@@ -10,29 +10,29 @@ import wootecam.lotto.exception.LottoException;
 public class Lotto {
 
 	public static final int LOTTO_NUMBER_SIZE = 6;
-	private final List<Integer> lottoNumbers;
+	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> lottoNumbers) {
+	public Lotto(List<LottoNumber> lottoNumbers) {
 		if (!isValidLottoNumberSize(lottoNumbers)) {
 			throw new LottoException("로또 번호는 6개여야 합니다.");
 		}
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 	}
 
-	private boolean isValidLottoNumberSize(List<Integer> lottoNumbers) {
-		List<Integer> numbers = Optional.ofNullable(lottoNumbers)
-			.orElse(new ArrayList<>());
+	private boolean isValidLottoNumberSize(List<LottoNumber> lottoNumbers) {
+		int size = Optional.ofNullable(lottoNumbers)
+			.orElse(new ArrayList<>()).size();
 
-		return numbers.size() == LOTTO_NUMBER_SIZE;
+		return size == LOTTO_NUMBER_SIZE;
 	}
 
-	public List<Integer> getLottoNumbers() {
+	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
 
 	public String toLottoNumberString() {
 		return this.lottoNumbers.stream()
-			.map(Object::toString)
+			.map(LottoNumber::valueOf)
 			.collect(Collectors.joining(","));
 	}
 
@@ -42,7 +42,7 @@ public class Lotto {
 			.count();
 	}
 
-	public boolean contains(int number) {
+	public boolean contains(LottoNumber number) {
 		return this.lottoNumbers.contains(number);
 	}
 }

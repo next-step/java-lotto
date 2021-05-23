@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import wootecam.lotto.exception.LottoException;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
+import wootecam.lotto.model.LottoNumber;
 
 public class LottoGameGeneratorTest {
 
@@ -36,7 +37,12 @@ public class LottoGameGeneratorTest {
 	@DisplayName("정상적인 입력에 대한 당첨번호테스트")
 	void test_당첨번호테스트(String input) {
 		Lotto winningLotto = lottoGameGenerator.getWinningLotto(input);
-		assertThat(winningLotto.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(1))).isTrue();
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(2))).isTrue();
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(3))).isTrue();
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(4))).isTrue();
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(5))).isTrue();
+		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(6))).isTrue();
 	}
 
 	@ParameterizedTest

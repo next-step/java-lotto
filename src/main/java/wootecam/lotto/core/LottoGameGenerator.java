@@ -29,8 +29,8 @@ public class LottoGameGenerator {
 	}
 
 	public Lotto getWinningLotto(String winningLottoInput) {
-		List<Integer> winningLottoList = Arrays.stream(winningLottoInput.split(","))
-			.map(s -> new LottoNumber(s).getNumber())
+		List<LottoNumber> winningLottoList = Arrays.stream(winningLottoInput.split(","))
+			.map(LottoNumber::new)
 			.distinct()
 			.collect(Collectors.toList());
 		return new Lotto(winningLottoList);

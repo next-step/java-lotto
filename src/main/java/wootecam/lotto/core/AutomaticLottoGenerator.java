@@ -3,8 +3,10 @@ package wootecam.lotto.core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import wootecam.lotto.model.Lotto;
+import wootecam.lotto.model.LottoNumber;
 
 public class AutomaticLottoGenerator {
 
@@ -25,8 +27,12 @@ public class AutomaticLottoGenerator {
 	protected Lotto getNumbers() {
 		Collections.shuffle(this.autoLottoNumbers);
 		List<Integer> autoNumberList = this.autoLottoNumbers.subList(0, 6);
-		Collections.sort(autoNumberList);
 
-		return new Lotto(autoNumberList);
+		List<LottoNumber> lotto = autoNumberList.stream()
+			.map(LottoNumber::new)
+			.sorted()
+			.collect(Collectors.toList());
+
+		return new Lotto(lotto);
 	}
 }
