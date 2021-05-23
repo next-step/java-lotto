@@ -2,13 +2,12 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toMap;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> CACHE = createCache();
 
@@ -54,5 +53,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number - o.number;
     }
 }
