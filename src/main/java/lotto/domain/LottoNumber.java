@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -34,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Stream.iterate(1, i -> i + 1)
                      .limit(45)
                      .collect(
-                         collectingAndThen(toMap(i -> i, LottoNumber::new),
+                         collectingAndThen(toMap(Function.identity(), LottoNumber::new),
                                            Collections::unmodifiableMap));
     }
 

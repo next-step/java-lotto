@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -15,7 +16,7 @@ public class WinningCountMap {
     public WinningCountMap() {
         winningCounterMap = Arrays.stream(WinningType.values())
                                   .filter(type -> type != WinningType.NONE)
-                                  .collect(toMap(type -> type, type -> 0));
+                                  .collect(toMap(Function.identity(), type -> 0));
     }
 
     public void addCount(WinningType winningType) {
