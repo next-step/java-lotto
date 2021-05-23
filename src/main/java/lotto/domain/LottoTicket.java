@@ -20,4 +20,9 @@ class LottoTicket {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return lottoNumbers.toString();
+	}
+
 }
