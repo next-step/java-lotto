@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
@@ -42,6 +44,12 @@ class LottoNumberTest {
 		// then
 		assertThat(lottoNumberList).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
 			LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-1, 0, 46})
+	void invalid(int number) {
+		assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 }
