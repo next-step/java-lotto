@@ -24,12 +24,12 @@ public class AutomaticLottoGeneratorTest {
 
 		AutomaticLottoGenerator autoLottoGenerator = new AutomaticLottoGenerator() {
 			@Override
-			protected Lotto getNumbers() {
+			protected Lotto getLotto() {
 				return new Lotto(input);
 			}
 		};
 
-		assertThat(autoLottoGenerator.getNumbers().contains(number)).isTrue();
+		assertThat(autoLottoGenerator.getLotto().contains(number)).isTrue();
 	}
 
 	static Stream<Arguments> parametersProvider() {

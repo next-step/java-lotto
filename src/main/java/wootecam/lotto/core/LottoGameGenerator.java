@@ -21,7 +21,7 @@ public class LottoGameGenerator {
 		List<Lotto> lottos = new ArrayList<>();
 
 		lottoCount.foreach(() -> {
-			Lotto lotto = this.automaticLottoGenerator.getNumbers();
+			Lotto lotto = this.automaticLottoGenerator.getLotto();
 			lottos.add(lotto);
 		});
 
