@@ -10,20 +10,18 @@ import lotto.ui.Result;
 
 public class LottoGame {
     public static void start() {
-        Command command = new Command();
-
         Shop shop = new Shop();
-        Money money = command.inputMoneyAmount();
+        Money money = Command.inputMoneyAmount();
         int lottoCount = shop.buyLotto(money);
 
-        command.printLottoAmount(lottoCount);
+        Command.printLottoAmount(lottoCount);
         LottoTicket lottoTicket = shop.selectAuto(lottoCount);
-        command.printLottoBundle(lottoTicket);
+        Command.printLottoBundle(lottoTicket);
 
-        Answer answer = new Answer(command.inputAnswer());
+        Answer answer = new Answer(Command.inputAnswer());
         MatchedAnswer matchAnswer = shop.matchAnswer(lottoTicket, answer);
 
-        command.resultMessage();
+        Command.resultMessage();
         Result.resultIncome(matchAnswer, money);
     }
 }
