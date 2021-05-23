@@ -42,7 +42,7 @@ public class Lotto {
 
     public LottoPrize matchWinningNumber(Lotto winningNumber) {
         LottoPrizeSelector lottoPrizeSelector = new LottoPrizeSelector(winningNumber, this);
-        return lottoPrizeSelector.matchWinningNumber();
+        return lottoPrizeSelector.selectLottoPrize();
     }
 
     public boolean hasNumber(Integer number) {
