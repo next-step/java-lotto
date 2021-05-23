@@ -10,6 +10,7 @@ import java.util.Set;
 
 public final class Lotto {
 	public static final int NUMBERS_SIZE = 6;
+
 	private final List<LottoNo> lottoNumbers = new ArrayList<>();
 
 	public Lotto(List<Integer> numbers) {
