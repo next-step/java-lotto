@@ -36,4 +36,11 @@ public enum Rank {
 	public long multiplyWinningMoney(int rankCount) {
 		return this.winningMoney * rankCount;
 	}
+
+	public boolean isGreaterThan(int matchCount) {
+		if (this.matchCount > matchCount) {
+			return true;
+		}
+		return false;
+	}
 }
