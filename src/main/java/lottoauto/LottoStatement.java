@@ -3,7 +3,7 @@ package lottoauto;
 import java.util.*;
 
 public class LottoStatement {
-    private final Map<LottoRule, Integer> hitCountMap = new HashMap<>();
+    private final Map<LottoRule, Integer> hitCountMap = new LinkedHashMap<>();
 
     public LottoStatement() {
         hitCountMap.put(LottoRule.THREE_HIT, 0);
@@ -30,4 +30,16 @@ public class LottoStatement {
         return hitCountMap.get(lottoRule);
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+
+        Set<LottoRule> keySet = hitCountMap.keySet();
+        for (LottoRule lottoRule : keySet) {
+
+            result += lottoRule.toString() + hitCountMap.get(lottoRule) +"개\n";
+        }
+
+        return result;
+    }
 }

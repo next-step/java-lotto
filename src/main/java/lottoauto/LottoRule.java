@@ -17,4 +17,9 @@ public enum LottoRule {
     public boolean isEqualsHitCount(HitCount hitCount) {
         return this.hitCount.equals(hitCount);
     }
+
+    @Override
+    public String toString() {
+        return hitCount.toString() + "개" + "일치 (" + winningMoney.toString() + ")-";
+    }
 }

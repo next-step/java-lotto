@@ -5,6 +5,7 @@ import java.util.List;
 
 public class User {
     private final Money amountForPurchasingLotto;
+    private final LottoStatement lottoStatement = new LottoStatement();
 
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 
@@ -27,15 +28,12 @@ public class User {
     public void checkHitCount(LottoNumbers winningNumbers) {
         for(LottoTicket lottoTicket: lottoTickets) {
             lottoTicket.calcHitCount(winningNumbers);
+            lottoStatement.judge(lottoTicket.hitCount());
         }
     }
 
     public void printHitCount(OutputView outputView) {
-
-        for(LottoTicket lottoTicket: lottoTickets) {
-            outputView.print(lottoTicket.hitCount());
-            outputView.print("\n");
-        }
+        outputView.println(lottoStatement.toString());
     }
 
     public void printLottoTickets(OutputView outputView) {

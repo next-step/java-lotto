@@ -3,6 +3,7 @@ package lottoauto;
 import java.util.Objects;
 
 public final class Money {
+    private static final String MONEY_UNIT = "원";
     private final int money;
 
     public Money(int money) {
@@ -24,5 +25,10 @@ public final class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(money) + MONEY_UNIT;
     }
 }
