@@ -10,11 +10,6 @@ public class Number {
 	}
 
 	public Number (String number) {
-		if (number.equals("")) {
-			this.number = 0L;
-			return;
-		}
-
 		try {
 			checkMinus(number);
 			this.number = Long.valueOf(number);

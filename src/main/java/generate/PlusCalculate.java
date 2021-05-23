@@ -7,6 +7,10 @@ import java.util.List;
 
 public class PlusCalculate {
 	public Integer excute (String input) {
+		if (input == null ||input.equals("")) {
+			return 0;
+		}
+
 		List<Number> numberList = new ArrayList<>();
 
 		for (String number : Separator.split(input)) {
