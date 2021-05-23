@@ -5,7 +5,7 @@ public class LottoTicket {
     private HitCount hitCount;
 
     public LottoTicket() {
-        this.lottoNumbers = new LottoNumbers();
+        this.lottoNumbers = new AutoStrategy().generateLottoNumbers();
     }
 
     public LottoTicket(LottoNumbers lottoNumbers) {

@@ -9,16 +9,10 @@ import java.util.List;
 public class LottoNumbers {
     private  static final String SPLIT_REGEX = ",";
 
-    private static final int ZERO = 0;
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    protected static final int ZERO = 0;
+    protected static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
-
-    public LottoNumbers() {
-        this.lottoNumbers = generateLottoNumbers();
-
-        validateDuplicate(lottoNumbers);
-    }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateDuplicate(lottoNumbers);
@@ -42,17 +36,7 @@ public class LottoNumbers {
         }
     }
 
-    private List<LottoNumber> generateLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for(int i = LottoNumber.LOTTO_NUMBER_START; i <= LottoNumber.LOTTO_NUMBER_END; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-
-        Collections.shuffle(lottoNumbers);
-
-        return lottoNumbers.subList(ZERO, LOTTO_NUMBERS_SIZE);
-    }
 
 
     @Override
