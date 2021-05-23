@@ -2,11 +2,6 @@ package lottery;
 
 import java.util.List;
 
-/**
- * Store 가 해야될 역할.
- * 1. Ticket을 발행하는 것
- * 2.
- */
 public class Store {
 
 	private GenerateTicketMachine machine;

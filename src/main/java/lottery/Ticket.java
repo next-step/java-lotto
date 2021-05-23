@@ -1,10 +1,6 @@
 package lottery;
 
-import static java.util.Collections.*;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import lottery.exceptions.InvalidTicketSizeException;
 

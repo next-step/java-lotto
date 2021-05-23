@@ -5,8 +5,6 @@ import static lottery.util.RandomUtil.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import lottery.util.RandomUtil;
-
 public class GenerateTicketMachine {
 
 	public List<Ticket> create(long count) {
