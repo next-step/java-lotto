@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,6 +28,15 @@ public class PurchaseInformationTest {
         int manualCount = 4;
 
         assertThatThrownBy(() -> new PurchaseInformation(price, manualCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 900})
+    @DisplayName("1000원 이하 입력 시 예외가 발생한다")
+    void ticketPriceExceptionTest(int price) {
+
+        assertThatThrownBy(() -> new PurchaseInformation(price, 0))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

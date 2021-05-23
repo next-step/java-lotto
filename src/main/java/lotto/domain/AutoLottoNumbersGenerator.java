@@ -3,31 +3,23 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoTicket.MINIMUM_PRICE;
 
-
-public class AutoLottoNumbersGenerator {
-
-    public static final String TICKET_PRICE_ERROR_MESSAGE = "티켓값은 최소 1000원 이상이어야 합니다.";
+public class AutoLottoNumbersGenerator implements LottoNumbersGenerator{
 
     private final NumbersGenerator lottoNumbersGenerator;
+    private final int autoCount;
 
-    public AutoLottoNumbersGenerator(NumbersGenerator lottoNumbersGenerator) {
+    public AutoLottoNumbersGenerator(int autoCount, NumbersGenerator lottoNumbersGenerator) {
+        this.autoCount = autoCount;
         this.lottoNumbersGenerator = lottoNumbersGenerator;
+
     }
 
-    public List<LottoNumbers> generate(int price) {
-        validatePrice(price);
+    public List<LottoNumbers> generate() {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < price / MINIMUM_PRICE; i++) {
+        for (int i = 0; i < autoCount; i++) {
             lottoNumbersList.add(LottoNumbers.of(lottoNumbersGenerator.generate()));
         }
         return lottoNumbersList;
-    }
-
-    private void validatePrice(int price) {
-        if (price < MINIMUM_PRICE) {
-            throw new IllegalArgumentException(TICKET_PRICE_ERROR_MESSAGE);
-        }
     }
 }
