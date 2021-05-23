@@ -21,6 +21,10 @@ public enum LotteryMatchType {
 		return money;
 	}
 
+	public int matchCount() {
+		return matchCount;
+	}
+
 	public static LotteryMatchType fromInteger(int matchNumber) {
 		return Arrays.stream(LotteryMatchType.values())
 			.filter(a -> a.matchCount == matchNumber)
