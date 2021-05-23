@@ -17,11 +17,11 @@ public class LottoGame {
         int lottoCount = shop.buyLotto(money);
 
         command.printLottoAmount(lottoCount);
-        LottoTicket lottoBundle = shop.selectAuto(lottoCount);
-        command.printLottoBundle(lottoBundle);
+        LottoTicket lottoTicket = shop.selectAuto(lottoCount);
+        command.printLottoBundle(lottoTicket);
 
         Answer answer = new Answer(command.inputAnswer());
-        MatchedAnswer matchAnswer = shop.matchAnswer(lottoBundle, answer);
+        MatchedAnswer matchAnswer = shop.matchAnswer(lottoTicket, answer);
 
         command.resultMessage();
         Result.resultIncome(matchAnswer, money);
