@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoTest {
 
@@ -21,7 +20,7 @@ class LottoTest {
     @ParameterizedTest
     void lottoNumberSizeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Lotto.of(numbers, LottoNumber.of(45)));
+            .isThrownBy(() -> Lotto.of(numbers));
     }
 
     @SuppressWarnings("unused")
@@ -40,7 +39,7 @@ class LottoTest {
     @ParameterizedTest
     void lottoNumberRangeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Lotto.of(numbers, LottoNumber.of(15)));
+            .isThrownBy(() -> Lotto.of(numbers));
     }
 
     @SuppressWarnings("unused")
@@ -55,21 +54,7 @@ class LottoTest {
     @Test
     void duplicateTest() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> Lotto.of(Arrays.asList(1, 1, 2, 3, 4, 5), LottoNumber.of(45)));
-    }
-
-    @DisplayName("두 로또 번호 일치 개수 검증")
-    @MethodSource("lottoNumberMatchTestCase")
-    @ParameterizedTest
-    void lottoNumberMatchTest(List<Integer> numbers,
-                              List<Integer> target,
-                              int expected) {
-
-        Lotto lotto1 = Lotto.of(numbers, LottoNumber.of(45));
-        Lotto lotto2 = Lotto.of(target, LottoNumber.of(45));
-        int actual = lotto1.getMatchCount(lotto2);
-
-        assertEquals(expected, actual);
+            .isThrownBy(() -> Lotto.of(Arrays.asList(1, 1, 2, 3, 4, 5)));
     }
 
     @SuppressWarnings("unused")
@@ -94,15 +79,8 @@ class LottoTest {
     @Test
     void success() {
         assertDoesNotThrow(() -> {
-            Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
+            Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
             System.out.println(lotto);
         });
-    }
-
-    @DisplayName("로또에 사용되는 6개의 번호와 1개의 보너스 번호는 모두 달라야 한다.")
-    @Test
-    void duplicateBonusNumberTest() {
-        assertThatIllegalArgumentException().isThrownBy(() ->
-            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(1)));
     }
 }

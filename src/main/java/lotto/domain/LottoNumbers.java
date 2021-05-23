@@ -34,6 +34,10 @@ public class LottoNumbers {
                                  .count();
     }
 
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     private void validateNumbersSizeAndDuplicateNumbers() {
         if (numbers == null || numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 중복 없는 6개의 수를 사용해야 합니다.");

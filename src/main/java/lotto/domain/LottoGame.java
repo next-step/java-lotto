@@ -37,12 +37,12 @@ public class LottoGame {
     }
 
     private void drawWinningLotto(List<Lotto> lottos) {
-        Lotto winningLotto = Lotto.of(ioManager.inputNumbers(),
-                                      LottoNumber.of(ioManager.inputBonusNumber()));
+        WinningLotto winningLotto = WinningLotto.of(ioManager.inputNumbers(),
+                                                    ioManager.inputBonusNumber());
         printStatistics(winningLotto, lottos);
     }
 
-    private void printStatistics(Lotto winningLotto, List<Lotto> lottos) {
+    private void printStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
 
         ioManager.printLine("당첨 통계");

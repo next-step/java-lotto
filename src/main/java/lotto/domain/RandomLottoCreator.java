@@ -15,6 +15,6 @@ public class RandomLottoCreator implements LottoCreator {
     @Override
     public Lotto create() {
         Collections.shuffle(CACHE);
-        return Lotto.of(CACHE.subList(0, 6), LottoNumber.of(CACHE.get(6)));
+        return Lotto.of(CACHE.subList(0, 6));
     }
 }

@@ -6,10 +6,10 @@ public class LottoStatistics {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final Lotto winningLotto;
+    private final WinningLotto winningLotto;
     private final WinningCountMap winningCountMap;
 
-    public LottoStatistics(Lotto winningLotto, List<Lotto> lottos) {
+    public LottoStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
         this.winningLotto = winningLotto;
         this.winningCountMap = new WinningCountMap();
 

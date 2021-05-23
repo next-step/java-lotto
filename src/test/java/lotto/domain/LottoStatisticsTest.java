@@ -22,21 +22,22 @@ class LottoStatisticsTest {
                                    .limit(5)
                                    .collect(toList());
 
-        LottoStatistics lottoStatistics = new LottoStatistics(creator.create(), lottos);
+        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
         assertEquals(5, lottoStatistics.getStatisticsData().size());
     }
 
     @DisplayName("총 수익율 검증")
     @MethodSource("earningRateTestCase")
     @ParameterizedTest
-    void earningRateTest(List<Integer> numbers, int bonusNumber, int prize) {
+    void earningRateTest(List<Integer> numbers, int prize) {
 
-        LottoCreator creator = () -> Lotto.of(numbers, LottoNumber.of(bonusNumber));
+        LottoCreator creator = () -> Lotto.of(numbers);
         List<Lotto> lottos = Stream.generate(creator::create)
                                    .limit(5)
                                    .collect(toList());
 
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
 
         double expected = (double) prize * 5 / 5000;
@@ -46,11 +47,11 @@ class LottoStatisticsTest {
     @SuppressWarnings("unused")
     private static Stream<Arguments> earningRateTestCase() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 40, WinningType.FIRST.getPrize()),
-            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), 45, WinningType.SECOND.getPrize()),
-            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), 40, WinningType.THIRD.getPrize()),
-            Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), 40, WinningType.FOURTH.getPrize()),
-            Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), 40, WinningType.FIFTH.getPrize())
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), WinningType.FIRST.getPrize()),
+            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 10), WinningType.SECOND.getPrize()),
+            Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), WinningType.THIRD.getPrize()),
+            Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), WinningType.FOURTH.getPrize()),
+            Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), WinningType.FIFTH.getPrize())
         );
     }
 }
