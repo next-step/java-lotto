@@ -18,6 +18,10 @@ class LottoTicket {
 
 	private final Set<LottoNumber> lottoNumbers;
 
+	static int compare(LottoTicket source, LottoTicket target) {
+		return source.compare(target.lottoNumbers);
+	}
+
 	LottoTicket(Set<LottoNumber> lottoNumbers) {
 		validate(lottoNumbers);
 
@@ -70,6 +74,15 @@ class LottoTicket {
 		if (!validateCollection(lottoNumberList, LOTTO_NUMBER_COUNT)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
 		}
+	}
+
+	int compare(Set<LottoNumber> lottoNumberSet) {
+		Set<LottoNumber> targetLottoNumberSet = new HashSet<>(lottoNumberSet);
+		validateLottoNumberSet(targetLottoNumberSet);
+
+		targetLottoNumberSet.retainAll(this.lottoNumbers);
+
+		return targetLottoNumberSet.size();
 	}
 
 	@Override
