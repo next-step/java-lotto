@@ -16,14 +16,43 @@ public class LottoController {
     }
 
     public static void run() {
-        //구매금액 입력
-        int price = LottoView.getPrice();
+        Integer price;
+        do {
+            price = price();
+        } while (price == null);
+
         LottoView.showPurchase(price / LottoConfig.LOTTO_PRICE);
         Lottos lottos = new Lottos(price / LottoConfig.LOTTO_PRICE);
         LottoView.showLottoList(lottos);
-        //당첨번호 입력
-        Lotto winningNumber = WinningNumberParser.parseWinningNumberToList(LottoView.showWinningNumber());
+
+        Lotto winningNumber;
+        do {
+            winningNumber = winningNumber();
+        } while (winningNumber == null);
+
         Statistics statistics = lottos.statistics(winningNumber);
         LottoView.showWinningStatistic(statistics);
+    }
+
+    private static Integer price() {
+        Integer price = null;
+        try {
+            price = LottoView.getPrice();
+        } catch (NumberFormatException e) {
+            LottoView.printWrongNumberFormat();
+        }
+        return price;
+    }
+
+    private static Lotto winningNumber() {
+        Lotto winningNumber = null;
+        String winningNumberInput = LottoView.showWinningNumber();
+        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToLotto(winningNumberInput);
+        try {
+            winningNumber = new Lotto(winningNumberList);
+        } catch (IllegalArgumentException e) {
+            LottoView.printIllegalArgument();
+        }
+        return winningNumber;
     }
 }

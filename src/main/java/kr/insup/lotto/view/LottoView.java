@@ -11,11 +11,11 @@ public class LottoView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int getPrice() {
+    public static Integer getPrice() {
         System.out.println("구입 금액을 입력해 주세요");
 
         String strPrice = scanner.nextLine();
-        return Integer.parseInt(strPrice);
+        return Integer.valueOf(strPrice);
     }
 
     public static void showPurchase(int attempt) {
@@ -44,7 +44,15 @@ public class LottoView {
         System.out.println("수익률은 " + statistics.calculateBenefitRate());
     }
 
-    private static void announceWinningStatus(int rank, int match, int price, int time){
+    private static void announceWinningStatus(int rank, int match, int price, int time) {
         System.out.println(rank + "등 " + match + "개 일치 (" + price + "원) - " + time + "개");
+    }
+
+    public static void printIllegalArgument() {
+        System.out.println("잘못된 당첨번호를 입력하였습니다. 다시 입력해주세요!");
+    }
+
+    public static void printWrongNumberFormat() {
+        System.out.println("잘못된 금액을 입력하였습니다. 다시 입력해주세요!");
     }
 }
