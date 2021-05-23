@@ -16,14 +16,14 @@ public class LottoStatistics {
         this.revenueRate = new BigDecimal(String.valueOf(0));
     }
 
-    public void init(final LottoGame lottoGame, final Lotto winnerLotto) {
-        makeWinningResults(lottoGame.getLottoes(), winnerLotto);
+    public void init(final LottoGame lottoGame, final Lotto winnerLotto, final LottoNumber bonusNumber) {
+        makeWinningResults(lottoGame.getLottoes(), winnerLotto, bonusNumber);
         makeRevenueRate(lottoGame.getMoney());
     }
 
-    private void makeWinningResults(final Lottoes lottoes, final Lotto winnerLotto) {
+    private void makeWinningResults(final Lottoes lottoes, final Lotto winnerLotto, final LottoNumber bonusNumber) {
         Arrays.stream(Rank.values())
-                .forEach(rank -> winningResults.put(rank, lottoes.getRankCount(winnerLotto, rank)));
+                .forEach(rank -> winningResults.put(rank, lottoes.getRankCount(winnerLotto, rank, bonusNumber)));
     }
 
     private void makeRevenueRate(final int amount) {

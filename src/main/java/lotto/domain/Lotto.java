@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.generator.NumberGenerator;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,28 +30,41 @@ public class Lotto {
                         Lotto::new));
     }
 
-    public static Lotto from(final Set<Integer> lottoNumbers) {
-        checkLottoNumbersSize(lottoNumbers);
+    public static Lotto from(final List<Integer> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
         return lottoNumbers.stream()
                 .map(LottoNumber::from)
                 .collect(collectingAndThen(toSet(),
                         Lotto::new));
     }
 
-    private static void checkLottoNumbersSize(final Set<Integer> lottoNumbers) {
+    private static void validateLottoNumbers(final List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_SIZE) {
-            throw new IllegalArgumentException(String.format("로또 번호는 중복되지 않은 %s자리 이어야 합니다.", NUMBER_SIZE));
+            throw new IllegalArgumentException(String.format("로또 번호는 %s자리 이어야 합니다.", NUMBER_SIZE));
+        }
+        if (new HashSet<>(lottoNumbers).size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("중복된 로또 번호는 입력할 수 없습니다.");
         }
     }
 
-    public Rank getRank(final Lotto winnerLotto) {
-        return Rank.valueOf(getMatchCount(winnerLotto));
+    public Rank getRank(final Lotto winnerLotto, final LottoNumber bonusNumber) {
+        return Rank.valueOf(getMatchCount(winnerLotto), matchBonus(bonusNumber));
     }
 
     private int getMatchCount(final Lotto winnerLotto) {
         return (int) winnerLotto.getLotto().stream()
                 .filter(lottoNumber -> this.lotto.contains(lottoNumber))
                 .count();
+    }
+
+    private boolean matchBonus(final LottoNumber bonusNumber) {
+        return lotto.contains(bonusNumber);
+    }
+
+    public void validateBonusNumber(final LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 중복될 수 없습니다.");
+        }
     }
 
     public Set<LottoNumber> getLotto() {

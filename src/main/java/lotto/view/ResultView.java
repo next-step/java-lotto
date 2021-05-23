@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Lottoes;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
@@ -19,13 +20,20 @@ public class ResultView {
     private static final String GAIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     private static final int MEANING_STANDARD_VALUE = 1;
 
-    public void printLottoes(LottoGame lottoGame) {
+    private ResultView() {}
+
+    public static void printPurchaseCountAndLottoes(final LottoGame lottoGame) {
         System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoGame.getLottoCount()));
-        lottoGame.getLottoes().getLottoes().stream()
-                .forEach(lotto -> System.out.println(prettyString(lotto)));
+        printLottoes(lottoGame.getLottoes());
     }
 
-    private static String prettyString(Lotto lotto) {
+    private static void printLottoes(final Lottoes lottoes) {
+        for (Lotto lotto : lottoes.getLottoes()) {
+            System.out.println(prettyString(lotto));
+        }
+    }
+
+    private static String prettyString(final Lotto lotto) {
         return String.format("%s%s%s", "[",
                 lotto.getLotto()
                         .stream()
@@ -36,23 +44,23 @@ public class ResultView {
                 "]");
     }
 
-    public void printStatistics(final LottoStatistics lottoStatistics) {
+    public static void printStatistics(final LottoStatistics lottoStatistics) {
         System.out.printf(WINNING_STATISTICS_MESSAGE);
         printWinningResults(lottoStatistics.getWinningResults());
         printRevenueRate(lottoStatistics.getRevenueRate());
     }
 
-    private void printWinningResults(Map<Rank, Integer> winningResults) {
+    private static void printWinningResults(final Map<Rank, Integer> winningResults) {
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .forEach(rank -> System.out.println(String.format(rank.getMessage(), winningResults.get(rank))));
     }
 
-    private void printRevenueRate(BigDecimal revenueRate) {
+    private static void printRevenueRate(final BigDecimal revenueRate) {
         System.out.println(String.format(REVENUE_RATE_MESSAGE, revenueRate, getMeaningMessage(revenueRate)));
     }
 
-    private String getMeaningMessage(BigDecimal revenueRate) {
+    private static String getMeaningMessage(final BigDecimal revenueRate) {
         return revenueRate.intValue() < MEANING_STANDARD_VALUE ? DAMAGE_MESSAGE : GAIN_MESSAGE;
     }
 }
