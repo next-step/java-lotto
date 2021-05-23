@@ -8,6 +8,7 @@ import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
 import lotto.model.Rate;
+import lotto.model.WinningNumbers;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
 import lotto.view.dro.LottoResultDto;
@@ -24,7 +25,7 @@ public class LottoApp {
 	public void run() {
 		Money money = inputMoney();
 		LottoTicket lottoTicket = inputLottoTicket(money.countOfLottoNumbers());
-		LottoNumbers winningNumbers = inputWinningNumbers();
+		WinningNumbers winningNumbers = inputWinningNumbers();
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
@@ -40,12 +41,16 @@ public class LottoApp {
 		return lottoTicket;
 	}
 
-	private LottoNumbers inputWinningNumbers() {
+	private WinningNumbers inputWinningNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
-		LottoNumbers lottoNumbers = new LottoNumbers(lottoAppInput.inputWinningNumbers());
-		lottoAppOutput.printBonusNumberView();
-		LottoNumber bonusNumber = LottoNumber.of(lottoAppInput.inputNumber());
-		return lottoNumbers;
+		LottoNumbers winningNumbers = new LottoNumbers(lottoAppInput.inputWinningNumbers());
+		LottoNumber bonusNumber = inputBonusNumber();
+		return WinningNumbers.of(winningNumbers, bonusNumber);
+	}
+
+	private LottoNumber inputBonusNumber() {
+		lottoAppOutput.printBonusNumberInputView();
+		return LottoNumber.of(lottoAppInput.inputNumber());
 	}
 
 	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {

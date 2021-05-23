@@ -77,9 +77,9 @@ public class LottoAppOutputTest {
 		lottoAppOutput.printLottoResult(lottoResultDto);
 
 		assertThat(outputStream.toString()).contains(
-			"3개 일치 (5000원)- 1개\n"
-			+ "4개 일치 (50000원)- 0개\n"
-			+ "5개 일치 (1500000원)- 1개\n"
+			"4개 일치 (50000원)- 1개\n"
+			+ "5개 일치 (1500000원)- 0개\n"
+			+ "5개 일치 (30000000원)- 1개\n"
 			+ "6개 일치 (2000000000원)- 0개\n");
 	}
 
@@ -100,7 +100,7 @@ public class LottoAppOutputTest {
 	@Test
 	@DisplayName("보너스볼을 입력 받을때 '보너스 볼을 입력해 주세요.' 라고 출력해야 한다.")
 	public void inputBonusNumberViewTest() {
-		lottoAppOutput.printBonusNumberView();
+		lottoAppOutput.printBonusNumberInputView();
 
 		assertThat(outputStream.toString()).contains("보너스 볼을 입력해 주세요.");
 	}

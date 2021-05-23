@@ -9,7 +9,7 @@ public class LottoRankResultDto {
 	private int resultCount;
 
 	public LottoRankResultDto(LottoRank lottoRank, int resultCount) {
-		this.matchCount = lottoRank.getMatchCount();
+		this.matchCount = lottoRank.getCountOfMatch();
 		Money prize = lottoRank.getPrize();
 		this.prize = prize.getAmount();
 		this.resultCount = resultCount;

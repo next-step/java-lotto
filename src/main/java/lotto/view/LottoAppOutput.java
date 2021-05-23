@@ -79,7 +79,7 @@ public class LottoAppOutput {
 		printStream.println(render);
 	}
 
-	public void printBonusNumberView() {
+	public void printBonusNumberInputView() {
 		printStream.println("보너스 볼을 입력해 주세요.");
 	}
 }

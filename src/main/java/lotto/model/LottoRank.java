@@ -1,41 +1,34 @@
 package lotto.model;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.Collections;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-	SEVENTH(0, Money.ZERO_WONS),
-	SIXTH(1, Money.ZERO_WONS),
-	FIFTH(2, Money.ZERO_WONS),
-	FOURTH(3, Money.ofWons(5000)),
-	THIRD(4, Money.ofWons((50_000))),
-	SECOND(5, Money.ofWons(1_500_000)),
-	FIRST(6, Money.ofWons(2_000_000_000));
+	FIRST(6, Money.ofWons(2_000_000_000), (countOfMatch, matchBonus) -> countOfMatch == 6),
+	SECOND(5, Money.ofWons(30_000_000), (countOfMatch, matchBonus) -> countOfMatch == 5 && matchBonus),
+	THIRD(5, Money.ofWons(1_500_000), (countOfMatch, matchBonus) -> countOfMatch == 5 && !matchBonus),
+	FOURTH(4, Money.ofWons(50_000), (countOfMatch, matchBonus) -> countOfMatch == 4),
+	FIFTH(3, Money.ofWons(5000), (countOfMatch, matchBonus) -> countOfMatch == 3),
+	MISS(0, Money.ofWons(0), (countOfMatch, matchBonus) -> countOfMatch < 3);
 
-	private final int matchCount;
+	private final int countOfMatch;
 	private final Money prize;
+	private final LottoRankPolicy policy;
 
-	private static final Map<Integer, LottoRank> lottoRanksByMatchCount;
-	static {
-		LottoRank[] lottoRanks = LottoRank.values();
-		lottoRanksByMatchCount = Stream.of(lottoRanks)
-			.collect(collectingAndThen(toMap(rank -> rank.matchCount, rank -> rank), Collections::unmodifiableMap));
-	}
-
-	LottoRank(int matchCount, Money prize) {
-		this.matchCount = matchCount;
+	LottoRank(int countOfMatch, Money prize, LottoRankPolicy policy) {
+		this.countOfMatch = countOfMatch;
 		this.prize = prize;
+		this.policy = policy;
 	}
 
-	static LottoRank of(int matchCount) {
-		return lottoRanksByMatchCount.get(matchCount);
+	static LottoRank of(int countOfMatch, boolean matchBonus) {
+		return Stream.of(LottoRank.values())
+			.filter(rank -> rank.policy.test(countOfMatch, matchBonus))
+			.findAny()
+			.orElseThrow(IllegalArgumentException::new);
 	}
 
-	public int getMatchCount() {
-		return matchCount;
+	public int getCountOfMatch() {
+		return countOfMatch;
 	}
 
 	public Money getPrize() {

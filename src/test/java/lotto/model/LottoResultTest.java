@@ -12,13 +12,13 @@ public class LottoResultTest {
 	public void sumTotalPrizeTest() {
 		LottoResult lottoResult = creatLottoResult(LottoRank.FIRST, LottoRank.THIRD, LottoRank.THIRD);
 
-		assertThat(lottoResult.sumTotalPrize()).isEqualTo(Money.ofWons(2_000_100_000));
+		assertThat(lottoResult.sumTotalPrize()).isEqualTo(Money.ofWons(2_003_000_000));
 	}
 
 	@Test
 	@DisplayName("수익률은 당첨금 총합 / 원금 이다.")
 	public void calculateEarningRateTest() {
-		LottoResult lottoResult = creatLottoResult(LottoRank.FOURTH);
+		LottoResult lottoResult = creatLottoResult(LottoRank.FIFTH);
 
 		Rate rate = lottoResult.calculateEarningRate(Money.ofWons(14000));
 

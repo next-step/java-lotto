@@ -41,14 +41,20 @@ public class LottoNumbers {
 			.collect(toList());
 	}
 
-	int match(LottoNumbers otherNumbers) {
+	LottoRank match(WinningNumbers winningNumbers) {
+		LottoNumbers otherNumbers = winningNumbers.getLottoNumbers();
+		LottoNumber bonusNumber = winningNumbers.getBonusNumber();
+		return LottoRank.of(countOfMatch(otherNumbers), contains(bonusNumber));
+	}
+
+	int countOfMatch(LottoNumbers otherNumbers) {
 		long matchCount = lottoNumbers.stream()
 			.filter(otherNumbers::contains)
 			.count();
 		return Math.toIntExact(matchCount);
 	}
 
-	private boolean contains(LottoNumber lottoNumber) {
+	boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
 	}
 }
