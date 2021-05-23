@@ -20,9 +20,9 @@ public class LottoController {
         do {
             price = price();
         } while (price == null);
-
-        LottoView.showPurchase(price / LottoConfig.LOTTO_PRICE);
-        Lottos lottos = new Lottos(price / LottoConfig.LOTTO_PRICE);
+        int attempt = price / LottoConfig.LOTTO_PRICE;
+        LottoView.showPurchase(attempt);
+        Lottos lottos = new Lottos(attempt);
         LottoView.showLottoList(lottos);
 
         Lotto winningNumber;

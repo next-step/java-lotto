@@ -35,11 +35,11 @@ public class Lotto {
     }
 
     private boolean isNumberWrongSize(List<String> numbers) {
-        return numbers.size() != 6;
+        return numbers.size() != LottoConfig.PICK_NUMBER;
     }
 
     private boolean isNumberDuplicate(List<String> numbers) {
-        return new HashSet<>(numbers).size() != 6;
+        return new HashSet<>(numbers).size() != LottoConfig.PICK_NUMBER;
     }
 
     private void validateNumber(String number) {
