@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.LottoNumber;
 
 public class NumberToLottoTest {
 
-	@Test
+	@ParameterizedTest
 	@DisplayName(value = "숫자를 받으면 LottoNumber 로 변경한다")
 	@ValueSource(ints = {10, 20, 30})
 	void convertIntToLottoNumber(int number) {
