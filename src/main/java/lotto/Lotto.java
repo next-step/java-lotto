@@ -12,6 +12,13 @@ public final class Lotto {
         checkLottoDuplicateNumbers();
     }
 
+    public Lotto() {
+        LottoGenerator automatic = new AutomaticLottoGenerator();
+        lottoNumbers.addAll(automatic.numberGenerator());
+        checkLottoSize();
+        checkLottoDuplicateNumbers();
+    }
+
     private void checkLottoSize() {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 1장의 숫자는 6개이여야 합니다.");
