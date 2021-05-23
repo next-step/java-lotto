@@ -1,10 +1,9 @@
-package step3.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step3.common.ErrorCode;
+import lotto.common.ErrorCode;
 
 import static org.assertj.core.api.Assertions.*;
 

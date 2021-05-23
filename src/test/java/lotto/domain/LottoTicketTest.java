@@ -1,9 +1,8 @@
-package step3.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.common.ErrorCode;
-import step3.common.WinningType;
+import lotto.common.ErrorCode;
 
 import java.util.*;
 

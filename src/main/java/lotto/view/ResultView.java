@@ -1,7 +1,7 @@
-package step3.view;
+package lotto.view;
 
-import step3.common.WinningType;
-import step3.domain.LottoTicket;
+import lotto.common.WinningType;
+import lotto.domain.LottoTicket;
 
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {

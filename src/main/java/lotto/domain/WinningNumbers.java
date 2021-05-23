@@ -1,7 +1,7 @@
-package step3.domain;
+package lotto.domain;
 
-import step3.common.ErrorCode;
-import step3.common.WinningType;
+import lotto.common.ErrorCode;
+import lotto.common.WinningType;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,10 +1,10 @@
-package step3.view;
+package lotto.view;
 
-import step3.common.WinningType;
-import step3.domain.LottoTicket;
-import step3.domain.LottoTicketGenerator;
-import step3.domain.Money;
-import step3.domain.WinningNumbers;
+import lotto.common.WinningType;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
+import lotto.domain.Money;
+import lotto.domain.WinningNumbers;
 
 public class GameView {
     InputView inputView = new InputView();

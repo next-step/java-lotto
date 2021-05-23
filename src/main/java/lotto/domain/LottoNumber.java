@@ -1,6 +1,6 @@
-package step3.domain;
+package lotto.domain;
 
-import step3.common.ErrorCode;
+import lotto.common.ErrorCode;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;

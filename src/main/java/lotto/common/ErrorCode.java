@@ -1,4 +1,4 @@
-package step3.common;
+package lotto.common;
 
 public enum ErrorCode {
     INVALID_LOTTO_NUMBER_RANGE("Lotto number should be from 1 to 45."),

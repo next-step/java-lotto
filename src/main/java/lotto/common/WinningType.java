@@ -1,4 +1,4 @@
-package step3.common;
+package lotto.common;
 
 public enum WinningType {
     FIRST(6, 2000000000),

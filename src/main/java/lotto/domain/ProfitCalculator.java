@@ -1,6 +1,6 @@
-package step3.domain;
+package lotto.domain;
 
-import step3.common.WinningType;
+import lotto.common.WinningType;
 
 public class ProfitCalculator {
     public double calculate(long money, WinningType[] winningTypes) {

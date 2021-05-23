@@ -1,6 +1,6 @@
-package step3;
+package lotto;
 
-import step3.view.GameView;
+import lotto.view.GameView;
 
 public class LottoGameApp {
     public static void main(String[] args) {
