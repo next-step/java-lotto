@@ -17,7 +17,7 @@ public class LottoStore {
 	private final int budget;
 	private final int price;
 
-	protected int purchaseCount() {
+	public int purchaseCount() {
 		return budget / price;
 	}
 
@@ -37,7 +37,7 @@ public class LottoStore {
 	}
 
 	public Ticket produceLotto() {
-		List<LottoNumbers>  result = new ArrayList<>();
+		List<LottoNumbers> result = new ArrayList<>();
 		AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
 		for (int i = 0; i < purchaseCount(); i++) {
 			LottoNumbers lotto = new LottoNumbers();
