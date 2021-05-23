@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Arrays;
+
 import lotto.domain.LottoRank;
 import lotto.domain.LottoRankCount;
 import lotto.domain.Lottos;
@@ -27,14 +29,11 @@ public class LottoOutputView {
 	public static void printWinningStatistics(LottoRankCount lottoRankCount) {
 		System.out.println(WINNING_STATISTICS);
 		System.out.println(LINE);
-		System.out.printf(MATCHES_RESULT_MESSAGE, LottoRank.FIRST.getMatches(), LottoRank.FIRST.getReward(),
-			lottoRankCount.getFirstCount());
-		System.out.printf(MATCHES_RESULT_MESSAGE, LottoRank.SECOND.getMatches(), LottoRank.SECOND.getReward(),
-			lottoRankCount.getSecondCount());
-		System.out.printf(MATCHES_RESULT_MESSAGE, LottoRank.THIRD.getMatches(), LottoRank.THIRD.getReward(),
-			lottoRankCount.getThirdCount());
-		System.out.printf(MATCHES_RESULT_MESSAGE, LottoRank.FOURTH.getMatches(), LottoRank.FOURTH.getReward(),
-			lottoRankCount.getFourthCount());
+		Arrays.stream(LottoRank.values())
+			.forEach(lottoRank -> {
+				System.out.printf(MATCHES_RESULT_MESSAGE, lottoRank.getMatches(), lottoRank.getReward(),
+					lottoRankCount.getCount(lottoRank));
+			});
 	}
 
 	public static void printYield(double yield) {

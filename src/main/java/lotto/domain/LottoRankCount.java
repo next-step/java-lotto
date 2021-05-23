@@ -1,33 +1,17 @@
 package lotto.domain;
 
+import java.util.Map;
+
 public class LottoRankCount {
 
-	private long firstCount;
-	private long secondCount;
-	private long thirdCount;
-	private long fourthCount;
+	Map<LottoRank, Long> rankCount;
 
-	public LottoRankCount(long firstCount, long secondCount, long thirdCount, long fourthCount) {
-		this.firstCount = firstCount;
-		this.secondCount = secondCount;
-		this.thirdCount = thirdCount;
-		this.fourthCount = fourthCount;
+	public LottoRankCount(Map<LottoRank, Long> rankCount) {
+		this.rankCount = rankCount;
 	}
 
-	public long getFirstCount() {
-		return firstCount;
-	}
-
-	public long getSecondCount() {
-		return secondCount;
-	}
-
-	public long getThirdCount() {
-		return thirdCount;
-	}
-
-	public long getFourthCount() {
-		return fourthCount;
+	public long getCount(LottoRank lottoRank) {
+		return this.rankCount.get(lottoRank);
 	}
 
 }

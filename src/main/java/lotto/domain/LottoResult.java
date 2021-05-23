@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoResult {
 
@@ -31,11 +34,15 @@ public class LottoResult {
 	}
 
 	public LottoRankCount getLottoRankCount() {
-		long firstCount = this.lottoRanks.stream().filter(lottoRank -> lottoRank == LottoRank.FIRST).count();
-		long secondCount = this.lottoRanks.stream().filter(lottoRank -> lottoRank == LottoRank.SECOND).count();
-		long thirdCount = this.lottoRanks.stream().filter(lottoRank -> lottoRank == LottoRank.THIRD).count();
-		long fourthCount = this.lottoRanks.stream().filter(lottoRank -> lottoRank == LottoRank.FOURTH).count();
-		return new LottoRankCount(firstCount, secondCount, thirdCount, fourthCount);
+		Map<LottoRank, Long> rankCount = new HashMap<>();
+		Arrays.stream(LottoRank.values())
+			.forEach(lottoRank -> {
+				long count = this.lottoRanks.stream()
+					.filter(resultLottoRank -> resultLottoRank == lottoRank)
+					.count();
+				rankCount.put(lottoRank, count);
+			});
+		return new LottoRankCount(rankCount);
 	}
 
 }

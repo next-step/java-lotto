@@ -54,10 +54,10 @@ public class LottoResultTest {
 	@Test
 	@DisplayName("로또 결과 순위 별 개수 테스트")
 	public void getLottoRankCount() {
-		assertThat(lottoResult.getLottoRankCount().getFirstCount()).isEqualTo(0);
-		assertThat(lottoResult.getLottoRankCount().getSecondCount()).isEqualTo(0);
-		assertThat(lottoResult.getLottoRankCount().getThirdCount()).isEqualTo(0);
-		assertThat(lottoResult.getLottoRankCount().getFourthCount()).isEqualTo(1);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FIRST)).isEqualTo(0);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.SECOND)).isEqualTo(0);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.THIRD)).isEqualTo(0);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FOURTH)).isEqualTo(1);
 	}
 
 }
