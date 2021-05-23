@@ -36,7 +36,7 @@ public class LottoNumbers {
 
 	private void validationSize(List<Integer> numbers) {
 		if (numbers == null || numbers.size() != LENGTH) {
-			throw new IllegalArgumentException("로또는 숫자6개로 이루어져야 합니다.");
+			throw new IllegalArgumentException(String.format("로또는 숫자 %d개로 이루어져야 합니다.", LENGTH));
 		}
 	}
 
