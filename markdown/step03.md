@@ -137,6 +137,7 @@ public class Number {
 >> :bulb: DDD(Domain-Driven Design, 도메인 주도 설계)를 이해하면 도움이 된다.
 >> 
 >> 참고자료 : 도메인 주도 설계 철저 입문(나루세 마사노부, 위키북스)
+>>> :exclamation: :exclamation: :exclamation: 현재 학습 중인 내용으로 DDD와 관계된 내용들이 정확하지 않을 수 있습니다. 아래 내용에 맹신하시지 마시길 바랍니다.
 >
 > 1.값 객채(VO, Value Object)
 > 1. 값 객체의 성질
@@ -358,43 +359,50 @@ public class Number {
 - [ ] 4.구현
     - [ ] 4-1.Lotto Context
         - [x] 4-1-1.도메인 주도 설계 이미지 작성
-        - [ ] 4-1-2.`Value Object` & `Aggregate`
-            - [ ] 4-1-2-1.`Ball(VO)`
-                - [ ] 4-1-2-1-1.`validate()` : 1~45의 자연수 유효성 체크
-                - [ ] 4-1-2-1-2.`generate()` : Ball 생성
-                - [ ] 4-1-2-1-3.`equals()` : 등가성 비교
-            - [ ] 4-1-2-2.`BallGroup(Aggregate)`
-                - [ ] 4-1-2-2-1.`allBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.
-            - [ ] 4-1-2-3.`Game(VO)`
-                - [ ] 4-1-2-3-1.`generateAuto()` : 모든 볼의 정보를 토대로 게임을 자동으로 생성한다.
-                - [ ] 4-1-2-3-2.`generateCustom()` : 모든 볼의 정보를 토대로 게임을 수동으로 생성한다.
-            - [ ] 4-1-2-4.`GameGroup(Aggregate)`
-                - [ ] 4-1-2-4-1.`generateGames()` : 여러 개의 게임을 생성한다.
-                - [ ] 4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.
-            - [ ] 4-1-2-5.`GameWinningCondition(VO)`
-                - [ ] 4-1-2-5-1.`generate()` : 게임 당첨 조건을 생성한다.
-                - [ ] 4-1-2-5-2.`winningStatistics()` : 당첨 통계를 생성한다.
-            - [ ] 4-1-2-6.`Money(VO)`
-                - [ ] 4-1-2-6-1.`validate()` : 돈 유효성 체크(0 이상)
-                - [ ] 4-1-2-6-2.`generate()` : 돈 생성
-                - [ ] 4-1-2-6-3.`buyGames()` : 금액에 따라 게임을 구매한다.
+        - [x] 4-1-2.`Value Object` & `Aggregate`
+            - [x] 4-1-2-1.`Ball(VO)`
+                - [x] 4-1-2-1-1.`validate()` : 1~45의 자연수 유효성 체크
+                - [x] 4-1-2-1-2.`generate()` : Ball 생성
+                - [x] 4-1-2-1-3.`equals()` : 등가성 비교
+            - [x] 4-1-2-2.`BallGroup(Aggregate)`
+                - [x] 4-1-2-2-1.`generate()` : 입력된 정보를 토대로 BallGroup을 생성한다.
+                - [x] 4-1-2-2-2.`allOfBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.
+            - [x] 4-1-2-3.`Game(VO)`
+                - [x] 4-1-2-3-1.`generateAuto()` : 모든 볼의 정보를 토대로 게임을 자동으로 생성한다.
+                - [x] 4-1-2-3-2.`generateCustom()` : 모든 볼의 정보를 토대로 게임을 수동으로 생성한다.
+            - [x] 4-1-2-4.`GameGroup(Aggregate)`
+                - [x] 4-1-2-4-1.`buyGames()` : 금액에 따라 여러 개의 게임을 생성한다.
+                - [x] 4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.
+            - [x] 4-1-2-5.`GameWinningCondition(VO)`
+                - [x] 4-1-2-5-1.`generate()` : 게임 당첨 조건을 생성한다.
+                - [x] 4-1-2-5-2.`calculateContainWinningBalls()` : 게임 등수를 계산한다.
+                - [x] 4-1-2-5-3.`makeMsgWinningStatistics()` : 당첨 통계를 생성한다.
+            - [x] 4-1-2-6.`Money(VO)`
+                - [x] 4-1-2-6-1.`validate()` : 돈 유효성 체크(0 이상)
+                - [x] 4-1-2-6-2.`generate()` : 돈 생성
+            - [x] 4-1-2-7.`PrizeCode(VO)`
+                - [x] 4-1-2-7-1.`is~()` : 등가성 비교
+                - [x] 4-1-2-7-2.`makeMsgWinningPrize()` : 등수 및 금액, 수익률 출력
         - [ ] 4-1-3.`Entity`
             - [ ] 4-1-3-1.`Round`
                 - [ ] 4-1-3-1-1.Field 생성 : `GameWinningCondition`, `GameGroup`, `Money`
     - [ ] 4-2.IO Context
-        - [ ] 4-2-1.`Value Object`
-            - [ ] 4-2-1-1.`InputText`
-                - [ ] 4-2-1-1-1.`split()` : 쉼표`,`를 구분자로 사용한다. `trim()`을 활용하여 공백을 제거한 숫자로 표출한다.
-            - [ ] 4-2-1-2.`ViewCode`
-                - [ ] 4-2-1-2-1.`is~()` : 등가성 비교 
+        - [x] 4-2-1.`Value Object` & `Aggregate`
+            - [x] 4-2-1-1.`InputText(VO)`
+                - [x] 4-2-1-1-1.`validate()` : `null`, `empty`의 경우 exception 발생
+                - [x] 4-2-1-1-2.`generate()` : `null`, `empty`의 경우 exception 발생
+                - [x] 4-2-1-1-3.`splitByComma()` : 쉼표`,`를 구분자로 사용한다. `trim()`을 활용하여 공백을 제거한 InputText의 리스트로 리턴한다.
+            - [x] 4-2-1-2.`InputTextGroup(Aggregate)`
+                - [x] 4-2-1-2-1.`generate()` : InputTextGroup를 생성한다.
+            - [x] 4-2-1-3.`ViewCode(VO)`
+                - [x] 4-2-1-3-1.`is~()` : 등가성 비교 
         - [ ] 4-2-2.View
             - [ ] 4-2-2-1.`TicketBoxView`
             - [ ] 4-2-2-2.`GameWinningConditionView`
             - [ ] 4-2-2-3.`WinningStaticsView`
     - [ ] 4-3.Refactoring
-        - [ ] 4-3-1.**_1차 구현 후 UI, IO class를 제외한 내용을 추가 작성한다._**
-            - [ ] 4-3-1-1.
-                - [ ] 4-3-1-1-1. 
+        - [ ] 4-3-1.각 VO, Entity, Aggregate에 맞는 메서드가 작성되었는가 확인
+        - [ ] 4-3-2.메서드 명이 충분히 적절하게 작성된 명칭인가 확인
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
         - [ ] 5-1-1.`Value Object` & `Aggregate`
