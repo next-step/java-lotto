@@ -1,5 +1,7 @@
 package lottery;
 
+import java.util.Arrays;
+
 public enum LotteryMatchType {
 	MISS_MATCH(-1, Money.won(0L)),
 	THREE_MATCH(3, Money.won(5000L)),
@@ -20,16 +22,9 @@ public enum LotteryMatchType {
 	}
 
 	public static LotteryMatchType fromInteger(int matchNumber) {
-		for (LotteryMatchType lotteryMatchType : LotteryMatchType.values()){
-			return getLotteryMatchType(matchNumber, lotteryMatchType);
-		}
-		return MISS_MATCH;
-	}
-
-	private static LotteryMatchType getLotteryMatchType(int matchNumber, LotteryMatchType lotteryMatchType) {
-		if (lotteryMatchType.matchCount == matchNumber){
-			return lotteryMatchType;
-		}
-		return MISS_MATCH;
+		return Arrays.stream(LotteryMatchType.values())
+			.filter(a -> a.matchCount == matchNumber)
+			.findFirst()
+			.orElse(MISS_MATCH);
 	}
 }
