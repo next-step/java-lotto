@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Lottoes;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
@@ -21,13 +22,18 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printLottoes(LottoGame lottoGame) {
+    public static void printPurchaseCountAndLottoes(final LottoGame lottoGame) {
         System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoGame.getLottoCount()));
-        lottoGame.getLottoes().getLottoes().stream()
-                .forEach(lotto -> System.out.println(prettyString(lotto)));
+        printLottoes(lottoGame.getLottoes());
     }
 
-    private static String prettyString(Lotto lotto) {
+    private static void printLottoes(final Lottoes lottoes) {
+        for (Lotto lotto : lottoes.getLottoes()) {
+            System.out.println(prettyString(lotto));
+        }
+    }
+
+    private static String prettyString(final Lotto lotto) {
         return String.format("%s%s%s", "[",
                 lotto.getLotto()
                         .stream()
