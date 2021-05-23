@@ -1,17 +1,26 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 public class LottoStatistics {
 
-    private final WinningLotto winningLotto;
     private final WinningCountMap winningCountMap;
 
     public LottoStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
-        this.winningLotto = winningLotto;
-        this.winningCountMap = new WinningCountMap();
 
-        analyzeLottosData(lottos);
+        Map<WinningType, Integer> map =
+            lottos.stream()
+                  .map(winningLotto::getWinningType)
+                  .filter(WinningType::isWinningLotto)
+                  .collect(groupingBy(Function.identity(), countingInt()));
+
+        this.winningCountMap = new WinningCountMap(map);
     }
 
     public List<WinningLottoDto> getStatisticsData() {
@@ -22,7 +31,7 @@ public class LottoStatistics {
         return winningCountMap.getTotalPrize() / (double) (totalLottoSize * Money.LOTTO_PRICE);
     }
 
-    private void analyzeLottosData(List<Lotto> lottos) {
-        lottos.forEach(lotto -> winningCountMap.addCount(winningLotto.getWinningType(lotto)));
+    private Collector<WinningType, ?, Integer> countingInt() {
+        return Collectors.reducing(0, e -> 1, Integer::sum);
     }
 }

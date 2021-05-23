@@ -1,26 +1,24 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 public class WinningCountMap {
 
     private final Map<WinningType, Integer> winningCounterMap;
 
-    public WinningCountMap() {
-        winningCounterMap = Arrays.stream(WinningType.values())
-                                  .filter(type -> type != WinningType.NONE)
-                                  .collect(toMap(Function.identity(), type -> 0));
-    }
+    public WinningCountMap(Map<WinningType, Integer> map) {
 
-    public void addCount(WinningType winningType) {
-        winningCounterMap.merge(winningType, 1, Integer::sum);
+        Arrays.stream(WinningType.values())
+              .filter(WinningType::isWinningLotto)
+              .forEach(type -> map.putIfAbsent(type, 0));
+
+        winningCounterMap = Collections.unmodifiableMap(map);
     }
 
     public long getTotalPrize() {

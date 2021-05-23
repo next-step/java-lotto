@@ -56,4 +56,8 @@ public enum WinningType {
     public int getPrize() {
         return prize;
     }
+
+    public boolean isWinningLotto() {
+        return this != NONE;
+    }
 }

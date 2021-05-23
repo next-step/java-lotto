@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningCountMapTest {
@@ -23,20 +27,20 @@ class WinningCountMapTest {
     @ParameterizedTest
     void totalPrizeTest(List<Integer> winningCounts) {
 
-        WinningCountMap winningCountMap = new WinningCountMap();
-
+        Map<WinningType, Integer> map = new HashMap<>();
         long expected = 0L;
 
         for (int i = 0; i < TYPES.length; i++) {
 
             int size = winningCounts.get(i);
             for (int j = 0; j < winningCounts.get(i); j++) {
-                winningCountMap.addCount(TYPES[i]);
+                map.merge(TYPES[i], 1, Integer::sum);
             }
 
             expected += (long) TYPES[i].getPrize() * (long) size;
         }
 
+        WinningCountMap winningCountMap = new WinningCountMap(map);
         assertEquals(expected, winningCountMap.getTotalPrize());
     }
 
@@ -54,7 +58,9 @@ class WinningCountMapTest {
     @DisplayName("데이터가 순서대로 뽑히는지 검증")
     @Test
     void dataSetsTest() {
-        WinningCountMap winningCountMap = new WinningCountMap();
+        WinningCountMap winningCountMap = new WinningCountMap(
+            Arrays.stream(TYPES).collect(toMap(Function.identity(), i -> 0))
+        );
         List<WinningLottoDto> dataSets = winningCountMap.getDataSets();
 
         List<WinningType> types = Arrays.stream(WinningType.values())
