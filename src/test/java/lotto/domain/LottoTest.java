@@ -1,50 +1,49 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Lotto 객체 생성 및 기능 검증 테스트
+ */
 class LottoTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1,1,2,3,4,5", "1,2,3,3,5,6", "10,11,12,14,14,16"})
-    void isDuplicated_lotto_number(String numbers) {
-        List<LottoNumber> lottoNumbers = toLottoNumbers(numbers);
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또는 중복되는 번호를 가질 수 없습니다.");
+    LottoNumbersGenerator lottoNumbersGenerator;
+
+    @BeforeEach
+    public void beforeEach() {
+        this.lottoNumbersGenerator = new LottoNumbersGenerator();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,6,7,8,9,10"})
-    @DisplayName("로또번호가 6개가 아닐 경우 로또 생성시 유효성 검증")
-    void validate_lotto_numbers_size(String textNumber) {
-        List<LottoNumber> lottoNumbers = toLottoNumbers(textNumber);
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또번호 개수가 부족하거나 초과하였습니다.");
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3"}, delimiter = ':')
+    void get_matchingNumber_count(String textWinningNumber, int matchingCount) {
+        // given
+        LottoNumbers lottoNumbers = this.lottoNumbersGenerator.toLottoNumbers("1,2,3,4,5,6");
+        LottoNumbers winningNumbers = this.lottoNumbersGenerator.toLottoNumbers(textWinningNumber);
+
+        // when
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        //then
+        assertThat(lotto.getCountOfMatchingNumber(winningNumbers)).isEqualTo(matchingCount);
     }
 
     @Test
     @DisplayName("6개의 로또번호를 가진 로또 생성")
     void create_lotto() {
-        List<LottoNumber> lottoNumbers = toLottoNumbers("1,2,3,4,5,6");
-        Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.getLottoNumbers()).isNotNull();
-    }
+        // given
+        LottoNumbers lottoNumbers = this.lottoNumbersGenerator.toLottoNumbers("1,2,3,4,5,6");
 
-    private List<LottoNumber> toLottoNumbers(String textNumber) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : textNumber.split(",")) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
-        }
-        return lottoNumbers;
+        // when
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        //then
+        assertThat(lotto.getLottoNumbers()).isNotNull();
     }
 }

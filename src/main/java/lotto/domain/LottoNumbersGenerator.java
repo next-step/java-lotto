@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbersGenerator {
+    public static final String SPLIT_DELIMITER = ",";
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbersGenerator() {
@@ -18,11 +19,20 @@ public class LottoNumbersGenerator {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public List<LottoNumber> generateRandomLottoNumbers() {
+    public LottoNumbers generateRandomLottoNumbers() {
         Collections.shuffle(this.lottoNumbers);
-        return this.lottoNumbers.stream()
+        List<LottoNumber> resultLottoNumbers = this.lottoNumbers.stream()
                 .limit(LottoNumbers.LOTTO_NUMBERS_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
+        return new LottoNumbers(resultLottoNumbers);
+    }
+
+    public LottoNumbers toLottoNumbers(String textNumber) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : textNumber.split(SPLIT_DELIMITER)) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
+        }
+        return new LottoNumbers(lottoNumbers);
     }
 }

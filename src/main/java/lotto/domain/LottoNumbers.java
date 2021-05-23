@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,14 @@ public class LottoNumbers {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean isEmpty() {
+        return this.lottoNumbers.isEmpty();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(this.lottoNumbers);
     }
 
     private void validateLottoNumbersSize(List<LottoNumber> lottoNumbers) {

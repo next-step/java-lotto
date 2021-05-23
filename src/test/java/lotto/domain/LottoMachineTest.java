@@ -6,8 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.List;
-
+/**
+ * LottoMachine 객체 생성 및 로또 생성기능 테스트
+ */
 public class LottoMachineTest {
 
     @ParameterizedTest
@@ -21,6 +22,6 @@ public class LottoMachineTest {
         Lottos lottos = lottoMachine.getLottos();
 
         // then
-        assertThat(lottos.getCountOfLottos()).isEqualTo(lottoCount);
+        assertThat(lottos.getSize()).isEqualTo(lottoCount);
     }
 }

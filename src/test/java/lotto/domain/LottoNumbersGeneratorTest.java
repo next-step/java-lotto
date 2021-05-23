@@ -1,63 +1,49 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
-
+/**
+ * LottoNumbersGenerator 객체 생성 및 로또번호 생성기능 테스트
+ */
 public class LottoNumbersGeneratorTest {
 
-    @RepeatedTest(10)
-    @DisplayName("생성된 로또번호 중복 확인")
-    void check_duplicate() {
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3,4,5,6", "a,b,c,d,e,f"})
+    @DisplayName("문자열을 로또번호로 변활할 떄 유효성 검사")
+    void validate_toLottoNumbers(String textNumber) {
         // given
         LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-        List<LottoNumber> randomLottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
-
-        // when
-        Set<LottoNumber> result = new HashSet<>(randomLottoNumbers);
 
         // then
-        assertThat(result.size()).isEqualTo(6);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"6,5,4,3,2,1", "5,3,4,1,7,9", "10,23,45,11,34,15"})
-    @DisplayName("생성된 로또번호 랜덤 유무 확인")
-    void check_random_lottoNumber(String textNumber) {
-        // given
-        List<LottoNumber> lottoNumbers = toLottoNumbers(textNumber);
-
-        // when
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator(lottoNumbers);
-        List<LottoNumber> randomLottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
-
-        // then
-        boolean result = Arrays.equals(lottoNumbers.toArray(), randomLottoNumbers.toArray());
-        assertThat(result).isFalse();
+        assertThatThrownBy(() -> lottoNumbersGenerator.toLottoNumbers(textNumber))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("생성된 로또숫자 개수 확인 테스트")
-    void check_lottoNumbers_size() {
+    @DisplayName("문자로 된 숫자 목록을 로또번호 목록으로 변환기능")
+    void toLottoNumbers() {
         // given
         LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-        List<LottoNumber> lottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
+        LottoNumbers lottoNumbers = lottoNumbersGenerator.toLottoNumbers("1, 2, 3 ,4,5,6");
 
         // then
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.isEmpty()).isFalse();
     }
 
-    private List<LottoNumber> toLottoNumbers(String textNumber) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : textNumber.split(",")) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
-        }
-        return lottoNumbers;
+    @Test
+    @DisplayName("로또번호 객체 생성")
+    void generator_lottoNumbers() {
+        // given
+        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
+        LottoNumbers lottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
+
+        // then
+        assertThat(lottoNumbers.isEmpty()).isFalse();
     }
 }
