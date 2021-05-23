@@ -20,23 +20,9 @@ public class LottoGameTest {
 	}
 
 	@Test
-	@DisplayName("구매금액이 로또를 구입하기 위한 최소금액이 안될경우 예외발생 테스트")
-	void createLottoGame() {
-		Assertions.assertThatThrownBy(() -> lottoGame.purchaseLottos(999, testRandomNumbersGenerator))
-				.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@Test
-	@DisplayName("구매금액으로 몇개의 로또를 구입할 수 있는지 테스트")
-	void findNumberOfAvailablePurchases() {
-		int lottoCount = lottoGame.findNumberOfAvailablePurchases(14000);
-		assertThat(lottoCount).isEqualTo(14);
-	}
-
-	@Test
 	@DisplayName("구매금액으로 로또를 구매하는 테스트")
 	void purchaseLottos() {
-		assertThat(lottoGame.purchaseLottos(14000, testRandomNumbersGenerator)).hasSize(14);
+		assertThat(lottoGame.purchaseLottos(new PuchaseAmount(14000), testRandomNumbersGenerator)).hasSize(14);
 	}
 
 }

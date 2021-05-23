@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoGame;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.RandomNumbersGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,7 +21,7 @@ public class LottoGameController {
 		//로또구입
 		int purchaseAmount = this.inputView.inputPurchaseAmount();
 		LottoGame lottoGame = new LottoGame();
-		List<Lotto> lottos = lottoGame.purchaseLottos(purchaseAmount, this.randomNumbersGenerator);
+		List<Lotto> lottos = lottoGame.purchaseLottos(new PuchaseAmount(purchaseAmount), this.randomNumbersGenerator);
 		InputView.printPurchaseLottos(lottos);
 
 		//당첨확인

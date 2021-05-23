@@ -15,7 +15,7 @@ public class LottoResult {
 	public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
 		this.lottos = lottos;
 		this.winningLotto = winningLotto;
-		this.totalPurchases = lottos.size() * LottoGame.PURCHASE_AMOUNT_PER_LOTTO;
+		this.totalPurchases = lottos.size() * PuchaseAmount.MINIMUM;
 		this.statMap = initRankMap();
 		this.findWinningResult();
 	}
