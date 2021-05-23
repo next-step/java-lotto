@@ -16,7 +16,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int number) {
-        if(number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new LottoNumberOutOfBoundsException(number);
         }
     }
@@ -41,5 +41,10 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

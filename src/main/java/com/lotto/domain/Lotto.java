@@ -1,9 +1,8 @@
 package com.lotto.domain;
 
-import java.util.Set;
 import java.util.TreeSet;
 
-import static com.lotto.domain.LottoReward.*;
+import static com.lotto.domain.LottoReward.generateReward;
 
 public final class Lotto {
 
@@ -20,15 +19,15 @@ public final class Lotto {
         return lottoNumbers;
     }
 
-    public LottoReward reward(Set<Integer> winningNumbers) {
+    public LottoReward reward(LottoWinningNumbers winningNumbers) {
         int sameCount = 0;
         for (LottoNumber number : lottoNumbers) {
-            sameCount += addOneIfContainInWinningNumbers(winningNumbers, number.number());
+            sameCount += addOneIfContainInWinningNumbers(winningNumbers, number);
         }
         return generateReward(sameCount);
     }
 
-    private int addOneIfContainInWinningNumbers(Set<Integer> winningNumbers, int number) {
+    private int addOneIfContainInWinningNumbers(LottoWinningNumbers winningNumbers, LottoNumber number) {
         if (winningNumbers.contains(number)) {
             return 1;
         }

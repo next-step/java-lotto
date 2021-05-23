@@ -1,12 +1,46 @@
 package com.lotto.domain;
 
+import com.lotto.exception.IllegalPriceException;
+import com.lotto.exception.LottoPriceOutOfBoundsException;
+
 import java.util.*;
 
 public class LottoGroup {
     private List<Lotto> lottoList;
 
-    public LottoGroup(List<Lotto> lottoList) {
+    private LottoGroup(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static LottoGroup createLottoGroup(String totalPrice) throws IllegalPriceException,
+            LottoPriceOutOfBoundsException {
+        int nTotalPrice = castIntTotalPrice(totalPrice);
+        validateTotalPrice(nTotalPrice);
+
+        int totalCount = nTotalPrice / Lotto.UNIT_PRICE;
+        List<Lotto> lottoList = new ArrayList<>();
+
+        for (int i = 0; i < totalCount; i++) {
+            lottoList.add(LottoAutoGenerator.generate());
+        }
+
+        return new LottoGroup(lottoList);
+    }
+
+    private static int castIntTotalPrice(String totalPrice) throws IllegalPriceException {
+        int nTotalPrice = 0;
+        try {
+            nTotalPrice = Integer.parseInt(totalPrice);
+        } catch (NumberFormatException exception) {
+            throw new IllegalPriceException(totalPrice);
+        }
+        return nTotalPrice;
+    }
+
+    private static void validateTotalPrice(int totalPrice) {
+        if (totalPrice < Lotto.UNIT_PRICE) {
+            throw new LottoPriceOutOfBoundsException(totalPrice);
+        }
     }
 
     public int size() {
@@ -14,39 +48,16 @@ public class LottoGroup {
     }
 
     public List<Lotto> lottoList() {
-        return lottoList;
+        return this.lottoList;
     }
 
-    public Map<LottoReward, Integer> winningLottoMap(Set<Integer> winningNumbers) {
-        Map<LottoReward, Integer> winningLottoMap = new HashMap<>();
+    public LottoStatistics statistics(LottoWinningNumbers winningNumbers) {
+        List<LottoReward> lottoRewards = new ArrayList<>();
+
         for (Lotto lotto : lottoList) {
-            LottoReward reward = lotto.reward(winningNumbers);
-            mapOnlyWinningLotto(winningLottoMap, reward);
+            lottoRewards.add(lotto.reward(winningNumbers));
         }
 
-        return winningLottoMap;
-    }
-
-    private void mapOnlyWinningLotto(Map<LottoReward, Integer> winningLottoMap, LottoReward reward) {
-        if (reward != LottoReward.NOTHING) {
-            winningLottoMap.put(reward, winningLottoMap.get(reward) != null ? winningLottoMap.get(reward) + 1 : 1);
-        }
-    }
-
-    public int totalReward(Set<Integer> winningNumbers) {
-        int totalReward = 0;
-        Map<LottoReward, Integer> winningLottoMap = winningLottoMap(winningNumbers);
-        for (LottoReward reward : winningLottoMap.keySet()) {
-            totalReward += reward.totalReward(winningLottoMap.get(reward));
-        }
-
-        return totalReward;
-    }
-
-    public double yield(Set<Integer> winningNumbers) {
-        int investment = lottoList.size() * Lotto.UNIT_PRICE;
-        int totalReward = totalReward(winningNumbers);
-
-        return totalReward / investment;
+        return LottoStatistics.createLottoStatistics(lottoRewards);
     }
 }

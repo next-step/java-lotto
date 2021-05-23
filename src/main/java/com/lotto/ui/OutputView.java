@@ -2,6 +2,7 @@ package com.lotto.ui;
 
 import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoReward;
+import com.lotto.domain.LottoStatistics;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import static com.lotto.ui.Message.*;
 
 public class OutputView {
 
-    static void out(String message) {
+    public static void out(String message) {
         System.out.println(message);
     }
 
@@ -36,11 +37,16 @@ public class OutputView {
         out("---------");
     }
 
-    public static void winningStatisticsDetail(Map<LottoReward, Integer> winningLottoMap) {
-        for (LottoReward reward : winningLottoMap.keySet()) {
-            String message = getMessage(reward);
+    public static void winningStatisticsDetail(LottoStatistics lottoStatistics) {
+        for (LottoReward reward : lottoStatistics.keySet()) {
+            printOnlyWinningLotto(lottoStatistics, reward, getMessage(reward));
+        }
+    }
+
+    private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward, String message) {
+        if (!message.isEmpty()) {
             out(String.format(WINNING_STATISTICS_DETAIL.message(),
-                    message, reward.reward(), winningLottoMap.get(reward)));
+                    message, reward.reward(), lottoStatistics.get(reward)));
         }
     }
 

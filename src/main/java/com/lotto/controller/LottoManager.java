@@ -1,70 +1,61 @@
 package com.lotto.controller;
 
-import com.lotto.domain.LottoAutoGenerator;
-import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoGroup;
-import com.lotto.domain.LottoNumber;
+import com.lotto.domain.LottoStatistics;
+import com.lotto.domain.LottoWinningNumbers;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LottoManager {
 
     public void control() {
-        int totalCount = inputPrice() / Lotto.UNIT_PRICE;
-        LottoGroup lottoGroup = createLottoGroup(totalCount);
-        OutputView.confirmBuyCount(totalCount);
+        LottoGroup lottoGroup = createLottoGroup();
+        OutputView.confirmBuyCount(lottoGroup.size());
         OutputView.buyLottoList(lottoGroup.lottoList());
 
-        Set<Integer> winningNumbers = inputWinningNumbers();
+        LottoWinningNumbers winningNumbers = createWinningNumbers();
 
         OutputView.winningStatistics();
-        OutputView.winningStatisticsDetail(lottoGroup.winningLottoMap(winningNumbers));
-        OutputView.investment(lottoGroup.yield(winningNumbers));
+        LottoStatistics statistics = lottoGroup.statistics(winningNumbers);
+        OutputView.winningStatisticsDetail(statistics);
+        OutputView.investment(statistics.yield());
     }
 
-    private Set<Integer> inputWinningNumbers() {
-        Set<Integer> winningNumbers = new HashSet<>();
+    private LottoGroup createLottoGroup() {
         boolean flag = true;
-        while (flag) {
-            OutputView.requireWinningNumbers();
-            try {
-                winningNumbers = InputView.inputWinningNumbers();
-                flag = false;
-            } catch (IllegalArgumentException exception) {
-                flag = true;
-            }
-        }
-        return winningNumbers;
-    }
-
-    private int inputPrice() {
-        boolean flag = true;
-        int inputPrice = 0;
+        LottoGroup lottoGroup = null;
 
         while (flag) {
             OutputView.requireLottoPrice();
             try {
-                inputPrice = InputView.inputPrice();
+                lottoGroup = LottoGroup.createLottoGroup(InputView.inputPrice());
                 flag = false;
-            } catch (IllegalArgumentException exception) {
+            } catch (RuntimeException exception) {
                 flag = true;
+                OutputView.out(exception.getMessage());
             }
         }
-        return inputPrice;
+        return lottoGroup;
     }
 
-    public LottoGroup createLottoGroup(int totalCount) {
-        List<Lotto> lottoList = new ArrayList<>();
+    private LottoWinningNumbers createWinningNumbers() {
+        LottoWinningNumbers lottoWinningNumbers = null;
 
-        for (int i = 0; i < totalCount; i++) {
-            lottoList.add(LottoAutoGenerator.generate());
+        boolean flag = true;
+        while (flag) {
+            OutputView.requireWinningNumbers();
+            try {
+                lottoWinningNumbers = LottoWinningNumbers
+                        .createLottoWinningNumbers(InputView.inputWinningNumbers());
+                flag = false;
+            } catch (RuntimeException exception) {
+                flag = true;
+                OutputView.out(exception.getMessage());
+            }
         }
-
-        return new LottoGroup(lottoList);
+        return lottoWinningNumbers;
     }
 }
