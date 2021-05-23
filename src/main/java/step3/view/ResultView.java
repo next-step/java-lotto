@@ -1,8 +1,6 @@
 package step3.view;
 
 import step3.common.WinningType;
-import step3.domain.LottoTicket;
-import step3.domain.ProfitCalculator;
 
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {

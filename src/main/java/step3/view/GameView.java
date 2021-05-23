@@ -1,40 +1,35 @@
 package step3.view;
 
 import step3.common.WinningType;
-import step3.domain.LottoTicket;
-import step3.domain.LottoTicketGenerator;
-import step3.domain.ProfitCalculator;
-import step3.domain.WinningNumbers;
+import step3.domain.*;
 
 public class GameView {
-    private static final int LOTTO_TICKET_PRICE = 1000;
     InputView inputView = new InputView();
     ResultView resultView = new ResultView();
 
     public void start() {
-        long money = inputView.inputMoney();
-        int LottoTicketCount = (int)(money/LOTTO_TICKET_PRICE);
-        resultView.printLottoTicketCount(LottoTicketCount);
+        Money money = new Money(inputView.inputMoney());
+        int lottoTicketCount = money.countLottoTicket();
+        resultView.printLottoTicketCount(lottoTicketCount);
 
-        LottoTicket[] lottoTickets = new LottoTicket[LottoTicketCount];
-        WinningType[] winningTypes = new WinningType[LottoTicketCount];
+        LottoTicket[] lottoTickets = new LottoTicket[lottoTicketCount];
+        WinningType[] winningTypes = new WinningType[lottoTicketCount];
 
         String winningNumberText = inputView.inputWinningNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberText);
 
         LottoTicketGenerator generator = new LottoTicketGenerator();
-        for (int i=0; i<LottoTicketCount; i++) {
+        for (int i=0; i<lottoTicketCount; i++) {
             LottoTicket lottoTicket = generator.generate();
             lottoTickets[i] = lottoTicket;
             System.out.println(lottoTickets[i]);
         }
 
-        for (int i=0; i<LottoTicketCount; i++) {
+        for (int i=0; i<lottoTicketCount; i++) {
             winningTypes[i] = winningNumbers.findWinningType(lottoTickets[i]);
         }
 
-        ProfitCalculator profitCalculator = new ProfitCalculator();
-        double profit = profitCalculator.calculate(money, winningTypes);
+        double profit = money.calculateProfit(winningTypes);
 
         resultView.printResultStatistics(winningTypes);
         resultView.printResultProfit(profit);
