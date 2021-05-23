@@ -48,22 +48,15 @@ public class OutputView {
     }
 
     private static String getMessage(LottoReward reward) {
-        String message = "";
-
-        switch (reward) {
-            case THREE:
-                message = "3";
-                break;
-            case FOUR:
-                message = "4";
-                break;
-            case FIVE:
-                message = "5";
-                break;
-            case SIX:
-                message = "6";
-                break;
+        if (reward == LottoReward.THREE) {
+            return "3";
+        } else if (reward == LottoReward.FOUR) {
+            return "4";
+        } else if (reward == LottoReward.FIVE) {
+            return "5";
+        } else if (reward == LottoReward.SIX) {
+            return "6";
         }
-        return message;
+        return "";
     }
 }
