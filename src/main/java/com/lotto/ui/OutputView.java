@@ -5,9 +5,8 @@ import com.lotto.domain.LottoReward;
 import com.lotto.domain.LottoStatistics;
 
 import java.util.List;
-import java.util.Map;
 
-import static com.lotto.domain.LottoReward.*;
+import static com.lotto.domain.LottoReward.NOTHING;
 import static com.lotto.ui.Message.*;
 
 public class OutputView {
@@ -38,32 +37,19 @@ public class OutputView {
     }
 
     public static void winningStatisticsDetail(LottoStatistics lottoStatistics) {
-        for (LottoReward reward : lottoStatistics.keySet()) {
-            printOnlyWinningLotto(lottoStatistics, reward, getMessage(reward));
+        for (LottoReward reward : LottoReward.values()) {
+            printOnlyWinningLotto(lottoStatistics, reward);
         }
     }
 
-    private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward, String message) {
-        if (!message.isEmpty()) {
+    private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward) {
+        if (reward != NOTHING) {
             out(String.format(WINNING_STATISTICS_DETAIL.message(),
-                    message, reward.reward(), lottoStatistics.get(reward)));
+                    reward.toString(), reward.reward(), lottoStatistics.get(reward)));
         }
     }
 
     public static void investment(double investment) {
         out(String.format(INVESTMENT.message(), investment));
-    }
-
-    private static String getMessage(LottoReward reward) {
-        if (reward == THREE) {
-            return "3";
-        } else if (reward == FOUR) {
-            return "4";
-        } else if (reward == FIVE) {
-            return "5";
-        } else if (reward == SIX) {
-            return "6";
-        }
-        return "";
     }
 }

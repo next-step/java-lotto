@@ -46,4 +46,19 @@ public enum LottoReward {
         }
         return NOTHING;
     }
+
+    @Override
+    public String toString() {
+        if (this == THREE) {
+            return "3";
+        } else if (this == FOUR) {
+            return "4";
+        } else if (this == FIVE) {
+            return "5";
+        } else if (this == SIX) {
+            return "6";
+        }
+
+        return "0";
+    }
 }
