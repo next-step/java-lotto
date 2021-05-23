@@ -13,7 +13,7 @@ public final class InputView {
   public PurchaseAmountQuantity getPurchaseAmountQuantity() {
     System.out.println("구매 금액을 입력해주세요.");
 
-    return new PurchaseAmountQuantity(new Scanner(System.in).nextInt());
+    return new PurchaseAmountQuantity(getIntValueFromUser());
   }
 
   public WinningNumber getWinningNumber() {
@@ -26,15 +26,14 @@ public final class InputView {
   private String[] getWinningNumbers() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-    return scanner.nextLine().split(",");
+    return getStringValueFromUser().split(",");
   }
 
   private int getBonusNumber() {
     System.out.println("보너스 볼을 입력해 주세요.");
 
-    return scanner.nextInt();
+    return getIntValueFromUser();
   }
-
 
   private int[] getParsedNumbersFrom(String[] splitNumbers) {
     int[] numbers = new int[6];
@@ -43,5 +42,20 @@ public final class InputView {
     }
 
     return numbers;
+  }
+
+  private int getIntValueFromUser() {
+    int amount = scanner.nextInt();
+    clearScanner();
+
+    return amount;
+  }
+
+  private String getStringValueFromUser() {
+    return scanner.nextLine();
+  }
+
+  private void clearScanner() {
+    scanner.nextLine();
   }
 }
