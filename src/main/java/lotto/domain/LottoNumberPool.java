@@ -26,7 +26,7 @@ class LottoNumberPool {
 
 	private static void initialize() {
 		for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
-			LottoNumber lottoNumber = new LottoNumber(i);
+			LottoNumber lottoNumber = LottoNumber.of(i);
 			LOTTO_NUMBER_MAP.put(i, lottoNumber);
 			LOTTO_NUMBER_LIST.add(lottoNumber);
 		}

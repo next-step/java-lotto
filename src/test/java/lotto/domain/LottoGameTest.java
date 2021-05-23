@@ -31,12 +31,12 @@ class LottoGameTest {
 
 	private Set<LottoNumber> getLottoNumbers() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
-		lottoNumbers.add(new LottoNumber(1));
-		lottoNumbers.add(new LottoNumber(2));
-		lottoNumbers.add(new LottoNumber(3));
-		lottoNumbers.add(new LottoNumber(4));
-		lottoNumbers.add(new LottoNumber(5));
-		lottoNumbers.add(new LottoNumber(6));
+		lottoNumbers.add(LottoNumber.of(1));
+		lottoNumbers.add(LottoNumber.of(2));
+		lottoNumbers.add(LottoNumber.of(3));
+		lottoNumbers.add(LottoNumber.of(4));
+		lottoNumbers.add(LottoNumber.of(5));
+		lottoNumbers.add(LottoNumber.of(6));
 
 		return lottoNumbers;
 	}

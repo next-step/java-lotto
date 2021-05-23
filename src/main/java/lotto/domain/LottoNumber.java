@@ -1,12 +1,33 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 class LottoNumber implements Comparable<LottoNumber> {
 
+	private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+	private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>(LOTTO_NUMBER_UPPER_BOUND);
+
+	static {
+		initialize();
+	}
+
+	private static void initialize() {
+		for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
+			LottoNumber lottoNumber = new LottoNumber(i);
+			LOTTO_NUMBER_MAP.put(i, lottoNumber);
+		}
+	}
+
+	static LottoNumber of(int number) {
+		return LOTTO_NUMBER_MAP.get(number);
+	}
+
 	private final int number;
 
-	LottoNumber(int number) {
+	private LottoNumber(int number) {
 		this.number = number;
 	}
 

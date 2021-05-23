@@ -18,10 +18,10 @@ class LottoNumberTest {
 		int number = 1;
 
 		// then
-		LottoNumber actual = new LottoNumber(number);
+		LottoNumber actual = LottoNumber.of(number);
 
 		// then
-		assertThat(actual).isEqualTo(new LottoNumber(number));
+		assertThat(actual).isEqualTo(LottoNumber.of(number));
 	}
 
 	@DisplayName("로또 번호 정렬 테스트")
@@ -29,19 +29,19 @@ class LottoNumberTest {
 	void sort() {
 		// given
 		List<LottoNumber> lottoNumberList = new ArrayList<>();
-		lottoNumberList.add(new LottoNumber(5));
-		lottoNumberList.add(new LottoNumber(2));
-		lottoNumberList.add(new LottoNumber(3));
-		lottoNumberList.add(new LottoNumber(1));
-		lottoNumberList.add(new LottoNumber(6));
-		lottoNumberList.add(new LottoNumber(4));
+		lottoNumberList.add(LottoNumber.of(5));
+		lottoNumberList.add(LottoNumber.of(2));
+		lottoNumberList.add(LottoNumber.of(3));
+		lottoNumberList.add(LottoNumber.of(1));
+		lottoNumberList.add(LottoNumber.of(6));
+		lottoNumberList.add(LottoNumber.of(4));
 
 		// when
 		Collections.sort(lottoNumberList);
 
 		// then
-		assertThat(lottoNumberList).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-			new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+		assertThat(lottoNumberList).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+			LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
 	}
 
 }

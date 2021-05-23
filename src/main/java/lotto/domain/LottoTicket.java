@@ -59,7 +59,7 @@ class LottoTicket {
 
 	private Set<LottoNumber> makeLottoNumberSet(List<Integer> numberList) {
 		Set<LottoNumber> lottoNumberSet = new HashSet<>(LOTTO_NUMBER_COUNT);
-		transform(numberList, lottoNumberSet, LottoNumber::new);
+		transform(numberList, lottoNumberSet, LottoNumber::of);
 
 		validateLottoNumberSet(lottoNumberSet);
 

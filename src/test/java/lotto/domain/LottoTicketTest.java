@@ -18,7 +18,7 @@ class LottoTicketTest {
 	@Test
 	void invalid_length() {
 		// given
-		HashSet<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2)));
+		HashSet<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2)));
 
 		// then
 		assertThatThrownBy(() -> new LottoTicket(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
@@ -40,12 +40,12 @@ class LottoTicketTest {
 
 	private Set<LottoNumber> getLottoNumbers() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
-		lottoNumbers.add(new LottoNumber(1));
-		lottoNumbers.add(new LottoNumber(2));
-		lottoNumbers.add(new LottoNumber(3));
-		lottoNumbers.add(new LottoNumber(4));
-		lottoNumbers.add(new LottoNumber(5));
-		lottoNumbers.add(new LottoNumber(6));
+		lottoNumbers.add(LottoNumber.of(1));
+		lottoNumbers.add(LottoNumber.of(2));
+		lottoNumbers.add(LottoNumber.of(3));
+		lottoNumbers.add(LottoNumber.of(4));
+		lottoNumbers.add(LottoNumber.of(5));
+		lottoNumbers.add(LottoNumber.of(6));
 
 		return lottoNumbers;
 	}
