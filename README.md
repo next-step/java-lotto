@@ -45,3 +45,7 @@
 - [x] 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
   - [x] 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)
   - [x] 숫자가 아닌 문자를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “1,ㄱ,3”)
+- [ ] 원시값에 제약조건이 있으므로 PositiveNumber라는 포장객체로 정의하자
+  - [ ] 문자열로부터 PositiveNumber 객체를 만드는 정적 메서드 정의
+  - [ ] 정적 메서드 입력 텍스트가 양수가 아닌 값이 들어올 경우 예외 발생
+  - [ ] PositiveNumber 내부 원시값에 덧셈을 하는 메서드 정의
