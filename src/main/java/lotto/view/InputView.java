@@ -37,8 +37,8 @@ public class InputView {
     public static List<LottoNumbers> inputManualNumbers(long manualCounts) {
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
         return Stream.generate(SCANNER::next)
-                    .limit(manualCounts)
-                    .map(LottoNumbers::valueOf)
-                    .collect(Collectors.toList());
+                .limit(manualCounts)
+                .map(LottoNumbers::valueOf)
+                .collect(Collectors.toList());
     }
 }

@@ -44,7 +44,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 - 수동 여부 테스트")
     void isManual() {
-        Lotto lotto = Lotto.manual(new LottoNumbers(1,2,3,4,5,6));
+        Lotto lotto = Lotto.manual(new LottoNumbers(1, 2, 3, 4, 5, 6));
 
         assertThat(lotto.isAuto()).isFalse();
         assertThat(lotto.isManual()).isTrue();
