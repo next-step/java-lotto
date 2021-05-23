@@ -17,7 +17,7 @@ public class LottoStore {
 	private final int budget;
 	private final int price;
 
-	protected int count() {
+	protected int purchaseCount() {
 		return budget / price;
 	}
 
@@ -39,7 +39,7 @@ public class LottoStore {
 	public Ticket produceLotto() {
 		List<LottoNumbers>  result = new ArrayList<>();
 		AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
-		for (int i = 0; i < count(); i++) {
+		for (int i = 0; i < purchaseCount(); i++) {
 			LottoNumbers lotto = new LottoNumbers();
 			autoGenerator.generate(lotto);
 			result.add(lotto);

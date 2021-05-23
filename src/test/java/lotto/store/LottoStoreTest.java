@@ -11,7 +11,7 @@ public class LottoStoreTest {
 	@DisplayName(value = "구매 가능한 로또의 개수는 budget / price 이다")
 	void count() {
 		LottoStore lottoStore = new LottoStore(10000, 1000);
-		assertThat(lottoStore.count()).isEqualTo(10);
+		assertThat(lottoStore.purchaseCount()).isEqualTo(10);
 	}
 
 }
