@@ -20,7 +20,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     void lottoNumberSizeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumbers(numbers));
+            .isThrownBy(() -> LottoNumbers.of(numbers));
     }
 
     @SuppressWarnings("unused")
@@ -39,7 +39,7 @@ class LottoNumbersTest {
     @ParameterizedTest
     void lottoNumberRangeTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumbers(numbers));
+            .isThrownBy(() -> LottoNumbers.of(numbers));
     }
 
     @SuppressWarnings("unused")
@@ -54,7 +54,7 @@ class LottoNumbersTest {
     @Test
     void duplicateTest() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumbers(Arrays.asList(1, 1, 2, 3, 4, 5)));
+            .isThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 1, 2, 3, 4, 5)));
     }
 
     @DisplayName("로또 번호 비교 검증")

@@ -2,25 +2,32 @@ package lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static java.util.stream.Collectors.toList;
+
 public class LottoNumbers {
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoNumbers(Collection<Integer> numbers) {
+    public LottoNumbers(Collection<LottoNumber> numbers) {
         this.numbers = Collections.unmodifiableSet(new TreeSet<>(numbers));
-
         validateNumbersSizeAndDuplicateNumbers();
-        validateNumbersRange();
     }
 
-    public static LottoNumbers of(Collection<Integer> numbers) {
+    public static LottoNumbers of(Collection<LottoNumber> numbers) {
         return new LottoNumbers(numbers);
     }
 
-    public Set<Integer> getNumbers() {
+    public static LottoNumbers of(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
+                                       .map(LottoNumber::of)
+                                       .collect(toList()));
+    }
+
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
@@ -35,17 +42,6 @@ public class LottoNumbers {
         if (numbers == null || numbers.size() != 6) {
             throw new IllegalArgumentException("로또 번호는 중복 없는 6개의 수를 사용해야 합니다.");
         }
-    }
-
-    private void validateNumbersRange() {
-        if (isLottoNumberRange()) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자만 사용해야 합니다.");
-        }
-    }
-
-    private boolean isLottoNumberRange() {
-        return numbers.stream()
-                      .anyMatch(number -> number < 1 || number > 45);
     }
 
     @Override
