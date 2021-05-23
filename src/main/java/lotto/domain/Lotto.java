@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public Lotto(String lottoString) {
-        this(new LottoNumbers(lottoString.split(",| ,")));
+        this(new LottoNumbers(lottoString.split(", |,")));
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
