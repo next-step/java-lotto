@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTicketGenerator {
+public class LottoTicketGenerator implements TicketGenerator {
 
     private static LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
 
@@ -33,6 +33,7 @@ public class LottoTicketGenerator {
         return pool;
     }
 
+    @Override
     public LottoTicket extract() {
         Collections.shuffle(numberPool);
         List<LottoNumber> extracted = new ArrayList<>();

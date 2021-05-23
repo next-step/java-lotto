@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,10 +14,18 @@ public class LottoResult {
     private int purchaseAmount;
     private float profitRatio;
 
-    public LottoResult(int purchaseAmount) {
+    public LottoResult(int purchaseAmount, WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         this.lottoResult = new TreeMap<>();
         this.purchaseAmount = purchaseAmount;
         setDefaultValues();
+        updateLottoResult(winningNumbers, lottoTickets);
+    }
+
+    private void updateLottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+        for (LottoTicket ticket : lottoTickets) {
+            MatchStatus status = ticket.matchingStatusWith(winningNumbers);
+            updateValue(status);
+        }
     }
 
     private void setDefaultValues() {
@@ -26,7 +35,7 @@ public class LottoResult {
         lottoResult.remove(MatchStatus.ELSE);
     }
 
-    public void updateValue(MatchStatus status) {
+    private void updateValue(MatchStatus status) {
         int resultCount = DEFAULT_COUNT;
         if (status.equals(MatchStatus.ELSE)) {
             return;

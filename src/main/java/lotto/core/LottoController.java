@@ -1,5 +1,6 @@
 package lotto.core;
 
+import lotto.domain.LottoTicketGenerator;
 import lotto.domain.LottoTickets;
 import lotto.domain.Message;
 import lotto.domain.WinningNumbers;
@@ -32,7 +33,7 @@ public class LottoController {
     private boolean requestLottoTicketsInput() {
         boolean stopRequestingInput = true;
         try {
-            lottoTickets = new LottoTickets(inputView.receivePurchaseAmount());
+            lottoTickets = new LottoTickets(LottoTicketGenerator.start(), inputView.receivePurchaseAmount());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             stopRequestingInput = false;
