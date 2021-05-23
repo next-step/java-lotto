@@ -62,17 +62,19 @@ class LottoTest {
 
     @DisplayName("당첨 번호를 입력하면 당첨 결과 금액을 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,10,11,12:5000", "1,2,3,4,10,11:50000", "1,2,3,4,5,7:1500000", "1,2,3,4,5,6:2000000000"}, delimiter = ':')
-    void getRank(String winnerLottoNumbers, int expectedPrizeMoney) {
+    @CsvSource(value = {"1,2,3,10,11,12:7:5000", "1,2,3,4,10,11:7:50000", "1,2,3,4,5,10:7:1500000",
+            "1,2,3,4,5,10:6:30000000", "1,2,3,4,5,6:7:2000000000"}, delimiter = ':')
+    void getRank(String winnerLottoNumbers, int bonusNumber, int expectedPrizeMoney) {
         // given
         Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
         Lotto winnerLotto = Lotto.from(Arrays.asList(winnerLottoNumbers.split(","))
                 .stream()
                 .map(i -> Integer.valueOf(i))
                 .collect(toList()));
+        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);
 
         // when
-        Rank rank = lotto.getRank(winnerLotto);
+        Rank rank = lotto.getRank(winnerLotto, bonusLottoNumber);
 
         // then
         assertThat(rank.getPrizeMoney()).isEqualTo(expectedPrizeMoney);

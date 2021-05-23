@@ -30,19 +30,22 @@ class LottoesTest {
 
     @DisplayName("당첨번호를 입력하면 Rank별로 당첨 개수를 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,10,11,12:3", "1,2,3,4,10,11:4", "1,2,3,4,5,7:5", "1,2,3,4,5,6:6"}, delimiter = ':')
-    void getRankCount(String winnerLottoNumbers, int matchCount) {
+    @CsvSource(value = {"1,2,3,10,11,12:3:false:7", "1,2,3,4,10,11:4:false:7", "1,2,3,4,5,10:5:false:7",
+            "1,2,3,4,5,10:5:true:6", "1,2,3,4,5,6:6:false:7"}, delimiter = ':')
+    void getRankCount(String winnerLottoNumbers, int matchCount, boolean matchBonus, int bonusNumber) {
         // given
         Lottoes lottoes = Lottoes.init();
         lottoes.buyLotto(new TestLottoNumberGenerator());
-        Rank rank = Rank.valueOf(matchCount);
+
+        Rank rank = Rank.valueOf(matchCount, matchBonus);
         Lotto winnerLotto = Lotto.from(Arrays.asList(winnerLottoNumbers.split(","))
                 .stream()
                 .map(i -> Integer.valueOf(i))
                 .collect(toList()));
+        LottoNumber lottoBonusNumber = LottoNumber.from(bonusNumber);
 
         // when
-        int rankCount = lottoes.getRankCount(winnerLotto, rank);
+        int rankCount = lottoes.getRankCount(winnerLotto, rank, lottoBonusNumber);
 
         // then
         assertThat(rankCount).isEqualTo(1);
