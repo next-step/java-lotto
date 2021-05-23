@@ -16,10 +16,10 @@ public class RevenueRatioTest {
 	@CsvSource(value = {"3000:3:5000", "10000:3:5000", "10000:4:50000", "10000:5:1500000"}, delimiter = ':')
 	void 수익률_테스트(int money, int resultCount, int revenue) {
 		LottoStore lottoStore = new LottoStore(money);
-		List<LottoResult> lottoResults = new ArrayList<>();
-		lottoResults.add(new LottoResult(resultCount));
+		List<LottoMatch> lottoMatches = new ArrayList<>();
+		lottoMatches.add(new LottoMatch(resultCount));
 
-		RevenueRatio revenueRatio = new RevenueRatio(lottoStore.getMoney(), lottoResults);
+		RevenueRatio revenueRatio = new RevenueRatio(lottoStore.getMoney(), lottoMatches);
 		assertThat(revenueRatio.calculate()).isEqualTo(revenue / (double)money);
 	}
 }

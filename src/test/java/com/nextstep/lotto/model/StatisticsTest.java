@@ -15,7 +15,8 @@ public class StatisticsTest {
 		WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
 		Lottos lottos = new Lottos(lottoCount);
 		Statistics statistics = new Statistics(winningLotto, lottos);
-
-		assertThat(statistics.getLottoResult().size()).isEqualTo(lottoCount);
+		statistics.generateLottoResult();
+		statistics.print();
+		assertThat(statistics.getLottoResult().lottoMatches().size()).isEqualTo(lottoCount);
 	}
 }

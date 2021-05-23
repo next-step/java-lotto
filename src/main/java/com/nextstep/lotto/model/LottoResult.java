@@ -1,14 +1,16 @@
 package com.nextstep.lotto.model;
 
+import java.util.List;
+
 public class LottoResult {
 
-	private int matchedCount;
+	private List<LottoMatch> lottoMatches;
 
-	public LottoResult(int matchedCount) {
-		this.matchedCount = matchedCount;
+	public LottoResult(List<LottoMatch> lottoMatches) {
+		this.lottoMatches = lottoMatches;
 	}
 
-	public int getMatchedCount() {
-		return this.matchedCount;
+	public List<LottoMatch> lottoMatches() {
+		return this.lottoMatches;
 	}
 }
