@@ -3,12 +3,14 @@ package generator;
 import generate.Separator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.ExceptionMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class SeparatorTest {
 	@Test
@@ -31,6 +33,19 @@ class SeparatorTest {
 		List<String> splitCommaAndColon2 = Separator.split("1,2:3");
 
 		assertThat(numbers).isEqualTo(splitCommaAndColon2);
+	}
+
+	@Test
+	@DisplayName (",와 :이외의 문자넣었을때")
+	public void 구분자를_컴마로_콜론으로_숫자분리_RED(){
+
+		assertThatThrownBy(() -> Separator.split("1;2;3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(ExceptionMessage.SEPARATOR_EXCEPTION);
+
+		assertThatThrownBy(() -> Separator.split("1.2.3"))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage(ExceptionMessage.SEPARATOR_EXCEPTION);
 	}
 
 	@Test
