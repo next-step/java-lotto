@@ -5,10 +5,10 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public enum Rank {
-    FIFTH(3, 5000, lottoReport -> lottoReport.threeMatched()),
-    FOURTH(4, 50000, lottoReport -> lottoReport.fourMatched()),
-    THIRD(5, 1500000, lottoReport -> lottoReport.fiveMatched()),
-    FIRST(6, 2000000000, lottoReport -> lottoReport.sixMatched()),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    FIRST(6, 2_000_000_000),
     ;
     public int countOfMatch;
     public int winnings;

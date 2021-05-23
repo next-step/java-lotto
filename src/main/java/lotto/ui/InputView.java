@@ -10,7 +10,6 @@ public class InputView {
     private static final String DELIMITER = ",";
 
     private InputView() {
-
     }
 
     public static int getLottoPurchaseAmount() {

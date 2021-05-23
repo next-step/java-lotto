@@ -14,7 +14,6 @@ public class LottoNumberGenerator {
             .collect(Collectors.toList());
 
     private LottoNumberGenerator() {
-
     }
 
     public static List<Integer> get() {

@@ -17,7 +17,6 @@ public class PrintView {
             YIELD_TIP_THRESHOLD);
 
     private PrintView() {
-
     }
 
     public static void askPurchaseAmountMessage() {
@@ -73,7 +72,10 @@ public class PrintView {
     }
 
     static String formatWinningMetric(Rank rank, LottoReport report) {
-        return String.format("%d개 일치 (%d)- %d개\n", rank.countOfMatch, rank.winnings, report.countWinnings(rank));
+        return String.format("%d개 일치 (%d)- %d개\n",
+                rank.countOfMatch,
+                rank.winningMoney,
+                report.countWinnings(rank));
     }
 
 }

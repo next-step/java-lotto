@@ -10,7 +10,6 @@ import java.util.List;
 
 public class LottoAppController {
     public void run() {
-
         List<Lotto> purchasedLottos = buyLotto();
         PrintView.showPurchasedLotto(purchasedLottos);
 
