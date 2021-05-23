@@ -46,9 +46,13 @@
   * 중복 되지 않는 숫자들의 집합이다.
   * 로또 한 게임의 숫자 개수인 6개가 맞는지 validation할 수 있다.
   * 다른 LottoNumbers와 몇개의 숫자가 동일한지 반환할 수 있다.
+
+* RandomNumberGenerateStrategy
+  * 랜덤한 LottoNumbers를 생성해내는 방법을 변경할 때 용이함을 확보하기 위한 전략 Interface
   
-* LottoNumbersFactory
+* FixedPoolRandomNumberGenerateStrategy
   * 1 ~ 46의 고정된 LottoNumber 풀에서 랜덤한 LottoNumbers를 생성해내는 클래스
+  * RandomNumberGenerateStrategy의 구현체이다.
 
 * LottoRanking
   * 숫자를 맞춘 개수에 따라 등수 정할 수 있는 enum
