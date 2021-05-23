@@ -4,56 +4,80 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_START = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-    private static final int ZERO = 0;
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    private  static final String SPLIT_REGEX = ",";
 
-    private final List<Integer> lottoNumbers;
+    private static final int ZERO = 0;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
         this.lottoNumbers = generateLottoNumbers();
+
+        validateDuplicate(lottoNumbers);
     }
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private List<Integer> generateLottoNumbers() {
-        List<Integer> lottoNumberList = IntStream.rangeClosed(LOTTO_NUMBER_START, LOTTO_NUMBER_END)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoNumberList);
+    public LottoNumbers(String winningNumbersContents) {
+        this.lottoNumbers = new ArrayList<>();
+        for(String str: winningNumbersContents.split(SPLIT_REGEX)) {
+            Integer num = Integer.parseInt(str.trim());
 
-        return lottoNumberList.subList(ZERO,LOTTO_NUMBER_SIZE);
+            lottoNumbers.add(new LottoNumber(num));
+        }
+
+        validateDuplicate(lottoNumbers);
     }
 
-    public boolean isNonDuplicate() {
-        return new HashSet<>(lottoNumbers).size() == LOTTO_NUMBER_SIZE;
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        if(new HashSet<>(lottoNumbers).size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("중복은 존재할 수 없습니다.");
+        }
     }
 
-    public boolean isBetween1To45() {
-        return lottoNumbers.stream()
-                .noneMatch(lottoNumber -> lottoNumber < LOTTO_NUMBER_START || lottoNumber > LOTTO_NUMBER_END);
+    private List<LottoNumber> generateLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for(int i = LottoNumber.LOTTO_NUMBER_START; i <= LottoNumber.LOTTO_NUMBER_END; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+
+        Collections.shuffle(lottoNumbers);
+
+        return lottoNumbers.subList(ZERO, LOTTO_NUMBERS_SIZE);
     }
+
 
     @Override
     public String toString() {
-        List<Integer> arrayList = new ArrayList<>(lottoNumbers);
-        Collections.sort(arrayList);
+        List<LottoNumber> arrayList = new ArrayList<>(lottoNumbers);
+        Collections.sort(arrayList, (a, b)-> a.lottoNumber() - b.lottoNumber() > 0 ? 1 : a.lottoNumber() - b.lottoNumber() < 0 ? -1 : 0  );
 
         return arrayList.toString();
     }
 
-    public int containNumber(int number) {
-        if(lottoNumbers.contains(number)) {
+    public int containNumber(LottoNumber lottoNumber) {
+        if(lottoNumbers.contains(lottoNumber)) {
             return 1;
         }
 
         return 0;
+    }
+
+    public HitCount checkHitCount(LottoNumbers winningNumbers) {
+        int result = 0;
+
+        for(LottoNumber lottoNumber: lottoNumbers) {
+            result += winningNumbers.containNumber(lottoNumber);
+        }
+
+        return new HitCount(result);
     }
 }

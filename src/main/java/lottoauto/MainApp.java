@@ -17,11 +17,11 @@ public class MainApp {
 
 
         outputView.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumberStr = inputView.next();
+        String winningNumbersContents = inputView.next();
 
-        WinningNumber winningNumber = new WinningNumber(winningNumberStr);
+        LottoNumbers winningNumbers = new LottoNumbers(winningNumbersContents);
 
-        user.checkWinning(winningNumber);
+        user.checkHitCount(winningNumbers);
         user.printHitCount(outputView);
     }
 }

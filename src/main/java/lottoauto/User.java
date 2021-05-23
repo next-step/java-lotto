@@ -24,9 +24,9 @@ public class User {
         return lottoTickets.size();
     }
 
-    public void checkWinning(WinningNumber winningNumber) {
+    public void checkHitCount(LottoNumbers winningNumbers) {
         for(LottoTicket lottoTicket: lottoTickets) {
-            winningNumber.checkWinning(lottoTicket);
+            lottoTicket.calcHitCount(winningNumbers);
         }
     }
 
@@ -35,10 +35,6 @@ public class User {
             outputView.print(lottoTicket.hitCount());
             outputView.print("\n");
         }
-    }
-
-    public void printStatement(OutputView outputView) {
-
     }
 
     public void printLottoTickets(OutputView outputView) {
