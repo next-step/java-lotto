@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -20,20 +21,18 @@ public class Lottos {
 	}
 
 	public LottoResult getLottoResult(Lotto winningLotto) {
-		List<LottoRank> userLottoRanks = new ArrayList<>();
-		for (Lotto lotto : this.lottos) {
-			userLottoRanks.add(LottoRank.valueOf(winningLotto.getMatchesCount(lotto)));
-		}
+		List<LottoRank> userLottoRanks = this.lottos.stream()
+			.map(lotto -> LottoRank.valueOf(winningLotto.getMatchesCount(lotto)))
+			.collect(Collectors.toList());
+
 		return new LottoResult(userLottoRanks);
 	}
 
 	@Override
 	public String toString() {
-		String lottosToString = "";
-		for (Lotto lotto : this.lottos) {
-			lottosToString += lotto.toString() + "\n";
-		}
-		return lottosToString;
+		return this.lottos.stream()
+			.map(Lotto::toString)
+			.collect(Collectors.joining("\n"));
 	}
 
 }
