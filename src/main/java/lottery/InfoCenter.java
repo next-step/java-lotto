@@ -16,12 +16,15 @@ public class InfoCenter {
 	}
 
 	public Result confirmTicket(Tickets buyerTickets) {
-		for (Ticket ticket : buyerTickets.getTicketList()) {
-			List<Integer> buyerNumbers = ticket.numbers();
-			buyerNumbers.removeAll(this.lastWeekWinningTicket.numbers());
-			LotteryMatchType lotteryMatchType = LotteryMatchType.fromInteger(Ticket.SIZE_OF_TICKET - buyerNumbers.size());
-			result.addMatchType(lotteryMatchType);
-		}
+
+		buyerTickets.getTicketList().stream()
+			.map(ticket -> {
+				List<Integer> numbers = ticket.numbers();
+				numbers.removeAll(this.lastWeekWinningTicket.numbers());
+				return Ticket.SIZE_OF_TICKET - numbers.size(); })
+			.filter(a -> a >= 3)
+			.map(LotteryMatchType::fromInteger)
+			.forEach(result::addMatchType);
 		return result;
 	}
 
