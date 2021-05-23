@@ -15,7 +15,7 @@ public class StringUtils {
         return changeStringToLottoNumbers(splitString);
 
     }
-    
+
     private static String[] splitString(String numberString) {
         return numberString.split(SEPARATOR);
     }
