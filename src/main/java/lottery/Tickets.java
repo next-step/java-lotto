@@ -9,12 +9,12 @@ public class Tickets {
 
 	private final List<Ticket> ticketList;
 
-	private Tickets(List<Ticket> ticketList) {
-		this.ticketList = ticketList;
-	}
-
 	public static Tickets of(List<Ticket> ticketList) {
 		return new Tickets(ticketList);
+	}
+
+	private Tickets(List<Ticket> ticketList) {
+		this.ticketList = ticketList;
 	}
 
 	public int size() {

@@ -37,19 +37,19 @@ public class Result {
 		return resultMap.get(LotteryMatchType.SIX_MATCH);
 	}
 
-	public Map<LotteryMatchType, Integer> getTotalMatchNumber() {
+	public Map<LotteryMatchType, Integer> getTotalMatchMap() {
 		return resultMap;
 	}
 
-	public Money getTotalMoney() {
+	public float getTotalYield(Money buyerMoney) {
+		Money totalMoney = getTotalMoney();
+		return totalMoney.divideWithFloating(buyerMoney);
+	}
+
+	private Money getTotalMoney() {
 		resultMap.forEach(
 			(match, count) -> totalMoney = totalMoney.add(match.money().multiply(count))
 		);
 		return totalMoney;
-	};
-
-	public float getTotalYield(Money buyerMoney){
-		Money totalMoney = getTotalMoney();
-		return totalMoney.divideWithFloating(buyerMoney);
 	}
 }
