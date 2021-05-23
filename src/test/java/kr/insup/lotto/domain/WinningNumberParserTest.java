@@ -18,7 +18,7 @@ public class WinningNumberParserTest {
         //given
         String input = "1, 3, 12, 32, 31, 45";
         //when
-        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToLotto(input);
+        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
         //then
         assertThat(winningNumberList).containsExactlyElementsOf(Arrays.asList("1", "3", "12", "32", "31", "45"));
 

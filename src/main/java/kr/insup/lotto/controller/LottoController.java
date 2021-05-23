@@ -47,7 +47,7 @@ public class LottoController {
     private static Lotto winningNumber() {
         Lotto winningNumber = null;
         String winningNumberInput = LottoView.showWinningNumber();
-        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToLotto(winningNumberInput);
+        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(winningNumberInput);
         try {
             winningNumber = new Lotto(winningNumberList);
         } catch (IllegalArgumentException e) {

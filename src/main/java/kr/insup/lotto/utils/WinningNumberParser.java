@@ -7,13 +7,13 @@ import java.util.List;
 
 public class WinningNumberParser {
 
-    public static Lotto parseWinningNumberToList(String winningNumber) {
+    public static List<String> parseWinningNumberToList(String winningNumber) {
         String[] numbers = winningNumber.split(",");
         List<String> numberList = new ArrayList<>();
         for(String number : numbers){
             number = number.trim();
             numberList.add(number);
         }
-        return new Lotto(numberList);
+        return numberList;
     }
 }

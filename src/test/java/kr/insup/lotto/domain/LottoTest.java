@@ -4,7 +4,6 @@ import kr.insup.lotto.utils.WinningNumberParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -74,7 +73,7 @@ public class LottoTest {
             "22, 22, 43, 21, 1, 2"})
     void 당첨번호_번호_입력시_validation(String input) {
         //given
-        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToLotto(input);
+        List<String> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
         //when, then
         assertThatThrownBy(() -> new Lotto(winningNumberList)).isInstanceOf(IllegalArgumentException.class);
     }
