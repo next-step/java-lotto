@@ -9,7 +9,7 @@ public enum LottoRank {
     SECOND(5, 1500000),
     FIRST(6, 2000000000);
 
-    private final int amount;
+    private final long amount;
     private final int hit;
 
     LottoRank(int hit, int amount) {
@@ -17,7 +17,7 @@ public enum LottoRank {
         this.amount = amount;
     }
 
-    public int amount() {
+    public long amount() {
         return this.amount;
     }
 

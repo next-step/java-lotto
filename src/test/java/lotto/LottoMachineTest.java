@@ -30,14 +30,14 @@ public class LottoMachineTest {
 
     @ParameterizedTest(name = "결과 테스트")
     @CsvSource(value = {"1,2,3,10,11,12:5000", "1,2,3,4,11,12,3:50000", "1,2,3,4,5,11:1500000", "1,2,3,4,5,6:2000000000"}, delimiter = ':')
-    public void result(String inputs, int expcted) {
+    public void result(String inputs, long expcted) {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Lotto winLotto = new Lotto(inputs.split(","));
 
         // when
         LottoMachine lottoMachine = LottoMachine.of(lottos);
-        int sum = lottoMachine.result(winLotto).sum();
+        long sum = lottoMachine.result(winLotto).sum();
 
         // then
         assertThat(sum).isEqualTo(expcted);

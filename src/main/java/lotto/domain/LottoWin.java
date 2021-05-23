@@ -24,11 +24,10 @@ public class LottoWin {
         }
     }
 
-    public int sum() {
-        int sum = 0;
+    public long sum() {
+        long sum = 0;
         for(LottoRank lottoWinType: lottoWin.keySet()) {
-            int multiple = lottoWinType.amount() * lottoWin.get(lottoWinType);
-            sum += multiple;
+            sum += lottoWinType.amount() * lottoWin.get(lottoWinType);
         }
         return sum;
     }
