@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
+	public static final int LOTTO_CEIL_NUMBER = 6;
 	private Set<Integer> lotto;
 
 	public Lotto(List<Integer> randomNumberList) {
@@ -14,7 +15,7 @@ public class Lotto {
 	}
 
 	private void validateRandomNumberListSize(Set<Integer> lotto) {
-		if (lotto.size() != 6) {
+		if (lotto.size() != LOTTO_CEIL_NUMBER) {
 			throw new RuntimeException("lotto numbers must be consist of six numbers");
 		}
 	}
