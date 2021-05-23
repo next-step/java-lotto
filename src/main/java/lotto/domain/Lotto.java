@@ -61,6 +61,12 @@ public class Lotto {
         return lotto.contains(bonusNumber);
     }
 
+    public void validateBonusNumber(final LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 중복될 수 없습니다.");
+        }
+    }
+
     public Set<LottoNumber> getLotto() {
         return Collections.unmodifiableSet(lotto);
     }

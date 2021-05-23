@@ -25,6 +25,7 @@ public class LottoController {
 
         Lotto winnerLotto = Lotto.from(InputView.inputWinnerLottoNumbers());
         LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
+        winnerLotto.validateBonusNumber(bonusNumber);
 
         lottoStatistics.init(lottoGame, winnerLotto, bonusNumber);
         ResultView.printStatistics(lottoStatistics);
