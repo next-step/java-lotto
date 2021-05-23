@@ -10,7 +10,7 @@ public class LottoNumbersGenerator {
 
     public LottoNumbersGenerator() {
         for (int i = LottoNumber.LOTTO_NUMBER_MIN; i <= LottoNumber.LOTTO_NUMBER_MAX; i++) {
-             lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -21,7 +21,7 @@ public class LottoNumbersGenerator {
     public List<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(this.lottoNumbers);
         return this.lottoNumbers.stream()
-                .limit(Lotto.LOTTO_NUMBERS_COUNT)
+                .limit(LottoNumbers.LOTTO_NUMBERS_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
     }

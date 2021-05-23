@@ -37,7 +37,7 @@ class LottoTest {
     void create_lotto() {
         List<LottoNumber> lottoNumbers = toLottoNumbers("1,2,3,4,5,6");
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers()).isNotNull();
     }
 
     private List<LottoNumber> toLottoNumbers(String textNumber) {

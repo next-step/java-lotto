@@ -16,12 +16,6 @@ public class LottoNumber implements Comparable {
         return this.numbers;
     }
 
-    private void validateOutOfRange(int number) {
-        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자만 가능합니다.");
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,5 +32,11 @@ public class LottoNumber implements Comparable {
     @Override
     public int compareTo(Object o) {
         return this.numbers - ((LottoNumber)o).getNumber();
+    }
+
+    private void validateOutOfRange(int number) {
+        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자만 가능합니다.");
+        }
     }
 }
