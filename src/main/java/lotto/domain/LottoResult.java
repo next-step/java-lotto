@@ -1,60 +1,28 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Objects;
 
 public class LottoResult {
+	private final Rank rank;
 
-	private final List<Lotto> lottos;
-	private final Lotto winningLotto;
-	private final HashMap<Rank, Integer> statMap;
-
-	public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
-		this.lottos = lottos;
-		this.winningLotto = winningLotto;
-		this.statMap = initRankMap();
-		this.findWinningResult();
+	public LottoResult(Rank rank) {
+		this.rank = rank;
 	}
 
-	public HashMap<Rank, Integer> getStatMap() {
-		return statMap;
+	public Rank getRank() {
+		return rank;
 	}
 
-	public double calculateProfitRate() {
-		long sumWinAmount = 0;
-		for (Rank rank : statMap.keySet()) {
-			int rankCount = statMap.get(rank);
-			sumWinAmount += rank.multiplyWinningMoney(rankCount);
-		}
-		if (sumWinAmount == 0) {
-			return 0;
-		}
-		return (double) sumWinAmount / totalPurchaseAmount();
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		LottoResult that = (LottoResult) o;
+		return rank == that.rank;
 	}
 
-	private double totalPurchaseAmount() {
-		return lottos.size() * PuchaseAmount.MINIMUM;
-	}
-
-	private void findWinningResult() {
-		for (Lotto lotto : lottos) {
-			Rank rank = lotto.findRank(winningLotto);
-			addRank(rank);
-		}
-	}
-
-	private void addRank(Rank rank) {
-		this.statMap.put(rank, this.statMap.get(rank) + 1);
-	}
-
-	private HashMap<Rank, Integer> initRankMap() {
-		HashMap<Rank, Integer> rankMap = new LinkedHashMap<>();
-		rankMap.put(Rank.NONE, 0);
-		rankMap.put(Rank.FOURTH, 0);
-		rankMap.put(Rank.THIRD, 0);
-		rankMap.put(Rank.SECOND, 0);
-		rankMap.put(Rank.FIRST, 0);
-		return rankMap;
+	@Override
+	public int hashCode() {
+		return Objects.hash(rank);
 	}
 }

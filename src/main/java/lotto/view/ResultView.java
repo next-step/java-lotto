@@ -1,10 +1,12 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import lotto.domain.Rank;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -15,32 +17,30 @@ public class ResultView {
 	public static final String MESSAGE_PERCENTAGE_OF_REVENUE = "총 수익률은 %.2f입니다.";
 	public static final String MESSAG_RESULT_IS_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public static void printLottoResult(LottoResult lottoResult) {
-		printLottoStatistics(lottoResult);
-		printProfitRate(lottoResult);
+	public static void printLottoResult(LottoResults lottoResults) {
+		printLottoStatistics(lottoResults);
+		printProfitRate(lottoResults);
 	}
 
-	private static void printLottoStatistics(LottoResult lottoResult) {
+	private static void printLottoStatistics(LottoResults lottoResults) {
 		System.out.println();
 		System.out.println(MESSAGE_WIN_STATISTICS);
 		System.out.println(MESSAGE_LINE_DELIMETER);
 
-		HashMap<Rank, Integer> statMap = lottoResult.getStatMap();
-		Iterator<Rank> rankIterator = statMap.keySet().iterator();
-		while (rankIterator.hasNext()) {
-			Rank rank = rankIterator.next();
-			printWinner(rank, statMap);
+		List<Rank> ranks = Arrays.stream(Rank.values())
+				.sorted(Comparator.comparingInt(Rank::getMatchCount))
+				.collect(Collectors.toList());
+
+		for (Rank rank : ranks) {
+			if (rank.isGreaterThan(NONE_MATCH_COUNT)) {
+				int rankCount = lottoResults.findRankCount(rank);
+				System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), rankCount);
+			}
 		}
 	}
 
-	private static void printWinner(Rank rank, HashMap<Rank, Integer> statMap) {
-		if (rank.getMatchCount() > NONE_MATCH_COUNT) {
-			System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), statMap.get(rank));
-		}
-	}
-
-	private static void printProfitRate(LottoResult lottoResult) {
-		double profitRate = lottoResult.calculateProfitRate();
+	private static void printProfitRate(LottoResults lottoResults) {
+		double profitRate = lottoResults.calculateProfitRate();
 		double percentageOfRevenue = floorProfitRate(profitRate);
 
 		System.out.printf(MESSAGE_PERCENTAGE_OF_REVENUE, percentageOfRevenue);
