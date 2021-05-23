@@ -25,7 +25,7 @@ public class WinningNumbers {
     }
 
     private void checkNumberCount(int[] input) throws IllegalArgumentException {
-        if (input.length > NUMBER_COUNT) {
+        if (input.length != NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
     }
@@ -44,10 +44,6 @@ public class WinningNumbers {
         if (inputs.size() < NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
-    }
-
-    public int count() {
-        return this.numbers.size();
     }
 
     public boolean contains(LottoNumber number) {
