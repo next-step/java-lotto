@@ -20,9 +20,19 @@ public class StringAddCalculator {
 		int sum = 0;
 
 		for (String number : numbers) {
-			sum += parseInt(number);
+			sum += convertToInteger(number);
 		}
 
 		return sum;
+	}
+
+	private static int convertToInteger(String number) {
+		int convNumber = parseInt(number);
+
+		if (convNumber < 0) {
+			throw new IllegalArgumentException("Negative number is invalid!");
+		}
+
+		return convNumber;
 	}
 }

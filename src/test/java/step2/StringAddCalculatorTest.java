@@ -1,6 +1,8 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -39,9 +41,10 @@ public class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(6);
 	}
 
-	@Test
-	public void splitAndSum_negative() throws Exception {
-		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+	@ParameterizedTest
+	@ValueSource(strings = {"-1,2,3", "1,ㄱ,3"})
+	public void splitAndSum_negative_or_non_number(String input) throws Exception {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
 			.isInstanceOf(RuntimeException.class);
 	}
 }
