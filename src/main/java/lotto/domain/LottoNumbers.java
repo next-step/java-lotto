@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.wrapper.LottoNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -22,6 +23,10 @@ public class LottoNumbers {
         }
     }
 
+    private void sort() {
+        Collections.sort(this.lottoNumbers);
+    }
+
     public boolean sizeIsNotSameWith(int lottoNumberCount) {
         return lottoNumbers.size() != lottoNumberCount;
     }
@@ -32,6 +37,8 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
+        sort();
+
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < lottoNumbers.size(); ++i) {
             sb.append(lottoNumbers.get(i) + ", ");

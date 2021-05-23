@@ -7,7 +7,7 @@ import java.util.Objects;
 import static lotto.domain.LottoGameOptions.LOTTO_NUMBERS_FROM;
 import static lotto.domain.LottoGameOptions.LOTTO_NUMBERS_TO;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     private LottoNumber(int number) {
@@ -48,5 +48,17 @@ public class LottoNumber {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+
+    @Override
+    public int compareTo(LottoNumber that) {
+        if (this.number > that.number) {
+            return 1;
+        }
+        if (this.number == that.number) {
+            return 0;
+        }
+        return -1;
     }
 }
