@@ -13,9 +13,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또 1장은 6개의 숫자를 가진다.")
     public void 로또_1장의_사이즈_확인() {
-        Lotto lotto = new Lotto(new Number(1), new Number(2), new Number(3)
-                , new Number(4), new Number(5), new Number(6));
-        assertThat(lotto.size()).isEqualTo(6);
+        Lotto automaticLotto = new Lotto();
+        assertThat(automaticLotto.size()).isEqualTo(6);
 
         assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3)
                 , new Number(4), new Number(5)))
