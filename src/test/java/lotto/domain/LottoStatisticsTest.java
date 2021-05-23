@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
@@ -22,10 +23,10 @@ class LottoStatisticsTest {
         LottoGame lottoGame = LottoGame.init(1000);
         lottoGame.buyLotto(new TestLottoNumberGenerator());
 
-        Lotto winnerLotto = Lotto.from(new HashSet<>(Arrays.asList(winnerLottoNumbers.split(",")))
+        Lotto winnerLotto = Lotto.from(Arrays.asList(winnerLottoNumbers.split(","))
                 .stream()
                 .map(i -> Integer.valueOf(i))
-                .collect(Collectors.toSet()));
+                .collect(toList()));
 
         LottoStatistics lottoStatistics = new LottoStatistics();
         lottoStatistics.init(lottoGame, winnerLotto);
