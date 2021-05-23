@@ -12,20 +12,20 @@ public final class Lotto {
         checkLottoDuplicateNumbers();
     }
 
-    private void checkLottoSize(){
-        if(lottoNumbers.size() != 6){
+    private void checkLottoSize() {
+        if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 1장의 숫자는 6개이여야 합니다.");
         }
     }
 
-    private void checkLottoDuplicateNumbers(){
+    private void checkLottoDuplicateNumbers() {
         Set<Number> setNumbers = new HashSet<>(lottoNumbers);
-        if(lottoNumbers.size() != setNumbers.size()){
+        if (lottoNumbers.size() != setNumbers.size()) {
             throw new IllegalArgumentException("중복된 숫자를 가질수 없습니다.");
         }
     }
 
-    public int size(){
+    public int size() {
         return lottoNumbers.size();
     }
 
