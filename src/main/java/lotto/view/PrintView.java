@@ -7,14 +7,20 @@ import java.util.List;
 
 public class PrintView {
 
-    public static final String BUY_RESULT_MESSAGE = "%d개를 구매했습니다.%n";
+    public static final String BUY_RESULT_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.%n";
     public static final String RESULT_TITLE_MESSAGE = "당첨 통계";
     public static final String DELIMITER_LINE = "---------";
 
-    public void printLottoNumbers(List<LottoNumbers> lottoTickets) {
-        System.out.printf(BUY_RESULT_MESSAGE, lottoTickets.size());
-        for (LottoNumbers lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket);
+    public void printLottoNumbers(List<LottoNumbers> manualLottoNumbers, List<LottoNumbers> autoLottoNumbers) {
+        System.out.println();
+        System.out.printf(BUY_RESULT_MESSAGE, manualLottoNumbers.size(), autoLottoNumbers.size());
+
+        for (LottoNumbers autoLottoNumber : autoLottoNumbers) {
+            System.out.println(autoLottoNumber);
+        }
+
+        for (LottoNumbers manualLottoNumber : manualLottoNumbers) {
+            System.out.println(manualLottoNumber);
         }
         System.out.println();
     }
