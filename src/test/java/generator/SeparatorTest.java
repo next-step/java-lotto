@@ -57,8 +57,14 @@ class SeparatorTest {
 
 	@Test
 	public void 문자사이에_커스텀구분자를_지정할_수_있다(){
-		List<String> splitCustom = Separator.split("//(.)\\n1.2.3");
+		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//;\n1;2;3"));
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(splitCustom);
+		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("// \n1 2 3"));
+
+//		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//.\n1.2.3")); ???
+
+//		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//*\n1*2*3")); ??? 머선 129
+
+		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//'\n1'2'3"));
 	}
 }
