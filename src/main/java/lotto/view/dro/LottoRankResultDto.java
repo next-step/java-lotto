@@ -4,19 +4,21 @@ import lotto.model.LottoRank;
 import lotto.model.Money;
 
 public class LottoRankResultDto {
-	private int matchCount;
-	private int prize;
-	private int resultCount;
+	private final int countOfMatch;
+	private final int prize;
+	private final int resultCount;
+	private final boolean matchBonusBall;
 
 	public LottoRankResultDto(LottoRank lottoRank, int resultCount) {
-		this.matchCount = lottoRank.getCountOfMatch();
-		Money prize = lottoRank.getPrize();
-		this.prize = prize.getAmount();
+		this.countOfMatch = lottoRank.getCountOfMatch();
+		Money prizeOfLank = lottoRank.getPrize();
+		this.prize = prizeOfLank.getAmount();
 		this.resultCount = resultCount;
+		this.matchBonusBall = lottoRank == LottoRank.SECOND;
 	}
 
-	public int getMatchCount() {
-		return matchCount;
+	public int getCountOfMatch() {
+		return countOfMatch;
 	}
 
 	public int getPrize() {
@@ -25,6 +27,10 @@ public class LottoRankResultDto {
 
 	public int getResultCount() {
 		return resultCount;
+	}
+
+	public boolean isMatchBonusBall() {
+		return matchBonusBall;
 	}
 }
 

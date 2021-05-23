@@ -61,7 +61,8 @@ public class LottoAppOutput {
 	}
 
 	void printLottoRankResult(LottoRankResultDto lottoRankResultDto) {
-		String render = String.format("%s개 일치 (%s원)- %s개", lottoRankResultDto.getMatchCount(),
+		String render = String.format("%s개 일치%s (%s원)- %s개", lottoRankResultDto.getCountOfMatch(),
+			lottoRankResultDto.isMatchBonusBall() ? ", 보너스 볼 일치" : "",
 			lottoRankResultDto.getPrize(),
 			lottoRankResultDto.getResultCount());
 		printStream.println(render);
