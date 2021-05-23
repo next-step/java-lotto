@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import step3.constant.Rank;
-import step3.io.InputView;
-import step3.io.ResultView;
+import step3.io.ConsoleInputView;
+import step3.io.ConsoleResultView;
 import step3.model.LottoNumber;
 import step3.model.LottoNumbers;
 import step3.model.Price;
@@ -18,16 +18,14 @@ public class Lotto {
     private static final int VICTORY_SIZE = 6;
     private static final String VICTORY_SIZE_CHECK = "6개의 숫자를 입력하세요";
 
-    private InputView inputView;
-    private ResultView resultView;
+    private ConsoleInputView inputView;
+    private ConsoleResultView resultView;
     private TotalLotto totalLotto;
     private Price price;
 
-    public Lotto() {}
-
-    public Lotto(InputView inputView, ResultView resultView) {
-        this.inputView = inputView;
-        this.resultView = resultView;
+    public Lotto() {
+        this.inputView = new ConsoleInputView();
+        this.resultView = new ConsoleResultView();
     }
 
     public TotalLotto pickLottoWithPrice(Price price) {
@@ -88,8 +86,7 @@ public class Lotto {
     public void statistics() {
         try {
             resultView.showInputVictoryNumber();
-            LottoNumbers victoryNumber = getVictoryNumbers(
-                inputView.getVictoryNumbers());
+            LottoNumbers victoryNumber = getVictoryNumbers(inputView.getVictoryNumbers());
             showWinning(totalLotto.groupByWinnerPrice(victoryNumber));
             showBanefit(totalLotto.getBenefit(victoryNumber, price));
 

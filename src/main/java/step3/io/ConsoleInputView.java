@@ -1,10 +1,8 @@
-package step3.io.impl;
+package step3.io;
 
 import java.util.Scanner;
 
-import step3.io.InputView;
-
-public class ConsoleInputView implements InputView {
+public class ConsoleInputView {
 
     private Scanner scanner;
 
@@ -12,12 +10,10 @@ public class ConsoleInputView implements InputView {
         scanner = new Scanner(System.in);
     }
 
-    @Override
     public String getPrice() {
         return scanner.nextLine();
     }
 
-    @Override
     public String getVictoryNumbers() {
         return scanner.nextLine();
     }
