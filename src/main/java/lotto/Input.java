@@ -8,4 +8,12 @@ public class Input {
     public static int insertPurchase() {
         return scanner.nextInt();
     }
+
+    public static String insertWinningNumber() {
+        return scanner.nextLine();
+    }
+
+    public static int insertBonusNumber() {
+        return scanner.nextInt();
+    }
 }
