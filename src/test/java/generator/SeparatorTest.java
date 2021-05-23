@@ -1,5 +1,6 @@
 package generator;
 
+import domain.Number;
 import generate.Separator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class SeparatorTest {
 	private List<String> NUMBERS_FIXTURE;
+
 
 	@BeforeEach
 	public void 인풋값_픽스처(){
