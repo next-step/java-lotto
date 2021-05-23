@@ -29,7 +29,8 @@ public class LottoResult {
 		Iterator<Rank> rankIterator = statMap.keySet().iterator();
 		while (rankIterator.hasNext()) {
 			Rank rank = rankIterator.next();
-			sumWinAmount += rank.getWinningMoney() * statMap.get(rank);
+			int rankCount = statMap.get(rank);
+			sumWinAmount += rank.multiplyWinningMoney(rankCount);
 		}
 		if (sumWinAmount == 0) {
 			return 0;

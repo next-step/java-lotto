@@ -32,4 +32,8 @@ public enum Rank {
 	public int getWinningMoney() {
 		return winningMoney;
 	}
+
+	public long multiplyWinningMoney(int rankCount) {
+		return this.winningMoney * rankCount;
+	}
 }
