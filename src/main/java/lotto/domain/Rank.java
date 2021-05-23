@@ -10,8 +10,8 @@ public enum Rank {
 	FOURTH(3, 5_000),
 	NONE(-1, 0);
 
-	int matchCount;
-	int winningMoney;
+	private int matchCount;
+	private int winningMoney;
 
 	Rank(int matchCount, int winningMoney) {
 		this.matchCount = matchCount;
