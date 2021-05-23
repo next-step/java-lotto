@@ -1,9 +1,6 @@
 package com.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LottoAutoGenerator {
     private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
@@ -17,8 +14,7 @@ public class LottoAutoGenerator {
 
     public static Lotto generate() {
         Collections.shuffle(range);
-        List<LottoNumber> lottoNumbers = range.subList(0, LOTTO_NUMBER_TOTAL_COUNT);
-        lottoNumbers.sort(Comparator.naturalOrder());
+        TreeSet<LottoNumber> lottoNumbers = new TreeSet<>(range.subList(0, LOTTO_NUMBER_TOTAL_COUNT));
 
         return new Lotto(lottoNumbers);
     }

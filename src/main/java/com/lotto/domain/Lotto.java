@@ -1,7 +1,7 @@
 package com.lotto.domain;
 
-import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static com.lotto.domain.LottoReward.*;
 
@@ -10,13 +10,13 @@ public final class Lotto {
     public static final int UNIT_PRICE = 1000;
     public static final int LOTTO_COUNT = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private TreeSet<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(TreeSet<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> numbers() {
+    public TreeSet<LottoNumber> numbers() {
         return lottoNumbers;
     }
 
