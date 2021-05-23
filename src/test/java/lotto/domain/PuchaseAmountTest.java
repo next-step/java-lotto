@@ -3,6 +3,8 @@ package lotto.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,12 +19,13 @@ public class PuchaseAmountTest {
 		}).isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@Test
+	@ParameterizedTest
 	@DisplayName("구매금액으로 몇개의 로또를 구입할 수 있는지 테스트")
-	void findNumberOfAvailablePurchases() {
-		PuchaseAmount puchaseAmount = new PuchaseAmount(14000);
+	@CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5400:5", "5900:5", "6100:6"}, delimiter = ':')
+	void findNumberOfAvailablePurchases(int money, int count) {
+		PuchaseAmount puchaseAmount = new PuchaseAmount(money);
 		int lottoCount = puchaseAmount.findNumberOfAvailablePurchases();
-		assertThat(lottoCount).isEqualTo(14);
+		assertThat(lottoCount).isEqualTo(count);
 	}
 
 }
