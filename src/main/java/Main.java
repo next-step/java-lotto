@@ -1,4 +1,4 @@
-import lotto.game.LottoGame;
+import lotto.LottoGame;
 
 public class Main {
     public static void main(String[] args) {
