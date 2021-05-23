@@ -3,7 +3,8 @@ package com.lotto.domain;
 import com.lotto.exception.IllegalPriceException;
 import com.lotto.exception.LottoPriceOutOfBoundsException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGroup {
     private List<Lotto> lottoList;

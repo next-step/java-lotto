@@ -6,7 +6,8 @@ public enum Message {
     REQUIRE_WINNING_NUMBERS("지난 주 담청 번호를 입력해 주세요."),
     WINNING_STATISTICS("담청 통계"),
     WINNING_STATISTICS_DETAIL("%s개 일치 (%s)- %d개"),
-    INVESTMENT("총 수익률은 %.2f 입니다."),;
+    INVESTMENT("총 수익률은 %.2f 입니다."),
+    ;
 
     private String message;
 

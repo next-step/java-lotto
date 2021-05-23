@@ -6,9 +6,6 @@ import com.lotto.domain.LottoWinningNumbers;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class LottoManager {
 
     public void control() {

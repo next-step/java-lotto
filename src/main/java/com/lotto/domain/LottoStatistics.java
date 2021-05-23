@@ -27,6 +27,10 @@ public class LottoStatistics {
     }
 
     public Integer get(LottoReward reward) {
+        if (this.lottoStatistics.get(reward) == null) {
+            return 0;
+        }
+
         return this.lottoStatistics.get(reward);
     }
 

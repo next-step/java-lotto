@@ -1,6 +1,9 @@
 package com.lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
 
 public class LottoAutoGenerator {
     private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
