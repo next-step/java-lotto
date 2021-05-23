@@ -9,26 +9,22 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private final InputView inputView;
-    private final ResultView resultView;
     private final NumberGenerator numberGenerator;
     private final LottoStatistics lottoStatistics;
 
     public LottoController() {
-        this.inputView = new InputView();
-        this.resultView = new ResultView();
         this.numberGenerator = new LottoNumberGenerator();
         this.lottoStatistics = new LottoStatistics();
     }
 
     public void play() {
-        LottoGame lottoGame = LottoGame.init(inputView.inputAmount());
+        LottoGame lottoGame = LottoGame.init(InputView.inputAmount());
         lottoGame.buyLotto(numberGenerator);
-        resultView.printLottoes(lottoGame);
+        ResultView.printLottoes(lottoGame);
 
-        Lotto winnerLotto = Lotto.from(inputView.inputWinnerLottoNumbers());
+        Lotto winnerLotto = Lotto.from(InputView.inputWinnerLottoNumbers());
         lottoStatistics.init(lottoGame, winnerLotto);
 
-        resultView.printStatistics(lottoStatistics);
+        ResultView.printStatistics(lottoStatistics);
     }
 }

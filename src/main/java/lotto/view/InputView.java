@@ -11,12 +11,14 @@ public class InputView {
     private static final String NUMBER_REGEX = "[^0-9,]";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public int inputAmount() {
+    private InputView() {}
+
+    public static int inputAmount() {
         System.out.println(INPUT_AMOUNT_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public Set<Integer> inputWinnerLottoNumbers() {
+    public static Set<Integer> inputWinnerLottoNumbers() {
         System.out.println(String.format("%n%s", INPUT_WINNER_LOTTO_NUMBERS_MESSAGE));
         String winnerLottoNumberString = scanner.nextLine().replaceAll(NUMBER_REGEX, "");
         String[] winnerLottoNumbers = winnerLottoNumberString.split(",");
