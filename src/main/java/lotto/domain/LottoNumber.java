@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
 	public static final int MIN = 1;
 	public static final int MAX = 45;
+	public static final String MESSAGE_LOTTO_NUMBER_RANGE = "로또번호는 %d~%d 이내의 숫자여야 합니다.";
 	private final int number;
 
 	public LottoNumber(int number) {
@@ -14,7 +15,7 @@ public class LottoNumber {
 
 	private void validationNumber(int number) {
 		if (number < MIN || number > MAX) {
-			throw new IllegalArgumentException(String.format("로또번호는 %d~%d 이내의 숫자여야 합니다.", MIN, MAX));
+			throw new IllegalArgumentException(String.format(MESSAGE_LOTTO_NUMBER_RANGE, MIN, MAX));
 		}
 	}
 

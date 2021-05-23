@@ -5,6 +5,8 @@ import java.util.*;
 public class LottoNumbers {
 
 	public static final int LENGTH = 6;
+	public static final String MESSAGE_EXIST_DUPLICATE_NUMBER = "로또번호중에서 중복된 숫자가 포함되어 있습니다.";
+	public static final String MESSAGE_LOTTO_NUMBER_MUST_BE_SIX_DIGIT = "로또는 숫자 %d개로 이루어져야 합니다.";
 	private final Set<LottoNumber> lottoNumbers;
 
 	public LottoNumbers(Integer... numbers) {
@@ -30,13 +32,13 @@ public class LottoNumbers {
 
 	private void validationDuplicate() {
 		if (this.lottoNumbers.size() != LENGTH) {
-			throw new IllegalArgumentException("로또번호중에서 중복된 숫자가 포함되어 있습니다.");
+			throw new IllegalArgumentException(MESSAGE_EXIST_DUPLICATE_NUMBER);
 		}
 	}
 
 	private void validationSize(List<Integer> numbers) {
 		if (numbers == null || numbers.size() != LENGTH) {
-			throw new IllegalArgumentException(String.format("로또는 숫자 %d개로 이루어져야 합니다.", LENGTH));
+			throw new IllegalArgumentException(String.format(MESSAGE_LOTTO_NUMBER_MUST_BE_SIX_DIGIT, LENGTH));
 		}
 	}
 
