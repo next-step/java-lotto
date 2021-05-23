@@ -46,7 +46,7 @@ public class Lottos {
 		Money winAmount = new Money(0);
 		for (Prize prize : Prize.values()) {
 			Money amount = prize.winAmount().multiply(statusMap.get(prize));
-			winAmount = winAmount.plus(amount.money());
+			winAmount = winAmount.plus(amount);
 		}
 		return winAmount;
 	}

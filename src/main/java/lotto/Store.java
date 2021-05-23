@@ -11,7 +11,7 @@ public class Store {
 		while (isBuyable(amount)) {
 			Lotto lotto = Lotto.publish();
 			lottos.add(lotto);
-			amount = amount.minus(LOTTO_PRICE);
+			amount = amount.minus(new Money(LOTTO_PRICE));
 		}
 		return new Lottos(lottos);
 	}

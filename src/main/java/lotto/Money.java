@@ -3,18 +3,12 @@ package lotto;
 import java.util.Objects;
 
 public class Money {
+	public static final String UNIT_KR = "원";
+
 	private final long money;
 
 	public Money(long money) {
 		this.money = money;
-	}
-
-	public Money(String money) {
-		this.money = Long.parseLong(money);
-	}
-
-	public long money() {
-		return money;
 	}
 
 	@Override
@@ -32,8 +26,8 @@ public class Money {
 		return Objects.hash(money);
 	}
 
-	public Money minus(long value) {
-		return new Money((money - value));
+	public Money minus(Money value) {
+		return new Money((money - value.money));
 	}
 
 	public boolean greaterThan(long lottoPrice) {
@@ -44,7 +38,19 @@ public class Money {
 		return new Money(money * value);
 	}
 
-	public Money plus(long value) {
-		return new Money(money + value);
+	public Money plus(Money value) {
+		return new Money(money + value.money);
+	}
+
+	public boolean isZero() {
+		return money == 0;
+	}
+
+	public double divide(Money value) {
+		return (double)money / value.money;
+	}
+
+	public String won() {
+		return money + UNIT_KR;
 	}
 }
