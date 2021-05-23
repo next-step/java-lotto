@@ -1,4 +1,4 @@
-package com.nextstep.lotto;
+package com.nextstep.lotto.result;
 
 import static org.assertj.core.api.Assertions.*;
 

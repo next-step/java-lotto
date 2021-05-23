@@ -6,7 +6,7 @@ import com.nextstep.lotto.result.RevenueRatio;
 import com.nextstep.lotto.result.Statistics;
 import com.nextstep.lotto.store.LottoStore;
 
-public class LottoGame {
+public class LottoMain {
 
 	public static void main(String[] args) {
 

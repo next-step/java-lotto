@@ -1,4 +1,4 @@
-package com.nextstep.lotto;
+package com.nextstep.lotto.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,9 +8,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import com.nextstep.lotto.lotto.Lotto;
-import com.nextstep.lotto.lotto.LottoNumber;
 
 public class LottoTest {
 
