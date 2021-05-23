@@ -11,14 +11,10 @@
 >### HitCount (일치 갯수) 
 >  - 일치 갯수 Wrapping class
 
->### User (유저)
-> - 금액을 가지고 LottoStore에게 티켓 목록을 구매.
-> - winningNumber와 비교하여 lottoTicket 목록의 당첨갯수를 체크.
+>### LottoTickets (로또 티켓 일급 컬렉션)
+> - 로또 티켓 가격을 가지고 금액에 맞는 로또 티켓 목록 발급.
+> - winningNumber와 비교하여 로또 티켓 목록의 당첨갯수를 체크.
 > - 투자금 대비 수익금 비율을 계산.
-
->### LottoStore (로또 가게)
-> - 로또 티켓 가격을 가지고 받은 금액에 맞는 자동 로또 티켓 목록 발급.
-> - 투자금을 계산.
 
 >### LottoTicket (로또 티켓)
 >  - 로또번호 일급 컬렉션을 가짐.
@@ -38,6 +34,8 @@
 >### LottoRule(로또 규칙) 
 >   - 일치 갯수별 당첨 금액을 가지는 enum 클래스
 
+>### LottoGenerateStrategy(로또번호 생성 전략 인터페이스)
+>   - AutoStrategy: 해당 인터페이스를 구현하여 로또번호를 자동으로 생성하는 기능.
 
 ---
 ## 기능요구사항
