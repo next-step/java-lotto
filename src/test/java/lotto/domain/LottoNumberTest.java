@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void createWithValidNumber(final int number) {
-        final LottoNumber lottoNumber = new LottoNumber(number);
+        final LottoNumber lottoNumber = LottoNumber.of(number);
 
         assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
@@ -23,6 +23,6 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void createWithInvalidNumber(final int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(number));
+                .isThrownBy(() -> LottoNumber.of(number));
     }
 }

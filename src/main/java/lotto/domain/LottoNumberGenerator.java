@@ -28,7 +28,7 @@ public class LottoNumberGenerator {
     private static List<LottoNumber> createNumbers() {
         final List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = MINIMUM_LOTTO_NUMBER; i < MAXIMUM_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.of(i));
         }
         return shuffle(lottoNumbers);
     }

@@ -27,8 +27,8 @@ class TextParserTest {
             void it_return_lotto_numbers() {
                 List<LottoNumber> lottoNumbers = TextParser.parseToLottoNumbers(text);
                 assertThat(lottoNumbers).containsExactly(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
                 );
             }
         }

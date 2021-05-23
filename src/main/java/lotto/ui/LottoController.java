@@ -33,7 +33,7 @@ public class LottoController {
         outputView.showInputResult(purchasedLottos, purchaseInformation);
 
         final Lotto winningLotto = new Lotto(inputView.askLastPrizeNumber());
-        final LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
+        final LottoNumber bonusNumber = LottoNumber.of(inputView.askBonusPrizeNumber());
         final GameResult gameResult = new GameResult(purchasedLottos);
         outputView.showResult(gameResult, winningLotto, bonusNumber);
         outputView.showProfit(money, gameResult.getResult(winningLotto, bonusNumber));

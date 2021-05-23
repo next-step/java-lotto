@@ -37,7 +37,7 @@ public class TextParser {
         return Stream.of(text.split(DELIMITER))
                 .map(String::trim)
                 .map(TextParser::parseToInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(toList());
     }
 
