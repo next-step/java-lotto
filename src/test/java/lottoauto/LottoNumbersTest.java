@@ -26,36 +26,4 @@ public class LottoNumbersTest {
 
         assertThatThrownBy(()->new LottoNumbers(lottoNumberList)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복은 존재할 수 없습니다.");
     }
-
-    @DisplayName("hitCount 테스트")
-    @Test
-    void checkHitCount() {
-        List<LottoNumber> winningNumberList = Stream.<LottoNumber>builder()
-                .add(new LottoNumber(1))
-                .add(new LottoNumber(2))
-                .add(new LottoNumber(3))
-                .add(new LottoNumber(4))
-                .add(new LottoNumber(5))
-                .add(new LottoNumber(6))
-                .build()
-                .collect(Collectors.toList());
-        LottoNumbers winningNumbers = new LottoNumbers(winningNumberList);
-
-        List<LottoNumber> lottoNumberList = Stream.<LottoNumber>builder()
-                .add(new LottoNumber(1))
-                .add(new LottoNumber(2))
-                .add(new LottoNumber(3))
-                .add(new LottoNumber(4))
-                .add(new LottoNumber(5))
-                .add(new LottoNumber(7))
-                .build()
-                .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-
-        winningNumbers.checkHitCount(lottoNumbers);
-        //LottoTicket lottoTicket = new LottoTicket(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)));
-
-        //winningNumber.checkWinning(lottoTicket);
-        //assertThat(lottoTicket.hitCount()).isEqualTo(new HitCount(5));
-    }
 }
