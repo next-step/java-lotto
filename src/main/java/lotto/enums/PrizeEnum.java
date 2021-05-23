@@ -1,6 +1,6 @@
 package lotto.common;
 
-import java.util.Map;
+import lotto.lotto.MatchedAnswer;
 
 public enum PrizeEnum {
     FOURTH(3, 5000),
@@ -24,7 +24,7 @@ public enum PrizeEnum {
         return prize;
     }
 
-    public int income(Map<Integer, Integer> matchAnswer) {
-        return prize * matchAnswer.getOrDefault(answer, 0);
+    public int income(MatchedAnswer matchAnswer) {
+        return prize * matchAnswer.count(answer);
     }
 }

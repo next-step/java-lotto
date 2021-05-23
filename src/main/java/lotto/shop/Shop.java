@@ -1,12 +1,7 @@
 package lotto.shop;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import lotto.common.ErrorMessage;
+import lotto.error.ErrorMessage;
+import lotto.lotto.Answer;
 import lotto.lotto.Lotto;
 
 public class Shop {
@@ -25,13 +20,11 @@ public class Shop {
         return lottoTicket;
     }
 
-    public Map<Integer, Integer> matchAnswer(LottoTicket lottoTicket, Set<Integer> answer) {
-        Map<Integer, Integer> match = new HashMap<>();
+    public MatchedAnswer matchAnswer(LottoTicket lottoTicket, Answer answer) {
+        MatchedAnswer match = new MatchedAnswer();
         lottoTicket.tickets().forEach(lotto -> {
-            lotto.numbers().retainAll(answer);
-            int size = lotto.numbers().size();
-            int count = match.getOrDefault(size, 0);
-            match.put(size, ++count);
+            lotto.numbers().retainAll(answer.numbers());
+            match.increaseCount(lotto.numbers().size());
         });
         return match;
     }

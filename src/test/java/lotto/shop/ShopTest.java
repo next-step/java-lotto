@@ -2,14 +2,18 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.error.ErrorMessage;
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoTicket;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import lotto.lotto.Answer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import lotto.error.ErrorMessage;
+import lotto.lotto.Lotto;
+import lotto.lotto.LottoTicket;
+import lotto.lotto.MatchedAnswer;
 
 public class ShopTest {
     Shop shop;
@@ -69,7 +73,8 @@ public class ShopTest {
     void testAnswer() {
         //given
         LottoTicket lottoTicket = new LottoTicket();
-        Set<Integer> answer = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Answer answer = new Answer(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
 
         Lotto lotto = new Lotto();
         lotto.addNumber(1);
@@ -80,8 +85,8 @@ public class ShopTest {
         lotto.addNumber(12);
         lottoTicket.add(lotto);
         //when
-        Map<Integer, Integer> match = shop.matchAnswer(lottoTicket, answer);
+        MatchedAnswer match = shop.matchAnswer(lottoTicket, answer);
         //then
-        assertThat(match.get(3)).isEqualTo(1);
+        assertThat(match.count(3)).isEqualTo(1);
     }
 }

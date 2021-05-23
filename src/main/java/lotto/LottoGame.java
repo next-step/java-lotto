@@ -1,11 +1,8 @@
 package lotto.game;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import lotto.lotto.Lotto;
+import lotto.lotto.Answer;
 import lotto.lotto.LottoTicket;
+import lotto.lotto.MatchedAnswer;
 import lotto.shop.Money;
 import lotto.shop.Shop;
 import lotto.ui.Command;
@@ -23,8 +20,8 @@ public class LottoGame {
         LottoTicket lottoBundle = shop.selectAuto(lottoCount);
         command.printLottoBundle(lottoBundle);
 
-        Set<Integer> answer = command.inputAnswer();
-        Map<Integer, Integer> matchAnswer = shop.matchAnswer(lottoBundle, answer);
+        Answer answer = new Answer(command.inputAnswer());
+        MatchedAnswer matchAnswer = shop.matchAnswer(lottoBundle, answer);
 
         command.resultMessage();
         Result.resultIncome(matchAnswer, money);
