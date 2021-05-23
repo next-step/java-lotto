@@ -38,13 +38,25 @@ public class LottoGame {
     }
 
     private WinnerNumbers generatorWinnerNumber() {
+        List<LottoNumber> lottoNumbers = getWinnerLottoNumbers();
+        LottoNumber bonusNumber = getBonusLottoNumber();
+
+        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers, bonusNumber);
+        return winnerNumbers;
+    }
+
+    private LottoNumber getBonusLottoNumber() {
+        int inputBonusNumber = inputView.inputBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.create(inputBonusNumber);
+        return bonusNumber;
+    }
+
+    private List<LottoNumber> getWinnerLottoNumbers() {
         List<String> inputWinnerNumbers = inputView.inputWinnerNumber();
+
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(inputWinnerNumbers);
-
-        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
-
-        return winnerNumbers;
+        return lottoNumbers;
     }
 
     private LottoWallet buyingLottoTickets() {
