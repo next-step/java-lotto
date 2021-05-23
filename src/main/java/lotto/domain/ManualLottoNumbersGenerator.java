@@ -14,15 +14,15 @@ public class ManualLottoNumbersGenerator implements LottoNumbersGenerator {
         this.manualNumbers = manualNumbers;
     }
 
-    private void validateManualNumbersLength(int manualCount, List<String> manualNumbers) {
-        if (manualCount > 0 && manualNumbers == null || manualCount != manualNumbers.size()) {
-            throw new IllegalArgumentException(MANUAL_COUNT_NOT_MATCH_ERROR_MESSAGE);
-        }
-    }
-
     public List<LottoNumbers> generate() {
         return manualNumbers.stream()
                 .map(LottoNumbers::of)
                 .collect(Collectors.toList());
+    }
+
+    private void validateManualNumbersLength(int manualCount, List<String> manualNumbers) {
+        if (manualCount > 0 && manualNumbers == null || manualCount != manualNumbers.size()) {
+            throw new IllegalArgumentException(MANUAL_COUNT_NOT_MATCH_ERROR_MESSAGE);
+        }
     }
 }

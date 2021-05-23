@@ -13,18 +13,18 @@ public class LottoTicket {
         this.prize = prize;
     }
 
-    private void validatePrize(Prize prize) {
-        if (prize == null) {
-            throw new IllegalArgumentException(NOT_FOUND_PRIZE_ERROR_MESSAGE);
-        }
-    }
-
     public static LottoTicket of(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
         return new LottoTicket(lottoNumbers, lottoNumbers.match(winningNumbers));
     }
 
     public Prize getPrize() {
         return prize;
+    }
+
+    private void validatePrize(Prize prize) {
+        if (prize == null) {
+            throw new IllegalArgumentException(NOT_FOUND_PRIZE_ERROR_MESSAGE);
+        }
     }
 
     @Override

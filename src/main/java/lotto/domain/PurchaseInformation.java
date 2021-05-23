@@ -13,12 +13,6 @@ public class PurchaseInformation {
         validateCount(manualCount);
     }
 
-    private void validateCount(int manualCount) {
-        if (manualCount > totalCount()) {
-            throw new IllegalArgumentException(NOT_VALID_COUNT_ERROR_MESSAGE);
-        }
-    }
-
     public int totalCount() {
         return price / MINIMUM_PRICE;
     }
@@ -29,5 +23,11 @@ public class PurchaseInformation {
 
     public int manualCount() {
         return this.manualCount;
+    }
+
+    private void validateCount(int manualCount) {
+        if (manualCount > totalCount()) {
+            throw new IllegalArgumentException(NOT_VALID_COUNT_ERROR_MESSAGE);
+        }
     }
 }
