@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import lotto.ui.IOManager;
 import lotto.ui.Input;
 import lotto.ui.StandardOutput;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
@@ -13,9 +13,13 @@ class LottoGameTest {
     void lottoIntegrationTest01() {
 
         IOManager ioManager = new IOManager(new Input() {
+
+            private final int[] params = new int[] {5000, 7};
+            private int paramsIndex = 0;
+
             @Override
             public int nextInt() {
-                return 5000; // 로또 5개 구매
+                return params[paramsIndex++]; // 로또 5개 구매, 보너스 번호 7
             }
 
             @Override

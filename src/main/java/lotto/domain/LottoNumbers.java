@@ -17,10 +17,6 @@ public class LottoNumbers {
         validateNumbersSizeAndDuplicateNumbers();
     }
 
-    public static LottoNumbers of(Collection<LottoNumber> numbers) {
-        return new LottoNumbers(numbers);
-    }
-
     public static LottoNumbers of(List<Integer> numbers) {
         return new LottoNumbers(numbers.stream()
                                        .map(LottoNumber::of)
