@@ -2,8 +2,6 @@ package lottery;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.Test;
 
 class BuyerTest {
@@ -15,11 +13,9 @@ class BuyerTest {
 		assertThatThrownBy(() -> Buyer.of(null))
 			.isInstanceOf(IllegalArgumentException.class).hasMessageContaining("유효하지 않은 값입니다.");
 
-
 		sut = Buyer.of(Money.won(10000L));
 
 		assertThat(sut.money()).isEqualTo(Money.won(10000L));
-		assertThat(sut.lotteryTickets()).isEqualTo(Collections.emptyList());
+		assertThat(sut.tickets()).isEqualTo(Tickets.ZERO);
 	}
-
 }

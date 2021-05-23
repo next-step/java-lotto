@@ -2,16 +2,12 @@ package lottery;
 
 import static java.util.Objects.*;
 
-import java.util.Collections;
-import java.util.List;
-
 public final class Buyer {
 	private Money money = Money.ZERO;
-	private List<Ticket> tickets;
+	private Tickets tickets = Tickets.ZERO;
 
 	private Buyer(Money money) {
 		setMoney(money);
-		this.tickets = Collections.emptyList();
 	}
 
 	public static Buyer of(Money initial) {
@@ -22,7 +18,7 @@ public final class Buyer {
 		return money;
 	}
 
-	public List<Ticket> lotteryTickets() {
+	public Tickets tickets() {
 		return tickets;
 	}
 
@@ -40,10 +36,10 @@ public final class Buyer {
 		return infoCenter.confirmTicket(this.tickets);
 	}
 
-	public void setMoney(Money rest) {
-		if (isNull(rest)) {
-			throw new IllegalArgumentException("유효하지 않은 값입니다.");
+	public void setMoney(Money money) {
+		if (isNull(money) || money.amount() < 1000) {
+			throw new IllegalArgumentException("1000원 이상의 값을 입력해주세요.");
 		}
-		this.money = rest;
+		this.money = money;
 	}
 }

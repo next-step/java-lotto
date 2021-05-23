@@ -15,8 +15,8 @@ public class InfoCenter {
 		this.lastWeekWinningTicket = lastWeekWinningTicket;
 	}
 
-	public Result confirmTicket(List<Ticket> buyerTickets) {
-		for (Ticket ticket : buyerTickets) {
+	public Result confirmTicket(Tickets buyerTickets) {
+		for (Ticket ticket : buyerTickets.getTicketList()) {
 			List<Integer> buyerNumbers = ticket.numbers();
 			buyerNumbers.removeAll(this.lastWeekWinningTicket.numbers());
 			LotteryMatchType lotteryMatchType = LotteryMatchType.fromInteger(Ticket.SIZE_OF_TICKET - buyerNumbers.size());

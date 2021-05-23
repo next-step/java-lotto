@@ -109,10 +109,11 @@ LotteryTicket - 로또
   - [x] 구매한 금액 대비 수익률을 제공한다.
 
 - [ ] 추후 리팩토링을 고려해볼만 사항
-  - [ ] TicketList 에 대한 일급 컬렉션 고려하기
+  - [x] TicketList 에 대한 일급 컬렉션 고려하기
   - [ ] View 개발
   - [x] Random Number 리스트로 변경하기
   - [ ] 메소드의 condition을 명확하게 하기 위해서 valid4j 도입
+  - [ ] Integer는 사실 Number이지 않을까?
 
 # [4단계] 로또(2등)
 

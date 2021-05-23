@@ -2,8 +2,6 @@ package lottery;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,11 +21,11 @@ class StoreTest {
 		assertThat(sut.getMachine()).isNotNull();
 	}
 
-
 	@Test
 	void 티켓을_판매한다() {
-		List<Ticket> tickets = sut.getTicket(buyer);
-		assertThat(tickets).isNotEmpty();
-		assertThat(tickets).hasSize(10);
+		Tickets tickets = sut.getTicket(buyer);
+
+		assertThat(tickets.getTicketList()).isNotEmpty();
+		assertThat(tickets.getTicketList()).hasSize(10);
 	}
 }

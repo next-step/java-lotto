@@ -1,7 +1,5 @@
 package lottery;
 
-import java.util.List;
-
 public class Store {
 
 	private GenerateTicketMachine machine;
@@ -12,7 +10,7 @@ public class Store {
 		machine = new GenerateTicketMachine();
 	}
 
-	public List<Ticket> getTicket(Buyer buyer) {
+	public Tickets getTicket(Buyer buyer) {
 		Money buyerMoney = buyer.money();
 		long ticketCount = buyerMoney.divide(TICKET_PRICE);
 		Money rest = buyerMoney.minus(Money.won(ticketCount * TICKET_PRICE.amount()));

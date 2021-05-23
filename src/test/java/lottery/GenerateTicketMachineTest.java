@@ -19,34 +19,37 @@ class GenerateTicketMachineTest {
 
 	@Test
 	void 랜덤숫자를가진_로또티켓을_발행한다() {
-		List<Ticket> ticket = sut.create(1);
-		assertThatHasValidNumber(ticket.get(0).numbers());
+		Tickets tickets = sut.create(1);
+		assertThatHasValidNumber(tickets.getTicketList().get(0).numbers());
 	}
 
 	@Test
 	void 발행된_티켓의_번호들은_정렬된_순서를_갖는다() {
-		List<Ticket> tickets = sut.create(1);
-		Ticket ticket = tickets.get(0);
+		Tickets tickets = sut.create(1);
+		Ticket ticket = tickets.getTicketList().get(0);
 		assertThat(ticket.numbers()).isSorted();
 	}
 
 	@Test
 	void 티켓을_한장_발행한다() {
-		List<Ticket> ticket = sut.create(1);
+		Tickets tickets = sut.create(1);
+		assertThat(tickets.getTicketList()).hasSize(1);
 
-		List<Integer> numbers = ticket.get(0).numbers();
+		List<Integer> numbers = tickets.getTicketList().get(0).numbers();
 		assertThat(numbers).hasSize(6);
 		assertThatHasValidNumber(numbers);
+
+
 	}
 
 	@Test
 	void 두장_발행한다() {
-		int count = 2;
+		Tickets tickets = sut.create(2);
 
-		List<Ticket> tickets = sut.create(count);
-		assertThat(tickets).hasSize(count);
+		List<Ticket> ticketList = tickets.getTicketList();
+		assertThat(ticketList).hasSize(2);
 
-		for (Ticket ticket : tickets) {
+		for (Ticket ticket : ticketList) {
 			assertThatHasValidNumber(ticket.numbers());
 		}
 	}
