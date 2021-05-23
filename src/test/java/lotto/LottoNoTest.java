@@ -20,6 +20,6 @@ class LottoNoTest {
 	@DisplayName("로또 번호 유효성 실패 테스트")
 	void noValidFail(int number) {
 		assertThatIllegalArgumentException().isThrownBy(() -> new LottoNo(number))
-			.withMessage("로또 번호는 1과 45사이의 수여야만 합니다.");
+			.withMessage("로또 번호는 %d ~ %d 사이의 수여야만 합니다.", LottoNo.MIN, LottoNo.MAX);
 	}
 }

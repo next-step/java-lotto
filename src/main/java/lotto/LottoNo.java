@@ -10,7 +10,7 @@ public class LottoNo implements Comparable<LottoNo>{
 
 	public LottoNo(int number) {
 		if (number < MIN || number > MAX) {
-			throw new IllegalArgumentException("로또 번호는 1과 45사이의 수여야만 합니다.");
+			throw new IllegalArgumentException(String.format("로또 번호는 %d ~ %d 사이의 수여야만 합니다.", MIN, MAX));
 		}
 		this.number = number;
 	}
