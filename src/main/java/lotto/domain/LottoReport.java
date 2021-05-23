@@ -1,7 +1,7 @@
 package lotto.domain;
 
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 public class LottoReport {
     public static final double PERCENTAGE = 100.0;
 
-    Map<Rank, Integer> countOfMatchByRank = new HashMap<>(Rank.values().length);
+    Map<Rank, Integer> countOfMatchByRank = new EnumMap<>(Rank.class);
     private double yield;
 
     public LottoReport(final Lotto winners, final List<Lotto> lottos) {
