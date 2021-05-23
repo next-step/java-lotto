@@ -1,12 +1,12 @@
 package io.mwkwon.lotto.domain;
 
+import io.mwkwon.lotto.constant.LottoConstants;
+
 import java.util.Objects;
 
-public final class LottoNumber {
-
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    private static final String EXCEPTION_MESSAGE = "1에서 45사이의 값만 입력 가능합니다.";
+public final class LottoNumber implements Comparable<LottoNumber> {
+    private static final String EXCEPTION_MESSAGE = LottoConstants.MIN_LOTTO_NUMBER + "에서 "
+            + LottoConstants.MAX_LOTTO_NUMBER +"사이의 값만 입력 가능합니다.";
 
     private final int number;
 
@@ -16,7 +16,7 @@ public final class LottoNumber {
     }
 
     private void validateLottoNumberBound(final int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+        if (number < LottoConstants.MIN_LOTTO_NUMBER || number > LottoConstants.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
     }
@@ -37,5 +37,10 @@ public final class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.number - other.number;
     }
 }

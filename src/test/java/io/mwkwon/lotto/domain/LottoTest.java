@@ -1,9 +1,6 @@
 package io.mwkwon.lotto.domain;
 
-import io.mwkwon.lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +11,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
 
     @Test
-    void 자동으로_로또_번호_생성_기능_테스트() {
-        Lotto lotto = Lotto.createAutoLotto();
-        assertThat(lotto.getLottoNumbers()).isNotNull();
-        assertThat(lotto.getLottoNumbers()).isNotEmpty();
+    void 로또_객체_정상_생성_여부_테스트() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
     }
 
     @Test
@@ -33,12 +36,6 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("서로 다른 로또번호 6개가 아닙니다.");
-    }
-
-    @Test
-    void 자동으로_생성된_로또_번호들의_사이즈가_6인지_여부_테스트() {
-        Lotto lotto = Lotto.createAutoLotto();
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
@@ -74,22 +71,5 @@ public class LottoTest {
         String strLottoNumbers = "3:1,3,42,5";
         assertThatThrownBy(() -> new Lotto(strLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage("숫자 ','만 입력 가능합니다.");
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-            "1,2,3,4,5,6:FIRST",
-            "1,2,3,4,5,7:SECOND",
-            "1,2,3,4,10,7:THIRD",
-            "1,2,3,11,10,7:FOURTH",
-            "1,2,10,11,12,14:MISS",
-            "1,10,11,12,13,14:MISS",
-            "7,8,9,10,11,12:MISS",
-    }, delimiter = ':')
-    void 당첨_결과_1등_계산_기능_테스트(String winningLottoNumbers, Rank excepted) {
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
-        Lotto buyLotto = new Lotto("1,2,3,4,5,6");
-        Rank rank = buyLotto.calcLottoRank(winningLotto);
-        assertThat(rank).isEqualTo(excepted);
     }
 }

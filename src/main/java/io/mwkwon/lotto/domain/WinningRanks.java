@@ -1,5 +1,6 @@
 package io.mwkwon.lotto.domain;
 
+import io.mwkwon.lotto.constant.LottoConstants;
 import io.mwkwon.lotto.enums.Rank;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class WinningRanks {
+    private static final int SCALE = 2;
     private final List<Rank> ranks;
 
     public WinningRanks(List<Rank> ranks) {
@@ -15,8 +17,8 @@ public class WinningRanks {
 
     public double calcProfitRate(LottoPayment lottoPayment) {
         int totalReward = calcTotalReward();
-        int buyLottoMoney = lottoPayment.calcLottoBuyQuantity() * LottoPayment.LOTTO_PRICE;
-        return new BigDecimal(totalReward).divide(new BigDecimal(buyLottoMoney), 2, RoundingMode.DOWN).doubleValue();
+        int buyLottoMoney = lottoPayment.calcLottoBuyQuantity() * LottoConstants.LOTTO_PRICE;
+        return new BigDecimal(totalReward).divide(new BigDecimal(buyLottoMoney), SCALE, RoundingMode.DOWN).doubleValue();
     }
 
     private int calcTotalReward() {

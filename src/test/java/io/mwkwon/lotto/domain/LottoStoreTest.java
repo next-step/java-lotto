@@ -16,8 +16,8 @@ public class LottoStoreTest {
     @CsvSource(value = {"10000:10", "25000:25", "12500:12"}, delimiter = ':')
     void 입력된_구입금액_기준_로또_구매_기능_테스트(int value, int excepted) {
         LottoStore lottoStore = new LottoStore();
-        lottoStore.buyAutoLottos(new LottoPayment(value));
-        assertThat(lottoStore.lottos().size()).isEqualTo(excepted);
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(new LottoMachine(), new LottoPayment(value));
+        assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
     }
 
     @Test
@@ -30,10 +30,11 @@ public class LottoStoreTest {
                 new Lotto("1,2,3,7,8,9"),
                 new Lotto("1,2,7,8,9,10")
         );
-        LottoStore lottoStore = new LottoStore(lottos);
+        BuyLottos buyLottos = new BuyLottos(lottos);
+        LottoStore lottoStore = new LottoStore();
         WinningRanks excepted = new WinningRanks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH));
 
-        WinningRanks ranks = lottoStore.calcLottosRank(winningLotto);
+        WinningRanks ranks = lottoStore.calcLottosRank(buyLottos, winningLotto);
         assertThat(ranks).isEqualTo(excepted);
     }
 }

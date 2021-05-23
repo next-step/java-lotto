@@ -1,5 +1,7 @@
 package io.mwkwon.lotto.enums;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,5 +38,9 @@ public enum Rank {
 
     public static Rank getRankByMatchCount(int matchCount) {
         return ENUM_MAP.getOrDefault(matchCount, MISS);
+    }
+
+    public static List<Rank> createPrintTargetRank() {
+        return Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
     }
 }

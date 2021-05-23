@@ -1,24 +1,29 @@
 package io.mwkwon.lotto;
 
-import io.mwkwon.lotto.domain.Lotto;
-import io.mwkwon.lotto.domain.LottoPayment;
-import io.mwkwon.lotto.domain.LottoStore;
-import io.mwkwon.lotto.domain.WinningRanks;
+import io.mwkwon.lotto.domain.*;
 import io.mwkwon.lotto.view.InputView;
 import io.mwkwon.lotto.view.ResultView;
 
 public class LottoApplication {
 
-    public static void main(String[] args) {
-        InputView inputView = new InputView();
-        LottoPayment lottoPayment = inputView.requestInputPayment();
+    private final InputView inputView;
+    private final ResultView resultView;
+    private final LottoGenerator lottoGenerator;
+
+    public LottoApplication(InputView inputView, ResultView resultView, LottoGenerator lottoGenerator) {
+        this.inputView = inputView;
+        this.resultView = resultView;
+        this.lottoGenerator = lottoGenerator;
+    }
+
+    public void run() {
         LottoStore lottoStore = new LottoStore();
-        lottoStore.buyAutoLottos(lottoPayment);
-        inputView.printBuyLottoCount(lottoPayment);
-        inputView.printBuyLottos(lottoStore);
-        Lotto winningLotto = inputView.requestWinningLottoNumbers();
-        WinningRanks winningRanks = lottoStore.calcLottosRank(winningLotto);
-        ResultView resultView = new ResultView();
+        LottoPayment lottoPayment = LottoPayment.create(inputView);
+        resultView.printBuyLottoCount(lottoPayment);
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(lottoGenerator, lottoPayment);
+        resultView.printBuyLottos(buyLottos);
+        Lotto winningLotto = lottoStore.createWinningLotto(inputView);
+        WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos, winningLotto);
         resultView.printWinningStatistics(winningRanks);
         resultView.printProfitRate(winningRanks, lottoPayment);
     }

@@ -1,42 +1,47 @@
 package io.mwkwon.lotto.domain;
 
+import io.mwkwon.lotto.constant.LottoConstants;
 import io.mwkwon.lotto.enums.Rank;
+import io.mwkwon.lotto.view.InputView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class LottoStore {
 
-    private final List<Lotto> lottos;
-
-    public LottoStore() {
-        this.lottos = new ArrayList<>();
+    public BuyLottos buyAutoLottos(LottoGenerator lottoGenerator, LottoPayment lottoPayment) {
+        return lottoGenerator.createAutoLottos(lottoPayment);
     }
 
-    public LottoStore(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+    public Lotto createWinningLotto(InputView inputView) {
+        String value = inputView.requestWinningLottoNumbers(LottoConstants.REQUEST_WINNING_LOTTO_MESSAGE);
+        return new Lotto(value);
     }
 
-    public void buyAutoLottos(LottoPayment lottoPayment) {
-        int lottoBuyQuantity = lottoPayment.calcLottoBuyQuantity();
-        for (int i = 0; i < lottoBuyQuantity; i++) {
-            this.lottos.add(Lotto.createAutoLotto());
-        }
-    }
-
-    public List<Lotto> lottos() {
-        return Collections.unmodifiableList(this.lottos);
-    }
-
-    public WinningRanks calcLottosRank(Lotto winningLotto) {
+    public WinningRanks calcLottosRank(BuyLottos buyLottos, Lotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            Rank rank = lotto.calcLottoRank(winningLotto);
+        for (Lotto buyLotto : buyLottos.lottos()) {
+            Rank rank = this.calcLottoRank(buyLotto, winningLotto);
             ranks.add(rank);
         }
         List<Rank> winningRanks = ranks.stream().filter(rank -> rank != Rank.MISS).collect(Collectors.toList());
         return new WinningRanks(winningRanks);
     }
+
+    private Rank calcLottoRank(Lotto buyLotto, Lotto winningLotto) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : winningLotto.lottoNumbers()) {
+            matchCount = calcMatchCount(matchCount, buyLotto, lottoNumber);
+        }
+        return Rank.getRankByMatchCount(matchCount);
+    }
+
+    private int calcMatchCount(int matchCount, Lotto buyLotto, LottoNumber lottoNumber) {
+        if (buyLotto.lottoNumbers().contains(lottoNumber)) {
+            matchCount++;
+        }
+        return matchCount;
+    }
+
 }
