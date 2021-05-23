@@ -2,8 +2,10 @@ package wootecam.lotto.core;
 
 import java.util.List;
 
+import wootecam.lotto.model.BonusNumber;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
+import wootecam.lotto.model.LottoNumber;
 import wootecam.lotto.model.LottoScoreMap;
 import wootecam.lotto.ui.InputView;
 import wootecam.lotto.ui.OutputView;
@@ -38,6 +40,9 @@ public class LottoExecutor {
 
 		String winningNumberInput = this.inputView.makeWinningNumberInput();
 		Lotto winningLotto = lottoGameGenerator.getWinningLotto(winningNumberInput);
+
+		String bonusNumberInput = this.inputView.makeBonusNumberInput();
+		BonusNumber bonusNumber = new BonusNumber(new LottoNumber(bonusNumberInput), winningLotto);
 
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
 		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
