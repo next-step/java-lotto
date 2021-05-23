@@ -1,17 +1,28 @@
 package lotto.domain;
 
 import lotto.domain.wrapper.LottoPurchase;
+import lotto.ui.LottoInputActualHandler;
 import lotto.ui.LottoInputHandler;
 import lotto.ui.LottoOutputHandler;
 
 import java.util.List;
 
 public class LottoGame {
-    private LottoInputHandler input = new LottoInputHandler();
+    private LottoInputHandler input = new LottoInputActualHandler();
     private LottoOutputHandler output = new LottoOutputHandler();
     private Lottos lottos = new Lottos();
 
-    public void start() {
+    public LottoGame() {
+        this(null);
+    }
+
+    public LottoGame(LottoInputHandler input) {
+        if (input != null) {
+            this.input = input;
+        }
+    }
+
+    public LottoResultPack start() {
         LottoPurchase lottoPurchase = new LottoPurchase(input.scanLottoPurchaseBudget()
                                                         ,input.scanCountOfManualLotto());
 
@@ -26,10 +37,12 @@ public class LottoGame {
         LottoWinNumbers winNumbers = new LottoWinNumbers(input.scanLottoWinNumbersString()
                                                         ,input.scanLottoBonusNumber());
 
-        LottoResultPack resultPack = winNumbers.checkAllOf(lottos);
+        LottoResultPack lottoResultPack = winNumbers.checkAllOf(lottos);
 
-        output.printWinnerStatistics(resultPack);
-        output.printProfitRatio(resultPack.calculateProfitRatio(lottoPurchase));
+        output.printWinnerStatistics(lottoResultPack);
+        output.printProfitRatio(lottoResultPack.calculateProfitRatio(lottoPurchase));
+
+        return lottoResultPack;
     }
 
 }
