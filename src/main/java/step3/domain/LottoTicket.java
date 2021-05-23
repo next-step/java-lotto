@@ -19,17 +19,6 @@ public class LottoTicket {
         return this.lottoNumbers.toArray(new LottoNumber[lottoNumbers.size()]);
     }
 
-    public WinningType findWinningType(int[] inputNumbers) {
-        throwInvalidWinningNumbers(inputNumbers);
-
-        int matchCount = 0;
-        for (int inputNumber : inputNumbers) {
-            matchCount += contains(inputNumber);
-        }
-
-        return WinningType.of(matchCount);
-    }
-
     private int contains(int inputNumber) {
         if(lottoNumbers.contains(new LottoNumber(inputNumber))) {
             return 1;
