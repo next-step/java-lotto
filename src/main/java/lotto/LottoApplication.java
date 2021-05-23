@@ -1,10 +1,12 @@
-package lotto.view;
+package lotto;
 
 import lotto.controller.LottoPurchaseController;
 import lotto.controller.LottoWinController;
 import lotto.controller.dto.LottoPurchaseResponse;
 import lotto.controller.dto.WinInquiryRequest;
 import lotto.controller.dto.WinInquiryResponse;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoApplication {
 
