@@ -8,26 +8,24 @@ import java.util.List;
 
 public class LottoGameController {
 
-	private InputView inputView;
 	private RandomNumbersGenerator randomNumbersGenerator;
 
-	public LottoGameController(InputView inputView, RandomNumbersGenerator randomNumbersGenerator) {
-		this.inputView = inputView;
+	public LottoGameController(RandomNumbersGenerator randomNumbersGenerator) {
 		this.randomNumbersGenerator = randomNumbersGenerator;
 	}
 
 	public void play() {
 
 		//로또구입
-		int purchaseAmount = this.inputView.inputPurchaseAmount();
+		int purchaseAmount = InputView.inputPurchaseAmount();
 		LottoGame lottoGame = new LottoGame();
-		List<Lotto> lottos = lottoGame.purchaseLottos(new PuchaseAmount(purchaseAmount), this.randomNumbersGenerator);
+		Lottos lottos = lottoGame.purchaseLottos(new PuchaseAmount(purchaseAmount), this.randomNumbersGenerator);
 		InputView.printPurchaseLottos(lottos);
 
 		//당첨확인
-		List<Integer> winningLottoNumbers = this.inputView.inputWinningLottoNumbers();
-		LottoResult lottoResult = new LottoResult(lottos, new Lotto(winningLottoNumbers));
-		ResultView.printLottoResult(lottoResult);
+		List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
+		LottoResults lottoResults = lottos.match(new Lotto(winningLottoNumbers));
+		ResultView.printLottoResult(lottoResults);
 
 	}
 
