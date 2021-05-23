@@ -30,6 +30,7 @@ public class LottoOutputView {
 		System.out.println(WINNING_STATISTICS);
 		System.out.println(LINE);
 		Arrays.stream(LottoRank.values())
+			.filter(lottoRank -> lottoRank != LottoRank.UNRANKED)
 			.forEach(lottoRank -> {
 				System.out.printf(MATCHES_RESULT_MESSAGE, lottoRank.getMatches(), lottoRank.getReward(),
 					lottoRankCount.getCount(lottoRank));
