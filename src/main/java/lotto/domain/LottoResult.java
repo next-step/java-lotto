@@ -26,9 +26,7 @@ public class LottoResult {
 
 	public double calculateProfitRate() {
 		long sumWinAmount = 0;
-		Iterator<Rank> rankIterator = statMap.keySet().iterator();
-		while (rankIterator.hasNext()) {
-			Rank rank = rankIterator.next();
+		for (Rank rank : statMap.keySet()) {
 			int rankCount = statMap.get(rank);
 			sumWinAmount += rank.multiplyWinningMoney(rankCount);
 		}
