@@ -9,11 +9,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
-	private static final String SPLIT_COMMA_COLON = ",|:";
+	private static final String SPLIT_COMMA = ",";
+	private static final String SPLIT_COLON = ":";
 	private static final String SPLIT_CUSTOM = "//(.)\n(.*)";
 
 	public static List<String> split (String input) {
-
 		return removeSpace(checkSeparator(input));
 	}
 	private static List<String> removeSpace (String[] input) {
@@ -27,20 +27,18 @@ public class Separator {
 	}
 
 	private static String[] checkSeparator (String input) {
-		final List<Matcher> matchers = Arrays.asList(
-				Pattern.compile(SPLIT_CUSTOM).matcher(input)
-				, Pattern.compile(SPLIT_COMMA_COLON).matcher(input));
+		if (input.contains(SPLIT_COMMA) || input.contains(SPLIT_COLON)) {
+			return input.split(SPLIT_COMMA + "|" + SPLIT_COLON);
+		}
 
-		return matchSeparator(matchers);
+		return matchSeparator(Pattern.compile(SPLIT_CUSTOM).matcher(input));
 	}
 
-	private static String[] matchSeparator (List<Matcher> matchers) {
-		for (Matcher matcher : matchers) {
-			if (matcher.find()) {
-				String separator = matcher.group(1);
+	private static String[] matchSeparator (Matcher matcher) {
+		if (matcher.find()) {
+			String separator = matcher.group(1);
 
-				return matcher.group(2).split(separator);
-			}
+			return matcher.group(2).split(separator);
 		}
 		throw new IllegalArgumentException(ExceptionMessage.SEPARATOR_EXCEPTION);
 	}
