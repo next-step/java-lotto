@@ -8,15 +8,10 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		if (input.contains(",")) {
-			return getSplitSumResult(input);
-		}
-
-		return parseInt(input);
+		return sumStringArray(input.split(",|:"));
 	}
 
-	private static int getSplitSumResult(String input) {
-		String[] numbers = input.split(",|:");
+	private static int sumStringArray(String[] numbers) {
 		int sum = 0;
 
 		for (String number : numbers) {
