@@ -3,11 +3,16 @@ package step3.domain;
 import step3.common.WinningType;
 
 public class ProfitCalculator {
-    public long calculate(long money, WinningType[] winningType) {
-        return 0;
+    public double calculate(long money, WinningType[] winningTypes) {
+        long prizeSum = 0;
+        for(WinningType winningType : winningTypes) {
+            prizeSum += winningType.getPrize();
+        }
+
+        return calculate(money, prizeSum);
     }
 
-    public long calculate(long money, long prizeSum) {
-        return 0;
+    public double calculate(long money, long prizeSum) {
+        return Math.floor(((double)prizeSum/money)*100)/100.0;
     }
 }

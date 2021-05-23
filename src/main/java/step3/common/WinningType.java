@@ -25,5 +25,9 @@ public enum WinningType {
         }
         return SEVENTH;
     }
+
+    public int getPrize() {
+        return prize;
+    }
 }
 
