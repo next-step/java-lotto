@@ -52,5 +52,4 @@ public class LottoInputHandler {
 
         return scanner.nextInt();
     }
-
 }

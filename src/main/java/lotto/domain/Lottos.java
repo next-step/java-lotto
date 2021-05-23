@@ -82,5 +82,4 @@ public class Lottos {
     public List<Lotto> values() {
         return this.lottos;
     }
-
 }
