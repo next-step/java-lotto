@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class LottoRanks implements Iterable<LottoRank> {
     public double totalReturnRate() {
         BigDecimal totalWinAmount = BigDecimal.valueOf(totalWinAmount());
         BigDecimal purchaseAmount = BigDecimal.valueOf((long) lottoRanks.size() * LottoTicket.PRICE);
-        BigDecimal totalReturnRate = totalWinAmount.divide(purchaseAmount, RETURN_RATE_SCALE, BigDecimal.ROUND_FLOOR);
+        BigDecimal totalReturnRate = totalWinAmount.divide(purchaseAmount, RETURN_RATE_SCALE, RoundingMode.FLOOR);
         return totalReturnRate.doubleValue();
     }
 
