@@ -21,7 +21,7 @@ public class LottoGames {
     return new TotalRankings(matchResult);
   }
 
-  public TotalOrderedLottoGameNumbers peekGameInfos() {
+  public TotalOrderedLottoGameNumbers peekTotalLottoGameNumbers() {
     return new TotalOrderedLottoGameNumbers(games);
   }
 

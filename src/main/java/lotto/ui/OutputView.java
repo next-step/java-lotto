@@ -12,7 +12,7 @@ public class OutputView {
   private OutputView() {}
 
   public static void displayOrderedGames(TotalOrderedLottoGameNumbers totalOrderedLottoGameNumbers) {
-    System.out.println(String.format(ORDERED_N_GAMES_FORMAT, totalOrderedLottoGameNumbers.orderedCount()));
+    System.out.println(String.format(ORDERED_N_GAMES_FORMAT, totalOrderedLottoGameNumbers.getOrderedCount()));
     System.out.println(totalOrderedLottoGameNumbers.toString());
   }
 

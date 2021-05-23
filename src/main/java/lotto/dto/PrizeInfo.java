@@ -13,8 +13,8 @@ public class PrizeInfo {
   private final long winningCount;
 
   public PrizeInfo(LottoRanking lottoRanking, long winningCount) {
-    this.matchCountPerGame = lottoRanking.matchCount();
-    this.winningAmount = lottoRanking.winningAmount();
+    this.matchCountPerGame = lottoRanking.getMatchCount();
+    this.winningAmount = lottoRanking.getWinningAmount();
     this.winningCount = winningCount;
   }
 

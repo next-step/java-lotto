@@ -30,7 +30,7 @@ class TotalOrderedLottoGameNumbersTest {
   @Test
   void orderedCountTest() {
     //when & then
-    assertThat(new TotalOrderedLottoGameNumbers(givenGames).orderedCount()).isEqualTo(2);
+    assertThat(new TotalOrderedLottoGameNumbers(givenGames).getOrderedCount()).isEqualTo(2);
   }
 
   @DisplayName("toString 값 테스트")

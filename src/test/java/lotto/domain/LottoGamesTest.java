@@ -41,7 +41,7 @@ class LottoGamesTest {
   @Test
   void peekGameInfosTest() {
     List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    assertThat(new LottoGames(given).peekGameInfos()).isEqualTo(new TotalOrderedLottoGameNumbers(given));
+    assertThat(new LottoGames(given).peekTotalLottoGameNumbers()).isEqualTo(new TotalOrderedLottoGameNumbers(given));
   }
 
   private static Stream<Arguments> provideMatchRankingsSource() {

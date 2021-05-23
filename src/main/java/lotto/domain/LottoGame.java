@@ -16,8 +16,8 @@ public class LottoGame {
     return LottoRanking.confirm(matchCount);
   }
 
-  public List<Integer> gameNumber() {
-    return gameNumbers.numbers();
+  public List<Integer> getGameNumbers() {
+    return gameNumbers.getNumbers();
   }
 
   @Override

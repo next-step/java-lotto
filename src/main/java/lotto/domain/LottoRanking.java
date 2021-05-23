@@ -25,10 +25,10 @@ public enum LottoRanking {
                 .orElse(NONE);
   }
 
-  public int matchCount() {
+  public int getMatchCount() {
     return matchCount;
   }
-  public long winningAmount() {
+  public long getWinningAmount() {
     return winningAmount;
   }
 }

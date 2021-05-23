@@ -17,7 +17,7 @@ public class LottoMachine {
   }
 
   public TotalOrderedLottoGameNumbers peekOrderedGames() {
-    return orderedGames.peekGameInfos();
+    return orderedGames.peekTotalLottoGameNumbers();
   }
 
   public AnalysisSheet confirmPrizeOrderedLottos(List<Integer> inputWinningNumbers) {

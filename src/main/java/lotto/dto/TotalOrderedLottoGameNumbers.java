@@ -13,11 +13,11 @@ public class TotalOrderedLottoGameNumbers {
   private final List<OrderedLottoGameNumbers> infos;
   public TotalOrderedLottoGameNumbers(List<LottoGame> games) {
     this.infos = games.stream()
-                  .map(lottoGame -> new OrderedLottoGameNumbers(lottoGame.gameNumber()))
+                  .map(lottoGame -> new OrderedLottoGameNumbers(lottoGame.getGameNumbers()))
                   .collect(Collectors.toList());
   }
 
-  public int orderedCount() {
+  public int getOrderedCount() {
     return infos.size();
   }
 

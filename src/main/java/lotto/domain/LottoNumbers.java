@@ -17,9 +17,9 @@ public class LottoNumbers {
     this.numbers = toSet(lottoNumbers);
   }
 
-  public List<Integer> numbers() {
+  public List<Integer> getNumbers() {
     return numbers.stream()
-            .map(LottoNumber::number)
+            .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
   }
 

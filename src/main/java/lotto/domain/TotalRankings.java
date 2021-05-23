@@ -26,7 +26,7 @@ public class TotalRankings {
     return winningCountsGroupByLottoRanking.entrySet()
         .stream()
         .filter(entry -> isPrized(entry.getKey()))
-        .sorted(Comparator.comparingInt(entry -> rankingMatchCount(entry.getKey())))
+        .sorted(Comparator.comparingInt(entry -> getRankingMatchCount(entry.getKey())))
         .map(entry -> new PrizeInfo(entry.getKey(), entry.getValue()))
         .collect(Collectors.toList());
   }
@@ -35,8 +35,8 @@ public class TotalRankings {
     return lottoRanking != LottoRanking.NONE;
   }
 
-  private int rankingMatchCount(LottoRanking lottoRanking) {
-    return lottoRanking.matchCount();
+  private int getRankingMatchCount(LottoRanking lottoRanking) {
+    return lottoRanking.getMatchCount();
   }
 
   @Override
