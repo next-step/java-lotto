@@ -13,6 +13,13 @@ public class LottoNumbers {
 		lottoNumbers = new ArrayList<>(LOTTO_SIZE);
 	}
 
+	protected LottoNumbers(List<Integer> numbers) {
+		this();
+		for (int number: numbers) {
+			this.add(new LottoNumber(number));
+		}
+	}
+
 	public void add(LottoNumber lottoNumber) {
 		if (!isLessThan()) {
 			return;
@@ -44,5 +51,15 @@ public class LottoNumbers {
 		}
 		lottoMessage.append("]");
 		return lottoMessage.toString();
+	}
+
+	public int sameCount(LottoNumbers lottoNumbers) {
+		int result = 0;
+		for (LottoNumber number : lottoNumbers.lottoNumbers) {
+			if (this.lottoNumbers.contains(number)) {
+				result ++;
+			}
+		}
+		return result;
 	}
 }

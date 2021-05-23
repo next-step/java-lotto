@@ -13,7 +13,7 @@ public class LottoNumber {
 
 	private void validate(int number) {
 		if (number < 1 || number > 46) {
-			throw new IllegalArgumentException("로또의 숫자의 범위는 1~46 입니다");
+			throw new IllegalArgumentException("로또의 숫자의 범위는 1~46 입니다 입력된 숫자: " + number);
 		}
 	}
 
