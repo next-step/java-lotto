@@ -37,8 +37,8 @@ public final class Buyer {
 	}
 
 	public void setMoney(Money money) {
-		if (isNull(money) || money.amount() < 1000) {
-			throw new IllegalArgumentException("1000원 이상의 값을 입력해주세요.");
+		if (isNull(money)) {
+			throw new IllegalArgumentException("유효하지 않은 값입니다.");
 		}
 		this.money = money;
 	}
