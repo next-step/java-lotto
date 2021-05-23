@@ -15,20 +15,18 @@ public class Lotto {
 	}
 
 	public Lotto(List<Integer> numbers) {
+		validationSize(numbers);
+
 		lottoNumbers = new LinkedHashSet<>();
 		for (Integer number : numbers) {
 			lottoNumbers.add(new LottoNumber(number));
 		}
-		validationNumbers(numbers);
+
+		validationDuplicate();
 	}
 
 	public Lotto(RandomNumbersGenerator randomNumbersGenerator) {
 		this(randomNumbersGenerator.generateNumbers());
-	}
-
-	private void validationNumbers(List<Integer> numbers) {
-		validationSize(numbers);
-		validationDuplicate();
 	}
 
 	private void validationDuplicate() {
