@@ -3,7 +3,7 @@ package step3.io;
 import java.util.List;
 import java.util.Map;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 
 public interface ResultView {
 
@@ -19,7 +19,7 @@ public interface ResultView {
 
     void showEmptyLine();
 
-    void showWinning(Map<WinnerPrice, Long> map);
+    void showWinning(Map<Rank, Long> map);
 
     void showBenefit(String benefit);
 

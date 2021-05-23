@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import step3.constant.OutputMessage;
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 import step3.io.ResultView;
 
 public class ConsoleResultView implements ResultView {
@@ -48,18 +48,18 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void showWinning(Map<WinnerPrice, Long> winningWithNumbers) {
+    public void showWinning(Map<Rank, Long> winningWithNumbers) {
         System.out.println(OutputMessage.STATISTICS.text());
         System.out.println(OutputMessage.SEPERATOR.text());
-        printWinningOne(WinnerPrice.FOURTH, winningWithNumbers);
-        printWinningOne(WinnerPrice.THIRD, winningWithNumbers);
-        printWinningOne(WinnerPrice.SECOND, winningWithNumbers);
-        printWinningOne(WinnerPrice.FIRST, winningWithNumbers);
+        printWinningOne(Rank.FOURTH, winningWithNumbers);
+        printWinningOne(Rank.THIRD, winningWithNumbers);
+        printWinningOne(Rank.SECOND, winningWithNumbers);
+        printWinningOne(Rank.FIRST, winningWithNumbers);
 
     }
 
-    private void printWinningOne(WinnerPrice winnerPrice,
-            Map<WinnerPrice, Long> winningWithNumbers) {
+    private void printWinningOne(Rank winnerPrice,
+            Map<Rank, Long> winningWithNumbers) {
 
         System.out.printf(OutputMessage.COUNT.text(),
             winnerPrice.matchedCount(),

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 
 public final class LottoNumbers {
 
@@ -62,11 +62,11 @@ public final class LottoNumbers {
         return result;
     }
 
-    public WinnerPrice getWinnerPrice(LottoNumbers victoryNumber) {
+    public Rank getRankWithVictoryNumber(LottoNumbers victoryNumber) {
         int matchedCount = (int)lottoNumbers.stream()
             .filter(victoryNumber::contains).count();
 
-        return WinnerPrice.findWinnerPriceBymatchedCount(matchedCount);
+        return Rank.findRankPriceBymatchedCount(matchedCount);
     }
 
     private boolean contains(LottoNumber compare) {

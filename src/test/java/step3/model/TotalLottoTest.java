@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 
 public class TotalLottoTest {
 
@@ -50,13 +50,13 @@ public class TotalLottoTest {
         TotalLotto totalLotto = new TotalLotto();
         setLottos(totalLotto);
 
-        Map<WinnerPrice, Long> winning = totalLotto.groupByWinnerPrice(
+        Map<Rank, Long> winning = totalLotto.groupByWinnerPrice(
             new LottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
 
-        assertThat(winning.get(WinnerPrice.FIRST)).isEqualTo(1);
-        assertThat(winning.get(WinnerPrice.SECOND)).isEqualTo(1);
-        assertThat(winning.get(WinnerPrice.THIRD)).isEqualTo(2);
-        assertThat(winning.get(WinnerPrice.FOURTH)).isEqualTo(1);
+        assertThat(winning.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(winning.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(winning.get(Rank.THIRD)).isEqualTo(2);
+        assertThat(winning.get(Rank.FOURTH)).isEqualTo(1);
     }
 
     private void setLottos(TotalLotto totalLotto) {

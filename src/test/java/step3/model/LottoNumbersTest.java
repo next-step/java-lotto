@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 
 public class LottoNumbersTest {
 
@@ -48,31 +48,31 @@ public class LottoNumbersTest {
 
     private void checkSix(LottoNumbers numbers) {
         assertThat(numbers
-            .getWinnerPrice(new LottoNumbers(
+            .getRankWithVictoryNumber(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))))
-                    .isEqualTo(WinnerPrice.FIRST);
+                    .isEqualTo(Rank.FIRST);
     }
 
     private void checkFive(LottoNumbers numbers) {
         assertThat(numbers
-            .getWinnerPrice(new LottoNumbers(
+            .getRankWithVictoryNumber(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6, 7)))))
-                    .isEqualTo(WinnerPrice.SECOND);
+                    .isEqualTo(Rank.SECOND);
     }
 
     private void checkFour(LottoNumbers numbers) {
         assertThat(numbers
-            .getWinnerPrice(new LottoNumbers(
+            .getRankWithVictoryNumber(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)))))
-                    .isEqualTo(WinnerPrice.THIRD);
+                    .isEqualTo(Rank.THIRD);
 
     }
 
     private void checkThree(LottoNumbers numbers) {
         assertThat(numbers
-            .getWinnerPrice(new LottoNumbers(
+            .getRankWithVictoryNumber(new LottoNumbers(
                 new ArrayList<>(Arrays.asList(4, 5, 6, 7, 8, 9)))))
-                    .isEqualTo(WinnerPrice.FOURTH);
+                    .isEqualTo(Rank.FOURTH);
     }
 
     private void setLottoNumbersOverSix(LottoNumbers lottoNumbers) {

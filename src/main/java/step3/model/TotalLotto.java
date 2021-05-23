@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 
 public class TotalLotto {
 
@@ -37,7 +37,7 @@ public class TotalLotto {
 
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
 
-        Map<WinnerPrice, Long> lottoResult = groupByWinnerPrice(victoryNumber);
+        Map<Rank, Long> lottoResult = groupByWinnerPrice(victoryNumber);
         BigDecimal result = sumResult(lottoResult);
 
         return result
@@ -45,17 +45,18 @@ public class TotalLotto {
             .toString();
     }
 
-    public Map<WinnerPrice, Long> groupByWinnerPrice(
+    public Map<Rank, Long> groupByWinnerPrice(
             LottoNumbers victoryNumber) {
 
         return totalLotto.stream()
-            .map(lottoNumbers -> lottoNumbers.getWinnerPrice(victoryNumber))
+            .map(lottoNumbers -> lottoNumbers
+                .getRankWithVictoryNumber(victoryNumber))
             .collect(Collectors.groupingBy(Function.identity(),
                 Collectors.counting()));
     }
 
-    private BigDecimal sumResult(Map<WinnerPrice, Long> lottoResult) {
-        Set<WinnerPrice> lottoRanks = lottoResult.keySet();
+    private BigDecimal sumResult(Map<Rank, Long> lottoResult) {
+        Set<Rank> lottoRanks = lottoResult.keySet();
 
         return lottoRanks.stream()
             .map(

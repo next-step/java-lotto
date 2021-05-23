@@ -3,7 +3,7 @@ package step3.game;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import step3.constant.WinnerPrice;
+import step3.constant.Rank;
 import step3.io.InputView;
 import step3.io.ResultView;
 import step3.model.LottoNumber;
@@ -104,7 +104,7 @@ public class Lotto {
         resultView.showBenefit(benefit);
     }
 
-    private void showWinning(Map<WinnerPrice, Long> map) {
+    private void showWinning(Map<Rank, Long> map) {
         resultView.showWinning(map);
     }
 
