@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTicket.MINIMUM_PRICE;
+
 public class PurchaseInformation {
     public static final String NOT_VALID_COUNT_ERROR_MESSAGE = "수동 로또 개수가 전체 로또 개수보다 클 수 없습니다.";
     private final int price;
@@ -18,7 +20,7 @@ public class PurchaseInformation {
     }
 
     public int totalCount() {
-        return price / 1000;
+        return price / MINIMUM_PRICE;
     }
 
     public int autoCount() {
