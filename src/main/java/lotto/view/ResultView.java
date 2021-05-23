@@ -50,17 +50,17 @@ public class ResultView {
         printRevenueRate(lottoStatistics.getRevenueRate());
     }
 
-    private static void printWinningResults(Map<Rank, Integer> winningResults) {
+    private static void printWinningResults(final Map<Rank, Integer> winningResults) {
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.MISS))
                 .forEach(rank -> System.out.println(String.format(rank.getMessage(), winningResults.get(rank))));
     }
 
-    private static void printRevenueRate(BigDecimal revenueRate) {
+    private static void printRevenueRate(final BigDecimal revenueRate) {
         System.out.println(String.format(REVENUE_RATE_MESSAGE, revenueRate, getMeaningMessage(revenueRate)));
     }
 
-    private static String getMeaningMessage(BigDecimal revenueRate) {
+    private static String getMeaningMessage(final BigDecimal revenueRate) {
         return revenueRate.intValue() < MEANING_STANDARD_VALUE ? DAMAGE_MESSAGE : GAIN_MESSAGE;
     }
 }
