@@ -1,7 +1,6 @@
 package step3.game;
 
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import step3.constant.Rank;
 import step3.io.ConsoleInputView;
@@ -11,10 +10,10 @@ import step3.model.LottoNumbers;
 import step3.model.Price;
 import step3.model.RandomNumbersGenerator;
 import step3.model.TotalLotto;
+import step3.util.StringUtils;
 
 public class Lotto {
 
-    private static final String ONLY_NUMBER = "숫자를 입력하세요";
     private static final int VICTORY_SIZE = 6;
     private static final String VICTORY_SIZE_CHECK = "6개의 숫자를 입력하세요";
 
@@ -39,17 +38,15 @@ public class Lotto {
 
     public void start() {
         buy();
-        resultView.showEmptyLine();
         statistics();
-
     }
 
     private void buy() {
         try {
-            resultView.showInputPrice();
-            price = new Price(getPrice());
+            price = new Price(inputView.getPrice());
             totalLotto = pickLottoWithPrice(price);
             showLotto();
+            resultView.showEmptyLine();
         } catch (Exception e) {
             resultView.showText(e.getMessage());
             buy();
@@ -64,19 +61,6 @@ public class Lotto {
 
     private void showTotalLotto() {
         resultView.showTotalLotto(totalLotto.lotto());
-    }
-
-    private int getPrice() {
-        String price = inputView.getPrice();
-        validation(price);
-        return Integer.parseInt(price);
-
-    }
-
-    private void validation(String number) {
-        if (!Pattern.matches("^[0-9]+$", number)) {
-            throw new IllegalArgumentException(ONLY_NUMBER);
-        }
     }
 
     private void showCount() {
@@ -110,8 +94,7 @@ public class Lotto {
         String[] numbers = victoryNumbers.split(",");
         for (String number : numbers) {
             number = number.trim();
-            validation(number);
-            result.addNumber(new LottoNumber(Integer.parseInt(number)));
+            result.addNumber(new LottoNumber(StringUtils.parseInt(number)));
         }
         validationVictoryInput(result);
 
