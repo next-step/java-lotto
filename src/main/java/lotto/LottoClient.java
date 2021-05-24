@@ -7,13 +7,14 @@ import lotto.input.InputView;
 import lotto.output.ResultView;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public final class LottoClient {
 
   public static void main(String[] args) {
 
     LottoGame lottoGame = new LottoGame(
-        new InputView(),
+        new InputView(new Scanner(System.in)),
         new LottoSeller(new RandomNumberGenerator(new Random())),
         new ResultView()
     );

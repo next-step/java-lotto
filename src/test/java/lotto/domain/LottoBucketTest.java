@@ -1,11 +1,18 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import lotto.input.WinningNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
 import static java.util.Arrays.asList;
+import static lotto.enums.Rank.FIFTH;
+import static lotto.enums.Rank.FIRST;
+import static lotto.enums.Rank.FOURTH;
+import static lotto.enums.Rank.MISS;
+import static lotto.enums.Rank.SECOND;
+import static lotto.enums.Rank.THIRD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoBucketTest {
@@ -13,7 +20,7 @@ class LottoBucketTest {
   @Test
   void matchNumberCount() {
     // Given
-    WinningNumber winningNumber = new WinningNumber(new int[]{1, 2, 3, 4, 5, 6});
+    WinningNumber winningNumber = new WinningNumber(new int[]{1, 2, 3, 4, 5, 6}, 7);
 
     LottoBucket lottoBucket = new LottoBucket(asList(
         new Lotto(numberCount -> asList(8, 21, 23, 41, 42, 43)),
@@ -32,11 +39,13 @@ class LottoBucketTest {
         new Lotto(numberCount -> asList(3, 8, 27, 30, 35, 44))
     ));
 
-    MatchNumberCount expectedMatchNumberCount = new MatchNumberCount(new HashMap<Integer, Integer>() {{
-      put(3, 1);
-      put(4, 0);
-      put(5, 0);
-      put(6, 0);
+    MatchNumberCount expectedMatchNumberCount = new MatchNumberCount(new HashMap<Rank, Long>() {{
+      put(FIRST, 0L);
+      put(SECOND, 0L);
+      put(THIRD, 0L);
+      put(FOURTH, 0L);
+      put(FIFTH, 1L);
+      put(MISS, 13L);
     }});
 
     // When

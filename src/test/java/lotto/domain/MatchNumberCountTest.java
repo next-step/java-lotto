@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+import static lotto.enums.Rank.FIFTH;
+import static lotto.enums.Rank.FIRST;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatchNumberCountTest {
@@ -11,17 +14,23 @@ class MatchNumberCountTest {
   @Test
   void revenue() {
     // Given
-    MatchNumberCount matchNumberCount = new MatchNumberCount(new HashMap<Integer, Integer>() {{
-      put(3, 1);
-      put(4, 0);
-      put(5, 0);
-      put(6, 0);
+    MatchNumberCount matchNumberCount = new MatchNumberCount(new HashMap<Rank, Long>() {{
+      put(FIFTH, 1L);
     }});
 
     // When
-    Integer actualRevenue = matchNumberCount.getRevenue();
+    Long actualRevenue = matchNumberCount.getRevenue();
 
     // Then
     assertEquals(5000, actualRevenue);
+  }
+
+  @Test
+  void name() {
+    HashMap<Rank, Long> hashMap = new HashMap<Rank, Long>() {{
+      put(FIFTH, 1L);
+    }};
+
+    Long aLong = hashMap.get(FIRST);
   }
 }
