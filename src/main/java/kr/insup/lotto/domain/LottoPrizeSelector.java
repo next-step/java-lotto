@@ -12,15 +12,20 @@ public class LottoPrizeSelector {
 
     public LottoPrize selectLottoPrize() {
         int match = 0;
+        boolean isBonusBallMatch = false;
 
         for (Integer number : winningNumber.numbers()) {
-            match = isWinningNumberContainNumber(number, match);
+            match = isUserNumberContainNumber(number, match);
         }
 
-        return LottoPrize.matchLottoPrize(match);
+        if (match == 5) {
+            isBonusBallMatch = userNumber.hasNumber(winningNumber.bonusNumber());
+        }
+
+        return LottoPrize.matchLottoPrize(match, isBonusBallMatch);
     }
 
-    private int isWinningNumberContainNumber(Integer number, int match) {
+    private int isUserNumberContainNumber(Integer number, int match) {
         if (userNumber.hasNumber(number)) {
             match++;
         }

@@ -5,29 +5,39 @@ import java.util.Map;
 
 public enum LottoPrize {
     First(6, 2000),
-    Second(5, 150),
-    Third(4, 50),
-    Fourth(3, 5),
+    Second(5, 300),
+    Third(5, 150),
+    Fourth(4, 50),
+    Fifth(3, 5),
     None(0, 0);
 
     private final int match;
     private final int winnings;
-    private static Map<Integer, LottoPrize> placeMap = new HashMap<>();
-
-    static {
-        for (LottoPrize lottoPrize : values()) {
-            placeMap.put(lottoPrize.match, lottoPrize);
-        }
-    }
 
     LottoPrize(int match, int winnings) {
         this.match = match;
         this.winnings = winnings;
     }
 
-    public static LottoPrize matchLottoPrize(int match) {
-        if (placeMap.containsKey(match)) {
-            return placeMap.get(match);
+    public static LottoPrize matchLottoPrize(int match, boolean isBonusBallMatch) {
+        if (match == First.match()) {
+            return First;
+        }
+
+        if (match == Second.match() && isBonusBallMatch) {
+            return Second;
+        }
+
+        if (match == Third.match()) {
+            return Third;
+        }
+
+        if (match == Fourth.match()) {
+            return Fourth;
+        }
+
+        if (match == Fifth.match()) {
+            return Fifth;
         }
 
         return None;

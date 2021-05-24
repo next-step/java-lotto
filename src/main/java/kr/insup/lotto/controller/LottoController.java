@@ -56,7 +56,8 @@ public class LottoController {
 
         try {
             List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(winningNumberInput);
-            winningNumber = new Lotto(winningNumberList);
+            Integer bonusNumber = LottoView.showBonusNumber();
+            winningNumber = new Lotto(winningNumberList, bonusNumber);
         } catch (NumberFormatException nfe) {
             LottoView.printWrongWinningNumberFormat();
         } catch (IllegalArgumentException e) {

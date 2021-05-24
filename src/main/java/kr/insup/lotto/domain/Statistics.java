@@ -8,18 +8,20 @@ public class Statistics {
     private int secondPlace = 0;
     private int thirdPlace = 0;
     private int fourthPlace = 0;
+    private int fifthPlace = 0;
     private final int attempt;
 
     public Statistics(int attempt) {
         this.attempt = attempt;
     }
 
-    public Statistics(int firstPlace, int secondPlace, int thirdPlace, int fourthPlace, int attempt) {
+    public Statistics(int firstPlace, int secondPlace, int thirdPlace, int fourthPlace, int fifthPlace, int attempt) {
         this(attempt);
         this.firstPlace = firstPlace;
         this.secondPlace = secondPlace;
         this.thirdPlace = thirdPlace;
         this.fourthPlace = fourthPlace;
+        this.fifthPlace = fifthPlace;
     }
 
     public void addCountToPlace(LottoPrize lottoPrize) {
@@ -37,6 +39,10 @@ public class Statistics {
 
         if (lottoPrize == LottoPrize.Fourth) {
             fourthPlace++;
+        }
+
+        if (lottoPrize == LottoPrize.Fifth) {
+            fifthPlace++;
         }
     }
 
@@ -56,6 +62,10 @@ public class Statistics {
         return fourthPlace;
     }
 
+    public int fifthPlace() {
+        return fifthPlace;
+    }
+
     public double calculateBenefitRate() {
         return (double) totalWinningPrice() / (double) (attempt * LottoConfig.LOTTO_PRICE);
     }
@@ -63,7 +73,8 @@ public class Statistics {
     private int totalWinningPrice() {
         return firstPlace * LottoPrize.First.winnings()
                 + secondPlace * LottoPrize.Second.winnings()
-                + thirdPlace * LottoPrize.Third.winnings() +
-                +fourthPlace * LottoPrize.Fourth.winnings();
+                + thirdPlace * LottoPrize.Third.winnings()
+                + fourthPlace * LottoPrize.Fourth.winnings()
+                + fifthPlace * LottoPrize.Fifth.winnings();
     }
 }
