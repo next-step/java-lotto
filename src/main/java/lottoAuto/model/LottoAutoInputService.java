@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,18 @@ import java.util.List;
 public class LottoAutoInputService {
 
     private LottoRandom lottoRandom = new LottoRandom();
-
     private List<Integer> winningNumber = new ArrayList<>();
-    private static final int lotto_price = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
-    public int inputPrice(int price) {
-        int amount = price / lotto_price;
+    public int getAmount(int price) {
+        int amount = price / LOTTO_PRICE;
 
         return amount;
     }
 
-    public List<Lotto> inputUserLottoNumber(int amount) {
-        List<Lotto> userLotto = lottoRandom.setLotto(amount);
-        return userLotto;
+    public Lottos inputUserLottoNumber(int amount) {
+        Lottos userLottos = lottoRandom.setLotto(amount);
+        return userLottos;
     }
 
     public Lotto inputWinningNumber(String winningNumber_string) {
