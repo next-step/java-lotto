@@ -9,18 +9,17 @@ public class RankingTable {
 
 	static {
 		rankingTable = new HashMap<>();
-		rankingTable.put(3, 5000);
-		rankingTable.put(4, 500000);
-		rankingTable.put(5, 1500000);
-		rankingTable.put(6, 2000000000);
+
+		for (Ranking ranking : Ranking.values()) {
+			rankingTable.put(ranking.getMatchedCount(), ranking.getwinnerPrice());
+		}
 	}
 
-	public static int getWinAmount(int matchedCount) {
+	public static int getWinnerPrice(int matchedCount) {
 		if (rankingTable.containsKey(matchedCount)) {
 			return rankingTable.get(matchedCount);
 		}
 
 		return NOTHING;
 	}
-
 }

@@ -23,7 +23,7 @@ public class ResultView {
 
 		Map<Integer, Integer> winnerCountByMatchedNumber = winnerStatics.presentAllCount();
 		for (int matchedCount : winnerCountByMatchedNumber.keySet()) {
-			System.out.println(matchedCount + "개 일치 (" + RankingTable.getWinAmount(matchedCount) + "원)- "
+			System.out.println(matchedCount + "개 일치 (" + RankingTable.getWinnerPrice(matchedCount) + "원)- "
 				+ winnerCountByMatchedNumber.get(matchedCount) + "개");
 		}
 	}

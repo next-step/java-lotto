@@ -38,7 +38,7 @@ public class WinnerStatics {
 		double profit = 0.00;
 
 		for (Integer matchedNumber : winnerCountByMatchedNumber.keySet()) {
-			profit += winnerCountByMatchedNumber.get(matchedNumber) * RankingTable.getWinAmount(matchedNumber);
+			profit += winnerCountByMatchedNumber.get(matchedNumber) * RankingTable.getWinnerPrice(matchedNumber);
 		}
 
 		return profit / getTotalAmount();
