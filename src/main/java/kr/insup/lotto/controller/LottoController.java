@@ -4,6 +4,7 @@ import kr.insup.lotto.config.LottoConfig;
 import kr.insup.lotto.domain.Lotto;
 import kr.insup.lotto.domain.Lottos;
 import kr.insup.lotto.domain.Statistics;
+import kr.insup.lotto.domain.WinningLotto;
 import kr.insup.lotto.utils.WinningNumberParser;
 import kr.insup.lotto.view.LottoView;
 
@@ -28,7 +29,7 @@ public class LottoController {
         Lottos lottos = new Lottos(attempt);
         LottoView.showLottoList(lottos);
 
-        Lotto winningNumber;
+        WinningLotto winningNumber;
 
         do {
             winningNumber = winningNumber();
@@ -50,17 +51,18 @@ public class LottoController {
         return price;
     }
 
-    private static Lotto winningNumber() {
-        Lotto winningNumber = null;
+    private static WinningLotto winningNumber() {
+        WinningLotto winningNumber = null;
         String winningNumberInput = LottoView.showWinningNumber();
 
         try {
             List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(winningNumberInput);
-            winningNumber = new Lotto(winningNumberList);
+            Integer bonusNumber = LottoView.showBonusNumber();
+            winningNumber = new WinningLotto(winningNumberList, bonusNumber);
         } catch (NumberFormatException nfe) {
             LottoView.printWrongWinningNumberFormat();
         } catch (IllegalArgumentException e) {
-            LottoView.printIllegalArgument();
+            LottoView.printIllegalArgument(e.getMessage());
         }
 
         return winningNumber;

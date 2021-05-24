@@ -22,7 +22,7 @@ public class Lotto {
 
     public void validateLotto() {
         if (isNumberWrongSize()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호의 개수가 잘못 되었습니다!");
         }
 
         for (Integer number : numbers) {
@@ -36,12 +36,13 @@ public class Lotto {
 
     private void validateNumber(Integer number) {
         if (LottoConfig.MIN_NUMBER > number || LottoConfig.MAX_NUMBER < number) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호의 숫자 범위가 잘못 되었습니다!");
         }
     }
 
-    public LottoPrize matchWinningNumber(Lotto winningNumber) {
+    public LottoPrize matchWinningNumber(WinningLotto winningNumber) {
         LottoPrizeSelector lottoPrizeSelector = new LottoPrizeSelector(winningNumber, this);
+
         return lottoPrizeSelector.selectLottoPrize();
     }
 
