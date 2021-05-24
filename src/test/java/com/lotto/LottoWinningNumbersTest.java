@@ -4,7 +4,7 @@ import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoNumber;
 import com.lotto.domain.LottoReward;
 import com.lotto.domain.LottoWinningNumbers;
-import com.lotto.exception.IllegalInputException;
+import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.IllegalLottoCountException;
 import com.lotto.exception.LottoNumberOutOfBoundsException;
 import org.assertj.core.api.Assertions;
@@ -49,7 +49,7 @@ public class LottoWinningNumbersTest {
     @ValueSource(strings = {"asd", ""})
     void createLottoWinningNumbers_잘못된입력데이터_예외(String input) {
         assertThatThrownBy(() -> LottoWinningNumbers.createLottoWinningNumbers(input))
-                .isInstanceOf(IllegalInputException.class);
+                .isInstanceOf(LottoNumberFormatException.class);
     }
 
     @ParameterizedTest

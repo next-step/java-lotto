@@ -1,6 +1,6 @@
 package com.lotto.domain;
 
-import com.lotto.exception.IllegalInputException;
+import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.IllegalLottoCountException;
 
 import java.util.HashSet;
@@ -16,12 +16,12 @@ public class LottoWinningNumbers {
     }
 
     public static LottoWinningNumbers createLottoWinningNumbers(String winningNumbers)
-            throws IllegalInputException, IllegalLottoCountException {
+            throws LottoNumberFormatException, IllegalLottoCountException {
         Set<LottoNumber> set;
         try {
             set = addWinningNumber(winningNumbers);
         } catch (NumberFormatException exception) {
-            throw new IllegalInputException();
+            throw new LottoNumberFormatException();
         }
         if (isLottoCount(set)) {
             throw new IllegalLottoCountException();
