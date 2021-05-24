@@ -115,9 +115,16 @@ chore (maintain)
 
 # 🚀 4단계 - 로또(2등)
 ## 기능 목록
-- LottoRule에 2등 룰 추가
-- LottoStatement에 보너스 넘버가 맞는지 체크 로직 추가.
-- lottoNumbers를 wrapping하여 bonus number를 관리.
+>### WinningNumbersWithBonus (당첨번호 + 보너스번호)
+>  - 6개의 당첨번호와 보너스번호로 이루어진 객체
+>  - 당첨여부 및 보너스번호 당첨여부
+
+>### LottoRule (2등 룰 추가)
+>  - 보너스번호 당첨여부를 가지는 2등 룰을 체크.
+
+>### LottoStatement (보너스 번호 체크 로직 추가)
+>  - 보너스번호 당첨여부까지 체크하도록 로직 수정
+
 ---
 ## 기능 요구사항
 - 2등을 위해 추가 번호를 하나 더 추첨한다.
