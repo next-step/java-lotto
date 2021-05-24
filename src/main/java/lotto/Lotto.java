@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.exceptions.InvalidLottoNumberException;
+import lotto.exceptions.InvalidLottoNumberLengthException;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
