@@ -4,6 +4,7 @@ import lotto.LottoNumbers;
 import lotto.generator.Generator;
 import lotto.generator.MessageLottoNumberGenerator;
 import lotto.statistics.StatisticsCalculator;
+import lotto.store.Budget;
 import lotto.store.LottoStore;
 import lotto.store.Ticket;
 
@@ -19,7 +20,7 @@ public class LottoGameManager {
 	}
 
 	private static Ticket purchaseLotto() {
-		int budget = InputView.purchasePrice();
+		Budget budget = InputView.purchasePrice();
 		LottoStore store = new LottoStore(budget, LOTTO_PRICE_PER);
 		OutputView.purchaseCountResult(store.purchaseCount());
 		return store.produceLotto();

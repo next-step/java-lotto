@@ -9,16 +9,16 @@ import lotto.generator.AutoLottoNumberGenerator;
 
 public class LottoStore {
 
-	public LottoStore(int budget, int price) {
+	public LottoStore(Budget budget, int price) {
 		this.budget = budget;
 		this.price = price;
 	}
 
-	private final int budget;
+	private final Budget budget;
 	private final int price;
 
 	public int purchaseCount() {
-		return budget / price;
+		return budget.get() / price;
 	}
 
 	@Override

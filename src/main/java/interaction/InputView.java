@@ -2,6 +2,8 @@ package interaction;
 
 import java.util.Scanner;
 
+import lotto.store.Budget;
+
 public class InputView {
 
 	private static final String PURCHASE_START_MESSAGE = "구입금액을 입력해 주세요.";
@@ -11,9 +13,9 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static int purchasePrice() {
+	public static Budget purchasePrice() {
 		System.out.println(PURCHASE_START_MESSAGE);
-		return scanner.nextInt();
+		return new Budget(scanner.nextInt());
 	}
 
 	public static String winningLottoNumberMessage() {

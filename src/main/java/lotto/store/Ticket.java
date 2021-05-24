@@ -6,13 +6,13 @@ import lotto.LottoNumbers;
 
 public class Ticket {
 
-	public Ticket(List<LottoNumbers> lottoList, int budget) {
+	public Ticket(List<LottoNumbers> lottoList, Budget budget) {
 		this.lottoList = lottoList;
 		this.budget = budget;
 	}
 
 	private final List<LottoNumbers> lottoList;
-	private final int budget;
+	private final Budget budget;
 
 	public int purchaseCount() {
 		return lottoList.size();
@@ -23,7 +23,7 @@ public class Ticket {
 	}
 
 	public int budget() {
-		return budget;
+		return budget.get();
 	}
 
 	@Override
