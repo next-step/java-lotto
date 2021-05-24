@@ -4,6 +4,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class GameOutput implements Output {
+    public static final String NEW_LINE = "\n";
     private PrintStream out;
 
     public GameOutput(OutputStream out) {
@@ -17,6 +18,6 @@ public class GameOutput implements Output {
 
     @Override
     public void error(String text) {
-        out.print(String.format("[부적합한 입력값] %s\n", text));
+        out.print(String.format("[부적합한 입력값] %s%s", text, NEW_LINE));
     }
 }

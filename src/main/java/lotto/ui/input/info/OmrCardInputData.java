@@ -5,6 +5,7 @@ import lotto.core.omr.OmrCard;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
 import lotto.ui.input.exception.InputException;
+import lotto.ui.output.GameOutput;
 
 public class OmrCardInputData implements InputData<OmrCard> {
     private GameInput input;
@@ -37,7 +38,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
             input.response(sixBall.toString());
         }
 
-        input.response("\n");
+        input.response(GameOutput.NEW_LINE);
     }
 
     private int requestMoney() throws InputException {
