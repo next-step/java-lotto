@@ -12,12 +12,12 @@ public enum Rank {
 
     private int matchWinning;
     private int prize;
-    private boolean matchBonus;
+    private boolean isBonus;
 
-    Rank(int matchWinning, int prize, boolean matchBonus) {
+    Rank(int matchWinning, int prize, boolean isBonus) {
         this.matchWinning = matchWinning;
         this.prize = prize;
-        this.matchBonus = matchBonus;
+        this.isBonus = isBonus;
     }
 
     public static Rank findByRank(int winningCount, Boolean hasBonus) {
@@ -25,7 +25,7 @@ public enum Rank {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchWinning == winningCount && !rank.matchBonus)
+                .filter(rank -> rank.matchWinning == winningCount && !rank.isBonus)
                 .findAny()
                 .orElse(NO_MATCH);
     }
