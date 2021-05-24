@@ -1,7 +1,6 @@
 package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
-import io.mwkwon.lotto.interfaces.InputView;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -28,16 +27,8 @@ public final class LottoPayment {
         this.value = payment;
     }
 
-    public static LottoPayment create(InputView inputView) {
-        LottoPayment lottoPayment = null;
-        try {
-            String value = inputView.requestInputPayment(LottoConstants.REQUEST_PAYMENT_MESSAGE);
-            lottoPayment = new LottoPayment(value);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage() + LottoConstants.RETRY_MESSAGE);
-            create(inputView);
-        }
-        return lottoPayment;
+    public static LottoPayment create(String value) {
+        return new LottoPayment(value);
     }
 
     private void checkNullAndEmpty(String value) {

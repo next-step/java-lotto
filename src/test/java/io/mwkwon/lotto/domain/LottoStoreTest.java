@@ -1,6 +1,7 @@
 package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.enums.Rank;
+import io.mwkwon.lotto.view.LottoInputView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -36,5 +37,31 @@ public class LottoStoreTest {
 
         WinningRanks ranks = lottoStore.calcLottosRank(buyLottos, winningLotto);
         assertThat(ranks).isEqualTo(excepted);
+    }
+
+    @Test
+    void 당첨_로또_객체_정상_생성_테스트() {
+        LottoInputView lottoInputView = new LottoInputView() {
+            @Override
+            public Lotto requestWinningLottoNumbers() {
+                return new Lotto("1,2,3,4,5,6");
+            }
+        };
+        LottoStore lottoStore = new LottoStore();
+        Lotto winningLotto = lottoStore.createWinningLotto(lottoInputView);
+        assertThat(winningLotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+    }
+
+    @Test
+    void 로또_구매_금액_객체_정상_생성_테스트() {
+        LottoInputView lottoInputView = new LottoInputView() {
+            @Override
+            public LottoPayment requestInputPayment() {
+                return new LottoPayment("14000");
+            }
+        };
+        LottoStore lottoStore = new LottoStore();
+        LottoPayment lottoPayment = lottoStore.createLottoPayment(lottoInputView);
+        assertThat(lottoPayment).isEqualTo(new LottoPayment("14000"));
     }
 }

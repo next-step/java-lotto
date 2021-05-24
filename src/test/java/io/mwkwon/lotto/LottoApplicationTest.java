@@ -1,7 +1,7 @@
 package io.mwkwon.lotto;
 
 import io.mwkwon.lotto.domain.*;
-import io.mwkwon.lotto.interfaces.InputView;
+import io.mwkwon.lotto.interfaces.DataGenerator;
 import io.mwkwon.lotto.interfaces.LottoGenerator;
 import io.mwkwon.lotto.view.ResultView;
 import org.junit.jupiter.api.Test;
@@ -14,17 +14,17 @@ public class LottoApplicationTest {
     @Test
     void 로또_통합_테스트() {
 
-        InputView inputView = new InputView() {
+        DataGenerator dataGenerator = new DataGenerator() {
             @Override
-            public String requestInputPayment(String message) {
+            public LottoPayment requestInputPayment() {
                 System.out.println("구입금액을 입력해 주세요.");
-                return "14000";
+                return new LottoPayment("14000");
             }
 
             @Override
-            public String requestWinningLottoNumbers(String message) {
+            public Lotto requestWinningLottoNumbers() {
                 System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-                return "1, 2, 3, 4, 5, 6";
+                return new Lotto("1, 2, 3, 4, 5, 6");
             }
         };
 
@@ -47,7 +47,7 @@ public class LottoApplicationTest {
             );
             return new BuyLottos(lottos);
         };
-        LottoApplication lottoApplication = new LottoApplication(inputView, new ResultView(), lottoGenerator);
+        LottoApplication lottoApplication = new LottoApplication(dataGenerator, new ResultView(), lottoGenerator);
         lottoApplication.run();
     }
 }

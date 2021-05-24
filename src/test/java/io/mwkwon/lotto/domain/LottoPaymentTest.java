@@ -39,4 +39,10 @@ public class LottoPaymentTest {
     void 숫자가_아닌_값_입력_시_에러_발생_테스트(String value) {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoPayment(value));
     }
+
+    @Test
+    void 로또_구매_금액_생성_static_method_테스트() {
+        LottoPayment lottoPayment = LottoPayment.create("14000");
+        assertThat(lottoPayment).isEqualTo(new LottoPayment("14000"));
+    }
 }

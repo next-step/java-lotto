@@ -1,8 +1,7 @@
 package io.mwkwon.lotto.domain;
 
-import io.mwkwon.lotto.constant.LottoConstants;
 import io.mwkwon.lotto.enums.Rank;
-import io.mwkwon.lotto.interfaces.InputView;
+import io.mwkwon.lotto.interfaces.DataGenerator;
 import io.mwkwon.lotto.interfaces.LottoGenerator;
 
 import java.util.ArrayList;
@@ -15,9 +14,12 @@ public final class LottoStore {
         return lottoGenerator.createAutoLottos(lottoPayment);
     }
 
-    public Lotto createWinningLotto(InputView inputView) {
-        String value = inputView.requestWinningLottoNumbers(LottoConstants.REQUEST_WINNING_LOTTO_MESSAGE);
-        return new Lotto(value);
+    public Lotto createWinningLotto(DataGenerator dataGenerator) {
+        return dataGenerator.requestWinningLottoNumbers();
+    }
+
+    public LottoPayment createLottoPayment(DataGenerator dataGenerator) {
+        return dataGenerator.requestInputPayment();
     }
 
     public WinningRanks calcLottosRank(BuyLottos buyLottos, Lotto winningLotto) {
@@ -44,5 +46,4 @@ public final class LottoStore {
         }
         return matchCount;
     }
-
 }

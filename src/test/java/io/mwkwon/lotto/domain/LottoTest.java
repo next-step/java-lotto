@@ -72,4 +72,10 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(strLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage("숫자 ','만 입력 가능합니다.");
     }
+
+    @Test
+    void 로또_생성_static_method_테스트() {
+        Lotto lotto = Lotto.create("1,2,3,4,5,6");
+        assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+    }
 }

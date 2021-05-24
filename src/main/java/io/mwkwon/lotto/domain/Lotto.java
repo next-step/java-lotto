@@ -28,6 +28,10 @@ public class Lotto {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
+    public static Lotto create(final String strLottoNumbers) {
+        return new Lotto(strLottoNumbers);
+    }
+
     public Set<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
