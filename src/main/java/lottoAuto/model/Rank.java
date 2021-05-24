@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 import java.util.Arrays;
 
@@ -20,12 +20,12 @@ public enum Rank {
         this.matchBonus = matchBonus;
     }
 
-    public static Rank findByRank(int winning_count, Boolean bonus_count) {
-        if (winning_count == 5 && bonus_count) {
+    public static Rank findByRank(int winningCount, Boolean hasBonus) {
+        if (winningCount == 5 && hasBonus) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchWinning == winning_count && !rank.matchBonus)
+                .filter(rank -> rank.matchWinning == winningCount && !rank.matchBonus)
                 .findAny()
                 .orElse(NO_MATCH);
     }
