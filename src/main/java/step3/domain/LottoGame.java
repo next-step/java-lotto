@@ -5,26 +5,28 @@ import step3.ui.ResultView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
-
-import static step3.domain.LottoConstants.*;
 
 public class LottoGame {
 
-    List<Lotto> lottos;
+    private static final String DEFAULT_REGEX = ", ";
 
-    private int threeCount;
-    private int fourCount;
-    private int fiveCount;
-    private int sixCount;
+    public static final int THREE_MATCH = 5_000;
+    public static final int FOUR_MATCH = 50_000;
+    public static final int FIVE_MATCH = 1_500_000;
+    public static final int SIX_MATCH = 2_000_000_000;
+
+    List<Lotto> lottos;
+    LottoCount lottoCount;
 
 
     public LottoGame(Money money) {
         lottos = new ArrayList<>();
+        lottoCount = new LottoCount();
 
         while (money.hasEnoughMoney()) {
             Lotto lotto = createLotto();
-            lotto.shuffle();
             lottos.add(lotto);
             money.buyOneLotto();
         }
@@ -34,29 +36,13 @@ public class LottoGame {
 
 
     public void getStatistics(Lotto winLotto) {
-        for (int i = 0; i < lottos.size(); ++i) {
-            int count = SameLottoChecker.countSameLottoNum(lottos.get(i), winLotto);
-            sameCount(count);
+        for (Lotto lotto : lottos) {
+            int count = SameLottoChecker.countSameLottoNum(lotto, winLotto);
+            lottoCount.sameCount(count);
         }
-        ResultView.showStatistics(threeCount, fourCount, fiveCount, sixCount);
-        ResultView.showRate(earningRate());
-    }
 
-    private double earningRate() {
-        long sum = 0;
-        sum += threeCount * THREE_MATCH;
-        sum += fourCount * FOUR_MATCH;
-        sum += fiveCount * FIVE_MATCH;
-        sum += sixCount * SIX_MATCH;
-
-        return sum / (double) (lottos.size() * 1000);
-    }
-
-    private void sameCount(int count) {
-        if (count == THREE_COUNT) threeCount++;
-        else if (count == FOUR_COUNT) fourCount++;
-        else if (count == FIVE_COUNT) fiveCount++;
-        else if (count == SIX_COUNT) sixCount++;
+        ResultView.showStatistics(lottoCount);
+        ResultView.showRate(lottoCount.earningRate(lottos.size()));
     }
 
     private Lotto createLotto() {
@@ -64,6 +50,8 @@ public class LottoGame {
     }
 
     public Lotto getWinLottoNum(String winNum) {
-        return new Lotto(Arrays.stream(winNum.split(DEFAULT_REGEX)).map(Integer::parseInt).collect(Collectors.toList()));
+        return new Lotto(Arrays.stream(winNum.split(DEFAULT_REGEX))
+                .map(Integer::parseInt)
+                .collect(Collectors.toCollection(TreeSet::new)));
     }
 }
