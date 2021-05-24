@@ -11,10 +11,6 @@ public class Result {
 	private Money totalMoney = Money.won(0L);
 
 	public Result() {
-		resultMap.put(LotteryMatchType.THREE_MATCH, 0);
-		resultMap.put(LotteryMatchType.FOUR_MATCH, 0);
-		resultMap.put(LotteryMatchType.FIVE_MATCH, 0);
-		resultMap.put(LotteryMatchType.SIX_MATCH, 0);
 	}
 
 	public void addMatchType(LotteryMatchType match) {

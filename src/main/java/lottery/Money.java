@@ -6,12 +6,12 @@ public final class Money {
 	public static final Money ZERO = new Money(0L);
 	private Long amount;
 
-	private Money(Long amount) {
-		setAmount(amount);
-	}
-
 	public static Money won(Long amount) {
 		return new Money(amount);
+	}
+
+	private Money(Long amount) {
+		setAmount(amount);
 	}
 
 	public Long amount() {
