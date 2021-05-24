@@ -68,12 +68,6 @@ public class LottoNumber {
     return lottoNumber;
   }
 
-  public void validatorPositiveNumber() {
-    if (lottoNumber < 0) {
-      throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
-    }
-  }
-
   public static void validateInvalidRangeNumber(LottoNumber lottoNumber) {
     if (lottoNumber == null) {
       throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;

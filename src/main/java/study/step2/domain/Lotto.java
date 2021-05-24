@@ -30,10 +30,6 @@ public class Lotto {
     return lottoNumbers;
   }
 
-  public void validatorPositiveNumbers() {
-    lottoNumbers.forEach(LottoNumber::validatorPositiveNumber);
-  }
-
   public void checkDuplication() {
     if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
       throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;

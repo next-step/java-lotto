@@ -12,7 +12,6 @@ public class ManualLottos {
     List<Lotto> list = new ArrayList<>();
 
     inputText.stream().map(Lotto::new).forEach(lotto -> {
-      lotto.validatorPositiveNumbers();
       lotto.checkDuplication();
       list.add(lotto);
     });
