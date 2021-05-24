@@ -6,15 +6,18 @@ import java.util.Objects;
 
 public class PrizeInfo {
 
-  private static final String ANALYSIS_FORMAT = "%d개 일치 (%d원)- %d개";
+  private static final String BONUS_BALL_NON_MATCHED_ANALYSIS_FORMAT = "%d개 일치 (%d원)- %d개";
+  private static final String BONUS_BALL_MATCHED_ANALYSIS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 
   private final int matchCountPerGame;
   private final long winningAmount;
+  private final boolean bonusNumberMatched;
   private final long winningCount;
 
   public PrizeInfo(LottoRanking lottoRanking, long winningCount) {
     this.matchCountPerGame = lottoRanking.getMatchCount();
     this.winningAmount = lottoRanking.getWinningAmount();
+    this.bonusNumberMatched = lottoRanking.isBonusNumberMatched();
     this.winningCount = winningCount;
   }
 
@@ -28,7 +31,10 @@ public class PrizeInfo {
 
   @Override
   public String toString() {
-    return String.format(ANALYSIS_FORMAT, matchCountPerGame, winningAmount, winningCount);
+    if(bonusNumberMatched) {
+      return String.format(BONUS_BALL_MATCHED_ANALYSIS_FORMAT, matchCountPerGame, winningAmount, winningCount);
+    }
+    return String.format(BONUS_BALL_NON_MATCHED_ANALYSIS_FORMAT, matchCountPerGame, winningAmount, winningCount);
   }
 
   @Override
