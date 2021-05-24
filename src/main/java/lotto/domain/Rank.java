@@ -29,6 +29,10 @@ public enum Rank {
                 .orElse(ELSE);
     }
 
+    public static int countOfMatchWhichNeedsBonusNumberCheck() {
+        return SECOND.getCountOfMatch();
+    }
+
     public int getCountOfMatch() {
         return this.countOfMatch;
     }

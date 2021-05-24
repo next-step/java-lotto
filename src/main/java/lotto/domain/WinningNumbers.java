@@ -53,6 +53,10 @@ public class WinningNumbers {
         return numbers.contains(number);
     }
 
+    public BonusNumber bonusNumber() {
+        return this.bonusNumber;
+    }
+
     public void addBonusNumber(int number) {
         BonusNumber bonusNumber = new BonusNumber(number);
         if (numbers.contains(bonusNumber)) {

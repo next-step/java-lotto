@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,7 +11,6 @@ public class LottoTicket {
     private final int INCREMENT_WHEN_MATCH = 1;
     private final int INCREMENT_WHEN_NO_MATCH = 0;
     private final int NUMBER_COUNT = 6;
-
 
     private final List<LottoNumber> numbers;
 
@@ -42,7 +42,22 @@ public class LottoTicket {
         for (LottoNumber number : numbers) {
             matchCount += increaseCountWhenMatch(number, winningNumbers);
         }
-        return Rank.valueOf(matchCount, false);
+
+        if (matchCount != Rank.countOfMatchWhichNeedsBonusNumberCheck()) {
+            return Rank.valueOf(matchCount, false);
+        }
+        return Rank.valueOf(matchCount, haveMatchWithBonusNumber(winningNumbers.bonusNumber()));
+    }
+
+    private boolean haveMatchWithBonusNumber(BonusNumber bonusNumber) {
+        if (bonusNumber == null) {
+            return false;
+        }
+        List<Integer> lottoNumberList = new ArrayList<>();
+        for (LottoNumber lottoNumber : numbers) {
+            lottoNumberList.add(lottoNumber.number());
+        }
+        return lottoNumberList.contains(bonusNumber.number());
     }
 
     private int increaseCountWhenMatch(LottoNumber number, WinningNumbers winningNumbers) {
