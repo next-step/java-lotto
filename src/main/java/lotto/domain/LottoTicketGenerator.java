@@ -10,7 +10,7 @@ import java.util.List;
 public class LottoTicketGenerator {
     private static final List<LottoNumber> LOTTO_NUMBERS_CACHE;
     private static final String LOTTO_NUMBERS_TEXT_SPLIT_REGEX = ",";
-    public static final int LOTTO_NUMBERS_LENGTH = 6;
+    private static final int LOTTO_NUMBERS_LENGTH = 6;
 
     static {
         LOTTO_NUMBERS_CACHE = new ArrayList<>();
@@ -22,7 +22,7 @@ public class LottoTicketGenerator {
 
     public List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS_CACHE);
-        List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS_CACHE.subList(0, LottoTicket.LOTTO_NUMBERS_LENGTH));
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS_CACHE.subList(0, LOTTO_NUMBERS_LENGTH));
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
