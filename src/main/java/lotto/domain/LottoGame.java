@@ -8,35 +8,30 @@ import lotto.ui.LottoInputActualHandler;
 import lotto.ui.LottoInputHandler;
 import lotto.ui.LottoOutputHandler;
 
+import java.io.IOException;
 import java.util.List;
 
 public class LottoGame {
     private LottoInputHandler input = new LottoInputActualHandler();
-    private LottoOutputHandler output = new LottoOutputHandler();
-    private LottoGenerator generator;
-    private Lottos lottos = new Lottos();
-
-    public LottoGame() {
-        this(null);
-    }
 
     // Integration Test를 위한 input 인터페이스 주입
-    public LottoGame(LottoInputHandler input) {
-        if (input != null) {
-            this.input = input;
+    public LottoGame(LottoInputHandler inputHandler) {
+        if (inputHandler != null) {
+            this.input = inputHandler;
         }
     }
 
-    public LottoResultPack start() {
+    public LottoResultPack start() throws IOException {
+        LottoOutputHandler output = new LottoOutputHandler();
+
         LottoPurchase lottoPurchase = new LottoPurchase(input.scanLottoPurchaseBudget()
                                                         ,input.scanCountOfManualLotto());
 
         List<String> manualLottoStrings = input.scanManualLottos(lottoPurchase.manualCount());
 
-        generator = new LottoGeneratorManual(manualLottoStrings);
-        lottos.add(generator.generate());
-        generator = new LottoGeneratorAuto(lottoPurchase.countOfAvailableAutoLotto());
-        lottos.add(generator.generate());
+        LottoGenerator manualGenerator = new LottoGeneratorManual(manualLottoStrings);
+        LottoGenerator autoGenerator = new LottoGeneratorAuto(lottoPurchase.countOfAvailableAutoLotto());
+        Lottos lottos = new Lottos(manualGenerator.generate(), autoGenerator.generate());
 
         output.printCount(manualLottoStrings.size(), lottoPurchase.countOfAvailableAutoLotto());
         output.printBought(lottos);

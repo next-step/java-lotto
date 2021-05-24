@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface LottoInputHandler {
@@ -8,7 +9,7 @@ public interface LottoInputHandler {
 
     int scanCountOfManualLotto();
 
-    List<String> scanManualLottos(int manualCount);
+    List<String> scanManualLottos(int manualCount) throws IOException;
 
     String scanLottoWinNumbersString();
 

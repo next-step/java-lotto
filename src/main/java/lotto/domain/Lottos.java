@@ -23,14 +23,17 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int count() {
-        return lottos.size();
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        for (Lotto manualLotto : manualLottos.values()) {
+            this.lottos.add(manualLotto);
+        }
+        for (Lotto autoLotto : autoLottos.values()) {
+            this.lottos.add(autoLotto);
+        }
     }
 
-    public void add(Lottos lottos) {
-        for (Lotto lotto : lottos.values()) {
-            this.lottos.add(lotto);
-        }
+    public int count() {
+        return lottos.size();
     }
 
     public void buyManual(List<String> manualLottoStringList) {

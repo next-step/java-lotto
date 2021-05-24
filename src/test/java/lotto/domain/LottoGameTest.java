@@ -4,6 +4,7 @@ import lotto.domain.wrapper.LottoPurchase;
 import lotto.ui.LottoInputHandler;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoGameTest {
 
     @Test
-    void 로또게임_integration_Test() {
+    void 로또게임_integration_Test() throws IOException {
         int 로또총구매금액 = 6000;
 
         LottoGame lottoGame = new LottoGame(new LottoInputHandler() {

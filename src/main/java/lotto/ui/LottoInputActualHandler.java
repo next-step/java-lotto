@@ -25,7 +25,7 @@ public class LottoInputActualHandler implements LottoInputHandler {
     }
 
     @Override
-    public List<String> scanManualLottos(int manualCount) {
+    public List<String> scanManualLottos(int manualCount) throws IOException {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -34,7 +34,7 @@ public class LottoInputActualHandler implements LottoInputHandler {
             try {
                 lottosString.add(br.readLine());
             } catch (IOException ioException) {
-                ioException.printStackTrace();
+                throw new IOException();
             }
         }
         return lottosString;
