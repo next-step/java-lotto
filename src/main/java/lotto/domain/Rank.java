@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.function.Function;
 
 public enum Rank {
     FIFTH(3, 5_000),

@@ -52,7 +52,7 @@ class LottoTest {
     @Test
     void 로또는_6자리_수_이다() {
         Lotto lotto = new Lotto(LottoNumberGenerator.get());
-        assertThat(lotto.numbers).hasSize(6);
+        assertThat(lotto.numbers).hasSize(Lotto.SIZE);
     }
 
     @ParameterizedTest

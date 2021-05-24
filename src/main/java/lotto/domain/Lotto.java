@@ -32,11 +32,11 @@ public class Lotto {
     }
 
     private boolean isValidLottoSize(List<Integer> numbers) {
-        return numbers.size() == Lotto.SIZE;
+        return numbers.size() == SIZE;
     }
 
     private boolean hasDuplicate(List<Integer> numbers) {
-        return numbers.stream().distinct().count() != Lotto.SIZE;
+        return numbers.stream().distinct().count() != SIZE;
     }
 
     private boolean containsInvalidNumber(List<Integer> numbers) {
@@ -49,7 +49,9 @@ public class Lotto {
 
 
     public int matchCountWith(Lotto other) {
-        return (int) numbers.stream().filter(other::contains).count();
+        return (int) numbers.stream()
+                .filter(other::contains)
+                .count();
     }
 
     public boolean contains(Integer number) {
