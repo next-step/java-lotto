@@ -29,8 +29,6 @@
 └── lotto
 ├── LottoNumber.java: 로또 번호 하나
 ├── LottoNumbers.java: 로또 한 세트이다
-├── converter
-│    └── NumberToLotto.java: 숫자를 입력받 로또 번호 하나 혹은 로또 번호들로 변환한다
 ├── generator
 │   ├── AutoLottoNumberGenerator.java: 랜덤을 사용해 로또 번호를 생성한다. 가게에서 파는 로또 머신의 역항
 │   ├── Generator.java: 로또 번호 생성기의 interface 이다.
