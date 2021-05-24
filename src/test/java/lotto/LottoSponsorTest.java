@@ -18,39 +18,48 @@ import lotto.enums.Prize;
 public class LottoSponsorTest {
 
     List<Ticket> tickets = Arrays.asList(
-        new Ticket("1,2,3,4,5,6"),
-        new Ticket("1,2,3,4,5,6"),
-        new Ticket("1,2,3,4,5,11"),
-        new Ticket("1,2,3,4,10,11")
+        new Ticket("1,2,3,5,8,13"), // SIX
+        new Ticket("1,2,3,5,8,21"), // BONUS
+        new Ticket("1,2,3,5,13,45"), // FIVE
+        new Ticket("1,2,3,5,44,45"), // FOUR
+        new Ticket("1,2,3,43,44,45"), // THREE
+        new Ticket("1,2,42,43,44,45"), // TWO
+        new Ticket("1,41,42,43,44,45"), // ONE
+        new Ticket("40,41,42,43,44,45") // ZERO
     );
-    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    Ticket winningTicket = new Ticket("1,2,3,5,8,13");
+    BonusNumber bonusNumber = new BonusNumber("21", winningTicket);
     Purchase purchase = new Purchase("1000");
-    LottoSponsor lottoSponsor = new LottoSponsor(tickets, winningTicket, purchase);
-    Map<Prize, Integer> scores = new EnumMap<>(Prize.class);
+    LottoSponsor lottoSponsor = new LottoSponsor(tickets, winningTicket, purchase, bonusNumber);
+    Map<Prize, Integer> answer = new EnumMap<>(Prize.class);
+    Long expectedTotalPrizeMoney = 0L;
 
     @BeforeEach
     void setUp() {
-        scores.put(Prize.SIX, 2);
-        scores.put(Prize.FIVE, 1);
-        scores.put(Prize.FOUR, 1);
-        scores.put(Prize.THREE, 0);
-        scores.put(Prize.TWO, 0);
-        scores.put(Prize.ONE, 0);
-        scores.put(Prize.ZERO, 0);
+        answer.put(Prize.BONUS, 1);
+        answer.put(Prize.SIX, 1);
+        answer.put(Prize.FIVE, 1);
+        answer.put(Prize.FOUR, 1);
+        answer.put(Prize.THREE, 1);
+        answer.put(Prize.TWO, 1);
+        answer.put(Prize.ONE, 1);
+        answer.put(Prize.ZERO, 1);
+
+        for (Prize prize : Prize.values()) {
+            expectedTotalPrizeMoney += (long)prize.getPrize();
+        }
     }
 
     @DisplayName("당첨된 티켓 수를 센다.")
     @Test
     void countScores() {
-        assertThat(lottoSponsor.countScores(tickets, winningTicket)).isEqualTo(scores);
+        assertThat(lottoSponsor.countScores(tickets, winningTicket, bonusNumber)).isEqualTo(answer);
     }
 
     @DisplayName("총 당첨금을 계산한다.")
     @Test
     void sumPrizeMoney() {
-        Long expectedTotalPrizeMoney = 4_001_550_000L;
-
-        assertThat(lottoSponsor.sumPrizeMoney(scores)).isEqualTo(expectedTotalPrizeMoney);
+        assertThat(lottoSponsor.sumPrizeMoney(answer)).isEqualTo(expectedTotalPrizeMoney);
     }
 
     @DisplayName("수익률을 계산한다. 소수점 2자리 아래 버림")
@@ -59,4 +68,5 @@ public class LottoSponsorTest {
     void convertToEarningRate(long money, int payment, float rate) {
         assertThat(lottoSponsor.convertToEarningRate(money, payment)).isEqualTo(rate);
     }
+
 }

@@ -14,8 +14,8 @@ public class LottoSponsor {
     private long totalPrizeMoney;
     private float earningRate;
 
-    public LottoSponsor(List<Ticket> tickets, Ticket winningTicket, Purchase purchase) {
-        Map<Prize, Integer> scores = countScores(tickets, winningTicket);
+    public LottoSponsor(List<Ticket> tickets, Ticket winningTicket, Purchase purchase, BonusNumber bonusNumber) {
+        Map<Prize, Integer> scores = countScores(tickets, winningTicket, bonusNumber);
         long totalPrizeMoney = sumPrizeMoney(scores);
         float earningRate = convertToEarningRate(totalPrizeMoney, purchase.payment());
 
@@ -24,19 +24,34 @@ public class LottoSponsor {
         this.earningRate = earningRate;
     }
 
-    protected Map<Prize, Integer> countScores(List<Ticket> tickets, Ticket winningTicket) {
+    protected Map<Prize, Integer> countScores(List<Ticket> tickets, Ticket winningTicket, BonusNumber bonusNumber) {
+        Map<Prize, Integer> scores = emptyScores();
+
+        for (Ticket ticket : tickets) {
+            Prize key = classifyPrize(ticket, winningTicket, bonusNumber);
+            int score = scores.get(key) + 1;
+            scores.put(key, score);
+        }
+
+        return scores;
+    }
+
+    private Map<Prize, Integer> emptyScores() {
         Map<Prize, Integer> scores = new EnumMap<>(Prize.class);
         for (Prize prize : Prize.values()) {
             scores.put(prize, 0);
         }
-
-        for (Ticket ticket : tickets) {
-            int index = ticket.countSameNumbers(winningTicket);
-            Prize key = Prize.valueOf(index);
-            int score = scores.get(key) + 1;
-            scores.put(key, score);
-        }
         return scores;
+    }
+
+    private Prize classifyPrize(Ticket ticket, Ticket winningTicket, BonusNumber bonusNumber) {
+        int count = ticket.countSameNumbers(winningTicket);
+
+        if (bonusNumber.isExist(ticket) && count == Prize.FIVE.getIndex()) {
+            return Prize.BONUS;
+        }
+
+        return Prize.valueOf(count);
     }
 
     protected long sumPrizeMoney(Map<Prize, Integer> scores) {
@@ -59,6 +74,7 @@ public class LottoSponsor {
         Display.show(Message.RESULT_3, this.scores.get(Prize.THREE));
         Display.show(Message.RESULT_4, this.scores.get(Prize.FOUR));
         Display.show(Message.RESULT_5, this.scores.get(Prize.FIVE));
+        Display.show(Message.RESULT_BONUS, this.scores.get(Prize.BONUS));
         Display.show(Message.RESULT_6, this.scores.get(Prize.SIX));
         Display.show(Message.RESULT_TOTAL, this.totalPrizeMoney);
         Display.show(Message.RESULT_TAIL, this.earningRate);

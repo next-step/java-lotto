@@ -20,7 +20,7 @@ public class WinningTicketController implements Controller {
 
         saveWinningTicket(Keyboard.read());
 
-        toResultController();
+        toBonusNumberController();
     }
 
     protected void saveWinningTicket(String numbers) {
@@ -28,7 +28,7 @@ public class WinningTicketController implements Controller {
         this.lotto.storage().saveWinningTicket(ticket);
     }
 
-    private void toResultController() {
-        this.lotto.toResultController();
+    private void toBonusNumberController() {
+        this.lotto.toBonusNumberController();
     }
 }

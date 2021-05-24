@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controllers.AutomaticTicketingController;
+import lotto.controllers.BonusNumberController;
 import lotto.controllers.Controller;
 import lotto.controllers.EndController;
 import lotto.controllers.PurchaseController;
@@ -12,6 +13,7 @@ public class Lotto {
 
     private Controller automaticTicketingController;
     private Controller winningTicketController;
+    private Controller bonusNumberController;
     private Controller resultController;
     private Controller endController;
 
@@ -21,6 +23,7 @@ public class Lotto {
     public Lotto(Model model) {
         this.automaticTicketingController = new AutomaticTicketingController(this);
         this.winningTicketController = new WinningTicketController(this);
+        this.bonusNumberController = new BonusNumberController(this);
         this.resultController = new ResultController(this);
         this.endController = new EndController();
 
@@ -54,6 +57,10 @@ public class Lotto {
 
     public void toWinningTicketController() {
         this.controller = this.winningTicketController;
+    }
+
+    public void toBonusNumberController() {
+        this.controller = this.bonusNumberController;
     }
 
     public void toResultController() {

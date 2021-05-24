@@ -35,6 +35,10 @@ public final class TicketGuard {
     }
 
     private static void guardInsufficientSize(List<Integer> numbers) {
+        if (numbers == null) {
+            throw new NullPointerException(ErrorMessage.NULL_NUMBERS.toString());
+        }
+
         if (numbers.size() != SIZE) {
             throw new InsufficientNumbersException(ErrorMessage.INSUFFICIENT_NUMBERS.toString());
         }
@@ -42,11 +46,11 @@ public final class TicketGuard {
 
     private static void guardOutOfBounds(List<Integer> numbers) {
         for (int number : numbers) {
-            verifyIndividualBounds(number);
+            guardOutOfBounds(number);
         }
     }
 
-    private static void verifyIndividualBounds(int number) {
+    private static void guardOutOfBounds(int number) {
         if (number < MIN_VALUE || MAX_VALUE < number) {
             throw new NumberOutOfBoundsException(ErrorMessage.NUMBER_OUT_OF_BOUNDS.toString());
         }

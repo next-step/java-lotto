@@ -7,6 +7,7 @@ public class Model {
     private Purchase purchase;
     private List<Ticket> automatedTickets;
     private Ticket winningTicket;
+    private BonusNumber bonusNumber;
 
     public Model() {
     }
@@ -33,6 +34,14 @@ public class Model {
 
     public Ticket loadWinningTicket() {
         return this.winningTicket;
+    }
+
+    public void saveBonusNumber(BonusNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
+    }
+
+    public BonusNumber loadBonusNumber() {
+        return this.bonusNumber;
     }
 
 }

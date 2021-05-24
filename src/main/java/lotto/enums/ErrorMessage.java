@@ -8,6 +8,7 @@ public enum ErrorMessage {
     INSUFFICIENT_NUMBERS("숫자 6개를 입력해주세요."),
     NUMBER_OUT_OF_BOUNDS("1 ~ 45 사이의 숫자를 입력해주세요."),
     DUPLICATE_NUMBERS("중복된 숫자가 있습니다."),
+    NULL_NUMBERS("숫자 리스트가 비었습니다."),
 
     CASH_OUT_OF_BOUNDS("지불 가능 금액은 1000원 ~ 1000000입니다."),
 

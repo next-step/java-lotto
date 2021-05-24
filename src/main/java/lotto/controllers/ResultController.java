@@ -2,6 +2,7 @@ package lotto.controllers;
 
 import java.util.List;
 
+import lotto.BonusNumber;
 import lotto.LottoSponsor;
 import lotto.Lotto;
 import lotto.Purchase;
@@ -25,8 +26,9 @@ public class ResultController implements Controller {
         List<Ticket> automatedTickets = loadAutomatedTickets();
         Ticket winningTicket = loadWinningTicket();
         Purchase purchase = loadPurchase();
+        BonusNumber bonusNumber = loadBonusNumber();
 
-        LottoSponsor lottoSponsor = new LottoSponsor(automatedTickets, winningTicket, purchase);
+        LottoSponsor lottoSponsor = new LottoSponsor(automatedTickets, winningTicket, purchase, bonusNumber);
         lottoSponsor.show();
     }
 
@@ -40,6 +42,10 @@ public class ResultController implements Controller {
 
     private Purchase loadPurchase() {
         return this.lotto.storage().loadPurchase();
+    }
+
+    private BonusNumber loadBonusNumber() {
+        return this.lotto.storage().loadBonusNumber();
     }
 
     private void toEndController() {
