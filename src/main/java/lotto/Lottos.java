@@ -23,6 +23,14 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
+    public LottoResult compareWinNumber(List<Integer> winNumber) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottos) {
+            lottoResult.checkWin(lotto.compareWinLottoNumber(winNumber));
+        }
+        return lottoResult;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -31,13 +39,5 @@ public class Lottos {
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
-    }
-
-    public int compareWinNumber(List<Integer> winNumber) {
-        int result = 0;
-        for (Lotto lotto : lottos) {
-            result = lotto.compareWinLottoNumber(winNumber);
-        }
-        return result;
     }
 }

@@ -15,7 +15,7 @@ public class LottosTest {
         Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumber(Arrays.asList(1, 3, 4, 5, 6, 7)));
         assertThat(lottos.isCount(1)).isTrue();
 
-        int result = lottos.compareWinNumber(Arrays.asList(1, 3, 4, 5, 6, 8));
-        assertThat(result).isEqualTo(5);
+        LottoResult lottoResult = lottos.compareWinNumber(Arrays.asList(1, 3, 4, 5, 6, 8));
+        assertThat(lottoResult.isFourth(0)).isTrue();
     }
 }
