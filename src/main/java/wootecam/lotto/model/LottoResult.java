@@ -1,6 +1,8 @@
 package wootecam.lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoResult {
 	MISS(0, 0),
@@ -18,12 +20,10 @@ public enum LottoResult {
 		this.winningMoney = winningMoney;
 	}
 
-	@Deprecated
-	public static LottoResult findByMatchedCount(int matchedCount) {
+	public static List<LottoResult> getPrizeResult() {
 		return Arrays.stream(LottoResult.values())
-			.filter(result -> result.matchedCount == matchedCount)
-			.findAny()
-			.orElse(MISS);
+			.filter(lottoResult -> MISS != lottoResult)
+			.collect(Collectors.toList());
 	}
 
 	public static LottoResult findByMatchedCount(int matchedCount, boolean isMatchedBonus) {
