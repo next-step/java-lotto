@@ -4,6 +4,9 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
+    private static final String BONUS_NUMBER_IS_NOT_LOTTO_NUMBER =
+        "보너스 번호는 6개의 로또 번호와 다른 번호로 사용해야 합니다.";
+
     private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
@@ -19,7 +22,7 @@ public class WinningLotto extends Lotto {
 
     private void validateLottoNumbers() {
         if (super.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 6개의 로또 번호와 다른 번호로 사용해야 합니다.");
+            throw new IllegalArgumentException(BONUS_NUMBER_IS_NOT_LOTTO_NUMBER);
         }
     }
 

@@ -10,6 +10,10 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoNumbers {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final String LOTTO_HAS_SIZE_6_WITH_NO_DUPLICATE =
+        "로또 번호는 중복 없는 6개의 수를 사용해야 합니다.";
+
     private final Set<LottoNumber> numbers;
 
     public LottoNumbers(Collection<LottoNumber> numbers) {
@@ -39,8 +43,8 @@ public class LottoNumbers {
     }
 
     private void validateNumbersSizeAndDuplicateNumbers() {
-        if (numbers == null || numbers.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 중복 없는 6개의 수를 사용해야 합니다.");
+        if (numbers == null || numbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(LOTTO_HAS_SIZE_6_WITH_NO_DUPLICATE);
         }
     }
 

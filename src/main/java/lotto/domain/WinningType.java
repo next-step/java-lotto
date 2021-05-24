@@ -17,9 +17,11 @@ public enum WinningType {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
+    private static final int SECOND_OR_THIRD_COUNT = 5;
+
     private static final Map<Integer, WinningType> CACHE =
         Arrays.stream(values())
-              .filter(type -> type.getMatchCount() != 5)
+              .filter(type -> type.getMatchCount() != SECOND_OR_THIRD_COUNT)
               .collect(
                   collectingAndThen(toMap(WinningType::getMatchCount, Function.identity()),
                                     Collections::unmodifiableMap));
@@ -34,7 +36,7 @@ public enum WinningType {
 
     public static WinningType find(int matchCount, boolean bonusMatched) {
 
-        if (matchCount == 5) {
+        if (matchCount == SECOND_OR_THIRD_COUNT) {
             return secondOrThird(bonusMatched);
         }
 
