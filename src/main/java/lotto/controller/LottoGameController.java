@@ -1,10 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoResults;
+import lotto.domain.Lottos;
+import lotto.domain.RandomNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoGameController {
 
@@ -16,15 +17,10 @@ public class LottoGameController {
 
 	public void play() {
 
-		//로또구입
-		int purchaseAmount = InputView.inputPurchaseAmount();
-		LottoGame lottoGame = new LottoGame();
-		Lottos lottos = lottoGame.purchaseLottos(new PuchaseAmount(purchaseAmount), this.randomNumbersGenerator);
+		Lottos lottos = new LottoGame().purchaseLottos(InputView.inputPurchaseAmount(), this.randomNumbersGenerator);
 		InputView.printPurchaseLottos(lottos);
 
-		//당첨확인
-		List<Integer> winningLottoNumbers = InputView.inputWinningLottoNumbers();
-		LottoResults lottoResults = lottos.match(new Lotto(winningLottoNumbers));
+		LottoResults lottoResults = lottos.match(InputView.inputWinningLotto());
 		ResultView.printLottoResult(lottoResults);
 
 	}

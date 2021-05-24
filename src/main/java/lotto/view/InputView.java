@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.PuchaseAmount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,15 +17,15 @@ public class InputView {
 	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int inputPurchaseAmount() {
+	public static PuchaseAmount inputPurchaseAmount() {
 		System.out.println(MESSAGE_INPUT_PURCHASE_AMOUNT);
-		return Integer.parseInt(scanner.nextLine());
+		return new PuchaseAmount(Integer.parseInt(scanner.nextLine()));
 	}
 
-	public static List<Integer> inputWinningLottoNumbers() {
+	public static Lotto inputWinningLotto() {
 		System.out.println(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
 		String inputNumbers = scanner.nextLine();
-		return toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER);
+		return new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
 	}
 
 	protected static List<Integer> toNumbers(String inputNumbers, String delimiter) {
