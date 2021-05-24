@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exceptions.LackOfMoneyToBuyLottoException;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Collections;
@@ -17,6 +19,10 @@ public class LottoDrawer {
 	}
 
 	public Lottos draw(BigDecimal receivedMoney) {
+		if (receivedMoney.compareTo(Constants.LOTTO_PRICE) < 0) {
+			throw new LackOfMoneyToBuyLottoException();
+		}
+
 		return new Lottos(IntStream.rangeClosed(1, numberOfLottosToBuy(receivedMoney))
 				.mapToObj((it) -> draw())
 				.collect(Collectors.toList()));
