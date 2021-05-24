@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -18,7 +19,10 @@ public class LottoStatistics {
         Map<WinningType, Integer> map =
             winningTypes.stream()
                         .filter(WinningType::isWinningLotto)
-                        .collect(groupingBy(Function.identity(), summingInt(type -> ADD_COUNT)));
+                        .collect(groupingBy(
+                                Function.identity(),
+                                () -> new EnumMap<>(WinningType.class),
+                                summingInt(type -> ADD_COUNT)));
 
         this.winningCountMap = new WinningCountMap(map);
     }
