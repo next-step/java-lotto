@@ -7,7 +7,9 @@ public class StringAddCalculator {
     private static Divider divider = new Divider();
 
     public static int splitAndSum(String input) {
-        if (inputHandler.isEmptyInput(input)) return 0;
+        if (inputHandler.isEmptyInput(input)) {
+            return 0;
+        }
         String targetNum = input;
         List<String> splitInputs = divider.getSplitByCustomDelimiter(input);
         if (splitInputs.size() > 1) {
