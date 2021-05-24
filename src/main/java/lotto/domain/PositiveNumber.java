@@ -39,7 +39,7 @@ public class PositiveNumber {
 
     private void validate(long value) {
         if (value < MINIMUM_AMOUNT) {
-            throw new IllegalArgumentException(format("숫자는 %d원 미만은 안됩니다.", MINIMUM_AMOUNT));
+            throw new IllegalArgumentException(format("숫자는 %d 미만은 안됩니다.", MINIMUM_AMOUNT));
         }
     }
 
