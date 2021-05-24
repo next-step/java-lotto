@@ -37,7 +37,7 @@ class OperatorTest {
   @CsvSource(value = {"//;\\n1;2;3$6", "//!\\n4!7!9$20", "//@\\n11@23@74$108", "1,2,3$6", "4:5:6$15", "24,55:11$90"}, delimiter = '$')
   @ParameterizedTest
   void calculateTest(String given, String expectation) {
-    assertThat(selectOperator(given).calculate(given)).isEqualTo(fromString(expectation));
+    assertThat(selectOperator(given).add(given)).isEqualTo(fromString(expectation));
   }
 
 }
