@@ -1,29 +1,27 @@
 package study.step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ManualLottos {
 
   private final List<Lotto> lottos;
 
   public ManualLottos(List<String> inputText) {
-    lottos = inputText.stream()
-        .map(Lotto::new)
-        .collect(Collectors.toList());
+    List<Lotto> list = new ArrayList<>();
+
+    inputText.stream().map(Lotto::new).forEach(lotto -> {
+      lotto.validatorPositiveNumbers();
+      lotto.checkDuplication();
+      list.add(lotto);
+    });
+
+    lottos = list;
   }
 
   public List<Lotto> getLottos() {
     return lottos;
-  }
-
-  public void validatorPositiveLottos() {
-    lottos.forEach(Lotto::validatorPositiveNumbers);
-  }
-
-  public void checkDuplicationLottos() {
-    lottos.forEach(Lotto::checkDuplication);
   }
 
   @Override

@@ -15,8 +15,6 @@ public class LottoMain {
     int manualInputLottoCount = InputView.manualInputLottoCount(money);
 
     ManualLottos manualLottos = new ManualLottos(InputView.manualInputLottos(manualInputLottoCount));
-    manualLottos.validatorPositiveLottos();
-    manualLottos.checkDuplicationLottos();
 
     LottoController lottoController = new LottoController();
     Lottos lottos = lottoController.createLottos(money, manualLottos.getLottos().size());
