@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
-    @DisplayName("당첨번호와 티켓번호가 비교결과 테스트")
+    @DisplayName("당첨번호와 티켓번호가 일치하지 않는 비교결과 테스트")
     @Test
     void check_match_result() {
         //Given
@@ -26,10 +26,10 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //When
-        MatchStatus matchStatus = lottoTicket.matchingStatusWith(winningNumbers);
+        Rank rank = lottoTicket.rankBasedOn(winningNumbers);
 
         //
-        assertThat(matchStatus).isEqualTo(MatchStatus.ELSE);
+        assertThat(rank).isEqualTo(Rank.ELSE);
     }
 
     @DisplayName("[,] 출력 포맷 점검")
@@ -88,9 +88,9 @@ public class LottoTicketTest {
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        MatchStatus matchStatus = lottoTicket.matchingStatusWith(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}));
+        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}));
 
         //Then
-        assertThat(matchStatus).isEqualTo(MatchStatus.FIVE);
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }

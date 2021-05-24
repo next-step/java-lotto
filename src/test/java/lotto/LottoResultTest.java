@@ -28,7 +28,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
 
         //Then
-        assertThat(lottoResult.getResultCount(MatchStatus.FIVE)).isEqualTo(1);
+        assertThat(lottoResult.getResultCount(Rank.SECOND)).isEqualTo(1);
     }
 
     @DisplayName("구매금액에 따라 수익률이 계산되는지 확인")

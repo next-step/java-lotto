@@ -37,12 +37,12 @@ public class LottoTicket {
         return numbers.size();
     }
 
-    public MatchStatus matchingStatusWith(WinningNumbers winningNumbers) {
+    public Rank rankBasedOn(WinningNumbers winningNumbers) {
         int matchCount = 0;
         for (LottoNumber number : numbers) {
             matchCount += increaseCountWhenMatch(number, winningNumbers);
         }
-        return MatchStatus.findStatusByMatchCount(matchCount);
+        return Rank.valueOf(matchCount, false);
     }
 
     private int increaseCountWhenMatch(LottoNumber number, WinningNumbers winningNumbers) {
