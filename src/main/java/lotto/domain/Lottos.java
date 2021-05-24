@@ -20,11 +20,12 @@ public class Lottos {
 		this.lottos.add(lotto);
 	}
 
-	public LottoResult getLottoResult(Lotto winningLotto) {
+	public LottoResult getLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
 		List<LottoRank> userLottoRanks = this.lottos.stream()
-			.map(lotto -> LottoRank.valueOf(winningLotto.getMatchesCount(lotto)))
+			.map(lotto ->
+				LottoRank.valueOf(winningLotto.getMatchesCount(lotto), lotto.containNumber(bonusNumber))
+			)
 			.collect(Collectors.toList());
-
 		return new LottoResult(userLottoRanks);
 	}
 
