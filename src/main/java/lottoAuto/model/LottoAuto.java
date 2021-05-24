@@ -3,7 +3,7 @@ package lottoAuto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoAutoInputService {
+public class LottoAuto {
     private LottoRandom lottoRandom = new LottoRandom();
     private List<Integer> winningNumber = new ArrayList<>();
 

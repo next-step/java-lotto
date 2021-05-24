@@ -4,7 +4,7 @@ import lottoAuto.vo.LottoResultVo;
 
 import java.util.*;
 
-public class LottoAutoService {
+public class LottoStatistic {
 
     private List<Integer> winning_count;
     private List<Boolean> bonus_count;
