@@ -25,7 +25,7 @@ public class LottoAppController {
         return LottoMachine.buyWith(purchaseAmount);
     }
 
-    private LottoReport getReport(List<Lotto> purchasedLottos) {
+    private LottoReport getReport(LottoList purchasedLottos) {
         PrintView.askWinningNumber();
         List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
         PrintView.askBonusNumber();
