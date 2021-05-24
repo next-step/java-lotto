@@ -15,12 +15,12 @@ public class WinningLottoTest {
         LottoNumber bonusNumber = LottoNumber.from(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        Lotto winningFirst = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto winningSecond = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7));
-        Lotto winningThird = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 8));
-        Lotto winningFourth = new Lotto(new LottoNumbers(1, 2, 3, 4, 8, 9));
-        Lotto winningFifth = new Lotto(new LottoNumbers(1, 2, 3, 7, 8, 9));
-        Lotto winningNothing = new Lotto(new LottoNumbers(7, 8, 9, 10, 11, 12));
+        Lotto winningFirst = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 6), LottoType.MANUAL);
+        Lotto winningSecond = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 7), LottoType.MANUAL);
+        Lotto winningThird = new Lotto(new LottoNumbers(1, 2, 3, 4, 5, 8), LottoType.MANUAL);
+        Lotto winningFourth = new Lotto(new LottoNumbers(1, 2, 3, 4, 8, 9), LottoType.MANUAL);
+        Lotto winningFifth = new Lotto(new LottoNumbers(1, 2, 3, 7, 8, 9), LottoType.MANUAL);
+        Lotto winningNothing = new Lotto(new LottoNumbers(7, 8, 9, 10, 11, 12), LottoType.MANUAL);
 
         assertThat(winningLotto.matchWinning(winningFirst)).isEqualTo(WinningType.FIRST);
         assertThat(winningLotto.matchWinning(winningSecond)).isEqualTo(WinningType.SECOND);

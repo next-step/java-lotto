@@ -1,6 +1,11 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
+
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -22,5 +27,18 @@ public class InputView {
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return SCANNER.nextInt();
+    }
+
+    public static long inputManualLottoCounts() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextLong();
+    }
+
+    public static List<LottoNumbers> inputManualNumbers(long manualCounts) {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        return Stream.generate(SCANNER::next)
+                .limit(manualCounts)
+                .map(LottoNumbers::valueOf)
+                .collect(Collectors.toList());
     }
 }

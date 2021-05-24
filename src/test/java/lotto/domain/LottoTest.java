@@ -23,12 +23,30 @@ class LottoTest {
     @DisplayName("지난 주 당첨번호와 매칭 테스트")
     void match() {
         LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(lottoNumbers, LottoType.MANUAL);
 
         LottoNumbers winningNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
         LottoNumber bonusNumber = LottoNumber.from(6);
         WinningType winningType = lotto.match(winningNumbers, bonusNumber);
 
         assertThat(winningType).isEqualTo(WinningType.SECOND);
+    }
+
+    @Test
+    @DisplayName("로또 - 자동 여부 테스트")
+    void isAuto() {
+        Lotto lotto = Lotto.auto();
+
+        assertThat(lotto.isAuto()).isTrue();
+        assertThat(lotto.isManual()).isFalse();
+    }
+
+    @Test
+    @DisplayName("로또 - 수동 여부 테스트")
+    void isManual() {
+        Lotto lotto = Lotto.manual(new LottoNumbers(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.isAuto()).isFalse();
+        assertThat(lotto.isManual()).isTrue();
     }
 }
