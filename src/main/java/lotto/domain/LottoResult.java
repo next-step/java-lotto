@@ -6,7 +6,8 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private final String RESULT_MATCH_COUNT_FORMAT = "%d개 일치 (%d원)- %d개%n";
+    private final String DEFAULT_RANK_FORMAT = "%d개 일치 (%d원)- %d개%n";
+    private final String SECOND_RANK_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
     private final String RESULT_PROFIT_RATIO_FORMAT = "총 수익률은 %.2f입니다. (원금보전 시, 수익률이 1입니다)";
     private final int DEFAULT_COUNT = 0;
 
@@ -54,11 +55,14 @@ public class LottoResult {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Rank, Integer> entry : lottoResult.entrySet()) {
             Rank rank = entry.getKey();
-            int matchCount = entry.getValue();
-            stringBuilder.append(String.format(RESULT_MATCH_COUNT_FORMAT,
-                    rank.getCountOfMatch(),
-                    rank.getPrice(),
-                    matchCount));
+            int rankCount = entry.getValue();
+            if (rank.equals(Rank.SECOND)) {
+                stringBuilder.append(String.format(SECOND_RANK_FORMAT, rank.getCountOfMatch(),
+                        rank.getPrice(), rankCount));
+                continue;
+            }
+            stringBuilder.append(String.format(DEFAULT_RANK_FORMAT, rank.getCountOfMatch(),
+                    rank.getPrice(), rankCount));
         }
         this.profitRatio = calculateProfitRatio();
         stringBuilder.append(String.format(RESULT_PROFIT_RATIO_FORMAT, profitRatio));
