@@ -14,8 +14,8 @@ public class LottoGame {
         OutputView.printInputMoneyMessage();
         Money money = InputView.inputMoneyAmount();
         LottoTicket lottoTicket = shop.buyAutoLotto(money);
-        OutputView.printLottoAmount(lottoTicket.count());
-        OutputView.printLottoBundle(lottoTicket);
+        OutputView.printLottoAmount(lottoTicket.matchingCount());
+        OutputView.printLottoTicket(lottoTicket);
         OutputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
         LottoResult matchAnswer = shop.matchAnswer(lottoTicket, winningNumber);

@@ -32,7 +32,7 @@ public class ShopTest {
         //when
         LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoTicket.count()).isEqualTo(10);
+        assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ShopTest {
         //when
         LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoTicket.count()).isEqualTo(10);
+        assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ShopTest {
         //when
         LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoTicket.count()).isEqualTo(10);
+        assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
 
     @Test
