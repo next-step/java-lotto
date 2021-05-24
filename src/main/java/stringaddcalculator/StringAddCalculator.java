@@ -11,7 +11,7 @@ public class StringAddCalculator {
             return 0;
         }
         String targetNum = input;
-        List<String> splitInputs = divider.getSplitByCustomDelimiter(input);
+        List<String> splitInputs = divider.splitInputByCustomDelimiterRule(input);
         if (splitInputs.size() > 1) {
             divider.setCustomDelimiter(splitInputs.get(0));
             targetNum = splitInputs.get(1);

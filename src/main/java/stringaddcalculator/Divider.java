@@ -10,7 +10,7 @@ public class Divider {
     private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
 
-    List<String> getSplitByCustomDelimiter(String input) {
+    List<String> splitInputByCustomDelimiterRule(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
         if(matcher.find()){
             return Arrays.asList(matcher.group(1),matcher.group(2));
