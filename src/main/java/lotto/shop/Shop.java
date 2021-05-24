@@ -1,18 +1,14 @@
 package lotto.shop;
 
 import lotto.error.ErrorMessage;
-import lotto.lotto.Answer;
+import lotto.lotto.WinningNumber;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.MatchedAnswer;
 
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;
@@ -30,10 +26,10 @@ public class Shop {
         return lottoTicket;
     }
 
-    public MatchedAnswer matchAnswer(LottoTicket lottoTicket, Answer answer) {
+    public MatchedAnswer matchAnswer(LottoTicket lottoTicket, WinningNumber winningNumber) {
         MatchedAnswer match = new MatchedAnswer();
         lottoTicket.tickets().forEach(lotto -> {
-            lotto.retainAll(answer);
+            lotto.retainAll(winningNumber);
             match.increaseCount(lotto.answerCount());
         });
         return match;

@@ -1,27 +1,27 @@
 package lotto;
 
-import lotto.lotto.Answer;
+import lotto.lotto.WinningNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.MatchedAnswer;
 import lotto.shop.Money;
 import lotto.shop.Shop;
-import lotto.ui.Command;
+import lotto.ui.OutputView;
+import lotto.ui.InputView;
 import lotto.ui.Result;
 
 public class LottoGame {
     public static void start() {
         Shop shop = new Shop();
-        Money money = Command.inputMoneyAmount();
+        OutputView.printInputMoneyMessage();
+        Money money = InputView.inputMoneyAmount();
         int lottoCount = shop.buyLotto(money);
-
-        Command.printLottoAmount(lottoCount);
+        OutputView.printLottoAmount(lottoCount);
         LottoTicket lottoTicket = shop.selectAuto(lottoCount);
-        Command.printLottoBundle(lottoTicket);
-
-        Answer answer = new Answer(Command.inputAnswer());
-        MatchedAnswer matchAnswer = shop.matchAnswer(lottoTicket, answer);
-
-        Command.resultMessage();
+        OutputView.printLottoBundle(lottoTicket);
+        OutputView.inputWinningNumber();
+        WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
+        MatchedAnswer matchAnswer = shop.matchAnswer(lottoTicket, winningNumber);
+        OutputView.resultMessage();
         Result.resultIncome(matchAnswer, money);
     }
 }

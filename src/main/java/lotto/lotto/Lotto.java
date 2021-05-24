@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lotto.error.ErrorMessage;
-import lotto.ui.Command;
+import lotto.ui.InputView;
 
 public class Lotto {
     public static final int MAX_COUNT = 6;
@@ -24,8 +24,8 @@ public class Lotto {
         return numbers.size() >= MAX_COUNT;
     }
 
-    public void retainAll(Answer answer) {
-        numbers.retainAll(answer.numbers());
+    public void retainAll(WinningNumber winningNumber) {
+        numbers.retainAll(winningNumber.numbers());
     }
 
     public int answerCount() {
@@ -37,7 +37,7 @@ public class Lotto {
                 .map(LottoNumber::getNumber)
                 .sorted()
                 .map(String::valueOf)
-                .collect(Collectors.joining(Command.NUMBER_DELIMITER));
+                .collect(Collectors.joining(InputView.NUMBER_DELIMITER));
     }
 
     private void checkNumber(int[] numbers) {

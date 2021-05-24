@@ -2,10 +2,10 @@ package lotto.lotto;
 
 import java.util.Set;
 
-public class Answer {
+public class WinningNumber {
     private final Set<LottoNumber> numbers;
 
-    public Answer(Set<LottoNumber> numbers) {
+    public WinningNumber(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 

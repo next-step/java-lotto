@@ -2,7 +2,6 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.lotto.Answer;
+import lotto.lotto.WinningNumber;
 import lotto.lotto.LottoNumber;
 import lotto.error.ErrorMessage;
 import lotto.lotto.Lotto;
@@ -81,12 +80,12 @@ public class ShopTest {
             numbers.add(lottoNumber);
         }
 
-        Answer answer = new Answer(numbers);
+        WinningNumber winningNumber = new WinningNumber(numbers);
 
         Lotto lotto = new Lotto(1, 2, 3, 9, 10, 11);
         lottoTicket.add(lotto);
         //when
-        MatchedAnswer match = shop.matchAnswer(lottoTicket, answer);
+        MatchedAnswer match = shop.matchAnswer(lottoTicket, winningNumber);
         //then
         assertThat(match.count(3)).isEqualTo(1);
     }
