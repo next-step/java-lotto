@@ -13,7 +13,7 @@ public class LottoReport {
 
     private double profitRate;
 
-    public LottoReport(final WinningLotto winners, final List<Lotto> lottos) {
+    public LottoReport(final WinningLotto winners, final LottoList lottos) {
         lottos.forEach(lotto -> updateMatchCountMetrics(winners, lotto));
         updateYield(lottos.size());
     }
