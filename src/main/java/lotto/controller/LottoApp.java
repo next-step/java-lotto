@@ -4,12 +4,11 @@ import java.util.List;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoNumbersGenerateStrategy;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
-import lotto.model.RandomGenerateStrategy;
 import lotto.model.Rate;
-import lotto.model.SupplierGenerateStrategy;
 import lotto.model.WinningNumbers;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
@@ -18,10 +17,15 @@ import lotto.view.dro.LottoResultDto;
 public class LottoApp {
 	private final LottoAppOutput lottoAppOutput;
 	private final LottoAppInput lottoAppInput;
+	private final LottoNumbersGenerateStrategy randomStrategy;
+	private final LottoNumbersGenerateStrategy supplierStrategy;
 
-	public LottoApp(LottoAppOutput lottoAppOutput, LottoAppInput lottoAppInput) {
+	public LottoApp(LottoAppOutput lottoAppOutput, LottoAppInput lottoAppInput,
+		LottoNumbersGenerateStrategy randomStrategy, LottoNumbersGenerateStrategy supplierStrategy) {
 		this.lottoAppOutput = lottoAppOutput;
 		this.lottoAppInput = lottoAppInput;
+		this.randomStrategy = randomStrategy;
+		this.supplierStrategy = supplierStrategy;
 	}
 
 	public void run() {
@@ -40,7 +44,7 @@ public class LottoApp {
 		List<LottoNumbers> manuals = inputManualNumbers();
 		int manualCount = manuals.size();
 		int autoCount = money.countOfLottoNumbers() - manualCount;
-		List<LottoNumbers> autos = generateAutoNumbers(autoCount);
+		List<LottoNumbers> autos = randomStrategy.generate(autoCount);
 		return LottoTicket.of(manuals, autos);
 	}
 
@@ -48,13 +52,7 @@ public class LottoApp {
 		lottoAppOutput.printManualCountInputView();
 		int manualCount = lottoAppInput.inputNumber();
 		lottoAppOutput.printManualLottoNumbersInputView();
-		SupplierGenerateStrategy supplierGenerateStrategy = new SupplierGenerateStrategy(lottoAppInput::inputNumbers);
-		return supplierGenerateStrategy.generate(manualCount);
-	}
-
-	private List<LottoNumbers> generateAutoNumbers(int autoCount) {
-		RandomGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
-		return randomGenerateStrategy.generate(autoCount);
+		return supplierStrategy.generate(manualCount);
 	}
 
 	private WinningNumbers inputWinningNumbers() {
