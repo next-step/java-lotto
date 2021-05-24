@@ -15,6 +15,10 @@ public class Lotto {
         this.lottoNumber = lottoRandomNumber.createRandomLotto();
     }
 
+    public Lotto(List<Integer> lottoNumber) {
+        this.lottoNumber = new LottoNumber(lottoNumber);
+    }
+
     public int compareWinLottoNumber(List<Integer> winLottoNumber) {
         return lottoNumber.countCollectNumber(winLottoNumber);
     }
@@ -28,7 +32,7 @@ public class Lotto {
     }
 
     public int containNumber(Integer winNumber) {
-        return lottoNumber.containNumber(winNumber);
+        return lottoNumber.isCollectNumber(winNumber);
     }
 
     @Override

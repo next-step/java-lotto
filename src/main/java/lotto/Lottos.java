@@ -1,6 +1,5 @@
 package lotto;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             lotto.compareWinLottoNumber(winNumber, lottoResult);
         }
+        lottoResult.calculateProfit(lottos.size());
         return lottoResult;
     }
 

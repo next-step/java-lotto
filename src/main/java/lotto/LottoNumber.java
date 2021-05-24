@@ -7,7 +7,7 @@ public class LottoNumber {
     private final List<Integer> lottoNumber;
 
     public LottoNumber(List<Integer> lottoNumber) {
-        LottoRandomNumberUtils.validationNumber(lottoNumber);
+        LottoValidationUtils.validationLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -33,10 +33,6 @@ public class LottoNumber {
             collectNumber += winLottoNumber.containNumber(winNumber);
         }
         return collectNumber;
-    }
-
-    public int containNumber(Integer winNumber) {
-        return lottoNumber.contains(winNumber) ? 1 : 0;
     }
 
     @Override
