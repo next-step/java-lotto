@@ -18,7 +18,14 @@ public class LottoTicket {
         return this.lottoNumbers;
     }
 
-    public LottoRank rank(LottoNumbers matchTarget) {
-        return LottoRank.of(lottoNumbers().matchCount(matchTarget));
+    public LottoRank rank(LottoNumbers matchTarget, LottoNumber bonusNumber) {
+        validateBonusNumber(matchTarget, bonusNumber);
+        return LottoRank.of(lottoNumbers().matchCount(matchTarget), lottoNumbers().contains(bonusNumber));
+    }
+
+    private void validateBonusNumber(LottoNumbers matchTarget, LottoNumber bonusNumber) {
+        if (matchTarget.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호와 당첨번호가 중복됩니다.");
+        }
     }
 }
