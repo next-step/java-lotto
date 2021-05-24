@@ -31,8 +31,8 @@ public class Money {
         return amount;
     }
 
-    public Money minus(Money manualLottoMoney) {
-        return new Money(this.amount - manualLottoMoney.value());
+    public Money minus(Money money) {
+        return new Money(this.amount - money.value());
     }
 
     private void validatePositive(int amount) {
