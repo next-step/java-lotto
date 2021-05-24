@@ -20,23 +20,25 @@ public class LottoTicketGenerator {
         }
     }
 
-    public LottoTicket generate() {
+    public List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS_CACHE);
         List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS_CACHE.subList(0, LottoTicket.LOTTO_NUMBERS_LENGTH));
         Collections.sort(lottoNumbers);
-        return new LottoTicket(lottoNumbers);
+        return lottoNumbers;
     }
 
-    public LottoTicket generate(String lottoNumbersText) {
+    public List<LottoNumber> generate(String lottoNumbersText) {
         String[] textNumbers = lottoNumbersText.split(LOTTO_NUMBERS_TEXT_SPLIT_REGEX);
         List<LottoNumber> resultLottoNumbers = new ArrayList<>();
         for (int i = 0; i < textNumbers.length; i++) {
             int number = Integer.parseInt(textNumbers[i]);
-            resultLottoNumbers.add(LOTTO_NUMBERS_CACHE.get(number));
+            Collections.sort(LOTTO_NUMBERS_CACHE);
+            resultLottoNumbers.add(LOTTO_NUMBERS_CACHE.get(number-1));
         }
+        Collections.sort(resultLottoNumbers);
         throwInvalidLottoNumbers(resultLottoNumbers);
 
-        return new LottoTicket(resultLottoNumbers);
+        return resultLottoNumbers;
     }
 
     private void throwInvalidLottoNumbers(List<LottoNumber> inputNumbers) {

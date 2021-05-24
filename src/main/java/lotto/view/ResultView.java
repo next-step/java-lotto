@@ -10,17 +10,15 @@ public class ResultView {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
     }
 
-    public void printLottoTickets(List<LottoTicket> lottoTickets) {
-        for (int i=0; i<lottoTickets.size(); i++) {
-            System.out.println(lottoTickets.get(i));
-        }
+    public void printLottoTickets(String lottoTicketsText) {
+        System.out.println(lottoTicketsText);
     }
 
-    public void printResultStatistics(WinningType[] winningTypes) {
+    public void printResultStatistics(List<WinningType> winningTypes) {
         System.out.println("\n당첨 통계\n---------");
         int[] matchCountResults = new int[] {0,0,0,0,0,0,0};
-        for(int i=0; i<winningTypes.length; i++) {
-            matchCountResults[winningTypes[i].getMatchCount()] ++;
+        for(WinningType winningType : winningTypes) {
+            matchCountResults[winningType.getMatchCount()] ++;
         }
 
         for(int i=3; i<matchCountResults.length; i++) {

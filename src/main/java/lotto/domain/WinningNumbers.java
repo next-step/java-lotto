@@ -11,7 +11,7 @@ public class WinningNumbers {
     private static final String winningNumbersTextSplitRegex = ",";
     private Set<LottoNumber> winningNumbers;
 
-    public WinningNumbers(Integer[] winningNumbers) {
+    /*public WinningNumbers(Integer[] winningNumbers) {
         throwInValidWinningNumbers(winningNumbers);
         this.winningNumbers = parseWinningNumbers(winningNumbers);
     }
@@ -62,6 +62,6 @@ public class WinningNumbers {
         if (new HashSet<Integer>(Arrays.asList(winningNumbers)).size() < LottoTicket.LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
         }
-    }
+    }*/
 
 }

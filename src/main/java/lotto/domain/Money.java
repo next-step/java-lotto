@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.common.ErrorCode;
 import lotto.common.WinningType;
 
+import java.util.List;
+
 public class Money {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private long money;
@@ -18,7 +20,7 @@ public class Money {
         return (int)(this.money/LOTTO_TICKET_PRICE);
     }
 
-    public double calculateProfit(WinningType[] winningTypes) {
+    public double calculateProfit(List<WinningType> winningTypes) {
         ProfitCalculator profitCalculator = new ProfitCalculator();
         return profitCalculator.calculate(this.money, winningTypes);
     }
