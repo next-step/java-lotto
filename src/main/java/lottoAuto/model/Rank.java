@@ -21,7 +21,7 @@ public enum Rank {
     }
 
     public static Rank findByRank(int winningCount, Boolean hasBonus) {
-        if (winningCount == 5 && hasBonus) {
+        if (winningCount == SECOND.matchWinning && hasBonus) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
