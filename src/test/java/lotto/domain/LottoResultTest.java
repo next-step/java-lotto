@@ -16,7 +16,7 @@ public class LottoResultTest {
 	@BeforeEach
 	void setUp() {
 		List<LottoRank> lottoRankList = new ArrayList<>();
-		lottoRankList.add(LottoRank.FOURTH);
+		lottoRankList.add(LottoRank.FIFTH);
 		lottoRankList.add(LottoRank.UNRANKED);
 		lottoRankList.add(LottoRank.UNRANKED);
 		lottoRankList.add(LottoRank.UNRANKED);
@@ -57,7 +57,8 @@ public class LottoResultTest {
 		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FIRST)).isEqualTo(0);
 		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.SECOND)).isEqualTo(0);
 		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.THIRD)).isEqualTo(0);
-		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FOURTH)).isEqualTo(1);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FOURTH)).isEqualTo(0);
+		assertThat(lottoResult.getLottoRankCount().getCount(LottoRank.FIFTH)).isEqualTo(1);
 	}
 
 }
