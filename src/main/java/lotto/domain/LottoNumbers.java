@@ -29,6 +29,10 @@ public class LottoNumbers {
         .count();
   }
 
+  public boolean contains(LottoNumber lottoNumber) {
+    return numbers.contains(lottoNumber);
+  }
+
   private Set<LottoNumber> toSet(List<LottoNumber> lottoNumbers) {
     Set<LottoNumber> uniqueNumbers = new TreeSet<>(lottoNumbers);
     if(uniqueNumbers.size() != NUMBER_COUNT_PER_GAME) {
