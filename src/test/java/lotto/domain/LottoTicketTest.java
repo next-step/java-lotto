@@ -46,7 +46,7 @@ class LottoTicketTest {
 
         // then
         assertThat(lottoTicket.rank(lottoNumbersMatch6, LottoNumber.of(45))).isEqualTo(LottoRank.FIRST);
-        assertThat(lottoTicket.rank(lottoNumbersMatch5, LottoNumber.of(2))).isEqualTo(LottoRank.SECOND);
+        assertThat(lottoTicket.rank(lottoNumbersMatch5, LottoNumber.of(1))).isEqualTo(LottoRank.SECOND);
         assertThat(lottoTicket.rank(lottoNumbersMatch5, LottoNumber.of(45))).isEqualTo(LottoRank.THIRD);
         assertThat(lottoTicket.rank(lottoNumbersMatch4, LottoNumber.of(45))).isEqualTo(LottoRank.FOURTH);
         assertThat(lottoTicket.rank(lottoNumbersMatch3, LottoNumber.of(45))).isEqualTo(LottoRank.FIFTH);
