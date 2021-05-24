@@ -8,18 +8,16 @@ import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.PrintView;
 
-import java.util.List;
-
 public class LottoAppController {
     public void run() {
-        LottoList purchasedLottos = new LottoList(buyLotto());
+        LottoList purchasedLottos = buyLotto();
         PrintView.showPurchasedLotto(purchasedLottos);
 
         LottoReport report = getReport(purchasedLottos);
         PrintView.showLottoReport(report);
     }
 
-    private List<Lotto> buyLotto() {
+    private LottoList buyLotto() {
         PrintView.askPurchaseAmountMessage();
         int purchaseAmount = InputView.getLottoPurchaseAmount();
         return LottoMachine.buyWith(purchaseAmount);
@@ -27,7 +25,7 @@ public class LottoAppController {
 
     private LottoReport getReport(LottoList purchasedLottos) {
         PrintView.askWinningNumber();
-        List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
+        Lotto lastWinningNumbers = new Lotto(InputView.getLastWinningNumber());
         PrintView.askBonusNumber();
         int bonusNumber = InputView.getBonusNumber();
         return new LottoReport(new WinningLotto(lastWinningNumbers, bonusNumber), purchasedLottos);
