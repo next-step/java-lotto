@@ -21,10 +21,10 @@ public class RankTest {
 	@Test
 	@DisplayName("일치하는 개수보다 큰지 확인 테스트")
 	void isGreaterThen() {
-		Assertions.assertThat(Rank.FIRST.isGreaterThan(5)).isTrue();
-		Assertions.assertThat(Rank.SECOND.isGreaterThan(4)).isTrue();
-		Assertions.assertThat(Rank.THIRD.isGreaterThan(3)).isTrue();
-		Assertions.assertThat(Rank.FOURTH.isGreaterThan(2)).isTrue();
+		Assertions.assertThat(Rank.FIRST.isGreaterThan(Rank.SECOND)).isTrue();
+		Assertions.assertThat(Rank.SECOND.isGreaterThan(Rank.THIRD)).isTrue();
+		Assertions.assertThat(Rank.THIRD.isGreaterThan(Rank.FOURTH)).isTrue();
+		Assertions.assertThat(Rank.FOURTH.isGreaterThan(Rank.NONE)).isTrue();
 	}
 
 }

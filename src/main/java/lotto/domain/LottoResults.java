@@ -14,7 +14,7 @@ public class LottoResults {
 	public LottoResults() {
 		this.lottoResults = new ArrayList<>();
 		this.renderRanks = Arrays.stream(Rank.values())
-				.filter(rank -> rank.isGreaterThan(Rank.NONE.getMatchCount()))
+				.filter(rank -> rank.isGreaterThan(Rank.NONE))
 				.sorted(Comparator.comparingInt(Rank::getMatchCount))
 				.collect(Collectors.toList());
 	}
