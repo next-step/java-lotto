@@ -57,22 +57,11 @@ public class PurchaseLotto {
     }
 
     private void updateResultLotto(int wonCountForOneLotto) {
-            resultAll.won(wonCountForOneLotto);
+        resultAll.won(wonCountForOneLotto);
     }
 
     private void setLastWonLottoNumbers(String lastWonLottoNumbers) {
         this.lastWonLottoNumber = new LastWonLottoNumber(lastWonLottoNumbers);
-    }
 
-//    public WonCount countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
-//        WonCount wonCount = new WonCount();
-//        for (int oneLottoNumber : generateLottoNumber) {
-//            wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumbers));
-//        }
-//        return wonCount;
-//    }
-//
-//    private boolean isSameNumber(int oneLottoNumber, List<Integer> lastWonLottoNumbers) {
-//        return lastWonLottoNumbers.contains(oneLottoNumber);
-//    }
+    }
 }

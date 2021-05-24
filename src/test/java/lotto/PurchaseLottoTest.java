@@ -1,13 +1,9 @@
 package lotto;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,12 +23,9 @@ public class PurchaseLottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     public void lastWonLottoNumbers_지난당첨번호문자열파싱검증(int number) {
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
         assertThat(lastWonLottoNumber.contains(number)).isTrue();
     }
-
-
-
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import calculator.StringAddCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
@@ -17,7 +19,7 @@ public class LottoNumberTest {
     public void setUp() {
         testLottoNumber = new ArrayList<Integer>();
         lottoNumberRange = new ArrayList<Integer>();
-        for(int i=1; i<46; i++) {
+        for (int i = 1; i < 46; i++) {
             lottoNumberRange.add(i);
         }
     }
@@ -52,6 +54,18 @@ public class LottoNumberTest {
         });
 
         assertThat(lottoNumber.getLottoNumbers().contains(1)).isTrue();
+    }
+
+    @Test
+    public void LastWonValidateNumber_로또번호검증_문자입력() {
+        assertThatThrownBy(() -> new LastWonLottoNumber("1,a,3,4,5,6"))
+                .isInstanceOf(RuntimeException.class).hasMessage("숫자만 입력 가능합니다.");
+    }
+
+    @Test
+    public void LastWonValidateNumber_로또번호검증_45초과입력() {
+        assertThatThrownBy(() -> new LastWonLottoNumber("1,2,3,4,5,56"))
+                .isInstanceOf(RuntimeException.class).hasMessage("1부터 45까지 숫자만 입력 가능합니다.");
     }
 
 }
