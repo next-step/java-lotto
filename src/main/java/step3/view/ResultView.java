@@ -1,6 +1,6 @@
 package step3.view;
 
-import step3.lotto.Lotto;
+import step3.lotto.LottoTicket;
 import step3.winning.WinningPrize;
 import step3.winning.WinningStatistics;
 import java.math.BigDecimal;
@@ -18,10 +18,14 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printLotto(Lotto lotto) {
-        for (int i = 0; i < lotto.size(); i++) {
-            System.out.println(lotto.getLottoTicket(i).getLottoNumbers());
+    public static void printLotto(List<LottoTicket> tickets) {
+        for (int i = 0; i < tickets.size(); i++) {
+            printLottoTicket(tickets.get(i));
         }
+    }
+
+    public static void printLottoTicket(LottoTicket ticket) {
+        System.out.println(ticket.getLottoNumberList());
     }
 
     public static void printStatisticsIntroduction() {
