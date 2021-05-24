@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGames;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -25,12 +25,12 @@ public class LottoManager {
     private void playLotto() {
         int money = inputView.takeMoney();
 
-        LottoGames lottoGames = new LottoGames(money);
+        Lottos lottos = new Lottos(money);
 
-        resultView.showLottoGames(lottoGames);
+        resultView.showLottoGames(lottos);
 
         int[] lottoNumbers = inputView.takeLottoNumbers();
 
-        resultView.showLottoStatics(lottoGames.calculateStatics(new LottoGame(lottoNumbers)));
+        resultView.showLottoStatics(lottos.calculateStatics(new Lotto(lottoNumbers)));
     }
 }

@@ -6,18 +6,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoStaticsTest {
-    LottoGames lottoGames;
+    Lottos lottos;
 
     @BeforeEach
     public void setup() {
-        lottoGames = new LottoGames(new int[][]{
+        lottos = new Lottos(new int[][]{
                 {1, 2, 3, 4, 5, 6},     // 6
                 {1, 2, 3, 41, 42, 43},  // 3
                 {41, 42, 43, 1, 2, 3},  // 3
@@ -34,29 +33,29 @@ public class LottoStaticsTest {
     @ParameterizedTest
     @CsvSource({"3,3","4,2","5,0","6,1"})
     public void 로또통계(int rank, int rankCount) {
-        LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
-        LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
+        Lotto winLotto = new Lotto(1,2,3,4,5,6);
+        LottoStatics statics = lottos.calculateStatics(winLotto);
         assertThat(statics.getRankCount(rank)).isEqualTo(rankCount);
     }
 
     @Test
     public void 수익률() {
-        LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
-        LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
+        Lotto winLotto = new Lotto(1,2,3,4,5,6);
+        LottoStatics statics = lottos.calculateStatics(winLotto);
         assertThat(statics.getProfit()).isEqualTo(200011.5);
     }
 
     @ParameterizedTest
     @MethodSource("provideLottoGames")
-    public void 수익률2(LottoGames lottoGames) {
-        LottoGame winLottoGame = new LottoGame(1,2,3,4,5,6);
-        LottoStatics statics = lottoGames.calculateStatics(winLottoGame);
+    public void 수익률2(Lottos lottos) {
+        Lotto winLotto = new Lotto(1,2,3,4,5,6);
+        LottoStatics statics = lottos.calculateStatics(winLotto);
         assertThat(statics.getProfit()).isEqualTo(0.35);
     }
 
     private static Stream<Arguments> provideLottoGames() {
         return Stream.of(
-                Arguments.of(new LottoGames(new int[][] {
+                Arguments.of(new Lottos(new int[][] {
                         {8, 21, 23, 41, 42, 43},
                         {3, 5, 11, 16, 32, 38},
                         {7, 11, 16, 35, 36, 44},

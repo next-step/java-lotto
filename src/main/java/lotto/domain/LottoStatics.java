@@ -1,48 +1,44 @@
 package lotto.domain;
 
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class LottoStatics {
     // 3개 이상부터 통계
     public static final int MIN_STATIC_RANK = 3;
     public static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
-    private static final String ENTER = "\n";
+
+    private List<Rank> ranks;
 
 
-    private Map<Integer, Integer> rankStatics;
-    private int totalGames;
 
-    public LottoStatics() {
-        init();
+    public LottoStatics(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
     public Profit getProfit() {
+        double total = getTotalPrize();
+        int totalCost = Lotto.PRICE *  ranks.size();
+
+        return new Profit(total , totalCost);
+    }
+
+    private double getTotalPrize() {
         double total = 0;
-        for (int rank : rankStatics.keySet()) {
-            total += getRankCount(rank) * RANK_PRIZE[rank];
+        for ( Rank rank : ranks) {
+            total += Rank.prize(rank);
         }
-        return new Profit(total,totalGames * LottoGame.PRICE);
+        return total;
     }
 
-    private void init() {
-        rankStatics = new HashMap<>();
-        for( int rank = MIN_STATIC_RANK; rank <= LottoGame.LOTTO_NUMBER_COUNT; rank++) {
-            rankStatics.computeIfAbsent(rank,k->0);
+    public int getRankCount(int targetRank) {
+        int count = 0;
+        for (Rank rank : ranks) {
+            if( rank == Rank.of(targetRank)) {
+                count++;
+            }
         }
-    }
-
-    public void addStatic(int rank) {
-        totalGames++;
-        if (rank >= MIN_STATIC_RANK) {
-            rankStatics.computeIfPresent(rank,(k,v)->v+1);
-        }
-    }
-
-    public int getRankCount(int rank) {
-        return rankStatics.getOrDefault(rank,0);
+        return count;
     }
 
 }

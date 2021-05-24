@@ -4,27 +4,27 @@ import lotto.exception.InvalidLottoGame;
 
 import java.util.*;
 
-public class LottoGame {
+public class Lotto {
     public static final int PRICE = 1_000;
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public LottoGame() {
+    public Lotto() {
         fillRandomNumbers();
     }
 
-    public LottoGame(int... numbers) {
+    public Lotto(int... numbers) {
         if (numbers.length > LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lottoNumbers.size()));
         }
 
         for (int number : numbers) {
-            addRandomNumber(number);
+            addCustomNumber(number);
         }
     }
 
-    private void addRandomNumber(int number) {
+    private void addCustomNumber(int number) {
         lottoNumbers.add(new LottoNumber(new CustomNumber(number)));
     }
 
@@ -42,19 +42,12 @@ public class LottoGame {
         lottoNumbers.add(number);
     }
 
-    public boolean isValid() {
-        if (this.lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lottoNumbers.size()));
-        }
-        return true;
-    }
-
-    public int matchCount(LottoGame game2) {
+    public Rank matchCount(Lotto other) {
         int count = 0;
         for (LottoNumber number : lottoNumbers) {
-            count = game2.increaseCountIfContains(number,count);
+            count = other.increaseCountIfContains(number,count);
         }
-        return count;
+        return Rank.of(count);
     }
 
     private int increaseCountIfContains(LottoNumber number, int count) {

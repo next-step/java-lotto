@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
-import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -16,20 +14,19 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoGameTest {
+public class LottoTest {
 
     @Test
     public void 로또게임_생성() {
-        LottoGame game = new LottoGame();
-        assertThat(game.isValid()).isTrue();
+        Lotto game = new Lotto();
     }
 
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
     public void 당첨번호와_로또게임이_일치하는_숫자갯수(int[] lastWeekNumbers, int[] myLottoNumbers, int matchCount) {
-        LottoGame winLotto = new LottoGame(lastWeekNumbers);
-        LottoGame myLotto = new LottoGame(myLottoNumbers);
-        assertThat(winLotto.matchCount(myLotto)).isEqualTo(matchCount);
+        Lotto winLotto = new Lotto(lastWeekNumbers);
+        Lotto myLotto = new Lotto(myLottoNumbers);
+        assertThat(winLotto.matchCount(myLotto)).isEqualTo(Rank.of(matchCount));
     }
 
     private static Stream<Arguments> provideLottoNumbers() {
@@ -44,16 +41,16 @@ public class LottoGameTest {
     @Test
     @DisplayName("당첨번호 갯수가 6개 이상일 때 InvalidLottoGame 에러발생")
     public void 당첨번호가_6개이상입력() {
-        assertThatThrownBy(()->new LottoGame(1,2,3,4,5,6,7))
+        assertThatThrownBy(()->new Lotto(1,2,3,4,5,6,7))
                 .isInstanceOf(InvalidLottoGame.class)
                 .hasMessageContaining(InvalidLottoGame.INVALID_LOTTO_GAME);
     }
 
     @Test
     public void 당첨번호_출력() {
-        assertThat(new LottoGame(1,2,3,4,5,6).toString())
+        assertThat(new Lotto(1,2,3,4,5,6).toString())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]");
-        assertThat(new LottoGame(6,5,4,3,2,1).toString())
+        assertThat(new Lotto(6,5,4,3,2,1).toString())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 

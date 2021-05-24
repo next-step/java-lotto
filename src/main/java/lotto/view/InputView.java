@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
+import lotto.domain.Lotto;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -12,8 +12,8 @@ public class InputView {
     private static final String REQUEST_WIN_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String DELIMITER = "\\s*,\\s*";
 
-    Scanner input = new Scanner(System.in);
-    PrintStream output = new PrintStream(System.out);
+    private Scanner input = new Scanner(System.in);
+    private PrintStream output = new PrintStream(System.out);
 
     public int takeMoney() {
         output.println(REQUEST_MONEY_INPUT_MESSAGE);
@@ -21,7 +21,7 @@ public class InputView {
         while(money <= 0) {
             money = parseMoney();
         }
-        output.println(String.format(LOTTO_COUNT_MESSAGE, money / LottoGame.PRICE));
+        output.println(String.format(LOTTO_COUNT_MESSAGE, money / Lotto.PRICE));
         return money;
     }
 
@@ -41,7 +41,7 @@ public class InputView {
     public int[] takeLottoNumbers() {
         int[] lottoNumbers = null;
         output.println(REQUEST_WIN_LOTTO_NUMBER_MESSAGE);
-        while (lottoNumbers == null || lottoNumbers.length < LottoGame.LOTTO_NUMBER_COUNT) {
+        while (lottoNumbers == null || lottoNumbers.length < Lotto.LOTTO_NUMBER_COUNT) {
             lottoNumbers = parseLottoNumbers();
         }
         enter();
