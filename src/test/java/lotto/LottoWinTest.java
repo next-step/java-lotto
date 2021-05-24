@@ -18,4 +18,15 @@ public class LottoWinTest {
         }
         assertThat(lottoWin.sum()).isEqualTo(Integer.parseInt(expected));
     }
+
+    @ParameterizedTest(name = "보너스 합계 테스트")
+    @CsvSource(value = {"3,4,5,6:2030055000", "3,3,3:15000"}, delimiter = ':')
+    public void sumWithBonus(String inputs, String expected) {
+        LottoWin lottoWin = new LottoWin();
+        String[] hits = inputs.split(",");
+        for(String hit : hits) {
+            lottoWin.hit(Integer.parseInt(hit), true);
+        }
+        assertThat(lottoWin.sum()).isEqualTo(Integer.parseInt(expected));
+    }
 }
