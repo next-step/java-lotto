@@ -11,7 +11,8 @@ import java.util.Stack;
 
 import static lotto.domain.LottoGameOptions.*;
 
-public class LottoGeneratorAuto implements LottoGenerator{
+public class LottoGeneratorAuto implements LottoGenerator {
+
     private int countOfAvailableAutoLotto;
 
     public LottoGeneratorAuto(int countOfAvailableAutoLotto) {
