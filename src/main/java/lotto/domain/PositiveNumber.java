@@ -28,7 +28,7 @@ public class PositiveNumber implements Comparable<PositiveNumber> {
     }
 
     public PositiveNumber divide(PositiveNumber target) {
-        return new PositiveNumber(value / target.toInt());
+        return new PositiveNumber(value / target.toLong());
     }
 
     public PositiveNumber multiple(PositiveNumber target) {
@@ -39,7 +39,9 @@ public class PositiveNumber implements Comparable<PositiveNumber> {
         return new PositiveNumber(value + target.toLong());
     }
 
-    public PositiveNumber minus(PositiveNumber target) { return new PositiveNumber( value - target.toInt()); }
+    public PositiveNumber minus(PositiveNumber target) {
+        return new PositiveNumber(value - target.toLong());
+    }
 
     public long toLong() {
         return value;

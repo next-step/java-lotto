@@ -68,13 +68,13 @@ public class GameTest {
     @DisplayName("금액보다 적은 수동로또번호가 입력되면 문제없다")
     public void 금액보다_많은_수동로또번호가_입력되면_문제없다(int money) {
         assertDoesNotThrow(() -> Game.createWithManualTicketByMoney(
-                        new LottoTickets(
-                                Arrays.asList(
-                                        new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6")),
-                                        new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6"))
-                                )
-                        ),
-                        new PositiveNumber(money)));
+                new LottoTickets(
+                        Arrays.asList(
+                                new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6")),
+                                new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6"))
+                        )
+                ),
+                new PositiveNumber(money)));
     }
 
     @Test
@@ -83,14 +83,17 @@ public class GameTest {
         int totalTicket = 50;
         int priceOfTicket = 1000;
 
-        List<LottoTicket> manualLottoTickets = Arrays.asList(new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6")),
+        List<LottoTicket> manualLottoTickets = Arrays.asList(
+                new LottoTicket(convertStringToLottoNumberList("1,2,3,4,5,6")),
                 new LottoTicket(convertStringToLottoNumberList("2,3,4,5,6,7")),
                 new LottoTicket(convertStringToLottoNumberList("3,4,5,6,7,8")),
                 new LottoTicket(convertStringToLottoNumberList("4,5,6,7,8,9")),
                 new LottoTicket(convertStringToLottoNumberList("5,6,7,8,9,10")),
                 new LottoTicket(convertStringToLottoNumberList("6,7,8,9,10,11")));
 
-        Game withManualTicketByMoney = Game.createWithManualTicketByMoney(new LottoTickets(manualLottoTickets), new PositiveNumber(totalTicket * priceOfTicket));
+        Game withManualTicketByMoney = Game.createWithManualTicketByMoney(
+                new LottoTickets(manualLottoTickets),
+                new PositiveNumber(totalTicket * priceOfTicket));
 
         assertThat(withManualTicketByMoney.sizeOfManualLottoTickets())
                 .isEqualTo(manualLottoTickets.size());

@@ -26,7 +26,7 @@ public class Game {
         PositiveNumber countOfManualTicket = new PositiveNumber(manualLottoTickets.size());
         PositiveNumber countOfTicket = money.divide(TICKET_PRICE);
 
-        if(countOfTicket.isUnder(countOfManualTicket)) {
+        if (countOfTicket.isUnder(countOfManualTicket)) {
             throw new IllegalArgumentException("금액 초과입니다.");
         }
 
