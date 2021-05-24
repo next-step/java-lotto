@@ -25,21 +25,7 @@ public class MessageLottoNumberGenerator implements Generator {
 	@Override
 	public LottoNumbers generate() {
 		Collections.sort(numbers);
-		List<LottoNumber> lottoNumberList = convertTo(numbers);
-		return appendLottoNumber(lottoNumberList);
+		return new LottoNumbers(numbers);
 	}
 
-	private List<LottoNumber> convertTo(List<Integer> numbers) {
-		return numbers.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toList());
-	}
-
-	private LottoNumbers appendLottoNumber(List<LottoNumber> lottoNumberList) {
-		LottoNumbers lottoNumbers = new LottoNumbers();
-		for (LottoNumber lottoNumber : lottoNumberList) {
-			lottoNumbers.add(lottoNumber);
-		}
-		return lottoNumbers;
-	}
 }

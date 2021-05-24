@@ -1,7 +1,7 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -9,30 +9,17 @@ public class LottoNumbers {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public LottoNumbers() {
-		lottoNumbers = new ArrayList<>(LOTTO_SIZE);
-	}
-
 	public LottoNumbers(List<Integer> numbers) {
-		this();
-		for (int number : numbers) {
-			this.add(new LottoNumber(number));
+		if (!isValidSource(numbers)) {
+			throw new IllegalArgumentException("lotto는 6개의 숫자로 구성되어 있습니다");
 		}
-	}
-
-	public void add(LottoNumber lottoNumber) {
-		if (!isLessThan()) {
-			return;
-		}
-		lottoNumbers.add(lottoNumber);
+		lottoNumbers = numbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 
 	public boolean isComplete() {
 		return lottoNumbers.size() == LOTTO_SIZE;
-	}
-
-	private boolean isLessThan() {
-		return lottoNumbers.size() <= LOTTO_SIZE && !isComplete();
 	}
 
 	public boolean hasWinLottoNumber(LottoNumber lottoNumber) {
@@ -70,5 +57,9 @@ public class LottoNumbers {
 
 	private boolean contains(LottoNumber purchased) {
 		return lottoNumbers.contains(purchased);
+	}
+
+	private boolean isValidSource(List<Integer> numbers) {
+		return numbers.size() == LOTTO_SIZE;
 	}
 }
