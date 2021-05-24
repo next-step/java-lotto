@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-    private LottoAutoService lottoAutoService = new LottoAutoService();
+    private LottoStatistic lottoStatistic = new LottoStatistic();
 
     private List<Lotto> userLotto = new ArrayList<>();
     private List<Integer> winningLotto = new ArrayList<>();

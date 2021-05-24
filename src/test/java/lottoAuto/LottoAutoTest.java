@@ -1,6 +1,6 @@
 package lottoAuto;
 
-import lottoAuto.model.LottoAutoService;
+import lottoAuto.model.LottoStatistic;
 import lottoAuto.model.Rank;
 import lottoAuto.view.LottoAutoResultView;
 import lottoAuto.vo.LottoResultVo;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.*;
 
 public class LottoAutoTest {
-    public LottoAutoService lottoAutoService = new LottoAutoService();
+    public LottoStatistic lottoStatistic = new LottoStatistic();
     public List<LottoResultVo> expected = new ArrayList<>();
     public LottoAutoResultView lottoAutoResultView = new LottoAutoResultView();
 
@@ -41,7 +41,7 @@ public class LottoAutoTest {
         List<Integer> winning_count = Arrays.asList(5, 3);
         List<Boolean> bonus_count = Arrays.asList(false, false);
 
-        List<LottoResultVo> actual = lottoAutoService.setWinningStatistic(winning_count, bonus_count);
+        List<LottoResultVo> actual = lottoStatistic.setWinningStatistic(winning_count, bonus_count);
 
         assertThat(actual.get(0).getRank()).isEqualTo(expected.get(0).getRank());
         assertThat(actual.get(1).getRank()).isEqualTo(expected.get(1).getRank());
@@ -54,7 +54,7 @@ public class LottoAutoTest {
         List<Integer> winning_count = Arrays.asList(5, 3);
         List<Boolean> bonus_count = Arrays.asList(true, false);
 
-        List<LottoResultVo> actual = lottoAutoService.setWinningStatistic(winning_count, bonus_count);
+        List<LottoResultVo> actual = lottoStatistic.setWinningStatistic(winning_count, bonus_count);
 
         assertThat(actual.get(0).getRank()).isEqualTo(expected.get(0).getRank());
         assertThat(actual.get(1).getRank()).isEqualTo(expected.get(1).getRank());
