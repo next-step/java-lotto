@@ -34,7 +34,8 @@ public class Lotto {
         List<LottoNumbers> lottoList = new ArrayList<>();
         int totalCount = price.getBuyCount();
         for (int index = 0; index < totalCount; index++) {
-            lottoList.add(new LottoNumbers(RandomNumbersGenerator.createNumbers()));
+            lottoList
+                .add(new LottoNumbers(RandomNumbersGenerator.createNumbers()));
         }
 
         return new TotalLotto(lottoList);
@@ -93,10 +94,12 @@ public class Lotto {
     }
 
     private LottoNumbers getVictoryNumbers() {
-        String[] numbers = inputView.getVictoryNumbers().split(",");
+        String[] numbers = inputView.getVictoryNumbers();
         validationVictoryInput(numbers);
         return new LottoNumbers(
-                Arrays.stream(numbers).map(number -> StringUtils.parseInt(number.trim())).collect(Collectors.toList()));
+            Arrays.stream(numbers)
+                .map(number -> StringUtils.parseInt(number.trim()))
+                .collect(Collectors.toList()));
     }
 
     private void validationVictoryInput(String[] numbers) {

@@ -19,9 +19,9 @@ public class ConsoleInputView {
         return StringUtils.parseInt(scanner.nextLine());
     }
 
-    public String getVictoryNumbers() {
+    public String[] getVictoryNumbers() {
         System.out.println(NEED_VICTORY_NUMBER_TEXT);
-        return scanner.nextLine();
+        return scanner.nextLine().split(",");
     }
 
 }
