@@ -44,11 +44,10 @@ public class LottoResults {
 	}
 
 	public int findRankCount(Rank rank) {
-		int rankCount = this.resultRanks.stream()
+		return this.resultRanks.stream()
 				.filter(r -> r.equals(rank))
 				.mapToInt(m -> 1)
 				.sum();
-		return rankCount;
 	}
 
 }
