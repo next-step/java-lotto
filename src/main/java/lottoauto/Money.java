@@ -29,7 +29,7 @@ public final class Money {
 
     @Override
     public String toString() {
-        return money + MONEY_UNIT;
+        return "(" + money + MONEY_UNIT + ")";
     }
 
     public int calcProceed(int count) {

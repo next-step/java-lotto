@@ -50,7 +50,7 @@ public class LottoNumbers {
     public boolean checkHitBonus(WinningNumbersWithBonus winningNumbersWithBonus) {
         boolean result = false;
 
-        for(LottoNumber lottoNumber: lottoNumbers) {
+        for (LottoNumber lottoNumber: lottoNumbers) {
             result = result || winningNumbersWithBonus.isHitBonusNumber(lottoNumber);
         }
 

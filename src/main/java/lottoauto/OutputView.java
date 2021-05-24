@@ -9,11 +9,10 @@ public class OutputView {
     private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_NUBER = "보너스 볼을 입력해주세요.";
 
-    private static final String STATEMENT = "당첨 통계\n---------\n";
+    private static final String STATEMENT = "당첨 통계\n---------";
     private static final String PROCEEDS_RATE = "총 수익률은 %.2f입니다.";
 
     private static final PrintStream printStream = System.out;
-
 
     public void printf(String format, Object... objects) {
         printStream.printf(format, objects);

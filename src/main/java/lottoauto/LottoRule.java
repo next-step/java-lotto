@@ -28,10 +28,6 @@ public enum LottoRule {
         return isMatchedBonus;
     }
 
-    private Money winningMoney() {
-        return winningMoney;
-    }
-
     public static LottoRule valueOf(final HitCount hitCount, final boolean isMatchedBonus) {
         LottoRule[] lottoRules = values();
 
@@ -41,13 +37,15 @@ public enum LottoRule {
                 .orElse(MISS);
     }
 
-    public boolean isEqualsHitCount(HitCount hitCount) {
-        return this.hitCount.equals(hitCount);
-    }
-
     @Override
     public String toString() {
-        return hitCount.toString() + "개" + "일치 (" + winningMoney.toString() + ")-";
+        String result = hitCount.toString();
+
+        if (this.equals(LottoRule.FIVE_HIT_WITH_BONUS)) {
+            result += ", 보너스 볼 일치";
+        }
+
+        return result + winningMoney.toString() + "-";
     }
 
     public int calcProceed(int count) {
