@@ -68,7 +68,6 @@ public class LottoResult {
     public float calculateProfitRatio() {
         long totalPrize = calculateTotalPrize();
         return totalPrize / (float) purchaseAmount;
-
     }
 
     private long calculateTotalPrize() {

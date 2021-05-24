@@ -10,6 +10,7 @@ public class WinningNumbers {
     private final int NUMBER_COUNT = 6;
 
     private final TreeSet<LottoNumber> numbers;
+    private BonusNumber bonusNumber;
 
     public WinningNumbers(int[] input) throws CustomIllegalArgumentException {
         checkNotNullOrEmpty(input);
@@ -50,5 +51,13 @@ public class WinningNumbers {
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public void addBonusNumber(int number) {
+        BonusNumber bonusNumber = new BonusNumber(number);
+        if (numbers.contains(bonusNumber)) {
+            throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
+        }
+        this.bonusNumber = bonusNumber;
     }
 }

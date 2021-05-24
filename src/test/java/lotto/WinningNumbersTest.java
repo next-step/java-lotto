@@ -20,7 +20,7 @@ public class WinningNumbersTest {
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
-    @DisplayName("6개 초과의 숫자를 입력하면 Exception을 발생한다")
+    @DisplayName("6개 초과의 당첨번호를 입력하면 Exception을 발생한다")
     @Test
     void throw_exception_when_more_than_six_numbers() {
         //Given+When
@@ -31,7 +31,7 @@ public class WinningNumbersTest {
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
-    @DisplayName("6개 미만의 숫자를 입력하면 Exception을 발생한다")
+    @DisplayName("6개 미만의 당첨번호를 입력하면 Exception을 발생한다")
     @Test
     void throw_exception_when_less_than_six_numbers() {
         //Given+When
@@ -52,4 +52,18 @@ public class WinningNumbersTest {
         assertThatThrownBy(() -> new WinningNumbers(input))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
+
+    @DisplayName("6개의 당첨번호 입력 후, 중복된 보너스 번호를 입력하면 Exception을 발생한다")
+    @Test
+    void throw_exception_when_duplicated_bonus_number() {
+        //Given+When
+        int[] input = new int[]{1,2,3,4,5,6};
+
+        //When+Then
+        WinningNumbers winningNumbers = new WinningNumbers(input);
+
+        assertThatThrownBy(() -> winningNumbers.addBonusNumber(1))
+                .isInstanceOf(CustomIllegalArgumentException.class);
+    }
+
 }
