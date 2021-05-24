@@ -28,7 +28,7 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public Map<Integer, Integer> announce(List<Integer> winnerLotto) {
+	public Map<Integer, Integer> announce(Lotto winnerLotto) {
 		winnerCountByMatchedNumber = new HashMap<>();
 		initiateWinnerCountByMatchedNumber();
 

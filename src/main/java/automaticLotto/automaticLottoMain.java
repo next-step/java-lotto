@@ -1,5 +1,6 @@
 package automaticLotto;
 
+import automaticLotto.domain.Lotto;
 import automaticLotto.domain.LottoGenerator;
 import automaticLotto.domain.Lottos;
 import automaticLotto.domain.WinnerStatics;
@@ -19,7 +20,7 @@ public class automaticLottoMain {
 	}
 
 	private static WinnerStatics getWinnerStatics(Lottos boughtLottos) {
-		return new WinnerStatics(boughtLottos, InputView.getLastWinLotto());
+		return new WinnerStatics(boughtLottos, new Lotto(InputView.getLastWinLotto()));
 	}
 
 	private static Lottos buy(int buyAmount) {

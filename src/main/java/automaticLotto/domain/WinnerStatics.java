@@ -1,15 +1,14 @@
 package automaticLotto.domain;
 
-import java.util.List;
 import java.util.Map;
 
 public class WinnerStatics {
 	private static final int NOTHING = 0;
 	private final Map<Integer, Integer> winnerCountByMatchedNumber;
 	private final Lottos boughtLottos;
-	private final List<Integer> winnerLotto;
+	private final Lotto winnerLotto;
 
-	public WinnerStatics(Lottos boughtLottos, List<Integer> winnerLotto) {
+	public WinnerStatics(Lottos boughtLottos, Lotto winnerLotto) {
 		this.boughtLottos = boughtLottos;
 		this.winnerLotto = winnerLotto;
 		this.winnerCountByMatchedNumber = getWinnerCountByMatchedNumber();

@@ -45,6 +45,6 @@ public class LottoTest {
 		List<Integer> randomNumberList1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 		Lotto lotto1 = new Lotto(randomNumberList1);
 
-		assertThat(lotto1.match(Arrays.asList(1, 2, 3, 4, 5, 7))).isEqualTo(5);
+		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
 	}
 }

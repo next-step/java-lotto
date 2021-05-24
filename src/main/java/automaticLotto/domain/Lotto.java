@@ -24,20 +24,25 @@ public class Lotto {
 		}
 	}
 
-	public int match(List<Integer> targetNumbers) {
+	public int match(Lotto targetLotto) {
 		int matchedSize = 0;
 
-		for (Integer number : targetNumbers) {
+		for (Integer number : targetLotto.getLotto()) {
 			matchedSize = getMatchedSize(matchedSize, number);
 		}
 
 		return matchedSize;
 	}
 
+	private Set<Integer> getLotto() {
+		return this.lotto;
+	}
+
 	private int getMatchedSize(int matchedSize, Integer number) {
 		if (lotto.contains(number)) {
 			matchedSize++;
 		}
+
 		return matchedSize;
 	}
 
