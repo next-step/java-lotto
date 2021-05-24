@@ -2,6 +2,7 @@ package lotto.domain.rank;
 
 import lotto.domain.PositiveNumber;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class LottoRanks {
     private final Map<LottoRank, Long> countOfLottoRank;
 
     public LottoRanks(Map<LottoRank, Long> countOfLottoRank) {
-        this.countOfLottoRank = new HashMap<>(countOfLottoRank);
+        this.countOfLottoRank = Collections.unmodifiableMap(countOfLottoRank);
     }
 
     public static LottoRanks createByList(List<LottoRank> lottoRanks) {
