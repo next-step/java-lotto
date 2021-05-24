@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public class LottoTickets {
+    public static final LottoTickets EMPTY_LOTTO_TICKETS = new LottoTickets(new ArrayList<>());
+
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = new ArrayList<>(lottoTickets);
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
     public static LottoTickets createByGenerator(
@@ -31,6 +33,6 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return lottoTickets;
     }
 }
