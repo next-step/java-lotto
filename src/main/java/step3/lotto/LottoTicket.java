@@ -19,26 +19,21 @@ public class LottoTicket {
 
     public LottoTicket() {
         lottoTicket = new TreeSet<>();
-        createLottoRandomNumbers();
-        insertLottoRandomNumbers();
+        createAutoLottoNumbers();
     }
 
     public LottoTicket(List<Integer> winningNumbers) {
         lottoTicket = new TreeSet<>();
-        insertLottoWinningNumbers(winningNumbers);
+        createWinningLottoNumbers(winningNumbers);
     }
 
-    private void createLottoRandomNumbers() {
+    private void createAutoLottoNumbers() {
         Collections.shuffle(DEFAULT_NUMBERS);
-    }
-
-    private void insertLottoRandomNumbers() {
         for (int i = LOTTO_START_DIGIT; i < LOTTO_END_DIGIT; i++) {
             this.lottoTicket.add(new LottoNumber(DEFAULT_NUMBERS.get(i)));
         }
     }
-
-    private void insertLottoWinningNumbers(List<Integer> numbers) {
+    private void createWinningLottoNumbers(List<Integer> numbers) {
         for (int i = LOTTO_START_DIGIT; i < LOTTO_END_DIGIT; i++) {
             this.lottoTicket.add(new LottoNumber(numbers.get(i)));
         }
