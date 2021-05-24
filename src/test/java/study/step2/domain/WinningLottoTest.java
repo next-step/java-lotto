@@ -25,23 +25,23 @@ class WinningLottoTest {
   @Test
   void checkDuplication() {
     //given
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 44");
+    String inputNumber = "1, 2, 3, 12, 15, 44";
 
     //when
-    Throwable thrown =  catchThrowable(winingLotto::checkDuplication);
+    Throwable thrown =  catchThrowable(() -> new Lotto(inputNumber));
 
     //then
     assertThat(thrown).isEqualTo(null);
   }
 
-  @DisplayName("당첨 번호 중복 번호 실패 테스트")
+  @DisplayName("당첨 번호 중복 테스트")
   @Test
   void checkDuplicationFail() {
     //given
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 15");
+    String inputNumber = "1, 2, 3, 12, 15, 15";
 
     //when
-    Throwable thrown =  catchThrowable(winingLotto::checkDuplication);
+    Throwable thrown =  catchThrowable(() -> new Lotto(inputNumber));
 
     //then
     assertThat(thrown).isInstanceOf(RuntimeException.class);
@@ -73,7 +73,7 @@ class WinningLottoTest {
   @Test
   void bonusValidation() {
     //given
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 15");
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16");
     LottoNumber bonusNumber = LottoNumber.valueOf(6);
 
     //when
@@ -87,7 +87,7 @@ class WinningLottoTest {
   @Test
   void bonusValidationFail() {
     //given
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 15");
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16");
     LottoNumber bonusNumber = LottoNumber.valueOf(3);
 
     //when

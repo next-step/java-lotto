@@ -1,7 +1,6 @@
 package study.step2;
 
 import study.step2.controller.LottoController;
-import study.step2.domain.LottoNumber;
 import study.step2.domain.Lottos;
 import study.step2.domain.ManualLottos;
 import study.step2.domain.WinningLotto;
@@ -20,12 +19,9 @@ public class LottoMain {
     Lottos lottos = lottoController.createLottos(money, manualLottos.getLottos().size());
     lottos.addManualLottos(manualLottos);
 
-    WinningLotto winningLotto = new WinningLotto(InputView.inputLastLottoNumbers());
-    winningLotto.checkDuplication();
+    WinningLotto winningLotto = new WinningLotto(InputView.inputLastLottoNumbers(), InputView.inputBonusNumber());
 
-    LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-
-    lottoController.findLottoWinning(lottos, winningLotto, money, bonusNumber);
+    lottoController.findLottoWinning(lottos, winningLotto, money);
   }
 
 }

@@ -67,12 +67,13 @@ public class LottosTest {
   @Test
   void winingMatchTest() {
     //given
+    int bonusNumber = 19;
+
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16");
-    LottoNumber bonusNumber = new LottoNumber(16);
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16", bonusNumber);
 
     // when
-    LottoResult LottoResult = lottos.match(winingLotto, bonusNumber);
+    LottoResult LottoResult = lottos.match(winingLotto);
     Map<Rank, Integer> rankMap = LottoResult.getRankMap();
 
     // then
@@ -83,12 +84,13 @@ public class LottosTest {
   @Test
   void winingMatchTestWithBonusNumber() {
     //given
+    int bonusNumber = 16;
+
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 44");
-    LottoNumber bonusNumber = new LottoNumber(16);
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 44", bonusNumber);
 
     // when
-    LottoResult LottoResult = lottos.match(winingLotto, bonusNumber);
+    LottoResult LottoResult = lottos.match(winingLotto);
     Map<Rank, Integer> rankMap = LottoResult.getRankMap();
 
     // then

@@ -24,13 +24,15 @@ public class Lotto {
         .map(String::trim)
         .map(LottoNumber::valueOf)
         .collect(Collectors.toSet());
+
+    checkDuplication();
   }
 
   public Set<LottoNumber> getLottoNumbers() {
     return lottoNumbers;
   }
 
-  public void checkDuplication() {
+  private void checkDuplication() {
     if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
       throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;
     }

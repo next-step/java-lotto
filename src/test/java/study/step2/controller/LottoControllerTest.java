@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.step2.domain.Lotto;
-import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoResult;
 import study.step2.domain.Lottos;
 import study.step2.domain.ManualLottos;
@@ -79,18 +78,17 @@ public class LottoControllerTest {
   void findLottoWinning() {
     // given
     int money = 1000;
-
-    LottoNumber bonusNumber = new LottoNumber(19);
+    int bonusNumber = 19;
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
 
-    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers);
+    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers, bonusNumber);
     Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money);
 
     // then
     assertThat(lottoResult).isNotNull();
@@ -101,17 +99,17 @@ public class LottoControllerTest {
   void findLottoWinningFirst() {
     // given
     int money = 1000;
-    LottoNumber bonusNumber = new LottoNumber(19);
+    int bonusNumber = 19;
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
 
-    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers);
+    WinningLotto winingLotto = new WinningLotto(pickedLottoNumbers, bonusNumber);
     Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money);
 
     // then
     assertThat(lottoResult.getValue(Rank.FIRST)).isEqualTo(1);
@@ -122,19 +120,18 @@ public class LottoControllerTest {
   void findLottoWinningSecondWithBonus() {
     // given
     int money = 1000;
+    int bonusNumber = 16;
 
     String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
     String winingLottoNumbers = "1, 2, 3, 12, 15, 19";
 
-    LottoNumber bonusNumber = new LottoNumber(16);
-
-    WinningLotto winingLotto = new WinningLotto(winingLottoNumbers);
+    WinningLotto winingLotto = new WinningLotto(winingLottoNumbers, bonusNumber);
     Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
 
     LottoController lottoController = new LottoController();
 
     // when
-    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber);
+    LottoResult lottoResult = lottoController.findLottoWinning(lottos, winingLotto, money);
 
     // then
     assertThat(lottoResult.getValue(Rank.SECOND)).isEqualTo(1);
@@ -144,20 +141,12 @@ public class LottoControllerTest {
   @Test
   void findLottoWinningSecondWithBonusFail() {
     // given
-    int money = 1000;
-
-    String pickedLottoNumbers = "1, 2, 3, 12, 15, 16";
     String winingLottoNumbers = "1, 2, 3, 12, 15, 19";
 
-    LottoNumber bonusNumber = new LottoNumber(19);
-
-    WinningLotto winingLotto = new WinningLotto(winingLottoNumbers);
-    Lottos lottos = new Lottos(new ArrayList<>(Collections.singletonList(new Lotto(pickedLottoNumbers))));
-
-    LottoController lottoController = new LottoController();
+    int bonusNumber = 19;
 
     // when
-    Throwable thrown =  catchThrowable(() -> lottoController.findLottoWinning(lottos, winingLotto, money, bonusNumber));
+    Throwable thrown =  catchThrowable(() -> new WinningLotto(winingLottoNumbers, bonusNumber));
 
     //then
     assertThat(thrown).isInstanceOf(RuntimeException.class);

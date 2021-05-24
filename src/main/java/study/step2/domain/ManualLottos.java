@@ -1,22 +1,17 @@
 package study.step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ManualLottos {
 
   private final List<Lotto> lottos;
 
   public ManualLottos(List<String> inputText) {
-    List<Lotto> list = new ArrayList<>();
-
-    inputText.stream().map(Lotto::new).forEach(lotto -> {
-      lotto.checkDuplication();
-      list.add(lotto);
-    });
-
-    lottos = list;
+    lottos = inputText.stream()
+        .map(Lotto::new)
+        .collect(Collectors.toList());
   }
 
   public List<Lotto> getLottos() {

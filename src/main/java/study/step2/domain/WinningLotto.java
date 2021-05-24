@@ -1,36 +1,36 @@
 package study.step2.domain;
 
 import static study.step2.Exception.CustomException.BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
-import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCEPTION;
-import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 public class WinningLotto {
 
-  private final Set<LottoNumber> lottoNumbers;
+  private final Lotto lotto;
+  private LottoNumber bonusNumber;
 
   public WinningLotto(String inputText) {
-    this.lottoNumbers =  Arrays.stream(inputText.split(","))
-        .map(String::trim)
-        .map(LottoNumber::valueOf)
-        .collect(Collectors.toSet());
+    this.lotto = new Lotto(inputText);
   }
 
-  public void checkDuplication() {
-    if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-      throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;
-    }
+  public WinningLotto(String inputText, int bonusNumber) {
+    lotto = new Lotto(inputText);
+    this.bonusNumber = new LottoNumber(bonusNumber);
+
+    bonusValidation(this.bonusNumber);
   }
 
-  public Set<LottoNumber> getLottoNumbers() {
-    return lottoNumbers;
+  public LottoNumber getBonusNumber() {
+    return bonusNumber;
   }
 
   public void bonusValidation(LottoNumber bonusNumber) {
-    if (lottoNumbers.contains(bonusNumber))
+    if (lotto.isMatchBonus(bonusNumber))
       throw BONUS_NUMBER_INVALID_MESSAGE_EXCEPTION;
+  }
+
+  public Set<LottoNumber> getLottoNumbers() {
+    return lotto.getLottoNumbers();
   }
 }
