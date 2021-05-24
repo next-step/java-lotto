@@ -8,7 +8,11 @@ public class WonCount {
             wonCount++;
     }
 
-    public int getWonCount() {
+    public int wonCount() {
         return wonCount;
     }
+
+    /*public int getWonCount() {
+        return wonCount;
+    }*/
 }

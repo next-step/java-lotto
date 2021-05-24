@@ -48,10 +48,10 @@ public class PurchaseLotto {
         setLastWonLottoNumbers(lastWonLottoNumbers);
         resultAll = new ResultAll();
 
-        int wonCountForOneLotto = 0;
+        WonCount wonCountForOneLotto;
         for (int i = 0; i < lottoNumberList.count(); i++) {
             wonCountForOneLotto = countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
-            updateResultLotto(wonCountForOneLotto);
+            updateResultLotto(wonCountForOneLotto.wonCount());
         }
     }
 
@@ -70,12 +70,12 @@ public class PurchaseLotto {
         this.lastWonLottoNumber = new LastWonLottoNumber(lastWonLottoNumbers);
     }
 
-    public int countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
+    public WonCount countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
         WonCount wonCount = new WonCount();
         for (int oneLottoNumber : generateLottoNumber) {
             wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumbers));
         }
-        return wonCount.getWonCount();
+        return wonCount;
     }
 
     private boolean isSameNumber(int oneLottoNumber, List<Integer> lastWonLottoNumbers) {
