@@ -13,7 +13,6 @@ import lotto.lotto.LottoTicket;
 import lotto.shop.Money;
 
 public class Command {
-    private static final int ANSWER_SIZE = 6;
     private static final Scanner SCANNER = new Scanner(System.in);
     public static final String NUMBER_DELIMITER = ",";
 
@@ -59,7 +58,7 @@ public class Command {
     }
 
     private static void checkAnswer(String[] answer) {
-        if (answer.length != ANSWER_SIZE) {
+        if (answer.length != Lotto.MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ANSWER);
         }
     }
