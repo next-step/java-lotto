@@ -12,6 +12,6 @@ public class LottoYield {
     }
 
     public double calc() {
-        return (double) reward.getValue() / (double) totalPrice.getValue();
+        return (double) reward.toLong() / (double) totalPrice.toLong();
     }
 }
