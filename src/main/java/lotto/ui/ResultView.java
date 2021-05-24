@@ -21,10 +21,10 @@ public class ResultView {
         }
     }
 
-    public void showWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int money) {
+    public void showWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int money, int bonusBallNumber) {
         Print.printStatistics();
 
-        List<WinningType> wins = playLotto.getWinningStatistics(createdLottos, lastWinningLotto);
+        List<WinningType> wins = playLotto.getWinningStatistics(createdLottos, lastWinningLotto, bonusBallNumber);
 
         Map<Object, Long> result = wins.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 

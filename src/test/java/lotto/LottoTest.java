@@ -11,9 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,8 +43,8 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
     void countSameNumbers(int index) {
-        Lotto lastWeekLWinningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        Lotto thisWeekMyLotto = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        Lotto lastWeekLWinningLotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+        Lotto thisWeekMyLotto = new Lotto(new HashSet<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
         Counter counter = new Counter();
 
         PlayLotto.countSameNumbers(lastWeekLWinningLotto, thisWeekMyLotto, counter, index);
@@ -60,8 +58,8 @@ public class LottoTest {
         String[] splitedLastNumbers = lastNumbers.split(",");
         String[] splitedMyNumbers = myNumbers.split(",");
 
-        List<Integer> lastLottoNumbers = new ArrayList<>();
-        List<Integer> myLottoNumbers = new ArrayList<>();
+        Set<Integer> lastLottoNumbers = new HashSet<>();
+        Set<Integer> myLottoNumbers = new HashSet<>();
 
         for (String number : splitedLastNumbers) {
             lastLottoNumbers.add(Integer.valueOf(number));

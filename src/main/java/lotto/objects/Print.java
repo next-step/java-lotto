@@ -1,6 +1,7 @@
 package lotto.objects;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 final public class Print {
@@ -9,8 +10,9 @@ final public class Print {
     }
 
     public static void printLottoNumbers(Lotto lotto) {
-        Collections.sort(lotto.getNumbers());
-        System.out.println(lotto.getNumbers());
+        List<Integer> numbers = lotto.getNumbers();
+        Collections.sort(numbers);
+        System.out.println(numbers);
     }
 
     public static void printStatistics() {

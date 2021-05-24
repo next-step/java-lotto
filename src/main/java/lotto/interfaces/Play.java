@@ -13,7 +13,7 @@ public interface Play {
     int compareNumbers(Lotto initLotto, Lotto myLotto);
     WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto);
     WinningType compareBonusNumber(int bonusNumber, Lotto myLotto);
-    WinningType findSameNumbers(Lotto initLotto, Lotto myLotto);
-    List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto);
+    WinningType findSameNumbers(Lotto initLotto, Lotto myLotto, int bonusBallNumber);
+    List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int bonusBallNumber);
     Lottos autoCreateLottos(int totalLotto);
 }

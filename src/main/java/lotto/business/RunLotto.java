@@ -17,8 +17,6 @@ public class RunLotto {
     }
 
     public void runLotto() {
-        Lotto lastWinningLotto = new Lotto();
-
         int money = inputView.enterPurchaseMoney();
         int totalLotto = playLotto.buyLotto(money);
 
@@ -26,10 +24,10 @@ public class RunLotto {
 
         resultView.showCreatedLottos(totalLotto, createdLottos);
 
-        inputView.enterLastWeekWinningNumbers(lastWinningLotto);
-        inputView.enterBonusBallNumber(lastWinningLotto);
+        Lotto lastWinningLotto = inputView.enterLastWeekWinningNumbers();
+        int bonusBallNumber = inputView.enterBonusBallNumber();
 
-        resultView.showWinningStatistics(createdLottos, lastWinningLotto, money);
+        resultView.showWinningStatistics(createdLottos, lastWinningLotto, money, bonusBallNumber);
 
     }
 }

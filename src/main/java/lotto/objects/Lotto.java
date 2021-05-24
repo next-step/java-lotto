@@ -1,23 +1,27 @@
 package lotto.objects;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public Lotto() {
-        this.numbers = new ArrayList<>();
+        this.numbers = new HashSet<>();
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
+        if (numbers.size() < 6) {
+            throw new IllegalArgumentException("로또의 개수가 6보다 작습니다.");
+        }
         this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
-
-        return numbers;
+        List<Integer> transformedNumbers = new ArrayList<>(numbers);
+        return transformedNumbers;
     }
 
     public void addNumber(int number) {

@@ -8,7 +8,6 @@ import lotto.objects.Lottos;
 import lotto.objects.WinningType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -87,19 +86,19 @@ public class PlayLotto implements Play {
         return WinningType.FIVE;
     }
 
-    public WinningType findSameNumbers(Lotto initLotto, Lotto myLotto) {
+    public WinningType findSameNumbers(Lotto initLotto, Lotto myLotto, int bonusBallNumber) {
         Counter count = new Counter();
         for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
             countSameNumbers(initLotto, myLotto, count, i);
         }
 
-        return decideWinningType(count.getCount(), initLotto.getNumbers().get(6), myLotto);
+        return decideWinningType(count.getCount(), bonusBallNumber, myLotto);
     }
 
-    public List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto) {
+    public List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int bonusBallNumber) {
         List<WinningType> wins = new ArrayList<>();
         for (Lotto lotto : createdLottos.getLottos()) {
-            wins.add(findSameNumbers(lastWinningLotto, lotto));
+            wins.add(findSameNumbers(lastWinningLotto, lotto, bonusBallNumber));
         }
 
         return wins;

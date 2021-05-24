@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Profit {
     static double getProfit(Map<Object, Long> result, int money) {
-        int sum = 0;
+        Long sum = 0L;
 
         for (Map.Entry<Object, Long> entry : result.entrySet()) {
             sum += getPrize(entry);
