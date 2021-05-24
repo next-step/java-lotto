@@ -1,13 +1,15 @@
 package lotto.domains;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -53,5 +55,24 @@ public class LottoNumbersTest {
         assertThat(numberList.contains(7)).isFalse();
         assertThat(lottoNumbers.lottoNumbers().contains(7)).isFalse();
         assertThat(numberList).isNotSameAs(lottoNumbers.lottoNumbers());
+    }
+
+    private static Stream<Arguments> provideListAndExpectedNumber() {
+        return Stream.of(
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 16)), 5),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 15, 16)), 4),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 14, 15, 16)), 3),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 13, 14, 15, 16)), 2),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 12, 13, 14, 15, 16)), 1),
+                Arguments.of(new LottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16)), 0)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideListAndExpectedNumber")
+    void 일치하는_숫자_리턴_테스트(LottoNumbers lottoNumbers, int expectedMatchCount) {
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lottoNumbers.matchingNumberCount(winningLottoNumbers)).isEqualTo(expectedMatchCount);
     }
 }
