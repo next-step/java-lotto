@@ -3,11 +3,6 @@ package lotto.view;
 import lotto.domain.LottoResults;
 import lotto.domain.Rank;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class ResultView {
 
 	public static final String MESSAGE_WIN_STATISTICS = "당첨 통계";
@@ -26,15 +21,9 @@ public class ResultView {
 		System.out.println(MESSAGE_WIN_STATISTICS);
 		System.out.println(MESSAGE_LINE_DELIMETER);
 
-		List<Rank> ranks = Arrays.stream(Rank.values())
-				.sorted(Comparator.comparingInt(Rank::getMatchCount))
-				.collect(Collectors.toList());
-
-		for (Rank rank : ranks) {
-			if (rank.isGreaterThan(Rank.NONE.getMatchCount())) {
-				int rankCount = lottoResults.findRankCount(rank);
-				System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), rankCount);
-			}
+		for (Rank rank : lottoResults.getRenderRanks()) {
+			int rankCount = lottoResults.findRankCount(rank);
+			System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), rankCount);
 		}
 	}
 
