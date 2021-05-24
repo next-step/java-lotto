@@ -19,8 +19,8 @@ public class ResultTest {
 
     @BeforeEach
     public void setUp() {
-        result = new Result(new Number(10), new Number(12), new Number(23)
-                , new Number(44), new Number(26), new Number(28));
+        result = new Result(new Lotto(new Number(10), new Number(12), new Number(23)
+                , new Number(44), new Number(26), new Number(28)));
     }
 
     @Test
@@ -51,19 +51,16 @@ public class ResultTest {
                 new Number(10), new Number(12), new Number(23), new Number(13), new Number(14), new Number(15)) // 4등 - 1개
         );
         result.confirm(lottoList);
-        assertThat(result.profitRate()).isEqualTo("5");
+        assertThat(result.profitRate()).isEqualTo("5.00");
     }
 
     @Test
-    @DisplayName("로또 구매 리스트에 대한 총 수익률을 구한다. case2: 오천원 내고 오천원 당첨")
+    @DisplayName("로또 구매 리스트에 대한 총 수익률을 구한다. case2: 이천원 내고 오천원 당첨")
     public void 총_수익률_구하기_2() {
         lottoList = new LottoList(new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 꽝
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 꽝
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 꽝
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 꽝
                 , new Lotto(new Number(10), new Number(12), new Number(23), new Number(13), new Number(14), new Number(15)) // 4등 - 1개
         );
         result.confirm(lottoList);
-        assertThat(result.profitRate()).isEqualTo("1");
+        assertThat(result.profitRate()).isEqualTo("2.50");
     }
 }
