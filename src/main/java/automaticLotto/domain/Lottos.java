@@ -1,4 +1,4 @@
-package automaticLotto;
+package automaticLotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,5 +56,9 @@ public class Lottos {
 		for (int i = WINNER_MINIMUM_CONDITION; i <= WINNER_MAXIMUM_CONDITION; i++) {
 			winnerCountByMatchedNumber.put(i, NOTHING);
 		}
+	}
+
+	public List<Lotto> getLottos() {
+		return this.lottos;
 	}
 }

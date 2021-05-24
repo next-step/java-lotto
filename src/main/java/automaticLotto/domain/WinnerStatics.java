@@ -1,4 +1,4 @@
-package automaticLotto;
+package automaticLotto.domain;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,10 @@ public class WinnerStatics {
 
 	private Map<Integer, Integer> getWinnerCountByMatchedNumber() {
 		return boughtLottos.announce(winnerLotto);
+	}
+
+	public Map<Integer, Integer> presentAllCount() {
+		return this.winnerCountByMatchedNumber;
 	}
 
 	public int presentCount(int matchedNumber) {

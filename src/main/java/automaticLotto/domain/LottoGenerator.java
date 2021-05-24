@@ -1,4 +1,4 @@
-package automaticLotto;
+package automaticLotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

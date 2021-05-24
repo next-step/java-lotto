@@ -1,4 +1,4 @@
-package automaticLotto;
+package automaticLotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -58,8 +58,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "Lotto{" +
-			"lotto=" + lotto +
-			'}';
+		return lotto + "";
 	}
 }

@@ -1,4 +1,4 @@
-package automaticLotto;
+package automaticLotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
