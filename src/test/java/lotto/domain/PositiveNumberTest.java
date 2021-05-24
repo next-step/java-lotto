@@ -65,4 +65,13 @@ public class PositiveNumberTest {
         assertThat(bignumber.minus(target))
                 .isEqualTo(new PositiveNumber(9000));
     }
+
+    @Test
+    @DisplayName("미만을 계산할 수 있다")
+    public void 미만을_계산할_수있다() {
+        PositiveNumber bignumber = new PositiveNumber(10000);
+        PositiveNumber target = new PositiveNumber(1000);
+
+        assertThat(target.isUnder(bignumber)).isTrue();
+    }
 }

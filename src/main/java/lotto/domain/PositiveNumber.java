@@ -6,6 +6,7 @@ import static java.lang.String.format;
 
 public class PositiveNumber implements Comparable<PositiveNumber> {
     private static final long MINIMUM_AMOUNT = 0;
+    private static final int UNDER = -1;
 
     public static final PositiveNumber ZERO = new PositiveNumber(0);
 
@@ -47,6 +48,10 @@ public class PositiveNumber implements Comparable<PositiveNumber> {
         if (value < MINIMUM_AMOUNT) {
             throw new IllegalArgumentException(format("숫자는 %d 미만은 안됩니다.", MINIMUM_AMOUNT));
         }
+    }
+
+    public boolean isUnder(PositiveNumber target) {
+        return compareTo(target) == UNDER;
     }
 
     @Override
