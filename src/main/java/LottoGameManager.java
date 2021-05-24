@@ -20,7 +20,7 @@ public class LottoGameManager {
 	}
 
 	private static Ticket purchaseLotto() {
-		Budget budget = InputView.purchasePrice();
+		Budget budget = InputView.budgetLottoPrice();
 		LottoStore store = new LottoStore(budget, LOTTO_PRICE_PER);
 		OutputView.purchaseCountResult(store.purchaseCount());
 		return store.produceLotto();

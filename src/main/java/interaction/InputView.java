@@ -13,7 +13,7 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static Budget purchasePrice() {
+	public static Budget budgetLottoPrice() {
 		System.out.println(PURCHASE_START_MESSAGE);
 		return new Budget(scanner.nextInt());
 	}
