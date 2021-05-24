@@ -1,4 +1,4 @@
-package study.ascii92der.lotto;
+package study.ascii92der.lotto.step1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
