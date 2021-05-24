@@ -89,7 +89,7 @@ public class StatisticsTest {
         //when
         double benefitRate = statistics.calculateBenefitRate();
 
-        //2000*1 + 300*2 + 150*1 + 50*4 + 5*1 = 2370
+        //2000*1 + 300*2 + 150*1 + 50*4 + 5*1 = 2955
         //then
         assertThat(benefitRate).isEqualTo(2955d / 200d);
     }
