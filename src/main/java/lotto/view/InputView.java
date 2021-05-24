@@ -25,7 +25,7 @@ public class InputView {
     public static WinInquiryRequest inputWinNumbers(List<LottoNumbersDto> purchaseNumbers) {
         System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        return new WinInquiryRequest(purchaseNumbers, inputWinNumbers(SCANNER.nextLine()));
+        return new WinInquiryRequest(purchaseNumbers, inputWinNumbers(SCANNER.nextLine()), inputBonusNumber());
     }
 
     private static LottoNumbersDto inputWinNumbers(String winNumbers) {
@@ -33,5 +33,10 @@ public class InputView {
                 .map(winNumber -> new Integer(winNumber.trim()))
                 .collect(Collectors.toList());
         return new LottoNumbersDto(winNumberList);
+    }
+
+    private static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
     }
 }
