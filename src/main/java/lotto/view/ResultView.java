@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-	public static final int NONE_MATCH_COUNT = -1;
 	public static final String MESSAGE_WIN_STATISTICS = "당첨 통계";
 	public static final String MESSAGE_LINE_DELIMETER = "---------";
 	public static final String MESSAGE_NUMBER_OF_MATCHS_BY_RANK = "%d개 일치 (%d원)- %d개\n";
@@ -32,7 +31,7 @@ public class ResultView {
 				.collect(Collectors.toList());
 
 		for (Rank rank : ranks) {
-			if (rank.isGreaterThan(NONE_MATCH_COUNT)) {
+			if (rank.isGreaterThan(Rank.NONE.getMatchCount())) {
 				int rankCount = lottoResults.findRankCount(rank);
 				System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), rankCount);
 			}
