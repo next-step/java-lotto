@@ -4,7 +4,7 @@ import lotto.domain.LottoRanking;
 
 import java.util.Objects;
 
-public class PrizeInfo {
+public class RankingPrizedCount {
 
   private static final String BONUS_BALL_NON_MATCHED_ANALYSIS_FORMAT = "%d개 일치 (%d원)- %d개";
   private static final String BONUS_BALL_MATCHED_ANALYSIS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
@@ -14,7 +14,7 @@ public class PrizeInfo {
   private final boolean bonusNumberMatched;
   private final long winningCount;
 
-  public PrizeInfo(LottoRanking lottoRanking, long winningCount) {
+  public RankingPrizedCount(LottoRanking lottoRanking, long winningCount) {
     this.matchCountPerGame = lottoRanking.getMatchCount();
     this.winningAmount = lottoRanking.getWinningAmount();
     this.bonusNumberMatched = lottoRanking.isBonusNumberMatched();
@@ -41,8 +41,8 @@ public class PrizeInfo {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    PrizeInfo prizeInfo = (PrizeInfo) o;
-    return matchCountPerGame == prizeInfo.matchCountPerGame && winningAmount == prizeInfo.winningAmount && winningCount == prizeInfo.winningCount;
+    RankingPrizedCount rankingPrizedCount = (RankingPrizedCount) o;
+    return matchCountPerGame == rankingPrizedCount.matchCountPerGame && winningAmount == rankingPrizedCount.winningAmount && winningCount == rankingPrizedCount.winningCount;
   }
 
   @Override
