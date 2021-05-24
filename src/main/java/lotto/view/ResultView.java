@@ -37,7 +37,7 @@ public class ResultView {
         return MESSAGE_EMPTY;
     }
 
-    public static void printProfit(int payment, LottoWin lottoWin) {
-        System.out.println("총 수익률은 " +  String.format("%.2f", ((double) lottoWin.sum() / payment)) + "입니다.");
+    public static void printProfit(BigDecimal profit) {
+        System.out.println("총 수익률은 " +  profit + "입니다.");
     }
 }

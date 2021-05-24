@@ -21,6 +21,6 @@ public class Main {
         LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
         LottoWin lottoWin = lottoMachine.result(winLotto, bonusBall);
         ResultView.printResult(lottoWin);
-        ResultView.printProfit(money.money(), lottoWin);
+        ResultView.printProfit(lottoWin.profit(money));
     }
 }
