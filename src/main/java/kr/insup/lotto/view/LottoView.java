@@ -74,15 +74,15 @@ public class LottoView {
         System.out.println(rank + "등 " + match + "개 일치 + 보너스 번호 (" + price + "원) - " + time + "개");
     }
 
-    public static void printIllegalArgument() {
-        System.out.println("잘못된 당첨번호를 입력하였습니다. 다시 입력해주세요!");
+    public static void printIllegalArgument(String errorMessage) {
+        System.out.println(errorMessage + " 다시 입력해주세요!");
     }
 
     public static void printWrongWinningNumberFormat() {
-        System.out.println("잘못된 당첨번호를 입력하였습니다. 다시 입력해주세요!");
+        System.out.println("숫자가 아닌 당첨번호를 입력하였습니다. 다시 입력해주세요!");
     }
 
     public static void printWrongPriceFormat() {
-        System.out.println("잘못된 금액을 입력하였습니다. 다시 입력해주세요!");
+        System.out.println("숫자가 아닌 금액을 입력하였습니다. 다시 입력해주세요!");
     }
 }
