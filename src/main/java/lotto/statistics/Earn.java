@@ -28,14 +28,15 @@ public enum Earn {
 		return earn;
 	}
 
-	public StringBuffer message(int repeatedCount) {
+	public String message(int repeatedCount) {
 		return new StringBuffer()
 			.append(matchCount)
 			.append("개 일치 (")
 			.append(earn)
 			.append("원)- ")
 			.append(repeatedCount)
-			.append("개\n");
+			.append("개\n")
+			.toString();
 	}
 
 }

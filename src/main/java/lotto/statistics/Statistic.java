@@ -21,7 +21,7 @@ public class Statistic {
 		return this;
 	}
 
-	public StringBuffer earningMessage() {
+	public String earningMessage() {
 		return earn.message(count);
 	}
 

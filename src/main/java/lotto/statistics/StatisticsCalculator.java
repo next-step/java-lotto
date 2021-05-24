@@ -55,7 +55,7 @@ public class StatisticsCalculator {
 		return statisticByMatchCount.get(matchCount).earningPrice();
 	}
 
-	private StringBuffer findEarnMessage(int matchCount) {
+	private String findEarnMessage(int matchCount) {
 		return statisticByMatchCount.get(matchCount).earningMessage();
 	}
 
@@ -76,14 +76,15 @@ public class StatisticsCalculator {
 		return (double) sumEarningPrice() / (double) ticket.budget();
 	}
 
-	private StringBuilder ratioResultMessage() {
+	private String ratioResultMessage() {
 		double ratio = earningRatio();
 		return new StringBuilder()
 			.append("총 수익률은 ")
 			.append(ratio)
 			.append("입니다.(기준이 1이기 때문에 결과적으로 ")
 			.append(messageByRatio(ratio))
-			.append("라는 의미임)");
+			.append("라는 의미임)")
+			.toString();
 	}
 
 	private String messageByRatio(double ratio) {
