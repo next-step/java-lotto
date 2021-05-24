@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    public static final int MIN_BOUND = 1;
+    public static final int MAX_BOUND = 45;
+
     private final int number;
 
     private LottoNumber(final int number) {
@@ -15,7 +18,7 @@ public class LottoNumber {
     }
 
     private static void validateNumber(final int number) {
-        if (number > Lotto.NUMBER_MAX_BOUND || number < Lotto.NUMBER_MIN_BOUND) {
+        if (number > MAX_BOUND || number < MIN_BOUND) {
             throw new IllegalArgumentException("로또 번호가 유효한 범위를 벗어났습니다.");
         }
     }

@@ -14,8 +14,6 @@ import static java.util.stream.Collectors.toSet;
 public class Lotto {
     public static final int PRICE = 1000;
     public static final int NUMBER_SIZE = 6;
-    public static final int NUMBER_MIN_BOUND = 1;
-    public static final int NUMBER_MAX_BOUND = 45;
 
     private final Set<LottoNumber> lotto;
 
