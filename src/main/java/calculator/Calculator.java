@@ -2,44 +2,47 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
     public static final int MINIMUM_OPERAND_VALUE = 0;
-    public static final int DELIMITER_POSITION = 1;
+    public static final String DEFAULT_DELIMITER_REGEX = "[,:]";
 
     private final Operands operands;
 
     public Calculator(String input) {
-        char delimiter = validateAndExtractDelimiter(input);
-
-        this.operands = makeOperandsByInput(input, String.valueOf(delimiter));
+        this.operands = validateAndExtractOperands(input);
     }
 
-    public Calculator(String input, String delimiter) {
-        this.operands = makeOperandsByInput(input, delimiter);
-    }
+    private Operands validateAndExtractOperands(String input) {
+        if (input == null || input.isEmpty()) {
+            return new Operands(List.of(MINIMUM_OPERAND_VALUE));
+        }
 
-    private char validateAndExtractDelimiter(String input) {
-        char delimiter = extractDelimiter(input);
+        String[] splitInput = extractOperands(input);
 
-        Delimiters.validateExistDelimiter(delimiter);
-
-        return delimiter;
-    }
-
-    private char extractDelimiter(String input) {
-        return input.charAt(DELIMITER_POSITION);
+        return validateOperands(splitInput);
     }
 
     public int sumOperands() {
         return operands.sum();
     }
 
-    private Operands makeOperandsByInput(String input, String delimiter) {
-        String[] splitedInput = splitOperandsByDelimiter(input, delimiter);
+    private String[] extractOperands(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
 
-        return validateOperands(splitedInput);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
+
+        return splitOperandsByDefaultDelimiter(input);
+    }
+
+    private String[] splitOperandsByDefaultDelimiter(String input) {
+        return input.split(DEFAULT_DELIMITER_REGEX);
     }
 
     private Operands validateOperands(String[] splitedInput) {
@@ -69,9 +72,5 @@ public class Calculator {
         if (parsedOperand < MINIMUM_OPERAND_VALUE) {
             throw new NumberFormatException();
         }
-    }
-
-    private String[] splitOperandsByDelimiter(String input, String delimiter) {
-        return input.split(delimiter);
     }
 }
