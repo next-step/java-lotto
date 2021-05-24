@@ -58,4 +58,11 @@ public class LottoNumbers {
     public List<Integer> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public int matchingNumberCount(LottoNumbers winningLottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningLottoNumbers::contains)
+                .count();
+
+    }
 }
