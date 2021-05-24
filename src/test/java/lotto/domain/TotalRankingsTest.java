@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import lotto.dto.PrizeInfo;
+import lotto.dto.RankingPrizedCount;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
@@ -19,14 +18,13 @@ class TotalRankingsTest {
   @ParameterizedTest
   @EnumSource(value = LottoRanking.class, names = {"NONE"}, mode = EnumSource.Mode.EXCLUDE)
   void createPrizeInfos(LottoRanking given) {
-    assertThat(new TotalRankings(Lists.newArrayList(given)).createPrizeInfos()).isEqualTo(Lists.newArrayList(new PrizeInfo(given, 1)));
-  }
+    //given
+    List<RankingPrizedCount> expectation = Arrays.stream(LottoRanking.values())
+        .filter(lottoRanking -> lottoRanking != LottoRanking.NONE)
+        .map(lottoRanking -> new RankingPrizedCount(lottoRanking, lottoRanking == given ? 1 : 0))
+        .collect(Collectors.toList());
 
-  @DisplayName("특정 등수에 몇 번 당첨 당첨되었는지 알수 있는 목록을 반환할 때 의미없는 등수는 반환하지 않는다.")
-  @ParameterizedTest
-  @EnumSource(value = LottoRanking.class, names = {"NONE"}, mode = EnumSource.Mode.INCLUDE)
-  void createPrizeInfosExcludeNone(LottoRanking given) {
-    assertThat(new TotalRankings(Lists.newArrayList(given)).createPrizeInfos()).isEmpty();
+    //when & then
+    assertThat(new TotalRankings(Lists.newArrayList(given)).createPrizeInfos()).isEqualTo(expectation);
   }
-
 }

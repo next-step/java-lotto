@@ -26,7 +26,11 @@ class AnalysisSheetTest {
   @Test
   void toStringPrizeInfosTest() {
     //given
-    String expectation = "3개 일치 (5000원)- 1개";
+    String expectation = "3개 일치 (5000원)- 0개\n" +
+                          "4개 일치 (50000원)- 1개\n" +
+                          "5개 일치 (1500000원)- 0개\n" +
+                          "5개 일치, 보너스 볼 일치(30000000원)- 0개\n" +
+                          "6개 일치 (2000000000원)- 0개";
     //when & then
     assertThat(new AnalysisSheet(givenTotalRankings, givenPurchasingAmount).toStringPrizeInfos()).hasToString(expectation);
   }
@@ -35,7 +39,7 @@ class AnalysisSheetTest {
   @Test
   void toStringYieldAnalysis() {
     //given
-    String expectation = "총 수익률은 5.00입니다. (이득임)";
+    String expectation = "총 수익률은 50.00입니다. (이득임)";
     //when & then
     assertThat(new AnalysisSheet(givenTotalRankings, givenPurchasingAmount).toStringYieldAnalysis()).hasToString(expectation);
   }
