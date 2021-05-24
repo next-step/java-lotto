@@ -5,16 +5,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-	Lottos boughtLottos;
-	final List<Integer> candidateNumbers;
+	private static final int START_POINT = 0;
+	private static final List<Integer> candidateNumbers;
 
-	public LottoGenerator() {
+	private Lottos boughtLottos;
+
+	static {
 		candidateNumbers = new ArrayList<>();
 
 		initiateCandidateNumbers();
 	}
 
-	private void initiateCandidateNumbers() {
+	private static void initiateCandidateNumbers() {
 		for (int i = Lotto.LOTTO_MINIMUM_NUMBER; i <= Lotto.LOTTO_MAXIMUM_NUMBER; i++) {
 			candidateNumbers.add(i);
 		}
@@ -22,15 +24,15 @@ public class LottoGenerator {
 
 	public Lottos buy(int budget) {
 		int possibleCount = getPossibleCount(budget);
-		publishLottos(possibleCount);
+		buyLottos(possibleCount);
 
 		return this.boughtLottos;
 	}
 
-	private void publishLottos(int possibleCount) {
+	private void buyLottos(int possibleCount) {
 		List<Lotto> candidateLottos = new ArrayList<>();
 
-		for (int i = 0; i < possibleCount; i++) {
+		for (int i = START_POINT; i < possibleCount; i++) {
 			candidateLottos.add(new Lotto(getRandomLottoNumbers()));
 		}
 
@@ -47,6 +49,6 @@ public class LottoGenerator {
 	private List<Integer> getRandomLottoNumbers() {
 		Collections.shuffle(candidateNumbers);
 
-		return candidateNumbers.subList(0, Lotto.LOTTO_LENGTH);
+		return candidateNumbers.subList(START_POINT, Lotto.LOTTO_LENGTH);
 	}
 }
