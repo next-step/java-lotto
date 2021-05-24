@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoWin;
 import lotto.domain.Money;
 import lotto.domain.generator.AutoLottosGenerator;
@@ -16,8 +17,10 @@ public class Main {
         ResultView.printPurchaseCount(money.countOfLotto());
         ResultView.printLottoNumbers(lottoMachine.lottos());
 
-        LottoWin lottoWin = lottoMachine.result(new Lotto(InputView.inputWinNumber()));
+        Lotto winLotto = new Lotto(InputView.inputWinNumber());
+        LottoNumber bonusBall = LottoNumber.of(InputView.inputBonusBall());
+        LottoWin lottoWin = lottoMachine.result(winLotto, bonusBall);
         ResultView.printResult(lottoWin);
-        ResultView.printProfit(money.money(), lottoWin);
+        ResultView.printProfit(lottoWin.profit(money));
     }
 }

@@ -3,11 +3,12 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -32,7 +33,6 @@ public class LottoMachineTest {
     @CsvSource(value = {"1,2,3,10,11,12:5000", "1,2,3,4,11,12,3:50000", "1,2,3,4,5,11:1500000", "1,2,3,4,5,6:2000000000"}, delimiter = ':')
     public void result(String inputs, long expcted) {
         // given
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
         Lotto winLotto = new Lotto(inputs.split(","));
 
         // when
@@ -41,5 +41,20 @@ public class LottoMachineTest {
 
         // then
         assertThat(sum).isEqualTo(expcted);
+    }
+
+
+    @Test
+    @DisplayName("보너스 결과 테스트")
+    public void resultWithBonus() {
+        // given
+        Lotto winLotto = new Lotto("1,2,3,4,5,7".split(","));
+
+        // when
+        LottoMachine lottoMachine = LottoMachine.of(lottos);
+        long sum = lottoMachine.result(winLotto, LottoNumber.of(6)).sum();
+
+        // then
+        assertThat(sum).isEqualTo(30000000);
     }
 }

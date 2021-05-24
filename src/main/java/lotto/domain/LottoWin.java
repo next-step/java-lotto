@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -7,10 +9,8 @@ public class LottoWin {
     Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
 
     public LottoWin() {
-        lottoWin.put(LottoRank.FOURTH, 0);
-        lottoWin.put(LottoRank.THIRD, 0);
-        lottoWin.put(LottoRank.SECOND, 0);
-        lottoWin.put(LottoRank.FIRST, 0);
+        Arrays.stream(LottoRank.values())
+            .forEach(lottoRank -> lottoWin.put(lottoRank, 0));
     }
 
     public Map<LottoRank, Integer> win() {
@@ -18,9 +18,18 @@ public class LottoWin {
     }
 
     public void hit(int match) {
-        LottoRank lottoWinType = LottoRank.of(match);
-        if(lottoWinType != LottoRank.MISS) {
-            lottoWin.put(lottoWinType, lottoWin.get(lottoWinType) + 1);
+        LottoRank lottoWinType = LottoRank.of(match, false);
+        addWin(lottoWinType);
+    }
+
+    public void hit(int match, boolean matchBonus) {
+        LottoRank lottoWinType = LottoRank.of(match, matchBonus);
+        addWin(lottoWinType);
+    }
+
+    private void addWin(LottoRank lottoRank) {
+        if(lottoRank != LottoRank.MISS) {
+            lottoWin.put(lottoRank, lottoWin.get(lottoRank) + 1);
         }
     }
 
@@ -30,5 +39,9 @@ public class LottoWin {
             sum += lottoWinType.amount() * lottoWin.get(lottoWinType);
         }
         return sum;
+    }
+
+    public BigDecimal profit(Money money) {
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(money.money()), 2, BigDecimal.ROUND_FLOOR);
     }
 }

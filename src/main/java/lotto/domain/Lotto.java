@@ -32,10 +32,19 @@ public class Lotto {
         }
     }
 
-    public int match(List<LottoNumber> winInput) {
+    public int match(Lotto lotto) {
         return (int)lottoNumbers.stream()
-            .filter(lottoNumber -> winInput.contains(lottoNumber))
+            .filter(lottoNumber -> lotto.containNumber(lottoNumber))
             .count();
+    }
+
+    private boolean containNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean matchBonus(LottoNumber bonusBall) {
+        return lottoNumbers.stream()
+            .anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
     public List<LottoNumber> lottoNumbers() {
