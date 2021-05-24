@@ -47,9 +47,7 @@ public class LottoNumber {
   public static LottoNumber valueOf(int inputNumber) {
     LottoNumber lottoNumber = lottoNumberMap.get(inputNumber);
 
-    if (lottoNumber == null) {
-      throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
-    }
+    validateInvalidRangeNumber(lottoNumber);
 
     return lottoNumber;
   }
@@ -72,6 +70,12 @@ public class LottoNumber {
 
   public void validatorPositiveNumber() {
     if (lottoNumber < 0) {
+      throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
+    }
+  }
+
+  public static void validateInvalidRangeNumber(LottoNumber lottoNumber) {
+    if (lottoNumber == null) {
       throw LOTTO_NUMBER_INVALID_RANGE_EXCEPTION;
     }
   }
