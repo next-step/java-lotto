@@ -57,7 +57,7 @@ public class WinningNumbers {
         return this.bonusNumber;
     }
 
-    public boolean addBonusNumber(BonusNumber bonusNumber) {
+    public boolean addBonusNumber(BonusNumber bonusNumber) throws CustomIllegalArgumentException{
         if (numbers.contains(bonusNumber)) {
             throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
         }

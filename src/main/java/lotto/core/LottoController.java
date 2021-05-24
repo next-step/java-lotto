@@ -65,7 +65,7 @@ public class LottoController {
         outputView.printMessage(Message.REQUEST_INPUT_BONUS_NUMBERS);
         boolean stopRequestingInput = false;
         while (!stopRequestingInput) {
-            stopRequestingInput = requestBonusNumberInput() && winningNumbers.addBonusNumber(bonusNumber);
+            stopRequestingInput = requestBonusNumberInput();
         }
     }
 
@@ -73,6 +73,7 @@ public class LottoController {
         boolean stopRequestingInput = true;
         try {
             bonusNumber = new BonusNumber(inputView.receiveIntegerInput());
+            winningNumbers.addBonusNumber(bonusNumber);
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             stopRequestingInput = false;
