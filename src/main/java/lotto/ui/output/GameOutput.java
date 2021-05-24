@@ -5,7 +5,7 @@ import java.io.PrintStream;
 
 public class GameOutput implements Output {
     public static final String NEW_LINE = "\n";
-    private PrintStream out;
+    private final PrintStream out;
 
     public GameOutput(OutputStream out) {
         this.out = (PrintStream) out;

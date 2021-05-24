@@ -8,7 +8,7 @@ import lotto.ui.input.exception.InputException;
 import lotto.ui.output.GameOutput;
 
 public class OmrCardInputData implements InputData<OmrCard> {
-    private GameInput input;
+    private final GameInput input;
 
     public OmrCardInputData(Input input) {
         this.input = (GameInput) input;

@@ -8,7 +8,7 @@ import lotto.ui.input.exception.InputException;
 import lotto.util.StringUtils;
 
 public class RoundInputData implements InputData<Round> {
-    private GameInput input;
+    private final GameInput input;
 
     public RoundInputData(Input input) {
         this.input = (GameInput) input;

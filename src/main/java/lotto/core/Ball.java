@@ -8,7 +8,7 @@ public class Ball implements Comparable {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
-    private int number;
+    private final int number;
 
     protected Ball(final int number) {
         if (validation(number)) {
@@ -22,7 +22,7 @@ public class Ball implements Comparable {
         return number;
     }
 
-    public static boolean validation(int number) {
+    private static boolean validation(int number) {
         return number < MIN || number > MAX;
     }
 

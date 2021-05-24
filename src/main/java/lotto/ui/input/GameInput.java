@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class GameInput implements Input {
-    private Scanner scanner;
-    private Output output;
+    private final Scanner scanner;
+    private final Output output;
 
     public GameInput(InputStream stream, Output output) {
         this.scanner = new Scanner(stream);

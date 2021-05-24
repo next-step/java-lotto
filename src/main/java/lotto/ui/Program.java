@@ -13,8 +13,8 @@ import lotto.ui.output.result.GameResult;
 import lotto.ui.output.report.NextStepProblemGameGameReport;
 
 public class Program {
-    private Output output;
-    private Input input;
+    private final Output output;
+    private final Input input;
 
     public Program() {
         this.output = new GameOutput(System.out);
