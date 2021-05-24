@@ -1,4 +1,6 @@
+/*
 package lotto;
+
 
 public class ResultThreeWon {
     private final String threeWonText = "3개 일치 (5000원)";
@@ -21,3 +23,4 @@ public class ResultThreeWon {
         return threeWonText + "-" + count + "개";
     }
 }
+*/

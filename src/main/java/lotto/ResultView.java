@@ -14,22 +14,17 @@ public class ResultView {
     public void printLottoGameResult(ResultAll resultAll, int inputPurchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out.println(resultAll.getResultThreeWon().getResult());
-        System.out.println(resultAll.getResultFourWon().getResult());
-        System.out.println(resultAll.getResultFiveWon().getResult());
-        System.out.println(resultAll.getResultSixWon().getResult());
+        ResultScoreEnum.THREE.printResult(resultAll.getResult().get(ResultScoreEnum.THREE));
+        ResultScoreEnum.FOUR.printResult(resultAll.getResult().get(ResultScoreEnum.FOUR));
+        ResultScoreEnum.FIVE.printResult(resultAll.getResult().get(ResultScoreEnum.FIVE));
+        ResultScoreEnum.SIX.printResult(resultAll.getResult().get(ResultScoreEnum.SIX));
+
         printYield(resultAll, inputPurchaseAmount);
     }
 
     private void printYield(ResultAll resultAll, int inputPurchaseAmount) {
-        float yield = calculateYield(resultAll, inputPurchaseAmount);
+        float yield = resultAll.yield(inputPurchaseAmount);
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
-    private float calculateYield(ResultAll resultAll, int inputPurchaseAmount) {
-        return ((resultAll.getResultThreeWon().getWonMoney() +
-                resultAll.getResultFourWon().getWonMoney() +
-                resultAll.getResultFiveWon().getWonMoney() +
-                resultAll.getResultSixWon().getWonMoney()) / inputPurchaseAmount);
-    }
 }

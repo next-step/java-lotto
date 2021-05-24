@@ -11,8 +11,4 @@ public class WonCount {
     public int wonCount() {
         return wonCount;
     }
-
-    /*public int getWonCount() {
-        return wonCount;
-    }*/
 }

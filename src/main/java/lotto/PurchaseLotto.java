@@ -56,14 +56,7 @@ public class PurchaseLotto {
     }
 
     private void updateResultLotto(int wonCountForOneLotto) {
-        if (wonCountForOneLotto == 3)
-            resultAll.getResultThreeWon().won();
-        if (wonCountForOneLotto == 4)
-            resultAll.getResultFourWon().won();
-        if (wonCountForOneLotto == 5)
-            resultAll.getResultFiveWon().won();
-        if (wonCountForOneLotto == 6)
-            resultAll.getResultSixWon().won();
+            resultAll.won(wonCountForOneLotto);
     }
 
     public void setLastWonLottoNumbers(String lastWonLottoNumbers) {
