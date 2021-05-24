@@ -30,7 +30,7 @@ class LottoTest {
 
     @Test
     void 로또는_1부터_45까지의_숫자_중에서_발행한다() {
-        Lotto lotto = new Lotto(LottoNumberGenerator.getBalls());
+        Lotto lotto = LottoGenerator.getLotto();
         assertThat(lotto.numbers()).allMatch(num -> num <= Lotto.MAX).allMatch(num -> num >= Lotto.MIN);
     }
 
@@ -49,7 +49,7 @@ class LottoTest {
 
     @Test
     void 로또는_6자리_수_이다() {
-        Lotto lotto = new Lotto(LottoNumberGenerator.getBalls());
+        Lotto lotto = LottoGenerator.getLotto();
         assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
     }
 

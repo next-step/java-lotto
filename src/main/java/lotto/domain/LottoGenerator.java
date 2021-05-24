@@ -6,15 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
     private static final List<Integer> SAMPLE = IntStream.rangeClosed(Lotto.MIN, Lotto.MAX)
             .boxed()
             .collect(Collectors.toList());
 
-    private LottoNumberGenerator() {
+    private LottoGenerator() {
     }
 
-    public static List<Integer> getBalls() {
+    public static Lotto getLotto() {
+        return new Lotto(getLottoNumbers());
+    }
+
+    private static List<Integer> getLottoNumbers() {
         List<Integer> shuffle = shuffledList().subList(0, Lotto.SIZE);
         shuffle.sort(Integer::compareTo);
         return shuffle;
