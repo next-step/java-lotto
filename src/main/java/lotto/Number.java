@@ -7,11 +7,15 @@ public class Number implements Comparable<Number> {
 	private final int value;
 
 	public Number(int value) {
+		validateNumberValue(value);
+
+		this.value = value;
+	}
+
+	private void validateNumberValue(int value) {
 		if (value < 1 || 45 < value) {
 			throw new IllegalArgumentException("Number must be between 1 and 45");
 		}
-
-		this.value = value;
 	}
 
 	@Override
