@@ -3,6 +3,8 @@ package kht2199;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kht2199.exception.CannotFoundPatternException;
+
 @SuppressWarnings("SameParameterValue")
 public class StringAddCalculator {
 
@@ -15,8 +17,10 @@ public class StringAddCalculator {
 			return 0;
 		}
 
-		String[] tokens = parseTokensByMatcher(TOKEN_PATTERN, text);
-		if (tokens == null) {
+		String[] tokens;
+		try {
+			tokens = parseTokensByMatcher(TOKEN_PATTERN, text);
+		} catch (CannotFoundPatternException e) {
 			tokens = text.split(TOKEN_REGEX);
 		}
 
@@ -28,10 +32,10 @@ public class StringAddCalculator {
 		return accumulate(intTokens);
 	}
 
-	private static String[] parseTokensByMatcher(Pattern pattern, String text) {
+	private static String[] parseTokensByMatcher(Pattern pattern, String text) throws CannotFoundPatternException {
 		Matcher matcher = pattern.matcher(text);
 		if (!matcher.find()) {
-			return null;
+			throw new CannotFoundPatternException();
 		}
 		checkValidationMatcherGroupCount(matcher);
 		return matcher.group(2).split(matcher.group(1));
