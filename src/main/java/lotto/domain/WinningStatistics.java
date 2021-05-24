@@ -23,7 +23,7 @@ public class WinningStatistics {
     }
 
     private double purchaseAmount() {
-        return statistics.size() * 1000;
+        return statistics.size() * LottoConstants.PRICE;
     }
 
     private double total() {

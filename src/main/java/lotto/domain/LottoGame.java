@@ -8,10 +8,10 @@ public class LottoGame {
     LottoList lottoList = new LottoList();
     WinningLottoNumbers winningLottoNumbers;
 
-    final static int PRICE = 1000;
+
 
     public int getBuyCount(int buyPrice) {
-        return buyPrice / PRICE;
+        return buyPrice / LottoConstants.PRICE;
     }
 
     public Lotto getLotto() {

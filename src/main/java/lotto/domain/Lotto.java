@@ -11,11 +11,11 @@ public class Lotto {
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
 
-        if (new HashSet<>(lottoNumbers).size() != 6) {
+        if (new HashSet<>(lottoNumbers).size() != LottoConstants.LOTTO_SELECT_NUM) {
             throw new IllegalArgumentException("로또 번호는 6개여아한다.");
         }
         for (int lottoNumber : lottoNumbers) {
-            if (lottoNumber < 1 || lottoNumber > 45) {
+            if (lottoNumber < LottoConstants.LOTTO_MIN_NUM || lottoNumber > LottoConstants.LOTTO_MAX_NUM) {
                 throw new IllegalArgumentException("로또 번호는 1~45 사이여야한다.");
             }
         }

@@ -14,7 +14,7 @@ public enum Rank {
     private static final String ERROR_VALUE_MSG = "값이 잘못되었습니다. 다시 한번 확인해주세요.";
 
     private int winningCount, money;
-    String message;
+    private String message;
 
     Rank(int winningCount, int money, String message) {
         this.winningCount = winningCount;
