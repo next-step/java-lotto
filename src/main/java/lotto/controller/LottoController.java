@@ -12,7 +12,7 @@ public class LottoController {
         InputView inputView = new InputView();
         PrintView printView = new PrintView();
 
-        PurchaseInformation purchaseInfo = new PurchaseInformation(inputView.inputPrice(), inputView.inputManualPurchaseCount());
+        PurchaseInformation purchaseInfo = inputView.inputPriceAndManualCount();
         LottoNumbersGenerator autoGenerator = new AutoLottoNumbersGenerator(purchaseInfo.autoCount(), new RandomNumbersGenerator());
         LottoNumbersGenerator manualGenerator = new ManualLottoNumbersGenerator(purchaseInfo.manualCount(), inputView.inputManualPurchaseNumbers(purchaseInfo.manualCount()));
 
