@@ -12,7 +12,7 @@ public class Lotto {
     public static final int MAX_COUNT = 6;
     private final Set<LottoNumber> numbers;
 
-    public Lotto(int... numbers) {
+    public Lotto(int[] numbers) {
         checkNumber(numbers);
         this.numbers = Stream.of(numbers)
                 .flatMapToInt(Arrays::stream)

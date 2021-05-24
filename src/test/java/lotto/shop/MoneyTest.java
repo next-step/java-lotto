@@ -1,7 +1,6 @@
 package lotto.shop;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 import lotto.error.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
@@ -26,8 +25,6 @@ public class MoneyTest {
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    Money money = new Money(-10);
-                }).withMessageContaining(ErrorMessage.MONEY_CANNOT_BE_NEGATIVE);
+                .isThrownBy(() -> new Money(-10)).withMessageContaining(ErrorMessage.MONEY_CANNOT_BE_NEGATIVE);
     }
 }

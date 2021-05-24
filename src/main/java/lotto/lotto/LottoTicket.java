@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    List<Lotto> lottoList = new ArrayList<>();
+    private final List<Lotto> lottoTickets = new ArrayList<>();
 
     public void add(Lotto lotto) {
-        lottoList.add(lotto);
+        lottoTickets.add(lotto);
     }
 
     public List<Lotto> tickets() {
-        return lottoList;
+        return lottoTickets;
+    }
+
+    public LottoResult matchWinningNumber(WinningNumber winningNumber) {
+        LottoResult lottoResult = new LottoResult();
+        lottoTickets.forEach(lotto -> {
+            lotto.retainAll(winningNumber);
+            lottoResult.increaseCount(lotto.answerCount());
+        });
+        return lottoResult;
+    }
+
+    public int count() {
+        return lottoTickets.size();
     }
 }

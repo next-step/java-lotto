@@ -14,7 +14,7 @@ import lotto.lotto.LottoNumber;
 import lotto.error.ErrorMessage;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoTicket;
-import lotto.lotto.MatchedAnswer;
+import lotto.lotto.LottoResult;
 
 public class ShopTest {
     Shop shop;
@@ -30,9 +30,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        int amount = shop.buyLotto(money);
+        LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(amount).isEqualTo(10);
+        assertThat(lottoTicket.count()).isEqualTo(10);
     }
 
     @Test
@@ -42,19 +42,19 @@ public class ShopTest {
         Money money = new Money(900);
         //when
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> shop.buyLotto(money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
+                .isThrownBy(() -> shop.buyAutoLotto(money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
         //then
     }
 
     @Test
     @DisplayName("구매한 만큼 로또 구입")
-    void butLotto() {
+    void buyLotto() {
         //given
         Money money = new Money(10000);
         //when
-        int lottoCount = shop.buyLotto(money);
+        LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoCount).isEqualTo(10);
+        assertThat(lottoTicket.count()).isEqualTo(10);
     }
 
     @Test
@@ -63,10 +63,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        int lottoCount = shop.buyLotto(money);
-        LottoTicket lottoTicket = shop.selectAuto(lottoCount);
+        LottoTicket lottoTicket = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoTicket.tickets().size()).isEqualTo(10);
+        assertThat(lottoTicket.count()).isEqualTo(10);
     }
 
     @Test
@@ -82,10 +81,10 @@ public class ShopTest {
 
         WinningNumber winningNumber = new WinningNumber(numbers);
 
-        Lotto lotto = new Lotto(1, 2, 3, 9, 10, 11);
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 33, 34, 34});
         lottoTicket.add(lotto);
         //when
-        MatchedAnswer match = shop.matchAnswer(lottoTicket, winningNumber);
+        LottoResult match = shop.matchAnswer(lottoTicket, winningNumber);
         //then
         assertThat(match.count(3)).isEqualTo(1);
     }

@@ -1,14 +1,14 @@
 package lotto.ui;
 
-import lotto.error.ErrorMessage;
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
-import lotto.shop.Money;
-
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import lotto.error.ErrorMessage;
+import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
+import lotto.shop.Money;
 
 public class InputView {
     public static final String NUMBER_DELIMITER = ",";

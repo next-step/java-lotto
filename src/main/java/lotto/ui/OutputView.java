@@ -1,8 +1,11 @@
 package lotto.ui;
 
 import lotto.enums.MessageEnum;
+import lotto.enums.PrizeEnum;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoTicket;
+import lotto.lotto.LottoResult;
+import lotto.shop.Money;
 
 public class OutputView {
     public static void printInputMoneyMessage() {
@@ -28,6 +31,13 @@ public class OutputView {
         println(MessageEnum.LINE.message());
     }
 
+    public static void resultIncome(LottoResult matchAnswer, Money money) {
+        for (PrizeEnum prizeValue : PrizeEnum.values()) {
+            println(prizeValue.answer(), prizeValue.prize(), matchAnswer);
+        }
+        System.out.printf(MessageEnum.INCOME_PREFIX.message() + "%.2f" + MessageEnum.INCOME_POSTFIX.message() + "%n", (float) matchAnswer.income() / money.amount());
+    }
+
     private static void printLotto(Lotto lotto) {
         String collect = lotto.numbersToString();
         System.out.println("[" + collect + "]");
@@ -39,5 +49,9 @@ public class OutputView {
 
     private static void println(String message, int amount) {
         System.out.println(amount + message);
+    }
+
+    private static void println(int answer, int prize, LottoResult matchAnswer) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n", answer, prize, matchAnswer.count(answer));
     }
 }

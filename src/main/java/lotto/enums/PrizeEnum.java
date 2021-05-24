@@ -1,6 +1,6 @@
 package lotto.enums;
 
-import lotto.lotto.MatchedAnswer;
+import lotto.lotto.LottoResult;
 
 public enum PrizeEnum {
     FOURTH(3, 5000),
@@ -24,7 +24,7 @@ public enum PrizeEnum {
         return prize;
     }
 
-    public int income(MatchedAnswer matchAnswer) {
+    public int income(LottoResult matchAnswer) {
         return prize * matchAnswer.count(answer);
     }
 }

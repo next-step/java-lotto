@@ -2,6 +2,7 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -12,9 +13,9 @@ public class NumberGeneratorTest {
     void generate() {
         //given
         //when
-        int number = NumberGenerator.generate();
+        int[] number = NumberGenerator.generate();
         //then
-        assertThat(number).isGreaterThan(0);
+        assertThat(number.length).isEqualTo(Lotto.MAX_COUNT);
     }
 
     @RepeatedTest(100)
@@ -22,9 +23,11 @@ public class NumberGeneratorTest {
     void checkNumber() {
         //given
         //when
-        int number = NumberGenerator.generate();
+        int[] numbers = NumberGenerator.generate();
         //then
-        assertThat(number).isGreaterThan(0);
-        assertThat(number).isLessThanOrEqualTo(45);
+        for (int number : numbers) {
+            assertThat(number).isGreaterThan(0);
+            assertThat(number).isLessThanOrEqualTo(45);
+        }
     }
 }
