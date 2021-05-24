@@ -43,19 +43,15 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    public int containNumber(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            return 1;
-        }
-
-        return 0;
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public HitCount checkHitCount(LottoNumbers winningNumbers) {
         int result = 0;
 
         for (LottoNumber lottoNumber: lottoNumbers) {
-            result += winningNumbers.containNumber(lottoNumber);
+            result += winningNumbers.contains(lottoNumber) ? 1 : 0;
         }
 
         return new HitCount(result);
