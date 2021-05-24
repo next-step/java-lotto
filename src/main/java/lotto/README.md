@@ -38,6 +38,7 @@
   * 중복 되지 않는 숫자들의 집합이다.
   * 로또 한 게임의 숫자 개수인 6개가 맞는지 validation할 수 있다.
   * 다른 LottoNumbers와 몇개의 숫자가 동일한지 반환할 수 있다.
+  * 하나의 LottoNumber를 포함하고 있는지 반환할 수 있다.
 
 * RandomNumberGenerateStrategy
   * 랜덤한 LottoNumbers를 생성해내는 방법을 변경할 때 용이함을 확보하기 위한 전략 Interface
@@ -48,11 +49,13 @@
 
 * LottoRanking
   * 숫자를 맞춘 개수에 따라 등수 정할 수 있는 enum
+  * 5개를 맞추고, 보너스 번호까지 맞췄을 때는 2등, 보너스 번호를 못맞췄을 때는 3등을 반환한다.
   * 등수를 나타내는 enum마다 당첨금을 나타낼 수 있다.
   
 * LottoGame
   * LottoNumbers를 멤버변수로 갖는 하나의 로또 게임을 나타내는 클래스
-  * 전달 받은 LottoGame(당첨 게임)과 비교해서 당첨 결과인 LottoRanking을 반환할 수 있다.
+  * 전달 받은 LottoGame(당첨 게임)과 비교해서 맞춘 숫자 갯수를 반환할 수 있다.
+  * 전달 받은 LottoNumber(보너스 번호)를 포함하고 있는지 여부를 반환할 수 있다.
   
 * TotalRankings
   * 로또 게임들의 당첨 결과인 여러개의 LottoRanking를 갖는 일급 컬렉션
@@ -99,3 +102,10 @@
 * GameGenerator
   * 입력 받는 값으로 로또 게임을 생성하는 책임을 갖는 클래스
   * 랜덤 생성을 위한 전략을 주입받아 랜덤 생성 방법을 바꿀 수 있다.
+  
+* WinningNumbersAndBonusNumber
+  * 입력 받는 당첨 번호와 보너스 번호를 도메인 객체에 전달하기위한 DTO 클래스
+  
+* WinningConditions
+  * 당첨 번호와 보너스 번호를 가지고 있는 도메인 클래스
+  * 로또 게임을 전달받아 등수를 반환할 수 있다.
