@@ -6,11 +6,12 @@ public class ResultAll {
     private HashMap<ResultScoreEnum, Integer> resultMap = new HashMap<>();
 
     public ResultAll() {
-        resultMap.put(ResultScoreEnum.THREE, 0);
-        resultMap.put(ResultScoreEnum.FOUR, 0);
-        resultMap.put(ResultScoreEnum.FIVE, 0);
-        resultMap.put(ResultScoreEnum.FIVE_BONUS, 0);
-        resultMap.put(ResultScoreEnum.SIX, 0);
+        resultMap.put(ResultScoreEnum.MISS, 0);
+        resultMap.put(ResultScoreEnum.FIFTH, 0);
+        resultMap.put(ResultScoreEnum.FOURTH, 0);
+        resultMap.put(ResultScoreEnum.THIRD, 0);
+        resultMap.put(ResultScoreEnum.SECOND, 0);
+        resultMap.put(ResultScoreEnum.FIRST, 0);
     }
 
     public HashMap<ResultScoreEnum, Integer> getResult() {
@@ -18,23 +19,26 @@ public class ResultAll {
     }
 
     public void won(WonCount wonCount) {
+        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.bonusWonCount());
+        resultMap.put(resultScoreEnum, resultMap.get(resultScoreEnum) + 1);
+/*        ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.bonusWonCount());
         if (wonCount.wonCount() == 3)
-            resultMap.put(ResultScoreEnum.THREE, resultMap.get(ResultScoreEnum.THREE) + 1);
+            resultMap.put(ResultScoreEnum.FIFTH, resultMap.get(ResultScoreEnum.FIFTH) + 1);
         if (wonCount.wonCount() == 4)
-            resultMap.put(ResultScoreEnum.FOUR, resultMap.get(ResultScoreEnum.FOUR) + 1);
-        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == 0)
-            resultMap.put(ResultScoreEnum.FIVE, resultMap.get(ResultScoreEnum.FIVE) + 1);
-        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == 1)
-            resultMap.put(ResultScoreEnum.FIVE_BONUS, resultMap.get(ResultScoreEnum.FIVE_BONUS) + 1);
+            resultMap.put(ResultScoreEnum.FOURTH, resultMap.get(ResultScoreEnum.FOURTH) + 1);
+        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == false)
+            resultMap.put(ResultScoreEnum.THIRD, resultMap.get(ResultScoreEnum.THIRD) + 1);
+        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == true)
+            resultMap.put(ResultScoreEnum.SECOND, resultMap.get(ResultScoreEnum.SECOND) + 1);
         if (wonCount.wonCount() == 6)
-            resultMap.put(ResultScoreEnum.SIX, resultMap.get(ResultScoreEnum.SIX) + 1);
+            resultMap.put(ResultScoreEnum.FIRST, resultMap.get(ResultScoreEnum.FIRST) + 1);*/
     }
 
     public float yield(int purchaseAmount) {
-        return ((ResultScoreEnum.THREE.getWonMoney(resultMap.get(ResultScoreEnum.THREE)) +
-                ResultScoreEnum.FOUR.getWonMoney(resultMap.get(ResultScoreEnum.FOUR)) +
-                ResultScoreEnum.FIVE.getWonMoney(resultMap.get(ResultScoreEnum.FIVE)) +
-                ResultScoreEnum.FIVE_BONUS.getWonMoney(resultMap.get(ResultScoreEnum.FIVE_BONUS)) +
-                ResultScoreEnum.SIX.getWonMoney(resultMap.get(ResultScoreEnum.SIX))) / (float) purchaseAmount);
+        return ((ResultScoreEnum.FIFTH.getWonMoney(resultMap.get(ResultScoreEnum.FIFTH)) +
+                ResultScoreEnum.FOURTH.getWonMoney(resultMap.get(ResultScoreEnum.FOURTH)) +
+                ResultScoreEnum.THIRD.getWonMoney(resultMap.get(ResultScoreEnum.THIRD)) +
+                ResultScoreEnum.SECOND.getWonMoney(resultMap.get(ResultScoreEnum.SECOND)) +
+                ResultScoreEnum.FIRST.getWonMoney(resultMap.get(ResultScoreEnum.FIRST))) / (float) purchaseAmount);
     }
 }
