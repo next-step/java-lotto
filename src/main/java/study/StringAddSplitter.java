@@ -26,13 +26,15 @@ public abstract class StringAddSplitter {
 	}
 
 	protected void validateTokens() throws RuntimeException {
-		for (String token : this.tokens)
+		for (String token : this.tokens) {
 			negativeValidToken(token);
+		}
 	}
 
 	private void negativeValidToken(String token) {
-		if (Integer.parseInt(token) < ZERO)
+		if (Integer.parseInt(token) < ZERO) {
 			throw new RuntimeException("음수입니다.");
+		}
 	}
 
 }
