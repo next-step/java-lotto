@@ -47,10 +47,11 @@ public class PurchaseLotto {
     public void resultLottoGame(String lastWonLottoNumbers) {
         setLastWonLottoNumbers(lastWonLottoNumbers);
         resultAll = new ResultAll();
+        Lotto lottoCompare = new Lotto();
 
         WonCount wonCountForOneLotto;
         for (int i = 0; i < lottoNumberList.count(); i++) {
-            wonCountForOneLotto = countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
+            wonCountForOneLotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
             updateResultLotto(wonCountForOneLotto.wonCount());
         }
     }
@@ -59,19 +60,19 @@ public class PurchaseLotto {
             resultAll.won(wonCountForOneLotto);
     }
 
-    public void setLastWonLottoNumbers(String lastWonLottoNumbers) {
+    private void setLastWonLottoNumbers(String lastWonLottoNumbers) {
         this.lastWonLottoNumber = new LastWonLottoNumber(lastWonLottoNumbers);
     }
 
-    public WonCount countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
-        WonCount wonCount = new WonCount();
-        for (int oneLottoNumber : generateLottoNumber) {
-            wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumbers));
-        }
-        return wonCount;
-    }
-
-    private boolean isSameNumber(int oneLottoNumber, List<Integer> lastWonLottoNumbers) {
-        return lastWonLottoNumbers.contains(oneLottoNumber);
-    }
+//    public WonCount countWonNumbers(List<Integer> generateLottoNumber, List<Integer> lastWonLottoNumbers) {
+//        WonCount wonCount = new WonCount();
+//        for (int oneLottoNumber : generateLottoNumber) {
+//            wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumbers));
+//        }
+//        return wonCount;
+//    }
+//
+//    private boolean isSameNumber(int oneLottoNumber, List<Integer> lastWonLottoNumbers) {
+//        return lastWonLottoNumbers.contains(oneLottoNumber);
+//    }
 }

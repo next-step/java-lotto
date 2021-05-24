@@ -5,7 +5,6 @@ import java.util.List;
 
 public class LottoNumber {
     private List<Integer> list;
-    //private LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy;
 
     public LottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         list = new ArrayList<Integer>();
