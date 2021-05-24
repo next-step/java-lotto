@@ -39,14 +39,10 @@ public enum LottoReward {
     public abstract int totalReward(int count);
 
     public static LottoReward generateReward(int sameCount) {
-        if (sameCount == 3) {
-            return FOURTH;
-        } else if (sameCount == 4) {
-            return THIRD;
-        } else if (sameCount == 5) {
-            return SECOND;
-        } else if (sameCount == 6) {
-            return FIRST;
+        for (LottoReward reward : LottoReward.values()) {
+            if (reward.sameCount() == sameCount) {
+                return reward;
+            }
         }
         return MISS;
     }
