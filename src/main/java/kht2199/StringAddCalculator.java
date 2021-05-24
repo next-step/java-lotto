@@ -8,9 +8,9 @@ import kht2199.exception.CannotFoundPatternException;
 @SuppressWarnings("SameParameterValue")
 public class StringAddCalculator {
 
-	private static final String TOKEN_REGEX = "[,:]";
+	private static final String DELIMITER_REGEX = "[,:]";
 
-	private static final Pattern TOKEN_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String text) {
 		if (!checkValidationInputText(text)) {
@@ -19,9 +19,9 @@ public class StringAddCalculator {
 
 		String[] tokens;
 		try {
-			tokens = parseTokensByMatcher(TOKEN_PATTERN, text);
+			tokens = parseTextByMatcher(DELIMITER_PATTERN, text);
 		} catch (CannotFoundPatternException e) {
-			tokens = text.split(TOKEN_REGEX);
+			tokens = text.split(DELIMITER_REGEX);
 		}
 
 		int[] intTokens = stringToInt(tokens);
@@ -32,7 +32,7 @@ public class StringAddCalculator {
 		return accumulate(intTokens);
 	}
 
-	private static String[] parseTokensByMatcher(Pattern pattern, String text) throws CannotFoundPatternException {
+	private static String[] parseTextByMatcher(Pattern pattern, String text) throws CannotFoundPatternException {
 		Matcher matcher = pattern.matcher(text);
 		if (!matcher.find()) {
 			throw new CannotFoundPatternException();
