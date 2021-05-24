@@ -57,6 +57,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("split String sum test")
     void sumTest() {
         String[] values = {"1","2","3","4","5"};
         assertThat(StringAddCalculator.sum(values)).isEqualTo(15);
