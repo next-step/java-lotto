@@ -15,11 +15,4 @@ public class LottoTest {
         int result = lotto.compareWinLottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8));
         assertThat(result).isEqualTo(6);
     }
-
-    @DisplayName("로또 랜덤 번호 생성 출력 테스트")
-    @Test
-    void 단순_출력_테스트(){
-        Lotto lotto = new Lotto();
-        System.out.println(lotto.toString());
-    }
 }
