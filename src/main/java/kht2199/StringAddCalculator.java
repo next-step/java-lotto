@@ -20,8 +20,8 @@ public class StringAddCalculator {
 			tokens = text.split(TOKEN_REGEX);
 		}
 
-		Integer[] intTokens = stringToInt(tokens);
-		for (Integer token : intTokens) {
+		int[] intTokens = stringToInt(tokens);
+		for (int token : intTokens) {
 			checkValidationToken(token);
 		}
 
@@ -44,9 +44,9 @@ public class StringAddCalculator {
 		}
 	}
 
-	private static int accumulate(Integer[] values) {
+	private static int accumulate(int[] values) {
 		int sum = 0;
-		for (Integer integer : values) {
+		for (int integer : values) {
 			sum += integer;
 		}
 		return sum;
@@ -57,7 +57,7 @@ public class StringAddCalculator {
 	 * @param token 토큰
 	 * @throws RuntimeException token 검증 실패시 발생.
 	 */
-	private static void checkValidationToken(Integer token) throws RuntimeException {
+	private static void checkValidationToken(int token) throws RuntimeException {
 		if (token < 0) {
 			throw new RuntimeException("token is less than 0." + token);
 		}
@@ -76,8 +76,8 @@ public class StringAddCalculator {
 		return !text.isEmpty();
 	}
 
-	private static Integer[] stringToInt(String[] string) {
-		Integer[] result = new Integer[string.length];
+	private static int[] stringToInt(String[] string) {
+		int[] result = new int[string.length];
 		for (int index = 0; index < string.length; index++) {
 			result[index] = Integer.parseInt(string[index]);
 		}
