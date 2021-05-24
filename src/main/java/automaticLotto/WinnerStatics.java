@@ -1,14 +1,11 @@
 package automaticLotto;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinnerStatics {
 	private static final int NOTHING = 0;
-
 	private final Map<Integer, Integer> winnerCountByMatchedNumber;
-	private final Map<Integer, Integer> rankingCondition;
 	private final Lottos boughtLottos;
 	private final List<Integer> winnerLotto;
 
@@ -16,16 +13,6 @@ public class WinnerStatics {
 		this.boughtLottos = boughtLottos;
 		this.winnerLotto = winnerLotto;
 		this.winnerCountByMatchedNumber = getWinnerCountByMatchedNumber();
-		rankingCondition = new HashMap<>();
-
-		initiateRankingCondition();
-	}
-
-	private void initiateRankingCondition() {
-		rankingCondition.put(3, 5000);
-		rankingCondition.put(4, 500000);
-		rankingCondition.put(5, 1500000);
-		rankingCondition.put(6, 2000000000);
 	}
 
 	private Map<Integer, Integer> getWinnerCountByMatchedNumber() {
@@ -48,7 +35,7 @@ public class WinnerStatics {
 		double profit = 0.00;
 
 		for (Integer matchedNumber : winnerCountByMatchedNumber.keySet()) {
-			profit += winnerCountByMatchedNumber.get(matchedNumber) * rankingCondition.get(matchedNumber);
+			profit += winnerCountByMatchedNumber.get(matchedNumber) * RankingTable.getWinAmount(matchedNumber);
 		}
 
 		return profit / getTotalAmount();
