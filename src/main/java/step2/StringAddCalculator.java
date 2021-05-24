@@ -1,63 +1,47 @@
 package step2;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER = ",|:";
-    public static final String CHARACTER_OR_NEGATIVE_NUMBER_ERROR = "문자와 음수는 입력이 불가능 합니다.";
+    private static final String DELIMITER_REGEX = "//(.)\n(.*)";
+    private static final int DELIMITER_MATCHER_GROUP = 1;
+    private static final int INPUT_NUMBER_MATCHER_GROUP = 2;
 
     private StringAddCalculator() {
     }
 
     public static int splitAndSum(String input) {
 
-        if (input == null || input.isEmpty()) {
+        if (!validateInput(input)) {
             return 0;
         }
 
         String delimiter = DEFAULT_DELIMITER;
-        String beforeSplit = input;
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+
+        Matcher matcher = Pattern.compile(DELIMITER_REGEX).matcher(input);
 
         if (matcher.find()) {
-            delimiter = matcher.group(1);
-            beforeSplit = matcher.group(2);
+            delimiter = matcher.group(DELIMITER_MATCHER_GROUP);
+            input = matcher.group(INPUT_NUMBER_MATCHER_GROUP);
         }
 
-        String[] splitNumbers = splitDelimiter(beforeSplit, delimiter);
-        Arrays.stream(splitNumbers).forEachOrdered(StringAddCalculator::isDigit);
+        int addValue = 0;
 
-        return add(Arrays.stream(splitNumbers)
-                .mapToInt(Integer::parseInt)
-                .toArray());
+        for (String splitNumber : splitDelimiter(input, delimiter)) {
+            PositiveNumber positiveNumber = new PositiveNumber(splitNumber);
+            addValue = positiveNumber.add(addValue);
+        }
+
+        return addValue;
+    }
+
+    private static boolean validateInput(String input) {
+        return input != null && !input.isEmpty();
     }
 
     private static String[] splitDelimiter(String beforeSplit, String delimiter) {
         return beforeSplit.split(delimiter);
-    }
-
-    private static void isDigit(String splitNumbers) {
-        if (!splitNumbers.chars().allMatch(Character::isDigit)) {
-            throw new RuntimeException(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
-        }
-    }
-
-    private static int add(int[] numbers) {
-
-        int sum = 0;
-        for (int number : numbers) {
-            minusNumberCheck(number);
-            sum += number;
-        }
-
-        return sum;
-    }
-
-    private static void minusNumberCheck(int number) {
-        if (number < 0) {
-            throw new RuntimeException(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
-        }
     }
 }

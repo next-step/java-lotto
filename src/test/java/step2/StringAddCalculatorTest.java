@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static step2.StringAddCalculator.CHARACTER_OR_NEGATIVE_NUMBER_ERROR;
+import static step2.NotPositiveNumberException.CHARACTER_OR_NEGATIVE_NUMBER_ERROR;
 
 public class StringAddCalculatorTest {
     @Test
@@ -50,13 +50,13 @@ public class StringAddCalculatorTest {
     @DisplayName("문자열 계산에 음수를 갖고 있는 문자열 입력")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class).hasMessageContaining(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
+                .isInstanceOf(NotPositiveNumberException.class).hasMessageContaining(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
     }
 
     @Test
     @DisplayName("문자열 계산에 문자가 포함 되어 있는 문자열 입력")
     public void splitAndSum_character() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,이,3"))
-                .isInstanceOf(RuntimeException.class).hasMessageContaining(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
+                .isInstanceOf(NotPositiveNumberException.class).hasMessageContaining(CHARACTER_OR_NEGATIVE_NUMBER_ERROR);
     }
 }
