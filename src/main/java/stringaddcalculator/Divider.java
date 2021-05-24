@@ -9,14 +9,17 @@ import java.util.regex.Pattern;
 public class Divider {
     private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
+    private final int CUSTOM_DELIMITER_IDX = 1;
+    private final int TARGET_NUM_IDX = 2;
 
     List<String> splitInputByCustomDelimiterRule(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
-        if(matcher.find()){
-            return Arrays.asList(matcher.group(1),matcher.group(2));
+        if (matcher.find()) {
+            return Arrays.asList(matcher.group(CUSTOM_DELIMITER_IDX), matcher.group(TARGET_NUM_IDX));
         }
         return Arrays.asList(input);
     }
+
     void setCustomDelimiter(String customDelimiter) {
         this.DELIMITER.add(customDelimiter);
     }
