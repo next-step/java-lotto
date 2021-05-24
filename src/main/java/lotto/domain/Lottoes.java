@@ -26,9 +26,9 @@ public class Lottoes {
         return lottoes.size();
     }
 
-    public int getRankCount(final Lotto winnerLotto, final Rank criteriaRank, final LottoNumber bonusNumber) {
+    public int getRankCount(final WinningLotto winningLotto, final Rank criteriaRank) {
         return (int) lottoes.stream()
-                .map(lotto -> lotto.getRank(winnerLotto, bonusNumber))
+                .map(lotto -> winningLotto.getRank(lotto))
                 .filter(rank -> rank.equals(criteriaRank))
                 .count();
     }

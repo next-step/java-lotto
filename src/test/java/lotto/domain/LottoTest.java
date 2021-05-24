@@ -7,10 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,10 +34,10 @@ class LottoTest {
         Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
 
         // when
-        Lotto winnerLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // then
-        assertThat(lotto).isEqualTo(winnerLotto);
+        assertThat(lotto).isEqualTo(winningLotto);
     }
 
     @DisplayName("6자리 숫자를 입력하지 않으면 예외가 발생한다")
@@ -60,38 +56,36 @@ class LottoTest {
                 .hasMessage("중복된 로또 번호는 입력할 수 없습니다.");
     }
 
-    @DisplayName("당첨번호가 중복된 보너스 볼을 입력하면 예외가 발생한다")
-    @Test
-    void validate_bonusNumber() {
-        // given
-        Lotto winnerLotto = Lotto.from(new TestLottoNumberGenerator());
-
-        // when
-        LottoNumber bonusNumber = LottoNumber.from(6);
-
-        // then
-        assertThatThrownBy(() -> winnerLotto.validateBonusNumber(bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("보너스번호는 당첨번호와 중복될 수 없습니다.");
-    }
-
-    @DisplayName("당첨 번호를 입력하면 당첨 결과 금액을 반환한다")
+    @DisplayName("당첨 로또를 입력하면 일치하는 개수를 반환한다")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,10,11,12:7:5000", "1,2,3,4,10,11:7:50000", "1,2,3,4,5,10:7:1500000",
-            "1,2,3,4,5,10:6:30000000", "1,2,3,4,5,6:7:2000000000"}, delimiter = ':')
-    void getRank(String winnerLottoNumbers, int bonusNumber, int expectedPrizeMoney) {
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3"}, delimiter = ':')
+    void match_count(String lottoNumbers, int expectedCount) {
         // given
-        Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
-        Lotto winnerLotto = Lotto.from(Arrays.asList(winnerLottoNumbers.split(","))
+        Lotto winningLotto = Lotto.from(new TestLottoNumberGenerator());
+        Lotto lotto = Lotto.from(Arrays.asList(lottoNumbers.split(","))
                 .stream()
                 .map(i -> Integer.valueOf(i))
                 .collect(toList()));
-        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);
 
         // when
-        Rank rank = lotto.getRank(winnerLotto, bonusLottoNumber);
+        int matchCount = lotto.getMatchCount(winningLotto);
 
         // then
-        assertThat(rank.getPrizeMoney()).isEqualTo(expectedPrizeMoney);
+        assertThat(matchCount).isEqualTo(expectedCount);
+    }
+
+    @DisplayName("보너스 번호가 포함되면 true 반환한다")
+    @ParameterizedTest
+    @CsvSource(value = {"6,true", "7,false"})
+    void match_bonus(int number, boolean expected) {
+        // given
+        Lotto lotto = Lotto.from(new TestLottoNumberGenerator());
+        LottoNumber bonusNumber = LottoNumber.from(number);
+
+        // when
+        boolean matchBonus = lotto.matchBonus(bonusNumber);
+
+        // then
+        assertThat(matchBonus).isEqualTo(expected);
     }
 }

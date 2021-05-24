@@ -45,24 +45,14 @@ public class Lotto {
         }
     }
 
-    public Rank getRank(final Lotto winnerLotto, final LottoNumber bonusNumber) {
-        return Rank.valueOf(getMatchCount(winnerLotto), matchBonus(bonusNumber));
-    }
-
-    private int getMatchCount(final Lotto winnerLotto) {
-        return (int) winnerLotto.getLotto().stream()
+    public int getMatchCount(final Lotto winningLotto) {
+        return (int) winningLotto.getLotto().stream()
                 .filter(lottoNumber -> this.lotto.contains(lottoNumber))
                 .count();
     }
 
-    private boolean matchBonus(final LottoNumber bonusNumber) {
+    public boolean matchBonus(final LottoNumber bonusNumber) {
         return lotto.contains(bonusNumber);
-    }
-
-    public void validateBonusNumber(final LottoNumber bonusNumber) {
-        if (lotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스번호는 당첨번호와 중복될 수 없습니다.");
-        }
     }
 
     public Set<LottoNumber> getLotto() {

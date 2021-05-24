@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
+import lotto.domain.WinningLotto;
 import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
 import lotto.view.InputView;
@@ -23,11 +24,11 @@ public class LottoController {
         lottoGame.buyLotto(numberGenerator);
         ResultView.printPurchaseCountAndLottoes(lottoGame);
 
-        Lotto winnerLotto = Lotto.from(InputView.inputWinnerLottoNumbers());
+        Lotto enteredWinningLotto = Lotto.from(InputView.inputWinningLottoNumbers());
         LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
-        winnerLotto.validateBonusNumber(bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(enteredWinningLotto, bonusNumber);
 
-        lottoStatistics.init(lottoGame, winnerLotto, bonusNumber);
+        lottoStatistics.init(lottoGame, winningLotto);
         ResultView.printStatistics(lottoStatistics);
     }
 }
