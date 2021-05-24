@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,35 +15,60 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    @DisplayName("로또티켓들과 당첨번호를 정확히 비교하는지 테스트")
-    @Test
-    void check_result_count_updated() {
+    private List<LottoTicket> tickets;
+    private WinningNumbers winningNumbers;
+
+    @BeforeEach
+    void setUp() {
         //Given
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                                                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoTicket> tickets = new ArrayList<>();
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        tickets = new ArrayList<>();
         tickets.add(new LottoTicket(numbers));
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18});
+        winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18});
+    }
 
+
+    @DisplayName("보너스볼 없는 경우, 3등에 해당")
+    @Test
+    void check_result_count_updated() {
         //When
+        LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
+
+        //Then
+        assertThat(lottoResult.getResultCount(Rank.THIRD)).isEqualTo(1);
+    }
+
+    @DisplayName("보너스볼 있는 경우, 2등에 해당")
+    @Test
+    void check_result_count_updated_with_bonus() {
+        //When
+        winningNumbers.addBonusNumber(6);
         LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
 
         //Then
         assertThat(lottoResult.getResultCount(Rank.SECOND)).isEqualTo(1);
     }
 
-    @DisplayName("구매금액에 따라 수익률이 계산되는지 확인")
+    @DisplayName("구매금액에 따라 수익률이 계산되는지 확인 : 보너스볼 없는 경우")
     @ParameterizedTest(name = "{displayName} ==> input : {0} / result : {1}")
-    @CsvSource({"1000,1500.00","5000,300.00","1500000,1.00"})
+    @CsvSource({"1000,1500.00", "5000,300.00", "1500000,1.00"})
     void check_profit_ratio(int purchaseAmount, float profitRatio) {
-        //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(new LottoTicket(numbers));
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18});
-
         //When
+        LottoResult lottoResult = new LottoResult(purchaseAmount, winningNumbers, tickets);
+
+        //Then
+        assertThat(lottoResult.calculateProfitRatio()).isEqualTo(profitRatio);
+
+    }
+
+
+    @DisplayName("구매금액에 따라 수익률이 계산되는지 확인 : 보너스볼 있는 경우")
+    @ParameterizedTest(name = "{displayName} ==> input : {0} / result : {1}")
+    @CsvSource({"1000,30000.00", "5000,6000.00", "1500000,20.00"})
+    void check_profit_ratio_with_bonus(int purchaseAmount, float profitRatio) {
+        //When
+        winningNumbers.addBonusNumber(6);
         LottoResult lottoResult = new LottoResult(purchaseAmount, winningNumbers, tickets);
 
         //Then
