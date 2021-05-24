@@ -41,4 +41,8 @@ public class LottoNumber {
     public int ascendingSort(LottoNumber comparisonObject) {
         return this.lottoNumber - comparisonObject.lottoNumber;
     }
+
+    public boolean isMatchBall(LottoTicket lottoTicket) {
+        return lottoTicket.contains(this);
+    }
 }
