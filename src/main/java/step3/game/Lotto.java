@@ -95,11 +95,14 @@ public class Lotto {
 
     private LottoNumbers getVictoryNumbers() {
         String[] numbers = inputView.getVictoryNumbers();
+        Integer bonusNumber = inputView.getBonusNumber();
         validationVictoryInput(numbers);
+
         return new LottoNumbers(
             Arrays.stream(numbers)
                 .map(number -> StringUtils.parseInt(number.trim()))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()),
+            bonusNumber);
     }
 
     private void validationVictoryInput(String[] numbers) {
