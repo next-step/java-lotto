@@ -3,11 +3,9 @@ package calculator;
 public class StringAddCalculator {
 
 	private Input input;
-	private Numbers numbers;
 
 	public StringAddCalculator(String userInput) {
 		this.input = new Input(userInput);
-		this.numbers = new Numbers();
 	}
 
 	public int splitAndSum() {
@@ -16,10 +14,7 @@ public class StringAddCalculator {
 		}
 
 		String[] tokens = new Tokenizer(input).split();
-
-		for(String token : tokens) {
-			numbers.add(new Number(token));
-		}
+		Numbers numbers = new Numbers(tokens);
 		return numbers.sum();
 	}
 }
