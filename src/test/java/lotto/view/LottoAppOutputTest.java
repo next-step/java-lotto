@@ -65,9 +65,10 @@ public class LottoAppOutputTest {
 	}
 
 	@Test
-	@DisplayName("당첨 통계는 등수 별 일치하는 로또 번호 개수, 당첨 금액, 당첨 개수를 출력한다.")
+	@DisplayName("당첨 통계는 등수 별 일치하는 로또 번호 개수, 당첨 금액, 보너스볼 일치 여부 (2등만), 당첨 개수를 출력한다.")
 	public void printLottoResultTest() {
 		LottoResultDto lottoResultDto = new LottoResultDto(Arrays.asList(
+			new LottoRankResultDto(LottoRank.FIFTH, 1),
 			new LottoRankResultDto(LottoRank.FOURTH, 1),
 			new LottoRankResultDto(LottoRank.THIRD, 0),
 			new LottoRankResultDto(LottoRank.SECOND, 1),
@@ -78,8 +79,9 @@ public class LottoAppOutputTest {
 
 		assertThat(outputStream.toString()).contains(
 			"3개 일치 (5000원)- 1개\n"
-			+ "4개 일치 (50000원)- 0개\n"
-			+ "5개 일치 (1500000원)- 1개\n"
+			+ "4개 일치 (50000원)- 1개\n"
+			+ "5개 일치 (1500000원)- 0개\n"
+			+ "5개 일치, 보너스 볼 일치 (30000000원)- 1개\n"
 			+ "6개 일치 (2000000000원)- 0개\n");
 	}
 
@@ -95,5 +97,13 @@ public class LottoAppOutputTest {
 		lottoAppOutput.printLottoEarningsRate(lottoEarningRateDto);
 
 		assertThat(outputStream.toString()).contains(expectedMessage);
+	}
+
+	@Test
+	@DisplayName("보너스볼을 입력 받을때 '보너스 볼을 입력해 주세요.' 라고 출력해야 한다.")
+	public void inputBonusNumberInputViewTest() {
+		lottoAppOutput.printBonusNumberInputView();
+
+		assertThat(outputStream.toString()).contains("보너스 볼을 입력해 주세요.");
 	}
 }

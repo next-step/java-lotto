@@ -51,7 +51,7 @@ public class LottoNumbersTest {
 	public void matchTest(String inputWinningNumbers, int expectedMatchCount) {
 		LottoNumbers winningNumbers = new LottoNumbers(splitAndMapToInt(inputWinningNumbers));
 
-		int matchCount = lottoNumbers.match(winningNumbers);
+		int matchCount = lottoNumbers.countOfMatch(winningNumbers);
 
 		assertThat(matchCount).isEqualTo(expectedMatchCount);
 	}

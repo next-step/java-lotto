@@ -21,7 +21,7 @@ public class LottoResultDto {
 	}
 
 	public static LottoResultDto toDto(LottoResult lottoResult, Rate earningRate) {
-		List<LottoRank> lottoRanksToRender = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+		List<LottoRank> lottoRanksToRender = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
 		List<LottoRankResultDto> lottoRankResultDtos = lottoRanksToRender.stream()
 			.map(lottoRank -> new LottoRankResultDto(lottoRank, lottoResult.count(lottoRank)))
 			.collect(Collectors.toList());

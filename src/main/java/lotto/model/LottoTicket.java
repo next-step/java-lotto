@@ -18,11 +18,10 @@ public class LottoTicket {
 			.collect(Collectors.toList());
 	}
 
-	public LottoResult match(LottoNumbers winningNumbers) {
+	public LottoResult match(WinningNumbers winningNumbers) {
 		LottoResult lottoResult = new LottoResult();
 		for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-			int matchCount = lottoNumbers.match(winningNumbers);
-			LottoRank lottoRank = LottoRank.of(matchCount);
+			LottoRank lottoRank = lottoNumbers.match(winningNumbers);
 			lottoResult.increaseCountOfRank(lottoRank);
 		}
 		return lottoResult;

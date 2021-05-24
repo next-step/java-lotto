@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-class LottoNumber {
+public class LottoNumber {
 	static final int MIN_NUMBER = 1;
 	static final int MAX_NUMBER = 45;
 
@@ -34,7 +34,7 @@ class LottoNumber {
 		return number;
 	}
 
-	static LottoNumber of(int number) {
+	public static LottoNumber of(int number) {
 		LottoNumber lottoNumber = numbersCache.get(number);
 		return Optional.ofNullable(lottoNumber)
 			.orElseThrow(() -> new IllegalArgumentException(EXCEPTION_MESSAGE_OF_RANGE_VALIDATION));

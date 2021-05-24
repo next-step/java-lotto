@@ -2,11 +2,13 @@ package lotto.controller;
 
 import static lotto.model.LottoNumbersGenerator.*;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
 import lotto.model.Rate;
+import lotto.model.WinningNumbers;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
 import lotto.view.dro.LottoResultDto;
@@ -23,13 +25,13 @@ public class LottoApp {
 	public void run() {
 		Money money = inputMoney();
 		LottoTicket lottoTicket = inputLottoTicket(money.countOfLottoNumbers());
-		LottoNumbers winningNumbers = inputWinningNumbers();
+		WinningNumbers winningNumbers = inputWinningNumbers();
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
 	private Money inputMoney() {
 		lottoAppOutput.printMoneyInputView();
-		return lottoAppInput.inputMoney();
+		return Money.ofWons(lottoAppInput.inputNumber());
 	}
 
 	private LottoTicket inputLottoTicket(int lottoNumbersCount) {
@@ -39,9 +41,18 @@ public class LottoApp {
 		return lottoTicket;
 	}
 
-	private LottoNumbers inputWinningNumbers() {
+	private WinningNumbers inputWinningNumbers() {
+		return WinningNumbers.of(inputLottoNumbers(), inputBonusNumber());
+	}
+
+	private LottoNumbers inputLottoNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
-		return new LottoNumbers(lottoAppInput.inputWinningNumbers());
+		return new LottoNumbers(lottoAppInput.inputNumbers());
+	}
+
+	private LottoNumber inputBonusNumber() {
+		lottoAppOutput.printBonusNumberInputView();
+		return LottoNumber.of(lottoAppInput.inputNumber());
 	}
 
 	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {
