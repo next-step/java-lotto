@@ -45,6 +45,9 @@ public class TotalLottoTest {
         victoryNumber = LottoNumbers.of("7, 10, 11, 12, 13, 14");
         assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
             .isEqualTo("0.35");
+        victoryNumber = LottoNumbers.of("1, 2, 3, 7, 8, 9", "10");
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("145003.92");
     }
 
     @Test
