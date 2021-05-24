@@ -1,9 +1,7 @@
 package controller;
 
-import domain.LottoMachine;
-import domain.LottoResult;
-import domain.LottoTickets;
-import domain.WinningNumber;
+import domain.*;
+import view.InputView;
 
 public class LottoGame {
     public LottoTickets generateLottoTickets(int price, LottoMachine lottoMachine) {
@@ -11,10 +9,14 @@ public class LottoGame {
     }
 
     public WinningNumber generateWinningNumber(String inputNumber, LottoMachine lottoMachine) {
-        return lottoMachine.winningNumber(inputNumber);
+        return InputView.winningNumber(inputNumber);
     }
 
-    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber) {
-        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber);
+    public LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
+        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
+    }
+
+    public LottoNumber generateBonusBall(int inputNumber, LottoMachine lottoMachine, WinningNumber winningNumber) {
+        return lottoMachine.bonusBall(inputNumber, winningNumber);
     }
 }
