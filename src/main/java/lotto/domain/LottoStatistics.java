@@ -9,6 +9,8 @@ import static java.util.stream.Collectors.summingInt;
 
 public class LottoStatistics {
 
+    private static final int ADD_COUNT = 1;
+
     private final WinningCountMap winningCountMap;
 
     public LottoStatistics(List<WinningType> winningTypes) {
@@ -16,7 +18,7 @@ public class LottoStatistics {
         Map<WinningType, Integer> map =
             winningTypes.stream()
                         .filter(WinningType::isWinningLotto)
-                        .collect(groupingBy(Function.identity(), summingInt(type -> 1)));
+                        .collect(groupingBy(Function.identity(), summingInt(type -> ADD_COUNT)));
 
         this.winningCountMap = new WinningCountMap(map);
     }
