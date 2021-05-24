@@ -1,17 +1,16 @@
 package study.step2.domain;
 
-import static study.step2.utils.MessageUtil.LOTTO_NUMBER_DUPLICATED;
-import static study.step2.utils.MessageUtil.VALIDATOR_NUMBER_MESSAGE;
+import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCEPTION;
 import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-  private Set<LottoNumber> lottoNumbers = new HashSet<>();
+  private Set<LottoNumber> lottoNumbers;
 
   public Lotto() {
   }
@@ -21,25 +20,21 @@ public class Lotto {
   }
 
   public Lotto(String inputText) {
-    Arrays.stream(inputText.split(", "))
-        .forEach(inputNumber -> lottoNumbers.add(LottoMachine.getLottoNumberMap().get(Integer.parseInt(inputNumber))));
+    lottoNumbers = Arrays.stream(inputText.split(","))
+        .map(String::trim)
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toSet());
+
+    checkDuplication();
   }
 
   public Set<LottoNumber> getLottoNumbers() {
     return lottoNumbers;
   }
 
-  public void validatorPositiveNumbers() {
-    boolean result = lottoNumbers.stream().anyMatch(number -> number.getLottoNumber() < 0);
-
-    if (result) {
-      throw new IllegalArgumentException(VALIDATOR_NUMBER_MESSAGE);
-    }
-  }
-
-  public void checkDuplication() {
+  private void checkDuplication() {
     if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBER) {
-      throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED);
+      throw LOTTO_NUMBER_DUPLICATED_EXCEPTION;
     }
   }
 
@@ -51,11 +46,6 @@ public class Lotto {
 
   public boolean isMatchBonus(LottoNumber bonusNumber) {
     return lottoNumbers.contains(bonusNumber);
-  }
-
-  public void bonusValidation(LottoNumber bonusNumber) {
-    if (lottoNumbers.contains(bonusNumber))
-      throw new IllegalArgumentException("보너스 번호는 지난 담청 번호 6개와 같을 수 없습니다.");
   }
 
   @Override

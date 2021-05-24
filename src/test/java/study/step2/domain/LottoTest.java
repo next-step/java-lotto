@@ -1,11 +1,10 @@
-package study.step2;
+package study.step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.domain.Lotto;
-import study.step2.domain.LottoNumber;
 
 public class LottoTest {
 
@@ -95,6 +94,32 @@ public class LottoTest {
 
     // then
     assertThat(isMatchBonus).isFalse();
+  }
+
+  @DisplayName("LottoNumber Set 생성 테스트")
+  @Test
+  void createLottoNumberSet() {
+    // given
+    Set<LottoNumber> lottoNumbers = LottoFactory.pick();
+
+    // when
+    int lottoNumbersSize = lottoNumbers.size();
+
+    // then
+    assertThat(lottoNumbersSize).isEqualTo(6);
+  }
+
+  @DisplayName("LottoNumber Set 생성 숫자가 0 보다 작은지 테스트")
+  @Test
+  void lottoNumberSetRangeTest() {
+    // given
+    Set<LottoNumber> lottoNumbers = LottoFactory.pick();
+
+    // when
+    boolean isInvalidRange = lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.getLottoNumber() < 0);
+
+    // then
+    assertThat(isInvalidRange).isFalse();
   }
 
 }

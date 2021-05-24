@@ -2,6 +2,8 @@ package study.step2.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -15,13 +17,26 @@ public class Lottos {
     return lottos;
   }
 
-  public LottoResult match(Lotto winningLotto, LottoNumber bonusNumber) {
+  public LottoResult match(WinningLotto winningLotto) {
     LottoResult lottoResult = new LottoResult();
 
-    lottos.stream().map(lotto -> Rank.find(lotto.matchCount(winningLotto.getLottoNumbers()), lotto.isMatchBonus(bonusNumber)))
+    lottos.stream().map(lotto -> Rank.find(lotto.matchCount(winningLotto.getLottoNumbers()), lotto.isMatchBonus(winningLotto.getBonusNumber())))
         .forEach(lottoResult::add);
 
     return lottoResult;
+  }
+
+  public void addManualLottos(ManualLottos manualLottos) {
+    lottos.addAll(manualLottos.getLottos());
+  }
+
+  public static Lottos makeLottos(int lottoCount) {
+    List<Lotto> lottoList = IntStream.range(0, lottoCount)
+        .mapToObj(i -> LottoFactory.pick())
+        .map(Lotto::new)
+        .collect(Collectors.toList());
+
+    return new Lottos(lottoList);
   }
 
   @Override

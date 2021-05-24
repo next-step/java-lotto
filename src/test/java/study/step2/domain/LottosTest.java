@@ -1,4 +1,4 @@
-package study.step2;
+package study.step2.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,13 +8,34 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.domain.Lotto;
-import study.step2.domain.LottoNumber;
-import study.step2.domain.LottoResult;
-import study.step2.domain.Lottos;
-import study.step2.domain.Rank;
 
 public class LottosTest {
+
+  @DisplayName("구매 금액을 입력 후 복권의 수 만큼  lottos 객체를 셍성하는지 테스트")
+  @Test
+  void makeLottosWithLottoCount() {
+    // given
+    int lottoCount = 3;
+
+    // when
+    Lottos lottos = Lottos.makeLottos(lottoCount);
+
+    // then
+    assertThat(lottos).isEqualTo(new Lottos(lottos.getLottos()));
+  }
+
+  @DisplayName("구매 금액을 0으로 입력했을 때, lotto 객체 크기가 0인지 테스트")
+  @Test
+  void makeLottosFail() {
+    // given
+    int lottoCount = 0;
+
+    // when
+    Lottos lottos = Lottos.makeLottos(lottoCount);
+
+    // then
+    assertThat(lottos).isEqualTo(new Lottos(new ArrayList<>()));
+  }
 
   @DisplayName("lottos 객체 생성 테스트")
   @Test
@@ -46,12 +67,13 @@ public class LottosTest {
   @Test
   void winingMatchTest() {
     //given
+    int bonusNumber = 19;
+
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    Lotto winingLotto = new Lotto("1, 2, 3, 12, 15, 16");
-    LottoNumber bonusNumber = new LottoNumber(16);
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 16", bonusNumber);
 
     // when
-    LottoResult LottoResult = lottos.match(winingLotto, bonusNumber);
+    LottoResult LottoResult = lottos.match(winingLotto);
     Map<Rank, Integer> rankMap = LottoResult.getRankMap();
 
     // then
@@ -62,12 +84,13 @@ public class LottosTest {
   @Test
   void winingMatchTestWithBonusNumber() {
     //given
+    int bonusNumber = 16;
+
     Lottos lottos = new Lottos(Arrays.asList(new Lotto("1, 2, 3, 12, 15, 16"), new Lotto("13, 17, 21, 28, 33, 44")));
-    Lotto winingLotto = new Lotto("1, 2, 3, 12, 15, 44");
-    LottoNumber bonusNumber = new LottoNumber(16);
+    WinningLotto winingLotto = new WinningLotto("1, 2, 3, 12, 15, 44", bonusNumber);
 
     // when
-    LottoResult LottoResult = lottos.match(winingLotto, bonusNumber);
+    LottoResult LottoResult = lottos.match(winingLotto);
     Map<Rank, Integer> rankMap = LottoResult.getRankMap();
 
     // then

@@ -1,6 +1,5 @@
 package study.step2.view;
 
-import static study.step2.utils.MessageUtil.LOTTO_COUNT_MESSAGE;
 import static study.step2.utils.MessageUtil.LOTTO_RESULT_MESSAGE;
 
 import java.util.Comparator;
@@ -14,13 +13,14 @@ import study.step2.domain.Rank;
 public class ResultView {
 
   private static final String lottoResultString = "%d개 일치 (%d원)- %d개";
+  private static final String lottoCountResultString = "수동으로 %d장, 자동으로 %d장 구매했습니다.";
   private static final String yieldString = "총 수익률은 %.2f 입니다.";
 
   private ResultView() {
   }
 
-  public static void printLottoCount(int lottoCount) {
-    System.out.println(lottoCount + LOTTO_COUNT_MESSAGE);
+  public static void printLottoCount(int manualLottosSize, int lottoCount) {
+    System.out.println(String.format(lottoCountResultString, manualLottosSize, lottoCount));
   }
 
   public static void printLottos(Lottos lottos) {

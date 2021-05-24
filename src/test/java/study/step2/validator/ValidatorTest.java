@@ -1,11 +1,10 @@
-package study.step2;
+package study.step2.validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step2.validator.Validator;
 
 public class ValidatorTest {
 
