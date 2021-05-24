@@ -29,4 +29,11 @@ public class LottoStatistics {
                 .mapToInt(LottoStatistic::payout)
                 .sum();
     }
+
+    public double rateOfReturn(int amount) {
+        return (double) statisticsMap.values()
+                .stream()
+                .mapToInt(LottoStatistic::payout)
+                .sum() / amount;
+    }
 }

@@ -19,4 +19,12 @@ public class LottoStatisticsTest {
         assertThat(lottoStatistics.count(3)).isEqualTo(2);
         assertThat(lottoStatistics.totalPayout()).isEqualTo(10000);
     }
+
+    @Test
+    void 수익률_테스트() {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        lottoStatistics.add(3);
+        lottoStatistics.add(3);
+        assertThat(lottoStatistics.rateOfReturn(100000)).isEqualTo(0.10);
+    }
 }
