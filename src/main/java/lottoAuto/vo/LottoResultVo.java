@@ -1,6 +1,6 @@
 package lottoAuto.vo;
 
-import lottoAuto.service.Rank;
+import lottoAuto.model.Rank;
 
 public class LottoResultVo {
     private Rank rank;
