@@ -51,8 +51,8 @@ public class PrintView {
         System.out.println();
         System.out.print(SHOW_LOTTO_REPORT);
         System.out.print(formatLottoReport(lottoReport));
-        System.out.printf(SHOW_TOTAL_YIELD, lottoReport.yield());
-        if (isYieldTipVisible(lottoReport.yield())) {
+        System.out.printf(SHOW_TOTAL_YIELD, lottoReport.profitRate());
+        if (isYieldTipVisible(lottoReport.profitRate())) {
             System.out.print(SHOW_TOTAL_YIELD_TIP);
         }
     }

@@ -46,7 +46,7 @@ public class LottoReportTest {
     @MethodSource("provider_당첨통계는_수익률을_알려준다")
     void 당첨통계는_수익률을_알려준다(List<Lotto> lottos, double 수익률) {
         LottoReport report = new LottoReport(우승번호, lottos);
-        assertThat(report.yield()).isEqualTo(수익률);
+        assertThat(report.profitRate()).isEqualTo(수익률);
     }
 
     static Stream<Arguments> provider_당첨통계는_수익률을_알려준다() {
