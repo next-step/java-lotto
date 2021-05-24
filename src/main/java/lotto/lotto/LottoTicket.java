@@ -23,7 +23,7 @@ public class LottoTicket {
         return lottoResult;
     }
 
-    public int count() {
+    public int matchingCount() {
         return lottoTickets.size();
     }
 }

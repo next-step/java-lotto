@@ -20,7 +20,7 @@ public class OutputView {
         println(MessageEnum.LOTTO_PURCHASE.message(), amount);
     }
 
-    public static void printLottoBundle(LottoTicket lottoTicket) {
+    public static void printLottoTicket(LottoTicket lottoTicket) {
         for(Lotto lotto : lottoTicket.tickets()) {
             printLotto(lotto);
         }
