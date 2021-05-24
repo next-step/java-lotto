@@ -13,6 +13,10 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
+    public Lotto(Lotto lotto) {
+        this(lotto.numbers());
+    }
+
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;

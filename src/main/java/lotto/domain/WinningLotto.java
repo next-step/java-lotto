@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import java.util.List;
 
 public class WinningLotto extends Lotto {
     public final int bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        super(numbers);
+    public WinningLotto(Lotto lotto, int bonusNumber) {
+        super(lotto);
         this.bonusNumber = bonusNumber;
     }
 }
