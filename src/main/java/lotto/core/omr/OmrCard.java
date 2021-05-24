@@ -36,6 +36,6 @@ public class OmrCard {
 
     @Override
     public String toString() {
-        return String.format("구입 갯수 : %d\n조회 : %s", size(), omrList.toString());
+        return omrList.toString();
     }
 }
