@@ -6,7 +6,10 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private Integer number;
+    public static final Integer BEG_LOTTO_NUM = 1;
+    public static final Integer END_LOTTO_NUM = 45;
+
+    private final int number;
 
     public LottoNumber(int number) {
         checkIfValidLotto(number);
@@ -15,7 +18,7 @@ public class LottoNumber {
     }
 
     private void checkIfValidLotto(int number) {
-        if (number < LottoConstants.BEG_LOTTO_NUM || number > LottoConstants.END_LOTTO_NUM) {
+        if (number < BEG_LOTTO_NUM || number > END_LOTTO_NUM) {
             throw new inValidLottoNumberException();
         }
     }
@@ -26,20 +29,18 @@ public class LottoNumber {
         return String.valueOf(number);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return Objects.equals(number, that.number);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        LottoNumber that = (LottoNumber) o;
+//        return Objects.equals(number, that.number);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(number);
+//    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
-    }
-
-    public Integer getNumber() {
-        return this.number;
-    }
+    public Integer valueOf() { return this.number; }
 }

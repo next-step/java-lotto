@@ -12,7 +12,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber1 = new LottoNumber(43);
         LottoNumber lottoNumber2 = new LottoNumber(43);
 
-        assertThat(lottoNumber1).isEqualTo(lottoNumber2);
+        assertThat(lottoNumber1.valueOf()).isEqualTo(lottoNumber2.valueOf());
     }
 
 
