@@ -15,13 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class SeparatorTest {
-	private List<String> NUMBERS_FIXTURE;
-
-
-	@BeforeEach
-	public void 인풋값_픽스처(){
-		NUMBERS_FIXTURE = Arrays.asList("1", "2", "3");
-	}
+	private final List<String> numberList = Arrays.asList("1", "2", "3");
 
 	@Test
 	@DisplayName (",와 :구분자로 문자열을 전달하는 경우 구분자를 기준으로 분리한 숫자의 합을 반환")
@@ -29,19 +23,19 @@ class SeparatorTest {
 
 		List<String> splitComma = Separator.split("1,2,3");
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(splitComma);
+		assertThat(numberList).isEqualTo(splitComma);
 
 		List<String> splitColon = Separator.split("1:2:3");
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(splitColon);
+		assertThat(numberList).isEqualTo(splitColon);
 
 		List<String> splitCommaAndColon = Separator.split("1:2,3");
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(splitCommaAndColon);
+		assertThat(numberList).isEqualTo(splitCommaAndColon);
 
 		List<String> splitCommaAndColon2 = Separator.split("1,2:3");
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(splitCommaAndColon2);
+		assertThat(numberList).isEqualTo(splitCommaAndColon2);
 	}
 
 	@Test
@@ -59,14 +53,14 @@ class SeparatorTest {
 
 	@Test
 	public void 문자사이에_커스텀구분자를_지정할_수_있다(){
-		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//;\n1;2;3"));
+		assertThat(numberList).isEqualTo(Separator.split("//;\n1;2;3"));
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("// \n1 2 3"));
+		assertThat(numberList).isEqualTo(Separator.split("// \n1 2 3"));
 
-//		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//.\n1.2.3")); ???
+//		assertThat(numberList).isEqualTo(Separator.split("//.\n1.2.3")); ???
 
-//		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//*\n1*2*3")); ??? 머선 129
+//		assertThat(numberList).isEqualTo(Separator.split("//*\n1*2*3")); ??? 머선 129
 
-		assertThat(NUMBERS_FIXTURE).isEqualTo(Separator.split("//'\n1'2'3"));
+		assertThat(numberList).isEqualTo(Separator.split("//'\n1'2'3"));
 	}
 }
