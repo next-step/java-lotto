@@ -8,19 +8,19 @@ import java.util.stream.Collectors;
 
 public class LottoResults {
 
-	private final List<LottoResult> lottoResults;
+	private final List<Rank> resultRanks;
 	private final List<Rank> renderRanks;
 
 	public LottoResults() {
-		this.lottoResults = new ArrayList<>();
+		this.resultRanks = new ArrayList<>();
 		this.renderRanks = Arrays.stream(Rank.values())
 				.filter(rank -> rank.isGreaterThan(Rank.NONE))
 				.sorted(Comparator.comparingInt(Rank::getMatchCount))
 				.collect(Collectors.toList());
 	}
 
-	public void add(LottoResult lottoResult) {
-		this.lottoResults.add(lottoResult);
+	public void add(Rank rank) {
+		this.resultRanks.add(rank);
 	}
 
 	public List<Rank> getRenderRanks() {
@@ -40,12 +40,12 @@ public class LottoResults {
 	}
 
 	private double totalPurchaseAmount() {
-		return lottoResults.size() * PurchaseAmount.MINIMUM;
+		return this.resultRanks.size() * PurchaseAmount.MINIMUM;
 	}
 
 	public int findRankCount(Rank rank) {
-		int rankCount = this.lottoResults.stream()
-				.filter(lottoResult -> lottoResult.getRank().equals(rank))
+		int rankCount = this.resultRanks.stream()
+				.filter(r -> r.equals(rank))
 				.mapToInt(m -> 1)
 				.sum();
 		return rankCount;

@@ -19,7 +19,7 @@ public class Lottos {
 		LottoResults lottoResults = new LottoResults();
 		for (Lotto lotto : this.lottos) {
 			Rank rank = lotto.findRank(winningLotto);
-			lottoResults.add(new LottoResult(rank));
+			lottoResults.add(rank);
 		}
 		return lottoResults;
 	}
