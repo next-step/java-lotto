@@ -24,7 +24,7 @@ public class OmrCardInputData implements InputData<OmrCard> {
 
             return omrCard;
         } catch (Exception e) {
-            input.redirectResponse(e.getMessage());
+            input.alertWarn(e.getMessage());
             return request();
         }
     }

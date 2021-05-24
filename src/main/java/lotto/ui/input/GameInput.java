@@ -25,7 +25,7 @@ public class GameInput implements Input {
         output.println(message);
     }
 
-    public void redirectResponse(String message) {
+    public void alertWarn(String message) {
         output.error(message);
         output.println("다시 입력해 주시기 바랍니다.\n");
     }

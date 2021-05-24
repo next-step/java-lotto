@@ -22,7 +22,7 @@ public class RoundInputData implements InputData<Round> {
 
             return new Round(SixBall.valueOf(fixedBalls), bonus);
         } catch (Exception e) {
-            input.redirectResponse(e.getMessage());
+            input.alertWarn(e.getMessage());
             return request();
         }
     }
