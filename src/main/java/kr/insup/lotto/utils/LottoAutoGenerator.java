@@ -9,10 +9,8 @@ public class LottoAutoGenerator implements NumberGenerator {
     private List<Integer> lottoAutoNumbers() {
         List<Integer> allNumbers = NumberGenerator.allNumbers();
         Collections.shuffle(allNumbers);
-        List<Integer> lottoAutoNumbers = allNumbers.subList(0, LottoConfig.LOTTO_COUNT);
-        Collections.sort(lottoAutoNumbers, Comparator.naturalOrder());
 
-        return lottoAutoNumbers;
+        return allNumbers.subList(0, LottoConfig.LOTTO_COUNT);
     }
 
     @Override
