@@ -1,25 +1,17 @@
 package generate;
 
 import domain.Number;
+import util.ExceptionMessage;
 import util.InputValidation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlusCalculate {
-	public Integer excute (String input) {
-		if (InputValidation.checkNullAndEmpty(input)) {
-			return 0;
-		}
-
-		if (InputValidation.checkSingle(input)) {
-			return Integer.parseInt(input);
-		}
-
+	public Integer excute (List<Integer> numbers) {
 		List<Number> numberList = new ArrayList<>();
 
-
-		for (String number : Separator.split(input)) {
+		for (Integer number : numbers) {
 			numberList.add(new Number(number));
 		}
 
@@ -33,6 +25,4 @@ public class PlusCalculate {
 		}
 		return result;
 	}
-
-
 }

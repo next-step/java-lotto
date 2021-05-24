@@ -3,20 +3,10 @@ package domain;
 import util.ExceptionMessage;
 
 public class Number {
-	private Long number;
+	private Integer number;
 
-	public Number () {
-		this("");
-	}
-
-	public Number (String number) {
-		try {
-			checkMinus(number);
-			this.number = Long.valueOf(number);
-
-		} catch (NumberFormatException e) {
-			throw new NumberFormatException(ExceptionMessage.NUMBER_FORMAT_EXCEPTION);
-		}
+	public Number (Integer number) {
+		this.number = number;
 	}
 
 	@Override
@@ -35,13 +25,6 @@ public class Number {
 	}
 
 	public Integer number () {
-		return number.intValue();
-	}
-
-	private boolean checkMinus(String number){
-		if (Integer.parseInt(number) < 0) {
-			throw new NumberFormatException();
-		}
-		return true;
+		return number;
 	}
 }
