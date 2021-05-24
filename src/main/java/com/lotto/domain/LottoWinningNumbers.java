@@ -6,6 +6,8 @@ import com.lotto.exception.IllegalLottoCountException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.lotto.domain.LottoReward.*;
+
 public class LottoWinningNumbers {
     private Set<LottoNumber> winningNumbers;
 
@@ -26,6 +28,21 @@ public class LottoWinningNumbers {
         }
 
         return new LottoWinningNumbers(set);
+    }
+
+    public LottoReward reward(Lotto lotto) {
+        int sameCount = 0;
+        for(LottoNumber lottoNumber : lotto.numbers()) {
+            sameCount += addOneIfContainInWinningNumbers(lottoNumber);
+        }
+        return generateReward(sameCount);
+    }
+
+    private int addOneIfContainInWinningNumbers(LottoNumber lottoNumber) {
+        if(winningNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     private static boolean isLottoCount(Set<LottoNumber> set) {

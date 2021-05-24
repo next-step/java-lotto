@@ -56,7 +56,7 @@ public class LottoGroup {
         List<LottoReward> lottoRewards = new ArrayList<>();
 
         for (Lotto lotto : lottoList) {
-            lottoRewards.add(lotto.reward(winningNumbers));
+            lottoRewards.add(winningNumbers.reward(lotto));
         }
 
         return LottoStatistics.createLottoStatistics(lottoRewards);
