@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.common.WinningType;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameView {
     InputView inputView = new InputView();
@@ -15,7 +15,7 @@ public class GameView {
         int lottoTicketCount = money.countLottoTicket();
         resultView.printLottoTicketCount(money.countLottoTicket());
 
-        LottoTicket[] lottoTickets = generateLottoTickets(lottoTicketCount);
+        List<LottoTicket> lottoTickets = generateLottoTickets(lottoTicketCount);
         resultView.printLottoTickets(lottoTickets);
 
         WinningType[] winningTypes = generateWinningTypes(lottoTickets);
@@ -25,22 +25,20 @@ public class GameView {
         inputView.close();
     }
 
-    private LottoTicket[] generateLottoTickets(int lottoTicketCount) {
-        LottoTicket[] lottoTickets = new LottoTicket[lottoTicketCount];
-        LottoTicketGenerator generator = new LottoTicketGenerator();
+    private List<LottoTicket> generateLottoTickets(int lottoTicketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            LottoTicket lottoTicket = generator.generate();
-            lottoTickets[i] = lottoTicket;
+            lottoTickets.add(new LottoTicketGenerator().generate());
         }
 
         return lottoTickets;
     }
 
-    private WinningType[] generateWinningTypes(LottoTicket[] lottoTickets) {
+    private WinningType[] generateWinningTypes(List<LottoTicket> lottoTickets) {
         WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningNumber());
-        WinningType[] winningTypes = new WinningType[lottoTickets.length];
-        for (int i = 0; i < lottoTickets.length; i++) {
-            winningTypes[i] = winningNumbers.findWinningType(lottoTickets[i]);
+        WinningType[] winningTypes = new WinningType[lottoTickets.size()];
+        for (int i = 0; i < lottoTickets.size(); i++) {
+            winningTypes[i] = winningNumbers.findWinningType(lottoTickets.get(i));
         }
 
         return winningTypes;

@@ -3,14 +3,16 @@ package lotto.view;
 import lotto.common.WinningType;
 import lotto.domain.LottoTicket;
 
+import java.util.List;
+
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
     }
 
-    public void printLottoTickets(LottoTicket[] lottoTickets) {
-        for (int i=0; i<lottoTickets.length; i++) {
-            System.out.println(lottoTickets[i]);
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+        for (int i=0; i<lottoTickets.size(); i++) {
+            System.out.println(lottoTickets.get(i));
         }
     }
 
