@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderGroup {
-	private final Integer numberOfLotto;
 	private final List<Lotto> lottos;
 
 	public OrderGroup (Integer numberOfLotto) {
-		this.numberOfLotto = numberOfLotto;
 		this.lottos = generateLotto(numberOfLotto);
 	}
 
