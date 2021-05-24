@@ -26,7 +26,7 @@ public final class Lotto {
   public Rank getRankBy(WinningNumber winningNumber) {
     return Rank.valueOf(
         getMatchCountFrom(winningNumber),
-        isMatchBonusNumber(winningNumber)
+        winningNumber.isMatchBonusNumberWith(this.numbers)
     );
   }
 
@@ -37,10 +37,6 @@ public final class Lotto {
     }
 
     return count;
-  }
-
-  private boolean isMatchBonusNumber(WinningNumber winningNumber) {
-    return numbers.contains(winningNumber.getBonusNumber());
   }
 
   @Override

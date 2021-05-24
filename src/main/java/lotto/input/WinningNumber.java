@@ -1,5 +1,7 @@
 package lotto.input;
 
+import java.util.List;
+
 public final class WinningNumber {
 
   private final int[] winningNumbers;
@@ -14,7 +16,7 @@ public final class WinningNumber {
     return winningNumbers;
   }
 
-  public int getBonusNumber() {
-    return bonusNumber;
+  public boolean isMatchBonusNumberWith(List<Integer> numbers) {
+    return numbers.contains(this.bonusNumber);
   }
 }
