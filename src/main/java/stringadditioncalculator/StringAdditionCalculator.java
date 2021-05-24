@@ -11,6 +11,10 @@ public class StringAdditionCalculator {
         return scanner.nextLine();
     }
 
+    public void output(int sum) {
+        System.out.println(sum);
+    }
+
     public int one(String text) {
         if (text.matches("\\d+")) {
             int number = Integer.parseInt(text);
@@ -36,7 +40,7 @@ public class StringAdditionCalculator {
             int number = Integer.parseInt(s);
             sum += number;
         }
-        System.out.println(sum);
+        output(sum);
         return sum;
     }
 
@@ -49,7 +53,7 @@ public class StringAdditionCalculator {
             String[] tokens = m.group(2).split(delimiters);
             sum = sum(tokens);
         }
-        System.out.println(sum);
+        output(sum);
         return sum;
     }
 
