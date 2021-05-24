@@ -24,19 +24,19 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5,b/,", "a:c/:", ",:0/:", "-1,10/,", "10,-5/,"}, delimiter = '/')
+    @CsvSource(value = {"5,b", "a:c", ",:0", "-1,10", "10,-5"}, delimiter = '/')
     @DisplayName("구분자를 제외한 값들이 숫자가 아니거나 음수인경우 예외처리한다.")
-    void validateOperands_test(String input, String delimiter) {
+    void validateOperands_test(String input) {
         //when
-        assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input, delimiter));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input));
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5//10|15|//", "0n10|10|n", "0:0|0|:"}, delimiter = '|')
+    @CsvSource(value = {"//;\\n1;2;3|6", "//[\\n10[3[1|14"}, delimiter = '|')
     @DisplayName("앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.")
-    void sumByCustomDelimiter_test(String input, int expectedAnswer, String delimiter) {
+    void sumByCustomDelimiter_test(String input, int expectedAnswer) {
         //given
-        Calculator calculator = new Calculator(input, delimiter);
+        Calculator calculator = new Calculator(input);
 
         //when
         int sum = calculator.sumOperands();
