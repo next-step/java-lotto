@@ -10,7 +10,6 @@ import java.util.Set;
 public class Lotto {
 
     private Set<Integer> numbers;
-    private Integer bonusNumber;
 
     public Lotto(NumberGenerator numberGenerator) {
         this(numberGenerator.generateNumber());
@@ -21,25 +20,14 @@ public class Lotto {
         validateLotto();
     }
 
-    public Lotto(List<Integer> numbers, Integer bonusNumber) {
-        this.numbers = new HashSet<>(numbers);
-        this.bonusNumber = bonusNumber;
-        validateLottoWithBonusNumber();
-    }
-
     public void validateLotto() {
         if (isNumberWrongSize()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호의 개수가 잘못 되었습니다!");
         }
 
         for (Integer number : numbers) {
             validateNumber(number);
         }
-    }
-
-    public void validateLottoWithBonusNumber() {
-        validateLotto();
-        validateNumber(bonusNumber);
     }
 
     private boolean isNumberWrongSize() {
@@ -48,11 +36,11 @@ public class Lotto {
 
     private void validateNumber(Integer number) {
         if (LottoConfig.MIN_NUMBER > number || LottoConfig.MAX_NUMBER < number) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호의 숫자 범위가 잘못 되었습니다!");
         }
     }
 
-    public LottoPrize matchWinningNumber(Lotto winningNumber) {
+    public LottoPrize matchWinningNumber(WinningLotto winningNumber) {
         LottoPrizeSelector lottoPrizeSelector = new LottoPrizeSelector(winningNumber, this);
 
         return lottoPrizeSelector.selectLottoPrize();
@@ -64,9 +52,5 @@ public class Lotto {
 
     public Set<Integer> numbers() {
         return numbers;
-    }
-
-    public Integer bonusNumber() {
-        return bonusNumber;
     }
 }

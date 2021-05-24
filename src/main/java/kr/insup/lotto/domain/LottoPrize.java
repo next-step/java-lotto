@@ -20,27 +20,28 @@ public enum LottoPrize {
     }
 
     public static LottoPrize matchLottoPrize(int match, boolean isBonusBallMatch) {
-        if (match == First.match()) {
-            return First;
+        if(isLottoPrizeMatch(Second, match)) {
+            return secondOrThird(isBonusBallMatch);
         }
 
-        if (match == Second.match() && isBonusBallMatch) {
-            return Second;
-        }
-
-        if (match == Third.match()) {
-            return Third;
-        }
-
-        if (match == Fourth.match()) {
-            return Fourth;
-        }
-
-        if (match == Fifth.match()) {
-            return Fifth;
+        for(LottoPrize lottoPrize : values()){
+            if(isLottoPrizeMatch(lottoPrize, match)){
+                return lottoPrize;
+            }
         }
 
         return None;
+    }
+
+    private static LottoPrize secondOrThird(boolean isBonusBallMatch) {
+        if(isBonusBallMatch){
+            return Second;
+        }
+        return Third;
+    }
+
+    private static boolean isLottoPrizeMatch(LottoPrize lottoPrize, int match) {
+        return lottoPrize.match() == match;
     }
 
     public int winnings() {

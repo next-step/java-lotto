@@ -19,7 +19,7 @@ public class LottoTest {
     void 당첨_번호_1등_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.First);
@@ -30,7 +30,7 @@ public class LottoTest {
     void 당첨_번호_2등_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Second);
@@ -41,7 +41,7 @@ public class LottoTest {
     void 당첨_번호_3등_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Third);
@@ -52,7 +52,7 @@ public class LottoTest {
     void 당첨_번호_4등_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8), 6);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 3, 4, 7, 8), 6);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Fourth);
@@ -63,7 +63,7 @@ public class LottoTest {
     void 당첨_번호_5등_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9), 13);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 3, 7, 8, 9), 13);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.Fifth);
@@ -74,7 +74,7 @@ public class LottoTest {
     void 아무것도_당첨_안됨_테스트() {
         //given
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 7, 8, 9, 10), 3);
+        WinningLotto winningNumbers = new WinningLotto(Arrays.asList(1, 2, 7, 8, 9, 10), 3);
 
         //when, then
         assertThat(lotto.matchWinningNumber(winningNumbers)).isEqualTo(LottoPrize.None);
@@ -91,7 +91,7 @@ public class LottoTest {
         List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
 
         //when, then
-        assertThatThrownBy(() -> new Lotto(winningNumberList)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(winningNumberList, 33)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("보너스 번호 validation test")
@@ -103,6 +103,6 @@ public class LottoTest {
         //given
         List<Integer> dummy = Arrays.asList(1, 2, 3, 4, 5, 6);
         //when, then
-        assertThatThrownBy(() -> new Lotto(dummy, input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(dummy, input)).isInstanceOf(IllegalArgumentException.class);
     }
 }

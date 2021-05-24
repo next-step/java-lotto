@@ -15,7 +15,7 @@ public class StatisticsTest {
         //given
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 3, 2, 4, 5, 6));
-        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
 
         //when
         statistics.addCountToPlace(lottoPrize);
@@ -30,7 +30,7 @@ public class StatisticsTest {
         //given
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 1, 5, 10));
-        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
 
         //when
         statistics.addCountToPlace(lottoPrize);
@@ -45,7 +45,7 @@ public class StatisticsTest {
         //given
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 1, 11, 10));
-        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10), 15));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 10), 15));
         //when
         statistics.addCountToPlace(lottoPrize);
         //then
@@ -58,7 +58,7 @@ public class StatisticsTest {
         //given
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 12, 11, 10));
-        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(11, 2, 3, 4, 5, 6), 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new WinningLotto(Arrays.asList(11, 2, 3, 4, 5, 6), 10));
         //when
         statistics.addCountToPlace(lottoPrize);
         //then
@@ -71,7 +71,7 @@ public class StatisticsTest {
         //given
         Statistics statistics = new Statistics(1);
         Lotto lotto = new Lotto(() -> Arrays.asList(4, 3, 2, 12, 11, 10));
-        LottoPrize lottoPrize = lotto.matchWinningNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
+        LottoPrize lottoPrize = lotto.matchWinningNumber(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10));
         //when
         statistics.addCountToPlace(lottoPrize);
         //then

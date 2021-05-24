@@ -2,10 +2,10 @@ package kr.insup.lotto.domain;
 
 public class LottoPrizeSelector {
 
-    private final Lotto winningNumber;
+    private final WinningLotto winningNumber;
     private final Lotto userNumber;
 
-    public LottoPrizeSelector(Lotto winningNumber, Lotto userNumber) {
+    public LottoPrizeSelector(WinningLotto winningNumber, Lotto userNumber) {
         this.winningNumber = winningNumber;
         this.userNumber = userNumber;
     }
@@ -14,7 +14,7 @@ public class LottoPrizeSelector {
         int match = 0;
         boolean isBonusBallMatch = false;
 
-        for (Integer number : winningNumber.numbers()) {
+        for (Integer number : winningNumber.winningNumbers()) {
             match = isUserNumberContainNumber(number, match);
         }
 

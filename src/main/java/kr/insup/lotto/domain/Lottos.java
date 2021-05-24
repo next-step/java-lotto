@@ -26,7 +26,7 @@ public class Lottos {
         return lottos;
     }
 
-    public Statistics statistics(Lotto winningNumber) {
+    public Statistics statistics(WinningLotto winningNumber) {
         Statistics statistics = new Statistics(attempt);
 
         for (Lotto lotto : lottos) {
