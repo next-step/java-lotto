@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoUser;
 import lotto.utils.LottoUtils;
@@ -11,6 +12,7 @@ public class LottoGame {
 
 	private static LottoUser user = new LottoUser();
 	private static Lotto winningLotto;
+	private static LottoNumber bonusNumber;
 
 	private LottoGame() {
 
@@ -20,6 +22,7 @@ public class LottoGame {
 		inputPurchaseLotto();
 		outputUserLottoStatus();
 		inputLastWeekWinningNumber();
+		inputBonusNumber();
 		outputResult();
 	}
 
@@ -37,8 +40,15 @@ public class LottoGame {
 		winningLotto = LottoUtils.getStringToLotto(LottoInputView.inputWinningLotto());
 	}
 
+	private static void inputBonusNumber() {
+		bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
+		if(winningLotto.containNumber(bonusNumber)){
+			inputBonusNumber();
+		}
+	}
+
 	private static void outputResult() {
-		LottoResult lottoResult = user.getUserLottoResult(winningLotto);
+		LottoResult lottoResult = user.getUserLottoResult(winningLotto, bonusNumber);
 		LottoOutputView.printWinningStatistics(lottoResult.getLottoRankCount());
 		LottoOutputView.printYield(lottoResult.getYield());
 	}

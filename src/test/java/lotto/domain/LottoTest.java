@@ -91,4 +91,12 @@ public class LottoTest {
 		assertThat(winningLotto.getMatchesCount(sourceLotto)).isEqualTo(matches);
 	}
 
+	@Test
+	@DisplayName("로또에 로또 번호가 포함되어있는지 확인하는 테스트")
+	public void containLottoNumber() {
+		Lotto lotto = new Lotto(lottoNumbers);
+		assertThat(lotto.containNumber(new LottoNumber(6))).isEqualTo(true);
+		assertThat(lotto.containNumber(new LottoNumber(7))).isEqualTo(false);
+	}
+
 }

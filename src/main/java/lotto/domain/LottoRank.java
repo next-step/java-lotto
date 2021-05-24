@@ -4,24 +4,38 @@ import java.util.Arrays;
 
 public enum LottoRank {
 	FIRST(2000000000, 6),
-	SECOND(1500000, 5),
-	THIRD(50000, 4),
-	FOURTH(5000, 3),
+	SECOND(30000000, 5, true),
+	THIRD(1500000, 5),
+	FOURTH(50000, 4),
+	FIFTH(5000, 3),
 	UNRANKED(0, 0);
 
 	private long reward;
 	private int matches;
+	private boolean hasBonusBall;
 
 	LottoRank(final long reward, final int matches) {
 		this.reward = reward;
 		this.matches = matches;
+		this.hasBonusBall = false;
 	}
 
-	public static LottoRank valueOf(long matches) {
+	LottoRank(final long reward, final int matches, final boolean hasBonusBall) {
+		this(reward, matches);
+		this.hasBonusBall = hasBonusBall;
+	}
+
+	public static LottoRank valueOf(long matches, boolean hasBonusBall) {
+
+		if (matches == SECOND.getMatches() && hasBonusBall) {
+			return SECOND;
+		}
+
 		return Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> lottoRank.matches == matches)
+			.filter(lottoRank -> !lottoRank.hasBonusBall)
 			.findFirst()
-			.orElse(LottoRank.UNRANKED);
+			.orElse(UNRANKED);
 	}
 
 	public long getReward() {
@@ -31,4 +45,9 @@ public enum LottoRank {
 	public int getMatches() {
 		return this.matches;
 	}
+
+	public boolean hasBonusBall() {
+		return this.hasBonusBall;
+	}
+
 }

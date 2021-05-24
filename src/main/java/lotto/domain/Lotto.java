@@ -16,7 +16,7 @@ public class Lotto {
 
 	public long getMatchesCount(Lotto lotto) {
 		return lotto.numbers.stream()
-			.filter(lottoNumber -> containNumber(lottoNumber))
+			.filter(this::containNumber)
 			.count();
 	}
 
@@ -34,7 +34,7 @@ public class Lotto {
 		return false;
 	}
 
-	private boolean containNumber(LottoNumber number) {
+	public boolean containNumber(LottoNumber number) {
 		return this.numbers.contains(number);
 	}
 

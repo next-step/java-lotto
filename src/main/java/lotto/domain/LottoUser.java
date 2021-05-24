@@ -22,8 +22,8 @@ public class LottoUser {
 		return this.lottos.getSize();
 	}
 
-	public LottoResult getUserLottoResult(Lotto winningLotto) {
-		return this.lottos.getLottoResult(winningLotto);
+	public LottoResult getUserLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
+		return this.lottos.getLottoResult(winningLotto, bonusNumber);
 	}
 
 	public Lottos getUserLottos() {
