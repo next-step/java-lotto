@@ -38,9 +38,6 @@ public enum Rank {
 	}
 
 	public boolean isGreaterThan(Rank rank) {
-		if (this.matchCount > rank.getMatchCount()) {
-			return true;
-		}
-		return false;
+		return this.matchCount > rank.getMatchCount();
 	}
 }
