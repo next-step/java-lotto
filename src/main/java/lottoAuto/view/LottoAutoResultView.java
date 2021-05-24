@@ -1,7 +1,7 @@
 package lottoAuto.view;
 
-import lottoAuto.service.Lotto;
-import lottoAuto.service.Lottos;
+import lottoAuto.model.Lotto;
+import lottoAuto.model.Lottos;
 import lottoAuto.vo.LottoResultVo;
 
 import java.util.*;
@@ -13,11 +13,11 @@ public class LottoAutoResultView extends LottoAutoInputView {
         return amount;
     }
 
-    public List<Lotto> showMyLottoInformation(int amount) {
+    public Lottos showMyLottoInformation(int amount) {
         System.out.println(amount + "개를 구매했습니다.");
-        List<Lotto> userLotto = lottoAutoInputService.inputUserLottoNumber(amount);
-        for (int i = 0; i < userLotto.size(); i++) {
-            System.out.println(userLotto.get(i));
+        Lottos userLotto = lottoAutoInputService.inputUserLottoNumber(amount);
+        for (Lotto lotto : userLotto.getLotto()) {
+            System.out.println(lotto.getNumbers());
         }
         return userLotto;
     }
