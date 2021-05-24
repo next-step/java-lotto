@@ -1,6 +1,9 @@
 package lotto.model;
 
-import java.util.HashMap;
+import static java.util.stream.Collectors.*;
+
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -8,16 +11,18 @@ public class LottoResult {
 	private static final int COUNT_INCREMENT_UNIT = 1;
 	private final Map<LottoRank, Integer> countByLottoRank;
 
-	LottoResult() {
-		countByLottoRank = new HashMap<>();
+	private LottoResult(Map<LottoRank, Integer> countByLottoRank) {
+		this.countByLottoRank = Collections.unmodifiableMap(countByLottoRank);
+	}
+
+	static LottoResult of(List<LottoRank> lottoRanks) {
+		Map<LottoRank, Integer> countByLottoRank = lottoRanks.stream()
+			.collect(toMap(rank -> rank, rank -> COUNT_INCREMENT_UNIT, Integer::sum));
+		return new LottoResult(countByLottoRank);
 	}
 
 	public int count(LottoRank rank) {
 		return countByLottoRank.getOrDefault(rank, DEFAULT_COUNT);
-	}
-
-	void increaseCountOfRank(LottoRank lottoRank) {
-		countByLottoRank.put(lottoRank, count(lottoRank) + COUNT_INCREMENT_UNIT);
 	}
 
 	Money sumTotalPrize() {

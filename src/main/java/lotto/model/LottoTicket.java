@@ -19,11 +19,9 @@ public class LottoTicket {
 	}
 
 	public LottoResult match(WinningNumbers winningNumbers) {
-		LottoResult lottoResult = new LottoResult();
-		for (LottoNumbers lottoNumbers : lottoNumbersGroup) {
-			LottoRank lottoRank = lottoNumbers.match(winningNumbers);
-			lottoResult.increaseCountOfRank(lottoRank);
-		}
-		return lottoResult;
+		List<LottoRank> lottoRanks = lottoNumbersGroup.stream()
+			.map((lottoNumbers) -> lottoNumbers.match(winningNumbers))
+			.collect(Collectors.toList());
+		return LottoResult.of(lottoRanks);
 	}
 }
