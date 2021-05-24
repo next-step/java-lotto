@@ -35,19 +35,11 @@ public class InputView {
         boolean stopReceivingInput = false;
         try {
             stopReceivingInput = checkNotNull(input)
-                    && checkIsNumber(input)
-                    && checkPositiveNumber(input);
+                    && checkIsNumber(input);
         } catch (IllegalArgumentException e) {
             outputView.printExceptionMessage(e);
         }
         return stopReceivingInput;
-    }
-
-    private boolean checkPositiveNumber(String input) throws CustomIllegalArgumentException {
-        if (Integer.parseInt(input) <= 0) {
-            throw new CustomIllegalArgumentException(Message.ERROR_NON_POSITIVE_NUMBER);
-        }
-        return true;
     }
 
     private boolean checkIsNumber(String input) throws CustomIllegalArgumentException {
@@ -108,7 +100,6 @@ public class InputView {
     private boolean checkAllValidNumbers(String[] inputs) throws IllegalArgumentException {
         for (String input : inputs) {
             checkIsNumber(input);
-            checkPositiveNumber(input);
         }
         return true;
     }
