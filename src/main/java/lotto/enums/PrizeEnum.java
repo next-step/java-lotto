@@ -8,23 +8,23 @@ public enum PrizeEnum {
     SECOND(5,1500000),
     FIRST(6, 2000000000);
 
-    int answer;
+    int matchingCount;
     int prize;
 
-    PrizeEnum(int answer, int prize) {
-        this.answer = answer;
+    PrizeEnum(int matchingCount, int prize) {
+        this.matchingCount = matchingCount;
         this.prize = prize;
     }
 
-    public int answer() {
-        return answer;
+    public int matchingCount() {
+        return matchingCount;
     }
 
     public int prize() {
         return prize;
     }
 
-    public int income(LottoResult matchAnswer) {
-        return prize * matchAnswer.count(answer);
+    public int income(LottoResult lottoResult) {
+        return prize * lottoResult.count(matchingCount);
     }
 }
