@@ -17,8 +17,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class SeparatorTest {
-	private final List<String> numberList = Arrays.asList("1", "2", "3");
-
 	@ParameterizedTest
 	@ValueSource(strings = {":", ","})
 	@DisplayName (",와 :구분자로 문자열을 전달하는 경우 구분자를 기준으로 분리한 숫자의 합을 반환")
@@ -26,7 +24,7 @@ class SeparatorTest {
 
 		List<String> splitNumber = Separator.split("1" + separator + "2" + separator + "3");
 
-		assertThat(splitNumber).isEqualTo(numberList);
+		assertThat(splitNumber).isEqualTo(Arrays.asList("1", "2", "3"));
 	}
 
 	@Test
@@ -44,14 +42,14 @@ class SeparatorTest {
 
 	@Test
 	public void 문자사이에_커스텀구분자를_지정할_수_있다(){
-		assertThat(Separator.split("//;\n1;2;3")).isEqualTo(numberList);
+		assertThat(Separator.split("//;\n1;2;3")).isEqualTo(Arrays.asList("1", "2", "3"));
 
-		assertThat(Separator.split("// \n1 2 3")).isEqualTo(numberList);
+		assertThat(Separator.split("// \n1 2 3")).isEqualTo(Arrays.asList("1", "2", "3"));
 
 //		assertThat(numberList).isEqualTo(Separator.split("//.\n1.2.3")); ???
 
 //		assertThat(numberList).isEqualTo(Separator.split("//*\n1*2*3")); ??? 머선 129
 
-		assertThat(Separator.split("//'\n1'2'3")).isEqualTo(numberList);
+		assertThat(Separator.split("//'\n1'2'3")).isEqualTo(Arrays.asList("1", "2", "3"));
 	}
 }
