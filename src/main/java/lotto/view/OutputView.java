@@ -32,7 +32,7 @@ public class OutputView {
     }
 
     public static void printWinResult(WinInquiryResponse response) {
-        System.out.println("당첨 통계");
+        System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
         printMatchResult(response.getWinStatisticList());
         printTotalReturnRate(response.getTotalReturnRate());
