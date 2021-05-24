@@ -24,8 +24,8 @@ public class LottoAutomaticMain {
 
         lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-        Map<Rank, Long> winning =  lottoGame.getWinning();
+        Map<Rank, Long> winning = lottoGame.getWinning();
         resultView.resultStatistics(winning);
-lottoGame.getStatistics(winning);
+        lottoGame.getStatistics(winning);
     }
 }

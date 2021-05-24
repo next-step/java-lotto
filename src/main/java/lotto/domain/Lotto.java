@@ -2,27 +2,29 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lotto;
+    private List<Integer> lottoNumbers;
 
-    final static int LOTTO_SELECT_NUM = 6;
 
-    public List<Integer> getLotto() {
-        return this.lotto;
-    }
+    public Lotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
 
-    public List<Integer> getAutoLotto() {
-        List<Integer> lotto = new ArrayList<>();
-        Collections.shuffle(LottoNumbers.LOTTO_NUMBER_LIST);
-        for (int i = 0; i < LOTTO_SELECT_NUM; i++) {
-            lotto.add(LottoNumbers.LOTTO_NUMBER_LIST.get(i));
+        if (new HashSet<>(lottoNumbers).size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6개여아한다.");
         }
-        Collections.sort(lotto);
-
-        return this.lotto = lotto;
+        for(int lottoNumber :lottoNumbers){
+            if(lottoNumber<1 || lottoNumber >45){
+                throw  new IllegalArgumentException("로또 번호는 1~45 사이여야한다.");
+            }
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
+    }
 
 }

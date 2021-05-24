@@ -18,7 +18,8 @@ public class LottoGame {
     }
 
     public Lotto getLotto() {
-        return new Lotto();
+        LottoMachine lottoMachine = new LottoMachine();
+        return lottoMachine.getAutoLotto();
     }
 
     public LottoList getLottoList(int buyCount) {
@@ -40,12 +41,12 @@ public class LottoGame {
         for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
             boolean bonus = false;
-            for (int lottoNumber : lotto.getLotto()) {
+            for (int lottoNumber : lotto.getLottoNumbers()) {
                 if (winningLottoNumbers.getWinningLottoNumbers().contains(lottoNumber)) {
                     numberOfWinnings++;
                 }
             }
-            if (lotto.getLotto().contains(winningLottoNumbers.getBonusNumber())) {
+            if (lotto.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber())) {
                 bonus = true;
             }
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
