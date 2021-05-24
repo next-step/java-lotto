@@ -2,7 +2,7 @@ package stringaddcalculator;
 
 public class InputHandler {
 
-    String INPUT_REGEX = "^[0-9]+$";
+    private static final String INPUT_REGEX = "^[0-9]+$";
 
     public boolean isEmptyInput(String input) {
         if (input == null || input.length() == 0)
