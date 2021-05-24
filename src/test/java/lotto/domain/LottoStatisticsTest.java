@@ -20,7 +20,7 @@ class LottoStatisticsTest {
     @DisplayName("수익률 확인")
     void calculate_rateOfReturn(int buyCount, int three, int four, int five, int six, String rateOfReturn) {
         // given
-        Price price = new Price(buyCount * Price.LOTTO_PRICE);
+        Price price = new Price(buyCount * Price.UNIT_OF_PRICE);
         Map<Integer, Integer> statistics = new HashMap<>();
         statistics.put(3, three);
         statistics.put(4, four);

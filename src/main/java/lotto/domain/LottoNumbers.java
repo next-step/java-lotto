@@ -30,6 +30,12 @@ public class LottoNumbers {
         return new ArrayList<>(this.lottoNumbers);
     }
 
+    public int getCountOfMatchingNumber(LottoNumbers winningNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -19,7 +19,7 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(new Price(price));
 
         // when
-        Lottos lottos = lottoMachine.getLottos();
+        Lottos lottos = lottoMachine.createLottos();
 
         // then
         assertThat(lottos.getSize()).isEqualTo(lottoCount);

@@ -1,29 +1,37 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumbersGenerator;
+import lotto.domain.LottoRankStatistics;
+import lotto.domain.Lottos;
+import lotto.domain.Price;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private InputView inputView;
-    private ResultView resultView;
-    private LottoNumbersGenerator generator;
+    private final InputView inputView;
+    private final ResultView resultView;
+    private Lottos lottos;
 
     public LottoController() {
         this.inputView = new InputView();
         this.resultView = new ResultView();
-        this.generator = new LottoNumbersGenerator();
     }
 
     public void playLotto() {
         Price price = new Price(this.inputView.getBuyPrice());
         LottoMachine lottoMachine = new LottoMachine(price);
-        Lottos lottos = lottoMachine.getLottos();
-        this.resultView.printLottosNumber(lottos);
-        LottoNumbers winningLottoNumbers = this.generator.toLottoNumbers(this.inputView.getWinningNumber());
-        LottoStatistics lottoStatistics = lottos.getLottoStatisticsByWinningNumbers(winningLottoNumbers);
+        this.lottos = lottoMachine.createLottos();
+    }
+
+    public void showResult() {
+        this.resultView.printLottosNumber(this.lottos);
+        LottoNumbersGenerator generator = new LottoNumbersGenerator();
+        LottoNumbers winningLottoNumbers = generator.toLottoNumbers(this.inputView.getWinningNumber());
+        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningLottoNumbers);
+        lottoStatistics.initStatistics();
         this.resultView.printStatisticsResult(lottoStatistics);
-        Double rateOfReturn = lottoStatistics.calculateRateOfReturnByPrice(price);
-        this.resultView.printRateOfReturnResult(rateOfReturn);
+        this.resultView.printRateOfReturnResult(lottoStatistics);
     }
 }

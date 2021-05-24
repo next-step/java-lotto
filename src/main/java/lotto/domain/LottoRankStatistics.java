@@ -22,7 +22,7 @@ public class LottoRankStatistics {
     public void initStatistics() {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (int i = 0; i < this.lottos.getSize(); i++) {
-            int matchCount = this.lottos.getLotto(i).getCountOfMatchingNumber(this.winningNumbers);
+            int matchCount = this.lottos.getLottoNumbers(i).getCountOfMatchingNumber(this.winningNumbers);
             LottoRank lottoRank = LottoRank.valueOf(matchCount);
             int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
             result.put(lottoRank, ++lottoCount);
@@ -35,13 +35,13 @@ public class LottoRankStatistics {
     }
 
     public String calculateRateOfReturn() {
-        double rateOfReturn = Math.floor(((double) getTotalWinningAmount()
+        double rateOfReturn = Math.floor(((double) sumTotalWinningAmount()
                 / (double) (this.rankCounts.calculateTotalCountByRank() * 1000)) * ONE_HUNDRED_INT)
                 / ONE_HUNDRED_DOUBLE;
         return String.format("%.2f", rateOfReturn);
     }
 
-    private long getTotalWinningAmount() {
+    private long sumTotalWinningAmount() {
         long totalAmount = DEFAULT_MONEY;
         for (LottoRank rank : LottoRank.values()) {
             totalAmount += this.rankCounts.getWinningLottoCount(rank) * rank.getWinningMoney();

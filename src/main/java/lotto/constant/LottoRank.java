@@ -1,7 +1,11 @@
 package lotto.constant;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
@@ -34,5 +38,16 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int countOfMatch) {
         return lottoRanks.getOrDefault(countOfMatch, LottoRank.OUT_OF_RANK);
+    }
+
+    public static List<LottoRank> valuesWithWinningRank() {
+        return Arrays.stream(LottoRank.values())
+                .filter(LottoRank::isWinningRank)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
+    private static boolean isWinningRank(LottoRank rank) {
+        return rank != OUT_OF_RANK;
     }
 }

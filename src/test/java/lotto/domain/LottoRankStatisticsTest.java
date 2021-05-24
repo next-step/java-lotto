@@ -30,12 +30,12 @@ public class LottoRankStatisticsTest {
     @DisplayName("총 수일륙을 확인")
     void total_winningMoney(int size, String winningNumber, String rateOfReturn) {
         // given
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,5,6")));
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,5,7")));
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,7,8")));
+        List<LottoNumbers> lottos = new ArrayList<>();
+        lottos.add(generator.toLottoNumbers("1,2,3,4,5,6"));
+        lottos.add(generator.toLottoNumbers("1,2,3,4,5,7"));
+        lottos.add(generator.toLottoNumbers("1,2,3,4,7,8"));
         for (int i = 0; i < size; i++) {
-            lottos.add(new Lotto(generator.toLottoNumbers("11,12,13,14,17,18")));
+            lottos.add(generator.toLottoNumbers("11,12,13,14,17,18"));
         }
         LottoRankStatistics statistics = new LottoRankStatistics(new Lottos(lottos), generator.toLottoNumbers(winningNumber));
 
@@ -51,10 +51,10 @@ public class LottoRankStatisticsTest {
     @DisplayName("등수별 당첨 개수를 확인")
     void lottoCount_by_rank() {
         // given
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,5,6")));
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,5,6")));
-        lottos.add(new Lotto(generator.toLottoNumbers("1,2,3,4,5,6")));
+        List<LottoNumbers> lottos = new ArrayList<>();
+        lottos.add(generator.toLottoNumbers("1,2,3,4,5,6"));
+        lottos.add(generator.toLottoNumbers("1,2,3,4,5,6"));
+        lottos.add(generator.toLottoNumbers("1,2,3,4,5,6"));
 
         LottoRankStatistics statistics = new LottoRankStatistics(new Lottos(lottos), generator.toLottoNumbers("1,2,3,4,5,6"));
 

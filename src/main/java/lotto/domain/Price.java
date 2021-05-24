@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Price {
-    public static final int LOTTO_PRICE = 1000;
+    public static final int UNIT_OF_PRICE = 1000;
     private final long price;
 
     public Price(long price) {
@@ -14,10 +14,6 @@ public class Price {
 
     public Long getPrice() {
         return this.price;
-    }
-
-    public Long getAvailableCountForBuy() {
-        return this.price / LOTTO_PRICE;
     }
 
     @Override
@@ -34,14 +30,14 @@ public class Price {
     }
 
     private void validateRemainderPrice(long price) {
-        if (price % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구입 금액은 1,000원 단위로만 입력 가능합니다.");
+        if (price % UNIT_OF_PRICE != 0) {
+            throw new IllegalArgumentException("금액은 1,000원 단위로만 입력 가능합니다.");
         }
     }
 
     private void validateMinimumPrice(long price) {
-        if (price / LOTTO_PRICE == 0) {
-            throw new IllegalArgumentException("최소 구매 가격은 1,000원 입니다.");
+        if (price / UNIT_OF_PRICE == 0) {
+            throw new IllegalArgumentException("최소 금액은 1,000원 입니다.");
         }
     }
 }
