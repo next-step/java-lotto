@@ -62,21 +62,33 @@ class LottoWinServiceTest {
     @DisplayName("당첨조회 - 등수갯수")
     void rankCount() {
         // given when
-        LottoRanks lottoRanks = service.inquiryWin(lottoTickets, winNumbers);
+        LottoRanks lottoRanks = service.inquiryWin(lottoTickets, winNumbers, LottoNumber.of(34));
 
         // then
         assertThat(lottoRanks.count(LottoRank.FIFTH)).isEqualTo(1);
         assertThat(lottoRanks.count(LottoRank.FOURTH)).isEqualTo(0);
         assertThat(lottoRanks.count(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(lottoRanks.count(LottoRank.SECOND)).isEqualTo(0);
         assertThat(lottoRanks.count(LottoRank.FIRST)).isEqualTo(0);
         assertThat(lottoRanks.count(LottoRank.LOSE)).isEqualTo(13);
+    }
+
+    @Test
+    @DisplayName("당첨조회 - 2등")
+    void rank_second() {
+        // given when
+        LottoNumbers winNumbers = new LottoNumbers(Stream.of(7, 11, 30, 40, 42, 45).map(LottoNumber::of).collect(Collectors.toSet()));
+        LottoRanks lottoRanks = service.inquiryWin(lottoTickets, winNumbers, LottoNumber.of(43));
+
+        // then
+        assertThat(lottoRanks.count(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("당첨조회 - 수익률")
     void totalReturnRate() {
         // given when
-        LottoRanks lottoRanks = service.inquiryWin(lottoTickets, winNumbers);
+        LottoRanks lottoRanks = service.inquiryWin(lottoTickets, winNumbers, LottoNumber.of(34));
 
         // then
         assertThat(lottoRanks.totalReturnRate()).isEqualTo(0.35);
