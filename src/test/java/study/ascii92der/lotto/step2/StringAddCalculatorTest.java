@@ -55,4 +55,10 @@ public class StringAddCalculatorTest {
     void splitTest(String value) {
         assertThat(split(value).length).isEqualTo(5);
     }
+
+    @Test
+    void sumTest() {
+        String[] values = {"1","2","3","4","5"};
+        assertThat(StringAddCalculator.sum(values)).isEqualTo(15);
+    }
 }

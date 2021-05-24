@@ -13,4 +13,10 @@ public class StringAddCalculator {
 
         return stringValues.split("[,:]");
     }
+
+    public static int sum(String[] values) {
+        int result = 0;
+        for(String value:values) result += Integer.parseInt(value);
+        return result;
+    }
 }
