@@ -7,7 +7,6 @@ import java.util.List;
 public class Lotto {
     private List<Integer> lottoNumbers;
 
-
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
 
@@ -17,7 +16,6 @@ public class Lotto {
         }
         this.lottoNumbers = lottoNumbers;
     }
-
 
     public static void throwIllegalArgumentException_lottoSize(List<Integer> winningLottoNumbers) {
         if( new HashSet<>(winningLottoNumbers).size() !=LottoConstants.LOTTO_SELECT_NUM) {
@@ -30,6 +28,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 1~45 까지 가능합니다.");
         }
     }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
