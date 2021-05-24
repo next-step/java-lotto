@@ -47,9 +47,7 @@ public class GameReport {
     }
 
     private int duplicateMatchSize() {
-        Rank[] ranks = Rank.duplicateMatchValues();
-
-        return Arrays.stream(ranks)
+        return Rank.duplicateMatchValues().stream()
             .mapToInt(rank -> size(rank))
             .sum();
     }
@@ -86,7 +84,7 @@ public class GameReport {
     }
 
     private Rank[] ignoreThirdWinners() {
-        return Arrays.stream(Rank.winningValues())
+        return Rank.winningValues().stream()
             .filter(x -> x != Rank.THIRD)
             .toArray(Rank[]::new);
     }
