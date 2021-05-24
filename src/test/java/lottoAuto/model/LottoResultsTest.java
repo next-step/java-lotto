@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 import java.util.ArrayList;
 import java.util.List;

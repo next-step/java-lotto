@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +30,12 @@ class LottosTest {
     @Test
     public void match() {
         LottoResultsTest lottoResultsTest = new LottoResultsTest();
-        userLotto.stream().map(lotto -> new LottoResultTest(lottoAutoService.statistic(userLotto, winningLotto)))
-                .forEach(lottoResultsTest::add);
+//        userLotto.stream().map(lotto -> new LottoResultTest(lottoAutoService.statistic(userLotto, winningLotto)))
+//                .forEach(lottoResultsTest::add);
+
+        //map 타입 변환
+//        List<String> name = new ArrayList<>();
+//        List<Car> cars = name.stream().map(x -> new Car(x)).collect(Collectors.toList());
 
         assertThat(lottoResultsTest.getLottoResultTestList1()).isEqualTo(3);
         assertThat(lottoResultsTest.getLottoResultTestList2()).isEqualTo(3);

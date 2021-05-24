@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 public class LottoResultTest {
     private int count;
