@@ -1,8 +1,8 @@
 package lottotest;
 
-import lotto.controller.LottoAutoController;
 import lotto.WinningPrice;
 import lotto.WinningResult;
+import lotto.controller.LottoAutoController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

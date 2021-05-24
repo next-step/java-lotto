@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import lotto.view.LottoManualView;
 import lotto.LottoPrice;
 import lotto.WinningPrice;
 import lotto.WinningResult;
 import lotto.model.LottoModel;
+import lotto.view.LottoManualView;
 
 import java.util.ArrayList;
 import java.util.List;

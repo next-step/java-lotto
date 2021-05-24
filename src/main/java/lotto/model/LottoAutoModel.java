@@ -27,7 +27,7 @@ public class LottoAutoModel {
     }
 
     public boolean contains(int bonusNumber) {
-            return autoNumbers.contains(bonusNumber);
+        return autoNumbers.contains(bonusNumber);
     }
 
     public int setWinningResult(List<Integer> winningNumbers) {

@@ -83,7 +83,7 @@ class StringAdditionCalculatorTest {
     void customDelimiter(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
-    
+
     @DisplayName(value = "//와 \n 문자 사이에 커스텀 구분자와 기존 구분자 (, 와 :)를 혼용할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2,3"})
