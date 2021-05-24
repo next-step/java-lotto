@@ -4,54 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.Lotto;
-import lotto.Lottos;
-import lotto.Money;
-import lotto.Store;
-
 public class InputView {
-	private Lottos lottos;
-	private Lotto prizeLotto;
+	public static final String INPUT_BUY_AMOUNT = "구입금액을 입력해 주세요.";
+	public static final String INPUT_LAST_WEEK_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+	public static final String DELIMITER = ",";
 
-	public void input() {
-		Scanner sc = new Scanner(System.in);
-		Money amount = inputAmount(sc);
+	private Scanner sc = new Scanner(System.in);
 
-		lottos = Store.buy(amount);
-		printLottos();
-
-		prizeLotto = inputPrizeLotto(sc);
-	}
-
-	private void printLottos() {
-		for (Lotto lotto : lottos.findAll()) {
-			System.out.println(lotto.numbers());
-		}
-	}
-
-	private Money inputAmount(Scanner sc) {
-		System.out.println("구입금액을 입력해 주세요.");
-		Money amount = new Money(sc.nextLong());
+	public long askAmount() {
+		System.out.println(INPUT_BUY_AMOUNT);
+		long amount = sc.nextLong();
 		sc.nextLine();
 		return amount;
 	}
 
-	private Lotto inputPrizeLotto(Scanner sc) {
-		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+	public List<Integer> askPrizeNumbers() {
+		System.out.println(INPUT_LAST_WEEK_NUMBERS);
 		String line = sc.nextLine();
-		String[] splits = line.split(",");
+		String[] splits = line.split(DELIMITER);
 		List<Integer> numbers = new ArrayList<>();
 		for (String e : splits) {
 			numbers.add(Integer.parseInt(e.trim()));
 		}
-		return new Lotto(numbers);
+		return numbers;
 	}
 
-	public Lottos lottos() {
-		return lottos;
-	}
-
-	public Lotto prizeLotto() {
-		return prizeLotto;
-	}
 }
