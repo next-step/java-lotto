@@ -14,9 +14,9 @@ public class LottoTest {
     @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.")
     @Test
     void buyLottoTest() {
-        PlayLotto playLotto = new PlayLotto();
+        LottoPurchase lottoPurchase = new LottoPurchase();
         int money = 14000;
-        assertThat(playLotto.buyLotto(money)).isEqualTo(14);
+        assertThat(lottoPurchase.buyLotto(money)).isEqualTo(14);
     }
 
     @DisplayName("로또 공은 1~45까지이다.")

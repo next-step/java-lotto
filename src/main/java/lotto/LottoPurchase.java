@@ -1,6 +1,6 @@
 package lotto;
 
-public class PlayLotto {
+public class LottoPurchase {
     private static final int LOTTO_PRICE = 1000;
 
     public int buyLotto(int money) {
