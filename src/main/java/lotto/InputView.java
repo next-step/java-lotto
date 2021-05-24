@@ -33,6 +33,7 @@ public class InputView {
     public String getInputBonusNumber() {
         return inputBonusNumber;
     }
+
     public void inputBonusLottoNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
         inputBonusNumber = scan.next();

@@ -41,7 +41,7 @@ public class LastWonLottoNumber {
     }
 
     public boolean containsBonus(int number) {
-        if(bonusNumber == number)
+        if (bonusNumber == number)
             return true;
 
         return false;
