@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -38,5 +39,9 @@ public class LottoWin {
             sum += lottoWinType.amount() * lottoWin.get(lottoWinType);
         }
         return sum;
+    }
+
+    public BigDecimal profit(Money money) {
+        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(money.money()), 2, BigDecimal.ROUND_FLOOR);
     }
 }
