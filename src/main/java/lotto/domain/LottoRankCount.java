@@ -7,12 +7,13 @@ import java.util.Map;
 public class LottoRankCount {
 
 	private static final int INIT_COUNT = 0;
+	private static final int ADD_COUNT = 1;
 
 	private Map<LottoRank, Integer> rankCount;
 
 	public LottoRankCount(List<LottoRank> lottoRanks) {
 		initRankCount();
-		calculateRankCount(lottoRanks);
+		calculateLottoRanksCount(lottoRanks);
 	}
 
 	public long getCount(LottoRank lottoRank) {
@@ -26,11 +27,11 @@ public class LottoRankCount {
 		}
 	}
 
-	private void calculateRankCount(List<LottoRank> lottoRanks) {
-		lottoRanks.forEach(this::addCount);
+	private void calculateLottoRanksCount(List<LottoRank> lottoRanks) {
+		lottoRanks.forEach(this::addLottoRankCount);
 	}
 
-	private void addCount(LottoRank lottoRank) {
-		this.rankCount.put(lottoRank, this.rankCount.get(lottoRank) + 1);
+	private void addLottoRankCount(LottoRank lottoRank) {
+		this.rankCount.put(lottoRank, this.rankCount.get(lottoRank) + ADD_COUNT);
 	}
 }
