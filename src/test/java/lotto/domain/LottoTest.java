@@ -29,21 +29,15 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoTest {
 
     @Test
-    void 로또_한_장의_가격은_1000원이다() {
-        Lotto lotto = new Lotto(LottoNumberGenerator.getBalls());
-        assertThat(lotto.PRICE).isEqualTo(1000);
-    }
-
-    @Test
     void 로또는_1부터_45까지의_숫자_중에서_발행한다() {
         Lotto lotto = new Lotto(LottoNumberGenerator.getBalls());
-        assertThat(lotto.numbers).allMatch(num -> num <= 45).allMatch(num -> num >= 1);
+        assertThat(lotto.numbers()).allMatch(num -> num <= Lotto.MAX).allMatch(num -> num >= Lotto.MIN);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void 로또는_1부터_45사이가_아닌_값을_입력할_수_없다(int invalidNumber) {
-        List<Integer> 잘못된_값 = new ArrayList<>(번호_0개_일치.numbers);
+        List<Integer> 잘못된_값 = new ArrayList<>(번호_0개_일치.numbers());
         잘못된_값.add(0, invalidNumber);
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(잘못된_값));
     }
@@ -56,7 +50,7 @@ class LottoTest {
     @Test
     void 로또는_6자리_수_이다() {
         Lotto lotto = new Lotto(LottoNumberGenerator.getBalls());
-        assertThat(lotto.numbers).hasSize(6);
+        assertThat(lotto.size()).isEqualTo(Lotto.SIZE);
     }
 
     @ParameterizedTest

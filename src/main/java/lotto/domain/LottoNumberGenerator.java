@@ -15,8 +15,7 @@ public class LottoNumberGenerator {
     }
 
     public static List<Integer> getBalls() {
-        List<Integer> shuffle = shuffledList();
-        shuffle = shuffle.subList(0, Lotto.SIZE);
+        List<Integer> shuffle = shuffledList().subList(0, Lotto.SIZE);
         shuffle.sort(Integer::compareTo);
         return shuffle;
     }
