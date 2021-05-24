@@ -11,7 +11,6 @@ public class Lottos {
 		validateMoney(money);
 
 		lottos = new ArrayList<>();
-
 		for (int i = 0; i < money.buyCount(); i++) {
 			lottos.add(new Lotto(LottoUtils.randomNumbers()));
 		}

@@ -7,18 +7,22 @@ public class Money {
 	private final int value;
 
 	public Money(int value) {
-		if (value < 0) {
-			throw new IllegalArgumentException("Money cannot be negative!");
-		}
+		validateMoneyValue(value);
 
 		this.value = value;
+	}
+
+	public int buyCount() {
+		return value / LOTTO_PRICE;
 	}
 
 	public boolean isEnough() {
 		return LOTTO_PRICE <= value;
 	}
 
-	public int buyCount() {
-		return value / LOTTO_PRICE;
+	private void validateMoneyValue(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException("Money cannot be negative!");
+		}
 	}
 }

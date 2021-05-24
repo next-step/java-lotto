@@ -8,6 +8,7 @@ public class Lotto {
 
 	public Lotto(List<Number> numbers) {
 		validateNumbers(numbers);
+
 		this.numbers = numbers;
 	}
 
