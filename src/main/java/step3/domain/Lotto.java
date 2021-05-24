@@ -3,57 +3,54 @@ package step3.domain;
 import step3.exception.DuplicatedNumberException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(TreeSet<Integer> numbers) {
         checkDuplicate(numbers);
 
-        lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; ++i) {
-            lottoNumbers.add(new LottoNumber(numbers.get(i)));
+        lottoNumbers = new TreeSet<>(Comparator.comparing(LottoNumber::valueOf));
+        lottoNumbers.addAll(numbers.stream().map(LottoNumber::new)
+                .collect(Collectors.toCollection(() -> new TreeSet<LottoNumber>(Comparator.comparing(LottoNumber::valueOf)))));
+    }
+
+    private void checkDuplicate(TreeSet<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new DuplicatedNumberException();
         }
     }
 
-    private void checkDuplicate(List<Integer> numbers) {
-        Set<Integer> dupCheck = new HashSet<>();
-        for (int i = 0; i < numbers.size(); ++i) {
-            throwDupCheck(numbers, dupCheck, i);
-            dupCheck.add(numbers.get(i));
-        }
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private void throwDupCheck(List<Integer> numbers, Set<Integer> dupCheck, int i) {
-        if (dupCheck.contains(numbers.get(i))) throw new DuplicatedNumberException();
-    }
-
-
-    public Integer findLottoNumByIdx(int idx) {
-        return lottoNumbers.get(idx).getNumber();
-    }
-
-    public void shuffle() {
-        Collections.shuffle(lottoNumbers);
-    }
-
-    public int length() {
-        return lottoNumbers.size();
+    public boolean findLottoNum(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override
     public String toString() {
+        List<LottoNumber> copy = shuffledLottoList();
+
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (int i = 0; i < lottoNumbers.size() - 1; ++i) {
-            sb.append(lottoNumbers.get(i));
+        for (LottoNumber lottoNumber : copy) {
+            sb.append(lottoNumber);
             sb.append(", ");
         }
-        sb.append(lottoNumbers.get(lottoNumbers.size() - 1));
+        sb.deleteCharAt(sb.length() - 1);
         sb.append("]");
         return sb.toString();
+    }
+
+    private List<LottoNumber> shuffledLottoList() {
+        List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
+        Collections.shuffle(copy);
+        return copy;
     }
 
     @Override
@@ -69,7 +66,4 @@ public class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    public void sort() {
-        lottoNumbers.sort(Comparator.comparing(LottoNumber::getNumber));
-    }
 }
