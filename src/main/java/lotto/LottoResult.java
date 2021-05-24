@@ -42,6 +42,6 @@ public class LottoResult {
 		return Arrays.stream(LottoPrizeType.values())
 				.filter(it -> it.getMatchedNumberCount() <= MAXIMUM_MATCHED_NUMBER && it.getMatchedNumberCount() >= MINIMUM_WINNING_MATCHED_NUMBER)
 				.map(it -> it.getMatchedNumberCount() + "개 일치 (" + it.getPrizeMoney() + "원)- " + getNumberOfLottosMatchedWith(it.getMatchedNumberCount()) + "개")
-				.collect(Collectors.joining("\n"));
+				.collect(Collectors.joining(Constants.JOINING_DELIMITER));
 	}
 }

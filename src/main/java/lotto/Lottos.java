@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
-	private static final String JOINING_DELIMITER = "\n";
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
@@ -29,6 +28,6 @@ public class Lottos {
 	public String toString() {
 		return lottos.stream()
 				.map(Lotto::toString)
-				.collect(Collectors.joining(JOINING_DELIMITER));
+				.collect(Collectors.joining(Constants.JOINING_DELIMITER));
 	}
 }
