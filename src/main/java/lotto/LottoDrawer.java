@@ -1,13 +1,13 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoDrawer {
-	private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
 	private final List<Integer> lottoNumbers;
 
 	public LottoDrawer() {
@@ -23,7 +23,7 @@ public class LottoDrawer {
 	}
 
 	private int numberOfLottosToBuy(BigDecimal receivedMoney) {
-		return receivedMoney.divide(LOTTO_PRICE)
+		return receivedMoney.divide(Constants.LOTTO_PRICE, MathContext.DECIMAL32)
 				.intValue();
 	}
 
