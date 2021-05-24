@@ -12,4 +12,12 @@ public class BonusNumber {
 		}
 		this.bonusNumber = bonusNumber;
 	}
+
+	public LottoNumber getBonusNumber() {
+		return bonusNumber;
+	}
+
+	public boolean containsBonus(Lotto lotto) {
+		return lotto.contains(bonusNumber);
+	}
 }

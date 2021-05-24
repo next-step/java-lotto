@@ -10,7 +10,7 @@ import wootecam.lotto.exception.LottoException;
 public class Lotto {
 
 	public static final int LOTTO_NUMBER_SIZE = 6;
-	private final List<LottoNumber> lottoNumbers;
+	protected final List<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		if (!isValidLottoNumberSize(lottoNumbers)) {
@@ -36,7 +36,7 @@ public class Lotto {
 			.collect(Collectors.joining(","));
 	}
 
-	public int getNumberMatchCount(Lotto winningLotto) {
+	public int getNumberMatchCount(WinningLotto winningLotto) {
 		return (int)this.lottoNumbers.stream()
 			.filter(winningLotto::contains)
 			.count();

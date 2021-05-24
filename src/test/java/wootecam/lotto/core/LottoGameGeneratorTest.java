@@ -7,12 +7,14 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import wootecam.lotto.exception.LottoException;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
 import wootecam.lotto.model.LottoNumber;
+import wootecam.lotto.model.WinningLotto;
 
 public class LottoGameGeneratorTest {
 
@@ -33,44 +35,44 @@ public class LottoGameGeneratorTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"1,2,3,4,5,6"})
+	@CsvSource(value = {"1,2,3,4,5,6:9"}, delimiter = ':')
 	@DisplayName("정상적인 입력에 대한 당첨번호테스트")
-	void test_당첨번호테스트(String input) {
-		Lotto winningLotto = lottoGameGenerator.getWinningLotto(input);
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(1))).isTrue();
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(2))).isTrue();
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(3))).isTrue();
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(4))).isTrue();
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(5))).isTrue();
-		assertThat(winningLotto.getLottoNumbers().contains(new LottoNumber(6))).isTrue();
+	void test_당첨번호테스트(String input, String bonusInput) {
+		WinningLotto winningLotto = lottoGameGenerator.getWinningLotto(input, bonusInput);
+		assertThat(winningLotto.contains(new LottoNumber(1))).isTrue();
+		assertThat(winningLotto.contains(new LottoNumber(2))).isTrue();
+		assertThat(winningLotto.contains(new LottoNumber(3))).isTrue();
+		assertThat(winningLotto.contains(new LottoNumber(4))).isTrue();
+		assertThat(winningLotto.contains(new LottoNumber(5))).isTrue();
+		assertThat(winningLotto.contains(new LottoNumber(6))).isTrue();
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"1,2,3,4,5", "4,5,6", "1,2,3", "1,2,3,4,5,5"})
+	@CsvSource(value = {"1,2,3,4,5:9", "4,5,6:9"}, delimiter = ':')
 	@DisplayName("당첨번호 입력이 잘못된경우 오류반환 확인")
-	void test_당첨번호오류테스트1(String input) {
+	void test_당첨번호오류테스트1(String input, String bonusInput) {
 		assertThatThrownBy(() -> {
-			lottoGameGenerator.getWinningLotto(input);
+			lottoGameGenerator.getWinningLotto(input, bonusInput);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining("로또 번호는 6개여야 합니다.");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"1,2,c,4,5,3", "a,b,c,d,f,g"})
+	@CsvSource(value = {"1,2,c,4,5,3:9", "a,b,c,d,e,f:9"}, delimiter = ':')
 	@DisplayName("당첨번호 입력이 잘못된경우 오류반환 확인 - 문자입력")
-	void test_당첨번호오류테스트2(String input) {
+	void test_당첨번호오류테스트2(String input, String bonusInput) {
 		assertThatThrownBy(() -> {
-			lottoGameGenerator.getWinningLotto(input);
+			lottoGameGenerator.getWinningLotto(input, bonusInput);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining("정수형이 아닙니다.");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"12,2,3,4,555,5", "48,282,393,222,444,555"})
+	@CsvSource(value = {"12,2,3,4,555,5:9", "48,282,393,222,444,555:9"}, delimiter = ':')
 	@DisplayName("당첨번호 입력이 잘못된경우 오류반환 확인 - 범위초과")
-	void test_당첨번호오류테스트3(String input) {
+	void test_당첨번호오류테스트3(String input, String bonusInput) {
 		assertThatThrownBy(() -> {
-			lottoGameGenerator.getWinningLotto(input);
+			lottoGameGenerator.getWinningLotto(input, bonusInput);
 		}).isInstanceOf(LottoException.class)
 			.hasMessageContaining("로또 번호는 1~45만 가능합니다.");
 	}
