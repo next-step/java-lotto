@@ -12,6 +12,11 @@ public class PositiveNumber implements Comparable<PositiveNumber> {
 
     private final long value;
 
+
+    public PositiveNumber(String value) {
+        this(Long.parseLong(value));
+    }
+
     public PositiveNumber(int value) {
         this((long) value);
     }

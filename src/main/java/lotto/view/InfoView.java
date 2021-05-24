@@ -21,7 +21,9 @@ public class InfoView {
     }
 
     public void countOfTicket() {
-        System.out.println(format("%d개를 구매했습니다.", game.sizeOfAutoLottoTickets()));
+        System.out.println(format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                game.sizeOfManualLottoTickets(),
+                game.sizeOfAutoLottoTickets()));
     }
 
     public void ticketNumbers() {
