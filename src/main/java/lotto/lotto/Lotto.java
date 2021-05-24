@@ -1,19 +1,23 @@
 package lotto.lotto;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import lotto.error.ErrorMessage;
 import lotto.ui.Command;
 
 public class Lotto {
-    private static final int MAX_COUNT = 6;
-    private final Set<LottoNumber> numbers = new HashSet<>();
+    public static final int MAX_COUNT = 6;
+    private final Set<LottoNumber> numbers;
 
-    public void addNumber(LottoNumber lottoNumber) {
-        if (!isContain(lottoNumber)) {
-            numbers.add(lottoNumber);
-        }
+    public Lotto(int... numbers) {
+        checkNumber(numbers);
+        this.numbers = Stream.of(numbers)
+                .flatMapToInt(Arrays::stream)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
 
     public boolean isSelectComplete() {
@@ -36,7 +40,9 @@ public class Lotto {
                 .collect(Collectors.joining(Command.NUMBER_DELIMITER));
     }
 
-    private boolean isContain(LottoNumber number) {
-        return numbers.stream().anyMatch(item -> item.equals(number));
+    private void checkNumber(int[] numbers) {
+        if (numbers.length != MAX_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
+        }
     }
 }
