@@ -2,7 +2,9 @@ package lotto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 	private static final int ROUNDING_OFF_SCALE = 2;
@@ -30,5 +32,13 @@ public class LottoResult {
 								.multiply(Constants.LOTTO_PRICE),
 						ROUNDING_OFF_SCALE, RoundingMode.FLOOR)
 				.floatValue();
+	}
+
+	@Override
+	public String toString() {
+		return Arrays.stream(LottoPrizeType.values())
+				.filter(it -> it.getMatchedNumberCount() <= 6 && it.getMatchedNumberCount() >= 3)
+				.map(it -> it.getMatchedNumberCount() + "개 일치 (" + it.getPrizeMoney() + "원)- " + getNumberOfLottosMatchedWith(it.getMatchedNumberCount()) + "개")
+				.collect(Collectors.joining("\n"));
 	}
 }

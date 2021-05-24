@@ -33,4 +33,9 @@ public class Lotto {
 		set.addAll(this.numbers);
 		return LottoPrizeType.valueByMatchedNumberCount(TWO_LOTTO_NUMBERS_LENGTH - set.size());
 	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
+	}
 }
