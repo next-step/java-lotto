@@ -11,32 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
-
-    private List<Integer> testLottoNumber;
-    private List<Integer> lottoNumberRange;
-
-    @BeforeEach
-    public void setUp() {
-        testLottoNumber = new ArrayList<Integer>();
-        lottoNumberRange = new ArrayList<Integer>();
-        for(int i=1; i<46; i++) {
-            lottoNumberRange.add(i);
-        }
-    }
-
-    @Test
-    public void generateLottoNumber_로또번호1_45범위내생성확인() {
-        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
-        testLottoNumber = lottoNumber.generateLottoNumber();
-
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(0))).isTrue();
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(1))).isTrue();
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(2))).isTrue();
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(3))).isTrue();
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(4))).isTrue();
-        assertThat(lottoNumberRange.contains(testLottoNumber.get(5))).isTrue();
-    }
+public class PurchaseLottoTest {
 
     @Test
     public void availablePurchaseLottoCount_구매가능매수확인() {
@@ -46,7 +21,7 @@ public class LottoTest {
     }
 
     @Test
-    public void purchaseAvailableLotto_구매로또번호생성검증() {
+    public void purchaseAvailableLotto_구매로또개수생성검증() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
         assertThat(purchaseLotto.purchaseAvailableLotto(14).count()).isEqualTo(14);
     }
@@ -60,7 +35,7 @@ public class LottoTest {
 
     @Test
     public void countWonNumbers_두개로또번호비교검증() {
-        LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy = new LottoNumberGeneratorStrategy() {
+        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
                 List<Integer> lottoNumber = new ArrayList<Integer>();
@@ -72,11 +47,12 @@ public class LottoTest {
                 lottoNumber.add(6);
                 return lottoNumber;
             }
-        };
+        });
+
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
 
         PurchaseLotto purchaseLotto = new PurchaseLotto();
-        assertThat(purchaseLotto.countWonNumbers(lottoNumberGeneratorStrategy.generateLottoNumber(), lastWonLottoNumber.getLastWonLottoNumbers())).isEqualTo(6);
+        assertThat(purchaseLotto.countWonNumbers(lottoNumber.getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers()).wonCount()).isEqualTo(6);
     }
 
 }

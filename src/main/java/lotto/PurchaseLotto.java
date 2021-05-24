@@ -40,7 +40,7 @@ public class PurchaseLotto {
     }
 
     public LottoNumber purchaseOneLotto() {
-        lottoNumber = new LottoNumber();
+        lottoNumber = new LottoNumber(new LottoNumberGenerator());
         return lottoNumber;
     }
 

@@ -5,15 +5,14 @@ import java.util.List;
 
 public class LottoNumber {
     private List<Integer> list;
-    private LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy;
+    //private LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy;
 
-    public LottoNumber() {
+    public LottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         list = new ArrayList<Integer>();
-        makeLottoNumber();
+        makeLottoNumber(lottoNumberGeneratorStrategy);
     }
 
-    public void makeLottoNumber() {
-        lottoNumberGeneratorStrategy = new LottoNumberGenerator();
+    public void makeLottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         list = lottoNumberGeneratorStrategy.generateLottoNumber();
     }
 
