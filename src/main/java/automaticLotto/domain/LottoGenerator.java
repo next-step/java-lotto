@@ -23,8 +23,7 @@ public class LottoGenerator {
 	}
 
 	public Lottos buy(int budget) {
-		int possibleCount = getPossibleCount(budget);
-		buyLottos(possibleCount);
+		buyLottos(getPossibleCount(budget));
 
 		return this.boughtLottos;
 	}
