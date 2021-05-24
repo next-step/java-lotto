@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 public class Tokenizer {
 
 	private static final String DEFAULT_DELIMITER = ",|:";
-	private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+	private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
 	private String tokenizer;
 	private String text;
@@ -39,6 +40,6 @@ public class Tokenizer {
 	}
 
 	private Matcher patternMatcher(String input) {
-		return Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+		return CUSTOM_DELIMITER_PATTERN.matcher(input);
 	}
 }
