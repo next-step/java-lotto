@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import calculator.StringCalculator;
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
-import lotto.converter.NumberToLotto;
 
 public class MessageLottoNumberGenerator implements Generator {
 
@@ -25,8 +25,14 @@ public class MessageLottoNumberGenerator implements Generator {
 	@Override
 	public LottoNumbers generate() {
 		Collections.sort(numbers);
-		List<LottoNumber> lottoNumberList = NumberToLotto.convert(numbers);
+		List<LottoNumber> lottoNumberList = convertTo(numbers);
 		return appendLottoNumber(lottoNumberList);
+	}
+
+	private List<LottoNumber> convertTo(List<Integer> numbers) {
+		return numbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 
 	private LottoNumbers appendLottoNumber(List<LottoNumber> lottoNumberList) {

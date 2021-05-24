@@ -3,10 +3,10 @@ package lotto.generator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
-import lotto.converter.NumberToLotto;
 
 public class AutoLottoNumberGenerator implements Generator {
 
@@ -37,8 +37,14 @@ public class AutoLottoNumberGenerator implements Generator {
 	public LottoNumbers generate() {
 		List<Integer> pickedNumbers = pickNumbers();
 		Collections.sort(pickedNumbers);
-		List<LottoNumber> lottoNumberList = NumberToLotto.convert(pickedNumbers);
+		List<LottoNumber> lottoNumberList = convertTo(pickedNumbers);
 		return appendLottoNumber(lottoNumberList);
+	}
+
+	private List<LottoNumber> convertTo(List<Integer> numbers) {
+		return numbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
 	}
 
 	private LottoNumbers appendLottoNumber(List<LottoNumber> lottoNumberList) {
