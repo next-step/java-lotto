@@ -3,6 +3,7 @@ package step3.winning;
 import step3.lotto.Lotto;
 import step3.lotto.LottoCount;
 import step3.lotto.LottoNumber;
+import step3.lotto.LottoTicket;
 
 import java.math.*;
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
 public class WinningStatistics {
     private static final int DEFAULT_VALUE = 0;
     private static final int ONE_VALUE = 1;
+
     private final Map<WinningPrize, Integer> winningResults;
     private BigDecimal yield;
 
@@ -22,17 +24,17 @@ public class WinningStatistics {
 
     public void calculateWinningResult(Lotto lottoList, WinningNumbers winningNumbers) {
         for (int i = DEFAULT_VALUE; i < lottoList.size(); i++) {
-            int points = compareNumbers(lottoList, winningNumbers, i);
+            int points = compareNumbers(lottoList.getLottoTicket(i), winningNumbers);
             WinningPrize prize = WinningPrize.valueOf(points);
             winningResults.put(prize, hasWinningPrize(prize));
         }
     }
 
-    private int compareNumbers(Lotto lottoList, WinningNumbers winningNumbers, int index) {
+    public int compareNumbers(LottoTicket ticket, WinningNumbers winningNumbers) {
         int points = DEFAULT_VALUE;
-        Iterator<LottoNumber> iterator = lottoList.iteratorLottoTicket(index);
-        while (iterator.hasNext()) {
-            points += winningNumbers.isContainNumber(iterator.next());
+        List<LottoNumber> winningNumberList = winningNumbers.getWinningNumbers();
+        for (LottoNumber winningNumber: winningNumberList) {
+            points += ticket.isContainNumber(winningNumber);
         }
         return points;
     }

@@ -22,7 +22,7 @@ public class LottoTicket {
         createAutoLottoNumbers();
     }
 
-    public LottoTicket(List<Integer> winningNumbers) {
+    public LottoTicket(Set<Integer> winningNumbers) {
         lottoTicket = new TreeSet<>();
         createWinningLottoNumbers(winningNumbers);
     }
@@ -33,13 +33,22 @@ public class LottoTicket {
             this.lottoTicket.add(new LottoNumber(DEFAULT_NUMBERS.get(i)));
         }
     }
-    private void createWinningLottoNumbers(List<Integer> numbers) {
-        for (int i = LOTTO_START_DIGIT; i < LOTTO_END_DIGIT; i++) {
-            this.lottoTicket.add(new LottoNumber(numbers.get(i)));
+    private void createWinningLottoNumbers(Set<Integer> numbers) {
+        for (int number: numbers) {
+            this.lottoTicket.add(new LottoNumber(number));
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
+        List<LottoNumber> list = new ArrayList<>();
+        Iterator<LottoNumber> it = this.lottoTicket.iterator();
+        while (it.hasNext()) {
+            list.add(it.next());
+        }
+        return list;
+    }
+
+    public List<Integer> getLottoNumberList() {
         List<Integer> list = new ArrayList<>();
         Iterator<LottoNumber> it = this.lottoTicket.iterator();
         while (it.hasNext()) {
@@ -48,7 +57,10 @@ public class LottoTicket {
         return list;
     }
 
-    public Iterator<LottoNumber> iteratorLottoTicket() {
-        return this.lottoTicket.iterator();
+    public int isContainNumber(LottoNumber number) {
+        if (lottoTicket.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 }

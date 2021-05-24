@@ -1,6 +1,7 @@
 package step3.utils;
 
 import java.util.List;
+import java.util.Set;
 
 public class ValidationUtils {
     private static final String MATCH_PRICE = "^[0-9\\,]*$";
@@ -33,14 +34,14 @@ public class ValidationUtils {
         return true;
     }
 
-    public static  List<Integer> validWinningNumbers(String winningNumbers) {
+    public static Set<Integer> validWinningNumbers(String winningNumbers) {
         if (!ValidationUtils.isNullCheck(winningNumbers)) {
             throw new RuntimeException(WINNING_NUMBER_NULL_EXCEPTION);
         }
         if (!ValidationUtils.validWinningNumbersComma(winningNumbers)) {
             throw new RuntimeException(WINNING_NUMBER_COMMA_EXCEPTION);
         }
-        List<Integer> winningNumberList = StringUtils.processStringNumbers(winningNumbers);
+        Set<Integer> winningNumberList = StringUtils.processStringNumbers(winningNumbers);
         if (!ValidationUtils.validWinningNumbersDigit(winningNumberList.size())) {
             throw new RuntimeException(WINNING_NUMBER_SIX_DIGIT_EXCEPTION);
         }

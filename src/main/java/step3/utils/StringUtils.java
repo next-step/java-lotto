@@ -1,7 +1,6 @@
 package step3.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class StringUtils {
     private static final String SEPARATOR = ",";
@@ -10,7 +9,7 @@ public class StringUtils {
         throw new AssertionError();
     }
 
-    public static List<Integer> processStringNumbers(String numberString){
+    public static Set<Integer> processStringNumbers(String numberString){
         String[] splitString = splitString(numberString);
         return changeStringToLottoNumbers(splitString);
 
@@ -20,11 +19,11 @@ public class StringUtils {
         return numberString.split(SEPARATOR);
     }
 
-    private static List<Integer> changeStringToLottoNumbers(String[] winningNumbers) {
-        List<Integer> winningNumberList = new ArrayList<>();
+    private static Set<Integer> changeStringToLottoNumbers(String[] winningNumbers) {
+        Set<Integer> winningNumberSet = new TreeSet<>();
         for (int i = 0; i < winningNumbers.length; i++) {
-            winningNumberList.add(Integer.parseInt(winningNumbers[i]));
+            winningNumberSet.add(Integer.parseInt(winningNumbers[i]));
         }
-        return winningNumberList;
+        return winningNumberSet;
     }
 }
