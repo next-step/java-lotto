@@ -20,12 +20,12 @@ public enum LottoPrize {
     }
 
     public static LottoPrize matchLottoPrize(int match, boolean isBonusBallMatch) {
-        if(isLottoPrizeMatch(Second, match)) {
+        if (isLottoPrizeMatch(Second, match)) {
             return secondOrThird(isBonusBallMatch);
         }
 
-        for(LottoPrize lottoPrize : values()){
-            if(isLottoPrizeMatch(lottoPrize, match)){
+        for (LottoPrize lottoPrize : values()) {
+            if (isLottoPrizeMatch(lottoPrize, match)) {
                 return lottoPrize;
             }
         }
@@ -34,7 +34,7 @@ public enum LottoPrize {
     }
 
     private static LottoPrize secondOrThird(boolean isBonusBallMatch) {
-        if(isBonusBallMatch){
+        if (isBonusBallMatch) {
             return Second;
         }
         return Third;

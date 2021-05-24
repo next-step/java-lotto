@@ -30,7 +30,7 @@ public class WinningLotto {
         return this.lotto.numbers();
     }
 
-    public Integer bonusNumber(){
+    public Integer bonusNumber() {
         return this.bonusNumber;
     }
 

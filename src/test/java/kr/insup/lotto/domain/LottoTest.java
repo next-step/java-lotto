@@ -98,7 +98,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {
             0, 46, 100, 1000, -30
-            })
+    })
     void 보너스_번호_validation(int input) {
         //given
         List<Integer> dummy = Arrays.asList(1, 2, 3, 4, 5, 6);
