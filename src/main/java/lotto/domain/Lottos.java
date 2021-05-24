@@ -23,10 +23,6 @@ public class Lottos {
 		return this.lottos;
 	}
 
-	public void add(Lotto lotto) {
-		this.lottos.add(lotto);
-	}
-
 	public int size() {
 		return this.lottos.size();
 	}
