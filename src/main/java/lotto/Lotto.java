@@ -8,13 +8,16 @@ public final class Lotto {
 
     public Lotto(Number... numbers) {
         lottoNumbers.addAll(Arrays.asList(numbers));
-        checkLottoSize();
-        checkLottoDuplicateNumbers();
+        checkValid();
     }
 
     public Lotto() {
         LottoGenerator automatic = new AutomaticLottoGenerator();
         lottoNumbers.addAll(automatic.numberGenerator());
+        checkValid();
+    }
+
+    private void checkValid(){
         checkLottoSize();
         checkLottoDuplicateNumbers();
     }
@@ -34,6 +37,14 @@ public final class Lotto {
 
     public int size() {
         return lottoNumbers.size();
+    }
+
+    public Number get(int index) {
+        return lottoNumbers.get(index);
+    }
+
+    public boolean contains(Number number){
+        return lottoNumbers.contains(number);
     }
 
     @Override

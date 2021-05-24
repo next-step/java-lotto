@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class LottoList {
@@ -13,8 +14,16 @@ public final class LottoList {
         }
     }
 
+    public LottoList(Lotto... lottoArrays) {
+        lottoList.addAll(Arrays.asList(lottoArrays));
+    }
+
     public int size(){
         return lottoList.size();
+    }
+
+    public Lotto get(int index){
+        return lottoList.get(index);
     }
 
     @Override

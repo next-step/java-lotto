@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public final class LottoStore {
 
-    private final BigDecimal lottoPrice = new BigDecimal("1000");
+    private final BigDecimal lottoPrice = LottoPrice.PRICE;
 
     public BigDecimal price() {
         return lottoPrice;
