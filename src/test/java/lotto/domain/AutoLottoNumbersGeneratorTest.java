@@ -14,8 +14,8 @@ public class AutoLottoNumbersGeneratorTest {
     @ValueSource(ints = {1, 2, 3})
     @DisplayName("구입 개수 만큼 로또 티켓을 발급한다")
     void ticketBuyTest(int count) {
-        LottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator(count, new RandomNumbersGenerator());
-        List<LottoNumbers> lottoTickets = lottoNumbersGenerator.generate();
+        AutoLottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator(new RandomLottoNumbersGenerator());
+        List<LottoNumbers> lottoTickets = lottoNumbersGenerator.generate(count);
         assertThat(lottoTickets.size()).isEqualTo(count);
     }
 }

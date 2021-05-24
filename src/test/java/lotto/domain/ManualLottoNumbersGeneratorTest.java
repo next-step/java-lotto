@@ -29,9 +29,9 @@ public class ManualLottoNumbersGeneratorTest {
     @DisplayName("수동으로 입력한 로또 번호를 발급한다")
     void createManualLottoNumbersTest() {
         int manualLottoCount = 2;
-        LottoNumbersGenerator lottoNumbersGenerator = new ManualLottoNumbersGenerator(manualLottoCount, numbers);
+        ManualLottoNumbersGenerator lottoNumbersGenerator = new ManualLottoNumbersGenerator();
 
-        List<LottoNumbers> manualLottoNumbers = lottoNumbersGenerator.generate();
+        List<LottoNumbers> manualLottoNumbers = lottoNumbersGenerator.generate(manualLottoCount, numbers);
         assertThat(manualLottoNumbers).hasSize(manualLottoCount);
         assertThat(manualLottoNumbers).containsExactly(LottoNumbers.of("1,2,3,4,5,6"), LottoNumbers.of("2,3,4,5,6,7"));
     }
@@ -42,7 +42,9 @@ public class ManualLottoNumbersGeneratorTest {
     @DisplayName("수동 구매 개수와 수동 번호 개수가 다른 경우 예외가 발생한다")
     void manualCountMatchTest(List<String> numbers) {
         int manualLottoCount = 3;
-        assertThatThrownBy(() -> new ManualLottoNumbersGenerator(manualLottoCount, numbers))
+        ManualLottoNumbersGenerator lottoNumbersGenerator = new ManualLottoNumbersGenerator();
+
+        assertThatThrownBy(() -> lottoNumbersGenerator.generate(manualLottoCount, numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

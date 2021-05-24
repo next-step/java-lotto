@@ -1,25 +1,18 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class AutoLottoNumbersGenerator implements LottoNumbersGenerator{
+public class AutoLottoNumbersGenerator {
 
     private final NumbersGenerator lottoNumbersGenerator;
-    private final int autoCount;
 
-    public AutoLottoNumbersGenerator(int autoCount, NumbersGenerator lottoNumbersGenerator) {
-        this.autoCount = autoCount;
+    public AutoLottoNumbersGenerator(NumbersGenerator lottoNumbersGenerator) {
         this.lottoNumbersGenerator = lottoNumbersGenerator;
 
     }
 
-    public List<LottoNumbers> generate() {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < autoCount; i++) {
-            lottoNumbersList.add(LottoNumbers.of(lottoNumbersGenerator.generate()));
-        }
-        return lottoNumbersList;
+    public List<LottoNumbers> generate(int count) {
+        return lottoNumbersGenerator.generate(count);
     }
 }
