@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +13,6 @@ public class SplitUtil {
     private static final String ERROR_INVALID_NUMBER_OF_CUSTOM_DELIMITER = "한 개의 커스텀 구분자만 입력해주세요.";
 
     public static String[] splitByDelimiter(String input) {
-        List<Operand> operands = new ArrayList<>();
         return splitAccordingly(input);
     }
 

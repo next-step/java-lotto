@@ -23,7 +23,7 @@ public class Operands {
         int total = 0;
 
         for (Operand operand : operands) {
-            total = operand.sumToTotal(total);
+            total = operand.sumTo(total);
         }
 
         return total;
