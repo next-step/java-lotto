@@ -1,9 +1,8 @@
 package lottoAuto.view;
 
-import lottoAuto.service.Lotto;
-import lottoAuto.service.LottoAutoInputService;
+import lottoAuto.model.Lotto;
+import lottoAuto.model.LottoAutoInputService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoAutoInputView {
@@ -13,7 +12,7 @@ public class LottoAutoInputView {
     public int inputPrice() {
         int price = scanner.nextInt();
 
-        int amount = lottoAutoInputService.inputPrice(price);
+        int amount = lottoAutoInputService.getAmount(price);
         return amount;
     }
 
