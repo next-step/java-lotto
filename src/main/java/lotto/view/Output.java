@@ -26,7 +26,7 @@ public class Output {
     }
 
     public static void printPurchasableMessage(Integer purchased) {
-        System.out.println(String.format(PURCHASABLE_MESSAGE,purchased));
+        System.out.println(String.format(PURCHASABLE_MESSAGE, purchased));
     }
 
     public static void printLottoNumbers(Set<LottoNumber> lottoNumbers) {

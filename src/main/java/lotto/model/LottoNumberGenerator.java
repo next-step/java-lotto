@@ -15,6 +15,7 @@ public class LottoNumberGenerator {
         }
         return lotto;
     }
+
     private static Integer makeRandomNumber() {
         return (int) (Math.random() * CANDIDATE_LOTTO_NUMBER_SIZE) + 1;
     }

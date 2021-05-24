@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WordTest {
     private static final String CUSTOM_EXPRESSION = "//;/n11;2;3";
@@ -79,6 +81,6 @@ public class WordTest {
     @ValueSource(strings = {""})
     @NullSource
     void emptyOrNullTest(final String text) {
-        assertThat(word.isEmptyOrNull(text)).isTrue();
+        assertThrows(IllegalArgumentException.class,()->word.isEmptyOrNull(text));
     }
 }

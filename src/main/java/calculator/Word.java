@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Word {
     private static final String SEPARATOR = "[,:]";
@@ -13,13 +14,16 @@ public class Word {
     private static final int FIRST_INDEX = 0;
     private static final int CUSTOM_LETTER_INDEX = 2;
     private static final String NEGATIVE_NUMBER_MESSAGE = "음수가 입력 되었습니다.";
+    private static final Pattern ONLY_NUMBER_REGEX_PATTERN = Pattern.compile(ONLY_NUMBER_REGEX);
 
     public List<Integer> makeNumbersInGeneralExpression(String expression) {
         List<String> stringExpressions = Arrays.asList(expression.split(SEPARATOR));
         List<Integer> numbers = new ArrayList<>();
+
         for (String expressions : stringExpressions) {
             numbers.add(Integer.parseInt(expressions));
         }
+
         return numbers;
     }
 
@@ -27,34 +31,38 @@ public class Word {
         customExpressions = customExpressions.replaceAll(NOT_NUMBER_REGEX, " ");
         List<String> stringExpressions = Arrays.asList(customExpressions.trim().split(" "));
         List<Integer> numbers = new ArrayList<>();
+
         for (String expressions : stringExpressions) {
             numbers.add(Integer.parseInt(expressions));
         }
+
+        validation(numbers);
+
         return numbers;
     }
 
     public boolean isCustomInput(String expression) {
         String[] inputs = expression.split("");
-        if (inputs[FIRST_INDEX].matches(ONLY_NUMBER_REGEX)) {
-            return false;
-        }
-        return true;
+        isEmptyOrNull(expression);
+
+        return !(ONLY_NUMBER_REGEX_PATTERN.matcher(inputs[FIRST_INDEX]).matches());
     }
 
     public String findCustomSeparator(String customExpression) {
-        return Arrays.asList(customExpression.split("")).get(CUSTOM_LETTER_INDEX);
+        isEmptyOrNull(customExpression);
+
+        return customExpression.split("")[CUSTOM_LETTER_INDEX];
     }
 
     public void validation(List<Integer> numbers) {
         if (Collections.min(numbers) < POSITIVE_NUMBER) {
-            throw new RuntimeException(NEGATIVE_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE);
         }
     }
 
-    public boolean isEmptyOrNull(String text) {
+    public void isEmptyOrNull(String text) {
         if (text == null || text.isEmpty()) {
-            return true;
+            throw new IllegalArgumentException("입력이 NULL 이거나 없습니다.");
         }
-        return false;
     }
 }
