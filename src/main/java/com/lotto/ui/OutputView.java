@@ -6,7 +6,7 @@ import com.lotto.domain.LottoStatistics;
 
 import java.util.List;
 
-import static com.lotto.domain.LottoReward.NOTHING;
+import static com.lotto.domain.LottoReward.MISS;
 import static com.lotto.ui.Message.*;
 
 public class OutputView {
@@ -43,7 +43,7 @@ public class OutputView {
     }
 
     private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward) {
-        if (reward != NOTHING) {
+        if (reward != MISS) {
             out(String.format(WINNING_STATISTICS_DETAIL.message(),
                     reward.toString(), reward.reward(), lottoStatistics.get(reward)));
         }

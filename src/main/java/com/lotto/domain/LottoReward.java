@@ -1,23 +1,23 @@
 package com.lotto.domain;
 
 public enum LottoReward {
-    THREE(5000) {
+    FIRST(2_000_000_000) {
         @Override
-        public int totalReward(int count) { return count * THREE.reward(); }
+        public int totalReward(int count) { return count * FIRST.reward(); }
     },
-    FOUR(50000) {
+    SECOND(1_500_000) {
         @Override
-        public int totalReward(int count) { return count * FOUR.reward(); }
+        public int totalReward(int count) { return count * SECOND.reward(); }
     },
-    FIVE(1500000) {
+    THIRD(50_000) {
         @Override
-        public int totalReward(int count) { return count * FIVE.reward(); }
+        public int totalReward(int count) { return count * THIRD.reward(); }
     },
-    SIX(2000000000) {
+    FOURTH(5_000) {
         @Override
-        public int totalReward(int count) { return count * SIX.reward(); }
+        public int totalReward(int count) { return count * FOURTH.reward(); }
     },
-    NOTHING(0) {
+    MISS(0) {
         @Override
         public int totalReward(int count) { return 0; }
     };
@@ -36,26 +36,26 @@ public enum LottoReward {
 
     public static LottoReward generateReward(int sameCount) {
         if (sameCount == 3) {
-            return THREE;
+            return FOURTH;
         } else if (sameCount == 4) {
-            return FOUR;
+            return THIRD;
         } else if (sameCount == 5) {
-            return FIVE;
+            return SECOND;
         } else if (sameCount == 6) {
-            return SIX;
+            return FIRST;
         }
-        return NOTHING;
+        return MISS;
     }
 
     @Override
     public String toString() {
-        if (this == THREE) {
+        if (this == FOURTH) {
             return "3";
-        } else if (this == FOUR) {
+        } else if (this == THIRD) {
             return "4";
-        } else if (this == FIVE) {
+        } else if (this == SECOND) {
             return "5";
-        } else if (this == SIX) {
+        } else if (this == FIRST) {
             return "6";
         }
 

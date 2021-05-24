@@ -73,7 +73,7 @@ public class LottoWinningNumbersTest {
 
         LottoReward reward = lottoWinningNumbers.reward(lotto);
 
-        assertThat(reward).isEqualTo(LottoReward.SIX);
+        assertThat(reward).isEqualTo(LottoReward.FIRST);
     }
 
     @DisplayName("로또 보상금 확인 담청실패")
@@ -90,6 +90,6 @@ public class LottoWinningNumbersTest {
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.createLottoWinningNumbers("7,8,9,10,11,12");
         LottoReward reward = lottoWinningNumbers.reward(lotto);
 
-        Assertions.assertThat(reward).isEqualTo(LottoReward.NOTHING);
+        Assertions.assertThat(reward).isEqualTo(LottoReward.MISS);
     }
 }
