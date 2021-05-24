@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import static java.lang.String.format;
 
-public class PositiveNumber {
+public class PositiveNumber implements Comparable<PositiveNumber> {
     private static final long MINIMUM_AMOUNT = 0;
 
     public static final PositiveNumber ZERO = new PositiveNumber(0);
@@ -22,19 +22,25 @@ public class PositiveNumber {
     }
 
     public PositiveNumber divide(PositiveNumber target) {
-        return new PositiveNumber(value / target.value);
+        return new PositiveNumber(value / target.toInt());
     }
 
     public PositiveNumber multiple(PositiveNumber target) {
-        return new PositiveNumber(value * target.getValue());
+        return new PositiveNumber(value * target.toLong());
     }
 
     public PositiveNumber plus(PositiveNumber target) {
-        return new PositiveNumber(value + target.getValue());
+        return new PositiveNumber(value + target.toLong());
     }
 
-    public long getValue() {
+    public PositiveNumber minus(PositiveNumber target) { return new PositiveNumber( value - target.toInt()); }
+
+    public long toLong() {
         return value;
+    }
+
+    public int toInt() {
+        return (int) value;
     }
 
     private void validate(long value) {
@@ -54,5 +60,10 @@ public class PositiveNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(PositiveNumber o) {
+        return Long.compare(toLong(), o.toLong());
     }
 }

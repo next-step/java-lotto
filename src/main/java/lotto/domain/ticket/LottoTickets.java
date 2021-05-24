@@ -21,7 +21,7 @@ public class LottoTickets {
             PositiveNumber sizeOfTickets) {
         final int LOOP_BEGIN_INDEX = 0;
 
-        return new LottoTickets(LongStream.range(LOOP_BEGIN_INDEX, sizeOfTickets.getValue())
+        return new LottoTickets(LongStream.range(LOOP_BEGIN_INDEX, sizeOfTickets.toLong())
                 .mapToObj(i -> new LottoTicket(lottoNumberGenerator.generate()))
                 .collect(Collectors.toList()));
     }
