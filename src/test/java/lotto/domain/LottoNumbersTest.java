@@ -108,4 +108,23 @@ class LottoNumbersTest {
         // then
         assertThat(lottoNumbers.matchCount(targetNumbers)).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("숫자 포함 테스트")
+    void contains() {
+        // given
+        Set<LottoNumber> lottoNumberList = Stream.of(8, 21, 23, 41, 43, 42).map(LottoNumber::of).collect(Collectors.toSet());
+
+        // when
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        // then
+        assertThat(lottoNumbers.contains(LottoNumber.of(8))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(21))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(23))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(41))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(43))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(42))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.of(33))).isFalse();
+    }
 }
