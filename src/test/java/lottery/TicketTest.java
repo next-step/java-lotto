@@ -16,14 +16,15 @@ class TicketTest {
 
 	@Test
 	void create() {
-		List<Integer> numbers = Lists.list(1, 2, 3, 4, 5, 6);
+		Numbers numbers = Numbers.from(Lists.list(1, 2, 3, 4, 5, 6));
 
 		sut = Ticket.of(numbers);
 
-		assertThat(sut.numbers()).hasSize(6);
-		assertThat(sut.numbers()).containsAll(numbers);
+		List<Integer> values = sut.numbers().getValues();
+		assertThat(values).hasSize(6);
+		assertThat(values).containsAll(numbers.getValues());
 
-		assertThatThrownBy(() -> Ticket.of(new ArrayList<>()))
+		assertThatThrownBy(() -> Ticket.of(Numbers.from(new ArrayList<>())))
 			.isInstanceOf(InvalidTicketSizeException.class);
 	}
 }

@@ -1,30 +1,23 @@
 package lottery;
 
-import java.util.List;
-
-import lottery.exceptions.InvalidTicketSizeException;
-
 public final class Ticket {
 
 	public final static int SIZE_OF_TICKET = 6;
-	private List<Integer> numbers;
+	private Numbers numbers;
 
-	public static Ticket of(List<Integer> numbers) {
+	public static Ticket of(Numbers numbers) {
 		return new Ticket(numbers);
 	}
 
-	private Ticket(List<Integer> numbers) {
+	private Ticket(Numbers numbers) {
 		setNumbers(numbers);
 	}
 
-	private void setNumbers(List<Integer> numbers) {
-		if (numbers.size() != SIZE_OF_TICKET) {
-			throw new InvalidTicketSizeException();
-		}
+	private void setNumbers(Numbers numbers) {
 		this.numbers = numbers;
 	}
 
-	public List<Integer> numbers() {
+	public Numbers numbers() {
 		return numbers;
 	}
 }

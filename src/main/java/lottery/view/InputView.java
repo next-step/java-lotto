@@ -16,9 +16,11 @@ public class InputView {
 	}
 
 	public void printTickets(Tickets tickets) {
-		tickets.getTicketList().forEach(ticket -> {
-			List<Integer> numbers = ticket.numbers();
-			System.out.println("[" + numbers.stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
+		tickets.getValues().forEach(ticket -> {
+			List<Integer> numbers = ticket.numbers().getValues();
+			System.out.println("[" + numbers.stream()
+				.map(String::valueOf)
+				.collect(Collectors.joining(", ")) + "]");
 		});
 	}
 

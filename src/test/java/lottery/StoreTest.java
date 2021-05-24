@@ -25,7 +25,7 @@ class StoreTest {
 	void 티켓을_판매한다() {
 		Tickets tickets = sut.getTicket(buyer);
 
-		assertThat(tickets.getTicketList()).isNotEmpty();
-		assertThat(tickets.getTicketList()).hasSize(10);
+		assertThat(tickets.getValues()).isNotEmpty();
+		assertThat(tickets.getValues()).hasSize(10);
 	}
 }

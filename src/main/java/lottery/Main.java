@@ -36,10 +36,10 @@ public class Main {
 		inputView.printTickets(tickets);
 
 		inputView.askForLastWeekTickets();
-		List<Integer> numbers = Arrays.stream(sc.nextLine().split(","))
+		List<Integer> ints = Arrays.stream(sc.nextLine().split(","))
 			.map(a -> Integer.parseInt(a.trim()))
 			.collect(Collectors.toList());
-		infoCenter.setLastWeekWinningTicket(Ticket.of(numbers));
+		infoCenter.setLastWeekWinningTicket(Ticket.of(Numbers.from(ints)));
 
 		Result result = buyer.checkTicket(infoCenter);
 		float totalYield = result.getTotalYield(initialMoney);
