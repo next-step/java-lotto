@@ -7,6 +7,7 @@ import lotto.domain.ticket.LottoTickets;
 
 public class Game {
     private static final PositiveNumber TICKET_PRICE = new PositiveNumber(1000);
+    private final static LottoNumberGenerator DEFAULT_LOTTO_GENERATOR = new LottoNumberRandomGenerator();
 
     private final LottoTickets autoLottoTickets;
     private final LottoTickets manualLottoTickets;
@@ -19,7 +20,7 @@ public class Game {
     }
 
     public static Game createByMoney(PositiveNumber money) {
-        return createByMoneyAndGenerator(money, new LottoNumberRandomGenerator());
+        return createByMoneyAndGenerator(money, DEFAULT_LOTTO_GENERATOR);
     }
 
     public static Game createWithManualTicketByMoney(LottoTickets manualLottoTickets, PositiveNumber money) {
@@ -33,7 +34,7 @@ public class Game {
         PositiveNumber countOfAutoTicket = countOfTicket.minus(countOfManualTicket);
 
         return new Game(
-                LottoTickets.createByGenerator(new LottoNumberRandomGenerator(), countOfAutoTicket),
+                LottoTickets.createByGenerator(DEFAULT_LOTTO_GENERATOR, countOfAutoTicket),
                 manualLottoTickets);
     }
 
