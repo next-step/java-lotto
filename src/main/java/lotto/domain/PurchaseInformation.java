@@ -28,10 +28,6 @@ public class PurchaseInformation {
         return this.manualCount;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     private void validatePrice(int price) {
         if (price < MINIMUM_PRICE) {
             throw new IllegalArgumentException(TICKET_PRICE_ERROR_MESSAGE);
@@ -42,5 +38,9 @@ public class PurchaseInformation {
         if (manualCount > totalCount()) {
             throw new IllegalArgumentException(NOT_VALID_COUNT_ERROR_MESSAGE);
         }
+    }
+
+    public String resultMessage(LottoResult lottoResult) {
+        return lottoResult.resultMessage(price);
     }
 }

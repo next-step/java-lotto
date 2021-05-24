@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
 import lotto.domain.PurchaseInformation;
 
 import java.util.List;
@@ -22,10 +21,10 @@ public class PrintView {
         System.out.println();
     }
 
-    public void printResult(LottoResult lottoResult, int price) {
+    public void printResult(String result) {
         System.out.println();
         System.out.println(RESULT_TITLE_MESSAGE);
         System.out.println(DELIMITER_LINE);
-        System.out.print(lottoResult.resultMessage(price));
+        System.out.println(result);
     }
 }
