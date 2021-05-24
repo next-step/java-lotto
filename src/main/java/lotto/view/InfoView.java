@@ -21,11 +21,11 @@ public class InfoView {
     }
 
     public void countOfTicket() {
-        System.out.println(format("%d개를 구매했습니다.", game.getLottoTickets().size()));
+        System.out.println(format("%d개를 구매했습니다.", game.sizeOfAutoLottoTickets()));
     }
 
     public void ticketNumbers() {
-        LottoTickets lottoTickets = game.getLottoTickets();
+        LottoTickets lottoTickets = game.getAllLottoTickets();
 
         for (LottoTicket ticket : lottoTickets.getTickets()) {
             printNumbers(ticket.getLottoNumbers());
