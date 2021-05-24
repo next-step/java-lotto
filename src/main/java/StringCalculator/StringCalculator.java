@@ -15,16 +15,16 @@ public class StringCalculator {
         return !text.matches(".*[0-9]*");
     }
 
-    public boolean isNegative(final String text) {
-        return text.contains("-");
+    public String notNegative(final String text) {
+        if (Integer.parseInt(text) < 0) {
+            throw new AdderException("음수는 불가능합니다");
+        }
+        return text;
     }
 
     public String isEmptyText(final String text) {
         if (text == null || text.length() == 0) {
             return "0";
-        }
-        if (isNegative(text)) {
-           throw new AdderException("음수는 불가능합니다");
         }
         return text;
     }
@@ -35,7 +35,7 @@ public class StringCalculator {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        if(notNumber(text)){
+        if (notNumber(text)) {
             throw new AdderException("숫자가 아닙니다");
         }
         return text.split("[,:]");

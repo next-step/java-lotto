@@ -1,10 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class WinningCheck {
 
 //    public int winner(List<List> lottoNumbers, List<Integer> winningNumber) {

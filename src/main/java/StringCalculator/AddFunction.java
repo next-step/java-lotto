@@ -3,9 +3,9 @@ package StringCalculator;
 import java.util.List;
 
 public class AddFunction {
-    StringCalculator stringCalculator= new StringCalculator();
+    StringCalculator stringCalculator = new StringCalculator();
 
-    public int add( String text) {
+    public int add(String text) {
         String newText = stringCalculator.isEmptyText(text);
         List<String> splitText = stringCalculator.splitText(newText);
         int result = 0;

@@ -13,7 +13,6 @@ public class Lotto {
     private List<Integer> lottoNumberList;
     private final List<Integer> lottoNumbers = new ArrayList<>();
     private final List<Integer> lastWeek = new ArrayList<>();
-    private final List<Rank> lottoResults = new ArrayList<>();
 
     public List<Integer> createLottoNumbers() {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
@@ -55,11 +54,4 @@ public class Lotto {
         }
 
     }
-
-//    public void compareNumber(){
-//        for(List<Integer> lotto : lottos){
-//            System.out.println(lotto.contains(lastWeek));
-//        }
-//    }
-
 }
