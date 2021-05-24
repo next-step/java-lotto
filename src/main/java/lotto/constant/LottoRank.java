@@ -33,6 +33,6 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch) {
-        return lottoRanks.get(countOfMatch);
+        return lottoRanks.getOrDefault(countOfMatch, LottoRank.OUT_OF_RANK);
     }
 }
