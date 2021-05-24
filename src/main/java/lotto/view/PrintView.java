@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchaseInformation;
 
 import java.util.List;
 
@@ -11,16 +12,12 @@ public class PrintView {
     public static final String RESULT_TITLE_MESSAGE = "당첨 통계";
     public static final String DELIMITER_LINE = "---------";
 
-    public void printLottoNumbers(List<LottoNumbers> manualLottoNumbers, List<LottoNumbers> autoLottoNumbers) {
+    public void printLottoNumbers(List<LottoNumbers> lottoNumbers, PurchaseInformation purchaseInfo) {
         System.out.println();
-        System.out.printf(BUY_RESULT_MESSAGE, manualLottoNumbers.size(), autoLottoNumbers.size());
+        System.out.printf(BUY_RESULT_MESSAGE, purchaseInfo.manualCount(), purchaseInfo.autoCount());
 
-        for (LottoNumbers autoLottoNumber : autoLottoNumbers) {
-            System.out.println(autoLottoNumber);
-        }
-
-        for (LottoNumbers manualLottoNumber : manualLottoNumbers) {
-            System.out.println(manualLottoNumber);
+        for (LottoNumbers numbers : lottoNumbers) {
+            System.out.println(numbers);
         }
         System.out.println();
     }
