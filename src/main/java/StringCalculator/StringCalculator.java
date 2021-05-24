@@ -7,32 +7,16 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private List<String> splitText(final String text) {
+    public List<String> splitText(final String text) {
         return Arrays.asList(customSpliter(text));
     }
-
-    public int add(final String text) {
-        String newText = isEmptyText(text);
-        List<String> splitText = splitText(newText);
-        int result = 0;
-
-        for (String number : splitText) {
-            result += Integer.parseInt(number);
-        }
-
-        return result;
-    }
-
 
     public boolean notNumber(final String text) {
         return !text.matches(".*[0-9]*");
     }
 
     public boolean isNegative(final String text) {
-        if (text.contains("-")) {
-            return true;
-        }
-        return false;
+        return text.contains("-");
     }
 
     public String isEmptyText(final String text) {
@@ -40,7 +24,7 @@ public class StringCalculator {
             return "0";
         }
         if (isNegative(text)) {
-            throw new RuntimeException("음수는 불가능합니다");
+           throw new AdderException("음수는 불가능합니다");
         }
         return text;
     }
@@ -49,12 +33,11 @@ public class StringCalculator {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
-            return tokens;
+            return m.group(2).split(customDelimiter);
         }
         if(notNumber(text)){
-            throw new RuntimeException("숫자가 아닙니다");
+            throw new AdderException("숫자가 아닙니다");
         }
-        return text.split(",|:");
+        return text.split("[,:]");
     }
 }
