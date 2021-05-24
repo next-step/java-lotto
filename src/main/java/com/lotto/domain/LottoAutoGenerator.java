@@ -11,7 +11,7 @@ public class LottoAutoGenerator {
 
     static {
         for (int i = LottoNumber.LOTTO_START_NUMBER; i <= LottoNumber.LOTTO_END_NUMBER; i++) {
-            range.add(new LottoNumber(i));
+            range.add(LottoNumber.valueOf(i));
         }
     }
 

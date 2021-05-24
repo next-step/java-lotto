@@ -15,7 +15,12 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    private void validate(int number) {
+    public static LottoNumber valueOf(int number) {
+        validate(number);
+        return LottoNumberCache.cache[number - 1];
+    }
+
+    private static void validate(int number) {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new LottoNumberOutOfBoundsException(number);
         }
@@ -46,5 +51,18 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    private static class LottoNumberCache {
+        static final LottoNumber[] cache = new LottoNumber[45];
+
+        static {
+            for (int i = LOTTO_START_NUMBER - 1; i < LOTTO_END_NUMBER; i++) {
+                cache[i] = new LottoNumber(i + 1);
+            }
+        }
+
+        private LottoNumberCache() {
+        }
     }
 }
