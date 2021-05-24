@@ -33,6 +33,25 @@ public class CalculatorTest {
     }
 
     @Test
+    @DisplayName("입력 값이 공백인 경우 0을 리턴한다.")
+    void EmptyNullInput_test() {
+        //when
+        Calculator calculator = new Calculator("");
+
+        assertThat(calculator.sumOperands()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("입력 값이 공백인 경우 0을 리턴한다.")
+    void NullInput_test() {
+        //when
+        Calculator calculator = new Calculator(null);
+
+        assertThat(calculator.sumOperands()).isEqualTo(0);
+    }
+
+
+    @Test
     @DisplayName("앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.")
     void sumByCustomDelimiter_test() {
         //given
