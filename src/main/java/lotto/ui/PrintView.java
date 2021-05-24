@@ -5,8 +5,6 @@ import lotto.domain.LottoList;
 import lotto.domain.LottoReport;
 import lotto.domain.Rank;
 
-import java.util.List;
-
 public class PrintView {
     private static final String ASK_PURCHASE_AMOUNT = "구매금액을 입력해 주세요.\n";
     private static final String SHOW_PURCHASED_LOTTO_AMOUNT = "%d개를 구매했습니다.\n";
@@ -37,9 +35,9 @@ public class PrintView {
     }
 
     static String formatLotto(Lotto lotto) {
-        String lottoCsv = String.valueOf(lotto.numbers.get(0));
-        for (int i = 1; i < lotto.numbers.size(); i++) {
-            lottoCsv += "," + lotto.numbers.get(i);
+        String lottoCsv = String.valueOf(lotto.get(0));
+        for (int i = 1; i < Lotto.SIZE; i++) {
+            lottoCsv += "," + lotto.get(i);
         }
         return String.format("[%s]\n", lottoCsv);
     }
@@ -64,7 +62,6 @@ public class PrintView {
 
     private static String formatLottoReport(LottoReport lottoReport) {
         StringBuilder builder = new StringBuilder();
-
         for (Rank rank : Rank.values()) {
             builder.append(formatWinningMetric(rank, lottoReport));
         }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -10,7 +11,7 @@ public class Lotto {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
-    public final List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -61,5 +62,17 @@ public class Lotto {
 
     public boolean matchBonus(int bonusBall) {
         return numbers.contains(bonusBall);
+    }
+
+    public int get(int index) {
+        return numbers.get(index);
+    }
+
+    public List<Integer> numbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public int size() {
+        return numbers.size();
     }
 }

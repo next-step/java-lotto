@@ -16,7 +16,7 @@ class WinningLottoTest {
         int bonusNumber = 45;
         WinningLotto winning = new WinningLotto(numbers, bonusNumber);
         assertAll(
-                () -> assertThat(winning.numbers).containsAll(numbers),
+                () -> assertThat(winning.numbers()).containsAll(numbers),
                 () -> assertThat(winning.bonusNumber).isEqualTo(bonusNumber)
         );
     }
