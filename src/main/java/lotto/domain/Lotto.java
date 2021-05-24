@@ -43,7 +43,8 @@ public class Lotto {
     }
 
     public boolean matchBonus(LottoNumber bonusBall) {
-        return false;
+        return lottoNumbers.stream()
+            .anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
     public List<LottoNumber> lottoNumbers() {
