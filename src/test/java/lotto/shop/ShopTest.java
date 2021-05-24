@@ -84,7 +84,7 @@ public class ShopTest {
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 33, 34, 34});
         lottoTicket.add(lotto);
         //when
-        LottoResult match = shop.matchAnswer(lottoTicket, winningNumber);
+        LottoResult match = shop.lottoResult(lottoTicket, winningNumber);
         //then
         assertThat(match.count(3)).isEqualTo(1);
     }

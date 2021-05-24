@@ -18,8 +18,8 @@ public class LottoGame {
         OutputView.printLottoTicket(lottoTicket);
         OutputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
-        LottoResult matchAnswer = shop.matchAnswer(lottoTicket, winningNumber);
+        LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber);
         OutputView.resultMessage();
-        OutputView.resultIncome(matchAnswer, money);
+        OutputView.resultIncome(lottoResult, money);
     }
 }

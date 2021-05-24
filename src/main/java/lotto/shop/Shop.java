@@ -22,7 +22,7 @@ public class Shop {
         return lottoTicket;
     }
 
-    public LottoResult matchAnswer(LottoTicket lottoTicket, WinningNumber winningNumber) {
+    public LottoResult lottoResult(LottoTicket lottoTicket, WinningNumber winningNumber) {
         return lottoTicket.matchWinningNumber(winningNumber);
     }
 

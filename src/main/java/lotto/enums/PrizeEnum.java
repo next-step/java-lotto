@@ -15,15 +15,16 @@ public enum PrizeEnum {
     FIRST(6, 2000000000);
 
     int countOfMatch;
+    int matchingCount;
     int prize;
 
-    PrizeEnum(int countOfMatch, int prize) {
-        this.countOfMatch = countOfMatch;
+    PrizeEnum(int matchingCount, int prize) {
+        this.matchingCount = matchingCount;
         this.prize = prize;
     }
 
-    public int answer() {
-        return countOfMatch;
+    public int matchingCount() {
+        return matchingCount;
     }
 
     public int prize() {
@@ -45,5 +46,7 @@ public enum PrizeEnum {
         }
 
         return prize;
+    public int income(LottoResult lottoResult) {
+        return prize * lottoResult.count(matchingCount);
     }
 }
