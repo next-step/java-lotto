@@ -1,6 +1,5 @@
 package study.step2.controller;
 
-import study.step2.domain.Lotto;
 import study.step2.domain.LottoNumber;
 import study.step2.domain.LottoPrice;
 import study.step2.domain.LottoResult;
@@ -17,7 +16,7 @@ public class LottoController {
     LottoPrice lottoPrice  = new LottoPrice(money);
     int lottoCount = lottoPrice.lottoCount() - manualLottosSize;
 
-    Lottos lottos = Lotto.makeLottos(lottoCount);
+    Lottos lottos = Lottos.makeLottos(lottoCount);
 
     ResultView.printLottoCount(manualLottosSize, lottos.getLottos().size());
 

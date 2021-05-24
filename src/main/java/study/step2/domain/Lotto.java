@@ -4,11 +4,9 @@ import static study.step2.Exception.CustomException.LOTTO_NUMBER_DUPLICATED_EXCE
 import static study.step2.validator.Validator.NUMBER_OF_LOTTO_NUMBER;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
@@ -46,15 +44,6 @@ public class Lotto {
     return (int) lottoNumbers.stream()
         .filter(winningLottoNumbers::contains)
         .count();
-  }
-
-  public static Lottos makeLottos(int lottoCount) {
-    List<Lotto> lottoList = IntStream.range(0, lottoCount)
-        .mapToObj(i -> LottoNumber.pick())
-        .map(Lotto::new)
-        .collect(Collectors.toList());
-
-    return new Lottos(lottoList);
   }
 
   public boolean isMatchBonus(LottoNumber bonusNumber) {
