@@ -17,6 +17,7 @@ public class ResultView {
         ResultScoreEnum.THREE.printResult(resultAll.getResult().get(ResultScoreEnum.THREE));
         ResultScoreEnum.FOUR.printResult(resultAll.getResult().get(ResultScoreEnum.FOUR));
         ResultScoreEnum.FIVE.printResult(resultAll.getResult().get(ResultScoreEnum.FIVE));
+        ResultScoreEnum.FIVE_BONUS.printResult(resultAll.getResult().get(ResultScoreEnum.FIVE_BONUS));
         ResultScoreEnum.SIX.printResult(resultAll.getResult().get(ResultScoreEnum.SIX));
 
         printYield(resultAll, inputPurchaseAmount);

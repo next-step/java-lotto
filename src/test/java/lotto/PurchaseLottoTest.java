@@ -21,11 +21,4 @@ public class PurchaseLottoTest {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
         assertThat(purchaseLotto.purchaseAvailableLotto(14).count()).isEqualTo(14);
     }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    public void lastWonLottoNumbers_지난당첨번호문자열파싱검증(int number) {
-        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6");
-        assertThat(lastWonLottoNumber.contains(number)).isTrue();
-    }
 }

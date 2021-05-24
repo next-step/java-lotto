@@ -23,7 +23,8 @@ public class PurchaseLotto {
         LottoNumberList lottoNumberList = purchaseAvailableLotto(lottoCount);
         resultView.printPurchasedLottos(lottoNumberList);
         inputView.inputLastWonLottoNumbers();
-        resultLottoGame(inputView.getInputLastWonLottoNumbers());
+        inputView.inputBonusLottoNumber();
+        resultLottoGame(inputView);
         resultView.printLottoGameResult(resultAll, inputView.getInputAmount());
     }
 
@@ -44,24 +45,23 @@ public class PurchaseLotto {
         return lottoNumber;
     }
 
-    public void resultLottoGame(String lastWonLottoNumbers) {
-        setLastWonLottoNumbers(lastWonLottoNumbers);
+    public void resultLottoGame(InputView inputView) {
+        setLastWonLottoNumbers(inputView);
         resultAll = new ResultAll();
         Lotto lottoCompare = new Lotto();
 
         WonCount wonCountForOneLotto;
         for (int i = 0; i < lottoNumberList.count(); i++) {
-            wonCountForOneLotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
-            updateResultLotto(wonCountForOneLotto.wonCount());
+            wonCountForOneLotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber);
+            updateResultLotto(wonCountForOneLotto);
         }
     }
 
-    private void updateResultLotto(int wonCountForOneLotto) {
+    private void updateResultLotto(WonCount wonCountForOneLotto) {
         resultAll.won(wonCountForOneLotto);
     }
 
-    private void setLastWonLottoNumbers(String lastWonLottoNumbers) {
-        this.lastWonLottoNumber = new LastWonLottoNumber(lastWonLottoNumbers);
-
+    private void setLastWonLottoNumbers(InputView inputView) {
+        this.lastWonLottoNumber = new LastWonLottoNumber(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
     }
 }
