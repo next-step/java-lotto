@@ -6,6 +6,7 @@ import java.util.List;
 
 import lotto.enums.ErrorMessage;
 import lotto.exceptions.TicketsOutOfBoundsException;
+import lotto.strategy.AutomaticStrategy;
 
 public class AutomaticTicketing {
 
@@ -20,8 +21,16 @@ public class AutomaticTicketing {
         this.strategy = strategy;
     }
 
+    private static List<Integer> numbers() {
+        List<Integer> digits = new ArrayList<>(MAX_VALUE);
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            digits.add(i);
+        }
+        return digits;
+    }
+
     public Ticket newTicket() {
-        shuffle(this.numbers);
+        Collections.shuffle(this.numbers);
         List<Integer> chosenNumbers = this.strategy.choose(this.numbers);
         return new Ticket(chosenNumbers);
     }
@@ -36,18 +45,6 @@ public class AutomaticTicketing {
             tickets.add(newTicket());
         }
         return tickets;
-    }
-
-    private static List<Integer> numbers() {
-        List<Integer> digits = new ArrayList<>(MAX_VALUE);
-        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-            digits.add(i);
-        }
-        return digits;
-    }
-
-    private void shuffle(List<Integer> digits) {
-        Collections.shuffle(digits);
     }
 
 }

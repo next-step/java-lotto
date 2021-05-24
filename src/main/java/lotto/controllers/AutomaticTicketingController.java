@@ -4,7 +4,7 @@ import java.util.List;
 
 import lotto.AutomaticTicketing;
 import lotto.Lotto;
-import lotto.SublistStrategy;
+import lotto.strategy.SublistStrategy;
 import lotto.Ticket;
 import lotto.enums.Message;
 import lotto.views.Display;

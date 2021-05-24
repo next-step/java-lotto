@@ -2,6 +2,9 @@ package lotto;
 
 import java.util.List;
 
+import lotto.tool.TicketGuard;
+import lotto.tool.TicketTokenizer;
+
 public class Ticket {
 
     private List<Integer> numbers;

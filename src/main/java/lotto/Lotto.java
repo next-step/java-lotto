@@ -6,6 +6,7 @@ import lotto.controllers.EndController;
 import lotto.controllers.PurchaseController;
 import lotto.controllers.ResultController;
 import lotto.controllers.WinningTicketController;
+import lotto.views.Display;
 
 public class Lotto {
 
@@ -28,7 +29,11 @@ public class Lotto {
     }
 
     public void run() {
-        controller.run();
+        try {
+            controller.run();
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+        }
     }
 
     public boolean isRunning() {

@@ -16,22 +16,11 @@ public class WinningTicketController implements Controller {
 
     @Override
     public void run() {
-        show();
-
-        try {
-            action();
-            toResultController();
-        } catch (Exception e) {
-            Display.error(e.getMessage());
-        }
-    }
-
-    private void show() {
         Display.show(Message.WINNING_TICKET);
-    }
 
-    private void action() {
         saveWinningTicket(Keyboard.read());
+
+        toResultController();
     }
 
     protected void saveWinningTicket(String numbers) {
