@@ -46,11 +46,10 @@ public class Lotto {
 	}
 
 	public int matchCount(Lotto winningLotto) {
-		int matchCount = lottoNumbers.stream()
+		return lottoNumbers.stream()
 				.filter(winningLotto::contains)
 				.mapToInt(x -> 1)
 				.sum();
-		return matchCount;
 	}
 
 	public Rank findRank(Lotto winningLotto) {
