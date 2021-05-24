@@ -1,11 +1,12 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StringNumbers {
 
-    private List<StringNumber> numbers;
+    private final List<StringNumber> numbers;
 
     public StringNumbers(final String[] input) {
         numbers = new ArrayList<>();
@@ -23,7 +24,6 @@ public class StringNumbers {
     }
 
     public List<StringNumber> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
-
 }

@@ -2,7 +2,7 @@ package calculator;
 
 public final class StringNumber {
 
-    private Integer value;
+    private int value;
 
     public StringNumber(final String input) {
         if (input == null || input.isEmpty()) {
@@ -15,11 +15,11 @@ public final class StringNumber {
     private void validateInput(String input) {
         value = Integer.parseInt(input);
         if (value < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
         }
     }
 
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
 

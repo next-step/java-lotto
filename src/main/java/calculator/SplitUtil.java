@@ -3,10 +3,13 @@ package calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SplitUtil {
+public final class SplitUtil {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String DEFAULT_DELIMITER = "[,:]";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.*)\n(.*)");
+
+    private SplitUtil() {
+    }
 
     public static String[] splitByDelimiter(String text) {
         Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
