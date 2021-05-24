@@ -3,6 +3,7 @@ package lottotest;
 import lotto.WinningPrice;
 import lotto.WinningResult;
 import lotto.controller.LottoAutoController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoAutoTest {
+    LottoAutoController controller ;
+
+    @BeforeEach
+    void setUp() {
+        controller = new LottoAutoController();
+    }
+
     @DisplayName(value = "당첨번호를 입력하면 정수들로 나타내준다.")
     @Test
     void convert_WinningNumbers_to_Integers() {
-        LottoAutoController controller = new LottoAutoController();
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             winningNumbers.add(i + 1);
