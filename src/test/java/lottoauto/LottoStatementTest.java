@@ -37,10 +37,21 @@ public class LottoStatementTest {
     @Test
     void calcProceeds() {
         lottoStatement.judge(new HitCount(2), false);
-        lottoStatement.judge(new HitCount(3), false);
-        lottoStatement.judge(new HitCount(4), false);
-        lottoStatement.judge(new HitCount(5), false);
+        assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(0));
 
+        lottoStatement.judge(new HitCount(3), false);
+        assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(5000));
+
+        lottoStatement.judge(new HitCount(3), true);
+        assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(5000));
+
+        lottoStatement.judge(new HitCount(4), false);
+        assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(5000+50000));
+
+        lottoStatement.judge(new HitCount(5), false);
         assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(5000+50000+1500000));
+
+        lottoStatement.judge(new HitCount(5), true);
+        assertThat(lottoStatement.calcProceeds()).isEqualTo(new Money(5000+50000+1500000+30_000_000));
     }
 }
