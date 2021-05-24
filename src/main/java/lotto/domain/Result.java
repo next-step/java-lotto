@@ -2,17 +2,20 @@ package lotto.domain;
 
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
+import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public final class Result {
 
     private final Lotto winningLotto;
     private BigDecimal winnings = BigDecimal.ZERO;
     private BigDecimal profitRate = BigDecimal.ZERO;
+    private final Rank rank = new Rank();
 
-    public Result(Number... numbers) {
-        winningLotto = new Lotto(numbers);
+    public Result(Lotto lotto) {
+        winningLotto = lotto;
     }
 
     public void confirm(LottoList lottoList) {
@@ -30,27 +33,40 @@ public final class Result {
         checkRank(count);
     }
 
-    private void checkRank(int count){
-        if(count == 3)
+    private void checkRank(int count) {
+        if (count == 3) {
+            rank.addFourth();
             winnings = winnings.add(LottoWinnings.FOURTH);
-        if(count == 4)
+        }
+        if (count == 4) {
+            rank.addThird();
             winnings = winnings.add(LottoWinnings.THIRD);
-        if(count == 5)
+        }
+        if (count == 5) {
+            rank.addSecond();
             winnings = winnings.add(LottoWinnings.SECOND);
-        if(count == 6)
+        }
+        if (count == 6) {
+            rank.addFirst();
             winnings = winnings.add(LottoWinnings.FIRST);
+        }
+
     }
 
     public BigDecimal winnings() {
         return winnings;
     }
 
-    private void calculateProfitRate(int purchasesCount){
+    private void calculateProfitRate(int purchasesCount) {
         BigDecimal totalPurchaseAmount = LottoPrice.PRICE.multiply(new BigDecimal(purchasesCount));
-        profitRate = winnings.divide(totalPurchaseAmount, 2);
+        profitRate = winnings.divide(totalPurchaseAmount, 2, RoundingMode.HALF_EVEN);
     }
 
-    public BigDecimal profitRate(){
+    public BigDecimal profitRate() {
         return profitRate;
+    }
+
+    public Rank rank() {
+        return rank;
     }
 }
