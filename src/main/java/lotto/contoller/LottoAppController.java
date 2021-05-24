@@ -1,6 +1,7 @@
 package lotto.contoller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoList;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoReport;
 import lotto.domain.WinningLotto;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class LottoAppController {
     public void run() {
-        List<Lotto> purchasedLottos = buyLotto();
+        LottoList purchasedLottos = new LottoList(buyLotto());
         PrintView.showPurchasedLotto(purchasedLottos);
 
         LottoReport report = getReport(purchasedLottos);
