@@ -1,7 +1,7 @@
 package lottoAuto;
 
-import lottoAuto.service.LottoAutoService;
-import lottoAuto.service.Rank;
+import lottoAuto.model.LottoAutoService;
+import lottoAuto.model.Rank;
 import lottoAuto.view.LottoAutoResultView;
 import lottoAuto.vo.LottoResultVo;
 import org.junit.jupiter.api.Test;
