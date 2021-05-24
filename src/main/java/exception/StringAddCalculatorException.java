@@ -1,12 +1,14 @@
 package exception;
 
-public class StringAddCalculatorException extends RuntimeException {
+import type.StringAddCalculatorExceptionType;
 
-	private StringAddCalculatorException(StringAddCalculatorExceptionCode code){
+public class StringAddCalculatorException extends RuntimeException{
+
+	private StringAddCalculatorException(final StringAddCalculatorExceptionType code){
 		super(code.getMessage());
 	}
 
-	public static StringAddCalculatorException of(StringAddCalculatorExceptionCode code){
+	public static StringAddCalculatorException of(StringAddCalculatorExceptionType code){
 		return new StringAddCalculatorException(code);
 	}
 }

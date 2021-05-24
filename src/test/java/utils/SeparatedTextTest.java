@@ -1,3 +1,5 @@
+package utils;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +20,5 @@ class SeparatedTextTest {
 		assertThat(separatedText).as("구분자 분리에 실패했습니다.").isNotNull();
 		assertThat(separatedText.getDelimiter()).isNotEmpty().isEqualTo(",|:|;");
 		assertThat(separatedText.getTexts()).isNotEmpty().isEqualTo("1;2;3");
-	}
-
-	@Test
-	@DisplayName("구분자 분리 동작시 입력값이 null일때 케이스 테스트")
-	void findSeparatorTestWithNull(){
-		assertThat(SeparatedText.findSeparator(null))
-			.isNull();
 	}
 }
