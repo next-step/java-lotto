@@ -2,44 +2,27 @@ package lotto;
 
 import utils.DrawNumber;
 
-import java.util.List;
-
 public final class LottoGenerator {
 	private final static int LOTTO_NUMBER_COUNT = 6;
-	private final static int LOTTO_PRICE = 1000;
 
-	private final LottoNumbersFactory lottoNumbersFactory;
-	private final DrawNumber drawNumber;
+	private final LottoNumbersFactory lottoNumbersFactory; // 로또 티켓 관리 클래스
+	private final DrawNumber drawNumber; // 숫자 뽑기 클래스
 
 	public LottoGenerator(final LottoNumbersFactory lottoNumbersFactory, final DrawNumber drawNumber){
 		this.lottoNumbersFactory = lottoNumbersFactory;
 		this.drawNumber = drawNumber;
 	}
 
-	public int buy(final int price){
-		int lottoNumber = price / LOTTO_PRICE;
-		if (lottoNumber <= 0) {
-			return 0;
-		}
-
-		for(int i = 0; i < lottoNumber; ++i){
+	public LottoNumbersFactory buy(final LottoMoney lottoMoney){
+		final int lottoCount = lottoMoney.calculateLottoCount();
+		for (int i = 0; i < lottoCount; ++i){
 			LottoNumbers lottoNumbers = new LottoNumbers(drawNumber.draw(LOTTO_NUMBER_COUNT));
 			lottoNumbersFactory.add(lottoNumbers);
 		}
-		return lottoNumber;
+		return this.lottoNumbersFactory;
 	}
 
-	public static boolean isValidLottoCount(List<Integer> numbers){
-		if(numbers == null) return false;
-		return numbers.size() == LOTTO_NUMBER_COUNT;
-	}
-
-	public LottoResult summary(final List<Integer> winnerNumbers){
-		LottoNumbers winnerLottoNumbers = new LottoNumbers(winnerNumbers);
-		return lottoNumbersFactory.summary(winnerLottoNumbers);
-	}
-
-	public void printLottoAll(){
-		lottoNumbersFactory.printAll();
+	public LottoResult summary(final LottoNumbers winnerNumbers){
+		return lottoNumbersFactory.summary(winnerNumbers);
 	}
 }

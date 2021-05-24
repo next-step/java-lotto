@@ -2,14 +2,25 @@ package lotto;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "로또 숫자 범위를 넘어가는 유효값 테스트. number[{0}]")
+	@ValueSource(ints = {
+		0, 46, -1
+	})
+	void validTest(final int number){
+		assertThatThrownBy(()->new LottoNumber(number))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest(name = "객체 비교 테스트. sourceNumber[{0}], targetNumber[{1}], expected[{2}]")
 	@CsvSource(value = {
-		"1,1,true", "1,0,false"
+		"1,1,true", "1,2,false"
 	})
 	void equalsTest(final int sourceNumber, final int targetNumber, final boolean expected) {
 		// given

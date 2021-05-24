@@ -1,29 +1,26 @@
 package utils;
 
-import exception.LottoException;
+import exception.StringAddCalculatorException;
 import type.DecimalType;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static type.LottoExceptionType.NEGATIVE_TEXT;
+import static type.StringAddCalculatorExceptionType.NEGATIVE_TEXT;
 
 public class NumberUtils {
 	private static final int INT_ZERO_VALUE = 0;
-	private static final double DOUBLE_ZERO_VALUE = 0.0;
-	private static final double DEFAULT_DOUBLE_VALUE = 0.0;
 
 	private NumberUtils(){
 		// empty
 	}
 
-	public static double mathRound(final double source, final double target, final DecimalType decimalType){
-		if(target <= DOUBLE_ZERO_VALUE) return DEFAULT_DOUBLE_VALUE;
-		double result = source / target;
-		double decimalNumber = decimalType.value();
-		return Math.round(result * decimalNumber) / decimalNumber;
+	public static BigDecimal mathRound(final BigDecimal source, final BigDecimal target, final DecimalType decimalType){
+		return source.divide(target, decimalType.value(), RoundingMode.HALF_UP);
 	}
 
 	public static int sumWithOutNegative(String[] texts) {
@@ -34,8 +31,8 @@ public class NumberUtils {
 	}
 
 	private static void checkNegative(final int value){
-		if(value < INT_ZERO_VALUE) {
-			throw LottoException.of(NEGATIVE_TEXT);
+		if (value < INT_ZERO_VALUE) {
+			throw StringAddCalculatorException.of(NEGATIVE_TEXT);
 		}
 	}
 

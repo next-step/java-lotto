@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoNumbersFactory {
 
@@ -21,7 +22,7 @@ public final class LottoNumbersFactory {
 
 	public LottoResult summary(final LottoNumbers winningLottoNumbers){
 		LottoResult result = new LottoResult();
-		if(size() == 0){
+		if (size() == 0){
 			return result;
 		}
 
@@ -35,8 +36,10 @@ public final class LottoNumbersFactory {
 		return this.lottoList.size();
 	}
 
-	public void printAll(){
-		lottoList.stream()
-				 .forEach(LottoNumbers::print);
+	@Override
+	public String toString(){
+		return lottoList.stream()
+				 .map(LottoNumbers::toString)
+				 .collect(Collectors.joining("\n"));
 	}
 }

@@ -1,31 +1,38 @@
 package utils;
 
 import exception.LottoException;
+import exception.StringAddCalculatorException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import type.DecimalType;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
-import static type.LottoExceptionType.NEGATIVE_TEXT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static type.StringAddCalculatorExceptionType.NEGATIVE_TEXT;
 
 class NumberUtilsTest {
 
-	@Test
-	void mathRoundTest() {
-		assertThat(NumberUtils.mathRound(100, 100, DecimalType.PLACE_TWO))
-			.isEqualTo(1.0);
+	@ParameterizedTest(name = "BigDecimal 클래스를 이용해 divide 테스트. source[{0}], target[{1}], expected[{2}]")
+	@CsvSource(value = {
+		"100, 100, 1.00", "30, 100, 0.30", "10, 15, 0.67"
+	})
+	void mathRoundTest(final int source, final int target, final String expected) {
+		// given
+		BigDecimal sourceNumber = BigDecimal.valueOf(source);
+		BigDecimal targetNumber = BigDecimal.valueOf(target);
 
-		assertThat(NumberUtils.mathRound(30, 100, DecimalType.PLACE_TWO))
-			.isEqualTo(0.3);
+		// when
+		BigDecimal result = NumberUtils.mathRound(sourceNumber, targetNumber, DecimalType.PLACE_TWO);
 
-		assertThat(NumberUtils.mathRound(10, 15, DecimalType.PLACE_TWO))
-			.isEqualTo(0.67);
+		assertThat(result.equals(new BigDecimal(expected)))
+			.isTrue();
 	}
 
 	@Test
@@ -58,7 +65,7 @@ class NumberUtilsTest {
 		String[] texts = {"1", "-2", "3"};
 
 		// when
-		assertThatExceptionOfType(LottoException.class)
+		assertThatExceptionOfType(StringAddCalculatorException.class)
 			.isThrownBy(()->NumberUtils.sumWithOutNegative(texts))
 			.withMessageContaining(NEGATIVE_TEXT.getMessage());
 	}

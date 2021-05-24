@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import type.LottoRewardType;
 
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-	LottoResult lottoResult;
+	private LottoResult lottoResult;
 
 	@BeforeEach
 	void setUp(){
@@ -23,6 +24,7 @@ class LottoResultTest {
 	}
 
 	@Test
+	@DisplayName("당첨 결과 집계 테스트")
 	void countTest() {
 		// given
 		lottoResult.add(3); // PLACE_4TH

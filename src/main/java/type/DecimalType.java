@@ -2,16 +2,16 @@ package type;
 
 public enum DecimalType {
 
-	PLACE_TWO(100.0),
+	PLACE_TWO(2),
 	;
 
-	private double decimalReferenceValue;
+	private int scale;
 
-	DecimalType(final double decimalReferenceValue){
-		this.decimalReferenceValue = decimalReferenceValue;
+	DecimalType(final int scale){
+		this.scale = scale;
 	}
 
-	public double value(){
-		return this.decimalReferenceValue;
+	public int value(){
+		return this.scale;
 	}
 }

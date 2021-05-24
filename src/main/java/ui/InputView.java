@@ -7,6 +7,10 @@ import utils.ConsoleUtils;
 
 public class InputView {
 
+	private InputView(){
+		// empty
+	}
+
 	public static int inputPrice(){
 		try {
 			return ConsoleUtils.nextInt(MessageType.INPUT_PRICE.message());

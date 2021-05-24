@@ -16,7 +16,7 @@ public final class LottoResult implements SumResult{
 	}
 
 	LottoResult(Map<LottoRewardType, Integer> lottoRewardMap){
-		if(lottoRewardMap == null){
+		if (lottoRewardMap == null){
 			throw new IllegalArgumentException();
 		}
 		init(lottoRewardMap);

@@ -23,8 +23,7 @@ public class DrawNumber {
 	}
 
 	public List<Integer> draw(int size) {
-		if(numbers.size() < size){
-			// ERROR
+		if (numbers.size() < size){
 			return Collections.emptyList();
 		}
 		List<Integer> temp = new ArrayList<>();

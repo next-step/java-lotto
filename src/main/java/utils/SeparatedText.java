@@ -28,7 +28,7 @@ public class SeparatedText {
 	}
 
 	public static SeparatedText findSeparator(final String text){
-		if(StringUtils.isEmpty(text)) {
+		if (StringUtils.isEmpty(text)) {
 			return new SeparatedText(DEFAULT_DELIMITER, "");
 		}
 		Matcher m = Pattern.compile(PATTERN).matcher(text);

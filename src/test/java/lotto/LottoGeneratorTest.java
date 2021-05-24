@@ -18,10 +18,10 @@ class LottoGeneratorTest {
 
 	@ParameterizedTest(name = "금액에 맞춰 로또를 사는 기능 테스트. price[{0}], expectedSize[{1}]")
 	@CsvSource(value = {
-		"10000, 10", "10500, 10", "11000, 11", "0, 0", "-1000, 0"
+		"10000, 10", "10500, 10", "11000, 11"
 	})
 	void buyTest(final int price, final int expectedSize) {
-		assertThat(lottoGenerator.buy(price))
+		assertThat(lottoGenerator.buy(new LottoMoney(price)).size())
 			.isEqualTo(expectedSize);
 	}
 }
