@@ -106,7 +106,7 @@ public class LottoTicketTest {
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
         WinningNumbers winningNumbers = new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18});
-        winningNumbers.addBonusNumber(17);
+        winningNumbers.addBonusNumber(new BonusNumber(17));
         Rank rank = lottoTicket.rankBasedOn(winningNumbers);
 
         //Then

@@ -57,11 +57,12 @@ public class WinningNumbers {
         return this.bonusNumber;
     }
 
-    public void addBonusNumber(int number) {
-        BonusNumber bonusNumber = new BonusNumber(number);
+    public boolean addBonusNumber(BonusNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
         }
         this.bonusNumber = bonusNumber;
+
+        return true;
     }
 }

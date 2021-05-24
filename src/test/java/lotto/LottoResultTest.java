@@ -43,7 +43,7 @@ public class LottoResultTest {
     @Test
     void check_result_count_updated_with_bonus() {
         //When
-        winningNumbers.addBonusNumber(6);
+        winningNumbers.addBonusNumber(new BonusNumber(6));
         LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
 
         //Then
@@ -68,7 +68,7 @@ public class LottoResultTest {
     @CsvSource({"1000,30000.00", "5000,6000.00", "1500000,20.00"})
     void check_profit_ratio_with_bonus(int purchaseAmount, float profitRatio) {
         //When
-        winningNumbers.addBonusNumber(6);
+        winningNumbers.addBonusNumber(new BonusNumber(6));
         LottoResult lottoResult = new LottoResult(purchaseAmount, winningNumbers, tickets);
 
         //Then

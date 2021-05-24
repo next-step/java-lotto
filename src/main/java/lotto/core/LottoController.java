@@ -1,9 +1,6 @@
 package lotto.core;
 
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.LottoTickets;
-import lotto.domain.Message;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -13,13 +10,14 @@ public class LottoController {
     private OutputView outputView;
     private LottoTickets lottoTickets;
     private WinningNumbers winningNumbers;
+    private BonusNumber bonusNumber;
 
     public LottoController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
 
-    public LottoTickets getTickets() {
+    public void getTickets() {
         outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
         boolean stopRequestingInput = false;
         while (!stopRequestingInput) {
@@ -27,13 +25,12 @@ public class LottoController {
         }
         outputView.printMessage(Message.INFO_TOTAL_COUNT, lottoTickets.count());
         outputView.printInfo(lottoTickets.toString());
-        return lottoTickets;
     }
 
     private boolean requestLottoTicketsInput() {
         boolean stopRequestingInput = true;
         try {
-            lottoTickets = new LottoTickets(LottoTicketGenerator.start(), inputView.receivePurchaseAmount());
+            lottoTickets = new LottoTickets(LottoTicketGenerator.start(), inputView.receiveIntegerInput());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             stopRequestingInput = false;
@@ -41,19 +38,18 @@ public class LottoController {
         return stopRequestingInput;
     }
 
-    public WinningNumbers getWinningNumbers() {
+    public void getWinningNumbers() {
         outputView.printMessage(Message.REQUEST_INPUT_WINNING_NUMBERS);
         boolean stopRequestingInput = false;
         while (!stopRequestingInput) {
             stopRequestingInput = requestWinningNumbersInput();
         }
-        return winningNumbers;
     }
 
     private boolean requestWinningNumbersInput() {
         boolean stopRequestingInput = true;
         try {
-            winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());
+            winningNumbers = new WinningNumbers(inputView.receiveIntegerArrayInput());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             stopRequestingInput = false;
@@ -63,5 +59,24 @@ public class LottoController {
 
     public void getLottoResult() {
         outputView.printLottoResult(lottoTickets.matchingResultWith(winningNumbers));
+    }
+
+    public void getBonusNumber() {
+        outputView.printMessage(Message.REQUEST_INPUT_BONUS_NUMBERS);
+        boolean stopRequestingInput = false;
+        while (!stopRequestingInput) {
+            stopRequestingInput = requestBonusNumberInput() && winningNumbers.addBonusNumber(bonusNumber);
+        }
+    }
+
+    private boolean requestBonusNumberInput() {
+        boolean stopRequestingInput = true;
+        try {
+            bonusNumber = new BonusNumber(inputView.receiveIntegerInput());
+        } catch (Exception e) {
+            outputView.printExceptionMessage(e);
+            stopRequestingInput = false;
+        }
+        return stopRequestingInput;
     }
 }

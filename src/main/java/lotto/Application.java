@@ -12,6 +12,8 @@ public class Application {
 
         //2. 당첨번호 입력
         controller.getWinningNumbers();
+        //2-1. 보너스 번호 입력
+        controller.getBonusNumber();
 
         //3. 당첨통계 생성 및 출력
         controller.getLottoResult();

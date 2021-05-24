@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.WinningNumbers;
 import lotto.exception.CustomIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
@@ -62,7 +63,7 @@ public class WinningNumbersTest {
         //When+Then
         WinningNumbers winningNumbers = new WinningNumbers(input);
 
-        assertThatThrownBy(() -> winningNumbers.addBonusNumber(1))
+        assertThatThrownBy(() -> winningNumbers.addBonusNumber(new BonusNumber(1)))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
