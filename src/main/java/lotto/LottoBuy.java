@@ -14,4 +14,5 @@ public class LottoBuy {
     public Lottos buyOneRandomLotto(LottoRandomNumber lottoRandomNumber) {
         return new Lottos(new Lotto(lottoRandomNumber));
     }
+
 }
