@@ -1,4 +1,8 @@
-package lotto;
+package lotto.domain;
+
+import lotto.domain.generator.AutomaticLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
+import lotto.domain.entity.Number;
 
 import java.util.*;
 

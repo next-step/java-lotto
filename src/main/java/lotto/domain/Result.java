@@ -1,7 +1,9 @@
-package lotto;
+package lotto.domain;
+
+import lotto.domain.entity.LottoList;
+import lotto.domain.entity.Number;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public final class Result {
 

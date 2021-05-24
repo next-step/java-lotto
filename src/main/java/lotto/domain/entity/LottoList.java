@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.entity;
+
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;

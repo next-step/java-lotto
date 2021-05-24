@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoBuyer;
+import lotto.domain.LottoStore;
+import lotto.domain.entity.LottoList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

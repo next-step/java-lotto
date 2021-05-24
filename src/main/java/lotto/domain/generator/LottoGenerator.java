@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.generator;
+
+import lotto.domain.entity.Number;
 
 import java.util.List;
 
