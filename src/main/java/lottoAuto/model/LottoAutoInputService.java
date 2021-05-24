@@ -4,16 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoAutoInputService {
-
     private LottoRandom lottoRandom = new LottoRandom();
     private List<Integer> winningNumber = new ArrayList<>();
-    private static final int LOTTO_PRICE = 1000;
-
-    public int getAmount(int price) {
-        int amount = price / LOTTO_PRICE;
-
-        return amount;
-    }
 
     public Lottos inputUserLottoNumber(int amount) {
         Lottos userLottos = lottoRandom.setLotto(amount);
