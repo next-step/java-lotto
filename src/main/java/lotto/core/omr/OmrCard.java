@@ -27,7 +27,7 @@ public class OmrCard {
     }
 
     public Map<Rank, List<Omr>> grade(Round round) {
-        return omrList.stream().collect(Collectors.groupingBy(x->x.grade(round)));
+        return omrList.stream().collect(Collectors.groupingBy(x -> x.grade(round)));
     }
 
     public int size() {

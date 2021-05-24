@@ -50,7 +50,7 @@ public class GameReport {
         Rank[] ranks = Rank.duplicateMatchValues();
 
         return Arrays.stream(ranks)
-            .mapToInt(rank-> size(rank))
+            .mapToInt(rank -> size(rank))
             .sum();
     }
 
@@ -74,26 +74,26 @@ public class GameReport {
 
     private double calcTotalWinningMoney() {
         return result.keySet().stream()
-                    .mapToInt(key->result.get(key).size() * key.winningMoney())
+                    .mapToInt(key -> result.get(key).size() * key.winningMoney())
                     .sum();
     }
 
     public void print(Output output) {
         output.println("당첨 통계");
         output.println("---------");
-        output.println(statisticsToString(x-> rankFormat(x), ignoreThirdWinners()));
+        output.println(statisticsToString(x -> rankFormat(x), ignoreThirdWinners()));
         output.println(yieldsToString(yields()));
     }
 
     private Rank[] ignoreThirdWinners() {
         return Arrays.stream(Rank.winningValues())
-            .filter(x->x != Rank.THIRD)
+            .filter(x -> x != Rank.THIRD)
             .toArray(Rank[]::new);
     }
 
     private String statisticsToString(Function<Rank, String> function, Rank ...ranks) {
         return Arrays.stream(ranks)
-            .map(rank->function.apply(rank))
+            .map(rank -> function.apply(rank))
             .collect(Collectors.joining("\n"));
     }
 
