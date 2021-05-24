@@ -28,9 +28,9 @@ public class LottoTickets implements Iterable<LottoTicket> {
         }
     }
 
-    public LottoRanks ranks(LottoNumbers winNumbers) {
+    public LottoRanks ranks(LottoNumbers winNumbers, LottoNumber bonusNumber) {
         List<LottoRank> lottoRanks = lottoTickets.stream()
-                .map(ticket -> ticket.rank(winNumbers))
+                .map(ticket -> ticket.rank(winNumbers, bonusNumber))
                 .collect(Collectors.toList());
         return new LottoRanks(lottoRanks);
     }
