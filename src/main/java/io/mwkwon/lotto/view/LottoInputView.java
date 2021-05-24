@@ -1,4 +1,6 @@
 package io.mwkwon.lotto.view;
+import io.mwkwon.lotto.interfaces.InputView;
+
 import java.util.Scanner;
 
 public class LottoInputView implements InputView {

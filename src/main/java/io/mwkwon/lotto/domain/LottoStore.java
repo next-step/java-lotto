@@ -2,7 +2,8 @@ package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
 import io.mwkwon.lotto.enums.Rank;
-import io.mwkwon.lotto.view.InputView;
+import io.mwkwon.lotto.interfaces.InputView;
+import io.mwkwon.lotto.interfaces.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

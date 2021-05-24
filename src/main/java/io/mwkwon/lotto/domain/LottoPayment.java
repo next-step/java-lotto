@@ -1,7 +1,7 @@
 package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
-import io.mwkwon.lotto.view.InputView;
+import io.mwkwon.lotto.interfaces.InputView;
 
 import java.util.Objects;
 import java.util.regex.Matcher;

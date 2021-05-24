@@ -1,4 +1,4 @@
-package io.mwkwon.lotto.view;
+package io.mwkwon.lotto.interfaces;
 
 public interface InputView {
     String requestInputPayment(String message);

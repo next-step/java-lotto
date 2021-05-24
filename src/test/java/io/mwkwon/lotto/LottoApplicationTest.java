@@ -1,7 +1,8 @@
 package io.mwkwon.lotto;
 
 import io.mwkwon.lotto.domain.*;
-import io.mwkwon.lotto.view.InputView;
+import io.mwkwon.lotto.interfaces.InputView;
+import io.mwkwon.lotto.interfaces.LottoGenerator;
 import io.mwkwon.lotto.view.ResultView;
 import org.junit.jupiter.api.Test;
 
