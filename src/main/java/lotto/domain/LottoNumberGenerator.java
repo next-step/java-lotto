@@ -7,25 +7,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberGenerator {
-    public static final int START_NUMBER = 1;
-    public static final int END_NUMBER = 45;
-    public static final List<Integer> SAMPLE = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+    private static final List<Integer> SAMPLE = IntStream.rangeClosed(Lotto.MIN, Lotto.MAX)
             .boxed()
             .collect(Collectors.toList());
 
     private LottoNumberGenerator() {
-
     }
 
     public static List<Integer> getBalls() {
         List<Integer> shuffle = shuffledList();
-        shuffle = shuffle.subList(0, Lotto.LOTTO_SIZE);
+        shuffle = shuffle.subList(0, Lotto.SIZE);
         shuffle.sort(Integer::compareTo);
         return shuffle;
-    }
-
-    public static int getBonusBall() {
-        return shuffledList().get(0);
     }
 
     private static List<Integer> shuffledList() {
