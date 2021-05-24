@@ -3,7 +3,6 @@ package study.step2.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,30 +34,17 @@ public class LottoNumberTest {
     assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
-  @DisplayName("LottoNumber Set 생성 테스트")
+  @DisplayName("LottoNumber 음수일 때 생성 실패 테스트")
   @Test
-  void createLottoNumberSet() {
+  void validatePositiveNumber() {
     // given
-    Set<LottoNumber> lottoNumbers = LottoNumber.pick();
+    String inputText = "-10";
 
-    // when
-    int lottoNumbersSize = lottoNumbers.size();
+    //when
+    Throwable thrown =  catchThrowable(() -> LottoNumber.valueOf(inputText));
 
-    // then
-    assertThat(lottoNumbersSize).isEqualTo(6);
-  }
-
-  @DisplayName("LottoNumber Set 생성 숫자가 0 보다 작은지 테스트")
-  @Test
-  void lottoNumberSetRangeTest() {
-    // given
-    Set<LottoNumber> lottoNumbers = LottoNumber.pick();
-
-    // when
-    boolean isInvalidRange = lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.getLottoNumber() < 0);
-
-    // then
-    assertThat(isInvalidRange).isFalse();
+    //then
+    assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
 }

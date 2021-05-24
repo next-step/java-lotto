@@ -32,7 +32,7 @@ public class Lottos {
 
   public static Lottos makeLottos(int lottoCount) {
     List<Lotto> lottoList = IntStream.range(0, lottoCount)
-        .mapToObj(i -> LottoNumber.pick())
+        .mapToObj(i -> LottoFactory.pick())
         .map(Lotto::new)
         .collect(Collectors.toList());
 
