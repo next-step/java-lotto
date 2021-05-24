@@ -22,35 +22,33 @@ public class LottoManager {
     }
 
     private LottoGroup createLottoGroup() {
-        boolean flag = true;
-        LottoGroup lottoGroup = null;
+        LottoGroup lottoGroup;
 
-        while (flag) {
+        while (true) {
             OutputView.requireLottoPrice();
             try {
                 lottoGroup = LottoGroup.createLottoGroup(InputView.inputPrice());
-                flag = false;
+                break;
             } catch (RuntimeException exception) {
-                flag = true;
                 OutputView.out(exception.getMessage());
+                continue;
             }
         }
         return lottoGroup;
     }
 
     private LottoWinningNumbers createWinningNumbers() {
-        LottoWinningNumbers lottoWinningNumbers = null;
+        LottoWinningNumbers lottoWinningNumbers;
 
-        boolean flag = true;
-        while (flag) {
+        while (true) {
             OutputView.requireWinningNumbers();
             try {
                 lottoWinningNumbers = LottoWinningNumbers
                         .createLottoWinningNumbers(InputView.inputWinningNumbers());
-                flag = false;
+                break;
             } catch (RuntimeException exception) {
-                flag = true;
                 OutputView.out(exception.getMessage());
+                continue;
             }
         }
         return lottoWinningNumbers;
