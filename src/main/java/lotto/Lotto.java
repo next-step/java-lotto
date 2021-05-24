@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Lotto {
 
+	private static final int REQUIRED_COUNT = 6;
+
 	private final List<Number> numbers;
 
 	public Lotto(List<Number> numbers) {
@@ -12,10 +14,10 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public int matchCount(List<Number> winningNumbers) {
+	public long matchCount(List<Number> winningNumbers) {
 		return numbers.stream()
-			.mapToInt(number -> winningNumbers.contains(number) ? 1 : 0)
-			.sum();
+			.filter(winningNumbers::contains)
+			.count();
 	}
 
 	private void validateNumbers(List<Number> numbers) {
@@ -23,7 +25,7 @@ public class Lotto {
 								.distinct()
 								.count();
 
-		if (numbers.size() != 6 || distinctCount != 6) {
+		if (numbers.size() != REQUIRED_COUNT || distinctCount != REQUIRED_COUNT) {
 			throw new IllegalArgumentException("Numbers must consist of 6 distinct numbers.");
 		}
 	}
