@@ -42,11 +42,12 @@ public class Result {
 	}
 
 	public float getTotalYield(Money buyerMoney) {
-		Money totalMoney = getTotalMoney();
-		return totalMoney.divideWithFloating(buyerMoney);
+		return getTotalMoney().divideWithFloating(buyerMoney);
 	}
 
 	private Money getTotalMoney() {
+		totalMoney = Money.won(0L);
+
 		resultMap.forEach(
 			(match, count) -> totalMoney = totalMoney.add(match.money().multiply(count))
 		);

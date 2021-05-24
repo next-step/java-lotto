@@ -29,21 +29,6 @@ public final class Money {
 		return new Money(Math.subtractExact(amount, won.amount));
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Money))
-			return false;
-		Money money = (Money)o;
-		return Objects.equals(amount, money.amount);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(amount);
-	}
-
 	public long divide(Money won) {
 		return Math.floorDiv(this.amount, won.amount);
 	}
@@ -62,9 +47,25 @@ public final class Money {
 
 	public float divideWithFloating(Money result) {
 		float v = (float)this.amount / result.amount;
-		if (Float.isInfinite(v) || Float.isNaN(v) ){
+		if (Float.isInfinite(v) || Float.isNaN(v)) {
 			throw new IllegalArgumentException("유효하지 않는 값입니다.");
 		}
 		return v;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Money))
+			return false;
+		Money money = (Money)o;
+		return Objects.equals(amount, money.amount);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(amount);
+	}
+
 }

@@ -10,14 +10,14 @@ public class Store {
 		machine = new GenerateTicketMachine();
 	}
 
+	public GenerateTicketMachine getMachine() {
+		return machine;
+	}
+
 	public Tickets getTicket(Buyer buyer) {
 		Money buyerMoney = buyer.money();
 		long ticketCount = buyerMoney.divide(TICKET_PRICE);
 		buyer.setMoney(buyerMoney.minus(TICKET_PRICE.multiply(ticketCount)));
 		return machine.create(ticketCount);
-	}
-
-	public GenerateTicketMachine getMachine() {
-		return machine;
 	}
 }

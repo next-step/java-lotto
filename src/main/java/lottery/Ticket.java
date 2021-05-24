@@ -9,12 +9,12 @@ public final class Ticket {
 	public final static int SIZE_OF_TICKET = 6;
 	private List<Integer> numbers;
 
-	private Ticket(List<Integer> numbers) {
-		setNumbers(numbers);
-	}
-
 	public static Ticket of(List<Integer> numbers) {
 		return new Ticket(numbers);
+	}
+
+	private Ticket(List<Integer> numbers) {
+		setNumbers(numbers);
 	}
 
 	private void setNumbers(List<Integer> numbers) {

@@ -4,14 +4,14 @@ import static java.util.Objects.*;
 
 public final class Buyer {
 	private Money money = Money.ZERO;
-	private Tickets tickets = Tickets.ZERO;
-
-	private Buyer(Money money) {
-		setMoney(money);
-	}
+	private Tickets tickets = Tickets.EMPTY_TICKETS;
 
 	public static Buyer of(Money initial) {
 		return new Buyer(initial);
+	}
+
+	private Buyer(Money money) {
+		setMoney(money);
 	}
 
 	public Money money() {

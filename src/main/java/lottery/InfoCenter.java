@@ -5,18 +5,13 @@ import java.util.List;
 public class InfoCenter {
 
 	private Ticket lastWeekWinningTicket;
-	private final Result result;
-
-	public InfoCenter() {
-		result = new Result();
-	}
 
 	public void setLastWeekWinningTicket(Ticket lastWeekWinningTicket) {
 		this.lastWeekWinningTicket = lastWeekWinningTicket;
 	}
 
 	public Result confirmTicket(Tickets buyerTickets) {
-
+		Result result = new Result();
 		buyerTickets.getTicketList().stream()
 			.map(ticket -> {
 				List<Integer> numbers = ticket.numbers();

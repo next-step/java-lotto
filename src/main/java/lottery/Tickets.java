@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Tickets {
 
-	public static final Tickets ZERO = new Tickets(new ArrayList<>());
+	public static final Tickets EMPTY_TICKETS = new Tickets(new ArrayList<>());
 
 	private final List<Ticket> ticketList;
 
