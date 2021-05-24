@@ -16,15 +16,11 @@ public class LottoAutomaticMain {
 
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         resultView.resultBuyPrice(buyCount);
-
-        LottoList lottos = lottoGame.getLottoList(buyCount);
-        resultView.resultLottoList(lottos);
+        resultView.resultLottoList(lottoGame.getLottoList(buyCount));
 
         lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-        WinningStatistics winningStatistics = lottoGame.getWinning();
-
-        resultView.resultStatistics(winningStatistics);
+        resultView.resultStatistics(lottoGame.getWinning());
 
     }
 }
