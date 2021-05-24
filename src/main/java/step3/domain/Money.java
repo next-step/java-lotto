@@ -4,6 +4,7 @@ import step3.exception.NotEnoughInitMoneyException;
 
 public class Money {
 
+    private static final int ONE_LOTTO_PRICE = 1000;
     int money;
 
     public Money(int money) {
@@ -13,15 +14,15 @@ public class Money {
     }
 
     public void buyOneLotto() {
-        this.money -= 1000;
+        this.money -= ONE_LOTTO_PRICE;
     }
 
     public boolean hasEnoughMoney() {
-        return money >= 1000;
+        return money >= ONE_LOTTO_PRICE;
     }
 
     private void checkInRange(int money) {
-        if (money < 1000) {
+        if (money < ONE_LOTTO_PRICE) {
             throw new NotEnoughInitMoneyException();
         }
     }

@@ -1,35 +1,21 @@
 package step3.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.TreeSet;
 
 public class RandomLottoNumGenerator {
 
-    private static boolean[] duplicatedNumCheck = new boolean[46];
+    private static final int END_OF_LOTTO_NUM = 45;
+    private static final int NUM_OF_LOTTO_BALL = 6;
 
-    public static List<Integer> createLottoNums() {
-        init();
-        List<Integer> numbers = new ArrayList<>();
+    public static TreeSet<Integer> createLottoNums() {
 
+        TreeSet<Integer> numbers = new TreeSet<>();
         do {
-
-            int number = (int) (Math.random() * 45) + 1;
-            getIfNotDuplicated(numbers, number);
-
-        } while (numbers.size() != 6);
+            int number = (int) (Math.random() * END_OF_LOTTO_NUM) + 1;
+            numbers.add(number);
+        } while (numbers.size() != NUM_OF_LOTTO_BALL);
 
         return numbers;
     }
 
-    private static void getIfNotDuplicated(List<Integer> numbers, int number) {
-        if (!duplicatedNumCheck[number]) {
-            duplicatedNumCheck[number] = true;
-            numbers.add(number);
-        }
-    }
-
-    private static void init() {
-        Arrays.fill(duplicatedNumCheck, false);
-    }
 }

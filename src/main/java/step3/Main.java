@@ -13,6 +13,5 @@ public class Main {
         String winNum = InputView.WinningNumbers();
         Lotto winningNumbers = lottoGame.getWinLottoNum(winNum);
         lottoGame.getStatistics(winningNumbers);
-
     }
 }
