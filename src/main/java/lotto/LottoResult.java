@@ -26,7 +26,8 @@ public class LottoResult {
 		return lottoResults.stream()
 				.map(LottoPrizeType::getPrizeMoney)
 				.reduce(BigDecimal.ZERO, BigDecimal::add)
-				.divide(BigDecimal.valueOf(lottoResults.size()).multiply(Constants.LOTTO_PRICE),
+				.divide(BigDecimal.valueOf(lottoResults.size())
+								.multiply(Constants.LOTTO_PRICE),
 						ROUNDING_OFF_SCALE, RoundingMode.FLOOR)
 				.floatValue();
 	}
