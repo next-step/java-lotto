@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 import lotto.ui.IOManager;
 
+import static java.util.stream.Collectors.toList;
+
 public class LottoGame {
 
     private final IOManager ioManager;
@@ -43,7 +45,12 @@ public class LottoGame {
     }
 
     private void printStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
+
+        List<WinningType> winningTypes = lottos.stream()
+                                               .map(winningLotto::getWinningType)
+                                               .collect(toList());
+
+        LottoStatistics lottoStatistics = new LottoStatistics(winningTypes);
 
         ioManager.printLine("당첨 통계");
         ioManager.printLine("---------");
