@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 	private static final int ROUNDING_OFF_SCALE = 2;
+	private static final int MAXIMUM_MATCHED_NUMBER = 6;
+	private static final int MINIMUM_WINNING_MATCHED_NUMBER = 3;
+
 	private final List<LottoPrizeType> lottoResults;
 
 	private LottoResult(List<LottoPrizeType> lottoResults) {
@@ -37,7 +40,7 @@ public class LottoResult {
 	@Override
 	public String toString() {
 		return Arrays.stream(LottoPrizeType.values())
-				.filter(it -> it.getMatchedNumberCount() <= 6 && it.getMatchedNumberCount() >= 3)
+				.filter(it -> it.getMatchedNumberCount() <= MAXIMUM_MATCHED_NUMBER && it.getMatchedNumberCount() >= MINIMUM_WINNING_MATCHED_NUMBER)
 				.map(it -> it.getMatchedNumberCount() + "개 일치 (" + it.getPrizeMoney() + "원)- " + getNumberOfLottosMatchedWith(it.getMatchedNumberCount()) + "개")
 				.collect(Collectors.joining("\n"));
 	}
