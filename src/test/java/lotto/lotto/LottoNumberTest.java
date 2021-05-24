@@ -1,7 +1,6 @@
 package lotto.lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 import lotto.error.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;

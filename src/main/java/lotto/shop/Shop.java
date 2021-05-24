@@ -3,12 +3,8 @@ package lotto.shop;
 import lotto.error.ErrorMessage;
 import lotto.lotto.WinningNumber;
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
-
-import java.util.Random;
-import java.util.stream.IntStream;
 
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;

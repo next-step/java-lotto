@@ -2,11 +2,10 @@ package lotto.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.error.ErrorMessage;
-import lotto.shop.Money;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.error.ErrorMessage;
 
 public class LottoTest {
     private Lotto lotto;
@@ -16,7 +15,7 @@ public class LottoTest {
     void testContain() {
         //given
         //when
-        lotto = new Lotto(1,1,1,1,1,1);
+        lotto = new Lotto(new int[]{1, 1, 1, 1, 1, 1});
         //then
         assertThat(lotto.isSelectComplete()).isFalse();
     }
@@ -28,9 +27,7 @@ public class LottoTest {
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    lotto = new Lotto(1,2,3);
-                }).withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
+                .isThrownBy(() -> lotto = new Lotto(new int[]{1, 2, 3})).withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
     }
 
     @Test
@@ -38,7 +35,7 @@ public class LottoTest {
     void testSelectComplete() {
         //given
         //when
-        lotto = new Lotto(1,2,3,4,5,6);
+        lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         //then
         assertThat(lotto.isSelectComplete()).isTrue();
     }

@@ -33,14 +33,14 @@ public class OutputView {
 
     public static void resultIncome(LottoResult matchAnswer, Money money) {
         for (PrizeEnum prizeValue : PrizeEnum.values()) {
-            println(prizeValue.answer(), prizeValue.prize(), matchAnswer);
+            printLottoResult(prizeValue.answer(), prizeValue.prize(), matchAnswer);
         }
-        System.out.printf(MessageEnum.INCOME_PREFIX.message() + "%.2f" + MessageEnum.INCOME_POSTFIX.message() + "%n", (float) matchAnswer.income() / money.amount());
+        printIncome(matchAnswer, money);
     }
 
     private static void printLotto(Lotto lotto) {
         String collect = lotto.numbersToString();
-        System.out.println("[" + collect + "]");
+        println("[" + collect + "]");
     }
 
     private static void println(String message) {
@@ -51,7 +51,11 @@ public class OutputView {
         System.out.println(amount + message);
     }
 
-    private static void println(int answer, int prize, LottoResult matchAnswer) {
+    private static void printLottoResult(int answer, int prize, LottoResult matchAnswer) {
         System.out.printf("%d개 일치 (%d원)- %d개\n", answer, prize, matchAnswer.count(answer));
+    }
+
+    private static void printIncome(LottoResult matchAnswer, Money money) {
+        System.out.printf(MessageEnum.INCOME_PREFIX.message() + "%.2f" + MessageEnum.INCOME_POSTFIX.message() + "%n", (float) matchAnswer.income() / money.amount());
     }
 }
