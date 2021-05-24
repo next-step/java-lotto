@@ -28,9 +28,9 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	public int checkWinning(List<Integer> winningNumber) {
+	public LottoPrizeType checkWinning(List<Integer> winningNumber) {
 		Set<Integer> set = new HashSet<>(winningNumber);
 		set.addAll(this.numbers);
-		return TWO_LOTTO_NUMBERS_LENGTH - set.size();
+		return LottoPrizeType.valueByMatchedNumberCount(TWO_LOTTO_NUMBERS_LENGTH - set.size());
 	}
 }

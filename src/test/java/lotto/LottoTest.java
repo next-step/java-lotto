@@ -15,11 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 	@Test
+	@DisplayName("당첨번호와 일치하는 숫자의 개수를 반환한다")
 	void checkWinningTest() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
 		List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-		int matchedNumber = lotto.checkWinning(winningNumber);
-		assertThat(matchedNumber).isEqualTo(5);
+		LottoPrizeType matchedNumber = lotto.checkWinning(winningNumber);
+		assertThat(matchedNumber).isEqualTo(LottoPrizeType.FIVE_MATCHED);
 	}
 
 	@Test
