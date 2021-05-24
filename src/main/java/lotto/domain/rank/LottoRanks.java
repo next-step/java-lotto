@@ -2,10 +2,7 @@ package lotto.domain.rank;
 
 import lotto.domain.PositiveNumber;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -42,5 +39,18 @@ public class LottoRanks {
         }
 
         return EMPTY_COUNT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoRanks that = (LottoRanks) o;
+        return Objects.equals(countOfLottoRank, that.countOfLottoRank);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(countOfLottoRank);
     }
 }

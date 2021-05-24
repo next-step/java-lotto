@@ -6,6 +6,7 @@ import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,5 +45,18 @@ public class LottoWon {
         } else if (lottoWonNumbers.contains(lottoNumber)) {
             throw new IllegalArgumentException("로또번호에는 보너스번호가 중첩으로 있어서는 안됩니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoWon lottoWon = (LottoWon) o;
+        return Objects.equals(lottoNumbers, lottoWon.lottoNumbers) && Objects.equals(bonusNumber, lottoWon.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers, bonusNumber);
     }
 }
