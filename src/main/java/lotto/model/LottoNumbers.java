@@ -2,10 +2,12 @@ package lotto.model;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -16,6 +18,10 @@ public class LottoNumbers {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
 		this.lottoNumbers = mapToLottoNumbers(inputNumbers);
+	}
+
+	static LottoNumbers of(Integer... numbers) {
+		return new LottoNumbers(Arrays.asList(numbers));
 	}
 
 	private void validateDuplicate(List<Integer> numbers) {
@@ -56,5 +62,22 @@ public class LottoNumbers {
 
 	boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other == null || getClass() != other.getClass()) {
+			return false;
+		}
+		LottoNumbers that = (LottoNumbers)other;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }

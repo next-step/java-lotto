@@ -3,6 +3,7 @@ package lotto.model;
 import static java.util.Arrays.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,5 +51,17 @@ public class LottoTicketTest {
 		LottoResult lottoResult = lottoTicket.match(WinningNumbers.of(winningNumbers, bonusNumber));
 
 		assertThat(lottoResult.count(lottoRank)).isEqualTo(expectedCount);
+	}
+
+	@Test
+	@DisplayName("두 개의 로또 숫자 그룹으로 로또 티켓을 만들 수 있다.")
+	public void createTest() {
+		List<LottoNumbers> oneGroup = Collections.singletonList(LottoNumbers.of(1, 2, 3, 4, 5, 6));
+		List<LottoNumbers> twoGroup = Collections.singletonList(LottoNumbers.of(2, 3, 4, 5, 6, 7));
+
+		LottoTicket lottoTicket = LottoTicket.of(oneGroup, twoGroup);
+
+		assertThat(lottoTicket.getLottoNumbersGroup())
+			.containsExactly(asList(1, 2, 3, 4, 5, 6), asList(2, 3, 4, 5, 6, 7));
 	}
 }

@@ -20,7 +20,7 @@ public class LottoNumbersTest {
 
 	@BeforeEach
 	public void setup() {
-		lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+		lottoNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
 	}
 
 	@Test

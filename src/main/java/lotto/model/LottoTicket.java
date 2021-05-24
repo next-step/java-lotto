@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
 
@@ -10,6 +11,14 @@ public class LottoTicket {
 
 	public LottoTicket(List<LottoNumbers> lottoNumbersGroup) {
 		this.lottoNumbersGroup = Collections.unmodifiableList(lottoNumbersGroup);
+	}
+
+	public static LottoTicket of(List<LottoNumbers> oneGroup, List<LottoNumbers> otherGroup) {
+		List<LottoNumbers> combineGroup = Stream.concat(
+			oneGroup.stream(),
+			otherGroup.stream())
+			.collect(Collectors.toList());
+		return new LottoTicket(combineGroup);
 	}
 
 	public List<List<Integer>> getLottoNumbersGroup() {
