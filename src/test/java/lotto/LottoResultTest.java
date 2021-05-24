@@ -14,7 +14,7 @@ public class LottoResultTest {
     void countFourth_4등_갯수_조회() {
         LottoBuy lottoBuy = new LottoBuy();
         Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoResult lottoResult = lottos.compareWinNumber(Arrays.asList(1, 2, 3, 8, 9, 10));
+        LottoResult lottoResult = lottos.compareWinNumber(new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 8, 9, 10))));
         assertThat(lottoResult.isFourth(1)).isTrue();
     }
 
@@ -27,7 +27,8 @@ public class LottoResultTest {
                 new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8))),
                 new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8))))
         ));
-        LottoResult lottoResult = lottos.compareWinNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winLottto = new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoResult lottoResult = lottos.compareWinNumber(winLottto);
         assertThat(lottoResult.isFirst(1)).isTrue();
         assertThat(lottoResult.isSecond(1)).isTrue();
         assertThat(lottoResult.isThird(2)).isTrue();

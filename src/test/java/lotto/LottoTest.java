@@ -15,4 +15,12 @@ public class LottoTest {
         int result = lotto.compareWinLottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8));
         assertThat(result).isEqualTo(6);
     }
+
+    @DisplayName("우승 로또 객체와 유저 로또 객체가 같은지 테스트")
+    @Test
+    void isEqualUserLottoAndWinLotto() {
+        Lotto lotto = new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        Lotto winlotto = new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8)));
+        //assertThat(lotto.compareWinLottoNumber(winlotto, new LottoResult())).isEqualTo(1);
+    }
 }

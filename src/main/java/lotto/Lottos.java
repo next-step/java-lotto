@@ -28,10 +28,10 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
-    public LottoResult compareWinNumber(List<Integer> winNumber) {
+    public LottoResult compareWinNumber(Lotto winNumber) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
-            lottoResult.checkWin(lotto.compareWinLottoNumber(winNumber));
+            lotto.compareWinLottoNumber(winNumber, lottoResult);
         }
         return lottoResult;
     }

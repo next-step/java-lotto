@@ -20,7 +20,7 @@ public class LottoResult {
         return this.countFourthLotto == expectedCount;
     }
 
-    public void checkWin(int compareWinLottoNumber) {
+    public void checkRank(int compareWinLottoNumber) {
         if (compareWinLottoNumber == 3) {
             countFourthLotto++;
             return;
@@ -33,9 +33,9 @@ public class LottoResult {
             countSecondLotto++;
             return;
         }
-        if (compareWinLottoNumber == 6) {
-            countFristLotto++;
-            return;
-        }
+    }
+
+    public void winLotto() {
+        countFristLotto++;
     }
 }

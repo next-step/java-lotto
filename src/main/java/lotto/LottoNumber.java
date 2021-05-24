@@ -27,6 +27,18 @@ public class LottoNumber {
         return lottoNumber.size() == expectedSize;
     }
 
+    public int compareWinLottoNumber(Lotto winLottoNumber) {
+        int collectNumber = 0;
+        for(Integer winNumber : lottoNumber){
+            collectNumber += winLottoNumber.containNumber(winNumber);
+        }
+        return collectNumber;
+    }
+
+    public int containNumber(Integer winNumber) {
+        return lottoNumber.contains(winNumber) ? 1 : 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
