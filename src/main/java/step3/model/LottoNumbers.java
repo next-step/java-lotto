@@ -15,6 +15,7 @@ public final class LottoNumbers {
     private static final int MAX_SIZE = 6;
     private static final String CHECK_SIZE = "6개의 숫자까지만 담을 수 있습니다.";
     private static final String CHECK_EMPTY = "공백은 불가능 합니다.";
+    private static final String CHECK_BONUS = "기존에 있던 수는 보너스 숫자가 될 수 없습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
     private LottoNumber bonusNumber;
@@ -32,6 +33,7 @@ public final class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers, Integer bonusNumber) {
         this(numbers);
+        checkBonusValidation(bonusNumber);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -46,24 +48,11 @@ public final class LottoNumbers {
         return new LottoNumbers(numberList, bounusValue);
     }
 
-    private void validationSize(List<Integer> numberList) {
-        if (!isAddAvailableInput(numberList)) {
-            throw new IllegalArgumentException(CHECK_SIZE);
-        }
-    }
-
     public static List<Integer> stringToIntegerList(String numbers) {
         validationEmpty(numbers);
         numbers = numbers.replace(" ", "");
         return Arrays.stream(numbers.split(",")).map(StringUtils::parseInt)
             .collect(Collectors.toList());
-    }
-
-    private static boolean validationEmpty(String numbers) {
-        if (null == numbers || "".equals(numbers.trim())) {
-            throw new IllegalArgumentException(CHECK_EMPTY);
-        }
-        return true;
     }
 
     public Rank getRankWithVictoryNumber(LottoNumbers victoryNumber) {
@@ -97,6 +86,29 @@ public final class LottoNumbers {
 
     private boolean isMatchedBonus(LottoNumber compare) {
         return this.bonusNumber != null && this.bonusNumber.equals(compare);
+    }
+
+    private void checkBonusValidation(Integer bonusNumber) {
+        boolean isInNumbers = lottoNumbers.stream()
+            .filter(number -> number.equals(new LottoNumber(bonusNumber)))
+            .count() == 1;
+
+        if (isInNumbers) {
+            throw new IllegalArgumentException(CHECK_BONUS);
+        }
+    }
+
+    private void validationSize(List<Integer> numberList) {
+        if (!isAddAvailableInput(numberList)) {
+            throw new IllegalArgumentException(CHECK_SIZE);
+        }
+    }
+
+    private static boolean validationEmpty(String numbers) {
+        if (null == numbers || "".equals(numbers.trim())) {
+            throw new IllegalArgumentException(CHECK_EMPTY);
+        }
+        return true;
     }
 
 }

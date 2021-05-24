@@ -18,6 +18,19 @@ import step3.constant.Rank;
 public class LottoNumbersTest {
 
     @Test
+    @DisplayName("기존에 존재한 번호를 보너스 번호로 세팅 시 IllegalArgumentException 발생")
+    void validationBonusTest() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+            () -> {
+                new LottoNumbers(
+                    new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
+            });
+
+        assertThat(exception.getMessage())
+            .isEqualTo("기존에 있던 수는 보너스 숫자가 될 수 없습니다.");
+    }
+
+    @Test
     @DisplayName("6개 이상의 숫자를 담을 시 IllegalArgumentException 발생")
     void validationTest() {
         Exception exception = assertThrows(IllegalArgumentException.class,
