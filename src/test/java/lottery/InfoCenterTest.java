@@ -79,7 +79,7 @@ class InfoCenterTest {
 
 		Result result = sut.confirmTicket(Tickets.of(tickets));
 
-		assertEqualMatchCount(result, 0,0,0,1);
+		assertEqualMatchCount(result, 0,0,0,3);
 	}
 
 	@Test
@@ -98,22 +98,6 @@ class InfoCenterTest {
 		Result result = sut.confirmTicket(Tickets.of(tickets));
 		float totalYield = result.getTotalYield(money);
 		assertThat(totalYield).isEqualTo(expected);
-	}
-
-	@Test
-	void 보너스_점수를_추가한_로또당첨_확인() {
-		List<Ticket> tickets = new ArrayList<>();
-		tickets.add(Ticket.of(Lists.list(1, 2, 3, 9, 10, 45)));
-		tickets.add(Ticket.of(Lists.list(1, 2, 3, 4, 10, 45)));
-		tickets.add(Ticket.of(Lists.list(1, 2, 3, 4, 5, 45)));
-
-		Ticket lastWinningNumber = Ticket.of(Lists.list(1, 2, 3, 4, 5, 6));
-
-		sut.setLastWeekWinningTicket(lastWinningNumber);
-		Result result = sut.confirmTicket(Tickets.of(tickets));
-
-		assertEqualMatchCount(result, 0, 1, 1, 1);
-
 	}
 
 	private void assertEqualMatchCount(Result result, int threeMatchNumber, int fourMatchNumber, int fiveMatchNumber,
