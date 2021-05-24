@@ -53,23 +53,23 @@ public class WinningNumbersTest {
         winningType = winningNumbers.findWinningType(userFirstLottoTicket);
         assertThat(winningType).isEqualTo(WinningType.FIRST);
 
-        // 4개 일치 시에는 3등
+        // 3개 일치 시에는 FIFTH
         List<LottoNumber> userForthLottoNumbers = Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
         );
         LottoTicket userForthLottoTicket = new LottoTicket(userForthLottoNumbers);
         winningType = winningNumbers.findWinningType(userForthLottoTicket);
-        assertThat(winningType).isEqualTo(WinningType.FORTH);
+        assertThat(winningType).isEqualTo(WinningType.FIFTH);
 
-        // 0개 일치 시에는 7등
+        // 0개 일치 시에는 MISS
         List<LottoNumber> userSeventhLottoNumbers = Arrays.asList(
                 new LottoNumber(11), new LottoNumber(12), new LottoNumber(13),
                 new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)
         );
         LottoTicket userSeventhLottoTicket = new LottoTicket(userSeventhLottoNumbers);
         winningType = winningNumbers.findWinningType(userSeventhLottoTicket);
-        assertThat(winningType).isEqualTo(WinningType.SEVENTH);
+        assertThat(winningType).isEqualTo(WinningType.MISS);
 
     }
 }
