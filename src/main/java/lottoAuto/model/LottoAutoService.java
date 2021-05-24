@@ -1,4 +1,4 @@
-package lottoAuto.service;
+package lottoAuto.model;
 
 import lottoAuto.vo.LottoResultVo;
 
@@ -9,7 +9,7 @@ public class LottoAutoService {
     private List<Integer> winning_count;
     private List<Boolean> bonus_count;
 
-    public int statistic(List<Lotto> lottos, List<Integer> winningNum) {
+    public int getStatistic(List<Lotto> lottos, List<Integer> winningNum) {
         int count = 0;
         for (int i = 0; i < lottos.size(); i++) {
             count = getCount(lottos.get(i).getNumbers(), winningNum, i);
@@ -17,17 +17,17 @@ public class LottoAutoService {
         return count;
     }
 
-    private int getCount(List<Integer> lottos, List<Integer> winningNum, int i) {
+    private int getCount(List<Integer> lottoNumber, List<Integer> winningNum, int i) {
         int count = 0;
         for (int j = 0; j < winningNum.size(); j++) {
-            if (lottos.contains(winningNum.get(j))) {
+            if (lottoNumber.contains(winningNum.get(j))) {
                 count++;
             }
         }
         return count;
     }
 
-    public List<Boolean> statisticBonus(List<List> result, int bonus) {
+    public List<Boolean> getStatisticBonus(List<List> result, int bonus) {
         bonus_count = new ArrayList<>();
         for (int i = 0; i < result.size(); i++) {
             Boolean count = getBonusCount(result, bonus, i);
