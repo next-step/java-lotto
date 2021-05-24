@@ -42,6 +42,10 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public boolean matchBonus(LottoNumber bonusBall) {
+        return false;
+    }
+
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
