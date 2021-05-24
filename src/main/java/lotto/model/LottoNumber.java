@@ -31,4 +31,8 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public int number() {
+        return lottoNumber;
+    }
 }

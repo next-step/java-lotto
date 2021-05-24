@@ -1,9 +1,16 @@
 package lotto.model;
 
 public class RandomGenerateRule implements GenerateRule{
+    private LottoNumbers lottoNumbers;
+    private int cursor;
+
+    public RandomGenerateRule() {
+        this.cursor = 0;
+        this.lottoNumbers = CandidateLottoGenerator.generate().shuffle();
+    }
+
     @Override
     public LottoNumber generate() {
-        //generate int by logics
-        return new LottoNumber(1);
+        return lottoNumbers.get(cursor++);
     }
 }

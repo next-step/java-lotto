@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoGenerator {
+    private final int MAX_LOTTO_NUMBER = 45;
     private GenerateRule generateRule;
 
     public LottoGenerator(GenerateRule generateRule) {
