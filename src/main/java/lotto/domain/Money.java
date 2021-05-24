@@ -19,8 +19,20 @@ public class Money {
         return new Money(amount);
     }
 
+    public static Money ofLottoCount(int count) {
+        return new Money(count * LOTTO_PRICE);
+    }
+
     public int getBuyableLottoSize() {
         return amount / LOTTO_PRICE;
+    }
+
+    public int value() {
+        return amount;
+    }
+
+    public Money minus(Money manualLottoMoney) {
+        return new Money(this.amount - manualLottoMoney.value());
     }
 
     private void validatePositive(int amount) {

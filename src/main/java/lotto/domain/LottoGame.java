@@ -19,17 +19,36 @@ public class LottoGame {
     }
 
     public void progress() {
+
         Money money = Money.of(ioManager.inputMoney());
-        List<Lotto> lottos = buyLottos(money);
+
+        Money manualLottoMoney = Money.ofLottoCount(ioManager.inputManualLottoCount());
+        List<Lotto> lottos = buyManualLottos(manualLottoMoney);
+
+        List<Lotto> autoLottos = buyAutoLottos(money.minus(manualLottoMoney),
+                                               manualLottoMoney);
+
+        lottos.addAll(autoLottos);
         drawWinningLotto(lottos);
     }
 
-    private List<Lotto> buyLottos(Money money) {
+    private List<Lotto> buyManualLottos(Money money) {
 
-        ioManager.printBuyCount(money.getBuyableLottoSize());
+        List<List<Integer>> lottoNumbers =
+            ioManager.inputManualLottoNumbers(money.getBuyableLottoSize());
+
+        return lottoNumbers.stream()
+                           .map(Lotto::of)
+                           .collect(toList());
+    }
+
+    private List<Lotto> buyAutoLottos(Money remainMoney, Money manualLottoMoney) {
+
+        ioManager.printBuyCount(manualLottoMoney.getBuyableLottoSize(),
+                                remainMoney.getBuyableLottoSize());
 
         List<Lotto> lottos = LottoVendingMachine.defaultVendingMachine()
-                                                .buyLottos(money);
+                                                .buyLottos(remainMoney);
 
         for (Lotto lotto : lottos) {
             ioManager.printLine(lotto.toString());
