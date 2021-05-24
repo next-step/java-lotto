@@ -6,10 +6,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoTest {
     private LottoNumbers winningNumber;
@@ -41,5 +44,14 @@ public class LottoTest {
     void 로또번호_가져오기_테스트() {
         Lotto lotto = new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         assertThat(lotto.lottoNumbers()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @Test
+    void 불변객체_학습테스트() {
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThrows(UnsupportedOperationException.class, () -> lottoNumbers.lottoNumbers().add(7));
+        assertThat(lotto.lottoNumbers().contains("7")).isFalse();
     }
 }
