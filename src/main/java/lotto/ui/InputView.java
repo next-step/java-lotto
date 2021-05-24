@@ -11,6 +11,7 @@ import lotto.Store;
 
 public class InputView {
 	private Lottos lottos;
+	private Lotto prizeLotto;
 
 	public void input() {
 		Scanner sc = new Scanner(System.in);
@@ -19,8 +20,7 @@ public class InputView {
 		lottos = Store.buy(amount);
 		printLottos();
 
-		Lotto prizeLotto = inputPrizeLotto(sc);
-		lottos.statistics(prizeLotto);
+		prizeLotto = inputPrizeLotto(sc);
 	}
 
 	private void printLottos() {
@@ -51,4 +51,7 @@ public class InputView {
 		return lottos;
 	}
 
+	public Lotto prizeLotto() {
+		return prizeLotto;
+	}
 }
