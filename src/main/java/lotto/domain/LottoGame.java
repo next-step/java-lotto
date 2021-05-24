@@ -56,11 +56,19 @@ public class LottoGame {
 
     private int getNumberOfWinnings(Lotto lotto, int numberOfWinnings) {
         for (int lottoNumber : lotto.getLottoNumbers()) {
-            if (winningLottoNumbers.getWinningLottoNumbers().contains(lottoNumber)) {
+            if (winningLottoNumbers.getWinningLottoNumbers().getLottoNumbers().contains(lottoNumber)) {
                 numberOfWinnings++;
             }
         }
         return numberOfWinnings;
+    }
+
+
+    public void getManualLotto(List<String> manualLottoList) {
+        for (String manualLottoStr : manualLottoList) {
+            Lotto lotto = new Lotto(manualLottoStr);
+            lottoList.add(lotto);
+        }
     }
 
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 public class LottoMachine {
 
-
     public Lotto getAutoLotto() {
         List<Integer> lotto = new ArrayList<>();
         Collections.shuffle(LottoNumbers.lotto_number_list);
