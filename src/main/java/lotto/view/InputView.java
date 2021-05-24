@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InputView {
-	private static final String SPLIT_REGEX = ", ";
+	private static final String SPLIT_REGEX = ", |,";
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static BigDecimal inputMoney() {
 		System.out.println(Constants.INPUT_MONEY_PRINT);
-		return BigDecimal.valueOf(scanner.nextInt());
+		int inputInt = scanner.nextInt();
+		scanner.nextLine();
+		return BigDecimal.valueOf(inputInt);
 	}
 
 	public static List<Integer> inputWinningNumber() {
