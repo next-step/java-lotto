@@ -3,9 +3,9 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static type.LottoExceptionType.WRONG_LOTTO_PRICE;
 
 class LottoMoneyTest {
 
@@ -14,7 +14,8 @@ class LottoMoneyTest {
 	@DisplayName("음수 금액일때 Exception 검증 테스트")
 	void constructorTestWithNegative(){
 		assertThatThrownBy(() -> new LottoMoney(-1000))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining(WRONG_LOTTO_PRICE.message());
 
 	}
 

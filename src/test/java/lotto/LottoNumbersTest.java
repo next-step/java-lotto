@@ -24,7 +24,7 @@ class LottoNumbersTest {
 	void constructorTestWithDuplication(){
 		assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,2,3,4,4,6)))
 			.isInstanceOf(LottoException.class)
-			.hasMessageContaining(WRONG_LOTTO_NUMBER.getMessage());
+			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
 	}
 
 	@Test
@@ -32,7 +32,7 @@ class LottoNumbersTest {
 	void constructorFailedWithNullTest(){
 		assertThatThrownBy(()-> new LottoNumbers(null))
 			.isInstanceOf(LottoException.class)
-			.hasMessageContaining(WRONG_LOTTO_NUMBER.getMessage());
+			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class LottoNumbersTest {
 	void constructorFailedWithEmptyTest(){
 		assertThatThrownBy(()-> new LottoNumbers(Collections.emptyList()))
 			.isInstanceOf(LottoException.class)
-			.hasMessageContaining(WRONG_LOTTO_NUMBER.getMessage());
+			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
 	}
 
 	@Test

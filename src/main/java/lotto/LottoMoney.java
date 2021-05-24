@@ -5,6 +5,8 @@ import utils.NumberUtils;
 
 import java.math.BigDecimal;
 
+import static type.LottoExceptionType.WRONG_LOTTO_PRICE;
+
 public class LottoMoney {
 
 	private static final int LOTTO_PRICE = 1000;
@@ -14,7 +16,7 @@ public class LottoMoney {
 
 	public LottoMoney(final int price){
 		if (price <= 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(WRONG_LOTTO_PRICE.message());
 		}
 		this.price = price;
 	}

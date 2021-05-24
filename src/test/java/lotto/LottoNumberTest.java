@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static type.LottoExceptionType.WRONG_LOTTO_NUMBER;
 
 class LottoNumberTest {
 
@@ -15,7 +16,8 @@ class LottoNumberTest {
 	})
 	void validTest(final int number){
 		assertThatThrownBy(()->new LottoNumber(number))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
 	}
 
 	@ParameterizedTest(name = "객체 비교 테스트. sourceNumber[{0}], targetNumber[{1}], expected[{2}]")

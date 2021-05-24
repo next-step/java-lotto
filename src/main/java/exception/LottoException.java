@@ -5,7 +5,7 @@ import type.LottoExceptionType;
 public class LottoException extends RuntimeException {
 
 	private LottoException(LottoExceptionType code){
-		super(code.getMessage());
+		super(code.message());
 	}
 
 	public static LottoException of(LottoExceptionType code){
