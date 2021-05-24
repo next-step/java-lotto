@@ -6,6 +6,7 @@ public class InputView {
     Scanner scan;
     private int inputAmount = 0;
     private String inputLastWonLottoNumber;
+    private String inputBonusNumber;
 
     InputView() {
         scan = new Scanner(System.in);
@@ -29,4 +30,11 @@ public class InputView {
         return inputLastWonLottoNumber;
     }
 
+    public String getInputBonusNumber() {
+        return inputBonusNumber;
+    }
+    public void inputBonusLottoNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        inputBonusNumber = scan.next();
+    }
 }

@@ -5,10 +5,12 @@ import java.util.List;
 
 public class LastWonLottoNumber {
     private List<Integer> lastWonLottoNumbers;
+    private Integer bonusNumber;
 
-    public LastWonLottoNumber(String inputLastWonLottoNumberString) {
+    public LastWonLottoNumber(String inputLastWonLottoNumberString, String inputBonusNumber) {
         lastWonLottoNumbers = new ArrayList<Integer>();
         lastWonLottoNumbers = parsingInputString(inputLastWonLottoNumberString);
+        bonusNumber = validateNumber(inputBonusNumber);
     }
 
     private List<Integer> parsingInputString(String inputLastWonLottoNumberString) {
@@ -34,11 +36,22 @@ public class LastWonLottoNumber {
         return splitNumber.matches("[+-]?\\d*(\\.\\d+)?");
     }
 
-    public boolean contains(int number) {
+    public boolean containsMain(int number) {
         return lastWonLottoNumbers.contains(number);
+    }
+
+    public boolean containsBonus(int number) {
+        if(bonusNumber == number)
+            return true;
+
+        return false;
     }
 
     public List<Integer> getLastWonLottoNumbers() {
         return lastWonLottoNumbers;
+    }
+
+    public Integer getBonusNumber() {
+        return bonusNumber;
     }
 }

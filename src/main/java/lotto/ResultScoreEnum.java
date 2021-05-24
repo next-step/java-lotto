@@ -4,6 +4,7 @@ public enum ResultScoreEnum {
     THREE("3개 일치 (5000원)", 5000),
     FOUR("4개 일치 (50000원)", 50000),
     FIVE("5개 일치 (150000원)", 150000),
+    FIVE_BONUS("5개 일치, 보너스 볼 일치 (30000000원)", 30000000),
     SIX("6개 일치 (2000000000원)", 2000000000);
 
     private String printResult;
