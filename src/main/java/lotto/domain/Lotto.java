@@ -12,6 +12,7 @@ public final class Lotto {
 
   private final List<Integer> numbers;
   private static final Integer NUMBER_COUNT = 6;
+  private Rank rank;
 
   public Lotto(NumberGenerator numberGenerator) {
     numbers = numberGenerator.generateNumbersOf(NUMBER_COUNT);
@@ -54,5 +55,22 @@ public final class Lotto {
   @Override
   public int hashCode() {
     return Objects.hash(numbers);
+  }
+
+  public Rank getCalculatedRankBy(WinningNumber winningNumber) {
+    setRankBy(winningNumber);
+
+    return getRank();
+  }
+
+  private void setRankBy(WinningNumber winningNumber) {
+    this.rank = Rank.valueOf(
+        getMatchCountFrom(winningNumber),
+        winningNumber.isMatchBonusNumberWith(this.numbers)
+    );
+  }
+
+  private Rank getRank() {
+    return this.rank;
   }
 }

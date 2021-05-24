@@ -3,17 +3,12 @@ package lotto.domain;
 import lotto.enums.Rank;
 import lotto.input.WinningNumber;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static lotto.enums.Rank.FIFTH;
-import static lotto.enums.Rank.FIRST;
-import static lotto.enums.Rank.FOURTH;
-import static lotto.enums.Rank.MISS;
-import static lotto.enums.Rank.SECOND;
-import static lotto.enums.Rank.THIRD;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public final class LottoBucket {
 
@@ -24,25 +19,19 @@ public final class LottoBucket {
   }
 
   public MatchNumberCount getMatchNumberCountWith(WinningNumber winningNumber) {
-    Map<Rank, Integer> count = getDefaultCount();
+    Map<Rank, Long> rankCount = lottos
+        .stream()
+        .map(lotto -> lotto.getCalculatedRankBy(winningNumber))
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    addRankNotIn(rankCount);
 
-    for (Lotto lotto : lottos) {
-      Rank rank = lotto.getRankBy(winningNumber);
-      count.put(rank, count.get(rank) + 1);
-    }
-
-    return new MatchNumberCount(count);
+    return new MatchNumberCount(rankCount);
   }
 
-  private Map<Rank, Integer> getDefaultCount() {
-    return new HashMap<Rank, Integer>() {{
-      put(FIRST, 0);
-      put(SECOND, 0);
-      put(THIRD, 0);
-      put(FOURTH, 0);
-      put(FIFTH, 0);
-      put(MISS, 0);
-    }};
+  private void addRankNotIn(Map<Rank, Long> rankCount) {
+    Arrays.stream(Rank.values())
+        .filter(rank -> !rankCount.containsKey(rank))
+        .forEach(rank -> rankCount.put(rank, 0L));
   }
 
   public int size() {

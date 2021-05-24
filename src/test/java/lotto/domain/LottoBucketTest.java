@@ -8,11 +8,7 @@ import java.util.HashMap;
 
 import static java.util.Arrays.asList;
 import static lotto.enums.Rank.FIFTH;
-import static lotto.enums.Rank.FIRST;
-import static lotto.enums.Rank.FOURTH;
 import static lotto.enums.Rank.MISS;
-import static lotto.enums.Rank.SECOND;
-import static lotto.enums.Rank.THIRD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoBucketTest {
@@ -39,13 +35,9 @@ class LottoBucketTest {
         new Lotto(numberCount -> asList(3, 8, 27, 30, 35, 44))
     ));
 
-    MatchNumberCount expectedMatchNumberCount = new MatchNumberCount(new HashMap<Rank, Integer>() {{
-      put(FIRST, 0);
-      put(SECOND, 0);
-      put(THIRD, 0);
-      put(FOURTH, 0);
-      put(FIFTH, 1);
-      put(MISS, 13);
+    MatchNumberCount expectedMatchNumberCount = new MatchNumberCount(new HashMap<Rank, Long>() {{
+      put(FIFTH, 1L);
+      put(MISS, 13L);
     }});
 
     // When

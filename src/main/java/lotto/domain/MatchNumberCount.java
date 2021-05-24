@@ -5,36 +5,22 @@ import lotto.enums.Rank;
 import java.util.Map;
 import java.util.Objects;
 
-import static lotto.enums.Rank.FIFTH;
-import static lotto.enums.Rank.FIRST;
-import static lotto.enums.Rank.FOURTH;
-import static lotto.enums.Rank.SECOND;
-import static lotto.enums.Rank.THIRD;
-
 public final class MatchNumberCount {
 
-  private final Map<Rank, Integer> matchNumberCount;
+  private final Map<Rank, Long> matchNumberCount;
 
-  public MatchNumberCount(Map<Rank, Integer> matchNumberCount) {
+  public MatchNumberCount(Map<Rank, Long> matchNumberCount) {
     this.matchNumberCount = matchNumberCount;
   }
 
-  public Integer getRevenue() {
-    int revenue = 0;
-
-    for (Rank rank : Rank.values()) {
-      revenue += matchNumberCount.get(rank) * rank.getWinningMoney();
-    }
-
-    return revenue;
+  public Long getRevenue() {
+    return matchNumberCount.keySet().stream()
+        .map(rank -> matchNumberCount.get(rank) * rank.getWinningMoney())
+        .reduce(0L, Long::sum);
   }
 
-  public void print() {
-    System.out.println("3개 일치 (5000원)- " + matchNumberCount.get(FIFTH) + "개");
-    System.out.println("4개 일치 (50000원)- " + matchNumberCount.get(FOURTH) + "개");
-    System.out.println("5개 일치 (1500000)- " + matchNumberCount.get(THIRD) + "개");
-    System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- " + matchNumberCount.get(SECOND) + "개");
-    System.out.println("6개 일치 (2000000000원)- " + matchNumberCount.get(FIRST) + "개");
+  public Map<Rank, Long> getMatchNumberCount() {
+    return matchNumberCount;
   }
 
   @Override
