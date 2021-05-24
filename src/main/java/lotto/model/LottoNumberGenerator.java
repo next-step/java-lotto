@@ -10,9 +10,11 @@ public class LottoNumberGenerator {
 
     public static Set<LottoNumber> makeLottoNumber() {
         Set<LottoNumber> lotto = new HashSet<>();
+
         while (lotto.size() < CORRECT_LOTTO_NUMBERS_SIZE) {
             lotto.add(new LottoNumber(makeRandomNumber()));
         }
+
         return lotto;
     }
 

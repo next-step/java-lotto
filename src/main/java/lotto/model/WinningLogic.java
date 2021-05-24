@@ -2,32 +2,29 @@ package lotto.model;
 
 import java.util.*;
 
-import static lotto.model.Reward.*;
-
 public class WinningLogic {
     public static final int INITIALIZE_NUMBER = 0;
 
     public Map<Integer, Integer> makePrizes(List<Reward> rewards) {
         TreeMap<Integer, Integer> prizes = new TreeMap<>();
 
-        for (Reward reward : values()) {
+        for (Reward reward : Reward.values()) {
             prizes.put(reward.getPrizeMoney(), INITIALIZE_NUMBER);
         }
+
         for (Reward reward : rewards) {
             prizes.replace(reward.getPrizeMoney(), prizes.get(reward.getPrizeMoney()) + 1);
         }
-        prizes.remove(0);
 
         return prizes;
     }
 
     public Integer makePrizeMoney(Map<Integer, Integer> prizes) {
         Integer prizeMoney = INITIALIZE_NUMBER;
-        prizeMoney += FIFTH_PRIZE.getPrizeMoney() * prizes.get(FIFTH_PRIZE.getPrizeMoney());
-        prizeMoney += FOURTH_PRIZE.getPrizeMoney() * prizes.get(FOURTH_PRIZE.getPrizeMoney());
-        prizeMoney += THIRD_PRIZE.getPrizeMoney() * prizes.get(THIRD_PRIZE.getPrizeMoney());
-        prizeMoney += SECOND_PRIZE.getPrizeMoney() * prizes.get(SECOND_PRIZE.getPrizeMoney());
-        prizeMoney += FIRST_PRIZE.getPrizeMoney() * prizes.get(FIRST_PRIZE.getPrizeMoney());
+
+        for (Reward reward : Reward.values()){
+            prizeMoney += reward.getPrizeMoney() * prizes.get(reward.getPrizeMoney());
+        }
 
         return prizeMoney;
     }
@@ -62,9 +59,6 @@ public class WinningLogic {
     }
 
     private boolean checkBonusCount(Lotto lotto, LottoNumber bonusNumber) {
-        if (lotto.contain(bonusNumber)) {
-            return true;
-        }
-        return false;
+        return lotto.contain(bonusNumber);
     }
 }

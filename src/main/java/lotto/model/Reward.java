@@ -32,6 +32,7 @@ public enum Reward {
         if (winningState.getBonusBallState() == true && winningState.getMatchedCount() == 5) {
             return SECOND_PRIZE;
         }
+
         return Arrays.stream(Reward.values())
                 .filter(reward -> reward.getMatchCount() == winningState.getMatchedCount())
                 .findAny()
