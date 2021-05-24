@@ -13,7 +13,7 @@ public class StringAddCalculator {
         String targetNum = input;
         List<String> splitInputs = divider.splitInputByCustomDelimiterRule(input);
         if (splitInputs.size() > 1) {
-            divider.setCustomDelimiter(splitInputs.get(0));
+            divider.addCustomDelimiter(splitInputs.get(0));
             targetNum = splitInputs.get(1);
         }
         String[] numArray = divider.getDividedInput(targetNum);

@@ -11,9 +11,9 @@ public class Divider {
     private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
     private final int CUSTOM_DELIMITER_IDX = 1;
     private final int TARGET_NUM_IDX = 2;
-    private Pattern pattern = Pattern.compile(CUSTOM_DELIMITER)
+    private Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
 
-    List<String> splitInputByCustomDelimiterRule(String input) {
+    public List<String> splitInputByCustomDelimiterRule(String input) {
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             return Arrays.asList(matcher.group(CUSTOM_DELIMITER_IDX), matcher.group(TARGET_NUM_IDX));
@@ -21,11 +21,11 @@ public class Divider {
         return Arrays.asList(input);
     }
 
-    void setCustomDelimiter(String customDelimiter) {
+    public void addCustomDelimiter(String customDelimiter) {
         this.DELIMITER.add(customDelimiter);
     }
 
-    String[] getDividedInput(String num) {
+    public String[] getDividedInput(String num) {
         String delimiterRegex = "([" + String.join("", DELIMITER) + "])";
         return num.split(delimiterRegex);
     }
