@@ -31,10 +31,10 @@ public class LottoTickets {
         return new Money(LOTTO_TICKET_PRICE * lottoTickets.size());
     }
 
-    public void checkHitCount(LottoNumbers winningNumbers, LottoStatement lottoStatement) {
+    public void checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus, LottoStatement lottoStatement) {
         for (LottoTicket lottoTicket: lottoTickets) {
-            lottoTicket.calcHitCount(winningNumbers);
-            lottoStatement.judge(lottoTicket.hitCount());
+            lottoTicket.calcHitCount(winningNumbersWithBonus);
+            lottoStatement.judge(lottoTicket.hitCount(), lottoTicket.isMatchedBonus());
         }
     }
 

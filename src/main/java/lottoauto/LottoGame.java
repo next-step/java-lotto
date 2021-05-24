@@ -11,11 +11,16 @@ public class LottoGame {
         LottoTickets lottoTickets = new LottoTickets(new Money(inputView.nextInt()), autoStrategy);
         outputView.printLottoTickets(lottoTickets);
 
-        outputView.enterWinningNumber();
+        outputView.enterWinningNumbers();
         LottoNumbers winningNumbers = new LottoNumbers(inputView.next());
 
+        outputView.enterBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(inputView.nextInt());
+
+        WinningNumbersWithBonus winningNumbersWithBonus = new WinningNumbersWithBonus(winningNumbers, bonusNumber);
+
         LottoStatement lottoStatement = new LottoStatement();
-        lottoTickets.checkHitCount(winningNumbers, lottoStatement);
+        lottoTickets.checkHitCount(winningNumbersWithBonus, lottoStatement);
         outputView.printStatement(lottoStatement);
         outputView.printProceedsRate(lottoTickets.calcProceedsRate(lottoStatement));
     }

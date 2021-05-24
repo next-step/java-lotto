@@ -37,9 +37,15 @@ public class LottoTicketTest {
                 .add(new LottoNumber(4)).add(new LottoNumber(5)).add(new LottoNumber(6))
                 .build()
                 .collect(Collectors.toList()));
-        lottoTicket.calcHitCount(winningNumbers);
-        assertThat(lottoTicket.hitCount()).isEqualTo(new HitCount(6));
+        LottoNumber bonusNumber = new LottoNumber(7);
 
+        WinningNumbersWithBonus winningNumbersWithBonus = new WinningNumbersWithBonus(winningNumbers, bonusNumber);
+
+        lottoTicket.calcHitCount(winningNumbersWithBonus);
+        assertThat(lottoTicket.hitCount()).isEqualTo(new HitCount(6));
+        assertThat(lottoTicket.isMatchedBonus()).isFalse();
+
+        /*
         winningNumbers = new LottoNumbers(Stream.<LottoNumber>builder()
                 .add(new LottoNumber(1)).add(new LottoNumber(2)).add(new LottoNumber(3))
                 .add(new LottoNumber(4)).add(new LottoNumber(5)).add(new LottoNumber(10))
@@ -63,5 +69,7 @@ public class LottoTicketTest {
                 .collect(Collectors.toList()));
         lottoTicket.calcHitCount(winningNumbers);
         assertThat(lottoTicket.hitCount()).isEqualTo(new HitCount(0));
+
+        */
     }
 }

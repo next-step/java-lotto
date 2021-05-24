@@ -47,11 +47,21 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public HitCount checkHitCount(LottoNumbers winningNumbers) {
+    public boolean checkHitBonus(WinningNumbersWithBonus winningNumbersWithBonus) {
+        boolean result = false;
+
+        for(LottoNumber lottoNumber: lottoNumbers) {
+            result = result || winningNumbersWithBonus.isHitBonusNumber(lottoNumber);
+        }
+
+        return result;
+    }
+
+    public HitCount checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus) {
         int result = 0;
 
         for (LottoNumber lottoNumber: lottoNumbers) {
-            result += winningNumbers.contains(lottoNumber) ? 1 : 0;
+            result += winningNumbersWithBonus.contains(lottoNumber) ? 1 : 0;
         }
 
         return new HitCount(result);

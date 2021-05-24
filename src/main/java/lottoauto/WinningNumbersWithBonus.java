@@ -16,6 +16,9 @@ public class WinningNumbersWithBonus {
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningNumbers.contains(lottoNumber);
+    }
 
     public boolean isHitBonusNumber(LottoNumber lottoNumber) {
         return bonusNumber.equals(lottoNumber);
