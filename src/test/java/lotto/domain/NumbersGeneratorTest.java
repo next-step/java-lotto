@@ -12,8 +12,10 @@ public class NumbersGeneratorTest {
     @Test
     @DisplayName("6개의 임의의 숫자를 생성한다")
     void validLottoNumbersLengthTest() {
-        NumbersGenerator numberGenerator = new RandomNumbersGenerator();
-        List<Integer> numbers = numberGenerator.generate();
-        assertThat(numbers).hasSize(6);
+        NumbersGenerator numberGenerator = new RandomLottoNumbersGenerator();
+        int count = 3;
+
+        List<LottoNumbers> numbers = numberGenerator.generate(count);
+        assertThat(numbers).hasSize(count);
     }
 }
