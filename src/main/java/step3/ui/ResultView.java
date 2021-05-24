@@ -1,6 +1,7 @@
 package step3.ui;
 
 import step3.domain.Lotto;
+import step3.domain.LottoCount;
 
 import java.util.List;
 
@@ -13,14 +14,14 @@ public class ResultView {
         }
     }
 
-    public static void showStatistics(int threeCount, int fourCount, int fiveCount, int sixCount) {
+    public static void showStatistics(LottoCount lottoCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (5000원) -" + threeCount + "개");
-        System.out.println("4개 일치 (50000원) -" + fourCount + "개");
-        System.out.println("5개 일치 (1500000원) -" + fiveCount + "개");
-        System.out.println("6개 일치 (2000000000원) -" + sixCount + "개");
+        System.out.println("3개 일치 (5000원) -" + lottoCount.getThreeCount() + "개");
+        System.out.println("4개 일치 (50000원) -" + lottoCount.getFourCount() + "개");
+        System.out.println("5개 일치 (1500000원) -" + lottoCount.getFiveCount() + "개");
+        System.out.println("6개 일치 (2000000000원) -" + lottoCount.getSixCount() + "개");
 
     }
 
