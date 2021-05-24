@@ -5,17 +5,14 @@ import java.util.List;
 
 public class Lottos {
 
-	private static final int LOTTO_PRICE = 1000;
-
 	private final List<Lotto> lottos;
 
-	public Lottos(int money) {
+	public Lottos(Money money) {
 		validateMoney(money);
 
 		lottos = new ArrayList<>();
 
-		int lottoCount = money / LOTTO_PRICE;
-		for (int i = 0; i < lottoCount; i++) {
+		for (int i = 0; i < money.buyCount(); i++) {
 			lottos.add(new Lotto(LottoUtils.randomNumbers()));
 		}
 	}
@@ -24,8 +21,8 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	private void validateMoney(int money) {
-		if (money < LOTTO_PRICE) {
+	private void validateMoney(Money money) {
+		if (!money.isEnough()) {
 			throw new IllegalArgumentException("Not enough money to buy a lotto.");
 		}
 	}
