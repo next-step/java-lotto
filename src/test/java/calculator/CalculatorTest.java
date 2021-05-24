@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -31,18 +32,17 @@ public class CalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Calculator(input));
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3|6", "//[\\n10[3[1|14"}, delimiter = '|')
+    @Test
     @DisplayName("앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.")
-    void sumByCustomDelimiter_test(String input, int expectedAnswer) {
+    void sumByCustomDelimiter_test() {
         //given
-        Calculator calculator = new Calculator(input);
+        Calculator calculator = new Calculator("//;\n1;2;3");
 
         //when
         int sum = calculator.sumOperands();
 
         //then
-        assertThat(sum).isEqualTo(expectedAnswer);
+        assertThat(sum).isEqualTo(6);
     }
 
     @ParameterizedTest
