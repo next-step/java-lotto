@@ -26,10 +26,9 @@ public class LottoMachine {
 
     public LottoWin result(Lotto winLotto) {
         LottoWin lottoWin = new LottoWin();
-        List<LottoNumber> lottoNumbers = winLotto.lottoNumbers();
 
         lottos.forEach(lotto -> {
-            int matchCount = lotto.match(lottoNumbers);
+            int matchCount = lotto.match(winLotto);
             lottoWin.hit(matchCount);
         });
         return lottoWin;
