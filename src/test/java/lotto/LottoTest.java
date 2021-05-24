@@ -48,8 +48,7 @@ public class LottoTest {
     @Test
     public void purchaseAvailableLotto_구매로또번호생성검증() {
         PurchaseLotto purchaseLotto = new PurchaseLotto();
-        purchaseLotto.purchaseAvailableLotto(14);
-        assertThat(purchaseLotto.getLottoNumberList().count()).isEqualTo(14);
+        assertThat(purchaseLotto.purchaseAvailableLotto(14).count()).isEqualTo(14);
     }
 
     @ParameterizedTest
