@@ -33,4 +33,9 @@ public class LottoMachine {
         });
         return lottoWin;
     }
+
+    public LottoWin result(Lotto winLotto, LottoNumber bonusBall) {
+        LottoWin lottoWin = new LottoWin();
+        return lottoWin;
+    }
 }
