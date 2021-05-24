@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.common.WinningType;
-import lotto.domain.LottoTicket;
 
 import java.util.List;
 

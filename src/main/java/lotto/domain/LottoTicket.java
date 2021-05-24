@@ -1,32 +1,29 @@
 package lotto.domain;
 
-import lotto.common.ErrorCode;
 import lotto.common.WinningType;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 public class LottoTicket {
     private final List<LottoNumber> LOTTO_NUMBERS;
 
     public LottoTicket() {
-        this.LOTTO_NUMBERS = new LottoTicketGenerator().generate();
+        this.LOTTO_NUMBERS = new ArrayList<>(new LottoTicketGenerator().generate());
     }
 
     public LottoTicket(String lottoNumbersText) {
-        List<LottoNumber> test =new LottoTicketGenerator().generate(lottoNumbersText);
-        this.LOTTO_NUMBERS = new LottoTicketGenerator().generate(lottoNumbersText);
+        this.LOTTO_NUMBERS = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
     }
 
-    public LottoNumber[] toArray() {
-        return this.LOTTO_NUMBERS.toArray(new LottoNumber[LOTTO_NUMBERS.size()]);
+    public List<LottoNumber> getLottoTicket() {
+        return Collections.unmodifiableList(this.LOTTO_NUMBERS);
     }
 
     public WinningType findWinningType(LottoTicket winningLottoTicket) {
         int matchCount = 0;
-        for (LottoNumber winningLottoNumber : winningLottoTicket.toArray()) {
+        for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
             matchCount += contains(winningLottoNumber);
         }
 

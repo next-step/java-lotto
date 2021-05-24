@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.common.WinningType;
 import lotto.domain.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameView {
