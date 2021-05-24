@@ -8,7 +8,7 @@ public class Number {
 		int num = Integer.parseInt(text);
 
 		if (num < 0) {
-			throw new RuntimeException();
+			throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
 		}
 		this.value = num;
 	}
