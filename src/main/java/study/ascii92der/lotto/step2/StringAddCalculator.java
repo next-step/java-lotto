@@ -24,7 +24,20 @@ public class StringAddCalculator {
 
     public static int sum(String[] values) {
         int result = 0;
-        for (String value : values) result += Integer.parseInt(value);
+        for (String value : values) result += parsingValue(value);
         return result;
+    }
+
+    private static int parsingValue(String value) {
+        int parsedNumber;
+        try {
+            parsedNumber = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Not a number", e);
+        }
+        if (parsedNumber < 0) {
+            throw new RuntimeException("invalid range number , Negative number");
+        }
+        return parsedNumber;
     }
 }
