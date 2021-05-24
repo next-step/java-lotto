@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class CalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"5,10|15", "0:10|10", "0:0|0"}, delimiter = '|')
+    @CsvSource(value = {"5,10|15", "0:10|10", "0:0|0", "5,3:10|18"}, delimiter = '|')
     @DisplayName("입력받은 숫자들과 구분자를 분리하여 합을 구한다.")
     void sum_test(String input, int expectedAnswer) {
         //given
