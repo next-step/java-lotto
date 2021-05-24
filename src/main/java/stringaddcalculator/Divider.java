@@ -11,9 +11,10 @@ public class Divider {
     private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
     private final int CUSTOM_DELIMITER_IDX = 1;
     private final int TARGET_NUM_IDX = 2;
+    private Pattern pattern = Pattern.compile(CUSTOM_DELIMITER)
 
     List<String> splitInputByCustomDelimiterRule(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             return Arrays.asList(matcher.group(CUSTOM_DELIMITER_IDX), matcher.group(TARGET_NUM_IDX));
         }
