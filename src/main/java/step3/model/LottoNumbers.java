@@ -17,6 +17,7 @@ public final class LottoNumbers {
     private static final String CHECK_EMPTY = "공백은 불가능 합니다.";
 
     private final Set<LottoNumber> lottoNumbers;
+    private LottoNumber bonusNumber;
 
     public LottoNumbers() {
         this.lottoNumbers = new TreeSet<>();
@@ -25,13 +26,24 @@ public final class LottoNumbers {
     public LottoNumbers(List<Integer> numbers) {
         validationSize(numbers);
         this.lottoNumbers = new TreeSet<>();
-        numbers.stream().forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        numbers.stream()
+            .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+    }
+
+    public LottoNumbers(List<Integer> numbers, Integer bonusNumber) {
+        this(numbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public static LottoNumbers of(String numbers) {
-        validationEmpty(numbers);
         List<Integer> numberList = stringToIntegerList(numbers);
         return new LottoNumbers(numberList);
+    }
+
+    public static LottoNumbers of(String numbers, String bounus) {
+        List<Integer> numberList = stringToIntegerList(numbers);
+        Integer bounusValue = StringUtils.parseInt(bounus);
+        return new LottoNumbers(numberList, bounusValue);
     }
 
     private void validationSize(List<Integer> numberList) {
@@ -41,8 +53,10 @@ public final class LottoNumbers {
     }
 
     public static List<Integer> stringToIntegerList(String numbers) {
+        validationEmpty(numbers);
         numbers = numbers.replace(" ", "");
-        return Arrays.stream(numbers.split(",")).map(StringUtils::parseInt).collect(Collectors.toList());
+        return Arrays.stream(numbers.split(",")).map(StringUtils::parseInt)
+            .collect(Collectors.toList());
     }
 
     private static boolean validationEmpty(String numbers) {
@@ -53,15 +67,21 @@ public final class LottoNumbers {
     }
 
     public Rank getRankWithVictoryNumber(LottoNumbers victoryNumber) {
-        int matchedCount = (int) lottoNumbers.stream().filter(victoryNumber::contains).count();
+        int matchedCount = (int)lottoNumbers.stream()
+            .filter(victoryNumber::contains).count();
 
-        return Rank.findRankPriceBymatchedCount(matchedCount);
+        boolean hasBous = lottoNumbers.stream()
+            .filter(victoryNumber::isMatchedBonus)
+            .count() == 1;
+
+        return Rank.findRankPriceBymatchedCount(matchedCount, hasBous);
     }
 
     @Override
     public String toString() {
         List<String> temp = new ArrayList<>(Arrays.asList("["));
-        lottoNumbers.stream().forEach(lottoNumber -> temp.add(lottoNumber.toString()));
+        lottoNumbers.stream()
+            .forEach(lottoNumber -> temp.add(lottoNumber.toString()));
         temp.add("]");
         return String.join(" ", temp);
     }
@@ -71,7 +91,12 @@ public final class LottoNumbers {
     }
 
     private boolean contains(LottoNumber compare) {
-        return lottoNumbers.stream().filter(lottoNumber -> lottoNumber.equals(compare)).count() == 1;
+        return lottoNumbers.stream()
+            .filter(lottoNumber -> lottoNumber.equals(compare)).count() == 1;
+    }
+
+    private boolean isMatchedBonus(LottoNumber compare) {
+        return this.bonusNumber != null && this.bonusNumber.equals(compare);
     }
 
 }

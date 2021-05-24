@@ -1,6 +1,6 @@
 package step3.model;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,21 +37,25 @@ public class TotalLottoTest {
     @DisplayName("로또 수익률 테스트")
     void getBenefitTest() {
         LottoNumbers victoryNumber = LottoNumbers.of("1, 2, 3, 7, 8, 9");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000))).isEqualTo("142968.21");
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("142968.21");
         victoryNumber = LottoNumbers.of("11, 12, 13, 14, 15, 16");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000))).isEqualTo("0.00");
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("0.00");
         victoryNumber = LottoNumbers.of("7, 10, 11, 12, 13, 14");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000))).isEqualTo("0.35");
+        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
+            .isEqualTo("0.35");
     }
 
     @Test
     @DisplayName("당첨 번호를 받아  등수별 총 수를 반환한다.")
     void winningLottoTest() {
 
-        Map<Rank, Long> winning = totalLotto.groupByWinnerPrice(LottoNumbers.of("1, 2, 3, 7, 8, 9"));
+        Map<Rank, Long> winning = totalLotto
+            .groupByWinnerPrice(LottoNumbers.of("1, 2, 3, 7, 8, 9"));
 
         assertThat(winning.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(winning.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(winning.get(Rank.THIRD)).isEqualTo(1);
         assertThat(winning.get(Rank.THIRD)).isEqualTo(1);
         assertThat(winning.get(Rank.FOURTH)).isEqualTo(1);
     }
