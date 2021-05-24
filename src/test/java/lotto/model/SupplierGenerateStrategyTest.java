@@ -15,7 +15,7 @@ class SupplierGenerateStrategyTest {
 	public void generateTest() {
 		LottoNumbersGenerateStrategy generateStrategy = new SupplierGenerateStrategy(() -> asList(1, 2, 3, 4, 5, 6));
 
-		List<LottoNumbers> lottoTicket = generateStrategy.generate(2);
+		List<LottoNumbers> lottoTicket = generateStrategy.generate(Count.of(2));
 
 		assertThat(lottoTicket).containsExactly(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumbers.of(1, 2, 3, 4, 5, 6));
 	}

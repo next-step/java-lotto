@@ -27,7 +27,10 @@ public class LottoAppOutput {
 		printStream.println(lottoNumbersCount + "개를 구매했습니다.");
 	}
 
-	public void printLottoTicket(LottoTicket lottoTicket) {
+	public void printLottoTicket(LottoTicket lottoTicket, int manualCount, int autoCount) {
+		printNewLine();
+		String render = String.format("수동으로 %s개, 자동으로 %s개를 구매했습니다.", manualCount, autoCount);
+		printStream.println(render);
 		for (List<Integer> lottoNumbers : lottoTicket.getLottoNumbersGroup()) {
 			printLottoNumbers(lottoNumbers);
 		}
@@ -85,10 +88,12 @@ public class LottoAppOutput {
 	}
 
 	public void printManualCountInputView() {
+		printNewLine();
 		printStream.println("수동으로 구매할 로또 수를 입력해 주세요.");
 	}
 
 	public void printManualLottoNumbersInputView() {
+		printNewLine();
 		printStream.println("수동으로 구매할 번호를 입력해 주세요.");
 	}
 }

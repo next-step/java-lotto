@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 
+import lotto.model.Count;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoNumbersGenerateStrategy;
@@ -30,7 +31,11 @@ public class LottoApp {
 
 	public void run() {
 		Money money = inputMoney();
-		LottoTicket lottoTicket = inputLottoTicket(money);
+		Count manualCount = inputManualBuyCount();
+		Count totalCount = money.countLotto();
+		Count autoCount = totalCount.minus(manualCount);
+		LottoTicket lottoTicket = inputLottoTicket(manualCount, autoCount);
+		printLottoTicket(lottoTicket, manualCount, autoCount);
 		WinningNumbers winningNumbers = inputWinningNumbers();
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
@@ -40,19 +45,20 @@ public class LottoApp {
 		return Money.ofWons(lottoAppInput.inputNumber());
 	}
 
-	private LottoTicket inputLottoTicket(Money money) {
-		List<LottoNumbers> manuals = inputManualNumbers();
-		int manualCount = manuals.size();
-		int autoCount = money.countOfLottoNumbers() - manualCount;
+	private LottoTicket inputLottoTicket(Count manualCount, Count autoCount) {
+		List<LottoNumbers> manuals = inputManualNumbers(manualCount);
 		List<LottoNumbers> autos = randomStrategy.generate(autoCount);
 		return LottoTicket.of(manuals, autos);
 	}
 
-	private List<LottoNumbers> inputManualNumbers() {
+	private Count inputManualBuyCount() {
 		lottoAppOutput.printManualCountInputView();
-		int manualCount = lottoAppInput.inputNumber();
+		return Count.of(lottoAppInput.inputNumber());
+	}
+
+	private List<LottoNumbers> inputManualNumbers(Count count) {
 		lottoAppOutput.printManualLottoNumbersInputView();
-		return supplierStrategy.generate(manualCount);
+		return supplierStrategy.generate(count);
 	}
 
 	private WinningNumbers inputWinningNumbers() {
@@ -67,6 +73,10 @@ public class LottoApp {
 	private LottoNumber inputBonusNumber() {
 		lottoAppOutput.printBonusNumberInputView();
 		return LottoNumber.of(lottoAppInput.inputNumber());
+	}
+
+	private void printLottoTicket(LottoTicket lottoTicket, Count manualCount, Count autoCount) {
+		lottoAppOutput.printLottoTicket(lottoTicket, manualCount.getCount(), autoCount.getCount());
 	}
 
 	private void printLottoResult(LottoResult lottoResult, Money inputMoney) {
