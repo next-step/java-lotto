@@ -1,6 +1,7 @@
 package lottoAuto.view;
 
 import lottoAuto.model.Lotto;
+import lottoAuto.model.LottoAuto;
 import lottoAuto.model.Lottos;
 import lottoAuto.vo.LottoResultVo;
 
@@ -10,22 +11,21 @@ public class LottoAutoResultView extends LottoAutoInputView {
     public int showAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         int amount = inputPrice();
+        System.out.println(amount + "개를 구매했습니다.");
         return amount;
     }
 
-    public Lottos showMyLottoInformation(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
-        Lottos userLotto = lottoAutoInputService.inputUserLottoNumber(amount);
-        for (Lotto lotto : userLotto.getLotto()) {
+    public void showUserLotto(Lottos lottos) {
+        for (Lotto lotto : lottos.getLotto()) {
             System.out.println(lotto.getNumbers());
         }
-        return userLotto;
     }
 
-    public Lotto showWinningNumber() {
+    public String showWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto winningLotto = inputWinningNumber();
-        return winningLotto;
+        String winningLottoString = inputWinningNumber();
+
+        return winningLottoString;
     }
 
     public int showBonusBall() {

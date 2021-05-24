@@ -1,6 +1,7 @@
 package lottoAuto;
 
-import lottoAuto.model.LottoAutoService;
+import lottoAuto.model.LottoAuto;
+import lottoAuto.model.LottoStatistic;
 import lottoAuto.model.Lotto;
 import lottoAuto.model.Lottos;
 import lottoAuto.view.LottoAutoResultView;
@@ -8,13 +9,17 @@ import lottoAuto.view.LottoAutoResultView;
 public class LottoAutoApplication {
 
     public static void main(String[] args) {
-        LottoAutoResultView lotto = new LottoAutoResultView();
-        LottoAutoService lottoAutoService = new LottoAutoService();
+        LottoAutoResultView lottoView = new LottoAutoResultView();
+        int amount = lottoView.showAmount();
 
-        int amount = lotto.showAmount();
-        Lottos userLotto = lotto.showMyLottoInformation(amount);
-        Lotto winningLotto = lotto.showWinningNumber();
-        int bonusBall = lotto.showBonusBall();
+        LottoAuto lottoAuto = new LottoAuto();
+        Lottos userLotto = lottoAuto.inputUserLottoNumber(amount);
+        lottoView.showUserLotto(userLotto);
+
+        String winningLottoString = lottoView.showWinningNumber();
+        Lotto winningLotto = lottoAuto.inputWinningNumber(winningLottoString);
+
+        int bonusBall = lottoView.showBonusBall();
 
     }
 }
