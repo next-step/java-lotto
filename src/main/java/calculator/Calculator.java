@@ -2,13 +2,10 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Calculator {
 
     public static final int MINIMUM_OPERAND_VALUE = 0;
-    public static final String DEFAULT_DELIMITER_REGEX = "[,:]";
 
     private final Operands operands;
 
@@ -21,28 +18,11 @@ public class Calculator {
             return new Operands(List.of(MINIMUM_OPERAND_VALUE));
         }
 
-        String[] splitInput = extractOperands(input);
-
-        return validateOperands(splitInput);
+        return validateOperands(new Extractor(input).extractOperands());
     }
 
     public int sumOperands() {
         return operands.sum();
-    }
-
-    private String[] extractOperands(String input) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
-
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
-        }
-
-        return splitOperandsByDefaultDelimiter(input);
-    }
-
-    private String[] splitOperandsByDefaultDelimiter(String input) {
-        return input.split(DEFAULT_DELIMITER_REGEX);
     }
 
     private Operands validateOperands(String[] splitedInput) {
