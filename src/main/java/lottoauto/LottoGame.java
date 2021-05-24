@@ -5,8 +5,10 @@ public class LottoGame {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
+        LottoGenerateStrategy autoStrategy = new AutoStrategy();
+
         outputView.enterPurChaseAmount();
-        LottoTickets lottoTickets = new LottoTickets(new Money(inputView.nextInt()));
+        LottoTickets lottoTickets = new LottoTickets(new Money(inputView.nextInt()), autoStrategy);
         outputView.printLottoTickets(lottoTickets);
 
         outputView.enterWinningNumber();

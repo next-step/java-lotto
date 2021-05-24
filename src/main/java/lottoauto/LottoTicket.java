@@ -4,8 +4,8 @@ public class LottoTicket {
     private final LottoNumbers lottoNumbers;
     private HitCount hitCount;
 
-    public LottoTicket() {
-        this.lottoNumbers = new AutoStrategy().generateLottoNumbers();
+    public LottoTicket(LottoGenerateStrategy lottoGenerateStrategy) {
+        this.lottoNumbers = lottoGenerateStrategy.generateLottoNumbers();
     }
 
     public LottoTicket(LottoNumbers lottoNumbers) {
