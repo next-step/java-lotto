@@ -18,7 +18,7 @@ public class LottoUtils {
 			.mapToObj(Number::new)
 			.collect(toList());
 
-	public static List<Number> getRandomNumbers() {
+	public static List<Number> randomNumbers() {
 		Collections.shuffle(numberPool);
 		return numberPool.stream()
 			.limit(REQUIRED_COUNT)

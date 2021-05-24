@@ -16,7 +16,7 @@ public class Lottos {
 
 		int lottoCount = money / LOTTO_PRICE;
 		for (int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto(LottoUtils.getRandomNumbers()));
+			lottos.add(new Lotto(LottoUtils.randomNumbers()));
 		}
 	}
 
