@@ -12,6 +12,12 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
+	public int matchCount(List<Number> winningNumbers) {
+		return numbers.stream()
+			.mapToInt(number -> winningNumbers.contains(number) ? 1 : 0)
+			.sum();
+	}
+
 	private void validateNumbers(List<Number> numbers) {
 		long distinctCount = numbers.stream()
 								.distinct()
