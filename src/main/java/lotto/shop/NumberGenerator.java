@@ -14,7 +14,7 @@ public class NumberGenerator {
                 .distinct()
                 .limit(Lotto.MAX_COUNT)
                 .boxed()
-                .mapToInt(i -> i)
+                .mapToInt(number -> number)
                 .toArray();
     }
 }
