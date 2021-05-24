@@ -1,22 +1,18 @@
 package stringaddcalculator;
 
 import java.util.List;
+import java.util.regex.Matcher;
 
 public class StringAddCalculator {
     private static InputHandler inputHandler = new InputHandler();
-    private static Divider divider = new Divider();
 
     public static int splitAndSum(String input) {
         if (inputHandler.isEmptyInput(input)) {
             return 0;
         }
-        String targetNum = input;
-        List<String> splitInputs = divider.splitInputByCustomDelimiterRule(input);
-        if (splitInputs.size() > 1) {
-            divider.addCustomDelimiter(splitInputs.get(0));
-            targetNum = splitInputs.get(1);
-        }
-        String[] numArray = divider.getDividedInput(targetNum);
+        Divider divider = new Divider(input);
+        String expression = divider.expression();
+        String[] numArray = divider.getDividedInput(expression);
         return stringAdd(numArray);
     }
 

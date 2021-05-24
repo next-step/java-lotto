@@ -7,18 +7,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Divider {
-    private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
     private final int CUSTOM_DELIMITER_IDX = 1;
     private final int TARGET_NUM_IDX = 2;
-    private Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
+    private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private List<String> DELIMITER = new ArrayList<>(Arrays.asList(",", ":"));
+    private Matcher matcher;
+    private String expression;
 
-    public List<String> splitInputByCustomDelimiterRule(String input) {
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            return Arrays.asList(matcher.group(CUSTOM_DELIMITER_IDX), matcher.group(TARGET_NUM_IDX));
+    public Divider(String input) {
+        this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        this.init(input);
+    }
+
+    private void init(String input){
+        if(this.matcher.find()){
+            this.addCustomDelimiter(this.matcher.group(CUSTOM_DELIMITER_IDX));
+            this.expression=this.matcher.group(TARGET_NUM_IDX);
+            return;
         }
-        return Arrays.asList(input);
+        this.expression=input;
+    }
+
+    public String expression() {
+       return this.expression;
     }
 
     public void addCustomDelimiter(String customDelimiter) {
