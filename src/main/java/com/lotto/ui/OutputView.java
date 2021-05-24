@@ -45,7 +45,7 @@ public class OutputView {
     private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward) {
         if (reward != MISS) {
             out(String.format(WINNING_STATISTICS_DETAIL.message(),
-                    reward.toString(), reward.reward(), lottoStatistics.get(reward)));
+                    reward.sameCount(), reward.reward(), lottoStatistics.get(reward)));
         }
     }
 
