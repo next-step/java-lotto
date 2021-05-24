@@ -14,18 +14,18 @@ import lotto.shop.Money;
 
 public class Command {
     private static final int ANSWER_SIZE = 6;
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     public static final String NUMBER_DELIMITER = ",";
 
     public static Money inputMoneyAmount() {
         println(MessageEnum.INPUT_MONEY.message());
-        String input = scanner.nextLine();
+        String input = SCANNER.nextLine();
         return new Money(toInteger(input));
     }
 
     public static Set<LottoNumber> inputAnswer() {
         println(MessageEnum.INPUT_LOTTO_ANSWER.message());
-        String input = scanner.nextLine();
+        String input = SCANNER.nextLine();
         String[] answer = input.split(NUMBER_DELIMITER);
         checkAnswer(answer);
         return Arrays.stream(answer)
