@@ -22,11 +22,11 @@ class WinnerNumbersTest {
         List<String> lottoNumberText = Arrays.asList("1", "2", "3", "4", "5", "6");
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(lottoNumberText);
+        LottoNumber bonusLottoNumber = LottoNumber.create(7);
 
-
-        winnerNumbers = WinnerNumbers.create(lottoNumbers);
+        winnerNumbers = WinnerNumbers.create(lottoNumbers, bonusLottoNumber);
     }
-    
+
     @DisplayName("로또당첨번호의 갯수는 6개여야한다.")
     @Test
     public void invalidWinnerNumberCountTest() {
@@ -42,9 +42,9 @@ class WinnerNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"FIRST|1,2,3,4,5,6",
             "SECOND|1,2,3,4,5,7",
-            "THIRD|1,2,3,4,10,7",
-            "FOURTH|1,2,3,20,11,13",
-            "MISS|1,2,30,25,10,9",
+            "THIRD|1,2,3,4,5,10",
+            "FOURTH|1,2,3,4,11,13",
+            "FIFTH|1,2,3,25,10,9",
             "MISS|1,17,30,25,10,9",
             "MISS|27,17,30,25,10,9"}, delimiter = '|')
     public void createLottoTicket(String rankName, String lottoNumber) {

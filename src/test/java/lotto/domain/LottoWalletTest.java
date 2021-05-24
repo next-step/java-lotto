@@ -12,7 +12,7 @@ class LottoWalletTest {
 
     @DisplayName("로또의 구입가능한 갯수 및 구입결과 확인 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"1000:1","1500:1","2000:2","10900:10"}, delimiter = ':')
+    @CsvSource(value = {"1000:1", "1500:1", "2000:2", "10900:10"}, delimiter = ':')
     public void createLottoWallet(String inputMoney, int ticketCount) {
         Money money = Money.create(inputMoney);
         LottoWallet lottoWallet = LottoWallet.create(money);

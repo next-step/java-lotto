@@ -39,11 +39,12 @@ class WinnerStatisticsTest {
 
     @DisplayName("로또당첨등수별 수익률 테스트(5장구입기준)")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:400000.00", "1,2,3,4,5,40:300.00", "1,2,3,4,35,40:10.00", "1,2,3,30,35,40:1.00", "1,2,25,30,35,40:0.00"}, delimiter = ':')
-    public void incomeRateTest(String lottoNumber, String expectedRate) {
+    @CsvSource(value = {"1,2,3,4,5,6:7:400000.00", "1,2,3,4,5,40:6:6000.00", "1,2,3,4,5,40:7:300.00", "1,2,3,4,35,40:7:10.00", "1,2,3,30,35,40:7:1.00", "1,2,25,30,35,40:7:0.00"}, delimiter = ':')
+    public void incomeRateTest(String lottoNumber, int bonusNumber, String expectedRate) {
         List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.create(bonusNumber);
 
-        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
+        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers, bonusLottoNumber);
 
         WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 
@@ -52,11 +53,12 @@ class WinnerStatisticsTest {
 
     @DisplayName("로또당첨 손실여부 테스트(5장구입기준)")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:false", "1,2,3,30,35,40:false", "1,2,25,30,35,40:true"}, delimiter = ':')
-    public void isLossTest(String lottoNumber, boolean expectedLoss) {
+    @CsvSource(value = {"1,2,3,4,5,6:7:false", "1,2,3,4,5,40:7:false", "1,2,3,30,35,40:7:false", "1,2,25,30,35,40:7:true"}, delimiter = ':')
+    public void isLossTest(String lottoNumber, int bonusNumber, boolean expectedLoss) {
         List<LottoNumber> lottoNumbers = makeLottoNumbers(lottoNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.create(bonusNumber);
 
-        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers);
+        WinnerNumbers winnerNumbers = WinnerNumbers.create(lottoNumbers, bonusLottoNumber);
 
         WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 

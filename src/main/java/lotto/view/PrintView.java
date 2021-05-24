@@ -9,6 +9,7 @@ public class PrintView {
 
     private static final String MESSAGE_BUY_COUNT = "%s개를 구매했습니다.\n";
     private static final String MESSAGE_MATCH = "%s개 일치 (%s원)- %s개\n";
+    private static final String MESSAGE_MATCH_WITH_BONUS = "%s개 일치, 보너스 볼 일치(%s원)- %s개\n";
     private static final String MESSAGE_INCOME_RATE = "총 수익률은 %s입니다.";
     private static final String MESSAGE_LOSS_DESC = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -44,6 +45,7 @@ public class PrintView {
     }
 
     private void showResultBody(WinnerStatistics winnerStatistics) {
+        printBodyLine(LottoRank.FIFTH, winnerStatistics);
         printBodyLine(LottoRank.FOURTH, winnerStatistics);
         printBodyLine(LottoRank.THIRD, winnerStatistics);
         printBodyLine(LottoRank.SECOND, winnerStatistics);
@@ -63,7 +65,13 @@ public class PrintView {
     }
 
     private void printBodyLine(LottoRank lottoRank, WinnerStatistics winnerStatistics) {
-        System.out.printf(MESSAGE_MATCH, lottoRank.matchCount(), lottoRank.reward(), winnerStatistics.getNumberOfWinners(lottoRank));
+        String printMessage = MESSAGE_MATCH;
+
+        if (lottoRank == LottoRank.SECOND) {
+            printMessage = MESSAGE_MATCH_WITH_BONUS;
+        }
+
+        System.out.printf(printMessage, lottoRank.matchCount(), lottoRank.reward(), winnerStatistics.getNumberOfWinners(lottoRank));
     }
 
     private void showResultHeadLine() {
