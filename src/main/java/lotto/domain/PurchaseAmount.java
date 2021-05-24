@@ -15,6 +15,6 @@ public class PurchaseAmount {
 	}
 
 	public int findNumberOfAvailablePurchases() {
-		return this.purchaseAmount / PurchaseAmount.MINIMUM;
+		return this.purchaseAmount / MINIMUM;
 	}
 }
