@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class Number implements Comparable<Number> {
 
-	private final int number;
+	private final int value;
 
-	public Number(int number) {
-		if (number < 1 || 45 < number) {
+	public Number(int value) {
+		if (value < 1 || 45 < value) {
 			throw new IllegalArgumentException("Number must be between 1 and 45");
 		}
 
-		this.number = number;
+		this.value = value;
 	}
 
 	@Override
@@ -21,16 +21,16 @@ public class Number implements Comparable<Number> {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Number number1 = (Number)o;
-		return number == number1.number;
+		return value == number1.value;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(number);
+		return Objects.hash(value);
 	}
 
 	@Override
 	public int compareTo(Number number) {
-		return Integer.compare(this.number, number.number);
+		return Integer.compare(this.value, number.value);
 	}
 }
