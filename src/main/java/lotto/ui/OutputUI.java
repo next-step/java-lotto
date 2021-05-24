@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domains.Lotto;
+import lotto.domains.Lottos;
 import lotto.enums.Payout;
 
 public class OutputUI {
@@ -19,5 +21,15 @@ public class OutputUI {
 
     public static void printRateOfReturn(double rateOfReturn) {
         System.out.printf("총 수익률은 %s 입니다.", String.format("%.2f",rateOfReturn));
+    }
+
+    public static void printLottosNumbers(Lottos lottos) {
+        for (Lotto lotto:lottos.lottos()) {
+            System.out.println(lotto.lottoNumbers().lottoNumbers().toString());
+        }
+    }
+
+    public static void printInputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 }

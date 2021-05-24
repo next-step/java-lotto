@@ -21,7 +21,7 @@ public class LottoMachine {
         this.amount = InputUI.inputPurchasingAmount();
         this.lottos = makeLottos(new Cash(amount));
         OutputUI.printNumberOfPurchases(lottos.count());
-        lottos.printLottosNumbers();
+        OutputUI.printLottosNumbers(lottos);
     }
 
     public Lottos makeLottos(Cash cash) {

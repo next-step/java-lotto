@@ -1,23 +1,18 @@
 package lotto.domains;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
     private final List<Lotto> lottoList;
 
-    public Lottos(final List<Lotto> lottoList) {
+    public Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
     public int count() {
         return lottoList.size();
-    }
-
-    public void printLottosNumbers() {
-        for (Lotto lotto : lottoList) {
-            System.out.println(lotto.lottoNumbers());
-        }
     }
 
     public LottoStatistics getStatistics(LottoNumbers winningLottoNumbers) {
@@ -26,5 +21,9 @@ public class Lottos {
             lottoStatistics.add(lotto.matchingNumberCount(winningLottoNumbers));
         }
         return lottoStatistics;
+    }
+
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(this.lottoList);
     }
 }
