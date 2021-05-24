@@ -12,26 +12,26 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringCalculatorTest {
     private StringCalculator calculator;
-    private Add add;
+    private AddFunction addFunction;
 
     @BeforeEach
     void setUp() {
         calculator = new StringCalculator();
-        add = new Add();
+        addFunction = new AddFunction();
     }
 
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNullTest(final String text) {
-        assertThat(add.add(text)).isZero();
+        assertThat(addFunction.add(text)).isZero();
     }
 
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"2"})
     void oneNumberTest(final String text) {
-        assertThat(add.add(text)).isSameAs(Integer.parseInt(text));
+        assertThat(addFunction.add(text)).isSameAs(Integer.parseInt(text));
     }
 
     @DisplayName(value = "숫자가 아닌 것이 더해지는 경우")
@@ -45,27 +45,27 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2"})
     void twoNumbersTest(final String text) {
-        assertThat(add.add(text)).isSameAs(3);
+        assertThat(addFunction.add(text)).isSameAs(3);
     }
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3"})
     void colonsTest(final String text) {
-        assertThat(add.add(text)).isSameAs(6);
+        assertThat(addFunction.add(text)).isSameAs(6);
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3"})
     void customDelimiterTest(final String text) {
-        assertThat(add.add(text)).isSameAs(6);
+        assertThat(addFunction.add(text)).isSameAs(6);
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
     @Test
     void negativeTest() {
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> add.add("-1"));
+                .isThrownBy(() -> addFunction.add("-1"));
     }
 }
