@@ -3,17 +3,14 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoRandomNumbersGenerator implements RandomNumbersGenerator {
 
-	private static final List<Integer> numbers;
-
-	static {
-		numbers = new ArrayList<>();
-		for (int number = LottoNumber.MIN; number <= LottoNumber.MAX; number++) {
-			numbers.add(number);
-		}
-	}
+	private static final List<Integer> numbers = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+			.boxed()
+			.collect(Collectors.toList());
 
 	@Override
 	public List<Integer> generateNumbers() {
