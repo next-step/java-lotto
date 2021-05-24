@@ -11,17 +11,25 @@ public class Lotto {
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
 
-        if (new HashSet<>(lottoNumbers).size() != LottoConstants.LOTTO_SELECT_NUM) {
-            throw new IllegalArgumentException("로또 번호는 6개여아한다.");
-        }
+        throwIllegalArgumentException_lottoSize(lottoNumbers);
         for (int lottoNumber : lottoNumbers) {
-            if (lottoNumber < LottoConstants.LOTTO_MIN_NUM || lottoNumber > LottoConstants.LOTTO_MAX_NUM) {
-                throw new IllegalArgumentException("로또 번호는 1~45 사이여야한다.");
-            }
+            throwIllegalArgumentException_lottoRange(lottoNumber);
         }
         this.lottoNumbers = lottoNumbers;
     }
 
+
+    public static void throwIllegalArgumentException_lottoSize(List<Integer> winningLottoNumbers) {
+        if( new HashSet<>(winningLottoNumbers).size() !=LottoConstants.LOTTO_SELECT_NUM) {
+            throw new IllegalArgumentException("로또 번호는 6개여야한다, 중복된 숫자가 들어가서는 안됩니다.");
+        }
+    }
+
+    public static void throwIllegalArgumentException_lottoRange(int lottoNumber) {
+        if(lottoNumber< LottoConstants.LOTTO_MIN_NUM || lottoNumber>LottoConstants.LOTTO_MAX_NUM){
+            throw new IllegalArgumentException("로또 번호는 1~45 까지 가능합니다.");
+        }
+    }
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
