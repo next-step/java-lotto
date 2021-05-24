@@ -4,6 +4,7 @@ public class Money {
 
     private static final String MONEY_POSITIVE = "금액은 0보다 큰 정수를 입력해주세요.";
     private static final String MONEY_UNIT_1000 = "금액은 1,000원 단위로 입력해주세요.";
+    private static final int ZERO = 0;
 
     public static final int LOTTO_PRICE = 1000;
 
@@ -36,13 +37,13 @@ public class Money {
     }
 
     private void validatePositive(int amount) {
-        if (amount <= 0) {
+        if (amount <= ZERO) {
             throw new IllegalArgumentException(MONEY_POSITIVE);
         }
     }
 
     private void validateUnit(int amount) {
-        if (amount % LOTTO_PRICE != 0) {
+        if (amount % LOTTO_PRICE != ZERO) {
             throw new IllegalArgumentException(MONEY_UNIT_1000);
         }
     }
