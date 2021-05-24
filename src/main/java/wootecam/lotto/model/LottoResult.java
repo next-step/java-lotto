@@ -3,11 +3,12 @@ package wootecam.lotto.model;
 import java.util.Arrays;
 
 public enum LottoResult {
-	DEFEAT(0, 0),
-	THREE_MATCHING(3, 5_000),
-	FOUR_MATCHING(4, 50_000),
-	FIVE_MATCHING(5, 1_500_000),
-	SIX_MATCHING(6, 2_000_000_000);
+	MISS(0, 0),
+	FIFTH(3, 5_000),
+	FOURTH(4, 50_000),
+	THIRD(5, 1_500_000),
+	SECOND(5, 30_000_000),
+	FIRST(6, 2_000_000_000);
 
 	private final int matchedCount;
 	private final int winningMoney;
@@ -17,11 +18,28 @@ public enum LottoResult {
 		this.winningMoney = winningMoney;
 	}
 
+	@Deprecated
 	public static LottoResult findByMatchedCount(int matchedCount) {
 		return Arrays.stream(LottoResult.values())
 			.filter(result -> result.matchedCount == matchedCount)
 			.findAny()
-			.orElse(DEFEAT);
+			.orElse(MISS);
+	}
+
+	public static LottoResult findByMatchedCount(int matchedCount, boolean isMatchedBonus) {
+
+		if (checkSecond(matchedCount, isMatchedBonus)) {
+			return SECOND;
+		}
+
+		return Arrays.stream(LottoResult.values())
+			.filter(result -> result.matchedCount == matchedCount)
+			.findFirst()
+			.orElse(MISS);
+	}
+
+	private static boolean checkSecond(int matchedCount, boolean isMatchedBonus) {
+		return matchedCount == 5 && isMatchedBonus;
 	}
 
 	public int getMatchedCount() {

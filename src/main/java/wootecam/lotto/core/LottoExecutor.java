@@ -42,7 +42,7 @@ public class LottoExecutor {
 		Lotto winningLotto = lottoGameGenerator.getWinningLotto(winningNumberInput);
 
 		String bonusNumberInput = this.inputView.makeBonusNumberInput();
-		BonusNumber bonusNumber = new BonusNumber(new LottoNumber(bonusNumberInput), winningLotto);
+		new BonusNumber(new LottoNumber(bonusNumberInput), winningLotto);
 
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
 		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);

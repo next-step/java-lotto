@@ -33,7 +33,7 @@ public class OutputView extends View {
 		out.println(LINE_TEXT);
 
 		Arrays.stream(LottoResult.values())
-			.filter(lottoResult -> lottoResult != LottoResult.DEFEAT)
+			.filter(lottoResult -> lottoResult != LottoResult.MISS)
 			.forEach(lottoResult -> {
 				out.printf(SCORE_FORMAT,
 					lottoResult.getMatchedCount(),

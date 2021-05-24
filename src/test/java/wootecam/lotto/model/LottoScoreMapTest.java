@@ -13,11 +13,11 @@ class LottoScoreMapTest {
 	@BeforeEach
 	void setup() {
 		scoreMap = new LottoScoreMap();
-		scoreMap.updateScore(LottoResult.FIVE_MATCHING);
-		scoreMap.updateScore(LottoResult.FIVE_MATCHING);
-		scoreMap.updateScore(LottoResult.FOUR_MATCHING);
-		scoreMap.updateScore(LottoResult.THREE_MATCHING);
-		scoreMap.updateScore(LottoResult.DEFEAT);
+		scoreMap.updateScore(LottoResult.THIRD);
+		scoreMap.updateScore(LottoResult.THIRD);
+		scoreMap.updateScore(LottoResult.FOURTH);
+		scoreMap.updateScore(LottoResult.FIFTH);
+		scoreMap.updateScore(LottoResult.MISS);
 	}
 
 	@Test
@@ -30,10 +30,10 @@ class LottoScoreMapTest {
 	@Test
 	@DisplayName("로또 결과가 정상적으로 업데이트 되는지 테스트")
 	void test_업데이트() {
-		assertThat(scoreMap.getLottoScores().get(LottoResult.FOUR_MATCHING)).isEqualTo(1);
-		assertThat(scoreMap.getLottoScores().get(LottoResult.FIVE_MATCHING)).isEqualTo(2);
-		assertThat(scoreMap.getLottoScores().get(LottoResult.THREE_MATCHING)).isEqualTo(1);
-		assertThat(scoreMap.getLottoScores().get(LottoResult.DEFEAT)).isEqualTo(1);
+		assertThat(scoreMap.getLottoScores().get(LottoResult.FOURTH)).isEqualTo(1);
+		assertThat(scoreMap.getLottoScores().get(LottoResult.THIRD)).isEqualTo(2);
+		assertThat(scoreMap.getLottoScores().get(LottoResult.FIFTH)).isEqualTo(1);
+		assertThat(scoreMap.getLottoScores().get(LottoResult.MISS)).isEqualTo(1);
 	}
 
 	@Test

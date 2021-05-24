@@ -34,11 +34,11 @@ public class LottoResultGeneratorTest {
 		lottos.add(lotto3);
 
 		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
-		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FIVE_MATCHING)).isEqualTo(1);
-		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FOUR_MATCHING)).isEqualTo(1);
-		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.THREE_MATCHING)).isEqualTo(1);
-		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.SIX_MATCHING)).isEqualTo(1);
-		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.DEFEAT)).isEqualTo(0);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.THIRD)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FOURTH)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FIFTH)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.FIRST)).isEqualTo(1);
+		assertThat(lottoScoreMap.getLottoScores().get(LottoResult.MISS)).isEqualTo(0);
 	}
 
 	private Lotto generateLotto(Integer... integers) {
