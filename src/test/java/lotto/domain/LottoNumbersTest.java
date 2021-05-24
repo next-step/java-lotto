@@ -9,6 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * LottoNumbers 객체 생성 및 기능 테스트
+ */
 public class LottoNumbersTest {
 
     LottoNumbersGenerator lottoNumbersGenerator;
@@ -16,6 +19,18 @@ public class LottoNumbersTest {
     @BeforeEach
     public void beforeEach() {
         this.lottoNumbersGenerator = new LottoNumbersGenerator();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6,5,4,3,2,1:true", "1,2,3,4,5,6:1,2,3,4,5,7:false"}, delimiter = ':')
+    @DisplayName("로또번호 목록 비교")
+    void equals(String textLottoNumber, String textTargetLottoNumber, boolean result) {
+        // given
+        LottoNumbers lottoNumbers = this.lottoNumbersGenerator.toLottoNumbers(textLottoNumber);
+        LottoNumbers targetLottoNumbers = this.lottoNumbersGenerator.toLottoNumbers(textTargetLottoNumber);
+
+        // then
+        assertThat(lottoNumbers.equals(targetLottoNumbers)).isEqualTo(result);
     }
 
     @ParameterizedTest

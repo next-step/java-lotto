@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
+    private static final int DEFAULT_COUNT = 0;
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -24,10 +25,11 @@ public class Lottos {
         Map<Integer, Integer> result = new HashMap<>();
         for (Lotto lotto : this.lottos) {
             int matchingCount = lotto.getCountOfMatchingNumber(winningNumbers);
-            int lottoCount = result.getOrDefault(matchingCount, 0);
+            int lottoCount = result.getOrDefault(matchingCount, DEFAULT_COUNT);
             result.put(matchingCount, ++lottoCount);
         }
-        return new LottoStatistics(filterWinningNumbers(result));
+        WinningCounts winningCounts = new WinningCounts(filterWinningNumbers(result));
+        return new LottoStatistics(winningCounts);
     }
 
     private Map<Integer, Integer> filterWinningNumbers(Map<Integer, Integer> result) {
@@ -37,7 +39,7 @@ public class Lottos {
     }
 
     private boolean isWinningNumber(Map.Entry<Integer, Integer> entry) {
-        return entry.getKey() >= LottoStatistics.WINNING_NUMBER_MINIMUM
-                && entry.getKey() <= LottoStatistics.WINNING_NUMBER_MAXIMUM;
+        return entry.getKey() >= WinningCounts.WINNING_NUMBER_MINIMUM
+                && entry.getKey() <= WinningCounts.WINNING_NUMBER_MAXIMUM;
     }
 }

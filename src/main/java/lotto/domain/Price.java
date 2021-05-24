@@ -16,7 +16,7 @@ public class Price {
         return this.price;
     }
 
-    public Long getCountAvailableForBuy() {
+    public Long getAvailableCountForBuy() {
         return this.price / LOTTO_PRICE;
     }
 

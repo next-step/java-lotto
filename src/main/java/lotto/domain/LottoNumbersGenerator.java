@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbersGenerator {
     public static final String SPLIT_DELIMITER = ",";
@@ -21,10 +20,10 @@ public class LottoNumbersGenerator {
 
     public LottoNumbers generateRandomLottoNumbers() {
         Collections.shuffle(this.lottoNumbers);
-        List<LottoNumber> resultLottoNumbers = this.lottoNumbers.stream()
-                .limit(LottoNumbers.LOTTO_NUMBERS_COUNT)
-                .sorted()
-                .collect(Collectors.toList());
+        List<LottoNumber> resultLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < LottoNumbers.LOTTO_NUMBERS_COUNT; i++) {
+             resultLottoNumbers.add(this.lottoNumbers.get(i));
+        }
         return new LottoNumbers(resultLottoNumbers);
     }
 

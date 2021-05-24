@@ -16,7 +16,7 @@ public class LottoMachineTest {
     @DisplayName("입력한 금액만큼의 로또 개수 생성 확인")
     void create(int price, int lottoCount) {
         // given
-        LottoMachine lottoMachine = new LottoMachine(price);
+        LottoMachine lottoMachine = new LottoMachine(new Price(price));
 
         // when
         Lottos lottos = lottoMachine.getLottos();

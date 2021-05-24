@@ -18,7 +18,7 @@ public class PriceTest {
         Price price = new Price(inputPrice);
 
         // when
-        Long makeCount = price.getCountAvailableForBuy();
+        Long makeCount = price.getAvailableCountForBuy();
 
         // then
         assertThat(makeCount).isEqualTo(availableCount);

@@ -13,7 +13,12 @@ public class Lotto {
 
     public int getCountOfMatchingNumber(LottoNumbers winningLottoNumbers) {
         return (int) this.lottoNumbers.getLottoNumbers().stream()
-                .filter(lottoNumber -> winningLottoNumbers.contains(lottoNumber))
+                .filter(winningLottoNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
     }
 }

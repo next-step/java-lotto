@@ -34,6 +34,11 @@ public class LottoNumber implements Comparable {
         return this.numbers - ((LottoNumber)o).getNumber();
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.numbers);
+    }
+
     private void validateOutOfRange(int number) {
         if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자만 가능합니다.");

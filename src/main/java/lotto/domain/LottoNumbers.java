@@ -1,9 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.StringJoiner;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBERS_COUNT = 6;
@@ -13,10 +16,6 @@ public class LottoNumbers {
         validateLottoNumbersSize(lottoNumbers);
         validateDuplicatedNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public LottoNumber getLottoNumber(int index) {
-        return this.lottoNumbers.get(index);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -29,6 +28,29 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(this.lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return this.lottoNumbers.containsAll(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(", ");
+        Collections.sort(this.lottoNumbers);
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            stringJoiner.add(lottoNumber.toString());
+        }
+        return "[" + stringJoiner.toString() + "]";
     }
 
     private void validateLottoNumbersSize(List<LottoNumber> lottoNumbers) {

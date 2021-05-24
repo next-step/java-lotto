@@ -1,52 +1,39 @@
 package lotto.domain;
 
-import java.util.Map;
-
 public class LottoStatistics {
-    public static final int WINNING_NUMBER_MINIMUM = 3;
-    public static final int WINNING_NUMBER_MAXIMUM = 6;
-    private static final int DEFAULT_COUNT = 0;
     private static final int ONE_HUNDRED_INT = 100;
     private static final double ONE_HUNDRED_DOUBLE = 100.0;
-    private final Map<Integer, Integer> matchedCounts;
+    private static final long DEFAULT_TOTAL_AMOUNT = 0L;
+    private WinningCounts winningCounts;
+    private WinningAmounts winningAmounts;
 
-    public LottoStatistics(Map<Integer, Integer> matchedCounts) {
-        validateMatchingNumber(matchedCounts);
-        this.matchedCounts = matchedCounts;
+    public LottoStatistics(WinningCounts winningCounts) {
+        this.winningCounts = winningCounts;
+        this.winningAmounts = new WinningAmounts();
     }
 
     public boolean isEmpty() {
-        return this.matchedCounts.isEmpty();
+        return this.winningCounts.isEmpty();
     }
 
     public int getCountOfLottoWithMatchingNumber(int matchingNumber) {
-        return this.matchedCounts.getOrDefault(matchingNumber, DEFAULT_COUNT);
+        return this.winningCounts.getWinningCount(matchingNumber);
     }
 
-    public Long getTotalWinningAmount() {
-        Long totalAmount = 0L;
-        for (Integer matchingCount : this.matchedCounts.keySet()) {
-            totalAmount += calculateAmountByMatchingCount(matchingCount);
+    public long getTotalWinningAmount() {
+        long totalAmount = DEFAULT_TOTAL_AMOUNT;
+        for (Integer winningNumber : this.winningCounts.getWinningNumberSet()) {
+            totalAmount += calculateAmountByWinningNumber(winningNumber);
         }
         return totalAmount;
     }
 
     public Double calculateRateOfReturnByPrice(Price price) {
-        return ((double) getTotalWinningAmount() / (double) price.getPrice()) * ONE_HUNDRED_INT / ONE_HUNDRED_DOUBLE;
+        return Math.floor(((double) getTotalWinningAmount() / (double) price.getPrice()) * ONE_HUNDRED_INT)
+                / ONE_HUNDRED_DOUBLE;
     }
 
-    private long calculateAmountByMatchingCount(Integer matchingCount) {
-        WinningAmount winningAmount = new WinningAmount();
-        return this.matchedCounts.getOrDefault(matchingCount, DEFAULT_COUNT) * winningAmount.getAmount(matchingCount);
-    }
-
-    private void validateMatchingNumber(Map<Integer, Integer> matchedCounts) {
-        boolean error = false;
-        for (Integer matchingNumber : matchedCounts.keySet()) {
-            error |= matchingNumber < WINNING_NUMBER_MINIMUM || matchingNumber > WINNING_NUMBER_MAXIMUM;
-        }
-        if (error) {
-            throw new IllegalArgumentException("당첨을 인정하는 번호 일치 개수는 3~6개 입니다.");
-        }
+    private long calculateAmountByWinningNumber(Integer winningNumber) {
+        return this.winningCounts.getWinningCount(winningNumber) * this.winningAmounts.getAmount(winningNumber);
     }
 }
