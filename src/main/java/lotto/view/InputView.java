@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.PuchaseAmount;
+import lotto.domain.PurchaseAmount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +17,9 @@ public class InputView {
 	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static PuchaseAmount inputPurchaseAmount() {
+	public static PurchaseAmount inputPurchaseAmount() {
 		System.out.println(MESSAGE_INPUT_PURCHASE_AMOUNT);
-		return new PuchaseAmount(Integer.parseInt(scanner.nextLine()));
+		return new PurchaseAmount(Integer.parseInt(scanner.nextLine()));
 	}
 
 	public static Lotto inputWinningLotto() {

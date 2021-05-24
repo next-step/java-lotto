@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("구입금액 테스트")
-public class PuchaseAmountTest {
+public class PurchaseAmountTest {
 
 	@Test
 	@DisplayName("구입금액이 최소금액 미만인 경우 예외발생")
 	void createWrongPuchaseAmount() {
 		Assertions.assertThatThrownBy(()->{
-			PuchaseAmount puchaseAmount = new PuchaseAmount(999);
+			PurchaseAmount purchaseAmount = new PurchaseAmount(999);
 		}).isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -23,8 +23,8 @@ public class PuchaseAmountTest {
 	@DisplayName("구매금액으로 몇개의 로또를 구입할 수 있는지 테스트")
 	@CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5400:5", "5900:5", "6100:6"}, delimiter = ':')
 	void findNumberOfAvailablePurchases(int money, int count) {
-		PuchaseAmount puchaseAmount = new PuchaseAmount(money);
-		int lottoCount = puchaseAmount.findNumberOfAvailablePurchases();
+		PurchaseAmount purchaseAmount = new PurchaseAmount(money);
+		int lottoCount = purchaseAmount.findNumberOfAvailablePurchases();
 		assertThat(lottoCount).isEqualTo(count);
 	}
 

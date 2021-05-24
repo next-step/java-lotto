@@ -40,7 +40,7 @@ public class LottoResults {
 	}
 
 	private double totalPurchaseAmount() {
-		return lottoResults.size() * PuchaseAmount.MINIMUM;
+		return lottoResults.size() * PurchaseAmount.MINIMUM;
 	}
 
 	public int findRankCount(Rank rank) {
