@@ -2,6 +2,7 @@ package lotto.ui;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.LottoStatistics;
 import lotto.domain.WinningLottoDto;
 
 import static java.util.stream.Collectors.toList;
@@ -53,7 +54,14 @@ public class IOManager {
         output.printLine(text);
     }
 
-    public void printStatistics(List<WinningLottoDto> statistics) {
+    public void printStatistics(LottoStatistics lottoStatistics, int lottoCount) {
+        output.printLine("당첨 통계");
+        output.printLine("---------");
+        printStatisticsDto(lottoStatistics.getStatisticsData());
+        printEarningRate(lottoStatistics.getEarningsRate(lottoCount));
+    }
+
+    private void printStatisticsDto(List<WinningLottoDto> statistics) {
         statistics.forEach(dto -> output.printLine(type(dto)));
     }
 

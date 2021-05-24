@@ -51,10 +51,6 @@ public class LottoGame {
                                                .collect(toList());
 
         LottoStatistics lottoStatistics = new LottoStatistics(winningTypes);
-
-        ioManager.printLine("당첨 통계");
-        ioManager.printLine("---------");
-        ioManager.printStatistics(lottoStatistics.getStatisticsData());
-        ioManager.printEarningRate(lottoStatistics.getEarningsRate(lottos.size()));
+        ioManager.printStatistics(lottoStatistics, lottos.size());
     }
 }
