@@ -8,6 +8,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class StringAddCalculatorTest {
 
     @Test
+    public void splitAndSum_입력오류_허용되지_않은_문자() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,t,3"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void splitAndSum_입력오류_잘못된_custom_구분자() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,2//;\n3;4"))
+                .isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("1,2;3//;\n"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     public void splitAndSum_null_또는_빈문자() {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
