@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.dto.AnalysisSheet;
 import lotto.dto.TotalOrderedLottoGameNumbers;
+import lotto.dto.WinningNumbersAndBonusNumber;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoMachine {
@@ -20,9 +20,10 @@ public class LottoMachine {
     return orderedGames.peekTotalLottoGameNumbers();
   }
 
-  public AnalysisSheet confirmPrizeOrderedLottos(List<Integer> inputWinningNumbers) {
-    LottoGame winningGame = gameGenerator.createLottoGame(inputWinningNumbers);
-    TotalRankings totalRankings = orderedGames.matchRankings(winningGame);
+  public AnalysisSheet confirmPrizeOrderedLottos(WinningNumbersAndBonusNumber winningNumbersAndBonusNumber) {
+    LottoGame winningGame = gameGenerator.createLottoGame(winningNumbersAndBonusNumber.getWinningNumbers());
+    WinningConditions winningConditions = WinningConditions.of(winningGame, winningNumbersAndBonusNumber.getBonusNumber());
+    TotalRankings totalRankings = orderedGames.matchRankings(winningConditions);
     return new AnalysisSheet(totalRankings, gameGenerator.peekTotalOrderedAmount());
   }
 

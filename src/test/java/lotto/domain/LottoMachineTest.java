@@ -5,6 +5,7 @@ import lotto.domain.strategy.TestRandomNumberGenerateStrategy;
 import lotto.dto.AnalysisSheet;
 import lotto.dto.OrderSheet;
 import lotto.dto.TotalOrderedLottoGameNumbers;
+import lotto.dto.WinningNumbersAndBonusNumber;
 import lotto.util.TestUtil;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,14 +41,13 @@ class LottoMachineTest {
   @Test
   void confirmPrizeOrderedLottosTest() {
     //given
-    List<Integer> givenWinningNumbers = IntStream.rangeClosed(1, 6)
-        .boxed()
-        .collect(Collectors.toList());
-
-    TotalRankings expectTotalRanking = new TotalRankings(Lists.newArrayList(LottoRanking.FIRST, LottoRanking.FIRST));
+    List<Integer> givenWinningNumbers = Lists.newArrayList(1, 2, 3, 4, 5, 7);
+    int givenBonusNumber = 6;
+    WinningNumbersAndBonusNumber givenWinningNumbersAndBonusNumber = new WinningNumbersAndBonusNumber(givenWinningNumbers, givenBonusNumber);
+    TotalRankings expectTotalRanking = new TotalRankings(Lists.newArrayList(LottoRanking.SECOND, LottoRanking.SECOND));
 
     //when & then
-    assertThat(givenLottoMachine.confirmPrizeOrderedLottos(givenWinningNumbers))
+    assertThat(givenLottoMachine.confirmPrizeOrderedLottos(givenWinningNumbersAndBonusNumber))
         .isEqualTo(new AnalysisSheet(expectTotalRanking, 2000L));
   }
 
