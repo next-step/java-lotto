@@ -40,6 +40,10 @@ public class Lotto {
                 .collect(Collectors.joining(InputView.NUMBER_DELIMITER));
     }
 
+    public boolean isContainBonus(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     private void checkNumber(int[] numbers) {
         if (numbers.length != MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);

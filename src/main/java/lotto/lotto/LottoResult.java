@@ -6,15 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Integer, Integer> result = new HashMap<>();
+    private final Map<PrizeEnum, Integer> result = new HashMap<>();
 
-    public int count(int matchingCount) {
-        return getOrDefault(matchingCount);
+    public int count(PrizeEnum prizeEnum) {
+        return getOrDefault(prizeEnum);
     }
 
-    public void increaseCount(int matchingCount) {
-        int count = getOrDefault(matchingCount);
-        result.put(matchingCount, ++count);
+    public void increaseCount(int matchingCount, boolean matchBonus) {
+        PrizeEnum prizeEnum = PrizeEnum.valueOf(matchingCount, matchBonus);
+        int count = getOrDefault(prizeEnum);
+        result.put(prizeEnum, ++count);
     }
 
     public int income() {
@@ -25,7 +26,7 @@ public class LottoResult {
         return total;
     }
 
-    private int getOrDefault(int matchingCount) {
-        return result.getOrDefault(matchingCount, 0);
+    private int getOrDefault(PrizeEnum prizeEnum) {
+        return result.getOrDefault(prizeEnum, 0);
     }
 }

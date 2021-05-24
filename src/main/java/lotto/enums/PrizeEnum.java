@@ -4,7 +4,6 @@ import lotto.error.ErrorMessage;
 import lotto.lotto.LottoResult;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum PrizeEnum {
     MISSING(0, 0),
@@ -14,7 +13,6 @@ public enum PrizeEnum {
     SECOND(5,30000000),
     FIRST(6, 2000000000);
 
-    int countOfMatch;
     int matchingCount;
     int prize;
 
@@ -31,22 +29,20 @@ public enum PrizeEnum {
         return prize;
     }
 
-    public int income(LottoResult matchAnswer) {
-        return prize * matchAnswer.count(countOfMatch);
+    public int income(LottoResult lottoResult) {
+        return prize * lottoResult.count(this);
     }
 
     public static PrizeEnum valueOf(int countOfMatch, boolean matchBonus) {
         PrizeEnum prize = Arrays.stream(values())
-                .filter(v -> v.countOfMatch == countOfMatch)
+                .filter(v -> v.matchingCount == countOfMatch)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM));
 
-        if (prize.countOfMatch == SECOND.countOfMatch && matchBonus) {
+        if (prize.matchingCount == SECOND.matchingCount && matchBonus) {
             return SECOND;
         }
 
         return prize;
-    public int income(LottoResult lottoResult) {
-        return prize * lottoResult.count(matchingCount);
     }
 }

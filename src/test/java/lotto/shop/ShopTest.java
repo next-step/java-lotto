@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import lotto.enums.PrizeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -83,9 +84,10 @@ public class ShopTest {
 
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 33, 34, 34});
         lottoTicket.add(lotto);
+        LottoNumber bonusNumber = new LottoNumber(5);
         //when
-        LottoResult match = shop.lottoResult(lottoTicket, winningNumber);
+        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         //then
-        assertThat(match.count(3)).isEqualTo(1);
+        assertThat(match.count(PrizeEnum.FIFTH)).isEqualTo(1);
     }
 }

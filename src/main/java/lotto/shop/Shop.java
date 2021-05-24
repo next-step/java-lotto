@@ -1,6 +1,7 @@
 package lotto.shop;
 
 import lotto.error.ErrorMessage;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningNumber;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoTicket;
@@ -22,8 +23,8 @@ public class Shop {
         return lottoTicket;
     }
 
-    public LottoResult lottoResult(LottoTicket lottoTicket, WinningNumber winningNumber) {
-        return lottoTicket.matchWinningNumber(winningNumber);
+    public LottoResult lottoResult(LottoTicket lottoTicket, WinningNumber winningNumber, LottoNumber bonusNumber) {
+        return lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
     }
 
     private void checkMoney(Money money) {

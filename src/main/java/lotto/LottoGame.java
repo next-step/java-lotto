@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
@@ -18,7 +19,8 @@ public class LottoGame {
         OutputView.printLottoTicket(lottoTicket);
         OutputView.inputWinningNumber();
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
-        LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber);
+        LottoNumber bonusNumber = new LottoNumber(5);
+        LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         OutputView.resultMessage();
         OutputView.resultIncome(lottoResult, money);
     }

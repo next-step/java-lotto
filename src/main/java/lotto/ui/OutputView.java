@@ -33,7 +33,7 @@ public class OutputView {
 
     public static void resultIncome(LottoResult lottoResult, Money money) {
         for (PrizeEnum prizeValue : PrizeEnum.values()) {
-            printLottoResult(prizeValue.matchingCount(), prizeValue.prize(), lottoResult);
+            printLottoResult(prizeValue, prizeValue.prize(), lottoResult);
         }
         printIncome(lottoResult, money);
     }
@@ -51,8 +51,8 @@ public class OutputView {
         System.out.println(amount + message);
     }
 
-    private static void printLottoResult(int matchingCount, int prize, LottoResult lottoResult) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", matchingCount, prize, lottoResult.count(matchingCount));
+    private static void printLottoResult(PrizeEnum prizeEnum, int prize, LottoResult matchAnswer) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n", prizeEnum.matchingCount(), prize, matchAnswer.count(prizeEnum));
     }
 
     private static void printIncome(LottoResult lottoResult, Money money) {
