@@ -17,7 +17,7 @@ public final class LottoStore {
         return lottoGenerator(purchaseCount.intValue());
     }
 
-    private LottoList lottoGenerator(int purchaseCount){
+    private LottoList lottoGenerator(int purchaseCount) {
         return new LottoList(purchaseCount);
     }
 

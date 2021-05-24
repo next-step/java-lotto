@@ -11,7 +11,7 @@ public final class LottoList {
     private final List<Lotto> lottoList = new ArrayList<>();
 
     public LottoList(int purchaseCount) {
-        for(int i=0; i<purchaseCount; i++){
+        for (int i = 0; i < purchaseCount; i++) {
             lottoList.add(new Lotto());
         }
     }
@@ -20,11 +20,11 @@ public final class LottoList {
         lottoList.addAll(Arrays.asList(lottoArrays));
     }
 
-    public int size(){
+    public int size() {
         return lottoList.size();
     }
 
-    public Lotto get(int index){
+    public Lotto get(int index) {
         return lottoList.get(index);
     }
 

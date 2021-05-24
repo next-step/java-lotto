@@ -21,7 +21,7 @@ public final class Lotto {
         checkValid();
     }
 
-    private void checkValid(){
+    private void checkValid() {
         checkLottoSize();
         checkLottoDuplicateNumbers();
     }
@@ -47,7 +47,7 @@ public final class Lotto {
         return lottoNumbers.get(index);
     }
 
-    public boolean contains(Number number){
+    public boolean contains(Number number) {
         return lottoNumbers.contains(number);
     }
 

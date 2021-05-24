@@ -16,19 +16,19 @@ public class LottoStoreTest {
     private LottoStore lottoStore;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         lottoStore = new LottoStore();
     }
 
     @Test
     @DisplayName("로또 1장의 가격은 천원이다.")
-    public void 로또_가격은_천원(){
+    public void 로또_가격은_천원() {
         assertThat(lottoStore.price()).isEqualTo(new BigDecimal("1000"));
     }
 
     @Test
     @DisplayName("구매자가 낸 가격만큼 로또를 발급한다. ex) 14000 / 1000 = 14장")
-    public void 로또_구입하기(){
+    public void 로또_구입하기() {
         LottoBuyer lottoBuyer = new LottoBuyer(new BigDecimal("14000"));
         LottoList purchaseList = lottoStore.toSell(lottoBuyer.payMoney());
         assertThat(purchaseList.size()).isEqualTo(14);
