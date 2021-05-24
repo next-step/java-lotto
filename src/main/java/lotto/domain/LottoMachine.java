@@ -36,6 +36,11 @@ public class LottoMachine {
 
     public LottoWin result(Lotto winLotto, LottoNumber bonusBall) {
         LottoWin lottoWin = new LottoWin();
+        lottos.forEach(lotto -> {
+            int matchCount = lotto.match(winLotto);
+            boolean bonus = lotto.matchBonus(bonusBall);
+            lottoWin.hit(matchCount, bonus);
+        });
         return lottoWin;
     }
 }
