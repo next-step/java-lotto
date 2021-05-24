@@ -5,9 +5,7 @@ public class InputHandler {
     private static final String INPUT_REGEX = "^[0-9]+$";
 
     public boolean isEmptyInput(String input) {
-        if (input == null || input.length() == 0)
-            return true;
-        return false;
+        return input == null || input.length() == 0;
     }
 
     public void illegalInputFilter(String input) {
