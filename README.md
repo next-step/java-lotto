@@ -110,9 +110,12 @@ LotteryTicket - 로또
 
 - [ ] 추후 리팩토링을 고려해볼만 사항
   - [x] TicketList 에 대한 일급 컬렉션 고려하기
+  - [x] MatchType에 대한 일급 컬렉션 고려하기
+  - [ ] 복권 번호에 대한 일급 컬렉션 고려하기  
   - [x] View 개발
   - [x] Random Number 리스트로 변경하기
   - [ ] Integer는 사실 Number이지 않을까?
+  
 
 # [4단계] 로또(2등)
 
