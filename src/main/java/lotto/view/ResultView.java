@@ -3,8 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.Rank;
-
-import java.util.Map;
+import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
@@ -18,15 +17,21 @@ public class ResultView {
         }
     }
 
-    public void resultStatistics(Map<Rank, Long> winning) {
+    public void resultStatistics(WinningStatistics winning) {
 
         for (Rank rank : Rank.values()) {
-            if (winning.get(rank) != null) {
-                System.out.println(rank.getMessage() + "(" + rank.getMoney() + "원) - " + winning.get(rank) + "개");
+            if (rank == Rank.MISS) {
+                continue;
+            }
+            if (winning.getStatistics().get(rank) != null) {
+                System.out.println(rank.getMessage() + "(" + rank.getMoney() + "원) - " + winning.getStatistics().get(rank) + "개");
             } else {
                 System.out.println(rank.getMessage() + "(" + rank.getMoney() + "원) - " + 0 + "개");
             }
+
         }
+
+        System.out.println("총 수익률 은 " + winning.yield() + "입니다");
 
     }
 }

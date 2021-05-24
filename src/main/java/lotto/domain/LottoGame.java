@@ -1,10 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.Rank;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoGame {
@@ -36,7 +33,7 @@ public class LottoGame {
     }
 
 
-    public Map<Rank, Long> getWinning() {
+    public WinningStatistics getWinning() {
         List<Rank> list = new ArrayList<>();
         for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
@@ -52,16 +49,11 @@ public class LottoGame {
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
             list.add(rank);
         }
-        Map<Rank, Long> collect = list.stream()
-                .collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+        WinningStatistics winningStatistics = new WinningStatistics(list.stream()
+                .collect(Collectors.groupingBy(x -> x, Collectors.counting())));
 
-        return collect;
+        return winningStatistics;
     }
 
 
-    public double getStatistics(Map<Rank,Long> statistics){
-
-
-        return 0;
-    }
 }
