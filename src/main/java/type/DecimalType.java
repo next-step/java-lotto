@@ -7,11 +7,11 @@ public enum DecimalType {
 
 	private int scale;
 
-	DecimalType(final int scale){
+	DecimalType(final int scale) {
 		this.scale = scale;
 	}
 
-	public int value(){
+	public int value() {
 		return this.scale;
 	}
 }

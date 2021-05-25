@@ -14,13 +14,13 @@ public enum LottoRewardType {
 	private final int reward;
 	private final String message;
 
-	LottoRewardType(final int collect, final int reward){
+	LottoRewardType(final int collect, final int reward) {
 		this.collect = collect;
 		this.reward = reward;
 		this.message = makeMessage();
 	}
 
-	private String makeMessage(){
+	private String makeMessage() {
 		StringBuilder stringBuilder = new StringBuilder();
 		return stringBuilder.append(this.collect)
 							.append("개 일치 (")
@@ -28,15 +28,15 @@ public enum LottoRewardType {
 							.append(")").toString();
 	}
 
-	public static LottoRewardType of(final int collect){
+	public static LottoRewardType of(final int collect) {
 		return Arrays.stream(values())
 					 .filter(value -> value.collect == collect)
 					 .findFirst()
 					 .orElse(NONE);
 	}
 
-	public int reward(){
+	public int reward() {
 		return this.reward;
 	}
-	public String message(){ return this.message; }
+	public String message() { return this.message; }
 }

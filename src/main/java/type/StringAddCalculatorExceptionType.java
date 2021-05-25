@@ -6,11 +6,11 @@ public enum StringAddCalculatorExceptionType {
 
 	private String message;
 
-	StringAddCalculatorExceptionType(final String message){
+	StringAddCalculatorExceptionType(final String message) {
 		this.message = message;
 	}
 
-	public String getMessage(){
+	public String getMessage() {
 		return this.message;
 	}
 }

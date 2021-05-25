@@ -11,7 +11,7 @@ public class DrawNumber {
 
 	private final List<Integer> numbers;
 
-	private DrawNumber(List<Integer> numbers){
+	private DrawNumber(List<Integer> numbers) {
 		// empty
 		this.numbers = Collections.unmodifiableList(numbers);
 	}
@@ -23,7 +23,7 @@ public class DrawNumber {
 	}
 
 	public List<Integer> draw(int size) {
-		if (numbers.size() < size){
+		if (numbers.size() < size) {
 			return Collections.emptyList();
 		}
 		List<Integer> temp = new ArrayList<>();

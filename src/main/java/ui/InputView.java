@@ -7,22 +7,22 @@ import utils.ConsoleUtils;
 
 public class InputView {
 
-	private InputView(){
+	private InputView() {
 		// empty
 	}
 
-	public static int inputPrice(){
+	public static int inputPrice() {
 		try {
 			return ConsoleUtils.nextInt(MessageType.INPUT_PRICE.message());
-		}catch(Exception e){
+		} catch(Exception e) {
 			throw LottoException.of(LottoExceptionType.ONLY_NUMBER);
 		}
 	}
 
-	public static String inputWinningNumber(){
+	public static String inputWinningNumber() {
 		try {
 			return ConsoleUtils.nextString(MessageType.INPUT_WINNING_NUMBER.message());
-		}catch(Exception e){
+		} catch(Exception e) {
 			throw LottoException.of(LottoExceptionType.WRONG_INPUT_TEXT);
 		}
 	}

@@ -1,7 +1,6 @@
 package lotto;
 
 import exception.LottoException;
-import ui.ResultView;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -20,36 +19,40 @@ public final class LottoNumbers {
 		throw new UnsupportedOperationException();
 	}
 
-	public LottoNumbers(List<Integer> numbers){
-		if (numbers == null){
+	public LottoNumbers(List<Integer> numbers) {
+		if (numbers == null) {
 			throw LottoException.of(WRONG_LOTTO_NUMBER);
 		}
-		Set<LottoNumber> lottoNumbers = numbers.stream()
-												  .map(LottoNumber::new)
-												  .sorted()
-												  .collect(Collectors.toCollection(LinkedHashSet::new));
-		if (isValidLottoNumberCount(lottoNumbers) == false){
-			throw LottoException.of(WRONG_LOTTO_NUMBER);
-		}
-		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+		this.lottoNumbers = Collections.unmodifiableSet(makeLottoNumbers(numbers));
 	}
 
-	public int matches(final LottoNumbers parameter){
+	private Set<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
+		Set<LottoNumber> lottoNumbers = numbers.stream()
+											   .map(LottoNumber::new)
+											   .sorted()
+											   .collect(Collectors.toCollection(LinkedHashSet::new));
+		if (isValidLottoNumberCount(lottoNumbers) == false) {
+			throw LottoException.of(WRONG_LOTTO_NUMBER);
+		}
+		return lottoNumbers;
+	}
+
+	public int matches(final LottoNumbers parameter) {
 		int sameNumber = 0;
-		for (LottoNumber number : parameter.lottoNumbers){
+		for (LottoNumber number : parameter.lottoNumbers) {
 			sameNumber += match(number);
 		}
 		return sameNumber;
 	}
 
-	private int match(final LottoNumber number){
-		if (this.lottoNumbers.contains(number)){
+	private int match(final LottoNumber number) {
+		if (this.lottoNumbers.contains(number)) {
 			return 1;
 		}
 		return 0;
 	}
 
-	public boolean isValidLottoNumberCount(final Set<LottoNumber> lottoNumbers){
+	public boolean isValidLottoNumberCount(final Set<LottoNumber> lottoNumbers) {
 		return lottoNumbers.size() == LOTTO_NUMBER_COUNT;
 	}
 

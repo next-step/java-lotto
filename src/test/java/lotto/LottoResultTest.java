@@ -46,4 +46,18 @@ class LottoResultTest {
 		assertThat(lottoResult.count(LottoRewardType.NONE))
 			.isEqualTo(0);
 	}
+
+	@Test
+	@DisplayName("수익률 계산 테스트")
+	void calculateRevenueTest(){
+		// given
+		Map<LottoRewardType, Integer> lottoRewardMap = new EnumMap<>(LottoRewardType.class);
+		lottoRewardMap.put(LottoRewardType.PLACE_4TH, 2);
+		LottoResult lottoResult = new LottoResult(lottoRewardMap);
+
+		// when
+		assertThat(lottoResult.calculateRevenue(new LottoMoney(10000)).doubleValue())
+			.isEqualTo(1.00); // then
+
+	}
 }

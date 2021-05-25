@@ -9,11 +9,11 @@ public enum LottoExceptionType {
 
 	private String message;
 
-	LottoExceptionType(final String message){
+	LottoExceptionType(final String message) {
 		this.message = message;
 	}
 
-	public String message(){
+	public String message() {
 		return this.message;
 	}
 }

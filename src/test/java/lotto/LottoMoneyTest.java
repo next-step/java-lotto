@@ -33,12 +33,4 @@ class LottoMoneyTest {
 		assertThat(new LottoMoney(10000).calculateLottoCount())
 			.isEqualTo(10);
 	}
-
-	@Test
-	@DisplayName("수익률 계산 테스트")
-	void calculateRevenueTest(){
-		assertThat(new LottoMoney(10000).calculateRevenue(()-> 10000).doubleValue())
-			.isEqualTo(1.00);
-
-	}
 }
