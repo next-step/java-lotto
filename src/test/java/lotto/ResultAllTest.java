@@ -10,7 +10,7 @@ public class ResultAllTest {
     public void updateResult_3등확인() {
         ResultAll resultAll = new ResultAll();
         SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
-        for(int i=0; i<3; i++)
+        for (int i = 0; i < 3; i++)
             sameNumberCountInALotto.updateCount(SameNumberStateEnum.SAME_MAIN_NUMBER);
 
         resultAll.updateResult(sameNumberCountInALotto);
@@ -21,7 +21,7 @@ public class ResultAllTest {
     public void yield_수익률확인() {
         ResultAll resultAll = new ResultAll();
         SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
-        for(int i=0; i<3; i++)
+        for (int i = 0; i < 3; i++)
             sameNumberCountInALotto.updateCount(SameNumberStateEnum.SAME_MAIN_NUMBER);
 
         resultAll.updateResult(sameNumberCountInALotto);
