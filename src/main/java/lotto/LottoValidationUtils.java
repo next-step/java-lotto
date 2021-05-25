@@ -15,7 +15,7 @@ public class LottoValidationUtils {
     private static final int LOTTO_MINIMUM_NUMBER = 1;
     private static final int LOTTO_MAXIMUM_NUMBER = 45;
 
-    private static final String WIN_LOTTO_NUMBER_DELIMITER = ",|, ";
+    private static final String WIN_LOTTO_NUMBER_DELIMITER = ",";
     private static final String NUMBER_REGEX = "[0-9]+$";
     private static final String NUMBER_FORMAT_EXCEPTION_MSG = "숫자만 입력 가능합니다.";
     private static final String NUMBER_NULL_EXCEPTION_MSG = "구매금액을 입력해 주세요.";
@@ -43,7 +43,7 @@ public class LottoValidationUtils {
         if(winNumber.equals("")){
             throw new NumberFormatException(NUMBER_NULL_EXCEPTION_MSG);
         }
-        String[] winNumberArr = winNumber.split(WIN_LOTTO_NUMBER_DELIMITER);
+        String[] winNumberArr = winNumber.replaceAll(" ", "").split(WIN_LOTTO_NUMBER_DELIMITER);
         List<Integer> winNumberList = new ArrayList<>();
         for(String number : winNumberArr) {
             checkNumberAndRange(number);

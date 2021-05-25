@@ -26,7 +26,6 @@ public class InputView {
         try {
             System.out.println(WIN_LOTTO_NUMBER_INPUT);
             winNumber = scanner.nextLine();
-            System.out.println(winNumber);
         } finally {
             if (scanner != null) scanner.close();
         }

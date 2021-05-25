@@ -7,7 +7,6 @@ public class LottoMain {
         Lottos lottos = lottoBuy.buyLotto(inputView.payForLotto());
         ResultView.buyLottoInfo(lottos);
 
-        inputView.inputWinLottoNumber();
         LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
 
         ResultView resultView = new ResultView();
