@@ -11,10 +11,10 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public LottoResults match(Lotto winningLotto) {
+	public LottoResults match(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : this.lottos) {
-			Rank rank = lotto.findRank(winningLotto);
+			Rank rank = winningLotto.findRank(lotto);
 			ranks.add(rank);
 		}
 		return new LottoResults(ranks);

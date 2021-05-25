@@ -17,9 +17,10 @@ public class LottoResults {
 			int rankCount = rankResults.getOrDefault(rank, RANK_RESULT_DEFAULT_VALUE) + ADD_RANK_COUNT;
 			rankResults.put(rank, rankCount);
 		}
+
 		renderRanks = Arrays.stream(Rank.values())
 				.filter(rank -> rank.isGreaterThan(Rank.NONE))
-				.sorted(Comparator.comparingInt(Rank::getMatchCount))
+				.sorted(Comparator.comparing(Rank::getMatchCount).thenComparing(Rank::getWinningMoney))
 				.collect(Collectors.toList());
 	}
 
