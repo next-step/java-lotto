@@ -9,9 +9,10 @@ import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private static Map<Integer, Rank> ENUM_MAP;
@@ -20,7 +21,9 @@ public enum Rank {
     private final int reward;
 
     static {
-        ENUM_MAP = Stream.of(Rank.values()).collect(Collectors.toMap(Rank::getMatchCount, Function.identity()));
+        ENUM_MAP = Stream.of(Rank.values())
+                .filter(rank -> rank != Rank.SECOND)
+                .collect(Collectors.toMap(Rank::getMatchCount, Function.identity()));
     }
 
     Rank(int matchCount, int reward) {
@@ -36,7 +39,10 @@ public enum Rank {
         return reward;
     }
 
-    public static Rank getRankByMatchCount(int matchCount) {
+    public static Rank valueOf(int matchCount, boolean isMatchBonus) {
+        if (matchCount == 5 && isMatchBonus) {
+            return Rank.SECOND;
+        }
         return ENUM_MAP.getOrDefault(matchCount, MISS);
     }
 

@@ -27,15 +27,15 @@ public class LottoStoreTest {
         List<Lotto> lottos = Arrays.asList(
                 new Lotto("1,2,3,4,5,6"),
                 new Lotto("1,2,3,4,5,7"),
+                new Lotto("1,2,3,4,5,8"),
                 new Lotto("1,2,3,4,7,8"),
-                new Lotto("1,2,3,7,8,9"),
-                new Lotto("1,2,7,8,9,10")
+                new Lotto("1,2,3,8,9,10")
         );
         BuyLottos buyLottos = new BuyLottos(lottos);
         LottoStore lottoStore = new LottoStore();
-        WinningRanks excepted = new WinningRanks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH));
+        WinningRanks excepted = new WinningRanks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH));
 
-        WinningRanks ranks = lottoStore.calcLottosRank(buyLottos, winningLotto);
+        WinningRanks ranks = lottoStore.calcLottosRank(buyLottos, winningLotto, new LottoNumber("7"));
         assertThat(ranks).isEqualTo(excepted);
     }
 

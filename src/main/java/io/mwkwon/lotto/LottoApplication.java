@@ -25,7 +25,7 @@ public class LottoApplication {
         resultView.printBuyLottos(buyLottos);
         Lotto winningLotto = lottoStore.createWinningLotto(dataGenerator);
         LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(dataGenerator, winningLotto);
-        WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos, winningLotto);
+        WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos, winningLotto, bonusBallLottoNumber);
         resultView.printWinningStatistics(winningRanks);
         resultView.printProfitRate(winningRanks, lottoPayment);
     }
