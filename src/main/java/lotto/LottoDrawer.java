@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoDrawer {
-	private final List<Integer> lottoNumbers;
+	private static final List<Integer> lottoNumbers =
+			IntStream.rangeClosed(Constants.LOTTO_MIN_NUMBER, Constants.LOTTO_MAX_NUMBER)
+					.boxed()
+					.collect(Collectors.toList());
 
-	public LottoDrawer() {
-		this.lottoNumbers = IntStream.rangeClosed(Constants.LOTTO_MIN_NUMBER, Constants.LOTTO_MAX_NUMBER)
-				.boxed()
-				.collect(Collectors.toList());
+	private LottoDrawer() {
 	}
 
-	public Lottos draw(BigDecimal receivedMoney) {
+	public static Lottos draw(BigDecimal receivedMoney) {
 		if (receivedMoney.compareTo(Constants.LOTTO_PRICE) < 0) {
 			throw new LackOfMoneyToBuyLottoException();
 		}
@@ -28,12 +28,12 @@ public class LottoDrawer {
 				.collect(Collectors.toList()));
 	}
 
-	private int numberOfLottosToBuy(BigDecimal receivedMoney) {
+	private static int numberOfLottosToBuy(BigDecimal receivedMoney) {
 		return receivedMoney.divide(Constants.LOTTO_PRICE, MathContext.DECIMAL32)
 				.intValue();
 	}
 
-	protected Lotto draw() {
+	protected static Lotto draw() {
 		Collections.shuffle(lottoNumbers);
 		return new Lotto(lottoNumbers.subList(0, Constants.LOTTO_NUMBERS_LENGTH)
 				.stream()

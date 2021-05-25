@@ -10,7 +10,6 @@ public enum LottoPrizeType {
 	FIVE_MATCHED(5, BigDecimal.valueOf(1_500_000)),
 	SIX_MATCHED(6, BigDecimal.valueOf(2_000_000_000));
 
-
 	private final int matchedNumberCount;
 	private final BigDecimal prizeMoney;
 

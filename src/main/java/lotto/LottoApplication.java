@@ -9,9 +9,7 @@ import java.util.List;
 public class LottoApplication {
 	public static void main(String[] args) {
 		BigDecimal receivedMoney = InputView.inputMoney();
-
-		LottoDrawer lottoDrawer = new LottoDrawer();
-		Lottos lottos = lottoDrawer.draw(receivedMoney);
+		Lottos lottos = LottoDrawer.draw(receivedMoney);
 
 		ResultView.printBoughtLottos(lottos);
 		List<Integer> winningNumber = InputView.inputWinningNumber();
