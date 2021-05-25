@@ -7,9 +7,7 @@ public class Lotto {
 
     public Lotto(String lottoString) {
         lottoNumbers = new ArrayList<>();
-        String[] lottoArray = lottoString
-                .replaceAll(" ", "")
-                .split(",");
+        String[] lottoArray = parseLottoString(lottoString);
         validDuplicateNumber(lottoArray);
 
         for (String value : lottoArray) {
@@ -27,5 +25,10 @@ public class Lotto {
         if (lottoNumberSet.size() != lottoArray.length) {
             throw new IllegalArgumentException("This Numbers has duplicate number");
         }
+    }
+
+    private String[] parseLottoString(String lottoString) {
+        return lottoString.replaceAll("[^0-9,]", "")
+                .split(",");
     }
 }
