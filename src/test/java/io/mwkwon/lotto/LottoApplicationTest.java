@@ -26,6 +26,12 @@ public class LottoApplicationTest {
                 System.out.println("지난 주 당첨 번호를 입력해 주세요.");
                 return new Lotto("1, 2, 3, 4, 5, 6");
             }
+
+            @Override
+            public LottoNumber requestBonusBallNumber(Lotto winningLotto) {
+                System.out.println("보너스 볼을 입력해 주세요.");
+                return new LottoNumber("7");
+            }
         };
 
         LottoGenerator lottoGenerator = (lottoPayment) -> {

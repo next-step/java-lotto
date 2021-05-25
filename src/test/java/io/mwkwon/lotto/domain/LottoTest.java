@@ -1,6 +1,8 @@
 package io.mwkwon.lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -77,5 +79,12 @@ public class LottoTest {
     void 로또_생성_static_method_테스트() {
         Lotto lotto = Lotto.create("1,2,3,4,5,6");
         assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6:true", "7:false"}, delimiter = ':')
+    void 생성된_로또_번호와_동일한_로또_번호가_존재하지는_체크_정상_동작_테스트(String number, boolean expected) {
+        Lotto lotto = Lotto.create("1,2,3,4,5,6");
+        assertThat(lotto.isContains(new LottoNumber(number))).isEqualTo(expected);
     }
 }

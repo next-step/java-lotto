@@ -22,6 +22,10 @@ public final class LottoStore {
         return dataGenerator.requestInputPayment();
     }
 
+    public LottoNumber createBonusBallLottoNumber(DataGenerator dataGenerator, Lotto winningLotto) {
+        return dataGenerator.requestBonusBallNumber(winningLotto);
+    }
+
     public WinningRanks calcLottosRank(BuyLottos buyLottos, Lotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto buyLotto : buyLottos.lottos()) {

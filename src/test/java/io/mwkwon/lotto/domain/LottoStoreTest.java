@@ -64,4 +64,19 @@ public class LottoStoreTest {
         LottoPayment lottoPayment = lottoStore.createLottoPayment(lottoInputView);
         assertThat(lottoPayment).isEqualTo(new LottoPayment("14000"));
     }
+
+    @Test
+    void 보너스볼_생성_기능_테스트() {
+        LottoInputView lottoInputView = new LottoInputView() {
+            @Override
+            public LottoNumber requestBonusBallNumber(Lotto winningLotto) {
+                return new LottoNumber("7");
+            }
+        };
+
+        LottoStore lottoStore = new LottoStore();
+        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+        LottoNumber lottoNumber = lottoStore.createBonusBallLottoNumber(lottoInputView, winningLotto);
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(7));
+    }
 }

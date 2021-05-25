@@ -36,6 +36,10 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    public boolean isContains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     private void checkValidNumberAndDelimiter(String strLottoNumbers) {
         Matcher matcher = Pattern.compile(REGEX).matcher(strLottoNumbers);
         if (matcher.find()) {
