@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.WinningResult;
+import lotto.model.WinningResult;
 import lotto.model.LottoModel;
 
 import java.util.ArrayList;

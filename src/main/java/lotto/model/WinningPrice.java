@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public enum WinningPrice {
     FIFTHPRICE(5_000),

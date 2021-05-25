@@ -1,7 +1,7 @@
 package lottotest;
 
-import lotto.WinningPrice;
-import lotto.WinningResult;
+import lotto.model.WinningPrice;
+import lotto.model.WinningResult;
 import lotto.controller.LottoManualController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

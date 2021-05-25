@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public class LottoPrice {
     public int getQuantity(int price) {
