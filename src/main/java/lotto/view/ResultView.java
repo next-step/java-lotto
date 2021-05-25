@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.common.WinningType;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class ResultView {
@@ -24,15 +25,19 @@ public class ResultView {
 
     public void printResultStatistics(Map<WinningType, Integer> gameResult) {
         System.out.println(STATISTICS_TITLE_MESSAGE);
-        for(WinningType winningType : gameResult.keySet()) {
-            if(winningType == WinningType.SECOND) {
-                System.out.printf(SECOND_STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), gameResult.get(winningType));
-                continue;
-            }
 
-            if(winningType.getMatchCount() >= MIN_PROFIT_MATCHING_COUNT) {
-                System.out.printf(STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), gameResult.get(winningType));
-            }
+        for(WinningType winningType : gameResult.keySet()) {
+            printResultStatistics(winningType, gameResult.get(winningType));
+        }
+    }
+
+    private void printResultStatistics(WinningType winningType, int value) {
+        if(winningType == WinningType.SECOND) {
+            System.out.printf(SECOND_STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), value);
+        }
+
+        if((winningType != WinningType.SECOND) && (winningType.getMatchCount() >= MIN_PROFIT_MATCHING_COUNT)) {
+            System.out.printf(STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), value);
         }
     }
 
