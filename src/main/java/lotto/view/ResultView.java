@@ -24,8 +24,16 @@ public class ResultView {
     public void printResultStatistics(Map<WinningType, Integer> gameResult) {
         System.out.println("\n당첨 통계\n---------");
         for(WinningType winningType : gameResult.keySet()) {
-            System.out.println(winningType.getMatchCount() + "개 일치 (" + winningType.getPrize() + ")-"
-                    + gameResult.get(winningType) +"개");
+            if(winningType == WinningType.SECOND) {
+                System.out.println(winningType.getMatchCount() + "개 일치, 보너스 볼 일치(" + winningType.getPrize() + "원)- "
+                        + gameResult.get(winningType) +"개");
+                continue;
+            }
+
+            if(winningType.getMatchCount() >= 3) {
+                System.out.println(winningType.getMatchCount() + "개 일치 (" + winningType.getPrize() + "원)- "
+                        + gameResult.get(winningType) +"개");
+            }
         }
     }
 

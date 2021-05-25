@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.common.ErrorCode;
 import lotto.common.WinningType;
 import lotto.view.ResultView;
 
@@ -16,8 +17,15 @@ public class LottoGamePlayer {
     }
 
     public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets, int bonusNumber) {
+        throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
         WinningType[] winningTypes = lottoTickets.getGameResults(winningLottoTicket, bonusNumber);
         resultView.printResultStatistics(getGameResult(winningTypes));
+    }
+
+    public void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
+        if(winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
+            throw  new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
+        }
     }
 
     public int[] getMatchCountResult(WinningType[] winningTypes) {
