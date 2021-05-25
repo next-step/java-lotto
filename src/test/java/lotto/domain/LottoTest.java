@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.LottoFixture.번호_0개_일치;
@@ -31,13 +30,13 @@ class LottoTest {
     @Test
     void 로또는_1부터_45까지의_숫자_중에서_발행한다() {
         Lotto lotto = LottoGenerator.getLotto();
-        assertThat(lotto.numbers()).allMatch(num -> num <= Lotto.MAX).allMatch(num -> num >= Lotto.MIN);
+        assertThat(lotto.numbers()).allMatch(lottoNumber -> LottoNumber.isValidNumber(lottoNumber.number));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void 로또는_1부터_45사이가_아닌_값을_입력할_수_없다(int invalidNumber) {
-        List<Integer> 잘못된_값 = new ArrayList<>(번호_0개_일치.numbers());
+        List<Integer> 잘못된_값 = Lists.newArrayList(invalidNumber, 1, 2, 3, 4, 5);
         잘못된_값.add(0, invalidNumber);
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(잘못된_값));
     }
@@ -56,7 +55,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다")
     void 로또는_입력받은_로또와_일치하는_번호의_수를_알려준다(Lotto lotto, int expected) {
-        assertThat(lotto.matchCountWith(우승번호)).isEqualTo(expected);
+        assertThat(lotto.matchCountWith(우승번호.lotto)).isEqualTo(expected);
     }
 
     static Stream<Arguments> provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다() {
