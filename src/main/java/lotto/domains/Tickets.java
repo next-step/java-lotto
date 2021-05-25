@@ -32,12 +32,7 @@ public class Tickets {
         return scores;
     }
 
-    @Override
-    public String toString() {
-        return printer();
-    }
-
-    private String printer() {
+    public String print() {
         StringBuilder message = new StringBuilder();
         for (Ticket ticket : this.tickets) {
             message.append(ticket.toString()).append(System.lineSeparator());

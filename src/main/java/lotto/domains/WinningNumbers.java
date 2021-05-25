@@ -28,8 +28,7 @@ public class WinningNumbers {
         return Prize.valueOf(count);
     }
 
-    @Override
-    public String toString() {
+    public String print() {
         return this.winningTicket + " + " + this.bonusNumber;
     }
 

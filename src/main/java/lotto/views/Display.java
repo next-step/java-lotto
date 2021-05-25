@@ -19,7 +19,7 @@ public final class Display {
     }
 
     public static void show(Tickets tickets) {
-        System.out.println(tickets.toString());
+        System.out.println(tickets.print());
     }
 
     public static void error(String message) {

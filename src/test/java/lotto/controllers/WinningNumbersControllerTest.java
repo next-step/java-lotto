@@ -39,7 +39,7 @@ public class WinningNumbersControllerTest {
 
         winningNumbersController.saveWinningNumbers(winningTicket, bonusNumber);
 
-        assertThat(lotto.storage().loadWinningNumbers().toString()).isEqualTo(expected);
+        assertThat(lotto.storage().loadWinningNumbers().print()).isEqualTo(expected);
     }
 
     @DisplayName("중복된 숫자를 입력하여 보너스 번호 입력을 실패한다.")
