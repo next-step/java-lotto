@@ -26,4 +26,12 @@ public class InputView {
 			throw LottoException.of(LottoExceptionType.WRONG_INPUT_TEXT);
 		}
 	}
+
+	public static int inputBonusNumber() {
+		try {
+			return ConsoleUtils.nextInt(MessageType.INPUT_BONUS_NUMBER.message());
+		} catch(Exception e) {
+			throw LottoException.of(LottoExceptionType.WRONG_INPUT_TEXT);
+		}
+	}
 }

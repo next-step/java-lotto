@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum LottoRewardType {
 	NONE(0, 0),
 	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
+	SECOND(5, 30_000_000, "5개 일치, 보너스 볼 일치(30000000원)"),
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
@@ -16,16 +16,20 @@ public enum LottoRewardType {
 	private final String message;
 
 	LottoRewardType(final int collect, final int reward) {
-		this.collect = collect;
-		this.reward = reward;
-		this.message = makeMessage();
+		this(collect, reward, defaultMessage(collect, reward));
 	}
 
-	private String makeMessage() {
+	LottoRewardType(final int collect, final int reward, final String message){
+		this.collect = collect;
+		this.reward = reward;
+		this.message = message;
+	}
+
+	private static String defaultMessage(final int collect, final int reward) {
 		StringBuilder stringBuilder = new StringBuilder();
-		return stringBuilder.append(this.collect)
+		return stringBuilder.append(collect)
 							.append("개 일치 (")
-							.append(this.reward)
+							.append(reward)
 							.append(")").toString();
 	}
 
