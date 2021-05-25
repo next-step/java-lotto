@@ -18,9 +18,13 @@ public class InputView {
 
 	public static List<Number> winningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-		String numbersString = scanner.next();
+		String text = scanner.next();
 		System.out.println();
-		String[] split = numbersString.split(DELIMITER);
+		return stringToNumbers(text);
+	}
+
+	public static List<Number> stringToNumbers(String text) {
+		String[] split = text.split(DELIMITER);
 		return Stream.of(split)
 			.mapToInt(s -> Integer.parseInt(s.trim()))
 			.mapToObj(Number::new)

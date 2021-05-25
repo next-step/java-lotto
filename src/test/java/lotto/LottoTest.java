@@ -1,11 +1,9 @@
 package lotto;
 
-import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,18 +11,14 @@ public class LottoTest {
 
 	@Test
 	void lotto_생성_성공() {
-		List<Number> numbers = IntStream.range(1, 7) // 1 ~ 6 숫자 생성
-			.mapToObj(Number::new)
-			.collect(toList());
+		List<Number> numbers = InputView.stringToNumbers("1,2,3,4,5,6");
 
 		assertDoesNotThrow(() -> new Lotto(numbers));
 	}
 
 	@Test
 	void lotto_생성_실패() {
-		List<Number> numbers = IntStream.range(1, 6) // 1 ~ 5 숫자 생성
-			.mapToObj(Number::new)
-			.collect(toList());
+		List<Number> numbers = InputView.stringToNumbers("1,2,3,4,5");
 
 		assertThrows(RuntimeException.class, () -> new Lotto(numbers)); // 숫자가 5개
 
@@ -37,12 +31,8 @@ public class LottoTest {
 
 	@Test
 	void lotto_매치_카운트_비교() {
-		List<Number> numbers1 = IntStream.range(1, 7) // 1 ~ 6 숫자 생성
-			.mapToObj(Number::new)
-			.collect(toList());
-		List<Number> numbers2 = IntStream.range(5, 11) // 5 ~ 10 숫자 생성
-			.mapToObj(Number::new)
-			.collect(toList());
+		List<Number> numbers1 = InputView.stringToNumbers("1,2,3,4,5,6");
+		List<Number> numbers2 = InputView.stringToNumbers("5,6,7,8,9,10");
 
 		Lotto lotto1 = new Lotto(numbers1);
 

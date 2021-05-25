@@ -16,6 +16,10 @@ public class Lottos {
 		}
 	}
 
+	public Lottos(List<Lotto> values) {
+		this.values = values;
+	}
+
 	public List<Lotto> values() {
 		return values;
 	}
