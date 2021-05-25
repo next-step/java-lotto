@@ -23,8 +23,8 @@ public class Lotto {
 
 	private void validateNumbers(List<Number> numbers) {
 		long distinctCount = numbers.stream()
-								.distinct()
-								.count();
+				.distinct()
+				.count();
 
 		if (numbers.size() != REQUIRED_COUNT || distinctCount != REQUIRED_COUNT) {
 			throw new IllegalArgumentException("Numbers must consist of 6 distinct numbers.");
