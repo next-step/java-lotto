@@ -22,7 +22,7 @@ public class WinningLotto {
 		return Rank.findRank(matchCount(lotto), lotto.contains(bonusNumber));
 	}
 
-	protected int matchCount(Lotto lotto) {
+	private int matchCount(Lotto lotto) {
 		return this.winningLotto.matchCount(lotto);
 	}
 
