@@ -34,9 +34,11 @@ public class LottoOutputView {
 
     private String printPrizeDetail(LottoResult lottoResult) {
         StringBuilder prizeDetail = new StringBuilder();
-        for (Rank eachRank : Rank.values()) {
-            prizeDetail.append(createEachPrizeDetail(lottoResult, eachRank));
+
+        for (int i = Rank.values().length - 1; i >= 0; i--) {
+            prizeDetail.append(createEachPrizeDetail(lottoResult, Rank.values()[i]));
         }
+        
         prizeDetail.substring(0, prizeDetail.length() - 1);
         return prizeDetail.toString();
     }
