@@ -12,7 +12,7 @@ public class LottoRankTest {
 
     @DisplayName("당첨 결과에 따른 당첨 금액을 구한다")
     @ParameterizedTest
-    @CsvSource(value = {"3,5000,false", "4,50000,false", "5,1500000,false", "5,30000000,true", "6,2000000000,false"})
+    @CsvSource(value = {"3,5000,true", "4,50000,true", "3,5000,false", "4,50000,false", "5,1500000,false", "5,30000000,true", "6,2000000000,false"})
     public void findRank(int winningCount, int expectedReward, boolean matchBonus) {
         //when
         LottoRank lottoRank = LottoRank.getLottoRank(winningCount, matchBonus);
@@ -46,7 +46,7 @@ public class LottoRankTest {
         LottoRank lottoRank = LottoRank.getLottoRank(winningCount, matchBonus);
 
         //then
-        assertThat(lottoRank).isEqualTo(LottoRank.FIVE_WITH_BONUS);
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
 
     }
 }
