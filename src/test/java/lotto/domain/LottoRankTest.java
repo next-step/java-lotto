@@ -1,49 +1,34 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.*;
+
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoRankTest {
 
-	@DisplayName("로또 번호 비교 결과가 6개 맞을 때 1등으로 판단하는지 테스트")
-	@Test
-	void isFirst() {
-		// given
-		int matchCount = 6;
-
-		// when
-		LottoRank lottoRank = LottoRank.rank(matchCount);
-
-		// then
-		assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
-	}
-
-	@DisplayName("로또 번호 비교 결과가 5개 맞을 때 2등으로 판단하는지 테스트")
-	@Test
-	void isSecond() {
-		// given
-		int matchCount = 5;
-
-		// when
-		LottoRank lottoRank = LottoRank.rank(matchCount);
-
-		// then
-		assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
-	}
-
-	@DisplayName("Rank 에 정의한 숫자를 전달했을 때, 순위권 밖으로 판단하는지 테스트")
+	@DisplayName("로또 등수 경우의 수 테스트")
 	@ParameterizedTest
-	@ValueSource(ints = {-1, 0, 1, 2, 7})
-	void isOutOfRank(int matchCount) {
-		// when
-		LottoRank lottoRank = LottoRank.rank(matchCount);
+	@MethodSource("argumentProvider")
+	void rank(LottoPoint lottoPoint, LottoRank expectedLottoRank) {
+		assertThat(LottoRank.rank(lottoPoint)).isEqualTo(expectedLottoRank);
+	}
 
-		// then
-		assertThat(lottoRank).isEqualTo(LottoRank.OUT_OF_RANK);
+	static Stream<Arguments> argumentProvider() {
+		return Stream.of(
+			arguments(new LottoPoint(6), LottoRank.FIRST),
+			arguments(new LottoPoint(5, true), LottoRank.SECOND),
+			arguments(new LottoPoint(5), LottoRank.THIRD),
+			arguments(new LottoPoint(4), LottoRank.FOURTH),
+			arguments(new LottoPoint(3), LottoRank.FIFTH),
+			arguments(new LottoPoint(0), LottoRank.OUT_OF_RANK),
+			arguments(new LottoPoint(100), LottoRank.OUT_OF_RANK)
+		);
 	}
 
 }
