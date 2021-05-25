@@ -7,7 +7,6 @@ import java.util.List;
 import lotto.intf.NumbersGenerator;
 
 public class LottoNumbersGenerator implements NumbersGenerator {
-    public static final String SPLIT_DELIMITER = ",";
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbersGenerator() {
@@ -18,14 +17,6 @@ public class LottoNumbersGenerator implements NumbersGenerator {
 
     public LottoNumbersGenerator(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
-    }
-
-    public LottoNumbers toLottoNumbers(String textNumber) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : textNumber.split(SPLIT_DELIMITER)) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
-        }
-        return new LottoNumbers(lottoNumbers);
     }
 
     @Override

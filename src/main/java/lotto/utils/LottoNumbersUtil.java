@@ -1,7 +1,7 @@
 package lotto.utils;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;

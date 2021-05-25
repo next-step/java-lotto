@@ -3,17 +3,18 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.intf.NumbersGenerator;
+import lotto.utils.LottoNumbersUtil;
 
 /**
  * LottoNumbersGenerator 객체 생성 및 로또번호 생성기능 테스트
@@ -24,11 +25,7 @@ public class LottoNumbersGeneratorTest {
     @ValueSource(strings = {"-1,2,3,4,5,6", "a,b,c,d,e,f"})
     @DisplayName("문자열을 로또번호로 변활할 떄 유효성 검사")
     void validate_toLottoNumbers(String textNumber) {
-        // given
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-
-        // then
-        assertThatThrownBy(() -> lottoNumbersGenerator.toLottoNumbers(textNumber))
+        assertThatThrownBy(() -> LottoNumbersUtil.toLottoNumbers(textNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -36,8 +33,7 @@ public class LottoNumbersGeneratorTest {
     @DisplayName("문자로 된 숫자 목록을 로또번호 목록으로 변환기능")
     void toLottoNumbers() {
         // given
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-        LottoNumbers lottoNumbers = lottoNumbersGenerator.toLottoNumbers("1, 2, 3 ,4,5,6");
+        LottoNumbers lottoNumbers = LottoNumbersUtil.toLottoNumbers("1, 2, 3 ,4,5,6");
 
         // then
         assertThat(lottoNumbers.isEmpty()).isFalse();
