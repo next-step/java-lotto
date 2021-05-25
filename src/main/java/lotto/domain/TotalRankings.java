@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.PrizeInfo;
+import lotto.dto.RankingPrizedCount;
 
 import java.util.*;
 import java.util.function.Function;
@@ -21,11 +21,11 @@ public class TotalRankings {
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
   }
 
-  public List<PrizeInfo> createPrizeInfos() {
+  public List<RankingPrizedCount> createPrizeInfos() {
     return Arrays.stream(LottoRanking.values())
             .filter(this::isPrized)
             .sorted(Comparator.comparingInt(this::getRankingMatchCount))
-            .map(lottoRanking -> new PrizeInfo(lottoRanking, winningCountsGroupByLottoRanking.getOrDefault(lottoRanking, WINNING_FAILED_COUNT)))
+            .map(lottoRanking -> new RankingPrizedCount(lottoRanking, winningCountsGroupByLottoRanking.getOrDefault(lottoRanking, WINNING_FAILED_COUNT)))
             .collect(Collectors.toList());
   }
 

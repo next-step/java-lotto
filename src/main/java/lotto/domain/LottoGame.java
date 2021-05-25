@@ -11,9 +11,13 @@ public class LottoGame {
     this.gameNumbers = gameNumbers;
   }
 
-  public LottoRanking checkWinning(LottoGame winningGame) {
-    int matchCount = gameNumbers.match(winningGame.gameNumbers);
-    return LottoRanking.confirm(matchCount);
+  public int matchWinningNumbers(LottoGame winningGame) {
+    return gameNumbers.match(winningGame.gameNumbers);
+  }
+
+  public boolean matchBonusNumber(LottoNumber bonusNumber) {
+    return gameNumbers.contains(bonusNumber);
+
   }
 
   public List<Integer> getGameNumbers() {

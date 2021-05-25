@@ -14,9 +14,9 @@ public class LottoGames {
     this.games = games;
   }
 
-  public TotalRankings matchRankings(LottoGame winningGame) {
+  public TotalRankings matchRankings(WinningConditions winningConditions) {
     List<LottoRanking> matchResult = games.stream()
-        .map(game -> game.checkWinning(winningGame))
+        .map(winningConditions::matchConditions)
         .collect(Collectors.toList());
     return new TotalRankings(matchResult);
   }

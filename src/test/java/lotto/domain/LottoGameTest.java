@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static lotto.util.TestUtil.getOneToSixLottoNumbers;
 import static lotto.util.TestUtil.toNumbers;
@@ -18,21 +20,27 @@ class LottoGameTest {
     winningNumbers = new LottoNumbers(getOneToSixLottoNumbers());
   }
 
-  @DisplayName("당첨 번호와 일치하는 갯수에 해당하는 등수를 반환한다.")
+  @DisplayName("당첨 번호와 일치하는 갯수를 반환한다.")
   @Test
-  void checkWinningTest() {
+  void matchWinningNumbersTest() {
     //given
     LottoNumbers firstNumbers = new LottoNumbers(toNumbers("1,2,3,4,5,6"));
     LottoNumbers secondNumbers = new LottoNumbers(toNumbers("1,2,3,4,5,7"));
     LottoNumbers thirdNumbers = new LottoNumbers(toNumbers("1,2,3,4,7,8"));
     LottoNumbers fourthNumbers = new LottoNumbers(toNumbers("1,2,3,7,8,9"));
-    LottoNumbers noneNumbers = new LottoNumbers(toNumbers("1,2,7,8,9,10"));
     assertAll(
-        () -> assertThat(new LottoGame(firstNumbers).checkWinning(new LottoGame(winningNumbers))).isSameAs(LottoRanking.FIRST),
-        () -> assertThat(new LottoGame(secondNumbers).checkWinning(new LottoGame(winningNumbers))).isSameAs(LottoRanking.SECOND),
-        () -> assertThat(new LottoGame(thirdNumbers).checkWinning(new LottoGame(winningNumbers))).isSameAs(LottoRanking.THIRD),
-        () -> assertThat(new LottoGame(fourthNumbers).checkWinning(new LottoGame(winningNumbers))).isSameAs(LottoRanking.FOURTH),
-        () -> assertThat(new LottoGame(noneNumbers).checkWinning(new LottoGame(winningNumbers))).isSameAs(LottoRanking.NONE)
+        () -> assertThat(new LottoGame(firstNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(6),
+        () -> assertThat(new LottoGame(secondNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(5),
+        () -> assertThat(new LottoGame(thirdNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(4),
+        () -> assertThat(new LottoGame(fourthNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(3)
     );
   }
+
+  @DisplayName("보너스 번호를 포함하고 있는지 여부를 반환한다.")
+  @CsvSource(value = {"1,true", "6,true", "7,false"})
+  @ParameterizedTest
+  void matchBonusNumberTest(int givenBonusNumber, boolean expectation) {
+    assertThat(new LottoGame(winningNumbers).matchBonusNumber(new LottoNumber(givenBonusNumber))).isEqualTo(expectation);
+  }
+
 }

@@ -14,7 +14,7 @@ public class LottoStore {
     OrderSheet orderSheet = InputView.orderNewGames();
     LottoMachine lottoMachine = new LottoMachine(new GameGenerator(orderSheet, new FixedPoolRandomNumberGenerateStrategy()));
     OutputView.displayOrderedGames(lottoMachine.peekOrderedGames());
-    AnalysisSheet analysisSheet = lottoMachine.confirmPrizeOrderedLottos(InputView.inputWinningNumbers());
+    AnalysisSheet analysisSheet = lottoMachine.confirmPrizeOrderedLottos(InputView.inputWinningNumbersAndBonusNumber());
     OutputView.displayAnalysisSheet(analysisSheet);
   }
 }

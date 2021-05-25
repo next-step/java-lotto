@@ -20,10 +20,13 @@ class LottoGamesTest {
   @ParameterizedTest
   @MethodSource("provideMatchRankingsSource")
   void matchRankingsTest(LottoGames givenGames, TotalRankings expectation) {
-    // given winning game
-    LottoGame winningGame = new LottoGame(new LottoNumbers(getOneToSixLottoNumbers()));
+    // given
+    LottoGame givenWinningGame = new LottoGame(new LottoNumbers(getOneToSixLottoNumbers()));
+    int givenBonusNumber = 7;
+    WinningConditions givenWinningConditions = WinningConditions.of(givenWinningGame, givenBonusNumber);
 
-    assertThat(givenGames.matchRankings(winningGame)).isEqualTo(expectation);
+
+    assertThat(givenGames.matchRankings(givenWinningConditions)).isEqualTo(expectation);
 
   }
 
@@ -39,11 +42,14 @@ class LottoGamesTest {
         Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"))),
                     new TotalRankings(Lists.newArrayList(LottoRanking.FIRST))
         ),
-        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
-                    new TotalRankings(Lists.newArrayList(LottoRanking.FIRST, LottoRanking.FOURTH))
+        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,7"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
+                    new TotalRankings(Lists.newArrayList(LottoRanking.SECOND, LottoRanking.FIFTH))
+        ),
+        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,8"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
+            new TotalRankings(Lists.newArrayList(LottoRanking.THIRD, LottoRanking.FIFTH))
         ),
         Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("10,20,30,40,15,25"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
-            new TotalRankings(Lists.newArrayList(LottoRanking.NONE, LottoRanking.FOURTH))
+            new TotalRankings(Lists.newArrayList(LottoRanking.NONE, LottoRanking.FIFTH))
         )
     );
   }

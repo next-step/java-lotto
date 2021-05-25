@@ -33,4 +33,16 @@ class LottoNumbersTest {
     //when & then
     assertThat(new LottoNumbers(numbers).match(winningNumbers)).isEqualTo(expectation);
   }
+
+  @DisplayName("특정 번호가 포함되어있는지 여부를 반환한다.")
+  @ParameterizedTest
+  @CsvSource(value = {"1,2,3,4,5,6:true", "40,19,8,22,34,10:false"}, delimiter = ':')
+  void containsTest(String givenNumbers, boolean expectation) {
+    //given
+    LottoNumber givenNumber = new LottoNumber(6);
+    List<LottoNumber> numbers = toNumbers(givenNumbers);
+
+    //when & then
+    assertThat(new LottoNumbers(numbers).contains(givenNumber)).isEqualTo(expectation);
+  }
 }

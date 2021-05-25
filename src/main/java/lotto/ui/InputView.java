@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.dto.OrderSheet;
+import lotto.dto.WinningNumbersAndBonusNumber;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -14,6 +15,7 @@ public class InputView {
   private static final String PLEASE_INPUT_INTEGER = "자연수로 입력 해 주세요.";
   private static final String PLEASE_INPUT_PURCHASING_PRICE = "구입금액을 입력해 주세요.";
   private static final String PLEASE_INPUT_LAST_WEEK_PRIZE = "지난 주 당첨 번호를 입력해 주세요.";
+  private static final String PLEASE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
   private static final Pattern SPACE = Pattern.compile("\\s");
   private static final Pattern COMMA = Pattern.compile(",");
 
@@ -25,8 +27,10 @@ public class InputView {
     return new OrderSheet(sayQuestionAndGetLong(PLEASE_INPUT_PURCHASING_PRICE));
   }
 
-  public static List<Integer> inputWinningNumbers() {
-    return sayQuestionAndGetStringArray(PLEASE_INPUT_LAST_WEEK_PRIZE);
+  public static WinningNumbersAndBonusNumber inputWinningNumbersAndBonusNumber() {
+    List<Integer> winningNumbers = sayQuestionAndGetStringArray(PLEASE_INPUT_LAST_WEEK_PRIZE);
+    int bonusNumber = (int) sayQuestionAndGetLong(PLEASE_INPUT_BONUS_NUMBER);
+    return new WinningNumbersAndBonusNumber(winningNumbers, bonusNumber);
   }
 
   private static long sayQuestionAndGetLong(String question) {
