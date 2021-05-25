@@ -42,5 +42,11 @@ public class LottoMoneyTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> money.checkAffordable(lottoCountGreaterThanLottoMoney));
     }
+
+    @ParameterizedTest
+    @CsvSource({"1000,1,0", "10000,3,7000", "14000,3,11000"})
+    void 로또구입금액은_입력받은_로또만큼_구매후_잔돈을_리턴한다(int 구입금액, int 구매요청로또_개수, int 잔돈) {
+        assertThat(new LottoMoney(구입금액).buyCountOfLotto(구매요청로또_개수))
+                .isEqualTo(new LottoMoney(잔돈));
     }
 }

@@ -43,6 +43,12 @@ public class LottoMoney {
         return countOfManualLotto <= countAffordableLotto();
     }
 
+    public LottoMoney buyCountOfLotto(int count) {
+        checkAffordable(count);
+        int purchasePrice = count * Lotto.PRICE;
+        return new LottoMoney(value - purchasePrice);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
