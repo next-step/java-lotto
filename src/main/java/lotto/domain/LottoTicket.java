@@ -21,14 +21,6 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.LOTTO_NUMBERS);
     }
 
-    public WinningType getWinningType(LottoTicket winningLottoTicket) {
-        int matchCount = 0;
-        for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
-            matchCount += addCount(contains(winningLottoNumber), matchCount);
-        }
-        return WinningType.of(matchCount);
-    }
-
     public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
         int matchCount = 0;
         for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
@@ -38,15 +30,15 @@ public class LottoTicket {
         return WinningType.of(matchCount, isMatchBonus(bonusNumber));
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.LOTTO_NUMBERS.contains(lottoNumber);
+    }
+
     private int addCount(boolean isContains, int matchCount) {
         if (isContains) {
             return 1;
         }
         return 0;
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.LOTTO_NUMBERS.contains(lottoNumber);
     }
 
     private boolean isMatchBonus(int bonusNumber) {

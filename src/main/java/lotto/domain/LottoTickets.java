@@ -28,15 +28,6 @@ public class LottoTickets {
         return stringBuilder.toString();
     }
 
-    public long getPrizeSum(LottoTicket winningLottoTicket) {
-        long prizeSum = 0;
-        for (LottoTicket lottoTicket : this.LOTTO_TICKETS) {
-            prizeSum += lottoTicket.getWinningType(winningLottoTicket).getPrize();
-        }
-
-        return prizeSum;
-    }
-
     public long getPrizeSum(LottoTicket winningLottoTicket, int bonusNumber) {
         long prizeSum = 0;
         for (LottoTicket lottoTicket : this.LOTTO_TICKETS) {
@@ -44,16 +35,6 @@ public class LottoTickets {
         }
 
         return prizeSum;
-    }
-
-    public WinningType[] getGameResults(LottoTicket winningLottoTicket) {
-        WinningType[] winningTypes = new WinningType[this.LOTTO_TICKETS.size()];
-        for (int i = 0; i < this.LOTTO_TICKETS.size(); i++) {
-            WinningType winningType = this.LOTTO_TICKETS.get(i).getWinningType(winningLottoTicket);
-            winningTypes[i] = winningType;
-        }
-
-        return winningTypes;
     }
 
     public WinningType[] getGameResults(LottoTicket winningLottoTicket, int bonusNumber) {

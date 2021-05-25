@@ -10,12 +10,6 @@ import java.util.Map;
 public class LottoGamePlayer {
     ResultView resultView = new ResultView();
 
-    public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets) {
-        WinningType[] winningTypes = lottoTickets.getGameResults(winningLottoTicket);
-        Map<WinningType, Integer> gameResult = getGameResult(winningTypes);
-        resultView.printResultStatistics(gameResult);
-    }
-
     public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets, int bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
         WinningType[] winningTypes = lottoTickets.getGameResults(winningLottoTicket, bonusNumber);
@@ -23,23 +17,14 @@ public class LottoGamePlayer {
     }
 
     public void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
-        if(winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
-            throw  new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
+        if ( winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
+            throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
-    }
-
-    public int[] getMatchCountResult(WinningType[] winningTypes) {
-        int[] matchCountResults = new int[] {0,0,0,0,0,0,0,0};
-        for(int i=0; i<winningTypes.length; i++) {
-            matchCountResults[winningTypes[i].getMatchCount()] ++;
-        }
-
-        return matchCountResults;
     }
 
     public Map<WinningType, Integer> getGameResult(WinningType[] winningTypes) {
         Map<WinningType, Integer> matchCountResults = initMatchCountResults();
-        for(int i=0; i<winningTypes.length; i++) {
+        for ( int i = 0; i < winningTypes.length; i++) {
             matchCountResults.put(winningTypes[i], countResult(matchCountResults, winningTypes[i]));
         }
 
