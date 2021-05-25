@@ -1,13 +1,11 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.util.BunchOfLottoGenerator;
 import lotto.view.Input;
 import lotto.view.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
@@ -21,17 +19,15 @@ public class LottoController {
 
         Output.printPurchasableMessage(purchasedLottoCount);
 
-        List<Lotto> bunchOfLotto = BunchOfLottoGenerator.makeBunchOfLotto(purchasedLottoCount);
+        BunchOfLotto bunchOfLotto = new BunchOfLotto(purchasedLottoCount);
+        Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
-        Output.printBunchOfLottoNumbers(bunchOfLotto);
-
-        WinningLogic winningLogic = new WinningLogic();
         WinningLotto winningLotto = makeWinningLotto();
-        Map<Integer, Integer> prizes = winningLogic.makePrizes(makeRewards(bunchOfLotto, winningLotto));
+        Prizes prizes = new Prizes(makeRewards(bunchOfLotto.getBunchOfLotto(), winningLotto));
 
         Output.printWinStatics();
-        Output.printPrize(prizes);
-        Output.printYield(winningLogic.makeYield(purchaseCalculator.getPurchaseAmount(), winningLogic.makePrizeMoney(prizes)));
+        Output.printPrize(prizes.getPrizes());
+        Output.printYield(Award.makeYield(purchaseCalculator.getPurchaseAmount(), Award.makePrizeMoney(prizes.getPrizes())));
     }
 
     public WinningLotto makeWinningLotto() {

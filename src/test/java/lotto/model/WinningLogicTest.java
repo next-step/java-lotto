@@ -42,7 +42,6 @@ public class WinningLogicTest {
     @Test
     @DisplayName("상품 당첨 해쉬맵 테스트")
     void makePrizesTest() {
-        WinningLogic winningLogic = new WinningLogic();
         List<Reward> rewards = new ArrayList<>();
 
         rewards.add(FIFTH_PRIZE);
@@ -50,7 +49,7 @@ public class WinningLogicTest {
         rewards.add(THIRD_PRIZE);
         rewards.add(FIFTH_PRIZE);
 
-        Map prizes = winningLogic.makePrizes(rewards);
+        Map prizes = Award.makePrizes(rewards);
 
         assertAll(
                 () -> assertThat(prizes.get(5000)).isEqualTo(2),
