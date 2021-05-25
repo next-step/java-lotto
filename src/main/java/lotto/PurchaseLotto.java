@@ -46,7 +46,6 @@ public class PurchaseLotto {
     public void resultLottoGame(InputView inputView) {
         setLastWonLottoNumbers(inputView);
         lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
-
     }
 
     private void setLastWonLottoNumbers(InputView inputView) {

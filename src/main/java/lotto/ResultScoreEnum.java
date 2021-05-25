@@ -39,7 +39,7 @@ public enum ResultScoreEnum {
         if (countOfMatch == 5 && matchBonus)
             return SECOND;
         if (countOfMatch == 6)
-            return FIFTH;
+            return FIRST;
 
         return MISS;
     }
