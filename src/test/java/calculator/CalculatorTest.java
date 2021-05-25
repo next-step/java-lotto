@@ -42,7 +42,7 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("입력 값이 공백인 경우 0을 리턴한다.")
+    @DisplayName("입력 값이 null인 경우 0을 리턴한다.")
     void nullInput_test() {
         //when
         Calculator calculator = new Calculator(null);
