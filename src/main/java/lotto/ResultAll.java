@@ -12,7 +12,7 @@ public class ResultAll {
         }
     }
 
-    public HashMap<ResultScoreEnum, Integer> getResult() {
+    public HashMap<ResultScoreEnum, Integer> result() {
         return resultMap;
     }
 
@@ -22,10 +22,10 @@ public class ResultAll {
     }
 
     public float yield(int purchaseAmount) {
-        return ((ResultScoreEnum.FIFTH.getWonMoney(resultMap.get(ResultScoreEnum.FIFTH)) +
-                ResultScoreEnum.FOURTH.getWonMoney(resultMap.get(ResultScoreEnum.FOURTH)) +
-                ResultScoreEnum.THIRD.getWonMoney(resultMap.get(ResultScoreEnum.THIRD)) +
-                ResultScoreEnum.SECOND.getWonMoney(resultMap.get(ResultScoreEnum.SECOND)) +
-                ResultScoreEnum.FIRST.getWonMoney(resultMap.get(ResultScoreEnum.FIRST))) / (float) purchaseAmount);
+        float sum = 0;
+        for (ResultScoreEnum resultScoreEnum : ResultScoreEnum.values()) {
+            sum += resultScoreEnum.getWonMoney(resultMap.get(resultScoreEnum));
+        }
+        return sum / (float) purchaseAmount;
     }
 }

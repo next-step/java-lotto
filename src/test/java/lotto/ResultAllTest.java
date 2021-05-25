@@ -14,7 +14,7 @@ public class ResultAllTest {
             sameNumberCountInALotto.updateCount(SameNumberStateEnum.SAME_MAIN_NUMBER);
 
         resultAll.updateResult(sameNumberCountInALotto);
-        assertThat(resultAll.getResult().get(ResultScoreEnum.FIFTH)).isEqualTo(1);
+        assertThat(resultAll.result().get(ResultScoreEnum.FIFTH)).isEqualTo(1);
     }
 
     @Test

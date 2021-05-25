@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println("--------");
         ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
         for (ResultScoreEnum state : resultScoreEnum) {
-            state.printResult(resultAll.getResult().get(state));
+            state.printResult(resultAll.result().get(state));
         }
 
         printYield(resultAll, inputPurchaseAmount);
