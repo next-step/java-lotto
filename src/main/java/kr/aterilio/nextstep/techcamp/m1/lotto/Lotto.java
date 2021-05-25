@@ -2,7 +2,9 @@ package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -10,12 +12,14 @@ public class Lotto {
     public static final int LOTTO_BALL_MAX = 45;
 
     private static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
+    private static final String MSG_ERR_DUPLICATE = "로또를 구성하는 수 중에 중복된 값이 있습니다.";
 
     private final List<Integer> lottoBalls = new ArrayList<>();
 
     public Lotto(Integer[] lottoNumbers) {
         pick(lottoNumbers);
         validateRange();
+        validateDuplicate();
     }
 
     private void pick(Integer[] lottoNumbers) {
@@ -34,6 +38,13 @@ public class Lotto {
     private void isOutOfRange(Integer ball) {
         if (ball < LOTTO_BALL_MIN || ball > LOTTO_BALL_MAX) {
             throw new IllegalArgumentException(MSG_ERR_OUT_OF_RANGE);
+        }
+    }
+
+    private void validateDuplicate() {
+        Set<Integer> distinct = new HashSet<>(lottoBalls);
+        if (distinct.size() != lottoBalls.size()) {
+            throw new IllegalArgumentException(MSG_ERR_DUPLICATE);
         }
     }
 }

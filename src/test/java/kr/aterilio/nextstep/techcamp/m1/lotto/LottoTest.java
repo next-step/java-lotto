@@ -37,4 +37,13 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("범위");
     }
+
+    @DisplayName("로또 생성 시 중복된 숫자가 있으면 예외가 발생한다.")
+    @Test
+    public void createLottoFailed_duplicated() {
+        assertThatThrownBy(() -> {
+            new Lotto(new Integer[]{1, 2, 3, 4, 5, 1});
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복");
+    }
 }
