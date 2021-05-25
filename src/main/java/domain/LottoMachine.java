@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +8,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoMachine {
-    private static final String DELIMITER = ", ";
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
     public static final int LOTTO_INDEX_MIN = 0;
@@ -42,16 +40,11 @@ public class LottoMachine {
         Collections.shuffle(lottoNumbers);
     }
 
-    public WinningNumber winningNumber(String winningNumberString) {
-        return new WinningNumber(Arrays.stream(winningNumberString.split(DELIMITER))
-                .map(value -> new LottoNumber(Integer.parseInt(value)))
-                .collect(Collectors.toList()));
-    }
-
     public int purchaseQuantity(int price) {
         if(price < ONE_LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MONEY_NOT_ENOUGH);
         }
         return price/ONE_LOTTO_PRICE;
     }
+
 }

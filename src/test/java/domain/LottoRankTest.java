@@ -12,10 +12,10 @@ public class LottoRankTest {
 
     @DisplayName("당첨 결과에 따른 당첨 금액을 구한다")
     @ParameterizedTest
-    @CsvSource(value = {"3,5000", "4,50000", "5,1500000", "6,2000000000"})
-    public void findRank(int winningCount, int expectedReward) {
+    @CsvSource(value = {"3,5000,true", "4,50000,true", "3,5000,false", "4,50000,false", "5,1500000,false", "5,30000000,true", "6,2000000000,false"})
+    public void findRank(int winningCount, int expectedReward, boolean matchBonus) {
         //when
-        LottoRank lottoRank = LottoRank.getLottoRank(winningCount);
+        LottoRank lottoRank = LottoRank.getLottoRank(winningCount, matchBonus);
 
         //then
         assertEquals(expectedReward, lottoRank.getReward());
@@ -33,5 +33,20 @@ public class LottoRankTest {
 
         //then
         assertThat(rewardRatio).isEqualTo(0.35);
+    }
+
+    @Test
+    @DisplayName("보너스 당첨 2등을 확인한다. (2등: 5개 일치 + 보너스볼)")
+    public void secondRank() {
+        //given
+        int winningCount = 5;
+        boolean matchBonus = true;
+
+        //when
+        LottoRank lottoRank = LottoRank.getLottoRank(winningCount, matchBonus);
+
+        //then
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
+
     }
 }

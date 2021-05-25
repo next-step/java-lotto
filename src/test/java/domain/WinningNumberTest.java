@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.InputView;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class WinningNumberTest {
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList()));
         LottoMachine lottoMachine = new LottoMachine();
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumbers);
+        WinningNumber winningNumber = InputView.winningNumber(winningNumbers);
 
         //when
         int winningCount = winningNumber.winningCount(lottoTicket);

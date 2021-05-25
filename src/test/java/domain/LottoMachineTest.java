@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import view.InputView;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -69,11 +71,25 @@ public class LottoMachineTest {
         String winningNumberString = "1, 2, 3, 4, 5, 6";
 
         //when
-        WinningNumber winningNumber = lottoMachine.winningNumber(winningNumberString);
+        WinningNumber winningNumber = InputView.winningNumber(winningNumberString);
 
         //then
         for (int i = 1; i <= 6; i++) {
             assertThat(winningNumber.contains(new LottoNumber(i))).isTrue();
         }
+    }
+
+    @DisplayName("당첨 번호에 속한 번호가 보너스 볼로 생성될 수 없다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    public void bonusBallIsNotContains(int bonusNumber) {
+        //given
+        String winningNumberString = "1, 2, 3, 4, 5, 6";
+        WinningNumber winningNumber = InputView.winningNumber(winningNumberString);
+
+        //when then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> InputView.bonusBall(bonusNumber, winningNumber))
+                .withMessageMatching("보너스 볼은 당첨 번호들이랑 달라야 합니다.");
     }
 }
