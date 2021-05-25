@@ -25,7 +25,7 @@ public class LottoOutputView {
         }
     }
 
-    public void printPrizeStatics(LottoResult lottoResult, PurchaseMoney purchaseMoney) {
+    public void printPrizeStatistics(LottoResult lottoResult, PurchaseMoney purchaseMoney) {
         System.out.println();
         System.out.println(MESSAGE_LOTTO_RESULT_HEADER);
         System.out.println(printPrizeDetail(lottoResult));

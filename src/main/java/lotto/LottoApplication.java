@@ -31,7 +31,7 @@ public class LottoApplication {
         WinningLottoNumber winningLottoNumber = lottoInputView.questionLastPrizeNumber();
         LottoResult lottoResult = winningLottoNumber.decidePrize(lottoGames);
 
-        lottoOutputView.printPrizeStatics(lottoResult, purchaseMoney);
+        lottoOutputView.printPrizeStatistics(lottoResult, purchaseMoney);
     }
 
     private void printPurchaseResult(LottoGames lottoGames) {
