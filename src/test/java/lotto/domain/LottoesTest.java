@@ -13,14 +13,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoesTest {
 
-    @DisplayName("로또를 구입하면 로또 개수가 1개 증가한다")
+    @DisplayName("수동 로또를 구입하면 로또 개수가 1개 증가한다")
     @Test
-    void buy_lotto() {
+    void buy_manual_lotto() {
         // given
         Lottoes lottoes = Lottoes.init();
 
         // when
-        lottoes.buyLotto(new TestLottoNumberGenerator());
+        lottoes.buyManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // then
+        assertThat(lottoes.getLottoCount()).isEqualTo(1);
+    }
+
+    @DisplayName("자동 로또를 구입하면 로또 개수가 1개 증가한다")
+    @Test
+    void buy_auto_lotto() {
+        // given
+        Lottoes lottoes = Lottoes.init();
+
+        // when
+        lottoes.buyAutoLotto(new TestLottoNumberGenerator());
 
         // then
         assertThat(lottoes.getLottoCount()).isEqualTo(1);
@@ -33,7 +46,7 @@ class LottoesTest {
     void getRankCount(String winningLottoNumbers, int matchCount, boolean matchBonus, int bonusNumber) {
         // given
         Lottoes lottoes = Lottoes.init();
-        lottoes.buyLotto(new TestLottoNumberGenerator());
+        lottoes.buyAutoLotto(new TestLottoNumberGenerator());
 
         Rank rank = Rank.valueOf(matchCount, matchBonus);
         Lotto enteredWinningLotto = Lotto.from(Arrays.asList(winningLottoNumbers.split(","))
