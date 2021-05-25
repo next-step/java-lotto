@@ -20,7 +20,7 @@ public class Money {
 		}
 	}
 
-	public int pay(int price) {
+	public int divide(int price) {
 		return value / price;
 	}
 

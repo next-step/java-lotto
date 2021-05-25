@@ -23,7 +23,7 @@ public class LottoStore {
 	}
 
 	private int lottoGameCount(Money money) {
-		return money.pay(PRICE);
+		return money.divide(PRICE);
 	}
 
 	private List<LottoTicket> generateLottoTickets(Money money) {
