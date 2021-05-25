@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,10 @@ public class LottoNumbers {
         if (!(new HashSet<>(lottoNumbers).size() == LOTTO_NUMBER_COUNT)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
         }
+    }
+
+    public String printInfo(){
+        return ((List<LottoNumber>) new ArrayList<>(lottoNumbers)).toString();
     }
 
     @Override
