@@ -16,7 +16,7 @@ public final class LottoNumbers {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	private LottoNumbers(){
+	private LottoNumbers() {
 		throw new UnsupportedOperationException();
 	}
 

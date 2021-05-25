@@ -24,7 +24,7 @@ class SetTest {
 
 	@Test
 	@DisplayName("Set Collection, Size 테스트")
-	void sizeTest(){
+	void sizeTest() {
 		assertThat(numbers.size())
 			.isEqualTo(3); // Set Collection 특성 때문에 중복이 제거되고 3개만 있어야한다.
 	}

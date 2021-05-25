@@ -15,7 +15,7 @@ class LottoResultTest {
 	private LottoResult lottoResult;
 
 	@BeforeEach
-	void setUp(){
+	void setUp() {
 		Map<LottoRewardType, Integer> lottoRewardMap = new EnumMap(LottoRewardType.class);
 		lottoRewardMap.put(LottoRewardType.FIFTH, 4);
 		lottoRewardMap.put(LottoRewardType.FOURTH, 3);
@@ -49,7 +49,7 @@ class LottoResultTest {
 
 	@Test
 	@DisplayName("수익률 계산 테스트")
-	void calculateRevenueTest(){
+	void calculateRevenueTest() {
 		// given
 		Map<LottoRewardType, Integer> lottoRewardMap = new EnumMap<>(LottoRewardType.class);
 		lottoRewardMap.put(LottoRewardType.FIFTH, 2);

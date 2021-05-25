@@ -12,7 +12,7 @@ class LottoGeneratorTest {
 	private LottoGenerator lottoGenerator;
 
 	@BeforeEach
-	void setUp(){
+	void setUp() {
 		lottoGenerator = new LottoGenerator(new LottoNumbersFactory(), DrawNumber.range(1, 45));
 	}
 

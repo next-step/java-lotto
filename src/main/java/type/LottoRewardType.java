@@ -19,7 +19,7 @@ public enum LottoRewardType {
 		this(collect, reward, defaultMessage(collect, reward));
 	}
 
-	LottoRewardType(final int collect, final int reward, final String message){
+	LottoRewardType(final int collect, final int reward, final String message) {
 		this.collect = collect;
 		this.reward = reward;
 		this.message = message;

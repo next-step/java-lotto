@@ -11,7 +11,7 @@ class StringUtilsTest {
 	@CsvSource(value = {
 		";$1;2;3", "@$1@2@3", ",$1,2,3"
 	}, delimiter = '$')
-	void splitTest(final String delimiter, final String text){
+	void splitTest(final String delimiter, final String text) {
 		assertThat(StringUtils.split(delimiter, text))
 			.containsExactly("1", "2", "3");
 	}
@@ -20,7 +20,7 @@ class StringUtilsTest {
 	@CsvSource(value = {
 		"$", "$1;2;3", ";$"
 	}, delimiter = '$')
-	void splitTestFailedTest(final String delimiter, final String text){
+	void splitTestFailedTest(final String delimiter, final String text) {
 		assertThat(StringUtils.split(delimiter, text))
 			.isEmpty();
 	}

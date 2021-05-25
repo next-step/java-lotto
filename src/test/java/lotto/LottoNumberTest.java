@@ -14,7 +14,7 @@ class LottoNumberTest {
 	@ValueSource(ints = {
 		0, 46, -1
 	})
-	void validTest(final int number){
+	void validTest(final int number) {
 		assertThatThrownBy(()->new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());

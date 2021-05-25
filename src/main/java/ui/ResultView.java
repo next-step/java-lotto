@@ -1,7 +1,6 @@
 package ui;
 
 import exception.LottoException;
-import lotto.LottoNumbers;
 import lotto.LottoNumbersFactory;
 import lotto.LottoResult;
 import utils.ConsoleUtils;

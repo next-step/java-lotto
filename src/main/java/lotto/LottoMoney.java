@@ -19,7 +19,7 @@ public class LottoMoney {
 		return Integer.divideUnsigned(price, LOTTO_PRICE);
 	}
 
-	public int price(){
+	public int price() {
 		return this.price;
 	}
 }

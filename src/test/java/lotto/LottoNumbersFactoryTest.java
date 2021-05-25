@@ -15,7 +15,7 @@ class LottoNumbersFactoryTest {
 	private LottoNumbersFactory lottoNumbersFactory;
 
 	@BeforeEach
-	void setUp(){
+	void setUp() {
 		List<LottoNumbers> lottoList = Arrays.asList(
 			new LottoNumbers(Arrays.asList(1,2,3,4,5,6)), 	// 6 matches
 			new LottoNumbers(Arrays.asList(1,20,3,25,12,7)),// 2 matches
@@ -27,7 +27,7 @@ class LottoNumbersFactoryTest {
 
 	@Test
 	@DisplayName("당첨 로또 번호를 가지고 Summary하는 기능 테스트")
-	void summaryTest(){
+	void summaryTest() {
 		// given
 		LottoNumbers winnerLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 		LottoNumber bonusNumber = new LottoNumber(7);

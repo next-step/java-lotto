@@ -15,14 +15,14 @@ class LottoNumbersTest {
 
 	@Test
 	@DisplayName("생성자 테스트")
-	void constructorTest(){
+	void constructorTest() {
 		assertThatCode(() -> new LottoNumbers(Arrays.asList(1,2,3,4,5,6)))
 			.doesNotThrowAnyException();
 	}
 
 	@Test
 	@DisplayName("생성자(중복값 존재하는) 테스트")
-	void constructorTestWithDuplication(){
+	void constructorTestWithDuplication() {
 		assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(1,2,3,4,4,6)))
 			.isInstanceOf(LottoException.class)
 			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
@@ -30,7 +30,7 @@ class LottoNumbersTest {
 
 	@Test
 	@DisplayName("필수 Parameter null 인 경우 생성자 테스트")
-	void constructorFailedWithNullTest(){
+	void constructorFailedWithNullTest() {
 		assertThatThrownBy(()-> new LottoNumbers(null))
 			.isInstanceOf(LottoException.class)
 			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
@@ -38,7 +38,7 @@ class LottoNumbersTest {
 
 	@Test
 	@DisplayName("필수 Parameter empty 인 경우 생성자 테스트")
-	void constructorFailedWithEmptyTest(){
+	void constructorFailedWithEmptyTest() {
 		assertThatThrownBy(()-> new LottoNumbers(Collections.emptyList()))
 			.isInstanceOf(LottoException.class)
 			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
