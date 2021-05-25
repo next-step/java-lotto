@@ -18,8 +18,8 @@ public class ResultAll {
         return resultMap;
     }
 
-    public void won(WonCount wonCount) {
-        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.isBonusWon());
+    public void won(SameNumberCountInALotto sameNumberCountInALotto) {
+        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(sameNumberCountInALotto.wonCount(), sameNumberCountInALotto.isBonusWon());
         resultMap.put(resultScoreEnum, resultMap.get(resultScoreEnum) + 1);
     }
 

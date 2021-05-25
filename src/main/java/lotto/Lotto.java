@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Lotto {
 
-    public WonCount countWonNumbers(List<Integer> generateLottoNumber, LastWonLottoNumber lastWonLottoNumber) {
-        WonCount wonCount = new WonCount();
+    public SameNumberCountInALotto countWonNumbers(List<Integer> generateLottoNumber, LastWonLottoNumber lastWonLottoNumber) {
+        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
         for (int oneLottoNumber : generateLottoNumber) {
-            wonCount.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumber));
+            sameNumberCountInALotto.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumber));
         }
-        return wonCount;
+        return sameNumberCountInALotto;
     }
 
     private SameNumberStateEnum isSameNumber(int oneLottoNumber, LastWonLottoNumber lastWonLottoNumber) {

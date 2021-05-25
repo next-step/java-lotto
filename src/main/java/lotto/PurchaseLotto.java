@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class PurchaseLotto {
     private static final int LOTTO_PRICE = 1000;
     private LottoNumber lottoNumber;
@@ -50,15 +48,15 @@ public class PurchaseLotto {
         resultAll = new ResultAll();
         Lotto lottoCompare = new Lotto();
 
-        WonCount wonCountForOneLotto;
+        SameNumberCountInALotto sameNumberCountInALotto;
         for (int i = 0; i < lottoNumberList.count(); i++) {
-            wonCountForOneLotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber);
-            updateResultLotto(wonCountForOneLotto);
+            sameNumberCountInALotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber);
+            updateResultLotto(sameNumberCountInALotto);
         }
     }
 
-    private void updateResultLotto(WonCount wonCountForOneLotto) {
-        resultAll.won(wonCountForOneLotto);
+    private void updateResultLotto(SameNumberCountInALotto sameNumberCountInALotto) {
+        resultAll.won(sameNumberCountInALotto);
     }
 
     private void setLastWonLottoNumbers(InputView inputView) {

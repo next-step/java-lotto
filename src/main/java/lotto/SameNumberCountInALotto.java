@@ -1,18 +1,18 @@
 package lotto;
 
-public class WonCount {
-    private int wonCount = 0;
+public class SameNumberCountInALotto {
+    private int sameNumberCount = 0;
     private boolean isBonusWon = false;
 
     public void updateCount(SameNumberStateEnum sameNumberStateEnum) {
         if (sameNumberStateEnum == SameNumberStateEnum.SAME_MAIN_NUMBER)
-            wonCount++;
+            sameNumberCount++;
         if (sameNumberStateEnum == SameNumberStateEnum.SAME_BONUS_NUMBER)
             isBonusWon = true;
     }
 
     public int wonCount() {
-        return wonCount;
+        return sameNumberCount;
     }
 
     public boolean isBonusWon() {
