@@ -40,4 +40,8 @@ class LottoVendorTest {
 		return lottoNumbers;
 	}
 
+	@Test
+	void invalid_lotto_number() {
+		assertThatThrownBy(() -> new LottoVendor("1,2,3,4,5,6", "6")).isInstanceOf(IllegalArgumentException.class);
+	}
 }
