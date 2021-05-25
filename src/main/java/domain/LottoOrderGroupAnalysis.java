@@ -1,6 +1,9 @@
 package domain;
 
+import ui.LottoReward;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class LottoOrderGroupAnalysis {
 	private final Integer[] winnerNumbers;
@@ -38,8 +41,20 @@ public class LottoOrderGroupAnalysis {
 		}
 	}
 
-	public Integer yield () {
-		return new BigDecimal(0).intValue();
+	public String yield () {
+		final BigDecimal lottoAmount = new BigDecimal(lottoOrderGroup.lottos().size());
+
+		final BigDecimal rewards = new BigDecimal(
+				(match3 * LottoReward.MATCH_3.getMoney())
+						+ (match4 * LottoReward.MATCH_4.getMoney())
+						+ (match5 * LottoReward.MATCH_5.getMoney())
+						+ (match6 * LottoReward.MATCH_6.getMoney())
+		);
+		if (rewards.compareTo(new BigDecimal(0)) == 0) {
+			return "0";
+		}
+
+		return rewards.divide(lottoAmount, 2, RoundingMode.HALF_EVEN).toString();
 	}
 
 	public Integer match3 () {
