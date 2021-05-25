@@ -30,4 +30,15 @@ public class LottoTest {
                 .hasMessageContaining("This Numbers has duplicate number");
 
     }
+
+    @Test
+    @DisplayName("숫자의 범위 1-45 밖일 시, IllegalArgumentException 발생")
+    void numberOutOfRangeTest() {
+        String lottoString = "3, 5, -1, 16, 32, 38";
+        assertThatThrownBy(() -> {
+            new Lotto(lottoString);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("out of range Lotto number");
+
+    }
 }
