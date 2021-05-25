@@ -37,4 +37,9 @@ public class Number implements Comparable<Number> {
 	public int compareTo(Number number) {
 		return Integer.compare(this.value, number.value);
 	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
+	}
 }

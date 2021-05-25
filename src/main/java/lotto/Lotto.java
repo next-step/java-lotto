@@ -29,4 +29,9 @@ public class Lotto {
 			throw new IllegalArgumentException("Numbers must consist of 6 distinct numbers.");
 		}
 	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
+	}
 }

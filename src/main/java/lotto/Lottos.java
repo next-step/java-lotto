@@ -5,19 +5,23 @@ import java.util.List;
 
 public class Lottos {
 
-	private final List<Lotto> lottos;
+	private final List<Lotto> values;
 
 	public Lottos(Money money) {
 		validateMoney(money);
 
-		lottos = new ArrayList<>();
+		values = new ArrayList<>();
 		for (int i = 0; i < money.buyCount(); i++) {
-			lottos.add(new Lotto(LottoUtils.randomNumbers()));
+			values.add(new Lotto(LottoUtils.randomNumbers()));
 		}
 	}
 
+	public List<Lotto> values() {
+		return values;
+	}
+
 	public int count() {
-		return lottos.size();
+		return values.size();
 	}
 
 	private void validateMoney(Money money) {
