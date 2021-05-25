@@ -43,19 +43,25 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    public int containNumber(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            return 1;
-        }
-
-        return 0;
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public HitCount checkHitCount(LottoNumbers winningNumbers) {
+    public boolean checkHitBonus(WinningNumbersWithBonus winningNumbersWithBonus) {
+        boolean result = false;
+
+        for (LottoNumber lottoNumber: lottoNumbers) {
+            result = result || winningNumbersWithBonus.isHitBonusNumber(lottoNumber);
+        }
+
+        return result;
+    }
+
+    public HitCount checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus) {
         int result = 0;
 
         for (LottoNumber lottoNumber: lottoNumbers) {
-            result += winningNumbers.containNumber(lottoNumber);
+            result += winningNumbersWithBonus.contains(lottoNumber) ? 1 : 0;
         }
 
         return new HitCount(result);

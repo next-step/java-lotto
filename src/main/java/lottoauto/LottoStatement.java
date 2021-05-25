@@ -9,20 +9,20 @@ public class LottoStatement {
         hitCountMap.put(LottoRule.THREE_HIT, 0);
         hitCountMap.put(LottoRule.FOUR_HIT, 0);
         hitCountMap.put(LottoRule.FIVE_HIT, 0);
+        hitCountMap.put(LottoRule.FIVE_HIT_WITH_BONUS, 0);
         hitCountMap.put(LottoRule.SIX_HIT, 0);
     }
 
-    public void judge(HitCount hitCount) {
+    public void judge(HitCount hitCount, boolean isMatchedBonus) {
         Set<LottoRule> keySet = hitCountMap.keySet();
         for (LottoRule lottoRule : keySet) {
-            isEqualsHitCount(hitCount, lottoRule);
+            accumulate(hitCount, isMatchedBonus, lottoRule);
         }
     }
 
-    private void isEqualsHitCount(HitCount hitCount, LottoRule lottoRule) {
-        if (lottoRule.isEqualsHitCount(hitCount)) {
-            int count = hitCountMap.get(lottoRule);
-            hitCountMap.put(lottoRule, count + 1);
+    private void accumulate(HitCount hitCount, boolean isMatchedBonus, LottoRule lottoRule) {
+        if (lottoRule == LottoRule.valueOf(hitCount, isMatchedBonus)) {               
+           hitCountMap.put(lottoRule, hitCountMap.get(lottoRule) + 1);
         }
     }
 

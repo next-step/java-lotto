@@ -7,17 +7,17 @@ public class LottoTickets {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(Money money) {
-        lottoTickets = giveLottoTickets(money);
+    public LottoTickets(Money money, LottoGenerateStrategy lottoGenerateStrategy) {
+        lottoTickets = giveLottoTickets(money, lottoGenerateStrategy);
     }
 
-    private List<LottoTicket> giveLottoTickets(Money money) {
+    private List<LottoTicket> giveLottoTickets(Money money, LottoGenerateStrategy lottoGenerateStrategy) {
         int lottoCount = money.calcLottoCount(LOTTO_TICKET_PRICE);
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket());
+            lottoTickets.add(new LottoTicket(lottoGenerateStrategy.generateLottoNumbers()));
         }
 
         return lottoTickets;
@@ -31,10 +31,10 @@ public class LottoTickets {
         return new Money(LOTTO_TICKET_PRICE * lottoTickets.size());
     }
 
-    public void checkHitCount(LottoNumbers winningNumbers, LottoStatement lottoStatement) {
+    public void checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus, LottoStatement lottoStatement) {
         for (LottoTicket lottoTicket: lottoTickets) {
-            lottoTicket.calcHitCount(winningNumbers);
-            lottoStatement.judge(lottoTicket.hitCount());
+            lottoTicket.calcHitCount(winningNumbersWithBonus);
+            lottoStatement.judge(lottoTicket.hitCount(), lottoTicket.isMatchedBonus());
         }
     }
 

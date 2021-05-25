@@ -24,6 +24,6 @@ public class HitCount {
 
     @Override
     public String toString() {
-        return Integer.toString(hitCount);
+        return hitCount + "개 일치";
     }
 }
