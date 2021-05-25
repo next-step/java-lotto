@@ -1,8 +1,8 @@
 package lotto;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoRandomNumberUtils implements LottoRandomNumber {
     private static final List<Integer> LOTTO_NUMBER_RANGE = LottoValidationUtils.lottoNumberRange();

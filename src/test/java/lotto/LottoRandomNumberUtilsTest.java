@@ -19,8 +19,9 @@ public class LottoRandomNumberUtilsTest {
     @Test
     void createRandomLottoNumberTest_로또_넘버_테스트_넘기기_테스트() {
         Lotto lotto = new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        int result = lotto.compareWinLottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8));
-        assertThat(result).isEqualTo(6);
+        LottoResult lottoResult = new LottoResult();
+        lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8))), lottoResult);
+        assertThat(lottoResult.isFirst(1)).isTrue();
     }
 
 }

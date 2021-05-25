@@ -21,10 +21,6 @@ public class Lotto {
         this.lottoNumber = new LottoNumber(lottoNumber);
     }
 
-    public int compareWinLottoNumber(List<Integer> winLottoNumber) {
-        return lottoNumber.countCollectNumber(winLottoNumber);
-    }
-
     public void compareWinLottoNumber(Lotto winLottoNumber, LottoResult lottoResult) {
         if(this.equals(winLottoNumber)){
             lottoResult.winLotto();

@@ -21,32 +21,14 @@ public class LottoResult {
     private int rewardSum = 0;
     private double profit = 0;
 
-    public int getCountFirstLotto() {
-        return countFirstLotto;
-    }
-
-    public int getCountSecondLotto() {
-        return countSecondLotto;
-    }
-
-    public int getCountThirdLotto() {
-        return countThirdLotto;
-    }
-
-    public int getCountFourthLotto() {
-        return countFourthLotto;
-    }
-
-    public double getProfit() {
-        return profit;
-    }
-
     public boolean isFirst(int expectedCount) {
         return this.countFirstLotto == expectedCount;
     }
+
     public boolean isSecond(int expectedCount) {
         return this.countSecondLotto == expectedCount;
     }
+
     public boolean isThird(int expectedCount) {
         return this.countThirdLotto == expectedCount;
     }
@@ -76,11 +58,11 @@ public class LottoResult {
 
     public double calculateProfit(int lottoCount) {
         calculateReward();
-        if(rewardSum == 0){
+        if (rewardSum == 0) {
             profit = 0;
             return 0;
         }
-        profit = Math.floor((double) rewardSum / (lottoCount * LottoValidationUtils.LOTTO_COST) * 100 ) / 100;
+        profit = Math.floor((double) rewardSum / (lottoCount * LottoValidationUtils.LOTTO_COST) * 100) / 100;
         return profit;
     }
 
@@ -95,6 +77,5 @@ public class LottoResult {
         System.out.printf(RESULT_FORM, THIRD_COLLECT_COUNT, THIRD_REWORD, countThirdLotto);
         System.out.printf(RESULT_FORM, FOURTH_COLLECT_COUNT, FOURTH_REWORD, countFourthLotto);
         System.out.printf(REMARK, profit);
-
     }
 }

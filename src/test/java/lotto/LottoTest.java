@@ -12,8 +12,9 @@ public class LottoTest {
     @Test
     void countCollectLottoNumber_일치하는_로또_번호_갯수() {
         Lotto lotto = new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        int result = lotto.compareWinLottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8));
-        assertThat(result).isEqualTo(6);
+        LottoResult lottoResult = new LottoResult();
+        lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 7, 8))), lottoResult);
+        assertThat(lottoResult.isFirst(1)).isTrue();
     }
 
     @DisplayName("우승 로또 객체와 유저 로또 객체가 같은지 테스트")

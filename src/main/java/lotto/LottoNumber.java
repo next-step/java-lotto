@@ -11,14 +11,6 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public int countCollectNumber(List<Integer> winLottoNumber) {
-        int collectCount = 0;
-        for (Integer number : winLottoNumber) {
-            collectCount += isCollectNumber(number);
-        }
-        return collectCount;
-    }
-
     public int isCollectNumber(Integer winNumber) {
         return lottoNumber.contains(winNumber) ? 1 : 0;
     }
