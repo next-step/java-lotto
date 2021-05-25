@@ -1,26 +1,26 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResults {
 
-	private final List<Rank> resultRanks;
+	public static final int RANK_RESULT_DEFAULT_VALUE = 0;
+	public static final int ADD_RANK_COUNT = 1;
+
+	private final Map<Rank, Integer> rankResults;
 	private final List<Rank> renderRanks;
 
-	public LottoResults() {
-		this.resultRanks = new ArrayList<>();
-		this.renderRanks = Arrays.stream(Rank.values())
+	public LottoResults(List<Rank> ranks) {
+		rankResults = new HashMap<>();
+		for (Rank rank : ranks) {
+			int rankCount = rankResults.getOrDefault(rank, RANK_RESULT_DEFAULT_VALUE) + ADD_RANK_COUNT;
+			rankResults.put(rank, rankCount);
+		}
+		renderRanks = Arrays.stream(Rank.values())
 				.filter(rank -> rank.isGreaterThan(Rank.NONE))
 				.sorted(Comparator.comparingInt(Rank::getMatchCount))
 				.collect(Collectors.toList());
-	}
-
-	public void add(Rank rank) {
-		this.resultRanks.add(rank);
 	}
 
 	public List<Rank> getRenderRanks() {
@@ -40,14 +40,18 @@ public class LottoResults {
 	}
 
 	private double totalPurchaseAmount() {
-		return this.resultRanks.size() * PurchaseAmount.MINIMUM;
+		return getPurchaseCount() * PurchaseAmount.MINIMUM;
+	}
+
+	private int getPurchaseCount() {
+		Set<Rank> ranks = rankResults.keySet();
+		return ranks.stream()
+				.mapToInt(rank -> rankResults.getOrDefault(rank, RANK_RESULT_DEFAULT_VALUE))
+				.sum();
 	}
 
 	public int findRankCount(Rank rank) {
-		return this.resultRanks.stream()
-				.filter(resultRank -> resultRank.equals(rank))
-				.mapToInt(m -> 1)
-				.sum();
+		return rankResults.getOrDefault(rank, RANK_RESULT_DEFAULT_VALUE);
 	}
 
 }
