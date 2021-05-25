@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -53,15 +52,15 @@ public class WinningNumbers {
         return winningNumbers.contains(number);
     }
 
-    public LottoNumber bonusNumber() {
-        return this.bonusNumber;
-    }
-
     private LottoNumber saveBonusNumber(int number) throws CustomIllegalArgumentException {
         LottoNumber bonusNumber = new LottoNumber(number);
         if (winningNumbers.contains(bonusNumber)) {
             throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
         }
         return bonusNumber;
+    }
+
+    public boolean bonusNumberMatches(List<LottoNumber> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

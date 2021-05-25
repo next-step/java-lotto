@@ -42,14 +42,7 @@ public class LottoTicket {
             matchCount += increaseCountWhenMatch(number, winningNumbers);
         }
 
-        return Rank.valueOf(matchCount, haveMatchWithBonusNumber(winningNumbers.bonusNumber()));
-    }
-
-    private boolean haveMatchWithBonusNumber(LottoNumber bonusNumber) {
-        if (bonusNumber == null) {
-            return false;
-        }
-        return numbers.contains(bonusNumber);
+        return Rank.valueOf(matchCount, winningNumbers.bonusNumberMatches(numbers));
     }
 
     private int increaseCountWhenMatch(LottoNumber number, WinningNumbers winningNumbers) {
