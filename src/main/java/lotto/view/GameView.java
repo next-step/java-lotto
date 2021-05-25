@@ -12,7 +12,7 @@ public class GameView {
         resultView.printLottoTicketCount(money.countLottoTicket()); // 로또 구매 개수 출력
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketCount);
-        resultView.printLottoTickets(lottoTickets.printLottoTickets()); // 로또 티켓 출력
+        resultView.printLottoTickets(lottoTickets.getString()); // 로또 티켓 출력
 
         LottoTicket winningLottoTicket = new LottoTicket(inputView.inputWinningNumber());
         int bonusNumber = inputView.inputBonusBall();

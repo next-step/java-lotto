@@ -48,7 +48,7 @@ public class LottoTicket {
         return false;
     }
 
-    public String printLottoTicket() {
+    public String getString() {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (LottoNumber lottoNumber : this.LOTTO_NUMBERS) {
             lottoNumbers.add(lottoNumber.of());

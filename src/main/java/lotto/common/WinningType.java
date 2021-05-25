@@ -1,5 +1,7 @@
 package lotto.common;
 
+import java.util.Arrays;
+
 public enum WinningType {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -18,30 +20,19 @@ public enum WinningType {
         this.prize = prize;
     }
 
-    public static WinningType of(int matchCount) {
-        for (WinningType winningType : WinningType.values()) {
-            if (winningType.matchCount == matchCount) {
-                return winningType;
-            }
-        }
-        return EIGHTH;
-    }
-
     public static WinningType of(int matchCount, boolean matchBonus) {
-        for (WinningType winningType : WinningType.values()) {
-            if (matchBonus && matchCount == 5) {
-                return WinningType.SECOND;
-            }
-
-            if (!matchBonus && matchCount ==5) {
-                return WinningType.THIRD;
-            }
-
-            if (winningType.matchCount == matchCount) {
-                return winningType;
-            }
+        if (matchBonus && matchCount == 5) {
+            return SECOND;
         }
-        return EIGHTH;
+
+        if (!matchBonus && matchCount == 5) {
+            return THIRD;
+        }
+
+        return Arrays.stream(WinningType.values())
+                .filter(t -> t.matchCount == matchCount)
+                .findFirst()
+                .orElse(EIGHTH);
     }
 
     public int getMatchCount() {

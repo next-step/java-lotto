@@ -18,12 +18,10 @@ public class LottoTickets {
         this.LOTTO_TICKETS = lottoTickets;
     }
 
-    public String printLottoTickets() {
+    public String getString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoTicket lottoTicket : LOTTO_TICKETS) {
-            stringBuilder.append(lottoTicket.printLottoTicket());
-            stringBuilder.append("\n");
-        }
+        this.LOTTO_TICKETS.stream()
+                .forEach(l -> stringBuilder.append(l.getString() + "\n"));
 
         return stringBuilder.toString();
     }
@@ -37,7 +35,7 @@ public class LottoTickets {
         return prizeSum;
     }
 
-    public WinningType[] getGameResults(LottoTicket winningLottoTicket, int bonusNumber) {
+    public WinningType[] getWinningTypes(LottoTicket winningLottoTicket, int bonusNumber) {
         WinningType[] winningTypes = new WinningType[this.LOTTO_TICKETS.size()];
         for (int i = 0; i < this.LOTTO_TICKETS.size(); i++) {
             WinningType winningType = this.LOTTO_TICKETS.get(i).getWinningType(winningLottoTicket, bonusNumber);

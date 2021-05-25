@@ -12,7 +12,7 @@ public class LottoGamePlayer {
 
     public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets, int bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
-        WinningType[] winningTypes = lottoTickets.getGameResults(winningLottoTicket, bonusNumber);
+        WinningType[] winningTypes = lottoTickets.getWinningTypes(winningLottoTicket, bonusNumber);
         resultView.printResultStatistics(getGameResult(winningTypes));
     }
 

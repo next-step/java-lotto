@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.common.ErrorCode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class LottoTicketGenerator {
     private static final List<LottoNumber> LOTTO_NUMBERS_CACHE;
