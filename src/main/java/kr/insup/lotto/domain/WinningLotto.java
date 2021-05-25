@@ -17,6 +17,13 @@ public class WinningLotto {
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
+        isWinningNumberContainsBonus();
+    }
+
+    private void isWinningNumberContainsBonus(){
+        if(lotto.hasNumber(bonusNumber)){
+            throw new IllegalArgumentException("당첨번호에 보너스 번호가 포함되어 있습니다");
+        }
     }
 
     public Set<LottoNumber> winningNumbers() {

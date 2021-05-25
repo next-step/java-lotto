@@ -37,4 +37,12 @@ public class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.of(46)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("보너스 번호가 당첨번호에 포함되는지 검사")
+    @Test
+    void 보너스_번호_당첨번호_포함_검사() {
+        //when, then
+        assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.of(5)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
