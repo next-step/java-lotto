@@ -14,10 +14,10 @@ public final class LottoStore {
 
     public LottoList toSell(BigDecimal amountReceived) {
         BigDecimal purchaseCount = amountReceived.divide(price(), BigDecimal.ROUND_DOWN);
-        return lottoGenerator(purchaseCount.intValue());
+        return generateLotto(purchaseCount.intValue());
     }
 
-    private LottoList lottoGenerator(int purchaseCount) {
+    private LottoList generateLotto(int purchaseCount) {
         return new LottoList(purchaseCount);
     }
 
