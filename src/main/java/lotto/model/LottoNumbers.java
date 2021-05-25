@@ -50,4 +50,24 @@ public class LottoNumbers {
         Collections.sort(lottoNubmers);
         return this;
     }
+
+    public int howManyMatched(LottoNumbers that){
+        int totalNumContains = 0;
+        for (int i=0; i<that.size(); i++){
+            totalNumContains += howManyContains(that.get(i));
+        }
+        return totalNumContains;
+    }
+
+    private int size() {
+        return lottoNubmers.size();
+    }
+
+    private int howManyContains(LottoNumber lottoNumber){
+        if (contains(lottoNumber)){
+            return 1;
+        }
+        return 0;
+    }
+
 }
