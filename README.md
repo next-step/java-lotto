@@ -62,6 +62,7 @@
 - [ ] 구입 금액을 입력 받음
 - [ ] 구입 금액 별 로또 구매 갯수 구함
 - [x] 6개의 숫자 추출
+  - [x] 아닐 시, IllegalArgumentException 발생
 - [x] 추출된 6개의 숫자의 범위 1-45
   - [x] 아닐 시, IllegalArgumentException 발생
 - [x] 6개의 숫자 중 중복값이 없어야 함

@@ -3,15 +3,23 @@ package study.ascii92der.lotto.step3;
 import java.util.*;
 
 public class Lotto {
+    public static final int LOTTO_NUMBER_VALID_COUNT = 6;
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(String lottoString) {
         lottoNumbers = new ArrayList<>();
         String[] lottoArray = parseLottoString(lottoString);
+        validNumberCount(lottoArray);
         validDuplicateNumber(lottoArray);
 
         for (String value : lottoArray) {
             lottoNumbers.add(new LottoNumber(value));
+        }
+    }
+
+    private void validNumberCount(String[] lottoArray) {
+        if(lottoArray.length != LOTTO_NUMBER_VALID_COUNT){
+            throw new IllegalArgumentException("Lotto Number count is wrong");
         }
     }
 

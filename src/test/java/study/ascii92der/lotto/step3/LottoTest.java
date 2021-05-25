@@ -2,22 +2,21 @@ package study.ascii92der.lotto.step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
     @Test
     @DisplayName("로또 번호가 6개인지 확인")
     void lottoNumberCountTest() {
-        String lottoString = "3, 5, 11, 16, 32, 38";
-        Lotto lotto = new Lotto(lottoString);
-        assertThat(lotto.size()).isEqualTo(6);
+        String lottoString = "3, 5, 11, 32, 38";
+
+        assertThatThrownBy(() -> {
+            new Lotto(lottoString);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Lotto Number count is wrong");
+
     }
 
     @Test
