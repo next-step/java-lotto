@@ -16,11 +16,11 @@ public class WinningResultTest {
 
 	@BeforeEach
 	void setUp() {
-		Lotto lotto1 = new Lotto(InputView.stringToNumbers("1,2,3,4,5,6"));
-		Lotto lotto2 = new Lotto(InputView.stringToNumbers("7,8,9,10,11,12"));
-		Lotto lotto3 = new Lotto(InputView.stringToNumbers("40,41,42,43,44,45"));
-		Lotto lotto4 = new Lotto(InputView.stringToNumbers("40,41,42,43,44,45"));
-		Lotto lotto5 = new Lotto(InputView.stringToNumbers("40,41,42,43,44,45"));
+		Lotto lotto1 = LottoGenerator.stringToLotto("1,2,3,4,5,6");
+		Lotto lotto2 = LottoGenerator.stringToLotto("7,8,9,10,11,12");
+		Lotto lotto3 = LottoGenerator.stringToLotto("40,41,42,43,44,45");
+		Lotto lotto4 = LottoGenerator.stringToLotto("40,41,42,43,44,45");
+		Lotto lotto5 = LottoGenerator.stringToLotto("40,41,42,43,44,45");
 		lottos = new Lottos(new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5)));
 	}
 
@@ -33,7 +33,7 @@ public class WinningResultTest {
 	}, delimiter = ':')
 	void 당첨_결과_확인(String text,
 			int fourth, int third, int second, int first) {
-		Lotto win = new Lotto(InputView.stringToNumbers(text));
+		Lotto win = LottoGenerator.stringToLotto(text);
 		WinningResult result = new WinningResult(win, lottos);
 		assertThat(result.dashboard().get(FOURTH_PRIZE)).isEqualTo(fourth);
 		assertThat(result.dashboard().get(THIRD_PRIZE)).isEqualTo(third);
@@ -49,7 +49,7 @@ public class WinningResultTest {
 		"5000:40,41,42,43,44,45:1200000.00"
 	}, delimiter = ':')
 	void 당첨_수익률_확인(long money, String text, double expectedRatio) {
-		Lotto win = new Lotto(InputView.stringToNumbers(text));
+		Lotto win = LottoGenerator.stringToLotto(text);
 		WinningResult result = new WinningResult(win, lottos);
 		assertThat(result.earningRate()).isEqualTo(expectedRatio);
 	}
