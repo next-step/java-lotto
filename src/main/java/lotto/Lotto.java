@@ -1,6 +1,7 @@
 package lotto;
 
 import static java.util.stream.Collectors.*;
+import static lotto.LottoNumber.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,16 +11,13 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-	private static final int LOTTO_MIN_NUMBER = 1;
-	private static final int LOTTO_LIMIT_NUMBER = 46;
-
 	private static final int REQUIRED_COUNT = 6;
 
 	private static final String DELIMITER = "\\,";
 
 	private static final List<LottoNumber> lottoNumberPool
-		= IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
-			.mapToObj(LottoNumber::new)
+		= IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
+			.mapToObj(LottoNumber::valueOf)
 			.collect(toList());
 
 	private final TreeSet<LottoNumber> numbers;
@@ -44,7 +42,7 @@ public class Lotto {
 				.count());
 	}
 
-	private void validateNumbers(TreeSet<LottoNumber> numbers) {
+	private static void validateNumbers(TreeSet<LottoNumber> numbers) {
 		if (numbers.size() != REQUIRED_COUNT) {
 			throw new InvalidNumberSetException("Lotto requires only 6 unique numbers.");
 		}
@@ -61,7 +59,7 @@ public class Lotto {
 		String[] split = text.split(DELIMITER);
 		return Stream.of(split)
 			.mapToInt(s -> Integer.parseInt(s.trim()))
-			.mapToObj(LottoNumber::new)
+			.mapToObj(LottoNumber::valueOf)
 			.collect(toCollection(TreeSet::new));
 	}
 

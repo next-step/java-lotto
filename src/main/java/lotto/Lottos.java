@@ -30,7 +30,7 @@ public class Lottos {
 		return values.size();
 	}
 
-	private void validateMoney(Money money) {
+	private static void validateMoney(Money money) {
 		if (!money.isEnough()) {
 			throw new IllegalArgumentException("Not enough money to buy a lotto.");
 		}

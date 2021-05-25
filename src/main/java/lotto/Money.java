@@ -20,7 +20,7 @@ public class Money {
 		return LOTTO_PRICE <= value;
 	}
 
-	private void validateMoneyValue(int value) {
+	private static void validateMoneyValue(int value) {
 		if (value < 0) {
 			throw new IllegalArgumentException("Money cannot be negative!");
 		}
