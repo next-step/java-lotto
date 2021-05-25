@@ -22,8 +22,8 @@ class WinningLottoNumberTest {
     @DisplayName("new_정상")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,7",
-            "13,22,13,34,25,37",
-            "21,23,37,42,15,37",
+            "13,22,14,34,25,37",
+            "21,23,35,42,15,37",
             "31,22,43,44,45,17",})
     void new_정상(String input) {
         assertDoesNotThrow(() -> new WinningLottoNumber(input));
