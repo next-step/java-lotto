@@ -9,13 +9,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.utils.LottoGenerator;
+
 public class LottoUserTest {
 
 	LottoUser user;
 
 	@BeforeEach
 	void setUpUser() {
-		user = new LottoUser(10000L);
+		user = new LottoUser(10000);
 	}
 
 	@Test
@@ -28,8 +30,20 @@ public class LottoUserTest {
 	@CsvSource(value = {"10000,10", "15000,15", "13500,13", "400000,400"}, delimiter = ',')
 	@DisplayName("로또 구매 테스트")
 	public void buyLotto(int price, int lottoCount) {
+		user = new LottoUser(price);
 		user.buyGenerateLottos();
 		assertThat(user.getLottoCount()).isEqualTo(lottoCount);
 	}
+
+	@Test
+	@DisplayName(" ")
+	public void getManualCount() {
+		Lottos lottos = new Lottos();
+		lottos.addLotto(LottoGenerator.generate());
+		user.buyManualLottos(lottos);
+		assertThat(user.getAutoLottoCount()).isEqualTo(9);
+		assertThat(user.getManualLottoCount()).isEqualTo(1);
+	}
+
 
 }
