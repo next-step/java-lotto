@@ -32,7 +32,7 @@ public class BallGroupTest {
 		return balls;
 	}
 
-	@DisplayName("4-1-2-2-1.generate()")
+	@DisplayName("4-1-2-2-1.`generate()` : 입력된 정보를 토대로 BallGroup을 생성한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], compareText:[{1}], exceptedIsEqual:{2}")
 	@Order(1)
 	@CsvSource(value = {"1, 2, 3, 4, 5, 6;1,2,3,4,5,6;true", "6,5,4,3,2,1;1,2,3,4,5,6;true",
@@ -47,12 +47,12 @@ public class BallGroupTest {
 		List<Ball> compareBallList = makeBallList(inputCompareTextGroup);
 
 		//when
-
-		//then
 		if (exceptedIsEqual) {
+			//then - exceptedIsEqual:true
 			assertThat(BallGroup.generate(inputTextGroup).balls()).containsSequence(compareBallList);
 			return;
 		}
+		//then - exceptedIsEqual:false
 		assertThat(BallGroup.generate(inputTextGroup).balls()).doesNotContainSequence(compareBallList);
 	}
 
@@ -87,7 +87,7 @@ public class BallGroupTest {
 			.isInstanceOf(IllegalInputTextGroupException.class);
 	}
 
-	@DisplayName("4-1-2-2-2.allOfBalls()")
+	@DisplayName("4-1-2-2-2.`allOfBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.")
 	@Test
 	@Order(4)
 	void allOfBalls() throws IllegalInputTextException, IllegalBallNumberException {

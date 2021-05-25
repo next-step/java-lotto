@@ -37,6 +37,14 @@ public class BallGroup {
 		return allOfBalls;
 	}
 
+	private static void addBallWhenNotDuplicated(List<Ball> destinationBalls, InputText inputText)
+		throws IllegalBallNumberException {
+		Ball pendingBall = Ball.generate(inputText);
+		if (!destinationBalls.contains(pendingBall)) {
+			destinationBalls.add(pendingBall);
+		}
+	}
+
 	public static BallGroup generate(InputTextGroup inputTextGroup) throws
 			IllegalBallNumberException, IllegalInputTextGroupException {
 		validateGenerate(inputTextGroup);
@@ -85,14 +93,6 @@ public class BallGroup {
 
 	public List<Ball> balls() {
 		return Collections.unmodifiableList(this.balls);
-	}
-
-	private static void addBallWhenNotDuplicated(List<Ball> destinationBalls, InputText inputText)
-			throws IllegalBallNumberException {
-		Ball pendingBall = Ball.generate(inputText);
-		if (!destinationBalls.contains(pendingBall)) {
-			destinationBalls.add(pendingBall);
-		}
 	}
 
 	public String makeMsgBalls() {

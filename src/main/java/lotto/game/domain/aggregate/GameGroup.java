@@ -38,7 +38,7 @@ public class GameGroup {
 
 	private static void validateCountOfGames(Money money) throws IllegalMoneyAmountException {
 		if (!isEffectiveMinCountOfGames(money.countOfGames())) {
-			throw new IllegalMoneyAmountException("1개 이상의 게임을 구매할 수 있는 1000원 이상의 금액이 필요합니다.");
+			throw new IllegalMoneyAmountException("1개 이상의 게임을 구매할 수 있는 " + Money.GAME_FEE + "원 이상의 금액이 필요합니다.");
 		}
 	}
 

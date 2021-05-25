@@ -56,9 +56,9 @@ public class MoneyTest {
 			.isInstanceOfAny(IllegalMoneyAmountException.class);
 	}
 
-	@DisplayName("4-1-2-6-2.generate() : 돈 생성")
+	@DisplayName("4-1-2-6-3.countOfGames() : 입력된 금액에서 구매할 수 있는 게임의 수")
 	@ParameterizedTest(name = "{index} - text:[{0}], exceptedNotThrownException:{1}")
-	@Order(2)
+	@Order(3)
 	@CsvSource(value = {"0;0;true", "999;0;true", "1000;1;true", "100000;100;true",
 		"1500;1;true"}, delimiter = ';')
 	void countOfGames(String text, int expectedCount, boolean exceptedNotThrownException) throws

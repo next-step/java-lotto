@@ -13,6 +13,9 @@ import lotto.game.exception.IllegalGameException;
 
 public class GameWinningCondition {
 	private static final int INITIALIZE_VALUE_ZERO = 0;
+	private static final int TWO_OF_DECIMAL_PLACES = 2;
+	private static final int NUMBER_ONE = 1;
+	private static final String PATTERN_TWO_OF_DECIMAL_PLACES = "#.##";
 
 	private final Game gameCondition;
 
@@ -69,8 +72,9 @@ public class GameWinningCondition {
 	private String calculateEarningRate(Map<PrizeCode, Integer> winningStatistics, GameGroup gameGroup) {
 		BigDecimal numerator = calculateNumeratorOfEarningRate(winningStatistics);
 		BigDecimal denominator = BigDecimal.valueOf(gameGroup.games().size() * Money.GAME_FEE);
-		double earningRate = numerator.divide(denominator, 2, RoundingMode.FLOOR).doubleValue();
-		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		double earningRate = numerator
+			.divide(denominator, TWO_OF_DECIMAL_PLACES, RoundingMode.FLOOR).doubleValue();
+		DecimalFormat decimalFormat = new DecimalFormat(PATTERN_TWO_OF_DECIMAL_PLACES);
 		return decimalFormat.format(earningRate);
 	}
 
@@ -96,7 +100,7 @@ public class GameWinningCondition {
 	}
 
 	private void plusCountMatchCounts(Map<PrizeCode, Integer> resultMap, PrizeCode prizeCode) {
-		resultMap.put(prizeCode, resultMap.get(prizeCode) + 1);
+		resultMap.put(prizeCode, resultMap.get(prizeCode) + NUMBER_ONE);
 	}
 
 	private Map<PrizeCode, Integer> initializeResultHashMap() {

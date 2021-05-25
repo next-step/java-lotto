@@ -40,7 +40,7 @@ public class GameTest {
 		}
 	}
 
-	@DisplayName("4-1-2-3-2.generateCustom()")
+	@DisplayName("4-1-2-3-2.`generateCustom()` : 모든 볼의 정보를 토대로 게임을 수동으로 생성한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}]")
 	@Order(2)
 	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "6,5,4,3,2,1;1,2,3,4,5,6;true",
@@ -81,7 +81,7 @@ public class GameTest {
 
 	@DisplayName("4-1-2-3-3.equals()")
 	@ParameterizedTest(name = "{index} - text:[{0}], compareText[{1}], expectedIsEqual:{2}")
-	@Order(3)
+	@Order(4)
 	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "6,5,4,3,2,1;1,2,3,4,5,6;true",
 		"1,2,3,3,4,5,6;1,8,3,4,5,6;false", "1, 21, 31, 45, 41, 11;1,11,21,31,41,45;true"}, delimiter = ';')
 	void equals(String text, String compareText, boolean expectedIsEqual) throws

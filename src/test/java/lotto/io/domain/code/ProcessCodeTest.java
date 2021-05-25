@@ -11,7 +11,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProcessCodeTest {
 
-	@DisplayName("4-2-1-3-1.`is~()` : 등가성 비교")
+	@DisplayName("4-2-1-4-1.`is~()` : 등가성 비교")
 	@Test
 	@Order(1)
 	void isEqualMethods() {

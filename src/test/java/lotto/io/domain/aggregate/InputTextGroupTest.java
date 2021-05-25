@@ -28,7 +28,7 @@ public class InputTextGroupTest {
 		return texts;
 	}
 
-	@DisplayName("4-2-1-2-1.generate()")
+	@DisplayName("4-2-1-2-1.`generate()` : InputTextGroup를 생성한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], compareText:[{1}], expectedIsEqual:{2}")
 	@Order(1)
 	@CsvSource(value = {"0,1,2,3,4,5;0,1,2,3,4,5;true", "1,2,3;2,3,4;false", "5,4,3,2,1;1,2,3,4,5;false",

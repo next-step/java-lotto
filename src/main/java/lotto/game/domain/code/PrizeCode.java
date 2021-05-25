@@ -1,9 +1,5 @@
 package lotto.game.domain.code;
 
-import java.math.BigDecimal;
-import java.util.Iterator;
-import java.util.Map;
-
 public enum PrizeCode {
 	NOTHING(6, 0, 0),
 	FIFTH_PLACE(5, 3, 5000),

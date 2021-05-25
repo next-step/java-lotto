@@ -5,14 +5,10 @@ import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Game;
 import lotto.game.domain.vo.GameWinningCondition;
 import lotto.game.domain.vo.Money;
-import lotto.game.exception.IllegalBallGroupException;
-import lotto.game.exception.IllegalBallNumberException;
-import lotto.game.exception.IllegalGameException;
+import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextGroupException;
-import lotto.io.exception.IllegalInputTextListException;
+import lotto.io.exception.IoContextIllegalParameterException;
 
 public class Round {
 	private GameWinningCondition gameWinningCondition;
@@ -24,12 +20,8 @@ public class Round {
 	}
 
 	public Round setupGameWinningCondition(InputText inputText) throws
-			IllegalInputTextException,
-			IllegalInputTextListException,
-			IllegalBallNumberException,
-			IllegalInputTextGroupException,
-			IllegalBallGroupException,
-			IllegalGameException {
+			GameContextIllegalParameterException,
+			IoContextIllegalParameterException {
 		InputTextGroup inputTextGroup = inputText.splitByComma();
 		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
 		Game customGame = Game.generateCustom(ballGroup);

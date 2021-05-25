@@ -21,7 +21,7 @@ import lotto.io.exception.IllegalInputTextListException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InputTextTest {
 
-	@DisplayName("4-2-1-1-1.validate()")
+	@DisplayName("4-2-1-1-1.`validate()` : `null`, `empty`의 경우 exception 발생")
 	@ParameterizedTest(name = "{index} - text:[{0}], expectedDoesNotThrowAnyException:{1}")
 	@Order(1)
 	@CsvSource(value = {"0,1,2,3,4,5;true", "1,2,3;true", "5,4,3,2,1;true",
@@ -48,7 +48,7 @@ public class InputTextTest {
 		return InputTextGroup.generate(texts);
 	}
 
-	@DisplayName("4-2-1-1-2.`generate()`")
+	@DisplayName("4-2-1-1-2.`generate()` : `null`, `empty`의 경우 exception 발생")
 	@ParameterizedTest(name = "{index} - text : [{0}]")
 	@Order(2)
 	@ValueSource(strings = {"", " "})
@@ -62,7 +62,7 @@ public class InputTextTest {
 		assertThatThrownBy(() -> InputText.generate(str)).isInstanceOf(IllegalInputTextException.class);
 	}
 
-	@DisplayName("4-2-1-1-3.splitByComma()")
+	@DisplayName("4-2-1-1-3.`splitByComma()` : 쉼표`,`를 구분자로 사용한다. `trim()`을 활용하여 공백을 제거한 InputText의 리스트로 리턴한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], compareText:[{1}], expectedIsEqual:{2}")
 	@Order(3)
 	@CsvSource(value = {"0,1,2,3,4,5;0,1,2,3,4,5;true", "1,2,3;2,3,4;false", "5,4,3,2,1;1,2,3,4,5;false",

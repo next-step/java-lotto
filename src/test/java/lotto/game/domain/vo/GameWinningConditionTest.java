@@ -16,6 +16,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.entity.Round;
+import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.game.exception.IllegalBallGroupException;
 import lotto.game.exception.IllegalBallNumberException;
 import lotto.game.exception.IllegalGameException;
@@ -24,6 +25,7 @@ import lotto.io.domain.vo.InputText;
 import lotto.io.exception.IllegalInputTextException;
 import lotto.io.exception.IllegalInputTextGroupException;
 import lotto.io.exception.IllegalInputTextListException;
+import lotto.io.exception.IoContextIllegalParameterException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GameWinningConditionTest {
@@ -188,12 +190,8 @@ public class GameWinningConditionTest {
 	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "1,2,3,4,5,6;2,3,4,5,6,7;false",
 		"1,2,3,4,5,6;1,3,5,2,4,6;true"}, delimiter = ';')
 	void equals(String winningCondition1, String winningCondition2, boolean isEqual) throws
-			IllegalInputTextException,
-			IllegalInputTextListException,
-			IllegalBallNumberException,
-			IllegalInputTextGroupException,
-			IllegalBallGroupException,
-			IllegalGameException {
+			IoContextIllegalParameterException,
+			GameContextIllegalParameterException {
 		//given
 
 		//when

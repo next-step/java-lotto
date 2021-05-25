@@ -18,8 +18,7 @@ public class TicketBoxView extends View {
 	}
 
 	@Override
-	public void displayProcess(
-			ViewStatus viewStatus, Round round, InputText inputText) throws
+	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) throws
 			IllegalMoneyAmountException,
 			IllegalInputTextGroupException {
 		if (viewStatus.currentProcessCode().isRequestInput()) {

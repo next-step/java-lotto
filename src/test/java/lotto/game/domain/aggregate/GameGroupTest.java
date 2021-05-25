@@ -42,7 +42,7 @@ public class GameGroupTest {
 
 	@DisplayName("4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.")
 	@ParameterizedTest(name = "{index} - moneyAmountText:[{0}], gameCount:{1}, exceptedNotThrownException:{2}")
-	@Order(1)
+	@Order(2)
 	@CsvSource(value = {"0;0;false", "999;0;false", "1000;1;true", "100000;100;true",
 			"1500;1;true"}, delimiter = ';')
 	void makeMsgAllGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) throws

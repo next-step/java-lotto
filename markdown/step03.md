@@ -368,8 +368,9 @@ public class Number {
                 - [x] 4-1-2-2-1.`generate()` : 입력된 정보를 토대로 BallGroup을 생성한다.
                 - [x] 4-1-2-2-2.`allOfBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.
             - [x] 4-1-2-3.`Game(VO)`
-                - [x] 4-1-2-3-1.`generateAuto()` : 모든 볼의 정보를 토대로 게임을 자동으로 생성한다.
+                - [x] 4-1-2-3-1.`generateAuto()` - 시도 횟수 : 100회, 경우의 수 : 2179827, 테스트 실패 확률 : 약0.00459%
                 - [x] 4-1-2-3-2.`generateCustom()` : 모든 볼의 정보를 토대로 게임을 수동으로 생성한다.
+                - [x] 4-1-2-3-3.`equals()` : 등가성 비교
             - [x] 4-1-2-4.`GameGroup(Aggregate)`
                 - [x] 4-1-2-4-1.`buyGames()` : 금액에 따라 여러 개의 게임을 생성한다.
                 - [x] 4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.
@@ -377,12 +378,14 @@ public class Number {
                 - [x] 4-1-2-5-1.`generate()` : 게임 당첨 조건을 생성한다.
                 - [x] 4-1-2-5-2.`calculateContainWinningBalls()` : 게임 등수를 계산한다.
                 - [x] 4-1-2-5-3.`makeMsgWinningStatistics()` : 당첨 통계를 생성한다.
+                - [x] 4-1-2-5-4.`equals()` : 같은 게임 승리 조건인지 판별한다.
             - [x] 4-1-2-6.`Money(VO)`
                 - [x] 4-1-2-6-1.`validate()` : 돈 유효성 체크(0 이상)
                 - [x] 4-1-2-6-2.`generate()` : 돈 생성
+                - [x] 4-1-2-6-3.`countOfGames()` : 입력된 금액에서 구매할 수 있는 게임의 수
             - [x] 4-1-2-7.`PrizeCode(VO)`
                 - [x] 4-1-2-7-1.`is~()` : 등가성 비교
-                - [x] 4-1-2-7-2.`makeMsgWinningPrize()` : 등수 및 금액, 수익률 출력
+                - [x] 4-1-2-7-2.`getCode()` : 코드 값 구하기  
         - [x] 4-1-3.`Entity`
             - [x] 4-1-3-1.`Round`
                 - [x] 4-1-3-1-1.Field 생성 : `GameWinningCondition`, `GameGroup`, `Money`
@@ -395,14 +398,17 @@ public class Number {
             - [x] 4-2-1-2.`InputTextGroup(Aggregate)`
                 - [x] 4-2-1-2-1.`generate()` : InputTextGroup를 생성한다.
             - [x] 4-2-1-3.`ViewCode(VO)`
-                - [x] 4-2-1-3-1.`is~()` : 등가성 비교 
+                - [x] 4-2-1-3-1.`is~()` : 등가성 비교
+            - [x] 4-2-1-4.`ProcessCode(VO)`
+                - [x] 4-2-1-4-1.`is~()` : 등가성 비교 
         - [x] 4-2-2.View
             - [x] 4-2-2-1.`TicketBoxView`
             - [x] 4-2-2-2.`GameWinningConditionView`
             - [x] 4-2-2-3.`WinningStaticsView`
-    - [ ] 4-3.Refactoring
-        - [ ] 4-3-1.각 VO, Entity, Aggregate에 맞는 메서드가 작성되었는가 확인
-        - [ ] 4-3-2.메서드 명이 충분히 적절하게 작성된 명칭인가 확인
+    - [x] 4-3.Refactoring
+        - [x] 4-3-1.각 VO, Entity, Aggregate에 맞는 메서드가 작성되었는가 확인
+        - [x] 4-3-2.메서드 명이 충분히 적절하게 작성된 명칭인가 확인
+        - [x] 4-3-3.Context별 상위 Exception 생성
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
         - [ ] 5-1-1.`Value Object` & `Aggregate`

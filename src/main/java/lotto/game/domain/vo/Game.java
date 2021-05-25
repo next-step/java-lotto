@@ -37,7 +37,7 @@ public class Game {
 
 	private static void validateBallGroupSizeEqualSix(BallGroup ballGroup) throws IllegalBallGroupException {
 		if (!isBallGroupSizeEqualSix(ballGroup)) {
-			throw new IllegalBallGroupException("게임은 반드시 숫자가 다른 6개의 볼을 가지고 있어야 합니다.");
+			throw new IllegalBallGroupException("게임은 반드시 숫자가 다른 " + GAME_BALL_SIZE + "개의 볼을 가지고 있어야 합니다.");
 		}
 	}
 

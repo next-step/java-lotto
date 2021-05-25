@@ -23,6 +23,10 @@ public class InputText {
 		return new InputText(text);
 	}
 
+	public String value() {
+		return this.value;
+	}
+
 	public static void validateGenerate(String text) throws IllegalInputTextException {
 		validateNotNullAndNotEmpty(text);
 	}
@@ -37,8 +41,13 @@ public class InputText {
 		return text == null || text.trim().isEmpty();
 	}
 
-	public String value() {
-		return this.value;
+	public InputTextGroup splitByComma() throws IllegalInputTextException, IllegalInputTextListException {
+		List<InputText> inputTexts = new ArrayList<>();
+		String[] splitInputTexts = this.value.split(COMMA_DELIMITER);
+		for (String text : splitInputTexts) {
+			inputTexts.add(generate(text));
+		}
+		return InputTextGroup.generate(Collections.unmodifiableList(inputTexts));
 	}
 
 	@Override
@@ -61,14 +70,5 @@ public class InputText {
 	@Override
 	public String toString() {
 		return "InputText{ value='" + value + "\'}";
-	}
-
-	public InputTextGroup splitByComma() throws IllegalInputTextException, IllegalInputTextListException {
-		List<InputText> inputTexts = new ArrayList<>();
-		String[] splitInputTexts = this.value.split(COMMA_DELIMITER);
-		for (String text : splitInputTexts) {
-			inputTexts.add(generate(text));
-		}
-		return InputTextGroup.generate(Collections.unmodifiableList(inputTexts));
 	}
 }

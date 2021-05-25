@@ -35,7 +35,7 @@ public class BallTest {
 			.isInstanceOfAny(IllegalBallNumberException.class);
 	}
 
-	@DisplayName("4-1-2-1-2.generate()")
+	@DisplayName("4-1-2-1-2.`generate()` : Ball 생성")
 	@ParameterizedTest(name = "{index} - text:[{0}], expectedNumber:{1}, exceptedNotThrownException:{2}")
 	@Order(2)
 	@CsvSource(value = {"0;0;false", "1;1;true", "45;45;true", "46;46;false", "one;1;false",
@@ -55,7 +55,7 @@ public class BallTest {
 		assertThatThrownBy(() -> Ball.generate(inputText).number()).isInstanceOf(IllegalBallNumberException.class);
 	}
 
-	@DisplayName("4-1-2-1-3.equals()")
+	@DisplayName("4-1-2-1-3.`equals()` : 등가성 비교")
 	@ParameterizedTest(name = "{index} - text:[{0}], expectedNumberText:[{1}], exceptedIsEquals:{2}")
 	@Order(3)
 	@CsvSource(value = {"1;45;false", "01;001;true", "45;45;true",

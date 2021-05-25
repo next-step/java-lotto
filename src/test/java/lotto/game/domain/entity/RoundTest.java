@@ -14,6 +14,7 @@ import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Game;
 import lotto.game.domain.vo.GameWinningCondition;
 import lotto.game.domain.vo.Money;
+import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.game.exception.IllegalBallGroupException;
 import lotto.game.exception.IllegalBallNumberException;
 import lotto.game.exception.IllegalGameException;
@@ -23,6 +24,7 @@ import lotto.io.domain.vo.InputText;
 import lotto.io.exception.IllegalInputTextException;
 import lotto.io.exception.IllegalInputTextGroupException;
 import lotto.io.exception.IllegalInputTextListException;
+import lotto.io.exception.IoContextIllegalParameterException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RoundTest {
@@ -30,12 +32,8 @@ public class RoundTest {
 	@Test
 	@DisplayName("4-1-3-1-1.Field 생성 : `GameWinningCondition")
 	void setupGameWinningCondition() throws
-			IllegalInputTextException,
-			IllegalInputTextListException,
-			IllegalBallNumberException,
-			IllegalInputTextGroupException,
-			IllegalBallGroupException,
-			IllegalGameException {
+			IoContextIllegalParameterException,
+			GameContextIllegalParameterException {
 		//given
 		String systemIn = "12,13,14,15,16,17";
 		boolean expectedIsEqual = true;
@@ -50,7 +48,8 @@ public class RoundTest {
 		Round round = Round.generate().setupGameWinningCondition(inputText);
 
 		//then
-		assertThat(round.gameWinningCondition().isSameWinningCondition(gameWinningCondition)).isEqualTo(expectedIsEqual);
+		assertThat(round.gameWinningCondition()
+			.isSameWinningCondition(gameWinningCondition)).isEqualTo(expectedIsEqual);
 	}
 
 	@DisplayName("4-1-3-1-1.Field 생성 : `GameGroup`, `Money")

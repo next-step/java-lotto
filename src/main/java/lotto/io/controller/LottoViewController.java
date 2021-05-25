@@ -3,17 +3,12 @@ package lotto.io.controller;
 import java.io.IOException;
 
 import lotto.game.domain.entity.Round;
-import lotto.game.exception.IllegalBallGroupException;
-import lotto.game.exception.IllegalBallNumberException;
-import lotto.game.exception.IllegalGameException;
-import lotto.game.exception.IllegalMoneyAmountException;
+import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.entity.ViewStatus;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextGroupException;
-import lotto.io.exception.IllegalInputTextListException;
+import lotto.io.exception.IoContextIllegalParameterException;
 import lotto.io.util.InputOutputUtil;
 import lotto.io.view.GameWinningConditionView;
 import lotto.io.view.TicketBoxView;
@@ -36,9 +31,8 @@ public class LottoViewController {
 	private void viewExceptionHandler() {
 		try {
 			displayCurrentProcess();
-		} catch (IllegalInputTextException | IllegalMoneyAmountException | IllegalInputTextGroupException
-			| IllegalBallNumberException | IllegalInputTextListException | IllegalGameException
-			| IllegalBallGroupException e) {
+		} catch (GameContextIllegalParameterException
+				| IoContextIllegalParameterException e) {
 			System.out.println(e.getMessage());
 			viewStatus.changeCurrentProcessCode(ProcessCode.REQUEST_INPUT);
 		} catch (IOException e) {
@@ -48,14 +42,9 @@ public class LottoViewController {
 	}
 
 	public void displayCurrentProcess() throws
-			IllegalInputTextException,
-			IOException,
-			IllegalMoneyAmountException,
-			IllegalInputTextGroupException,
-			IllegalBallNumberException,
-			IllegalInputTextListException,
-			IllegalGameException,
-			IllegalBallGroupException {
+			GameContextIllegalParameterException,
+			IoContextIllegalParameterException,
+			IOException {
 		generateViewWhenViewIsNullOrNotSameViewCode();
 		InputText inputText = null;
 		if (viewStatus.currentProcessCode().isSystemIn()) {

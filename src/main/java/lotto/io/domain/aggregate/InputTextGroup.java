@@ -18,6 +18,10 @@ public class InputTextGroup {
 		return new InputTextGroup(unmodifiableInputTexts);
 	}
 
+	public List<InputText> inputTexts() {
+		return Collections.unmodifiableList(inputTexts);
+	}
+
 	private static void validateGenerate(List<InputText> unmodifiableInputTexts) throws IllegalInputTextListException {
 		validateNotNullOrNotEmpty(unmodifiableInputTexts);
 	}
@@ -29,7 +33,4 @@ public class InputTextGroup {
 		}
 	}
 
-	public List<InputText> inputTexts() {
-		return Collections.unmodifiableList(inputTexts);
-	}
 }
