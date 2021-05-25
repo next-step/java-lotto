@@ -17,6 +17,8 @@ public class LottoController {
         int buyCount = lotto.buyCount(inputView.money());
         List<LottoNumbers> lottoNumbers = lotto.autoLottoNumbers(buyCount);
         resultView.print(lottoNumbers);
+
+        String numbers = inputView.numbers();
     }
 
 }

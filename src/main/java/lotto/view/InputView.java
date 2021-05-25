@@ -31,6 +31,11 @@ public class InputView {
         }
     }
 
+    public String numbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
     private boolean normal(int money) {
         if (money <= ZERO) {
             return false;
