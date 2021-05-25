@@ -16,7 +16,7 @@ public class LottoVendor {
 	public LottoVendor(String winningLottoNumbers, String bonusNumberString) {
 		validateNumber(bonusNumberString);
 
-		winningLottoTicket = new LottoTicket(winningLottoNumbers);
+		winningLottoTicket = LottoTicketConverter.convert(winningLottoNumbers);
 		bonusNumber = LottoNumber.of(Integer.parseInt(bonusNumberString));
 
 		validateIntersectWinningNumber();

@@ -83,7 +83,7 @@ class UserLottoTest {
 	void lottoTickets() {
 		// given
 		List<LottoTicket> lottoTicketList = new ArrayList<>();
-		lottoTicketList.add(new LottoTicket("1,2,3,4,5,6"));
+		lottoTicketList.add(LottoTicketConverter.convert("1,2,3,4,5,6"));
 		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// when
