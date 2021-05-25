@@ -27,9 +27,10 @@ public final class LottoStore {
 
         // 당첨번호 입력
         final Lotto answerLottoNumbers = lottoInput.inputAnswerLottoNumbers();
+        final LottoNumber bonusNumber = lottoInput.inputBonusNumber();
 
         // 추첨
-        final WinningResult winningResult = new WinningResult(answerLottoNumbers);
+        final WinningResult winningResult = new WinningResult(answerLottoNumbers, bonusNumber);
         winningResult.matchWinningLotto(lottos);
         lottoOutput.printWinningStatistics(winningResult);
         lottoOutput.printProfitRate(winningResult.getProfitRate(toPurchaseLotto));
