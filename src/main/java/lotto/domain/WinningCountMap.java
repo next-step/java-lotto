@@ -10,13 +10,15 @@ import static java.util.stream.Collectors.toList;
 
 public class WinningCountMap {
 
+    private static final int IF_ABSENT_TYPE_DEFAULT_VALUE = 0;
+
     private final Map<WinningType, Integer> winningCounterMap;
 
     public WinningCountMap(Map<WinningType, Integer> map) {
 
         Arrays.stream(WinningType.values())
               .filter(WinningType::isWinningLotto)
-              .forEach(type -> map.putIfAbsent(type, 0));
+              .forEach(type -> map.putIfAbsent(type, IF_ABSENT_TYPE_DEFAULT_VALUE));
 
         winningCounterMap = Collections.unmodifiableMap(map);
     }

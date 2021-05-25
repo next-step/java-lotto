@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 import lotto.ui.IOManager;
 
+import static java.util.stream.Collectors.toList;
+
 public class LottoGame {
 
     private final IOManager ioManager;
@@ -17,17 +19,36 @@ public class LottoGame {
     }
 
     public void progress() {
+
         Money money = Money.of(ioManager.inputMoney());
-        List<Lotto> lottos = buyLottos(money);
+
+        Money manualLottoMoney = Money.ofLottoCount(ioManager.inputManualLottoCount());
+        List<Lotto> lottos = buyManualLottos(manualLottoMoney);
+
+        List<Lotto> autoLottos = buyAutoLottos(money.minus(manualLottoMoney),
+                                               manualLottoMoney);
+
+        lottos.addAll(autoLottos);
         drawWinningLotto(lottos);
     }
 
-    private List<Lotto> buyLottos(Money money) {
+    private List<Lotto> buyManualLottos(Money money) {
 
-        ioManager.printBuyCount(money.getBuyableLottoSize());
+        List<List<Integer>> lottoNumbers =
+            ioManager.inputManualLottoNumbers(money.getBuyableLottoSize());
+
+        return lottoNumbers.stream()
+                           .map(Lotto::of)
+                           .collect(toList());
+    }
+
+    private List<Lotto> buyAutoLottos(Money remainMoney, Money manualLottoMoney) {
+
+        ioManager.printBuyCount(manualLottoMoney.getBuyableLottoSize(),
+                                remainMoney.getBuyableLottoSize());
 
         List<Lotto> lottos = LottoVendingMachine.defaultVendingMachine()
-                                                .buyLottos(money);
+                                                .buyLottos(remainMoney);
 
         for (Lotto lotto : lottos) {
             ioManager.printLine(lotto.toString());
@@ -43,11 +64,12 @@ public class LottoGame {
     }
 
     private void printStatistics(WinningLotto winningLotto, List<Lotto> lottos) {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto, lottos);
 
-        ioManager.printLine("당첨 통계");
-        ioManager.printLine("---------");
-        ioManager.printStatistics(lottoStatistics.getStatisticsData());
-        ioManager.printEarningRate(lottoStatistics.getEarningsRate(lottos.size()));
+        List<WinningType> winningTypes = lottos.stream()
+                                               .map(winningLotto::getWinningType)
+                                               .collect(toList());
+
+        LottoStatistics lottoStatistics = new LottoStatistics(winningTypes);
+        ioManager.printStatistics(lottoStatistics, lottos.size());
     }
 }
