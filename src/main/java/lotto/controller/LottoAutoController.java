@@ -11,7 +11,9 @@ import java.util.List;
 
 public class LottoAutoController {
 
-    public void start(List<LottoModel> lottos) {
+    public void start() {
+        List<LottoModel> lottos = new ArrayList<>();
+
         LottoAutoView view = new LottoAutoView();
 
         int price = view.inputPrice();
