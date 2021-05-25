@@ -28,14 +28,9 @@ public class Scores {
     }
 
     public long totalMoney() {
-        long sum = 0;
-
-        for (Prize prize : this.scores.keySet()) {
-            long money = (long)prize.getPrize() * (long)this.scores.get(prize);
-            sum += money;
-        }
-
-        return sum;
+        return this.scores.keySet().stream()
+            .map(prize -> (long)prize.getPrize() * (long)this.scores.get(prize))
+            .reduce(0L, Long::sum);
     }
 
     public int of(Prize prize) {

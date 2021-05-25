@@ -1,5 +1,6 @@
 package lotto.enums;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,8 @@ public enum Prize {
     private static final Map<Integer, Prize> lookup = new HashMap<>();
 
     static {
-        for (Prize prize : Prize.values()) {
-            lookup.put(prize.index, prize);
-        }
+        Arrays.stream(Prize.values())
+            .forEach(prize -> lookup.put(prize.index, prize));
     }
 
     private int index;

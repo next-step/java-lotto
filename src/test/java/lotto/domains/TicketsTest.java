@@ -3,6 +3,7 @@ package lotto.domains;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.enums.Prize;
+import lotto.exceptions.EmptyTicketsException;
 
 public class TicketsTest {
 
@@ -47,5 +49,21 @@ public class TicketsTest {
     @Test
     void countPrize() {
         assertThat(tickets.scores(winningNumbers).equals(answer)).isTrue();
+    }
+
+    @DisplayName("티켓 리스트가 null이면 에러 발생")
+    @Test
+    void guard_Null_ExceptionThrown() {
+        assertThatExceptionOfType(EmptyTicketsException.class).isThrownBy(() -> {
+            new Tickets(null);
+        });
+    }
+
+    @DisplayName("티켓 리스트가 크기가 0이면 에러 발생")
+    @Test
+    void guard_Empty_ExceptionThrown() {
+        assertThatExceptionOfType(EmptyTicketsException.class).isThrownBy(() -> {
+            new Tickets(Collections.emptyList());
+        });
     }
 }

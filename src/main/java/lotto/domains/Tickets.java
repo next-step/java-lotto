@@ -2,8 +2,8 @@ package lotto.domains;
 
 import java.util.List;
 
-import lotto.enums.ErrorMessage;
 import lotto.enums.Prize;
+import lotto.exceptions.EmptyTicketsException;
 
 public class Tickets {
 
@@ -11,7 +11,7 @@ public class Tickets {
 
     public Tickets(List<Ticket> tickets) {
         if (tickets == null || tickets.isEmpty()) {
-            throw new NullPointerException(ErrorMessage.NULL_TICKETS.toString());
+            throw new EmptyTicketsException();
         }
 
         this.tickets = tickets;
@@ -34,6 +34,10 @@ public class Tickets {
 
     @Override
     public String toString() {
+        return printer();
+    }
+
+    private String printer() {
         StringBuilder message = new StringBuilder();
         for (Ticket ticket : this.tickets) {
             message.append(ticket.toString()).append(System.lineSeparator());

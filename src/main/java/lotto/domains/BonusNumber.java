@@ -1,6 +1,5 @@
 package lotto.domains;
 
-import lotto.enums.ErrorMessage;
 import lotto.exceptions.NumberOutOfBoundsException;
 import lotto.tool.Converter;
 
@@ -15,7 +14,7 @@ public class BonusNumber {
         int number = Converter.toInteger(text);
 
         if (number < MIN_VALUE || MAX_VALUE < number) {
-            throw new NumberOutOfBoundsException(ErrorMessage.NUMBER_OUT_OF_BOUNDS.toString());
+            throw new NumberOutOfBoundsException();
         }
 
         this.bonusNumber = number;

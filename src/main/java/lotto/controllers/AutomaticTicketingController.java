@@ -2,14 +2,14 @@ package lotto.controllers;
 
 import lotto.AutomaticTicketing;
 import lotto.Lotto;
+import lotto.strategy.RandomLottoNumbers;
 import lotto.domains.Tickets;
-import lotto.strategy.SublistStrategy;
 import lotto.enums.Message;
 import lotto.views.Display;
 
 public class AutomaticTicketingController implements Controller {
 
-    private AutomaticTicketing automaticTicketing = new AutomaticTicketing(new SublistStrategy());
+    private AutomaticTicketing automaticTicketing = new AutomaticTicketing(new RandomLottoNumbers());
 
     private Lotto lotto;
 

@@ -3,11 +3,13 @@ package lotto.tool;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.exceptions.DuplicateNumbersException;
+import lotto.exceptions.EmptyNumbersException;
 import lotto.exceptions.InsufficientNumbersException;
 import lotto.exceptions.NumberOutOfBoundsException;
 
@@ -23,8 +25,16 @@ public class TicketGuardTest {
     @DisplayName("숫자 리스트가 null이면 에러 발생")
     @Test
     void guard_Null_ExceptionThrown() {
-        assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(EmptyNumbersException.class).isThrownBy(() -> {
             TicketGuard.guard(null);
+        });
+    }
+
+    @DisplayName("숫자 리스트가 크기가 0이면 에러 발생")
+    @Test
+    void guard_Empty_ExceptionThrown() {
+        assertThatExceptionOfType(EmptyNumbersException.class).isThrownBy(() -> {
+            TicketGuard.guard(Collections.emptyList());
         });
     }
 

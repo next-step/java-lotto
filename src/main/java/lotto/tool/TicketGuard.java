@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lotto.enums.ErrorMessage;
 import lotto.exceptions.DuplicateNumbersException;
+import lotto.exceptions.EmptyNumbersException;
 import lotto.exceptions.InsufficientNumbersException;
 import lotto.exceptions.NumberOutOfBoundsException;
 
@@ -35,12 +35,12 @@ public final class TicketGuard {
     }
 
     private static void guardInsufficientSize(List<Integer> numbers) {
-        if (numbers == null) {
-            throw new NullPointerException(ErrorMessage.NULL_NUMBERS.toString());
+        if (numbers == null || numbers.isEmpty()) {
+            throw new EmptyNumbersException();
         }
 
         if (numbers.size() != SIZE) {
-            throw new InsufficientNumbersException(ErrorMessage.INSUFFICIENT_NUMBERS.toString());
+            throw new InsufficientNumbersException();
         }
     }
 
@@ -52,14 +52,14 @@ public final class TicketGuard {
 
     private static void guardOutOfBounds(int number) {
         if (number < MIN_VALUE || MAX_VALUE < number) {
-            throw new NumberOutOfBoundsException(ErrorMessage.NUMBER_OUT_OF_BOUNDS.toString());
+            throw new NumberOutOfBoundsException();
         }
     }
 
     private static void guardDuplicate(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>(numbers);
         if (set.size() < numbers.size()) {
-            throw new DuplicateNumbersException(ErrorMessage.DUPLICATE_NUMBERS.toString());
+            throw new DuplicateNumbersException();
         }
     }
 

@@ -11,7 +11,7 @@ public class WinningNumbers {
 
     public WinningNumbers(Ticket winningTicket, BonusNumber bonusNumber) {
         if (bonusNumber.isExist(winningTicket)) {
-            throw new DuplicateNumbersException(ErrorMessage.DUPLICATE_NUMBERS.toString());
+            throw new DuplicateNumbersException(ErrorMessage.DUPLICATE_BONUS_NUMBER.toString());
         }
 
         this.winningTicket = winningTicket;

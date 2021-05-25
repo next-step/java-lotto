@@ -1,6 +1,5 @@
 package lotto.domains;
 
-import lotto.enums.ErrorMessage;
 import lotto.exceptions.CashOutOfBoundsException;
 import lotto.tool.Converter;
 
@@ -15,7 +14,7 @@ public class Purchase {
         int cash = Converter.toInteger(text);
 
         if (cash < MIN_PURCHASE_PRICE || MAX_PURCHASE_PRICE < cash) {
-            throw new CashOutOfBoundsException(ErrorMessage.CASH_OUT_OF_BOUNDS.toString());
+            throw new CashOutOfBoundsException();
         }
 
         this.cash = cash;
