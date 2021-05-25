@@ -7,3 +7,15 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## Step-2
+
+#### 기능 상세
+* Input Handler
+    * 숫자 이외의 값 또는 음수 filter
+    * 빈 문자열 또는 null값 반환
+* Divider
+    * 커스텀 구분자 분리 기능
+    * 구분자로 값 분할 기능
+* Calculator
+    * 주어진 숫자 더하기 기능
