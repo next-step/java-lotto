@@ -66,7 +66,7 @@
   - [x] 아닐 시, IllegalArgumentException 발생
 - [x] 6개의 숫자 중 중복값이 없어야 함
   - [x] 아닐 시, IllegalArgumentException 발생
-- [ ] 구입 금액만큼 로또 번호 추출
+- [x] 정해진 횟수만큼 로또 번호 추출
 - [ ] 당첨 번호를 입력 받음
 - [ ] 3개 일치 값 저장
 - [ ] 4개 일치 값 저장
