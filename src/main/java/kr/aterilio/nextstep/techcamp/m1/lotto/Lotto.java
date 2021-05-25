@@ -9,6 +9,8 @@ public class Lotto {
     public static final int LOTTO_BALL_MIN = 1;
     public static final int LOTTO_BALL_MAX = 45;
 
+    private static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
+
     private final List<Integer> lottoBalls = new ArrayList<>();
 
     public Lotto(Integer[] lottoNumbers) {
@@ -31,7 +33,7 @@ public class Lotto {
 
     private void isOutOfRange(Integer ball) {
         if (ball < LOTTO_BALL_MIN || ball > LOTTO_BALL_MAX) {
-            throw new IllegalArgumentException("로또를 구성하는 수가 범위를 벗어났습니다.");
+            throw new IllegalArgumentException(MSG_ERR_OUT_OF_RANGE);
         }
     }
 }
