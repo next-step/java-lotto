@@ -12,16 +12,13 @@ import java.util.List;
 public class LottoAutoController {
 
     public void start() {
-        List<LottoModel> lottos = new ArrayList<>();
-
         LottoAutoView view = new LottoAutoView();
-
         int price = view.inputPrice();
 
         LottoPrice lottoPrice = new LottoPrice();
         int quantity = lottoPrice.getQuantity(price);
 
-        setLotto(quantity, lottos);
+        List<LottoModel> lottos = setLotto(quantity);
         view.printLotto(quantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
@@ -35,10 +32,12 @@ public class LottoAutoController {
         view.outputWinningStatistic(getEarningRate(getEarningPrice(), price));
     }
 
-    public void setLotto(int quantity, List<LottoModel> lottos) {
+    public List<LottoModel> setLotto(int quantity) {
+        List<LottoModel> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(new LottoModel());
         }
+        return lottos;
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
