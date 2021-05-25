@@ -17,7 +17,7 @@ public class LottoReport {
     }
 
     private void updateMatchCountMetrics(WinningLotto winners, Lotto lotto) {
-        int countOfMatch = lotto.matchCountWith(winners);
+        int countOfMatch = lotto.matchCountWith(winners.lotto);
         boolean matchBonus = lotto.matchBonus(winners.bonusNumber);
         Rank.valueOf(countOfMatch, matchBonus)
                 .ifPresent(this::updateCountOfMatchByRank);
