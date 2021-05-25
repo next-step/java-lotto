@@ -20,16 +20,37 @@ public class LottoAppController {
     }
 
     private Lottos buyLotto() {
+        LottoMoney purchaseAmount = askPurchaseAmount();
+        Lottos manual = askManualLottosWith(purchaseAmount);
+
+        LottoMoney remainder = purchaseAmount.buyCountOfLotto(manual.size());
+        Lottos auto = LottoMachine.buyWith(remainder);
+
+        return Lottos.merge(manual, auto);
+    }
+
+    private LottoMoney askPurchaseAmount() {
         PrintView.askPurchaseAmountMessage();
-        int purchaseAmount = InputView.getLottoPurchaseAmount();
-        return LottoMachine.buyWith(new LottoMoney(purchaseAmount));
+        return new LottoMoney(InputView.getLottoPurchaseAmount());
+    }
+
+    private Lottos askManualLottosWith(LottoMoney purchaseAmount) {
+        PrintView.askCountOfManualLotto();
+        int countOfManualLotto = InputView.getCountOfManualLotto();
+
+        purchaseAmount.checkAffordable(countOfManualLotto);
+        PrintView.askManualLotto();
+
+        return InputView.getManualLottos(countOfManualLotto);
     }
 
     private LottoReport getReport(Lottos purchasedLottos) {
         PrintView.askWinningNumber();
         List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
+
         PrintView.askBonusNumber();
         int bonusNumber = InputView.getBonusNumber();
+
         return new LottoReport(new WinningLotto(lastWinningNumbers, bonusNumber), purchasedLottos);
     }
 }
