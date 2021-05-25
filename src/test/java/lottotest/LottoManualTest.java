@@ -48,7 +48,7 @@ public class LottoManualTest {
     @Test
     void add_The_Number_of_Winnings() {
         WinningResult winningResult = new WinningResult();
-        winningResult.addCount(4, true);
+        winningResult.addNumberOfWinning(4, true);
 
         assertThat(winningResult.getNumberOfFourthPlace()).isEqualTo(1);
     }

@@ -1,5 +1,6 @@
 package lottotest;
 
+import lotto.model.WinningLotto;
 import lotto.model.WinningPrice;
 import lotto.model.WinningResult;
 import lotto.controller.LottoAutoController;
@@ -23,11 +24,12 @@ public class LottoAutoTest {
     @DisplayName(value = "당첨번호를 입력하면 정수들로 나타내준다.")
     @Test
     void convert_WinningNumbers_to_Integers() {
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             winningNumbers.add(i + 1);
         }
-        assertThat(controller.convertWinningNumbersToInt("1, 2, 3, 4, 5, 6")).isEqualTo(winningNumbers);
+        assertThat(winningLotto.getWinningNumbers()).isEqualTo(winningNumbers);
     }
 
     @DisplayName(value = "당첨금액 enum 에서 당첨금액을 가져와 보여준다.")
@@ -48,7 +50,7 @@ public class LottoAutoTest {
     @Test
     void add_The_Number_of_Winnings() {
         WinningResult winningResult = new WinningResult();
-        winningResult.addCount(4, true);
+        winningResult.addNumberOfWinning(4, true);
 
         assertThat(winningResult.getNumberOfFourthPlace()).isEqualTo(1);
     }
