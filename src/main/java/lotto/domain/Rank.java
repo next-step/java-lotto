@@ -22,15 +22,16 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+
+        if (countOfMatch == SECOND.getCountOfMatch() && matchBonus == SECOND.matchBonus) {
+            return SECOND;
+        }
+
         return Arrays.stream(values())
                 .filter(rank -> (rank.getCountOfMatch() == countOfMatch))
                 .filter(rank -> (rank.withBonusNumber() == matchBonus))
                 .findAny()
                 .orElse(ELSE);
-    }
-
-    public static int countOfMatchWhichNeedsBonusNumberCheck() {
-        return SECOND.getCountOfMatch();
     }
 
     public int getCountOfMatch() {
