@@ -11,6 +11,6 @@ public class LottoMain {
         ResultView.buyLottoInfo(lottos);
 
         LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
-        ResultView.prinfResult(lottoResult);
+        ResultView.printResult(lottoResult);
     }
 }

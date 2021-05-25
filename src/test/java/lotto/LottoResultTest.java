@@ -34,4 +34,13 @@ public class LottoResultTest {
         assertThat(lottoResult.isThird(2)).isTrue();
         assertThat(lottoResult.isFourth(0)).isTrue();
     }
+
+    @DisplayName("수익률 테스트")
+    @Test
+    void lottoProfit_수익률_테스트() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.checkRank(3);
+        double result = lottoResult.calculateProfit(14);
+        assertThat(result).isEqualTo(0.35);
+    }
 }

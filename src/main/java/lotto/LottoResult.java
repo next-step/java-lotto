@@ -1,20 +1,28 @@
 package lotto;
 
 public class LottoResult {
-    private static final int FRIST_REWORD = 2000000000;
+    private static final int FIRST_REWORD = 2000000000;
     private static final int SECOND_REWORD = 1500000;
     private static final int THIRD_REWORD = 50000;
     private static final int FOURTH_REWORD = 5000;
 
-    private int countFristLotto = 0;
+    private static final int FIRST_COLLECT_COUNT = 6;
+    private static final int SECOND_COLLECT_COUNT = 5;
+    private static final int THIRD_COLLECT_COUNT = 4;
+    private static final int FOURTH_COLLECT_COUNT = 3;
+
+    private static final String RESULT_FORM = "%d개 일치 (%d원)- %d개\n";
+    private static final String REMARK = "총 수익률은 %.3f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
+    private int countFirstLotto = 0;
     private int countSecondLotto = 0;
     private int countThirdLotto = 0;
     private int countFourthLotto = 0;
     private int rewardSum = 0;
-    private long profit = 0L;
+    private double profit = 0;
 
-    public int getCountFristLotto() {
-        return countFristLotto;
+    public int getCountFirstLotto() {
+        return countFirstLotto;
     }
 
     public int getCountSecondLotto() {
@@ -29,12 +37,12 @@ public class LottoResult {
         return countFourthLotto;
     }
 
-    public long getProfit() {
+    public double getProfit() {
         return profit;
     }
 
     public boolean isFirst(int expectedCount) {
-        return this.countFristLotto == expectedCount;
+        return this.countFirstLotto == expectedCount;
     }
     public boolean isSecond(int expectedCount) {
         return this.countSecondLotto == expectedCount;
@@ -63,20 +71,30 @@ public class LottoResult {
     }
 
     public void winLotto() {
-        countFristLotto++;
+        countFirstLotto++;
     }
 
-    public void calculateProfit(int lottoCount) {
+    public double calculateProfit(int lottoCount) {
         calculateReward();
         if(rewardSum == 0){
             profit = 0;
-            return;
+            return 0;
         }
-        profit = rewardSum / (lottoCount * LottoValidationUtils.LOTTO_COST);
+        profit = Math.floor((double) rewardSum / (lottoCount * LottoValidationUtils.LOTTO_COST) * 100 ) / 100;
+        return profit;
     }
 
     private void calculateReward() {
-        rewardSum = ((FRIST_REWORD * countFristLotto) + (SECOND_REWORD * countSecondLotto) + (THIRD_REWORD * countThirdLotto)
+        rewardSum = ((FIRST_REWORD * countFirstLotto) + (SECOND_REWORD * countSecondLotto) + (THIRD_REWORD * countThirdLotto)
                 + (FOURTH_REWORD * countFourthLotto));
+    }
+
+    public void printResult() {
+        System.out.printf(RESULT_FORM, FIRST_COLLECT_COUNT, FIRST_REWORD, countFirstLotto);
+        System.out.printf(RESULT_FORM, SECOND_COLLECT_COUNT, SECOND_REWORD, countSecondLotto);
+        System.out.printf(RESULT_FORM, THIRD_COLLECT_COUNT, THIRD_REWORD, countThirdLotto);
+        System.out.printf(RESULT_FORM, FOURTH_COLLECT_COUNT, FOURTH_REWORD, countFourthLotto);
+        System.out.printf(REMARK, profit);
+
     }
 }
