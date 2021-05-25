@@ -33,7 +33,7 @@ public class WinningResult {
 	private long totalAward() {
 		return dashboard.keySet()
 			.stream()
-			.mapToLong(winner -> winner.prize * dashboard.get(winner))
+			.mapToLong(winner -> winner.award() * dashboard.get(winner))
 			.reduce(0L, Long::sum);
 	}
 

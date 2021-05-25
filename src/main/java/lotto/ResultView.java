@@ -24,10 +24,10 @@ public class ResultView {
 			+ "5개 일치 (%d원)- %d개\n"
 			+ "6개 일치 (%d원)- %d개\n"
 			+ "총 수익률은 %.2f입니다.\n",
-			FOURTH_PRIZE.prize, dashboard.get(FOURTH_PRIZE),
-			THIRD_PRIZE.prize, dashboard.get(THIRD_PRIZE),
-			SECOND_PRIZE.prize, dashboard.get(SECOND_PRIZE),
-			FIRST_PRIZE.prize, dashboard.get(FIRST_PRIZE),
+			FOURTH_PRIZE.award(), dashboard.get(FOURTH_PRIZE),
+			THIRD_PRIZE.award(), dashboard.get(THIRD_PRIZE),
+			SECOND_PRIZE.award(), dashboard.get(SECOND_PRIZE),
+			FIRST_PRIZE.award(), dashboard.get(FIRST_PRIZE),
 			result.earningRate()
 		);
 	}
