@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.entity.LottoList;
-import lotto.domain.entity.Number;
 import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;
@@ -50,7 +49,6 @@ public final class Result {
             rank.addFirst();
             winnings = winnings.add(LottoWinnings.FIRST);
         }
-
     }
 
     public BigDecimal winnings() {

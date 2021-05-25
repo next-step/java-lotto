@@ -19,8 +19,7 @@ public class ResultTest {
 
     @BeforeEach
     public void setUp() {
-        result = new Result(new Lotto(new Number(10), new Number(12), new Number(23)
-                , new Number(44), new Number(26), new Number(28)));
+        result = new Result(new Lotto(new Number(10), new Number(12), new Number(23), new Number(44), new Number(26), new Number(28)));
     }
 
     @Test
@@ -42,7 +41,6 @@ public class ResultTest {
         result.confirm(lottoList);
         assertThat(result.winnings()).isEqualTo(new BigDecimal("2001500000"));
     }
-
 
     @Test
     @DisplayName("로또 구매 리스트에 대한 총 수익률을 구한다. case1: 천원 내고 오천원 당첨")

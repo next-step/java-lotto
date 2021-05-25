@@ -19,7 +19,6 @@ public final class LottoController {
         OutputView.printReceiveWinningNumber();
         Result result = new Result(InputView.receiveWinningNumbers());
         result.confirm(lottoList);
-        System.out.println(result.rank());
         OutputView.printStatistics(result.profitRate(), result.rank());
     }
 }
