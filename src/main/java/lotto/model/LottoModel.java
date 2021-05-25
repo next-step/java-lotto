@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoModel {
-    private List<Integer> numbers = new ArrayList<>();
     private static final int numberOfNumbers = 6;
     private static final int maxNumber = 45;
+
+    private List<Integer> numbers = new ArrayList<>();
 
     public LottoModel(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
