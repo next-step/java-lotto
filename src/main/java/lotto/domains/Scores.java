@@ -31,7 +31,7 @@ public class Scores {
         long sum = 0;
 
         for (Prize prize : this.scores.keySet()) {
-            long money = (long)prize.getPrize() * (long)scores.get(prize);
+            long money = (long)prize.getPrize() * (long)this.scores.get(prize);
             sum += money;
         }
 

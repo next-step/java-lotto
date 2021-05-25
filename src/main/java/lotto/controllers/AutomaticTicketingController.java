@@ -20,7 +20,7 @@ public class AutomaticTicketingController implements Controller {
     @Override
     public void run() {
         int ticketsAmount = loadTicketsAmount();
-        Tickets tickets = buyNewTickets(ticketsAmount);
+        Tickets tickets = buyAutomatedTickets(ticketsAmount);
 
         Display.show(Message.AUTOMATIC_TICKETING, ticketsAmount);
         Display.show(tickets);
@@ -32,13 +32,13 @@ public class AutomaticTicketingController implements Controller {
         return this.lotto.storage().loadPurchase().ticketsAmount();
     }
 
-    protected Tickets buyNewTickets(int amount) {
+    protected Tickets buyAutomatedTickets(int amount) {
         Tickets tickets = this.automaticTicketing.newTickets(amount);
         this.lotto.storage().saveAutomatedTickets(tickets);
         return tickets;
     }
 
     private void toWinningTicketController() {
-        this.lotto.toWinningTicketController();
+        this.lotto.toWinningNumbersController();
     }
 }

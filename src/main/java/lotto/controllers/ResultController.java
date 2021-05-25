@@ -18,10 +18,11 @@ public class ResultController implements Controller {
 
     @Override
     public void run() {
+        Purchase purchase = loadPurchase();
         WinningNumbers winningNumbers = loadWinningNumbers();
         Tickets automatedTickets = loadAutomatedTickets();
         Scores scores = automatedTickets.scores(winningNumbers);
-        EarningRate earningRate = new EarningRate(scores, loadPurchase());
+        EarningRate earningRate = new EarningRate(scores, purchase);
 
         Reporter.report(scores, earningRate);
 

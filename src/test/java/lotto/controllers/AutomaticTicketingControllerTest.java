@@ -35,7 +35,7 @@ public class AutomaticTicketingControllerTest {
     @DisplayName("자동 티켓 구매")
     @Test
     void buyNewTickets() {
-        assertThat(automaticTicketingController.buyNewTickets(amount).size()).isEqualTo(amount);
+        assertThat(automaticTicketingController.buyAutomatedTickets(amount).size()).isEqualTo(amount);
     }
 
 }

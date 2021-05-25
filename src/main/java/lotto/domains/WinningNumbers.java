@@ -30,7 +30,7 @@ public class WinningNumbers {
 
     @Override
     public String toString() {
-        return this.winningTicket + " " + this.bonusNumber;
+        return this.winningTicket + " + " + this.bonusNumber;
     }
 
 }
