@@ -18,7 +18,7 @@ public class LottoTicketTest {
     @Test
     void check_match_result() {
         //Given
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 6}, 45);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
                 new LottoNumber(13), new LottoNumber(14),
                 new LottoNumber(17), new LottoNumber(18)
@@ -88,7 +88,7 @@ public class LottoTicketTest {
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}, 45));
+        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 45));
 
         //Then
         assertThat(rank).isEqualTo(Rank.THIRD);
@@ -105,7 +105,7 @@ public class LottoTicketTest {
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}, 17));
+        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 17));
 
         //Then
         assertThat(rank).isEqualTo(Rank.SECOND);

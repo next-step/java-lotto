@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 

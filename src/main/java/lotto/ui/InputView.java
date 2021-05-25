@@ -56,7 +56,7 @@ public class InputView {
         return true;
     }
 
-    public int[] receiveIntegerArrayInput() {
+    public Integer[] receiveIntegerArrayInput() {
         String input = "";
         String[] inputs;
         boolean stopReceivingInput = false;
@@ -65,12 +65,12 @@ public class InputView {
             stopReceivingInput = isNotNull(input) && isValidIntegerArray(input);
         }
         inputs = SplitUtil.splitByDelimiter(input);
-        return convertStringArrayToIntArray(inputs);
+        return convertStringArrayToIntegerArray(inputs);
     }
 
-    private int[] convertStringArrayToIntArray(String[] input) {
+    private Integer[] convertStringArrayToIntegerArray(String[] input) {
         int inputLength = input.length;
-        int[] result = new int[inputLength];
+        Integer[] result = new Integer[inputLength];
         for (int i = 0; i < inputLength; i++) {
             result[i] = Integer.parseInt(input[i]);
         }

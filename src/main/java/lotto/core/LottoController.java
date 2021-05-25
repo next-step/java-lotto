@@ -4,6 +4,9 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class LottoController {
 
     private InputView inputView;
@@ -38,30 +41,40 @@ public class LottoController {
 
     public WinningNumbers getWinningNumbers() {
         outputView.printMessage(Message.REQUEST_INPUT_WINNING_NUMBERS);
+        List<Integer> winningNumbersCandidate = null;
         WinningNumbers winningNumbers = null;
+
+        while (winningNumbersCandidate == null) {
+            winningNumbersCandidate = requestWinningNumbersInput();
+        }
+
+        outputView.printMessage(Message.REQUEST_INPUT_BONUS_NUMBERS);
         while (winningNumbers == null) {
-            winningNumbers = requestWinningNumbersInput();
+            winningNumbers = createWinningNumbersWith(winningNumbersCandidate, getBonusNumber());
         }
         return winningNumbers;
     }
 
-    private WinningNumbers requestWinningNumbersInput() {
-        int[] numbers;
-        try {
-            numbers = inputView.receiveIntegerArrayInput();
-        } catch (Exception e) {
-            outputView.printExceptionMessage(e);
-            return null;
-        }
-
+    private WinningNumbers createWinningNumbersWith(List<Integer> numbers, Integer bonusNumber) {
         WinningNumbers winningNumbers;
         try {
-            winningNumbers = new WinningNumbers(numbers, getBonusNumber());
+            winningNumbers = new WinningNumbers(numbers, bonusNumber);
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
         }
         return winningNumbers;
+    }
+
+    private List<Integer> requestWinningNumbersInput() {
+        List<Integer> numbers;
+        try {
+            numbers = Arrays.asList(inputView.receiveIntegerArrayInput());
+        } catch (Exception e) {
+            outputView.printExceptionMessage(e);
+            return null;
+        }
+        return numbers;
     }
 
     public void getLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
@@ -69,7 +82,6 @@ public class LottoController {
     }
 
     private Integer getBonusNumber() {
-        outputView.printMessage(Message.REQUEST_INPUT_BONUS_NUMBERS);
         Integer lottoNumber = null;
         while (lottoNumber == null) {
             lottoNumber = requestBonusNumberInput();

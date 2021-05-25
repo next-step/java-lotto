@@ -17,6 +17,7 @@ public class LottoResultTest {
 
     private List<LottoTicket> tickets;
     private WinningNumbers winningNumbers;
+    List<Integer> winningNumbersInput;
 
     @BeforeEach
     void setUp() {
@@ -25,13 +26,14 @@ public class LottoResultTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         tickets = new ArrayList<>();
         tickets.add(new LottoTicket(numbers));
+        winningNumbersInput = Arrays.asList(1, 2, 3, 4, 5, 18);
     }
 
     @DisplayName("보너스볼이 틀린 경우, 3등에 해당")
     @Test
     void check_result_count_updated() {
         //When
-        winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18}, 7);
+        winningNumbers = new WinningNumbers(winningNumbersInput, 7);
         LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
 
         //Then
@@ -42,7 +44,7 @@ public class LottoResultTest {
     @Test
     void check_result_count_updated_with_bonus() {
         //When
-        winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18}, 6);
+        winningNumbers = new WinningNumbers(winningNumbersInput, 6);
         LottoResult lottoResult = new LottoResult(5000, winningNumbers, tickets);
 
         //Then
@@ -54,7 +56,7 @@ public class LottoResultTest {
     @CsvSource({"1000,1500.00", "5000,300.00", "1500000,1.00"})
     void check_profit_ratio(int purchaseAmount, float profitRatio) {
         //When
-        winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18}, 7);
+        winningNumbers = new WinningNumbers(winningNumbersInput, 7);
         LottoResult lottoResult = new LottoResult(purchaseAmount, winningNumbers, tickets);
 
         //Then
@@ -66,7 +68,7 @@ public class LottoResultTest {
     @CsvSource({"1000,30000.00", "5000,6000.00", "1500000,20.00"})
     void check_profit_ratio_with_bonus(int purchaseAmount, float profitRatio) {
         //When
-        winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 18}, 6);
+        winningNumbers = new WinningNumbers(winningNumbersInput, 6);
         LottoResult lottoResult = new LottoResult(purchaseAmount, winningNumbers, tickets);
 
         //Then

@@ -1,10 +1,13 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningNumbers;
 import lotto.exception.CustomIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -14,7 +17,7 @@ public class WinningNumbersTest {
     @Test
     void throw_exception_when_duplicated() {
         //Given+When
-        int[] input = new int[]{1,2,2,2,2,3};
+        List<Integer> input = Arrays.asList(1, 2, 2, 2, 2, 3);
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input, 6))
@@ -25,7 +28,7 @@ public class WinningNumbersTest {
     @Test
     void throw_exception_when_more_than_six_numbers() {
         //Given+When
-        int[] input = new int[]{1,2,3,4,5,6,7};
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input, 8))
@@ -36,7 +39,7 @@ public class WinningNumbersTest {
     @Test
     void throw_exception_when_less_than_six_numbers() {
         //Given+When
-        int[] input = new int[]{1,2,3,4,5};
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5);
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input, 6))
@@ -47,7 +50,7 @@ public class WinningNumbersTest {
     @Test
     void throw_exception_when_input_is_empty() {
         //Given+When
-        int[] input = new int[]{};
+        List<Integer> input = Collections.emptyList();
 
         //When+Then
         assertThatThrownBy(() -> new WinningNumbers(input, 1))
@@ -58,10 +61,10 @@ public class WinningNumbersTest {
     @Test
     void throw_exception_when_duplicated_bonus_number() {
         //Given+When
-        int[] input = new int[]{1,2,3,4,5,6};
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         //Then
-        assertThatThrownBy(() -> new WinningNumbers(input,1))
+        assertThatThrownBy(() -> new WinningNumbers(input, 1))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
