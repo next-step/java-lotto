@@ -6,37 +6,29 @@ public class InputView {
     public static final String LOTTO_BUY_PAY_INPUT = "구입금액을 입력해 주세요.";
     public static final String WIN_LOTTO_NUMBER_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
 
-    private final Scanner scanner;
-    private final LottoBuy lottoBuy;
+    private Scanner scanner;
 
-    public InputView() {
-        this.scanner = new Scanner(System.in);
-        this.lottoBuy = new LottoBuy();
-    }
-
-    public Lottos lottoBuyStart() {
-        Lottos lottos = new Lottos();
+    public Pay payForLotto() {
+        Pay pay;
         try {
+            scanner = new Scanner(System.in);
             System.out.println(LOTTO_BUY_PAY_INPUT);
-            int pay = this.scanner.nextInt();
-            lottos = lottoBuy.buyLotto(pay);
-        } catch (Exception e) {
-            e.printStackTrace();
+            int payForLotto = scanner.nextInt();
+            pay = new Pay(payForLotto);
         } finally {
-            this.scanner.nextLine();
+            scanner.nextLine();
         }
-        return lottos;
+        return pay;
     }
 
     public Lotto inputWinLottoNumber() {
-        String winNumber = "";
+        String winNumber;
         try {
             System.out.println(WIN_LOTTO_NUMBER_INPUT);
-            winNumber = this.scanner.nextLine();
-        } catch (Exception e) {
-            e.printStackTrace();
+            winNumber = scanner.nextLine();
+            System.out.println(winNumber);
         } finally {
-            this.scanner.close();
+            if (scanner != null) scanner.close();
         }
         return new Lotto(LottoValidationUtils.lottoNumberToList(winNumber));
     }

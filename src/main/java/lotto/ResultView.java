@@ -14,6 +14,10 @@ public class ResultView {
         System.out.println("---------");
     }
 
+    public static void buyLottoInfo(Lottos lottos) {
+        System.out.println(lottos.toString());
+    }
+
     public void prinfResult(LottoResult lottoResult) {
         System.out.printf(FIRST_RANK, lottoResult.getCountFristLotto());
         System.out.println();

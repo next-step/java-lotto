@@ -3,7 +3,11 @@ package lotto;
 public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        Lottos lottos = inputView.lottoBuyStart();
+        LottoBuy lottoBuy = new LottoBuy();
+        Lottos lottos = lottoBuy.buyLotto(inputView.payForLotto());
+        ResultView.buyLottoInfo(lottos);
+
+        inputView.inputWinLottoNumber();
         LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
 
         ResultView resultView = new ResultView();

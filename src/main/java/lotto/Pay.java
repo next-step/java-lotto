@@ -12,6 +12,10 @@ public class Pay {
         this.pay = pay;
     }
 
+    public int countBuyLotto(int lottoCost) {
+        return this.pay / lottoCost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
