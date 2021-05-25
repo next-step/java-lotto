@@ -5,17 +5,15 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-	private StringCalculator() {}
-
 	private static final String DEFAULT_DELIMITER = ",|:";
 	private static final Pattern DEFAULT_DELIMITER_PATTERN = Pattern.compile(DEFAULT_DELIMITER);
 	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\\n(.*)");
-
 	private static final char NUMERIC_CHARACTER_START_0 = '0';
 	private static final char NUMERIC_CHARACTER_END_9 = '9';
-
 	private static final int DELIMITER_GROUP = 1;
 	private static final int TEXT_GROUP = 2;
+	private StringCalculator() {
+	}
 
 	public static int splitAndSum(String text) {
 		if (isEmpty(text)) {

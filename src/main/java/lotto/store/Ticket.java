@@ -6,13 +6,12 @@ import lotto.LottoNumbers;
 
 public class Ticket {
 
+	private final List<LottoNumbers> lottoList;
+	private final Budget budget;
 	public Ticket(List<LottoNumbers> lottoList, Budget budget) {
 		this.lottoList = lottoList;
 		this.budget = budget;
 	}
-
-	private final List<LottoNumbers> lottoList;
-	private final Budget budget;
 
 	public int purchaseCount() {
 		return lottoList.size();

@@ -50,7 +50,7 @@ public class LottoNumbers {
 
 	private int compareToPurchased(LottoNumber purchased, int count) {
 		if (contains(purchased)) {
-			count ++;
+			count++;
 		}
 		return count++;
 	}

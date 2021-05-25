@@ -63,7 +63,7 @@ public class StatisticsCalculatorTest {
 			add(new LottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8)));
 			add(new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9)));
 		}};
-		return new Ticket(purchased,  new Budget(4_000));
+		return new Ticket(purchased, new Budget(4_000));
 	}
 
 }

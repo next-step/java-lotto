@@ -4,13 +4,12 @@ import java.util.Objects;
 
 public class Statistic {
 
+	private final Earn earn;
+	private int count;
 	public Statistic(int repeatedCount, Earn earn) {
 		this.count = repeatedCount;
 		this.earn = earn;
 	}
-
-	private int count;
-	private final Earn earn;
 
 	public int earningPrice() {
 		return count * earn.winningPrice();

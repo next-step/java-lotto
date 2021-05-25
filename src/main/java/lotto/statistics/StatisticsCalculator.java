@@ -73,7 +73,7 @@ public class StatisticsCalculator {
 	}
 
 	public double earningRatio() {
-		return (double) sumEarningPrice() / (double) ticket.budget();
+		return (double)sumEarningPrice() / (double)ticket.budget();
 	}
 
 	private String ratioResultMessage() {

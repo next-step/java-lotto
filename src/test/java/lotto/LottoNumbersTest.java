@@ -25,7 +25,7 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName(value = "로또 넘버 개수가 6개 미만이면 IllegalArgumentException 을 일으킨다")
 	void isCompleteLotto() {
-		assertThrows(IllegalArgumentException.class, ()-> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new LottoNumbers(Arrays.asList(1, 2));
 		});
 	}
@@ -33,7 +33,7 @@ public class LottoNumbersTest {
 	@Test
 	@DisplayName(value = "로또 넘버는 6개로 구성되어 있다")
 	void addLessThanEqualSix() {
-		assertThrows(IllegalArgumentException.class, ()-> {
+		assertThrows(IllegalArgumentException.class, () -> {
 			new LottoNumbers(Arrays.asList(
 				1, 2, 3, 4, 5, 6, 7, 8, 9
 			));
@@ -75,6 +75,5 @@ public class LottoNumbersTest {
 	private LottoNumbers mockLottoNumbers(List<Integer> numbers) {
 		return new LottoNumbers(numbers);
 	}
-
 
 }
