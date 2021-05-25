@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.util.BunchOfLottoGenerator;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -20,8 +21,7 @@ public class LottoController {
 
         Output.printPurchasableMessage(purchasedLottoCount);
 
-        BunchOfLottoGenerator bunchOfLottoGenerator = new BunchOfLottoGenerator(purchasedLottoCount);
-        List<Lotto> bunchOfLotto = bunchOfLottoGenerator.getBunchOfLotto();
+        List<Lotto> bunchOfLotto = BunchOfLottoGenerator.makeBunchOfLotto(purchasedLottoCount);
 
         Output.printBunchOfLottoNumbers(bunchOfLotto);
 

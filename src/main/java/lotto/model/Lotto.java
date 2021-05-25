@@ -18,9 +18,6 @@ public class Lotto {
     }
 
     private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-            throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_MESSAGE);
-        }
         if (lottoNumbers.size() != CORRECT_LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(NOT_CORRECT_LOTTO_NUMBERS_MESSAGE);
         }

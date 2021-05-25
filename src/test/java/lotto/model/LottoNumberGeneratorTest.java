@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

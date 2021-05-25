@@ -7,6 +7,9 @@ import java.util.*;
 public class TypeConvert {
     private static final String STRING_SEPARATOR = ",";
 
+    private TypeConvert() {
+    }
+
     public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
         List<String> stringList = Arrays.asList(inputSting.split(STRING_SEPARATOR));
         Set<LottoNumber> convertedSet = new HashSet<>();

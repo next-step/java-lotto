@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.util.BunchOfLottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,7 @@ public class BunchOfLottoGeneratorTest {
     void getBunchOfLottoTest() {
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(14000);
         int purchasedLottoCount = purchaseCalculator.CalculatePurchasableCount();
-        BunchOfLottoGenerator bunchOfLottoGenerator = new BunchOfLottoGenerator(purchasedLottoCount);
-        List<Lotto> bunchOfLotto = bunchOfLottoGenerator.getBunchOfLotto();
+        List<Lotto> bunchOfLotto = BunchOfLottoGenerator.makeBunchOfLotto(purchasedLottoCount);
 
         Assertions.assertThat(bunchOfLotto.size()).isEqualTo(purchasedLottoCount);
     }
