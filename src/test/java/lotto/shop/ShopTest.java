@@ -2,6 +2,7 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -82,7 +83,7 @@ public class ShopTest {
 
         WinningNumber winningNumber = new WinningNumber(numbers);
 
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 33, 34, 34});
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 34));
         lottoTicket.add(lotto);
         LottoNumber bonusNumber = new LottoNumber(5);
         //when

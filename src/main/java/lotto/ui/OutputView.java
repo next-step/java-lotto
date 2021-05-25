@@ -3,9 +3,12 @@ package lotto.ui;
 import lotto.enums.MessageEnum;
 import lotto.enums.PrizeEnum;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
 import lotto.shop.Money;
+
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printInputMoneyMessage() {

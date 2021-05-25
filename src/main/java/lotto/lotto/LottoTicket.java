@@ -17,8 +17,7 @@ public class LottoTicket {
     public LottoResult matchWinningNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
         lottoTickets.forEach(lotto -> {
-            lotto.retainAll(winningNumber);
-            lottoResult.increaseCount(lotto.answerCount(), lotto.isContainBonus(bonusNumber));
+            lottoResult.increaseCount(lotto.matchingCount(winningNumber), lotto.isContainBonus(bonusNumber));
         });
         return lottoResult;
     }

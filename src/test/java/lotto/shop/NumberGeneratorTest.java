@@ -7,15 +7,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class NumberGeneratorTest {
     @Test
     @DisplayName("숫자 발생")
     void generate() {
         //given
         //when
-        int[] number = NumberGenerator.generate();
+        List<Integer> number = NumberGenerator.generate();
         //then
-        assertThat(number.length).isEqualTo(Lotto.MAX_COUNT);
+        assertThat(number.size()).isEqualTo(Lotto.MAX_COUNT);
     }
 
     @RepeatedTest(100)
@@ -23,7 +25,7 @@ public class NumberGeneratorTest {
     void checkNumber() {
         //given
         //when
-        int[] numbers = NumberGenerator.generate();
+        List<Integer> numbers = NumberGenerator.generate();
         //then
         for (int number : numbers) {
             assertThat(number).isGreaterThan(0);
