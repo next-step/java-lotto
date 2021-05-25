@@ -8,12 +8,23 @@ import java.util.Map;
  * 당첨 결과를 갖고있는 객체
  */
 public final class WinningResult {
+    public static final String BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE = "보너스 번호는 당첨번호와 같을 수 없습니다.";
     private final Map<LottoResult, Integer> lottoResultCounts = new HashMap<>();
     private final Lotto winningLotto;
+    private final LottoNumber bonusLottoNumber;
 
-    public WinningResult(final Lotto winningLotto) {
+    public WinningResult(final Lotto winningLotto, final LottoNumber bonusLottoNumber) {
+        validateDuplicatedBonusNumber(winningLotto, bonusLottoNumber);
         initLottoResultCounts();
         this.winningLotto = winningLotto;
+        this.bonusLottoNumber = bonusLottoNumber;
+    }
+
+    private void validateDuplicatedBonusNumber(final Lotto winningLotto, final LottoNumber bonusLottoNumber) {
+        if (winningLotto.getLottoNumbers()
+                .contains(bonusLottoNumber)) {
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE);
+        }
     }
 
     private void initLottoResultCounts() {
@@ -52,6 +63,7 @@ public final class WinningResult {
     }
 
     private LottoResult getLottoResult(final Lotto unidentifiedLotto) {
-        return LottoResult.findByMatchCount(winningLotto.matchCount(unidentifiedLotto));
+        return LottoResult.findByMatchCount(unidentifiedLotto.matchCount(winningLotto),
+                unidentifiedLotto.matchBonusNumber(bonusLottoNumber));
     }
 }
