@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Lotto {
     public static final int PRICE = 1_000;
-    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final int NUMBER_COUNT = 6;
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
@@ -15,8 +15,8 @@ public class Lotto {
     }
 
     public Lotto(int... numbers) {
-        if (numbers.length > LOTTO_NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lottoNumbers.size()));
+        if (numbers.length != NUMBER_COUNT) {
+            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,numbers.length));
         }
 
         for (int number : numbers) {
@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     private void fillRandomNumbers() {
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+        for (int i = 0; i < NUMBER_COUNT; i++) {
             addRandomNumber();
         }
     }

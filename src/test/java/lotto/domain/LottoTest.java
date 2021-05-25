@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
 import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -38,12 +39,20 @@ public class LottoTest {
     }
 
 
-    @Test
+    @ParameterizedTest
     @DisplayName("당첨번호 갯수가 6개 이상일 때 InvalidLottoGame 에러발생")
-    public void 당첨번호가_6개이상입력() {
-        assertThatThrownBy(()->new Lotto(1,2,3,4,5,6,7))
+    @MethodSource("provideWinNumbersIsNot6")
+    public void 당첨번호가_6개가아닐경우(int[] numbers) {
+        assertThatThrownBy(()->new Lotto(numbers))
                 .isInstanceOf(InvalidLottoGame.class)
-                .hasMessageContaining(InvalidLottoGame.INVALID_LOTTO_GAME);
+                .hasMessage(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,numbers.length));
+    }
+
+    private static Stream<Arguments> provideWinNumbersIsNot6() {
+        return Stream.of(
+                Arguments.of(new int[]{1,2,3,4,5,6,7}),
+                Arguments.of(new int[]{1,2,3,4})
+        );
     }
 
     @Test

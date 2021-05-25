@@ -41,7 +41,7 @@ public class InputView {
     public int[] takeLottoNumbers() {
         int[] lottoNumbers = null;
         output.println(REQUEST_WIN_LOTTO_NUMBER_MESSAGE);
-        while (lottoNumbers == null || lottoNumbers.length < Lotto.LOTTO_NUMBER_COUNT) {
+        while (lottoNumbers == null || lottoNumbers.length < Lotto.NUMBER_COUNT) {
             lottoNumbers = parseLottoNumbers();
         }
         enter();
