@@ -28,24 +28,14 @@ public class ResultView {
 			}
 
 			System.out.println(
-				ranking.getMatchedCount() + "개 일치 (" + Ranking.getWinnerPrice(ranking.getMatchedCount()) + "원)- "
+				ranking.getMatchedCount() + "개 일치 (" + ranking.getWinnerPrice() + "원)- "
 					+ winnerCountByMatchedNumber.get(ranking) + "개");
 		}
 	}
 
 	public static void printProfit(WinnerStatics winnerStatics) {
-		String profit = "이익이";
-
-		if (winnerStatics.getProfitRate() == 1) {
-			profit = "쌤썜이";
-		}
-
-		if (winnerStatics.getProfitRate() < 1) {
-			profit = "손해";
-		}
-
 		System.out.println(
-			"총 수익률은 " + String.format("%.2f", winnerStatics.getProfitRate()) + "입니다.(기준이 1이기 때문에 결과적으로 " + profit
+			"총 수익률은 " + winnerStatics.getProfitRate() + "입니다.(기준이 1이기 때문에 결과적으로 " + winnerStatics.getProfitResult()
 				+ "라는 의미임)");
 	}
 }

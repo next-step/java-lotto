@@ -4,16 +4,22 @@ import java.util.Map;
 
 public class WinnerStatics {
 	private final WinnerTable winnerTable;
-	private final Lottos boughtLottos;
-	private final Lotto winnerLotto;
+	private final ProfitRate profitRate;
 
 	public WinnerStatics(Lottos boughtLottos, Lotto winnerLotto) {
-		this.boughtLottos = boughtLottos;
-		this.winnerLotto = winnerLotto;
-		this.winnerTable = getWinnerTable();
+		this.winnerTable = getWinnerTable(boughtLottos, winnerLotto);
+		this.profitRate = new ProfitRate(setProfitRate(boughtLottos));
 	}
 
-	private WinnerTable getWinnerTable() {
+	private double setProfitRate(Lottos boughtLottos) {
+		return winnerTable.getTotalAmount() / getTotalAmount(boughtLottos);
+	}
+
+	private int getTotalAmount(Lottos boughtLottos) {
+		return boughtLottos.size() * Lotto.LOTTO_PRICE;
+	}
+
+	private WinnerTable getWinnerTable(Lottos boughtLottos, Lotto winnerLotto) {
 		return boughtLottos.announce(winnerLotto);
 	}
 
@@ -25,11 +31,11 @@ public class WinnerStatics {
 		return winnerTable.getWinnerCount(winner);
 	}
 
-	public double getProfitRate() {
-		return winnerTable.getTotalAmount() / getTotalAmount();
+	public String getProfitRate() {
+		return profitRate.getProfitRate();
 	}
 
-	private int getTotalAmount() {
-		return boughtLottos.size() * Lotto.LOTTO_PRICE;
+	public String getProfitResult() {
+		return profitRate.getResult();
 	}
 }
