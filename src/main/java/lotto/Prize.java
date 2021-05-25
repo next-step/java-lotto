@@ -30,4 +30,15 @@ public enum Prize {
 	public Money win() {
 		return win;
 	}
+
+	public static Profit profit(Statistics statistics) {
+		int totalCount = statistics.totalCount();
+		Money win = new Money(0);
+		for (Prize prize : Prize.values()) {
+			int count = statistics.status(prize);
+			Money amount = prize.win().multiply(count);
+			win = win.plus(amount);
+		}
+		return new Profit(win, Store.LOTTO_PRICE.multiply(totalCount));
+	}
 }
