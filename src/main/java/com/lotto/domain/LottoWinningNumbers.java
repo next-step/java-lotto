@@ -64,7 +64,7 @@ public class LottoWinningNumbers {
         String[] splitNumbers = winningNumbers.split(",");
         Set<LottoNumber> set = new HashSet<>();
         for (String sNumber : splitNumbers) {
-            set.add(new LottoNumber(Integer.valueOf(sNumber.trim())));
+            set.add(LottoNumber.valueOf(Integer.valueOf(sNumber.trim())));
         }
         return set;
     }
