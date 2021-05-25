@@ -1,49 +1,42 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.view.Input;
+import lotto.view.Output;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import static lotto.view.Input.*;
-import static lotto.view.Output.*;
-import static lotto.util.TypeConvert.*;
+import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
 
 public class LottoController {
     public void run() {
-        printStartMessage();
+        Output.printStartMessage();
 
-        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(inputMoneyForPurchase());
+        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
         int purchasedLottoCount = purchaseCalculator.CalculatePurchasableCount();
 
-        printPurchasableMessage(purchasedLottoCount);
+        Output.printPurchasableMessage(purchasedLottoCount);
 
         BunchOfLottoGenerator bunchOfLottoGenerator = new BunchOfLottoGenerator(purchasedLottoCount);
         List<Lotto> bunchOfLotto = bunchOfLottoGenerator.getBunchOfLotto();
 
-        printBunchOfLottoNumbers(bunchOfLotto);
+        Output.printBunchOfLottoNumbers(bunchOfLotto);
 
         WinningLogic winningLogic = new WinningLogic();
         WinningLotto winningLotto = makeWinningLotto();
         Map<Integer, Integer> prizes = winningLogic.makePrizes(makeRewards(bunchOfLotto, winningLotto));
 
-        printWinStatics();
-        printPrize(prizes);
-        printYield(winningLogic.makeYield(purchaseCalculator.getPurchaseAmount(), winningLogic.makePrizeMoney(prizes)));
-    }
-
-    public List<Lotto> makeBunchOfLotto(int purchasedLottoCount) {
-        List<Lotto> bunchOfLotto = new ArrayList<>();
-
-        for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLotto.add(new Lotto(LottoNumberGenerator.makeLottoNumber()));
-        }
-
-        return bunchOfLotto;
+        Output.printWinStatics();
+        Output.printPrize(prizes);
+        Output.printYield(winningLogic.makeYield(purchaseCalculator.getPurchaseAmount(), winningLogic.makePrizeMoney(prizes)));
     }
 
     public WinningLotto makeWinningLotto() {
-        Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(inputWinningNumbers());
-        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(inputBonusNumber()));
+        Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());
+        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(Input.inputBonusNumber()));
 
         return new WinningLotto(winningNumbers, bonusBall);
     }

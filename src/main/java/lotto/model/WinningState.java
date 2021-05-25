@@ -1,16 +1,16 @@
 package lotto.model;
 
 public class WinningState {
-    final int matchedCount;
-    final boolean matchingBonusBall;
+    private final int matchedCount;
+    private final boolean bonusBallMatchSuccess;
 
-    public WinningState(int matchedCount, boolean bonusBall) {
+    public WinningState(int matchedCount, boolean bonusBallMatchSuccess) {
         this.matchedCount = matchedCount;
-        this.matchingBonusBall = bonusBall;
+        this.bonusBallMatchSuccess = bonusBallMatchSuccess;
     }
 
-    public boolean getBonusBallState() {
-        return this.matchingBonusBall;
+    public boolean isBonusBallMatchSuccess() {
+        return this.bonusBallMatchSuccess;
     }
 
     public int getMatchedCount() {

@@ -22,7 +22,7 @@ public class WinningLogic {
     public Integer makePrizeMoney(Map<Integer, Integer> prizes) {
         Integer prizeMoney = INITIALIZE_NUMBER;
 
-        for (Reward reward : Reward.values()){
+        for (Reward reward : Reward.values()) {
             prizeMoney += reward.getPrizeMoney() * prizes.get(reward.getPrizeMoney());
         }
 

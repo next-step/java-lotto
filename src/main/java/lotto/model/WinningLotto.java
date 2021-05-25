@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.Set;
 
 import static lotto.model.Lotto.*;
@@ -24,7 +25,7 @@ public class WinningLotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public LottoNumber getBonusBall() {

@@ -6,7 +6,6 @@ import java.util.Set;
 
 public class Lotto {
     public static final int CANDIDATE_LOTTO_NUMBER_SIZE = 45;
-
     public static final int CORRECT_LOTTO_NUMBERS_SIZE = 6;
     public static final String NOT_CORRECT_LOTTO_NUMBERS_MESSAGE = "로또번호는 총 6개여야 합니다.";
     public static final String DUPLICATED_LOTTO_NUMBERS_MESSAGE = "로또번호는 중복이 있을 수 없습니다.";

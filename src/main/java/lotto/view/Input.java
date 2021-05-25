@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static lotto.view.Output.*;
 
 public class Input {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static Integer inputMoneyForPurchase() {
         String purchase = scanner.nextLine();

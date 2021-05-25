@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.Objects;
 
 public class LottoNumber {
-    private static Integer MAX_LOTTO_NUMBER_VALUE = 45;
-    private static Integer MINIMUM_LOTTO_NUMBER_VALUE = 1;
+    private static final int MAX_LOTTO_NUMBER_VALUE = 45;
+    private static final int MINIMUM_LOTTO_NUMBER_VALUE = 1;
     private static final String NOT_VALIDATE_NUMBER_RANGE_MESSAGE = "로또번호는 1~45 사이의 숫자입니다.";
 
-    final int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         validate(lottoNumber);

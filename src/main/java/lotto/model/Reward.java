@@ -29,7 +29,7 @@ public enum Reward {
     }
 
     public static Reward getReward(WinningState winningState) {
-        if (winningState.getBonusBallState() == true && winningState.getMatchedCount() == 5) {
+        if (winningState.isBonusBallMatchSuccess() == true && winningState.getMatchedCount() == 5) {
             return SECOND_PRIZE;
         }
 

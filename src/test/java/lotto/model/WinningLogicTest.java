@@ -33,9 +33,9 @@ public class WinningLogicTest {
 
         assertAll(
                 () -> assertThat(threeMatchedWinningLotto.getMatchedCount()).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLotto.getBonusBallState()).isFalse(),
+                () -> assertThat(threeMatchedWinningLotto.isBonusBallMatchSuccess()).isFalse(),
                 () -> assertThat(threeMatchedWinningLottoWithBonus.getMatchedCount()).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLottoWithBonus.getBonusBallState()).isTrue()
+                () -> assertThat(threeMatchedWinningLottoWithBonus.isBonusBallMatchSuccess()).isTrue()
         );
     }
 

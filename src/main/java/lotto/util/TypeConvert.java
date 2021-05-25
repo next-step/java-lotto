@@ -5,7 +5,7 @@ import lotto.model.LottoNumber;
 import java.util.*;
 
 public class TypeConvert {
-    public static String STRING_SEPARATOR = ",";
+    private static final String STRING_SEPARATOR = ",";
 
     public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
         List<String> stringList = Arrays.asList(inputSting.split(STRING_SEPARATOR));
