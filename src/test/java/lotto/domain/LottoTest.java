@@ -15,24 +15,24 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 @DisplayName("로또 클래스")
 class LottoTest {
     private List<LottoNumber> lottoNumbers1 = Arrays.asList(
-            new LottoNumber(1), new LottoNumber(2),
-            new LottoNumber(3), new LottoNumber(4),
-            new LottoNumber(5), new LottoNumber(6)
+            LottoNumber.of(1), LottoNumber.of(2),
+            LottoNumber.of(3), LottoNumber.of(4),
+            LottoNumber.of(5), LottoNumber.of(6)
     );
     private List<LottoNumber> lottoNumbers2 = Arrays.asList(
-            new LottoNumber(1), new LottoNumber(2),
-            new LottoNumber(3), new LottoNumber(10),
-            new LottoNumber(20), new LottoNumber(30)
+            LottoNumber.of(1), LottoNumber.of(2),
+            LottoNumber.of(3), LottoNumber.of(10),
+            LottoNumber.of(20), LottoNumber.of(30)
     );
     private List<LottoNumber> duplicatedNumbers = Arrays.asList(
-            new LottoNumber(3), new LottoNumber(3),
-            new LottoNumber(3), new LottoNumber(3),
-            new LottoNumber(3), new LottoNumber(3)
+            LottoNumber.of(3), LottoNumber.of(3),
+            LottoNumber.of(3), LottoNumber.of(3),
+            LottoNumber.of(3), LottoNumber.of(3)
     );
     private List<LottoNumber> unOrderedNumber = Arrays.asList(
-            new LottoNumber(6), new LottoNumber(5),
-            new LottoNumber(4), new LottoNumber(3),
-            new LottoNumber(2), new LottoNumber(1)
+            LottoNumber.of(6), LottoNumber.of(5),
+            LottoNumber.of(4), LottoNumber.of(3),
+            LottoNumber.of(2), LottoNumber.of(1)
     );
 
     private Lotto lotto1;
@@ -47,15 +47,15 @@ class LottoTest {
         lotto1 = new Lotto(lottoNumbers1);
         lotto2 = new Lotto(lottoNumbers2);
         winningLotto = lotto1;
-        bonusNumber = new LottoNumber(7);
-        duplicatedNumber = new LottoNumber(1);
+        bonusNumber = LottoNumber.of(7);
+        duplicatedNumber = LottoNumber.of(1);
     }
 
     @Test
     void lottoAscendingOrder() {
         Lotto actual = new Lotto(unOrderedNumber);
 
-        assertThat(actual).hasToString(actual.toString());
+        assertThat(actual).hasToString(lottoNumbers1.toString());
     }
 
     @Nested

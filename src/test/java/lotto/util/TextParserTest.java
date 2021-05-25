@@ -4,6 +4,8 @@ import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -27,8 +29,8 @@ class TextParserTest {
             void it_return_lotto_numbers() {
                 List<LottoNumber> lottoNumbers = TextParser.parseToLottoNumbers(text);
                 assertThat(lottoNumbers).containsExactly(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
                 );
             }
         }
@@ -58,5 +60,11 @@ class TextParserTest {
                         .isThrownBy(() -> TextParser.parseToLottoNumbers(text));
             }
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,1", "2,2", "3,3"})
+    void parseText(String input, int result) {
+        assertThat(TextParser.parseToInt(input)).isEqualTo(result);
     }
 }

@@ -37,11 +37,11 @@ public class TextParser {
         return Stream.of(text.split(DELIMITER))
                 .map(String::trim)
                 .map(TextParser::parseToInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(toList());
     }
 
-    private static int parseToInt(String inputText) {
+    public static int parseToInt(String inputText) {
         try {
             return (Integer.parseUnsignedInt(inputText));
         } catch (NumberFormatException e) {

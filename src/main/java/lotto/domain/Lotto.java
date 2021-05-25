@@ -43,7 +43,7 @@ public class Lotto {
      * @return 상금
      */
     public Prize getPrizeMatch(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        int matchCount = winningLotto.getLottoMatchCount();
+        int matchCount = getLottoMatchCount(winningLotto);
         if (winningLotto.isMatch(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER);
         }
@@ -51,9 +51,9 @@ public class Lotto {
         return Prize.of(matchCount, isBonusNumberMatch);
     }
 
-    private int getLottoMatchCount() {
+    private int getLottoMatchCount(Lotto winningLotto) {
         return Math.toIntExact(lottoNumbers.stream()
-                .filter(this::isMatch)
+                .filter(winningLotto::isMatch)
                 .count());
     }
 

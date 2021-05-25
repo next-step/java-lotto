@@ -11,11 +11,29 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        this.lottos = lottos;
+    }
+
+    public Lottos(List<Lotto> lottos, List<Lotto> manualPurchasedLottos) {
+        this.lottos = collectLottos(lottos, manualPurchasedLottos);
+    }
+
+    private List<Lotto> collectLottos(List<Lotto> generatedLottos, List<Lotto> manualPurchasedLottos) {
+        generatedLottos.addAll(manualPurchasedLottos);
+        return new ArrayList<>(generatedLottos);
+    }
+
+    public List<Lotto> addLottos(List<Lotto> generatedLottos) {
+        lottos.addAll(generatedLottos);
+        return new ArrayList<>(lottos);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public int getSize() {
+        return lottos.size();
     }
 
     @Override
