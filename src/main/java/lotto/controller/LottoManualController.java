@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.LottoModel;
-import lotto.model.LottoPrice;
-import lotto.model.WinningPrice;
-import lotto.model.WinningResult;
+import lotto.model.*;
 import lotto.view.LottoManualInputView;
 import lotto.view.LottoManualResultView;
 
@@ -27,14 +24,10 @@ public class LottoManualController {
         setAutoLottos(autoQuantity, lottos);
         resultView.printLottos(manualQuantity, autoQuantity, lottos);
 
-        List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
-        int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
-
-        checkWinningNumbers(winningNumbers);
-        checkBonusNumber(bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
 
         WinningResult winningResult = new WinningResult();
-        winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
+        winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
@@ -58,27 +51,6 @@ public class LottoManualController {
             winningNumbers.add(number);
         }
         return winningNumbers;
-    }
-
-    private int convertBonusNumberToInt(String bonusStringNumber) {
-        int bonusNumber = Integer.parseInt(bonusStringNumber);
-        return bonusNumber;
-    }
-
-    private void checkWinningNumbers(List<Integer> winningNumbers) {
-        for (int number : winningNumbers) {
-            checkNumber(number);
-        }
-    }
-
-    private void checkBonusNumber(int bonusNumber) {
-        checkNumber(bonusNumber);
-    }
-
-    private void checkNumber(int number) {
-        if (number < 1 || 45 < number) {
-            throw new IllegalArgumentException("당첨번호는 1부터 45까지의 숫자입니다.");
-        }
     }
 
     private float getEarningRate(int earningPrice, int purchasePrice) {
