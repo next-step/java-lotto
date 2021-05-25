@@ -7,6 +7,7 @@ public enum LotteryMatchType {
 	THREE_MATCH(3, Money.won(5_000L)),
 	FOUR_MATCH(4, Money.won(50_000L)),
 	FIVE_MATCH(5, Money.won(1_500_000L)),
+	FIVE_MATCH_WITH_BONUS(5, Money.won(30_000_000L)),
 	SIX_MATCH(6, Money.won(2_000_000_000L));
 
 	private final int matchCount;
@@ -27,7 +28,7 @@ public enum LotteryMatchType {
 
 	public static LotteryMatchType fromInteger(int matchCount) {
 		return Arrays.stream(LotteryMatchType.values())
-			.filter(a -> a.matchCount == matchCount)
+			.filter(matchType -> matchType.matchCount == matchCount)
 			.findFirst()
 			.orElse(MISS_MATCH);
 	}

@@ -3,6 +3,7 @@ package lottery;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ class InfoCenterTest {
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
 
-		assertEqualMatchCount(result, 1, 0, 0, 0);
+		assertEqualMatchCount(result, 1, 0, 0, 0, 0);
 	}
 
 	@Test
@@ -47,7 +48,7 @@ class InfoCenterTest {
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
-		assertEqualMatchCount(result, 0, 1, 0, 0);
+		assertEqualMatchCount(result, 0, 1, 0, 0, 0);
 	}
 
 	@Test
@@ -55,9 +56,9 @@ class InfoCenterTest {
 		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 13)));
 		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
 		sut.setLastWeekWinningTicket(lastWinningNumber);
-
+		sut.setBonusNumber(45);
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
-		assertEqualMatchCount(result, 0, 0, 1, 0);
+		assertEqualMatchCount(result, 0, 0, 1, 0, 0);
 	}
 
 	@Test
@@ -67,29 +68,27 @@ class InfoCenterTest {
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
-		assertEqualMatchCount(result, 0, 0, 0, 1);
+		assertEqualMatchCount(result, 0, 0, 0, 1, 0);
 	}
 
 	@Test
 	void 복수의_로또티켓을_체크할수_있다() {
-		List<Ticket> tickets = new ArrayList<>();
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))));
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))));
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))));
+
+		Tickets tickets = getTickets(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
 		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
-		Result result = sut.confirmTicket(Tickets.of(tickets));
+		Result result = sut.confirmTicket(tickets);
 
-		assertEqualMatchCount(result, 0, 0, 0, 3);
+		assertEqualMatchCount(result, 0, 0, 0, 1, 0);
 	}
 
 	@Test
 	void 수익률을_계산한다() {
-		List<Ticket> tickets = new ArrayList<>();
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11))));
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11))));
-		tickets.add(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11))));
+		Tickets tickets = getTickets(Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11),
+			Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11),
+			Sets.newLinkedHashSet(1, 2, 3, 9, 10, 11)
+		);
 
 		Money money = Money.won(3000L);
 		float expected = 5.0f;
@@ -97,19 +96,45 @@ class InfoCenterTest {
 		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
-		Result result = sut.confirmTicket(Tickets.of(tickets));
+		Result result = sut.confirmTicket(tickets);
 		float totalYield = result.getTotalYield(money);
 		assertThat(totalYield).isEqualTo(expected);
 	}
 
+	@Test
+	void 보너스점수로_당첨될_경우() {
+		Tickets tickets = getTickets(
+			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11),
+			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11),
+			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11)
+		);
+		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		sut.setLastWeekWinningTicket(lastWinningNumber);
+		int bonus = 11;
+		sut.setBonusNumber(bonus);
+
+		Result result = sut.confirmTicket(tickets);
+
+		assertEqualMatchCount(result, 0, 0, 0, 0, 3);
+	}
+
 	private void assertEqualMatchCount(Result result, int threeMatchNumber, int fourMatchNumber, int fiveMatchNumber,
-		int sixMatchNumber) {
+		int sixMatchNumber, int bonus) {
 
 		Map<LotteryMatchType, Integer> resultMap = result.getResultMap();
 
 		assertThat(resultMap.getOrDefault(LotteryMatchType.THREE_MATCH, 0)).isEqualTo(threeMatchNumber);
 		assertThat(resultMap.getOrDefault(LotteryMatchType.FOUR_MATCH, 0)).isEqualTo(fourMatchNumber);
-		assertThat(resultMap.getOrDefault(LotteryMatchType.FIVE_MATCH,0)).isEqualTo(fiveMatchNumber);
-		assertThat(resultMap.getOrDefault(LotteryMatchType.SIX_MATCH,0)).isEqualTo(sixMatchNumber);
+		assertThat(resultMap.getOrDefault(LotteryMatchType.FIVE_MATCH, 0)).isEqualTo(fiveMatchNumber);
+		assertThat(resultMap.getOrDefault(LotteryMatchType.FIVE_MATCH_WITH_BONUS, 0)).isEqualTo(bonus);
+		assertThat(resultMap.getOrDefault(LotteryMatchType.SIX_MATCH, 0)).isEqualTo(sixMatchNumber);
+	}
+
+	private Tickets getTickets(LinkedHashSet<Integer>... numbers) {
+		List<Ticket> tickets = new ArrayList<>();
+		for (LinkedHashSet<Integer> number : numbers) {
+			tickets.add(Ticket.of(LottoNumbers.from(number)));
+		}
+		return Tickets.of(tickets);
 	}
 }
