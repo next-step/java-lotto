@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.model.WinningResult;
-import lotto.model.LottoModel;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class LottoAutoInputView {

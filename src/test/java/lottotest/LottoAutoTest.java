@@ -1,9 +1,9 @@
 package lottotest;
 
+import lotto.controller.LottoAutoController;
 import lotto.model.WinningLotto;
 import lotto.model.WinningPrice;
 import lotto.model.WinningResult;
-import lotto.controller.LottoAutoController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoAutoTest {
-    LottoAutoController controller ;
+    LottoAutoController controller;
 
     @BeforeEach
     void setUp() {

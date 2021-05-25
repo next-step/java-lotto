@@ -1,9 +1,9 @@
 package lotto.controller;
 
+import lotto.model.LottoModel;
 import lotto.model.LottoPrice;
 import lotto.model.WinningPrice;
 import lotto.model.WinningResult;
-import lotto.model.LottoModel;
 import lotto.view.LottoManualInputView;
 import lotto.view.LottoManualResultView;
 
