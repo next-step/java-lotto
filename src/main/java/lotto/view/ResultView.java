@@ -14,9 +14,12 @@ public class ResultView {
         System.out.println(lottoTicketsText);
     }
 
-    public void printResultStatistics(int matchingCount, int matchingSum) {
-        System.out.println(matchingCount + "개 일치 (" + WinningType.of(matchingCount).getPrize() + ")-"
-                + matchingSum +"개");
+    public void printResultStatistics(int[] matchCountResults) {
+        System.out.println("\n당첨 통계\n---------");
+        for(int i=3; i<matchCountResults.length; i++) {
+            System.out.println(i + "개 일치 (" + WinningType.of(i).getPrize() + ")-"
+                    + matchCountResults[i] +"개");
+        }
     }
 
     public void printResultProfit(double profit) {

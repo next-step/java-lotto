@@ -9,10 +9,7 @@ public class LottoGamePlayer {
     public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets) {
         WinningType[] winningTypes = lottoTickets.getGameResults(winningLottoTicket);
         int[] matchCountResults = getMatchCountResult(winningTypes);
-        System.out.println("\n당첨 통계\n---------");
-        for(int i=3; i<matchCountResults.length; i++) {
-            resultView.printResultStatistics(i, matchCountResults[i]);
-        }
+        resultView.printResultStatistics(matchCountResults);
     }
 
     public int[] getMatchCountResult(WinningType[] winningTypes) {
