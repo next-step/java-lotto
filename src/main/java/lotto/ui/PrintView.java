@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoList;
+import lotto.domain.Lottos;
 import lotto.domain.LottoReport;
 import lotto.domain.Rank;
 
@@ -24,7 +24,7 @@ public class PrintView {
         System.out.print(ASK_PURCHASE_AMOUNT);
     }
 
-    public static void showPurchasedLotto(LottoList lottos) {
+    public static void showPurchasedLotto(Lottos lottos) {
         showPurchasedLottoAmount(lottos.size());
         lottos.forEach(lotto -> System.out.print(formatLotto(lotto)));
         System.out.println();

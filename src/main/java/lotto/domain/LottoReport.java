@@ -11,7 +11,7 @@ public class LottoReport {
     private final Map<Rank, Integer> countOfMatchByRank = new EnumMap<>(Rank.class);
     private double profitRate;
 
-    public LottoReport(final WinningLotto winners, final LottoList lottos) {
+    public LottoReport(final WinningLotto winners, final Lottos lottos) {
         lottos.forEach(lotto -> updateMatchCountMetrics(winners, lotto));
         updateYield(lottos.size());
     }

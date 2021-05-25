@@ -1,7 +1,7 @@
 package lotto.contoller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoList;
+import lotto.domain.Lottos;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoReport;
 import lotto.domain.WinningLotto;
@@ -10,20 +10,20 @@ import lotto.ui.PrintView;
 
 public class LottoAppController {
     public void run() {
-        LottoList purchasedLottos = buyLotto();
+        Lottos purchasedLottos = buyLotto();
         PrintView.showPurchasedLotto(purchasedLottos);
 
         LottoReport report = getReport(purchasedLottos);
         PrintView.showLottoReport(report);
     }
 
-    private LottoList buyLotto() {
+    private Lottos buyLotto() {
         PrintView.askPurchaseAmountMessage();
         int purchaseAmount = InputView.getLottoPurchaseAmount();
         return LottoMachine.buyWith(purchaseAmount);
     }
 
-    private LottoReport getReport(LottoList purchasedLottos) {
+    private LottoReport getReport(Lottos purchasedLottos) {
         PrintView.askWinningNumber();
         Lotto lastWinningNumbers = new Lotto(InputView.getLastWinningNumber());
         PrintView.askBonusNumber();
