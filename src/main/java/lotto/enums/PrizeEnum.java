@@ -6,7 +6,6 @@ import lotto.lotto.LottoResult;
 import java.util.Arrays;
 
 public enum PrizeEnum {
-    MISSING(0, 0),
     FIFTH(3, 5000),
     FOURTH(4,50000),
     THIRD(5,1500000),
@@ -39,7 +38,7 @@ public enum PrizeEnum {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM));
 
-        if (prize.matchingCount == SECOND.matchingCount && matchBonus) {
+        if (prize.matchingCount == THIRD.matchingCount && matchBonus) {
             return SECOND;
         }
 

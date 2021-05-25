@@ -38,4 +38,8 @@ public class InputView {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ANSWER);
         }
     }
+
+    public static int inputBonusNumber() {
+        return SCANNER.nextInt();
+    }
 }

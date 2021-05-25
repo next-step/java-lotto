@@ -91,4 +91,27 @@ public class ShopTest {
         //then
         assertThat(match.count(PrizeEnum.FIFTH)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("2등 당첨")
+    void testSecond() {
+        //given
+        LottoTicket lottoTicket = new LottoTicket();
+        Set<LottoNumber> numbers = new HashSet<>();
+        for (int i = 1; i < 7; i++) {
+            LottoNumber lottoNumber = new LottoNumber(i);
+            numbers.add(lottoNumber);
+        }
+
+        WinningNumber winningNumber = new WinningNumber(numbers);
+
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
+        lottoTicket.add(lotto);
+        LottoNumber bonusNumber = new LottoNumber(16);
+        //when
+        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+
+        //then
+        assertThat(match.count(PrizeEnum.SECOND)).isEqualTo(1);
+    }
 }

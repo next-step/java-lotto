@@ -36,7 +36,7 @@ public class Lotto {
     }
 
     public boolean isContainBonus(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+        return numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
     private void checkNumber(List<Integer> numbers) {

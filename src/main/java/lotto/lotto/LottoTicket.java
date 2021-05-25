@@ -16,8 +16,11 @@ public class LottoTicket {
 
     public LottoResult matchWinningNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
         LottoResult lottoResult = new LottoResult();
+
         lottoTickets.forEach(lotto -> {
-            lottoResult.increaseCount(lotto.matchingCount(winningNumber), lotto.isContainBonus(bonusNumber));
+            // matchingCount로직에서 중복되는 번호만 남기기 때문에 보너스 번호가 있는지 먼저 검사해야함
+            boolean containBonus = lotto.isContainBonus(bonusNumber);
+            lottoResult.increaseCount(lotto.matchingCount(winningNumber), containBonus);
         });
         return lottoResult;
     }

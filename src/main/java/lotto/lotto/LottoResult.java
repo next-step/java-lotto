@@ -13,6 +13,9 @@ public class LottoResult {
     }
 
     public void increaseCount(int matchingCount, boolean matchBonus) {
+        if (matchingCount < PrizeEnum.FIFTH.matchingCount()) {
+            return;
+        }
         PrizeEnum prizeEnum = PrizeEnum.valueOf(matchingCount, matchBonus);
         int count = getOrDefault(prizeEnum);
         result.put(prizeEnum, ++count);

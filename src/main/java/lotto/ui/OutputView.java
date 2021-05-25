@@ -3,19 +3,16 @@ package lotto.ui;
 import lotto.enums.MessageEnum;
 import lotto.enums.PrizeEnum;
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
 import lotto.shop.Money;
-
-import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printInputMoneyMessage() {
         println(MessageEnum.INPUT_MONEY.message());
     }
 
-    public static void inputWinningNumber() {
+    public static void printWinningNumber() {
         println(MessageEnum.INPUT_LOTTO_ANSWER.message());
     }
 
@@ -41,6 +38,10 @@ public class OutputView {
         printIncome(lottoResult, money);
     }
 
+    public static void printBonusNumber() {
+        println(MessageEnum.INPUT_BONUS_NUMBER.message());
+    }
+
     private static void printLotto(Lotto lotto) {
         String collect = lotto.numbersToString();
         println("[" + collect + "]");
@@ -55,7 +56,11 @@ public class OutputView {
     }
 
     private static void printLottoResult(PrizeEnum prizeEnum, int prize, LottoResult matchAnswer) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", prizeEnum.matchingCount(), prize, matchAnswer.count(prizeEnum));
+        String bonusInfo = "";
+        if (prizeEnum.equals(PrizeEnum.SECOND)) {
+            bonusInfo = MessageEnum.BONUS_BALL_MESSAGE.message();
+        }
+        System.out.printf("%d개 일치" + bonusInfo + "(%d원)- %d개\n", prizeEnum.matchingCount(), prize, matchAnswer.count(prizeEnum));
     }
 
     private static void printIncome(LottoResult lottoResult, Money money) {

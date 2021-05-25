@@ -17,9 +17,10 @@ public class LottoGame {
         LottoTicket lottoTicket = shop.buyAutoLotto(money);
         OutputView.printLottoAmount(lottoTicket.matchingCount());
         OutputView.printLottoTicket(lottoTicket);
-        OutputView.inputWinningNumber();
+        OutputView.printWinningNumber();
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
-        LottoNumber bonusNumber = new LottoNumber(5);
+        OutputView.printBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
         LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         OutputView.resultMessage();
         OutputView.resultIncome(lottoResult, money);
