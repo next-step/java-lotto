@@ -27,12 +27,12 @@ public class Extractor {
         return splitOperandsByDefaultDelimiter(this.input);
     }
 
-    private String extractOperands(Matcher matcher) {
-        return matcher.group(OPERAND_POSITION);
-    }
-
     private String extractCustomDelimiter(Matcher matcher) {
         return matcher.group(CUSTOM_DELIMITER_POSITION);
+    }
+
+    private String extractOperands(Matcher matcher) {
+        return matcher.group(OPERAND_POSITION);
     }
 
     private String[] splitOperandsByDefaultDelimiter(String input) {
