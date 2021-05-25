@@ -1,14 +1,9 @@
 package step3.winning;
 
-import step3.lotto.LottoNumber;
-import step3.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class WinningNumbersTest {
@@ -40,14 +35,5 @@ class WinningNumbersTest {
             new WinningNumbers(numbers);
         }).isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("당첨번호는 6자리 숫자로 구성되어야합니다.");
-    }
-
-    @DisplayName("당첨번호 안에 숫자가 포함되어있는지 확인")
-    @ParameterizedTest
-    @CsvSource(value = {"3:1", "7:0", "1:1"}, delimiter = ':')
-    void isContainNumber(int number, int expected) {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
-        int result = winningNumbers.isContainNumber(new LottoNumber(number));
-        assertThat(result).isEqualTo(expected);
     }
 }

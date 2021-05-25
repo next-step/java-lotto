@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step3.lotto.Lotto;
 import step3.lotto.LottoCount;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import step3.lotto.LottoNumber;
 import step3.lotto.LottoTicket;
 import step3.utils.ValidationUtils;
 
@@ -22,7 +22,8 @@ public class WinningStatisticsTest {
         LottoCount lottoCount = new LottoCount(14000);
         Lotto lotto = new Lotto(lottoCount);
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
-        statistics = new WinningStatistics(lotto, winningNumbers, lottoCount);
+        LottoNumber bonusNumber = new LottoNumber(3);
+        statistics = new WinningStatistics(lotto, winningNumbers, lottoCount, bonusNumber);
     }
 
     @DisplayName("로또번호 지정하여 당첨 결과 계산")
@@ -34,6 +35,19 @@ public class WinningStatisticsTest {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         int result = statistics.compareNumbers(ticket, winningNumbers);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("보너스번호 당첨 결과 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"2,4,5,10,11,12:false", "1,2,3,4,5,10:false", "1,2,3,4,5,7:true", "1,2,3,4,5,6:false", "10,11,12,23,34,45:false"}, delimiter = ':')
+    void hasBonusNumber(String inputLottoNumber, boolean expected) {
+        Set<Integer> lottoNumbers = ValidationUtils.validWinningNumbers(inputLottoNumber);
+        LottoTicket ticket = new LottoTicket(lottoNumbers);
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        int points = statistics.compareNumbers(ticket, winningNumbers);
+        boolean result = statistics.hasBonusNumber(points, ticket, bonusNumber);
         assertThat(result).isEqualTo(expected);
     }
 }
