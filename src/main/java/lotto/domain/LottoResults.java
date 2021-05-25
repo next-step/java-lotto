@@ -45,7 +45,7 @@ public class LottoResults {
 
 	public int findRankCount(Rank rank) {
 		return this.resultRanks.stream()
-				.filter(r -> r.equals(rank))
+				.filter(resultRank -> resultRank.equals(rank))
 				.mapToInt(m -> 1)
 				.sum();
 	}
