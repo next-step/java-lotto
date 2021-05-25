@@ -19,19 +19,8 @@ public class ResultAll {
     }
 
     public void won(WonCount wonCount) {
-        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.bonusWonCount());
+        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.isBonusWon());
         resultMap.put(resultScoreEnum, resultMap.get(resultScoreEnum) + 1);
-/*        ResultScoreEnum.valueOf(wonCount.wonCount(), wonCount.bonusWonCount());
-        if (wonCount.wonCount() == 3)
-            resultMap.put(ResultScoreEnum.FIFTH, resultMap.get(ResultScoreEnum.FIFTH) + 1);
-        if (wonCount.wonCount() == 4)
-            resultMap.put(ResultScoreEnum.FOURTH, resultMap.get(ResultScoreEnum.FOURTH) + 1);
-        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == false)
-            resultMap.put(ResultScoreEnum.THIRD, resultMap.get(ResultScoreEnum.THIRD) + 1);
-        if (wonCount.wonCount() == 5 && wonCount.bonusWonCount() == true)
-            resultMap.put(ResultScoreEnum.SECOND, resultMap.get(ResultScoreEnum.SECOND) + 1);
-        if (wonCount.wonCount() == 6)
-            resultMap.put(ResultScoreEnum.FIRST, resultMap.get(ResultScoreEnum.FIRST) + 1);*/
     }
 
     public float yield(int purchaseAmount) {
