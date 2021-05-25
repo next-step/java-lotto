@@ -430,14 +430,14 @@ public class Number {
         - [x] 5-3-1.< 2 Depth 규칙
         - [x] 5-3-2.함수(또는 메서드) 15라인 이하
         - [x] 5-3-3.else 예약어 금지
-- [ ] 6.인수인계
-    - [ ] 6-1.소감 및 피드백 정리
-        - [ ] 6-1-1.느낀점 & 배운점 작성
-        - [ ] 6-1-2.피드백 요청 정리
-    - [ ] 6-2.코드리뷰 요청 및 피드백
-        - [ ] 6-1-1.step3를 gregolee/java-lotto로 push : `git push origin step3`
-        - [ ] 6-1-2.pull request(PR) 작성
-    - [ ] 6-3.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
+- [x] 6.인수인계
+    - [x] 6-1.소감 및 피드백 정리
+        - [x] 6-1-1.느낀점 & 배운점 작성
+        - [x] 6-1-2.피드백 요청 정리
+    - [x] 6-2.코드리뷰 요청 및 피드백
+        - [x] 6-1-1.step3를 gregolee/java-lotto로 push : `git push origin step3`
+        - [x] 6-1-2.pull request(PR) 작성
+    - [x] 6-3.Slack을 통해 merge가 되는지 확인한 후에 코드 리뷰 3단계 과정으로 다음 단계 미션을 진행
 
 ### 2.3. 설계
 #### 2.3.1. Domain-Driven-Design (DDD)
