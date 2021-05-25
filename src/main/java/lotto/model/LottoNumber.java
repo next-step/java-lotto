@@ -27,6 +27,18 @@ public class LottoNumber {
         return lottoNumber;
     }
 
+    public static LottoNumber lottoNumber(String number) {
+        int lottoNumber;
+
+        try {
+            lottoNumber = Integer.parseInt(number);
+        } catch (NumberFormatException numberFormatException) {
+            throw new NumberFormatException("번호를 잘 못 입력하셨습니다.");
+        }
+
+        return lottoNumber(lottoNumber);
+    }
+
     private static void validateLottoNumber(LottoNumber lottoNumber) {
         if (lottoNumber == null) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
