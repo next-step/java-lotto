@@ -24,13 +24,13 @@ class LottoSellerTest {
             new LottoGame(new HashSet(Arrays.asList(from(40), from(41), from(42), from(43), from(44), from(45))))
     );
 
-    private  LottoGameGenerator mockLottoGameGenerator = new LottoGameGenerator() {
+    private LottoGameGenerator mockLottoGameGenerator = new LottoGameGenerator() {
         private int currentIndex = 0;
 
         @Override
         public LottoGame generate() {
             LottoGame result = mockLottoGameList.get(currentIndex++);
-            if(currentIndex == mockLottoGameList.size()) {
+            if (currentIndex == mockLottoGameList.size()) {
                 currentIndex = 0;
             }
             return result;
@@ -61,6 +61,6 @@ class LottoSellerTest {
 
         // When, Then
         assertThatExceptionOfType(NotEnoughMoneyException.class)
-                .isThrownBy(() ->  lottoSeller.sell(purchaseMoney));
+                .isThrownBy(() -> lottoSeller.sell(purchaseMoney));
     }
 }

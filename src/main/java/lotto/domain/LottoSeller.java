@@ -22,7 +22,7 @@ public class LottoSeller {
     private LottoGames generate(BuyableLottoCount buyableLottoCount) {
         LottoGames lottoGames = new LottoGames();
 
-        for(int i = 0; buyableLottoCount.isHigher(i) ; i++) {
+        for (int i = 0; buyableLottoCount.isHigher(i); i++) {
             LottoGame lottoGame = lottoGameGenerator.generate();
             lottoGames.add(lottoGame);
         }

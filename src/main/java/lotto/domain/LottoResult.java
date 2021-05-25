@@ -2,11 +2,8 @@ package lotto.domain;
 
 import lotto.dto.PurchaseMoney;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.math.BigDecimal.valueOf;
 
 public class LottoResult {
     private final int INCREMENT_SIZE = 1;

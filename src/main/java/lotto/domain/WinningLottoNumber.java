@@ -55,7 +55,7 @@ public class WinningLottoNumber {
         String[] tempPlayerInputArray = playerInput.split(",");
         List<String> tempPlayerInputList = Arrays.asList(tempPlayerInputArray);
         Set<String> playerInputSetForSizeCheck = new HashSet<>(tempPlayerInputList);
-        
+
         if (playerInputSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(format(MESSAGE_REQUEST_VALID_LOTTO_COUNT,
                     MIN_LOTTO_NUMBER,

@@ -29,7 +29,7 @@ public class PurchaseMoney {
     }
 
     private void validateIntConstructor(int value) {
-        if(value < 0) {
+        if (value < 0) {
             throw new IllegalArgumentException(MESSAGE_POSITIVE_NUMBER_ONLY);
         }
     }

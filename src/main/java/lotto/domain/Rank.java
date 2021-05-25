@@ -31,6 +31,6 @@ public enum Rank {
                 .filter(rank -> rank.getMatchCount() == matchCount)
                 .findFirst();
 
-        return result.orElseGet(()->Rank.MISS);
+        return result.orElseGet(() -> Rank.MISS);
     }
 }

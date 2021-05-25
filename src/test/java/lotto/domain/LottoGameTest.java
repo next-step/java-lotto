@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static lotto.domain.LottoNumber.from;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("LottoGame 테스트")
 class LottoGameTest {

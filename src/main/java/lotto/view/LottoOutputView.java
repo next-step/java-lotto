@@ -6,7 +6,6 @@ import lotto.domain.Rank;
 import lotto.dto.PurchaseMoney;
 
 import static java.lang.String.format;
-import static java.math.BigDecimal.valueOf;
 
 
 public class LottoOutputView {
@@ -38,7 +37,7 @@ public class LottoOutputView {
         for (Rank eachRank : Rank.values()) {
             prizeDetail.append(createEachPrizeDetail(lottoResult, eachRank));
         }
-        prizeDetail.substring(0, prizeDetail.length()-1);
+        prizeDetail.substring(0, prizeDetail.length() - 1);
         return prizeDetail.toString();
     }
 

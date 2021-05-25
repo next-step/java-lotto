@@ -59,7 +59,7 @@ class LottoGameGeneratorTest {
             @Override
             public LottoGame generate() {
                 LottoGame result = list.get(currentIndex++);
-                if(currentIndex == list.size()) {
+                if (currentIndex == list.size()) {
                     currentIndex = 0;
                 }
                 return result;

@@ -6,10 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.math.BigDecimal;
 import java.util.stream.Stream;
 
-import static java.math.BigDecimal.valueOf;
 import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,6 +57,7 @@ class LottoResultTest {
                 Arguments.of(case4LottoResult, case4ExpectedResult)
         );
     }
+
     @DisplayName("getProfit_정상")
     @ParameterizedTest
     @MethodSource("provideSource_getProfit_정상")

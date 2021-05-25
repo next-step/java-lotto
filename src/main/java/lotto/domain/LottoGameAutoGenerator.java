@@ -30,7 +30,7 @@ public class LottoGameAutoGenerator implements LottoGameGenerator {
     private void createRandomLottoNumbers() {
         randomLottoNumbers = new ArrayList<>();
 
-        for(int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             randomLottoNumbers.add(from(i));
         }
     }
