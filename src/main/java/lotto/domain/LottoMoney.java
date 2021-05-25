@@ -28,6 +28,10 @@ public class LottoMoney {
         return amount % Lotto.PRICE == 0;
     }
 
+    public int countOfAffordableLotto() {
+        return value / Lotto.PRICE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,5 +28,11 @@ public class LottoMoneyTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoMoney(invalidMoneyUnit))
                 .withMessage("로또는 1000원 단위로 구매할 수 있습니다");
+    }
+
+    @ParameterizedTest
+    @CsvSource({"3000,3", "1000,1", "14000,14"})
+    void 로또구입금액은_구입가능한_로또개수를_알려준다(int money, int expectedAffordableLottoCount) {
+        assertThat(new LottoMoney(money).countOfAffordableLotto()).isEqualTo(expectedAffordableLottoCount);
     }
 }
