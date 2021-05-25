@@ -22,13 +22,13 @@ class RankTest {
 
     static Stream<Arguments> provideSourceToValueOf() {
         return Stream.of(
-                Arguments.of("6", Rank.FIRST),
-                Arguments.of("5", Rank.SECOND),
-                Arguments.of("4", Rank.THIRD),
-                Arguments.of("3", Rank.FOURTH),
-                Arguments.of("2", Rank.MISS),
-                Arguments.of("1", Rank.MISS),
-                Arguments.of("0", Rank.MISS)
+                Arguments.of(6, Rank.FIRST),
+                Arguments.of(5, Rank.SECOND),
+                Arguments.of(4, Rank.THIRD),
+                Arguments.of(3, Rank.FOURTH),
+                Arguments.of(2, Rank.MISS),
+                Arguments.of(1, Rank.MISS),
+                Arguments.of(0, Rank.MISS)
         );
     }
 }
