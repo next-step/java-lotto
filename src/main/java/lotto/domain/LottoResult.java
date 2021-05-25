@@ -35,4 +35,8 @@ public class LottoResult {
         }
         return result;
     }
+
+    public double getProfit(PurchaseMoney purchaseMoney) {
+        return (double) getAllPrize() / purchaseMoney.getValue();
+    }
 }
