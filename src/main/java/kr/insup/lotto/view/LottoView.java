@@ -1,9 +1,6 @@
 package kr.insup.lotto.view;
 
-import kr.insup.lotto.domain.Lotto;
-import kr.insup.lotto.domain.Lottos;
-import kr.insup.lotto.domain.LottoPrize;
-import kr.insup.lotto.domain.Statistics;
+import kr.insup.lotto.domain.*;
 
 import java.util.*;
 
@@ -31,11 +28,11 @@ public class LottoView {
         }
     }
 
-    private static List<String> convertNumbersToList(Set<Integer> numbers) {
+    private static List<String> convertNumbersToList(Set<LottoNumber> numbers) {
         List<String> numberList = new ArrayList<>();
 
-        for (Integer number : numbers) {
-            numberList.add(String.valueOf(number));
+        for (LottoNumber number : numbers) {
+            numberList.add(String.valueOf(number.number()));
         }
 
         Collections.sort(numberList, Comparator.comparing(Integer::valueOf));

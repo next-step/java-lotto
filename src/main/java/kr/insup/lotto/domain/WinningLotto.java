@@ -8,29 +8,22 @@ import java.util.Set;
 
 public class WinningLotto {
     private Lotto lotto;
-    private Integer bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
-        this(new Lotto(numbers), bonusNumber);
+        this(new Lotto(numbers), LottoNumber.of(bonusNumber));
     }
 
-    public WinningLotto(Lotto lotto, Integer bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
-        validateBonusNumber(this.bonusNumber);
     }
 
-    private void validateBonusNumber(Integer bonusNumber) {
-        if (LottoConfig.MIN_NUMBER > bonusNumber || LottoConfig.MAX_NUMBER < bonusNumber) {
-            throw new IllegalArgumentException("보너스 번호의 범위값이 잘못 되었습니다!");
-        }
-    }
-
-    public Set<Integer> winningNumbers() {
+    public Set<LottoNumber> winningNumbers() {
         return this.lotto.numbers();
     }
 
-    public Integer bonusNumber() {
+    public LottoNumber bonusNumber() {
         return this.bonusNumber;
     }
 

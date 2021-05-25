@@ -9,14 +9,17 @@ import java.util.Set;
 
 public class Lotto {
 
-    private Set<Integer> numbers;
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto(NumberGenerator numberGenerator) {
         this(numberGenerator.generateNumber());
     }
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new HashSet<>(numbers);
+        for(int i : numbers){
+            this.lottoNumbers.add(LottoNumber.of(i));
+        }
+
         validateLotto();
     }
 
@@ -24,20 +27,10 @@ public class Lotto {
         if (isNumberWrongSize()) {
             throw new IllegalArgumentException("로또 번호의 개수가 잘못 되었습니다!");
         }
-
-        for (Integer number : numbers) {
-            validateNumber(number);
-        }
     }
 
     private boolean isNumberWrongSize() {
-        return numbers.size() != LottoConfig.LOTTO_COUNT;
-    }
-
-    private void validateNumber(Integer number) {
-        if (LottoConfig.MIN_NUMBER > number || LottoConfig.MAX_NUMBER < number) {
-            throw new IllegalArgumentException("로또 번호의 숫자 범위가 잘못 되었습니다!");
-        }
+        return lottoNumbers.size() != LottoConfig.LOTTO_COUNT;
     }
 
     public LottoPrize matchWinningNumber(WinningLotto winningNumber) {
@@ -46,11 +39,15 @@ public class Lotto {
         return lottoPrizeSelector.selectLottoPrize();
     }
 
-    public boolean hasNumber(Integer number) {
-        return this.numbers().contains(number);
+    public boolean hasNumber(LottoNumber number) {
+        return hasNumber(number.number());
     }
 
-    public Set<Integer> numbers() {
-        return numbers;
+    public boolean hasNumber(Integer number) {
+        return this.lottoNumbers.contains(LottoNumber.of(number));
+    }
+
+    public Set<LottoNumber> numbers() {
+        return lottoNumbers;
     }
 }

@@ -14,7 +14,7 @@ public class LottoPrizeSelector {
         int match = 0;
         boolean isBonusBallMatch = false;
 
-        for (Integer number : winningNumber.winningNumbers()) {
+        for (LottoNumber number : winningNumber.winningNumbers()) {
             match = isUserNumberContainNumber(number, match);
         }
 
@@ -25,7 +25,7 @@ public class LottoPrizeSelector {
         return LottoPrize.matchLottoPrize(match, isBonusBallMatch);
     }
 
-    private int isUserNumberContainNumber(Integer number, int match) {
+    private int isUserNumberContainNumber(LottoNumber number, int match) {
         if (userNumber.hasNumber(number)) {
             match++;
         }
