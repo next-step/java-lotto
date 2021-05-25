@@ -12,7 +12,7 @@ public class Lottos {
 
 		values = new ArrayList<>();
 		for (int i = 0; i < money.buyCount(); i++) {
-			values.add(LottoGenerator.randomLotto());
+			values.add(new Lotto());
 		}
 	}
 
