@@ -15,7 +15,7 @@ public class RandomGenerateStrategy implements LottoNumbersGenerateStrategy {
 	@Override
 	public List<LottoNumbers> generate(Count count) {
 		return count.streamFromZero()
-			.mapToObj((i) -> new LottoNumbers(generateRandomNumbers()))
+			.mapToObj((i) -> LottoNumbers.of(generateRandomNumbers()))
 			.collect(Collectors.toList());
 	}
 

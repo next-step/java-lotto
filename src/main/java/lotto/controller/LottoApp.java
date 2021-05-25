@@ -72,7 +72,7 @@ public class LottoApp {
 
 	private LottoNumbers inputLottoNumbers() {
 		lottoAppOutput.printWinningNumbersInputView();
-		return new LottoNumbers(lottoAppInput.inputNumbers());
+		return LottoNumbers.of(lottoAppInput.inputNumbers());
 	}
 
 	private LottoNumber inputBonusNumber() {

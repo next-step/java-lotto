@@ -14,7 +14,7 @@ public class NumbersInputStrategy implements LottoNumbersGenerateStrategy {
 	@Override
 	public List<LottoNumbers> generate(Count count) {
 		return count.streamFromZero()
-			.mapToObj((i) -> new LottoNumbers(numbersSupplier.get()))
+			.mapToObj((i) -> LottoNumbers.of(numbersSupplier.get()))
 			.collect(Collectors.toList());
 	}
 }

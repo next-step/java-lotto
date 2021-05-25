@@ -34,7 +34,7 @@ public class LottoNumbersTest {
 	@ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7", "1,1,2,3,4,5", "1,1,2,3,4,5,7"})
 	public void validationLottoNumbersTest(String notValidInput) {
 		List<Integer> numbers = splitAndMapToInt(notValidInput);
-		assertThatThrownBy(() -> new LottoNumbers(numbers))
+		assertThatThrownBy(() -> LottoNumbers.of(numbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -49,10 +49,17 @@ public class LottoNumbersTest {
 	@DisplayName("LottoNumbers 는 당첨번호와 비교해서 일치하는 개수를 반환한다.")
 	@CsvSource(value = {"1,2,3,4,5,6:6", "10,30,20,35,9,19:0", "2,3,1,7,9,8:3"}, delimiter = ':')
 	public void matchTest(String inputWinningNumbers, int expectedMatchCount) {
-		LottoNumbers winningNumbers = new LottoNumbers(splitAndMapToInt(inputWinningNumbers));
+		LottoNumbers winningNumbers = LottoNumbers.of(splitAndMapToInt(inputWinningNumbers));
 
 		int matchCount = lottoNumbers.countOfMatch(winningNumbers);
 
 		assertThat(matchCount).isEqualTo(expectedMatchCount);
 	}
+
+	@Test
+	@DisplayName("로또 번호 순서가 달라도 구성이 같으면 같은 로또 번호 이다")
+	public void equalsTest() {
+		assertThat(LottoNumbers.of(1, 2, 3, 4, 5, 6)).isEqualTo(LottoNumbers.of(6, 5, 4, 3, 2, 1));
+	}
+
 }

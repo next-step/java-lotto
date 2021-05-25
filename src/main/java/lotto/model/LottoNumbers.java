@@ -12,16 +12,20 @@ import java.util.Set;
 
 public class LottoNumbers {
 	static final int LENGTH = 6;
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
-	public LottoNumbers(List<Integer> inputNumbers) {
+	private LottoNumbers(List<Integer> inputNumbers) {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
 		this.lottoNumbers = mapToLottoNumbers(inputNumbers);
 	}
 
+	public static LottoNumbers of(List<Integer> inputNumbers) {
+		return new LottoNumbers(inputNumbers);
+	}
+
 	static LottoNumbers of(Integer... numbers) {
-		return new LottoNumbers(Arrays.asList(numbers));
+		return LottoNumbers.of(Arrays.asList(numbers));
 	}
 
 	private void validateDuplicate(List<Integer> numbers) {
@@ -35,10 +39,10 @@ public class LottoNumbers {
 		}
 	}
 
-	private List<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
+	private Set<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
 		return numbers.stream()
 			.map(LottoNumber::of)
-			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
+			.collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
 	}
 
 	List<Integer> getNumbers() {
