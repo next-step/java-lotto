@@ -15,7 +15,8 @@ public class Main {
         Lotto lotto = new Lotto(lottoCount);
         ResultView.printLotto(lotto.getLottoTickets());
         WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers());
-        WinningStatistics winningStatistics = new WinningStatistics(lotto, winningNumbers, lottoCount);
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        WinningStatistics winningStatistics = new WinningStatistics(lotto, winningNumbers, lottoCount, bonusNumber);
         ResultView.printStatistics(winningStatistics);
     }
 }

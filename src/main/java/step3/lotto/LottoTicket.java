@@ -8,6 +8,8 @@ public class LottoTicket {
     private static final int LOTTO_END_DIGIT = 6;
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
     private static final List<Integer> DEFAULT_NUMBERS = new ArrayList<>();
 
     static {
@@ -59,8 +61,8 @@ public class LottoTicket {
 
     public int isContainNumber(LottoNumber number) {
         if (lottoTicket.contains(number)) {
-            return 1;
+            return ONE;
         }
-        return 0;
+        return ZERO;
     }
 }
