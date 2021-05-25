@@ -15,9 +15,9 @@ public final class Lotto {
         checkValid();
     }
 
-    public Lotto() {
-        LottoGenerator automatic = new AutomaticLottoGenerator();
-        lottoNumbers.addAll(automatic.numberGenerator());
+    public Lotto(LottoGenerator lottoGenerator) {
+        lottoGenerator = new AutomaticLottoGenerator();
+        lottoNumbers.addAll(lottoGenerator.numberGenerator());
         checkValid();
     }
 

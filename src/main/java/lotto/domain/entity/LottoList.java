@@ -1,6 +1,7 @@
 package lotto.domain.entity;
 
 import lotto.domain.Lotto;
+import lotto.domain.generator.AutomaticLottoGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ public final class LottoList {
 
     public LottoList(int purchaseCount) {
         for (int i = 0; i < purchaseCount; i++) {
-            lottoList.add(new Lotto());
+            lottoList.add(new Lotto(new AutomaticLottoGenerator()));
         }
     }
 
