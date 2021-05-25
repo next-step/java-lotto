@@ -19,8 +19,9 @@ public class Lotto {
     }
 
     public int matchingCount(WinningNumber winningNumber) {
-        retainAll(winningNumber);
-        return numbers.size();
+        return (int) numbers.stream()
+                .filter(winningNumber.numbers()::contains)
+                .count();
     }
 
     private void retainAll(WinningNumber winningNumber) {
