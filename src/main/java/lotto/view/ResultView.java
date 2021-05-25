@@ -8,6 +8,9 @@ import lotto.domain.Profit;
 import java.io.PrintStream;
 
 public class ResultView {
+    private static final int MIN_STATIC_RANK = 3;
+    private static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
+
     PrintStream view = new PrintStream(System.out);
     private String ENTER = System.lineSeparator();
     public void enter() {
@@ -31,10 +34,10 @@ public class ResultView {
         Profit profit = statics.getProfit();
         buffer.append("당첨 통계").append(ENTER)
                 .append("---------").append(ENTER);
-        for(int rank = LottoStatics.MIN_STATIC_RANK; rank <= Lotto.NUMBER_COUNT; rank++) {
+        for(int rank = MIN_STATIC_RANK; rank <= Lotto.NUMBER_COUNT; rank++) {
             buffer.append(rank)
                     .append("개 일치 (")
-                    .append(LottoStatics.RANK_PRIZE[rank])
+                    .append(RANK_PRIZE[rank])
                     .append(")- ")
                     .append(statics.getRankCount(rank))
                     .append("개").append(ENTER);

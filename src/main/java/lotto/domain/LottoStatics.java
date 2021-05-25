@@ -4,9 +4,6 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoStatics {
-    // 3개 이상부터 통계
-    public static final int MIN_STATIC_RANK = 3;
-    public static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
 
     private List<Rank> ranks;
 
