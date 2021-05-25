@@ -30,17 +30,17 @@ public class Lotto {
 		}
 	}
 
-	public int match(Lotto targetLotto) {
-		int matchedSize = 0;
+	public Ranking match(Lotto targetLotto) {
+		int matchedCount = 0;
 
 		for (Integer number : targetLotto.lotto) {
-			matchedSize = getMatchedSize(matchedSize, number);
+			matchedCount = getMatchedCount(matchedCount, number);
 		}
 
-		return matchedSize;
+		return Ranking.getWinnerPrice(matchedCount);
 	}
 
-	private int getMatchedSize(int matchedSize, Integer number) {
+	private int getMatchedCount(int matchedSize, Integer number) {
 		if (lotto.contains(number)) {
 			matchedSize++;
 		}

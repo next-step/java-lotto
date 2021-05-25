@@ -17,12 +17,12 @@ public class WinnerStatics {
 		return boughtLottos.announce(winnerLotto);
 	}
 
-	public Map<Integer, Integer> presentAllCount() {
+	public Map<Ranking, Integer> presentAllCount() {
 		return winnerTable.getWinnerTable();
 	}
 
-	public int presentCount(int matchedCount) {
-		return winnerTable.getWinnerCount(matchedCount);
+	public int presentCount(Ranking winner) {
+		return winnerTable.getWinnerCount(winner);
 	}
 
 	public double getProfitRate() {

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import automaticLotto.domain.Lotto;
 import automaticLotto.domain.Lottos;
-import automaticLotto.domain.RankingTable;
+import automaticLotto.domain.Ranking;
 import automaticLotto.domain.WinnerStatics;
 
 public class ResultView {
@@ -21,10 +21,15 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		Map<Integer, Integer> winnerCountByMatchedNumber = winnerStatics.presentAllCount();
-		for (int matchedCount : winnerCountByMatchedNumber.keySet()) {
-			System.out.println(matchedCount + "개 일치 (" + RankingTable.getWinnerPrice(matchedCount) + "원)- "
-				+ winnerCountByMatchedNumber.get(matchedCount) + "개");
+		Map<Ranking, Integer> winnerCountByMatchedNumber = winnerStatics.presentAllCount();
+		for (Ranking ranking : Ranking.values()) {
+			if (ranking == Ranking.RANKING_LAST) {
+				continue;
+			}
+
+			System.out.println(
+				ranking.getMatchedCount() + "개 일치 (" + Ranking.getWinnerPrice(ranking.getMatchedCount()) + "원)- "
+					+ winnerCountByMatchedNumber.get(ranking) + "개");
 		}
 	}
 

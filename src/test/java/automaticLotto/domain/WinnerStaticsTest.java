@@ -24,13 +24,12 @@ public class WinnerStaticsTest {
 	}
 
 	@Test
-	@DisplayName("당첨이 아무도 안됐을 경우(ex, 숫자 2개 일치 등) 0 노출")
+	@DisplayName("당첨이 아무도 안됐을 경우(ex, 숫자 2개 일치 등) 당첨되지 않은 개수 노출")
 	public void present_no_winner_statics() {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 2, 31, 32, 33, 34)));
 
-		assertThat(winnerStatics.presentCount(0)).isEqualTo(0);
-		assertThat(winnerStatics.presentCount(2)).isEqualTo(0);
+		assertThat(winnerStatics.presentCount(Ranking.RANKING_LAST)).isEqualTo(4);
 	}
 
 	@Test
@@ -39,7 +38,7 @@ public class WinnerStaticsTest {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThat(winnerStatics.presentCount(5)).isEqualTo(1);
+		assertThat(winnerStatics.presentCount(Ranking.RANKING_2)).isEqualTo(1);
 	}
 
 	@Test
@@ -57,6 +56,6 @@ public class WinnerStaticsTest {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 41, 42, 43, 44, 45)));
 
-		assertThat(winnerStatics.presentCount(5)).isEqualTo(3);
+		assertThat(winnerStatics.presentCount(Ranking.RANKING_2)).isEqualTo(3);
 	}
 }
