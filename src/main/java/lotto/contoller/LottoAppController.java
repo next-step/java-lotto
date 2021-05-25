@@ -12,22 +12,16 @@ import java.util.List;
 
 public class LottoAppController {
     public void run() {
-        Lottos purchasedLottos = buyLotto();
-        PrintView.showPurchasedLotto(purchasedLottos);
 
-        LottoReport report = getReport(purchasedLottos);
+        LottoMoney purchaseAmount = askPurchaseAmount();
+        Lottos manual = askManualLottosWith(purchaseAmount);
+        Lottos auto = LottoMachine.buyWith(purchaseAmount);
+        PrintView.showPurchasedLotto(manual, auto);
+
+        LottoReport report = getReport(Lottos.merge(manual, auto));
         PrintView.showLottoReport(report);
     }
 
-    private Lottos buyLotto() {
-        LottoMoney purchaseAmount = askPurchaseAmount();
-        Lottos manual = askManualLottosWith(purchaseAmount);
-
-        LottoMoney remainder = purchaseAmount.buyCountOfLotto(manual.size());
-        Lottos auto = LottoMachine.buyWith(remainder);
-
-        return Lottos.merge(manual, auto);
-    }
 
     private LottoMoney askPurchaseAmount() {
         PrintView.askPurchaseAmountMessage();
