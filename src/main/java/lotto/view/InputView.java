@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class InputView {
     private static final int ZERO = 0;
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private Scanner scanner = new Scanner(System.in);
 
     public int money() {
