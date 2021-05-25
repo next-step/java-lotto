@@ -36,7 +36,7 @@ public class LottoTest {
 		Lotto acendingLotto = new Lotto(ascendingRandomNumberList);
 		Lotto notAcendingLotto = new Lotto(notAscendingRandomNumberList);
 
-		assertThat(acendingLotto.equals(notAcendingLotto)).isTrue();
+		assertThat(acendingLotto.toString().equals(notAcendingLotto.toString())).isTrue();
 	}
 
 	@Test
