@@ -1,40 +1,16 @@
 package lotto.view;
 
-import lotto.model.WinningResult;
 import lotto.model.LottoModel;
+import lotto.model.WinningResult;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class LottoAutoView {
-
-    public int inputPrice() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
-    }
-
+public class LottoAutoResultView {
     public void printLotto(int quantity, List<LottoModel> lottos) {
         System.out.println(quantity + "개를 구매했습니다.");
         for (LottoModel lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
-    }
-
-    public String inputWinningNumbers() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
-    }
-
-    public String inputBonusNumber() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
     }
 
     public void outputWinningStatistic(float earningRate) {

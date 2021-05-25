@@ -4,7 +4,8 @@ import lotto.model.LottoPrice;
 import lotto.model.WinningPrice;
 import lotto.model.WinningResult;
 import lotto.model.LottoModel;
-import lotto.view.LottoManualView;
+import lotto.view.LottoManualInputView;
+import lotto.view.LottoManualResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +13,31 @@ import java.util.List;
 public class LottoManualController {
 
     public void start(List<LottoModel> lottos) {
-        LottoManualView view = new LottoManualView();
+        LottoManualInputView inputView = new LottoManualInputView();
+        LottoManualResultView resultView = new LottoManualResultView();
 
-        int price = view.inputPrice();
+        int price = inputView.inputPrice();
 
         LottoPrice lottoPrice = new LottoPrice();
         int quantity = lottoPrice.getQuantity(price);
 
-        int manualQuantity = view.inputManualLottoQuantity();
+        int manualQuantity = inputView.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
-        List<String> manualNumbers = view.inputManualLottoNumbers(manualQuantity);
+        List<String> manualNumbers = inputView.inputManualLottoNumbers(manualQuantity);
         setManualLottos(manualQuantity, manualNumbers, lottos);
         setAutoLottos(autoQuantity, lottos);
-        view.printLottos(manualQuantity, autoQuantity, lottos);
+        resultView.printLottos(manualQuantity, autoQuantity, lottos);
 
-        List<Integer> winningNumbers = convertWinningNumbersToInt(view.inputWinningNumbers());
-        int bonusNumber = convertBonusNumberToInt(view.inputBonusNumber());
+        List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
+        int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
 
         checkWinningNumbers(winningNumbers);
         checkBonusNumber(bonusNumber);
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
-        view.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
+        resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
     }
 
     public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
