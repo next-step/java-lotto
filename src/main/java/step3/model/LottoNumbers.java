@@ -13,7 +13,7 @@ import step3.util.StringUtils;
 public final class LottoNumbers {
 
     private static final int MAX_SIZE = 6;
-    private static final String CHECK_SIZE = "6개의 숫자까지만 담을 수 있습니다.";
+    private static final String CHECK_SIZE = "6개의 숫자를 담아야 합니다.";
     private static final String CHECK_EMPTY = "공백은 불가능 합니다.";
     private static final String CHECK_BONUS = "기존에 있던 수는 보너스 숫자가 될 수 없습니다.";
 
@@ -27,7 +27,7 @@ public final class LottoNumbers {
             .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
-    public LottoNumbers(List<Integer> numbers, Integer bonusNumber) {
+    private LottoNumbers(List<Integer> numbers, Integer bonusNumber) {
         this(numbers);
         checkBonusValidation(bonusNumber);
         this.bonusNumber = new LottoNumber(bonusNumber);
@@ -75,7 +75,7 @@ public final class LottoNumbers {
     }
 
     private boolean isAddAvailableInput(List<Integer> numbers) {
-        return numbers.size() <= MAX_SIZE;
+        return numbers.size() == MAX_SIZE;
     }
 
     private boolean contains(LottoNumber compare) {
