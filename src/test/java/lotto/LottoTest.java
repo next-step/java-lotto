@@ -11,7 +11,7 @@ public class LottoTest {
 
     @Test
     public void countWonNumbers_두개로또번호비교검증() {
-        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGeneratorStrategy() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
                 List<Integer> lottoNumber = new ArrayList<Integer>();
@@ -25,15 +25,17 @@ public class LottoTest {
             }
         });
 
+        LottoNumbersList lottoNumbersList = new LottoNumbersList();
+        lottoNumbersList.appendLottoNumber(lottoNumbers);
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
 
-        Lotto lottoCompare = new Lotto();
-        assertThat(lottoCompare.countWonNumbers(lottoNumber.getLottoNumbers(), lastWonLottoNumber).wonCount()).isEqualTo(6);
+        lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
+        assertThat(lottoNumbersList.getResultAll().getResult().get(ResultScoreEnum.FIRST)).isEqualTo(1);
     }
 
     @Test
     public void countWonNumbers_보너스번호비교검증() {
-        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGeneratorStrategy() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
                 List<Integer> lottoNumber = new ArrayList<Integer>();
@@ -46,10 +48,11 @@ public class LottoTest {
                 return lottoNumber;
             }
         });
-
+        LottoNumbersList lottoNumbersList = new LottoNumbersList();
+        lottoNumbersList.appendLottoNumber(lottoNumbers);
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
 
-        Lotto lottoCompare = new Lotto();
-        assertThat(lottoCompare.countWonNumbers(lottoNumber.getLottoNumbers(), lastWonLottoNumber).isBonusWon()).isTrue();
+        lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
+        assertThat(lottoNumbersList.getResultAll().getResult().get(ResultScoreEnum.SECOND)).isEqualTo(1);
     }
 }

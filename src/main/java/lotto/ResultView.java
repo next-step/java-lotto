@@ -5,9 +5,9 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printPurchasedLottos(LottoNumberList lottoNumberList) {
-        for (int i = 0; i < lottoNumberList.count(); i++) {
-            System.out.println(lottoNumberList.get(i).getLottoNumbers());
+    public void printPurchasedLottos(LottoNumbersList lottoNumbersList) {
+        for (int i = 0; i < lottoNumbersList.count(); i++) {
+            System.out.println(lottoNumbersList.get(i).getLottoNumbers());
         }
     }
 

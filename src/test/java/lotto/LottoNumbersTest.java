@@ -1,6 +1,5 @@
 package lotto;
 
-import calculator.StringAddCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoNumbersTest {
 
     private List<Integer> testLottoNumber;
     private List<Integer> lottoNumberRange;
@@ -41,7 +40,7 @@ public class LottoNumberTest {
 
     @Test
     public void makeLottoNumber_로또번호생성확인() {
-        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGeneratorStrategy() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
                 List<Integer> lottoNumberList = new ArrayList<Integer>();
@@ -55,7 +54,7 @@ public class LottoNumberTest {
             }
         });
 
-        assertThat(lottoNumber.getLottoNumbers().contains(1)).isTrue();
+        assertThat(lottoNumbers.getLottoNumbers().contains(1)).isTrue();
     }
 
     @Test
