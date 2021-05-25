@@ -18,7 +18,11 @@ public class Lottoes {
         return new Lottoes();
     }
 
-    public void buyLotto(final NumberGenerator numberGenerator) {
+    public void buyManualLotto(final List<Integer> lottoNumbers) {
+        this.lottoes.add(Lotto.from(lottoNumbers));
+    }
+
+    public void buyAutoLotto(final NumberGenerator numberGenerator) {
         this.lottoes.add(Lotto.from(numberGenerator));
     }
 
