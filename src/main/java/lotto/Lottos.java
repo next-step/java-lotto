@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.util.Collections.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Lottos {
 	}
 
 	public List<Lotto> values() {
-		return values;
+		return unmodifiableList(values);
 	}
 
 	public int count() {
