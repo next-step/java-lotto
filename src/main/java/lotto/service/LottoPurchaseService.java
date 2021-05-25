@@ -5,8 +5,7 @@ import lotto.domain.LottoTickets;
 
 public class LottoPurchaseService {
 
-    public LottoTickets purchaseTickets(int purchaseAmount) {
-        LottoMoney lottoMoney = LottoMoney.of(purchaseAmount);
-        return LottoTickets.autoTickets(lottoMoney.purchaseCount());
+    public LottoTickets purchaseTickets(LottoMoney purchaseAmount) {
+        return LottoTickets.autoTickets(purchaseAmount.purchaseCount());
     }
 }

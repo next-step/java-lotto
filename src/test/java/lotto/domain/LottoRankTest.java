@@ -14,13 +14,14 @@ class LottoRankTest {
     @DisplayName("기본 등수조회")
     void basicRank() {
         // given when then
-        assertThat(LottoRank.of(0)).isEqualTo(LottoRank.LOSE);
-        assertThat(LottoRank.of(1)).isEqualTo(LottoRank.LOSE);
-        assertThat(LottoRank.of(2)).isEqualTo(LottoRank.LOSE);
-        assertThat(LottoRank.of(3)).isEqualTo(LottoRank.FIFTH);
-        assertThat(LottoRank.of(4)).isEqualTo(LottoRank.FOURTH);
-        assertThat(LottoRank.of(5)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoRank.of(6)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.of(0, false)).isEqualTo(LottoRank.LOSE);
+        assertThat(LottoRank.of(1, false)).isEqualTo(LottoRank.LOSE);
+        assertThat(LottoRank.of(2, false)).isEqualTo(LottoRank.LOSE);
+        assertThat(LottoRank.of(3, false)).isEqualTo(LottoRank.FIFTH);
+        assertThat(LottoRank.of(4, false)).isEqualTo(LottoRank.FOURTH);
+        assertThat(LottoRank.of(5, false)).isEqualTo(LottoRank.THIRD);
+        assertThat(LottoRank.of(5, true)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.of(6, false)).isEqualTo(LottoRank.FIRST);
     }
 
     @ParameterizedTest
@@ -29,7 +30,7 @@ class LottoRankTest {
     void invalidMatchCount(int matchCount) {
         // given when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoRank.of(matchCount))
+                .isThrownBy(() -> LottoRank.of(matchCount, true))
                 .withMessageMatching("매칭 숫자에 해당하는 등수가 존재하지 않습니다.");
     }
 

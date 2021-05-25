@@ -63,7 +63,7 @@ class LottoTicketsTest {
         lottoTicketList.add(ticket13);
         lottoTicketList.add(ticket14);
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
-        LottoRanks ranks = lottoTickets.ranks(winNumbers);
+        LottoRanks ranks = lottoTickets.ranks(winNumbers, LottoNumber.of(34));
 
         // then
         assertThat(ranks.totalReturnRate()).isEqualTo(0.35);

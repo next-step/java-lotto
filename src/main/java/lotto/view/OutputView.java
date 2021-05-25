@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+    private static final String BLANK = " ";
+
     private OutputView() {
         throw new AssertionError();
     }
@@ -32,7 +34,7 @@ public class OutputView {
     }
 
     public static void printWinResult(WinInquiryResponse response) {
-        System.out.println("당첨 통계");
+        System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
         printMatchResult(response.getWinStatisticList());
         printTotalReturnRate(response.getTotalReturnRate());
@@ -48,7 +50,14 @@ public class OutputView {
         if (winStatistic.getRankCount() == 0) {
             return;
         }
-        System.out.println(winStatistic.getRankCount() + " 개 일치 (" + winStatistic.getWinAmount() + "원)" + " - " + winStatistic.getMatchCount() + " 개");
+        System.out.println(winStatistic.getRankCount() + " 개 일치" + printBonusTarget(winStatistic.isMatchBonusTarget()) + "(" + winStatistic.getWinAmount() + "원)" + " - " + winStatistic.getMatchCount() + " 개");
+    }
+
+    private static String printBonusTarget(boolean matchBonusTarget) {
+        if (matchBonusTarget) {
+            return ", 보너스 볼 일치";
+        }
+        return BLANK;
     }
 
     private static void printTotalReturnRate(double totalReturnRate) {
