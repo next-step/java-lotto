@@ -14,8 +14,8 @@ public class LotteryMatchTypeMap {
 		this.matchTypeMap = matchTypeMap;
 	}
 
-	public static LotteryMatchTypeMap of(Map<LotteryMatchType, Integer> collect) {
-		return new LotteryMatchTypeMap(collect);
+	public static LotteryMatchTypeMap of(Map<LotteryMatchType, Integer> map) {
+		return new LotteryMatchTypeMap(map);
 	}
 
 	public Map<LotteryMatchType, Integer> getMatchTypeMap() {

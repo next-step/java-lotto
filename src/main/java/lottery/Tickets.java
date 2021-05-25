@@ -1,6 +1,7 @@
 package lottery;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Tickets {
@@ -22,7 +23,7 @@ public class Tickets {
 	}
 
 	public List<Ticket> getValues() {
-		return value;
+		return Collections.unmodifiableList(value);
 	}
 
 	public Ticket getValue(int i) {
