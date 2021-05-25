@@ -6,6 +6,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class LottoUtils {
 
@@ -13,6 +14,14 @@ public class LottoUtils {
 
 	private LottoUtils() {
 
+	}
+
+	public static Lottos getStringArrayToLottos(String[] lottosString) {
+		Lottos lottos = new Lottos();
+		for (String lottoString : lottosString) {
+			lottos.addLotto(getStringToLotto(lottoString));
+		}
+		return lottos;
 	}
 
 	public static Lotto getStringToLotto(String lottoString) {

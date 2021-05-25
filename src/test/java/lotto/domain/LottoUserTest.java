@@ -15,7 +15,7 @@ public class LottoUserTest {
 
 	@BeforeEach
 	void setUpUser() {
-		user = new LottoUser();
+		user = new LottoUser(10000L);
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class LottoUserTest {
 	@CsvSource(value = {"10000,10", "15000,15", "13500,13", "400000,400"}, delimiter = ',')
 	@DisplayName("로또 구매 테스트")
 	public void buyLotto(int price, int lottoCount) {
-		user.buyGenerateLottos(price);
+		user.buyGenerateLottos();
 		assertThat(user.getLottoCount()).isEqualTo(lottoCount);
 	}
 

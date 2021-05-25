@@ -10,7 +10,7 @@ import lotto.view.LottoOutputView;
 
 public class LottoGame {
 
-	private static LottoUser user = new LottoUser();
+	private static LottoUser user;
 	private static Lotto winningLotto;
 	private static LottoNumber bonusNumber;
 
@@ -20,6 +20,9 @@ public class LottoGame {
 
 	public static void start() {
 		inputPurchaseLotto();
+		inputManualLottos();
+		purchaseAutoLottos();
+		outputPurchaseLottosResult();
 		outputUserLottoStatus();
 		inputLastWeekWinningNumber();
 		inputBonusNumber();
@@ -28,7 +31,20 @@ public class LottoGame {
 
 	private static void inputPurchaseLotto() {
 		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
-		user.buyGenerateLottos(purchasePrice);
+		user = new LottoUser(purchasePrice);
+	}
+
+	private static void inputManualLottos() {
+		String[] manualLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
+		user.buyManualLottos(LottoUtils.getStringArrayToLottos(manualLottos));
+	}
+
+	private static void purchaseAutoLottos() {
+		user.buyGenerateLottos();
+	}
+
+	private static void outputPurchaseLottosResult() {
+		LottoOutputView.printPurchaseLottoResult(1,1);
 	}
 
 	private static void outputUserLottoStatus() {

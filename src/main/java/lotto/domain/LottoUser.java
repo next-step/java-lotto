@@ -5,17 +5,25 @@ import lotto.utils.LottoGenerator;
 public class LottoUser {
 
 	private Lottos lottos;
+	private long price;
 
-	public LottoUser() {
-		lottos = new Lottos();
+	public LottoUser(long price) {
+		this.lottos = new Lottos();
+		this.price = price;
 	}
 
-	public void buyGenerateLottos(final int price) {
+	// todo test
+	public void buyGenerateLottos() {
 		int count = 0;
-		while (count < getBuyLottoCount(price)) {
+		while (count < getBuyAutoLottoCount()) {
 			this.lottos.addLotto(LottoGenerator.generate());
 			count++;
 		}
+	}
+
+	// todo test
+	public void buyManualLottos(Lottos manualLottos) {
+		this.lottos.addAllLottos(manualLottos);
 	}
 
 	public int getLottoCount() {
@@ -30,8 +38,12 @@ public class LottoUser {
 		return this.lottos;
 	}
 
-	private int getBuyLottoCount(int price) {
-		return price / Lotto.LOTTO_PRICE;
+	private long getBuyLottoCount() {
+		return this.price / Lotto.LOTTO_PRICE;
+	}
+
+	private long getBuyAutoLottoCount() {
+		return getBuyLottoCount() - getLottoCount();
 	}
 
 }
