@@ -33,7 +33,7 @@ public class LottoNumbersList {
     }
 
     private void updateResultLotto(SameNumberCountInALotto sameNumberCountInALotto) {
-        resultAll.won(sameNumberCountInALotto);
+        resultAll.updateResult(sameNumberCountInALotto);
     }
 
     public ResultAll getResultAll() {
