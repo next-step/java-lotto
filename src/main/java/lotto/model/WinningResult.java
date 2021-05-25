@@ -34,27 +34,27 @@ public class WinningResult {
         return map.get("numberOfFifthPlace");
     }
 
-    public static void addCount(int count, boolean bonus) {
-        if (count == 3) {
+    public static void addNumberOfWinning(int numberOfWinningNumbers, boolean bonus) {
+        if (numberOfWinningNumbers == 3) {
             int number = map.get("numberOfFifthPlace");
             map.put("numberOfFifthPlace", ++number);
         }
-        if (count == 4) {
+        if (numberOfWinningNumbers == 4) {
             int number = map.get("numberOfFourthPlace");
             map.put("numberOfFourthPlace", ++number);
 
         }
-        if (count == 5 && !bonus) {
+        if (numberOfWinningNumbers == 5 && !bonus) {
             int number = map.get("numberOfThirdPlace");
             map.put("numberOfThirdPlace", ++number);
 
         }
-        if (count == 5 && bonus) {
+        if (numberOfWinningNumbers == 5 && bonus) {
             int number = map.get("numberOfSecondPlace");
             map.put("numberOfSecondPlace", ++number);
 
         }
-        if (count == 6) {
+        if (numberOfWinningNumbers == 6) {
             int number = map.get("numberOfFirstPlace");
             map.put("numberOfFirstPlace", ++number);
         }
@@ -62,9 +62,9 @@ public class WinningResult {
 
     public void getWinningResult(List<LottoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
         for (LottoModel lotto : lottos) {
-            int count = lotto.countWinningNumbers(winningNumbers);
+            int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
             boolean bonus = lotto.contains(bonusNumber);
-            WinningResult.addCount(count, bonus);
+            WinningResult.addNumberOfWinning(numberOfWinningNumbers, bonus);
         }
     }
 }
