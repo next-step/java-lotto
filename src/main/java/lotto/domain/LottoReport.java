@@ -16,6 +16,7 @@ public class LottoReport {
 	public static final String NOTHING = "본전";
 
 	private static final String MESSAGE_FORMAT = "%d개 일치 (%s원)- %d개";
+	private static final String SECOND_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치 (%s원)- %d개";
 	private static final Map<Integer, String> EARNING_RESULT_MAP = new HashMap<>();
 
 	static {
@@ -44,14 +45,21 @@ public class LottoReport {
 	}
 
 	private String buildLottoRankMessage() {
-		return formatMessage(FOURTH) + LINE_SEPARATOR
+		return formatMessage(FIFTH) + LINE_SEPARATOR
+			+ formatMessage(FOURTH) + LINE_SEPARATOR
 			+ formatMessage(THIRD) + LINE_SEPARATOR
 			+ formatMessage(SECOND) + LINE_SEPARATOR
 			+ formatMessage(FIRST) + LINE_SEPARATOR;
 	}
 
-	private String formatMessage(LottoRank fourth) {
-		return String.format(MESSAGE_FORMAT, fourth.matchCount(), fourth.money(), lottoRankMap.getOrDefault(fourth, 0));
+	private String formatMessage(LottoRank lottoRank) {
+		if (lottoRank.equals(SECOND)) {
+			return String.format(SECOND_MESSAGE_FORMAT, lottoRank.matchCount(), lottoRank.money(),
+				lottoRankMap.getOrDefault(lottoRank, 0));
+		}
+
+		return String.format(MESSAGE_FORMAT, lottoRank.matchCount(), lottoRank.money(),
+			lottoRankMap.getOrDefault(lottoRank, 0));
 	}
 
 	public BigDecimal earningRatio() {
