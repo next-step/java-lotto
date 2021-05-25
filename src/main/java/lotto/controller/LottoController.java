@@ -1,7 +1,10 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumbers;
 import lotto.view.InputView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -9,8 +12,8 @@ public class LottoController {
 
     public void lotto(){
         Lotto lotto = new Lotto();
-        int count = lotto.buyCount(inputView.money());
-
+        int buyCount = lotto.buyCount(inputView.money());
+        List<LottoNumbers> lottoNumbers = lotto.autoLottoNumbers(buyCount);
     }
 
 }
