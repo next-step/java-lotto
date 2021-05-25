@@ -11,7 +11,7 @@ public class LottoNumber {
         makeLottoNumber(lottoNumberGeneratorStrategy);
     }
 
-    public void makeLottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+    private void makeLottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         list = lottoNumberGeneratorStrategy.generateLottoNumber();
     }
 
