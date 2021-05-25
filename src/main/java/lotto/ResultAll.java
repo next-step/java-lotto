@@ -17,7 +17,7 @@ public class ResultAll {
     }
 
     public void updateResult(SameNumberCountInALotto sameNumberCountInALotto) {
-        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(sameNumberCountInALotto.wonCount(), sameNumberCountInALotto.isBonusWon());
+        ResultScoreEnum resultScoreEnum = sameNumberCountInALotto.getResultScore();
         resultMap.put(resultScoreEnum, resultMap.get(resultScoreEnum) + 1);
     }
 

@@ -11,11 +11,8 @@ public class SameNumberCountInALotto {
             isBonusWon = true;
     }
 
-    public int wonCount() {
-        return sameNumberCount;
-    }
-
-    public boolean isBonusWon() {
-        return isBonusWon;
+    public ResultScoreEnum getResultScore() {
+        ResultScoreEnum resultScoreEnum = ResultScoreEnum.valueOf(sameNumberCount, isBonusWon);
+        return resultScoreEnum;
     }
 }
