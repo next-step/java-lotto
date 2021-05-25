@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import static lotto.model.LottoNumbers.LOTTO_NUMBER_COUNT;
 
 public class WinningNumbers {
-    private static final String WINNING_NUMBER_CREATE_FAIL_MESSAGE = "당첨 번호 생성에 실패 했습니다.";
+    public static final String WINNING_NUMBER_CREATE_FAIL_MESSAGE = "당첨 번호 생성에 실패 했습니다.";
     private static final String SPLIT_SYMBOL = ",";
     private final List<LottoNumber> winningNumbers;
 
