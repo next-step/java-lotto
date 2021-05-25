@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 import java.util.HashSet;
@@ -8,19 +9,19 @@ import java.util.Set;
 import static lotto.model.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
 
-    private LottoNumberGenerator() {
+    private LottoGenerator() {
     }
 
-    public static Set<LottoNumber> makeLottoNumber() {
-        Set<LottoNumber> lotto = new HashSet<>();
+    public static Lotto makeLotto() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        while (lotto.size() < CORRECT_LOTTO_NUMBERS_SIZE) {
-            lotto.add(new LottoNumber(makeRandomNumber()));
+        while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE) {
+            lottoNumbers.add(new LottoNumber(makeRandomNumber()));
         }
 
-        return lotto;
+        return new Lotto(lottoNumbers);
     }
 
     private static Integer makeRandomNumber() {

@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.util.LottoNumberGenerator;
+import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,9 +48,9 @@ public class LottoTest {
     @DisplayName("로또에서 로또 번호 리스트를 가져올 수 있다.")
     @Test
     void getLottoNumbersTest() {
-        Set<LottoNumber> lottoNumbers = LottoNumberGenerator.makeLottoNumber();
+        Lotto lotto = LottoGenerator.makeLotto();
 
-        assertThat(new Lotto(lottoNumbers)
+        assertThat(lotto
                 .getLottoNumbers()
                 .size()).isEqualTo(Lotto.CORRECT_LOTTO_NUMBERS_SIZE);
     }
