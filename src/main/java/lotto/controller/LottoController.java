@@ -24,7 +24,7 @@ public class LottoController {
         int countOfManualLotto = InputView.inputCountOfManualLotto();
         lottoGame.buyLotto(numberGenerator, InputView.inputManualLottoes(countOfManualLotto));
 
-        ResultView.printPurchaseCountAndLottoes(lottoGame);
+        ResultView.printPurchaseCountAndLottoes(lottoGame, countOfManualLotto);
 
         Lotto enteredWinningLotto = Lotto.from(InputView.inputWinningLottoNumbers());
         LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
