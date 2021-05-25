@@ -28,9 +28,8 @@ public class LottoNumbers {
 	}
 
 	public int matchCountWith(LottoNumbers numbers){
-		Set<Integer> values = this.numbers;
-		values.removeAll(numbers.getValues());
-		return SIZE_OF_TICKET - values.size();
+		this.numbers.removeAll(numbers.getValues());
+		return SIZE_OF_TICKET - this.numbers.size();
 	}
 
 	@Override

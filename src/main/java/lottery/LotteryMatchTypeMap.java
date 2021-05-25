@@ -1,5 +1,6 @@
 package lottery;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ public class LotteryMatchTypeMap {
 	public static final LotteryMatchTypeMap EMPTY = new LotteryMatchTypeMap(new LinkedHashMap<>());
 
 	private final Map<LotteryMatchType, Integer> matchTypeMap;
-
 
 	private LotteryMatchTypeMap(Map<LotteryMatchType, Integer> matchTypeMap) {
 		this.matchTypeMap = matchTypeMap;
@@ -19,7 +19,7 @@ public class LotteryMatchTypeMap {
 	}
 
 	public Map<LotteryMatchType, Integer> getMatchTypeMap() {
-		return matchTypeMap;
+		return Collections.unmodifiableMap(matchTypeMap);
 	}
 
 	public Money getTotalMoney() {
