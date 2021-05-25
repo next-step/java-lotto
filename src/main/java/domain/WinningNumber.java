@@ -1,10 +1,13 @@
 package domain;
 
+import view.InputView;
+
 import java.util.List;
 
 public class WinningNumber {
 
     private final List<LottoNumber> winningNumber;
+    private LottoNumber bonusNumber;
 
     public WinningNumber(List<LottoNumber> winningNumber) {
         this.winningNumber = winningNumber;
@@ -18,4 +21,9 @@ public class WinningNumber {
         return (int) winningNumber.stream()
                 .filter(lottoTicket::contains).count();
     }
+
+    public static WinningNumber generateWinningNumber(String inputNumber) {
+        return InputView.winningNumber(inputNumber);
+    }
+
 }
