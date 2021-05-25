@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningNumbers;
 import lotto.exception.CustomIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +17,7 @@ public class WinningNumbersTest {
         int[] input = new int[]{1,2,2,2,2,3};
 
         //When+Then
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningNumbers(input, 6))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -28,7 +28,7 @@ public class WinningNumbersTest {
         int[] input = new int[]{1,2,3,4,5,6,7};
 
         //When+Then
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningNumbers(input, 8))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -39,7 +39,7 @@ public class WinningNumbersTest {
         int[] input = new int[]{1,2,3,4,5};
 
         //When+Then
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningNumbers(input, 6))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -50,7 +50,7 @@ public class WinningNumbersTest {
         int[] input = new int[]{};
 
         //When+Then
-        assertThatThrownBy(() -> new WinningNumbers(input))
+        assertThatThrownBy(() -> new WinningNumbers(input, 1))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -60,10 +60,8 @@ public class WinningNumbersTest {
         //Given+When
         int[] input = new int[]{1,2,3,4,5,6};
 
-        //When+Then
-        WinningNumbers winningNumbers = new WinningNumbers(input);
-
-        assertThatThrownBy(() -> winningNumbers.addBonusNumber(new BonusNumber(1)))
+        //Then
+        assertThatThrownBy(() -> new WinningNumbers(input,1))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 

@@ -8,76 +8,83 @@ public class LottoController {
 
     private InputView inputView;
     private OutputView outputView;
-    private LottoTickets lottoTickets;
-    private WinningNumbers winningNumbers;
-    private BonusNumber bonusNumber;
 
     public LottoController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
 
-    public void getTickets() {
+    public LottoTickets getTickets() {
         outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
-        boolean stopRequestingInput = false;
-        while (!stopRequestingInput) {
-            stopRequestingInput = requestLottoTicketsInput();
+        LottoTickets lottoTickets = null;
+        while (lottoTickets == null) {
+            lottoTickets = requestLottoTicketsInput();
         }
         outputView.printMessage(Message.INFO_TOTAL_COUNT, lottoTickets.count());
         outputView.printInfo(lottoTickets.toString());
+        return lottoTickets;
     }
 
-    private boolean requestLottoTicketsInput() {
-        boolean stopRequestingInput = true;
+    private LottoTickets requestLottoTicketsInput() {
+        LottoTickets lottoTickets;
         try {
             lottoTickets = new LottoTickets(LottoTicketGenerator.start(), inputView.receiveIntegerInput());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
-            stopRequestingInput = false;
+            return null;
         }
-        return stopRequestingInput;
+        return lottoTickets;
     }
 
-    public void getWinningNumbers() {
+    public WinningNumbers getWinningNumbers() {
         outputView.printMessage(Message.REQUEST_INPUT_WINNING_NUMBERS);
-        boolean stopRequestingInput = false;
-        while (!stopRequestingInput) {
-            stopRequestingInput = requestWinningNumbersInput();
+        WinningNumbers winningNumbers = null;
+        while (winningNumbers == null) {
+            winningNumbers = requestWinningNumbersInput();
         }
+        return winningNumbers;
     }
 
-    private boolean requestWinningNumbersInput() {
-        boolean stopRequestingInput = true;
+    private WinningNumbers requestWinningNumbersInput() {
+        int[] numbers;
         try {
-            winningNumbers = new WinningNumbers(inputView.receiveIntegerArrayInput());
+            numbers = inputView.receiveIntegerArrayInput();
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
-            stopRequestingInput = false;
+            return null;
         }
-        return stopRequestingInput;
+
+        WinningNumbers winningNumbers;
+        try {
+            winningNumbers = new WinningNumbers(numbers, getBonusNumber());
+        } catch (Exception e) {
+            outputView.printExceptionMessage(e);
+            return null;
+        }
+        return winningNumbers;
     }
 
-    public void getLottoResult() {
+    public void getLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
         outputView.printLottoResult(lottoTickets.matchingResultWith(winningNumbers));
     }
 
-    public void getBonusNumber() {
+    private Integer getBonusNumber() {
         outputView.printMessage(Message.REQUEST_INPUT_BONUS_NUMBERS);
-        boolean stopRequestingInput = false;
-        while (!stopRequestingInput) {
-            stopRequestingInput = requestBonusNumberInput();
+        Integer lottoNumber = null;
+        while (lottoNumber == null) {
+            lottoNumber = requestBonusNumberInput();
         }
+        return lottoNumber;
     }
 
-    private boolean requestBonusNumberInput() {
-        boolean stopRequestingInput = true;
+    private Integer requestBonusNumberInput() {
+        int bonusNumber;
         try {
-            bonusNumber = new BonusNumber(inputView.receiveIntegerInput());
-            winningNumbers.addBonusNumber(bonusNumber);
+            bonusNumber = inputView.receiveIntegerInput();
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
-            stopRequestingInput = false;
+            return null;
         }
-        return stopRequestingInput;
+        return bonusNumber;
     }
 }

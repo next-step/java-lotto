@@ -46,15 +46,11 @@ public class LottoTicket {
         return Rank.valueOf(matchCount, haveMatchWithBonusNumber(winningNumbers.bonusNumber()));
     }
 
-    private boolean haveMatchWithBonusNumber(BonusNumber bonusNumber) {
+    private boolean haveMatchWithBonusNumber(LottoNumber bonusNumber) {
         if (bonusNumber == null) {
             return false;
         }
-        List<Integer> lottoNumberList = new ArrayList<>();
-        for (LottoNumber lottoNumber : numbers) {
-            lottoNumberList.add(lottoNumber.number());
-        }
-        return lottoNumberList.contains(bonusNumber.number());
+        return numbers.contains(bonusNumber);
     }
 
     private int increaseCountWhenMatch(LottoNumber number, WinningNumbers winningNumbers) {

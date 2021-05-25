@@ -9,14 +9,15 @@ public class WinningNumbers {
 
     private final int NUMBER_COUNT = 6;
 
-    private final TreeSet<LottoNumber> numbers;
-    private BonusNumber bonusNumber;
-
-    public WinningNumbers(int[] input) throws CustomIllegalArgumentException {
-        checkNotNullOrEmpty(input);
-        checkNumberCount(input);
-        checkDuplicate(input);
-        numbers = saveWinningNumbers(input);
+    private final TreeSet<LottoNumber> winningNumbers;
+    private LottoNumber bonusNumber;
+    
+    public WinningNumbers(int[] winningNumbersArray, int bonusNumberInt) throws CustomIllegalArgumentException {
+        checkNotNullOrEmpty(winningNumbersArray);
+        checkNumberCount(winningNumbersArray);
+        checkDuplicate(winningNumbersArray);
+        winningNumbers = saveWinningNumbers(winningNumbersArray);
+        bonusNumber = saveBonusNumber(bonusNumberInt);
     }
 
     private TreeSet<LottoNumber> saveWinningNumbers(int[] input) {
@@ -50,19 +51,18 @@ public class WinningNumbers {
     }
 
     public boolean contains(LottoNumber number) {
-        return numbers.contains(number);
+        return winningNumbers.contains(number);
     }
 
-    public BonusNumber bonusNumber() {
+    public LottoNumber bonusNumber() {
         return this.bonusNumber;
     }
 
-    public boolean addBonusNumber(BonusNumber bonusNumber) throws CustomIllegalArgumentException{
-        if (numbers.contains(bonusNumber)) {
+    private LottoNumber saveBonusNumber(int number) throws CustomIllegalArgumentException {
+        LottoNumber bonusNumber = new LottoNumber(number);
+        if (winningNumbers.contains(bonusNumber)) {
             throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
         }
-        this.bonusNumber = bonusNumber;
-
-        return true;
+        return bonusNumber;
     }
 }
