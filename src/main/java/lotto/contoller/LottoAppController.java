@@ -1,6 +1,6 @@
 package lotto.contoller;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.domain.Lottos;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoReport;
@@ -22,7 +22,7 @@ public class LottoAppController {
     private Lottos buyLotto() {
         PrintView.askPurchaseAmountMessage();
         int purchaseAmount = InputView.getLottoPurchaseAmount();
-        return LottoMachine.buyWith(purchaseAmount);
+        return LottoMachine.buyWith(new LottoMoney(purchaseAmount));
     }
 
     private LottoReport getReport(Lottos purchasedLottos) {
