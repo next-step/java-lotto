@@ -34,7 +34,7 @@ public class OperandsTest {
         );
     }
 
-    private static Arguments generateSumArgument(int exptecdAnswer, Integer...input) {
-        return Arguments.of(exptecdAnswer, List.of(input));
+    private static Arguments generateSumArgument(int expectedAnswer, Integer...input) {
+        return Arguments.of(expectedAnswer, List.of(input));
     }
 }
