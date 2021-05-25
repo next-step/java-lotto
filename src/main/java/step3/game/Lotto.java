@@ -1,6 +1,5 @@
 package step3.game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +30,11 @@ public class Lotto {
     }
 
     public TotalLotto pickLottoWithPrice(Price price) {
-        List<LottoNumbers> lottoList = new ArrayList<>();
-        int totalCount = price.getBuyCount();
-        for (int index = 0; index < totalCount; index++) {
-            lottoList
-                .add(new LottoNumbers(RandomNumbersGenerator.createNumbers()));
-        }
+        List<LottoNumbers> lottoList = price.getBuyCountStream()
+            .boxed()
+            .map(number -> new LottoNumbers(
+                RandomNumbersGenerator.createNumbers()))
+            .collect(Collectors.toList());
 
         return new TotalLotto(lottoList);
     }
