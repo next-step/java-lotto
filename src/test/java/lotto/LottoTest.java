@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.entity.Number;
+import lotto.domain.generator.AutomaticLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +16,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 1장은 6개의 숫자를 가진다.")
     public void 로또_1장의_사이즈_확인() {
-        Lotto automaticLotto = new Lotto();
+        Lotto automaticLotto = new Lotto(new AutomaticLottoGenerator());
         assertThat(automaticLotto.size()).isEqualTo(6);
 
         assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3)
