@@ -18,30 +18,31 @@ public class Calculator {
             return new Operands(List.of(MINIMUM_OPERAND_VALUE));
         }
 
-        return validateOperands(new Extractor(input).extractOperands());
+        return validateAndAppendOperands(new Extractor(input).extractOperands());
     }
 
     public int sumOperands() {
         return operands.sum();
     }
 
-    private Operands validateOperands(String[] splitedInput) {
+    private Operands validateAndAppendOperands(String[] splitedInput) {
         List<Integer> parseInts = new ArrayList<>();
 
         for (String operand : splitedInput) {
-            validateOperand(parseInts, operand);
+            int validatedOperand = validateOperand(operand);
+            parseInts.add(validatedOperand);
         }
 
         return new Operands(parseInts);
     }
 
-    private void validateOperand(List<Integer> parseInts, String operand) {
+    private int validateOperand(String operand) {
         try {
             int parsedOperand = Integer.parseInt(operand);
 
             validatePositiveOperand(parsedOperand);
 
-            parseInts.add(parsedOperand);
+            return parsedOperand;
 
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 연산 값입니다. : " + operand);
