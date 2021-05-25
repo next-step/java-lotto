@@ -48,6 +48,6 @@ public class LottoGenerator {
 	private List<Integer> getRandomLottoNumbers() {
 		Collections.shuffle(candidateNumbers);
 
-		return candidateNumbers.subList(START_POINT, Lotto.LOTTO_LENGTH);
+		return new ArrayList<>(candidateNumbers.subList(START_POINT, Lotto.LOTTO_LENGTH));
 	}
 }

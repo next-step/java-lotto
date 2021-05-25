@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinnerTable {
-	private static final int WINNER_MINIMUM_CONDITION = 3;
-	private static final int WINNER_MAXIMUM_CONDITION = 6;
 	private static final int NOTHING = 0;
 
 	Map<Integer, Integer> winnerTable;
@@ -16,7 +14,7 @@ public class WinnerTable {
 	}
 
 	private void initiateWinnerTable() {
-		for (int i = WINNER_MINIMUM_CONDITION; i <= WINNER_MAXIMUM_CONDITION; i++) {
+		for (int i = Ranking.RANKING_4.getMatchedCount(); i <= Ranking.RANKING_1.getMatchedCount(); i++) {
 			winnerTable.put(i, NOTHING);
 		}
 	}

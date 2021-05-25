@@ -1,5 +1,6 @@
 package automaticLotto.domain;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -11,11 +12,16 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private Set<Integer> lotto;
+	private List<Integer> lotto;
 
 	public Lotto(List<Integer> randomNumberList) {
-		this.lotto = new HashSet<>(randomNumberList);
-		validateRandomNumberListSize(this.lotto);
+		validateRandomNumberListSize(new HashSet<>(randomNumberList));
+		this.lotto = randomNumberList;
+		sortLottoNumber();
+	}
+
+	private void sortLottoNumber() {
+		lotto.sort(Comparator.comparingInt(x -> x));
 	}
 
 	private void validateRandomNumberListSize(Set<Integer> lotto) {
@@ -34,7 +40,7 @@ public class Lotto {
 		return matchedSize;
 	}
 
-	private Set<Integer> getLotto() {
+	private List<Integer> getLotto() {
 		return this.lotto;
 	}
 
