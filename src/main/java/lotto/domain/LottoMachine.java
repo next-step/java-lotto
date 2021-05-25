@@ -9,7 +9,7 @@ public class LottoMachine {
     }
 
     public static Lottos buyWith(LottoMoney lottoMoney) {
-        int lottoSize = lottoMoney.countOfAffordableLotto();
+        int lottoSize = lottoMoney.countAffordableLotto();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = lottoSize; i > 0; i--) {
             lottos.add(LottoGenerator.getLotto());
