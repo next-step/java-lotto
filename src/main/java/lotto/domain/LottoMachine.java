@@ -7,7 +7,7 @@ import java.util.List;
  * 요청한 돈만큼 랜덤한 로또들을 만들어주는 객체
  */
 public final class LottoMachine {
-    private static final String INVALID_LOTTO_PRICE_MESSAGE = "로또를 구매하려면 최소 1000원 이상을 입력해야합니다.";
+    public static final String INVALID_LOTTO_PRICE_MESSAGE = "로또를 구매하려면 최소 1000원 이상을 입력해야합니다.";
     private final Money lottoPrice;
 
     public LottoMachine(final Money lottoPrice) {

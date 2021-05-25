@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static lotto.domain.LottoMachine.INVALID_LOTTO_PRICE_MESSAGE;
 import static lotto.domain.LottoOptions.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -37,8 +38,9 @@ public class LottoMachineTest {
         final LottoMachine lottoMachine = new LottoMachine(new Money(LOTTO_PRICE));
 
         //when, then
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoMachine.pullSlot(
-                new Money(money), new LottoNumberAutoGenerator()));
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                lottoMachine.pullSlot(new Money(money), new LottoNumberAutoGenerator()))
+                .withMessageMatching(INVALID_LOTTO_PRICE_MESSAGE);
     }
 
 }
