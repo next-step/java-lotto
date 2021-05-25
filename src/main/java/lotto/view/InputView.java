@@ -31,8 +31,7 @@ public final class InputView {
         validateNumber(input);
         validatePositiveNumber(input);
     }
-
-
+    
     private static void validateNumber(String input) {
         try {
             Integer.parseInt(input);

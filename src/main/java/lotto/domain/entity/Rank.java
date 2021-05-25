@@ -1,7 +1,5 @@
 package lotto.domain.entity;
 
-import java.util.Objects;
-
 public class Rank {
 
     private int first = 0;
