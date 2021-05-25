@@ -13,4 +13,6 @@ public class RandomGenerateRule implements GenerateRule{
     public LottoNumber generate() {
         return lottoNumbers.get(cursor++);
     }
+
+    //TODO: cursor 초과 방지
 }

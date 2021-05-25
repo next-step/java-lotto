@@ -45,4 +45,9 @@ public class LottoNumbers {
         Collections.shuffle(lottoNubmers);
         return this;
     }
+
+    public LottoNumbers sort(){
+        Collections.sort(lottoNubmers);
+        return this;
+    }
 }

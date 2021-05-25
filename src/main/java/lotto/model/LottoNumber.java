@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
     private final int MIN_LOTTO_NUM = 1;
     private final int MAX_LOTTO_NUM = 45;
     private final String OUT_OF_NUMER_RANGE_MESSAGE = "out of number range";
@@ -34,5 +34,16 @@ public class LottoNumber {
 
     public int number() {
         return lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber that){
+        if (this.lottoNumber > that.lottoNumber){
+            return 1;
+        }
+        if(this.lottoNumber < that.lottoNumber){
+            return -1;
+        }
+        return 0;
     }
 }

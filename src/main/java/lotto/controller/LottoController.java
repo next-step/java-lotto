@@ -11,7 +11,7 @@ public class LottoController {
         for (int i=0; i<numLottoTiket; i++){
             LottoGenerator lottoGenerator = new LottoGenerator(new RandomGenerateRule());
             LottoNumbers generated = lottoGenerator.generate();
-            System.out.println(generated.toString());
+            System.out.println(generated.sort().toString());
         }
     }
 }
