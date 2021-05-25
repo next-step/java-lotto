@@ -7,18 +7,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private final List<LottoNumber> LOTTO_NUMBERS;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket() {
-        this.LOTTO_NUMBERS = new ArrayList<>(new LottoTicketGenerator().generate());
+        this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate());
     }
 
     public LottoTicket(String lottoNumbersText) {
-        this.LOTTO_NUMBERS = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
+        this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
     }
 
     public List<LottoNumber> getLottoTicket() {
-        return Collections.unmodifiableList(this.LOTTO_NUMBERS);
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
@@ -31,7 +31,7 @@ public class LottoTicket {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return this.LOTTO_NUMBERS.contains(lottoNumber);
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     private int addCount(boolean isContains, int matchCount) {
@@ -42,7 +42,7 @@ public class LottoTicket {
     }
 
     private boolean isMatchBonus(int bonusNumber) {
-        if (this.LOTTO_NUMBERS.contains(new LottoNumber(bonusNumber))) {
+        if (this.lottoNumbers.contains(new LottoNumber(bonusNumber))) {
             return true;
         }
         return false;
@@ -50,7 +50,7 @@ public class LottoTicket {
 
     public String getString() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : this.LOTTO_NUMBERS) {
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
             lottoNumbers.add(lottoNumber.of());
         }
         return lottoNumbers.toString();
