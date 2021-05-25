@@ -41,18 +41,27 @@ public class LottoController {
 			System.out.printf(MATCH_5_NUMBERS.getMessage()+"%d개%n", analysis.match5());
 			System.out.printf(MATCH_6_NUMBERS.getMessage()+"%d개%n", analysis.match6());
 
-			System.out.printf("총 수익률은 %s입니다.", analysis.yield());
+			System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 		}
 	}
 
 	private Integer validMoney(String inputMoney) {
-		//TODO 1000원단위
-		return Integer.parseInt(inputMoney) / 1000;
+		final int money = Integer.parseInt(inputMoney);
+
+		if (money % 1000 > 0) {
+			throw new NumberFormatException("1000원단위로 입력해주세요.");
+		}
+
+		return  money/ 1000;
 	}
 
 	private Integer[] validWinnerNumbers(String winnerNumbers) {
-		//TODO input validation
 		String[] stringNumbers = winnerNumbers.split(",");
+
+		if (stringNumbers.length != LOTTO_NUMBER_LENGTH) {
+			throw new IllegalArgumentException("6자리 숫자를 ,을 이용해 입력해 주세요.");
+		}
+
 		Integer[] numbers = new Integer[LOTTO_NUMBER_LENGTH];
 
 		for (Integer i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
