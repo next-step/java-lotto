@@ -10,6 +10,9 @@ public enum Reward {
     SECOND_PRIZE(5, true, 30_000_000),
     FIRST_PRIZE(6, false, 2_000_000_000);
 
+    private static final int SECOND_PRIZE_COUNT_CONDITION =5;
+    private static final boolean SECOND_PRIZE_BONUS_BALL_CONDITION =true;
+
     private final int matchCount;
     private final boolean bonusBall;
     private final int prizeMoney;
@@ -29,7 +32,7 @@ public enum Reward {
     }
 
     public static Reward getReward(WinningState winningState) {
-        if (winningState.isBonusBallMatchSuccess() == true && winningState.getMatchedCount() == 5) {
+        if (winningState.isSecondPrizeState(SECOND_PRIZE_COUNT_CONDITION,SECOND_PRIZE_BONUS_BALL_CONDITION)) {
             return SECOND_PRIZE;
         }
 
