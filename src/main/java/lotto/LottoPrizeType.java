@@ -10,6 +10,9 @@ public enum LottoPrizeType {
 	FIVE_MATCHED(5, BigDecimal.valueOf(1_500_000)),
 	SIX_MATCHED(6, BigDecimal.valueOf(2_000_000_000));
 
+	private static final int MAXIMUM_MATCHED_NUMBER = 6;
+	private static final int MINIMUM_WINNING_MATCHED_NUMBER = 3;
+
 	private final int matchedNumberCount;
 	private final BigDecimal prizeMoney;
 
@@ -23,6 +26,10 @@ public enum LottoPrizeType {
 				.filter(it -> it.matchedNumberCount == matchedNumberCount)
 				.findFirst()
 				.orElse(NO_MATCHED);
+	}
+
+	public boolean isWinningType() {
+		return matchedNumberCount <= MAXIMUM_MATCHED_NUMBER && matchedNumberCount >= MINIMUM_WINNING_MATCHED_NUMBER;
 	}
 
 	public int getMatchedNumberCount() {
