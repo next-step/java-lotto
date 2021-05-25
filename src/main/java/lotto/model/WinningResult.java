@@ -1,53 +1,62 @@
 package lotto.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class WinningResult {
-
-    private static int numberOfFirstPlace = 0;
-    private static int numberOfSecondPlace = 0;
-    private static int numberOfThirdPlace = 0;
-    private static int numberOfFourthPlace = 0;
-    private static int numberOfFifthPlace = 0;
+    static HashMap<String, Integer> map = new HashMap<String, Integer>();
 
     public WinningResult() {
+        map.put("numberOfFirstPlace", 0);
+        map.put("numberOfSecondPlace", 0);
+        map.put("numberOfThirdPlace", 0);
+        map.put("numberOfFourthPlace", 0);
+        map.put("numberOfFifthPlace", 0);
     }
 
     public static int getNumberOfFirstPlace() {
-        return numberOfFirstPlace;
+        return map.get("numberOfFirstPlace");
     }
 
     public static int getNumberOfSecondPlace() {
-        return numberOfSecondPlace;
+        return map.get("numberOfSecondPlace");
     }
 
     public static int getNumberOfThirdPlace() {
-        return numberOfThirdPlace;
+        return map.get("numberOfThirdPlace");
     }
 
     public static int getNumberOfFourthPlace() {
-        return numberOfFourthPlace;
+        return map.get("numberOfFourthPlace");
     }
 
     public static int getNumberOfFifthPlace() {
-        return numberOfFifthPlace;
+        return map.get("numberOfFifthPlace");
     }
 
     public static void addCount(int count, boolean bonus) {
         if (count == 3) {
-            numberOfFifthPlace++;
+            int number = map.get("numberOfFifthPlace");
+            map.put("numberOfFifthPlace", ++number);
         }
         if (count == 4) {
-            numberOfFourthPlace++;
+            int number = map.get("numberOfFourthPlace");
+            map.put("numberOfFourthPlace", ++number);
+
         }
         if (count == 5 && !bonus) {
-            numberOfThirdPlace++;
+            int number = map.get("numberOfThirdPlace");
+            map.put("numberOfThirdPlace", ++number);
+
         }
         if (count == 5 && bonus) {
-            numberOfSecondPlace++;
+            int number = map.get("numberOfSecondPlace");
+            map.put("numberOfSecondPlace", ++number);
+
         }
         if (count == 6) {
-            numberOfFirstPlace++;
+            int number = map.get("numberOfFirstPlace");
+            map.put("numberOfFirstPlace", ++number);
         }
     }
 
