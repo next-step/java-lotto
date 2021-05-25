@@ -1,5 +1,7 @@
 package com.lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoReward {
     FIRST(6, false, 2_000_000_000) {
         @Override
@@ -63,11 +65,9 @@ public enum LottoReward {
     public abstract int totalReward(int count);
 
     public static LottoReward generateReward(int sameCount) {
-        for (LottoReward reward : LottoReward.values()) {
-            if (reward.sameCount() == sameCount && !reward.isBonus()) {
-                return reward;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(reward -> reward.sameCount() == sameCount && !reward.isBonus())
+                .findFirst()
+                .orElse(MISS);
     }
 }
