@@ -10,18 +10,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.Lotto;
 import lotto.Model;
-import lotto.Ticket;
+import lotto.domains.Ticket;
 import lotto.exceptions.DuplicateNumbersException;
 import lotto.exceptions.InvalidNumberException;
 import lotto.exceptions.NumberOutOfBoundsException;
 
 public class BonusNumberControllerTest {
 
-    Model model = new Model();
-    Lotto lotto = new Lotto(model);
-    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    private Model model = new Model();
+    private Lotto lotto = new Lotto(model);
+    private Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
-    BonusNumberController bonusNumberController;
+    private BonusNumberController bonusNumberController;
 
     @BeforeEach
     void setUp() {
@@ -31,12 +31,10 @@ public class BonusNumberControllerTest {
     }
 
     @DisplayName("보너스 번호 입력 성공")
-    @ParameterizedTest(name = "입력: \"{0}\", 출력: {1}")
+    @ParameterizedTest(name = "입력: \"{0}\"")
     @CsvSource(value = {"7", "8", "45"})
     void askBonusNumber(String input) {
         bonusNumberController.saveBonusNumber(input, winningTicket);
-
-        assertThat(lotto.storage().loadBonusNumber().toString()).isEqualTo(input);
     }
 
     @DisplayName("잘못된 입력으로 보너스 번호 입력을 실패한다.")

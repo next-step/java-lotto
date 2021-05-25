@@ -1,7 +1,7 @@
 package lotto.controllers;
 
 import lotto.Lotto;
-import lotto.Purchase;
+import lotto.domains.Purchase;
 import lotto.enums.Message;
 import lotto.views.Display;
 import lotto.views.Keyboard;

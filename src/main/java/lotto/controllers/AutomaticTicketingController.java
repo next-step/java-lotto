@@ -1,11 +1,9 @@
 package lotto.controllers;
 
-import java.util.List;
-
 import lotto.AutomaticTicketing;
 import lotto.Lotto;
+import lotto.domains.Tickets;
 import lotto.strategy.SublistStrategy;
-import lotto.Ticket;
 import lotto.enums.Message;
 import lotto.views.Display;
 
@@ -21,11 +19,11 @@ public class AutomaticTicketingController implements Controller {
 
     @Override
     public void run() {
-        int amount = loadTicketsAmount();
-        List<Ticket> tickets = buyNewTickets(amount);
+        int ticketsAmount = loadTicketsAmount();
+        Tickets tickets = buyNewTickets(ticketsAmount);
 
-        displayTicketAmount(amount);
-        displayTickets(tickets);
+        Display.show(Message.AUTOMATIC_TICKETING, ticketsAmount);
+        Display.show(tickets);
 
         toWinningTicketController();
     }
@@ -34,20 +32,10 @@ public class AutomaticTicketingController implements Controller {
         return this.lotto.storage().loadPurchase().ticketsAmount();
     }
 
-    protected List<Ticket> buyNewTickets(int amount) {
-        List<Ticket> tickets = this.automaticTicketing.newTickets(amount);
+    protected Tickets buyNewTickets(int amount) {
+        Tickets tickets = this.automaticTicketing.newTickets(amount);
         this.lotto.storage().saveAutomatedTickets(tickets);
         return tickets;
-    }
-
-    private void displayTicketAmount(int amount) {
-        Display.show(Message.AUTOMATIC_TICKETING, amount);
-    }
-
-    private void displayTickets(List<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
-            Display.show(ticket);
-        }
     }
 
     private void toWinningTicketController() {

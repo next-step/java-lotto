@@ -13,8 +13,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.Lotto;
 import lotto.Model;
-import lotto.Purchase;
-import lotto.Ticket;
+import lotto.domains.Purchase;
+import lotto.domains.Ticket;
+import lotto.domains.Tickets;
 import lotto.exceptions.DuplicateNumbersException;
 import lotto.exceptions.InsufficientNumbersException;
 import lotto.exceptions.InvalidPatternException;
@@ -22,19 +23,20 @@ import lotto.exceptions.NumberOutOfBoundsException;
 
 public class WinningTicketControllerTest {
 
-    Purchase purchase = new Purchase("12345");
-    List<Ticket> tickets = Arrays.asList(
+    private Purchase purchase = new Purchase("12345");
+    private List<Ticket> ticketList = Arrays.asList(
         new Ticket("1,2,3,4,5,6"),
         new Ticket("1,2,3,4,5,6"),
         new Ticket("1,2,3,4,5,11"),
         new Ticket("1,2,3,4,10,11")
     );
-    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    private Tickets tickets = new Tickets(ticketList);
+    private Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
-    Model model = new Model();
-    Lotto lotto = new Lotto(model);
+    private Model model = new Model();
+    private Lotto lotto = new Lotto(model);
 
-    WinningTicketController winningTicketController;
+    private WinningTicketController winningTicketController;
 
     @BeforeEach
     void setUp() {

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domains;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,20 +10,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.exceptions.DuplicateNumbersException;
 import lotto.exceptions.InvalidNumberException;
 import lotto.exceptions.NumberOutOfBoundsException;
 
 public class BonusNumberTest {
 
-    Ticket winningTicket = new Ticket("1,2,3,4,5,6");
+    private Ticket winningTicket = new Ticket("1,2,3,4,5,6");
 
     @DisplayName("보너스 숫자가 티켓에 있는지 판별한다.")
     @ParameterizedTest(name = "[1, 2, 3, 4, 5, 6]: {0} - {1}")
     @CsvSource(value = {"1,true", "7,false"})
     void bonusNumber_IsExistInTicket(String input, boolean expected) {
-        Ticket winningTicket = new Ticket(Arrays.asList(11, 12, 13, 14, 15, 16));
-        BonusNumber bonusNumber = new BonusNumber(input, winningTicket);
+        BonusNumber bonusNumber = new BonusNumber(input);
 
         Ticket ticket = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
@@ -34,10 +32,10 @@ public class BonusNumberTest {
     @Test
     void bonusNumber_EmptyOrNull_ExceptionThrown() {
         assertThatExceptionOfType(InvalidNumberException.class).isThrownBy(() -> {
-            new BonusNumber("", winningTicket);
+            new BonusNumber("");
         });
         assertThatExceptionOfType(InvalidNumberException.class).isThrownBy(() -> {
-            new BonusNumber(null, winningTicket);
+            new BonusNumber(null);
         });
     }
 
@@ -46,16 +44,7 @@ public class BonusNumberTest {
     @ValueSource(strings = {"0", "46"})
     void bonusNumber_OutOfBounds_ExceptionThrown(String input) {
         assertThatExceptionOfType(NumberOutOfBoundsException.class).isThrownBy(() -> {
-            new BonusNumber(input, winningTicket);
-        });
-    }
-
-    @DisplayName("중복된 숫자를 입력하여 보너스 번호 생성을 실패한다.")
-    @ParameterizedTest(name = "[1, 2, 3, 4, 5, 6]: \"{0}\"")
-    @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
-    void bonusNumber_DuplicateNumber_ExceptionThrown(String input) {
-        assertThatExceptionOfType(DuplicateNumbersException.class).isThrownBy(() -> {
-            new BonusNumber(input, winningTicket);
+            new BonusNumber(input);
         });
     }
 
@@ -63,7 +52,7 @@ public class BonusNumberTest {
     @ParameterizedTest(name = "[1, 2, 3, 4, 5, 6]: \"{0}\"")
     @ValueSource(strings = {"7", "8", "45"})
     void createBonusNumber(String input) {
-        assertThat(new BonusNumber(input, winningTicket).toString()).isEqualTo(input);
+        assertThat(new BonusNumber(input).toString()).isEqualTo(input);
     }
 
 }

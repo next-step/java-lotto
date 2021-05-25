@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domains;
 
 import lotto.enums.ErrorMessage;
 import lotto.exceptions.CashOutOfBoundsException;

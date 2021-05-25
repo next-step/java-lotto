@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domains;
 
 import lotto.enums.ErrorMessage;
-import lotto.exceptions.DuplicateNumbersException;
 import lotto.exceptions.NumberOutOfBoundsException;
 import lotto.tool.Converter;
 
@@ -12,15 +11,11 @@ public class BonusNumber {
 
     private int bonusNumber;
 
-    public BonusNumber(String text, Ticket winningTicket) {
+    public BonusNumber(String text) {
         int number = Converter.toInteger(text);
 
         if (number < MIN_VALUE || MAX_VALUE < number) {
             throw new NumberOutOfBoundsException(ErrorMessage.NUMBER_OUT_OF_BOUNDS.toString());
-        }
-
-        if (winningTicket.contains(number)) {
-            throw new DuplicateNumbersException(ErrorMessage.DUPLICATE_NUMBERS.toString());
         }
 
         this.bonusNumber = number;

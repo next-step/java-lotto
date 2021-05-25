@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.domains.Ticket;
+import lotto.domains.Tickets;
 import lotto.enums.ErrorMessage;
 import lotto.exceptions.TicketsOutOfBoundsException;
 import lotto.strategy.AutomaticStrategy;
@@ -35,7 +37,7 @@ public class AutomaticTicketing {
         return new Ticket(chosenNumbers);
     }
 
-    public List<Ticket> newTickets(int count) {
+    public Tickets newTickets(int count) {
         if (count < 1) {
             throw new TicketsOutOfBoundsException(ErrorMessage.TICKETS_OUT_OF_BOUNDS.toString());
         }
@@ -44,7 +46,8 @@ public class AutomaticTicketing {
         for (int i = 0; i < count; i++) {
             tickets.add(newTicket());
         }
-        return tickets;
+
+        return new Tickets(tickets);
     }
 
 }
