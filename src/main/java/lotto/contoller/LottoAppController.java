@@ -8,6 +8,8 @@ import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.PrintView;
 
+import java.util.List;
+
 public class LottoAppController {
     public void run() {
         Lottos purchasedLottos = buyLotto();
@@ -25,7 +27,7 @@ public class LottoAppController {
 
     private LottoReport getReport(Lottos purchasedLottos) {
         PrintView.askWinningNumber();
-        Lotto lastWinningNumbers = new Lotto(InputView.getLastWinningNumber());
+        List<Integer> lastWinningNumbers = InputView.getLastWinningNumber();
         PrintView.askBonusNumber();
         int bonusNumber = InputView.getBonusNumber();
         return new LottoReport(new WinningLotto(lastWinningNumbers, bonusNumber), purchasedLottos);
