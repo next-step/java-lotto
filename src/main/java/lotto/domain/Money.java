@@ -20,8 +20,8 @@ public class Money {
         return (int)(this.money/LOTTO_TICKET_PRICE);
     }
 
-    public double calculateProfit(List<WinningType> winningTypes) {
+    public double calculateProfit(long prizeSum) {
         ProfitCalculator profitCalculator = new ProfitCalculator();
-        return profitCalculator.calculate(this.money, winningTypes);
+        return profitCalculator.calculate(this.money, prizeSum);
     }
 }

@@ -21,12 +21,11 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.LOTTO_NUMBERS);
     }
 
-    public WinningType findWinningType(LottoTicket winningLottoTicket) {
+    public WinningType getWinningType(LottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
             matchCount += contains(winningLottoNumber);
         }
-
         return WinningType.of(matchCount);
     }
 

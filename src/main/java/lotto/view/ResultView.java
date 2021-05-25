@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.common.WinningType;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {
@@ -13,17 +14,9 @@ public class ResultView {
         System.out.println(lottoTicketsText);
     }
 
-    public void printResultStatistics(List<WinningType> winningTypes) {
-        System.out.println("\n당첨 통계\n---------");
-        int[] matchCountResults = new int[] {0,0,0,0,0,0,0};
-        for(WinningType winningType : winningTypes) {
-            matchCountResults[winningType.getMatchCount()] ++;
-        }
-
-        for(int i=3; i<matchCountResults.length; i++) {
-            System.out.println(i + "개 일치 (" + WinningType.of(i).getPrize() + ")-"
-                    + matchCountResults[i] +"개");
-        }
+    public void printResultStatistics(int matchingCount, int matchingSum) {
+        System.out.println(matchingCount + "개 일치 (" + WinningType.of(matchingCount).getPrize() + ")-"
+                + matchingSum +"개");
     }
 
     public void printResultProfit(double profit) {

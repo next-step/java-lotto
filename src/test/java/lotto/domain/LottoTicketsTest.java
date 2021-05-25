@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import lotto.common.WinningType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -22,6 +25,26 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(1);
 
         //생성된 WinningType 리스트는 NULL이 될 수 없다.
-        assertThat(lottoTickets.getWinningTypes(new LottoTicket())).isNotNull();
+        assertThat(lottoTickets.getGameResults(new LottoTicket())).isNotNull();
+    }
+
+    @Test
+    @DisplayName("로또 상금 합계 계산 테스트")
+    void getPrizeSum() {
+        LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
+
+        //1등, 2등 합계
+        LottoTickets firstUserLottoTickets = new LottoTickets(Arrays.asList(
+                new LottoTicket("1,2,3,4,5,6"), new LottoTicket("1,2,3,4,5,7")
+        ));
+        assertThat(firstUserLottoTickets.getPrizeSum(winningLottoTicket))
+                .isEqualTo(WinningType.FIRST.getPrize() + WinningType.SECOND.getPrize());
+
+        //3등, 4등 합계
+        LottoTickets secondUserLottoTickets = new LottoTickets(Arrays.asList(
+                new LottoTicket("1,2,3,4,15,16"), new LottoTicket("1,2,3,14,15,17")
+        ));
+        assertThat(secondUserLottoTickets.getPrizeSum(winningLottoTicket))
+                .isEqualTo(WinningType.THIRD.getPrize() + WinningType.FORTH.getPrize());
     }
 }

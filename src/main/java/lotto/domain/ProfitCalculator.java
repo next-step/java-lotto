@@ -14,7 +14,7 @@ public class ProfitCalculator {
         return calculate(money, prizeSum);
     }
 
-    private double calculate(long money, long prizeSum) {
+    public double calculate(long money, long prizeSum) {
         return Math.floor(((double) prizeSum/money)*100)/100.0;
     }
 }
