@@ -14,11 +14,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
-    }
-
     public int size() {
         return lottos.size();
     }

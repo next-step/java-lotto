@@ -1,16 +1,19 @@
 package lotto.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoMachine {
     private LottoMachine() {
     }
 
     public static Lottos buyWith(int amount) {
         int lottoSize = amount / Lotto.PRICE;
-        Lottos lottos = new Lottos();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = lottoSize; i > 0; i--) {
             lottos.add(LottoGenerator.getLotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 }
