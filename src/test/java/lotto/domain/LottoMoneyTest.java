@@ -14,12 +14,11 @@ public class LottoMoneyTest {
         assertThat(new LottoMoney(1000)).isEqualTo(new LottoMoney(1000));
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 0, 50, -1})
-    void 로또구입금액은_1_000원_보다_작을_수_없다(int lessThanALottoPrice) {
+    @Test
+    void 로또구입금액은_0원_보다_작을_수_없다() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoMoney(lessThanALottoPrice))
-                .withMessage("로또 최소 구매액은 1000원 입니다.");
+                .isThrownBy(() -> new LottoMoney(-1))
+                .withMessage("로또구매금액은 0원 보다 작을 수 없습니다.");
     }
 
     @ParameterizedTest
@@ -33,6 +32,15 @@ public class LottoMoneyTest {
     @ParameterizedTest
     @CsvSource({"3000,3", "1000,1", "14000,14"})
     void 로또구입금액은_구입가능한_로또개수를_알려준다(int money, int expectedAffordableLottoCount) {
-        assertThat(new LottoMoney(money).countOfAffordableLotto()).isEqualTo(expectedAffordableLottoCount);
+        assertThat(new LottoMoney(money).countAffordableLotto()).isEqualTo(expectedAffordableLottoCount);
+    }
+
+    @Test
+    void 로또구입금액은_입력받은_로또개수가_구매가능금액보다_큰_경우_에러를_던진다() {
+        LottoMoney money = new LottoMoney(1000);
+        int lottoCountGreaterThanLottoMoney = money.countAffordableLotto() + 1;
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> money.checkAffordable(lottoCountGreaterThanLottoMoney));
+    }
     }
 }
