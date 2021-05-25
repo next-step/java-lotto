@@ -10,8 +10,8 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @DisplayName("숫자의 범위 1-45 밖일 시, IllegalArgumentException 발생")
-    @ValueSource(ints = {-4, 0, 46})
-    void numberOutOfRangeTest(int value) {
+    @ValueSource(strings = {"-4", "0", "46"})
+    void numberOutOfRangeTest(String value) {
 
         assertThatThrownBy(() -> {
             new LottoNumber(value);

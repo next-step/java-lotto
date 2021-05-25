@@ -1,19 +1,18 @@
 package study.ascii92der.lotto.step3;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumberArray) {
+    public Lotto(String lottoString) {
         lottoNumbers = new ArrayList<>();
+        String[] lottoArray = lottoString
+                .replaceAll(" ", "")
+                .split(",");
+        validDuplicateNumber(lottoArray);
 
-        validDuplicateNumber(lottoNumberArray);
-
-        for (Integer value : lottoNumberArray) {
+        for (String value : lottoArray) {
             lottoNumbers.add(new LottoNumber(value));
         }
     }
@@ -23,10 +22,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private void validDuplicateNumber(List<Integer> lottoNumberArray) {
-        Set<Integer> lottoNumberSet = new HashSet<>();
-        lottoNumberSet.addAll(lottoNumberArray);
-        if (lottoNumberSet.size() != lottoNumberArray.size()) {
+    private void validDuplicateNumber(String[] lottoArray) {
+        Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(lottoArray));
+        if (lottoNumberSet.size() != lottoArray.length) {
             throw new IllegalArgumentException("This Numbers has duplicate number");
         }
     }
