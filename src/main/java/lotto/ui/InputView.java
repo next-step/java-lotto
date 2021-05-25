@@ -1,8 +1,12 @@
 package lotto.ui;
 
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -26,6 +30,31 @@ public class InputView {
     }
 
     public static List<Integer> getLastWinningNumber() {
+        return getNumberList();
+    }
+
+    public static int getBonusNumber() {
+        return getANumber();
+    }
+
+    public static int getCountOfManualLotto() {
+        return getANumber();
+    }
+
+    private static int getANumber() {
+        String line = SCANNER.nextLine();
+        return parseInt(line);
+    }
+
+    public static Lottos getManualLottos(int countOfManualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < countOfManualLottos; i++) {
+            lottos.add(new Lotto(getNumberList()));
+        }
+        return new Lottos(lottos);
+    }
+
+    private static List<Integer> getNumberList() {
         String line = SCANNER.nextLine();
         String[] numericStrings = line.split(DELIMITER);
 
@@ -40,8 +69,4 @@ public class InputView {
         return integerList;
     }
 
-    public static int getBonusNumber() {
-        String line = SCANNER.nextLine();
-        return parseInt(line);
-    }
 }
