@@ -20,14 +20,14 @@ public class LottoModel {
         return manualNumbers.split(separator);
     }
 
-    private int convertToInt(String number) {
-        return Integer.parseInt(number);
-    }
-
     private void setManualLotto(String[] manualNumbers) {
         for (int i = 0; i < manualNumbers.length; i++) {
             addNumber(convertToInt(manualNumbers[i]));
         }
+    }
+
+    private int convertToInt(String number) {
+        return Integer.parseInt(number);
     }
 
     public LottoModel() {
