@@ -13,13 +13,13 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void 로또번호_생성_실패_예외(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(LottoNumberOutOfBoundsException.class);
+        assertThatThrownBy(() -> LottoNumber.valueOf(number)).isInstanceOf(LottoNumberOutOfBoundsException.class);
     }
 
     @Test
     void valueOf_성공() {
-        LottoNumber lottoNumber1 = new LottoNumber(1);
-        LottoNumber lottoNumber2 = new LottoNumber(1);
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(1);
 
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
         assertThat(LottoNumber.valueOf(1)).isEqualTo(LottoNumber.valueOf(1));

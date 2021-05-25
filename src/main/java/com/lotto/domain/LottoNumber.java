@@ -17,17 +17,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
 
-    public static LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(int number) throws LottoNumberOutOfBoundsException {
         validate(number);
         return cache[number - 1];
     }
 
-    private static void validate(int number) {
+    private static void validate(int number) throws LottoNumberOutOfBoundsException {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new LottoNumberOutOfBoundsException(number);
         }
@@ -45,7 +45,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(this instanceof LottoNumber)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }

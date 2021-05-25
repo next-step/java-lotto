@@ -2,8 +2,7 @@ package com.lotto.controller;
 
 import com.lotto.domain.LottoGroup;
 import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.LottoWinningBonusNumber;
-import com.lotto.domain.LottoWinningNumbers;
+import com.lotto.domain.WinningLotto;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
@@ -14,31 +13,12 @@ public class LottoManager {
         OutputView.confirmBuyCount(lottoGroup.size());
         OutputView.buyLottoList(lottoGroup.lottoList());
 
-        LottoWinningNumbers winningNumbers = createWinningNumbers();
-        LottoWinningBonusNumber bonusNumber = createBonusNumber();
+        WinningLotto winningLotto = createWinningLotto();
 
         OutputView.winningStatistics();
-        LottoStatistics statistics = lottoGroup.statistics(winningNumbers, bonusNumber);
+        LottoStatistics statistics = lottoGroup.statistics(winningLotto);
         OutputView.winningStatisticsDetail(statistics);
         OutputView.investment(statistics.yield());
-    }
-
-    private LottoWinningBonusNumber createBonusNumber() {
-        LottoWinningBonusNumber bonusNumber;
-
-        while (true) {
-            OutputView.requireBonusNumbers();
-            try {
-                bonusNumber = LottoWinningBonusNumber.valueOf(InputView.inputDataFromConsole());
-                break;
-            } catch (RuntimeException exception) {
-                OutputView.out(exception.getMessage());
-                continue;
-            }
-        }
-        return bonusNumber;
-
-
     }
 
     private LottoGroup createLottoGroup() {
@@ -57,20 +37,32 @@ public class LottoManager {
         return lottoGroup;
     }
 
-    private LottoWinningNumbers createWinningNumbers() {
-        LottoWinningNumbers lottoWinningNumbers;
+    private WinningLotto createWinningLotto() {
+        WinningLotto winningLotto;
 
         while (true) {
             OutputView.requireWinningNumbers();
             try {
-                lottoWinningNumbers = LottoWinningNumbers
-                        .createLottoWinningNumbers(InputView.inputDataFromConsole());
+                winningLotto = WinningLotto
+                        .createWinningLotto(InputView.inputDataFromConsole());
                 break;
             } catch (RuntimeException exception) {
                 OutputView.out(exception.getMessage());
                 continue;
             }
         }
-        return lottoWinningNumbers;
+
+        while (true) {
+            OutputView.requireBonusNumbers();
+            try {
+                winningLotto.setBonusNumber(InputView.inputDataFromConsole());
+                break;
+            } catch (RuntimeException exception) {
+                OutputView.out(exception.getMessage());
+                continue;
+            }
+        }
+
+        return winningLotto;
     }
 }

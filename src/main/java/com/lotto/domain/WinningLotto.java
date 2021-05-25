@@ -2,22 +2,25 @@ package com.lotto.domain;
 
 import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.IllegalLottoCountException;
+import com.lotto.exception.LottoNumberOutOfBoundsException;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static com.lotto.domain.LottoReward.*;
 
-public class LottoWinningNumbers {
+public class WinningLotto {
     private Set<LottoNumber> winningNumbers;
+    private LottoNumber bonusNumber;
 
-    public LottoWinningNumbers(Set<LottoNumber> winningNumbers) {
+    public WinningLotto(Set<LottoNumber> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public static LottoWinningNumbers createLottoWinningNumbers(String winningNumbers)
-            throws LottoNumberFormatException, IllegalLottoCountException {
+    public static WinningLotto createWinningLotto(String winningNumbers)
+            throws LottoNumberFormatException, IllegalLottoCountException, LottoNumberOutOfBoundsException {
         Set<LottoNumber> set;
+        LottoNumber bonusNumber;
         try {
             set = addWinningNumber(winningNumbers);
         } catch (NumberFormatException exception) {
@@ -27,10 +30,21 @@ public class LottoWinningNumbers {
             throw new IllegalLottoCountException();
         }
 
-        return new LottoWinningNumbers(set);
+        return new WinningLotto(set);
     }
 
-    public LottoReward reward(Lotto lotto, LottoWinningBonusNumber bonusNumber) {
+    public void setBonusNumber(String sNumber) throws LottoNumberOutOfBoundsException, LottoNumberFormatException {
+        int number;
+        try {
+            number = Integer.parseInt(sNumber);
+        } catch (NumberFormatException exception) {
+            throw new LottoNumberFormatException();
+        }
+
+        this.bonusNumber = LottoNumber.valueOf(number);
+    }
+
+    public LottoReward reward(Lotto lotto) {
         int sameCount = 0;
         for (LottoNumber lottoNumber : lotto.numbers()) {
             sameCount += addOneIfContainInWinningNumbers(lottoNumber);
@@ -41,7 +55,7 @@ public class LottoWinningNumbers {
         return generateReward(sameCount);
     }
 
-    private boolean isContainsWinningNumbers(LottoWinningBonusNumber bonusNumber) {
+    private boolean isContainsWinningNumbers(LottoNumber bonusNumber) {
         return winningNumbers.contains(bonusNumber);
     }
 
@@ -60,7 +74,8 @@ public class LottoWinningNumbers {
         return set.size() != Lotto.LOTTO_COUNT;
     }
 
-    private static Set<LottoNumber> addWinningNumber(String winningNumbers) throws NumberFormatException {
+    private static Set<LottoNumber> addWinningNumber(String winningNumbers)
+            throws NumberFormatException, LottoNumberOutOfBoundsException {
         String[] splitNumbers = winningNumbers.split(",");
         Set<LottoNumber> set = new HashSet<>();
         for (String sNumber : splitNumbers) {

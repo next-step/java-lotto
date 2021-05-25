@@ -52,11 +52,11 @@ public class LottoGroup {
         return this.lottoList;
     }
 
-    public LottoStatistics statistics(LottoWinningNumbers winningNumbers, LottoWinningBonusNumber bonusNumber) {
+    public LottoStatistics statistics(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = new ArrayList<>();
 
         for (Lotto lotto : lottoList) {
-            lottoRewards.add(winningNumbers.reward(lotto, bonusNumber));
+            lottoRewards.add(winningLotto.reward(lotto));
         }
 
         return LottoStatistics.createLottoStatistics(lottoRewards);
