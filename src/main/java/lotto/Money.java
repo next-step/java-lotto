@@ -3,8 +3,6 @@ package lotto;
 import java.util.Objects;
 
 public class Money {
-	public static final String UNIT_KR = "원";
-
 	private final long money;
 
 	public Money(long money) {
@@ -43,7 +41,8 @@ public class Money {
 		return (double)money / value.money;
 	}
 
-	public String won() {
-		return money + UNIT_KR;
+	public long amount() {
+		return money;
 	}
+
 }

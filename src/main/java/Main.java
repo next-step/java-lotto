@@ -32,16 +32,16 @@ public class Main {
 		 * 사용자 입력 : 지난주 당첨 번호
 		 */
 		List<Integer> prizeNumbers = inputView.askPrizeNumbers();
-		Statistics statistics = analyze(prizeNumbers, lottos);
+		Statistics statistics = lottos.statistics(prizeNumbers);
 
 		/*
 		 * 결과 출력 : 통계, 수익률
 		 */
 		resultView.outputIntro();
-		resultView.outputStatistics(Prize.SIX.count(), Prize.SIX.winAmount().won(), statistics.status(Prize.SIX));
-		resultView.outputStatistics(Prize.FIVE.count(), Prize.FIVE.winAmount().won(), statistics.status(Prize.FIVE));
-		resultView.outputStatistics(Prize.FOUR.count(), Prize.FOUR.winAmount().won(), statistics.status(Prize.FOUR));
-		resultView.outputStatistics(Prize.THREE.count(), Prize.THREE.winAmount().won(), statistics.status(Prize.THREE));
+		resultView.outputStatistics(Prize.SIX.count(), Prize.SIX.win().amount(), statistics.status(Prize.SIX));
+		resultView.outputStatistics(Prize.FIVE.count(), Prize.FIVE.win().amount(), statistics.status(Prize.FIVE));
+		resultView.outputStatistics(Prize.FOUR.count(), Prize.FOUR.win().amount(), statistics.status(Prize.FOUR));
+		resultView.outputStatistics(Prize.THREE.count(), Prize.THREE.win().amount(), statistics.status(Prize.THREE));
 		resultView.outputProfit(statistics.profit().rate());
 	}
 

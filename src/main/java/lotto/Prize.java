@@ -8,11 +8,11 @@ public enum Prize {
 	NOTHING(-1, new Money(0));
 
 	private final int count;
-	private final Money winAmount;
+	private final Money win;
 
 	Prize(int count, Money winAmount) {
 		this.count = count;
-		this.winAmount = winAmount;
+		this.win = winAmount;
 	}
 
 	public static Prize findByCount(int count) {
@@ -27,7 +27,7 @@ public enum Prize {
 		return count;
 	}
 
-	public Money winAmount() {
-		return winAmount;
+	public Money win() {
+		return win;
 	}
 }

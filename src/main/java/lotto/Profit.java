@@ -1,7 +1,7 @@
 package lotto;
 
 public class Profit {
-	public static final double PERCENT_RATE = 100.0;
+	public static final double HUNDREDTHS_PLACE_POINT = 100.0;
 
 	private final double rate;
 
@@ -9,10 +9,14 @@ public class Profit {
 		if (totalAmount.isZero()) {
 			throw new ArithmeticException("0으로 나눌 수 없습니다.");
 		}
-		this.rate = totalWinAmount.divide(totalAmount);
+		rate = round(totalWinAmount.divide(totalAmount));
 	}
 
 	public double rate() {
-		return Math.round(rate * PERCENT_RATE) / PERCENT_RATE; // 소수점 둘째 자리까지
+		return rate;
 	}
+	private double round(double value) {
+		return Math.round(value * HUNDREDTHS_PLACE_POINT) / HUNDREDTHS_PLACE_POINT;
+	}
+
 }
