@@ -1,4 +1,4 @@
-package kr.aterilio.nextstep;
+package kr.aterilio.nextstep.techcamp.m1.exercise;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
