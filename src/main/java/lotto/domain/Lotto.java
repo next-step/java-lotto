@@ -35,13 +35,13 @@ public class Lotto {
     }
 
     private boolean isValidLottoSize(List<Integer> numbers) {
-        return numbers.size() == Lotto.SIZE;
+        return numbers.size() == SIZE;
     }
 
     private boolean hasDuplicate(List<Integer> numbers) {
         return numbers.stream()
                 .distinct()
-                .count() != Lotto.SIZE;
+                .count() != SIZE;
     }
 
     private boolean containsInvalidNumber(List<Integer> numbers) {
