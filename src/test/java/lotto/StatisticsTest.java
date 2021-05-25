@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 public class StatisticsTest {
 
 	private Lottos lottos;
-	private Statistics statistics;
 
 	@BeforeEach
 	void before() {
@@ -25,15 +24,13 @@ public class StatisticsTest {
 		lottoList.add(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
 		lottoList.add(new Lotto(Arrays.asList(31, 32, 33, 14, 35, 16)));
 		lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 14, 15, 16)));
-
 		lottos = new Lottos(lottoList);
-		statistics = new Statistics(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
 	}
 
 	@Test
 	@DisplayName("생성 테스트")
 	void create() {
+		Statistics statistics = new Statistics();
 		assertThat(statistics).isNotNull();
 		for (Prize prize : Prize.values()) {
 			assertThat(statistics.status(prize)).isEqualTo(0);
@@ -43,19 +40,11 @@ public class StatisticsTest {
 	@Test
 	@DisplayName("당첨 현황 테스트")
 	void statistics() {
-		statistics.analyze(lottos);
+		Statistics statistics = lottos.statistics(Arrays.asList(1, 2, 3, 4, 5, 6));
 		assertThat(statistics.status(Prize.SIX)).isEqualTo(0);
 		assertThat(statistics.status(Prize.FIVE)).isEqualTo(0);
 		assertThat(statistics.status(Prize.FOUR)).isEqualTo(0);
 		assertThat(statistics.status(Prize.THREE)).isEqualTo(1);
-	}
-
-	@Test
-	@DisplayName("수익률 계산")
-	void profitRate() {
-		statistics.analyze(lottos);
-		Profit profit = statistics.profit();
-		assertThat(profit.rate()).isEqualTo(0.71);
 	}
 }
 

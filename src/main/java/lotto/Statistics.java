@@ -4,30 +4,12 @@ import java.util.EnumMap;
 
 public class Statistics {
 	private final EnumMap<Prize, Integer> statusMap = new EnumMap<>(Prize.class);
-	private final Lotto prizeLotto;
-	private int count = 0;
 
-	public Statistics(Lotto prizeLotto) {
-		this.prizeLotto = prizeLotto;
-		initMap();
-	}
-
-	private void initMap() {
-		statusMap.clear();
+	public Statistics() {
 		for (Prize prize : Prize.values()) {
 			statusMap.put(prize, 0);
 		}
 	}
-
-	public void analyze(Lottos lottos) {
-		initMap();
-		count = lottos.count();
-		for (Lotto lotto : lottos.findAll()) {
-			Prize prize = lotto.match(prizeLotto);
-			statusMap.put(prize, statusMap.get(prize) + 1);
-		}
-	}
-
 	public int status(Prize prize) {
 		return statusMap.get(prize);
 	}
@@ -44,4 +26,14 @@ public class Statistics {
 		}
 		return winAmount;
 	}
+
+
+	public int totalCount() {
+		return statusMap.keySet().stream().mapToInt(this::status).sum();
+	}
+
+	public void addCount(Prize prize) {
+		statusMap.put(prize, status(prize) + 1);
+	}
+
 }

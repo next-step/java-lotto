@@ -14,7 +14,13 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public List<Lotto> findAll() {
-		return lottos;
+	public Statistics statistics(List<Integer> prizeNumbers) {
+		Lotto prizeLotto = new Lotto(prizeNumbers);
+		Statistics statistics = new Statistics();
+		for (Lotto lotto : lottos) {
+			Prize prize = lotto.match(prizeLotto);
+			statistics.addCount(prize);
+		}
+		return statistics;
 	}
 }
