@@ -3,11 +3,13 @@ package generate;
 import java.util.Arrays;
 import java.util.Random;
 
+import static domain.Lotto.LOTTO_NUMBER_LENGTH;
+
 public class LottoRandomNumber {
-	private static final Integer LOTTO_NUMBER_LENGTH = 6;
+
 
 	public static Integer[] numbers () {
-		Integer[] lottoNumbers = new Integer[6];
+		Integer[] lottoNumbers = new Integer[LOTTO_NUMBER_LENGTH];
 
 		for (Integer i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
 			Random random = new Random();
