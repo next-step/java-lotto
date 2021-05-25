@@ -21,6 +21,7 @@ import static lotto.domain.LottoFixture.번호_5개_일치;
 import static lotto.domain.LottoFixture.번호_6개_일치;
 import static lotto.domain.LottoFixture.우승번호;
 import static lotto.domain.LottoFixture.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
 
@@ -83,5 +84,16 @@ class LottoTest {
                 Arguments.of(번호_0개_일치, false),
                 Arguments.of(번호_0개_일치_보너스번호_일치, true)
         );
+    }
+
+    @Test
+    void 두개의_Lottos_를_merge하는_기능을_제공한다() {
+        Lottos one = new Lottos(Lists.newArrayList(번호_6개_일치, 번호_5개_일치, 번호_4개_일치, 번호_3개_일치));
+        Lottos another = new Lottos(Lists.newArrayList(번호_2개_일치, 번호_1개_일치, 번호_0개_일치, 번호_0개_일치));
+        Lottos merged = Lottos.merge(one, another);
+        assertAll(
+                () -> assertThat(merged.size()).isEqualTo(one.size() + another.size()),
+                () -> assertThat(merged.containsAll(another)).isTrue(),
+                () -> assertThat(merged.containsAll(one)).isTrue());
     }
 }
