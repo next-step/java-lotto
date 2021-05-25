@@ -1,4 +1,6 @@
-package lotto;
+package domain;
+
+import java.util.Arrays;
 
 public class Lotto {
 	private final Integer[] numbers;
@@ -9,5 +11,10 @@ public class Lotto {
 
 	public Integer[] numbers () {
 		return numbers;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + Arrays.toString(numbers) + "]";
 	}
 }

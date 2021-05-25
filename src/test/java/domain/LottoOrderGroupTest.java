@@ -1,19 +1,16 @@
-package lotto;
+package domain;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class OrderGroupTest {
-
+class LottoOrderGroupTest {
 	@Test
 	public void 주문그룹_생성_테스트(){
 		int size = 3;
 
-		final OrderGroup orderGroup = new OrderGroup(size);
+		final LottoOrderGroup orderGroup = new LottoOrderGroup(size);
 
 		assertThat(orderGroup.lottos().size()).isEqualTo(size);
-
 	}
 }

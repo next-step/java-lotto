@@ -1,14 +1,14 @@
-package lotto;
+package domain;
 
 import generate.LottoRandomNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderGroup {
+public class LottoOrderGroup {
 	private final List<Lotto> lottos;
 
-	public OrderGroup (Integer numberOfLotto) {
+	public LottoOrderGroup(Integer numberOfLotto) {
 		this.lottos = generateLotto(numberOfLotto);
 	}
 
@@ -20,9 +20,7 @@ public class OrderGroup {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (Integer i = 0; i < numberOfLotto; i++) {
-			Integer[] lottoNumbers = LottoRandomNumber.numbers();
-
-			lottos.add(new Lotto(lottoNumbers));
+			lottos.add(new Lotto(LottoRandomNumber.numbers()));
 		}
 
 		return lottos;
