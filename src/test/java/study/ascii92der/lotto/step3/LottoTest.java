@@ -18,5 +18,15 @@ public class LottoTest {
         assertThat(lotto.generateNumber().size()).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("로또 중복 번호 확인 테스트")
+    void duplicateNumberTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 1);
 
+        assertThatThrownBy(() -> {
+            new Lotto(lottoNumbers);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("This Numbers has duplicate number");
+
+    }
 }
