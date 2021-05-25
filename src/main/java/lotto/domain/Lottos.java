@@ -11,7 +11,7 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public LottoResults match(WinningLotto winningLotto) {
+	public LottoResults findResult(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : this.lottos) {
 			Rank rank = winningLotto.findRank(lotto);

@@ -29,7 +29,7 @@ public class LottoResultsTest {
 		WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
 
 		Lottos lottos = new Lottos(lottoList);
-		LottoResults lottoResults = lottos.match(winningLotto);
+		LottoResults lottoResults = lottos.findResult(winningLotto);
 		Assertions.assertThat(lottoResults.findRankCount(Rank.FIRST)).isEqualTo(1);
 	}
 
