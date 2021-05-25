@@ -16,7 +16,7 @@ public class LottoGamePlayer {
         resultView.printResultStatistics(getGameResult(winningTypes));
     }
 
-    public void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
+    private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
         if ( winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }

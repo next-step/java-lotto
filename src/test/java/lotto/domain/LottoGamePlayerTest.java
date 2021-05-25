@@ -15,8 +15,6 @@ public class LottoGamePlayerTest {
     @DisplayName("WinningType count 테스트")
     void getMatchCountResult() {
         WinningType[] winningTypes = {WinningType.FIRST, WinningType.SECOND, WinningType.SECOND, WinningType.SIXTH};
-        //int[] matchCountResults = new LottoGamePlayer().getMatchCountResult(winningTypes);
-        //assertThat(matchCountResults).containsExactly(0,0,1,0,0,0,2,1);
         Map<WinningType, Integer> matchCountResults = new LottoGamePlayer().getGameResult(winningTypes);
 
         assertThat(matchCountResults.keySet()).containsExactly(WinningType.EIGHTH, WinningType.SEVENTH, WinningType.SIXTH,
