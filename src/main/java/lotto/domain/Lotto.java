@@ -53,7 +53,6 @@ public class Lotto {
         return !(number >= MIN && number <= MAX);
     }
 
-
     public int matchCountWith(Lotto other) {
         return (int) numbers.stream()
                 .filter(other::contains)
