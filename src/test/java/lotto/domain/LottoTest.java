@@ -1,20 +1,17 @@
 package lotto.domain;
 
-import static lotto.domain.LottoFixture.*;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static lotto.domain.LottoFixture.번호_0개_일치;
 import static lotto.domain.LottoFixture.번호_1개_일치;
 import static lotto.domain.LottoFixture.번호_2개_일치;
@@ -23,7 +20,7 @@ import static lotto.domain.LottoFixture.번호_4개_일치;
 import static lotto.domain.LottoFixture.번호_5개_일치;
 import static lotto.domain.LottoFixture.번호_6개_일치;
 import static lotto.domain.LottoFixture.우승번호;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static lotto.domain.LottoFixture.*;
 
 class LottoTest {
 
