@@ -1,5 +1,7 @@
 package domain;
 
+import view.InputView;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -12,6 +14,10 @@ public class LottoNumber {
     public LottoNumber(int number) {
         validation(number);
         lottoNumber = number;
+    }
+
+    public static LottoNumber generateBonusBall(int inputNumber, WinningNumber winningNumber) {
+        return InputView.bonusBall(inputNumber, winningNumber);
     }
 
     private void validation(int number) {
