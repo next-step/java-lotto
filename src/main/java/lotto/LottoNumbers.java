@@ -32,9 +32,7 @@ public final class LottoNumbers {
 											   .map(LottoNumber::new)
 											   .sorted()
 											   .collect(Collectors.toCollection(LinkedHashSet::new));
-		if (isValidLottoNumberCount(lottoNumbers) == false) {
-			throw LottoException.of(WRONG_LOTTO_NUMBER);
-		}
+		checkLottoNumberCount(lottoNumbers);
 		return lottoNumbers;
 	}
 
@@ -51,16 +49,17 @@ public final class LottoNumbers {
 											  .reduce(0, Integer::sum);
 	}
 
-	private boolean contains(final LottoNumber lottoNumber) {
+	public boolean contains(final LottoNumber lottoNumber) {
 		return this.lottoNumbers.contains(lottoNumber);
 	}
 
-	public boolean isValidLottoNumberCount(final Set<LottoNumber> lottoNumbers) {
-		return lottoNumbers.size() == LOTTO_NUMBER_COUNT;
+	public void checkLottoNumberCount(final Set<LottoNumber> lottoNumbers) {
+		if(lottoNumbers.size() != LOTTO_NUMBER_COUNT){
+			throw LottoException.of(WRONG_LOTTO_NUMBER);
+		}
 	}
 
-	@Override
-	public String toString() {
-		return lottoNumbers.toString();
+	public Set<LottoNumber> lottoNumbers() {
+		return this.lottoNumbers;
 	}
 }

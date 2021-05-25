@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public final class LottoResult {
 
@@ -40,21 +39,8 @@ public final class LottoResult {
 			  .forEach(type -> lottoRewardMap.putIfAbsent(type, 0));
 	}
 
-	@Override
-	public String toString() {
-		return lottoRewardMap.entrySet().stream()
-							 .filter(entry -> entry.getKey() != LottoRewardType.NONE)
-							 .map(this::makeMessage)
-							 .collect(Collectors.joining(System.lineSeparator()));
-	}
-
-	private String makeMessage(Map.Entry<LottoRewardType, Integer> entry) {
-		return new StringBuilder()
-			.append(entry.getKey().message())
-			.append("- ")
-			.append(entry.getValue())
-			.append("개")
-			.toString();
+	public Map<LottoRewardType, Integer> lottoRewardMap() {
+		return this.lottoRewardMap;
 	}
 
 	public BigDecimal calculateRevenue(final LottoMoney lottoMoney) {

@@ -1,6 +1,7 @@
 package lotto;
 
 import exception.LottoException;
+import type.LottoExceptionType;
 import ui.InputView;
 import ui.ResultView;
 import utils.*;
@@ -46,12 +47,14 @@ public final class LottoManager {
 	}
 
 	private LottoNumber bonusLottoNumber() {
-		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-		ResultView.printWinningLottoNumber();
-		return bonusNumber;
+		return new LottoNumber(InputView.inputBonusNumber());
 	}
 
 	private void calculateResult(final LottoNumbers winningLottoNumber, final LottoNumber lottoNumber, final LottoMoney lottoMoney) {
+		if (winningLottoNumber.contains(lottoNumber)) {
+			throw LottoException.of(LottoExceptionType.DUPLICATE_BONUS_NUMBER);
+		}
+		ResultView.printWinningLottoNumber();
 		LottoResult lottoResult = this.lottoGenerator.summary(winningLottoNumber, lottoNumber);
 		BigDecimal revenue = lottoResult.calculateRevenue(lottoMoney);
 		ResultView.printCalculateRevenue(lottoResult, revenue);

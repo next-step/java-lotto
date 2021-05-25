@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class LottoNumbersFactory {
 
@@ -32,10 +31,7 @@ public final class LottoNumbersFactory {
 		return this.lottoList.size();
 	}
 
-	@Override
-	public String toString() {
-		return lottoList.stream()
-				 .map(LottoNumbers::toString)
-				 .collect(Collectors.joining("\n"));
+	public List<LottoNumbers> lottoList() {
+		return this.lottoList;
 	}
 }
