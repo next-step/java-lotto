@@ -51,6 +51,14 @@ public final class Lotto {
         return lottoNumbers.contains(number);
     }
 
+    public String numbers(){
+        StringBuilder numbers = new StringBuilder();
+        for (Number lottoNumber : lottoNumbers) {
+            numbers.append(lottoNumber.getNumber()).append(",");
+        }
+        return numbers.substring(0, numbers.length() - 1);
+    }
+
     @Override
     public String toString() {
         return "LottoNumbers=" + lottoNumbers + " } ";

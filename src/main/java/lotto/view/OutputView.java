@@ -38,11 +38,7 @@ public final class OutputView {
     }
 
     private static void printNumbers(Lotto lotto) {
-        StringBuilder lottoList = new StringBuilder();
-        for (int i = 0; i < lotto.size(); i++) {
-            lottoList.append(lotto.get(i).getNumber()).append(",");
-        }
-        System.out.print(lottoList.substring(0, lottoList.length() - 1));
+        System.out.print(lotto.numbers());
     }
 
     public static void printReceiveWinningNumber() {
