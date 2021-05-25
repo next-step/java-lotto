@@ -60,8 +60,7 @@
 ### 기능 요구 사항
 
 - [ ] 구입 금액을 입력 받음
-- [x] 구입 금액 별 로또 구매 갯수 구함
-  - [x] 구입금액 valid check, IllegalArgumentException 발생
+- [ ] 구입 금액 별 로또 구매 갯수 구함
 - [x] 6개의 숫자 추출
   - [x] 아닐 시, IllegalArgumentException 발생
 - [x] 추출된 6개의 숫자의 범위 1-45
@@ -70,6 +69,7 @@
   - [x] 아닐 시, IllegalArgumentException 발생
 - [x] 정해진 횟수만큼 로또 번호 추출
 - [ ] 당첨 번호를 입력 받음
+- [ ] 일치되는 로또 번호 계산 
 - [x] 3개 일치 값 저장
 - [x] 4개 일치 값 저장
 - [x] 5개 일치 값 저장
