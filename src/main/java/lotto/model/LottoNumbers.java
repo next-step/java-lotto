@@ -1,10 +1,13 @@
 package lotto.model;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import lotto.LottoUtil;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 
 import static lotto.model.LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
-import static lotto.model.WinningNumbers.SPLIT_SYMBOL;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -16,14 +19,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(String number) {
-        this(lottoNumbers(number));
-    }
-
-    private static List<LottoNumber> lottoNumbers(String lottoNumber) {
-        return Arrays.stream(lottoNumber.split(SPLIT_SYMBOL))
-                .map(String::trim)
-                .map(LottoNumber::lottoNumber)
-                .collect(Collectors.toList());
+        this(LottoUtil.stringNumbersToLottoNumbers(number));
     }
 
     private void normalSize(List<LottoNumber> lottoNumbers) {
@@ -32,7 +28,7 @@ public class LottoNumbers {
         }
     }
 
-    public String printInfo(){
+    public String printInfo() {
         return ((List<LottoNumber>) new ArrayList<>(lottoNumbers)).toString();
     }
 

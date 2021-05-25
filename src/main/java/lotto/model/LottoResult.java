@@ -17,13 +17,13 @@ public class LottoResult {
                 .collect(Collectors.toMap(Function.identity(), count -> 0));
     }
 
-    public void addLottoRankingCount(LottoRanking lottoRanking){
+    public void addLottoRankingCount(LottoRanking lottoRanking) {
         if (lottoRanking != null) {
             lottoResult.put(lottoRanking, lottoResult.get(lottoRanking) + 1);
         }
     }
 
-    public String result(List<LottoNumbers> purchaseLottoNumbers, WinningNumbers winningNumbers){
+    public String result(List<LottoNumbers> purchaseLottoNumbers, WinningNumbers winningNumbers) {
 
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
             addLottoRankingCount(LottoRanking.lottoRanking(purchaseLottoNumber.correctCount(winningNumbers.winningNumbers())));
@@ -53,6 +53,7 @@ public class LottoResult {
 
     private String rankingPrintInfo() {
         return Arrays.stream(LottoRanking.values())
+                .filter(ranking -> !ranking.equals(LottoRanking.MISS))
                 .map((LottoRanking) -> resultString(LottoRanking, lottoResult.get(LottoRanking)))
                 .sorted()
                 .collect(Collectors.joining());

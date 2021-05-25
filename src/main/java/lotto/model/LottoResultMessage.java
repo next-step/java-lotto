@@ -12,7 +12,7 @@ public enum LottoResultMessage {
         this.message = message;
     }
 
-    public static String message(float rateOfReturn){
+    public static String message(float rateOfReturn) {
 
         if (rateOfReturn > PRINCIPAL_RATE) {
             return PROFIT.message;

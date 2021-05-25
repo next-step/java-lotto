@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.LottoUtil;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,13 +21,7 @@ public class WinningNumbers {
     }
 
     public WinningNumbers(String number) {
-        this(winningNumber(number));
-    }
-
-    private static List<LottoNumber> winningNumber(String lottoNumber) {
-        return Arrays.stream(lottoNumber.replace(" ", "").split(SPLIT_SYMBOL))
-                .map(LottoNumber::lottoNumber)
-                .collect(Collectors.toList());
+        this(LottoUtil.stringNumbersToLottoNumbers(number));
     }
 
     private void validateLottoNumberSize(List<LottoNumber> lottoNumbers) {
@@ -34,7 +30,7 @@ public class WinningNumbers {
         }
     }
 
-    public List<LottoNumber> winningNumbers(){
+    public List<LottoNumber> winningNumbers() {
         return Collections.unmodifiableList(winningNumbers);
     }
 }
