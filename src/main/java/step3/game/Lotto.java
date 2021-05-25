@@ -2,10 +2,8 @@ package step3.game;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import step3.constant.Rank;
 import step3.io.ConsoleInputView;
 import step3.io.ConsoleResultView;
 import step3.model.LottoNumbers;
@@ -48,7 +46,8 @@ public class Lotto {
         try {
             price = new Price(inputView.getPrice());
             totalLotto = pickLottoWithPrice(price);
-            showLotto();
+            resultView.buyCount(totalLotto.totalSize());
+            resultView.showText(totalLotto.toString());
             resultView.showEmptyLine();
         } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
@@ -57,38 +56,19 @@ public class Lotto {
 
     }
 
-    private void showLotto() {
-        showCount();
-        showTotalLotto();
-    }
-
-    private void showTotalLotto() {
-        resultView.showText(totalLotto.toString());
-    }
-
-    private void showCount() {
-        resultView.buyCount(totalLotto.size());
-    }
-
     public void statistics() {
         try {
             LottoNumbers victoryNumber = getVictoryNumbers();
-            showWinning(totalLotto.groupByWinnerPrice(victoryNumber));
-            showBanefit(totalLotto.getBenefit(victoryNumber, price));
+            resultView
+                .showWinning((totalLotto.groupByWinnerPrice(victoryNumber)));
+            resultView
+                .showBenefit(totalLotto.getBenefit(victoryNumber, price));
 
         } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
             statistics();
         }
 
-    }
-
-    private void showBanefit(String benefit) {
-        resultView.showBenefit(benefit);
-    }
-
-    private void showWinning(Map<Rank, Long> map) {
-        resultView.showWinning(map);
     }
 
     private LottoNumbers getVictoryNumbers() {

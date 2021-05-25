@@ -1,6 +1,6 @@
 package step3.game;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class LottoTest {
     void pickLottoWithPriceTest() {
         TotalLotto lottoTotal = new Lotto()
             .pickLottoWithPrice(new Price(14000));
-        assertThat(lottoTotal.size()).isEqualTo(14);
+        assertThat(lottoTotal.totalSize()).isEqualTo("14");
     }
 
 }

@@ -28,9 +28,9 @@ public class TotalLottoTest {
     }
 
     @Test
-    @DisplayName("size 반환 테스트")
+    @DisplayName("totalSize 반환 테스트")
     void sizeTest() {
-        assertThat(totalLotto.size()).isEqualTo(4);
+        assertThat(totalLotto.totalSize()).isEqualTo("4");
     }
 
     @Test
