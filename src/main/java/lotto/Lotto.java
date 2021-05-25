@@ -6,9 +6,9 @@ public class Lotto {
 
 	private static final int REQUIRED_COUNT = 6;
 
-	private final List<Number> numbers;
+	private final List<LottoNumber> numbers;
 
-	public Lotto(List<Number> numbers) {
+	public Lotto(List<LottoNumber> numbers) {
 		validateNumbers(numbers);
 
 		this.numbers = numbers;
@@ -20,7 +20,7 @@ public class Lotto {
 				.count());
 	}
 
-	private void validateNumbers(List<Number> numbers) {
+	private void validateNumbers(List<LottoNumber> numbers) {
 		long distinctCount = numbers.stream()
 				.distinct()
 				.count();

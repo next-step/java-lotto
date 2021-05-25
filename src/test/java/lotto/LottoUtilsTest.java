@@ -10,7 +10,7 @@ public class LottoUtilsTest {
 
 	@Test
 	void randomLottoNumbers() {
-		List<Number> numbers = LottoUtils.randomNumbers();
+		List<LottoNumber> numbers = LottoUtils.randomNumbers();
 		assertThat(numbers.size()).isEqualTo(6);
 		assertThat(numbers.stream()
 					.distinct()

@@ -15,12 +15,12 @@ public class LottoUtils {
 
 	private static final int REQUIRED_COUNT = 6;
 
-	private static final List<Number> numberPool
+	private static final List<LottoNumber> numberPool
 		= IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
-			.mapToObj(Number::new)
+			.mapToObj(LottoNumber::new)
 			.collect(toList());
 
-	public static List<Number> randomNumbers() {
+	public static List<LottoNumber> randomNumbers() {
 		Collections.shuffle(numberPool);
 		return numberPool.stream()
 			.limit(REQUIRED_COUNT)

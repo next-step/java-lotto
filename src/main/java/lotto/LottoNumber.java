@@ -2,11 +2,11 @@ package lotto;
 
 import java.util.Objects;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int value;
 
-	public Number(int value) {
+	public LottoNumber(int value) {
 		validateNumberValue(value);
 
 		this.value = value;
@@ -24,7 +24,7 @@ public class Number implements Comparable<Number> {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Number number1 = (Number)o;
+		LottoNumber number1 = (LottoNumber)o;
 		return value == number1.value;
 	}
 
@@ -34,7 +34,7 @@ public class Number implements Comparable<Number> {
 	}
 
 	@Override
-	public int compareTo(Number number) {
+	public int compareTo(LottoNumber number) {
 		return Integer.compare(this.value, number.value);
 	}
 

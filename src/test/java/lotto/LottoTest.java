@@ -12,21 +12,21 @@ public class LottoTest {
 
 	@Test
 	void lotto_생성_성공() {
-		List<Number> numbers = InputView.stringToNumbers("1,2,3,4,5,6");
+		List<LottoNumber> numbers = InputView.stringToNumbers("1,2,3,4,5,6");
 
 		assertDoesNotThrow(() -> new Lotto(numbers));
 	}
 
 	@Test
 	void lotto_생성_실패() {
-		List<Number> numbers = InputView.stringToNumbers("1,2,3,4,5");
+		List<LottoNumber> numbers = InputView.stringToNumbers("1,2,3,4,5");
 
 		assertThrows(RuntimeException.class, () -> new Lotto(numbers)); // 숫자가 5개
 
-		numbers.add(new Number(1));
+		numbers.add(new LottoNumber(1));
 		assertThrows(RuntimeException.class, () -> new Lotto(numbers)); // 기존과 동일한 숫자 추가
 
-		numbers.add(new Number(45));
+		numbers.add(new LottoNumber(45));
 		assertThrows(RuntimeException.class, () -> new Lotto(numbers)); // distinct 숫자 갯수는 6이나, 숫자는 7
 	}
 

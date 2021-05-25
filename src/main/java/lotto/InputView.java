@@ -16,18 +16,18 @@ public class InputView {
 		return new Money(scanner.nextInt());
 	}
 
-	public static List<Number> winningNumbers() {
+	public static List<LottoNumber> winningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String text = scanner.next();
 		System.out.println();
 		return stringToNumbers(text);
 	}
 
-	public static List<Number> stringToNumbers(String text) {
+	public static List<LottoNumber> stringToNumbers(String text) {
 		String[] split = text.split(DELIMITER);
 		return Stream.of(split)
 			.mapToInt(s -> Integer.parseInt(s.trim()))
-			.mapToObj(Number::new)
+			.mapToObj(LottoNumber::new)
 			.collect(toList());
 	}
 }
