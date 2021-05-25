@@ -1,8 +1,8 @@
 package lotto;
 
-public class Money {
+import static lotto.LottoUtils.*;
 
-	private static final int LOTTO_PRICE = 1000;
+public class Money {
 
 	private final int value;
 

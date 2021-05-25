@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.Winner.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,13 +31,13 @@ public class LottoTest {
 	}
 
 	@Test
-	void lotto_매치_카운트_비교() {
-		List<Number> numbers1 = InputView.stringToNumbers("1,2,3,4,5,6");
-		List<Number> numbers2 = InputView.stringToNumbers("5,6,7,8,9,10");
+	void lotto_등수_판별() {
+		Lotto lotto1 = new Lotto(InputView.stringToNumbers("1,2,3,4,5,6"));
 
-		Lotto lotto1 = new Lotto(numbers1);
+		Lotto winningLotto1 = new Lotto(InputView.stringToNumbers("1,2,3,4,5,6"));
+		Lotto winningLotto2 = new Lotto(InputView.stringToNumbers("5,6,7,8,9,10"));
 
-		assertThat(lotto1.matchCount(numbers1)).isEqualTo(6);
-		assertThat(lotto1.matchCount(numbers2)).isEqualTo(2);
+		assertThat(lotto1.winningCheck(winningLotto1)).isEqualTo(FIRST_PRIZE);
+		assertThat(lotto1.winningCheck(winningLotto2)).isEqualTo(NONE);
 	}
 }

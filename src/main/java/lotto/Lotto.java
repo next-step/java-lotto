@@ -14,10 +14,10 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public long matchCount(List<Number> winningNumbers) {
-		return numbers.stream()
-			.filter(winningNumbers::contains)
-			.count();
+	public Winner winningCheck(Lotto winLotto) {
+		return Winner.valueOf((int) numbers.stream()
+			.filter(winLotto.numbers::contains)
+			.count());
 	}
 
 	private void validateNumbers(List<Number> numbers) {

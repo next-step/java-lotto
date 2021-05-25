@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.LottoUtils.*;
 import static lotto.Winner.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -51,7 +52,8 @@ public class WinningResultTest {
 	void 당첨_수익률_확인(long money, String text, double expectedRatio) {
 		Lotto win = new Lotto(InputView.stringToNumbers(text));
 		WinningResult result = new WinningResult(win, lottos);
-		double resultRatio = Math.floor(result.totalPrize() * 100.0 / money) / 100.0;
+		long lottoBuyCount = money / LOTTO_PRICE * 1000;
+		double resultRatio = Math.floor(result.totalAward() * 100.0 / lottoBuyCount) / 100.0;
 		assertThat(resultRatio).isEqualTo(expectedRatio);
 	}
 }
