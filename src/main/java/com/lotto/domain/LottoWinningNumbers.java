@@ -30,16 +30,27 @@ public class LottoWinningNumbers {
         return new LottoWinningNumbers(set);
     }
 
-    public LottoReward reward(Lotto lotto) {
+    public LottoReward reward(Lotto lotto, LottoWinningBonusNumber bonusNumber) {
         int sameCount = 0;
-        for(LottoNumber lottoNumber : lotto.numbers()) {
+        for (LottoNumber lottoNumber : lotto.numbers()) {
             sameCount += addOneIfContainInWinningNumbers(lottoNumber);
+        }
+        if (isSecond(sameCount) && isContainsWinningNumbers(bonusNumber)) {
+            return SECOND_BONUS;
         }
         return generateReward(sameCount);
     }
 
+    private boolean isContainsWinningNumbers(LottoWinningBonusNumber bonusNumber) {
+        return winningNumbers.contains(bonusNumber);
+    }
+
+    private boolean isSecond(int sameCount) {
+        return sameCount == SECOND_BONUS.sameCount();
+    }
+
     private int addOneIfContainInWinningNumbers(LottoNumber lottoNumber) {
-        if(winningNumbers.contains(lottoNumber)) {
+        if (winningNumbers.contains(lottoNumber)) {
             return 1;
         }
         return 0;

@@ -1,32 +1,50 @@
 package com.lotto.domain;
 
 public enum LottoReward {
-    FIRST(6, 2_000_000_000) {
+    FIRST(6, false, 2_000_000_000) {
         @Override
-        public int totalReward(int count) { return count * FIRST.reward(); }
+        public int totalReward(int count) {
+            return count * FIRST.reward();
+        }
     },
-    SECOND(5, 1_500_000) {
+    SECOND_BONUS(5, true, 3_000_000) {
         @Override
-        public int totalReward(int count) { return count * SECOND.reward(); }
+        public int totalReward(int count) {
+            return count * SECOND_BONUS.reward();
+        }
     },
-    THIRD(4, 50_000) {
+    SECOND(5, false, 1_500_000) {
         @Override
-        public int totalReward(int count) { return count * THIRD.reward(); }
+        public int totalReward(int count) {
+            return count * SECOND.reward();
+        }
     },
-    FOURTH(3, 5_000) {
+    THIRD(4, false, 50_000) {
         @Override
-        public int totalReward(int count) { return count * FOURTH.reward(); }
+        public int totalReward(int count) {
+            return count * THIRD.reward();
+        }
     },
-    MISS(0, 0) {
+    FOURTH(3, false, 5_000) {
         @Override
-        public int totalReward(int count) { return 0; }
+        public int totalReward(int count) {
+            return count * FOURTH.reward();
+        }
+    },
+    MISS(0, false, 0) {
+        @Override
+        public int totalReward(int count) {
+            return 0;
+        }
     };
 
     private int reward;
     private int sameCount;
+    private boolean isBonus;
 
-    LottoReward(int sameCount, int reward) {
+    LottoReward(int sameCount, boolean isBonus, int reward) {
         this.reward = reward;
+        this.isBonus = isBonus;
         this.sameCount = sameCount;
     }
 
@@ -34,13 +52,19 @@ public enum LottoReward {
         return reward;
     }
 
-    public int sameCount() { return sameCount; }
+    public int sameCount() {
+        return sameCount;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
 
     public abstract int totalReward(int count);
 
     public static LottoReward generateReward(int sameCount) {
         for (LottoReward reward : LottoReward.values()) {
-            if (reward.sameCount() == sameCount) {
+            if (reward.sameCount() == sameCount && !reward.isBonus()) {
                 return reward;
             }
         }

@@ -1,9 +1,6 @@
 package com.lotto;
 
-import com.lotto.domain.Lotto;
-import com.lotto.domain.LottoNumber;
-import com.lotto.domain.LottoReward;
-import com.lotto.domain.LottoWinningNumbers;
+import com.lotto.domain.*;
 import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.IllegalLottoCountException;
 import com.lotto.exception.LottoNumberOutOfBoundsException;
@@ -71,7 +68,7 @@ public class LottoWinningNumbersTest {
         LottoNumber number6 = new LottoNumber(6);
         Lotto lotto = new Lotto(new TreeSet<>(Arrays.asList(number1, number2, number3, number4, number5, number6)));
 
-        LottoReward reward = lottoWinningNumbers.reward(lotto);
+        LottoReward reward = lottoWinningNumbers.reward(lotto, LottoWinningBonusNumber.valueOf(7));
 
         assertThat(reward).isEqualTo(LottoReward.FIRST);
     }
@@ -88,7 +85,7 @@ public class LottoWinningNumbersTest {
         Lotto lotto = new Lotto(new TreeSet<>(Arrays.asList(number1, number2, number3, number4, number5, number6)));
 
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.createLottoWinningNumbers("7,8,9,10,11,12");
-        LottoReward reward = lottoWinningNumbers.reward(lotto);
+        LottoReward reward = lottoWinningNumbers.reward(lotto, LottoWinningBonusNumber.valueOf(1));
 
         Assertions.assertThat(reward).isEqualTo(LottoReward.MISS);
     }

@@ -4,7 +4,7 @@ import com.lotto.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Objects;
 
-public final class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
 
@@ -38,7 +38,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(this instanceof LottoNumber)) return false;
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
