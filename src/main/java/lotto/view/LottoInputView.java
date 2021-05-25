@@ -17,7 +17,9 @@ public class LottoInputView {
 
     public PurchaseMoney questionPurchaseMoney() {
         System.out.println(MESSAGE_PURCHASE_MONEY);
+
         String playerInput = scanner.nextLine();
+        playerInput = removeSpace(playerInput);
 
         return new PurchaseMoney(playerInput);
     }
@@ -25,8 +27,14 @@ public class LottoInputView {
     public WinningLottoNumber questionLastPrizeNumber() {
         System.out.println();
         System.out.println(MESSAGE_LAST_PRIZE_NUMBER);
+
         String playerInput = scanner.nextLine();
+        playerInput = removeSpace(playerInput);
 
         return new WinningLottoNumber(playerInput);
+    }
+
+    private String removeSpace(String playerInput) {
+        return playerInput.replaceAll(" ", "");
     }
 }
