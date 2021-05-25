@@ -87,7 +87,7 @@ public class StringCalculator {
 		return tokenizing(text, DEFAULT_DELIMITER);
 	}
 
-	private static String[] tokenizing(String text, String delimiter) {
+	public static String[] tokenizing(String text, String delimiter) {
 		return text.split(delimiter);
 	}
 

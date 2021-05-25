@@ -18,12 +18,53 @@
 
 # 로또
 
+## 객체
+
+├── LottoGameManager.java: 로또 게임을 시작하고 종료하는 관리자이다.
+├── calculator
+│   └── StringCalculator.java: 앞선 step1, 2 의 계산기이다. 사용자가 입력한 당첨 번호에 사용한다
+├── interaction : user interface 를 맞는다
+│    ├── InputView.java
+│    └── OutputView.java
+└── lotto
+├── LottoNumber.java: 로또 번호 하나
+├── LottoNumbers.java: 로또 한 세트이다
+├── generator
+│   ├── AutoLottoNumberGenerator.java: 랜덤을 사용해 로또 번호를 생성한다. 가게에서 파는 로또 머신의 역항
+│   ├── Generator.java: 로또 번호 생성기의 interface 이다.
+│   └── MessageLottoNumberGenerator.java: 사용자가 입력한 문자열을 로또 한벌로 만들어주는 역할을 한다
+├── statistics
+│    ├── Earn.java: 로또 번호 매칭이 되었을 때 각 등급별 가격을 명시한다
+│    ├── Statistic.java: 로또 하나에 대해 얼마나 매칭되었는지, 그래서 얼마를 벌었는지 통계를 내어준다
+│    └── StatisticsCalculator.java: 사용자가 구매한 금액의 모든 로또를 계산한다
+└── store
+├── LottoStore.java: 로또를 판매한다, 또한 확장성을 고려해 로또의 가격을 정할 수 있다
+└── Ticket.java: 유저가 한번 구매한 모든 로또는 티켓으로 발급된다
+
+## 고려한 내용
+
+1. `List`, `Map` 에서 initialCapacity 를 명시했다. 사이즈가 늘어나고, re-hasing 을 하면서 발생되는 추가적인 연산을 막고 싶었다.
+
+
 ## 진행 방법
 
 * 로또 요구사항을 파악한다.
 * 요구사항에 대한 구현을 완료한 후 자신의 github 아이디에 해당하는 브랜치에 Pull Request(이하 PR)를 통해 코드 리뷰 요청을 한다.
 * 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
+
+## 기능 요구사항
+
+1. 로또 구매 가격을 입력받는다 (장당 1,000원)
+   - input은 `int`
+2. 사용자는 구매하고 싶은 만큼의 로또 가격을 입력한다. 구매 개수 = (입력 / 1000)
+   - 구매 개수 출력
+3. 구매 개수 만큼의 로또를 생성한다
+   - 생성한 로또 출력
+4. 로또 우승 번호 6자리를 입력받는다
+5. 우승 번호와 일치하는 개수를 찾아 통계를 낸다 (3, 4, 5, 6개 일치)
+6. 각 일치되는 개수별 우승상금의 합계를 반환한다
+7. 1을 기준으로 백분율 표시 (얻은 상금 / 구매 가격)
 
 ## 프로그래밍 요구사항
 
@@ -33,6 +74,9 @@
 - 메소드의 크기가 최대 10라인을 넘지 않도록 구현한다.
     - method가 한 가지 일만 하도록 최대한 작게 만들어라.
 - else를 사용하지 마라.
+- `input`, `output` 에 대한 객체 설계
+    - `InputView`, `ResultView` 생성
+- 함수는 한 가지 일만 해야한다
 
 ## 온라인 코드 리뷰 과정
 
