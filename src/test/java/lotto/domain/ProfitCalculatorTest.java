@@ -30,10 +30,10 @@ public class ProfitCalculatorTest {
     void calculateProfit_shouldFloor() {
         ProfitCalculator profitCalculator = new ProfitCalculator();
         //소수점 둘째자리까지 표기되며 이후는 버림
-        List<WinningType> plusWinningTypes = Arrays.asList(WinningType.FORTH, WinningType.FORTH, WinningType.SEVENTH);
+        List<WinningType> plusWinningTypes = Arrays.asList(WinningType.FIFTH, WinningType.FIFTH, WinningType.SEVENTH);
         assertThat(profitCalculator.calculate(3000, plusWinningTypes)).isEqualTo(3.33);
 
-        List<WinningType> MinusWinningTypes = Arrays.asList(WinningType.FIFTH, WinningType.SIXTH, WinningType.SEVENTH);
+        List<WinningType> MinusWinningTypes = Arrays.asList(WinningType.SIXTH, WinningType.SEVENTH, WinningType.EIGHTH);
         assertThat(profitCalculator.calculate(3000, MinusWinningTypes)).isEqualTo(0.00);
     }
 }

@@ -27,10 +27,10 @@ public class LottoTicketTest {
         LottoTicket userThirdLottoTicket = new LottoTicket("1,2,3,4,5,8");
         assertThat(userThirdLottoTicket.getWinningType(winningLottoTicket, bonusNumber)).isEqualTo(WinningType.THIRD);
 
-        //4등은 3개 로또번호가 일치하는 경우이다.
+        //5등은 3개 로또번호가 일치하는 경우이다.
         LottoTicket userForthLottoTicket = new LottoTicket("1,2,3,14,15,16");
         winningType = userForthLottoTicket.getWinningType(winningLottoTicket);
-        assertThat(winningType).isEqualTo(WinningType.FORTH);
+        assertThat(winningType).isEqualTo(WinningType.FIFTH);
 
         //8등은 0개 로또번호가 일치하는 경우이다.
         LottoTicket userSeventhLottoNumbers = new LottoTicket("11,12,13,14,15,16");

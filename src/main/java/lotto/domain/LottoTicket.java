@@ -29,11 +29,27 @@ public class LottoTicket {
         return WinningType.of(matchCount);
     }
 
+    public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
+        int matchCount = 0;
+        for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
+            matchCount += contains(winningLottoNumber);
+        }
+
+        return WinningType.of(matchCount, isMatchBonus(bonusNumber));
+    }
+
     private int contains(LottoNumber winningLottoNumber) {
         if (this.LOTTO_NUMBERS.contains(winningLottoNumber)) {
             return 1;
         }
         return 0;
+    }
+
+    private boolean isMatchBonus(int bonusNumber) {
+        if (this.LOTTO_NUMBERS.contains(new LottoNumber(bonusNumber))) {
+            return true;
+        }
+        return false;
     }
 
     public String printLottoTicket() {

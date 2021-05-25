@@ -32,19 +32,20 @@ public class LottoTicketsTest {
     @DisplayName("로또 상금 합계 계산 테스트")
     void getPrizeSum() {
         LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
+        int bonusNumber = 7;
 
         //1등, 2등 합계
         LottoTickets firstUserLottoTickets = new LottoTickets(Arrays.asList(
                 new LottoTicket("1,2,3,4,5,6"), new LottoTicket("1,2,3,4,5,7")
         ));
-        assertThat(firstUserLottoTickets.getPrizeSum(winningLottoTicket))
+        assertThat(firstUserLottoTickets.getPrizeSum(winningLottoTicket, bonusNumber))
                 .isEqualTo(WinningType.FIRST.getPrize() + WinningType.SECOND.getPrize());
 
         //3등, 4등 합계
         LottoTickets secondUserLottoTickets = new LottoTickets(Arrays.asList(
-                new LottoTicket("1,2,3,4,15,16"), new LottoTicket("1,2,3,14,15,17")
+                new LottoTicket("1,2,3,4,5,16"), new LottoTicket("1,2,3,4,15,17")
         ));
-        assertThat(secondUserLottoTickets.getPrizeSum(winningLottoTicket))
+        assertThat(secondUserLottoTickets.getPrizeSum(winningLottoTicket, bonusNumber))
                 .isEqualTo(WinningType.THIRD.getPrize() + WinningType.FORTH.getPrize());
     }
 }

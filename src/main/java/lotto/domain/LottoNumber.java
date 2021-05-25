@@ -14,6 +14,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.LOTTO_NUMBER = lottoNumber;
     }
 
+    public Integer of() {
+        return this.LOTTO_NUMBER;
+    }
+
     @Override
     public int compareTo(LottoNumber o) {
         return this.LOTTO_NUMBER - o.LOTTO_NUMBER;
@@ -30,9 +34,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return ((LottoNumber)obj).LOTTO_NUMBER == this.LOTTO_NUMBER;
         }
         return super.equals(obj);
-    }
-
-    public Integer of() {
-        return this.LOTTO_NUMBER;
     }
 }

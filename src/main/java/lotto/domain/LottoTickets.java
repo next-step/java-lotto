@@ -37,10 +37,29 @@ public class LottoTickets {
         return prizeSum;
     }
 
+    public long getPrizeSum(LottoTicket winningLottoTicket, int bonusNumber) {
+        long prizeSum = 0;
+        for (LottoTicket lottoTicket : this.LOTTO_TICKETS) {
+            prizeSum += lottoTicket.getWinningType(winningLottoTicket, bonusNumber).getPrize();
+        }
+
+        return prizeSum;
+    }
+
     public WinningType[] getGameResults(LottoTicket winningLottoTicket) {
         WinningType[] winningTypes = new WinningType[this.LOTTO_TICKETS.size()];
         for (int i = 0; i < this.LOTTO_TICKETS.size(); i++) {
             WinningType winningType = this.LOTTO_TICKETS.get(i).getWinningType(winningLottoTicket);
+            winningTypes[i] = winningType;
+        }
+
+        return winningTypes;
+    }
+
+    public WinningType[] getGameResults(LottoTicket winningLottoTicket, int bonusNumber) {
+        WinningType[] winningTypes = new WinningType[this.LOTTO_TICKETS.size()];
+        for (int i = 0; i < this.LOTTO_TICKETS.size(); i++) {
+            WinningType winningType = this.LOTTO_TICKETS.get(i).getWinningType(winningLottoTicket, bonusNumber);
             winningTypes[i] = winningType;
         }
 
