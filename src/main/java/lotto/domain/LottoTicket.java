@@ -36,8 +36,11 @@ public class LottoTicket {
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return this.LOTTO_NUMBERS.toString();
+    public String printLottoTicket() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : this.LOTTO_NUMBERS) {
+            lottoNumbers.add(lottoNumber.of());
+        }
+        return lottoNumbers.toString();
     }
 }

@@ -21,7 +21,7 @@ public class LottoTickets {
     public String printLottoTickets() {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket lottoTicket : LOTTO_TICKETS) {
-            stringBuilder.append(lottoTicket.toString());
+            stringBuilder.append(lottoTicket.printLottoTicket());
             stringBuilder.append("\n");
         }
 

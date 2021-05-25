@@ -2,9 +2,6 @@ package lotto.view;
 
 import lotto.common.WinningType;
 
-import java.util.List;
-import java.util.Map;
-
 public class ResultView {
     public void printLottoTicketCount(int lottoTicketCount) {
         System.out.println(lottoTicketCount + "개를 구매했습니다.");
