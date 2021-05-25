@@ -24,10 +24,6 @@ public class Lotto {
                 .count();
     }
 
-    private void retainAll(WinningNumber winningNumber) {
-        numbers.retainAll(winningNumber.numbers());
-    }
-
     public String numbersToString() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
