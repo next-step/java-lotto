@@ -1,7 +1,16 @@
 package lotto.model;
 
 public class LottoPrice {
-    public int getQuantity(int price) {
+    private int price ;
+
+    public LottoPrice(int price) {
+        this.price = price;
+    }
+    public static int getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
         return price / 1_000;
     }
 }

@@ -16,10 +16,8 @@ public class LottoManualController {
         LottoManualInputView inputView = new LottoManualInputView();
         LottoManualResultView resultView = new LottoManualResultView();
 
-        int price = inputView.inputPrice();
-
-        LottoPrice lottoPrice = new LottoPrice();
-        int quantity = lottoPrice.getQuantity(price);
+        LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
+        int quantity = lottoPrice.getQuantity();
 
         int manualQuantity = inputView.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
@@ -37,7 +35,7 @@ public class LottoManualController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
-        resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), price));
+        resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {

@@ -15,10 +15,9 @@ public class LottoAutoController {
     public void start() {
         LottoAutoInputView inputView = new LottoAutoInputView();
         LottoAutoResultView resultView = new LottoAutoResultView();
-        int price = inputView.inputPrice();
 
-        LottoPrice lottoPrice = new LottoPrice();
-        int quantity = lottoPrice.getQuantity(price);
+        LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
+        int quantity = lottoPrice.getQuantity();
 
         List<LottoModel> lottos = setLotto(quantity);
         resultView.printLotto(quantity, lottos);
@@ -31,7 +30,7 @@ public class LottoAutoController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningNumbers, bonusNumber);
-        resultView.outputWinningStatistic(getEarningRate(getEarningPrice(), price));
+        resultView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public List<LottoModel> setLotto(int quantity) {
