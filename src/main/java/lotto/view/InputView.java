@@ -28,12 +28,12 @@ public class InputView {
 		System.out.println(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
 
 		String inputNumbers = scanner.nextLine();
-		Lotto lotto = new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
+		Lotto winningLotto = new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
 
 		System.out.println(MESSAGE_INPUT_BONUS_NUMBERS);
 		int lottoNumber = Integer.parseInt(scanner.nextLine());
 
-		return new WinningLotto(lotto, lottoNumber);
+		return new WinningLotto(winningLotto, lottoNumber);
 	}
 
 	protected static List<Integer> toNumbers(String inputNumbers, String delimiter) {
