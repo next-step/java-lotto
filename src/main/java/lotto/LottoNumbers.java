@@ -24,16 +24,16 @@ public final class LottoNumbers {
 		if (numbers == null) {
 			throw LottoException.of(WRONG_LOTTO_NUMBER);
 		}
-		this.lottoNumbers = Collections.unmodifiableSet(makeLottoNumbers(numbers));
+		Set<LottoNumber> lottoNumbers = makeLottoNumbers(numbers);
+		checkLottoNumberCount(lottoNumbers);
+		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
 	}
 
 	private Set<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
-		Set<LottoNumber> lottoNumbers = numbers.stream()
-											   .map(LottoNumber::new)
-											   .sorted()
-											   .collect(Collectors.toCollection(LinkedHashSet::new));
-		checkLottoNumberCount(lottoNumbers);
-		return lottoNumbers;
+		return numbers.stream()
+					  .map(LottoNumber::new)
+					  .sorted()
+					  .collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
 	public LottoRewardType result(final LottoNumbers winningLottoNumber, final LottoNumber bonusNumber) {
