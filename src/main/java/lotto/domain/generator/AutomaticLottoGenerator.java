@@ -11,11 +11,11 @@ public final class AutomaticLottoGenerator implements LottoGenerator {
     @Override
     public List<Number> numberGenerator() {
         List<Number> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             numbers.add(new Number(i));
         }
         Collections.shuffle(numbers);
-        List<Number> automaticNumbers = numbers.subList(0, 6);
+        List<Number> automaticNumbers = numbers.subList(0, LOTTO_FULL_NUMBER);
         sortNumbers(automaticNumbers);
         return automaticNumbers;
     }
