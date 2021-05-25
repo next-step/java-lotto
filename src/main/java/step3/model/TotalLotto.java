@@ -42,11 +42,10 @@ public class TotalLotto {
                 Collectors.counting()));
     }
 
-    @Override
-    public String toString() {
+    public String getStatus() {
         List<String> temp = new ArrayList<>();
         totalLotto.stream()
-            .forEach(lottoNumbers -> temp.add(lottoNumbers.toString()));
+            .forEach(lottoNumbers -> temp.add(lottoNumbers.getStatus()));
         return String.join("\n", temp);
     }
 

@@ -33,7 +33,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof LottoNumber) {
-            LottoNumber other = (LottoNumber) obj;
+            LottoNumber other = (LottoNumber)obj;
             return this.number.equals(other.number);
         }
         return false;
@@ -44,8 +44,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         return (number > other.number) ? 1 : -1;
     }
 
-    @Override
-    public String toString() {
+    public String getStatus() {
         return String.valueOf(number);
     }
 }

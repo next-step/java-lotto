@@ -66,11 +66,10 @@ public final class LottoNumbers {
         return Rank.findRankPriceBymatchedCount(matchedCount, hasBous);
     }
 
-    @Override
-    public String toString() {
+    public String getStatus() {
         List<String> temp = new ArrayList<>(Arrays.asList("["));
         lottoNumbers.stream()
-            .forEach(lottoNumber -> temp.add(lottoNumber.toString()));
+            .forEach(lottoNumber -> temp.add(lottoNumber.getStatus()));
         temp.add("]");
         return String.join(" ", temp);
     }
