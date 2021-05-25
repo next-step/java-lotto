@@ -14,9 +14,9 @@ public class Lotto {
 
 	private List<Integer> lotto;
 
-	public Lotto(List<Integer> randomNumberList) {
-		validateRandomNumberListSize(new HashSet<>(randomNumberList));
-		this.lotto = randomNumberList;
+	public Lotto(List<Integer> numberList) {
+		validateNumberListSize(new HashSet<>(numberList));
+		this.lotto = numberList;
 		sortLottoNumber();
 	}
 
@@ -24,7 +24,7 @@ public class Lotto {
 		lotto.sort(Comparator.comparingInt(x -> x));
 	}
 
-	private void validateRandomNumberListSize(Set<Integer> lotto) {
+	private void validateNumberListSize(Set<Integer> lotto) {
 		if (lotto.size() != LOTTO_LENGTH) {
 			throw new RuntimeException("lotto numbers must be consist of six numbers");
 		}
@@ -33,15 +33,11 @@ public class Lotto {
 	public int match(Lotto targetLotto) {
 		int matchedSize = 0;
 
-		for (Integer number : targetLotto.getLotto()) {
+		for (Integer number : targetLotto.lotto) {
 			matchedSize = getMatchedSize(matchedSize, number);
 		}
 
 		return matchedSize;
-	}
-
-	private List<Integer> getLotto() {
-		return this.lotto;
 	}
 
 	private int getMatchedSize(int matchedSize, Integer number) {
