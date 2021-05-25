@@ -1,15 +1,18 @@
 package lottery;
 
+import java.util.Collections;
+import java.util.Map;
+
 public class Result {
 
 	private final LotteryMatchTypeMap resultMap;
 
-	public Result() {
-		resultMap = LotteryMatchTypeMap.newInstance();
+	public Result(LotteryMatchTypeMap resultMap) {
+		this.resultMap = resultMap;
 	}
 
-	public LotteryMatchTypeMap getResultMap() {
-		return resultMap;
+	public Map<LotteryMatchType, Integer> getResultMap() {
+		return Collections.unmodifiableMap(resultMap.getMatchTypeMap());
 	}
 
 	public float getTotalYield(Money buyerMoney) {

@@ -1,6 +1,6 @@
 package lottery.view;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lottery.Tickets;
@@ -17,7 +17,7 @@ public class InputView {
 
 	public void printTickets(Tickets tickets) {
 		tickets.getValues().forEach(ticket -> {
-			List<Integer> numbers = ticket.numbers().getValues();
+			Set<Integer> numbers = ticket.numbers().getValues();
 			System.out.println("[" + numbers.stream()
 				.map(String::valueOf)
 				.collect(Collectors.joining(", ")) + "]");

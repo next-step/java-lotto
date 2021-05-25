@@ -2,10 +2,10 @@ package lottery;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import org.assertj.core.util.Lists;
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
 import lottery.exceptions.InvalidTicketSizeException;
@@ -16,15 +16,15 @@ class TicketTest {
 
 	@Test
 	void create() {
-		Numbers numbers = Numbers.from(Lists.list(1, 2, 3, 4, 5, 6));
+		LottoNumbers lottoNumbers = LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
 
-		sut = Ticket.of(numbers);
+		sut = Ticket.of(lottoNumbers);
 
-		List<Integer> values = sut.numbers().getValues();
+		Set<Integer> values = sut.numbers().getValues();
 		assertThat(values).hasSize(6);
-		assertThat(values).containsAll(numbers.getValues());
+		assertThat(values).containsAll(lottoNumbers.getValues());
 
-		assertThatThrownBy(() -> Ticket.of(Numbers.from(new ArrayList<>())))
+		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>())))
 			.isInstanceOf(InvalidTicketSizeException.class);
 	}
 }

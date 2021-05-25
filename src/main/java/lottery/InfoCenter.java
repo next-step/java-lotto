@@ -1,6 +1,8 @@
 package lottery;
 
-import java.util.List;
+import static java.util.stream.Collectors.*;
+
+import java.util.stream.Collectors;
 
 public class InfoCenter {
 
@@ -12,19 +14,10 @@ public class InfoCenter {
 	}
 
 	public Result confirmTicket(Tickets buyerTickets) {
-		Result result = new Result();
-
-		buyerTickets.getValues().stream()
-			.map(ticket -> {
-				Numbers numbers = ticket.numbers();
-				List<Integer> values = numbers.getValues();
-				values.removeAll(this.lastWeekWinningTicket.numbers().getValues());
-				return Ticket.SIZE_OF_TICKET - values.size(); })
+		return new Result(LotteryMatchTypeMap.of(buyerTickets.getValues().stream()
+			.map(ticket -> ticket.numbers().matchCountWith(lastWeekWinningTicket.numbers()))
 			.filter(matchCount -> matchCount >= MATCH_THREE_NUMBER)
-			.map(LotteryMatchType::fromInteger)
-			.forEach(match -> result.getResultMap().addMatchType(match));
-
-		return result;
+			.collect(Collectors.groupingBy(LotteryMatchType::fromInteger, summingInt(a -> 1)))));
 	}
 
 	public Ticket lastWeekWinningNumbers() {

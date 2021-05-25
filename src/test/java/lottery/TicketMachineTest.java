@@ -2,18 +2,19 @@ package lottery;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class GenerateTicketMachineTest {
+class TicketMachineTest {
 
-	private GenerateTicketMachine sut;
+	private TicketMachine sut;
 
 	@BeforeEach
 	void setUp() {
-		sut = new GenerateTicketMachine();
+		sut = new TicketMachine();
 
 	}
 
@@ -27,7 +28,7 @@ class GenerateTicketMachineTest {
 	void 발행된_티켓의_번호들은_정렬된_순서를_갖는다() {
 		Tickets tickets = sut.create(1);
 		Ticket ticket = tickets.getValues().get(0);
-		assertThat(ticket.numbers().getValues()).isSorted();
+		assertThat(new ArrayList<>(ticket.numbers().getValues())).isSorted();
 	}
 
 	@Test
@@ -35,10 +36,10 @@ class GenerateTicketMachineTest {
 		Tickets tickets = sut.create(1);
 		assertThat(tickets.getValues()).hasSize(1);
 
-		Numbers numbers = tickets.getValue(0)
+		LottoNumbers lottoNumbers = tickets.getValue(0)
 			.numbers();
-		assertThat(numbers.getValues()).hasSize(6);
-		assertThatHasValidNumber(numbers);
+		assertThat(lottoNumbers.getValues()).hasSize(6);
+		assertThatHasValidNumber(lottoNumbers);
 
 
 	}
@@ -55,8 +56,8 @@ class GenerateTicketMachineTest {
 		}
 	}
 
-	private void assertThatHasValidNumber(Numbers numbers) {
-		for (int number : numbers.getValues()) {
+	private void assertThatHasValidNumber(LottoNumbers lottoNumbers) {
+		for (int number : lottoNumbers.getValues()) {
 			assertThat(number).isBetween(1, 45);
 		}
 	}

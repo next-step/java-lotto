@@ -1,8 +1,9 @@
 package lottery;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lottery.view.InputView;
@@ -36,10 +37,11 @@ public class Main {
 		inputView.printTickets(tickets);
 
 		inputView.askForLastWeekTickets();
-		List<Integer> ints = Arrays.stream(sc.nextLine().split(","))
+		Set<Integer> ints = Arrays.stream(sc.nextLine().split(","))
 			.map(a -> Integer.parseInt(a.trim()))
-			.collect(Collectors.toList());
-		infoCenter.setLastWeekWinningTicket(Ticket.of(Numbers.from(ints)));
+			.sorted()
+			.collect(Collectors.toCollection(LinkedHashSet::new));
+		infoCenter.setLastWeekWinningTicket(Ticket.of(LottoNumbers.from(ints)));
 
 		Result result = buyer.checkTicket(infoCenter);
 		float totalYield = result.getTotalYield(initialMoney);

@@ -2,15 +2,15 @@ package lottery;
 
 public class Store {
 
-	private final GenerateTicketMachine machine;
+	private final TicketMachine machine;
 
 	private static final Money TICKET_PRICE = Money.won(1000L);
 
 	public Store() {
-		machine = new GenerateTicketMachine();
+		machine = new TicketMachine();
 	}
 
-	public GenerateTicketMachine getMachine() {
+	public TicketMachine getMachine() {
 		return machine;
 	}
 
