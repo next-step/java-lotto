@@ -1,6 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,10 +23,18 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {-2000, -5000, -100})
     public void buyLottoFailedTest(int money) {
-
         assertThatThrownBy(() -> {
             new LottoBundle(money);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0원 이상");
+    }
+
+    @DisplayName("로또 생성 시 1-45 범위에 속하지 않는 숫자가 있으면 예외가 발생한다.")
+    @Test
+    public void createLottoFailedTest() {
+        assertThatThrownBy(() -> {
+            new Lotto(new Integer[]{-1, 2, 3, 4, 5, 46});
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("범위");
     }
 }
