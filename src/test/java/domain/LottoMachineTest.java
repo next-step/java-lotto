@@ -89,7 +89,7 @@ public class LottoMachineTest {
 
         //when then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lottoMachine.bonusBall(bonusNumber, winningNumber))
+                .isThrownBy(() -> InputView.bonusBall(bonusNumber, winningNumber))
                 .withMessageMatching("보너스 볼은 당첨 번호들이랑 달라야 합니다.");
     }
 }
