@@ -11,11 +11,14 @@ public class LottoValidationUtils {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int LOTTO_MINIMUN_NUMBER = 1;
     private static final int LOTTO_MAXINUM_NUMBER = 45;
+
     private static final String WIN_LOTTO_NUMBER_DELIMETER = ",";
-    public static final String NUMBER_REGEX = "[+-]?[0-9]+$";
-    public static final String NUMBER_RANGE_EXECEPTION_MSG = "숫자는 1부터 45까지만 입력 가능합니다.";
-    public static final String NUMBER_FORMAT_EXECEPTION_MSG = "숫자만 입력 가능합니다.";
-    public static final String NUMBER_NULL_EXECEPTION_MSG = "구매금액을 입력해 주세요.";
+    private static final String NUMBER_REGEX = "[+-]?[0-9]+$";
+    private static final String NUMBER_RANGE_EXECEPTION_MSG = "숫자는 1부터 45까지만 입력 가능합니다.";
+    private static final String NUMBER_FORMAT_EXECEPTION_MSG = "숫자만 입력 가능합니다.";
+    private static final String NUMBER_NULL_EXECEPTION_MSG = "구매금액을 입력해 주세요.";
+
+    public static final int LOTTO_COST = 1000;
 
     public static int getLottoNumberSize(){
         return LOTTO_NUMBER_SIZE;

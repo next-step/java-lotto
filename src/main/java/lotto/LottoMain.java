@@ -5,6 +5,7 @@ public class LottoMain {
         InputView inputView = new InputView();
         Lottos lottos = inputView.lottoBuyStart();
         LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
+
         ResultView resultView = new ResultView();
         resultView.prinfResult(lottoResult);
     }
