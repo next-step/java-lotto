@@ -1,23 +1,23 @@
 package lotto.model;
 
-import lotto.controller.LottoController;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
     @DisplayName("로또 생성시 로또 번호 리스트의 길이가 6이 아니면 에러.")
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6,7})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7})
     void validateLottoListSizeTest(int number) {
         List<LottoNumber> lottoNumberList = Arrays.asList(new LottoNumber(number));
         Set<LottoNumber> lottoNumbers = new HashSet<>();
@@ -28,18 +28,6 @@ public class LottoTest {
                     new Lotto(lottoNumbers);
                 });
     }
-
-/*    @DisplayName("로또 생성시 로또 번호 리스트가 중복되면 에러.")
-    @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6,6})
-    void validateLottoListDuplicateTest(int number) {
-        Set<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(number));
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    new Lotto(lottoNumbers);
-                });
-    }*/
 
     @DisplayName("로또 생성시 발생하는 2가지 에러 검증")
     @ParameterizedTest

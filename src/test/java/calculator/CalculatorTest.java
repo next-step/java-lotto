@@ -19,14 +19,14 @@ public class CalculatorTest {
     }
 
     @Test
-    public void sumNumbers() {
+    void sumNumbers() {
         List<Integer> numbers = Arrays.asList(2, 3);
         assertThat(calculator.sumNumbers(numbers)).isEqualTo(5);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2,3", "//;/n1;2;3"})
-    public void sumExpression(String input) {
+    void sumExpression(String input) {
         assertThat(calculator.sumExpression(input)).isEqualTo(6);
     }
 }

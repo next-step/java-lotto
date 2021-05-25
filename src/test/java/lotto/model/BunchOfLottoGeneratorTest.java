@@ -1,8 +1,5 @@
 package lotto.model;
 
-import lotto.model.BunchOfLottoGenerator;
-import lotto.model.Lotto;
-import lotto.model.PurchaseCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,18 +1,19 @@
 package lotto.model;
 
-import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static lotto.model.Reward.*;
 import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class
-WinningLogicTest {
+public class WinningLogicTest {
     @DisplayName("당첨번호와 로또번호 `비교`시 총 몇개의 같은 숫자가 일치하는지 알 수있다.")
     @Test
     void makeWinningStateTest() {
@@ -25,8 +26,8 @@ WinningLogicTest {
         Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
 
         Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers,incorrectBonusBall);
-        WinningLotto winningLottoWithBonus = new WinningLotto(winningLottoNumbers,correctBonusBall);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, incorrectBonusBall);
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLottoNumbers, correctBonusBall);
         WinningState threeMatchedWinningLotto = winningLogic.makeWinningState(lotto, winningLotto);
         WinningState threeMatchedWinningLottoWithBonus = winningLogic.makeWinningState(lotto, winningLottoWithBonus);
 

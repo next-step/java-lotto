@@ -1,6 +1,5 @@
 package calculator;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,8 +9,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WordTest {
     private static final String CUSTOM_EXPRESSION = "//;/n11;2;3";
@@ -25,7 +25,7 @@ public class WordTest {
 
     @DisplayName("입력한 값을 반환한다.")
     @Test
-    public void makeNumbersInGeneralExpressionTest() {
+    void makeNumbersInGeneralExpressionTest() {
         String expression = GENERAL_EXPRESSION;
         List<Integer> numbers = word.makeNumbersInGeneralExpression(expression);
         assertThat(numbers.get(0)).isEqualTo(1);
@@ -35,7 +35,7 @@ public class WordTest {
     @DisplayName("구분자를 기준으로 분리한 모든 정수값을 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,2", "1:2"})
-    public void makeNumbersInTwoGeneralExpressionTest(String input) {
+    void makeNumbersInTwoGeneralExpressionTest(String input) {
         List<Integer> numbers = word.makeNumbersInGeneralExpression(input);
         assertThat(numbers.get(0)).isEqualTo(1);
         assertThat(numbers.get(1)).isEqualTo(2);
@@ -43,7 +43,7 @@ public class WordTest {
 
     @DisplayName("커스텀 구분자를 기준으로 분리한 모든 정수값을 반환한다. ")
     @Test
-    public void makeNumbersInCustomExpressionTest() {
+    void makeNumbersInCustomExpressionTest() {
         List<Integer> numbers = word.makeNumbersInCustomExpression(CUSTOM_EXPRESSION);
         assertThat(numbers.get(0)).isEqualTo(11);
         assertThat(numbers.get(1)).isEqualTo(2);
@@ -52,7 +52,7 @@ public class WordTest {
 
     @DisplayName("입력된 문자의 시작값이 숫자인지 '/' 인지 판별한다.")
     @Test
-    public void isCustomInputTest() {
+    void isCustomInputTest() {
         Boolean isCustom = word.isCustomInput(CUSTOM_EXPRESSION);
         Boolean isGeneral = word.isCustomInput(GENERAL_EXPRESSION);
 
@@ -62,14 +62,14 @@ public class WordTest {
 
     @DisplayName("커스텀 구분자가 입력된 경우 커스텀 구분자를 찾을 수 있다.")
     @Test
-    public void findCustomSeparatorTest() {
+    void findCustomSeparatorTest() {
         String customSeparator = word.findCustomSeparator(CUSTOM_EXPRESSION);
         assertThat(customSeparator).isEqualTo(";");
     }
 
     @DisplayName("입력값이 음수인 경우 `RuntimeException` throw 한다.")
     @Test
-    public void validationTest() {
+    void validationTest() {
         String expression = "-1,2,3";
 
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
@@ -81,6 +81,6 @@ public class WordTest {
     @ValueSource(strings = {""})
     @NullSource
     void emptyOrNullTest(final String text) {
-        assertThrows(IllegalArgumentException.class,()->word.isEmptyOrNull(text));
+        assertThrows(IllegalArgumentException.class, () -> word.isEmptyOrNull(text));
     }
 }

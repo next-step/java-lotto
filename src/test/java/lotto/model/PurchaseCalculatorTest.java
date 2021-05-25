@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.PurchaseCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
