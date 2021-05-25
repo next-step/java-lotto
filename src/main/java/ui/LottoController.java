@@ -41,7 +41,7 @@ public class LottoController {
 			System.out.printf(MATCH_5_NUMBERS.getMessage()+"%d개%n", analysis.match5());
 			System.out.printf(MATCH_6_NUMBERS.getMessage()+"%d개%n", analysis.match6());
 
-			System.out.printf("총 수익률은 %d입니다.", analysis.yield());
+			System.out.printf("총 수익률은 %s입니다.", analysis.yield());
 		}
 	}
 
