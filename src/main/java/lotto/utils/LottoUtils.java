@@ -16,11 +16,9 @@ public class LottoUtils {
 
 	}
 
-	public static Lottos getStringArrayToLottos(String[] lottosString) {
+	public static Lottos getStringListToLottos(List<String> lottosStringList) {
 		Lottos lottos = new Lottos();
-		for (String lottoString : lottosString) {
-			lottos.addLotto(getStringToLotto(lottoString));
-		}
+		lottosStringList.forEach(lottoString -> lottos.addLotto(getStringToLotto(lottoString)));
 		return lottos;
 	}
 
@@ -29,7 +27,8 @@ public class LottoUtils {
 		List<LottoNumber> winningLottoNumbers = new ArrayList<>();
 		Arrays.stream(lottoArrays)
 			.forEach(
-				winningLottoNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningLottoNumber.trim()))));
+				winningLottoNumber -> winningLottoNumbers.add(
+					new LottoNumber(Integer.parseInt(winningLottoNumber.trim()))));
 		return new Lotto(winningLottoNumbers);
 	}
 }

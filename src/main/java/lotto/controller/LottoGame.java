@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
@@ -35,8 +37,8 @@ public class LottoGame {
 	}
 
 	private static void inputManualLottos() {
-		String[] manualLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
-		user.buyManualLottos(LottoUtils.getStringArrayToLottos(manualLottos));
+		List<String> manualLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
+		user.buyManualLottos(LottoUtils.getStringListToLottos(manualLottos));
 	}
 
 	private static void purchaseAutoLottos() {
@@ -44,7 +46,7 @@ public class LottoGame {
 	}
 
 	private static void outputPurchaseLottosResult() {
-		LottoOutputView.printPurchaseLottoResult(1,1);
+		LottoOutputView.printPurchaseLottoResult(user.getAutoLottoCount(), user.getManualLottoCount());
 	}
 
 	private static void outputUserLottoStatus() {

@@ -1,5 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoInputView {
@@ -37,15 +40,17 @@ public class LottoInputView {
 		return input.nextInt();
 	}
 
-	public static String[] inputManualLottoNumber(int manualLottoCount) {
-		String[] manualLottoNumber = new String[manualLottoCount];
-		System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
-		for (int count = 0; count< manualLottoCount; count++) {
-			manualLottoNumber[count] = input.nextLine();
+	public static List<String> inputManualLottoNumber(int manualLottoCount) {
+		input = new Scanner(System.in);
+		if (manualLottoCount == 0) {
+			return Collections.EMPTY_LIST;
 		}
-		return manualLottoNumber;
+		List<String> manualLottoNumbers = new ArrayList<>();
+		System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+		for (int count = 0; count < manualLottoCount; count++) {
+			manualLottoNumbers.add(input.nextLine());
+		}
+		return manualLottoNumbers;
 	}
-
-
 
 }
