@@ -14,11 +14,10 @@ public class ResultView {
     public void printLottoGameResult(ResultAll resultAll, int inputPurchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        ResultScoreEnum.FIFTH.printResult(resultAll.getResult().get(ResultScoreEnum.FIFTH));
-        ResultScoreEnum.FOURTH.printResult(resultAll.getResult().get(ResultScoreEnum.FOURTH));
-        ResultScoreEnum.THIRD.printResult(resultAll.getResult().get(ResultScoreEnum.THIRD));
-        ResultScoreEnum.SECOND.printResult(resultAll.getResult().get(ResultScoreEnum.SECOND));
-        ResultScoreEnum.FIRST.printResult(resultAll.getResult().get(ResultScoreEnum.FIRST));
+        ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
+        for (ResultScoreEnum state : resultScoreEnum) {
+            state.printResult(resultAll.getResult().get(state));
+        }
 
         printYield(resultAll, inputPurchaseAmount);
     }
