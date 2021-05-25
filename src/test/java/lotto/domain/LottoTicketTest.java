@@ -75,7 +75,7 @@ class LottoTicketTest {
 		// when
 		int matchCount = 0;
 		for (LottoTicket lottoTicket : lottoTickets) {
-			matchCount = LottoTicket.compare(winningLottoTicket, lottoTicket);
+			matchCount = LottoTicket.countDuplicates(winningLottoTicket, lottoTicket);
 		}
 
 		// then

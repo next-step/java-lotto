@@ -14,13 +14,15 @@ class LottoTicket {
 
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final String DELIMITER = ",";
-	private static final String INVALID_LOTTO_NUMBERS_MESSAGE = "로또 숫자는 %d 자리입니다.";
-	private static final String INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE = "로또 번호 문자열은 숫자와 %s만 가능합니다.";
+	private static final String INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE = String.format("로또 숫자는 %d 자리입니다.",
+		LOTTO_NUMBER_COUNT);
+	private static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = String.format("로또 번호 문자열은 숫자 %d개와 %s만 가능합니다.",
+		LOTTO_NUMBER_COUNT, DELIMITER);
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	static int compare(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
-		return userLottoTicket.compare(winningLottoTicket.lottoNumbers);
+	static int countDuplicates(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
+		return userLottoTicket.countDuplicates(winningLottoTicket.lottoNumbers);
 	}
 
 	LottoTicket(Set<LottoNumber> lottoNumbers) {
@@ -31,7 +33,7 @@ class LottoTicket {
 
 	private void validate(Set<LottoNumber> lottoNumbers) {
 		if (!validateCollection(lottoNumbers, LOTTO_NUMBER_COUNT)) {
-			throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBERS_MESSAGE, LOTTO_NUMBER_COUNT));
+			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE);
 		}
 	}
 
@@ -47,7 +49,7 @@ class LottoTicket {
 
 	private void validateNumberString(String numbersString) {
 		if (!validateNumbersPattern(numbersString)) {
-			throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_TEXT_FORMAT_MESSAGE, DELIMITER));
+			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
 		}
 	}
 
@@ -66,20 +68,14 @@ class LottoTicket {
 		Set<LottoNumber> lottoNumberSet = new HashSet<>(LOTTO_NUMBER_COUNT);
 		transform(numberList, lottoNumberSet, LottoNumber::of);
 
-		validateLottoNumberSet(lottoNumberSet);
+		validate(lottoNumberSet);
 
 		return lottoNumberSet;
 	}
 
-	private void validateLottoNumberSet(Set<LottoNumber> lottoNumberList) {
-		if (!validateCollection(lottoNumberList, LOTTO_NUMBER_COUNT)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_MESSAGE);
-		}
-	}
-
-	int compare(Set<LottoNumber> lottoNumberSet) {
+	int countDuplicates(Set<LottoNumber> lottoNumberSet) {
 		Set<LottoNumber> targetLottoNumberSet = new HashSet<>(lottoNumberSet);
-		validateLottoNumberSet(targetLottoNumberSet);
+		validate(targetLottoNumberSet);
 
 		targetLottoNumberSet.retainAll(this.lottoNumbers);
 
