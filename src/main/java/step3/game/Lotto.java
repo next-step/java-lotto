@@ -30,8 +30,8 @@ public class Lotto {
     public TotalLotto pickLottoWithPrice(Price price) {
         List<LottoNumbers> lottoList = price.getBuyCountStream()
             .boxed()
-            .map(number -> new LottoNumbers(
-                RandomNumbersGenerator.createNumbers()))
+            .map(number -> LottoNumbers
+                .of(RandomNumbersGenerator.createNumbers()))
             .collect(Collectors.toList());
 
         return new TotalLotto(lottoList);

@@ -20,11 +20,7 @@ public final class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
     private LottoNumber bonusNumber;
 
-    public LottoNumbers() {
-        this.lottoNumbers = new TreeSet<>();
-    }
-
-    public LottoNumbers(List<Integer> numbers) {
+    private LottoNumbers(List<Integer> numbers) {
         validationSize(numbers);
         this.lottoNumbers = new TreeSet<>();
         numbers.stream()
@@ -35,6 +31,10 @@ public final class LottoNumbers {
         this(numbers);
         checkBonusValidation(bonusNumber);
         this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    public static LottoNumbers of(List<Integer> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     public static LottoNumbers of(String numbers) {

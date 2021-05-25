@@ -35,8 +35,7 @@ public class LottoNumbersTest {
     void validationTest() {
         Exception exception = assertThrows(IllegalArgumentException.class,
             () -> {
-                new LottoNumbers(
-                    new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+                LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
             });
 
         assertThat(exception.getMessage()).isEqualTo("6개의 숫자까지만 담을 수 있습니다.");
