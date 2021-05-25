@@ -8,8 +8,6 @@ public class LottoGenerator {
 	private static final int START_POINT = 0;
 	private static final List<Integer> candidateNumbers;
 
-	private Lottos boughtLottos;
-
 	static {
 		candidateNumbers = new ArrayList<>();
 
@@ -23,19 +21,14 @@ public class LottoGenerator {
 	}
 
 	public Lottos buy(int budget) {
-		buyLottos(getPossibleCount(budget));
-
-		return this.boughtLottos;
-	}
-
-	private void buyLottos(int possibleCount) {
 		List<Lotto> candidateLottos = new ArrayList<>();
+		int possibleCount = getPossibleCount(budget);
 
 		for (int i = START_POINT; i < possibleCount; i++) {
 			candidateLottos.add(new Lotto(getRandomLottoNumbers()));
 		}
 
-		this.boughtLottos = new Lottos(candidateLottos);
+		return new Lottos(candidateLottos);
 	}
 
 	private int getPossibleCount(int budget) {
