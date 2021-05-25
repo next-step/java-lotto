@@ -27,8 +27,7 @@ public final class LottoResult {
 		this.lottoRewardMap = lottoRewardMap;
 	}
 
-	public void add(final int collect) {
-		LottoRewardType lottoRewardType = LottoRewardType.of(collect);
+	public void add(final LottoRewardType lottoRewardType) {
 		lottoRewardMap.computeIfPresent(lottoRewardType, ((key, value) -> value += 1));
 	}
 

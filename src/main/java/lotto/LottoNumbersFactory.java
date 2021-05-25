@@ -20,14 +20,10 @@ public final class LottoNumbersFactory {
 		this.lottoList.add(lottoNumbers);
 	}
 
-	public LottoResult summary(final LottoNumbers winningLottoNumbers) {
+	public LottoResult summary(final LottoNumbers winningLottoNumbers, final LottoNumber bonusNumber) {
 		LottoResult result = new LottoResult();
-		if (size() == 0){
-			return result;
-		}
-
 		lottoList.stream()
-				 .map(lottoNumbers -> lottoNumbers.matches(winningLottoNumbers))
+				 .map(lottoNumbers -> lottoNumbers.result(winningLottoNumbers, bonusNumber))
 				 .forEach(result::add);
 		return result;
 	}

@@ -31,7 +31,9 @@ public final class LottoManager {
 	private void startLotto() {
 		LottoMoney lottoMoney = new LottoMoney(InputView.inputPrice());
 		buyLotto(lottoMoney);
-		CalculateResult(winningLottoNumber(), lottoMoney);
+		CalculateResult(winningLottoNumber(),
+						bonusLottoNumber(),
+						lottoMoney);
 	}
 
 	private void buyLotto(final LottoMoney lottoMoney) {
@@ -40,13 +42,16 @@ public final class LottoManager {
 	}
 
 	private LottoNumbers winningLottoNumber() {
-		LottoNumbers winningLottoNumber = inputWinningNumber();
-		ResultView.printWinningLottoNumber();
-		return winningLottoNumber;
+		return inputWinningNumber();
 	}
 
-	private void CalculateResult(final LottoNumbers winningLottoNumber, final LottoMoney lottoMoney) {
-		LottoResult lottoResult = this.lottoGenerator.summary(winningLottoNumber);
+	private LottoNumber bonusLottoNumber() {
+		ResultView.printWinningLottoNumber();
+		return new LottoNumber(1);
+	}
+
+	private void CalculateResult(final LottoNumbers winningLottoNumber, final LottoNumber lottoNumber, final LottoMoney lottoMoney) {
+		LottoResult lottoResult = this.lottoGenerator.summary(winningLottoNumber, lottoNumber);
 		BigDecimal revenue = lottoResult.calculateRevenue(lottoMoney);
 		ResultView.printCalculateRevenue(lottoResult, revenue);
 	}

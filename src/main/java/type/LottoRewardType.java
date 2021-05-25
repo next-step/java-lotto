@@ -4,10 +4,11 @@ import java.util.Arrays;
 
 public enum LottoRewardType {
 	NONE(0, 0),
-	PLACE_1TH(6, 2_000_000_000),
-	PLACE_2TH(5, 1_500_000),
-	PLACE_3TH(4, 50_000),
-	PLACE_4TH(3, 5_000),
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 1_500_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5_000),
 	;
 
 	private final int collect;
@@ -28,11 +29,19 @@ public enum LottoRewardType {
 							.append(")").toString();
 	}
 
-	public static LottoRewardType of(final int collect) {
+	public static LottoRewardType of(final int collect, final boolean matchBonus) {
 		return Arrays.stream(values())
 					 .filter(value -> value.collect == collect)
+					 .map(value -> mapToSecondWithMatchBonus(value, matchBonus))
 					 .findFirst()
 					 .orElse(NONE);
+	}
+
+	private static LottoRewardType mapToSecondWithMatchBonus(final LottoRewardType lottoRewardType, final boolean matchBonus) {
+		if(lottoRewardType == SECOND && matchBonus == false){
+			return THIRD;
+		}
+		return lottoRewardType;
 	}
 
 	public int reward() {

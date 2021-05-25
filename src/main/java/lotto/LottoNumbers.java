@@ -1,6 +1,7 @@
 package lotto;
 
 import exception.LottoException;
+import type.LottoRewardType;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -37,19 +38,21 @@ public final class LottoNumbers {
 		return lottoNumbers;
 	}
 
-	public int matches(final LottoNumbers parameter) {
-		int sameNumber = 0;
-		for (LottoNumber number : parameter.lottoNumbers) {
-			sameNumber += match(number);
-		}
-		return sameNumber;
+	public LottoRewardType result(final LottoNumbers winningLottoNumber, final LottoNumber bonusNumber) {
+		return LottoRewardType.of(matches(winningLottoNumber),
+								  contains(bonusNumber));
 	}
 
-	private int match(final LottoNumber number) {
-		if (this.lottoNumbers.contains(number)) {
-			return 1;
-		}
-		return 0;
+
+	private int matches(final LottoNumbers winningLottoNumber) {
+		return winningLottoNumber.lottoNumbers.stream()
+											  .filter(this::contains)
+											  .map(notUsed -> 1)
+											  .reduce(0, Integer::sum);
+	}
+
+	private boolean contains(final LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber);
 	}
 
 	public boolean isValidLottoNumberCount(final Set<LottoNumber> lottoNumbers) {

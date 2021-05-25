@@ -30,14 +30,15 @@ class LottoNumbersFactoryTest {
 	void summaryTest(){
 		// given
 		LottoNumbers winnerLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumber bonusNumber = new LottoNumber(7);
 
 		// when
-		LottoResult lottoResult = lottoNumbersFactory.summary(winnerLottoNumbers);
+		LottoResult lottoResult = lottoNumbersFactory.summary(winnerLottoNumbers, bonusNumber);
 
 		// then
 		assertThat(lottoResult).isNotNull();
-		assertThat(lottoResult.count(LottoRewardType.PLACE_1TH)).isEqualTo(1);
-		assertThat(lottoResult.count(LottoRewardType.PLACE_3TH)).isEqualTo(1);
+		assertThat(lottoResult.count(LottoRewardType.FIRST)).isEqualTo(1);
+		assertThat(lottoResult.count(LottoRewardType.FOURTH)).isEqualTo(1);
 
 	}
 

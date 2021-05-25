@@ -3,6 +3,7 @@ package lotto;
 import exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import type.LottoRewardType;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,9 +48,10 @@ class LottoNumbersTest {
 	@DisplayName("숫자 모음끼리의 matches 테스트")
 	void matchesTest() {
 		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-		LottoNumbers target = new LottoNumbers(Arrays.asList(1,2,3,7,8,9));
+		LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,7,8,9));
+		LottoNumber bonusNumber = new LottoNumber(10);
 
-		assertThat(lottoNumbers.matches(target))
-			.isEqualTo(3);
+		assertThat(lottoNumbers.result(winningLottoNumbers, bonusNumber))
+			.isEqualTo(LottoRewardType.FIFTH);
 	}
 }

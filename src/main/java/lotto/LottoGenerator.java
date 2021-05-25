@@ -22,7 +22,7 @@ public final class LottoGenerator {
 		return this.lottoNumbersFactory;
 	}
 
-	public LottoResult summary(final LottoNumbers winnerNumbers) {
-		return lottoNumbersFactory.summary(winnerNumbers);
+	public LottoResult summary(final LottoNumbers winnerNumbers, final LottoNumber bonusNumber) {
+		return lottoNumbersFactory.summary(winnerNumbers, bonusNumber);
 	}
 }
