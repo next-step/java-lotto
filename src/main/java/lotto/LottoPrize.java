@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum LottoPrize {
 
 	MATCH_ZERO(0, 0),
@@ -10,6 +12,13 @@ public enum LottoPrize {
 
 	private long matchCount;
 	private int winningAmount;
+
+	public static LottoPrize getLottoPrizeFromMatchCount(long matchedNumberCount) {
+		return Arrays.stream(LottoPrize.values())
+			.filter(it -> it.matchCount == matchedNumberCount)
+			.findFirst()
+			.orElse(MATCH_ZERO);
+	}
 
 	LottoPrize(int matchCount, int winningAmount) {
 		this.matchCount = matchCount;

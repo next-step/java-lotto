@@ -1,8 +1,12 @@
 package lotto;
 
+import static lotto.LottoPrize.*;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,7 +16,12 @@ public class Lotto {
 
 	public Lotto(List<LottoNumber> numbers) {
 		validate(numbers);
-		this.lottoNumbers = numbers;
+		this.lottoNumbers = sortNumber(numbers);
+	}
+
+	public LottoPrize compare(Lotto winningLotto) {
+		long matchCount = lottoNumbers.stream().filter(winningLotto::contains).count();
+		return getLottoPrizeFromMatchCount(matchCount);
 	}
 
 	private void validate(List<LottoNumber> numbers) {
@@ -20,5 +29,21 @@ public class Lotto {
 		if(set.size() != MAX_LOTTO_COUNT) {
 			throw new IllegalArgumentException("중복된 숫자가 포함되어 있습니다.");
 		}
+	}
+
+	private List<LottoNumber> sortNumber(List<LottoNumber> numbers) {
+		Collections.sort(numbers);
+		return numbers;
+	}
+
+	private boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return "[" + lottoNumbers.stream()
+			.map(LottoNumber::toString)
+			.collect(Collectors.joining(",")) + "]";
 	}
 }
