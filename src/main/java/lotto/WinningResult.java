@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.LottoUtils.*;
+import static lotto.Money.*;
 
 import java.util.Arrays;
 import java.util.HashMap;

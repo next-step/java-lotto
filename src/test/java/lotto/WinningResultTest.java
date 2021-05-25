@@ -1,6 +1,5 @@
 package lotto;
 
-import static lotto.LottoUtils.*;
 import static lotto.Winner.*;
 import static org.assertj.core.api.Assertions.*;
 

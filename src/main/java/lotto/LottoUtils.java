@@ -8,8 +8,6 @@ import java.util.stream.IntStream;
 
 public class LottoUtils {
 
-	public static final int LOTTO_PRICE = 1000;
-
 	private static final int LOTTO_MIN_NUMBER = 1;
 	private static final int LOTTO_LIMIT_NUMBER = 46;
 
