@@ -3,7 +3,6 @@ package lotto.model;
 import lotto.LottoUtil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,18 +13,12 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> numbers) {
-        normalSize(numbers);
+        LottoUtil.validateLottoNumbersSize(numbers, LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
         this.lottoNumbers = numbers;
     }
 
     public LottoNumbers(String number) {
         this(LottoUtil.stringNumbersToLottoNumbers(number));
-    }
-
-    private void normalSize(List<LottoNumber> lottoNumbers) {
-        if (!(new HashSet<>(lottoNumbers).size() == LOTTO_NUMBER_COUNT)) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
-        }
     }
 
     public String printInfo() {
