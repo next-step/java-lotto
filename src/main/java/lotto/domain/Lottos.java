@@ -1,23 +1,38 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Lottos implements Iterable<Lotto>{
     private List<Lotto> lottoGames = new ArrayList<>();
 
-    public Lottos(int money) {
+
+    public Lottos(LottoNumberFactory factory, int money) {
         int lottoCount = money / Lotto.PRICE;
         for (int i = 0; i < lottoCount; i++) {
-            lottoGames.add(new Lotto());
+            lottoGames.add(createLotto(factory,Collections.EMPTY_LIST));
         }
     }
 
-    public Lottos(int[][] lottoGames) {
-        for (int[] lottoGame : lottoGames) {
-            this.lottoGames.add(new Lotto(lottoGame));
+    public Lottos(LottoNumberFactory factory, List<List<Integer>> lottoGames) {
+        for( List<Integer> lotto  : lottoGames) {
+            this.lottoGames.add(createLotto(factory,lotto));
         }
+    }
+    public static Lotto createLotto(LottoNumberFactory factory, List<Integer> numbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
+        for( int i = 0; i < numbers.size(); i++) {
+            Number lottoNumber = createLottoNumber(factory,numbers.get(i));
+            lotto.add(new LottoNumber(lottoNumber));
+        }
+
+        while(lotto.size() < Lotto.NUMBER_COUNT) {
+            lotto.add(new LottoNumber(createLottoNumber(factory,null)));
+        }
+        return new Lotto(lotto);
+    }
+
+    private static Number createLottoNumber(LottoNumberFactory factory,Integer number) {
+        return factory.generateNumber(number);
     }
 
     public LottoStatics calculateStatics(Lotto winGame) {

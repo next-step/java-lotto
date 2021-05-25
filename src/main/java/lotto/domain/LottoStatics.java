@@ -10,8 +10,6 @@ public class LottoStatics {
 
     private List<Rank> ranks;
 
-
-
     public LottoStatics(List<Rank> ranks) {
         this.ranks = ranks;
     }

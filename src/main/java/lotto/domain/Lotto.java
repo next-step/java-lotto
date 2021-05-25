@@ -2,44 +2,22 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final int PRICE = 1_000;
     public static final int NUMBER_COUNT = 6;
 
-    private Set<LottoNumber> lottoNumbers = new HashSet<>();
+    private Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        fillRandomNumbers();
-    }
-
-    public Lotto(int... numbers) {
-        if (numbers.length != NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,numbers.length));
+    public Lotto(Set<LottoNumber> lotto) {
+        if (lotto.size() != NUMBER_COUNT) {
+            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lotto.size()));
         }
-
-        for (int number : numbers) {
-            addCustomNumber(number);
-        }
-    }
-
-    private void addCustomNumber(int number) {
-        lottoNumbers.add(new LottoNumber(new CustomNumber(number)));
-    }
-
-    private void fillRandomNumbers() {
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            addRandomNumber();
-        }
-    }
-
-    private void addRandomNumber() {
-        LottoNumber number = new LottoNumber(new RandomNumber());
-        while (lottoNumbers.contains(number)) {
-            number = new LottoNumber(new RandomNumber());
-        }
-        lottoNumbers.add(number);
+        lottoNumbers = lotto;
     }
 
     public Rank matchCount(Lotto other) {

@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.Lotto;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -38,17 +40,17 @@ public class InputView {
         output.println(WRONG_INPUT_MESSAGE);
     }
 
-    public int[] takeLottoNumbers() {
-        int[] lottoNumbers = null;
+    public List<Integer> takeLottoNumbers() {
+        List<Integer> lottoNumbers = new ArrayList<>();
         output.println(REQUEST_WIN_LOTTO_NUMBER_MESSAGE);
-        while (lottoNumbers == null || lottoNumbers.length < Lotto.NUMBER_COUNT) {
-            lottoNumbers = parseLottoNumbers();
+        while (lottoNumbers.size() != Lotto.NUMBER_COUNT) {
+            lottoNumbers = new ArrayList(parseLottoNumbers());
         }
         enter();
         return lottoNumbers;
     }
 
-    private int[] parseLottoNumbers() {
+    private List<Integer> parseLottoNumbers() {
         try {
             return nextIntArray();
         } catch (Exception e) {
@@ -62,16 +64,15 @@ public class InputView {
         return input.nextLine();
     }
 
-    private int[] nextIntArray() {
+    private List<Integer> nextIntArray() {
         String userInput = input.nextLine();
 
         String[] stringNumbers = userInput.split(DELIMITER);
-        int[] intArr = new int[stringNumbers.length];
-        int idx = 0;
+        List<Integer> numbers = new ArrayList<>();
         for (String number : stringNumbers) {
-            intArr[idx++] = Integer.parseInt(number);
+            numbers.add(Integer.parseInt(number));
         }
-        return intArr;
+        return numbers;
     }
 
     public void enter() {
