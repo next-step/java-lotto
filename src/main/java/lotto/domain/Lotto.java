@@ -47,16 +47,20 @@ public final class Lotto {
         return lottoNumbers.get(index);
     }
 
-    public boolean contains(Number number) {
-        return lottoNumbers.contains(number);
-    }
-
     public String numbers(){
         StringBuilder numbers = new StringBuilder();
         for (Number lottoNumber : lottoNumbers) {
             numbers.append(lottoNumber.getNumber()).append(",");
         }
         return numbers.substring(0, numbers.length() - 1);
+    }
+
+    public int confirmWinning(Lotto winningLotto) {
+        int count = 0;
+        for (int i = 0; i < winningLotto.size(); i++) {
+            count = lottoNumbers.contains(winningLotto.get(i)) ? count + 1 : count;
+        }
+        return count;
     }
 
     @Override

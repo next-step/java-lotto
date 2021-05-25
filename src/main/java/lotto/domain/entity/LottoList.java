@@ -1,6 +1,7 @@
 package lotto.domain.entity;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoWinnings;
 import lotto.domain.generator.AutomaticLottoGenerator;
 
 import java.util.ArrayList;
@@ -27,6 +28,29 @@ public final class LottoList {
 
     public Lotto get(int index) {
         return lottoList.get(index);
+    }
+
+    public Rank compareWith(Lotto winningLotto){
+        Rank rank = new Rank();
+        for (Lotto buyLotto : lottoList) {
+            checkRank(buyLotto.confirmWinning(winningLotto), rank);
+        }
+        return rank;
+    }
+
+    private void checkRank(int count, Rank rank) {
+        if (count == 3) {
+            rank.addFourth();
+        }
+        if (count == 4) {
+            rank.addThird();
+        }
+        if (count == 5) {
+            rank.addSecond();
+        }
+        if (count == 6) {
+            rank.addFirst();
+        }
     }
 
     @Override

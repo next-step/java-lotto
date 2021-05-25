@@ -11,46 +11,24 @@ public final class Result {
     private final Lotto winningLotto;
     private BigDecimal winnings = BigDecimal.ZERO;
     private BigDecimal profitRate = BigDecimal.ZERO;
-    private final Rank rank = new Rank();
+    private Rank rank = new Rank();
     private final LottoStore lottoStore = new LottoStore();
-
 
     public Result(Lotto lotto) {
         winningLotto = lotto;
     }
 
     public void confirm(LottoList lottoList) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            compareWith(lottoList.get(i), winningLotto);
-        }
+        rank = lottoList.compareWith(winningLotto);
+        calcWinnings();
         calculateProfitRate(lottoList.size());
     }
 
-    private void compareWith(Lotto winningLottoNumber, Lotto buyLottoNumber) {
-        int count = 0;
-        for (int i = 0; i < winningLottoNumber.size(); i++) {
-            count = winningLottoNumber.contains(buyLottoNumber.get(i)) ? count + 1 : count;
-        }
-        checkRank(count);
-    }
-
-    private void checkRank(int count) {
-        if (count == 3) {
-            rank.addFourth();
-            winnings = winnings.add(LottoWinnings.FOURTH);
-        }
-        if (count == 4) {
-            rank.addThird();
-            winnings = winnings.add(LottoWinnings.THIRD);
-        }
-        if (count == 5) {
-            rank.addSecond();
-            winnings = winnings.add(LottoWinnings.SECOND);
-        }
-        if (count == 6) {
-            rank.addFirst();
-            winnings = winnings.add(LottoWinnings.FIRST);
-        }
+    private void calcWinnings() {
+        winnings = winnings.add(LottoWinnings.FOURTH.multiply(new BigDecimal(rank.fourth())));
+        winnings = winnings.add(LottoWinnings.THIRD.multiply(new BigDecimal(rank.third())));
+        winnings = winnings.add(LottoWinnings.SECOND.multiply(new BigDecimal(rank.second())));
+        winnings = winnings.add(LottoWinnings.FIRST.multiply(new BigDecimal(rank.first())));
     }
 
     public BigDecimal winnings() {
