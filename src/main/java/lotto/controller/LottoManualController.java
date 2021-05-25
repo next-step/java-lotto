@@ -86,10 +86,10 @@ public class LottoManualController {
     }
 
     public int getEarningPrice() {
-        return (WinningPrice.FIFTHPRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
-                + WinningPrice.FOURTHPRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
-                + WinningPrice.THIRDPRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
-                + WinningPrice.SECONDPRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
-                + WinningPrice.FIRSTPRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
+        return (WinningPrice.FIFTH_PRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
+                + WinningPrice.FOURTH_PRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
+                + WinningPrice.THIRD_PRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
+                + WinningPrice.SECOND_PRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
+                + WinningPrice.FIRST_PRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
     }
 }

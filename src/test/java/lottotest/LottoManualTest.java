@@ -33,7 +33,7 @@ public class LottoManualTest {
     @DisplayName(value = "당첨결과 enum 에서 당첨금액을 가져와 보여준다.")
     @Test
     void show_winningPrice() {
-        assertThat(WinningPrice.FIFTHPRICE.getPrice()).isEqualTo(5000);
+        assertThat(WinningPrice.FIFTH_PRICE.getPrice()).isEqualTo(5000);
     }
 
     @DisplayName(value = "당첨결과 enum 에서 당첨횟수를 가져와 보여준다.")
