@@ -35,7 +35,4 @@ public class Lotto {
                 .split(",");
     }
 
-    public int size() {
-        return this.lottoNumbers.size();
-    }
 }
