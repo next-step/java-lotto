@@ -15,9 +15,10 @@ public class Lotto {
 	}
 
 	public Winner winningCheck(Lotto winLotto) {
-		return Winner.valueOf((int) numbers.stream()
-			.filter(winLotto.numbers::contains)
-			.count());
+		return Winner.valueOf(
+			(int) numbers.stream()
+				.filter(winLotto.numbers::contains)
+				.count());
 	}
 
 	private void validateNumbers(List<Number> numbers) {

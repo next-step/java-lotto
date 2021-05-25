@@ -52,8 +52,6 @@ public class WinningResultTest {
 	void 당첨_수익률_확인(long money, String text, double expectedRatio) {
 		Lotto win = new Lotto(InputView.stringToNumbers(text));
 		WinningResult result = new WinningResult(win, lottos);
-		long lottoBuyCount = money / LOTTO_PRICE * 1000;
-		double resultRatio = Math.floor(result.totalAward() * 100.0 / lottoBuyCount) / 100.0;
-		assertThat(resultRatio).isEqualTo(expectedRatio);
+		assertThat(result.earningRate()).isEqualTo(expectedRatio);
 	}
 }

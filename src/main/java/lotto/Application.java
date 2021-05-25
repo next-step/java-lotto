@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class Application {
 
 	public static void main(String[] args) {
@@ -9,7 +7,8 @@ public class Application {
 		Lottos lottos = new Lottos(money);
 		ResultView.printBuyResult(lottos);
 
-		List<Number> winningNumbers = InputView.winningNumbers();
-		ResultView.printWinningResult(lottos);
+		Lotto win = new Lotto(InputView.winningNumbers());
+		WinningResult result = new WinningResult(win, lottos);
+		ResultView.printWinningResult(result);
 	}
 }
