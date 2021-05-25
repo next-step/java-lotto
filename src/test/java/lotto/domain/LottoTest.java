@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static lotto.domain.Lotto.LOTTO_NUMBER_SIZE_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -32,7 +33,8 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(2),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-        )));
+        )))
+                .withMessageMatching(LOTTO_NUMBER_SIZE_MESSAGE);
     }
 
     @DisplayName("로또번호가 6개 미만이면 예외를 발생시킨다.")
@@ -41,7 +43,8 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5)
-        )));
+        )))
+                .withMessageMatching(LOTTO_NUMBER_SIZE_MESSAGE);
     }
 
     @DisplayName("로또의 당첨은 로또숫자가 같은지를 확인한다.")
@@ -63,5 +66,23 @@ public class LottoTest {
 
         //then
         assertThat(matchCount).isEqualTo(expected);
+    }
+
+    @DisplayName("로또 당첨번호가 보너스번호와 맞는지 확인한다.")
+    @Test
+    void match_bonus_number() {
+        //given
+        final int bonusNumber = 45;
+        final Lotto lotto = new Lotto(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(bonusNumber)
+        ));
+        final LottoNumber lottoNumber = new LottoNumber(bonusNumber);
+
+        //when
+        final boolean matchBonusNumber = lotto.matchBonusNumber(lottoNumber);
+
+        //then
+        assertThat(matchBonusNumber).isTrue();
     }
 }
