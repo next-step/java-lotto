@@ -6,12 +6,10 @@ public class ResultAll {
     private HashMap<ResultScoreEnum, Integer> resultMap = new HashMap<>();
 
     public ResultAll() {
-        resultMap.put(ResultScoreEnum.MISS, 0);
-        resultMap.put(ResultScoreEnum.FIFTH, 0);
-        resultMap.put(ResultScoreEnum.FOURTH, 0);
-        resultMap.put(ResultScoreEnum.THIRD, 0);
-        resultMap.put(ResultScoreEnum.SECOND, 0);
-        resultMap.put(ResultScoreEnum.FIRST, 0);
+        ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
+        for(ResultScoreEnum state : resultScoreEnum) {
+            resultMap.put(state, 0);
+        }
     }
 
     public HashMap<ResultScoreEnum, Integer> getResult() {

@@ -32,12 +32,4 @@ public class LottoNumbersList {
         }
         return resultAll;
     }
-
-//    private void updateResultLotto(SameNumberCountInALotto sameNumberCountInALotto) {
-//        resultAll.updateResult(sameNumberCountInALotto);
-//    }
-//
-//    public ResultAll getResultAll() {
-//        return resultAll;
-//    }
 }
