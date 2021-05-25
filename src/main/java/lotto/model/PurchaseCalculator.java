@@ -3,7 +3,17 @@ package lotto.model;
 public class PurchaseCalculator {
     public static Integer LOTTERY_PRICE = 1000;
 
-    public static int countPurchasable(int purchaseAmount) {
+    private final int purchaseAmount;
+
+    public PurchaseCalculator(int purchaseAmount) {
+        this.purchaseAmount = purchaseAmount;
+    }
+
+    public int CalculatePurchasableCount() {
         return purchaseAmount / LOTTERY_PRICE;
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 }

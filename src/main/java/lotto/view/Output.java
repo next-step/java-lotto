@@ -4,6 +4,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Reward;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public class Output {
         System.out.println(lottoNumbers);
     }
 
-    public static void printBunchOfLottoNumbers(Set<Lotto> bunchOfLotto) {
+    public static void printBunchOfLottoNumbers(List<Lotto> bunchOfLotto) {
         for (Lotto lotto : bunchOfLotto) {
             printLottoNumbers(lotto.getLottoNumbers());
         }

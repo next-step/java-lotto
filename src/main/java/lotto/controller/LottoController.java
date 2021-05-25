@@ -12,12 +12,13 @@ public class LottoController {
     public void run() {
         printStartMessage();
 
-        Integer purchaseAmount = inputMoneyForPurchase();
-        Integer purchasedLottoCount = PurchaseCalculator.countPurchasable(purchaseAmount);
+        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(inputMoneyForPurchase());
+        int purchasedLottoCount = purchaseCalculator.CalculatePurchasableCount();
 
         printPurchasableMessage(purchasedLottoCount);
 
-        Set<Lotto> bunchOfLotto = makeBunchOfLotto(purchasedLottoCount);
+        BunchOfLottoGenerator bunchOfLottoGenerator = new BunchOfLottoGenerator(purchasedLottoCount);
+        List<Lotto> bunchOfLotto = bunchOfLottoGenerator.getBunchOfLotto();
 
         printBunchOfLottoNumbers(bunchOfLotto);
 
@@ -27,18 +28,16 @@ public class LottoController {
 
         printWinStatics();
         printPrize(prizes);
-        printYield(winningLogic.makeYield(purchaseAmount, winningLogic.makePrizeMoney(prizes)));
+        printYield(winningLogic.makeYield(purchaseCalculator.getPurchaseAmount(), winningLogic.makePrizeMoney(prizes)));
     }
 
-    public Set<Lotto> makeBunchOfLotto(int purchasedLottoCount) {
-        List<Lotto> bunchOfLottoList = new ArrayList<>();
+    public List<Lotto> makeBunchOfLotto(int purchasedLottoCount) {
+        List<Lotto> bunchOfLotto = new ArrayList<>();
 
         for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLottoList.add(new Lotto(LottoNumberGenerator.makeLottoNumber()));
+            bunchOfLotto.add(new Lotto(LottoNumberGenerator.makeLottoNumber()));
         }
 
-        Set<Lotto> bunchOfLotto = new HashSet<>();
-        bunchOfLotto.addAll(bunchOfLottoList);
         return bunchOfLotto;
     }
 
@@ -49,7 +48,7 @@ public class LottoController {
         return new WinningLotto(winningNumbers, bonusBall);
     }
 
-    private List<Reward> makeRewards(Set<Lotto> bunchOfLotto, WinningLotto winningLotto) {
+    private List<Reward> makeRewards(List<Lotto> bunchOfLotto, WinningLotto winningLotto) {
         List<Reward> rewards = new ArrayList<>();
         WinningLogic winningLogic = new WinningLogic();
 
