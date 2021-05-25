@@ -11,16 +11,16 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class WinningNumbersTest {
     @Test
     @DisplayName("범위를 벗어나는 당첨 번호")
-    public void lottoNumberValid(){
-        assertThatIllegalArgumentException().isThrownBy (
+    public void lottoNumberValid() {
+        assertThatIllegalArgumentException().isThrownBy(
                 () -> new WinningNumbers("1,2,3,4,5,55")
         ).withMessage(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
     }
 
     @Test
     @DisplayName("당첨 번호 6개가 아닐 경우")
-    public void lottoNumberCountValid(){
-        assertThatIllegalArgumentException().isThrownBy (
+    public void lottoNumberCountValid() {
+        assertThatIllegalArgumentException().isThrownBy(
                 () -> new WinningNumbers("1,2,3,4,5")
         ).withMessage(WINNING_NUMBER_CREATE_FAIL_MESSAGE);
     }
