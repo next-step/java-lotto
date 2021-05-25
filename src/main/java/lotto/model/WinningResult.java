@@ -39,21 +39,22 @@ public class WinningResult {
             int number = map.get("numberOfFifthPlace");
             map.put("numberOfFifthPlace", ++number);
         }
+
         if (numberOfWinningNumbers == 4) {
             int number = map.get("numberOfFourthPlace");
             map.put("numberOfFourthPlace", ++number);
-
         }
+
         if (numberOfWinningNumbers == 5 && !bonus) {
             int number = map.get("numberOfThirdPlace");
             map.put("numberOfThirdPlace", ++number);
-
         }
+
         if (numberOfWinningNumbers == 5 && bonus) {
             int number = map.get("numberOfSecondPlace");
             map.put("numberOfSecondPlace", ++number);
-
         }
+
         if (numberOfWinningNumbers == 6) {
             int number = map.get("numberOfFirstPlace");
             map.put("numberOfFirstPlace", ++number);
