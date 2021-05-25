@@ -61,9 +61,12 @@ public class LottoGame {
 
     private LottoWallet buyingLottoTickets() {
         Money money = inputView.inputMoneyForBuyTicket();
+        int countOfManualLottoTicket = inputView.inputCountOfManualLottoTicket();
+        LottoWallet lottoWallet = LottoWallet.create(money, countOfManualLottoTicket);
 
-        LottoWallet lottoWallet = LottoWallet.create(money);
-        lottoWallet.buyingLotto(new RandomNumberGeneratorStrategy());
+        List<List<String>> manualNumbers = inputView.inputManualNumbers(countOfManualLottoTicket);
+
+        lottoWallet.buyingLotto(new RandomNumberGeneratorStrategy(), manualNumbers);
         return lottoWallet;
     }
 }
