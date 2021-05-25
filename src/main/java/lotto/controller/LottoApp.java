@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import lotto.model.Count;
 import lotto.model.LottoNumber;
@@ -30,13 +31,13 @@ public class LottoApp {
 	}
 
 	public void run() {
-		Money money = inputMoney();
-		Count manualCount = inputManualBuyCount();
+		Money money = requireValidInput(this::inputMoney);
 		Count totalCount = money.countLotto();
+		Count manualCount = requireValidInput(() -> inputManualBuyCount(totalCount));
 		Count autoCount = totalCount.minus(manualCount);
-		LottoTicket lottoTicket = inputLottoTicket(manualCount, autoCount);
+		LottoTicket lottoTicket = requireValidInput(() -> inputLottoTicket(manualCount, autoCount));
 		printLottoTicket(lottoTicket, manualCount, autoCount);
-		WinningNumbers winningNumbers = inputWinningNumbers();
+		WinningNumbers winningNumbers = requireValidInput(this::inputWinningNumbers);
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
@@ -51,9 +52,13 @@ public class LottoApp {
 		return LottoTicket.of(manuals, autos);
 	}
 
-	private Count inputManualBuyCount() {
+	private Count inputManualBuyCount(Count maxCount) {
 		lottoAppOutput.printManualCountInputView();
-		return Count.of(lottoAppInput.inputNumber());
+		Count manualCount = Count.of(lottoAppInput.inputNumber());
+		if (manualCount.greaterThan(maxCount)) {
+			throw new IllegalArgumentException("최대 " + maxCount.getCount() + " 개 구입 가능");
+		}
+		return manualCount;
 	}
 
 	private List<LottoNumbers> inputManualNumbers(Count count) {
@@ -83,5 +88,23 @@ public class LottoApp {
 		Rate earningRate = lottoResult.calculateEarningRate(inputMoney);
 		LottoResultDto resultDto = LottoResultDto.toDto(lottoResult, earningRate);
 		lottoAppOutput.printLottoResult(resultDto);
+	}
+
+	private <T> T requireValidInput(Supplier<T> supplier) {
+		T inputResult = null;
+		while (inputResult == null) {
+			inputResult = input(supplier);
+		}
+		return inputResult;
+	}
+
+	private <T> T input(Supplier<T> input) {
+		T result = null;
+		try {
+			result = input.get();
+		} catch (IllegalArgumentException e) {
+			lottoAppOutput.printMessage(e.getMessage());
+		}
+		return result;
 	}
 }

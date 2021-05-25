@@ -54,4 +54,8 @@ public class Count {
 	public int hashCode() {
 		return Objects.hash(count);
 	}
+
+	public boolean greaterThan(Count otherCount) {
+		return this.count > otherCount.count;
+	}
 }

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class LottoAppInput {
 	private static final String LOTTO_NUMBER_SPLIT_REGEX = ", |,";
-
+	private static final String NUMBER_EXCEPTION_MESSAGE = "숫자를 입력해주세요";
 	private final Scanner scanner;
 
 	public LottoAppInput(Scanner scanner) {
@@ -16,12 +16,20 @@ public class LottoAppInput {
 
 	public int inputNumber() {
 		String input = scanner.nextLine();
-		return Integer.parseInt(input);
+		try {
+			return Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(NUMBER_EXCEPTION_MESSAGE);
+		}
 	}
 
 	public List<Integer> inputNumbers() {
 		String inputNumbers = scanner.nextLine();
-		return splitAndParseInt(inputNumbers);
+		try {
+			return splitAndParseInt(inputNumbers);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(NUMBER_EXCEPTION_MESSAGE);
+		}
 	}
 
 	private List<Integer> splitAndParseInt(String inputNumbers) {
