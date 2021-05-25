@@ -25,11 +25,13 @@ bin/
 WinningAmounts.java
 WinningCounts.java
 LottoStatistics.java
+Lotto.java
 
 ### test ###
 WinningAmountsTest.java
 WinningCountsTest.java
 LottoStatisticsTest.java
+LottoTest.java
 
 ### 기타 ###
 RegexTest.java

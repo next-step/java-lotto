@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.intf.NumbersGenerator;
 
 public class LottoMachine {
+    private static final int LOTTO_PRICE = 1000;
     private final Price buyPrice;
     private NumbersGenerator numbersGenerator;
 
@@ -16,7 +17,7 @@ public class LottoMachine {
 
     public Lottos createLottos() {
         List<LottoNumbers> lottos = new ArrayList<>();
-        long buyCount = buyPrice.getPrice() / Lotto.LOTTO_PRICE;
+        long buyCount = buyPrice.getPrice() / LOTTO_PRICE;
         for (int i = 0; i < buyCount; i++) {
             lottos.add(this.numbersGenerator.generateLottoNumbers());
         }
