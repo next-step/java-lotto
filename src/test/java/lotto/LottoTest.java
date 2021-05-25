@@ -50,6 +50,6 @@ public class LottoTest {
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
 
         Lotto lottoCompare = new Lotto();
-        assertThat(lottoCompare.countWonNumbers(lottoNumber.getLottoNumbers(), lastWonLottoNumber).bonusWonCount()).isEqualTo(1);
+        assertThat(lottoCompare.countWonNumbers(lottoNumber.getLottoNumbers(), lastWonLottoNumber).bonusWonCount()).isTrue();
     }
 }
