@@ -27,7 +27,7 @@ public class PriceTest {
     @DisplayName("가격에 대한 총 로또 구매 횟수 반환 테스트")
     void countTest() {
         Price price = new Price(14000);
-        assertThat(price.getBuyCount()).isEqualTo(14);
+        assertThat(price.getBuyCountStream().count()).isEqualTo(14);
 
     }
 

@@ -19,8 +19,8 @@ public class TotalLotto {
         this.totalLotto = totalLotto;
     }
 
-    public int size() {
-        return totalLotto.size();
+    public String totalSize() {
+        return String.valueOf(totalLotto.size());
     }
 
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
@@ -28,19 +28,24 @@ public class TotalLotto {
         Map<Rank, Long> lottoResult = groupByWinnerPrice(victoryNumber);
         BigDecimal result = sumResult(lottoResult);
 
-        return result.divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN).toString();
+        return result
+            .divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN)
+            .toString();
     }
 
     public Map<Rank, Long> groupByWinnerPrice(LottoNumbers victoryNumber) {
 
-        return totalLotto.stream().map(lottoNumbers -> lottoNumbers.getRankWithVictoryNumber(victoryNumber))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return totalLotto.stream()
+            .map(lottoNumbers -> lottoNumbers
+                .getRankWithVictoryNumber(victoryNumber))
+            .collect(Collectors.groupingBy(Function.identity(),
+                Collectors.counting()));
     }
 
-    @Override
-    public String toString() {
+    public String getStatus() {
         List<String> temp = new ArrayList<>();
-        totalLotto.stream().forEach(lottoNumbers -> temp.add(lottoNumbers.toString()));
+        totalLotto.stream()
+            .forEach(lottoNumbers -> temp.add(lottoNumbers.getStatus()));
         return String.join("\n", temp);
     }
 
@@ -48,8 +53,9 @@ public class TotalLotto {
         Set<Rank> lottoRanks = lottoResult.keySet();
 
         return lottoRanks.stream()
-                .map(winner -> new BigDecimal(winner.winnerPrice()).multiply(new BigDecimal(lottoResult.get(winner))))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            .map(winner -> new BigDecimal(winner.winnerPrice())
+                .multiply(new BigDecimal(lottoResult.get(winner))))
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }
