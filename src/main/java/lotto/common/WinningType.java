@@ -6,10 +6,9 @@ public enum WinningType {
     THIRD(5, 1_500_000),
     FORTH(4, 50_000),
     FIFTH(3, 5_000),
-    MISS(0, 0);
-//    SIXTH(2, 0),
-//    SEVENTH(1, 0),
-//    EIGHTH(0, 0);
+    SIXTH(2, 0),
+    SEVENTH(1, 0),
+    EIGHTH(0, 0);
 
     private final int matchCount;
     private final int prize;
@@ -25,15 +24,11 @@ public enum WinningType {
                 return winningType;
             }
         }
-        return MISS;
+        return EIGHTH;
     }
 
     public static WinningType of(int matchCount, boolean matchBonus) {
         for (WinningType winningType : WinningType.values()) {
-            if (matchCount < 3) {
-                return WinningType.MISS;
-            }
-
             if (matchBonus && matchCount == 5) {
                 return WinningType.SECOND;
             }
@@ -46,7 +41,7 @@ public enum WinningType {
                 return winningType;
             }
         }
-        return MISS;
+        return EIGHTH;
     }
 
     public int getMatchCount() {
