@@ -17,7 +17,7 @@ public class LottoTest {
     void lottoNumberCountTest() {
         String lottoString = "3, 5, 11, 16, 32, 38";
         Lotto lotto = new Lotto(lottoString);
-        assertThat(lotto.generateNumber().size()).isEqualTo(6);
+        assertThat(lotto.size()).isEqualTo(6);
     }
 
     @Test

@@ -15,11 +15,6 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> generateNumber() {
-
-        return lottoNumbers;
-    }
-
     private void validDuplicateNumber(String[] lottoArray) {
         Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(lottoArray));
         if (lottoNumberSet.size() != lottoArray.length) {
@@ -30,5 +25,9 @@ public class Lotto {
     private String[] parseLottoString(String lottoString) {
         return lottoString.replaceAll("[^0-9,]", "")
                 .split(",");
+    }
+
+    public int size() {
+        return this.lottoNumbers.size();
     }
 }
