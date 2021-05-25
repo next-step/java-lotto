@@ -17,6 +17,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "[" + Arrays.toString(numbers) + "]";
+		return Arrays.toString(numbers);
 	}
 }

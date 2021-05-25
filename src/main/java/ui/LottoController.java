@@ -34,12 +34,12 @@ public class LottoController {
 			LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(winnerNumbers, lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
-			System.out.println(PRINT_ANALYSIS_TITLE);
-			System.out.println(PRINT_LINE);
-			System.out.printf(MATCH_3_NUMBERS.getMessage()+"%d개", analysis.match3());
-			System.out.printf(MATCH_4_NUMBERS.getMessage()+"%d개", analysis.match4());
-			System.out.printf(MATCH_5_NUMBERS.getMessage()+"%d개", analysis.match5());
-			System.out.printf(MATCH_6_NUMBERS.getMessage()+"%d개", analysis.match6());
+			System.out.println(PRINT_ANALYSIS_TITLE.getMessage());
+			System.out.println(PRINT_LINE.getMessage());
+			System.out.printf(MATCH_3_NUMBERS.getMessage()+"%d개%n", analysis.match3());
+			System.out.printf(MATCH_4_NUMBERS.getMessage()+"%d개%n", analysis.match4());
+			System.out.printf(MATCH_5_NUMBERS.getMessage()+"%d개%n", analysis.match5());
+			System.out.printf(MATCH_6_NUMBERS.getMessage()+"%d개%n", analysis.match6());
 
 			System.out.printf("총 수익률은 %d입니다.", analysis.yield());
 		}
