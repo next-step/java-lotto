@@ -5,15 +5,17 @@ import java.util.List;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoResult;
 import wootecam.lotto.model.LottoScoreMap;
+import wootecam.lotto.model.WinningLotto;
 
 public class LottoResultGenerator {
 
-	private LottoResult getLottoResult(Lotto targetLotto, Lotto winningLotto) {
+	private LottoResult getLottoResult(Lotto targetLotto, WinningLotto winningLotto) {
 		int matchCount = targetLotto.getNumberMatchCount(winningLotto);
-		return LottoResult.findByMatchedCount(matchCount);
+		boolean isMatchedBonus = winningLotto.containsBonusNumber(targetLotto);
+		return LottoResult.findByMatchedCount(matchCount, isMatchedBonus);
 	}
 
-	public LottoScoreMap getLottoResults(List<Lotto> lottos, Lotto winningLotto) {
+	public LottoScoreMap getLottoResults(List<Lotto> lottos, WinningLotto winningLotto) {
 		LottoScoreMap lottoScoreMap = new LottoScoreMap();
 
 		for (Lotto lotto : lottos) {

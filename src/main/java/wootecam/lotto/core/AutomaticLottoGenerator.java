@@ -24,7 +24,7 @@ public class AutomaticLottoGenerator {
 		}
 	}
 
-	protected Lotto getNumbers() {
+	protected Lotto getLotto() {
 		Collections.shuffle(this.autoLottoNumbers);
 		List<Integer> autoNumberList = this.autoLottoNumbers.subList(0, 6);
 

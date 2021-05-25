@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import wootecam.lotto.model.BonusNumber;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
 import wootecam.lotto.model.LottoNumber;
+import wootecam.lotto.model.WinningLotto;
 
 public class LottoGameGenerator {
 
@@ -21,18 +23,21 @@ public class LottoGameGenerator {
 		List<Lotto> lottos = new ArrayList<>();
 
 		lottoCount.foreach(() -> {
-			Lotto lotto = this.automaticLottoGenerator.getNumbers();
+			Lotto lotto = this.automaticLottoGenerator.getLotto();
 			lottos.add(lotto);
 		});
 
 		return lottos;
 	}
 
-	public Lotto getWinningLotto(String winningLottoInput) {
+	public WinningLotto getWinningLotto(String winningLottoInput, String BonusNumberInput) {
 		List<LottoNumber> winningLottoList = Arrays.stream(winningLottoInput.split(","))
 			.map(LottoNumber::new)
 			.distinct()
 			.collect(Collectors.toList());
-		return new Lotto(winningLottoList);
+		Lotto lotto = new Lotto(winningLottoList);
+		BonusNumber bonusNumber = new BonusNumber(new LottoNumber(BonusNumberInput), lotto);
+
+		return new WinningLotto(lotto, bonusNumber);
 	}
 }
