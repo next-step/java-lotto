@@ -5,11 +5,10 @@ import java.util.List;
 
 public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
-    private ResultAll resultAll;
+
 
     public LottoNumbersList() {
         lottoNumbersList = new ArrayList<LottoNumbers>();
-        resultAll = new ResultAll();
     }
 
     public void appendLottoNumber(LottoNumbers numbers) {
@@ -24,19 +23,21 @@ public class LottoNumbersList {
         return lottoNumbersList.get(index);
     }
 
-    public void countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
+    public ResultAll countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
+        ResultAll resultAll = new ResultAll();
         SameNumberCountInALotto sameNumberCountInALotto = null;
         for (int i = 0; i < lottoNumbersList.size(); i++) {
             sameNumberCountInALotto = lottoNumbersList.get(i).countMatchedNumbers(lastWonLottoNumber);
-            updateResultLotto(sameNumberCountInALotto);
+            resultAll.updateResult(sameNumberCountInALotto);
         }
-    }
-
-    private void updateResultLotto(SameNumberCountInALotto sameNumberCountInALotto) {
-        resultAll.updateResult(sameNumberCountInALotto);
-    }
-
-    public ResultAll getResultAll() {
         return resultAll;
     }
+
+//    private void updateResultLotto(SameNumberCountInALotto sameNumberCountInALotto) {
+//        resultAll.updateResult(sameNumberCountInALotto);
+//    }
+//
+//    public ResultAll getResultAll() {
+//        return resultAll;
+//    }
 }

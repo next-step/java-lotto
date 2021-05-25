@@ -29,8 +29,7 @@ public class LottoTest {
         lottoNumbersList.appendLottoNumber(lottoNumbers);
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
 
-        lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
-        assertThat(lottoNumbersList.getResultAll().getResult().get(ResultScoreEnum.FIRST)).isEqualTo(1);
+        assertThat(lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber).getResult().get(ResultScoreEnum.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -52,7 +51,7 @@ public class LottoTest {
         lottoNumbersList.appendLottoNumber(lottoNumbers);
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
 
-        lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
-        assertThat(lottoNumbersList.getResultAll().getResult().get(ResultScoreEnum.SECOND)).isEqualTo(1);
+
+        assertThat(lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber).getResult().get(ResultScoreEnum.SECOND)).isEqualTo(1);
     }
 }
