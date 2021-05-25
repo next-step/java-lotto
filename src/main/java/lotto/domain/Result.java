@@ -12,6 +12,8 @@ public final class Result {
     private BigDecimal winnings = BigDecimal.ZERO;
     private BigDecimal profitRate = BigDecimal.ZERO;
     private final Rank rank = new Rank();
+    private final LottoStore lottoStore = new LottoStore();
+
 
     public Result(Lotto lotto) {
         winningLotto = lotto;
@@ -56,7 +58,8 @@ public final class Result {
     }
 
     private void calculateProfitRate(int purchasesCount) {
-        BigDecimal totalPurchaseAmount = LottoPrice.PRICE.multiply(new BigDecimal(purchasesCount));
+        BigDecimal lottoPrice = lottoStore.price();
+        BigDecimal totalPurchaseAmount = lottoPrice.multiply(new BigDecimal(purchasesCount));
         profitRate = winnings.divide(totalPurchaseAmount, 2, RoundingMode.HALF_EVEN);
     }
 

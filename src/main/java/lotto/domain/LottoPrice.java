@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 
-public final class LottoPrice {
+public final class LottoPrice extends BigDecimal {
 
-    public static final BigDecimal PRICE = new BigDecimal("1000");
-
-
+    public LottoPrice(String price) {
+        super(price);
+    }
 }

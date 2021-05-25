@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public final class LottoStore {
 
-    private final BigDecimal lottoPrice = LottoPrice.PRICE;
+    private final LottoPrice lottoPrice = new LottoPrice("1000");
 
-    public BigDecimal price() {
+    public LottoPrice price() {
         return lottoPrice;
     }
 
