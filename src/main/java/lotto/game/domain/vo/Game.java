@@ -37,7 +37,7 @@ public class Game {
 
 	private static void validateBallGroupSizeEqualSix(BallGroup ballGroup) throws IllegalBallGroupException {
 		if (!isBallGroupSizeEqualSix(ballGroup)) {
-			throw new IllegalBallGroupException("게임은 반드시 6개의 볼을 가지고 있어야 합니다.");
+			throw new IllegalBallGroupException("게임은 반드시 숫자가 다른 6개의 볼을 가지고 있어야 합니다.");
 		}
 	}
 
@@ -57,5 +57,11 @@ public class Game {
 
 	public BallGroup ballGroup() {
 		return this.ballGroup;
+	}
+
+	public boolean isContainSameBalls(Game compareGame) {
+		List<Ball> thisBalls = this.ballGroup.balls();
+		List<Ball> thatBalls = compareGame.ballGroup.balls();
+		return thisBalls.containsAll(thatBalls) && thatBalls.containsAll(thisBalls);
 	}
 }

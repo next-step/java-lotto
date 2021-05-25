@@ -41,7 +41,7 @@ public class BallTest {
 	@CsvSource(value = {"0;0;false", "1;1;true", "45;45;true", "46;46;false", "one;1;false",
 		"fortyFive;45;false"}, delimiter = ';')
 	void generate(String text, int expectedNumber, boolean exceptedNotThrownException) throws
-		IllegalInputTextException, IllegalBallNumberException {
+			IllegalInputTextException, IllegalBallNumberException {
 		//given
 		InputText inputText = InputText.generate(text);
 
@@ -61,7 +61,7 @@ public class BallTest {
 	@CsvSource(value = {"1;45;false", "01;001;true", "45;45;true",
 			"45;1;false", "01;1;true", "20;20;true"}, delimiter = ';')
 	void equals(String text, String expectedNumberText, boolean exceptedIsEquals) throws
-		IllegalInputTextException, IllegalBallNumberException {
+			IllegalInputTextException, IllegalBallNumberException {
 		//given
 		InputText inputText = InputText.generate(text);
 		InputText inputTextExpectedNumber = InputText.generate(expectedNumberText);

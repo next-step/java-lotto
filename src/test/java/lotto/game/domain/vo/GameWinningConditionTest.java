@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
+import lotto.game.domain.entity.Round;
 import lotto.game.exception.IllegalBallGroupException;
 import lotto.game.exception.IllegalBallNumberException;
 import lotto.game.exception.IllegalGameException;
@@ -179,5 +180,33 @@ public class GameWinningConditionTest {
 		//then - not throw any Exception
 		System.out.println(winningCondition.makeMsgWinningStatistics(gameGroup));
 		assertThat(winningCondition.makeMsgWinningStatistics(gameGroup));
+	}
+
+	@DisplayName("4-1-2-5-4.`equals()` : 같은 게임 승리 조건인지 판별한다.")
+	@ParameterizedTest(name = "{index} - winningCondition1:[{0}], winningCondition2:{1}, isEqual:{2}")
+	@Order(5)
+	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "1,2,3,4,5,6;2,3,4,5,6,7;false",
+		"1,2,3,4,5,6;1,3,5,2,4,6;true"}, delimiter = ';')
+	void equals(String winningCondition1, String winningCondition2, boolean isEqual) throws
+			IllegalInputTextException,
+			IllegalInputTextListException,
+			IllegalBallNumberException,
+			IllegalInputTextGroupException,
+			IllegalBallGroupException,
+			IllegalGameException {
+		//given
+
+		//when
+		InputText inputText1 = InputText.generate(winningCondition1);
+		InputTextGroup inputTextGroup1 = inputText1.splitByComma();
+		BallGroup ballGroup1 = BallGroup.generate(inputTextGroup1);
+		Game customGame1 = Game.generateCustom(ballGroup1);
+		GameWinningCondition gameWinningCondition1 = GameWinningCondition.generate(customGame1);
+
+		InputText inputText2 = InputText.generate(winningCondition2);
+		Round round = Round.generate().setupGameWinningCondition(inputText2);
+
+		//then
+		assertThat(round.gameWinningCondition().isSameWinningCondition(gameWinningCondition1)).isEqualTo(isEqual);
 	}
 }

@@ -78,4 +78,30 @@ public class GameTest {
 		//then
 		assertThatThrownBy(() -> Game.generateCustom(ballGroup)).isInstanceOf(IllegalBallGroupException.class);
 	}
+
+	@DisplayName("4-1-2-3-3.equals()")
+	@ParameterizedTest(name = "{index} - text:[{0}], compareText[{1}], expectedIsEqual:{2}")
+	@Order(3)
+	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "6,5,4,3,2,1;1,2,3,4,5,6;true",
+		"1,2,3,3,4,5,6;1,8,3,4,5,6;false", "1, 21, 31, 45, 41, 11;1,11,21,31,41,45;true"}, delimiter = ';')
+	void equals(String text, String compareText, boolean expectedIsEqual) throws
+			IllegalInputTextException,
+			IllegalInputTextListException,
+			IllegalBallNumberException,
+			IllegalInputTextGroupException,
+			IllegalBallGroupException {
+		//given
+		InputTextGroup inputTextGroup = InputText.generate(text).splitByComma();
+		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
+
+		InputTextGroup compareInputTextGroup = InputText.generate(compareText).splitByComma();
+		BallGroup compareBallGroup = BallGroup.generate(compareInputTextGroup);
+
+		//when
+		Game newGame = Game.generateCustom(ballGroup);
+		Game compareGame = Game.generateCustom(compareBallGroup);
+
+		//then
+		assertThat(newGame.isContainSameBalls(compareGame)).isEqualTo(expectedIsEqual);
+	}
 }

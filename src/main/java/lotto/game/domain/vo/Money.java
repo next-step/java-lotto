@@ -29,7 +29,7 @@ public class Money {
 	private static void validateEffectiveAmount(InputText text) throws IllegalMoneyAmountException {
 		int amount = parse(text);
 		if (!isEffectiveAmount(amount)) {
-			throw new IllegalMoneyAmountException("볼 넘버는 "
+			throw new IllegalMoneyAmountException("구입금액은 "
 				+ EFFECTIVE_MIN_AMOUNT + "이상 자연수만 가능합니다. "
 				+ "입력된 값 : " + amount);
 		}
@@ -50,5 +50,9 @@ public class Money {
 
 	public int countOfGames() {
 		return this.amount / GAME_FEE;
+	}
+
+	public int amount() {
+		return this.amount;
 	}
 }

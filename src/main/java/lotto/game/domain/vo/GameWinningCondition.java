@@ -68,7 +68,7 @@ public class GameWinningCondition {
 
 	private String calculateEarningRate(Map<PrizeCode, Integer> winningStatistics, GameGroup gameGroup) {
 		BigDecimal numerator = calculateNumeratorOfEarningRate(winningStatistics);
-		BigDecimal denominator = BigDecimal.valueOf(gameGroup.games().size());
+		BigDecimal denominator = BigDecimal.valueOf(gameGroup.games().size() * Money.GAME_FEE);
 		double earningRate = numerator.divide(denominator, 2, RoundingMode.FLOOR).doubleValue();
 		DecimalFormat decimalFormat = new DecimalFormat("#.##");
 		return decimalFormat.format(earningRate);
@@ -106,4 +106,11 @@ public class GameWinningCondition {
 		}
 		return resultMap;
 	}
+
+	public boolean isSameWinningCondition(GameWinningCondition gameWinningCondition) {
+		List<Ball> thisBalls = this.gameCondition.ballGroup().balls();
+		List<Ball> compareBalls = gameWinningCondition.gameCondition.ballGroup().balls();
+		return thisBalls.containsAll(compareBalls) && compareBalls.containsAll(thisBalls);
+	}
+
 }
