@@ -15,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>();
 
     static {
-        for (int i = MINIMUM_LOTTO_NUMBER; i < MAXIMUM_LOTTO_NUMBER; i++) {
+        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
             cachedLottoNumbers.put(i, new LottoNumber(i));
         }
     }

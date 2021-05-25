@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseInformation;
 import lotto.util.TextParser;
@@ -44,19 +43,18 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<Lotto> askManualLottos(PurchaseInformation purchaseInformation) {
+    public List<String> askManualLottos(PurchaseInformation purchaseInformation) {
         if (purchaseInformation.getManualPurchaseCount() == 0) {
             return new ArrayList<>();
         }
         return getManualLottos(purchaseInformation);
     }
 
-    private List<Lotto> getManualLottos(PurchaseInformation purchaseInformation) {
-        final List<Lotto> lottos = new ArrayList<>();
+    private List<String> getManualLottos(PurchaseInformation purchaseInformation) {
+        final List<String> lottos = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
         for (int i = 0; i < purchaseInformation.getManualPurchaseCount(); i++) {
-            Lotto lotto = new Lotto(TextParser.parseToLottoNumbers(scanner.nextLine()));
-            lottos.add(lotto);
+            lottos.add(scanner.nextLine());
         }
         return new ArrayList<>(lottos);
     }

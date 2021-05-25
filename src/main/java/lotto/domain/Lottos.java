@@ -23,6 +23,11 @@ public class Lottos {
         return new ArrayList<>(generatedLottos);
     }
 
+    public List<Lotto> addLottos(List<Lotto> generatedLottos) {
+        lottos.addAll(generatedLottos);
+        return new ArrayList<>(lottos);
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }

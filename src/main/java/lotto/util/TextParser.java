@@ -41,7 +41,7 @@ public class TextParser {
                 .collect(toList());
     }
 
-    private static int parseToInt(String inputText) {
+    public static int parseToInt(String inputText) {
         try {
             return (Integer.parseUnsignedInt(inputText));
         } catch (NumberFormatException e) {
