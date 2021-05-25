@@ -19,15 +19,15 @@ import lotto.view.dro.LottoResultDto;
 public class LottoApp {
 	private final LottoAppOutput lottoAppOutput;
 	private final LottoAppInput lottoAppInput;
-	private final LottoNumbersGenerateStrategy randomStrategy;
-	private final LottoNumbersGenerateStrategy supplierStrategy;
+	private final LottoNumbersGenerateStrategy randomGenerateStrategy;
+	private final LottoNumbersGenerateStrategy numbersInputStrategy;
 
 	public LottoApp(LottoAppOutput lottoAppOutput, LottoAppInput lottoAppInput,
-		LottoNumbersGenerateStrategy randomStrategy, LottoNumbersGenerateStrategy supplierStrategy) {
+		LottoNumbersGenerateStrategy randomGenerateStrategy, LottoNumbersGenerateStrategy numbersInputStrategy) {
 		this.lottoAppOutput = lottoAppOutput;
 		this.lottoAppInput = lottoAppInput;
-		this.randomStrategy = randomStrategy;
-		this.supplierStrategy = supplierStrategy;
+		this.randomGenerateStrategy = randomGenerateStrategy;
+		this.numbersInputStrategy = numbersInputStrategy;
 	}
 
 	public void run() {
@@ -48,7 +48,7 @@ public class LottoApp {
 
 	private LottoTicket inputLottoTicket(Count manualCount, Count autoCount) {
 		List<LottoNumbers> manuals = inputManualNumbers(manualCount);
-		List<LottoNumbers> autos = randomStrategy.generate(autoCount);
+		List<LottoNumbers> autos = randomGenerateStrategy.generate(autoCount);
 		return LottoTicket.of(manuals, autos);
 	}
 
@@ -63,7 +63,7 @@ public class LottoApp {
 
 	private List<LottoNumbers> inputManualNumbers(Count count) {
 		lottoAppOutput.printManualLottoNumbersInputView();
-		return supplierStrategy.generate(count);
+		return numbersInputStrategy.generate(count);
 	}
 
 	private WinningNumbers inputWinningNumbers() {
