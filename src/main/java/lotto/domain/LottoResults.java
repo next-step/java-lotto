@@ -33,10 +33,10 @@ public class LottoResults {
 	}
 
 	private double totalPurchaseAmount() {
-		return getPurchaseCount() * PurchaseAmount.MINIMUM;
+		return findPurchaseCount() * PurchaseAmount.MINIMUM;
 	}
 
-	private int getPurchaseCount() {
+	private int findPurchaseCount() {
 		Set<Rank> ranks = rankResults.keySet();
 		return ranks.stream()
 				.mapToInt(rank -> rankResults.getOrDefault(rank, RANK_RESULT_DEFAULT_VALUE))
