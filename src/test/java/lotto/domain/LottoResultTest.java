@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.PurchaseMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,44 +19,44 @@ class LottoResultTest {
     @DisplayName("getAllPrize_정상")
     @ParameterizedTest
     @MethodSource("provideSource_getAllPrize_정상")
-    void getAllPrize_정상(LottoResult lottoResult, BigDecimal expectedResult) {
+    void getAllPrize_정상(LottoResult lottoResult, long expectedResult) {
         // When
-        BigDecimal actualResult = lottoResult.getAllPrize();
+        long actualResult = lottoResult.getAllPrize();
 
         // Then
-        assertThat(actualResult).isEqualTo(expectedResult);
+        assertThat(expectedResult).isEqualTo(actualResult);
     }
 
     static Stream<Arguments> provideSource_getAllPrize_정상() {
-        LottoResult case1 = new LottoResult();
-        case1.put(FIRST);
-        BigDecimal case1Result = valueOf(2_000_000_000L);
+        LottoResult case1LottoResult = new LottoResult();
+        case1LottoResult.put(FIRST);
+        long case1ExpectedResult = 2_000_000_000L;
 
-        LottoResult case2 = new LottoResult();
-        case2.put(FIRST);
-        case2.put(SECOND);
-        case2.put(SECOND);
-        BigDecimal case2Result = valueOf(2_003_000_000L);
+        LottoResult case2LottoResult = new LottoResult();
+        case2LottoResult.put(FIRST);
+        case2LottoResult.put(SECOND);
+        case2LottoResult.put(SECOND);
+        long case2ExpectedResult = 2_003_000_000L;
 
-        LottoResult case3 = new LottoResult();
-        case3.put(FIRST);
-        case3.put(FIRST);
-        case3.put(SECOND);
-        case3.put(THIRD);
-        BigDecimal case3Result = valueOf(4_001_550_000L);
+        LottoResult case3LottoResult = new LottoResult();
+        case3LottoResult.put(FIRST);
+        case3LottoResult.put(FIRST);
+        case3LottoResult.put(SECOND);
+        case3LottoResult.put(THIRD);
+        long case3ExpectedResult = 4_001_550_000L;
 
-        LottoResult case4 = new LottoResult();
-        case4.put(FIRST);
-        case4.put(SECOND);
-        case4.put(THIRD);
-        case4.put(FOURTH);
-        BigDecimal case4Result = valueOf(2_001_555_000L);
+        LottoResult case4LottoResult = new LottoResult();
+        case4LottoResult.put(FIRST);
+        case4LottoResult.put(SECOND);
+        case4LottoResult.put(THIRD);
+        case4LottoResult.put(FOURTH);
+        long case4ExpectedResult = 2_001_555_000L;
 
         return Stream.of(
-                Arguments.of(case1, case1Result),
-                Arguments.of(case2, case2Result),
-                Arguments.of(case3, case3Result),
-                Arguments.of(case4, case4Result)
-                );
+                Arguments.of(case1LottoResult, case1ExpectedResult),
+                Arguments.of(case2LottoResult, case2ExpectedResult),
+                Arguments.of(case3LottoResult, case3ExpectedResult),
+                Arguments.of(case4LottoResult, case4ExpectedResult)
+        );
     }
 }

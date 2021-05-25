@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.PurchaseMoney;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +28,10 @@ public class LottoResult {
         return value.get(rank);
     }
 
-    public BigDecimal getAllPrize() {
-        BigDecimal result = new BigDecimal(0);
-        for (Rank each : Rank.values()) {
-            BigDecimal eachRankResult = valueOf(each.getPrize()).multiply(valueOf(value.get(each)));
-            result = result.add(eachRankResult);
+    public long getAllPrize() {
+        long result = 0L;
+        for (Rank eachRank : Rank.values()) {
+            result += (long) eachRank.getPrize() * value.get(eachRank);
         }
         return result;
     }
