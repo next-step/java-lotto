@@ -82,4 +82,13 @@ class LottoTicketTest {
 		assertThat(matchCount).isEqualTo(expected);
 	}
 
+	@DisplayName("로또 번호 하나 비교 테스트")
+	@Test
+	void matchNumber() {
+		// given
+		LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+
+		// then
+		assertThat(lottoTicket.matchNumber(LottoNumber.of(6))).isTrue();
+	}
 }

@@ -86,6 +86,10 @@ class LottoTicket {
 		return targetLottoNumberSet.size();
 	}
 
+	boolean matchNumber(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	@Override
 	public String toString() {
 		List<LottoNumber> list = new ArrayList<>(lottoNumbers);
