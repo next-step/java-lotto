@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -21,7 +22,7 @@ public class Lotto {
 			.mapToObj(LottoNumber::new)
 			.collect(toList());
 
-	private final List<LottoNumber> numbers;
+	private final TreeSet<LottoNumber> numbers;
 
 	public Lotto() {
 		this(randomNumbers());
@@ -31,7 +32,7 @@ public class Lotto {
 		this(stringToNumbers(text));
 	}
 
-	public Lotto(List<LottoNumber> numbers) {
+	public Lotto(TreeSet<LottoNumber> numbers) {
 		validateNumbers(numbers);
 
 		this.numbers = numbers;
@@ -43,30 +44,25 @@ public class Lotto {
 				.count());
 	}
 
-	private void validateNumbers(List<LottoNumber> numbers) {
-		long distinctCount = numbers.stream()
-				.distinct()
-				.count();
-
-		if (numbers.size() != REQUIRED_COUNT || distinctCount != REQUIRED_COUNT) {
-			throw new IllegalArgumentException("Numbers must consist of 6 distinct numbers.");
+	private void validateNumbers(TreeSet<LottoNumber> numbers) {
+		if (numbers.size() != REQUIRED_COUNT) {
+			throw new InvalidNumberSetException("Lotto requires only 6 unique numbers.");
 		}
 	}
 
-	private static List<LottoNumber> randomNumbers() {
+	private static TreeSet<LottoNumber> randomNumbers() {
 		Collections.shuffle(lottoNumberPool);
 		return lottoNumberPool.stream()
 			.limit(REQUIRED_COUNT)
-			.sorted()
-			.collect(toList());
+			.collect(toCollection(TreeSet::new));
 	}
 
-	private static List<LottoNumber> stringToNumbers(String text) {
+	private static TreeSet<LottoNumber> stringToNumbers(String text) {
 		String[] split = text.split(DELIMITER);
 		return Stream.of(split)
 			.mapToInt(s -> Integer.parseInt(s.trim()))
 			.mapToObj(LottoNumber::new)
-			.collect(toList());
+			.collect(toCollection(TreeSet::new));
 	}
 
 	@Override

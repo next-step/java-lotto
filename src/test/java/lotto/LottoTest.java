@@ -17,9 +17,9 @@ public class LottoTest {
 
 	@Test
 	void lotto_생성_실패() {
-		assertThrows(RuntimeException.class, () -> new Lotto("1,2,3,4,5")); // 숫자가 5개
-		assertThrows(RuntimeException.class, () -> new Lotto("1,2,3,4,5,1")); // 기존과 동일한 숫자 추가
-		assertThrows(RuntimeException.class, () -> new Lotto("1,2,3,4,5,6,6")); // distinct 숫자 갯수는 6이나, 숫자는 7
+		assertThrows(InvalidNumberSetException.class, () -> new Lotto("1,2,3,4,5")); // 숫자가 5개
+		assertThrows(InvalidNumberSetException.class, () -> new Lotto("1,2,3,4,5,1")); // 기존과 동일한 숫자 추가
+		assertThrows(InvalidNumberSetException.class, () -> new Lotto("1,2,3,4,5,6,7")); // 숫자가 7개
 	}
 
 	@Test
