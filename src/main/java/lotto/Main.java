@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import lotto.controller.LottoApp;
 import lotto.model.LottoNumbersGenerateStrategy;
-import lotto.model.RandomGenerateStrategy;
 import lotto.model.NumbersInputStrategy;
+import lotto.model.RandomGenerateStrategy;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
 
