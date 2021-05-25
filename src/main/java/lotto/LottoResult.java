@@ -56,15 +56,15 @@ public class LottoResult {
     }
 
     public void checkRank(int compareWinLottoNumber) {
-        if (compareWinLottoNumber == 3) {
+        if (compareWinLottoNumber == FOURTH_COLLECT_COUNT) {
             countFourthLotto++;
             return;
         }
-        if (compareWinLottoNumber == 4) {
+        if (compareWinLottoNumber == THIRD_COLLECT_COUNT) {
             countThirdLotto++;
             return;
         }
-        if (compareWinLottoNumber == 5) {
+        if (compareWinLottoNumber == SECOND_COLLECT_COUNT) {
             countSecondLotto++;
             return;
         }
