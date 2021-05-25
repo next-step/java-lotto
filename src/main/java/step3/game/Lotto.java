@@ -50,7 +50,7 @@ public class Lotto {
             totalLotto = pickLottoWithPrice(price);
             showLotto();
             resultView.showEmptyLine();
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
             buy();
         }
@@ -76,7 +76,7 @@ public class Lotto {
             showWinning(totalLotto.groupByWinnerPrice(victoryNumber));
             showBanefit(totalLotto.getBenefit(victoryNumber, price));
 
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
             statistics();
         }
