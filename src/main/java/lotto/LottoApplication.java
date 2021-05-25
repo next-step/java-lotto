@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoReport;
+import lotto.domain.LottoVendor;
 import lotto.domain.UserLotto;
 
 public class LottoApplication {
@@ -19,10 +20,17 @@ public class LottoApplication {
 
 	public int run() {
 		try {
-			sendMessage(requestMoneyMessage());
+			sendMessage(lottoView.inputMoneyView());
 			UserLotto userLotto = buyLotto(receiveMoney());
-			viewUserLottoReport(reportUserLotto(userLotto));
 			viewUserLottoState(userLotto);
+
+			sendMessage(lottoView.inputWinningLottoNumbers());
+			String winningLottoNumbers = winningLottoNumbers();
+			sendMessage(lottoView.inputBonusNumber());
+			String bonusNumberString = bonusLottoNumber();
+
+			LottoVendor lottoVendor = lottoController.lottoVendor(winningLottoNumbers, bonusNumberString);
+			viewUserLottoReport(lottoVendor.report(userLotto.lottoTickets()));
 
 			return NORMAL_SIGNAL;
 		} catch (Exception e) {
@@ -32,10 +40,6 @@ public class LottoApplication {
 		} finally {
 			userInterface.shutdown();
 		}
-	}
-
-	private String requestMoneyMessage() {
-		return lottoView.inputMoneyView();
 	}
 
 	private void sendMessage(String message) {
@@ -54,18 +58,17 @@ public class LottoApplication {
 		sendMessage(lottoView.lottoReportView(lottoReport));
 	}
 
-	private LottoReport reportUserLotto(UserLotto userLotto) {
-		return lottoController.report(winningLottoNumbers(), userLotto);
-	}
-
 	private String winningLottoNumbers() {
 		return userInterface.receiveWinningLottoNumber();
+	}
+
+	private String bonusLottoNumber() {
+		return userInterface.receiveBonusLottoNumber();
 	}
 
 	private void viewUserLottoState(UserLotto userLotto) {
 		sendMessage(lottoView.userLottoCountView(userLotto.count()));
 		sendMessage(lottoView.userLottoNumberListView(userLotto.lottoNumberMessage()));
-		sendMessage(lottoView.inputWinningLottoNumbers());
 	}
 
 	public static void main(String[] args) {

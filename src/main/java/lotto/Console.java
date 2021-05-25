@@ -26,4 +26,9 @@ public class Console implements UserInterface {
 		return SCANNER.nextLine();
 	}
 
+	@Override
+	public String receiveBonusLottoNumber() {
+		return SCANNER.nextLine();
+	}
+
 }

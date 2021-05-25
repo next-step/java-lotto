@@ -10,4 +10,5 @@ public interface UserInterface {
 
 	String receiveWinningLottoNumber();
 
+	String receiveBonusLottoNumber();
 }
