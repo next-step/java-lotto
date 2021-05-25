@@ -23,6 +23,7 @@ public class LottoInputView {
     }
 
     public WinningLottoNumber questionLastPrizeNumber() {
+        System.out.println();
         System.out.println(MESSAGE_LAST_PRIZE_NUMBER);
         String playerInput = scanner.nextLine();
 

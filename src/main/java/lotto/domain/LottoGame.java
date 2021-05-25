@@ -22,6 +22,10 @@ public class LottoGame {
         return values.size();
     }
 
+    public boolean find(LottoNumber lottoNumber) {
+        return values.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
