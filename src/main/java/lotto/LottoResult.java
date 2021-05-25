@@ -6,8 +6,6 @@ public class LottoResult {
     private static final int THIRD_REWORD = 50000;
     private static final int FOURTH_REWORD = 5000;
 
-    private static final int LOTTO_COST = 1000;
-
     private int countFristLotto = 0;
     private int countSecondLotto = 0;
     private int countThirdLotto = 0;
@@ -74,7 +72,7 @@ public class LottoResult {
             profit = 0;
             return;
         }
-        profit = rewardSum / (lottoCount * LOTTO_COST) * 100;
+        profit = rewardSum / (lottoCount * LottoValidationUtils.LOTTO_COST);
     }
 
     private void calculateReward() {

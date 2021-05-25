@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
 public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -8,8 +11,6 @@ public class LottoMain {
         ResultView.buyLottoInfo(lottos);
 
         LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
-
-        ResultView resultView = new ResultView();
-        resultView.prinfResult(lottoResult);
+        ResultView.prinfResult(lottoResult);
     }
 }

@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.Lotto;
+import lotto.LottoValidationUtils;
+import lotto.Pay;
 
 import java.util.Scanner;
 
