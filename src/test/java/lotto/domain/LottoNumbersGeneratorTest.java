@@ -3,15 +3,17 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.intf.NumbersGenerator;
 
 /**
  * LottoNumbersGenerator 객체 생성 및 로또번호 생성기능 테스트
@@ -49,9 +51,9 @@ public class LottoNumbersGeneratorTest {
             lottoNumbers.add(new LottoNumber(i));
         }
 
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator(lottoNumbers);
+        NumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator(lottoNumbers);
         LottoNumbers baseLottoNumbers = new LottoNumbers(lottoNumbers.stream().limit(6).collect(Collectors.toList()));
-        LottoNumbers targetLottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
+        LottoNumbers targetLottoNumbers = lottoNumbersGenerator.generateLottoNumbers();
 
         assertThat(baseLottoNumbers.equals(targetLottoNumbers)).isFalse();
     }
@@ -60,8 +62,8 @@ public class LottoNumbersGeneratorTest {
     @DisplayName("로또번호 객체 생성")
     void generator_lottoNumbers() {
         // given
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
-        LottoNumbers lottoNumbers = lottoNumbersGenerator.generateRandomLottoNumbers();
+        NumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
+        LottoNumbers lottoNumbers = lottoNumbersGenerator.generateLottoNumbers();
 
         // then
         assertThat(lottoNumbers.isEmpty()).isFalse();
