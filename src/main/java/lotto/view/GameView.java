@@ -15,10 +15,11 @@ public class GameView {
         resultView.printLottoTickets(lottoTickets.printLottoTickets()); // 로또 티켓 출력
 
         LottoTicket winningLottoTicket = new LottoTicket(inputView.inputWinningNumber());
-        new LottoGamePlayer().play(winningLottoTicket, lottoTickets, inputView.inputBonusBall()); //게임 실행 (로또 매칭 확인)
+        int bonusNumber = inputView.inputBonusBall();
+        new LottoGamePlayer().play(winningLottoTicket, lottoTickets, bonusNumber); //게임 실행 (로또 매칭 확인)
 
-        long prizeSum = lottoTickets.getPrizeSum(winningLottoTicket);
-        resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 확인
+        long prizeSum = lottoTickets.getPrizeSum(winningLottoTicket, bonusNumber);
+        resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력
 
         inputView.close();
     }
