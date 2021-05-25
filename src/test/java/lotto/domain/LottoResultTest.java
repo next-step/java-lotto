@@ -63,7 +63,6 @@ class LottoResultTest {
     @MethodSource("provideSource_getProfit_정상")
     void getProfit_정상(LottoResult lottoResult, PurchaseMoney purchaseMoney, double expectedResult) {
         // When
-        System.out.println(lottoResult.getAllPrize());
         double actualResult = lottoResult.getProfit(purchaseMoney);
 
         // Then
