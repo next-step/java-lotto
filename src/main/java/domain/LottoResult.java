@@ -1,9 +1,8 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import view.InputView;
+
+import java.util.*;
 
 public class LottoResult {
     private static final int ONE_LOTTO_PRICE = 1000;
@@ -14,12 +13,17 @@ public class LottoResult {
     private final Map<LottoRank, Integer> lottoResults;
 
     public LottoResult(List<LottoTicket> lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
-        Map<LottoRank, Integer> results = new HashMap<>();
+        Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
+
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = LottoRank.getLottoRank(winningNumber.winningCount(lottoTicket), bonusBall.isMatchBall(lottoTicket));
             results.put(lottoRank, results.getOrDefault(lottoRank,DEFAULT_VALUE) + ADD_COUNT);
         }
         this.lottoResults = results;
+    }
+
+    public static LottoResult result(LottoTickets lottoTickets, WinningNumber winningNumber, LottoNumber bonusBall) {
+        return new LottoResult(lottoTickets.getLottoTickets(), winningNumber, bonusBall);
     }
 
     public int getResult(LottoRank key) {
