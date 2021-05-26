@@ -13,8 +13,8 @@ import static lotto.domain.LottoOptions.LOTTO_SIZE;
  */
 public final class Splitter {
     private static final String DEFAULT_SEPARATOR = "[,]";
-    private static final String INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다.";
-    private static final String INVALID_INPUT_VALUE_ERROR_MESSAGE = "숫자가 아닌 값을 넣을 수 없습니다.";
+    public static final String INVALID_LOTTO_SIZE_ERROR_MESSAGE = "로또 번호는 6개의 숫자로 이루어져야 합니다.";
+    public static final String INVALID_INPUT_VALUE_ERROR_MESSAGE = "숫자가 아닌 값을 넣을 수 없습니다.";
 
     public static List<LottoNumber> split(final String answerLottoNumbers) {
         final List<LottoNumber> lottoNumbers = makeLottoNumbers(answerLottoNumbers);

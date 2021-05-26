@@ -41,8 +41,14 @@ public final class LottoOutput {
         System.out.println("---------");
         Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.getMatchCount() != 0)
-                .map(lottoResult -> lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getReward() + "원)- " +
-                        lottoResultCounts.get(lottoResult) + "개")
+                .map(lottoResult -> {
+                    if (lottoResult == LottoResult.SECOND) {
+                        return lottoResult.getMatchCount() + "개 일치, 보너스 볼 일치(30000000원) - " +
+                                lottoResultCounts.get(lottoResult) + "개";
+                    }
+                    return lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getReward() + "원)- " +
+                            lottoResultCounts.get(lottoResult) + "개";
+                })
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
     }
