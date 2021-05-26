@@ -29,8 +29,8 @@ public class LottoResult {
 		return map;
 	}
 
-	public Long getNumberOfLottosMatchedWith(int matchedNumberCount) {
-		return lottoResults.get(LottoPrizeType.valueByMatchedNumberCount(matchedNumberCount))
+	public Long getNumberOfLottosMatchedWith(LottoPrizeType lottoPrizeType) {
+		return lottoResults.get(lottoPrizeType)
 				.longValue();
 	}
 

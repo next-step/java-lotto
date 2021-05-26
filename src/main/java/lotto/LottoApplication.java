@@ -13,7 +13,8 @@ public class LottoApplication {
 
 		ResultView.printBoughtLottos(lottos);
 		List<Integer> winningNumber = InputView.inputWinningNumber();
-		LottoResult lottoResult = lottos.getWinningResult(winningNumber);
+		int bonusNumber = InputView.inputBonusNumber();
+		LottoResult lottoResult = lottos.getWinningResult(WinningNumber.of(winningNumber, bonusNumber));
 		ResultView.printWinningStatistics(lottoResult);
 	}
 }

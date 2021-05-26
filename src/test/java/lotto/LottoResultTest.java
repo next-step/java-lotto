@@ -12,7 +12,7 @@ public class LottoResultTest {
 	@DisplayName("로또 당첨 수익률을 반환한다")
 	void profitRateTest() {
 		LottoResult lottoResult = LottoResult.of(Arrays.asList(
-				LottoPrizeType.THREE_MATCHED,
+				LottoPrizeType.FIFTH,
 				LottoPrizeType.NO_MATCHED,
 				LottoPrizeType.NO_MATCHED,
 				LottoPrizeType.NO_MATCHED,
