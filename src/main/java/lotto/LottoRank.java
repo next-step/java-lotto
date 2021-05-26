@@ -3,11 +3,11 @@ package lotto;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    MISS(0, 0);
+    MISS(0, 0),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private int winReward;
@@ -19,8 +19,20 @@ public enum LottoRank {
 
     public static LottoRank searchRank(int countOfMatchUserLotto) {
         return Stream.of(values())
-                .filter(LottoResult -> LottoResult.matchCount == countOfMatchUserLotto)
+                .filter(LottoRank -> LottoRank.matchCount == countOfMatchUserLotto)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    public boolean isMiss() {
+        return this == MISS;
+    }
+
+    public int getReward(Integer integer) {
+        return winReward * integer;
+    }
+
+    public void printReward(int countMatch) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n", matchCount, winReward, countMatch);
     }
 }

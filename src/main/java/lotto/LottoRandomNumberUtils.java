@@ -10,7 +10,7 @@ public class LottoRandomNumberUtils implements LottoRandomNumber {
     public LottoNumber createRandomLotto() {
         List<Integer> randomNumber = new ArrayList<>();
         Collections.shuffle(LOTTO_NUMBER_RANGE);
-        for (int number = 0; number < LottoValidationUtils.getLottoNumberSize() ; number++) {
+        for (int number = 0; number < LottoValidationUtils.getLottoNumberSize(); number++) {
             randomNumber.add(LOTTO_NUMBER_RANGE.get(number));
         }
         Collections.sort(randomNumber);

@@ -21,7 +21,7 @@ public class LottoNumber {
 
     public int compareWinLottoNumber(Lotto winLottoNumber) {
         int collectNumber = 0;
-        for(Integer winNumber : lottoNumber){
+        for (Integer winNumber : lottoNumber) {
             collectNumber += winLottoNumber.matchNumber(winNumber);
         }
         return collectNumber;

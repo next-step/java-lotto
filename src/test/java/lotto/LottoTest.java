@@ -1,7 +1,6 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,7 +18,6 @@ public class LottoTest {
     @MethodSource("countMatchNumberTest")
     void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectedRank) {
         Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
-        LottoResult lottoResult = new LottoResult();
         LottoRank lottoRank = lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)));
         assertThat(lottoRank).isEqualTo(expectedRank);
     }

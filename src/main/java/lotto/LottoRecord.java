@@ -1,19 +1,26 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LottoRecord {
+    private static final String REMARK = "총 수익률은 %.3f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private final Map<LottoRank, Integer> lottoRecord;
 
+    private double profit = 0;
+
     public LottoRecord() {
-        this.lottoRecord = new HashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            lottoRecord.put(lottoRank, 0);
-        }
+        this.lottoRecord = new LinkedHashMap<>();
+        Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> !lottoRank.isMiss())
+                .forEach(lottoRank -> lottoRecord.put(lottoRank, 0));
     }
 
     public void recordRank(LottoRank lottoRank) {
+        if (lottoRank.isMiss()) {
+            return;
+        }
         lottoRecord.put(lottoRank, lottoRecord.get(lottoRank) + 1);
     }
 
@@ -21,4 +28,20 @@ public class LottoRecord {
         return lottoRecord.get(lottoRank) == expected;
     }
 
+    public void printResult() {
+        for (LottoRank lottoRank : lottoRecord.keySet()) {
+            lottoRank.printReward(lottoRecord.get(lottoRank));
+        }
+        System.out.printf(REMARK, profit);
+    }
+
+    public void calculateProfit(int lottoCount) {
+        int sumReward = 0;
+        for (LottoRank lottoRank : lottoRecord.keySet()) {
+            sumReward += lottoRank.getReward(lottoRecord.get(lottoRank));
+        }
+        if(sumReward != 0){
+            profit = Math.floor((double) sumReward / (lottoCount * LottoValidationUtils.LOTTO_COST) * 10) / 10;
+        }
+    }
 }

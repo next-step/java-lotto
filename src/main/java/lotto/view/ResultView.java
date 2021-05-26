@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.LottoResult;
+import lotto.LottoRecord;
 import lotto.Lottos;
 
 public class ResultView {
@@ -9,10 +9,10 @@ public class ResultView {
         System.out.println(lottos.toString());
     }
 
-    public static void printResult(LottoResult lottoResult) {
+    public static void printResult(LottoRecord lottoRecord) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        lottoResult.printResult();
+        lottoRecord.printResult();
     }
 }

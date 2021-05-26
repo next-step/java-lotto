@@ -21,14 +21,6 @@ public class Lotto {
         this.lottoNumber = new LottoNumber(lottoNumber);
     }
 
-    /*public void compareWinLottoNumber(Lotto winLottoNumber, LottoResult lottoResult) {
-        if (this.equals(winLottoNumber)) {
-            lottoResult.winLotto();
-            return;
-        }
-        lottoResult.checkRank(lottoNumber.compareWinLottoNumber(winLottoNumber));
-    }*/
-
     public LottoRank compareWinLottoNumber(Lotto winLottoNumber) {
         return LottoRank.searchRank(lottoNumber.compareWinLottoNumber(winLottoNumber));
     }
