@@ -15,19 +15,8 @@ public class LottoMatchResult {
 		this.results = purchasedLotto.comparePrize(winningLotto);
 	}
 
-	public void printResult() {
-		ResultView.print(ResultView.LOTTO_RESULT);
-
-		Map<LottoPrize, Long> resultCount =
-			results.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-		resultCount.forEach((lottoPrize, count) ->
-			ResultView.print(ResultView.MATCHING_COUNT,
-				lottoPrize.getMatchCount(),
-				lottoPrize.getWinningAmount(),
-				count));
-
-		ResultView.print(ResultView.TOTAL_REVENUE, getProfit());
+	public Map<LottoPrize, Long> getResult() {
+			return results.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 
 	public float getProfit() {

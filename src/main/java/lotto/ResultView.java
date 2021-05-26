@@ -21,4 +21,16 @@ public class ResultView {
 	public static void print(String msg, long num1, int num2, long num3) {
 		System.out.println(String.format(msg, num1, num2, num3));
 	}
+
+	public static void printResult(LottoMatchResult lottoMatchResult) {
+		ResultView.print(ResultView.LOTTO_RESULT);
+		lottoMatchResult.getResult().forEach((lottoPrize, count) ->
+			ResultView.print(ResultView.MATCHING_COUNT, lottoPrize.getMatchCount(), lottoPrize.getWinningAmount(), count));
+		ResultView.print(ResultView.TOTAL_REVENUE, lottoMatchResult.getProfit());
+	}
+
+	public static void printPurchaseResult(Lottos purchasedLotto) {
+		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, purchasedLotto.lottoCount());
+		purchasedLotto.getLottos().forEach(lotto -> ResultView.print(lotto.toString()));
+	}
 }

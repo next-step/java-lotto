@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
 
@@ -25,24 +26,19 @@ public class LottoMachine {
 	}
 
 	private Lottos purchase() {
-		List<Lotto> lottos = new ArrayList<>();
-		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, maxPurchaseLottoCount());
-
-		for(int i = 0; i< maxPurchaseLottoCount(); i++) {
-			Lotto lotto = new Lotto(generateLottoNumber());
-			lottos.add(lotto);
-			ResultView.print(lotto.toString());
-		}
-
-		return new Lottos(lottos);
+		return new Lottos(Stream.generate(this::generateLotto).limit(maxPurchaseLottoCount()).collect(Collectors.toList()));
 	}
 
 	private int maxPurchaseLottoCount() {
 		return money / LOTTO_PRICE;
 	}
 
-	private List<LottoNumber> generateLottoNumber() {
+	private List<LottoNumber> getRandomLottoNumber() {
 		Collections.shuffle(LOTTO_NUMBER_BUCKET);
 		return new ArrayList<>(LOTTO_NUMBER_BUCKET.subList(0, Lotto.MAX_LOTTO_COUNT));
+	}
+
+	private Lotto generateLotto() {
+		return new Lotto(getRandomLottoNumber());
 	}
 }
