@@ -9,7 +9,7 @@ public class LottoResult {
     private final Map<Prize, Integer> result = new HashMap<>();
 
     public int count(Prize prize) {
-        return getOrDefault(prize);
+        return result.getOrDefault(prize, 0);
     }
 
     public void increaseCount(int matchingCount, boolean matchBonus) {
@@ -17,7 +17,7 @@ public class LottoResult {
             return;
         }
         Prize prize = Prize.valueOf(matchingCount, matchBonus);
-        int count = getOrDefault(prize);
+        int count = result.getOrDefault(prize, 0);
         result.put(prize, ++count);
     }
 
@@ -27,9 +27,5 @@ public class LottoResult {
             total += prizeValue.income(this);
         }
         return total;
-    }
-
-    private int getOrDefault(Prize prize) {
-        return result.getOrDefault(prize, 0);
     }
 }
