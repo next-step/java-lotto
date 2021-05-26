@@ -150,9 +150,10 @@
     │      │  │      WinningType.java              당첨 타입
     │      │  │
     │      │  ├─domain
-    │      │  │      LottoGamePlayer.java          로또 게임 실행
+    │      │  │      GameResult.java               로또 게임 결과
     │      │  │      LottoNumber.java              로또 번호
     │      │  │      LottoTicket.java              로또 티켓
+    │      │  │      LottoTicketGameResult.java    각 티켓 별 게임 결과
     │      │  │      LottoTicketGenerator.java     로또 티켓 생성기
     │      │  │      LottoTickets.java             로또 티켓 리스트
     │      │  │      Money.java                    지불 돈
@@ -171,12 +172,12 @@
         └─java
             ├─lotto
             │  └─domain
-            │          LottoGamePlayerTest.java
-            │          LottoNumberTest.java
-            │          LottoTicketGeneratorTest.java
-            │          LottoTicketsTest.java
-            │          LottoTicketTest.java
-            │          MoneyTest.java
+           │          GameResultTest.java
+           │          LottoNumberTest.java
+           │          LottoTicketGeneratorTest.java
+           │          LottoTicketsTest.java
+           │          LottoTicketTest.java
+           │          MoneyTest.java
             │
             ├─step1                                  1단계 - 학습 테스트 실습
             │      SetTest.java
