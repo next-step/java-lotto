@@ -24,8 +24,6 @@ public class LottoExecutor {
 		String manualLottoCountInput = this.inputView.makeManualLottoCountInput();
 		LottoCount lottoCount = new LottoCount(purchaseMoneyInput, manualLottoCountInput);
 
-		this.outputView.printLottoCount(lottoCount);
-
 		if (!lottoCount.isGreaterThanZero()) {
 			this.outputView.printExitLottoGame();
 			return;
@@ -37,8 +35,10 @@ public class LottoExecutor {
 	private void playLotto(LottoCount lottoCount) {
 		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator(),
 			new ManualLottoGenerator(this.inputView));
+		this.outputView.printManualLottoInputMessage();
 		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
-		this.outputView.printAutomaticLotto(lottos);
+		this.outputView.printLottoCount(lottoCount);
+		this.outputView.printTotalLottos(lottos);
 
 		String winningNumberInput = this.inputView.makeWinningNumberInput();
 		String bonusNumberInput = this.inputView.makeBonusNumberInput();
