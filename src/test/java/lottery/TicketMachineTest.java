@@ -22,7 +22,7 @@ class TicketMachineTest {
 	@Test
 	void 랜덤숫자를가진_로또티켓을_발행한다() {
 		Tickets tickets = sut.create(1);
-		assertThatHasValidNumber(tickets.getValue(0).numbers());
+		assertThatHasValidGenerateNumber(tickets.getValue(0).numbers());
 	}
 
 	@Test
@@ -40,9 +40,7 @@ class TicketMachineTest {
 		Set<Integer> lottoNumbers = tickets.getValue(0)
 			.numbers();
 		assertThat(lottoNumbers).hasSize(6);
-		assertThatHasValidNumber(lottoNumbers);
-
-
+		assertThatHasValidGenerateNumber(lottoNumbers);
 	}
 
 	@Test
@@ -53,13 +51,14 @@ class TicketMachineTest {
 		assertThat(ticketList).hasSize(2);
 
 		for (Ticket ticket : ticketList) {
-			assertThatHasValidNumber(ticket.numbers());
+			assertThatHasValidGenerateNumber(ticket.numbers());
 		}
 	}
 
-	private void assertThatHasValidNumber(Set<Integer> lottoNumbers) {
+	private void assertThatHasValidGenerateNumber(Set<Integer> lottoNumbers) {
 		for (int number : lottoNumbers) {
 			assertThat(number).isBetween(1, 45);
 		}
+		assertThat(new ArrayList<>(lottoNumbers)).isSorted();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public final class Money {
 	public static final Money ZERO = new Money(0L);
+	public static final String NOT_VALID_MONEY_EXCEPTION_MESSAGE = "유효하지 않은 로또 금액입니다.";
 	private Long amount;
 
 	public static Money won(Long amount) {
@@ -19,8 +20,8 @@ public final class Money {
 	}
 
 	private void setAmount(Long amount) {
-		if (amount < 0) {
-			throw new IllegalArgumentException("유효하지 않는 금액입니다");
+		if (Objects.isNull(amount) || amount < 0) {
+			throw new IllegalArgumentException(NOT_VALID_MONEY_EXCEPTION_MESSAGE);
 		}
 		this.amount = amount;
 	}
@@ -48,7 +49,7 @@ public final class Money {
 	public float divideWithFloating(Money result) {
 		float v = (float)this.amount / result.amount;
 		if (Float.isInfinite(v) || Float.isNaN(v)) {
-			throw new IllegalArgumentException("유효하지 않는 값입니다.");
+			throw new IllegalArgumentException(NOT_VALID_MONEY_EXCEPTION_MESSAGE);
 		}
 		return v;
 	}

@@ -4,7 +4,7 @@ public class Store {
 
 	private final TicketMachine machine;
 
-	private static final Money TICKET_PRICE = Money.won(1000L);
+	public static final Money TICKET_PRICE = Money.won(1000L);
 
 	public Store() {
 		machine = new TicketMachine();

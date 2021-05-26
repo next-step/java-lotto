@@ -21,7 +21,7 @@ public final class Ticket {
 	}
 
 	public Set<Integer> numbers() {
-		return lottoNumbers.getValues();
+		return lottoNumbers.values();
 	}
 
 	@Override
