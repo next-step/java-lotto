@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.Money;
-
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;

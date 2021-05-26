@@ -1,6 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Message;
 import lotto.exception.CustomIllegalArgumentException;
 
 public class Money {

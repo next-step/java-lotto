@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.core.LottoController;
 import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 
 public class Application {

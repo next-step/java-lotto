@@ -1,6 +1,6 @@
 package lotto.core;
 
-import lotto.Money;
+import lotto.domain.Money;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
