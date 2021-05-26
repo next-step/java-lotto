@@ -22,7 +22,7 @@ public class LottoGameGenerator {
 	public List<Lotto> getLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		lottoCount.foreach(() -> {
+		lottoCount.automaticForeach(() -> {
 			Lotto lotto = this.automaticLottoGenerator.getLotto();
 			lottos.add(lotto);
 		});

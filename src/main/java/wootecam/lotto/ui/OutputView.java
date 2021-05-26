@@ -20,7 +20,7 @@ public class OutputView extends View {
 	public static final int EARNING_RATE_100 = 1;
 
 	public void printLottoCount(LottoCount lottoCount) {
-		out.printf(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getCount());
+		out.printf(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getTotalCount());
 	}
 
 	public void printAutomaticLotto(List<Lotto> lottos) {

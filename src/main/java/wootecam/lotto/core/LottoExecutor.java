@@ -21,7 +21,9 @@ public class LottoExecutor {
 
 	public void start() {
 		String purchaseMoneyInput = this.inputView.makeLottoPurchaseMoneyInput();
-		LottoCount lottoCount = new LottoCount(purchaseMoneyInput);
+		String manualLottoCountInput = this.inputView.makeManualLottoCountInput();
+		LottoCount lottoCount = new LottoCount(purchaseMoneyInput, manualLottoCountInput);
+
 		this.outputView.printLottoCount(lottoCount);
 
 		if (!lottoCount.isGreaterThanZero()) {

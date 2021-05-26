@@ -29,9 +29,9 @@ public class LottoGameGeneratorTest {
 	@ValueSource(strings = {"5000", "2000", "15000"})
 	@DisplayName("입력된 금액에 맞는 로또 수를 생성하는지 테스트")
 	void test_로또구매수만큼_로또생성확인(String input) {
-		LottoCount lottoCount = new LottoCount(input);
+		LottoCount lottoCount = new LottoCount(input, "0");
 		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
-		assertThat(lottos.size()).isEqualTo(lottoCount.getCount());
+		assertThat(lottos.size()).isEqualTo(lottoCount.getTotalCount());
 	}
 
 	@ParameterizedTest
