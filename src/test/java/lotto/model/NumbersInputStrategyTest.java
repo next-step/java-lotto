@@ -11,12 +11,15 @@ import org.junit.jupiter.api.Test;
 class NumbersInputStrategyTest {
 
 	@Test
-	@DisplayName("로또 숫자를 정해진 숫자 대로 여러개 생성할 수 있다.")
+	@DisplayName("숫자 입력으로 로또 숫자를 여러개를 만들어 낼 수 있다.")
 	public void generateTest() {
-		LottoNumbersGenerateStrategy generateStrategy = new NumbersInputStrategy(() -> asList(1, 2, 3, 4, 5, 6));
+		LottoNumbersGenerateStrategy generateStrategy = new NumbersInputStrategy(asList(
+			asList(1, 2, 3, 4, 5, 6),
+			asList(2, 3, 4, 5, 6, 7)
+		));
 
-		List<LottoNumbers> lottoTicket = generateStrategy.generate(2);
+		List<LottoNumbers> lottoTicket = generateStrategy.generate();
 
-		assertThat(lottoTicket).containsExactly(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumbers.of(1, 2, 3, 4, 5, 6));
+		assertThat(lottoTicket).containsExactly(LottoNumbers.of(1, 2, 3, 4, 5, 6), LottoNumbers.of(2, 3, 4, 5, 6, 7));
 	}
 }

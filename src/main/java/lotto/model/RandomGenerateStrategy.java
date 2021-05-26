@@ -10,10 +10,15 @@ import java.util.stream.IntStream;
 
 public class RandomGenerateStrategy implements LottoNumbersGenerateStrategy {
 	private static final Random random = new Random();
+	private final int lottoCount;
+
+	public RandomGenerateStrategy(int lottoCount) {
+		this.lottoCount = lottoCount;
+	}
 
 	@Override
-	public List<LottoNumbers> generate(int count) {
-		return IntStream.range(0, count)
+	public List<LottoNumbers> generate() {
+		return IntStream.range(0, lottoCount)
 			.mapToObj((i) -> LottoNumbers.of(generateRandomNumbers()))
 			.collect(Collectors.toList());
 	}

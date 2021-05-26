@@ -1,21 +1,19 @@
 package lotto.model;
 
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class NumbersInputStrategy implements LottoNumbersGenerateStrategy {
-	private final Supplier<List<Integer>> numbersSupplier;
+	private final List<List<Integer>> inputNumbers;
 
-	public NumbersInputStrategy(Supplier<List<Integer>> numbersSupplier) {
-		this.numbersSupplier = numbersSupplier;
+	public NumbersInputStrategy(List<List<Integer>> inputNumbers) {
+		this.inputNumbers = inputNumbers;
 	}
 
 	@Override
-	public List<LottoNumbers> generate(int count) {
-		return IntStream.range(0, count)
-			.mapToObj((i) -> LottoNumbers.of(numbersSupplier.get()))
+	public List<LottoNumbers> generate() {
+		return inputNumbers.stream()
+			.map(LottoNumbers::of)
 			.collect(Collectors.toList());
 	}
 }

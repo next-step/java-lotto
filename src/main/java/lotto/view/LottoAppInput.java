@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoAppInput {
@@ -32,6 +33,12 @@ public class LottoAppInput {
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(NUMBER_EXCEPTION_MESSAGE);
 		}
+	}
+
+	public List<List<Integer>> inputNumbers(int count) {
+		return IntStream.range(0, count)
+			.mapToObj((i) -> inputNumbers())
+			.collect(Collectors.toList());
 	}
 
 	private List<Integer> splitAndParseInt(String inputNumbers) {
