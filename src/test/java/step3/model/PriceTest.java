@@ -31,4 +31,18 @@ public class PriceTest {
 
     }
 
+    @Test
+    @DisplayName("가격보다 수동으로 구매한 로또수가 클 경우 에러 발생 테스트")
+    void createWithManual() {
+
+        Exception exception = assertThrows(IllegalArgumentException.class,
+            () -> {
+                new Price(14000, 100);
+            });
+
+        assertThat(exception.getMessage())
+            .isEqualTo("가격에 맞는 수동 구매 로또 수를 입력하세요");
+
+    }
+
 }
