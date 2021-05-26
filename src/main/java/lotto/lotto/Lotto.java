@@ -24,12 +24,8 @@ public class Lotto {
                 .count();
     }
 
-    public String numbersToString() {
-        return numbers.stream()
-                .map(LottoNumber::getNumber)
-                .sorted()
-                .map(String::valueOf)
-                .collect(Collectors.joining(InputView.NUMBER_DELIMITER));
+    public Set<LottoNumber> numbers() {
+        return numbers;
     }
 
     public boolean isContainBonus(LottoNumber bonusNumber) {

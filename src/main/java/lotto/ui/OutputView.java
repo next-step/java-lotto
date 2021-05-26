@@ -3,9 +3,12 @@ package lotto.ui;
 import lotto.enums.Message;
 import lotto.enums.Prize;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
 import lotto.shop.Money;
+
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printInputMoneyMessage() {
@@ -43,7 +46,7 @@ public class OutputView {
     }
 
     private static void printLotto(Lotto lotto) {
-        String collect = lotto.numbersToString();
+        String collect = lottoNumberToString(lotto);
         println("[" + collect + "]");
     }
 
@@ -65,5 +68,13 @@ public class OutputView {
 
     private static void printIncome(LottoResult lottoResult, Money money) {
         System.out.printf(Message.INCOME_PREFIX.message() + "%.2f" + Message.INCOME_POSTFIX.message() + "%n", (float) lottoResult.income() / money.amount());
+    }
+
+    private static String lottoNumberToString(Lotto lotto) {
+        return lotto.numbers().stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.joining(InputView.NUMBER_DELIMITER));
     }
 }
