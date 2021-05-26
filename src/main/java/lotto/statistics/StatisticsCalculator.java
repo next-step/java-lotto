@@ -15,6 +15,8 @@ public class StatisticsCalculator {
     private static final int MINIMUM_MATCH = 3;
     private static final int MAXIMUM_MATCH = 6;
 
+    private static final int LOAD_FACTOR_NEVER_RE_HASHING = 1;
+
     private final Ticket ticket;
     private final LottoNumbers winnerLotto;
     private final Map<Integer, Statistic> statisticByMatchCount;
@@ -22,7 +24,7 @@ public class StatisticsCalculator {
     public StatisticsCalculator(Ticket ticket, LottoNumbers winnerLotto) {
         this.ticket = ticket;
         this.winnerLotto = winnerLotto;
-        this.statisticByMatchCount = new HashMap<>(WINNING_TYPE_SIZE);
+        this.statisticByMatchCount = new HashMap<>(WINNING_TYPE_SIZE, LOAD_FACTOR_NEVER_RE_HASHING);
         init();
     }
 
