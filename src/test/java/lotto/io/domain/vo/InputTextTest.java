@@ -16,7 +16,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextListException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InputTextTest {
@@ -26,7 +25,7 @@ public class InputTextTest {
 	@Order(1)
 	@CsvSource(value = {"0,1,2,3,4,5;true", "1,2,3;true", "5,4,3,2,1;true",
 		"1, 2, 3;true", "one,two;true", "' ';false", ";false"}, delimiter = ';')
-	void validate(String text, boolean expectedDoesNotThrowAnyException) throws IllegalInputTextException {
+	void validate(String text, boolean expectedDoesNotThrowAnyException) {
 		//given
 
 		//when
@@ -39,8 +38,7 @@ public class InputTextTest {
 		assertThatThrownBy(() -> InputText.validateGenerate(text)).isInstanceOf(IllegalInputTextException.class);
 	}
 
-	private InputTextGroup makeInputTextGroup(String text) throws
-			IllegalInputTextException, IllegalInputTextListException {
+	private InputTextGroup makeInputTextGroup(String text) {
 		List<InputText> texts = new ArrayList<>();
 		for (String splitText : text.split(InputText.COMMA_DELIMITER)) {
 			texts.add(InputText.generate(splitText));
@@ -67,8 +65,7 @@ public class InputTextTest {
 	@Order(3)
 	@CsvSource(value = {"0,1,2,3,4,5;0,1,2,3,4,5;true", "1,2,3;2,3,4;false", "5,4,3,2,1;1,2,3,4,5;false",
 		"1,2,3;1, 2, 3;true", "one,two;1,2;false"}, delimiter = ';')
-	void validate(String text, String compareText, boolean expectedIsEqual) throws
-			IllegalInputTextException, IllegalInputTextListException {
+	void validate(String text, String compareText, boolean expectedIsEqual) {
 		//given
 		InputTextGroup compareTexts = makeInputTextGroup(compareText);
 

@@ -7,18 +7,17 @@ import java.util.Objects;
 
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextListException;
 
 public class InputText {
 	public static final String COMMA_DELIMITER = ",";
 
-	private String value;
+	private final String value;
 
 	private InputText(String text) {
 		this.value = text.trim();
 	}
 
-	public static InputText generate(String text) throws IllegalInputTextException {
+	public static InputText generate(String text) {
 		validateGenerate(text);
 		return new InputText(text);
 	}
@@ -27,11 +26,11 @@ public class InputText {
 		return this.value;
 	}
 
-	public static void validateGenerate(String text) throws IllegalInputTextException {
+	public static void validateGenerate(String text) {
 		validateNotNullAndNotEmpty(text);
 	}
 
-	private static void validateNotNullAndNotEmpty(String text) throws IllegalInputTextException {
+	private static void validateNotNullAndNotEmpty(String text) {
 		if (isNullOrEmpty(text)) {
 			throw new IllegalInputTextException("입력 값은 Null 혹은 공백의 문자열일 수 없습니다.");
 		}
@@ -41,7 +40,7 @@ public class InputText {
 		return text == null || text.trim().isEmpty();
 	}
 
-	public InputTextGroup splitByComma() throws IllegalInputTextException, IllegalInputTextListException {
+	public InputTextGroup splitByComma() {
 		List<InputText> inputTexts = new ArrayList<>();
 		String[] splitInputTexts = this.value.split(COMMA_DELIMITER);
 		for (String text : splitInputTexts) {
@@ -69,6 +68,6 @@ public class InputText {
 
 	@Override
 	public String toString() {
-		return "InputText{ value='" + value + "\'}";
+		return "InputText{ value='" + value + "'}";
 	}
 }

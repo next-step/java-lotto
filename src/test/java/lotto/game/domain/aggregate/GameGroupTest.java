@@ -12,8 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import lotto.game.domain.vo.Money;
 import lotto.game.exception.IllegalMoneyAmountException;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextGroupException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GameGroupTest {
@@ -23,8 +21,7 @@ public class GameGroupTest {
 	@Order(1)
 	@CsvSource(value = {"0;0;false", "999;0;false", "1000;1;true", "100000;100;true",
 			"1500;1;true"}, delimiter = ';')
-	void buyGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) throws
-		IllegalInputTextException, IllegalMoneyAmountException, IllegalInputTextGroupException {
+	void buyGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(moneyAmountText);
 		Money money = Money.generate(inputText);
@@ -45,8 +42,7 @@ public class GameGroupTest {
 	@Order(2)
 	@CsvSource(value = {"0;0;false", "999;0;false", "1000;1;true", "100000;100;true",
 			"1500;1;true"}, delimiter = ';')
-	void makeMsgAllGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) throws
-			IllegalInputTextException, IllegalMoneyAmountException, IllegalInputTextGroupException {
+	void makeMsgAllGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(moneyAmountText);
 		Money money = Money.generate(inputText);

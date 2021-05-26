@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.game.exception.IllegalMoneyAmountException;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MoneyTest {
@@ -21,7 +20,7 @@ public class MoneyTest {
 	@Order(1)
 	@CsvSource(value = {"-1;false", "0;true", "1000;true", "100000;true", "one;false",
 			"fortyFive;false"}, delimiter = ';')
-	void validateGenerate(String text, boolean exceptedNotThrownException) throws IllegalInputTextException {
+	void validateGenerate(String text, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(text);
 
@@ -41,7 +40,7 @@ public class MoneyTest {
 	@Order(2)
 	@CsvSource(value = {"-1;false", "0;true", "1000;true", "100000;true", "one;false",
 			"fortyFive;false"}, delimiter = ';')
-	void generate(String text, boolean exceptedNotThrownException) throws IllegalInputTextException {
+	void generate(String text, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(text);
 
@@ -61,8 +60,7 @@ public class MoneyTest {
 	@Order(3)
 	@CsvSource(value = {"0;0;true", "999;0;true", "1000;1;true", "100000;100;true",
 		"1500;1;true"}, delimiter = ';')
-	void countOfGames(String text, int expectedCount, boolean exceptedNotThrownException) throws
-		IllegalInputTextException, IllegalMoneyAmountException {
+	void countOfGames(String text, int expectedCount, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(text);
 

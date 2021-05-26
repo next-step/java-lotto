@@ -292,12 +292,12 @@ class Demeter {
         - [x] 0-4-7.remote에서 가져온 나의 branch로 rebase : `git rebase upstream/gregolee`
         - [x] 0-4-7.gregolee -> step4로 체크아웃 : `git checkout -b step4`
     - [ ] 0-5.리뷰어님의 리뷰를 반영한 코드로 수정
-        - [ ] 0-5-1.`Unchecked Exception` 적용 고려
-            - [ ] 0-5-1-1.`Checked Exception` -> `Unchecked Exception`
-                - [ ] 0-5-1-1-1.GameContextIllegalParameterException.java
-                - [ ] 0-5-1-1-2.IoContextIllegalParameterException.java
-            - [ ] 0-5-1-2.`Unchecked Exception` -> `Checked Exception`
-                - [ ] 0-5-1-2-1.InputOutputUtil.java > IOException
+        - [x] 0-5-1.`Unchecked Exception` 적용 고려
+            - [x] 0-5-1-1.`Checked Exception` -> `Unchecked Exception`
+                - [x] 0-5-1-1-1.GameContextIllegalParameterException.java
+                - [x] 0-5-1-1-2.IoContextIllegalParameterException.java
+            - [x] 0-5-1-2.`Unchecked Exception` -> `Checked Exception`
+                - [x] 0-5-1-2-1.InputOutputUtil.java > IOException
         - [ ] 0-5-2.`디미터 법칙(Law of Demeter)` 적용 : 역할 위임
             - [ ] 0-5-2-1.BallGroup.java > validateNotNullAndNotEmpty
             - [ ] 0-5-2-2.Game.java > isNullOrEmpty
@@ -309,8 +309,8 @@ class Demeter {
             - [ ] 0-5-3-1.BallGroup.java > makeMsgBalls()
             - [ ] 0-5-3-2.GameGroup.java > makeMsgAllGames()
             - [ ] 0-5-3-3.GameWinningCondition.java > makeMsgWinningStatistics
-        - [ ] 0-5-4.Lambda 표현
-            - [ ] 0-5-4-1.GameGroup.java > findCode [리뷰어님 코드 참조](https://github.com/next-step/java-lotto/pull/1668/files/501e79acc66e1d7414668dc3ce71b24dd9fb4a4b#diff-aa283a537bfb0ab4c3f6811f34e8b39baf989ade08d2a0e282941f5a6f2d9458)
+        - [x] 0-5-4.Lambda 표현
+            - [x] 0-5-4-1.GameGroup.java > findCode [리뷰어님 코드 참조](https://github.com/next-step/java-lotto/pull/1668/files/501e79acc66e1d7414668dc3ce71b24dd9fb4a4b#diff-aa283a537bfb0ab4c3f6811f34e8b39baf989ade08d2a0e282941f5a6f2d9458)
 - [x] 1.자바 코드 컨벤션을 위한 세팅
     - [x] 1-1.[gradle-editorconfig](https://naver.github.io/hackday-conventions-java/#editorconfig) 적용
     - [x] 1-2.[gradle-checkstyle](https://naver.github.io/hackday-conventions-java/#checkstyle) 적용

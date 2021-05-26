@@ -16,16 +16,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.entity.Round;
-import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.game.exception.IllegalBallGroupException;
-import lotto.game.exception.IllegalBallNumberException;
 import lotto.game.exception.IllegalGameException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextGroupException;
-import lotto.io.exception.IllegalInputTextListException;
-import lotto.io.exception.IoContextIllegalParameterException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GameWinningConditionTest {
@@ -34,9 +28,7 @@ public class GameWinningConditionTest {
 	@Order(1)
 	@CsvSource(value = {"1,2,3,4,5, 6;true", "7,8,9,10,11,25;true", "12,13,14,15,16,17;true",
 		"19,19,20,20,21,22,23,24;true"}, delimiter = ';')
-	void validateGenerate(String text, boolean exceptedNotThrownException) throws
-			IllegalInputTextException, IllegalInputTextListException,
-			IllegalBallNumberException, IllegalInputTextGroupException, IllegalBallGroupException {
+	void validateGenerate(String text, boolean exceptedNotThrownException) {
 		//given
 		InputText inputText = InputText.generate(text);
 		InputTextGroup inputTextGroup = inputText.splitByComma();
@@ -71,11 +63,9 @@ public class GameWinningConditionTest {
 	@DisplayName("4-1-2-5-1.`generate()` : 게임 당첨 조건을 생성한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], exceptedNotThrownException:{1}")
 	@Order(3)
-	@CsvSource(value = {"1,2,3,4,5, 6;true", "7,8,9,10,11,25;true", "12,13,14,15,16,17;true",
-		"19,19,20,20,21,22,23,24;true"}, delimiter = ';')
-	void generate(String text, boolean exceptedNotThrownException) throws
-			IllegalInputTextException, IllegalInputTextListException,
-			IllegalBallNumberException, IllegalInputTextGroupException, IllegalBallGroupException {
+	@CsvSource(value = {"1,2,3,4,5, 6", "7,8,9,10,11,25", "12,13,14,15,16,17",
+		"19,19,20,20,21,22,23,24"}, delimiter = ';')
+	void generate(String text) {
 		//given
 		InputText inputText = InputText.generate(text);
 		InputTextGroup inputTextGroup = inputText.splitByComma();
@@ -90,13 +80,11 @@ public class GameWinningConditionTest {
 
 	@DisplayName("4-1-2-5-2.`calculateContainWinningBalls()` : 게임 등수를 계산한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], exceptedNotThrownException:{1}, countOfMatch:{2}")
-	@Order(3)
+	@Order(4)
 	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;6", "1,2,3,4,5,6;2,3,4,5,6,7;5",
 		"1,2,3,4,5,6;3,4,5,6,7,8;4", "1,2,3,4,5,6;4,5,6,7,8,9;3", "1,2,3,4,5,6;5,6,7,8,9,10;2",
 		"1,2,3,4,5,6;6,7,8,9,10,11;1", "1,2,3,4,5,6;7,8,9,10,11,12;0"}, delimiter = ';')
-	void calculateContainWinningBalls(String boughtGameText, String winningConditionText, long countOfMatch) throws
-		IllegalInputTextException, IllegalInputTextListException, IllegalBallNumberException,
-		IllegalInputTextGroupException, IllegalBallGroupException, IllegalGameException {
+	void calculateContainWinningBalls(String boughtGameText, String winningConditionText, long countOfMatch) {
 		//given
 		InputText inputText = InputText.generate(boughtGameText);
 		InputTextGroup inputTextGroup = inputText.splitByComma();
@@ -117,14 +105,12 @@ public class GameWinningConditionTest {
 
 	@DisplayName("4-1-2-5-3.`makeMsgWinningStatistics()` : 당첨 통계를 생성한다.")
 	@ParameterizedTest(name = "{index} - text:[{0}], exceptedNotThrownException:{1}, countOfMatch:{2}")
-	@Order(4)
+	@Order(5)
 	@CsvSource(value = {"1,2,3,4,5,6;2,3,4,5,6,7;3,4,5,6,7,8;4,5,6,7,8,9;5,6,7,8,9,10;6,7,8,9,10,11;"
 		+ "7,8,9,10,11,12;1,2,3,4,5,6"}, delimiter = ';')
 	void makeMsgWinningStatistics(String boughtGame6MatchText, String boughtGame5MatchText,
 		String boughtGame4MatchText, String boughtGame3MatchText, String boughtGame2MatchText,
-		String boughtGame1MatchText, String boughtGame0MatchText, String winningConditionText) throws
-		IllegalInputTextException, IllegalInputTextListException, IllegalBallNumberException,
-		IllegalInputTextGroupException, IllegalBallGroupException, IllegalGameException {
+		String boughtGame1MatchText, String boughtGame0MatchText, String winningConditionText) {
 		//given
 		InputText inputText6Match = InputText.generate(boughtGame6MatchText);
 		InputTextGroup inputTextGroup6Match = inputText6Match.splitByComma();
@@ -181,17 +167,15 @@ public class GameWinningConditionTest {
 
 		//then - not throw any Exception
 		System.out.println(winningCondition.makeMsgWinningStatistics(gameGroup));
-		assertThat(winningCondition.makeMsgWinningStatistics(gameGroup));
+		assertThatCode(() -> winningCondition.makeMsgWinningStatistics(gameGroup)).doesNotThrowAnyException();
 	}
 
 	@DisplayName("4-1-2-5-4.`equals()` : 같은 게임 승리 조건인지 판별한다.")
 	@ParameterizedTest(name = "{index} - winningCondition1:[{0}], winningCondition2:{1}, isEqual:{2}")
-	@Order(5)
+	@Order(6)
 	@CsvSource(value = {"1,2,3,4,5,6;1,2,3,4,5,6;true", "1,2,3,4,5,6;2,3,4,5,6,7;false",
 		"1,2,3,4,5,6;1,3,5,2,4,6;true"}, delimiter = ';')
-	void equals(String winningCondition1, String winningCondition2, boolean isEqual) throws
-			IoContextIllegalParameterException,
-			GameContextIllegalParameterException {
+	void equals(String winningCondition1, String winningCondition2, boolean isEqual) {
 		//given
 
 		//when

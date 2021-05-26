@@ -1,5 +1,7 @@
 package lotto.game.domain.code;
 
+import java.util.Arrays;
+
 public enum PrizeCode {
 	NOTHING(6, 0, 0),
 	FIFTH_PLACE(5, 3, 5000),
@@ -19,19 +21,10 @@ public enum PrizeCode {
 	}
 
 	public static PrizeCode findCode(int countOfMatch) {
-		if (WINNER.countOfMatch() == countOfMatch) {
-			return WINNER;
-		}
-		if (THIRD_PLACE.countOfMatch() == countOfMatch) {
-			return THIRD_PLACE;
-		}
-		if (FOURTH_PLACE.countOfMatch() == countOfMatch) {
-			return FOURTH_PLACE;
-		}
-		if (FIFTH_PLACE.countOfMatch() == countOfMatch) {
-			return FIFTH_PLACE;
-		}
-		return NOTHING;
+		return Arrays.stream(values())
+			.filter(prizeCode -> prizeCode.countOfMatch == countOfMatch)
+			.findFirst()
+			.orElse(NOTHING);
 	}
 
 	public int countOfMatch() {

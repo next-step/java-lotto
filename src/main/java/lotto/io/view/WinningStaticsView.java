@@ -16,7 +16,7 @@ public class WinningStaticsView extends View {
 
 	@Override
 	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) {
-		if (viewStatus.currentProcessCode().isFinish()) {
+		if (viewStatus.isFinishProcess()) {
 			processWhenFinish(round);
 			changeViewStatusWhenFinish(viewStatus);
 		}

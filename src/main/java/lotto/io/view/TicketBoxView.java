@@ -3,12 +3,10 @@ package lotto.io.view;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.entity.Round;
 import lotto.game.domain.vo.Money;
-import lotto.game.exception.IllegalMoneyAmountException;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.entity.ViewStatus;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextGroupException;
 
 public class TicketBoxView extends View {
 
@@ -18,23 +16,20 @@ public class TicketBoxView extends View {
 	}
 
 	@Override
-	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) throws
-			IllegalMoneyAmountException,
-			IllegalInputTextGroupException {
-		if (viewStatus.currentProcessCode().isRequestInput()) {
+	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) {
+		if (viewStatus.isRequestInputProcess()) {
 			processWhenRequestInput();
 			changeViewStatusWhenRequestInput(viewStatus);
 			return;
 		}
-		if (viewStatus.currentProcessCode().isSystemIn()) {
-			processWhenSystemIn(viewStatus, round, inputText);
+		if (viewStatus.isSystemInProcess()) {
+			processWhenSystemIn(round, inputText);
 			changeViewStatusWhenSystemIn(viewStatus);
 			return;
 		}
-		if (viewStatus.currentProcessCode().isFinish()) {
+		if (viewStatus.isFinishProcess()) {
 			processWhenFinish(round);
 			changeViewStatusWhenFinish(viewStatus);
-			return;
 		}
 	}
 
@@ -59,9 +54,7 @@ public class TicketBoxView extends View {
 		System.out.println(viewCode().inputRequestMessage());
 	}
 
-	private void processWhenSystemIn(ViewStatus viewStatus, Round round, InputText inputText) throws
-			IllegalMoneyAmountException,
-			IllegalInputTextGroupException {
+	private void processWhenSystemIn(Round round, InputText inputText) {
 		Money money = Money.generate(inputText);
 		round.raiseMoney(money);
 		GameGroup boughtGames = GameGroup.buyGames(round.money());

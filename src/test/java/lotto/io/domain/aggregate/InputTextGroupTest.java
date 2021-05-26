@@ -14,13 +14,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
 import lotto.io.exception.IllegalInputTextListException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InputTextGroupTest {
 
-	private List<InputText> makeInputTextList(String text) throws IllegalInputTextException {
+	private List<InputText> makeInputTextList(String text) {
 		List<InputText> texts = new ArrayList<>();
 		for (String splitText : text.split(InputText.COMMA_DELIMITER)) {
 			texts.add(InputText.generate(splitText));
@@ -33,8 +32,7 @@ public class InputTextGroupTest {
 	@Order(1)
 	@CsvSource(value = {"0,1,2,3,4,5;0,1,2,3,4,5;true", "1,2,3;2,3,4;false", "5,4,3,2,1;1,2,3,4,5;false",
 		"1,2,3;1, 2, 3;true", "one,two;1,2;false"}, delimiter = ';')
-	void generate(String text, String compareText, boolean expectedIsEqual) throws
-			IllegalInputTextException, IllegalInputTextListException {
+	void generate(String text, String compareText, boolean expectedIsEqual) {
 		//given
 		List<InputText> texts = makeInputTextList(text);
 		List<InputText> compareTexts = makeInputTextList(compareText);

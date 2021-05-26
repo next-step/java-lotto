@@ -13,7 +13,7 @@ public class InputTextGroup {
 		this.inputTexts = inputTexts;
 	}
 
-	public static InputTextGroup generate(List<InputText> unmodifiableInputTexts) throws IllegalInputTextListException {
+	public static InputTextGroup generate(List<InputText> unmodifiableInputTexts) {
 		validateGenerate(unmodifiableInputTexts);
 		return new InputTextGroup(unmodifiableInputTexts);
 	}
@@ -22,12 +22,11 @@ public class InputTextGroup {
 		return Collections.unmodifiableList(inputTexts);
 	}
 
-	private static void validateGenerate(List<InputText> unmodifiableInputTexts) throws IllegalInputTextListException {
+	private static void validateGenerate(List<InputText> unmodifiableInputTexts) {
 		validateNotNullOrNotEmpty(unmodifiableInputTexts);
 	}
 
-	private static void validateNotNullOrNotEmpty(List<InputText> unmodifiableInputTexts) throws
-		IllegalInputTextListException {
+	private static void validateNotNullOrNotEmpty(List<InputText> unmodifiableInputTexts) {
 		if (unmodifiableInputTexts == null || unmodifiableInputTexts.isEmpty()) {
 			throw new IllegalInputTextListException("최소 1개 이상의 입력값이 존재해야 합니다.");
 		}

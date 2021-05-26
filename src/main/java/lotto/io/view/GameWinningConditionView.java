@@ -1,12 +1,10 @@
 package lotto.io.view;
 
 import lotto.game.domain.entity.Round;
-import lotto.game.exception.GameContextIllegalParameterException;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.entity.ViewStatus;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IoContextIllegalParameterException;
 
 public class GameWinningConditionView extends View {
 
@@ -16,15 +14,13 @@ public class GameWinningConditionView extends View {
 	}
 
 	@Override
-	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) throws
-			GameContextIllegalParameterException,
-			IoContextIllegalParameterException {
-		if (viewStatus.currentProcessCode().isRequestInput()) {
+	public void displayProcess(ViewStatus viewStatus, Round round, InputText inputText) {
+		if (viewStatus.isRequestInputProcess()) {
 			processWhenRequestInput();
 			changeViewStatusWhenRequestInput(viewStatus);
 			return;
 		}
-		if (viewStatus.currentProcessCode().isSystemIn()) {
+		if (viewStatus.isSystemInProcess()) {
 			processWhenSystemIn(round, inputText);
 			changeViewStatusWhenSystemIn(viewStatus);
 			return;
@@ -53,9 +49,7 @@ public class GameWinningConditionView extends View {
 		System.out.println(viewCode().inputRequestMessage());
 	}
 
-	private void processWhenSystemIn(Round round, InputText inputText) throws
-			GameContextIllegalParameterException,
-			IoContextIllegalParameterException {
+	private void processWhenSystemIn(Round round, InputText inputText) {
 		round.setupGameWinningCondition(inputText);
 	}
 }

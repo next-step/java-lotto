@@ -23,11 +23,11 @@ public class GameWinningCondition {
 		this.gameCondition = customGame;
 	}
 
-	public static void validateGenerate(Game customGame) throws IllegalGameException {
+	public static void validateGenerate(Game customGame) {
 		validateNotNullOrNotEmpty(customGame);
 	}
 
-	private static void validateNotNullOrNotEmpty(Game customGame) throws IllegalGameException {
+	private static void validateNotNullOrNotEmpty(Game customGame) {
 		if (isNullOrEmpty(customGame)) {
 			throw new IllegalGameException("전달 받은 정보가 null 또는 비어있는 값입니다. 당첨 정보가 들어 있는 게임 정보를 전달해주시기 바랍니다.");
 		}
@@ -38,7 +38,7 @@ public class GameWinningCondition {
 			|| customGame.ballGroup().balls() == null || customGame.ballGroup().balls().isEmpty();
 	}
 
-	public static GameWinningCondition generate(Game customGame) throws IllegalGameException {
+	public static GameWinningCondition generate(Game customGame) {
 		validateGenerate(customGame);
 		return new GameWinningCondition(customGame);
 	}
@@ -58,7 +58,7 @@ public class GameWinningCondition {
 		for (PrizeCode thisPrize : PrizeCode.values()) {
 			stringBuilder.append(makeMsgWinningAmount(thisPrize, winningStatistics.get(thisPrize)));
 		}
-		stringBuilder.append("총 수익률은 " + earningRate + "입니다.\n");
+		stringBuilder.append("총 수익률은 ").append(earningRate).append("입니다.\n");
 		return stringBuilder.toString();
 	}
 

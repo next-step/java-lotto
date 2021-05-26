@@ -1,6 +1,6 @@
 package lotto.game.exception;
 
-public class IllegalBallNumberException extends GameContextIllegalParameterException {
+public class IllegalBallNumberException extends GameContextIllegalArgumentException {
 	public IllegalBallNumberException(String message) {
 		super(message);
 	}

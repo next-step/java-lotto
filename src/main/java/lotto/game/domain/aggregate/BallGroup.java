@@ -5,10 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import lotto.game.domain.vo.Ball;
-import lotto.game.exception.IllegalBallNumberException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
 import lotto.io.exception.IllegalInputTextGroupException;
 
 public class BallGroup {
@@ -21,32 +19,24 @@ public class BallGroup {
 	}
 
 	static {
-		try {
-			makeAllOfBalls();
-		} catch (IllegalInputTextException | IllegalBallNumberException e) {
-			e.printStackTrace();
-		}
+		makeAllOfBalls();
 	}
 
-	private static List<Ball> makeAllOfBalls() throws IllegalInputTextException, IllegalBallNumberException {
-		List<Ball> allOfBalls = new ArrayList<>();
+	private static void makeAllOfBalls() {
 		for (int i = Ball.EFFECTIVE_MIN_NUMBER; i <= Ball.EFFECTIVE_MAX_NUMBER; i++) {
 			InputText inputText = InputText.generate(String.valueOf(i));
 			addBallWhenNotDuplicated(ALL_OF_BALLS, inputText);
 		}
-		return allOfBalls;
 	}
 
-	private static void addBallWhenNotDuplicated(List<Ball> destinationBalls, InputText inputText)
-		throws IllegalBallNumberException {
+	private static void addBallWhenNotDuplicated(List<Ball> destinationBalls, InputText inputText) {
 		Ball pendingBall = Ball.generate(inputText);
 		if (!destinationBalls.contains(pendingBall)) {
 			destinationBalls.add(pendingBall);
 		}
 	}
 
-	public static BallGroup generate(InputTextGroup inputTextGroup) throws
-			IllegalBallNumberException, IllegalInputTextGroupException {
+	public static BallGroup generate(InputTextGroup inputTextGroup) {
 		validateGenerate(inputTextGroup);
 		List<Ball> balls = new ArrayList<>();
 		for (InputText inputText : inputTextGroup.inputTexts()) {
@@ -56,36 +46,32 @@ public class BallGroup {
 		return new BallGroup(Collections.unmodifiableList(balls));
 	}
 
-	private static void validateGenerate(InputTextGroup inputTextGroup) throws IllegalInputTextGroupException {
+	private static void validateGenerate(InputTextGroup inputTextGroup) {
 		validateNotNullAndNotEmpty(inputTextGroup);
 	}
 
-	private static void validateNotNullAndNotEmpty(InputTextGroup inputTextGroup) throws
-			IllegalInputTextGroupException {
+	private static void validateNotNullAndNotEmpty(InputTextGroup inputTextGroup) {
 		if (inputTextGroup == null || inputTextGroup.inputTexts() == null || inputTextGroup.inputTexts().isEmpty()) {
 			throw new IllegalInputTextGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
 		}
 	}
 
 	public static List<Ball> allOfBalls() {
-		List<Ball> copiedAllOfBalls = new ArrayList<>();
-		copiedAllOfBalls.addAll(ALL_OF_BALLS);
-		return copiedAllOfBalls;
+		return new ArrayList<>(ALL_OF_BALLS);
 	}
 
-	public static BallGroup generate(List<Ball> subList) throws IllegalInputTextGroupException {
+	public static BallGroup generate(List<Ball> subList) {
 		validateGenerate(subList);
-		List<Ball> balls = new ArrayList<>();
-		balls.addAll(subList);
+		List<Ball> balls = new ArrayList<>(subList);
 		Collections.sort(balls);
 		return new BallGroup(Collections.unmodifiableList(balls));
 	}
 
-	private static void validateGenerate(List<Ball> subList) throws IllegalInputTextGroupException {
+	private static void validateGenerate(List<Ball> subList) {
 		validateNotNullAndNotEmpty(subList);
 	}
 
-	private static void validateNotNullAndNotEmpty(List<Ball> subList) throws IllegalInputTextGroupException {
+	private static void validateNotNullAndNotEmpty(List<Ball> subList) {
 		if (subList == null || subList.isEmpty()) {
 			throw new IllegalInputTextGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
 		}

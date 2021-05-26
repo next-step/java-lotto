@@ -9,7 +9,7 @@ public class Ball implements Comparable<Ball> {
 	public static final int EFFECTIVE_MIN_NUMBER = 1;
 	public static final int EFFECTIVE_MAX_NUMBER = 45;
 
-	private int number;
+	private final int number;
 
 	private Ball(InputText text) {
 		this.number = parse(text);
@@ -73,12 +73,6 @@ public class Ball implements Comparable<Ball> {
 
 	@Override
 	public int compareTo(Ball ball) {
-		if (this.number() > ball.number()) {
-			return 1;
-		}
-		if (this.number() < ball.number()) {
-			return -1;
-		}
-		return 0;
+		return Integer.compare(this.number(), ball.number());
 	}
 }

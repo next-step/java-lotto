@@ -13,12 +13,12 @@ public class Money {
 		this.amount = parse(inputText);
 	}
 
-	public static void validateGenerate(InputText text) throws IllegalMoneyAmountException {
+	public static void validateGenerate(InputText text) {
 		validateNumberFormat(text);
 		validateEffectiveAmount(text);
 	}
 
-	private static void validateNumberFormat(InputText text) throws IllegalMoneyAmountException {
+	private static void validateNumberFormat(InputText text) {
 		try {
 			parse(text);
 		} catch (NumberFormatException e) {
@@ -26,7 +26,7 @@ public class Money {
 		}
 	}
 
-	private static void validateEffectiveAmount(InputText text) throws IllegalMoneyAmountException {
+	private static void validateEffectiveAmount(InputText text) {
 		int amount = parse(text);
 		if (!isEffectiveAmount(amount)) {
 			throw new IllegalMoneyAmountException("구입금액은 "
@@ -43,7 +43,7 @@ public class Money {
 		return EFFECTIVE_MIN_AMOUNT <= amount;
 	}
 
-	public static Money generate(InputText inputText) throws IllegalMoneyAmountException {
+	public static Money generate(InputText inputText) {
 		validateGenerate(inputText);
 		return new Money(inputText);
 	}

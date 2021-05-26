@@ -14,26 +14,15 @@ import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Game;
 import lotto.game.domain.vo.GameWinningCondition;
 import lotto.game.domain.vo.Money;
-import lotto.game.exception.GameContextIllegalParameterException;
-import lotto.game.exception.IllegalBallGroupException;
-import lotto.game.exception.IllegalBallNumberException;
-import lotto.game.exception.IllegalGameException;
-import lotto.game.exception.IllegalMoneyAmountException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextException;
-import lotto.io.exception.IllegalInputTextGroupException;
-import lotto.io.exception.IllegalInputTextListException;
-import lotto.io.exception.IoContextIllegalParameterException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RoundTest {
 
 	@Test
 	@DisplayName("4-1-3-1-1.Field 생성 : `GameWinningCondition")
-	void setupGameWinningCondition() throws
-			IoContextIllegalParameterException,
-			GameContextIllegalParameterException {
+	void setupGameWinningCondition() {
 		//given
 		String systemIn = "12,13,14,15,16,17";
 		boolean expectedIsEqual = true;
@@ -55,10 +44,7 @@ public class RoundTest {
 	@DisplayName("4-1-3-1-1.Field 생성 : `GameGroup`, `Money")
 	@ParameterizedTest(name = "{index} - text:[{0}], exceptedNotThrownException:{1}")
 	@CsvSource(value = {"1000;1", "100000;100", "1500;1"}, delimiter = ';')
-	void raiseMoney(String moneyText, int gameSize) throws
-			IllegalInputTextException,
-			IllegalInputTextGroupException,
-			IllegalMoneyAmountException {
+	void raiseMoney(String moneyText, int gameSize) {
 		//given
 
 		//when
