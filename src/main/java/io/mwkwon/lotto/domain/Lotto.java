@@ -61,6 +61,13 @@ public class Lotto {
         }
     }
 
+    public long calcMatchLottoNumberCount(Lotto winningLotto) {
+        return lottoNumbers
+                .stream()
+                .filter(lottoNumber -> winningLotto.isContains(lottoNumber))
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

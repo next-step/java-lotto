@@ -87,4 +87,20 @@ public class LottoTest {
         Lotto lotto = Lotto.create("1,2,3,4,5,6");
         assertThat(lotto.isContains(new LottoNumber(number))).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:6",
+            "1,2,3,4,5,7:5",
+            "1,2,3,4,7,8:4",
+            "1,2,3,7,8,9:3",
+            "1,2,7,8,9,10:2",
+            "1,7,8,9,10,11:1",
+            "7,8,9,10,11,12:0"
+    }, delimiter = ':')
+    void 당첨_로또와_일치하는_로또_번호_갯수_반환_동작_테스트(String winningLottoNumbers, int excepted) {
+        Lotto buyLotto = Lotto.create("1,2,3,4,5,6");
+        long matchCount = buyLotto.calcMatchLottoNumberCount(new Lotto(winningLottoNumbers));
+        assertThat(matchCount).isEqualTo(excepted);
+    }
 }

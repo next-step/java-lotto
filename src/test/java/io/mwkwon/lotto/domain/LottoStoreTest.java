@@ -1,13 +1,9 @@
 package io.mwkwon.lotto.domain;
 
-import io.mwkwon.lotto.enums.Rank;
 import io.mwkwon.lotto.view.LottoInputView;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,24 +15,6 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
         BuyLottos buyLottos = lottoStore.buyAutoLottos(new LottoMachine(), new LottoPayment(value));
         assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
-    }
-
-    @Test
-    void 구매한_로또_당첨_결과_계산_테스트() {
-        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
-        List<Lotto> lottos = Arrays.asList(
-                new Lotto("1,2,3,4,5,6"),
-                new Lotto("1,2,3,4,5,7"),
-                new Lotto("1,2,3,4,5,8"),
-                new Lotto("1,2,3,4,7,8"),
-                new Lotto("1,2,3,8,9,10")
-        );
-        BuyLottos buyLottos = new BuyLottos(lottos);
-        LottoStore lottoStore = new LottoStore();
-        WinningRanks excepted = new WinningRanks(Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH));
-
-        WinningRanks ranks = lottoStore.calcLottosRank(buyLottos, winningLotto, new LottoNumber("7"));
-        assertThat(ranks).isEqualTo(excepted);
     }
 
     @Test
