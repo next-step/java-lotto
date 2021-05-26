@@ -23,7 +23,7 @@ public class LottoPurchaseController {
 
     public LottoPurchaseResponse purchaseTickets(LottoPurchaseRequest request) {
         LottoMoney purchaseAmount = LottoMoney.of(request.getPurchaseAmount());
-        LottoTickets lottoTickets = purchaseService.purchaseTickets(purchaseAmount);
+        LottoTickets lottoTickets = purchaseService.purchaseAutoTickets(purchaseAmount);
         return LottoPurchaseAssembler.assemblePurchaseResponse(lottoTickets);
     }
 

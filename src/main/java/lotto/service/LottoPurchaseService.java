@@ -11,7 +11,7 @@ public class LottoPurchaseService {
         }
     }
 
-    public LottoTickets purchaseTickets(LottoMoney purchaseAmount) {
+    public LottoTickets purchaseAutoTickets(LottoMoney purchaseAmount) {
         return LottoTickets.autoTickets(purchaseAmount.purchaseCount());
     }
 }
