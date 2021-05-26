@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.AnalysisSheet;
-import lotto.dto.TotalOrderedLottoGameNumbers;
+import lotto.dto.TotalOrderedLottoGameDescription;
 import lotto.dto.WinningNumbersAndBonusNumber;
 
 import java.util.Objects;
@@ -16,12 +16,12 @@ public class LottoMachine {
     this.orderedGames = gameGenerator.generateNewLottoGames();
   }
 
-  public TotalOrderedLottoGameNumbers peekOrderedGames() {
+  public TotalOrderedLottoGameDescription peekOrderedGames() {
     return orderedGames.peekTotalLottoGameNumbers();
   }
 
   public AnalysisSheet confirmPrizeOrderedLottos(WinningNumbersAndBonusNumber winningNumbersAndBonusNumber) {
-    LottoGame winningGame = gameGenerator.createLottoGame(winningNumbersAndBonusNumber.getWinningNumbers());
+    LottoGame winningGame = gameGenerator.createManualLottoGame(winningNumbersAndBonusNumber.getWinningNumbers());
     WinningConditions winningConditions = WinningConditions.of(winningGame, winningNumbersAndBonusNumber.getBonusNumber());
     TotalRankings totalRankings = orderedGames.matchRankings(winningConditions);
     return new AnalysisSheet(totalRankings, gameGenerator.peekTotalOrderedAmount());
