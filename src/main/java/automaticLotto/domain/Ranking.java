@@ -30,7 +30,7 @@ public enum Ranking {
 		return this.winnerPrice;
 	}
 
-	public static Ranking getWinnerPrice(int matchedCount) {
+	public static Ranking valueOf(int matchedCount) {
 		if (rankingTable.containsKey(matchedCount)) {
 			return rankingTable.get(matchedCount);
 		}

@@ -37,7 +37,7 @@ public class Lotto {
 			matchedCount = getMatchedCount(matchedCount, number);
 		}
 
-		return Ranking.getWinnerPrice(matchedCount);
+		return Ranking.valueOf(matchedCount);
 	}
 
 	private int getMatchedCount(int matchedSize, Integer number) {
