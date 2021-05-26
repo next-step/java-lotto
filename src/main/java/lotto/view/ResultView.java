@@ -18,7 +18,7 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.stream().forEach(lotto -> {
+        lottos.forEach(lotto -> {
                 System.out.println(lotto.lottoNumbers());
             });
     }
