@@ -18,7 +18,7 @@ public class TotalRankings {
 
   private Map<LottoRanking, Long> toMap(List<LottoRanking> rankings) {
     return rankings.stream()
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(LottoRanking.class),  Collectors.counting()));
   }
 
   public List<RankingPrizedCount> createPrizeInfos() {
