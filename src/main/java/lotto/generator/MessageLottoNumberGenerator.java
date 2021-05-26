@@ -25,4 +25,8 @@ public class MessageLottoNumberGenerator implements Generator {
         return new LottoNumbers(numbers);
     }
 
+    protected List<Integer> numbers() {
+        return numbers;
+    }
+
 }
