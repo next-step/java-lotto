@@ -15,6 +15,7 @@ import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
 import wootecam.lotto.model.LottoNumber;
 import wootecam.lotto.model.WinningLotto;
+import wootecam.lotto.ui.InputView;
 
 public class LottoGameGeneratorTest {
 
@@ -22,7 +23,8 @@ public class LottoGameGeneratorTest {
 
 	@BeforeEach
 	void setup() {
-		lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
+		lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator(),
+			new ManualLottoGenerator(new InputView()));
 	}
 
 	@ParameterizedTest

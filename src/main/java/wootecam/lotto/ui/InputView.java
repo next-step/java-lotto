@@ -32,4 +32,8 @@ public class InputView extends View {
 		out.println(MANUAL_NUMBER_INPUT_MESSAGE);
 		return this.scanner.nextLine();
 	}
+
+	public String makeManualLottoNumbersInput() {
+		return this.scanner.nextLine();
+	}
 }

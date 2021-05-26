@@ -15,12 +15,21 @@ public class LottoGameGenerator {
 
 	private final AutomaticLottoGenerator automaticLottoGenerator;
 
-	public LottoGameGenerator(AutomaticLottoGenerator automaticLottoGenerator) {
+	private final ManualLottoGenerator manualLottoGenerator;
+
+	public LottoGameGenerator(AutomaticLottoGenerator automaticLottoGenerator,
+		ManualLottoGenerator manualLottoGenerator) {
 		this.automaticLottoGenerator = automaticLottoGenerator;
+		this.manualLottoGenerator = manualLottoGenerator;
 	}
 
 	public List<Lotto> getLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
+
+		lottoCount.manualForeach(() -> {
+			Lotto lotto = this.manualLottoGenerator.getLotto();
+			lottos.add(lotto);
+		});
 
 		lottoCount.automaticForeach(() -> {
 			Lotto lotto = this.automaticLottoGenerator.getLotto();

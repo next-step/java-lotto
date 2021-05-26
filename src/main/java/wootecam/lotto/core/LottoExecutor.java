@@ -35,7 +35,8 @@ public class LottoExecutor {
 	}
 
 	private void playLotto(LottoCount lottoCount) {
-		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
+		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator(),
+			new ManualLottoGenerator(this.inputView));
 		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
 		this.outputView.printAutomaticLotto(lottos);
 
