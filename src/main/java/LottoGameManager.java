@@ -12,7 +12,7 @@ public class LottoGameManager {
 
     private static final int LOTTO_PRICE_PER = 1_000;
 
-    private LottoGameManager() {
+    protected LottoGameManager() {
     }
 
     public static void main(String[] args) {
