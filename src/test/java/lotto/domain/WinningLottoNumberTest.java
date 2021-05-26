@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import static lotto.domain.LottoGame.createManual;
 import static lotto.domain.LottoNumber.valueOf;
 import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,11 +52,11 @@ class WinningLottoNumberTest {
     }
 
     private List<LottoGame> mockLottoGameList = Arrays.asList(
-            new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
-            new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(7)))),
-            new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(8), valueOf(9)))),
-            new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(10), valueOf(11), valueOf(12)))),
-            new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(13), valueOf(14), valueOf(15))))
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(7)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(8), valueOf(9)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(10), valueOf(11), valueOf(12)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(13), valueOf(14), valueOf(15))))
     );
 
     @DisplayName("decidePrize_정상")

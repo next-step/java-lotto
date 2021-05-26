@@ -4,7 +4,6 @@ import lotto.exception.IllegalLottoNumberCountException;
 
 import java.util.*;
 
-import static java.lang.String.format;
 import static java.util.Collections.shuffle;
 import static lotto.domain.LottoNumber.*;
 
@@ -14,7 +13,7 @@ public class LottoGame {
 
     private Set<LottoNumber> values;
 
-    public LottoGame(Set<LottoNumber> values) {
+    private LottoGame(Set<LottoNumber> values) {
         validate(values);
         this.values = values;
     }
@@ -29,7 +28,7 @@ public class LottoGame {
 
     public int compare(LottoGame lottoGame) {
         int result = 0;
-        for(LottoNumber value : values) {
+        for (LottoNumber value : values) {
             result = lottoGame.find(value) ? result + 1 : result;
         }
         return result;

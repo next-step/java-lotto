@@ -3,15 +3,18 @@ package lotto.domain;
 import lotto.exception.IllegalLottoNumberCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static lotto.domain.LottoGame.createManual;
 import static lotto.domain.LottoNumber.valueOf;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -25,7 +28,7 @@ class LottoGameTest {
     void new_정상(Set<LottoNumber> values) {
 
         // When, Then
-        assertDoesNotThrow(() -> new LottoGame(values));
+        assertDoesNotThrow(() -> createManual(values));
     }
 
     static Stream<Arguments> provideSource_new_정상() {
@@ -42,7 +45,7 @@ class LottoGameTest {
     void new_예외(Set<LottoNumber> values) {
         // When, Then
         assertThatExceptionOfType(IllegalLottoNumberCountException.class)
-                .isThrownBy(() -> new LottoGame(values));
+                .isThrownBy(() -> createManual(values));
     }
 
     static Stream<Arguments> provideSource_new_예외() {
@@ -64,5 +67,13 @@ class LottoGameTest {
 
         // Then
         assertEquals(LottoGame.LOTTO_NUMBER_COUNT, lottoGame.size());
+    }
+
+    @Test
+    void test() {
+        List<LottoNumber> lottoNumbers = LottoGame.RANDOM_LOTTO_NUMBERS;
+        lottoNumbers = LottoGame.RANDOM_LOTTO_NUMBERS;
+        lottoNumbers = LottoGame.RANDOM_LOTTO_NUMBERS;
+        lottoNumbers = LottoGame.RANDOM_LOTTO_NUMBERS;
     }
 }
