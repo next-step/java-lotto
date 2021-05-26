@@ -7,8 +7,9 @@ public class Application {
 		Lottos lottos = new Lottos(money);
 		ResultView.printBuyResult(lottos);
 
-		Lotto win = InputView.winLotto();
-		WinningResult result = new WinningResult(win, lottos);
+		Lotto winLotto = InputView.winLotto();
+		LottoNumber bonusBall = InputView.bonusBall();
+		WinningResult result = new WinningResult(winLotto, lottos);
 		ResultView.printWinningResult(result);
 	}
 }

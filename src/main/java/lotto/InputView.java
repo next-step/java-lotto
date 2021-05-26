@@ -14,7 +14,12 @@ public class InputView {
 	public static Lotto winLotto() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String text = scanner.next();
-		System.out.println();
 		return new Lotto(text);
+	}
+
+	public static LottoNumber bonusBall() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+		int bonusBall = scanner.nextInt();
+		return LottoNumber.valueOf(bonusBall);
 	}
 }
