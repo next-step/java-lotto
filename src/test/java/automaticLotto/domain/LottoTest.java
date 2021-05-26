@@ -47,4 +47,11 @@ public class LottoTest {
 
 		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(Ranking.RANKING_2);
 	}
+
+	@Test
+	@DisplayName("보너스 번호는 로또 번호와 중복되지 않음")
+	public void bonus_number_can_not_be_duplicated_with_the_six_numbers() {
+		assertThatThrownBy(() -> new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 6))
+			.isInstanceOf(RuntimeException.class);
+	}
 }

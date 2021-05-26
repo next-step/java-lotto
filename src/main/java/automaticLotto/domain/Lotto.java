@@ -12,16 +12,30 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private List<Integer> lotto;
+	private List<Integer> numbers;
+	private int bonusNumber;
 
 	public Lotto(List<Integer> numberList) {
+		this(numberList, 0);
+	}
+
+	public Lotto(List<Integer> numberList, int bonusNumber) {
 		validateNumberListSize(new HashSet<>(numberList));
-		this.lotto = numberList;
+		validateBonusNumber(numberList, bonusNumber);
+
+		this.numbers = numberList;
+		this.bonusNumber = bonusNumber;
 		sortLottoNumber();
 	}
 
+	private void validateBonusNumber(List<Integer> numberList, int bonusNumber) {
+		if (numberList.contains(bonusNumber)) {
+			throw new RuntimeException("bonus number can not be duplicated with lotto numbers");
+		}
+	}
+
 	private void sortLottoNumber() {
-		lotto.sort(Comparator.comparingInt(x -> x));
+		numbers.sort(Comparator.comparingInt(x -> x));
 	}
 
 	private void validateNumberListSize(Set<Integer> lotto) {
@@ -33,7 +47,7 @@ public class Lotto {
 	public Ranking match(Lotto targetLotto) {
 		int matchedCount = 0;
 
-		for (Integer number : targetLotto.lotto) {
+		for (Integer number : targetLotto.numbers) {
 			matchedCount = getMatchedCount(matchedCount, number);
 		}
 
@@ -41,7 +55,7 @@ public class Lotto {
 	}
 
 	private int getMatchedCount(int matchedSize, Integer number) {
-		if (lotto.contains(number)) {
+		if (numbers.contains(number)) {
 			matchedSize++;
 		}
 
@@ -55,16 +69,16 @@ public class Lotto {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Lotto lotto1 = (Lotto)o;
-		return Objects.equals(lotto, lotto1.lotto);
+		return Objects.equals(numbers, lotto1.numbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lotto);
+		return Objects.hash(numbers);
 	}
 
 	@Override
 	public String toString() {
-		return lotto + "";
+		return numbers + "";
 	}
 }
