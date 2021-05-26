@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.model.config.LottoConfig;
 import lotto.view.ViewOutput;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,14 +35,15 @@ public class LottoResultMap {
             int numMatchedLottoNumbers = lottoResult.getValue();
             totalProfit += calculateEachReward(numMatched, numMatchedLottoNumbers);
         }
-        ViewOutput.printlnProfitRate(calculateProfitRate(expense, totalProfit));
+        ViewOutput.printlnProfitRate(calculateProfitRate(totalProfit));
     }
 
-    private int calculateProfitRate(int expense, int totalProfit){
+    public BigDecimal calculateProfitRate(int totalProfit){
         if(totalProfit == 0 || expense == 0){
-            return 0;
+
+            return new BigDecimal(0);
         }
-        return (totalProfit / expense);
+        return new BigDecimal(totalProfit).divide(new BigDecimal(expense), 4, BigDecimal.ROUND_CEILING);
     }
 
     private int calculateEachReward(int key, int value){
