@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class WinResult {
 
-    public static final double RETURN_DIGITS_VALUE = 100.0;
     public static final int LOTTO_PRICE = 1000;
     private Map<LottoWinner, Integer> result;
     private int buyLottoCount;
@@ -51,6 +50,6 @@ public class WinResult {
         for (LottoWinner lottoWinner : LottoWinner.values()) {
             totalEarnWinnerPrice += (lottoWinner.winnerPrice * result.get(lottoWinner));
         }
-        return Math.floor((totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE)) * RETURN_DIGITS_VALUE) / RETURN_DIGITS_VALUE;
+        return Math.floor(totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE));
     }
 }
