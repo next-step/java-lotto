@@ -10,7 +10,7 @@ import com.lotto.ui.OutputView;
 public class LottoManager {
 
     public void control() {
-        RequestPurchaseLotto requestPurchaseLotto = InputView.inputPurchase();
+        RequestPurchaseLotto requestPurchaseLotto = inputPurchase();
         LottoGroup lottoGroup = LottoGroup.createLottoGroup(requestPurchaseLotto);
 
         OutputView.confirmBuyCount(requestPurchaseLotto);
@@ -54,5 +54,53 @@ public class LottoManager {
         }
 
         return winningLotto;
+    }
+
+    public RequestPurchaseLotto inputPurchase() {
+        RequestPurchaseLotto requestPurchaseLotto = new RequestPurchaseLotto();
+
+        repeatInputTotalPrice(requestPurchaseLotto);
+        repeatInputManualLottoCount(requestPurchaseLotto);
+        repeatInputManualNumbers(requestPurchaseLotto);
+
+        return requestPurchaseLotto;
+    }
+
+    private String[] inputManualNumbers(RequestPurchaseLotto requestPurchaseLotto) {
+        String[] sLottoList = new String[requestPurchaseLotto.getManualLottoCount()];
+        for (int i = 0; i< requestPurchaseLotto.getManualLottoCount(); i++) {
+            sLottoList[i] = InputView.inputDataFromConsole();
+        }
+        return sLottoList;
+    }
+
+    private void repeatInputManualNumbers(RequestPurchaseLotto requestPurchaseLotto) {
+        try {
+            OutputView.requireManualNumberList();
+            requestPurchaseLotto.setLottoList(inputManualNumbers(requestPurchaseLotto));
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            repeatInputManualNumbers(requestPurchaseLotto);
+        }
+    }
+
+    private void repeatInputManualLottoCount(RequestPurchaseLotto requestPurchaseLotto) {
+        try {
+            OutputView.requireManualLottoCount();
+            requestPurchaseLotto.setManualLottoCount(InputView.inputDataFromConsole());
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            repeatInputManualLottoCount(requestPurchaseLotto);
+        }
+    }
+
+    private void repeatInputTotalPrice(RequestPurchaseLotto requestPurchaseLotto) {
+        try {
+            OutputView.requireLottoPrice();
+            requestPurchaseLotto.setTotalPrice(InputView.inputDataFromConsole());
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            repeatInputTotalPrice(requestPurchaseLotto);
+        }
     }
 }
