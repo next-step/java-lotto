@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LottoWin {
-    Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
+    final Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
 
     public LottoWin() {
         Arrays.stream(LottoRank.values())
@@ -34,14 +34,15 @@ public class LottoWin {
     }
 
     public long sum() {
-        long sum = 0;
-        for(LottoRank lottoWinType: lottoWin.keySet()) {
-            sum += lottoWinType.amount() * lottoWin.get(lottoWinType);
-        }
-        return sum;
+        return lottoWin.keySet().stream()
+            .mapToLong(lottoWinType -> lottoWinType.amount() * lottoWin.get(lottoWinType))
+            .sum();
     }
 
     public BigDecimal profit(Money money) {
-        return BigDecimal.valueOf(sum()).divide(BigDecimal.valueOf(money.money()), 2, BigDecimal.ROUND_FLOOR);
+        return BigDecimal.valueOf(sum())
+            .divide(BigDecimal.valueOf(money.money()),
+                2,
+                BigDecimal.ROUND_FLOOR);
     }
 }
