@@ -16,7 +16,7 @@ public class WinResult {
     }
 
     public WinResult(List<LottoResult> lottoResults) {
-        super();
+        this();
         for (LottoResult lottoResult : lottoResults) {
             saveLottoResult(lottoResult);
         }
