@@ -21,18 +21,6 @@ public enum LottoRank {
         this.winAmount = winAmount;
     }
 
-    public int matchCount() {
-        return matchCount;
-    }
-
-    public boolean isMatchBonusTarget() {
-        return matchBonusTarget;
-    }
-
-    public long winAmount() {
-        return winAmount;
-    }
-
     public static LottoRank of(int matchCount, boolean matchBonusTarget) {
         if (isLose(matchCount)) {
             return LOSE;
@@ -45,16 +33,28 @@ public enum LottoRank {
 
     private boolean match(int matchCount, boolean matchBonusTarget) {
         if (this.matchBonusTarget) {
-            return matchCount(matchCount) && matchBonusTarget;
+            return isMatch(matchCount) && matchBonusTarget;
         }
-        return matchCount(matchCount) && !matchBonusTarget;
+        return isMatch(matchCount) && !matchBonusTarget;
     }
 
-    private boolean matchCount(int matchCount) {
+    private boolean isMatch(int matchCount) {
         return this.matchCount == matchCount;
     }
 
     private static boolean isLose(int matchCount) {
-        return matchCount >= LOSE.matchCount() && matchCount < FIFTH.matchCount();
+        return matchCount >= LOSE.isMatch() && matchCount < FIFTH.isMatch();
+    }
+
+    public int isMatch() {
+        return matchCount;
+    }
+
+    public boolean isMatchBonusTarget() {
+        return matchBonusTarget;
+    }
+
+    public long winAmount() {
+        return winAmount;
     }
 }
