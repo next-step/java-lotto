@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import lotto.domain.generator.AutoLottosGenerator;
 import lotto.domain.generator.LottosGenerator;
@@ -23,7 +24,11 @@ public class LottoMachine {
     }
 
     public static LottoMachine of(LottoTicketCount autoLottoTicketCount, List<String> manualNumbers) {
-        return null;
+        List<Lotto> autoLottos = generateAutoLottos(autoLottoTicketCount);
+        List<Lotto> manualLottos = generateManualLottos(manualNumbers);
+
+        return of(Stream.concat(manualLottos.stream(), autoLottos.stream())
+            .collect(toList()));
     }
 
     public static LottoMachine of(List<Lotto> lottos) {
