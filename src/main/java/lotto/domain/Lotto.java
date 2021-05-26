@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.generator.AutomaticLottoGenerator;
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.AutomaticLottoNumbersGenerator;
+import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.entity.Number;
 
 import java.util.*;
@@ -15,9 +15,9 @@ public final class Lotto {
         checkValid();
     }
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        lottoGenerator = new AutomaticLottoGenerator();
-        lottoNumbers.addAll(lottoGenerator.numberGenerator());
+    public Lotto(LottoNumbersGenerator lottoNumbersGenerator) {
+        lottoNumbersGenerator = new AutomaticLottoNumbersGenerator();
+        lottoNumbers.addAll(lottoNumbersGenerator.numberGenerator());
         checkValid();
     }
 

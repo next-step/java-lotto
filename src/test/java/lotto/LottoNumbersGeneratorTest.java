@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.entity.Number;
-import lotto.domain.generator.AutomaticLottoGenerator;
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.AutomaticLottoNumbersGenerator;
+import lotto.domain.generator.LottoNumbersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,19 +12,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LottoGeneratorTest {
+public class LottoNumbersGeneratorTest {
 
-    private LottoGenerator lottoGenerator;
+    private LottoNumbersGenerator lottoNumbersGenerator;
 
     @BeforeEach
     public void setup(){
-        lottoGenerator = new AutomaticLottoGenerator();
+        lottoNumbersGenerator = new AutomaticLottoNumbersGenerator();
     }
 
     @Test
     @DisplayName("로또 자동 생성기 테스트")
     public void 자동_로또_생성(){
-        List<Number> numbers = lottoGenerator.numberGenerator();
+        List<Number> numbers = lottoNumbersGenerator.numberGenerator();
         assertThat(numbers.size()).isEqualTo(6);
         for (Number number : numbers) {
             assertThat(number).isBetween(new Number(1), new Number(45));
@@ -34,8 +34,8 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또 정렬 기능 테스트")
     public void 로또_정렬_확인(){
-        List<Number> numbers = lottoGenerator.numberGenerator();
-        lottoGenerator.sortNumbers(numbers);
+        List<Number> numbers = lottoNumbersGenerator.numberGenerator();
+        lottoNumbersGenerator.sortNumbers(numbers);
         Number number;
         Number nextNumber;
         for (int i = 0; i < (numbers.size() - 1) ; i++) {
