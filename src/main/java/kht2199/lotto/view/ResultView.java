@@ -61,7 +61,10 @@ public class ResultView {
 			return "입력값의 길이가 유효하지 않습니다.";
 		}
 		if (error == InvalidInputError.PARSING) {
-			return "입력값의 포멧이 유효하지 않습니다";
+			return "입력값의 포멧이 유효하지 않습니다.";
+		}
+		if (error == InvalidInputError.RANGE) {
+			return "입력값의 범위가 유효하지 않습니다.";
 		}
 		throw new RuntimeException(exception);
 	}
