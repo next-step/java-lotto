@@ -39,7 +39,7 @@ public class RoundInputData implements InputData<Round> {
 
     private int[] requestWinningNumber() throws InputException{
         try {
-            String text = input.request("지난 주 당첨 번호를 입력해 주세요.");
+            String text = input.requestAfterNewLine("지난 주 당첨 번호를 입력해 주세요.");
             return StringUtils.csvToIntArray(text);
         } catch (NumberFormatException e) {
             throw new InputException("시도 횟수는 숫자만 가능합니다.");

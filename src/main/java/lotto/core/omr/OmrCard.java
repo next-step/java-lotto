@@ -3,11 +3,11 @@ package lotto.core.omr;
 import lotto.core.SixBall;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OmrCard {
     public static final int PRICE = 1000;
@@ -32,6 +32,10 @@ public class OmrCard {
 
     public int size() {
         return omrList.size();
+    }
+
+    public Stream<Omr> stream() {
+        return omrList.stream();
     }
 
     @Override

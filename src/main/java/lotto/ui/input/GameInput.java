@@ -3,7 +3,7 @@ package lotto.ui.input;
 import lotto.ui.output.GameOutput;
 import lotto.ui.output.Output;
 import java.io.InputStream;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameInput implements Input {
     private final Scanner scanner;
@@ -29,5 +29,21 @@ public class GameInput implements Input {
     public void alertWarn(String message) {
         output.error(message);
         output.println(String.format("다시 입력해 주시기 바랍니다.", GameOutput.NEW_LINE));
+    }
+
+    public String requestAfterNewLine(String message) {
+        output.println("");
+
+        return request(message);
+    }
+
+    public List<String> requestForMultipleValues(int repeat, String message) {
+        List<String> answers = new ArrayList<>(Arrays.asList(requestAfterNewLine(message)));
+
+        while (answers.size() < repeat) {
+            answers.add(scanner.nextLine());
+        }
+
+        return answers;
     }
 }

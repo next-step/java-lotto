@@ -13,7 +13,7 @@ public class NextStepProblemGameGameReport implements GameReport {
 
     @Override
     public String format(GameResult gameResult) {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(NEW_LINE);
 
         builder.append("당첨 통계").append(NEW_LINE);
         builder.append("---------").append(NEW_LINE);
