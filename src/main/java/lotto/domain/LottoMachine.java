@@ -17,7 +17,7 @@ class LottoMachine {
 
 	private static List<LottoNumber> unmodifiableLottoNumberList() {
 		return Collections.unmodifiableList(
-				IntStream.range(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
+				IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
 						.mapToObj(LottoNumber::of)
 						.collect(Collectors.toList()));
 	}
