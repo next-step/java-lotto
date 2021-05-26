@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.common.WinningType;
-import lotto.domain.LottoTicketGameResult;
+import lotto.domain.GameWinningResult;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,10 +24,10 @@ public class ResultView {
         System.out.println(lottoTicketsText);
     }
 
-    public void printGameResult(List<LottoTicketGameResult> lottoTicketGameResult) {
+    public void printGameResult(List<GameWinningResult> gameResult) {
         System.out.println(STATISTICS_TITLE_MESSAGE);
-        Collections.reverse(lottoTicketGameResult);
-        for(LottoTicketGameResult result : lottoTicketGameResult) {
+        Collections.reverse(gameResult);
+        for(GameWinningResult result : gameResult) {
             printGameResult(result.getWinningType(), result.getWinningCount());
         }
     }

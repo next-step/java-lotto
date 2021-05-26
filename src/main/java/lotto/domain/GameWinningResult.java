@@ -2,11 +2,11 @@ package lotto.domain;
 
 import lotto.common.WinningType;
 
-public class LottoTicketGameResult {
+public class GameWinningResult {
     private final WinningType winningType;
     private final int winningCount;
 
-    public LottoTicketGameResult(WinningType winningType, int winningCount) {
+    public GameWinningResult(WinningType winningType, int winningCount) {
         this.winningType = winningType;
         this.winningCount = winningCount;
     }
@@ -27,8 +27,8 @@ public class LottoTicketGameResult {
     @Override
     public boolean equals(Object obj) {
         if(obj !=null || this.getClass() == obj.getClass()) {
-            return (((LottoTicketGameResult)obj).winningCount == this.winningCount) &&
-                    (((LottoTicketGameResult)obj).winningType.equals(this.winningType));
+            return (((GameWinningResult)obj).winningCount == this.winningCount) &&
+                    (((GameWinningResult)obj).winningType.equals(this.winningType));
         }
         return super.equals(obj);
     }

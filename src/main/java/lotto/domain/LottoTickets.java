@@ -38,7 +38,7 @@ public class LottoTickets {
         return prizeSum;
     }
 
-    public List<WinningType> getWinningResults(LottoTicket winningLottoTicket, int bonusNumber) {
+    public List<WinningType> getWinningResult(LottoTicket winningLottoTicket, int bonusNumber) {
         return this.lottoTickets.stream()
                 .map(t -> t.getWinningType(winningLottoTicket, bonusNumber))
                 .collect(Collectors.toList());

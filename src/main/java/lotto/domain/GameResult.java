@@ -6,24 +6,24 @@ import lotto.common.WinningType;
 import java.util.*;
 
 public class GameResult {
-    private List<LottoTicketGameResult> lottoTicketGameResults;
+    private List<GameWinningResult> gameWinningResults;
 
     public GameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
-        this.lottoTicketGameResults = getGameResult(winningLottoTicket, userLottoTickets, bonusNumber);
+        this.gameWinningResults = getGameResult(winningLottoTicket, userLottoTickets, bonusNumber);
     }
 
 
-    private List<LottoTicketGameResult> getGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
-        List<WinningType> winningResult = userLottoTickets.getWinningResults(winningLottoTicket, bonusNumber);
-        List<LottoTicketGameResult> gameLottoTicketGameResult = new ArrayList<>();
+    private List<GameWinningResult> getGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
+        List<WinningType> winningResult = userLottoTickets.getWinningResult(winningLottoTicket, bonusNumber);
+        List<GameWinningResult> gameWinningResult = new ArrayList<>();
         for(WinningType winningType : WinningType.values()) {
-            gameLottoTicketGameResult.add(new LottoTicketGameResult(winningType, (int) winningResult.stream()
+            gameWinningResult.add(new GameWinningResult(winningType, (int) winningResult.stream()
                                                                                     .filter(w -> w.equals(winningType))
                                                                                     .count()));
         }
 
-        return gameLottoTicketGameResult;
+        return gameWinningResult;
     }
 
     private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
@@ -32,7 +32,7 @@ public class GameResult {
         }
     }
 
-    public List<LottoTicketGameResult> getGameResult() {
-        return lottoTicketGameResults;
+    public List<GameWinningResult> getGameResult() {
+        return gameWinningResults;
     }
 }
