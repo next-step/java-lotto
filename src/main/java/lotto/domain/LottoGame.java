@@ -7,8 +7,19 @@ public class LottoGame {
 
   private final LottoNumbers gameNumbers;
 
-  public LottoGame(LottoNumbers gameNumbers) {
+  private final OrderType orderType;
+
+  private LottoGame(LottoNumbers gameNumbers, OrderType orderType) {
     this.gameNumbers = gameNumbers;
+    this.orderType = orderType;
+  }
+
+  public static LottoGame createAutoGame(LottoNumbers lottoNumbers) {
+    return new LottoGame(lottoNumbers, OrderType.AUTO);
+  }
+
+  public static LottoGame createManualGame(LottoNumbers lottoNumbers) {
+    return new LottoGame(lottoNumbers, OrderType.MANUAL);
   }
 
   public int matchWinningNumbers(LottoGame winningGame) {
@@ -22,6 +33,10 @@ public class LottoGame {
 
   public List<Integer> getGameNumbers() {
     return gameNumbers.getNumbers();
+  }
+
+  public String getOrderTypeName() {
+    return orderType.getDisplayName();
   }
 
   @Override

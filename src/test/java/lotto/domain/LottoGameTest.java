@@ -21,26 +21,30 @@ class LottoGameTest {
   }
 
   @DisplayName("당첨 번호와 일치하는 갯수를 반환한다.")
-  @Test
-  void matchWinningNumbersTest() {
+  @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3"}, delimiter = ':')
+  @ParameterizedTest
+  void matchWinningNumbersTest(String givenNumbers, int expectation) {
     //given
-    LottoNumbers firstNumbers = new LottoNumbers(toNumbers("1,2,3,4,5,6"));
-    LottoNumbers secondNumbers = new LottoNumbers(toNumbers("1,2,3,4,5,7"));
-    LottoNumbers thirdNumbers = new LottoNumbers(toNumbers("1,2,3,4,7,8"));
-    LottoNumbers fourthNumbers = new LottoNumbers(toNumbers("1,2,3,7,8,9"));
-    assertAll(
-        () -> assertThat(new LottoGame(firstNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(6),
-        () -> assertThat(new LottoGame(secondNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(5),
-        () -> assertThat(new LottoGame(thirdNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(4),
-        () -> assertThat(new LottoGame(fourthNumbers).matchWinningNumbers(new LottoGame(winningNumbers))).isEqualTo(3)
-    );
+    LottoNumbers givenLottoNumbers = new LottoNumbers(toNumbers(givenNumbers));
+    //when & then
+    assertThat(LottoGame.createAutoGame(givenLottoNumbers).matchWinningNumbers(LottoGame.createManualGame(winningNumbers)))
+        .isEqualTo(expectation);
   }
 
   @DisplayName("보너스 번호를 포함하고 있는지 여부를 반환한다.")
   @CsvSource(value = {"1,true", "6,true", "7,false"})
   @ParameterizedTest
   void matchBonusNumberTest(int givenBonusNumber, boolean expectation) {
-    assertThat(new LottoGame(winningNumbers).matchBonusNumber(new LottoNumber(givenBonusNumber))).isEqualTo(expectation);
+    assertThat(LottoGame.createAutoGame(winningNumbers).matchBonusNumber(new LottoNumber(givenBonusNumber))).isEqualTo(expectation);
+  }
+
+  @DisplayName("자동 생성된 로또인지, 수동 생성된 로또인지 반환한다.")
+  @Test
+  void orderTypeReturnTest() {
+    assertAll(
+        () -> assertThat(LottoGame.createAutoGame(winningNumbers).getOrderTypeName()).isEqualTo(OrderType.AUTO.getDisplayName()),
+        () -> assertThat(LottoGame.createManualGame(winningNumbers).getOrderTypeName()).isEqualTo(OrderType.MANUAL.getDisplayName())
+    );
   }
 
 }
