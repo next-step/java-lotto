@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.model.LottoNumber.MAX_LOTTO_NUMBER;
-import static lotto.model.LottoNumber.MIN_LOTTO_NUMBER;
-import static lotto.model.LottoNumbers.LOTTO_NUMBER_COUNT;
+import static lotto.common.LottoConstants.MAX_LOTTO_NUMBER;
+import static lotto.common.LottoConstants.MIN_LOTTO_NUMBER;
+import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.view.InputView.LOTTO_PRICE;
 
-public class Lotto {
+public class LottoMachine {
 
     private final List<LottoNumber> lottoNumber;
 
-    public Lotto() {
+    public LottoMachine() {
         List<Integer> integers = initLottoRange();
         this.lottoNumber = integers.stream()
                 .map(LottoNumber::lottoNumber)

@@ -5,9 +5,9 @@ import lotto.LottoUtil;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.common.LottoConstants.WINNING_NUMBER_CREATE_FAIL_MESSAGE;
+
 public class WinningNumbers {
-    public static final String WINNING_NUMBER_CREATE_FAIL_MESSAGE = "당첨 번호 생성에 실패 했습니다.";
-    public static final String SPLIT_SYMBOL = ",";
     private final List<LottoNumber> winningNumbers;
 
     public WinningNumbers(List<LottoNumber> winningNumbers) {

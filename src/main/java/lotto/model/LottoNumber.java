@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final String LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE = "로또 번호는 1 ~ 45 까지 입니다.";
-    public static final String WRONG_INPUT_NUMBER = "번호를 잘 못 입력하셨습니다.";
+import static lotto.common.LottoConstants.*;
 
+public class LottoNumber {
     private final int number;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 

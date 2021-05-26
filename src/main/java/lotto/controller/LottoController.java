@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
+import lotto.model.LottoMachine;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
 import lotto.model.WinningNumbers;
@@ -13,13 +13,13 @@ public class LottoController {
 
     private final InputView inputView = new InputView();
     private final ResultView resultView = new ResultView();
-    private final Lotto lotto = new Lotto();
+    private final LottoMachine lottoMachine = new LottoMachine();
     private final LottoResult lottoResult = new LottoResult();
 
     public void lotto(){
 
-        int buyCount = lotto.buyCount(inputView.money());
-        List<LottoNumbers> lottoNumbers = lotto.autoLottoNumbers(buyCount);
+        int buyCount = lottoMachine.buyCount(inputView.money());
+        List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount);
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.model.LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
+import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.common.LottoConstants.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
 
 public class LottoNumbers {
-    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> numbers) {

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.view.LottoResultMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,20 +11,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.model.LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
-import static lotto.model.WinningNumbers.WINNING_NUMBER_CREATE_FAIL_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoResultTest {
-    Lotto lotto;
+public class LottoMachineResultTest {
+    LottoMachine lottoMachine;
     LottoResult lottoResult;
     WinningNumbers winningNumbers;
     List<LottoNumbers> buyLottoNumbers;
 
     @BeforeEach
     public void setup(){
-        lotto = new Lotto();
+        lottoMachine = new LottoMachine();
         lottoResult = new LottoResult();
         winningNumbers = new WinningNumbers("1,2,3,4,5,6");
         buyLottoNumbers = new ArrayList<>();

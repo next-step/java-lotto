@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.view;
 
 public enum LottoResultMessage {
     PROFIT("이득이"),

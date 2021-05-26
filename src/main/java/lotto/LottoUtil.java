@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.model.LottoNumbers.LOTTO_NUMBER_COUNT;
-import static lotto.model.WinningNumbers.SPLIT_SYMBOL;
+import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.common.LottoConstants.SPLIT_SYMBOL;
 
 public class LottoUtil {
     private LottoUtil() {
