@@ -150,7 +150,8 @@
     │      │  │      WinningType.java              당첨 타입
     │      │  │
     │      │  ├─domain
-    │      │  │      GameResult.java               로또 게임 결과
+    │      │  │      GameResult.java               게임 결과
+    │      │  │      GameWinningResult.java        WiningType 별 게임 결과
     │      │  │      LottoNumber.java              로또 번호
     │      │  │      LottoTicket.java              로또 티켓
     │      │  │      LottoTicketGameResult.java    각 티켓 별 게임 결과
