@@ -26,7 +26,7 @@ public final class LottoManager {
 			startLotto();
 		} catch(LottoException e) {
 			ResultView.printExceptionMessage(e);
-		} catch(Exception e){
+		} catch(Exception e) {
 			ResultView.printExceptionMessage(LottoException.of(SYSTEM_ERROR));
 		}
 	}
