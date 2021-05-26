@@ -30,7 +30,7 @@ public class InputView {
 
     private static LottoNumbersDto inputWinNumbers(String winNumbers) {
         List<Integer> winNumberList = Arrays.stream(winNumbers.split(NUMBER_DELIMITER))
-                .map(winNumber -> new Integer(winNumber.trim()))
+                .map(winNumber -> Integer.valueOf(winNumber.trim()))
                 .collect(Collectors.toList());
         return new LottoNumbersDto(winNumberList);
     }
