@@ -3,7 +3,7 @@ package com.lotto.ui;
 import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoReward;
 import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.ReqPurchaseLotto;
+import com.lotto.domain.RequestPurchaseLotto;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class OutputView {
         out(REQUIRE_LOTTO_PRICE.message());
     }
 
-    public static void confirmBuyCount(ReqPurchaseLotto reqPurchaseLotto) {
+    public static void confirmBuyCount(RequestPurchaseLotto requestPurchaseLotto) {
         out(String.format(CONFIRM_BUY_COUNT.message(),
-                reqPurchaseLotto.getManualLottoCount(), reqPurchaseLotto.getAutoLottoCount()));
+                requestPurchaseLotto.getManualLottoCount(), requestPurchaseLotto.getAutoLottoCount()));
     }
 
     public static void buyLottoList(List<Lotto> lottoList) {

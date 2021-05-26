@@ -1,6 +1,6 @@
 package com.lotto.ui;
 
-import com.lotto.domain.ReqPurchaseLotto;
+import com.lotto.domain.RequestPurchaseLotto;
 
 import java.util.Scanner;
 
@@ -11,51 +11,51 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static ReqPurchaseLotto inputPurchase() {
-        ReqPurchaseLotto reqPurchaseLotto = new ReqPurchaseLotto();
+    public static RequestPurchaseLotto inputPurchase() {
+        RequestPurchaseLotto requestPurchaseLotto = new RequestPurchaseLotto();
 
-        repeatInputTotalPrice(reqPurchaseLotto);
-        repeatInputManualLottoCount(reqPurchaseLotto);
-        repeatInputManualNumbers(reqPurchaseLotto);
+        repeatInputTotalPrice(requestPurchaseLotto);
+        repeatInputManualLottoCount(requestPurchaseLotto);
+        repeatInputManualNumbers(requestPurchaseLotto);
 
-        return reqPurchaseLotto;
+        return requestPurchaseLotto;
     }
 
-    private static String[] inputManualNumbers(ReqPurchaseLotto reqPurchaseLotto) {
-        String[] sLottoList = new String[reqPurchaseLotto.getManualLottoCount()];
-        for (int i = 0; i< reqPurchaseLotto.getManualLottoCount(); i++) {
+    private static String[] inputManualNumbers(RequestPurchaseLotto requestPurchaseLotto) {
+        String[] sLottoList = new String[requestPurchaseLotto.getManualLottoCount()];
+        for (int i = 0; i< requestPurchaseLotto.getManualLottoCount(); i++) {
             sLottoList[i] = inputDataFromConsole();
         }
         return sLottoList;
     }
 
-    private static void repeatInputManualNumbers(ReqPurchaseLotto reqPurchaseLotto) {
+    private static void repeatInputManualNumbers(RequestPurchaseLotto requestPurchaseLotto) {
         try {
             OutputView.requireManualNumberList();
-            reqPurchaseLotto.setLottoList(inputManualNumbers(reqPurchaseLotto));
+            requestPurchaseLotto.setLottoList(inputManualNumbers(requestPurchaseLotto));
         } catch (RuntimeException exception) {
             OutputView.out(exception.getMessage());
-            repeatInputManualNumbers(reqPurchaseLotto);
+            repeatInputManualNumbers(requestPurchaseLotto);
         }
     }
 
-    private static void repeatInputManualLottoCount(ReqPurchaseLotto reqPurchaseLotto) {
+    private static void repeatInputManualLottoCount(RequestPurchaseLotto requestPurchaseLotto) {
         try {
             OutputView.requireManualLottoCount();
-            reqPurchaseLotto.setManualLottoCount(inputDataFromConsole());
+            requestPurchaseLotto.setManualLottoCount(inputDataFromConsole());
         } catch (RuntimeException exception) {
             OutputView.out(exception.getMessage());
-            repeatInputManualLottoCount(reqPurchaseLotto);
+            repeatInputManualLottoCount(requestPurchaseLotto);
         }
     }
 
-    private static void repeatInputTotalPrice(ReqPurchaseLotto reqPurchaseLotto) {
+    private static void repeatInputTotalPrice(RequestPurchaseLotto requestPurchaseLotto) {
         try {
             OutputView.requireLottoPrice();
-            reqPurchaseLotto.setTotalPrice(inputDataFromConsole());
+            requestPurchaseLotto.setTotalPrice(inputDataFromConsole());
         } catch (RuntimeException exception) {
             OutputView.out(exception.getMessage());
-            repeatInputTotalPrice(reqPurchaseLotto);
+            repeatInputTotalPrice(requestPurchaseLotto);
         }
     }
 }

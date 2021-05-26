@@ -4,11 +4,9 @@ import com.lotto.exception.*;
 
 import java.util.*;
 
-public class ReqPurchaseLotto {
+public class RequestPurchaseLotto {
     private int totalPrice;
-    private int totalCount;
     private int manualLottoCount;
-    private int autoLottoCount;
     private List<Lotto> lottoList;
 
     public void setTotalPrice(String sTotalPrice)
@@ -20,7 +18,6 @@ public class ReqPurchaseLotto {
             throw new LottoPriceNumberFormatException(sTotalPrice);
         }
         validateTotalPrice(totalPrice);
-        totalCount = totalPrice / Lotto.UNIT_PRICE;
     }
 
     private static void validateTotalPrice(int totalPrice) {
@@ -38,7 +35,6 @@ public class ReqPurchaseLotto {
             throw new LottoManualCountNumberFormatException();
         }
         validateManualLottoCount(manualLottoCount);
-        autoLottoCount = totalCount - manualLottoCount;
     }
 
     private void validateManualLottoCount(int manualLottoCount) throws LottoManualCountOutOfBoundsException {
@@ -81,6 +77,10 @@ public class ReqPurchaseLotto {
     }
 
     public int getAutoLottoCount() {
-        return autoLottoCount;
+        return totalCount() - manualLottoCount;
+    }
+
+    private int totalCount() {
+        return totalPrice / Lotto.UNIT_PRICE;
     }
 }

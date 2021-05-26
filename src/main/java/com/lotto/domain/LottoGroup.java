@@ -13,16 +13,16 @@ public class LottoGroup {
         this.lottoList = lottoList;
     }
 
-    public static LottoGroup createLottoGroup(ReqPurchaseLotto reqPurchaseLotto)
+    public static LottoGroup createLottoGroup(RequestPurchaseLotto requestPurchaseLotto)
             throws LottoPriceNumberFormatException, LottoPriceOutOfBoundsException {
 
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int i = 0; i < reqPurchaseLotto.getManualLottoCount(); i++) {
-            lottoList.add(reqPurchaseLotto.getLottoList().get(i));
+        for (int i = 0; i < requestPurchaseLotto.getManualLottoCount(); i++) {
+            lottoList.add(requestPurchaseLotto.getLottoList().get(i));
         }
 
-        for (int i = 0; i < reqPurchaseLotto.getAutoLottoCount(); i++) {
+        for (int i = 0; i < requestPurchaseLotto.getAutoLottoCount(); i++) {
             lottoList.add(LottoAutoGenerator.generate());
         }
 

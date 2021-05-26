@@ -2,7 +2,7 @@ package com.lotto.controller;
 
 import com.lotto.domain.LottoGroup;
 import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.ReqPurchaseLotto;
+import com.lotto.domain.RequestPurchaseLotto;
 import com.lotto.domain.WinningLotto;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
@@ -10,10 +10,10 @@ import com.lotto.ui.OutputView;
 public class LottoManager {
 
     public void control() {
-        ReqPurchaseLotto reqPurchaseLotto = InputView.inputPurchase();
-        LottoGroup lottoGroup = LottoGroup.createLottoGroup(reqPurchaseLotto);
+        RequestPurchaseLotto requestPurchaseLotto = InputView.inputPurchase();
+        LottoGroup lottoGroup = LottoGroup.createLottoGroup(requestPurchaseLotto);
 
-        OutputView.confirmBuyCount(reqPurchaseLotto);
+        OutputView.confirmBuyCount(requestPurchaseLotto);
         OutputView.buyLottoList(lottoGroup.lottoList());
 
         WinningLotto winningLotto = createWinningLotto();
