@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public enum Winner {
 	FIRST_PRIZE(6, 2_000_000_000L),
-	SECOND_PRIZE(5, 1_500_000L),
-	THIRD_PRIZE(4, 50_000L),
-	FOURTH_PRIZE(3, 5_000L),
+	SECOND_PRIZE(5, 30_000_000L),
+	THIRD_PRIZE(5, 1_500_000L),
+	FOURTH_PRIZE(4, 50_000L),
+	FIFTH_PRIZE(3, 5_000L),
 	NONE(0, 0);
 
-	private int count;
-	private long award;
+	private final int count;
+	private final long award;
 
 	Winner(int count, long award) {
 		this.count = count;
