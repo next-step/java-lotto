@@ -40,8 +40,16 @@ public enum LottoRank {
 		this.money = money;
 	}
 
-	static LottoRank rank(LottoPoint lottoPoint) {
-		return lottoPointIndex.getOrDefault(lottoPoint, OUT_OF_RANK);
+	static LottoRank rank(int matchCount, boolean bonus) {
+		return lottoPointIndex.getOrDefault(lottoPoint(matchCount, bonus), OUT_OF_RANK);
+	}
+
+	private static LottoPoint lottoPoint(int matchCount, boolean bonus) {
+		if (matchCount == SECOND.matchCount()) {
+			return new LottoPoint(matchCount, bonus);
+		}
+
+		return new LottoPoint(matchCount);
 	}
 
 }

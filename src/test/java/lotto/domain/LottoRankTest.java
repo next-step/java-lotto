@@ -15,19 +15,19 @@ class LottoRankTest {
 	@DisplayName("로또 등수 경우의 수 테스트")
 	@ParameterizedTest
 	@MethodSource("argumentProvider")
-	void rank(LottoPoint lottoPoint, LottoRank expectedLottoRank) {
-		assertThat(LottoRank.rank(lottoPoint)).isEqualTo(expectedLottoRank);
+	void rank(int matchCount, boolean bonus, LottoPoint lottoPoint, LottoRank expectedLottoRank) {
+		assertThat(LottoRank.rank(matchCount, bonus)).isEqualTo(expectedLottoRank);
 	}
 
 	static Stream<Arguments> argumentProvider() {
 		return Stream.of(
-			arguments(new LottoPoint(6), LottoRank.FIRST),
-			arguments(new LottoPoint(5, true), LottoRank.SECOND),
-			arguments(new LottoPoint(5), LottoRank.THIRD),
-			arguments(new LottoPoint(4), LottoRank.FOURTH),
-			arguments(new LottoPoint(3), LottoRank.FIFTH),
-			arguments(new LottoPoint(0), LottoRank.OUT_OF_RANK),
-			arguments(new LottoPoint(100), LottoRank.OUT_OF_RANK)
+			arguments(6, false, new LottoPoint(6), LottoRank.FIRST),
+			arguments(5, true, new LottoPoint(5, true), LottoRank.SECOND),
+			arguments(5, false, new LottoPoint(5), LottoRank.THIRD),
+			arguments(4, false, new LottoPoint(4), LottoRank.FOURTH),
+			arguments(3, false, new LottoPoint(3), LottoRank.FIFTH),
+			arguments(0, false, new LottoPoint(0), LottoRank.OUT_OF_RANK),
+			arguments(100, false, new LottoPoint(100), LottoRank.OUT_OF_RANK)
 		);
 	}
 

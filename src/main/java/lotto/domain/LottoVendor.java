@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoRank.*;
 import static lotto.util.ValidationUtils.*;
 
 import java.util.ArrayList;
@@ -45,19 +44,8 @@ public class LottoVendor {
 	}
 
 	private LottoRank lottoRank(LottoTicket lottoTicket) {
-		return LottoRank.rank(lottoPoint(lottoTicket, matchCount(lottoTicket)));
-	}
-
-	private LottoPoint lottoPoint(LottoTicket lottoTicket, int matchCount) {
-		if (matchCount == SECOND.matchCount()) {
-			return new LottoPoint(matchCount, lottoTicket.matchNumber(bonusNumber));
-		}
-
-		return new LottoPoint(matchCount);
-	}
-
-	private int matchCount(LottoTicket lottoTicket) {
-		return LottoTicket.countDuplicates(lottoTicket, winningLottoTicket);
+		return LottoRank.rank(LottoTicket.countCommonNumber(lottoTicket, winningLottoTicket),
+			lottoTicket.matchNumber(bonusNumber));
 	}
 
 }
