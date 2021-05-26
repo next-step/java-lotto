@@ -35,7 +35,7 @@
 |---|---|---|
 | 구입금액 | assets | 예산, 예산금액 |
 | 구매한 | purchased | |
-| 당첨금 | winning numbers | |
+| 당첨번호 | winning numbers | |
 
 ## 기능정의
 - [X] 구입 금액으로 구매할 수 있는 로또 갯수를 계산
