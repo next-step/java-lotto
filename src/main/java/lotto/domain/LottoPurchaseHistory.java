@@ -2,19 +2,19 @@ package lotto.domain;
 
 public class LottoPurchaseHistory {
 
-	private int autoLottoCount;
-	private int manualLottoCount;
+	private LottoCount autoLottoCount;
+	private LottoCount manualLottoCount;
 
-	public LottoPurchaseHistory(int autoLottoCount, int manualLottoCount) {
+	public LottoPurchaseHistory(LottoCount autoLottoCount, LottoCount manualLottoCount) {
 		this.autoLottoCount = autoLottoCount;
 		this.manualLottoCount = manualLottoCount;
 	}
 
 	public int getAutoLottoCount() {
-		return this.autoLottoCount;
+		return this.autoLottoCount.getCount();
 	}
 
 	public int getManualLottoCount() {
-		return this.manualLottoCount;
+		return this.manualLottoCount.getCount();
 	}
 }

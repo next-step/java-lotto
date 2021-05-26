@@ -10,7 +10,7 @@ public class LottoPurchaseHistoryTest {
 	@Test
 	@DisplayName("구매 이력 생성 테스트")
 	public void createLottoPurchaseHistory() {
-		LottoPurchaseHistory lottoPurchaseHistory = new LottoPurchaseHistory(5,3);
+		LottoPurchaseHistory lottoPurchaseHistory = new LottoPurchaseHistory(new LottoCount(5), new LottoCount(3));
 		assertThat(lottoPurchaseHistory.getManualLottoCount()).isEqualTo(3);
 		assertThat(lottoPurchaseHistory.getAutoLottoCount()).isEqualTo(5);
 	}

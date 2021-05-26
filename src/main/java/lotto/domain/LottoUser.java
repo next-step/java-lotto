@@ -14,7 +14,7 @@ public class LottoUser {
 		this.lottos.addAllLottos(manualLottos);
 		int autoLottoCount = getAutoLottoCount(money, manualLottos.getSize());
 		buyGenerateLottos(autoLottoCount);
-		return new LottoPurchaseHistory(autoLottoCount, manualLottos.getSize());
+		return new LottoPurchaseHistory(new LottoCount(autoLottoCount), new LottoCount(manualLottos.getSize()));
 	}
 
 	private void buyGenerateLottos(int autoLottoCount) {
