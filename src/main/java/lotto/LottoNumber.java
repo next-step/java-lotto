@@ -26,6 +26,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return NUMBER_CACHE.put(value, new LottoNumber(value));
 	}
 
+	public static LottoNumber valueOf(String value) {
+		return valueOf(Integer.parseInt(value));
+	}
+
 	private LottoNumber(int value) {
 		validateNumberValue(value);
 
