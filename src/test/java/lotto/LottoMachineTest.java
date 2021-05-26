@@ -17,6 +17,12 @@ public class LottoMachineTest {
     }
 
     @Test
+    @DisplayName("금액은 1000원 단위")
+    public void validateLottoMoney(){
+        assertThat(lottoMachine.validateMoney(15000)).isEqualTo(true);
+    }
+
+    @Test
     @DisplayName("입력 받은 금액 / 1000 만큼 구매")
     public void buyLottoCount(){
         assertThat(lottoMachine.buyCount(15000)).isEqualTo(15);

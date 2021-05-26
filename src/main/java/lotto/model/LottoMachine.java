@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import static lotto.common.LottoConstants.*;
 
 public class LottoMachine {
-
+    private static final int ZERO = 0;
     private final List<LottoNumber> lottoNumber;
 
     public LottoMachine() {
@@ -31,6 +31,13 @@ public class LottoMachine {
 
     public int buyCount(int money) {
         return money / LOTTO_PRICE;
+    }
+
+    public boolean validateMoney(int money) {
+        if (money <= ZERO) {
+            return false;
+        }
+        return money % LOTTO_PRICE == ZERO;
     }
 
     private LottoNumbers oneLottoNumbers() {

@@ -20,6 +20,11 @@ public class LottoController {
         LottoResult lottoResult = new LottoResult();
 
         int money = inputView.money();
+        while (!lottoMachine.validateMoney(money)) {
+            System.out.println("금액을 천원 단위로 입력 하세요.");
+            money = inputView.money();
+        }
+
         int buyCount = lottoMachine.buyCount(money);
         List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount);
         resultView.print(lottoNumbers);

@@ -3,23 +3,12 @@ package lotto.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static lotto.common.LottoConstants.LOTTO_PRICE;
-
 public class InputView {
-    private static final int ZERO = 0;
     private Scanner scanner = new Scanner(System.in);
 
     public int money() {
-
         System.out.println("구매금액을 입력해 주세요.");
-        int inputMoney = inputMoney();
-
-        while (!normal(inputMoney)) {
-            System.out.println("금액을 천원 단위로 입력 하세요.");
-            inputMoney = inputMoney();
-        }
-
-        return inputMoney;
+        return inputMoney();
     }
 
     private int inputMoney() {
@@ -36,12 +25,5 @@ public class InputView {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
-    }
-
-    private boolean normal(int money) {
-        if (money <= ZERO) {
-            return false;
-        }
-        return money % LOTTO_PRICE == ZERO;
     }
 }
