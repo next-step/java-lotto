@@ -36,7 +36,7 @@ class TicketMachineTest {
 		Tickets tickets = sut.automaticTicketCreate(1);
 		assertThat(tickets.getValues()).hasSize(1);
 
-		Set<Integer> lottoNumbers = tickets.getValue(0)
+		Set<LottoNo> lottoNumbers = tickets.getValue(0)
 			.numbers();
 		assertThat(lottoNumbers).hasSize(6);
 		assertThatHasValidGenerateNumber(lottoNumbers);
@@ -54,9 +54,9 @@ class TicketMachineTest {
 		}
 	}
 
-	private void assertThatHasValidGenerateNumber(Set<Integer> lottoNumbers) {
-		for (int number : lottoNumbers) {
-			assertThat(number).isBetween(1, 45);
+	private void assertThatHasValidGenerateNumber(Set<LottoNo> lottoNumbers) {
+		for (LottoNo number : lottoNumbers) {
+			assertThat(number.value()).isBetween(1, 45);
 		}
 		assertThat(new ArrayList<>(lottoNumbers)).isSorted();
 	}

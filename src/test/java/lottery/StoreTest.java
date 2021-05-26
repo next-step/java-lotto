@@ -1,10 +1,12 @@
 package lottery;
 
+import static lottery.LottoNo.*;
+import static lottery.fixture.Const.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +16,6 @@ class StoreTest {
 
 	private Store sut;
 	private Buyer buyer;
-
 	@BeforeEach
 	void setUp() {
 		sut = new Store();
@@ -30,9 +31,9 @@ class StoreTest {
 	void 티켓을_판매한다() {
 		buyer = Buyer.of(Money.won(7000L));
 		Tickets manualTickets = getTickets(
-			Sets.newLinkedHashSet(1,2,3,4,5,6),
-			Sets.newLinkedHashSet(1,2,3,4,5,6),
-			Sets.newLinkedHashSet(1,2,3,4,5,6)
+			로또번호_1_2_3_4_5_6,
+			로또번호_1_2_3_4_5_6,
+			로또번호_1_2_3_4_5_6
 		);
 
 		Tickets tickets = sut.getTicket(buyer, manualTickets);
@@ -47,7 +48,8 @@ class StoreTest {
 		buyer = Buyer.of(Money.won(5000L));
 		int countOfManual = 1;
 		int countOfAuto = 4;
-		Tickets manualTickets = getTickets(Sets.newLinkedHashSet(1,2,3,4,5,6));
+
+		Tickets manualTickets = getTickets(로또번호_1_2_3_4_5_6);
 		Tickets ticket = sut.getTicket(buyer, manualTickets);
 
 		assertThat(ticket.sizeOfManualTickets()).isEqualTo(countOfManual);
@@ -56,9 +58,9 @@ class StoreTest {
 
 
 
-	private Tickets getTickets(LinkedHashSet<Integer>... numbers) {
+	private Tickets getTickets(Set<LottoNo>... numbers) {
 		List<Ticket> tickets = new ArrayList<>();
-		for (LinkedHashSet<Integer> number : numbers) {
+		for (Set<LottoNo> number : numbers) {
 			tickets.add(Ticket.of(LottoNumbers.from(number), TicketType.MANUAL));
 		}
 		return Tickets.of(tickets);

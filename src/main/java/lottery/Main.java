@@ -38,7 +38,7 @@ public class Main {
 
 		inputView.askForBonusNumber();
 		int bonus = Integer.parseInt(sc.nextLine().trim());
-		infoCenter.setLastWeekWinningTicket(new WinningTicket(lastWeekTicket, bonus));
+		infoCenter.setLastWeekWinningTicket(new WinningTicket(lastWeekTicket, LottoNo.of(bonus)));
 
 		Result result = buyer.checkTicket(infoCenter);
 

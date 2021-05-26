@@ -12,7 +12,7 @@ public class TicketMachine {
 
 	public Tickets automaticTicketCreate(long count) {
 		return Tickets.of(LongStream.range(0, count)
-			.mapToObj(a -> LottoNumbers.from(generateSixNumbers(LOTTERY_MINIMUM_NUMBER, LOTTERY_MAXIMUM_NUMBER)))
+			.mapToObj(a -> LottoNumbers.from(generateSixLottoNoes(LOTTERY_MINIMUM_NUMBER, LOTTERY_MAXIMUM_NUMBER)))
 			.map(numbers -> Ticket.of(numbers, TicketType.AUTO))
 			.collect(Collectors.toList()));
 	}

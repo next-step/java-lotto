@@ -15,9 +15,9 @@ public class LottoNumbers {
 
 	private static final String NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "로또 번호에 대한 정보가 없습니다";
 
-	private Set<Integer> numbers;
+	private Set<LottoNo> numbers;
 
-	public static LottoNumbers from(Set<Integer> numbers) {
+	public static LottoNumbers from(Set<LottoNo> numbers) {
 		if (numbers.size() != SIZE_OF_TICKET) {
 			throw new InvalidTicketSizeException();
 		}
@@ -25,26 +25,25 @@ public class LottoNumbers {
 	}
 
 	public static LottoNumbers from(String[] split) {
-		return new LottoNumbers(Arrays.stream(split).map(Integer::new)
+		return new LottoNumbers(Arrays.stream(split).map(LottoNo::of)
 			.sorted()
 			.collect(Collectors.toCollection(LinkedHashSet::new)));
 	}
 
-	private LottoNumbers(Set<Integer> numbers) {
+	private LottoNumbers(Set<LottoNo> numbers) {
 		setNumbers(numbers);
 	}
 
-	private void setNumbers(Set<Integer> numbers) {
-		if (Objects.isNull(numbers) || numbers.isEmpty()){
+	private void setNumbers(Set<LottoNo> numbers) {
+		if (Objects.isNull(numbers) || numbers.isEmpty()) {
 			throw new IllegalArgumentException(NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
 		}
 		this.numbers = numbers;
 	}
 
-	public Set<Integer> values() {
+	public Set<LottoNo> values() {
 		return Collections.unmodifiableSet(numbers);
 	}
-
 
 	@Override
 	public boolean equals(Object o) {
