@@ -7,6 +7,7 @@ import java.util.List;
 public class Lotto {
     private static final int MAX_LOTTO_RANGE = 45;
     private static final int SINGLE_LOTTO_DIGIT = 6;
+    public static final int LOTTO_PRICE = 1000;
     private static List<Integer> lottoNumPool;
     private List<Integer> lottoNum;
 
@@ -21,19 +22,26 @@ public class Lotto {
         return this.lottoNum;
     }
 
-    public int countWin(int[] winList){
-        int winNum=0;
-        for(int i=0;i<winList.length;i++){
-            winNum+=this.isWinNumber(winList[i]);
+    public int countWin(int[] winList) {
+        int winNum = 0;
+        for (int i = 0; i < winList.length; i++) {
+            winNum += this.getWinCount(winList[i]);
         }
         return winNum;
     }
 
-    private int isWinNumber(int targetNum){
-       if(this.lottoNum.contains(targetNum)){
-           return 1;
-       }
-       return 0;
+    private int getWinCount(int targetNum) {
+        if (this.isWinNumber(targetNum)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private boolean isWinNumber(int targetNum) {
+        if (this.lottoNum.contains(targetNum)) {
+            return true;
+        }
+        return false;
     }
 
     private void initLottoNum() {
