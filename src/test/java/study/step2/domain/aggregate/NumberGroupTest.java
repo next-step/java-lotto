@@ -24,13 +24,18 @@ public class NumberGroupTest {
 	@CsvSource(value = {"1,2|1,2|true", "1:2|1,2|true", "1,2:3|1,2,3|true",
 		"12,12:12|12,12,12|true", "12;12|12,12|false"}, delimiter = '|')
 	void split(String text, String expectedStringArrText, boolean isNotThrowException) {
+		//given
 		List<Number> expectedNumbers = Arrays.stream(expectedStringArrText.split(","))
 			.map(Number::generate)
 			.collect(Collectors.toList());
+
+		//when
 		if (isNotThrowException) {
+			//then
 			assertThat(NumberGroup.generate(InputText.split(text)).numbers()).containsSequence(expectedNumbers);
 			return;
 		}
+		//then - throw RuntimeException
 		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers())
 			.isInstanceOf(RuntimeException.class);
 	}

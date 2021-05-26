@@ -3,6 +3,9 @@ package study.step2.domain.value;
 import java.util.Objects;
 
 public class Number {
+	private static final int RETURN_ZERO = 0;
+	private static final int EFFECTIVE_LIMIT_MIN_VALUE = 0;
+
 	private int number;
 
 	private Number(int number) {
@@ -15,13 +18,13 @@ public class Number {
 
 	public static Number generate(String text) {
 		int parsedInt = parse(text);
-		isValid(parsedInt);
+		validateGenerateNumber(parsedInt);
 		return new Number(parsedInt);
 	}
 
 	private static int parse(String text) {
 		if (isNullOrEmpty(text)) {
-			return 0;
+			return RETURN_ZERO;
 		}
 		return Integer.parseInt(text);
 	}
@@ -30,15 +33,14 @@ public class Number {
 		return text == null || text.trim().isEmpty();
 	}
 
-	private static boolean isValid(int parsedInt) {
-		return isValidNotNegative(parsedInt);
+	private static void validateGenerateNumber(int parsedInt) {
+		validateNotNegative(parsedInt);
 	}
 
-	private static boolean isValidNotNegative(int parsedInt) {
-		if (-1 < parsedInt) {
-			return true;
+	private static void validateNotNegative(int parsedInt) {
+		if (parsedInt < EFFECTIVE_LIMIT_MIN_VALUE) {
+			throw new RuntimeException("입력된 값 중 음수가 포함되어 있습니다. : " + parsedInt);
 		}
-		throw new RuntimeException("입력된 값 중 음수가 포함되어 있습니다. : " + parsedInt);
 	}
 
 	@Override

@@ -24,11 +24,16 @@ public class StringAddCalculatorTest {
 	@CsvSource(value = {"1,2|3|true", "1:2|3|true", "1,2:3|6|true",
 		"12,12:12|36|true", "12;12|24|false"}, delimiter = '|')
 	void split(String text, int expectedSum, boolean isNotThrowException) {
+		//given
+
+		//when
 		if (isNotThrowException) {
+			//then
 			List<Number> numbers = NumberGroup.generate(InputText.split(text)).numbers();
 			assertThat(StringAddCalculator.sum(numbers)).isEqualTo(expectedSum);
 			return;
 		}
+		//then - throw RuntimeException
 		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers())
 			.isInstanceOf(RuntimeException.class);
 	}
@@ -38,16 +43,20 @@ public class StringAddCalculatorTest {
 	@Order(2)
 	@ValueSource(strings = {"//;\n1;2;3!!!6!!!true", "//;\n1:2,3;4!!!10!!!true", "1,2;3,3,3!!!12!!!false"})
 	void splitWithCustomDelimiter(String valueSource) {
+		//given
 		String[] expectedValues = valueSource.split("!!!");
 		String text = expectedValues[0];
 		int expectedSum = Integer.parseInt(expectedValues[1]);
 		boolean isNotThrowException = Boolean.valueOf(expectedValues[2]);
 
+		//when
 		if (isNotThrowException) {
+			//then
 			List<Number> numbers = NumberGroup.generate(InputText.split(text)).numbers();
 			assertThat(StringAddCalculator.sum(numbers)).isEqualTo(expectedSum);
 			return;
 		}
+		//then - throw RuntimeException
 		assertThatThrownBy(() -> NumberGroup.generate(InputText.split(text)).numbers())
 			.isInstanceOf(RuntimeException.class);
 	}

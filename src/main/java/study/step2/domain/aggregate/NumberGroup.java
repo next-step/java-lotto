@@ -1,13 +1,14 @@
 package study.step2.domain.aggregate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import study.step2.domain.value.Number;
 
 public class NumberGroup {
-	private List<Number> numbers;
+	private final List<Number> numbers;
 
 	private NumberGroup(List<Number> numbers) {
 		this.numbers = numbers;
@@ -24,6 +25,6 @@ public class NumberGroup {
 	}
 
 	public List<Number> numbers() {
-		return this.numbers;
+		return Collections.unmodifiableList(this.numbers);
 	}
 }

@@ -5,10 +5,16 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 	private static final String BASIC_DELIMITER = ",|:";
+	private static final Pattern CUSTOM_DELIMITER_READOUT_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final int CUSTOM_DELIMITER_INDEX = 1;
+	private static final int CHARACTERIZED_NUMBERS_INDEX = 2;
+	private static final int RETURN_ZERO = 0;
+	private static final int EFFECTIVE_LIMIT_MIN_VALUE = 0;
+
 
 	public static int splitAndSum(String text) {
 		if (isNullOrEmpty(text)) {
-			return 0;
+			return RETURN_ZERO;
 		}
 		return calculateSum(text);
 	}
@@ -24,10 +30,10 @@ public class StringAddCalculator {
 	}
 
 	private static String[] splitText(String text) {
-		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+		Matcher matcher = CUSTOM_DELIMITER_READOUT_PATTERN.matcher(text);
 		if (matcher.find()) {
-			String customDelimiter = matcher.group(1) + "|" + BASIC_DELIMITER;
-			return matcher.group(2).split(customDelimiter);
+			String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX) + "|" + BASIC_DELIMITER;
+			return matcher.group(CHARACTERIZED_NUMBERS_INDEX).split(customDelimiter);
 		}
 		return text.split(BASIC_DELIMITER);
 	}
@@ -42,22 +48,21 @@ public class StringAddCalculator {
 
 	private static int parseIntCharacterizedNumber(String characterizedNumber) {
 		if (isNullOrEmpty(characterizedNumber)) {
-			return 0;
+			return RETURN_ZERO;
 		}
 		int result = Integer.parseInt(characterizedNumber);
-		isValidGraterThanZero(result);
+		validateGraterThanZero(result);
 		return result;
 	}
 
-	private static boolean isValidGraterThanZero(int number) {
-		if (0 <= number) {
-			return true;
+	private static void validateGraterThanZero(int number) {
+		if (number < EFFECTIVE_LIMIT_MIN_VALUE) {
+			throw new RuntimeException("0보다 작은 수가 있습니다. 0 이상의 숫자를 입력해주세요. 입력된 음수 : " + number);
 		}
-		throw new RuntimeException("0보다 작은 수가 있습니다. 0 이상의 숫자를 입력해주세요. 입력된 음수 : " + number);
 	}
 
 	private static int sumNumberArray(int[] numberArray) {
-		int result = 0;
+		int result = RETURN_ZERO;
 		for (int number : numberArray) {
 			result += number;
 		}

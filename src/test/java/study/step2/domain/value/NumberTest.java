@@ -18,10 +18,15 @@ public class NumberTest {
 	@Order(1)
 	@CsvSource(value = {"one;1;false", "1;1;true", "zero;0;false", "12a;12;false", "1234;1234;true"}, delimiter = ';')
 	void parseToInt(String text, int expectedNumber, boolean exceptedNotThrownException) {
+		//given
+
+		//when
 		if (exceptedNotThrownException) {
+			//then - true
 			assertThat(Number.generate(text).value()).isEqualTo(expectedNumber);
 			return;
 		}
+		//then - throw NumberFormatException
 		assertThatThrownBy(() -> Number.generate(text).value()).isInstanceOf(NumberFormatException.class);
 	}
 
@@ -30,10 +35,15 @@ public class NumberTest {
 	@Order(2)
 	@ValueSource(strings = {"null", "", " "})
 	void parseToIntWithNullAndEmpty(String str) {
+		//given
+
+		//when - null
 		if ("null".equals(str)) {
+			//then - null
 			assertThat(Number.generate(null).value()).isEqualTo(0);
 			return;
 		}
+		//then - empty, blank
 		assertThat(Number.generate(str).value()).isEqualTo(0);
 	}
 
@@ -42,10 +52,15 @@ public class NumberTest {
 	@Order(3)
 	@CsvSource(value = {"1;1;true", "-1;-1;false", "12;12;true", "0;0;true", "-100;-100;false"}, delimiter = ';')
 	void parseToIntWithoutNegative(String text, int expectedNumber, boolean exceptedNotThrownException) {
+		//given
+
+		//when
 		if (exceptedNotThrownException) {
+			//then
 			assertThat(Number.generate(text).value()).isEqualTo(expectedNumber);
 			return;
 		}
+		//then - throw RuntimeException
 		assertThatThrownBy(() -> Number.generate(text).value()).isInstanceOf(RuntimeException.class);
 	}
 }
