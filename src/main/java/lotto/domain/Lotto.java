@@ -41,10 +41,6 @@ public final class Lotto {
         return lottoNumbers.size();
     }
 
-    public Number get(int index) {
-        return lottoNumbers.get(index);
-    }
-
     public String numbers(){
         StringBuilder numbers = new StringBuilder();
         for (Number lottoNumber : lottoNumbers) {
@@ -53,12 +49,16 @@ public final class Lotto {
         return numbers.substring(0, numbers.length() - 1);
     }
 
-    public int confirmWinning(Lotto purchased) {
+    public int confirmWinning(Lotto winningLotto) {
         int count = 0;
-        for (int i = 0; i < purchased.size(); i++) {
-            count = lottoNumbers.contains(purchased.get(i)) ? count + 1 : count;
+        for (Number lottoNumber : lottoNumbers) {
+            count = winningLotto.isNumber(lottoNumber) ? count + 1 : count;
         }
         return count;
+    }
+
+    private boolean isNumber(Number number){
+        return lottoNumbers.contains(number);
     }
 
     @Override

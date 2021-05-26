@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
@@ -16,10 +17,12 @@ public class ResultTest {
 
     private LottoList lottoList;
     private Result result;
+    private LottoPrice lottoPrice;
 
     @BeforeEach
     public void setUp() {
         result = new Result(new Lotto(new Number(10), new Number(12), new Number(23), new Number(44), new Number(26), new Number(28)));
+        lottoPrice = new LottoPrice("1000");
     }
 
     @Test
@@ -28,7 +31,7 @@ public class ResultTest {
         lottoList = new LottoList(new Lotto(
                 new Number(10), new Number(12), new Number(23), new Number(44), new Number(26), new Number(28)) // 1등 - 1개
         );
-        result.confirm(lottoList);
+        result.confirm(lottoList, lottoPrice);
         assertThat(result.winnings()).isEqualTo(new BigDecimal("2000000000"));
     }
 
@@ -38,7 +41,7 @@ public class ResultTest {
         lottoList = new LottoList(new Lotto(new Number(10), new Number(12), new Number(23), new Number(44), new Number(26), new Number(28)) // 1등
                 , new Lotto(new Number(11), new Number(23), new Number(12), new Number(44), new Number(26), new Number(28)) // 2등 - 1개
         );
-        result.confirm(lottoList);
+        result.confirm(lottoList, lottoPrice);
         assertThat(result.winnings()).isEqualTo(new BigDecimal("2001500000"));
     }
 
@@ -48,7 +51,7 @@ public class ResultTest {
         lottoList = new LottoList(new Lotto(
                 new Number(10), new Number(12), new Number(23), new Number(13), new Number(14), new Number(15)) // 4등 - 1개
         );
-        result.confirm(lottoList);
+        result.confirm(lottoList, lottoPrice);
         assertThat(result.profitRate()).isEqualTo("5.00");
     }
 
@@ -58,7 +61,7 @@ public class ResultTest {
         lottoList = new LottoList(new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 꽝
                 , new Lotto(new Number(10), new Number(12), new Number(23), new Number(13), new Number(14), new Number(15)) // 4등 - 1개
         );
-        result.confirm(lottoList);
+        result.confirm(lottoList, lottoPrice);
         assertThat(result.profitRate()).isEqualTo("2.50");
     }
 }

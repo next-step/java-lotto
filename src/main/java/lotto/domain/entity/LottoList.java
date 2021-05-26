@@ -32,7 +32,7 @@ public final class LottoList {
     public Rank compareWith(Lotto winningLotto){
         Rank rank = new Rank();
         for (Lotto purchased : lottoList) {
-            checkRank(winningLotto.confirmWinning(purchased), rank);
+            checkRank(purchased.confirmWinning(winningLotto), rank);
         }
         return rank;
     }

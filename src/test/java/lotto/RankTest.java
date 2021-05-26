@@ -1,15 +1,13 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrice;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
 import lotto.domain.entity.Rank;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +26,7 @@ public class RankTest {
                 , new Lotto(new Number(1), new Number(2), new Number(3), new Number(9), new Number(8), new Number(7)) // 4등
         );
 
-        result.confirm(lottoList);
+        result.confirm(lottoList, new LottoPrice("1000"));
         Rank rank = result.rank();
 
         assertThat(rank.first()).isEqualTo(1);
