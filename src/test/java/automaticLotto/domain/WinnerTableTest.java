@@ -7,35 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class WinnerTableTest {
 	@Test
-	@DisplayName("당첨 됐을 경우 해당 횟수 노출")
-	public void present_winner_statics() {
-		WinnerTable winnerTable = new WinnerTable() {
-			@Override
-			public void count(Ranking ranking) {
-				winnerTable.put(Ranking.RANKING_4, 4);
-				winnerTable.put(Ranking.RANKING_3, 1);
-			}
-		};
-
-		winnerTable.count(Ranking.RANKING_3);
-
-		assertThat(winnerTable.getWinnerCount(Ranking.RANKING_3)).isEqualTo(1);
-	}
-
-	@Test
 	@DisplayName("총 당첨 금액 계산")
 	public void calculate_profit_rate() {
-		WinnerTable winnerTable = new WinnerTable() {
-			@Override
-			public void count(Ranking ranking) {
-				winnerTable.put(Ranking.RANKING_4, 4);
-				winnerTable.put(Ranking.RANKING_3, 1);
-			}
-		};
-
+		WinnerTable winnerTable = new WinnerTable();
 		winnerTable.count(Ranking.RANKING_3);
 
-		assertThat(winnerTable.getTotalAmount()).isEqualTo(520000);
+		assertThat(winnerTable.getTotalAmount()).isEqualTo(500000);
 	}
 
 	@Test

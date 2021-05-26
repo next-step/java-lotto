@@ -20,7 +20,6 @@ public class WinnerStaticsTest {
 		candidateLottos.add(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
 		candidateLottos.add(new Lotto(Arrays.asList(45, 44, 43, 42, 41, 39)));
 		candidateLottos.add(new Lotto(Arrays.asList(45, 44, 43, 42, 41, 28)));
-
 	}
 
 	@Test
@@ -47,7 +46,7 @@ public class WinnerStaticsTest {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThat(winnerStatics.getProfitRate()).isEqualTo(375);
+		assertThat(winnerStatics.getProfitRate()).isEqualTo("375.00");
 	}
 
 	@Test

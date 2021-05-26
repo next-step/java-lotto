@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class WinnerTable {
 	private static final int NOTHING = 0;
+	private static final double DOUBLE_ZERO = 0.00;
 
-	Map<Ranking, Integer> winnerTable;
+	private final Map<Ranking, Integer> winnerTable;
 
 	public WinnerTable() {
 		this.winnerTable = new HashMap<>();
@@ -32,7 +33,7 @@ public class WinnerTable {
 	}
 
 	public double getTotalAmount() {
-		double totalAmount = 0.00;
+		double totalAmount = DOUBLE_ZERO;
 
 		for (Ranking winner : winnerTable.keySet()) {
 			totalAmount += getWinnerCount(winner) * winner.getWinnerPrice();
@@ -52,5 +53,12 @@ public class WinnerTable {
 
 	private boolean hasCount(Ranking ranking) {
 		return winnerTable.containsKey(ranking);
+	}
+
+	@Override
+	public String toString() {
+		return "WinnerTable{" +
+			"winnerTable=" + winnerTable +
+			'}';
 	}
 }
