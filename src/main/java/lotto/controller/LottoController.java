@@ -7,6 +7,7 @@ import lotto.domain.LottoNumbersGenerator;
 import lotto.domain.LottoRankStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Price;
+import lotto.domain.WinningNumbers;
 import lotto.utils.LottoNumbersUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -31,7 +32,8 @@ public class LottoController {
     public void showResult() {
         LottoNumbers winningLottoNumbers = LottoNumbersUtil.toLottoNumbers(this.inputView.getWinningNumber());
         LottoNumber bonusNumber = new LottoNumber(this.inputView.getBonusNumber());
-        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningLottoNumbers, bonusNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
+        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningNumbers);
         lottoStatistics.initStatistics();
         this.resultView.printStatisticsResult(lottoStatistics);
         this.resultView.printRateOfReturnResult(lottoStatistics);

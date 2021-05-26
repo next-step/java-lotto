@@ -11,20 +11,18 @@ public class LottoRankStatistics {
     private static final int ONE_HUNDRED_INT = 100;
     private static final double ONE_HUNDRED_DOUBLE = 100.0;
     private final Lottos lottos;
-    private final LottoNumbers winningNumbers;
-    private final LottoNumber bonusNumber;
+    private final WinningNumbers winningNumbers;
     private RankCounts rankCounts;
 
-    public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumber, LottoNumber bonusNumber) {
+    public LottoRankStatistics(Lottos lottos, WinningNumbers winningNumber) {
         this.lottos = lottos;
         this.winningNumbers = winningNumber;
-        this.bonusNumber = bonusNumber;
     }
 
     public void initStatistics() {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (int i = 0; i < this.lottos.getSize(); i++) {
-            LottoRank lottoRank = findRankByLottoNumbers(this.lottos.getLottoNumbers(i));
+            LottoRank lottoRank = this.winningNumbers.findRank(this.lottos.getLottoNumbers(i));
             int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
             result.put(lottoRank, ++lottoCount);
         }
@@ -40,12 +38,6 @@ public class LottoRankStatistics {
                 / (double) (this.rankCounts.calculateTotalCountByRank() * 1000)) * ONE_HUNDRED_INT)
                 / ONE_HUNDRED_DOUBLE;
         return String.format("%.2f", rateOfReturn);
-    }
-
-    private LottoRank findRankByLottoNumbers(LottoNumbers lottoNumbers) {
-        int matchCount = lottoNumbers.getCountOfMatchingNumber(this.winningNumbers);
-        boolean resultBonus = lottoNumbers.contains(this.bonusNumber);
-        return LottoRank.valueOf(matchCount, resultBonus);
     }
 
     private long sumTotalWinningAmount() {

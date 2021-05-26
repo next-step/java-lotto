@@ -31,8 +31,9 @@ public class LottoRankStatisticsTest {
             textLottoNumbers.add("11,12,13,14,17,18");
         }
         List<LottoNumbers> lottos = toLottoNumbers(textLottoNumbers);
-        LottoRankStatistics statistics = new LottoRankStatistics(new Lottos(lottos),
-                LottoNumbersUtil.toLottoNumbers(winningNumber), new LottoNumber(bonusNumber));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbersUtil.toLottoNumbers(winningNumber),
+                new LottoNumber(bonusNumber));
+        LottoRankStatistics statistics = new LottoRankStatistics(new Lottos(lottos), winningNumbers);
 
         // when
         statistics.initStatistics();
@@ -50,8 +51,9 @@ public class LottoRankStatisticsTest {
         // given
         NumbersGenerator generator = createLottoNumbers("1,2,3,4,5,6");
         LottoMachine machine = new LottoMachine(new Price(lottoCount * 1000), generator);
-        LottoRankStatistics statistics = new LottoRankStatistics(machine.createLottos(),
-                LottoNumbersUtil.toLottoNumbers(textWinningNumber), new LottoNumber(bonusNumber));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbersUtil.toLottoNumbers(textWinningNumber),
+                new LottoNumber(bonusNumber));
+        LottoRankStatistics statistics = new LottoRankStatistics(machine.createLottos(), winningNumbers);
 
         // when
         statistics.initStatistics();
