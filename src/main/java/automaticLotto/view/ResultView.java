@@ -2,7 +2,6 @@ package automaticLotto.view;
 
 import java.util.Map;
 
-import automaticLotto.domain.Lotto;
 import automaticLotto.domain.Lottos;
 import automaticLotto.domain.Ranking;
 import automaticLotto.domain.WinnerStatics;
@@ -10,9 +9,7 @@ import automaticLotto.domain.WinnerStatics;
 public class ResultView {
 	public static void printBoughtLottos(Lottos boughtLottos) {
 		System.out.println(boughtLottos.size() + "개를 구매했습니다.");
-		for (Lotto lotto : boughtLottos.getLottos()) {
-			System.out.println(lotto);
-		}
+		boughtLottos.forEachLottos(System.out::println);
 		System.out.println();
 	}
 

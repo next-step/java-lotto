@@ -1,6 +1,7 @@
 package automaticLotto.domain;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Lottos {
 	private static final int MAXIMUM_LOTTOS_SIZE = 100;
@@ -32,7 +33,7 @@ public class Lottos {
 		return winnerTable;
 	}
 
-	public List<Lotto> getLottos() {
-		return this.lottos;
+	public void forEachLottos(Consumer<Lotto> lamda) {
+		lottos.forEach(lamda);
 	}
 }
