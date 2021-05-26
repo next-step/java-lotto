@@ -14,46 +14,39 @@ public class WinResultTest {
     @Test
     @DisplayName("3개 일치 값 저장")
     void saveMatchLottoNumberThreeTest() {
-        WinResult winResult = new WinResult();
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,11,22,33"),
+                new Lotto("1,2,3,12,21,44")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
 
-        winResult.saveWinResult(LottoWinner.FOURTH);
-        winResult.saveWinResult(LottoWinner.FOURTH);
-        winResult.saveWinResult(LottoWinner.FOURTH);
-
-        assertThat(winResult.result(LottoWinner.FOURTH)).isEqualTo(3);
+        assertThat(winResult.result(LottoWinner.FOURTH)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("4개 일치 값 저장")
     void saveMatchLottoNumberFourTest() {
-        WinResult winResult = new WinResult();
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,4,22,33"),
+                new Lotto("1,2,3,11,6,33"),
+                new Lotto("6,2,3,11,5,33")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
 
-        winResult.saveWinResult(LottoWinner.THIRD);
-        winResult.saveWinResult(LottoWinner.THIRD);
-
-        assertThat(winResult.result(LottoWinner.THIRD)).isEqualTo(2);
+        assertThat(winResult.result(LottoWinner.THIRD)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("5개 일치 값 저장")
     void saveMatchLottoNumberFiveTest() {
-        WinResult winResult = new WinResult();
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,4,5,33"),
+                new Lotto("1,2,6,4,5,33")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
 
-        winResult.saveWinResult(LottoWinner.SECOND);
-        winResult.saveWinResult(LottoWinner.SECOND);
-        winResult.saveWinResult(LottoWinner.SECOND);
-        winResult.saveWinResult(LottoWinner.SECOND);
-        winResult.saveWinResult(LottoWinner.SECOND);
-
-        assertThat(winResult.result(LottoWinner.SECOND)).isEqualTo(5);
+        assertThat(winResult.result(LottoWinner.SECOND)).isEqualTo(2);
     }
 
     @Test
     @DisplayName("6개 일치 값 저장")
     void saveMatchLottoNumberSixTest() {
-        WinResult winResult = new WinResult();
-
-        winResult.saveWinResult(LottoWinner.FIRST);
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,4,5,6")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
 
         assertThat(winResult.result(LottoWinner.FIRST)).isEqualTo(1);
     }
@@ -61,11 +54,8 @@ public class WinResultTest {
     @Test
     @DisplayName("일치되는 로또 번호 계산 테스트")
     void calculateMatchedNumberCountTest() {
-        String lottoString = "1,2,3,4,5,11";
-        LottoResult lottoResult = new LottoResult(new Lotto(lottoString), new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
-        List<LottoResult> lottoResults = new ArrayList<>();
-        lottoResults.add(lottoResult);
-        WinResult winResult = new WinResult(lottoResults);
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,4,5,33")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
 
         assertThat(winResult.result(LottoWinner.SECOND)).isEqualTo(1);
     }
@@ -73,13 +63,9 @@ public class WinResultTest {
     @Test
     @DisplayName("총 수익률 계산")
     void calculateTotalEarningRate() {
-        List<LottoResult> lottoResults = new ArrayList<>();
-        List<String> winnerNumbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        String lottoString = "1,2,3,4,5,11:13,14,15,11,12,16:45,23,11,12,22,33";
-        for (String numbers : lottoString.split(":")) {
-            lottoResults.add(new LottoResult(new Lotto(numbers), winnerNumbers));
-        }
-        WinResult winResult = new WinResult(lottoResults);
-        assertThat(winResult.totalEarningRate()).isEqualTo(500.00);
+        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto("1,2,3,4,5,33"), new Lotto("1,2,3,16,17,18")));
+        WinResult winResult = new WinResult(lottos, new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))));
+
+        assertThat(winResult.totalEarningRate()).isEqualTo(752.5);
     }
 }

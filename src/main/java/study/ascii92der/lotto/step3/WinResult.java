@@ -1,28 +1,32 @@
 package study.ascii92der.lotto.step3;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WinResult {
 
     public static final int LOTTO_PRICE = 1000;
     private Map<LottoWinner, Integer> result;
-    private int buyLottoCount;
+    private final int buyLottoCount;
 
-    public WinResult() {
-        result = new HashMap<>();
-        for (LottoWinner lottoWinner : LottoWinner.values()) {
-            result.put(lottoWinner, 0);
+    public WinResult(List<Lotto> lottos, List<String> winnerNumberList) {
+        init();
+        List<LottoResult> lottoResults = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            lottoResults.add(new LottoResult(lotto, winnerNumberList));
         }
-    }
 
-    public WinResult(List<LottoResult> lottoResults) {
-        this();
         for (LottoResult lottoResult : lottoResults) {
             saveLottoResult(lottoResult);
         }
         buyLottoCount = lottoResults.size();
+
+    }
+
+    private void init() {
+        result = new HashMap<>();
+        for (LottoWinner lottoWinner : LottoWinner.values()) {
+            result.put(lottoWinner, 0);
+        }
     }
 
     private void saveLottoResult(LottoResult lottoResult) {
@@ -31,14 +35,10 @@ public class WinResult {
         }
     }
 
-    public void saveWinResult(LottoWinner lottoWinner, int matchCount) {
-        if (lottoWinner.matchNumberCount == matchCount) {
+    private void saveWinResult(LottoWinner lottoWinner, int matchCount) {
+        if (lottoWinner.getMatchNumberCount() == matchCount) {
             result.put(lottoWinner, result.get(lottoWinner) + 1);
         }
-    }
-
-    public void saveWinResult(LottoWinner lottoWinner) {
-        result.put(lottoWinner, result.get(lottoWinner) + 1);
     }
 
     public int result(LottoWinner lottoWinner) {
@@ -48,7 +48,7 @@ public class WinResult {
     public double totalEarningRate() {
         double totalEarnWinnerPrice = 0;
         for (LottoWinner lottoWinner : LottoWinner.values()) {
-            totalEarnWinnerPrice += (lottoWinner.winnerPrice * result.get(lottoWinner));
+            totalEarnWinnerPrice += (lottoWinner.getWinnerPrice() * result.get(lottoWinner));
         }
         return totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE);
     }
