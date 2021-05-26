@@ -1,9 +1,7 @@
 package wootecam.lotto.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import wootecam.lotto.model.BonusNumber;
 import wootecam.lotto.model.Lotto;
@@ -40,11 +38,7 @@ public class LottoGameGenerator {
 	}
 
 	public WinningLotto getWinningLotto(String winningLottoInput, String BonusNumberInput) {
-		List<LottoNumber> winningLottoList = Arrays.stream(winningLottoInput.split(","))
-			.map(LottoNumber::of)
-			.distinct()
-			.collect(Collectors.toList());
-		Lotto lotto = new Lotto(winningLottoList);
+		Lotto lotto = new Lotto(winningLottoInput);
 		BonusNumber bonusNumber = new BonusNumber(LottoNumber.of(BonusNumberInput), lotto);
 
 		return new WinningLotto(lotto, bonusNumber);
