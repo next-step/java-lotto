@@ -30,10 +30,10 @@ public class WinningRanksTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "14000:FOURTH:0.35", "10000:FOURTH:0.5", "50000:THIRD:1", "10000:THIRD:5", "5000:THIRD:10"
+            "14000:FIFTH:0.35", "10000:FIFTH:0.5", "50000:FOURTH:1", "10000:FOURTH:5", "5000:FOURTH:10"
     }, delimiter = ':')
     void 당첨_수익률_계산_기능_테스트(int payment, Rank rank, double excepted) {
-        LottoPayment lottoPayment = new LottoPayment(payment);
+        LottoPayment lottoPayment = LottoPayment.create(payment);
         WinningRanks winningRanks = new WinningRanks(Arrays.asList(rank));
         double profitRate = winningRanks.calcProfitRate(lottoPayment);
         assertThat(profitRate).isEqualTo(excepted);

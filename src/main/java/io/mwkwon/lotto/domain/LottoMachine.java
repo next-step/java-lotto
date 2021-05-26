@@ -12,7 +12,7 @@ public class LottoMachine implements LottoGenerator {
 
     static {
         for (int i = LottoConstants.MIN_LOTTO_NUMBER; i <= LottoConstants.MAX_LOTTO_NUMBER; i++) {
-            LOTTO_NUMBERS.add(new LottoNumber(i));
+            LOTTO_NUMBERS.add(LottoNumber.create(i));
         }
     }
 
@@ -22,7 +22,7 @@ public class LottoMachine implements LottoGenerator {
         int lottoBuyQuantity = lottoPayment.calcLottoBuyQuantity();
         for (int i = 0; i < lottoBuyQuantity; i++) {
             Collections.shuffle(LOTTO_NUMBERS);
-            lottos.add(new Lotto(LOTTO_NUMBERS.subList(LottoConstants.FROM_INDEX, LottoConstants.LOTTO_BOUND)));
+            lottos.add(Lotto.create(LOTTO_NUMBERS.subList(LottoConstants.FROM_INDEX, LottoConstants.LOTTO_BOUND)));
         }
         return new BuyLottos(lottos);
     }

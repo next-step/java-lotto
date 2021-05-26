@@ -8,42 +8,17 @@ import java.util.regex.Pattern;
 
 public final class LottoPayment {
     private static final String MINIMUM_EXCEPTION_MESSAGE = "최소 로또 구입 가능 금액은 " + LottoConstants.LOTTO_PRICE + "원 입니다.";
-    private static final String NULL_AND_EMPTY_EXCEPTION_MESSAGE = "로또 구입 금액이 입력 되지 않았습니다.";
-    private static final String NUMBER_FORMAT_EXCEPTION_MESSAGE = "로또 구입 금액은 숫자만 입력 가능합니다.";
-    private static final String REGEX = "[^0-9]";
 
     private final int value;
 
-    public LottoPayment(int value) {
+    private LottoPayment(int value) {
         checkMinimumLottoPayment(value);
         this.value = value;
     }
 
-    public LottoPayment(String value) {
-        checkNullAndEmpty(value);
-        checkNumberFormat(value);
-        int payment = Integer.parseInt(value);
-        checkMinimumLottoPayment(payment);
-        this.value = payment;
-    }
-
-    public static LottoPayment create(String value) {
+    public static LottoPayment create(int value) {
         return new LottoPayment(value);
     }
-
-    private void checkNullAndEmpty(String value) {
-        if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException(NULL_AND_EMPTY_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private void checkNumberFormat(String value) {
-        Matcher matcher = Pattern.compile(REGEX).matcher(value);
-        if (matcher.find()) {
-            throw new IllegalArgumentException(NUMBER_FORMAT_EXCEPTION_MESSAGE);
-        }
-    }
-
 
     private void checkMinimumLottoPayment(int value) {
         if (value < LottoConstants.LOTTO_PRICE) {

@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStoreTest {
@@ -13,21 +16,29 @@ public class LottoStoreTest {
     @CsvSource(value = {"10000:10", "25000:25", "12500:12"}, delimiter = ':')
     void 입력된_구입금액_기준_로또_구매_기능_테스트(int value, int excepted) {
         LottoStore lottoStore = new LottoStore(new LottoInputView(), new LottoMachine());
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(new LottoPayment(value));
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(LottoPayment.create(value));
         assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
     }
 
     @Test
     void 당첨_로또_객체_정상_생성_테스트() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6));
         LottoInputView lottoInputView = new LottoInputView() {
             @Override
             public Lotto requestWinningLottoNumbers() {
-                return new Lotto("1,2,3,4,5,6");
+
+                return Lotto.create(lottoNumbers);
             }
         };
         LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
         Lotto winningLotto = lottoStore.createWinningLotto();
-        assertThat(winningLotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+        assertThat(winningLotto).isEqualTo(Lotto.create(lottoNumbers));
     }
 
     @Test
@@ -35,12 +46,12 @@ public class LottoStoreTest {
         LottoInputView lottoInputView = new LottoInputView() {
             @Override
             public LottoPayment requestInputPayment() {
-                return new LottoPayment("14000");
+                return LottoPayment.create(14000);
             }
         };
         LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
         LottoPayment lottoPayment = lottoStore.createLottoPayment();
-        assertThat(lottoPayment).isEqualTo(new LottoPayment("14000"));
+        assertThat(lottoPayment).isEqualTo(LottoPayment.create(14000));
     }
 
     @Test
@@ -48,13 +59,19 @@ public class LottoStoreTest {
         LottoInputView lottoInputView = new LottoInputView() {
             @Override
             public LottoNumber requestBonusBallNumber(Lotto winningLotto) {
-                return new LottoNumber("7");
+                return LottoNumber.create(7);
             }
         };
-
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6));
         LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
-        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+        Lotto winningLotto = Lotto.create(lottoNumbers);
         LottoNumber lottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(7));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.create(7));
     }
 }
