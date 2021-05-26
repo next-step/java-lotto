@@ -13,3 +13,5 @@
 2단계 - 문자열 덧셈 계산기 : [[Markdown 보기]](./markdown/step02.md)
 
 3단계 - 로또(자동) : [[Markdown 보기]](./markdown/step03.md)
+
+4단계 - 로또(2등) : [[Markdown 보기]](./markdown/step04.md)
