@@ -1,5 +1,6 @@
 package lotto;
 
+import exception.LottoException;
 import type.DecimalType;
 import type.LottoRewardType;
 import utils.NumberUtils;
@@ -8,6 +9,9 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static type.LottoExceptionType.NULL_PARAMETER;
 
 public final class LottoResult {
 
@@ -18,12 +22,16 @@ public final class LottoResult {
 		this(new EnumMap(LottoRewardType.class));
 	}
 
-	LottoResult(Map<LottoRewardType, Integer> lottoRewardMap) {
-		if (lottoRewardMap == null) {
-			throw new IllegalArgumentException();
-		}
+	LottoResult(final Map<LottoRewardType, Integer> lottoRewardMap) {
+		checkNull(lottoRewardMap);
 		init(lottoRewardMap);
 		this.lottoRewardMap = lottoRewardMap;
+	}
+
+	private void checkNull(final Map<LottoRewardType, Integer> lottoRewardMap) {
+		if (Objects.isNull(lottoRewardMap)) {
+			throw LottoException.of(NULL_PARAMETER);
+		}
 	}
 
 	public void add(final LottoRewardType lottoRewardType) {

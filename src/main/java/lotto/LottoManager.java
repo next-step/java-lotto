@@ -8,6 +8,7 @@ import utils.*;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
 
+import static type.LottoExceptionType.SYSTEM_ERROR;
 
 public final class LottoManager {
 	private static final int LOTTO_MIN_NUMBER = 1;
@@ -25,6 +26,8 @@ public final class LottoManager {
 			startLotto();
 		} catch(LottoException e) {
 			ResultView.printExceptionMessage(e);
+		} catch(Exception e){
+			ResultView.printExceptionMessage(LottoException.of(SYSTEM_ERROR));
 		}
 	}
 
@@ -43,15 +46,18 @@ public final class LottoManager {
 									   this.lottoGenerator.lottoNumbersFactory());
 	}
 
-	private void createUserLotto(final LottoCount lottoCount){
+	private void createUserLotto(final LottoCount lottoCount) {
+		if(lottoCount.isEmptyUserCount()){
+			return;
+		}
 		InputView.printUserLotto();
-		for(int i = 0; i < lottoCount.userCount(); ++i){
+		for (int i = 0; i < lottoCount.userCount(); ++i) {
 			LottoNumbers lottoNumbers = makeLottoNumbers(InputView.inputUserLottoNumber());
 			this.lottoGenerator.add(lottoNumbers);
 		}
 	}
 
-	private void createAutoLotto(final LottoCount lottoCount){
+	private void createAutoLotto(final LottoCount lottoCount) {
 		this.lottoGenerator.autoGenerate(lottoCount);
 	}
 
@@ -71,7 +77,7 @@ public final class LottoManager {
 		return makeLottoNumbers(inputText);
 	}
 
-	private LottoNumbers makeLottoNumbers(final String text){
+	private LottoNumbers makeLottoNumbers(final String text) {
 		SeparatedText separatedText = SeparatedText.findSeparator(text);
 		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
 		return new LottoNumbers(NumberUtils.parseInts(texts, lottoNumberCondition()));

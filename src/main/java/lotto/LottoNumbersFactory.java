@@ -1,8 +1,14 @@
 package lotto;
 
+import exception.LottoException;
+import type.LottoExceptionType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import static type.LottoExceptionType.NULL_PARAMETER;
 
 public final class LottoNumbersFactory {
 
@@ -13,7 +19,14 @@ public final class LottoNumbersFactory {
 	}
 
 	LottoNumbersFactory(final List<LottoNumbers> lottoList) {
+		checkNull(lottoList);
 		this.lottoList = lottoList;
+	}
+
+	private void checkNull(final List<LottoNumbers> lottoList) {
+		if (Objects.isNull(lottoList)) {
+			throw LottoException.of(NULL_PARAMETER);
+		}
 	}
 
 	public void add(final LottoNumbers lottoNumbers) {

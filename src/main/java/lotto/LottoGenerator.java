@@ -1,6 +1,11 @@
 package lotto;
 
+import exception.LottoException;
 import utils.DrawNumber;
+
+import java.util.Objects;
+
+import static type.LottoExceptionType.NULL_PARAMETER;
 
 public final class LottoGenerator {
 	private final static int LOTTO_NUMBER_COUNT = 6;
@@ -9,8 +14,15 @@ public final class LottoGenerator {
 	private final DrawNumber drawNumber; // 숫자 뽑기 클래스
 
 	public LottoGenerator(final LottoNumbersFactory lottoNumbersFactory, final DrawNumber drawNumber) {
+		checkNull(lottoNumbersFactory, drawNumber);
 		this.lottoNumbersFactory = lottoNumbersFactory;
 		this.drawNumber = drawNumber;
+	}
+
+	private void checkNull(final LottoNumbersFactory lottoNumbersFactory, final DrawNumber drawNumber) {
+		if (Objects.isNull(lottoNumbersFactory) || Objects.isNull(drawNumber)) {
+			throw LottoException.of(NULL_PARAMETER);
+		}
 	}
 
 	public void add(final LottoNumbers lottoNumbers){
@@ -23,11 +35,11 @@ public final class LottoGenerator {
 			lottoNumbersFactory.add(lottoNumbers);
 		}
 	}
-	public LottoNumbersFactory lottoNumbersFactory(){
+	public LottoNumbersFactory lottoNumbersFactory() {
 		return this.lottoNumbersFactory;
 	}
 
-	public int size(){
+	public int size() {
 		return this.lottoNumbersFactory.lottoList().size();
 	}
 
