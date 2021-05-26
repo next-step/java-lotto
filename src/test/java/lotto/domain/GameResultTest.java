@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoGamePlayerTest {
+public class GameResultTest {
 
     @ParameterizedTest
     @DisplayName("게임 결과 테스트_보너스볼 불일치")
@@ -24,8 +24,9 @@ public class LottoGamePlayerTest {
         LottoTickets userLottoTickets = new LottoTickets(
                 Arrays.asList(new LottoTicket(lottoNumber)));
 
-        Map<WinningType, Integer> matchCountResults = new LottoGamePlayer().getGameResult(winningLottoTicket, userLottoTickets, 30);
-        assertThat(matchCountResults.keySet()).contains(WinningType.of(matchCount, false));
+        List<LottoTicketGameResult> lottoTicketGameResults = new GameResult(winningLottoTicket, userLottoTickets, 30).getGameResult();
+        LottoTicketGameResult expectedLottoTicketGameResults = new LottoTicketGameResult(WinningType.of(matchCount, false), 1);
+        assertThat(lottoTicketGameResults).contains(expectedLottoTicketGameResults);
     }
 
     @ParameterizedTest
@@ -37,8 +38,9 @@ public class LottoGamePlayerTest {
         LottoTickets userLottoTickets = new LottoTickets(
                 Arrays.asList(new LottoTicket(lottoNumber)));
 
-        Map<WinningType, Integer> matchCountResults = new LottoGamePlayer().getGameResult(winningLottoTicket, userLottoTickets, 7);
-        assertThat(matchCountResults.keySet()).contains(WinningType.of(matchCount, true));
+        List<LottoTicketGameResult> lottoTicketGameResults = new GameResult(winningLottoTicket, userLottoTickets, 7).getGameResult();
+        LottoTicketGameResult expectedLottoTicketGameResult = new LottoTicketGameResult(WinningType.of(matchCount, true), 1);
+        assertThat(lottoTicketGameResults).contains(expectedLottoTicketGameResult);
     }
 
     @Test
@@ -51,8 +53,11 @@ public class LottoGamePlayerTest {
                         new LottoTicket("1,2,3,4,5,8"), new LottoTicket("1,2,3,4,7,8"),
                         new LottoTicket("1,2,3,7,8,9"), new LottoTicket("1,2,8,9,10,11")));
 
-        Map<WinningType, Integer> firstMatchCountResults = new LottoGamePlayer().getGameResult(winningLottoTicket, firstUserLottoTickets, 7);
-        assertThat(firstMatchCountResults.values()).containsExactly(1,1,1,1,1,1);
+        List<LottoTicketGameResult> firstMatchCountResults = new GameResult(winningLottoTicket, firstUserLottoTickets, 7).getGameResult();
+        for(int i = 0; i<=6; i++) {
+            LottoTicketGameResult expectedLottoTicketGameResult = new LottoTicketGameResult(WinningType.of(i, false), 1);
+            assertThat(firstMatchCountResults).contains(expectedLottoTicketGameResult);
+        }
 
         //순서대로 1등, 2등, 2등, 5등, MISS, MISS 로또 티켓
         LottoTickets secondUserLottoTickets = new LottoTickets(
@@ -60,8 +65,17 @@ public class LottoGamePlayerTest {
                         new LottoTicket("5,2,3,4,1,7"), new LottoTicket("2,1,3,8,9,7"),
                         new LottoTicket("11,12,13,14,15,16"), new LottoTicket("10,8,2,9,1,11")));
 
-        Map<WinningType, Integer> secondMatchCountResults = new LottoGamePlayer().getGameResult(winningLottoTicket, secondUserLottoTickets, 7);
-        assertThat(secondMatchCountResults.values()).containsExactly(1,2,0,0,1,2);
+
+        List<LottoTicketGameResult> secondMatchCountResults = new GameResult(winningLottoTicket, secondUserLottoTickets, 7).getGameResult();
+        List<LottoTicketGameResult> expectedLottoTicketGameResults = new ArrayList<>();
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.FIRST, 1));
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.SECOND, 2));
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.THIRD, 0));
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.FORTH, 0));
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.FIFTH, 1));
+        expectedLottoTicketGameResults.add(new LottoTicketGameResult(WinningType.MISS, 2));
+
+        assertThat(secondMatchCountResults).isEqualTo(expectedLottoTicketGameResults);
     }
 
     @Test
@@ -69,7 +83,7 @@ public class LottoGamePlayerTest {
     void inputBonusNumber_shouldNotIncludedWinningLottoNumber() {
         LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoTickets userLottoTickets = new LottoTickets(1);
-        assertThatThrownBy(()->new LottoGamePlayer().getGameResult(winningLottoTicket, userLottoTickets,1))
+        assertThatThrownBy(()->new GameResult(winningLottoTicket, userLottoTickets,1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
     }

@@ -18,4 +18,18 @@ public class LottoTicketGameResult {
     public int getWinningCount() {
         return winningCount;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj !=null || this.getClass() == obj.getClass()) {
+            return (((LottoTicketGameResult)obj).winningCount == this.winningCount) &&
+                    (((LottoTicketGameResult)obj).winningType.equals(this.winningType));
+        }
+        return super.equals(obj);
+    }
 }

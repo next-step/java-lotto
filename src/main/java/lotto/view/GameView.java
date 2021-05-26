@@ -30,9 +30,8 @@ public class GameView {
 
     private void showGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, Money money) {
         int bonusNumber = inputView.inputBonusBall();
-        LottoGamePlayer lottoGamePlayer = new LottoGamePlayer();
-        resultView.printGameResult(
-                lottoGamePlayer.getGameResult(winningLottoTicket, userLottoTickets, bonusNumber)); // 게임 결과 출력
+        GameResult gameResult = new GameResult(winningLottoTicket, userLottoTickets, bonusNumber);
+        resultView.printGameResult(gameResult.getGameResult()); // 게임 결과 출력
 
         long prizeSum = userLottoTickets.getPrizeSum(winningLottoTicket, bonusNumber);
         resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력

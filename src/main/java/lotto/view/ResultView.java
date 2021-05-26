@@ -1,9 +1,10 @@
 package lotto.view;
 
 import lotto.common.WinningType;
+import lotto.domain.LottoTicketGameResult;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 public class ResultView {
     private static final String LOTTO_TICKET_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -23,11 +24,11 @@ public class ResultView {
         System.out.println(lottoTicketsText);
     }
 
-    public void printGameResult(Map<WinningType, Integer> gameResult) {
+    public void printGameResult(List<LottoTicketGameResult> lottoTicketGameResult) {
         System.out.println(STATISTICS_TITLE_MESSAGE);
-
-        for(WinningType winningType : gameResult.keySet()) {
-            printGameResult(winningType, gameResult.get(winningType));
+        Collections.reverse(lottoTicketGameResult);
+        for(LottoTicketGameResult result : lottoTicketGameResult) {
+            printGameResult(result.getWinningType(), result.getWinningCount());
         }
     }
 
