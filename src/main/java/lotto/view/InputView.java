@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import utils.StringUtils;
 
@@ -49,19 +52,23 @@ public class InputView {
         return inputCountOfManualLottoTicket;
     }
 
-    public List<List<String>> inputManualNumbers(int countOfManualLottoTicket) {
-        List<List<String>> lottoNumbers = new ArrayList<>();
+    public List<LottoTicket> inputManualNumbers(int countOfManualLottoTicket) {
+        System.out.println(MESSAGE_QUESTION_MANUAL_NUMBER);
 
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         for (int i = 0; i < countOfManualLottoTicket; i++) {
             List<String> manualNumber = inputManualNumber();
-            lottoNumbers.add(manualNumber);
+            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(manualNumber);
+
+            LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
+            lottoTickets.add(lottoTicket);
 
         }
-        return lottoNumbers;
+        return lottoTickets;
     }
 
     private List<String> inputManualNumber() {
-        System.out.println(MESSAGE_QUESTION_MANUAL_NUMBER);
         String inputWinnerNumber = scanner.nextLine();
         String[] winnerNumbers = StringUtils.split(inputWinnerNumber);
         return Arrays.asList(winnerNumbers);
