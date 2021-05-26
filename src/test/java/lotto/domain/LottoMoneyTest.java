@@ -29,4 +29,24 @@ class LottoMoneyTest {
         // then
         assertThat(lottoMoney.purchaseCount()).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("수량 기반 구입금액")
+    void money_fromPurchaseCount() {
+        // given when
+        LottoMoney lottoMoney = LottoMoney.fromCount(5);
+
+        // then
+        assertThat(lottoMoney.purchaseCount()).isEqualTo(5);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    @DisplayName("수량기반 구입금액 - 구매수량 부족")
+    void lackOfPurchaseCount(int purchaseCount) {
+        // given when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoMoney.fromCount(purchaseCount))
+                .withMessageMatching("구매 수량을 입력해 주세요.");
+    }
 }
