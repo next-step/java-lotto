@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import lotto.error.ErrorMessage;
 import lotto.lotto.LottoResult;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 
 class PrizeTest {
@@ -40,20 +42,24 @@ class PrizeTest {
         assertThat(prize.money()).isEqualTo(Prize.THIRD.money());
     }
 
-    @Test
-    @DisplayName("valueOf 메서드 결과 테스트")
-    void valueOf() {
+    @ParameterizedTest
+    @DisplayName("valueOf 메서드 결과 테스트 - 실패")
+    @ValueSource(ints = {0, -1, 7, 9, 90})
+    void valueOfFailed(int countOfMatch) {
         //given
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Prize.valueOf(0, false))
+                .isThrownBy(() -> Prize.valueOf(countOfMatch, false))
                 .withMessageContaining(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM);
+    }
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Prize.valueOf(-1, false))
-                .withMessageContaining(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM);
-
+    @Test
+    @DisplayName("valueOf 메서드 결과 테스트 - 성공")
+    void valueOfSuccess() {
+        //given
+        //when
+        //then
         assertThat(Prize.valueOf(6, false).money()).isEqualTo(Prize.FIRST.money());
     }
 
