@@ -2,22 +2,19 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoMoneyTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 100, 999})
+    @Test
     @DisplayName("구입금액 부족")
-    void lackOfMoney(int amount) {
+    void lackOfMoney() {
         // given when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMoney.of(amount))
-                .withMessageMatching("금액이 부족합니다. 최소 1000 원 이상의 금액을 입력해 주세요.");
+                .isThrownBy(() -> LottoMoney.of(-1))
+                .withMessageMatching("금액은 음수가 될 수 없습니다.");
     }
 
     @Test
@@ -40,13 +37,12 @@ class LottoMoneyTest {
         assertThat(lottoMoney.purchaseCount()).isEqualTo(5);
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 0})
+    @Test
     @DisplayName("수량기반 구입금액 - 구매수량 부족")
-    void lackOfPurchaseCount(int purchaseCount) {
+    void lackOfPurchaseCount() {
         // given when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMoney.fromCount(purchaseCount))
+                .isThrownBy(() -> LottoMoney.fromCount(-1))
                 .withMessageMatching("구매 수량을 입력해 주세요.");
     }
 
@@ -91,5 +87,25 @@ class LottoMoneyTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> money2000.subtract(money5000))
                 .withMessageMatching("금액은 음수가 될 수 없습니다. 감수를 확인해 주세요.");
+    }
+
+    @Test
+    @DisplayName("로또금액 - 티켓가격 미만 수 허용")
+    void lessThanTicketPrice() {
+        // given
+        LottoMoney lottoMoney = LottoMoney.of(500);
+
+        // when then
+        assertThat(lottoMoney.purchaseCount()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("로또금액 - 티켓 0장 금액정의 허용")
+    void fromCountZero() {
+        // given
+        LottoMoney lottoMoney = LottoMoney.fromCount(0);
+
+        // when then
+        assertThat(lottoMoney.purchaseCount()).isEqualTo(0);
     }
 }
