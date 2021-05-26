@@ -6,6 +6,7 @@ import java.util.List;
 
 import kht2199.lotto.Lotto;
 import kht2199.lotto.LottoList;
+import kht2199.lotto.LottoRule;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.assets.AssetsException;
@@ -41,8 +42,13 @@ public class ResultView {
 		print("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
-	public void printResultStatistics(LottoWinningResult lottoWinningResult) {
-		assert false;
+	public void printResultStatistics(LottoRule rule, LottoWinningResult lottoWinningResult, int assetsUsed) {
+		print("당첨 통계");
+		print("---------");
+		for (int i = 3; i <= 6; i++) {
+			print(String.format("%d개 일치 (%d원)- %d개", i, rule.prize(i), lottoWinningResult.countMatched(i)));
+		}
+		print(String.format("총 수익률은 %1f입니다.", lottoWinningResult.rate(assetsUsed)));
 	}
 
 	public void printException(DomainException e) {

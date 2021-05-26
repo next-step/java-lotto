@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,16 +13,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoWinningResultTest {
 
 	@ParameterizedTest
-	@DisplayName("당첨번호와 단일 로또의 일치 갯수, 상금 계산")
+	@DisplayName("당첨번호와 단일 로또의 일치 갯수")
 	@MethodSource("calculateSource")
 	void calculate(Lotto winningResult, Lotto lotto, int matched) {
 		LottoWinningResult result = new LottoWinningResult(winningResult);
-		LottoRule lottoRule = new LottoRule();
-		LottoResult calculate = result.calculate(lottoRule, winningResult, lotto);
-		assertThat(calculate)
-			.hasFieldOrPropertyWithValue("matched", matched)
-			.hasFieldOrPropertyWithValue("prize", lottoRule.prize(matched))
-		;
+		assertThat(result.calculateMatched(winningResult, lotto))
+			.isEqualTo(matched);
 	}
 
 	static Stream<Arguments> calculateSource() {

@@ -1,6 +1,5 @@
 package kht2199.lotto;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,42 +12,49 @@ public class LottoWinningResult {
 
 	private final Lotto winningNumber;
 
-	private final Map<Lotto, LottoResult> results = new HashMap<>();
+	private final Map<Integer, Integer> matchedPrizeMap;
+
+	private LottoRule rule;
 
 	public LottoWinningResult(Lotto winningNumber) {
 		this.winningNumber = winningNumber;
+		this.matchedPrizeMap = new HashMap<>();
+		initMatchedPrizeMap();
+	}
+
+	private void initMatchedPrizeMap() {
+		for (int i = 1; i <= 6; i++) {
+			matchedPrizeMap.put(i, 0);
+		}
 	}
 
 	/**
 	 * 당첨 갯수, 당첨 금액 설정
 	 */
 	public void updateLottoWinningNumbers(LottoRule rule, LottoList list) {
-		results.clear();
+		this.rule = rule;
+		initMatchedPrizeMap();
 		for (Lotto lotto : list.getList()) {
-			results.put(lotto, calculate(rule, winningNumber, lotto));
+			int matched = calculateMatched(winningNumber, lotto);
+			matchedPrizeMap.putIfAbsent(matched, 0);
+			Integer totalPrize = matchedPrizeMap.get(matched);
+			matchedPrizeMap.put(matched, totalPrize + rule.prize(matched));
 		}
 	}
 
 	/**
-	 *
-	 *
-	 * @param rule 로또 규칙.
 	 * @param winningNumber 당첨번호.
 	 * @param lotto 비교대상 로또.
 	 * @return 결과정보.
 	 */
-	protected LottoResult calculate(LottoRule rule, Lotto winningNumber, Lotto lotto) {
+	protected int calculateMatched(Lotto winningNumber, Lotto lotto) {
 		List<Integer> winningNumbers = winningNumber.getNumbers();
 		List<Integer> numbers = lotto.getNumbers();
 		int matched = 0;
 		for (Integer number : numbers) {
 			matched += ifContainsThenOneElseZero(winningNumbers, number);
 		}
-		return new LottoResult(matched, rule.prize(matched));
-	}
-
-	public Map<Lotto, LottoResult> getWinningNumber() {
-		return Collections.unmodifiableMap(results);
+		return matched;
 	}
 
 	/**
@@ -56,5 +62,26 @@ public class LottoWinningResult {
 	 */
 	protected int ifContainsThenOneElseZero(List<Integer> list, Integer number) {
 		return list.contains(number) ? 1 : 0;
+	}
+
+	public int countMatched(int matched) {
+		Integer totalMatchedPrize = matchedPrizeMap.get(matched);
+		int prize = rule.prize(matched);
+		if (prize == 0) {
+			return 0;
+		}
+		return totalMatchedPrize / prize;
+	}
+
+	public int totalPrize() {
+		int sum = 0;
+		for (Integer value : matchedPrizeMap.values()) {
+			sum += value;
+		}
+		return sum;
+	}
+
+	public float rate(int assets) {
+		return (float) totalPrize() / assets;
 	}
 }

@@ -23,13 +23,16 @@ public class RandomLotto {
 
 	private final LottoGenerator generator = new LottoGenerator();
 
-	private int assets;
-
 	private final LottoList lottoList = new LottoList();
 
-	private LottoWinningResult lottoWinningResult;
-
 	private final LottoRule rule = new LottoRule();
+
+	/**
+	 * 현재 예산.
+	 */
+	private int assets;
+
+	private int assetsUsed;
 
 	public RandomLotto(InputView inputView, ResultView resultView) {
 		this.input = inputView;
@@ -52,10 +55,10 @@ public class RandomLotto {
 		output.printMessageForWinningNumbers();
 		//
 		Lotto winningNumbers = input.acceptWinningNumbers();
-		this.lottoWinningResult = new LottoWinningResult(winningNumbers);
+		LottoWinningResult lottoWinningResult = new LottoWinningResult(winningNumbers);
 		lottoWinningResult.updateLottoWinningNumbers(rule, lottoList);
 		//
-		output.printResultStatistics(lottoWinningResult);
+		output.printResultStatistics(rule, lottoWinningResult, assetsUsed);
 	}
 
 	/**
@@ -67,28 +70,18 @@ public class RandomLotto {
 	}
 
 	/**
-	 * 예산 조회.
-	 * 테스트시 사용한다.
-	 */
-	protected int getAssets() {
-		return assets;
-	}
-
-	protected LottoList getLottoList() {
-		return lottoList;
-	}
-
-	/**
 	 * 로또를 구매하고, 예산을 차감한다.
 	 */
 	protected void purchase(int countsOfLotto) throws LottoListNotEmptyException, AssetsNotEnoughException {
+		// validation.
 		if (this.lottoList.isNotEmpty()) {
 			throw new LottoListNotEmptyException();
 		}
-		this.assets -= countsOfLotto * LOTTO_PRICE;
-		if (assets < 0) {
+		if (this.assets < countsOfLotto * LOTTO_PRICE) {
 			throw new AssetsNotEnoughException();
 		}
+		this.assetsUsed = countsOfLotto * LOTTO_PRICE;
+		this.assets -= assetsUsed;
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < countsOfLotto; i++) {
 			lottos.add(generator.random());
