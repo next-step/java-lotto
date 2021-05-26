@@ -57,7 +57,7 @@ public class OutputView {
 
     private static void printLottoResult(Prize prize, int money, LottoResult matchAnswer) {
         String bonusInfo = "";
-        if (prize.equals(Prize.SECOND)) {
+        if (prize.isSecond()) {
             bonusInfo = Message.BONUS_BALL_MESSAGE.message();
         }
         System.out.printf("%d개 일치" + bonusInfo + "(%d원)- %d개\n", prize.matchingCount(), money, matchAnswer.count(prize));

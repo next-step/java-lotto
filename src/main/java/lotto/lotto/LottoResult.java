@@ -1,9 +1,10 @@
 package lotto.lotto;
 
-import lotto.enums.Prize;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
+
+import lotto.enums.Prize;
 
 public class LottoResult {
     private final Map<Prize, Integer> result = new HashMap<>();
@@ -22,11 +23,9 @@ public class LottoResult {
     }
 
     public int income() {
-        int total = 0;
-        for (Prize prizeValue : Prize.values()) {
-            total += prizeValue.income(this);
-        }
-        return total;
+        return Stream.of(Prize.values())
+                .mapToInt(prize -> prize.income(this))
+                .sum();
     }
 
     private boolean isFail(int matchingCount) {

@@ -1,9 +1,10 @@
 package lotto.enums;
 
+import java.util.Arrays;
+
 import lotto.error.ErrorMessage;
 import lotto.lotto.LottoResult;
 
-import java.util.Arrays;
 
 public enum Prize {
     FIFTH(3, 5000),
@@ -43,5 +44,9 @@ public enum Prize {
         }
 
         return prize;
+    }
+
+    public boolean isSecond() {
+        return this.equals(SECOND);
     }
 }
