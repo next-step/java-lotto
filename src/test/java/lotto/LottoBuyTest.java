@@ -20,12 +20,4 @@ public class LottoBuyTest {
         Lottos lottos = lottoBuy.buyLotto(new Pay(14000));
         assertThat(lottos.isCount(14)).isTrue();
     }
-
-    @DisplayName("구매 금액 만큼 구매한 로또 단순 출력 테스트")
-    @Test
-    void printLottoInfo_로또_단순_출력_테스트() {
-        Lottos lottos = lottoBuy.buyLotto(new Pay(14000));
-        System.out.println(lottos.toString());
-    }
-
 }
