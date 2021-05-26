@@ -6,10 +6,10 @@ package kht2199.lotto;
  */
 public class LottoResult {
 
-	private final int[] results;
+	private final Lotto result;
 
-	public LottoResult(int[] results) {
-		this.results = results;
+	public LottoResult(Lotto result) {
+		this.result = result;
 	}
 
 	/**

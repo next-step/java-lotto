@@ -1,7 +1,10 @@
 package kht2199.lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import kht2199.lotto.Lotto;
 import kht2199.lotto.LottoResult;
 
 /**
@@ -28,7 +31,8 @@ public class InputView {
 	protected LottoResult validationLottoResultString(String input) {
 		assert false;
 		// TODO input string to int array.
-		int[] lottoNumbers = new int[6];
-		return new LottoResult(lottoNumbers);
+		List<Integer> lottoNumbers = new ArrayList<>(6);
+		Lotto winningNumbers = new Lotto(lottoNumbers);
+		return new LottoResult(winningNumbers);
 	}
 }
