@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+public class LottoNumbersListTest {
 
     @Test
     public void countWonNumbers_두개로또번호비교검증() {
@@ -50,7 +50,6 @@ public class LottoTest {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
         lottoNumbersList.appendLottoNumber(lottoNumbers);
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
-
 
         assertThat(lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber).result().get(ResultScoreEnum.SECOND)).isEqualTo(1);
     }
