@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import kht2199.lotto.Lotto;
-import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
 
@@ -56,15 +55,25 @@ public class InputView {
 			throw new InvalidInputException(InvalidInputError.LENGTH);
 		}
 		try {
-			checkParsableToInteger(split);
+			validateLottoNumber(split);
 		} catch (NumberFormatException e) {
 			throw new InvalidInputException(InvalidInputError.PARSING);
 		}
 	}
 
-	private void checkParsableToInteger(String[] split) throws NumberFormatException {
+	/**
+	 * 번호 유효성 체크
+	 */
+	protected void validateLottoNumber(String[] split)
+			throws NumberFormatException, InvalidInputException {
 		for (String s : split) {
-			Integer.parseInt(s);
+			validateRange(Integer.parseInt(s));
+		}
+	}
+
+	private void validateRange(int parseInt) throws InvalidInputException {
+		if (parseInt < 1 || parseInt > 46) {
+			throw new InvalidInputException(InvalidInputError.RANGE);
 		}
 	}
 }

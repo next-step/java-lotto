@@ -9,7 +9,7 @@ import kht2199.lotto.view.ResultView;
  *
  * @author heetaek.kim
  */
-public class LottoMain {
+public class LottoApplication {
 
 	public static void main(String[] args) {
 		ResultView resultView = new ResultView();
