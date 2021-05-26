@@ -15,7 +15,7 @@ public class WinInquiryAssembler {
     private static List<WinStatistic> assembleWinStatics(LottoRanks lottoRanks) {
         List<WinStatistic> winStatistics = new ArrayList<>();
         for (LottoRank rank : LottoRank.values()) {
-            winStatistics.add(new WinStatistic(rank.matchCount(), rank.winAmount(), lottoRanks.count(rank), rank.isMatchBonusTarget()));
+            winStatistics.add(new WinStatistic(rank.isMatch(), rank.winAmount(), lottoRanks.count(rank), rank.isMatchBonusTarget()));
         }
         return winStatistics;
     }
