@@ -12,6 +12,8 @@ public class StatisticsCalculator {
     private static final String PROFIT_MESSAGE = "이익";
     private static final String BREAK_EVENT_MESSAGE = "본전";
     private static final String LOSS_MESSAGE = "손해";
+    private static final int MINIMUM_MATCH = 3;
+    private static final int MAXIMUM_MATCH = 6;
 
     private final Ticket ticket;
     private final LottoNumbers winnerLotto;
@@ -25,6 +27,9 @@ public class StatisticsCalculator {
     }
 
     private void init() {
+        for (int i = MINIMUM_MATCH; i <= MAXIMUM_MATCH; i ++) {
+            statisticByMatchCount.putIfAbsent(i, new Statistic(0, Earn.match(i)));
+        }
         for (LottoNumbers purchased : ticket.purchasedLotto()) {
             compute(statisticByMatchCount, purchased);
         }
@@ -62,7 +67,7 @@ public class StatisticsCalculator {
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder("당첨 통계\n---------\n");
-        for (int matchCount = 3; matchCount < 7; matchCount++) {
+        for (int matchCount = MINIMUM_MATCH; matchCount <= MAXIMUM_MATCH; matchCount++) {
             if (!statisticByMatchCount.containsKey(matchCount)) {
                 continue;
             }
