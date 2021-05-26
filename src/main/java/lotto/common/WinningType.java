@@ -8,9 +8,7 @@ public enum WinningType {
     THIRD(5, 1_500_000),
     FORTH(4, 50_000),
     FIFTH(3, 5_000),
-    SIXTH(2, 0),
-    SEVENTH(1, 0),
-    EIGHTH(0, 0);
+    MISS(0, 0);
 
     private final int matchCount;
     private final int prize;
@@ -21,18 +19,12 @@ public enum WinningType {
     }
 
     public static WinningType of(int matchCount, boolean matchBonus) {
-        if (matchBonus && matchCount == 5) {
-            return SECOND;
-        }
-
-        if (!matchBonus && matchCount == 5) {
-            return THIRD;
-        }
 
         return Arrays.stream(WinningType.values())
                 .filter(t -> t.matchCount == matchCount)
+                .filter(t -> !t.equals(SECOND) || matchBonus)
                 .findFirst()
-                .orElse(EIGHTH);
+                .orElse(MISS);
     }
 
     public int getMatchCount() {

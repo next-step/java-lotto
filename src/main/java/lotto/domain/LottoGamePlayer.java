@@ -17,14 +17,14 @@ public class LottoGamePlayer {
     }
 
     private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
-        if ( winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
+        if (winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
     }
 
     public Map<WinningType, Integer> getGameResult(WinningType[] winningTypes) {
         Map<WinningType, Integer> matchCountResults = initMatchCountResults();
-        for ( int i = 0; i < winningTypes.length; i++) {
+        for (int i = 0; i < winningTypes.length; i++) {
             matchCountResults.put(winningTypes[i], countResult(matchCountResults, winningTypes[i]));
         }
 

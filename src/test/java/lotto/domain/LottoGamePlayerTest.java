@@ -14,12 +14,12 @@ public class LottoGamePlayerTest {
     @Test
     @DisplayName("WinningType count 테스트")
     void getMatchCountResult() {
-        WinningType[] winningTypes = {WinningType.FIRST, WinningType.SECOND, WinningType.SECOND, WinningType.SIXTH};
+        WinningType[] winningTypes = {WinningType.FIRST, WinningType.SECOND, WinningType.SECOND, WinningType.MISS};
         Map<WinningType, Integer> matchCountResults = new LottoGamePlayer().getGameResult(winningTypes);
 
-        assertThat(matchCountResults.keySet()).containsExactly(WinningType.EIGHTH, WinningType.SEVENTH, WinningType.SIXTH,
+        assertThat(matchCountResults.keySet()).containsExactly(WinningType.MISS,
                 WinningType.FIFTH, WinningType.FORTH, WinningType.THIRD, WinningType.SECOND, WinningType.FIRST);
-        assertThat(matchCountResults.values()).containsExactly(0, 0, 1, 0, 0, 0, 2, 1);
+        assertThat(matchCountResults.values()).containsExactly(1, 0, 0, 0, 2, 1);
     }
 
     @Test

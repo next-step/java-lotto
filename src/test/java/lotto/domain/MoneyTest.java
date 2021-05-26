@@ -37,10 +37,10 @@ public class MoneyTest {
     @DisplayName("수익률 계산 소수점 테스트")
     void calculateProfit_shouldFloor() {
         //소수점 둘째자리까지 표기되며 이후는 버림
-        List<WinningType> plusWinningTypes = Arrays.asList(WinningType.FIFTH, WinningType.FIFTH, WinningType.SEVENTH);
+        List<WinningType> plusWinningTypes = Arrays.asList(WinningType.FIFTH, WinningType.FIFTH, WinningType.MISS);
         assertThat(new Money(3000).calculateProfit(10000)).isEqualTo(3.33);
 
-        List<WinningType> MinusWinningTypes = Arrays.asList(WinningType.SIXTH, WinningType.SEVENTH, WinningType.EIGHTH);
+        List<WinningType> MinusWinningTypes = Arrays.asList(WinningType.MISS, WinningType.MISS, WinningType.MISS);
         assertThat(new Money(3000).calculateProfit(0)).isEqualTo(0.00);
     }
 

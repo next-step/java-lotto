@@ -35,6 +35,6 @@ public class LottoTicketTest {
         //8등은 0개 로또번호가 일치하는 경우이다.
         LottoTicket userSeventhLottoNumbers = new LottoTicket("11,12,13,14,15,16");
         winningType = userSeventhLottoNumbers.getWinningType(winningLottoTicket, 10);
-        assertThat(winningType).isEqualTo(WinningType.EIGHTH);
+        assertThat(winningType).isEqualTo(WinningType.MISS);
     }
 }
