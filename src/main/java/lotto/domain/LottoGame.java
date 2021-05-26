@@ -44,11 +44,11 @@ public class LottoGame {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoGame lottoGame = (LottoGame) o;
-    return gameNumbers.equals(lottoGame.gameNumbers);
+    return gameNumbers.equals(lottoGame.gameNumbers) && orderType == lottoGame.orderType;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(gameNumbers);
+    return Objects.hash(gameNumbers, orderType);
   }
 }

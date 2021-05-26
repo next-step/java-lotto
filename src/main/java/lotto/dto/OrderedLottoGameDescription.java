@@ -32,11 +32,11 @@ public class OrderedLottoGameDescription {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     OrderedLottoGameDescription that = (OrderedLottoGameDescription) o;
-    return purchasedLottoInfos.equals(that.purchasedLottoInfos);
+    return purchasedLottoInfos.equals(that.purchasedLottoInfos) && orderType.equals(that.orderType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(purchasedLottoInfos);
+    return Objects.hash(purchasedLottoInfos, orderType);
   }
 }
