@@ -9,7 +9,8 @@ class LottoNumber implements Comparable<LottoNumber> {
 	private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
 	private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
 	private static final String INVALID_LOTTO_NUMBER_MESSAGE = "로또 번호는 %d에서 %d 사이입니다.";
-	private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>(LOTTO_NUMBER_UPPER_BOUND);
+
+	private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>(LOTTO_NUMBER_UPPER_BOUND);
 
 	static {
 		initialize();
@@ -17,14 +18,14 @@ class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void initialize() {
 		for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
-			LOTTO_NUMBER_MAP.put(i, new LottoNumber(i));
+			lottoNumberMap.put(i, new LottoNumber(i));
 		}
 	}
 
 	static LottoNumber of(int number) {
 		validate(number);
 
-		return LOTTO_NUMBER_MAP.get(number);
+		return lottoNumberMap.get(number);
 	}
 
 	private static void validate(int number) {

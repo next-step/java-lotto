@@ -16,7 +16,7 @@ public class Money {
 
 	private void validate(String money) {
 		if (!validateNumber(money)) {
-			throw new IllegalArgumentException(Money.INVALID_NUMBER_MESSAGE);
+			throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
 		}
 	}
 

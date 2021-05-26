@@ -8,7 +8,7 @@ public class LottoStore {
 	private static final String INVALID_MONEY_MESSAGE = "로또 구입 금액은 %d원 이상입니다.";
 	private static final int LOWER_BOUND = 1;
 
-	private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
+	private static final LottoMachine lottoMachine = new LottoMachine();
 
 	public UserLotto buy(Money money) {
 		validate(money);
@@ -27,7 +27,7 @@ public class LottoStore {
 	}
 
 	private List<LottoTicket> generateLottoTickets(Money money) {
-		return LOTTO_MACHINE.generate(lottoGameCount(money));
+		return lottoMachine.generate(lottoGameCount(money));
 	}
 
 }

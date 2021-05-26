@@ -12,14 +12,14 @@ public enum LottoRank {
 	FIFTH(3, new LottoPoint(3), 5000L),
 	OUT_OF_RANK(0, new LottoPoint(0), 0L);
 
-	private static final Map<LottoPoint, LottoRank> LOTTO_RANK_MAP = new HashMap<>();
+	private static final Map<LottoPoint, LottoRank> lottoPointIndex = new HashMap<>();
 
 	static {
-		LOTTO_RANK_MAP.put(FIRST.lottoPoint, FIRST);
-		LOTTO_RANK_MAP.put(SECOND.lottoPoint, SECOND);
-		LOTTO_RANK_MAP.put(THIRD.lottoPoint, THIRD);
-		LOTTO_RANK_MAP.put(FOURTH.lottoPoint, FOURTH);
-		LOTTO_RANK_MAP.put(FIFTH.lottoPoint, FIFTH);
+		lottoPointIndex.put(FIRST.lottoPoint, FIRST);
+		lottoPointIndex.put(SECOND.lottoPoint, SECOND);
+		lottoPointIndex.put(THIRD.lottoPoint, THIRD);
+		lottoPointIndex.put(FOURTH.lottoPoint, FOURTH);
+		lottoPointIndex.put(FIFTH.lottoPoint, FIFTH);
 	}
 
 	private final int matchCount;
@@ -41,7 +41,7 @@ public enum LottoRank {
 	}
 
 	static LottoRank rank(LottoPoint lottoPoint) {
-		return LOTTO_RANK_MAP.getOrDefault(lottoPoint, OUT_OF_RANK);
+		return lottoPointIndex.getOrDefault(lottoPoint, OUT_OF_RANK);
 	}
 
 }
