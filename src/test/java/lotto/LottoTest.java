@@ -19,13 +19,11 @@ public class LottoTest {
         Lotto automaticLotto = new Lotto(new AutomaticLottoGenerator());
         assertThat(automaticLotto.size()).isEqualTo(6);
 
-        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3)
-                , new Number(4), new Number(5)))
+        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 1장의 숫자는 6개이여야 합니다.");
 
-        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3)
-                , new Number(4), new Number(5), new Number(6), new Number(7)))
+        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6), new Number(7)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 1장의 숫자는 6개이여야 합니다.");
     }
@@ -33,8 +31,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 1장은 중복되지 않은 숫자를 가진다.")
     public void 중복되지_않은_숫자() {
-        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3)
-                , new Number(4), new Number(5), new Number(5)))
+        assertThatThrownBy(() -> new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된 숫자를 가질수 없습니다.");
     }
