@@ -6,9 +6,6 @@ public interface UserInterface {
 
 	void shutdown();
 
-	String receiveMoney();
+	String receive();
 
-	String receiveWinningLottoNumber();
-
-	String receiveBonusLottoNumber();
 }

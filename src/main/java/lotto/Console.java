@@ -17,17 +17,7 @@ public class Console implements UserInterface {
 	}
 
 	@Override
-	public String receiveMoney() {
-		return SCANNER.nextLine();
-	}
-
-	@Override
-	public String receiveWinningLottoNumber() {
-		return SCANNER.nextLine();
-	}
-
-	@Override
-	public String receiveBonusLottoNumber() {
+	public String receive() {
 		return SCANNER.nextLine();
 	}
 

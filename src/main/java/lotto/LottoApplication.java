@@ -47,7 +47,7 @@ public class LottoApplication {
 	}
 
 	private String receiveMoney() {
-		return userInterface.receiveMoney();
+		return userInterface.receive();
 	}
 
 	private UserLotto buyLotto(String money) {
@@ -59,11 +59,11 @@ public class LottoApplication {
 	}
 
 	private String winningLottoNumbers() {
-		return userInterface.receiveWinningLottoNumber();
+		return userInterface.receive();
 	}
 
 	private String bonusLottoNumber() {
-		return userInterface.receiveBonusLottoNumber();
+		return userInterface.receive();
 	}
 
 	private void viewUserLottoState(UserLotto userLotto) {
