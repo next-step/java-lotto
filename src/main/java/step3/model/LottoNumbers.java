@@ -24,13 +24,13 @@ public final class LottoNumbers {
         validationSize(numbers);
         this.lottoNumbers = new TreeSet<>();
         numbers.stream()
-            .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+            .forEach(number -> lottoNumbers.add(LottoNumber.of(number)));
     }
 
     private LottoNumbers(List<Integer> numbers, Integer bonusNumber) {
         this(numbers);
         checkBonusValidation(bonusNumber);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public static LottoNumbers of(List<Integer> numbers) {
@@ -89,7 +89,7 @@ public final class LottoNumbers {
 
     private void checkBonusValidation(Integer bonusNumber) {
         boolean isInNumbers = lottoNumbers.stream()
-            .filter(number -> number.equals(new LottoNumber(bonusNumber)))
+            .filter(number -> number.equals(LottoNumber.of(bonusNumber)))
             .count() == 1;
 
         if (isInNumbers) {
