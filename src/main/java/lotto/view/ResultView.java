@@ -3,13 +3,24 @@ package lotto.view;
 import lotto.domain.LottoResults;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
 
 	public static final String MESSAGE_WIN_STATISTICS = "당첨 통계";
 	public static final String MESSAGE_LINE_DELIMETER = "---------";
-	public static final String MESSAGE_NUMBER_OF_MATCHS_BY_RANK = "%d개 일치 (%d원)- %d개\n";
+	public static final String MESSAGE_NUMBER_OF_MATCHS_BY_RANK = "%d개 일치%s (%d원)- %d개\n";
 	public static final String MESSAGE_PERCENTAGE_OF_REVENUE = "총 수익률은 %.2f입니다.";
 	public static final String MESSAG_RESULT_IS_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+	public static final String MESSAGE_MATCH_BONUS = ", 보너스 볼 일치";
+	public static final String MESSAGE_EMPTY = "";
+	public static final List<Rank> renderRanks = Arrays.stream(Rank.values())
+			.filter(rank -> rank.isGreaterThan(Rank.NONE))
+			.sorted(Comparator.comparing(Rank::getMatchCount).thenComparing(Rank::getWinningMoney))
+			.collect(Collectors.toList());
 
 	public static void printLottoResult(LottoResults lottoResults) {
 		printLottoStatistics(lottoResults);
@@ -21,10 +32,17 @@ public class ResultView {
 		System.out.println(MESSAGE_WIN_STATISTICS);
 		System.out.println(MESSAGE_LINE_DELIMETER);
 
-		for (Rank rank : lottoResults.getRenderRanks()) {
+		for (Rank rank : renderRanks) {
 			int rankCount = lottoResults.findRankCount(rank);
-			System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), rank.getWinningMoney(), rankCount);
+			System.out.printf(MESSAGE_NUMBER_OF_MATCHS_BY_RANK, rank.getMatchCount(), makeBonusMessage(rank), rank.getWinningMoney(), rankCount);
 		}
+	}
+
+	private static String makeBonusMessage(Rank rank) {
+		if (rank.equals(Rank.SECOND)) {
+			return MESSAGE_MATCH_BONUS;
+		}
+		return MESSAGE_EMPTY;
 	}
 
 	private static void printProfitRate(LottoResults lottoResults) {

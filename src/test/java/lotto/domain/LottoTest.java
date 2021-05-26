@@ -10,11 +10,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 @DisplayName("로또(일급콜렉션) 테스트")
 public class LottoTest {
 
-	private Lotto winningLotto;
+	private WinningLotto winningLotto;
 
 	@BeforeEach
 	void setUp() {
-		winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+		Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
+		int bonusNumber = 7;
+		winningLotto = new WinningLotto(lotto, bonusNumber);
 	}
 
 	@Test
@@ -54,26 +56,13 @@ public class LottoTest {
 	}
 
 	@Test
-	@DisplayName("당첨번호와 비교하여 일치하는 숫자개수 테스트")
+	@DisplayName("로또번호를 비교하여 일치하는 숫자개수 테스트")
 	void matchCount() {
 		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 6)
-				.matchCount(winningLotto)).isEqualTo(6);
-	}
+				.matchCount(new Lotto(1, 2, 3, 4, 5, 6))).isEqualTo(6);
 
-	@Test
-	@DisplayName("당첨번호와 비교하여 랭킹을 구하는 테스트")
-	void rank() {
 		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 6)
-				.findRank(winningLotto)).isEqualTo(Rank.FIRST);
-
-		Assertions.assertThat(new Lotto(1, 2, 3, 4, 5, 45)
-				.findRank(winningLotto)).isEqualTo(Rank.SECOND);
-
-		Assertions.assertThat(new Lotto(1, 2, 3, 4, 44, 45)
-				.findRank(winningLotto)).isEqualTo(Rank.THIRD);
-
-		Assertions.assertThat(new Lotto(1, 2, 3, 43, 44, 45)
-				.findRank(winningLotto)).isEqualTo(Rank.FOURTH);
+				.matchCount(new Lotto(1, 2, 3, 4, 5, 10))).isEqualTo(5);
 	}
 
 }

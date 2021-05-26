@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class InputView {
 
 	public static final String MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String MESSAGE_INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+	public static final String MESSAGE_INPUT_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
 	public static final String MESSAGE_PURCHAGE_COMPLETE = "%d개를 구매했습니다.\n";
 	protected static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
 	private static final Scanner scanner = new Scanner(System.in);
@@ -22,10 +24,16 @@ public class InputView {
 		return new PurchaseAmount(Integer.parseInt(scanner.nextLine()));
 	}
 
-	public static Lotto inputWinningLotto() {
+	public static WinningLotto inputWinningLotto() {
 		System.out.println(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
+
 		String inputNumbers = scanner.nextLine();
-		return new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
+		Lotto winningLotto = new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
+
+		System.out.println(MESSAGE_INPUT_BONUS_NUMBERS);
+		int lottoNumber = Integer.parseInt(scanner.nextLine());
+
+		return new WinningLotto(winningLotto, lottoNumber);
 	}
 
 	protected static List<Integer> toNumbers(String inputNumbers, String delimiter) {

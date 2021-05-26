@@ -20,7 +20,7 @@ public class LottoGameController {
 		Lottos lottos = new LottoGame().purchaseLottos(InputView.inputPurchaseAmount(), this.randomNumbersGenerator);
 		InputView.printPurchaseLottos(lottos);
 
-		LottoResults lottoResults = lottos.match(InputView.inputWinningLotto());
+		LottoResults lottoResults = lottos.findResult(InputView.inputWinningLotto());
 		ResultView.printLottoResult(lottoResults);
 
 	}

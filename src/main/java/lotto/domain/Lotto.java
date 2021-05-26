@@ -52,10 +52,6 @@ public class Lotto {
 				.sum();
 	}
 
-	public Rank findRank(Lotto winningLotto) {
-		return Rank.findRankByMatchCount(matchCount(winningLotto));
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
