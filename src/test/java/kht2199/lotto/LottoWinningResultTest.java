@@ -34,12 +34,4 @@ class LottoWinningResultTest {
 			Arguments.of(winningResult, new Lotto(List.of(7, 8, 9, 10, 11, 12)), 0)
 		);
 	}
-
-	@Test
-	void getWinningNumber() {
-	}
-
-	@Test
-	void ifContainsThenOneElseZero() {
-	}
 }
