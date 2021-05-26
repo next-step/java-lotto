@@ -15,10 +15,12 @@ public class LottoGame {
         int manualTicketCount = inputView.nextInt();
 
         outputView.enterManualTicketNumbers();
-        List<String> requestedManualLottoNumbers = new ArrayList<>();
+        List<String> manualTicketNumbers = new ArrayList<>();
         for(int i = 0; i < manualTicketCount; i++) {
-            requestedManualLottoNumbers.add(inputView.next());
+            manualTicketNumbers.add(inputView.next());
         }
+
+        RequestedManualLottoNumbers requestedManualLottoNumbers = new RequestedManualLottoNumbers(manualTicketNumbers);
 
         LottoTickets lottoTickets = new LottoTickets(money, requestedManualLottoNumbers);
         outputView.printLottoTickets(lottoTickets);

@@ -3,8 +3,8 @@ package lottoauto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -30,9 +30,8 @@ public class LottoTicketsTest {
     @DisplayName("돈보다 티켓을 더 요구하는 경우 예외")
     @Test
     void 수동티켓_예외() {
-        List<String> requestedManualLottoNumbers = new ArrayList<>();
-        requestedManualLottoNumbers.add("");
-        requestedManualLottoNumbers.add("");
+        RequestedManualLottoNumbers requestedManualLottoNumbers = new RequestedManualLottoNumbers(Stream.<String>builder().add("").add("").build().collect(Collectors.toList()));
+
         assertThatIllegalArgumentException().isThrownBy(()->new LottoTickets(new Money(1000), requestedManualLottoNumbers))
                 .withMessage("돈이 부족하여 수동티켓을 줄 수 없습니다.");
     }
