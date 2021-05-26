@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.domain.LottoRank.*;
 
 import java.math.BigDecimal;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class LottoReport {
 
 	public LottoReport(List<LottoRank> lottoRankList) {
 		lottoTicketCount = lottoRankList.size();
-		lottoRankMap = new HashMap<>(lottoRankList.size());
+		lottoRankMap = new EnumMap<>(LottoRank.class);
 
 		for (LottoRank lottoRank : lottoRankList) {
 			lottoRankMap.put(lottoRank, lottoRankMap.getOrDefault(lottoRank, 0) + 1);
