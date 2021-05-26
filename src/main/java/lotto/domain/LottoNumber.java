@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.lang.String.format;
-
 public class LottoNumber {
     public static final Map<Integer, LottoNumber> ALL_LOTTO_NUMBERS = initializeAllLottoNumbers();
     public static final int MIN_LOTTO_NUMBER = 1;
