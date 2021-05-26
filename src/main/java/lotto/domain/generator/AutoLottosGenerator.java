@@ -35,6 +35,9 @@ public class AutoLottosGenerator implements LottosGenerator{
     @Override
     public List<Lotto> generate(LottoTicketCount ticketCount) {
         List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < ticketCount.getLottoTicketCount(); i++) {
+            lottoList.add(generateAuto());
+        }
         return lottoList;
     }
 
