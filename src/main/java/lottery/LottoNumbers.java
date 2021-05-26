@@ -2,9 +2,12 @@ package lottery;
 
 import static lottery.Ticket.*;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import lottery.exceptions.InvalidTicketSizeException;
 
@@ -21,6 +24,12 @@ public class LottoNumbers {
 		return new LottoNumbers(numbers);
 	}
 
+	public static LottoNumbers from(String[] split) {
+		return new LottoNumbers(Arrays.stream(split).map(Integer::new)
+			.sorted()
+			.collect(Collectors.toCollection(LinkedHashSet::new)));
+	}
+
 	private LottoNumbers(Set<Integer> numbers) {
 		setNumbers(numbers);
 	}
@@ -35,6 +44,7 @@ public class LottoNumbers {
 	public Set<Integer> values() {
 		return Collections.unmodifiableSet(numbers);
 	}
+
 
 	@Override
 	public boolean equals(Object o) {

@@ -16,15 +16,14 @@ class TicketTest {
 
 	@Test
 	void create() {
+		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>()), TicketType.MANUAL))
+			.isInstanceOf(InvalidTicketSizeException.class);
+
 		LottoNumbers lottoNumbers = LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
 
-		sut = Ticket.of(lottoNumbers);
+		sut = Ticket.of(lottoNumbers, TicketType.MANUAL);
 
-		Set<Integer> values = sut.numbers();
-		assertThat(values).hasSize(6);
-		assertThat(values).containsAll(lottoNumbers.values());
+		assertThat(sut.numbers()).hasSize(6);
 
-		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>())))
-			.isInstanceOf(InvalidTicketSizeException.class);
 	}
 }

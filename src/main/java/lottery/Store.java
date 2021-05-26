@@ -14,10 +14,14 @@ public class Store {
 		return machine;
 	}
 
-	public Tickets getTicket(Buyer buyer) {
+	public Tickets getTicket(Buyer buyer, Tickets manualTickets) {
 		Money buyerMoney = buyer.money();
-		long ticketCount = buyerMoney.divide(TICKET_PRICE);
-		buyer.setMoney(buyerMoney.minus(TICKET_PRICE.multiply(ticketCount)));
-		return machine.create(ticketCount);
+		int countOfManualTicket = manualTickets.size();
+
+		Money minus = buyerMoney.minus(TICKET_PRICE.multiply(countOfManualTicket));
+		long countOfAutomaticTicket = minus.divide(TICKET_PRICE);
+		Tickets tickets = machine.automaticTicketCreate(countOfAutomaticTicket);
+		buyer.setMoney(buyerMoney.minus(TICKET_PRICE.multiply(countOfAutomaticTicket + countOfManualTicket)));
+		return tickets.merge(manualTickets);
 	}
 }

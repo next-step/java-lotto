@@ -24,7 +24,7 @@ class InfoCenterTest {
 	@Test
 	void 지난주_당첨번호를_입력받는다() {
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 10);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 10);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		assertThat(sut.lastWeekWinningNumbers()).isEqualTo(lastWinningNumber);
@@ -32,9 +32,10 @@ class InfoCenterTest {
 
 	@Test
 	void 로또_3개자리_일치() {
-		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 11, 12, 13)));
+		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 11, 12, 13)),
+			TicketType.MANUAL);
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -43,9 +44,9 @@ class InfoCenterTest {
 
 	@Test
 	void 로또_4개자리_일치() {
-		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 12, 13)));
+		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 12, 13)), TicketType.MANUAL);
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -54,9 +55,9 @@ class InfoCenterTest {
 
 	@Test
 	void 로또_5개자리_일치() {
-		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 13)));
+		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 13)), TicketType.MANUAL);
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -65,9 +66,9 @@ class InfoCenterTest {
 
 	@Test
 	void 로또_6개자리_일치() {
-		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.MANUAL);
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -78,7 +79,7 @@ class InfoCenterTest {
 	void 복수의_로또티켓을_체크할수_있다() {
 		Tickets tickets = getTickets(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(tickets);
@@ -97,7 +98,7 @@ class InfoCenterTest {
 		float expected = 5.0f;
 
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 		;
 
@@ -114,7 +115,7 @@ class InfoCenterTest {
 			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11)
 		);
 		WinningTicket lastWinningNumber = new WinningTicket(
-			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 11);
+			Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)), TicketType.WINNING), 11);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(tickets);
@@ -137,7 +138,7 @@ class InfoCenterTest {
 	private Tickets getTickets(LinkedHashSet<Integer>... numbers) {
 		List<Ticket> tickets = new ArrayList<>();
 		for (LinkedHashSet<Integer> number : numbers) {
-			tickets.add(Ticket.of(LottoNumbers.from(number)));
+			tickets.add(Ticket.of(LottoNumbers.from(number), TicketType.MANUAL));
 		}
 		return Tickets.of(tickets);
 	}
