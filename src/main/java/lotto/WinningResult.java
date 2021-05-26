@@ -11,12 +11,12 @@ public class WinningResult {
 	private final int buyCount;
 	private final Map<Winner, Integer> dashboard;
 
-	public WinningResult(Lotto win, Lottos lottos) {
+	public WinningResult(WinningNumber winningNumber, Lottos lottos) {
 		buyCount = lottos.count();
 		dashboard = defaultDashboard();
 
 		lottos.values().forEach(lotto -> {
-			Winner winner = lotto.winningCheck(win);
+			Winner winner = winningNumber.resultOf(lotto);
 			dashboard.computeIfPresent(winner, (k, v) -> ++v);
 		});
 	}

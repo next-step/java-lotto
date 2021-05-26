@@ -10,6 +10,8 @@ public enum Winner {
 	FIFTH_PRIZE(3, 5_000L),
 	NONE(0, 0);
 
+	private static final int SECOND_OR_THIRD = 5;
+
 	private final int count;
 	private final long award;
 
@@ -18,13 +20,17 @@ public enum Winner {
 		this.award = award;
 	}
 
-	public static Winner valueOf(long value) {
+	public static Winner valueOf(long value, boolean matchBonus) {
 		validateWinnerValue(value);
+
+		if (value == SECOND_OR_THIRD) {
+			return matchBonus ? SECOND_PRIZE : THIRD_PRIZE;
+		}
 
 		return Arrays.stream(values())
 			.filter(winner -> winner.count == value)
 			.findFirst()
-			.orElse(Winner.NONE);
+			.orElse(NONE);
 	}
 
 	public long award() {

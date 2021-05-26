@@ -29,10 +29,10 @@ public class WinningNumberTest {
 		LottoNumber bonusNumber = LottoNumber.valueOf("7");
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusNumber);
 
-		assertThat(winningNumber.matchResult(lotto1st)).isEqualTo(FIRST_PRIZE);
-		assertThat(winningNumber.matchResult(lotto2nd)).isEqualTo(SECOND_PRIZE);
-		assertThat(winningNumber.matchResult(lotto3rd)).isEqualTo(THIRD_PRIZE);
-		assertThat(winningNumber.matchResult(lotto4th)).isEqualTo(FOURTH_PRIZE);
-		assertThat(winningNumber.matchResult(lotto5th)).isEqualTo(FIFTH_PRIZE);
+		assertThat(winningNumber.resultOf(lotto1st)).isEqualTo(FIRST_PRIZE);
+		assertThat(winningNumber.resultOf(lotto2nd)).isEqualTo(SECOND_PRIZE);
+		assertThat(winningNumber.resultOf(lotto3rd)).isEqualTo(THIRD_PRIZE);
+		assertThat(winningNumber.resultOf(lotto4th)).isEqualTo(FOURTH_PRIZE);
+		assertThat(winningNumber.resultOf(lotto5th)).isEqualTo(FIFTH_PRIZE);
 	}
 }

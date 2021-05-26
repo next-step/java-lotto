@@ -1,6 +1,5 @@
 package lotto;
 
-import static lotto.Winner.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,14 +33,14 @@ public class LottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 등수 판별")
+	@DisplayName("로또 일치 갯수 확인")
 	void lotto_등수_판별() {
 		Lotto lotto1 = new Lotto("1,2,3,4,5,6");
 
 		Lotto winningLotto1 = new Lotto("1,2,3,4,5,6");
 		Lotto winningLotto2 = new Lotto("5,6,7,8,9,10");
 
-		assertThat(lotto1.winningCheck(winningLotto1)).isEqualTo(FIRST_PRIZE);
-		assertThat(lotto1.winningCheck(winningLotto2)).isEqualTo(NONE);
+		assertThat(lotto1.matchCount(winningLotto1)).isEqualTo(6);
+		assertThat(lotto1.matchCount(winningLotto2)).isEqualTo(2);
 	}
 }

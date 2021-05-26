@@ -22,8 +22,10 @@ public class ResultView {
 			"3개 일치 (%d원)- %d개\n"
 			+ "4개 일치 (%d원)- %d개\n"
 			+ "5개 일치 (%d원)- %d개\n"
+			+ "5개 일치, 보너스 볼 일치(%d원)- %d개\n"
 			+ "6개 일치 (%d원)- %d개\n"
 			+ "총 수익률은 %.2f입니다.\n",
+			FOURTH_PRIZE.award(), dashboard.get(FIFTH_PRIZE),
 			FOURTH_PRIZE.award(), dashboard.get(FOURTH_PRIZE),
 			THIRD_PRIZE.award(), dashboard.get(THIRD_PRIZE),
 			SECOND_PRIZE.award(), dashboard.get(SECOND_PRIZE),

@@ -3,14 +3,24 @@ package lotto;
 public class WinningNumber {
 
 	private final Lotto winLotto;
-	private final LottoNumber bonusNumber;
+	private final LottoNumber bonusBall;
 
-	public WinningNumber(Lotto winLotto, LottoNumber bonusNumber) {
+	public WinningNumber(Lotto winLotto, LottoNumber bonusBall) {
+		validateBonusNumber(winLotto, bonusBall);
+
 		this.winLotto = winLotto;
-		this.bonusNumber = bonusNumber;
+		this.bonusBall = bonusBall;
 	}
 
-	public Winner matchResult(Lotto lotto) {
-		return null;
+	public Winner resultOf(Lotto lotto) {
+		return Winner.valueOf(
+			lotto.matchCount(winLotto),
+			lotto.contains(bonusBall));
+	}
+
+	private void validateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
+		if (winLotto.contains(bonusNumber)) {
+			throw new InvalidNumberSetException("Bonus number must not be duplicate with the winning number.");
+		}
 	}
 }

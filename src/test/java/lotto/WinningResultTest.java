@@ -27,16 +27,21 @@ public class WinningResultTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
-		"1,2,3,4,5,6:0:0:0:1",
-		"2,3,4,5,6,7:0:0:1:0",
-		"4,5,6,7,8,9:2:0:0:0",
-		"40,41,42,43,44,45:0:0:0:3"
+		"1,2,3,4,5,6		:7		:0:0:0:0:1",
+		"2,3,4,5,6,7		:1		:0:0:0:1:0",
+		"2,3,4,5,6,7		:45		:0:0:1:0:0",
+		"4,5,6,7,8,9		:45		:2:0:0:0:0",
+		"40,41,42,43,44,45	:1		:0:0:0:0:3"
 	}, delimiter = ':')
 	@DisplayName("당첨 결과 확인")
-	void 당첨_결과_확인(String text,
-			int fourth, int third, int second, int first) {
-		Lotto win = new Lotto(text);
-		WinningResult result = new WinningResult(win, lottos);
+	void 당첨_결과_확인(String lottoNumbers, int bonusNumber,
+			int fifth, int fourth, int third, int second, int first) {
+		Lotto winLotto = new Lotto(lottoNumbers);
+		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
+		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
+
+		WinningResult result = new WinningResult(winningNumber, lottos);
+		assertThat(result.dashboard().get(FIFTH_PRIZE)).isEqualTo(fifth);
 		assertThat(result.dashboard().get(FOURTH_PRIZE)).isEqualTo(fourth);
 		assertThat(result.dashboard().get(THIRD_PRIZE)).isEqualTo(third);
 		assertThat(result.dashboard().get(SECOND_PRIZE)).isEqualTo(second);
@@ -45,15 +50,18 @@ public class WinningResultTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
-		"5231:1,2,3,4,5,6:400000.00",
-		"5000:2,3,4,5,6,7:300.00",
-		"5000:4,5,6,7,8,9:2",
-		"5000:40,41,42,43,44,45:1200000.00"
+		"1,2,3,4,5,6		:7		:400000.00",
+		"2,3,4,5,6,7		:1		:6000.00",
+		"2,3,4,5,6,7		:45		:300.00",
+		"4,5,6,7,8,9		:45		:2",
+		"40,41,42,43,44,45	:1		:1200000.00"
 	}, delimiter = ':')
 	@DisplayName("당첨 수익률 확인")
-	void 당첨_수익률_확인(long money, String text, double expectedRatio) {
-		Lotto win = new Lotto(text);
-		WinningResult result = new WinningResult(win, lottos);
+	void 당첨_수익률_확인(String lottoNumbers, int bonusNumber, double expectedRatio) {
+		Lotto winLotto = new Lotto(lottoNumbers);
+		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
+		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
+		WinningResult result = new WinningResult(winningNumber, lottos);
 		assertThat(result.earningRate()).isEqualTo(expectedRatio);
 	}
 }

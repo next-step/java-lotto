@@ -36,10 +36,10 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public Winner winningCheck(Lotto winLotto) {
-		return Winner.valueOf(numbers.stream()
+	public long matchCount(Lotto winLotto) {
+		return numbers.stream()
 				.filter(winLotto.numbers::contains)
-				.count());
+				.count();
 	}
 
 	private static void validateNumbers(TreeSet<LottoNumber> numbers) {
