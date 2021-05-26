@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoWin {
-    final Map<LottoRank, Integer> lottoWin = new LinkedHashMap<>();
+    final Map<LottoRank, Integer> lottoWin = new EnumMap<>(LottoRank.class);
 
     public LottoWin() {
         Arrays.stream(LottoRank.values())
