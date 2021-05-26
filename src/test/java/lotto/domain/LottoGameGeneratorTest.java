@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumber.from;
+import static lotto.domain.LottoNumber.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("LottoGameGenerator 테스트")
@@ -34,9 +34,9 @@ class LottoGameGeneratorTest {
 
     static Stream<Arguments> provideSource_generate_정상() {
         return Stream.of(
-                Arguments.of(new LottoGame(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4), from(5), from(6))))),
-                Arguments.of(new LottoGame(new HashSet(Arrays.asList(from(11), from(12), from(13), from(14), from(15), from(16))))),
-                Arguments.of(new LottoGame(new HashSet(Arrays.asList(from(21), from(22), from(23), from(24), from(25), from(26)))))
+                Arguments.of(new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6))))),
+                Arguments.of(new LottoGame(new HashSet(Arrays.asList(valueOf(11), valueOf(12), valueOf(13), valueOf(14), valueOf(15), valueOf(16))))),
+                Arguments.of(new LottoGame(new HashSet(Arrays.asList(valueOf(21), valueOf(22), valueOf(23), valueOf(24), valueOf(25), valueOf(26)))))
         );
     }
 
@@ -45,11 +45,11 @@ class LottoGameGeneratorTest {
     void generate_mock() {
         // Given
         List<LottoGame> list = Arrays.asList(
-                new LottoGame(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4), from(5), from(6)))),
-                new LottoGame(new HashSet(Arrays.asList(from(10), from(11), from(12), from(13), from(14), from(15)))),
-                new LottoGame(new HashSet(Arrays.asList(from(20), from(21), from(22), from(23), from(24), from(25)))),
-                new LottoGame(new HashSet(Arrays.asList(from(30), from(31), from(32), from(33), from(34), from(35)))),
-                new LottoGame(new HashSet(Arrays.asList(from(40), from(41), from(42), from(43), from(44), from(45))))
+                new LottoGame(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
+                new LottoGame(new HashSet(Arrays.asList(valueOf(10), valueOf(11), valueOf(12), valueOf(13), valueOf(14), valueOf(15)))),
+                new LottoGame(new HashSet(Arrays.asList(valueOf(20), valueOf(21), valueOf(22), valueOf(23), valueOf(24), valueOf(25)))),
+                new LottoGame(new HashSet(Arrays.asList(valueOf(30), valueOf(31), valueOf(32), valueOf(33), valueOf(34), valueOf(35)))),
+                new LottoGame(new HashSet(Arrays.asList(valueOf(40), valueOf(41), valueOf(42), valueOf(43), valueOf(44), valueOf(45))))
         );
 
         LottoGameGenerator lottoGameGenerator = new LottoGameGenerator() {

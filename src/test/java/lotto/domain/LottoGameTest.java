@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,9 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static lotto.domain.LottoNumber.from;
+import static lotto.domain.LottoNumber.valueOf;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("LottoGame 테스트")
 class LottoGameTest {
@@ -27,9 +29,9 @@ class LottoGameTest {
 
     static Stream<Arguments> provideSource_new_정상() {
         return Stream.of(
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4), from(5), from(6)))),
-                Arguments.of(new HashSet(Arrays.asList(from(11), from(12), from(13), from(14), from(15), from(16)))),
-                Arguments.of(new HashSet(Arrays.asList(from(21), from(22), from(23), from(24), from(25), from(26))))
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(11), valueOf(12), valueOf(13), valueOf(14), valueOf(15), valueOf(16)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(21), valueOf(22), valueOf(23), valueOf(24), valueOf(25), valueOf(26))))
         );
     }
 
@@ -44,13 +46,22 @@ class LottoGameTest {
 
     static Stream<Arguments> provideSource_new_예외() {
         return Stream.of(
-                Arguments.of(new HashSet(Arrays.asList(from(1)))),
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2)))),
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2), from(3)))),
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4)))),
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4), from(5)))),
-                Arguments.of(new HashSet(Arrays.asList(from(1), from(2), from(3), from(4), from(5), from(6), from(7))))
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5)))),
+                Arguments.of(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6), valueOf(7))))
         );
     }
 
+    @RepeatedTest(100)
+    @DisplayName("createAuto_정상")
+    void createAuto_정상() {
+        // When
+        LottoGame lottoGame = LottoGame.createAuto();
+
+        // Then
+        assertEquals(LottoGame.LOTTO_NUMBER_COUNT, lottoGame.size());
+    }
 }

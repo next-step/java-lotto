@@ -66,7 +66,7 @@ public class WinningLottoNumber {
 
     private void parseValues(String playerInput) {
         this.values = Arrays.stream(playerInput.split(COMMA))
-                .map(each -> from(parseInt(each)))
+                .map(each -> valueOf(parseInt(each)))
                 .collect(Collectors.toList());
     }
 
