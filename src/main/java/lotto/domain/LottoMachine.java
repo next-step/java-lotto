@@ -22,6 +22,10 @@ public class LottoMachine {
         return new LottoMachine(generator.generate(money));
     }
 
+    public static LottoMachine of(LottoTicketCount autoLottoTicketCount, List<String> manualNumbers) {
+        return null;
+    }
+
     public static LottoMachine of(List<Lotto> lottos) {
         return new LottoMachine(lottos);
     }
