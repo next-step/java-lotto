@@ -32,11 +32,11 @@ class LottoNumbersFactoryTest {
 	@DisplayName("당첨 로또 번호를 가지고 Summary하는 기능 테스트")
 	void summaryTest() {
 		// given
-		LottoNumbers winnerLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-		LottoNumber bonusNumber = new LottoNumber(7);
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+																		  new LottoNumber(7));
 
 		// when
-		LottoResult lottoResult = lottoNumbersFactory.summary(winnerLottoNumbers, bonusNumber);
+		LottoResult lottoResult = lottoNumbersFactory.summary(winningLottoNumbers);
 
 		// then
 		assertThat(lottoResult).isNotNull();

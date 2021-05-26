@@ -36,9 +36,9 @@ public final class LottoNumbers {
 					  .collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	public LottoRewardType result(final LottoNumbers winningLottoNumber, final LottoNumber bonusNumber) {
-		return LottoRewardType.of(matches(winningLottoNumber),
-								  contains(bonusNumber));
+	public LottoRewardType result(final WinningLottoNumbers winningLottoNumbers) {
+		return LottoRewardType.of(matches(winningLottoNumbers.winningLottoNumbers()),
+								  contains(winningLottoNumbers.bonusNumber()));
 	}
 
 

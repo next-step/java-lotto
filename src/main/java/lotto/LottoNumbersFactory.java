@@ -6,7 +6,7 @@ import java.util.List;
 
 public final class LottoNumbersFactory {
 
-	private List<LottoNumbers> lottoList;
+	private final List<LottoNumbers> lottoList;
 
 	public LottoNumbersFactory() {
 		this(new ArrayList<>());
@@ -20,10 +20,10 @@ public final class LottoNumbersFactory {
 		this.lottoList.add(lottoNumbers);
 	}
 
-	public LottoResult summary(final LottoNumbers winningLottoNumbers, final LottoNumber bonusNumber) {
+	public LottoResult summary(final WinningLottoNumbers winningLottoNumbers) {
 		LottoResult result = new LottoResult();
 		lottoList.stream()
-				 .map(lottoNumbers -> lottoNumbers.result(winningLottoNumbers, bonusNumber))
+				 .map(lottoNumbers -> lottoNumbers.result(winningLottoNumbers))
 				 .forEach(result::add);
 		return result;
 	}
