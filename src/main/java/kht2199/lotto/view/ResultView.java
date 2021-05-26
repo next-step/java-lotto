@@ -22,6 +22,10 @@ public class ResultView {
 		print(e.getMessage());
 	}
 
+	public void printInsertAssets() {
+		print("구입금액을 입력해 주세요.");
+	}
+
 	public void printPurchased(LottoList list) {
 		print(list.size() + "개를 구매했습니다");
 	}

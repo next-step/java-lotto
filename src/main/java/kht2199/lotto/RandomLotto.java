@@ -1,7 +1,5 @@
 package kht2199.lotto;
 
-import static java.lang.System.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class RandomLotto {
 	 * @throws AssetsNotEnoughException 예산 부족.
 	 */
 	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException {
-		out.println("구입금액을 입력해 주세요.");
+		output.printInsertAssets();
 		assets = acceptAssets();
 		int countsOfLotto = calculateLottoCount(assets, LOTTO_PRICE);
 		purchase(countsOfLotto);

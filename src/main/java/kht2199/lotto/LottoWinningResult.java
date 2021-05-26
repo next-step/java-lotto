@@ -54,7 +54,7 @@ public class LottoWinningResult {
 	/**
 	 * 2-depth 를 지키기 위해 만들어진 메서드.
 	 */
-	private int ifContainsThenOneElseZero(List<Integer> winningNumbers, Integer number) {
+	protected int ifContainsThenOneElseZero(List<Integer> winningNumbers, Integer number) {
 		return winningNumbers.contains(number) ? 1 : 0;
 	}
 }
