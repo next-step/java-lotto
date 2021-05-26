@@ -1,5 +1,6 @@
 package lotto.controller.dto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoPurchaseRequest {
@@ -7,6 +8,12 @@ public class LottoPurchaseRequest {
     private final int purchaseAmount;
     private final int manualLottoTicketCount;
     private final List<LottoNumbersDto> manualLottoNumbers;
+
+    public LottoPurchaseRequest(int purchaseAmount, int manualLottoTicketCount) {
+        this.purchaseAmount = purchaseAmount;
+        this.manualLottoTicketCount = manualLottoTicketCount;
+        this.manualLottoNumbers = Collections.emptyList();
+    }
 
     public LottoPurchaseRequest(int purchaseAmount, int manualLottoTicketCount, List<LottoNumbersDto> manualLottoNumbers) {
         this.purchaseAmount = purchaseAmount;
