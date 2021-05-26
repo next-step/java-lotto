@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.WinningLottoNonPositiveNumberException;
+import lotto.exception.WinningLottoNumberCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,15 +30,23 @@ class WinningLottoNumberTest {
         assertDoesNotThrow(() -> new WinningLottoNumber(input));
     }
 
-    @DisplayName("new_예외")
+    @DisplayName("new_예외_음수")
     @ParameterizedTest
-    @CsvSource({"ㄱ,ㄴ,ㄷ",
-            "-1,-3,2,3,5,6",
-            "21,23,37,42,15,-1",
-            "31,22,43,44",})
-    void new_예외(String input) {
+    @CsvSource({"-1,-3,2,3,5,6",
+            "21,23,37,42,15,-1"})
+    void new_예외_음수(String input) {
         // When, Then
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(WinningLottoNonPositiveNumberException.class)
+                .isThrownBy(() -> new WinningLottoNumber(input));
+    }
+
+    @DisplayName("new_예외_부족한_번호_수")
+    @ParameterizedTest
+    @CsvSource({"21,23,37,42",
+            "31,22,43,44"})
+    void new_예외_부족한_번호_수(String input) {
+        // When, Then
+        assertThatExceptionOfType(WinningLottoNumberCountException.class)
                 .isThrownBy(() -> new WinningLottoNumber(input));
     }
 

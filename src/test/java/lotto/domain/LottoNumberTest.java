@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberBoundaryException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -40,7 +41,7 @@ class LottoNumberTest {
     @DisplayName("valueOf_예외")
     void new_예외(int value) {
         // When, Then
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(IllegalLottoNumberBoundaryException.class)
                 .isThrownBy(() -> LottoNumber.valueOf(value));
     }
 

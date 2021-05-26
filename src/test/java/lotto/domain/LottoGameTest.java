@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,7 +41,7 @@ class LottoGameTest {
     @DisplayName("new_예외")
     void new_예외(Set<LottoNumber> values) {
         // When, Then
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(IllegalLottoNumberCountException.class)
                 .isThrownBy(() -> new LottoGame(values));
     }
 

@@ -1,15 +1,16 @@
 package lotto.domain;
 
-import java.util.Objects;
-import java.util.Set;
+import lotto.exception.IllegalLottoNumberCountException;
+
+import java.util.*;
 
 import static java.lang.String.format;
+import static java.util.Collections.shuffle;
+import static lotto.domain.LottoNumber.*;
 
 public class LottoGame {
+    public static final List<LottoNumber> RANDOM_LOTTO_NUMBERS = initializeAllLottoNumbers();
     public static final int LOTTO_NUMBER_COUNT = 6;
-    private static final String ILLEGAL_ARGUMENT_FORMAT = "한 게임에 로또 번호는 %d개 입니다.";
-    private static final String ILLEGAL_ARGUMENT_MESSAGE
-            = format(ILLEGAL_ARGUMENT_FORMAT, LOTTO_NUMBER_COUNT);
 
     private Set<LottoNumber> values;
 
@@ -44,9 +45,30 @@ public class LottoGame {
         return values.toString();
     }
 
+    public static LottoGame createAuto() {
+        shuffle(RANDOM_LOTTO_NUMBERS);
+        Set<LottoNumber> values = new HashSet<>();
+
+        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
+            values.add(RANDOM_LOTTO_NUMBERS.get(i));
+        }
+
+        return new LottoGame(values);
+    }
+
     private void validate(Set<LottoNumber> values) {
         if (values.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
+            throw new IllegalLottoNumberCountException();
         }
+    }
+
+    private static List<LottoNumber> initializeAllLottoNumbers() {
+        List<LottoNumber> result = new ArrayList<>();
+
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            result.add(valueOf(i));
+        }
+
+        return result;
     }
 }
