@@ -69,4 +69,17 @@ public class WinResultTest {
 
         assertThat(winResult.result(LottoWinner.SECOND)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("총 수익률 계산")
+    void calculateTotalEarningRate() {
+        List<LottoResult> lottoResults = new ArrayList<>();
+        List<Integer> winnerNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        String lottoString = "1,2,3,4,5,11:13,14,15,11,12,16:45,23,11,12,22,33";
+        for (String numbers : lottoString.split(":")) {
+            lottoResults.add(new LottoResult(new Lotto(numbers), winnerNumbers));
+        }
+        WinResult winResult = new WinResult(lottoResults);
+        assertThat(winResult.totalEarningRate()).isEqualTo(500.00);
+    }
 }

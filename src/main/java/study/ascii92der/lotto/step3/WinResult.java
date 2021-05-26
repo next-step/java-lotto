@@ -6,7 +6,10 @@ import java.util.Map;
 
 public class WinResult {
 
+    public static final double RETURN_DIGITS_VALUE = 100.0;
+    public static final int LOTTO_PRICE = 1000;
     private Map<LottoWinner, Integer> result;
+    private int buyLottoCount;
 
     public WinResult() {
         result = new HashMap<>();
@@ -20,6 +23,7 @@ public class WinResult {
         for (LottoResult lottoResult : lottoResults) {
             saveLottoResult(lottoResult);
         }
+        buyLottoCount = lottoResults.size();
     }
 
     private void saveLottoResult(LottoResult lottoResult) {
@@ -42,4 +46,11 @@ public class WinResult {
         return result.get(lottoWinner);
     }
 
+    public double totalEarningRate() {
+        double totalEarnWinnerPrice = 0;
+        for (LottoWinner lottoWinner : LottoWinner.values()) {
+            totalEarnWinnerPrice += (lottoWinner.winnerPrice * result.get(lottoWinner));
+        }
+        return Math.floor((totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE)) * RETURN_DIGITS_VALUE) / RETURN_DIGITS_VALUE;
+    }
 }
