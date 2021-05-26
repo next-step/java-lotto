@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RandomNumberGenerateStrategyTest {
+class NumberGenerateStrategyTest {
 
   @DisplayName("새로운 로또 숫자들을 반환한다.")
   @Test
   void test() {
     //given
-    RandomNumberGenerateStrategy givenStrategy = new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
+    NumberGenerateStrategy givenStrategy = new TestNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
     assertThat(givenStrategy.generateNewNumbers()).isEqualTo(new LottoNumbers(TestUtil.getOneToSixLottoNumbers()));
   }
 }

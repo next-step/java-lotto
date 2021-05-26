@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.RandomNumberGenerateStrategy;
+import lotto.domain.strategy.NumberGenerateStrategy;
 import lotto.dto.OrderSheet;
 
 import java.util.List;
@@ -13,11 +13,11 @@ public class GameGenerator {
 
 
   private final OrderSheet orderSheet;
-  private final RandomNumberGenerateStrategy randomNumberGenerateStrategy;
+  private final NumberGenerateStrategy numberGenerateStrategy;
 
-  public GameGenerator(OrderSheet orderSheet, RandomNumberGenerateStrategy randomNumberGenerateStrategy) {
+  public GameGenerator(OrderSheet orderSheet, NumberGenerateStrategy numberGenerateStrategy) {
     this.orderSheet = orderSheet;
-    this.randomNumberGenerateStrategy = randomNumberGenerateStrategy;
+    this.numberGenerateStrategy = numberGenerateStrategy;
   }
 
   private static long computeNumberOfGames(long purchasingAmount) {
@@ -59,6 +59,6 @@ public class GameGenerator {
   }
 
   private LottoGame createGameByRandomStrategy() {
-    return LottoGame.createAutoGame(randomNumberGenerateStrategy.generateNewNumbers());
+    return LottoGame.createAutoGame(numberGenerateStrategy.generateNewNumbers());
   }
 }

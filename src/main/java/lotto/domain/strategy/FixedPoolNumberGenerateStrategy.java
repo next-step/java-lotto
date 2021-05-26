@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class FixedPoolRandomNumberGenerateStrategy implements RandomNumberGenerateStrategy {
+public class FixedPoolNumberGenerateStrategy implements NumberGenerateStrategy {
 
   private static final List<LottoNumber> lottoNumberPool = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUM, LottoNumber.LOTTO_MAX_NUM)
       .mapToObj(LottoNumber::new)

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.TestRandomNumberGenerateStrategy;
+import lotto.domain.strategy.TestNumberGenerateStrategy;
 import lotto.dto.OrderSheet;
 import lotto.util.TestUtil;
 import org.assertj.core.util.Lists;
@@ -25,8 +25,8 @@ class GameGeneratorTest {
   @BeforeEach
   void setUp() {
     List<List<Integer>> manualNumbers = Lists.list(Lists.newArrayList(1, 2, 3, 4, 5, 6), Lists.newArrayList(1, 2, 3, 4, 5, 6));
-    oneGameGenerator = new GameGenerator(OrderSheet.of(1000L, Collections.emptyList()), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
-    twoGameGenerator = new GameGenerator(OrderSheet.of(2000L, manualNumbers), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
+    oneGameGenerator = new GameGenerator(OrderSheet.of(1000L, Collections.emptyList()), new TestNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
+    twoGameGenerator = new GameGenerator(OrderSheet.of(2000L, manualNumbers), new TestNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
   }
 
   @DisplayName("지불 금액으로 살 수 있는 만큼의 로또를 생성한다.")

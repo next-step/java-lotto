@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.strategy.RandomNumberGenerateStrategy;
-import lotto.domain.strategy.TestRandomNumberGenerateStrategy;
+import lotto.domain.strategy.NumberGenerateStrategy;
+import lotto.domain.strategy.TestNumberGenerateStrategy;
 import lotto.dto.AnalysisSheet;
 import lotto.dto.OrderSheet;
 import lotto.dto.TotalOrderedLottoGameDescription;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,8 +24,8 @@ class LottoMachineTest {
   void setUp() {
     List<List<Integer>> manualNumbers = Lists.list(Lists.newArrayList(1, 2, 3, 4, 5, 6));
     OrderSheet givenOrderSheet = OrderSheet.of(2000L, manualNumbers);
-    RandomNumberGenerateStrategy givenRandomNumberGenerateStrategy = new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
-    GameGenerator givenGameGenerator = new GameGenerator(givenOrderSheet, givenRandomNumberGenerateStrategy);
+    NumberGenerateStrategy givenNumberGenerateStrategy = new TestNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
+    GameGenerator givenGameGenerator = new GameGenerator(givenOrderSheet, givenNumberGenerateStrategy);
     givenLottoMachine = new LottoMachine(givenGameGenerator);
   }
 
