@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class LottoNumbersFactory {
@@ -32,6 +33,6 @@ public final class LottoNumbersFactory {
 	}
 
 	public List<LottoNumbers> lottoList() {
-		return this.lottoList;
+		return Collections.unmodifiableList(this.lottoList);
 	}
 }

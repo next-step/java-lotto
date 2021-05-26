@@ -39,10 +39,6 @@ public final class LottoResult {
 			  .forEach(type -> lottoRewardMap.putIfAbsent(type, 0));
 	}
 
-	public Map<LottoRewardType, Integer> lottoRewardMap() {
-		return this.lottoRewardMap;
-	}
-
 	public BigDecimal calculateRevenue(final LottoMoney lottoMoney) {
 		if (lottoMoney == null) {
 			return DEFAULT_REVENUE_VALUE;
@@ -58,5 +54,9 @@ public final class LottoResult {
 							 .filter(entry -> entry.getKey() != LottoRewardType.NONE)
 							 .map(entry -> entry.getKey().reward() * entry.getValue())
 							 .reduce(0, Integer::sum);
+	}
+
+	public Map<LottoRewardType, Integer> lottoRewardMap() {
+		return this.lottoRewardMap;
 	}
 }
