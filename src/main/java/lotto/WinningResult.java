@@ -9,19 +9,19 @@ import java.util.Map;
 public class WinningResult {
 
 	private final int buyCount;
-	private final Map<Winner, Integer> dashboard;
+	private final Map<Rank, Integer> dashboard;
 
 	public WinningResult(WinningNumber winningNumber, Lottos lottos) {
 		buyCount = lottos.count();
 		dashboard = defaultDashboard();
 
 		lottos.values().forEach(lotto -> {
-			Winner winner = winningNumber.resultOf(lotto);
-			dashboard.computeIfPresent(winner, (k, v) -> ++v);
+			Rank rank = winningNumber.resultOf(lotto);
+			dashboard.computeIfPresent(rank, (k, v) -> ++v);
 		});
 	}
 
-	public Map<Winner, Integer> dashboard() {
+	public Map<Rank, Integer> dashboard() {
 		return dashboard;
 	}
 
@@ -37,10 +37,10 @@ public class WinningResult {
 			.reduce(0L, Long::sum);
 	}
 
-	private static Map<Winner, Integer> defaultDashboard() {
-		Map<Winner, Integer> dashboard = new HashMap<>();
+	private static Map<Rank, Integer> defaultDashboard() {
+		Map<Rank, Integer> dashboard = new HashMap<>();
 
-		Arrays.stream(Winner.values()).forEach(winner -> {
+		Arrays.stream(Rank.values()).forEach(winner -> {
 			dashboard.put(winner, 0);
 		});
 

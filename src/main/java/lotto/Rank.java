@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Arrays;
 
-public enum Winner {
+public enum Rank {
 	FIRST_PRIZE(6, 2_000_000_000L),
 	SECOND_PRIZE(5, 30_000_000L),
 	THIRD_PRIZE(5, 1_500_000L),
@@ -15,12 +15,12 @@ public enum Winner {
 	private final int count;
 	private final long award;
 
-	Winner(int count, long award) {
+	Rank(int count, long award) {
 		this.count = count;
 		this.award = award;
 	}
 
-	public static Winner valueOf(long value, boolean matchBonus) {
+	public static Rank valueOf(long value, boolean matchBonus) {
 		validateWinnerValue(value);
 
 		if (value == SECOND_OR_THIRD) {

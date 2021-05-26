@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Winner.*;
+import static lotto.Rank.*;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		Map<Winner, Integer> dashboard = result.dashboard();
+		Map<Rank, Integer> dashboard = result.dashboard();
 
 		System.out.printf(
 			"3개 일치 (%d원)- %d개\n"

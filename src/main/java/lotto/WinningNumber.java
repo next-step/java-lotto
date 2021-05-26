@@ -12,8 +12,8 @@ public class WinningNumber {
 		this.bonusBall = bonusBall;
 	}
 
-	public Winner resultOf(Lotto lotto) {
-		return Winner.valueOf(
+	public Rank resultOf(Lotto lotto) {
+		return Rank.valueOf(
 			lotto.matchCount(winLotto),
 			lotto.contains(bonusBall));
 	}

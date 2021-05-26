@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Winner.*;
+import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
