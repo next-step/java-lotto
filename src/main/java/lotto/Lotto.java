@@ -15,10 +15,13 @@ public class Lotto {
 
 	private static final String DELIMITER = "\\,";
 
-	private static final List<LottoNumber> lottoNumberPool
-		= IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
+	private static final List<LottoNumber> LOTTO_NUMBER_POOL;
+
+	static {
+		LOTTO_NUMBER_POOL = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
 			.mapToObj(LottoNumber::valueOf)
 			.collect(toList());
+	}
 
 	private final TreeSet<LottoNumber> numbers;
 
@@ -36,12 +39,6 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public long matchCount(Lotto winLotto) {
-		return numbers.stream()
-				.filter(winLotto.numbers::contains)
-				.count();
-	}
-
 	private static void validateNumbers(TreeSet<LottoNumber> numbers) {
 		if (numbers.size() != REQUIRED_COUNT) {
 			throw new InvalidNumberSetException("Lotto requires only 6 unique numbers.");
@@ -49,8 +46,8 @@ public class Lotto {
 	}
 
 	private static TreeSet<LottoNumber> randomNumbers() {
-		Collections.shuffle(lottoNumberPool);
-		return lottoNumberPool.stream()
+		Collections.shuffle(LOTTO_NUMBER_POOL);
+		return LOTTO_NUMBER_POOL.stream()
 			.limit(REQUIRED_COUNT)
 			.collect(toCollection(TreeSet::new));
 	}
@@ -63,12 +60,18 @@ public class Lotto {
 			.collect(toCollection(TreeSet::new));
 	}
 
-	@Override
-	public String toString() {
-		return numbers.toString();
+	public long matchCount(Lotto winLotto) {
+		return numbers.stream()
+				.filter(winLotto.numbers::contains)
+				.count();
 	}
 
 	public boolean contains(LottoNumber number) {
 		return numbers.contains(number);
+	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
 	}
 }

@@ -12,15 +12,15 @@ public class WinningNumber {
 		this.bonusBall = bonusBall;
 	}
 
+	private static void validateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
+		if (winLotto.contains(bonusNumber)) {
+			throw new InvalidNumberSetException("Bonus number must not be duplicate with the winning number.");
+		}
+	}
+
 	public Rank resultOf(Lotto lotto) {
 		return Rank.valueOf(
 			lotto.matchCount(winLotto),
 			lotto.contains(bonusBall));
-	}
-
-	private void validateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
-		if (winLotto.contains(bonusNumber)) {
-			throw new InvalidNumberSetException("Bonus number must not be duplicate with the winning number.");
-		}
 	}
 }

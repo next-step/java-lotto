@@ -33,13 +33,13 @@ public enum Rank {
 			.orElse(NONE);
 	}
 
-	public long award() {
-		return winningAward;
-	}
-
 	private static void validateWinnerValue(long countOfMatch) {
 		if (countOfMatch < 0L || 6L < countOfMatch) {
 			throw new IllegalArgumentException("Winners only have values between 0 and 6.");
 		}
+	}
+
+	public long award() {
+		return winningAward;
 	}
 }
