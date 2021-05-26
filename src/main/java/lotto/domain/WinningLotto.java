@@ -6,12 +6,17 @@ public class WinningLotto {
 	private final Lotto winningLotto;
 	private final LottoNumber bonusNumber;
 
-	public WinningLotto(Lotto winningLotto, int bonusNumber) {
-		if (winningLotto.contains(new LottoNumber(bonusNumber))) {
+	public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+		if (winningLotto.contains(bonusNumber)) {
 			throw new IllegalArgumentException(MESSAGE_INVALID_BONUS_NUMBER);
 		}
 		this.winningLotto = winningLotto;
-		this.bonusNumber = new LottoNumber(bonusNumber);
+		this.bonusNumber = bonusNumber;
+
+	}
+
+	public WinningLotto(Lotto winningLotto, int bonusNumber) {
+		this(winningLotto, new LottoNumber(bonusNumber));
 	}
 
 	public boolean contains(LottoNumber lottoNumber) {

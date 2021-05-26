@@ -14,7 +14,7 @@ public class PurchaseAmountTest {
 	@Test
 	@DisplayName("구입금액이 최소금액 미만인 경우 예외발생")
 	void createWrongPuchaseAmount() {
-		Assertions.assertThatThrownBy(()->{
+		Assertions.assertThatThrownBy(() -> {
 			PurchaseAmount purchaseAmount = new PurchaseAmount(999);
 		}).isInstanceOf(IllegalArgumentException.class);
 	}
@@ -26,6 +26,13 @@ public class PurchaseAmountTest {
 		PurchaseAmount purchaseAmount = new PurchaseAmount(money);
 		int lottoCount = purchaseAmount.findNumberOfAvailablePurchases();
 		assertThat(lottoCount).isEqualTo(count);
+	}
+
+	@ParameterizedTest
+	@DisplayName("입력값 숫자 여부 테스트")
+	@CsvSource(value = {"1:true", "1234567890:true", "abcdefg:false", "123a:false", "123.:false", "123.0:false", "123.a:false", "123.0123:false"}, delimiter = ':')
+	void isNumeric(String strNumber, boolean isNumber) {
+		assertThat(PurchaseAmount.isNumeric(strNumber)).isEqualTo(isNumber);
 	}
 
 }

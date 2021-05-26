@@ -5,19 +5,44 @@ import java.util.Objects;
 public class LottoNumber {
 	public static final int MIN = 1;
 	public static final int MAX = 45;
-	public static final String MESSAGE_LOTTO_NUMBER_RANGE = "로또번호는 %d~%d 이내의 숫자여야 합니다.";
+	public static final String MESSAGE_INVALID_NUMBER = "로또번호는 숫자(정수)만 입력가능합니다.";
+	public static final String MESSAGE_INVALID_RANGE = "로또번호는 %d~%d 이내의 숫자여야 합니다.";
 
 	private final int number;
 
 	public LottoNumber(int number) {
-		validationNumber(number);
+		validationRange(number);
 		this.number = number;
 	}
 
-	private void validationNumber(int number) {
-		if (number < MIN || number > MAX) {
-			throw new IllegalArgumentException(String.format(MESSAGE_LOTTO_NUMBER_RANGE, MIN, MAX));
+	public LottoNumber(String number) {
+		validationNumber(number);
+		validationRange(number);
+		this.number = Integer.parseInt(number);
+	}
+
+	private void validationNumber(String number) {
+		if (!isNumeric(number)) {
+			throw new IllegalArgumentException(MESSAGE_INVALID_NUMBER);
 		}
+	}
+
+	private void validationRange(String number) {
+		validationRange(Integer.parseInt(number));
+	}
+
+	private void validationRange(int number) {
+		if (number < MIN || number > MAX) {
+			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_RANGE, MIN, MAX));
+		}
+	}
+
+	protected static boolean isNumeric(String str) {
+		if (str == null || str.trim().length() == 0) {
+			return false;
+		}
+		String regex = "[0-9]+";
+		return str.matches(regex);
 	}
 
 	@Override
