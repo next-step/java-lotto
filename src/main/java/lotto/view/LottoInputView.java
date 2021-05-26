@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,10 +41,10 @@ public class LottoInputView {
 
 	public static List<String> inputManualLottoNumber(int manualLottoCount) {
 		input = new Scanner(System.in);
-		if (manualLottoCount == 0) {
-			return Collections.EMPTY_LIST;
-		}
 		List<String> manualLottoNumbers = new ArrayList<>();
+		if (manualLottoCount == 0) {
+			return manualLottoNumbers;
+		}
 		System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
 		for (int count = 0; count < manualLottoCount; count++) {
 			manualLottoNumbers.add(input.nextLine());
