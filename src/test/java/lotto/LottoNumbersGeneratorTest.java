@@ -24,7 +24,7 @@ public class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("로또 자동 생성기 테스트")
     public void 자동_로또_생성(){
-        List<Number> numbers = lottoNumbersGenerator.numberGenerator();
+        List<Number> numbers = lottoNumbersGenerator.generateNumber();
         assertThat(numbers.size()).isEqualTo(6);
         for (Number number : numbers) {
             assertThat(number).isBetween(new Number(1), new Number(45));
@@ -34,7 +34,7 @@ public class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("로또 정렬 기능 테스트")
     public void 로또_정렬_확인(){
-        List<Number> numbers = lottoNumbersGenerator.numberGenerator();
+        List<Number> numbers = lottoNumbersGenerator.generateNumber();
         lottoNumbersGenerator.sortNumbers(numbers);
         Number number;
         Number nextNumber;

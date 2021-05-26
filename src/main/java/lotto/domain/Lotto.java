@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.generator.AutomaticLottoNumbersGenerator;
 import lotto.domain.generator.LottoNumbersGenerator;
 import lotto.domain.entity.Number;
 
@@ -16,8 +15,7 @@ public final class Lotto {
     }
 
     public Lotto(LottoNumbersGenerator lottoNumbersGenerator) {
-        lottoNumbersGenerator = new AutomaticLottoNumbersGenerator();
-        lottoNumbers.addAll(lottoNumbersGenerator.numberGenerator());
+        lottoNumbers.addAll(lottoNumbersGenerator.generateNumber());
         checkValid();
     }
 
@@ -55,10 +53,10 @@ public final class Lotto {
         return numbers.substring(0, numbers.length() - 1);
     }
 
-    public int confirmWinning(Lotto winningLotto) {
+    public int confirmWinning(Lotto purchased) {
         int count = 0;
-        for (int i = 0; i < winningLotto.size(); i++) {
-            count = lottoNumbers.contains(winningLotto.get(i)) ? count + 1 : count;
+        for (int i = 0; i < purchased.size(); i++) {
+            count = lottoNumbers.contains(purchased.get(i)) ? count + 1 : count;
         }
         return count;
     }

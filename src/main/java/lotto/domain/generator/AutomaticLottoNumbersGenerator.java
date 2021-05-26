@@ -9,7 +9,7 @@ import java.util.List;
 public final class AutomaticLottoNumbersGenerator implements LottoNumbersGenerator {
 
     @Override
-    public List<Number> numberGenerator() {
+    public List<Number> generateNumber() {
         List<Number> numbers = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             numbers.add(new Number(i));

@@ -9,7 +9,7 @@ public interface LottoNumbersGenerator {
     int MAX_NUMBER = 45;
     int FULL_NUMBER_SIZE = 6;
 
-    List<Number> numberGenerator();
+    List<Number> generateNumber();
 
     void sortNumbers(List<Number> lottoNumbers);
 
