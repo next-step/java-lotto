@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exceptions.DuplicationNotAllowedException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +18,9 @@ public class WinningNumber {
 	}
 
 	public static WinningNumber of(List<Integer> winningNumber, Integer bonusNumber) {
+		if (winningNumber.contains(bonusNumber)) {
+			throw new DuplicationNotAllowedException();
+		}
 		return new WinningNumber(winningNumber, bonusNumber);
 	}
 

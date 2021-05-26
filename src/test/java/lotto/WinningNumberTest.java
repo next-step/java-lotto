@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumberTest {
 	@Test
@@ -18,5 +19,14 @@ class WinningNumberTest {
 		WinningNumber winningNumber = WinningNumber.of(winningNumbers, bonusNumber);
 		LottoPrizeType prizeType = winningNumber.checkWinning(lottoNumbers);
 		assertThat(prizeType).isEqualTo(LottoPrizeType.SECOND);
+	}
+
+	@Test
+	@DisplayName("보너스 번호가 이미 로또번호에 존재하면 익셉션을 발생한다")
+	void duplicationNotAllowedTest() {
+		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+		int bonusNumber = 7;
+		assertThatThrownBy(() -> WinningNumber.of(lottoNumbers, bonusNumber))
+				.isInstanceOf(RuntimeException.class);
 	}
 }
