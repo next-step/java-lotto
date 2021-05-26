@@ -28,7 +28,7 @@ public class LottoTicketGenerator implements TicketGenerator {
     private List<LottoNumber> createNumberPool() {
         List<LottoNumber> pool = new ArrayList<>();
         for (int num = MIN_VALUE; num <= MAX_VALUE; num++) {
-            pool.add(new LottoNumber(num));
+            pool.add(LottoNumber.of(num));
         }
         return pool;
     }

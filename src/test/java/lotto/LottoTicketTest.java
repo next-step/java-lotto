@@ -19,9 +19,9 @@ public class LottoTicketTest {
     void check_match_result() {
         //Given
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
-                new LottoNumber(13), new LottoNumber(14),
-                new LottoNumber(17), new LottoNumber(18)
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
+                LottoNumber.of(13),LottoNumber.of(14),
+                LottoNumber.of(17),LottoNumber.of(18)
         );
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
@@ -52,10 +52,9 @@ public class LottoTicketTest {
     @Test
     void throw_exception_when_numbers_not_six() {
         //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
-                new LottoNumber(13), new LottoNumber(14),
-                new LottoNumber(17), new LottoNumber(18),
-                new LottoNumber(20)
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
+                LottoNumber.of(13),LottoNumber.of(14),
+                LottoNumber.of(17),LottoNumber.of(18), LottoNumber.of(20)
         );
 
         //When + Then
@@ -67,9 +66,9 @@ public class LottoTicketTest {
     @Test
     void throw_exception_when_numbers_duplicated() {
         //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
-                new LottoNumber(13), new LottoNumber(14),
-                new LottoNumber(17), new LottoNumber(17)
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
+                LottoNumber.of(13),LottoNumber.of(14),
+                LottoNumber.of(17),LottoNumber.of(17)
         );
 
         //When + Then
@@ -81,10 +80,9 @@ public class LottoTicketTest {
     @Test
     void return_right_status_after_matching_without_bonus() {
         //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
-                new LottoNumber(13), new LottoNumber(14),
-                new LottoNumber(15), new LottoNumber(17)
-        );
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
+                LottoNumber.of(13),LottoNumber.of(14),
+                LottoNumber.of(15),LottoNumber.of(17));
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
@@ -98,10 +96,9 @@ public class LottoTicketTest {
     @Test
     void return_right_status_after_matching_with_bonus() {
         //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
-                new LottoNumber(13), new LottoNumber(14),
-                new LottoNumber(15), new LottoNumber(17)
-        );
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
+                LottoNumber.of(13),LottoNumber.of(14),
+                LottoNumber.of(15),LottoNumber.of(17));
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);

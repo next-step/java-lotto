@@ -17,7 +17,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     void throw_exception_when_out_of_range(int input) {
         //Given+When+Then
-        assertThatThrownBy(() -> new LottoNumber(input))
+        assertThatThrownBy(() -> LottoNumber.of(input))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -25,8 +25,8 @@ public class LottoNumberTest {
     @Test
     void equals_true_when_same_number() {
         //Given
-        LottoNumber lottoNumber1 = new LottoNumber(3);
-        LottoNumber lottoNumber2 = new LottoNumber(3);
+        LottoNumber lottoNumber1 = LottoNumber.of(3);
+        LottoNumber lottoNumber2 = LottoNumber.of(3);
 
         //When + Then
         assertThat(lottoNumber1.equals(lottoNumber2)).isTrue();
@@ -36,10 +36,23 @@ public class LottoNumberTest {
     @Test
     void equals_false_when_different_number() {
         //Given
-        LottoNumber lottoNumber1 = new LottoNumber(3);
-        LottoNumber lottoNumber2 = new LottoNumber(45);
+        LottoNumber lottoNumber1 = LottoNumber.of(3);
+        LottoNumber lottoNumber2 = LottoNumber.of(45);
 
         //When + Then
         assertThat(lottoNumber1.equals(lottoNumber2)).isFalse();
+    }
+
+    @DisplayName("로또 번호 생성")
+    @Test
+    void create(){
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(LottoNumber.of(1)).isEqualTo(lottoNumber);
+    }
+
+    @DisplayName("동일 로또 번호 주소값 비교")
+    @Test
+    void check_static(){
+        assertThat(LottoNumber.of(1)==LottoNumber.of(1)).isTrue();
     }
 }

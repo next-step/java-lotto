@@ -22,8 +22,8 @@ public class LottoResultTest {
     @BeforeEach
     void setUp() {
         //Given
-        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
         tickets = new ArrayList<>();
         tickets.add(new LottoTicket(numbers));
         winningNumbersInput = Arrays.asList(1, 2, 3, 4, 5, 18);
