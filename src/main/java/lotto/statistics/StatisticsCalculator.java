@@ -8,12 +8,14 @@ import lotto.store.Ticket;
 
 public class StatisticsCalculator {
 
-    private static final int WINNING_TYPE_SIZE = 4;
+    private static final int WINNING_TYPE_SIZE = 5;
     private static final String PROFIT_MESSAGE = "이익";
     private static final String BREAK_EVENT_MESSAGE = "본전";
     private static final String LOSS_MESSAGE = "손해";
     private static final int MINIMUM_MATCH = 3;
     private static final int MAXIMUM_MATCH = 6;
+
+    private static final int LOAD_FACTOR_NEVER_RE_HASHING = 1;
 
     private final Ticket ticket;
     private final LottoNumbers winnerLotto;
@@ -22,7 +24,7 @@ public class StatisticsCalculator {
     public StatisticsCalculator(Ticket ticket, LottoNumbers winnerLotto) {
         this.ticket = ticket;
         this.winnerLotto = winnerLotto;
-        this.statisticByMatchCount = new HashMap<>(WINNING_TYPE_SIZE);
+        this.statisticByMatchCount = new HashMap<>(WINNING_TYPE_SIZE, LOAD_FACTOR_NEVER_RE_HASHING);
         init();
     }
 
