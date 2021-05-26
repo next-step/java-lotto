@@ -12,7 +12,6 @@ import java.util.List;
 
 public class LottoAppController {
     public void run() {
-
         LottoMoney purchaseAmount = askPurchaseAmount();
         Lottos manual = askManualLottosWith(purchaseAmount);
         Lottos auto = LottoMachine.buyWith(purchaseAmount);

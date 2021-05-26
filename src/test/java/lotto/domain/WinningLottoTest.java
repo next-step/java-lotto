@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static lotto.domain.LottoFixture.번호_6개_일치;
 import static lotto.domain.LottoFixture.번호_6개_일치_숫자리스트;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;

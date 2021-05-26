@@ -79,4 +79,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
 }
