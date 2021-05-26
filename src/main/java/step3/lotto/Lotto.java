@@ -1,7 +1,6 @@
 package step3.lotto;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Lotto {
@@ -26,7 +25,7 @@ public class Lotto {
         return this.lottoTickets.get(index);
     }
 
-    public Iterator<LottoNumber> iteratorLottoTicket(int index) {
-        return getLottoTicket(index).iteratorLottoTicket();
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }
