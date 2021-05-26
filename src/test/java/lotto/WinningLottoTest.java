@@ -21,27 +21,27 @@ public class WinningLottoTest {
     @DisplayName("5등 결과 확인")
     public void fifthRanking() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,10,20,30");
-        assertThat(winningLotto.correctCount(lottoNumbers.lottoNumbers()) == 3).isTrue();
+        assertThat(winningLotto.correctCount(lottoNumbers) == 3).isTrue();
     }
 
     @Test
     @DisplayName("4등 결과 확인")
     public void fourthRanking() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,10,20");
-        assertThat(winningLotto.correctCount(lottoNumbers.lottoNumbers()) == 4).isTrue();
+        assertThat(winningLotto.correctCount(lottoNumbers) == 4).isTrue();
     }
 
     @Test
     @DisplayName("3등 결과 확인")
     public void thirdRanking() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,10");
-        assertThat(winningLotto.correctCount(lottoNumbers.lottoNumbers()) == 5).isTrue();
+        assertThat(winningLotto.correctCount(lottoNumbers) == 5).isTrue();
     }
 
     @Test
     @DisplayName("1등 결과 확인")
     public void firstRanking() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
-        assertThat(winningLotto.correctCount(lottoNumbers.lottoNumbers()) == 6).isTrue();
+        assertThat(winningLotto.correctCount(lottoNumbers) == 6).isTrue();
     }
 }

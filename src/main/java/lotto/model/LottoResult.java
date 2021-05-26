@@ -22,9 +22,9 @@ public class LottoResult {
     }
 
     public Map<LottoRanking, Integer> lottoResult(List<LottoNumbers> purchaseLottoNumbers, LottoNumbers winningNumbers) {
-
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
-            addLottoRankingCount(LottoRanking.lottoRanking(new WinningLotto(purchaseLottoNumber).correctCount(winningNumbers.lottoNumbers())));
+            addLottoRankingCount(LottoRanking.lottoRanking(winningLotto.correctCount(purchaseLottoNumber)));
         }
 
         return this.lottoResult;
