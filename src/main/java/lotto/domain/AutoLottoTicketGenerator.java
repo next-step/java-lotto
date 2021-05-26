@@ -4,8 +4,6 @@ import java.util.*;
 
 public class AutoLottoTicketGenerator implements TicketGenerator {
 
-    private static AutoLottoTicketGenerator autoLottoTicketGenerator = new AutoLottoTicketGenerator();
-
     private final int NUMBER_COUNT_PER_TICKET = 6;
 
     private static final List<Integer> numberPool = new ArrayList<>();
@@ -16,22 +14,23 @@ public class AutoLottoTicketGenerator implements TicketGenerator {
         }
     }
 
-    public static AutoLottoTicketGenerator start() {
-        if (autoLottoTicketGenerator == null) {
-            autoLottoTicketGenerator = new AutoLottoTicketGenerator();
+    @Override
+    public List<LottoTicket> generate(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Collections.shuffle(numberPool);
+            tickets.add(extract());
         }
-        return autoLottoTicketGenerator;
+        return tickets;
     }
 
-
-    @Override
-    public LottoTicket extract() {
-        Collections.shuffle(numberPool);
-        List<Integer> extracted = new ArrayList<>();
+    private LottoTicket extract() {
+        List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_COUNT_PER_TICKET; i++) {
-            extracted.add(numberPool.get(i));
+            numbers.add(numberPool.get(i));
         }
-        Collections.sort(extracted);
-        return new LottoTicket(extracted);
+        Collections.sort(numbers);
+
+        return new LottoTicket(numbers);
     }
 }

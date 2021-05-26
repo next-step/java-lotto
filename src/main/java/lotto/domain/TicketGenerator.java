@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface TicketGenerator {
 
-    LottoTicket extract();
+    List<LottoTicket> generate(int count);
 }

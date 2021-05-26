@@ -18,27 +18,44 @@ public class LottoController {
         this.outputView = new OutputView();
     }
 
-    public LottoTickets getTickets() {
-        outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
-        LottoTickets lottoTickets = null;
-        while (lottoTickets == null) {
-            lottoTickets = requestLottoTicketsInput();
+    public LottoTickets getTickets(Money amount) {
+        int totalCount = amount.countOfTickets();
+        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
+
+        boolean stopReceivingInput = false;
+        int manualCount = 0;
+        while (!stopReceivingInput) {
+            manualCount = inputView.receiveIntegerInput();
+            stopReceivingInput = checkTicketCount(totalCount, manualCount);
         }
-        outputView.printMessage(Message.INFO_TOTAL_COUNT, lottoTickets.count());
+
+        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKETS);
+        LottoTickets lottoTickets
+                = new LottoTickets(requestTicketsInput(new ManualLottoTicketGenerator(), manualCount));
+        lottoTickets.combineWith(requestTicketsInput(new AutoLottoTicketGenerator(), totalCount - manualCount));
+
+        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, manualCount, totalCount - manualCount);
         outputView.printInfo(lottoTickets.toString());
         return lottoTickets;
     }
 
-    private LottoTickets requestLottoTicketsInput() {
-        LottoTickets lottoTickets;
+    private List<LottoTicket> requestTicketsInput(TicketGenerator generator, int count) {
+        List<LottoTicket> tickets;
         try {
-            Money money = new Money(inputView.receiveIntegerInput());
-            lottoTickets = new LottoTickets(AutoLottoTicketGenerator.start(), money);
+            tickets = generator.generate(count);
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
         }
-        return lottoTickets;
+        return tickets;
+    }
+
+    private boolean checkTicketCount(int totalCount, int input) {
+        if (totalCount < input) {
+            outputView.printMessage(Message.ERROR_LOTTO_COUNT_OUT_OF_RANGE, totalCount);
+            return false;
+        }
+        return true;
     }
 
     public WinningNumbers getWinningNumbers() {
@@ -100,5 +117,25 @@ public class LottoController {
             return null;
         }
         return bonusNumber;
+    }
+
+    public Money getPurchaseAmount() {
+        outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
+        Money money = null;
+        while (money == null) {
+            money = requestMoneyInput();
+        }
+        return money;
+    }
+
+    private Money requestMoneyInput() {
+        Money money;
+        try {
+            money = new Money(inputView.receiveIntegerInput());
+        } catch (Exception e) {
+            outputView.printExceptionMessage(e);
+            return null;
+        }
+        return money;
     }
 }

@@ -2,7 +2,7 @@ package lotto.domain;
 
 public enum Message {
 
-    ERROR_NON_NUMBER("숫자만 입력해주세요."),
+    ERROR_NON_POSITIVE_NUMBER("0 이상의 숫자만 입력해주세요."),
     ERROR_EMPTY_INPUT("빈 값이 입력되었습니다. 다시 입력해주세요."),
 
     ERROR_AMOUNT_OUT_OF_RANGE("%d원 이상, %d원 이하의 금액을 입력해주세요."),
@@ -11,6 +11,7 @@ public enum Message {
     ERROR_BONUS_NUMBER_DUPLICATED("당첨 번호와 중복되는 보너스 볼을 입력했습니다. 다른 값을 입력해주세요."),
     ERROR_LOTTO_NUMBER_WRONG_COUNT("%d개의 숫자를 입력해주세요."),
     ERROR_LOTTO_NUMBER_OUT_OF_RANGE("%d와 %d사이의 숫자를 입력해주세요."),
+    ERROR_LOTTO_COUNT_OUT_OF_RANGE("%d장을 초과하여 입력할 수 없습니다."),
 
 
     REQUEST_INPUT_AMOUNT("구입금액을 입력해주세요."),
@@ -20,6 +21,7 @@ public enum Message {
     REQUEST_INPUT_BONUS_NUMBERS("보너스 볼을 입력해 주세요."),
 
     INFO_TOTAL_COUNT("%d개를 구매했습니다."),
+    INFO_MANUAL_AUTO_COUNT("수동으로 %d장, 자동으로 %d장을 구매했습니다."),
     INFO_BEFORE_PRINT_LOTTO_RESULT("당첨 통계\n--------");
 
     private String text;

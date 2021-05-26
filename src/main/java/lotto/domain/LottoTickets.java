@@ -1,29 +1,13 @@
 package lotto.domain;
 
-import lotto.Money;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
 
-    private Money amount;
     private final List<LottoTicket> lottoTickets;
-    private final TicketGenerator ticketGenerator;
 
-    public LottoTickets(TicketGenerator ticketGenerator, Money purchaseAmount) {
-        this.ticketGenerator = ticketGenerator;
-        this.amount = purchaseAmount;
-        this.lottoTickets = issueTickets(amount.countOfTickets());
-    }
-
-    private List<LottoTicket> issueTickets(int count) {
-        List<LottoTicket> ticketList = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            LottoTicket ticket = ticketGenerator.extract();
-            ticketList.add(ticket);
-        }
-        return ticketList;
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     public LottoResult matchingResultWith(WinningNumbers winningNumbers) {
@@ -41,5 +25,9 @@ public class LottoTickets {
             stringBuilder.append(System.lineSeparator());
         }
         return stringBuilder.toString();
+    }
+
+    public void combineWith(List<LottoTicket> others) {
+        lottoTickets.addAll(others);
     }
 }

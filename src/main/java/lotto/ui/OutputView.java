@@ -23,6 +23,10 @@ public class OutputView {
     }
 
     public void printMessage(Message message, Object arg1) {
-        System.out.println(String.format(message.getText(), arg1));
+        System.out.printf((message.getText()) + "%n", arg1);
+    }
+
+    public void printMessage(Message message, Object arg1, Object arg2) {
+        System.out.printf((message.getText()) + "%n", arg1, arg2);
     }
 }

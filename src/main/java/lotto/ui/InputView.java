@@ -11,7 +11,8 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^-?[0-9]+$");
+    //    private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^-?[0-9]+$");
+    private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
 
     private Scanner scanner;
     private OutputView outputView;
@@ -32,10 +33,11 @@ public class InputView {
     }
 
     private boolean isValidInteger(String input) {
-        boolean stopReceivingInput = false;
+        boolean stopReceivingInput;
         try {
             stopReceivingInput = isNotNull(input) && isPositiveInteger(input);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
+            stopReceivingInput = false;
             outputView.printExceptionMessage(e);
         }
         return stopReceivingInput;
@@ -51,7 +53,7 @@ public class InputView {
     private boolean isPositiveInteger(String input) throws CustomIllegalArgumentException {
         Matcher numberMatcher = VALID_NUMBER_PATTERN.matcher(input);
         if (!numberMatcher.find()) {
-            throw new CustomIllegalArgumentException(Message.ERROR_NON_NUMBER);
+            throw new CustomIllegalArgumentException(Message.ERROR_NON_POSITIVE_NUMBER);
         }
         return true;
     }
@@ -83,7 +85,7 @@ public class InputView {
         try {
             String[] inputs = SplitUtil.splitByDelimiter(input);
             stopReceivingInput = areAllValidIntegers(inputs);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             outputView.printExceptionMessage(e);
         }
         return stopReceivingInput;

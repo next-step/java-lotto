@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,20 +24,6 @@ public class LottoTicketTest {
 
         //
         assertThat(rank).isEqualTo(Rank.ELSE);
-    }
-
-    @DisplayName("[,] 출력 포맷 점검")
-    @Test
-    void check_toString_print_result() {
-        //Given
-        Pattern pattern = Pattern.compile("\\[.*,*]");
-        LottoTicket lottoTicket = AutoLottoTicketGenerator.start().extract();
-
-        //When
-        String print = lottoTicket.toString();
-
-        //Then
-        assertThat(print).matches(pattern);
     }
 
     @DisplayName("로또티켓의 번호가 6개가 아니라면 Exception이 발생한다")
