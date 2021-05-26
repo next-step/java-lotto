@@ -13,14 +13,7 @@ public class LottoMain {
         ResultView.printLottoCount(lottoPrice);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoPrice.lottoCount(); i++) {
-            List<String> generatedNumberList = lottoGenerator.generate();
-            Collections.sort(generatedNumberList);
-            String lottoNumbers = String.join(",", generatedNumberList);
-            ResultView.printLottoNumbers(lottoNumbers);
-            lottos.add(new Lotto(lottoNumbers));
-        }
+        List<Lotto> lottos = lottoGenerator.generateLottos(lottoPrice);
 
         String winnerNumbers = InputView.inputWinnerNumbers();
         List<String> winnerNumberList = new ArrayList<>(Arrays.asList(winnerNumbers.split(",")));

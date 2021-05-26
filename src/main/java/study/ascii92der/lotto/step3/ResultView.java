@@ -5,8 +5,8 @@ public class ResultView {
     public static final String PRINT_BUY_LOTTO_COUNT = "%d개를 구매했습니다.%n";
     public static final String PRINT_LOTTO_NUMBERS = "[ %s ]%n";
     public static final String PRINT_WINNER_RESULT = "%d개 일치 (%d원)- %d개%n";
-    public static final String PRINT_RESULT_SEPARATOR = "---------%n";
-    public static final String PRINT_RESULT = "당첨 통계%n";
+    public static final String PRINT_RESULT_SEPARATOR = "---------";
+    public static final String PRINT_RESULT = "당첨 통계";
     public static final String PRINT_TOTAL_EARNING_RATE = "총 수익률은 %.2f입니다.%n";
 
     public static void printLottoCount(LottoPrice lottoPrice) {

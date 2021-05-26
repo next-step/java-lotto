@@ -25,4 +25,17 @@ public class LottoGenerator {
         Collections.shuffle(lottoList);
         return lottoList.subList(LOTTO_INDEX_START, LOTTO_INDEX_END);
     }
+
+    public List<Lotto> generateLottos(LottoPrice lottoPrice) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoPrice.lottoCount(); i++) {
+            List<String> generatedNumberList = generate();
+            Collections.sort(generatedNumberList);
+            String lottoNumbers = String.join(",", generatedNumberList);
+            ResultView.printLottoNumbers(lottoNumbers);
+            lottos.add(new Lotto(lottoNumbers));
+        }
+        return lottos;
+    }
+
 }
