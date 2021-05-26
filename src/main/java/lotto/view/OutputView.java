@@ -17,7 +17,7 @@ public class OutputView {
     }
 
     public static void printPurchaseResult(LottoPurchaseResponse response) {
-        System.out.println(response.getLottoNumbersDtoList().size() + "개를 구매했습니다.");
+        System.out.println(System.lineSeparator() + "수동으로 " + response.getManualTicketCount() + "장, 자동으로 " + response.getAutoTicketCount() + "장을 구매했습니다.");
         printLottoNumberList(response.getLottoNumbersDtoList());
     }
 
