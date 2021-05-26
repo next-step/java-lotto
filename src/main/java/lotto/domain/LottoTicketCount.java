@@ -20,6 +20,10 @@ public class LottoTicketCount {
         }
     }
 
+    public int getLottoTicketCount() {
+        return this.lottoTicketCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
