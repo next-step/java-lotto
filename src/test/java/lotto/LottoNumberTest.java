@@ -1,5 +1,6 @@
 package lotto;
 
+import exception.LottoException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +17,7 @@ class LottoNumberTest {
 	})
 	void validTest(final int number) {
 		assertThatThrownBy(()->new LottoNumber(number))
-			.isInstanceOf(IllegalArgumentException.class)
+			.isInstanceOf(LottoException.class)
 			.hasMessageContaining(WRONG_LOTTO_NUMBER.message());
 	}
 
