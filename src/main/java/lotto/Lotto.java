@@ -67,4 +67,8 @@ public class Lotto {
 	public String toString() {
 		return numbers.toString();
 	}
+
+	public boolean contains(LottoNumber number) {
+		return numbers.contains(number);
+	}
 }

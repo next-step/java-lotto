@@ -24,6 +24,16 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("특정 로또번호가 존재하는지 체크")
+	void checkContainsLottoNumber() {
+		Lotto lotto = new Lotto("1,2,3,4,5,6");
+		LottoNumber exist = LottoNumber.valueOf("1");
+		LottoNumber notExist = LottoNumber.valueOf("7");
+		assertThat(lotto.contains(exist)).isTrue();
+		assertThat(lotto.contains(notExist)).isFalse();
+	}
+
+	@Test
 	@DisplayName("로또 등수 판별")
 	void lotto_등수_판별() {
 		Lotto lotto1 = new Lotto("1,2,3,4,5,6");
