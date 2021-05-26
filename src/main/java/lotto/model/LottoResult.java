@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lotto.view.InputView.LOTTO_PRICE;
+import static lotto.common.LottoConstants.LOTTO_PRICE;
 
 public class LottoResult {
 

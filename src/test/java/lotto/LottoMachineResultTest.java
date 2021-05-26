@@ -1,6 +1,9 @@
 package lotto;
 
-import lotto.model.*;
+import lotto.model.LottoMachine;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoResult;
+import lotto.model.WinningNumbers;
 import lotto.view.LottoResultMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

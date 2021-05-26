@@ -14,17 +14,17 @@ public class LottoMachineNumberTest {
     @DisplayName("로또 번호 객체 생성")
     public void create(){
         int createLottoNumber = 1;
-        LottoNumber lottoNumber = LottoNumber.lottoNumber(createLottoNumber);
-        assertThat(lottoNumber.equals(LottoNumber.lottoNumber(createLottoNumber))).isTrue();
+        LottoNumber lottoNumber = LottoNumber.valueOf(createLottoNumber);
+        assertThat(lottoNumber.equals(LottoNumber.valueOf(createLottoNumber))).isTrue();
     }
 
     @Test
     @DisplayName("로또 번호 범위 체크")
     public void abnormalNumber(){
         assertThatIllegalArgumentException()
-                .isThrownBy (() ->  LottoNumber.lottoNumber(0)).withMessage(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
+                .isThrownBy (() ->  LottoNumber.valueOf(0)).withMessage(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
 
         assertThatIllegalArgumentException()
-                .isThrownBy (() ->  LottoNumber.lottoNumber(46)).withMessage(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
+                .isThrownBy (() ->  LottoNumber.valueOf(46)).withMessage(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
     }
 }

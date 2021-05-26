@@ -2,19 +2,19 @@ package lotto.model;
 
 import lotto.LottoUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
+import static java.util.Comparator.*;
 import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.common.LottoConstants.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
 
 public class LottoNumbers {
-    private final List<LottoNumber> lottoNumbers;
+    private final TreeSet<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public LottoNumbers(Set<LottoNumber> numbers) {
         LottoUtil.validateLottoNumbersSize(numbers, LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
-        this.lottoNumbers = numbers;
+        this.lottoNumbers = new TreeSet<>(comparingInt(LottoNumber::number));
+        this.lottoNumbers.addAll(numbers);
     }
 
     public LottoNumbers(String number) {
@@ -25,7 +25,7 @@ public class LottoNumbers {
         return ((List<LottoNumber>) new ArrayList<>(lottoNumbers)).toString();
     }
 
-    public int correctCount(List<LottoNumber> winningNumbers) {
+    public int correctCount(TreeSet<LottoNumber> winningNumbers) {
         List<LottoNumber> numbers = new ArrayList<>(winningNumbers);
         numbers.removeAll(lottoNumbers);
         return LOTTO_NUMBER_COUNT - numbers.size();

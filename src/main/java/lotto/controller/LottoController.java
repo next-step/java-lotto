@@ -8,15 +8,16 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.TreeSet;
 
 public class LottoController {
 
-    private final InputView inputView = new InputView();
-    private final ResultView resultView = new ResultView();
-    private final LottoMachine lottoMachine = new LottoMachine();
-    private final LottoResult lottoResult = new LottoResult();
-
     public void lotto(){
+
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoResult lottoResult = new LottoResult();
 
         int buyCount = lottoMachine.buyCount(inputView.money());
         List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount);

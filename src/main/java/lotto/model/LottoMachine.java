@@ -3,13 +3,11 @@ package lotto.model;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.common.LottoConstants.MAX_LOTTO_NUMBER;
-import static lotto.common.LottoConstants.MIN_LOTTO_NUMBER;
-import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.view.InputView.LOTTO_PRICE;
+import static lotto.common.LottoConstants.*;
 
 public class LottoMachine {
 
@@ -18,7 +16,7 @@ public class LottoMachine {
     public LottoMachine() {
         List<Integer> integers = initLottoRange();
         this.lottoNumber = integers.stream()
-                .map(LottoNumber::lottoNumber)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
@@ -43,7 +41,7 @@ public class LottoMachine {
         return lottoNumber.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .sorted(Comparator.comparing(LottoNumber::number))
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+                .collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::new));
 
     }
 }

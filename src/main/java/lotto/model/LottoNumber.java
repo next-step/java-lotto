@@ -19,13 +19,12 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber lottoNumber(int number) {
-        LottoNumber lottoNumber = lottoNumbers.get(number);
-        validateLottoNumber(lottoNumber);
-        return lottoNumber;
+    public static LottoNumber valueOf(int number) {
+        validateLottoNumber(number);
+        return lottoNumbers.get(number);
     }
 
-    public static LottoNumber lottoNumber(String number) {
+    public static LottoNumber valueOf(String number) {
         int lottoNumber;
 
         try {
@@ -34,11 +33,11 @@ public class LottoNumber {
             throw new NumberFormatException(WRONG_INPUT_NUMBER);
         }
 
-        return lottoNumber(lottoNumber);
+        return valueOf(lottoNumber);
     }
 
-    private static void validateLottoNumber(LottoNumber lottoNumber) {
-        if (lottoNumber == null) {
+    private static void validateLottoNumber(int lottoNumber) {
+        if (lottoNumber > MAX_LOTTO_NUMBER || lottoNumber < MIN_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
         }
     }

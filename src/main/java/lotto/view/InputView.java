@@ -3,9 +3,10 @@ package lotto.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static lotto.common.LottoConstants.LOTTO_PRICE;
+
 public class InputView {
     private static final int ZERO = 0;
-    public static final int LOTTO_PRICE = 1000;
     private Scanner scanner = new Scanner(System.in);
 
     public int money() {
