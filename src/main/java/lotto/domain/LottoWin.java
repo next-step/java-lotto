@@ -9,7 +9,7 @@ public class LottoWin {
     final Map<LottoRank, Integer> lottoWin = new EnumMap<>(LottoRank.class);
 
     public LottoWin() {
-        Arrays.stream(LottoRank.values())
+        Arrays.asList(LottoRank.values())
             .forEach(lottoRank -> lottoWin.put(lottoRank, 0));
     }
 
