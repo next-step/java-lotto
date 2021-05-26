@@ -14,23 +14,20 @@ public class SeparatedText {
 	private String texts;
 
 
-	public SeparatedText(final String delimiter, final String texts){
+	public SeparatedText(final String delimiter, final String texts) {
 		this.delimiter = delimiter;
 		this.texts = texts;
 	}
 
-	public String getDelimiter(){
+	public String getDelimiter() {
 		return this.delimiter;
 	}
 
-	public String getTexts(){
+	public String getTexts() {
 		return this.texts;
 	}
 
-	public static SeparatedText findSeparator(final String text){
-		if (StringUtils.isEmpty(text)) {
-			return new SeparatedText(DEFAULT_DELIMITER, "");
-		}
+	public static SeparatedText findSeparator(final String text) {
 		Matcher m = Pattern.compile(PATTERN).matcher(text);
 		if (false == m.find()) {
 			return new SeparatedText(DEFAULT_DELIMITER, text);
@@ -40,7 +37,7 @@ public class SeparatedText {
 		return new SeparatedText(addDelimiter(delimiter), texts);
 	}
 
-	private static String addDelimiter(final String delimiter){
+	private static String addDelimiter(final String delimiter) {
 		return new StringBuilder(DEFAULT_DELIMITER)
 			.append(PATTERN_DELIMITER)
 			.append(delimiter)

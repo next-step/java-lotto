@@ -9,7 +9,7 @@ class SeparatedTextTest {
 
 	@Test
 	@DisplayName("구분자를 찾아 분리하는 기능 테스트")
-	void findSeparatorTest(){
+	void findSeparatorTest() {
 		// given
 		final String text = "//;\n1;2;3";
 

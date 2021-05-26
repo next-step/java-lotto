@@ -19,7 +19,7 @@ public class NumberUtils {
 		// empty
 	}
 
-	public static BigDecimal mathRound(final BigDecimal source, final BigDecimal target, final DecimalType decimalType){
+	public static BigDecimal mathRound(final BigDecimal source, final BigDecimal target, final DecimalType decimalType) {
 		return source.divide(target, decimalType.value(), RoundingMode.HALF_UP);
 	}
 
@@ -30,13 +30,13 @@ public class NumberUtils {
 					 .reduce(INT_ZERO_VALUE, Integer::sum);
 	}
 
-	private static void checkNegative(final int value){
+	private static void checkNegative(final int value) {
 		if (value < INT_ZERO_VALUE) {
 			throw StringAddCalculatorException.of(NEGATIVE_TEXT);
 		}
 	}
 
-	public static List<Integer> parseInts(final String[] texts, Predicate<Integer> condition){
+	public static List<Integer> parseInts(final String[] texts, Predicate<Integer> condition) {
 		return Arrays.stream(texts)
 					 .map(String::trim)
 					 .map(Integer::parseInt)

@@ -26,7 +26,7 @@ class StringAddCalculatorTest {
 	}
 
 	@Test
-	public void splitAndSum_negative(){
+	public void splitAndSum_negative() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
 			.isInstanceOf(RuntimeException.class);
 	}

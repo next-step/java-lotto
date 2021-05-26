@@ -1,7 +1,7 @@
 package lotto;
 
 import exception.LottoException;
-import ui.ResultView;
+import type.LottoRewardType;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -16,45 +16,50 @@ public final class LottoNumbers {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	private LottoNumbers(){
+	private LottoNumbers() {
 		throw new UnsupportedOperationException();
 	}
 
-	public LottoNumbers(List<Integer> numbers){
-		if (numbers == null){
+	public LottoNumbers(List<Integer> numbers) {
+		if (numbers == null) {
 			throw LottoException.of(WRONG_LOTTO_NUMBER);
 		}
-		Set<LottoNumber> lottoNumbers = numbers.stream()
-												  .map(LottoNumber::new)
-												  .sorted()
-												  .collect(Collectors.toCollection(LinkedHashSet::new));
-		if (isValidLottoNumberCount(lottoNumbers) == false){
-			throw LottoException.of(WRONG_LOTTO_NUMBER);
-		}
+		Set<LottoNumber> lottoNumbers = makeLottoNumbers(numbers);
+		checkLottoNumberCount(lottoNumbers);
 		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
 	}
 
-	public int matches(final LottoNumbers parameter){
-		int sameNumber = 0;
-		for (LottoNumber number : parameter.lottoNumbers){
-			sameNumber += match(number);
+	private Set<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
+		return numbers.stream()
+					  .map(LottoNumber::new)
+					  .sorted()
+					  .collect(Collectors.toCollection(LinkedHashSet::new));
+	}
+
+	public LottoRewardType result(final LottoNumbers winningLottoNumber, final LottoNumber bonusNumber) {
+		return LottoRewardType.of(matches(winningLottoNumber),
+								  contains(bonusNumber));
+	}
+
+
+	private int matches(final LottoNumbers winningLottoNumber) {
+		return winningLottoNumber.lottoNumbers.stream()
+											  .filter(this::contains)
+											  .map(notUsed -> 1)
+											  .reduce(0, Integer::sum);
+	}
+
+	public boolean contains(final LottoNumber lottoNumber) {
+		return this.lottoNumbers.contains(lottoNumber);
+	}
+
+	public void checkLottoNumberCount(final Set<LottoNumber> lottoNumbers) {
+		if(lottoNumbers.size() != LOTTO_NUMBER_COUNT){
+			throw LottoException.of(WRONG_LOTTO_NUMBER);
 		}
-		return sameNumber;
 	}
 
-	private int match(final LottoNumber number){
-		if (this.lottoNumbers.contains(number)){
-			return 1;
-		}
-		return 0;
-	}
-
-	public boolean isValidLottoNumberCount(final Set<LottoNumber> lottoNumbers){
-		return lottoNumbers.size() == LOTTO_NUMBER_COUNT;
-	}
-
-	@Override
-	public String toString() {
-		return lottoNumbers.toString();
+	public Set<LottoNumber> lottoNumbers() {
+		return this.lottoNumbers;
 	}
 }

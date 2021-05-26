@@ -11,7 +11,7 @@ class StringTest {
 
 	@Test
 	@DisplayName("String split method를 이용하여 문자열 자르기 테스트")
-	void splitTest(){
+	void splitTest() {
 		assertThat("1,2".split(","))
 			.hasSize(2)
 			.contains("1", "2");
@@ -19,14 +19,14 @@ class StringTest {
 
 	@Test
 	@DisplayName("String split method를 이용하여 하나의 문자만 가지는 문자열 자르기 테스트")
-	void splitTestWithSingleText(){
+	void splitTestWithSingleText() {
 		assertThat("1".split(","))
 			.containsExactly("1");
 	}
 
 	@Test
 	@DisplayName("String substring을 이용하여 첫번째 문자와 끝 문자 자르기 테스트")
-	void substringTest(){
+	void substringTest() {
 		String text = "(1,2)";
 		assertThat(text.substring(1, text.length()-1))
 			.isEqualTo("1,2");
@@ -36,7 +36,7 @@ class StringTest {
 	@CsvSource(value = {
 		"0,a", "1,b", "2,c"
 	})
-	void charAtTest(final int index, final char expected){
+	void charAtTest(final int index, final char expected) {
 		assertThat("abc".charAt(index))
 			.isEqualTo(expected);
 	}
@@ -45,7 +45,7 @@ class StringTest {
 	@ValueSource(ints = {
 		-1, 3, 4, 5
 	})
-	void charAtTestWithStringIndexOutOfBoundsException(final int index){
+	void charAtTestWithStringIndexOutOfBoundsException(final int index) {
 		assertThatThrownBy(()-> "abc".charAt(index))
 			.isInstanceOf(StringIndexOutOfBoundsException.class)
 			.hasMessageContaining("String index out of range: " + index);

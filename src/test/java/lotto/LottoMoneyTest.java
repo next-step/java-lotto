@@ -12,7 +12,7 @@ class LottoMoneyTest {
 
 	@Test
 	@DisplayName("음수 금액일때 Exception 검증 테스트")
-	void constructorTestWithNegative(){
+	void constructorTestWithNegative() {
 		assertThatThrownBy(() -> new LottoMoney(-1000))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(WRONG_LOTTO_PRICE.message());
@@ -21,7 +21,7 @@ class LottoMoneyTest {
 
 	@Test
 	@DisplayName("0 금액일때 Exception 검증 테스트")
-	void constructorTestWithZero(){
+	void constructorTestWithZero() {
 		assertThatThrownBy(() -> new LottoMoney(0))
 			.isInstanceOf(IllegalArgumentException.class);
 
@@ -29,16 +29,8 @@ class LottoMoneyTest {
 
 	@Test
 	@DisplayName("금액에 맞춰 살수 있는 로또의 갯수 반환 테스트")
-	void calculateLottoCountTest(){
+	void calculateLottoCountTest() {
 		assertThat(new LottoMoney(10000).calculateLottoCount())
 			.isEqualTo(10);
-	}
-
-	@Test
-	@DisplayName("수익률 계산 테스트")
-	void calculateRevenueTest(){
-		assertThat(new LottoMoney(10000).calculateRevenue(()-> 10000).doubleValue())
-			.isEqualTo(1.00);
-
 	}
 }

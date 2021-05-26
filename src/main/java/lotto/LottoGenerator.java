@@ -8,21 +8,21 @@ public final class LottoGenerator {
 	private final LottoNumbersFactory lottoNumbersFactory; // 로또 티켓 관리 클래스
 	private final DrawNumber drawNumber; // 숫자 뽑기 클래스
 
-	public LottoGenerator(final LottoNumbersFactory lottoNumbersFactory, final DrawNumber drawNumber){
+	public LottoGenerator(final LottoNumbersFactory lottoNumbersFactory, final DrawNumber drawNumber) {
 		this.lottoNumbersFactory = lottoNumbersFactory;
 		this.drawNumber = drawNumber;
 	}
 
-	public LottoNumbersFactory buy(final LottoMoney lottoMoney){
+	public LottoNumbersFactory buy(final LottoMoney lottoMoney) {
 		final int lottoCount = lottoMoney.calculateLottoCount();
-		for (int i = 0; i < lottoCount; ++i){
+		for (int i = 0; i < lottoCount; ++i) {
 			LottoNumbers lottoNumbers = new LottoNumbers(drawNumber.draw(LOTTO_NUMBER_COUNT));
 			lottoNumbersFactory.add(lottoNumbers);
 		}
 		return this.lottoNumbersFactory;
 	}
 
-	public LottoResult summary(final LottoNumbers winnerNumbers){
-		return lottoNumbersFactory.summary(winnerNumbers);
+	public LottoResult summary(final LottoNumbers winnerNumbers, final LottoNumber bonusNumber) {
+		return lottoNumbersFactory.summary(winnerNumbers, bonusNumber);
 	}
 }
