@@ -50,10 +50,7 @@ public class Lotto {
                 .split(",");
     }
 
-    public int hasNumber(int value) {
-        if (lottoNumbers.contains(value)) {
-            return 1;
-        }
-        return 0;
+    public boolean hasNumber(int value) {
+        return lottoNumbers.contains(value);
     }
 }
