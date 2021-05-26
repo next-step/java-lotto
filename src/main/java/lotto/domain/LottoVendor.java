@@ -16,14 +16,17 @@ public class LottoVendor {
 	public LottoVendor(String winningLottoNumbers, String bonusNumberString) {
 		validateNumber(bonusNumberString);
 
-		winningLottoTicket = LottoTicketConverter.convert(winningLottoNumbers);
-		bonusNumber = LottoNumber.of(Integer.parseInt(bonusNumberString));
+		LottoTicket lottoTicket = LottoTicketConverter.convert(winningLottoNumbers);
+		LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(bonusNumberString));
 
-		validateIntersectWinningNumber();
+		validateIntersectWinningNumber(lottoTicket, lottoNumber);
+
+		winningLottoTicket = lottoTicket;
+		bonusNumber = lottoNumber;
 	}
 
-	private void validateIntersectWinningNumber() {
-		if (winningLottoTicket.matchNumber(bonusNumber)) {
+	private void validateIntersectWinningNumber(LottoTicket lottoTicket, LottoNumber lottoNumber) {
+		if (lottoTicket.matchNumber(lottoNumber)) {
 			throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER_MESSAGE);
 		}
 	}
@@ -45,13 +48,6 @@ public class LottoVendor {
 		return LottoRank.rank(lottoPoint(lottoTicket, matchCount(lottoTicket)));
 	}
 
-	/**
-	 * 로또 번호가 5개 일치하면 2등 여부 확인을 위해 보너스 번호를 비교한다.
-	 *
-	 * @param lottoTicket 유저 로또 티켓
-	 * @param matchCount 당첨 번호가 일치하는 번호 수
-	 * @return 로또 포인트
-	 */
 	private LottoPoint lottoPoint(LottoTicket lottoTicket, int matchCount) {
 		if (matchCount == SECOND.matchCount()) {
 			return new LottoPoint(matchCount, lottoTicket.matchNumber(bonusNumber));
