@@ -4,7 +4,7 @@ public class LottoPrice {
 
     public static final int LOTTO_PRICE = 1000;
     public static final String ERROR_MASSAGE_NEGATIVE_INPUT_MONEY = "input money is negative";
-    private int money;
+    private final int money;
 
     public LottoPrice(int money) {
         if(money<0){

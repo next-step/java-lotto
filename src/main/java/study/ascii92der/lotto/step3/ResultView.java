@@ -21,20 +21,20 @@ public class ResultView {
         System.out.println(PRINT_RESULT);
         System.out.println(PRINT_RESULT_SEPARATOR);
         System.out.printf((PRINT_WINNER_RESULT),
-                LottoWinner.FOURTH.matchNumberCount,
-                LottoWinner.FOURTH.winnerPrice,
+                LottoWinner.FOURTH.getMatchNumberCount(),
+                LottoWinner.FOURTH.getWinnerPrice(),
                 winResult.result(LottoWinner.FOURTH));
         System.out.printf((PRINT_WINNER_RESULT),
-                LottoWinner.THIRD.matchNumberCount,
-                LottoWinner.THIRD.winnerPrice,
+                LottoWinner.THIRD.getMatchNumberCount(),
+                LottoWinner.THIRD.getWinnerPrice(),
                 winResult.result(LottoWinner.THIRD));
         System.out.printf((PRINT_WINNER_RESULT),
-                LottoWinner.SECOND.matchNumberCount,
-                LottoWinner.SECOND.winnerPrice,
+                LottoWinner.SECOND.getMatchNumberCount(),
+                LottoWinner.SECOND.getWinnerPrice(),
                 winResult.result(LottoWinner.SECOND));
         System.out.printf((PRINT_WINNER_RESULT),
-                LottoWinner.FIRST.matchNumberCount,
-                LottoWinner.FIRST.winnerPrice,
+                LottoWinner.FIRST.getMatchNumberCount(),
+                LottoWinner.FIRST.getWinnerPrice(),
                 winResult.result(LottoWinner.FIRST));
         System.out.printf((PRINT_TOTAL_EARNING_RATE), winResult.totalEarningRate());
     }
