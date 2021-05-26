@@ -2,9 +2,9 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoTicketGenerator implements TicketGenerator {
+public class AutoLottoTicketGenerator implements TicketGenerator {
 
-    private static LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
+    private static AutoLottoTicketGenerator autoLottoTicketGenerator = new AutoLottoTicketGenerator();
 
     private final int NUMBER_COUNT_PER_TICKET = 6;
 
@@ -16,11 +16,11 @@ public class LottoTicketGenerator implements TicketGenerator {
         }
     }
 
-    public static LottoTicketGenerator start() {
-        if (lottoTicketGenerator == null) {
-            lottoTicketGenerator = new LottoTicketGenerator();
+    public static AutoLottoTicketGenerator start() {
+        if (autoLottoTicketGenerator == null) {
+            autoLottoTicketGenerator = new AutoLottoTicketGenerator();
         }
-        return lottoTicketGenerator;
+        return autoLottoTicketGenerator;
     }
 
 

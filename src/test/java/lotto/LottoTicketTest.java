@@ -32,7 +32,7 @@ public class LottoTicketTest {
     void check_toString_print_result() {
         //Given
         Pattern pattern = Pattern.compile("\\[.*,*]");
-        LottoTicket lottoTicket = LottoTicketGenerator.start().extract();
+        LottoTicket lottoTicket = AutoLottoTicketGenerator.start().extract();
 
         //When
         String print = lottoTicket.toString();

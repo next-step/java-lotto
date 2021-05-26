@@ -17,7 +17,7 @@ public class LottoTicketsTest {
         //Given
         int purchaseAmount = 15400;
         //When + Then
-        assertThatThrownBy(() -> new LottoTickets(LottoTicketGenerator.start(), purchaseAmount))
+        assertThatThrownBy(() -> new LottoTickets(AutoLottoTicketGenerator.start(), purchaseAmount))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -29,7 +29,7 @@ public class LottoTicketsTest {
         int purchaseAmount = Integer.parseInt(input);
 
         //When + Then
-        assertThatThrownBy(() -> new LottoTickets(LottoTicketGenerator.start(), purchaseAmount))
+        assertThatThrownBy(() -> new LottoTickets(AutoLottoTicketGenerator.start(), purchaseAmount))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 }

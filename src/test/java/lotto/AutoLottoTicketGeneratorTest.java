@@ -1,20 +1,20 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
+import lotto.domain.AutoLottoTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTicketGeneratorTest {
+public class AutoLottoTicketGeneratorTest {
 
     @DisplayName("싱글톤 객체임을 확인한다")
     @Test
     void check_singleton_pattern() {
         //Given+When
-        LottoTicketGenerator firstGenerator = LottoTicketGenerator.start();
-        LottoTicketGenerator secondGenerator = LottoTicketGenerator.start();
+        AutoLottoTicketGenerator firstGenerator = AutoLottoTicketGenerator.start();
+        AutoLottoTicketGenerator secondGenerator = AutoLottoTicketGenerator.start();
 
         //Then
         assertThat(firstGenerator).isSameAs(secondGenerator);
@@ -24,7 +24,7 @@ public class LottoTicketGeneratorTest {
     @Test
     void extract_six_random_numbers() {
         //Given+When
-        LottoTicket lottoTicket = LottoTicketGenerator.start().extract();
+        LottoTicket lottoTicket = AutoLottoTicketGenerator.start().extract();
         //Then
         assertThat(lottoTicket.countOfNumbers()).isEqualTo(6);
     }

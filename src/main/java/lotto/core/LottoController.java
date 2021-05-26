@@ -31,7 +31,7 @@ public class LottoController {
     private LottoTickets requestLottoTicketsInput() {
         LottoTickets lottoTickets;
         try {
-            lottoTickets = new LottoTickets(LottoTicketGenerator.start(), inputView.receiveIntegerInput());
+            lottoTickets = new LottoTickets(AutoLottoTicketGenerator.start(), inputView.receiveIntegerInput());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
