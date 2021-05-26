@@ -29,11 +29,11 @@ public class LottoTicket {
 		}
 	}
 
-	static int countDuplicates(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
-		return userLottoTicket.countDuplicates(winningLottoTicket.lottoNumbers);
+	static int countCommonNumber(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
+		return userLottoTicket.countCommonNumber(winningLottoTicket.lottoNumbers);
 	}
 
-	int countDuplicates(Set<LottoNumber> lottoNumberSet) {
+	int countCommonNumber(Set<LottoNumber> lottoNumberSet) {
 		Set<LottoNumber> targetLottoNumberSet = new HashSet<>(lottoNumberSet);
 		validate(targetLottoNumberSet);
 
