@@ -1,8 +1,9 @@
 package step3.ui;
 
 import step3.domain.Lotto;
-import step3.domain.LottoCount;
 import step3.domain.LottoNumber;
+import step3.domain.Rank;
+import step3.domain.Ranks;
 
 import java.util.List;
 
@@ -29,18 +30,19 @@ public class ResultView {
         System.out.println(sb.toString());
     }
 
-    public static void showStatistics(LottoCount lottoCount) {
+    public static void showStatistics(Ranks ranks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (5000원) -" + lottoCount.getThreeCount() + "개");
-        System.out.println("4개 일치 (50000원) -" + lottoCount.getFourCount() + "개");
-        System.out.println("5개 일치 (1500000원) -" + lottoCount.getFiveCount() + "개");
-        System.out.println("6개 일치 (2000000000원) -" + lottoCount.getSixCount() + "개");
+        System.out.println("3개 일치 (5000원) -" + ranks.findCountWithAmount(Rank.FIFTH.getWinningMoney()) + "개");
+        System.out.println("4개 일치 (50000원) -" + ranks.findCountWithAmount(Rank.FOURTH.getWinningMoney()) + "개");
+        System.out.println("5개 일치 (1500000원) -" + ranks.findCountWithAmount(Rank.THIRD.getWinningMoney()) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) -" + ranks.findCountWithAmount(Rank.SECOND.getWinningMoney()) + "개");
+        System.out.println("6개 일치 (2000000000원) -" + ranks.findCountWithAmount(Rank.FIRST.getWinningMoney()) + "개");
 
     }
 
-    public static void showRate(double earningRate) {
-        System.out.println("총 수익률은 " + earningRate + " 입니다.");
+    public static void showRate(Ranks ranks) {
+        System.out.println("총 수익률은 " + ranks.earningRate() + " 입니다.");
     }
 }
