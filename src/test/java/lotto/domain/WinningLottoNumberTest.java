@@ -5,13 +5,13 @@ import lotto.exception.WinningLottoNumberCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.valueOf;
 import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -32,7 +32,7 @@ class WinningLottoNumberTest {
 
     @DisplayName("new_예외_음수")
     @ParameterizedTest
-    @CsvSource({"-1,-3,2,3,5,6",
+    @ValueSource(strings = {"-1,-3,2,3,5,6",
             "21,23,37,42,15,-1"})
     void new_예외_음수(String input) {
         // When, Then
@@ -42,7 +42,7 @@ class WinningLottoNumberTest {
 
     @DisplayName("new_예외_부족한_번호_수")
     @ParameterizedTest
-    @CsvSource({"21,23,37,42",
+    @ValueSource(strings = {"21,23,37,42",
             "31,22,43,44"})
     void new_예외_부족한_번호_수(String input) {
         // When, Then

@@ -27,6 +27,14 @@ public class LottoGame {
         return values.contains(lottoNumber);
     }
 
+    public int compare(LottoGame lottoGame) {
+        int result = 0;
+        for(LottoNumber value : values) {
+            result = lottoGame.find(value) ? result + 1 : result;
+        }
+        return result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,6 +62,11 @@ public class LottoGame {
         }
 
         return new LottoGame(values);
+    }
+
+    public static LottoGame createManual(Set<LottoNumber> lottoNumbers) {
+
+        return new LottoGame(lottoNumbers);
     }
 
     private void validate(Set<LottoNumber> values) {

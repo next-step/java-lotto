@@ -19,7 +19,7 @@ public class WinningLottoNumber {
     private static final String COMMA = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+(,\\d+)*$");
 
-    private List<LottoNumber> values;
+    private LottoGame value;
 
     public WinningLottoNumber(String playerInput) {
         validatePlayerInput(playerInput);
@@ -61,17 +61,15 @@ public class WinningLottoNumber {
     }
 
     private void parseValues(String playerInput) {
-        this.values = Arrays.stream(playerInput.split(COMMA))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(playerInput.split(COMMA))
                 .map(each -> valueOf(parseInt(each)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+
+        value = LottoGame.createManual(lottoNumbers);
     }
 
     private Rank decidePrizeEachGame(LottoGame lottoGame) {
-        int result = 0;
-
-        for (LottoNumber lottoNumber : values) {
-            result = (lottoGame.find(lottoNumber) ? result + 1 : result);
-        }
+        int result = value.compare(lottoGame);
 
         return Rank.valueOf(result);
     }
