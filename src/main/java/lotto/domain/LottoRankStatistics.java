@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 import lotto.constant.LottoRank;
 
@@ -12,6 +12,7 @@ public class LottoRankStatistics {
     private static final double ONE_HUNDRED_DOUBLE = 100.0;
     private final Lottos lottos;
     private final LottoNumbers winningNumbers;
+    private LottoNumber bonusNumber;
     private RankCounts rankCounts;
 
     public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumbers) {
@@ -19,11 +20,16 @@ public class LottoRankStatistics {
         this.winningNumbers = winningNumbers;
     }
 
+    public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumber, LottoNumber bonusNumber) {
+        this.lottos = lottos;
+        this.winningNumbers = winningNumber;
+        this.bonusNumber = bonusNumber;
+    }
+
     public void initStatistics() {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (int i = 0; i < this.lottos.getSize(); i++) {
-            int matchCount = this.lottos.getLottoNumbers(i).getCountOfMatchingNumber(this.winningNumbers);
-            LottoRank lottoRank = LottoRank.valueOf(matchCount);
+            LottoRank lottoRank = findRankByLottoNumbers(this.lottos.getLottoNumbers(i));
             int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
             result.put(lottoRank, ++lottoCount);
         }
@@ -39,6 +45,12 @@ public class LottoRankStatistics {
                 / (double) (this.rankCounts.calculateTotalCountByRank() * 1000)) * ONE_HUNDRED_INT)
                 / ONE_HUNDRED_DOUBLE;
         return String.format("%.2f", rateOfReturn);
+    }
+
+    private LottoRank findRankByLottoNumbers(LottoNumbers lottoNumbers) {
+        int matchCount = lottoNumbers.getCountOfMatchingNumber(this.winningNumbers);
+        boolean resultBonus = lottoNumbers.contains(this.bonusNumber);
+        return LottoRank.valueOf(matchCount, resultBonus);
     }
 
     private long sumTotalWinningAmount() {
