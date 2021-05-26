@@ -54,7 +54,7 @@ public class LottoNumbersTest {
             }
         });
 
-        assertThat(lottoNumbers.getLottoNumbers().contains(1)).isTrue();
+        assertThat(lottoNumbers.contains(1)).isTrue();
     }
 
     @Test

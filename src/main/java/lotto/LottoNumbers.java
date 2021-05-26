@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoNumbers {
     private List<Integer> lottoNumbers;
@@ -45,5 +46,9 @@ public class LottoNumbers {
             return SameNumberStateEnum.SAME_BONUS_NUMBER;
 
         return SameNumberStateEnum.NO_SAME;
+    }
+
+    public boolean contains(int checkNumber) {
+        return lottoNumbers.contains(checkNumber);
     }
 }
