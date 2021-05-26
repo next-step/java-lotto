@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoMoneyTest {
 
@@ -107,5 +106,17 @@ class LottoMoneyTest {
 
         // when then
         assertThat(lottoMoney.purchaseCount()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("구입가능여부 검증")
+    void validatePurchasable() {
+        // given
+        LottoMoney lottoMoney = LottoMoney.of(500);
+
+        // when then
+        assertThatIllegalStateException()
+                .isThrownBy(lottoMoney::validatePurchasable)
+                .withMessageMatching("금액이 부족합니다. 최소 1000 원 이상의 금액을 입력해 주세요.");
     }
 }
