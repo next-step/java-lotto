@@ -29,10 +29,10 @@ public enum Rank {
 	}
 
 	public boolean isMatch(int matchCount, boolean matchBonusNumber) {
-		if (matchBonusNumber == true) {
+		if (matchBonusNumber) {
 			return this.matchCount == matchCount;
 		}
-		return this.matchCount == matchCount && this.matchBonusNumber == matchBonusNumber;
+		return this.matchCount == matchCount && !this.matchBonusNumber;
 	}
 
 	public int getMatchCount() {
