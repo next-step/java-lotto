@@ -29,7 +29,7 @@ public class LottoGroup {
     }
 
     private static int castIntTotalPrice(String totalPrice) throws IllegalPriceException {
-        int nTotalPrice = 0;
+        int nTotalPrice;
         try {
             nTotalPrice = Integer.parseInt(totalPrice);
         } catch (NumberFormatException exception) {
@@ -52,11 +52,11 @@ public class LottoGroup {
         return this.lottoList;
     }
 
-    public LottoStatistics statistics(LottoWinningNumbers winningNumbers) {
+    public LottoStatistics statistics(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = new ArrayList<>();
 
         for (Lotto lotto : lottoList) {
-            lottoRewards.add(lotto.reward(winningNumbers));
+            lottoRewards.add(winningLotto.reward(lotto));
         }
 
         return LottoStatistics.createLottoStatistics(lottoRewards);

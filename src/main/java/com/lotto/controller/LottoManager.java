@@ -2,57 +2,68 @@ package com.lotto.controller;
 
 import com.lotto.domain.LottoGroup;
 import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.LottoWinningNumbers;
+import com.lotto.domain.WinningLotto;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
 public class LottoManager {
 
     public void control() {
-        LottoGroup lottoGroup = createLottoGroup();
+        LottoGroup lottoGroup = repeatCreateLottoGroup();
         OutputView.confirmBuyCount(lottoGroup.size());
         OutputView.buyLottoList(lottoGroup.lottoList());
 
-        LottoWinningNumbers winningNumbers = createWinningNumbers();
+        WinningLotto winningLotto = createWinningLotto();
 
         OutputView.winningStatistics();
-        LottoStatistics statistics = lottoGroup.statistics(winningNumbers);
+        LottoStatistics statistics = lottoGroup.statistics(winningLotto);
         OutputView.winningStatisticsDetail(statistics);
         OutputView.investment(statistics.yield());
     }
 
-    private LottoGroup createLottoGroup() {
-        boolean flag = true;
-        LottoGroup lottoGroup = null;
+    private LottoGroup repeatCreateLottoGroup() {
+        LottoGroup lottoGroup;
 
-        while (flag) {
-            OutputView.requireLottoPrice();
-            try {
-                lottoGroup = LottoGroup.createLottoGroup(InputView.inputPrice());
-                flag = false;
-            } catch (RuntimeException exception) {
-                flag = true;
-                OutputView.out(exception.getMessage());
-            }
+        OutputView.requireLottoPrice();
+        try {
+            lottoGroup = LottoGroup.createLottoGroup(InputView.inputDataFromConsole());
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            lottoGroup = repeatCreateLottoGroup();
         }
+
         return lottoGroup;
     }
 
-    private LottoWinningNumbers createWinningNumbers() {
-        LottoWinningNumbers lottoWinningNumbers = null;
+    private WinningLotto createWinningLotto() {
+        WinningLotto winningLotto;
+        winningLotto = repeatCreateWinningLotto();
+        repeatSetBonusNumber(winningLotto);
 
-        boolean flag = true;
-        while (flag) {
-            OutputView.requireWinningNumbers();
-            try {
-                lottoWinningNumbers = LottoWinningNumbers
-                        .createLottoWinningNumbers(InputView.inputWinningNumbers());
-                flag = false;
-            } catch (RuntimeException exception) {
-                flag = true;
-                OutputView.out(exception.getMessage());
-            }
+        return winningLotto;
+    }
+
+    private void repeatSetBonusNumber(WinningLotto winningLotto) {
+        OutputView.requireBonusNumbers();
+        try {
+            winningLotto.setBonusNumber(InputView.inputDataFromConsole());
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            repeatSetBonusNumber(winningLotto);
         }
-        return lottoWinningNumbers;
+    }
+
+    private WinningLotto repeatCreateWinningLotto() {
+        WinningLotto winningLotto;
+
+        OutputView.requireWinningNumbers();
+        try {
+            winningLotto = WinningLotto.createWinningLotto(InputView.inputDataFromConsole());
+        } catch (RuntimeException exception) {
+            OutputView.out(exception.getMessage());
+            winningLotto = repeatCreateWinningLotto();
+        }
+
+        return winningLotto;
     }
 }

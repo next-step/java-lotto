@@ -1,64 +1,73 @@
 package com.lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoReward {
-    THREE(5000) {
+    FIRST(6, false, 2_000_000_000) {
         @Override
-        public int totalReward(int count) { return count * THREE.reward(); }
+        public int totalReward(int count) {
+            return count * FIRST.reward();
+        }
     },
-    FOUR(50000) {
+    SECOND_BONUS(5, true, 3_000_000) {
         @Override
-        public int totalReward(int count) { return count * FOUR.reward(); }
+        public int totalReward(int count) {
+            return count * SECOND_BONUS.reward();
+        }
     },
-    FIVE(1500000) {
+    SECOND(5, false, 1_500_000) {
         @Override
-        public int totalReward(int count) { return count * FIVE.reward(); }
+        public int totalReward(int count) {
+            return count * SECOND.reward();
+        }
     },
-    SIX(2000000000) {
+    THIRD(4, false, 50_000) {
         @Override
-        public int totalReward(int count) { return count * SIX.reward(); }
+        public int totalReward(int count) {
+            return count * THIRD.reward();
+        }
     },
-    NOTHING(0) {
+    FOURTH(3, false, 5_000) {
         @Override
-        public int totalReward(int count) { return 0; }
+        public int totalReward(int count) {
+            return count * FOURTH.reward();
+        }
+    },
+    MISS(0, false, 0) {
+        @Override
+        public int totalReward(int count) {
+            return 0;
+        }
     };
 
     private int reward;
+    private int sameCount;
+    private boolean isBonus;
 
-    LottoReward(int reward) {
+    LottoReward(int sameCount, boolean isBonus, int reward) {
         this.reward = reward;
+        this.isBonus = isBonus;
+        this.sameCount = sameCount;
     }
 
     public int reward() {
         return reward;
     }
 
+    public int sameCount() {
+        return sameCount;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
+
     public abstract int totalReward(int count);
 
     public static LottoReward generateReward(int sameCount) {
-        if (sameCount == 3) {
-            return THREE;
-        } else if (sameCount == 4) {
-            return FOUR;
-        } else if (sameCount == 5) {
-            return FIVE;
-        } else if (sameCount == 6) {
-            return SIX;
-        }
-        return NOTHING;
-    }
-
-    @Override
-    public String toString() {
-        if (this == THREE) {
-            return "3";
-        } else if (this == FOUR) {
-            return "4";
-        } else if (this == FIVE) {
-            return "5";
-        } else if (this == SIX) {
-            return "6";
-        }
-
-        return "0";
+        return Arrays.stream(values())
+                .filter(reward -> reward.sameCount() == sameCount && !reward.isBonus())
+                .findFirst()
+                .orElse(MISS);
     }
 }

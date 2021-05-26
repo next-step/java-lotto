@@ -4,18 +4,30 @@ import com.lotto.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Objects;
 
-public final class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
+    private static final LottoNumber[] cache = new LottoNumber[45];
+
+    static {
+        for (int i = LOTTO_START_NUMBER - 1; i < LOTTO_END_NUMBER; i++) {
+            cache[i] = new LottoNumber(i + 1);
+        }
+    }
 
     private int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
 
-    private void validate(int number) {
+    public static LottoNumber valueOf(int number) throws LottoNumberOutOfBoundsException {
+        validate(number);
+        return cache[number - 1];
+    }
+
+    private static void validate(int number) throws LottoNumberOutOfBoundsException {
         if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new LottoNumberOutOfBoundsException(number);
         }

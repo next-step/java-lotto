@@ -6,7 +6,8 @@ import com.lotto.domain.LottoStatistics;
 
 import java.util.List;
 
-import static com.lotto.domain.LottoReward.NOTHING;
+import static com.lotto.domain.LottoReward.MISS;
+import static com.lotto.domain.LottoReward.SECOND_BONUS;
 import static com.lotto.ui.Message.*;
 
 public class OutputView {
@@ -31,6 +32,10 @@ public class OutputView {
         out(REQUIRE_WINNING_NUMBERS.message());
     }
 
+    public static void requireBonusNumbers() {
+        out(REQUIRE_BONUS_NUMBER.message());
+    }
+
     public static void winningStatistics() {
         out(WINNING_STATISTICS.message());
         out("---------");
@@ -43,9 +48,10 @@ public class OutputView {
     }
 
     private static void printOnlyWinningLotto(LottoStatistics lottoStatistics, LottoReward reward) {
-        if (reward != NOTHING) {
+        if (reward != MISS) {
             out(String.format(WINNING_STATISTICS_DETAIL.message(),
-                    reward.toString(), reward.reward(), lottoStatistics.get(reward)));
+                    reward.sameCount(), reward == SECOND_BONUS ? WINNING_BONUS.message() : "",
+                    reward.reward(), lottoStatistics.get(reward)));
         }
     }
 
