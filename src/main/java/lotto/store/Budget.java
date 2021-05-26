@@ -2,13 +2,13 @@ package lotto.store;
 
 public class Budget {
 
-	public Budget(int budget) {
-		this.budget = budget;
-	}
+    private final int budget;
 
-	private final int budget;
+    public Budget(int budget) {
+        this.budget = budget;
+    }
 
-	public int get() {
-		return budget;
-	}
+    public int get() {
+        return budget;
+    }
 }
