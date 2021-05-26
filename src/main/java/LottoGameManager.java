@@ -12,27 +12,35 @@ public class LottoGameManager {
 
     private static final int LOTTO_PRICE_PER = 1_000;
 
+    private LottoGameManager() {
+    }
+
     public static void main(String[] args) {
+        LottoGameManager manager = new LottoGameManager();
+        manager.start();
+    }
+
+    public void start() {
         Ticket lottPurchaseTicket = purchaseLotto();
         OutputView.sendMessage(lottPurchaseTicket.toString());
         LottoNumbers winningLotto = winningLotto();
         calculate(lottPurchaseTicket, winningLotto);
     }
 
-    private static Ticket purchaseLotto() {
+    protected Ticket purchaseLotto() {
         Budget budget = InputView.budgetLottoPrice();
         LottoStore store = new LottoStore(budget, LOTTO_PRICE_PER);
         OutputView.purchaseCountResult(store.purchaseCount());
         return store.produceLotto();
     }
 
-    private static LottoNumbers winningLotto() {
+    protected LottoNumbers winningLotto() {
         String winningLottoMessage = InputView.winningLottoNumberMessage();
         Generator winningLottoGenerator = new MessageLottoNumberGenerator(winningLottoMessage);
         return winningLottoGenerator.generate();
     }
 
-    private static void calculate(Ticket purchased, LottoNumbers winning) {
+    protected void calculate(Ticket purchased, LottoNumbers winning) {
         StatisticsCalculator calculator = new StatisticsCalculator(purchased, winning);
         OutputView.sendMessage(calculator.toString());
     }
