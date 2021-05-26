@@ -12,11 +12,11 @@ public class Profit {
 		rate = round(totalWinAmount.divide(totalAmount));
 	}
 
-	public double rate() {
-		return rate;
-	}
 	private double round(double value) {
 		return Math.round(value * HUNDREDTHS_PLACE_POINT) / HUNDREDTHS_PLACE_POINT;
 	}
 
+	public double rate() {
+		return rate;
+	}
 }
