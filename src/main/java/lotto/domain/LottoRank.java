@@ -26,15 +26,18 @@ public enum LottoRank {
 	}
 
 	public static LottoRank valueOf(long matches, boolean hasBonusBall) {
-		if (matches == SECOND.getMatches() && hasBonusBall) {
-			return SECOND;
-		}
 		return Arrays.stream(LottoRank.values())
-			.filter(lottoRank -> lottoRank.matches == matches && !lottoRank.hasBonusBall)
+			.filter(lottoRank -> lottoRank.matches == matches && lottoRank.hasBonusBall == hasBonusBall)
+			.findFirst()
+			.orElse(valueOfHasBonusBall(matches, hasBonusBall));
+	}
+
+	private static LottoRank valueOfHasBonusBall(long matches, boolean hasBonusBall) {
+		return Arrays.stream(LottoRank.values())
+			.filter(lottoRank -> lottoRank.matches == matches && lottoRank.hasBonusBall == !hasBonusBall)
 			.findFirst()
 			.orElse(UNRANKED);
 	}
-
 
 	public long getReward() {
 		return this.reward;
