@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,11 +18,7 @@ public class LottoTicketTest {
     void check_match_result() {
         //Given
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
-                LottoNumber.of(13),LottoNumber.of(14),
-                LottoNumber.of(17),LottoNumber.of(18)
-        );
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(11,12,13,14,17,18));
 
         //When
         Rank rank = lottoTicket.rankBasedOn(winningNumbers);
@@ -37,8 +32,6 @@ public class LottoTicketTest {
     void check_toString_print_result() {
         //Given
         Pattern pattern = Pattern.compile("\\[.*,*]");
-
-        //Pattern pattern = Pattern.compile("[0-9]");
         LottoTicket lottoTicket = LottoTicketGenerator.start().extract();
 
         //When
@@ -51,41 +44,24 @@ public class LottoTicketTest {
     @DisplayName("로또티켓의 번호가 6개가 아니라면 Exception이 발생한다")
     @Test
     void throw_exception_when_numbers_not_six() {
-        //Given
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
-                LottoNumber.of(13),LottoNumber.of(14),
-                LottoNumber.of(17),LottoNumber.of(18), LottoNumber.of(20)
-        );
-
-        //When + Then
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        //Given + When + Then
+        assertThatThrownBy(() -> new LottoTicket(Arrays.asList(11,12,13,14,17,18,20)))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("로또티켓의 번호가 6개인데, 중복이 발생하면 Exception이 발생한다")
     @Test
     void throw_exception_when_numbers_duplicated() {
-        //Given
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
-                LottoNumber.of(13),LottoNumber.of(14),
-                LottoNumber.of(17),LottoNumber.of(17)
-        );
-
-        //When + Then
-        assertThatThrownBy(() -> new LottoTicket(numbers))
+        //Given + When + Then
+        assertThatThrownBy(() -> new LottoTicket(Arrays.asList(11,12,13,14,17,17)))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
     @DisplayName("정확한 Rank를 내놓는지 확인 : 보너스 볼이 틀린 경우")
     @Test
     void return_right_status_after_matching_without_bonus() {
-        //Given
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
-                LottoNumber.of(13),LottoNumber.of(14),
-                LottoNumber.of(15),LottoNumber.of(17));
-
-        //When
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        //Given + When
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(11,12,13,14,15,17));
         Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 45));
 
         //Then
@@ -95,13 +71,8 @@ public class LottoTicketTest {
     @DisplayName("정확한 Rank를 내놓는지 확인 : 보너스 볼 있는 경우")
     @Test
     void return_right_status_after_matching_with_bonus() {
-        //Given
-        List<LottoNumber> numbers = Arrays.asList(LottoNumber.of(11), LottoNumber.of(12),
-                LottoNumber.of(13),LottoNumber.of(14),
-                LottoNumber.of(15),LottoNumber.of(17));
-
-        //When
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        //Given + When
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(11,12,13,14,15,17));
         Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 17));
 
         //Then

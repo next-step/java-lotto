@@ -1,21 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTicketGenerator implements TicketGenerator {
 
     private static LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
 
-    private final int MIN_VALUE = 1;
-    private final int MAX_VALUE = 45;
     private final int NUMBER_COUNT_PER_TICKET = 6;
 
-    private final List<LottoNumber> numberPool;
+    private static final List<Integer> numberPool = new ArrayList<>();
 
-    private LottoTicketGenerator() {
-        numberPool = createNumberPool();
+    static {
+        for (int i = LottoNumber.MIN_VALUE; i <= LottoNumber.MAX_VALUE; i++) {
+            numberPool.add(i);
+        }
     }
 
     public static LottoTicketGenerator start() {
@@ -25,18 +23,11 @@ public class LottoTicketGenerator implements TicketGenerator {
         return lottoTicketGenerator;
     }
 
-    private List<LottoNumber> createNumberPool() {
-        List<LottoNumber> pool = new ArrayList<>();
-        for (int num = MIN_VALUE; num <= MAX_VALUE; num++) {
-            pool.add(LottoNumber.of(num));
-        }
-        return pool;
-    }
 
     @Override
     public LottoTicket extract() {
         Collections.shuffle(numberPool);
-        List<LottoNumber> extracted = new ArrayList<>();
+        List<Integer> extracted = new ArrayList<>();
         for (int i = 0; i < NUMBER_COUNT_PER_TICKET; i++) {
             extracted.add(numberPool.get(i));
         }
