@@ -26,7 +26,14 @@ public class ResultView {
     public static void printResult(LottoWin lottoWin) {
         System.out.println(MESSAGE_WIN_RESULT);
         for(LottoRank win : lottoWin.win().keySet()) {
-            System.out.println(win.hit() + "개 일치" + printBonus(win) + "(" + win.amount() + "원) - " + lottoWin.win().get(win) + "개");
+            System.out.println(win.hit() +
+                "개 일치" +
+                printBonus(win) +
+                "(" +
+                win.amount() +
+                "원) - " +
+                lottoWin.win().get(win) +
+                "개");
         }
     }
 
