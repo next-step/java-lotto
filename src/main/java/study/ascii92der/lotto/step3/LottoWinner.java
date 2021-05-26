@@ -6,11 +6,19 @@ public enum LottoWinner {
     THIRD(4, 50000),
     FOURTH(3, 5000);
 
-    int matchNumberCount;
-    int winnerPrice;
+    private final int matchNumberCount;
+    private final int winnerPrice;
 
     LottoWinner(int matchNumberCount, int winnerPrice) {
         this.matchNumberCount = matchNumberCount;
         this.winnerPrice = winnerPrice;
+    }
+
+    public int getMatchNumberCount() {
+        return matchNumberCount;
+    }
+
+    public int getWinnerPrice() {
+        return winnerPrice;
     }
 }
