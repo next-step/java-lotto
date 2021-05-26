@@ -1,12 +1,14 @@
 package lotto;
 
-import java.util.List;
+import lotto.domains.Purchase;
+import lotto.domains.Tickets;
+import lotto.domains.WinningNumbers;
 
 public class Model {
 
     private Purchase purchase;
-    private List<Ticket> automatedTickets;
-    private Ticket winningTicket;
+    private Tickets automatedTickets;
+    private WinningNumbers winningNumbers;
 
     public Model() {
     }
@@ -19,20 +21,20 @@ public class Model {
         return this.purchase;
     }
 
-    public void saveAutomatedTickets(List<Ticket> automatedTickets) {
+    public void saveAutomatedTickets(Tickets automatedTickets) {
         this.automatedTickets = automatedTickets;
     }
 
-    public List<Ticket> loadAutomatedTickets() {
+    public Tickets loadAutomatedTickets() {
         return this.automatedTickets;
     }
 
-    public void saveWinningTicket(Ticket winningTicket) {
-        this.winningTicket = winningTicket;
+    public void saveWinningNumbers(WinningNumbers winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
-    public Ticket loadWinningTicket() {
-        return this.winningTicket;
+    public WinningNumbers loadWinningNumbers() {
+        return this.winningNumbers;
     }
 
 }

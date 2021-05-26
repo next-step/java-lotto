@@ -1,6 +1,8 @@
-package lotto;
+package step2;
 
 import java.util.List;
+
+import lotto.tool.Tokenizer;
 
 public final class StringAddCalculator {
 

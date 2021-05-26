@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 
 import lotto.Lotto;
 import lotto.Model;
-import lotto.Purchase;
+import lotto.domains.Purchase;
 
 public class AutomaticTicketingControllerTest {
 
     private static final int amount = 12;
-    Purchase purchase = new Purchase("12345");
+    private Purchase purchase = new Purchase("12345");
 
-    Model model = new Model();
-    Lotto lotto = new Lotto(model);
+    private Model model = new Model();
+    private Lotto lotto = new Lotto(model);
 
-    AutomaticTicketingController automaticTicketingController;
+    private AutomaticTicketingController automaticTicketingController;
 
     @BeforeEach
     void setUp() {
@@ -35,7 +35,7 @@ public class AutomaticTicketingControllerTest {
     @DisplayName("자동 티켓 구매")
     @Test
     void buyNewTickets() {
-        assertThat(automaticTicketingController.buyNewTickets(amount).size()).isEqualTo(amount);
+        assertThat(automaticTicketingController.buyAutomatedTickets(amount).size()).isEqualTo(amount);
     }
 
 }

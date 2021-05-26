@@ -1,5 +1,6 @@
 package lotto.enums;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,17 +14,17 @@ public enum Prize {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    SIX(6, 2_000_000_000),
+    BONUS(7, 30_000_000);
 
-    private static final int MIN_NUMBER = 0;
-    private static final int MAX_NUMBER = 6;
+    private static final int MIN_INDEX = 0;
+    private static final int MAX_INDEX = 7;
 
     private static final Map<Integer, Prize> lookup = new HashMap<>();
 
     static {
-        for (Prize prize : Prize.values()) {
-            lookup.put(prize.index, prize);
-        }
+        Arrays.stream(Prize.values())
+            .forEach(prize -> lookup.put(prize.index, prize));
     }
 
     private int index;
@@ -43,7 +44,7 @@ public enum Prize {
     }
 
     public static Prize valueOf(int index) {
-        if (index < MIN_NUMBER || MAX_NUMBER < index) {
+        if (index < MIN_INDEX || MAX_INDEX < index) {
             throw new NumberOutOfBoundsException(ErrorMessage.PRIZE_OUT_OF_BOUNDS.toString());
         }
         return lookup.get(index);

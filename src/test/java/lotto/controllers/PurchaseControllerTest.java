@@ -15,10 +15,10 @@ import lotto.exceptions.InvalidNumberException;
 
 public class PurchaseControllerTest {
 
-    Model model = new Model();
-    Lotto lotto = new Lotto(model);
+    private Model model = new Model();
+    private Lotto lotto = new Lotto(model);
 
-    PurchaseController purchaseController;
+    private PurchaseController purchaseController;
 
     @BeforeEach
     void setUp() {

@@ -1,7 +1,7 @@
 package lotto.controllers;
 
 import lotto.Lotto;
-import lotto.Purchase;
+import lotto.domains.Purchase;
 import lotto.enums.Message;
 import lotto.views.Display;
 import lotto.views.Keyboard;
@@ -16,22 +16,11 @@ public class PurchaseController implements Controller {
 
     @Override
     public void run() {
-        show();
-
-        try {
-            action();
-            toAutomaticTicketingController();
-        } catch (Exception e) {
-            Display.error(e.getMessage());
-        }
-    }
-
-    private void show() {
         Display.show(Message.PURCHASE);
-    }
 
-    private void action() {
         buyTickets(Keyboard.read());
+
+        toAutomaticTicketingController();
     }
 
     protected void buyTickets(String money) {

@@ -1,6 +1,9 @@
-package lotto;
+package lotto.domains;
 
 import java.util.List;
+
+import lotto.tool.TicketGuard;
+import lotto.tool.TicketTokenizer;
 
 public class Ticket {
 
@@ -19,18 +22,7 @@ public class Ticket {
     }
 
     public int countSameNumbers(Ticket other) {
-        int count = 0;
-        for (int number : this.numbers) {
-            count += countIfContains(other, number);
-        }
-        return count;
-    }
-
-    private int countIfContains(Ticket other, int number) {
-        if (other.contains(number)) {
-            return 1;
-        }
-        return 0;
+        return (int)this.numbers.stream().filter(other::contains).count();
     }
 
     @Override

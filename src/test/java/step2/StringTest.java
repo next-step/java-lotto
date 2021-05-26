@@ -1,4 +1,4 @@
-package step1;
+package step2;
 
 import static org.assertj.core.api.Assertions.*;
 

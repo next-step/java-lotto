@@ -1,11 +1,12 @@
 package lotto.controllers;
 
-import java.util.List;
-
-import lotto.LottoSponsor;
+import lotto.domains.Scores;
+import lotto.domains.EarningRate;
 import lotto.Lotto;
-import lotto.Purchase;
-import lotto.Ticket;
+import lotto.domains.Purchase;
+import lotto.domains.Tickets;
+import lotto.domains.WinningNumbers;
+import lotto.views.Reporter;
 
 public class ResultController implements Controller {
 
@@ -17,29 +18,27 @@ public class ResultController implements Controller {
 
     @Override
     public void run() {
-        delegateToLottoSponsor();
+        Purchase purchase = loadPurchase();
+        WinningNumbers winningNumbers = loadWinningNumbers();
+        Tickets automatedTickets = loadAutomatedTickets();
+        Scores scores = automatedTickets.scores(winningNumbers);
+        EarningRate earningRate = new EarningRate(scores, purchase);
+
+        Reporter.report(scores, earningRate);
+
         toEndController();
     }
 
-    private void delegateToLottoSponsor() {
-        List<Ticket> automatedTickets = loadAutomatedTickets();
-        Ticket winningTicket = loadWinningTicket();
-        Purchase purchase = loadPurchase();
-
-        LottoSponsor lottoSponsor = new LottoSponsor(automatedTickets, winningTicket, purchase);
-        lottoSponsor.show();
-    }
-
-    private Ticket loadWinningTicket() {
-        return this.lotto.storage().loadWinningTicket();
-    }
-
-    private List<Ticket> loadAutomatedTickets() {
+    private Tickets loadAutomatedTickets() {
         return this.lotto.storage().loadAutomatedTickets();
     }
 
     private Purchase loadPurchase() {
         return this.lotto.storage().loadPurchase();
+    }
+
+    private WinningNumbers loadWinningNumbers() {
+        return this.lotto.storage().loadWinningNumbers();
     }
 
     private void toEndController() {

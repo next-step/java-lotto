@@ -1,4 +1,4 @@
-package lotto;
+package step2;
 
 import static org.assertj.core.api.Assertions.*;
 

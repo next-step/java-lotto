@@ -14,8 +14,8 @@ import lotto.exceptions.TicketsOutOfBoundsException;
 
 public class AutomaticTicketingTest {
 
-    AutomaticTicketing automaticTicketing = new AutomaticTicketing(
-        numbers -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    private AutomaticTicketing automaticTicketing = new AutomaticTicketing(
+        () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
     @DisplayName("로또 번호 6개를 생성한다.")
     @ParameterizedTest(name = "출력: \"{1}\"")

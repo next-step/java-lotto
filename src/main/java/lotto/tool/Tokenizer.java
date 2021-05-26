@@ -1,4 +1,4 @@
-package lotto;
+package lotto.tool;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import lotto.enums.ErrorMessage;
 import lotto.exceptions.InvalidPatternException;
 
 public final class Tokenizer {
@@ -44,7 +43,7 @@ public final class Tokenizer {
             String customDelimiter = matcher.group(DELIMITER_POSITION);
             return tokenize(matcher.group(NUMBERS_POSITION), customDelimiter);
         }
-        throw new InvalidPatternException(ErrorMessage.INVALID_PATTERN.toString());
+        throw new InvalidPatternException();
     }
 
     private static String loadDelimiters(String text) {

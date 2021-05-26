@@ -1,7 +1,8 @@
 package lotto.views;
 
-import lotto.Ticket;
+import lotto.domains.Tickets;
 import lotto.enums.Message;
+import lotto.domains.EarningRate;
 
 public final class Display {
 
@@ -13,8 +14,12 @@ public final class Display {
         System.out.println(String.format(message.toString(), number));
     }
 
-    public static void show(Ticket ticket) {
-        System.out.println(ticket);
+    public static void show(Message message, EarningRate earningRate) {
+        System.out.println(String.format(message.toString(), earningRate));
+    }
+
+    public static void show(Tickets tickets) {
+        System.out.println(tickets.print());
     }
 
     public static void error(String message) {

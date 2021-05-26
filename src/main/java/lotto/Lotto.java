@@ -5,12 +5,13 @@ import lotto.controllers.Controller;
 import lotto.controllers.EndController;
 import lotto.controllers.PurchaseController;
 import lotto.controllers.ResultController;
-import lotto.controllers.WinningTicketController;
+import lotto.controllers.WinningNumbersController;
+import lotto.views.Display;
 
 public class Lotto {
 
     private Controller automaticTicketingController;
-    private Controller winningTicketController;
+    private Controller winningNumbersController;
     private Controller resultController;
     private Controller endController;
 
@@ -19,7 +20,7 @@ public class Lotto {
 
     public Lotto(Model model) {
         this.automaticTicketingController = new AutomaticTicketingController(this);
-        this.winningTicketController = new WinningTicketController(this);
+        this.winningNumbersController = new WinningNumbersController(this);
         this.resultController = new ResultController(this);
         this.endController = new EndController();
 
@@ -28,7 +29,11 @@ public class Lotto {
     }
 
     public void run() {
-        controller.run();
+        try {
+            controller.run();
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+        }
     }
 
     public boolean isRunning() {
@@ -47,8 +52,8 @@ public class Lotto {
         this.controller = this.automaticTicketingController;
     }
 
-    public void toWinningTicketController() {
-        this.controller = this.winningTicketController;
+    public void toWinningNumbersController() {
+        this.controller = this.winningNumbersController;
     }
 
     public void toResultController() {

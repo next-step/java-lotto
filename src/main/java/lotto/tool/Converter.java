@@ -1,6 +1,5 @@
 package lotto.tool;
 
-import lotto.enums.ErrorMessage;
 import lotto.exceptions.InvalidNumberException;
 
 public final class Converter {
@@ -12,7 +11,7 @@ public final class Converter {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            throw new InvalidNumberException(ErrorMessage.INVALID_NUMBER.toString());
+            throw new InvalidNumberException();
         }
     }
 
