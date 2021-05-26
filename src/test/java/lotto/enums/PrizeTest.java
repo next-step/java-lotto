@@ -1,9 +1,13 @@
 package lotto.enums;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.error.ErrorMessage;
+import lotto.lotto.LottoResult;
+
 
 class PrizeTest {
     @Test
@@ -34,5 +38,48 @@ class PrizeTest {
         Prize prize = Prize.valueOf(5, false);
         //then
         assertThat(prize.money()).isEqualTo(Prize.THIRD.money());
+    }
+
+    @Test
+    @DisplayName("valueOf 메서드 결과 테스트")
+    void valueOf() {
+        //given
+        //when
+        //then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Prize.valueOf(0, false))
+                .withMessageContaining(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Prize.valueOf(-1, false))
+                .withMessageContaining(ErrorMessage.INVALID_LOTTO_PRIZE_ENUM);
+
+        assertThat(Prize.valueOf(6, false).money()).isEqualTo(Prize.FIRST.money());
+    }
+
+    @Test
+    @DisplayName("당첨 카운트 테스트")
+    void increase() {
+        //given
+        LottoResult lottoResult = new LottoResult();
+        //when
+        lottoResult.increaseCount(Prize.THIRD.matchingCount, false);
+        lottoResult.increaseCount(Prize.FOURTH.matchingCount, false);
+        lottoResult.increaseCount(Prize.FOURTH.matchingCount, false);
+        //then
+        assertThat(lottoResult.count(Prize.THIRD)).isEqualTo(1);
+        assertThat(lottoResult.count(Prize.FOURTH)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("당첨 금액 테스트")
+    void income() {
+        //given
+        LottoResult lottoResult = new LottoResult();
+        //when
+        lottoResult.increaseCount(Prize.THIRD.matchingCount, false);
+        lottoResult.increaseCount(Prize.SECOND.matchingCount, true);
+        //then
+        assertThat(lottoResult.income()).isEqualTo(Prize.SECOND.money() + Prize.THIRD.money());
     }
 }
