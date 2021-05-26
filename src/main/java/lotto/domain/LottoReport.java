@@ -41,7 +41,7 @@ public class LottoReport {
 			+ formatMessage(FOURTH) + LINE_SEPARATOR
 			+ formatMessage(THIRD) + LINE_SEPARATOR
 			+ formatMessage(SECOND) + LINE_SEPARATOR
-			+ formatMessage(FIRST) + LINE_SEPARATOR;
+			+ formatMessage(FIRST);
 	}
 
 	private String formatMessage(LottoRank lottoRank) {
