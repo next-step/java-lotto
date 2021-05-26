@@ -10,6 +10,9 @@ public class WinningTicket {
 	private final int bonus;
 
 	public WinningTicket(Ticket ticket, int bonus) {
+		if (Objects.isNull(ticket) || bonus <= 0 || bonus > 45) {
+			throw new IllegalArgumentException("잘못된 당첨 정보 입니다");
+		}
 		this.ticket = ticket;
 		this.bonus = bonus;
 	}

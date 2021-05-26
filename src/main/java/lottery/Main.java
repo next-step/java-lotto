@@ -41,11 +41,11 @@ public class Main {
 			.map(a -> Integer.parseInt(a.trim()))
 			.sorted()
 			.collect(Collectors.toCollection(LinkedHashSet::new));
-		infoCenter.setLastWeekWinningTicket(Ticket.of(LottoNumbers.from(ints)));
+		Ticket lastWeekTicket = Ticket.of(LottoNumbers.from(ints));
 
 		inputView.askForBonusNumber();
 		int bonus = Integer.parseInt(sc.nextLine().trim());
-		infoCenter.setBonusNumber(bonus);
+		infoCenter.setLastWeekWinningTicket(new WinningTicket(lastWeekTicket, bonus));
 
 		Result result = buyer.checkTicket(infoCenter);
 		float totalYield = result.getTotalYield(initialMoney);

@@ -24,7 +24,7 @@ class InfoCenterTest {
 
 	@Test
 	void 지난주_당첨번호를_입력받는다() {
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 10);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		assertThat(sut.lastWeekWinningNumbers()).isEqualTo(lastWinningNumber);
@@ -33,18 +33,17 @@ class InfoCenterTest {
 	@Test
 	void 로또_3개자리_일치() {
 		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 11, 12, 13)));
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
-
 		assertEqualMatchCount(result, 1, 0, 0, 0, 0);
 	}
 
 	@Test
 	void 로또_4개자리_일치() {
 		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 12, 13)));
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -54,9 +53,9 @@ class InfoCenterTest {
 	@Test
 	void 로또_5개자리_일치() {
 		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 13)));
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
-		sut.setBonusNumber(45);
+
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
 		assertEqualMatchCount(result, 0, 0, 1, 0, 0);
 	}
@@ -64,7 +63,7 @@ class InfoCenterTest {
 	@Test
 	void 로또_6개자리_일치() {
 		Ticket buyerTicket = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
@@ -73,9 +72,8 @@ class InfoCenterTest {
 
 	@Test
 	void 복수의_로또티켓을_체크할수_있다() {
-
 		Tickets tickets = getTickets(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
 
 		Result result = sut.confirmTicket(tickets);
@@ -93,8 +91,8 @@ class InfoCenterTest {
 		Money money = Money.won(3000L);
 		float expected = 5.0f;
 
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
-		sut.setLastWeekWinningTicket(lastWinningNumber);
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 7);
+		sut.setLastWeekWinningTicket(lastWinningNumber);;
 
 		Result result = sut.confirmTicket(tickets);
 		float totalYield = result.getTotalYield(money);
@@ -108,10 +106,8 @@ class InfoCenterTest {
 			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11),
 			Sets.newLinkedHashSet(1, 2, 3, 4, 5, 11)
 		);
-		Ticket lastWinningNumber = Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6)));
+		WinningTicket lastWinningNumber = new WinningTicket(Ticket.of(LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6))), 11);
 		sut.setLastWeekWinningTicket(lastWinningNumber);
-		int bonus = 11;
-		sut.setBonusNumber(bonus);
 
 		Result result = sut.confirmTicket(tickets);
 
