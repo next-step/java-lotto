@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class NumbersInputStrategy implements LottoNumbersGenerateStrategy {
 	private final Supplier<List<Integer>> numbersSupplier;
@@ -12,8 +13,8 @@ public class NumbersInputStrategy implements LottoNumbersGenerateStrategy {
 	}
 
 	@Override
-	public List<LottoNumbers> generate(Count count) {
-		return count.streamFromZero()
+	public List<LottoNumbers> generate(int count) {
+		return IntStream.range(0, count)
 			.mapToObj((i) -> LottoNumbers.of(numbersSupplier.get()))
 			.collect(Collectors.toList());
 	}

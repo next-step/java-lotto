@@ -1,7 +1,6 @@
 package lotto.model;
 
 import static java.util.stream.Collectors.*;
-import static lotto.model.Count.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,8 +12,8 @@ public class RandomGenerateStrategy implements LottoNumbersGenerateStrategy {
 	private static final Random random = new Random();
 
 	@Override
-	public List<LottoNumbers> generate(Count count) {
-		return count.streamFromZero()
+	public List<LottoNumbers> generate(int count) {
+		return IntStream.range(0, count)
 			.mapToObj((i) -> LottoNumbers.of(generateRandomNumbers()))
 			.collect(Collectors.toList());
 	}
@@ -22,7 +21,7 @@ public class RandomGenerateStrategy implements LottoNumbersGenerateStrategy {
 	private List<Integer> generateRandomNumbers() {
 		List<Integer> candidateNumbers = generateLottoCandidateNumbers();
 		Collections.shuffle(candidateNumbers, random);
-		return candidateNumbers.subList(ZERO.getCount(), LottoNumbers.LENGTH);
+		return candidateNumbers.subList(0, LottoNumbers.LENGTH);
 	}
 
 	private List<Integer> generateLottoCandidateNumbers() {

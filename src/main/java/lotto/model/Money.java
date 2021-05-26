@@ -28,8 +28,8 @@ public class Money {
 		return amount;
 	}
 
-	public Count countLotto() {
-		return Count.of(divided(LOTTO_PRICE));
+	int countLotto() {
+		return (int) divided(LOTTO_PRICE);
 	}
 
 	Money times(int count) {
