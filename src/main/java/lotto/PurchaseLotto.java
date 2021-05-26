@@ -40,11 +40,11 @@ public class PurchaseLotto {
     }
 
     public ResultAll resultLottoGame(InputView inputView, LottoNumbersList lottoNumbersList) {
-        setLastWonLottoNumbers(inputView);
-        return lottoNumbersList.countMatchedNumbersList(lastWonLottoNumber);
+        return lottoNumbersList.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
     }
 
-    private void setLastWonLottoNumbers(InputView inputView) {
-        this.lastWonLottoNumber = new LastWonLottoNumber(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
+    private LastWonLottoNumber setLastWonLottoNumbers(InputView inputView) {
+        lastWonLottoNumber = new LastWonLottoNumber(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
+        return lastWonLottoNumber;
     }
 }
