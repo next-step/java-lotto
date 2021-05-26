@@ -1,35 +1,35 @@
 package lotto.lotto;
 
-import lotto.enums.PrizeEnum;
+import lotto.enums.Prize;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<PrizeEnum, Integer> result = new HashMap<>();
+    private final Map<Prize, Integer> result = new HashMap<>();
 
-    public int count(PrizeEnum prizeEnum) {
-        return getOrDefault(prizeEnum);
+    public int count(Prize prize) {
+        return getOrDefault(prize);
     }
 
     public void increaseCount(int matchingCount, boolean matchBonus) {
-        if (matchingCount < PrizeEnum.FIFTH.matchingCount()) {
+        if (matchingCount < Prize.FIFTH.matchingCount()) {
             return;
         }
-        PrizeEnum prizeEnum = PrizeEnum.valueOf(matchingCount, matchBonus);
-        int count = getOrDefault(prizeEnum);
-        result.put(prizeEnum, ++count);
+        Prize prize = Prize.valueOf(matchingCount, matchBonus);
+        int count = getOrDefault(prize);
+        result.put(prize, ++count);
     }
 
     public int income() {
         int total = 0;
-        for (PrizeEnum prizeValue : PrizeEnum.values()) {
+        for (Prize prizeValue : Prize.values()) {
             total += prizeValue.income(this);
         }
         return total;
     }
 
-    private int getOrDefault(PrizeEnum prizeEnum) {
-        return result.getOrDefault(prizeEnum, 0);
+    private int getOrDefault(Prize prize) {
+        return result.getOrDefault(prize, 0);
     }
 }

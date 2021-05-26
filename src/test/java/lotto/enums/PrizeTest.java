@@ -5,15 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PrizeEnumTest {
+class PrizeTest {
     @Test
     @DisplayName("일치하는 로또 개수 반환")
     void getPrize() {
         //given
         //when
-        PrizeEnum prizeEnum = PrizeEnum.valueOf(3, false);
+        Prize prize = Prize.valueOf(3, false);
         //then
-        assertThat(prizeEnum.prize()).isEqualTo(PrizeEnum.FIFTH.prize());
+        assertThat(prize.money()).isEqualTo(Prize.FIFTH.money());
     }
 
     @Test
@@ -21,9 +21,9 @@ class PrizeEnumTest {
     void getSecondPrize() {
         //given
         //when
-        PrizeEnum prizeEnum = PrizeEnum.valueOf(5, true);
+        Prize prize = Prize.valueOf(5, true);
         //then
-        assertThat(prizeEnum.prize()).isEqualTo(PrizeEnum.SECOND.prize());
+        assertThat(prize.money()).isEqualTo(Prize.SECOND.money());
     }
 
     @Test
@@ -31,8 +31,8 @@ class PrizeEnumTest {
     void getThirdPrize() {
         //given
         //when
-        PrizeEnum prizeEnum = PrizeEnum.valueOf(5, false);
+        Prize prize = Prize.valueOf(5, false);
         //then
-        assertThat(prizeEnum.prize()).isEqualTo(PrizeEnum.THIRD.prize());
+        assertThat(prize.money()).isEqualTo(Prize.THIRD.money());
     }
 }

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import lotto.enums.PrizeEnum;
+import lotto.enums.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -89,7 +89,7 @@ public class ShopTest {
         //when
         LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         //then
-        assertThat(match.count(PrizeEnum.FIFTH)).isEqualTo(1);
+        assertThat(match.count(Prize.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -112,6 +112,6 @@ public class ShopTest {
         LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
 
         //then
-        assertThat(match.count(PrizeEnum.SECOND)).isEqualTo(1);
+        assertThat(match.count(Prize.SECOND)).isEqualTo(1);
     }
 }
