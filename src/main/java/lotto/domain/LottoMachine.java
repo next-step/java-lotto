@@ -22,14 +22,6 @@ class LottoMachine {
 						.collect(Collectors.toList()));
 	}
 
-	static LottoTicket generate() {
-		ArrayList<LottoNumber> lottoNumberList = new ArrayList<>(LOTTO_NUMBER_LIST);
-		Collections.shuffle(lottoNumberList);
-		List<LottoNumber> shuffledList = lottoNumberList.subList(FROM_INDEX, LOTTO_NUMBER_COUNT);
-
-		return new LottoTicket(Collections.unmodifiableSet(new HashSet<>(shuffledList)));
-	}
-
 	List<LottoTicket> generate(int count) {
 		List<LottoTicket> lottoTicketList = new ArrayList<>(count);
 
@@ -38,6 +30,14 @@ class LottoMachine {
 		}
 
 		return Collections.unmodifiableList(lottoTicketList);
+	}
+
+	static LottoTicket generate() {
+		ArrayList<LottoNumber> lottoNumberList = new ArrayList<>(LOTTO_NUMBER_LIST);
+		Collections.shuffle(lottoNumberList);
+		List<LottoNumber> shuffledList = lottoNumberList.subList(FROM_INDEX, LOTTO_NUMBER_COUNT);
+
+		return new LottoTicket(Collections.unmodifiableSet(new HashSet<>(shuffledList)));
 	}
 
 }
