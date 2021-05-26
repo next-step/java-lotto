@@ -2,6 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,5 +39,14 @@ public class LottoAppInput {
 		return Stream.of(numbers)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+	}
+
+	public <T> T requireValidInput(Supplier<T> input, Consumer<String> errorMessageConsumer) {
+		try {
+			return input.get();
+		} catch (IllegalArgumentException e) {
+			errorMessageConsumer.accept(e.getMessage());
+			return requireValidInput(input, errorMessageConsumer);
+		}
 	}
 }

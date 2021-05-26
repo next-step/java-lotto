@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import lotto.model.Count;
 import lotto.model.LottoNumber;
@@ -31,13 +30,24 @@ public class LottoApp {
 	}
 
 	public void run() {
-		Money money = requireValidInput(this::inputMoney);
+		Money money = lottoAppInput.requireValidInput(
+			this::inputMoney,
+			lottoAppOutput::printMessage
+		);
 		Count totalCount = money.countLotto();
-		Count manualCount = requireValidInput(() -> inputManualBuyCount(totalCount));
+		Count manualCount = lottoAppInput.requireValidInput(
+			() -> inputManualBuyCount(totalCount),
+			lottoAppOutput::printMessage
+		);
 		Count autoCount = totalCount.minus(manualCount);
-		LottoTicket lottoTicket = requireValidInput(() -> inputLottoTicket(manualCount, autoCount));
+		LottoTicket lottoTicket = lottoAppInput.requireValidInput(
+			() -> inputLottoTicket(manualCount, autoCount),
+			lottoAppOutput::printMessage
+		);
 		printLottoTicket(lottoTicket, manualCount, autoCount);
-		WinningNumbers winningNumbers = requireValidInput(this::inputWinningNumbers);
+		WinningNumbers winningNumbers = lottoAppInput.requireValidInput(
+			this::inputWinningNumbers, lottoAppOutput::printMessage
+		);
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
@@ -88,23 +98,5 @@ public class LottoApp {
 		Rate earningRate = lottoResult.calculateEarningRate(inputMoney);
 		LottoResultDto resultDto = LottoResultDto.toDto(lottoResult, earningRate);
 		lottoAppOutput.printLottoResult(resultDto);
-	}
-
-	private <T> T requireValidInput(Supplier<T> supplier) {
-		T inputResult = null;
-		while (inputResult == null) {
-			inputResult = input(supplier);
-		}
-		return inputResult;
-	}
-
-	private <T> T input(Supplier<T> input) {
-		T result = null;
-		try {
-			result = input.get();
-		} catch (IllegalArgumentException e) {
-			lottoAppOutput.printMessage(e.getMessage());
-		}
-		return result;
 	}
 }
