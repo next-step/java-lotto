@@ -55,7 +55,7 @@ public class LottoNumbers {
         return count++;
     }
 
-    private boolean contains(LottoNumber purchased) {
+    protected boolean contains(LottoNumber purchased) {
         return lottoNumbers.contains(purchased);
     }
 
