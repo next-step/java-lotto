@@ -12,8 +12,8 @@ import kht2199.lotto.view.ResultView;
 public class LottoMain {
 
 	public static void main(String[] args) {
-		InputView inputView = new InputView();
 		ResultView resultView = new ResultView();
+		InputView inputView = new InputView(resultView);
 		RandomLotto randomLotto = new RandomLotto(inputView, resultView);
 		start(randomLotto, resultView);
 	}

@@ -5,7 +5,6 @@ import static java.lang.System.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
@@ -30,7 +29,7 @@ public class RandomLotto {
 
 	private final LottoList lottoList = new LottoList();
 
-	private LottoResult lottoResult;
+	private LottoWinningResult lottoWinningResult;
 
 	private final LottoRule rule = new LottoRule();
 
@@ -51,9 +50,10 @@ public class RandomLotto {
 		purchase(countsOfLotto);
 		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
-		lottoResult = input.lottoResult();
-		lottoResult.updateLottoResult(lottoList);
-		output.printResultStatistics(lottoResult);
+		output.printMessageForWinningNumbers();
+		lottoWinningResult = input.acceptWinningNumbers();
+		lottoWinningResult.updateLottoWinningNumbers(lottoList);
+		output.printResultStatistics(lottoWinningResult);
 	}
 
 	/**

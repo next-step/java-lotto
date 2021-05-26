@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +21,14 @@ import kht2199.lotto.view.ResultView;
  */
 class RandomLottoTest {
 
-	RandomLotto randomLotto = new RandomLotto(new InputView(), new ResultView());
+	private static RandomLotto randomLotto;
+
+	@BeforeAll
+	static void beforeAll() {
+		ResultView resultView = new ResultView();
+		InputView inputView = new InputView(resultView);
+		randomLotto = new RandomLotto(inputView, resultView);
+	}
 
 	@ParameterizedTest
 	@DisplayName("구입 금액으로 구매할 수 있는 로또 갯수를 계산")

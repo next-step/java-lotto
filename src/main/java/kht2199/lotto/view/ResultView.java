@@ -2,8 +2,11 @@ package kht2199.lotto.view;
 
 import static java.lang.System.*;
 
+import java.util.List;
+
+import kht2199.lotto.Lotto;
 import kht2199.lotto.LottoList;
-import kht2199.lotto.LottoResult;
+import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.assets.AssetsException;
 
@@ -18,22 +21,30 @@ public class ResultView {
 	}
 
 	public void printPurchased(LottoList list) {
-		assert false;
+		print(list.size() + "개를 구매했습니다");
 	}
 
 	public void printLottoList(LottoList lottoList) {
-		assert false;
+		List<Lotto> list = lottoList.getList();
+		for (Lotto lotto : list) {
+			print(lotto.toString());
+		}
 	}
 
-	private void print(String message) {
-		out.println(message);
+	public void printMessageForWinningNumbers() {
+		print("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
-	public void printResultStatistics(LottoResult lottoResult) {
+	public void printResultStatistics(LottoWinningResult lottoWinningResult) {
 		assert false;
 	}
 
 	public void printException(DomainException e) {
 		// TODO print for domain exceptions.
 	}
+
+	private void print(String message) {
+		out.println(message);
+	}
+
 }

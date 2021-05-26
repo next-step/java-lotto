@@ -18,4 +18,17 @@ public final class Lotto {
 	public List<Integer> getNumbers() {
 		return numbers;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append('[');
+		for (int i = 0, numbersSize = numbers.size(); i < numbersSize; i++) {
+			boolean lastIndex = i + 1 == numbersSize;
+			Integer number = numbers.get(i);
+			buffer.append(number);
+			buffer.append(lastIndex ? "]" : ", ");
+		}
+		return buffer.toString();
+	}
 }

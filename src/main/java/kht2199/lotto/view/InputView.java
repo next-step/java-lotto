@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import kht2199.lotto.Lotto;
-import kht2199.lotto.LottoResult;
+import kht2199.lotto.LottoWinningResult;
+import kht2199.lotto.exception.input.InvalidInputError;
+import kht2199.lotto.exception.input.InvalidInputException;
 
 /**
  *
@@ -15,24 +17,55 @@ public class InputView {
 
 	private static final Scanner in = new Scanner(System.in);
 
+	private final ResultView output;
+
+	public InputView(ResultView output) {
+		this.output = output;
+	}
+
 	public int assets() {
 		String assetsString = in.nextLine();
 		return Integer.parseInt(assetsString);
 	}
 
-	public LottoResult lottoResult() {
-		assert false;
-		return validationLottoResultString(in.nextLine());
+	public LottoWinningResult acceptWinningNumbers() {
+		try {
+			String winningNumbersString = in.nextLine();
+			validationLottoResultString(winningNumbersString);
+			String[] splitNumbers = winningNumbersString.split(",");
+			List<Integer> numbers = new ArrayList<>();
+			for (String splitNumber : splitNumbers) {
+				numbers.add(Integer.parseInt(splitNumber));
+			}
+			Lotto winningNumbers = new Lotto(numbers);
+			return new LottoWinningResult(winningNumbers);
+		} catch (InvalidInputException e) {
+			output.printException(e);
+			return acceptWinningNumbers();
+		}
 	}
 
 	/**
 	 * 입력 문자열 자체에 대한 검증은 UI에서 검증.
 	 */
-	protected LottoResult validationLottoResultString(String input) {
-		assert false;
-		// TODO input string to int array.
-		List<Integer> lottoNumbers = new ArrayList<>(6);
-		Lotto winningNumbers = new Lotto(lottoNumbers);
-		return new LottoResult(winningNumbers);
+	protected void validationLottoResultString(String input) throws InvalidInputException {
+		if (input == null || input.equals("")) {
+			throw new InvalidInputException(InvalidInputError.EMPTY);
+		}
+		String[] split = input.split(",");
+		if (split.length != 6) {
+			throw new InvalidInputException(InvalidInputError.LENGTH);
+		}
+		try {
+			checkParsableToInteger(split);
+		} catch (NumberFormatException e) {
+			throw new InvalidInputException(InvalidInputError.PARSING);
+		}
+	}
+
+	private void checkParsableToInteger(String[] split) throws NumberFormatException {
+		for (String s : split) {
+			Integer.parseInt(s);
+		}
 	}
 }
