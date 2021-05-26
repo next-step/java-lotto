@@ -6,32 +6,33 @@ import lotto.LottoNumbers;
 
 public class Ticket {
 
-	private final List<LottoNumbers> lottoList;
-	private final Budget budget;
-	public Ticket(List<LottoNumbers> lottoList, Budget budget) {
-		this.lottoList = lottoList;
-		this.budget = budget;
-	}
+    private final List<LottoNumbers> lottoList;
+    private final Budget budget;
 
-	public int purchaseCount() {
-		return lottoList.size();
-	}
+    public Ticket(List<LottoNumbers> lottoList, Budget budget) {
+        this.lottoList = lottoList;
+        this.budget = budget;
+    }
 
-	public List<LottoNumbers> purchasedLotto() {
-		return lottoList;
-	}
+    public int purchaseCount() {
+        return lottoList.size();
+    }
 
-	public int budget() {
-		return budget.get();
-	}
+    public List<LottoNumbers> purchasedLotto() {
+        return lottoList;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder message = new StringBuilder();
-		for (LottoNumbers lottoNumbers : lottoList) {
-			message.append(lottoNumbers);
-			message.append("\n");
-		}
-		return message.toString();
-	}
+    public int budget() {
+        return budget.get();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder message = new StringBuilder();
+        for (LottoNumbers lottoNumbers : lottoList) {
+            message.append(lottoNumbers);
+            message.append("\n");
+        }
+        return message.toString();
+    }
 }

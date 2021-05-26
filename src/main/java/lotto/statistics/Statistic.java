@@ -4,38 +4,39 @@ import java.util.Objects;
 
 public class Statistic {
 
-	private final Earn earn;
-	private int count;
-	public Statistic(int repeatedCount, Earn earn) {
-		this.count = repeatedCount;
-		this.earn = earn;
-	}
+    private final Earn earn;
+    private int count;
 
-	public int earningPrice() {
-		return count * earn.winningPrice();
-	}
+    public Statistic(int repeatedCount, Earn earn) {
+        this.count = repeatedCount;
+        this.earn = earn;
+    }
 
-	public Statistic plusMatchCount() {
-		count++;
-		return this;
-	}
+    public int earningPrice() {
+        return count * earn.winningPrice();
+    }
 
-	public String earningMessage() {
-		return earn.message(count);
-	}
+    public Statistic plusMatchCount() {
+        count++;
+        return this;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Statistic))
-			return false;
-		Statistic statistic = (Statistic)o;
-		return count == statistic.count && earn == statistic.earn;
-	}
+    public String earningMessage() {
+        return earn.message(count);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(count, earn);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Statistic))
+            return false;
+        Statistic statistic = (Statistic)o;
+        return count == statistic.count && earn == statistic.earn;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count, earn);
+    }
 }

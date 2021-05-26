@@ -10,19 +10,23 @@ import lotto.LottoNumbers;
 
 public class MessageLottoNumberGenerator implements Generator {
 
-	private final List<Integer> numbers;
+    private final List<Integer> numbers;
 
-	public MessageLottoNumberGenerator(String message) {
-		List<String> numbers = Arrays.asList(StringCalculator.tokenizing(message, ", "));
-		this.numbers = numbers.stream()
-			.map(Integer::valueOf)
-			.collect(Collectors.toList());
-	}
+    public MessageLottoNumberGenerator(String message) {
+        List<String> numbers = Arrays.asList(StringCalculator.tokenizing(message, ", "));
+        this.numbers = numbers.stream()
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
+    }
 
-	@Override
-	public LottoNumbers generate() {
-		Collections.sort(numbers);
-		return new LottoNumbers(numbers);
-	}
+    @Override
+    public LottoNumbers generate() {
+        Collections.sort(numbers);
+        return new LottoNumbers(numbers);
+    }
+
+    protected List<Integer> numbers() {
+        return numbers;
+    }
 
 }

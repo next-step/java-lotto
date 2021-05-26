@@ -6,15 +6,15 @@ import lotto.LottoNumbers;
 
 public class BonusLottoGenerator extends MessageLottoNumberGenerator implements Generator {
 
-	private final LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-	public BonusLottoGenerator(String message, int bonus) {
-		super(message);
-		this.bonusNumber = new LottoNumber(bonus);
-	}
+    public BonusLottoGenerator(String message, int bonus) {
+        super(message);
+        this.bonusNumber = new LottoNumber(bonus);
+    }
 
-	@Override
-	public LottoNumbers generate() {
-		return new BonusLotto(super.numbers(), bonusNumber);
-	}
+    @Override
+    public LottoNumbers generate() {
+        return new BonusLotto(super.numbers(), bonusNumber);
+    }
 }
