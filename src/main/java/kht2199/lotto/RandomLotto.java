@@ -39,16 +39,16 @@ public class RandomLotto {
 		this.output = resultView;
 	}
 
+	/**
+	 *
+	 * @throws LottoListNotEmptyException 초기화 문제.
+	 * @throws AssetsNotEnoughException 예산 부족.
+	 */
 	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException {
 		out.println("구입금액을 입력해 주세요.");
 		assets = acceptAssets();
 		int countsOfLotto = calculateLottoCount(assets, LOTTO_PRICE);
-		try {
-			purchase(countsOfLotto);
-		} catch (DomainException e) {
-			// 예산 혹은 초기화 문제로 인한 예외발생.
-			throw e;
-		}
+		purchase(countsOfLotto);
 		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
 		lottoResult = input.lottoResult();

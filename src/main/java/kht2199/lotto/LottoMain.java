@@ -18,6 +18,9 @@ public class LottoMain {
 		start(randomLotto, resultView);
 	}
 
+	/**
+	 * 예외발생시, 프로그램을 재시작하거나 종료, 조정을 한다.
+	 */
 	private static void start(RandomLotto randomLotto, ResultView resultView) {
 		try {
 			randomLotto.start();
