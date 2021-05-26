@@ -29,4 +29,8 @@ public class TestUtil {
     return LottoGame.createAutoGame(new LottoNumbers(toNumbers(numbers)));
   }
 
+  public static LottoGame createManualLottoGameFromLottoNumbers(String numbers) {
+    return LottoGame.createManualGame(new LottoNumbers(toNumbers(numbers)));
+  }
+
 }
