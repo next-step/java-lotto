@@ -63,21 +63,6 @@ class UserLottoTest {
 		assertThat(userLotto.count()).isEqualTo(2);
 	}
 
-	@DisplayName("로또 번호 목록을 문자열로 받아오는 테스트")
-	@Test
-	void lottoNumberMessage() {
-		// given
-		List<LottoTicket> lottoTicketList = new ArrayList<>();
-		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
-		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
-
-		// when
-		UserLotto userLotto = new UserLotto(lottoTicketList);
-
-		// then
-		assertThat(userLotto.lottoNumberMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]");
-	}
-
 	@DisplayName("로또 티켓 리스트를 반환하는 테스트")
 	@Test
 	void lottoTickets() {

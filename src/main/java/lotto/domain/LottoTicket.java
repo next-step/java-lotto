@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-class LottoTicket {
+public class LottoTicket {
 
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final String INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE = String.format("로또 숫자는 %d 자리입니다.",

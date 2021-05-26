@@ -40,17 +40,4 @@ class LottoViewTest {
 		assertThat(message).isEqualTo(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
 	}
 
-	@DisplayName("로또 번호 출력 테스트")
-	@Test
-	void userLottoNumberListView() {
-		// given
-		String lottoNumberMessage = "lottoNumberMessage";
-
-		// when
-		String message = lottoView.userLottoNumberListView(lottoNumberMessage);
-
-		// then
-		assertThat(message).isEqualTo(STATISTIC_HEADER_MESSAGE + lottoNumberMessage);
-	}
-
 }

@@ -68,7 +68,7 @@ public class LottoApplication {
 
 	private void viewUserLottoState(UserLotto userLotto) {
 		sendMessage(lottoView.userLottoCountView(userLotto.count()));
-		sendMessage(lottoView.userLottoNumberListView(userLotto.lottoNumberMessage()));
+		sendMessage(lottoView.userLottoNumberListView(userLotto));
 	}
 
 	public static void main(String[] args) {

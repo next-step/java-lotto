@@ -1,6 +1,14 @@
 package lotto;
 
+import lotto.domain.LottoRank;
 import lotto.domain.LottoReport;
+import lotto.domain.LottoTicket;
+import lotto.domain.UserLotto;
+
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static lotto.domain.LottoRank.*;
 
 public class LottoView {
 
@@ -12,6 +20,9 @@ public class LottoView {
 	public static final String STATISTIC_HEADER_MESSAGE =
 			LINE_SEPARATOR + "당첨 통계" + LINE_SEPARATOR + "---------";
 	public static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+
+	private static final String MESSAGE_FORMAT = "%d개 일치 (%s원)- %d개";
+	private static final String SECOND_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치 (%s원)- %d개";
 
 	public String inputMoneyView() {
 		return INPUT_MONEY_MESSAGE;
@@ -29,15 +40,34 @@ public class LottoView {
 		return INPUT_BONUS_NUMBER_MESSAGE;
 	}
 
+	public String userLottoNumberListView(UserLotto userLotto) {
+		return userLotto.lottoTickets()
+				.stream()
+				.map(LottoTicket::toString)
+				.collect(Collectors.joining(LINE_SEPARATOR));
+	}
+
 	public String lottoReportView(LottoReport lottoReport) {
 		return STATISTIC_HEADER_MESSAGE + LINE_SEPARATOR
-				+ lottoReport.lottoRankMessage() + LINE_SEPARATOR
+				+ buildLottoRankMessage(lottoReport.lottoRankMap()) + LINE_SEPARATOR
 				+ String.format(EARNING_RESULT_MESSAGE_FORMAT, lottoReport.earningRatio(),
 				lottoReport.earningResultMessage());
 	}
 
-	public String userLottoNumberListView(String lottoNumberMessage) {
-		return lottoNumberMessage;
+	private String buildLottoRankMessage(Map<LottoRank, Integer> lottoRankMap) {
+		return formatMessage(FIFTH, lottoRankMap.getOrDefault(FIFTH, 0)) + LINE_SEPARATOR
+				+ formatMessage(FOURTH, lottoRankMap.getOrDefault(FOURTH, 0)) + LINE_SEPARATOR
+				+ formatMessage(THIRD, lottoRankMap.getOrDefault(THIRD, 0)) + LINE_SEPARATOR
+				+ formatMessage(SECOND, lottoRankMap.getOrDefault(SECOND, 0)) + LINE_SEPARATOR
+				+ formatMessage(FIRST, lottoRankMap.getOrDefault(FIRST, 0));
+	}
+
+	private String formatMessage(LottoRank lottoRank, Integer lottoCount) {
+		if (lottoRank.equals(SECOND)) {
+			return String.format(SECOND_MESSAGE_FORMAT, lottoRank.matchCount(), lottoRank.money(), lottoCount);
+		}
+
+		return String.format(MESSAGE_FORMAT, lottoRank.matchCount(), lottoRank.money(), lottoCount);
 	}
 
 }
