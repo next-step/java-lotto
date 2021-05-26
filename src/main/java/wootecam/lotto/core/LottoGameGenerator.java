@@ -32,11 +32,11 @@ public class LottoGameGenerator {
 
 	public WinningLotto getWinningLotto(String winningLottoInput, String BonusNumberInput) {
 		List<LottoNumber> winningLottoList = Arrays.stream(winningLottoInput.split(","))
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.distinct()
 			.collect(Collectors.toList());
 		Lotto lotto = new Lotto(winningLottoList);
-		BonusNumber bonusNumber = new BonusNumber(new LottoNumber(BonusNumberInput), lotto);
+		BonusNumber bonusNumber = new BonusNumber(LottoNumber.of(BonusNumberInput), lotto);
 
 		return new WinningLotto(lotto, bonusNumber);
 	}

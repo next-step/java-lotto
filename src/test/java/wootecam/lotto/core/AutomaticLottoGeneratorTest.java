@@ -33,12 +33,12 @@ public class AutomaticLottoGeneratorTest {
 	}
 
 	static Stream<Arguments> parametersProvider() {
-		LottoNumber lottoNumber = new LottoNumber(1);
-		LottoNumber lottoNumber1 = new LottoNumber(3);
-		LottoNumber lottoNumber2 = new LottoNumber(5);
-		LottoNumber lottoNumber3 = new LottoNumber(7);
-		LottoNumber lottoNumber4 = new LottoNumber(9);
-		LottoNumber lottoNumber5 = new LottoNumber(11);
+		LottoNumber lottoNumber = LottoNumber.of(1);
+		LottoNumber lottoNumber1 = LottoNumber.of(3);
+		LottoNumber lottoNumber2 = LottoNumber.of(5);
+		LottoNumber lottoNumber3 = LottoNumber.of(7);
+		LottoNumber lottoNumber4 = LottoNumber.of(9);
+		LottoNumber lottoNumber5 = LottoNumber.of(11);
 		List<LottoNumber> lottoNumbers = Arrays.asList(lottoNumber, lottoNumber1, lottoNumber2, lottoNumber3,
 			lottoNumber4, lottoNumber5);
 

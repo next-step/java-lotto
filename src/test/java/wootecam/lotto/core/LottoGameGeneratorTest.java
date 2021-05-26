@@ -39,12 +39,12 @@ public class LottoGameGeneratorTest {
 	@DisplayName("정상적인 입력에 대한 당첨번호테스트")
 	void test_당첨번호테스트(String input, String bonusInput) {
 		WinningLotto winningLotto = lottoGameGenerator.getWinningLotto(input, bonusInput);
-		assertThat(winningLotto.contains(new LottoNumber(1))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(2))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(3))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(4))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(5))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(6))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(1))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(2))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(3))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(4))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(5))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(6))).isTrue();
 	}
 
 	@ParameterizedTest

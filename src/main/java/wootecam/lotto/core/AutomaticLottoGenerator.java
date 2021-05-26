@@ -29,7 +29,7 @@ public class AutomaticLottoGenerator {
 		List<Integer> autoNumberList = this.autoLottoNumbers.subList(0, 6);
 
 		List<LottoNumber> lotto = autoNumberList.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.sorted()
 			.collect(Collectors.toList());
 
