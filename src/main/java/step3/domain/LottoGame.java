@@ -12,19 +12,14 @@ public class LottoGame {
 
     private static final String DEFAULT_REGEX = ", ";
 
-    public static final int THREE_MATCH = 5_000;
-    public static final int FOUR_MATCH = 50_000;
-    public static final int FIVE_MATCH = 1_500_000;
-    public static final int SIX_MATCH = 2_000_000_000;
-
     private final List<Lotto> lottos;
-    private final LottoCount lottoCount;
+    private final Ranks ranks;
 
 
     public LottoGame(Money money) {
         ResultView resultView = new ResultView();
+        ranks = new Ranks();
         lottos = new ArrayList<>();
-        lottoCount = new LottoCount();
 
         while (money.hasEnoughMoney()) {
             Lotto lotto = createLotto();
@@ -36,14 +31,14 @@ public class LottoGame {
     }
 
 
-    public void getStatistics(Lotto winLotto) {
-        for (Lotto lotto : lottos) {
-            int count = SameLottoChecker.countSameLottoNumber(lotto, winLotto);
-            lottoCount.sameCount(count);
+    public void getStatistics(Lotto winningLotto, BonusNumber bonusNumber) {
+        for (Lotto boughtLotto : lottos) {
+            int count = SameLottoChecker.countSameLottoNumber(boughtLotto, winningLotto);
+            ranks.addRank(Rank.valueOf(count, bonusNumber.isMatchedWithLotto(boughtLotto)));
         }
 
-        ResultView.showStatistics(lottoCount);
-        ResultView.showRate(lottoCount.earningRate(lottos.size()));
+        ResultView.showStatistics(ranks);
+        ResultView.showRate(ranks);
     }
 
     private Lotto createLotto() {
@@ -54,5 +49,9 @@ public class LottoGame {
         return new Lotto(Arrays.stream(winNum.split(DEFAULT_REGEX))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(TreeSet::new)));
+    }
+
+    public BonusNumber getBonusNum(Lotto winningNumbers, int bonusNum) {
+        return new BonusNumber(winningNumbers, bonusNum);
     }
 }

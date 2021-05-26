@@ -14,6 +14,6 @@ class MoneyTest {
     void notEnoughMoney() {
         assertThatThrownBy(() -> new Money(800)
         ).isInstanceOf(NotEnoughInitMoneyException.class)
-                .hasMessageContaining(NotEnoughInitMoneyException.message);
+                .hasMessageContaining(NotEnoughInitMoneyException.MESSAGE);
     }
 }

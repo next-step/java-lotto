@@ -1,5 +1,6 @@
 package step3;
 
+import step3.domain.BonusNumber;
 import step3.domain.Lotto;
 import step3.domain.LottoGame;
 import step3.domain.Money;
@@ -10,8 +11,20 @@ public class Main {
         int amount = InputView.purchaseAmount();
         LottoGame lottoGame = new LottoGame(new Money(amount));
 
-        String winNum = InputView.WinningNumbers();
-        Lotto winningNumbers = lottoGame.getWinLottoNum(winNum);
-        lottoGame.getStatistics(winningNumbers);
+        Lotto winningNumbers = getWinningNumbers(lottoGame);
+        BonusNumber bonusNumber = getBonusNumber(lottoGame, winningNumbers);
+
+
+        lottoGame.getStatistics(winningNumbers,bonusNumber);
+    }
+
+    private static BonusNumber getBonusNumber(LottoGame lottoGame, Lotto winningNumbers) {
+        int bonusNum = InputView.getBonusNumber();
+        return lottoGame.getBonusNum(winningNumbers,bonusNum);
+    }
+
+    private static Lotto getWinningNumbers(LottoGame lottoGame) {
+        String winNum = InputView.getWinningNumbers();
+        return lottoGame.getWinLottoNum(winNum);
     }
 }
