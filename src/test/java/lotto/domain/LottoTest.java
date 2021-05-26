@@ -80,7 +80,7 @@ public class LottoTest {
         final LottoNumber lottoNumber = new LottoNumber(bonusNumber);
 
         //when
-        final boolean matchBonusNumber = lotto.matchBonusNumber(lottoNumber);
+        final boolean matchBonusNumber = lotto.isContains(lottoNumber);
 
         //then
         assertThat(matchBonusNumber).isTrue();

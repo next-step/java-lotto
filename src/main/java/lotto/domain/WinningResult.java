@@ -64,6 +64,6 @@ public final class WinningResult {
 
     private LottoResult getLottoResult(final Lotto unidentifiedLotto) {
         return LottoResult.findByMatchCount(unidentifiedLotto.matchCount(winningLotto),
-                unidentifiedLotto.matchBonusNumber(bonusLottoNumber));
+                unidentifiedLotto.isContains(bonusLottoNumber));
     }
 }
