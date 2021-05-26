@@ -41,7 +41,7 @@ public final class Lotto {
         return lottoNumbers.size();
     }
 
-    public String numbers(){
+    public String numbers() {
         StringBuilder numbers = new StringBuilder();
         for (Number lottoNumber : lottoNumbers) {
             numbers.append(lottoNumber.getNumber()).append(",");
@@ -57,7 +57,7 @@ public final class Lotto {
         return count;
     }
 
-    private boolean isNumber(Number number){
+    private boolean isNumber(Number number) {
         return lottoNumbers.contains(number);
     }
 
