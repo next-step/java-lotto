@@ -25,6 +25,10 @@ public class Lotto {
 	}
 
 	private void validate(List<LottoNumber> numbers) {
+		if(numbers.size() != MAX_LOTTO_COUNT) {
+			throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
+		}
+
 		Set<LottoNumber> set = new HashSet<>(numbers);
 		if(set.size() != MAX_LOTTO_COUNT) {
 			throw new IllegalArgumentException("중복된 숫자가 포함되어 있습니다.");
