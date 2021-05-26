@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,8 +24,9 @@ class GameGeneratorTest {
 
   @BeforeEach
   void setUp() {
-    oneGameGenerator = new GameGenerator(new OrderSheet(1000L), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
-    twoGameGenerator = new GameGenerator(new OrderSheet(2000L), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
+    List<List<Integer>> manualNumbers = Lists.list(Lists.newArrayList(1, 2, 3, 4, 5, 6), Lists.newArrayList(1, 2, 3, 4, 5, 6));
+    oneGameGenerator = new GameGenerator(OrderSheet.of(1000L, Collections.emptyList()), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
+    twoGameGenerator = new GameGenerator(OrderSheet.of(2000L, manualNumbers), new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers()));
   }
 
   @DisplayName("지불 금액으로 살 수 있는 만큼의 로또를 생성한다.")
@@ -32,7 +34,7 @@ class GameGeneratorTest {
   void generateNewLottoGames() {
     //given
     List<LottoGame> expectOneGame = Lists.newArrayList(LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    List<LottoGame> expectTwoGames = Lists.newArrayList(LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())), LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())));
+    List<LottoGame> expectTwoGames = Lists.newArrayList(LottoGame.createManualGame(new LottoNumbers(getOneToSixLottoNumbers())), LottoGame.createManualGame(new LottoNumbers(getOneToSixLottoNumbers())));
 
     assertAll(
         () -> assertThat(oneGameGenerator.generateNewLottoGames()).isEqualTo(new LottoGames(expectOneGame)),
@@ -54,6 +56,6 @@ class GameGeneratorTest {
                                 .mapToObj(number -> number * 2)
                                 .collect(Collectors.toList());
 
-    assertThat(oneGameGenerator.createLottoGame(givenNumbers)).isEqualTo(TestUtil.createAutoLottoGameFromLottoNumbers("2,4,6,8,10,12"));
+    assertThat(oneGameGenerator.createManualLottoGame(givenNumbers)).isEqualTo(TestUtil.createManualLottoGameFromLottoNumbers("2,4,6,8,10,12"));
   }
 }
