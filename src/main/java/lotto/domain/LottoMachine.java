@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import lotto.domain.generator.AutoLottosGenerator;
 import lotto.domain.generator.LottosGenerator;
+import lotto.utils.StringUtil;
 
 public class LottoMachine {
     private final List<Lotto> lottos;
@@ -29,7 +33,16 @@ public class LottoMachine {
 
     public static List<Lotto> generateManualLottos(List<String> stringNumbers) {
         List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < stringNumbers.size(); i++) {
+            lottoList.add(generateManualLotto(stringNumbers.get(i)));
+        }
         return lottoList;
+    }
+
+    private static Lotto generateManualLotto(String lottoNumbers) {
+        return new Lotto(Arrays.stream(StringUtil.split(lottoNumbers))
+            .map(i -> LottoNumber.of(i))
+            .collect(toList()));
     }
 
     public List<Lotto> lottos() {
