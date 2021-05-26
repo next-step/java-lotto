@@ -23,7 +23,7 @@ public class LottoWinningResult {
 	}
 
 	private void initMatchedPrizeMap() {
-		for (int i = 1; i <= 6; i++) {
+		for (int i = 0; i <= 6; i++) {
 			matchedPrizeMap.put(i, 0);
 		}
 	}
@@ -36,7 +36,6 @@ public class LottoWinningResult {
 		initMatchedPrizeMap();
 		for (Lotto lotto : list.getList()) {
 			int matched = calculateMatched(winningNumber, lotto);
-			matchedPrizeMap.putIfAbsent(matched, 0);
 			Integer totalPrize = matchedPrizeMap.get(matched);
 			matchedPrizeMap.put(matched, totalPrize + rule.prize(matched));
 		}
