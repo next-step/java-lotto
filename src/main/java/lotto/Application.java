@@ -10,7 +10,7 @@ public class Application {
 		Lotto winLotto = InputView.winLotto();
 		LottoNumber bonusBall = InputView.bonusBall();
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		WinningResult result = new WinningResult(winningNumber, lottos);
+		GameResult result = new GameResult(winningNumber, lottos);
 		ResultView.printWinningResult(result);
 	}
 }

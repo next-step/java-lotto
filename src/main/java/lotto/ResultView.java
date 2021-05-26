@@ -12,7 +12,7 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void printWinningResult(WinningResult result) {
+	public static void printWinningResult(GameResult result) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 

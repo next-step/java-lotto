@@ -5,13 +5,15 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class WinningResultTest {
+public class GameResultTest {
 
 	Lottos lottos;
 
@@ -40,7 +42,7 @@ public class WinningResultTest {
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
 
-		WinningResult result = new WinningResult(winningNumber, lottos);
+		GameResult result = new GameResult(winningNumber, lottos);
 		assertThat(result.dashboard().get(FIFTH_PRIZE)).isEqualTo(fifth);
 		assertThat(result.dashboard().get(FOURTH_PRIZE)).isEqualTo(fourth);
 		assertThat(result.dashboard().get(THIRD_PRIZE)).isEqualTo(third);
@@ -61,7 +63,21 @@ public class WinningResultTest {
 		Lotto winLotto = new Lotto(lottoNumbers);
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		WinningResult result = new WinningResult(winningNumber, lottos);
+		GameResult result = new GameResult(winningNumber, lottos);
 		assertThat(result.earningRate()).isEqualTo(expectedRatio);
+	}
+
+	@Test
+	@DisplayName("대시보드 불변 여부 확인")
+	void checkUnmodifiedDashboard() {
+		Lotto winLotto = new Lotto("1,2,3,4,5,6");
+		LottoNumber bonusBall = LottoNumber.valueOf(7);
+		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
+		GameResult result = new GameResult(winningNumber, lottos);
+		Map<Rank, Integer> dashboard = result.dashboard();
+		assertThatThrownBy(() -> dashboard.remove(NONE))
+			.isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> dashboard.put(NONE, 1))
+			.isInstanceOf(RuntimeException.class);
 	}
 }

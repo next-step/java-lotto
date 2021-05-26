@@ -3,15 +3,16 @@ package lotto;
 import static lotto.Money.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinningResult {
+public class GameResult {
 
 	private final int buyCount;
 	private final Map<Rank, Integer> dashboard;
 
-	public WinningResult(WinningNumber winningNumber, Lottos lottos) {
+	public GameResult(WinningNumber winningNumber, Lottos lottos) {
 		buyCount = lottos.count();
 		dashboard = defaultDashboard();
 
@@ -22,18 +23,17 @@ public class WinningResult {
 	}
 
 	public Map<Rank, Integer> dashboard() {
-		return dashboard;
+		return Collections.unmodifiableMap(dashboard);
 	}
 
 	public double earningRate() {
-		return totalAward() * 1.0
-			/ (buyCount * LOTTO_PRICE);
+		return ((double) totalAward()) / (buyCount * LOTTO_PRICE);
 	}
 
 	private long totalAward() {
 		return dashboard.keySet()
 			.stream()
-			.mapToLong(winner -> winner.award() * dashboard.get(winner))
+			.mapToLong(w -> w.award() * dashboard.get(w))
 			.reduce(0L, Long::sum);
 	}
 
