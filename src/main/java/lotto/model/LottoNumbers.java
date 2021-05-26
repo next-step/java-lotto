@@ -19,16 +19,6 @@ public class LottoNumbers {
         this(stringNumbersToLottoNumbers(number));
     }
 
-    public String printInfo() {
-        return ((List<LottoNumber>) new ArrayList<>(lottoNumbers)).toString();
-    }
-
-    public int correctCount(TreeSet<LottoNumber> winningNumbers) {
-        List<LottoNumber> numbers = new ArrayList<>(winningNumbers);
-        numbers.removeAll(lottoNumbers);
-        return LOTTO_NUMBER_COUNT - numbers.size();
-    }
-
     private static Set<LottoNumber> stringNumbersToLottoNumbers(String lottoNumber) {
         return Arrays.stream(lottoNumber.split(SPLIT_SYMBOL))
                 .map(String::trim)
@@ -36,14 +26,14 @@ public class LottoNumbers {
                 .collect(Collectors.toSet());
     }
 
-    private static void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers, String message) {
+    private void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers, String message) {
         if (!(lottoNumbers.size() == LOTTO_NUMBER_COUNT)) {
             throw new IllegalArgumentException(message);
         }
     }
 
     public TreeSet<LottoNumber> lottoNumbers(){
-        return this.lottoNumbers;
+        return lottoNumbers;
     }
 
     @Override

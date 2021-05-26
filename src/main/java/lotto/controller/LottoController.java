@@ -2,11 +2,13 @@ package lotto.controller;
 
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoRanking;
 import lotto.model.LottoResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
 
@@ -17,7 +19,8 @@ public class LottoController {
         LottoMachine lottoMachine = new LottoMachine();
         LottoResult lottoResult = new LottoResult();
 
-        int buyCount = lottoMachine.buyCount(inputView.money());
+        int money = inputView.money();
+        int buyCount = lottoMachine.buyCount(money);
         List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount);
         resultView.print(lottoNumbers);
 
@@ -25,7 +28,9 @@ public class LottoController {
         LottoNumbers winningNumbers = new LottoNumbers(numbers);
 
         resultView.print();
-        resultView.print(lottoResult.result(lottoNumbers, winningNumbers));
+        Map<LottoRanking, Integer> lottoRankingResult = lottoResult.lottoResult(lottoNumbers, winningNumbers);
+        float rateOfReturn = lottoResult.rateOfReturn(money);
+        resultView.print(lottoRankingResult, rateOfReturn);
     }
 
 }

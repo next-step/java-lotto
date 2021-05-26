@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoRanking;
 import lotto.model.LottoResult;
 import lotto.view.LottoResultMessage;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,10 +13,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoMachineResultTest {
+public class LottoResultTest {
     LottoMachine lottoMachine;
     LottoResult lottoResult;
     LottoNumbers winningNumbers;
@@ -33,27 +35,25 @@ public class LottoMachineResultTest {
     @DisplayName("5등 결과 확인")
     public void fifthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,10,20,30"));
-        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
-        assertThat(result).contains("3개 일치 (5000원)- 1개");
-        assertThat(result).contains("총 수익률은 5.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        assertThat(result.get(LottoRanking.FIFTH).equals(1)).isTrue();
     }
 
     @Test
     @DisplayName("4등 결과 확인")
     public void fourthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,10,20"));
-        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
-        assertThat(result).contains("4개 일치 (50000원)- 1개");
-        assertThat(result).contains("총 수익률은 50.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        assertThat(result.get(LottoRanking.FOURTH).equals(1)).isTrue();
+
     }
 
     @Test
     @DisplayName("3등 결과 확인")
     public void thirdRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,10"));
-        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
-        assertThat(result).contains("5개 일치 (1500000원)- 1개");
-        assertThat(result).contains("총 수익률은 1500.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        assertThat(result.get(LottoRanking.THIRD).equals(1)).isTrue();
     }
 
 
@@ -61,9 +61,9 @@ public class LottoMachineResultTest {
     @DisplayName("1등 결과 확인")
     public void firstRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,6"));
-        String result = lottoResult.result(buyLottoNumbers, winningNumbers);
-        assertThat(result).contains("6개 일치 (2000000000원)- 1개");
-        assertThat(result).contains("총 수익률은 2000000.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        assertThat(result.get(LottoRanking.FIRST).equals(1)).isTrue();
+
     }
 
     @ParameterizedTest

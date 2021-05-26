@@ -1,14 +1,10 @@
 package lotto.model;
 
-import lotto.view.LottoResultMessage;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static lotto.common.LottoConstants.LOTTO_PRICE;
 
 public class LottoResult {
 
@@ -25,24 +21,16 @@ public class LottoResult {
         }
     }
 
-    public String result(List<LottoNumbers> purchaseLottoNumbers, LottoNumbers winningNumbers) {
+    public Map<LottoRanking, Integer> lottoResult(List<LottoNumbers> purchaseLottoNumbers, LottoNumbers winningNumbers) {
 
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
-            addLottoRankingCount(LottoRanking.lottoRanking(purchaseLottoNumber.correctCount(winningNumbers.lottoNumbers())));
+            addLottoRankingCount(LottoRanking.lottoRanking(new WinningLotto(purchaseLottoNumber).correctCount(winningNumbers.lottoNumbers())));
         }
 
-        float rateOfReturn = rateOfReturn(purchaseLottoNumbers.size() * LOTTO_PRICE);
-
-        return new StringBuilder().append(rankingPrintInfo()).append(rateResultString(rateOfReturn)).toString();
+        return this.lottoResult;
     }
 
-
-    private String rateResultString(float rateOfReturn) {
-        return String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임", String.format("%.2f", rateOfReturn), LottoResultMessage.message(rateOfReturn));
-    }
-
-    private float rateOfReturn(int inputMoney) {
-
+    public float rateOfReturn(int inputMoney) {
         long sum = 0;
 
         for (LottoRanking lottoRanking : lottoResult.keySet()) {
@@ -52,16 +40,4 @@ public class LottoResult {
         return (float) sum / inputMoney;
     }
 
-
-    private String rankingPrintInfo() {
-        return Arrays.stream(LottoRanking.values())
-                .filter(ranking -> !ranking.equals(LottoRanking.MISS))
-                .map((LottoRanking) -> resultString(LottoRanking, lottoResult.get(LottoRanking)))
-                .sorted()
-                .collect(Collectors.joining());
-    }
-
-    public String resultString(LottoRanking lottoRanking, int count) {
-        return String.format("%d개 일치 (%d원)- %d개\n", lottoRanking.getCorrectCount(), lottoRanking.getPrice(), count);
-    }
 }

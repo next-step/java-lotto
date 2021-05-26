@@ -14,7 +14,7 @@ import static lotto.common.LottoConstants.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoMachineNumbersTest {
+public class LottoNumbersTest {
     private Set<LottoNumber> lottoNumberSet;
     private LottoNumbers lottoNumbers;
 
