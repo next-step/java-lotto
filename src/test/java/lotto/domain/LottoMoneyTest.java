@@ -64,4 +64,32 @@ class LottoMoneyTest {
         assertThat(money3000).isLessThan(money5000);
         assertThat(money3000).isEqualByComparingTo(money3000_1);
     }
+
+    @Test
+    @DisplayName("로또금액 뺄셈")
+    void subtract() {
+        // given
+        LottoMoney money5000 = LottoMoney.of(5000);
+        LottoMoney money2000 = LottoMoney.of(2000);
+
+        // when
+        LottoMoney money3000 = money5000.subtract(money2000);
+
+        // then
+        assertThat(money3000.purchaseCount()).isEqualTo(3);
+        assertThat(money3000).isEqualByComparingTo(LottoMoney.of(3000));
+    }
+
+    @Test
+    @DisplayName("로또금액 뺄셈 - 감수가 더 큰 경우")
+    void subtract_negative() {
+        // given
+        LottoMoney money5000 = LottoMoney.of(5000);
+        LottoMoney money2000 = LottoMoney.of(2000);
+
+        // when then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> money2000.subtract(money5000))
+                .withMessageMatching("금액은 음수가 될 수 없습니다. 감수를 확인해 주세요.");
+    }
 }

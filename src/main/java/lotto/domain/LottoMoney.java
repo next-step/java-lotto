@@ -35,7 +35,18 @@ public class LottoMoney implements Comparable<LottoMoney> {
     }
 
     @Override
-    public int compareTo(LottoMoney o) {
-        return Integer.compare(this.amount, o.amount);
+    public int compareTo(LottoMoney arg) {
+        return Integer.compare(this.amount, arg.amount);
+    }
+
+    public LottoMoney subtract(LottoMoney arg) {
+        validateSubtracts(arg);
+        return LottoMoney.of(amount - arg.amount);
+    }
+
+    private void validateSubtracts(LottoMoney arg) {
+        if (this.compareTo(arg) < 0) {
+            throw new IllegalArgumentException("금액은 음수가 될 수 없습니다. 감수를 확인해 주세요.");
+        }
     }
 }
