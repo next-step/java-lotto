@@ -13,7 +13,7 @@ public class LottoResult {
     }
 
     public void increaseCount(int matchingCount, boolean matchBonus) {
-        if (matchingCount < Prize.FIFTH.matchingCount()) {
+        if (isFail(matchingCount)) {
             return;
         }
         Prize prize = Prize.valueOf(matchingCount, matchBonus);
@@ -27,5 +27,9 @@ public class LottoResult {
             total += prizeValue.income(this);
         }
         return total;
+    }
+
+    private boolean isFail(int matchingCount) {
+        return matchingCount < Prize.FIFTH.matchingCount();
     }
 }
