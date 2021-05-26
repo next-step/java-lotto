@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public enum LottoRank {
 
@@ -26,6 +27,7 @@ public enum LottoRank {
             return LOSE;
         }
         return Arrays.stream(values())
+                .sorted(Collections.reverseOrder())
                 .filter(rank -> rank.match(matchCount, matchBonusTarget))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("매칭 숫자에 해당하는 등수가 존재하지 않습니다."));
@@ -35,7 +37,7 @@ public enum LottoRank {
         if (this.matchBonusTarget) {
             return isMatch(matchCount) && matchBonusTarget;
         }
-        return isMatch(matchCount) && !matchBonusTarget;
+        return isMatch(matchCount);
     }
 
     private boolean isMatch(int matchCount) {
