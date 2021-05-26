@@ -1,13 +1,12 @@
 package lotto.model;
 
-import lotto.model.config.LottoConfig;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NumberMatcherTest {
+public class LottoGameTest {
 
     @Test
     void 매칭되는갯수_테스트(){
@@ -18,8 +17,8 @@ public class NumberMatcherTest {
                 new LottoNumber(3), new LottoNumber(4), new LottoNumber(30), new LottoNumber(31)));
 
 
-        NumberMatcher numberMatcher = new NumberMatcher(winningNumbers);
-        int actual = numberMatcher.howManyMatched(userNumbers);
+        LottoGame lottoGame = new LottoGame(winningNumbers);
+        int actual = lottoGame.howManyMatched(userNumbers);
         assertThat(actual).isEqualTo(4);
     }
 }

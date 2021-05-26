@@ -2,13 +2,12 @@ package lotto.model.config;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
-import lotto.model.NumberMatcher;
+import lotto.model.LottoGame;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoConfigTest {
 
@@ -21,8 +20,8 @@ class LottoConfigTest {
                 new LottoNumber(3), new LottoNumber(4), new LottoNumber(30), new LottoNumber(31)));
 
 
-        NumberMatcher numberMatcher = new NumberMatcher(winningNumbers);
-        int rewardPrice = LottoConfig.winningRewards.get(numberMatcher.howManyMatched(userNumbers));
+        LottoGame lottoGame = new LottoGame(winningNumbers);
+        int rewardPrice = LottoConfig.winningRewards.get(lottoGame.howManyMatched(userNumbers));
         assertThat(rewardPrice).isEqualTo(50000);
     }
 }

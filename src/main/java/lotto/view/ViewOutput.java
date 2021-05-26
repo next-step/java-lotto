@@ -29,7 +29,7 @@ public class ViewOutput {
         if (profitRate.doubleValue() > 1){
             return EARN;
         }
-        if(profitRate.doubleValue() == 0){
+        if(profitRate.doubleValue() == 1){
             return EVEN;
         }
         return LOSS;

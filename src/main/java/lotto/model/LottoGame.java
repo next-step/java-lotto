@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NumberMatcher {
+public class LottoGame {
     private LottoNumbers winningNumbers;
     private final Map<Integer, Integer> winningRewards = new HashMap<>();
 
-    public NumberMatcher(LottoNumbers winningNumbers) {
+    public LottoGame(LottoNumbers winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
