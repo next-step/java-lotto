@@ -1,6 +1,8 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGames;
+import lotto.domain.LottoResult;
+import lotto.domain.WinningLottoNumber;
 import lotto.dto.PurchaseMoney;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -22,7 +24,7 @@ public class LottoApplication {
 
     private void run() {
         PurchaseMoney purchaseMoney = lottoInputView.questionPurchaseMoney();
-        LottoGames lottoGames = LottoGames.purchase(purchaseMoney);
+        LottoGames lottoGames = LottoGames.purchaseAuto(purchaseMoney);
 
         printPurchaseResult(lottoGames);
 

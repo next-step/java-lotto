@@ -16,8 +16,8 @@ public class LottoGames {
         this.values = values;
     }
 
-    public static LottoGames purchase(PurchaseMoney purchaseMoney) {
-        validatePurchasing(purchaseMoney);
+    public static LottoGames purchaseAuto(PurchaseMoney purchaseMoney) {
+        validateEnoughMoney(purchaseMoney);
         int count = calculateBuyableCount(purchaseMoney);
 
         List<LottoGame> values = new ArrayList<>();
@@ -49,7 +49,7 @@ public class LottoGames {
         return Objects.hash(values);
     }
 
-    private static void validatePurchasing(PurchaseMoney purchaseMoney) {
+    private static void validateEnoughMoney(PurchaseMoney purchaseMoney) {
         LottoPrice.isEnoughMoney(purchaseMoney);
     }
 
