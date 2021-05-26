@@ -75,7 +75,7 @@ class UserLottoTest {
 		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// then
-		assertThat(userLotto.lottoNumberMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]\r\n");
+		assertThat(userLotto.lottoNumberMessage()).isEqualTo("[1, 2, 3, 4, 5, 6]\r\n[1, 2, 3, 4, 5, 6]");
 	}
 
 	@DisplayName("로또 티켓 리스트를 반환하는 테스트")

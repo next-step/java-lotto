@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserLotto {
 
@@ -31,13 +32,9 @@ public class UserLotto {
 	}
 
 	private String buildLottoNumberMessage() {
-		StringBuilder build = new StringBuilder();
-		for (LottoTicket lottoTicket : lottoTicketList) {
-			build.append(lottoTicket.toString())
-				.append(LINE_SEPARATOR);
-		}
-
-		return build.toString();
+		return lottoTicketList.stream()
+				.map(LottoTicket::toString)
+				.collect(Collectors.joining(LINE_SEPARATOR));
 	}
 
 	public List<LottoTicket> lottoTickets() {
