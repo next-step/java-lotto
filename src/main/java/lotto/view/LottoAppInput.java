@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 public class LottoAppInput {
 	private static final String LOTTO_NUMBER_SPLIT_REGEX = ", |,";
 	private static final String NUMBER_EXCEPTION_MESSAGE = "숫자를 입력해주세요";
+	private static final int FROM_ZERO = 0;
 	private final Scanner scanner;
 
 	public LottoAppInput(Scanner scanner) {
@@ -36,7 +37,7 @@ public class LottoAppInput {
 	}
 
 	public List<List<Integer>> inputNumbers(int count) {
-		return IntStream.range(0, count)
+		return IntStream.range(FROM_ZERO, count)
 			.mapToObj((i) -> inputNumbers())
 			.collect(Collectors.toList());
 	}

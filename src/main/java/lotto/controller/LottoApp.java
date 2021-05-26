@@ -17,7 +17,7 @@ import lotto.model.Rate;
 import lotto.model.WinningNumbers;
 import lotto.view.LottoAppInput;
 import lotto.view.LottoAppOutput;
-import lotto.view.dro.LottoResultDto;
+import lotto.view.dto.LottoResultDto;
 
 public class LottoApp {
 	private final LottoAppOutput lottoAppOutput;

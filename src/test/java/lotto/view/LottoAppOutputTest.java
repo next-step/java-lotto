@@ -14,9 +14,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoRank;
 import lotto.model.Rate;
-import lotto.view.dro.LottoEarningRateDto;
-import lotto.view.dro.LottoRankResultDto;
-import lotto.view.dro.LottoResultDto;
+import lotto.view.dto.LottoEarningRateDto;
+import lotto.view.dto.LottoRankResultDto;
+import lotto.view.dto.LottoResultDto;
 
 public class LottoAppOutputTest {
 

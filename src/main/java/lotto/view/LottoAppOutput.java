@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.LottoTicket;
-import lotto.view.dro.LottoEarningRateDto;
-import lotto.view.dro.LottoRankResultDto;
-import lotto.view.dro.LottoResultDto;
+import lotto.view.dto.LottoEarningRateDto;
+import lotto.view.dto.LottoRankResultDto;
+import lotto.view.dto.LottoResultDto;
 
 public class LottoAppOutput {
 	private static final String LOTTO_NUMBER_OUTPUT_DELIMITER = ", ";
