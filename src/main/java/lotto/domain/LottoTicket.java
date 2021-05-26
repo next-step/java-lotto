@@ -8,6 +8,8 @@ import java.util.List;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
+    private static final int CONTAINS_ADD_NUMBER = 1;
+    private static final int NOT_CONTAINS_ADD_NUMBER = 0;
 
     public LottoTicket() {
         this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate());
@@ -24,7 +26,7 @@ public class LottoTicket {
     public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
         int matchCount = 0;
         for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
-            matchCount += addCount(contains(winningLottoNumber), matchCount);
+            matchCount += addCount(winningLottoNumber);
         }
 
         return WinningType.of(matchCount, isMatchBonus(bonusNumber));
@@ -34,11 +36,11 @@ public class LottoTicket {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    private int addCount(boolean isContains, int matchCount) {
-        if (isContains) {
-            return 1;
+    private int addCount(LottoNumber lottoNumber) {
+        if (contains(lottoNumber)) {
+            return CONTAINS_ADD_NUMBER;
         }
-        return 0;
+        return NOT_CONTAINS_ADD_NUMBER;
     }
 
     private boolean isMatchBonus(int bonusNumber) {

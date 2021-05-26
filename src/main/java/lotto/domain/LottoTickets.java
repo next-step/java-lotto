@@ -20,8 +20,9 @@ public class LottoTickets {
 
     public String getString() {
         StringBuilder stringBuilder = new StringBuilder();
-        this.lottoTickets.stream()
-                .forEach(l -> stringBuilder.append(l.getString() + "\n"));
+        for(LottoTicket lottoTicket : this.lottoTickets) {
+            stringBuilder.append(lottoTicket.getString() + "\n");
+        }
 
         return stringBuilder.toString();
     }

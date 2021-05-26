@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.common.ErrorCode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicketGenerator {
     private static final List<LottoNumber> LOTTO_NUMBERS_CACHE;
@@ -25,16 +26,13 @@ public class LottoTicketGenerator {
     }
 
     public List<LottoNumber> generate(String lottoNumbersText) {
-        String[] textNumbers = lottoNumbersText.split(LOTTO_NUMBERS_TEXT_SPLIT_REGEX);
-        List<LottoNumber> resultLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < textNumbers.length; i++) {
-            int number = Integer.parseInt(textNumbers[i]);
-            Collections.sort(LOTTO_NUMBERS_CACHE);
-            resultLottoNumbers.add(LOTTO_NUMBERS_CACHE.get(number-1));
-        }
-        Collections.sort(resultLottoNumbers);
-        throwInvalidLottoNumbers(resultLottoNumbers);
+        List<LottoNumber> resultLottoNumbers = Arrays.stream(lottoNumbersText.split(LOTTO_NUMBERS_TEXT_SPLIT_REGEX))
+                                                    .map(Integer::parseInt)
+                                                    .sorted()
+                                                    .map(LottoNumber::new)
+                                                    .collect(Collectors.toList());
 
+        throwInvalidLottoNumbers(resultLottoNumbers);
         return resultLottoNumbers;
     }
 

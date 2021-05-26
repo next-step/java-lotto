@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class LottoGamePlayer {
     ResultView resultView = new ResultView();
+    private static final int MATCH_COUNT_RESULT_INIT_NUMBER = 0;
+    private static final int MATCH_COUNT_RESULT_PLUS_NUMBER = 1;
 
     public void play(LottoTicket winningLottoTicket, LottoTickets lottoTickets, int bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
@@ -17,7 +19,7 @@ public class LottoGamePlayer {
     }
 
     private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
-        if (winningLottoTicket.contains(new LottoNumber(bonusNumber))) {
+        if (winningLottoTicket.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
     }
@@ -35,7 +37,7 @@ public class LottoGamePlayer {
         Map<WinningType, Integer> matchCountResults = new LinkedHashMap<>();
         WinningType[] winningTypes = WinningType.values();
         for (int i = winningTypes.length-1; i >= 0; i--) {
-            matchCountResults.put(winningTypes[i], 0);
+            matchCountResults.put(winningTypes[i], MATCH_COUNT_RESULT_INIT_NUMBER);
         }
 
         return matchCountResults;
@@ -43,8 +45,8 @@ public class LottoGamePlayer {
 
     private int countResult(Map<WinningType, Integer> matchCountResults, WinningType winningType) {
         if (matchCountResults.containsKey(winningType)) {
-            return matchCountResults.get(winningType) + 1;
+            return matchCountResults.get(winningType) + MATCH_COUNT_RESULT_PLUS_NUMBER;
         }
-        return 1;
+        return MATCH_COUNT_RESULT_PLUS_NUMBER;
     }
 }
