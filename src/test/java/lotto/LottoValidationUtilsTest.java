@@ -4,39 +4,47 @@ import lotto.exception.LottoNumberRangeException;
 import lotto.exception.LottoSizeOrDuplicateException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoValidationUtilsTest {
-    @DisplayName("로또 번호 유효성 체크")
-    @Test
-    void 중복_사이즈_테스트() {
-        assertThatThrownBy(() -> LottoValidationUtils.validationLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 5)))
-                .isInstanceOf(LottoSizeOrDuplicateException.class);
-
-        assertThatThrownBy(() -> LottoValidationUtils.validationLottoNumber(Arrays.asList(1, 2, 3, 4, 5)))
-                .isInstanceOf(LottoSizeOrDuplicateException.class);
-
-        assertThatThrownBy(() -> LottoValidationUtils.validationLottoNumber(Arrays.asList(1, 2, 3, 4, 5,6,7,8)))
+    @DisplayName("로또 번호 길이 유효성 체크")
+    @ParameterizedTest
+    @MethodSource("sizeErrorNumber")
+    void 중복_사이즈_테스트(List<Integer> lottoNumber) {
+        assertThatThrownBy(() -> LottoValidationUtils.validationLottoNumber(lottoNumber))
                 .isInstanceOf(LottoSizeOrDuplicateException.class);
     }
 
-    @DisplayName("숫자가 아닌 값")
-    @Test
-    void 숫자_체크() {
-        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList("1,2,r,3,4,5"))
-                .isInstanceOf(NumberFormatException.class);
+    static Stream sizeErrorNumber() {
+        return Stream.of(
+                Arrays.asList(1, 2, 3, 4, 5, 5),
+                Arrays.asList(1, 2, 3, 4, 5),
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8),
+                Arrays.asList(1, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9)
+        );
+    }
 
-        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList("1,2,4.,3,4,5"))
+    @DisplayName("오류 문자가 있는지 체크")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,r,3,4,5", "1,2,4.,3,4,5"})
+    void 숫자_아닌_값_존재_여부_체크(String winNumber) {
+        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList(winNumber))
                 .isInstanceOf(NumberFormatException.class);
     }
 
-    @DisplayName("숫자 범위 체크")
-    @Test
-    void 범위_체크() {
-        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList("1,2,56,3,4,5"))
+    @DisplayName("로또 번호 범위 1~45 체크")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,55,3,4,5", "1,2,65,3,4,5", "1,2,46,3,4,5"})
+    void 로또_번호_범위_체크(String winNumber) {
+        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList(winNumber))
                 .isInstanceOf(LottoNumberRangeException.class);
     }
 }

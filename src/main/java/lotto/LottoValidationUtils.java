@@ -34,7 +34,7 @@ public class LottoValidationUtils {
 
     public static void validationLottoNumber(List<Integer> lottoNumber) {
         Set<Integer> checkNumber = new HashSet<>(lottoNumber);
-        if (checkNumber.size() != LOTTO_NUMBER_SIZE) {
+        if (checkNumber.size() != LOTTO_NUMBER_SIZE || lottoNumber.size() != LOTTO_NUMBER_SIZE) {
             throw new LottoSizeOrDuplicateException(LOTTO_NUMBER_SIZE);
         }
     }
@@ -58,7 +58,7 @@ public class LottoValidationUtils {
             throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MSG);
         }
         if(Integer.parseInt(winNumberArr) < LOTTO_MINIMUM_NUMBER || Integer.parseInt(winNumberArr) > LOTTO_MAXIMUM_NUMBER){
-            throw new LottoNumberRangeException(LOTTO_MINIMUM_NUMBER, LOTTO_MINIMUM_NUMBER);
+            throw new LottoNumberRangeException(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER);
         }
     }
 }
