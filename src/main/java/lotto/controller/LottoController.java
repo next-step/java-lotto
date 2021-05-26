@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersGenerator;
 import lotto.domain.LottoRankStatistics;
@@ -24,12 +25,13 @@ public class LottoController {
         Price price = new Price(this.inputView.getBuyPrice());
         LottoMachine lottoMachine = new LottoMachine(price, new LottoNumbersGenerator());
         this.lottos = lottoMachine.createLottos();
+        this.resultView.printLottosNumber(this.lottos);
     }
 
     public void showResult() {
-        this.resultView.printLottosNumber(this.lottos);
         LottoNumbers winningLottoNumbers = LottoNumbersUtil.toLottoNumbers(this.inputView.getWinningNumber());
-        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningLottoNumbers);
+        LottoNumber bonusNumber = new LottoNumber(this.inputView.getBonusNumber());
+        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningLottoNumbers, bonusNumber);
         lottoStatistics.initStatistics();
         this.resultView.printStatisticsResult(lottoStatistics);
         this.resultView.printRateOfReturnResult(lottoStatistics);

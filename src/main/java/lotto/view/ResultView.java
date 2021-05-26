@@ -19,7 +19,8 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoRank rank : LottoRank.valuesWithWinningRank()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney()
+            String textByRank = getTextByRank(rank);
+            System.out.printf(textByRank, rank.getCountOfMatch(), rank.getWinningMoney()
                     , lottoStatistics.getLottoCountByRank(rank));
         }
     }
@@ -31,5 +32,12 @@ public class ResultView {
             resultRateOfReturnMessage = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         System.out.printf("총 수익률은 %s입니다.%s \n", rateOfReturn, resultRateOfReturnMessage);
+    }
+
+    private String getTextByRank(LottoRank rank) {
+        if (rank.equals(LottoRank.SECOND)) {
+            return "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+        }
+        return "%d개 일치 (%d원)- %d개\n";
     }
 }

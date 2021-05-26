@@ -12,13 +12,8 @@ public class LottoRankStatistics {
     private static final double ONE_HUNDRED_DOUBLE = 100.0;
     private final Lottos lottos;
     private final LottoNumbers winningNumbers;
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
     private RankCounts rankCounts;
-
-    public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumbers) {
-        this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
-    }
 
     public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumber, LottoNumber bonusNumber) {
         this.lottos = lottos;
