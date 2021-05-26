@@ -36,6 +36,10 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
+    public void removeAll(LottoNumbers lottoNumbers){
+        this.lottoNumbers.removeAll(lottoNumbers.lottoNumbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

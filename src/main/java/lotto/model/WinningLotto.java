@@ -1,7 +1,5 @@
 package lotto.model;
 
-import java.util.TreeSet;
-
 import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
 
 public class WinningLotto {
@@ -12,8 +10,7 @@ public class WinningLotto {
     }
 
     public int correctCount(LottoNumbers lottoNumbers) {
-        TreeSet<LottoNumber> numbers = lottoNumbers.lottoNumbers();
-        numbers.removeAll(winningLottoNumbers.lottoNumbers());
-        return LOTTO_NUMBER_COUNT - numbers.size();
+        lottoNumbers.removeAll(winningLottoNumbers);
+        return LOTTO_NUMBER_COUNT - lottoNumbers.lottoNumbers().size();
     }
 }
