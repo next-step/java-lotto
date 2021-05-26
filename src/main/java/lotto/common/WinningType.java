@@ -19,7 +19,6 @@ public enum WinningType {
     }
 
     public static WinningType of(int matchCount, boolean matchBonus) {
-
         return Arrays.stream(WinningType.values())
                 .filter(t -> t.matchCount == matchCount)
                 .filter(t -> !t.equals(SECOND) || matchBonus)

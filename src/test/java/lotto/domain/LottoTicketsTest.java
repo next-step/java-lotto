@@ -25,7 +25,7 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(1);
 
         //생성된 WinningType 리스트는 NULL이 될 수 없다.
-        assertThat(lottoTickets.getWinningTypes(new LottoTicket(), 1)).isNotNull();
+        assertThat(lottoTickets.getWinningResults(new LottoTicket(), 1)).isNotNull();
     }
 
     @Test

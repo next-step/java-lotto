@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.common.WinningType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -36,13 +37,9 @@ public class LottoTickets {
         return prizeSum;
     }
 
-    public WinningType[] getWinningTypes(LottoTicket winningLottoTicket, int bonusNumber) {
-        WinningType[] winningTypes = new WinningType[this.lottoTickets.size()];
-        for (int i = 0; i < this.lottoTickets.size(); i++) {
-            WinningType winningType = this.lottoTickets.get(i).getWinningType(winningLottoTicket, bonusNumber);
-            winningTypes[i] = winningType;
-        }
-
-        return winningTypes;
+    public List<WinningType> getWinningResults(LottoTicket winningLottoTicket, int bonusNumber) {
+        return this.lottoTickets.stream()
+                .map(t -> t.getWinningType(winningLottoTicket, bonusNumber))
+                .collect(Collectors.toList());
     }
 }

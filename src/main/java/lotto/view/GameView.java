@@ -16,7 +16,8 @@ public class GameView {
 
         LottoTicket winningLottoTicket = new LottoTicket(inputView.inputWinningNumber());
         int bonusNumber = inputView.inputBonusBall();
-        new LottoGamePlayer().play(winningLottoTicket, lottoTickets, bonusNumber); //게임 실행 (로또 매칭 확인)
+        LottoGamePlayer lottoGamePlayer = new LottoGamePlayer();
+        resultView.printResultStatistics(lottoGamePlayer.getGameResult(winningLottoTicket, lottoTickets, bonusNumber));  //게임 실행 (로또 매칭 확인)
 
         long prizeSum = lottoTickets.getPrizeSum(winningLottoTicket, bonusNumber);
         resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력
