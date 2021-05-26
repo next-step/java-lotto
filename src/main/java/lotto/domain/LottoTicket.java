@@ -17,10 +17,6 @@ class LottoTicket {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	static int countDuplicates(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
-		return userLottoTicket.countDuplicates(winningLottoTicket.lottoNumbers);
-	}
-
 	LottoTicket(Set<LottoNumber> lottoNumbers) {
 		validate(lottoNumbers);
 
@@ -31,6 +27,10 @@ class LottoTicket {
 		if (!validateCollection(lottoNumbers, LOTTO_NUMBER_COUNT)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE);
 		}
+	}
+
+	static int countDuplicates(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
+		return userLottoTicket.countDuplicates(winningLottoTicket.lottoNumbers);
 	}
 
 	int countDuplicates(Set<LottoNumber> lottoNumberSet) {

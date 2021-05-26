@@ -17,8 +17,7 @@ class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void initialize() {
 		for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
-			LottoNumber lottoNumber = new LottoNumber(i);
-			LOTTO_NUMBER_MAP.put(i, lottoNumber);
+			LOTTO_NUMBER_MAP.put(i, new LottoNumber(i));
 		}
 	}
 
