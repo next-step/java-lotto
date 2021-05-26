@@ -6,10 +6,7 @@ import type.LottoRewardType;
 import utils.NumberUtils;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static type.LottoExceptionType.NULL_PARAMETER;
 
@@ -65,6 +62,6 @@ public final class LottoResult {
 	}
 
 	public Map<LottoRewardType, Integer> lottoRewardMap() {
-		return this.lottoRewardMap;
+		return Collections.unmodifiableMap(this.lottoRewardMap);
 	}
 }
