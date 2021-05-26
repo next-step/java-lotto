@@ -1,30 +1,26 @@
 package lotto;
 
-import static java.util.Collections.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 public final class Lotto {
 	public static final int NUMBERS_SIZE = 6;
 
-	private final List<LottoNo> lottoNumbers = new ArrayList<>();
+	private final Set<LottoNo> lottoNumbers = new TreeSet<>();
 
 	public Lotto(List<Integer> numbers) {
-		validateNumbers(numbers);
 		for (Integer number : numbers) {
 			LottoNo lottoNo = new LottoNo(number);
 			lottoNumbers.add(lottoNo);
 		}
-		sort(lottoNumbers);
+		validateNumbers();
 	}
 
 	public Lotto(Set<LottoNo> numbers) {
 		lottoNumbers.addAll(numbers);
-		sort(lottoNumbers);
 	}
 
 	public static Lotto publish() {
@@ -35,17 +31,9 @@ public final class Lotto {
 		return new Lotto(numbers);
 	}
 
-	private void validateNumbers(List<Integer> numbers) {
-		if (Objects.isNull(numbers) || numbers.size() != NUMBERS_SIZE) {
+	private void validateNumbers() {
+		if (lottoNumbers.size() != NUMBERS_SIZE) {
 			throw new IllegalArgumentException("잘못된 번호 모음입니다.");
-		}
-		duplicatedNumbers(numbers);
-	}
-
-	private void duplicatedNumbers(List<Integer> numbers) {
-		Set<Integer> numberSet = new HashSet<>(numbers);
-		if (numbers.size() != numberSet.size()) {
-			throw new IllegalArgumentException("중복된 번호가 존재합니다.");
 		}
 	}
 
@@ -68,6 +56,4 @@ public final class Lotto {
 		}
 		return Prize.findByCount(count);
 	}
-
-
 }

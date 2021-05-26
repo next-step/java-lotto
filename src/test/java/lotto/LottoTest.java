@@ -28,7 +28,7 @@ public class LottoTest {
 	@DisplayName("중복 테스트")
 	void duplicated() {
 		assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5)))
-			.withMessage("중복된 번호가 존재합니다.");
+			.withMessage("잘못된 번호 모음입니다.");
 	}
 
 	@Test
