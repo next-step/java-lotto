@@ -26,6 +26,10 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
+    public int purchasableCount(LottoTicketCount manualCount) {
+        return 0;
+    }
+
     public int money() {
         return this.money;
     }
