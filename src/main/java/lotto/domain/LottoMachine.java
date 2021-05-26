@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.domain.generator.AutoLottosGenerator;
 import lotto.domain.generator.LottosGenerator;
 
 public class LottoMachine {
@@ -18,6 +20,16 @@ public class LottoMachine {
 
     public static LottoMachine of(List<Lotto> lottos) {
         return new LottoMachine(lottos);
+    }
+
+    public static List<Lotto> generateAutoLottos(LottoTicketCount autoLottoTicketCount) {
+        LottosGenerator generator = new AutoLottosGenerator();
+        return generator.generate(autoLottoTicketCount);
+    }
+
+    public static List<Lotto> generateManualLottos(List<String> stringNumbers) {
+        List<Lotto> lottoList = new ArrayList<>();
+        return lottoList;
     }
 
     public List<Lotto> lottos() {
