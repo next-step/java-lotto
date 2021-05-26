@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,5 +23,13 @@ public class Lottos {
 			statistics.addCount(prize);
 		}
 		return statistics;
+	}
+
+	public List<List<Integer>> allNumbers() {
+		List<List<Integer>> allNumbers = new ArrayList<>();
+		for (Lotto lotto : lottos) {
+			allNumbers.add(lotto.numbers());
+		}
+		return allNumbers;
 	}
 }
