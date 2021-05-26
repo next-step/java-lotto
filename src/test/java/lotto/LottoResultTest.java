@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
@@ -22,8 +23,8 @@ public class LottoResultTest {
     void countFourth_4등_갯수_조회() {
         LottoBuy lottoBuy = new LottoBuy();
         Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoResult lottoResult = lottos.compareWinNumber(new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 8, 9, 10))));
-        assertThat(lottoResult.isFourth(1)).isTrue();
+        LottoRecord lottoRecord = lottos.compareWinNumber(new Lotto(() -> new LottoNumber(Arrays.asList(1, 2, 3, 8, 9, 10))));
+        assertThat(lottoRecord.isRecord(LottoRank.FOURTH, 1)).isTrue();
     }
 
     @ParameterizedTest
@@ -32,11 +33,11 @@ public class LottoResultTest {
     void countManyLottoRank_여러장_등수_조회(List<Integer> lottoNumber, List<Integer> winLottoNumber, int fst, int snd, int trd, int frd) {
         Lottos lottos = new Lottos(new ArrayList<Lotto>(Arrays.asList(new Lotto(() -> new LottoNumber(lottoNumber)))));
         Lotto winLottto = new Lotto(() -> new LottoNumber(winLottoNumber));
-        LottoResult lottoResult = lottos.compareWinNumber(winLottto);
-        assertThat(lottoResult.isFirst(fst)).isTrue();
-        assertThat(lottoResult.isSecond(snd)).isTrue();
-        assertThat(lottoResult.isThird(trd)).isTrue();
-        assertThat(lottoResult.isFourth(frd)).isTrue();
+        LottoRecord lottoRecord = lottos.compareWinNumber(winLottto);
+        assertThat(lottoRecord.isRecord(FIRST, fst)).isTrue();
+        assertThat(lottoRecord.isRecord(SECOND, snd)).isTrue();
+        assertThat(lottoRecord.isRecord(THIRD, trd)).isTrue();
+        assertThat(lottoRecord.isRecord(FOURTH, frd)).isTrue();
     }
 
     static Stream<Arguments> countLottosCollectNumber() {

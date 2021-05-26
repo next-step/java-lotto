@@ -27,13 +27,22 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
-    public LottoResult compareWinNumber(Lotto winNumber) {
+    /*public LottoResult compareWinNumber(Lotto winNumber) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
             lotto.compareWinLottoNumber(winNumber, lottoResult);
         }
         lottoResult.calculateProfit(lottos.size());
         return lottoResult;
+    }*/
+
+    public LottoRecord compareWinNumber(Lotto winNumber) {
+        LottoRecord lottoRecord = new LottoRecord();
+        for (Lotto lotto : lottos) {
+            lottoRecord.recordRank(lotto.compareWinLottoNumber(winNumber));
+        }
+        //lottoRecord.calculateProfit(lottos.size());
+        return lottoRecord;
     }
 
     @Override

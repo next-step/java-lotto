@@ -10,22 +10,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.LottoRank.FIRST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @DisplayName("로또 번호가 당첨 번호와 일치하는 갯수를 반환하는 테스트")
     @ParameterizedTest
     @MethodSource("countMatchNumberTest")
-    void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, int expectedCount) {
+    void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectedRank) {
         Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
         LottoResult lottoResult = new LottoResult();
-        lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)), lottoResult);
-        assertThat(lottoResult.isFirst(expectedCount)).isTrue();
+        LottoRank lottoRank = lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)));
+        assertThat(lottoRank).isEqualTo(expectedRank);
     }
 
     static Stream<Arguments> countMatchNumberTest() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), 1)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), FIRST)
         );
     }
 

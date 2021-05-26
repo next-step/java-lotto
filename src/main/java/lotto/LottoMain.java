@@ -10,7 +10,7 @@ public class LottoMain {
         Lottos lottos = lottoBuy.buyLotto(inputView.payForLotto());
         ResultView.buyLottoInfo(lottos);
 
-        LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
-        ResultView.printResult(lottoResult);
+        //LottoResult lottoResult = lottos.compareWinNumber(inputView.inputWinLottoNumber());
+        //ResultView.printResult(lottoResult);
     }
 }

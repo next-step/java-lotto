@@ -8,17 +8,16 @@ public class LottoRecord {
 
     public LottoRecord() {
         this.lottoRecord = new HashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            lottoRecord.put(lottoRank, 0);
+        }
     }
 
     public void recordRank(LottoRank lottoRank) {
-        if (!lottoRecord.containsKey(lottoRank)) {
-            lottoRecord.put(lottoRank, 1);
-            return;
-        }
         lottoRecord.put(lottoRank, lottoRecord.get(lottoRank) + 1);
     }
 
-    public boolean isRecord(LottoRank lottoRank, int expected){
+    public boolean isRecord(LottoRank lottoRank, int expected) {
         return lottoRecord.get(lottoRank) == expected;
     }
 
