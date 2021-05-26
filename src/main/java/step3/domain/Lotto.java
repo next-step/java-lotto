@@ -13,8 +13,8 @@ public class Lotto {
     public Lotto(TreeSet<Integer> numbers) {
         checkDuplicate(numbers);
 
-        lottoNumbers = new TreeSet<>(Comparator.comparing(LottoNumber::valueOf));
-        lottoNumbers.addAll(numbers.stream().map(LottoNumber::new).collect(toCollection(TreeSet::new)));
+        this.lottoNumbers = new TreeSet<>(Comparator.comparing(LottoNumber::valueOf));
+        this.lottoNumbers.addAll(numbers.stream().map(LottoNumber::new).collect(toCollection(TreeSet::new)));
     }
 
     private void checkDuplicate(TreeSet<Integer> numbers) {
@@ -30,7 +30,6 @@ public class Lotto {
     public boolean findLottoNum(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
-
 
 
     public List<LottoNumber> shuffledLottoList() {

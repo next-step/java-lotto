@@ -8,7 +8,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final Integer BEG_LOTTO_NUM = 1;
     public static final Integer END_LOTTO_NUM = 45;
 
-    private final int number;
+    protected int number;
+
+    public LottoNumber() {
+    }
 
     public LottoNumber(int number) {
         checkIfValidLotto(number);
@@ -33,5 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return String.valueOf(number);
     }
 
-    public int valueOf() { return this.number; }
+    public int valueOf() {
+        return this.number;
+    }
 }
