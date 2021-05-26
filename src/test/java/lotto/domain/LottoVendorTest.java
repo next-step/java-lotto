@@ -22,7 +22,7 @@ class LottoVendorTest {
 		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// when
-		LottoReport lottoReport = lottoVendor.report(userLotto.lottoTickets());
+		LottoReport lottoReport = lottoVendor.report(userLotto);
 
 		// then
 		assertThat(lottoReport).isNotNull();

@@ -30,7 +30,7 @@ public class LottoApplication {
 			String bonusNumberString = bonusLottoNumber();
 
 			LottoVendor lottoVendor = lottoController.lottoVendor(winningLottoNumbers, bonusNumberString);
-			viewUserLottoReport(lottoVendor.report(userLotto.lottoTickets()));
+			viewUserLottoReport(lottoVendor.report(userLotto));
 
 			return NORMAL_SIGNAL;
 		} catch (Exception e) {
