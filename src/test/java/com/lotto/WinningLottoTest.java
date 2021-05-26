@@ -19,49 +19,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class WinningLottoTest {
     @Test
     void createLottoWinningNumbers_성공() {
-        LottoNumber number1 = LottoNumber.valueOf(1);
-        LottoNumber number2 = LottoNumber.valueOf(2);
-        LottoNumber number3 = LottoNumber.valueOf(3);
-        LottoNumber number4 = LottoNumber.valueOf(4);
-        LottoNumber number5 = LottoNumber.valueOf(5);
-        LottoNumber number6 = LottoNumber.valueOf(6);
-        LottoNumber number7 = LottoNumber.valueOf(7);
-        WinningLotto winningLotto = WinningLotto.createWinningLotto("1,2,3,4,5,6");
-        assertThat(winningLotto.contains(number1)).isTrue();
-        assertThat(winningLotto.contains(number2)).isTrue();
-        assertThat(winningLotto.contains(number3)).isTrue();
-        assertThat(winningLotto.contains(number4)).isTrue();
-        assertThat(winningLotto.contains(number5)).isTrue();
-        assertThat(winningLotto.contains(number6)).isTrue();
-        assertThat(winningLotto.contains(number7)).isFalse();
-    }
+        Lotto lotto = Lotto.createLotto("1,2,3,4,5,6");
+        String bonusNumber = "1";
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(lotto, bonusNumber);
 
-    @Test
-    void createLottoWinningNumbers_입력숫자개수_예외() {
-        assertThatThrownBy(() -> WinningLotto.createWinningLotto("1,2,3,4,5"))
-                .isInstanceOf(IllegalLottoCountException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"asd", ""})
-    void createLottoWinningNumbers_잘못된입력데이터_예외(String input) {
-        assertThatThrownBy(() -> WinningLotto.createWinningLotto(input))
-                .isInstanceOf(LottoNumberFormatException.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1,-2,-3,-4,-5,-6"})
-    void createLottoWinningNumbers_잘못된입력데이터_음수_예외(String input) {
-        assertThatThrownBy(() -> WinningLotto.createWinningLotto(input))
-                .isInstanceOf(LottoNumberOutOfBoundsException.class);
+        assertThat(winningLotto).isEqualTo(WinningLotto.createWinningLotto(lotto, bonusNumber));
     }
 
     @DisplayName("로또 보상금 확인 1등")
     @Test
     void reward_성공() {
-        WinningLotto winningLotto = WinningLotto.createWinningLotto("1,2,3,4,5,6");
-        Lotto lotto = createLotto();
+        Lotto winningLottoNumbers = Lotto.createLotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(winningLottoNumbers, "9");
 
+        Lotto lotto = Lotto.createLotto("1,2,3,4,5,6");
         LottoReward reward = winningLotto.reward(lotto);
 
         assertThat(reward).isEqualTo(LottoReward.FIRST);
@@ -70,29 +41,21 @@ public class WinningLottoTest {
     @DisplayName("로또 보상금 확인 담청실패")
     @Test
     void reward_lose() {
-        Lotto lotto = createLotto();
+        Lotto winningLottoNumbers = Lotto.createLotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(winningLottoNumbers, "9");
 
-        WinningLotto winningLotto = WinningLotto.createWinningLotto("7,8,9,10,11,12");
+        Lotto lotto = Lotto.createLotto("7,8,9,10,11,12");
         LottoReward reward = winningLotto.reward(lotto);
 
         Assertions.assertThat(reward).isEqualTo(LottoReward.MISS);
     }
 
-    private Lotto createLotto() {
-        LottoNumber number1 = LottoNumber.valueOf(1);
-        LottoNumber number2 = LottoNumber.valueOf(2);
-        LottoNumber number3 = LottoNumber.valueOf(3);
-        LottoNumber number4 = LottoNumber.valueOf(4);
-        LottoNumber number5 = LottoNumber.valueOf(5);
-        LottoNumber number6 = LottoNumber.valueOf(6);
-        return new Lotto(new TreeSet<>(Arrays.asList(number1, number2, number3, number4, number5, number6)));
-    }
-
     @Test
     void 이등_보너스_보상() {
-        Lotto lotto = createLotto();
-        WinningLotto winningLotto = WinningLotto.createWinningLotto("1,2,3,4,5,7");
-        winningLotto.setBonusNumber("7");
+        Lotto winningLottoNumbers = Lotto.createLotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(winningLottoNumbers, "6");
+
+        Lotto lotto = Lotto.createLotto("1,2,3,4,5,7");
 
         LottoReward reward = winningLotto.reward(lotto);
 
@@ -101,9 +64,10 @@ public class WinningLottoTest {
 
     @Test
     void 이등_보너스없는_보상() {
-        Lotto lotto = createLotto();
-        WinningLotto winningLotto = WinningLotto.createWinningLotto("1,2,3,4,5,7");
-        winningLotto.setBonusNumber("8");
+        Lotto winningLottoNumbers = Lotto.createLotto("1,2,3,4,5,6");
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(winningLottoNumbers, "9");
+
+        Lotto lotto = Lotto.createLotto("1,2,3,4,5,7");
 
         LottoReward reward = winningLotto.reward(lotto);
 

@@ -1,38 +1,35 @@
 package com.lotto.domain;
 
-import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.IllegalLottoCountException;
+import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.LottoNumberOutOfBoundsException;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.TreeSet;
 
-import static com.lotto.domain.LottoReward.*;
+import static com.lotto.domain.LottoReward.SECOND_BONUS;
+import static com.lotto.domain.LottoReward.generateReward;
 
-public class WinningLotto {
-    private Set<LottoNumber> winningNumbers;
+public final class WinningLotto extends Lotto {
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Set<LottoNumber> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public WinningLotto(TreeSet<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        super(lottoNumbers);
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto createWinningLotto(String winningNumbers)
-            throws LottoNumberFormatException, IllegalLottoCountException, LottoNumberOutOfBoundsException {
-        Set<LottoNumber> set;
-        try {
-            set = addWinningNumber(winningNumbers);
-        } catch (NumberFormatException exception) {
-            throw new LottoNumberFormatException();
-        }
-        if (isLottoCount(set)) {
-            throw new IllegalLottoCountException();
-        }
+    public static WinningLotto createWinningLotto(Lotto winningLotto, String sBonusNumber)
+            throws LottoNumberFormatException,
+            LottoNumberOutOfBoundsException,
+            IllegalLottoCountException {
 
-        return new WinningLotto(set);
+        LottoNumber bonusNumber = castLottoNumber(sBonusNumber);
+
+        return new WinningLotto(winningLotto.numbers(), bonusNumber);
     }
 
-    public void setBonusNumber(String sNumber) throws LottoNumberOutOfBoundsException, LottoNumberFormatException {
+    public static LottoNumber castLottoNumber(String sNumber)
+            throws LottoNumberOutOfBoundsException, LottoNumberFormatException {
+
         int number;
         try {
             number = Integer.parseInt(sNumber);
@@ -40,7 +37,7 @@ public class WinningLotto {
             throw new LottoNumberFormatException();
         }
 
-        this.bonusNumber = LottoNumber.valueOf(number);
+        return LottoNumber.valueOf(number);
     }
 
     public LottoReward reward(Lotto lotto) {
@@ -48,14 +45,10 @@ public class WinningLotto {
         for (LottoNumber lottoNumber : lotto.numbers()) {
             sameCount += addOneIfContainInWinningNumbers(lottoNumber);
         }
-        if (isSecond(sameCount) && isContainsWinningNumbers(bonusNumber)) {
+        if (isSecond(sameCount) && contains(bonusNumber)) {
             return SECOND_BONUS;
         }
         return generateReward(sameCount);
-    }
-
-    private boolean isContainsWinningNumbers(LottoNumber bonusNumber) {
-        return winningNumbers.contains(bonusNumber);
     }
 
     private boolean isSecond(int sameCount) {
@@ -63,27 +56,13 @@ public class WinningLotto {
     }
 
     private int addOneIfContainInWinningNumbers(LottoNumber lottoNumber) {
-        if (winningNumbers.contains(lottoNumber)) {
+        if (contains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    private static boolean isLottoCount(Set<LottoNumber> set) {
-        return set.size() != Lotto.LOTTO_COUNT;
-    }
-
-    private static Set<LottoNumber> addWinningNumber(String winningNumbers)
-            throws NumberFormatException, LottoNumberOutOfBoundsException {
-        String[] splitNumbers = winningNumbers.split(",");
-        Set<LottoNumber> set = new HashSet<>();
-        for (String sNumber : splitNumbers) {
-            set.add(LottoNumber.valueOf(Integer.valueOf(sNumber.trim())));
-        }
-        return set;
-    }
-
     public boolean contains(LottoNumber number) {
-        return this.winningNumbers.contains(number);
+        return this.numbers().contains(number);
     }
 }

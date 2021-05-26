@@ -1,9 +1,6 @@
 package com.lotto.controller;
 
-import com.lotto.domain.LottoGroup;
-import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.RequestPurchaseLotto;
-import com.lotto.domain.WinningLotto;
+import com.lotto.domain.*;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
@@ -25,32 +22,31 @@ public class LottoManager {
     }
 
     private WinningLotto createWinningLotto() {
-        WinningLotto winningLotto;
-        winningLotto = repeatCreateWinningLotto();
-        repeatSetBonusNumber(winningLotto);
-
-        return winningLotto;
+        Lotto lotto = repeatCreateLotto();
+        return repeatCreateWinningLottoWithBonusNumber(lotto);
     }
 
-    private void repeatSetBonusNumber(WinningLotto winningLotto) {
+    private WinningLotto repeatCreateWinningLottoWithBonusNumber(Lotto winningLotto) {
+        WinningLotto retWinningLotto;
         OutputView.requireBonusNumbers();
         try {
-            winningLotto.setBonusNumber(InputView.inputDataFromConsole());
+            retWinningLotto = WinningLotto.createWinningLotto(winningLotto, InputView.inputDataFromConsole());
         } catch (RuntimeException exception) {
             OutputView.out(exception.getMessage());
-            repeatSetBonusNumber(winningLotto);
+            retWinningLotto = repeatCreateWinningLottoWithBonusNumber(winningLotto);
         }
+        return retWinningLotto;
     }
 
-    private WinningLotto repeatCreateWinningLotto() {
-        WinningLotto winningLotto;
+    private Lotto repeatCreateLotto() {
+        Lotto winningLotto;
 
         OutputView.requireWinningNumbers();
         try {
-            winningLotto = WinningLotto.createWinningLotto(InputView.inputDataFromConsole());
+            winningLotto = Lotto.createLotto(InputView.inputDataFromConsole());
         } catch (RuntimeException exception) {
             OutputView.out(exception.getMessage());
-            winningLotto = repeatCreateWinningLotto();
+            winningLotto = repeatCreateLotto();
         }
 
         return winningLotto;

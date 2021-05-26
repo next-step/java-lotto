@@ -31,11 +31,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber valueOf(String sNumber)
             throws LottoNumberFormatException, LottoNumberOutOfBoundsException {
 
-        int number = validate(sNumber);
+        int number = castInt(sNumber);
         return valueOf(number);
     }
 
-    private static int validate(String sNumber) {
+    private static int castInt(String sNumber) throws LottoNumberFormatException {
         int number;
         try {
             number = Integer.parseInt(sNumber.trim());
