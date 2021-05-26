@@ -17,7 +17,9 @@ public class LottoWinController {
     }
 
     public WinInquiryResponse inquiryWin(WinInquiryRequest request) {
-        LottoRanks lottoRanks = lottoWinService.inquiryWin(LottoNumbersAssembler.assemblePurchaseTickets(request.getPurchaseNumbers()), LottoNumbersAssembler.assembleLottoNumbers(request.getWinNumbers()), LottoNumber.of(request.getBonusNumber()));
+        LottoRanks lottoRanks = lottoWinService.inquiryWin(LottoNumbersAssembler.assemblePurchaseTickets(request.getPurchaseNumbers()),
+                LottoNumbersAssembler.assembleLottoNumbers(request.getWinNumbers()),
+                LottoNumber.of(request.getBonusNumber()));
         return WinInquiryAssembler.assembleWinInquiryResponse(lottoRanks);
     }
 
