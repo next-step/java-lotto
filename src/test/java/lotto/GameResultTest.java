@@ -43,11 +43,11 @@ public class GameResultTest {
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
 
 		GameResult result = new GameResult(winningNumber, lottos);
-		assertThat(result.dashboard().get(FIFTH_PRIZE)).isEqualTo(fifth);
-		assertThat(result.dashboard().get(FOURTH_PRIZE)).isEqualTo(fourth);
-		assertThat(result.dashboard().get(THIRD_PRIZE)).isEqualTo(third);
-		assertThat(result.dashboard().get(SECOND_PRIZE)).isEqualTo(second);
-		assertThat(result.dashboard().get(FIRST_PRIZE)).isEqualTo(first);
+		assertThat(result.dashboard().get(FIFTH)).isEqualTo(fifth);
+		assertThat(result.dashboard().get(FOURTH)).isEqualTo(fourth);
+		assertThat(result.dashboard().get(THIRD)).isEqualTo(third);
+		assertThat(result.dashboard().get(SECOND)).isEqualTo(second);
+		assertThat(result.dashboard().get(FIRST)).isEqualTo(first);
 	}
 
 	@ParameterizedTest
