@@ -51,16 +51,9 @@ public class LottoWinningResult {
 		List<Integer> numbers = lotto.getNumbers();
 		int matched = 0;
 		for (Integer number : numbers) {
-			matched += ifContainsThenOneElseZero(winningNumbers, number);
+			matched += winningNumbers.contains(number) ? 1 : 0;
 		}
 		return matched;
-	}
-
-	/**
-	 * 2-depth 를 지키기 위해 만들어진 메서드.
-	 */
-	protected int ifContainsThenOneElseZero(List<Integer> list, Integer number) {
-		return list.contains(number) ? 1 : 0;
 	}
 
 	public int countMatched(int matched) {
