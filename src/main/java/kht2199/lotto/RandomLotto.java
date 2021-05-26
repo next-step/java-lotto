@@ -50,10 +50,16 @@ public class RandomLotto {
 	 * @param lottoPrice 로또 개별 금액.
 	 * @return 구매한 갯수.
 	 */
-	private int purchase(int assets, int lottoPrice) {
+	protected int purchase(int assets, int lottoPrice) {
 		// TODO 로또 구매 후 정산
-		assert false;
-		return 0;
+		return calculateLottoCount(assets, lottoPrice);
+	}
+
+	/**
+	 * @return 구매가능한 로또 갯수를 반환한다,
+	 */
+	protected int calculateLottoCount(int assets, int lottoPrice) {
+		return Math.floorDiv(assets, lottoPrice);
 	}
 
 	/**
