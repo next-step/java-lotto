@@ -9,14 +9,11 @@ import lotto.store.Ticket;
 public class StatisticsCalculator {
 
     private static final int WINNING_TYPE_SIZE = 4;
-    private static final int MINIMUM_MATCH = 3;
-    private static final int MAXIMUM_MATCH = 6;
-
     private static final int LOAD_FACTOR_NEVER_RE_HASHING = 1;
 
     private final Ticket ticket;
     private final LottoNumbers winnerLotto;
-    private final Map<Integer, Statistic> statisticByMatchCount;
+    private final Map<Ranking, Statistic> statisticByMatchCount;
 
     public StatisticsCalculator(Ticket ticket, LottoNumbers winnerLotto) {
         this.ticket = ticket;
@@ -26,51 +23,51 @@ public class StatisticsCalculator {
     }
 
     private void init() {
-        for (int i = MINIMUM_MATCH; i <= MAXIMUM_MATCH; i++) {
-            statisticByMatchCount.putIfAbsent(i, new Statistic(0, Earn.match(i)));
+        for (Ranking ranking : Ranking.values()) {
+            statisticByMatchCount.putIfAbsent(ranking, new Statistic(0, Earn.match(ranking)));
         }
         for (LottoNumbers purchased : ticket.purchasedLotto()) {
             compute(statisticByMatchCount, purchased);
         }
     }
 
-    protected Map<Integer, Statistic> statisticsMap() {
+    protected Map<Ranking, Statistic> statisticsMap() {
         return statisticByMatchCount;
     }
 
-    private void compute(Map<Integer, Statistic> mapByCount, LottoNumbers purchased) {
+    private void compute(Map<Ranking, Statistic> mapByCount, LottoNumbers purchased) {
         int count = winnerLotto.sameCount(purchased);
         if (count < 3) {
             return;
         }
-        mapByCount.putIfAbsent(count, new Statistic(0, Earn.match(count)));
-        mapByCount.computeIfPresent(count, (k, v) -> v.plusMatchCount());
+        Ranking rank = winnerLotto.ranking(purchased);
+        mapByCount.computeIfPresent(rank, (k, v) -> v.plusMatchCount());
     }
 
     public int sumEarningPrice() {
         int result = 0;
-        for (int matchCount : statisticByMatchCount.keySet()) {
-            result += earningPriceByMatchCount(matchCount);
+        for (Ranking ranking : statisticByMatchCount.keySet()) {
+            result += earningPriceByMatchCount(ranking);
         }
         return result;
     }
 
-    private int earningPriceByMatchCount(int matchCount) {
-        return statisticByMatchCount.get(matchCount).earningPrice();
+    private int earningPriceByMatchCount(Ranking ranking) {
+        return statisticByMatchCount.get(ranking).earningPrice();
     }
 
-    private String findEarnMessage(int matchCount) {
-        return statisticByMatchCount.get(matchCount).earningMessage();
+    private String findEarnMessage(Ranking ranking) {
+        return statisticByMatchCount.get(ranking).earningMessage();
     }
 
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder("당첨 통계\n---------\n");
-        for (int matchCount = MINIMUM_MATCH; matchCount <= MAXIMUM_MATCH; matchCount++) {
-            if (!statisticByMatchCount.containsKey(matchCount)) {
+        for (Ranking ranking : Ranking.reverse(winnerLotto.hasBonus())) {
+            if (!statisticByMatchCount.containsKey(ranking)) {
                 continue;
             }
-            message.append(findEarnMessage(matchCount));
+            message.append(findEarnMessage(ranking));
         }
         message.append(ratioResultMessage());
         return message.toString();
