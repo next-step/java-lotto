@@ -1,18 +1,21 @@
 package lotto.domain;
 
+
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
     public static final int PRICE = 1_000;
-
     public static final int SIZE = 6;
-
     public static final int MIN = 1;
-
     public static final int MAX = 45;
 
-    public final List<Integer> numbers;
+    private final List<Integer> numbers;
+
+    public Lotto(Lotto lotto) {
+        this(lotto.numbers());
+    }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -32,15 +35,18 @@ public class Lotto {
     }
 
     private boolean isValidLottoSize(List<Integer> numbers) {
-        return numbers.size() == Lotto.SIZE;
+        return numbers.size() == SIZE;
     }
 
     private boolean hasDuplicate(List<Integer> numbers) {
-        return numbers.stream().distinct().count() != Lotto.SIZE;
+        return numbers.stream()
+                .distinct()
+                .count() != SIZE;
     }
 
     private boolean containsInvalidNumber(List<Integer> numbers) {
-        return numbers.stream().anyMatch(this::isInValidNumber);
+        return numbers.stream()
+                .anyMatch(this::isInValidNumber);
     }
 
     private boolean isInValidNumber(int number) {
@@ -49,10 +55,28 @@ public class Lotto {
 
 
     public int matchCountWith(Lotto other) {
-        return (int) numbers.stream().filter(other::contains).count();
+        return (int) numbers.stream()
+                .filter(other::contains)
+                .count();
     }
 
     public boolean contains(Integer number) {
         return numbers.contains(number);
+    }
+
+    public boolean matchBonus(int bonusBall) {
+        return numbers.contains(bonusBall);
+    }
+
+    public int get(int index) {
+        return numbers.get(index);
+    }
+
+    public List<Integer> numbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public int size() {
+        return numbers.size();
     }
 }
