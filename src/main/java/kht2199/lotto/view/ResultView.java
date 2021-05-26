@@ -4,6 +4,7 @@ import static java.lang.System.*;
 
 import kht2199.lotto.LottoList;
 import kht2199.lotto.LottoResult;
+import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.assets.AssetsException;
 
 /**
@@ -16,7 +17,7 @@ public class ResultView {
 		print(e.getMessage());
 	}
 
-	public void printPurchased(int purchasedLottoCount) {
+	public void printPurchased(LottoList list) {
 		assert false;
 	}
 
@@ -30,5 +31,9 @@ public class ResultView {
 
 	public void printResultStatistics(LottoResult lottoResult) {
 		assert false;
+	}
+
+	public void printException(DomainException e) {
+		// TODO print for domain exceptions.
 	}
 }

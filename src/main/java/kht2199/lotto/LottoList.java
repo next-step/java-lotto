@@ -1,5 +1,6 @@
 package kht2199.lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,8 +9,16 @@ import java.util.List;
  */
 public class LottoList {
 
-	private List<Lotto> list;
+	/**
+	 * unmodifiable list.
+	 */
+	private List<Lotto> list = Collections.emptyList();
 
-	public LottoList() {}
+	public boolean isNotEmpty() {
+		return !list.isEmpty();
+	}
 
+	public void setList(List<Lotto> list) {
+		this.list = Collections.unmodifiableList(list);
+	}
 }

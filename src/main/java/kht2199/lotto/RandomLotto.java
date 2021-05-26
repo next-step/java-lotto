@@ -2,7 +2,13 @@ package kht2199.lotto;
 
 import static java.lang.System.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kht2199.lotto.exception.DomainException;
+import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
+import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.view.InputView;
 import kht2199.lotto.view.ResultView;
 
@@ -22,7 +28,7 @@ public class RandomLotto {
 
 	private int assets;
 
-	private LottoList lottoList;
+	private final LottoList lottoList = new LottoList();
 
 	private LottoResult lottoResult;
 
@@ -33,11 +39,17 @@ public class RandomLotto {
 		this.output = resultView;
 	}
 
-	public void start() {
+	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException {
 		out.println("구입금액을 입력해 주세요.");
 		assets = acceptAssets();
-		int purchased = purchase(assets, LOTTO_PRICE);
-		output.printPurchased(purchased);
+		int countsOfLotto = calculateLottoCount(assets, LOTTO_PRICE);
+		try {
+			purchase(countsOfLotto);
+		} catch (DomainException e) {
+			// 예산 혹은 초기화 문제로 인한 예외발생.
+			throw e;
+		}
+		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
 		lottoResult = input.lottoResult();
 		lottoResult.updateLottoResult(lottoList);
@@ -45,14 +57,41 @@ public class RandomLotto {
 	}
 
 	/**
-	 *
-	 * @param assets 예산.
-	 * @param lottoPrice 로또 개별 금액.
-	 * @return 구매한 갯수.
+	 * 예산 조정.
+	 * 테스트시 사용한다.
 	 */
-	protected int purchase(int assets, int lottoPrice) {
-		// TODO 로또 구매 후 정산
-		return calculateLottoCount(assets, lottoPrice);
+	protected void setAssets(int assets) {
+		this.assets = assets;
+	}
+
+	/**
+	 * 예산 조회.
+	 * 테스트시 사용한다.
+	 */
+	protected int getAssets() {
+		return assets;
+	}
+
+	protected LottoList getLottoList() {
+		return lottoList;
+	}
+
+	/**
+	 * 로또를 구매하고, 예산을 차감한다.
+	 */
+	protected void purchase(int countsOfLotto) throws LottoListNotEmptyException, AssetsNotEnoughException {
+		if (this.lottoList.isNotEmpty()) {
+			throw new LottoListNotEmptyException();
+		}
+		this.assets -= countsOfLotto * LOTTO_PRICE;
+		if (assets < 0) {
+			throw new AssetsNotEnoughException();
+		}
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < countsOfLotto; i++) {
+			lottos.add(generator.random());
+		}
+		this.lottoList.setList(lottos);
 	}
 
 	/**
@@ -77,4 +116,5 @@ public class RandomLotto {
 			return acceptAssets();
 		}
 	}
+
 }
