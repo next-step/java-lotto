@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoMoney {
+public class LottoMoney implements Comparable<LottoMoney> {
 
     private final int amount;
 
@@ -32,5 +32,10 @@ public class LottoMoney {
 
     public int purchaseCount() {
         return amount / LottoTicket.PRICE;
+    }
+
+    @Override
+    public int compareTo(LottoMoney o) {
+        return Integer.compare(this.amount, o.amount);
     }
 }

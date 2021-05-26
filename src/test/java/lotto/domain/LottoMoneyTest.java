@@ -49,4 +49,19 @@ class LottoMoneyTest {
                 .isThrownBy(() -> LottoMoney.fromCount(purchaseCount))
                 .withMessageMatching("구매 수량을 입력해 주세요.");
     }
+
+    @Test
+    @DisplayName("로또금액 비교")
+    void compare() {
+        // given
+        LottoMoney money3000 = LottoMoney.of(3000);
+        LottoMoney money3000_1 = LottoMoney.of(3000);
+        LottoMoney money5000 = LottoMoney.of(5000);
+        LottoMoney money2000 = LottoMoney.of(2000);
+
+        // when then
+        assertThat(money3000).isGreaterThan(money2000);
+        assertThat(money3000).isLessThan(money5000);
+        assertThat(money3000).isEqualByComparingTo(money3000_1);
+    }
 }
