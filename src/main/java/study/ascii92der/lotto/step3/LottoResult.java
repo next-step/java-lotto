@@ -6,10 +6,10 @@ public class LottoResult {
 
     private int matchCount;
 
-    public LottoResult(Lotto lotto, List<Integer> winningNumbers) {
+    public LottoResult(Lotto lotto, List<String> winningNumbers) {
         matchCount = 0;
-        for (Integer winningNumber : winningNumbers) {
-            matchCount += lotto.hasNumber(winningNumber);
+        for (String winningNumber : winningNumbers) {
+            matchCount += lotto.hasNumber(Integer.parseInt(winningNumber));
         }
     }
 
