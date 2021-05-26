@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ResultAllTest {
 
     @Test
-    public void updateResult_3등확인() {
+    public void updateResult_3등로또당첨_HASHMAP_추가_확인() {
         ResultAll resultAll = new ResultAll();
         SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto(3,false);
 

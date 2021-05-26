@@ -10,6 +10,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumbersListTest {
 
     @Test
+    public void appendLottonNumber_로또리스트추가검증() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
+            @Override
+            public List<Integer> generateLottoNumber() {
+                List<Integer> lottoNumber = new ArrayList<Integer>();
+                lottoNumber.add(1);
+                lottoNumber.add(2);
+                lottoNumber.add(3);
+                lottoNumber.add(4);
+                lottoNumber.add(5);
+                lottoNumber.add(6);
+                return lottoNumber;
+            }
+        });
+
+        LottoNumbersList lottoNumbersList = new LottoNumbersList();
+        lottoNumbersList.appendLottoNumber(lottoNumbers);
+        assertThat(lottoNumbersList.count()).isEqualTo(1);
+    }
+    @Test
     public void countWonNumbers_두개로또번호비교검증() {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override

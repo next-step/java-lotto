@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
 
-
     public LottoNumbersList() {
         lottoNumbersList = new ArrayList<LottoNumbers>();
     }

@@ -43,14 +43,14 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumberList = new ArrayList<Integer>();
-                lottoNumberList.add(1);
-                lottoNumberList.add(3);
-                lottoNumberList.add(5);
-                lottoNumberList.add(7);
-                lottoNumberList.add(9);
-                lottoNumberList.add(11);
-                return lottoNumberList;
+                List<Integer> lottoNumbers = new ArrayList<Integer>();
+                lottoNumbers.add(1);
+                lottoNumbers.add(3);
+                lottoNumbers.add(5);
+                lottoNumbers.add(7);
+                lottoNumbers.add(9);
+                lottoNumbers.add(11);
+                return lottoNumbers;
             }
         });
 
@@ -58,22 +58,22 @@ public class LottoNumbersTest {
     }
 
     @Test
-    public void LastWonValidateNumber_로또번호검증_문자입력() {
-        assertThatThrownBy(() -> new LastWonLottoNumber("1,a,3,4,5,6", "7"))
-                .isInstanceOf(RuntimeException.class).hasMessage("숫자만 입력 가능합니다.");
-    }
+    public void countMatchedNumbers_로또번호_맞춘_갯수_검증() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
+            @Override
+            public List<Integer> generateLottoNumber() {
+                List<Integer> lottoNumbers = new ArrayList<Integer>();
+                lottoNumbers.add(1);
+                lottoNumbers.add(3);
+                lottoNumbers.add(5);
+                lottoNumbers.add(7);
+                lottoNumbers.add(9);
+                lottoNumbers.add(11);
+                return lottoNumbers;
+            }
+        });
 
-    @Test
-    public void LastWonValidateNumber_로또번호검증_45초과입력() {
-        assertThatThrownBy(() -> new LastWonLottoNumber("1,2,3,4,5,56", "7"))
-                .isInstanceOf(RuntimeException.class).hasMessage("1부터 45까지 숫자만 입력 가능합니다.");
+        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,3,5,6,7,8","10");
+        assertThat(lottoNumbers.countMatchedNumbers(lastWonLottoNumber).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
     }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    public void lastWonLottoNumbers_지난당첨번호문자열파싱검증(int number) {
-        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,2,3,4,5,6", "7");
-        assertThat(lastWonLottoNumber.containsMain(number)).isTrue();
-    }
-
 }
