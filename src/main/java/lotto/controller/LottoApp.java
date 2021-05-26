@@ -1,10 +1,13 @@
 package lotto.controller;
 
+import static lotto.view.LottoAppInput.*;
+
 import java.util.List;
 
 import lotto.model.LottoCount;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoNumbersGenerateStrategy;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
@@ -26,19 +29,14 @@ public class LottoApp {
 	}
 
 	public void run() {
-		Money money = lottoAppInput.requireValidInput(this::inputMoney, lottoAppOutput::printMessage);
-		LottoCount lottoCount = lottoAppInput.requireValidInput(
-			() -> {
-				int manualCount = inputManualCount();
-				return LottoCount.of(money, manualCount);
-			}, lottoAppOutput::printMessage);
+		Money money = requireValidInput(this::inputMoney, lottoAppOutput::printMessage);
 
-		LottoTicket lottoTicket = lottoAppInput.requireValidInput(() -> inputLottoTicket(lottoCount),
-			lottoAppOutput::printMessage);
+		LottoCount lottoCount = requireValidInput(() -> inputLottoCount(money), lottoAppOutput::printMessage);
+
+		LottoTicket lottoTicket = requireValidInput(() -> inputLottoTicket(lottoCount), lottoAppOutput::printMessage);
 		printLottoTicket(lottoTicket, lottoCount);
 
-		WinningNumbers winningNumbers = lottoAppInput.requireValidInput(this::inputWinningNumbers,
-			lottoAppOutput::printMessage);
+		WinningNumbers winningNumbers = requireValidInput(this::inputWinningNumbers, lottoAppOutput::printMessage);
 		printLottoResult(lottoTicket.match(winningNumbers), money);
 	}
 
@@ -47,14 +45,21 @@ public class LottoApp {
 		return Money.ofWons(lottoAppInput.inputNumber());
 	}
 
-	private LottoTicket inputLottoTicket(LottoCount lottoCount) {
-		return LottoTicket.create(new NumbersInputStrategy(inputManualNumbers(lottoCount.getManualCount())),
-							new RandomGenerateStrategy(lottoCount.getAutoCount()));
+	private LottoCount inputLottoCount(Money money) {
+		int manualCount = inputManualCount();
+		return LottoCount.of(money, manualCount);
 	}
 
 	private int inputManualCount() {
 		lottoAppOutput.printManualCountInputView();
 		return lottoAppInput.inputNumber();
+	}
+
+	private LottoTicket inputLottoTicket(LottoCount lottoCount) {
+		List<List<Integer>> inputNumbers = inputManualNumbers(lottoCount.getManualCount());
+		LottoNumbersGenerateStrategy numbersInputStrategy = new NumbersInputStrategy(inputNumbers);
+		LottoNumbersGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy(lottoCount.getAutoCount());
+		return LottoTicket.create(numbersInputStrategy, randomGenerateStrategy);
 	}
 
 	private List<List<Integer>> inputManualNumbers(int manualCount) {

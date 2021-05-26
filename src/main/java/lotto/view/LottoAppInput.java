@@ -48,7 +48,7 @@ public class LottoAppInput {
 			.collect(Collectors.toList());
 	}
 
-	public <T> T requireValidInput(Supplier<T> input, Consumer<String> errorMessageConsumer) {
+	public static <T> T requireValidInput(Supplier<T> input, Consumer<String> errorMessageConsumer) {
 		try {
 			return input.get();
 		} catch (IllegalArgumentException e) {
