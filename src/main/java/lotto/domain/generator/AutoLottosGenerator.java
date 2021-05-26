@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicketCount;
 import lotto.domain.Money;
 
 public class AutoLottosGenerator implements LottosGenerator{
@@ -28,6 +29,12 @@ public class AutoLottosGenerator implements LottosGenerator{
         for (int i = 0; i < money.countOfLotto(); i++) {
             lottoList.add(generateAuto());
         }
+        return lottoList;
+    }
+
+    @Override
+    public List<Lotto> generate(LottoTicketCount ticketCount) {
+        List<Lotto> lottoList = new ArrayList<>();
         return lottoList;
     }
 
