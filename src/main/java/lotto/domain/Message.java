@@ -14,8 +14,11 @@ public enum Message {
 
 
     REQUEST_INPUT_AMOUNT("구입금액을 입력해주세요."),
+    REQUEST_MANUAL_LOTTO_TICKET_COUNT("수동으로 구매할 로또 수를 입력해 주세요."),
+    REQUEST_MANUAL_LOTTO_TICKETS("수동으로 구매할 번호를 입력해 주세요."),
     REQUEST_INPUT_WINNING_NUMBERS("구분자(쉼표(,) 혹은 콜론(:))를 이용하여 지난 주 당첨 번호를 입력해 주세요."),
     REQUEST_INPUT_BONUS_NUMBERS("보너스 볼을 입력해 주세요."),
+
     INFO_TOTAL_COUNT("%d개를 구매했습니다."),
     INFO_BEFORE_PRINT_LOTTO_RESULT("당첨 통계\n--------");
 

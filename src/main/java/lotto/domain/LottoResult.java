@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Money;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,11 +17,18 @@ public class LottoResult {
     private int purchaseAmount;
     private float profitRatio;
 
-    public LottoResult(int purchaseAmount, WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+//    public LottoResult(int purchaseAmount, WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+//        this.lottoResult = new TreeMap<>();
+//        //this.purchaseAmount = purchaseAmount;
+//        setDefaultValues();
+//        updateLottoResult(winningNumbers, lottoTickets);
+//    }
+
+    public LottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         this.lottoResult = new TreeMap<>();
-        this.purchaseAmount = purchaseAmount;
         setDefaultValues();
         updateLottoResult(winningNumbers, lottoTickets);
+        this.purchaseAmount = lottoTickets.size() * Money.PRICE_PER_TICKET;
     }
 
     private void updateLottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {

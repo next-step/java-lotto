@@ -1,5 +1,6 @@
 package lotto.core;
 
+import lotto.Money;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
@@ -31,7 +32,8 @@ public class LottoController {
     private LottoTickets requestLottoTicketsInput() {
         LottoTickets lottoTickets;
         try {
-            lottoTickets = new LottoTickets(AutoLottoTicketGenerator.start(), inputView.receiveIntegerInput());
+            Money money = new Money(inputView.receiveIntegerInput());
+            lottoTickets = new LottoTickets(AutoLottoTicketGenerator.start(), money);
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
