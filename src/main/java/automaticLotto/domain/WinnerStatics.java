@@ -1,7 +1,5 @@
 package automaticLotto.domain;
 
-import java.util.Map;
-
 public class WinnerStatics {
 	private final WinnerTable winnerTable;
 	private final ProfitRate profitRate;
@@ -21,10 +19,6 @@ public class WinnerStatics {
 
 	private WinnerTable getWinnerTable(Lottos boughtLottos, Lotto winnerLotto) {
 		return boughtLottos.announce(winnerLotto);
-	}
-
-	public Map<Ranking, Integer> presentAllCount() {
-		return winnerTable.getWinnerTable();
 	}
 
 	public int presentCount(Ranking winner) {

@@ -1,7 +1,5 @@
 package automaticLotto.view;
 
-import java.util.Map;
-
 import automaticLotto.domain.Lottos;
 import automaticLotto.domain.Ranking;
 import automaticLotto.domain.WinnerStatics;
@@ -18,7 +16,6 @@ public class ResultView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		Map<Ranking, Integer> winnerCountByMatchedNumber = winnerStatics.presentAllCount();
 		for (Ranking ranking : Ranking.values()) {
 			if (ranking == Ranking.RANKING_LAST) {
 				continue;
@@ -26,7 +23,7 @@ public class ResultView {
 
 			System.out.println(
 				ranking.getMatchedCount() + "개 일치 (" + ranking.getWinnerPrice() + "원)- "
-					+ winnerCountByMatchedNumber.get(ranking) + "개");
+					+ winnerStatics.presentCount(ranking) + "개");
 		}
 	}
 

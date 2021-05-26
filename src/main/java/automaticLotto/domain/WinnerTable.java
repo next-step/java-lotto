@@ -20,10 +20,6 @@ public class WinnerTable {
 		}
 	}
 
-	public Map<Ranking, Integer> getWinnerTable() {
-		return this.winnerTable;
-	}
-
 	public int getWinnerCount(Ranking winner) {
 		if (hasCount(winner)) {
 			return winnerTable.get(winner);
