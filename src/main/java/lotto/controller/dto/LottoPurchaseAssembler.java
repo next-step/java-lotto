@@ -10,12 +10,15 @@ import java.util.List;
 
 public class LottoPurchaseAssembler {
 
-    public static LottoPurchaseResponse assemblePurchaseResponse(LottoTickets lottoTickets) {
+    public static LottoPurchaseResponse assemblePurchaseResponse(LottoTickets manualTickets, LottoTickets autoTickets) {
         List<LottoNumbersDto> lottoNumbersDtoList = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoNumbersDtoList.add(new LottoNumbersDto(assembleLottoNumbers(lottoTicket)));
+        for (LottoTicket manualTicket : manualTickets) {
+            lottoNumbersDtoList.add(new LottoNumbersDto(assembleLottoNumbers(manualTicket)));
         }
-        return new LottoPurchaseResponse(lottoNumbersDtoList);
+        for (LottoTicket autoTicket : autoTickets) {
+            lottoNumbersDtoList.add(new LottoNumbersDto(assembleLottoNumbers(autoTicket)));
+        }
+        return new LottoPurchaseResponse(manualTickets.count(), autoTickets.count(), lottoNumbersDtoList);
     }
 
     private static List<Integer> assembleLottoNumbers(LottoTicket lottoTicket) {

@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.controller.dto.LottoNumbersAssembler;
 import lotto.controller.dto.LottoPurchaseAssembler;
 import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.controller.dto.LottoPurchaseResponse;
@@ -22,9 +23,11 @@ public class LottoPurchaseController {
     }
 
     public LottoPurchaseResponse purchaseTickets(LottoPurchaseRequest request) {
-        LottoMoney purchaseAmount = LottoMoney.of(request.getPurchaseAmount());
-        LottoTickets lottoTickets = purchaseService.purchaseAutoTickets(purchaseAmount);
-        return LottoPurchaseAssembler.assemblePurchaseResponse(lottoTickets);
+        LottoMoney manualTicketPurchaseAmount = LottoMoney.fromCount(request.getManualLottoTicketCount());
+        LottoTickets manualTickets = LottoNumbersAssembler.assemblePurchaseTickets(request.getManualLottoNumbers());
+        LottoMoney autoTicketPurchaseAmount = LottoMoney.of(request.getPurchaseAmount()).subtract(manualTicketPurchaseAmount);
+        LottoTickets autoTickets = purchaseService.purchaseAutoTickets(autoTicketPurchaseAmount);
+        return LottoPurchaseAssembler.assemblePurchaseResponse(manualTickets, autoTickets);
     }
 
 }
