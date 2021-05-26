@@ -48,11 +48,15 @@ public class RandomLotto {
 		assets = acceptAssets();
 		int countsOfLotto = calculateLottoCount(assets, LOTTO_PRICE);
 		purchase(countsOfLotto);
+		// prints
 		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
 		output.printMessageForWinningNumbers();
-		lottoWinningResult = input.acceptWinningNumbers();
-		lottoWinningResult.updateLottoWinningNumbers(lottoList);
+		//
+		Lotto winningNumbers = input.acceptWinningNumbers();
+		this.lottoWinningResult = new LottoWinningResult(winningNumbers);
+		lottoWinningResult.updateLottoWinningNumbers(rule, lottoList);
+		//
 		output.printResultStatistics(lottoWinningResult);
 	}
 

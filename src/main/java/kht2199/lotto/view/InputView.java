@@ -28,7 +28,7 @@ public class InputView {
 		return Integer.parseInt(assetsString);
 	}
 
-	public LottoWinningResult acceptWinningNumbers() {
+	public Lotto acceptWinningNumbers() {
 		try {
 			String winningNumbersString = in.nextLine();
 			validationLottoResultString(winningNumbersString);
@@ -37,8 +37,7 @@ public class InputView {
 			for (String splitNumber : splitNumbers) {
 				numbers.add(Integer.parseInt(splitNumber));
 			}
-			Lotto winningNumbers = new Lotto(numbers);
-			return new LottoWinningResult(winningNumbers);
+			return new Lotto(numbers);
 		} catch (InvalidInputException e) {
 			output.printException(e);
 			return acceptWinningNumbers();
