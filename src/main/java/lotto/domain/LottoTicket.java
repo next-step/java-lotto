@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.common.WinningType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -19,13 +18,9 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
     }
 
-    public List<LottoNumber> getLottoTicket() {
-        return Collections.unmodifiableList(this.lottoNumbers);
-    }
-
     public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
         int matchCount = 0;
-        for (LottoNumber winningLottoNumber : winningLottoTicket.getLottoTicket()) {
+        for (LottoNumber winningLottoNumber : winningLottoTicket.lottoNumbers) {
             matchCount += addCount(winningLottoNumber);
         }
 
@@ -53,8 +48,9 @@ public class LottoTicket {
     public String getString() {
         List<Integer> lottoNumbers = new ArrayList<>();
         for (LottoNumber lottoNumber : this.lottoNumbers) {
-            lottoNumbers.add(lottoNumber.of());
+            lottoNumbers.add(lottoNumber.value());
         }
+
         return lottoNumbers.toString();
     }
 }

@@ -7,9 +7,9 @@ import java.util.*;
 
 public class LottoGamePlayer {
 
-    public Map<WinningType, Integer> getGameResult(LottoTicket winningLottoTicket, LottoTickets lottoTickets, int bonusNumber) {
+    public Map<WinningType, Integer> getGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
-        List<WinningType> winningResult = lottoTickets.getWinningResults(winningLottoTicket, bonusNumber);
+        List<WinningType> winningResult = userLottoTickets.getWinningResults(winningLottoTicket, bonusNumber);
         Map<WinningType, Integer> matchCountResults = new LinkedHashMap<>();
         Arrays.stream(WinningType.values())
                 .forEachOrdered(v -> matchCountResults.put(v, (int) winningResult.stream()

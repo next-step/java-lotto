@@ -23,21 +23,21 @@ public class ResultView {
         System.out.println(lottoTicketsText);
     }
 
-    public void printResultStatistics(Map<WinningType, Integer> gameResult) {
+    public void printGameResult(Map<WinningType, Integer> gameResult) {
         System.out.println(STATISTICS_TITLE_MESSAGE);
 
         for(WinningType winningType : gameResult.keySet()) {
-            printResultStatistics(winningType, gameResult.get(winningType));
+            printGameResult(winningType, gameResult.get(winningType));
         }
     }
 
-    private void printResultStatistics(WinningType winningType, int value) {
+    private void printGameResult(WinningType winningType, int rank) {
         if(winningType == WinningType.SECOND) {
-            System.out.printf(SECOND_STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), value);
+            System.out.printf(SECOND_STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), rank);
         }
 
         if((winningType != WinningType.SECOND) && (winningType.getMatchCount() >= MIN_PROFIT_MATCHING_COUNT)) {
-            System.out.printf(STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), value);
+            System.out.printf(STATISTICS_MESSAGE, winningType.getMatchCount(), winningType.getPrize(), rank);
         }
     }
 

@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(lottoNumber);
     }
 
-    public Integer of() {
+    public Integer value() {
         return this.lottoNumber;
     }
 
