@@ -47,6 +47,7 @@ public class InputView {
         for (int i = 0; i < ticketCount; i++) {
             manualLottoNumbers.add(inputLottoNumbers(SCANNER.nextLine()));
         }
+        SCANNER.nextLine();
         return manualLottoNumbers;
     }
 
