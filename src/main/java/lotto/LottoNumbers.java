@@ -3,6 +3,8 @@ package lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.statistics.Ranking;
+
 public class LottoNumbers {
 
     private static final int LOTTO_SIZE = 6;
@@ -24,6 +26,14 @@ public class LottoNumbers {
 
     public boolean hasWinLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public Ranking ranking(LottoNumbers purchasedLotto) {
+        return Ranking.valueOf(sameCount(purchasedLotto), false);
+    }
+
+    public boolean hasBonus() {
+        return false;
     }
 
     @Override

@@ -21,8 +21,8 @@ public class StatisticsCalculatorTest {
 	void statistics() {
 		LottoNumbers win = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 		StatisticsCalculator calculator = new StatisticsCalculator(mockTicket(), win);
-		Map<Integer, Statistic> countByStatic = calculator.statisticsMap();
-		assertThat(countByStatic.get(3)).isEqualTo(new Statistic(1, Earn.THREE_MATCHED));
+		Map<Ranking, Statistic> countByStatic = calculator.statisticsMap();
+		assertThat(countByStatic.get(Ranking.FIFTH)).isEqualTo(new Statistic(1, Earn.THREE_MATCHED));
 	}
 
 	@Test

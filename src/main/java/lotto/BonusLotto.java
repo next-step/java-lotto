@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.List;
 
+import lotto.statistics.Ranking;
+
 public class BonusLotto extends LottoNumbers {
 
     private final LottoNumber bonus;
@@ -15,12 +17,14 @@ public class BonusLotto extends LottoNumbers {
     }
 
     @Override
-    public int sameCount(LottoNumbers pursedLotto) {
-        int exceptBonus = super.sameCount(pursedLotto);
-        if (!pursedLotto.contains(this.bonus)) {
-            return exceptBonus;
-        }
-        return exceptBonus + 1;
+    public Ranking ranking(LottoNumbers purchasedLotto) {
+        int same = sameCount(purchasedLotto);
+        return Ranking.valueOf(same, true);
+    }
+
+    @Override
+    public boolean hasBonus() {
+        return true;
     }
 
 }

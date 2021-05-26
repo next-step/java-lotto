@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.statistics.Ranking;
+
 class BonusLottoTest {
 
 	@Test
@@ -25,11 +27,11 @@ class BonusLottoTest {
 		List<Integer> winnerLottoNumberList = Arrays.asList(3, 4, 5, 6, 7, 8);
 
 		BonusLotto bonusLotto = new BonusLotto(winnerLottoNumberList, new LottoNumber(10));
-		LottoNumbers purchased = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 10));
-		assertThat(bonusLotto.sameCount(purchased)).isEqualTo(6);
+		LottoNumbers purchased1 = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 10));
+		LottoNumbers purchased2 = new LottoNumbers(Arrays.asList(3, 5, 6, 7, 8, 10));
 
-		LottoNumbers winner = new LottoNumbers(winnerLottoNumberList);
-		assertThat(winner.sameCount(purchased)).isEqualTo(5);
+		assertThat(bonusLotto.ranking(purchased1)).isEqualTo(Ranking.SECOND);
+		assertThat(bonusLotto.ranking(purchased2)).isEqualTo(Ranking.SECOND);
 	}
 
 }
