@@ -3,7 +3,11 @@ package lottoauto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketsTest {
     LottoGenerateStrategy lottoGenerateStrategy = new AutoStrategy();
@@ -21,5 +25,15 @@ public class LottoTicketsTest {
     void 로또티켓가격() {
         assertThat(new LottoTickets(new Money(14500), lottoGenerateStrategy).calcInvestment()).isEqualTo(new Money(14000));
         assertThat(new LottoTickets(new Money(1234), lottoGenerateStrategy).calcInvestment()).isEqualTo(new Money(1000));
+    }
+
+    @DisplayName("돈보다 티켓을 더 요구하는 경우 예외")
+    @Test
+    void 수동티켓_예외() {
+        List<String> requestedManualLottoNumbers = new ArrayList<>();
+        requestedManualLottoNumbers.add("");
+        requestedManualLottoNumbers.add("");
+        assertThatIllegalArgumentException().isThrownBy(()->new LottoTickets(new Money(1000), requestedManualLottoNumbers))
+                .withMessage("돈이 부족하여 수동티켓을 줄 수 없습니다.");
     }
 }

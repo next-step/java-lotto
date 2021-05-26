@@ -4,6 +4,8 @@ import java.io.PrintStream;
 
 public class OutputView {
     private static final String ENTER_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String ENTER_MANUAL_TICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_MANUAL_TICKET_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String TICKETS_COUNT = "%d개를 구매했습니다.";
 
     private static final String ENTER_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
@@ -13,6 +15,8 @@ public class OutputView {
     private static final String PROCEEDS_RATE = "총 수익률은 %.2f입니다.";
 
     private static final PrintStream printStream = System.out;
+
+
 
     public void printf(String format, Object... objects) {
         printStream.printf(format, objects);
@@ -46,5 +50,13 @@ public class OutputView {
 
     public void enterBonusNumber() {
         println(ENTER_BONUS_NUBER);
+    }
+
+    public void enterManualTicketCount() {
+        println(ENTER_MANUAL_TICKET_COUNT);
+    }
+
+    public void enterManualTicketNumbers() {
+        println(ENTER_MANUAL_TICKET_NUMBERS);
     }
 }
