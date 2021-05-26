@@ -50,6 +50,6 @@ public class WinResult {
         for (LottoWinner lottoWinner : LottoWinner.values()) {
             totalEarnWinnerPrice += (lottoWinner.winnerPrice * result.get(lottoWinner));
         }
-        return Math.floor(totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE));
+        return totalEarnWinnerPrice / (buyLottoCount * LOTTO_PRICE);
     }
 }
