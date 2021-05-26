@@ -9,19 +9,27 @@ import java.util.stream.Collectors;
 
 public final class LottoStore {
 
-    public BuyLottos buyAutoLottos(LottoGenerator lottoGenerator, LottoPayment lottoPayment) {
+    private final DataGenerator dataGenerator;
+    private final LottoGenerator lottoGenerator;
+
+    public LottoStore(DataGenerator dataGenerator, LottoGenerator lottoGenerator) {
+        this.dataGenerator = dataGenerator;
+        this.lottoGenerator = lottoGenerator;
+    }
+
+    public BuyLottos buyAutoLottos(LottoPayment lottoPayment) {
         return lottoGenerator.createAutoLottos(lottoPayment);
     }
 
-    public Lotto createWinningLotto(DataGenerator dataGenerator) {
+    public Lotto createWinningLotto() {
         return dataGenerator.requestWinningLottoNumbers();
     }
 
-    public LottoPayment createLottoPayment(DataGenerator dataGenerator) {
+    public LottoPayment createLottoPayment() {
         return dataGenerator.requestInputPayment();
     }
 
-    public LottoNumber createBonusBallLottoNumber(DataGenerator dataGenerator, Lotto winningLotto) {
+    public LottoNumber createBonusBallLottoNumber(Lotto winningLotto) {
         return dataGenerator.requestBonusBallNumber(winningLotto);
     }
 

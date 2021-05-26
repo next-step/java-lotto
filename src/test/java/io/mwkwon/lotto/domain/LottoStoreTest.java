@@ -12,8 +12,8 @@ public class LottoStoreTest {
     @ParameterizedTest
     @CsvSource(value = {"10000:10", "25000:25", "12500:12"}, delimiter = ':')
     void 입력된_구입금액_기준_로또_구매_기능_테스트(int value, int excepted) {
-        LottoStore lottoStore = new LottoStore();
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(new LottoMachine(), new LottoPayment(value));
+        LottoStore lottoStore = new LottoStore(new LottoInputView(), new LottoMachine());
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(new LottoPayment(value));
         assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
     }
 
@@ -25,8 +25,8 @@ public class LottoStoreTest {
                 return new Lotto("1,2,3,4,5,6");
             }
         };
-        LottoStore lottoStore = new LottoStore();
-        Lotto winningLotto = lottoStore.createWinningLotto(lottoInputView);
+        LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
+        Lotto winningLotto = lottoStore.createWinningLotto();
         assertThat(winningLotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
     }
 
@@ -38,8 +38,8 @@ public class LottoStoreTest {
                 return new LottoPayment("14000");
             }
         };
-        LottoStore lottoStore = new LottoStore();
-        LottoPayment lottoPayment = lottoStore.createLottoPayment(lottoInputView);
+        LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
+        LottoPayment lottoPayment = lottoStore.createLottoPayment();
         assertThat(lottoPayment).isEqualTo(new LottoPayment("14000"));
     }
 
@@ -52,9 +52,9 @@ public class LottoStoreTest {
             }
         };
 
-        LottoStore lottoStore = new LottoStore();
+        LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
         Lotto winningLotto = new Lotto("1,2,3,4,5,6");
-        LottoNumber lottoNumber = lottoStore.createBonusBallLottoNumber(lottoInputView, winningLotto);
+        LottoNumber lottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);
         assertThat(lottoNumber).isEqualTo(new LottoNumber(7));
     }
 }

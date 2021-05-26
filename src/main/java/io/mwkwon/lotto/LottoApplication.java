@@ -18,13 +18,13 @@ public class LottoApplication {
     }
 
     public void run() {
-        LottoStore lottoStore = new LottoStore();
-        LottoPayment lottoPayment = lottoStore.createLottoPayment(dataGenerator);
+        LottoStore lottoStore = new LottoStore(dataGenerator, lottoGenerator);
+        LottoPayment lottoPayment = lottoStore.createLottoPayment();
         resultView.printBuyLottoCount(lottoPayment);
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(lottoGenerator, lottoPayment);
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(lottoPayment);
         resultView.printBuyLottos(buyLottos);
-        Lotto winningLotto = lottoStore.createWinningLotto(dataGenerator);
-        LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(dataGenerator, winningLotto);
+        Lotto winningLotto = lottoStore.createWinningLotto();
+        LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);
         WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos, winningLotto, bonusBallLottoNumber);
         resultView.printWinningStatistics(winningRanks);
         resultView.printProfitRate(winningRanks, lottoPayment);
