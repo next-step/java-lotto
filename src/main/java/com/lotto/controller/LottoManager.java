@@ -2,9 +2,8 @@ package com.lotto.controller;
 
 import com.lotto.domain.LottoGroup;
 import com.lotto.domain.LottoStatistics;
-import com.lotto.domain.WinningLotto;
 import com.lotto.domain.ReqPurchaseLotto;
-import com.lotto.exception.LottoManualCountNumberFormatException;
+import com.lotto.domain.WinningLotto;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
