@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PURCHASE_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_MESSAGE = "%n당첨통계%n---------%n";
     private static final String REVENUE_RATE_MESSAGE = "총 수익률은 %s입니다.%s";
     private static final String DAMAGE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -22,8 +22,10 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printPurchaseCountAndLottoes(final LottoGame lottoGame) {
-        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, lottoGame.getLottoCount()));
+    public static void printPurchaseCountAndLottoes(final LottoGame lottoGame, final int countOfManualLotto) {
+        int countOfAutoLotto = lottoGame.getLottoCount() - countOfManualLotto;
+        System.out.print(System.lineSeparator());
+        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, countOfManualLotto, countOfAutoLotto));
         printLottoes(lottoGame.getLottoes());
     }
 

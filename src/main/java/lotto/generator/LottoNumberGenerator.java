@@ -1,6 +1,7 @@
 package lotto.generator;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +14,7 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     static {
         allLottoNumbers = new ArrayList<>();
-        IntStream.rangeClosed(Lotto.NUMBER_MIN_BOUND, Lotto.NUMBER_MAX_BOUND)
+        IntStream.rangeClosed(LottoNumber.MIN_BOUND, LottoNumber.MAX_BOUND)
                 .boxed()
                 .distinct()
                 .forEach(allLottoNumbers::add);
