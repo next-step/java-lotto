@@ -41,8 +41,8 @@ public class Lotto {
         try {
             price = new Price(inputView.getPrice());
             totalLotto = pickLottoWithPrice(price);
-            resultView.buyCount(totalLotto.totalSize());
-            resultView.showText(totalLotto.getStatus());
+            resultView.buyCount(totalLotto);
+            resultView.showTextStatus(totalLotto);
             resultView.showEmptyLine();
         } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
