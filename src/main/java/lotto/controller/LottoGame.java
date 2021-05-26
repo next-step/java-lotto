@@ -7,6 +7,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseHistory;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoUser;
+import lotto.domain.Lottos;
 import lotto.utils.LottoUtils;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -18,10 +19,11 @@ public class LottoGame {
 	private static LottoNumber bonusNumber;
 
 	private LottoGame() {
-		user = new LottoUser();
+
 	}
 
 	public static void start() {
+		initUser();
 		purchaseLottos();
 		getUserLottoStatus();
 		inputLastWeekWinningNumber();
@@ -29,11 +31,17 @@ public class LottoGame {
 		outputResult();
 	}
 
+	private static void initUser() {
+		user = new LottoUser();
+	}
+
 	private static void purchaseLottos() {
 		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
-		List<String> manualLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
-		LottoPurchaseHistory lottoPurchaseHistory = user.buyLottos(LottoUtils.getStringListToLottos(manualLottos), purchasePrice);
-		LottoOutputView.printPurchaseLottoResult(lottoPurchaseHistory.getAutoLottoCount(), lottoPurchaseHistory.getManualLottoCount());
+		List<String> manualStringLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
+		Lottos manualLottos = LottoUtils.getStringListToLottos(manualStringLottos);
+		LottoPurchaseHistory lottoPurchaseHistory = user.buyLottos(manualLottos, purchasePrice);
+		LottoOutputView.printPurchaseLottoResult(lottoPurchaseHistory.getAutoLottoCount(),
+			lottoPurchaseHistory.getManualLottoCount());
 	}
 
 	private static void getUserLottoStatus() {
