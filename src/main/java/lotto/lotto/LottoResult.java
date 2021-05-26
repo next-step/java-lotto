@@ -17,7 +17,7 @@ public class LottoResult {
             return;
         }
         Prize prize = Prize.valueOf(matchingCount, matchBonus);
-        int count = result.getOrDefault(prize, 0);
+        int count = count(prize);
         result.put(prize, ++count);
     }
 
