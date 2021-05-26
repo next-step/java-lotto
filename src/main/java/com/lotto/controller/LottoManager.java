@@ -3,14 +3,18 @@ package com.lotto.controller;
 import com.lotto.domain.LottoGroup;
 import com.lotto.domain.LottoStatistics;
 import com.lotto.domain.WinningLotto;
+import com.lotto.domain.ReqPurchaseLotto;
+import com.lotto.exception.LottoManualCountNumberFormatException;
 import com.lotto.ui.InputView;
 import com.lotto.ui.OutputView;
 
 public class LottoManager {
 
     public void control() {
-        LottoGroup lottoGroup = repeatCreateLottoGroup();
-        OutputView.confirmBuyCount(lottoGroup.size());
+        ReqPurchaseLotto reqPurchaseLotto = InputView.inputPurchase();
+        LottoGroup lottoGroup = LottoGroup.createLottoGroup(reqPurchaseLotto);
+
+        OutputView.confirmBuyCount(reqPurchaseLotto);
         OutputView.buyLottoList(lottoGroup.lottoList());
 
         WinningLotto winningLotto = createWinningLotto();
@@ -19,20 +23,6 @@ public class LottoManager {
         LottoStatistics statistics = lottoGroup.statistics(winningLotto);
         OutputView.winningStatisticsDetail(statistics);
         OutputView.investment(statistics.yield());
-    }
-
-    private LottoGroup repeatCreateLottoGroup() {
-        LottoGroup lottoGroup;
-
-        OutputView.requireLottoPrice();
-        try {
-            lottoGroup = LottoGroup.createLottoGroup(InputView.inputDataFromConsole());
-        } catch (RuntimeException exception) {
-            OutputView.out(exception.getMessage());
-            lottoGroup = repeatCreateLottoGroup();
-        }
-
-        return lottoGroup;
     }
 
     private WinningLotto createWinningLotto() {

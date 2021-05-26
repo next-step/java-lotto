@@ -3,6 +3,7 @@ package com.lotto.ui;
 import com.lotto.domain.Lotto;
 import com.lotto.domain.LottoReward;
 import com.lotto.domain.LottoStatistics;
+import com.lotto.domain.ReqPurchaseLotto;
 
 import java.util.List;
 
@@ -20,8 +21,9 @@ public class OutputView {
         out(REQUIRE_LOTTO_PRICE.message());
     }
 
-    public static void confirmBuyCount(int buyCount) {
-        out(buyCount + CONFIRM_BUY_COUNT.message());
+    public static void confirmBuyCount(ReqPurchaseLotto reqPurchaseLotto) {
+        out(String.format(CONFIRM_BUY_COUNT.message(),
+                reqPurchaseLotto.getManualLottoCount(), reqPurchaseLotto.getAutoLottoCount()));
     }
 
     public static void buyLottoList(List<Lotto> lottoList) {
@@ -35,6 +37,10 @@ public class OutputView {
     public static void requireBonusNumbers() {
         out(REQUIRE_BONUS_NUMBER.message());
     }
+
+    public static void requireManualLottoCount() { out(REQUIRE_MANUAL_LOTTO_COUNT.message()); }
+
+    public static void requireManualNumberList() { out(REQUIRE_MANUAL_NUMBER.message()); }
 
     public static void winningStatistics() {
         out(WINNING_STATISTICS.message());

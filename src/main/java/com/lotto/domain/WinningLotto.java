@@ -20,7 +20,6 @@ public class WinningLotto {
     public static WinningLotto createWinningLotto(String winningNumbers)
             throws LottoNumberFormatException, IllegalLottoCountException, LottoNumberOutOfBoundsException {
         Set<LottoNumber> set;
-        LottoNumber bonusNumber;
         try {
             set = addWinningNumber(winningNumbers);
         } catch (NumberFormatException exception) {

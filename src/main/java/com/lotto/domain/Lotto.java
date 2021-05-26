@@ -1,5 +1,7 @@
 package com.lotto.domain;
 
+import com.lotto.exception.IllegalLottoCountException;
+
 import java.util.TreeSet;
 
 public final class Lotto {
@@ -11,6 +13,13 @@ public final class Lotto {
 
     public Lotto(TreeSet<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validate();
+    }
+
+    private void validate() {
+        if (lottoNumbers.size() != LOTTO_COUNT) {
+            throw new IllegalLottoCountException(lottoNumbers.toString());
+        }
     }
 
     public TreeSet<LottoNumber> numbers() {
