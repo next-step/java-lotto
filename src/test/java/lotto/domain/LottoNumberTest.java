@@ -18,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNumberTest {
 
     @ParameterizedTest
-    @MethodSource("provideSource_new_정상")
-    @DisplayName("new_정상")
-    void new_정상(int value) {
+    @MethodSource("provideSource_valueOf_정상")
+    @DisplayName("valueOf_정상")
+    void valueOf_정상(int value) {
         // When, Then
-        assertDoesNotThrow(() -> new LottoNumber(value));
+        assertDoesNotThrow(() -> LottoNumber.valueOf(value));
     }
 
-    static Stream<Arguments> provideSource_new_정상() {
+    static Stream<Arguments> provideSource_valueOf_정상() {
         List<Arguments> argumentsList = new ArrayList<>();
 
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
@@ -36,37 +36,15 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideSource_from_정상")
-    @DisplayName("from_정상")
-    void from_정상(int value) {
-        // Given
-        LottoNumber lottoNumberUsingNew = new LottoNumber(value);
-        LottoNumber lottoNumberUsingFrom = LottoNumber.from(value);
-
-        // When, Then
-        assertEquals(lottoNumberUsingFrom, lottoNumberUsingNew);
-    }
-
-    static Stream<Arguments> provideSource_from_정상() {
-        List<Arguments> argumentsList = new ArrayList<>();
-
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            argumentsList.add(Arguments.of(i));
-        }
-
-        return argumentsList.stream();
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideSource_new_예외")
-    @DisplayName("new_예외")
+    @MethodSource("provideSource_valueOf_예외")
+    @DisplayName("valueOf_예외")
     void new_예외(int value) {
         // When, Then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(value));
+                .isThrownBy(() -> LottoNumber.valueOf(value));
     }
 
-    static Stream<Arguments> provideSource_new_예외() {
+    static Stream<Arguments> provideSource_valueOf_예외() {
         List<Arguments> argumentsList = new ArrayList<>();
 
         for (int i = MIN_LOTTO_NUMBER - 6; i <= MIN_LOTTO_NUMBER - 1; i++) {
@@ -85,8 +63,8 @@ class LottoNumberTest {
     @DisplayName("equals_true")
     void equals_true(int value) {
         // Given
-        LottoNumber firstLottoNumber = new LottoNumber(value);
-        LottoNumber secondLottoNumber = new LottoNumber(value);
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(value);
+        LottoNumber secondLottoNumber = LottoNumber.valueOf(value);
 
         // When, Then
         assertTrue(firstLottoNumber.equals(secondLottoNumber));
@@ -97,8 +75,8 @@ class LottoNumberTest {
     @DisplayName("equals_false")
     void equals_false(int value) {
         // Given
-        LottoNumber firstLottoNumber = new LottoNumber(value - 1);
-        LottoNumber secondLottoNumber = new LottoNumber(value);
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(value - 1);
+        LottoNumber secondLottoNumber = LottoNumber.valueOf(value);
 
         // When, Then
         assertFalse(firstLottoNumber.equals(secondLottoNumber));
