@@ -8,15 +8,31 @@ public final class Price {
     private static final String NOT_AVALIABLE_MANUAL = "가격에 맞는 수동 구매 로또 수를 입력하세요";
 
     private Integer price;
-    private Integer manual;
+    private Integer autoCount;
+    private Integer manualCount;
 
     public Price(Integer price) {
-        validation(price);
-        this.price = price;
+        this(price, 0);
     }
 
     public Price(int price, int manual) {
         validation(price, manual);
+        this.price = price;
+        this.manualCount = manual;
+        this.autoCount = price / MIN_VALUE - manual;
+
+    }
+
+    public IntStream getBuyManualCountStream() {
+        return IntStream.range(0, manualCount);
+    }
+
+    public IntStream getBuyAutoCountStream() {
+        return IntStream.range(0, autoCount);
+    }
+
+    public int value() {
+        return price;
     }
 
     private void validation(int price, int manual) {
@@ -38,14 +54,6 @@ public final class Price {
 
     private boolean isUnderMin(int price) {
         return price < MIN_VALUE;
-    }
-
-    public IntStream getBuyCountStream() {
-        return IntStream.range(0, price / MIN_VALUE);
-    }
-
-    public int value() {
-        return price;
     }
 
 }

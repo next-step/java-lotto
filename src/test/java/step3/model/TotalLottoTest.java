@@ -28,12 +28,6 @@ public class TotalLottoTest {
     }
 
     @Test
-    @DisplayName("totalSize 반환 테스트")
-    void sizeTest() {
-        assertThat(totalLotto.totalSize()).isEqualTo("4");
-    }
-
-    @Test
     @DisplayName("로또 수익률 테스트")
     void getBenefitTest() {
         LottoNumbers victoryNumber = LottoNumbers.of("1, 2, 3, 7, 8, 9");

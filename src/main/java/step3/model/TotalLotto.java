@@ -19,10 +19,6 @@ public class TotalLotto {
         this.totalLotto = totalLotto;
     }
 
-    public String totalSize() {
-        return String.valueOf(totalLotto.size());
-    }
-
     public String getBenefit(LottoNumbers victoryNumber, Price price) {
 
         Map<Rank, Long> lottoResult = groupByWinnerPrice(victoryNumber);

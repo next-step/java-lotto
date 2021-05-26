@@ -3,10 +3,11 @@ package step3.io;
 import java.util.Map;
 
 import step3.constant.Rank;
+import step3.model.Price;
 import step3.model.TotalLotto;
 
 public class ConsoleResultView {
-    private static final String BUY_TEXT = "%s개를 구매했습니다.";
+    private static final String BUY_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String STATISTICS_TEXT = "당첨 통계";
     private static final String SEPERATOR_TEXT = "---------";
     private static final String COUNT_TEXT = "%d개 일치(%d원)-%d개";
@@ -17,8 +18,9 @@ public class ConsoleResultView {
         System.out.println(message);
     }
 
-    public void buyCount(TotalLotto totalLotto) {
-        System.out.printf(BUY_TEXT, totalLotto.totalSize());
+    public void buyCount(Price price) {
+        System.out.printf(BUY_TEXT, price.getBuyManualCountStream().count(),
+            price.getBuyAutoCountStream().count());
         System.out.println();
     }
 

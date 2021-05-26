@@ -1,5 +1,6 @@
 package step3.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,16 +23,6 @@ public class Lotto {
         this.resultView = new ConsoleResultView();
     }
 
-    public TotalLotto pickLottoWithPrice(Price price) {
-        List<LottoNumbers> lottoList = price.getBuyCountStream()
-            .boxed()
-            .map(number -> LottoNumbers
-                .of(RandomNumbersGenerator.createNumbers()))
-            .collect(Collectors.toList());
-
-        return new TotalLotto(lottoList);
-    }
-
     public void start() {
         buy();
         statistics();
@@ -39,9 +30,9 @@ public class Lotto {
 
     private void buy() {
         try {
-            price = new Price(inputView.getPrice());
-            totalLotto = pickLottoWithPrice(price);
-            resultView.buyCount(totalLotto);
+            setPrice();
+            totalLotto = new TotalLotto(getLottoNeberWithPrice());
+            resultView.buyCount(price);
             resultView.showTextStatus(totalLotto);
             resultView.showEmptyLine();
         } catch (IllegalArgumentException e) {
@@ -49,6 +40,20 @@ public class Lotto {
             buy();
         }
 
+    }
+
+    private List<LottoNumbers> getLottoNeberWithPrice() {
+        List<LottoNumbers> totalNumbers = new ArrayList<>();
+        totalNumbers.addAll(pickAutoLottoWithPrice(price));
+        totalNumbers.addAll(pickManulLottoWithPrice(price));
+
+        return totalNumbers;
+    }
+
+    private void setPrice() {
+        int totalPrice = inputView.getPrice();
+        int manualCount = inputView.getManulCount();
+        price = new Price(totalPrice, manualCount);
     }
 
     public void statistics() {
@@ -69,6 +74,22 @@ public class Lotto {
     private LottoNumbers getVictoryNumbers() {
         return LottoNumbers.of(inputView.getVictoryNumbers(),
             inputView.getBonusNumber());
+    }
+
+    protected List<LottoNumbers> pickAutoLottoWithPrice(Price price) {
+        return price.getBuyAutoCountStream()
+            .boxed()
+            .map(number -> LottoNumbers
+                .of(RandomNumbersGenerator.createNumbers()))
+            .collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> pickManulLottoWithPrice(Price price) {
+        inputView.getManulNumber();
+        return price.getBuyManualCountStream()
+            .boxed()
+            .map(number -> LottoNumbers.of(inputView.getText()))
+            .collect(Collectors.toList());
     }
 
 }
