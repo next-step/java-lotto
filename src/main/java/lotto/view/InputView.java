@@ -18,17 +18,45 @@ public class InputView {
     }
 
     public static LottoPurchaseRequest inputPurchaseInfo() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return new LottoPurchaseRequest(SCANNER.nextInt());
-    }
-    
-    public static WinInquiryRequest inputWinNumbers(List<LottoNumbersDto> purchaseNumbers) {
-        System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
-        SCANNER.nextLine();
-        return new WinInquiryRequest(purchaseNumbers, inputWinNumbers(SCANNER.nextLine()), inputBonusNumber());
+        return new LottoPurchaseRequest(inputPurchaseAmount(), inputManualTicketCount());
     }
 
-    private static LottoNumbersDto inputWinNumbers(String winNumbers) {
+    public static LottoPurchaseRequest inputPurchaseInfo(LottoPurchaseRequest request) {
+        return new LottoPurchaseRequest(request.getPurchaseAmount(),
+                request.getManualLottoTicketCount(),
+                inputManualLottoNumbers(request.getManualLottoTicketCount()));
+    }
+
+    private static int inputPurchaseAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private static int inputManualTicketCount() {
+        System.out.println(System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private static List<LottoNumbersDto> inputManualLottoNumbers(int ticketCount) {
+        if (ticketCount == 0) {
+            return Collections.emptyList();
+        }
+        System.out.println(System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.");
+        SCANNER.nextLine();
+        List<LottoNumbersDto> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            manualLottoNumbers.add(inputLottoNumbers(SCANNER.nextLine()));
+        }
+        return manualLottoNumbers;
+    }
+
+    public static WinInquiryRequest inputLottoNumbers(List<LottoNumbersDto> purchaseNumbers) {
+        System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
+        SCANNER.nextLine();
+        return new WinInquiryRequest(purchaseNumbers, inputLottoNumbers(SCANNER.nextLine()), inputBonusNumber());
+    }
+
+    private static LottoNumbersDto inputLottoNumbers(String winNumbers) {
         List<Integer> winNumberList = Arrays.stream(winNumbers.split(NUMBER_DELIMITER))
                 .map(winNumber -> Integer.valueOf(winNumber.trim()))
                 .collect(Collectors.toList());

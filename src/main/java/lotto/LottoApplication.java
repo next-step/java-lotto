@@ -17,10 +17,11 @@ public class LottoApplication {
 
         LottoPurchaseRequest lottoPurchaseRequest = InputView.inputPurchaseInfo();
         lottoPurchaseController.validatePurchasable(lottoPurchaseRequest);
+        lottoPurchaseRequest = InputView.inputPurchaseInfo(lottoPurchaseRequest);
         LottoPurchaseResponse lottoPurchaseResponse = lottoPurchaseController.purchaseTickets(lottoPurchaseRequest);
         OutputView.printPurchaseResult(lottoPurchaseResponse);
 
-        WinInquiryRequest winInquiryRequest = InputView.inputWinNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
+        WinInquiryRequest winInquiryRequest = InputView.inputLottoNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
         WinInquiryResponse winInquiryResponse = lottoWinController.inquiryWin(winInquiryRequest);
         OutputView.printWinResult(winInquiryResponse);
     }
