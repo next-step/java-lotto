@@ -19,8 +19,13 @@ public class LottoNumbersList {
         return lottoNumbersList.size();
     }
 
-    public LottoNumbers get(int index) {
-        return lottoNumbersList.get(index);
+    public void foreach() {
+        lottoNumbersList.forEach(new Consumer<LottoNumbers>() {
+            @Override
+            public void accept(LottoNumbers lottoNumbers) {
+                System.out.println(lottoNumbers.getLottoNumbers());
+            }
+        });
     }
 
     public ResultAll countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {

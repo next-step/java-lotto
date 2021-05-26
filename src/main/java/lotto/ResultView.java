@@ -6,9 +6,7 @@ public class ResultView {
     }
 
     public void printPurchasedLottos(LottoNumbersList lottoNumbersList) {
-        for (int i = 0; i < lottoNumbersList.count(); i++) {
-            System.out.println(lottoNumbersList.get(i).getLottoNumbers());
-        }
+        lottoNumbersList.foreach();
     }
 
     public void printLottoGameResult(ResultAll resultAll, int inputPurchaseAmount) {
