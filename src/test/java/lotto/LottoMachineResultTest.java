@@ -3,7 +3,6 @@ package lotto;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
-import lotto.model.WinningNumbers;
 import lotto.view.LottoResultMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,14 +18,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoMachineResultTest {
     LottoMachine lottoMachine;
     LottoResult lottoResult;
-    WinningNumbers winningNumbers;
+    LottoNumbers winningNumbers;
     List<LottoNumbers> buyLottoNumbers;
 
     @BeforeEach
     public void setup(){
         lottoMachine = new LottoMachine();
         lottoResult = new LottoResult();
-        winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        winningNumbers = new LottoNumbers("1,2,3,4,5,6");
         buyLottoNumbers = new ArrayList<>();
     }
 

@@ -1,24 +1,22 @@
 package lotto.model;
 
-import lotto.LottoUtil;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.*;
-import static lotto.common.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.common.LottoConstants.LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE;
+import static lotto.common.LottoConstants.*;
 
 public class LottoNumbers {
     private final TreeSet<LottoNumber> lottoNumbers;
 
     public LottoNumbers(Set<LottoNumber> numbers) {
-        LottoUtil.validateLottoNumbersSize(numbers, LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
+        validateLottoNumbersSize(numbers, LOTTO_NUMBER_OUT_OF_BOUND_MESSAGE);
         this.lottoNumbers = new TreeSet<>(comparingInt(LottoNumber::number));
         this.lottoNumbers.addAll(numbers);
     }
 
     public LottoNumbers(String number) {
-        this(LottoUtil.stringNumbersToLottoNumbers(number));
+        this(stringNumbersToLottoNumbers(number));
     }
 
     public String printInfo() {
@@ -29,6 +27,23 @@ public class LottoNumbers {
         List<LottoNumber> numbers = new ArrayList<>(winningNumbers);
         numbers.removeAll(lottoNumbers);
         return LOTTO_NUMBER_COUNT - numbers.size();
+    }
+
+    private static Set<LottoNumber> stringNumbersToLottoNumbers(String lottoNumber) {
+        return Arrays.stream(lottoNumber.split(SPLIT_SYMBOL))
+                .map(String::trim)
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toSet());
+    }
+
+    private static void validateLottoNumbersSize(Set<LottoNumber> lottoNumbers, String message) {
+        if (!(lottoNumbers.size() == LOTTO_NUMBER_COUNT)) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    public TreeSet<LottoNumber> lottoNumbers(){
+        return this.lottoNumbers;
     }
 
     @Override

@@ -25,10 +25,10 @@ public class LottoResult {
         }
     }
 
-    public String result(List<LottoNumbers> purchaseLottoNumbers, WinningNumbers winningNumbers) {
+    public String result(List<LottoNumbers> purchaseLottoNumbers, LottoNumbers winningNumbers) {
 
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
-            addLottoRankingCount(LottoRanking.lottoRanking(purchaseLottoNumber.correctCount(winningNumbers.winningNumbers())));
+            addLottoRankingCount(LottoRanking.lottoRanking(purchaseLottoNumber.correctCount(winningNumbers.lottoNumbers())));
         }
 
         float rateOfReturn = rateOfReturn(purchaseLottoNumbers.size() * LOTTO_PRICE);

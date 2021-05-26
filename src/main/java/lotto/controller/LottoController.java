@@ -3,12 +3,10 @@ package lotto.controller;
 import lotto.model.LottoMachine;
 import lotto.model.LottoNumbers;
 import lotto.model.LottoResult;
-import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.TreeSet;
 
 public class LottoController {
 
@@ -24,7 +22,7 @@ public class LottoController {
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        LottoNumbers winningNumbers = new LottoNumbers(numbers);
 
         resultView.print();
         resultView.print(lottoResult.result(lottoNumbers, winningNumbers));
