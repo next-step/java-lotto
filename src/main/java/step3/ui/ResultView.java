@@ -2,16 +2,31 @@ package step3.ui;
 
 import step3.domain.Lotto;
 import step3.domain.LottoCount;
+import step3.domain.LottoNumber;
 
 import java.util.List;
 
 public class ResultView {
 
-    public static void showLottos(List<Lotto> lottos) {
+    public void showLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + " 개를 구매했습니다.");
         for (int i = 0; i < lottos.size(); ++i) {
-            System.out.println(lottos.get(i));
+            showLotto(lottos.get(i));
         }
+    }
+
+    public static void showLotto(Lotto lotto) {
+        List<LottoNumber> copy = lotto.shuffledLottoList();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (LottoNumber lottoNumber : copy) {
+            sb.append(lottoNumber);
+            sb.append(", ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("]");
+        System.out.println(sb.toString());
     }
 
     public static void showStatistics(LottoCount lottoCount) {

@@ -17,11 +17,12 @@ public class LottoGame {
     public static final int FIVE_MATCH = 1_500_000;
     public static final int SIX_MATCH = 2_000_000_000;
 
-    List<Lotto> lottos;
-    LottoCount lottoCount;
+    private final List<Lotto> lottos;
+    private final LottoCount lottoCount;
 
 
     public LottoGame(Money money) {
+        ResultView resultView = new ResultView();
         lottos = new ArrayList<>();
         lottoCount = new LottoCount();
 
@@ -31,13 +32,13 @@ public class LottoGame {
             money.buyOneLotto();
         }
 
-        ResultView.showLottos(lottos);
+        resultView.showLottos(lottos);
     }
 
 
     public void getStatistics(Lotto winLotto) {
         for (Lotto lotto : lottos) {
-            int count = SameLottoChecker.countSameLottoNum(lotto, winLotto);
+            int count = SameLottoChecker.countSameLottoNumber(lotto, winLotto);
             lottoCount.sameCount(count);
         }
 

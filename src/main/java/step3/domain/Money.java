@@ -5,7 +5,8 @@ import step3.exception.NotEnoughInitMoneyException;
 public class Money {
 
     private static final int ONE_LOTTO_PRICE = 1000;
-    int money;
+    
+    private int money;
 
     public Money(int money) {
         checkInRange(money);

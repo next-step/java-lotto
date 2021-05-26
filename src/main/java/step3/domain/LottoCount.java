@@ -6,12 +6,10 @@ public class LottoCount {
     public static final int FOUR_MATCH = 50_000;
     public static final int FIVE_MATCH = 1_500_000;
     public static final int SIX_MATCH = 2_000_000_000;
-
     public static final int THREE_COUNT = 3;
     public static final int FOUR_COUNT = 4;
     public static final int FIVE_COUNT = 5;
     public static final int SIX_COUNT = 6;
-
 
     private int threeCount;
     private int fourCount;

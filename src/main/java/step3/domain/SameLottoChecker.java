@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class SameLottoChecker {
 
-    public static int countSameLottoNum(Lotto l1, Lotto l2) {
+    public static int countSameLottoNumber(Lotto l1, Lotto l2) {
         int count = 0;
 
         Set<LottoNumber> anotherLotto = l2.getLottoNumbers();
