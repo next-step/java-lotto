@@ -11,7 +11,6 @@ public class LottoTicket {
     private final int INCREMENT_WHEN_NO_MATCH = 0;
     private final int NUMBER_COUNT = 6;
 
-
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) throws CustomIllegalArgumentException {
@@ -37,12 +36,13 @@ public class LottoTicket {
         return numbers.size();
     }
 
-    public MatchStatus matchingStatusWith(WinningNumbers winningNumbers) {
+    public Rank rankBasedOn(WinningNumbers winningNumbers) {
         int matchCount = 0;
         for (LottoNumber number : numbers) {
             matchCount += increaseCountWhenMatch(number, winningNumbers);
         }
-        return MatchStatus.findStatusByMatchCount(matchCount);
+
+        return Rank.valueOf(matchCount, winningNumbers.bonusNumberMatches(numbers));
     }
 
     private int increaseCountWhenMatch(LottoNumber number, WinningNumbers winningNumbers) {

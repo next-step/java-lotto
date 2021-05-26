@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
-    @DisplayName("당첨번호와 티켓번호가 비교결과 테스트")
+    @DisplayName("당첨번호와 티켓번호가 일치하지 않는 비교결과 테스트")
     @Test
     void check_match_result() {
         //Given
-        WinningNumbers winningNumbers = new WinningNumbers(new int[]{1, 2, 3, 4, 5, 6});
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
                 new LottoNumber(13), new LottoNumber(14),
                 new LottoNumber(17), new LottoNumber(18)
@@ -26,10 +26,10 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
         //When
-        MatchStatus matchStatus = lottoTicket.matchingStatusWith(winningNumbers);
+        Rank rank = lottoTicket.rankBasedOn(winningNumbers);
 
         //
-        assertThat(matchStatus).isEqualTo(MatchStatus.ELSE);
+        assertThat(rank).isEqualTo(Rank.ELSE);
     }
 
     @DisplayName("[,] 출력 포맷 점검")
@@ -77,9 +77,9 @@ public class LottoTicketTest {
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
-    @DisplayName("WinningNumbers와의 정확한 비교결과를 내놓는지 확인")
+    @DisplayName("정확한 Rank를 내놓는지 확인 : 보너스 볼이 틀린 경우")
     @Test
-    void return_right_status_after_matching() {
+    void return_right_status_after_matching_without_bonus() {
         //Given
         List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
                 new LottoNumber(13), new LottoNumber(14),
@@ -88,9 +88,26 @@ public class LottoTicketTest {
 
         //When
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        MatchStatus matchStatus = lottoTicket.matchingStatusWith(new WinningNumbers(new int[]{11, 12, 13, 14, 15, 18}));
+        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 45));
 
         //Then
-        assertThat(matchStatus).isEqualTo(MatchStatus.FIVE);
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @DisplayName("정확한 Rank를 내놓는지 확인 : 보너스 볼 있는 경우")
+    @Test
+    void return_right_status_after_matching_with_bonus() {
+        //Given
+        List<LottoNumber> numbers = Arrays.asList(new LottoNumber(11), new LottoNumber(12),
+                new LottoNumber(13), new LottoNumber(14),
+                new LottoNumber(15), new LottoNumber(17)
+        );
+
+        //When
+        LottoTicket lottoTicket = new LottoTicket(numbers);
+        Rank rank = lottoTicket.rankBasedOn(new WinningNumbers(Arrays.asList(11, 12, 13, 14, 15, 18), 17));
+
+        //Then
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }

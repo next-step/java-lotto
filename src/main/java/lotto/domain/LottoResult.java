@@ -6,11 +6,12 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private final String RESULT_MATCH_COUNT_FORMAT = "%d개 일치 (%d원)- %d개%n";
+    private final String DEFAULT_RANK_FORMAT = "%d개 일치 (%d원)- %d개%n";
+    private final String SECOND_RANK_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
     private final String RESULT_PROFIT_RATIO_FORMAT = "총 수익률은 %.2f입니다. (원금보전 시, 수익률이 1입니다)";
     private final int DEFAULT_COUNT = 0;
 
-    private final TreeMap<MatchStatus, Integer> lottoResult;
+    private final TreeMap<Rank, Integer> lottoResult;
     private int purchaseAmount;
     private float profitRatio;
 
@@ -23,42 +24,45 @@ public class LottoResult {
 
     private void updateLottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         for (LottoTicket ticket : lottoTickets) {
-            MatchStatus status = ticket.matchingStatusWith(winningNumbers);
-            updateValue(status);
+            Rank rank = ticket.rankBasedOn(winningNumbers);
+            updateValue(rank);
         }
     }
 
     private void setDefaultValues() {
-        for (MatchStatus status : MatchStatus.values()) {
-            lottoResult.put(status, DEFAULT_COUNT);
+        for (Rank rank : Rank.values()) {
+            lottoResult.put(rank, DEFAULT_COUNT);
         }
-        lottoResult.remove(MatchStatus.ELSE);
+        lottoResult.remove(Rank.ELSE);
     }
 
-    private void updateValue(MatchStatus status) {
+    private void updateValue(Rank rank) {
         int resultCount = DEFAULT_COUNT;
-        if (status.equals(MatchStatus.ELSE)) {
+        if (rank.equals(Rank.ELSE)) {
             return;
         }
-        if (lottoResult.containsKey(status)) {
-            resultCount = lottoResult.get(status);
+        if (lottoResult.containsKey(rank)) {
+            resultCount = lottoResult.get(rank);
         }
-        lottoResult.put(status, resultCount + 1);
+        lottoResult.put(rank, resultCount + 1);
     }
 
-    public int getResultCount(MatchStatus status) {
-        return lottoResult.get(status);
+    public int getResultCount(Rank rank) {
+        return lottoResult.get(rank);
     }
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<MatchStatus, Integer> entry : lottoResult.entrySet()) {
-            MatchStatus matchStatus = entry.getKey();
-            int matchCount = entry.getValue();
-            stringBuilder.append(String.format(RESULT_MATCH_COUNT_FORMAT,
-                    matchStatus.getMatchCount(),
-                    matchStatus.getPrice(),
-                    matchCount));
+        for (Map.Entry<Rank, Integer> entry : lottoResult.entrySet()) {
+            Rank rank = entry.getKey();
+            int rankCount = entry.getValue();
+            if (rank.equals(Rank.SECOND)) {
+                stringBuilder.append(String.format(SECOND_RANK_FORMAT, rank.getCountOfMatch(),
+                        rank.getPrice(), rankCount));
+                continue;
+            }
+            stringBuilder.append(String.format(DEFAULT_RANK_FORMAT, rank.getCountOfMatch(),
+                    rank.getPrice(), rankCount));
         }
         this.profitRatio = calculateProfitRatio();
         stringBuilder.append(String.format(RESULT_PROFIT_RATIO_FORMAT, profitRatio));
@@ -68,15 +72,14 @@ public class LottoResult {
     public float calculateProfitRatio() {
         long totalPrize = calculateTotalPrize();
         return totalPrize / (float) purchaseAmount;
-
     }
 
     private long calculateTotalPrize() {
         long totalPrize = 0;
-        for (Map.Entry<MatchStatus, Integer> entry : lottoResult.entrySet()) {
-            MatchStatus matchStatus = entry.getKey();
+        for (Map.Entry<Rank, Integer> entry : lottoResult.entrySet()) {
+            Rank rank = entry.getKey();
             int matchCount = entry.getValue();
-            totalPrize += (long) matchStatus.getPrice() * matchCount;
+            totalPrize += (long) rank.getPrice() * matchCount;
         }
         return totalPrize;
     }

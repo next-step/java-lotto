@@ -21,36 +21,34 @@ public class InputView {
         this.outputView = new OutputView();
     }
 
-    public int receivePurchaseAmount() {
+    public int receiveIntegerInput() {
         String input = "";
         boolean stopReceivingInput = false;
         while (!stopReceivingInput) {
             input = scanner.nextLine();
-            stopReceivingInput = checkValidAmount(input);
+            stopReceivingInput = isValidInteger(input);
         }
         return Integer.parseInt(input);
     }
 
-    private boolean checkValidAmount(String input) {
+    private boolean isValidInteger(String input) {
         boolean stopReceivingInput = false;
         try {
-            stopReceivingInput = checkNotNull(input)
-                    && checkIsNumber(input)
-                    && checkPositiveNumber(input);
+            stopReceivingInput = isNotNull(input) && isPositiveInteger(input);
         } catch (IllegalArgumentException e) {
             outputView.printExceptionMessage(e);
         }
         return stopReceivingInput;
     }
 
-    private boolean checkPositiveNumber(String input) throws CustomIllegalArgumentException {
-        if (Integer.parseInt(input) <= 0) {
-            throw new CustomIllegalArgumentException(Message.ERROR_NON_POSITIVE_NUMBER);
+    private boolean isNotNull(String input) throws CustomIllegalArgumentException {
+        if (input == null || input.length() == 0) {
+            throw new CustomIllegalArgumentException(Message.ERROR_EMPTY_INPUT);
         }
         return true;
     }
 
-    private boolean checkIsNumber(String input) throws CustomIllegalArgumentException {
+    private boolean isPositiveInteger(String input) throws CustomIllegalArgumentException {
         Matcher numberMatcher = VALID_NUMBER_PATTERN.matcher(input);
         if (!numberMatcher.find()) {
             throw new CustomIllegalArgumentException(Message.ERROR_NON_NUMBER);
@@ -58,28 +56,21 @@ public class InputView {
         return true;
     }
 
-    private boolean checkNotNull(String input) throws CustomIllegalArgumentException {
-        if (input == null || input.length() == 0) {
-            throw new CustomIllegalArgumentException(Message.ERROR_EMPTY_INPUT);
-        }
-        return true;
-    }
-
-    public int[] receiveWinningNumbers() {
+    public Integer[] receiveIntegerArrayInput() {
         String input = "";
         String[] inputs;
         boolean stopReceivingInput = false;
         while (!stopReceivingInput) {
             input = scanner.nextLine();
-            stopReceivingInput = checkValidLottoNumbers(input);
+            stopReceivingInput = isNotNull(input) && isValidIntegerArray(input);
         }
         inputs = SplitUtil.splitByDelimiter(input);
-        return convertStringArrayToIntArray(inputs);
+        return convertStringArrayToIntegerArray(inputs);
     }
 
-    private int[] convertStringArrayToIntArray(String[] input) {
+    private Integer[] convertStringArrayToIntegerArray(String[] input) {
         int inputLength = input.length;
-        int[] result = new int[inputLength];
+        Integer[] result = new Integer[inputLength];
         for (int i = 0; i < inputLength; i++) {
             result[i] = Integer.parseInt(input[i]);
         }
@@ -87,28 +78,20 @@ public class InputView {
         return result;
     }
 
-    private boolean checkValidLottoNumbers(String input) {
+    private boolean isValidIntegerArray(String input) {
         boolean stopReceivingInput = false;
         try {
-            stopReceivingInput = checkNotNull(input);
-        } catch (IllegalArgumentException e) {
-            outputView.printExceptionMessage(e);
-        }
-
-        try {
-            stopReceivingInput = false;
             String[] inputs = SplitUtil.splitByDelimiter(input);
-            stopReceivingInput = checkAllValidNumbers(inputs);
+            stopReceivingInput = areAllValidIntegers(inputs);
         } catch (IllegalArgumentException e) {
             outputView.printExceptionMessage(e);
         }
         return stopReceivingInput;
     }
 
-    private boolean checkAllValidNumbers(String[] inputs) throws IllegalArgumentException {
+    private boolean areAllValidIntegers(String[] inputs) throws IllegalArgumentException {
         for (String input : inputs) {
-            checkIsNumber(input);
-            checkPositiveNumber(input);
+            isPositiveInteger(input);
         }
         return true;
     }
