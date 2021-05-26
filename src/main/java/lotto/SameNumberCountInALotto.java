@@ -4,11 +4,9 @@ public class SameNumberCountInALotto {
     private int sameNumberCount = 0;
     private boolean isBonusWon = false;
 
-    public void updateCount(SameNumberStateEnum sameNumberStateEnum) {
-        if (sameNumberStateEnum == SameNumberStateEnum.SAME_MAIN_NUMBER)
-            sameNumberCount++;
-        if (sameNumberStateEnum == SameNumberStateEnum.SAME_BONUS_NUMBER)
-            isBonusWon = true;
+    SameNumberCountInALotto(int sameNumberCount, boolean isBonusWon) {
+        this.sameNumberCount = sameNumberCount;
+        this.isBonusWon = isBonusWon;
     }
 
     public ResultScoreEnum getResultScore() {

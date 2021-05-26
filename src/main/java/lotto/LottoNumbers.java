@@ -1,10 +1,13 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoNumbers {
     private List<Integer> lottoNumbers;
+    private int sameNumberCount = 0;
+    private boolean isBonusWon = false;
 
     public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         lottoNumbers = new ArrayList<Integer>();
@@ -20,11 +23,18 @@ public class LottoNumbers {
     }
 
     public SameNumberCountInALotto countMatchedNumbers(LastWonLottoNumber lastWonLottoNumber) {
-        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
         for (int oneLottoNumber : lottoNumbers) {
-            sameNumberCountInALotto.updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumber));
+            updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumber));
         }
+        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto(sameNumberCount, isBonusWon); //생성자로 멤버변수셋팅
         return sameNumberCountInALotto;
+    }
+
+    public void updateCount(SameNumberStateEnum sameNumberStateEnum) {
+        if (sameNumberStateEnum == SameNumberStateEnum.SAME_MAIN_NUMBER)
+            sameNumberCount++;
+        if (sameNumberStateEnum == SameNumberStateEnum.SAME_BONUS_NUMBER)
+            isBonusWon = true;
     }
 
     private SameNumberStateEnum isSameNumber(int oneLottoNumber, LastWonLottoNumber lastWonLottoNumber) {

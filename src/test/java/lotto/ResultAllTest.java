@@ -9,9 +9,7 @@ public class ResultAllTest {
     @Test
     public void updateResult_3등확인() {
         ResultAll resultAll = new ResultAll();
-        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
-        for (int i = 0; i < 3; i++)
-            sameNumberCountInALotto.updateCount(SameNumberStateEnum.SAME_MAIN_NUMBER);
+        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto(3,false);
 
         resultAll.updateResult(sameNumberCountInALotto);
         assertThat(resultAll.result().get(ResultScoreEnum.FIFTH)).isEqualTo(1);
@@ -20,9 +18,7 @@ public class ResultAllTest {
     @Test
     public void yield_수익률확인() {
         ResultAll resultAll = new ResultAll();
-        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto();
-        for (int i = 0; i < 3; i++)
-            sameNumberCountInALotto.updateCount(SameNumberStateEnum.SAME_MAIN_NUMBER);
+        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto(3,false);
 
         resultAll.updateResult(sameNumberCountInALotto);
         assertThat(resultAll.yield(5000)).isEqualTo(1);
