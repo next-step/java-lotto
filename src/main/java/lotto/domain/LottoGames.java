@@ -1,23 +1,31 @@
 package lotto.domain;
 
+import lotto.dto.PurchaseMoney;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static lotto.domain.LottoPrice.LOTTO_PRICE;
 
 public class LottoGames {
 
     private List<LottoGame> values;
 
-    public LottoGames() {
-        values = new ArrayList<>();
-    }
-
     public LottoGames(List<LottoGame> values) {
         this.values = values;
     }
 
-    public void add(LottoGame lottoGame) {
-        this.values.add(lottoGame);
+    public static LottoGames purchase(PurchaseMoney purchaseMoney) {
+        validatePurchasing(purchaseMoney);
+        int count = calculateBuyableCount(purchaseMoney);
+
+        List<LottoGame> values = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            values.add(LottoGame.createAuto());
+        }
+
+        return new LottoGames(values);
     }
 
     public LottoGame get(int index) {
@@ -39,5 +47,13 @@ public class LottoGames {
     @Override
     public int hashCode() {
         return Objects.hash(values);
+    }
+
+    private static void validatePurchasing(PurchaseMoney purchaseMoney) {
+        LottoPrice.isEnoughMoney(purchaseMoney);
+    }
+
+    private static int calculateBuyableCount(PurchaseMoney purchaseMoney) {
+        return purchaseMoney.getValue() / LOTTO_PRICE;
     }
 }
