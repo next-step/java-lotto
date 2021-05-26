@@ -14,25 +14,6 @@ public class WinningTicket {
 		this.bonus = bonus;
 	}
 
-	public Ticket getTicket() {
-		return ticket;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof WinningTicket))
-			return false;
-		WinningTicket that = (WinningTicket)o;
-		return bonus == that.bonus && Objects.equals(ticket, that.ticket);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(ticket, bonus);
-	}
-
 	public LotteryMatchType getMatchTypeWith(Ticket targetTicket) {
 		LinkedHashSet<Integer> targetNumbers = new LinkedHashSet<>(targetTicket.numbers());
 		targetNumbers.removeAll(this.ticket.numbers());
@@ -48,5 +29,20 @@ public class WinningTicket {
 		LotteryMatchType matchType,
 		Set<Integer> winningTicketNumbers) {
 		return matchType == LotteryMatchType.FIVE_MATCH && winningTicketNumbers.contains(bonus);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof WinningTicket))
+			return false;
+		WinningTicket that = (WinningTicket)o;
+		return bonus == that.bonus && Objects.equals(ticket, that.ticket);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ticket, bonus);
 	}
 }
