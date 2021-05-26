@@ -32,7 +32,7 @@ class LottoMachineTest {
   @Test
   void peekOrderedGamesTest() {
     //given
-    List<LottoGame> expectGaems = Lists.newArrayList(TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6"), TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6"));
+    List<LottoGame> expectGaems = Lists.newArrayList(TestUtil.createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"), TestUtil.createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"));
     assertThat(givenLottoMachine.peekOrderedGames())
         .isEqualTo(new TotalOrderedLottoGameNumbers(expectGaems));
   }

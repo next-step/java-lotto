@@ -31,8 +31,8 @@ class GameGeneratorTest {
   @Test
   void generateNewLottoGames() {
     //given
-    List<LottoGame> expectOneGame = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    List<LottoGame> expectTwoGames = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())), new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
+    List<LottoGame> expectOneGame = Lists.newArrayList(LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())));
+    List<LottoGame> expectTwoGames = Lists.newArrayList(LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())), LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())));
 
     assertAll(
         () -> assertThat(oneGameGenerator.generateNewLottoGames()).isEqualTo(new LottoGames(expectOneGame)),
@@ -54,6 +54,6 @@ class GameGeneratorTest {
                                 .mapToObj(number -> number * 2)
                                 .collect(Collectors.toList());
 
-    assertThat(oneGameGenerator.createLottoGame(givenNumbers)).isEqualTo(TestUtil.createLottoGameFromLottoNumbers("2,4,6,8,10,12"));
+    assertThat(oneGameGenerator.createLottoGame(givenNumbers)).isEqualTo(TestUtil.createAutoLottoGameFromLottoNumbers("2,4,6,8,10,12"));
   }
 }

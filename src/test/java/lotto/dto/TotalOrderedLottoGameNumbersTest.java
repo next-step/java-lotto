@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.util.TestUtil.createLottoGameFromLottoNumbers;
+import static lotto.util.TestUtil.createAutoLottoGameFromLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TotalOrderedLottoGameNumbersTest {
@@ -17,7 +17,7 @@ class TotalOrderedLottoGameNumbersTest {
 
   @BeforeEach
   void setUp() {
-    givenGames = Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"));
+    givenGames = Lists.newArrayList(createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"), createAutoLottoGameFromLottoNumbers("1,2,3,10,20,30"));
   }
 
   @DisplayName("주문한 로또 게임들의 갯수를 반환한다.")

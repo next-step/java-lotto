@@ -25,8 +25,8 @@ public class TestUtil {
         .collect(Collectors.toList());
   }
 
-  public static LottoGame createLottoGameFromLottoNumbers(String numbers) {
-    return new LottoGame(new LottoNumbers(toNumbers(numbers)));
+  public static LottoGame createAutoLottoGameFromLottoNumbers(String numbers) {
+    return LottoGame.createAutoGame(new LottoNumbers(toNumbers(numbers)));
   }
 
 }
