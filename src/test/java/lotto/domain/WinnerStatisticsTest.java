@@ -25,18 +25,6 @@ class WinnerStatisticsTest {
         }
     }
 
-    private List<LottoNumber> makeLottoNumbers(int startNumber) {
-        List<String> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            String number = String.valueOf(startNumber + i);
-            lottoNumbers.add(number);
-        }
-
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-
-        return lottoNumberGenerator.generator(lottoNumbers);
-    }
-
     @DisplayName("로또당첨등수별 수익률 테스트(5장구입기준)")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:7:400000.00", "1,2,3,4,5,40:6:6000.00", "1,2,3,4,5,40:7:300.00", "1,2,3,4,35,40:7:10.00", "1,2,3,30,35,40:7:1.00", "1,2,25,30,35,40:7:0.00"}, delimiter = ':')
@@ -63,6 +51,18 @@ class WinnerStatisticsTest {
         WinnerStatistics winnerStatistics = WinnerStatistics.create(tickets, winnerNumbers);
 
         assertThat(winnerStatistics.isLoss()).isEqualTo(expectedLoss);
+    }
+
+    private List<LottoNumber> makeLottoNumbers(int startNumber) {
+        List<String> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            String number = String.valueOf(startNumber + i);
+            lottoNumbers.add(number);
+        }
+
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+
+        return lottoNumberGenerator.generator(lottoNumbers);
     }
 
     private List<LottoNumber> makeLottoNumbers(String lottoNumber) {
