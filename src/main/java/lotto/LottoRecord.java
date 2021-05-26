@@ -38,10 +38,14 @@ public class LottoRecord {
     public void calculateProfit(int lottoCount) {
         int sumReward = 0;
         for (LottoRank lottoRank : lottoRecord.keySet()) {
-            sumReward += lottoRank.getReward(lottoRecord.get(lottoRank));
+            sumReward += lottoRank.rankOfReward(lottoRecord.get(lottoRank));
         }
         if(sumReward != 0){
-            profit = Math.floor((double) sumReward / (lottoCount * LottoValidationUtils.LOTTO_COST) * 10) / 10;
+            profit = Math.floor((double) sumReward / (lottoCount * LottoValidationUtils.LOTTO_COST) * 100) / 100;
         }
+    }
+
+    public boolean isProfit(double expected){
+        return profit == expected;
     }
 }

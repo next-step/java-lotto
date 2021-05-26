@@ -28,8 +28,8 @@ public enum LottoRank {
         return this == MISS;
     }
 
-    public int getReward(Integer integer) {
-        return winReward * integer;
+    public int rankOfReward(int rankCount) {
+        return winReward * rankCount;
     }
 
     public void printReward(int countMatch) {
