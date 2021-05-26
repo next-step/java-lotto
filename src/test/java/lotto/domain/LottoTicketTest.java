@@ -81,4 +81,25 @@ class LottoTicketTest {
 		// then
 		assertThat(lottoTicket.matchNumber(LottoNumber.of(6))).isTrue();
 	}
+
+	@Test
+	void equals() {
+		// given
+		LottoTicket lottoTicket = LottoTicketConverter.convert("1,2,3,4,5,6");
+		LottoTicket expected = LottoTicketConverter.convert("1,2,3,4,5,6");
+
+		// then
+		assertThat(lottoTicket).isEqualTo(expected);
+		assertThat(lottoTicket.equals(expected)).isTrue();
+	}
+
+	@Test
+	void hashcode() {
+		// given
+		LottoTicket lottoTicket = LottoTicketConverter.convert("1,2,3,4,5,6");
+		LottoTicket expected = LottoTicketConverter.convert("1,2,3,4,5,6");
+
+		// then
+		assertThat(lottoTicket.hashCode()).isEqualTo(expected.hashCode());
+	}
 }

@@ -24,6 +24,7 @@ class LottoNumberTest {
 
 		// then
 		assertThat(actual).isEqualTo(LottoNumber.of(number));
+		assertThat(actual.equals(LottoNumber.of(number))).isTrue();
 	}
 
 	@DisplayName("로또 번호 정렬 테스트")
