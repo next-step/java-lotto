@@ -9,6 +9,8 @@ import kht2199.lotto.LottoList;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.assets.AssetsException;
+import kht2199.lotto.exception.input.InvalidInputError;
+import kht2199.lotto.exception.input.InvalidInputException;
 
 /**
  *
@@ -40,7 +42,24 @@ public class ResultView {
 	}
 
 	public void printException(DomainException e) {
+		if (e instanceof InvalidInputException) {
+			print(inputErrorToMessage((InvalidInputException)e));
+		}
 		// TODO print for domain exceptions.
+	}
+
+	private String inputErrorToMessage(InvalidInputException exception) {
+		InvalidInputError error = exception.getError();
+		if (error == InvalidInputError.EMPTY) {
+			return "입력값이 없습니다.";
+		}
+		if (error == InvalidInputError.LENGTH) {
+			return "입력값의 길이가 유효하지 않습니다.";
+		}
+		if (error == InvalidInputError.PARSING) {
+			return "입력값의 포멧이 유효하지 않습니다";
+		}
+		throw new RuntimeException(exception);
 	}
 
 	private void print(String message) {
