@@ -52,7 +52,11 @@ public class LottoResult {
 	public String toString() {
 		return Arrays.stream(LottoPrizeType.values())
 				.filter(LottoPrizeType::isWinningType)
-				.map(it -> it.getMatchedNumberCount() + "개 일치 (" + it.getPrizeMoney() + "원)- " + lottoResults.getOrDefault(it, new AtomicLong(0)) + "개")
+				.map(it -> it.getMatchedNumberCount() + "개 일치" + getSecondPrizeString(it) + "(" + it.getPrizeMoney() + "원)- " + lottoResults.getOrDefault(it, new AtomicLong(0)) + "개")
 				.collect(Collectors.joining(Constants.JOINING_DELIMITER));
+	}
+
+	private String getSecondPrizeString(LottoPrizeType lottoPrizeType) {
+		return lottoPrizeType == LottoPrizeType.SECOND ? ", 보너스 볼 일치" : "";
 	}
 }
