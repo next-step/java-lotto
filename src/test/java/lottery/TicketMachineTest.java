@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ class TicketMachineTest {
 	void 발행된_티켓의_번호들은_정렬된_순서를_갖는다() {
 		Tickets tickets = sut.create(1);
 		Ticket ticket = tickets.getValues().get(0);
-		assertThat(new ArrayList<>(ticket.numbers().getValues())).isSorted();
+		assertThat(new ArrayList<>(ticket.numbers())).isSorted();
 	}
 
 	@Test
@@ -36,9 +37,9 @@ class TicketMachineTest {
 		Tickets tickets = sut.create(1);
 		assertThat(tickets.getValues()).hasSize(1);
 
-		LottoNumbers lottoNumbers = tickets.getValue(0)
+		Set<Integer> lottoNumbers = tickets.getValue(0)
 			.numbers();
-		assertThat(lottoNumbers.getValues()).hasSize(6);
+		assertThat(lottoNumbers).hasSize(6);
 		assertThatHasValidNumber(lottoNumbers);
 
 
@@ -56,8 +57,8 @@ class TicketMachineTest {
 		}
 	}
 
-	private void assertThatHasValidNumber(LottoNumbers lottoNumbers) {
-		for (int number : lottoNumbers.getValues()) {
+	private void assertThatHasValidNumber(Set<Integer> lottoNumbers) {
+		for (int number : lottoNumbers) {
 			assertThat(number).isBetween(1, 45);
 		}
 	}

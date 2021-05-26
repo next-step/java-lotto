@@ -17,7 +17,7 @@ public class InputView {
 
 	public void printTickets(Tickets tickets) {
 		tickets.getValues().forEach(ticket -> {
-			Set<Integer> numbers = ticket.numbers().getValues();
+			Set<Integer> numbers = ticket.numbers();
 			print("[" + numbers.stream()
 				.map(String::valueOf)
 				.collect(Collectors.joining(", ")) + "]");

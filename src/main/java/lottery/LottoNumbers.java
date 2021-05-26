@@ -27,30 +27,6 @@ public class LottoNumbers {
 		return Collections.unmodifiableSet(numbers);
 	}
 
-	public LotteryMatchType getMatchTypeWith(LottoNumbers numbers, int bonus) {
-		LotteryMatchType matchType = LotteryMatchType.fromInteger(getSameNumberCount(numbers));
-		if (isBonusMatchCount(bonus, matchType)) {
-			return LotteryMatchType.FIVE_MATCH_WITH_BONUS;
-		}
-		if (isNotContainsBonus(bonus, matchType)) {
-			return LotteryMatchType.FIVE_MATCH;
-		}
-		return matchType;
-	}
-
-	private int getSameNumberCount(LottoNumbers numbers) {
-		this.numbers.removeAll(numbers.getValues());
-		return SIZE_OF_TICKET - this.numbers.size();
-	}
-
-	private boolean isBonusMatchCount(int bonus, LotteryMatchType matchType) {
-		return matchType == LotteryMatchType.FIVE_MATCH && this.numbers.contains(bonus);
-	}
-
-	private boolean isNotContainsBonus(int bonus, LotteryMatchType matchType) {
-		return matchType == LotteryMatchType.FIVE_MATCH && (this.numbers.contains(bonus) == false);
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

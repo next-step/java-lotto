@@ -1,6 +1,7 @@
 package lottery;
 
 import java.util.Objects;
+import java.util.Set;
 
 public final class Ticket {
 
@@ -19,8 +20,8 @@ public final class Ticket {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public LottoNumbers numbers() {
-		return lottoNumbers;
+	public Set<Integer> numbers() {
+		return lottoNumbers.getValues();
 	}
 
 	@Override

@@ -6,9 +6,10 @@ import static java.util.stream.Collectors.*;
 public class InfoCenter {
 
 	private Ticket lastWeekWinningTicket;
+	private WinningTicket winningTicket;
 	private int bonus;
 
-	public void setLastWeekWinningTicket(Ticket lastWeekWinningTicket) {
+	void setLastWeekWinningTicket(Ticket lastWeekWinningTicket) {
 		this.lastWeekWinningTicket = lastWeekWinningTicket;
 	}
 
@@ -20,8 +21,9 @@ public class InfoCenter {
 		requireNonNull(lastWeekWinningTicket, "지난 주 티켓이 없습니다.");
 		requireNonNull(bonus, "보너스 볼이 없습니다.");
 
+		winningTicket = new WinningTicket(lastWeekWinningTicket, bonus);
 		return new Result(LotteryMatchTypeMap.of(buyerTickets.getValues().stream()
-			.map(ticket -> ticket.numbers().getMatchTypeWith(lastWeekWinningTicket.numbers(), bonus))
+			.map(ticket -> winningTicket.getMatchTypeWith(ticket))
 			.filter(matchType -> LotteryMatchType.MISS_MATCH != matchType)
 			.collect(groupingBy(a -> a, summingInt(a -> 1)))));
 	}
