@@ -4,18 +4,19 @@ import static lotto.Winner.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
 	@Test
+	@DisplayName("로또 생성 성공")
 	void lotto_생성_성공() {
 		assertDoesNotThrow(() -> new Lotto("1,2,3,4,5,6"));
 	}
 
 	@Test
+	@DisplayName("로또 생성 실패")
 	void lotto_생성_실패() {
 		assertThrows(InvalidNumberSetException.class, () -> new Lotto("1,2,3,4,5")); // 숫자가 5개
 		assertThrows(InvalidNumberSetException.class, () -> new Lotto("1,2,3,4,5,1")); // 기존과 동일한 숫자 추가
@@ -23,6 +24,7 @@ public class LottoTest {
 	}
 
 	@Test
+	@DisplayName("로또 등수 판별")
 	void lotto_등수_판별() {
 		Lotto lotto1 = new Lotto("1,2,3,4,5,6");
 
