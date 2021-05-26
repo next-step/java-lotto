@@ -1,15 +1,23 @@
 package lotto.dto;
 
+import lotto.domain.LottoGame;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class OrderedLottoGameNumbers {
+public class OrderedLottoGameDescription {
 
   private final List<Integer> purchasedLottoInfos;
+  private final String orderType;
 
-  public OrderedLottoGameNumbers(List<Integer> purchasedLottoInfos) {
-    this.purchasedLottoInfos = purchasedLottoInfos;
+  public OrderedLottoGameDescription(LottoGame lottoGame) {
+    this.purchasedLottoInfos = lottoGame.getGameNumbers();
+    this.orderType = lottoGame.getOrderTypeName();
+  }
+
+  public String getOrderType() {
+    return orderType;
   }
 
   @Override
@@ -23,7 +31,7 @@ public class OrderedLottoGameNumbers {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    OrderedLottoGameNumbers that = (OrderedLottoGameNumbers) o;
+    OrderedLottoGameDescription that = (OrderedLottoGameDescription) o;
     return purchasedLottoInfos.equals(that.purchasedLottoInfos);
   }
 
