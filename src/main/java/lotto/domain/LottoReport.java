@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.EarningResultMessage;
-
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import lotto.EarningResultMessage;
 
 public class LottoReport {
 
@@ -34,7 +34,7 @@ public class LottoReport {
 	public String earningResultMessage() {
 		BigDecimal earningRatio = earnings.divide(new BigDecimal(spentMoney()), SCALE, BigDecimal.ROUND_DOWN);
 
-		return EarningResultMessage.lookupByValue(earningRatio.compareTo(BigDecimal.ONE));
+		return EarningResultMessage.get(earningRatio.compareTo(BigDecimal.ONE));
 	}
 
 	private int spentMoney() {
