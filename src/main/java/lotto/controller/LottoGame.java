@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseHistory;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoUser;
 import lotto.utils.LottoUtils;
@@ -17,39 +18,25 @@ public class LottoGame {
 	private static LottoNumber bonusNumber;
 
 	private LottoGame() {
-
+		user = new LottoUser();
 	}
 
 	public static void start() {
-		inputPurchaseLotto();
-		inputManualLottos();
-		purchaseAutoLottos();
-		outputPurchaseLottosResult();
-		outputUserLottoStatus();
+		purchaseLottos();
+		getUserLottoStatus();
 		inputLastWeekWinningNumber();
 		inputBonusNumber();
 		outputResult();
 	}
 
-	private static void inputPurchaseLotto() {
+	private static void purchaseLottos() {
 		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
-		user = new LottoUser(purchasePrice);
-	}
-
-	private static void inputManualLottos() {
 		List<String> manualLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
-		user.buyManualLottos(LottoUtils.getStringListToLottos(manualLottos));
+		LottoPurchaseHistory lottoPurchaseHistory = user.buyLottos(LottoUtils.getStringListToLottos(manualLottos), purchasePrice);
+		LottoOutputView.printPurchaseLottoResult(lottoPurchaseHistory.getAutoLottoCount(), lottoPurchaseHistory.getManualLottoCount());
 	}
 
-	private static void purchaseAutoLottos() {
-		user.buyGenerateLottos();
-	}
-
-	private static void outputPurchaseLottosResult() {
-		LottoOutputView.printPurchaseLottoResult(user.getAutoLottoCount(), user.getManualLottoCount());
-	}
-
-	private static void outputUserLottoStatus() {
+	private static void getUserLottoStatus() {
 		LottoOutputView.printPurchaseLottoCount(user.getLottoCount());
 		LottoOutputView.printLottos(user.getUserLottos());
 	}
@@ -60,7 +47,7 @@ public class LottoGame {
 
 	private static void inputBonusNumber() {
 		bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
-		if(winningLotto.containNumber(bonusNumber)){
+		if (winningLotto.containNumber(bonusNumber)) {
 			inputBonusNumber();
 		}
 	}

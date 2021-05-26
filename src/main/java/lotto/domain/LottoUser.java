@@ -5,26 +5,28 @@ import lotto.utils.LottoGenerator;
 public class LottoUser {
 
 	private Lottos lottos;
-	private int price;
-	private int manualLottoCount;
-	private int autoLottoCount;
 
-	public LottoUser(int price) {
+	public LottoUser() {
 		this.lottos = new Lottos();
-		this.price = price;
 	}
 
-	public void buyGenerateLottos() {
+	public LottoPurchaseHistory buyLottos(Lottos manualLottos, int money) {
+		this.lottos.addAllLottos(manualLottos);
+		int autoLottoCount = getAutoLottoCount(money, manualLottos.getSize());
+		buyGenerateLottos(autoLottoCount);
+		return new LottoPurchaseHistory(autoLottoCount, manualLottos.getSize());
+	}
+
+	private void buyGenerateLottos(int autoLottoCount) {
 		int count = 0;
-		while (count < getAutoLottoCount()) {
+		while (count < autoLottoCount) {
 			this.lottos.addLotto(LottoGenerator.generate());
 			count++;
 		}
 	}
 
-	public void buyManualLottos(Lottos manualLottos) {
-		this.manualLottoCount = manualLottos.getSize();
-		this.lottos.addAllLottos(manualLottos);
+	private int getAutoLottoCount(int money, int manualLottoCount) {
+		return money / Lotto.LOTTO_PRICE - manualLottoCount;
 	}
 
 	public int getLottoCount() {
@@ -37,19 +39,6 @@ public class LottoUser {
 
 	public Lottos getUserLottos() {
 		return this.lottos;
-	}
-
-	public int getAutoLottoCount() {
-		this.autoLottoCount = getBuyLottoCount() - this.manualLottoCount;
-		return this.autoLottoCount;
-	}
-
-	public int getManualLottoCount() {
-		return this.manualLottoCount;
-	}
-
-	public int getBuyLottoCount() {
-		return this.price / Lotto.LOTTO_PRICE;
 	}
 
 }

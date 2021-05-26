@@ -17,7 +17,7 @@ public class LottoUserTest {
 
 	@BeforeEach
 	void setUpUser() {
-		user = new LottoUser(10000);
+		user = new LottoUser();
 	}
 
 	@Test
@@ -27,23 +27,15 @@ public class LottoUserTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"10000,10", "15000,15", "13500,13", "400000,400"}, delimiter = ',')
+	@CsvSource(value = {"10000,10,9", "15000,15,14", "13500,13,12", "400000,400,399"}, delimiter = ',')
 	@DisplayName("로또 구매 테스트")
-	public void buyLotto(int price, int lottoCount) {
-		user = new LottoUser(price);
-		user.buyGenerateLottos();
+	public void buyLotto(int money, int lottoCount, int autoLottoCount) {
+		user = new LottoUser();
+		Lottos manualLottos = new Lottos();
+		manualLottos.addLotto(LottoGenerator.generate());
+		LottoPurchaseHistory purchaseHistory = user.buyLottos(manualLottos, money);
 		assertThat(user.getLottoCount()).isEqualTo(lottoCount);
+		assertThat(purchaseHistory.getManualLottoCount()).isEqualTo(1);
+		assertThat(purchaseHistory.getAutoLottoCount()).isEqualTo(autoLottoCount);
 	}
-
-	@Test
-	@DisplayName(" ")
-	public void getManualCount() {
-		Lottos lottos = new Lottos();
-		lottos.addLotto(LottoGenerator.generate());
-		user.buyManualLottos(lottos);
-		assertThat(user.getAutoLottoCount()).isEqualTo(9);
-		assertThat(user.getManualLottoCount()).isEqualTo(1);
-	}
-
-
 }
