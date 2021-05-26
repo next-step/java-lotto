@@ -28,10 +28,6 @@ public final class LottoNumbersFactory {
 		return result;
 	}
 
-	public int size() {
-		return this.lottoList.size();
-	}
-
 	public List<LottoNumbers> lottoList() {
 		return Collections.unmodifiableList(this.lottoList);
 	}

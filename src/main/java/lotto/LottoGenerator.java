@@ -13,13 +13,22 @@ public final class LottoGenerator {
 		this.drawNumber = drawNumber;
 	}
 
-	public LottoNumbersFactory buy(final LottoMoney lottoMoney) {
-		final int lottoCount = lottoMoney.calculateLottoCount();
-		for (int i = 0; i < lottoCount; ++i) {
+	public void add(final LottoNumbers lottoNumbers){
+		lottoNumbersFactory.add(lottoNumbers);
+	}
+
+	public void autoGenerate(final LottoCount lottoCount) {
+		for (int i = 0; i < lottoCount.autoCount(); ++i) {
 			LottoNumbers lottoNumbers = new LottoNumbers(drawNumber.draw(LOTTO_NUMBER_COUNT));
 			lottoNumbersFactory.add(lottoNumbers);
 		}
+	}
+	public LottoNumbersFactory lottoNumbersFactory(){
 		return this.lottoNumbersFactory;
+	}
+
+	public int size(){
+		return this.lottoNumbersFactory.lottoList().size();
 	}
 
 	public LottoResult summary(final WinningLottoNumbers winningLottoNumbers) {

@@ -36,8 +36,23 @@ public final class LottoManager {
 	}
 
 	private void buyLotto(final LottoMoney lottoMoney) {
-		LottoNumbersFactory lottoNumbersFactory = this.lottoGenerator.buy(lottoMoney);
-		ResultView.printResultBuyLotto(lottoNumbersFactory);
+		LottoCount lottoCount = new LottoCount(lottoMoney, InputView.inputUserLottoCount());
+		createUserLotto(lottoCount);
+		createAutoLotto(lottoCount);
+		ResultView.printResultBuyLotto(lottoCount,
+									   this.lottoGenerator.lottoNumbersFactory());
+	}
+
+	private void createUserLotto(final LottoCount lottoCount){
+		InputView.printUserLotto();
+		for(int i = 0; i < lottoCount.userCount(); ++i){
+			LottoNumbers lottoNumbers = makeLottoNumbers(InputView.inputUserLottoNumber());
+			this.lottoGenerator.add(lottoNumbers);
+		}
+	}
+
+	private void createAutoLotto(final LottoCount lottoCount){
+		this.lottoGenerator.autoGenerate(lottoCount);
 	}
 
 	private LottoNumber bonusLottoNumber() {
@@ -53,7 +68,11 @@ public final class LottoManager {
 
 	private LottoNumbers inputWinningNumber() {
 		String inputText = InputView.inputWinningNumber();
-		SeparatedText separatedText = SeparatedText.findSeparator(inputText);
+		return makeLottoNumbers(inputText);
+	}
+
+	private LottoNumbers makeLottoNumbers(final String text){
+		SeparatedText separatedText = SeparatedText.findSeparator(text);
 		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
 		return new LottoNumbers(NumberUtils.parseInts(texts, lottoNumberCondition()));
 	}
