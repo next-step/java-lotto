@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoViewTest {
+class LottoViewTest {
 
 	private final LottoView lottoView = new LottoView();
 

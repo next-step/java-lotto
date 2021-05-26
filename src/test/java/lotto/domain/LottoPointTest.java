@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoPointTest {
+class LottoPointTest {
 
 	@Test
 	void equals() {
