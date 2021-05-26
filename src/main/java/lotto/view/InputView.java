@@ -38,22 +38,20 @@ public class InputView {
     }
 
     private static List<LottoNumbersDto> inputManualLottoNumbers(int ticketCount) {
+        SCANNER.nextLine();
         if (ticketCount == 0) {
             return Collections.emptyList();
         }
         System.out.println(System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.");
-        SCANNER.nextLine();
         List<LottoNumbersDto> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             manualLottoNumbers.add(inputLottoNumbers(SCANNER.nextLine()));
         }
-        SCANNER.nextLine();
         return manualLottoNumbers;
     }
 
     public static WinInquiryRequest inputLottoNumbers(List<LottoNumbersDto> purchaseNumbers) {
         System.out.println(System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요.");
-        SCANNER.nextLine();
         return new WinInquiryRequest(purchaseNumbers, inputLottoNumbers(SCANNER.nextLine()), inputBonusNumber());
     }
 
