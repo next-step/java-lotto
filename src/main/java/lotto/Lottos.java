@@ -18,7 +18,7 @@ public class Lottos {
 		Lotto prizeLotto = new Lotto(prizeNumbers);
 		Statistics statistics = new Statistics();
 		for (Lotto lotto : lottos) {
-			Prize prize = lotto.match(prizeLotto);
+			Prize prize = lotto.result(prizeLotto);
 			statistics.addCount(prize);
 		}
 		return statistics;

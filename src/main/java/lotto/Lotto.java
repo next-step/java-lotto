@@ -49,7 +49,7 @@ public final class Lotto {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	public Prize match(Lotto win) {
+	public Prize result(Lotto win) {
 		int count = 0;
 		for (LottoNo lottoNumber : lottoNumbers) {
 			count = win.contain(lottoNumber) ? count + 1 : count;

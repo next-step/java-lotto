@@ -43,12 +43,12 @@ public class LottoTest {
 		Lotto one = new Lotto(Arrays.asList(6, 14, 12, 11, 15, 13));
 		Lotto zero = new Lotto(Arrays.asList(16, 14, 12, 11, 15, 13));
 
-		assertThat(six.match(win)).isEqualTo(Prize.SIX);
-		assertThat(five.match(win)).isEqualTo(Prize.FIVE);
-		assertThat(four.match(win)).isEqualTo(Prize.FOUR);
-		assertThat(three.match(win)).isEqualTo(Prize.THREE);
-		assertThat(two.match(win)).isEqualTo(Prize.NOTHING);
-		assertThat(one.match(win)).isEqualTo(Prize.NOTHING);
-		assertThat(zero.match(win)).isEqualTo(Prize.NOTHING);
+		assertThat(six.result(win)).isEqualTo(Prize.SIX);
+		assertThat(five.result(win)).isEqualTo(Prize.FIVE);
+		assertThat(four.result(win)).isEqualTo(Prize.FOUR);
+		assertThat(three.result(win)).isEqualTo(Prize.THREE);
+		assertThat(two.result(win)).isEqualTo(Prize.NOTHING);
+		assertThat(one.result(win)).isEqualTo(Prize.NOTHING);
+		assertThat(zero.result(win)).isEqualTo(Prize.NOTHING);
 	}
 }
