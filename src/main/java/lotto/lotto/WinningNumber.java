@@ -12,4 +12,8 @@ public class WinningNumber {
     public Set<LottoNumber> numbers() {
         return numbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
 }

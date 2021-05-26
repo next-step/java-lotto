@@ -21,6 +21,7 @@ public class LottoGame {
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
         OutputView.printBonusNumber();
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        shop.checkDuplicateBonusNumber(winningNumber, bonusNumber);
         LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         OutputView.resultMessage();
         OutputView.resultIncome(lottoResult, money);

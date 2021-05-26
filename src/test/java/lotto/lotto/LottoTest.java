@@ -18,6 +18,7 @@ public class LottoTest {
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3))).withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3)))
+                .withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
     }
 }

@@ -75,13 +75,7 @@ public class ShopTest {
     void testAnswer() {
         //given
         LottoTicket lottoTicket = new LottoTicket();
-        Set<LottoNumber> numbers = new HashSet<>();
-        for (int i = 1; i < 7; i++) {
-            LottoNumber lottoNumber = new LottoNumber(i);
-            numbers.add(lottoNumber);
-        }
-
-        WinningNumber winningNumber = new WinningNumber(numbers);
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 34));
         lottoTicket.add(lotto);
@@ -97,13 +91,7 @@ public class ShopTest {
     void testSecond() {
         //given
         LottoTicket lottoTicket = new LottoTicket();
-        Set<LottoNumber> numbers = new HashSet<>();
-        for (int i = 1; i < 7; i++) {
-            LottoNumber lottoNumber = new LottoNumber(i);
-            numbers.add(lottoNumber);
-        }
-
-        WinningNumber winningNumber = new WinningNumber(numbers);
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
         lottoTicket.add(lotto);
@@ -113,5 +101,28 @@ public class ShopTest {
 
         //then
         assertThat(match.count(Prize.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("보너스 넘버가 중복 될 경우 에러")
+    void checkDuplicateBonusNumber() {
+        //given
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(1);
+        Shop shop = new Shop();
+        //when
+        //then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> shop.checkDuplicateBonusNumber(winningNumber, bonusNumber))
+                .withMessageContaining(ErrorMessage.DUPLICATE_BONUS_NUMBER);
+    }
+
+    private Set<LottoNumber> initWinningNumbers() {
+        Set<LottoNumber> numbers = new HashSet<>();
+        for (int i = 1; i < 7; i++) {
+            LottoNumber lottoNumber = new LottoNumber(i);
+            numbers.add(lottoNumber);
+        }
+        return numbers;
     }
 }
