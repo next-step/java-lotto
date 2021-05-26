@@ -11,8 +11,8 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public int isCollectNumber(Integer winNumber) {
-        return lottoNumber.contains(winNumber) ? 1 : 0;
+    public boolean isContainNumber(Integer winNumber) {
+        return lottoNumber.contains(winNumber);
     }
 
     public boolean lottoSize(int expectedSize) {
@@ -22,7 +22,7 @@ public class LottoNumber {
     public int compareWinLottoNumber(Lotto winLottoNumber) {
         int collectNumber = 0;
         for(Integer winNumber : lottoNumber){
-            collectNumber += winLottoNumber.containNumber(winNumber);
+            collectNumber += winLottoNumber.matchNumber(winNumber);
         }
         return collectNumber;
     }

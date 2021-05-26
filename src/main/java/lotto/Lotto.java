@@ -22,15 +22,15 @@ public class Lotto {
     }
 
     public void compareWinLottoNumber(Lotto winLottoNumber, LottoResult lottoResult) {
-        if(this.equals(winLottoNumber)){
+        if (this.equals(winLottoNumber)) {
             lottoResult.winLotto();
             return;
         }
         lottoResult.checkRank(lottoNumber.compareWinLottoNumber(winLottoNumber));
     }
 
-    public int containNumber(Integer winNumber) {
-        return lottoNumber.isCollectNumber(winNumber);
+    public int matchNumber(Integer winNumber) {
+        return lottoNumber.isContainNumber(winNumber) ? 1 : 0;
     }
 
     @Override
