@@ -20,9 +20,9 @@ class TicketTest {
 
 		sut = Ticket.of(lottoNumbers);
 
-		Set<Integer> values = sut.numbers().getValues();
+		Set<Integer> values = sut.numbers();
 		assertThat(values).hasSize(6);
-		assertThat(values).containsAll(lottoNumbers.getValues());
+		assertThat(values).containsAll(lottoNumbers.values());
 
 		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>())))
 			.isInstanceOf(InvalidTicketSizeException.class);

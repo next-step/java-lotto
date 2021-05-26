@@ -12,7 +12,7 @@ class MoneyTest {
 		assertThat(sut).isEqualTo(Money.won(10000L));
 		assertThatThrownBy(() -> Money.won(-1L))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining("유효하지 않는 금액입니다");
+			.hasMessageContaining(Money.NOT_VALID_MONEY_EXCEPTION_MESSAGE);
 	}
 
 	@Test

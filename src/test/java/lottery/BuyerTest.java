@@ -1,5 +1,6 @@
 package lottery;
 
+import static lottery.Money.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,10 @@ class BuyerTest {
 	@Test
 	void createBuyerTest() {
 		assertThatThrownBy(() -> Buyer.of(null))
-			.isInstanceOf(IllegalArgumentException.class).hasMessageContaining("유효하지 않은 값입니다.");
+			.isInstanceOf(IllegalArgumentException.class).hasMessageContaining(NOT_VALID_MONEY_EXCEPTION_MESSAGE);
+
+		assertThatThrownBy(() -> Buyer.of(Money.won(-1L)))
+			.isInstanceOf(IllegalArgumentException.class).hasMessageContaining(NOT_VALID_MONEY_EXCEPTION_MESSAGE);
 
 		sut = Buyer.of(Money.won(10000L));
 

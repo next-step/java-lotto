@@ -10,7 +10,9 @@ import lottery.exceptions.InvalidTicketSizeException;
 
 public class LottoNumbers {
 
-	private final Set<Integer> numbers;
+	private static final String NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "로또 번호에 대한 정보가 없습니다";
+
+	private Set<Integer> numbers;
 
 	public static LottoNumbers from(Set<Integer> numbers) {
 		if (numbers.size() != SIZE_OF_TICKET) {
@@ -20,16 +22,18 @@ public class LottoNumbers {
 	}
 
 	private LottoNumbers(Set<Integer> numbers) {
+		setNumbers(numbers);
+	}
+
+	private void setNumbers(Set<Integer> numbers) {
+		if (Objects.isNull(numbers) || numbers.isEmpty()){
+			throw new IllegalArgumentException(NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
+		}
 		this.numbers = numbers;
 	}
 
-	public Set<Integer> getValues() {
+	public Set<Integer> values() {
 		return Collections.unmodifiableSet(numbers);
-	}
-
-	public int matchCountWith(LottoNumbers numbers){
-		this.numbers.removeAll(numbers.getValues());
-		return SIZE_OF_TICKET - this.numbers.size();
 	}
 
 	@Override

@@ -1,24 +1,31 @@
 package lottery;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LotteryMatchTypeMap {
 
-	public static final LotteryMatchTypeMap EMPTY = new LotteryMatchTypeMap(new LinkedHashMap<>());
+	private static final String NOT_FOUND_LOTTERY_MATCH_TYPE = "LotteryMatchTypeMap 정보가 없습니다";
 
-	private final Map<LotteryMatchType, Integer> matchTypeMap;
-
-	private LotteryMatchTypeMap(Map<LotteryMatchType, Integer> matchTypeMap) {
-		this.matchTypeMap = matchTypeMap;
-	}
+	private Map<LotteryMatchType, Integer> matchTypeMap;
 
 	public static LotteryMatchTypeMap of(Map<LotteryMatchType, Integer> map) {
 		return new LotteryMatchTypeMap(map);
 	}
 
-	public Map<LotteryMatchType, Integer> getMatchTypeMap() {
+	private LotteryMatchTypeMap(Map<LotteryMatchType, Integer> matchTypeMap) {
+		setMatchTypeMap(matchTypeMap);
+	}
+
+	private void setMatchTypeMap(Map<LotteryMatchType, Integer> matchTypeMap) {
+		if (Objects.isNull(matchTypeMap) || matchTypeMap.isEmpty()){
+			throw new IllegalArgumentException(NOT_FOUND_LOTTERY_MATCH_TYPE);
+		}
+		this.matchTypeMap = matchTypeMap;
+	}
+
+	public Map<LotteryMatchType, Integer> matchTypeMap() {
 		return Collections.unmodifiableMap(matchTypeMap);
 	}
 
