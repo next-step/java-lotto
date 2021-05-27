@@ -9,6 +9,7 @@ import kht2199.lotto.data.LottoList;
 import kht2199.lotto.LottoRule;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.DomainException;
+import kht2199.lotto.exception.LottoNumberDuplicatedException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
@@ -38,7 +39,7 @@ public class ResultView {
 		}
 	}
 
-	public void printMessageForWinningNumbers() {
+	public void printAskWinningNumbers() {
 		print("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
@@ -54,6 +55,10 @@ public class ResultView {
 	public void printException(DomainException e) {
 		if (e instanceof InvalidInputException) {
 			print(inputErrorToMessage((InvalidInputException)e));
+		}
+
+		if (e instanceof LottoNumberDuplicatedException) {
+			print("로또 번호가 중복입니다.");
 		}
 		// TODO print for domain exceptions.
 	}
@@ -83,4 +88,7 @@ public class ResultView {
 		out.println(message);
 	}
 
+	public void printAskBonusNumber() {
+		print("보너스 볼을 입력해 주세요.");
+	}
 }

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import kht2199.lotto.data.Lotto;
+import kht2199.lotto.LottoWinningResult;
+import kht2199.lotto.exception.LottoNumberDuplicatedException;
+import kht2199.lotto.exception.LottoNumberNotInitiatedException;
+import kht2199.lotto.exception.LottoNumberSizeInvalidException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
 
@@ -27,23 +30,34 @@ public class InputView {
 		return Integer.parseInt(assetsString);
 	}
 
-	public Lotto acceptWinningNumbers() {
-		Lotto winningNumbers;
+	public void acceptWinningNumbers(LottoWinningResult winningNumbers) {
 		try {
 			String winningNumbersString = in.nextLine();
 			validationLottoResultString(winningNumbersString);
 			String[] splitNumbers = winningNumbersString.split(",");
 			List<Integer> numbers = intToString(splitNumbers);
-			winningNumbers = new Lotto(numbers);
-		} catch (InvalidInputException e) {
+			winningNumbers.setWinningNumbers(numbers);
+		} catch (InvalidInputException | LottoNumberSizeInvalidException e) {
 			output.printException(e);
-			return acceptWinningNumbers();
+			acceptWinningNumbers(winningNumbers);
 		} catch (NumberFormatException e) {
 			output.printException(e);
-			return acceptWinningNumbers();
+			acceptWinningNumbers(winningNumbers);
 		}
+	}
 
-		return winningNumbers;
+	public void acceptBonusNumber(LottoWinningResult winningNumbers) {
+		try {
+			String bonusNumberString = in.nextLine();
+			validationLottoResultString(bonusNumberString);
+			winningNumbers.setBonusNumber(Integer.parseInt(bonusNumberString));
+		} catch (InvalidInputException | LottoNumberDuplicatedException | LottoNumberNotInitiatedException e) {
+			output.printException(e);
+			acceptBonusNumber(winningNumbers);
+		} catch (NumberFormatException e) {
+			output.printException(e);
+			acceptBonusNumber(winningNumbers);
+		}
 	}
 
 	private List<Integer> intToString(String[] splitNumbers) throws NumberFormatException {

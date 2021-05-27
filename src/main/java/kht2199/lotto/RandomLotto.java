@@ -54,13 +54,17 @@ public class RandomLotto {
 		// prints
 		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
-		output.printMessageForWinningNumbers();
-		//
-		Lotto winningNumbers = input.acceptWinningNumbers();
-		LottoWinningResult lottoWinningResult = new LottoWinningResult(winningNumbers);
-		lottoWinningResult.updateLottoWinningNumbers(rule, lottoList);
-		//
-		output.printResultStatistics(rule, lottoWinningResult, assetsUsed);
+		output.printAskWinningNumbers();
+		// 로또 당첨번호.
+		LottoWinningResult winningResult = new LottoWinningResult();
+		input.acceptWinningNumbers(winningResult);
+		// 로또 보너스번호.
+		output.printAskBonusNumber();
+		input.acceptBonusNumber(winningResult);
+		// 결과 생성.
+		winningResult.updateLottoWinningNumbers(rule, lottoList);
+		// 통계
+		output.printResultStatistics(rule, winningResult, assetsUsed);
 	}
 
 	/**
