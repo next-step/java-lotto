@@ -47,7 +47,7 @@ public class ConsoleView {
     }
 
     public static void printResult(LottoResult lottoResult){
-        BigDecimal profitRate = calculateProfitRatio(lottoResult.getTotalReward(), lottoResult.getExpense());
+        BigDecimal profitRate = calculateProfitRatio(lottoResult.getScoreMap().calculateReward(), lottoResult.getExpense());
         String message = String.format(PROFIT_MESSAGE, profitRate, getResultStatus(profitRate));
         System.out.println(message);
     }
