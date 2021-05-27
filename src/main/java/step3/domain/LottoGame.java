@@ -13,12 +13,10 @@ public class LottoGame {
     private static final String DEFAULT_REGEX = ", ";
 
     private final List<Lotto> lottos;
-    private final Ranks ranks;
 
 
     public LottoGame(Money money) {
         ResultView resultView = new ResultView();
-        ranks = new Ranks();
         lottos = new ArrayList<>();
 
         while (money.hasEnoughMoney()) {
@@ -31,14 +29,16 @@ public class LottoGame {
     }
 
 
-    public void getStatistics(Lotto winningLotto, BonusNumber bonusNumber) {
+    public Ranks getRanks(Lotto winningLotto, BonusNumber bonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
+
         for (Lotto boughtLotto : lottos) {
             int count = SameLottoChecker.countSameLottoNumber(boughtLotto, winningLotto);
-            ranks.addRank(Rank.valueOf(count, bonusNumber.isMatchedWithLotto(boughtLotto)));
+            ranks.add(Rank.valueOf(count, bonusNumber.isMatchedWithLotto(boughtLotto)));
         }
+        return Ranks.of(ranks);
 
-        ResultView.showStatistics(ranks);
-        ResultView.showRate(ranks);
+
     }
 
     private Lotto createLotto() {
