@@ -21,7 +21,7 @@ public class LottoOrderGroupAnalysis {
 
 	private void matchSetting(){
 		for (Lotto lotto : lottoOrderGroup.lottos()) {
-			final Integer matchCount = LottoNumberMatch.matchCount(winnerNumbers, lotto.numbers());
+			final Integer matchCount = LottoNumberMatch.matchCount(winnerNumbers, lotto);
 			match(matchCount);
 		}
 	}

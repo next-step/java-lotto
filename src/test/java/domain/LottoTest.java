@@ -13,4 +13,9 @@ class LottoTest {
 
 		assertThat(lotto.numbers()).isEqualTo(numbers);
 	}
+	
+	@Test
+	public void 로또번호_매칭테스트(){
+	    
+	}
 }
