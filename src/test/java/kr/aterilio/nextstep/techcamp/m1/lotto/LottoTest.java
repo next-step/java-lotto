@@ -46,4 +46,12 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복");
     }
+
+    @DisplayName("입력받는 당첨 번호는 쉼표(,)로 분리되는 숫자의 나열이며 공백은 무시한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "5, 2, 3, 1, 6, 7:6"}, delimiter = ':')
+    public void createLuckyNumbers(String inputLuckyNumbers, int count) {
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
+        assertThat(luckyNumbers.count()).isEqualTo(count);
+    }
 }

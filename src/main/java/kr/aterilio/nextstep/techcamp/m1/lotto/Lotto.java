@@ -47,4 +47,8 @@ public class Lotto {
             throw new IllegalArgumentException(MSG_ERR_DUPLICATE);
         }
     }
+
+    public int count() {
+        return lottoBalls.size();
+    }
 }
