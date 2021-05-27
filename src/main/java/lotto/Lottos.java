@@ -36,6 +36,10 @@ public class Lottos {
         return lottoRecord;
     }
 
+    public int getCount() {
+        return lottos.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

@@ -17,6 +17,14 @@ public enum LottoRank {
         this.winReward = winReward;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getWinReward() {
+        return winReward;
+    }
+
     public static LottoRank searchRank(int countOfMatchUserLotto) {
         return Stream.of(values())
                 .filter(LottoRank -> LottoRank.matchCount == countOfMatchUserLotto)
@@ -30,9 +38,5 @@ public enum LottoRank {
 
     public int rankOfReward(int rankCount) {
         return winReward * rankCount;
-    }
-
-    public void printReward(int countMatch) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", matchCount, winReward, countMatch);
     }
 }
