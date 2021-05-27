@@ -5,8 +5,11 @@ import lotto.controller.dto.LottoPurchaseAssembler;
 import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.controller.dto.LottoPurchaseResponse;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTickets;
 import lotto.service.LottoPurchaseService;
+
+import java.util.List;
 
 public class LottoPurchaseController {
 
@@ -24,9 +27,12 @@ public class LottoPurchaseController {
 
     public LottoPurchaseResponse purchaseTickets(LottoPurchaseRequest request) {
         LottoMoney manualTicketPurchaseAmount = LottoMoney.fromCount(request.getManualLottoTicketCount());
-        LottoTickets manualTickets = LottoNumbersAssembler.assemblePurchaseTickets(request.getManualLottoNumbers());
+        List<LottoNumbers> manualLottoNumbersList = LottoNumbersAssembler.assembleLottoNumbersList(request.getManualLottoNumbers());
+        LottoTickets manualTickets = purchaseService.purchaseManualTickets(manualTicketPurchaseAmount, manualLottoNumbersList);
+
         LottoMoney autoTicketPurchaseAmount = LottoMoney.of(request.getPurchaseAmount()).subtract(manualTicketPurchaseAmount);
         LottoTickets autoTickets = purchaseService.purchaseAutoTickets(autoTicketPurchaseAmount);
+
         return LottoPurchaseAssembler.assemblePurchaseResponse(manualTickets, autoTickets);
     }
 
