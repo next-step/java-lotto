@@ -5,7 +5,10 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.domain.LottoTicketCount;
 import lotto.domain.Money;
 
 public class MoneyTest {
@@ -33,6 +36,15 @@ public class MoneyTest {
         Money money = new Money(14000);
         // when & then
         assertThat(money.countOfLotto()).isEqualTo(14);
+    }
+
+    @ParameterizedTest(name = "복권 수동 구매 수에 따른 자동 구매 수 테스트")
+    @CsvSource(value = {"1:9", "5:5", "10:0"}, delimiter = ':')
+    void manual(int input, int expected) {
+        // given
+        Money lottoMoney = new Money(10000);
+        // when & then
+        assertThat(lottoMoney.purchasableCount(new LottoTicketCount(input))).isEqualTo(expected);
     }
 }
 

@@ -26,6 +26,14 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
+    public int purchasableCount(LottoTicketCount manualCount) {
+        int ticketCount = countOfLotto() - manualCount.getLottoTicketCount();
+        if (ticketCount < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수가 구입금액 보다 큽니다.");
+        }
+        return ticketCount;
+    }
+
     public int money() {
         return this.money;
     }
