@@ -24,9 +24,9 @@ public class WinningLottoNumber {
     private LottoGame prizeLottoNumber;
     private LottoNumber bonusLottoNumber;
 
-    public WinningLottoNumber(String playerInput) {
-        validateConstructor(playerInput);
-        parseValues(playerInput);
+    public WinningLottoNumber(String prizeLottoNumberInput) {
+        validateConstructor(prizeLottoNumberInput);
+        parseValues(prizeLottoNumberInput);
     }
 
     public LottoResult decidePrize(LottoGames lottoGames) {
@@ -41,45 +41,45 @@ public class WinningLottoNumber {
         return lottoResult;
     }
 
-    public void applyBonusNumber(String playerInput) {
-        validateAlreadySet(playerInput);
-        validateBonusNumber(playerInput);
+    public void applyBonusNumber(String bonusNumberInput) {
+        validateAlreadySet();
+        validateBonusNumber(bonusNumberInput);
 
-        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(playerInput));
+        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(bonusNumberInput));
     }
 
-    private void validateConstructor(String playerInput) {
-        validatePositiveNumber(playerInput);
-        validateInputSize(playerInput);
+    private void validateConstructor(String prizeLottoNumberInput) {
+        validatePositiveNumber(prizeLottoNumberInput);
+        validateInputSize(prizeLottoNumberInput);
     }
 
-    private void validatePositiveNumber(String playerInput) {
-        Matcher numberArrayCheckResult = NUMBER_PATTERN.matcher(playerInput);
+    private void validatePositiveNumber(String prizeLottoNumberInput) {
+        Matcher numberArrayCheckResult = NUMBER_PATTERN.matcher(prizeLottoNumberInput);
         if (!numberArrayCheckResult.find()) {
             throw new WinningLottoNonPositiveNumberException();
         }
     }
 
-    private void validateInputSize(String playerInput) {
-        String[] tempPlayerInputArray = playerInput.split(",");
-        List<String> tempPlayerInputList = Arrays.asList(tempPlayerInputArray);
-        Set<String> playerInputSetForSizeCheck = new HashSet<>(tempPlayerInputList);
+    private void validateInputSize(String prizeLottoNumberInput) {
+        String[] tempPrizeLottoNumberArray = prizeLottoNumberInput.split(",");
+        List<String> tempPrizeLottoNumberList = Arrays.asList(tempPrizeLottoNumberArray);
+        Set<String> tempPrizeLottoNumberSetForSizeCheck = new HashSet<>(tempPrizeLottoNumberList);
 
-        if (playerInputSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
+        if (tempPrizeLottoNumberSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
             throw new WinningLottoNumberCountException();
         }
     }
 
-    private void validateAlreadySet(String playerInput) {
+    private void validateAlreadySet() {
         if (bonusLottoNumber != null) {
             throw new AlreadyAppliedBonusNumberException();
         }
     }
 
-    private void validateBonusNumber(String playerInput) {
-        LottoNumber tempLottoNumber = valueOf(Integer.parseInt(playerInput));
+    private void validateBonusNumber(String bonusNumberInput) {
+        LottoNumber tempBonusNumber = valueOf(Integer.parseInt(bonusNumberInput));
 
-        if (prizeLottoNumber.find(tempLottoNumber)) {
+        if (prizeLottoNumber.find(tempBonusNumber)) {
             throw new DuplicatedBonusNumberException();
         }
     }
