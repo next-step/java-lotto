@@ -28,11 +28,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber valueOf(int value) {
-		if (NUMBER_CACHE.containsKey(value)) {
-			return NUMBER_CACHE.get(value);
-		}
-
-		return NUMBER_CACHE.put(value, new LottoNumber(value));
+		NUMBER_CACHE.putIfAbsent(value, new LottoNumber(value));
+		return NUMBER_CACHE.get(value);
 	}
 
 	public static LottoNumber valueOf(String value) {
