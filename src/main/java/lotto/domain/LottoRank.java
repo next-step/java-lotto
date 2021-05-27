@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public enum LottoRank {
 
@@ -21,7 +22,33 @@ public enum LottoRank {
         this.winAmount = winAmount;
     }
 
-    public int matchCount() {
+    public static LottoRank of(int matchCount, boolean matchBonusTarget) {
+        if (isLose(matchCount)) {
+            return LOSE;
+        }
+        return Arrays.stream(values())
+                .sorted(Collections.reverseOrder())
+                .filter(rank -> rank.match(matchCount, matchBonusTarget))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("매칭 숫자에 해당하는 등수가 존재하지 않습니다."));
+    }
+
+    private boolean match(int matchCount, boolean matchBonusTarget) {
+        if (this.matchBonusTarget) {
+            return isMatch(matchCount) && matchBonusTarget;
+        }
+        return isMatch(matchCount);
+    }
+
+    private boolean isMatch(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    private static boolean isLose(int matchCount) {
+        return matchCount >= LOSE.isMatch() && matchCount < FIFTH.isMatch();
+    }
+
+    public int isMatch() {
         return matchCount;
     }
 
@@ -31,30 +58,5 @@ public enum LottoRank {
 
     public long winAmount() {
         return winAmount;
-    }
-
-    public static LottoRank of(int matchCount, boolean matchBonusTarget) {
-        if (isLose(matchCount)) {
-            return LOSE;
-        }
-        return Arrays.stream(values())
-                .filter(rank -> rank.match(matchCount, matchBonusTarget))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("매칭 숫자에 해당하는 등수가 존재하지 않습니다."));
-    }
-
-    private boolean match(int matchCount, boolean matchBonusTarget) {
-        if (this.matchBonusTarget) {
-            return matchCount(matchCount) && matchBonusTarget;
-        }
-        return matchCount(matchCount) && !matchBonusTarget;
-    }
-
-    private boolean matchCount(int matchCount) {
-        return this.matchCount == matchCount;
-    }
-
-    private static boolean isLose(int matchCount) {
-        return matchCount >= LOSE.matchCount() && matchCount < FIFTH.matchCount();
     }
 }

@@ -23,7 +23,7 @@ public class LottoTickets implements Iterable<LottoTicket> {
     }
 
     private static void validateCount(int count) {
-        if (count <= 0) {
+        if (count < 0) {
             throw new IllegalArgumentException("구매 수량을 입력해 주세요.");
         }
     }
@@ -33,6 +33,10 @@ public class LottoTickets implements Iterable<LottoTicket> {
                 .map(ticket -> ticket.rank(winNumbers, bonusNumber))
                 .collect(Collectors.toList());
         return new LottoRanks(lottoRanks);
+    }
+
+    public int count() {
+        return lottoTickets.size();
     }
 
     @Override

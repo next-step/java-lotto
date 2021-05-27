@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoPurchaseController;
 import lotto.controller.LottoWinController;
+import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.controller.dto.LottoPurchaseResponse;
 import lotto.controller.dto.WinInquiryRequest;
 import lotto.controller.dto.WinInquiryResponse;
@@ -14,9 +15,13 @@ public class LottoApplication {
         LottoPurchaseController lottoPurchaseController = new LottoPurchaseController();
         LottoWinController lottoWinController = new LottoWinController();
 
-        LottoPurchaseResponse lottoPurchaseResponse = lottoPurchaseController.purchaseTickets(InputView.inputPurchaseInfo());
+        LottoPurchaseRequest lottoPurchaseRequest = InputView.inputPurchaseInfo();
+        lottoPurchaseController.validatePurchasable(lottoPurchaseRequest);
+        lottoPurchaseRequest = InputView.inputPurchaseInfo(lottoPurchaseRequest);
+        LottoPurchaseResponse lottoPurchaseResponse = lottoPurchaseController.purchaseTickets(lottoPurchaseRequest);
         OutputView.printPurchaseResult(lottoPurchaseResponse);
-        WinInquiryRequest winInquiryRequest = InputView.inputWinNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
+
+        WinInquiryRequest winInquiryRequest = InputView.inputLottoNumbers(lottoPurchaseResponse.getLottoNumbersDtoList());
         WinInquiryResponse winInquiryResponse = lottoWinController.inquiryWin(winInquiryRequest);
         OutputView.printWinResult(winInquiryResponse);
     }

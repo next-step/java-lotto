@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,45 +15,30 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoTicketTest {
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:45:FIRST",
+            "7,2,3,4,5,6:1:SECOND",
+            "7,2,3,4,5,6:45:THIRD",
+            "7,8,3,4,5,6:45:FOURTH",
+            "7,8,9,4,5,6:45:FIFTH",
+            "7,8,9,10,5,6:45:LOSE",
+            "7,8,9,10,11,12:45:LOSE",
+            "7,8,9,10,11,12:45:LOSE"
+    }, delimiter = ':')
     @DisplayName("등수 조회")
-    void rank() {
+    void rank(String winningNumbers, String bonusNumber, String rankName) {
         // given
         Set<LottoNumber> lottoNumberList = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        Set<LottoNumber> lottoNumberMatch6 = Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch6 = new LottoNumbers(lottoNumberMatch6);
-
-        Set<LottoNumber> lottoNumberMatch5 = Stream.of(7, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch5 = new LottoNumbers(lottoNumberMatch5);
-
-        Set<LottoNumber> lottoNumberMatch4 = Stream.of(7, 8, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch4 = new LottoNumbers(lottoNumberMatch4);
-
-        Set<LottoNumber> lottoNumberMatch3 = Stream.of(7, 8, 9, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch3 = new LottoNumbers(lottoNumberMatch3);
-
-        Set<LottoNumber> lottoNumberMatch2 = Stream.of(7, 8, 9, 10, 5, 6).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch2 = new LottoNumbers(lottoNumberMatch2);
-
-        Set<LottoNumber> lottoNumberMatch1 = Stream.of(7, 8, 9, 10, 11, 12).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch1 = new LottoNumbers(lottoNumberMatch1);
-
-        Set<LottoNumber> lottoNumberMatch0 = Stream.of(7, 8, 9, 10, 11, 12).map(LottoNumber::of).collect(Collectors.toSet());
-        LottoNumbers lottoNumbersMatch0 = new LottoNumbers(lottoNumberMatch0);
+        Set<LottoNumber> lottoNumberSet = Arrays.stream(winningNumbers.split(",")).mapToInt(Integer::valueOf).mapToObj(LottoNumber::of).collect(Collectors.toSet());
+        LottoNumbers winningLottoNumbers = new LottoNumbers(lottoNumberSet);
 
         // then
-        assertThat(lottoTicket.rank(lottoNumbersMatch6, LottoNumber.of(45))).isEqualTo(LottoRank.FIRST);
-        assertThat(lottoTicket.rank(lottoNumbersMatch5, LottoNumber.of(1))).isEqualTo(LottoRank.SECOND);
-        assertThat(lottoTicket.rank(lottoNumbersMatch5, LottoNumber.of(45))).isEqualTo(LottoRank.THIRD);
-        assertThat(lottoTicket.rank(lottoNumbersMatch4, LottoNumber.of(45))).isEqualTo(LottoRank.FOURTH);
-        assertThat(lottoTicket.rank(lottoNumbersMatch3, LottoNumber.of(45))).isEqualTo(LottoRank.FIFTH);
-        assertThat(lottoTicket.rank(lottoNumbersMatch2, LottoNumber.of(45))).isEqualTo(LottoRank.LOSE);
-        assertThat(lottoTicket.rank(lottoNumbersMatch1, LottoNumber.of(45))).isEqualTo(LottoRank.LOSE);
-        assertThat(lottoTicket.rank(lottoNumbersMatch0, LottoNumber.of(45))).isEqualTo(LottoRank.LOSE);
+        assertThat(lottoTicket.rank(winningLottoNumbers, LottoNumber.of(Integer.parseInt(bonusNumber))).name()).isEqualTo(rankName);
     }
 
     @ParameterizedTest
