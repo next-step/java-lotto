@@ -43,7 +43,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber valueOf(String value) {
-		return valueOf(parseInt(value));
+		return valueOf(parseInt(value.trim()));
 	}
 
 	@Override

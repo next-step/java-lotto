@@ -55,7 +55,6 @@ public class Lotto {
 	private static TreeSet<LottoNumber> stringToNumbers(String text) {
 		String[] split = text.split(DELIMITER);
 		return Stream.of(split)
-			.map(String::trim)
 			.map(LottoNumber::valueOf)
 			.collect(toCollection(TreeSet::new));
 	}
