@@ -18,7 +18,7 @@ public class Lotto {
 	private static final List<LottoNumber> LOTTO_NUMBER_POOL;
 
 	static {
-		LOTTO_NUMBER_POOL = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
+		LOTTO_NUMBER_POOL = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
 			.mapToObj(LottoNumber::valueOf)
 			.collect(toList());
 	}
