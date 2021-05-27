@@ -5,6 +5,7 @@ import java.util.List;
 
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
+import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.assets.AssetsNegativeException;
@@ -26,7 +27,9 @@ public class RandomLotto {
 
 	private final LottoGenerator generator = new LottoGenerator();
 
-	private final LottoList lottoList = new LottoList();
+	private LottoList lottoList;
+
+	private LottoWinningResult winningResult;
 
 	/**
 	 * 현재 예산.
@@ -45,17 +48,18 @@ public class RandomLotto {
 	 * @throws LottoListNotEmptyException 초기화 문제.
 	 * @throws AssetsNotEnoughException 예산 부족.
 	 */
-	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException {
+	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException, LottoListEmptyException {
+		initForRestart();
 		output.printInsertAssets();
 		assets = acceptAssets();
 		int countsOfLotto = calculateLottoCount(assets, LOTTO_PRICE);
-		purchase(countsOfLotto);
+		lottoList = purchase(countsOfLotto);
 		// prints
 		output.printPurchased(lottoList);
 		output.printLottoList(lottoList);
 		output.printAskWinningNumbers();
 		// 로또 당첨번호.
-		LottoWinningResult winningResult = new LottoWinningResult();
+		winningResult = new LottoWinningResult();
 		input.acceptWinningNumbers(winningResult);
 		// 로또 보너스번호.
 		output.printAskBonusNumber();
@@ -77,10 +81,10 @@ public class RandomLotto {
 	/**
 	 * 로또를 구매하고, 예산을 차감한다.
 	 */
-	protected void purchase(int countsOfLotto) throws LottoListNotEmptyException, AssetsNotEnoughException {
+	protected LottoList purchase(int countsOfLotto) throws AssetsNotEnoughException, LottoListEmptyException {
 		// validation.
-		if (this.lottoList.isNotEmpty()) {
-			throw new LottoListNotEmptyException();
+		if (countsOfLotto <= 0) {
+			throw new LottoListEmptyException();
 		}
 		if (this.assets < countsOfLotto * LOTTO_PRICE) {
 			throw new AssetsNotEnoughException();
@@ -91,7 +95,7 @@ public class RandomLotto {
 		for (int i = 0; i < countsOfLotto; i++) {
 			lottos.add(generator.random());
 		}
-		this.lottoList.setList(lottos);
+		return new LottoList(lottos);
 	}
 
 	/**
@@ -99,6 +103,15 @@ public class RandomLotto {
 	 */
 	protected int calculateLottoCount(int assets, int lottoPrice) {
 		return Math.floorDiv(assets, lottoPrice);
+	}
+
+	protected void validateAssets(int assets) throws AssetsException {
+		if (assets < 0) {
+			throw new AssetsNegativeException();
+		}
+		if (assets < 1000) {
+			throw new AssetsNotEnoughException();
+		}
 	}
 
 	/**
@@ -117,13 +130,11 @@ public class RandomLotto {
 		}
 	}
 
-	public void validateAssets(int assets) throws AssetsException {
-		if (assets < 0) {
-			throw new AssetsNegativeException();
-		}
-		if (assets < 1000) {
-			throw new AssetsNotEnoughException();
-		}
+	private void initForRestart() {
+		this.lottoList = null;
+		this.winningResult = null;
+		this.assets = 0;
+		this.assetsUsed = 0;
 	}
 
 }
