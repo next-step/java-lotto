@@ -5,11 +5,11 @@ import lotto.domain.LottoNumbers;
 
 import java.util.List;
 
-public class TestRandomNumberGenerateStrategy implements RandomNumberGenerateStrategy {
+public class TestNumberGenerateStrategy implements NumberGenerateStrategy {
 
   private final List<LottoNumber> testNumbers;
 
-  public TestRandomNumberGenerateStrategy(List<LottoNumber> testNumbers) {
+  public TestNumberGenerateStrategy(List<LottoNumber> testNumbers) {
     this.testNumbers = testNumbers;
   }
 

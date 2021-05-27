@@ -8,23 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lotto.util.TestUtil.createLottoGameFromLottoNumbers;
+import static lotto.util.TestUtil.createAutoLottoGameFromLottoNumbers;
+import static lotto.util.TestUtil.createManualLottoGameFromLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TotalOrderedLottoGameNumbersTest {
+class TotalOrderedLottoGameDescriptionTest {
 
   private List<LottoGame> givenGames;
 
   @BeforeEach
   void setUp() {
-    givenGames = Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"));
+    givenGames = Lists.newArrayList(createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"), createManualLottoGameFromLottoNumbers("1,2,3,10,20,30"));
   }
 
   @DisplayName("주문한 로또 게임들의 갯수를 반환한다.")
   @Test
   void orderedCountTest() {
     //when & then
-    assertThat(new TotalOrderedLottoGameNumbers(givenGames).getOrderedCount()).isEqualTo(2);
+    assertThat(new TotalOrderedLottoGameDescription(givenGames).getOrderedCountPerOrderType()).isEqualTo("자동으로 1장, 수동으로 1장");
   }
 
   @DisplayName("주문한 로또 게임들을 정해진 포맷으로 출력한다.")
@@ -34,7 +35,7 @@ class TotalOrderedLottoGameNumbersTest {
     String expectation = "[1, 2, 3, 4, 5, 6]" + System.lineSeparator() + "[1, 2, 3, 10, 20, 30]";
 
     //when & then
-    assertThat(new TotalOrderedLottoGameNumbers(givenGames).toString()).hasToString(expectation);
+    assertThat(new TotalOrderedLottoGameDescription(givenGames).toString()).hasToString(expectation);
   }
 
 }

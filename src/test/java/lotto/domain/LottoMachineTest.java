@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.domain.strategy.RandomNumberGenerateStrategy;
-import lotto.domain.strategy.TestRandomNumberGenerateStrategy;
+import lotto.domain.strategy.NumberGenerateStrategy;
+import lotto.domain.strategy.TestNumberGenerateStrategy;
 import lotto.dto.AnalysisSheet;
 import lotto.dto.OrderSheet;
-import lotto.dto.TotalOrderedLottoGameNumbers;
+import lotto.dto.TotalOrderedLottoGameDescription;
 import lotto.dto.WinningNumbersAndBonusNumber;
 import lotto.util.TestUtil;
 import org.assertj.core.util.Lists;
@@ -22,9 +22,10 @@ class LottoMachineTest {
 
   @BeforeEach
   void setUp() {
-    OrderSheet givenOrderSheet = new OrderSheet(2000L);
-    RandomNumberGenerateStrategy givenRandomNumberGenerateStrategy = new TestRandomNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
-    GameGenerator givenGameGenerator = new GameGenerator(givenOrderSheet, givenRandomNumberGenerateStrategy);
+    List<List<Integer>> manualNumbers = Lists.list(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+    OrderSheet givenOrderSheet = OrderSheet.of(2000L, manualNumbers);
+    NumberGenerateStrategy givenNumberGenerateStrategy = new TestNumberGenerateStrategy(TestUtil.getOneToSixLottoNumbers());
+    GameGenerator givenGameGenerator = new GameGenerator(givenOrderSheet, givenNumberGenerateStrategy);
     givenLottoMachine = new LottoMachine(givenGameGenerator);
   }
 
@@ -32,9 +33,9 @@ class LottoMachineTest {
   @Test
   void peekOrderedGamesTest() {
     //given
-    List<LottoGame> expectGaems = Lists.newArrayList(TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6"), TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6"));
+    List<LottoGame> expectGaems = Lists.newArrayList(TestUtil.createManualLottoGameFromLottoNumbers("1,2,3,4,5,6"), TestUtil.createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"));
     assertThat(givenLottoMachine.peekOrderedGames())
-        .isEqualTo(new TotalOrderedLottoGameNumbers(expectGaems));
+        .isEqualTo(new TotalOrderedLottoGameDescription(expectGaems));
   }
 
   @DisplayName("당첨 번호를 맞춰 본 후 당첨 내역 목록과 손익률을 반환한다.")

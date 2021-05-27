@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.TotalOrderedLottoGameNumbers;
+import lotto.dto.TotalOrderedLottoGameDescription;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class LottoGamesTest {
   @MethodSource("provideMatchRankingsSource")
   void matchRankingsTest(LottoGames givenGames, TotalRankings expectation) {
     // given
-    LottoGame givenWinningGame = new LottoGame(new LottoNumbers(getOneToSixLottoNumbers()));
+    LottoGame givenWinningGame = LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers()));
     int givenBonusNumber = 7;
     WinningConditions givenWinningConditions = WinningConditions.of(givenWinningGame, givenBonusNumber);
 
@@ -33,22 +33,22 @@ class LottoGamesTest {
   @DisplayName("로또 게임들의 숫자를 반환한다.")
   @Test
   void peekGameInfosTest() {
-    List<LottoGame> given = Lists.newArrayList(new LottoGame(new LottoNumbers(getOneToSixLottoNumbers())));
-    assertThat(new LottoGames(given).peekTotalLottoGameNumbers()).isEqualTo(new TotalOrderedLottoGameNumbers(given));
+    List<LottoGame> given = Lists.newArrayList(LottoGame.createAutoGame(new LottoNumbers(getOneToSixLottoNumbers())));
+    assertThat(new LottoGames(given).peekTotalLottoGameNumbers()).isEqualTo(new TotalOrderedLottoGameDescription(given));
   }
 
   private static Stream<Arguments> provideMatchRankingsSource() {
     return Stream.of(
-        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,6"))),
+        Arguments.of(new LottoGames(Lists.newArrayList(createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6"))),
                     new TotalRankings(Lists.newArrayList(LottoRanking.FIRST))
         ),
-        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,7"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
+        Arguments.of(new LottoGames(Lists.newArrayList(createAutoLottoGameFromLottoNumbers("1,2,3,4,5,7"), createAutoLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
                     new TotalRankings(Lists.newArrayList(LottoRanking.SECOND, LottoRanking.FIFTH))
         ),
-        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("1,2,3,4,5,8"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
+        Arguments.of(new LottoGames(Lists.newArrayList(createAutoLottoGameFromLottoNumbers("1,2,3,4,5,8"), createAutoLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
             new TotalRankings(Lists.newArrayList(LottoRanking.THIRD, LottoRanking.FIFTH))
         ),
-        Arguments.of(new LottoGames(Lists.newArrayList(createLottoGameFromLottoNumbers("10,20,30,40,15,25"), createLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
+        Arguments.of(new LottoGames(Lists.newArrayList(createAutoLottoGameFromLottoNumbers("10,20,30,40,15,25"), createAutoLottoGameFromLottoNumbers("1,2,3,10,20,30"))),
             new TotalRankings(Lists.newArrayList(LottoRanking.NONE, LottoRanking.FIFTH))
         )
     );

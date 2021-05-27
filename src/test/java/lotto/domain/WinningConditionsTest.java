@@ -15,7 +15,7 @@ class WinningConditionsTest {
   @Test
   void ofFailTest() {
     //given
-    LottoGame givenWinningGame = TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6");
+    LottoGame givenWinningGame = TestUtil.createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6");
     int givenBonusNumber = 3;
 
     //when & then
@@ -27,11 +27,11 @@ class WinningConditionsTest {
   @ParameterizedTest
   void matchConditions(String givenLottoNumbers, LottoRanking expectation) {
     //given
-    LottoGame givenWinningGame = TestUtil.createLottoGameFromLottoNumbers("1,2,3,4,5,6");
+    LottoGame givenWinningGame = TestUtil.createAutoLottoGameFromLottoNumbers("1,2,3,4,5,6");
     int givenBonusNumber = 7;
 
     //when
-    LottoRanking actual = WinningConditions.of(givenWinningGame, givenBonusNumber).matchConditions(TestUtil.createLottoGameFromLottoNumbers(givenLottoNumbers));
+    LottoRanking actual = WinningConditions.of(givenWinningGame, givenBonusNumber).matchConditions(TestUtil.createAutoLottoGameFromLottoNumbers(givenLottoNumbers));
     //then
     assertThat(actual).isSameAs(expectation);
   }
