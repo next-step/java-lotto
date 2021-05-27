@@ -19,23 +19,18 @@ public class ConsoleView {
     public ConsoleView() {
     }
 
-
-//    public ConsoleView(LottoResult lottoResult) {
-//        this.lottoResult = lottoResult;
-//    }
-
-    public void printLotto(List<LottoTicket> lottoTickets){
+    public static void printLotto(List<LottoTicket> lottoTickets){
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.toString());
+            System.out.println(lottoTicket.sort().toString());
         }
     }
 
-    public void print(LottoResult lottoResult) {
+    public static void print(LottoResult lottoResult) {
         printScoreMap(lottoResult);
         printResult(lottoResult);
     }
 
-    private void printScoreMap(LottoResult lottoResult){
+    public static void printScoreMap(LottoResult lottoResult){
         ScoreMap scoreMap = lottoResult.getScoreMap();
         for( Map.Entry<Integer, Integer> lottoResultItem : scoreMap.getEntrySet() ){
             int numMatched = lottoResultItem.getKey();
@@ -51,13 +46,13 @@ public class ConsoleView {
 
     }
 
-    private void printResult(LottoResult lottoResult){
+    public static void printResult(LottoResult lottoResult){
         BigDecimal profitRate = calculateProfitRatio(lottoResult.getTotalReward(), lottoResult.getExpense());
         String message = String.format(PROFIT_MESSAGE, profitRate, getResultStatus(profitRate));
         System.out.println(message);
     }
 
-    public BigDecimal calculateProfitRatio(int totalProfit, int expense){
+    public static BigDecimal calculateProfitRatio(int totalProfit, int expense){
         if(totalProfit == 0 || expense == 0){
 
             return new BigDecimal(0);

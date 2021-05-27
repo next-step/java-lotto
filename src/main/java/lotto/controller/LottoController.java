@@ -8,23 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoController {
-    private int expense;
-    private int numLottoTicket;
 
-    public LottoController(int expense, int numLottoTicket) {
-        this.expense = expense;
-        this.numLottoTicket = numLottoTicket;
+    public LottoController() {
     }
 
-    public List<LottoTicket> generate(){
+    public List<LottoTicket> generate(int numLottoTicket){
         LottoGenerator lottoGenerator = new LottoGenerator(numLottoTicket, new RandomGenerateRule());
         List<LottoTicket> userLottoTickets = lottoGenerator.generateAll();
         return userLottoTickets;
     }
 
-    public LottoResult run(List<LottoTicket> userLottoTickets) {
-        List<LottoNumber> winningNumbers = ViewInput.getWinningNumbers();
-        LottoTicket winningTicket = new LottoTicket(winningNumbers);
+    public LottoResult run(LottoTicket winningTicket, List<LottoTicket> userLottoTickets, int expense) {
+
         LottoGame lottoGame = new LottoGame(winningTicket, userLottoTickets, expense);
         LottoResult lottoResult = lottoGame.getLottoResult();
         return lottoResult;
