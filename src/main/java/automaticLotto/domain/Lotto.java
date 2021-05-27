@@ -12,26 +12,13 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private List<Integer> numbers;
-	private int bonusNumber;
+	protected List<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
-		this(numberList, 0);
-	}
-
-	public Lotto(List<Integer> numberList, int bonusNumber) {
 		validateNumberListSize(new HashSet<>(numberList));
-		validateBonusNumber(numberList, bonusNumber);
 
 		this.numbers = numberList;
-		this.bonusNumber = bonusNumber;
 		sortLottoNumber();
-	}
-
-	private void validateBonusNumber(List<Integer> numberList, int bonusNumber) {
-		if (numberList.contains(bonusNumber)) {
-			throw new RuntimeException("bonus number can not be duplicated with lotto numbers");
-		}
 	}
 
 	private void sortLottoNumber() {
@@ -44,27 +31,8 @@ public class Lotto {
 		}
 	}
 
-	public Ranking match(Lotto targetLotto) {
-		int matchedCount = 0;
-		boolean isBonusNumberContained = false;
-
-		for (Integer number : targetLotto.numbers) {
-			matchedCount = getMatchedCount(matchedCount, number);
-		}
-
-		if (numbers.contains(targetLotto.bonusNumber)) {
-			isBonusNumberContained = true;
-		}
-
-		return Ranking.valueOf(new RankingCondition(matchedCount, isBonusNumberContained));
-	}
-
-	private int getMatchedCount(int matchedSize, Integer number) {
-		if (numbers.contains(number)) {
-			matchedSize++;
-		}
-
-		return matchedSize;
+	public boolean hasNumber(int number) {
+		return numbers.contains(number);
 	}
 
 	@Override

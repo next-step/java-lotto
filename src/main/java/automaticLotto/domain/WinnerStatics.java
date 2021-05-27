@@ -4,7 +4,7 @@ public class WinnerStatics {
 	private final WinnerTable winnerTable;
 	private final ProfitRate profitRate;
 
-	public WinnerStatics(Lottos boughtLottos, Lotto winnerLotto) {
+	public WinnerStatics(Lottos boughtLottos, WinnerLotto winnerLotto) {
 		this.winnerTable = getWinnerTable(boughtLottos, winnerLotto);
 		this.profitRate = new ProfitRate(setProfitRate(boughtLottos));
 	}
@@ -17,7 +17,7 @@ public class WinnerStatics {
 		return boughtLottos.size() * Lotto.LOTTO_PRICE;
 	}
 
-	private WinnerTable getWinnerTable(Lottos boughtLottos, Lotto winnerLotto) {
+	private WinnerTable getWinnerTable(Lottos boughtLottos, WinnerLotto winnerLotto) {
 		return boughtLottos.announce(winnerLotto);
 	}
 
