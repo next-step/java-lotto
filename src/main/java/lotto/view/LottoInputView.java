@@ -13,7 +13,7 @@ public class LottoInputView {
 	private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
 	private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
-	private static Scanner input = new Scanner(System.in);
+	private static final Scanner input = new Scanner(System.in);
 
 	private LottoInputView() {
 
@@ -21,27 +21,25 @@ public class LottoInputView {
 
 	public static int inputPurchaseLottoPrice() {
 		System.out.println(INPUT_PURCHASE_LOTTO_PRICE_MESSAGE);
-		return input.nextInt();
+		return Integer.parseInt(input.nextLine());
 	}
 
 	public static String inputWinningLotto() {
 		System.out.println(INPUT_LAST_WEEK_WINNING_LOTTO_NUMBER_MESSAGE);
-		input = new Scanner(System.in);
 		return input.nextLine();
 	}
 
 	public static int inputBonusNumber() {
 		System.out.println(INPUT_BONUS_LOTTO_NUMBER_MESSAGE);
-		return input.nextInt();
+		return Integer.parseInt(input.nextLine());
 	}
 
 	public static int inputManualLottoCount() {
 		System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
-		return input.nextInt();
+		return Integer.parseInt(input.nextLine());
 	}
 
 	public static List<String> inputManualLottoNumber(int manualLottoCount) {
-		input = new Scanner(System.in);
 		if (manualLottoCount == 0) {
 			return Collections.emptyList();
 		}
