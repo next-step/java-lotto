@@ -19,8 +19,12 @@ public final class LottoNumberAutoGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> drawLots() {
-        Collections.shuffle(numberBox);
-        return numberBox.subList(0, LOTTO_SIZE);
+    public List<Lotto> drawLots(final int lottoCount) {
+        final List<Lotto> lottos = new ArrayList<>(lottoCount);
+        for (int i = 0; i < lottoCount; i++) {
+            Collections.shuffle(numberBox);
+            lottos.add(new Lotto(numberBox.subList(0, LOTTO_SIZE)));
+        }
+        return lottos;
     }
 }
