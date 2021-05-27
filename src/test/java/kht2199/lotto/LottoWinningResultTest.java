@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.exception.LottoNumberDuplicatedException;
 import kht2199.lotto.exception.LottoNumberNotInitiatedException;
@@ -20,19 +21,26 @@ class LottoWinningResultTest {
 	@ParameterizedTest
 	@DisplayName("당첨번호와 단일 로또의 일치 갯수")
 	@MethodSource("calculateSource")
-	void calculate(List<Integer> winningResult, Lotto lotto, int matched) throws LottoNumberSizeInvalidException {
+	void calculate(Lotto lotto, Rank rank) throws
+			LottoNumberSizeInvalidException,
+			LottoNumberDuplicatedException,
+			LottoNumberNotInitiatedException {
+		List<Integer> winningResult = List.of(1, 2, 3, 4, 5, 6);
 		LottoWinningResult result = new LottoWinningResult();
 		result.setWinningNumbers(winningResult);
+		result.setBonusNumber(7);
 		assertThat(result.calculateMatched(lotto))
-			.isEqualTo(matched);
+			.isEqualTo(rank);
 	}
 
 	static Stream<Arguments> calculateSource() {
-		List<Integer> winningResult = List.of(1, 2, 3, 4, 5, 6);
 		return Stream.of(
-			Arguments.of(winningResult, new Lotto(List.of(1, 2, 3, 4, 5, 6)), 6),
-			Arguments.of(winningResult, new Lotto(List.of(1, 2, 3, 4, 5, 7)), 5),
-			Arguments.of(winningResult, new Lotto(List.of(7, 8, 9, 10, 11, 12)), 0)
+			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 8)), Rank.THIRD),
+			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 8, 9)), Rank.FOURTH),
+			Arguments.of(new Lotto(List.of(1, 2, 3, 8, 9, 10)), Rank.FIFTH),
+			Arguments.of(new Lotto(List.of(7, 8, 9, 10, 11, 12)), Rank.MISS)
 		);
 	}
 

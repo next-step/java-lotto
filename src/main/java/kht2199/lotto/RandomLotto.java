@@ -7,6 +7,7 @@ import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
+import kht2199.lotto.exception.assets.AssetsNegativeException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.view.InputView;
 import kht2199.lotto.view.ResultView;
@@ -26,8 +27,6 @@ public class RandomLotto {
 	private final LottoGenerator generator = new LottoGenerator();
 
 	private final LottoList lottoList = new LottoList();
-
-	private final LottoRule rule = new LottoRule();
 
 	/**
 	 * 현재 예산.
@@ -62,9 +61,9 @@ public class RandomLotto {
 		output.printAskBonusNumber();
 		input.acceptBonusNumber(winningResult);
 		// 결과 생성.
-		winningResult.updateLottoWinningNumbers(rule, lottoList);
+		winningResult.updateLottoWinningNumbers(lottoList);
 		// 통계
-		output.printResultStatistics(rule, winningResult, assetsUsed);
+		output.printResultStatistics(winningResult, assetsUsed);
 	}
 
 	/**
@@ -110,11 +109,20 @@ public class RandomLotto {
 	private int acceptAssets() {
 		try {
 			int assetsInput = input.assets();
-			rule.validateAssets(assetsInput);
+			validateAssets(assetsInput);
 			return assetsInput;
 		} catch (AssetsException e) {
 			output.handleException(e);
 			return acceptAssets();
+		}
+	}
+
+	public void validateAssets(int assets) throws AssetsException {
+		if (assets < 0) {
+			throw new AssetsNegativeException();
+		}
+		if (assets < 1000) {
+			throw new AssetsNotEnoughException();
 		}
 	}
 

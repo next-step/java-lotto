@@ -4,7 +4,7 @@ import static java.lang.System.*;
 
 import java.util.List;
 
-import kht2199.lotto.LottoRule;
+import kht2199.Rank;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
@@ -43,24 +43,25 @@ public class ResultView {
 		print("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
-	public void printResultStatistics(LottoRule rule, LottoWinningResult lottoWinningResult, int assetsUsed) {
+	public void printResultStatistics(LottoWinningResult result, int assetsUsed) {
 		print("당첨 통계");
 		print("---------");
 		for (int i = 3; i <= 6; i++) {
-			printResultOfMatched(rule, i, lottoWinningResult);
+			printResultOfMatched(i, result);
 		}
-		print(String.format("총 수익률은 %1f입니다.", lottoWinningResult.rate(assetsUsed)));
+		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
 	}
 
 	/**
 	 * 5등의 경우, 보너스 볼 일치여부까지 출력한다.
 	 */
-	protected void printResultOfMatched(LottoRule rule, int match, LottoWinningResult lottoWinningResult) {
+	protected void printResultOfMatched(int match, LottoWinningResult result) {
 		String format = "%d개 일치 (%d원)- %d개";
-		print(String.format(format, match, rule.prize(match, false), lottoWinningResult.countMatched(match, false)));
+		Rank rank = Rank.valueOf(match, false);
+		print(String.format(format, match, rank.getWinningMoney(), result.countMatched(rank)));
 		if (match == 5) {
 			format = "5개 일치, 보너스 볼 일치(%d) - %d개";
-			print(String.format(format, rule.prize(match, true), lottoWinningResult.countMatched(match, true)));
+			print(String.format(format, Rank.SECOND.getWinningMoney(), result.countMatched(Rank.SECOND)));
 		}
 	}
 

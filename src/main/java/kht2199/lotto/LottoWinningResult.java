@@ -1,10 +1,11 @@
 package kht2199.lotto;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.LottoNumberDuplicatedException;
@@ -20,23 +21,21 @@ public class LottoWinningResult {
 	/**
 	 * 일치갯수, 일치갯수에 대한 상금의 총합을 기록한다.
 	 */
-	private final Map<Integer, Integer> matchedPrizeMap;
+	private final Map<Rank, Integer> matchedPrizeMap;
 
 	private List<Integer> winningNumber;
 
 	private int bonusNumber;
 
-	private LottoRule rule;
-
 	public LottoWinningResult() {
-		this.matchedPrizeMap = new HashMap<>();
+		this.matchedPrizeMap = new EnumMap<>(Rank.class);
 		initMatchedPrizeMap();
 	}
 
 	/**
 	 * 당첨 갯수, 당첨 금액 설정
 	 */
-	public void updateLottoWinningNumbers(LottoRule rule, LottoList list) {
+	public void updateLottoWinningNumbers(LottoList list) {
 		// TODO RuntimeException을 DomainException으로 변경.
 		if (winningNumber == null) {
 			throw new RuntimeException("당첨번호가 설정되어 있지 않습니다.");
@@ -44,13 +43,11 @@ public class LottoWinningResult {
 		if (bonusNumber == 0) {
 			throw new RuntimeException("보너스 번호가 설정되어 있지 않습니다.");
 		}
-		this.rule = rule;
 		initMatchedPrizeMap();
 		for (Lotto lotto : list.getList()) {
-			int matched = calculateMatched(lotto);
-			Integer totalPrize = matchedPrizeMap.get(matched);
-			int prize = rule.prize(matched, winningNumber.contains(bonusNumber));
-			matchedPrizeMap.put(matched, totalPrize + prize);
+			Rank rank = calculateMatched(lotto);
+			Integer totalPrize = matchedPrizeMap.get(rank);
+			matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
 		}
 	}
 
@@ -58,18 +55,21 @@ public class LottoWinningResult {
 	 * @param lotto 비교대상 로또.
 	 * @return 결과정보.
 	 */
-	protected int calculateMatched(Lotto lotto) {
+	protected Rank calculateMatched(Lotto lotto) {
 		List<Integer> numbers = lotto.getNumbers();
 		int matched = 0;
 		for (Integer number : numbers) {
 			matched += winningNumber.contains(number) ? 1 : 0;
 		}
-		return matched;
+		if (matched == 5 && numbers.contains(bonusNumber)) {
+			return Rank.SECOND;
+		}
+		return Rank.valueOf(matched, false);
 	}
 
-	public int countMatched(int matched, boolean bonus) {
-		Integer totalMatchedPrize = matchedPrizeMap.get(matched);
-		int prize = totalMatchedPrize / rule.prize(matched, matched == 5 && bonus);
+	public int countMatched(Rank rank) {
+		Integer totalMatchedPrize = matchedPrizeMap.get(rank);
+		int prize = totalMatchedPrize / rank.getWinningMoney();
 		if (prize == 0) {
 			return 0;
 		}
@@ -113,9 +113,8 @@ public class LottoWinningResult {
 	}
 
 	private void initMatchedPrizeMap() {
-		for (int i = 0; i <= 6; i++) {
-			matchedPrizeMap.put(i, 0);
+		for (Rank value : Rank.values()) {
+			matchedPrizeMap.put(value, 0);
 		}
 	}
-
 }

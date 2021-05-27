@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  *
+ * TODO 일급컬렉션 적용
+ *
  * @author heetaek.kim
  */
 public final class Lotto {
