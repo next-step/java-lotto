@@ -64,4 +64,14 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("6개");
     }
+
+    @DisplayName("당첨 번호에 숫자가 아닌 값이 입력되면 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"4,3,t,1", "5, t, 3"})
+    public void createLuckyNumbersFailed_notInteger(String inputLuckyNumbers) {
+        assertThatThrownBy(()-> {
+            new LuckyNumbers(inputLuckyNumbers);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자");
+    }
 }

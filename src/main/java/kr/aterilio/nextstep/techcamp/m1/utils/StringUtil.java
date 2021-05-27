@@ -58,8 +58,16 @@ public class StringUtil {
     public static Integer[] convertToIntegerArray(String[] targets) {
         Integer[] convert = new Integer[targets.length];
         for (int i = targets.length-1; i >= 0; --i) {
-            convert[i] = Integer.parseInt(targets[i].trim());
+            String target = targets[i].trim();
+            validateNumeric(target);
+            convert[i] = Integer.parseInt(target);
         }
         return convert;
+    }
+
+    private static void validateNumeric(String target) {
+        if (!isNumeric(target)) {
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
     }
 }
