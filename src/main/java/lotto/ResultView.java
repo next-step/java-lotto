@@ -5,19 +5,17 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printPurchasedLottos(LottoNumberList lottoNumberList) {
-        for (int i = 0; i < lottoNumberList.count(); i++) {
-            System.out.println(lottoNumberList.get(i).getLottoNumbers());
-        }
+    public void printPurchasedLottos(LottoNumbersList lottoNumbersList) {
+        lottoNumbersList.foreach((x) -> System.out.println(x.getLottoNumbers()));
     }
 
     public void printLottoGameResult(ResultAll resultAll, int inputPurchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        ResultScoreEnum.THREE.printResult(resultAll.getResult().get(ResultScoreEnum.THREE));
-        ResultScoreEnum.FOUR.printResult(resultAll.getResult().get(ResultScoreEnum.FOUR));
-        ResultScoreEnum.FIVE.printResult(resultAll.getResult().get(ResultScoreEnum.FIVE));
-        ResultScoreEnum.SIX.printResult(resultAll.getResult().get(ResultScoreEnum.SIX));
+        ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
+        for (ResultScoreEnum state : resultScoreEnum) {
+            state.printResult(resultAll.result().get(state));
+        }
 
         printYield(resultAll, inputPurchaseAmount);
     }

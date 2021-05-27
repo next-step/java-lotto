@@ -1,8 +1,9 @@
 package lotto;
 
-import calculator.StringAddCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoNumbersTest {
 
     private List<Integer> testLottoNumber;
     private List<Integer> lottoNumberRange;
@@ -39,33 +40,40 @@ public class LottoNumberTest {
 
     @Test
     public void makeLottoNumber_로또번호생성확인() {
-        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGeneratorStrategy() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumberList = new ArrayList<Integer>();
-                lottoNumberList.add(1);
-                lottoNumberList.add(3);
-                lottoNumberList.add(5);
-                lottoNumberList.add(7);
-                lottoNumberList.add(9);
-                lottoNumberList.add(11);
-                return lottoNumberList;
+                List<Integer> lottoNumbers = new ArrayList<Integer>();
+                lottoNumbers.add(1);
+                lottoNumbers.add(3);
+                lottoNumbers.add(5);
+                lottoNumbers.add(7);
+                lottoNumbers.add(9);
+                lottoNumbers.add(11);
+                return lottoNumbers;
             }
         });
 
-        assertThat(lottoNumber.getLottoNumbers().contains(1)).isTrue();
+        assertThat(lottoNumbers.contains(1)).isTrue();
     }
 
     @Test
-    public void LastWonValidateNumber_로또번호검증_문자입력() {
-        assertThatThrownBy(() -> new LastWonLottoNumber("1,a,3,4,5,6"))
-                .isInstanceOf(RuntimeException.class).hasMessage("숫자만 입력 가능합니다.");
-    }
+    public void countMatchedNumbers_로또번호_맞춘_갯수_검증() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
+            @Override
+            public List<Integer> generateLottoNumber() {
+                List<Integer> lottoNumbers = new ArrayList<Integer>();
+                lottoNumbers.add(1);
+                lottoNumbers.add(3);
+                lottoNumbers.add(5);
+                lottoNumbers.add(7);
+                lottoNumbers.add(9);
+                lottoNumbers.add(11);
+                return lottoNumbers;
+            }
+        });
 
-    @Test
-    public void LastWonValidateNumber_로또번호검증_45초과입력() {
-        assertThatThrownBy(() -> new LastWonLottoNumber("1,2,3,4,5,56"))
-                .isInstanceOf(RuntimeException.class).hasMessage("1부터 45까지 숫자만 입력 가능합니다.");
+        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,3,5,6,7,8","10");
+        assertThat(lottoNumbers.countMatchedNumbers(lastWonLottoNumber).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
     }
-
 }

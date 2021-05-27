@@ -1,13 +1,8 @@
 package lotto;
 
-import java.util.List;
-
 public class PurchaseLotto {
     private static final int LOTTO_PRICE = 1000;
-    private LottoNumber lottoNumber;
-    private LottoNumberList lottoNumberList;
     private LastWonLottoNumber lastWonLottoNumber;
-    private ResultAll resultAll;
     private InputView inputView;
     private ResultView resultView;
 
@@ -20,48 +15,36 @@ public class PurchaseLotto {
         inputView.inputPurchaseAmount();
         int lottoCount = availablePurchaseLottoCount(inputView.getInputAmount());
         resultView.printPurchasedCount(lottoCount);
-        LottoNumberList lottoNumberList = purchaseAvailableLotto(lottoCount);
-        resultView.printPurchasedLottos(lottoNumberList);
+        LottoNumbersList lottoNumbersList = purchaseAvailableLotto(lottoCount);
+        resultView.printPurchasedLottos(lottoNumbersList);
         inputView.inputLastWonLottoNumbers();
-        resultLottoGame(inputView.getInputLastWonLottoNumbers());
-        resultView.printLottoGameResult(resultAll, inputView.getInputAmount());
+        inputView.inputBonusLottoNumber();
+        resultView.printLottoGameResult(resultLottoGame(inputView, lottoNumbersList), inputView.getInputAmount());
     }
 
     public int availablePurchaseLottoCount(int amount) {
         return amount / LOTTO_PRICE;
     }
 
-    public LottoNumberList purchaseAvailableLotto(int lottoCount) {
-        lottoNumberList = new LottoNumberList();
+    public LottoNumbersList purchaseAvailableLotto(int lottoCount) {
+        LottoNumbersList lottoNumbersList = new LottoNumbersList();
         for (int i = 0; i < lottoCount; i++) {
-            lottoNumberList.appendLottoNumber(purchaseOneLotto());
+            lottoNumbersList.appendLottoNumber(purchaseOneLotto());
         }
-        return lottoNumberList;
+        return lottoNumbersList;
     }
 
-    public LottoNumber purchaseOneLotto() {
-        lottoNumber = new LottoNumber(new LottoNumberGenerator());
-        return lottoNumber;
+    public LottoNumbers purchaseOneLotto() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
+        return lottoNumbers;
     }
 
-    public void resultLottoGame(String lastWonLottoNumbers) {
-        setLastWonLottoNumbers(lastWonLottoNumbers);
-        resultAll = new ResultAll();
-        Lotto lottoCompare = new Lotto();
-
-        WonCount wonCountForOneLotto;
-        for (int i = 0; i < lottoNumberList.count(); i++) {
-            wonCountForOneLotto = lottoCompare.countWonNumbers(lottoNumberList.get(i).getLottoNumbers(), lastWonLottoNumber.getLastWonLottoNumbers());
-            updateResultLotto(wonCountForOneLotto.wonCount());
-        }
+    public ResultAll resultLottoGame(InputView inputView, LottoNumbersList lottoNumbersList) {
+        return lottoNumbersList.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
     }
 
-    private void updateResultLotto(int wonCountForOneLotto) {
-        resultAll.won(wonCountForOneLotto);
-    }
-
-    private void setLastWonLottoNumbers(String lastWonLottoNumbers) {
-        this.lastWonLottoNumber = new LastWonLottoNumber(lastWonLottoNumbers);
-
+    private LastWonLottoNumber setLastWonLottoNumbers(InputView inputView) {
+        lastWonLottoNumber = new LastWonLottoNumber(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
+        return lastWonLottoNumber;
     }
 }
