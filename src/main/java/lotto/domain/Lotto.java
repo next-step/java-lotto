@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -12,6 +13,7 @@ public class Lotto {
 	public Lotto(final List<LottoNumber> numbers) {
 		validate(numbers);
 		this.numbers = numbers;
+		sort();
 	}
 
 	public long getMatchesCount(Lotto lotto) {
@@ -42,5 +44,9 @@ public class Lotto {
 		if (numbers.size() > LOTTO_NUMBER_SIZE) {
 			throw new IllegalArgumentException("6개 보다 크다");
 		}
+	}
+
+	private void sort() {
+		Collections.sort(this.numbers);
 	}
 }
