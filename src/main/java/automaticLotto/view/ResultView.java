@@ -21,6 +21,13 @@ public class ResultView {
 				continue;
 			}
 
+			if (ranking == Ranking.RANKING_1.RANKING_2) {
+				System.out.println(
+					ranking.getMatchedCount() + "개 일치, 보너스볼 일치 (" + ranking.getWinnerPrice() + "원)- "
+						+ winnerStatics.presentCount(ranking) + "개");
+				continue;
+			}
+
 			System.out.println(
 				ranking.getMatchedCount() + "개 일치 (" + ranking.getWinnerPrice() + "원)- "
 					+ winnerStatics.presentCount(ranking) + "개");

@@ -20,7 +20,7 @@ public class automaticLottoMain {
 	}
 
 	private static WinnerStatics getWinnerStatics(Lottos boughtLottos) {
-		return new WinnerStatics(boughtLottos, new Lotto(InputView.getLastWinLotto()));
+		return new WinnerStatics(boughtLottos, new Lotto(InputView.getLastWinLotto(), InputView.getBonusNumber()));
 	}
 
 	private static Lottos buy(int buyAmount) {
