@@ -24,7 +24,7 @@ public class Lottos {
 
 	private static void validateMoney(Money money) {
 		if (!money.isEnough()) {
-			throw new IllegalArgumentException("Not enough money to buy a lotto.");
+			throw new NotEnoughMoneyException("로또를 구입하기엔 돈이 부족합니다.");
 		}
 	}
 

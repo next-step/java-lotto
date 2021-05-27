@@ -14,7 +14,7 @@ public class Money {
 
 	private static void validateMoneyValue(int value) {
 		if (value < 0) {
-			throw new IllegalArgumentException("Money cannot be negative!");
+			throw new OutOfBoundValueException("금액은 음수가 될 수 없습니다.");
 		}
 	}
 

@@ -41,7 +41,7 @@ public class Lotto {
 
 	private static void validateNumbers(TreeSet<LottoNumber> numbers) {
 		if (numbers.size() != REQUIRED_COUNT) {
-			throw new InvalidNumberSetException("Lotto requires only 6 unique numbers.");
+			throw new InvalidNumberSetException("로또는 각각 다른 6개의 숫자로 구성되어야 합니다.");
 		}
 	}
 

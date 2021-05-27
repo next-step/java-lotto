@@ -14,7 +14,7 @@ public class WinningNumber {
 
 	private static void validateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
 		if (winLotto.contains(bonusNumber)) {
-			throw new InvalidNumberSetException("Bonus number must not be duplicate with the winning number.");
+			throw new InvalidNumberSetException("보너스 숫자는 당첨번호에 포함될 수 없습니다.");
 		}
 	}
 
