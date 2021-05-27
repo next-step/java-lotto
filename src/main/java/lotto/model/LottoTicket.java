@@ -2,7 +2,7 @@ package lotto.model;
 import java.util.*;
 
 public class LottoTicket {
-    private List<LottoNumber> lottoNubmers;
+    private List<LottoNumber> lottoNubmers = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -19,10 +19,6 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber){
         return lottoNubmers.contains(lottoNumber);
-    }
-
-    public LottoTicket(){
-        this.lottoNubmers = new ArrayList<>();
     }
 
     public LottoTicket(List<LottoNumber> lottoNubmers) {
