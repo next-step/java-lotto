@@ -1,6 +1,7 @@
 package lotto.model;
 
 public interface GenerateRule {
-    public LottoNumbers lottonumbers = null;
+    public LottoTicket LottoTicket = null;
     public LottoNumber generate();
+    public void init();
 }

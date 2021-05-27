@@ -1,17 +1,33 @@
 package lotto.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class LottoGame {
-    private LottoNumbers winningNumbers;
-    private final Map<Integer, Integer> winningRewards = new HashMap<>();
+    private LottoTicket winningTicket;
+    private List<LottoTicket> userLottoTickets;
+    private int expense;
 
-    public LottoGame(LottoNumbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public LottoGame(LottoTicket winningTicket, List<LottoTicket> userLottoTickets, int expense) {
+        this.winningTicket = winningTicket;
+        this.userLottoTickets = userLottoTickets;
+        this.expense = expense;
     }
 
-    public int howManyMatched(LottoNumbers userNumbers) {
-        return winningNumbers.howManyMatched(userNumbers);
+    public int howManyMatched(LottoTicket userNumbers) {
+        return winningTicket.howManyMatched(userNumbers);
+    }
+
+    public ScoreMap makeScoreMap() {
+        ScoreMap scoreMap = new ScoreMap();
+        for (LottoTicket userLottoTicket : userLottoTickets) {
+            scoreMap.updateWithNumMatched(winningTicket.howManyMatched(userLottoTicket));
+        }
+        return scoreMap;
+    }
+
+    public LottoResult getLottoResult(){
+        ScoreMap scoreMap = makeScoreMap();
+        int totalReward = scoreMap.calculateReward();
+        return new LottoResult(scoreMap, totalReward, expense);
     }
 }

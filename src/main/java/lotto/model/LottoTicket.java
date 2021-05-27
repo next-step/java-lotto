@@ -1,17 +1,14 @@
 package lotto.model;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
-public class LottoNumbers {
+public class LottoTicket {
     private List<LottoNumber> lottoNubmers;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        LottoTicket that = (LottoTicket) o;
         return Objects.equals(lottoNubmers, that.lottoNubmers);
     }
 
@@ -24,7 +21,11 @@ public class LottoNumbers {
         return lottoNubmers.contains(lottoNumber);
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNubmers) {
+    public LottoTicket(){
+        this.lottoNubmers = new ArrayList<>();
+    }
+
+    public LottoTicket(List<LottoNumber> lottoNubmers) {
         this.lottoNubmers = lottoNubmers;
     }
 
@@ -37,21 +38,28 @@ public class LottoNumbers {
         return "[" + strJoiner.toString() + "]";
     }
 
-    public LottoNumber get(int index){
+    public LottoNumber get(int index) {
+        if(index >= lottoNubmers.size()){
+            try {
+                throw new Exception("index out of range");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return lottoNubmers.get(index);
     }
 
-    public LottoNumbers shuffle() {
+    public LottoTicket shuffle() {
         Collections.shuffle(lottoNubmers);
         return this;
     }
 
-    public LottoNumbers sort(){
+    public LottoTicket sort(){
         Collections.sort(lottoNubmers);
         return this;
     }
 
-    public int howManyMatched(LottoNumbers that){
+    public int howManyMatched(LottoTicket that){
         int totalNumContains = 0;
         for (int i=0; i<that.size(); i++){
             totalNumContains += howManyContains(that.get(i));
@@ -64,7 +72,7 @@ public class LottoNumbers {
     }
 
     private int howManyContains(LottoNumber lottoNumber){
-        if (contains(lottoNumber)){
+        if (lottoNubmers.contains(lottoNumber)){
             return 1;
         }
         return 0;

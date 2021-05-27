@@ -5,4 +5,9 @@ public class MockGenerateRule implements GenerateRule{
     public LottoNumber generate() {
         return new LottoNumber(1);
     }
+
+    @Override
+    public void init() {
+        return;
+    }
 }
