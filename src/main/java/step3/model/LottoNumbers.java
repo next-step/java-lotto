@@ -88,13 +88,12 @@ public final class LottoNumbers {
     }
 
     private void checkBonusValidation(Integer bonusNumber) {
-        boolean isInNumbers = lottoNumbers.stream()
+        lottoNumbers.stream()
             .filter(number -> number.equals(LottoNumber.of(bonusNumber)))
-            .count() == 1;
-
-        if (isInNumbers) {
-            throw new IllegalArgumentException(CHECK_BONUS);
-        }
+            .findFirst()
+            .ifPresent(number -> {
+                throw new IllegalArgumentException(CHECK_BONUS);
+            });
     }
 
     private void validationSize(List<Integer> numberList) {
