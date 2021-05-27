@@ -1,18 +1,35 @@
 package study.lotto;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Optional;
 
-public class WinningPrize {
-    private static final BigDecimal forthPrize = BigDecimal.valueOf(5000);
-    private static final BigDecimal thirdPrize = BigDecimal.valueOf(50000);
-    private static final BigDecimal secondPrize = BigDecimal.valueOf(1500000);
-    private static final BigDecimal firstPrize = BigDecimal.valueOf(2000000000);
+public enum WinningPrize {
+    FOURTH(3, BigDecimal.valueOf(5000)),
+    THIRD(4, BigDecimal.valueOf(50000)),
+    SECOND(5, BigDecimal.valueOf(1500000)),
+    FIRST(6, BigDecimal.valueOf(2000000000));
 
-    public static BigDecimal prize(int matchCount) {
-        if (matchCount==3) return forthPrize;
-        if (matchCount==4) return thirdPrize;
-        if (matchCount==5) return secondPrize;
-        if (matchCount==6) return firstPrize;
-        return BigDecimal.ZERO;
+    private int matchCount;
+    private BigDecimal prize;
+
+    WinningPrize(int matchCount, BigDecimal prize) {
+        this.matchCount = matchCount;
+        this.prize = prize;
     }
+
+    public static Optional<WinningPrize> of(int matchCount) {
+        return Arrays.stream(values())
+                .filter(winningPrize -> winningPrize.matchCount == matchCount)
+                .findFirst();
+    }
+
+    public int matchCount() {
+        return matchCount;
+    }
+
+    public BigDecimal prize() {
+        return prize;
+    }
+
 }

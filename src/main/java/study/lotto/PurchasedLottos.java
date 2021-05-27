@@ -4,22 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasedLottos {
-    List<LottoPaper> lottoPapers;
+    List<LottoNumbers> lottoNumbers;
 
     public PurchasedLottos(int lottoPapers) {
-        List<LottoPaper> purchasedLottos = new ArrayList<>();
+        List<LottoNumbers> purchasedLottos = new ArrayList<>();
         while (purchasedLottos.size() < lottoPapers) {
-            LottoPaper purchaseLotto = new LottoPaper();
+            LottoNumbers purchaseLotto = LottoNumbers.randomNumbers();
             purchasedLottos.add(purchaseLotto);
         }
-        this.lottoPapers = purchasedLottos;
+        this.lottoNumbers = purchasedLottos;
     }
 
-    public PurchasedLottos(List<LottoPaper> lottoPapers) {
-        this.lottoPapers = lottoPapers;
+    public PurchasedLottos(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoPaper> values() {
-        return lottoPapers;
+    public List<LottoNumbers> values() {
+        return lottoNumbers;
+    }
+
+    public int count() {
+        return lottoNumbers.size();
     }
 }

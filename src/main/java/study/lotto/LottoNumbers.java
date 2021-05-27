@@ -1,32 +1,27 @@
 package study.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import study.lotto.util.LottoNumberGenerator;
+
+import java.util.*;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> markedLottoNumbers;
 
-    public LottoNumbers() {
-        this.lottoNumbers = lottoNumbers();
+    public LottoNumbers(List<LottoNumber> markedLottoNumbers) {
+        this.markedLottoNumbers = markedLottoNumbers;
     }
 
-    private List<Integer> lottoNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(i);
-        }
-        return numbers;
+    public static LottoNumbers randomNumbers() {
+        return new LottoNumbers(LottoNumberGenerator.randomNumbers());
     }
 
-    public List<Integer> autoCreatedNumbers() {
-        Collections.shuffle(lottoNumbers);
-        List<Integer> autoMarkedLottoNumbers =  lottoNumbers.subList(0,6);
-        Collections.sort(autoMarkedLottoNumbers);
-        return autoMarkedLottoNumbers;
+    public List<LottoNumber> lottoNumbers() {
+        return markedLottoNumbers;
     }
 
-    public List<Integer> values() {
-        return lottoNumbers;
+    public int matchWinningNumberCount(LottoNumbers winningNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>(winningNumbers.lottoNumbers());
+        numbers.removeAll(markedLottoNumbers);
+        return LottoGame.MARK_SIZE - numbers.size();
     }
 }
