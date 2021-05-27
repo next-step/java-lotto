@@ -45,7 +45,7 @@ public class LottoTest {
 		List<Integer> randomNumberList1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 		Lotto lotto1 = new Lotto(randomNumberList1);
 
-		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(Ranking.RANKING_2);
+		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(Ranking.RANKING_3);
 	}
 
 	@Test
@@ -66,8 +66,8 @@ public class LottoTest {
 	@Test
 	@DisplayName("로또 번호 5개가 맞고 보너스 번호도 포함되면 랭킹 2위")
 	public void five_numbers_matched_and_bonus_number_contained_then_ranking2() {
-		Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+		Lotto lotto1 = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(Ranking.RANKING_2);
+		assertThat(lotto1.match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8), 6))).isEqualTo(Ranking.RANKING_2);
 	}
 }

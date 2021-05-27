@@ -10,7 +10,7 @@ public class WinnerTableTest {
 	@DisplayName("총 당첨 금액 계산")
 	public void calculate_profit_rate() {
 		WinnerTable winnerTable = new WinnerTable();
-		winnerTable.count(Ranking.RANKING_3);
+		winnerTable.count(Ranking.RANKING_4);
 
 		assertThat(winnerTable.getTotalAmount()).isEqualTo(500000);
 	}

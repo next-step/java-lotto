@@ -46,6 +46,6 @@ public class LottosTest {
 
 		WinnerTable winnerTable = lottos.announce(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThat(winnerTable.getWinnerCount(Ranking.RANKING_2)).isEqualTo(1);
+		assertThat(winnerTable.getWinnerCount(Ranking.RANKING_3)).isEqualTo(1);
 	}
 }

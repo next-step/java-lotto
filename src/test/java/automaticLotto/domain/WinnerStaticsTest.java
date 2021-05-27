@@ -37,7 +37,7 @@ public class WinnerStaticsTest {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThat(winnerStatics.presentCount(Ranking.RANKING_2)).isEqualTo(1);
+		assertThat(winnerStatics.presentCount(Ranking.RANKING_3)).isEqualTo(1);
 	}
 
 	@Test
@@ -55,6 +55,6 @@ public class WinnerStaticsTest {
 		WinnerStatics winnerStatics = new WinnerStatics(new Lottos(candidateLottos),
 			new Lotto(Arrays.asList(1, 41, 42, 43, 44, 45)));
 
-		assertThat(winnerStatics.presentCount(Ranking.RANKING_2)).isEqualTo(3);
+		assertThat(winnerStatics.presentCount(Ranking.RANKING_3)).isEqualTo(3);
 	}
 }
