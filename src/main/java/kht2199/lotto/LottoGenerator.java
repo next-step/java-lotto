@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import kht2199.lotto.data.Lotto;
+
 /**
  * 로또 번호 생성기.
  *

@@ -1,4 +1,4 @@
-package kht2199.lotto;
+package kht2199.lotto.data;
 
 import java.util.Collections;
 import java.util.List;

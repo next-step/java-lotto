@@ -4,8 +4,8 @@ import static java.lang.System.*;
 
 import java.util.List;
 
-import kht2199.lotto.Lotto;
-import kht2199.lotto.LottoList;
+import kht2199.lotto.data.Lotto;
+import kht2199.lotto.data.LottoList;
 import kht2199.lotto.LottoRule;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.DomainException;

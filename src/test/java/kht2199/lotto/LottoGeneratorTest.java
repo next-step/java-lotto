@@ -1,13 +1,13 @@
 package kht2199.lotto;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
+
+import kht2199.lotto.data.Lotto;
 
 /**
  *

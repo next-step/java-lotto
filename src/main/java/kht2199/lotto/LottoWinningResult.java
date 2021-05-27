@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kht2199.lotto.data.Lotto;
+import kht2199.lotto.data.LottoList;
+
 /**
  *
  * @author heetaek.kim
@@ -12,6 +15,9 @@ public class LottoWinningResult {
 
 	private final Lotto winningNumber;
 
+	/**
+	 * 일치갯수, 일치갯수에 대한 상금의 총합을 기록한다.
+	 */
 	private final Map<Integer, Integer> matchedPrizeMap;
 
 	private LottoRule rule;
@@ -20,12 +26,6 @@ public class LottoWinningResult {
 		this.winningNumber = winningNumber;
 		this.matchedPrizeMap = new HashMap<>();
 		initMatchedPrizeMap();
-	}
-
-	private void initMatchedPrizeMap() {
-		for (int i = 0; i <= 6; i++) {
-			matchedPrizeMap.put(i, 0);
-		}
 	}
 
 	/**
@@ -73,7 +73,19 @@ public class LottoWinningResult {
 		return sum;
 	}
 
+	/**
+	 * 수익률을 계산한다.
+	 *
+	 * @param assets 사용한 자산.
+	 * @return 수익률 범위 0~1
+	 */
 	public float rate(int assets) {
 		return (float) totalPrize() / assets;
+	}
+
+	private void initMatchedPrizeMap() {
+		for (int i = 0; i <= 6; i++) {
+			matchedPrizeMap.put(i, 0);
+		}
 	}
 }

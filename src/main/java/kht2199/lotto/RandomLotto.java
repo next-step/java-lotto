@@ -3,6 +3,8 @@ package kht2199.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import kht2199.lotto.data.Lotto;
+import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;

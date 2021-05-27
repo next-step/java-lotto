@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import kht2199.lotto.Lotto;
+import kht2199.lotto.data.Lotto;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
 
