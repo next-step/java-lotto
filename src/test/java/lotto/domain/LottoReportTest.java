@@ -1,14 +1,14 @@
 package lotto.domain;
 
-import static lotto.domain.LottoRank.*;
-import static lotto.domain.LottoStore.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import static lotto.domain.LottoRank.*;
+import static lotto.domain.LottoStore.*;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoReportTest {
 

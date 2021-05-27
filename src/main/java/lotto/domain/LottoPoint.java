@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoPoint {
+
 	private final int point;
 	private final boolean bonus;
 

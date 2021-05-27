@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.*;
 
 class MoneyTest {
 
@@ -19,7 +20,7 @@ class MoneyTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {"1000:1", "10000:10", "100:0", "1200:1"}, delimiter = ':')
+	@CsvSource(value = {"1000:1", "10000:10", "1200:1"}, delimiter = ':')
 	void pay(String input, int expected) {
 		// given
 		Money money = new Money(input);
@@ -32,4 +33,16 @@ class MoneyTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@ParameterizedTest
+	@CsvSource(value = {"1:true", "3:true", "10:false"}, delimiter = ':')
+	void isEnough(int count, boolean result) {
+		// given
+		Money money = new Money("3000");
+
+		// when
+		boolean enough = money.isEnough(count);
+
+		// then
+		assertThat(enough).isEqualTo(result);
+	}
 }

@@ -30,22 +30,14 @@ public class UserLotto {
 		return lottoTicketList;
 	}
 
-	public LottoReport report(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+	public LottoReport report(WinningLotto winningLotto) {
 		List<LottoRank> lottoRankList = new ArrayList<>();
 
 		for (LottoTicket lottoTicket : lottoTicketList) {
-			lottoRankList.add(
-				LottoRank.rank(countCommonNumber(winningLottoTicket, lottoTicket), isBonus(bonusNumber, lottoTicket)));
-		}
+			lottoRankList.add(winningLotto.rank(lottoTicket));
+        }
 
 		return new LottoReport(lottoRankList);
 	}
 
-	private int countCommonNumber(LottoTicket winningLottoTicket, LottoTicket lottoTicket) {
-		return LottoTicket.countCommonNumber(lottoTicket, winningLottoTicket);
-	}
-
-	private boolean isBonus(LottoNumber bonusNumber, LottoTicket lottoTicket) {
-		return lottoTicket.matchNumber(bonusNumber);
-	}
 }

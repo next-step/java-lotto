@@ -1,15 +1,15 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
 
@@ -51,7 +51,11 @@ class LottoNumberTest {
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0, 46})
 	void invalid(int number) {
-		assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(IllegalArgumentException.class);
+		// when
+		Throwable throwable = catchThrowable(() -> LottoNumber.of(number));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
 	}
 
 }

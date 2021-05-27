@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,10 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -65,7 +65,7 @@ class LottoTicketTest {
 		// when
 		int matchCount = 0;
 		for (LottoTicket lottoTicket : lottoTickets) {
-			matchCount = LottoTicket.countCommonNumber(winningLottoTicket, lottoTicket);
+			matchCount = LottoTicket.countMatchingNumber(winningLottoTicket, lottoTicket);
 		}
 
 		// then
@@ -90,7 +90,7 @@ class LottoTicketTest {
 
 		// then
 		assertThat(lottoTicket).isEqualTo(expected);
-		assertThat(lottoTicket.equals(expected)).isTrue();
+		assertThat(lottoTicket.equals(expected)).isEqualTo(true);
 	}
 
 	@Test
@@ -100,6 +100,6 @@ class LottoTicketTest {
 		LottoTicket expected = LottoTicketConverter.convert("1,2,3,4,5,6");
 
 		// then
-		assertThat(lottoTicket.hashCode()).isEqualTo(expected.hashCode());
+		assertThat(lottoTicket.hashCode()).hasSameHashCodeAs(expected.hashCode());
 	}
 }

@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static lotto.util.ValidationUtils.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import static lotto.util.ValidationUtils.*;
 
 public class LottoTicket {
 
@@ -29,11 +29,11 @@ public class LottoTicket {
 		}
 	}
 
-	static int countCommonNumber(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
-		return userLottoTicket.countCommonNumber(winningLottoTicket.lottoNumbers);
+	static int countMatchingNumber(LottoTicket userLottoTicket, LottoTicket winningLottoTicket) {
+		return userLottoTicket.countMatchingNumber(winningLottoTicket.lottoNumbers);
 	}
 
-	int countCommonNumber(Set<LottoNumber> lottoNumberSet) {
+	int countMatchingNumber(Set<LottoNumber> lottoNumberSet) {
 		Set<LottoNumber> targetLottoNumberSet = new HashSet<>(lottoNumberSet);
 		validate(targetLottoNumberSet);
 

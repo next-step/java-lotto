@@ -1,12 +1,12 @@
 package lotto.domain;
 
+import lotto.EarningResultMessage;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
-import lotto.EarningResultMessage;
 
 public class LottoReport {
 
