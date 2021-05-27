@@ -33,7 +33,8 @@ public class LottoUserTest {
 		user = new LottoUser();
 		Lottos manualLottos = new Lottos();
 		manualLottos.addLotto(LottoGenerator.generate());
-		LottoPurchaseHistory purchaseHistory = user.buyLottos(manualLottos, money);
+		user.buyLottos(manualLottos, money);
+		LottoPurchaseHistory purchaseHistory = user.getLottoPurchaseHistory();
 		assertThat(user.getLottoCount()).isEqualTo(lottoCount);
 		assertThat(purchaseHistory.getManualLottoCount()).isEqualTo(1);
 		assertThat(purchaseHistory.getAutoLottoCount()).isEqualTo(autoLottoCount);

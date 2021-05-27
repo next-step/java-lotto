@@ -5,24 +5,33 @@ import lotto.utils.LottoGenerator;
 public class LottoUser {
 
 	private Lottos lottos;
+	private LottoPurchaseHistory lottoPurchaseHistory;
 
 	public LottoUser() {
 		this.lottos = new Lottos();
+		this.lottoPurchaseHistory = new LottoPurchaseHistory();
 	}
 
-	public LottoPurchaseHistory buyLottos(Lottos manualLottos, int money) {
+	public void buyLottos(Lottos manualLottos, int money) {
 		this.lottos.addAllLottos(manualLottos);
+		this.lottoPurchaseHistory.setManualLottos(manualLottos);
 		int autoLottoCount = getAutoLottoCount(money, manualLottos.getSize());
 		buyGenerateLottos(autoLottoCount);
-		return new LottoPurchaseHistory(new LottoCount(autoLottoCount), new LottoCount(manualLottos.getSize()));
 	}
 
 	private void buyGenerateLottos(int autoLottoCount) {
+		Lottos autoLottos = new Lottos();
 		int count = 0;
 		while (count < autoLottoCount) {
-			this.lottos.addLotto(LottoGenerator.generate());
+			autoLottos.addLotto(LottoGenerator.generate());
 			count++;
 		}
+		this.lottoPurchaseHistory.setAutoLottos(autoLottos);
+		this.lottos.addAllLottos(autoLottos);
+	}
+
+	public LottoPurchaseHistory getLottoPurchaseHistory() {
+		return this.lottoPurchaseHistory;
 	}
 
 	private int getAutoLottoCount(int money, int manualLottoCount) {
