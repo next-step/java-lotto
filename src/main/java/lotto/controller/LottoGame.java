@@ -38,7 +38,7 @@ public class LottoGame {
 	private static void purchaseLottos() {
 		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
 		List<String> manualStringLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
-		Lottos manualLottos = LottoUtils.getStringListToLottos(manualStringLottos);
+		Lottos manualLottos = LottoUtils.mapStringListToLottos(new Lottos(), manualStringLottos);
 		user.buyLottos(manualLottos, purchasePrice);
 		LottoPurchaseHistory lottoPurchaseHistory = user.getLottoPurchaseHistory();
 		LottoOutputView.printPurchaseLottoResult(lottoPurchaseHistory.getAutoLottoCount(),

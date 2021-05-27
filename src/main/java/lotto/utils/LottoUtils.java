@@ -16,8 +16,7 @@ public class LottoUtils {
 
 	}
 
-	public static Lottos getStringListToLottos(List<String> lottosStringList) {
-		Lottos lottos = new Lottos();
+	public static Lottos mapStringListToLottos(Lottos lottos, List<String> lottosStringList) {
 		lottosStringList.forEach(lottoString -> lottos.addLotto(getStringToLotto(lottoString)));
 		return lottos;
 	}

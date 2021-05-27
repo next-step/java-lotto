@@ -31,7 +31,7 @@ public class LottoUtilsTest {
 		lottoStringList.add("1, 2, 3, 4, 5, 6");
 		lottoStringList.add("4, 10, 25, 40, 45, 1");
 		lottoStringList.add("23, 4 ,2, 30, 1, 5");
-		Lottos lottos =LottoUtils.getStringListToLottos(lottoStringList);
+		Lottos lottos = LottoUtils.mapStringListToLottos(new Lottos(), lottoStringList);
 		assertThat(lottos.getSize()).isEqualTo(3);
 	}
 }
