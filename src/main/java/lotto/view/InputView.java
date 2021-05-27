@@ -55,9 +55,9 @@ public class InputView {
         return new WinInquiryRequest(purchaseNumbers, inputLottoNumbers(SCANNER.nextLine()), inputBonusNumber());
     }
 
-    private static LottoNumbersDto inputLottoNumbers(String winNumbers) {
-        List<Integer> winNumberList = Arrays.stream(winNumbers.split(NUMBER_DELIMITER))
-                .map(winNumber -> Integer.valueOf(winNumber.trim()))
+    private static LottoNumbersDto inputLottoNumbers(String inputNumbers) {
+        List<Integer> winNumberList = Arrays.stream(inputNumbers.split(NUMBER_DELIMITER))
+                .map(inputNumber -> Integer.valueOf(inputNumber.trim()))
                 .collect(Collectors.toList());
         return new LottoNumbersDto(winNumberList);
     }
