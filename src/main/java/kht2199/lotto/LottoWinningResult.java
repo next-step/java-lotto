@@ -1,68 +1,72 @@
 package kht2199.lotto;
 
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
+import kht2199.lotto.exception.lotto.LottoNumberLengthException;
 
 /**
+ * TODO matchedPrizeMap 일급컬렉션으로 변경
  *
  * @author heetaek.kim
  */
 public class LottoWinningResult {
 
-	private final Lotto winningNumber;
-
 	/**
 	 * 일치갯수, 일치갯수에 대한 상금의 총합을 기록한다.
 	 */
-	private final Map<Integer, Integer> matchedPrizeMap;
+	private final Map<Rank, Integer> matchedPrizeMap;
 
-	private LottoRule rule;
+	private Lotto winningNumber;
 
-	public LottoWinningResult(Lotto winningNumber) {
-		this.winningNumber = winningNumber;
-		this.matchedPrizeMap = new HashMap<>();
+	private int bonusNumber;
+
+	public LottoWinningResult() {
+		this.matchedPrizeMap = new EnumMap<>(Rank.class);
 		initMatchedPrizeMap();
 	}
 
 	/**
 	 * 당첨 갯수, 당첨 금액 설정
 	 */
-	public void updateLottoWinningNumbers(LottoRule rule, LottoList list) {
-		this.rule = rule;
+	public void updateLottoWinningNumbers(LottoList list) {
+		// TODO RuntimeException을 DomainException으로 변경.
+		if (winningNumber == null) {
+			throw new RuntimeException("당첨번호가 설정되어 있지 않습니다.");
+		}
+		if (bonusNumber == 0) {
+			throw new RuntimeException("보너스 번호가 설정되어 있지 않습니다.");
+		}
 		initMatchedPrizeMap();
 		for (Lotto lotto : list.getList()) {
-			int matched = calculateMatched(winningNumber, lotto);
-			Integer totalPrize = matchedPrizeMap.get(matched);
-			matchedPrizeMap.put(matched, totalPrize + rule.prize(matched));
+			Rank rank = calculateMatched(lotto);
+			Integer totalPrize = matchedPrizeMap.get(rank);
+			matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
 		}
 	}
 
 	/**
-	 * @param winningNumber 당첨번호.
 	 * @param lotto 비교대상 로또.
 	 * @return 결과정보.
 	 */
-	protected int calculateMatched(Lotto winningNumber, Lotto lotto) {
-		List<Integer> winningNumbers = winningNumber.getNumbers();
+	protected Rank calculateMatched(Lotto lotto) {
 		List<Integer> numbers = lotto.getNumbers();
 		int matched = 0;
 		for (Integer number : numbers) {
-			matched += winningNumbers.contains(number) ? 1 : 0;
+			matched += winningNumber.contains(number) ? 1 : 0;
 		}
-		return matched;
-	}
-
-	public int countMatched(int matched) {
-		Integer totalMatchedPrize = matchedPrizeMap.get(matched);
-		int prize = rule.prize(matched);
-		if (prize == 0) {
-			return 0;
+		if (matched == 5 && numbers.contains(bonusNumber)) {
+			return Rank.SECOND;
 		}
-		return totalMatchedPrize / prize;
+		return Rank.valueOf(matched, false);
 	}
 
 	public int totalPrize() {
@@ -83,9 +87,31 @@ public class LottoWinningResult {
 		return (float) totalPrize() / assets;
 	}
 
+	public void setBonusNumber(int bonusNumber)
+			throws LottoBonusNumberDuplicatedException, LottoWinningNumberNotInitiatedException {
+		if (winningNumber == null) {
+			throw new LottoWinningNumberNotInitiatedException();
+		}
+		if (winningNumber.contains(bonusNumber)) {
+			throw new LottoBonusNumberDuplicatedException();
+		}
+		this.bonusNumber = bonusNumber;
+	}
+
+	public void setWinningNumbers(List<Integer> numbers) throws LottoNumberException {
+		if (numbers == null || numbers.size() != 6) {
+			throw new LottoNumberLengthException();
+		}
+		this.winningNumber = new Lotto(numbers);
+	}
+
+	public Map<Rank, Integer> getMatchedPrizeMap() {
+		return Collections.unmodifiableMap(matchedPrizeMap);
+	}
+
 	private void initMatchedPrizeMap() {
-		for (int i = 0; i <= 6; i++) {
-			matchedPrizeMap.put(i, 0);
+		for (Rank value : Rank.values()) {
+			matchedPrizeMap.put(value, 0);
 		}
 	}
 }

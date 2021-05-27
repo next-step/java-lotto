@@ -2,13 +2,14 @@ package kht2199.lotto.view;
 
 import static java.lang.System.*;
 
-import java.util.List;
+import java.util.Map;
 
-import kht2199.lotto.data.Lotto;
-import kht2199.lotto.data.LottoList;
-import kht2199.lotto.LottoRule;
+import kht2199.Rank;
 import kht2199.lotto.LottoWinningResult;
+import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.DomainException;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
@@ -32,34 +33,52 @@ public class ResultView {
 	}
 
 	public void printLottoList(LottoList lottoList) {
-		List<Lotto> list = lottoList.getList();
-		for (Lotto lotto : list) {
-			print(lotto.toString());
-		}
+		print(lottoList.toString());
 	}
 
-	public void printMessageForWinningNumbers() {
+	public void printAskWinningNumbers() {
 		print("지난 주 당첨 번호를 입력해 주세요.");
 	}
 
-	public void printResultStatistics(LottoRule rule, LottoWinningResult lottoWinningResult, int assetsUsed) {
+	public void printResultStatistics(LottoWinningResult result, int assetsUsed) {
 		print("당첨 통계");
 		print("---------");
-		for (int i = 3; i <= 6; i++) {
-			print(String.format("%d개 일치 (%d원)- %d개", i, rule.prize(i), lottoWinningResult.countMatched(i)));
+		Map<Rank, Integer> matchedPrizeMap = result.getMatchedPrizeMap();
+		matchedPrizeMap.forEach(this::printResultOfMatched);
+		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
+	}
+
+	/**
+	 * 5등의 경우, 보너스 볼 일치여부까지 출력한다.
+	 */
+	protected void printResultOfMatched(Rank rank, int prize) {
+		String format = "%d개 일치 (%d원)- %d개";
+		int countOfMatched = rank.getWinningMoney() == 0 ? 0 : prize / rank.getWinningMoney();
+		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
+		if (rank == Rank.SECOND) {
+			format = "5개 일치, 보너스 볼 일치(%d) - %d개";
+			print(String.format(format, Rank.SECOND.getWinningMoney(), countOfMatched));
 		}
-		print(String.format("총 수익률은 %1f입니다.", lottoWinningResult.rate(assetsUsed)));
 	}
 
 	public void printException(DomainException e) {
 		if (e instanceof InvalidInputException) {
 			print(inputErrorToMessage((InvalidInputException)e));
 		}
+
+		if (e instanceof LottoBonusNumberDuplicatedException) {
+			print("로또 번호가 중복입니다.");
+		}
+
+		if (e instanceof LottoListEmptyException) {
+			print("구매가능한 로또가 없습니다.");
+		}
 		// TODO print for domain exceptions.
 	}
 
 	public void printException(NumberFormatException e) {
-		print(e.getMessage());
+		e.printStackTrace();
+		print("입력값이 숫자형이 아닙니다.");
 	}
 
 	private String inputErrorToMessage(InvalidInputException exception) {
@@ -83,4 +102,7 @@ public class ResultView {
 		out.println(message);
 	}
 
+	public void printAskBonusNumber() {
+		print("보너스 볼을 입력해 주세요.");
+	}
 }

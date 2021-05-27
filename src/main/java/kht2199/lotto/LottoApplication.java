@@ -1,5 +1,6 @@
 package kht2199.lotto;
 
+import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.view.InputView;
@@ -24,7 +25,7 @@ public class LottoApplication {
 	private static void start(RandomLotto randomLotto, ResultView resultView) {
 		try {
 			randomLotto.start();
-		} catch (LottoListNotEmptyException | AssetsNotEnoughException e) {
+		} catch (LottoListNotEmptyException | AssetsNotEnoughException | LottoListEmptyException e) {
 			resultView.printException(e);
 			start(randomLotto, resultView);
 		}
