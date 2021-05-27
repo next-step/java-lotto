@@ -17,11 +17,9 @@ public class ResultView {
     }
 
     public static void showLotto(Lotto lotto) {
-        List<LottoNumber> copy = lotto.shuffledLottoList();
-
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (LottoNumber lottoNumber : copy) {
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             sb.append(lottoNumber);
             sb.append(", ");
         }
