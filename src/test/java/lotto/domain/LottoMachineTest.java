@@ -2,6 +2,10 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,15 +19,32 @@ import lotto.utils.LottoNumbersUtil;
 public class LottoMachineTest {
 
     @ParameterizedTest
+    @CsvSource(value = {"0:1,2,3,4,5,6", "1:2,3,4,5,6,7", "2:10,11,12,13,14,15", "9:10,11,12,13,14,15"}, delimiter = ':')
+    @DisplayName("수동 로또번호 입력 시 테스트")
+    void manualLotto(int index, String textResultLottoNumbers) {
+        // given
+        List<LottoNumbers> manualNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7").stream()
+                .map(LottoNumbersUtil::toLottoNumbers)
+                .collect(Collectors.toList());
+        LottoMachine lottoMachine = new LottoMachine(10000, manualNumbers);
+
+        // when
+        Lottos lottos = lottoMachine.createLottos(createNumbersGenerator("10,11,12,13,14,15"));
+
+        // then
+        assertThat(lottos.getLottoNumbers(index).getCountOfMatchingNumber(LottoNumbersUtil.toLottoNumbers(textResultLottoNumbers))).isEqualTo(6);
+    }
+
+    @ParameterizedTest
     @CsvSource(value = {"1000:1", "10000:10", "15000:15", "3000:3"}, delimiter = ':')
     @DisplayName("입력한 금액만큼의 로또 개수 생성 확인")
     void create(int price, int lottoCount) {
         // given
         NumbersGenerator numbersGenerator = createNumbersGenerator("1,2,3,4,5,7");
-        LottoMachine lottoMachine = new LottoMachine(new Price(price), numbersGenerator);
+        LottoMachine lottoMachine = new LottoMachine(price);
 
         // when
-        Lottos lottos = lottoMachine.createLottos();
+        Lottos lottos = lottoMachine.createLottos(numbersGenerator);
 
         // then
         assertThat(lottos.getSize()).isEqualTo(lottoCount);
@@ -32,6 +53,4 @@ public class LottoMachineTest {
     private NumbersGenerator createNumbersGenerator(String textNumbers) {
         return () -> LottoNumbersUtil.toLottoNumbers(textNumbers);
     }
-
-
 }

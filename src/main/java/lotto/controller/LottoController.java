@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -24,9 +26,11 @@ public class LottoController {
 
     public void playLotto() {
         Price price = new Price(this.inputView.getBuyPrice());
-        LottoMachine lottoMachine = new LottoMachine(price, new LottoNumbersGenerator());
-        this.lottos = lottoMachine.createLottos();
-        this.resultView.printLottosNumber(this.lottos);
+        int manualLottoCount = this.inputView.getManualLottoCount();
+        List<LottoNumbers> manualLottoNumbers = this.inputView.getManualLottoNumbers(manualLottoCount);
+        LottoMachine lottoMachine = new LottoMachine(price, manualLottoNumbers);
+        this.lottos = lottoMachine.createLottos(new LottoNumbersGenerator());
+        this.resultView.printLottosNumber(this.lottos, manualLottoCount);
     }
 
     public void showResult() {
@@ -34,7 +38,6 @@ public class LottoController {
         LottoNumber bonusNumber = new LottoNumber(this.inputView.getBonusNumber());
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningNumbers);
-        lottoStatistics.initStatistics();
         this.resultView.printStatisticsResult(lottoStatistics);
         this.resultView.printRateOfReturnResult(lottoStatistics);
     }

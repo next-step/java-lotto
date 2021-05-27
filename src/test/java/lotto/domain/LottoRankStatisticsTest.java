@@ -36,7 +36,6 @@ public class LottoRankStatisticsTest {
         LottoRankStatistics statistics = new LottoRankStatistics(new Lottos(lottos), winningNumbers);
 
         // when
-        statistics.initStatistics();
         String resultRateOfReturn = statistics.calculateRateOfReturn();
 
         // then
@@ -50,13 +49,12 @@ public class LottoRankStatisticsTest {
     void lottoCount_by_rank(int lottoCount, String textWinningNumber, int bonusNumber, LottoRank rank) {
         // given
         NumbersGenerator generator = createLottoNumbers("1,2,3,4,5,6");
-        LottoMachine machine = new LottoMachine(new Price(lottoCount * 1000), generator);
+        LottoMachine machine = new LottoMachine(new Price(lottoCount * 1000));
         WinningNumbers winningNumbers = new WinningNumbers(LottoNumbersUtil.toLottoNumbers(textWinningNumber),
                 new LottoNumber(bonusNumber));
-        LottoRankStatistics statistics = new LottoRankStatistics(machine.createLottos(), winningNumbers);
+        LottoRankStatistics statistics = new LottoRankStatistics(machine.createLottos(generator), winningNumbers);
 
         // when
-        statistics.initStatistics();
         int resultLottoCount = statistics.getLottoCountByRank(rank);
 
         // then
