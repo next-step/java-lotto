@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class PurchaseAmount {
 
-	public static final int MINIMUM = 1_000;
+	public static final int AMOUNT_PER_UNIT = 1_000;
 	public static final String MESSAGE_INVALID_MINIMUM_AMOUNT = "로또를 구입하려면 최소 %,d원 이상 있어야 합니다.";
 	public static final String MESSAGE_INVALID_AMOUNT = "구입금액은 숫자(정수)만 입력가능합니다.";
 
@@ -22,7 +22,7 @@ public class PurchaseAmount {
 	}
 
 	public int findNumberOfAvailablePurchases() {
-		return this.purchaseAmount / MINIMUM;
+		return this.purchaseAmount / AMOUNT_PER_UNIT;
 	}
 
 	private void validationNumber(String purchaseAmount) {
@@ -36,9 +36,13 @@ public class PurchaseAmount {
 	}
 
 	private void validationMinimum(int purchaseAmount) {
-		if (purchaseAmount < MINIMUM) {
-			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MINIMUM_AMOUNT, MINIMUM));
+		if (purchaseAmount < AMOUNT_PER_UNIT) {
+			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MINIMUM_AMOUNT, AMOUNT_PER_UNIT));
 		}
+	}
+
+	public boolean isGreaterThen(int purchaseAmount) {
+		return this.purchaseAmount >= purchaseAmount;
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class LottoResults {
 	}
 
 	private double totalPurchaseAmount() {
-		return findPurchaseCount() * PurchaseAmount.MINIMUM;
+		return findPurchaseCount() * PurchaseAmount.AMOUNT_PER_UNIT;
 	}
 
 	private int findPurchaseCount() {
