@@ -41,8 +41,7 @@ public class SetTest {
 	@ParameterizedTest(name = "Case : {argumentsWithNames}")
 	@CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
 	@DisplayName("요구사항 3 : contains() 메소드를 활용한 값이 포함 결과값 확인")
-	void containsWithResult(String input, String expected) {
-		String result = numbers.contains(Integer.parseInt(input)) ? "true" : "false";
-		assertThat(result).isEqualTo(expected);
+	void containsWithResult(int input, boolean expected) {
+		assertThat(numbers.contains(input)).isEqualTo(expected);
 	}
 }
