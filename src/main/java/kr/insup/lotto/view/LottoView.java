@@ -1,6 +1,7 @@
 package kr.insup.lotto.view;
 
 import kr.insup.lotto.domain.*;
+import kr.insup.lotto.utils.LottoNumberParser;
 
 import java.util.*;
 
@@ -20,7 +21,33 @@ public class LottoView {
         System.out.println(attempt + "개를 구매했습니다.");
     }
 
-    public static void showLottoList(Lottos lottos) {
+    public static Integer getManualLottoCount() {
+        System.out.println("수동으로 구매할 개수를 입력해주세요.");
+
+        String strManualCount = scanner.nextLine();
+
+        return Integer.valueOf(strManualCount);
+    }
+
+    public static List<Lotto> getManualLotto(int manualCount) {
+
+        System.out.println("수동으로 구매할 번호를 입력해주세요");
+
+        List<Lotto> manualLotto = new ArrayList<>();
+
+        for (int i = 0; i < manualCount; i++) {
+            System.out.println((i + 1) + "번째 번호 : ");
+            String strManualLotto = scanner.nextLine();
+            List<Integer> lottoNumber = LottoNumberParser.parseLottoNumberToList(strManualLotto);
+            manualLotto.add(new Lotto(lottoNumber));
+        }
+
+        return manualLotto;
+    }
+
+    public static void showLottoList(Lottos lottos, int autoCount, int manualCount) {
+        System.out.println("자동으로 " + autoCount + "장, 수동으로 " + manualCount + "장 구입하였습니다");
+
         for (Lotto lotto : lottos.lottoList()) {
             List<String> lottoList = convertNumbersToList(lotto.numbers());
             String numbers = String.join(",", lottoList);
@@ -81,5 +108,13 @@ public class LottoView {
 
     public static void printWrongPriceFormat() {
         System.out.println("숫자가 아닌 금액을 입력하였습니다. 다시 입력해주세요!");
+    }
+
+    public static void printWrongManualNumberFormat() {
+        System.out.println("숫자가 아닌 번호를 입력하였습니다. 다시 입력해주세요!");
+    }
+
+    public static void printWrongManualCount() {
+        System.out.println("수동 게임의 숫자가 전체 게임 수보다 많습니다. 다시 입력해주세요!");
     }
 }

@@ -1,6 +1,7 @@
 package kr.insup.lotto.domain;
 
 import kr.insup.lotto.utils.LottoAutoGenerator;
+import kr.insup.lotto.utils.LottoManualGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +9,20 @@ import java.util.List;
 public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
-    private final int attempt;
+    private Integer attempt;
 
-    public Lottos(int attempt) {
+    public Lottos(Integer attempt) {
         this.attempt = attempt;
 
         for (int i = 0; i < attempt; i++) {
             lottos.add(new Lotto(new LottoAutoGenerator()));
         }
+    }
+
+    public Lottos(int autoAttempt, List<Lotto> manualLottoNumbers) {
+        this(autoAttempt);
+
+        lottos.addAll(manualLottoNumbers);
     }
 
     public int size() {
