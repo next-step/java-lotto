@@ -20,7 +20,6 @@ public class Lottos {
 		this.lottos.add(lotto);
 	}
 
-	// todo : test
 	public void addAllLottos(Lottos lottos) {
 		this.lottos.addAll(lottos.lottos);
 	}
