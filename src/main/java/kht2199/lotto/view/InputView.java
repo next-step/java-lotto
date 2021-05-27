@@ -49,7 +49,7 @@ public class InputView {
 	public void acceptBonusNumber(LottoWinningResult winningNumbers) {
 		try {
 			String bonusNumberString = in.nextLine();
-			validationLottoResultString(bonusNumberString);
+			validateLottoNumber(bonusNumberString);
 			winningNumbers.setBonusNumber(Integer.parseInt(bonusNumberString));
 		} catch (InvalidInputException | LottoBonusNumberDuplicatedException | LottoWinningNumberNotInitiatedException e) {
 			output.printException(e);
@@ -80,7 +80,7 @@ public class InputView {
 			throw new InvalidInputException(InvalidInputError.LENGTH);
 		}
 		try {
-			validateLottoNumber(split);
+			validateLottoNumbers(split);
 		} catch (NumberFormatException e) {
 			throw new InvalidInputException(InvalidInputError.PARSING);
 		}
@@ -89,11 +89,16 @@ public class InputView {
 	/**
 	 * 번호 유효성 체크
 	 */
-	protected void validateLottoNumber(String[] split)
+	protected void validateLottoNumbers(String[] split)
 			throws NumberFormatException, InvalidInputException {
 		for (String s : split) {
-			validateRange(Integer.parseInt(s));
+			validateLottoNumber(s);
 		}
+	}
+
+	protected void validateLottoNumber(String number)
+			throws NumberFormatException, InvalidInputException {
+		validateRange(Integer.parseInt(number));
 	}
 
 	private void validateRange(int parseInt) throws InvalidInputException {

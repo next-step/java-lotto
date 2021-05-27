@@ -77,7 +77,8 @@ public class ResultView {
 	}
 
 	public void printException(NumberFormatException e) {
-		print(e.getMessage());
+		e.printStackTrace();
+		print("입력값이 숫자형이 아닙니다.");
 	}
 
 	private String inputErrorToMessage(InvalidInputException exception) {
