@@ -11,6 +11,7 @@ public class RankingConditionTest {
 	public void when_match_count_is_under_5_then_only_match_count_is_matter_for_calculating_ranking() {
 		assertThat(new RankingCondition(3, true)).isEqualTo(new RankingCondition(3, false));
 		assertThat(Ranking.valueOf(new RankingCondition(3, true))).isEqualTo(Ranking.RANKING_5);
+		assertThat(Ranking.valueOf(new RankingCondition(3, false))).isEqualTo(Ranking.RANKING_5);
 	}
 
 	@Test

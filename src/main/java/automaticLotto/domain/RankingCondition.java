@@ -21,13 +21,13 @@ public class RankingCondition {
 		this.matchedCount = matchedCount;
 		this.isBonusNumberContained = isBonusNumberContained;
 
+		validateMatchedCount(matchedCount);
+	}
+
+	private void validateMatchedCount(int matchedCount) {
 		if (matchedCount < Ranking.getMinimumMatchedCount()
 			|| matchedCount > Ranking.getMaximumMatchedCount()) {
 			throw new RuntimeException("match count must be within ranking range(0 - 6)");
-		}
-
-		if (matchedCount != 5) {
-			this.isBonusNumberContained = false;
 		}
 	}
 
@@ -49,6 +49,10 @@ public class RankingCondition {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(matchedCount, isBonusNumberContained);
+		if (matchedCount == BONUS_RELATED_NUMBER) {
+			return Objects.hash(matchedCount, isBonusNumberContained);
+		}
+
+		return Objects.hash(matchedCount);
 	}
 }
