@@ -13,4 +13,8 @@ public class LuckyNumbers {
     public int count() {
         return luckyNumber.count();
     }
+
+    public int matchCount(Lotto lotto) {
+        return luckyNumber.matchCount(lotto);
+    }
 }

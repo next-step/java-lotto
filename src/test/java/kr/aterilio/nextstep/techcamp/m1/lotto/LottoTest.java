@@ -1,5 +1,6 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -93,5 +94,20 @@ public class LottoTest {
             new LuckyNumbers(inputLuckyNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복");
+    }
+
+    @DisplayName("당첨 번호와 주어진 로또의 일치하는 갯수를 판단한다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:1,2,3,4,5,6:6",
+            "1,2,3,4,5,6:1,2,3,4,5,7:5",
+            "1,2,3,4,5,6:1,2,3,4,7,8:4",
+            "1,2,3,4,5,6:1,2,3,7,8,9:3",
+            "1,2,3,4,5,6:1,2,7,8,9,10:2",
+    }, delimiter = ':')
+    public void judgeMatchCount(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
+        Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
+        assertThat(luckyNumbers.matchCount(lotto)).isEqualTo(expected);
     }
 }

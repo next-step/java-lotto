@@ -24,6 +24,12 @@ public class Lotto {
         validateDuplicate();
     }
 
+    public int matchCount(Lotto that) {
+        List<Integer> matches = new ArrayList<>(this.lottoBalls);
+        matches.retainAll(that.lottoBalls);
+        return matches.size();
+    }
+
     private void pick(Integer[] lottoNumbers) {
         validateElementCount(lottoNumbers);
         for (int i = lottoNumbers.length; i > 0; --i) {
