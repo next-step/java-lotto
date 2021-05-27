@@ -1,6 +1,6 @@
 package calculator.util;
 
-import calculator.domain.CalculatorExpression;
+import calculator.dto.CalculatorExpression;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
