@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 
-    private static final String EMPTY_STRING = "";
-
-    private static final String REGEX_NUMERIC = "^[0-9]+$";
     private static final int INDEX_NOT_FOUND = -1;
     private static final int IDX_GROUP_1 = 1;
+
+    private static final String EMPTY_STRING = "";
+    private static final String REGEX_NUMERIC = "^[0-9-]+$"; // 음수도 숫자이므로 정규식에 - 문자 추가
 
     public static boolean isEmpty(String data) {
         return data == null || EMPTY_STRING.equals(data.trim());
