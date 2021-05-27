@@ -5,17 +5,17 @@ import java.util.List;
 
 public class ManualLottoNumbers {
 
-    private final List<LottoNumberText> lottoNumberTextList;
+	private final List<LottoNumberText> lottoNumberTextList;
 
-    public ManualLottoNumbers(List<LottoNumberText> lottoNumberTextList) {
-        this.lottoNumberTextList = lottoNumberTextList;
-    }
+	public ManualLottoNumbers(List<LottoNumberText> lottoNumberTextList) {
+		this.lottoNumberTextList = lottoNumberTextList;
+	}
 
-    public int count() {
-        return lottoNumberTextList.size();
-    }
+	public int count() {
+		return lottoNumberTextList.size();
+	}
 
-    public List<LottoNumberText> toList() {
-        return Collections.unmodifiableList(lottoNumberTextList);
-    }
+	public List<LottoNumberText> toList() {
+		return Collections.unmodifiableList(lottoNumberTextList);
+	}
 }

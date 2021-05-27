@@ -5,22 +5,22 @@ import static lotto.util.ValidationUtils.*;
 
 public class LottoNumberText {
 
-    private final String text;
+	private final String text;
 
-    public LottoNumberText(String numberText) {
-        validate(numberText);
+	public LottoNumberText(String numberText) {
+		validate(numberText);
 
-        text = numberText;
-    }
+		text = numberText;
+	}
 
-    private void validate(String numberText) {
-        if (!validateNumbersPattern(numberText)) {
-            throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE,
-                    LOTTO_NUMBER_COUNT, DELIMITER));
-        }
-    }
+	private void validate(String numberText) {
+		if (!validateNumbersPattern(numberText)) {
+			throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE,
+				LOTTO_NUMBER_COUNT, DELIMITER));
+		}
+	}
 
-    public String text() {
-        return text;
-    }
+	public String text() {
+		return text;
+	}
 }

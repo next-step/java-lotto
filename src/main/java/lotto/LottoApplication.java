@@ -4,6 +4,7 @@ import lotto.domain.LottoBuyingRequest;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberText;
 import lotto.domain.LottoReport;
+import lotto.domain.LottoStore;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketConverter;
 import lotto.domain.ManualLottoCount;
@@ -19,7 +20,6 @@ public class LottoApplication {
 	public static final int ABNORMAL_SIGNAL = -1;
 	public static final String EXCEPTION_OCCURRED_MESSAGE = "Exception occurred. message: %s";
 
-	private final LottoController lottoController = new LottoController();
 	private final LottoView lottoView = new LottoView();
 	private final UserInterface userInterface;
 
@@ -66,7 +66,8 @@ public class LottoApplication {
 
 	private UserLotto buyLotto(Money money, ManualLottoNumbers manualLottoNumbers) {
 		LottoBuyingRequest lottoBuyingRequest = new LottoBuyingRequest(money, manualLottoNumbers);
-		UserLotto userLotto = lottoController.buyLotto(lottoBuyingRequest);
+		LottoStore lottoStore = new LottoStore();
+		UserLotto userLotto = lottoStore.buy(lottoBuyingRequest);
 
 		sendMessage(lottoView.userLottoCountView(lottoBuyingRequest));
 		sendMessage(lottoView.userLottoNumberListView(userLotto));
@@ -78,8 +79,8 @@ public class LottoApplication {
 		sendMessage(lottoView.inputManualLottoNumberView());
 
 		return new ManualLottoNumbers(new FillList<LottoNumberText>()
-				.apply(manualLottoCount.count(),
-						() -> new LottoNumberText(userInterface.receive())));
+			.apply(manualLottoCount.count(),
+				() -> new LottoNumberText(userInterface.receive())));
 	}
 
 	private ManualLottoCount receiveManualLottoCount(Money money) {
