@@ -9,7 +9,10 @@ public class LotteryNumbers {
 
     public LotteryNumbers(int...numbers) {
         this.numbers = new ArrayList<>();
+        fillNumbers(numbers);
+    }
 
+    private void fillNumbers(int[] numbers) {
         for (int number : numbers) {
             this.numbers.add(number);
         }
