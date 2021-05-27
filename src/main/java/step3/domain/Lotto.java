@@ -2,7 +2,9 @@ package step3.domain;
 
 import step3.exception.DuplicatedNumberException;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -12,9 +14,9 @@ public class Lotto {
 
     public Lotto(TreeSet<Integer> numbers) {
         checkDuplicate(numbers);
-
-        this.lottoNumbers = new TreeSet<>(Comparator.comparing(LottoNumber::valueOf));
-        this.lottoNumbers.addAll(numbers.stream().map(LottoNumber::new).collect(toCollection(TreeSet::new)));
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(toCollection(TreeSet::new));
     }
 
     private void checkDuplicate(TreeSet<Integer> numbers) {
@@ -31,12 +33,6 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-
-    public List<LottoNumber> shuffledLottoList() {
-        List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
-        Collections.shuffle(copy);
-        return copy;
-    }
 
     @Override
     public boolean equals(Object o) {
