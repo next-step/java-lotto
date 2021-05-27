@@ -3,22 +3,19 @@ package lotto;
 import exception.LottoException;
 import ui.InputView;
 import ui.ResultView;
-import utils.*;
 
+import java.util.List;
 import java.math.BigDecimal;
-import java.util.function.Predicate;
+import java.util.ArrayList;
 
 import static type.LottoExceptionType.SYSTEM_ERROR;
 
 public final class LottoManager {
-	private static final int LOTTO_MIN_NUMBER = 1;
-	private static final int LOTTO_MAX_NUMBER = 45;
 
 	private final LottoGenerator lottoGenerator;
 
 	public LottoManager() {
-		lottoGenerator = new LottoGenerator(new LottoNumbersFactory(),
-											DrawNumber.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
+		lottoGenerator = new LottoGenerator(new LottoNumbersFactory());
 	}
 
 	public void run() {
@@ -51,14 +48,15 @@ public final class LottoManager {
 			return;
 		}
 		InputView.printUserLotto();
+		List<String> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < lottoCount.userCount(); ++i) {
-			LottoNumbers lottoNumbers = makeLottoNumbers(InputView.inputUserLottoNumber());
-			this.lottoGenerator.add(lottoNumbers);
+			lottoNumbers.add(InputView.inputUserLottoNumber());
 		}
+		this.lottoGenerator.generateManualLotto(lottoNumbers);
 	}
 
 	private void createAutoLotto(final LottoCount lottoCount) {
-		this.lottoGenerator.autoGenerate(lottoCount);
+		this.lottoGenerator.generateAutoLotto(lottoCount);
 	}
 
 	private LottoNumber bonusLottoNumber() {
@@ -74,21 +72,7 @@ public final class LottoManager {
 
 	private LottoNumbers inputWinningNumber() {
 		String inputText = InputView.inputWinningNumber();
-		return makeLottoNumbers(inputText);
+		return LottoGenerator.makeLottoNumbers(inputText);
 	}
 
-	private LottoNumbers makeLottoNumbers(final String text) {
-		SeparatedText separatedText = SeparatedText.findSeparator(text);
-		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
-		return new LottoNumbers(NumberUtils.parseInts(texts, lottoNumberCondition()));
-	}
-
-	private Predicate<Integer> lottoNumberCondition() {
-		return num -> {
-			if (num < LOTTO_MIN_NUMBER || num > LOTTO_MAX_NUMBER) {
-				return false;
-			}
-			return true;
-		};
-	}
 }

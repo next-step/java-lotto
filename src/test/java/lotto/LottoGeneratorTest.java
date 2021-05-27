@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import utils.DrawNumber;
 
 import java.util.Arrays;
 
@@ -17,7 +16,7 @@ class LottoGeneratorTest {
 
 	@BeforeEach
 	void setUp() {
-		lottoGenerator = new LottoGenerator(new LottoNumbersFactory(), DrawNumber.range(1, 45));
+		lottoGenerator = new LottoGenerator(new LottoNumbersFactory());
 	}
 
 
@@ -25,8 +24,8 @@ class LottoGeneratorTest {
 	@DisplayName("Client가 직접 생성한 Lotto를 추가하는 테스트")
 	void addTest(){
 		// when
-		lottoGenerator.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-		lottoGenerator.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)));
+		lottoGenerator.generateManualLotto(Arrays.asList("1,2,3,4,5,6",
+														 "1,2,3,4,5,7"));
 
 		// then
 		assertThat(lottoGenerator.size())
@@ -43,7 +42,7 @@ class LottoGeneratorTest {
 		final LottoCount lottoCount = new LottoCount(new LottoMoney(price), 0);
 
 		// when
-		lottoGenerator.autoGenerate(lottoCount);
+		lottoGenerator.generateAutoLotto(lottoCount);
 
 		assertThat(lottoGenerator.size())
 			.isEqualTo(expectedSize);
@@ -56,10 +55,10 @@ class LottoGeneratorTest {
 		final LottoCount lottoCount = new LottoCount(new LottoMoney(10000), 3);
 
 		// when
-		lottoGenerator.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-		lottoGenerator.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,7)));
-		lottoGenerator.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,8)));
-		lottoGenerator.autoGenerate(lottoCount);
+		lottoGenerator.generateManualLotto(Arrays.asList("1,2,3,4,5,6",
+														 "1,2,3,4,6,7",
+														 "1,2,3,6,7,8"));
+		lottoGenerator.generateAutoLotto(lottoCount);
 
 		// then
 		assertThat(lottoGenerator.size())
