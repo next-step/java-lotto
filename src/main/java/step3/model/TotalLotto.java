@@ -19,13 +19,14 @@ public class TotalLotto {
         this.totalLotto = totalLotto;
     }
 
-    public String getBenefit(LottoNumbers victoryNumber, Price price) {
+    public String getBenefit(LottoNumbers victoryNumber,
+            PurchaseInfo purchaseInfo) {
 
         Map<Rank, Long> lottoResult = groupByWinnerPrice(victoryNumber);
         BigDecimal result = sumResult(lottoResult);
 
         return result
-            .divide(new BigDecimal(price.value()), 2, RoundingMode.DOWN)
+            .divide(purchaseInfo.priceToBigDecimal(), 2, RoundingMode.DOWN)
             .toString();
     }
 

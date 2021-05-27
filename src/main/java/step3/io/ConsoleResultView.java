@@ -3,7 +3,7 @@ package step3.io;
 import java.util.Map;
 
 import step3.constant.Rank;
-import step3.model.Price;
+import step3.model.PurchaseInfo;
 import step3.model.TotalLotto;
 
 public class ConsoleResultView {
@@ -18,9 +18,10 @@ public class ConsoleResultView {
         System.out.println(message);
     }
 
-    public void buyCount(Price price) {
-        System.out.printf(BUY_TEXT, price.getBuyManualCountStream().count(),
-            price.getBuyAutoCountStream().count());
+    public void buyCount(PurchaseInfo purchaseInfo) {
+        System.out.printf(BUY_TEXT,
+            purchaseInfo.getBuyManualCountStream().count(),
+            purchaseInfo.getBuyAutoCountStream().count());
         System.out.println();
     }
 

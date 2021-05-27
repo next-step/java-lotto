@@ -31,17 +31,21 @@ public class TotalLottoTest {
     @DisplayName("로또 수익률 테스트")
     void getBenefitTest() {
         LottoNumbers victoryNumber = LottoNumbers.of("1, 2, 3, 7, 8, 9");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
-            .isEqualTo("142968.21");
+        assertThat(
+            totalLotto.getBenefit(victoryNumber, new PurchaseInfo(14000)))
+                .isEqualTo("142968.21");
         victoryNumber = LottoNumbers.of("11, 12, 13, 14, 15, 16");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
-            .isEqualTo("0.00");
+        assertThat(
+            totalLotto.getBenefit(victoryNumber, new PurchaseInfo(14000)))
+                .isEqualTo("0.00");
         victoryNumber = LottoNumbers.of("7, 10, 11, 12, 13, 14");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
-            .isEqualTo("0.35");
+        assertThat(
+            totalLotto.getBenefit(victoryNumber, new PurchaseInfo(14000)))
+                .isEqualTo("0.35");
         victoryNumber = LottoNumbers.of("1, 2, 3, 7, 8, 9", "10");
-        assertThat(totalLotto.getBenefit(victoryNumber, new Price(14000)))
-            .isEqualTo("145003.92");
+        assertThat(
+            totalLotto.getBenefit(victoryNumber, new PurchaseInfo(14000)))
+                .isEqualTo("145003.92");
     }
 
     @Test

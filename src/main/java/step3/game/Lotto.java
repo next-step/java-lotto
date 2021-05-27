@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import step3.io.ConsoleInputView;
 import step3.io.ConsoleResultView;
 import step3.model.LottoNumbers;
-import step3.model.Price;
+import step3.model.PurchaseInfo;
 import step3.model.RandomNumbersGenerator;
 import step3.model.TotalLotto;
 
@@ -16,7 +16,7 @@ public class Lotto {
     private ConsoleInputView inputView;
     private ConsoleResultView resultView;
     private TotalLotto totalLotto;
-    private Price price;
+    private PurchaseInfo purchaseInfo;
 
     public Lotto() {
         this.inputView = new ConsoleInputView();
@@ -32,7 +32,7 @@ public class Lotto {
         try {
             setPrice();
             totalLotto = new TotalLotto(getLottoNeberWithPrice());
-            resultView.buyCount(price);
+            resultView.buyCount(purchaseInfo);
             resultView.showTextStatus(totalLotto);
             resultView.showEmptyLine();
         } catch (IllegalArgumentException e) {
@@ -44,8 +44,8 @@ public class Lotto {
 
     private List<LottoNumbers> getLottoNeberWithPrice() {
         List<LottoNumbers> totalNumbers = new ArrayList<>();
-        totalNumbers.addAll(pickAutoLottoWithPrice(price));
-        totalNumbers.addAll(pickManulLottoWithPrice(price));
+        totalNumbers.addAll(pickAutoLottoWithPrice(purchaseInfo));
+        totalNumbers.addAll(pickManulLottoWithPrice(purchaseInfo));
 
         return totalNumbers;
     }
@@ -53,7 +53,7 @@ public class Lotto {
     private void setPrice() {
         int totalPrice = inputView.getPrice();
         int manualCount = inputView.getManulCount();
-        price = new Price(totalPrice, manualCount);
+        purchaseInfo = new PurchaseInfo(totalPrice, manualCount);
     }
 
     public void statistics() {
@@ -62,7 +62,8 @@ public class Lotto {
             resultView
                 .showWinning((totalLotto.groupByWinnerPrice(victoryNumber)));
             resultView
-                .showBenefit(totalLotto.getBenefit(victoryNumber, price));
+                .showBenefit(
+                    totalLotto.getBenefit(victoryNumber, purchaseInfo));
 
         } catch (IllegalArgumentException e) {
             resultView.showText(e.getMessage());
@@ -76,15 +77,16 @@ public class Lotto {
             inputView.getBonusNumber());
     }
 
-    protected List<LottoNumbers> pickAutoLottoWithPrice(Price price) {
-        return price.getBuyAutoCountStream()
+    protected List<LottoNumbers> pickAutoLottoWithPrice(
+            PurchaseInfo purchaseInfo) {
+        return purchaseInfo.getBuyAutoCountStream()
             .boxed()
             .map(number -> LottoNumbers
                 .of(RandomNumbersGenerator.createNumbers()))
             .collect(Collectors.toList());
     }
 
-    private List<LottoNumbers> pickManulLottoWithPrice(Price price) {
+    private List<LottoNumbers> pickManulLottoWithPrice(PurchaseInfo price) {
         inputView.getManulNumber();
         return price.getBuyManualCountStream()
             .boxed()

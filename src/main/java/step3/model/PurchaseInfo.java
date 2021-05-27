@@ -1,26 +1,29 @@
 package step3.model;
 
+import java.math.BigDecimal;
 import java.util.stream.IntStream;
 
-public final class Price {
+public final class PurchaseInfo {
     private static final int MIN_VALUE = 1000;
     private static final String NOT_AVALIABLE = "가격은 0보다 크며, 1000단위만 가능합니다.";
     private static final String NOT_AVALIABLE_MANUAL = "가격에 맞는 수동 구매 로또 수를 입력하세요";
 
     private Integer price;
-    private Integer autoCount;
     private Integer manualCount;
 
-    public Price(Integer price) {
+    public PurchaseInfo(Integer price) {
         this(price, 0);
     }
 
-    public Price(int price, int manual) {
-        validation(price, manual);
+    public PurchaseInfo(int price, int manualCount) {
+        validation(price, manualCount);
         this.price = price;
-        this.manualCount = manual;
-        this.autoCount = price / MIN_VALUE - manual;
+        this.manualCount = manualCount;
 
+    }
+
+    public int getAutoCount() {
+        return this.price / MIN_VALUE - this.manualCount;
     }
 
     public IntStream getBuyManualCountStream() {
@@ -28,11 +31,11 @@ public final class Price {
     }
 
     public IntStream getBuyAutoCountStream() {
-        return IntStream.range(0, autoCount);
+        return IntStream.range(0, getAutoCount());
     }
 
-    public int value() {
-        return price;
+    public BigDecimal priceToBigDecimal() {
+        return new BigDecimal(price);
     }
 
     private void validation(int price, int manual) {

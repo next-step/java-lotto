@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class PriceTest {
+public class PurchaseInfoTest {
 
     @ParameterizedTest
     @DisplayName("가격은 0보다 크며, 1000단위만 가능하다.")
@@ -16,7 +16,7 @@ public class PriceTest {
     void createTest(int price) {
         Exception exception = assertThrows(IllegalArgumentException.class,
             () -> {
-                new Price(price);
+                new PurchaseInfo(price);
             });
 
         assertThat(exception.getMessage())
@@ -26,8 +26,8 @@ public class PriceTest {
     @Test
     @DisplayName("가격에 대한 총 로또 구매 횟수 반환 테스트")
     void countTest() {
-        Price price = new Price(14000);
-        assertThat(price.getBuyAutoCountStream().count()).isEqualTo(14);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(14000);
+        assertThat(purchaseInfo.getBuyAutoCountStream().count()).isEqualTo(14);
 
     }
 
@@ -37,7 +37,7 @@ public class PriceTest {
 
         Exception exception = assertThrows(IllegalArgumentException.class,
             () -> {
-                new Price(14000, 100);
+                new PurchaseInfo(14000, 100);
             });
 
         assertThat(exception.getMessage())
