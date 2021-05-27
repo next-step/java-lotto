@@ -2,9 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
-public class LottoNumbersList {
+public class LottoNumbersList  {
     private List<LottoNumbers> lottoNumbersList;
 
     public LottoNumbersList() {
@@ -19,13 +20,8 @@ public class LottoNumbersList {
         return lottoNumbersList.size();
     }
 
-    public void foreach() {
-        lottoNumbersList.forEach(new Consumer<LottoNumbers>() {
-            @Override
-            public void accept(LottoNumbers lottoNumbers) {
-                System.out.println(lottoNumbers.getLottoNumbers());
-            }
-        });
+    public void foreach(Consumer<LottoNumbers> lamda) {
+        lottoNumbersList.forEach(lamda);
     }
 
     public ResultAll countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
