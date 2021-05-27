@@ -14,11 +14,11 @@ public class LottoController {
 
 	public void insertMoney () {
 		while (true) {
-			System.out.println(ASK_INSERTMONEY.getMessage());
+			System.out.println(ASK_INSERTMONEY);
 
 			final Integer lottoAmount = validMoney(scanner.nextLine().trim());
 
-			System.out.println(lottoAmount + PURCHASE_MENT_SURFIX.getMessage());
+			System.out.println(lottoAmount + PURCHASE_MENT_SURFIX);
 
 			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(lottoAmount);
 
@@ -27,19 +27,19 @@ public class LottoController {
 			}
 
 			System.out.println(); // 줄바꿈용
-			System.out.println(ASK_LOTTO_WINNER_NUMBER.getMessage());
+			System.out.println(ASK_LOTTO_WINNER_NUMBER);
 
 			final Integer[] winnerNumbers = 	validWinnerNumbers(scanner.nextLine().trim());
 
 			LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(winnerNumbers, lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
-			System.out.println(PRINT_ANALYSIS_TITLE.getMessage());
-			System.out.println(PRINT_LINE.getMessage());
-			System.out.printf(MATCH_3_NUMBERS.getMessage()+"%d개%n", analysis.match3());
-			System.out.printf(MATCH_4_NUMBERS.getMessage()+"%d개%n", analysis.match4());
-			System.out.printf(MATCH_5_NUMBERS.getMessage()+"%d개%n", analysis.match5());
-			System.out.printf(MATCH_6_NUMBERS.getMessage()+"%d개%n", analysis.match6());
+			System.out.println(PRINT_ANALYSIS_TITLE);
+			System.out.println(PRINT_LINE);
+			System.out.printf(MATCH_3_NUMBERS+"%d개%n", analysis.match3());
+			System.out.printf(MATCH_4_NUMBERS+"%d개%n", analysis.match4());
+			System.out.printf(MATCH_5_NUMBERS+"%d개%n", analysis.match5());
+			System.out.printf(MATCH_6_NUMBERS+"%d개%n", analysis.match6());
 
 			System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 		}
