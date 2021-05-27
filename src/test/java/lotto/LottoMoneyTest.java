@@ -1,5 +1,6 @@
 package lotto;
 
+import exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class LottoMoneyTest {
 	@DisplayName("음수 금액일때 Exception 검증 테스트")
 	void constructorTestWithNegative() {
 		assertThatThrownBy(() -> new LottoMoney(-1000))
-			.isInstanceOf(IllegalArgumentException.class)
+			.isInstanceOf(LottoException.class)
 			.hasMessageContaining(WRONG_LOTTO_PRICE.message());
 
 	}
@@ -23,7 +24,7 @@ class LottoMoneyTest {
 	@DisplayName("0 금액일때 Exception 검증 테스트")
 	void constructorTestWithZero() {
 		assertThatThrownBy(() -> new LottoMoney(0))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(LottoException.class);
 
 	}
 

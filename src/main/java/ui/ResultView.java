@@ -1,6 +1,7 @@
 package ui;
 
 import exception.LottoException;
+import lotto.LottoCount;
 import lotto.LottoNumbers;
 import lotto.LottoNumbersFactory;
 import lotto.LottoResult;
@@ -36,20 +37,20 @@ public class ResultView {
 	}
 
 
-	public static void printResultBuyLotto(final LottoNumbersFactory lottoNumbersFactory) {
+	public static void printResultBuyLotto(final LottoCount lottoCount, final LottoNumbersFactory lottoNumbersFactory) {
 		if (lottoNumbersFactory == null) {
 			return;
 		}
-		printMessage(makeLottoSizeMessage(lottoNumbersFactory.size()));
+		printLine();
+		printMessage(makeLottoSizeMessage(lottoCount));
 		printMessage(convertStringToLottoNumbersFactory(lottoNumbersFactory));
 		printLine();
 	}
 
-	private static String makeLottoSizeMessage(final int size) {
-		return new StringBuilder()
-			.append(size)
-			.append(OUTPUT_LOTTO_COUNT.message())
-			.toString();
+	private static String makeLottoSizeMessage(final LottoCount lottoCount) {
+		return String.format(OUTPUT_LOTTO_COUNT.message(),
+							 lottoCount.userCount(),
+							 lottoCount.autoCount());
 	}
 
 	private static String convertStringToLottoNumbersFactory(final LottoNumbersFactory lottoNumbersFactory) {

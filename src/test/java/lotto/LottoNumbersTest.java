@@ -48,10 +48,10 @@ class LottoNumbersTest {
 	@DisplayName("숫자 모음끼리의 matches 테스트")
 	void matchesTest() {
 		LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-		LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,7,8,9));
-		LottoNumber bonusNumber = new LottoNumber(10);
+		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(Arrays.asList(1,2,3,7,8,9)),
+																		  new LottoNumber(10));
 
-		assertThat(lottoNumbers.result(winningLottoNumbers, bonusNumber))
+		assertThat(lottoNumbers.result(winningLottoNumbers))
 			.isEqualTo(LottoRewardType.FIFTH);
 	}
 }

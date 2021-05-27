@@ -1,5 +1,7 @@
 package lotto;
 
+import exception.LottoException;
+
 import static type.LottoExceptionType.WRONG_LOTTO_PRICE;
 
 public class LottoMoney {
@@ -9,10 +11,14 @@ public class LottoMoney {
 	private final int price;
 
 	public LottoMoney(final int price) {
-		if (price <= 0) {
-			throw new IllegalArgumentException(WRONG_LOTTO_PRICE.message());
-		}
+		checkUnderZero(price);
 		this.price = price;
+	}
+
+	private void checkUnderZero(final int price) {
+		if (price <= 0) {
+			throw LottoException.of(WRONG_LOTTO_PRICE);
+		}
 	}
 
 	public int calculateLottoCount() {

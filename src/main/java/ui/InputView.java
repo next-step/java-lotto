@@ -19,6 +19,15 @@ public class InputView {
 		}
 	}
 
+	public static int inputUserLottoCount(){
+		ConsoleUtils.printLine();
+		try {
+			return ConsoleUtils.nextInt(MessageType.INPUT_USER_LOTTO_COUNT.message());
+		} catch(Exception e) {
+			throw LottoException.of(LottoExceptionType.ONLY_NUMBER);
+		}
+	}
+
 	public static String inputWinningNumber() {
 		try {
 			return ConsoleUtils.nextString(MessageType.INPUT_WINNING_NUMBER.message());
@@ -33,5 +42,18 @@ public class InputView {
 		} catch(Exception e) {
 			throw LottoException.of(LottoExceptionType.WRONG_INPUT_TEXT);
 		}
+	}
+
+	public static String inputUserLottoNumber() {
+		try {
+			return ConsoleUtils.nextString();
+		} catch(Exception e) {
+			throw LottoException.of(LottoExceptionType.WRONG_INPUT_TEXT);
+		}
+	}
+
+	public static void printUserLotto(){
+		ConsoleUtils.printLine();
+		ConsoleUtils.printLine(MessageType.INPUT_USER_LOTTO.message());
 	}
 }

@@ -1,24 +1,21 @@
 package lotto;
 
 import exception.LottoException;
-import type.LottoExceptionType;
 import ui.InputView;
 import ui.ResultView;
-import utils.*;
 
+import java.util.List;
 import java.math.BigDecimal;
-import java.util.function.Predicate;
+import java.util.ArrayList;
 
+import static type.LottoExceptionType.SYSTEM_ERROR;
 
 public final class LottoManager {
-	private static final int LOTTO_MIN_NUMBER = 1;
-	private static final int LOTTO_MAX_NUMBER = 45;
 
 	private final LottoGenerator lottoGenerator;
 
 	public LottoManager() {
-		lottoGenerator = new LottoGenerator(new LottoNumbersFactory(),
-											DrawNumber.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
+		lottoGenerator = new LottoGenerator(new LottoNumbersFactory());
 	}
 
 	public void run() {
@@ -26,53 +23,56 @@ public final class LottoManager {
 			startLotto();
 		} catch(LottoException e) {
 			ResultView.printExceptionMessage(e);
+		} catch(Exception e) {
+			ResultView.printExceptionMessage(LottoException.of(SYSTEM_ERROR));
 		}
 	}
 
 	private void startLotto() {
 		LottoMoney lottoMoney = new LottoMoney(InputView.inputPrice());
 		buyLotto(lottoMoney);
-		calculateResult(winningLottoNumber(),
-						bonusLottoNumber(),
+		calculateResult(new WinningLottoNumbers(inputWinningNumber(), bonusLottoNumber()),
 						lottoMoney);
 	}
 
 	private void buyLotto(final LottoMoney lottoMoney) {
-		LottoNumbersFactory lottoNumbersFactory = this.lottoGenerator.buy(lottoMoney);
-		ResultView.printResultBuyLotto(lottoNumbersFactory);
+		LottoCount lottoCount = new LottoCount(lottoMoney, InputView.inputUserLottoCount());
+		createUserLotto(lottoCount);
+		createAutoLotto(lottoCount);
+		ResultView.printResultBuyLotto(lottoCount,
+									   this.lottoGenerator.lottoNumbersFactory());
 	}
 
-	private LottoNumbers winningLottoNumber() {
-		return inputWinningNumber();
+	private void createUserLotto(final LottoCount lottoCount) {
+		if(lottoCount.isEmptyUserCount()){
+			return;
+		}
+		InputView.printUserLotto();
+		List<String> lottoNumbers = new ArrayList<>();
+		for (int i = 0; i < lottoCount.userCount(); ++i) {
+			lottoNumbers.add(InputView.inputUserLottoNumber());
+		}
+		this.lottoGenerator.generateManualLotto(lottoNumbers);
+	}
+
+	private void createAutoLotto(final LottoCount lottoCount) {
+		this.lottoGenerator.generateAutoLotto(lottoCount);
 	}
 
 	private LottoNumber bonusLottoNumber() {
 		return new LottoNumber(InputView.inputBonusNumber());
 	}
 
-	private void calculateResult(final LottoNumbers winningLottoNumber, final LottoNumber lottoNumber, final LottoMoney lottoMoney) {
-		if (winningLottoNumber.contains(lottoNumber)) {
-			throw LottoException.of(LottoExceptionType.DUPLICATE_BONUS_NUMBER);
-		}
+	private void calculateResult(final WinningLottoNumbers winningLottoNumbers, final LottoMoney lottoMoney) {
 		ResultView.printWinningLottoNumber();
-		LottoResult lottoResult = this.lottoGenerator.summary(winningLottoNumber, lottoNumber);
+		LottoResult lottoResult = this.lottoGenerator.summary(winningLottoNumbers);
 		BigDecimal revenue = lottoResult.calculateRevenue(lottoMoney);
 		ResultView.printCalculateRevenue(lottoResult, revenue);
 	}
 
 	private LottoNumbers inputWinningNumber() {
 		String inputText = InputView.inputWinningNumber();
-		SeparatedText separatedText = SeparatedText.findSeparator(inputText);
-		String[] texts = StringUtils.split(separatedText.getDelimiter(), separatedText.getTexts());
-		return new LottoNumbers(NumberUtils.parseInts(texts, lottoNumberCondition()));
+		return LottoGenerator.makeLottoNumbers(inputText);
 	}
 
-	private Predicate<Integer> lottoNumberCondition() {
-		return num -> {
-			if (num < LOTTO_MIN_NUMBER || num > LOTTO_MAX_NUMBER) {
-				return false;
-			}
-			return true;
-		};
-	}
 }

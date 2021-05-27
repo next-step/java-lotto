@@ -3,10 +3,7 @@ package lotto;
 import exception.LottoException;
 import type.LottoRewardType;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static type.LottoExceptionType.WRONG_LOTTO_NUMBER;
@@ -20,13 +17,17 @@ public final class LottoNumbers {
 		throw new UnsupportedOperationException();
 	}
 
-	public LottoNumbers(List<Integer> numbers) {
-		if (numbers == null) {
-			throw LottoException.of(WRONG_LOTTO_NUMBER);
-		}
+	public LottoNumbers(final List<Integer> numbers) {
+		checkNull(numbers);
 		Set<LottoNumber> lottoNumbers = makeLottoNumbers(numbers);
 		checkLottoNumberCount(lottoNumbers);
 		this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+	}
+
+	private void checkNull(final List<Integer> numbers) {
+		if (Objects.isNull(numbers)) {
+			throw LottoException.of(WRONG_LOTTO_NUMBER);
+		}
 	}
 
 	private Set<LottoNumber> makeLottoNumbers(final List<Integer> numbers) {
@@ -36,9 +37,9 @@ public final class LottoNumbers {
 					  .collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	public LottoRewardType result(final LottoNumbers winningLottoNumber, final LottoNumber bonusNumber) {
-		return LottoRewardType.of(matches(winningLottoNumber),
-								  contains(bonusNumber));
+	public LottoRewardType result(final WinningLottoNumbers winningLottoNumbers) {
+		return LottoRewardType.of(matches(winningLottoNumbers.winningLottoNumbers()),
+								  contains(winningLottoNumbers.bonusNumber()));
 	}
 
 

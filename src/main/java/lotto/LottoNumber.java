@@ -1,5 +1,7 @@
 package lotto;
 
+import exception.LottoException;
+
 import java.util.Objects;
 
 import static type.LottoExceptionType.WRONG_LOTTO_NUMBER;
@@ -12,10 +14,14 @@ public final class LottoNumber implements Comparable<LottoNumber> {
 	private final int number;
 
 	public LottoNumber(final int number) {
-		if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-			throw new IllegalArgumentException(WRONG_LOTTO_NUMBER.message());
-		}
+		checkValidLottoNumber(number);
 		this.number = number;
+	}
+
+	private void checkValidLottoNumber(final int number) {
+		if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
+			throw LottoException.of(WRONG_LOTTO_NUMBER);
+		}
 	}
 
 	@Override

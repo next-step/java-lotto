@@ -1,13 +1,14 @@
 package lotto;
 
+import exception.LottoException;
 import type.DecimalType;
 import type.LottoRewardType;
 import utils.NumberUtils;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
+
+import static type.LottoExceptionType.NULL_PARAMETER;
 
 public final class LottoResult {
 
@@ -18,12 +19,16 @@ public final class LottoResult {
 		this(new EnumMap(LottoRewardType.class));
 	}
 
-	LottoResult(Map<LottoRewardType, Integer> lottoRewardMap) {
-		if (lottoRewardMap == null) {
-			throw new IllegalArgumentException();
-		}
+	LottoResult(final Map<LottoRewardType, Integer> lottoRewardMap) {
+		checkNull(lottoRewardMap);
 		init(lottoRewardMap);
 		this.lottoRewardMap = lottoRewardMap;
+	}
+
+	private void checkNull(final Map<LottoRewardType, Integer> lottoRewardMap) {
+		if (Objects.isNull(lottoRewardMap)) {
+			throw LottoException.of(NULL_PARAMETER);
+		}
 	}
 
 	public void add(final LottoRewardType lottoRewardType) {
@@ -37,10 +42,6 @@ public final class LottoResult {
 	private void init(Map<LottoRewardType, Integer> lottoRewardMap) {
 		Arrays.stream(LottoRewardType.values())
 			  .forEach(type -> lottoRewardMap.putIfAbsent(type, 0));
-	}
-
-	public Map<LottoRewardType, Integer> lottoRewardMap() {
-		return this.lottoRewardMap;
 	}
 
 	public BigDecimal calculateRevenue(final LottoMoney lottoMoney) {
@@ -58,5 +59,9 @@ public final class LottoResult {
 							 .filter(entry -> entry.getKey() != LottoRewardType.NONE)
 							 .map(entry -> entry.getKey().reward() * entry.getValue())
 							 .reduce(0, Integer::sum);
+	}
+
+	public Map<LottoRewardType, Integer> lottoRewardMap() {
+		return Collections.unmodifiableMap(this.lottoRewardMap);
 	}
 }
