@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import kht2199.lotto.data.Lotto;
+import kht2199.lotto.exception.lotto.LottoNumberException;
 
 /**
  * 로또 번호 생성기.
@@ -18,6 +19,10 @@ public final class LottoGenerator {
 		List<Integer> numbers = IntStream.range(1, 46).boxed()
 			.collect(Collectors.toList());
 		Collections.shuffle(numbers);
-		return new Lotto(numbers.subList(0, 6));
+		try {
+			return new Lotto(numbers.subList(0, 6));
+		} catch (LottoNumberException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

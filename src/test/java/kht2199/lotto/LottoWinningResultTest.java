@@ -12,9 +12,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
-import kht2199.lotto.exception.LottoNumberDuplicatedException;
-import kht2199.lotto.exception.LottoNumberNotInitiatedException;
-import kht2199.lotto.exception.LottoNumberSizeInvalidException;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
 
 class LottoWinningResultTest {
 
@@ -22,9 +22,8 @@ class LottoWinningResultTest {
 	@DisplayName("당첨번호와 단일 로또의 일치 갯수")
 	@MethodSource("calculateSource")
 	void calculate(Lotto lotto, Rank rank) throws
-			LottoNumberSizeInvalidException,
-			LottoNumberDuplicatedException,
-			LottoNumberNotInitiatedException {
+			LottoBonusNumberDuplicatedException,
+			LottoWinningNumberNotInitiatedException, LottoNumberException {
 		List<Integer> winningResult = List.of(1, 2, 3, 4, 5, 6);
 		LottoWinningResult result = new LottoWinningResult();
 		result.setWinningNumbers(winningResult);
@@ -33,7 +32,7 @@ class LottoWinningResultTest {
 			.isEqualTo(rank);
 	}
 
-	static Stream<Arguments> calculateSource() {
+	static Stream<Arguments> calculateSource() throws LottoNumberException {
 		return Stream.of(
 			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
 			Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
@@ -48,12 +47,12 @@ class LottoWinningResultTest {
 	@DisplayName("보너스 번호 설정. 당첨번호와 중복되지 않고 당첨번호가 이미 설정되어 있어야 한다.")
 	@MethodSource("bonusNumberSource")
 	void bonusNumber(List<Integer> winningNumbers, int bonusNumber, Class<? extends Exception> exception) throws
-			LottoNumberDuplicatedException,
-			LottoNumberNotInitiatedException {
+		LottoBonusNumberDuplicatedException,
+		LottoWinningNumberNotInitiatedException {
 		LottoWinningResult result = new LottoWinningResult();
 		try {
 			result.setWinningNumbers(winningNumbers);
-		} catch (LottoNumberSizeInvalidException e) {
+		} catch (LottoNumberException e) {
 			// ignore
 		}
 		if (exception != null) {
@@ -67,8 +66,8 @@ class LottoWinningResultTest {
 	static Stream<Arguments> bonusNumberSource() {
 		return Stream.of(
 			Arguments.of(List.of(1,2,3,4,5,6), 7, null), // 정상적인 경우
-			Arguments.of(List.of(1,2,3,4,5,6), 1, LottoNumberDuplicatedException.class), // 보너스번호가 번호에서 중복될 경우
-			Arguments.of(null, 7, LottoNumberNotInitiatedException.class) // 당첨번호가 설정되어 있지 않은 경우
+			Arguments.of(List.of(1,2,3,4,5,6), 1, LottoBonusNumberDuplicatedException.class), // 보너스번호가 번호에서 중복될 경우
+			Arguments.of(null, 7, LottoWinningNumberNotInitiatedException.class) // 당첨번호가 설정되어 있지 않은 경우
 		);
 	}
 }

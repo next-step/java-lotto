@@ -1,6 +1,5 @@
 package kht2199.lotto;
 
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +7,10 @@ import java.util.Map;
 import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
-import kht2199.lotto.exception.LottoNumberDuplicatedException;
-import kht2199.lotto.exception.LottoNumberNotInitiatedException;
-import kht2199.lotto.exception.LottoNumberSizeInvalidException;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
+import kht2199.lotto.exception.lotto.LottoNumberLengthException;
 
 /**
  *
@@ -23,7 +23,7 @@ public class LottoWinningResult {
 	 */
 	private final Map<Rank, Integer> matchedPrizeMap;
 
-	private List<Integer> winningNumber;
+	private Lotto winningNumber;
 
 	private int bonusNumber;
 
@@ -95,21 +95,21 @@ public class LottoWinningResult {
 	}
 
 	public void setBonusNumber(int bonusNumber)
-			throws LottoNumberDuplicatedException, LottoNumberNotInitiatedException {
+			throws LottoBonusNumberDuplicatedException, LottoWinningNumberNotInitiatedException {
 		if (winningNumber == null) {
-			throw new LottoNumberNotInitiatedException();
+			throw new LottoWinningNumberNotInitiatedException();
 		}
 		if (winningNumber.contains(bonusNumber)) {
-			throw new LottoNumberDuplicatedException();
+			throw new LottoBonusNumberDuplicatedException();
 		}
 		this.bonusNumber = bonusNumber;
 	}
 
-	public void setWinningNumbers(List<Integer> numbers) throws LottoNumberSizeInvalidException {
+	public void setWinningNumbers(List<Integer> numbers) throws LottoNumberException {
 		if (numbers == null || numbers.size() != 6) {
-			throw new LottoNumberSizeInvalidException();
+			throw new LottoNumberLengthException();
 		}
-		this.winningNumber = Collections.unmodifiableList(numbers);
+		this.winningNumber = new Lotto(numbers);
 	}
 
 	private void initMatchedPrizeMap() {

@@ -3,9 +3,11 @@ package kht2199.lotto.data;
 import java.util.Collections;
 import java.util.List;
 
+import kht2199.lotto.exception.lotto.LottoNumberEmptyException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
+import kht2199.lotto.exception.lotto.LottoNumberLengthException;
+
 /**
- *
- * TODO 일급컬렉션 적용
  *
  * @author heetaek.kim
  */
@@ -13,8 +15,18 @@ public final class Lotto {
 
 	private final List<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(List<Integer> numbers) throws LottoNumberException {
+		validate(numbers);
 		this.numbers = Collections.unmodifiableList(numbers);
+	}
+
+	private void validate(List<Integer> numbers) throws LottoNumberException {
+		if (numbers == null || numbers.isEmpty()) {
+			throw new LottoNumberEmptyException();
+		}
+		if (numbers.size() != 6) {
+			throw new LottoNumberLengthException();
+		}
 	}
 
 	public List<Integer> getNumbers() {
@@ -32,5 +44,9 @@ public final class Lotto {
 			buffer.append(lastIndex ? "]" : ", ");
 		}
 		return buffer.toString();
+	}
+
+	public boolean contains(int number) {
+		return this.numbers.contains(number);
 	}
 }

@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import kht2199.lotto.LottoWinningResult;
-import kht2199.lotto.exception.LottoNumberDuplicatedException;
-import kht2199.lotto.exception.LottoNumberNotInitiatedException;
-import kht2199.lotto.exception.LottoNumberSizeInvalidException;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
 
 /**
  *
@@ -37,7 +37,7 @@ public class InputView {
 			String[] splitNumbers = winningNumbersString.split(",");
 			List<Integer> numbers = intToString(splitNumbers);
 			winningNumbers.setWinningNumbers(numbers);
-		} catch (InvalidInputException | LottoNumberSizeInvalidException e) {
+		} catch (InvalidInputException | LottoNumberException e) {
 			output.printException(e);
 			acceptWinningNumbers(winningNumbers);
 		} catch (NumberFormatException e) {
@@ -51,7 +51,7 @@ public class InputView {
 			String bonusNumberString = in.nextLine();
 			validationLottoResultString(bonusNumberString);
 			winningNumbers.setBonusNumber(Integer.parseInt(bonusNumberString));
-		} catch (InvalidInputException | LottoNumberDuplicatedException | LottoNumberNotInitiatedException e) {
+		} catch (InvalidInputException | LottoBonusNumberDuplicatedException | LottoWinningNumberNotInitiatedException e) {
 			output.printException(e);
 			acceptBonusNumber(winningNumbers);
 		} catch (NumberFormatException e) {
