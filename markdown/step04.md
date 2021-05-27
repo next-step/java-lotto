@@ -321,7 +321,7 @@ class Demeter {
     - [x] 2-2.정준철 리뷰어님의 리뷰 참고자료 [디미터 법칙(Law of Demeter)](https://dundung.tistory.com/203) 참조
 - [x] 3.분석 및 설계
     - [x] 3-1.Step04.md 작성
-    - [ ] 3-2.도메인 주도 설계 이미지 수정
+    - [x] 3-2.도메인 주도 설계 이미지 수정
 - [ ] 4.구현
     - [ ] 4-1.Game Context
         - [ ] 4-1-1.`Value Object` & `Aggregate`
