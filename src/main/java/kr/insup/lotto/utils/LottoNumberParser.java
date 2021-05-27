@@ -5,10 +5,10 @@ import kr.insup.lotto.domain.Lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinningNumberParser {
+public class LottoNumberParser {
 
-    public static List<Integer> parseWinningNumberToList(String winningNumber) {
-        String[] numbers = winningNumber.split(",");
+    public static List<Integer> parseLottoNumberToList(String LottoNumber) throws NumberFormatException {
+        String[] numbers = LottoNumber.split(",");
         List<Integer> numberList = new ArrayList<>();
 
         for (String number : numbers) {

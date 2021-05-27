@@ -1,6 +1,6 @@
 package kr.insup.lotto.domain;
 
-import kr.insup.lotto.utils.WinningNumberParser;
+import kr.insup.lotto.utils.LottoNumberParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -88,7 +88,7 @@ public class LottoTest {
             "22, 22, 43, 21, 1, 2"})
     void 당첨번호_번호_입력시_validation(String input) {
         //given
-        List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
+        List<Integer> winningNumberList = LottoNumberParser.parseLottoNumberToList(input);
 
         //when, then
         assertThatThrownBy(() -> new WinningLotto(winningNumberList, 33)).isInstanceOf(IllegalArgumentException.class);
