@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoManualCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersGenerator;
@@ -26,7 +27,7 @@ public class LottoController {
 
     public void playLotto() {
         Price price = new Price(this.inputView.getBuyPrice());
-        int manualLottoCount = this.inputView.getManualLottoCount();
+        LottoManualCount manualLottoCount = new LottoManualCount(this.inputView.getManualLottoCount(price));
         List<LottoNumbers> manualLottoNumbers = this.inputView.getManualLottoNumbers(manualLottoCount);
         LottoMachine lottoMachine = new LottoMachine(price, manualLottoNumbers);
         this.lottos = lottoMachine.createLottos(new LottoNumbersGenerator());

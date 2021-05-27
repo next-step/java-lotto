@@ -15,6 +15,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LottoNumberTest {
 
     @ParameterizedTest
+    @ValueSource(ints = {1,2,44,45})
+    @DisplayName("미리 생성해둔 로또번호 객체 재사용")
+    void lottoNumber_of(int lottoNumber) {
+        assertThat(LottoNumber.of(lottoNumber)).isSameAs(LottoNumber.of(lottoNumber));
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("로또번호의 값 범위 유효성을 검증한다.")
     void validate_lotto_number(int number) {

@@ -40,4 +40,8 @@ public class Price {
             throw new IllegalArgumentException("최소 금액은 1,000원 입니다.");
         }
     }
+
+    public boolean canBuy(int manualWishCount) {
+        return this.price >= manualWishCount * UNIT_OF_PRICE;
+    }
 }
