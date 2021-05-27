@@ -8,7 +8,7 @@ public enum Ranking {
 		30000000), RANKING_1(6, 2000000000);
 
 	private static final Map<Integer, Ranking> rankingTable;
-	public static final int SECOND_RANKING = 5;
+	public static final int SECOND_RANKING_MATCH_COUNT = 5;
 
 	private final int matchedCount;
 	private final int winnerPrice;
@@ -34,11 +34,11 @@ public enum Ranking {
 	}
 
 	public static Ranking valueOf(int matchedCount, boolean isBonusNumberContained) {
-		if (matchedCount == SECOND_RANKING && isBonusNumberContained) {
+		if (matchedCount == SECOND_RANKING_MATCH_COUNT && isBonusNumberContained) {
 			return RANKING_2;
 		}
 
-		if (matchedCount == SECOND_RANKING) {
+		if (matchedCount == SECOND_RANKING_MATCH_COUNT) {
 			return RANKING_3;
 		}
 
@@ -47,5 +47,13 @@ public enum Ranking {
 		}
 
 		return Ranking.RANKING_LAST;
+	}
+
+	public static String getExplanation(Ranking ranking) {
+		if (ranking == Ranking.RANKING_2) {
+			return ranking.getMatchedCount() + "개 일치, 보너스볼 일치";
+		}
+
+		return ranking.getMatchedCount() + "개 일치";
 	}
 }
