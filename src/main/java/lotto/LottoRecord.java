@@ -21,7 +21,7 @@ public class LottoRecord {
     }
 
     public boolean isRecord(LottoRank lottoRank, int expected) {
-        return Collections.frequency(lottoRecord, lottoRank) == expected;
+        return Collections.frequency(lottoRecord, lottoRank) - 1 == expected;
     }
 
     public Map<LottoRank, Long> calculateReward() {
