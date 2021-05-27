@@ -2,12 +2,16 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoAppInput {
 	private static final String LOTTO_NUMBER_SPLIT_REGEX = ", |,";
-
+	private static final String NUMBER_EXCEPTION_MESSAGE = "숫자를 입력해주세요";
+	private static final int FROM_ZERO = 0;
 	private final Scanner scanner;
 
 	public LottoAppInput(Scanner scanner) {
@@ -16,12 +20,26 @@ public class LottoAppInput {
 
 	public int inputNumber() {
 		String input = scanner.nextLine();
-		return Integer.parseInt(input);
+		try {
+			return Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(NUMBER_EXCEPTION_MESSAGE);
+		}
 	}
 
 	public List<Integer> inputNumbers() {
 		String inputNumbers = scanner.nextLine();
-		return splitAndParseInt(inputNumbers);
+		try {
+			return splitAndParseInt(inputNumbers);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException(NUMBER_EXCEPTION_MESSAGE);
+		}
+	}
+
+	public List<List<Integer>> inputNumbers(int count) {
+		return IntStream.range(FROM_ZERO, count)
+			.mapToObj((i) -> inputNumbers())
+			.collect(Collectors.toList());
 	}
 
 	private List<Integer> splitAndParseInt(String inputNumbers) {
@@ -29,5 +47,14 @@ public class LottoAppInput {
 		return Stream.of(numbers)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+	}
+
+	public static <T> T requireValidInput(Supplier<T> input, Consumer<String> errorMessageConsumer) {
+		try {
+			return input.get();
+		} catch (IllegalArgumentException e) {
+			errorMessageConsumer.accept(e.getMessage());
+			return requireValidInput(input, errorMessageConsumer);
+		}
 	}
 }

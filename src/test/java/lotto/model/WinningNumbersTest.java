@@ -13,7 +13,7 @@ public class WinningNumbersTest {
 
 	@BeforeEach
 	void setup() {
-		this.lottoNumbers = new LottoNumbers(asList(1, 2, 3, 4, 5, 6));
+		this.lottoNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
 	}
 
 	@Test

@@ -2,20 +2,30 @@ package lotto.model;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoNumbers {
 	static final int LENGTH = 6;
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
-	public LottoNumbers(List<Integer> inputNumbers) {
+	private LottoNumbers(List<Integer> inputNumbers) {
 		validateLength(inputNumbers);
 		validateDuplicate(inputNumbers);
 		this.lottoNumbers = mapToLottoNumbers(inputNumbers);
+	}
+
+	public static LottoNumbers of(List<Integer> inputNumbers) {
+		return new LottoNumbers(inputNumbers);
+	}
+
+	static LottoNumbers of(Integer... numbers) {
+		return LottoNumbers.of(Arrays.asList(numbers));
 	}
 
 	private void validateDuplicate(List<Integer> numbers) {
@@ -29,10 +39,10 @@ public class LottoNumbers {
 		}
 	}
 
-	private List<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
+	private Set<LottoNumber> mapToLottoNumbers(List<Integer> numbers) {
 		return numbers.stream()
 			.map(LottoNumber::of)
-			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
+			.collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
 	}
 
 	List<Integer> getNumbers() {
@@ -56,5 +66,22 @@ public class LottoNumbers {
 
 	boolean contains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (other == null || getClass() != other.getClass()) {
+			return false;
+		}
+		LottoNumbers that = (LottoNumbers)other;
+		return Objects.equals(lottoNumbers, that.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }

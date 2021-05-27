@@ -14,9 +14,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.model.LottoRank;
 import lotto.model.Rate;
-import lotto.view.dro.LottoEarningRateDto;
-import lotto.view.dro.LottoRankResultDto;
-import lotto.view.dro.LottoResultDto;
+import lotto.view.dto.LottoEarningRateDto;
+import lotto.view.dto.LottoRankResultDto;
+import lotto.view.dto.LottoResultDto;
 
 public class LottoAppOutputTest {
 
@@ -105,5 +105,21 @@ public class LottoAppOutputTest {
 		lottoAppOutput.printBonusNumberInputView();
 
 		assertThat(outputStream.toString()).contains("보너스 볼을 입력해 주세요.");
+	}
+
+	@Test
+	@DisplayName("수동 로또 수롤 입력 받을때 '수동으로 구매할 로또 수를 입력해 주세요.' 라고 출략해야 한다.")
+	public void inputManualCountInputViewTest() {
+		lottoAppOutput.printManualCountInputView();
+
+		assertThat(outputStream.toString()).contains("수동으로 구매할 로또 수를 입력해 주세요.");
+	}
+
+	@Test
+	@DisplayName("수동 로또 번호롤 입력 받을때 '수동으로 구매할 번호를 입력해 주세요.' 라고 출략해야 한다.")
+	public void inputManualLottoNumbersInputViewTest() {
+		lottoAppOutput.printManualLottoNumbersInputView();
+
+		assertThat(outputStream.toString()).contains("수동으로 구매할 번호를 입력해 주세요.");
 	}
 }

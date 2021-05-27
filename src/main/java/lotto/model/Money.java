@@ -28,7 +28,7 @@ public class Money {
 		return amount;
 	}
 
-	public int countOfLottoNumbers() {
+	int countLotto() {
 		return (int) divided(LOTTO_PRICE);
 	}
 

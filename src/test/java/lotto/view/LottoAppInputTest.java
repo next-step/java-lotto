@@ -25,6 +25,16 @@ public class LottoAppInputTest {
 		assertThat(winningNumbers).containsExactly(1, 2, 3, 4, 5, 6);
 	}
 
+	@Test
+	@DisplayName("숫자가 아닌 문자를 입력할 수 없다.")
+	public void numberFormatExceptionTest() {
+		LottoAppInput lottoAppInput = createLottoAppInput("일이삼사");
+
+		assertThatThrownBy(lottoAppInput::inputNumber)
+			.isInstanceOf(NumberFormatException.class)
+			.hasMessageContaining("숫자를 입력해주세요");
+	}
+
 	private LottoAppInput createLottoAppInput(String input) {
 		InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 		return new LottoAppInput(new Scanner(inputStream));

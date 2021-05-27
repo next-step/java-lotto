@@ -1,4 +1,4 @@
-package lotto.view.dro;
+package lotto.view.dto;
 
 import static lotto.model.LottoRank.*;
 
