@@ -110,4 +110,20 @@ public class LottoTest {
         LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
         assertThat(luckyNumbers.matchCount(lotto)).isEqualTo(expected);
     }
+
+    @DisplayName("당첨 번호와 주어진 로또의 일치하는 갯수에 따른 당첨금을 판단한다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1,2,3,4,5,6:1,2,3,4,5,6:2000000000",
+            "1,2,3,4,5,6:1,2,3,4,5,7:1500000",
+            "1,2,3,4,5,6:1,2,3,4,7,8:50000",
+            "1,2,3,4,5,6:1,2,3,7,8,9:5000",
+            "1,2,3,4,5,6:1,2,7,8,9,10:0",
+    }, delimiter = ':')
+    public void judgePrizeMoney(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
+        Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
+        int matchCount = luckyNumbers.matchCount(lotto);
+        assertThat(LottoResult.prizeMoney(matchCount)).isEqualTo(expected);
+    }
 }
