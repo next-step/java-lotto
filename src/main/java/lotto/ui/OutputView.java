@@ -1,23 +1,26 @@
 package lotto.ui;
 
-import lotto.enums.MessageEnum;
-import lotto.enums.PrizeEnum;
+import lotto.enums.Message;
+import lotto.enums.Prize;
 import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
 import lotto.shop.Money;
 
+import java.util.stream.Collectors;
+
 public class OutputView {
     public static void printInputMoneyMessage() {
-        println(MessageEnum.INPUT_MONEY.message());
+        println(Message.INPUT_MONEY.message());
     }
 
-    public static void inputWinningNumber() {
-        println(MessageEnum.INPUT_LOTTO_ANSWER.message());
+    public static void printWinningNumber() {
+        println(Message.INPUT_LOTTO_ANSWER.message());
     }
 
     public static void printLottoAmount(int amount) {
-        println(MessageEnum.LOTTO_PURCHASE.message(), amount);
+        println(Message.LOTTO_PURCHASE.message(), amount);
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
@@ -27,19 +30,23 @@ public class OutputView {
     }
 
     public static void resultMessage() {
-        println(MessageEnum.RESULT.message());
-        println(MessageEnum.LINE.message());
+        println(Message.RESULT.message());
+        println(Message.LINE.message());
     }
 
     public static void resultIncome(LottoResult lottoResult, Money money) {
-        for (PrizeEnum prizeValue : PrizeEnum.values()) {
-            printLottoResult(prizeValue.matchingCount(), prizeValue.prize(), lottoResult);
+        for (Prize prizeValue : Prize.values()) {
+            printLottoResult(prizeValue, prizeValue.money(), lottoResult);
         }
         printIncome(lottoResult, money);
     }
 
+    public static void printBonusNumber() {
+        println(Message.INPUT_BONUS_NUMBER.message());
+    }
+
     private static void printLotto(Lotto lotto) {
-        String collect = lotto.numbersToString();
+        String collect = lottoNumberToString(lotto);
         println("[" + collect + "]");
     }
 
@@ -51,11 +58,23 @@ public class OutputView {
         System.out.println(amount + message);
     }
 
-    private static void printLottoResult(int matchingCount, int prize, LottoResult lottoResult) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", matchingCount, prize, lottoResult.count(matchingCount));
+    private static void printLottoResult(Prize prize, int money, LottoResult matchAnswer) {
+        String bonusInfo = "";
+        if (prize.isSecond()) {
+            bonusInfo = Message.BONUS_BALL_MESSAGE.message();
+        }
+        System.out.printf("%d개 일치" + bonusInfo + "(%d원)- %d개\n", prize.matchingCount(), money, matchAnswer.count(prize));
     }
 
     private static void printIncome(LottoResult lottoResult, Money money) {
-        System.out.printf(MessageEnum.INCOME_PREFIX.message() + "%.2f" + MessageEnum.INCOME_POSTFIX.message() + "%n", (float) lottoResult.income() / money.amount());
+        System.out.printf(Message.INCOME_PREFIX.message() + "%.2f" + Message.INCOME_POSTFIX.message() + "%n", (float) lottoResult.income() / money.amount());
+    }
+
+    private static String lottoNumberToString(Lotto lotto) {
+        return lotto.numbers().stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .map(String::valueOf)
+                .collect(Collectors.joining(InputView.NUMBER_DELIMITER));
     }
 }

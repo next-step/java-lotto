@@ -2,9 +2,11 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import lotto.enums.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,19 +75,54 @@ public class ShopTest {
     void testAnswer() {
         //given
         LottoTicket lottoTicket = new LottoTicket();
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
+
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 34));
+        lottoTicket.add(lotto);
+        LottoNumber bonusNumber = new LottoNumber(5);
+        //when
+        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+        //then
+        assertThat(match.count(Prize.FIFTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("2등 당첨")
+    void testSecond() {
+        //given
+        LottoTicket lottoTicket = new LottoTicket();
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
+
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
+        lottoTicket.add(lotto);
+        LottoNumber bonusNumber = new LottoNumber(16);
+        //when
+        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+
+        //then
+        assertThat(match.count(Prize.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("보너스 넘버가 중복 될 경우 에러")
+    void checkDuplicateBonusNumber() {
+        //given
+        WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
+        LottoNumber bonusNumber = new LottoNumber(1);
+        Shop shop = new Shop();
+        //when
+        //then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> shop.checkDuplicateBonusNumber(winningNumber, bonusNumber))
+                .withMessageContaining(ErrorMessage.DUPLICATE_BONUS_NUMBER);
+    }
+
+    private Set<LottoNumber> initWinningNumbers() {
         Set<LottoNumber> numbers = new HashSet<>();
         for (int i = 1; i < 7; i++) {
             LottoNumber lottoNumber = new LottoNumber(i);
             numbers.add(lottoNumber);
         }
-
-        WinningNumber winningNumber = new WinningNumber(numbers);
-
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 33, 34, 34});
-        lottoTicket.add(lotto);
-        //when
-        LottoResult match = shop.lottoResult(lottoTicket, winningNumber);
-        //then
-        assertThat(match.count(3)).isEqualTo(1);
+        return numbers;
     }
 }

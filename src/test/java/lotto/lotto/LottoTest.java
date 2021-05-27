@@ -7,18 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import lotto.error.ErrorMessage;
 
-public class LottoTest {
-    private Lotto lotto;
+import java.util.Arrays;
 
-    @Test
-    @DisplayName("같은 숫자를 넣었을 때")
-    void testContain() {
-        //given
-        //when
-        lotto = new Lotto(new int[]{1, 1, 1, 1, 1, 1});
-        //then
-        assertThat(lotto.isSelectComplete()).isFalse();
-    }
+public class LottoTest {
 
     @Test
     @DisplayName("숫자를 모두 선택하지 않은 경우")
@@ -27,16 +18,7 @@ public class LottoTest {
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> lotto = new Lotto(new int[]{1, 2, 3})).withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
-    }
-
-    @Test
-    @DisplayName("숫자를 모두 선택한 경우")
-    void testSelectComplete() {
-        //given
-        //when
-        lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        //then
-        assertThat(lotto.isSelectComplete()).isTrue();
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3)))
+                .withMessageContaining(ErrorMessage.INVALID_LOTTO_COUNT);
     }
 }
