@@ -56,7 +56,7 @@ public class Lotto {
 			isBonusNumberContained = true;
 		}
 
-		return Ranking.valueOf(matchedCount, isBonusNumberContained);
+		return Ranking.valueOf(new RankingCondition(matchedCount, isBonusNumberContained));
 	}
 
 	private int getMatchedCount(int matchedSize, Integer number) {
