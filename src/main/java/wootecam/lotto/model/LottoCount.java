@@ -40,12 +40,13 @@ public class LottoCount {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		LottoCount that = (LottoCount)o;
-		return totalCount == that.totalCount;
+		return totalCount == that.totalCount && manualCount == that.manualCount
+			&& automaticCount == that.automaticCount;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(totalCount);
+		return Objects.hash(totalCount, manualCount, automaticCount);
 	}
 
 	public int getTotalCount() {
