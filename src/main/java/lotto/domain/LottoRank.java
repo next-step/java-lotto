@@ -5,12 +5,12 @@ import java.util.Map;
 
 public enum LottoRank {
 
-	FIRST(6, new LottoPoint(6), 2_000_000_000L),
+	FIRST(6, new LottoPoint(6, false), 2_000_000_000L),
 	SECOND(5, new LottoPoint(5, true), 30_000_000),
-	THIRD(5, new LottoPoint(5), 1_500_000L),
-	FOURTH(4, new LottoPoint(4), 50_000L),
-	FIFTH(3, new LottoPoint(3), 5000L),
-	OUT_OF_RANK(0, new LottoPoint(0), 0L);
+	THIRD(5, new LottoPoint(5, false), 1_500_000L),
+	FOURTH(4, new LottoPoint(4, false), 50_000L),
+	FIFTH(3, new LottoPoint(3, false), 5000L),
+	OUT_OF_RANK(0, new LottoPoint(0, false), 0L);
 
 	private static final Map<LottoPoint, LottoRank> lottoPointIndex = new HashMap<>();
 
@@ -41,15 +41,7 @@ public enum LottoRank {
 	}
 
 	static LottoRank rank(int matchCount, boolean bonus) {
-		return lottoPointIndex.getOrDefault(lottoPoint(matchCount, bonus), OUT_OF_RANK);
-	}
-
-	private static LottoPoint lottoPoint(int matchCount, boolean bonus) {
-		if (matchCount == SECOND.matchCount()) {
-			return new LottoPoint(matchCount, bonus);
-		}
-
-		return new LottoPoint(matchCount);
+		return lottoPointIndex.getOrDefault(new LottoPoint(matchCount, bonus), OUT_OF_RANK);
 	}
 
 }
