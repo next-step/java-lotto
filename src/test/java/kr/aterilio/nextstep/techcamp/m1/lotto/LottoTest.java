@@ -54,4 +54,14 @@ public class LottoTest {
         LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
         assertThat(luckyNumbers.count()).isEqualTo(count);
     }
+
+    @DisplayName("입력받는 당첨 번호의 갯수가 6개가 아니면 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"4,3,2,1", "5, 2, 3"})
+    public void createLuckyNumbersFailed_count(String inputLuckyNumbers) {
+        assertThatThrownBy(()-> {
+            new LuckyNumbers(inputLuckyNumbers);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("6개");
+    }
 }

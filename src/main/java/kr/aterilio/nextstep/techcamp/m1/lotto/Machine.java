@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class Machine {
 
-    public static final int IDX_MIN = 0;
-    public static final int IDX_MAX = 5;
+    public static final int IDX_START = 0;
+    public static final int IDX_END_NOT_CLOSED = 6;
 
     private static final List<Integer> numberPool;
     public static final Integer[] EMPTY_INT_ARRAY = {0};
@@ -21,7 +21,7 @@ public class Machine {
 
     public static Integer[] draw() {
         Collections.shuffle(numberPool);
-        return  numberPool.subList(IDX_MIN, IDX_MAX)
+        return  numberPool.subList(IDX_START, IDX_END_NOT_CLOSED)
                           .toArray(EMPTY_INT_ARRAY);
     }
 }
