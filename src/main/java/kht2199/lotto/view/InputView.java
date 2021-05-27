@@ -28,19 +28,30 @@ public class InputView {
 	}
 
 	public Lotto acceptWinningNumbers() {
+		Lotto winningNumbers;
 		try {
 			String winningNumbersString = in.nextLine();
 			validationLottoResultString(winningNumbersString);
 			String[] splitNumbers = winningNumbersString.split(",");
-			List<Integer> numbers = new ArrayList<>();
-			for (String splitNumber : splitNumbers) {
-				numbers.add(Integer.parseInt(splitNumber));
-			}
-			return new Lotto(numbers);
+			List<Integer> numbers = intToString(splitNumbers);
+			winningNumbers = new Lotto(numbers);
 		} catch (InvalidInputException e) {
 			output.printException(e);
 			return acceptWinningNumbers();
+		} catch (NumberFormatException e) {
+			output.printException(e);
+			return acceptWinningNumbers();
 		}
+
+		return winningNumbers;
+	}
+
+	private List<Integer> intToString(String[] splitNumbers) throws NumberFormatException {
+		List<Integer> list = new ArrayList<>();
+		for (String splitNumber : splitNumbers) {
+			list.add(Integer.parseInt(splitNumber));
+		}
+		return list;
 	}
 
 	/**

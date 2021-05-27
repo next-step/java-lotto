@@ -58,6 +58,10 @@ public class ResultView {
 		// TODO print for domain exceptions.
 	}
 
+	public void printException(NumberFormatException e) {
+		print(e.getMessage());
+	}
+
 	private String inputErrorToMessage(InvalidInputException exception) {
 		InvalidInputError error = exception.getError();
 		if (error == InvalidInputError.EMPTY) {
