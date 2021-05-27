@@ -1,5 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.calculator;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
+
 public class Parser {
 
     private static final int IDX_MIN_CUSTOM_DELIMITER = 0;
