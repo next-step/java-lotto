@@ -24,28 +24,19 @@ public class LottoNumbers {
     }
 
     public SameNumberCountInALotto countMatchedNumbers(LastWonLottoNumber lastWonLottoNumber) {
+        int sameNumberCount = 0;
+        boolean isBonusWon = false;
         for (int oneLottoNumber : lottoNumbers) {
-            updateCount(isSameNumber(oneLottoNumber, lastWonLottoNumber));
+            sameNumberCount = increaseIfSameNumber(sameNumberCount, oneLottoNumber, lastWonLottoNumber);
+            isBonusWon = lastWonLottoNumber.containsBonus(oneLottoNumber);
         }
-        SameNumberCountInALotto sameNumberCountInALotto = new SameNumberCountInALotto(sameNumberCount, isBonusWon); //생성자로 멤버변수셋팅
-        return sameNumberCountInALotto;
+        return new SameNumberCountInALotto(sameNumberCount, isBonusWon);
     }
 
-    public void updateCount(SameNumberStateEnum sameNumberStateEnum) {
-        if (sameNumberStateEnum == SameNumberStateEnum.SAME_MAIN_NUMBER)
-            sameNumberCount++;
-        if (sameNumberStateEnum == SameNumberStateEnum.SAME_BONUS_NUMBER)
-            isBonusWon = true;
-    }
-
-    private SameNumberStateEnum isSameNumber(int oneLottoNumber, LastWonLottoNumber lastWonLottoNumber) {
-        if (lastWonLottoNumber.containsMain(oneLottoNumber))
-            return SameNumberStateEnum.SAME_MAIN_NUMBER;
-
-        if (lastWonLottoNumber.containsBonus(oneLottoNumber))
-            return SameNumberStateEnum.SAME_BONUS_NUMBER;
-
-        return SameNumberStateEnum.NO_SAME;
+    private int increaseIfSameNumber(int currentSameNumberCount, int lottoNumber, LastWonLottoNumber lastWonLottoNumber) {
+        if (lastWonLottoNumber.containsMain(lottoNumber))
+            return currentSameNumberCount + 1;
+        return currentSameNumberCount;
     }
 
     public boolean contains(int checkNumber) {
