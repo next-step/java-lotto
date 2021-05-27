@@ -36,6 +36,6 @@ class LottoApplicationTest {
 		int signal = lottoApplication.run();
 
 		// then
-		assertThat(signal).isEqualTo(LottoApplication.NORMAL_SIGNAL);
+		assertThat(signal).isEqualTo(LottoApplication.ABNORMAL_SIGNAL);
 	}
 }
