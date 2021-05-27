@@ -1,9 +1,6 @@
 package kht2199.lotto;
 
-import java.util.Collections;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 import kht2199.Rank;
 import kht2199.lotto.data.Lotto;
@@ -14,24 +11,18 @@ import kht2199.lotto.exception.lotto.LottoNumberException;
 import kht2199.lotto.exception.lotto.LottoNumberLengthException;
 
 /**
- * TODO matchedPrizeMap 일급컬렉션으로 변경
- *
  * @author heetaek.kim
  */
 public class LottoWinningResult {
 
-	/**
-	 * 일치갯수, 일치갯수에 대한 상금의 총합을 기록한다.
-	 */
-	private final Map<Rank, Integer> matchedPrizeMap;
+	private final LottoPrizeResult lottoPrizeResult;
 
 	private Lotto winningNumber;
 
 	private int bonusNumber;
 
 	public LottoWinningResult() {
-		this.matchedPrizeMap = new EnumMap<>(Rank.class);
-		initMatchedPrizeMap();
+		this.lottoPrizeResult = new LottoPrizeResult();
 	}
 
 	/**
@@ -45,11 +36,10 @@ public class LottoWinningResult {
 		if (bonusNumber == 0) {
 			throw new RuntimeException("보너스 번호가 설정되어 있지 않습니다.");
 		}
-		initMatchedPrizeMap();
+		lottoPrizeResult.reset();
 		for (Lotto lotto : list.getList()) {
 			Rank rank = calculateMatched(lotto);
-			Integer totalPrize = matchedPrizeMap.get(rank);
-			matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
+			lottoPrizeResult.addWinningMoney(rank);
 		}
 	}
 
@@ -70,11 +60,7 @@ public class LottoWinningResult {
 	}
 
 	public int totalPrize() {
-		int sum = 0;
-		for (Integer value : matchedPrizeMap.values()) {
-			sum += value;
-		}
-		return sum;
+		return lottoPrizeResult.totalPrize();
 	}
 
 	/**
@@ -103,15 +89,5 @@ public class LottoWinningResult {
 			throw new LottoNumberLengthException();
 		}
 		this.winningNumber = new Lotto(numbers);
-	}
-
-	public Map<Rank, Integer> getMatchedPrizeMap() {
-		return Collections.unmodifiableMap(matchedPrizeMap);
-	}
-
-	private void initMatchedPrizeMap() {
-		for (Rank value : Rank.values()) {
-			matchedPrizeMap.put(value, 0);
-		}
 	}
 }
