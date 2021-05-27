@@ -8,7 +8,9 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 3단계 - 로또 (자동) 
+<details>
+<summary style="font-Weight : bold; font-size : 25px;" >3단계 - 로또 (자동) </summary>
+<div>  
 
 ## 기능 요구사항
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또 발급
@@ -57,6 +59,53 @@ chore (maintain)
 * input 뷰와 result 뷰 
   * 기능 로직 코드 와 뷰 분리
 
+</div>
+</details>
 
+---
 
+## 4단계 - 로또 (보너스 볼 2등)
+* 2등을 위해 추가 번호를 하나 더 추첨한다.
+* 당첨 통계에 2등도 추가해야 한다.
+<details>
+<summary> 예시 </summary>
+<div>
 
+```
+지난 주 당첨 번호를 입력해 주세요.
+1, 2, 3, 4, 5, 6
+보너스 볼을 입력해 주세요.
+7
+당첨 통계
+---------
+3개 일치 (5000원)- 1개
+4개 일치 (50000원)- 0개
+5개 일치 (1500000원)- 0개
+5개 일치, 보너스 볼 일치(30000000원) - 0개
+6개 일치 (2000000000원)- 0개
+총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+```
+
+</div>
+</details>
+
+## 프로그래밍 요구사항
+* 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+* java **enum**을 적용해 프로그래밍을 구현한다.
+* **규칙 8: 일급 콜렉션**을 쓴다.
+* indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+* 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+* 자바 코드 컨벤션을 지키면서 프로그래밍한다. ```너무어렵```
+* else 예약어를 쓰지 않는다.
+
+## commit 로그 요구사항 (3단계 참조)
+
+## 기능 구현
+* LottoRank enum 수정
+  * 3단계에서 만든 LottoRank enum 에 2등 상수 추가
+* Lotto.compareWinLottoNumber() 에 보너스 번호 인자 값 추가
+  * 방안 1 - 그럼 Lotto 에 보너스 볼이 있는지 없는지 boolean 상태값을 추가 
+  * 방안 2 - LottoNumber 에 boolean 리턴값으로하는 보너스 볼 contains 메서드 추가
+    * LottoRank.searchRank에 boolean 인자값 추가
+* view 단 개발
+  
