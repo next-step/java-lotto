@@ -17,17 +17,17 @@ public class LottoUtils {
 	}
 
 	public static Lottos mapStringListToLottos(Lottos lottos, List<String> lottosStringList) {
-		lottosStringList.forEach(lottoString -> lottos.addLotto(getStringToLotto(lottoString)));
+		lottosStringList.forEach(lottoString -> lottos.addLotto(mapStringToLotto(lottoString)));
 		return lottos;
 	}
 
-	public static Lotto getStringToLotto(String lottoString) {
+	public static Lotto mapStringToLotto(String lottoString) {
 		String[] lottoArrays = lottoString.split(LOTTO_STRING_DELIMITER_REGEX);
 		List<LottoNumber> winningLottoNumbers = new ArrayList<>();
 		Arrays.stream(lottoArrays)
 			.forEach(
 				winningLottoNumber -> winningLottoNumbers.add(
-					new LottoNumber(Integer.parseInt(winningLottoNumber.trim()))));
+					LottoNumber.of(Integer.parseInt(winningLottoNumber.trim()))));
 		return new Lotto(winningLottoNumbers);
 	}
 }

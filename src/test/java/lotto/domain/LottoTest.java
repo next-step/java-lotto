@@ -17,12 +17,12 @@ public class LottoTest {
 	@BeforeEach
 	void setUp() {
 		lottoNumbers = new ArrayList<>();
-		lottoNumbers.add(new LottoNumber(1));
-		lottoNumbers.add(new LottoNumber(2));
-		lottoNumbers.add(new LottoNumber(3));
-		lottoNumbers.add(new LottoNumber(4));
-		lottoNumbers.add(new LottoNumber(5));
-		lottoNumbers.add(new LottoNumber(6));
+		lottoNumbers.add(LottoNumber.of(1));
+		lottoNumbers.add(LottoNumber.of(2));
+		lottoNumbers.add(LottoNumber.of(3));
+		lottoNumbers.add(LottoNumber.of(4));
+		lottoNumbers.add(LottoNumber.of(5));
+		lottoNumbers.add(LottoNumber.of(6));
 	}
 
 	@Test
@@ -34,9 +34,23 @@ public class LottoTest {
 
 	@Test
 	@DisplayName("로또 6개 숫자 이상의 생성 시 에러 발생 테스트")
-	public void createLottoException() {
-		lottoNumbers.add(new LottoNumber(7));
+	public void createLotto_6자리_로또_숫자가_아닌_경우() {
+		lottoNumbers.add(LottoNumber.of(7));
 		assertThatThrownBy(() -> new Lotto(lottoNumbers))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@DisplayName("로또 중복 번호 체크 에러 테스트")
+	public void createLotto_중복번호가_입력되_에러_발생하는_경우(){
+		List<LottoNumber> duplicatedLotto = new ArrayList<>();
+		duplicatedLotto.add(LottoNumber.of(1));
+		duplicatedLotto.add(LottoNumber.of(1));
+		duplicatedLotto.add(LottoNumber.of(3));
+		duplicatedLotto.add(LottoNumber.of(4));
+		duplicatedLotto.add(LottoNumber.of(5));
+		duplicatedLotto.add(LottoNumber.of(6));
+		assertThatThrownBy(() -> new Lotto(duplicatedLotto))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -61,12 +75,12 @@ public class LottoTest {
 	public void notEqualsLottoTest() {
 		Lotto sourceLotto = new Lotto(lottoNumbers);
 		List<LottoNumber> anotherLottoNumbers = new ArrayList<>();
-		anotherLottoNumbers.add(new LottoNumber(1));
-		anotherLottoNumbers.add(new LottoNumber(2));
-		anotherLottoNumbers.add(new LottoNumber(3));
-		anotherLottoNumbers.add(new LottoNumber(4));
-		anotherLottoNumbers.add(new LottoNumber(5));
-		anotherLottoNumbers.add(new LottoNumber(7));
+		anotherLottoNumbers.add(LottoNumber.of(1));
+		anotherLottoNumbers.add(LottoNumber.of(2));
+		anotherLottoNumbers.add(LottoNumber.of(3));
+		anotherLottoNumbers.add(LottoNumber.of(4));
+		anotherLottoNumbers.add(LottoNumber.of(5));
+		anotherLottoNumbers.add(LottoNumber.of(7));
 		Lotto winningLotto = new Lotto(anotherLottoNumbers);
 		assertThat(sourceLotto).isNotNull();
 		assertThat(winningLotto).isNotNull();
@@ -81,12 +95,12 @@ public class LottoTest {
 		int sixthNumber, int matches) {
 		Lotto sourceLotto = new Lotto(lottoNumbers);
 		List<LottoNumber> anotherLottoNumbers = new ArrayList<>();
-		anotherLottoNumbers.add(new LottoNumber(firstNumber));
-		anotherLottoNumbers.add(new LottoNumber(secondNumber));
-		anotherLottoNumbers.add(new LottoNumber(thirdNumber));
-		anotherLottoNumbers.add(new LottoNumber(fourthNumber));
-		anotherLottoNumbers.add(new LottoNumber(fifthNumber));
-		anotherLottoNumbers.add(new LottoNumber(sixthNumber));
+		anotherLottoNumbers.add(LottoNumber.of(firstNumber));
+		anotherLottoNumbers.add(LottoNumber.of(secondNumber));
+		anotherLottoNumbers.add(LottoNumber.of(thirdNumber));
+		anotherLottoNumbers.add(LottoNumber.of(fourthNumber));
+		anotherLottoNumbers.add(LottoNumber.of(fifthNumber));
+		anotherLottoNumbers.add(LottoNumber.of(sixthNumber));
 		Lotto winningLotto = new Lotto(anotherLottoNumbers);
 		assertThat(winningLotto.getMatchesCount(sourceLotto)).isEqualTo(matches);
 	}
@@ -95,8 +109,8 @@ public class LottoTest {
 	@DisplayName("로또에 로또 번호가 포함되어있는지 확인하는 테스트")
 	public void containLottoNumber() {
 		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.containNumber(new LottoNumber(6))).isEqualTo(true);
-		assertThat(lotto.containNumber(new LottoNumber(7))).isEqualTo(false);
+		assertThat(lotto.containNumber(LottoNumber.of(6))).isEqualTo(true);
+		assertThat(lotto.containNumber(LottoNumber.of(7))).isEqualTo(false);
 	}
 
 }

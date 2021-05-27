@@ -22,7 +22,7 @@ public class LottoGenerator {
 		List<LottoNumber> allNumbers = new ArrayList<>();
 		int number = LottoNumber.MIN_LOTTO_NUMBER;
 		while (number < LottoNumber.MAX_LOTTO_NUMBER) {
-			LottoNumber lottoNumber = new LottoNumber(number);
+			LottoNumber lottoNumber = LottoNumber.of(number);
 			allNumbers.add(lottoNumber);
 			number++;
 		}

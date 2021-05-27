@@ -51,11 +51,11 @@ public class LottoGame {
 	}
 
 	private static void inputLastWeekWinningNumber() {
-		winningLotto = LottoUtils.getStringToLotto(LottoInputView.inputWinningLotto());
+		winningLotto = LottoUtils.mapStringToLotto(LottoInputView.inputWinningLotto());
 	}
 
 	private static void inputBonusNumber() {
-		bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
+		bonusNumber = LottoNumber.of(LottoInputView.inputBonusNumber());
 		if (winningLotto.containNumber(bonusNumber)) {
 			inputBonusNumber();
 		}
