@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.game.exception.IllegalBallNumberException;
 import lotto.io.domain.vo.InputText;
+import lotto.io.exception.IllegalInputTextException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BallTest {
@@ -31,7 +32,7 @@ public class BallTest {
 		}
 		//then - throw NumberFormatException
 		assertThatThrownBy(() -> Ball.validateGenerate(inputText))
-			.isInstanceOfAny(IllegalBallNumberException.class);
+			.isInstanceOfAny(IllegalInputTextException.class, IllegalBallNumberException.class);
 	}
 
 	@DisplayName("4-1-2-1-2.`generate()` : Ball 생성")
@@ -50,7 +51,8 @@ public class BallTest {
 			return;
 		}
 		//then - throw NumberFormatException
-		assertThatThrownBy(() -> Ball.generate(inputText).number()).isInstanceOf(IllegalBallNumberException.class);
+		assertThatThrownBy(() -> Ball.generate(inputText).number())
+			.isInstanceOfAny(IllegalInputTextException.class, IllegalBallNumberException.class);
 	}
 
 	@DisplayName("4-1-2-1-3.`equals()` : 등가성 비교")

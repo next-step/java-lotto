@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.game.exception.IllegalBallNumberException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.exception.IllegalInputTextException;
 
@@ -27,17 +28,38 @@ public class InputText {
 	}
 
 	public static void validateGenerate(String text) {
-		validateNotNullAndNotEmpty(text);
+		validateNotNull(text);
+		validateNotEmpty(text);
 	}
 
-	private static void validateNotNullAndNotEmpty(String text) {
-		if (isNullOrEmpty(text)) {
-			throw new IllegalInputTextException("입력 값은 Null 혹은 공백의 문자열일 수 없습니다.");
+	private static void validateNotNull(Object object) {
+		if (Objects.isNull(object)) {
+			throw new IllegalInputTextException("InputText 혹은 입력 값은 null일 수 없습니다.");
 		}
 	}
 
-	private static boolean isNullOrEmpty(String text) {
-		return text == null || text.trim().isEmpty();
+	private static void validateNotEmpty(String text) {
+		if (text.trim().isEmpty()) {
+			throw new IllegalInputTextException("입력 값은 공백의 문자열일 수 없습니다.");
+		}
+	}
+
+	public static void validateNumberFormatInputText(InputText inputText) {
+		validateInputText(inputText);
+		try {
+			Integer.parseInt(inputText.value);
+		} catch (NumberFormatException e) {
+			throw new IllegalInputTextException("Integer 값으로 parsing할 수 없습니다. 입력된 값 : " + inputText.value);
+		}
+	}
+
+	public static void validateInputText(InputText inputText) {
+		validateNotNull(inputText);
+		validateGenerate(inputText.value);
+	}
+
+	public int parseInt() {
+		return Integer.parseInt(value);
 	}
 
 	public InputTextGroup splitByComma() {

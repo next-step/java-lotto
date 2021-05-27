@@ -9,8 +9,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.game.exception.IllegalMoneyAmountException;
+import lotto.game.exception.IllegalMoneyException;
 import lotto.io.domain.vo.InputText;
+import lotto.io.exception.IllegalInputTextException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MoneyTest {
@@ -32,7 +33,7 @@ public class MoneyTest {
 		}
 		//then - throw NumberFormatException
 		assertThatThrownBy(() -> Money.validateGenerate(inputText))
-			.isInstanceOfAny(IllegalMoneyAmountException.class);
+			.isInstanceOfAny(IllegalInputTextException.class, IllegalMoneyException.class);
 	}
 
 	@DisplayName("4-1-2-6-2.generate() : 돈 생성")
@@ -52,7 +53,7 @@ public class MoneyTest {
 		}
 		//then - throw NumberFormatException
 		assertThatThrownBy(() -> Money.generate(inputText))
-			.isInstanceOfAny(IllegalMoneyAmountException.class);
+			.isInstanceOfAny(IllegalInputTextException.class, IllegalMoneyException.class);
 	}
 
 	@DisplayName("4-1-2-6-3.countOfGames() : 입력된 금액에서 구매할 수 있는 게임의 수")
@@ -72,6 +73,6 @@ public class MoneyTest {
 		}
 		//then - throw NumberFormatException
 		assertThatThrownBy(() -> Money.generate(inputText))
-			.isInstanceOfAny(IllegalMoneyAmountException.class);
+			.isInstanceOfAny(IllegalMoneyException.class);
 	}
 }

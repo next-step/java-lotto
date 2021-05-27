@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.game.domain.aggregate.BallGroup;
-import lotto.game.exception.IllegalBallGroupException;
+import lotto.game.exception.IllegalGameException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
 
@@ -64,7 +64,7 @@ public class GameTest {
 		//when
 
 		//then
-		assertThatThrownBy(() -> Game.generateCustom(ballGroup)).isInstanceOf(IllegalBallGroupException.class);
+		assertThatThrownBy(() -> Game.generateCustom(ballGroup)).isInstanceOf(IllegalGameException.class);
 	}
 
 	@DisplayName("4-1-2-3-3.equals()")

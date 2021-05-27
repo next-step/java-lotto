@@ -3,11 +3,12 @@ package lotto.game.domain.aggregate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import lotto.game.domain.vo.Ball;
+import lotto.game.exception.IllegalBallGroupException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
-import lotto.io.exception.IllegalInputTextGroupException;
 
 public class BallGroup {
 	private static final List<Ball> ALL_OF_BALLS = new ArrayList<>();
@@ -37,27 +38,13 @@ public class BallGroup {
 	}
 
 	public static BallGroup generate(InputTextGroup inputTextGroup) {
-		validateGenerate(inputTextGroup);
+		InputTextGroup.validateInputTextGroup(inputTextGroup);
 		List<Ball> balls = new ArrayList<>();
 		for (InputText inputText : inputTextGroup.inputTexts()) {
 			addBallWhenNotDuplicated(balls, inputText);
 		}
 		Collections.sort(balls);
 		return new BallGroup(Collections.unmodifiableList(balls));
-	}
-
-	private static void validateGenerate(InputTextGroup inputTextGroup) {
-		validateNotNullAndNotEmpty(inputTextGroup);
-	}
-
-	private static void validateNotNullAndNotEmpty(InputTextGroup inputTextGroup) {
-		if (inputTextGroup == null || inputTextGroup.inputTexts() == null || inputTextGroup.inputTexts().isEmpty()) {
-			throw new IllegalInputTextGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
-		}
-	}
-
-	public static List<Ball> allOfBalls() {
-		return new ArrayList<>(ALL_OF_BALLS);
 	}
 
 	public static BallGroup generate(List<Ball> subList) {
@@ -67,26 +54,33 @@ public class BallGroup {
 		return new BallGroup(Collections.unmodifiableList(balls));
 	}
 
-	private static void validateGenerate(List<Ball> subList) {
-		validateNotNullAndNotEmpty(subList);
-	}
-
-	private static void validateNotNullAndNotEmpty(List<Ball> subList) {
-		if (subList == null || subList.isEmpty()) {
-			throw new IllegalInputTextGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
-		}
+	public static List<Ball> allOfBalls() {
+		return new ArrayList<>(ALL_OF_BALLS);
 	}
 
 	public List<Ball> balls() {
 		return Collections.unmodifiableList(this.balls);
 	}
 
-	public String makeMsgBalls() {
-		StringBuilder stringBuilder = new StringBuilder("[");
-		for (Ball ball : balls) {
-			stringBuilder.append(ball.number()).append(",");
+	private static void validateNotNull(Object object) {
+		if (Objects.isNull(object)) {
+			throw new IllegalBallGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
 		}
-		stringBuilder.replace(stringBuilder.lastIndexOf(","), stringBuilder.length(), "]");
-		return stringBuilder.toString();
+	}
+
+	private static void validateNotEmpty(List<Ball> subList) {
+		if (subList.isEmpty()) {
+			throw new IllegalBallGroupException("입력값이 최소 1개 이상 존재해야 합니다.");
+		}
+	}
+
+	private static void validateGenerate(List<Ball> subList) {
+		validateNotNull(subList);
+		validateNotEmpty(subList);
+	}
+
+	public static void validateBallGroup(BallGroup ballGroup) {
+		validateNotNull(ballGroup);
+		validateGenerate(ballGroup.balls);
 	}
 }

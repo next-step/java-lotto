@@ -84,7 +84,7 @@ public class BallGroupTest {
 
 		//then
 		assertThatThrownBy(() -> BallGroup.generate(nullInputTextGroup))
-			.isInstanceOf(IllegalInputTextGroupException.class);
+			.isInstanceOfAny(IllegalInputTextListException.class, IllegalInputTextGroupException.class);
 	}
 
 	@DisplayName("4-1-2-2-2.`allOfBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.")

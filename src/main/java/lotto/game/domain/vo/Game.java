@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import lotto.game.domain.aggregate.BallGroup;
-import lotto.game.exception.IllegalBallGroupException;
+import lotto.game.exception.IllegalGameException;
 
 public class Game {
 	private static final int GAME_BALL_START_INDEX = 0;
@@ -25,33 +25,23 @@ public class Game {
 	}
 
 	public static Game generateCustom(BallGroup ballGroup) {
-		validateGanerate(ballGroup);
+		validateGenerate(ballGroup);
 		return new Game(ballGroup);
 	}
 
-	private static void validateGanerate(BallGroup ballGroup) {
-		validateNotNullAndNotEmpty(ballGroup);
+	private static void validateGenerate(BallGroup ballGroup) {
+		BallGroup.validateBallGroup(ballGroup);
 		validateBallGroupSizeEqualSix(ballGroup);
 	}
 
 	private static void validateBallGroupSizeEqualSix(BallGroup ballGroup) {
 		if (!isBallGroupSizeEqualSix(ballGroup)) {
-			throw new IllegalBallGroupException("게임은 반드시 숫자가 다른 " + GAME_BALL_SIZE + "개의 볼을 가지고 있어야 합니다.");
+			throw new IllegalGameException("게임은 반드시 숫자가 다른 " + GAME_BALL_SIZE + "개의 볼을 가지고 있어야 합니다.");
 		}
 	}
 
 	private static boolean isBallGroupSizeEqualSix(BallGroup ballGroup) {
 		return ballGroup.balls().size() == GAME_BALL_SIZE;
-	}
-
-	private static void validateNotNullAndNotEmpty(BallGroup ballGroup) {
-		if (isNullOrEmpty(ballGroup)) {
-			throw new IllegalBallGroupException("볼은 적어도 1개 이상이 있어야 합니다.");
-		}
-	}
-
-	private static boolean isNullOrEmpty(BallGroup ballGroup) {
-		return ballGroup == null || ballGroup.balls() == null || ballGroup.balls().isEmpty();
 	}
 
 	public BallGroup ballGroup() {
@@ -62,5 +52,12 @@ public class Game {
 		List<Ball> thisBalls = this.ballGroup.balls();
 		List<Ball> thatBalls = compareGame.ballGroup.balls();
 		return thisBalls.containsAll(thatBalls) && thatBalls.containsAll(thisBalls);
+	}
+
+	public int calculateContainWinningBalls(Game winningCondition) {
+		List<Ball> boughtBalls = this.ballGroup.balls();
+		return (int) winningCondition.ballGroup().balls().stream()
+			.filter(boughtBalls::contains)
+			.count();
 	}
 }

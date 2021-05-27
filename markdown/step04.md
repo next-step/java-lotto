@@ -291,24 +291,24 @@ class Demeter {
         - [x] 0-4-6.원본(next-step) git repository에서 merge된 나의 branch(gregolee)를 fetch : `git fetch upstream gregolee`
         - [x] 0-4-7.remote에서 가져온 나의 branch로 rebase : `git rebase upstream/gregolee`
         - [x] 0-4-7.gregolee -> step4로 체크아웃 : `git checkout -b step4`
-    - [ ] 0-5.리뷰어님의 리뷰를 반영한 코드로 수정
+    - [x] 0-5.리뷰어님의 리뷰를 반영한 코드로 수정
         - [x] 0-5-1.`Unchecked Exception` 적용 고려
             - [x] 0-5-1-1.`Checked Exception` -> `Unchecked Exception`
                 - [x] 0-5-1-1-1.GameContextIllegalParameterException.java
                 - [x] 0-5-1-1-2.IoContextIllegalParameterException.java
             - [x] 0-5-1-2.`Unchecked Exception` -> `Checked Exception`
                 - [x] 0-5-1-2-1.InputOutputUtil.java > IOException
-        - [ ] 0-5-2.`디미터 법칙(Law of Demeter)` 적용 : 역할 위임
-            - [ ] 0-5-2-1.BallGroup.java > validateNotNullAndNotEmpty
-            - [ ] 0-5-2-2.Game.java > isNullOrEmpty
-            - [ ] 0-5-2-3.GameGroup.java > validateCountOfGames -> Money.java
-            - [ ] 0-5-2-4.Ball.java > parse(), validate~ -> InputText.java
-            - [ ] 0-5-2-5.GameWinningCondition.java > isNullOrEmpty, calculateContainWinningBalls -> Game.java
-            - [ ] 0-5-2-5.GameWinningCondition.java > calculateEarningRate -> Money.java
-        - [ ] 0-5-3.출력을 담당하는 객체로 위임
-            - [ ] 0-5-3-1.BallGroup.java > makeMsgBalls()
-            - [ ] 0-5-3-2.GameGroup.java > makeMsgAllGames()
-            - [ ] 0-5-3-3.GameWinningCondition.java > makeMsgWinningStatistics
+        - [x] 0-5-2.`디미터 법칙(Law of Demeter)` 적용 : 역할 위임
+            - [x] 0-5-2-1.BallGroup.java > validateNotNullAndNotEmpty
+            - [x] 0-5-2-2.Game.java > isNullOrEmpty
+            - [x] 0-5-2-3.GameGroup.java > validateCountOfGames -> Money.java
+            - [x] 0-5-2-4.Ball.java > parse(), validate~ -> InputText.java
+            - [x] 0-5-2-5.GameWinningCondition.java > isNullOrEmpty, calculateContainWinningBalls -> Game.java
+            - [x] 0-5-2-5.GameWinningCondition.java > calculateEarningRate -> Money.java
+        - [x] 0-5-3.출력을 담당하는 객체로 위임
+            - [x] 0-5-3-1.BallGroup.java > makeMsgBalls()
+            - [x] 0-5-3-2.GameGroup.java > makeMsgAllGames()
+            - [x] 0-5-3-3.GameWinningCondition.java > makeMsgWinningStatistics
         - [x] 0-5-4.Lambda 표현
             - [x] 0-5-4-1.GameGroup.java > findCode [리뷰어님 코드 참조](https://github.com/next-step/java-lotto/pull/1668/files/501e79acc66e1d7414668dc3ce71b24dd9fb4a4b#diff-aa283a537bfb0ab4c3f6811f34e8b39baf989ade08d2a0e282941f5a6f2d9458)
 - [x] 1.자바 코드 컨벤션을 위한 세팅

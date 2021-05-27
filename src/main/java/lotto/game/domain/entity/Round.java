@@ -3,13 +3,12 @@ package lotto.game.domain.entity;
 import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Game;
-import lotto.game.domain.vo.GameWinningCondition;
 import lotto.game.domain.vo.Money;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
 
 public class Round {
-	private GameWinningCondition gameWinningCondition;
+	private Game gameWinningCondition;
 	private GameGroup boughtGames;
 	private Money money;
 
@@ -20,12 +19,11 @@ public class Round {
 	public Round setupGameWinningCondition(InputText inputText) {
 		InputTextGroup inputTextGroup = inputText.splitByComma();
 		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
-		Game customGame = Game.generateCustom(ballGroup);
-		this.gameWinningCondition = GameWinningCondition.generate(customGame);
+		this.gameWinningCondition = Game.generateCustom(ballGroup);
 		return this;
 	}
 
-	public GameWinningCondition gameWinningCondition() {
+	public Game gameWinningCondition() {
 		return this.gameWinningCondition;
 	}
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import lotto.game.domain.vo.Money;
-import lotto.game.exception.IllegalMoneyAmountException;
+import lotto.game.exception.IllegalMoneyException;
 import lotto.io.domain.vo.InputText;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -34,29 +34,6 @@ public class GameGroupTest {
 		}
 		//then - throw IllegalMoneyAmountException
 		assertThatThrownBy(() -> GameGroup.buyGames(money))
-			.isInstanceOfAny(IllegalMoneyAmountException.class);
-	}
-
-	@DisplayName("4-1-2-4-2.`makeMsgAllGames()` : 모든 게임의 정보를 메시지로 작성한다.")
-	@ParameterizedTest(name = "{index} - moneyAmountText:[{0}], gameCount:{1}, exceptedNotThrownException:{2}")
-	@Order(2)
-	@CsvSource(value = {"0;0;false", "999;0;false", "1000;1;true", "100000;100;true",
-			"1500;1;true"}, delimiter = ';')
-	void makeMsgAllGames(String moneyAmountText, int gameCount, boolean exceptedNotThrownException) {
-		//given
-		InputText inputText = InputText.generate(moneyAmountText);
-		Money money = Money.generate(inputText);
-
-		//when
-		if (exceptedNotThrownException) {
-			//then - not throw any Exception
-			GameGroup gameGroup = GameGroup.buyGames(money);
-			assertThat(gameGroup.games().size()).isEqualTo(gameCount);
-			System.out.println(gameGroup.makeMsgAllGames());
-			return;
-		}
-		//then - throw IllegalMoneyAmountException
-		assertThatThrownBy(() -> GameGroup.buyGames(money))
-			.isInstanceOfAny(IllegalMoneyAmountException.class);
+			.isInstanceOfAny(IllegalMoneyException.class);
 	}
 }
