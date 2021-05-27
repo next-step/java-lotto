@@ -19,6 +19,8 @@ import static lotto.domain.LottoNumber.valueOf;
 
 public class WinningLottoNumber {
     private static final String COMMA = ",";
+    private static final int MATCHING_BONUS_NUMBER  = 1;
+    private static final int MISMATCHING_BONUS_NUMBER  = 0;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+(,\\d+)*$");
 
     private LottoGame prizeLottoNumber;
@@ -94,7 +96,7 @@ public class WinningLottoNumber {
 
     private Rank decidePrizeEachGame(LottoGame lottoGame) {
         int prizeResult = prizeLottoNumber.compare(lottoGame);
-        int bonusNumberResult = (lottoGame.find(bonusLottoNumber) ? 1 : 0);
+        int bonusNumberResult = (lottoGame.find(bonusLottoNumber) ? MATCHING_BONUS_NUMBER : MISMATCHING_BONUS_NUMBER);
         return Rank.valueOf(prizeResult, bonusNumberResult);
     }
 }
