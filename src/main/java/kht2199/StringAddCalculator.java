@@ -3,35 +3,39 @@ package kht2199;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kht2199.exception.CannotFoundPatternException;
+
 @SuppressWarnings("SameParameterValue")
 public class StringAddCalculator {
 
-	private static final String TOKEN_REGEX = "[,:]";
+	private static final String DELIMITER_REGEX = "[,:]";
 
-	private static final Pattern TOKEN_PATTERN = Pattern.compile("//(.)\n(.*)");
+	private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
 	public static int splitAndSum(String text) {
 		if (!checkValidationInputText(text)) {
 			return 0;
 		}
 
-		String[] tokens = parseTokensByMatcher(TOKEN_PATTERN, text);
-		if (tokens == null) {
-			tokens = text.split(TOKEN_REGEX);
+		String[] tokens;
+		try {
+			tokens = parseTextByMatcher(DELIMITER_PATTERN, text);
+		} catch (CannotFoundPatternException e) {
+			tokens = text.split(DELIMITER_REGEX);
 		}
 
-		Integer[] intTokens = stringToInt(tokens);
-		for (Integer token : intTokens) {
+		int[] intTokens = stringToInt(tokens);
+		for (int token : intTokens) {
 			checkValidationToken(token);
 		}
 
 		return accumulate(intTokens);
 	}
 
-	private static String[] parseTokensByMatcher(Pattern pattern, String text) {
+	private static String[] parseTextByMatcher(Pattern pattern, String text) throws CannotFoundPatternException {
 		Matcher matcher = pattern.matcher(text);
 		if (!matcher.find()) {
-			return null;
+			throw new CannotFoundPatternException();
 		}
 		checkValidationMatcherGroupCount(matcher);
 		return matcher.group(2).split(matcher.group(1));
@@ -44,9 +48,9 @@ public class StringAddCalculator {
 		}
 	}
 
-	private static int accumulate(Integer[] values) {
+	private static int accumulate(int[] values) {
 		int sum = 0;
-		for (Integer integer : values) {
+		for (int integer : values) {
 			sum += integer;
 		}
 		return sum;
@@ -57,7 +61,7 @@ public class StringAddCalculator {
 	 * @param token 토큰
 	 * @throws RuntimeException token 검증 실패시 발생.
 	 */
-	private static void checkValidationToken(Integer token) throws RuntimeException {
+	private static void checkValidationToken(int token) throws RuntimeException {
 		if (token < 0) {
 			throw new RuntimeException("token is less than 0." + token);
 		}
@@ -76,8 +80,8 @@ public class StringAddCalculator {
 		return !text.isEmpty();
 	}
 
-	private static Integer[] stringToInt(String[] string) {
-		Integer[] result = new Integer[string.length];
+	private static int[] stringToInt(String[] string) {
+		int[] result = new int[string.length];
 		for (int index = 0; index < string.length; index++) {
 			result[index] = Integer.parseInt(string[index]);
 		}
