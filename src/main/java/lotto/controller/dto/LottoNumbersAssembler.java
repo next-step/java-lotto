@@ -12,13 +12,17 @@ import java.util.stream.Collectors;
 public class LottoNumbersAssembler {
 
     public static LottoTickets assemblePurchaseTickets(List<LottoNumbersDto> purchaseNumbers) {
-        List<LottoTicket> lottoTicketList = purchaseNumbers.stream()
-                .map(LottoNumbersAssembler::assembleLottoNumbers)
-                .collect(Collectors.toList())
+        List<LottoTicket> lottoTicketList = assembleLottoNumbersList(purchaseNumbers)
                 .stream()
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
         return new LottoTickets(lottoTicketList);
+    }
+
+    public static List<LottoNumbers> assembleLottoNumbersList(List<LottoNumbersDto> lottoNumbersDtoList) {
+        return lottoNumbersDtoList.stream()
+                .map(LottoNumbersAssembler::assembleLottoNumbers)
+                .collect(Collectors.toList());
     }
 
     public static LottoNumbers assembleLottoNumbers(LottoNumbersDto numbers) {
