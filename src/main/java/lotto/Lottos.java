@@ -18,7 +18,7 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public LottoResult getWinningResult(List<Integer> winningNumber) {
+	public LottoResult getWinningResult(WinningNumber winningNumber) {
 		return LottoResult.of(lottos.stream()
 				.map(it -> it.checkWinning(winningNumber))
 				.collect(Collectors.toList()));

@@ -4,12 +4,9 @@ import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoNumberLengthException;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Lotto {
-	private static final int TWO_LOTTO_NUMBERS_LENGTH = Constants.LOTTO_NUMBERS_LENGTH * 2;
 	private final List<Integer> numbers;
 
 	public Lotto(List<Integer> numbers) {
@@ -31,10 +28,8 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	public LottoPrizeType checkWinning(List<Integer> winningNumber) {
-		Set<Integer> set = new HashSet<>(winningNumber);
-		set.addAll(this.numbers);
-		return LottoPrizeType.valueByMatchedNumberCount(TWO_LOTTO_NUMBERS_LENGTH - set.size());
+	public LottoPrizeType checkWinning(WinningNumber winningNumber) {
+		return winningNumber.checkWinning(numbers);
 	}
 
 	@Override

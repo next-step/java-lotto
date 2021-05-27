@@ -19,8 +19,9 @@ public class LottoTest {
 	void checkWinningTest() {
 		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
 		List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-		LottoPrizeType matchedNumber = lotto.checkWinning(winningNumber);
-		assertThat(matchedNumber).isEqualTo(LottoPrizeType.FIVE_MATCHED);
+		int bonusNumber = 10;
+		LottoPrizeType matchedNumber = lotto.checkWinning(WinningNumber.of(winningNumber, bonusNumber));
+		assertThat(matchedNumber).isEqualTo(LottoPrizeType.THIRD);
 	}
 
 	@Test

@@ -5,10 +5,11 @@ import java.util.Arrays;
 
 public enum LottoPrizeType {
 	NO_MATCHED(0, BigDecimal.ZERO),
-	THREE_MATCHED(3, BigDecimal.valueOf(5_000)),
-	FOUR_MATCHED(4, BigDecimal.valueOf(50_000)),
-	FIVE_MATCHED(5, BigDecimal.valueOf(1_500_000)),
-	SIX_MATCHED(6, BigDecimal.valueOf(2_000_000_000));
+	FIFTH(3, BigDecimal.valueOf(5_000)),
+	FOURTH(4, BigDecimal.valueOf(50_000)),
+	THIRD(5, BigDecimal.valueOf(1_500_000)),
+	SECOND(5, BigDecimal.valueOf(30_000_000)),
+	FIRST(6, BigDecimal.valueOf(2_000_000_000));
 
 	private static final int MAXIMUM_MATCHED_NUMBER = 6;
 	private static final int MINIMUM_WINNING_MATCHED_NUMBER = 3;
@@ -21,11 +22,18 @@ public enum LottoPrizeType {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public static LottoPrizeType valueByMatchedNumberCount(int matchedNumberCount) {
+	public static LottoPrizeType valueByMatchedNumberCount(int matchedNumberCount, boolean bonusBallMatched) {
 		return Arrays.stream(LottoPrizeType.values())
-				.filter(it -> it.matchedNumberCount == matchedNumberCount)
+				.filter(it -> filterPrize(matchedNumberCount, bonusBallMatched, it))
 				.findFirst()
 				.orElse(NO_MATCHED);
+	}
+
+	private static boolean filterPrize(int matchedNumberCount, boolean bonusBallMatched, LottoPrizeType it) {
+		if (it.matchedNumberCount == matchedNumberCount) {
+			return it != THIRD || !bonusBallMatched;
+		}
+		return false;
 	}
 
 	public boolean isWinningType() {
