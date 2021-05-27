@@ -37,10 +37,10 @@ public class GameInput implements Input {
         return request(message);
     }
 
-    public List<String> requestForMultipleValues(int repeat, String message) {
+    public List<String> requestForMultipleValues(int count, String message) {
         List<String> answers = new ArrayList<>(Arrays.asList(requestAfterNewLine(message)));
 
-        while (answers.size() < repeat) {
+        while (answers.size() < count) {
             answers.add(scanner.nextLine());
         }
 

@@ -22,8 +22,8 @@ public class Program {
     }
 
     public void run() {
-        OmrCard omrCard = new OmrCardInputData(input).request();
-        Round round = new RoundInputData(input).request();
+        OmrCard omrCard = new OmrCardInputData(input).input();
+        Round round = new RoundInputData(input).input();
 
         reportPrint(omrCard, round);
     }

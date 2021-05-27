@@ -4,58 +4,32 @@ import lotto.core.SixBall;
 import lotto.core.round.Round;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
-import lotto.ui.input.exception.InputException;
-import lotto.util.StringUtils;
+import lotto.ui.input.info.request.WinningBonusRequest;
+import lotto.ui.input.info.request.WinningSixBallsRequest;
 
 public class RoundInputData implements InputData<Round> {
-    private final GameInput input;
+    private final GameInput gameInput;
+    private final WinningSixBallsRequest winningSixBalls;
+    private final WinningBonusRequest winningBonus;
 
     public RoundInputData(Input input) {
-        this.input = (GameInput) input;
+        this.gameInput = (GameInput) input;
+
+        this.winningSixBalls = new WinningSixBallsRequest(gameInput);
+        this.winningBonus = new WinningBonusRequest(gameInput);
     }
 
     @Override
-    public Round request() {
+    public Round input() {
         try {
-            int[] fixedBalls = requestFixedBalls();
-            int bonus = requestBonus();
+            SixBall sixBall = winningSixBalls.request();
+            int bonus = winningBonus.request();
 
-            return new Round(SixBall.valueOf(fixedBalls), bonus);
+            return new Round(sixBall, bonus);
         } catch (Exception e) {
-            input.alertWarn(e.getMessage());
-            return request();
+            gameInput.alertWarn(e.getMessage());
+            return input();
         }
-    }
-
-    private int[] requestFixedBalls() throws InputException {
-        int[] fixedBalls = requestWinningNumber();
-
-        if (isWinningSixBallValidation(fixedBalls.length)) {
-            throw new InputException(String.format("당첨 번호는 총 %d개를 입력해주셔야 합니다.", SixBall.LENGTH));
-        }
-
-        return fixedBalls;
-    }
-
-    private int[] requestWinningNumber() throws InputException{
-        try {
-            String text = input.requestAfterNewLine("지난 주 당첨 번호를 입력해 주세요.");
-            return StringUtils.csvToIntArray(text);
-        } catch (NumberFormatException e) {
-            throw new InputException("시도 횟수는 숫자만 가능합니다.");
-        }
-    }
-
-    private int requestBonus() throws InputException {
-        try {
-            return Integer.parseInt(input.request("보너스 볼을 입력해 주세요."));
-        } catch (NumberFormatException e) {
-            throw new InputException("보너스 볼은 숫자만 가능합니다.");
-        }
-    }
-
-    private boolean isWinningSixBallValidation(int length) {
-        return length < SixBall.LENGTH;
     }
 
 }
