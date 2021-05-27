@@ -1,5 +1,6 @@
 package lotto;
 
+import static java.lang.Integer.*;
 import static java.util.stream.Collectors.*;
 
 import java.util.Map;
@@ -9,14 +10,29 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static final int LOTTO_MIN_NUMBER = 1;
-	public static final int LOTTO_MAX_NUMBER = 45;
+	public static final int LOTTO_LIMIT_NUMBER = 45 + 1;
 
-	private static final Map<Integer, LottoNumber> NUMBER_CACHE
-		= IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1)
+	private static final Map<Integer, LottoNumber> NUMBER_CACHE;
+
+	static {
+		NUMBER_CACHE = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
 			.boxed()
 			.collect(toMap(i -> i, LottoNumber::new));
+	}
 
 	private final int value;
+
+	private LottoNumber(int value) {
+		validateNumberValue(value);
+
+		this.value = value;
+	}
+
+	private static void validateNumberValue(int value) {
+		if (value < LOTTO_MIN_NUMBER || LOTTO_LIMIT_NUMBER <= value) {
+			throw new IllegalArgumentException("Number must be between 1 and 45");
+		}
+	}
 
 	public static LottoNumber valueOf(int value) {
 		if (NUMBER_CACHE.containsKey(value)) {
@@ -26,16 +42,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return NUMBER_CACHE.put(value, new LottoNumber(value));
 	}
 
-	private LottoNumber(int value) {
-		validateNumberValue(value);
-
-		this.value = value;
-	}
-
-	private static void validateNumberValue(int value) {
-		if (value < LOTTO_MIN_NUMBER || LOTTO_MAX_NUMBER < value) {
-			throw new IllegalArgumentException("Number must be between 1 and 45");
-		}
+	public static LottoNumber valueOf(String value) {
+		return valueOf(parseInt(value));
 	}
 
 	@Override

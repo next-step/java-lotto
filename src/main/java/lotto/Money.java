@@ -12,17 +12,17 @@ public class Money {
 		this.value = value;
 	}
 
+	private static void validateMoneyValue(int value) {
+		if (value < 0) {
+			throw new IllegalArgumentException("Money cannot be negative!");
+		}
+	}
+
 	public int buyCount() {
 		return value / LOTTO_PRICE;
 	}
 
 	public boolean isEnough() {
 		return LOTTO_PRICE <= value;
-	}
-
-	private static void validateMoneyValue(int value) {
-		if (value < 0) {
-			throw new IllegalArgumentException("Money cannot be negative!");
-		}
 	}
 }

@@ -22,17 +22,17 @@ public class Lottos {
 		this.values = values;
 	}
 
+	private static void validateMoney(Money money) {
+		if (!money.isEnough()) {
+			throw new IllegalArgumentException("Not enough money to buy a lotto.");
+		}
+	}
+
 	public List<Lotto> values() {
 		return unmodifiableList(values);
 	}
 
 	public int count() {
 		return values.size();
-	}
-
-	private static void validateMoney(Money money) {
-		if (!money.isEnough()) {
-			throw new IllegalArgumentException("Not enough money to buy a lotto.");
-		}
 	}
 }

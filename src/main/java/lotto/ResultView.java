@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Winner.*;
+import static lotto.Rank.*;
 
 import java.util.Map;
 
@@ -12,22 +12,24 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void printWinningResult(WinningResult result) {
+	public static void printWinningResult(GameResult result) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		Map<Winner, Integer> dashboard = result.dashboard();
+		Map<Rank, Integer> dashboard = result.dashboard();
 
 		System.out.printf(
 			"3개 일치 (%d원)- %d개\n"
 			+ "4개 일치 (%d원)- %d개\n"
 			+ "5개 일치 (%d원)- %d개\n"
+			+ "5개 일치, 보너스 볼 일치(%d원)- %d개\n"
 			+ "6개 일치 (%d원)- %d개\n"
 			+ "총 수익률은 %.2f입니다.\n",
-			FOURTH_PRIZE.award(), dashboard.get(FOURTH_PRIZE),
-			THIRD_PRIZE.award(), dashboard.get(THIRD_PRIZE),
-			SECOND_PRIZE.award(), dashboard.get(SECOND_PRIZE),
-			FIRST_PRIZE.award(), dashboard.get(FIRST_PRIZE),
+			FOURTH.award(), dashboard.get(FIFTH),
+			FOURTH.award(), dashboard.get(FOURTH),
+			THIRD.award(), dashboard.get(THIRD),
+			SECOND.award(), dashboard.get(SECOND),
+			FIRST.award(), dashboard.get(FIRST),
 			result.earningRate()
 		);
 	}
