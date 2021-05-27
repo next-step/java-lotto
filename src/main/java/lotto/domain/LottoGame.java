@@ -5,13 +5,17 @@ import java.util.List;
 
 public class LottoGame {
 
-	public Lottos purchaseLottos(PurchaseAmount purchaseAmount, RandomNumbersGenerator randomNumbersGenerator) {
-		List<Lotto> lottos = new ArrayList<>();
-		int lottoCount = purchaseAmount.findNumberOfAvailablePurchases();
-		for (int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto(randomNumbersGenerator));
+	public PurchaseLottos purchaseLottos(PurchaseRequest purchaseRequest, RandomNumbersGenerator randomNumbersGenerator) {
+		Lottos autoLottos = purchaseAutoLottos(randomNumbersGenerator, purchaseRequest.findNumberOfAutomaticPurchases());
+		return new PurchaseLottos(purchaseRequest.getManualLottos(), autoLottos);
+	}
+
+	private Lottos purchaseAutoLottos(RandomNumbersGenerator randomNumbersGenerator, int countOfPurchase) {
+		List<Lotto> autoLottos = new ArrayList<>();
+		for (int i = 0; i < countOfPurchase; i++) {
+			autoLottos.add(new Lotto(randomNumbersGenerator));
 		}
-		return new Lottos(lottos);
+		return new Lottos(autoLottos);
 	}
 
 }

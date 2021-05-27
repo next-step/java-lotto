@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,11 +10,14 @@ public class InputView {
 
 	public static final String MESSAGE_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String MESSAGE_INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+	public static final String MESSAGE_INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 	public static final String MESSAGE_INPUT_BONUS_NUMBERS = "보너스 볼을 입력해 주세요.";
-	public static final String MESSAGE_PURCHAGE_COMPLETE = "%d개를 구매했습니다.\n";
+	public static final String MESSAGE_PURCHAGE_COMPLETE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	public static final String INPUT_LOTTO_NUMBERS_DELIMITER = ",";
 	public static final String MESSAGE_ERROR_PREFIX = "[ 예외발생 ] : ";
 	public static final String MESSAGE_EMPTY = "";
+	public static final String MESSAGE_INPUT_COUNT_OF_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String MESSAGE_INVALID_NUMBER = "유효하지 않은 숫자를 입력하셨습니다.";
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static PurchaseAmount inputPurchaseAmount() {
@@ -36,8 +38,45 @@ public class InputView {
 		}
 	}
 
+	public static Lottos inputManualLottos() {
+		int countOfManual = inputCountOfManual();
+		return inputManualLottos(countOfManual);
+	}
+
+	private static Lottos inputManualLottos(int countOfManual) {
+		if (countOfManual > 0) {
+			print();
+			print(MESSAGE_INPUT_MANUAL_LOTTO_NUMBERS);
+		}
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < countOfManual; i++) {
+			Lotto lotto = inputManualLotto();
+			lottos.add(lotto);
+		}
+		return new Lottos(lottos);
+	}
+
+	private static int inputCountOfManual() {
+		Integer countOfManual = null;
+		while (countOfManual == null) {
+			print();
+			print(MESSAGE_INPUT_COUNT_OF_MANUAL);
+			countOfManual = toCountOfManual(inputUsingScanner());
+		}
+		return countOfManual;
+	}
+
+	private static Integer toCountOfManual(String inputUsingScanner) {
+		try {
+			return Integer.parseInt(inputUsingScanner);
+		} catch (NumberFormatException e) {
+			printError(MESSAGE_INVALID_NUMBER);
+			return null;
+		}
+	}
+
 	public static WinningLotto inputWinningLotto() {
-		Lotto inputWinningLotto = inputLotto();
+		Lotto inputWinningLotto = inputLotto(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
 		WinningLotto winningLotto = null;
 		while (winningLotto == null) {
 			winningLotto = toWinningLotto(inputWinningLotto, inputBonusNumber());
@@ -54,10 +93,18 @@ public class InputView {
 		}
 	}
 
-	public static Lotto inputLotto() {
+	private static Lotto inputManualLotto() {
 		Lotto winLotto = null;
 		while (winLotto == null) {
-			print(MESSAGE_INPUT_WIN_LOTTO_NUMBERS);
+			winLotto = toLotto(inputUsingScanner());
+		}
+		return winLotto;
+	}
+
+	private static Lotto inputLotto(String message) {
+		Lotto winLotto = null;
+		while (winLotto == null) {
+			print(message);
 			winLotto = toLotto(inputUsingScanner());
 		}
 		return winLotto;
@@ -119,12 +166,17 @@ public class InputView {
 		return inputNumbers.split(delimiter);
 	}
 
-	public static void printPurchaseLottos(Lottos purchaseLottos) {
-		System.out.printf(MESSAGE_PURCHAGE_COMPLETE, purchaseLottos.size());
+	public static void printPurchaseLottos(PurchaseLottos purchaseLottos) {
+		print();
+		print(String.format(MESSAGE_PURCHAGE_COMPLETE, purchaseLottos.sizeOfManual(), purchaseLottos.sizeOfAuto()));
 
-		for (Lotto lotto : purchaseLottos.getLottos()) {
+		for (Lotto lotto : purchaseLottos.getManualLottos()) {
 			print(lotto);
 		}
+		for (Lotto lotto : purchaseLottos.getAutoLottos()) {
+			print(lotto);
+		}
+
 		print();
 	}
 }
