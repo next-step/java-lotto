@@ -49,7 +49,8 @@ public class LottoWinningResult {
 		for (Lotto lotto : list.getList()) {
 			int matched = calculateMatched(lotto);
 			Integer totalPrize = matchedPrizeMap.get(matched);
-			matchedPrizeMap.put(matched, totalPrize + rule.prize(matched));
+			int prize = rule.prize(matched, winningNumber.contains(bonusNumber));
+			matchedPrizeMap.put(matched, totalPrize + prize);
 		}
 	}
 
@@ -66,9 +67,9 @@ public class LottoWinningResult {
 		return matched;
 	}
 
-	public int countMatched(int matched) {
+	public int countMatched(int matched, boolean bonus) {
 		Integer totalMatchedPrize = matchedPrizeMap.get(matched);
-		int prize = rule.prize(matched);
+		int prize = totalMatchedPrize / rule.prize(matched, matched == 5 && bonus);
 		if (prize == 0) {
 			return 0;
 		}
