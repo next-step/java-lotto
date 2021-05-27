@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 import lotto.constant.LottoRank;
 
@@ -11,19 +11,18 @@ public class LottoRankStatistics {
     private static final int ONE_HUNDRED_INT = 100;
     private static final double ONE_HUNDRED_DOUBLE = 100.0;
     private final Lottos lottos;
-    private final LottoNumbers winningNumbers;
+    private final WinningNumbers winningNumbers;
     private RankCounts rankCounts;
 
-    public LottoRankStatistics(Lottos lottos, LottoNumbers winningNumbers) {
+    public LottoRankStatistics(Lottos lottos, WinningNumbers winningNumber) {
         this.lottos = lottos;
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = winningNumber;
     }
 
     public void initStatistics() {
         Map<LottoRank, Integer> result = new HashMap<>();
         for (int i = 0; i < this.lottos.getSize(); i++) {
-            int matchCount = this.lottos.getLottoNumbers(i).getCountOfMatchingNumber(this.winningNumbers);
-            LottoRank lottoRank = LottoRank.valueOf(matchCount);
+            LottoRank lottoRank = this.winningNumbers.findRank(this.lottos.getLottoNumbers(i));
             int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
             result.put(lottoRank, ++lottoCount);
         }

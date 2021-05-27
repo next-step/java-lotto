@@ -16,8 +16,13 @@ public class InputView {
 
     public String getWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String textWinningNumber = this.scanner.nextLine();
+        return this.scanner.nextLine();
+    }
+
+    public int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = Integer.parseInt(this.scanner.nextLine());
         System.out.println("");
-        return textWinningNumber;
+        return bonusNumber;
     }
 }
