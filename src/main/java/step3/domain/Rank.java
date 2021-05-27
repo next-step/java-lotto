@@ -14,8 +14,8 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private int countOfMatch;
-    private int winningMoney;
+    private final int countOfMatch;
+    private final int winningMoney;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -31,12 +31,11 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        Rank[] ranks = values();
 
-        Rank rank = Arrays.stream(ranks)
+        Rank rank = Arrays.stream(values())
                 .filter(r -> r.countOfMatch == countOfMatch)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(IllegalRankNumberException.MESSAGE));
+                .orElseThrow(() -> new IllegalRankNumberException(IllegalRankNumberException.MESSAGE));
 
         if (rank.getCountOfMatch() == THIRD.getCountOfMatch() && matchBonus) {
             return SECOND;

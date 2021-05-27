@@ -2,6 +2,7 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Ranks {
 
@@ -10,16 +11,12 @@ public class Ranks {
 
     private List<Rank> ranks;
 
-    public Ranks() {
-        ranks = new ArrayList<>();
-    }
-
     public Ranks(List<Rank> ranks) {
         this.ranks = ranks;
     }
 
-    public void addRank(Rank rank) {
-        ranks.add(rank);
+    public static Ranks of(List<Rank> ranks) {
+        return new Ranks(ranks);
     }
 
     public long findCountWithAmount(int winningMoney) {
