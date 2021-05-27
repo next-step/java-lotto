@@ -2,15 +2,14 @@ package kht2199.lotto.view;
 
 import static java.lang.System.*;
 
-import java.util.List;
 import java.util.Map;
 
 import kht2199.Rank;
 import kht2199.lotto.LottoWinningResult;
-import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
@@ -34,10 +33,7 @@ public class ResultView {
 	}
 
 	public void printLottoList(LottoList lottoList) {
-		List<Lotto> list = lottoList.getList();
-		for (Lotto lotto : list) {
-			print(lotto.toString());
-		}
+		print(lottoList.toString());
 	}
 
 	public void printAskWinningNumbers() {
@@ -72,6 +68,10 @@ public class ResultView {
 
 		if (e instanceof LottoBonusNumberDuplicatedException) {
 			print("로또 번호가 중복입니다.");
+		}
+
+		if (e instanceof LottoListEmptyException) {
+			print("구매가능한 로또가 없습니다.");
 		}
 		// TODO print for domain exceptions.
 	}
