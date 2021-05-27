@@ -1,6 +1,6 @@
 package domain;
 
-import ui.LottoReward;
+import ui.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -45,10 +45,10 @@ public class LottoOrderGroupAnalysis {
 		final BigDecimal lottoAmount = new BigDecimal(lottoOrderGroup.lottos().size());
 
 		final BigDecimal rewards = new BigDecimal(
-				(match3 * LottoReward.MATCH_3.getMoney())
-						+ (match4 * LottoReward.MATCH_4.getMoney())
-						+ (match5 * LottoReward.MATCH_5.getMoney())
-						+ (match6 * LottoReward.MATCH_6.getMoney())
+				(match3 * Rank.THIRD.getMoney())
+						+ (match4 * Rank.SECOND.getMoney())
+						+ (match5 * Rank.FIRST.getMoney())
+						+ (match6 * Rank.FIFTH.getMoney())
 		);
 		if (rewards.compareTo(new BigDecimal(0)) == 0) {
 			return "0";

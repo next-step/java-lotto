@@ -31,6 +31,10 @@ public class LottoController {
 
 			final Integer[] winnerNumbers = 	validWinnerNumbers(scanner.nextLine().trim());
 
+			System.out.println(ASK_LOTTO_BONUS_NUMBER.getMessage());
+
+			final Integer bonusNumber = Integer.parseInt(scanner.nextLine().trim());
+
 			LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(winnerNumbers, lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
