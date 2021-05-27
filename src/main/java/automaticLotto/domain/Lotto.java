@@ -46,12 +46,17 @@ public class Lotto {
 
 	public Ranking match(Lotto targetLotto) {
 		int matchedCount = 0;
+		boolean isBonusNumberContained = false;
 
 		for (Integer number : targetLotto.numbers) {
 			matchedCount = getMatchedCount(matchedCount, number);
 		}
 
-		return Ranking.valueOf(matchedCount);
+		if (numbers.contains(targetLotto.bonusNumber)) {
+			isBonusNumberContained = true;
+		}
+
+		return Ranking.valueOf(matchedCount, isBonusNumberContained);
 	}
 
 	private int getMatchedCount(int matchedSize, Integer number) {

@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Ranking {
-	RANKING_LAST(0, 0), RANKING_4(3, 5000), RANKING_3(4, 500000), RANKING_2(5, 1500000), ANKING_1(6, 2000000000);
+	RANKING_LAST(0, 0), RANKING_5(3, 5000), RANKING_4(4, 500000), RANKING_3(5, 1500000), RANKING_2(5,
+		30000000), RANKING_1(6, 2000000000);
+
+	private static final Map<Integer, Ranking> rankingTable;
+	public static final int SECOND_RANKING = 5;
 
 	private final int matchedCount;
 	private final int winnerPrice;
-	private static final Map<Integer, Ranking> rankingTable;
 
 	static {
 		rankingTable = new HashMap<>();
@@ -30,7 +33,15 @@ public enum Ranking {
 		return this.winnerPrice;
 	}
 
-	public static Ranking valueOf(int matchedCount) {
+	public static Ranking valueOf(int matchedCount, boolean isBonusNumberContained) {
+		if (matchedCount == SECOND_RANKING && isBonusNumberContained) {
+			return RANKING_2;
+		}
+
+		if (matchedCount == SECOND_RANKING) {
+			return RANKING_3;
+		}
+
 		if (rankingTable.containsKey(matchedCount)) {
 			return rankingTable.get(matchedCount);
 		}
