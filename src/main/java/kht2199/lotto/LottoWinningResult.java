@@ -1,5 +1,6 @@
 package kht2199.lotto;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import kht2199.lotto.exception.lotto.LottoNumberException;
 import kht2199.lotto.exception.lotto.LottoNumberLengthException;
 
 /**
+ * TODO matchedPrizeMap 일급컬렉션으로 변경
  *
  * @author heetaek.kim
  */
@@ -67,15 +69,6 @@ public class LottoWinningResult {
 		return Rank.valueOf(matched, false);
 	}
 
-	public int countMatched(Rank rank) {
-		Integer totalMatchedPrize = matchedPrizeMap.get(rank);
-		int prize = totalMatchedPrize / rank.getWinningMoney();
-		if (prize == 0) {
-			return 0;
-		}
-		return totalMatchedPrize / prize;
-	}
-
 	public int totalPrize() {
 		int sum = 0;
 		for (Integer value : matchedPrizeMap.values()) {
@@ -110,6 +103,10 @@ public class LottoWinningResult {
 			throw new LottoNumberLengthException();
 		}
 		this.winningNumber = new Lotto(numbers);
+	}
+
+	public Map<Rank, Integer> getMatchedPrizeMap() {
+		return Collections.unmodifiableMap(matchedPrizeMap);
 	}
 
 	private void initMatchedPrizeMap() {

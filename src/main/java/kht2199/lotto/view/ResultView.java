@@ -3,6 +3,7 @@ package kht2199.lotto.view;
 import static java.lang.System.*;
 
 import java.util.List;
+import java.util.Map;
 
 import kht2199.Rank;
 import kht2199.lotto.LottoWinningResult;
@@ -46,22 +47,21 @@ public class ResultView {
 	public void printResultStatistics(LottoWinningResult result, int assetsUsed) {
 		print("당첨 통계");
 		print("---------");
-		for (int i = 3; i <= 6; i++) {
-			printResultOfMatched(i, result);
-		}
+		Map<Rank, Integer> matchedPrizeMap = result.getMatchedPrizeMap();
+		matchedPrizeMap.forEach(this::printResultOfMatched);
 		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
 	}
 
 	/**
 	 * 5등의 경우, 보너스 볼 일치여부까지 출력한다.
 	 */
-	protected void printResultOfMatched(int match, LottoWinningResult result) {
+	protected void printResultOfMatched(Rank rank, int prize) {
 		String format = "%d개 일치 (%d원)- %d개";
-		Rank rank = Rank.valueOf(match, false);
-		print(String.format(format, match, rank.getWinningMoney(), result.countMatched(rank)));
-		if (match == 5) {
+		int countOfMatched = rank.getWinningMoney() == 0 ? 0 : prize / rank.getWinningMoney();
+		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
+		if (rank == Rank.SECOND) {
 			format = "5개 일치, 보너스 볼 일치(%d) - %d개";
-			print(String.format(format, Rank.SECOND.getWinningMoney(), result.countMatched(Rank.SECOND)));
+			print(String.format(format, Rank.SECOND.getWinningMoney(), countOfMatched));
 		}
 	}
 
