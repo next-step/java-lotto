@@ -10,7 +10,6 @@ public class LottoNumber {
     private Integer number;
     private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
-
     static {
         for (int i = LottoConfig.MIN_NUMBER; i <= LottoConfig.MAX_NUMBER; i++) {
             lottoNumberMap.put(i, new LottoNumber(i));
