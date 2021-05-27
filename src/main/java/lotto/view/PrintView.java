@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 
 public class PrintView {
 
-    private static final String MESSAGE_BUY_COUNT = "%s개를 구매했습니다.\n";
+    private static final String MESSAGE_BUY_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.\n";
     private static final String MESSAGE_MATCH = "%s개 일치 (%s원)- %s개\n";
     private static final String MESSAGE_MATCH_WITH_BONUS = "%s개 일치, 보너스 볼 일치(%s원)- %s개\n";
     private static final String MESSAGE_INCOME_RATE = "총 수익률은 %s입니다.";
@@ -22,7 +22,7 @@ public class PrintView {
 
     public void showStatusBuyTicket(LottoWallet lottoWallet) {
         List<LottoTicket> lottoTickets = lottoWallet.takeOutLottoTickets();
-        System.out.printf(MESSAGE_BUY_COUNT, lottoWallet.getTicketCount());
+        System.out.printf(MESSAGE_BUY_COUNT, lottoWallet.getManualTicketCount(), lottoWallet.getAutoTicketCount());
         for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }

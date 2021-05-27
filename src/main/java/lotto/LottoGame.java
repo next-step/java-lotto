@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.LottoNumberGenerator;
-import lotto.domain.RandomNumberGeneratorStrategy;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
@@ -61,9 +60,15 @@ public class LottoGame {
 
     private LottoWallet buyingLottoTickets() {
         Money money = inputView.inputMoneyForBuyTicket();
+        int countOfManualLottoTicket = inputView.inputCountOfManualLottoTicket();
 
-        LottoWallet lottoWallet = LottoWallet.create(money);
-        lottoWallet.buyingLotto(new RandomNumberGeneratorStrategy());
+        PurchaseBudget purchaseBudget = PurchaseBudget.create(money, countOfManualLottoTicket);
+
+        List<LottoTicket> manualNumbers = inputView.inputManualNumbers(countOfManualLottoTicket);
+
+        LottoSeller lottoSeller = new LottoSeller(new RandomNumberGeneratorStrategy());
+        LottoWallet lottoWallet = lottoSeller.sell(manualNumbers, purchaseBudget);
+
         return lottoWallet;
     }
 }

@@ -1,8 +1,12 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
+import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +14,8 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String MESSAGE_QUESTION_HOW_MANY_BUY = "구입금액을 입력해 주세요.";
+    private static final String MESSAGE_QUESTION_HOW_MANY_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MESSAGE_QUESTION_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String MESSAGE_QUESTION_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_QUESTION_BONUS_NUMBER = "보너스번호를 입력해 주세요.";
 
@@ -37,5 +43,34 @@ public class InputView {
         System.out.println(MESSAGE_QUESTION_BONUS_NUMBER);
         int inputBonusNumber = scanner.nextInt();
         return inputBonusNumber;
+    }
+
+    public int inputCountOfManualLottoTicket() {
+        System.out.println(MESSAGE_QUESTION_HOW_MANY_MANUAL);
+        int inputCountOfManualLottoTicket = Integer.parseInt(scanner.nextLine());
+
+        return inputCountOfManualLottoTicket;
+    }
+
+    public List<LottoTicket> inputManualNumbers(int countOfManualLottoTicket) {
+        System.out.println(MESSAGE_QUESTION_MANUAL_NUMBER);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        for (int i = 0; i < countOfManualLottoTicket; i++) {
+            List<String> manualNumber = inputManualNumber();
+            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generator(manualNumber);
+
+            LottoTicket lottoTicket = LottoTicket.create(lottoNumbers);
+            lottoTickets.add(lottoTicket);
+
+        }
+        return lottoTickets;
+    }
+
+    private List<String> inputManualNumber() {
+        String inputWinnerNumber = scanner.nextLine();
+        String[] winnerNumbers = StringUtils.split(inputWinnerNumber);
+        return Arrays.asList(winnerNumbers);
     }
 }
