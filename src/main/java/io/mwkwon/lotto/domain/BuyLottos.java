@@ -1,5 +1,8 @@
 package io.mwkwon.lotto.domain;
 
+import io.mwkwon.lotto.enums.Rank;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +16,16 @@ public class BuyLottos {
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public List<Rank> calcLottoRank(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        List<Rank> ranks = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            long matchLottoNumberCount = lotto.calcMatchLottoNumberCount(winningLotto);
+            Rank rank = Rank.matchRank(matchLottoNumberCount, lotto.isContains(bonusLottoNumber));
+            ranks.add(rank);
+        }
+        return ranks;
     }
 
     @Override
