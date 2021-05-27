@@ -11,11 +11,7 @@ public class LottoGame {
         this.userLottoTickets = userLottoTickets;
     }
 
-    public int howManyMatched(LottoTicket userNumbers) {
-        return winningTicket.howManyMatched(userNumbers);
-    }
-
-    public ScoreMap getLottoResult() {
+    public ScoreMap getScores() {
         ScoreMap scoreMap = new ScoreMap();
         for (LottoTicket userLottoTicket : userLottoTickets) {
             scoreMap.updateWithNumMatched(winningTicket.howManyMatched(userLottoTicket));

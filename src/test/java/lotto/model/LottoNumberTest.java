@@ -4,6 +4,11 @@ import domain.Digit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,5 +30,12 @@ class LottoNumberTest {
         LottoNumber expected = new LottoNumber(2);
         LottoNumber actual = new LottoNumber(2);
         assertThat(expected).isEqualTo(actual);
+    }
+
+    @Test
+    void 정렬_테스트(){
+        List<LottoNumber> actual = new ArrayList<>(Arrays.asList(new LottoNumber(3), new LottoNumber(2), new LottoNumber(1)));
+        Collections.sort(actual);
+        assertThat(actual).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3));
     }
 }

@@ -13,7 +13,7 @@ class LottoGeneratorTest {
     void 로또넘버_생성테스트(){
         List<LottoNumber> numberList = Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1), new LottoNumber(1));
         LottoTicket expected = new LottoTicket(numberList);
-        LottoGenerator lottoGenerator = new LottoGenerator(new MockGenerateRule());
+        LottoGenerator lottoGenerator = new LottoGenerator(1, new MockGenerateRule());
         LottoTicket actual = lottoGenerator.generate();
         assertThat(actual).isEqualTo(expected);
     }
