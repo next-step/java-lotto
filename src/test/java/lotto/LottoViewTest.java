@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoViewTest {
+class LottoViewTest {
 
 	private final LottoView lottoView = new LottoView();
 
@@ -38,19 +38,6 @@ public class LottoViewTest {
 
 		// then
 		assertThat(message).isEqualTo(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
-	}
-
-	@DisplayName("로또 번호 출력 테스트")
-	@Test
-	void userLottoNumberListView() {
-		// given
-		String lottoNumberMessage = "lottoNumberMessage";
-
-		// when
-		String message = lottoView.userLottoNumberListView(lottoNumberMessage);
-
-		// then
-		assertThat(message).isEqualTo(STATISTIC_HEADER_MESSAGE + lottoNumberMessage);
 	}
 
 }

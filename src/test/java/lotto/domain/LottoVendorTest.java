@@ -16,13 +16,13 @@ class LottoVendorTest {
 	@Test
 	void report() {
 		// given
-		LottoVendor lottoVendor = new LottoVendor("1,2,3,4,5,6");
+		LottoVendor lottoVendor = new LottoVendor("1,2,3,4,5,6", "7");
 		List<LottoTicket> lottoTicketList = new ArrayList<>();
 		lottoTicketList.add(new LottoTicket(getLottoNumbers()));
 		UserLotto userLotto = new UserLotto(lottoTicketList);
 
 		// when
-		LottoReport lottoReport = lottoVendor.report(userLotto.lottoTickets());
+		LottoReport lottoReport = lottoVendor.report(userLotto);
 
 		// then
 		assertThat(lottoReport).isNotNull();
@@ -40,4 +40,8 @@ class LottoVendorTest {
 		return lottoNumbers;
 	}
 
+	@Test
+	void invalid_lotto_number() {
+		assertThatThrownBy(() -> new LottoVendor("1,2,3,4,5,6", "6")).isInstanceOf(IllegalArgumentException.class);
+	}
 }

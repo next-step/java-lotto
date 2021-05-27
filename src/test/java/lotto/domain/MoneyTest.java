@@ -26,7 +26,7 @@ class MoneyTest {
 		int lottoPrice = 1000;
 
 		// when
-		int actual = money.pay(lottoPrice);
+		int actual = money.divide(lottoPrice);
 
 		// then
 		assertThat(actual).isEqualTo(expected);

@@ -1,18 +1,20 @@
 package lotto;
 
-import lotto.domain.LottoReport;
+import lotto.domain.LottoStore;
+import lotto.domain.LottoVendor;
+import lotto.domain.Money;
 import lotto.domain.UserLotto;
 
 public class LottoController {
 
-	private final LottoService lottoService = new LottoService();
-
 	public UserLotto buyLotto(String money) {
-		return lottoService.buyLotto(money);
+		LottoStore lottoStore = new LottoStore();
+
+		return lottoStore.buy(new Money(money));
 	}
 
-	public LottoReport report(String winningLottoNumbers, UserLotto userLotto) {
-		return lottoService.report(winningLottoNumbers, userLotto);
+	public LottoVendor lottoVendor(String winningLottoNumbers, String bonusNumberString) {
+		return new LottoVendor(winningLottoNumbers, bonusNumberString);
 	}
 
 }

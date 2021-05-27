@@ -1,12 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class UserLotto {
 
 	private static final String INVALID_LOTTO_TICKET_LIST_MESSAGE = "로또 티켓이 유효하지 않습니다.";
-	private static final String LINE_SEPARATOR = "\r\n";
 
 	private final List<LottoTicket> lottoTicketList;
 
@@ -26,22 +26,26 @@ public class UserLotto {
 		return lottoTicketList.size();
 	}
 
-	public String lottoNumberMessage() {
-		return buildLottoNumberMessage();
-	}
-
-	private String buildLottoNumberMessage() {
-		StringBuilder build = new StringBuilder();
-		for (LottoTicket lottoTicket : lottoTicketList) {
-			build.append(lottoTicket.toString())
-				.append(LINE_SEPARATOR);
-		}
-
-		return build.toString();
-	}
-
 	public List<LottoTicket> lottoTickets() {
 		return lottoTicketList;
 	}
 
+	public LottoReport report(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+		List<LottoRank> lottoRankList = new ArrayList<>();
+
+		for (LottoTicket lottoTicket : lottoTicketList) {
+			lottoRankList.add(
+				LottoRank.rank(countCommonNumber(winningLottoTicket, lottoTicket), isBonus(bonusNumber, lottoTicket)));
+		}
+
+		return new LottoReport(lottoRankList);
+	}
+
+	private int countCommonNumber(LottoTicket winningLottoTicket, LottoTicket lottoTicket) {
+		return LottoTicket.countCommonNumber(lottoTicket, winningLottoTicket);
+	}
+
+	private boolean isBonus(LottoNumber bonusNumber, LottoTicket lottoTicket) {
+		return lottoTicket.matchNumber(bonusNumber);
+	}
 }

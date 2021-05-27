@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMachineTest {
+class LottoMachineTest {
 
 	@DisplayName("로또 개수만큼 로또 티켓 생성 테스트")
 	@Test
