@@ -1,9 +1,9 @@
 package com.lotto.exception;
 
-public class IllegalPriceException extends RuntimeException {
+public class LottoPriceNumberFormatException extends RuntimeException {
     private static final String MESSAGE = "잘못된 가격 입니다. 입력받은 가격:";
 
-    public IllegalPriceException(String wrongPrice) {
+    public LottoPriceNumberFormatException(String wrongPrice) {
         super(MESSAGE + wrongPrice);
     }
 

@@ -1,6 +1,6 @@
 package com.lotto.domain;
 
-import com.lotto.exception.IllegalPriceException;
+import com.lotto.exception.LottoPriceNumberFormatException;
 import com.lotto.exception.LottoPriceOutOfBoundsException;
 
 import java.util.ArrayList;
@@ -13,35 +13,20 @@ public class LottoGroup {
         this.lottoList = lottoList;
     }
 
-    public static LottoGroup createLottoGroup(String totalPrice) throws IllegalPriceException,
-            LottoPriceOutOfBoundsException {
-        int nTotalPrice = castIntTotalPrice(totalPrice);
-        validateTotalPrice(nTotalPrice);
+    public static LottoGroup createLottoGroup(RequestPurchaseLotto requestPurchaseLotto)
+            throws LottoPriceNumberFormatException, LottoPriceOutOfBoundsException {
 
-        int totalCount = nTotalPrice / Lotto.UNIT_PRICE;
         List<Lotto> lottoList = new ArrayList<>();
 
-        for (int i = 0; i < totalCount; i++) {
+        for (int i = 0; i < requestPurchaseLotto.getManualLottoCount(); i++) {
+            lottoList.add(requestPurchaseLotto.getLottoList().get(i));
+        }
+
+        for (int i = 0; i < requestPurchaseLotto.getAutoLottoCount(); i++) {
             lottoList.add(LottoAutoGenerator.generate());
         }
 
         return new LottoGroup(lottoList);
-    }
-
-    private static int castIntTotalPrice(String totalPrice) throws IllegalPriceException {
-        int nTotalPrice;
-        try {
-            nTotalPrice = Integer.parseInt(totalPrice);
-        } catch (NumberFormatException exception) {
-            throw new IllegalPriceException(totalPrice);
-        }
-        return nTotalPrice;
-    }
-
-    private static void validateTotalPrice(int totalPrice) {
-        if (totalPrice < Lotto.UNIT_PRICE) {
-            throw new LottoPriceOutOfBoundsException(totalPrice);
-        }
     }
 
     public int size() {

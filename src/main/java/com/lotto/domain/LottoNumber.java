@@ -1,5 +1,6 @@
 package com.lotto.domain;
 
+import com.lotto.exception.LottoNumberFormatException;
 import com.lotto.exception.LottoNumberOutOfBoundsException;
 
 import java.util.Objects;
@@ -25,6 +26,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber valueOf(int number) throws LottoNumberOutOfBoundsException {
         validate(number);
         return cache[number - 1];
+    }
+
+    public static LottoNumber valueOf(String sNumber)
+            throws LottoNumberFormatException, LottoNumberOutOfBoundsException {
+
+        int number = castInt(sNumber);
+        return valueOf(number);
+    }
+
+    private static int castInt(String sNumber) throws LottoNumberFormatException {
+        int number;
+        try {
+            number = Integer.parseInt(sNumber.trim());
+        } catch (NumberFormatException exception) {
+            throw new LottoNumberFormatException();
+        }
+        return number;
     }
 
     private static void validate(int number) throws LottoNumberOutOfBoundsException {
