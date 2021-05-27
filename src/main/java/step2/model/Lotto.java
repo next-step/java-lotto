@@ -1,6 +1,7 @@
 package step2.model;
 
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ public class Lotto {
     }
 
     public int checkWinningCount(Lotto winningLotto) {
-        SortedSet<LottoNumber> temp = new TreeSet<>(lottoNumbers);
+        Set<LottoNumber> temp = new TreeSet<>(lottoNumbers);
         temp.retainAll(winningLotto.lottoNumbers);
         return temp.size();
     }
@@ -36,7 +37,7 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    private static void validateSize(SortedSet<LottoNumber> lottoNumbers) {
+    private static void validateSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new LottoLengthException();
         }
