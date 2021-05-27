@@ -19,12 +19,4 @@ public class RankingTest {
 		assertThat(Ranking.valueOf(new RankingCondition(5, false))).isEqualTo(Ranking.RANKING_3);
 		assertThat(Ranking.valueOf(new RankingCondition(5, true))).isEqualTo(Ranking.RANKING_2);
 	}
-
-	@Test
-	@DisplayName("매치되는 수의 최소값과 최대값을 구함")
-	public void get_maximum_match_count_and_minimum_match_count() {
-		assertThat(Ranking.getMaximumMatchedCount()).isEqualTo(6);
-		assertThat(Ranking.getMinimumMatchedCount()).isEqualTo(0);
-	}
-
 }

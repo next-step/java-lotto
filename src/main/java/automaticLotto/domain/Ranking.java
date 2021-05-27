@@ -4,28 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Ranking {
-	RANKING_LAST(0, 0), RANKING_5(3, 5000), RANKING_4(4, 500000), RANKING_3(5, 1500000), RANKING_2(5,
-		30000000), RANKING_1(6, 2000000000);
+	RANKING_LAST(new RankingCondition(0), 0), RANKING_5(new RankingCondition(3), 5000), RANKING_4(
+		new RankingCondition(4), 500000), RANKING_3(new RankingCondition(5, false),
+		1500000), RANKING_2(new RankingCondition(5, true),
+		30000000), RANKING_1(new RankingCondition(6), 2000000000);
 
 	private static final Map<RankingCondition, Ranking> rankingTable;
 
-	private final int matchedCount;
+	private final RankingCondition rankingCondition;
 	private final int winnerPrice;
 
 	static {
 		rankingTable = new HashMap<>();
 		for (Ranking ranking : values()) {
-			rankingTable.put(new RankingCondition(ranking), ranking);
+			rankingTable.put(ranking.rankingCondition, ranking);
 		}
 	}
 
-	Ranking(int matchedCount, int winnerPrice) {
-		this.matchedCount = matchedCount;
+	Ranking(RankingCondition rankingCondition, int winnerPrice) {
+		this.rankingCondition = rankingCondition;
 		this.winnerPrice = winnerPrice;
 	}
 
-	public int getMatchedCount() {
-		return this.matchedCount;
+	public RankingCondition getRankingCondition() {
+		return this.rankingCondition;
 	}
 
 	public int getWinnerPrice() {
@@ -42,17 +44,9 @@ public enum Ranking {
 
 	public static String getExplanation(Ranking ranking) {
 		if (ranking == Ranking.RANKING_2) {
-			return ranking.getMatchedCount() + "개 일치, 보너스볼 일치";
+			return ranking.getRankingCondition().getMatchedCount() + "개 일치, 보너스볼 일치";
 		}
 
-		return ranking.getMatchedCount() + "개 일치";
-	}
-
-	public static int getMinimumMatchedCount() {
-		return RANKING_LAST.matchedCount;
-	}
-
-	public static int getMaximumMatchedCount() {
-		return RANKING_1.matchedCount;
+		return ranking.getRankingCondition().getMatchedCount() + "개 일치";
 	}
 }

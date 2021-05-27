@@ -4,17 +4,14 @@ import java.util.Objects;
 
 public class RankingCondition {
 	private static final int BONUS_RELATED_NUMBER = 5;
+	private static final int MINIMUM_MATCH_COUNT = 0;
+	private static final int MAXIMUM_MATCH_COUNT = 6;
 
 	private int matchedCount;
 	private boolean isBonusNumberContained;
 
-	public RankingCondition(Ranking ranking) {
-		this.matchedCount = ranking.getMatchedCount();
-		this.isBonusNumberContained = false;
-
-		if (ranking == Ranking.RANKING_2) {
-			this.isBonusNumberContained = true;
-		}
+	public RankingCondition(int matchedCount) {
+		this(matchedCount, false);
 	}
 
 	public RankingCondition(int matchedCount, boolean isBonusNumberContained) {
@@ -25,10 +22,14 @@ public class RankingCondition {
 	}
 
 	private void validateMatchedCount(int matchedCount) {
-		if (matchedCount < Ranking.getMinimumMatchedCount()
-			|| matchedCount > Ranking.getMaximumMatchedCount()) {
+		if (matchedCount < MINIMUM_MATCH_COUNT
+			|| matchedCount > MAXIMUM_MATCH_COUNT) {
 			throw new RuntimeException("match count must be within ranking range(0 - 6)");
 		}
+	}
+
+	public int getMatchedCount() {
+		return matchedCount;
 	}
 
 	@Override
