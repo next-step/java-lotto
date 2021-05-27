@@ -12,18 +12,33 @@ import static lotto.domain.LottoOptions.LOTTO_PRICE;
 public final class LottoStore {
     private final LottoInput lottoInput;
     private final LottoOutput lottoOutput;
+    private final Money lottoPrice;
 
     public LottoStore(final LottoInput lottoInput, final LottoOutput lottoOutput) {
         this.lottoInput = lottoInput;
         this.lottoOutput = lottoOutput;
+        this.lottoPrice = new Money(LOTTO_PRICE);
     }
 
     public void trade() {
         // 구매
-        final Money lottoPrice = new Money(LOTTO_PRICE);
-        final Money toPurchaseLotto = lottoInput.inputMoneyToPurchaseLotto();
-        final List<Lotto> lottos = new LottoMachine(lottoPrice).pullSlot(toPurchaseLotto, new LottoNumberAutoGenerator());
-        lottoOutput.printPurchasedLottos(lottos);
+        final Money moneyToPurchaseLotto = lottoInput.inputMoneyToPurchaseLotto();
+        final LottoMachine lottoMachine = new LottoMachine(lottoPrice);
+        final int allLottoCount = lottoMachine.getPurchableLottoCount(moneyToPurchaseLotto);
+
+        // 로또 수동
+        final int manualLottoCount = lottoInput.inputManualLottoCount();
+        final PurchaseInformation manualPurchaseInformation = new ManualPurchaseInformation(allLottoCount, manualLottoCount);
+        final List<String> inputManualLottoNumbers = lottoInput.inputManualLottoNumbers(manualPurchaseInformation.getLottoCount());
+        final List<Lotto> manualLottos = lottoMachine.pullSlot(manualPurchaseInformation, new LottoNumberManualGenerator(inputManualLottoNumbers));
+
+        // 로또 자동
+        final PurchaseInformation autoPurchaseInformation = new AutoPurchaseInformation(allLottoCount, manualLottoCount);
+        final List<Lotto> autoLottos = lottoMachine.pullSlot(autoPurchaseInformation, new LottoNumberAutoGenerator());
+
+        // 로또 구매 결과
+        final Lottos lottos = new Lottos(manualLottos, autoLottos);
+        lottoOutput.printPurchasedLottos(lottos, manualPurchaseInformation);
 
         // 당첨번호 입력
         final Lotto answerLottoNumbers = lottoInput.inputAnswerLottoNumbers();
@@ -33,6 +48,6 @@ public final class LottoStore {
         final WinningResult winningResult = new WinningResult(answerLottoNumbers, bonusNumber);
         winningResult.matchWinningLotto(lottos);
         lottoOutput.printWinningStatistics(winningResult);
-        lottoOutput.printProfitRate(winningResult.getProfitRate(toPurchaseLotto));
+        lottoOutput.printProfitRate(winningResult.getProfitRate(moneyToPurchaseLotto));
     }
 }
