@@ -8,8 +8,10 @@ public class DelimiterExtractor {
     private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int DELIMITER_GROUP_INDEX_IN_MATCHER = 1;
     private static final int DATA_GROUP_INDEX_IN_MATCHER = 2;
-    private static String splitData;
-    public static String extractDelimiter(String data) {
+
+    private String splitData;
+
+    public String extractDelimiter(String data) {
         Matcher delimiterMatcher = DELIMITER_PATTERN.matcher(data);
         splitData = data;
         if (delimiterMatcher.find()) {
@@ -19,7 +21,8 @@ public class DelimiterExtractor {
         return DEFAULT_DELIMITER;
     }
 
-    public static String getSplitData() {
+
+    public String getSplitData() {
         return splitData;
     }
 }

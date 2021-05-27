@@ -87,9 +87,8 @@ public class StringAddCalculatorTest {
     @ValueSource(strings={"-1,2;3","//&\na1&2&3"})
     @DisplayName("숫자 이외의 문자나 음수일 경우 Runtime Exception")
     public void inputValidTest(String negativeNumbersOrNotNumbers) {
-        assertThatThrownBy(()->{
-            calculator.calculate(negativeNumbersOrNotNumbers);
-        }).isInstanceOf(RuntimeException.class)
+        assertThatThrownBy(()->calculator.calculate(negativeNumbersOrNotNumbers))
+                .isInstanceOf(RuntimeException.class)
                 .hasMessage("invalid data");
     }
 }
