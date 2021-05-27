@@ -1,57 +1,40 @@
 package lotto.domain;
 
+import lotto.common.WinningType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import lotto.common.ErrorCode;
-
-import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketTest {
-
-    private final List<LottoNumber> defaultLottoNumbers = Arrays.asList(
-            new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
-    );
-
     @Test
-    @DisplayName("로또 티켓 길이 테스트")
-    void lottoTicket_shouldBeSix() {
-        // success
-        assertThat(new LottoTicket(defaultLottoNumbers)).isInstanceOf(LottoTicket.class);
+    @DisplayName("로또 티켓 winningType 테스트")
+    void checkWinningType() {
+        WinningType winningType;
+        LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
+        int bonusNumber = 7;
 
-        // failed
-        List<LottoNumber> failLottoNumbers = Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)
-        );
+        // 6개 모두 일치 시에는 1등
+        LottoTicket userFirstLottoTicket = new LottoTicket("1,2,3,4,5,6");
+        winningType = userFirstLottoTicket.getWinningType(winningLottoTicket, 10);
+        assertThat(winningType).isEqualTo(WinningType.FIRST);
 
-        assertThatThrownBy(()->new LottoTicket(failLottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH.getErrorMessage());
-    }
+        //2등은 보너스 번호가 포함되어있고, 5개 로또번호가 일치하는 경우이다.
+        LottoTicket userSecondLottoTicket = new LottoTicket("1,2,3,4,5,7");
+        assertThat(userSecondLottoTicket.getWinningType(winningLottoTicket, bonusNumber)).isEqualTo(WinningType.SECOND);
 
-    @Test
-    @DisplayName("로또 티켓 정렬 테스트")
-    void lottoTicket_shouldBeInOrder() {
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(2), new LottoNumber(1), new LottoNumber(4),
-                new LottoNumber(3), new LottoNumber(6), new LottoNumber(5)
-        ));
+        //3등은 5개 로또번호가 일치하는 경우이다.
+        LottoTicket userThirdLottoTicket = new LottoTicket("1,2,3,4,5,8");
+        assertThat(userThirdLottoTicket.getWinningType(winningLottoTicket, bonusNumber)).isEqualTo(WinningType.THIRD);
 
-        LottoNumber[] lottoNumbers = lottoTicket.toArray();
+        //5등은 3개 로또번호가 일치하는 경우이다.
+        LottoTicket userForthLottoTicket = new LottoTicket("1,2,3,14,15,16");
+        winningType = userForthLottoTicket.getWinningType(winningLottoTicket, 10);
+        assertThat(winningType).isEqualTo(WinningType.FIFTH);
 
-        for(int i=0; i<lottoNumbers.length-1; i++) {
-            assertThat(lottoNumbers[i].compareTo(lottoNumbers[i+1]) < 0).isTrue();
-        }
-    }
-
-    @Test
-    @DisplayName("로또 티켓 중복 테스트")
-    void lottoTicket_throwDuplicatedLottoNumber() {
-        assertThatThrownBy(()->new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5)
-        ))).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
+        //8등은 0개 로또번호가 일치하는 경우이다.
+        LottoTicket userSeventhLottoNumbers = new LottoTicket("11,12,13,14,15,16");
+        winningType = userSeventhLottoNumbers.getWinningType(winningLottoTicket, 10);
+        assertThat(winningType).isEqualTo(WinningType.MISS);
     }
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.common.ErrorCode;
-import lotto.common.WinningType;
 
 public class Money {
     private static final int LOTTO_TICKET_PRICE = 1000;
@@ -18,8 +17,7 @@ public class Money {
         return (int)(this.money/LOTTO_TICKET_PRICE);
     }
 
-    public double calculateProfit(WinningType[] winningTypes) {
-        ProfitCalculator profitCalculator = new ProfitCalculator();
-        return profitCalculator.calculate(this.money, winningTypes);
+    public double calculateProfit(long prizeSum) {
+        return Math.floor(((double) prizeSum/money)*100)/100.0;
     }
 }

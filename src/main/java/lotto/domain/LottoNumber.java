@@ -8,10 +8,29 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        throwInvalidLottoNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+
+    public LottoNumber(String lottoText) {
+        int lottoNumber = Integer.parseInt(lottoText);
+        throwInvalidLottoNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    private void throwInvalidLottoNumber(int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE.getErrorMessage());
         }
-        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
+    }
+
+    public Integer value() {
+        return this.lottoNumber;
     }
 
     @Override
@@ -26,14 +45,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj!=null && obj.getClass() == this.getClass()) {
+        if ( obj != null && obj.getClass() == this.getClass()) {
             return ((LottoNumber)obj).lottoNumber == this.lottoNumber;
         }
         return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(this.lottoNumber);
     }
 }

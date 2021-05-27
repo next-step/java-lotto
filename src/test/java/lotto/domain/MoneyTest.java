@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import lotto.common.WinningType;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import lotto.common.ErrorCode;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -26,6 +31,17 @@ public class MoneyTest {
         //금액은 로또 가격보다 커야한다.
         assertThatThrownBy(()-> new Money(inputMoney)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.INVALID_MONEY_RANGE.getErrorMessage());
+    }
+
+    @Test
+    @DisplayName("수익률 계산 소수점 테스트")
+    void calculateProfit_shouldFloor() {
+        //소수점 둘째자리까지 표기되며 이후는 버림
+        List<WinningType> plusWinningTypes = Arrays.asList(WinningType.FIFTH, WinningType.FIFTH, WinningType.MISS);
+        assertThat(new Money(3000).calculateProfit(10000)).isEqualTo(3.33);
+
+        List<WinningType> MinusWinningTypes = Arrays.asList(WinningType.MISS, WinningType.MISS, WinningType.MISS);
+        assertThat(new Money(3000).calculateProfit(0)).isEqualTo(0.00);
     }
 
 }

@@ -1,46 +1,56 @@
 package lotto.domain;
 
-import lotto.common.ErrorCode;
+import lotto.common.WinningType;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    public static final int LOTTO_NUMBERS_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
+    private static final int CONTAINS_ADD_NUMBER = 1;
+    private static final int NOT_CONTAINS_ADD_NUMBER = 0;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        throwInvalidLottoNumbers(lottoNumbers);
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public LottoTicket() {
+        this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate());
     }
 
-    public LottoNumber[] toArray() {
-        return this.lottoNumbers.toArray(new LottoNumber[lottoNumbers.size()]);
+    public LottoTicket(String lottoNumbersText) {
+        this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
     }
 
-    private int contains(int inputNumber) {
-        if (lottoNumbers.contains(new LottoNumber(inputNumber))) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private void throwInvalidLottoNumbers(List<LottoNumber> inputNumbers) {
-        //로또 넘버 길이 체크
-        if (inputNumbers.size() != LOTTO_NUMBERS_LENGTH ) {
-            throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH.getErrorMessage());
+    public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
+        int matchCount = 0;
+        for (LottoNumber winningLottoNumber : winningLottoTicket.lottoNumbers) {
+            matchCount += addCount(winningLottoNumber);
         }
 
-        //로또 넘버 중복 체크
-        if (new HashSet<LottoNumber>(inputNumbers).size() < LOTTO_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(ErrorCode.DUPLICATED_LOTTO_NUMBER.getErrorMessage());
-        }
+        return WinningType.of(matchCount, isMatchBonus(bonusNumber));
     }
 
-    @Override
-    public String toString() {
-        return this.lottoNumbers.toString();
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    private int addCount(LottoNumber lottoNumber) {
+        if (contains(lottoNumber)) {
+            return CONTAINS_ADD_NUMBER;
+        }
+        return NOT_CONTAINS_ADD_NUMBER;
+    }
+
+    private boolean isMatchBonus(int bonusNumber) {
+        if (this.lottoNumbers.contains(new LottoNumber(bonusNumber))) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getString() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            lottoNumbers.add(lottoNumber.value());
+        }
+
+        return lottoNumbers.toString();
     }
 }
