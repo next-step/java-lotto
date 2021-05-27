@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.AlreadyAppliedBonusNumberException;
+import lotto.exception.DuplicatedBonusNumberException;
 import lotto.exception.WinningLottoNonPositiveNumberException;
 import lotto.exception.WinningLottoNumberCountException;
 
@@ -19,10 +21,11 @@ public class WinningLottoNumber {
     private static final String COMMA = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+(,\\d+)*$");
 
-    private LottoGame value;
+    private LottoGame prizeLottoNumber;
+    private LottoNumber bonusLottoNumber;
 
     public WinningLottoNumber(String playerInput) {
-        validatePlayerInput(playerInput);
+        validateConstructor(playerInput);
         parseValues(playerInput);
     }
 
@@ -38,7 +41,14 @@ public class WinningLottoNumber {
         return lottoResult;
     }
 
-    private void validatePlayerInput(String playerInput) {
+    public void applyBonusNumber(String playerInput) {
+        validateAlreadySet(playerInput);
+        validateBonusNumber(playerInput);
+
+        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(playerInput));
+    }
+
+    private void validateConstructor(String playerInput) {
         validatePositiveNumber(playerInput);
         validateInputSize(playerInput);
     }
@@ -60,17 +70,31 @@ public class WinningLottoNumber {
         }
     }
 
+    private void validateAlreadySet(String playerInput) {
+        if (bonusLottoNumber != null) {
+            throw new AlreadyAppliedBonusNumberException();
+        }
+    }
+
+    private void validateBonusNumber(String playerInput) {
+        LottoNumber tempLottoNumber = valueOf(Integer.parseInt(playerInput));
+
+        if (prizeLottoNumber.find(tempLottoNumber)) {
+            throw new DuplicatedBonusNumberException();
+        }
+    }
+
     private void parseValues(String playerInput) {
         Set<LottoNumber> lottoNumbers = Arrays.stream(playerInput.split(COMMA))
                 .map(each -> valueOf(parseInt(each)))
                 .collect(Collectors.toSet());
 
-        value = LottoGame.createManual(lottoNumbers);
+        prizeLottoNumber = LottoGame.createManual(lottoNumbers);
     }
 
     private Rank decidePrizeEachGame(LottoGame lottoGame) {
-        int result = value.compare(lottoGame);
-
-        return Rank.valueOf(result);
+        int prizeResult = prizeLottoNumber.compare(lottoGame);
+        int bonusNumberResult = (lottoGame.find(bonusLottoNumber) ? 1 : 0);
+        return Rank.valueOf(prizeResult, bonusNumberResult);
     }
 }
