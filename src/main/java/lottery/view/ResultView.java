@@ -15,13 +15,7 @@ public class ResultView {
 		final Map<LotteryMatchType, Integer> resultMap = result.getResultMap();
 		Arrays.stream(LotteryMatchType.values())
 			.filter(matchType -> matchType != LotteryMatchType.MISS_MATCH)
-			.forEachOrdered(
-				matchType -> {
-					if (resultMap.containsKey(matchType)) {
-						makeMatchStringTemplate(matchType, resultMap.get(matchType));
-					}
-					makeMatchStringTemplate(matchType, 0);
-				}
+			.forEachOrdered(matchType -> makeMatchStringTemplate(matchType, resultMap.getOrDefault(matchType, 0))
 			);
 		System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n", yield);
 	}
@@ -33,10 +27,10 @@ public class ResultView {
 		if (matchType == LotteryMatchType.FIVE_MATCH_WITH_BONUS) {
 			append.append(", 보너스 볼 일치");
 		}
-		append.append(" (")
+		StringBuilder result = append.append(" (")
 			.append(matchType.money().amount())
 			.append("원)- " + count + "개");
-		System.out.println(append);
+		System.out.println(result);
 	}
 
 	private void print(String 당첨_통계) {

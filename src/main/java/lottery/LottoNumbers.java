@@ -2,9 +2,12 @@ package lottery;
 
 import static lottery.Ticket.*;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import lottery.exceptions.InvalidTicketSizeException;
 
@@ -12,27 +15,33 @@ public class LottoNumbers {
 
 	private static final String NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "로또 번호에 대한 정보가 없습니다";
 
-	private Set<Integer> numbers;
+	private Set<LottoNumber> numbers;
 
-	public static LottoNumbers from(Set<Integer> numbers) {
+	public static LottoNumbers from(Set<LottoNumber> numbers) {
 		if (numbers.size() != SIZE_OF_TICKET) {
 			throw new InvalidTicketSizeException();
 		}
 		return new LottoNumbers(numbers);
 	}
 
-	private LottoNumbers(Set<Integer> numbers) {
+	public static LottoNumbers from(String[] split) {
+		return new LottoNumbers(Arrays.stream(split).map(LottoNumber::of)
+			.sorted()
+			.collect(Collectors.toCollection(LinkedHashSet::new)));
+	}
+
+	private LottoNumbers(Set<LottoNumber> numbers) {
 		setNumbers(numbers);
 	}
 
-	private void setNumbers(Set<Integer> numbers) {
-		if (Objects.isNull(numbers) || numbers.isEmpty()){
+	private void setNumbers(Set<LottoNumber> numbers) {
+		if (Objects.isNull(numbers) || numbers.isEmpty()) {
 			throw new IllegalArgumentException(NOT_FOUND_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
 		}
 		this.numbers = numbers;
 	}
 
-	public Set<Integer> values() {
+	public Set<LottoNumber> values() {
 		return Collections.unmodifiableSet(numbers);
 	}
 

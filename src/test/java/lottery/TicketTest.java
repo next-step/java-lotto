@@ -1,11 +1,10 @@
 package lottery;
 
+import static lottery.fixture.Const.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.LinkedHashSet;
-import java.util.Set;
 
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
 import lottery.exceptions.InvalidTicketSizeException;
@@ -13,18 +12,16 @@ import lottery.exceptions.InvalidTicketSizeException;
 class TicketTest {
 
 	Ticket sut;
-
 	@Test
 	void create() {
-		LottoNumbers lottoNumbers = LottoNumbers.from(Sets.newLinkedHashSet(1, 2, 3, 4, 5, 6));
-
-		sut = Ticket.of(lottoNumbers);
-
-		Set<Integer> values = sut.numbers();
-		assertThat(values).hasSize(6);
-		assertThat(values).containsAll(lottoNumbers.values());
-
-		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>())))
+		assertThatThrownBy(() -> Ticket.of(LottoNumbers.from(new LinkedHashSet<>()), TicketType.MANUAL))
 			.isInstanceOf(InvalidTicketSizeException.class);
+
+		LottoNumbers lottoNumbers = LottoNumbers.from(로또번호_1_2_3_4_5_6);
+
+		sut = Ticket.of(lottoNumbers, TicketType.MANUAL);
+
+		assertThat(sut.numbers()).hasSize(6);
+
 	}
 }

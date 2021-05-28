@@ -26,9 +26,15 @@ public final class Buyer {
 		return tickets;
 	}
 
-	public void buyTicket(Store store) {
+	public void buyTicket(Store store, Tickets manualTickets) {
 		requireNonNull(store);
-		this.tickets = store.getTicket(this);
+		hasAffordableTicketMoney(manualTickets.size());
+		this.tickets = store.getTicket(this, manualTickets);
+	}
+
+	private void hasAffordableTicketMoney(int size) {
+		Money totalManualPrice = Store.TICKET_PRICE.multiply(size);
+		this.money.minus(totalManualPrice);
 	}
 
 	public Result checkTicket(InfoCenter infoCenter) {
