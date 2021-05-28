@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static lotto.util.ValidationUtils.*;
 
+import java.util.Optional;
+
 public class ManualLottoCount {
 
 	private static final String INVALID_LOTTO_COUNT_MESSAGE = "로또 개수는 숫자만 입력할 수 있습니다.";
@@ -10,28 +12,26 @@ public class ManualLottoCount {
 	private final int count;
 
 	public ManualLottoCount(String countString, Money money) {
-		validate(countString);
-		this.count = validateCount(countString, money);
+		this.count = validCount(countString, validMoney(money));
 	}
 
-	private void validate(String countString) {
-		if (!validateNumber(countString)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_COUNT_MESSAGE);
-		}
+	private Money validMoney(Money money) {
+		return Optional.ofNullable(money)
+			.orElseThrow(() -> new IllegalArgumentException("로또 구입 금액이 유효하지 않습니다."));
 	}
 
-	private int validateCount(String countString, Money money) {
-		int tempCount = Integer.parseInt(countString);
-
-		validateEnoughMoney(money, tempCount);
-
-		return tempCount;
+	private Integer validCount(String countString, Money validMoney) {
+		return Optional.ofNullable(validCountString(countString))
+			.map(Integer::parseInt)
+			.filter(validMoney::isEnough)
+			.orElseThrow(() -> new IllegalArgumentException(NOT_ENOUGH_MONEY_MESSAGE));
 	}
 
-	private void validateEnoughMoney(Money money, int tempCount) {
-		if (!money.isEnough(tempCount)) {
-			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_MESSAGE);
-		}
+	private String validCountString(String countString) {
+		return Optional.ofNullable(countString)
+			.filter(str -> NUMBER_PATTERN.matcher(str)
+				.find())
+			.orElseThrow(() -> new IllegalArgumentException(INVALID_LOTTO_COUNT_MESSAGE));
 	}
 
 	public int count() {
