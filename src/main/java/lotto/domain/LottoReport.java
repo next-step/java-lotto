@@ -10,20 +10,32 @@ import java.util.Map;
 
 public class LottoReport {
 
-	public static final int SCALE = 2;
+	private static final int SCALE = 2;
 
-	private final Map<LottoRank, Integer> lottoRankMap;
-	private final int lottoTicketCount;
-
-	private BigDecimal earnings = new BigDecimal(0);
+	private final Map<LottoRank, Integer> lottoRankMap = new EnumMap<>(LottoRank.class);
+	private final List<LottoRank> lottoRankList;
+	private final BigDecimal earnings;
 
 	public LottoReport(List<LottoRank> lottoRankList) {
-		lottoTicketCount = lottoRankList.size();
-		lottoRankMap = new EnumMap<>(LottoRank.class);
+		this.lottoRankList = lottoRankList;
+		earnings = sumEarnings(lottoRankList);
+
+		countPerRank(lottoRankList);
+	}
+
+	private BigDecimal sumEarnings(List<LottoRank> lottoRankList) {
+		BigDecimal decimal = new BigDecimal(0);
 
 		for (LottoRank lottoRank : lottoRankList) {
+			decimal = decimal.add(BigDecimal.valueOf(lottoRank.money()));
+		}
+
+		return decimal;
+	}
+
+	private void countPerRank(List<LottoRank> lottoRankList) {
+		for (LottoRank lottoRank : lottoRankList) {
 			lottoRankMap.put(lottoRank, lottoRankMap.getOrDefault(lottoRank, 0) + 1);
-			earnings = earnings.add(BigDecimal.valueOf(lottoRank.money()));
 		}
 	}
 
@@ -38,7 +50,7 @@ public class LottoReport {
 	}
 
 	private int spentMoney() {
-		return lottoTicketCount * LottoStore.PRICE;
+		return lottoRankList.size() * LottoStore.PRICE;
 	}
 
 	public Map<LottoRank, Integer> lottoRankMap() {
