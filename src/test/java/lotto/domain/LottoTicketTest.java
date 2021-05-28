@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,16 @@ class LottoTicketTest {
 
 		// then
 		assertThatThrownBy(() -> new LottoTicket(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+	void givenNullOrEmptyToConstructor_then_ExceptionThrown(Set<LottoNumber> set) {
+		// when
+		Throwable throwable = catchThrowable(() -> new LottoTicket(set));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@DisplayName("로또 번호 목록 출력 테스트")
@@ -79,7 +90,7 @@ class LottoTicketTest {
 		LottoTicket lottoTicket = LottoTicketConverter.convert("1,2,3,4,5,6");
 
 		// then
-		assertThat(lottoTicket.matchNumber(LottoNumber.of(6))).isTrue();
+		assertThat(lottoTicket.isMatchingNumber(LottoNumber.of(6))).isTrue();
 	}
 
 	@Test

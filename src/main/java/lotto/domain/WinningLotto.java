@@ -15,7 +15,7 @@ public class WinningLotto {
 	}
 
 	private void validateBonusNumber(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
-		if (winningLottoTicket.matchNumber(bonusLottoNumber)) {
+		if (winningLottoTicket.isMatchingNumber(bonusLottoNumber)) {
 			throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER_MESSAGE);
 		}
 	}
@@ -25,7 +25,7 @@ public class WinningLotto {
 	}
 
 	private boolean isMatchingBonusNumber(LottoTicket userLottoTicket) {
-		return userLottoTicket.matchNumber(bonusLottoNumber);
+		return userLottoTicket.isMatchingNumber(bonusLottoNumber);
 	}
 
 	private int countMatchingNumber(LottoTicket userLottoTicket) {
