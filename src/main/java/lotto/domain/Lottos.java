@@ -20,6 +20,10 @@ public class Lottos {
 		this.lottos.add(lotto);
 	}
 
+	public void addAllLottos(Lottos lottos) {
+		this.lottos.addAll(lottos.lottos);
+	}
+
 	public LottoResult getLottoResult(Lotto winningLotto, LottoNumber bonusNumber) {
 		List<LottoRank> userLottoRanks = this.lottos.stream()
 			.map(lotto ->

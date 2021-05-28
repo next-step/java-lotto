@@ -11,8 +11,11 @@ public class LottoOutputView {
 	private static final String PURCHASE_LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
 	private static final String WINNING_STATISTICS = "당첨 통계";
 	private static final String LINE = "---------";
-	private static final String MATCHES_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+	private static final String MATCHES_RESULT_MESSAGE = "%d개 일치 %s(%d원)- %d개\n";
 	private static final String YIELD_MESSAGE = "총 수익률은 %f 입니다.\n";
+	private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
+	private static final String NOT_BONUS_BALL_MESSAGE = "";
+	private static final String PURCHASE_LOTTO_RESULT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
 	private LottoOutputView() {
 
@@ -32,13 +35,26 @@ public class LottoOutputView {
 		Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> lottoRank != LottoRank.UNRANKED)
 			.forEach(lottoRank -> {
-				System.out.printf(MATCHES_RESULT_MESSAGE, lottoRank.getMatches(), lottoRank.getReward(),
+				System.out.printf(MATCHES_RESULT_MESSAGE, lottoRank.getMatches(),
+					getBonusBallMessage(lottoRank.hasBonusBall()),
+					lottoRank.getReward(),
 					lottoRankCount.getCount(lottoRank));
 			});
 	}
 
 	public static void printYield(double yield) {
 		System.out.printf(YIELD_MESSAGE, yield);
+	}
+
+	public static void printPurchaseLottoResult(int autoCount, int manualCount) {
+		System.out.printf(PURCHASE_LOTTO_RESULT, manualCount, autoCount);
+	}
+
+	private static String getBonusBallMessage(boolean hasBonusBall) {
+		if (hasBonusBall) {
+			return BONUS_BALL_MESSAGE;
+		}
+		return NOT_BONUS_BALL_MESSAGE;
 	}
 
 }

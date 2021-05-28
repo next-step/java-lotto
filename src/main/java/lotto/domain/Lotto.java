@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -12,6 +15,7 @@ public class Lotto {
 	public Lotto(final List<LottoNumber> numbers) {
 		validate(numbers);
 		this.numbers = numbers;
+		sort();
 	}
 
 	public long getMatchesCount(Lotto lotto) {
@@ -38,9 +42,24 @@ public class Lotto {
 		return this.numbers.contains(number);
 	}
 
-	private void validate(List<LottoNumber> numbers) {
-		if (numbers.size() > LOTTO_NUMBER_SIZE) {
-			throw new IllegalArgumentException("6개 보다 크다");
+	private void validate(List<LottoNumber> checkNumbers) {
+		validateCount(checkNumbers);
+		validateDuplicate(checkNumbers);
+	}
+
+	private void validateCount(List<LottoNumber> checkNumbers) {
+		if (checkNumbers.size() != LOTTO_NUMBER_SIZE) {
+			throw new IllegalArgumentException("로또 번호는 6개여만 합니다.");
 		}
+	}
+
+	private void validateDuplicate(List<LottoNumber> checkNumbers) {
+		Set<LottoNumber> checkNumberSet = new HashSet(checkNumbers);
+		if(checkNumberSet.size() != LOTTO_NUMBER_SIZE)
+			throw new IllegalArgumentException("로또에 중복된 번호가 있습니다.");
+	}
+
+	private void sort() {
+		Collections.sort(this.numbers);
 	}
 }

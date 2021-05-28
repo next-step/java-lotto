@@ -6,6 +6,7 @@ import java.util.List;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class LottoUtils {
 
@@ -15,12 +16,18 @@ public class LottoUtils {
 
 	}
 
-	public static Lotto getStringToLotto(String lottoString) {
+	public static Lottos mapStringListToLottos(Lottos lottos, List<String> lottosStringList) {
+		lottosStringList.forEach(lottoString -> lottos.addLotto(mapStringToLotto(lottoString)));
+		return lottos;
+	}
+
+	public static Lotto mapStringToLotto(String lottoString) {
 		String[] lottoArrays = lottoString.split(LOTTO_STRING_DELIMITER_REGEX);
 		List<LottoNumber> winningLottoNumbers = new ArrayList<>();
 		Arrays.stream(lottoArrays)
 			.forEach(
-				winningLottoNumber -> winningLottoNumbers.add(new LottoNumber(Integer.parseInt(winningLottoNumber.trim()))));
+				winningLottoNumber -> winningLottoNumbers.add(
+					LottoNumber.of(Integer.parseInt(winningLottoNumber.trim()))));
 		return new Lotto(winningLottoNumbers);
 	}
 }

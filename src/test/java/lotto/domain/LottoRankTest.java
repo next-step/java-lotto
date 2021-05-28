@@ -33,12 +33,12 @@ public class LottoRankTest {
 	@DisplayName("로또 순위 매칭 개수에 따른 로또 순위 확인 테스트")
 	public void valueOf() {
 		assertThat(LottoRank.valueOf(6, false)).isEqualTo(LottoRank.FIRST);
-		assertThat(LottoRank.valueOf(5, true)).isEqualTo(LottoRank.SECOND);
 		assertThat(LottoRank.valueOf(5, false)).isEqualTo(LottoRank.THIRD);
 		assertThat(LottoRank.valueOf(4, false)).isEqualTo(LottoRank.FOURTH);
 		assertThat(LottoRank.valueOf(3, false)).isEqualTo(LottoRank.FIFTH);
 		assertThat(LottoRank.valueOf(3, true)).isEqualTo(LottoRank.FIFTH);
 		assertThat(LottoRank.valueOf(0, false)).isEqualTo(LottoRank.UNRANKED);
+		assertThat(LottoRank.valueOf(5, true)).isEqualTo(LottoRank.SECOND);
 	}
 
 	@Test

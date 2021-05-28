@@ -1,16 +1,20 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseHistory;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoUser;
+import lotto.domain.Lottos;
 import lotto.utils.LottoUtils;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoGame {
 
-	private static LottoUser user = new LottoUser();
+	private static LottoUser user;
 	private static Lotto winningLotto;
 	private static LottoNumber bonusNumber;
 
@@ -19,30 +23,40 @@ public class LottoGame {
 	}
 
 	public static void start() {
-		inputPurchaseLotto();
-		outputUserLottoStatus();
+		initUser();
+		purchaseLottos();
+		getUserLottoStatus();
 		inputLastWeekWinningNumber();
 		inputBonusNumber();
 		outputResult();
 	}
 
-	private static void inputPurchaseLotto() {
-		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
-		user.buyGenerateLottos(purchasePrice);
+	private static void initUser() {
+		user = new LottoUser();
 	}
 
-	private static void outputUserLottoStatus() {
+	private static void purchaseLottos() {
+		int purchasePrice = LottoInputView.inputPurchaseLottoPrice();
+		List<String> manualStringLottos = LottoInputView.inputManualLottoNumber(LottoInputView.inputManualLottoCount());
+		Lottos manualLottos = LottoUtils.mapStringListToLottos(new Lottos(), manualStringLottos);
+		user.buyLottos(manualLottos, purchasePrice);
+		LottoPurchaseHistory lottoPurchaseHistory = user.getLottoPurchaseHistory();
+		LottoOutputView.printPurchaseLottoResult(lottoPurchaseHistory.getAutoLottoCount(),
+			lottoPurchaseHistory.getManualLottoCount());
+	}
+
+	private static void getUserLottoStatus() {
 		LottoOutputView.printPurchaseLottoCount(user.getLottoCount());
 		LottoOutputView.printLottos(user.getUserLottos());
 	}
 
 	private static void inputLastWeekWinningNumber() {
-		winningLotto = LottoUtils.getStringToLotto(LottoInputView.inputWinningLotto());
+		winningLotto = LottoUtils.mapStringToLotto(LottoInputView.inputWinningLotto());
 	}
 
 	private static void inputBonusNumber() {
-		bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
-		if(winningLotto.containNumber(bonusNumber)){
+		bonusNumber = LottoNumber.of(LottoInputView.inputBonusNumber());
+		if (winningLotto.containNumber(bonusNumber)) {
 			inputBonusNumber();
 		}
 	}
