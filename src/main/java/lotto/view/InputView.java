@@ -18,22 +18,12 @@ public class InputView {
 
     public long inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        try {
-            return nextLongLine();
-        } catch (NumberFormatException nfe) {
-            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
-            return inputMoney();
-        }
+        return nextLongLine();
     }
 
     public int inputManualTicketCount() {
         System.out.println(INPUT_MANUAL_TICKET_COUNT_MESSSAGE);
-        try {
-            return nextIntLint();
-        } catch (NumberFormatException ime) {
-            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
-            return inputManualTicketCount();
-        }
+        return nextIntLine();
     }
 
     public List<LottoTicket> inputManualLottoTicket(int manualTicketCount) {
@@ -53,12 +43,7 @@ public class InputView {
 
     public int inputBonusBall() {
         System.out.println(INPUT_BONUS_BALL);
-        try{
-            return nextIntLint();
-        }catch (NumberFormatException nfe) {
-            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
-            return inputBonusBall();
-        }
+        return nextIntLine();
     }
 
     private long nextLongLine() {
@@ -66,7 +51,7 @@ public class InputView {
         return Long.parseLong(line);
     }
 
-    private int nextIntLint() {
+    private int nextIntLine() {
         String line = scanner.nextLine();
         return Integer.parseInt(line);
     }

@@ -8,13 +8,13 @@ import java.util.*;
 public class GameResult {
     private List<GameWinningResult> gameWinningResults;
 
-    public GameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
+    public GameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, LottoNumber bonusNumber) {
         throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
         this.gameWinningResults = getGameResult(winningLottoTicket, userLottoTickets, bonusNumber);
     }
 
 
-    private List<GameWinningResult> getGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, int bonusNumber) {
+    private List<GameWinningResult> getGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, LottoNumber bonusNumber) {
         List<WinningType> winningResult = userLottoTickets.getWinningResult(winningLottoTicket, bonusNumber);
         List<GameWinningResult> gameWinningResult = new ArrayList<>();
         for(WinningType winningType : WinningType.values()) {
@@ -26,8 +26,8 @@ public class GameResult {
         return gameWinningResult;
     }
 
-    private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, int bonusNumber) {
-        if (winningLottoTicket.contains(LottoNumber.of(bonusNumber))) {
+    private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        if (winningLottoTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
     }

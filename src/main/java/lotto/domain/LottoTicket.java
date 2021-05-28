@@ -18,7 +18,7 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(new LottoTicketGenerator().generate(lottoNumbersText));
     }
 
-    public WinningType getWinningType(LottoTicket winningLottoTicket, int bonusNumber) {
+    public WinningType getWinningType(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         int matchCount = 0;
         for (LottoNumber winningLottoNumber : winningLottoTicket.lottoNumbers) {
             matchCount += addCount(winningLottoNumber);
@@ -38,8 +38,8 @@ public class LottoTicket {
         return NOT_CONTAINS_ADD_NUMBER;
     }
 
-    private boolean isMatchBonus(int bonusNumber) {
-        if (this.lottoNumbers.contains(new LottoNumber(bonusNumber))) {
+    private boolean isMatchBonus(LottoNumber bonusNumber) {
+        if (this.lottoNumbers.contains(bonusNumber)) {
             return true;
         }
         return false;

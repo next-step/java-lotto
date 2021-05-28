@@ -30,7 +30,7 @@ public class LottoTickets {
         return stringBuilder.toString();
     }
 
-    public long getPrizeSum(LottoTicket winningLottoTicket, int bonusNumber) {
+    public long getPrizeSum(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         long prizeSum = 0;
         for (LottoTicket lottoTicket : this.lottoTickets) {
             prizeSum += lottoTicket.getWinningType(winningLottoTicket, bonusNumber).getPrize();
@@ -39,7 +39,7 @@ public class LottoTickets {
         return prizeSum;
     }
 
-    public List<WinningType> getWinningResult(LottoTicket winningLottoTicket, int bonusNumber) {
+    public List<WinningType> getWinningResult(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         return this.lottoTickets.stream()
                 .map(t -> t.getWinningType(winningLottoTicket, bonusNumber))
                 .collect(Collectors.toList());

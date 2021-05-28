@@ -27,14 +27,14 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(1);
 
         //생성된 WinningType 리스트는 NULL이 될 수 없다.
-        assertThat(lottoTickets.getWinningResult(new LottoTicket(), 1)).isNotNull();
+        assertThat(lottoTickets.getWinningResult(new LottoTicket(), new LottoNumber(1))).isNotNull();
     }
 
     @Test
     @DisplayName("로또 상금 합계 계산 테스트")
     void getPrizeSum() {
         LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         //1등, 2등 합계
         LottoTickets firstUserLottoTickets = new LottoTickets(Arrays.asList(
@@ -55,7 +55,7 @@ public class LottoTicketsTest {
     @DisplayName("로또 티켓 병합 테스트")
     void mergeLottoTickets() {
         LottoTicket winningLottoTicket = new LottoTicket("7,8,9,10,11,12");
-        int bonusNumber = 20;
+        LottoNumber bonusNumber = new LottoNumber(20);
 
         LottoTickets lottoTickets = new LottoTickets(new ArrayList<LottoTicket>(){{
             add(new LottoTicket("1,2,3,4,5,6"));

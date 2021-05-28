@@ -24,7 +24,7 @@ public class GameResultTest {
         LottoTickets userLottoTickets = new LottoTickets(
                 Arrays.asList(new LottoTicket(lottoNumber)));
 
-        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets, 30).getGameResult();
+        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets, new LottoNumber(30)).getGameResult();
         GameWinningResult expectedGameWinningResults = new GameWinningResult(WinningType.of(matchCount, false), 1);
         assertThat(gameWinningResults).contains(expectedGameWinningResults);
     }
@@ -38,7 +38,7 @@ public class GameResultTest {
         LottoTickets userLottoTickets = new LottoTickets(
                 Arrays.asList(new LottoTicket(lottoNumber)));
 
-        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets, 7).getGameResult();
+        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets, new LottoNumber(7)).getGameResult();
         GameWinningResult expectedGameWinningResult = new GameWinningResult(WinningType.of(matchCount, true), 1);
         assertThat(gameWinningResults).contains(expectedGameWinningResult);
     }
@@ -53,7 +53,7 @@ public class GameResultTest {
                         new LottoTicket("1,2,3,4,5,8"), new LottoTicket("1,2,3,4,7,8"),
                         new LottoTicket("1,2,3,7,8,9"), new LottoTicket("1,2,8,9,10,11")));
 
-        List<GameWinningResult> firstMatchCountResults = new GameResult(winningLottoTicket, firstUserLottoTickets, 7).getGameResult();
+        List<GameWinningResult> firstMatchCountResults = new GameResult(winningLottoTicket, firstUserLottoTickets, new LottoNumber(7)).getGameResult();
         for(int i = 0; i<=6; i++) {
             GameWinningResult expectedGameWinningResult = new GameWinningResult(WinningType.of(i, false), 1);
             assertThat(firstMatchCountResults).contains(expectedGameWinningResult);
@@ -66,7 +66,7 @@ public class GameResultTest {
                         new LottoTicket("11,12,13,14,15,16"), new LottoTicket("10,8,2,9,1,11")));
 
 
-        List<GameWinningResult> secondMatchCountResults = new GameResult(winningLottoTicket, secondUserLottoTickets, 7).getGameResult();
+        List<GameWinningResult> secondMatchCountResults = new GameResult(winningLottoTicket, secondUserLottoTickets, new LottoNumber(7)).getGameResult();
         List<GameWinningResult> expectedGameWinningResults = new ArrayList<>();
         expectedGameWinningResults.add(new GameWinningResult(WinningType.FIRST, 1));
         expectedGameWinningResults.add(new GameWinningResult(WinningType.SECOND, 2));
@@ -83,7 +83,7 @@ public class GameResultTest {
     void inputBonusNumber_shouldNotIncludedWinningLottoNumber() {
         LottoTicket winningLottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoTickets userLottoTickets = new LottoTickets(1);
-        assertThatThrownBy(()->new GameResult(winningLottoTicket, userLottoTickets,1))
+        assertThatThrownBy(()->new GameResult(winningLottoTicket, userLottoTickets,new LottoNumber(1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
     }
