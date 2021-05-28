@@ -18,6 +18,7 @@ public class InputView {
 	public static final String MESSAGE_EMPTY = "";
 	public static final String MESSAGE_INPUT_COUNT_OF_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
 	public static final String MESSAGE_INVALID_NUMBER = "유효하지 않은 숫자를 입력하셨습니다.";
+	public static final String MESSAGE_INVALID_PURCHASE_AMOUNT = "구입금액은 숫자(정수)만 입력가능합니다.";
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static PurchaseAmount inputPurchaseAmount() {
@@ -31,7 +32,10 @@ public class InputView {
 
 	protected static PurchaseAmount toPurchaseAmount(String inputPurchaseAmount) {
 		try {
-			return new PurchaseAmount(inputPurchaseAmount);
+			return new PurchaseAmount(Integer.parseInt(inputPurchaseAmount));
+		} catch (NumberFormatException e) {
+			printError(MESSAGE_INVALID_PURCHASE_AMOUNT);
+			return null;
 		} catch (IllegalArgumentException e) {
 			printError(e.getMessage());
 			return null;

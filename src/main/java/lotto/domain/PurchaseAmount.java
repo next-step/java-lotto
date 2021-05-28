@@ -6,15 +6,9 @@ public class PurchaseAmount {
 
 	public static final int AMOUNT_PER_UNIT = 1_000;
 	public static final String MESSAGE_INVALID_MINIMUM_AMOUNT = "로또를 구입하려면 최소 %,d원 이상 있어야 합니다.";
-	public static final String MESSAGE_INVALID_AMOUNT = "구입금액은 숫자(정수)만 입력가능합니다.";
 
 	private final int purchaseAmount;
 
-	public PurchaseAmount(String purchaseAmount) {
-		validationNumber(purchaseAmount);
-		validationMinimum(purchaseAmount);
-		this.purchaseAmount = Integer.parseInt(purchaseAmount);
-	}
 
 	public PurchaseAmount(int purchaseAmount) {
 		validationMinimum(purchaseAmount);
@@ -23,16 +17,6 @@ public class PurchaseAmount {
 
 	public int findNumberOfAvailablePurchases() {
 		return this.purchaseAmount / AMOUNT_PER_UNIT;
-	}
-
-	private void validationNumber(String purchaseAmount) {
-		if (!isNumeric(purchaseAmount)) {
-			throw new IllegalArgumentException(MESSAGE_INVALID_AMOUNT);
-		}
-	}
-
-	private void validationMinimum(String purchaseAmount) {
-		validationMinimum(Integer.parseInt(purchaseAmount));
 	}
 
 	private void validationMinimum(int purchaseAmount) {
@@ -63,11 +47,4 @@ public class PurchaseAmount {
 		return String.valueOf(purchaseAmount);
 	}
 
-	protected static boolean isNumeric(String str) {
-		if (str == null || str.trim().length() == 0) {
-			return false;
-		}
-		String regex = "[0-9]+";
-		return str.matches(regex);
-	}
 }
