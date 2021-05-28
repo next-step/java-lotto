@@ -10,6 +10,8 @@ import view.InputView;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LottoMachineTest {
     private static LottoMachine lottoMachine;
@@ -91,5 +93,21 @@ public class LottoMachineTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> InputView.bonusBall(bonusNumber, winningNumber))
                 .withMessageMatching("보너스 볼은 당첨 번호들이랑 달라야 합니다.");
+    }
+
+    @DisplayName("로또 구매 금액에서 수동 갯수를 뺀 만큼 자동 번호를 생성한다.")
+    @Test
+    void autoLottoTicketTest() {
+        //given
+        int buyMoney = 10000;
+
+        LottoTickets mockTickets = mock(LottoTickets.class);
+        when(mockTickets.lottoTicketCount()).thenReturn(3);
+
+        // when
+        LottoTickets autoLottoTickets = lottoMachine.autoGenerate(buyMoney, mockTickets);
+
+        // then
+        assertThat(autoLottoTickets.lottoTicketCount()).isEqualTo(7);
     }
 }
