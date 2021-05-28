@@ -21,9 +21,14 @@ public class WinningLotto {
 	}
 
 	public LottoRank rank(LottoTicket userLottoTicket) {
-		int count = LottoTicket.countMatchingNumber(userLottoTicket, winningLottoTicket);
-		boolean bonus = userLottoTicket.matchNumber(bonusLottoNumber);
+		return LottoRank.rank(countMatchingNumber(userLottoTicket), isMatchingBonusNumber(userLottoTicket));
+	}
 
-		return LottoRank.rank(count, bonus);
+	private boolean isMatchingBonusNumber(LottoTicket userLottoTicket) {
+		return userLottoTicket.matchNumber(bonusLottoNumber);
+	}
+
+	private int countMatchingNumber(LottoTicket userLottoTicket) {
+		return LottoTicket.countMatchingNumber(userLottoTicket, winningLottoTicket);
 	}
 }
