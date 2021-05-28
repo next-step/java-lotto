@@ -48,7 +48,7 @@ public class ResultView {
 		// 어떻게 print 할 것인지 ResultView 에서 결정하기 위해, toString 미구현.
 		Map<Rank, Integer> matchedPrizeMap = result.priseResult()
 			.getMatchedPrizeMap();
-		for (Rank value : Rank.range(3, 6, true)) {
+		for (Rank value : Rank.range(3, 6, false)) {
 			printResultOfMatched(value, matchedPrizeMap.get(value));
 		}
 		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
@@ -60,11 +60,12 @@ public class ResultView {
 	protected void printResultOfMatched(Rank rank, int prize) {
 		String format = "%d개 일치 (%d원)- %d개";
 		int countOfMatched = rank.getWinningMoney() == 0 ? 0 : prize / rank.getWinningMoney();
-		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
 		if (rank == Rank.SECOND) {
 			format = "5개 일치, 보너스 볼 일치(%d) - %d개";
 			print(String.format(format, Rank.SECOND.getWinningMoney(), countOfMatched));
+			return;
 		}
+		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
 	}
 
 	public void printException(DomainException e) {

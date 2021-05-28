@@ -28,7 +28,7 @@ public enum Rank {
 	public static Rank[] range(int min, int max, boolean asc) {
 		return Arrays.stream(Rank.values())
 			.filter(r -> r.countOfMatch >= min && r.countOfMatch <= max)
-			.sorted((a, b) -> asc ? -1 : a.compareTo(b))
+			.sorted((a, b) -> (asc ? 1 : -1) * a.compareTo(b))
 			.toArray(Rank[]::new);
 	}
 
