@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Ranking {
-	RANKING_LAST(new RankingCondition(0), 0), RANKING_5(new RankingCondition(3), 5000), RANKING_4(
-		new RankingCondition(4), 500000), RANKING_3(new RankingCondition(5, false),
-		1500000), RANKING_2(new RankingCondition(5, true),
-		30000000), RANKING_1(new RankingCondition(6), 2000000000);
+	RANKING_LAST(new RankingCondition(0), 0),
+	RANKING_5(new RankingCondition(3), 5000),
+	RANKING_4(new RankingCondition(4), 500000),
+	RANKING_3(new RankingCondition(5, false), 1500000),
+	RANKING_2(new RankingCondition(5, true), 30000000),
+	RANKING_1(new RankingCondition(6), 2000000000);
 
 	private static final Map<RankingCondition, Ranking> rankingTable;
 
