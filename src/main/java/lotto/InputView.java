@@ -10,6 +10,7 @@ import calculator.Tokenizer;
 
 public class InputView {
 	public static final String LOTTO_PURCHASE_INPUT = "구입금액을 입력해 주세요.";
+	public static final String BONUS_NUMBER_INPUT = "보너스 볼을 입력해 주세요.";
 	public static final String WINNING_NUMBER_MSG = "지난 주 당첨 번호를 입력해 주세요.";
 
 	public static final Scanner scanner = new Scanner(System.in);
@@ -31,5 +32,12 @@ public class InputView {
 		String[] lottoNum = new Tokenizer(new Input(input)).split();
 
 		return Arrays.stream(lottoNum).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
+	}
+
+	public static LottoNumber inputBonusNumber() {
+		System.out.println(BONUS_NUMBER_INPUT);
+		int bonusNumber = scanner.nextInt();
+		scanner.nextLine();
+		return new LottoNumber(bonusNumber);
 	}
 }
