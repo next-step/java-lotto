@@ -12,6 +12,7 @@ public class Const {
 	public static final Set<LottoNumber> buyer_로또번호_1_2_3_11_12_13 = Sets.newLinkedHashSet(of(1), of(2), of(3), of(11),
 		of(12),
 		of(13));
+
 	public static final Set<LottoNumber> buyer_로또번호_1_2_3_4_12_13 = Sets.newLinkedHashSet(of(1), of(2), of(3), of(4),
 		of(12),
 		of(13));

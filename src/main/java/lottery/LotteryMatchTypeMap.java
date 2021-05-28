@@ -19,7 +19,7 @@ public class LotteryMatchTypeMap {
 	}
 
 	private void setMatchTypeMap(Map<LotteryMatchType, Integer> matchTypeMap) {
-		if (Objects.isNull(matchTypeMap) || matchTypeMap.isEmpty()){
+		if (Objects.isNull(matchTypeMap)){
 			throw new IllegalArgumentException(NOT_FOUND_LOTTERY_MATCH_TYPE);
 		}
 		this.matchTypeMap = matchTypeMap;

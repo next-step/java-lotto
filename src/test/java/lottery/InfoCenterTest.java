@@ -18,18 +18,34 @@ class InfoCenterTest {
 
 	private InfoCenter sut;
 	private WinningTicket 당첨번호_1_2_3_4_5_6_보너스_7;
+	private WinningTicket 당첨번호_10_11_12_13_14_15_보너스_16;
 	@BeforeEach
 	void setUp() {
 		sut = new InfoCenter();
 		당첨번호_1_2_3_4_5_6_보너스_7 = new WinningTicket(
 			Ticket.of(LottoNumbers.from(
 				Sets.newLinkedHashSet(of(1), of(2), of(3), of(4), of(5), of(6))), TicketType.WINNING), 보너스_7);
+		당첨번호_10_11_12_13_14_15_보너스_16 = new WinningTicket(
+			Ticket.of(LottoNumbers.from(
+				Sets.newLinkedHashSet(of(10), of(11), of(12), of(13), of(14), of(15))), TicketType.WINNING), of(16));
+
 	}
 
 	@Test
 	void 지난주_당첨번호를_입력받는다() {
 		sut.setLastWeekWinningTicket(당첨번호_1_2_3_4_5_6_보너스_7);
 		assertThat(sut.lastWeekWinningNumbers()).isEqualTo(당첨번호_1_2_3_4_5_6_보너스_7);
+	}
+
+	@Test
+	void 로또_0개자리_일치() {
+
+		Ticket buyerTicket = Ticket.of(LottoNumbers.from(buyer_로또번호_1_2_3_4_5_6),
+			TicketType.MANUAL);
+		sut.setLastWeekWinningTicket(당첨번호_10_11_12_13_14_15_보너스_16);
+
+		Result result = sut.confirmTicket(Tickets.of(Lists.list(buyerTicket)));
+		assertEqualMatchCount(result, 0, 0, 0, 0, 0);
 	}
 
 	@Test
