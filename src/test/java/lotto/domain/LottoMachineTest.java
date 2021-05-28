@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,5 +45,18 @@ class LottoMachineTest {
 
 		// then
 		assertThat(lottoTickets).containsExactly(lottoTicket1, lottoTicket2);
+	}
+
+	@Test
+	void validate() {
+		// given
+		LottoMachine lottoMachine = new LottoMachine();
+		List<LottoTicket> expected = new ArrayList<>();
+
+		// when
+		List<LottoTicket> lottoTickets = lottoMachine.generate(0);
+
+		// then
+		assertThat(lottoTickets).isEqualTo(expected);
 	}
 }
