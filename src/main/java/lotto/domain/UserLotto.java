@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.util.CollectionUtils.*;
+
 public class UserLotto {
 
 	private static final String INVALID_LOTTO_TICKET_LIST_MESSAGE = "로또 티켓이 유효하지 않습니다.";
@@ -31,13 +33,7 @@ public class UserLotto {
 	}
 
 	public LottoReport report(WinningLotto winningLotto) {
-		List<LottoRank> lottoRankList = new ArrayList<>();
-
-		for (LottoTicket lottoTicket : lottoTicketList) {
-			lottoRankList.add(winningLotto.rank(lottoTicket));
-        }
-
-		return new LottoReport(lottoRankList);
+		return new LottoReport(transform(lottoTicketList, new ArrayList<>(), winningLotto::rank));
 	}
 
 }
