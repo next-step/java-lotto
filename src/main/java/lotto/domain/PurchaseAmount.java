@@ -9,7 +9,6 @@ public class PurchaseAmount {
 
 	private final int purchaseAmount;
 
-
 	public PurchaseAmount(int purchaseAmount) {
 		validationMinimum(purchaseAmount);
 		this.purchaseAmount = purchaseAmount;
