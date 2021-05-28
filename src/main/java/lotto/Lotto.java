@@ -21,8 +21,14 @@ public class Lotto {
         this.lottoNumber = new LottoNumber(lottoNumber);
     }
 
-    public LottoRank compareWinLottoNumber(Lotto winLottoNumber) {
-        return LottoRank.searchRank(lottoNumber.compareWinLottoNumber(winLottoNumber));
+    public LottoRank compareWinLottoNumber(Lotto winLottoNumber, int bonusNumber) {
+        int matchCount = lottoNumber.compareWinLottoNumber(winLottoNumber);
+        LottoRank lottoRank = LottoRank.searchRank(matchCount);
+        if (lottoRank.isThird() || lottoRank.isSecond()) {
+            System.out.println(lottoNumber.isContainNumber(bonusNumber));
+            lottoRank = LottoRank.searchBonusRank(matchCount, lottoNumber.isContainNumber(bonusNumber));
+        }
+        return lottoRank;
     }
 
     public int matchNumber(Integer winNumber) {

@@ -27,10 +27,10 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
-    public LottoRecord compareWinNumber(Lotto winNumber) {
+    public LottoRecord compareWinNumber(Lotto winNumber, int bonusNumber) {
         LottoRecord lottoRecord = new LottoRecord();
         for (Lotto lotto : lottos) {
-            lottoRecord.recordRank(lotto.compareWinLottoNumber(winNumber));
+            lottoRecord.recordRank(lotto.compareWinLottoNumber(winNumber, bonusNumber));
         }
         lottoRecord.calculateProfit(lottos.size());
         return lottoRecord;
