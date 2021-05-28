@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class ResultView {
+    private static final String PURCHASE_PRINT = "개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String HYPHENS = "---------";
     private static final String TOTAL_YIELD = "총 수익률은";
@@ -64,5 +65,9 @@ public class ResultView {
             return LOSS_MESSAGE;
         }
         return PROFIT_MESSAGE;
+    }
+
+    public static void printPurchasePrice(int lottoCount) {
+        System.out.println(lottoCount + PURCHASE_PRINT);
     }
 }

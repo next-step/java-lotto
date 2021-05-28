@@ -1,13 +1,16 @@
 package step5.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
+    private final LottoCount lottoCount;
 
-    public Lotto(LottoCount lottoCount) {
+    public Lotto(int purchasePrice) {
         lottoTickets = new ArrayList<>();
+        lottoCount = new LottoCount(purchasePrice);
         createLottoTickets(lottoCount);
     }
 
@@ -21,11 +24,15 @@ public class Lotto {
         return this.lottoTickets.size();
     }
 
-    public LottoTicket getLottoTicket(int index) {
-        return this.lottoTickets.get(index);
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public int getLottoCount() {
+        return lottoCount.getLottoCount();
+    }
+
+    public int getPurchasePrice() {
+        return lottoCount.calculateCountToPrice();
     }
 }

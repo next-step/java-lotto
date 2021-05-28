@@ -59,7 +59,7 @@ public class LottoTicket {
         return list;
     }
 
-    public int isContainNumber(LottoNumber number) {
+    public int containNumber(LottoNumber number) {
         if (lottoTicket.contains(number)) {
             return ONE;
         }
