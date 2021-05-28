@@ -27,13 +27,7 @@ public class LottoNumbers {
     }
 
     private void validateNumber(List<Integer> lottoNumbers) {
-        for (int lottoNumber : lottoNumbers) {
-            validateMaxMinNumber(lottoNumber);
-        }
-    }
-
-    private void validateMaxMinNumber(int lottoNumber) {
-        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+        if (lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER)) {
             throw new IllegalArgumentException("로또번호는 1부터 45까지의 값을 입력해주세요");
         }
     }
@@ -63,6 +57,5 @@ public class LottoNumbers {
         return (int) this.lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count();
-
     }
 }
