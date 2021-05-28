@@ -9,10 +9,12 @@ import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoGameStateException;
 import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
+import kht2199.lotto.exception.number.LottoNumberRangeException;
 
 /**
  *
@@ -43,8 +45,10 @@ public class ResultView {
 	public void printResultStatistics(LottoWinningResult result, int assetsUsed) {
 		print("당첨 통계");
 		print("---------");
-		Map<Rank, Integer> matchedPrizeMap = result.getMatchedPrizeMap();
-		matchedPrizeMap.forEach(this::printResultOfMatched);
+		// 어떻게 print 할 것인지 ResultView 에서 결정하기 위해, toString 미구현.
+		result.priseResult()
+			.getMatchedPrizeMap()
+			.forEach(this::printResultOfMatched);
 		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
 	}
 
@@ -73,7 +77,12 @@ public class ResultView {
 		if (e instanceof LottoListEmptyException) {
 			print("구매가능한 로또가 없습니다.");
 		}
-		// TODO print for domain exceptions.
+		if (e instanceof LottoGameStateException) {
+			print("게임상태가 유효하지 않습니다. " + e.getMessage());
+		}
+		if (e instanceof LottoNumberRangeException) {
+			print("로또 번호가 유효하지 않습니다.");
+		}
 	}
 
 	public void printException(NumberFormatException e) {

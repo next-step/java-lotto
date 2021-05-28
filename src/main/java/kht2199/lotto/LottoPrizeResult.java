@@ -1,5 +1,6 @@
 package kht2199.lotto;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,5 +35,9 @@ public class LottoPrizeResult {
 		for (Rank value : Rank.values()) {
 			matchedPrizeMap.put(value, 0);
 		}
+	}
+
+	public Map<Rank, Integer> getMatchedPrizeMap() {
+		return Collections.unmodifiableMap(matchedPrizeMap);
 	}
 }

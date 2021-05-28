@@ -3,8 +3,8 @@ package kht2199.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
+import kht2199.lotto.exception.LottoGameStateException;
 import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.LottoListNotEmptyException;
 import kht2199.lotto.exception.assets.AssetsException;
@@ -48,7 +48,11 @@ public class RandomLotto {
 	 * @throws LottoListNotEmptyException 초기화 문제.
 	 * @throws AssetsNotEnoughException 예산 부족.
 	 */
-	public void start() throws LottoListNotEmptyException, AssetsNotEnoughException, LottoListEmptyException {
+	public void start() throws
+			LottoListNotEmptyException,
+			AssetsNotEnoughException,
+			LottoListEmptyException,
+			LottoGameStateException {
 		initForRestart();
 		output.printInsertAssets();
 		assets = acceptAssets();
@@ -91,7 +95,7 @@ public class RandomLotto {
 		}
 		this.assetsUsed = countsOfLotto * LOTTO_PRICE;
 		this.assets -= assetsUsed;
-		List<Lotto> lottos = new ArrayList<>();
+		List<LottoNumbers> lottos = new ArrayList<>();
 		for (int i = 0; i < countsOfLotto; i++) {
 			lottos.add(generator.random());
 		}

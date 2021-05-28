@@ -1,15 +1,19 @@
 package kht2199.lotto.view;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import kht2199.lotto.LottoNumber;
+import kht2199.lotto.LottoNumbers;
 import kht2199.lotto.LottoWinningResult;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
 import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
-import kht2199.lotto.exception.lotto.LottoNumberException;
+import kht2199.lotto.exception.number.LottoNumberException;
+import kht2199.lotto.exception.number.LottoNumberRangeException;
 
 /**
  *
@@ -34,9 +38,11 @@ public class InputView {
 		try {
 			String winningNumbersString = in.nextLine();
 			validationLottoResultString(winningNumbersString);
-			String[] splitNumbers = winningNumbersString.split(",");
-			List<Integer> numbers = intToString(splitNumbers);
-			winningNumbers.setWinningNumbers(numbers);
+			List<Integer> splitNumbers = Arrays.stream(winningNumbersString.split(","))
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
+			LottoNumbers lottoNumbers = LottoNumber.valuesOf(splitNumbers);
+			winningNumbers.setWinningNumbers(lottoNumbers);
 		} catch (InvalidInputException | LottoNumberException e) {
 			output.printException(e);
 			acceptWinningNumbers(winningNumbers);
@@ -50,22 +56,15 @@ public class InputView {
 		try {
 			String bonusNumberString = in.nextLine();
 			validateLottoNumber(bonusNumberString);
-			winningNumbers.setBonusNumber(Integer.parseInt(bonusNumberString));
-		} catch (InvalidInputException | LottoBonusNumberDuplicatedException | LottoWinningNumberNotInitiatedException e) {
+			winningNumbers.setBonusNumber(LottoNumber.valueOf(bonusNumberString));
+		} catch (InvalidInputException | LottoBonusNumberDuplicatedException |
+				LottoWinningNumberNotInitiatedException | LottoNumberRangeException e) {
 			output.printException(e);
 			acceptBonusNumber(winningNumbers);
 		} catch (NumberFormatException e) {
 			output.printException(e);
 			acceptBonusNumber(winningNumbers);
 		}
-	}
-
-	private List<Integer> intToString(String[] splitNumbers) throws NumberFormatException {
-		List<Integer> list = new ArrayList<>();
-		for (String splitNumber : splitNumbers) {
-			list.add(Integer.parseInt(splitNumber));
-		}
-		return list;
 	}
 
 	/**

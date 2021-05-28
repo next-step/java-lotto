@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import kht2199.lotto.data.Lotto;
-import kht2199.lotto.exception.lotto.LottoNumberException;
+import kht2199.lotto.exception.number.LottoNumberException;
 
 /**
  * 로또 번호 생성기.
@@ -15,13 +14,14 @@ import kht2199.lotto.exception.lotto.LottoNumberException;
  */
 public final class LottoGenerator {
 
-	public Lotto random() {
+	public LottoNumbers random() {
 		List<Integer> numbers = IntStream.range(1, 46).boxed()
 			.collect(Collectors.toList());
 		Collections.shuffle(numbers);
 		try {
-			return new Lotto(numbers.subList(0, 6));
+			return LottoNumber.valuesOf(numbers.subList(0, 6));
 		} catch (LottoNumberException e) {
+			// 1~46 이외의 숫자는 발생하지 않음.
 			throw new RuntimeException(e);
 		}
 	}

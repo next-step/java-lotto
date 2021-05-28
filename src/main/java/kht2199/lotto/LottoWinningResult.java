@@ -1,14 +1,12 @@
 package kht2199.lotto;
 
-import java.util.List;
-
 import kht2199.Rank;
-import kht2199.lotto.data.Lotto;
 import kht2199.lotto.data.LottoList;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoGameStateException;
 import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
-import kht2199.lotto.exception.lotto.LottoNumberException;
-import kht2199.lotto.exception.lotto.LottoNumberLengthException;
+import kht2199.lotto.exception.number.LottoNumberException;
+import kht2199.lotto.exception.rank.OutOfRangeOfMatchedCountException;
 
 /**
  * @author heetaek.kim
@@ -17,9 +15,9 @@ public class LottoWinningResult {
 
 	private final LottoPrizeResult lottoPrizeResult;
 
-	private Lotto winningNumber;
+	private LottoNumbers winningNumber;
 
-	private int bonusNumber;
+	private LottoNumber bonusNumber;
 
 	public LottoWinningResult() {
 		this.lottoPrizeResult = new LottoPrizeResult();
@@ -28,16 +26,15 @@ public class LottoWinningResult {
 	/**
 	 * 당첨 갯수, 당첨 금액 설정
 	 */
-	public void updateLottoWinningNumbers(LottoList list) {
-		// TODO RuntimeException을 DomainException으로 변경.
+	public void updateLottoWinningNumbers(LottoList list) throws LottoGameStateException {
 		if (winningNumber == null) {
-			throw new RuntimeException("당첨번호가 설정되어 있지 않습니다.");
+			throw new LottoGameStateException("당첨번호가 설정되어 있지 않습니다.");
 		}
-		if (bonusNumber == 0) {
-			throw new RuntimeException("보너스 번호가 설정되어 있지 않습니다.");
+		if (bonusNumber == null) {
+			throw new LottoGameStateException("보너스 번호가 설정되어 있지 않습니다.");
 		}
 		lottoPrizeResult.reset();
-		for (Lotto lotto : list.getList()) {
+		for (LottoNumbers lotto : list.getList()) {
 			Rank rank = calculateMatched(lotto);
 			lottoPrizeResult.addWinningMoney(rank);
 		}
@@ -47,16 +44,17 @@ public class LottoWinningResult {
 	 * @param lotto 비교대상 로또.
 	 * @return 결과정보.
 	 */
-	protected Rank calculateMatched(Lotto lotto) {
-		List<Integer> numbers = lotto.getNumbers();
-		int matched = 0;
-		for (Integer number : numbers) {
-			matched += winningNumber.contains(number) ? 1 : 0;
-		}
-		if (matched == 5 && numbers.contains(bonusNumber)) {
+	protected Rank calculateMatched(LottoNumbers lotto) {
+		int matched = winningNumber.countMatched(lotto);
+		if (matched == 5L && lotto.contains(bonusNumber)) {
 			return Rank.SECOND;
 		}
-		return Rank.valueOf(matched, false);
+		try {
+			return Rank.valueOf(matched, false);
+		} catch (OutOfRangeOfMatchedCountException e) {
+			// 발생할 여지가 없어야하기 때문에, RuntimeException 으로 적용.
+			throw new RuntimeException(e);
+		}
 	}
 
 	public int totalPrize() {
@@ -73,7 +71,7 @@ public class LottoWinningResult {
 		return (float) totalPrize() / assets;
 	}
 
-	public void setBonusNumber(int bonusNumber)
+	public void setBonusNumber(LottoNumber bonusNumber)
 			throws LottoBonusNumberDuplicatedException, LottoWinningNumberNotInitiatedException {
 		if (winningNumber == null) {
 			throw new LottoWinningNumberNotInitiatedException();
@@ -84,10 +82,11 @@ public class LottoWinningResult {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public void setWinningNumbers(List<Integer> numbers) throws LottoNumberException {
-		if (numbers == null || numbers.size() != 6) {
-			throw new LottoNumberLengthException();
-		}
-		this.winningNumber = new Lotto(numbers);
+	public void setWinningNumbers(LottoNumbers numbers) throws LottoNumberException {
+		this.winningNumber = numbers;
+	}
+
+	public LottoPrizeResult priseResult() {
+		return lottoPrizeResult;
 	}
 }

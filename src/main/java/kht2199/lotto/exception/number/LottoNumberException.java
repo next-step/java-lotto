@@ -1,4 +1,4 @@
-package kht2199.lotto.exception.lotto;
+package kht2199.lotto.exception.number;
 
 import kht2199.lotto.exception.DomainException;
 

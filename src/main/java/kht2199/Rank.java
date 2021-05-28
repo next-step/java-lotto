@@ -1,5 +1,9 @@
 package kht2199;
 
+import java.util.Arrays;
+
+import kht2199.lotto.exception.rank.OutOfRangeOfMatchedCountException;
+
 /**
  *
  * @author heetaek.kim
@@ -29,19 +33,20 @@ public enum Rank {
 		return winningMoney;
 	}
 
-	public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+	public static Rank valueOf(int countOfMatch, boolean matchBonus)
+			throws OutOfRangeOfMatchedCountException {
+		if (countOfMatch > 6 || countOfMatch < 0) {
+			throw new OutOfRangeOfMatchedCountException();
+		}
 		if (countOfMatch == 5 && matchBonus) {
 			return SECOND;
 		}
 		if (countOfMatch == 5) {
 			return THIRD;
 		}
-		for (Rank value : values()) {
-			if (value.countOfMatch == countOfMatch) {
-				return value;
-			}
-		}
-		return MISS;
+		return Arrays.stream(values())
+			.filter(r -> r.countOfMatch == countOfMatch)
+			.findFirst()
+			.orElseThrow(RuntimeException::new);
 	}
-
 }
