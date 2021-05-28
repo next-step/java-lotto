@@ -10,6 +10,8 @@ public class StatisticsCalculator {
 
     private static final int WINNING_TYPE_SIZE = 4;
     private static final int LOAD_FACTOR_NEVER_RE_HASHING = 1;
+    private static final int EARNING_MATCH_MINIMUM_COUNT = 3;
+    private static final int INIT_COUNT = 0;
 
     private final Ticket ticket;
     private final LottoNumbers winnerLotto;
@@ -24,7 +26,7 @@ public class StatisticsCalculator {
 
     private void init() {
         for (Ranking ranking : Ranking.values()) {
-            statisticByMatchCount.putIfAbsent(ranking, new Statistic(0, Earn.match(ranking)));
+            statisticByMatchCount.putIfAbsent(ranking, new Statistic(INIT_COUNT, Earn.match(ranking)));
         }
         for (LottoNumbers purchased : ticket.purchasedLotto()) {
             compute(statisticByMatchCount, purchased);
@@ -37,7 +39,7 @@ public class StatisticsCalculator {
 
     private void compute(Map<Ranking, Statistic> mapByCount, LottoNumbers purchased) {
         int count = winnerLotto.sameCount(purchased);
-        if (count < 3) {
+        if (count < EARNING_MATCH_MINIMUM_COUNT) {
             return;
         }
         Ranking rank = winnerLotto.ranking(purchased);
