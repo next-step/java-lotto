@@ -3,9 +3,11 @@ package step3.io;
 import java.util.Map;
 
 import step3.constant.Rank;
+import step3.model.PurchaseInfo;
+import step3.model.TotalLotto;
 
 public class ConsoleResultView {
-    private static final String BUY_TEXT = "%s개를 구매했습니다.";
+    private static final String BUY_TEXT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String STATISTICS_TEXT = "당첨 통계";
     private static final String SEPERATOR_TEXT = "---------";
     private static final String COUNT_TEXT = "%d개 일치(%d원)-%d개";
@@ -16,8 +18,10 @@ public class ConsoleResultView {
         System.out.println(message);
     }
 
-    public void buyCount(String totalSize) {
-        System.out.printf(BUY_TEXT, totalSize);
+    public void buyCount(PurchaseInfo purchaseInfo) {
+        System.out.printf(BUY_TEXT,
+            purchaseInfo.getBuyManualCountStream().count(),
+            purchaseInfo.getBuyAutoCountStream().count());
         System.out.println();
     }
 
@@ -49,6 +53,10 @@ public class ConsoleResultView {
     public void showBenefit(String benefit) {
         System.out.printf(BENEFIT_TEXT, benefit);
         System.out.println();
+    }
+
+    public void showTextStatus(TotalLotto totalLotto) {
+        System.out.println(totalLotto.getStatus());
     }
 
 }
