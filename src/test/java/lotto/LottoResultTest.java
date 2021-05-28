@@ -56,7 +56,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningNumbers, tickets);
 
         //Then
-        assertThat(lottoResult.calculateProfitRatio()).isEqualTo(1500.0f);
+        assertThat(lottoResult.calculateProfitRatio(tickets.size())).isEqualTo(1500.0f);
     }
 
     @DisplayName("수익률이 계산되는지 확인 : 보너스볼이 맞는 경우")
@@ -67,6 +67,6 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningNumbers, tickets);
 
         //Then
-        assertThat(lottoResult.calculateProfitRatio()).isEqualTo(30000.0f);
+        assertThat(lottoResult.calculateProfitRatio(tickets.size())).isEqualTo(30000.0f);
     }
 }
