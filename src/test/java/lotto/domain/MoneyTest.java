@@ -25,6 +25,15 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
+    @DisplayName("로또 티켓 구매 개수 테스트")
+    @CsvSource(value = {"1000:1","1500:1", "10001: 10"}, delimiter = ':')
+    void countLottoTicket_shouldBeDividedByLottoPrice(long inputMoney, int lottoTicketCount) {
+        //로또 티켓 개수 = 지불 금액/로또 가격
+        Money money = new Money(inputMoney);
+        assertThat(money.countLottoTicket()).isEqualTo(lottoTicketCount);
+    }
+
+    @ParameterizedTest
     @DisplayName("금액 입력 테스트")
     @ValueSource(longs = {-1000,0, 500})
     void inputMoney_throwInvalidZeroNumberException(long inputMoney) {
