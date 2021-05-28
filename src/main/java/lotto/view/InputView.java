@@ -179,7 +179,7 @@ public class InputView {
 
 	public static void printPurchaseQuantity(PurchaseAmount purchaseAmount, Lottos manaulLottos) {
 		int manualQuantity = manaulLottos.size();
-		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		int autoQuantity = purchaseAmount.availablePurchasesQuantity() - manualQuantity;
 
 		print();
 		print(String.format(MESSAGE_PURCHAGE_COMPLETE, manualQuantity, autoQuantity));

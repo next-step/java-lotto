@@ -26,13 +26,13 @@ public class Lottos {
 		validationManualLottos(purchaseAmount, manualLottos);
 		lottos = new ArrayList<>(manualLottos.getLottos());
 		int manualQuantity = manualLottos.size();
-		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		int autoQuantity = purchaseAmount.availablePurchasesQuantity() - manualQuantity;
 		generateRandomNumbers(randomNumbersGenerator, autoQuantity);
 	}
 
 	private void validationManualLottos(PurchaseAmount purchaseAmount, Lottos manualLottos) {
 		int manualQuantity = manualLottos.size();
-		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		int autoQuantity = purchaseAmount.availablePurchasesQuantity() - manualQuantity;
 		if (autoQuantity < 0) {
 			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MANUAL_AVAILABLE_PURCHASES, purchaseAmount, manualQuantity));
 		}

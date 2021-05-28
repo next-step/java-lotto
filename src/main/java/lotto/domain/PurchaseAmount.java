@@ -18,10 +18,6 @@ public class PurchaseAmount {
 		return this.purchaseAmount / AMOUNT_PER_UNIT;
 	}
 
-	public int availablePurchasesQuantityMinusManualQuantity(int manualQuantity) {
-		return (this.purchaseAmount / AMOUNT_PER_UNIT) - manualQuantity;
-	}
-
 	private void validationMinimum(int purchaseAmount) {
 		if (purchaseAmount < AMOUNT_PER_UNIT) {
 			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MINIMUM_AMOUNT, AMOUNT_PER_UNIT));
