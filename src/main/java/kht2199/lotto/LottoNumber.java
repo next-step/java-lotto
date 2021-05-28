@@ -78,7 +78,7 @@ public class LottoNumber {
 		return Objects.hash(number);
 	}
 
-	public char value() {
-		return (char) this.number;
+	public int value() {
+		return this.number;
 	}
 }
