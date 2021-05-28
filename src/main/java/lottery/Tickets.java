@@ -46,11 +46,15 @@ public class Tickets {
 	}
 
 	public int sizeOfManualTickets() {
-		return value.stream().filter(a -> a.getType().equals(TicketType.MANUAL)).mapToInt(a -> 1).sum();
+		return value.stream()
+			.filter(ticket -> ticket.getType().equals(TicketType.MANUAL))
+			.mapToInt(a -> 1).sum();
 	}
 
 	public int sizeOfAutoTickets() {
-		return value.stream().filter(a -> a.getType().equals(TicketType.AUTO)).mapToInt(a -> 1).sum();
+		return value.stream()
+			.filter(ticket -> ticket.getType().equals(TicketType.AUTO))
+			.mapToInt(a -> 1).sum();
 	}
 
 	public Tickets merge(Tickets tickets) {
