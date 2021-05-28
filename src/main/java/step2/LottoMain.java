@@ -1,6 +1,11 @@
 package step2;
 
-import step2.model.*;
+import java.util.List;
+import step2.model.LottoGame;
+import step2.model.LottoMoney;
+import step2.model.LottoPrize;
+import step2.model.LottoPrizes;
+import step2.model.LottoWinning;
 import step2.util.LottoMakeNumbers;
 import step2.view.LottoInput;
 import step2.view.LottoOutput;
@@ -14,17 +19,12 @@ public class LottoMain {
         LottoOutput.printPurchaseNumbers(lottoGame.getLottoCount());
         LottoOutput.printLottoNumbers(lottoGame);
 
-        LottoTotalCalculator lottoTotalCalculator = LottoTotalCalculator.of(
-            lottoGame.getLottos(),
-            LottoWinning.of(
-                Lotto.of(
-                    LottoMakeNumbers.convertStringToNumbers(
-                        LottoInput.inputWinnerNumbers()
-                    )
-                )
-            )
-        );
-
-        LottoOutput.printWinningStatistics(lottoTotalCalculator);
+        LottoWinning lottoWinning = LottoWinning
+            .of(LottoMakeNumbers.convertStringToNumbers(LottoInput.inputWinnerNumbers()),
+                LottoInput.inputBonus());
+        List<LottoPrize> lottoPrizeList = lottoGame.getLottos().getCalculate(lottoWinning);
+        LottoPrizes lottoPrizes = LottoPrizes
+            .of(lottoPrizeList, lottoGame.getLottos().resultLottoGamePayOffRatio(lottoPrizeList));
+        LottoOutput.printWinningStatistics(lottoPrizes);
     }
 }

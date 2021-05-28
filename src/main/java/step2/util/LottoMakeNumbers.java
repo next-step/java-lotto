@@ -1,16 +1,15 @@
 package step2.util;
 
-import step2.exception.LottoNotNumberException;
-import step2.model.Lotto;
-import step2.model.LottoNumber;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
+import step2.exception.LottoNotNumberException;
+import step2.model.Lotto;
+import step2.model.LottoNumber;
 
 public class LottoMakeNumbers {
 

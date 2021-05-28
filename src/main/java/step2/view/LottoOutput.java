@@ -1,10 +1,13 @@
 package step2.view;
 
-import step2.model.*;
+import static java.util.stream.Collectors.joining;
 
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.joining;
+import step2.model.Lotto;
+import step2.model.LottoGame;
+import step2.model.LottoNumber;
+import step2.model.LottoPrizes;
+import step2.model.Lottos;
 
 public class LottoOutput {
 
@@ -22,7 +25,8 @@ public class LottoOutput {
 
         Lottos lottos = lottoGame.getLottos();
 
-        String lottoNumbers = lottos.stream()
+        String lottoNumbers = lottos.getLottos()
+            .stream()
             .map(LottoOutput::lottoToString)
             .map(i -> i.toString())
             .collect(Collectors.joining(NEW_LINE));
@@ -42,9 +46,10 @@ public class LottoOutput {
         System.out.printf("%d개를 구매했습니다.\n", lottoCount);
     }
 
-    public static void printWinningStatistics(LottoTotalCalculator lottoTotalCalculator) {
+    public static void printWinningStatistics(LottoPrizes lottoPrizes) {
         System.out.printf(HEAD_FORMAT,
-            lottoTotalCalculator.stream()
+            lottoPrizes.getLottoPrizes()
+                .stream()
                 .map(prize -> String.format(BODY_FORMAT,
                     prize.getRank().getMatchCnt(),
                     prize.getRank().getPrice(),
@@ -54,7 +59,7 @@ public class LottoOutput {
 
         System.out.printf(
             PAY_OFF_FORMAT,
-            lottoTotalCalculator.resultLottoGamePayOffRatio()
+            lottoPrizes.getPayOffRatio()
         );
     }
 }
