@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -19,7 +20,7 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public List<LottoPrize> comparePrize(Lotto winningLotto) {
-		return lottos.stream().map(lotto -> lotto.compare(winningLotto)).collect(Collectors.toList());
+	public List<LottoPrize> comparePrize(WinningLotto winningLotto) {
+		return lottos.stream().map(lotto -> lotto.compare(winningLotto)).filter(Objects::nonNull).collect(Collectors.toList());
 	}
 }
