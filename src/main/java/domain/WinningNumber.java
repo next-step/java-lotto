@@ -7,7 +7,6 @@ import java.util.List;
 public class WinningNumber {
 
     private final List<LottoNumber> winningNumber;
-    private LottoNumber bonusNumber;
 
     public WinningNumber(List<LottoNumber> winningNumber) {
         this.winningNumber = winningNumber;
@@ -25,5 +24,4 @@ public class WinningNumber {
     public static WinningNumber generateWinningNumber(String inputNumber) {
         return InputView.winningNumber(inputNumber);
     }
-
 }
