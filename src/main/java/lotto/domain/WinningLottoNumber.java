@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.AlreadyAppliedBonusNumberException;
+import lotto.exception.DuplicatedBonusNumberException;
 import lotto.exception.WinningLottoNonPositiveNumberException;
 import lotto.exception.WinningLottoNumberCountException;
 
@@ -17,13 +19,16 @@ import static lotto.domain.LottoNumber.valueOf;
 
 public class WinningLottoNumber {
     private static final String COMMA = ",";
+    private static final int MATCHING_BONUS_NUMBER  = 1;
+    private static final int MISMATCHING_BONUS_NUMBER  = 0;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+(,\\d+)*$");
 
-    private LottoGame value;
+    private LottoGame prizeLottoNumber;
+    private LottoNumber bonusLottoNumber;
 
-    public WinningLottoNumber(String playerInput) {
-        validatePlayerInput(playerInput);
-        parseValues(playerInput);
+    public WinningLottoNumber(String prizeLottoNumberInput) {
+        validateConstructor(prizeLottoNumberInput);
+        parseValues(prizeLottoNumberInput);
     }
 
     public LottoResult decidePrize(LottoGames lottoGames) {
@@ -38,25 +43,46 @@ public class WinningLottoNumber {
         return lottoResult;
     }
 
-    private void validatePlayerInput(String playerInput) {
-        validatePositiveNumber(playerInput);
-        validateInputSize(playerInput);
+    public void applyBonusNumber(String bonusNumberInput) {
+        validateAlreadySet();
+        validateBonusNumber(bonusNumberInput);
+
+        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(bonusNumberInput));
     }
 
-    private void validatePositiveNumber(String playerInput) {
-        Matcher numberArrayCheckResult = NUMBER_PATTERN.matcher(playerInput);
+    private void validateConstructor(String prizeLottoNumberInput) {
+        validatePositiveNumber(prizeLottoNumberInput);
+        validateInputSize(prizeLottoNumberInput);
+    }
+
+    private void validatePositiveNumber(String prizeLottoNumberInput) {
+        Matcher numberArrayCheckResult = NUMBER_PATTERN.matcher(prizeLottoNumberInput);
         if (!numberArrayCheckResult.find()) {
             throw new WinningLottoNonPositiveNumberException();
         }
     }
 
-    private void validateInputSize(String playerInput) {
-        String[] tempPlayerInputArray = playerInput.split(",");
-        List<String> tempPlayerInputList = Arrays.asList(tempPlayerInputArray);
-        Set<String> playerInputSetForSizeCheck = new HashSet<>(tempPlayerInputList);
+    private void validateInputSize(String prizeLottoNumberInput) {
+        String[] tempPrizeLottoNumberArray = prizeLottoNumberInput.split(",");
+        List<String> tempPrizeLottoNumberList = Arrays.asList(tempPrizeLottoNumberArray);
+        Set<String> tempPrizeLottoNumberSetForSizeCheck = new HashSet<>(tempPrizeLottoNumberList);
 
-        if (playerInputSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
+        if (tempPrizeLottoNumberSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
             throw new WinningLottoNumberCountException();
+        }
+    }
+
+    private void validateAlreadySet() {
+        if (bonusLottoNumber != null) {
+            throw new AlreadyAppliedBonusNumberException();
+        }
+    }
+
+    private void validateBonusNumber(String bonusNumberInput) {
+        LottoNumber tempBonusNumber = valueOf(Integer.parseInt(bonusNumberInput));
+
+        if (prizeLottoNumber.find(tempBonusNumber)) {
+            throw new DuplicatedBonusNumberException();
         }
     }
 
@@ -65,12 +91,12 @@ public class WinningLottoNumber {
                 .map(each -> valueOf(parseInt(each)))
                 .collect(Collectors.toSet());
 
-        value = LottoGame.createManual(lottoNumbers);
+        prizeLottoNumber = LottoGame.createManual(lottoNumbers);
     }
 
     private Rank decidePrizeEachGame(LottoGame lottoGame) {
-        int result = value.compare(lottoGame);
-
-        return Rank.valueOf(result);
+        int prizeResult = prizeLottoNumber.compare(lottoGame);
+        int bonusNumberResult = (lottoGame.find(bonusLottoNumber) ? MATCHING_BONUS_NUMBER : MISMATCHING_BONUS_NUMBER);
+        return Rank.valueOf(prizeResult, bonusNumberResult);
     }
 }

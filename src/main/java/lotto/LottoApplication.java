@@ -29,6 +29,8 @@ public class LottoApplication {
         printPurchaseResult(lottoGames);
 
         WinningLottoNumber winningLottoNumber = lottoInputView.questionLastPrizeNumber();
+        winningLottoNumber = lottoInputView.questionBonusNumber(winningLottoNumber);
+
         LottoResult lottoResult = winningLottoNumber.decidePrize(lottoGames);
 
         lottoOutputView.printPrizeStatistics(lottoResult, purchaseMoney);
