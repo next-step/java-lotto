@@ -78,7 +78,7 @@ public class InputText {
 		if (!(object instanceof InputText)) {
 			return false;
 		}
-		InputText inputText = (InputText)object;
+		InputText inputText = (InputText) object;
 		return Objects.equals(value, inputText.value);
 	}
 

@@ -37,7 +37,7 @@ public class ViewCodeTest {
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isBonusBall()).isEqualTo(false);
 		assertThat(ViewCode.BONUS_BALL.isBonusBall()).isEqualTo(true);
 		assertThat(ViewCode.WINNING_STATICS.isBonusBall()).isEqualTo(false);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isBonusBall()).isEqualTo(true);
+		assertThat(ViewCode.SHUTDOWN_APPLICATION.isBonusBall()).isEqualTo(false);
 		//isWinningStaticsView()
 		assertThat(ViewCode.TICKET_BOX.isWinningStaticsView()).isEqualTo(false);
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isWinningStaticsView()).isEqualTo(false);

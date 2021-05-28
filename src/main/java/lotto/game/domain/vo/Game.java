@@ -13,7 +13,7 @@ public class Game {
 
 	private final BallGroup ballGroup;
 
-	public Game(BallGroup ballGroup) {
+	private Game(BallGroup ballGroup) {
 		this.ballGroup = ballGroup;
 	}
 

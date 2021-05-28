@@ -17,6 +17,10 @@ public class WinningStaticsView extends View {
 	private static final int INITIALIZE_VALUE_ZERO = 0;
 	private static final int NUMBER_ONE = 1;
 
+	private WinningStaticsView() {
+
+	}
+
 	@Override
 	public ViewCode viewCode() {
 		return ViewCode.WINNING_STATICS;
@@ -77,7 +81,8 @@ public class WinningStaticsView extends View {
 			return "";
 		}
 		if (thisPrize.isSecondPlace()) {
-			return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", thisPrize.countOfMatch(), thisPrize.winningAmount(), numberOfPrize);
+			return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", thisPrize.countOfMatch(),
+				thisPrize.winningAmount(), numberOfPrize);
 		}
 		return String.format("%d개 일치 (%d원)- %d개\n", thisPrize.countOfMatch(), thisPrize.winningAmount(), numberOfPrize);
 	}

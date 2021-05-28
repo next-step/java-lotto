@@ -129,6 +129,78 @@ feat (feature)
 - 온라인 코드리뷰 요청 3단계 동영상<br>  [![온라인 코드리뷰 요청 3단계 동영상](https://img.youtube.com/vi/fzrT3eoecUw/0.jpg)](https://www.youtube.com/watch?v=fzrT3eoecUw)
   <br>
 
+#### 1.4.4. editorConfig setting
+```
+Execution failed for task ':editorconfigCheck'.
+> There are .editorconfig violations. You may want to run
+
+* Try:
+Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':editorconfigCheck'.
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:110)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.OutputDirectoryCreatingTaskExecuter.execute(OutputDirectoryCreatingTaskExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipUpToDateTaskExecuter.execute(SkipUpToDateTaskExecuter.java:59)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskOutputCachingStateExecuter.execute(ResolveTaskOutputCachingStateExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ValidatingTaskExecuter.execute(ValidatingTaskExecuter.java:59)
+	at org.gradle.api.internal.tasks.execution.SkipEmptySourceFilesTaskExecuter.execute(SkipEmptySourceFilesTaskExecuter.java:101)
+	at org.gradle.api.internal.tasks.execution.FinalizeInputFilePropertiesTaskExecuter.execute(FinalizeInputFilePropertiesTaskExecuter.java:44)
+	at org.gradle.api.internal.tasks.execution.CleanupStaleOutputsExecuter.execute(CleanupStaleOutputsExecuter.java:91)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskArtifactStateTaskExecuter.execute(ResolveTaskArtifactStateTaskExecuter.java:62)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:59)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ExecuteAtMostOnceTaskExecuter.execute(ExecuteAtMostOnceTaskExecuter.java:43)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:34)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.run(EventFiringTaskExecuter.java:51)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:301)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:293)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:175)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:91)
+	at org.gradle.internal.operations.DelegatingBuildOperationExecutor.run(DelegatingBuildOperationExecutor.java:31)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:46)
+	at org.gradle.execution.taskgraph.LocalTaskInfoExecutor.execute(LocalTaskInfoExecutor.java:42)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareWorkItemExecutor.execute(DefaultTaskExecutionGraph.java:277)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareWorkItemExecutor.execute(DefaultTaskExecutionGraph.java:262)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$ExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:135)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$ExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:130)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$ExecutorWorker.execute(DefaultTaskPlanExecutor.java:200)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$ExecutorWorker.executeWithWork(DefaultTaskPlanExecutor.java:191)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$ExecutorWorker.run(DefaultTaskPlanExecutor.java:130)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
+Caused by: org.gradle.api.GradleException: There are .editorconfig violations. You may want to run
+
+    ./gradlew editorconfigFormat
+
+to fix them automagically.
+	at org.ec4j.gradle.AbstractEditorconfigTask.perform(AbstractEditorconfigTask.java:159)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:73)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:46)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:39)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:26)
+	at org.gradle.api.internal.AbstractTask$TaskActionWrapper.execute(AbstractTask.java:801)
+	at org.gradle.api.internal.AbstractTask$TaskActionWrapper.execute(AbstractTask.java:768)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$1.run(ExecuteActionsTaskExecuter.java:131)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:301)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:293)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:175)
+	at org.gradle.internal.operations.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:91)
+	at org.gradle.internal.operations.DelegatingBuildOperationExecutor.run(DelegatingBuildOperationExecutor.java:31)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeAction(ExecuteActionsTaskExecuter.java:120)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:99)
+	... 31 more
+```
+
+- 위와 같은 에러가 뜨면 다음을 실행한다. `./gradlew editorconfigFormat`
+
+#### 1.4.5. Windows, Mac OS 간 checkStyle 적용 문제
+- CRLF(Windows), LF(Mac OS) 가 달라서 동일하게 맞춰줘야 한다.
+- 같은 소스를 다른 환경에서 다룬다면 **_반드시 "editorConfig", "checkStyle"을 확인_** 하자
+[해결방법](https://stackoverflow.com/questions/40470895/phpstorm-saving-with-linux-line-ending-on-windows)
+
 ## 2. 분석 및 설계
 
 ### 2.1. 이번 Step 핵심 목표
@@ -322,7 +394,7 @@ class Demeter {
 - [x] 3.분석 및 설계
     - [x] 3-1.Step04.md 작성
     - [x] 3-2.도메인 주도 설계 이미지 수정
-- [ ] 4.구현
+- [x] 4.구현
     - [x] 4-1.Game Context
         - [x] 4-1-1.`Value Object` & `Aggregate`
             - [x] 4-1-1-1.`Game(VO)`
@@ -350,27 +422,25 @@ class Demeter {
             - [x] 4-2-2-3.`WinningStaticsView` : 당첨결과 출력 내용 수정(2등 추가)
         - [x] 4-2-3.`Entity`
             - [x] 4-2-3-1.`ViewStatus` : `BonusBallView` 관련 분기처리 추가
-    - [ ] 4-3.Refactoring
-        - [ ] 4-3-1.
-        - [ ] 4-3-2.
-        - [ ] 4-3-3.
-- [ ] 5.테스트
-    - [ ] 5-1.Gradle build Success 확인
-        - [ ] 5-1-1.`Value Object` & `Aggregate`
-            - [ ] 5-1-1-1.`Ball(VO)`
-            - [ ] 5-1-1-2.`BallGroup(Aggregate)`
-            - [ ] 5-1-1-3.`Game(VO)`
-            - [ ] 5-1-1-4.`GameGroup(Aggregate)`
-            - [ ] 5-1-1-5.`GameWinningCondition(VO)`
-            - [ ] 5-1-1-6.`Money(VO)`
-            - [ ] 5-1-1-7.`InputText(VO)`
-            - [ ] 5-1-1-8.`InputTextGroup(Aggregate)`
-            - [ ] 5-1-1-9.`ViewCode(VO)`
-            - [ ] 5-1-1-10.`ProcessCode(VO)`
-            - [ ] 5-1-1-11.`PrizeCode(VO)`
-        - [ ] 5-1-2.`Entity`
-            - [ ] 5-1-2-1.`Round`
-    - [ ] 5-2.checkstyle 문제없는지 확인 (Java Convention)
+    - [x] 4-3.Refactoring
+        - [x] 4-3-1.생성자(Constructor) public -> private 전환 : generate()로 통제
+- [x] 5.테스트
+    - [x] 5-1.Gradle build Success 확인
+        - [x] 5-1-1.`Value Object` & `Aggregate`
+            - [x] 5-1-1-1.`Ball(VO)`
+            - [x] 5-1-1-2.`BallGroup(Aggregate)`
+            - [x] 5-1-1-3.`Game(VO)`
+            - [x] 5-1-1-4.`GameGroup(Aggregate)`
+            - [x] 5-1-1-5.`GameWinningCondition(VO)`
+            - [x] 5-1-1-6.`Money(VO)`
+            - [x] 5-1-1-7.`InputText(VO)`
+            - [x] 5-1-1-8.`InputTextGroup(Aggregate)`
+            - [x] 5-1-1-9.`ViewCode(VO)`
+            - [x] 5-1-1-10.`ProcessCode(VO)`
+            - [x] 5-1-1-11.`PrizeCode(VO)`
+        - [x] 5-1-2.`Entity`
+            - [x] 5-1-2-1.`Round`
+    - [x] 5-2.checkstyle 문제없는지 확인 (Java Convention)
     - [ ] 5-3.요구사항 조건들 충족했는지 확인
         - [ ] 5-3-1.< 2 Depth 규칙
         - [ ] 5-3-2.함수(또는 메서드) 15라인 이하

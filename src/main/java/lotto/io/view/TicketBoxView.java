@@ -13,6 +13,10 @@ import lotto.io.domain.vo.InputText;
 
 public class TicketBoxView extends View {
 
+	private TicketBoxView() {
+
+	}
+
 	@Override
 	public ViewCode viewCode() {
 		return ViewCode.TICKET_BOX;

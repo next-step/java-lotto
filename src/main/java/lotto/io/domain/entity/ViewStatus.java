@@ -4,14 +4,18 @@ import lotto.game.domain.entity.Round;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.vo.InputText;
-import lotto.io.view.*;
+import lotto.io.view.BonusBallView;
+import lotto.io.view.GameWinningConditionView;
+import lotto.io.view.TicketBoxView;
+import lotto.io.view.View;
+import lotto.io.view.WinningStaticsView;
 
 public class ViewStatus {
 	private View view;
 	private ViewCode currentViewCode;
 	private ProcessCode currentProcessCode;
 
-	public ViewStatus(ViewCode viewCode, ProcessCode processCode) {
+	private ViewStatus(ViewCode viewCode, ProcessCode processCode) {
 		this.currentViewCode = viewCode;
 		this.currentProcessCode = processCode;
 	}

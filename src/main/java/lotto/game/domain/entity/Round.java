@@ -15,6 +15,10 @@ public class Round {
 	private Money money;
 	private Ball bonusBall;
 
+	private Round() {
+
+	}
+
 	public static Round generate() {
 		return new Round();
 	}

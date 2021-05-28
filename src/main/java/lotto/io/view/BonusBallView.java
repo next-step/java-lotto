@@ -8,6 +8,10 @@ import lotto.io.domain.vo.InputText;
 
 public class BonusBallView extends View {
 
+	private BonusBallView() {
+
+	}
+
 	@Override
 	public ViewCode viewCode() {
 		return ViewCode.BONUS_BALL;

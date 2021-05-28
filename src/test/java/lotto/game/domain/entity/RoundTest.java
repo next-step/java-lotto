@@ -2,8 +2,6 @@ package lotto.game.domain.entity;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.game.domain.vo.Ball;
-import lotto.game.exception.IllegalBonusBallException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -15,6 +13,7 @@ import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Game;
 import lotto.game.domain.vo.Money;
+import lotto.game.exception.IllegalBonusBallException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
 
@@ -61,7 +60,7 @@ public class RoundTest {
 	}
 
 	@DisplayName("4-1-3-1-1.Field 생성 : `bonusBall : Ball`")
-	@ParameterizedTest(name = "{index} - winningConditionText:[{0}], bonusBallText:[{1}], expectedNotThrowException:{2}")
+	@ParameterizedTest(name = "{index} - winningConditionText:{0}, bonusBallText:{1}, expectedNotThrowException:{2}")
 	@CsvSource(value = {"1,2,3,4,5,6;1;false", "6,5,4,3,2,1;2;false", "1,2,3,3,4,5,6;7;true",
 		"1, 21, 31, 45, 41, 11;45;false"}, delimiter = ';')
 	void setupBonusBall(String winningConditionText, String bonusBallText, boolean expectedNotThrowException) {

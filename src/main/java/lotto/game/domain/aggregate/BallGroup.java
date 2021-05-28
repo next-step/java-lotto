@@ -15,7 +15,7 @@ public class BallGroup {
 
 	private final List<Ball> balls;
 
-	public BallGroup(List<Ball> unmodifiableList) {
+	private BallGroup(List<Ball> unmodifiableList) {
 		this.balls = unmodifiableList;
 	}
 
@@ -84,7 +84,7 @@ public class BallGroup {
 		validateGenerate(ballGroup.balls);
 	}
 
-    public boolean isContainBall(Ball ball) {
+	public boolean isContainBall(Ball ball) {
 		return balls.contains(ball);
-    }
+	}
 }

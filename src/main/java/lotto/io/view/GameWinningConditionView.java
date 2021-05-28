@@ -8,6 +8,10 @@ import lotto.io.domain.vo.InputText;
 
 public class GameWinningConditionView extends View {
 
+	private GameWinningConditionView() {
+
+	}
+
 	@Override
 	public ViewCode viewCode() {
 		return ViewCode.GAME_WINNING_CONDITION;

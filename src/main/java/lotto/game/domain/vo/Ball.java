@@ -49,7 +49,7 @@ public class Ball implements Comparable<Ball> {
 		if (!(object instanceof Ball)) {
 			return false;
 		}
-		Ball ball = (Ball)object;
+		Ball ball = (Ball) object;
 		return number == ball.number;
 	}
 

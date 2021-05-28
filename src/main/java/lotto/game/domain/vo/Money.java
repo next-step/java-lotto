@@ -74,7 +74,7 @@ public class Money {
 
 	public static String calculateEarningRate(Map<PrizeCode, Integer> winningStatistics, int gameCounts) {
 		BigDecimal numerator = calculateNumeratorOfEarningRate(winningStatistics);
-		BigDecimal denominator = BigDecimal.valueOf((long)gameCounts * Money.GAME_FEE);
+		BigDecimal denominator = BigDecimal.valueOf((long) gameCounts * Money.GAME_FEE);
 		double earningRate = numerator
 			.divide(denominator, TWO_OF_DECIMAL_PLACES, RoundingMode.FLOOR).doubleValue();
 		DecimalFormat decimalFormat = new DecimalFormat(PATTERN_TWO_OF_DECIMAL_PLACES);

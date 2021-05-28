@@ -10,7 +10,7 @@ import lotto.game.domain.vo.Money;
 public class GameGroup {
 	private final List<Game> games;
 
-	public GameGroup(List<Game> newGames) {
+	private GameGroup(List<Game> newGames) {
 		this.games = newGames;
 	}
 
