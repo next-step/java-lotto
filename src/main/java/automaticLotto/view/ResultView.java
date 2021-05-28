@@ -22,7 +22,7 @@ public class ResultView {
 			}
 
 			System.out.println(
-				ranking.getMatchedCount() + "개 일치 (" + ranking.getWinnerPrice() + "원)- "
+				Ranking.getExplanation(ranking) + " (" + ranking.getWinnerPrice() + "원)- "
 					+ winnerStatics.presentCount(ranking) + "개");
 		}
 	}

@@ -12,16 +12,17 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private List<Integer> lotto;
+	protected List<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
 		validateNumberListSize(new HashSet<>(numberList));
-		this.lotto = numberList;
+
+		this.numbers = numberList;
 		sortLottoNumber();
 	}
 
 	private void sortLottoNumber() {
-		lotto.sort(Comparator.comparingInt(x -> x));
+		numbers.sort(Comparator.comparingInt(x -> x));
 	}
 
 	private void validateNumberListSize(Set<Integer> lotto) {
@@ -30,22 +31,8 @@ public class Lotto {
 		}
 	}
 
-	public Ranking match(Lotto targetLotto) {
-		int matchedCount = 0;
-
-		for (Integer number : targetLotto.lotto) {
-			matchedCount = getMatchedCount(matchedCount, number);
-		}
-
-		return Ranking.getWinnerPrice(matchedCount);
-	}
-
-	private int getMatchedCount(int matchedSize, Integer number) {
-		if (lotto.contains(number)) {
-			matchedSize++;
-		}
-
-		return matchedSize;
+	public boolean hasNumber(int number) {
+		return numbers.contains(number);
 	}
 
 	@Override
@@ -55,16 +42,16 @@ public class Lotto {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Lotto lotto1 = (Lotto)o;
-		return Objects.equals(lotto, lotto1.lotto);
+		return Objects.equals(numbers, lotto1.numbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lotto);
+		return Objects.hash(numbers);
 	}
 
 	@Override
 	public String toString() {
-		return lotto + "";
+		return numbers + "";
 	}
 }

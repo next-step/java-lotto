@@ -23,11 +23,11 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public WinnerTable announce(Lotto winnerLotto) {
+	public WinnerTable announce(WinnerLotto winnerLotto) {
 		WinnerTable winnerTable = new WinnerTable();
 
 		for (Lotto lotto : lottos) {
-			winnerTable.count(lotto.match(winnerLotto));
+			winnerTable.count(winnerLotto.match(lotto));
 		}
 
 		return winnerTable;
