@@ -6,13 +6,15 @@ import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
 
+    private static final Pattern pattern = Pattern.compile("\\d+");
+
     public String input() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
     public int one(String text) {
-        if (text.matches("\\d+")) {
+        if (pattern.matcher(text).matches()) {
             int number = Integer.parseInt(text);
             return number;
         }
@@ -39,7 +41,7 @@ public class StringAdditionCalculator {
     }
 
     public int custom(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile("^//(.)\n(.*)").matcher(text);
         int sum = 0;
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -64,6 +66,7 @@ public class StringAdditionCalculator {
             return colon(text);
         }
         if (text.contains("//") && text.contains(("\n"))) {
+            System.out.println("test");
             return custom(text);
         }
         throw new RuntimeException();
