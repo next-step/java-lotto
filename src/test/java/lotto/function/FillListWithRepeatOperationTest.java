@@ -1,4 +1,4 @@
-package lotto;
+package lotto.function;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,14 +7,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import lotto.function.FillList;
-
-class FillListTest {
+class FillListWithRepeatOperationTest {
 
 	@Test
 	void apply() {
 		// given
-		FillList<Integer> fillResultList = new FillList<>();
+		FillListWithRepeatOperation<Integer> fillResultList = new FillListWithRepeatOperation<>();
 
 		// when
 		List<Integer> integers = fillResultList.apply(5, this::generateOne);

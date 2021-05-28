@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.function.FillList;
+import lotto.function.FillListWithRepeatOperation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +26,7 @@ class LottoMachine {
 	}
 
 	List<LottoTicket> generate(int count) {
-		return Collections.unmodifiableList(new FillList<LottoTicket>()
+		return Collections.unmodifiableList(new FillListWithRepeatOperation<LottoTicket>()
 				.apply(count, this::generate));
 	}
 

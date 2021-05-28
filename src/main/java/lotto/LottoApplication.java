@@ -12,7 +12,7 @@ import lotto.domain.ManualLottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.UserLotto;
 import lotto.domain.WinningLotto;
-import lotto.function.FillList;
+import lotto.function.FillListWithRepeatOperation;
 
 public class LottoApplication {
 
@@ -78,7 +78,7 @@ public class LottoApplication {
 	private ManualLottoNumbers receiveManualLottoNumbers(ManualLottoCount manualLottoCount) {
 		sendMessage(lottoView.inputManualLottoNumberView());
 
-		return new ManualLottoNumbers(new FillList<LottoNumberText>()
+		return new ManualLottoNumbers(new FillListWithRepeatOperation<LottoNumberText>()
 			.apply(manualLottoCount.count(),
 				() -> new LottoNumberText(userInterface.receive())));
 	}
