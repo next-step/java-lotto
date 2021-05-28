@@ -29,7 +29,7 @@ public class Wallet {
 		List<Lotto> values = new ArrayList<>();
 
 		for (int i = 0; i < money / LOTTO_PRICE; i++) {
-			values.add(LottoGenerator.randomNumbers());
+			values.add(LottoGenerator.generate());
 		}
 
 		return new Lottos(values);

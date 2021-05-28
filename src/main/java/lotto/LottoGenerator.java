@@ -22,14 +22,14 @@ public class LottoGenerator {
 			.collect(toList());
 	}
 
-	public static synchronized Lotto randomNumbers() {
+	public static synchronized Lotto generate() {
 		Collections.shuffle(LOTTO_NUMBER_POOL);
 		return new Lotto(LOTTO_NUMBER_POOL.stream()
 			.limit(REQUIRED_COUNT)
 			.collect(toSet()));
 	}
 
-	public static Lotto customNumbers(String text) {
+	public static Lotto generate(String text) {
 		String[] split = text.split(DELIMITER);
 		return new Lotto(Stream.of(split)
 			.map(LottoNumber::valueOf)

@@ -29,7 +29,7 @@ public class LottosTest {
 	@DisplayName("로또스의 밸류값이 불변인지 확인")
 	void lottos_밸류값_불변_테스트() {
 		Lottos lottos = new Wallet(5000).buyAll();
-		assertThatThrownBy(() -> lottos.values().add(LottoGenerator.randomNumbers()))
+		assertThatThrownBy(() -> lottos.values().add(LottoGenerator.generate()))
 			.isInstanceOf(UnsupportedOperationException.class);
 		assertThatThrownBy(() -> lottos.values().remove(0))
 			.isInstanceOf(UnsupportedOperationException.class);

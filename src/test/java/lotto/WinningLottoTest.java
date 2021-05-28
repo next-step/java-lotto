@@ -10,7 +10,7 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("보너스볼이 중복될 경우 예외 발생")
 	void bonusBallDuplicateCheck() {
-		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
+		Lotto winLotto = LottoGenerator.generate("1,2,3,4,5,6");
 		LottoNumber bonusNumber = LottoNumber.valueOf("1");
 		assertThatThrownBy(() -> new WinningLotto(winLotto, bonusNumber))
 			.isInstanceOf(RuntimeException.class);
@@ -19,13 +19,13 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("당첨번호로부터 등수 확인")
 	void matchWinningNumber() {
-		Lotto lotto1st = LottoGenerator.customNumbers("1,2,3,4,5,6");
-		Lotto lotto2nd = LottoGenerator.customNumbers("2,3,4,5,6,7");
-		Lotto lotto3rd = LottoGenerator.customNumbers("2,3,4,5,6,8");
-		Lotto lotto4th = LottoGenerator.customNumbers("3,4,5,6,7,8");
-		Lotto lotto5th = LottoGenerator.customNumbers("4,5,6,7,8,9");
+		Lotto lotto1st = LottoGenerator.generate("1,2,3,4,5,6");
+		Lotto lotto2nd = LottoGenerator.generate("2,3,4,5,6,7");
+		Lotto lotto3rd = LottoGenerator.generate("2,3,4,5,6,8");
+		Lotto lotto4th = LottoGenerator.generate("3,4,5,6,7,8");
+		Lotto lotto5th = LottoGenerator.generate("4,5,6,7,8,9");
 
-		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
+		Lotto winLotto = LottoGenerator.generate("1,2,3,4,5,6");
 		LottoNumber bonusNumber = LottoNumber.valueOf("7");
 		WinningLotto winningLotto = new WinningLotto(winLotto, bonusNumber);
 
