@@ -16,13 +16,10 @@ public class LottoNumber {
 	}
 
 	public LottoNumber(String number) {
-		validationNumber(number);
 		validationRange(number);
-		this.number = Integer.parseInt(number);
-	}
-
-	private void validationNumber(String number) {
-		if (!isNumeric(number)) {
+		try {
+			this.number = Integer.parseInt(number);
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_INVALID_NUMBER);
 		}
 	}
@@ -35,14 +32,6 @@ public class LottoNumber {
 		if (number < MIN || number > MAX) {
 			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_RANGE, MIN, MAX));
 		}
-	}
-
-	protected static boolean isNumeric(String str) {
-		if (str == null || str.trim().length() == 0) {
-			return false;
-		}
-		String regex = "[0-9]+";
-		return str.matches(regex);
 	}
 
 	@Override
