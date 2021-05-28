@@ -19,10 +19,12 @@ public class Lottos {
         }
     }
 
-    public Lottos(int autoAttempt, List<Lotto> manualLottoNumbers) {
+    public Lottos(int autoAttempt, List<String> manualStringLottoNumbers) {
         this(autoAttempt);
 
-        lottos.addAll(manualLottoNumbers);
+        for (String stringNumber : manualStringLottoNumbers) {
+            lottos.add(new Lotto(new LottoManualGenerator(stringNumber)));
+        }
     }
 
     public int size() {

@@ -29,17 +29,16 @@ public class LottoView {
         return Integer.valueOf(strManualCount);
     }
 
-    public static List<Lotto> getManualLotto(int manualCount) {
+    public static List<String> getManualLotto(int manualCount) {
 
         System.out.println("수동으로 구매할 번호를 입력해주세요");
 
-        List<Lotto> manualLotto = new ArrayList<>();
+        List<String> manualLotto = new ArrayList<>();
 
         for (int i = 0; i < manualCount; i++) {
             System.out.println((i + 1) + "번째 번호 : ");
             String strManualLotto = scanner.nextLine();
-            List<Integer> lottoNumber = LottoNumberParser.parseLottoNumberToList(strManualLotto);
-            manualLotto.add(new Lotto(lottoNumber));
+            manualLotto.add(strManualLotto);
         }
 
         return manualLotto;

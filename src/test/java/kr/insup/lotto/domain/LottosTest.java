@@ -24,10 +24,10 @@ public class LottosTest {
     @Test
     void 수동_자동으로_구입하여_로또_게임_생성() {
         //given
-        List<Lotto> lottoList = Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9))
+        List<String> lottoList = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "2, 3, 4, 5, 6, 7",
+                "4, 6, 7, 8, 10, 11"
         );
 
         Lottos lottos = new Lottos(4, lottoList);

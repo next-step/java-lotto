@@ -72,8 +72,8 @@ public class LottoController {
         return manualCount;
     }
 
-    private static List<Lotto> manualLotto(int manualCount) {
-        List<Lotto> manualLottos = null;
+    private static List<String> manualLotto(int manualCount) {
+        List<String> manualLottos = null;
 
         try {
             manualLottos = LottoView.getManualLotto(manualCount);
