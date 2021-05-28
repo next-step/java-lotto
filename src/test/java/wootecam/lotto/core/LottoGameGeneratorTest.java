@@ -15,7 +15,6 @@ import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoCount;
 import wootecam.lotto.model.LottoNumber;
 import wootecam.lotto.model.WinningLotto;
-import wootecam.lotto.ui.InputView;
 
 public class LottoGameGeneratorTest {
 
@@ -23,8 +22,7 @@ public class LottoGameGeneratorTest {
 
 	@BeforeEach
 	void setup() {
-		lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator(),
-			new ManualLottoGenerator(new InputView()));
+		lottoGameGenerator = new LottoGameGenerator();
 	}
 
 	@ParameterizedTest
@@ -32,7 +30,8 @@ public class LottoGameGeneratorTest {
 	@DisplayName("입력된 금액에 맞는 로또 수를 생성하는지 테스트")
 	void test_로또구매수만큼_로또생성확인(String input) {
 		LottoCount lottoCount = new LottoCount(input, "0");
-		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
+		List<Lotto> lottos = lottoGameGenerator.getLottos(new AutomaticLottoGenerator(),
+			lottoCount.getAutomaticCount());
 		assertThat(lottos.size()).isEqualTo(lottoCount.getTotalCount());
 	}
 
