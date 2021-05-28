@@ -2,9 +2,11 @@ package step3.domain;
 
 import step3.exception.DuplicatedNumberException;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
+import static java.util.stream.Collectors.toCollection;
 
 public class Lotto {
 
@@ -12,10 +14,9 @@ public class Lotto {
 
     public Lotto(TreeSet<Integer> numbers) {
         checkDuplicate(numbers);
-
-        lottoNumbers = new TreeSet<>(Comparator.comparing(LottoNumber::valueOf));
-        lottoNumbers.addAll(numbers.stream().map(LottoNumber::new)
-                .collect(Collectors.toCollection(() -> new TreeSet<LottoNumber>(Comparator.comparing(LottoNumber::valueOf)))));
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(toCollection(TreeSet::new));
     }
 
     private void checkDuplicate(TreeSet<Integer> numbers) {
@@ -32,26 +33,6 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    @Override
-    public String toString() {
-        List<LottoNumber> copy = shuffledLottoList();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LottoNumber lottoNumber : copy) {
-            sb.append(lottoNumber);
-            sb.append(", ");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        sb.append("]");
-        return sb.toString();
-    }
-
-    private List<LottoNumber> shuffledLottoList() {
-        List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
-        Collections.shuffle(copy);
-        return copy;
-    }
 
     @Override
     public boolean equals(Object o) {

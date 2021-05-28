@@ -12,10 +12,17 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static String WinningNumbers() {
+    public static String getWinningNumbers() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return sc.nextLine();
+    }
+
+    public static int getBonusNumber() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return sc.nextInt();
     }
 }

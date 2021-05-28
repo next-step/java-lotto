@@ -9,18 +9,18 @@ class LottoNumberTest {
 
     @Test
     void sameLottoNumber() {
-        LottoNumber lottoNumber1 = new LottoNumber(43);
-        LottoNumber lottoNumber2 = new LottoNumber(43);
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(43);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(43);
 
-        assertThat(lottoNumber1.valueOf()).isEqualTo(lottoNumber2.valueOf());
+        assertThat(lottoNumber1).isSameAs(lottoNumber2);
     }
 
 
     @Test
     void notSameLottoNumber() {
-        LottoNumber lottoNumber1 = new LottoNumber(43);
-        LottoNumber lottoNumber2 = new LottoNumber(45);
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(43);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(45);
 
-        assertThat(lottoNumber1).isNotEqualTo(lottoNumber2);
+        assertThat(lottoNumber1).isNotSameAs(lottoNumber2);
     }
 }
