@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.*;
 public class MoneyTest {
 
     @ParameterizedTest
-    @DisplayName("로또 티켓 구매 개수 테스트")
-    @CsvSource(value = {"1000:1","1500:1", "10001: 10"}, delimiter = ':')
-    void countLottoTicket_shouldBeDividedByLottoPrice(long inputMoney, int lottoTicketCount) {
-        //로또 티켓 개수 = 지불 금액/로또 가격
+    @DisplayName("자동 로또 티켓 구매 개수 테스트")
+    @CsvSource(value = {"10000:1:9","1500:1:0", "10001:8:2"}, delimiter = ':')
+    void countAutoLottoTicket(long inputMoney, int manualTicketCount, int autoTicketcount) {
+        //자동 로또 티켓 개수 = (지불 금액/로또 가격) - 수동 로또 개수
         Money money = new Money(inputMoney);
-        assertThat(money.countLottoTicket()).isEqualTo(lottoTicketCount);
+        assertThat(money.countAutoLottoTicket(manualTicketCount)).isEqualTo(autoTicketcount);
     }
 
     @ParameterizedTest

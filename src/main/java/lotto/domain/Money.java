@@ -13,8 +13,8 @@ public class Money {
         this.money = money;
     }
 
-    public int countLottoTicket() {
-        return (int)(this.money/LOTTO_TICKET_PRICE);
+    public int countAutoLottoTicket(int manualTicketCount) {
+        return (int)(this.money/LOTTO_TICKET_PRICE)-manualTicketCount;
     }
 
     public double calculateProfit(long prizeSum) {
