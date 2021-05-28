@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,33 @@ class LottoBuyingRequestTest {
 				new LottoNumberText("1,2,3,4,5,6"));
 			new LottoBuyingRequest(new Money(moneyStr), new ManualLottoNumbers(lottoNumberTextList));
 		});
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void given_NullMoney_then_ExceptionThrown() {
+		// given
+		Money money = null;
+		ManualLottoNumbers manualLottoNumber = new ManualLottoNumbers(
+			Collections.singletonList(new LottoNumberText("1,2,3,4,5,6")));
+
+		// when
+		Throwable throwable = catchThrowable(() -> new LottoBuyingRequest(money, manualLottoNumber));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void given_NullManualLottoNumber_then_ExceptionThrown() {
+		// given
+		Money money = new Money("1000");
+		ManualLottoNumbers manualLottoNumber = null;
+
+		// when
+		Throwable throwable = catchThrowable(() -> new LottoBuyingRequest(money, manualLottoNumber));
 
 		// then
 		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
@@ -71,18 +99,4 @@ class LottoBuyingRequestTest {
 		assertThat(lottoBuyingRequest.manualLottoNumberStrings()).containsExactly(numberArray);
 	}
 
-	@Test
-	void hasAutoLottoRequest() {
-		// given
-		String moneyStr = "10000";
-		List<LottoNumberText> lottoNumberTextList = Arrays.asList(new LottoNumberText("1,2,3,4,5,6"),
-			new LottoNumberText("1,2,3,4,5,6"));
-
-		// when
-		LottoBuyingRequest lottoBuyingRequest = new LottoBuyingRequest(new Money(moneyStr),
-			new ManualLottoNumbers(lottoNumberTextList));
-
-		// then
-		assertThat(lottoBuyingRequest.hasAutoLottoRequest()).isTrue();
-	}
 }
