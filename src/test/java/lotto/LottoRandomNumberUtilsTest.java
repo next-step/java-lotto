@@ -24,7 +24,7 @@ public class LottoRandomNumberUtilsTest {
     @DisplayName("로또 랜덤 번호 테스트 코드 위해 함수형 인터페이스 생성")
     @ParameterizedTest
     @MethodSource("createRandomLottoNumberTest")
-    void createRandomLottoNumberTest_로또_넘버_테스트_넘기기_테스트(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectRank, int bonusNumber) {
+    void createRandomLottoNumberTest_로또_넘버_테스트_넘기기_테스트(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectRank, LottoBonusNumber bonusNumber) {
         Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
         LottoRank lottoRank = lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectRank);
@@ -32,9 +32,9 @@ public class LottoRandomNumberUtilsTest {
 
     static Stream<Arguments> createRandomLottoNumberTest() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 8), FIRST, 10),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 9), SECOND, 8),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 9), THIRD, 10)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 8), FIRST, new LottoBonusNumber(55)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 9), SECOND, new LottoBonusNumber(8)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), Arrays.asList(1, 2, 3, 4, 7, 9), THIRD, new LottoBonusNumber(10))
         );
     }
 }

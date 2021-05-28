@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
+import lotto.LottoBonusNumber;
 import lotto.LottoValidationUtils;
 import lotto.Pay;
 
@@ -33,14 +34,15 @@ public class InputView {
         return new Lotto(LottoValidationUtils.lottoNumberToList(winNumber));
     }
 
-    public int inputBonusNumber() {
-        int bonusNumber;
+    public LottoBonusNumber inputBonusNumber(Lotto winLotto) {
+        LottoBonusNumber lottoBonusNumber;
         try {
             System.out.println(BONUS_LOTTO_NUMBER_INPUT);
-            bonusNumber = scanner.nextInt();
+            int bonusNumber = scanner.nextInt();
+            lottoBonusNumber = new LottoBonusNumber(winLotto, bonusNumber);
         } finally {
             if (scanner != null) scanner.close();
         }
-        return bonusNumber;
+        return lottoBonusNumber;
     }
 }

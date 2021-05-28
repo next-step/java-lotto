@@ -15,6 +15,10 @@ public class LottoNumber {
         return lottoNumber.contains(winNumber);
     }
 
+    public boolean isContainsBonusNumber(LottoBonusNumber bonusNumber) {
+        return bonusNumber.isContainsBonusNumber(lottoNumber);
+    }
+
     public boolean lottoSize(int expectedSize) {
         return lottoNumber.size() == expectedSize;
     }

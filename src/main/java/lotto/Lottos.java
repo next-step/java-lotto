@@ -27,7 +27,7 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
-    public LottoRecord compareWinNumber(Lotto winNumber, int bonusNumber) {
+    public LottoRecord compareWinNumber(Lotto winNumber, LottoBonusNumber bonusNumber) {
         LottoRecord lottoRecord = new LottoRecord();
         for (Lotto lotto : lottos) {
             lottoRecord.recordRank(lotto.compareWinLottoNumber(winNumber, bonusNumber));

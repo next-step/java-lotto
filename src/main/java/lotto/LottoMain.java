@@ -9,8 +9,9 @@ public class LottoMain {
         LottoBuy lottoBuy = new LottoBuy();
         Lottos lottos = lottoBuy.buyLotto(inputView.payForLotto());
         ResultView.buyLottoInfo(lottos);
+        Lotto winLotto =  inputView.inputWinLottoNumber();
 
-        LottoRecord lottoRecord = lottos.compareWinNumber(inputView.inputWinLottoNumber(), inputView.inputBonusNumber());
+        LottoRecord lottoRecord = lottos.compareWinNumber(winLotto, inputView.inputBonusNumber(winLotto));
         ResultView.printResult(lottoRecord);
     }
 }

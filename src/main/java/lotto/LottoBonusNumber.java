@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.exception.BonusNumberException;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoBonusNumber {
@@ -17,6 +18,10 @@ public class LottoBonusNumber {
         }
         LottoValidationUtils.checkNumberAndRange(String.valueOf(bonusNumber));
         this.bonusNumber = bonusNumber;
+    }
+
+    public boolean isContainsBonusNumber(List<Integer> lottoNumber) {
+        return lottoNumber.contains(bonusNumber);
     }
 
     @Override
