@@ -17,10 +17,10 @@ public class BonusLottoGameManager extends LottoGameManager {
 
     @Override
     public void start() {
-        Ticket lottPurchaseTicket = purchaseLotto();
-        OutputView.sendMessage(lottPurchaseTicket.toString());
+        Ticket lottoPurchaseTicket = purchaseLotto();
+        OutputView.sendMessage(lottoPurchaseTicket.toString());
         LottoNumbers winningLotto = winningLotto();
-        calculate(lottPurchaseTicket, winningLotto);
+        calculate(lottoPurchaseTicket, winningLotto);
     }
 
     @Override
