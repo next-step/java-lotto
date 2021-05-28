@@ -34,7 +34,7 @@ class LottoTicketTest {
     void isContainNumber(String inputLottoNumbers, int number, int expected) {
         Set<Integer> lottoTicketSet = StringUtils.processStringNumbers(inputLottoNumbers);
         LottoTicket lottoTicket = new LottoTicket(lottoTicketSet);
-        int result = lottoTicket.isContainNumber(new LottoNumber(number));
+        int result = lottoTicket.containNumber(new LottoNumber(number));
         assertThat(result).isEqualTo(expected);
     }
 }
