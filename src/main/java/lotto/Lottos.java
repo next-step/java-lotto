@@ -1,8 +1,12 @@
 package lotto;
 
 import static java.util.Collections.*;
+import static java.util.stream.Collectors.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -26,5 +30,26 @@ public class Lottos {
 
 	public int count() {
 		return values.size();
+	}
+
+	public Lottos mergeWith(Lottos lottos) {
+		return new Lottos(Stream.of(values, lottos.values)
+			.flatMap(Collection::stream)
+			.collect(toList()));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lottos lottos = (Lottos)o;
+		return Objects.equals(values, lottos.values);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(values);
 	}
 }
