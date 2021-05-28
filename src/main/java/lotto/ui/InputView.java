@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    //    private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^-?[0-9]+$");
     private final Pattern VALID_NUMBER_PATTERN = Pattern.compile("^[0-9]+$");
 
     private Scanner scanner;

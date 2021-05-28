@@ -15,7 +15,7 @@ public class Application {
 
         //2. 수동 + 자동 로또 생성
         LottoTickets lottoTickets = controller.getManualTickets(purchaseAmount);
-        lottoTickets.combineWith(controller.getAutoTickets(purchaseAmount, lottoTickets.count()));
+        lottoTickets = controller.getAutoTickets(purchaseAmount, lottoTickets);
 
         //2. 당첨번호 입력 +  보너스 번호 입력
         WinningNumbers winningNumbers = controller.getWinningNumbers();

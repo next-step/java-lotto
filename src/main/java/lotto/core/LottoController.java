@@ -19,17 +19,20 @@ public class LottoController {
         this.outputView = new OutputView();
     }
 
-    public LottoTickets getAutoTickets(PurchaseAmount amount, int createdCount) {
+    public LottoTickets getAutoTickets(PurchaseAmount amount, LottoTickets tickets) {
+        int createdCount = tickets.count();
         int creatingCount = amount.countOfTickets() - createdCount;
 
-        LottoTickets lottoTickets = null;
-        while (lottoTickets == null) {
-            lottoTickets = requestAutoTicketsInput(creatingCount);
+        LottoTickets autoTickets = null;
+        while (autoTickets == null) {
+            autoTickets = requestAutoTicketsInput(creatingCount);
         }
-        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, createdCount, creatingCount);
-        outputView.printInfo(lottoTickets.toString());
+        tickets.combineWith(autoTickets);
 
-        return lottoTickets;
+        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, createdCount, creatingCount);
+        outputView.printInfo(tickets.toString());
+
+        return tickets;
     }
 
     private LottoTickets requestAutoTicketsInput(int count) {
@@ -68,8 +71,10 @@ public class LottoController {
 
     private List<LottoTicket> createTickets(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+
+        while (tickets.contains(null) || tickets.size() < count) {
             tickets.add(checkTicketInput());
+            tickets.remove(null);
         }
         return tickets;
     }
