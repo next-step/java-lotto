@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import lotto.game.exception.IllegalBallNumberException;
 import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.exception.IllegalInputTextException;
 

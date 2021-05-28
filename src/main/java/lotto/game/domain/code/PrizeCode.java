@@ -10,11 +10,11 @@ public enum PrizeCode {
 	SECOND_PLACE(5, true, 30_000_000),
 	WINNER(6, false, 2_000_000_000);
 
-	private int COUNT_OF_MATCH_THAT_NEEDS_TO_CHECK_IS_MATCH_BONUS_BALL = 5;
+	private static final int COUNT_OF_MATCH_THAT_NEEDS_TO_CHECK_IS_MATCH_BONUS_BALL = 5;
 
-	private int countOfMatch;
-	private boolean isMatchBonusBall;
-	private int winningAmount;
+	private final int countOfMatch;
+	private final boolean isMatchBonusBall;
+	private final int winningAmount;
 
 	PrizeCode(int countOfMatch, boolean isMatchBonusBall, int winningAmount) {
 		this.countOfMatch = countOfMatch;
