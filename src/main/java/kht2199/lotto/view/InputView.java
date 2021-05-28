@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import kht2199.lotto.data.Lotto;
+import kht2199.lotto.LottoWinningResult;
+import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoWinningNumberNotInitiatedException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
+import kht2199.lotto.exception.lotto.LottoNumberException;
 
 /**
  *
@@ -27,23 +30,34 @@ public class InputView {
 		return Integer.parseInt(assetsString);
 	}
 
-	public Lotto acceptWinningNumbers() {
-		Lotto winningNumbers;
+	public void acceptWinningNumbers(LottoWinningResult winningNumbers) {
 		try {
 			String winningNumbersString = in.nextLine();
 			validationLottoResultString(winningNumbersString);
 			String[] splitNumbers = winningNumbersString.split(",");
 			List<Integer> numbers = intToString(splitNumbers);
-			winningNumbers = new Lotto(numbers);
-		} catch (InvalidInputException e) {
+			winningNumbers.setWinningNumbers(numbers);
+		} catch (InvalidInputException | LottoNumberException e) {
 			output.printException(e);
-			return acceptWinningNumbers();
+			acceptWinningNumbers(winningNumbers);
 		} catch (NumberFormatException e) {
 			output.printException(e);
-			return acceptWinningNumbers();
+			acceptWinningNumbers(winningNumbers);
 		}
+	}
 
-		return winningNumbers;
+	public void acceptBonusNumber(LottoWinningResult winningNumbers) {
+		try {
+			String bonusNumberString = in.nextLine();
+			validateLottoNumber(bonusNumberString);
+			winningNumbers.setBonusNumber(Integer.parseInt(bonusNumberString));
+		} catch (InvalidInputException | LottoBonusNumberDuplicatedException | LottoWinningNumberNotInitiatedException e) {
+			output.printException(e);
+			acceptBonusNumber(winningNumbers);
+		} catch (NumberFormatException e) {
+			output.printException(e);
+			acceptBonusNumber(winningNumbers);
+		}
 	}
 
 	private List<Integer> intToString(String[] splitNumbers) throws NumberFormatException {
@@ -66,7 +80,7 @@ public class InputView {
 			throw new InvalidInputException(InvalidInputError.LENGTH);
 		}
 		try {
-			validateLottoNumber(split);
+			validateLottoNumbers(split);
 		} catch (NumberFormatException e) {
 			throw new InvalidInputException(InvalidInputError.PARSING);
 		}
@@ -75,11 +89,16 @@ public class InputView {
 	/**
 	 * 번호 유효성 체크
 	 */
-	protected void validateLottoNumber(String[] split)
+	protected void validateLottoNumbers(String[] split)
 			throws NumberFormatException, InvalidInputException {
 		for (String s : split) {
-			validateRange(Integer.parseInt(s));
+			validateLottoNumber(s);
 		}
+	}
+
+	protected void validateLottoNumber(String number)
+			throws NumberFormatException, InvalidInputException {
+		validateRange(Integer.parseInt(number));
 	}
 
 	private void validateRange(int parseInt) throws InvalidInputException {

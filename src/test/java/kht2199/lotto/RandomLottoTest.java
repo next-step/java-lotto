@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import kht2199.lotto.exception.LottoListNotEmptyException;
+import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.view.InputView;
 import kht2199.lotto.view.ResultView;
@@ -51,7 +51,7 @@ class RandomLottoTest {
 	@DisplayName("로또 구매 후 정산")
 	@MethodSource("purchaseSource")
 	void purchase(int assets, int countsOfLotto, Integer remains, boolean exception)
-			throws LottoListNotEmptyException, AssetsNotEnoughException {
+			throws LottoListEmptyException, AssetsNotEnoughException {
 		randomLotto.setAssets(assets);
 		if (exception) {
 			assertThatThrownBy(() -> randomLotto.purchase(countsOfLotto))
