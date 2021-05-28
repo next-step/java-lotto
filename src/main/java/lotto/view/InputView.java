@@ -12,22 +12,21 @@ public class InputView {
     private static final String INPUT_MANUAL_TICKET_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
-    private static Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
     public long inputMoney() {
-        scanner = new Scanner(System.in);
         System.out.println(INPUT_MONEY_MESSAGE);
         return scanner.nextLong();
+
     }
 
     public int inputManualTicketCount() {
-        scanner = new Scanner(System.in);
         System.out.println(INPUT_MANUAL_TICKET_COUNT_MESSSAGE);
         return scanner.nextInt();
     }
 
     public List<LottoTicket> inputManualLottoTicket(int manualTicketCount) {
-        scanner = new Scanner(System.in);
+        scanner.nextLine(); // clear scanner buffer
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         System.out.println(INPUT_MANUAL_TICKET_MESSAGE);
         for (int i = 0; i < manualTicketCount; i++) {
@@ -38,13 +37,11 @@ public class InputView {
     }
 
     public String inputWinningNumber() {
-        scanner = new Scanner(System.in);
         System.out.println(INPUT_WINNING_NUMBERS);
         return scanner.nextLine();
     }
 
     public int inputBonusBall() {
-        scanner = new Scanner(System.in);
         System.out.println(INPUT_BONUS_BALL);
         return scanner.nextInt();
     }
