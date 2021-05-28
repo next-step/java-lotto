@@ -1,6 +1,6 @@
 package kr.insup.lotto.domain;
 
-import kr.insup.lotto.utils.WinningNumberParser;
+import kr.insup.lotto.utils.LottoNumberParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningNumberParserTest {
+public class LottoNumberParserTest {
 
     @DisplayName("당첨 번호 입력 받은 값 파싱 테스트")
     @Test
@@ -20,7 +20,7 @@ public class WinningNumberParserTest {
         String input = "1, 3, 12, 32, 31, 45";
 
         //when
-        List<Integer> winningNumberList = WinningNumberParser.parseWinningNumberToList(input);
+        List<Integer> winningNumberList = LottoNumberParser.parseLottoNumberToList(input);
 
         //then
         assertThat(winningNumberList).containsExactlyElementsOf(Arrays.asList(1, 3, 12, 32, 31, 45));
@@ -34,7 +34,7 @@ public class WinningNumberParserTest {
         String input = "1, 3, 12, 32, 31, as";
 
         //when, then
-        assertThatThrownBy(() -> WinningNumberParser.parseWinningNumberToList(input))
+        assertThatThrownBy(() -> LottoNumberParser.parseLottoNumberToList(input))
                 .isInstanceOf(NumberFormatException.class);
     }
 }
