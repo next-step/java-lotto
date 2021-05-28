@@ -1,14 +1,14 @@
-package step3.winning;
+package step5.winning;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.lotto.Lotto;
-import step3.lotto.LottoCount;
+import step5.lotto.Lotto;
+import step5.lotto.LottoCount;
 import org.junit.jupiter.api.BeforeEach;
-import step3.lotto.LottoNumber;
-import step3.lotto.LottoTicket;
-import step3.utils.ValidationUtils;
+import step5.lotto.LottoNumber;
+import step5.lotto.LottoTicket;
+import step5.utils.ValidationUtils;
 
 import java.util.Set;
 

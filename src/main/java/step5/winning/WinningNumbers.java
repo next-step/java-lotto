@@ -1,8 +1,9 @@
-package step3.winning;
+package step5.winning;
 
-import step3.lotto.LottoNumber;
-import step3.lotto.LottoTicket;
-import step3.utils.ValidationUtils;
+import step5.lotto.LottoNumber;
+import step5.lotto.LottoTicket;
+import step5.utils.ValidationUtils;
+
 import java.util.List;
 import java.util.Set;
 

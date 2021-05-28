@@ -1,4 +1,4 @@
-package step3.lotto;
+package step5.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package step3.lotto;
+package step5.lotto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final static int LOTTO_START_NUMBER = 1;

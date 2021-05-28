@@ -1,8 +1,9 @@
-package step3.view;
+package step5.view;
 
-import step3.lotto.LottoTicket;
-import step3.winning.WinningPrize;
-import step3.winning.WinningStatistics;
+import step5.lotto.LottoTicket;
+import step5.winning.WinningPrize;
+import step5.winning.WinningStatistics;
+
 import java.math.BigDecimal;
 import java.util.*;
 

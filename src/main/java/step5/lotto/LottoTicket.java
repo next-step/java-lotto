@@ -1,4 +1,4 @@
-package step3.lotto;
+package step5.lotto;
 
 import java.util.*;
 import java.util.stream.IntStream;

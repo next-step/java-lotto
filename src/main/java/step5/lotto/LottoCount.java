@@ -1,4 +1,4 @@
-package step3.lotto;
+package step5.lotto;
 
 public class LottoCount {
     private static final int DEFAULT_PRICE = 1000;

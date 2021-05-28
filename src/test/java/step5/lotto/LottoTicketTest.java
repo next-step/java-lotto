@@ -1,9 +1,9 @@
-package step3.lotto;
+package step5.lotto;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.utils.StringUtils;
+import step5.utils.StringUtils;
 import java.util.Set;
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 import static org.assertj.core.api.Assertions.assertThat;

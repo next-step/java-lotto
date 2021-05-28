@@ -1,12 +1,12 @@
-package step3;
+package step5;
 
-import step3.lotto.Lotto;
-import step3.lotto.LottoCount;
-import step3.lotto.LottoNumber;
-import step3.view.InputView;
-import step3.view.ResultView;
-import step3.winning.WinningNumbers;
-import step3.winning.WinningStatistics;
+import step5.lotto.Lotto;
+import step5.lotto.LottoCount;
+import step5.lotto.LottoNumber;
+import step5.view.InputView;
+import step5.view.ResultView;
+import step5.winning.WinningNumbers;
+import step5.winning.WinningStatistics;
 
 public class Main {
     public static void main(String[] args) {

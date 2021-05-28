@@ -1,6 +1,6 @@
-package step3.view;
+package step5.view;
 
-import step3.lotto.LottoCount;
+import step5.lotto.LottoCount;
 
 import java.util.Scanner;
 
