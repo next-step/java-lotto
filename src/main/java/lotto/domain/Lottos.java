@@ -18,6 +18,10 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
+	public Lottos(RandomNumbersGenerator randomNumbersGenerator, PurchaseAmount purchaseAmount) {
+		this(randomNumbersGenerator, purchaseAmount, new Lottos());
+	}
+
 	public Lottos(RandomNumbersGenerator randomNumbersGenerator, PurchaseAmount purchaseAmount, Lottos manualLottos) {
 		validationManualLottos(purchaseAmount, manualLottos);
 		lottos = new ArrayList<>(manualLottos.getLottos());

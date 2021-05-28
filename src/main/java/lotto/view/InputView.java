@@ -177,13 +177,15 @@ public class InputView {
 		return inputNumbers.split(delimiter);
 	}
 
-	public static void printPurchaseLottos(PurchaseRequest purchaseRequest, Lottos purchaseLottos) {
-		int manualQuantity = purchaseRequest.manualQuantity();
-		int autoQuantity = purchaseRequest.autoQuantity();
+	public static void printPurchaseQuantity(PurchaseAmount purchaseAmount, Lottos manaulLottos) {
+		int manualQuantity = manaulLottos.size();
+		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
 
 		print();
 		print(String.format(MESSAGE_PURCHAGE_COMPLETE, manualQuantity, autoQuantity));
+	}
 
+	public static void printPurchaseLottos(Lottos purchaseLottos) {
 		for (Lotto lotto : purchaseLottos.getLottos()) {
 			print(lotto);
 		}
