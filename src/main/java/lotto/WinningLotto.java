@@ -1,11 +1,11 @@
 package lotto;
 
-public class WinningNumber {
+public class WinningLotto {
 
 	private final Lotto winLotto;
 	private final LottoNumber bonusBall;
 
-	public WinningNumber(Lotto winLotto, LottoNumber bonusBall) {
+	public WinningLotto(Lotto winLotto, LottoNumber bonusBall) {
 		validateBonusNumber(winLotto, bonusBall);
 
 		this.winLotto = winLotto;

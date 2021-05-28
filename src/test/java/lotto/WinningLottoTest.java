@@ -6,13 +6,13 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningNumberTest {
+public class WinningLottoTest {
 	@Test
 	@DisplayName("보너스볼이 중복될 경우 예외 발생")
 	void bonusBallDuplicateCheck() {
 		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
 		LottoNumber bonusNumber = LottoNumber.valueOf("1");
-		assertThatThrownBy(() -> new WinningNumber(winLotto, bonusNumber))
+		assertThatThrownBy(() -> new WinningLotto(winLotto, bonusNumber))
 			.isInstanceOf(RuntimeException.class);
 	}
 
@@ -27,12 +27,12 @@ public class WinningNumberTest {
 
 		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
 		LottoNumber bonusNumber = LottoNumber.valueOf("7");
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusNumber);
+		WinningLotto winningLotto = new WinningLotto(winLotto, bonusNumber);
 
-		assertThat(winningNumber.resultOf(lotto1st)).isEqualTo(FIRST);
-		assertThat(winningNumber.resultOf(lotto2nd)).isEqualTo(SECOND);
-		assertThat(winningNumber.resultOf(lotto3rd)).isEqualTo(THIRD);
-		assertThat(winningNumber.resultOf(lotto4th)).isEqualTo(FOURTH);
-		assertThat(winningNumber.resultOf(lotto5th)).isEqualTo(FIFTH);
+		assertThat(winningLotto.resultOf(lotto1st)).isEqualTo(FIRST);
+		assertThat(winningLotto.resultOf(lotto2nd)).isEqualTo(SECOND);
+		assertThat(winningLotto.resultOf(lotto3rd)).isEqualTo(THIRD);
+		assertThat(winningLotto.resultOf(lotto4th)).isEqualTo(FOURTH);
+		assertThat(winningLotto.resultOf(lotto5th)).isEqualTo(FIFTH);
 	}
 }

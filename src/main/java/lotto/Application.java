@@ -9,8 +9,8 @@ public class Application {
 
 		Lotto winLotto = InputView.winLotto();
 		LottoNumber bonusBall = InputView.bonusBall();
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		GameResult result = new GameResult(winningNumber, lottos);
+		WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
+		GameResult result = new GameResult(winningLotto, lottos);
 		ResultView.printWinningResult(result);
 	}
 }

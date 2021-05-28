@@ -14,13 +14,13 @@ public class GameResult {
 	private final int buyCount;
 	private final Map<Rank, Integer> dashboard;
 
-	public GameResult(WinningNumber winningNumber, Lottos lottos) {
+	public GameResult(WinningLotto winningLotto, Lottos lottos) {
 		buyCount = lottos.count();
 		dashboard = defaultDashboard();
 
 		lottos.values()
 			.stream()
-			.map(winningNumber::resultOf)
+			.map(winningLotto::resultOf)
 			.forEach(rank -> dashboard.computeIfPresent(rank, (k, v) -> ++v));
 	}
 

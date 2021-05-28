@@ -40,9 +40,9 @@ public class GameResultTest {
 			int fifth, int fourth, int third, int second, int first) {
 		Lotto winLotto = LottoGenerator.customNumbers(lottoNumbers);
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
+		WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 
-		GameResult result = new GameResult(winningNumber, lottos);
+		GameResult result = new GameResult(winningLotto, lottos);
 		assertThat(result.dashboard().get(FIFTH)).isEqualTo(fifth);
 		assertThat(result.dashboard().get(FOURTH)).isEqualTo(fourth);
 		assertThat(result.dashboard().get(THIRD)).isEqualTo(third);
@@ -62,8 +62,8 @@ public class GameResultTest {
 	void 당첨_수익률_확인(String lottoNumbers, int bonusNumber, double expectedRatio) {
 		Lotto winLotto = LottoGenerator.customNumbers(lottoNumbers);
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		GameResult result = new GameResult(winningNumber, lottos);
+		WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
+		GameResult result = new GameResult(winningLotto, lottos);
 		assertThat(result.earningRate()).isEqualTo(expectedRatio);
 	}
 
@@ -72,8 +72,8 @@ public class GameResultTest {
 	void checkUnmodifiedDashboard() {
 		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
 		LottoNumber bonusBall = LottoNumber.valueOf(7);
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		GameResult result = new GameResult(winningNumber, lottos);
+		WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
+		GameResult result = new GameResult(winningLotto, lottos);
 		Map<Rank, Integer> dashboard = result.dashboard();
 		assertThatThrownBy(() -> dashboard.remove(NONE))
 			.isInstanceOf(RuntimeException.class);
