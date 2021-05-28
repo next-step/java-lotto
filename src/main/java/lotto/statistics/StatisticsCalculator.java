@@ -83,7 +83,7 @@ public class StatisticsCalculator {
             .append("총 수익률은 ")
             .append(ratio)
             .append("입니다.(기준이 1이기 때문에 결과적으로 ")
-            .append(Profit.ratioBy(ratio))
+            .append(Profit.messageByRatio(ratio))
             .append("라는 의미임)")
             .toString();
     }

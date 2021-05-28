@@ -1,29 +1,28 @@
 package lotto.statistics;
 
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 public enum Profit {
 
-    PROFIT_MESSAGE("이익"),
-    BREAK_EVENT_MESSAGE("본전"),
-    LOSS_MESSAGE("손해");
+    PROFIT_MESSAGE((ratio) -> ratio > 1, "이익"),
+    BREAK_EVENT_MESSAGE((ratio) -> ratio == 1, "본전"),
+    LOSS_MESSAGE((ratio) -> ratio < 1, "손해");
 
+    private final Predicate<Double> predicate;
     private final String description;
 
-    Profit(String description) {
+    Profit(Predicate<Double> predicate, String description) {
+        this.predicate = predicate;
         this.description = description;
     }
 
-    public static Profit ratioBy(double ratio) {
-        if (ratio > 1) {
-            return PROFIT_MESSAGE;
-        }
-        if (ratio < 1) {
-            return LOSS_MESSAGE;
-        }
-        return BREAK_EVENT_MESSAGE;
+    public static String messageByRatio(double ratio) {
+        return Arrays.stream(values())
+            .filter(a -> a.predicate.test(ratio))
+            .findAny()
+            .get()
+            .description;
     }
 
-    @Override
-    public String toString() {
-        return description;
-    }
 }
