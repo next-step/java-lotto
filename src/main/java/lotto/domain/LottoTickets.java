@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.common.WinningType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,5 +43,10 @@ public class LottoTickets {
         return this.lottoTickets.stream()
                 .map(t -> t.getWinningType(winningLottoTicket, bonusNumber))
                 .collect(Collectors.toList());
+    }
+
+    public LottoTickets addAll(List<LottoTicket> inputTickets) {
+        this.lottoTickets.addAll(inputTickets);
+        return new LottoTickets(this.lottoTickets);
     }
 }
