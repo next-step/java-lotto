@@ -2,19 +2,19 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
-    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     static {
         for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -25,7 +25,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) throws CustomIllegalArgumentException {
-        LottoNumber lottoNumber = lottoNumbers.get(number);
+        LottoNumber lottoNumber = lottoNumbers.stream()
+                .filter(no -> no.number == number)
+                .findFirst()
+                .orElse(null);
         if (lottoNumber == null) {
             throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_OUT_OF_RANGE,
                     MIN_VALUE, MAX_VALUE);
