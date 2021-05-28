@@ -16,6 +16,7 @@ public class LottoMachine {
     private static final String ERROR_MESSAGE_MONEY_NOT_ENOUGH = "1000원 이상의 금액을 입력해야 합니다.";
     private static final List<LottoNumber> lottoNumbers;
 
+
     static {
         lottoNumbers = IntStream.range(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
                 .mapToObj(LottoNumber::new)
@@ -47,4 +48,18 @@ public class LottoMachine {
         return price/ONE_LOTTO_PRICE;
     }
 
+    public LottoTickets autoGenerate(int price, LottoTickets manualLottos) {
+        int totalLottoTicketCount = purchaseQuantity(price);
+        int autoLottoTicketCount = totalLottoTicketCount - manualLottos.lottoTicketCount();
+
+        return autoGenerate(autoLottoTicketCount);
+    }
+
+    public LottoTickets autoGenerate(int limit) {
+        List<LottoTicket> lottoTickets = Stream.generate(this::generate)
+                .limit(limit)
+                .collect(Collectors.toList());
+
+        return new LottoTickets(lottoTickets);
+    }
 }
