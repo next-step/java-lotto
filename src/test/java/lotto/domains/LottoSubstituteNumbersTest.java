@@ -7,11 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoSubstituteNumbersTest {
     @Test
-    void 생성자_테스트() {
-        assertThat(LottoSubstituteNumbers.sixLottoNumbers()).isEqualTo(LottoSubstituteNumbers.sixLottoNumbers());
-    }
-
-    @Test
     void 여섯개의_로또번호_반환_테스트() {
         assertThat(LottoSubstituteNumbers.sixLottoNumbers().size()).isEqualTo(6);
     }
