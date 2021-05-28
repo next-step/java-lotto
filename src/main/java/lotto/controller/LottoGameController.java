@@ -17,8 +17,7 @@ public class LottoGameController {
 		Lottos manualLottos = InputView.inputManualLottos();
 		PurchaseRequest purchaseRequest = new PurchaseRequest(purchaseAmount, manualLottos);
 
-		LottoGame lottoGame = new LottoGame(randomNumbersGenerator);
-		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
+		Lottos purchaseLottos = new Lottos(randomNumbersGenerator, purchaseRequest.getPurchaseAmount(), purchaseRequest.getManualLottos());
 		InputView.printPurchaseLottos(purchaseRequest, purchaseLottos);
 
 		WinningLotto winningLotto = InputView.inputWinningLotto();

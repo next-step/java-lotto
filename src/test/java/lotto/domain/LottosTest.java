@@ -5,23 +5,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("로또게임 테스트")
-public class LottoGameTest {
-
-	LottoGame lottoGame;
+@DisplayName("로또(일급콜렉션) 테스트")
+public class LottosTest {
+	TestRandomNumbersGenerator randomNumbersGenerator;
 
 	@BeforeEach
-	void setUp() {
-		lottoGame = new LottoGame(new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6}));
+	void setup() {
+		randomNumbersGenerator = new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6});
 	}
 
 	@Test
 	@DisplayName("로또를 모두 자동으로 구매하는 테스트")
 	void purchaseAutoLottos() {
 		PurchaseRequest purchaseRequest = new PurchaseRequest(new PurchaseAmount(14000));
-		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
+		Lottos purchaseLottos = new Lottos(randomNumbersGenerator, purchaseRequest.getPurchaseAmount(), purchaseRequest.getManualLottos());
 		assertThat(purchaseLottos.size()).isEqualTo(14);
 	}
 
@@ -35,7 +33,7 @@ public class LottoGameTest {
 				new Lotto(1, 2, 3, 4, 5, 6)
 		);
 		PurchaseRequest purchaseRequest = new PurchaseRequest(new PurchaseAmount(14000), manaulLottos);
-		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
+		Lottos purchaseLottos = new Lottos(randomNumbersGenerator, purchaseRequest.getPurchaseAmount(), purchaseRequest.getManualLottos());
 		assertThat(purchaseLottos.size()).isEqualTo(14); //전체
 	}
 
