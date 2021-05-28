@@ -53,7 +53,7 @@ public class LottoValidationUtils {
         return winNumberList;
     }
 
-    private static void checkNumberAndRange(String winNumberArr) {
+    public static void checkNumberAndRange(String winNumberArr) {
         if(!winNumberArr.matches(NUMBER_REGEX)) {
             throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MSG);
         }

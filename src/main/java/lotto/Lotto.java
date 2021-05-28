@@ -35,6 +35,10 @@ public class Lotto {
         return lottoNumber.isContainNumber(winNumber) ? 1 : 0;
     }
 
+    public boolean isMatchNumber(Integer winNumber) {
+        return lottoNumber.isContainNumber(winNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
