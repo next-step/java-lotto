@@ -3,24 +3,24 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Money {
+public class Wallet {
 
 	public static final int LOTTO_PRICE = 1000;
 
-	private final int value;
+	private final int money;
 
-	public Money(int value) {
-		validateMoneyValue(value);
+	public Wallet(int money) {
+		validateMoneyValue(money);
 
-		this.value = value;
+		this.money = money;
 	}
 
-	private static void validateMoneyValue(int value) {
-		if (value < 0) {
+	private static void validateMoneyValue(int money) {
+		if (money < 0) {
 			throw new OutOfBoundValueException("금액은 음수가 될 수 없습니다.");
 		}
 
-		if (value < LOTTO_PRICE) {
+		if (money < LOTTO_PRICE) {
 			throw new NotEnoughMoneyException("로또를 구입하기엔 돈이 부족합니다.");
 		}
 	}
@@ -28,7 +28,7 @@ public class Money {
 	public Lottos buyAll() {
 		List<Lotto> values = new ArrayList<>();
 
-		for (int i = 0; i < value / LOTTO_PRICE; i++) {
+		for (int i = 0; i < money / LOTTO_PRICE; i++) {
 			values.add(LottoGenerator.randomNumbers());
 		}
 

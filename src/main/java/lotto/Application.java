@@ -3,8 +3,8 @@ package lotto;
 public class Application {
 
 	public static void main(String[] args) {
-		Money money = InputView.pay();
-		Lottos lottos = money.buyAll();
+		Wallet wallet = InputView.pay();
+		Lottos lottos = wallet.buyAll();
 		ResultView.printBuyResult(lottos);
 
 		Lotto winLotto = InputView.winLotto();

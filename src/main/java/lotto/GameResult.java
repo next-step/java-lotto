@@ -3,7 +3,7 @@ package lotto;
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
-import static lotto.Money.*;
+import static lotto.Wallet.*;
 
 import java.util.Map;
 
