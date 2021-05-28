@@ -14,11 +14,12 @@ public class Money {
     }
 
     public int countAutoLottoTicket(int manualTicketCount) {
-        return (int)(this.money/LOTTO_TICKET_PRICE)-manualTicketCount;
-    }
-
-    public int countLottoTicket() {
-        return (int)(this.money/LOTTO_TICKET_PRICE);
+        int lottoTicketCount = (int)(this.money/LOTTO_TICKET_PRICE);
+        int autoTicketCount = lottoTicketCount-manualTicketCount;
+        if (autoTicketCount < 0) {
+            throw new IllegalArgumentException(ErrorCode.INVALID_TICKET_COUNT_RANGE.getErrorMessage());
+        }
+        return autoTicketCount;
     }
 
     public double calculateProfit(long prizeSum) {

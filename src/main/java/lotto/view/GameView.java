@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.common.ErrorCode;
 import lotto.domain.*;
 
 import java.util.List;
@@ -20,9 +19,6 @@ public class GameView {
 
     private LottoTickets generateLottoTicket(int manualTicketCount, Money money) {
         int autoTicketCount = money.countAutoLottoTicket(manualTicketCount); // 자동 로또 티켓 개수
-        if (manualTicketCount + autoTicketCount > money.countLottoTicket()) {
-            throw new IllegalArgumentException(ErrorCode.INVALID_TICKET_COUNT_RANGE.getErrorMessage());
-        }
         List<LottoTicket> manualLottoTickets = inputView.inputManualLottoTicket(manualTicketCount); // 수동 로또 티켓 생성
         LottoTickets autoLottoTickets = new LottoTickets(autoTicketCount);// 자동 로또 티켓 생성
         resultView.printLottoTicketCount(manualTicketCount, autoTicketCount); //로또 티켓 구매 개수 출력
