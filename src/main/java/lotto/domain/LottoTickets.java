@@ -5,13 +5,18 @@ import java.util.List;
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
-    private final TicketGenerator ticketGenerator;
+    private TicketGenerator ticketGenerator;
     private final int count;
 
     public LottoTickets(TicketGenerator ticketGenerator, int count) {
         this.ticketGenerator = ticketGenerator;
         this.count = count;
         this.lottoTickets = createTicketsBy(count);
+    }
+
+    public LottoTickets(List<LottoTicket> tickets) {
+        this.lottoTickets = tickets;
+        this.count = tickets.size();
     }
 
     private List<LottoTicket> createTicketsBy(int count) {

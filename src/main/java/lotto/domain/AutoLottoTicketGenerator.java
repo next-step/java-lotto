@@ -14,7 +14,6 @@ public class AutoLottoTicketGenerator implements TicketGenerator {
         }
     }
 
-    @Override
     public List<LottoTicket> generate(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {

@@ -12,15 +12,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
 
-    @DisplayName("생성")
+    @DisplayName("생성자 체크 : TicketGenerator & int count")
     @Test
-    void create() {
+    void constructor_with_generator() {
         //Given + When
         LottoTickets tickets = new LottoTickets(new AutoLottoTicketGenerator(), 3);
 
         //Then
         assertThat(tickets).isNotNull();
         assertThat(tickets.count()).isEqualTo(3);
+    }
+
+    @DisplayName("생성자 체크 : List<LottoTicket>")
+    @Test
+    void constructor_with_list_lottoTicket() {
+        //Given
+        List<LottoTicket> tickets = new ArrayList<>();
+        tickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        tickets.add(new LottoTicket(Arrays.asList(5, 6, 7, 8, 9, 10)));
+
+        //When
+        LottoTickets lottoTickets = new LottoTickets(tickets);
+
+        //Then
+        assertThat(lottoTickets).isNotNull();
+        assertThat(lottoTickets.count()).isEqualTo(2);
     }
 
     @DisplayName("티켓이 추가되는지 테스트")

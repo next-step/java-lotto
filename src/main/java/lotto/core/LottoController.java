@@ -5,6 +5,7 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,38 +19,70 @@ public class LottoController {
         this.outputView = new OutputView();
     }
 
-    public LottoTickets getTickets(Money amount) {
-//        int totalCount = amount.countOfTickets();
-//        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
-//
-//        boolean stopReceivingInput = false;
-//        int manualCount = 0;
-//        while (!stopReceivingInput) {
-//            manualCount = inputView.receiveIntegerInput();
-//            stopReceivingInput = checkTicketCount(totalCount, manualCount);
-//        }
-//
-//        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKETS);
-//        LottoTickets lottoTickets
-//                = new LottoTickets(requestTicketsInput(new ManualLottoTicketGenerator(), manualCount));
-//        lottoTickets.combineWith(requestTicketsInput(new AutoLottoTicketGenerator(), totalCount - manualCount));
-//
-//        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, manualCount, totalCount - manualCount);
-//        outputView.printInfo(lottoTickets.toString());
-//        return lottoTickets;
-        return new LottoTickets(new AutoLottoTicketGenerator(), 3);
+    public LottoTickets getAutoTickets(Money amount, int createdCount) {
+        int creatingCount = amount.countOfTickets() - createdCount;
+
+        LottoTickets lottoTickets = null;
+        while (lottoTickets == null) {
+            lottoTickets = requestAutoTicketsInput(creatingCount);
+        }
+        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, createdCount, creatingCount);
+        outputView.printInfo(lottoTickets.toString());
+
+        return lottoTickets;
     }
 
-
-    private List<LottoTicket> requestTicketsInput(TicketGenerator generator, int count) {
+    private LottoTickets requestAutoTicketsInput(int count) {
         List<LottoTicket> tickets;
         try {
-            tickets = generator.generate(count);
+            tickets = new AutoLottoTicketGenerator().generate(count);
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
         }
+        return new LottoTickets(tickets);
+    }
+
+    public LottoTickets getManualTickets(Money amount) {
+        int totalCount = amount.countOfTickets();
+        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
+
+        boolean stopReceivingInput = false;
+        int manualCount = 0;
+        while (!stopReceivingInput) {
+            manualCount = inputView.receiveIntegerInput();
+            stopReceivingInput = checkTicketCount(totalCount, manualCount);
+        }
+
+        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKETS);
+        return new LottoTickets(requestManualTicketsInput(manualCount));
+    }
+
+    private List<LottoTicket> requestManualTicketsInput(int count) {
+        List<LottoTicket> tickets = null;
+        while (tickets == null) {
+            tickets = createTickets(count);
+        }
         return tickets;
+    }
+
+    private List<LottoTicket> createTickets(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            tickets.add(checkTicketInput());
+        }
+        return tickets;
+    }
+
+    private LottoTicket checkTicketInput() {
+        LottoTicket lottoTicket;
+        try {
+            lottoTicket = new LottoTicket(Arrays.asList(inputView.receiveIntegerArrayInput()));
+        } catch (Exception e) {
+            outputView.printExceptionMessage(e);
+            lottoTicket = null;
+        }
+        return lottoTicket;
     }
 
     private boolean checkTicketCount(int totalCount, int input) {
