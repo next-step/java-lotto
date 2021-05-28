@@ -23,21 +23,13 @@ public class GameView {
         if (manualTicketCount + autoTicketCount > money.countLottoTicket()) {
             throw new IllegalArgumentException(ErrorCode.INVALID_TICKET_COUNT_RANGE.getErrorMessage());
         }
-        List<LottoTicket> manualLottoTickets = generateManualLottoTickets(manualTicketCount); // 수동 로또 티켓 생성
-        LottoTickets autoLottoTickets = generateAutoLottoTickets(autoTicketCount); // 자동 로또 티켓 생성
+        List<LottoTicket> manualLottoTickets = inputView.inputManualLottoTicket(manualTicketCount); // 수동 로또 티켓 생성
+        LottoTickets autoLottoTickets = new LottoTickets(autoTicketCount);// 자동 로또 티켓 생성
         resultView.printLottoTicketCount(manualTicketCount, autoTicketCount); //로또 티켓 구매 개수 출력
         LottoTickets userLottoTickets = autoLottoTickets.addAll(manualLottoTickets); // 수동, 자동 티켓 병합
         resultView.printLottoTickets(userLottoTickets.getString()); // 병합된 로또 티켓 출력
 
         return userLottoTickets;
-    }
-
-    private List<LottoTicket> generateManualLottoTickets(int ticketCount) {
-        return inputView.inputManualLottoTicket(ticketCount);
-    }
-
-    private LottoTickets generateAutoLottoTickets(int ticketCount) {
-        return new LottoTickets(ticketCount);
     }
 
     private void showGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, Money money) {
