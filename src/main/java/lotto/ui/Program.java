@@ -14,7 +14,7 @@ import lotto.ui.output.report.NextStepProblemGameGameReport;
 
 public class Program {
     private final Output output;
-    private final Input input;
+    private final GameInput input;
 
     public Program() {
         this.output = new GameOutput(System.out);

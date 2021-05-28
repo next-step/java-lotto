@@ -14,13 +14,17 @@ public class Round {
     private final Ball bonusBall;
 
     public Round(SixBall sixBall, int bonus) {
-        this(DEFAULT_ROUND, sixBall, bonus);
+        this(DEFAULT_ROUND, sixBall, Machine.draw(bonus));
     }
 
-    public Round(int round, SixBall sixBall, int bonus) {
+    public Round(SixBall sixBall, Ball bonusBall) {
+        this(DEFAULT_ROUND, sixBall, bonusBall);
+    }
+
+    public Round(int round, SixBall sixBall, Ball bonusBall) {
         this.round = round;
         this.sixBall = sixBall;
-        this.bonusBall = Machine.draw(bonus);
+        this.bonusBall = bonusBall;
 
         if (validation()) {
             throw new LottoRuleException("보너스 볼이 당첨 번호에 포함되어 있습니다.");

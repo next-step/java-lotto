@@ -6,7 +6,7 @@ import lotto.ui.input.exception.InputException;
 public abstract class Request<T> {
     protected final GameInput input;
 
-    public Request(GameInput input) {
+    protected Request(GameInput input) {
         this.input = input;
     }
 

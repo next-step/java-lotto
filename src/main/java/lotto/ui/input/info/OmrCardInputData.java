@@ -3,7 +3,6 @@ package lotto.ui.input.info;
 import lotto.core.SixBall;
 import lotto.core.omr.OmrCard;
 import lotto.ui.input.GameInput;
-import lotto.ui.input.Input;
 import lotto.ui.input.exception.InputException;
 import lotto.ui.input.info.request.ManualNumberRequest;
 import lotto.ui.input.info.request.TotalPurchaseCountRequest;
@@ -17,8 +16,8 @@ public class OmrCardInputData implements InputData<OmrCard> {
     private final GameInput gameInput;
     private final TotalPurchaseCountRequest totalPurchaseCount;
 
-    public OmrCardInputData(Input input) {
-        this.gameInput = (GameInput) input;
+    public OmrCardInputData(GameInput gameInput) {
+        this.gameInput = gameInput;
         this.totalPurchaseCount = new TotalPurchaseCountRequest(gameInput);
     }
 
