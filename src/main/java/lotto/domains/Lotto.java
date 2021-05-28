@@ -1,10 +1,13 @@
 package lotto.domains;
 
+import lotto.enums.MatchingInfo;
+
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
+    private MatchingInfo matchingInfo;
 
-    public Lotto(){
+    public Lotto() {
         lottoNumbers = new LottoNumbers();
     }
 
@@ -12,11 +15,17 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchingNumberCount(LottoNumbers winningNumber) {
-        return this.lottoNumbers.matchingNumberCount(winningNumber);
+    public void matching(LottoNumbers winningNumbers, int bonusNumber) {
+        int matchingNumber = this.lottoNumbers.matchingNumberCount(winningNumbers);
+        boolean hasBonusNumber = this.lottoNumbers.contains(bonusNumber);
+        this.matchingInfo = MatchingInfo.matchingInfo(matchingNumber, hasBonusNumber);
     }
 
     public LottoNumbers lottoNumbers() {
         return lottoNumbers;
+    }
+
+    public MatchingInfo matchingInfo() {
+        return this.matchingInfo;
     }
 }
