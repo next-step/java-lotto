@@ -8,12 +8,6 @@ public class LottoTickets {
     private final TicketGenerator ticketGenerator;
     private final int count;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-        this.ticketGenerator = new AutoLottoTicketGenerator();
-        this.count = 0;
-    }
-
     public LottoTickets(TicketGenerator ticketGenerator, int count) {
         this.ticketGenerator = ticketGenerator;
         this.count = count;
@@ -41,7 +35,7 @@ public class LottoTickets {
         return stringBuilder.toString();
     }
 
-    public void combineWith(List<LottoTicket> others) {
-        lottoTickets.addAll(others);
+    public void combineWith(LottoTickets others) {
+        lottoTickets.addAll(others.lottoTickets);
     }
 }

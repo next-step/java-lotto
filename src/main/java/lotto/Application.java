@@ -14,6 +14,9 @@ public class Application {
         Money purchaseAmount = controller.getPurchaseAmount();
 
         //2. 수동
+//        LottoTickets tickets = controller.getManualTickets(purchaseAmount);
+        LottoTickets tickets = controller.getTickets(purchaseAmount);
+        tickets.combineWith(controller.getTickets(purchaseAmount));
         LottoTickets lottoTickets = controller.getTickets(purchaseAmount);
 
         //2. 당첨번호 입력 +  보너스 번호 입력

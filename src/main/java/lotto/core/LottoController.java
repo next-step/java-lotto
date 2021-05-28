@@ -19,25 +19,27 @@ public class LottoController {
     }
 
     public LottoTickets getTickets(Money amount) {
-        int totalCount = amount.countOfTickets();
-        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
-
-        boolean stopReceivingInput = false;
-        int manualCount = 0;
-        while (!stopReceivingInput) {
-            manualCount = inputView.receiveIntegerInput();
-            stopReceivingInput = checkTicketCount(totalCount, manualCount);
-        }
-
-        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKETS);
-        LottoTickets lottoTickets
-                = new LottoTickets(requestTicketsInput(new ManualLottoTicketGenerator(), manualCount));
-        lottoTickets.combineWith(requestTicketsInput(new AutoLottoTicketGenerator(), totalCount - manualCount));
-
-        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, manualCount, totalCount - manualCount);
-        outputView.printInfo(lottoTickets.toString());
-        return lottoTickets;
+//        int totalCount = amount.countOfTickets();
+//        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
+//
+//        boolean stopReceivingInput = false;
+//        int manualCount = 0;
+//        while (!stopReceivingInput) {
+//            manualCount = inputView.receiveIntegerInput();
+//            stopReceivingInput = checkTicketCount(totalCount, manualCount);
+//        }
+//
+//        outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKETS);
+//        LottoTickets lottoTickets
+//                = new LottoTickets(requestTicketsInput(new ManualLottoTicketGenerator(), manualCount));
+//        lottoTickets.combineWith(requestTicketsInput(new AutoLottoTicketGenerator(), totalCount - manualCount));
+//
+//        outputView.printMessage(Message.INFO_MANUAL_AUTO_COUNT, manualCount, totalCount - manualCount);
+//        outputView.printInfo(lottoTickets.toString());
+//        return lottoTickets;
+        return new LottoTickets(new AutoLottoTicketGenerator(), 3);
     }
+
 
     private List<LottoTicket> requestTicketsInput(TicketGenerator generator, int count) {
         List<LottoTicket> tickets;
