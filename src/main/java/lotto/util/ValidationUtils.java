@@ -10,7 +10,7 @@ public class ValidationUtils {
 	public static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
 
 	private static final String NUMBERS_PATTERN_REGEX = "^([0-9]{1,2},){5}[0-9]{1,2}$";
-	private static final Pattern LOTTO_NUMBERS_PATTERN = Pattern.compile(NUMBERS_PATTERN_REGEX);
+	public static final Pattern LOTTO_NUMBERS_PATTERN = Pattern.compile(NUMBERS_PATTERN_REGEX);
 
 	private ValidationUtils() {
 	}

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.function.FillListWithRepeatOperation;
+import static lotto.util.CollectionUtils.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.util.CollectionUtils.*;
+import lotto.function.FillListWithRepeatOperation;
 
 public class LottoMachine {
 
@@ -22,8 +22,8 @@ public class LottoMachine {
 
 	private static List<LottoNumber> unmodifiableLottoNumberList() {
 		return IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
-				.mapToObj(LottoNumber::of)
-				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+			.mapToObj(LottoNumber::of)
+			.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 	}
 
 	public UserLotto buy(LottoBuyingRequest lottoBuyingRequest) {
@@ -55,8 +55,8 @@ public class LottoMachine {
 		}
 
 		return new FillListWithRepeatOperation<LottoTicket>()
-				.andThen(Collections::unmodifiableList)
-				.apply(count, this::generate);
+			.andThen(Collections::unmodifiableList)
+			.apply(count, this::generate);
 	}
 
 	private LottoTicket generate() {
