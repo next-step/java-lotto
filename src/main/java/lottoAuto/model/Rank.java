@@ -32,8 +32,8 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    public static int getPrize(Rank rank) {
-        return rank.prize;
+    public static int getPrize(Rank rank,Long count) {
+        return rank.prize * Integer.valueOf(String.valueOf(count));
     }
 
     public static String getMessage(Rank rank) {
