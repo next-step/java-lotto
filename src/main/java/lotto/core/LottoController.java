@@ -1,6 +1,6 @@
 package lotto.core;
 
-import lotto.domain.Money;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
@@ -19,7 +19,7 @@ public class LottoController {
         this.outputView = new OutputView();
     }
 
-    public LottoTickets getAutoTickets(Money amount, int createdCount) {
+    public LottoTickets getAutoTickets(PurchaseAmount amount, int createdCount) {
         int creatingCount = amount.countOfTickets() - createdCount;
 
         LottoTickets lottoTickets = null;
@@ -43,7 +43,7 @@ public class LottoController {
         return new LottoTickets(tickets);
     }
 
-    public LottoTickets getManualTickets(Money amount) {
+    public LottoTickets getManualTickets(PurchaseAmount amount) {
         int totalCount = amount.countOfTickets();
         outputView.printMessage(Message.REQUEST_MANUAL_LOTTO_TICKET_COUNT);
 
@@ -154,23 +154,23 @@ public class LottoController {
         return bonusNumber;
     }
 
-    public Money getPurchaseAmount() {
+    public PurchaseAmount getPurchaseAmount() {
         outputView.printMessage(Message.REQUEST_INPUT_AMOUNT);
-        Money money = null;
-        while (money == null) {
-            money = requestMoneyInput();
+        PurchaseAmount purchaseAmount = null;
+        while (purchaseAmount == null) {
+            purchaseAmount = requestPurchaseAmountInput();
         }
-        return money;
+        return purchaseAmount;
     }
 
-    private Money requestMoneyInput() {
-        Money money;
+    private PurchaseAmount requestPurchaseAmountInput() {
+        PurchaseAmount purchaseAmount;
         try {
-            money = new Money(inputView.receiveIntegerInput());
+            purchaseAmount = new PurchaseAmount(inputView.receiveIntegerInput());
         } catch (Exception e) {
             outputView.printExceptionMessage(e);
             return null;
         }
-        return money;
+        return purchaseAmount;
     }
 }

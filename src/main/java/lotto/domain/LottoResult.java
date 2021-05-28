@@ -15,18 +15,11 @@ public class LottoResult {
     private int purchaseAmount;
     private float profitRatio;
 
-//    public LottoResult(int purchaseAmount, WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
-//        this.lottoResult = new TreeMap<>();
-//        //this.purchaseAmount = purchaseAmount;
-//        setDefaultValues();
-//        updateLottoResult(winningNumbers, lottoTickets);
-//    }
-
     public LottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         this.lottoResult = new TreeMap<>();
         setDefaultValues();
         updateLottoResult(winningNumbers, lottoTickets);
-        this.purchaseAmount = lottoTickets.size() * Money.PRICE_PER_TICKET;
+        this.purchaseAmount = lottoTickets.size() * PurchaseAmount.PRICE_PER_TICKET;
     }
 
     private void updateLottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {

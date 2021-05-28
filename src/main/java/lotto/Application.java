@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.core.LottoController;
 import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 
 public class Application {
@@ -11,7 +11,7 @@ public class Application {
         LottoController controller = new LottoController();
 
         //1. 구매금액 입력
-        Money purchaseAmount = controller.getPurchaseAmount();
+        PurchaseAmount purchaseAmount = controller.getPurchaseAmount();
 
         //2. 수동 + 자동 로또 생성
         LottoTickets lottoTickets = controller.getManualTickets(purchaseAmount);

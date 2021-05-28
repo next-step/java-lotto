@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Money;
+import lotto.domain.PurchaseAmount;
 import lotto.exception.CustomIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MoneyTest {
+public class PurchaseAmountTest {
 
     @DisplayName("금액을 로또가격으로 나눈 값이 정수가 아닐 경우, Exception 발생")
     @Test
     void throw_exception_when_mod_is_not_zero() {
         //Given + When + Then
-        assertThatThrownBy(() -> new Money(1800))
+        assertThatThrownBy(() -> new PurchaseAmount(1800))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 
@@ -24,7 +24,7 @@ public class MoneyTest {
     @ValueSource(strings = {"0", "100001", "-1"})
     void throw_exception_when_invalid_purchase_amount(int input) {
         //Given + When + Then
-        assertThatThrownBy(() -> new Money(input))
+        assertThatThrownBy(() -> new PurchaseAmount(input))
                 .isInstanceOf(CustomIllegalArgumentException.class);
     }
 

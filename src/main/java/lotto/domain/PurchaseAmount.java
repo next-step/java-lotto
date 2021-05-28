@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
-public class Money {
+public class PurchaseAmount {
 
     public static final int PRICE_PER_TICKET = 1000;
     private final int MINIMUM_PURCHASE_AMOUNT = 1000;
@@ -10,7 +10,7 @@ public class Money {
 
     private int money;
 
-    public Money(int amount) throws CustomIllegalArgumentException {
+    public PurchaseAmount(int amount) throws CustomIllegalArgumentException {
         checkValidInput(amount);
         checkDividable(amount);
         this.money = amount;
