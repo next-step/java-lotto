@@ -37,10 +37,6 @@ public class LottoTicket {
         }
     }
 
-    public int countOfNumbers() {
-        return numbers.size();
-    }
-
     public Rank rankBasedOn(WinningNumbers winningNumbers) {
         int matchCount = 0;
         for (LottoNumber number : numbers) {
