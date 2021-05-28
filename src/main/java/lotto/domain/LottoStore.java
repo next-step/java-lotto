@@ -11,13 +11,21 @@ public class LottoStore {
 	private static final LottoMachine lottoMachine = new LottoMachine();
 
 	public UserLotto buy(LottoBuyingRequest lottoBuyingRequest) {
-		List<String> lottoNumberStrings = lottoBuyingRequest.manualLottoNumberStrings();
-		List<LottoTicket> lottoTicketList = new ArrayList<>(lottoMachine.manual(lottoNumberStrings));
+		return new UserLotto(Collections.unmodifiableList(generateLottoTickets(lottoBuyingRequest)));
+	}
 
-		if (lottoBuyingRequest.hasAutoLottoRequest()) {
-			lottoTicketList.addAll(lottoMachine.generate(lottoBuyingRequest.autoLottoCount()));
-		}
+	private List<LottoTicket> generateLottoTickets(LottoBuyingRequest lottoBuyingRequest) {
+		List<LottoTicket> lottoTicketList = new ArrayList<>(generateManualLottoTickets(lottoBuyingRequest));
+		lottoTicketList.addAll(generateAutoLottoIfRequestExist(lottoBuyingRequest.autoLottoCount()));
 
-		return new UserLotto(Collections.unmodifiableList(lottoTicketList));
+		return lottoTicketList;
+	}
+
+	private List<LottoTicket> generateManualLottoTickets(LottoBuyingRequest lottoBuyingRequest) {
+		return lottoMachine.manual(lottoBuyingRequest.manualLottoNumberStrings());
+	}
+
+	private List<LottoTicket> generateAutoLottoIfRequestExist(int count) {
+		return new ArrayList<>(lottoMachine.generate(count));
 	}
 }
