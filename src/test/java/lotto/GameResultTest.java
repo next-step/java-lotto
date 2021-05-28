@@ -19,11 +19,11 @@ public class GameResultTest {
 
 	@BeforeEach
 	void setUp() {
-		Lotto lotto1 = new Lotto("1,2,3,4,5,6");
-		Lotto lotto2 = new Lotto("7,8,9,10,11,12");
-		Lotto lotto3 = new Lotto("40,41,42,43,44,45");
-		Lotto lotto4 = new Lotto("40,41,42,43,44,45");
-		Lotto lotto5 = new Lotto("40,41,42,43,44,45");
+		Lotto lotto1 = LottoGenerator.customNumbers("1,2,3,4,5,6");
+		Lotto lotto2 = LottoGenerator.customNumbers("7,8,9,10,11,12");
+		Lotto lotto3 = LottoGenerator.customNumbers("40,41,42,43,44,45");
+		Lotto lotto4 = LottoGenerator.customNumbers("40,41,42,43,44,45");
+		Lotto lotto5 = LottoGenerator.customNumbers("40,41,42,43,44,45");
 		lottos = new Lottos(new ArrayList<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5)));
 	}
 
@@ -38,7 +38,7 @@ public class GameResultTest {
 	@DisplayName("당첨 결과 확인")
 	void 당첨_결과_확인(String lottoNumbers, int bonusNumber,
 			int fifth, int fourth, int third, int second, int first) {
-		Lotto winLotto = new Lotto(lottoNumbers);
+		Lotto winLotto = LottoGenerator.customNumbers(lottoNumbers);
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
 
@@ -60,7 +60,7 @@ public class GameResultTest {
 	}, delimiter = ':')
 	@DisplayName("당첨 수익률 확인")
 	void 당첨_수익률_확인(String lottoNumbers, int bonusNumber, double expectedRatio) {
-		Lotto winLotto = new Lotto(lottoNumbers);
+		Lotto winLotto = LottoGenerator.customNumbers(lottoNumbers);
 		LottoNumber bonusBall = LottoNumber.valueOf(bonusNumber);
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
 		GameResult result = new GameResult(winningNumber, lottos);
@@ -70,7 +70,7 @@ public class GameResultTest {
 	@Test
 	@DisplayName("대시보드 불변 여부 확인")
 	void checkUnmodifiedDashboard() {
-		Lotto winLotto = new Lotto("1,2,3,4,5,6");
+		Lotto winLotto = LottoGenerator.customNumbers("1,2,3,4,5,6");
 		LottoNumber bonusBall = LottoNumber.valueOf(7);
 		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
 		GameResult result = new GameResult(winningNumber, lottos);

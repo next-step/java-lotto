@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.LottoGenerator.*;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -14,7 +16,7 @@ public class InputView {
 	public static Lotto winLotto() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String text = scanner.next();
-		return new Lotto(text);
+		return customNumbers(text);
 	}
 
 	public static LottoNumber bonusBall() {

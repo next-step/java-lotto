@@ -2,29 +2,21 @@ package lotto;
 
 import static java.util.Collections.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
 	private final List<Lotto> values;
 
-	public Lottos(Money money) {
-		validateMoney(money);
-
-		values = new ArrayList<>();
-		for (int i = 0; i < money.buyCount(); i++) {
-			values.add(new Lotto());
-		}
-	}
-
 	public Lottos(List<Lotto> values) {
+		validateLottoList(values);
+
 		this.values = values;
 	}
 
-	private static void validateMoney(Money money) {
-		if (!money.isEnough()) {
-			throw new NotEnoughMoneyException("로또를 구입하기엔 돈이 부족합니다.");
+	private static void validateLottoList(List<Lotto> values) {
+		if (values.isEmpty()) {
+			throw new EmptyLottoListException("로또는 최소 1개 이상 존재해야 합니다.");
 		}
 	}
 

@@ -4,7 +4,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		Money money = InputView.pay();
-		Lottos lottos = new Lottos(money);
+		Lottos lottos = money.buyAll();
 		ResultView.printBuyResult(lottos);
 
 		Lotto winLotto = InputView.winLotto();
