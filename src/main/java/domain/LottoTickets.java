@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -15,5 +16,14 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public LottoTickets concat(LottoTickets targetLottoTickets) {
+
+        List<LottoTicket> totalTicket = new ArrayList<>();
+        totalTicket.addAll(lottoTickets);
+        totalTicket.addAll(targetLottoTickets.getLottoTickets());
+
+        return new LottoTickets(totalTicket);
     }
 }
