@@ -21,7 +21,7 @@ class MoneyTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"1000:1", "10000:10", "1200:1"}, delimiter = ':')
-	void pay(String input, int expected) {
+	void divide(String input, int expected) {
 		// given
 		Money money = new Money(input);
 		int lottoPrice = 1000;
