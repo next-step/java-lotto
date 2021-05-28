@@ -25,6 +25,13 @@ public enum Rank {
 		this.winningMoney = winningMoney;
 	}
 
+	public static Rank[] range(int min, int max, boolean asc) {
+		return Arrays.stream(Rank.values())
+			.filter(r -> r.countOfMatch >= min && r.countOfMatch <= max)
+			.sorted((a, b) -> asc ? -1 : a.compareTo(b))
+			.toArray(Rank[]::new);
+	}
+
 	public int getCountOfMatch() {
 		return countOfMatch;
 	}
@@ -49,4 +56,5 @@ public enum Rank {
 			.findFirst()
 			.orElse(MISS);
 	}
+
 }

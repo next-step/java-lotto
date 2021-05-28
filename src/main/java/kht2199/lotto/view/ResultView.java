@@ -46,9 +46,11 @@ public class ResultView {
 		print("당첨 통계");
 		print("---------");
 		// 어떻게 print 할 것인지 ResultView 에서 결정하기 위해, toString 미구현.
-		result.priseResult()
-			.getMatchedPrizeMap()
-			.forEach(this::printResultOfMatched);
+		Map<Rank, Integer> matchedPrizeMap = result.priseResult()
+			.getMatchedPrizeMap();
+		for (Rank value : Rank.range(3, 6, true)) {
+			printResultOfMatched(value, matchedPrizeMap.get(value));
+		}
 		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
 	}
 
