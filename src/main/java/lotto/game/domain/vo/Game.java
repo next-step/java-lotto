@@ -60,4 +60,8 @@ public class Game {
 			.filter(boughtBalls::contains)
 			.count();
 	}
+
+	public boolean isContainBall(Ball ball) {
+		return ballGroup.isContainBall(ball);
+	}
 }

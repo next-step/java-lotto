@@ -4,10 +4,7 @@ import lotto.game.domain.entity.Round;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.vo.InputText;
-import lotto.io.view.GameWinningConditionView;
-import lotto.io.view.TicketBoxView;
-import lotto.io.view.View;
-import lotto.io.view.WinningStaticsView;
+import lotto.io.view.*;
 
 public class ViewStatus {
 	private View view;
@@ -33,6 +30,10 @@ public class ViewStatus {
 
 	public boolean isWinningStaticsView() {
 		return currentViewCode.isWinningStaticsView();
+	}
+
+	private boolean isBonusBallView() {
+		return currentViewCode.isBonusBall();
 	}
 
 	public boolean isGameWinningConditionView() {
@@ -74,6 +75,9 @@ public class ViewStatus {
 		}
 		if (isWinningStaticsView()) {
 			view = WinningStaticsView.generate();
+		}
+		if (isBonusBallView()) {
+			view = BonusBallView.generate();
 		}
 	}
 

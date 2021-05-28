@@ -83,4 +83,8 @@ public class BallGroup {
 		validateNotNull(ballGroup);
 		validateGenerate(ballGroup.balls);
 	}
+
+    public boolean isContainBall(Ball ball) {
+		return balls.contains(ball);
+    }
 }

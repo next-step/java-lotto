@@ -76,6 +76,9 @@ public class WinningStaticsView extends View {
 		if (thisPrize.isNothing()) {
 			return "";
 		}
+		if (thisPrize.isSecondPlace()) {
+			return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", thisPrize.countOfMatch(), thisPrize.winningAmount(), numberOfPrize);
+		}
 		return String.format("%d개 일치 (%d원)- %d개\n", thisPrize.countOfMatch(), thisPrize.winningAmount(), numberOfPrize);
 	}
 
@@ -83,7 +86,8 @@ public class WinningStaticsView extends View {
 		Map<PrizeCode, Integer> resultMap = initializeResultHashMap();
 		for (Game boughtGame : round.boughtGames().games()) {
 			int matchCounts = boughtGame.calculateContainWinningBalls(round.gameWinningCondition());
-			PrizeCode prizeCode = PrizeCode.findCode(matchCounts);
+			boolean isMatchBonusBall = boughtGame.isContainBall(round.bonusBall());
+			PrizeCode prizeCode = PrizeCode.findCode(matchCounts, isMatchBonusBall);
 			plusCountMatchCounts(resultMap, prizeCode);
 		}
 		return resultMap;

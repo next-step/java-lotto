@@ -6,11 +6,11 @@ import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.entity.ViewStatus;
 import lotto.io.domain.vo.InputText;
 
-public class GameWinningConditionView extends View {
+public class BonusBallView extends View {
 
 	@Override
 	public ViewCode viewCode() {
-		return ViewCode.GAME_WINNING_CONDITION;
+		return ViewCode.BONUS_BALL;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class GameWinningConditionView extends View {
 	}
 
 	public static View generate() {
-		return new GameWinningConditionView();
+		return new BonusBallView();
 	}
 
 	private void changeViewStatusWhenRequestInput(ViewStatus viewStatus) {
@@ -37,8 +37,8 @@ public class GameWinningConditionView extends View {
 	}
 
 	private void changeViewStatusWhenSystemIn(ViewStatus viewStatus) {
-		viewStatus.changeCurrentViewCode(ViewCode.BONUS_BALL);
-		viewStatus.changeCurrentProcessCode(ProcessCode.REQUEST_INPUT);
+		viewStatus.changeCurrentViewCode(ViewCode.WINNING_STATICS);
+		viewStatus.changeCurrentProcessCode(ProcessCode.FINISH);
 	}
 
 	private void changeViewStatusDefault(ViewStatus viewStatus) {
@@ -50,6 +50,6 @@ public class GameWinningConditionView extends View {
 	}
 
 	private void processWhenSystemIn(Round round, InputText inputText) {
-		round.setupGameWinningCondition(inputText);
+		round.setupBonusBall(inputText);
 	}
 }

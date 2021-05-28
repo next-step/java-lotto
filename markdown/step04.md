@@ -323,33 +323,33 @@ class Demeter {
     - [x] 3-1.Step04.md 작성
     - [x] 3-2.도메인 주도 설계 이미지 수정
 - [ ] 4.구현
-    - [ ] 4-1.Game Context
-        - [ ] 4-1-1.`Value Object` & `Aggregate`
-            - [ ] 4-1-1-1.`Game(VO)`
-                - [ ] 4-1-1-1-1.`isContainBall()` : 게임에 공이 포함되었는지 여부
-            - [ ] 4-1-1-2.`BallGroup(Aggregate)`
-                - [ ] 4-1-1-2-1.`isContainBall()` : 공 그룹에 공이 포함되었는지 여부
-            - [ ] 4-1-1-3.`PrizeCode(VO)`
-                - [ ] 4-1-1-3-1.`findCode()` : 일치 숫자와 보너스 볼 조합 등수 리턴 
-            - [ ] 4-1-1-4.`Game(VO)`
-                - [ ] 4-1-1-4-1.
-        - [ ] 4-1-2.`Entity`
-            - [ ] 4-1-2-1.`Round`
-                - [ ] 4-1-2-1-1.Field 생성 : `bonusBall : Ball`
-                - [ ] 4-1-2-1-2.`setupBonusBall()` : 보너스 볼 등록
-        - [ ] 4-1-3.`Exception`
-            - [ ] 4-1-3-1.`IllegalBonusBallException`
-    - [ ] 4-2.IO Context
-        - [ ] 4-2-1.`Value Object` & `Aggregate`
-            - [ ] 4-2-1-1.`ViewCode(VO)`
-                - [ ] 4-2-1-1-1.`BONUS_BALL` : enum 추가
-                - [ ] 4-2-1-1-2.`is~()` : 등가성 비교
-        - [ ] 4-2-2.View
-            - [ ] 4-2-2-1.`GameWinningConditionView` : 당첨번호 입력 후 BonusBallView로 변경
-            - [ ] 4-2-2-2.`BonusBallView` : 생성
-            - [ ] 4-2-2-3.`WinningStaticsView` : 당첨결과 출력 내용 수정(2등 추가)
-        - [ ] 4-2-3.`Entity`
-            - [ ] 4-2-3-1.`ViewStatus` : `BonusBallView` 관련 분기처리 추가
+    - [x] 4-1.Game Context
+        - [x] 4-1-1.`Value Object` & `Aggregate`
+            - [x] 4-1-1-1.`Game(VO)`
+                - [x] 4-1-1-1-1.`isContainBall()` : 게임에 공이 포함되었는지 여부
+            - [x] 4-1-1-2.`BallGroup(Aggregate)`
+                - [x] 4-1-1-2-1.`isContainBall()` : 공 그룹에 공이 포함되었는지 여부
+            - [x] 4-1-1-3.`PrizeCode(VO)`
+                - [x] 4-1-1-3-1.`findCode()` : 코드 값 구하기
+        - [x] 4-1-2.`Entity`
+            - [x] 4-1-2-1.`Round`
+                - [x] 4-1-2-1-1.Field 생성 : `bonusBall : Ball`
+                - [x] 4-1-2-1-2.`setupBonusBall()` : 보너스 볼 등록
+        - [x] 4-1-3.`Exception`
+            - [x] 4-1-3-1.`IllegalBonusBallException`
+    - [x] 4-2.IO Context
+        - [x] 4-2-1.`Value Object` & `Aggregate`
+            - [x] 4-2-1-1.`ViewCode(VO)`
+                - [x] 4-2-1-1-1.`BONUS_BALL` : enum 추가
+                - [x] 4-2-1-1-2.`is~()` : 등가성 비교
+        - [x] 4-2-2.View
+            - [x] 4-2-2-1.`GameWinningConditionView`
+                - [x] 4-2-2-1-1.당첨번호 입력 후 BonusBallView로 변경
+                - [x] 4-2-2-1-2.2등 출력내용 변경
+            - [x] 4-2-2-2.`BonusBallView` : 생성
+            - [x] 4-2-2-3.`WinningStaticsView` : 당첨결과 출력 내용 수정(2등 추가)
+        - [x] 4-2-3.`Entity`
+            - [x] 4-2-3-1.`ViewStatus` : `BonusBallView` 관련 분기처리 추가
     - [ ] 4-3.Refactoring
         - [ ] 4-3-1.
         - [ ] 4-3-2.

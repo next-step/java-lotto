@@ -3,36 +3,45 @@ package lotto.game.domain.code;
 import java.util.Arrays;
 
 public enum PrizeCode {
-	NOTHING(6, 0, 0),
-	FIFTH_PLACE(5, 3, 5000),
-	FOURTH_PLACE(4, 4, 50000),
-	THIRD_PLACE(3, 5, 1500000),
-	// SECOND_PLACE(2, 5, 20000000),
-	WINNER(1, 6, 2000000000);
+	NOTHING(0, false, 0),
+	FIFTH_PLACE(3, false, 5_000),
+	FOURTH_PLACE(4, false, 50_000),
+	THIRD_PLACE(5, false, 1_500_000),
+	SECOND_PLACE(5, true, 30_000_000),
+	WINNER(6, false, 2_000_000_000);
 
-	private int grade;
+	private int COUNT_OF_MATCH_THAT_NEEDS_TO_CHECK_IS_MATCH_BONUS_BALL = 5;
+
 	private int countOfMatch;
+	private boolean isMatchBonusBall;
 	private int winningAmount;
 
-	PrizeCode(int grade, int countOfMatch, int winningAmount) {
-		this.grade = grade;
+	PrizeCode(int countOfMatch, boolean isMatchBonusBall, int winningAmount) {
 		this.countOfMatch = countOfMatch;
+		this.isMatchBonusBall = isMatchBonusBall;
 		this.winningAmount = winningAmount;
 	}
 
 	public static PrizeCode findCode(int countOfMatch) {
+		return findCode(countOfMatch, false);
+	}
+
+	public static PrizeCode findCode(int countOfMatch, boolean isMatchBonusBall) {
 		return Arrays.stream(values())
-			.filter(prizeCode -> prizeCode.countOfMatch == countOfMatch)
+			.filter(prizeCode -> prizeCode.isSameCountOfMatchAndBonusBall(countOfMatch, isMatchBonusBall))
 			.findFirst()
 			.orElse(NOTHING);
 	}
 
-	public int countOfMatch() {
-		return this.countOfMatch;
+	private boolean isSameCountOfMatchAndBonusBall(int countOfMatch, boolean isMatchBonusBall) {
+		if (countOfMatch == COUNT_OF_MATCH_THAT_NEEDS_TO_CHECK_IS_MATCH_BONUS_BALL) {
+			return this.countOfMatch == countOfMatch && this.isMatchBonusBall == isMatchBonusBall;
+		}
+		return this.countOfMatch == countOfMatch;
 	}
 
-	public int grade() {
-		return this.grade;
+	public int countOfMatch() {
+		return this.countOfMatch;
 	}
 
 	public int winningAmount() {
@@ -51,9 +60,9 @@ public enum PrizeCode {
 		return this == THIRD_PLACE;
 	}
 
-	// public boolean isSecondPlace() {
-	// 	return this == SECOND_PLACE;
-	// }
+	public boolean isSecondPlace() {
+		return this == SECOND_PLACE;
+	}
 
 	public boolean isWinner() {
 		return this == WINNER;

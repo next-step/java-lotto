@@ -2,6 +2,8 @@ package lotto.game.domain.entity;
 
 import static org.assertj.core.api.Assertions.*;
 
+import lotto.game.domain.vo.Ball;
+import lotto.game.exception.IllegalBonusBallException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -56,6 +58,27 @@ public class RoundTest {
 		//then
 		assertThat(round.money().amount()).isEqualTo(money.amount());
 		assertThat(round.boughtGames().games().size()).isEqualTo(gameSize);
+	}
+
+	@DisplayName("4-1-3-1-1.Field 생성 : `bonusBall : Ball`")
+	@ParameterizedTest(name = "{index} - winningConditionText:[{0}], bonusBallText:[{1}], expectedNotThrowException:{2}")
+	@CsvSource(value = {"1,2,3,4,5,6;1;false", "6,5,4,3,2,1;2;false", "1,2,3,3,4,5,6;7;true",
+		"1, 21, 31, 45, 41, 11;45;false"}, delimiter = ';')
+	void setupBonusBall(String winningConditionText, String bonusBallText, boolean expectedNotThrowException) {
+		//given
+		InputText winningConditionInputText = InputText.generate(winningConditionText);
+
+		InputText inputText = InputText.generate(bonusBallText);
+
+		//when
+		Round round = Round.generate().setupGameWinningCondition(winningConditionInputText);
+
+		//then
+		if (expectedNotThrowException) {
+			assertThatCode(() -> round.setupBonusBall(inputText)).doesNotThrowAnyException();
+			return;
+		}
+		assertThatThrownBy(() -> round.setupBonusBall(inputText)).isInstanceOf(IllegalBonusBallException.class);
 	}
 
 }

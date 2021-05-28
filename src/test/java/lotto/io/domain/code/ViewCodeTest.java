@@ -23,21 +23,31 @@ public class ViewCodeTest {
 		//isTicketBoxView()
 		assertThat(ViewCode.TICKET_BOX.isTicketBoxView()).isEqualTo(true);
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isTicketBoxView()).isEqualTo(false);
+		assertThat(ViewCode.BONUS_BALL.isTicketBoxView()).isEqualTo(false);
 		assertThat(ViewCode.WINNING_STATICS.isTicketBoxView()).isEqualTo(false);
 		assertThat(ViewCode.SHUTDOWN_APPLICATION.isTicketBoxView()).isEqualTo(false);
 		//isGameWinningConditionView()
 		assertThat(ViewCode.TICKET_BOX.isGameWinningConditionView()).isEqualTo(false);
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isGameWinningConditionView()).isEqualTo(true);
+		assertThat(ViewCode.BONUS_BALL.isGameWinningConditionView()).isEqualTo(false);
 		assertThat(ViewCode.WINNING_STATICS.isGameWinningConditionView()).isEqualTo(false);
 		assertThat(ViewCode.SHUTDOWN_APPLICATION.isGameWinningConditionView()).isEqualTo(false);
+		//isBonusBall()
+		assertThat(ViewCode.TICKET_BOX.isBonusBall()).isEqualTo(false);
+		assertThat(ViewCode.GAME_WINNING_CONDITION.isBonusBall()).isEqualTo(false);
+		assertThat(ViewCode.BONUS_BALL.isBonusBall()).isEqualTo(true);
+		assertThat(ViewCode.WINNING_STATICS.isBonusBall()).isEqualTo(false);
+		assertThat(ViewCode.SHUTDOWN_APPLICATION.isBonusBall()).isEqualTo(true);
 		//isWinningStaticsView()
 		assertThat(ViewCode.TICKET_BOX.isWinningStaticsView()).isEqualTo(false);
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isWinningStaticsView()).isEqualTo(false);
+		assertThat(ViewCode.BONUS_BALL.isWinningStaticsView()).isEqualTo(false);
 		assertThat(ViewCode.WINNING_STATICS.isWinningStaticsView()).isEqualTo(true);
 		assertThat(ViewCode.SHUTDOWN_APPLICATION.isWinningStaticsView()).isEqualTo(false);
 		//isShutdownApplication()
 		assertThat(ViewCode.TICKET_BOX.isShutdownApplication()).isEqualTo(false);
 		assertThat(ViewCode.GAME_WINNING_CONDITION.isShutdownApplication()).isEqualTo(false);
+		assertThat(ViewCode.BONUS_BALL.isShutdownApplication()).isEqualTo(false);
 		assertThat(ViewCode.WINNING_STATICS.isShutdownApplication()).isEqualTo(false);
 		assertThat(ViewCode.SHUTDOWN_APPLICATION.isShutdownApplication()).isEqualTo(true);
 	}

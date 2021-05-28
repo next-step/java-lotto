@@ -87,4 +87,24 @@ public class GameTest {
 		//then
 		assertThat(newGame.isContainSameBalls(compareGame)).isEqualTo(expectedIsEqual);
 	}
+
+	@DisplayName("4-1-1-1-1.`isContainBall()` : 게임에 공이 포함되었는지 여부")
+	@ParameterizedTest(name = "{index} - text:[{0}], ballText[{1}], expectedIsContain:{2}")
+	@Order(5)
+	@CsvSource(value = {"1,2,3,4,5,6;1;true", "6,5,4,3,2,1;2;true", "1,2,3,3,4,5,6;7;false",
+		"1, 21, 31, 45, 41, 11;45;true"}, delimiter = ';')
+	void isContainsBall(String text, String ballText, boolean expectedIsContain) {
+		//given
+		InputTextGroup inputTextGroup = InputText.generate(text).splitByComma();
+		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
+
+		InputText inputText = InputText.generate(ballText);
+
+		//when
+		Game newGame = Game.generateCustom(ballGroup);
+		Ball ball = Ball.generate(inputText);
+
+		//then
+		assertThat(newGame.isContainBall(ball)).isEqualTo(expectedIsContain);
+	}
 }
