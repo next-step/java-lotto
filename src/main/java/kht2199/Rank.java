@@ -47,6 +47,6 @@ public enum Rank {
 		return Arrays.stream(values())
 			.filter(r -> r.countOfMatch == countOfMatch)
 			.findFirst()
-			.orElseThrow(RuntimeException::new);
+			.orElse(MISS);
 	}
 }
