@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import lotto.function.TransformElement;
+
 import java.util.List;
 
 import static lotto.domain.LottoStore.*;
@@ -46,13 +47,7 @@ public class LottoBuyingRequest {
 	}
 
 	public List<String> manualLottoNumberStrings() {
-		List<LottoNumberText> lottoNumberTextList = manualLottoNumbers.toList();
-		List<String> lottoNumberStrings = new ArrayList<>();
-
-		for (LottoNumberText lottoNumberText : lottoNumberTextList) {
-			lottoNumberStrings.add(lottoNumberText.text());
-		}
-
-		return lottoNumberStrings;
+		return new TransformElement<LottoNumberText, String>()
+				.apply(manualLottoNumbers.toList(), LottoNumberText::text);
 	}
 }
