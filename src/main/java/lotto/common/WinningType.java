@@ -10,8 +10,6 @@ public enum WinningType {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private static final int MIN_MISS_MATCH_COUNT = 0;
-    private static final int MAX_MISS_MATCH_COUNT = 2;
     private final int matchCount;
     private final int prize;
 
@@ -21,7 +19,7 @@ public enum WinningType {
     }
 
     public static WinningType of(int matchCount, boolean matchBonus) {
-        if (matchCount >= MIN_MISS_MATCH_COUNT && matchCount <= MAX_MISS_MATCH_COUNT) {
+        if (matchCount >= MISS.matchCount && matchCount < FIFTH.matchCount) {
             return MISS;
         }
 
