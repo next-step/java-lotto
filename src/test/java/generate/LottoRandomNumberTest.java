@@ -4,27 +4,29 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoRandomNumberTest {
 
     @RepeatedTest(100)
     public void 로또번호자동생성() {
-        Integer[] randomNumbers = LottoRandomNumber.numbers();
+        List<Integer> randomNumbers = LottoRandomNumber.numbers();
 
-        assertThat(randomNumbers.length).isEqualTo(6);
+        assertThat(randomNumbers.size()).isEqualTo(6);
 
         assertThat(randomNumbers)
-                .containsOnlyOnce(
-                        randomNumbers[0],
-                        randomNumbers[1],
-                        randomNumbers[2],
-                        randomNumbers[3],
-                        randomNumbers[4],
-                        randomNumbers[5]
-                );
+            .containsOnlyOnce(
+                        randomNumbers.get(0),
+                        randomNumbers.get(1),
+                        randomNumbers.get(2),
+                        randomNumbers.get(3),
+                        randomNumbers.get(4),
+                        randomNumbers.get(5)
+            );
     }
 
 }

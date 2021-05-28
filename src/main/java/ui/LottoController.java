@@ -4,6 +4,8 @@ import domain.Lotto;
 import domain.LottoOrderGroup;
 import domain.LottoOrderGroupAnalysis;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static domain.Lotto.*;
@@ -29,7 +31,7 @@ public class LottoController {
 			System.out.println(); // 줄바꿈용
 			System.out.println(ASK_LOTTO_WINNER_NUMBER);
 
-			final Integer[] winnerNumbers = 	validWinnerNumbers(scanner.nextLine().trim());
+			final List<Integer> winnerNumbers = 	validWinnerNumbers(scanner.nextLine().trim());
 
 			LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(winnerNumbers, lottoOrderGroup);
 
@@ -55,17 +57,17 @@ public class LottoController {
 		return  money/ 1000;
 	}
 
-	private Integer[] validWinnerNumbers(String winnerNumbers) {
+	private List<Integer> validWinnerNumbers(String winnerNumbers) {
 		String[] stringNumbers = winnerNumbers.split(",");
 
 		if (stringNumbers.length != LOTTO_NUMBER_LENGTH) {
 			throw new IllegalArgumentException("6자리 숫자를 ,을 이용해 입력해 주세요.");
 		}
 
-		Integer[] numbers = new Integer[LOTTO_NUMBER_LENGTH];
+		List<Integer> numbers = new ArrayList<>();
 
 		for (Integer i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-			numbers[i] = Integer.parseInt(stringNumbers[i]);
+			numbers.add(Integer.parseInt(stringNumbers[i]));
 		}
 
 		return numbers;

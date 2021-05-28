@@ -2,6 +2,8 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoOrderGroupAnalysisTest {
@@ -13,7 +15,7 @@ class LottoOrderGroupAnalysisTest {
 	@Test
 	public void 수익률_계산() {
 		LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(
-				new Integer[]{1, 2, 3, 4, 5, 6}
+				Arrays.asList(1, 2, 3, 4, 5, 6)
 				, new LottoOrderGroup(10)
 		);
 		//??

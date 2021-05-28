@@ -1,6 +1,8 @@
 package generate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static domain.Lotto.LOTTO_NUMBER_LENGTH;
@@ -8,8 +10,8 @@ import static domain.Lotto.LOTTO_NUMBER_LENGTH;
 public class LottoRandomNumber {
 
 
-	public static Integer[] numbers () {
-		Integer[] lottoNumbers = new Integer[LOTTO_NUMBER_LENGTH];
+	public static List<Integer> numbers () {
+		List<Integer> lottoNumbers = new ArrayList<>();
 
 		for (Integer i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
 			Random random = new Random();
@@ -17,7 +19,7 @@ public class LottoRandomNumber {
 			Integer randomNumber = random.nextInt(44)+1;
 
 			if (checkDuplicate(lottoNumbers, randomNumber)) {
-				lottoNumbers[i] = randomNumber;
+				lottoNumbers.add(randomNumber);
 				continue;
 			}
 
@@ -26,7 +28,7 @@ public class LottoRandomNumber {
 		return lottoNumbers;
 	}
 
-	private static Boolean checkDuplicate(Integer[] lottoNumbers, int aRandomNumber){
+	private static Boolean checkDuplicate(List<Integer> lottoNumbers, int aRandomNumber){
 		return !Arrays.asList(lottoNumbers).contains(aRandomNumber);
 	}
 }

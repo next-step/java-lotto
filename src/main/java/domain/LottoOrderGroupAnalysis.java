@@ -1,19 +1,20 @@
 package domain;
 
-import ui.LottoReward;
+import ui.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 public class LottoOrderGroupAnalysis {
-	private final Integer[] winnerNumbers;
+	private final List<Integer> winnerNumbers;
 	private final LottoOrderGroup lottoOrderGroup;
 	private Integer match3 = 0;
 	private Integer match4 = 0;
 	private Integer match5 = 0;
 	private Integer match6 = 0;
 
-	public LottoOrderGroupAnalysis (Integer[] winnerNumbers, LottoOrderGroup lottoOrderGroup) {
+	public LottoOrderGroupAnalysis (List<Integer> winnerNumbers, LottoOrderGroup lottoOrderGroup) {
 		this.winnerNumbers = winnerNumbers;
 		this.lottoOrderGroup = lottoOrderGroup;
 		matchSetting();
@@ -45,10 +46,10 @@ public class LottoOrderGroupAnalysis {
 		final BigDecimal lottoAmount = new BigDecimal(lottoOrderGroup.lottos().size());
 
 		final BigDecimal rewards = new BigDecimal(
-				(match3 * LottoReward.MATCH_3.getMoney())
-						+ (match4 * LottoReward.MATCH_4.getMoney())
-						+ (match5 * LottoReward.MATCH_5.getMoney())
-						+ (match6 * LottoReward.MATCH_6.getMoney())
+				(match3 * Rank.THIRD.money())
+						+ (match4 * Rank.SECOND.money())
+						+ (match5 * Rank.FIRST.money())
+						+ (match6 * Rank.FIFTH.money())
 		);
 		if (rewards.compareTo(new BigDecimal(0)) == 0) {
 			return "0";

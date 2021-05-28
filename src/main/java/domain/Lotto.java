@@ -1,31 +1,34 @@
 package domain;
 
+import ui.Rank;
+
 import java.util.Arrays;
+import java.util.List;
 
 public class Lotto {
 	public static final Integer LOTTO_NUMBER_LENGTH = 6;
-	private Integer matchCount;
+	private Rank rank = Rank.NONE;
 
-	private final Integer[] numbers;
+	private final List<Integer> numbers;
 
-	public Lotto (Integer[] numbers) {
+	public Lotto (List<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
 	@Override
 	public String toString() {
-		return Arrays.toString(numbers);
+		return numbers.toString();
 	}
 
-	public Integer[] numbers () {
+	public List<Integer> numbers () {
 		return numbers;
 	}
 
-	public Integer matchCount () {
-		return matchCount;
+	public Rank rank (Rank rank) {
+		return this.rank = rank;
 	}
 
-	public void matchCount (Integer matchCount) {
-		this.matchCount = matchCount;
+	public Rank rank () {
+		return rank;
 	}
 }
