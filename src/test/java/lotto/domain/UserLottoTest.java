@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,5 +91,29 @@ class UserLottoTest {
 
 		// then
 		assertThat(report).isNotNull();
+	}
+
+	@Test
+	void given_null_to_constructor() {
+		// given
+		List<LottoTicket> lottoTickets = null;
+
+		// when
+		Throwable throwable = catchThrowable(() -> new UserLotto(lottoTickets));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void given_empty_list_to_constructor() {
+		// given
+		List<LottoTicket> lottoTickets = Collections.emptyList();
+
+		// when
+		Throwable throwable = catchThrowable(() -> new UserLotto(lottoTickets));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
 	}
 }
