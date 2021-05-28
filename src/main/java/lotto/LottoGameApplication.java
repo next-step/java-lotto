@@ -5,9 +5,9 @@ import lotto.domain.LottoRandomNumbersGenerator;
 
 public class LottoGameApplication {
 
-	public static void main(String[] args) {
-		LottoGameController controller = new LottoGameController(new LottoRandomNumbersGenerator());
-		controller.play();
-	}
+    public static void main(String[] args) {
+        LottoGameController controller = new LottoGameController(new LottoRandomNumbersGenerator());
+        controller.play();
+    }
 
 }

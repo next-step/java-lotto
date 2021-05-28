@@ -5,15 +5,15 @@ import java.util.List;
 
 public class TestRandomNumbersGenerator implements RandomNumbersGenerator {
 
-	private final List<Integer> numbers;
+    private final List<Integer> numbers;
 
-	public TestRandomNumbersGenerator(Integer[] numbers) {
-		this.numbers = Arrays.asList(numbers);
-	}
+    public TestRandomNumbersGenerator(Integer[] numbers) {
+        this.numbers = Arrays.asList(numbers);
+    }
 
-	@Override
-	public List<Integer> generateNumbers() {
-		return this.numbers;
-	}
+    @Override
+    public List<Integer> generateNumbers() {
+        return this.numbers;
+    }
 
 }
