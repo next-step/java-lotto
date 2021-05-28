@@ -4,13 +4,11 @@ import java.util.Scanner;
 
 public class InputView {
     private Scanner scanner = new Scanner(System.in);
-    private static final int LOTTO_PRICE = 1000;
 
     public int inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         int price = scanner.nextInt();
-        int amount = price / LOTTO_PRICE;
-        return amount;
+        return price;
     }
 
     public String inputWinningNumber() {
