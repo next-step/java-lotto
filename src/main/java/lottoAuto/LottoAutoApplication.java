@@ -1,25 +1,33 @@
 package lottoAuto;
 
-import lottoAuto.model.LottoAuto;
-import lottoAuto.model.LottoStatistic;
-import lottoAuto.model.Lotto;
-import lottoAuto.model.Lottos;
-import lottoAuto.view.LottoAutoResultView;
+import lottoAuto.model.*;
+import lottoAuto.view.InputView;
+import lottoAuto.view.ResultView;
+
+import java.util.Map;
 
 public class LottoAutoApplication {
 
     public static void main(String[] args) {
-        LottoAutoResultView lottoView = new LottoAutoResultView();
-        int amount = lottoView.showAmount();
+        ResultView resultView = new ResultView();
+        InputView inputView = new InputView();
+
+        int price = inputView.inputPrice();
+        int amount = resultView.showAmount(price);
 
         LottoAuto lottoAuto = new LottoAuto();
-        Lottos userLotto = lottoAuto.inputUserLottoNumber(amount);
-        lottoView.showUserLotto(userLotto);
+        Lottos userLottos = lottoAuto.inputUserLottoNumber(amount);
+        resultView.showUserLotto(userLottos);
 
-        String winningLottoString = lottoView.showWinningNumber();
+        String winningLottoString = inputView.inputWinningNumber();
         Lotto winningLotto = lottoAuto.inputWinningNumber(winningLottoString);
+        int bonusBall = inputView.inputBonusBall();
 
-        int bonusBall = lottoView.showBonusBall();
+        LottoStatistic lottoStatistic = new LottoStatistic(userLottos,winningLotto,bonusBall);
+        LottoResults lottoResults = lottoStatistic.getStatistic();
 
+        Map<Rank,Long> resultMap = resultView.showWinningStatistic(lottoResults);
+        double revenue = lottoStatistic.getRevenue(price,resultMap);
+        resultView.showRevenue(revenue);
     }
 }
