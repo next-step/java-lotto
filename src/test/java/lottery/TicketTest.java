@@ -1,13 +1,10 @@
 package lottery;
 
-import static lottery.LottoNo.*;
 import static lottery.fixture.Const.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.LinkedHashSet;
-import java.util.Set;
 
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
 import lottery.exceptions.InvalidTicketSizeException;

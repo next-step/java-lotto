@@ -32,7 +32,7 @@ public final class Ticket {
 		this.lottoNumbers = lottoNumbers;
 	}
 
-	public Set<LottoNo> numbers() {
+	public Set<LottoNumber> numbers() {
 		return lottoNumbers.values();
 	}
 

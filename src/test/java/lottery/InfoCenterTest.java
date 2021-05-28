@@ -1,6 +1,6 @@
 package lottery;
 
-import static lottery.LottoNo.*;
+import static lottery.LottoNumber.*;
 import static lottery.fixture.Const.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,8 +13,6 @@ import org.assertj.core.util.Lists;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import lottery.fixture.Const;
 
 class InfoCenterTest {
 
@@ -101,7 +99,7 @@ class InfoCenterTest {
 
 	@Test
 	void 보너스점수로_당첨될_경우() {
-		Set<LottoNo> 로또번호_1_2_3_4_5_7 = Sets.newLinkedHashSet(of(1), of(2), of(3), of(4), of(5), of(7));
+		Set<LottoNumber> 로또번호_1_2_3_4_5_7 = Sets.newLinkedHashSet(of(1), of(2), of(3), of(4), of(5), of(7));
 		Tickets tickets = getTickets(
 			로또번호_1_2_3_4_5_7,
 			로또번호_1_2_3_4_5_7,
@@ -126,9 +124,9 @@ class InfoCenterTest {
 		assertThat(resultMap.getOrDefault(LotteryMatchType.SIX_MATCH, 0)).isEqualTo(sixMatchNumber);
 	}
 
-	private Tickets getTickets(Set<LottoNo>... numbers) {
+	private Tickets getTickets(Set<LottoNumber>... numbers) {
 		List<Ticket> tickets = new ArrayList<>();
-		for (Set<LottoNo> number : numbers) {
+		for (Set<LottoNumber> number : numbers) {
 			tickets.add(Ticket.of(LottoNumbers.from(number), TicketType.MANUAL));
 		}
 		return Tickets.of(tickets);

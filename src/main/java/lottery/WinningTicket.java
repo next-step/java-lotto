@@ -7,11 +7,11 @@ import java.util.Set;
 public class WinningTicket {
 
 	private Ticket ticket;
-	private LottoNo bonus;
+	private LottoNumber bonus;
 	private static final String NOT_VALID_WINNING_TICKET_NUMBERS_EXCEPTION_MESSAGE = "잘못된 당첨 정보 입니다";
 	private static final String NOT_VALID_BONUS_EXCEPTION_MESSAGE = "잘못된 보너스 번호 입니다";
 
-	public WinningTicket(Ticket ticket, LottoNo bonus) {
+	public WinningTicket(Ticket ticket, LottoNumber bonus) {
 		setTicket(ticket);
 		setBonus(bonus);
 	}
@@ -23,12 +23,12 @@ public class WinningTicket {
 		this.ticket = ticket;
 	}
 
-	private void setBonus(LottoNo bonus) {
+	private void setBonus(LottoNumber bonus) {
 		this.bonus = bonus;
 	}
 
 	public LotteryMatchType getMatchTypeWith(Ticket targetTicket) {
-		LinkedHashSet<LottoNo> targetNumbers = new LinkedHashSet<>(targetTicket.numbers());
+		LinkedHashSet<LottoNumber> targetNumbers = new LinkedHashSet<>(targetTicket.numbers());
 		targetNumbers.removeAll(this.ticket.numbers());
 
 		LotteryMatchType matchType = LotteryMatchType.byMatchCount(Ticket.SIZE_OF_TICKET - targetNumbers.size());
@@ -38,7 +38,7 @@ public class WinningTicket {
 		return matchType;
 	}
 
-	private boolean isBonusMatchCount(LottoNo bonus, LotteryMatchType matchType, Set<LottoNo> winningTicketNumbers) {
+	private boolean isBonusMatchCount(LottoNumber bonus, LotteryMatchType matchType, Set<LottoNumber> winningTicketNumbers) {
 		return matchType == LotteryMatchType.FIVE_MATCH && winningTicketNumbers.contains(bonus);
 	}
 

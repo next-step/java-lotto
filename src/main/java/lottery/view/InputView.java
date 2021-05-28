@@ -3,7 +3,7 @@ package lottery.view;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lottery.LottoNo;
+import lottery.LottoNumber;
 import lottery.Tickets;
 
 public class InputView {
@@ -18,7 +18,7 @@ public class InputView {
 
 	public void printTickets(Tickets tickets) {
 		tickets.getValues().forEach(ticket -> {
-			Set<LottoNo> numbers = ticket.numbers();
+			Set<LottoNumber> numbers = ticket.numbers();
 			print("[" + numbers.stream()
 				.map(lottoNo -> String.valueOf(lottoNo.value()))
 				.collect(Collectors.joining(", ")) + "]");

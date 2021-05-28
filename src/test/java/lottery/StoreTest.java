@@ -1,6 +1,5 @@
 package lottery;
 
-import static lottery.LottoNo.*;
 import static lottery.fixture.Const.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,9 +56,9 @@ class StoreTest {
 
 
 
-	private Tickets getTickets(Set<LottoNo>... numbers) {
+	private Tickets getTickets(Set<LottoNumber>... numbers) {
 		List<Ticket> tickets = new ArrayList<>();
-		for (Set<LottoNo> number : numbers) {
+		for (Set<LottoNumber> number : numbers) {
 			tickets.add(Ticket.of(LottoNumbers.from(number), TicketType.MANUAL));
 		}
 		return Tickets.of(tickets);

@@ -1,21 +1,20 @@
 package lottery;
 
-import java.util.Comparator;
 import java.util.Objects;
 
-public class LottoNo implements Comparable<LottoNo> {
+public class LottoNumber implements Comparable<LottoNumber> {
 
 	private int value;
 
-	public static LottoNo of(int value) {
-		return new LottoNo(value);
+	public static LottoNumber of(int value) {
+		return new LottoNumber(value);
 	}
 
-	public static LottoNo of(String value) {
-		return new LottoNo(Integer.parseInt(value));
+	public static LottoNumber of(String value) {
+		return new LottoNumber(Integer.parseInt(value));
 	}
 
-	private LottoNo(int value) {
+	private LottoNumber(int value) {
 		setValue(value);
 	}
 
@@ -34,10 +33,10 @@ public class LottoNo implements Comparable<LottoNo> {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (!(o instanceof LottoNo))
+		if (!(o instanceof LottoNumber))
 			return false;
-		LottoNo lottoNo = (LottoNo)o;
-		return value == lottoNo.value;
+		LottoNumber lottoNumber = (LottoNumber)o;
+		return value == lottoNumber.value;
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class LottoNo implements Comparable<LottoNo> {
 	}
 
 	@Override
-	public int compareTo(LottoNo o) {
+	public int compareTo(LottoNumber o) {
 		return Integer.compare(this.value, o.value);
 	}
 }
