@@ -11,18 +11,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoGameTest {
 
 	LottoGame lottoGame;
-	TestRandomNumbersGenerator testRandomNumbersGenerator;
 
 	@BeforeEach
 	void setUp() {
-		lottoGame = new LottoGame();
-		testRandomNumbersGenerator = new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6});
+		lottoGame = new LottoGame(new TestRandomNumbersGenerator(new Integer[]{1, 2, 3, 4, 5, 6}));
 	}
 
 	@Test
 	@DisplayName("로또를 모두 자동으로 구매하는 테스트")
 	void purchaseAutoLottos() {
-		PurchaseLottos purchaseLottos = lottoGame.purchaseLottos(new PurchaseRequest(14000), testRandomNumbersGenerator);
+		PurchaseRequest purchaseRequest = new PurchaseRequest(new PurchaseAmount(14000));
+		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
 		assertThat(purchaseLottos.size()).isEqualTo(14);
 	}
 
@@ -35,23 +34,9 @@ public class LottoGameTest {
 				new Lotto(1, 2, 3, 4, 5, 6),
 				new Lotto(1, 2, 3, 4, 5, 6)
 		);
-		PurchaseLottos purchaseLottos = lottoGame.purchaseLottos(new PurchaseRequest(14000, manaulLottos), testRandomNumbersGenerator);
+		PurchaseRequest purchaseRequest = new PurchaseRequest(new PurchaseAmount(14000), manaulLottos);
+		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
 		assertThat(purchaseLottos.size()).isEqualTo(14); //전체
-		assertThat(purchaseLottos.getManualLottos()).hasSize(4); //수동
-		assertThat(purchaseLottos.getAutoLottos()).hasSize(10); //자동
-	}
-
-	@Test
-	@DisplayName("수동으로 구매할 로또개수가 총 구매금액을 초과하는 경우 예외발생 테스트")
-	void purchaseWrongManualLottos() {
-		Lottos manaulLottos = new Lottos(
-				new Lotto(1, 2, 3, 4, 5, 6),
-				new Lotto(1, 2, 3, 4, 5, 6),
-				new Lotto(1, 2, 3, 4, 5, 6)
-		);
-
-		assertThatThrownBy(() -> lottoGame.purchaseLottos(new PurchaseRequest(2000, manaulLottos), testRandomNumbersGenerator))
-				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 }

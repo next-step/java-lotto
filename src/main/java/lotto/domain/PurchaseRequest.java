@@ -6,45 +6,38 @@ public class PurchaseRequest {
 	private final PurchaseAmount purchaseAmount;
 	private final Lottos manualLottos;
 
-	public PurchaseRequest(int purchaseAmount) {
-		this(new PurchaseAmount(purchaseAmount));
-	}
-
 	public PurchaseRequest(PurchaseAmount purchaseAmount) {
 		this.purchaseAmount = purchaseAmount;
 		this.manualLottos = new Lottos();
 	}
 
-	public PurchaseRequest(int purchaseAmount, Lottos manaulLottos) {
-		this(new PurchaseAmount(purchaseAmount), manaulLottos);
-	}
-
 	public PurchaseRequest(PurchaseAmount purchaseAmount, Lottos manaulLottos) {
-		validationManualPurchase(purchaseAmount, manaulLottos);
+		validationManualLottos(purchaseAmount, manaulLottos);
 		this.purchaseAmount = purchaseAmount;
 		this.manualLottos = manaulLottos;
 	}
 
-	private void validationManualPurchase(PurchaseAmount amount, Lottos lottos) {
-		int needPurchseAmount = calculateManualPurchaseAmount(lottos);
-		if (!amount.isGreaterThen(needPurchseAmount)) {
-			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MANUAL_AVAILABLE_PURCHASES, amount, needPurchseAmount));
+	private void validationManualLottos(PurchaseAmount purchaseAmount, Lottos manualLottos) {
+		int manualQuantity = manualLottos.size();
+		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		if (autoQuantity < 0) {
+			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MANUAL_AVAILABLE_PURCHASES, purchaseAmount, manualQuantity));
 		}
-	}
-
-	protected static int calculateManualPurchaseAmount(Lottos lottos) {
-		return PurchaseAmount.AMOUNT_PER_UNIT * lottos.size();
-	}
-
-	public int findNumberOfAutomaticPurchases() {
-		int numberOfAvailablePurchases = purchaseAmount.findNumberOfAvailablePurchases();
-		if (!manualLottos.isEmpty()) {
-			numberOfAvailablePurchases -= manualLottos.size();
-		}
-		return numberOfAvailablePurchases;
 	}
 
 	public Lottos getManualLottos() {
 		return manualLottos;
+	}
+
+	public PurchaseAmount getPurchaseAmount() {
+		return purchaseAmount;
+	}
+
+	public int getManualLottoQuantity() {
+		return manualLottos.size();
+	}
+
+	public int getAutomaticLottoQuantity() {
+		return purchaseAmount.availablePurchasesQuantityMinusManualQuantity(getManualLottoQuantity());
 	}
 }

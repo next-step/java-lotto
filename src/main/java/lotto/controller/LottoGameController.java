@@ -15,15 +15,15 @@ public class LottoGameController {
 	public void play() {
 		PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
 		Lottos manualLottos = InputView.inputManualLottos();
-
 		PurchaseRequest purchaseRequest = new PurchaseRequest(purchaseAmount, manualLottos);
-		PurchaseLottos purchaseLottos = new LottoGame().purchaseLottos(purchaseRequest, randomNumbersGenerator);
-		InputView.printPurchaseLottos(purchaseLottos);
+
+		LottoGame lottoGame = new LottoGame(randomNumbersGenerator);
+		Lottos purchaseLottos = lottoGame.purchaseLottos(purchaseRequest);
+		InputView.printPurchaseLottos(purchaseRequest, purchaseLottos);
 
 		WinningLotto winningLotto = InputView.inputWinningLotto();
 		LottoResults lottoResults = purchaseLottos.findResult(winningLotto);
 		ResultView.printLottoResult(lottoResults);
-
 	}
 
 }

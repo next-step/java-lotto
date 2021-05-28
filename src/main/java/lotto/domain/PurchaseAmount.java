@@ -15,8 +15,12 @@ public class PurchaseAmount {
 		this.purchaseAmount = purchaseAmount;
 	}
 
-	public int findNumberOfAvailablePurchases() {
+	public int availablePurchasesQuantity() {
 		return this.purchaseAmount / AMOUNT_PER_UNIT;
+	}
+
+	public int availablePurchasesQuantityMinusManualQuantity(int manualQuantity) {
+		return (this.purchaseAmount / AMOUNT_PER_UNIT) - manualQuantity;
 	}
 
 	private void validationMinimum(int purchaseAmount) {

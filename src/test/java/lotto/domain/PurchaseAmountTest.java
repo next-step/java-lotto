@@ -24,8 +24,8 @@ public class PurchaseAmountTest {
 	@CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5400:5", "5900:5", "6100:6"}, delimiter = ':')
 	void findNumberOfAvailablePurchases(int money, int count) {
 		PurchaseAmount purchaseAmount = new PurchaseAmount(money);
-		int lottoCount = purchaseAmount.findNumberOfAvailablePurchases();
-		assertThat(lottoCount).isEqualTo(count);
+		int quantity = purchaseAmount.availablePurchasesQuantity();
+		assertThat(quantity).isEqualTo(count);
 	}
 
 }

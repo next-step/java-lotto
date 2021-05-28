@@ -6,11 +6,9 @@ import java.util.List;
 
 public class Lottos {
 
-	private final List<Lotto> lottos;
+	public static final String MESSAGE_INVALID_MANUAL_AVAILABLE_PURCHASES = "총 금액 %s 원으로 수동로또 %d 개를 구입할 수 없습니다. (금액부족)";
 
-	public Lottos() {
-		this.lottos = new ArrayList<>();
-	}
+	private final List<Lotto> lottos;
 
 	public Lottos(Lotto... lottos) {
 		this.lottos = Arrays.asList(lottos);
@@ -18,6 +16,28 @@ public class Lottos {
 
 	public Lottos(List<Lotto> lottos) {
 		this.lottos = lottos;
+	}
+
+	public Lottos(RandomNumbersGenerator randomNumbersGenerator, PurchaseAmount purchaseAmount, Lottos manualLottos) {
+		validationManualLottos(purchaseAmount, manualLottos);
+		lottos = new ArrayList<>(manualLottos.getLottos());
+		int manualQuantity = manualLottos.size();
+		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		generateRandomNumbers(randomNumbersGenerator, autoQuantity);
+	}
+
+	private void validationManualLottos(PurchaseAmount purchaseAmount, Lottos manualLottos) {
+		int manualQuantity = manualLottos.size();
+		int autoQuantity = purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity);
+		if (autoQuantity < 0) {
+			throw new IllegalArgumentException(String.format(MESSAGE_INVALID_MANUAL_AVAILABLE_PURCHASES, purchaseAmount, manualQuantity));
+		}
+	}
+
+	private void generateRandomNumbers(RandomNumbersGenerator randomNumbersGenerator, int generateCount) {
+		for (int i = 0; i < generateCount; i++) {
+			lottos.add(new Lotto(randomNumbersGenerator));
+		}
 	}
 
 	public LottoResults findResult(WinningLotto winningLotto) {
@@ -35,17 +55,5 @@ public class Lottos {
 
 	public int size() {
 		return lottos.size();
-	}
-
-	public boolean isEmpty() {
-		return lottos.isEmpty();
-	}
-
-	public void addLottos(Lottos lottos) {
-		addAll(lottos.getLottos());
-	}
-
-	private void addAll(List<Lotto> lottos) {
-		this.lottos.addAll(lottos);
 	}
 }

@@ -17,6 +17,7 @@ public class InputView {
 	public static final String MESSAGE_ERROR_PREFIX = "[ 예외발생 ] : ";
 	public static final String MESSAGE_EMPTY = "";
 	public static final String MESSAGE_INPUT_COUNT_OF_MANUAL = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String MESSAGE_INVALID_NUMBER_REINPUT = "유효하지 않은 숫자를 입력하셨습니다. 다시 입력해주세요.";
 	public static final String MESSAGE_INVALID_NUMBER = "유효하지 않은 숫자를 입력하셨습니다.";
 	public static final String MESSAGE_INVALID_PURCHASE_AMOUNT = "구입금액은 숫자(정수)만 입력가능합니다.";
 	private static final Scanner scanner = new Scanner(System.in);
@@ -126,6 +127,9 @@ public class InputView {
 	private static LottoNumber toBonusNumber(String inputNumber) {
 		try {
 			return new LottoNumber(inputNumber);
+		} catch (NumberFormatException e) {
+			printError(MESSAGE_INVALID_NUMBER);
+			return null;
 		} catch (IllegalArgumentException e) {
 			printError(e.getMessage());
 			return null;
@@ -135,6 +139,9 @@ public class InputView {
 	private static Lotto toLotto(String inputNumbers) {
 		try {
 			return new Lotto(toNumbers(inputNumbers, INPUT_LOTTO_NUMBERS_DELIMITER));
+		} catch (NumberFormatException e) {
+			printError(MESSAGE_INVALID_NUMBER_REINPUT);
+			return null;
 		} catch (IllegalArgumentException e) {
 			printError(e.getMessage());
 			return null;
@@ -170,17 +177,16 @@ public class InputView {
 		return inputNumbers.split(delimiter);
 	}
 
-	public static void printPurchaseLottos(PurchaseLottos purchaseLottos) {
+	public static void printPurchaseLottos(PurchaseRequest purchaseRequest, Lottos purchaseLottos) {
+		int manualQuantity = purchaseRequest.getManualLottoQuantity();
+		int autoQuantity = purchaseRequest.getAutomaticLottoQuantity();
+
 		print();
-		print(String.format(MESSAGE_PURCHAGE_COMPLETE, purchaseLottos.sizeOfManual(), purchaseLottos.sizeOfAuto()));
+		print(String.format(MESSAGE_PURCHAGE_COMPLETE, manualQuantity, autoQuantity));
 
-		for (Lotto lotto : purchaseLottos.getManualLottos()) {
+		for (Lotto lotto : purchaseLottos.getLottos()) {
 			print(lotto);
 		}
-		for (Lotto lotto : purchaseLottos.getAutoLottos()) {
-			print(lotto);
-		}
-
 		print();
 	}
 }
