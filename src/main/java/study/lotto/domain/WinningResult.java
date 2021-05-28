@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
@@ -26,7 +26,7 @@ public class WinningResult {
         winningPrize.ifPresent(w -> winningResult.computeIfPresent(w, (key, count) -> count+1));
     }
 
-    public Map<WinningPrize, Integer> value(){
+    public Map<WinningPrize, Integer> value() {
         return winningResult;
     }
 

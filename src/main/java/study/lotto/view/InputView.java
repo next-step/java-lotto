@@ -13,7 +13,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         boolean isRightPrice = false;
-        while (!isRightPrice){
+        while (!isRightPrice) {
             System.out.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
             input = scanner.next();
             isRightPrice = checkInput(input);

@@ -2,6 +2,8 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.WinningPrize;
+import study.lotto.domain.WinningResult;
 
 
 import java.math.BigDecimal;

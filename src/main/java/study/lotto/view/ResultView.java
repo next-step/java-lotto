@@ -1,6 +1,6 @@
 package study.lotto.view;
 
-import study.lotto.*;
+import study.lotto.domain.*;
 
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class ResultView {
 
 
     private String additionalMessage(BigDecimal rate) {
-        if (rate.compareTo(BigDecimal.ONE) < 0){
+        if (rate.compareTo(BigDecimal.ONE) < 0) {
             return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         return "";

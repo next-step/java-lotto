@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 public class StudyTest {
 
     @Test
-    void splite(){
+    void splite() {
         String data = "1,2";
         String[] result = data.split(",");
         assertThat(result).contains("1");
@@ -16,7 +16,7 @@ public class StudyTest {
     }
 
     @Test
-    void substringTest(){
+    void substringTest() {
         String data = "(1,2)";
         int startIndex = data.indexOf("(")+1;
         int endIndex = data.indexOf(")");
@@ -26,7 +26,7 @@ public class StudyTest {
 
     @DisplayName("길이 이상 위치의 char값 가져올때 StringIndexOutOfBoundsException 발생 확인")
     @Test
-    void charAtTest(){
+    void charAtTest() {
         String data = "abc";
         assertThatThrownBy(() -> data.charAt(3)).isInstanceOf(StringIndexOutOfBoundsException.class);
         assertThatExceptionOfType(StringIndexOutOfBoundsException.class).isThrownBy(() -> data.charAt(4));

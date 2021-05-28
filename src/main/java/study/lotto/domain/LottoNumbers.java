@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.domain;
 
 import study.lotto.util.LottoNumberGenerator;
 
