@@ -16,16 +16,14 @@ public class LottoNumber {
 	}
 
 	public LottoNumber(String number) {
-		validationRange(number);
+		final int value;
 		try {
-			this.number = Integer.parseInt(number);
+			value = Integer.parseInt(number);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(MESSAGE_INVALID_NUMBER);
 		}
-	}
-
-	private void validationRange(String number) {
-		validationRange(Integer.parseInt(number));
+		validationRange(value);
+		this.number = value;
 	}
 
 	private void validationRange(int number) {
