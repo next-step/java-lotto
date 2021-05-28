@@ -9,7 +9,6 @@ public class GameResult {
     private List<GameWinningResult> gameWinningResults;
 
     public GameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, LottoNumber bonusNumber) {
-        throwDuplicatedBonusBallException(winningLottoTicket, bonusNumber);
         this.gameWinningResults = getGameResult(winningLottoTicket, userLottoTickets, bonusNumber);
     }
 
@@ -24,12 +23,6 @@ public class GameResult {
         }
 
         return gameWinningResult;
-    }
-
-    private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
-        if (winningLottoTicket.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
-        }
     }
 
     public List<GameWinningResult> getGameResult() {

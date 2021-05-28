@@ -15,7 +15,11 @@ public class GameView {
         LottoTickets userLottoTickets = generateLottoTicket(manualTicketCount, money); // 로또 티켓 생성
         LottoTicket winningLottoTicket = inputWinningLottoTicket(); // 지난주 당첨 티켓 입력
         LottoNumber bonusNumber = inputBonusNumber(winningLottoTicket); //보너스 볼 입력
-        showGameResult(winningLottoTicket, userLottoTickets, money, bonusNumber); // 게임 결과 출력
+
+        GameResult gameResult = new GameResult(winningLottoTicket, userLottoTickets, bonusNumber);
+        resultView.printGameResult(gameResult.getGameResult()); // 게임 결과 출력
+        long prizeSum = userLottoTickets.getPrizeSum(winningLottoTicket, bonusNumber);
+        resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력
     }
 
     private Money pay() {
@@ -94,14 +98,6 @@ public class GameView {
             System.out.println(iae.getMessage());
             return inputBonusNumber(winningLottoTicket);
         }
-    }
-
-    private void showGameResult(LottoTicket winningLottoTicket, LottoTickets userLottoTickets, Money money, LottoNumber bonusNumber) {
-        GameResult gameResult = new GameResult(winningLottoTicket, userLottoTickets, bonusNumber);
-        resultView.printGameResult(gameResult.getGameResult()); // 게임 결과 출력
-
-        long prizeSum = userLottoTickets.getPrizeSum(winningLottoTicket, bonusNumber);
-        resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력
     }
 
     private void throwDuplicatedBonusBallException(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
