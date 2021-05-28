@@ -29,10 +29,6 @@ public class PurchaseAmount {
 		}
 	}
 
-	public boolean isGreaterThen(int purchaseAmount) {
-		return this.purchaseAmount >= purchaseAmount;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
