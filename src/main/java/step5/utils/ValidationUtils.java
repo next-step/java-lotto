@@ -7,44 +7,34 @@ public class ValidationUtils {
     private static final String WINNING_NUMBER_COMMA_EXCEPTION = "당첨번호는 쉼표(,)로 구분되어야합니다.";
     private static final String WINNING_NUMBER_NULL_EXCEPTION = "당첨번호를 입력해주세요.";
     private static final String WINNING_NUMBER_SIX_DIGIT_EXCEPTION = "당첨번호는 6자리 숫자로 구성되어야합니다.";
+    private static final String WINNING_BONUS_DUPLICATION_EXCEPTION = "보너스볼은 당첨번호와 중복되서는 안됩니다.";
     private static final int LOTTO_END_DIGIT = 6;
 
     private ValidationUtils() {
         throw new AssertionError();
     }
 
-    public static boolean isNullCheck(String winningNumbers) {
+    public static void isNull(String winningNumbers) {
         if (winningNumbers == null || winningNumbers.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean validWinningNumbersComma(String winningNumbers) {
-        if (!winningNumbers.matches(MATCH_PRICE)) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean validWinningNumbersDigit(int size) {
-        if (size != LOTTO_END_DIGIT) {
-            return false;
-        }
-        return true;
-    }
-
-    public static Set<Integer> validWinningNumbers(String winningNumbers) {
-        if (!ValidationUtils.isNullCheck(winningNumbers)) {
             throw new RuntimeException(WINNING_NUMBER_NULL_EXCEPTION);
         }
-        if (!ValidationUtils.validWinningNumbersComma(winningNumbers)) {
+    }
+
+    public static void validWinningNumbersComma(String winningNumbers) {
+        if (!winningNumbers.matches(MATCH_PRICE)) {
             throw new RuntimeException(WINNING_NUMBER_COMMA_EXCEPTION);
         }
-        Set<Integer> winningNumberList = StringUtils.processStringNumbers(winningNumbers);
-        if (!ValidationUtils.validWinningNumbersDigit(winningNumberList.size())) {
+    }
+
+    public static void validWinningNumbersDigit(int size) {
+        if (size != LOTTO_END_DIGIT) {
             throw new RuntimeException(WINNING_NUMBER_SIX_DIGIT_EXCEPTION);
         }
-        return winningNumberList;
+    }
+
+    public static void validDuplicationNumbers(Set<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new RuntimeException(WINNING_BONUS_DUPLICATION_EXCEPTION);
+        }
     }
 }
