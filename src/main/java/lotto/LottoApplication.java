@@ -1,10 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoBuyingRequest;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberText;
 import lotto.domain.LottoReport;
-import lotto.domain.LottoStore;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketConverter;
 import lotto.domain.ManualLottoCount;
@@ -68,8 +68,8 @@ public class LottoApplication {
 
 	private UserLotto buyLotto(Money money, ManualLottoNumbers manualLottoNumbers) {
 		LottoBuyingRequest lottoBuyingRequest = new LottoBuyingRequest(money, manualLottoNumbers);
-		LottoStore lottoStore = new LottoStore();
-		UserLotto userLotto = lottoStore.buy(lottoBuyingRequest);
+		LottoMachine lottoMachine = new LottoMachine();
+		UserLotto userLotto = lottoMachine.buy(lottoBuyingRequest);
 
 		sendMessage(lottoView.userLottoCountView(lottoBuyingRequest));
 		sendMessage(lottoView.userLottoNumberListView(userLotto));

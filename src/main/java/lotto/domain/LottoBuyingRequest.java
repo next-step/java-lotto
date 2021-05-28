@@ -5,7 +5,7 @@ import lotto.function.TransformElement;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.LottoStore.*;
+import static lotto.domain.LottoMachine.*;
 
 public class LottoBuyingRequest {
 

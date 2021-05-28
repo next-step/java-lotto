@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoStore.*;
+import static lotto.domain.LottoMachine.*;
 import static lotto.util.ValidationUtils.*;
 
 public class Money {

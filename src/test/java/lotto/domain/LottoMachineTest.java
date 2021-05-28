@@ -59,4 +59,22 @@ class LottoMachineTest {
 		// then
 		assertThat(lottoTickets).isEqualTo(expected);
 	}
+
+	@Test
+	void buy() {
+		// given
+		String moneyStr = "10000";
+		List<LottoNumberText> lottoNumberTextList = Arrays.asList(new LottoNumberText("1,2,3,4,5,6"),
+				new LottoNumberText("1,2,3,4,5,6"));
+		LottoBuyingRequest lottoBuyingRequest = new LottoBuyingRequest(new Money(moneyStr),
+				new ManualLottoNumbers(lottoNumberTextList));
+		LottoMachine lottoMachine = new LottoMachine();
+
+		// when
+		UserLotto userLotto = lottoMachine.buy(lottoBuyingRequest);
+
+		// then
+		assertThat(userLotto).isNotNull();
+		assertThat(userLotto.count()).isEqualTo(10);
+	}
 }

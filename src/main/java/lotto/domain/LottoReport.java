@@ -8,6 +8,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.LottoMachine.*;
+
 public class LottoReport {
 
 	private static final int SCALE = 2;
@@ -50,7 +52,7 @@ public class LottoReport {
 	}
 
 	private int spentMoney() {
-		return lottoRankList.size() * LottoStore.PRICE;
+		return lottoRankList.size() * PRICE;
 	}
 
 	public Map<LottoRank, Integer> lottoRankMap() {
