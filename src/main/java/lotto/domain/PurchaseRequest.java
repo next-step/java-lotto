@@ -33,11 +33,11 @@ public class PurchaseRequest {
 		return purchaseAmount;
 	}
 
-	public int getManualLottoQuantity() {
+	public int manualQuantity() {
 		return manualLottos.size();
 	}
 
-	public int getAutomaticLottoQuantity() {
-		return purchaseAmount.availablePurchasesQuantityMinusManualQuantity(getManualLottoQuantity());
+	public int autoQuantity() {
+		return purchaseAmount.availablePurchasesQuantityMinusManualQuantity(manualQuantity());
 	}
 }

@@ -178,8 +178,8 @@ public class InputView {
 	}
 
 	public static void printPurchaseLottos(PurchaseRequest purchaseRequest, Lottos purchaseLottos) {
-		int manualQuantity = purchaseRequest.getManualLottoQuantity();
-		int autoQuantity = purchaseRequest.getAutomaticLottoQuantity();
+		int manualQuantity = purchaseRequest.manualQuantity();
+		int autoQuantity = purchaseRequest.autoQuantity();
 
 		print();
 		print(String.format(MESSAGE_PURCHAGE_COMPLETE, manualQuantity, autoQuantity));
