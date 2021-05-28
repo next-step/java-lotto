@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.common.ErrorCode;
 import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,17 +18,25 @@ public class InputView {
 
     public long inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        return scanner.nextLong();
-
+        try {
+            return nextLongLine();
+        } catch (NumberFormatException nfe) {
+            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
+            return inputMoney();
+        }
     }
 
     public int inputManualTicketCount() {
         System.out.println(INPUT_MANUAL_TICKET_COUNT_MESSSAGE);
-        return scanner.nextInt();
+        try {
+            return nextIntLint();
+        } catch (NumberFormatException ime) {
+            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
+            return inputManualTicketCount();
+        }
     }
 
     public List<LottoTicket> inputManualLottoTicket(int manualTicketCount) {
-        scanner.nextLine(); // clear scanner buffer
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         System.out.println(INPUT_MANUAL_TICKET_MESSAGE);
         for (int i = 0; i < manualTicketCount; i++) {
@@ -43,7 +53,22 @@ public class InputView {
 
     public int inputBonusBall() {
         System.out.println(INPUT_BONUS_BALL);
-        return scanner.nextInt();
+        try{
+            return nextIntLint();
+        }catch (NumberFormatException nfe) {
+            System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
+            return inputBonusBall();
+        }
+    }
+
+    private long nextLongLine() {
+        String line = scanner.nextLine();
+        return Long.parseLong(line);
+    }
+
+    private int nextIntLint() {
+        String line = scanner.nextLine();
+        return Integer.parseInt(line);
     }
 
     public void close() {
