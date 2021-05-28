@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lotto.core.exception.LottoRuleException;
 
 @EqualsAndHashCode(of = "number")
-public class Ball implements Comparable {
+public class Ball implements Comparable<Ball> {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
@@ -27,9 +27,7 @@ public class Ball implements Comparable {
     }
 
     @Override
-    public int compareTo(Object obj) {
-        Ball ball = (Ball) obj;
-
+    public int compareTo(Ball ball) {
         return this.number - ball.number;
     }
 
