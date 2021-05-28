@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.function.TransformElement;
 
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.LottoStore.*;
@@ -48,6 +49,7 @@ public class LottoBuyingRequest {
 
 	public List<String> manualLottoNumberStrings() {
 		return new TransformElement<LottoNumberText, String>()
+				.andThen(Collections::unmodifiableList)
 				.apply(manualLottoNumbers.toList(), LottoNumberText::text);
 	}
 }

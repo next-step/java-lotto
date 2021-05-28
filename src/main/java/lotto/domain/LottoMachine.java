@@ -26,8 +26,9 @@ class LottoMachine {
 	}
 
 	List<LottoTicket> generate(int count) {
-		return Collections.unmodifiableList(new FillListWithRepeatOperation<LottoTicket>()
-				.apply(count, this::generate));
+		return new FillListWithRepeatOperation<LottoTicket>()
+				.andThen(Collections::unmodifiableList)
+				.apply(count, this::generate);
 	}
 
 	private LottoTicket generate() {

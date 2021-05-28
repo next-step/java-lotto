@@ -14,6 +14,8 @@ import lotto.domain.UserLotto;
 import lotto.domain.WinningLotto;
 import lotto.function.FillListWithRepeatOperation;
 
+import java.util.Collections;
+
 public class LottoApplication {
 
 	public static final int NORMAL_SIGNAL = 1;
@@ -79,8 +81,9 @@ public class LottoApplication {
 		sendMessage(lottoView.inputManualLottoNumberView());
 
 		return new ManualLottoNumbers(new FillListWithRepeatOperation<LottoNumberText>()
-			.apply(manualLottoCount.count(),
-				() -> new LottoNumberText(userInterface.receive())));
+				.andThen(Collections::unmodifiableList)
+				.apply(manualLottoCount.count(),
+						() -> new LottoNumberText(userInterface.receive())));
 	}
 
 	private ManualLottoCount receiveManualLottoCount(Money money) {
