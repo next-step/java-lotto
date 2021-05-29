@@ -3,6 +3,7 @@ package io.mwkwon.lotto.domain;
 import io.mwkwon.lotto.enums.Rank;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,29 @@ public class BuyLottosTest {
         List<Lotto> lotto = Arrays.asList(Lotto.create(lottoNumbers));
         BuyLottos buyLottos = new BuyLottos(lotto);
         assertThat(buyLottos).isEqualTo(new BuyLottos(lotto));
+    }
+
+    @Test
+    void 수동_자동_로또_리스트를_활용하여_구매_로또_정상_생성_테스트() {
+        List<Lotto> manualLottos = new ArrayList<>();
+        manualLottos.add(Lotto.create(Arrays.asList(
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6))));
+        List<Lotto> autoLottos = new ArrayList<>();
+        autoLottos.add(Lotto.create(Arrays.asList(
+                LottoNumber.create(7),
+                LottoNumber.create(8),
+                LottoNumber.create(9),
+                LottoNumber.create(10),
+                LottoNumber.create(11),
+                LottoNumber.create(12))));
+
+        BuyLottos buyLottos = BuyLottos.create(manualLottos, autoLottos);
+        assertThat(buyLottos.lottos().size()).isEqualTo(2);
     }
 
     @Test

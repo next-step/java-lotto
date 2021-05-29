@@ -16,8 +16,8 @@ public class LottoStoreTest {
     @CsvSource(value = {"10000:10", "25000:25", "12500:12"}, delimiter = ':')
     void 입력된_구입금액_기준_로또_구매_기능_테스트(int value, int excepted) {
         LottoStore lottoStore = new LottoStore(new LottoInputView(), new LottoMachine());
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(LottoPayment.create(value));
-        assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
+        List<Lotto> buyLottos = lottoStore.buyAutoLottos(LottoPayment.create(value), PurchaseQuantity.create(0));
+        assertThat(buyLottos.size()).isEqualTo(excepted);
     }
 
     @Test

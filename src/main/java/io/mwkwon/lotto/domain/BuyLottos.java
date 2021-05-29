@@ -14,6 +14,11 @@ public class BuyLottos {
         this.lottos = lottos;
     }
 
+    public static BuyLottos create(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        manualLottos.addAll(autoLottos);
+        return new BuyLottos(manualLottos);
+    }
+
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }

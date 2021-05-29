@@ -5,6 +5,8 @@ import io.mwkwon.lotto.interfaces.DataGenerator;
 import io.mwkwon.lotto.interfaces.LottoGenerator;
 import io.mwkwon.lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoApplication {
 
     private final DataGenerator dataGenerator;
@@ -20,8 +22,11 @@ public class LottoApplication {
     public void run() {
         LottoStore lottoStore = new LottoStore(dataGenerator, lottoGenerator);
         LottoPayment lottoPayment = lottoStore.createLottoPayment();
-        resultView.printBuyLottoCount(lottoPayment);
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(lottoPayment);
+        PurchaseQuantity manualLottoPurchaseQuantity = lottoStore.createManualLottoPurchaseQuantity(lottoPayment);
+        List<Lotto> manualLottos = lottoStore.createManualLottos(manualLottoPurchaseQuantity);
+        List<Lotto> autoLottos = lottoStore.buyAutoLottos(lottoPayment, manualLottoPurchaseQuantity);
+        resultView.printBuyLottoCount(manualLottos, autoLottos);
+        BuyLottos buyLottos = BuyLottos.create(manualLottos, autoLottos);
         resultView.printBuyLottos(buyLottos);
         Lotto winningLotto = lottoStore.createWinningLotto();
         LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);

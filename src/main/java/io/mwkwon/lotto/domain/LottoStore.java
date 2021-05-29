@@ -17,8 +17,9 @@ public final class LottoStore {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public BuyLottos buyAutoLottos(LottoPayment lottoPayment) {
-        return lottoGenerator.createAutoLottos(lottoPayment);
+    public List<Lotto> buyAutoLottos(LottoPayment lottoPayment, PurchaseQuantity manualLottoPurchaseQuantity) {
+        PurchaseQuantity autoLottoPurchaseQuantity = manualLottoPurchaseQuantity.calcAutoLottoPurchaseQuantity(lottoPayment);
+        return lottoGenerator.createAutoLottos(autoLottoPurchaseQuantity);
     }
 
     public Lotto createWinningLotto() {

@@ -6,9 +6,7 @@ import io.mwkwon.lotto.domain.LottoPayment;
 import io.mwkwon.lotto.domain.PurchaseQuantity;
 import io.mwkwon.lotto.interfaces.DataGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -76,7 +74,7 @@ public class LottoInputView implements DataGenerator {
             return lottoNumbers;
         }
         System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS);
-        while (purchaseQuantity.isSame(lottoNumbers.size())) {
+        while (purchaseQuantity.isLessThan(lottoNumbers.size())) {
             String value = this.requestInput();
             List<LottoNumber> lottoNumber = this.createLottoNumbers(value);
             lottoNumbers.add(lottoNumber);
@@ -105,12 +103,17 @@ public class LottoInputView implements DataGenerator {
     }
 
     private List<LottoNumber> createLottoNumbers(String strLottoNumbers) {
-        this.checkNullAndEmpty(strLottoNumbers);
-        this.checkValidNumberAndDelimiter(strLottoNumbers);
-        String[] split = strLottoNumbers.split(DELIMITER);
-        return Stream.of(split)
-                .map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim())))
-                .collect(Collectors.toList());
+        try {
+            this.checkNullAndEmpty(strLottoNumbers);
+            this.checkValidNumberAndDelimiter(strLottoNumbers);
+            String[] split = strLottoNumbers.split(DELIMITER);
+            return Stream.of(split)
+                    .map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim())))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + RETRY_MESSAGE);
+            return Collections.emptyList();
+        }
     }
 
     private LottoNumber createBonusLottoNumber(String strNumber, Lotto winningLotto) {

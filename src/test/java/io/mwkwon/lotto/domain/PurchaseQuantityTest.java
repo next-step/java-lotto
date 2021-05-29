@@ -2,9 +2,6 @@ package io.mwkwon.lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -36,7 +33,7 @@ public class PurchaseQuantityTest {
     void 로또_구매_금액을_기준으로_수동_구매_수량을_제외한_자동_구매_수량_금액_정상_계산_테스트() {
         PurchaseQuantity purchaseQuantity = PurchaseQuantity.create(3);
         LottoPayment lottoPayment = LottoPayment.create(10000);
-        int autoPurchaseQuantity = purchaseQuantity.calcAutoLottoPurchaseQuantity(lottoPayment);
-        assertThat(autoPurchaseQuantity).isEqualTo(7);
+        PurchaseQuantity autoPurchaseQuantity = purchaseQuantity.calcAutoLottoPurchaseQuantity(lottoPayment);
+        assertThat(autoPurchaseQuantity.isSame(7)).isTrue();
     }
 }

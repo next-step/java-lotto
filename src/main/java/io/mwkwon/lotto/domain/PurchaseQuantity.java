@@ -2,8 +2,6 @@ package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class PurchaseQuantity {
@@ -32,14 +30,19 @@ public class PurchaseQuantity {
         }
     }
 
-    public int calcAutoLottoPurchaseQuantity(LottoPayment lottoPayment) {
-        return lottoPayment.calcLottoBuyQuantity() - quantity;
+    public PurchaseQuantity calcAutoLottoPurchaseQuantity(LottoPayment lottoPayment) {
+        int autoPurchaseQuantity = lottoPayment.calcLottoBuyQuantity() - quantity;
+        return PurchaseQuantity.create(autoPurchaseQuantity);
     }
 
     public boolean isSame(int other) {
         return quantity == other;
     }
 
+
+    public boolean isLessThan(int other) {
+        return other < quantity;
+    }
 
     @Override
     public boolean equals(Object o) {
