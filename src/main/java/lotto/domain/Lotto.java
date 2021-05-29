@@ -57,7 +57,7 @@ public final class Lotto {
         return count;
     }
 
-    private boolean isNumber(Number number) {
+    public boolean isNumber(Number number) {
         return lottoNumbers.contains(number);
     }
 

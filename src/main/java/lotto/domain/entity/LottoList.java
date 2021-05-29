@@ -29,26 +29,35 @@ public final class LottoList {
         return lottoList.get(index);
     }
 
-    public Rank compareWith(Lotto winningLotto){
-        Rank rank = new Rank();
+    public RankCounter compareWith(Lotto winningLotto, Number bonusNumber){
+        RankCounter rankCounter = new RankCounter();
+        boolean matchBonus = false;
         for (Lotto purchased : lottoList) {
-            checkRank(purchased.confirmWinning(winningLotto), rank);
+            matchBonus = isMatchBonus(purchased, bonusNumber);
+            checkRank(purchased.confirmWinning(winningLotto), rankCounter, matchBonus);
         }
-        return rank;
+        return rankCounter;
     }
 
-    private void checkRank(int count, Rank rank) {
+    private boolean isMatchBonus(Lotto purchased, Number bonusNumber) {
+        return purchased.isNumber(bonusNumber);
+    }
+
+    private void checkRank(int count, RankCounter rankCounter, boolean matchBonus) {
         if (count == 3) {
-            rank.addFourth();
+            rankCounter.addFifth();
         }
         if (count == 4) {
-            rank.addThird();
+            rankCounter.addFourth();
         }
-        if (count == 5) {
-            rank.addSecond();
+        if (count == 5 && !matchBonus) {
+            rankCounter.addThird();
+        }
+        if (count == 5 && matchBonus) {
+            rankCounter.addSecond();
         }
         if (count == 6) {
-            rank.addFirst();
+            rankCounter.addFirst();
         }
     }
 
