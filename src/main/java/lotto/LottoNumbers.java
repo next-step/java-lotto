@@ -4,29 +4,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        LottoValidationUtils.validationLottoNumber(lottoNumbers);
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isContainWinNumber(Integer winNumber) {
-        return lottoNumbers.contains(winNumber);
-    }
-
-    public boolean isContainsBonusNumber(LottoBonusNumber bonusNumber) {
-        return bonusNumber.isContainsBonusNumber(lottoNumbers);
+    public boolean isContainsNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(number -> number.equals(lottoNumber));
     }
 
     public boolean lottoSize(int expectedSize) {
         return lottoNumbers.size() == expectedSize;
     }
 
-    public int compareWinLotto(Lotto winLotto) {
+    public int countMatchWinLottoNumber(Lotto winLotto) {
         int countMatchNumber = 0;
-        for (Integer userLottoNumber : lottoNumbers) {
-            countMatchNumber += winLotto.matchNumber(userLottoNumber);
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            countMatchNumber += winLotto.matchNumber(lottoNumber);
         }
         return countMatchNumber;
     }
@@ -46,6 +42,13 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            stringBuilder.append(lottoNumber.toString());
+            stringBuilder.append(", ");
+        }
+        stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "]");
+        return stringBuilder.toString();
     }
 }

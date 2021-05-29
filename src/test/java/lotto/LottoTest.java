@@ -17,31 +17,22 @@ public class LottoTest {
     @DisplayName("로또 번호가 당첨 번호와 일치하는 갯수를 반환하는 테스트")
     @ParameterizedTest
     @MethodSource("countMatchNumberTest")
-    void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectedRank, LottoBonusNumber bonusNumber) {
-        Lotto lotto = new Lotto(() -> new LottoNumbers(userLotto));
-        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumbers(winLotto)), bonusNumber);
+    void countCollectLottoNumber_일치하는_로또_번호_갯수(List<LottoNumber> userLottoNumbers, List<LottoNumber> winLottoNumbers, LottoRank expectedRank, LottoNumber bonusNumber) {
+        Lotto lotto = new Lotto(() -> new LottoNumbers(userLottoNumbers));
+        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumbers(winLottoNumbers)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectedRank);
     }
 
     static Stream<Arguments> countMatchNumberTest() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), FIRST, new LottoBonusNumber(10)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 9), SECOND, new LottoBonusNumber(6))
-        );
-    }
-
-    @DisplayName("유저 로또 객체와 입력한 당첨 번호 객체가 같은지 테스트")
-    @ParameterizedTest
-    @MethodSource("equalUserLottoAndWinLotto")
-    void isEqualUserLottoAndWinLotto(List<Integer> userRandomLotto, String winLottoInput) {
-        Lotto userLotto = new Lotto(() -> new LottoNumbers(userRandomLotto));
-        Lotto winLotto = new Lotto(LottoValidationUtils.lottoNumberToList(winLottoInput));
-        assertThat(userLotto).isEqualTo(winLotto);
-    }
-
-    static Stream<Arguments> equalUserLottoAndWinLotto() {
-        return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), "2,1,6,4,3,5")
+                Arguments.of(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                        , Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                        , FIRST
+                        , new LottoNumber(10)),
+                Arguments.of(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                        , Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(9))
+                        , SECOND
+                        , new LottoNumber(6))
         );
     }
 }

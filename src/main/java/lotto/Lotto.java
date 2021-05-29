@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -16,26 +14,25 @@ public class Lotto {
         this.lottoNumbers = lottoRandomNumber.createRandomLotto();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank compareWinLotto(Lotto winLotto, LottoBonusNumber bonusNumber) {
-        int matchCount = lottoNumbers.compareWinLotto(winLotto);
+    public LottoRank compareWinLotto(Lotto winLotto, LottoNumber bonusNumber) {
+        int matchCount = lottoNumbers.countMatchWinLottoNumber(winLotto);
         LottoRank userLottoRank = LottoRank.searchRank(matchCount);
         if (userLottoRank.isThird() || userLottoRank.isSecond()) {
-            userLottoRank = LottoRank.searchBonusRank(matchCount, lottoNumbers.isContainsBonusNumber(bonusNumber));
+            userLottoRank = LottoRank.searchBonusRank(matchCount, lottoNumbers.isContainsNumber(bonusNumber));
         }
         return userLottoRank;
     }
 
-    public int matchNumber(Integer userLottoNumber) {
-        return lottoNumbers.isContainWinNumber(userLottoNumber) ? 1 : 0;
+    public boolean isContainsNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.isContainsNumber(bonusNumber);
     }
 
-    public boolean isMatchNumber(Integer winNumber) {
-        return lottoNumbers.isContainWinNumber(winNumber);
+    public int matchNumber(LottoNumber userLottoNumber) {
+        return lottoNumbers.isContainsNumber(userLottoNumber) ? 1 : 0;
     }
 
     @Override

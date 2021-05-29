@@ -54,8 +54,4 @@ public enum LottoRank {
                 .get();
 
     }
-
-    public int rankOfReward(int rankCount) {
-        return winReward * rankCount;
-    }
 }

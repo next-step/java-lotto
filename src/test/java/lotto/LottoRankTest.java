@@ -14,8 +14,8 @@ public class LottoRankTest {
     @DisplayName("맞은 갯수로 등수 조회 검증")
     @ParameterizedTest
     @MethodSource("searchRankTestArg")
-    void searchRank_등수_조회(LottoRank lottoRank, int matchCount, boolean matchBounsYN) {
-        assertThat(LottoRank.searchBonusRank(matchCount, matchBounsYN)).isEqualTo(lottoRank);
+    void searchRank_등수_조회(LottoRank lottoRank, int matchCount, boolean matchBonusYN) {
+        assertThat(LottoRank.searchBonusRank(matchCount, matchBonusYN)).isEqualTo(lottoRank);
     }
 
     static Stream<Arguments> searchRankTestArg() {

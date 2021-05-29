@@ -4,6 +4,7 @@ import lotto.LottoRank;
 import lotto.LottoRecord;
 import lotto.Lottos;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class ResultView {
@@ -23,10 +24,17 @@ public class ResultView {
         System.out.println(WIN_STATISTICS);
         System.out.println("---------");
         Map<LottoRank, Long> result = userLottoRecord.calculateReward();
-        result.forEach(
-                (lottoRank, countMatch) ->
-                        System.out.printf(lottoRank.isSecond() ? BONUS_REWARD_REMARK : REWARD_REMARK, lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1)
-        );
+        result.forEach((lottoRank, countMatch) -> {
+            if (lottoRank.isSecond()) {
+                printMatchBonusNumberRemark(lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
+            } else {
+                System.out.printf(REWARD_REMARK, lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
+            }
+        });
         System.out.printf(REMARK, userLottoRecord.getProfit());
+    }
+
+    private static void printMatchBonusNumberRemark(int matchCount, int winReward, long countMatch) {
+        System.out.printf(BONUS_REWARD_REMARK, matchCount, winReward, countMatch);
     }
 }

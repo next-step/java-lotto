@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.LottoBonusNumber;
-import lotto.LottoValidationUtils;
-import lotto.Pay;
+import lotto.*;
 
 import java.util.Scanner;
 
@@ -31,18 +28,18 @@ public class InputView {
         String winNumber;
         System.out.println(WIN_LOTTO_NUMBER_INPUT);
         winNumber = scanner.nextLine();
-        return new Lotto(LottoValidationUtils.lottoNumberToList(winNumber));
+        return new Lotto(LottoValidationUtils.lottoNumberToListNumbers(winNumber));
     }
 
-    public LottoBonusNumber inputBonusNumber(Lotto winLotto) {
-        LottoBonusNumber lottoBonusNumber;
+    public LottoNumber inputBonusNumber(Lotto winLotto) {
+        LottoNumber bonusNumber;
         try {
             System.out.println(BONUS_LOTTO_NUMBER_INPUT);
-            int bonusNumber = scanner.nextInt();
-            lottoBonusNumber = new LottoBonusNumber(winLotto, bonusNumber);
+            int inputBonusNumber = scanner.nextInt();
+            bonusNumber = new LottoNumber(winLotto, inputBonusNumber);
         } finally {
             if (scanner != null) scanner.close();
         }
-        return lottoBonusNumber;
+        return bonusNumber;
     }
 }

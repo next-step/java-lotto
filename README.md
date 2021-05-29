@@ -108,4 +108,10 @@ chore (maintain)
   * 방안 2 - LottoNumber 에 boolean 리턴값으로하는 보너스 볼 contains 메서드 추가
     * LottoRank.searchRank에 boolean 인자값 추가
 * view 단 개발
-  
+
+## 기능 수정
+* LottoNumber 의 기존 List<Integer> 이었던 상태값을 List<LottoNumber> 로 변경 후 LottNumbers로 클래서명 변경
+  * Lottos -> Lotto 를 상태로 가지는 일급 컬렉션
+  * Lotto 클래스의 인스턴스는 Lotto 명
+    * LottoNumbers 를 상태로 가지는 일급 컬렉션
+  * LottoNumbers -> int LottoNumber 를 상태로 가지는 객체

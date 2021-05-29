@@ -15,10 +15,6 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
     public boolean isCount(int expectedCount) {
         return getCount() == expectedCount;
     }
@@ -27,7 +23,7 @@ public class Lottos {
         this.lottos.add(new Lotto());
     }
 
-    public LottoRecord compareWinLotto(Lotto winLotto, LottoBonusNumber bonusNumber) {
+    public LottoRecord compareWinLotto(Lotto winLotto, LottoNumber bonusNumber) {
         LottoRecord userLottoRecord = new LottoRecord();
         for (Lotto userLotto : lottos) {
             userLottoRecord.recordRank(userLotto.compareWinLotto(winLotto, bonusNumber));
