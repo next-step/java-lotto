@@ -9,28 +9,23 @@ public class Ball implements Comparable<Ball> {
 	public static final int EFFECTIVE_MIN_NUMBER = 1;
 	public static final int EFFECTIVE_MAX_NUMBER = 45;
 
-	private int number;
+	private final int number;
 
 	private Ball(InputText text) {
-		this.number = parse(text);
+		this.number = text.parseInt();
 	}
 
-	private static int parse(InputText text) {
-		return Integer.parseInt(text.value());
-	}
-
-	public static Ball generate(InputText text) throws IllegalBallNumberException {
+	public static Ball generate(InputText text) {
 		validateGenerate(text);
 		return new Ball(text);
 	}
 
-	static void validateGenerate(InputText text) throws IllegalBallNumberException {
-		validateNumberFormat(text);
-		validateEffectiveNumber(text);
+	static void validateGenerate(InputText text) {
+		InputText.validateNumberFormatInputText(text);
+		validateEffectiveNumber(text.parseInt());
 	}
 
-	private static void validateEffectiveNumber(InputText text) throws IllegalBallNumberException {
-		int number = parse(text);
+	private static void validateEffectiveNumber(int number) {
 		if (!isEffectiveNumber(number)) {
 			throw new IllegalBallNumberException("볼 넘버는 "
 				+ EFFECTIVE_MIN_NUMBER + "~" + EFFECTIVE_MAX_NUMBER + "까지의 자연수만 가능합니다. "
@@ -40,14 +35,6 @@ public class Ball implements Comparable<Ball> {
 
 	private static boolean isEffectiveNumber(int number) {
 		return EFFECTIVE_MIN_NUMBER <= number && number <= EFFECTIVE_MAX_NUMBER;
-	}
-
-	private static void validateNumberFormat(InputText text) throws IllegalBallNumberException {
-		try {
-			parse(text);
-		} catch (NumberFormatException e) {
-			throw new IllegalBallNumberException("Integer 값으로 parsing할 수 없습니다. 입력된 값 : " + text.value());
-		}
 	}
 
 	public int number() {
@@ -62,7 +49,7 @@ public class Ball implements Comparable<Ball> {
 		if (!(object instanceof Ball)) {
 			return false;
 		}
-		Ball ball = (Ball)object;
+		Ball ball = (Ball) object;
 		return number == ball.number;
 	}
 
@@ -73,12 +60,6 @@ public class Ball implements Comparable<Ball> {
 
 	@Override
 	public int compareTo(Ball ball) {
-		if (this.number() > ball.number()) {
-			return 1;
-		}
-		if (this.number() < ball.number()) {
-			return -1;
-		}
-		return 0;
+		return Integer.compare(this.number(), ball.number());
 	}
 }

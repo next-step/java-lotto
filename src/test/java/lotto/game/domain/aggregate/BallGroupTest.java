@@ -84,7 +84,7 @@ public class BallGroupTest {
 
 		//then
 		assertThatThrownBy(() -> BallGroup.generate(nullInputTextGroup))
-			.isInstanceOf(IllegalInputTextGroupException.class);
+			.isInstanceOfAny(IllegalInputTextListException.class, IllegalInputTextGroupException.class);
 	}
 
 	@DisplayName("4-1-2-2-2.`allOfBalls()` : 모든 볼의 정보를 초기화하여 static 영역에 가지고 있는다.")
@@ -104,4 +104,22 @@ public class BallGroupTest {
 		assertThat(BallGroup.allOfBalls()).containsSequence(compareBalls);
 	}
 
+	@DisplayName("4-1-1-2-1.`isContainBall()` : 공 그룹에 공이 포함되었는지 여부")
+	@ParameterizedTest(name = "{index} - text:[{0}], ballText[{1}], expectedIsContain:{2}")
+	@Order(5)
+	@CsvSource(value = {"1,2,3,4,5,6;1;true", "6,5,4,3,2,1;2;true", "1,2,3,3,4,5,6;7;false",
+		"1, 21, 31, 45, 41, 11;45;true"}, delimiter = ';')
+	void isContainsBall(String text, String ballText, boolean expectedIsContain) {
+		//given
+		InputTextGroup inputTextGroup = InputText.generate(text).splitByComma();
+
+		InputText inputText = InputText.generate(ballText);
+
+		//when
+		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
+		Ball ball = Ball.generate(inputText);
+
+		//then
+		assertThat(ballGroup.isContainBall(ball)).isEqualTo(expectedIsContain);
+	}
 }
