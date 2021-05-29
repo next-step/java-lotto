@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public class LottoShop {
 	private static final int START_POINT = 0;
 	private static final List<Integer> candidateNumbers;
 	private static final ArrayList<Lotto> EMPTY_LOTTOS = new ArrayList<>();
@@ -21,11 +21,11 @@ public class LottoGenerator {
 		}
 	}
 
-	public Lottos buy(int budget) {
+	public static Lottos buy(int budget) {
 		return buy(budget, EMPTY_LOTTOS);
 	}
 
-	public Lottos buy(int budget, List<Lotto> manualLottos) {
+	public static Lottos buy(int budget, List<Lotto> manualLottos) {
 		List<Lotto> candidateLottos = new ArrayList<>();
 
 		candidateLottos.addAll(manualLottos);
@@ -37,18 +37,18 @@ public class LottoGenerator {
 		return new Lottos(candidateLottos);
 	}
 
-	private int getRemainBudget(int budget, List<Lotto> manualLottos) {
+	private static int getRemainBudget(int budget, List<Lotto> manualLottos) {
 		return budget - (manualLottos.size() * Lotto.LOTTO_PRICE);
 	}
 
-	private int getPossibleCount(int budget) {
+	private static int getPossibleCount(int budget) {
 		if (budget < Lotto.LOTTO_PRICE) {
 			throw new RuntimeException("you can not buy even one lotto");
 		}
 		return budget / Lotto.LOTTO_PRICE;
 	}
 
-	private List<Integer> getRandomLottoNumbers() {
+	private static List<Integer> getRandomLottoNumbers() {
 		Collections.shuffle(candidateNumbers);
 
 		return new ArrayList<>(candidateNumbers.subList(START_POINT, Lotto.LOTTO_LENGTH));

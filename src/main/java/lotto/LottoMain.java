@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.WinnerLotto;
 import lotto.domain.WinnerStatics;
@@ -25,8 +25,6 @@ public class LottoMain {
 	}
 
 	private static Lottos buy(int buyAmount) {
-		LottoGenerator lottoGenerator = new LottoGenerator();
-
-		return lottoGenerator.buy(buyAmount);
+		return LottoShop.buy(buyAmount);
 	}
 }
