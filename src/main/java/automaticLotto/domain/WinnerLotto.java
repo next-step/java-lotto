@@ -7,9 +7,9 @@ public class WinnerLotto {
 	private int bonusNumber;
 
 	public WinnerLotto(List<Integer> numberList, int bonusNumber) {
+		validateBonusNumber(numberList, bonusNumber);
 		this.lotto = new Lotto(numberList);
 		this.bonusNumber = bonusNumber;
-		validateBonusNumber(numberList, bonusNumber);
 	}
 
 	private void validateBonusNumber(List<Integer> numberList, int bonusNumber) {
@@ -19,24 +19,10 @@ public class WinnerLotto {
 	}
 
 	public Ranking match(Lotto boughtLotto) {
-		int matchedCount = 0;
-		boolean isBonusNumberContained = false;
-
-		for (Integer number : boughtLotto.getNumbers()) {
-			matchedCount = getMatchedCount(matchedCount, number);
-		}
-
-		if (boughtLotto.hasNumber(bonusNumber)) {
-			isBonusNumberContained = true;
-		}
-
-		return Ranking.valueOf(new RankingCondition(matchedCount, isBonusNumberContained));
-	}
-
-	private int getMatchedCount(int matchedCount, Integer number) {
-		if (lotto.hasNumber(number)) {
-			matchedCount++;
-		}
-		return matchedCount;
+		return Ranking.valueOf(new RankingCondition(
+			(int)boughtLotto.getNumbers().stream()
+				.filter(number -> lotto.hasNumber(number))
+				.count(),
+			boughtLotto.hasNumber(bonusNumber)));
 	}
 }
