@@ -41,6 +41,11 @@ public class LottoApplicationTest {
                 System.out.println("보너스 볼을 입력해 주세요.");
                 return LottoNumber.create(7);
             }
+
+            @Override
+            public PurchaseQuantity requestManualLottoPurchaseQuantity(LottoPayment lottoPayment) {
+                return PurchaseQuantity.create(3);
+            }
         };
 
         LottoGenerator lottoGenerator = (lottoPayment) -> {

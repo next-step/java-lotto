@@ -3,8 +3,6 @@ package io.mwkwon.lotto.domain;
 import io.mwkwon.lotto.constant.LottoConstants;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class LottoPayment {
     private static final String MINIMUM_EXCEPTION_MESSAGE = "최소 로또 구입 가능 금액은 " + LottoConstants.LOTTO_PRICE + "원 입니다.";
@@ -41,5 +39,9 @@ public final class LottoPayment {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public boolean isGreaterThan(int payment) {
+        return value < payment ;
     }
 }

@@ -74,4 +74,18 @@ public class LottoStoreTest {
         LottoNumber lottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);
         assertThat(lottoNumber).isEqualTo(LottoNumber.create(7));
     }
+
+    @Test
+    void 수동으로_구해할_로또_수_입력_기능_테스트() {
+        LottoInputView lottoInputView = new LottoInputView() {
+            @Override
+            public PurchaseQuantity requestManualLottoPurchaseQuantity(LottoPayment lottoPayment) {
+                return PurchaseQuantity.create(3);
+            }
+        };
+        LottoPayment lottoPayment = LottoPayment.create(14000);
+        LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
+        PurchaseQuantity purchaseQuantity = lottoStore.createManualLottoPurchaseQuantity(lottoPayment);
+        assertThat(purchaseQuantity).isEqualTo(PurchaseQuantity.create(3));
+    }
 }

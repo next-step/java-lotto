@@ -39,4 +39,7 @@ public final class LottoStore {
         return new WinningRanks(winningRanks);
     }
 
+    public PurchaseQuantity createManualLottoPurchaseQuantity(LottoPayment lottoPayment) {
+        return dataGenerator.requestManualLottoPurchaseQuantity(lottoPayment);
+    }
 }
