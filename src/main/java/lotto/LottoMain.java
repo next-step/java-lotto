@@ -1,13 +1,13 @@
-package automaticLotto;
+package lotto;
 
-import automaticLotto.domain.LottoGenerator;
-import automaticLotto.domain.Lottos;
-import automaticLotto.domain.WinnerLotto;
-import automaticLotto.domain.WinnerStatics;
-import automaticLotto.view.InputView;
-import automaticLotto.view.ResultView;
+import lotto.domain.LottoGenerator;
+import lotto.domain.Lottos;
+import lotto.domain.WinnerLotto;
+import lotto.domain.WinnerStatics;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
-public class automaticLottoMain {
+public class LottoMain {
 	public static void main(String[] args) {
 		Lottos boughtLottos = buy(InputView.getBuyAmount());
 

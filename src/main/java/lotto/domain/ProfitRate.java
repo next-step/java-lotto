@@ -1,4 +1,4 @@
-package automaticLotto.domain;
+package lotto.domain;
 
 public class ProfitRate {
 	double profitRate;

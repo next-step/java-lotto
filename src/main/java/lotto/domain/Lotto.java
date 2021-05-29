@@ -1,10 +1,9 @@
-package automaticLotto.domain;
+package lotto.domain;
 
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
@@ -12,21 +11,15 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private List<Integer> numbers;
+	private TreeSet<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
-		validateNumberListSize(new HashSet<>(numberList));
-
-		this.numbers = numberList;
-		sortLottoNumber();
+		numbers = new TreeSet<>(numberList);
+		validateNumberListSize(numbers);
 	}
 
-	private void sortLottoNumber() {
-		numbers.sort(Comparator.comparingInt(x -> x));
-	}
-
-	private void validateNumberListSize(Set<Integer> lotto) {
-		if (lotto.size() != LOTTO_LENGTH) {
+	private void validateNumberListSize(Set<Integer> candidateLotto) {
+		if (candidateLotto.size() != LOTTO_LENGTH) {
 			throw new RuntimeException("lotto numbers must be consist of six numbers");
 		}
 	}
@@ -35,7 +28,7 @@ public class Lotto {
 		return numbers.contains(number);
 	}
 
-	public List<Integer> getNumbers() {
+	public Set<Integer> getNumbers() {
 		return numbers;
 	}
 
@@ -56,6 +49,6 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return numbers + "";
+		return numbers.toString();
 	}
 }

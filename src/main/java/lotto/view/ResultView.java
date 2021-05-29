@@ -1,8 +1,8 @@
-package automaticLotto.view;
+package lotto.view;
 
-import automaticLotto.domain.Lottos;
-import automaticLotto.domain.Ranking;
-import automaticLotto.domain.WinnerStatics;
+import lotto.domain.Lottos;
+import lotto.domain.Ranking;
+import lotto.domain.WinnerStatics;
 
 public class ResultView {
 	public static void printBoughtLottos(Lottos boughtLottos) {
