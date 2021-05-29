@@ -321,14 +321,14 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
         - [x] 5-3-6.일급콜렉션 활용
         - [x] 5-3-7.축약 금지
         - [x] 5-3-8.예외 처리
-- [ ] 6.인수인계
-    - [ ] 6-1.소감 및 피드백 정리
-        - [ ] 6-1-1.느낀점 & 배운점 작성
-        - [ ] 6-1-2.피드백 요청 정리
-    - [ ] 6-2.코드리뷰 요청 및 피드백
-        - [ ] 6-1-1.step5를 gregolee/java-lotto로 push : `git push origin step5`
-        - [ ] 6-1-2.pull request(PR) 작성
-    - [ ] 6-3.Slack을 통해 merge가 되는지 확인한 후에 미션 종료
+- [x] 6.인수인계
+    - [x] 6-1.소감 및 피드백 정리
+        - [x] 6-1-1.느낀점 & 배운점 작성
+        - [x] 6-1-2.피드백 요청 정리
+    - [x] 6-2.코드리뷰 요청 및 피드백
+        - [x] 6-1-1.step5를 gregolee/java-lotto로 push : `git push origin step5`
+        - [x] 6-1-2.pull request(PR) 작성
+    - [x] 6-3.Slack을 통해 merge가 되는지 확인한 후에 미션 종료
 
 ### 2.3. 설계
 
@@ -342,13 +342,18 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
 
 #### 3.1.1. 느낀점
 
-- 
+- TDD, DDD 적용기
+  - 처음에 코드 구현량이 상당히 힘들었습니다.
+  - 적은 양의 원시값(primitive value)과 문자열임에도 값객체, 일급콜렉션 적용은 상당히 많은 테스트를 진행해야 했습니다.
+  - 그러나 단계를 거듭할수록 수정할 코드의 양과 리팩토링이 상당히 빠르게 진행되었습니다.
 
 #### 3.1.2. 배운점
 
-- 
+- 리펙토링은 끝이 없다.
+  - 충분하다고 생각했던 코드가 변경해야 될 지점이 많다는 것을 깨달았습니다.
+  - 이번 리팩토링에 해당 부분을 반영했으나, 추가적으로 진행할 것이 있는지 다시 한 번 관심 있게 봐야할 것 같습니다. 
 
 
 ### 3.2. 피드백 요청
 
-- 
+- 이번 단계에는 피드백 요청할 사항이 없습니다.
