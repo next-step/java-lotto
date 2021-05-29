@@ -1,8 +1,8 @@
-package autolotto;
+package lotto;
 
 import java.math.BigDecimal;
 
-import static autolotto.Lotto.LOTTO_PRICE;
+import static lotto.Lotto.LOTTO_PRICE;
 
 
 public class LottoStatistics {

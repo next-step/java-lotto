@@ -1,6 +1,6 @@
-package autolotto;
+package lotto;
 
-import static autolotto.LottoStatistics.getLottoBuyingCount;
+import static lotto.LottoStatistics.getLottoBuyingCount;
 
 public class App {
 

@@ -1,7 +1,5 @@
-package autolotto;
+package lotto;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
