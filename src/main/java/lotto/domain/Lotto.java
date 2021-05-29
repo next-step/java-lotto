@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
@@ -12,25 +13,28 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private final Set<Integer> numbers;
+	private final Set<LottoNumber> numbers;
 
 	public Lotto(List<Integer> numberList) {
-		numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numberList));
+		numbers = Collections.unmodifiableSortedSet(
+			new TreeSet<>(numberList.stream()
+				.map(x -> new LottoNumber(x))
+				.collect(Collectors.toList())));
 
 		validateNumberListSize(numbers);
 	}
 
-	private void validateNumberListSize(Set<Integer> candidateLotto) {
+	private void validateNumberListSize(Set<LottoNumber> candidateLotto) {
 		if (candidateLotto.size() != LOTTO_LENGTH) {
 			throw new RuntimeException("lotto numbers must be consist of six numbers");
 		}
 	}
 
-	public boolean hasNumber(int number) {
+	public boolean hasNumber(LottoNumber number) {
 		return numbers.contains(number);
 	}
 
-	public Set<Integer> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return numbers;
 	}
 

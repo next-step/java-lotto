@@ -50,6 +50,7 @@ public class LottoShopTest {
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThatThrownBy(() -> LottoShop.buy(1000, manualLottos));
+		assertThatThrownBy(() -> LottoShop.buy(1000, manualLottos))
+			.isInstanceOf(RuntimeException.class);
 	}
 }
