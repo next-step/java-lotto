@@ -67,7 +67,8 @@
     * 수동 번호와 자동 번호 노출
 * 도메인 로직 고도화
     * 로또 번호 원시값 wrapping
-    * 로또 자료구조 변경(기존 : arrayList -> 변경 : treeSet)
+    * 로또 자료구조 변경(기존 : arrayList -> 변경 : unmodifiableSortedSet) / 인스턴스 변수 final 추가
+        * 로또 클래스 immutable로 만들기 위함(getNumbers 로 인스턴스 변수에 바로 접근 가능하기 때문에 add 등의 데이터 변경을 막기 위함)
     * 익셉션 세분화
     * 펙토레 메서드 및 캐시 구현
     * 테스트 코드 상세화
