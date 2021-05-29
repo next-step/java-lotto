@@ -17,8 +17,7 @@ public class GameView {
         LottoTicket winningTicket = inputWinningLottoTicket(); // 지난주 당첨 티켓 입력
         WinningLottoTicket winningLottoTicket = generateWinningLottoTicket(winningTicket);
 
-        GameResult gameResult = new GameResult(winningLottoTicket, lottoTickets);
-        resultView.printGameResult(gameResult.getGameResult()); // 게임 결과 출력
+        resultView.printGameResult(new GameResult().getGameResult(winningLottoTicket, lottoTickets)); // 게임 결과 출력
         long prizeSum = winningLottoTicket.getPrizeSum(lottoTickets);
         resultView.printResultProfit(money.calculateProfit(prizeSum)); // 총 수익률 출력
     }

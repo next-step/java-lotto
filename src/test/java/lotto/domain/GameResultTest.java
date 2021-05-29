@@ -23,7 +23,7 @@ public class GameResultTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 30);
         List<LottoTicket> userLottoTickets = Arrays.asList(new LottoTicket(lottoNumber));
 
-        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets).getGameResult();
+        List<GameWinningResult> gameWinningResults = new GameResult().getGameResult(winningLottoTicket, userLottoTickets);
         GameWinningResult expectedGameWinningResults = new GameWinningResult(WinningType.of(matchCount, false), 1);
         assertThat(gameWinningResults).contains(expectedGameWinningResults);
     }
@@ -36,7 +36,7 @@ public class GameResultTest {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
         List<LottoTicket> userLottoTickets = Arrays.asList(new LottoTicket(lottoNumber));
 
-        List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets).getGameResult();
+        List<GameWinningResult> gameWinningResults = new GameResult().getGameResult(winningLottoTicket, userLottoTickets);
         GameWinningResult expectedGameWinningResult = new GameWinningResult(WinningType.of(matchCount, true), 1);
         assertThat(gameWinningResults).contains(expectedGameWinningResult);
     }
@@ -50,7 +50,7 @@ public class GameResultTest {
                 new LottoTicket("1,2,3,4,5,8"), new LottoTicket("1,2,3,4,7,8"),
                 new LottoTicket("1,2,3,7,8,9"), new LottoTicket("1,2,8,9,10,11"));
 
-        List<GameWinningResult> firstMatchCountResults = new GameResult(winningLottoTicket, firstUserLottoTickets).getGameResult();
+        List<GameWinningResult> firstMatchCountResults = new GameResult().getGameResult(winningLottoTicket, firstUserLottoTickets);
         for(int i = 0; i<=6; i++) {
             GameWinningResult expectedGameWinningResult = new GameWinningResult(WinningType.of(i, false), 1);
             assertThat(firstMatchCountResults).contains(expectedGameWinningResult);
@@ -62,7 +62,7 @@ public class GameResultTest {
                 new LottoTicket("11,12,13,14,15,16"), new LottoTicket("10,8,2,9,1,11"));
 
 
-        List<GameWinningResult> secondMatchCountResults = new GameResult(winningLottoTicket, secondUserLottoTickets).getGameResult();
+        List<GameWinningResult> secondMatchCountResults = new GameResult().getGameResult(winningLottoTicket, secondUserLottoTickets);
         List<GameWinningResult> expectedGameWinningResults = new ArrayList<>();
         expectedGameWinningResults.add(new GameWinningResult(WinningType.FIRST, 1));
         expectedGameWinningResults.add(new GameWinningResult(WinningType.SECOND, 2));
