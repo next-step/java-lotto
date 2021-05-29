@@ -20,7 +20,7 @@ public class Lottos {
 
 	public LottoResult getWinningResult(WinningNumber winningNumber) {
 		return LottoResult.of(lottos.stream()
-				.map(it -> it.checkWinning(winningNumber))
+				.map(lotto -> lotto.checkWinning(winningNumber))
 				.collect(Collectors.toList()));
 	}
 

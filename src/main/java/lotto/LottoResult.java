@@ -24,7 +24,7 @@ public class LottoResult {
 
 	private Map<LottoPrizeType, AtomicLong> enumMapOf(List<LottoPrizeType> lottoResults) {
 		Map<LottoPrizeType, AtomicLong> map = new EnumMap<>(LottoPrizeType.class);
-		lottoResults.forEach(it -> map.computeIfAbsent(it, result -> new AtomicLong(0))
+		lottoResults.forEach(lottoResult -> map.computeIfAbsent(lottoResult, result -> new AtomicLong(0))
 				.getAndIncrement());
 		return map;
 	}
@@ -52,7 +52,7 @@ public class LottoResult {
 	public String toString() {
 		return Arrays.stream(LottoPrizeType.values())
 				.filter(LottoPrizeType::isWinningType)
-				.map(it -> it.getMatchedNumberCount() + "개 일치" + getSecondPrizeString(it) + "(" + it.getPrizeMoney() + "원)- " + lottoResults.getOrDefault(it, new AtomicLong(0)) + "개")
+				.map(lottoPrizeType -> lottoPrizeType.getMatchedNumberCount() + "개 일치" + getSecondPrizeString(lottoPrizeType) + "(" + lottoPrizeType.getPrizeMoney() + "원)- " + lottoResults.getOrDefault(lottoPrizeType, new AtomicLong(0)) + "개")
 				.collect(Collectors.joining(Constants.JOINING_DELIMITER));
 	}
 
