@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoTicket {
     private List<Lotto> lottoList;
-    private LottoStatistics lottoStatistics = new LottoStatistics();
+
 
     public LottoTicket(int num) {
         lottoList = new ArrayList<>();
@@ -18,13 +18,9 @@ public class LottoTicket {
         return lottoList;
     }
 
-    public LottoStatistics lottoStatistics() {
-        return lottoStatistics;
-    }
-
-    public void calculateWinList(int[] winList) {
+    public void compareWinList(int[] winList) {
         for (int i = 0; i < lottoList.size(); i++) {
-            lottoStatistics.collectWin(lottoList.get(i).countWin(winList));
+            lottoList.get(i).calculateWin(winList);
         }
     }
 }
