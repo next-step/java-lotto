@@ -30,8 +30,8 @@ public class LottoTicketGeneratorTest {
 
         //수동 티켓 생성 일치 테스트
         assertThat(lottoManualNumbers)
-                .containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+                .containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
     }
 
     void lottoNumbers_shouldBeInOrder(List<LottoNumber> lottoNumbers) {

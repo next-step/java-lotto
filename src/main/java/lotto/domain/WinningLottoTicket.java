@@ -11,7 +11,7 @@ public class WinningLottoTicket {
     private final LottoNumber bonusNumber;
 
     public WinningLottoTicket(LottoTicket lottoTicket, int bonusNumber) {
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         if (lottoTicket.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
