@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
-	public static final int LOTTO_MINIMUM_NUMBER = 1;
-	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
 	private final Set<LottoNumber> numbers;

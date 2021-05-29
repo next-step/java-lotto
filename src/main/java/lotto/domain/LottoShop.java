@@ -15,7 +15,7 @@ public class LottoShop {
 	}
 
 	private static void initiateCandidateNumbers() {
-		for (int i = Lotto.LOTTO_MINIMUM_NUMBER; i <= Lotto.LOTTO_MAXIMUM_NUMBER; i++) {
+		for (int i = LottoNumber.LOTTO_MINIMUM_NUMBER; i <= LottoNumber.LOTTO_MAXIMUM_NUMBER; i++) {
 			candidateNumbers.add(i);
 		}
 	}
