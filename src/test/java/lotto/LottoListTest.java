@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
-import lotto.domain.entity.Rank;
+import lotto.domain.entity.RankCounter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,13 +37,13 @@ public class LottoListTest {
         Lotto lotto1 = new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
         Lotto lotto2 = new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(7));
         LottoList lottoList = new LottoList(lotto1, lotto2);
-        assertThat(lottoList.compareWith(winningLotto)).isEqualTo(makeRank());
+        assertThat(lottoList.compareWith(winningLotto, new Number(5))).isEqualTo(makeRank());
     }
 
-    private Rank makeRank(){
-        Rank rank = new Rank();
-        rank.addFirst();
-        rank.addSecond();
-        return rank;
+    private RankCounter makeRank(){
+        RankCounter rankCounter = new RankCounter();
+        rankCounter.addFirst();
+        rankCounter.addSecond();
+        return rankCounter;
     }
 }
