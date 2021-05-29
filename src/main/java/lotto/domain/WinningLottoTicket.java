@@ -7,15 +7,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
-    private LottoTicket lottoTicket;
-    private LottoNumber bonusNumber;
+    private final LottoTicket lottoTicket;
+    private final LottoNumber bonusNumber;
 
-    public WinningLottoTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.contains(bonusNumber)) {
+    public WinningLottoTicket(LottoTicket lottoTicket, int bonusNumber) {
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        if (lottoTicket.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(ErrorCode.DUPLICATED_BONUS_NUMBER.getErrorMessage());
         }
         this.lottoTicket = lottoTicket;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = bonusLottoNumber;
     }
 
     public long getPrizeSum(List<LottoTicket> userLottoTickets) {

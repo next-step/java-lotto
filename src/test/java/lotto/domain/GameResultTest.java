@@ -20,7 +20,7 @@ public class GameResultTest {
     @CsvSource(value = {"'1,2,3,4,5,6':'6'", "'1,2,3,4,5,7':'5'", "'1,2,3,4,7,8':'4'", "'1,2,3,7,8,9':'3'",
             "'1,2,7,8,9,10':'2'", "'1,7,8,9,10,11':'1'", "'7,8,9,10,11,12':'0'"}, delimiter = ':')
     void getGameResult_notMatchingBonusNumber(String lottoNumber, int matchCount) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), new LottoNumber(30));
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 30);
         List<LottoTicket> userLottoTickets = Arrays.asList(new LottoTicket(lottoNumber));
 
         List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets).getGameResult();
@@ -33,7 +33,7 @@ public class GameResultTest {
     @CsvSource(value = {"'1,2,3,4,5,6':'6'", "'1,2,3,4,5,7':'5'", "'1,2,3,4,7,8':'4'", "'1,2,3,7,8,9':'3'",
             "'1,2,7,8,9,10':'2'", "'1,7,8,9,10,11':'1'", "'7,8,9,10,11,12':'0'"}, delimiter = ':')
     void getGameResult_matchingBonusNumber(String lottoNumber, int matchCount) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), new LottoNumber(7));
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
         List<LottoTicket> userLottoTickets = Arrays.asList(new LottoTicket(lottoNumber));
 
         List<GameWinningResult> gameWinningResults = new GameResult(winningLottoTicket, userLottoTickets).getGameResult();
@@ -44,7 +44,7 @@ public class GameResultTest {
     @Test
     @DisplayName("게임 결과 테스트_개수 확인")
     void getGameResult_countWinningResult() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), new LottoNumber(7));
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(new LottoTicket("1,2,3,4,5,6"), 7);
         //순서대로 1등, 2등, 3등, 4등, 5등, MISS 로또 티켓
         List<LottoTicket> firstUserLottoTickets = Arrays.asList(new LottoTicket("1,2,3,4,5,6"), new LottoTicket("1,2,3,4,5,7"),
                 new LottoTicket("1,2,3,4,5,8"), new LottoTicket("1,2,3,4,7,8"),

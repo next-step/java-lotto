@@ -97,7 +97,7 @@ public class GameView {
 
     private WinningLottoTicket generateWinningLottoTicket(LottoTicket winningTicket) {
         try {
-            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusBall()); //보너스 볼 입력
+            int bonusNumber = inputView.inputBonusBall(); //보너스 볼 입력
             return new WinningLottoTicket(winningTicket, bonusNumber);
         } catch (NumberFormatException nfe) {
             System.out.println(ErrorCode.INPUT_MISS_MATCHED.getErrorMessage());
