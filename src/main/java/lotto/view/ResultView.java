@@ -24,17 +24,17 @@ public class ResultView {
         System.out.println(WIN_STATISTICS);
         System.out.println("---------");
         Map<LottoRank, Long> result = userLottoRecord.calculateReward();
-        result.forEach((lottoRank, countMatch) -> {
-            if (lottoRank.isSecond()) {
-                printMatchBonusNumberRemark(lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
-            } else {
-                System.out.printf(REWARD_REMARK, lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
-            }
-        });
+        result.forEach((lottoRank, countMatch) ->
+                printRewardRemark(lottoRank, countMatch)
+        );
         System.out.printf(REMARK, userLottoRecord.getProfit());
     }
 
-    private static void printMatchBonusNumberRemark(int matchCount, int winReward, long countMatch) {
-        System.out.printf(BONUS_REWARD_REMARK, matchCount, winReward, countMatch);
+    private static void printRewardRemark(LottoRank lottoRank, Long countMatch) {
+        if (lottoRank.isSecond()) {
+            System.out.printf(BONUS_REWARD_REMARK, lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
+        } else {
+            System.out.printf(REWARD_REMARK, lottoRank.getMatchCount(), lottoRank.getWinReward(), countMatch - 1);
+        }
     }
 }
