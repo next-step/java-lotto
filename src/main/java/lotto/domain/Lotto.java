@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,10 +12,11 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private TreeSet<Integer> numbers;
+	private Set<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
-		numbers = new TreeSet<>(numberList);
+		numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numberList));
+
 		validateNumberListSize(numbers);
 	}
 
