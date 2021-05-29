@@ -32,7 +32,7 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(money);
+        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
         //then
         assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
@@ -44,7 +44,7 @@ public class ShopTest {
         Money money = new Money(900);
         //when
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> shop.buyAutoLotto(money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
+                .isThrownBy(() -> shop.buyAutoLotto(new LottoTicket(), money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
         //then
     }
 
@@ -54,7 +54,7 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(money);
+        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
         //then
         assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
@@ -65,7 +65,7 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(money);
+        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
         //then
         assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
@@ -115,6 +115,41 @@ public class ShopTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> shop.checkDuplicateBonusNumber(winningNumber, bonusNumber))
                 .withMessageContaining(ErrorMessage.DUPLICATE_BONUS_NUMBER);
+    }
+
+    @Test
+    @DisplayName("셀프 로또 구매 확인")
+    void buySelfLottoAmount() {
+        //given
+        Money money = shop.buySelfLotto(new Money(10000), 7);
+        //then
+        assertThat(money.amount()).isEqualTo(3000);
+    }
+
+    @Test
+    @DisplayName("셀프 로또 금액 부족")
+    void buySelfLottoFailed() {
+        //given
+        //when
+        //then
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> shop.buySelfLotto(new Money(10000), 100))
+                .withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
+    }
+
+    @Test
+    @DisplayName("셀프 구매후 자동 구매")
+    void buySelfAutoLotto() {
+        //given
+        //when
+        Money money = shop.buySelfLotto(new Money(10000), 5);
+        LottoTicket lottoTicket = new LottoTicket();
+        for (int i = 0; i < 5; i++) {
+            lottoTicket.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        }
+        LottoTicket lottoTicket1 = shop.buyAutoLotto(lottoTicket, money);
+        //then
+        assertThat(lottoTicket1.tickets().size()).isEqualTo(10);
     }
 
     private Set<LottoNumber> initWinningNumbers() {

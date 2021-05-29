@@ -19,19 +19,24 @@ public class OutputView {
         println(Message.INPUT_LOTTO_ANSWER.message());
     }
 
-    public static void printLottoAmount(int amount) {
-        println(Message.LOTTO_PURCHASE.message(), amount);
-    }
-
     public static void printLottoTicket(LottoTicket lottoTicket) {
         for(Lotto lotto : lottoTicket.tickets()) {
             printLotto(lotto);
         }
     }
 
-    public static void resultMessage() {
+    public static void printInputSelfLottoAmount() {
+        println(Message.INPUT_SELF_LOTTO_AMOUNT.message());
+    }
+
+    public static void printInputSelfLottoNumber() {
+        println(Message.INPUT_SELF_LOTTO_NUMBERS.message());
+    }
+
+    public static void resultMessage(LottoResult lottoResult, Money money) {
         println(Message.RESULT.message());
         println(Message.LINE.message());
+        OutputView.resultIncome(lottoResult, money);
     }
 
     public static void resultIncome(LottoResult lottoResult, Money money) {
@@ -43,6 +48,11 @@ public class OutputView {
 
     public static void printBonusNumber() {
         println(Message.INPUT_BONUS_NUMBER.message());
+    }
+
+    public static void printLottoAmount(int self, int auto) {
+        System.out.printf("수동으로 %d장, 자동으로  %d 개를 구매했습니다", self, auto);
+        System.out.println();
     }
 
     private static void printLotto(Lotto lotto) {

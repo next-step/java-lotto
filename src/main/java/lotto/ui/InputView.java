@@ -19,7 +19,7 @@ public class InputView {
         return new Money(toInteger(input));
     }
 
-    public static Set<LottoNumber> inputWinningNumber() {
+    public static Set<LottoNumber> inputLottoNumber() {
         String input = SCANNER.nextLine();
         String[] winningNumber = input.split(NUMBER_DELIMITER);
         checkAnswer(winningNumber);
@@ -39,7 +39,7 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
-        return SCANNER.nextInt();
+    public static int inputNumber() {
+        return toInteger(SCANNER.nextLine());
     }
 }

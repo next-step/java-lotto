@@ -3,7 +3,7 @@ package lotto.shop;
 import lotto.error.ErrorMessage;
 
 public class Money {
-    private final int amount;
+    private int amount;
 
     public Money(int amount) {
         checkNegative(amount);
@@ -12,6 +12,10 @@ public class Money {
 
     public int amount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     private void checkNegative(int amount) {

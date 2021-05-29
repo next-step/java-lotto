@@ -10,13 +10,22 @@ import lotto.lotto.LottoResult;
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;
 
-    public LottoTicket buyAutoLotto(Money money) {
+    public Money buySelfLotto(Money money, int amount) {
         checkMoney(money);
-        return selectAuto(money.amount() / PURCHASE_PRICE);
+        return purchase(money, amount);
     }
 
-    private LottoTicket selectAuto(int amount) {
-        LottoTicket lottoTicket = new LottoTicket();
+    public LottoTicket buyAutoLotto(LottoTicket lottoTicket, Money money) {
+        checkMoney(money);
+        return selectAuto(lottoTicket, money.amount() / PURCHASE_PRICE);
+    }
+
+    private Money purchase(Money money, int amount) {
+        checkMoney(money);
+        return new Money(calculate(money, amount));
+    }
+
+    private LottoTicket selectAuto(LottoTicket lottoTicket, int amount) {
         for (int i = 0; i < amount; i++) {
             lottoTicket.add(createAutoLotto());
         }
@@ -39,11 +48,22 @@ public class Shop {
         }
     }
 
+    private void checkMoney(Money money, int amount) {
+        if (money.amount() < amount * PURCHASE_PRICE) {
+            throw new RuntimeException(ErrorMessage.NOT_ENOUGH_MONEY);
+        }
+    }
+
     private Lotto createAutoLotto() {
         return generateNumber();
     }
 
     private Lotto generateNumber() {
         return new Lotto(NumberGenerator.generate());
+    }
+
+    private int calculate(Money money, int amount) {
+        checkMoney(money, amount);
+        return money.amount() - amount * PURCHASE_PRICE;
     }
 }

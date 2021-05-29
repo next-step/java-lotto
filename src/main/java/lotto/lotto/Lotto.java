@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +10,11 @@ import lotto.error.ErrorMessage;
 public class Lotto {
     public static final int MAX_COUNT = 6;
     private final Set<LottoNumber> numbers;
+
+    public Lotto(Set<LottoNumber> numbers) {
+        checkNumber(numbers);
+        this.numbers = numbers;
+    }
 
     public Lotto(List<Integer> numbers) {
         checkNumber(numbers);
@@ -32,6 +38,12 @@ public class Lotto {
     }
 
     private void checkNumber(List<Integer> numbers) {
+        if (numbers.size() != MAX_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
+        }
+    }
+
+    private void checkNumber(Set<LottoNumber> numbers) {
         if (numbers.size() != MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
         }
