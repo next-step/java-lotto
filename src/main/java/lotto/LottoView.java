@@ -1,15 +1,13 @@
 package lotto;
 
+import static lotto.domain.LottoRank.*;
+
+import java.util.Map;
+
 import lotto.domain.LottoBuyingRequest;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoReport;
-import lotto.domain.LottoTicket;
 import lotto.domain.UserLotto;
-
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static lotto.domain.LottoRank.*;
 
 public class LottoView {
 
@@ -45,10 +43,7 @@ public class LottoView {
 	}
 
 	public String userLottoNumberListView(UserLotto userLotto) {
-		return userLotto.lottoTickets()
-			.stream()
-			.map(LottoTicket::toString)
-			.collect(Collectors.joining(LINE_SEPARATOR));
+		return userLotto.toString();
 	}
 
 	public String lottoReportView(LottoReport lottoReport) {

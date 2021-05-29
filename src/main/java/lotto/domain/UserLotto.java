@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import static lotto.LottoView.*;
 import static lotto.util.CollectionUtils.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserLotto {
 
@@ -32,4 +34,10 @@ public class UserLotto {
             transform(lottoTickets, new ArrayList<>(), winningLotto::rank)));
     }
 
+    @Override
+    public String toString() {
+        return lottoTickets.stream()
+            .map(LottoTicket::toString)
+            .collect(Collectors.joining(LINE_SEPARATOR));
+    }
 }
