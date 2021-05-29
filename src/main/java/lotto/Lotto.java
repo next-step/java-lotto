@@ -64,10 +64,7 @@ public class Lotto {
     }
 
     private boolean isWinNumber(int targetNum) {
-        if (this.lottoNum.contains(targetNum)) {
-            return true;
-        }
-        return false;
+        return this.lottoNum.contains(targetNum);
     }
 
     private static List<Integer> initLottoNum() {
