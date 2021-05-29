@@ -12,7 +12,7 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	private Set<Integer> numbers;
+	private final Set<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
 		numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numberList));
