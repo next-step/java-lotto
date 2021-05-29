@@ -6,7 +6,7 @@ import static lotto.Lotto.LOTTO_PRICE;
 
 
 public class LottoStatistics {
-    static public int getLottoBuyingCount(int money) {
+    public static int getLottoBuyingCount(int money) {
         return Math.round(money / LOTTO_PRICE);
     }
 

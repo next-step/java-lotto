@@ -3,7 +3,7 @@ package lotto;
 import java.util.Scanner;
 
 public class InputView {
-    private final static Scanner SCANNER = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private static final String START_WORDING = "구입금액을 입력해주세요";
 
