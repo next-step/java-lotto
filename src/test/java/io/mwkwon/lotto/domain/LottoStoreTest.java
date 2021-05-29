@@ -88,4 +88,26 @@ public class LottoStoreTest {
         PurchaseQuantity purchaseQuantity = lottoStore.createManualLottoPurchaseQuantity(lottoPayment);
         assertThat(purchaseQuantity).isEqualTo(PurchaseQuantity.create(3));
     }
+
+    @Test
+    void 수동_구매_수량에따라_구매_수동_로또_생성_테스트() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6));
+        LottoInputView lottoInputView = new LottoInputView(){
+            @Override
+            public List<List<LottoNumber>> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
+                return Arrays.asList(lottoNumbers);
+            }
+        };
+        LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
+        PurchaseQuantity purchaseQuantity = PurchaseQuantity.create(1);
+        List<Lotto> manualLottos = lottoStore.createManualLottos(purchaseQuantity);
+        assertThat(purchaseQuantity.isSame(manualLottos.size())).isTrue();
+        assertThat(manualLottos).isEqualTo(Arrays.asList(Lotto.create(lottoNumbers)));
+    }
 }

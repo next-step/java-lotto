@@ -2,6 +2,8 @@ package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PurchaseQuantity {
@@ -24,6 +26,21 @@ public class PurchaseQuantity {
         return new PurchaseQuantity(quantity);
     }
 
+    public void checkValidPossiblePurchaseQuantity(LottoPayment lottoPayment) {
+        if (lottoPayment.isGreaterThan(quantity * LottoConstants.LOTTO_PRICE)) {
+            throw new IllegalArgumentException(GREATER_THAN_QUANTITY_ERROR_MESSAGE);
+        }
+    }
+
+    public int calcAutoLottoPurchaseQuantity(LottoPayment lottoPayment) {
+        return lottoPayment.calcLottoBuyQuantity() - quantity;
+    }
+
+    public boolean isSame(int other) {
+        return quantity == other;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,11 +52,5 @@ public class PurchaseQuantity {
     @Override
     public int hashCode() {
         return Objects.hash(quantity);
-    }
-
-    public void checkValidPossiblePurchaseQuantity(LottoPayment lottoPayment) {
-        if (lottoPayment.isGreaterThan(quantity * LottoConstants.LOTTO_PRICE)) {
-            throw new IllegalArgumentException(GREATER_THAN_QUANTITY_ERROR_MESSAGE);
-        }
     }
 }

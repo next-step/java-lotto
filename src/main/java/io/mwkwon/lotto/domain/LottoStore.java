@@ -42,4 +42,12 @@ public final class LottoStore {
     public PurchaseQuantity createManualLottoPurchaseQuantity(LottoPayment lottoPayment) {
         return dataGenerator.requestManualLottoPurchaseQuantity(lottoPayment);
     }
+
+    public List<Lotto> createManualLottos(PurchaseQuantity purchaseQuantity) {
+        List<List<LottoNumber>> manualLottoNumbers = dataGenerator.requestManualLottoNumbers(purchaseQuantity);
+        return manualLottoNumbers
+                .stream()
+                .map(lottoNumbers -> lottoGenerator.createManualLotto(lottoNumbers))
+                .collect(Collectors.toList());
+    }
 }

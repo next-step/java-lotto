@@ -6,6 +6,7 @@ import io.mwkwon.lotto.domain.LottoPayment;
 import io.mwkwon.lotto.domain.PurchaseQuantity;
 import io.mwkwon.lotto.interfaces.DataGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,6 +25,7 @@ public class LottoInputView implements DataGenerator {
     private static final String DELIMITER = ",";
     private static final String REQUEST_BONUS_BALL_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String REQUEST_MANUAL_LOTTO_PURCHASE_QUANTITY_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String REQUEST_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -67,6 +69,20 @@ public class LottoInputView implements DataGenerator {
         return lottoPurchaseQuantity;
     }
 
+    @Override
+    public List<List<LottoNumber>> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
+        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
+        if (purchaseQuantity.isSame(0)) {
+            return lottoNumbers;
+        }
+        System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS);
+        while (purchaseQuantity.isSame(lottoNumbers.size())) {
+            String value = this.requestInput();
+            List<LottoNumber> lottoNumber = this.createLottoNumbers(value);
+            lottoNumbers.add(lottoNumber);
+        }
+        return lottoNumbers;
+    }
 
     private LottoPayment createLottoPayment(String value) {
         try {
@@ -80,13 +96,21 @@ public class LottoInputView implements DataGenerator {
 
     private Lotto createLotto(String strLottoNumbers) {
         try {
-            this.checkValidNumberAndDelimiter(strLottoNumbers);
             List<LottoNumber> lottoNumbers = this.createLottoNumbers(strLottoNumbers);
             return Lotto.create(lottoNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage() + RETRY_MESSAGE);
             return null;
         }
+    }
+
+    private List<LottoNumber> createLottoNumbers(String strLottoNumbers) {
+        this.checkNullAndEmpty(strLottoNumbers);
+        this.checkValidNumberAndDelimiter(strLottoNumbers);
+        String[] split = strLottoNumbers.split(DELIMITER);
+        return Stream.of(split)
+                .map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim())))
+                .collect(Collectors.toList());
     }
 
     private LottoNumber createBonusLottoNumber(String strNumber, Lotto winningLotto) {
@@ -114,12 +138,7 @@ public class LottoInputView implements DataGenerator {
         }
     }
 
-    private List<LottoNumber> createLottoNumbers(String strLottoNumbers) {
-        String[] split = strLottoNumbers.split(DELIMITER);
-        return Stream.of(split)
-                .map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim())))
-                .collect(Collectors.toList());
-    }
+
 
     private void checkDuplicateLottoNumber(LottoNumber lottoNumber, Lotto winningLotto) {
         if (winningLotto.isContains(lottoNumber)) {
@@ -141,6 +160,11 @@ public class LottoInputView implements DataGenerator {
 
     private String requestInput(String message) {
         System.out.println(message);
+        return this.scanner.nextLine();
+    }
+
+    private String requestInput() {
+        System.out.println();
         return this.scanner.nextLine();
     }
 }

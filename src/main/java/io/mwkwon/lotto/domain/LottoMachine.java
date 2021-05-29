@@ -26,4 +26,9 @@ public class LottoMachine implements LottoGenerator {
         }
         return new BuyLottos(lottos);
     }
+
+    @Override
+    public Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
+        return Lotto.create(lottoNumbers);
+    }
 }
