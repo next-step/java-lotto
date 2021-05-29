@@ -26,10 +26,32 @@ public class Lotto {
         return lottoWin;
     }
 
-    private int countWin(int[] winList) {
+
+    public void calculateWin(List<Integer> winList) {
+        int matchNum = this.countWin(winList);
+        if (LottoWin.FIRST_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.FIRST_PLACE;
+            return;
+        }
+        if (LottoWin.SECOND_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.SECOND_PLACE;
+            return;
+        }
+        if (LottoWin.THIRD_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.THIRD_PLACE;
+            return;
+        }
+        if (LottoWin.FOURTH_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.FOURTH_PLACE;
+            return;
+        }
+        this.lottoWin = LottoWin.LAST_PLACE;
+    }
+
+    private int countWin(List<Integer> winList) {
         int winNum = 0;
-        for (int i = 0; i < winList.length; i++) {
-            winNum += this.getWinCount(winList[i]);
+        for (int i = 0; i < winList.size(); i++) {
+            winNum += this.getWinCount(winList.get(i));
         }
         return winNum;
     }
@@ -64,24 +86,4 @@ public class Lotto {
         }
     }
 
-    public void calculateWin(int[] winList) {
-        int matchNum = this.countWin(winList);
-        if (LottoWin.FIRST_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FIRST_PLACE;
-            return;
-        }
-        if (LottoWin.SECOND_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.SECOND_PLACE;
-            return;
-        }
-        if (LottoWin.THIRD_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.THIRD_PLACE;
-            return;
-        }
-        if (LottoWin.FOURTH_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FOURTH_PLACE;
-            return;
-        }
-        this.lottoWin = LottoWin.LAST_PLACE;
-    }
 }

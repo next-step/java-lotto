@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -22,12 +24,12 @@ public class InputView {
         return input;
     }
 
-    public static int[] convertWinNumberStringToIntArray(String winNumber) {
+    public static List<Integer> convertWinNumberStringToIntArray(String winNumber) {
         String[] splitString = winNumber.split(",");
-        int[] winNumberArray = new int[splitString.length];
+        List<Integer> winNumberList = new ArrayList<>();
         for (int i = 0; i < splitString.length; i++) {
-            winNumberArray[i] = Integer.parseInt(splitString[i]);
+            winNumberList.add(Integer.parseInt(splitString[i]));
         }
-        return winNumberArray;
+        return winNumberList;
     }
 }

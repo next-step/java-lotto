@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 import static lotto.LottoStatistics.getLottoBuyingCount;
 
 public class App {
@@ -11,7 +13,7 @@ public class App {
         LottoTicket lottoTicket = new LottoTicket(lottoNum);
         OutputView.outputLottoList(lottoTicket.lottoList());
         String lastWeekWinNumber = InputView.getLastWeekWinNumber();
-        int[] winNumber = InputView.convertWinNumberStringToIntArray(lastWeekWinNumber);
+        List<Integer> winNumber = InputView.convertWinNumberStringToIntArray(lastWeekWinNumber);
         lottoTicket.compareWinList(winNumber);
         OutputView.printWinResult(lottoTicket);
     }
