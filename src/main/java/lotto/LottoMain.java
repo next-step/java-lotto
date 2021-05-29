@@ -8,7 +8,7 @@ public class LottoMain {
         InputView inputView = new InputView();
         Pay userPay = inputView.payForLotto();
         BuyLottoCount userBuyLottoCount = inputView.manualLottoCount(userPay);
-        Lottos userLottos = inputView.buyManualLotto(userBuyLottoCount);
+        Lottos userLottos = inputView.buyLotto(userBuyLottoCount);
 
         ResultView.buyLottoInfo(userLottos, userBuyLottoCount);
         Lotto winLotto = inputView.inputWinLottoNumber();

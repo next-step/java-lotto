@@ -38,11 +38,12 @@ public class InputView {
         return autoLottoCount;
     }
 
-    public Lottos buyManualLotto(BuyLottoCount userBuyLottoCount) {
+    public Lottos buyLotto(BuyLottoCount userBuyLottoCount) {
         LottoBuy lottoBuy = new LottoBuy();
         String manualLottoNumber;
         int manualLottoCount = userBuyLottoCount.getManualCount();
-        System.out.println(MANUAL_LOTTO_NUMBER_INPUT);
+        if(manualLottoCount != 0)
+            System.out.println(MANUAL_LOTTO_NUMBER_INPUT);
         for (int count = 0; count < manualLottoCount; count++) {
             manualLottoNumber = scanner.nextLine();
             lottoBuy.buyManualLotto(manualLottoNumber);
