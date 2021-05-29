@@ -18,7 +18,7 @@ public class Lotto {
 	public Lotto(List<Integer> numberList) {
 		numbers = Collections.unmodifiableSortedSet(
 			new TreeSet<>(numberList.stream()
-				.map(x -> new LottoNumber(x))
+				.map(x -> LottoNumber.of(x))
 				.collect(Collectors.toList())));
 
 		validateNumberListSize(numbers);

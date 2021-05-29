@@ -9,7 +9,7 @@ public class WinnerLotto {
 	public WinnerLotto(List<Integer> numberList, int bonusNumber) {
 		validateBonusNumber(numberList, bonusNumber);
 		this.lotto = new Lotto(numberList);
-		this.bonusNumber = new LottoNumber(bonusNumber);
+		this.bonusNumber = LottoNumber.of(bonusNumber);
 	}
 
 	private void validateBonusNumber(List<Integer> numberList, int bonusNumber) {
