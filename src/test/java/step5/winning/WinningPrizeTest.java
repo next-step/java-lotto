@@ -1,4 +1,4 @@
-package step3.winning;
+package step5.winning;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
