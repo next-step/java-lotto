@@ -26,11 +26,11 @@ public class InputView {
         return nextIntLine();
     }
 
-    public List<LottoTicket> inputManualLottoTicket(int manualTicketCount) {
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+    public List<String> inputManualLottoTicket(int ticketCount) {
+        List<String> manualLottoTickets = new ArrayList<>();
         System.out.println(INPUT_MANUAL_TICKET_MESSAGE);
-        for (int i = 0; i < manualTicketCount; i++) {
-            manualLottoTickets.add(new LottoTicket(scanner.nextLine()));
+        for (int i = 0; i < ticketCount; i++) {
+            manualLottoTickets.add(scanner.nextLine());
         }
 
         return manualLottoTickets;

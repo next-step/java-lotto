@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.common.WinningType;
 import lotto.domain.GameWinningResult;
+import lotto.domain.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,8 +21,13 @@ public class ResultView {
         System.out.printf(LOTTO_TICKET_COUNT_MESSAGE, manualTicketCount, lottoTicketCount);
     }
 
-    public void printLottoTickets(String lottoTicketsText) {
-        System.out.println(lottoTicketsText);
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(LottoTicket lottoTicket : lottoTickets) {
+            stringBuilder.append(lottoTicket.getString() + "\n");
+        }
+
+        System.out.println(stringBuilder);
     }
 
     public void printGameResult(List<GameWinningResult> gameResult) {
