@@ -14,10 +14,10 @@ public class LottoShopTest {
 	@DisplayName("금액을 입력하면 해당 금액에서 가능한 로또만큼 발행")
 	public void buy_lottos_within_budget_limit() {
 		Lottos boughtLottos = LottoShop.buy(14000);
-		assertThat(boughtLottos.size()).isEqualTo(14);
+		assertThat(boughtLottos.getTotalSize()).isEqualTo(14);
 
 		boughtLottos = LottoShop.buy(14700);
-		assertThat(boughtLottos.size()).isEqualTo(14);
+		assertThat(boughtLottos.getTotalSize()).isEqualTo(14);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class LottoShopTest {
 
 		Lottos boughtLottos = LottoShop.buy(5000, manualLottos);
 
-		assertThat(boughtLottos.size()).isEqualTo(5);
+		assertThat(boughtLottos.getTotalSize()).isEqualTo(5);
 	}
 
 	@Test

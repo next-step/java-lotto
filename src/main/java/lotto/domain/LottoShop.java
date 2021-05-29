@@ -7,7 +7,6 @@ import java.util.List;
 public class LottoShop {
 	private static final int START_POINT = 0;
 	private static final List<Integer> candidateNumbers;
-	private static final ArrayList<Lotto> EMPTY_LOTTOS = new ArrayList<>();
 
 	static {
 		candidateNumbers = new ArrayList<>();
@@ -22,19 +21,18 @@ public class LottoShop {
 	}
 
 	public static Lottos buy(int budget) {
-		return buy(budget, EMPTY_LOTTOS);
+		return buy(budget, Lottos.EMPTY_LOTTOS);
 	}
 
 	public static Lottos buy(int budget, List<Lotto> manualLottos) {
 		List<Lotto> candidateLottos = new ArrayList<>();
 
-		candidateLottos.addAll(manualLottos);
 		int possibleCount = getPossibleCount(getRemainBudget(budget, manualLottos));
 		for (int i = START_POINT; i < possibleCount; i++) {
 			candidateLottos.add(new Lotto(getRandomLottoNumbers()));
 		}
 
-		return new Lottos(candidateLottos);
+		return new Lottos(candidateLottos, manualLottos);
 	}
 
 	private static int getRemainBudget(int budget, List<Lotto> manualLottos) {

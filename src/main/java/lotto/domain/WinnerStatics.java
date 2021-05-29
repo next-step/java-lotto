@@ -14,7 +14,7 @@ public class WinnerStatics {
 	}
 
 	private int getTotalAmount(Lottos boughtLottos) {
-		return boughtLottos.size() * Lotto.LOTTO_PRICE;
+		return boughtLottos.getTotalSize() * Lotto.LOTTO_PRICE;
 	}
 
 	private WinnerTable getWinnerTable(Lottos boughtLottos, WinnerLotto winnerLotto) {

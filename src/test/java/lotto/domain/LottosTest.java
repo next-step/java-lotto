@@ -34,7 +34,7 @@ public class LottosTest {
 			lottos.add(new Lotto(randomNumberList));
 		}
 
-		assertThat(new Lottos(lottos).size()).isEqualTo(55);
+		assertThat(new Lottos(lottos).getTotalSize()).isEqualTo(55);
 	}
 
 	@Test
@@ -47,5 +47,22 @@ public class LottosTest {
 		WinnerTable winnerTable = lottos.announce(new WinnerLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 8));
 
 		assertThat(winnerTable.getWinnerCount(Ranking.RANKING_3)).isEqualTo(1);
+	}
+
+	@Test
+	@DisplayName("수동 번호와 자동 번호의 개수 노출 및 전체 개수 노출")
+	public void get_count_of_manual_lottos_and_automatic_lottos_and_total() {
+		List<Lotto> candidateManualLottos = new ArrayList<>();
+		candidateManualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		candidateManualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+
+		List<Lotto> candidateAutomaicLottos = new ArrayList<>();
+		candidateAutomaicLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+
+		Lottos lottos = new Lottos(candidateAutomaicLottos, candidateManualLottos);
+
+		assertThat(lottos.getAutomaticLottosSize()).isEqualTo(1);
+		assertThat(lottos.getManualLottosSize()).isEqualTo(2);
+		assertThat(lottos.getTotalSize()).isEqualTo(3);
 	}
 }
