@@ -17,7 +17,7 @@ public class RequestedManualLottoNumbers {
     public List<LottoTicket> generateManualLottoTickets() {
         List<LottoTicket> result = new ArrayList<>();
 
-        for(String manualLottoNumber: requestedManualLottoNumbers) {
+        for (String manualLottoNumber: requestedManualLottoNumbers) {
             LottoGenerateStrategy manualStrategy = new ManualStrategy(manualLottoNumber);
             result.add(new LottoTicket(manualStrategy));
         }

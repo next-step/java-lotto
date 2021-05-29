@@ -1,6 +1,5 @@
 package lottoauto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -11,14 +10,8 @@ public class LottoGame {
         outputView.enterPurChaseAmount();
         Money money = new Money(inputView.nextInt());
 
-        outputView.enterManualTicketCount();
-        int manualTicketCount = inputView.nextInt();
-
-        outputView.enterManualTicketNumbers();
-        List<String> manualTicketNumbers = new ArrayList<>();
-        for(int i = 0; i < manualTicketCount; i++) {
-            manualTicketNumbers.add(inputView.next());
-        }
+        int manualTicketCount = outputView.enterManualTicketCount(inputView);
+        List<String> manualTicketNumbers = outputView.enterManualTicketNumbers(manualTicketCount, inputView);
 
         RequestedManualLottoNumbers requestedManualLottoNumbers = new RequestedManualLottoNumbers(manualTicketNumbers);
 

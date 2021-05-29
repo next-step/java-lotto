@@ -1,6 +1,8 @@
 package lottoauto;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OutputView {
     private static final String ENTER_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
@@ -52,11 +54,18 @@ public class OutputView {
         println(ENTER_BONUS_NUBER);
     }
 
-    public void enterManualTicketCount() {
+    public int enterManualTicketCount(InputView inputView) {
         println(ENTER_MANUAL_TICKET_COUNT);
+        return inputView.nextInt();
     }
 
-    public void enterManualTicketNumbers() {
+    public List<String> enterManualTicketNumbers(int manualTicketCount, InputView inputView) {
         println(ENTER_MANUAL_TICKET_NUMBERS);
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < manualTicketCount; i++) {
+            result.add(inputView.next());
+        }
+
+        return result;
     }
 }
