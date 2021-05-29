@@ -20,13 +20,13 @@ public class Money {
 
 	private final int amount;
 
-	private Money(InputText inputText) {
-		this.amount = inputText.parseInt();
+	private Money(int amount) {
+		this.amount = amount;
 	}
 
 	public static Money generate(InputText inputText) {
 		validateGenerate(inputText);
-		return new Money(inputText);
+		return new Money(inputText.parseInt());
 	}
 
 	public static void validateGenerate(InputText text) {
@@ -58,7 +58,12 @@ public class Money {
 		}
 	}
 
-	public static void validateMoneyForGame(Money money) {
+	public static void validateMoneyForAutoGame(Money money) {
+		validateNotNull(money);
+		validateEffectiveAmount(money.amount);
+	}
+
+	public static void validateRaiseMoney(Money money) {
 		validateNotNull(money);
 		validateEffectiveAmount(money.amount);
 		validateGameFee(money.amount);
@@ -89,5 +94,11 @@ public class Money {
 				return BigDecimal.valueOf(countOfPrize).multiply(BigDecimal.valueOf(winningAmount));
 			})
 			.reduce(BigDecimal.valueOf(INITIALIZE_VALUE_ZERO), BigDecimal::add);
+	}
+
+	public Money amountOfAutoGames(CustomGameCount customGameCount) {
+		int amountOfAutoGames = this.amount - (GAME_FEE * customGameCount.count());
+		InputText amountOfAutoGamesText = InputText.generate(String.valueOf(amountOfAutoGames));
+		return Money.generate(amountOfAutoGamesText);
 	}
 }

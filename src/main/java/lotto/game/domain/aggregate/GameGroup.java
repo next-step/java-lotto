@@ -14,10 +14,15 @@ public class GameGroup {
 		this.games = newGames;
 	}
 
-	public static GameGroup buyGames(Money money) {
-		Money.validateMoneyForGame(money);
+	public static GameGroup generate() {
+		return new GameGroup(new ArrayList<>());
+	}
+
+	public GameGroup buyAutoGames(Money money) {
+		Money.validateMoneyForAutoGame(money);
 		List<Game> newGames = makeGamesWithinMoneyRange(money);
-		return new GameGroup(newGames);
+		games.addAll(newGames);
+		return this;
 	}
 
 	private static List<Game> makeGamesWithinMoneyRange(Money money) {
@@ -34,5 +39,13 @@ public class GameGroup {
 
 	public int gamesCount() {
 		return games.size();
+	}
+
+	public int count() {
+		return games.size();
+	}
+
+	public void buyCustomGame(Game customGame) {
+		games.add(customGame);
 	}
 }

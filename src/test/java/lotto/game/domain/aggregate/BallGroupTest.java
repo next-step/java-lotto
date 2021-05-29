@@ -27,7 +27,7 @@ public class BallGroupTest {
 	private List<Ball> makeBallList(InputTextGroup inputTextGroup) throws IllegalBallNumberException {
 		List<Ball> balls = new ArrayList<>();
 		for (InputText inputText : inputTextGroup.inputTexts()) {
-			balls.add(Ball.generate(inputText));
+			balls.add(Ball.of(inputText));
 		}
 		return balls;
 	}
@@ -95,7 +95,7 @@ public class BallGroupTest {
 		List<Ball> compareBalls = new ArrayList<>();
 		for (int i = Ball.EFFECTIVE_MIN_NUMBER; i <= Ball.EFFECTIVE_MAX_NUMBER; i++) {
 			InputText inputText = InputText.generate(String.valueOf(i));
-			compareBalls.add(Ball.generate(inputText));
+			compareBalls.add(Ball.of(inputText));
 		}
 
 		//when
@@ -117,7 +117,7 @@ public class BallGroupTest {
 
 		//when
 		BallGroup ballGroup = BallGroup.generate(inputTextGroup);
-		Ball ball = Ball.generate(inputText);
+		Ball ball = Ball.of(inputText);
 
 		//then
 		assertThat(ballGroup.isContainBall(ball)).isEqualTo(expectedIsContain);

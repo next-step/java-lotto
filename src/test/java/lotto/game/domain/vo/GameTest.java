@@ -102,7 +102,7 @@ public class GameTest {
 
 		//when
 		Game newGame = Game.generateCustom(ballGroup);
-		Ball ball = Ball.generate(inputText);
+		Ball ball = Ball.of(inputText);
 
 		//then
 		assertThat(newGame.isContainBall(ball)).isEqualTo(expectedIsContain);

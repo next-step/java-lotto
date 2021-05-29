@@ -1,5 +1,7 @@
 package lotto.game.domain.vo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import lotto.game.exception.IllegalBallNumberException;
@@ -8,16 +10,23 @@ import lotto.io.domain.vo.InputText;
 public class Ball implements Comparable<Ball> {
 	public static final int EFFECTIVE_MIN_NUMBER = 1;
 	public static final int EFFECTIVE_MAX_NUMBER = 45;
+	public static final Map<Integer, Ball> ALL_BALL_INSTANCES = new HashMap<>();
 
 	private final int number;
 
-	private Ball(InputText text) {
-		this.number = text.parseInt();
+	private Ball(int number) {
+		this.number = number;
 	}
 
-	public static Ball generate(InputText text) {
+	static {
+		for (int i = EFFECTIVE_MIN_NUMBER; i <= EFFECTIVE_MAX_NUMBER; i++) {
+			ALL_BALL_INSTANCES.put(i, new Ball(i));
+		}
+	}
+
+	public static Ball of(InputText text) {
 		validateGenerate(text);
-		return new Ball(text);
+		return ALL_BALL_INSTANCES.get(text.parseInt());
 	}
 
 	static void validateGenerate(InputText text) {

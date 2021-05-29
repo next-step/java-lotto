@@ -64,7 +64,12 @@ public class WinningStaticsView extends View {
 
 	private void printStatisticsEarningRate(GameGroup boughtGames, Map<PrizeCode, Integer> winningStatistics) {
 		String earningRate = Money.calculateEarningRate(winningStatistics, boughtGames.gamesCount());
-		System.out.println("총 수익률은 " + earningRate + "입니다.\n");
+		System.out.print("총 수익률은 " + earningRate + "입니다. ");
+		if (NUMBER_ONE <= Double.parseDouble(earningRate)) {
+			System.out.println("축하합니다. 이득을 보셨군요!");
+			return;
+		}
+		System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 	}
 
 	private void printStatisticsEachPrizeCode(Map<PrizeCode, Integer> winningStatistics) {

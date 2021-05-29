@@ -1,8 +1,11 @@
 package lotto.game.domain.entity;
 
+import java.util.List;
+
 import lotto.game.domain.aggregate.BallGroup;
 import lotto.game.domain.aggregate.GameGroup;
 import lotto.game.domain.vo.Ball;
+import lotto.game.domain.vo.CustomGameCount;
 import lotto.game.domain.vo.Game;
 import lotto.game.domain.vo.Money;
 import lotto.game.exception.IllegalBonusBallException;
@@ -10,10 +13,11 @@ import lotto.io.domain.aggregate.InputTextGroup;
 import lotto.io.domain.vo.InputText;
 
 public class Round {
+	private final GameGroup boughtGames = GameGroup.generate();
 	private Game gameWinningCondition;
-	private GameGroup boughtGames;
 	private Money money;
 	private Ball bonusBall;
+	private CustomGameCount customGameCount;
 
 	private Round() {
 
@@ -31,7 +35,7 @@ public class Round {
 	}
 
 	public Round setupBonusBall(InputText inputText) {
-		Ball bonusBall = Ball.generate(inputText);
+		Ball bonusBall = Ball.of(inputText);
 		if (gameWinningCondition.isContainBall(bonusBall)) {
 			throw new IllegalBonusBallException("당첨 번호에 포함되지 않는 번호만 보너스 볼로 지정될 수 있습니다.");
 		}
@@ -43,11 +47,8 @@ public class Round {
 		return this.gameWinningCondition;
 	}
 
-	public void setupBoughtGames(GameGroup boughtGames) {
-		this.boughtGames = boughtGames;
-	}
-
 	public void raiseMoney(Money money) {
+		Money.validateRaiseMoney(money);
 		this.money = money;
 	}
 
@@ -63,4 +64,35 @@ public class Round {
 		return this.bonusBall;
 	}
 
+	public void setupCustomGameCount(CustomGameCount customGameCount) {
+		this.customGameCount = customGameCount;
+	}
+
+	public int customGameCount() {
+		return customGameCount.count();
+	}
+
+	public int boughtGamesCount() {
+		return boughtGames.count();
+	}
+
+	public void buyCustomGame(Game customGame) {
+		boughtGames.buyCustomGame(customGame);
+	}
+
+	public Money moneyOfAutoGames() {
+		return money.amountOfAutoGames(customGameCount);
+	}
+
+	public void buyAutoGames(Money moneyOfAutoGames) {
+		boughtGames.buyAutoGames(moneyOfAutoGames);
+	}
+
+	public boolean isFinishBuyCustomGames() {
+		return customGameCount.count() == boughtGamesCount();
+	}
+
+	public List<Game> games() {
+		return boughtGames.games();
+	}
 }

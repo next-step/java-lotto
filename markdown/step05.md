@@ -250,38 +250,51 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
 - [x] 3.분석 및 설계
     - [x] 3-1.step05.md 작성
     - [x] 3-2.도메인 주도 설계 이미지 수정
-- [ ] 4.구현
-    - [ ] 4-1.Game Context
-        - [ ] 4-1-1.`Value Object` & `Aggregate`
-            - [ ] 4-1-1-1.`Ball(VO)`
-                - [ ] 4-1-1-1-1.`generate()` -> `of()` : 매번 공 객체를 생성하지 않고, 기존 1~45의 공만 활용하도록 한다. 
-            - [ ] 4-1-1-2.
-                - [ ] 4-1-1-2-1.
-            - [ ] 4-1-1-3.
-                - [ ] 4-1-1-3-1.
-        - [ ] 4-1-2.`Entity`
-            - [ ] 4-1-2-1.`Round`
-                - [ ] 4-1-2-1-1.
-        - [ ] 4-1-3.`Exception`
-            - [ ] 4-1-3-1.
-    - [ ] 4-2.IO Context
-        - [ ] 4-2-1.`Value Object` & `Aggregate`
-            - [ ] 4-2-1-1.
-                - [ ] 4-2-1-1-1.
-                - [ ] 4-2-1-1-2.
-        - [ ] 4-2-2.View
-            - [ ] 4-2-2-1.`TicketBoxView`
-                - [ ] 4-2-2-1-1.구매 금액 입력 후 수동 구매 입력 화면으로 변경
-                - [ ] 4-2-2-1-2.출력 메시지 변경
-            - [ ] 4-2-2-2.`BuyCustomGameCountView`
-                - [ ] 4-2-2-2-1.당첨번호 입력 후 BonusBallView로 변경
-                - [ ] 4-2-2-2-2.2등 출력내용 변경
-            - [ ] 4-2-2-3.`BuyCustomGameView` : 생성
-            - [ ] 4-2-2-4.`WinningStaticsView` : 당첨결과 출력 내용 수정(2등 추가)
-        - [ ] 4-2-3.`Entity`
-            - [ ] 4-2-3-1.`ViewStatus` : `BuyCustomGameCountView`, `BuyCustomGameView` 관련 분기처리 추가
-    - [ ] 4-3.Refactoring
-        - [ ] 4-3-1.
+- [x] 4.구현
+    - [x] 4-1.Game Context
+        - [x] 4-1-1.`Value Object` & `Aggregate`
+            - [x] 4-1-1-1.`Ball(VO)`
+                - [x] 4-1-1-1-1.`generate()` -> `of()` : 매번 공 객체를 생성하지 않고, 기존 1~45의 공만 활용하도록 한다. 
+            - [x] 4-1-1-2.`CustomGameCount(VO)`
+                - [x] 4-1-1-2-1.`validateGenerate()` : 0 이상의 자연수인지 검증한다.
+                - [x] 4-1-1-2-2.`generate()` : 0 이상의 자연수만 생성 가능하도록 한다.
+            - [x] 4-1-1-3.`Money(VO)`
+                - [x] 4-1-1-3-1.`amountOfAutoGames` : 자동 생성할 금액을 계산한다.
+                - [x] 4-1-1-3-2.`validateMoneyForGame()` -> `validateMoneyForAutoGame()`
+                - [x] 4-1-1-3-3.`validateRaiseMoney()` : 최초 게임 구매 금액을 등록한다.
+            - [x] 4-1-1-4.`GameGroup(Aggregate)`
+              - [x] 4-1-1-3-1.`count()` : 생성된 게임의 수를 조회한다.
+              - [x] 4-1-1-3-2.`buyCustomGame()` : 임의로 생성한 게임을 등록한다.
+        - [x] 4-1-2.`Entity`
+            - [x] 4-1-2-1.`Round`
+                - [x] 4-1-2-1-1.`setupCustomGameCount()` : 수동 생성할 게임 수를 세팅한다.
+                - [x] 4-1-2-1-2.`customGameCount()` : 수동 생성할 게임의 수를 조회한다.
+                - [x] 4-1-2-1-3.`boughtGamesCount()` : 구매한 게임 수를 조회한다.
+                - [x] 4-1-2-1-4.`buyCustomGame()` : 수동 구매한 게임을 등록한다.
+                - [x] 4-1-2-1-5.`moneyOfAutoGames()` : 자동 구매할 금액을 조회한다.
+                - [x] 4-1-2-1-6.`buyAutoGames()` : 자동 게임을 구매한다.
+                - [x] 4-1-2-1-7.`isFinishBuyCustomGames()` : 수동 구매할 수만큼 번호를 지정했는지 확인 
+        - [x] 4-1-3.`Exception`
+            - [x] 4-1-3-1.`IllegalCustomGameCountException`
+    - [x] 4-2.IO Context
+        - [x] 4-2-1.`Value Object` & `Aggregate`
+            - [x] 4-2-1-1.`ViewCode(Code)`
+                - [x] 4-2-1-1-1.`view()` : 화면 인스턴스 리턴
+                - [x] 4-2-1-1-2.`is~()` : 등가성 비교 제거
+        - [x] 4-2-2.View
+            - [x] 4-2-2-1.`TicketBoxView`
+                - [x] 4-2-2-1-1.구매 금액 입력 후 수동 구매 입력 화면으로 변경
+                - [x] 4-2-2-1-2.출력 메시지 변경
+            - [x] 4-2-2-2.`WinningStaticsView`
+                - [x] 4-2-2-2-1.당첨 수익률에 따라 출력 메시지 다르게 표출
+            - [x] 4-2-2-3.`BuyCustomGameView` : 수동 게임 구매 화면
+            - [x] 4-2-2-4.`BuyCustomGameCountView` : 수동 게임 구매 갯수 화면
+        - [x] 4-2-3.`Entity`
+            - [x] 4-2-3-1.붎필요한 메서드 제거
+            - [x] 4-2-3-2.화면 조정 메서드 변경
+    - [x] 4-3.Refactoring
+        - [x] 4-3-1.`Ball` : `generate()` -> `of()` : 매번 공 객체를 생성하지 않고, 기존 1~45의 공만 활용하도록 한다.
+        - [x] 4-3-2.`ViewCode` : 코드별 지정된 화면 인스턴스를 리턴하도록 한다.
 - [ ] 5.테스트
     - [ ] 5-1.Gradle build Success 확인
         - [ ] 5-1-1.`Value Object` & `Aggregate`
@@ -305,6 +318,9 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
         - [ ] 5-3-3.else 예약어 금지
         - [ ] 5-3-4.Code값들은 `enum`을 활용한다.
         - [ ] 5-3-5.일급콜렉션 활용
+        - [ ] 5-3-6.일급콜렉션 활용
+        - [ ] 5-3-7.축약 금지
+        - [ ] 5-3-8.예외 처리
 - [ ] 6.인수인계
     - [ ] 6-1.소감 및 피드백 정리
         - [ ] 6-1-1.느낀점 & 배운점 작성

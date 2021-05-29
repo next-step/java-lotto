@@ -35,7 +35,7 @@ public class BallTest {
 			.isInstanceOfAny(IllegalInputTextException.class, IllegalBallNumberException.class);
 	}
 
-	@DisplayName("4-1-2-1-2.`generate()` : Ball 생성")
+	@DisplayName("4-1-2-1-2.`of()` : 셍성된 Ball Instance 가져오기")
 	@ParameterizedTest(name = "{index} - text:[{0}], expectedNumber:{1}, exceptedNotThrownException:{2}")
 	@Order(2)
 	@CsvSource(value = {"0;0;false", "1;1;true", "45;45;true", "46;46;false", "one;1;false",
@@ -47,11 +47,12 @@ public class BallTest {
 		//when
 		if (exceptedNotThrownException) {
 			//then -
-			assertThat(Ball.generate(inputText).number()).isEqualTo(expectedNumber);
+			assertThat(Ball.of(inputText).number()).isEqualTo(expectedNumber);
+			assertThat(Ball.of(inputText) == Ball.of(inputText)).isTrue();
 			return;
 		}
 		//then - throw NumberFormatException
-		assertThatThrownBy(() -> Ball.generate(inputText).number())
+		assertThatThrownBy(() -> Ball.of(inputText).number())
 			.isInstanceOfAny(IllegalInputTextException.class, IllegalBallNumberException.class);
 	}
 
@@ -65,8 +66,8 @@ public class BallTest {
 		InputText inputText = InputText.generate(text);
 		InputText inputTextExpectedNumber = InputText.generate(expectedNumberText);
 
-		Ball ball = Ball.generate(inputText);
-		Ball expectedBall = Ball.generate(inputTextExpectedNumber);
+		Ball ball = Ball.of(inputText);
+		Ball expectedBall = Ball.of(inputTextExpectedNumber);
 
 		//when
 
