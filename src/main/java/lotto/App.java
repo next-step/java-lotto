@@ -8,12 +8,11 @@ public class App {
         int buyingMoney = InputView.getBuyingMoney();
         int lottoNum = getLottoBuyingCount(buyingMoney);
         OutputView.printBuyingCount(lottoNum);
-        LottoTicket lottoList = new LottoTicket(lottoNum);
-        OutputView.outputLottoList(lottoList.lottoList());
+        LottoTicket lottoTicket = new LottoTicket(lottoNum);
+        OutputView.outputLottoList(lottoTicket.lottoList());
         String lastWeekWinNumber = InputView.getLastWeekWinNumber();
         int[] winNumber = InputView.convertWinNumberStringToIntArray(lastWeekWinNumber);
-        lottoList.calculateWinList(winNumber);
-        LottoStatistics lottoStatistics = lottoList.lottoStatistics();
-        OutputView.printWinResult(lottoStatistics);
+        lottoTicket.compareWinList(winNumber);
+        OutputView.printWinResult(lottoTicket);
     }
 }
