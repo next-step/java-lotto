@@ -15,7 +15,10 @@ class LottoApplicationTest {
 		// given
 		String userInputData = "100000\r\n3\r\n1,2,3,4,5,6\r\n11,12,13,14,15,16\r\n21,22,23,24,25,26\r\n1,2,3,4,5,6\r\n7\r\n";
 		System.setIn(new ByteArrayInputStream(userInputData.getBytes()));
-		LottoApplication lottoApplication = new LottoApplication(new Console());
+		UserInterface userInterface = new Console();
+		InputView inputView = new InputView(userInterface);
+		OutputView outputView = new OutputView(userInterface);
+		LottoApplication lottoApplication = new LottoApplication(inputView, outputView);
 
 		// when
 		int signal = lottoApplication.run();
@@ -30,7 +33,10 @@ class LottoApplicationTest {
 		// given
 		String userInputData = "100000\r\n0\r\n1,2,3,4,5,6\r\n7\r\n";
 		System.setIn(new ByteArrayInputStream(userInputData.getBytes()));
-		LottoApplication lottoApplication = new LottoApplication(new Console());
+		UserInterface userInterface = new Console();
+		InputView inputView = new InputView(userInterface);
+		OutputView outputView = new OutputView(userInterface);
+		LottoApplication lottoApplication = new LottoApplication(inputView, outputView);
 
 		// when
 		int signal = lottoApplication.run();
