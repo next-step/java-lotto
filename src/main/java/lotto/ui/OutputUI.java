@@ -3,14 +3,18 @@ package lotto.ui;
 import lotto.domains.Lotto;
 import lotto.domains.Lottos;
 import lotto.enums.MatchingInfo;
+import lotto.enums.PurchasingWay;
 
 public class OutputUI {
     public static void printInputPurchasingAmount() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printNumberOfPurchases(int number) {
-        System.out.println(number + "개를 구매했습니다.");
+    public static void printNumberOfPurchases(Lottos lottos) {
+        int automaticCount = lottos.countOfPurchasingWay(PurchasingWay.AUTOMATIC);
+        int manualCount = lottos.countOfPurchasingWay(PurchasingWay.MANUAL);
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.",manualCount,automaticCount);
+        System.out.println();
     }
 
     public static void printInputWinningLottoNumbers() {
@@ -40,5 +44,13 @@ public class OutputUI {
                     lottos.countOfMatchingNumber(matchingInfo));
             System.out.println();
         }
+    }
+
+    public static void printInputManualLottoAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputManualLottosNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
