@@ -1,5 +1,6 @@
 package study.lotto.domain;
 
+import study.lotto.exception.DuplicateBonusBallException;
 import study.lotto.util.LottoNumberGenerator;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
@@ -13,7 +14,9 @@ import java.util.stream.IntStream;
 public class LottoGame {
 
     public static final int MARK_SIZE = 6;
-    public static final List<Integer> AVAILABLE_LOTTONUMBERS = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    public static final int LOTTONUMBER_FROM = 1;
+    public static final int LOTTONUMBER_TO = 45;
+    public static final List<Integer> AVAILABLE_LOTTONUMBERS = IntStream.rangeClosed(LOTTONUMBER_FROM, LOTTONUMBER_TO).boxed().collect(Collectors.toList());
 
     private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
     private final InputView inputView;
@@ -42,7 +45,7 @@ public class LottoGame {
 
     public void validateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.lottoNumbers().contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+            throw new DuplicateBonusBallException();
         }
     }
 

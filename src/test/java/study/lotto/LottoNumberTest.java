@@ -3,6 +3,7 @@ package study.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.LottoNumber;
+import study.lotto.exception.WrongLottoNumberException;
 
 import java.util.*;
 
@@ -21,10 +22,10 @@ public class LottoNumberTest {
         assertThat(lastNumber.value()).isEqualTo(45);
 
         assertThatThrownBy(() -> new LottoNumber(0))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoNumberException.class);
 
         assertThatThrownBy(() -> new LottoNumber(46))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoNumberException.class);
 
     }
 

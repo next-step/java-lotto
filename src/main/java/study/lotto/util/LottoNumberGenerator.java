@@ -2,6 +2,7 @@ package study.lotto.util;
 
 import study.lotto.domain.LottoGame;
 import study.lotto.domain.LottoNumber;
+import study.lotto.exception.WrongLottoSizeException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class LottoNumberGenerator {
     private static void validateSize(List<LottoNumber> markedLottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>(markedLottoNumbers);
         if (lottoNumberSet.size() != LottoGame.MARK_SIZE) {
-            throw new IllegalArgumentException("6개의 로또 번호가 아닙니다.");
+            throw new WrongLottoSizeException();
         }
     }
 

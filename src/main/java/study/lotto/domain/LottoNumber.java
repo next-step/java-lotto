@@ -1,5 +1,7 @@
 package study.lotto.domain;
 
+import study.lotto.exception.WrongLottoNumberException;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -13,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static void validateLottoNumber(int number) {
         if (!LottoGame.AVAILABLE_LOTTONUMBERS.contains(number)) {
-            throw new IllegalArgumentException("잘못된 로또 번호입니다");
+            throw new WrongLottoNumberException();
         }
     }
 

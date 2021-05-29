@@ -3,6 +3,7 @@ package study.lotto.util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.LottoNumber;
+import study.lotto.exception.WrongLottoSizeException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -51,11 +52,11 @@ public class LottoGeneratorTest {
     public void wrongInputTest() {
 
         assertThatThrownBy(() -> LottoNumberGenerator.markedNumbers("3,3,1,4,5,7"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoSizeException.class);
         assertThatThrownBy(() -> LottoNumberGenerator.markedNumbers("1,2,3,4,5"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoSizeException.class);
         assertThatThrownBy(() -> LottoNumberGenerator.markedNumbers("1,2,3,4,5,6,7"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoSizeException.class);
     }
 
 

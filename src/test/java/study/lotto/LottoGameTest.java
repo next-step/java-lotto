@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import study.lotto.domain.*;
+import study.lotto.exception.DuplicateBonusBallException;
 import study.lotto.util.LottoNumberGenerator;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
@@ -89,7 +90,7 @@ public class LottoGameTest {
         LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
         LottoNumber bonusNumber = new LottoNumber(6);
         assertThatThrownBy(() -> lottoGame.validateBonusNumber(winningNumbers, bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DuplicateBonusBallException.class);
     }
 
 }
