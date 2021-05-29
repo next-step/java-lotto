@@ -7,14 +7,14 @@ import java.util.List;
 public class Lotto {
     private static final int MAX_LOTTO_RANGE = 45;
     private static final int SINGLE_LOTTO_DIGIT = 6;
+    private static final List<Integer> lottoNumPool = initLottoNum();
+
     public static final int LOTTO_PRICE = 1000;
-    private static List<Integer> lottoNumPool;
+
     private List<Integer> lottoNum;
+    private LottoWin lottoWin;
 
     public Lotto() {
-        if (this.lottoNumPool == null) {
-            this.initLottoNum();
-        }
         this.generateLottoNum();
     }
 
@@ -22,7 +22,11 @@ public class Lotto {
         return this.lottoNum;
     }
 
-    public int countWin(int[] winList) {
+    public LottoWin lottoWin() {
+        return lottoWin;
+    }
+
+    private int countWin(int[] winList) {
         int winNum = 0;
         for (int i = 0; i < winList.length; i++) {
             winNum += this.getWinCount(winList[i]);
@@ -44,11 +48,12 @@ public class Lotto {
         return false;
     }
 
-    private void initLottoNum() {
-        this.lottoNumPool = new ArrayList<>();
+    private static List<Integer> initLottoNum() {
+        List<Integer> lottoNumPool = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_RANGE; i++) {
-            this.lottoNumPool.add(i);
+            lottoNumPool.add(i);
         }
+        return lottoNumPool;
     }
 
     private void generateLottoNum() {
@@ -57,5 +62,26 @@ public class Lotto {
         for (int i = 0; i < SINGLE_LOTTO_DIGIT; i++) {
             lottoNum.add(lottoNumPool.get(i));
         }
+    }
+
+    public void calculateWin(int[] winList) {
+        int matchNum = this.countWin(winList);
+        if (LottoWin.FIRST_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.FIRST_PLACE;
+            return;
+        }
+        if (LottoWin.SECOND_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.SECOND_PLACE;
+            return;
+        }
+        if (LottoWin.THIRD_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.THIRD_PLACE;
+            return;
+        }
+        if (LottoWin.FOURTH_PLACE.matchNum() == matchNum) {
+            this.lottoWin = LottoWin.FOURTH_PLACE;
+            return;
+        }
+        this.lottoWin = LottoWin.LAST_PLACE;
     }
 }
