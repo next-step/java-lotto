@@ -6,7 +6,6 @@ import study.lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,9 +27,23 @@ public class LottoGame {
     public void play() {
         BigDecimal purchaseAmount = inputView.inputPurchaseAmount();
         PurchasedLottos purchasedLottos = purchase(purchaseAmount);
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers(inputView.inputWinningNumbers()));
+        WinningNumbers winningNumbers = inputWinninNumbers();
         WinningResult winningResult = checkPrize(purchasedLottos, winningNumbers);
         printResult(purchaseAmount, winningResult);
+    }
+
+    private WinningNumbers inputWinninNumbers() {
+        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers(inputView.inputWinningNumbers()));
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
+        validateBonusNumber(winningNumbers, bonusNumber);
+        return new WinningNumbers(winningNumbers, bonusNumber);
+
+    }
+
+    public void validateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.lottoNumbers().contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
+        }
     }
 
     public int purchaseableNumber(BigDecimal amount) {
@@ -43,11 +56,12 @@ public class LottoGame {
         return purchasedLottos;
     }
 
-    public WinningResult checkPrize(PurchasedLottos purchasedLottos, LottoNumbers winningNumbers) {
+    public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
         WinningResult winningResult = new WinningResult();
         for (LottoNumbers lottoNumbers : purchasedLottos.values()) {
-            int matchCount = lottoNumbers.matchWinningNumberCount(winningNumbers);
-            winningResult.addPrize(matchCount);
+            int matchCount = lottoNumbers.matchWinningNumberCount(winningNumbers.lottoNumbers());
+            boolean matchBonus = lottoNumbers.isMatchBonus(winningNumbers.bonusNumber());
+            winningResult.addPrize(matchCount, matchBonus);
         }
 
         return winningResult;

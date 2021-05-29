@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGameTest {
 
@@ -51,16 +52,18 @@ public class LottoGameTest {
     public void checkPrizeTest() {
         //given
         PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
+        LottoNumbers lottoNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers,bonusNumber);
 
         //when
         WinningResult winningResult = lottoGame.checkPrize(purchasedLottos, winningNumbers);
 
         //then
-        assertThat(winningResult.value().get(WinningPrize.FIRST)).isEqualTo(1);
-        assertThat(winningResult.value().get(WinningPrize.SECOND)).isEqualTo(0);
-        assertThat(winningResult.value().get(WinningPrize.THIRD)).isEqualTo(1);
-        assertThat(winningResult.value().get(WinningPrize.FOURTH)).isEqualTo(2);
+        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(winningResult.value().get(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(2);
     }
 
     private List<LottoNumbers> generatePurchaseLottos() {
@@ -78,6 +81,15 @@ public class LottoGameTest {
     public void profitRateTest(BigDecimal prizeAmount, BigDecimal expect) {
 
         assertThat(lottoGame.profitRate(BigDecimal.valueOf(5000),prizeAmount)).isEqualTo(expect);
+    }
+
+    @DisplayName("당첨 번호와 보너스 볼 중복시 에러")
+    @Test
+    public void inputWinningNumber() {
+        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
+        LottoNumber bonusNumber = new LottoNumber(6);
+        assertThatThrownBy(() -> lottoGame.validateBonusNumber(winningNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }

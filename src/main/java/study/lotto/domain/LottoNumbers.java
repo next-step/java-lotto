@@ -24,4 +24,8 @@ public class LottoNumbers {
         numbers.removeAll(markedLottoNumbers);
         return LottoGame.MARK_SIZE - numbers.size();
     }
+
+    public boolean isMatchBonus(LottoNumber bonusNumber) {
+        return markedLottoNumbers.contains(bonusNumber);
+    }
 }
