@@ -9,7 +9,7 @@ import wootecam.lotto.model.LottoScoreMap;
 
 public class OutputView extends View {
 
-	public static final String LOTTO_COUNT_OUTPUT_FORMAT = "%d개를 구매했습니다.%n";
+	public static final String LOTTO_COUNT_OUTPUT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
 	public static final String SCORE_FORMAT = "%d개 일치 (%d원) - %d%n";
 	public static final String SCORE_SECOND_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d%n";
 	public static final String EARNING_RATE_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -18,12 +18,13 @@ public class OutputView extends View {
 	public static final String LINE_TEXT = "--------";
 	public static final String EXIT_LOTTO_MESSAGE = "구매한 로또가 없어 로또 게임을 종료합니다.";
 	public static final int EARNING_RATE_100 = 1;
+	public static final String MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 	public void printLottoCount(LottoCount lottoCount) {
-		out.printf(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getCount());
+		out.printf(LOTTO_COUNT_OUTPUT_FORMAT, lottoCount.getManualCount(), lottoCount.getAutomaticCount());
 	}
 
-	public void printAutomaticLotto(List<Lotto> lottos) {
+	public void printTotalLottos(List<Lotto> lottos) {
 		lottos.stream()
 			.map(lotto -> "[" + lotto.toLottoNumberString() + "]")
 			.forEach(out::println);
@@ -56,5 +57,9 @@ public class OutputView extends View {
 
 	public void printExitLottoGame() {
 		out.println(EXIT_LOTTO_MESSAGE);
+	}
+
+	public void printManualLottoInputMessage() {
+		out.println(MANUAL_LOTTO_INPUT_MESSAGE);
 	}
 }

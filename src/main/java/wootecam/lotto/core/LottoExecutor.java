@@ -1,5 +1,6 @@
 package wootecam.lotto.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import wootecam.lotto.model.Lotto;
@@ -21,8 +22,8 @@ public class LottoExecutor {
 
 	public void start() {
 		String purchaseMoneyInput = this.inputView.makeLottoPurchaseMoneyInput();
-		LottoCount lottoCount = new LottoCount(purchaseMoneyInput);
-		this.outputView.printLottoCount(lottoCount);
+		String manualLottoCountInput = this.inputView.makeManualLottoCountInput();
+		LottoCount lottoCount = new LottoCount(purchaseMoneyInput, manualLottoCountInput);
 
 		if (!lottoCount.isGreaterThanZero()) {
 			this.outputView.printExitLottoGame();
@@ -33,16 +34,27 @@ public class LottoExecutor {
 	}
 
 	private void playLotto(LottoCount lottoCount) {
-		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
-		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
-		this.outputView.printAutomaticLotto(lottos);
+		LottoGameGenerator lottoGameGenerator = new LottoGameGenerator();
+		this.outputView.printManualLottoInputMessage();
+		List<Lotto> manualLottos = lottoGameGenerator.getLottos(
+			new ManualLottoGenerator(this.inputView::makeManualLottoNumbersInput),
+			lottoCount.getManualCount());
+		List<Lotto> automaticLottos = lottoGameGenerator.getLottos(new AutomaticLottoGenerator(),
+			lottoCount.getAutomaticCount());
+
+		List<Lotto> totalLottos = new ArrayList<>();
+		totalLottos.addAll(manualLottos);
+		totalLottos.addAll(automaticLottos);
+
+		this.outputView.printLottoCount(lottoCount);
+		this.outputView.printTotalLottos(totalLottos);
 
 		String winningNumberInput = this.inputView.makeWinningNumberInput();
 		String bonusNumberInput = this.inputView.makeBonusNumberInput();
 		WinningLotto winningLotto = lottoGameGenerator.getWinningLotto(winningNumberInput, bonusNumberInput);
 
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
-		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(lottos, winningLotto);
+		LottoScoreMap lottoScoreMap = lottoResultGenerator.getLottoResults(totalLottos, winningLotto);
 		this.outputView.printLottoScoreMap(lottoScoreMap);
 		this.outputView.printEarningRate(lottoScoreMap);
 		this.inputView.close();

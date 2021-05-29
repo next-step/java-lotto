@@ -19,12 +19,12 @@ public class LottoTest {
 		List<LottoNumber> inputList = getNumberList(input);
 		Lotto lotto = new Lotto(inputList);
 
-		assertThat(lotto.contains(new LottoNumber(1))).isTrue();
-		assertThat(lotto.contains(new LottoNumber(2))).isTrue();
-		assertThat(lotto.contains(new LottoNumber(3))).isTrue();
-		assertThat(lotto.contains(new LottoNumber(4))).isTrue();
-		assertThat(lotto.contains(new LottoNumber(5))).isTrue();
-		assertThat(lotto.contains(new LottoNumber(6))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(1))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(2))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(3))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(4))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(5))).isTrue();
+		assertThat(lotto.contains(LottoNumber.of(6))).isTrue();
 	}
 
 	@ParameterizedTest
@@ -39,7 +39,7 @@ public class LottoTest {
 
 	private List<LottoNumber> getNumberList(String input) {
 		return Arrays.stream(input.split(","))
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 

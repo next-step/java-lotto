@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import wootecam.lotto.model.Lotto;
 import wootecam.lotto.model.LottoNumber;
 
-public class AutomaticLottoGenerator {
+public class AutomaticLottoGenerator implements LottoGenerator {
 
 	public static final int CAPACITY = 45;
 	public static final int FIRST_VALUE = 1;
@@ -24,12 +24,13 @@ public class AutomaticLottoGenerator {
 		}
 	}
 
-	protected Lotto getLotto() {
+	@Override
+	public Lotto getLotto() {
 		Collections.shuffle(this.autoLottoNumbers);
 		List<Integer> autoNumberList = this.autoLottoNumbers.subList(0, 6);
 
 		List<LottoNumber> lotto = autoNumberList.stream()
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.sorted()
 			.collect(Collectors.toList());
 

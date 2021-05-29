@@ -22,16 +22,17 @@ public class LottoGameGeneratorTest {
 
 	@BeforeEach
 	void setup() {
-		lottoGameGenerator = new LottoGameGenerator(new AutomaticLottoGenerator());
+		lottoGameGenerator = new LottoGameGenerator();
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = {"5000", "2000", "15000"})
 	@DisplayName("입력된 금액에 맞는 로또 수를 생성하는지 테스트")
 	void test_로또구매수만큼_로또생성확인(String input) {
-		LottoCount lottoCount = new LottoCount(input);
-		List<Lotto> lottos = lottoGameGenerator.getLottos(lottoCount);
-		assertThat(lottos.size()).isEqualTo(lottoCount.getCount());
+		LottoCount lottoCount = new LottoCount(input, "0");
+		List<Lotto> lottos = lottoGameGenerator.getLottos(new AutomaticLottoGenerator(),
+			lottoCount.getAutomaticCount());
+		assertThat(lottos.size()).isEqualTo(lottoCount.getTotalCount());
 	}
 
 	@ParameterizedTest
@@ -39,12 +40,12 @@ public class LottoGameGeneratorTest {
 	@DisplayName("정상적인 입력에 대한 당첨번호테스트")
 	void test_당첨번호테스트(String input, String bonusInput) {
 		WinningLotto winningLotto = lottoGameGenerator.getWinningLotto(input, bonusInput);
-		assertThat(winningLotto.contains(new LottoNumber(1))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(2))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(3))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(4))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(5))).isTrue();
-		assertThat(winningLotto.contains(new LottoNumber(6))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(1))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(2))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(3))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(4))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(5))).isTrue();
+		assertThat(winningLotto.contains(LottoNumber.of(6))).isTrue();
 	}
 
 	@ParameterizedTest

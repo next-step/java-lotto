@@ -25,7 +25,7 @@ public class LottoResultGeneratorTest {
 		LottoResultGenerator lottoResultGenerator = new LottoResultGenerator();
 
 		Lotto resultLotto = this.generateLotto(1, 2, 3, 4, 5, 6);
-		WinningLotto winningLotto = new WinningLotto(resultLotto, new BonusNumber(new LottoNumber(7), resultLotto));
+		WinningLotto winningLotto = new WinningLotto(resultLotto, new BonusNumber(LottoNumber.of(7), resultLotto));
 
 		List<Lotto> lottos = new ArrayList<>();
 		Lotto lotto = this.generateLotto(2, 3, 4, 5, 6, 45);
@@ -49,6 +49,6 @@ public class LottoResultGeneratorTest {
 	}
 
 	private Lotto generateLotto(Integer... integers) {
-		return new Lotto(Arrays.stream(integers).map(LottoNumber::new).collect(Collectors.toList()));
+		return new Lotto(Arrays.stream(integers).map(LottoNumber::of).collect(Collectors.toList()));
 	}
 }
