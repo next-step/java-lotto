@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,42 +15,26 @@ class LottoStatisticsTest {
     }
 
     @Test
-    void threeMatch() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.collectWin(3);
-        assertThat(lottoStatistics.threeMatch()).isEqualTo(1);
+    void calculateLottoTicketProfit() {
+        LottoTicket lottoTicket = new LottoTicket(1);
+        List<Integer> lottoNum = lottoTicket.lottoList().get(0).lottoNum();
+        lottoTicket.compareWinList(lottoNum);
+        BigDecimal bg1 = new BigDecimal(LottoWin.FIRST_PLACE.winPrice());
+        BigDecimal bg2 = new BigDecimal(1000);
+        assertThat(LottoStatistics.calculateLottoTicketProfit(lottoTicket)).isEqualTo(bg1.divide(bg2, 2, BigDecimal.ROUND_HALF_DOWN).doubleValue());
     }
 
     @Test
-    void fourMatch() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.collectWin(4);
-        assertThat(lottoStatistics.fourMatch()).isEqualTo(1);
+    void countLottoWinNumMatch() {
+        LottoTicket lottoTicket = new LottoTicket(1);
+        List<Integer> lottoNum = lottoTicket.lottoList().get(0).lottoNum();
+        lottoTicket.compareWinList(lottoNum);
+
+        assertThat(LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE)).isEqualTo(1);
+        assertThat(LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE)).isEqualTo(0);
+        assertThat(LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.THIRD_PLACE)).isEqualTo(0);
     }
 
-    @Test
-    void fiveMatch() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.collectWin(5);
-        assertThat(lottoStatistics.fiveMatch()).isEqualTo(1);
-    }
 
-    @Test
-    void sixMatch() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.collectWin(6);
-        assertThat(lottoStatistics.sixMatch()).isEqualTo(1);
-    }
-
-    @Test
-    void calculateTotalProfit() {
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        lottoStatistics.collectWin(3);
-        assertThat(lottoStatistics.calculateTotalProfit()).isEqualTo(5000 / 1000);
-        lottoStatistics.collectWin(4);
-        BigDecimal bg1 = new BigDecimal(55000);
-        BigDecimal bg2 = new BigDecimal(2000);
-        assertThat(lottoStatistics.calculateTotalProfit()).isEqualTo(bg1.divide(bg2, 2, BigDecimal.ROUND_HALF_DOWN).doubleValue());
-    }
 }
 
