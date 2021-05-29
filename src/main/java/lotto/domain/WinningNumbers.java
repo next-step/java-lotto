@@ -24,7 +24,7 @@ public class WinningNumbers {
     private TreeSet<LottoNumber> saveWinningNumbers(List<Integer> input) {
         TreeSet<LottoNumber> inputs = new TreeSet<>();
         for (int n : input) {
-            inputs.add(new LottoNumber(n));
+            inputs.add(LottoNumber.of(n));
         }
         return inputs;
     }
@@ -53,7 +53,7 @@ public class WinningNumbers {
     }
 
     private LottoNumber saveBonusNumber(int number) throws CustomIllegalArgumentException {
-        LottoNumber bonusNumber = new LottoNumber(number);
+        LottoNumber bonusNumber = LottoNumber.of(number);
         if (winningNumbers.contains(bonusNumber)) {
             throw new CustomIllegalArgumentException(Message.ERROR_BONUS_NUMBER_DUPLICATED);
         }

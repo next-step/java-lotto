@@ -2,25 +2,38 @@ package lotto.domain;
 
 import lotto.exception.CustomIllegalArgumentException;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int MIN_VALUE = 1;
-    private final int MAX_VALUE = 45;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
+    private static Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+    static {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+    }
 
     private int number;
 
-    public LottoNumber(int number) throws CustomIllegalArgumentException {
-        checkValidValue(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void checkValidValue(int number) throws CustomIllegalArgumentException {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
+    public static LottoNumber of(int number) throws CustomIllegalArgumentException {
+        LottoNumber lottoNumber = lottoNumbers.stream()
+                .filter(no -> no.number == number)
+                .findFirst()
+                .orElse(null);
+        if (lottoNumber == null) {
             throw new CustomIllegalArgumentException(Message.ERROR_LOTTO_NUMBER_OUT_OF_RANGE,
-                                                    MIN_VALUE, MAX_VALUE);
+                    MIN_VALUE, MAX_VALUE);
         }
+        return lottoNumber;
     }
 
     public int number() {

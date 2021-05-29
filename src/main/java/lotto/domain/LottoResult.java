@@ -12,14 +12,13 @@ public class LottoResult {
     private final int DEFAULT_COUNT = 0;
 
     private final TreeMap<Rank, Integer> lottoResult;
-    private int purchaseAmount;
     private float profitRatio;
 
-    public LottoResult(int purchaseAmount, WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+    public LottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         this.lottoResult = new TreeMap<>();
-        this.purchaseAmount = purchaseAmount;
         setDefaultValues();
         updateLottoResult(winningNumbers, lottoTickets);
+        this.profitRatio = calculateProfitRatio(lottoTickets.size());
     }
 
     private void updateLottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
@@ -64,14 +63,13 @@ public class LottoResult {
             stringBuilder.append(String.format(DEFAULT_RANK_FORMAT, rank.getCountOfMatch(),
                     rank.getPrice(), rankCount));
         }
-        this.profitRatio = calculateProfitRatio();
         stringBuilder.append(String.format(RESULT_PROFIT_RATIO_FORMAT, profitRatio));
         return stringBuilder.toString();
     }
 
-    public float calculateProfitRatio() {
+    public float calculateProfitRatio(int ticketCount) {
         long totalPrize = calculateTotalPrize();
-        return totalPrize / (float) purchaseAmount;
+        return totalPrize / ((float) ticketCount * PurchaseAmount.PRICE_PER_TICKET);
     }
 
     private long calculateTotalPrize() {
