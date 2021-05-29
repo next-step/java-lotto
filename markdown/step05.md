@@ -249,7 +249,7 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
     - [x] 2-4. 정적 팩토리 메소드, 인스턴스 캐싱
 - [x] 3.분석 및 설계
     - [x] 3-1.step05.md 작성
-    - [ ] 3-2.도메인 주도 설계 이미지 수정
+    - [x] 3-2.도메인 주도 설계 이미지 수정
 - [ ] 4.구현
     - [ ] 4-1.Game Context
         - [ ] 4-1-1.`Value Object` & `Aggregate`
