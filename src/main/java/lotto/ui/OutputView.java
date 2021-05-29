@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import java.util.stream.Collectors;
+
 import lotto.enums.Message;
 import lotto.enums.Prize;
 import lotto.lotto.Lotto;
@@ -7,8 +9,6 @@ import lotto.lotto.LottoNumber;
 import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoResult;
 import lotto.shop.Money;
-
-import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printInputMoneyMessage() {

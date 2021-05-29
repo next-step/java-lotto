@@ -2,12 +2,12 @@ package lotto.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.error.ErrorMessage;
-
-import java.util.Arrays;
 
 public class LottoTest {
 

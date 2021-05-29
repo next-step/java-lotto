@@ -2,10 +2,11 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import lotto.lotto.Lotto;
 
 import java.util.List;
 

@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import lotto.enums.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.enums.Prize;
 import lotto.lotto.WinningNumber;
 import lotto.lotto.LottoNumber;
 import lotto.error.ErrorMessage;

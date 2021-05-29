@@ -2,9 +2,10 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.error.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.error.ErrorMessage;
 
 public class MoneyTest {
     @Test
