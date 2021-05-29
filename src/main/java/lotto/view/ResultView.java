@@ -6,7 +6,12 @@ import lotto.domain.WinnerStatics;
 
 public class ResultView {
 	public static void printBoughtLottos(Lottos boughtLottos) {
-		System.out.println(boughtLottos.size() + "개를 구매했습니다.");
+		System.out.println();
+
+		System.out.println(
+			"수동으로 " + boughtLottos.getManualLottosSize() + "장, 자동으로 " + boughtLottos.getAutomaticLottosSize()
+				+ "개를 구매했습니다.");
+
 		boughtLottos.forEachLottos(System.out::println);
 		System.out.println();
 	}

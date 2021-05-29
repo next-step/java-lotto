@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.List;
+
+import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.WinnerLotto;
@@ -9,7 +12,7 @@ import lotto.view.ResultView;
 
 public class LottoMain {
 	public static void main(String[] args) {
-		Lottos boughtLottos = buy(InputView.getBuyAmount());
+		Lottos boughtLottos = buy(InputView.getBuyAmount(), InputView.getManualLottos(InputView.getManualLottoCount()));
 
 		ResultView.printBoughtLottos(boughtLottos);
 
@@ -24,7 +27,7 @@ public class LottoMain {
 			new WinnerLotto(InputView.getLastWinLotto(), InputView.getBonusNumber()));
 	}
 
-	private static Lottos buy(int buyAmount) {
-		return LottoShop.buy(buyAmount);
+	private static Lottos buy(int buyAmount, List<Lotto> manualLottos) {
+		return LottoShop.buy(buyAmount, manualLottos);
 	}
 }

@@ -1,9 +1,12 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import lotto.domain.Lotto;
 
 public class InputView {
 	private static Scanner scanner = new Scanner(System.in);
@@ -14,12 +17,34 @@ public class InputView {
 		return scanner.nextInt();
 	}
 
+	public static int getManualLottoCount() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+		return scanner.nextInt();
+	}
+
+	public static List<Lotto> getManualLottos(int count) {
+		List<Lotto> manualLottos = new ArrayList<>();
+		scanner.nextLine();
+
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+		for (int i = 0; i < count; i++) {
+			manualLottos.add(new Lotto(getSplitNumberList(scanner.nextLine())));
+		}
+
+		return manualLottos;
+	}
+
 	public static List<Integer> getLastWinLotto() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-		scanner.nextLine();
 		String lastWinLotto = scanner.nextLine();
-		return Arrays.stream(lastWinLotto.split(","))
+		return getSplitNumberList(lastWinLotto);
+	}
+
+	private static List<Integer> getSplitNumberList(String numberList) {
+		return Arrays.stream(numberList.split(","))
 			.map((x) -> Integer.parseInt(x.trim()))
 			.collect(Collectors.toList());
 	}
