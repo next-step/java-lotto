@@ -223,11 +223,9 @@
     │      │  │      GameWinningResult.java        WiningType 별 게임 결과
     │      │  │      LottoNumber.java              로또 번호
     │      │  │      LottoTicket.java              로또 티켓
-    │      │  │      LottoTicketGameResult.java    각 티켓 별 게임 결과
     │      │  │      LottoTicketGenerator.java     로또 티켓 생성기
-    │      │  │      LottoTickets.java             로또 티켓 리스트
     │      │  │      Money.java                    지불 돈
-    │      │  │
+    │      │  │      WinningLottoTicket.java       당첨 로또 티켓
     │      │  └─view
     │      │          GameView.java                게임 화면
     │      │          InputView.java               입력 화면
@@ -242,12 +240,13 @@
         └─java
             ├─lotto
             │  └─domain
-           │          GameResultTest.java
-           │          LottoNumberTest.java
-           │          LottoTicketGeneratorTest.java
-           │          LottoTicketsTest.java
-           │          LottoTicketTest.java
-           │          MoneyTest.java
+            │          GameResultTest.java
+            │          LottoNumberTest.java
+            │          LottoTicketGeneratorTest.java
+            │          LottoTicketTest.java
+            │          MoneyTest.java
+            │          WinningLottoTicketTest.java
+            │          WinningTypeTest.java
             │
             ├─step1                                  1단계 - 학습 테스트 실습
             │      SetTest.java
