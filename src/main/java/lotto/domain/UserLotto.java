@@ -6,6 +6,7 @@ import static lotto.util.CollectionUtils.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,21 @@ public class UserLotto {
 	public LottoReport report(WinningLotto winningLotto) {
 		return new LottoReport(Collections.unmodifiableList(
 			transform(lottoTickets, new ArrayList<>(), winningLotto::rank)));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		UserLotto userLotto = (UserLotto)o;
+		return Objects.equals(lottoTickets, userLotto.lottoTickets);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoTickets);
 	}
 
 	@Override

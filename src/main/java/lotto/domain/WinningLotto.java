@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class WinningLotto {
@@ -36,5 +37,21 @@ public class WinningLotto {
 
 	private int countMatchingNumber(LottoTicket userLottoTicket) {
 		return LottoTicket.countMatchingNumber(userLottoTicket, winningLottoTicket);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		WinningLotto that = (WinningLotto)o;
+		return Objects.equals(winningLottoTicket, that.winningLottoTicket) && Objects.equals(
+			bonusLottoNumber, that.bonusLottoNumber);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(winningLottoTicket, bonusLottoNumber);
 	}
 }
