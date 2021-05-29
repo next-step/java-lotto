@@ -18,7 +18,7 @@ public class LottoValidationUtilsTest {
     @ParameterizedTest
     @MethodSource("sizeErrorNumber")
     void 중복_사이즈_테스트(List<Integer> lottoNumber) {
-        assertThatThrownBy(() -> LottoValidationUtils.validationLottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoValidationUtils.checkDuplicateAndSize(lottoNumber))
                 .isInstanceOf(LottoSizeOrDuplicateException.class);
     }
 
@@ -35,7 +35,7 @@ public class LottoValidationUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,r,3,4,5", "1,2,4.,3,4,5"})
     void 숫자_아닌_값_존재_여부_체크(String winNumber) {
-        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList(winNumber))
+        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToListNumbers(winNumber))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -43,7 +43,7 @@ public class LottoValidationUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,55,3,4,5", "1,2,65,3,4,5", "1,2,46,3,4,5"})
     void 로또_번호_범위_체크(String winNumber) {
-        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToList(winNumber))
+        assertThatThrownBy(() -> LottoValidationUtils.lottoNumberToListNumbers(winNumber))
                 .isInstanceOf(LottoNumberRangeException.class);
     }
 }

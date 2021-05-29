@@ -1,30 +1,17 @@
 package lotto;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final List<Integer> lottoNumber;
+    private final int lottoNumber;
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        LottoValidationUtils.validationLottoNumber(lottoNumber);
+    public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public boolean isContainNumber(Integer winNumber) {
-        return lottoNumber.contains(winNumber);
-    }
-
-    public boolean lottoSize(int expectedSize) {
-        return lottoNumber.size() == expectedSize;
-    }
-
-    public int compareWinLottoNumber(Lotto winLottoNumber) {
-        int collectNumber = 0;
-        for (Integer winNumber : lottoNumber) {
-            collectNumber += winLottoNumber.matchNumber(winNumber);
-        }
-        return collectNumber;
+    public LottoNumber(Lotto winLotto, int inputBonusNumber) {
+        LottoValidationUtils.isContainsNumberToWinLotto(winLotto, inputBonusNumber);
+        this.lottoNumber = inputBonusNumber;
     }
 
     @Override
@@ -32,7 +19,7 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
@@ -42,6 +29,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return String.valueOf(lottoNumber);
     }
 }

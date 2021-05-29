@@ -14,17 +14,19 @@ public class LottoRankTest {
     @DisplayName("맞은 갯수로 등수 조회 검증")
     @ParameterizedTest
     @MethodSource("searchRankTestArg")
-    void searchRank_등수_조회(LottoRank lottoRank, int matchCount) {
-        assertThat(LottoRank.searchRank(matchCount)).isEqualTo(lottoRank);
+    void searchRank_등수_조회(LottoRank lottoRank, int matchCount, boolean matchBonusYN) {
+        assertThat(LottoRank.searchBonusRank(matchCount, matchBonusYN)).isEqualTo(lottoRank);
     }
 
     static Stream<Arguments> searchRankTestArg() {
         return Stream.of(
-                Arguments.of(MISS, 0),
-                Arguments.of(FOURTH, 3),
-                Arguments.of(THIRD, 4),
-                Arguments.of(MISS, 2),
-                Arguments.of(FIRST, 6)
+                Arguments.of(MISS, 0, false),
+                Arguments.of(FIFTH, 3, false),
+                Arguments.of(FOURTH, 4, false),
+                Arguments.of(MISS, 0, false),
+                Arguments.of(THIRD, 5, false),
+                Arguments.of(SECOND, 5, true),
+                Arguments.of(FIRST, 6, false)
         );
     }
 }

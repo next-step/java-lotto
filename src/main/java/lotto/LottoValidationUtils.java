@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.exception.BonusNumberException;
 import lotto.exception.LottoNumberRangeException;
 import lotto.exception.LottoSizeOrDuplicateException;
 
@@ -22,7 +23,7 @@ public class LottoValidationUtils {
 
     public static final int LOTTO_COST = 1000;
 
-    public static int getLottoNumberSize(){
+    public static int getLottoNumberSize() {
         return LOTTO_NUMBER_SIZE;
     }
 
@@ -32,32 +33,42 @@ public class LottoValidationUtils {
                 .collect(Collectors.toList());
     }
 
-    public static void validationLottoNumber(List<Integer> lottoNumber) {
+    public static void checkDuplicateAndSize(List<Integer> lottoNumber) {
         Set<Integer> checkNumber = new HashSet<>(lottoNumber);
         if (checkNumber.size() != LOTTO_NUMBER_SIZE || lottoNumber.size() != LOTTO_NUMBER_SIZE) {
             throw new LottoSizeOrDuplicateException(LOTTO_NUMBER_SIZE);
         }
     }
 
-    public static List<Integer> lottoNumberToList(String winNumber) {
-        if(winNumber.equals("")){
+    public static LottoNumbers lottoNumberToListNumbers(String winNumber) {
+        if (winNumber.equals("")) {
             throw new NumberFormatException(NUMBER_NULL_EXCEPTION_MSG);
         }
         String[] winNumberArr = winNumber.replaceAll(" ", "").split(WIN_LOTTO_NUMBER_DELIMITER);
-        List<Integer> winNumberList = new ArrayList<>();
-        for(String number : winNumberArr) {
+        List<LottoNumber> winLottoNumbers = new ArrayList<>();
+        List<Integer> checkNumbers = new ArrayList<>();
+        for (String number : winNumberArr) {
             checkNumberAndRange(number);
-            winNumberList.add(Integer.parseInt(number));
+            checkNumbers.add(Integer.parseInt(number));
+            winLottoNumbers.add(new LottoNumber(Integer.parseInt(number)));
         }
-        validationLottoNumber(winNumberList);
-        return winNumberList;
+        checkDuplicateAndSize(checkNumbers);
+        return new LottoNumbers(winLottoNumbers);
     }
 
-    private static void checkNumberAndRange(String winNumberArr) {
-        if(!winNumberArr.matches(NUMBER_REGEX)) {
+    public static void isContainsNumberToWinLotto(Lotto winLotto, int inputBonusNumber) {
+        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
+        if (winLotto.isContainsNumber(bonusNumber)) {
+            throw new BonusNumberException();
+        }
+        checkNumberAndRange(String.valueOf(inputBonusNumber));
+    }
+
+    public static void checkNumberAndRange(String winNumberArr) {
+        if (!winNumberArr.matches(NUMBER_REGEX)) {
             throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION_MSG);
         }
-        if(Integer.parseInt(winNumberArr) < LOTTO_MINIMUM_NUMBER || Integer.parseInt(winNumberArr) > LOTTO_MAXIMUM_NUMBER){
+        if (Integer.parseInt(winNumberArr) < LOTTO_MINIMUM_NUMBER || Integer.parseInt(winNumberArr) > LOTTO_MAXIMUM_NUMBER) {
             throw new LottoNumberRangeException(LOTTO_MINIMUM_NUMBER, LOTTO_MAXIMUM_NUMBER);
         }
     }

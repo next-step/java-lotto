@@ -11,8 +11,7 @@ public class LottoRecord {
     private double profit = 0;
 
     public LottoRecord() {
-        this.lottoRecord = Arrays.stream(LottoRank.values())
-                .collect(Collectors.toList());
+        this.lottoRecord = new ArrayList<>();
     }
 
     public void recordRank(LottoRank lottoRank) {

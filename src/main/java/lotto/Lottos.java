@@ -15,25 +15,21 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
     public boolean isCount(int expectedCount) {
-        return this.lottos.size() == expectedCount;
+        return getCount() == expectedCount;
     }
 
     public void createRandomLotto() {
         this.lottos.add(new Lotto());
     }
 
-    public LottoRecord compareWinNumber(Lotto winNumber) {
-        LottoRecord lottoRecord = new LottoRecord();
-        for (Lotto lotto : lottos) {
-            lottoRecord.recordRank(lotto.compareWinLottoNumber(winNumber));
+    public LottoRecord compareWinLotto(Lotto winLotto, LottoNumber bonusNumber) {
+        LottoRecord userLottoRecord = new LottoRecord();
+        for (Lotto userLotto : lottos) {
+            userLottoRecord.recordRank(userLotto.compareWinLotto(winLotto, bonusNumber));
         }
-        lottoRecord.calculateProfit(lottos.size());
-        return lottoRecord;
+        userLottoRecord.calculateProfit(lottos.size());
+        return userLottoRecord;
     }
 
     public int getCount() {
