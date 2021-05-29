@@ -50,4 +50,24 @@ class ValidationUtilsTest {
         }).isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("보너스볼은 당첨번호와 중복되서는 안됩니다.");
     }
+
+    @DisplayName("구매금액 1000원 이하일 경우 예외 확인")
+    @ParameterizedTest
+    @ValueSource(strings = {"900", "0", "-1000"})
+    void validPurchasePrice(int price) {
+        assertThatThrownBy(() -> {
+            ValidationUtils.validPurchasePrice(price);
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("로또는 1000원 이상부터 구매할수있습니다.");
+    }
+
+    @DisplayName("수동구매 개수 범위 초과시 예외 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"14:15", "3:4", "10:-10"}, delimiter = ':')
+    void validManualCount(int lottoCount, int maualCOunt) {
+        assertThatThrownBy(() -> {
+            ValidationUtils.validManualCount(lottoCount, maualCOunt);
+        }).isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("수동으로 구매 가능한 개수가 아닙니다.");
+    }
 }
