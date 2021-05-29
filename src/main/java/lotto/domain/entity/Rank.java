@@ -1,56 +1,27 @@
 package lotto.domain.entity;
 
-import java.util.Objects;
+import java.math.BigDecimal;
 
-public class Rank {
+public enum Rank {
+    FIRST(6, new BigDecimal("2000000000")),
+    SECOND(5, new BigDecimal("30000000")),
+    THIRD(5, new BigDecimal("1500000")),
+    FOURTH(4, new BigDecimal("50000")),
+    FIFTH(3, new BigDecimal("5000"));
 
-    private int first = 0;
-    private int second = 0;
-    private int third = 0;
-    private int fourth = 0;
+    private final int countOfMatch;
+    private final BigDecimal winningMoney;
 
-    public void addFirst() {
-        first++;
+    Rank(int countOfMatch, BigDecimal winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    public void addSecond() {
-        second++;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public void addThird() {
-        third++;
-    }
-
-    public void addFourth() {
-        fourth++;
-    }
-
-    public int first() {
-        return first;
-    }
-
-    public int second() {
-        return second;
-    }
-
-    public int third() {
-        return third;
-    }
-
-    public int fourth() {
-        return fourth;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rank rank = (Rank) o;
-        return first == rank.first && second == rank.second && third == rank.third && fourth == rank.fourth;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(first, second, third, fourth);
+    public BigDecimal winningMoney() {
+        return winningMoney;
     }
 }
