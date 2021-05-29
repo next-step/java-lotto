@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.entity.LottoList;
+import lotto.domain.entity.LottoPrice;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPrice;
+import lotto.domain.entity.LottoPrice;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;

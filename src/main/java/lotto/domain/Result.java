@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.entity.LottoList;
+import lotto.domain.entity.LottoPrice;
 import lotto.domain.entity.Number;
-import lotto.domain.entity.RankCounter;
 import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;

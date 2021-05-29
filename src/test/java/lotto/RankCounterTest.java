@@ -1,11 +1,11 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPrice;
+import lotto.domain.entity.LottoPrice;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
-import lotto.domain.entity.RankCounter;
+import lotto.domain.RankCounter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
