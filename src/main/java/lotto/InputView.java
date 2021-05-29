@@ -24,7 +24,7 @@ public class InputView {
         return input;
     }
 
-    public static List<Integer> convertWinNumberStringToIntArray(String winNumber) {
+    public static List<Integer> convertWinNumberStringToIntegerList(String winNumber) {
         String[] splitString = winNumber.split(",");
         List<Integer> winNumberList = new ArrayList<>();
         for (int i = 0; i < splitString.length; i++) {
