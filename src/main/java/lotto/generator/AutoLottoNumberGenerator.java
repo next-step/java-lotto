@@ -9,7 +9,7 @@ import lotto.LottoNumbers;
 public class AutoLottoNumberGenerator implements Generator {
 
     private static final int LOTTO_START = 1;
-    private static final int LOTTO_END = 46;
+    private static final int LOTTO_END = 45;
 
     private static final int RANDOM_RANGE_START = 0;
     private static final int RANDOM_RANGE_END = 6;
