@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.error.ErrorMessage;
-import lotto.ui.InputView;
 
 public class Lotto {
     public static final int MAX_COUNT = 6;
@@ -14,7 +13,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         checkNumber(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 

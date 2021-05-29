@@ -79,7 +79,7 @@ public class ShopTest {
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 34));
         lottoTicket.add(lotto);
-        LottoNumber bonusNumber = new LottoNumber(5);
+        LottoNumber bonusNumber = LottoNumber.of(5);
         //when
         LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         //then
@@ -95,7 +95,7 @@ public class ShopTest {
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
         lottoTicket.add(lotto);
-        LottoNumber bonusNumber = new LottoNumber(16);
+        LottoNumber bonusNumber = LottoNumber.of(16);
         //when
         LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
 
@@ -108,7 +108,7 @@ public class ShopTest {
     void checkDuplicateBonusNumber() {
         //given
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.of(1);
         Shop shop = new Shop();
         //when
         //then
@@ -120,7 +120,7 @@ public class ShopTest {
     private Set<LottoNumber> initWinningNumbers() {
         Set<LottoNumber> numbers = new HashSet<>();
         for (int i = 1; i < 7; i++) {
-            LottoNumber lottoNumber = new LottoNumber(i);
+            LottoNumber lottoNumber = LottoNumber.of(i);
             numbers.add(lottoNumber);
         }
         return numbers;

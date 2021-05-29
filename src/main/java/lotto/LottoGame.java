@@ -20,7 +20,7 @@ public class LottoGame {
         OutputView.printWinningNumber();
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumber());
         OutputView.printBonusNumber();
-        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
         shop.checkDuplicateBonusNumber(winningNumber, bonusNumber);
         LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         OutputView.resultMessage();

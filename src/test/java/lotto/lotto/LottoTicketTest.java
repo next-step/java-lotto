@@ -19,14 +19,14 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket();
         Set<LottoNumber> numbers = new HashSet<>();
         for (int i = 1; i < 7; i++) {
-            LottoNumber lottoNumber = new LottoNumber(i);
+            LottoNumber lottoNumber = LottoNumber.of(i);
             numbers.add(lottoNumber);
         }
 
         WinningNumber winningNumber = new WinningNumber(numbers);
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
-        LottoNumber bonusNumber = new LottoNumber(45);
+        LottoNumber bonusNumber = LottoNumber.of(45);
         lottoTicket.add(lotto);
         //when
         LottoResult lottoResult = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);

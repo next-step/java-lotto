@@ -25,7 +25,7 @@ public class InputView {
         checkAnswer(winningNumber);
         return Arrays.stream(winningNumber)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 

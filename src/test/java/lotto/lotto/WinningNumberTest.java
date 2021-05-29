@@ -14,9 +14,9 @@ class WinningNumberTest {
     void contains() {
         //given
         Set<LottoNumber> numbers = new HashSet<>();
-        numbers.add(new LottoNumber(1));
+        numbers.add(LottoNumber.of(1));
         WinningNumber winningNumber = new WinningNumber(numbers);
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.of(1);
         //when
         boolean contains = winningNumber.contains(bonusNumber);
         //then
