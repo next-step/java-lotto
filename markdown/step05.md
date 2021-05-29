@@ -295,32 +295,32 @@ Optional<Cart> optional = Optional.ofNullable(response.getCart()).orElseThrow(Il
     - [x] 4-3.Refactoring
         - [x] 4-3-1.`Ball` : `generate()` -> `of()` : 매번 공 객체를 생성하지 않고, 기존 1~45의 공만 활용하도록 한다.
         - [x] 4-3-2.`ViewCode` : 코드별 지정된 화면 인스턴스를 리턴하도록 한다.
-- [ ] 5.테스트
-    - [ ] 5-1.Gradle build Success 확인
-        - [ ] 5-1-1.`Value Object` & `Aggregate`
-            - [ ] 5-1-1-1.`Ball(VO)`
-            - [ ] 5-1-1-2.`BallGroup(Aggregate)`
-            - [ ] 5-1-1-3.`Game(VO)`
-            - [ ] 5-1-1-4.`GameGroup(Aggregate)`
-            - [ ] 5-1-1-5.`GameWinningCondition(VO)`
-            - [ ] 5-1-1-6.`Money(VO)`
-            - [ ] 5-1-1-7.`InputText(VO)`
-            - [ ] 5-1-1-8.`InputTextGroup(Aggregate)`
-            - [ ] 5-1-1-9.`ViewCode(VO)`
-            - [ ] 5-1-1-10.`ProcessCode(VO)`
-            - [ ] 5-1-1-11.`PrizeCode(VO)`
-        - [ ] 5-1-2.`Entity`
-            - [ ] 5-1-2-1.`Round`
-    - [ ] 5-2.checkstyle 문제없는지 확인 (Java Convention)
-    - [ ] 5-3.요구사항 조건들 충족했는지 확인
-        - [ ] 5-3-1.< 2 Depth 규칙
-        - [ ] 5-3-2.함수(또는 메서드) 15라인 이하
-        - [ ] 5-3-3.else 예약어 금지
-        - [ ] 5-3-4.Code값들은 `enum`을 활용한다.
-        - [ ] 5-3-5.일급콜렉션 활용
-        - [ ] 5-3-6.일급콜렉션 활용
-        - [ ] 5-3-7.축약 금지
-        - [ ] 5-3-8.예외 처리
+- [x] 5.테스트
+    - [x] 5-1.Gradle build Success 확인
+        - [x] 5-1-1.`Value Object` & `Aggregate`
+            - [x] 5-1-1-1.`Ball(VO)`
+            - [x] 5-1-1-2.`BallGroup(Aggregate)`
+            - [x] 5-1-1-3.`Game(VO)`
+            - [x] 5-1-1-4.`GameGroup(Aggregate)`
+            - [x] 5-1-1-5.`GameWinningCondition(VO)`
+            - [x] 5-1-1-6.`Money(VO)`
+            - [x] 5-1-1-7.`InputText(VO)`
+            - [x] 5-1-1-8.`InputTextGroup(Aggregate)`
+            - [x] 5-1-1-9.`ViewCode(VO)`
+            - [x] 5-1-1-10.`ProcessCode(VO)`
+            - [x] 5-1-1-11.`PrizeCode(VO)`
+        - [x] 5-1-2.`Entity`
+            - [x] 5-1-2-1.`Round`
+    - [x] 5-2.checkstyle 문제없는지 확인 (Java Convention)
+    - [x] 5-3.요구사항 조건들 충족했는지 확인
+        - [x] 5-3-1.< 2 Depth 규칙
+        - [x] 5-3-2.함수(또는 메서드) 15라인 이하
+        - [x] 5-3-3.else 예약어 금지
+        - [x] 5-3-4.Code값들은 `enum`을 활용한다.
+        - [x] 5-3-5.모든 원시값과 문자열을 포장한다.
+        - [x] 5-3-6.일급콜렉션 활용
+        - [x] 5-3-7.축약 금지
+        - [x] 5-3-8.예외 처리
 - [ ] 6.인수인계
     - [ ] 6-1.소감 및 피드백 정리
         - [ ] 6-1-1.느낀점 & 배운점 작성
