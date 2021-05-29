@@ -2,11 +2,12 @@ package automaticLotto.domain;
 
 import java.util.List;
 
-public class WinnerLotto extends Lotto {
+public class WinnerLotto {
+	private Lotto lotto;
 	private int bonusNumber;
 
 	public WinnerLotto(List<Integer> numberList, int bonusNumber) {
-		super(numberList);
+		this.lotto = new Lotto(numberList);
 		this.bonusNumber = bonusNumber;
 		validateBonusNumber(numberList, bonusNumber);
 	}
@@ -21,7 +22,7 @@ public class WinnerLotto extends Lotto {
 		int matchedCount = 0;
 		boolean isBonusNumberContained = false;
 
-		for (Integer number : boughtLotto.numbers) {
+		for (Integer number : boughtLotto.getNumbers()) {
 			matchedCount = getMatchedCount(matchedCount, number);
 		}
 
@@ -33,7 +34,7 @@ public class WinnerLotto extends Lotto {
 	}
 
 	private int getMatchedCount(int matchedCount, Integer number) {
-		if (numbers.contains(number)) {
+		if (lotto.hasNumber(number)) {
 			matchedCount++;
 		}
 		return matchedCount;

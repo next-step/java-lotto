@@ -12,7 +12,7 @@ public class Lotto {
 	public static final int LOTTO_MAXIMUM_NUMBER = 45;
 	public static final int LOTTO_LENGTH = 6;
 
-	protected List<Integer> numbers;
+	private List<Integer> numbers;
 
 	public Lotto(List<Integer> numberList) {
 		validateNumberListSize(new HashSet<>(numberList));
@@ -33,6 +33,10 @@ public class Lotto {
 
 	public boolean hasNumber(int number) {
 		return numbers.contains(number);
+	}
+
+	public List<Integer> getNumbers() {
+		return numbers;
 	}
 
 	@Override
