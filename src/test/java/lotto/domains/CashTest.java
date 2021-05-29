@@ -7,15 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CashTest {
     @Test
-    void 생성자_테스트() {
+    void 현재금액으로_구입가능한_수량구하기_테스트() {
         Cash cash = new Cash(14000);
-        assertThat(cash).isNotNull();
-    }
-
-    @Test
-    void 현재금액으로_구입가능한_수량구하기() {
-        Cash cash = new Cash(14000);
-        assertThat(cash.numberOfPurchasesAvailable(new Cash(1000))).isEqualTo(14);
+        assertThat(cash.numberOfPurchasesAvailable()).isEqualTo(14);
     }
 
     @Test

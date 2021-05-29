@@ -1,30 +1,31 @@
 package lotto.domains;
 
-import java.util.Arrays;
+import lotto.enums.MatchingInfo;
 
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
+    private MatchingInfo matchingInfo;
 
-    public Lotto(){
+    public Lotto() {
         lottoNumbers = new LottoNumbers();
     }
 
-    public Lotto(final LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchingNumberCount(LottoNumbers winningNumber) {
-        int matchingNumberCount = 0;
-        for (int lottoNumber : lottoNumbers.lottoNumbers()) {
-            if (winningNumber.contains(lottoNumber)) {
-                matchingNumberCount++;
-            }
-        }
-        return matchingNumberCount;
+    public void matching(LottoNumbers winningNumbers, int bonusNumber) {
+        int matchingNumber = this.lottoNumbers.matchingNumberCount(winningNumbers);
+        boolean hasBonusNumber = this.lottoNumbers.contains(bonusNumber);
+        this.matchingInfo = MatchingInfo.matchingInfo(matchingNumber, hasBonusNumber);
     }
 
-    public String lottoNumbers() {
-        return Arrays.toString(lottoNumbers.lottoNumbers().toArray());
+    public LottoNumbers lottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public MatchingInfo matchingInfo() {
+        return this.matchingInfo;
     }
 }

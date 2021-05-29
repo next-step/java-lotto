@@ -17,29 +17,17 @@ public class LottoNumbers {
         validateNumber(lottoNumbers);
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private List<Integer> makeLottoNumbers() {
-        List<Integer> lottoNumberList;
-        List<Integer> numberList = new ArrayList<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            numberList.add(i);
-        }
-        Collections.shuffle(numberList);
-        lottoNumberList = numberList.subList(0,6);
+        List<Integer> lottoNumberList = new ArrayList<>(LottoSubstituteNumbers.sixLottoNumbers());
         Collections.sort(lottoNumberList);
         return lottoNumberList;
     }
 
     private void validateNumber(List<Integer> lottoNumbers) {
-        for (int lottoNumber : lottoNumbers) {
-            validateMaxMinNumber(lottoNumber);
-        }
-    }
-
-    private void validateMaxMinNumber(int lottoNumber) {
-        if (lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER) {
+        if (lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber < LOTTO_MIN_NUMBER || lottoNumber > LOTTO_MAX_NUMBER)) {
             throw new IllegalArgumentException("로또번호는 1부터 45까지의 값을 입력해주세요");
         }
     }
@@ -62,6 +50,12 @@ public class LottoNumbers {
     }
 
     public List<Integer> lottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public int matchingNumberCount(LottoNumbers winningLottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(winningLottoNumbers::contains)
+                .count();
     }
 }

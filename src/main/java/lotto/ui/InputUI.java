@@ -12,4 +12,8 @@ public class InputUI {
     public static String inputWinningNumbers() {
         return scanner.nextLine();
     }
+
+    public static int inputBonusNumber() {
+        return Integer.parseInt(scanner.nextLine());
+    }
 }
