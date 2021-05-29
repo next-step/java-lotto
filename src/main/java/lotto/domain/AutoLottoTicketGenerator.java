@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class AutoLottoTicketGenerator implements TicketGenerator {
+public class AutoLottoTicketGenerator {
 
     private final int NUMBER_COUNT_PER_TICKET = 6;
 
