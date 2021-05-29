@@ -4,10 +4,11 @@ import step5.lotto.LottoNumber;
 import step5.lotto.LottoTicket;
 import step5.utils.StringUtils;
 import step5.utils.ValidationUtils;
-import java.util.List;
 import java.util.Set;
 
 public class WinningNumbers {
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ONE_VALUE = 1;
     private LottoTicket winningNumbers;
     private LottoNumber bonusNumber;
 
@@ -18,15 +19,24 @@ public class WinningNumbers {
         ValidationUtils.validWinningNumbersDigit(winningNumbers.size());
         ValidationUtils.validDuplicationNumbers(winningNumbers, bonusNumber);
 
-        this.winningNumbers = new LottoTicket(winningNumbers);
+        LottoTicket winningNumberTicket = new LottoTicket();
+        winningNumberTicket.createManualLottoNumbers(winningNumbers);
+        this.winningNumbers = winningNumberTicket;
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public List<LottoNumber> getWinningNumbers() {
-        return this.winningNumbers.getLottoNumbers();
+    public boolean hasBonusNumber(LottoTicket ticket) {
+        if (ticket.containNumber(this.bonusNumber) == ONE_VALUE) {
+            return true;
+        }
+        return false;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public int calculateWinningPoints(LottoTicket ticket) {
+        int points = DEFAULT_VALUE;
+        for (LottoNumber winningNumber: winningNumbers.getLottoNumbers()) {
+            points += ticket.containNumber(winningNumber);
+        }
+        return points;
     }
 }

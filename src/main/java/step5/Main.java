@@ -8,14 +8,20 @@ import step5.winning.WinningStatistics;
 
 public class Main {
     public static void main(String[] args) {
-        Lotto lotto = new Lotto(InputView.inputPurchasePrice());
-        ResultView.printPurchasePrice(lotto.getLottoCount());
+        Lotto lotto = new Lotto(InputView.inputPurchasePrice(), InputView.inputLottoManualCount());
+        InputView.inputLottoManualNumbers(lotto);
+        lotto.addAutoLottoTicket();
+
+        ResultView.printPurchaseResult(lotto.getLottoCount());
         ResultView.printLotto(lotto.getLottoTickets());
 
         String inputWinningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(inputWinningNumbers, bonusNumber);
-        WinningStatistics winningStatistics = new WinningStatistics(lotto, winningNumbers);
+
+        WinningStatistics winningStatistics = new WinningStatistics();
+        winningStatistics.calculateWinningResult(lotto.getLottoTickets(), winningNumbers);
+        winningStatistics.calculateYield(lotto.getPurchasePrice());
         ResultView.printStatistics(winningStatistics);
     }
 }

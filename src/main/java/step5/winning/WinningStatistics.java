@@ -1,7 +1,5 @@
 package step5.winning;
 
-import step5.lotto.Lotto;
-import step5.lotto.LottoNumber;
 import step5.lotto.LottoTicket;
 import java.math.*;
 import java.util.*;
@@ -14,55 +12,37 @@ public class WinningStatistics {
     private final Map<WinningPrize, Integer> winningResults;
     private BigDecimal yield;
 
-    public WinningStatistics(Lotto lottoList, WinningNumbers winningNumbers) {
+    public WinningStatistics() {
         winningResults = new HashMap<>();
         this.yield = new BigDecimal(String.valueOf(DEFAULT_VALUE));
-        calculateWinningResult(lottoList.getLottoTickets(), winningNumbers);
-        calculateYield(lottoList.getPurchasePrice());
     }
 
     public void calculateWinningResult(List<LottoTicket> lottoList, WinningNumbers winningNumbers) {
         for (int i = DEFAULT_VALUE; i < lottoList.size(); i++) {
             WinningPrize prize = makeWinningResult(lottoList.get(i), winningNumbers);
-            winningResults.put(prize, hasWinningPrize(prize));
+            winningResults.put(prize, getWinningPrizeCount(prize));
         }
     }
 
     public WinningPrize makeWinningResult(LottoTicket ticket, WinningNumbers winningNumbers) {
-        int points = compareNumbers(ticket, winningNumbers);
+        int points = winningNumbers.calculateWinningPoints(ticket);
         boolean bonusNumberResult = false;
         if (points == FIVE_VALUE) {
-            bonusNumberResult = hasBonusNumber(ticket, winningNumbers.getBonusNumber());
+            bonusNumberResult = winningNumbers.hasBonusNumber(ticket);
         }
         return  WinningPrize.valueOf(points, bonusNumberResult);
     }
 
-    public int compareNumbers(LottoTicket ticket, WinningNumbers winningNumbers) {
-        int points = DEFAULT_VALUE;
-        List<LottoNumber> winningNumberList = winningNumbers.getWinningNumbers();
-        for (LottoNumber winningNumber: winningNumberList) {
-            points += ticket.containNumber(winningNumber);
-        }
-        return points;
-    }
-
-    public boolean hasBonusNumber(LottoTicket ticket, LottoNumber bonusNumber) {
-        if (ticket.containNumber(bonusNumber) == ONE_VALUE) {
-            return true;
-        }
-        return false;
-    }
-
-    private int hasWinningPrize(WinningPrize prize) {
+    private int getWinningPrizeCount(WinningPrize prize) {
         return this.winningResults.getOrDefault(prize, DEFAULT_VALUE) + ONE_VALUE;
     }
 
     public void calculateYield(final int amount) {
-        BigDecimal totalPrizeMoney = new BigDecimal(String.valueOf(getTotalPrizeMoney()));
+        BigDecimal totalPrizeMoney = new BigDecimal(String.valueOf(sumTotalPrizeMoney()));
         this.yield = totalPrizeMoney.divide(new BigDecimal(String.valueOf(amount)), 2, RoundingMode.HALF_EVEN);
     }
 
-    private int getTotalPrizeMoney() {
+    private int sumTotalPrizeMoney() {
         int totalPrizeMoney = DEFAULT_VALUE;
         for (WinningPrize winningPrize : winningResults.keySet()) {
             totalPrizeMoney += winningPrize.getWinningMoney() * winningResults.get(winningPrize);

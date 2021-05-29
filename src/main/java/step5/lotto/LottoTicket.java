@@ -21,33 +21,23 @@ public class LottoTicket {
 
     public LottoTicket() {
         lottoTicket = new TreeSet<>();
-        createAutoLottoNumbers();
     }
 
-    public LottoTicket(Set<Integer> winningNumbers) {
-        lottoTicket = new TreeSet<>();
-        createWinningLottoNumbers(winningNumbers);
-    }
-
-    private void createAutoLottoNumbers() {
+    public void createAutoLottoNumbers() {
         Collections.shuffle(DEFAULT_NUMBERS);
         for (int i = LOTTO_START_DIGIT; i < LOTTO_END_DIGIT; i++) {
             this.lottoTicket.add(new LottoNumber(DEFAULT_NUMBERS.get(i)));
         }
     }
-    private void createWinningLottoNumbers(Set<Integer> numbers) {
+
+    public void createManualLottoNumbers(Set<Integer> numbers) {
         for (int number: numbers) {
             this.lottoTicket.add(new LottoNumber(number));
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        List<LottoNumber> list = new ArrayList<>();
-        Iterator<LottoNumber> it = this.lottoTicket.iterator();
-        while (it.hasNext()) {
-            list.add(it.next());
-        }
-        return list;
+    public Set<LottoNumber> getLottoNumbers() {
+        return this.lottoTicket;
     }
 
     public List<Integer> getLottoNumberList() {
