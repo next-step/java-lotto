@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoNumbersTest {
     @DisplayName("로또 번호 생성 테스트")
     @ParameterizedTest
     @MethodSource("createLottoNumber")
     void createLottoNumber_로또_일치_검증(List<Integer> lotto, List<Integer> compareLotto) {
-        LottoNumber lottoNumber = new LottoNumber(lotto);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(compareLotto));
+        LottoNumbers lottoNumbers = new LottoNumbers(lotto);
+        assertThat(lottoNumbers).isEqualTo(new LottoNumbers(compareLotto));
     }
 
     static Stream<Arguments> createLottoNumber() {
@@ -33,7 +33,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("isRightNumber")
     void isRightNumber_로또_번호_유효성_체크(List<Integer> lottoNumber) {
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> new LottoNumbers(lottoNumber))
                 .isInstanceOf(LottoSizeOrDuplicateException.class);
     }
 

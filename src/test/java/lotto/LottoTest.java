@@ -18,8 +18,8 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("countMatchNumberTest")
     void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectedRank, LottoBonusNumber bonusNumber) {
-        Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
-        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
+        Lotto lotto = new Lotto(() -> new LottoNumbers(userLotto));
+        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumbers(winLotto)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectedRank);
     }
 
@@ -34,7 +34,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("equalUserLottoAndWinLotto")
     void isEqualUserLottoAndWinLotto(List<Integer> userRandomLotto, String winLottoInput) {
-        Lotto userLotto = new Lotto(() -> new LottoNumber(userRandomLotto));
+        Lotto userLotto = new Lotto(() -> new LottoNumbers(userRandomLotto));
         Lotto winLotto = new Lotto(LottoValidationUtils.lottoNumberToList(winLottoInput));
         assertThat(userLotto).isEqualTo(winLotto);
     }

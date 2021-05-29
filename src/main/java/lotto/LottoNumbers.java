@@ -3,10 +3,10 @@ package lotto;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumbers {
     private final List<Integer> lottoNumbers;
 
-    public LottoNumber(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         LottoValidationUtils.validationLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -25,8 +25,8 @@ public class LottoNumber {
 
     public int compareWinLotto(Lotto winLotto) {
         int countMatchNumber = 0;
-        for (Integer winNumber : lottoNumbers) {
-            countMatchNumber += winLotto.matchNumber(winNumber);
+        for (Integer userLottoNumber : lottoNumbers) {
+            countMatchNumber += winLotto.matchNumber(userLottoNumber);
         }
         return countMatchNumber;
     }
@@ -35,7 +35,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

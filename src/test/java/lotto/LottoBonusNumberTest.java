@@ -28,7 +28,7 @@ public class LottoBonusNumberTest {
     @ParameterizedTest
     @MethodSource("bonusNumberTest")
     void isExistbonusNumberInWinLottoNumber_당첨_로또_번호에_없는_번호_검증(List<Integer> winLotto, int bonusNumber) {
-        Lotto lotto = new Lotto(() -> new LottoNumber(winLotto));
+        Lotto lotto = new Lotto(() -> new LottoNumbers(winLotto));
         assertThatThrownBy(() -> new LottoBonusNumber(lotto, bonusNumber))
                 .isInstanceOf(BonusNumberException.class);
     }
@@ -43,7 +43,7 @@ public class LottoBonusNumberTest {
     @ParameterizedTest
     @MethodSource("bonusNumberFormatTest")
     void validateBonusNumber_보너스_번호_유효성_체크(List<Integer> winLotto, int bonusNumber) {
-        Lotto lotto = new Lotto(() -> new LottoNumber(winLotto));
+        Lotto lotto = new Lotto(() -> new LottoNumbers(winLotto));
         assertThatThrownBy(() -> new LottoBonusNumber(lotto, bonusNumber))
                 .isInstanceOf(LottoNumberRangeException.class);
     }

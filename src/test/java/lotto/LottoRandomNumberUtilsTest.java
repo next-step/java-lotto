@@ -17,16 +17,16 @@ public class LottoRandomNumberUtilsTest {
     @DisplayName("로또 번호 랜덤 생성 후 정상 생성 테스트")
     @Test
     void creatRandomLottoNumber_랜덤_로또_번호_생성() {
-        LottoNumber lottoNumber = new LottoRandomNumberUtils().createRandomLotto();
-        assertThat(lottoNumber.lottoSize(6)).isTrue();
+        LottoNumbers lottoNumbers = new LottoRandomNumberUtils().createRandomLotto();
+        assertThat(lottoNumbers.lottoSize(6)).isTrue();
     }
 
     @DisplayName("로또 랜덤 번호 테스트 코드 위해 함수형 인터페이스 생성")
     @ParameterizedTest
     @MethodSource("createRandomLottoNumberTest")
     void createRandomLottoNumberTest_로또_넘버_테스트_넘기기_테스트(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectRank, LottoBonusNumber bonusNumber) {
-        Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
-        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
+        Lotto lotto = new Lotto(() -> new LottoNumbers(userLotto));
+        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumbers(winLotto)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectRank);
     }
 

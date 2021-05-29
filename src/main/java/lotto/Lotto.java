@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final LottoNumber lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
         LottoRandomNumber lottoRandomNumber = new LottoRandomNumberUtils();
@@ -18,7 +18,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = new LottoNumber(lottoNumbers);
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
     public LottoRank compareWinLotto(Lotto winLotto, LottoBonusNumber bonusNumber) {
@@ -30,8 +30,8 @@ public class Lotto {
         return userLottoRank;
     }
 
-    public int matchNumber(Integer winNumber) {
-        return lottoNumbers.isContainWinNumber(winNumber) ? 1 : 0;
+    public int matchNumber(Integer userLottoNumber) {
+        return lottoNumbers.isContainWinNumber(userLottoNumber) ? 1 : 0;
     }
 
     public boolean isMatchNumber(Integer winNumber) {

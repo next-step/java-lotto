@@ -18,7 +18,7 @@ public class LottosTest {
     @MethodSource("countLottosCollectNumber")
     void countLottosCollectNumber_테스트코드로_구매_로또_일치_번호_테스트(List<Integer> userRandomLotto, String winLottoInput, LottoRank expectlottoRank, int expectedCount, LottoBonusNumber bonusNumber) {
         LottoBuy lottoBuy = new LottoBuy();
-        Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumber(userRandomLotto));
+        Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumbers(userRandomLotto));
         Lotto winLotto = new Lotto(LottoValidationUtils.lottoNumberToList(winLottoInput));
         LottoRecord lottoRecord = lottos.compareWinLotto(winLotto, bonusNumber);
         assertThat(lottoRecord.isRecord(expectlottoRank, expectedCount)).isTrue();

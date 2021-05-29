@@ -1,5 +1,5 @@
 package lotto;
 
 public interface LottoRandomNumber {
-    LottoNumber createRandomLotto();
+    LottoNumbers createRandomLotto();
 }
