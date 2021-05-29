@@ -5,7 +5,9 @@ public enum ErrorCode {
     INVALID_LOTTO_NUMBER_LENGTH("Length of lotto number should be 6."),
     DUPLICATED_LOTTO_NUMBER("Lotto number should not be duplicated."),
     INVALID_MONEY_RANGE("Money input should be bigger than lotto ticket price."),
-    DUPLICATED_BONUS_NUMBER("Bonus ball should not be included in winning number.");
+    DUPLICATED_BONUS_NUMBER("Bonus ball should not be included in winning number."),
+    INVALID_TICKET_COUNT_RANGE("The number of ticket count is wrong."),
+    INPUT_MISS_MATCHED("Input format is wrong.");
 
     private final String errorMessage;
 

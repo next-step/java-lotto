@@ -7,15 +7,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MAX_LOTTO_NUMBER = 45;
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        throwInvalidLottoNumber(lottoNumber);
-        this.lottoNumber = lottoNumber;
-    }
-
-
-    public LottoNumber(String lottoText) {
-        int lottoNumber = Integer.parseInt(lottoText);
-        throwInvalidLottoNumber(lottoNumber);
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
@@ -26,6 +18,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int lottoNumber) {
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE.getErrorMessage());
+        }
         return new LottoNumber(lottoNumber);
     }
 

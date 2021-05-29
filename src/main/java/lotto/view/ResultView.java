@@ -2,12 +2,13 @@ package lotto.view;
 
 import lotto.common.WinningType;
 import lotto.domain.GameWinningResult;
+import lotto.domain.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;
 
 public class ResultView {
-    private static final String LOTTO_TICKET_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_TICKET_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String STATISTICS_TITLE_MESSAGE = "\n당첨 통계\n---------";
     private static final String SECOND_STATISTICS_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
@@ -16,12 +17,17 @@ public class ResultView {
     private static final int PROFIT_STANDARD = 1;
     private static final int MIN_PROFIT_MATCHING_COUNT = 3;
 
-    public void printLottoTicketCount(int lottoTicketCount) {
-        System.out.println(lottoTicketCount + LOTTO_TICKET_COUNT_MESSAGE);
+    public void printLottoTicketCount(int manualTicketCount, int lottoTicketCount) {
+        System.out.printf(LOTTO_TICKET_COUNT_MESSAGE, manualTicketCount, lottoTicketCount);
     }
 
-    public void printLottoTickets(String lottoTicketsText) {
-        System.out.println(lottoTicketsText);
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(LottoTicket lottoTicket : lottoTickets) {
+            stringBuilder.append(lottoTicket.getString() + "\n");
+        }
+
+        System.out.println(stringBuilder);
     }
 
     public void printGameResult(List<GameWinningResult> gameResult) {

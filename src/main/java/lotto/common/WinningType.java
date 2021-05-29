@@ -19,11 +19,15 @@ public enum WinningType {
     }
 
     public static WinningType of(int matchCount, boolean matchBonus) {
+        if (matchCount >= MISS.matchCount && matchCount < FIFTH.matchCount) {
+            return MISS;
+        }
+
         return Arrays.stream(WinningType.values())
                 .filter(t -> t.matchCount == matchCount)
                 .filter(t -> !t.equals(SECOND) || matchBonus)
                 .findFirst()
-                .orElse(MISS);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int getMatchCount() {

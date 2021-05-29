@@ -14,7 +14,7 @@ public class LottoTicketGenerator {
         LOTTO_NUMBERS_CACHE = new ArrayList<>();
 
         for (int i = LottoNumber.MIN_LOTTO_NUMBER; i <= LottoNumber.MAX_LOTTO_NUMBER; i++) {
-            LOTTO_NUMBERS_CACHE.add(new LottoNumber(i));
+            LOTTO_NUMBERS_CACHE.add(LottoNumber.of(i));
         }
     }
 
@@ -29,7 +29,7 @@ public class LottoTicketGenerator {
         List<LottoNumber> resultLottoNumbers = Arrays.stream(lottoNumbersText.split(LOTTO_NUMBERS_TEXT_SPLIT_REGEX))
                                                     .map(Integer::parseInt)
                                                     .sorted()
-                                                    .map(LottoNumber::new)
+                                                    .map(LottoNumber::of)
                                                     .collect(Collectors.toList());
 
         throwInvalidLottoNumbers(resultLottoNumbers);
