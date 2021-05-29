@@ -26,7 +26,7 @@ public class LottoRandomNumberUtilsTest {
     @MethodSource("createRandomLottoNumberTest")
     void createRandomLottoNumberTest_로또_넘버_테스트_넘기기_테스트(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectRank, LottoBonusNumber bonusNumber) {
         Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
-        LottoRank lottoRank = lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
+        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectRank);
     }
 

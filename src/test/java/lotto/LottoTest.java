@@ -19,7 +19,7 @@ public class LottoTest {
     @MethodSource("countMatchNumberTest")
     void countCollectLottoNumber_일치하는_로또_번호_갯수(List<Integer> userLotto, List<Integer> winLotto, LottoRank expectedRank, LottoBonusNumber bonusNumber) {
         Lotto lotto = new Lotto(() -> new LottoNumber(userLotto));
-        LottoRank lottoRank = lotto.compareWinLottoNumber(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
+        LottoRank lottoRank = lotto.compareWinLotto(new Lotto(() -> new LottoNumber(winLotto)), bonusNumber);
         assertThat(lottoRank).isEqualTo(expectedRank);
     }
 

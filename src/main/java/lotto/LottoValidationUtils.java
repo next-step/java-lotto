@@ -44,13 +44,13 @@ public class LottoValidationUtils {
             throw new NumberFormatException(NUMBER_NULL_EXCEPTION_MSG);
         }
         String[] winNumberArr = winNumber.replaceAll(" ", "").split(WIN_LOTTO_NUMBER_DELIMITER);
-        List<Integer> winNumberList = new ArrayList<>();
+        List<Integer> winNumbers = new ArrayList<>();
         for(String number : winNumberArr) {
             checkNumberAndRange(number);
-            winNumberList.add(Integer.parseInt(number));
+            winNumbers.add(Integer.parseInt(number));
         }
-        validationLottoNumber(winNumberList);
-        return winNumberList;
+        validationLottoNumber(winNumbers);
+        return winNumbers;
     }
 
     public static void checkNumberAndRange(String winNumberArr) {

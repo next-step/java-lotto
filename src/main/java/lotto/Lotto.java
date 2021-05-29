@@ -5,37 +5,37 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final LottoNumber lottoNumber;
+    private final LottoNumber lottoNumbers;
 
     public Lotto() {
         LottoRandomNumber lottoRandomNumber = new LottoRandomNumberUtils();
-        this.lottoNumber = lottoRandomNumber.createRandomLotto();
+        this.lottoNumbers = lottoRandomNumber.createRandomLotto();
     }
 
     public Lotto(LottoRandomNumber lottoRandomNumber) {
-        this.lottoNumber = lottoRandomNumber.createRandomLotto();
+        this.lottoNumbers = lottoRandomNumber.createRandomLotto();
     }
 
-    public Lotto(List<Integer> lottoNumber) {
-        Collections.sort(lottoNumber);
-        this.lottoNumber = new LottoNumber(lottoNumber);
+    public Lotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = new LottoNumber(lottoNumbers);
     }
 
-    public LottoRank compareWinLottoNumber(Lotto winLottoNumber, LottoBonusNumber bonusNumber) {
-        int matchCount = lottoNumber.compareWinLottoNumber(winLottoNumber);
-        LottoRank lottoRank = LottoRank.searchRank(matchCount);
-        if (lottoRank.isThird() || lottoRank.isSecond()) {
-            lottoRank = LottoRank.searchBonusRank(matchCount, lottoNumber.isContainsBonusNumber(bonusNumber));
+    public LottoRank compareWinLotto(Lotto winLotto, LottoBonusNumber bonusNumber) {
+        int matchCount = lottoNumbers.compareWinLotto(winLotto);
+        LottoRank userLottoRank = LottoRank.searchRank(matchCount);
+        if (userLottoRank.isThird() || userLottoRank.isSecond()) {
+            userLottoRank = LottoRank.searchBonusRank(matchCount, lottoNumbers.isContainsBonusNumber(bonusNumber));
         }
-        return lottoRank;
+        return userLottoRank;
     }
 
     public int matchNumber(Integer winNumber) {
-        return lottoNumber.isContainNumber(winNumber) ? 1 : 0;
+        return lottoNumbers.isContainWinNumber(winNumber) ? 1 : 0;
     }
 
     public boolean isMatchNumber(Integer winNumber) {
-        return lottoNumber.isContainNumber(winNumber);
+        return lottoNumbers.isContainWinNumber(winNumber);
     }
 
     @Override
@@ -43,16 +43,16 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumber, lotto.lottoNumber);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return lottoNumbers.toString();
     }
 }

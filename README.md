@@ -103,7 +103,7 @@ chore (maintain)
 ## 기능 구현
 * LottoRank enum 수정
   * 3단계에서 만든 LottoRank enum 에 2등 상수 추가
-* Lotto.compareWinLottoNumber() 에 보너스 번호 인자 값 추가
+* Lotto.compareWinLotto() 에 보너스 번호 인자 값 추가
   * 방안 1 - 그럼 Lotto 에 보너스 볼이 있는지 없는지 boolean 상태값을 추가 
   * 방안 2 - LottoNumber 에 boolean 리턴값으로하는 보너스 볼 contains 메서드 추가
     * LottoRank.searchRank에 boolean 인자값 추가

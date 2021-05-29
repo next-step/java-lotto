@@ -4,31 +4,31 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final List<Integer> lottoNumber;
+    private final List<Integer> lottoNumbers;
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        LottoValidationUtils.validationLottoNumber(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(List<Integer> lottoNumbers) {
+        LottoValidationUtils.validationLottoNumber(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isContainNumber(Integer winNumber) {
-        return lottoNumber.contains(winNumber);
+    public boolean isContainWinNumber(Integer winNumber) {
+        return lottoNumbers.contains(winNumber);
     }
 
     public boolean isContainsBonusNumber(LottoBonusNumber bonusNumber) {
-        return bonusNumber.isContainsBonusNumber(lottoNumber);
+        return bonusNumber.isContainsBonusNumber(lottoNumbers);
     }
 
     public boolean lottoSize(int expectedSize) {
-        return lottoNumber.size() == expectedSize;
+        return lottoNumbers.size() == expectedSize;
     }
 
-    public int compareWinLottoNumber(Lotto winLottoNumber) {
-        int collectNumber = 0;
-        for (Integer winNumber : lottoNumber) {
-            collectNumber += winLottoNumber.matchNumber(winNumber);
+    public int compareWinLotto(Lotto winLotto) {
+        int countMatchNumber = 0;
+        for (Integer winNumber : lottoNumbers) {
+            countMatchNumber += winLotto.matchNumber(winNumber);
         }
-        return collectNumber;
+        return countMatchNumber;
     }
 
     @Override
@@ -36,16 +36,16 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return lottoNumbers.toString();
     }
 }

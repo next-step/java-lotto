@@ -20,7 +20,7 @@ public class LottosTest {
         LottoBuy lottoBuy = new LottoBuy();
         Lottos lottos = lottoBuy.buyOneRandomLotto(() -> new LottoNumber(userRandomLotto));
         Lotto winLotto = new Lotto(LottoValidationUtils.lottoNumberToList(winLottoInput));
-        LottoRecord lottoRecord = lottos.compareWinNumber(winLotto, bonusNumber);
+        LottoRecord lottoRecord = lottos.compareWinLotto(winLotto, bonusNumber);
         assertThat(lottoRecord.isRecord(expectlottoRank, expectedCount)).isTrue();
     }
 
