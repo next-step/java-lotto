@@ -7,44 +7,25 @@ import lotto.intf.NumbersGenerator;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private final Price buyPrice;
-    private Lottos manualLottos;
+    private NumbersGenerator generator;
 
-    public LottoMachine(Price buyPrice) {
-        this.buyPrice = buyPrice;
-        this.manualLottos = new Lottos(new ArrayList<>());
+    public LottoMachine(NumbersGenerator generator) {
+        this.generator = generator;
     }
 
-    public LottoMachine(int buyPrice) {
-        this(new Price(buyPrice));
-    }
-
-    public LottoMachine(Price buyPrice, List<LottoNumbers> manualNumbers) {
-        this.buyPrice = buyPrice;
-        this.manualLottos = new Lottos(manualNumbers);
-    }
-
-    public LottoMachine(int buyPrice, List<LottoNumbers> manualNumbers) {
-        this(new Price(buyPrice), manualNumbers);
-    }
-
-    public Lottos createLottos(NumbersGenerator numbersGenerator) {
+    public Lottos createLottos(Price price, List<LottoNumbers> manualLottoNumbers) {
+        Long autoLottoCount = (price.getPrice() / LOTTO_PRICE) - manualLottoNumbers.size();
         List<LottoNumbers> lottos = new ArrayList<>();
-        addMenualLottoNumbers(lottos);
-        addAutoLottoNumbers(lottos, numbersGenerator);
+        lottos.addAll(manualLottoNumbers);
+        lottos.addAll(createAutoLottos(autoLottoCount));
         return new Lottos(lottos);
     }
 
-    private void addMenualLottoNumbers(List<LottoNumbers> lottos) {
-        for (int i = 0; i < this.manualLottos.getSize(); i++) {
-            lottos.add(this.manualLottos.getLottoNumbers(i));
+    private List<LottoNumbers> createAutoLottos(Long autoLottoCount) {
+        List<LottoNumbers> autoLottos = new ArrayList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
+            autoLottos.add(this.generator.generateLottoNumbers());
         }
-    }
-
-    private void addAutoLottoNumbers(List<LottoNumbers> lottos, NumbersGenerator numbersGenerator) {
-        long buyCount = (buyPrice.getPrice() / LOTTO_PRICE) - this.manualLottos.getSize();
-        for (int i = 0; i < buyCount; i++) {
-            lottos.add(numbersGenerator.generateLottoNumbers());
-        }
+        return autoLottos;
     }
 }

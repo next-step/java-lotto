@@ -1,17 +1,18 @@
 package lotto.view;
 
 import lotto.constant.LottoRank;
-import lotto.domain.LottoManualCount;
 import lotto.domain.LottoRankStatistics;
 import lotto.domain.Lottos;
 
 public class ResultView {
     public static final double PROFIT_STANDARD = 1.0;
 
-    public void printLottosNumber(Lottos lottos, LottoManualCount manualLottoCount) {
-        int manualCount = manualLottoCount.manualCount();
+    public void printBuyLottosCount(int allLottoCount, int manualLottoCount) {
         System.out.println("");
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, lottos.getSize() - manualCount);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, allLottoCount - manualLottoCount);
+    }
+
+    public void printLottoNumbers(Lottos lottos) {
         for (int i = 0; i < lottos.getSize(); i++) {
             System.out.println(lottos.getLottoNumbers(i).toString());
         }

@@ -3,42 +3,39 @@ package lotto.controller;
 import java.util.List;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoManualCount;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumbersGenerator;
 import lotto.domain.LottoRankStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
-import lotto.utils.LottoNumbersUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
     private final InputView inputView;
     private final ResultView resultView;
-    private Lottos lottos;
+    private final LottoMachine lottoMachine;
 
     public LottoController() {
         this.inputView = new InputView();
         this.resultView = new ResultView();
+        this.lottoMachine = new LottoMachine(new LottoNumbersGenerator());
     }
 
     public void playLotto() {
         Price price = new Price(this.inputView.getBuyPrice());
-        LottoManualCount manualLottoCount = new LottoManualCount(this.inputView.getManualLottoCount(price));
-        List<LottoNumbers> manualLottoNumbers = this.inputView.getManualLottoNumbers(manualLottoCount);
-        LottoMachine lottoMachine = new LottoMachine(price, manualLottoNumbers);
-        this.lottos = lottoMachine.createLottos(new LottoNumbersGenerator());
-        this.resultView.printLottosNumber(this.lottos, manualLottoCount);
+        List<LottoNumbers> manualLottoNumbers = this.inputView.getManualLottoNumbers(price);
+        Lottos lottos = this.lottoMachine.createLottos(price, manualLottoNumbers);
+        this.resultView.printBuyLottosCount(lottos.getSize(), manualLottoNumbers.size());
+        this.resultView.printLottoNumbers(lottos);
+        winningConfirmation(lottos);
     }
 
-    public void showResult() {
-        LottoNumbers winningLottoNumbers = LottoNumbersUtil.toLottoNumbers(this.inputView.getWinningNumber());
-        LottoNumber bonusNumber = new LottoNumber(this.inputView.getBonusNumber());
-        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
-        LottoRankStatistics lottoStatistics = new LottoRankStatistics(this.lottos, winningNumbers);
+    private void winningConfirmation(Lottos lottos) {
+        WinningNumbers winningNumbers = new WinningNumbers(this.inputView.getWinningNumber(),
+                this.inputView.getBonusNumber());
+        LottoRankStatistics lottoStatistics = new LottoRankStatistics(lottos, winningNumbers);
         this.resultView.printStatisticsResult(lottoStatistics);
         this.resultView.printRateOfReturnResult(lottoStatistics);
     }

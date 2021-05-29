@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +27,10 @@ public class LottoMachineTest {
         List<LottoNumbers> manualNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7").stream()
                 .map(LottoNumbersUtil::toLottoNumbers)
                 .collect(Collectors.toList());
-        LottoMachine lottoMachine = new LottoMachine(10000, manualNumbers);
+        LottoMachine lottoMachine = new LottoMachine(createNumbersGenerator("10,11,12,13,14,15"));
 
         // when
-        Lottos lottos = lottoMachine.createLottos(createNumbersGenerator("10,11,12,13,14,15"));
+        Lottos lottos = lottoMachine.createLottos(new Price(10000), manualNumbers);
 
         // then
         assertThat(lottos.getLottoNumbers(index).getCountOfMatchingNumber(LottoNumbersUtil.toLottoNumbers(textResultLottoNumbers))).isEqualTo(6);
@@ -41,10 +42,10 @@ public class LottoMachineTest {
     void create(int price, int lottoCount) {
         // given
         NumbersGenerator numbersGenerator = createNumbersGenerator("1,2,3,4,5,7");
-        LottoMachine lottoMachine = new LottoMachine(price);
+        LottoMachine lottoMachine = new LottoMachine(numbersGenerator);
 
         // when
-        Lottos lottos = lottoMachine.createLottos(numbersGenerator);
+        Lottos lottos = lottoMachine.createLottos(new Price(price), new ArrayList<LottoNumbers>());
 
         // then
         assertThat(lottos.getSize()).isEqualTo(lottoCount);
