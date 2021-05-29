@@ -32,4 +32,12 @@ public class PayTest {
         assertThatThrownBy(() -> new Pay(payForLotto))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("자동 번호를 살 수 있는 갯수")
+    @ParameterizedTest
+    @CsvSource(value = {"1100:1:0", "2100:1:1"}, delimiter = ':')
+    void countAutoLotto_자동_번호_개수(int payForLotto, int manualLottoCount, int autoLottoCount) {
+        Pay pay = new Pay(payForLotto);
+        assertThat(pay.countAutoLotto(manualLottoCount)).isEqualTo(autoLottoCount);
+    }
 }

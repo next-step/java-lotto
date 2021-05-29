@@ -15,12 +15,8 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
-    public boolean isCount(int expectedCount) {
-        return getCount() == expectedCount;
-    }
-
-    public void createRandomLotto() {
-        this.lottos.add(new Lotto());
+    public void createLotto(Lotto lotto) {
+        this.lottos.add(lotto);
     }
 
     public LottoRecord compareWinLotto(Lotto winLotto, LottoNumber bonusNumber) {
@@ -30,6 +26,10 @@ public class Lottos {
         }
         userLottoRecord.calculateProfit(lottos.size());
         return userLottoRecord;
+    }
+
+    public boolean isCount(int expectedCount) {
+        return getCount() == expectedCount;
     }
 
     public int getCount() {

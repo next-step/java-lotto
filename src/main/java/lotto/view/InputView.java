@@ -5,9 +5,11 @@ import lotto.*;
 import java.util.Scanner;
 
 public class InputView {
-    public static final String LOTTO_BUY_PAY_INPUT = "구입금액을 입력해 주세요.";
-    public static final String WIN_LOTTO_NUMBER_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String BONUS_LOTTO_NUMBER_INPUT = "보너스 번호를 입력해 주세요.";
+    private static final String LOTTO_BUY_PAY_INPUT = "구입금액을 입력해 주세요.";
+    private static final String WIN_LOTTO_NUMBER_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_LOTTO_NUMBER_INPUT = "보너스 번호를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_COUNT_INPUT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER_INPUT = "수동으로 구매할 번호를 입력해 주세요.";
 
     private Scanner scanner;
 
@@ -22,6 +24,30 @@ public class InputView {
             scanner.nextLine();
         }
         return pay;
+    }
+
+    public BuyLottoCount manualLottoCount(Pay userPay) {
+        BuyLottoCount autoLottoCount;
+        try {
+            System.out.println(MANUAL_LOTTO_COUNT_INPUT);
+            int autoLottoCountInput = scanner.nextInt();
+            autoLottoCount = new BuyLottoCount(autoLottoCountInput, userPay);
+        } finally {
+            scanner.nextLine();
+        }
+        return autoLottoCount;
+    }
+
+    public Lottos buyManualLotto(BuyLottoCount userBuyLottoCount) {
+        LottoBuy lottoBuy = new LottoBuy();
+        String manualLottoNumber;
+        int manualLottoCount = userBuyLottoCount.getManualCount();
+        System.out.println(MANUAL_LOTTO_NUMBER_INPUT);
+        for (int count = 0; count < manualLottoCount; count++) {
+            manualLottoNumber = scanner.nextLine();
+            lottoBuy.buyManualLotto(manualLottoNumber);
+        }
+        return lottoBuy.buyAutoLotto(userBuyLottoCount.getAutoLottoCount());
     }
 
     public Lotto inputWinLottoNumber() {
