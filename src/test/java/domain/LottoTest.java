@@ -22,7 +22,7 @@ class LottoTest {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		final Lotto lotto = new Lotto(numbers);
-		assertThat(lotto.rank()).isEqualTo(Rank.NONE);
+		assertThat(lotto.rank()).isEqualTo(Rank.NOT_YET);
 
 		lotto.rank(Rank.FIFTH);
 

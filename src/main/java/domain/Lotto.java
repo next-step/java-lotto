@@ -2,14 +2,14 @@ package domain;
 
 import ui.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
 	public static final Integer LOTTO_NUMBER_LENGTH = 6;
-	private Rank rank = Rank.NONE;
+	public static final Integer LOTTO_MAX_NUMBER = 44;
 
 	private final List<Integer> numbers;
+	private Rank rank = Rank.NOT_YET;
 
 	public Lotto (List<Integer> numbers) {
 		this.numbers = numbers;
