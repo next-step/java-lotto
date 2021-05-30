@@ -2,7 +2,7 @@ package ui;
 
 import domain.Lotto;
 import domain.LottoOrderGroup;
-import domain.LottoOrderGroupAnalysis;
+import domain.LottoOrderGroupStatics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class LottoController {
 
 			final List<Integer> winnerNumbers = 	validWinnerNumbers(scanner.nextLine().trim());
 
-			LottoOrderGroupAnalysis analysis = new LottoOrderGroupAnalysis(winnerNumbers, lottoOrderGroup);
+			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
 			System.out.println(PRINT_ANALYSIS_TITLE);
