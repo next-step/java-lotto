@@ -10,9 +10,9 @@ import lotto.lotto.LottoResult;
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;
 
-    public Money buySelfLotto(Money money, int amount) {
+    public Money buySelfLotto(Money money, int lottoQuantity) {
         checkMoney(money);
-        return purchase(money, amount);
+        return purchase(money, lottoQuantity);
     }
 
     public LottoTicket buyAutoLotto(LottoTicket lottoTicket, Money money) {
@@ -20,13 +20,13 @@ public class Shop {
         return selectAuto(lottoTicket, money.amount() / PURCHASE_PRICE);
     }
 
-    private Money purchase(Money money, int amount) {
+    private Money purchase(Money money, int quantity) {
         checkMoney(money);
-        return new Money(calculate(money, amount));
+        return new Money(calculate(money, quantity));
     }
 
-    private LottoTicket selectAuto(LottoTicket lottoTicket, int amount) {
-        for (int i = 0; i < amount; i++) {
+    private LottoTicket selectAuto(LottoTicket lottoTicket, int quantity) {
+        for (int i = 0; i < quantity; i++) {
             lottoTicket.add(createAutoLotto());
         }
         return lottoTicket;
@@ -48,8 +48,8 @@ public class Shop {
         }
     }
 
-    private void checkMoney(Money money, int amount) {
-        if (money.amount() < amount * PURCHASE_PRICE) {
+    private void checkMoney(Money money, int quantity) {
+        if (money.amount() < quantity * PURCHASE_PRICE) {
             throw new RuntimeException(ErrorMessage.NOT_ENOUGH_MONEY);
         }
     }
@@ -62,8 +62,8 @@ public class Shop {
         return new Lotto(NumberGenerator.generate());
     }
 
-    private int calculate(Money money, int amount) {
-        checkMoney(money, amount);
-        return money.amount() - amount * PURCHASE_PRICE;
+    private int calculate(Money money, int quantity) {
+        checkMoney(money, quantity);
+        return money.amount() - quantity * PURCHASE_PRICE;
     }
 }

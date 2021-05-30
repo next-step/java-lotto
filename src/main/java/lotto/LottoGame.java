@@ -14,12 +14,12 @@ public class LottoGame {
     public static void start() {
         Shop shop = new Shop();
         Money money = inputMoney();
-        int selfAmount = inputSelfLottoAmount();
-        Money remainMoney = shop.buySelfLotto(money, selfAmount);
+        int selfLottoQuantity = inputSelfLottoQuantity();
+        Money remainMoney = shop.buySelfLotto(money, selfLottoQuantity);
         OutputView.printInputSelfLottoNumber();
-        LottoTicket lottoTicket = inputSelfLottoNumber(selfAmount);
+        LottoTicket lottoTicket = inputSelfLottoNumber(selfLottoQuantity);
         lottoTicket = shop.buyAutoLotto(lottoTicket, remainMoney);
-        printLotto(lottoTicket, selfAmount);
+        printLotto(lottoTicket, selfLottoQuantity);
 
         WinningNumber winningNumber = new WinningNumber(InputView.inputLottoNumber());
         LottoNumber bonusNumber = inputBonusNumber();
@@ -34,8 +34,8 @@ public class LottoGame {
         return InputView.inputMoneyAmount();
     }
 
-    private static int inputSelfLottoAmount() {
-        OutputView.printInputSelfLottoAmount();
+    private static int inputSelfLottoQuantity() {
+        OutputView.printInputSelfLottoQuantity();
         return InputView.inputNumber();
     }
 
@@ -52,8 +52,8 @@ public class LottoGame {
         return lottoTicket;
     }
 
-    private static void printLotto(LottoTicket lottoTicket, int selfAmount) {
-        OutputView.printLottoAmount(selfAmount, lottoTicket.matchingCount() - selfAmount);
+    private static void printLotto(LottoTicket lottoTicket, int selfQuantity) {
+        OutputView.printLottoQuantity(selfQuantity, lottoTicket.matchingCount() - selfQuantity);
         OutputView.printLottoTicket(lottoTicket);
         OutputView.printWinningNumber();
     }
