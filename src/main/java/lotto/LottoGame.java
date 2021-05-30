@@ -15,10 +15,10 @@ public class LottoGame {
         Shop shop = new Shop();
         Money money = inputMoney();
         int selfLottoQuantity = inputSelfLottoQuantity();
-        Money remainMoney = shop.buySelfLotto(money, selfLottoQuantity);
+        Money balance = shop.buySelfLotto(money, selfLottoQuantity);
         OutputView.printInputSelfLottoNumber();
         LottoTicket lottoTicket = inputSelfLottoNumber(selfLottoQuantity);
-        lottoTicket = shop.buyAutoLotto(lottoTicket, remainMoney);
+        lottoTicket = shop.buyAutoLotto(lottoTicket, balance);
         printLotto(lottoTicket, selfLottoQuantity);
 
         WinningNumber winningNumber = new WinningNumber(InputView.inputLottoNumber());
