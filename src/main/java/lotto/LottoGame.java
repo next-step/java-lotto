@@ -10,6 +10,9 @@ import lotto.shop.Shop;
 import lotto.ui.OutputView;
 import lotto.ui.InputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
     public static void start() {
         Shop shop = new Shop();
@@ -17,8 +20,7 @@ public class LottoGame {
         int selfLottoQuantity = inputSelfLottoQuantity();
         Money balance = shop.buySelfLotto(money, selfLottoQuantity);
         OutputView.printInputSelfLottoNumber();
-        LottoTicket lottoTicket = inputSelfLottoNumber(selfLottoQuantity);
-        lottoTicket = shop.buyAutoLotto(lottoTicket, balance);
+        LottoTicket lottoTicket = inputSelfLottoNumber(selfLottoQuantity, shop.buyAutoLotto(balance));
         printLotto(lottoTicket, selfLottoQuantity);
 
         WinningNumber winningNumber = new WinningNumber(InputView.inputLottoNumber());
@@ -43,12 +45,12 @@ public class LottoGame {
         return LottoNumber.of(InputView.inputNumber());
     }
 
-    private static LottoTicket inputSelfLottoNumber(int selfLottoQuantity) {
-        LottoTicket lottoTicket = new LottoTicket();
+    private static LottoTicket inputSelfLottoNumber(int selfLottoQuantity, int autoLottoQuantity) {
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < selfLottoQuantity; i++) {
-            lottoTicket.add(new Lotto(InputView.inputLottoNumber()));
+            lottoList.add(new Lotto(InputView.inputLottoNumber()));
         }
-        return lottoTicket;
+        return new LottoTicket(lottoList, autoLottoQuantity);
     }
 
     private static void printLotto(LottoTicket lottoTicket, int selfQuantity) {

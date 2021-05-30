@@ -2,8 +2,10 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +34,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
+        int autoLottoQuantity = shop.buyAutoLotto(money);
+        List<Lotto> lottoList = new ArrayList<>();
+        LottoTicket lottoTicket = new LottoTicket(lottoList, autoLottoQuantity);
         //then
         assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
@@ -44,7 +48,7 @@ public class ShopTest {
         Money money = new Money(900);
         //when
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> shop.buyAutoLotto(new LottoTicket(), money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
+                .isThrownBy(() -> shop.buyAutoLotto(money)).withMessageContaining(ErrorMessage.NOT_ENOUGH_MONEY);
         //then
     }
 
@@ -54,9 +58,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
+        int quantity = shop.buyAutoLotto(money);
         //then
-        assertThat(lottoTicket.matchingCount()).isEqualTo(10);
+        assertThat(quantity).isEqualTo(10);
     }
 
     @Test
@@ -65,7 +69,9 @@ public class ShopTest {
         //given
         Money money = new Money(10000);
         //when
-        LottoTicket lottoTicket = shop.buyAutoLotto(new LottoTicket(), money);
+        int quantity = shop.buyAutoLotto(money);
+        List<Lotto> lottoList = new ArrayList<>();
+        LottoTicket lottoTicket = new LottoTicket(lottoList, quantity);
         //then
         assertThat(lottoTicket.matchingCount()).isEqualTo(10);
     }
@@ -74,12 +80,13 @@ public class ShopTest {
     @DisplayName("번호가 맞는지")
     void testAnswer() {
         //given
-        LottoTicket lottoTicket = new LottoTicket();
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
 
+        List<Lotto> lottoList = new ArrayList<>();
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 35));
-        lottoTicket.add(lotto);
+        lottoList.add(lotto);
         LottoNumber bonusNumber = LottoNumber.of(45);
+        LottoTicket lottoTicket = new LottoTicket(lottoList, 0);
         //when
         LottoResult match = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
         //then
@@ -90,11 +97,12 @@ public class ShopTest {
     @DisplayName("2등 당첨")
     void testSecond() {
         //given
-        LottoTicket lottoTicket = new LottoTicket();
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
 
+        List<Lotto> lottoList = new ArrayList<>();
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
-        lottoTicket.add(lotto);
+        lottoList.add(lotto);
+        LottoTicket lottoTicket = new LottoTicket(lottoList, 0);
         LottoNumber bonusNumber = LottoNumber.of(16);
         //when
         LottoResult match = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
@@ -109,7 +117,8 @@ public class ShopTest {
         //given
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(1);
-        LottoTicket lottoTicket = new LottoTicket();
+        List<Lotto> lottoList = new ArrayList<>();
+        LottoTicket lottoTicket = new LottoTicket(lottoList, 0);
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -143,13 +152,14 @@ public class ShopTest {
         //given
         //when
         Money money = shop.buySelfLotto(new Money(10000), 5);
-        LottoTicket lottoTicket = new LottoTicket();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            lottoTicket.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+            lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         }
-        LottoTicket lottoTicket1 = shop.buyAutoLotto(lottoTicket, money);
+        int quantity = shop.buyAutoLotto(money);
+        LottoTicket lottoTicket = new LottoTicket(lottoList, quantity);
         //then
-        assertThat(lottoTicket1.tickets().size()).isEqualTo(10);
+        assertThat(lottoTicket.tickets().size()).isEqualTo(10);
     }
 
     private Set<LottoNumber> initWinningNumbers() {

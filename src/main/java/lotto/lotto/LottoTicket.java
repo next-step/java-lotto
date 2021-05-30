@@ -1,15 +1,16 @@
 package lotto.lotto;
 
-import lotto.error.ErrorMessage;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class LottoTicket {
-    private final List<Lotto> lottoTickets = new ArrayList<>();
+import lotto.error.ErrorMessage;
+import lotto.shop.NumberGenerator;
 
-    public void add(Lotto lotto) {
-        lottoTickets.add(lotto);
+public class LottoTicket {
+    private final List<Lotto> lottoTickets;
+
+    public LottoTicket(List<Lotto> selfLottoList, int autoLottoQuantity) {
+        lottoTickets = selfLottoList;
+        selectAuto(autoLottoQuantity);
     }
 
     public List<Lotto> tickets() {
@@ -31,5 +32,19 @@ public class LottoTicket {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER);
         }
+    }
+
+    private void selectAuto(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            lottoTickets.add(createAutoLotto());
+        }
+    }
+
+    private Lotto createAutoLotto() {
+        return generateNumber();
+    }
+
+    private Lotto generateNumber() {
+        return new Lotto(NumberGenerator.generate());
     }
 }

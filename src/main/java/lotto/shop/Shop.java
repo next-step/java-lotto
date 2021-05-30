@@ -1,11 +1,6 @@
 package lotto.shop;
 
 import lotto.error.ErrorMessage;
-import lotto.lotto.LottoNumber;
-import lotto.lotto.WinningNumber;
-import lotto.lotto.Lotto;
-import lotto.lotto.LottoTicket;
-import lotto.lotto.LottoResult;
 
 public class Shop {
     private static final int PURCHASE_PRICE = 1000;
@@ -15,21 +10,14 @@ public class Shop {
         return purchase(money, lottoQuantity);
     }
 
-    public LottoTicket buyAutoLotto(LottoTicket lottoTicket, Money money) {
+    public int buyAutoLotto(Money money) {
         checkMoney(money);
-        return selectAuto(lottoTicket, money.amount() / PURCHASE_PRICE);
+        return money.amount() / PURCHASE_PRICE;
     }
 
     private Money purchase(Money money, int quantity) {
         checkMoney(money);
         return new Money(calculate(money, quantity));
-    }
-
-    private LottoTicket selectAuto(LottoTicket lottoTicket, int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            lottoTicket.add(createAutoLotto());
-        }
-        return lottoTicket;
     }
 
     private void checkMoney(Money money) {
@@ -42,14 +30,6 @@ public class Shop {
         if (money.amount() < quantity * PURCHASE_PRICE) {
             throw new RuntimeException(ErrorMessage.NOT_ENOUGH_MONEY);
         }
-    }
-
-    private Lotto createAutoLotto() {
-        return generateNumber();
-    }
-
-    private Lotto generateNumber() {
-        return new Lotto(NumberGenerator.generate());
     }
 
     private int calculate(Money money, int quantity) {
