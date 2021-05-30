@@ -2,25 +2,25 @@ package lotto;
 
 public class WinningLotto {
 
-	private final Lotto winLotto;
+	private final Lotto winningNumber;
 	private final LottoNumber bonusBall;
 
-	public WinningLotto(Lotto winLotto, LottoNumber bonusBall) {
-		validateBonusNumber(winLotto, bonusBall);
+	public WinningLotto(Lotto winningNumber, LottoNumber bonusBall) {
+		validateBonusBall(winningNumber, bonusBall);
 
-		this.winLotto = winLotto;
+		this.winningNumber = winningNumber;
 		this.bonusBall = bonusBall;
 	}
 
-	private static void validateBonusNumber(Lotto winLotto, LottoNumber bonusNumber) {
-		if (winLotto.contains(bonusNumber)) {
+	private static void validateBonusBall(Lotto winningNumber, LottoNumber bonusBall) {
+		if (winningNumber.contains(bonusBall)) {
 			throw new InvalidNumberSetException("보너스 숫자는 당첨번호에 포함될 수 없습니다.");
 		}
 	}
 
 	public Rank resultOf(Lotto lotto) {
 		return Rank.valueOf(
-			lotto.matchCount(winLotto),
+			lotto.matchCount(winningNumber),
 			lotto.contains(bonusBall));
 	}
 }

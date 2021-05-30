@@ -1,13 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import static lotto.LottoShop.*;
 
 public class Wallet {
 
-	public static final int LOTTO_PRICE = 1000;
-
-	private int money;
+	private final int money;
 
 	public Wallet(int money) {
 		validateMoneyValue(money);
@@ -19,42 +16,27 @@ public class Wallet {
 		if (money < 0) {
 			throw new OutOfBoundValueException("금액은 음수가 될 수 없습니다.");
 		}
+	}
 
-		if (money < LOTTO_PRICE) {
-			throw new NotEnoughMoneyException("로또를 구입하기엔 돈이 부족합니다.");
+	public Wallet spend(int purchasedCount) {
+		int moneyLeft = money - LOTTO_PRICE * purchasedCount;
+
+		validateMoneyLeft(moneyLeft);
+
+		return new Wallet(moneyLeft);
+	}
+
+	private void validateMoneyLeft(int moneyLeft) {
+		if (moneyLeft < 0) {
+			throw new NotEnoughMoneyException("로또 갯수가 지갑 사정을 넘어섭니다.");
 		}
+	}
+
+	public boolean isEnough() {
+		return money >= LOTTO_PRICE;
 	}
 
 	public int buyLimit() {
 		return money / LOTTO_PRICE;
-	}
-
-	public Lottos buyAutoAll() {
-		List<Lotto> values = new ArrayList<>();
-
-		for (int i = 0; i < buyLimit(); i++) {
-			values.add(LottoGenerator.generate());
-		}
-
-		Lottos lottos = new Lottos(values);
-		payMoney(lottos.count());
-		return lottos;
-	}
-
-	public Lottos buyManual(Lottos lottos) {
-		payMoney(lottos.count());
-		return new Lottos(lottos.values());
-	}
-
-	private void payMoney(int count) {
-		validateBuyCount(count);
-
-		money -= count * LOTTO_PRICE;
-	}
-
-	private void validateBuyCount(int count) {
-		if (buyLimit() < count) {
-			throw new NotEnoughMoneyException(count + "개 만큼 살 수 없습니다.");
-		}
 	}
 }

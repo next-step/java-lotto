@@ -8,12 +8,12 @@ public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static Wallet pay() {
+	public static Wallet initWallet() {
 		System.out.println("\n구입금액을 입력해 주세요.");
 		return new Wallet(scanner.nextInt());
 	}
 
-	public static Lotto winLotto() {
+	public static Lotto winningNumber() {
 		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 		String text = scanner.next();
 		return LottoGenerator.generate(text);
@@ -25,24 +25,19 @@ public class InputView {
 		return LottoNumber.valueOf(bonusBall);
 	}
 
-	public static Lottos manualBuy(Wallet wallet) {
+	public static List<String> lottoStrings(Wallet wallet) {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualCount = scanner.nextInt();
 		if (wallet.buyLimit() < manualCount) {
-			throw new NotEnoughMoneyException(manualCount + "개 만큼 살 수 없습니다."); // TODO Duplicate Statement!
+			throw new NotEnoughMoneyException(manualCount + "개 만큼 살 수 없습니다.");
 		}
 
-		return writeDownManualLottos(manualCount);
-	}
-
-	private static Lottos writeDownManualLottos(int count) {
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-		List<Lotto> lottoList = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			String text = scanner.next();
-			lottoList.add(LottoGenerator.generate(text));
+		List<String> lottoList = new ArrayList<>();
+		for (int i = 0; i < manualCount; i++) {
+			lottoList.add(scanner.next());
 		}
 
-		return new Lottos(lottoList);
+		return lottoList;
 	}
 }

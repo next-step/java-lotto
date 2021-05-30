@@ -2,6 +2,7 @@ package lotto;
 
 import static lotto.LottoGenerator.*;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -22,9 +23,9 @@ public class Lotto {
 		}
 	}
 
-	public long matchCount(Lotto winLotto) {
+	public long matchCount(Lotto winningNumber) {
 		return numbers.stream()
-				.filter(winLotto.numbers::contains)
+				.filter(winningNumber.numbers::contains)
 				.count();
 	}
 
@@ -35,5 +36,20 @@ public class Lotto {
 	@Override
 	public String toString() {
 		return numbers.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(numbers, lotto.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }

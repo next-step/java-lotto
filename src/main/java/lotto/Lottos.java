@@ -1,12 +1,12 @@
 package lotto;
 
 import static java.util.Collections.*;
-import static java.util.stream.Collectors.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -16,6 +16,13 @@ public class Lottos {
 		validateLottoList(values);
 
 		this.values = values;
+	}
+
+	public Lottos(Lottos... lottos) {
+		this(Arrays.stream(lottos)
+			.map(Lottos::values)
+			.flatMap(Collection::stream)
+			.collect(Collectors.toList()));
 	}
 
 	private static void validateLottoList(List<Lotto> values) {
@@ -30,12 +37,6 @@ public class Lottos {
 
 	public int count() {
 		return values.size();
-	}
-
-	public Lottos mergeWith(Lottos lottos) {
-		return new Lottos(Stream.of(values, lottos.values)
-			.flatMap(Collection::stream)
-			.collect(toList()));
 	}
 
 	@Override

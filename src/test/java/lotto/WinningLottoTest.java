@@ -10,9 +10,9 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("보너스볼이 중복될 경우 예외 발생")
 	void bonusBallDuplicateCheck() {
-		Lotto winLotto = LottoGenerator.generate("1,2,3,4,5,6");
-		LottoNumber bonusNumber = LottoNumber.valueOf("1");
-		assertThatThrownBy(() -> new WinningLotto(winLotto, bonusNumber))
+		Lotto winningNumber = LottoGenerator.generate("1,2,3,4,5,6");
+		LottoNumber bonusBall = LottoNumber.valueOf("1");
+		assertThatThrownBy(() -> new WinningLotto(winningNumber, bonusBall))
 			.isInstanceOf(RuntimeException.class);
 	}
 
@@ -25,9 +25,9 @@ public class WinningLottoTest {
 		Lotto lotto4th = LottoGenerator.generate("3,4,5,6,7,8");
 		Lotto lotto5th = LottoGenerator.generate("4,5,6,7,8,9");
 
-		Lotto winLotto = LottoGenerator.generate("1,2,3,4,5,6");
-		LottoNumber bonusNumber = LottoNumber.valueOf("7");
-		WinningLotto winningLotto = new WinningLotto(winLotto, bonusNumber);
+		Lotto winningNumber = LottoGenerator.generate("1,2,3,4,5,6");
+		LottoNumber bonusBall = LottoNumber.valueOf("7");
+		WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
 
 		assertThat(winningLotto.resultOf(lotto1st)).isEqualTo(FIRST);
 		assertThat(winningLotto.resultOf(lotto2nd)).isEqualTo(SECOND);
