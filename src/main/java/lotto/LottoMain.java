@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 
+import lotto.domain.Budget;
 import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
@@ -28,6 +29,6 @@ public class LottoMain {
 	}
 
 	private static Lottos buy(int buyAmount, List<Lotto> manualLottos) {
-		return LottoShop.buy(buyAmount, manualLottos);
+		return LottoShop.buy(new Budget(buyAmount), manualLottos);
 	}
 }

@@ -20,30 +20,19 @@ public class LottoShop {
 		}
 	}
 
-	public static Lottos buy(int budget) {
+	public static Lottos buy(Budget budget) {
 		return buy(budget, Lottos.EMPTY_LOTTOS);
 	}
 
-	public static Lottos buy(int budget, List<Lotto> manualLottos) {
+	public static Lottos buy(Budget budget, List<Lotto> manualLottos) {
 		List<Lotto> candidateLottos = new ArrayList<>();
 
-		int possibleCount = getPossibleCount(getRemainBudget(budget, manualLottos));
+		int possibleCount = budget.getPossibleCount(manualLottos);
 		for (int i = START_POINT; i < possibleCount; i++) {
 			candidateLottos.add(new Lotto(getRandomLottoNumbers()));
 		}
 
 		return new Lottos(candidateLottos, manualLottos);
-	}
-
-	private static int getRemainBudget(int budget, List<Lotto> manualLottos) {
-		return budget - (manualLottos.size() * Lotto.LOTTO_PRICE);
-	}
-
-	private static int getPossibleCount(int budget) {
-		if (budget < Lotto.LOTTO_PRICE) {
-			throw new RuntimeException("you can not buy even one lotto");
-		}
-		return budget / Lotto.LOTTO_PRICE;
 	}
 
 	private static List<Integer> getRandomLottoNumbers() {

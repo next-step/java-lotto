@@ -13,20 +13,20 @@ public class LottoShopTest {
 	@Test
 	@DisplayName("금액을 입력하면 해당 금액에서 가능한 로또만큼 발행")
 	public void buy_lottos_within_budget_limit() {
-		Lottos boughtLottos = LottoShop.buy(14000);
+		Lottos boughtLottos = LottoShop.buy(new Budget(14000));
 		assertThat(boughtLottos.getTotalSize()).isEqualTo(14);
 
-		boughtLottos = LottoShop.buy(14700);
+		boughtLottos = LottoShop.buy(new Budget(14700));
 		assertThat(boughtLottos.getTotalSize()).isEqualTo(14);
 	}
 
 	@Test
 	@DisplayName("발행할 수 없는 금액이 입력되면 에러를 발생")
 	public void buy_lottos_over_budget_limit() {
-		assertThatThrownBy(() -> LottoShop.buy(0))
+		assertThatThrownBy(() -> LottoShop.buy(new Budget(0)))
 			.isInstanceOf(RuntimeException.class);
 
-		assertThatThrownBy(() -> LottoShop.buy(700))
+		assertThatThrownBy(() -> LottoShop.buy(new Budget(750)))
 			.isInstanceOf(RuntimeException.class);
 
 	}
@@ -38,7 +38,7 @@ public class LottoShopTest {
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		Lottos boughtLottos = LottoShop.buy(5000, manualLottos);
+		Lottos boughtLottos = LottoShop.buy(new Budget(5000), manualLottos);
 
 		assertThat(boughtLottos.getTotalSize()).isEqualTo(5);
 	}
@@ -50,7 +50,7 @@ public class LottoShopTest {
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		manualLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		assertThatThrownBy(() -> LottoShop.buy(1000, manualLottos))
+		assertThatThrownBy(() -> LottoShop.buy(new Budget(1000), manualLottos))
 			.isInstanceOf(RuntimeException.class);
 	}
 }
