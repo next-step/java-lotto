@@ -14,7 +14,7 @@ public enum Ranking {
 	private static final Map<RankingCondition, Ranking> rankingTable;
 
 	private final RankingCondition rankingCondition;
-	private final int winnerPrice;
+	private final long winnerPrice;
 
 	static {
 		rankingTable = new HashMap<>();
@@ -32,7 +32,7 @@ public enum Ranking {
 		return this.rankingCondition;
 	}
 
-	public int getWinnerPrice() {
+	public long getWinnerPrice() {
 		return this.winnerPrice;
 	}
 
