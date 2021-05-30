@@ -25,6 +25,10 @@ public class Lottos {
         return lottos.size() * Lotto.PRICE;
     }
 
+    public int getCount() {
+        return lottos.size();
+    }
+
     public List<LottoPrize> getCalculate(LottoWinning lottoWinning) {
         return Arrays.stream(LottoRank.values())
             .map(rank -> LottoPrize.of(rank, getWinningCount(rank, lottoWinning)))
@@ -42,7 +46,11 @@ public class Lottos {
         return (double) getPayoff(lottoPrizes) / getPrice();
     }
 
-    private long getPayoff(List<LottoPrize> lottoPrizes) {
+    public long getPayoff(List<LottoPrize> lottoPrizes) {
         return lottoPrizes.stream().mapToLong(LottoPrize::getTotalPrize).sum();
+    }
+
+    public void addLottos(Lottos lottos) {
+        this.lottos.addAll(0, lottos.getLottos().stream().collect(toList()));
     }
 }
