@@ -17,7 +17,18 @@ class LottosTest {
 	@ParameterizedTest
 	@CsvSource(value = { "6,1", "5,3", "4,2", "3,1" })
 	void comparePrize(int matchedNumberCount, int lottoCount) {
-		Lottos lottos = new Lottos(Arrays.asList(
+		Lottos lottos = lottosData();
+		List<LottoNumber> winningNumbers = Stream.of(1,2,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList());
+		WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(45));
+
+		List<LottoPrize> result = lottos.comparePrize(winningLotto);
+		assertThat(result.stream()
+			.filter(lottoPrize -> lottoPrize.equals(getLottoPrizeFromMatchCount(matchedNumberCount, false)))
+			.count()).isEqualTo(lottoCount);
+	}
+
+	static Lottos lottosData() {
+		return new Lottos(Arrays.asList(
 			new Lotto(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::new).collect(Collectors.toList())),
 			new Lotto(Stream.of(1, 2, 3, 4, 6, 7).map(LottoNumber::new).collect(Collectors.toList())),
 			new Lotto(Stream.of(1, 22, 33, 4, 6, 7).map(LottoNumber::new).collect(Collectors.toList())),
@@ -27,13 +38,5 @@ class LottosTest {
 			new Lotto(Stream.of(1, 2, 3, 4, 36, 37).map(LottoNumber::new).collect(Collectors.toList())),
 			new Lotto(Stream.of(1, 2, 3, 4, 26, 27).map(LottoNumber::new).collect(Collectors.toList())),
 			new Lotto(Stream.of(1, 2, 3, 4, 6, 7).map(LottoNumber::new).collect(Collectors.toList()))));
-
-		List<LottoNumber> winningNumbers = Stream.of(1,2,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList());
-		WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(45));
-
-		List<LottoPrize> result = lottos.comparePrize(winningLotto);
-		assertThat(result.stream()
-			.filter(lottoPrize -> lottoPrize.equals(getLottoPrizeFromMatchCount(matchedNumberCount, false)))
-			.count()).isEqualTo(lottoCount);
 	}
 }
