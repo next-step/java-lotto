@@ -7,13 +7,12 @@ import java.util.Map;
 public class ResultView {
 
 	public static void printBuyResult(Lottos lottos) {
-		System.out.println(lottos.count() + "개를 구매했습니다.");
+		System.out.println("\n" + lottos.count() + "개를 구매했습니다.");
 		lottos.values().forEach(System.out::println);
-		System.out.println();
 	}
 
 	public static void printWinningResult(GameResult result) {
-		System.out.println("당첨 통계");
+		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 
 		Map<Rank, Integer> dashboard = result.dashboard();
