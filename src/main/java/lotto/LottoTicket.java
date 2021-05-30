@@ -1,0 +1,25 @@
+package lotto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LottoTicket {
+    private List<Lotto> lottoList;
+
+    public LottoTicket(int num) {
+        lottoList = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            lottoList.add(new Lotto());
+        }
+    }
+
+    public List<Lotto> lottoList() {
+        return lottoList;
+    }
+
+    public void compareWinList(List<Integer> winList) {
+        for (int i = 0; i < lottoList.size(); i++) {
+            lottoList.get(i).calculateWin(winList);
+        }
+    }
+}
