@@ -11,11 +11,6 @@ public class LottoNumberFactoryImpl implements LottoNumberFactory{
     }
 
     @Override
-    public Number generateNumber(Integer customNumber) {
-        return null;
-    }
-
-    @Override
     public LottoNumber generateNumber() {
         return new LottoNumber(strategy.generateNumber());
     }

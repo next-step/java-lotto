@@ -11,23 +11,27 @@ public class RandomStrategy implements Strategy {
 
     Set<Integer> numbers = new HashSet<>();
 
-    @Override
-    public Set<Integer> generateNumbers() {
-        for (int i = 0; i < GENERATE_COUNT; i++) {
-            addNumber();
-        }
-        return numbers;
-    }
-
-    private void addNumber() {
-        int number = generateNumber();
+    private int addNumber() {
+        resetIfGenerateCountOver();
+        int number = genNumber();
         while ( numbers.contains(number)) {
-            number =  generateNumber();
+            number =  genNumber();
         }
         numbers.add(number);
+        return number;
+    }
+
+    private void resetIfGenerateCountOver() {
+        if( numbers.size() >= GENERATE_COUNT) {
+            numbers.clear();
+        }
+    }
+
+    private int genNumber() {
+        return new Random().nextInt(MAX_NUMBER) + MIN_NUMBER;
     }
 
     public Integer generateNumber() {
-        return new Random().nextInt(MAX_NUMBER)+MIN_NUMBER;
+        return addNumber();
     }
 }

@@ -11,32 +11,30 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public Lotto(Set<LottoNumber> lotto) {
-        if (lotto.size() != NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lotto.size()));
-        }
         lottoNumbers = lotto;
+        verifyLottoNumbers();
     }
 
-    public Lotto(List<LottoNumber> numbers) {
-        this(new HashSet<>(numbers));
-    }
+
 
     public Lotto(LottoNumberFactory factory) {
         for (int i = 0; i < NUMBER_COUNT; i++) {
             lottoNumbers.add(factory.generateNumber());
         }
+        verifyLottoNumbers();
     }
 
-    private static Set<LottoNumber> generateLottoNumbers() {
-        return null;
-    }
-
-    public static Lotto createLotto(LottoNumberFactory factory) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            addLottoNumber(factory, lottoNumbers);
+    public Lotto(List<Integer> numbers) {
+        for (int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
         }
-        return new Lotto(lottoNumbers);
+        verifyLottoNumbers();
+    }
+
+    private void verifyLottoNumbers() {
+        if (lottoNumbers.size() != NUMBER_COUNT) {
+            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME, lottoNumbers.size()));
+        }
     }
 
     private static void addLottoNumber(LottoNumberFactory factory, Set<LottoNumber> lottoNumbers) {

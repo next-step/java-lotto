@@ -31,7 +31,7 @@ public class LottoTest {
 
     @Test
     public void 로또게임_생성() {
-        Lotto game = new Lotto(factory);
+        new Lotto(factory);
     }
 
     @ParameterizedTest
@@ -80,25 +80,5 @@ public class LottoTest {
         return Stream.of(Arguments.of(Arrays.asList(1,2,3,4,5,6), "[1, 2, 3, 4, 5, 6]"),
                 Arguments.of(Arrays.asList(6,5,4,3,2,1) , "[1, 2, 3, 4, 5, 6]")
         );
-    }
-
-    public static class IntArrayConverter extends SimpleArgumentConverter {
-
-        @Override
-        protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
-            if (source instanceof String && int[].class.isAssignableFrom(targetType)) {
-                String[] stringArray = ((String) source).split("\\s*,\\s*");
-                int[] intArray = new int[stringArray.length];
-                int idx = 0;
-                for( String number : stringArray) {
-                    intArray[idx++] = Integer.parseInt(number);
-                }
-                return intArray;
-            } else {
-                throw new IllegalArgumentException("Conversion from " + source.getClass() + " to "
-                        + targetType + " not supported.");
-            }
-        }
-
     }
 }

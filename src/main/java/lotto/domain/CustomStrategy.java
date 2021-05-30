@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumber;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class CustomStrategy implements Strategy{
     private final Set<Integer> customNumbers = new HashSet<>();
@@ -18,15 +21,6 @@ public class CustomStrategy implements Strategy{
 
     public static CustomStrategy of(List<Integer> customNumbers) {
         return new CustomStrategy(customNumbers);
-    }
-
-    public static CustomStrategy of(Integer... customNumbers) {
-        return new CustomStrategy(Arrays.asList(customNumbers));
-    }
-
-    @Override
-    public Set<Integer> generateNumbers() {
-        return customNumbers;
     }
 
     @Override
