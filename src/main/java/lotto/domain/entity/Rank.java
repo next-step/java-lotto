@@ -1,56 +1,55 @@
 package lotto.domain.entity;
 
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.util.Arrays;
 
-public class Rank {
+public enum Rank {
+    FIRST(6, new BigDecimal("2000000000"), false),
+    SECOND(5, new BigDecimal("30000000"), true),
+    THIRD(5, new BigDecimal("1500000"), false),
+    FOURTH(4, new BigDecimal("50000"), false),
+    FIFTH(3, new BigDecimal("5000"), false),
+    MISS(0, new BigDecimal("0"), false);
 
-    private int first = 0;
-    private int second = 0;
-    private int third = 0;
-    private int fourth = 0;
+    private final int countOfMatch;
+    private final BigDecimal winningMoney;
+    private final boolean matchBonus;
 
-    public void addFirst() {
-        first++;
+    Rank(int countOfMatch, BigDecimal winningMoney, boolean matchBonus) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
+        this.matchBonus = matchBonus;
     }
 
-    public void addSecond() {
-        second++;
+    private int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public void addThird() {
-        third++;
+    private boolean getMatchBonus() {
+        return matchBonus;
     }
 
-    public void addFourth() {
-        fourth++;
+    public BigDecimal winningMoney() {
+        return winningMoney;
     }
 
-    public int first() {
-        return first;
+    public static Rank valueOfCountWithMatchBonus(int count, boolean matchBonus) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() == count && rank.getMatchBonus() == isMatchBonus(rank, matchBonus))
+                .findAny()
+                .orElse(Rank.MISS);
     }
 
-    public int second() {
-        return second;
-    }
-
-    public int third() {
-        return third;
-    }
-
-    public int fourth() {
-        return fourth;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rank rank = (Rank) o;
-        return first == rank.first && second == rank.second && third == rank.third && fourth == rank.fourth;
+    private static boolean isMatchBonus(Rank rank, boolean matchBonus) {
+        return rank.getCountOfMatch() == 5 && matchBonus;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(first, second, third, fourth);
+    public String toString() {
+        return "Rank{" +
+                "countOfMatch=" + countOfMatch +
+                ", winningMoney=" + winningMoney +
+                ", matchBonus=" + matchBonus +
+                '}';
     }
 }

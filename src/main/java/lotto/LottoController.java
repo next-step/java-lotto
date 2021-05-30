@@ -1,9 +1,11 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoStore;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
+import lotto.domain.entity.Number;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,7 +19,10 @@ public final class LottoController {
         OutputView.printPurchaseCompletion(lottoList.size());
         OutputView.printLottoList(lottoList);
         OutputView.printReceiveWinningNumber();
-        Result result = new Result(InputView.receiveWinningNumbers());
+        Lotto winningLotto = InputView.receiveWinningNumbers();
+        OutputView.printReceiveBonusNumber();
+        Number bonusNumber = InputView.receiveBonusNumber();
+        Result result = new Result(winningLotto, bonusNumber);
         result.confirm(lottoList, lottoStore.price());
         OutputView.printStatistics(result.profitRate(), result.rank());
     }

@@ -3,9 +3,8 @@ package lotto.domain.entity;
 import lotto.domain.Lotto;
 import lotto.domain.generator.AutomaticLottoNumbersGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 public final class LottoList {
 
@@ -29,26 +28,10 @@ public final class LottoList {
         return lottoList.get(index);
     }
 
-    public Rank compareWith(Lotto winningLotto){
-        Rank rank = new Rank();
-        for (Lotto purchased : lottoList) {
-            checkRank(purchased.confirmWinning(winningLotto), rank);
-        }
-        return rank;
-    }
-
-    private void checkRank(int count, Rank rank) {
-        if (count == 3) {
-            rank.addFourth();
-        }
-        if (count == 4) {
-            rank.addThird();
-        }
-        if (count == 5) {
-            rank.addSecond();
-        }
-        if (count == 6) {
-            rank.addFirst();
+    public void forEach(Consumer<? super Lotto> action) {
+        Objects.requireNonNull(action);
+        for (Lotto lotto : lottoList) {
+            action.accept(lotto);
         }
     }
 

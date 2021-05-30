@@ -27,6 +27,12 @@ public final class InputView {
         return new Lotto(numbers);
     }
 
+    public static Number receiveBonusNumber() {
+        String bonusNumber = SCANNER.nextLine();
+        validate(bonusNumber);
+        return new Number(Integer.parseInt(bonusNumber));
+    }
+
     public static void validate(String input) {
         validateNumber(input);
         validatePositiveNumber(input);
