@@ -15,7 +15,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static lotto.domain.LottoFixture.번호_0개_일치;
 import static lotto.domain.LottoFixture.번호_1개_일치;
@@ -25,7 +24,6 @@ import static lotto.domain.LottoFixture.번호_4개_일치;
 import static lotto.domain.LottoFixture.번호_5개_일치;
 import static lotto.domain.LottoFixture.번호_6개_일치;
 import static lotto.domain.LottoFixture.우승번호;
-import static lotto.domain.LottoFixture.*;
 
 class LottoTest {
 
@@ -57,7 +55,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다")
     void 로또는_입력받은_로또와_일치하는_번호의_수를_알려준다(Lotto lotto, int expected) {
-        assertThat(lotto.matchCountWith(우승번호.lotto)).isEqualTo(expected);
+        assertThat(lotto.matchCountWith(우승번호.lotto())).isEqualTo(expected);
     }
 
     static Stream<Arguments> provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다() {
@@ -69,7 +67,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provider_로또는_보너스번호와_일치하는지_여부를_알려준다")
     void 로또는_보너스번호와_일치하는지_여부를_알려준다(Lotto lotto, boolean expected) {
-        assertThat(lotto.matchBonus(우승번호.bonusNumber)).isEqualTo(expected);
+        assertThat(lotto.contains(우승번호.bonusNumber())).isEqualTo(expected);
     }
 
     static Stream<Arguments> provider_로또는_보너스번호와_일치하는지_여부를_알려준다() {

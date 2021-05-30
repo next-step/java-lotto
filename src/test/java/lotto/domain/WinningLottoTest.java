@@ -13,8 +13,8 @@ class WinningLottoTest {
         int bonusNumber = 45;
         WinningLotto winning = new WinningLotto(번호_6개_일치_숫자리스트, bonusNumber);
         assertAll(
-                () -> assertThat(winning.lotto).isEqualTo(new Lotto(번호_6개_일치_숫자리스트)),
-                () -> assertThat(winning.bonusNumber).isEqualTo(new LottoNumber(bonusNumber))
+                () -> assertThat(winning.lotto()).isEqualTo(new Lotto(번호_6개_일치_숫자리스트)),
+                () -> assertThat(winning.bonusNumber()).isEqualTo(new LottoNumber(bonusNumber))
         );
     }
 }
