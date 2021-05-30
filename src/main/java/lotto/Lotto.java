@@ -25,6 +25,10 @@ public class Lotto {
 		return getLottoPrizeFromMatchCount(matchCount, isMatchBonus);
 	}
 
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
+
 	private void validate(List<LottoNumber> numbers) {
 		if(numbers.size() != MAX_LOTTO_COUNT) {
 			throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
