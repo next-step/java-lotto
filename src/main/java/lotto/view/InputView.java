@@ -1,19 +1,21 @@
 package lotto.view;
 
+import lotto.common.MessageCode;
+
 import java.util.Scanner;
 
 public class InputView {
     Scanner scan;
-    private int inputAmount = 0;
     private String inputLastWonLottoNumber;
     private String inputBonusNumber;
+    private int inputAmount;
 
     public InputView() {
         scan = new Scanner(System.in);
     }
 
-    public void inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+    public void inputMoneyForLotto() {
+        System.out.println(MessageCode.INPUT_MONEY_FOR_LOTTO.message());
         inputAmount = scan.nextInt();
     }
 
@@ -22,7 +24,7 @@ public class InputView {
     }
 
     public void inputLastWonLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(MessageCode.INPUT_LAST_WON_LOTTO_NUMBERS.message());
         inputLastWonLottoNumber = scan.next();
     }
 
@@ -35,7 +37,7 @@ public class InputView {
     }
 
     public void inputBonusLottoNumber() {
-        System.out.println("보너스 볼을 입력해주세요.");
+        System.out.println(MessageCode.INPUT_LAST_WON_BONUS_NUMBER.message());
         inputBonusNumber = scan.next();
     }
 }

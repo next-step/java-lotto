@@ -15,21 +15,21 @@ public class LottoGame {
     }
 
     public void LottoStart() {
-        inputView.inputPurchaseAmount();
-        int lottoCount = availablePurchaseLottoCount(inputView.getInputAmount());
+        inputView.inputMoneyForLotto();
+        int lottoCount = availablePurchaseCount(inputView.getInputAmount());
         resultView.printPurchasedCount(lottoCount);
-        LottoNumbersList lottoNumbersList = purchaseAvailableLotto(lottoCount);
+        LottoNumbersList lottoNumbersList = purchaseLottos(lottoCount);
         resultView.printPurchasedLottos(lottoNumbersList);
         inputView.inputLastWonLottoNumbers();
         inputView.inputBonusLottoNumber();
         resultView.printLottoGameResult(resultLottoGame(inputView, lottoNumbersList), inputView.getInputAmount());
     }
 
-    public int availablePurchaseLottoCount(int amount) {
+    public int availablePurchaseCount(int amount) {
         return amount / Constant.LOTTO_PRICE.value();
     }
 
-    public LottoNumbersList purchaseAvailableLotto(int lottoCount) {
+    public LottoNumbersList purchaseLottos(int lottoCount) {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
         for (int i = 0; i < lottoCount; i++) {
             lottoNumbersList.appendLottoNumber(purchaseOneLotto());

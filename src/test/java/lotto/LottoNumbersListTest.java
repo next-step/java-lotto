@@ -4,6 +4,7 @@ import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,13 +36,8 @@ public class LottoNumbersListTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumber = new ArrayList<Integer>();
-                lottoNumber.add(1);
-                lottoNumber.add(2);
-                lottoNumber.add(3);
-                lottoNumber.add(4);
-                lottoNumber.add(5);
-                lottoNumber.add(6);
+                Integer[] lottoNumberArray = {1,2,3,4,5,6};
+                List<Integer> lottoNumber = Arrays.asList(lottoNumberArray);
                 return lottoNumber;
             }
         });
@@ -58,13 +54,8 @@ public class LottoNumbersListTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumber = new ArrayList<Integer>();
-                lottoNumber.add(1);
-                lottoNumber.add(2);
-                lottoNumber.add(3);
-                lottoNumber.add(4);
-                lottoNumber.add(5);
-                lottoNumber.add(7);
+                Integer[] lottoNumberArray = {1,2,3,4,5,7};
+                List<Integer> lottoNumber = Arrays.asList(lottoNumberArray);
                 return lottoNumber;
             }
         });

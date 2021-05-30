@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,17 +43,11 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumbers = new ArrayList<Integer>();
-                lottoNumbers.add(1);
-                lottoNumbers.add(3);
-                lottoNumbers.add(5);
-                lottoNumbers.add(7);
-                lottoNumbers.add(9);
-                lottoNumbers.add(11);
-                return lottoNumbers;
+                Integer[] lottoNumberArray = {1,3,5,7,9,11};
+                List<Integer> lottoNumber = Arrays.asList(lottoNumberArray);
+                return lottoNumber;
             }
         });
-
         assertThat(lottoNumbers.contains(1)).isTrue();
     }
 
@@ -61,17 +56,11 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumbers = new ArrayList<Integer>();
-                lottoNumbers.add(1);
-                lottoNumbers.add(3);
-                lottoNumbers.add(5);
-                lottoNumbers.add(7);
-                lottoNumbers.add(9);
-                lottoNumbers.add(11);
-                return lottoNumbers;
+                Integer[] lottoNumberArray = {1,3,5,7,9,11};
+                List<Integer> lottoNumber = Arrays.asList(lottoNumberArray);
+                return lottoNumber;
             }
         });
-
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,3,5,6,7,8","10");
         assertThat(lottoNumbers.countMatchedNumbers(lastWonLottoNumber).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
     }
