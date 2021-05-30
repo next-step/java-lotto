@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.HashMap;
 
-public class ResultAll {
+public class ResultAllLottoScores {
     private HashMap<ResultScoreEnum, Integer> resultMap = new HashMap<>();
 
-    public ResultAll() {
+    public ResultAllLottoScores() {
         ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
         for(ResultScoreEnum state : resultScoreEnum) {
             resultMap.put(state, 0);
@@ -16,8 +16,8 @@ public class ResultAll {
         return resultMap;
     }
 
-    public void updateResult(SameNumberCountInALotto sameNumberCountInALotto) {
-        ResultScoreEnum resultScoreEnum = sameNumberCountInALotto.getResultScore();
+    public void updateResult(MatchStatusOfALotto matchStatusOfALotto) {
+        ResultScoreEnum resultScoreEnum = matchStatusOfALotto.getResultScore();
         resultMap.put(resultScoreEnum, resultMap.get(resultScoreEnum) + 1);
     }
 

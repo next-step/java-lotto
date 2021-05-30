@@ -1,10 +1,10 @@
 package lotto.domain;
 
-public class SameNumberCountInALotto {
+public class MatchStatusOfALotto {
     private int sameNumberCount = 0;
     private boolean isBonusWon = false;
 
-    public SameNumberCountInALotto(int sameNumberCount, boolean isBonusWon) {
+    public MatchStatusOfALotto(int sameNumberCount, boolean isBonusWon) {
         this.sameNumberCount = sameNumberCount;
         this.isBonusWon = isBonusWon;
     }

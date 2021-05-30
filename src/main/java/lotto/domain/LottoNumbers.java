@@ -5,8 +5,6 @@ import java.util.List;
 
 public class LottoNumbers {
     private List<Integer> lottoNumbers;
-    private int sameNumberCount = 0;
-    private boolean isBonusWon = false;
 
     public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         lottoNumbers = new ArrayList<Integer>();
@@ -21,14 +19,14 @@ public class LottoNumbers {
         return this.lottoNumbers;
     }
 
-    public SameNumberCountInALotto countMatchedNumbers(LastWonLottoNumber lastWonLottoNumber) {
+    public MatchStatusOfALotto countMatchedNumbers(LastWonLottoNumber lastWonLottoNumber) {
         int sameNumberCount = 0;
         boolean isBonusWon = false;
         for (int oneLottoNumber : lottoNumbers) {
             sameNumberCount = increaseIfSameNumber(sameNumberCount, oneLottoNumber, lastWonLottoNumber);
             isBonusWon = lastWonLottoNumber.containsBonus(oneLottoNumber);
         }
-        return new SameNumberCountInALotto(sameNumberCount, isBonusWon);
+        return new MatchStatusOfALotto(sameNumberCount, isBonusWon);
     }
 
     private int increaseIfSameNumber(int currentSameNumberCount, int lottoNumber, LastWonLottoNumber lastWonLottoNumber) {

@@ -4,12 +4,12 @@ import lotto.common.Constant;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class PurchaseLotto {
+public class LottoGame {
     private LastWonLottoNumber lastWonLottoNumber;
     private InputView inputView;
     private ResultView resultView;
 
-    public PurchaseLotto() {
+    public LottoGame() {
         inputView = new InputView();
         resultView = new ResultView();
     }
@@ -42,7 +42,7 @@ public class PurchaseLotto {
         return lottoNumbers;
     }
 
-    public ResultAll resultLottoGame(InputView inputView, LottoNumbersList lottoNumbersList) {
+    public ResultAllLottoScores resultLottoGame(InputView inputView, LottoNumbersList lottoNumbersList) {
         return lottoNumbersList.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
     }
 
