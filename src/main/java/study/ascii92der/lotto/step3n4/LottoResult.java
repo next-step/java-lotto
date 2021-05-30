@@ -4,14 +4,14 @@ import java.util.List;
 
 public class LottoResult {
 
-    private int matchCount;
+    private LottoWinner lottoWinner;
 
-    public LottoResult(Lotto lotto, List<String> winningNumbers) {
-        matchCount = 0;
-
+    public LottoResult(Lotto lotto, List<String> winningNumbers, int bonusNumber) {
+        int matchCount = 0;
         for (String winningNumber : winningNumbers) {
             matchCount += calculateMatchedLotto(lotto, Integer.parseInt(winningNumber));
         }
+        lottoWinner = LottoWinner.valueOf(matchCount, lotto.hasNumber(bonusNumber));
     }
 
     private int calculateMatchedLotto(Lotto lotto, int winningNumber) {
@@ -21,7 +21,7 @@ public class LottoResult {
         return 0;
     }
 
-    public int matchNumberCount() {
-        return matchCount;
+    public LottoWinner result() {
+        return lottoWinner;
     }
 }
