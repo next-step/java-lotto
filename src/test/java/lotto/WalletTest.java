@@ -1,10 +1,9 @@
 package lotto;
 
-import static lotto.Wallet.*;
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -40,23 +39,23 @@ public class WalletTest {
 		Wallet wallet = new Wallet(12345);
 		Lottos beforeBuy = new Lottos(IntStream.range(0, 13)
 			.mapToObj(i -> LottoGenerator.generate())
-			.collect(Collectors.toList()));
+			.collect(toList()));
 
 		assertThrows(NotEnoughMoneyException.class, () -> wallet.buyManual(beforeBuy));
 	}
 
 	@Test
-	@DisplayName("로또를 구매하고 남은 돈 확인")
+	@DisplayName("로또 구매 한도 변화 확인")
 	void checkChangeMoney() {
-		int money = 12345;
+		int money = 120000;
 		int buyCount = 3;
 		Wallet wallet = new Wallet(money);
 		Lottos lottos = new Lottos(IntStream.range(0, buyCount)
 			.mapToObj(i -> LottoGenerator.generate())
-			.collect(Collectors.toList()));
+			.collect(toList()));
 
 		wallet.buyManual(lottos);
 
-		assertThat(wallet.money()).isEqualTo(money - buyCount * LOTTO_PRICE);
+		assertThat(wallet.buyLimit()).isEqualTo(117);
 	}
 }

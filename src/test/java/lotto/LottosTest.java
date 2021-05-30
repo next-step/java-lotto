@@ -14,23 +14,23 @@ public class LottosTest {
 	@Test
 	@DisplayName("구입한 로또 갯수 확인")
 	void lottos_발급_테스트() {
-		Lottos lottos1 = new Wallet(10999).buyAll();
+		Lottos lottos1 = new Wallet(10999).buyAutoAll();
 		assertThat(lottos1.count()).isEqualTo(10);
-		Lottos lottos2 = new Wallet(254846).buyAll();
+		Lottos lottos2 = new Wallet(254846).buyAutoAll();
 		assertThat(lottos2.count()).isEqualTo(254);
 	}
 
 	@Test
 	@DisplayName("돈이 부족할 경우 예외 발생")
 	void lottos_발급_실패_테스트() {
-		assertThatThrownBy(() -> new Wallet(999).buyAll())
+		assertThatThrownBy(() -> new Wallet(999).buyAutoAll())
 			.isInstanceOf(RuntimeException.class);
 	}
 
 	@Test
 	@DisplayName("로또스의 밸류값이 불변인지 확인")
 	void lottos_밸류값_불변_테스트() {
-		Lottos lottos = new Wallet(5000).buyAll();
+		Lottos lottos = new Wallet(5000).buyAutoAll();
 		assertThatThrownBy(() -> lottos.values().add(LottoGenerator.generate()))
 			.isInstanceOf(UnsupportedOperationException.class);
 		assertThatThrownBy(() -> lottos.values().remove(0))

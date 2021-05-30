@@ -7,7 +7,7 @@ public class Wallet {
 
 	public static final int LOTTO_PRICE = 1000;
 
-	private final int money;
+	private int money;
 
 	public Wallet(int money) {
 		validateMoneyValue(money);
@@ -25,13 +25,36 @@ public class Wallet {
 		}
 	}
 
-	public Lottos buyAll() {
+	public int buyLimit() {
+		return money / LOTTO_PRICE;
+	}
+
+	public Lottos buyAutoAll() {
 		List<Lotto> values = new ArrayList<>();
 
-		for (int i = 0; i < money / LOTTO_PRICE; i++) {
+		for (int i = 0; i < buyLimit(); i++) {
 			values.add(LottoGenerator.generate());
 		}
 
-		return new Lottos(values);
+		Lottos lottos = new Lottos(values);
+		payMoney(lottos.count());
+		return lottos;
+	}
+
+	public Lottos buyManual(Lottos lottos) {
+		payMoney(lottos.count());
+		return new Lottos(lottos.values());
+	}
+
+	private void payMoney(int count) {
+		validateBuyCount(count);
+
+		money -= count * LOTTO_PRICE;
+	}
+
+	private void validateBuyCount(int count) {
+		if (buyLimit() < count) {
+			throw new NotEnoughMoneyException(count + "개 만큼 살 수 없습니다.");
+		}
 	}
 }
