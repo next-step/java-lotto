@@ -64,4 +64,14 @@ public class LottoNumbersTest {
         LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,3,5,6,7,8","10");
         assertThat(lottoNumbers.countMatchedNumbers(lastWonLottoNumber).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
     }
+
+    @Test
+    public void purchase_수동구매_로또개수제외하고_자동번호생성검증() {
+
+    }
+
+    @Test
+    public void purchase_수동구매_로또번호_생성검증() {
+
+    }
 }

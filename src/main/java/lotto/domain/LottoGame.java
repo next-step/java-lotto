@@ -15,14 +15,15 @@ public class LottoGame {
     }
 
     public void LottoStart() {
-        inputView.inputMoneyForLotto();
-        int lottoCount = availablePurchaseCount(inputView.getInputAmount());
+        int inputMoney = inputView.inputMoneyForLotto();
+        int manualLottoCount = inputView.inputCountForManualLotto();
+        int lottoCount = availablePurchaseCount(inputMoney);
         resultView.printPurchasedCount(lottoCount);
         LottoNumbersList lottoNumbersList = purchaseLottos(lottoCount);
         resultView.printPurchasedLottos(lottoNumbersList);
-        inputView.inputLastWonLottoNumbers();
-        inputView.inputBonusLottoNumber();
-        resultView.printLottoGameResult(resultLottoGame(inputView, lottoNumbersList), inputView.getInputAmount());
+        String inputLastWonLottoNumbers = inputView.inputLastWonLottoNumbers();
+        String inputBonusLottoNumber = inputView.inputBonusLottoNumber();
+        resultView.printLottoGameResult(resultLottoGame(inputLastWonLottoNumbers, inputBonusLottoNumber, lottoNumbersList), inputMoney);
     }
 
     public int availablePurchaseCount(int amount) {
@@ -42,12 +43,12 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    public ResultAllLottoScores resultLottoGame(InputView inputView, LottoNumbersList lottoNumbersList) {
-        return lottoNumbersList.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
+    public ResultAllLottoScores resultLottoGame(String inputLastWonLottoNumbers, String inputBonusLottoNumber, LottoNumbersList lottoNumbersList) {
+        return lottoNumbersList.countMatchedNumbersList(setLastWonLottoNumbers(inputLastWonLottoNumbers, inputBonusLottoNumber));
     }
 
-    private LastWonLottoNumber setLastWonLottoNumbers(InputView inputView) {
-        lastWonLottoNumber = new LastWonLottoNumber(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
+    private LastWonLottoNumber setLastWonLottoNumbers(String inputLastWonLottoNumbers, String inputBonusLottoNumber) {
+        lastWonLottoNumber = new LastWonLottoNumber(inputLastWonLottoNumbers, inputBonusLottoNumber);
         return lastWonLottoNumber;
     }
 }

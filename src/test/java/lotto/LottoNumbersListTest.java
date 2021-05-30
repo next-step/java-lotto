@@ -16,13 +16,8 @@ public class LottoNumbersListTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
             @Override
             public List<Integer> generateLottoNumber() {
-                List<Integer> lottoNumber = new ArrayList<Integer>();
-                lottoNumber.add(1);
-                lottoNumber.add(2);
-                lottoNumber.add(3);
-                lottoNumber.add(4);
-                lottoNumber.add(5);
-                lottoNumber.add(6);
+                Integer[] lottoNumberArray = {1,2,3,4,5,6};
+                List<Integer> lottoNumber = Arrays.asList(lottoNumberArray);
                 return lottoNumber;
             }
         });
@@ -31,6 +26,7 @@ public class LottoNumbersListTest {
         lottoNumbersList.appendLottoNumber(lottoNumbers);
         assertThat(lottoNumbersList.count()).isEqualTo(1);
     }
+
     @Test
     public void countWonNumbers_두개로또번호비교검증() {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {

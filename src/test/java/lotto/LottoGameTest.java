@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGameTest {
 
     @Test
-    public void availablePurchaseLottoCount_구매가능매수확인() {
+    public void availablePurchaseLottoCount_자동_수동_구매가능매수확인() {
         LottoGame lottoGame = new LottoGame();
         int lottoCount = lottoGame.availablePurchaseCount(14500);
         assertThat(lottoCount).isEqualTo(14);

@@ -5,8 +5,8 @@ public enum MessageCode {
     INVALID_LOTTO_NUMBER_TYPE("숫자만 입력 가능합니다."),
     INPUT_MONEY_FOR_LOTTO("구입금액을 입력해 주세요."),
     INPUT_LAST_WON_LOTTO_NUMBERS("지난 주 당첨 번호를 입력해 주세요."),
-    INPUT_LAST_WON_BONUS_NUMBER("보너스 볼을 입력해주세요");
-
+    INPUT_LAST_WON_BONUS_NUMBER("보너스 볼을 입력해주세요"),
+    INPUT_COUNT_MANUAL_LOTTO("수동으로 구매할 로또 수를 입력해 주세요.");
     private final String message;
 
     MessageCode(String message) {
