@@ -29,7 +29,7 @@ public class InputView {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualCount = scanner.nextInt();
 		if (wallet.buyLimit() < manualCount) {
-			throw new NotEnoughMoneyException(manualCount + "개 만큼 살 수 없습니다.");
+			throw new NotEnoughMoneyException(manualCount + "개 만큼 구매할 수 없습니다.");
 		}
 
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");

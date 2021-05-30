@@ -10,7 +10,7 @@ public class Application {
 		Lottos beforeBuy = InputView.manualLottos(wallet);
 
 		Lottos lottos = shop.buyLottos(wallet, beforeBuy);
-		ResultView.printBuyResult(lottos);
+		ResultView.printBuyResult(lottos, beforeBuy.count());
 
 		Lotto winningNumber = InputView.winningNumber();
 		LottoNumber bonusBall = InputView.bonusBall();
