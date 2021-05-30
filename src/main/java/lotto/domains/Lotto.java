@@ -20,6 +20,10 @@ public class Lotto {
         this.purchasingWay = PurchasingWay.MANUAL;
     }
 
+    public Lotto(String stringLottoNumber) {
+        this(new LottoNumbers(stringLottoNumber));
+    }
+
     public void matching(LottoNumbers winningNumbers, int bonusNumber) {
         int matchingNumber = this.lottoNumbers.matchingNumberCount(winningNumbers);
         boolean hasBonusNumber = this.lottoNumbers.contains(bonusNumber);
