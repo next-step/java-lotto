@@ -15,6 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumbersTest {
+    @Test
+    void 생성자_테스트() {
+        String stringLottoNumber = "1,2,3,4, 5,6";
+        LottoNumbers lottoNumbers = new LottoNumbers(stringLottoNumber);
+        assertThat(lottoNumbers.contains(5)).isTrue();
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"1,true", "6,true", "0,false", "7,false"}, delimiter = ',')
     void 특정숫자가_포함되어있는지_테스트(int targetNumber, boolean expected) {
