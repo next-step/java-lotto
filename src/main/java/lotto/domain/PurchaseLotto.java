@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import lotto.common.Constant;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class PurchaseLotto {
-    private static final int LOTTO_PRICE = 1000;
     private LastWonLottoNumber lastWonLottoNumber;
     private InputView inputView;
     private ResultView resultView;
@@ -26,7 +26,7 @@ public class PurchaseLotto {
     }
 
     public int availablePurchaseLottoCount(int amount) {
-        return amount / LOTTO_PRICE;
+        return amount / Constant.LOTTO_PRICE.value();
     }
 
     public LottoNumbersList purchaseAvailableLotto(int lottoCount) {

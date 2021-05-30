@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ResultScoreEnum;
-
 public class SameNumberCountInALotto {
     private int sameNumberCount = 0;
     private boolean isBonusWon = false;

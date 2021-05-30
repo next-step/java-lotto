@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.common.Constant;
+import lotto.common.MessageCode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +26,11 @@ public class LastWonLottoNumber {
 
     private int validateNumber(String splitNumber) {
         if (!isNumeric(splitNumber))
-            throw new RuntimeException("숫자만 입력 가능합니다.");
+            throw new RuntimeException(MessageCode.INVALID_LOTTO_NUMBER_TYPE.message());
 
         int number = Integer.parseInt(splitNumber);
-        if (number > 45)
-            throw new RuntimeException("1부터 45까지 숫자만 입력 가능합니다.");
+        if (number > Constant.MAX_LOTTO_NUMBER.value())
+            throw new RuntimeException(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
 
         return number;
     }
