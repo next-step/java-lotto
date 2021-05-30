@@ -8,47 +8,31 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import lotto.io.view.BonusBallView;
+import lotto.io.view.BuyCustomGameCountView;
+import lotto.io.view.BuyCustomGameView;
+import lotto.io.view.GameWinningConditionView;
+import lotto.io.view.TicketBoxView;
+import lotto.io.view.WinningStaticsView;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ViewCodeTest {
 
-	@DisplayName("4-2-1-3-1.`is~()` : 등가성 비교")
+	@DisplayName("view")
 	@Test
 	@Order(1)
-	void isEqualMethods() {
+	void view() {
 		//given
 
 		//when
 
 		//then
-		//isTicketBoxView()
-		assertThat(ViewCode.TICKET_BOX.isTicketBoxView()).isEqualTo(true);
-		assertThat(ViewCode.GAME_WINNING_CONDITION.isTicketBoxView()).isEqualTo(false);
-		assertThat(ViewCode.BONUS_BALL.isTicketBoxView()).isEqualTo(false);
-		assertThat(ViewCode.WINNING_STATICS.isTicketBoxView()).isEqualTo(false);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isTicketBoxView()).isEqualTo(false);
-		//isGameWinningConditionView()
-		assertThat(ViewCode.TICKET_BOX.isGameWinningConditionView()).isEqualTo(false);
-		assertThat(ViewCode.GAME_WINNING_CONDITION.isGameWinningConditionView()).isEqualTo(true);
-		assertThat(ViewCode.BONUS_BALL.isGameWinningConditionView()).isEqualTo(false);
-		assertThat(ViewCode.WINNING_STATICS.isGameWinningConditionView()).isEqualTo(false);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isGameWinningConditionView()).isEqualTo(false);
-		//isBonusBall()
-		assertThat(ViewCode.TICKET_BOX.isBonusBall()).isEqualTo(false);
-		assertThat(ViewCode.GAME_WINNING_CONDITION.isBonusBall()).isEqualTo(false);
-		assertThat(ViewCode.BONUS_BALL.isBonusBall()).isEqualTo(true);
-		assertThat(ViewCode.WINNING_STATICS.isBonusBall()).isEqualTo(false);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isBonusBall()).isEqualTo(false);
-		//isWinningStaticsView()
-		assertThat(ViewCode.TICKET_BOX.isWinningStaticsView()).isEqualTo(false);
-		assertThat(ViewCode.GAME_WINNING_CONDITION.isWinningStaticsView()).isEqualTo(false);
-		assertThat(ViewCode.BONUS_BALL.isWinningStaticsView()).isEqualTo(false);
-		assertThat(ViewCode.WINNING_STATICS.isWinningStaticsView()).isEqualTo(true);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isWinningStaticsView()).isEqualTo(false);
-		//isShutdownApplication()
-		assertThat(ViewCode.TICKET_BOX.isShutdownApplication()).isEqualTo(false);
-		assertThat(ViewCode.GAME_WINNING_CONDITION.isShutdownApplication()).isEqualTo(false);
-		assertThat(ViewCode.BONUS_BALL.isShutdownApplication()).isEqualTo(false);
-		assertThat(ViewCode.WINNING_STATICS.isShutdownApplication()).isEqualTo(false);
-		assertThat(ViewCode.SHUTDOWN_APPLICATION.isShutdownApplication()).isEqualTo(true);
+		assertThat(ViewCode.TICKET_BOX.view() instanceof TicketBoxView).isTrue();
+		assertThat(ViewCode.BUY_CUSTOM_GAME_COUNT.view() instanceof BuyCustomGameCountView).isTrue();
+		assertThat(ViewCode.BUY_CUSTOM_GAME.view() instanceof BuyCustomGameView).isTrue();
+		assertThat(ViewCode.GAME_WINNING_CONDITION.view() instanceof GameWinningConditionView).isTrue();
+		assertThat(ViewCode.BONUS_BALL.view() instanceof BonusBallView).isTrue();
+		assertThat(ViewCode.WINNING_STATICS.view() instanceof WinningStaticsView).isTrue();
+		assertThat(ViewCode.SHUTDOWN_APPLICATION.view()).isEqualTo(null);
 	}
 }

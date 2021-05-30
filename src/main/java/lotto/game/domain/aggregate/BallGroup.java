@@ -31,7 +31,7 @@ public class BallGroup {
 	}
 
 	private static void addBallWhenNotDuplicated(List<Ball> destinationBalls, InputText inputText) {
-		Ball pendingBall = Ball.generate(inputText);
+		Ball pendingBall = Ball.of(inputText);
 		if (!destinationBalls.contains(pendingBall)) {
 			destinationBalls.add(pendingBall);
 		}

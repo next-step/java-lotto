@@ -4,11 +4,7 @@ import lotto.game.domain.entity.Round;
 import lotto.io.domain.code.ProcessCode;
 import lotto.io.domain.code.ViewCode;
 import lotto.io.domain.vo.InputText;
-import lotto.io.view.BonusBallView;
-import lotto.io.view.GameWinningConditionView;
-import lotto.io.view.TicketBoxView;
 import lotto.io.view.View;
-import lotto.io.view.WinningStaticsView;
 
 public class ViewStatus {
 	private View view;
@@ -30,22 +26,6 @@ public class ViewStatus {
 
 	public void changeCurrentProcessCode(ProcessCode processCode) {
 		this.currentProcessCode = processCode;
-	}
-
-	public boolean isWinningStaticsView() {
-		return currentViewCode.isWinningStaticsView();
-	}
-
-	private boolean isBonusBallView() {
-		return currentViewCode.isBonusBall();
-	}
-
-	public boolean isGameWinningConditionView() {
-		return currentViewCode.isGameWinningConditionView();
-	}
-
-	public boolean isTicketBoxView() {
-		return currentViewCode.isTicketBoxView();
 	}
 
 	public boolean isShutdownApplication() {
@@ -71,18 +51,7 @@ public class ViewStatus {
 	}
 
 	private void generateView() {
-		if (isTicketBoxView()) {
-			view = TicketBoxView.generate();
-		}
-		if (isGameWinningConditionView()) {
-			view = GameWinningConditionView.generate();
-		}
-		if (isWinningStaticsView()) {
-			view = WinningStaticsView.generate();
-		}
-		if (isBonusBallView()) {
-			view = BonusBallView.generate();
-		}
+		view = this.currentViewCode.view();
 	}
 
 	public void displayProcess(Round round, InputText inputText) {

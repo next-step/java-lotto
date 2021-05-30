@@ -15,3 +15,5 @@
 3단계 - 로또(자동) : [[Markdown 보기]](./markdown/step03.md)
 
 4단계 - 로또(2등) : [[Markdown 보기]](./markdown/step04.md)
+
+5단계 - 로또(수동) : [[Markdown 보기]](./markdown/step05.md)

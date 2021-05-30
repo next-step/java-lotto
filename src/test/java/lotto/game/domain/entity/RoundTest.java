@@ -48,11 +48,12 @@ public class RoundTest {
 		//when
 		InputText moneyInputText = InputText.generate(moneyText);
 		Money money = Money.generate(moneyInputText);
-		GameGroup boughtGame = GameGroup.buyGames(money);
+		GameGroup gameGroup = GameGroup.generate();
+		gameGroup.buyAutoGames(money);
 
 		Round round = Round.generate();
 		round.raiseMoney(money);
-		round.setupBoughtGames(boughtGame);
+		round.buyAutoGames(money);
 
 		//then
 		assertThat(round.money().amount()).isEqualTo(money.amount());

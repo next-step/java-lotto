@@ -49,7 +49,8 @@ public class TicketBoxView extends View {
 	}
 
 	private void changeViewStatusWhenSystemIn(ViewStatus viewStatus) {
-		viewStatus.changeCurrentProcessCode(ProcessCode.FINISH);
+		viewStatus.changeCurrentViewCode(ViewCode.BUY_CUSTOM_GAME_COUNT);
+		viewStatus.changeCurrentProcessCode(ProcessCode.REQUEST_INPUT);
 	}
 
 	private void changeViewStatusWhenFinish(ViewStatus viewStatus) {
@@ -64,17 +65,18 @@ public class TicketBoxView extends View {
 	private void processWhenSystemIn(Round round, InputText inputText) {
 		Money money = Money.generate(inputText);
 		round.raiseMoney(money);
-		GameGroup boughtGames = GameGroup.buyGames(round.money());
-		round.setupBoughtGames(boughtGames);
 	}
 
 	private void processWhenFinish(Round round) {
-		printBoughtGames(round.boughtGames());
+		round.buyAutoGames(round.moneyOfAutoGames());
+		printBoughtGames(round);
 	}
 
-	private void printBoughtGames(GameGroup boughtGamesGroup) {
-		System.out.println(boughtGamesGroup.gamesCount() + "개를 구매했습니다.");
-		for (Game boughtGame : boughtGamesGroup.games()) {
+	private void printBoughtGames(Round round) {
+		System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+			round.customGameCount(),
+			(round.boughtGamesCount() - round.customGameCount())));
+		for (Game boughtGame : round.games()) {
 			printBoughtGame(boughtGame);
 		}
 		System.out.println();
