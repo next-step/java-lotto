@@ -35,7 +35,7 @@ public class ResultView {
 
 	private static String matchingCountMessage(LottoPrize lottoPrize) {
 		String msg = "%d개 일치";
-		if(lottoPrize.hasBonusNumber()) {
+		if(lottoPrize.isSecond()) {
 			msg += ", 보너스 볼 일치";
 		}
 		msg += " (%d원) - %d개";

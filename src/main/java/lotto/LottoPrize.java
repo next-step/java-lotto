@@ -35,7 +35,7 @@ public enum LottoPrize {
 		return matchCount;
 	}
 
-	public boolean hasBonusNumber() {
-		return hasBonusNumber;
+	public boolean isSecond() {
+		return this == SECOND;
 	}
 }
