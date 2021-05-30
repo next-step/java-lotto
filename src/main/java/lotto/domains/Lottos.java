@@ -48,6 +48,4 @@ public class Lottos {
                 .mapToDouble(lotto -> lotto.matchingInfo().getPayout())
                 .sum() / (lottoList.size() * LOTTO_PRICE);
     }
-
-
 }
