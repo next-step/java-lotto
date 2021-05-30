@@ -3,13 +3,16 @@ package lotto.domain;
 import lotto.exception.IllegalLottoNumberCountException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Collections.shuffle;
 import static lotto.domain.LottoNumber.*;
 
 public class LottoGame {
     public static final List<LottoNumber> RANDOM_LOTTO_NUMBERS = initializeAllLottoNumbers();
     public static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String COMMA = ",";
 
     private Set<LottoNumber> values;
 
@@ -61,6 +64,14 @@ public class LottoGame {
         }
 
         return new LottoGame(values);
+    }
+
+    public static LottoGame createManual(String playerInput) {
+        Set<LottoNumber> lottoNumbers = Arrays.stream(playerInput.split(COMMA))
+                .map(each -> valueOf(parseInt(each)))
+                .collect(Collectors.toSet());
+
+        return new LottoGame(lottoNumbers);
     }
 
     public static LottoGame createManual(Set<LottoNumber> lottoNumbers) {
