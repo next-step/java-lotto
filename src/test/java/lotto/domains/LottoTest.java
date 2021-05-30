@@ -1,6 +1,7 @@
 package lotto.domains;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,6 +17,13 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         this.winningNumber = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
+    void 생성자_테스트() {
+        assertThat(new Lotto()).isNotNull();
+        assertThat(new Lotto(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)))).isNotNull();
+        assertThat(new Lotto("1,2,3,4,5,6")).isNotNull();
     }
 
     private static Stream<Arguments> provideListAndExpectedMatchingNumber() {
