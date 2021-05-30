@@ -1,14 +1,13 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumberFactoryImpl;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class LottoManager {
     private InputView inputView;
@@ -30,13 +29,13 @@ public class LottoManager {
     private void playLotto() {
         int money = inputView.takeMoney();
 
-        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl();
+        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl(new RandomStrategy());
         Lottos lottos = new Lottos(factory,money);
 
         resultView.showLottoGames(lottos);
 
         List<Integer> lottoNumbers = inputView.takeLottoNumbers();
-
-        resultView.showLottoStatics(lottos.calculateStatics(Lottos.createLotto(factory,lottoNumbers)));
+        factory.setGenerateStrategy(new CustomStrategy(lottoNumbers));
+        resultView.showLottoStatics(lottos.calculateStatics(new Lotto(factory)));
     }
 }

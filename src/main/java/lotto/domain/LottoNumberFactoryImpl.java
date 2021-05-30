@@ -1,11 +1,27 @@
 package lotto.domain;
 
 public class LottoNumberFactoryImpl implements LottoNumberFactory{
+    private Strategy strategy;
+
+    public LottoNumberFactoryImpl() {
+    }
+
+    public LottoNumberFactoryImpl(Strategy strategy) {
+        this.strategy = strategy;
+    }
+
     @Override
     public Number generateNumber(Integer customNumber) {
-        if (customNumber == null) {
-            return new RandomNumber();
-        }
-        return new CustomNumber(customNumber);
+        return null;
+    }
+
+    @Override
+    public LottoNumber generateNumber() {
+        return new LottoNumber(strategy.generateNumber());
+    }
+
+    @Override
+    public void setGenerateStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 }

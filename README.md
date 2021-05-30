@@ -50,3 +50,14 @@
 ### 기능목록
 1. [ ] 로또 2등 Rank를 구분하기
 2. [ ] 통계에 추가하기
+3. [x] 로또 번호 생성(전략)
+4. [x] 로또 한자리 LottoNumber생성 => factory
+5. [x] random의 경우 input 필요 x, cutom의 경우 정해진 input 받아야함
+
+### 노트
+1. 로또는 자동 혹은 수동이다. => 변경점 시사
+2. 로또를 자동 혹은 수동으로 생성할 수 있다. 
+   - 팩토리로 자동, 수동 로또를 만든다. Lottos -> Factory -> RandomLotto or CustomLotto
+   - 팩토리로 랜덤 번호, 수동 번호를 generate한다. Lottos -> Lotto -> RandomGenerator or CustomGenerator
+3. Lottos는 수동, 자동을 동적으로 결정해서 생성할 수 있다.
+4. factory 전략을 바꾸기 위해서 매번 setStrategy를 호출해줘야함 어떻게 중복을 처리할 수 없을까?

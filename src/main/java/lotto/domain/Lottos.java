@@ -4,21 +4,24 @@ import java.util.*;
 
 public class Lottos implements Iterable<Lotto>{
     private List<Lotto> lottos = new ArrayList<>();
-
+    private LottoNumberFactory factory;
 
     public Lottos(LottoNumberFactory factory, int money) {
         int lottoCount = money / Lotto.PRICE;
+        this.factory = factory;
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(createLotto(factory,Collections.emptyList()));
+            this.addRandomLotto();
         }
     }
 
     public Lottos(LottoNumberFactory factory, List<List<Integer>> lottos) {
+        this.factory = factory;
         for( List<Integer> lotto  : lottos) {
-            this.lottos.add(createLotto(factory,lotto));
+            this.addCustomLotto(lotto);
         }
     }
-    public static Lotto createLotto(LottoNumberFactory factory, List<Integer> numbers) {
+
+    private static Lotto createLotto(LottoNumberFactory factory, List<Integer> numbers) {
         Set<LottoNumber> lotto = new HashSet<>();
         for( Integer number : numbers) {
             Number lottoNumber = createLottoNumber(factory,number);
@@ -33,6 +36,16 @@ public class Lottos implements Iterable<Lotto>{
 
     private static Number createLottoNumber(LottoNumberFactory factory,Integer number) {
         return factory.generateNumber(number);
+    }
+
+    public void addCustomLotto(List<Integer> customNumbers) {
+        factory.setGenerateStrategy(new CustomStrategy(customNumbers));
+        lottos.add(new Lotto(factory));
+    }
+
+    public void addRandomLotto() {
+        factory.setGenerateStrategy(new RandomStrategy());
+        lottos.add(new Lotto(factory));
     }
 
     public LottoStatics calculateStatics(Lotto winGame) {
