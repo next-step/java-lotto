@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningLottoNumber;
 import lotto.dto.PurchaseMoney;
 
@@ -36,7 +37,7 @@ public class LottoInputView {
         System.out.println(MESSAGE_BONUS_NUMBER);
         String playerInput = requestPlayerInput();
 
-        winningLottoNumber.applyBonusNumber(playerInput);
+        winningLottoNumber.applyBonusNumber(LottoNumber.valueOf(playerInput));
         return winningLottoNumber;
     }
 

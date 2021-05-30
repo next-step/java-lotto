@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberArgumentTypeException;
 import lotto.exception.IllegalLottoNumberBoundaryException;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.lang.Integer.parseInt;
 
 public class LottoNumber {
     public static final Map<Integer, LottoNumber> ALL_LOTTO_NUMBERS = initializeAllLottoNumbers();
@@ -14,13 +17,22 @@ public class LottoNumber {
     private int value;
 
     private LottoNumber(int value) {
-        validate(value);
+        validateLottoNumberBoundary(value);
         this.value = value;
     }
 
     public static LottoNumber valueOf(int value) {
-        validate(value);
+        validateLottoNumberBoundary(value);
         return ALL_LOTTO_NUMBERS.get(value);
+    }
+
+    public static LottoNumber valueOf(String value) {
+        validateIllegalCharacter(value);
+
+        int parsedValue = parseInt(value);
+        validateLottoNumberBoundary(parsedValue);
+
+        return ALL_LOTTO_NUMBERS.get(parsedValue);
     }
 
     @Override
@@ -40,9 +52,17 @@ public class LottoNumber {
         return String.valueOf(value);
     }
 
-    private static void validate(int value) {
+    private static void validateLottoNumberBoundary(int value) {
         if (MIN_LOTTO_NUMBER > value || value > MAX_LOTTO_NUMBER) {
             throw new IllegalLottoNumberBoundaryException();
+        }
+    }
+
+    private static void validateIllegalCharacter(String value) {
+        try {
+            parseInt(value);
+        } catch(NumberFormatException e) {
+            throw new IllegalLottoNumberArgumentTypeException();
         }
     }
 

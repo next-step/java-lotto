@@ -29,11 +29,11 @@ public class WinningLottoNumber {
         return lottoResult;
     }
 
-    public void applyBonusNumber(String bonusNumberInput) {
+    public void applyBonusNumber(LottoNumber lottoNumber) {
         validateAlreadySet();
-        validateBonusNumber(bonusNumberInput);
+        validateBonusNumber(lottoNumber);
 
-        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(bonusNumberInput));
+        this.bonusLottoNumber = lottoNumber;
     }
 
     private void validateAlreadySet() {
@@ -42,10 +42,8 @@ public class WinningLottoNumber {
         }
     }
 
-    private void validateBonusNumber(String bonusNumberInput) {
-        LottoNumber tempBonusNumber = valueOf(Integer.parseInt(bonusNumberInput));
-
-        if (prizeLottoNumber.find(tempBonusNumber)) {
+    private void validateBonusNumber(LottoNumber bonusLottoNumber) {
+        if (prizeLottoNumber.find(bonusLottoNumber)) {
             throw new DuplicatedBonusNumberException();
         }
     }

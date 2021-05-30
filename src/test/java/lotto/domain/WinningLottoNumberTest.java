@@ -23,10 +23,19 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 class WinningLottoNumberTest {
 
     private WinningLottoNumber winningLottoNumberForTest;
+    private LottoNumber bonusLottoNumberForTest;
+    private List<LottoGame> mockLottoGameList = Arrays.asList(
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(7)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(8), valueOf(9)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(10), valueOf(11), valueOf(12)))),
+            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(13), valueOf(14), valueOf(15))))
+    );
 
     @BeforeEach
     void setUp() {
         winningLottoNumberForTest = new WinningLottoNumber(createManual("1,2,3,4,5,6"));
+        bonusLottoNumberForTest = valueOf(7);
     }
 
     @DisplayName("new_정상")
@@ -43,19 +52,11 @@ class WinningLottoNumberTest {
         assertDoesNotThrow(() -> new WinningLottoNumber(lottoGame));
     }
 
-    private List<LottoGame> mockLottoGameList = Arrays.asList(
-            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
-            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(7)))),
-            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(8), valueOf(9)))),
-            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(10), valueOf(11), valueOf(12)))),
-            createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(13), valueOf(14), valueOf(15))))
-    );
-
     @DisplayName("decidePrize_정상")
     @Test
     void decidePrize_정상() {
         // Given
-        winningLottoNumberForTest.applyBonusNumber("7");
+        winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest);
         LottoGames lottoGames = new LottoGames(mockLottoGameList);
         final int EXPECTED_FIRST_COUNT = 1;
         final int EXPECTED_SECOND_COUNT = 1;
@@ -77,34 +78,28 @@ class WinningLottoNumberTest {
     @DisplayName("applyBonusNumber_정상")
     @Test
     void applyBonusNumber_정상() {
-        // Given
-        final String bonusNumberInput = "7";
-
-        // When, Then
-        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusNumberInput));
+        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
     }
 
     @DisplayName("applyBonusNumber_예외1_비정상적인_보너스_번호_변경_시도_예외")
     @Test
     void applyBonusNumber_예외1_비정상적인_보너스_번호_변경_시도_예외() {
-        // Given
-        final String bonusNumberInput = "7";
-
         // When, Then
-        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusNumberInput));
+        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
 
         assertThatExceptionOfType(AlreadyAppliedBonusNumberException.class)
-                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusNumberInput));
+                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
     }
 
     @DisplayName("applyBonusNumber_예외2_당첨번호와_중복되는_보너스번호_적용_예외")
     @Test
     void applyBonusNumber_예외2_당첨번호와_중복되는_보너스번호_적용_예외() {
         // Given
-        final String bonusNumberInput = "6";
+        final int NON_DUPLICATED_NUMBER = 6;
+        LottoNumber bonusLottoNumber = valueOf(NON_DUPLICATED_NUMBER);
 
         // When, Then
         assertThatExceptionOfType(DuplicatedBonusNumberException.class)
-                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusNumberInput));
+                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumber));
     }
 }
