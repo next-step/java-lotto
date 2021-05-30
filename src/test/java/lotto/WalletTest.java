@@ -24,19 +24,19 @@ public class WalletTest {
 	}
 
 	@Test
-	@DisplayName("로또를 수동으로 구매한 경우 남은 지갑 확인")
+	@DisplayName("금액을 지불한 후 남은 구매한도 확인")
 	void buyManualLotto() {
 		Wallet wallet = new Wallet(12345);
-		Wallet afterWallet = wallet.spend(10);
+		Wallet afterWallet = wallet.pay(10000);
 
 		assertThat(afterWallet.buyLimit()).isEqualTo(2);
 	}
 
 	@Test
-	@DisplayName("로또를 한도 이상으로 입력 시 예외")
+	@DisplayName("한도 이상으로 지불할 경우 예외 발생")
 	void buyManualLottoError() {
 		Wallet wallet = new Wallet(12345);
 
-		assertThrows(NotEnoughMoneyException.class, () -> wallet.spend(13));
+		assertThrows(NotEnoughMoneyException.class, () -> wallet.pay(13000));
 	}
 }

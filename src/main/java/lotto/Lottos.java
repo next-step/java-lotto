@@ -1,6 +1,7 @@
 package lotto;
 
 import static java.util.Collections.*;
+import static lotto.LottoShop.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,6 +38,10 @@ public class Lottos {
 
 	public int count() {
 		return values.size();
+	}
+
+	public int totalPrice() {
+		return values.size() * LOTTO_PRICE;
 	}
 
 	@Override

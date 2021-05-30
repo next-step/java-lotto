@@ -3,7 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,9 +31,11 @@ public class LottoShopTest {
 	@DisplayName("수동 로또 발급 성공")
 	void buyManualLottos() {
 		Wallet wallet = new Wallet(10000);
-		List<String> beforeBuy = new ArrayList<>();
-		beforeBuy.add("1,2,3,4,5,6");
-		beforeBuy.add("3,4,5,6,7,8");
+
+		Lottos beforeBuy = new Lottos(new ArrayList<>(Arrays.asList(
+			LottoGenerator.generate("1,2,3,4,5,6"),
+			LottoGenerator.generate("3,4,5,6,7,8")
+		)));
 
 		Lottos lottos = shop.buyLottos(wallet, beforeBuy);
 
@@ -56,9 +58,11 @@ public class LottoShopTest {
 	@DisplayName("수동 로또 발급 실패")
 	void cannotBuyManualLottos() {
 		Wallet wallet = new Wallet(1000);
-		List<String> beforeBuy = new ArrayList<>();
-		beforeBuy.add("1,2,3,4,5,6");
-		beforeBuy.add("3,4,5,6,7,8");
+		Lottos beforeBuy = new Lottos(new ArrayList<>(Arrays.asList(
+			LottoGenerator.generate("1,2,3,4,5,6"),
+			LottoGenerator.generate("3,4,5,6,7,8")
+		)));
+
 		assertThatThrownBy(() -> shop.buyLottos(wallet, beforeBuy))
 			.isInstanceOf(NotEnoughMoneyException.class);
 	}

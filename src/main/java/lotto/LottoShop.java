@@ -1,7 +1,5 @@
 package lotto;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +19,12 @@ public class LottoShop {
 		return new Lottos(values);
 	}
 
-	public Lottos buyLottos(Wallet wallet, List<String> beforeBuy) {
+	public Lottos buyLottos(Wallet wallet, Lottos beforeBuy) {
 		validateWallet(wallet);
 
-		Lottos manualLottos
-			= new Lottos(beforeBuy.stream()
-				.map(LottoGenerator::generate)
-				.collect(toList()));
-		Wallet spendWallet = wallet.spend(beforeBuy.size());
+		Wallet spendWallet = wallet.pay(beforeBuy.totalPrice());
 
-		return new Lottos(manualLottos, buyLottos(spendWallet));
+		return new Lottos(beforeBuy, buyLottos(spendWallet));
 	}
 
 	private void validateWallet(Wallet wallet) {

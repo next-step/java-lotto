@@ -18,17 +18,14 @@ public class Wallet {
 		}
 	}
 
-	public Wallet spend(int purchasedCount) {
-		int moneyLeft = money - LOTTO_PRICE * purchasedCount;
-
-		validateMoneyLeft(moneyLeft);
-
-		return new Wallet(moneyLeft);
+	public Wallet pay(int price) {
+		validatePrice(price);
+		return new Wallet(money - price);
 	}
 
-	private void validateMoneyLeft(int moneyLeft) {
-		if (moneyLeft < 0) {
-			throw new NotEnoughMoneyException("로또 갯수가 지갑 사정을 넘어섭니다.");
+	private void validatePrice(int price) {
+		if (money < price) {
+			throw new NotEnoughMoneyException("보유한 금액을 초과하여 지불할 수 없습니다.");
 		}
 	}
 

@@ -8,7 +8,7 @@ public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static Wallet initWallet() {
+	public static Wallet wallet() {
 		System.out.println("\n구입금액을 입력해 주세요.");
 		return new Wallet(scanner.nextInt());
 	}
@@ -25,7 +25,7 @@ public class InputView {
 		return LottoNumber.valueOf(bonusBall);
 	}
 
-	public static List<String> lottoStrings(Wallet wallet) {
+	public static Lottos manualLottos(Wallet wallet) {
 		System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualCount = scanner.nextInt();
 		if (wallet.buyLimit() < manualCount) {
@@ -33,11 +33,11 @@ public class InputView {
 		}
 
 		System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-		List<String> lottoList = new ArrayList<>();
+		List<Lotto> lottoList = new ArrayList<>();
 		for (int i = 0; i < manualCount; i++) {
-			lottoList.add(scanner.next());
+			lottoList.add(LottoGenerator.generate(scanner.next()));
 		}
 
-		return lottoList;
+		return new Lottos(lottoList);
 	}
 }
