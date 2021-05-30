@@ -138,10 +138,10 @@
   - java8에 추가된 Optional을 적용해 NullPointerException이 발생하지 않도록 한다.
   
 ### 피드백 반영 필요 사항
-- [ ] WinningLottoNumber의 당첨번호 생성 팩토리 메소드 인수를 LottoGame으로 변경
-  - [ ] 변경시 필요없어지는 일부 유효성 검사 소스 코드 제거
-  - [ ] 변경시 필요없어지는 예외 클래스 제거 
-- WinningLottoNumber의 보너스 번호 추가 팩토리 메소드 인수를 LottoNumber로 변경
+- [x] WinningLottoNumber의 당첨번호 생성자 인수를 LottoGame으로 변경
+  - [x] 변경시 필요없어지는 일부 유효성 검사 소스 코드 제거
+  - [x] 변경시 필요없어지는 예외 클래스 제거 
+- WinningLottoNumber의 보너스 번호 추가 메소드 인수를 LottoNumber로 변경
   - [ ] 변경시 필요없어지는 일부 유효성 검사 소스 코드 제거
   - [ ] 변경시 필요없어지는 예외 클래스 제거 
   
