@@ -50,6 +50,6 @@ public final class Lotto {
 		for (LottoNo lottoNumber : lottoNumbers) {
 			count = winLotto.contain(lottoNumber) ? count + 1 : count;
 		}
-		return Prize.findByCount(count);
+		return Prize.valueOf(count);
 	}
 }

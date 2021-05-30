@@ -17,7 +17,7 @@ public class PrizeTest {
 	@CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3, 5000", "2, 0", "1, 0", "0, 0"}, delimiter = ',')
 	@DisplayName("당첨 금액 매치 테스트")
 	void match(int count, long win) {
-		assertThat(Prize.findByCount(count).win()).isEqualTo(new Money(win));
+		assertThat(Prize.valueOf(count).win()).isEqualTo(new Money(win));
 	}
 
 	@Test

@@ -22,10 +22,10 @@ public class WinLottoTest {
 		Lotto one = new Lotto(Arrays.asList(6, 14, 12, 11, 15, 13));
 		Lotto zero = new Lotto(Arrays.asList(16, 14, 12, 11, 15, 13));
 
-		assertThat(six.result(win)).isEqualTo(Prize.SIX);
-		assertThat(five.result(win)).isEqualTo(Prize.FIVE);
-		assertThat(four.result(win)).isEqualTo(Prize.FOUR);
-		assertThat(three.result(win)).isEqualTo(Prize.THREE);
+		assertThat(six.result(win)).isEqualTo(Prize.FIRST);
+		assertThat(five.result(win)).isEqualTo(Prize.SECOND);
+		assertThat(four.result(win)).isEqualTo(Prize.THIRD);
+		assertThat(three.result(win)).isEqualTo(Prize.FOURTH);
 		assertThat(two.result(win)).isEqualTo(Prize.NOTHING);
 		assertThat(one.result(win)).isEqualTo(Prize.NOTHING);
 		assertThat(zero.result(win)).isEqualTo(Prize.NOTHING);
