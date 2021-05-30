@@ -16,7 +16,7 @@ public class Lottos {
 	}
 
 	public Statistics statistics(List<Integer> prizeNumbers) {
-		Lotto prizeLotto = new Lotto(prizeNumbers);
+		WinLotto prizeLotto = new WinLotto(prizeNumbers);
 		Statistics statistics = new Statistics();
 		for (Lotto lotto : lottos) {
 			Prize prize = lotto.result(prizeLotto);

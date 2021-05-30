@@ -45,14 +45,10 @@ public final class Lotto {
 		return numbers;
 	}
 
-	private boolean contain(LottoNo lottoNumber) {
-		return lottoNumbers.contains(lottoNumber);
-	}
-
-	public Prize result(Lotto win) {
+	public Prize result(WinLotto winLotto) {
 		int count = 0;
 		for (LottoNo lottoNumber : lottoNumbers) {
-			count = win.contain(lottoNumber) ? count + 1 : count;
+			count = winLotto.contain(lottoNumber) ? count + 1 : count;
 		}
 		return Prize.findByCount(count);
 	}
