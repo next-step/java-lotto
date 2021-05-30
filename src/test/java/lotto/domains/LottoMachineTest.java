@@ -15,7 +15,7 @@ public class LottoMachineTest {
         manualLottos.add("1,2,3,4,5,6");
         manualLottos.add("11,12,13,14,15,16");
         manualLottos.add("21,22,23,24,25,26");
-        PurchasingInfo purchasingInfo = new PurchasingInfo(14000, 3, manualLottos);
+        PurchasingInfo purchasingInfo = new PurchasingInfo(14000, manualLottos);
         Lottos lottos = LottoMachine.makeLottos(purchasingInfo);
         assertThat(lottos.countOfPurchasingWay(PurchasingWay.MANUAL)).isEqualTo(3);
         assertThat(lottos.countOfPurchasingWay(PurchasingWay.AUTOMATIC)).isEqualTo(11);
