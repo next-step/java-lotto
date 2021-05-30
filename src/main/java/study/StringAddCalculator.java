@@ -9,7 +9,7 @@ public class StringAddCalculator {
 
 
     public static int splitAndSum(String input) {
-        if (isEmpty(input)){
+        if (isEmpty(input)) {
             return 0;
         }
 
@@ -19,11 +19,11 @@ public class StringAddCalculator {
     }
 
     private static String[] stringSplit(String input) {
-        if (input.matches(NUMBER_PATTERN)){
+        if (input.matches(NUMBER_PATTERN)) {
             return new String[]{input};
         }
         Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
-        if (m.find()){
+        if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
@@ -31,7 +31,7 @@ public class StringAddCalculator {
     }
 
     private static boolean isEmpty(String input) {
-        if (input == null || input == ""){
+        if (input == null || input.equals("")) {
             return true;
         }
         return false;

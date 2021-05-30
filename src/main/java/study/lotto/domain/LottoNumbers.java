@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.domain;
 
 import study.lotto.util.LottoNumberGenerator;
 
@@ -23,5 +23,9 @@ public class LottoNumbers {
         List<LottoNumber> numbers = new ArrayList<>(winningNumbers.lottoNumbers());
         numbers.removeAll(markedLottoNumbers);
         return LottoGame.MARK_SIZE - numbers.size();
+    }
+
+    public boolean isMatchBonus(LottoNumber bonusNumber) {
+        return markedLottoNumbers.contains(bonusNumber);
     }
 }

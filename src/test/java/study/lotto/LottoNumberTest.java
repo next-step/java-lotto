@@ -2,7 +2,8 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.StringAddCalculator;
+import study.lotto.domain.LottoNumber;
+import study.lotto.exception.WrongLottoNumberException;
 
 import java.util.*;
 
@@ -13,7 +14,7 @@ public class LottoNumberTest {
 
     @DisplayName("로또 번호는 1~45 사이이다.")
     @Test
-    public void lottoNumberTest(){
+    public void lottoNumberTest() {
         LottoNumber firstNumber = new LottoNumber(1);
         assertThat(firstNumber.value()).isEqualTo(1);
 
@@ -21,16 +22,16 @@ public class LottoNumberTest {
         assertThat(lastNumber.value()).isEqualTo(45);
 
         assertThatThrownBy(() -> new LottoNumber(0))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoNumberException.class);
 
         assertThatThrownBy(() -> new LottoNumber(46))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(WrongLottoNumberException.class);
 
     }
 
     @DisplayName("오름차순 정렬")
     @Test
-    public void sortTest(){
+    public void sortTest() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(3));
         lottoNumbers.add(new LottoNumber(2));

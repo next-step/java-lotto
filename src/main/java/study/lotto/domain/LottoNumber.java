@@ -1,9 +1,10 @@
-package study.lotto;
+package study.lotto.domain;
+
+import study.lotto.exception.WrongLottoNumberException;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
 
     private final int lottoNumber;
 
@@ -12,9 +13,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
-    public static void validateLottoNumber(int number){
+    public static void validateLottoNumber(int number) {
         if (!LottoGame.AVAILABLE_LOTTONUMBERS.contains(number)) {
-            throw new IllegalArgumentException("잘못된 로또 번호입니다");
+            throw new WrongLottoNumberException();
         }
     }
 
@@ -38,13 +39,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        if (this.lottoNumber < lottoNumber.lottoNumber) {
-            return -1;
-        }
-        if (this.lottoNumber > lottoNumber.lottoNumber) {
-            return 1;
-        }
-        return 0;
+        return this.lottoNumber - lottoNumber.value();
     }
 
 }

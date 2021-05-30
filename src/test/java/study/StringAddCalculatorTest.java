@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @Test
-    public void splitAndSum_Null_또는_빈문자(){
+    public void splitAndSum_Null_또는_빈문자() {
         int result = StringAddCalculator.splitAndSum(null);
         assertThat(result).isEqualTo(0);
 

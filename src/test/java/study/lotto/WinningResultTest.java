@@ -2,6 +2,8 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import study.lotto.domain.LottoRank;
+import study.lotto.domain.WinningResult;
 
 
 import java.math.BigDecimal;
@@ -14,35 +16,30 @@ public class WinningResultTest {
     @Test
     void WinningLottoTest() {
         WinningResult winningResult = new WinningResult();
-        winningResult.addPrize(2);
-        winningResult.addPrize(3);
-        winningResult.addPrize(3);
-        winningResult.addPrize(5);
-        winningResult.addPrize(6);
-        winningResult.addPrize(6);
+        winningResult.addPrize(2, true);
+        winningResult.addPrize(3, true);
+        winningResult.addPrize(3, true);
+        winningResult.addPrize(5, true);
+        winningResult.addPrize(5, false);
+        winningResult.addPrize(6, true);
+        winningResult.addPrize(6, true);
 
-        assertThat(winningResult.value().get(WinningPrize.FOURTH)).isEqualTo(2);
-        assertThat(winningResult.value().get(WinningPrize.THIRD)).isEqualTo(0);
-        assertThat(winningResult.value().get(WinningPrize.SECOND)).isEqualTo(1);
-        assertThat(winningResult.value().get(WinningPrize.FIRST)).isEqualTo(2);
+        assertThat(winningResult.value().get(LottoRank.FIFTH)).isEqualTo(2);
+        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(winningResult.value().get(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(2);
     }
 
     @DisplayName("총 상금 확인")
     @Test
     void WinningLottoPrizeTest() {
         WinningResult winningResult = new WinningResult();
-        winningResult.addPrize(2);
-        winningResult.addPrize(3);
-        winningResult.addPrize(3);
-        winningResult.addPrize(5);
-        winningResult.addPrize(6);
-        winningResult.addPrize(6);
+        winningResult.addPrize(5, false);
+        winningResult.addPrize(5, true);
 
-        BigDecimal totalPrize = WinningPrize.FOURTH.prize();
-        totalPrize = totalPrize.add(WinningPrize.FOURTH.prize());
-        totalPrize = totalPrize.add(WinningPrize.SECOND.prize());
-        totalPrize = totalPrize.add(WinningPrize.FIRST.prize());
-        totalPrize = totalPrize.add(WinningPrize.FIRST.prize());
+        BigDecimal totalPrize = LottoRank.THIRD.prize();
+        totalPrize = totalPrize.add(LottoRank.SECOND.prize());
 
         assertThat(winningResult.totalPrize()).isEqualTo(totalPrize);
     }
