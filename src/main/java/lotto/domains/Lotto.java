@@ -12,7 +12,6 @@ public class Lotto {
     public Lotto() {
         this.lottoNumbers = new LottoNumbers();
         this.purchasingWay = PurchasingWay.AUTOMATIC;
-
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
@@ -24,9 +23,9 @@ public class Lotto {
         this(new LottoNumbers(stringLottoNumber));
     }
 
-    public void matching(LottoNumbers winningNumbers, int bonusNumber) {
-        int matchingNumber = this.lottoNumbers.matchingNumberCount(winningNumbers);
-        boolean hasBonusNumber = this.lottoNumbers.contains(bonusNumber);
+    public void matching(WinningLotto winningLotto) {
+        int matchingNumber = this.lottoNumbers.matchingNumberCount(winningLotto.winningNumbers());
+        boolean hasBonusNumber = this.lottoNumbers.contains(winningLotto.bonusNumber());
         this.matchingInfo = MatchingInfo.matchingInfo(matchingNumber, hasBonusNumber);
     }
 
