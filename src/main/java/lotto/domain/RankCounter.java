@@ -7,12 +7,13 @@ import lotto.domain.entity.Rank;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 public class RankCounter {
 
     private final Map<Rank, Integer> counter = new HashMap<>();
 
-    public void addCount(Rank rank) {
+    private void addCount(Rank rank) {
         int count = counter.get(rank) != null
                 ? counter.get(rank) + 1
                 : 1;
@@ -23,34 +24,20 @@ public class RankCounter {
         return counter.get(rank) != null ? counter.get(rank) : 0;
     }
 
-    public Map<Rank, Integer> counter() {
-        return counter;
+    public void entryForEach(BiConsumer<? super Rank, ? super Integer> action) {
+        Objects.requireNonNull(action);
+        for (Map.Entry<Rank, Integer> entry : counter.entrySet()) {
+            Rank rank = entry.getKey();
+            Integer integer = entry.getValue();
+            action.accept(rank, integer);
+        }
     }
 
     public void counting(LottoList lottoList, Lotto winningLotto, Number bonusNumber) {
-        boolean matchBonus = false;
-        for (Lotto purchased : lottoList.foreach()) {
-            matchBonus = isMatchBonus(purchased, bonusNumber);
-            checkRanking(purchased.checkNumbers(winningLotto), matchBonus);
-        }
-    }
-
-    private void checkRanking(int count, boolean matchBonus) {
-        if (count == 3) {
-            addCount(Rank.FIFTH);
-        }
-        if (count == 4) {
-            addCount(Rank.FOURTH);
-        }
-        if (count == 5 && !matchBonus) {
-            addCount(Rank.THIRD);
-        }
-        if (count == 5 && matchBonus) {
-            addCount(Rank.SECOND);
-        }
-        if (count == 6) {
-            addCount(Rank.FIRST);
-        }
+        lottoList.forEach(lotto -> {
+            Rank rank = Rank.valueOfCountWithMatchBonus(lotto.checkNumbers(winningLotto), isMatchBonus(lotto, bonusNumber));
+            addCount(rank);
+        });
     }
 
     private boolean isMatchBonus(Lotto purchased, Number bonusNumber) {
@@ -68,12 +55,5 @@ public class RankCounter {
     @Override
     public int hashCode() {
         return Objects.hash(counter);
-    }
-
-    @Override
-    public String toString() {
-        return "RankCounter{" +
-                "counter=" + counter +
-                '}';
     }
 }

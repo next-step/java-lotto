@@ -3,9 +3,8 @@ package lotto.domain.entity;
 import lotto.domain.Lotto;
 import lotto.domain.generator.AutomaticLottoNumbersGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 public final class LottoList {
 
@@ -29,8 +28,11 @@ public final class LottoList {
         return lottoList.get(index);
     }
 
-    public Iterable<? extends Lotto> foreach() {
-        return lottoList;
+    public void forEach(Consumer<? super Lotto> action) {
+        Objects.requireNonNull(action);
+        for (Lotto lotto : lottoList) {
+            action.accept(lotto);
+        }
     }
 
     @Override

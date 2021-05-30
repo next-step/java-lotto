@@ -5,7 +5,6 @@ import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

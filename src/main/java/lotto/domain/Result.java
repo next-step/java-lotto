@@ -3,11 +3,9 @@ package lotto.domain;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.LottoPrice;
 import lotto.domain.entity.Number;
-import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Map;
 
 public final class Result {
 
@@ -36,10 +34,9 @@ public final class Result {
     }
 
     private void calculateWinningMoney() {
-        Map<Rank, Integer> counter = rankCounter.counter();
-        for (Rank rank : counter.keySet()) {
-            winnings = winnings.add(rank.winningMoney().multiply(new BigDecimal(counter.get(rank))));
-        }
+        rankCounter.entryForEach((rank, integer) -> {
+            winnings = winnings.add(rank.winningMoney());
+        });
     }
 
     public BigDecimal winnings() {
