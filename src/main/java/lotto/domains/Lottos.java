@@ -17,20 +17,17 @@ public class Lottos {
         this.lottoList = new ArrayList<>(lottoList);
     }
 
-    public int count() {
-        return lottoList.size();
-    }
-
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(this.lottoList);
     }
 
-    public void matchingWinningNumbersAndBonusNumber(LottoNumbers winningNumbers, int bonusNumber) {
+    public void matchingWinningNumbersAndBonusNumber(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            lotto.matching(winningNumbers, bonusNumber);
+            lotto.matching(winningLotto);
         }
     }
 
+    //TODO refactor: 비슷한역할을 하는 중복된 코드인데 중복제거를 할수 없을까?
     public int countOfMatchingNumber(MatchingInfo matchingInfo) {
         return (int) lottoList.stream()
                 .filter(lotto -> lotto.matchingInfo() == matchingInfo)
@@ -45,7 +42,10 @@ public class Lottos {
 
     public double rateOfReturn() {
         return lottoList.stream()
+                //TODO refactor: lotto.getPayout() 으로 할수 있지 않을까?
                 .mapToDouble(lotto -> lotto.matchingInfo().getPayout())
                 .sum() / (lottoList.size() * LOTTO_PRICE);
     }
+
+
 }
