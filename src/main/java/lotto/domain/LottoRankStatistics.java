@@ -17,16 +17,7 @@ public class LottoRankStatistics {
     public LottoRankStatistics(Lottos lottos, WinningNumbers winningNumber) {
         this.lottos = lottos;
         this.winningNumbers = winningNumber;
-    }
-
-    public void initStatistics() {
-        Map<LottoRank, Integer> result = new HashMap<>();
-        for (int i = 0; i < this.lottos.getSize(); i++) {
-            LottoRank lottoRank = this.winningNumbers.findRank(this.lottos.getLottoNumbers(i));
-            int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
-            result.put(lottoRank, ++lottoCount);
-        }
-        this.rankCounts = new RankCounts(result);
+        initStatistics();
     }
 
     public int getLottoCountByRank(LottoRank rank) {
@@ -38,6 +29,16 @@ public class LottoRankStatistics {
                 / (double) (this.rankCounts.calculateTotalCountByRank() * 1000)) * ONE_HUNDRED_INT)
                 / ONE_HUNDRED_DOUBLE;
         return String.format("%.2f", rateOfReturn);
+    }
+
+    private void initStatistics() {
+        Map<LottoRank, Integer> result = new HashMap<>();
+        for (int i = 0; i < this.lottos.getSize(); i++) {
+            LottoRank lottoRank = this.winningNumbers.findRank(this.lottos.getLottoNumbers(i));
+            int lottoCount = result.getOrDefault(lottoRank, DEFAULT_COUNT);
+            result.put(lottoRank, ++lottoCount);
+        }
+        this.rankCounts = new RankCounts(result);
     }
 
     private long sumTotalWinningAmount() {

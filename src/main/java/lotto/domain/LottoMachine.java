@@ -7,20 +7,25 @@ import lotto.intf.NumbersGenerator;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    private final Price buyPrice;
-    private NumbersGenerator numbersGenerator;
+    private NumbersGenerator generator;
 
-    public LottoMachine(Price buyPrice, NumbersGenerator numbersGenerator) {
-        this.buyPrice = buyPrice;
-        this.numbersGenerator = numbersGenerator;
+    public LottoMachine(NumbersGenerator generator) {
+        this.generator = generator;
     }
 
-    public Lottos createLottos() {
+    public Lottos createLottos(Price price, List<LottoNumbers> manualLottoNumbers) {
+        Long autoLottoCount = (price.getPrice() / LOTTO_PRICE) - manualLottoNumbers.size();
         List<LottoNumbers> lottos = new ArrayList<>();
-        long buyCount = buyPrice.getPrice() / LOTTO_PRICE;
-        for (int i = 0; i < buyCount; i++) {
-            lottos.add(this.numbersGenerator.generateLottoNumbers());
-        }
+        lottos.addAll(manualLottoNumbers);
+        lottos.addAll(createAutoLottos(autoLottoCount));
         return new Lottos(lottos);
+    }
+
+    private List<LottoNumbers> createAutoLottos(Long autoLottoCount) {
+        List<LottoNumbers> autoLottos = new ArrayList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
+            autoLottos.add(this.generator.generateLottoNumbers());
+        }
+        return autoLottos;
     }
 }
