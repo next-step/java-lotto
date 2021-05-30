@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.LottoShop.*;
+import static lotto.shop.LottoShop.*;
 
 public class Wallet {
 

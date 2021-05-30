@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.shop.Lottos;
+
 public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);

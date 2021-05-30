@@ -1,7 +1,7 @@
-package lotto;
+package lotto.shop;
 
 import static java.util.Collections.*;
-import static lotto.LottoShop.*;
+import static lotto.shop.LottoShop.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,21 +9,31 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import lotto.EmptyLottoListException;
+import lotto.Lotto;
+
 public class Lottos {
+
+	private final boolean certified;
 
 	private final List<Lotto> values;
 
-	public Lottos(List<Lotto> values) {
+	Lottos(boolean certified, List<Lotto> values) {
 		validateLottoList(values);
 
+		this.certified = certified;
 		this.values = values;
 	}
 
-	public Lottos(Lottos... lottos) {
-		this(Arrays.stream(lottos)
+	Lottos(boolean certified, Lottos... lottos) {
+		this(certified, Arrays.stream(lottos)
 			.map(Lottos::values)
 			.flatMap(Collection::stream)
 			.collect(Collectors.toList()));
+	}
+
+	public Lottos(List<Lotto> values) {
+		this(false, values);
 	}
 
 	private static void validateLottoList(List<Lotto> values) {
@@ -42,6 +52,10 @@ public class Lottos {
 
 	public int totalPrice() {
 		return values.size() * LOTTO_PRICE;
+	}
+
+	public boolean validate() {
+		return certified;
 	}
 
 	@Override

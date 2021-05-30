@@ -1,4 +1,4 @@
-package lotto;
+package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,6 +8,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.LottoGenerator;
+import lotto.NotEnoughMoneyException;
+import lotto.Wallet;
 
 public class LottoShopTest {
 
@@ -24,6 +28,7 @@ public class LottoShopTest {
 		Wallet wallet = new Wallet(12345);
 		Lottos lottos = shop.buyLottos(wallet);
 		assertThat(lottos).isNotNull();
+		assertThat(lottos.validate()).isTrue();
 		assertThat(lottos.count()).isEqualTo(12);
 	}
 
@@ -40,6 +45,7 @@ public class LottoShopTest {
 		Lottos lottos = shop.buyLottos(wallet, beforeBuy);
 
 		assertThat(lottos).isNotNull();
+		assertThat(lottos.validate()).isTrue();
 		assertThat(lottos.count()).isEqualTo(10);
 		assertThat(lottos.values()).isNotNull();
 		assertThat(lottos.values().get(0)).isEqualTo(LottoGenerator.generate("1,2,3,4,5,6"));

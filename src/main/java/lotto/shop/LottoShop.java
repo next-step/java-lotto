@@ -1,11 +1,18 @@
-package lotto;
+package lotto.shop;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.Lotto;
+import lotto.LottoGenerator;
+import lotto.NotEnoughMoneyException;
+import lotto.Wallet;
+
 public class LottoShop {
 
 	public static final int LOTTO_PRICE = 1000;
+
+	private static final boolean CERTIFICATE = true;
 
 	public Lottos buyLottos(Wallet wallet) {
 		validateWallet(wallet);
@@ -16,7 +23,7 @@ public class LottoShop {
 			values.add(LottoGenerator.generate());
 		}
 
-		return new Lottos(values);
+		return new Lottos(CERTIFICATE, values);
 	}
 
 	public Lottos buyLottos(Wallet wallet, Lottos beforeBuy) {
@@ -24,7 +31,7 @@ public class LottoShop {
 
 		Wallet spendWallet = wallet.pay(beforeBuy.totalPrice());
 
-		return new Lottos(beforeBuy, buyLottos(spendWallet));
+		return new Lottos(CERTIFICATE, beforeBuy, buyLottos(spendWallet));
 	}
 
 	private void validateWallet(Wallet wallet) {

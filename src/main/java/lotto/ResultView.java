@@ -4,6 +4,8 @@ import static lotto.Rank.*;
 
 import java.util.Map;
 
+import lotto.shop.Lottos;
+
 public class ResultView {
 
 	public static void printBuyResult(Lottos lottos, int manualCount) {

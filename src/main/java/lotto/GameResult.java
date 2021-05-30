@@ -3,9 +3,11 @@ package lotto;
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
-import static lotto.LottoShop.*;
+import static lotto.shop.LottoShop.*;
 
 import java.util.Map;
+
+import lotto.shop.Lottos;
 
 public class GameResult {
 

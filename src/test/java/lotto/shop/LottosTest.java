@@ -1,12 +1,18 @@
-package lotto;
+package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.EmptyLottoListException;
+import lotto.LottoGenerator;
+import lotto.Wallet;
 
 public class LottosTest {
 
@@ -48,5 +54,18 @@ public class LottosTest {
 	void doesNotAllowEmptyList() {
 		assertThatThrownBy(() -> new Lottos(Collections.emptyList()))
 			.isInstanceOf(EmptyLottoListException.class);
+	}
+
+	@Test
+	@DisplayName("샵에서 인증받은 로또인지 확인")
+	void certifiedLottosCheck() {
+		Lottos certified = shop.buyLottos(new Wallet(10999));
+		Lottos uncertified = new Lottos(new ArrayList<>(Arrays.asList(
+			LottoGenerator.generate("1,2,3,4,5,6"),
+			LottoGenerator.generate("3,4,5,6,7,8")
+		)));
+
+		assertThat(certified.validate()).isTrue();
+		assertThat(uncertified.validate()).isFalse();
 	}
 }
