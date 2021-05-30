@@ -15,7 +15,7 @@ public class LottoCount {
     }
 
     private void validateSmallerThanNumberOfPurchasesAvailable(int count, Cash purchasingAmount) {
-        if (purchasingAmount.isPurchasesAvailable(count)) {
+        if (!purchasingAmount.isPurchasesAvailable(count)) {
             throw new IllegalArgumentException("구입가능 금액을 벗어납니다.");
         }
     }
