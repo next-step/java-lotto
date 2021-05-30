@@ -19,10 +19,6 @@ public class WinnerLotto {
 	}
 
 	public Ranking match(Lotto boughtLotto) {
-		return Ranking.valueOf(new RankingCondition(
-			(int)boughtLotto.getNumbers().stream()
-				.filter(number -> lotto.hasNumber(number))
-				.count(),
-			boughtLotto.hasNumber(bonusNumber)));
+		return Ranking.valueOf(new RankingCondition(boughtLotto.match(lotto), boughtLotto.hasNumber(bonusNumber)));
 	}
 }

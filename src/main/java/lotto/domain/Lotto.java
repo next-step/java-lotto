@@ -32,8 +32,10 @@ public class Lotto {
 		return numbers.contains(number);
 	}
 
-	public Set<LottoNumber> getNumbers() {
-		return numbers;
+	public int match(Lotto boughtLotto) {
+		return (int)boughtLotto.numbers.stream()
+			.filter(x -> hasNumber(x))
+			.count();
 	}
 
 	@Override
