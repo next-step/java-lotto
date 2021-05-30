@@ -17,9 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LottoNumbersTest {
     @Test
     void 생성자_테스트() {
-        String stringLottoNumber = "1,2,3,4, 5,6";
-        LottoNumbers lottoNumbers = new LottoNumbers(stringLottoNumber);
-        assertThat(lottoNumbers.contains(5)).isTrue();
+        assertThat(new LottoNumbers("1,2,3,4,5,6"));
+        assertThat(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @ParameterizedTest
@@ -34,17 +33,25 @@ public class LottoNumbersTest {
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46)));
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(0, 2, 3, 4, 5, 45)));
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(-1, 2, 3, 4, 5, 45)));
+
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,2,3,4,5,46"));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("0,2,3,4,5,45"));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("-1,2,3,4,5,45"));
     }
 
     @Test
     void 로또번호_중복숫자_에러_테스트() {
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1, 1, 3, 4, 5, 46)));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5,45"));
     }
 
     @Test
     void 로또번호_숫자갯수_에러_테스트() {
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1,1,3,4,5)));
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1,1,3,4,5,6,7)));
+
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5,6,7"));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5"));
     }
 
     @Test
