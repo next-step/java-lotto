@@ -10,8 +10,6 @@ public class Lotto {
 
     public static final int PRICE = 1_000;
     public static final int SIZE = 6;
-    public static final int MIN = 1;
-    public static final int MAX = 45;
 
     private final List<LottoNumber> numbers;
 
@@ -49,10 +47,6 @@ public class Lotto {
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
-    }
-
-    public boolean matchBonus(LottoNumber bonusBall) {
-        return numbers.contains(bonusBall);
     }
 
     public LottoNumber get(int index) {
