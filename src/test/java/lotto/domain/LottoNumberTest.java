@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoNumberTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {Lotto.MIN - 1, Lotto.MAX + 1})
+    @ValueSource(ints = {LottoNumber.MIN - 1, LottoNumber.MAX + 1})
     void 로또번호는_1부터_45사이의_숫자이다(int outOfBounds) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(outOfBounds));
     }

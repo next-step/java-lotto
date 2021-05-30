@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+
     public final int number;
 
     public LottoNumber(int number) {
@@ -13,7 +16,7 @@ public class LottoNumber {
     }
 
     public static boolean isValidNumber(int number) {
-        return number >= Lotto.MIN && number <= Lotto.MAX;
+        return number >= MIN && number <= MAX;
     }
 
     @Override
