@@ -7,8 +7,19 @@ import org.junit.jupiter.api.Test;
 
 public class BudgetTest {
 	@Test
-	@DisplayName("0원 이하의 금액은 받을 수 없음")
-	void can_not_accept_under_0_amonut() {
+	@DisplayName("1000만원 이상의 금액은 받을 수 없음")
+	void can_not_accept_over_10_million() {
+		assertThatThrownBy(() -> new Budget("100000000"))
+			.isInstanceOf(RuntimeException.class);
+		assertThatThrownBy(() -> new Budget(100000000))
+			.isInstanceOf(RuntimeException.class);
+	}
+
+	@Test
+	@DisplayName("0원 미만의 금액은 받을 수 없음")
+	void can_not_accept_under_0() {
+		assertThatThrownBy(() -> new Budget("-1"))
+			.isInstanceOf(RuntimeException.class);
 		assertThatThrownBy(() -> new Budget(-1))
 			.isInstanceOf(RuntimeException.class);
 	}
