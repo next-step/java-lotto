@@ -1,4 +1,4 @@
-package StringAddCalculator;
+package stringAddCalculator;
 
 public class Number {
 	private static final int MINIMUM_VALUE = 0;

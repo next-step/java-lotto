@@ -1,4 +1,4 @@
-package StringAddCalculator;
+package stringAddCalculator;
 
 public class StringAddCalculator {
 	public static int splitAndReturnSum(String inputFromUser) {
