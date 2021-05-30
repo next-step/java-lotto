@@ -56,4 +56,8 @@ public class LottoGames {
     private static int calculateBuyableCount(PurchaseMoney purchaseMoney) {
         return purchaseMoney.getValue() / LOTTO_PRICE;
     }
+
+    public void merge(LottoGames otherLottoGames) {
+        this.values.addAll(otherLottoGames.values);
+    }
 }
