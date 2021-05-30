@@ -47,9 +47,11 @@ public final class Lotto {
 
 	public Prize result(WinLotto winLotto) {
 		int count = 0;
+		boolean matchBonus = false;
 		for (LottoNo lottoNumber : lottoNumbers) {
-			count = winLotto.contain(lottoNumber) ? count + 1 : count;
+			count = winLotto.contains(lottoNumber) ? count + 1 : count;
+			matchBonus = matchBonus || winLotto.isBonusNumber(lottoNumber);
 		}
-		return Prize.valueOf(count);
+		return Prize.valueOf(count, matchBonus);
 	}
 }

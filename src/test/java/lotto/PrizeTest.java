@@ -14,10 +14,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class PrizeTest {
 
 	@ParameterizedTest
-	@CsvSource(value = {"6,2000000000", "5,1500000", "4,50000", "3, 5000", "2, 0", "1, 0", "0, 0"}, delimiter = ',')
+	@CsvSource(value = {"6,false,2000000000", "5,true,30000000", "5,false,1500000",
+						"4,false,50000", "3,false,5000", "2,false,0", "1,false,0", "0,false,0"}, delimiter = ',')
 	@DisplayName("당첨 금액 매치 테스트")
-	void match(int count, long win) {
-		assertThat(Prize.valueOf(count).win()).isEqualTo(new Money(win));
+	void match(int count, boolean matchBonus, long win) {
+		assertThat(Prize.valueOf(count, matchBonus).win()).isEqualTo(new Money(win));
 	}
 
 	@Test
@@ -33,7 +34,7 @@ public class PrizeTest {
 		lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 14, 15, 16)));
 		Lottos lottos = new Lottos(lottoList);
 
-		Statistics statistics = lottos.statistics(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Statistics statistics = lottos.statistics(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
 		Profit profit = Prize.profit(statistics);
 		assertThat(profit.rate()).isEqualTo(0.71);

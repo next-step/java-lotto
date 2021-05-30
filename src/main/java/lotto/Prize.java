@@ -1,10 +1,11 @@
 package lotto;
 
 public enum Prize {
-	FIRST(6, new Money(2000000000)),
-	SECOND(5, new Money(1500000)),
-	THIRD(4, new Money(50000)),
-	FOURTH(3, new Money(5000)),
+	FIRST(6, new Money(2_000_000_000)),
+	SECOND(5, new Money(30_000_000)),
+	THIRD(5, new Money(1_500_000)),
+	FOURTH(4, new Money(50_000)),
+	FIFTH(3, new Money(5_000)),
 	NOTHING(0, new Money(0));
 
 	private final int count;
@@ -15,12 +16,20 @@ public enum Prize {
 		this.win = winAmount;
 	}
 
-	public static Prize valueOf(int count) {
-		Prize findResult = NOTHING;
+	public static Prize valueOf(int count, boolean matchBonus) {
+		Prize result = NOTHING;
 		for (Prize prize : values()) {
-			findResult = (prize.count() == count) ? prize : findResult;
+			result = isSameCount(count, prize) ? prize : result;
 		}
-		return findResult;
+		return isSecondPrize(result, matchBonus) ? Prize.SECOND : result;
+	}
+
+	private static boolean isSecondPrize(Prize prize, boolean matchBonus) {
+		return prize.equals(Prize.THIRD) && matchBonus;
+	}
+
+	private static boolean isSameCount(int count, Prize prize) {
+		return prize.count() == count;
 	}
 
 	public int count() {

@@ -15,11 +15,11 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public Statistics statistics(List<Integer> prizeNumbers) {
-		WinLotto prizeLotto = new WinLotto(prizeNumbers);
+	public Statistics statistics(List<Integer> prizeNumbers, Integer bonusNumber) {
+		WinLotto winLotto = new WinLotto(prizeNumbers, bonusNumber);
 		Statistics statistics = new Statistics();
 		for (Lotto lotto : lottos) {
-			Prize prize = lotto.result(prizeLotto);
+			Prize prize = lotto.result(winLotto);
 			statistics.addCount(prize);
 		}
 		return statistics;
