@@ -11,8 +11,12 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    @Override
-    public String toString() {
-        return winningNumbers + "" + bonusNumber + "";
+    public int getWinningCount(LottoTicket lottoTicket) {
+        return (int) winningNumbers.stream()
+                .filter(lottoTicket::compareWinningNumber).count();
+    }
+
+    public boolean isWinningBonusNumber(LottoTicket lottoTicket) {
+        return lottoTicket.compareBonusBall(bonusNumber);
     }
 }

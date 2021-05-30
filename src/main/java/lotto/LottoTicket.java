@@ -13,6 +13,14 @@ public class LottoTicket {
         return lottoTicket.size();
     }
 
+    public boolean compareWinningNumber(LottoNumber winningNumber) {
+        return lottoTicket.contains(winningNumber);
+    }
+
+    public boolean compareBonusBall(LottoNumber bonusBall) {
+        return lottoTicket.contains(bonusBall);
+    }
+
     @Override
     public String toString() {
         return lottoTicket + "";

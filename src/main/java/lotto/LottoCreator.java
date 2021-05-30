@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 public class LottoCreator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final int LOTTO_NUMBER_INCREMENT_INDEX = 1;
     private static final int LOTTO_NUMBER_MIN_COUNT = 0;
     private static final int LOTTO_NUMBER_MAX_COUNT = 6;
     private static final String COMMA = ", ";
@@ -17,7 +18,8 @@ public class LottoCreator {
     private List<LottoNumber> lottoNumbers;
 
     public void makeLottoNumbers() {
-        lottoNumbers = IntStream.iterate(MIN_NUMBER, i -> i + 1).limit(MAX_NUMBER)
+        lottoNumbers = IntStream.iterate(MIN_NUMBER, i -> i + LOTTO_NUMBER_INCREMENT_INDEX)
+                .limit(MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
