@@ -1,10 +1,12 @@
-package lotto;
+package lotto.domain;
+
+import lotto.domain.ResultScoreEnum;
 
 public class SameNumberCountInALotto {
     private int sameNumberCount = 0;
     private boolean isBonusWon = false;
 
-    SameNumberCountInALotto(int sameNumberCount, boolean isBonusWon) {
+    public SameNumberCountInALotto(int sameNumberCount, boolean isBonusWon) {
         this.sameNumberCount = sameNumberCount;
         this.isBonusWon = isBonusWon;
     }

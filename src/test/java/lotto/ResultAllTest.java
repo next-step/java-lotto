@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.ResultAll;
+import lotto.domain.ResultScoreEnum;
+import lotto.domain.SameNumberCountInALotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

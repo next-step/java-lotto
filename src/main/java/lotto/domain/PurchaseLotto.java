@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain;
+
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class PurchaseLotto {
     private static final int LOTTO_PRICE = 1000;

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain;
+
+import lotto.domain.PurchaseLotto;
 
 public class LottoController {
     public static void main(String[] args) {

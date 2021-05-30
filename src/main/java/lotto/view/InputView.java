@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class InputView {
     private String inputLastWonLottoNumber;
     private String inputBonusNumber;
 
-    InputView() {
+    public InputView() {
         scan = new Scanner(System.in);
     }
 

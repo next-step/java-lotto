@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoNumbersList;
+import lotto.domain.ResultAll;
+import lotto.domain.ResultScoreEnum;
 
 public class ResultView {
     public void printPurchasedCount(int count) {
