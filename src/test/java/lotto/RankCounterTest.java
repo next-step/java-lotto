@@ -26,7 +26,6 @@ public class RankCounterTest {
                 , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(10)) // 2등
                 , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(11)) // 3등
                 , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(8), new Number(10)) // 4등
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(9), new Number(8), new Number(10)) // 5등
         );
 
         result.confirm(lottoList, new LottoPrice("1000"));
@@ -36,6 +35,6 @@ public class RankCounterTest {
         assertThat(rankCounter.countByRank(Rank.SECOND)).isEqualTo(1);
         assertThat(rankCounter.countByRank(Rank.THIRD)).isEqualTo(1);
         assertThat(rankCounter.countByRank(Rank.FOURTH)).isEqualTo(1);
-        assertThat(rankCounter.countByRank(Rank.FIFTH)).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.FIFTH)).isEqualTo(0);
     }
 }
