@@ -1,8 +1,8 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoMatchResult {
@@ -10,13 +10,20 @@ public class LottoMatchResult {
 	private List<LottoPrize> results;
 	private Lottos purchasedLotto;
 
-	public LottoMatchResult(Lottos purchasedLotto, Lotto winningLotto) {
+	public LottoMatchResult(Lottos purchasedLotto, WinningLotto winningLotto) {
 		this.purchasedLotto = purchasedLotto;
 		this.results = purchasedLotto.comparePrize(winningLotto);
 	}
 
 	public Map<LottoPrize, Long> getResult() {
-			return results.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<LottoPrize, Long> result = Arrays.stream(LottoPrize.values())
+			.collect(Collectors.toMap(lottoPrize -> lottoPrize, lottoPrize -> 0L));
+
+		results.forEach(lottoPrize -> {
+			result.put(lottoPrize, result.get(lottoPrize) + 1);
+		});
+
+		return result;
 	}
 
 	public float getProfit() {

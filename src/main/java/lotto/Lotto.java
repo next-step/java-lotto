@@ -19,9 +19,14 @@ public class Lotto {
 		this.lottoNumbers = sortNumber(numbers);
 	}
 
-	public LottoPrize compare(Lotto winningLotto) {
+	public LottoPrize compare(WinningLotto winningLotto) {
 		long matchCount = lottoNumbers.stream().filter(winningLotto::contains).count();
-		return getLottoPrizeFromMatchCount(matchCount);
+		boolean isMatchBonus = lottoNumbers.stream().anyMatch(winningLotto::isMatchBonusNumber);
+		return getLottoPrizeFromMatchCount(matchCount, isMatchBonus);
+	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	private void validate(List<LottoNumber> numbers) {
@@ -38,10 +43,6 @@ public class Lotto {
 	private List<LottoNumber> sortNumber(List<LottoNumber> numbers) {
 		Collections.sort(numbers);
 		return numbers;
-	}
-
-	private boolean contains(LottoNumber lottoNumber) {
-		return lottoNumbers.contains(lottoNumber);
 	}
 
 	@Override
