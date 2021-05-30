@@ -7,6 +7,7 @@ import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Map;
 
 public final class Result {
 
@@ -22,8 +23,8 @@ public final class Result {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateBonusNumber(Lotto lotto, Number bonusNumber){
-        if(lotto.isNumber(bonusNumber)){
+    private void validateBonusNumber(Lotto lotto, Number bonusNumber) {
+        if (lotto.isNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼은 당첨 번호들과 같을 수 없습니다.");
         }
     }
@@ -35,11 +36,10 @@ public final class Result {
     }
 
     private void calculateWinningMoney() {
-        winnings = winnings.add(Rank.FIFTH.winningMoney().multiply(new BigDecimal(rankCounter.fifth())));
-        winnings = winnings.add(Rank.FOURTH.winningMoney().multiply(new BigDecimal(rankCounter.fourth())));
-        winnings = winnings.add(Rank.THIRD.winningMoney().multiply(new BigDecimal(rankCounter.third())));
-        winnings = winnings.add(Rank.SECOND.winningMoney().multiply(new BigDecimal(rankCounter.second())));
-        winnings = winnings.add(Rank.FIRST.winningMoney().multiply(new BigDecimal(rankCounter.first())));
+        Map<Rank, Integer> counter = rankCounter.counter();
+        for (Rank rank : counter.keySet()) {
+            winnings = winnings.add(rank.winningMoney().multiply(new BigDecimal(counter.get(rank))));
+        }
     }
 
     public BigDecimal winnings() {

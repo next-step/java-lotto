@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
 import lotto.domain.RankCounter;
+import lotto.domain.entity.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,8 +43,8 @@ public class LottoListTest {
 
     private RankCounter makeRank(){
         RankCounter rankCounter = new RankCounter();
-        rankCounter.addFirst();
-        rankCounter.addSecond();
+        rankCounter.addCount(Rank.FIRST);
+        rankCounter.addCount(Rank.SECOND);
         return rankCounter;
     }
 }

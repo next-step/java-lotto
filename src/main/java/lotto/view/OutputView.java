@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.entity.LottoList;
 import lotto.domain.RankCounter;
+import lotto.domain.entity.Rank;
 
 import java.math.BigDecimal;
 
@@ -50,11 +51,11 @@ public final class OutputView {
     public static void printStatistics(BigDecimal profitRate, RankCounter rankCounter) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(HYPHEN);
-        System.out.printf(FIRST_MESSAGE, rankCounter.first());
-        System.out.printf(SECOND_MESSAGE, rankCounter.second());
-        System.out.printf(THIRD_MESSAGE, rankCounter.third());
-        System.out.printf(FOURTH_MESSAGE, rankCounter.fourth());
-        System.out.printf(FIFTH_MESSAGE, rankCounter.fifth());
+        System.out.printf(FIRST_MESSAGE, rankCounter.countByRank(Rank.FIRST));
+        System.out.printf(SECOND_MESSAGE, rankCounter.countByRank(Rank.SECOND));
+        System.out.printf(THIRD_MESSAGE, rankCounter.countByRank(Rank.THIRD));
+        System.out.printf(FOURTH_MESSAGE, rankCounter.countByRank(Rank.FOURTH));
+        System.out.printf(FIFTH_MESSAGE, rankCounter.countByRank(Rank.FIFTH));
         System.out.printf(PROFIT_RATE_RESULT_MESSAGE, profitRate);
     }
 

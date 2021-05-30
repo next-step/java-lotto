@@ -30,7 +30,7 @@ public final class LottoList {
         return lottoList.get(index);
     }
 
-    public RankCounter compareWith(Lotto winningLotto, Number bonusNumber){
+    public RankCounter compareWith(Lotto winningLotto, Number bonusNumber) {
         RankCounter rankCounter = new RankCounter();
         boolean matchBonus = false;
         for (Lotto purchased : lottoList) {
@@ -46,19 +46,19 @@ public final class LottoList {
 
     private void checkRank(int count, RankCounter rankCounter, boolean matchBonus) {
         if (count == 3) {
-            rankCounter.addFifth();
+            rankCounter.addCount(Rank.FIFTH);
         }
         if (count == 4) {
-            rankCounter.addFourth();
+            rankCounter.addCount(Rank.FOURTH);
         }
         if (count == 5 && !matchBonus) {
-            rankCounter.addThird();
+            rankCounter.addCount(Rank.THIRD);
         }
         if (count == 5 && matchBonus) {
-            rankCounter.addSecond();
+            rankCounter.addCount(Rank.SECOND);
         }
         if (count == 6) {
-            rankCounter.addFirst();
+            rankCounter.addCount(Rank.FIRST);
         }
     }
 

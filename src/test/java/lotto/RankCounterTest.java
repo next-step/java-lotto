@@ -6,6 +6,7 @@ import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
 import lotto.domain.RankCounter;
+import lotto.domain.entity.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +32,10 @@ public class RankCounterTest {
         result.confirm(lottoList, new LottoPrice("1000"));
         RankCounter rankCounter = result.rank();
 
-        assertThat(rankCounter.first()).isEqualTo(1);
-        assertThat(rankCounter.second()).isEqualTo(1);
-        assertThat(rankCounter.third()).isEqualTo(1);
-        assertThat(rankCounter.fourth()).isEqualTo(1);
-        assertThat(rankCounter.fifth()).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.THIRD)).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.FOURTH)).isEqualTo(1);
+        assertThat(rankCounter.countByRank(Rank.FIFTH)).isEqualTo(1);
     }
 }
