@@ -1,5 +1,7 @@
 package lotto.domains;
 
+import lotto.util.Convertor;
+
 import java.util.*;
 
 public class LottoNumbers {
@@ -18,6 +20,10 @@ public class LottoNumbers {
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    public LottoNumbers(String stringLottoNumber) {
+        this(Convertor.convertStringToList(stringLottoNumber));
     }
 
     private List<Integer> makeLottoNumbers() {
