@@ -81,7 +81,7 @@ public class ShopTest {
         lottoTicket.add(lotto);
         LottoNumber bonusNumber = LottoNumber.of(45);
         //when
-        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+        LottoResult match = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
         //then
         assertThat(match.count(Prize.FIFTH)).isEqualTo(1);
     }
@@ -97,7 +97,7 @@ public class ShopTest {
         lottoTicket.add(lotto);
         LottoNumber bonusNumber = LottoNumber.of(16);
         //when
-        LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+        LottoResult match = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
 
         //then
         assertThat(match.count(Prize.SECOND)).isEqualTo(1);
@@ -109,11 +109,11 @@ public class ShopTest {
         //given
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(1);
-        Shop shop = new Shop();
+        LottoTicket lottoTicket = new LottoTicket();
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> shop.lottoResult(new LottoTicket(), winningNumber, bonusNumber))
+                .isThrownBy(() -> lottoTicket.matchWinningNumber(winningNumber, bonusNumber))
                 .withMessageContaining(ErrorMessage.DUPLICATE_BONUS_NUMBER);
     }
 

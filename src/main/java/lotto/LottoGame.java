@@ -23,7 +23,7 @@ public class LottoGame {
 
         WinningNumber winningNumber = new WinningNumber(InputView.inputLottoNumber());
         LottoNumber bonusNumber = inputBonusNumber();
-        LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
+        LottoResult lottoResult = lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
 
         OutputView.resultMessage(lottoResult, money);
     }
