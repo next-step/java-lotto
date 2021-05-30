@@ -42,7 +42,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("provideListAndExpectedMatchingNumber")
     void 당첨번호_매칭후_매칭정보_테스트(Lotto lotto, int bonusNumber, int expectedMatchingNumber, int expectedPayout) {
-        lotto.matching(winningNumber, bonusNumber);
+        lotto.matching(new WinningLotto(winningNumber, bonusNumber));
         assertThat(lotto.matchingInfo().matchingNumber()).isEqualTo(expectedMatchingNumber);
         assertThat(lotto.matchingInfo().getPayout()).isEqualTo(expectedPayout);
     }
