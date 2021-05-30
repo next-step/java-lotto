@@ -32,13 +32,8 @@ public class Shop {
         return lottoTicket;
     }
 
-    public void checkDuplicateBonusNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER);
-        }
-    }
-
     public LottoResult lottoResult(LottoTicket lottoTicket, WinningNumber winningNumber, LottoNumber bonusNumber) {
+        checkDuplicateBonusNumber(winningNumber, bonusNumber);
         return lottoTicket.matchWinningNumber(winningNumber, bonusNumber);
     }
 
@@ -65,5 +60,11 @@ public class Shop {
     private int calculate(Money money, int quantity) {
         checkMoney(money, quantity);
         return money.amount() - quantity * PURCHASE_PRICE;
+    }
+
+    private void checkDuplicateBonusNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
+        if (winningNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER);
+        }
     }
 }

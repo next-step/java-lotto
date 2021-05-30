@@ -77,9 +77,9 @@ public class ShopTest {
         LottoTicket lottoTicket = new LottoTicket();
         WinningNumber winningNumber = new WinningNumber(initWinningNumbers());
 
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 34));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 33, 34, 35));
         lottoTicket.add(lotto);
-        LottoNumber bonusNumber = LottoNumber.of(5);
+        LottoNumber bonusNumber = LottoNumber.of(45);
         //when
         LottoResult match = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
         //then
@@ -113,7 +113,7 @@ public class ShopTest {
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> shop.checkDuplicateBonusNumber(winningNumber, bonusNumber))
+                .isThrownBy(() -> shop.lottoResult(new LottoTicket(), winningNumber, bonusNumber))
                 .withMessageContaining(ErrorMessage.DUPLICATE_BONUS_NUMBER);
     }
 

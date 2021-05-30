@@ -23,7 +23,6 @@ public class LottoGame {
 
         WinningNumber winningNumber = new WinningNumber(InputView.inputLottoNumber());
         LottoNumber bonusNumber = inputBonusNumber();
-        shop.checkDuplicateBonusNumber(winningNumber, bonusNumber);
         LottoResult lottoResult = shop.lottoResult(lottoTicket, winningNumber, bonusNumber);
 
         OutputView.resultMessage(lottoResult, money);
@@ -44,9 +43,9 @@ public class LottoGame {
         return LottoNumber.of(InputView.inputNumber());
     }
 
-    private static LottoTicket inputSelfLottoNumber(int selfAmount) {
+    private static LottoTicket inputSelfLottoNumber(int selfLottoQuantity) {
         LottoTicket lottoTicket = new LottoTicket();
-        for (int i = 0; i < selfAmount; i++) {
+        for (int i = 0; i < selfLottoQuantity; i++) {
             lottoTicket.add(new Lotto(InputView.inputLottoNumber()));
         }
         return lottoTicket;
