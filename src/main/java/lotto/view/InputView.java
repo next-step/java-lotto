@@ -40,15 +40,15 @@ public class InputView {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
 		String lastWinLotto = scanner.nextLine();
-		return getSplitNumberList(lastWinLotto);
+		return Optional.of(getSplitNumberList(lastWinLotto))
+			.orElseThrow(() -> new RuntimeException("input must be collection of numbers with comma split"));
 	}
 
 	private static List<Integer> getSplitNumberList(String numberList) {
-		return Optional.of(Arrays.stream(numberList.split(","))
+		return Arrays.stream(numberList.split(","))
 			.map(x -> Optional.of(Integer.parseInt(x.trim()))
-				.orElseThrow(RuntimeException::new))
-			.collect(Collectors.toList()))
-			.orElseThrow(RuntimeException::new);
+				.orElseThrow(() -> new RuntimeException("each number must be integer number type")))
+			.collect(Collectors.toList());
 	}
 
 	public static int getBonusNumber() {
