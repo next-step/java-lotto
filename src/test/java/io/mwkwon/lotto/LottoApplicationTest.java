@@ -48,19 +48,19 @@ public class LottoApplicationTest {
             }
 
             @Override
-            public List<List<LottoNumber>> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
+            public List<LottoNumbers> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
                 return Arrays.asList(
-                        Stream.of("8, 21, 23, 41, 42, 43".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList()),
-                        Stream.of("3, 5, 11, 16, 32, 38".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList()),
-                        Stream.of("7, 11, 16, 35, 36, 44".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())
+                        LottoNumbers.create(Stream.of("8, 21, 23, 41, 42, 43".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
+                        LottoNumbers.create(Stream.of("3, 5, 11, 16, 32, 38".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
+                        LottoNumbers.create(Stream.of("7, 11, 16, 35, 36, 44".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList()))
                 );
             }
         };
 
         LottoGenerator lottoGenerator = new LottoMachine() {
             @Override
-            public List<Lotto> createAutoLottos(PurchaseQuantity purchaseQuantity) {
-                return  Arrays.asList(
+            public BuyLottos createAutoLottos(PurchaseQuantity purchaseQuantity) {
+                return  BuyLottos.create(Arrays.asList(
                         Lotto.create(Stream.of("1, 8, 11, 31, 41, 42".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
                         Lotto.create(Stream.of("13, 14, 16, 38, 42, 45".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
                         Lotto.create(Stream.of("7, 11, 30, 40, 42, 43".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
@@ -72,7 +72,7 @@ public class LottoApplicationTest {
                         Lotto.create(Stream.of("13, 14, 18, 21, 23, 35".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
                         Lotto.create(Stream.of("17, 21, 29, 37, 42, 45".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList())),
                         Lotto.create(Stream.of("3, 8, 27, 30, 35, 44".split(",")).map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim()))).collect(Collectors.toList()))
-                );
+                ));
             }
         };
         LottoApplication lottoApplication = new LottoApplication(dataGenerator, new ResultView(), lottoGenerator);

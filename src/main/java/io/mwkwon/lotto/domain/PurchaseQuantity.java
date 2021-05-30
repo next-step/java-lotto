@@ -33,6 +33,7 @@ public class PurchaseQuantity {
     public PurchaseQuantity calcAutoLottoPurchaseQuantity(LottoPayment lottoPayment) {
         int autoPurchaseQuantity = lottoPayment.calcLottoBuyQuantity() - quantity;
         return PurchaseQuantity.create(autoPurchaseQuantity);
+
     }
 
     public boolean isSame(int other) {

@@ -18,6 +18,7 @@ public class Lotto {
         return new Lotto(strLottoNumbers);
     }
 
+
     public Set<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }

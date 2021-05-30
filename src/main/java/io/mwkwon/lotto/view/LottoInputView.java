@@ -1,9 +1,6 @@
 package io.mwkwon.lotto.view;
 
-import io.mwkwon.lotto.domain.Lotto;
-import io.mwkwon.lotto.domain.LottoNumber;
-import io.mwkwon.lotto.domain.LottoPayment;
-import io.mwkwon.lotto.domain.PurchaseQuantity;
+import io.mwkwon.lotto.domain.*;
 import io.mwkwon.lotto.interfaces.DataGenerator;
 
 import java.util.*;
@@ -68,15 +65,15 @@ public class LottoInputView implements DataGenerator {
     }
 
     @Override
-    public List<List<LottoNumber>> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
-        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
+    public List<LottoNumbers> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         if (purchaseQuantity.isSame(0)) {
-            return lottoNumbers;
+            return null;
         }
         System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS);
         while (purchaseQuantity.isLessThan(lottoNumbers.size())) {
             String value = this.requestInput();
-            List<LottoNumber> lottoNumber = this.createLottoNumbers(value);
+            LottoNumbers lottoNumber = this.createLottoNumbers(value, DELIMITER);
             lottoNumbers.add(lottoNumber);
         }
         return lottoNumbers;
@@ -94,25 +91,26 @@ public class LottoInputView implements DataGenerator {
 
     private Lotto createLotto(String strLottoNumbers) {
         try {
-            List<LottoNumber> lottoNumbers = this.createLottoNumbers(strLottoNumbers);
-            return Lotto.create(lottoNumbers);
+            LottoNumbers lottoNumbers = this.createLottoNumbers(strLottoNumbers, DELIMITER);
+            return lottoNumbers.createLotto();
         } catch (Exception e) {
             System.out.println(e.getMessage() + RETRY_MESSAGE);
             return null;
         }
     }
 
-    private List<LottoNumber> createLottoNumbers(String strLottoNumbers) {
+    private LottoNumbers createLottoNumbers(String strLottoNumbers, String delimiter) {
         try {
             this.checkNullAndEmpty(strLottoNumbers);
             this.checkValidNumberAndDelimiter(strLottoNumbers);
-            String[] split = strLottoNumbers.split(DELIMITER);
-            return Stream.of(split)
+            String[] split = strLottoNumbers.split(delimiter);
+            List<LottoNumber> lottoNumbers = Stream.of(split)
                     .map(strNumber -> LottoNumber.create(Integer.parseInt(strNumber.trim())))
                     .collect(Collectors.toList());
+            return LottoNumbers.create(lottoNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage() + RETRY_MESSAGE);
-            return Collections.emptyList();
+            return null;
         }
     }
 

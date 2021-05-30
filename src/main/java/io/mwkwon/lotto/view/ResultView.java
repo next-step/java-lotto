@@ -11,8 +11,8 @@ public class ResultView {
     private static final String DELIMITER = "---------";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printBuyLottoCount(List<Lotto> manualLottos, List<Lotto> autoLottos) {
-        System.out.println(String.format(BUY_COUNT_MESSAGE, manualLottos.size(), autoLottos.size()));
+    public void printBuyLottoCount(BuyLottos manualLottos, BuyLottos autoLottos) {
+        System.out.println(String.format(BUY_COUNT_MESSAGE, manualLottos.lottos().size(), autoLottos.lottos().size()));
     }
 
     public void printBuyLottos(BuyLottos buyLottos) {

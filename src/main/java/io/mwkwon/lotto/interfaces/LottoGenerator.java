@@ -1,10 +1,11 @@
 package io.mwkwon.lotto.interfaces;
 
-import io.mwkwon.lotto.domain.*;
-
-import java.util.List;
+import io.mwkwon.lotto.domain.BuyLottos;
+import io.mwkwon.lotto.domain.Lotto;
+import io.mwkwon.lotto.domain.LottoNumbers;
+import io.mwkwon.lotto.domain.PurchaseQuantity;
 
 public interface LottoGenerator {
-    List<Lotto> createAutoLottos(PurchaseQuantity purchaseQuantity);
-    Lotto createManualLotto(List<LottoNumber> lottoNumbers);
+    BuyLottos createAutoLottos(PurchaseQuantity purchaseQuantity);
+    Lotto createManualLotto(LottoNumbers lottoNumbers);
 }

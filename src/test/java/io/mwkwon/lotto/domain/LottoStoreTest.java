@@ -16,8 +16,8 @@ public class LottoStoreTest {
     @CsvSource(value = {"10000:10", "25000:25", "12500:12"}, delimiter = ':')
     void 입력된_구입금액_기준_로또_구매_기능_테스트(int value, int excepted) {
         LottoStore lottoStore = new LottoStore(new LottoInputView(), new LottoMachine());
-        List<Lotto> buyLottos = lottoStore.buyAutoLottos(LottoPayment.create(value), PurchaseQuantity.create(0));
-        assertThat(buyLottos.size()).isEqualTo(excepted);
+        BuyLottos buyLottos = lottoStore.buyAutoLottos(LottoPayment.create(value), PurchaseQuantity.create(0));
+        assertThat(buyLottos.lottos().size()).isEqualTo(excepted);
     }
 
     @Test
@@ -100,14 +100,14 @@ public class LottoStoreTest {
                 LottoNumber.create(6));
         LottoInputView lottoInputView = new LottoInputView(){
             @Override
-            public List<List<LottoNumber>> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
-                return Arrays.asList(lottoNumbers);
+            public List<LottoNumbers> requestManualLottoNumbers(PurchaseQuantity purchaseQuantity) {
+                return Arrays.asList(LottoNumbers.create(lottoNumbers));
             }
         };
         LottoStore lottoStore = new LottoStore(lottoInputView, new LottoMachine());
         PurchaseQuantity purchaseQuantity = PurchaseQuantity.create(1);
-        List<Lotto> manualLottos = lottoStore.createManualLottos(purchaseQuantity);
-        assertThat(purchaseQuantity.isSame(manualLottos.size())).isTrue();
-        assertThat(manualLottos).isEqualTo(Arrays.asList(Lotto.create(lottoNumbers)));
+        BuyLottos manualLottos = lottoStore.createManualLottos(purchaseQuantity);
+        assertThat(purchaseQuantity.isSame(manualLottos.lottos().size())).isTrue();
+        assertThat(manualLottos).isEqualTo(BuyLottos.create(Arrays.asList(Lotto.create(lottoNumbers))));
     }
 }
