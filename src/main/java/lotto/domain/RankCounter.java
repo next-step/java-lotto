@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.entity.LottoList;
+import lotto.domain.entity.Number;
 import lotto.domain.entity.Rank;
 
 import java.util.HashMap;
@@ -18,11 +20,41 @@ public class RankCounter {
     }
 
     public Integer countByRank(Rank rank) {
-        return counter.get(rank);
+        return counter.get(rank) != null ? counter.get(rank) : 0;
     }
 
     public Map<Rank, Integer> counter() {
         return counter;
+    }
+
+    public void counting(LottoList lottoList, Lotto winningLotto, Number bonusNumber) {
+        boolean matchBonus = false;
+        for (Lotto purchased : lottoList.foreach()) {
+            matchBonus = isMatchBonus(purchased, bonusNumber);
+            checkRanking(purchased.checkNumbers(winningLotto), matchBonus);
+        }
+    }
+
+    private void checkRanking(int count, boolean matchBonus) {
+        if (count == 3) {
+            addCount(Rank.FIFTH);
+        }
+        if (count == 4) {
+            addCount(Rank.FOURTH);
+        }
+        if (count == 5 && !matchBonus) {
+            addCount(Rank.THIRD);
+        }
+        if (count == 5 && matchBonus) {
+            addCount(Rank.SECOND);
+        }
+        if (count == 6) {
+            addCount(Rank.FIRST);
+        }
+    }
+
+    private boolean isMatchBonus(Lotto purchased, Number bonusNumber) {
+        return purchased.isNumber(bonusNumber);
     }
 
     @Override

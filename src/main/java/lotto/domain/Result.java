@@ -15,7 +15,7 @@ public final class Result {
     private final Number bonusNumber;
     private BigDecimal winnings = BigDecimal.ZERO;
     private BigDecimal profitRate = BigDecimal.ZERO;
-    private RankCounter rankCounter = new RankCounter();
+    private final RankCounter rankCounter = new RankCounter();
 
     public Result(Lotto lotto, Number bonusNumber) {
         validateBonusNumber(lotto, bonusNumber);
@@ -30,7 +30,7 @@ public final class Result {
     }
 
     public void confirm(LottoList lottoList, LottoPrice lottoPrice) {
-        rankCounter = lottoList.compareWith(winningLotto, bonusNumber);
+        rankCounter.counting(lottoList, winningLotto, bonusNumber);
         calculateWinningMoney();
         calculateProfitRate(lottoList.size(), lottoPrice);
     }

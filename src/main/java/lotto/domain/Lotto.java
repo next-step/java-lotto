@@ -49,7 +49,7 @@ public final class Lotto {
         return numbers.substring(0, numbers.length() - 1);
     }
 
-    public int confirmWinning(Lotto winningLotto) {
+    public int checkNumbers(Lotto winningLotto) {
         int count = 0;
         for (Number lottoNumber : lottoNumbers) {
             count = winningLotto.isNumber(lottoNumber) ? count + 1 : count;
