@@ -42,10 +42,6 @@ public class LottoOutput {
         return "[" + str + "]";
     }
 
-    public static void printPurchaseNumbers(int lottoCount) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoCount);
-    }
-
     public static void printWinningStatistics(LottoPrizes lottoPrizes) {
         System.out.printf(HEAD_FORMAT,
             lottoPrizes.getLottoPrizes()
@@ -61,5 +57,9 @@ public class LottoOutput {
             PAY_OFF_FORMAT,
             lottoPrizes.getPayOffRatio()
         );
+    }
+
+    public static void printPurchaseNumbers(int lottoCount, int selfLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",selfLottoCount, lottoCount);
     }
 }
