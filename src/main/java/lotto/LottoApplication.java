@@ -1,8 +1,14 @@
 package lotto;
 
-import lotto.domain.LottoReport;
-import lotto.domain.LottoVendor;
+import lotto.domain.LottoBuyingRequest;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.ManualLottoCount;
+import lotto.domain.ManualLottoNumbers;
+import lotto.domain.Money;
 import lotto.domain.UserLotto;
+import lotto.domain.WinningLotto;
 
 public class LottoApplication {
 
@@ -10,71 +16,56 @@ public class LottoApplication {
 	public static final int ABNORMAL_SIGNAL = -1;
 	public static final String EXCEPTION_OCCURRED_MESSAGE = "Exception occurred. message: %s";
 
-	private final LottoController lottoController = new LottoController();
-	private final LottoView lottoView = new LottoView();
-	private final UserInterface userInterface;
+	private final OutputView outputView;
+	private final InputView inputView;
 
-	public LottoApplication(UserInterface userInterface) {
-		this.userInterface = userInterface;
+	public LottoApplication(InputView inputView, OutputView outputView) {
+		this.inputView = inputView;
+		this.outputView = outputView;
 	}
 
 	public int run() {
 		try {
-			sendMessage(lottoView.inputMoneyView());
-			UserLotto userLotto = buyLotto(receiveMoney());
-			viewUserLottoState(userLotto);
-
-			sendMessage(lottoView.inputWinningLottoNumbers());
-			String winningLottoNumbers = winningLottoNumbers();
-			sendMessage(lottoView.inputBonusNumber());
-			String bonusNumberString = bonusLottoNumber();
-
-			LottoVendor lottoVendor = lottoController.lottoVendor(winningLottoNumbers, bonusNumberString);
-			viewUserLottoReport(lottoVendor.report(userLotto));
+			process();
 
 			return NORMAL_SIGNAL;
 		} catch (Exception e) {
 			System.err.printf(EXCEPTION_OCCURRED_MESSAGE, e.getMessage());
 
 			return ABNORMAL_SIGNAL;
-		} finally {
-			userInterface.shutdown();
 		}
 	}
 
-	private void sendMessage(String message) {
-		userInterface.send(message);
-	}
+	private void process() {
+		Money money = inputView.receiveMoney();
+		ManualLottoCount manualLottoCount = inputView.receiveManualLottoCount(money);
+		ManualLottoNumbers manualLottoNumbers = inputView.receiveManualLottoNumbers(manualLottoCount);
 
-	private String receiveMoney() {
-		return userInterface.receive();
-	}
+		LottoMachine lottoMachine = new LottoMachine();
+		LottoBuyingRequest lottoBuyingRequest = new LottoBuyingRequest(money, manualLottoNumbers);
+		UserLotto userLotto = lottoMachine.buy(lottoBuyingRequest);
 
-	private UserLotto buyLotto(String money) {
-		return lottoController.buyLotto(money);
-	}
+		outputView.userLottoCountView(lottoBuyingRequest);
+		outputView.userLottoNumberListView(userLotto);
 
-	private void viewUserLottoReport(LottoReport lottoReport) {
-		sendMessage(lottoView.lottoReportView(lottoReport));
-	}
+		LottoTicket winningLottoTicket = inputView.receiveWinningLottoNumber();
+		LottoNumber bonusLottoNumber = inputView.receiveBonusNumber();
+		WinningLotto winningLotto = new WinningLotto(winningLottoTicket, bonusLottoNumber);
 
-	private String winningLottoNumbers() {
-		return userInterface.receive();
-	}
-
-	private String bonusLottoNumber() {
-		return userInterface.receive();
-	}
-
-	private void viewUserLottoState(UserLotto userLotto) {
-		sendMessage(lottoView.userLottoCountView(userLotto.count()));
-		sendMessage(lottoView.userLottoNumberListView(userLotto));
+		outputView.lottoReportView(userLotto.report(winningLotto));
 	}
 
 	public static void main(String[] args) {
-		UserInterface console = new Console();
-		LottoApplication lottoApplication = new LottoApplication(console);
-		lottoApplication.run();
+		UserInterface userInterface = new Console();
+
+		try {
+			InputView inputView = new InputView(userInterface);
+			OutputView outputView = new OutputView(userInterface);
+			LottoApplication lottoApplication = new LottoApplication(inputView, outputView);
+			lottoApplication.run();
+		} finally {
+			userInterface.shutdown();
+		}
 	}
 
 }

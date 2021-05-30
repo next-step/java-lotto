@@ -1,51 +1,59 @@
 package lotto.domain;
 
+import static lotto.OutputView.*;
+import static lotto.util.CollectionUtils.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserLotto {
 
-	private static final String INVALID_LOTTO_TICKET_LIST_MESSAGE = "로또 티켓이 유효하지 않습니다.";
+	private static final String NO_LOTTO_TICKET_LIST_MESSAGE = "구매한 로또 티켓이 없습니다.";
 
-	private final List<LottoTicket> lottoTicketList;
+	private final List<LottoTicket> lottoTickets;
 
 	UserLotto(List<LottoTicket> lottoTicketList) {
-		validate(lottoTicketList);
-
-		this.lottoTicketList = Collections.unmodifiableList(lottoTicketList);
-	}
-
-	private void validate(List<LottoTicket> lottoTicketList) {
-		if (lottoTicketList == null || lottoTicketList.size() == 0) {
-			throw new IllegalArgumentException(INVALID_LOTTO_TICKET_LIST_MESSAGE);
-		}
+		lottoTickets = Optional.ofNullable(lottoTicketList)
+			.filter(lottoTicket -> lottoTicket.size() > 0)
+			.orElseThrow(() -> new IllegalArgumentException(NO_LOTTO_TICKET_LIST_MESSAGE));
 	}
 
 	public int count() {
-		return lottoTicketList.size();
+		return lottoTickets.size();
 	}
 
 	public List<LottoTicket> lottoTickets() {
-		return lottoTicketList;
+		return Collections.unmodifiableList(lottoTickets);
 	}
 
-	public LottoReport report(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
-		List<LottoRank> lottoRankList = new ArrayList<>();
-
-		for (LottoTicket lottoTicket : lottoTicketList) {
-			lottoRankList.add(
-				LottoRank.rank(countCommonNumber(winningLottoTicket, lottoTicket), isBonus(bonusNumber, lottoTicket)));
-		}
-
-		return new LottoReport(lottoRankList);
+	public LottoReport report(WinningLotto winningLotto) {
+		return new LottoReport(Collections.unmodifiableList(
+			transform(lottoTickets, new ArrayList<>(), winningLotto::rank)));
 	}
 
-	private int countCommonNumber(LottoTicket winningLottoTicket, LottoTicket lottoTicket) {
-		return LottoTicket.countCommonNumber(lottoTicket, winningLottoTicket);
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		UserLotto userLotto = (UserLotto)o;
+		return Objects.equals(lottoTickets, userLotto.lottoTickets);
 	}
 
-	private boolean isBonus(LottoNumber bonusNumber, LottoTicket lottoTicket) {
-		return lottoTicket.matchNumber(bonusNumber);
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoTickets);
+	}
+
+	@Override
+	public String toString() {
+		return lottoTickets.stream()
+			.map(LottoTicket::toString)
+			.collect(Collectors.joining(LINE_SEPARATOR));
 	}
 }

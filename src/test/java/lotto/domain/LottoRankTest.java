@@ -21,13 +21,13 @@ class LottoRankTest {
 
 	static Stream<Arguments> argumentProvider() {
 		return Stream.of(
-			arguments(6, false, new LottoPoint(6), LottoRank.FIRST),
+			arguments(6, false, new LottoPoint(6, false), LottoRank.FIRST),
 			arguments(5, true, new LottoPoint(5, true), LottoRank.SECOND),
-			arguments(5, false, new LottoPoint(5), LottoRank.THIRD),
-			arguments(4, false, new LottoPoint(4), LottoRank.FOURTH),
-			arguments(3, false, new LottoPoint(3), LottoRank.FIFTH),
-			arguments(0, false, new LottoPoint(0), LottoRank.OUT_OF_RANK),
-			arguments(100, false, new LottoPoint(100), LottoRank.OUT_OF_RANK)
+			arguments(5, false, new LottoPoint(5, false), LottoRank.THIRD),
+			arguments(4, false, new LottoPoint(4, false), LottoRank.FOURTH),
+			arguments(3, false, new LottoPoint(3, false), LottoRank.FIFTH),
+			arguments(0, false, new LottoPoint(0, false), LottoRank.OUT_OF_RANK),
+			arguments(100, false, new LottoPoint(100, false), LottoRank.OUT_OF_RANK)
 		);
 	}
 

@@ -3,17 +3,14 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoPoint {
+
+	private static final int SECOND_RANK_MATCH_COUNT = 5;
 	private final int point;
 	private final boolean bonus;
 
-	public LottoPoint(int point) {
-		this.point = point;
-		bonus = false;
-	}
-
 	public LottoPoint(int point, boolean bonus) {
 		this.point = point;
-		this.bonus = bonus;
+		this.bonus = (point == SECOND_RANK_MATCH_COUNT) && bonus;
 	}
 
 	@Override

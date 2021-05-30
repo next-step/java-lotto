@@ -1,16 +1,17 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.*;
 
 class UserLottoTest {
 
@@ -78,4 +79,41 @@ class UserLottoTest {
 		assertThat(actual).isEqualTo(lottoTicketList);
 	}
 
+	@Test
+	void report() {
+		// given
+		List<LottoTicket> lottoTicketList = new ArrayList<>();
+		lottoTicketList.add(LottoTicketConverter.convert("1,2,3,4,5,6"));
+		UserLotto userLotto = new UserLotto(lottoTicketList);
+
+		// when
+		LottoReport report = userLotto.report(new WinningLotto(LottoTicketConverter.convert("1,2,3,4,5,6"), LottoNumber.of(7)));
+
+		// then
+		assertThat(report).isNotNull();
+	}
+
+	@Test
+	void given_null_to_constructor() {
+		// given
+		List<LottoTicket> lottoTickets = null;
+
+		// when
+		Throwable throwable = catchThrowable(() -> new UserLotto(lottoTickets));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void given_empty_list_to_constructor() {
+		// given
+		List<LottoTicket> lottoTickets = Collections.emptyList();
+
+		// when
+		Throwable throwable = catchThrowable(() -> new UserLotto(lottoTickets));
+
+		// then
+		assertThat(throwable).isInstanceOf(IllegalArgumentException.class);
+	}
 }

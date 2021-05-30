@@ -7,31 +7,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class LottoTicketConverter {
 
-	private static final int LOTTO_NUMBER_COUNT = 6;
-	private static final String DELIMITER = ",";
-	private static final String INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE = String.format("로또 숫자는 %d 자리입니다.",
+	static final int LOTTO_NUMBER_COUNT = 6;
+
+	static final String DELIMITER = ",";
+	static final String INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE = String.format("로또 숫자는 %d 자리입니다.",
 		LOTTO_NUMBER_COUNT);
-	private static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = String.format("로또 번호 문자열은 숫자 %d개와 %s만 가능합니다.",
+	public static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = String.format("로또 번호 문자열은 숫자 %d개와 %s만 가능합니다.",
 		LOTTO_NUMBER_COUNT, DELIMITER);
+
+	private LottoTicketConverter() {
+	}
 
 	public static LottoTicket convert(String numberString) {
 		return new LottoTicket(parseLottoNumberSet(numberString));
 	}
 
 	private static Set<LottoNumber> parseLottoNumberSet(String numbersString) {
-		validateNumberString(numbersString);
-
-		return makeLottoNumberSet(makeIntegerList(makeStringArray(numbersString)));
+		return makeLottoNumberSet(makeIntegerList(makeStringArray(validNumberString(numbersString))));
 	}
 
-	private static void validateNumberString(String numbersString) {
-		if (!validateNumbersPattern(numbersString)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
-		}
+	private static String validNumberString(String numbersString) {
+		return Optional.ofNullable(numbersString)
+			.filter(str -> LOTTO_NUMBERS_PATTERN.matcher(str)
+				.find())
+			.orElseThrow(() -> new IllegalArgumentException(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE));
 	}
 
 	private static String[] makeStringArray(String numbersString) {
@@ -39,24 +43,25 @@ public class LottoTicketConverter {
 	}
 
 	private static List<Integer> makeIntegerList(String[] numbers) {
-		List<Integer> numberList = new ArrayList<>(LOTTO_NUMBER_COUNT);
-		transform(Arrays.asList(numbers), numberList, Integer::parseInt);
-
-		return numberList;
+		return transform(Arrays.asList(numbers), new ArrayList<>(), Integer::parseInt);
 	}
 
 	private static Set<LottoNumber> makeLottoNumberSet(List<Integer> numberList) {
-		Set<LottoNumber> lottoNumberSet = new HashSet<>(LOTTO_NUMBER_COUNT);
-		transform(numberList, lottoNumberSet, LottoNumber::of);
+		Set<LottoNumber> lottoNumberSet = new HashSet<>(
+			transform(validNumberList(numberList), new ArrayList<>(), LottoNumber::of));
 
-		validate(lottoNumberSet);
-
-		return lottoNumberSet;
+		return validLottoNumbers(lottoNumberSet);
 	}
 
-	private static void validate(Set<LottoNumber> lottoNumbers) {
-		if (!validateCollection(lottoNumbers, LOTTO_NUMBER_COUNT)) {
-			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE);
-		}
+	private static Set<LottoNumber> validLottoNumbers(Set<LottoNumber> lottoNumberSet) {
+		return Optional.of(lottoNumberSet)
+			.filter(set -> set.size() == LOTTO_NUMBER_COUNT)
+			.orElseThrow(() -> new IllegalArgumentException(INVALID_LOTTO_NUMBERS_FORMAT_MESSAGE));
 	}
+
+	private static List<Integer> validNumberList(List<Integer> numberList) {
+		return Optional.ofNullable(numberList)
+			.orElse(new ArrayList<>());
+	}
+
 }
