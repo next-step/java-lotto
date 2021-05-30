@@ -3,7 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoMoney {
-    private static final int ZERO_WON = 0;
+    private static final int MIN = 0;
+
     private final int value;
 
     public LottoMoney(int amount) {
@@ -22,7 +23,7 @@ public class LottoMoney {
     }
 
     private static boolean isLessThanZeroWon(int amount) {
-        return amount < ZERO_WON;
+        return amount < MIN;
     }
 
     private static boolean isValidUnit(int amount) {
@@ -41,12 +42,6 @@ public class LottoMoney {
 
     private boolean isAffordable(int countOfManualLotto) {
         return countOfManualLotto <= countAffordableLotto();
-    }
-
-    public LottoMoney buyCountOfLotto(int count) {
-        checkAffordable(count);
-        int purchasePrice = count * Lotto.PRICE;
-        return new LottoMoney(value - purchasePrice);
     }
 
     @Override
