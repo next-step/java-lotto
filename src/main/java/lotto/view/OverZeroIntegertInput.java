@@ -1,20 +1,14 @@
 package lotto.view;
 
+import java.util.Optional;
+
 public class OverZeroIntegertInput {
 	int input;
 
 	public OverZeroIntegertInput(String stringInput) {
-		int input;
+		this.input = Optional.of(stringInput).map(Integer::parseInt).orElseThrow(RuntimeException::new);
 
-		try {
-			input = Integer.parseInt(stringInput);
-		} catch (Exception e) {
-			throw new RuntimeException("input must be number type");
-		}
-
-		this.input = input;
-
-		if (this.input < 0) {
+		if (this.input <= 0) {
 			throw new RuntimeException("input must be over 0");
 		}
 	}

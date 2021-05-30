@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -43,9 +44,11 @@ public class InputView {
 	}
 
 	private static List<Integer> getSplitNumberList(String numberList) {
-		return Arrays.stream(numberList.split(","))
-			.map((x) -> Integer.parseInt(x.trim()))
-			.collect(Collectors.toList());
+		return Optional.of(Arrays.stream(numberList.split(","))
+			.map(x -> Optional.of(Integer.parseInt(x.trim()))
+				.orElseThrow(RuntimeException::new))
+			.collect(Collectors.toList()))
+			.orElseThrow(RuntimeException::new);
 	}
 
 	public static int getBonusNumber() {
