@@ -20,8 +20,8 @@ public class ResultController implements Controller {
     public void run() {
         Purchase purchase = loadPurchase();
         WinningNumbers winningNumbers = loadWinningNumbers();
-        Tickets automatedTickets = loadAutomatedTickets();
-        Scores scores = automatedTickets.scores(winningNumbers);
+        Tickets tickets = loadTickets();
+        Scores scores = tickets.scores(winningNumbers);
         EarningRate earningRate = new EarningRate(scores, purchase);
 
         Reporter.report(scores, earningRate);
@@ -29,8 +29,8 @@ public class ResultController implements Controller {
         toEndController();
     }
 
-    private Tickets loadAutomatedTickets() {
-        return this.lotto.storage().loadAutomatedTickets();
+    private Tickets loadTickets() {
+        return this.lotto.storage().loadTickets();
     }
 
     private Purchase loadPurchase() {

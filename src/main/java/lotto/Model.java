@@ -7,7 +7,7 @@ import lotto.domains.WinningNumbers;
 public class Model {
 
     private Purchase purchase;
-    private Tickets automatedTickets;
+    private Tickets tickets;
     private WinningNumbers winningNumbers;
 
     public Model() {
@@ -21,12 +21,12 @@ public class Model {
         return this.purchase;
     }
 
-    public void saveAutomatedTickets(Tickets automatedTickets) {
-        this.automatedTickets = automatedTickets;
+    public void saveTickets(Tickets tickets) {
+        this.tickets = tickets;
     }
 
-    public Tickets loadAutomatedTickets() {
-        return this.automatedTickets;
+    public Tickets loadTickets() {
+        return this.tickets;
     }
 
     public void saveWinningNumbers(WinningNumbers winningNumbers) {

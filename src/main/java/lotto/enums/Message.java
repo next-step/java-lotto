@@ -3,7 +3,11 @@ package lotto.enums;
 public enum Message {
 
     PURCHASE("구입 금액을 입력해주세요. (1,000 ~ 1,000,000)"),
-    AUTOMATIC_TICKETING("%d개를 구매했습니다."),
+    TICKET_AMOUNT("로또 %d장을 구입합니다."),
+    MANUAL_AMOUNT("수동으로 구매할 로또 수를 입력해 주세요."),
+    MANUAL_TICKETING("수동으로 로또 번호를 입력해 주세요."),
+    SKIP_MANUAL_TICKETING("로또 번호 수동 선택을 생략합니다."),
+    AUTOMATIC_TICKETING("수동으로 %d장, 자동으로 %d장 구매했습니다."),
     WINNING_TICKET("지난 주 당첨 번호를 입력해 주세요."),
     BONUS_NUMBER("보너스 볼을 입력해 주세요."),
 

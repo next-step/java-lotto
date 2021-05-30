@@ -18,18 +18,25 @@ public class PurchaseController implements Controller {
     public void run() {
         Display.show(Message.PURCHASE);
 
-        buyTickets(Keyboard.read());
+        int ticketAmount = buyTickets(Keyboard.read());
 
-        toAutomaticTicketingController();
+        Display.show(Message.TICKET_AMOUNT, ticketAmount);
+
+        toTicketingController();
     }
 
-    protected void buyTickets(String money) {
+    protected int buyTickets(String money) {
         Purchase purchase = new Purchase(money);
+        savePurchase(purchase);
+        return purchase.ticketsAmount();
+    }
+
+    private void savePurchase(Purchase purchase) {
         this.lotto.storage().savePurchase(purchase);
     }
 
-    private void toAutomaticTicketingController() {
-        this.lotto.toAutomaticTicketingController();
+    private void toTicketingController() {
+        this.lotto.toTicketingController();
     }
 
 }

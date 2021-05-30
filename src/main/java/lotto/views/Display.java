@@ -14,6 +14,10 @@ public final class Display {
         System.out.println(String.format(message.toString(), number));
     }
 
+    public static void show(Message message, Tickets manualTickets, Tickets automatedTickets) {
+        System.out.println(String.format(message.toString(), manualTickets.size(), automatedTickets.size()));
+    }
+
     public static void show(Message message, EarningRate earningRate) {
         System.out.println(String.format(message.toString(), earningRate));
     }

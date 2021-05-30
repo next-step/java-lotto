@@ -21,7 +21,7 @@ public class AutomaticTicketing {
     }
 
     public Tickets newTickets(int count) {
-        if (count < 1) {
+        if (count < 0) {
             throw new TicketsOutOfBoundsException();
         }
 

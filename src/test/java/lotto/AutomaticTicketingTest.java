@@ -31,9 +31,9 @@ public class AutomaticTicketingTest {
         assertThat(automaticTicketing.newTickets(input).size()).isEqualTo(expected);
     }
 
-    @DisplayName("로또 0개 이하를 생성하면 에러가 발생한다.")
+    @DisplayName("로또 음수를 입력하면 에러가 발생한다.")
     @ParameterizedTest(name = "입력: \"{0}\"")
-    @ValueSource(ints = {-1, 0})
+    @ValueSource(ints = {-1})
     void newTickets(int input) {
         assertThatExceptionOfType(TicketsOutOfBoundsException.class).isThrownBy(() -> {
             automaticTicketing.newTickets(input);
