@@ -10,12 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
     @Test
-    void 구입금액_만큼_로또반환_테스트() {
-        Lottos lottos = LottoMachine.makeLottos(new Cash(14000));
-        assertThat(lottos.count()).isEqualTo(14);
-    }
-
-    @Test
     void 구입정보를_이용하여_로또컬렉션_반환_테스트() {
         List<String> manualLottos = new ArrayList<>();
         manualLottos.add("1,2,3,4,5,6");
