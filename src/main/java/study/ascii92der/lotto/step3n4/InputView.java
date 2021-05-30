@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3;
+package study.ascii92der.lotto.step3n4;
 
 import java.util.ArrayList;
 import java.util.Arrays;

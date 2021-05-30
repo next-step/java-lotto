@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3;
+package study.ascii92der.lotto.step3n4;
 
 public enum LottoWinner {
     FIRST(6, 2000000000),
