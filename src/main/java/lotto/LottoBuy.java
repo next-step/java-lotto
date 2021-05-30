@@ -2,13 +2,18 @@ package lotto;
 
 public class LottoBuy {
     private Lottos lottos;
-    private int buyCount;
 
-    public Lottos buyLotto(Pay payForLotto) {
-        this.buyCount = payForLotto.countBuyLotto(LottoValidationUtils.LOTTO_COST);
+    public LottoBuy() {
         lottos = new Lottos();
-        for (int count = 0; count < buyCount; count++) {
-            lottos.createRandomLotto();
+    }
+
+    public void buyManualLotto(String manualLottoNumber) {
+        lottos.createLotto(new Lotto(LottoValidationUtils.lottoNumberToListNumbers(manualLottoNumber)));
+    }
+
+    public Lottos buyAutoLotto(int autoLottoCount) {
+        for (int count = 0; count < autoLottoCount; count++) {
+            lottos.createLotto(new Lotto());
         }
         return lottos;
     }

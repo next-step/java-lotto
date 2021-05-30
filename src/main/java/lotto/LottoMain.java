@@ -6,10 +6,12 @@ import lotto.view.ResultView;
 public class LottoMain {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        LottoBuy lottoBuy = new LottoBuy();
-        Lottos userLottos = lottoBuy.buyLotto(inputView.payForLotto());
-        ResultView.buyLottoInfo(userLottos);
-        Lotto winLotto =  inputView.inputWinLottoNumber();
+        Pay userPay = inputView.payForLotto();
+        BuyLottoCount userBuyLottoCount = inputView.manualLottoCount(userPay);
+        Lottos userLottos = inputView.buyLotto(userBuyLottoCount);
+
+        ResultView.buyLottoInfo(userLottos, userBuyLottoCount);
+        Lotto winLotto = inputView.inputWinLottoNumber();
 
         LottoRecord userLottoRecord = userLottos.compareWinLotto(winLotto, inputView.inputBonusNumber(winLotto));
         ResultView.printResult(userLottoRecord);

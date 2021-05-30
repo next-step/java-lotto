@@ -16,6 +16,14 @@ public class Pay {
         return this.pay / lottoCost;
     }
 
+    public boolean isCanBuyManualLottoCount(int autoLottoCount) {
+        return pay >= autoLottoCount * LottoValidationUtils.LOTTO_COST;
+    }
+
+    public int countAutoLotto(int manualLottoCount) {
+        return (pay / LottoValidationUtils.LOTTO_COST) - manualLottoCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
