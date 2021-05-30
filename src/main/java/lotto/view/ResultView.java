@@ -1,15 +1,15 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatics;
-import lotto.domain.Lottos;
-import lotto.domain.Profit;
+import lotto.domain.*;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 public class ResultView {
     private static final int MIN_STATIC_RANK = 3;
     private static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
+
+    private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 
     PrintStream view = new PrintStream(System.out);
     private String ENTER = System.lineSeparator();
@@ -32,17 +32,31 @@ public class ResultView {
 
         StringBuffer buffer = new StringBuffer();
         Profit profit = statics.getProfit();
-        buffer.append("당첨 통계").append(ENTER)
+        buffer.append(ENTER).append("당첨 통계").append(ENTER)
                 .append("---------").append(ENTER);
-        for(int rank = MIN_STATIC_RANK; rank <= Lotto.NUMBER_COUNT; rank++) {
-            buffer.append(rank)
-                    .append("개 일치 (")
-                    .append(RANK_PRIZE[rank])
-                    .append(")- ")
-                    .append(statics.getRankCount(rank))
-                    .append("개").append(ENTER);
+        Map<Rank,Integer> rankCounts = statics.rankCounts();
+        for ( Rank rank: Rank.values()) {
+            appendStatics(buffer,rank,rankCounts.get(rank));
         }
+
         buffer.append("총 수익률은 ").append(profit).append("입니다.");
         view.println(buffer);
+    }
+
+    private void appendStatics(StringBuffer buffer, Rank rank, Integer count) {
+        if( rank == Rank.nothing) {
+            return;
+        }
+        buffer.append(rank.matchCount())
+                .append("개 일치");
+        if (rank == Rank.fiveNumbersMatchWithBonusNumber) {
+            buffer.append(BONUS_MATCH_MESSAGE);
+        }
+        buffer.append(" (")
+                .append(rank.prize())
+                .append("원)- ")
+                .append(count)
+                .append("개")
+                .append(ENTER);
     }
 }

@@ -7,6 +7,7 @@ public enum Rank {
     threeNumbersMatch(3,5_000),
     fourNumbersMatch(4,50_000),
     fiveNumbersMatch(5,1_500_000),
+    fiveNumbersMatchWithBonusNumber(5,30_000_000),
     sixNumbersMatch(6,2_000_000_000)
     ;
 
@@ -45,4 +46,10 @@ public enum Rank {
         ).get(matchCount);
     }
 
+    public int matchCount() {
+        return matchCount;
+    }
+    public int prize() {
+        return prize;
+    }
 }

@@ -1,7 +1,9 @@
 package lotto.domain;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoStatics {
 
@@ -34,6 +36,31 @@ public class LottoStatics {
             }
         }
         return count;
+    }
+
+    public Map<Rank, Integer> rankCounts() {
+        Map<Rank, Integer> rankCounts = initializeCounts();
+        for (Rank rank : this.ranks) {
+            addRankCount(rankCounts, rank);
+        }
+        return rankCounts;
+    }
+
+    private Map<Rank, Integer> initializeCounts() {
+        Map<Rank, Integer> rankCounts = new HashMap<>();
+        Rank[] ranks = Rank.values();
+        int start = Rank.threeNumbersMatch.ordinal();
+
+        for (int i = start; i < ranks.length; i++) {
+            rankCounts.put(ranks[i],0);
+        }
+        return rankCounts;
+    }
+
+    private void addRankCount(Map<Rank, Integer> rankCounts, Rank rank) {
+        if (rankCounts.containsKey(rank)) {
+            rankCounts.computeIfPresent(rank,(r, ov)->ov+1);
+        }
     }
 
 }

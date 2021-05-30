@@ -32,7 +32,9 @@ public class LottoManager {
         resultView.showLottoGames(lottos);
 
         List<Integer> lottoNumbers = inputView.takeLottoNumbers();
+        Integer bonuseNumber = inputView.takeBonusNumber();
         factory.setGenerateStrategy(new CustomStrategy(lottoNumbers));
-        resultView.showLottoStatics(lottos.calculateStatics(new Lotto(factory)));
+
+        resultView.showLottoStatics(lottos.calculateStatics(new WinLotto(factory,bonuseNumber)));
     }
 }

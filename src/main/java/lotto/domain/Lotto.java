@@ -10,13 +10,6 @@ public class Lotto {
 
     private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public Lotto(Set<LottoNumber> lotto) {
-        lottoNumbers = lotto;
-        verifyLottoNumbers();
-    }
-
-
-
     public Lotto(LottoNumberFactory factory) {
         for (int i = 0; i < NUMBER_COUNT; i++) {
             lottoNumbers.add(factory.generateNumber());
@@ -60,7 +53,7 @@ public class Lotto {
         return count;
     }
 
-    private boolean containsNumber(LottoNumber number) {
+    public boolean containsNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
