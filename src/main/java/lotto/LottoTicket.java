@@ -17,9 +17,9 @@ public class LottoTicket {
         return lottoList;
     }
 
-    public void compareWinList(List<Integer> winList) {
+    public void compareWinList(List<Integer> winList, int bonusNumber) {
         for (int i = 0; i < lottoList.size(); i++) {
-            lottoList.get(i).calculateWin(winList);
+            lottoList.get(i).calculateWin(winList, bonusNumber);
         }
     }
 

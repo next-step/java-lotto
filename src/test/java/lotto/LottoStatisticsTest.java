@@ -18,7 +18,7 @@ class LottoStatisticsTest {
     void calculateLottoTicketProfit() {
         LottoTicket lottoTicket = new LottoTicket(1);
         List<Integer> lottoNum = lottoTicket.lottoList().get(0).lottoNum();
-        lottoTicket.compareWinList(lottoNum);
+        lottoTicket.compareWinList(lottoNum, 100);
         BigDecimal bg1 = new BigDecimal(LottoWin.FIRST_PLACE.winPrice());
         BigDecimal bg2 = new BigDecimal(1000);
         assertThat(LottoStatistics.calculateLottoTicketProfit(lottoTicket)).isEqualTo(bg1.divide(bg2, 2, BigDecimal.ROUND_HALF_DOWN).doubleValue());
@@ -28,7 +28,7 @@ class LottoStatisticsTest {
     void countLottoWinNumMatch() {
         LottoTicket lottoTicket = new LottoTicket(1);
         List<Integer> lottoNum = lottoTicket.lottoList().get(0).lottoNum();
-        lottoTicket.compareWinList(lottoNum);
+        lottoTicket.compareWinList(lottoNum, 100);
 
         assertThat(LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE)).isEqualTo(1);
         assertThat(LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE)).isEqualTo(0);

@@ -27,9 +27,10 @@ public class Lotto {
     }
 
 
-    public void calculateWin(List<Integer> winList) {
+    public void calculateWin(List<Integer> winList, int bonusNumber) {
         int matchNum = this.countWin(winList);
-        this.lottoWin = LottoWin.valueOf(matchNum, true);
+        boolean matchBonus = this.lottoNum.contains(bonusNumber);
+        this.lottoWin = LottoWin.valueOf(matchNum, matchBonus);
     }
 
     private int countWin(List<Integer> winList) {

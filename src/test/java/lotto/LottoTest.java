@@ -29,7 +29,12 @@ class LottoTest {
             for (int i = lottoNum.size() - 1; i >= targetLottoWIn.matchNum(); i--) {
                 win.add(lottoNum.get(i) + 100);
             }
-            lotto.calculateWin(win);
+            if (lottoWin == LottoWin.SECOND_PLACE) {
+                lotto.calculateWin(win, lottoNum.get(lottoNum.size() - 1));
+            }
+            if (lottoWin != LottoWin.SECOND_PLACE) {
+                lotto.calculateWin(win, 100);
+            }
 
             assertThat(lotto.lottoWin()).isEqualTo(targetLottoWIn);
         }
