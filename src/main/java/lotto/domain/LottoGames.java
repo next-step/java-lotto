@@ -57,7 +57,8 @@ public class LottoGames {
         return purchaseMoney.getValue() / LOTTO_PRICE;
     }
 
-    public void merge(LottoGames otherLottoGames) {
+    public LottoGames merge(LottoGames otherLottoGames) {
         this.values.addAll(otherLottoGames.values);
+        return this;
     }
 }
