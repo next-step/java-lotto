@@ -17,9 +17,9 @@ public class OutputView {
         System.out.println(format(LOTTO_BUY_WORDING, num));
     }
 
-    public static void outputLottoList(List<Lotto> lottoList) {
-        for (int i = 0; i < lottoList.size(); i++) {
-            List<Integer> lottoNum = lottoList.get(i).lottoNum();
+    public static void outputLottoList(LottoTicket lottoTicket) {
+        for (int i = 0; i < lottoTicket.getLottoSize(); i++) {
+            List<Integer> lottoNum = lottoTicket.getLottoNumWithIdx(i);
             Collections.sort(lottoNum);
             System.out.println(lottoNum);
         }

@@ -11,7 +11,7 @@ public class App {
         int lottoNum = getLottoBuyingCount(buyingMoney);
         OutputView.printBuyingCount(lottoNum);
         LottoTicket lottoTicket = new LottoTicket(lottoNum);
-        OutputView.outputLottoList(lottoTicket.lottoList());
+        OutputView.outputLottoList(lottoTicket);
         String lastWeekWinNumber = InputView.getLastWeekWinNumber();
         List<Integer> winNumber = InputView.convertWinNumberStringToIntegerList(lastWeekWinNumber);
         lottoTicket.compareWinList(winNumber);

@@ -22,4 +22,12 @@ public class LottoTicket {
             lottoList.get(i).calculateWin(winList);
         }
     }
+
+    public List<Integer> getLottoNumWithIdx(int idx) {
+        return this.lottoList.get(idx).lottoNum();
+    }
+
+    public int getLottoSize() {
+        return this.lottoList.size();
+    }
 }
