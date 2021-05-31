@@ -18,18 +18,34 @@ public class LottoDrawer {
 	private LottoDrawer() {
 	}
 
-	public static Lottos draw(BigDecimal receivedMoney) {
-		if (receivedMoney.compareTo(Constants.LOTTO_PRICE) < 0) {
+	public static Lottos draw(BigDecimal receivedMoney, List<List<Integer>> manualLottoNumbers) {
+		BigDecimal usedMoneyForManualLottos = getUsedMoney(manualLottoNumbers.size());
+		if (receivedMoney.compareTo(Constants.LOTTO_PRICE) < 0 || receivedMoney.compareTo(usedMoneyForManualLottos) < 0) {
 			throw new LackOfMoneyToBuyLottoException();
 		}
 
-		return new Lottos(IntStream.rangeClosed(1, numberOfLottosToBuy(receivedMoney))
+		List<Lotto> lottos = manualLottoNumbers.stream()
+				.map(it -> it.stream()
+						.sorted()
+						.collect(Collectors.toList()))
+				.map(Lotto::new)
+				.collect(Collectors.toList());
+
+		lottos.addAll(IntStream.rangeClosed(1, numberOfLottosToBuy(receivedMoney, usedMoneyForManualLottos))
 				.mapToObj((it) -> draw())
 				.collect(Collectors.toList()));
+
+		return new Lottos(lottos);
 	}
 
-	private static int numberOfLottosToBuy(BigDecimal receivedMoney) {
-		return receivedMoney.divide(Constants.LOTTO_PRICE, MathContext.DECIMAL32)
+	private static BigDecimal getUsedMoney(int numberOfManualLottoNumbers) {
+		return BigDecimal.valueOf(numberOfManualLottoNumbers)
+				.multiply(Constants.LOTTO_PRICE);
+	}
+
+	private static int numberOfLottosToBuy(BigDecimal receivedMoney, BigDecimal usedMoneyForManualLottos) {
+		return receivedMoney.subtract(usedMoneyForManualLottos)
+				.divide(Constants.LOTTO_PRICE, MathContext.DECIMAL32)
 				.intValue();
 	}
 
