@@ -3,6 +3,7 @@ package lotto.ui.input.info.request;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.exception.InputException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ManualNumberRequest extends Request<List<String>> {
@@ -30,6 +31,10 @@ public class ManualNumberRequest extends Request<List<String>> {
     }
 
     private List<String> requestNumberCsvs(int count) throws InputException {
+        if (count == 0) {
+            return Collections.EMPTY_LIST;
+        }
+
         return input.requestForMultipleValues(count, "수동으로 구매할 번호를 입력해 주세요.");
     }
 
