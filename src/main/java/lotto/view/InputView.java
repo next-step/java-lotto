@@ -79,9 +79,6 @@ public class InputView {
         return numbers;
     }
 
-    public void enter() {
-        output.println("");
-    }
 
 
 }

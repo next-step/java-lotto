@@ -35,8 +35,11 @@ public class CustomStrategyTest {
     @DisplayName("6개보다 작은 갯수가 들어오면 에러발생")
     @Test
     public void generateNumberLessThan6() {
-        factory.setGenerateStrategy(new CustomStrategy(Arrays.asList(1,2,3,4,5)));
-        assertThatThrownBy(()->new Lotto(factory))
+
+        assertThatThrownBy(()-> {
+            factory.setGenerateStrategy(new CustomStrategy(Arrays.asList(1,2,3,4,5)));
+            new Lotto(factory);
+        })
                 .isInstanceOf(InvalidLottoNumber.class)
                 .hasMessage(new InvalidLottoNumber(Arrays.asList(1,2,3,4,5).toString()).getMessage());
     }

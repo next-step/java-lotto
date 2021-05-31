@@ -1,21 +1,15 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoGame;
 import lotto.exception.InvalidLottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.converter.ArgumentConversionException;
-import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,8 +51,11 @@ public class LottoTest {
     @DisplayName("당첨번호 갯수가 6개 이상일 때 InvalidLottoGame 에러발생")
     @MethodSource("provideWinNumbersIsNot6")
     public void 당첨번호가_6개가아닐경우(List<Integer> numbers) {
-        factory.setGenerateStrategy(CustomStrategy.of(numbers));
-        assertThatThrownBy(()->new Lotto(factory))
+
+        assertThatThrownBy(()->{
+            factory.setGenerateStrategy(CustomStrategy.of(numbers));
+            new Lotto(factory);
+        })
                 .isInstanceOf(InvalidLottoNumber.class)
                 .hasMessage(new InvalidLottoNumber(numbers.toString()).getMessage());
     }

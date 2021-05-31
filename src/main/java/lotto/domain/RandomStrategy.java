@@ -5,8 +5,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class RandomStrategy implements Strategy {
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int GENERATE_COUNT = 6;
 
     Set<Integer> numbers = new HashSet<>();
@@ -28,7 +26,7 @@ public class RandomStrategy implements Strategy {
     }
 
     private int genNumber() {
-        return new Random().nextInt(MAX_NUMBER) + MIN_NUMBER;
+        return new Random().nextInt(LottoNumber.MAX_NUMBER) + LottoNumber.MIN_NUMBER;
     }
 
     public Integer generateNumber() {

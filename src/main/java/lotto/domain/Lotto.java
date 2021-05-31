@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
+import lotto.exception.InvalidLottoNumber;
 
 import java.util.*;
 
@@ -14,28 +15,20 @@ public class Lotto {
         for (int i = 0; i < NUMBER_COUNT; i++) {
             lottoNumbers.add(factory.generateNumber());
         }
-        verifyLottoNumbers();
     }
 
     public Lotto(List<Integer> numbers) {
+        verifyLottoNumbers(numbers);
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        verifyLottoNumbers();
+
     }
 
-    private void verifyLottoNumbers() {
-        if (lottoNumbers.size() != NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME, lottoNumbers.size()));
+    public static void verifyLottoNumbers(List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != NUMBER_COUNT) {
+            throw new InvalidLottoNumber(numbers.toString());
         }
-    }
-
-    private static void addLottoNumber(LottoNumberFactory factory, Set<LottoNumber> lottoNumbers) {
-        LottoNumber number = factory.generateNumber();
-        while (lottoNumbers.contains(number)) {
-            number = factory.generateNumber();
-        }
-        lottoNumbers.add(number);
     }
 
     public Rank matchCount(Lotto other) {

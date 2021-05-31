@@ -6,9 +6,6 @@ import java.io.PrintStream;
 import java.util.Map;
 
 public class ResultView {
-    private static final int MIN_STATIC_RANK = 3;
-    private static final int[] RANK_PRIZE = new int[] {0,0,0,5_000,50_000,1_500_000,2_000_000_000};
-
     private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 
     PrintStream view = new PrintStream(System.out);

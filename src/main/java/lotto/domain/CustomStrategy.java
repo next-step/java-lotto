@@ -12,6 +12,8 @@ public class CustomStrategy implements Strategy{
     private final Iterator<Integer> generator;
 
     public CustomStrategy(List<Integer> customNumbers) {
+        Lotto.verifyLottoNumbers(customNumbers);
+
         for (Integer number : customNumbers) {
             verifyNumber(number);
             this.customNumbers.add(number);
