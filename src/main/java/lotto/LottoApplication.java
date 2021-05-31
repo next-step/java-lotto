@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.model.CandidateLottoGenerator;
 import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 
@@ -15,7 +16,7 @@ public class LottoApplication {
 
         int expense = ViewInput.askExpense();
         int numLottoTicket = ViewInput.askAvailableNumLottoTicket(expense);
-        LottoController lottoController = new LottoController();
+        LottoController lottoController = new LottoController(CandidateLottoGenerator.generate());
         List<LottoTicket> userLottoTickets = lottoController.generate(numLottoTicket);
         ConsoleView.printLotto(userLottoTickets);
 

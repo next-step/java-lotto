@@ -25,6 +25,10 @@ public class LottoTicket {
         this.lottoNubmers = lottoNubmers;
     }
 
+    public List<LottoNumber> getLottoNumbers(){
+        return Collections.unmodifiableList(this.lottoNubmers);
+    }
+
     @Override
     public String toString(){
         StringJoiner strJoiner = new StringJoiner(",");

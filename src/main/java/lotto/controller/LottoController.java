@@ -2,16 +2,25 @@ package lotto.controller;
 
 import lotto.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
 
-    public LottoController() {
+    private CandidateLottoNumbers candidateLottoNumbers;
+
+    public LottoController(CandidateLottoNumbers candidateLottoNumbers) {
+        this.candidateLottoNumbers = candidateLottoNumbers;
     }
 
     public List<LottoTicket> generate(int numLottoTicket){
-        LottoGenerator lottoGenerator = new LottoGenerator(numLottoTicket, new RandomGenerateRule());
-        return lottoGenerator.generateBulk();
+        List<LottoTicket> tickets = new ArrayList<>();
+        LottoGenerator lottoGenerator = new LottoGenerator(candidateLottoNumbers);
+        for (int i=0; i<numLottoTicket; i++){
+            LottoTicket temp = lottoGenerator.generate();
+            tickets.add(temp);
+        }
+        return tickets;
     }
 
     public LottoResult run(LottoTicket winningTicket, List<LottoTicket> userLottoTickets, int expense) {

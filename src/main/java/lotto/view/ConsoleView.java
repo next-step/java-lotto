@@ -1,13 +1,13 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
 import lotto.model.ScoreMap;
 import lotto.model.config.LottoConfig;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConsoleView {
     private final static String EARN = "이득";
@@ -21,8 +21,19 @@ public class ConsoleView {
 
     public static void printLotto(List<LottoTicket> lottoTickets){
         for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.sort().toString());
+            List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+            List<LottoNumber> copyedLottoNumbers = new ArrayList(lottoNumbers);
+            Collections.sort(copyedLottoNumbers);
+            System.out.println(LottoNumbersToLineString(copyedLottoNumbers));
         }
+    }
+
+    public static String LottoNumbersToLineString(List<LottoNumber> lottoNumbers){
+        StringJoiner strJoiner = new StringJoiner(",");
+        for (LottoNumber lottoNubmer : lottoNumbers) {
+            strJoiner.add( Integer.toString(lottoNubmer.number()) );
+        }
+        return "[" + strJoiner.toString() + "]";
     }
 
     public static void print(LottoResult lottoResult) {
@@ -48,7 +59,7 @@ public class ConsoleView {
 
     public static void printResult(LottoResult lottoResult){
         BigDecimal profitRate = calculateProfitRatio(lottoResult.getScoreMap().calculateReward(), lottoResult.getExpense());
-        String message = String.format(PROFIT_MESSAGE, profitRate, getResultStatus(profitRate));
+        String message = String.format(PROFIT_MESSAGE, profitRate.toPlainString(), getResultStatus(profitRate));
         System.out.println(message);
     }
 
