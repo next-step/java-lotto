@@ -1,42 +1,44 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Word {
     private static final String SEPARATOR = "[,:]";
     private static final String ONLY_NUMBER_REGEX = "[0-9]";
-    private static final String NOT_NUMBER_REGEX = "[^0-9]";
+    private static final String NOT_NUMBER_REGEX = "[^0-9-]";
     private static final int POSITIVE_NUMBER = 0;
     private static final int FIRST_INDEX = 0;
     private static final int CUSTOM_LETTER_INDEX = 2;
     private static final String NEGATIVE_NUMBER_MESSAGE = "음수가 입력 되었습니다.";
     private static final Pattern ONLY_NUMBER_REGEX_PATTERN = Pattern.compile(ONLY_NUMBER_REGEX);
 
-    public List<Integer> makeNumbersInGeneralExpression(String expression) {
-        List<String> stringExpressions = Arrays.asList(expression.split(SEPARATOR));
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String expressions : stringExpressions) {
-            numbers.add(Integer.parseInt(expressions));
+    public List<Integer> makeNumbers(String expression) {
+        if (isCustomInput(expression)) {
+            return convertExpressionsToNumbers(makeNumbersInCustomExpression(expression));
         }
-
-        return numbers;
+        return convertExpressionsToNumbers(makeNumbersInGeneralExpression(expression));
     }
 
-    public List<Integer> makeNumbersInCustomExpression(String customExpressions) {
+    private List<String> makeNumbersInCustomExpression(String customExpressions) {
         customExpressions = customExpressions.replaceAll(NOT_NUMBER_REGEX, " ");
-        List<String> stringExpressions = Arrays.asList(customExpressions.trim().split(" "));
-        List<Integer> numbers = new ArrayList<>();
 
-        for (String expressions : stringExpressions) {
-            numbers.add(Integer.parseInt(expressions));
-        }
+        return Arrays.asList(customExpressions.trim().split(" "));
+    }
 
-        validation(numbers);
+    private List<String> makeNumbersInGeneralExpression(String expression) {
+        return Arrays.asList(expression.split(SEPARATOR));
+    }
+
+    List<Integer> convertExpressionsToNumbers(List<String> stringExpressions) {
+        List<Integer> numbers =stringExpressions.stream()
+                .map((string)->Integer.parseInt(string))
+                .collect(Collectors.toList());
+
+        notNegativeValidation(numbers);
 
         return numbers;
     }
@@ -50,11 +52,10 @@ public class Word {
 
     public String findCustomSeparator(String customExpression) {
         isEmptyOrNull(customExpression);
-
         return customExpression.split("")[CUSTOM_LETTER_INDEX];
     }
 
-    public void validation(List<Integer> numbers) {
+    public void notNegativeValidation(List<Integer> numbers) {
         if (Collections.min(numbers) < POSITIVE_NUMBER) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE);
         }

@@ -27,7 +27,7 @@ public class WordTest {
     @Test
     void makeNumbersInGeneralExpressionTest() {
         String expression = GENERAL_EXPRESSION;
-        List<Integer> numbers = word.makeNumbersInGeneralExpression(expression);
+        List<Integer> numbers = word.makeNumbers(expression);
         assertThat(numbers.get(0)).isEqualTo(1);
         assertThat(numbers.get(1)).isEqualTo(2);
     }
@@ -36,7 +36,7 @@ public class WordTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2", "1:2"})
     void makeNumbersInTwoGeneralExpressionTest(String input) {
-        List<Integer> numbers = word.makeNumbersInGeneralExpression(input);
+        List<Integer> numbers = word.makeNumbers(input);
         assertThat(numbers.get(0)).isEqualTo(1);
         assertThat(numbers.get(1)).isEqualTo(2);
     }
@@ -44,7 +44,7 @@ public class WordTest {
     @DisplayName("커스텀 구분자를 기준으로 분리한 모든 정수값을 반환한다. ")
     @Test
     void makeNumbersInCustomExpressionTest() {
-        List<Integer> numbers = word.makeNumbersInCustomExpression(CUSTOM_EXPRESSION);
+        List<Integer> numbers = word.makeNumbers(CUSTOM_EXPRESSION);
         assertThat(numbers.get(0)).isEqualTo(11);
         assertThat(numbers.get(1)).isEqualTo(2);
         assertThat(numbers.get(2)).isEqualTo(3);
@@ -73,7 +73,7 @@ public class WordTest {
         String expression = "-1,2,3";
 
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
-            word.validation(word.makeNumbersInGeneralExpression(expression));
+            word.notNegativeValidation(word.makeNumbers(expression));
         });
     }
 
