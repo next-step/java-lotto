@@ -3,6 +3,7 @@ package lottery.domain;
 public class WinnerLottery {
 
     public static final int MATCH_COUNT = 1;
+    public static final int DEFAULT_MATCH_COUNT = 0;
 
     private final LotteryNumbers lotteryNumbers;
 
@@ -11,7 +12,7 @@ public class WinnerLottery {
     }
 
     public int match(LotteryNumbers input) {
-        int matchCount = 0;
+        int matchCount = DEFAULT_MATCH_COUNT;
 
         for (LotteryNumber number : lotteryNumbers.numbers()) {
             matchCount = addCountIfContains(input, matchCount, number);
