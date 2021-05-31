@@ -59,12 +59,12 @@ public class LottoTicket {
         return this;
     }
 
-    public int howManyMatched(LottoTicket that){
+    public LottoRank howManyMatched(LottoTicket that){
         int totalNumContains = 0;
         for (int i=0; i<that.size(); i++){
             totalNumContains += howManyContains(that.get(i));
         }
-        return totalNumContains;
+        return LottoRank.of(totalNumContains);
     }
 
     private int size() {

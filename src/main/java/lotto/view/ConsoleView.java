@@ -34,13 +34,12 @@ public class ConsoleView {
 
     public static void printScoreMap(LottoResult lottoResult){
         ScoreMap scoreMap = lottoResult.getScoreMap();
-        for(Integer matchCount : scoreMap.getKeySet() ){
-            LottoRank lottorank =  LottoRank.of(matchCount);
-            if(lottorank == null){
+        for(LottoRank lottoRank : scoreMap.getKeySet() ){
+            if(lottoRank == null){
                 continue;
             }
-            String message = String.format(MATCH_MESSAGE, matchCount,
-                    lottorank.getPrize(), scoreMap.get(matchCount));
+            String message = String.format(MATCH_MESSAGE, lottoRank.getMatchCount(),
+                    lottoRank.getPrize(), scoreMap.getNumMatchCount(lottoRank));
             System.out.println(message);
         }
     }

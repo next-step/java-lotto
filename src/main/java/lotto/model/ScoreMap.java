@@ -6,46 +6,46 @@ import java.util.Objects;
 import java.util.Set;
 
 public class ScoreMap {
-    private Map<Integer, Integer> scoreMap;
+    private Map<LottoRank, Integer> scoreMap;
 
     public ScoreMap() {
-        this.scoreMap = new HashMap<Integer, Integer>(){{
-            put(0, 0);
-            put(1, 0);
-            put(2, 0);
-            put(3, 0);
-            put(4, 0);
-            put(5, 0);
-            put(6, 0);
+        this.scoreMap = new HashMap<LottoRank, Integer>(){{
+            put(LottoRank.MATCH_COUNT_ZERO, 0);
+            put(LottoRank.MATCH_COUNT_ONE, 0);
+            put(LottoRank.MATCH_COUNT_TWO, 0);
+            put(LottoRank.MATCH_COUNT_THREE, 0);
+            put(LottoRank.MATCH_COUNT_FOUR, 0);
+            put(LottoRank.MATCH_COUNT_FIVE, 0);
+            put(LottoRank.MATCH_COUNT_SIX, 0);
         }};
     }
 
-    public Set<Integer> getKeySet(){
+    public Set<LottoRank> getKeySet(){
         return scoreMap.keySet();
     }
 
-    public Integer get(Integer key){
-        return scoreMap.get(key);
+    public Integer getNumMatchCount(LottoRank lottoRank){
+        return scoreMap.get(lottoRank);
     }
 
-    public void updateByMatchCount(int matchCount) {
-        scoreMap.put(matchCount, scoreMap.get(matchCount) + 1);
+    public void updateByMatchCount(LottoRank lottoRank) {
+        scoreMap.put(lottoRank, scoreMap.get(lottoRank) + 1);
     }
 
     public int sumRewards() {
         int totalProfit = 0;
-        for( Integer matchCount : scoreMap.keySet() ){
-            totalProfit += multiplyRewardPriceByNumMatched(matchCount, scoreMap.get(matchCount));
+        for( LottoRank lottoRank : scoreMap.keySet() ){
+            totalProfit += multiplyRewardPriceByNumMatched(lottoRank.getMatchCount(), scoreMap.get(lottoRank));
         }
         return totalProfit;
     }
 
-    private int multiplyRewardPriceByNumMatched(int matchCount, int actualNumMatched){
+    private int multiplyRewardPriceByNumMatched(int matchCount, int numMatchCount){
         int rewardPrice = LottoRank.of(matchCount).getPrize();
-        if(rewardPrice == 0 || actualNumMatched == 0){
+        if(rewardPrice == 0 || numMatchCount == 0){
             return 0;
         }
-        return rewardPrice * actualNumMatched;
+        return rewardPrice * numMatchCount;
     }
 
     @Override
