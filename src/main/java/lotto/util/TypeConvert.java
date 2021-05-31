@@ -15,7 +15,7 @@ public class TypeConvert {
         List<String> stringList = Arrays.asList(inputSting.split(STRING_SEPARATOR));
 
         return stringList.stream()
-                .map((element)->new LottoNumber(Integer.parseInt(element)))
+                .map((element) -> new LottoNumber(Integer.parseInt(element)))
                 .collect(Collectors.toSet());
     }
 }

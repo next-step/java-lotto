@@ -34,8 +34,8 @@ public class Word {
     }
 
     List<Integer> convertExpressionsToNumbers(List<String> stringExpressions) {
-        List<Integer> numbers =stringExpressions.stream()
-                .map((string)->Integer.parseInt(string))
+        List<Integer> numbers = stringExpressions.stream()
+                .map((string) -> Integer.parseInt(string))
                 .collect(Collectors.toList());
 
         notNegativeValidation(numbers);

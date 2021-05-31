@@ -42,7 +42,7 @@ public class Prizes {
     }
 
     public BigDecimal makeYield(int purchaseAmount) {
-        return BigDecimal.valueOf(this.prizeMoney).divide(BigDecimal.valueOf( purchaseAmount));
+        return BigDecimal.valueOf(this.prizeMoney).divide(BigDecimal.valueOf(purchaseAmount));
     }
 
     public Map<Integer, Integer> getPrizes() {
