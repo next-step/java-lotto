@@ -8,6 +8,7 @@ public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static Integer inputMoneyForPurchase() {
+        printStartMessage();
         String purchase = scanner.nextLine();
         return Integer.parseInt(purchase);
     }

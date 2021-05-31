@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.Reward;
+import lotto.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -49,9 +47,11 @@ public class Output {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
     }
 
-    public static void printWinStatics() {
+    public static void printWinStatics(Prizes prizes, PurchaseCalculator purchaseCalculator) {
         System.out.println(WIN_STATIC_MESSAGE);
         System.out.println(SEPARATOR);
+        printPrize(prizes.getPrizes());
+        printYield(Award.makeYield(purchaseCalculator.getPurchaseAmount(), Award.makePrizeMoney(prizes.getPrizes())));
     }
 
     public static void printPrize(Map<Integer, Integer> prizes) {

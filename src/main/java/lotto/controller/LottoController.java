@@ -12,8 +12,6 @@ import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
 
 public class LottoController {
     public void run() {
-        Output.printStartMessage();
-
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
         int purchasedLottoCount = purchaseCalculator.CalculatePurchasableCount();
 
@@ -25,9 +23,7 @@ public class LottoController {
         WinningLotto winningLotto = makeWinningLotto();
         Prizes prizes = new Prizes(makeRewards(bunchOfLotto.getBunchOfLotto(), winningLotto));
 
-        Output.printWinStatics();
-        Output.printPrize(prizes.getPrizes());
-        Output.printYield(Award.makeYield(purchaseCalculator.getPurchaseAmount(), Award.makePrizeMoney(prizes.getPrizes())));
+        Output.printWinStatics(prizes,purchaseCalculator);
     }
 
     public WinningLotto makeWinningLotto() {
