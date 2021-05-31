@@ -1,5 +1,7 @@
 package lottery;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -9,14 +11,14 @@ public class LotteryNumbers {
 
     private static final int MINIMUM_LOTTERY_NUMBERS_SIZE = 6;
 
-    private final Set<LotteryNumber> numbers;
+    private final ImmutableSet<LotteryNumber> numbers;
 
     public LotteryNumbers(List<Integer> numbers) {
         Set<LotteryNumber> lotteryNumbers = toSet(numbers);
 
         validateLotteryNumbersSize(lotteryNumbers);
 
-        this.numbers = lotteryNumbers;
+        this.numbers = ImmutableSet.copyOf(lotteryNumbers);
     }
 
     private Set<LotteryNumber> toSet(List<Integer> numbers) {
@@ -26,7 +28,7 @@ public class LotteryNumbers {
             lotteryNumbers.add(new LotteryNumber(number));
         }
 
-        return lotteryNumbers;
+        return new HashSet<>(lotteryNumbers);
     }
 
     private void validateLotteryNumbersSize(Set<LotteryNumber> numbers) {
