@@ -2,6 +2,7 @@ package lottery;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LotteryNumbers {
@@ -32,5 +33,18 @@ public class LotteryNumbers {
 
     public int size() {
         return this.numbers.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryNumbers that = (LotteryNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
