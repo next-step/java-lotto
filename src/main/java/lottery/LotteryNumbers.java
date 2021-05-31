@@ -1,38 +1,35 @@
 package lottery;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LotteryNumbers {
 
     private static final int MINIMUM_LOTTERY_NUMBERS_SIZE = 6;
 
-    private final ImmutableSet<LotteryNumber> numbers;
+    private final ImmutableList<LotteryNumber> numbers;
 
     public LotteryNumbers(List<Integer> numbers) {
-        Set<LotteryNumber> lotteryNumbers = toSet(numbers);
+        List<LotteryNumber> lotteryNumbers = toLotteryNumbers(numbers);
 
         validateLotteryNumbersSize(lotteryNumbers);
 
-        this.numbers = ImmutableSet.copyOf(lotteryNumbers);
+        this.numbers = ImmutableList.copyOf(lotteryNumbers);
     }
 
-    private Set<LotteryNumber> toSet(List<Integer> numbers) {
-        Set<LotteryNumber> lotteryNumbers = new HashSet<>();
+    private List<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
+        List<LotteryNumber> lotteryNumbers = new ArrayList<>();
 
         for (Integer number : numbers) {
             lotteryNumbers.add(new LotteryNumber(number));
         }
 
-        return new HashSet<>(lotteryNumbers);
+        return new ArrayList<>(lotteryNumbers);
     }
 
-    private void validateLotteryNumbersSize(Set<LotteryNumber> numbers) {
-        int sizeOfNumbers = numbers.size();
+    private void validateLotteryNumbersSize(List<LotteryNumber> numbers) {
+        int sizeOfNumbers = new HashSet<>(numbers).size();
 
         if (sizeOfNumbers != MINIMUM_LOTTERY_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리이어야 합니다. : " + sizeOfNumbers);
