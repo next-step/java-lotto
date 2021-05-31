@@ -3,10 +3,6 @@ package io.mwkwon.lotto.domain;
 import io.mwkwon.lotto.constant.LottoConstants;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
     private static final String DUPLICATE_EXCEPTION_MESSAGE = "서로 다른 로또번호 6개가 아닙니다.";
@@ -21,6 +17,7 @@ public class Lotto {
     public static Lotto create(final List<LottoNumber> strLottoNumbers) {
         return new Lotto(strLottoNumbers);
     }
+
 
     public Set<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);

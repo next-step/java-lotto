@@ -6,14 +6,13 @@ import io.mwkwon.lotto.enums.Rank;
 import java.util.*;
 
 public class ResultView {
-    private static final String BUY_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s장을 구매했습니다.";
     private static final String TITLE = "당첨 통계";
     private static final String DELIMITER = "---------";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printBuyLottoCount(LottoPayment lottoPayment) {
-        int buyQuantity = lottoPayment.calcLottoBuyQuantity();
-        System.out.println(buyQuantity + BUY_COUNT_MESSAGE);
+    public void printBuyLottoCount(BuyLottos manualLottos, BuyLottos autoLottos) {
+        System.out.println(String.format(BUY_COUNT_MESSAGE, manualLottos.lottos().size(), autoLottos.lottos().size()));
     }
 
     public void printBuyLottos(BuyLottos buyLottos) {

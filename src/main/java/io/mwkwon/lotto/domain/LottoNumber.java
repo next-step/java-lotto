@@ -2,26 +2,33 @@ package io.mwkwon.lotto.domain;
 
 import io.mwkwon.lotto.constant.LottoConstants;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
     private static final String NUMBER_BOUND_ERROR_MESSAGE = LottoConstants.MIN_LOTTO_NUMBER + "에서 "
             + LottoConstants.MAX_LOTTO_NUMBER +"사이의 값만 입력 가능합니다.";
+
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
     private final int number;
 
+    static {
+        for (int i = LottoConstants.MIN_LOTTO_NUMBER; i <= LottoConstants.MAX_LOTTO_NUMBER; i++) {
+            LOTTO_NUMBERS.put(i, new LottoNumber(i));
+        }
+    }
+
     private LottoNumber(int number) {
-        validateLottoNumberBound(number);
         this.number = number;
     }
 
-    public static LottoNumber create(int strNumber) {
-        return new LottoNumber(strNumber);
-    }
-
-    private void validateLottoNumberBound(final int number) {
-        if (number < LottoConstants.MIN_LOTTO_NUMBER || number > LottoConstants.MAX_LOTTO_NUMBER) {
+    public static LottoNumber create(int number) {
+        LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(NUMBER_BOUND_ERROR_MESSAGE);
         }
+        return lottoNumber;
     }
 
     @Override

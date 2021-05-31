@@ -17,13 +17,17 @@ public class LottoMachine implements LottoGenerator {
     }
 
     @Override
-    public BuyLottos createAutoLottos(LottoPayment lottoPayment) {
+    public BuyLottos createAutoLottos(PurchaseQuantity purchaseQuantity) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoBuyQuantity = lottoPayment.calcLottoBuyQuantity();
-        for (int i = 0; i < lottoBuyQuantity; i++) {
+        do {
             Collections.shuffle(LOTTO_NUMBERS);
             lottos.add(Lotto.create(LOTTO_NUMBERS.subList(LottoConstants.FROM_INDEX, LottoConstants.LOTTO_BOUND)));
-        }
-        return new BuyLottos(lottos);
+        } while (purchaseQuantity.isLessThan(lottos.size()));
+        return BuyLottos.create(lottos);
+    }
+
+    @Override
+    public Lotto createManualLotto(LottoNumbers lottoNumbers) {
+        return lottoNumbers.createLotto();
     }
 }

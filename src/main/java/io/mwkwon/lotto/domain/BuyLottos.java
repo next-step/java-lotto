@@ -10,19 +10,29 @@ import java.util.Objects;
 public class BuyLottos {
     private final List<Lotto> lottos;
 
-    public BuyLottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    private BuyLottos(final List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
+    }
+
+    public static BuyLottos create(List<Lotto> lottos) {
+        return new BuyLottos(lottos);
     }
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public List<Rank> calcLottoRank(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public BuyLottos merge(BuyLottos otherBuyLottos) {
+        lottos.addAll(otherBuyLottos.lottos);
+        return new BuyLottos(lottos);
+    }
+
+    public List<Rank> calcLottoRank(WinningLotto winningLotto) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            long matchLottoNumberCount = lotto.calcMatchLottoNumberCount(winningLotto);
-            Rank rank = Rank.matchRank(matchLottoNumberCount, lotto.isContains(bonusLottoNumber));
+            long matchLottoNumberCount = winningLotto.calcMatchLottoNumberCount(lotto);
+            boolean isMatchBonus = winningLotto.isContainsBonusBall(lotto);
+            Rank rank = Rank.matchRank(matchLottoNumberCount, isMatchBonus);
             ranks.add(rank);
         }
         return ranks;

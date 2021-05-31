@@ -20,12 +20,16 @@ public class LottoApplication {
     public void run() {
         LottoStore lottoStore = new LottoStore(dataGenerator, lottoGenerator);
         LottoPayment lottoPayment = lottoStore.createLottoPayment();
-        resultView.printBuyLottoCount(lottoPayment);
-        BuyLottos buyLottos = lottoStore.buyAutoLottos(lottoPayment);
+        PurchaseQuantity manualLottoPurchaseQuantity = lottoStore.createManualLottoPurchaseQuantity(lottoPayment);
+        BuyLottos manualLottos = lottoStore.createManualLottos(manualLottoPurchaseQuantity);
+        BuyLottos autoLottos = lottoStore.buyAutoLottos(lottoPayment, manualLottoPurchaseQuantity);
+        resultView.printBuyLottoCount(manualLottos, autoLottos);
+        BuyLottos buyLottos = manualLottos.merge(autoLottos);
         resultView.printBuyLottos(buyLottos);
-        Lotto winningLotto = lottoStore.createWinningLotto();
-        LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(winningLotto);
-        WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos, winningLotto, bonusBallLottoNumber);
+        Lotto lotto = lottoStore.createWinningLotto();
+        LottoNumber bonusBallLottoNumber = lottoStore.createBonusBallLottoNumber(lotto);
+        WinningLotto winningLotto = WinningLotto.create(lotto, bonusBallLottoNumber);
+        WinningRanks winningRanks = lottoStore.calcLottosRank(buyLottos,winningLotto);
         resultView.printWinningStatistics(winningRanks);
         resultView.printProfitRate(winningRanks, lottoPayment);
     }

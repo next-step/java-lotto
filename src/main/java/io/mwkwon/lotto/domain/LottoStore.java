@@ -17,8 +17,9 @@ public final class LottoStore {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public BuyLottos buyAutoLottos(LottoPayment lottoPayment) {
-        return lottoGenerator.createAutoLottos(lottoPayment);
+    public BuyLottos buyAutoLottos(LottoPayment lottoPayment, PurchaseQuantity manualLottoPurchaseQuantity) {
+        PurchaseQuantity autoLottoPurchaseQuantity = manualLottoPurchaseQuantity.calcAutoLottoPurchaseQuantity(lottoPayment);
+        return lottoGenerator.createAutoLottos(autoLottoPurchaseQuantity);
     }
 
     public Lotto createWinningLotto() {
@@ -33,10 +34,23 @@ public final class LottoStore {
         return dataGenerator.requestBonusBallNumber(winningLotto);
     }
 
-    public WinningRanks calcLottosRank(BuyLottos buyLottos, Lotto winningLotto, LottoNumber bonusBallLottoNumber) {
-        List<Rank> ranks = buyLottos.calcLottoRank(winningLotto, bonusBallLottoNumber);
+    public WinningRanks calcLottosRank(BuyLottos buyLottos, WinningLotto winningLotto) {
+        List<Rank> ranks = buyLottos.calcLottoRank(winningLotto);
         List<Rank> winningRanks = ranks.stream().filter(rank -> rank != Rank.MISS).collect(Collectors.toList());
         return new WinningRanks(winningRanks);
     }
 
+    public PurchaseQuantity createManualLottoPurchaseQuantity(LottoPayment lottoPayment) {
+        return dataGenerator.requestManualLottoPurchaseQuantity(lottoPayment);
+    }
+
+    public BuyLottos createManualLottos(PurchaseQuantity purchaseQuantity) {
+        List<LottoNumbers> manualLottoNumbers = dataGenerator.requestManualLottoNumbers(purchaseQuantity);
+        List<Lotto> lottos = manualLottoNumbers
+                .stream()
+                .map(lottoNumbers -> lottoGenerator.createManualLotto(lottoNumbers))
+                .collect(Collectors.toList());
+
+        return BuyLottos.create(lottos);
+    }
 }
