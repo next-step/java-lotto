@@ -1,22 +1,22 @@
 package lottery;
 
-import java.util.List;
-
 public class Lottery {
+
+    public static final int DEFAULT_LOTTERY_PRICE = 1000;
 
     private final LotteryNumbers lotteryNumbers;
     private final Integer price;
 
     public Lottery(LotteryNumbers lotteryNumbers) {
         this.lotteryNumbers = lotteryNumbers;
-        this.price = 1000;
+        this.price = DEFAULT_LOTTERY_PRICE;
     }
 
-    public List<Integer> numbers() {
-        return List.of(1, 2, 3, 4, 5, 6);
+    public LotteryNumbers numbers() {
+        return this.lotteryNumbers;
     }
 
     public int price() {
-        return 1000;
+        return this.price;
     }
 }
