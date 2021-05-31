@@ -25,6 +25,10 @@ public class Lotteries {
         return lotteries;
     }
 
+    public List<Lottery> lotteries() {
+        return lotteries;
+    }
+
     public int size() {
         return lotteries.size();
     }
