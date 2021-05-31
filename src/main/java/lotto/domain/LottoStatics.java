@@ -7,54 +7,53 @@ import java.util.Map;
 
 public class LottoStatics {
 
-    private List<Rank> ranks;
+    private Map<Rank, Integer> ranks;
+    private int totalCount;
 
     public LottoStatics(List<Rank> ranks) {
-        this.ranks = ranks;
+        this.ranks = initializeCounts(ranks);
+        this.totalCount = ranks.size();
     }
 
     public Profit getProfit() {
         double total = getTotalPrize();
-        int totalCost = Lotto.PRICE *  ranks.size();
+        int totalCost = Lotto.PRICE *  totalCount;
 
         return new Profit(total , totalCost);
     }
 
     private double getTotalPrize() {
         double total = 0;
-        for ( Rank rank : ranks) {
-            total += Rank.prize(rank);
+        for ( Rank rank : ranks.keySet()) {
+            total += Rank.prize(rank) * ranks.get(rank);
         }
         return total;
     }
 
     public int getRankCount(int targetRank) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            if( rank == Rank.of(targetRank)) {
-                count++;
-            }
-        }
-        return count;
+        return ranks.get(Rank.of(targetRank));
     }
 
     public Map<Rank, Integer> rankCounts() {
-        Map<Rank, Integer> rankCounts = initializeCounts();
-        for (Rank rank : this.ranks) {
+        Map<Rank, Integer> counts = new HashMap<>(ranks);
+        counts.remove(Rank.nothing);
+        return counts;
+    }
+
+    private Map<Rank, Integer> initializeCounts(List<Rank> ranks) {
+        Map<Rank, Integer> rankCounts = initializeRankMap();
+        for (Rank rank : ranks) {
             addRankCount(rankCounts, rank);
         }
         return rankCounts;
     }
 
-    private Map<Rank, Integer> initializeCounts() {
-        Map<Rank, Integer> rankCounts = new HashMap<>();
-        Rank[] ranks = Rank.values();
-        int start = Rank.threeNumbersMatch.ordinal();
-
-        for (int i = start; i < ranks.length; i++) {
-            rankCounts.put(ranks[i],0);
+    private Map<Rank, Integer> initializeRankMap() {
+        Map<Rank,Integer> counts = new HashMap<>();
+        for ( Rank rank : Rank.values()) {
+            counts.put(rank,0);
         }
-        return rankCounts;
+        return counts;
     }
 
     private void addRankCount(Map<Rank, Integer> rankCounts, Rank rank) {
