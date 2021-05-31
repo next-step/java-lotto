@@ -34,4 +34,17 @@ public class LotteryNumbersTest {
     void notSixDigitLotteryNumber_test(List<Integer> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> new LotteryNumbers(numbers));
     }
+
+    @ParameterizedTest
+    @ArraySources(
+            {
+                    @ArraySource({1, 1, 3, 4, 5, 6}),
+                    @ArraySource({1, 1, 1, 1, 1, 1}),
+                    @ArraySource({45, 45, 10, 25, 30, 4})
+            }
+    )
+    @DisplayName("로또번호는 중복되면 안된다.")
+    void notDuplicateLotteryNumbers_test(List<Integer> numbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LotteryNumbers(numbers));
+    }
 }
