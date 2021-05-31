@@ -3,6 +3,7 @@ package lotto.util;
 import lotto.model.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TypeConvert {
     private static final String STRING_SEPARATOR = ",";
@@ -12,12 +13,9 @@ public class TypeConvert {
 
     public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
         List<String> stringList = Arrays.asList(inputSting.split(STRING_SEPARATOR));
-        Set<LottoNumber> convertedSet = new HashSet<>();
 
-        for (String element : stringList) {
-            convertedSet.add(new LottoNumber(Integer.parseInt(element)));
-        }
-
-        return convertedSet;
+        return stringList.stream()
+                .map((element)->new LottoNumber(Integer.parseInt(element)))
+                .collect(Collectors.toSet());
     }
 }
