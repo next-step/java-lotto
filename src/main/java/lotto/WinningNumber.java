@@ -9,11 +9,11 @@ import java.util.Set;
 public class WinningNumber {
 	private static final int TWO_LOTTO_NUMBERS_LENGTH = Constants.LOTTO_NUMBERS_LENGTH * 2;
 
-	private final List<Integer> winningNumber;
+	private final Lotto winningNumber;
 	private final Integer bonusNumber;
 
 	private WinningNumber(List<Integer> winningNumber, Integer bonusNumber) {
-		this.winningNumber = winningNumber;
+		this.winningNumber = new Lotto(winningNumber);
 		this.bonusNumber = bonusNumber;
 	}
 
@@ -25,7 +25,7 @@ public class WinningNumber {
 	}
 
 	public LottoPrizeType checkWinning(List<Integer> lottoNumbers) {
-		Set<Integer> set = new HashSet<>(winningNumber);
+		Set<Integer> set = new HashSet<>(winningNumber.numbers());
 		set.addAll(lottoNumbers);
 		return LottoPrizeType.valueByMatchedNumberCount(
 				TWO_LOTTO_NUMBERS_LENGTH - set.size(),
