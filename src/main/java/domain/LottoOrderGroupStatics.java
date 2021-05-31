@@ -17,10 +17,9 @@ public class LottoOrderGroupStatics {
 	public LottoOrderGroupStatics (List<Integer> winnerNumbers, LottoOrderGroup lottoOrderGroup) {
 		this.winnerNumbers = winnerNumbers;
 		this.lottoOrderGroup = lottoOrderGroup;
-		matchSetting();
 	}
 
-	private void matchSetting(){
+	public void matchSetting(){
 		for (Lotto lotto : lottoOrderGroup.lottos()) {
 			final Integer matchCount = LottoNumberMatch.matchCount(winnerNumbers, lotto);
 			match(matchCount);
