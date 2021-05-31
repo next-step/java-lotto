@@ -14,7 +14,7 @@ public class LotteryNumber {
             throw new IllegalArgumentException("로또번호는 1 ~ 45 사이의 숫자이어야 합니다.");
         }
 
-        lotteryNumber = number;
+        this.lotteryNumber = number;
     }
 
     @Override
