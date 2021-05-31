@@ -1,5 +1,6 @@
 package lotto.ui.output.result;
 
+import lotto.core.rule.GameMoney;
 import lotto.core.omr.Omr;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Rank;
@@ -46,7 +47,7 @@ public class GameResult {
     }
 
     private double calcTotalPrice(OmrCard omrCard) {
-        return omrCard.size() * OmrCard.PRICE;
+        return omrCard.size() * GameMoney.PRICE_OF_ONE_GAME;
     }
 
     private double calcTotalWinningMoney() {

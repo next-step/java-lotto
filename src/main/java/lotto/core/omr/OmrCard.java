@@ -10,15 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OmrCard {
-    public static final int PRICE = 1000;
     private final List<Omr> omrList;
 
     public OmrCard() {
         this.omrList = new ArrayList<>();
-    }
-
-    public static boolean isValidateMinimumAmount(int money) {
-        return money < PRICE;
     }
 
     public void marking(SixBall sixBall) {

@@ -3,7 +3,6 @@ package lotto.ui;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Round;
 import lotto.ui.input.GameInput;
-import lotto.ui.input.Input;
 import lotto.ui.input.info.OmrCardInputData;
 import lotto.ui.input.info.RoundInputData;
 import lotto.ui.output.GameOutput;
