@@ -1,4 +1,4 @@
-package lottery;
+package lottery.domain;
 
 import com.google.common.collect.ImmutableList;
 

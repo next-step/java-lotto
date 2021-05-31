@@ -1,4 +1,4 @@
-package lottery;
+package lottery.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;

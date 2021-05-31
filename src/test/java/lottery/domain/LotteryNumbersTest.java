@@ -1,7 +1,8 @@
-package lottery;
+package lottery.domain;
 
 import config.ArraySource;
 import config.ArraySources;
+import lottery.domain.LotteryNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
