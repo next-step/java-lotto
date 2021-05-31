@@ -15,7 +15,7 @@ public class WinningSixBallsRequest extends Request<SixBall> {
     public SixBall request() throws InputException {
         int[] fixedBalls = requestWinningNumber();
 
-        if (isWinningSixBallValidation(fixedBalls.length)) {
+        if (SixBall.isLengthValidation(fixedBalls.length)) {
             throw new InputException(String.format("당첨 번호는 총 %d개를 입력해주셔야 합니다.", SixBall.LENGTH));
         }
 
@@ -31,7 +31,7 @@ public class WinningSixBallsRequest extends Request<SixBall> {
         }
     }
 
-    private boolean isWinningSixBallValidation(int length) {
+    /*private boolean isWinningSixBallValidation(int length) {
         return length < SixBall.LENGTH;
-    }
+    }*/
 }

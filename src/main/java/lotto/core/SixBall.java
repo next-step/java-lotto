@@ -39,6 +39,10 @@ public class SixBall {
         return balls.contains(ball);
     }
 
+    public static boolean isLengthValidation(int length) {
+        return length < LENGTH;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(balls);
