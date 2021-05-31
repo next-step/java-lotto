@@ -17,9 +17,10 @@ class LotteryFactoryTest {
         //given
         Lotteries lotteries = new Lotteries(new GenerateCount(3), new MockNumberGenerator());
         WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(10, 2, 34, 4, 5, 6)));
+        LotteryFactory lotteryFactory = new LotteryFactory();
 
         //when
-        Map<Integer, Integer> matchCounts = LotteryFactory.matchAll(lotteries, winnerLottery);
+        Map<Integer, Integer> matchCounts = lotteryFactory.matchAll(lotteries, winnerLottery);
 
         assertAll(
                 () -> assertThat(matchCounts.get(3)).isEqualTo(0),
