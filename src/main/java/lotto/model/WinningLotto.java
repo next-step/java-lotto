@@ -11,6 +11,30 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
+    public WinningState makeWinningState(Lotto lotto) {
+        int winningCount = makeWinningCount(lotto.getLottoNumbers(), getLottoNumbers());
+        WinningState winningState = new WinningState(winningCount, checkBonusCount(lotto, this.bonusBall));
+
+        return winningState;
+    }
+
+    private int makeWinningCount(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningLottoNumbers) {
+        return winningLottoNumbers.stream()
+                .mapToInt((winningLottoNumber) -> compareWithWinningLotto(lottoNumbers, winningLottoNumber))
+                .sum();
+    }
+
+    private int compareWithWinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber winningLottoNumber) {
+        if (lottoNumbers.contains(winningLottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private boolean checkBonusCount(Lotto lotto, LottoNumber bonusNumber) {
+        return lotto.contain(bonusNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return winningLotto.getLottoNumbers();
     }

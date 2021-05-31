@@ -10,7 +10,6 @@ public class BunchOfLotto {
     private final List<Lotto> bunchOfLotto;
 
     public BunchOfLotto(int purchasedLottoCount) {
-
         this.bunchOfLotto = BunchOfLottoGenerator.makeBunchOfLotto(purchasedLottoCount);
     }
 
@@ -19,10 +18,8 @@ public class BunchOfLotto {
     }
 
     public List<Reward> makeRewards(WinningLotto winningLotto) {
-        WinningLogic winningLogic = new WinningLogic();
-
         return bunchOfLotto.stream()
-                .map((lotto) -> Reward.getReward(winningLogic.makeWinningState(lotto, winningLotto)))
+                .map((lotto) -> Reward.getReward(winningLotto.makeWinningState(lotto)))
                 .collect(Collectors.toList());
     }
 }
