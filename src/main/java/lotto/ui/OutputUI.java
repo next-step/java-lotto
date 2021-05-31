@@ -13,7 +13,7 @@ public class OutputUI {
     public static void printNumberOfPurchases(Lottos lottos) {
         int automaticCount = lottos.countOfPurchasingWay(PurchasingWay.AUTOMATIC);
         int manualCount = lottos.countOfPurchasingWay(PurchasingWay.MANUAL);
-        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.",manualCount,automaticCount);
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualCount, automaticCount);
         System.out.println();
     }
 

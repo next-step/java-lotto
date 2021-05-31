@@ -6,13 +6,14 @@ public class PurchasingInfo {
 
     private final Cash cash;
     private final List<String> manualLottoList;
+
     public PurchasingInfo(Cash cash, List<String> manualLottos) {
         this.cash = cash;
         this.manualLottoList = manualLottos;
     }
 
     public PurchasingInfo(int cash, List<String> manualLottos) {
-        this(new Cash(cash),manualLottos);
+        this(new Cash(cash), manualLottos);
     }
 
     public List<String> manualLottoList() {
@@ -25,4 +26,5 @@ public class PurchasingInfo {
 
     public int autoLottoCount() {
         return cash.numberOfPurchasesAvailable() - manualLottoList.size();
-    }}
+    }
+}

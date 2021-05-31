@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoCountTest {
     @Test
     void 음수_에러_반환_테스트() {
-        assertThatThrownBy(()-> new LottoCount(-1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoCount(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

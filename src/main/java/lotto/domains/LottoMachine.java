@@ -7,7 +7,7 @@ public class LottoMachine {
 
     private LottoMachine() {
     }
-    //TODO refactor: 로또 객체생성(new Lotto())이 여기있는게 맞을까 ?
+
     public static Lottos makeLottos(PurchasingInfo purchasingInfo) {
         List<Lotto> lottoList = new ArrayList<>();
         makeManualLottos(lottoList, purchasingInfo);
