@@ -4,14 +4,20 @@ import java.util.Objects;
 
 public class Price {
 
+    public static final int MINIMUM_PRICE = 0;
+
     private final Integer price;
 
     public Price(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("금액은 0원이상 이어야 합니다.");
-        }
+        validatePrice(price);
 
         this.price = price;
+    }
+
+    private void validatePrice(int price) {
+        if (price < MINIMUM_PRICE) {
+            throw new IllegalArgumentException("금액은 0원이상 이어야 합니다.");
+        }
     }
 
     @Override
