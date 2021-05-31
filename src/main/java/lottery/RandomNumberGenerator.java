@@ -13,14 +13,19 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     @Override
     public List<Integer> generate() {
-        List<Integer> numbers = makeAllNumbers();
+        List<Integer> numbers = generateAllNumbers();
 
+        return generateSortedRandomNumbers(numbers);
+    }
+
+    private List<Integer> generateSortedRandomNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
+        Collections.sort(numbers);
 
         return new ArrayList<>(numbers.subList(START_INDEX, LOTTO_LENGTH));
     }
 
-    private List<Integer> makeAllNumbers() {
+    private List<Integer> generateAllNumbers() {
         List<Integer> numbers = new ArrayList<>();
 
         for (int number = MINIMUM_LOTTERY_NUMBER; number <= MAXIMUM_LOTTERY_NUMBER; number++) {
