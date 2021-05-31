@@ -10,25 +10,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningLottoTest {
-    @DisplayName("당첨번호와 로또번호 `비교`시 총 몇개의 같은 숫자가 일치하는지 알 수있다.")
+    @DisplayName("로또번호와 당첨번호의 보너스 볼이 일치하지않는경우 서로 일치하는 숫자와 보너스 볼 일치 여부를 알 수있다")
     @Test
-    void makeWinningStateTest() {
+    void makeWinningStateWithFalseBonusBallTest() {
         String lottoNumber = "1,2,3,4,5,6";
-        String winningNumber = "1,2,11,22,33,3";
+        String winningNumber = "1,2,3,11,22,33";
         LottoNumber incorrectBonusBall = new LottoNumber(7);
-        LottoNumber correctBonusBall = new LottoNumber(6);
         Set<LottoNumber> lottoNumbers = convertStringToLottoNumberSet((lottoNumber));
         Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
 
         Lotto lotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, incorrectBonusBall);
-        WinningLotto winningLottoWithBonus = new WinningLotto(winningLottoNumbers, correctBonusBall);
         WinningState threeMatchedWinningLotto = winningLotto.makeWinningState(lotto);
-        WinningState threeMatchedWinningLottoWithBonus = winningLottoWithBonus.makeWinningState(lotto);
+
 
         assertAll(
                 () -> assertThat(threeMatchedWinningLotto.getMatchedCount()).isEqualTo(3),
-                () -> assertThat(threeMatchedWinningLotto.isBonusBallMatchSuccess()).isFalse(),
+                () -> assertThat(threeMatchedWinningLotto.isBonusBallMatchSuccess()).isFalse()
+        );
+    }
+
+    @DisplayName("로또번호와 당첨번호의 보너스 볼이 일치하는경우 서로 일치하는 숫자와 보너스 볼 일치 여부를 알 수있다")
+    @Test
+    void makeWinningStateWithTrueBonusBallTest() {
+        String lottoNumber = "1,2,3,4,5,6";
+        String winningNumber = "1,2,3,11,22,33";
+        LottoNumber correctBonusBall = new LottoNumber(6);
+        Set<LottoNumber> lottoNumbers = convertStringToLottoNumberSet((lottoNumber));
+        Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
+
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLottoWithBonus = new WinningLotto(winningLottoNumbers, correctBonusBall);
+        WinningState threeMatchedWinningLottoWithBonus = winningLottoWithBonus.makeWinningState(lotto);
+
+        assertAll(
                 () -> assertThat(threeMatchedWinningLottoWithBonus.getMatchedCount()).isEqualTo(3),
                 () -> assertThat(threeMatchedWinningLottoWithBonus.isBonusBallMatchSuccess()).isTrue()
         );
