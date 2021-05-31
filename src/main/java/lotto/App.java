@@ -13,6 +13,7 @@ public class App {
         LottoTicket lottoTicket = new LottoTicket(lottoNum);
         OutputView.outputLottoList(lottoTicket);
         String lastWeekWinNumber = InputView.getLastWeekWinNumber();
+        String bonusNumber = InputView.getBonusWinNumber();
         List<Integer> winNumber = InputView.convertWinNumberStringToIntegerList(lastWeekWinNumber);
         lottoTicket.compareWinList(winNumber);
         OutputView.printWinResult(lottoTicket);
