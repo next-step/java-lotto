@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import static lotto.model.Reward.*;
@@ -49,13 +48,13 @@ public class WinningLogicTest {
         rewards.add(THIRD_PRIZE);
         rewards.add(FIFTH_PRIZE);
 
-        Map prizes = Award.makePrizes(rewards);
+        Prizes prizes = new Prizes(rewards);
 
         assertAll(
-                () -> assertThat(prizes.get(5000)).isEqualTo(2),
-                () -> assertThat(prizes.get(50000)).isEqualTo(1),
-                () -> assertThat(prizes.get(1500000)).isEqualTo(1),
-                () -> assertThat(prizes.get(30000000)).isEqualTo(0)
+                () -> assertThat(prizes.getPrizes().get(5000)).isEqualTo(2),
+                () -> assertThat(prizes.getPrizes().get(50000)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(1500000)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(30000000)).isEqualTo(0)
         );
     }
 }

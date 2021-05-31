@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,7 +52,7 @@ public class Output {
         System.out.println(WIN_STATIC_MESSAGE);
         System.out.println(SEPARATOR);
         printPrize(prizes.getPrizes());
-        printYield(Award.makeYield(purchaseCalculator.getPurchaseAmount(), Award.makePrizeMoney(prizes.getPrizes())));
+        printYield(prizes.makeYield(purchaseCalculator.getPurchaseAmount()));
     }
 
     public static void printPrize(Map<Integer, Integer> prizes) {
@@ -82,7 +83,7 @@ public class Output {
         System.out.println(String.format(FIFTH_PRIZE_MESSAGE, winCount));
     }
 
-    public static void printYield(double yield) {
+    public static void printYield(BigDecimal yield) {
         System.out.println(String.format(YIELD_MESSAGE, yield));
     }
 }
