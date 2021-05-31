@@ -1,7 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.NumberGenerator;
-
 import java.util.List;
 
 public class MockNumberGenerator implements NumberGenerator {
