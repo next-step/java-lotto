@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGames;
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningLottoNumber;
 import lotto.dto.ManuallyPurchasingLottoCount;
 import lotto.dto.PurchaseMoney;

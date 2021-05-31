@@ -30,7 +30,7 @@ class ManuallyPurchasingLottoCountTest {
     void new_예외(String value) {
         // When, Then
         assertThatExceptionOfType(IllegalManuallyPurchasingLottoCountExcepion.class)
-                .isThrownBy(()->new ManuallyPurchasingLottoCount(value));
+                .isThrownBy(() -> new ManuallyPurchasingLottoCount(value));
     }
 
 }

@@ -1,6 +1,5 @@
 package lotto.dto;
 
-import lotto.exception.IllegalLottoNumberCountException;
 import lotto.exception.IllegalManuallyPurchasingLottoCountExcepion;
 
 import static java.lang.Integer.parseInt;
@@ -26,7 +25,7 @@ public class ManuallyPurchasingLottoCount {
     }
 
     private void validateValueBoundary(int value) {
-        if(value <= 0) {
+        if (value <= 0) {
             throw new IllegalManuallyPurchasingLottoCountExcepion();
         }
     }

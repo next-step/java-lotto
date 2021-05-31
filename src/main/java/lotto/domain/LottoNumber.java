@@ -61,7 +61,7 @@ public class LottoNumber {
     private static void validateIllegalCharacter(String value) {
         try {
             parseInt(value);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalLottoNumberArgumentTypeException();
         }
     }

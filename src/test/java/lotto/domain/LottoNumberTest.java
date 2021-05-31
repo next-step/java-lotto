@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.lang.String.valueOf;
 import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
