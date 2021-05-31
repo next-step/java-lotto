@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbersList;
+import lotto.domain.LottoNumbersList_ref;
 import lotto.domain.ResultAllLottoScores;
 import lotto.domain.ResultScoreEnum;
 
@@ -9,8 +9,8 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printPurchasedLottos(LottoNumbersList lottoNumbersList) {
-        lottoNumbersList.foreach((x) -> System.out.println(x.getLottoNumbers()));
+    public void printPurchasedLottos(LottoNumbersList_ref lottoNumbersListRef) {
+        lottoNumbersListRef.foreach((x) -> System.out.println(x.getLottoNumbers()));
     }
 
     public void printLottoGameResult(ResultAllLottoScores resultAllLottoScores, int inputPurchaseAmount) {

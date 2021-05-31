@@ -33,3 +33,32 @@
   * ex) get해서 비교 X -> isMatch로 구현 / int matchCount = userLotto.match(winningLotto)
 * 테스트 케이스 추가
   * 등수별 테스트
+* LottoNumbers.contains indent depth 수정
+  
+## 재설계
+* LottoNo : 로또 번호 1개
+  * int 원시값포장
+  * 번호 하나에 대한 validation
+    * 1~45사이, 숫자만 들어가고
+
+* LottoNumbers : 6개번호 묶음  
+  * List<LottoNo>  
+  * 수동생성생성자: LottoNumber(1,2,3,4,5,6)
+  * 자동생성생성자: LottoNumber(LottoNumberGeneratorStrategy)
+  * 6개 번호 묶음에 대한 validation
+    * 중복번호 존재하면 안됨
+
+* LottoNumbersList : 구매한 전체 로또
+  * List<LottoNumbers>
+  
+* WiningLottoNumbers : 당첨번호
+  * LottoNumbers
+  * int bonusNumber
+
+* LottoGame : 로또 번호 생성
+  * 자동번호 생성
+  * 수동번호 생성
+  * 구입한 번호와 당첨번호 비교해서 결과값 저장
+
+* ResultView
+  * 로또 당첨 결과값 출력

@@ -1,23 +1,27 @@
 package lotto.domain;
+/*
 
 import lotto.common.Constant;
 import lotto.common.MessageCode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class LastWonLottoNumber {
-    private List<Integer> lastWonLottoNumbers;
-    private Integer bonusNumber;
+public class LottoNumberManualGenerator implements LottoNumberGeneratorStrategy {
+    String manualLottoNumber;
 
-    public LastWonLottoNumber(String inputLastWonLottoNumberString, String inputBonusNumber) {
-        lastWonLottoNumbers = new ArrayList<Integer>();
-        lastWonLottoNumbers = parsingInputString(inputLastWonLottoNumberString);
-        bonusNumber = validateNumber(inputBonusNumber);
+    public LottoNumberManualGenerator(String manualLottoNumbers) {
+        this.manualLottoNumber = manualLottoNumbers;
     }
 
-    private List<Integer> parsingInputString(String inputLastWonLottoNumberString) {
-        String[] numbers = inputLastWonLottoNumberString.split(",");
+    public List<Integer> generateLottoNumber() {
+        List<Integer> lottoNumbers = parsingInputString(manualLottoNumber);
+        return lottoNumbers;
+    }
+
+    private List<Integer> parsingInputString(String lottoNumber) {
+        String[] numbers = lottoNumber.split(",");
         for (int i = 0; i < numbers.length; i++) {
             lastWonLottoNumbers.add(validateNumber(numbers[i]));
         }
@@ -35,6 +39,7 @@ public class LastWonLottoNumber {
         return number;
     }
 
+
     private boolean isNumeric(String splitNumber) {
         return splitNumber.matches("[+-]?\\d*(\\.\\d+)?");
     }
@@ -42,19 +47,5 @@ public class LastWonLottoNumber {
     public boolean containsMain(int number) {
         return lastWonLottoNumbers.contains(number);
     }
-
-    public boolean containsBonus(int number) {
-        if (bonusNumber == number)
-            return true;
-
-        return false;
-    }
-
-    public List<Integer> getLastWonLottoNumbers() {
-        return lastWonLottoNumbers;
-    }
-
-    public Integer getBonusNumber() {
-        return bonusNumber;
-    }
 }
+*/

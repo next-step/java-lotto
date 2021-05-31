@@ -4,12 +4,12 @@ import lotto.common.Constant;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoGame {
+public class LottoGame_ref {
     private LastWonLottoNumber_ref lastWonLottoNumberRef;
     private InputView inputView;
     private ResultView resultView;
 
-    public LottoGame() {
+    public LottoGame_ref() {
         inputView = new InputView();
         resultView = new ResultView();
     }

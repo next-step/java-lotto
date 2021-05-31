@@ -11,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumbersTest {
+public class LottoNumbersRefTest {
 
     private List<Integer> testLottoNumber;
     private List<Integer> lottoNumberRange;
@@ -27,7 +27,7 @@ public class LottoNumbersTest {
 
     @Test
     public void generateLottoNumber_로또번호1_45범위내생성확인() {
-        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
+        LottoNumberGeneratorRef lottoNumber = new LottoNumberGeneratorRef();
         testLottoNumber = lottoNumber.generateLottoNumber();
 
         assertThat(lottoNumberRange.contains(testLottoNumber.get(0))).isTrue();
@@ -40,7 +40,7 @@ public class LottoNumbersTest {
 
     @Test
     public void makeLottoNumber_로또번호생성확인() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
+        LottoNumbers_ref lottoNumbersRef = new LottoNumbers_ref(new LottoNumberGeneratorStrategy_ref() {
             @Override
             public List<Integer> generateLottoNumber() {
                 Integer[] lottoNumberArray = {1,3,5,7,9,11};
@@ -48,12 +48,12 @@ public class LottoNumbersTest {
                 return lottoNumber;
             }
         });
-        assertThat(lottoNumbers.contains(1)).isTrue();
+        assertThat(lottoNumbersRef.contains(1)).isTrue();
     }
 
     @Test
     public void countMatchedNumbers_로또번호_맞춘_갯수_검증() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGeneratorStrategy() {
+        LottoNumbers_ref lottoNumbersRef = new LottoNumbers_ref(new LottoNumberGeneratorStrategy_ref() {
             @Override
             public List<Integer> generateLottoNumber() {
                 Integer[] lottoNumberArray = {1,3,5,7,9,11};
@@ -61,8 +61,8 @@ public class LottoNumbersTest {
                 return lottoNumber;
             }
         });
-        LastWonLottoNumber lastWonLottoNumber = new LastWonLottoNumber("1,3,5,6,7,8","10");
-        assertThat(lottoNumbers.countMatchedNumbers(lastWonLottoNumber).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
+        LastWonLottoNumber_ref lastWonLottoNumberRef = new LastWonLottoNumber_ref("1,3,5,6,7,8","10");
+        assertThat(lottoNumbersRef.countMatchedNumbers(lastWonLottoNumberRef).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
     }
 
     @Test

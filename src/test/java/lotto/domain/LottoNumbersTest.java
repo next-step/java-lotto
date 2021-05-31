@@ -1,0 +1,37 @@
+package lotto.domain;
+
+import lotto.common.Constant;
+import lotto.common.MessageCode;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+class LottoNumbersTest {
+
+    @Test
+    public void LottoNumbers_수동생성_검증() {
+        int[] numbers = {1,2,3,4,5,6};
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        assertThat(lottoNumbers.contains(1)).isTrue();
+    }
+
+    @Test
+    public void LottoNumbers_수동생성_숫자범위_검증() {
+        int[] numbers = {1,2,3,4,5,50};
+        assertThatThrownBy(() -> new LottoNumbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
+    }
+
+    @Test
+    public void LottoNumbers_자동생성_소팅_검증() {
+        LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
+
+        for( int i=0; i< Constant.LOTTO_NUMBER_COUNT.value()-1; i++) {
+            assertThat(lottoNumbers.lottoNumbers().get(i).lottNo() < lottoNumbers.lottoNumbers().get(i+1).lottNo()).isTrue();
+        }
+    }
+}

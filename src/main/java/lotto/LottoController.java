@@ -1,10 +1,10 @@
 package lotto;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoGame_ref;
 
 public class LottoController {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.LottoStart();
+        LottoGame_ref lottoGameRef = new LottoGame_ref();
+        lottoGameRef.LottoStart();
     }
 }

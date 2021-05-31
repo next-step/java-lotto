@@ -4,38 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    private List<LottoNo> lottoNumbers;
 
-    public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
-        lottoNumbers = new ArrayList<Integer>();
-        makeLottoNumber(lottoNumberGeneratorStrategy);
+    public LottoNumbers(int[] numbers) {
+        lottoNumbers = new ArrayList<LottoNo>();
+        for (int number : numbers)
+            lottoNumbers.add(new LottoNo(number));
     }
 
-    private void makeLottoNumber(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+    public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+        lottoNumbers = new ArrayList<LottoNo>();
         lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+    public List<LottoNo> lottoNumbers() {
+        return lottoNumbers;
     }
 
-    public MatchStatusOfALotto countMatchedNumbers(LastWonLottoNumber lastWonLottoNumber) {
-        int sameNumberCount = 0;
-        boolean isBonusWon = false;
-        for (int oneLottoNumber : lottoNumbers) {
-            sameNumberCount = increaseIfSameNumber(sameNumberCount, oneLottoNumber, lastWonLottoNumber);
-            isBonusWon = lastWonLottoNumber.containsBonus(oneLottoNumber);
+    public boolean contains(int number) {
+        for(LottoNo lottoNo:lottoNumbers) {
+            if (lottoNo.lottNo() == number)
+                return true;
         }
-        return new MatchStatusOfALotto(sameNumberCount, isBonusWon);
-    }
-
-    private int increaseIfSameNumber(int currentSameNumberCount, int lottoNumber, LastWonLottoNumber lastWonLottoNumber) {
-        if (lastWonLottoNumber.containsMain(lottoNumber))
-            return currentSameNumberCount + 1;
-        return currentSameNumberCount;
-    }
-
-    public boolean contains(int checkNumber) {
-        return lottoNumbers.contains(checkNumber);
+        return false;
     }
 }

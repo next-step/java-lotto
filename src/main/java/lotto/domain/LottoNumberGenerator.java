@@ -1,26 +1,30 @@
 package lotto.domain;
 
 import lotto.common.Constant;
+import lotto.common.LottoNoComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumberGenerator implements LottoNumberGeneratorStrategy {
-    private static List<Integer> lottoNumberRange;
+    private static List<LottoNo> lottoNumberRange;
 
     public LottoNumberGenerator() {
-        lottoNumberRange = new ArrayList<Integer>();
+        lottoNumberRange = new ArrayList<LottoNo>();
         for (int i = 1; i <= Constant.MAX_LOTTO_NUMBER.value(); i++) {
-            lottoNumberRange.add(i);
+            lottoNumberRange.add(new LottoNo(i));
         }
     }
 
-    public List<Integer> generateLottoNumber() {
-        List<Integer> lottoNumbers = new ArrayList<Integer>();
+    public List<LottoNo> generateLottoNumber() {
+        List<LottoNo> lottoNumbers = new ArrayList<LottoNo>();
         Collections.shuffle(lottoNumberRange);
         for (int i = 0; i < Constant.LOTTO_NUMBER_COUNT.value(); i++) {
             lottoNumbers.add(lottoNumberRange.get(i));
         }
-        Collections.sort(lottoNumbers);
+        LottoNoComparator comp = new LottoNoComparator();
+        Collections.sort(lottoNumbers, comp);
         return lottoNumbers;
     }
 }

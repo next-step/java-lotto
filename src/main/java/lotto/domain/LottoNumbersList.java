@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class LottoNumbersList  {
+public class LottoNumbersList {
     private List<LottoNumbers> lottoNumbersList;
 
     public LottoNumbersList() {
@@ -23,7 +23,7 @@ public class LottoNumbersList  {
         lottoNumbersList.forEach(lamda);
     }
 
-    public ResultAllLottoScores countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
+/*    public ResultAllLottoScores countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
         ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
         MatchStatusOfALotto matchStatusOfALotto = null;
         for (int i = 0; i < lottoNumbersList.size(); i++) {
@@ -31,5 +31,5 @@ public class LottoNumbersList  {
             resultAllLottoScores.updateResult(matchStatusOfALotto);
         }
         return resultAllLottoScores;
-    }
+    }*/
 }

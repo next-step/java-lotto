@@ -6,28 +6,38 @@ import java.util.Scanner;
 
 public class InputView {
     Scanner scan;
+    private String inputLastWonLottoNumber;
+    private String inputBonusNumber;
+    private int inputAmount;
 
     public InputView() {
         scan = new Scanner(System.in);
     }
 
-    public int inputMoneyForLotto() {
+    public void inputMoneyForLotto() {
         System.out.println(MessageCode.INPUT_MONEY_FOR_LOTTO.message());
-        return scan.nextInt();
+        inputAmount = scan.nextInt();
     }
 
-    public String inputLastWonLottoNumbers() {
+    public int getInputAmount() {
+        return inputAmount;
+    }
+
+    public void inputLastWonLottoNumbers() {
         System.out.println(MessageCode.INPUT_LAST_WON_LOTTO_NUMBERS.message());
-        return scan.next();
+        inputLastWonLottoNumber = scan.next();
     }
 
-    public String inputBonusLottoNumber() {
+    public String getInputLastWonLottoNumbers() {
+        return inputLastWonLottoNumber;
+    }
+
+    public String getInputBonusNumber() {
+        return inputBonusNumber;
+    }
+
+    public void inputBonusLottoNumber() {
         System.out.println(MessageCode.INPUT_LAST_WON_BONUS_NUMBER.message());
-        return scan.next();
-    }
-
-    public int inputCountForManualLotto() {
-        System.out.println(MessageCode.INPUT_COUNT_MANUAL_LOTTO.message());
-        return scan.nextInt();
+        inputBonusNumber = scan.next();
     }
 }
