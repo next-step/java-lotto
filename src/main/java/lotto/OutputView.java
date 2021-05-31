@@ -32,10 +32,10 @@ public class OutputView {
     }
 
     private static String makeWinWords(LottoTicket lottoTicket) {
-        String output = format(MATCH_WORDING, LottoWin.FOURTH_PLACE.matchNum(), LottoWin.FOURTH_PLACE.winPrice(), LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE)) + "\n";
-        output += format(MATCH_WORDING, LottoWin.THIRD_PLACE.matchNum(), LottoWin.THIRD_PLACE.winPrice(), LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.THIRD_PLACE)) + "\n";
-        output += format(MATCH_WORDING, LottoWin.SECOND_PLACE.matchNum(), LottoWin.SECOND_PLACE.winPrice(), LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.SECOND_PLACE)) + "\n";
-        output += format(MATCH_WORDING, LottoWin.FIRST_PLACE.matchNum(), LottoWin.FIRST_PLACE.winPrice(), LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE)) + "\n";
+        String output = makeLottoWinCountString(LottoWin.FOURTH_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE));
+        output += makeLottoWinCountString(LottoWin.THIRD_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.THIRD_PLACE));
+        output += makeLottoWinCountString(LottoWin.SECOND_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.SECOND_PLACE));
+        output += makeLottoWinCountString(LottoWin.FIRST_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE));
         double totalProfitRatio = LottoStatistics.calculateLottoTicketProfit(lottoTicket);
         if (totalProfitRatio >= 1) {
             output += format(TOTAL_MATCH_WORDING_PROFIT, totalProfitRatio);
@@ -43,6 +43,10 @@ public class OutputView {
         }
         output += format(TOTAL_MATCH_WORDING_LOSS, totalProfitRatio);
         return output;
+    }
+
+    private static String makeLottoWinCountString(LottoWin lottoWin, int countLottoWinNumMatch) {
+        return format(MATCH_WORDING, lottoWin.matchNum(), lottoWin.winPrice(), countLottoWinNumMatch) + "\n";
     }
 
 }
