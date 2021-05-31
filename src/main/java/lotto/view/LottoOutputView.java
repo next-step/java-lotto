@@ -9,15 +9,15 @@ import static java.lang.String.format;
 
 
 public class LottoOutputView {
-    private static final String MESSAGE_LOTTO_GAMES_SIZE = "%d개를 구매했습니다.";
+    private static final String MESSAGE_PURCHASING_LOTTO_GAMES_RESULT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String MESSAGE_LOTTO_RESULT_HEADER = "당첨통계\n---------";
     private static final String MESSAGE_LOTTO_RESULT_BODY = "%d개 일치 (%d원)- %d개\n";
     private static final String MESSAGE_LOTTO_RESULT_SECOND_BODY = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String MESSAGE_LOTTO_PROFIT_RESULT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 
-    public void printLottoGamesSize(LottoGames lottoGames) {
-        System.out.println(format(MESSAGE_LOTTO_GAMES_SIZE, lottoGames.size()));
+    public void printLottoGamesSize(LottoGames autoLottoGames, LottoGames manualLottoGames) {
+        System.out.println(format(MESSAGE_PURCHASING_LOTTO_GAMES_RESULT, manualLottoGames.size(), autoLottoGames.size()));
     }
 
     public void printLottoGame(LottoGames lottoGames) {

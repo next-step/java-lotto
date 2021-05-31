@@ -24,20 +24,27 @@ public class LottoApplication {
 
     private void run() {
         PurchaseMoney purchaseMoney = lottoInputView.questionPurchaseMoney();
-        LottoGames lottoGames = LottoGames.purchaseAuto(purchaseMoney);
-
-        printPurchaseResult(lottoGames);
+        LottoGames purchaseLottoGames = purchaseLottoGames(purchaseMoney);
 
         WinningLottoNumber winningLottoNumber = lottoInputView.questionLastPrizeNumber();
         winningLottoNumber = lottoInputView.questionBonusNumber(winningLottoNumber);
 
-        LottoResult lottoResult = winningLottoNumber.decidePrize(lottoGames);
+        LottoResult lottoResult = winningLottoNumber.decidePrize(purchaseLottoGames);
 
         lottoOutputView.printPrizeStatistics(lottoResult, purchaseMoney);
     }
 
-    private void printPurchaseResult(LottoGames lottoGames) {
-        lottoOutputView.printLottoGamesSize(lottoGames);
-        lottoOutputView.printLottoGame(lottoGames);
+    private LottoGames purchaseLottoGames(PurchaseMoney purchaseMoney) {
+        LottoGames autoLottoGames = LottoGames.purchaseAuto(purchaseMoney);
+        LottoGames manualLottoGames = lottoInputView.questionManualPurchasingLotto();
+        lottoOutputView.printLottoGamesSize(autoLottoGames, manualLottoGames);
+
+        LottoGames mergedLottoGames = mergeAutoAndManualLottoGames(autoLottoGames, manualLottoGames);
+        lottoOutputView.printLottoGame(mergedLottoGames);
+        return mergedLottoGames;
+    }
+
+    private LottoGames mergeAutoAndManualLottoGames(LottoGames autoLottoGames, LottoGames manualLottoGames) {
+        return autoLottoGames.merge(manualLottoGames);
     }
 }
