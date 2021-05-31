@@ -17,7 +17,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(winningTicket, Arrays.asList(userTicket));
         ScoreMap actual = lottoGame.getScores();
         ScoreMap expected = new ScoreMap();
-        expected.updateWithNumMatched(4);
+        expected.updateByMatchCount(4);
         assertThat(actual).isEqualTo(expected);
     }
 }

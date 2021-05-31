@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.config.LottoConfig;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,29 +20,32 @@ public class ScoreMap {
         }};
     }
 
-    public Set<Map.Entry<Integer, Integer>> getEntrySet(){
-        return scoreMap.entrySet();
+    public Set<Integer> getKeySet(){
+        return scoreMap.keySet();
     }
 
-    public void updateWithNumMatched(int numMatched) {
-        scoreMap.put(numMatched, scoreMap.get(numMatched) + 1);
+    public Integer get(Integer key){
+        return scoreMap.get(key);
     }
 
-    public int calculateReward() {
+    public void updateByMatchCount(int matchCount) {
+        scoreMap.put(matchCount, scoreMap.get(matchCount) + 1);
+    }
+
+    public int sumRewards() {
         int totalProfit = 0;
-        for( Map.Entry<Integer, Integer> lottoResult : scoreMap.entrySet() ){
-            int numMatched = lottoResult.getKey();
-            int numMatchedLottoNumbers = lottoResult.getValue();
-            totalProfit += calculateEachReward(numMatched, numMatchedLottoNumbers);
+        for( Integer matchCount : scoreMap.keySet() ){
+            totalProfit += multiplyRewardPriceByNumMatched(matchCount, scoreMap.get(matchCount));
         }
         return totalProfit;
     }
 
-    private int calculateEachReward(int key, int value){
-        if(LottoConfig.winningRewards.get(key) == 0 || value == 0){
+    private int multiplyRewardPriceByNumMatched(int matchCount, int actualNumMatched){
+        int rewardPrice = LottoRank.of(matchCount).getPrize();
+        if(rewardPrice == 0 || actualNumMatched == 0){
             return 0;
         }
-        return LottoConfig.winningRewards.get(key) * value;
+        return rewardPrice * actualNumMatched;
     }
 
     @Override
