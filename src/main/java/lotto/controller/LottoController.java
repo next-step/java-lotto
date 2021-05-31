@@ -4,8 +4,6 @@ import lotto.model.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
@@ -21,9 +19,9 @@ public class LottoController {
         Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
         WinningLotto winningLotto = makeWinningLotto();
-        Prizes prizes = new Prizes(makeRewards(bunchOfLotto.getBunchOfLotto(), winningLotto));
+        Prizes prizes = new Prizes(bunchOfLotto.makeRewards(winningLotto));
 
-        Output.printWinStatics(prizes,purchaseCalculator);
+        Output.printWinStatics(prizes, purchaseCalculator);
     }
 
     public WinningLotto makeWinningLotto() {
@@ -31,16 +29,5 @@ public class LottoController {
         LottoNumber bonusBall = new LottoNumber(Integer.parseInt(Input.inputBonusNumber()));
 
         return new WinningLotto(winningNumbers, bonusBall);
-    }
-
-    private List<Reward> makeRewards(List<Lotto> bunchOfLotto, WinningLotto winningLotto) {
-        List<Reward> rewards = new ArrayList<>();
-        WinningLogic winningLogic = new WinningLogic();
-
-        for (Lotto lotto : bunchOfLotto) {
-            rewards.add(Reward.getReward(winningLogic.makeWinningState(lotto, winningLotto)));
-        }
-
-        return rewards;
     }
 }
