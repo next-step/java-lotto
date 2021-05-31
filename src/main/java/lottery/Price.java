@@ -6,7 +6,11 @@ public class Price {
 
     private final Integer price;
 
-    public Price(Integer price) {
+    public Price(int price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("금액은 0원이상 이어야 합니다.");
+        }
+
         this.price = price;
     }
 
