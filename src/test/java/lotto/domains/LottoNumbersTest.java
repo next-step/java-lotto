@@ -18,37 +18,26 @@ public class LottoNumbersTest {
     @Test
     void 생성자_테스트() {
         assertThat(new LottoNumbers("1,2,3,4,5,6"));
-        assertThat(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,true", "6,true", "0,false", "7,false"}, delimiter = ',')
+    @CsvSource(value = {"1,true", "6,true", "7,false"}, delimiter = ',')
     void 특정숫자가_포함되어있는지_테스트(int targetNumber, boolean expected) {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoNumbers.contains(targetNumber)).isEqualTo(expected);
-    }
-
-    @Test
-    void 로또번호_0이하_45이상숫자_에러_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46)));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(0, 2, 3, 4, 5, 45)));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(-1, 2, 3, 4, 5, 45)));
-
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,2,3,4,5,46"));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("0,2,3,4,5,45"));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("-1,2,3,4,5,45"));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        assertThat(lottoNumbers.contains(LottoNumber.of(targetNumber))).isEqualTo(expected);
     }
 
     @Test
     void 로또번호_중복숫자_에러_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1, 1, 3, 4, 5, 46)));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(46))));
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5,45"));
     }
 
     @Test
     void 로또번호_숫자갯수_에러_테스트() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1,1,3,4,5)));
-        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(1,1,3,4,5,6,7)));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5))));
+        assertThrows(IllegalArgumentException.class, () -> new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7))));
 
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5,6,7"));
         assertThrows(IllegalArgumentException.class, () -> new LottoNumbers("1,1,3,4,5"));
@@ -56,16 +45,16 @@ public class LottoNumbersTest {
 
     @Test
     void 불변객체_학습테스트() {
-        List<Integer> numberList = new ArrayList<>();
-        numberList.add(1);
-        numberList.add(2);
-        numberList.add(3);
-        numberList.add(4);
-        numberList.add(5);
-        numberList.add(6);
+        List<LottoNumber> numberList = new ArrayList<>();
+        numberList.add(LottoNumber.of(1));
+        numberList.add(LottoNumber.of(2));
+        numberList.add(LottoNumber.of(3));
+        numberList.add(LottoNumber.of(4));
+        numberList.add(LottoNumber.of(5));
+        numberList.add(LottoNumber.of(6));
         LottoNumbers lottoNumbers = new LottoNumbers(numberList);
 
-        assertThrows(UnsupportedOperationException.class,() -> lottoNumbers.lottoNumbers().add(7));
+        assertThrows(UnsupportedOperationException.class, () -> lottoNumbers.lottoNumbers().add(LottoNumber.of(7)));
         assertThat(numberList.contains(7)).isFalse();
         assertThat(lottoNumbers.lottoNumbers().contains(7)).isFalse();
         assertThat(numberList).isNotSameAs(lottoNumbers.lottoNumbers());
@@ -73,20 +62,20 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> provideListAndExpectedNumber() {
         return Stream.of(
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 16)), 5),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 15, 16)), 4),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 14, 15, 16)), 3),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 13, 14, 15, 16)), 2),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 12, 13, 14, 15, 16)), 1),
-                Arguments.of(new LottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16)), 0)
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))), 6),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(16))), 5),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(15), LottoNumber.of(16))), 4),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16))), 3),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16))), 2),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(12), LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16))), 1),
+                Arguments.of(new LottoNumbers(Arrays.asList(LottoNumber.of(11), LottoNumber.of(12), LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15), LottoNumber.of(16))), 0)
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideListAndExpectedNumber")
     void 일치하는_숫자_리턴_테스트(LottoNumbers lottoNumbers, int expectedMatchCount) {
-        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
         assertThat(lottoNumbers.matchingNumberCount(winningLottoNumbers)).isEqualTo(expectedMatchCount);
     }
 }

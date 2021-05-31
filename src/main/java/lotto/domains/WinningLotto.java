@@ -2,28 +2,30 @@ package lotto.domains;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public WinningLotto(String stringWinningNumbers, int bonusNumber) {
         LottoNumbers lottoNumber = new LottoNumbers(stringWinningNumbers);
-        validateBonusNumberInWinningLottoNumber(lottoNumber, bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
+        validateBonusNumberInWinningLottoNumber(lottoNumber, bonusLottoNumber);
         this.winningLotto = new Lotto(new LottoNumbers(stringWinningNumbers));
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = bonusLottoNumber;
 
     }
 
     public WinningLotto(LottoNumbers winningLottoNumber, int bonusNumber) {
-        validateBonusNumberInWinningLottoNumber(winningLottoNumber, bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
+        validateBonusNumberInWinningLottoNumber(winningLottoNumber, bonusLottoNumber);
         this.winningLotto = new Lotto(winningLottoNumber);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = bonusLottoNumber;
     }
 
-    private void validateBonusNumberInWinningLottoNumber(LottoNumbers lottoNumber, int bonusNumber) {
+    private void validateBonusNumberInWinningLottoNumber(LottoNumbers lottoNumber, LottoNumber bonusNumber) {
         if (lottoNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨번호에 없는 보너스번호를 입력해주세요.");
         }
@@ -33,7 +35,7 @@ public class WinningLotto {
         return this.winningLotto.lottoNumbers();
     }
 
-    public int bonusNumber() {
+    public LottoNumber bonusNumber() {
         return bonusNumber;
     }
 }
