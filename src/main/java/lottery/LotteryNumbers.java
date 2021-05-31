@@ -9,21 +9,27 @@ public class LotteryNumbers {
 
     private static final int MINIMUM_LOTTERY_NUMBERS_SIZE = 6;
 
-    private final Set<Integer> numbers;
+    private final Set<LotteryNumber> numbers;
 
     public LotteryNumbers(List<Integer> numbers) {
-        HashSet<Integer> converted = toSet(numbers);
+        Set<LotteryNumber> lotteryNumbers = toSet(numbers);
 
-        validateLotteryNumbersSize(converted);
+        validateLotteryNumbersSize(lotteryNumbers);
 
-        this.numbers = converted;
+        this.numbers = lotteryNumbers;
     }
 
-    private HashSet<Integer> toSet(List<Integer> numbers) {
-        return new HashSet<>(numbers);
+    private Set<LotteryNumber> toSet(List<Integer> numbers) {
+        Set<LotteryNumber> lotteryNumbers = new HashSet<>();
+
+        for (Integer number : numbers) {
+            lotteryNumbers.add(new LotteryNumber(number));
+        }
+
+        return lotteryNumbers;
     }
 
-    private void validateLotteryNumbersSize(Set<Integer> numbers) {
+    private void validateLotteryNumbersSize(Set<LotteryNumber> numbers) {
         int sizeOfNumbers = numbers.size();
 
         if (sizeOfNumbers != MINIMUM_LOTTERY_NUMBERS_SIZE) {
