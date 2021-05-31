@@ -29,23 +29,7 @@ public class Lotto {
 
     public void calculateWin(List<Integer> winList) {
         int matchNum = this.countWin(winList);
-        if (LottoWin.FIRST_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FIRST_PLACE;
-            return;
-        }
-        if (LottoWin.SECOND_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.SECOND_PLACE;
-            return;
-        }
-        if (LottoWin.THIRD_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.THIRD_PLACE;
-            return;
-        }
-        if (LottoWin.FOURTH_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FOURTH_PLACE;
-            return;
-        }
-        this.lottoWin = LottoWin.LAST_PLACE;
+        this.lottoWin = LottoWin.valueOf(matchNum, true);
     }
 
     private int countWin(List<Integer> winList) {
