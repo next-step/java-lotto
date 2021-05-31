@@ -11,10 +11,9 @@ public class LotteriesTest {
     @DisplayName("입력한 개수만큼 로또를 생성한다.")
     void generateLotteries_test() {
         //when
-        Lotteries lotteries = new Lotteries(5);
+        Lotteries lotteries = new Lotteries(5, new MockNumberGenerator());
 
         //then
         assertThat(lotteries.size()).isEqualTo(5);
-
     }
 }
