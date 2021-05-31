@@ -36,6 +36,14 @@ public class LotteryNumbers {
         }
     }
 
+    public ImmutableList<LotteryNumber> numbers() {
+        return numbers;
+    }
+
+    boolean contains(LotteryNumber number) {
+        return numbers.contains(number);
+    }
+
     public int size() {
         return this.numbers.size();
     }
