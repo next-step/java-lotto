@@ -3,9 +3,11 @@ package lotto;
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static java.util.stream.Collectors.*;
-import static lotto.Money.*;
+import static lotto.shop.LottoShop.*;
 
 import java.util.Map;
+
+import lotto.shop.Lottos;
 
 public class GameResult {
 
@@ -14,13 +16,13 @@ public class GameResult {
 	private final int buyCount;
 	private final Map<Rank, Integer> dashboard;
 
-	public GameResult(WinningNumber winningNumber, Lottos lottos) {
+	public GameResult(WinningLotto winningLotto, Lottos lottos) {
 		buyCount = lottos.count();
 		dashboard = defaultDashboard();
 
 		lottos.values()
 			.stream()
-			.map(winningNumber::resultOf)
+			.map(winningLotto::resultOf)
 			.forEach(rank -> dashboard.computeIfPresent(rank, (k, v) -> ++v));
 	}
 

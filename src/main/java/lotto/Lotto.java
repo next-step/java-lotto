@@ -1,73 +1,51 @@
 package lotto;
 
-import static java.util.stream.Collectors.*;
-import static lotto.LottoNumber.*;
+import static lotto.LottoGenerator.*;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Lotto {
 
-	private static final int REQUIRED_COUNT = 6;
+	private final SortedSet<LottoNumber> numbers;
 
-	private static final String DELIMITER = "\\,";
-
-	private static final List<LottoNumber> LOTTO_NUMBER_POOL;
-
-	static {
-		LOTTO_NUMBER_POOL = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
-			.mapToObj(LottoNumber::valueOf)
-			.collect(toList());
-	}
-
-	private final TreeSet<LottoNumber> numbers;
-
-	public Lotto() {
-		this(randomNumbers());
-	}
-
-	public Lotto(String text) {
-		this(stringToNumbers(text));
-	}
-
-	public Lotto(TreeSet<LottoNumber> numbers) {
+	public Lotto(Set<LottoNumber> numbers) {
 		validateNumbers(numbers);
 
-		this.numbers = numbers;
+		this.numbers = new TreeSet<>(numbers);
 	}
 
-	private static void validateNumbers(TreeSet<LottoNumber> numbers) {
+	private static void validateNumbers(Set<LottoNumber> numbers) {
 		if (numbers.size() != REQUIRED_COUNT) {
-			throw new InvalidNumberSetException("Lotto requires only 6 unique numbers.");
+			throw new InvalidNumberSetException("로또는 서로 다른 6개의 숫자로 구성되어야 합니다.");
 		}
 	}
 
-	private static TreeSet<LottoNumber> randomNumbers() {
-		Collections.shuffle(LOTTO_NUMBER_POOL);
-		return LOTTO_NUMBER_POOL.stream()
-			.limit(REQUIRED_COUNT)
-			.collect(toCollection(TreeSet::new));
-	}
-
-	private static TreeSet<LottoNumber> stringToNumbers(String text) {
-		String[] split = text.split(DELIMITER);
-		return Stream.of(split)
-			.map(String::trim)
-			.map(LottoNumber::valueOf)
-			.collect(toCollection(TreeSet::new));
-	}
-
-	public long matchCount(Lotto winLotto) {
+	public long matchCount(Lotto winningNumber) {
 		return numbers.stream()
-				.filter(winLotto.numbers::contains)
+				.filter(winningNumber.numbers::contains)
 				.count();
 	}
 
 	public boolean contains(LottoNumber number) {
 		return numbers.contains(number);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(numbers, lotto.numbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 
 	@Override

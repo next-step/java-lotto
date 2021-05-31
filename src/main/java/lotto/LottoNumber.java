@@ -1,24 +1,17 @@
 package lotto;
 
 import static java.lang.Integer.*;
-import static java.util.stream.Collectors.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-	public static final int LOTTO_MIN_NUMBER = 1;
-	public static final int LOTTO_LIMIT_NUMBER = 45 + 1;
+	public static final int MIN_VALUE = 1;
+	public static final int MAX_VALUE = 45;
 
-	private static final Map<Integer, LottoNumber> NUMBER_CACHE;
-
-	static {
-		NUMBER_CACHE = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_LIMIT_NUMBER)
-			.boxed()
-			.collect(toMap(i -> i, LottoNumber::new));
-	}
+	private static final Map<Integer, LottoNumber> NUMBER_CACHE = new HashMap<>();
 
 	private final int value;
 
@@ -29,21 +22,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	private static void validateNumberValue(int value) {
-		if (value < LOTTO_MIN_NUMBER || LOTTO_LIMIT_NUMBER <= value) {
-			throw new IllegalArgumentException("Number must be between 1 and 45");
+		if (value < MIN_VALUE || MAX_VALUE < value) {
+			throw new OutOfBoundValueException("로또 숫자는 1-45 사이의 숫자로 생성할 수 있습니다.");
 		}
 	}
 
 	public static LottoNumber valueOf(int value) {
-		if (NUMBER_CACHE.containsKey(value)) {
-			return NUMBER_CACHE.get(value);
-		}
-
-		return NUMBER_CACHE.put(value, new LottoNumber(value));
+		NUMBER_CACHE.putIfAbsent(value, new LottoNumber(value));
+		return NUMBER_CACHE.get(value);
 	}
 
 	public static LottoNumber valueOf(String value) {
-		return valueOf(parseInt(value));
+		return valueOf(parseInt(value.trim()));
 	}
 
 	@Override

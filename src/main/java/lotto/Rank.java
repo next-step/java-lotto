@@ -21,7 +21,7 @@ public enum Rank {
 	}
 
 	public static Rank valueOf(long countOfMatch, boolean matchBonus) {
-		validateWinnerValue(countOfMatch);
+		validateCount(countOfMatch);
 
 		if (countOfMatch == SECOND_OR_THIRD) {
 			return matchBonus ? SECOND : THIRD;
@@ -33,9 +33,9 @@ public enum Rank {
 			.orElse(NONE);
 	}
 
-	private static void validateWinnerValue(long countOfMatch) {
+	private static void validateCount(long countOfMatch) {
 		if (countOfMatch < 0L || 6L < countOfMatch) {
-			throw new IllegalArgumentException("Winners only have values between 0 and 6.");
+			throw new OutOfBoundValueException("일치 갯수는 0 에서 6 사이의 숫자만 존재합니다.");
 		}
 	}
 

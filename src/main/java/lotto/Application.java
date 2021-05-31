@@ -1,16 +1,25 @@
 package lotto;
 
+import lotto.shop.LottoShop;
+import lotto.shop.Lottos;
+
 public class Application {
 
 	public static void main(String[] args) {
-		Money money = InputView.pay();
-		Lottos lottos = new Lottos(money);
-		ResultView.printBuyResult(lottos);
+		LottoShop shop = new LottoShop();
 
-		Lotto winLotto = InputView.winLotto();
+		Wallet wallet = InputView.wallet();
+
+		Lottos beforeBuy = InputView.manualLottos(wallet);
+
+		Lottos lottos = shop.buyLottos(wallet, beforeBuy);
+		ResultView.printBuyResult(lottos, beforeBuy.count());
+
+		Lotto winningNumber = InputView.winningNumber();
 		LottoNumber bonusBall = InputView.bonusBall();
-		WinningNumber winningNumber = new WinningNumber(winLotto, bonusBall);
-		GameResult result = new GameResult(winningNumber, lottos);
+
+		WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
+		GameResult result = new GameResult(winningLotto, lottos);
 		ResultView.printWinningResult(result);
 	}
 }

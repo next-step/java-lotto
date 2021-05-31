@@ -4,16 +4,20 @@ import static lotto.Rank.*;
 
 import java.util.Map;
 
+import lotto.shop.Lottos;
+
 public class ResultView {
 
-	public static void printBuyResult(Lottos lottos) {
-		System.out.println(lottos.count() + "개를 구매했습니다.");
+	public static void printBuyResult(Lottos lottos, int manualCount) {
+		System.out.println(
+			"\n" + String.format(
+					"수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+					manualCount, lottos.count() - manualCount));
 		lottos.values().forEach(System.out::println);
-		System.out.println();
 	}
 
 	public static void printWinningResult(GameResult result) {
-		System.out.println("당첨 통계");
+		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 
 		Map<Rank, Integer> dashboard = result.dashboard();
