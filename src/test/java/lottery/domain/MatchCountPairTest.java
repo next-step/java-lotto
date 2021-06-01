@@ -37,9 +37,9 @@ class MatchCountPairTest {
         pair.addMatchCountPair(MatchCount.FOUR);
 
         //when
-        int profit = pair.calculateTotalProfit();
+        Profit profit = pair.calculateTotalProfit();
 
         //then
-        assertThat(profit).isEqualTo(1600000);
+        assertThat(profit).isEqualTo(new Profit(1600000));
     }
 }

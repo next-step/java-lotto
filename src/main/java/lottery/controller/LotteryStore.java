@@ -22,9 +22,9 @@ public class LotteryStore {
 
         ResultView.printToStatisticWinner();
 
-        int totalProfit = matchCountPair.calculateTotalProfit();
+        Profit totalProfit = matchCountPair.calculateTotalProfit();
         ResultView.printMatchCountAndProfit(matchCountPair);
-        ResultView.printResultProfit(totalProfit);
+        ResultView.printResultProfit(totalProfit.profit());
     }
 
     private static WinnerLottery receiptWinnerLottery() {
