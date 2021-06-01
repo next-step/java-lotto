@@ -21,6 +21,10 @@ public class InputView {
 
     public static String winningLottoNumberMessage() {
         System.out.println(WINNING_LOTTO_NUMBER);
+        return lottoNumberMessage();
+    }
+
+    public static String lottoNumberMessage() {
         String number = scanner.nextLine();
         while (number == null || number.isEmpty()) {
             number = scanner.nextLine();
