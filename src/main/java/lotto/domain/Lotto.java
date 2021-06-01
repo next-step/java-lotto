@@ -26,7 +26,6 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-
     private void validateLotto() {
         validateNumbers();
         validateDuplicate();
@@ -48,4 +47,5 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
 }
