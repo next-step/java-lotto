@@ -15,8 +15,19 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void updateLottoResult(Lotto winningLotto) {
+        for (Lotto lotto : lottos) {
+            int matchCount = lotto.getMatchCount(winningLotto);
+            LottoPrize.findByMatchCount(matchCount).updateWinningResult(matchCount);
+        }
     }
 
 }

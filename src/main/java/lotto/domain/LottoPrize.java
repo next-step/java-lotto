@@ -13,8 +13,8 @@ public enum LottoPrize {
 
     final int matchCount;
     final int matchPrize;
-    private int totalWinningCount;
-    private long totalWinningPrize;
+    private int winningCount;
+    private long winningPrize;
 
     LottoPrize(int matchCount, int matchPrize) {
         this.matchCount = matchCount;
@@ -23,8 +23,8 @@ public enum LottoPrize {
 
     void updateWinningResult(int matchCount) {
         if (this.matchCount == matchCount) {
-            this.totalWinningCount++;
-            this.totalWinningPrize += this.matchPrize;
+            this.winningCount++;
+            this.winningPrize += this.matchPrize;
         }
     }
 
@@ -34,12 +34,19 @@ public enum LottoPrize {
                 .findFirst().orElse(NONE);
     }
 
-    public int getTotalWinningCount() {
-        return totalWinningCount;
+    static long getTotalPrize() {
+        long total = 0;
+        for (LottoPrize prize : values()) {
+            total += prize.winningPrize;
+        }
+        return total;
     }
 
-    public long getTotalWinningPrize() {
-        return totalWinningPrize;
+    public int getWinningCount() {
+        return winningCount;
     }
 
+    public long getWinningPrize() {
+        return winningPrize;
+    }
 }
