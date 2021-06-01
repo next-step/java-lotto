@@ -14,6 +14,10 @@ public class Price {
         this.price = price;
     }
 
+    public int calculatePerLottery() {
+        return price / 1000;
+    }
+
     private void validatePrice(int price) {
         if (price < MINIMUM_PRICE) {
             throw new IllegalArgumentException("금액은 0원이상 이어야 합니다.");
