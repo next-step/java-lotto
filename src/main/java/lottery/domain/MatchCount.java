@@ -9,7 +9,7 @@ public enum MatchCount {
     FOUR_MATCH(4),
     THREE_MATCH(3);
 
-    private Integer count;
+    private final Integer count;
 
     MatchCount(Integer count) {
         this.count = count;
