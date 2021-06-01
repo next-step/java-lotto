@@ -23,7 +23,7 @@ public enum MatchCount {
                 .orElse(ZERO);
     }
 
-    public Integer getCount() {
+    public Integer count() {
         return count;
     }
 }
