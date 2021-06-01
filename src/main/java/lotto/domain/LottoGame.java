@@ -18,7 +18,7 @@ public final class LottoGame {
   }
 
   public void start() {
-    PurchaseAmountQuantity purchaseAmountQuantity = inputView.getPurchaseAmountQuantity();
+    PurchaseAmountQuantity purchaseAmountQuantity = inputView.input();
 
     LottoBucket lottoBucket = lottoSeller.getLottoBucketBy(purchaseAmountQuantity);
     WinningNumber winningNumber = inputView.getWinningNumber();
