@@ -4,6 +4,7 @@ import lotto.exceptions.LackOfMoneyToBuyLottoException;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +26,6 @@ public class LottoDrawer {
 		}
 
 		List<Lotto> lottos = manualLottoNumbers.stream()
-				.map(it -> it.stream()
-						.sorted()
-						.collect(Collectors.toList()))
 				.map(Lotto::new)
 				.collect(Collectors.toList());
 
@@ -51,9 +49,6 @@ public class LottoDrawer {
 
 	protected static Lotto draw() {
 		Collections.shuffle(lottoNumbers);
-		return new Lotto(lottoNumbers.subList(0, Constants.LOTTO_NUMBERS_LENGTH)
-				.stream()
-				.sorted()
-				.collect(Collectors.toList()));
+		return new Lotto(new ArrayList<>(lottoNumbers.subList(0, Constants.LOTTO_NUMBERS_LENGTH)));
 	}
 }
