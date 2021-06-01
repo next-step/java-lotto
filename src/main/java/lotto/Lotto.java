@@ -54,4 +54,8 @@ public final class Lotto {
 		}
 		return Prize.valueOf(count, matchBonus);
 	}
+
+	public boolean contains(LottoNo lottoNo) {
+		return lottoNumbers.contains(lottoNo);
+	}
 }

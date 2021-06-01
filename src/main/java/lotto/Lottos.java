@@ -15,7 +15,7 @@ public class Lottos {
 		return lottos.size();
 	}
 
-	public Statistics statistics(List<Integer> prizeNumbers, Integer bonusNumber) {
+	public Statistics statistics(List<Integer> prizeNumbers, int bonusNumber) {
 		WinLotto winLotto = new WinLotto(prizeNumbers, bonusNumber);
 		Statistics statistics = new Statistics();
 		for (Lotto lotto : lottos) {
