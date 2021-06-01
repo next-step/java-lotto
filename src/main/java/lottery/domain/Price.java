@@ -2,6 +2,8 @@ package lottery.domain;
 
 import java.util.Objects;
 
+import static lottery.domain.Lottery.DEFAULT_LOTTERY_PRICE;
+
 public class Price {
 
     public static final int MINIMUM_PRICE = 0;
@@ -15,7 +17,7 @@ public class Price {
     }
 
     public int calculatePerLottery() {
-        return price / 1000;
+        return price / DEFAULT_LOTTERY_PRICE;
     }
 
     private void validatePrice(int price) {
