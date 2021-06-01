@@ -45,6 +45,10 @@ public class LottoNumber {
         }
     }
 
+    public boolean isSameNumber(String numberString) {
+        return this.number == Integer.parseInt(numberString);
+    }
+
     public int number() {
         return number;
     }
