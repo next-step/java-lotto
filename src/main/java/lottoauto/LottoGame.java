@@ -13,9 +13,9 @@ public class LottoGame {
         int manualTicketCount = outputView.enterManualTicketCount(inputView);
         List<String> manualTicketNumbers = outputView.enterManualTicketNumbers(manualTicketCount, inputView);
 
-        RequestedManualLottoNumbers requestedManualLottoNumbers = new RequestedManualLottoNumbers(manualTicketNumbers);
+        LottoCounter lottoCounter = new LottoCounter(money, manualTicketCount);
+        LottoTickets lottoTickets = lottoCounter.generateLottoTickets(manualTicketNumbers);
 
-        LottoTickets lottoTickets = new LottoTickets(money, requestedManualLottoNumbers);
         outputView.printLottoTickets(lottoTickets);
 
         outputView.enterWinningNumbers();
