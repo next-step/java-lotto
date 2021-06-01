@@ -1,39 +1,58 @@
-package kht2199.lotto;
+package kht2199.lotto.entity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import kht2199.lotto.exception.number.LottoNumberLengthException;
+import kht2199.lotto.exception.rank.OutOfRangeOfMatchedCountException;
 
-public class LottoNumbers {
+public class Lotto {
 
 	private final List<LottoNumber> numbers;
+
+	private final boolean auto;
 
 	/**
 	 * primitive type으로 초기화하려면 {@link LottoNumber#valuesOf(int...)}로 초기화한다.
 	 */
-	public LottoNumbers(List<LottoNumber> numbers) throws LottoNumberLengthException {
+	public Lotto(List<LottoNumber> numbers, boolean auto) throws LottoNumberLengthException {
 		if (numbers == null || numbers.size() != 6) {
 			throw new LottoNumberLengthException();
 		}
-		this.numbers = Collections.unmodifiableList(
-			new ArrayList<>(numbers)
-		);
+		this.numbers = Collections.unmodifiableList(numbers);
+		this.auto = auto;
 	}
 
 	public boolean contains(LottoNumber number) {
 		return this.numbers.contains(number);
 	}
 
-	public int countMatched(LottoNumbers numbers) {
+	public int countMatched(Lotto numbers) {
 		return (int) this.numbers.stream()
 			.filter(numbers::contains)
 			.count();
 	}
 
+	public Rank calculateRank(Lotto winningNumber, LottoNumber bonusNumber) {
+		int matched = winningNumber.countMatched(this);
+		if (matched == 5L && this.contains(bonusNumber)) {
+			return Rank.SECOND;
+		}
+		try {
+			return Rank.valueOf(matched, false);
+		} catch (OutOfRangeOfMatchedCountException e) {
+			// 발생할 여지가 없어야하기 때문에, RuntimeException 으로 적용.
+			throw new RuntimeException(e);
+		}
+	}
+
+	public boolean isAuto() {
+		return auto;
+	}
+
 	/**
-	 * @return [1, 2, 3, 4, 5, 6]
+	 * @return e.g. [1, 2, 3, 4, 5, 6]
 	 */
 	@Override
 	public String toString() {
@@ -47,4 +66,5 @@ public class LottoNumbers {
 		}
 		return buffer.toString();
 	}
+
 }

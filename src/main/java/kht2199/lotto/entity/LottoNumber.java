@@ -1,4 +1,4 @@
-package kht2199.lotto;
+package kht2199.lotto.entity;
 
 import static java.util.stream.Collectors.*;
 
@@ -35,25 +35,31 @@ public class LottoNumber {
 		return valueOf(Integer.parseInt(value));
 	}
 
-	public static LottoNumbers valuesOf(int ...values) throws LottoNumberRangeException, LottoNumberLengthException {
+	public static Lotto valuesOf(int ...values) throws LottoNumberRangeException, LottoNumberLengthException {
+		return valuesOf(true, values);
+	}
+
+	public static Lotto valuesOf(boolean auto, int ...values) throws LottoNumberRangeException, LottoNumberLengthException {
 		for (int value : values) {
 			validateRange(value);
 		}
-		return new LottoNumbers(Arrays.stream(values)
+		return new Lotto(Arrays.stream(values)
 			.mapToObj(cache::get)
-			.collect(toList())
+			.collect(toList()),
+			auto
 		);
 	}
 
-	public static LottoNumbers valuesOf(List<Integer> values) throws
+	public static Lotto valuesOf(List<Integer> values, boolean auto) throws
 			LottoNumberRangeException,
 			LottoNumberLengthException {
 		for (Integer value : values) {
 			validateRange(value);
 		}
-		return new LottoNumbers(values.stream()
+		return new Lotto(values.stream()
 			.map(cache::get)
-			.collect(toList())
+			.collect(toList()),
+			auto
 		);
 	}
 

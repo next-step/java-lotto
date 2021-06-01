@@ -1,4 +1,4 @@
-package kht2199;
+package kht2199.lotto.entity;
 
 import java.util.Arrays;
 

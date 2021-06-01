@@ -1,10 +1,8 @@
-package kht2199.lotto;
+package kht2199.lotto.entity;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import kht2199.Rank;
 
 public class LottoPrizeResult {
 
@@ -17,12 +15,12 @@ public class LottoPrizeResult {
 		reset();
 	}
 
-	public void addWinningMoney(Rank rank) {
+	void addWinningMoney(Rank rank) {
 		Integer totalPrize = matchedPrizeMap.get(rank);
 		matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
 	}
 
-	public int totalPrize() {
+	int totalPrize() {
 		int sum = 0;
 		for (Integer value : matchedPrizeMap.values()) {
 			sum += value;
@@ -30,14 +28,14 @@ public class LottoPrizeResult {
 		return sum;
 	}
 
-	public void reset() {
+	void reset() {
 		this.matchedPrizeMap = new HashMap<>();
 		for (Rank value : Rank.values()) {
 			matchedPrizeMap.put(value, 0);
 		}
 	}
 
-	public Map<Rank, Integer> getMatchedPrizeMap() {
+	Map<Rank, Integer> getMatchedPrizeMap() {
 		return Collections.unmodifiableMap(matchedPrizeMap);
 	}
 }

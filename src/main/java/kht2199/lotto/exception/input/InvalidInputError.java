@@ -9,5 +9,7 @@ public enum InvalidInputError {
 	LENGTH,
 	PARSING,
 	RANGE,
+	NEGATIVE,
+	ZERO,
 	;
 }
