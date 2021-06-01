@@ -21,7 +21,7 @@ public class LottoDrawer {
 
 	public static Lottos draw(BigDecimal receivedMoney, List<List<Integer>> manualLottoNumbers) {
 		BigDecimal usedMoneyForManualLottos = getUsedMoney(manualLottoNumbers.size());
-		if (receivedMoney.compareTo(Constants.LOTTO_PRICE) < 0 || receivedMoney.compareTo(usedMoneyForManualLottos) < 0) {
+		if (lessThan(receivedMoney, Constants.LOTTO_PRICE) || lessThan(receivedMoney, usedMoneyForManualLottos)) {
 			throw new LackOfMoneyToBuyLottoException();
 		}
 
@@ -34,6 +34,10 @@ public class LottoDrawer {
 				.collect(Collectors.toList()));
 
 		return new Lottos(lottos);
+	}
+
+	private static boolean lessThan(BigDecimal object, BigDecimal target) {
+		return object.compareTo(target) < 0;
 	}
 
 	private static BigDecimal getUsedMoney(int numberOfManualLottoNumbers) {
