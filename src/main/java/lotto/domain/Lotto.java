@@ -1,24 +1,31 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
 
-    private static List<Integer> LOTTO_NUMBER_POOL = Arrays.asList(
+    static List<Integer> LOTTO_NUMBER_POOL = Arrays.asList(
             1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
             16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
             31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45
     );
-    private static int LOTTO_SIZE = 6;
+    static int LOTTO_SIZE = 6;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
         validateLotto();
+        Collections.sort(this.numbers);
     }
+
+    public Lotto() {
+        Collections.shuffle(LOTTO_NUMBER_POOL);
+        List<Integer> numbers = LOTTO_NUMBER_POOL.subList(0, LOTTO_SIZE);
+        this.numbers = new ArrayList<>(numbers);
+        validateLotto();
+        Collections.sort(numbers);
+    }
+
 
     private void validateLotto() {
         validateNumbers();
