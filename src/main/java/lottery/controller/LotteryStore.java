@@ -6,7 +6,6 @@ import lottery.view.ResultView;
 
 public class LotteryStore {
     public static void main(String[] args) {
-
         Price price = receiptPrice();
 
         GenerateCount generateCount = generateCount(price);
@@ -22,6 +21,10 @@ public class LotteryStore {
 
         ResultView.printToStatisticWinner();
 
+        calculateAndPrintProfit(matchCountPair);
+    }
+
+    private static void calculateAndPrintProfit(MatchCountPair matchCountPair) {
         Profit totalProfit = matchCountPair.calculateTotalProfit();
         ResultView.printMatchCountAndProfit(matchCountPair);
         ResultView.printResultProfit(totalProfit.profit());
