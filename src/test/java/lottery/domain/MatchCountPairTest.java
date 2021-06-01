@@ -26,4 +26,20 @@ class MatchCountPairTest {
                 () -> assertThat(pair.countByMatchCount(MatchCount.SIX)).isEqualTo(0)
         );
     }
+
+    @Test
+    @DisplayName("수익률을 계산한다.")
+    void calculateTotalProfit_test() {
+        //given
+        MatchCountPair pair = new MatchCountPair();
+        pair.addMatchCountPair(MatchCount.FIVE);
+        pair.addMatchCountPair(MatchCount.FOUR);
+        pair.addMatchCountPair(MatchCount.FOUR);
+
+        //when
+        int profit = pair.calculateTotalProfit();
+
+        //then
+        assertThat(profit).isEqualTo(1600000);
+    }
 }

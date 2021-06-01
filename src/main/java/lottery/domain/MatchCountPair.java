@@ -10,6 +10,8 @@ import static lottery.domain.WinnerLottery.MATCH_COUNT;
 
 public class MatchCountPair {
 
+    public static final int DEFAULT_PROFIT = 0;
+
     private ImmutableMap<MatchCount, Integer> pair;
 
     public MatchCountPair() {
@@ -30,6 +32,22 @@ public class MatchCountPair {
         Map<MatchCount, Integer> newPair = new HashMap<>(pair);
         newPair.put(matchCount, addMatchCount(pair, matchCount));
         pair = ImmutableMap.copyOf(newPair);
+    }
+
+    public int calculateTotalProfit() {
+        int totalProfit = DEFAULT_PROFIT;
+
+        for (MatchCount matchCount : pair.keySet()) {
+            Integer count = pair.get(matchCount);
+            Rank rank = Rank.valueOf(matchCount);
+            totalProfit += calculateProfit(count, rank);
+        }
+
+        return totalProfit;
+    }
+
+    private int calculateProfit(Integer count, Rank rank) {
+        return count * rank.profit();
     }
 
     private int addMatchCount(Map<MatchCount, Integer> matchCountPairs, MatchCount matchCount) {
