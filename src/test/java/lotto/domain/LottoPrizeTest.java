@@ -12,8 +12,8 @@ class LottoPrizeTest {
     @Test
     void updateStatus() {
         FIRST.updateWinningResult(FIRST.matchCount);
-        int totalWinningCount = FIRST.getTotalWinningCount();
-        long totalWinningPrize = FIRST.getTotalWinningPrize();
+        int totalWinningCount = FIRST.getWinningCount();
+        long totalWinningPrize = FIRST.getWinningPrize();
         assertThat(totalWinningCount).isEqualTo(1);
         assertThat(totalWinningPrize).isEqualTo(FIRST.matchPrize);
     }
