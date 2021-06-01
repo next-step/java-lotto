@@ -17,9 +17,6 @@ public class InputView {
         System.out.println(START_WORDING);
         String input = SCANNER.nextLine();
         int inputNumber = Integer.parseInt(input);
-        if (inputNumber <= 0) {
-            throw new RuntimeException("구매 급액은 0보다 커야합니다.");
-        }
         return new Money(inputNumber);
     }
 
