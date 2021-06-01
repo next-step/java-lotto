@@ -1,13 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
-import lotto.domain.LottoGames;
 import lotto.domain.WinningLottoNumber;
 import lotto.dto.ManuallyPurchasingLottoCount;
+import lotto.dto.ManuallyPurchasingLottoNumber;
 import lotto.dto.PurchaseMoney;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static lotto.domain.LottoNumber.valueOf;
@@ -31,18 +29,17 @@ public class LottoInputView {
         return new PurchaseMoney(requestPlayerInput());
     }
 
-    public LottoGames questionManualPurchasingLotto() {
+    public ManuallyPurchasingLottoCount questionManualPurchasingCount() {
         System.out.println(MESSAGE_MANUAL_PURCHASE_LOTTO_COUNT);
-        ManuallyPurchasingLottoCount manuallyPurchasingLottoCount = new ManuallyPurchasingLottoCount(requestPlayerInput());
+        return new ManuallyPurchasingLottoCount(requestPlayerInput());
+    }
 
+    public void questionManualPurchasingLottoNumber() {
         System.out.println(MESSAGE_MANUAL_PURCHASE_LOTTO_DETAIL);
-        List<LottoGame> lottoGames = new ArrayList<>();
-        for (int i = 0; i < manuallyPurchasingLottoCount.getValue(); i++) {
-            String manualLottoNumbers = requestPlayerInput();
-            LottoGame lottoGame = LottoGame.createManual(manualLottoNumbers);
-            lottoGames.add(lottoGame);
-        }
-        return new LottoGames(lottoGames);
+    }
+
+    public ManuallyPurchasingLottoNumber answerManualPurchasingLottoNumber() {
+        return new ManuallyPurchasingLottoNumber(requestPlayerInput());
     }
 
     public WinningLottoNumber questionLastPrizeNumber() {
