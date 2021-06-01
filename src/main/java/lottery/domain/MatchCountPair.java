@@ -36,7 +36,7 @@ public class MatchCountPair {
         return matchCountPairs.getOrDefault(matchCount, DEFAULT_MATCH_COUNT) + MATCH_COUNT;
     }
 
-    public Integer get(MatchCount index) {
+    public Integer countByMatchCount(MatchCount index) {
         return pair.get(index);
     }
 }

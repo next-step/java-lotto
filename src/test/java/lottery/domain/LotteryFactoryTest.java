@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -23,10 +22,10 @@ class LotteryFactoryTest {
         MatchCountPair pair = lotteryFactory.matchAll(lotteries, winnerLottery);
 
         assertAll(
-                () -> assertThat(pair.get(MatchCount.THREE_MATCH)).isEqualTo(0),
-                () -> assertThat(pair.get(MatchCount.FOUR_MATCH)).isEqualTo(3),
-                () -> assertThat(pair.get(MatchCount.FIVE_MATCH)).isEqualTo(0),
-                () -> assertThat(pair.get(MatchCount.SIX_MATCH)).isEqualTo(0)
+                () -> assertThat(pair.countByMatchCount(MatchCount.THREE)).isEqualTo(0),
+                () -> assertThat(pair.countByMatchCount(MatchCount.FOUR)).isEqualTo(3),
+                () -> assertThat(pair.countByMatchCount(MatchCount.FIVE)).isEqualTo(0),
+                () -> assertThat(pair.countByMatchCount(MatchCount.SIX)).isEqualTo(0)
         );
     }
 }

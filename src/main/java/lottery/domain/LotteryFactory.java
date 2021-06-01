@@ -2,7 +2,7 @@ package lottery.domain;
 
 public class LotteryFactory {
 
-    MatchCountPair matchAll(Lotteries lotteries, WinnerLottery winnerLottery) {
+    public MatchCountPair matchAll(Lotteries lotteries, WinnerLottery winnerLottery) {
         return matchAllAndAddCounts(lotteries, winnerLottery);
     }
 
