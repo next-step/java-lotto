@@ -7,6 +7,10 @@ public class StringUtils {
     private static final String DEFAULT_REGEX = "\\s*,\\s*";
     private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,###,###,###");
 
+    private StringUtils() {
+        throw new AssertionError();
+    }
+
     public static int[] csvToIntArray(String source) {
         return csvToIntArray(source, DEFAULT_REGEX);
     }
