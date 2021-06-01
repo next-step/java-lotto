@@ -27,7 +27,7 @@ public class LottoNumbersGeneratorTest {
         List<Number> numbers = lottoNumbersGenerator.generateNumber();
         assertThat(numbers.size()).isEqualTo(6);
         for (Number number : numbers) {
-            assertThat(number).isBetween(new Number(1), new Number(45));
+            assertThat(number).isBetween(Number.of(1), Number.of(45));
         }
     }
 
