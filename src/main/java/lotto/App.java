@@ -14,8 +14,8 @@ public class App {
         OutputView.outputLottoList(lottoTicket);
         String lastWeekWinNumber = InputView.getLastWeekWinNumber();
         List<Integer> winNumber = InputView.convertWinNumberStringToIntegerList(lastWeekWinNumber);
-        String bonusNumber = InputView.getBonusWinNumber();
-        lottoTicket.compareWinList(winNumber,Integer.parseInt(bonusNumber));
+        int bonusNumber = InputView.getBonusWinNumber();
+        lottoTicket.compareWinList(winNumber, bonusNumber);
         OutputView.printWinResult(lottoTicket);
     }
 }
