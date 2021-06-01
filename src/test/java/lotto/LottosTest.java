@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 	@ParameterizedTest(name = "[{index}] {0}에 당첨된 로또는 {1}개 인 당첨 결과를 반환한다")
-	@CsvSource(value = {"FIRST:1", "SECOND:1", "THIRD:3", "FOURTH:2", "FIFTH:1", "NO_MATCHED:2"}, delimiter = ':')
+	@CsvSource(value = {"FIRST:1", "SECOND:1", "THIRD:3", "FOURTH:2", "FIFTH:1", "MISS:2"}, delimiter = ':')
 	void lottosGetWinningResultTest(LottoPrizeType lottoPrizeType, int lottoCount) {
 		Lottos lottos = new Lottos(Arrays.asList(
 				new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),

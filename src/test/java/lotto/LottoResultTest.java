@@ -13,19 +13,19 @@ public class LottoResultTest {
 	void profitRateTest() {
 		LottoResult lottoResult = LottoResult.of(Arrays.asList(
 				LottoPrizeType.FIFTH,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED,
-				LottoPrizeType.NO_MATCHED));
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS,
+				LottoPrizeType.MISS));
 
 		float profitRate = lottoResult.getProfitRate();
 		assertThat(profitRate).isEqualTo(0.35f);

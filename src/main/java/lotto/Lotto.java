@@ -4,17 +4,23 @@ import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoNumberLengthException;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 	private final List<Integer> numbers;
 
 	public Lotto(List<Integer> numbers) {
-		validate(numbers);
-		this.numbers = numbers;
+		Set<Integer> numbersSet = new HashSet<>(numbers);
+		validate(numbersSet);
+		this.numbers = numbers.stream()
+				.sorted()
+				.collect(Collectors.toList());
 	}
 
-	private void validate(List<Integer> numbers) {
+	private void validate(Set<Integer> numbers) {
 		if (numbers.size() != Constants.LOTTO_NUMBERS_LENGTH) {
 			throw new InvalidLottoNumberLengthException();
 		}
