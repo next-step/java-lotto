@@ -11,6 +11,9 @@ import lotto.generator.MessageLottoNumberGenerator;
 
 public class ManualLottoStore extends LottoStore {
 
+    private static final String MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String MANUAL_AND_AUTOMATIC_COUNT_MESSAGE = "수동으로 %d장 자동으로 %d장 구매했습니다.";
+
     private final int manualCount;
     private final int automaticCount;
 
@@ -31,7 +34,7 @@ public class ManualLottoStore extends LottoStore {
     @Override
     public Ticket produceLotto() {
         List<LottoNumbers> result = new ArrayList<>(manualInputLotto());
-        OutputView.sendMessage(String.format("수동으로 %d장 자동으로 %d장 구매했습니다.", manualCount, automaticCount));
+        OutputView.sendMessage(String.format(MANUAL_AND_AUTOMATIC_COUNT_MESSAGE, manualCount, automaticCount));
         AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
         for (int i = 0; i < automaticCount; i++) {
             LottoNumbers lotto = autoGenerator.generate();
@@ -41,7 +44,7 @@ public class ManualLottoStore extends LottoStore {
     }
 
     private List<LottoNumbers> manualInputLotto() {
-        OutputView.sendMessage("수동으로 구매할 번호를 입력해 주세요.");
+        OutputView.sendMessage(MANUAL_LOTTO_COUNT_MESSAGE);
         List<LottoNumbers> result = new ArrayList<>(manualCount);
         while (result.size() < manualCount) {
             result.add(MessageLottoNumberGenerator.of(InputView.lottoNumberMessage()));
