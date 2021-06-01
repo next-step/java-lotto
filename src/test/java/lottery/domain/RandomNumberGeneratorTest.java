@@ -1,6 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
