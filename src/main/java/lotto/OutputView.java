@@ -20,7 +20,7 @@ public class OutputView {
 
     public static void outputLottoList(LottoTicket lottoTicket) {
         for (int i = 0; i < lottoTicket.getLottoSize(); i++) {
-            List<Integer> lottoNum = lottoTicket.getLottoNumWithIdx(i);
+            List<LottoNumber> lottoNum = lottoTicket.getLottoNumWithIdx(i);
             Collections.sort(lottoNum);
             System.out.println(lottoNum);
         }

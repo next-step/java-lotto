@@ -13,46 +13,37 @@ public class InputView {
     private static final String BONUS_NUMBER_WORDING = "보너스 볼을 입력해 주세요.";
 
 
-    public static int getBuyingMoney() {
+    public static Money getBuyingMoney() {
         System.out.println(START_WORDING);
         String input = SCANNER.nextLine();
         int inputNumber = Integer.parseInt(input);
         if (inputNumber <= 0) {
             throw new RuntimeException("구매 급액은 0보다 커야합니다.");
         }
-        return inputNumber;
+        return new Money(inputNumber);
     }
 
-    public static String getLastWeekWinNumber() {
+    public static WinningLotto getLastWeekWinNumber() {
         System.out.println(LAST_WEEK_WIN_NUMBER_WORDING);
         String input = SCANNER.nextLine();
-        return input;
+        return convertWinNumberStringToIntegerList(input);
     }
 
-    public static int getBonusWinNumber() {
+    public static LottoNumber getBonusWinNumber() {
         System.out.println(BONUS_NUMBER_WORDING);
         String input = SCANNER.nextLine();
         int number = Integer.parseInt(input);
-        validateLottoNumber(number);
-        return number;
+        return new LottoNumber(number);
     }
 
-    public static List<Integer> convertWinNumberStringToIntegerList(String winNumber) {
+    public static WinningLotto convertWinNumberStringToIntegerList(String winNumber) {
         String[] splitString = winNumber.split(",");
-        List<Integer> winNumberList = new ArrayList<>();
+        List<LottoNumber> winNumberList = new ArrayList<>();
         for (int i = 0; i < splitString.length; i++) {
             int number = Integer.parseInt(splitString[i]);
-            validateLottoNumber(number);
-            winNumberList.add(number);
+            winNumberList.add(new LottoNumber(number));
         }
-        return winNumberList;
+        return new WinningLotto(winNumberList);
     }
-
-    private static void validateLottoNumber(int number) {
-        if (number <= 0 || number > 45) {
-            throw new RuntimeException("로또번호는 1~45사이여야합니다.");
-        }
-    }
-
 
 }

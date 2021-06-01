@@ -17,17 +17,19 @@ public class LottoTicket {
         return lottoList;
     }
 
-    public void compareWinList(List<Integer> winList, int bonusNumber) {
+    public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
+        List winList = winningLotto.value();
         for (int i = 0; i < lottoList.size(); i++) {
             lottoList.get(i).calculateWin(winList, bonusNumber);
         }
     }
 
-    public List<Integer> getLottoNumWithIdx(int idx) {
+    public List<LottoNumber> getLottoNumWithIdx(int idx) {
         return this.lottoList.get(idx).lottoNum();
     }
 
     public int getLottoSize() {
         return this.lottoList.size();
     }
+
 }
