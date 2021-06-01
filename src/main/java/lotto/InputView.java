@@ -39,8 +39,8 @@ public class InputView {
     public static WinningLotto convertWinNumberStringToIntegerList(String winNumber) {
         String[] splitString = winNumber.split(",");
         List<LottoNumber> winNumberList = new ArrayList<>();
-        for (int i = 0; i < splitString.length; i++) {
-            int number = Integer.parseInt(splitString[i]);
+        for (String s : splitString) {
+            int number = Integer.parseInt(s);
             winNumberList.add(new LottoNumber(number));
         }
         return new WinningLotto(winNumberList);
