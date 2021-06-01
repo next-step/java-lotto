@@ -26,7 +26,7 @@ public enum LottoRanking {
         return correctCount;
     }
 
-    public static LottoRanking lottoRanking(int correctCount,  boolean bonusBall) throws IllegalArgumentException {
+    public static LottoRanking lottoRanking(int correctCount, boolean bonusBall) throws IllegalArgumentException {
 
         LottoRanking lottoRanking = Arrays.stream(LottoRanking.values())
                 .filter(lotto -> !lotto.equals(LottoRanking.MISS))

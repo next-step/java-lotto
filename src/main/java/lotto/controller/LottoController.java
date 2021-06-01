@@ -25,9 +25,7 @@ public class LottoController {
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();
-        LottoNumbers winningNumbers = new LottoNumbers(numbers);
-        int bonusBall = inputView.bonusBall();
-        LottoNumber bonusNumber = LottoNumber.valueOf(bonusBall);
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
 
         while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
             System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
@@ -35,7 +33,7 @@ public class LottoController {
         }
 
         resultView.print();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(numbers), bonusNumber);
         resultView.print(lottoResult.lottoResult(lottoNumbers, winningLotto), lottoResult.rateOfReturn(money));
     }
 
