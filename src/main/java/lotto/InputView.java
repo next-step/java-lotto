@@ -1,10 +1,10 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import calculator.Input;
 import calculator.Tokenizer;
@@ -45,12 +45,7 @@ public class InputView {
 		int manualCount = inputManualLottoCount();
 		System.out.println(MANUAL_LOTTOS_MSG);
 
-		List<Lotto> lottos = new ArrayList<>();
-
-		for(int i = 0; i < manualCount; i++) {
-			lottos.add(new Lotto(getLottoFromInput()));
-		}
-		return lottos;
+		return Stream.generate(() -> new Lotto(getLottoFromInput())).limit(manualCount).collect(Collectors.toList());
 	}
 
 	private static List<LottoNumber> getLottoFromInput() {
