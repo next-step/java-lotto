@@ -34,4 +34,13 @@ class LottoTest {
         assertThat(lotto).doesNotHaveDuplicates();
     }
 
+    @DisplayName("일치하는 로또 번호의 개수 구하기")
+    @Test
+    void getMatchCount() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int matchCount = lotto.getMatchCount(winningLotto);
+        assertThat(matchCount).isEqualTo(6);
+    }
+
 }
