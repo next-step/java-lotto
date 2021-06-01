@@ -23,10 +23,10 @@ class LotteryFactoryTest {
         MatchCountPair pair = lotteryFactory.matchAll(lotteries, winnerLottery);
 
         assertAll(
-                () -> assertThat(pair.get(3)).isEqualTo(0),
-                () -> assertThat(pair.get(4)).isEqualTo(3),
-                () -> assertThat(pair.get(5)).isEqualTo(0),
-                () -> assertThat(pair.get(6)).isEqualTo(0)
+                () -> assertThat(pair.get(MatchCount.THREE_MATCH)).isEqualTo(0),
+                () -> assertThat(pair.get(MatchCount.FOUR_MATCH)).isEqualTo(3),
+                () -> assertThat(pair.get(MatchCount.FIVE_MATCH)).isEqualTo(0),
+                () -> assertThat(pair.get(MatchCount.SIX_MATCH)).isEqualTo(0)
         );
     }
 }

@@ -11,7 +11,7 @@ public class LotteryFactory {
 
         for (Lottery lottery : lotteries.lotteries()) {
             int matchCount = winnerLottery.match(lottery.numbers());
-            matchCountPair.addMatchCountPair(matchCount);
+            matchCountPair.addMatchCountPair(MatchCount.valueOf(matchCount));
         }
 
         return matchCountPair;
