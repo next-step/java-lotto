@@ -11,11 +11,11 @@ public enum Rank {
     FIRST(MatchCount.SIX, 2000000000);
 
     private final MatchCount matchCount;
-    private final Integer price;
+    private final Integer profit;
 
-    Rank(MatchCount matchCount, Integer price) {
+    Rank(MatchCount matchCount, Integer profit) {
         this.matchCount = matchCount;
-        this.price = price;
+        this.profit = profit;
     }
 
     public static Rank valueOf(MatchCount matchCount) {
@@ -29,7 +29,7 @@ public enum Rank {
         return matchCount.getCount();
     }
 
-    public Integer price() {
-        return price;
+    public Integer profit() {
+        return profit;
     }
 }
