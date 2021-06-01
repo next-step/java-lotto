@@ -19,6 +19,11 @@ public class MessageLottoNumberGenerator implements Generator {
             .collect(Collectors.toList());
     }
 
+    public static LottoNumbers of(String message) {
+        MessageLottoNumberGenerator generator = new MessageLottoNumberGenerator(message);
+        return generator.generate();
+    }
+
     @Override
     public LottoNumbers generate() {
         Collections.sort(numbers);
