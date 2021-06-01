@@ -89,10 +89,6 @@ public class LottoGame {
 		return Math.floorDiv(assets.getAssets(), LOTTO_PRICE);
 	}
 
-	public static int getLottoPrice() {
-		return LOTTO_PRICE;
-	}
-
 	public void validatePurchasable(int count) throws AssetsNotEnoughException {
 		if (assets.getAssets() < count * LOTTO_PRICE) {
 			throw new AssetsNotEnoughException();
