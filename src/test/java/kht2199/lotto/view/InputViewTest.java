@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,7 +23,7 @@ class InputViewTest {
 	@DisplayName("당첨번호 입력에 대한 유효성 체크")
 	@MethodSource("validationLottoResultStringSource")
 	void validationLottoResultString(String input, InvalidInputError error) {
-		InputView inputView = new InputView(null);
+		InputView inputView = new InputView();
 		if (error != null) {
 			assertThatThrownBy(() -> inputView.validationLottoResultString(input))
 				.isInstanceOf(InvalidInputException.class)

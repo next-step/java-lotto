@@ -1,6 +1,5 @@
 package kht2199.lotto.entity;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
