@@ -20,13 +20,13 @@ class LotteryFactoryTest {
         LotteryFactory lotteryFactory = new LotteryFactory();
 
         //when
-        Map<Integer, Integer> matchCounts = lotteryFactory.matchAll(lotteries, winnerLottery);
+        MatchCountPair pair = lotteryFactory.matchAll(lotteries, winnerLottery);
 
         assertAll(
-                () -> assertThat(matchCounts.get(3)).isEqualTo(0),
-                () -> assertThat(matchCounts.get(4)).isEqualTo(3),
-                () -> assertThat(matchCounts.get(5)).isEqualTo(0),
-                () -> assertThat(matchCounts.get(6)).isEqualTo(0)
+                () -> assertThat(pair.get(3)).isEqualTo(0),
+                () -> assertThat(pair.get(4)).isEqualTo(3),
+                () -> assertThat(pair.get(5)).isEqualTo(0),
+                () -> assertThat(pair.get(6)).isEqualTo(0)
         );
     }
 }
