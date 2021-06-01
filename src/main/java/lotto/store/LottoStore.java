@@ -11,14 +11,19 @@ public class LottoStore {
 
     private final Budget budget;
     private final int price;
+    private final int count;
 
     public LottoStore(Budget budget, int price) {
         this.budget = budget;
         this.price = price;
+        this.count = budget.get() / price;
+        if (!isPurchasable(count)) {
+            throw new IllegalArgumentException("Lotto를 구매할 수 없는 금액 입니다");
+        }
     }
 
     public int purchaseCount() {
-        return budget.get() / price;
+        return count;
     }
 
     @Override
@@ -44,6 +49,10 @@ public class LottoStore {
             result.add(lotto);
         }
         return new Ticket(result, budget);
+    }
+
+    private static boolean isPurchasable(int count) {
+        return count >= 1;
     }
 
 }
