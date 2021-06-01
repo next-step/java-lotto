@@ -21,4 +21,9 @@ public class GenerateCount {
     public int count() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(count);
+    }
 }

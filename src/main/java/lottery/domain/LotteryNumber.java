@@ -29,4 +29,9 @@ public class LotteryNumber {
     public int hashCode() {
         return Objects.hash(lotteryNumber);
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lotteryNumber);
+    }
 }
