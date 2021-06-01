@@ -12,6 +12,12 @@ public class ResultView {
     public static final String LOTTERY_NUMBER_DELIMITER = ",";
     public static final String CLOSE_LOTTERY_NUMBERS = "]";
     public static final String OPEN_LOTTERY_NUMBERS = "[";
+    public static final String OPEN_PROFIT = "(";
+    public static final String CLOSE_PROFIT = ")";
+    public static final String LINE_DELIMITER = "-";
+    public static final String WHITE_SPACE = " ";
+    public static final int START_INDEX = 0;
+    public static final int LINE_DELIMITER_SIZE = 7;
 
     public static void printResultProfit(int profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
@@ -27,11 +33,11 @@ public class ResultView {
     }
 
     private static void printCount(int count) {
-        System.out.println("- " + count);
+        System.out.println(LINE_DELIMITER + WHITE_SPACE + count);
     }
 
     private static void pintProfit(int profit) {
-        System.out.print("(" + profit + ")");
+        System.out.print(OPEN_PROFIT + profit + CLOSE_PROFIT);
     }
 
     private static void printMatchCount(int matchCount) {
@@ -40,11 +46,22 @@ public class ResultView {
 
     public static void printToStatisticWinner() {
         ResultView.printStatisticWinnerLottery();
-        ResultView.printLines();
+        ResultView.printLinesAndLineBreak();
+    }
+
+    private static void printLinesAndLineBreak() {
+        printLines();
+        printLineBreak();
     }
 
     private static void printLines() {
-        System.out.println("-------");
+        for (int count = START_INDEX; count < LINE_DELIMITER_SIZE; count++) {
+            System.out.print(LINE_DELIMITER);
+        }
+    }
+
+    private static void printLineBreak() {
+        System.out.println();
     }
 
     private static void printStatisticWinnerLottery() {
