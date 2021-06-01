@@ -11,7 +11,7 @@ public class LottoStore {
 
     private final Budget budget;
     private final int price;
-    private final int count;
+    protected final int count;
 
     public LottoStore(Budget budget, int price) {
         this.budget = budget;
