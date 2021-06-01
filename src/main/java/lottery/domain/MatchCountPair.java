@@ -10,39 +10,33 @@ import static lottery.domain.WinnerLottery.MATCH_COUNT;
 
 public class MatchCountPair {
 
-    private static final int THREE_MATCH = 3;
-    private static final int FOUR_MATCH = 4;
-    private static final int FIVE_MATCH = 5;
-    private static final int SIX_MATCH = 6;
-
-    private ImmutableMap<Integer, Integer> pair;
+    private ImmutableMap<MatchCount, Integer> pair;
 
     public MatchCountPair() {
         this.pair = ImmutableMap.copyOf(initializeMatchCountPairs());
     }
 
-    private Map<Integer, Integer> initializeMatchCountPairs() {
-        Map<Integer, Integer> matchCountPairs = new HashMap<>();
+    private Map<MatchCount, Integer> initializeMatchCountPairs() {
+        Map<MatchCount, Integer> matchCountPairs = new HashMap<>();
 
-        matchCountPairs.put(THREE_MATCH, DEFAULT_MATCH_COUNT);
-        matchCountPairs.put(FOUR_MATCH, DEFAULT_MATCH_COUNT);
-        matchCountPairs.put(FIVE_MATCH, DEFAULT_MATCH_COUNT);
-        matchCountPairs.put(SIX_MATCH, DEFAULT_MATCH_COUNT);
+        for (MatchCount matchCount : MatchCount.values()) {
+            matchCountPairs.put(matchCount, DEFAULT_MATCH_COUNT);
+        }
 
         return matchCountPairs;
     }
 
-    void addMatchCountPair(int matchCount) {
-        Map<Integer, Integer> newPair = new HashMap<>(pair);
+    void addMatchCountPair(MatchCount matchCount) {
+        Map<MatchCount, Integer> newPair = new HashMap<>(pair);
         newPair.put(matchCount, addMatchCount(pair, matchCount));
         pair = ImmutableMap.copyOf(newPair);
     }
 
-    private int addMatchCount(Map<Integer, Integer> matchCountPairs, int matchCount) {
+    private int addMatchCount(Map<MatchCount, Integer> matchCountPairs, MatchCount matchCount) {
         return matchCountPairs.getOrDefault(matchCount, DEFAULT_MATCH_COUNT) + MATCH_COUNT;
     }
 
-    public Integer get(int index) {
+    public Integer get(MatchCount index) {
         return pair.get(index);
     }
 }

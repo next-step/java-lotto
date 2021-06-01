@@ -15,15 +15,15 @@ class MatchCountPairTest {
         MatchCountPair pair = new MatchCountPair();
 
         //when
-        pair.addMatchCountPair(3);
-        pair.addMatchCountPair(4);
+        pair.addMatchCountPair(MatchCount.THREE_MATCH);
+        pair.addMatchCountPair(MatchCount.FOUR_MATCH);
 
         //then
         assertAll(
-                () -> assertThat(pair.get(3)).isEqualTo(1),
-                () -> assertThat(pair.get(4)).isEqualTo(1),
-                () -> assertThat(pair.get(5)).isEqualTo(0),
-                () -> assertThat(pair.get(6)).isEqualTo(0)
+                () -> assertThat(pair.get(MatchCount.THREE_MATCH)).isEqualTo(1),
+                () -> assertThat(pair.get(MatchCount.FOUR_MATCH)).isEqualTo(1),
+                () -> assertThat(pair.get(MatchCount.FIVE_MATCH)).isEqualTo(0),
+                () -> assertThat(pair.get(MatchCount.SIX_MATCH)).isEqualTo(0)
         );
     }
 }
