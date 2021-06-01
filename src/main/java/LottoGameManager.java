@@ -10,7 +10,7 @@ import lotto.store.Ticket;
 
 public class LottoGameManager {
 
-    private static final int LOTTO_PRICE_PER = 1_000;
+    protected static final int LOTTO_PRICE_PER = 1_000;
 
     protected LottoGameManager() {
     }
