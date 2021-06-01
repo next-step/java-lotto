@@ -55,6 +55,14 @@ public class LottoResultTest {
         assertThat(result.get(LottoRanking.THIRD).equals(1)).isTrue();
     }
 
+    @Test
+    @DisplayName("2등 결과 확인")
+    public void secondRanking() {
+        buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,7"));
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
+        assertThat(result.get(LottoRanking.SECOND).equals(1)).isTrue();
+    }
+
 
     @Test
     @DisplayName("1등 결과 확인")
