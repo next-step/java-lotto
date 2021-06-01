@@ -44,7 +44,7 @@ class PurchaseMoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3000:2","4000:3"}, delimiterString = ":")
+    @CsvSource(value = {"3000:2", "4000:3"}, delimiterString = ":")
     @DisplayName("minus_정상")
     void minus_정상(int purchaseMoneyValue, String manuallyPurchasingLottoCountValue) {
         // Given
@@ -56,7 +56,7 @@ class PurchaseMoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"3000:4","4000:5"}, delimiterString = ":")
+    @CsvSource(value = {"3000:4", "4000:5"}, delimiterString = ":")
     @DisplayName("minus_예외")
     void minus_예외(int purchaseMoneyValue, String manuallyPurchasingLottoCountValue) {
         // Given
