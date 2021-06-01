@@ -12,10 +12,12 @@ import lotto.generator.MessageLottoNumberGenerator;
 public class ManualLottoStore extends LottoStore {
 
     private final int manualCount;
+    private final int automaticCount;
 
     public ManualLottoStore(Budget budget, int price, int manualCount) {
         super(budget, price);
         this.manualCount = manualCount;
+        this.automaticCount = count - manualCount;
         valid(budget, price, manualCount);
     }
 
@@ -29,9 +31,9 @@ public class ManualLottoStore extends LottoStore {
     @Override
     public Ticket produceLotto() {
         List<LottoNumbers> result = new ArrayList<>(manualInputLotto());
-        OutputView.sendMessage(String.format("수동으로 %d장 자동으로 %d장 구매했습니다.", manualCount, purchaseCount() - manualCount));
+        OutputView.sendMessage(String.format("수동으로 %d장 자동으로 %d장 구매했습니다.", manualCount, automaticCount));
         AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
-        for (int i = 0; i < purchaseCount() - manualCount; i++) {
+        for (int i = 0; i < automaticCount; i++) {
             LottoNumbers lotto = autoGenerator.generate();
             result.add(lotto);
         }
