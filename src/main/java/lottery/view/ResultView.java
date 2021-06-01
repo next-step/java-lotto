@@ -13,8 +13,8 @@ public class ResultView {
     public static final String CLOSE_LOTTERY_NUMBERS = "]";
     public static final String OPEN_LOTTERY_NUMBERS = "[";
 
-    public static void printResultProfit() {
-        System.out.println("총 수익률은 입니다.");
+    public static void printResultProfit(int profit) {
+        System.out.println("총 수익률은 " + profit + "입니다.");
     }
 
     public static void printMatchCountAndProfit(MatchCountPair matchCountPair) {
