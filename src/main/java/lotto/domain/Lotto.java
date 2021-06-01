@@ -26,6 +26,12 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
+    public int getMatchCount(Lotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(winningLotto.numbers::contains)
+                .count();
+    }
+
     private void validateLotto() {
         validateNumbers();
         validateDuplicate();
