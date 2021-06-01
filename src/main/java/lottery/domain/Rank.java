@@ -5,10 +5,10 @@ import java.util.Arrays;
 public enum Rank {
 
     FAIL(MatchCount.ZERO, 0),
-    FIFTH(MatchCount.THREE, 5000),
-    THIRD(MatchCount.FOUR, 50000),
-    SECOND(MatchCount.FIVE, 1500000),
-    FIRST(MatchCount.SIX, 2000000000);
+    FIFTH(MatchCount.THREE, 5_000),
+    THIRD(MatchCount.FOUR, 50_000),
+    SECOND(MatchCount.FIVE, 1_500_000),
+    FIRST(MatchCount.SIX, 2000_000_000);
 
     private final MatchCount matchCount;
     private final Integer profit;
@@ -26,7 +26,7 @@ public enum Rank {
     }
 
     public int matchCount() {
-        return matchCount.getCount();
+        return matchCount.count();
     }
 
     public Integer profit() {
