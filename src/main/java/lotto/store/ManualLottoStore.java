@@ -33,7 +33,9 @@ public class ManualLottoStore extends LottoStore {
 
     @Override
     public Ticket produceLotto() {
-        List<LottoNumbers> result = new ArrayList<>(manualInputLotto());
+        List<LottoNumbers> result = new ArrayList<>(count);
+        result.addAll(manualInputLotto());
+
         OutputView.sendMessage(String.format(MANUAL_AND_AUTOMATIC_COUNT_MESSAGE, manualCount, automaticCount));
         AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
         for (int i = 0; i < automaticCount; i++) {
