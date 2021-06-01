@@ -1,7 +1,9 @@
-import ui.Calculator;
+import ui.LottoController;
 
 public class Application {
-	public static void main (String[] args) {
-		Calculator.powerOn();
-	}
+  private static final LottoController lotto = new LottoController();
+
+    public static void main(String[] args) {
+        lotto.insertMoney();
+    }
 }
