@@ -39,10 +39,15 @@ public class ResultView {
     }
 
     private String resultString(LottoRanking lottoRanking, int count) {
+        if (lottoRanking.equals(LottoRanking.SECOND)) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", lottoRanking.getCorrectCount(), lottoRanking.getPrice(), count);
+        }
+
         return String.format("%d개 일치 (%d원)- %d개\n", lottoRanking.getCorrectCount(), lottoRanking.getPrice(), count);
     }
 
     private String rateResultString(float rateOfReturn) {
-        return String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임", String.format("%.2f", rateOfReturn), LottoResultMessage.message(rateOfReturn));
+        return String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임",
+                String.format("%.2f", rateOfReturn), LottoResultMessage.message(rateOfReturn));
     }
 }

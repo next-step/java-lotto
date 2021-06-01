@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -49,5 +50,10 @@ public class LottoMachine {
                 .sorted(Comparator.comparing(LottoNumber::number))
                 .collect(Collectors.collectingAndThen(Collectors.toSet(), LottoNumbers::new));
 
+    }
+
+    public boolean useAbleBonusBall(String numbers, LottoNumber bonusBall) {
+        return Arrays.stream(numbers.split(","))
+                .noneMatch(bonusBall::isSameNumber);
     }
 }

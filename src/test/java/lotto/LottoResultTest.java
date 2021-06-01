@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.LottoMachine;
-import lotto.model.LottoNumbers;
-import lotto.model.LottoRanking;
-import lotto.model.LottoResult;
+import lotto.model.*;
 import lotto.view.LottoResultMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +19,7 @@ public class LottoResultTest {
     LottoResult lottoResult;
     LottoNumbers winningNumbers;
     List<LottoNumbers> buyLottoNumbers;
+    WinningLotto winningLotto;
 
     @BeforeEach
     public void setup(){
@@ -29,13 +27,14 @@ public class LottoResultTest {
         lottoResult = new LottoResult();
         winningNumbers = new LottoNumbers("1,2,3,4,5,6");
         buyLottoNumbers = new ArrayList<>();
+        winningLotto = new WinningLotto(winningNumbers, LottoNumber.valueOf(7));
     }
 
     @Test
     @DisplayName("5등 결과 확인")
     public void fifthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,10,20,30"));
-        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
         assertThat(result.get(LottoRanking.FIFTH).equals(1)).isTrue();
     }
 
@@ -43,7 +42,7 @@ public class LottoResultTest {
     @DisplayName("4등 결과 확인")
     public void fourthRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,10,20"));
-        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
         assertThat(result.get(LottoRanking.FOURTH).equals(1)).isTrue();
 
     }
@@ -52,8 +51,16 @@ public class LottoResultTest {
     @DisplayName("3등 결과 확인")
     public void thirdRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,10"));
-        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
         assertThat(result.get(LottoRanking.THIRD).equals(1)).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 결과 확인")
+    public void secondRanking() {
+        buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,7"));
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
+        assertThat(result.get(LottoRanking.SECOND).equals(1)).isTrue();
     }
 
 
@@ -61,7 +68,7 @@ public class LottoResultTest {
     @DisplayName("1등 결과 확인")
     public void firstRanking() {
         buyLottoNumbers.add(new LottoNumbers("1,2,3,4,5,6"));
-        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningNumbers);
+        Map<LottoRanking, Integer> result = lottoResult.lottoResult(buyLottoNumbers, winningLotto);
         assertThat(result.get(LottoRanking.FIRST).equals(1)).isTrue();
 
     }

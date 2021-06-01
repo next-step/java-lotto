@@ -32,11 +32,11 @@ public class LottoNumbers {
         }
     }
 
-    public TreeSet<LottoNumber> lottoNumbers(){
+    public TreeSet<LottoNumber> lottoNumbers() {
         return lottoNumbers;
     }
 
-    public void removeAll(LottoNumbers lottoNumbers){
+    public void removeAll(LottoNumbers lottoNumbers) {
         this.lottoNumbers.removeAll(lottoNumbers.lottoNumbers);
     }
 

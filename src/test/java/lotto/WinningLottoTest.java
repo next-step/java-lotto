@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.model.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ public class WinningLottoTest {
 
     @BeforeEach
     public void setup(){
-        winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,6"));
+        winningLotto = new WinningLotto(new LottoNumbers("1,2,3,4,5,6"), LottoNumber.valueOf(7));
     }
 
     @Test
@@ -36,6 +37,14 @@ public class WinningLottoTest {
     public void thirdRanking() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,10");
         assertThat(winningLotto.correctCount(lottoNumbers) == 5).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 결과 확인")
+    public void secondRanking() {
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,7");
+        assertThat(winningLotto.correctCount(lottoNumbers) == 5).isTrue();
+        assertThat(winningLotto.matchedBonusBall(lottoNumbers)).isTrue();
     }
 
     @Test

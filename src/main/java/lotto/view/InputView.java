@@ -26,4 +26,17 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
+
+    public int bonusBall() {
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException inputMismatchException) {
+            System.out.println("보너스 볼은 정수만 입력 가능합니다.");
+            scanner = new Scanner(System.in);
+            return bonusBall();
+        }
+    }
 }

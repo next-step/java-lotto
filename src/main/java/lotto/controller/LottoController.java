@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.model.LottoMachine;
-import lotto.model.LottoNumbers;
-import lotto.model.LottoResult;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,10 +24,17 @@ public class LottoController {
         List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(lottoMachine.buyCount(money));
         resultView.print(lottoNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(inputView.numbers());
+        String numbers = inputView.numbers();
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
+
+        while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
+            System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
+            bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
+        }
 
         resultView.print();
-        resultView.print(lottoResult.lottoResult(lottoNumbers, winningNumbers), lottoResult.rateOfReturn(money));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(numbers), bonusNumber);
+        resultView.print(lottoResult.lottoResult(lottoNumbers, winningLotto), lottoResult.rateOfReturn(money));
     }
 
 }

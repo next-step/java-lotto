@@ -21,10 +21,10 @@ public class LottoResult {
         }
     }
 
-    public Map<LottoRanking, Integer> lottoResult(List<LottoNumbers> purchaseLottoNumbers, LottoNumbers winningNumbers) {
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+    public Map<LottoRanking, Integer> lottoResult(List<LottoNumbers> purchaseLottoNumbers, WinningLotto winningLotto) {
         for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
-            addLottoRankingCount(LottoRanking.lottoRanking(winningLotto.correctCount(purchaseLottoNumber)));
+            addLottoRankingCount(LottoRanking.lottoRanking(winningLotto.correctCount(purchaseLottoNumber),
+                    winningLotto.matchedBonusBall(purchaseLottoNumber)));
         }
 
         return this.lottoResult;
