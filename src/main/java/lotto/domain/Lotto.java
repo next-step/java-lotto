@@ -19,6 +19,13 @@ public final class Lotto {
         checkValid();
     }
 
+    public Lotto(List<Integer> numbers) {
+        for(Integer number : numbers){
+            lottoNumbers.add(Number.of(number));
+        }
+        checkValid();
+    }
+
     private void checkValid() {
         checkLottoSize();
         checkLottoDuplicateNumbers();

@@ -22,7 +22,7 @@ public final class InputView {
         Number[] numbers = new Number[receiveNumbers.length];
         for (int i = 0; i < receiveNumbers.length; i++) {
             validate(receiveNumbers[i]);
-            numbers[i] = new Number(Integer.parseInt(receiveNumbers[i]));
+            numbers[i] = Number.of(receiveNumbers[i]);
         }
         return new Lotto(numbers);
     }
@@ -30,7 +30,7 @@ public final class InputView {
     public static Number receiveBonusNumber() {
         String bonusNumber = SCANNER.nextLine();
         validate(bonusNumber);
-        return new Number(Integer.parseInt(bonusNumber));
+        return Number.of(bonusNumber);
     }
 
     public static void validate(String input) {
