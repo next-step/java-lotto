@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum LottoWin {
     FIRST_PLACE(6, 2000000000),
     SECOND_PLACE(5, 30000000),
@@ -25,21 +27,20 @@ public enum LottoWin {
     }
 
     public static LottoWin valueOf(int matchNum, boolean matchBonus) {
-        if (matchNum == FIRST_PLACE.matchNum) {
-            return FIRST_PLACE;
+        return Arrays.stream(LottoWin.values())
+                .filter(v -> {
+                    return lottoWinBonusFilter(v, matchNum, matchBonus);
+                }).findFirst()
+                .orElse(LAST_PLACE);
+    }
+
+    private static boolean lottoWinBonusFilter(LottoWin lottoWin, int matchNum, boolean matchBonus) {
+        if (lottoWin == SECOND_PLACE) {
+            return matchNum == lottoWin.matchNum && matchBonus;
         }
-        if (matchNum == SECOND_PLACE.matchNum && matchBonus) {
-            return SECOND_PLACE;
+        if (lottoWin == THIRD_PLACE) {
+            return matchNum == lottoWin.matchNum && !matchBonus;
         }
-        if (matchNum == THIRD_PLACE.matchNum) {
-            return THIRD_PLACE;
-        }
-        if (matchNum == FOURTH_PLACE.matchNum) {
-            return FOURTH_PLACE;
-        }
-        if (matchNum == FIFTH_PLACE.matchNum) {
-            return FIFTH_PLACE;
-        }
-        return LAST_PLACE;
+        return matchNum == lottoWin.matchNum;
     }
 }
