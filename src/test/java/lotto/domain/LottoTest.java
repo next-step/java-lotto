@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,6 +24,14 @@ class LottoTest {
     void duplicateNumbers() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 1, 1, 1, 1, 1)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호 랜덤으로 생성")
+    @Test
+    void createRandomLotto() {
+        List<Integer> lotto = new Lotto().getNumbers();
+        assertThat(lotto).hasSize(LOTTO_SIZE);
+        assertThat(lotto).doesNotHaveDuplicates();
     }
 
 }
