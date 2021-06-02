@@ -24,5 +24,4 @@ class LottoRandomNumberTest {
 						randomNumbers.get(5)
 				);
 	}
-
 }

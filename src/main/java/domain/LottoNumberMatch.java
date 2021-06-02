@@ -5,8 +5,7 @@ import ui.Rank;
 import java.util.List;
 
 public class LottoNumberMatch {
-	private LottoNumberMatch () {
-	}
+	private LottoNumberMatch () { }
 
 	public static Integer matchCount (List<Integer> winNumber, Lotto lotto) {
 		int matchCount = 0;
@@ -16,7 +15,6 @@ public class LottoNumberMatch {
 
 		return lotto.rank(Rank.valueOf(matchCount)).countOfMatch();
 	}
-
 	public static Boolean matchBonus (int bonusBall, Lotto lotto) {
 		if (lotto.numbers().contains(bonusBall)) {
 			return Boolean.TRUE;
