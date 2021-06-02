@@ -3,36 +3,37 @@ package lotto.domain;
 import lotto.input.PurchaseAmountQuantity;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public final class LottoSeller {
 
-  private final NumberGenerator numberGenerator;
-
-  public LottoSeller(NumberGenerator numberGenerator) {
-    this.numberGenerator = numberGenerator;
-  }
-
   public LottoBucket getLottoBucketBy(PurchaseAmountQuantity purchaseAmountQuantity) {
-    ArrayList<Lotto> lottos = getManualLottosFrom(purchaseAmountQuantity);
-    addAutoLottos(purchaseAmountQuantity, lottos);
+    List<Lotto> manualLottos = getManualLottosFrom(purchaseAmountQuantity);
+    List<Lotto> autoLottos = getAutoLottosFrom(purchaseAmountQuantity);
 
-    return new LottoBucket(lottos);
+    return new LottoBucket(
+        Stream
+            .concat(manualLottos.stream(), autoLottos.stream())
+            .collect(Collectors.toList())
+    );
   }
 
-  private ArrayList<Lotto> getManualLottosFrom(PurchaseAmountQuantity purchaseAmountQuantity) {
+  private List<Lotto> getManualLottosFrom(PurchaseAmountQuantity purchaseAmountQuantity) {
     return purchaseAmountQuantity
         .getManualLottoNumbers()
         .stream()
-        .map(Lotto::new)
+        .map(inputManualNumber -> new Lotto(new ManualNumberGenerator(inputManualNumber)))
         .collect(Collectors.toCollection(ArrayList::new));
   }
 
-  private void addAutoLottos(PurchaseAmountQuantity purchaseAmountQuantity, ArrayList<Lotto> lottos) {
-    IntStream
+  private List<Lotto> getAutoLottosFrom(PurchaseAmountQuantity purchaseAmountQuantity) {
+    return IntStream
         .range(0, purchaseAmountQuantity.getAutoCount())
-        .mapToObj(quantity -> new Lotto(numberGenerator))
-        .forEach(lottos::add);
+        .mapToObj(quantity -> new Lotto(new RandomNumberGenerator(new Random())))
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 }
