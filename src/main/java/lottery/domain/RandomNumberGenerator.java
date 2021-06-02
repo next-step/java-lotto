@@ -6,16 +6,13 @@ import java.util.List;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
-    private static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final int LOTTERY_LENGTH = 6;
-    public static final int MINIMUM_LOTTERY_NUMBER = 1;
     public static final int START_INDEX = 0;
+    private static final List<Integer> LOTTERY_NUMBERS = generateAllLotteryNumbers();
 
     @Override
     public List<Integer> generate() {
-        List<Integer> numbers = generateAllNumbers();
-
-        return generateSortedRandomNumbers(numbers);
+        return generateSortedRandomNumbers(LOTTERY_NUMBERS);
     }
 
     private List<Integer> generateSortedRandomNumbers(List<Integer> numbers) {
@@ -32,13 +29,13 @@ public class RandomNumberGenerator implements NumberGenerator {
         return new ArrayList<>(numbers.subList(START_INDEX, LOTTERY_LENGTH));
     }
 
-    private List<Integer> generateAllNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private static List<Integer> generateAllLotteryNumbers() {
+        List<Integer> lotteryNumbers = new ArrayList<>();
 
-        for (int number = MINIMUM_LOTTERY_NUMBER; number <= MAXIMUM_LOTTERY_NUMBER; number++) {
-            numbers.add(number);
+        for (int number = LotteryNumber.MINIMUM; number <= LotteryNumber.MAXIMUM; number++) {
+            lotteryNumbers.add(number);
         }
 
-        return numbers;
+        return lotteryNumbers;
     }
 }
