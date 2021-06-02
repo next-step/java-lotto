@@ -19,8 +19,8 @@ public class LottoTicket {
 
     public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<LottoNumber> winList = winningLotto.value();
-        for (int i = 0; i < lottoList.size(); i++) {
-            lottoList.get(i).calculateWin(winList, bonusNumber);
+        for (Lotto lotto : lottoList) {
+            lotto.calculateWin(winList, bonusNumber);
         }
     }
 
