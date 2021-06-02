@@ -34,10 +34,6 @@ public class LottoList {
 		return list.isEmpty();
 	}
 
-	public List<Lotto> getList() {
-		return list;
-	}
-
 	public int size() {
 		return list.size();
 	}
