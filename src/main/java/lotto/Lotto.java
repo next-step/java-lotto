@@ -36,19 +36,19 @@ public class Lotto {
     private int countWin(List<LottoNumber> winList) {
         int winNum = 0;
         for (int i = 0; i < winList.size(); i++) {
-            winNum += this.getWinCount(winList.get(i).value());
+            winNum += this.getWinCount(winList.get(i));
         }
         return winNum;
     }
 
-    private int getWinCount(int targetNum) {
+    private int getWinCount(LottoNumber targetNum) {
         if (this.isWinNumber(targetNum)) {
             return 1;
         }
         return 0;
     }
 
-    private boolean isWinNumber(int targetNum) {
+    private boolean isWinNumber(LottoNumber targetNum) {
         return this.lottoNum.contains(targetNum);
     }
 
