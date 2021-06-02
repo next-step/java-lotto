@@ -34,9 +34,7 @@ public class LottoMachine {
     }
 
     public Lottos lottoNumbers(List<String> manualLotto, int autoBuyCount) {
-        List<LottoNumbers> manualLottoNumbers = manualLottoNumbers(manualLotto);
-        List<LottoNumbers> autoLottoNumbers = autoLottoNumbers(autoBuyCount);
-        return new Lottos(manualLottoNumbers, autoLottoNumbers);
+        return new Lottos(manualLottoNumbers(manualLotto), autoLottoNumbers(autoBuyCount));
     }
 
     public int buyCount(int money) {
