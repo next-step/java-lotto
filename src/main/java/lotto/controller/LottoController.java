@@ -28,7 +28,7 @@ public class LottoController {
         LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
 
         while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
-            System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
+            resultView.printBonusBallError();
             bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
         }
 

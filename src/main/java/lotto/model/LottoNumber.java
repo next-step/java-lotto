@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 import static lotto.common.LottoConstants.*;
 
 public class LottoNumber {
-    private static final String NUMERIC_CHECK_REGEX = "-?\\d+(\\.\\d+)?";
-
     private final int number;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
@@ -29,8 +27,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(String number) {
-        validateNumeric(number);
-        return valueOf(Integer.parseInt(number));
+        return valueOf(validateAndParseInt(number));
     }
 
     private static void validateLottoNumber(int lottoNumber) {
@@ -39,14 +36,24 @@ public class LottoNumber {
         }
     }
 
-    private static void validateNumeric(String lottoNumber) {
-        if (!lottoNumber.matches(NUMERIC_CHECK_REGEX)) {
+    private static int validateAndParseInt(String lottoNumber) {
+        int number;
+
+        try {
+            number = Integer.parseInt(lottoNumber);
+        } catch (Exception e) {
             throw new WrongNumberException();
         }
+
+        return number;
     }
 
     public boolean isSameNumber(String numberString) {
         return this.number == Integer.parseInt(numberString);
+    }
+
+    public boolean isSameNumber(int number) {
+        return this.number == number;
     }
 
     public int number() {

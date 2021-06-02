@@ -19,6 +19,10 @@ public class ResultView {
         System.out.println();
     }
 
+    public void printBonusBallError(){
+        System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
+    }
+
     public void print() {
         System.out.println();
         System.out.println("당첨 통계");
@@ -26,7 +30,6 @@ public class ResultView {
     }
 
     public void print(Map<LottoRanking, Integer> lottoResult, float rateOfReturn) {
-        ;
         System.out.println(new StringBuilder().append(rankingPrintInfo(lottoResult)).append(rateResultString(rateOfReturn)));
     }
 
