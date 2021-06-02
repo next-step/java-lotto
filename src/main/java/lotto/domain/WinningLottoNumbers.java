@@ -60,7 +60,7 @@ public class WinningLottoNumbers {
         return 0;
     }
 
-    public ResultScoreEnum matchLottoNumbers(LottoNumbers lottoNumbers) {
+    public MatchStatusOfALotto matchLottoNumbers(LottoNumbers lottoNumbers) {
         int sameNumberCount = 0;
         boolean isSameBonusNumber = false;
 
@@ -71,7 +71,8 @@ public class WinningLottoNumbers {
 
         MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(sameNumberCount, isSameBonusNumber);
 
-        return matchStatusOfALotto.getResultScore();
+        return matchStatusOfALotto;
+        //return matchStatusOfALotto.getResultScore();
     }
 
     private int increaseIfSameNumber(LottoNo targetLottoNo, int sameNumberCount) {

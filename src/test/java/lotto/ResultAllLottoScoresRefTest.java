@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.MatchStatusOfALotto_ref;
 import lotto.domain.ResultAllLottoScores_ref;
 import lotto.domain.ResultScoreEnum_ref;
-import lotto.domain.MatchStatusOfALotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

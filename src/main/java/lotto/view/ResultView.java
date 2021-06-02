@@ -1,32 +1,27 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbersList_ref;
-import lotto.domain.ResultAllLottoScores_ref;
-import lotto.domain.ResultScoreEnum_ref;
+import lotto.domain.*;
 
 public class ResultView {
-    public void printPurchasedCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public void printPurchasedCount(int manualCount, int autoCount, LottoNumbersList lottoNumbersList) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount +"개를 구매했습니다.");
+        lottoNumbersList.foreach((x) -> System.out.println(x.showLottoNoList()));
     }
 
-    public void printPurchasedLottos(LottoNumbersList_ref lottoNumbersListRef) {
-        lottoNumbersListRef.foreach((x) -> System.out.println(x.getLottoNumbers()));
-    }
-
-    public void printLottoGameResult(ResultAllLottoScores_ref resultAllLottoScoresRef, int inputPurchaseAmount) {
+    public void printLottoGameResult(ResultAllLottoScores resultAllLottoScores, int inputPurchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        ResultScoreEnum_ref resultScoreEnumRef[] = ResultScoreEnum_ref.values();
-        for (ResultScoreEnum_ref state : resultScoreEnumRef) {
-            state.printResult(resultAllLottoScoresRef.result().get(state));
+        ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
+        for (ResultScoreEnum state : resultScoreEnum) {
+            state.printResult(resultAllLottoScores.result().get(state));
         }
 
-        printYield(resultAllLottoScoresRef, inputPurchaseAmount);
+        printYield(resultAllLottoScores, inputPurchaseAmount);
     }
 
-    private void printYield(ResultAllLottoScores_ref resultAllLottoScoresRef, int inputPurchaseAmount) {
-        float yield = resultAllLottoScoresRef.yield(inputPurchaseAmount);
-        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
+    private void printYield(ResultAllLottoScores resultAllLottoScores, int inputPurchaseAmount) {
+        float yield = resultAllLottoScores.yield(inputPurchaseAmount);
+        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다. (기준이 1이기 떄문에 결과적으로 손해라는 의미임");
     }
 
 }

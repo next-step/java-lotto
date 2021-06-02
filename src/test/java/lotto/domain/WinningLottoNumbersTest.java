@@ -32,7 +32,8 @@ public class WinningLottoNumbersTest {
         int[] numbers = {1,2,3,4,5,7};
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
-        assertThat(winningLottoNumbers.matchLottoNumbers(lottoNumbers)).isEqualTo(ResultScoreEnum.SECOND);
+        MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(5, true);
+        assertThat(winningLottoNumbers.matchLottoNumbers(lottoNumbers)).isEqualTo(matchStatusOfALotto);
     }
 
 

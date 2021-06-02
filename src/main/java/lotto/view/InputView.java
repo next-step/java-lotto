@@ -29,9 +29,9 @@ public class InputView {
         return inputAmount;
     }
 
-    public void inputLastWonLottoNumbers() {
-        System.out.println(MessageCode.INPUT_LAST_WON_LOTTO_NUMBERS.message());
-        inputLastWonLottoNumber = scan.next();
+    public String inputWinningLottoNumbers() {
+        System.out.println(MessageCode.INPUT_WINNING_LOTTO_NUMBERS.message());
+        return scan.next();
     }
 
     public String getInputLastWonLottoNumbers() {
@@ -42,13 +42,14 @@ public class InputView {
         return inputBonusNumber;
     }
 
-    public void inputBonusLottoNumber() {
-        System.out.println(MessageCode.INPUT_LAST_WON_BONUS_NUMBER.message());
-        inputBonusNumber = scan.next();
+    public String inputBonusLottoNumber() {
+        System.out.println(MessageCode.INPUT_BONUS_NUMBER.message());
+        return scan.next();
     }
 
     public LottoNumbers[] inputManualLottoNumbers(int manualBuyLottoCount) {
-        String [] manualLottoNumbers = {};
+        System.out.println(MessageCode.INPUT_MANUAL_LOTTO_NUMBERS.message());
+        String [] manualLottoNumbers = new String[manualBuyLottoCount];
         for(int i=0; i<manualBuyLottoCount; i++)
             manualLottoNumbers[i] = scan.next();
 
