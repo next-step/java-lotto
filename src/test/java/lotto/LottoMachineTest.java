@@ -21,7 +21,7 @@ class LottoMachineTest {
 	@CsvSource({ "1000,1", "15000,15", "500,0" })
 	void purchaseLotto(int money, int expected) {
 		LottoMachine lottoMachine = new LottoMachine(money, Collections.emptyList());
-		assertThat(lottoMachine.getPurchasedAutoLotto().lottoCount()).isEqualTo(expected);
+		assertThat(lottoMachine.purchasedAutoLottoCount()).isEqualTo(expected);
 	}
 
 	@DisplayName("자동 로또 수는 최대 구매 가능한 수에 수동으로 구매한 로또 수를 제한 만큼이다.")
@@ -29,7 +29,7 @@ class LottoMachineTest {
 	@MethodSource("generateData")
 	void purchaseLotto(List<Lotto> manualLotto, int money, int expected) {
 		LottoMachine lottoMachine = new LottoMachine(money, manualLotto);
-		assertThat(lottoMachine.getPurchasedAutoLotto().lottoCount()).isEqualTo(expected);
+		assertThat(lottoMachine.purchasedAutoLottoCount()).isEqualTo(expected);
 	}
 
 	@DisplayName("수동 로또 수는 최대 구매 가능한 수를 넘을 수는 없다.")

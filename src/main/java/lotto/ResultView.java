@@ -29,11 +29,9 @@ public class ResultView {
 	}
 
 	public static void printPurchaseResult(LottoMachine lottoMachine) {
-		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT,
-			lottoMachine.getPurchasedManualLotto().lottoCount(),
-			lottoMachine.getPurchasedAutoLotto().lottoCount());
-		lottoMachine.getPurchasedManualLotto().getLottos().forEach(lotto -> ResultView.print(lotto.toString()));
-		lottoMachine.getPurchasedAutoLotto().getLottos().forEach(lotto -> ResultView.print(lotto.toString()));
+		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, lottoMachine.purchasedManualLottoCount(), lottoMachine.purchasedAutoLottoCount());
+		ResultView.print(lottoMachine.printAutoLotto());
+		ResultView.print(lottoMachine.printManualLotto());
 	}
 
 	private static String matchingCountMessage(LottoPrize lottoPrize) {

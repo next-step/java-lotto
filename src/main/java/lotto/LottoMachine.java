@@ -23,12 +23,12 @@ public class LottoMachine {
 		purchase(money, manualLottos);
 	}
 
-	public Lottos getPurchasedAutoLotto() {
-		return purchasedAutoLotto;
+	public int purchasedAutoLottoCount() {
+		return purchasedAutoLotto.lottoCount();
 	}
 
-	public Lottos getPurchasedManualLotto() {
-		return purchasedManualLotto;
+	public int purchasedManualLottoCount() {
+		return purchasedManualLotto.lottoCount();
 	}
 
 	public Lottos getPurchasedLotto() {
@@ -64,5 +64,13 @@ public class LottoMachine {
 
 	private Lotto generateLotto() {
 		return new Lotto(getRandomLottoNumber());
+	}
+
+	public String printAutoLotto() {
+		return this.purchasedAutoLotto.toString();
+	}
+
+	public String printManualLotto() {
+		return this.purchasedManualLotto.toString();
 	}
 }
