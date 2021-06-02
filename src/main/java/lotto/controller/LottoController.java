@@ -4,37 +4,54 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoController {
 
-    public void lotto() {
+    private final InputView inputView = new InputView();
+    private final ResultView resultView = new ResultView();
+    private final LottoMachine lottoMachine = new LottoMachine();
 
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-        LottoMachine lottoMachine = new LottoMachine();
+    public void lotto() {
         LottoResult lottoResult = new LottoResult();
 
-        int money = inputView.money();
-        while (!lottoMachine.validateMoney(money)) {
-            System.out.println("금액을 천원 단위로 입력 하세요.");
-            money = inputView.money();
-        }
+        int money = moneyInput();
 
-        List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(lottoMachine.buyCount(money));
+        int buyCount = lottoMachine.buyCount(money);
+        int manualBuyCount = inputView.manualBuyCount();
+        int autoBuyCount = buyCount - manualBuyCount;
+        lottoMachine.buyCountValid(buyCount, manualBuyCount);
+
+        Lottos lottoNumbers = lottoMachine.lottoNumbers(inputView.manualBuy(manualBuyCount), autoBuyCount);
+
+        resultView.print(manualBuyCount, autoBuyCount);
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();
-        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
-
-        while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
-            System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
-            bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
-        }
+        LottoNumber bonusNumber = bonusNumber(numbers);
 
         resultView.print();
         WinningLotto winningLotto = new WinningLotto(new LottoNumbers(numbers), bonusNumber);
         resultView.print(lottoResult.lottoResult(lottoNumbers, winningLotto), lottoResult.rateOfReturn(money));
+    }
+
+    private int moneyInput() {
+        int money = inputView.money();
+
+        while (!lottoMachine.validateMoney(money)) {
+            resultView.printInputMoneyError();
+            money = inputView.money();
+        }
+
+        return money;
+    }
+
+    private LottoNumber bonusNumber(String numbers) {
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
+
+        while (!lottoMachine.useAbleBonusBall(numbers, bonusNumber)) {
+            resultView.printBonusBallError();
+            bonusNumber = LottoNumber.valueOf(inputView.bonusBall());
+        }
+        return bonusNumber;
     }
 
 }

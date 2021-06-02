@@ -2,21 +2,33 @@ package lotto.view;
 
 import lotto.model.LottoNumbers;
 import lotto.model.LottoRanking;
+import lotto.model.Lottos;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void print(List<LottoNumbers> lottoNumbers) {
+    public void print(Lottos lottoNumbers) {
 
-        lottoNumbers.stream()
+        lottoNumbers.lottos().stream()
                 .map(LottoNumbers::lottoNumbers)
                 .forEach(System.out::println);
 
         System.out.println();
+    }
+
+    public void printInputMoneyError(){
+        System.out.println("금액을 천원 단위로 입력 하세요.");
+    }
+
+    public void printBonusBallError(){
+        System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
+    }
+
+    public void print(int manualBuyCount, int autoBuyCount){
+        System.out.println("수동으로 " + manualBuyCount + "장 자동으로 " + autoBuyCount + "개를 구매했습니다.");
     }
 
     public void print() {
@@ -26,7 +38,6 @@ public class ResultView {
     }
 
     public void print(Map<LottoRanking, Integer> lottoResult, float rateOfReturn) {
-        ;
         System.out.println(new StringBuilder().append(rankingPrintInfo(lottoResult)).append(rateResultString(rateOfReturn)));
     }
 

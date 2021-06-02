@@ -21,8 +21,8 @@ public class LottoResult {
         }
     }
 
-    public Map<LottoRanking, Integer> lottoResult(List<LottoNumbers> purchaseLottoNumbers, WinningLotto winningLotto) {
-        for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers) {
+    public Map<LottoRanking, Integer> lottoResult(Lottos purchaseLottoNumbers, WinningLotto winningLotto) {
+        for (LottoNumbers purchaseLottoNumber : purchaseLottoNumbers.lottos()) {
             addLottoRankingCount(LottoRanking.lottoRanking(winningLotto.correctCount(purchaseLottoNumber),
                     winningLotto.matchedBonusBall(purchaseLottoNumber)));
         }
