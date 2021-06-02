@@ -2,7 +2,7 @@ package lottery.domain;
 
 public class GenerateCount {
 
-    public static final int MINIMUM_GENERATE_COUNT = 1;
+    public static final int MINIMUM = 1;
 
     private final int count;
 
@@ -13,7 +13,7 @@ public class GenerateCount {
     }
 
     private void validateGenerateCount(int count) {
-        if (count < MINIMUM_GENERATE_COUNT) {
+        if (count < MINIMUM) {
             throw new IllegalArgumentException("로또 생성 개수는 1개 이상이어야 합니다.");
         }
     }
