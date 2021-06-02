@@ -22,9 +22,13 @@ public enum LottoRank {
     public static LottoRank of(int matchCount, boolean matchBonus) {
 
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                .filter(lottoRank -> lottoRank.isMatch(matchCount))
                 .map(lottoRank -> checkSeconPrize(lottoRank, matchBonus))
                 .findFirst().orElse(MISS);
+    }
+
+    private boolean isMatch(int matchCount) {
+        return this.matchCount == matchCount;
     }
 
     private static LottoRank checkSeconPrize(LottoRank lottoRank, boolean matchBonus) {
