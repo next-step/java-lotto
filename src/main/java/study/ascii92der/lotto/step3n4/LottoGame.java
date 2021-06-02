@@ -7,9 +7,9 @@ public class LottoGame {
         ResultView.printLottoCount(lottoPrice);
         ResultView.printWinnerResult(
                 new WinResult(
-                        (new LottoGenerator())
-                                .generateLottos(lottoPrice),
-                        InputView.inputWinnerNumbers(), InputView.inputBonusNumber()));
-
+                        (new LottoGenerator()).generateLottos(lottoPrice),
+                        new WinningLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber())
+                )
+        );
     }
 }

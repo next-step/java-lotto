@@ -8,10 +8,10 @@ public class WinResult {
     private final int buyLottoCount;
     private List<LottoResult> lottoResults;
 
-    public WinResult(List<Lotto> lottos, List<String> winnerNumberList, int bonusNumber) {
+    public WinResult(List<Lotto> lottos, WinningLotto winningLotto) {
         lottoResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lottoResults.add(new LottoResult(lotto, winnerNumberList, bonusNumber));
+            lottoResults.add(new LottoResult(lotto, winningLotto));
         }
         buyLottoCount = lottoResults.size();
     }

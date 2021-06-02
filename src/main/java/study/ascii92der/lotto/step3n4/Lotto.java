@@ -32,7 +32,15 @@ public class Lotto {
         }
     }
 
-    public boolean hasNumber(int value) {
-        return lottoNumbers.contains(new LottoNumber(value));
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public int match(Lotto lotto) {
+        return Integer.parseInt(
+                String.valueOf(
+                        this.lottoNumbers.stream().filter(lotto::contains).count()
+                )
+        );
     }
 }

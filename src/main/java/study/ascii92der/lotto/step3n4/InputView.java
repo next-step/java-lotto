@@ -16,12 +16,19 @@ public class InputView {
         return new LottoPrice(Integer.parseInt(scanner.nextLine()));
     }
 
-    public static List<String> inputWinnerNumbers() {
+    public static Lotto inputWinnerNumbers() {
         System.out.println(INPUT_WINNER_NUMBERS);
-        return new ArrayList<>(Arrays.asList(scanner.nextLine().split(",")));
+        List<Integer> winingNumbers = new ArrayList<>();
+
+        Arrays.stream(scanner.nextLine().split(","))
+                .map(Integer::parseInt)
+                .forEach(winingNumbers::add);
+
+        return new Lotto(winingNumbers);
     }
-    public static int inputBonusNumber() {
+
+    public static LottoNumber inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return Integer.parseInt(scanner.nextLine());
+        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
     }
 }

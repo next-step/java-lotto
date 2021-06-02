@@ -19,7 +19,8 @@ public class WinResultTest {
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1),
                 new Lotto(lottoNumbers2)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 45));
 
         assertThat(winResult.result(LottoWinner.FIFTH)).isEqualTo(2);
     }
@@ -33,7 +34,8 @@ public class WinResultTest {
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1),
                 new Lotto(lottoNumbers2), new Lotto(lottoNumbers3)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 45));
 
         assertThat(winResult.result(LottoWinner.FOURTH)).isEqualTo(3);
     }
@@ -46,7 +48,8 @@ public class WinResultTest {
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1),
                 new Lotto(lottoNumbers2)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 45));
 
         assertThat(winResult.result(LottoWinner.THIRD)).isEqualTo(2);
     }
@@ -57,7 +60,8 @@ public class WinResultTest {
         List<Integer> lottoNumbers1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 45));
 
         assertThat(winResult.result(LottoWinner.FIRST)).isEqualTo(1);
     }
@@ -68,8 +72,8 @@ public class WinResultTest {
         List<Integer> lottoNumbers1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 33));
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
-
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 45));
         assertThat(winResult.result(LottoWinner.THIRD)).isEqualTo(1);
     }
 
@@ -81,7 +85,8 @@ public class WinResultTest {
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1),
                 new Lotto(lottoNumbers2)));
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), 45);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 45));
 
         assertThat(winResult.totalEarningRate()).isEqualTo(750.0);
     }
@@ -93,9 +98,9 @@ public class WinResultTest {
         List<Integer> lottoNumbers2 = new ArrayList<>(Arrays.asList(1, 2, 41, 16, 17, 18));
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(lottoNumbers1),
                 new Lotto(lottoNumbers2)));
-        int bonusNumber = 33;
         WinResult winResult = new WinResult(lottos,
-                new ArrayList<>(Arrays.asList("1,2,3,4,5,6".split(","))), bonusNumber);
+                new WinningLotto(
+                        new ArrayList<>(Arrays.asList(1,2,3,4,5,6)), 33));
 
         assertThat(winResult.totalEarningRate()).isEqualTo(15000.0);
     }
