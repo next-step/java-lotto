@@ -15,6 +15,17 @@ public class Lotteries {
         lotteries = ImmutableList.copyOf(generateLotteries(count, generator));
     }
 
+    public MatchCountPair matchAllAndAddCounts(WinnerLottery winnerLottery) {
+        MatchCountPair matchCountPair = new MatchCountPair();
+
+        for (Lottery lottery : lotteries) {
+            int matchCount = winnerLottery.match(lottery.numbers());
+            matchCountPair.addMatchCountPair(MatchCount.valueOf(matchCount));
+        }
+
+        return matchCountPair;
+    }
+
     private List<Lottery> generateLotteries(GenerateCount generateCount, NumberGenerator generator) {
         List<Lottery> lotteries = new ArrayList<>();
 
