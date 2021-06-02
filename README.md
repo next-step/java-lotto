@@ -34,7 +34,10 @@
 * 테스트 케이스 추가
   * 등수별 테스트
 * LottoNumbers.contains indent depth 수정
-  
+
+## 작업중
+* WiningLottoNumbers 구현중
+
 ## 재설계
 * LottoNo : 로또 번호 1개
   * int 원시값포장
@@ -54,11 +57,14 @@
 * WiningLottoNumbers : 당첨번호
   * LottoNumbers
   * int bonusNumber
+  * 구입한 번호(LottoNumbers)와 당첨번호(WinningLottoNumbers) 비교해서 결과값 저장
+    * matchLottoNumbers(LottoNumbers) : ResultScore
 
 * LottoGame : 로또 번호 생성
   * 자동번호 생성
   * 수동번호 생성
-  * 구입한 번호와 당첨번호 비교해서 결과값 저장
+  * WiningLottoNumbers.matchLottoNumbers를 LottoNumberList만큼 반복해서 실행
+  
 
 * ResultView
   * 로또 당첨 결과값 출력

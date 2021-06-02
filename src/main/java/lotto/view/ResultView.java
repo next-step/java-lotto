@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbersList_ref;
-import lotto.domain.ResultAllLottoScores;
-import lotto.domain.ResultScoreEnum;
+import lotto.domain.ResultAllLottoScores_ref;
+import lotto.domain.ResultScoreEnum_ref;
 
 public class ResultView {
     public void printPurchasedCount(int count) {
@@ -13,19 +13,19 @@ public class ResultView {
         lottoNumbersListRef.foreach((x) -> System.out.println(x.getLottoNumbers()));
     }
 
-    public void printLottoGameResult(ResultAllLottoScores resultAllLottoScores, int inputPurchaseAmount) {
+    public void printLottoGameResult(ResultAllLottoScores_ref resultAllLottoScoresRef, int inputPurchaseAmount) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
-        for (ResultScoreEnum state : resultScoreEnum) {
-            state.printResult(resultAllLottoScores.result().get(state));
+        ResultScoreEnum_ref resultScoreEnumRef[] = ResultScoreEnum_ref.values();
+        for (ResultScoreEnum_ref state : resultScoreEnumRef) {
+            state.printResult(resultAllLottoScoresRef.result().get(state));
         }
 
-        printYield(resultAllLottoScores, inputPurchaseAmount);
+        printYield(resultAllLottoScoresRef, inputPurchaseAmount);
     }
 
-    private void printYield(ResultAllLottoScores resultAllLottoScores, int inputPurchaseAmount) {
-        float yield = resultAllLottoScores.yield(inputPurchaseAmount);
+    private void printYield(ResultAllLottoScores_ref resultAllLottoScoresRef, int inputPurchaseAmount) {
+        float yield = resultAllLottoScoresRef.yield(inputPurchaseAmount);
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 

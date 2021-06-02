@@ -41,7 +41,7 @@ public class LottoNumbersRefListTest {
         lottoNumbersListRef.appendLottoNumber(lottoNumbersRef);
         LastWonLottoNumber_ref lastWonLottoNumberRef = new LastWonLottoNumber_ref("1,2,3,4,5,6", "7");
 
-        assertThat(lottoNumbersListRef.countMatchedNumbersList(lastWonLottoNumberRef).result().get(ResultScoreEnum.FIRST)).isEqualTo(1);
+        assertThat(lottoNumbersListRef.countMatchedNumbersList(lastWonLottoNumberRef).result().get(ResultScoreEnum_ref.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -58,6 +58,6 @@ public class LottoNumbersRefListTest {
         lottoNumbersListRef.appendLottoNumber(lottoNumbersRef);
         LastWonLottoNumber_ref lastWonLottoNumberRef = new LastWonLottoNumber_ref("1,2,3,4,5,6", "7");
 
-        assertThat(lottoNumbersListRef.countMatchedNumbersList(lastWonLottoNumberRef).result().get(ResultScoreEnum.SECOND)).isEqualTo(1);
+        assertThat(lottoNumbersListRef.countMatchedNumbersList(lastWonLottoNumberRef).result().get(ResultScoreEnum_ref.SECOND)).isEqualTo(1);
     }
 }

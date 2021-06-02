@@ -19,14 +19,14 @@ public class LottoNumbers_ref {
         return this.lottoNumbers;
     }
 
-    public MatchStatusOfALotto countMatchedNumbers(LastWonLottoNumber_ref lastWonLottoNumberRef) {
+    public MatchStatusOfALotto_ref countMatchedNumbers(LastWonLottoNumber_ref lastWonLottoNumberRef) {
         int sameNumberCount = 0;
         boolean isBonusWon = false;
         for (int oneLottoNumber : lottoNumbers) {
             sameNumberCount = increaseIfSameNumber(sameNumberCount, oneLottoNumber, lastWonLottoNumberRef);
             isBonusWon = lastWonLottoNumberRef.containsBonus(oneLottoNumber);
         }
-        return new MatchStatusOfALotto(sameNumberCount, isBonusWon);
+        return new MatchStatusOfALotto_ref(sameNumberCount, isBonusWon);
     }
 
     private int increaseIfSameNumber(int currentSameNumberCount, int lottoNumber, LastWonLottoNumber_ref lastWonLottoNumberRef) {

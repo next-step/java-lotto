@@ -62,7 +62,7 @@ public class LottoNumbersRefTest {
             }
         });
         LastWonLottoNumber_ref lastWonLottoNumberRef = new LastWonLottoNumber_ref("1,3,5,6,7,8","10");
-        assertThat(lottoNumbersRef.countMatchedNumbers(lastWonLottoNumberRef).getResultScore()).isEqualTo(ResultScoreEnum.FOURTH);
+        assertThat(lottoNumbersRef.countMatchedNumbers(lastWonLottoNumberRef).getResultScore()).isEqualTo(ResultScoreEnum_ref.FOURTH);
     }
 
     @Test

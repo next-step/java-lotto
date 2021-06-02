@@ -42,7 +42,7 @@ public class LottoGame {
         return lottoNumbersRef;
     }
 
-    public ResultAllLottoScores resultLottoGame(InputView inputView, LottoNumbersList_ref lottoNumbersListRef) {
+    public ResultAllLottoScores_ref resultLottoGame(InputView inputView, LottoNumbersList_ref lottoNumbersListRef) {
         return lottoNumbersListRef.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
     }
 

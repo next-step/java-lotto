@@ -23,13 +23,13 @@ public class LottoNumbersList_ref {
         lottoNumbersRefList.forEach(lamda);
     }
 
-    public ResultAllLottoScores countMatchedNumbersList(LastWonLottoNumber_ref lastWonLottoNumberRef) {
-        ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
-        MatchStatusOfALotto matchStatusOfALotto = null;
+    public ResultAllLottoScores_ref countMatchedNumbersList(LastWonLottoNumber_ref lastWonLottoNumberRef) {
+        ResultAllLottoScores_ref resultAllLottoScoresRef = new ResultAllLottoScores_ref();
+        MatchStatusOfALotto_ref matchStatusOfALotto_ref = null;
         for (int i = 0; i < lottoNumbersRefList.size(); i++) {
-            matchStatusOfALotto = lottoNumbersRefList.get(i).countMatchedNumbers(lastWonLottoNumberRef);
-            resultAllLottoScores.updateResult(matchStatusOfALotto);
+            matchStatusOfALotto_ref = lottoNumbersRefList.get(i).countMatchedNumbers(lastWonLottoNumberRef);
+            resultAllLottoScoresRef.updateResult(matchStatusOfALotto_ref);
         }
-        return resultAllLottoScores;
+        return resultAllLottoScoresRef;
     }
 }
