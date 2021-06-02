@@ -3,22 +3,21 @@ package study.ascii92der.lotto.step3n4;
 public class ResultView {
 
     public static final String PRINT_BUY_LOTTO_COUNT = "%d개를 구매했습니다.%n";
-    public static final String PRINT_LOTTO_NUMBERS = "[ %s ]%n";
     public static final String PRINT_WINNER_RESULT = "%d개 일치 (%d원)- %d개%n";
     public static final String PRINT_WINNER_RESULT_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
     public static final String PRINT_RESULT_SEPARATOR = "---------";
     public static final String PRINT_RESULT = "당첨 통계";
     public static final String PRINT_TOTAL_EARNING_RATE = "총 수익률은 %.2f입니다.%n";
 
-    public static void printLottoCount(LottoPrice lottoPrice) {
+    public void printLottoCount(LottoPrice lottoPrice) {
         System.out.printf((PRINT_BUY_LOTTO_COUNT), lottoPrice.lottoCount());
     }
 
-    public static void printLottoNumbers(String lottoNumbers) {
-        System.out.printf((PRINT_LOTTO_NUMBERS), lottoNumbers);
+    public void printLottoNumbers(Lottos lottos) {
+        System.out.print(lottos.toString());
     }
 
-    public static void printWinnerResult(WinResult winResult) {
+    public void printWinnerResult(WinResult winResult) {
         System.out.println(PRINT_RESULT);
         System.out.println(PRINT_RESULT_SEPARATOR);
         System.out.printf((PRINT_WINNER_RESULT),

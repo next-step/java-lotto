@@ -7,9 +7,9 @@ public class LottoNumber {
     public static final int LOTTO_NUMBER_MAXIMUM = 45;
     public static final String ERROR_MASSAGE_OUT_OF_RANGE_LOTTO_NUMBER = "out of range Lotto number";
 
-    private final int number;
+    private final Integer number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(Integer number) {
         this.number = number;
         validRangeNumber();
     }
@@ -25,11 +25,20 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return Objects.equals(number, that.number);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
+    public int compareTo(LottoNumber o2) {
+        return this.number.compareTo(o2.number);
     }
 }

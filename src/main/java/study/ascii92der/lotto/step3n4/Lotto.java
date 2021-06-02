@@ -1,6 +1,7 @@
 package study.ascii92der.lotto.step3n4;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_VALID_COUNT = 6;
@@ -42,5 +43,17 @@ public class Lotto {
                         this.lottoNumbers.stream().filter(lotto::contains).count()
                 )
         );
+    }
+
+
+    @Override
+    public String toString() {
+        Comparator<LottoNumber> compareByLottoNumber = LottoNumber::compareTo;
+        lottoNumbers.sort(compareByLottoNumber);
+
+        return "[" +
+                lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(",")) +
+                "]" +
+                System.lineSeparator();
     }
 }

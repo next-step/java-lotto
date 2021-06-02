@@ -15,4 +15,11 @@ public class Lottos {
         lottos.stream().map(lotto -> new LottoResult(lotto, winningLotto)).forEach(lottoResults::add);
         return lottoResults;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        lottos.forEach(lotto -> sb.append(lotto.toString()));
+        return sb.toString();
+    }
 }

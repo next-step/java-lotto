@@ -1,16 +1,22 @@
 package study.ascii92der.lotto.step3n4;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.io.ByteArrayInputStream;
 
 class LottoGameTest {
 
     @Test
-    void start() {
-        LottoGame lottoGame = new LottoGame();
-        lottoGame.start(new LottoPrice(13000),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(11));
+    @DisplayName("LottoGame 최종 테스트")
+    void run() {
+        String input = "14000\n1,2,3,4,5,6\n13";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        InputView inputView = new InputView(System.in);
+        ResultView resultView = new ResultView();
+        LottoGame lottoGame = new LottoGame(inputView, resultView);
+
+        lottoGame.run();
     }
 }
