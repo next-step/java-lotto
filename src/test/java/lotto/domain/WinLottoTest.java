@@ -16,7 +16,7 @@ public class WinLottoTest {
     @Test
     @DisplayName("bonus번호가 맞을경우 2등 rank 리턴")
     public void bonusNumberRankTest() {
-        WinLotto winLotto = new WinLotto(new LottoNumberFactoryImpl(new CustomStrategy(Arrays.asList(1,2,3,4,5,6))),10);
+        WinLotto winLotto = new WinLotto(new Lotto(1,2,3,4,5,6),10);
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,10));
         assertThat(Rank.fiveNumbersMatchWithBonusNumber == winLotto.matchCount(lotto)).isTrue();
     }

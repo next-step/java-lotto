@@ -2,21 +2,22 @@ package lotto.domain;
 
 import java.util.List;
 
-public class WinLotto extends Lotto {
+public class WinLotto {
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
-    public WinLotto(LottoNumberFactory factory, int bonusNumber) {
-        super(factory);
+
+    public WinLotto(Lotto lotto, int bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public WinLotto(List<Integer> numbers, int bonusNumber) {
-        super(numbers);
+        this.lotto = new Lotto(numbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    @Override
     public Rank matchCount(Lotto other) {
-        Rank matchRank = super.matchCount(other);
+        Rank matchRank = lotto.matchCount(other);
         if ( matchRank == Rank.fiveNumbersMatch) {
             matchRank = rankWithBonusNumber(other);
         }

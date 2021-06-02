@@ -22,7 +22,10 @@ public class Lotto {
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
+    }
 
+    public Lotto(Integer... numbers) {
+        this(Arrays.asList(numbers));
     }
 
     public static void verifyLottoNumbers(List<Integer> numbers) {

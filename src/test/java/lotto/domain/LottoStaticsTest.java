@@ -23,9 +23,8 @@ public class LottoStaticsTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbersWithRankCount")
     public void 로또통계(List<List<Integer>> lottoNumbers, List<String> matchingCounts) {
-        factory.setGenerateStrategy(new CustomStrategy(Arrays.asList(1,2,3,4,5,6)));
-        Lotto winLotto = new Lotto(factory);
-        Lottos lottos = new Lottos(new LottoNumberFactoryImpl(),lottoNumbers);
+        WinLotto winLotto = new WinLotto(new Lotto(1,2,3,4,5,6),10);
+        Lottos lottos = new Lottos(lottoNumbers);
         LottoStatics statics = lottos.calculateStatics(winLotto);
         for( String matchingCount : matchingCounts) {
             int rank = Integer.parseInt(matchingCount.split(",")[0]);
@@ -71,9 +70,8 @@ public class LottoStaticsTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
     public void 수익률(List<List<Integer>> numbers, double profitRate) {
-        factory.setGenerateStrategy(new CustomStrategy(Arrays.asList(1,2,3,4,5,6)));
-        Lotto winLotto = new Lotto(factory);
-        Lottos lottos = new Lottos(new LottoNumberFactoryImpl(),numbers);
+        WinLotto winLotto = new WinLotto(new Lotto(1,2,3,4,5,6),10);
+        Lottos lottos = new Lottos(numbers);
         LottoStatics statics = lottos.calculateStatics(winLotto);
         assertThat(statics.getProfit()).isEqualTo(profitRate);
     }

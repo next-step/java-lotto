@@ -4,6 +4,7 @@ public class LottoNumberFactoryImpl implements LottoNumberFactory{
     private Strategy strategy;
 
     public LottoNumberFactoryImpl() {
+        this(new RandomStrategy());
     }
 
     public LottoNumberFactoryImpl(Strategy strategy) {
