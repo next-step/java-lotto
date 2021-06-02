@@ -26,16 +26,19 @@ public final class RandomLottoUI {
 
 	private final ResultView output;
 
+	private LottoGameState state;
+
 	public RandomLottoUI(InputView inputView, ResultView resultView) {
 		this.input = inputView;
 		this.output = resultView;
+		this.state = INITIATING;
 	}
 
 	/**
 	 * 예외 발생시 게임의 흐름을 제어한다.
 	 */
 	public void start(LottoGame game) {
-		while (game.getState() != ENDED) {
+		while (state != ENDED) {
 			processAndUpdateState(game);
 		}
 	}
@@ -90,9 +93,7 @@ public final class RandomLottoUI {
 
 	private void processAndUpdateState(LottoGame game) {
 		try {
-			LottoGameState state = game.getState();
-			LottoGameState next = state.process(this, game);
-			game.setState(next);
+			this.state = state.process(this, game);
 		} catch (DomainException e) {
 			printException(e);
 		}

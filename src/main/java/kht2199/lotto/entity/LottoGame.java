@@ -6,9 +6,6 @@ import kht2199.lotto.LottoGenerator;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 
-/**
- * 게임 상태, 상태에 대한 트랜젝션 관리.
- */
 public class LottoGame {
 
 	private static final int LOTTO_PRICE = 1000;
@@ -19,13 +16,10 @@ public class LottoGame {
 
 	private final LottoAssets assets;
 
-	private LottoGameState state;
-
 	private LottoWinningResult winningResult;
 
 	public LottoGame() {
 		this.purchasedList = new LottoList();
-		this.state = INITIATING;
 		this.assets = new LottoAssets(0);
 	}
 
@@ -41,10 +35,6 @@ public class LottoGame {
 		return assets;
 	}
 
-	public LottoGameState getState() {
-		return this.state;
-	}
-
 	public LottoList getPurchasedLottoList() {
 		return purchasedList;
 	}
@@ -54,10 +44,6 @@ public class LottoGame {
 		LottoWinningResult winningResult = new LottoWinningResult(winningNumbers, bonusNumber);
 		winningResult.updateLottoWinningNumbers(purchasedList);
 		this.winningResult = winningResult;
-	}
-
-	public void setState(LottoGameState state) {
-		this.state = state;
 	}
 
 	/**
