@@ -55,7 +55,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다")
     void 로또는_입력받은_로또와_일치하는_번호의_수를_알려준다(Lotto lotto, int expected) {
-        assertThat(lotto.matchCountWith(우승번호.lotto())).isEqualTo(expected);
+        assertThat(lotto.matchCountWith(우승번호)).isEqualTo(expected);
     }
 
     static Stream<Arguments> provider_로또는_입력받은_로또와_일치하는_번호의_수를_알려준다() {

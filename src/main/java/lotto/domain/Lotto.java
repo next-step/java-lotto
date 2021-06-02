@@ -39,9 +39,9 @@ public class Lotto {
                 .count() != SIZE;
     }
 
-    public int matchCountWith(Lotto other) {
+    public int matchCountWith(WinningLotto winningLotto) {
         return (int) numbers.stream()
-                .filter(other::contains)
+                .filter(winningLotto::contains)
                 .count();
     }
 
