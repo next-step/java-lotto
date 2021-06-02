@@ -10,7 +10,7 @@ public class LottoPriceTest {
 
     @Test
     @DisplayName("입력된 액수만큼 구매할 수 있는 로또 수 테스트")
-    void buyLottoTest() {
+    void buyLottoCount() {
         LottoPrice lottoPrice = new LottoPrice(14000);
 
         assertThat(lottoPrice.lottoCount()).isEqualTo(14);
@@ -20,10 +20,8 @@ public class LottoPriceTest {
     @DisplayName("invalid money test")
     void invalidMoneyTest() {
 
-        assertThatThrownBy(() -> {
-            new LottoPrice(-14000);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("input money is negative");
+        assertThatThrownBy(() -> new LottoPrice(-14000)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(LottoPrice.ERROR_MASSAGE_NOT_ENOUGH_INPUT_MONEY);
     }
 
 }
