@@ -2,6 +2,7 @@ package lotto.input;
 
 import lotto.domain.MatchNumberCount;
 import lotto.domain.LottoRoi;
+import lotto.domain.MessagePrinter;
 
 import java.util.List;
 
@@ -20,11 +21,7 @@ public final class PurchaseAmountQuantity {
     this.autoCount = quantity - manualCount;
     this.manualLottoNumbers = manualLottoNumbers;
 
-    print();
-  }
-
-  private void print() {
-    System.out.println("\n수동으로 " + this.manualCount + "장, 자동으로 " + this.autoCount + "개를 구매했습니다.");
+    MessagePrinter.print("\n수동으로 " + this.manualCount + "장, 자동으로 " + this.autoCount + "개를 구매했습니다.");
   }
 
   public LottoRoi getRoiBy(MatchNumberCount matchNumberCount) {
