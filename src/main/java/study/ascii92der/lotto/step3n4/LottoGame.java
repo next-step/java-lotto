@@ -2,14 +2,15 @@ package study.ascii92der.lotto.step3n4;
 
 public class LottoGame {
 
-    public static void start() {
-        LottoPrice lottoPrice = InputView.inputMoney();
+    public void start(LottoPrice lottoPrice, Lotto winningLotto, LottoNumber lottoNumber) {
+
         ResultView.printLottoCount(lottoPrice);
         ResultView.printWinnerResult(
                 new WinResult(
                         (new LottoGenerator()).generateLottos(lottoPrice),
-                        new WinningLotto(InputView.inputWinnerNumbers(), InputView.inputBonusNumber())
+                        new WinningLotto(winningLotto, lottoNumber)
                 )
         );
     }
+    
 }
