@@ -76,7 +76,8 @@ class LottoTest {
 			Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
 			Arguments.of(Arrays.asList(1,2,3,4,5,7), 5),
 			Arguments.of(Arrays.asList(1,2,3,4,8,9), 4),
-			Arguments.of(Arrays.asList(1,2,3,10,8,9), 3)
+			Arguments.of(Arrays.asList(1,2,3,10,8,9), 3),
+			Arguments.of(Arrays.asList(1,2,3,10,8,45), 3)
 		);
 	}
 }
