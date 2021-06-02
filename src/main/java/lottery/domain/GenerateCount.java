@@ -14,7 +14,7 @@ public class GenerateCount {
 
     private void validateGenerateCount(int count) {
         if (count < MINIMUM) {
-            throw new IllegalArgumentException("로또 생성 개수는 1개 이상이어야 합니다.");
+            throw new IllegalArgumentException("로또 생성 개수는 " + MINIMUM + "개 이상이어야 합니다.");
         }
     }
 
