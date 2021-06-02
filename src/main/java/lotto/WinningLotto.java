@@ -3,13 +3,13 @@ package lotto;
 import java.util.List;
 
 public class WinningLotto {
-    List<LottoNumber> value;
+    List<LottoNumber> winningLotto;
 
     public WinningLotto(List<LottoNumber> winningNumbers) {
-        this.value = winningNumbers;
+        this.winningLotto = winningNumbers;
     }
 
     public List<LottoNumber> value() {
-        return value;
+        return winningLotto;
     }
 }

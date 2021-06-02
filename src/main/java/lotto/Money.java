@@ -1,15 +1,15 @@
 package lotto;
 
 public class Money {
-    private int value;
+    private int money;
 
     public Money(int num) {
         validateMoney(num);
-        this.value = num;
+        this.money = num;
     }
 
     public int value() {
-        return this.value;
+        return this.money;
     }
 
     private void validateMoney(int num) {

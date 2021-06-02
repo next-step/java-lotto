@@ -1,17 +1,17 @@
 package lotto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private final int value;
+    private final int lottoNumber;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
     public LottoNumber(int num) {
         validateLottoNumber(num);
-        this.value = num;
+        this.lottoNumber = num;
     }
 
     public int value() {
-        return value;
+        return lottoNumber;
     }
 
     private void validateLottoNumber(int num) {
@@ -22,11 +22,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return this.value - o.value;
+        return this.lottoNumber - o.lottoNumber;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return String.valueOf(lottoNumber);
     }
 }
