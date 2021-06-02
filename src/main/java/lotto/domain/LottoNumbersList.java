@@ -11,6 +11,12 @@ public class LottoNumbersList {
         lottoNumbersList = new ArrayList<LottoNumbers>();
     }
 
+    public LottoNumbersList(LottoNumbers[] lottoNumbersArray) {
+        lottoNumbersList = new ArrayList<LottoNumbers>();
+        for ( LottoNumbers lottoNumbers : lottoNumbersArray)
+            lottoNumbersList.add(lottoNumbers);
+    }
+
     public void appendLottoNumber(LottoNumbers numbers) {
         lottoNumbersList.add(numbers);
     }
@@ -21,6 +27,10 @@ public class LottoNumbersList {
 
     public void foreach(Consumer<LottoNumbers> lamda) {
         lottoNumbersList.forEach(lamda);
+    }
+
+    public LottoNumbers lottoNumberList(int i) {
+        return lottoNumbersList.get(i);
     }
 
 /*    public ResultAllLottoScores countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {

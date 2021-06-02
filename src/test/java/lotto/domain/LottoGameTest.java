@@ -2,16 +2,13 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoGameTest {
 
- //   @Test
-/*    public void Lotto_번호비교_검증() {
+    @Test
+    public void Lotto_자동번호_개수_검증() {
         LottoGame lottoGame = new LottoGame();
-
-        int[] numbers = {1,2,3,4,5,43};
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6","7");
-        lottoGame.matchLotto(winningLottoNumbers, lottoNumbers);
-    }*/
+        assertThat(lottoGame.getAutoBuyLottoCount(14500, 3)).isEqualTo(11);
+    }
 }

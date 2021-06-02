@@ -1,28 +1,28 @@
 package lotto.domain;
 
 import lotto.common.Constant;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.view.InputView_ref;
+import lotto.view.ResultView_ref;
 
 public class LottoGame_ref {
     private LastWonLottoNumber_ref lastWonLottoNumberRef;
-    private InputView inputView;
-    private ResultView resultView;
+    private InputView_ref inputViewRef;
+    private ResultView_ref resultViewRef;
 
     public LottoGame_ref() {
-        inputView = new InputView();
-        resultView = new ResultView();
+        inputViewRef = new InputView_ref();
+        resultViewRef = new ResultView_ref();
     }
 
     public void LottoStart() {
-        inputView.inputMoneyForLotto();
-        int lottoCount = availablePurchaseCount(inputView.getInputAmount());
-        resultView.printPurchasedCount(lottoCount);
+        inputViewRef.inputMoneyForLotto();
+        int lottoCount = availablePurchaseCount(inputViewRef.getInputAmount());
+        resultViewRef.printPurchasedCount(lottoCount);
         LottoNumbersList_ref lottoNumbersListRef = purchaseLottos(lottoCount);
-        resultView.printPurchasedLottos(lottoNumbersListRef);
-        inputView.inputLastWonLottoNumbers();
-        inputView.inputBonusLottoNumber();
-        resultView.printLottoGameResult(resultLottoGame(inputView, lottoNumbersListRef), inputView.getInputAmount());
+        resultViewRef.printPurchasedLottos(lottoNumbersListRef);
+        inputViewRef.inputLastWonLottoNumbers();
+        inputViewRef.inputBonusLottoNumber();
+        resultViewRef.printLottoGameResult(resultLottoGame(inputViewRef, lottoNumbersListRef), inputViewRef.getInputAmount());
     }
 
     public int availablePurchaseCount(int amount) {
@@ -42,12 +42,12 @@ public class LottoGame_ref {
         return lottoNumbersRef;
     }
 
-    public ResultAllLottoScores_ref resultLottoGame(InputView inputView, LottoNumbersList_ref lottoNumbersListRef) {
-        return lottoNumbersListRef.countMatchedNumbersList(setLastWonLottoNumbers(inputView));
+    public ResultAllLottoScores_ref resultLottoGame(InputView_ref inputViewRef, LottoNumbersList_ref lottoNumbersListRef) {
+        return lottoNumbersListRef.countMatchedNumbersList(setLastWonLottoNumbers(inputViewRef));
     }
 
-    private LastWonLottoNumber_ref setLastWonLottoNumbers(InputView inputView) {
-        lastWonLottoNumberRef = new LastWonLottoNumber_ref(inputView.getInputLastWonLottoNumbers(), inputView.getInputBonusNumber());
+    private LastWonLottoNumber_ref setLastWonLottoNumbers(InputView_ref inputViewRef) {
+        lastWonLottoNumberRef = new LastWonLottoNumber_ref(inputViewRef.getInputLastWonLottoNumbers(), inputViewRef.getInputBonusNumber());
         return lastWonLottoNumberRef;
     }
 }
