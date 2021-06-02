@@ -1,4 +1,4 @@
-package kht2199.lotto.view;
+package kht2199.lotto.controller;
 
 import static kht2199.lotto.LottoGameState.*;
 
@@ -14,13 +14,15 @@ import kht2199.lotto.exception.assets.AssetsException;
 import kht2199.lotto.exception.input.InvalidInputException;
 import kht2199.lotto.exception.number.LottoNumberLengthException;
 import kht2199.lotto.exception.number.LottoNumberRangeException;
+import kht2199.lotto.view.InputView;
+import kht2199.lotto.view.ResultView;
 
 /**
  * reusable, stateless instance.
  *
  * @author heetaek.kim
  */
-public final class RandomLottoUI {
+public final class RandomLottoController {
 
 	private final InputView input;
 
@@ -28,7 +30,7 @@ public final class RandomLottoUI {
 
 	private LottoGameState state;
 
-	public RandomLottoUI(InputView inputView, ResultView resultView) {
+	public RandomLottoController(InputView inputView, ResultView resultView) {
 		this.input = inputView;
 		this.output = resultView;
 		this.state = INITIATING;

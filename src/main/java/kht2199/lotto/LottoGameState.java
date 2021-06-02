@@ -11,18 +11,18 @@ import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.exception.input.InvalidInputException;
 import kht2199.lotto.exception.number.LottoNumberLengthException;
 import kht2199.lotto.exception.number.LottoNumberRangeException;
-import kht2199.lotto.view.RandomLottoUI;
+import kht2199.lotto.controller.RandomLottoController;
 
 public enum LottoGameState {
 	INITIATING {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) {
 			return ACCEPT_ASSETS;
 		}
 	},
 	ACCEPT_ASSETS {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) throws AssetsException, InvalidInputException {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) throws AssetsException, InvalidInputException {
 			int assets = ui.acceptAssets();
 			game.initiateAssets(assets);
 			return PURCHASE_MANUALLY;
@@ -30,7 +30,7 @@ public enum LottoGameState {
 	},
 	PURCHASE_MANUALLY {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) throws InvalidInputException, AssetsNotEnoughException {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) throws InvalidInputException, AssetsNotEnoughException {
 			int count = ui.acceptLottoCountForManual();
 			game.validatePurchasable(count);
 			LottoList list = ui.acceptLotto(count);
@@ -40,7 +40,7 @@ public enum LottoGameState {
 	},
 	PURCHASE_AUTOMATIC {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) throws AssetsNotEnoughException {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) throws AssetsNotEnoughException {
 			int purchasableLottoCount = game.calculatePurchasableLottoCount();
 			if (purchasableLottoCount != 0) {
 				game.purchaseRandom(purchasableLottoCount);
@@ -50,7 +50,7 @@ public enum LottoGameState {
 	},
 	PURCHASED {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) {
 			LottoList purchasedLottoList = game.getPurchasedLottoList();
 			ui.printLottoList(purchasedLottoList);
 			return ACCEPT_WINNING_RESULT;
@@ -58,7 +58,7 @@ public enum LottoGameState {
 	},
 	ACCEPT_WINNING_RESULT {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) throws
+		public LottoGameState process(RandomLottoController ui, LottoGame game) throws
 				LottoNumberRangeException,
 				LottoBonusNumberDuplicatedException,
 				LottoNumberLengthException,
@@ -71,18 +71,18 @@ public enum LottoGameState {
 	},
 	PRINT_STATISTICS {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) {
 			ui.printResultStatistics(game);
 			return ENDED;
 		}
 	},
 	ENDED {
 		@Override
-		public LottoGameState process(RandomLottoUI ui, LottoGame game) {
+		public LottoGameState process(RandomLottoController ui, LottoGame game) {
 			throw new RuntimeException("invalid state.");
 		}
 	},
 	;
 
-	public abstract LottoGameState process(RandomLottoUI ui, LottoGame game) throws DomainException;
+	public abstract LottoGameState process(RandomLottoController ui, LottoGame game) throws DomainException;
 }
