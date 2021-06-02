@@ -76,8 +76,6 @@ public class LottoGame {
 	}
 
 	public void validatePurchasable(int count) throws AssetsNotEnoughException {
-		if (assets.getAssets() < count * LOTTO_PRICE) {
-			throw new AssetsNotEnoughException();
-		}
+		assets.validatePurchasable(count * LOTTO_PRICE);
 	}
 }

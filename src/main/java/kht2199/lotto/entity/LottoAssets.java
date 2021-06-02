@@ -34,4 +34,9 @@ public final class LottoAssets {
 		this.assets = assets;
 	}
 
+	public void validatePurchasable(int amount) throws AssetsNotEnoughException {
+		if (assets < amount) {
+			throw new AssetsNotEnoughException();
+		}
+	}
 }
