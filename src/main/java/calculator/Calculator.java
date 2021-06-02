@@ -4,22 +4,29 @@ import java.util.Scanner;
 
 public class Calculator {
 
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        StringNumbers numbers = requestInput();
-        int sum = numbers.sum();
-        System.out.printf("합계는 %d 입니다.", sum);
+        StringNumbers numbers;
+        try {
+            numbers = requestInput();
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자가 아닙니다.");
+            return;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        printOutput(numbers.sum());
     }
 
     private static StringNumbers requestInput() {
         System.out.print("계산할 값을 입력해주세요 : ");
-        String[] input = SplitUtil.splitByDelimiter(new Scanner(System.in).nextLine());
-        StringNumbers numbers = null;
-        try {
-             numbers = new StringNumbers(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
-            requestInput();
-        }
-        return numbers;
+        String[] input = SplitUtil.splitByDelimiter(scanner.nextLine());
+        return new StringNumbers(input);
+    }
+
+    private static void printOutput(int sum) {
+        System.out.printf("합계는 %d 입니다.", sum);
     }
 }
