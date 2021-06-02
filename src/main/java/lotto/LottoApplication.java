@@ -1,11 +1,8 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.model.CandidateLottoGenerator;
-import lotto.model.LottoNumber;
-import lotto.model.LottoResult;
+import lotto.model.*;
 
-import lotto.model.LottoTicket;
 import lotto.view.ConsoleView;
 import lotto.view.ViewInput;
 
@@ -21,7 +18,8 @@ public class LottoApplication {
         ConsoleView.printLotto(userLottoTickets);
 
         List<LottoNumber> winningNumbers = ViewInput.askWinningNumbers();
-        LottoResult lottoResult = lottoController.run(new LottoTicket(winningNumbers),userLottoTickets ,expense);
+        LottoNumber bonusNumber = ViewInput.askBonusNumber();
+        LottoResult lottoResult = lottoController.run(new WinningLottoTicket(winningNumbers, bonusNumber),userLottoTickets ,expense);
         ConsoleView.printScoreMap(lottoResult);
         ConsoleView.printResult(lottoResult);
 

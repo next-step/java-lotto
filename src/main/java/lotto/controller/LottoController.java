@@ -23,7 +23,7 @@ public class LottoController {
         return tickets;
     }
 
-    public LottoResult run(LottoTicket winningTicket, List<LottoTicket> userLottoTickets, int expense) {
+    public LottoResult run(WinningLottoTicket winningTicket, List<LottoTicket> userLottoTickets, int expense) {
         LottoGame lottoGame = new LottoGame(winningTicket, userLottoTickets);
         ScoreMap scoreMap = lottoGame.getScores();
         return new LottoResult(scoreMap, expense);

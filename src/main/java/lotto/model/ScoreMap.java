@@ -1,21 +1,19 @@
 package lotto.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class ScoreMap {
     private Map<LottoRank, Integer> scoreMap;
 
     public ScoreMap() {
-        this.scoreMap = new HashMap<LottoRank, Integer>(){{
+        this.scoreMap = new LinkedHashMap<LottoRank, Integer>(){{
             put(LottoRank.MATCH_COUNT_ZERO, 0);
             put(LottoRank.MATCH_COUNT_ONE, 0);
             put(LottoRank.MATCH_COUNT_TWO, 0);
             put(LottoRank.MATCH_COUNT_THREE, 0);
             put(LottoRank.MATCH_COUNT_FOUR, 0);
             put(LottoRank.MATCH_COUNT_FIVE, 0);
+            put(LottoRank.MATCH_COUNT_FIVE_AND_BONUS, 0);
             put(LottoRank.MATCH_COUNT_SIX, 0);
         }};
     }
@@ -35,13 +33,13 @@ public class ScoreMap {
     public int sumRewards() {
         int totalProfit = 0;
         for( LottoRank lottoRank : scoreMap.keySet() ){
-            totalProfit += multiplyRewardPriceByNumMatched(lottoRank.getMatchCount(), scoreMap.get(lottoRank));
+            totalProfit += multiplyRewardPriceByNumMatched(lottoRank, scoreMap.get(lottoRank));
         }
         return totalProfit;
     }
 
-    private int multiplyRewardPriceByNumMatched(int matchCount, int numMatchCount){
-        int rewardPrice = LottoRank.of(matchCount).getPrize();
+    private int multiplyRewardPriceByNumMatched(LottoRank lottoRank, int numMatchCount){
+        int rewardPrice = lottoRank.getPrize();
         if(rewardPrice == 0 || numMatchCount == 0){
             return 0;
         }
