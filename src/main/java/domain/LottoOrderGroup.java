@@ -8,7 +8,7 @@ import java.util.List;
 public class LottoOrderGroup {
 	private final List<Lotto> lottos;
 
-	public LottoOrderGroup(Integer numberOfLotto) {
+	public LottoOrderGroup (Integer numberOfLotto) {
 		this.lottos = generateLotto(numberOfLotto);
 	}
 
@@ -16,7 +16,7 @@ public class LottoOrderGroup {
 		return lottos;
 	}
 
-	public List<Lotto> generateLotto(Integer numberOfLotto) {
+	public List<Lotto> generateLotto (Integer numberOfLotto) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < numberOfLotto; i++) {

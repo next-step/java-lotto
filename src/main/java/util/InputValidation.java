@@ -1,13 +1,8 @@
 package util;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static util.SeparateDelimiter.*;
-
 public class InputValidation {
 	public static Boolean checkNullAndEmpty (String input) {
-		if (input == null ||input.equals("")) {
+		if (input == null || input.equals("")) {
 			return Boolean.TRUE;
 		}
 

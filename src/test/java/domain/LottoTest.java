@@ -10,15 +10,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoTest {
 	@Test
-	public void 로또번호생성테스트(){
+	public void 로또번호생성테스트 () {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		final Lotto lotto = new Lotto(numbers);
 
 		assertThat(lotto.numbers()).isEqualTo(numbers);
 	}
+
 	@Test
-	public void 로또_랭킹세팅_테스트(){
+	public void 로또_랭킹세팅_테스트 () {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		final Lotto lotto = new Lotto(numbers);
