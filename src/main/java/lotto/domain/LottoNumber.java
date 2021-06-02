@@ -10,7 +10,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (!isValidNumber(number)) {
-            throw new IllegalArgumentException("로또 번호는 1에서 45사이의 숫자값만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(String.format("로또 번호는 %d에서 %d사이의 숫자값만 입력할 수 있습니다.", MIN, MAX));
         }
         this.number = number;
     }
