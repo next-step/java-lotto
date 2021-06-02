@@ -57,7 +57,7 @@ public final class RandomLottoUI {
 		output.print("수동으로 구매할 번호를 입력해 주세요.");
 		LottoList list = new LottoList();
 		while (list.size() < count) {
-			addLottoOrIgnoreWhenExceptionOccur(list);
+			list.addLotto(acceptLottoIgnoreWhenExceptionOccur());
 		}
 		return list;
 	}
@@ -99,12 +99,12 @@ public final class RandomLottoUI {
 		}
 	}
 
-	private void addLottoOrIgnoreWhenExceptionOccur(LottoList list) {
+	private Lotto acceptLottoIgnoreWhenExceptionOccur() {
 		try {
-			Lotto lotto = input.acceptLotto();
-			list.addLotto(lotto);
+			return input.acceptLotto();
 		} catch (InvalidInputException | LottoNumberRangeException | LottoNumberLengthException e) {
 			output.printException(e);
+			return acceptLottoIgnoreWhenExceptionOccur();
 		}
 	}
 
