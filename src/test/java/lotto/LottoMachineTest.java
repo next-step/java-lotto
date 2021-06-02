@@ -18,25 +18,27 @@ class LottoMachineTest {
 
 	@DisplayName("금액에 해당하는 만큼의 로또를 구매한다.")
 	@ParameterizedTest
-	@CsvSource({ "1000,1", "15000,15", "500,0" })
+	@CsvSource({ "1000,1", "15000,15" })
 	void purchaseLotto(int money, int expected) {
-		LottoMachine lottoMachine = new LottoMachine(money, Collections.emptyList());
-		assertThat(lottoMachine.purchasedAutoLottoCount()).isEqualTo(expected);
+		LottoMachine lottoMachine = new LottoMachine(money);
+		Lottos autos = lottoMachine.purchaseAuto(lottoMachine.purchaseLottoCount());
+		assertThat(autos.lottoCount()).isEqualTo(expected);
 	}
 
-	@DisplayName("자동 로또 수는 최대 구매 가능한 수에 수동으로 구매한 로또 수를 제한 만큼이다.")
+	@DisplayName("로또 구매 금액보다 작은 경우 구매할 수 없다.")
 	@ParameterizedTest
-	@MethodSource("generateData")
-	void purchaseLotto(List<Lotto> manualLotto, int money, int expected) {
-		LottoMachine lottoMachine = new LottoMachine(money, manualLotto);
-		assertThat(lottoMachine.purchasedAutoLottoCount()).isEqualTo(expected);
+	@CsvSource({ "999", "500" })
+	void purchaseLotto(int money) {
+		assertThatThrownBy(() -> new LottoMachine(money))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("로또 최소 금액은 1000원입니다.");
 	}
 
 	@DisplayName("수동 로또 수는 최대 구매 가능한 수를 넘을 수는 없다.")
 	@ParameterizedTest
 	@MethodSource("generateOverData")
 	void purchaseLottoOverMax(List<Lotto> manualLotto, int money) {
-		assertThatThrownBy(() -> new LottoMachine(money, manualLotto))
+		assertThatThrownBy(() -> new LottoMachine(money).purchaseManual(manualLotto))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("구매할 수 있는 최대 갯수를 넘었습니다.");
 	}
@@ -45,15 +47,6 @@ class LottoMachineTest {
 		return Stream.of(
 			Arguments.of(lottosData().subList(0, 5), 1000),
 			Arguments.of(lottosData().subList(0, 8), 7000)
-		);
-	}
-
-	static Stream<Arguments> generateData() {
-		return Stream.of(
-			Arguments.of(lottosData().subList(0, 2), 5000, 3),
-			Arguments.of(lottosData().subList(0, 5), 15000, 10),
-			Arguments.of(lottosData().subList(0, 8), 8000, 0),
-			Arguments.of(Collections.emptyList(), 5000, 5)
 		);
 	}
 

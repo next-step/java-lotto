@@ -28,10 +28,10 @@ public class ResultView {
 		ResultView.print(ResultView.TOTAL_REVENUE, lottoMatchResult.getProfit());
 	}
 
-	public static void printPurchaseResult(LottoMachine lottoMachine) {
-		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, lottoMachine.purchasedManualLottoCount(), lottoMachine.purchasedAutoLottoCount());
-		ResultView.print(lottoMachine.printAutoLotto());
-		ResultView.print(lottoMachine.printManualLotto());
+	public static void printPurchaseResult(Lottos auto, Lottos manual) {
+		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, auto.lottoCount(), manual.lottoCount());
+		ResultView.print(auto.toString());
+		ResultView.print(manual.toString());
 	}
 
 	private static String matchingCountMessage(LottoPrize lottoPrize) {

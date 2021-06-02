@@ -13,44 +13,32 @@ public class LottoMachine {
 	private static final List<LottoNumber> LOTTO_NUMBER_BUCKET = IntStream.range(LottoNumber.MIN_NUMBER,LottoNumber.MAX_NUMBER)
 		.mapToObj(LottoNumber::new).collect(Collectors.toList());
 
-	private Lottos purchasedAutoLotto;
-	private Lottos purchasedManualLotto;
+	private int money;
 
-	public LottoMachine(int money, List<Lotto> manualLottos) {
+	public LottoMachine(int money) {
+		if(money < LOTTO_PRICE) {
+			throw new IllegalArgumentException("로또 최소 금액은 1000원입니다.");
+		}
+		this.money = money;
+	}
+
+	public Lottos purchaseManual(List<Lotto> manualLottos) {
 		if(isOverManualLottoCount(money, manualLottos.size())) {
 			throw new IllegalArgumentException("구매할 수 있는 최대 갯수를 넘었습니다.");
 		}
-		purchase(money, manualLottos);
+		return new Lottos(manualLottos);
 	}
 
-	public int purchasedAutoLottoCount() {
-		return purchasedAutoLotto.lottoCount();
+	public Lottos purchaseAuto(int count) {
+		return new Lottos(Stream.generate(this::generateLotto).limit(count).collect(Collectors.toList()));
 	}
 
-	public int purchasedManualLottoCount() {
-		return purchasedManualLotto.lottoCount();
-	}
-
-	public Lottos getPurchasedLotto() {
-		return new Lottos(Stream.concat(purchasedAutoLotto.getLottos().stream(),
-			purchasedManualLotto.getLottos().stream()).collect(Collectors.toList()));
+	public int purchaseLottoCount() {
+		return this.money / LOTTO_PRICE;
 	}
 
 	private boolean isOverManualLottoCount(int money, int manualLottoCount) {
 		return manualLottoCount > maxPurchaseLottoCount(money);
-	}
-
-	private void purchase(int money, List<Lotto> manualLottos) {
-		this.purchasedManualLotto = purchaseManual(manualLottos);
-		this.purchasedAutoLotto = purchaseAuto(maxPurchaseLottoCount(money) - manualLottos.size());
-	}
-
-	private Lottos purchaseManual(List<Lotto> manualLottos) {
-		return new Lottos(manualLottos);
-	}
-
-	private Lottos purchaseAuto(int count) {
-		return new Lottos(Stream.generate(this::generateLotto).limit(count).collect(Collectors.toList()));
 	}
 
 	private int maxPurchaseLottoCount(int money) {
@@ -64,13 +52,5 @@ public class LottoMachine {
 
 	private Lotto generateLotto() {
 		return new Lotto(getRandomLottoNumber());
-	}
-
-	public String printAutoLotto() {
-		return this.purchasedAutoLotto.toString();
-	}
-
-	public String printManualLotto() {
-		return this.purchasedManualLotto.toString();
 	}
 }
