@@ -13,6 +13,7 @@ public class Lottos {
             lottos.add(new Lotto());
         }
         this.lottos = lottos;
+        printLottos();
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -28,6 +29,10 @@ public class Lottos {
             int matchCount = lotto.getMatchCount(winningLotto);
             LottoPrize.findByMatchCount(matchCount).updateWinningResult(matchCount);
         }
+    }
+
+    public void printLottos() {
+        lottos.forEach(Lotto::printLotto);
     }
 
 }

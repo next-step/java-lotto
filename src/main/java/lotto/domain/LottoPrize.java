@@ -34,7 +34,7 @@ public enum LottoPrize {
                 .findFirst().orElse(NONE);
     }
 
-    static long getTotalPrize() {
+    public static long getTotalPrize() {
         long total = 0;
         for (LottoPrize prize : values()) {
             total += prize.winningPrize;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static lotto.io.Message.REQUEST_PURCHASE_AMOUNT;
+import static lotto.io.Message.REQUEST_WINNING_NUMBER;
 import static lotto.io.OutputView.print;
 
 public class InputView {
@@ -16,7 +17,7 @@ public class InputView {
     public static int requestPurchaseAmount() {
         try {
             print(REQUEST_PURCHASE_AMOUNT);
-            return scan.nextInt();
+            return Integer.parseInt(scan.nextLine());
         } catch (Exception e) {
             print(e.getMessage());
             return requestPurchaseAmount();
@@ -24,7 +25,8 @@ public class InputView {
     }
 
     public static Lotto requestWinningLotto() {
-        String input = scan.next();
+        print(REQUEST_WINNING_NUMBER);
+        String input = scan.nextLine();
         try {
             List<Integer> numbers = SplitUtil.fromStringToList(input);
             return new Lotto(numbers);

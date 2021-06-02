@@ -2,6 +2,9 @@ package lotto.domain;
 
 import java.util.*;
 
+import static lotto.io.OutputView.print;
+
+
 public class Lotto {
 
     static List<Integer> LOTTO_NUMBER_POOL = Arrays.asList(
@@ -23,13 +26,17 @@ public class Lotto {
         List<Integer> numbers = LOTTO_NUMBER_POOL.subList(0, LOTTO_SIZE);
         this.numbers = new ArrayList<>(numbers);
         validateLotto();
-        Collections.sort(numbers);
+        Collections.sort(this.numbers);
     }
 
     public int getMatchCount(Lotto winningLotto) {
         return (int) numbers.stream()
                 .filter(winningLotto.numbers::contains)
                 .count();
+    }
+
+    public void printLotto() {
+        print(numbers.toString());
     }
 
     private void validateLotto() {
