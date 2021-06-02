@@ -25,4 +25,11 @@ class LottoMoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("로또 티켓 수 구하기")
+    @Test
+    void ticketCount() {
+        int purchaseMoney = 14000;
+        LottoMoney lottoMoney = new LottoMoney(purchaseMoney);
+        assertThat(lottoMoney.getLottoTicketCount()).isEqualTo(purchaseMoney / LOTTO_PRICE);
+    }
 }
