@@ -9,8 +9,8 @@ public class LottoGeneratorTest {
 
     @Test
     @DisplayName("로또 번호 자동 생성 테스트")
-    void lottoNumberGeneratorTest() {
+    void create() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        assertThat(lottoGenerator.generate().size()).isEqualTo(6);
+        assertThat(lottoGenerator.generate()).isInstanceOf(Lotto.class);
     }
 }

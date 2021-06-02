@@ -4,53 +4,35 @@ import java.util.*;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_VALID_COUNT = 6;
-    public static final int LOTTO_NUMBER_MINIMUM = 1;
-    public static final int LOTTO_NUMBER_MAXIMUM = 45;
 
     public static final String ERROR_MASSAGE_WRONG_NUMBER_COUNT = "Lotto Number count is wrong";
     public static final String ERROR_MASSAGE_DUPLICATE_NUMBER = "This Numbers has duplicate number";
-    public static final String ERROR_MASSAGE_OUT_OF_RANGE_LOTTO_NUMBER = "out of range Lotto number";
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(String lottoString) {
+    public Lotto(List<Integer> lotto) {
+
         lottoNumbers = new ArrayList<>();
-        String[] lottoArray = parseLottoString(lottoString);
-        validNumberCount(lottoArray);
-        validDuplicateNumber(lottoArray);
+        lotto.stream().map(LottoNumber::new).forEach(lottoNumbers::add);
 
-        for (String value : lottoArray) {
-            lottoNumbers.add(validRangeNumber(value));
-        }
+        validNumberCount();
+        validDuplicateNumber();
     }
 
-    private int validRangeNumber(String number) {
-        int lottoNumber = Integer.parseInt(number);
-        if (!(lottoNumber >= LOTTO_NUMBER_MINIMUM && LOTTO_NUMBER_MAXIMUM >= lottoNumber)) {
-            throw new IllegalArgumentException(ERROR_MASSAGE_OUT_OF_RANGE_LOTTO_NUMBER);
-        }
-        return lottoNumber;
-    }
-
-    private void validNumberCount(String[] lottoArray) {
-        if (lottoArray.length != LOTTO_NUMBER_VALID_COUNT) {
+    private void validNumberCount() {
+        if (this.lottoNumbers.size() != LOTTO_NUMBER_VALID_COUNT) {
             throw new IllegalArgumentException(ERROR_MASSAGE_WRONG_NUMBER_COUNT);
         }
     }
 
-    private void validDuplicateNumber(String[] lottoArray) {
-        Set<String> lottoNumberSet = new HashSet<>(Arrays.asList(lottoArray));
-        if (lottoNumberSet.size() != lottoArray.length) {
+    private void validDuplicateNumber() {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumberSet.size() != this.lottoNumbers.size()) {
             throw new IllegalArgumentException(ERROR_MASSAGE_DUPLICATE_NUMBER);
         }
     }
 
-    private String[] parseLottoString(String lottoString) {
-        return lottoString.replaceAll("[\\[\\] ]", "")
-                .split(",");
-    }
-
     public boolean hasNumber(int value) {
-        return lottoNumbers.contains(value);
+        return lottoNumbers.contains(new LottoNumber(value));
     }
 }

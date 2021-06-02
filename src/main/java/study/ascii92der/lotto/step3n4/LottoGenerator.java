@@ -11,31 +11,26 @@ public class LottoGenerator {
     public static final int LOTTO_INDEX_START = 0;
     public static final int LOTTO_INDEX_END = 6;
 
-    private final List<String> lottoList;
+    private final List<Integer> numberList;
 
     public LottoGenerator() {
-        lottoList = new ArrayList<>();
-
+        numberList = new ArrayList<>();
         for (int lottoNumber = LOTTO_MINIMUM_NUMBER; lottoNumber <= LOTTO_MAXIMUM_NUMBER; lottoNumber++) {
-            lottoList.add(String.valueOf(lottoNumber));
+            numberList.add(lottoNumber);
         }
     }
 
-    public List<String> generate() {
-        Collections.shuffle(lottoList);
-        return lottoList.subList(LOTTO_INDEX_START, LOTTO_INDEX_END);
+    public Lotto generate() {
+        Collections.shuffle(this.numberList);
+        return new Lotto(this.numberList.subList(LOTTO_INDEX_START, LOTTO_INDEX_END));
     }
 
     public List<Lotto> generateLottos(LottoPrice lottoPrice) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<Lotto> lottosList = new ArrayList<>();
         for (int i = 0; i < lottoPrice.lottoCount(); i++) {
-            List<String> generatedNumberList = generate();
-            Collections.sort(generatedNumberList);
-            String lottoNumbers = String.join(",", generatedNumberList);
-            ResultView.printLottoNumbers(lottoNumbers);
-            lottos.add(new Lotto(lottoNumbers));
+            lottosList.add(this.generate());
         }
-        return lottos;
+        return lottosList;
     }
 
 }
