@@ -12,20 +12,6 @@ public class WinnerLottery {
     }
 
     public int match(LotteryNumbers input) {
-        int matchCount = DEFAULT_MATCH_COUNT;
-
-        for (LotteryNumber number : winnerNumbers.numbers()) {
-            matchCount = addCountIfContains(input, matchCount, number);
-        }
-
-        return matchCount;
-    }
-
-    private int addCountIfContains(LotteryNumbers input, int matchCount, LotteryNumber number) {
-        if (input.contains(number)) {
-            return matchCount + MATCH_COUNT;
-        }
-
-        return matchCount;
+        return winnerNumbers.match(input);
     }
 }

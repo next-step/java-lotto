@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.*;
 
+import static lottery.domain.WinnerLottery.DEFAULT_MATCH_COUNT;
+import static lottery.domain.WinnerLottery.MATCH_COUNT;
+
 public class LotteryNumbers {
 
     private static final int MINIMUM_LOTTERY_NUMBERS_SIZE = 6;
@@ -34,6 +37,24 @@ public class LotteryNumbers {
         if (sizeOfNumbers != MINIMUM_LOTTERY_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6자리이어야 합니다. : " + sizeOfNumbers);
         }
+    }
+
+    public int match(LotteryNumbers input) {
+        int matchCount = DEFAULT_MATCH_COUNT;
+
+        for (LotteryNumber number : numbers) {
+            matchCount = addCountIfContains(input, matchCount, number);
+        }
+
+        return matchCount;
+    }
+
+    private int addCountIfContains(LotteryNumbers input, int matchCount, LotteryNumber number) {
+        if (input.contains(number)) {
+            return matchCount + MATCH_COUNT;
+        }
+
+        return matchCount;
     }
 
     public ImmutableList<LotteryNumber> numbers() {
