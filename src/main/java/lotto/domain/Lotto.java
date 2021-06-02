@@ -7,29 +7,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public final class Lotto {
 
   private final List<Integer> numbers;
-  private static final Integer NUMBER_COUNT = 6;
   private Rank rank;
 
   public Lotto(NumberGenerator numberGenerator) {
-    numbers = numberGenerator.generateNumbersOf(NUMBER_COUNT);
-    print(numbers);
-  }
+    numbers = numberGenerator.generateNumbers();
 
-  public Lotto(String autoLottoNumber) {
-    numbers = Arrays.stream(autoLottoNumber.trim().replace(" ","").split(","))
-        .map(Integer::parseInt)
-        .collect(Collectors.toList());
-    print(numbers);
-  }
-
-  private void print(List<Integer> numbers) {
     Collections.sort(numbers);
-    System.out.println(Arrays.toString(numbers.toArray()));
+    MessagePrinter.print(Arrays.toString(numbers.toArray()));
   }
 
   public Rank getRankBy(WinningNumber winningNumber) {
