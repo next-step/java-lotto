@@ -12,7 +12,7 @@ public class LottoGame {
 
 	private final LottoList purchasedList;
 
-	private final LottoAssets assets;
+	private LottoAssets assets;
 
 	private LottoWinningResult winningResult;
 
@@ -21,8 +21,8 @@ public class LottoGame {
 		this.assets = new LottoAssets(0);
 	}
 
-	public void initAssets(int assets) {
-		this.assets.updateAsset(assets);
+	public void initiateAssets(int assets) {
+		this.assets = new LottoAssets(assets);
 	}
 
 	public LottoWinningResult getWinningResult() {

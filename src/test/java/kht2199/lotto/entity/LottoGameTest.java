@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import kht2199.lotto.exception.LottoListEmptyException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.exception.number.LottoNumberLengthException;
 import kht2199.lotto.exception.number.LottoNumberRangeException;
@@ -21,7 +20,7 @@ class LottoGameTest {
 	@MethodSource("calculatePurchasableLottoCountSource")
 	void calculatePurchasableLottoCount(int assets, int calculated) {
 		LottoGame game = new LottoGame();
-		game.initAssets(assets);
+		game.initiateAssets(assets);
 		assertThat(game.calculatePurchasableLottoCount())
 			.isEqualTo(calculated);
 	}
@@ -43,7 +42,7 @@ class LottoGameTest {
 		LottoNumberLengthException,
 		LottoNumberRangeException {
 		LottoGame game = new LottoGame();
-		game.initAssets(assets);
+		game.initiateAssets(assets);
 		LottoList list = new LottoList();
 		while (countsOfLotto-- > 0) {
 			list.addLotto(LottoNumber.valuesOf(1, 2, 3, 4, 5, 6));

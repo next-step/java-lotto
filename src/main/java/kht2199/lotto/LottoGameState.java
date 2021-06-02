@@ -24,7 +24,7 @@ public enum LottoGameState {
 		@Override
 		public LottoGameState process(RandomLottoUI ui, LottoGame game) throws AssetsException, InvalidInputException {
 			int assets = ui.acceptAssets();
-			game.initAssets(assets);
+			game.initiateAssets(assets);
 			return PURCHASE_MANUALLY;
 		}
 	},

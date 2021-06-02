@@ -30,10 +30,6 @@ public final class LottoAssets {
 		assets -= assetsUsed;
 	}
 
-	void updateAsset(int assets) {
-		this.assets = assets;
-	}
-
 	public void validatePurchasable(int amount) throws AssetsNotEnoughException {
 		if (assets < amount) {
 			throw new AssetsNotEnoughException();
