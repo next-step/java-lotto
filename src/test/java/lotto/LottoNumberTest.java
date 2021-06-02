@@ -22,13 +22,13 @@ class LottoNumberTest {
 
     @Test
     void testToString() {
-        LottoNumber stringLotto=new LottoNumber(1);
+        LottoNumber stringLotto = new LottoNumber(1);
         assertThat(stringLotto.toString()).isEqualTo("1");
     }
 
     @Test
-    void testValidate(){
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(()->{
+    void testValidate() {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             new LottoNumber(-1);
         });
     }

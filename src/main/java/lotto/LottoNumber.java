@@ -1,7 +1,9 @@
 package lotto;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private int value;
+    private final int value;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     public LottoNumber(int num) {
         validateLottoNumber(num);
@@ -13,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(int num) {
-        if (num <= 0 || num > 45) {
+        if (num < MIN_LOTTO_NUMBER || num > MAX_LOTTO_NUMBER) {
             throw new RuntimeException("로또번호는 1~45사이여야합니다.");
         }
     }
