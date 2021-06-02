@@ -48,8 +48,9 @@ public class ManualLottoStore extends LottoStore {
     private List<LottoNumbers> manualInputLotto() {
         OutputView.sendMessage(MANUAL_LOTTO_COUNT_MESSAGE);
         List<LottoNumbers> result = new ArrayList<>(manualCount);
+        MessageLottoNumberGenerator generator = new MessageLottoNumberGenerator();
         while (result.size() < manualCount) {
-            result.add(MessageLottoNumberGenerator.of(InputView.lottoNumberMessage()));
+            result.add(generator.generate(InputView.lottoNumberMessage()));
         }
         return result;
     }

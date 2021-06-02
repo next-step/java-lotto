@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lotto.statistics.Ranking;
@@ -71,5 +72,20 @@ public class LottoNumbers {
 
     private boolean isValidSource(List<Integer> numbers) {
         return numbers.size() == LOTTO_SIZE;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof LottoNumbers))
+            return false;
+        LottoNumbers that = (LottoNumbers)o;
+        return lottoNumbers.equals(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
