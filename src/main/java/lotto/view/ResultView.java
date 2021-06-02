@@ -27,6 +27,10 @@ public class ResultView {
         System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
     }
 
+    public void print(int manualBuyCount, int autoBuyCount){
+        System.out.println("수동으로 " + manualBuyCount + "장 자동으로 " + autoBuyCount + "개를 구매했습니다.");
+    }
+
     public void print() {
         System.out.println();
         System.out.println("당첨 통계");

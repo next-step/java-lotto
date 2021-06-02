@@ -1,6 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -33,7 +35,6 @@ public class InputView {
     }
 
     public String numbers() {
-        scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
@@ -49,5 +50,19 @@ public class InputView {
             scanner = new Scanner(System.in);
             return bonusBall();
         }
+    }
+
+    public List<String> manualBuy(int manualBuyCount) {
+
+        List<String> manualBuyCounts = new ArrayList<>();
+        scanner.nextLine();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요");
+
+        for (int i = 0; i < manualBuyCount; i++) {
+            manualBuyCounts.add(scanner.nextLine());
+        }
+        System.out.println();
+
+        return manualBuyCounts;
     }
 }

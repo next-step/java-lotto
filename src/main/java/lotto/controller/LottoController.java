@@ -23,10 +23,12 @@ public class LottoController {
 
         int buyCount = lottoMachine.buyCount(money);
         int manualBuyCount = inputView.manualBuyCount();
-
+        int autoBuyCount = buyCount - manualBuyCount;
         lottoMachine.buyCountValid(buyCount, manualBuyCount);
 
-        List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount - manualBuyCount);
+        List<LottoNumbers> lottoNumbers = lottoMachine.lottoNumbers(inputView.manualBuy(manualBuyCount), autoBuyCount);
+
+        resultView.print(manualBuyCount, autoBuyCount);
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();

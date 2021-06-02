@@ -2,10 +2,7 @@ package lotto.model;
 
 import lotto.exception.BuyCountErrorException;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -28,8 +25,23 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumbers> autoLottoNumbers(int buyCount) {
+    private List<LottoNumbers> manualLottoNumbers(List<String> manualBuys) {
+        return manualBuys.stream().map(LottoNumbers::new).collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> autoLottoNumbers(int buyCount) {
         return IntStream.range(0, buyCount).mapToObj(i -> oneLottoNumbers()).collect(Collectors.toList());
+    }
+
+    public List<LottoNumbers> lottoNumbers(List<String> manualLotto, int autoBuyCount) {
+        List<LottoNumbers> manualLottoNumbers = manualLottoNumbers(manualLotto);
+        List<LottoNumbers> autoLottoNumbers = autoLottoNumbers(autoBuyCount);
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+
+        lottoNumbers.addAll(manualLottoNumbers);
+        lottoNumbers.addAll(autoLottoNumbers);
+
+        return lottoNumbers;
     }
 
     public int buyCount(int money) {
