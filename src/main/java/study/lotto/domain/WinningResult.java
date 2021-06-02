@@ -1,15 +1,13 @@
 package study.lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class WinningResult {
     private static final Map<LottoRank, Integer> winningResult = new LinkedHashMap<>();
 
-    static {
+    public WinningResult() {
         for (LottoRank value : LottoRank.values()) {
             addWitoutMiss(winningResult, value);
         }

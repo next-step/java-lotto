@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private static final String PURCHASE_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private static final String RESULT_MESSAGE = "\n당첨 통계\n---------";
     private static final String WINNING_PRIZE_RESULT_MESSAGE = "%d개 일치%s(%s원)- %d개\n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %,.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n";
 
@@ -29,6 +30,7 @@ public class ResultView {
     }
 
     public void winningResult(WinningResult winningResult, BigDecimal profitRate) {
+        System.out.println(RESULT_MESSAGE);
         for (LottoRank lottoRank : winningResult.value().keySet()) {
             System.out.printf(WINNING_PRIZE_RESULT_MESSAGE,
                     lottoRank.matchCount(),

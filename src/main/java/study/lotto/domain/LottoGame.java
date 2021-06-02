@@ -12,10 +12,6 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    public static final int MARK_SIZE = 6;
-    public static final int LOTTONUMBER_FROM = 1;
-    public static final int LOTTONUMBER_TO = 45;
-
     public static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
     private final InputView inputView;
     private final ResultView resultView;
@@ -28,8 +24,8 @@ public class LottoGame {
     public void play() {
         BigDecimal purchaseAmount = inputView.inputPurchaseAmount();
         PurchasedLottos purchasedLottos = purchase(purchaseableNumber(purchaseAmount));
-        WinningNumbers winningNumbers = inputWinninNumbers();
-        WinningResult winningResult = checkPrize(purchasedLottos, winningNumbers);
+        WinningLotto winningLotto = inputWinninLotto();
+        WinningResult winningResult = checkPrize(purchasedLottos, winningLotto);
         printResult(purchaseAmount, winningResult);
     }
 
@@ -37,16 +33,16 @@ public class LottoGame {
         return amount.divide(LOTTO_PRICE,0, RoundingMode.DOWN).intValue();
     }
 
-    private WinningNumbers inputWinninNumbers() {
-        Lotto winningNumbers = new Lotto(inputView.inputWinningNumbers());
+    private WinningLotto inputWinninLotto() {
+        Lotto winningLotto = new Lotto(inputView.inputWinningLotto());
         LottoNumber bonusNumber = inputView.inputBonusNumber();
-        validateBonusNumber(winningNumbers, bonusNumber);
+        validateBonusNumber(winningLotto, bonusNumber);
 
-        return new WinningNumbers(winningNumbers, bonusNumber);
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    public void validateBonusNumber(Lotto winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.lotto().contains(bonusNumber)) {
+    public void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new DuplicateBonusBallException();
         }
     }
@@ -77,11 +73,11 @@ public class LottoGame {
         }
     }
 
-    public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
+    public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
         for (Lotto lotto : purchasedLottos.values()) {
-            int matchCount = lotto.matchWinningNumberCount(winningNumbers.lottoNumbers());
-            boolean matchBonus = lotto.isMatchBonus(winningNumbers.bonusNumber());
+            int matchCount = lotto.matchWinningNumberCount(winningLotto.lotto());
+            boolean matchBonus = lotto.isMatchBonus(winningLotto.bonusNumber());
             winningResult.addPrize(matchCount, matchBonus);
         }
 

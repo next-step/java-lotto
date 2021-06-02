@@ -2,8 +2,6 @@ package study.lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public enum LottoRank {
     MISS(0, BigDecimal.ZERO),

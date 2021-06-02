@@ -43,11 +43,11 @@ public class Lotto {
         return lotto;
     }
 
-    public static Lotto randomNumbers() {
+    public static Lotto randomLotto() {
         List<Integer> keys = new ArrayList<>(LottoNumber.LOTTO_NUMBER_MAP.keySet());
         Collections.shuffle(keys);
 
-        return new Lotto(keys.stream().limit(LottoGame.MARK_SIZE).map(LottoNumber::of).collect(Collectors.toSet()));
+        return new Lotto(keys.stream().limit(LOTTO_SIZE).map(LottoNumber::of).collect(Collectors.toSet()));
     }
 
     public List<LottoNumber> lotto() {
@@ -56,10 +56,10 @@ public class Lotto {
         return lottoNumberList;
     }
 
-    public int matchWinningNumberCount(Lotto winningNumbers) {
-        List<LottoNumber> numbers = new ArrayList<>(winningNumbers.lotto());
+    public int matchWinningNumberCount(Lotto winningLotto) {
+        List<LottoNumber> numbers = new ArrayList<>(winningLotto.lotto());
         numbers.removeAll(lotto);
-        return LottoGame.MARK_SIZE - numbers.size();
+        return LOTTO_SIZE - numbers.size();
     }
 
     public boolean isMatchBonus(LottoNumber bonusNumber) {
@@ -85,5 +85,9 @@ public class Lotto {
         return lotto().stream()
                 .map(LottoNumber::value).collect(Collectors.toList())
                 .toString();
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lotto.contains(bonusNumber);
     }
 }

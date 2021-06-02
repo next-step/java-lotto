@@ -2,9 +2,7 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.StringAddCalculator;
 import study.lotto.domain.Lotto;
-import study.lotto.domain.LottoRank;
 import study.lotto.exception.WrongLottoNumberException;
 import study.lotto.exception.WrongLottoSizeException;
 
@@ -18,7 +16,7 @@ public class LottoTest {
     @DisplayName("자동으로 랜덤한 6개의 로또 번호를 가진 로또종이가 생성")
     @Test
     public void randomNumberLottoPaperTest() {
-        Lotto lotto = Lotto.randomNumbers();
+        Lotto lotto = Lotto.randomLotto();
         assertThat(lotto.lotto().size()).isEqualTo(6);
     }
 
@@ -65,8 +63,8 @@ public class LottoTest {
     @Test
     public void randomNumberLottoPaperTest2() {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto winningNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        int matchCount = lotto.matchWinningNumberCount(winningNumbers);
+        Lotto winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        int matchCount = lotto.matchWinningNumberCount(winningLotto);
 
         assertThat(matchCount).isEqualTo(6);
     }

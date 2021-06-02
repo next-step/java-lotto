@@ -1,18 +1,16 @@
 package study.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class WinningNumbers {
+public class WinningLotto {
     Lotto winningLotto;
     LottoNumber bonusNumber;
 
-    public WinningNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public Lotto lottoNumbers() {
+    public Lotto lotto() {
         return winningLotto;
     }
 
