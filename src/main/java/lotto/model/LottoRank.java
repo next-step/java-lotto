@@ -26,7 +26,7 @@ public enum LottoRank {
         LottoRank matchingLottoRank = Arrays.stream(values())
                 .filter(rank -> (rank.matchCount == matchCount))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(RuntimeException::new);
         if (matchingLottoRank.equals(LottoRank.MATCH_COUNT_FIVE) && hasBonus){
             return LottoRank.MATCH_COUNT_FIVE_AND_BONUS;
         }
