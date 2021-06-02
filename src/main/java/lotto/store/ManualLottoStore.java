@@ -31,10 +31,7 @@ public class ManualLottoStore extends LottoStore {
 
         OutputView.sendMessage(String.format(MANUAL_AND_AUTOMATIC_COUNT_MESSAGE, manualCount, automaticCount));
         AutoLottoNumberGenerator autoGenerator = new AutoLottoNumberGenerator();
-        for (int i = 0; i < automaticCount; i++) {
-            LottoNumbers lotto = autoGenerator.generate();
-            result.add(lotto);
-        }
+        result.addAll(autoGenerator.generate(automaticCount));
         return new Ticket(result, budget);
     }
 
