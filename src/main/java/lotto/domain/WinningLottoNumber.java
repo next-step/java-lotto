@@ -2,33 +2,16 @@ package lotto.domain;
 
 import lotto.exception.AlreadyAppliedBonusNumberException;
 import lotto.exception.DuplicatedBonusNumberException;
-import lotto.exception.WinningLottoNonPositiveNumberException;
-import lotto.exception.WinningLottoNumberCountException;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import static java.lang.Integer.parseInt;
-import static lotto.domain.LottoGame.LOTTO_NUMBER_COUNT;
-import static lotto.domain.LottoNumber.valueOf;
 
 public class WinningLottoNumber {
-    private static final String COMMA = ",";
-    private static final int MATCHING_BONUS_NUMBER  = 1;
-    private static final int MISMATCHING_BONUS_NUMBER  = 0;
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+(,\\d+)*$");
+    private static final int MATCHING_BONUS_NUMBER = 1;
+    private static final int MISMATCHING_BONUS_NUMBER = 0;
 
     private LottoGame prizeLottoNumber;
     private LottoNumber bonusLottoNumber;
 
-    public WinningLottoNumber(String prizeLottoNumberInput) {
-        validateConstructor(prizeLottoNumberInput);
-        parseValues(prizeLottoNumberInput);
+    public WinningLottoNumber(LottoGame prizeLottoNumber) {
+        this.prizeLottoNumber = prizeLottoNumber;
     }
 
     public LottoResult decidePrize(LottoGames lottoGames) {
@@ -43,33 +26,11 @@ public class WinningLottoNumber {
         return lottoResult;
     }
 
-    public void applyBonusNumber(String bonusNumberInput) {
+    public void applyBonusNumber(LottoNumber lottoNumber) {
         validateAlreadySet();
-        validateBonusNumber(bonusNumberInput);
+        validateBonusNumber(lottoNumber);
 
-        this.bonusLottoNumber = LottoNumber.valueOf(parseInt(bonusNumberInput));
-    }
-
-    private void validateConstructor(String prizeLottoNumberInput) {
-        validatePositiveNumber(prizeLottoNumberInput);
-        validateInputSize(prizeLottoNumberInput);
-    }
-
-    private void validatePositiveNumber(String prizeLottoNumberInput) {
-        Matcher numberArrayCheckResult = NUMBER_PATTERN.matcher(prizeLottoNumberInput);
-        if (!numberArrayCheckResult.find()) {
-            throw new WinningLottoNonPositiveNumberException();
-        }
-    }
-
-    private void validateInputSize(String prizeLottoNumberInput) {
-        String[] tempPrizeLottoNumberArray = prizeLottoNumberInput.split(",");
-        List<String> tempPrizeLottoNumberList = Arrays.asList(tempPrizeLottoNumberArray);
-        Set<String> tempPrizeLottoNumberSetForSizeCheck = new HashSet<>(tempPrizeLottoNumberList);
-
-        if (tempPrizeLottoNumberSetForSizeCheck.size() != LOTTO_NUMBER_COUNT) {
-            throw new WinningLottoNumberCountException();
-        }
+        this.bonusLottoNumber = lottoNumber;
     }
 
     private void validateAlreadySet() {
@@ -78,20 +39,10 @@ public class WinningLottoNumber {
         }
     }
 
-    private void validateBonusNumber(String bonusNumberInput) {
-        LottoNumber tempBonusNumber = valueOf(Integer.parseInt(bonusNumberInput));
-
-        if (prizeLottoNumber.find(tempBonusNumber)) {
+    private void validateBonusNumber(LottoNumber bonusLottoNumber) {
+        if (prizeLottoNumber.find(bonusLottoNumber)) {
             throw new DuplicatedBonusNumberException();
         }
-    }
-
-    private void parseValues(String playerInput) {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(playerInput.split(COMMA))
-                .map(each -> valueOf(parseInt(each)))
-                .collect(Collectors.toSet());
-
-        prizeLottoNumber = LottoGame.createManual(lottoNumbers);
     }
 
     private Rank decidePrizeEachGame(LottoGame lottoGame) {

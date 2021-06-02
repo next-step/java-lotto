@@ -2,8 +2,7 @@ package lotto.domain;
 
 import lotto.exception.AlreadyAppliedBonusNumberException;
 import lotto.exception.DuplicatedBonusNumberException;
-import lotto.exception.WinningLottoNonPositiveNumberException;
-import lotto.exception.WinningLottoNumberCountException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,36 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 @DisplayName("WinningLottoNumber 테스트")
 class WinningLottoNumberTest {
 
-    @DisplayName("new_정상")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,7",
-            "13,22,14,34,25,37",
-            "21,23,35,42,15,37",
-            "31,22,43,44,45,17",})
-    void new_정상(String input) {
-        assertDoesNotThrow(() -> new WinningLottoNumber(input));
-    }
-
-    @DisplayName("new_예외_음수")
-    @ParameterizedTest
-    @ValueSource(strings = {"-1,-3,2,3,5,6",
-            "21,23,37,42,15,-1"})
-    void new_예외_음수(String input) {
-        // When, Then
-        assertThatExceptionOfType(WinningLottoNonPositiveNumberException.class)
-                .isThrownBy(() -> new WinningLottoNumber(input));
-    }
-
-    @DisplayName("new_예외_부족한_번호_수")
-    @ParameterizedTest
-    @ValueSource(strings = {"21,23,37,42",
-            "31,22,43,44"})
-    void new_예외_부족한_번호_수(String input) {
-        // When, Then
-        assertThatExceptionOfType(WinningLottoNumberCountException.class)
-                .isThrownBy(() -> new WinningLottoNumber(input));
-    }
-
+    private WinningLottoNumber winningLottoNumberForTest;
+    private LottoNumber bonusLottoNumberForTest;
     private List<LottoGame> mockLottoGameList = Arrays.asList(
             createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(6)))),
             createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(4), valueOf(5), valueOf(7)))),
@@ -61,12 +32,31 @@ class WinningLottoNumberTest {
             createManual(new HashSet(Arrays.asList(valueOf(1), valueOf(2), valueOf(3), valueOf(13), valueOf(14), valueOf(15))))
     );
 
+    @BeforeEach
+    void setUp() {
+        winningLottoNumberForTest = new WinningLottoNumber(createManual("1,2,3,4,5,6"));
+        bonusLottoNumberForTest = valueOf(7);
+    }
+
+    @DisplayName("new_정상")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,7",
+            "13,22,14,34,25,37",
+            "21,23,35,42,15,37",
+            "31,22,43,44,45,17",})
+    void new_정상(String input) {
+        // Given
+        LottoGame lottoGame = LottoGame.createManual(input);
+
+        // When, Then
+        assertDoesNotThrow(() -> new WinningLottoNumber(lottoGame));
+    }
+
     @DisplayName("decidePrize_정상")
     @Test
     void decidePrize_정상() {
         // Given
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6");
-        winningLottoNumber.applyBonusNumber("7");
+        winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest);
         LottoGames lottoGames = new LottoGames(mockLottoGameList);
         final int EXPECTED_FIRST_COUNT = 1;
         final int EXPECTED_SECOND_COUNT = 1;
@@ -75,7 +65,7 @@ class WinningLottoNumberTest {
         final int EXPECTED_FIFTH_COUNT = 2;
 
         // When
-        LottoResult lottoResult = winningLottoNumber.decidePrize(lottoGames);
+        LottoResult lottoResult = winningLottoNumberForTest.decidePrize(lottoGames);
 
         // Then
         assertThat(lottoResult.get(FIRST)).isEqualTo(EXPECTED_FIRST_COUNT);
@@ -88,37 +78,28 @@ class WinningLottoNumberTest {
     @DisplayName("applyBonusNumber_정상")
     @Test
     void applyBonusNumber_정상() {
-        // Given
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6");
-        final String bonusNumberInput = "7";
-
-        // When, Then
-        assertDoesNotThrow(() -> winningLottoNumber.applyBonusNumber(bonusNumberInput));
+        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
     }
 
     @DisplayName("applyBonusNumber_예외1_비정상적인_보너스_번호_변경_시도_예외")
     @Test
     void applyBonusNumber_예외1_비정상적인_보너스_번호_변경_시도_예외() {
-        // Given
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6");
-        final String bonusNumberInput = "7";
-
         // When, Then
-        assertDoesNotThrow(() -> winningLottoNumber.applyBonusNumber(bonusNumberInput));
+        assertDoesNotThrow(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
 
         assertThatExceptionOfType(AlreadyAppliedBonusNumberException.class)
-                .isThrownBy(() -> winningLottoNumber.applyBonusNumber(bonusNumberInput));
+                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumberForTest));
     }
 
     @DisplayName("applyBonusNumber_예외2_당첨번호와_중복되는_보너스번호_적용_예외")
     @Test
     void applyBonusNumber_예외2_당첨번호와_중복되는_보너스번호_적용_예외() {
         // Given
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6");
-        final String bonusNumberInput = "6";
+        final int NON_DUPLICATED_NUMBER = 6;
+        LottoNumber bonusLottoNumber = valueOf(NON_DUPLICATED_NUMBER);
 
         // When, Then
         assertThatExceptionOfType(DuplicatedBonusNumberException.class)
-                .isThrownBy(() -> winningLottoNumber.applyBonusNumber(bonusNumberInput));
+                .isThrownBy(() -> winningLottoNumberForTest.applyBonusNumber(bonusLottoNumber));
     }
 }

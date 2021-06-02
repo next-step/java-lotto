@@ -5,6 +5,9 @@ import lotto.dto.PurchaseMoney;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.floor;
+import static lotto.domain.LottoPrice.LOTTO_PRICE;
+
 public class LottoResult {
     private final int INCREMENT_SIZE = 1;
 
@@ -34,6 +37,6 @@ public class LottoResult {
     }
 
     public double getProfit(PurchaseMoney purchaseMoney) {
-        return (double) getAllPrize() / purchaseMoney.getValue();
+        return (double) getAllPrize() / (floor(purchaseMoney.getAmount() / LOTTO_PRICE) * LOTTO_PRICE);
     }
 }
