@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import com.google.common.collect.ImmutableList;
+
 public class Lottery {
 
     public static final int DEFAULT_LOTTERY_PRICE = 1000;
@@ -14,6 +16,10 @@ public class Lottery {
 
     public LotteryNumbers numbers() {
         return this.lotteryNumbers;
+    }
+
+    public ImmutableList<LotteryNumber> retrieveNumbers() {
+        return this.lotteryNumbers.numbers();
     }
 
     public Price price() {

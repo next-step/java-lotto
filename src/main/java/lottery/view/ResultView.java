@@ -72,19 +72,18 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printLotteryNumbers(Lotteries lotteries) {
-        for (Lottery lottery : lotteries.lotteries()) {
+    public static void printAllLotteryNumbers(List<Lottery> lotteries) {
+        for (Lottery lottery : lotteries) {
             printInitLotteryNumber();
 
-            ImmutableList<LotteryNumber> lotteryNumbers = lottery.numbers().numbers();
-            printLotteryNumbers(lotteryNumbers);
+            printLotteryNumbers(lottery.retrieveNumbers());
 
             printCloseLotteryNumbers();
         }
     }
 
     private static void printLotteryNumbers(ImmutableList<LotteryNumber> lotteryNumbers) {
-        printLotteryNumbers(makeDisplayLotteryNumbers(lotteryNumbers));
+        printDisplayLotteryNumbers(makeDisplayLotteryNumbers(lotteryNumbers));
     }
 
     private static List<String> makeDisplayLotteryNumbers(ImmutableList<LotteryNumber> lotteryNumbers) {
@@ -97,7 +96,7 @@ public class ResultView {
         return displayNumbers;
     }
 
-    private static void printLotteryNumbers(List<String> displayNumbers) {
+    private static void printDisplayLotteryNumbers(List<String> displayNumbers) {
         System.out.print(StringUtils.join(displayNumbers, LOTTERY_NUMBER_DELIMITER));
     }
 

@@ -23,7 +23,7 @@ public class LotteryStore {
     }
 
     private static WinnerLottery receiptWinnerLottery(Lotteries lotteries) {
-        ResultView.printLotteryNumbers(lotteries);
+        ResultView.printAllLotteryNumbers(lotteries.lotteries());
         return receiptWinnerLottery();
     }
 
