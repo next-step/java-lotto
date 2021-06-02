@@ -2,7 +2,9 @@ package interaction;
 
 import java.util.Scanner;
 
+import lotto.dto.ManualGameDto;
 import lotto.store.Budget;
+import lotto.store.ManualCount;
 
 public class InputView {
 
@@ -38,8 +40,14 @@ public class InputView {
         return bonusNumber;
     }
 
-    public static int manualLottoCount() {
+    public static ManualGameDto budgetAndManualCount() {
+        Budget budget = budgetLottoPrice();
+        ManualCount manualCount = manualLottoCount();
+        return new ManualGameDto(budget, manualCount);
+    }
+
+    private static ManualCount manualLottoCount() {
         System.out.println(MANUAL_LOTTO_COUNT);
-        return scanner.nextInt();
+        return new ManualCount(scanner.nextInt());
     }
 }

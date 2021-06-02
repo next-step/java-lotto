@@ -22,4 +22,11 @@ public class LottoStoreTest {
             () -> new LottoStore(new Budget(500), 1_000));
     }
 
+    @Test
+    @DisplayName(value = "lotto를 구매하기에 충분한 예산을 준비할 경우 어떠한 exception 도 발생하지 않고 Store가 생성된다")
+    void noExceptionWhenConstruct() {
+        assertDoesNotThrow(() ->
+            new LottoStore(new Budget(10_000), 1_000));
+    }
+
 }

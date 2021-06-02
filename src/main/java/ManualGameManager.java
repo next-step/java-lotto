@@ -1,6 +1,6 @@
 import interaction.InputView;
 import interaction.OutputView;
-import lotto.store.Budget;
+import lotto.dto.ManualGameDto;
 import lotto.store.LottoStore;
 import lotto.store.ManualLottoStore;
 import lotto.store.Ticket;
@@ -18,9 +18,10 @@ public class ManualGameManager extends BonusLottoGameManager {
 
     @Override
     protected Ticket purchaseLotto() {
-        Budget budget = InputView.budgetLottoPrice();
-        int manualCount = InputView.manualLottoCount();
-        LottoStore store = new ManualLottoStore(budget, lottoPrice(), manualCount);
+        ManualGameDto manualGameDto = InputView.budgetAndManualCount();
+        manualGameDto.isValidManualCountBy(lottoPrice());
+
+        LottoStore store = new ManualLottoStore(manualGameDto, lottoPrice());
         OutputView.purchaseCountResult(store.purchaseCount());
         return store.produceLotto();
     }
