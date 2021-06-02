@@ -1,7 +1,6 @@
 package study.lotto.domain;
 
 import study.lotto.exception.DuplicateBonusBallException;
-import study.lotto.util.LottoNumberGenerator;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -28,23 +27,33 @@ public class LottoGame {
     }
 
     public void play() {
+
         BigDecimal purchaseAmount = inputView.inputPurchaseAmount();
+        ////        PurchasedLottos purchasedLottos = selfPick();
+
         PurchasedLottos purchasedLottos = purchase(purchaseAmount);
         WinningNumbers winningNumbers = inputWinninNumbers();
         WinningResult winningResult = checkPrize(purchasedLottos, winningNumbers);
         printResult(purchaseAmount, winningResult);
+
+    }
+
+    public PurchasedLottos selfPick() {
+        int selfPickLottoCount = inputView.inputSelfPickLottoCount();
+        List<String> selfPickLottoList = inputView.inputSelfPickLotto(selfPickLottoCount);
+        return new PurchasedLottos(selfPickLottoList.stream().map(Lotto::new).collect(Collectors.toList()));
     }
 
     private WinningNumbers inputWinninNumbers() {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers(inputView.inputWinningNumbers()));
+        Lotto winningNumbers = new Lotto(inputView.inputWinningNumbers());
         LottoNumber bonusNumber = inputView.inputBonusNumber();
         validateBonusNumber(winningNumbers, bonusNumber);
         return new WinningNumbers(winningNumbers, bonusNumber);
 
     }
 
-    public void validateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.lottoNumbers().contains(bonusNumber)) {
+    public void validateBonusNumber(Lotto winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.lotto().contains(bonusNumber)) {
             throw new DuplicateBonusBallException();
         }
     }
@@ -61,9 +70,9 @@ public class LottoGame {
 
     public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
         WinningResult winningResult = new WinningResult();
-        for (LottoNumbers lottoNumbers : purchasedLottos.values()) {
-            int matchCount = lottoNumbers.matchWinningNumberCount(winningNumbers.lottoNumbers());
-            boolean matchBonus = lottoNumbers.isMatchBonus(winningNumbers.bonusNumber());
+        for (Lotto lotto : purchasedLottos.values()) {
+            int matchCount = lotto.matchWinningNumberCount(winningNumbers.lottoNumbers());
+            boolean matchBonus = lotto.isMatchBonus(winningNumbers.bonusNumber());
             winningResult.addPrize(matchCount, matchBonus);
         }
 

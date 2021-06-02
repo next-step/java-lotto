@@ -12,8 +12,8 @@ public enum LottoRank {
     SECOND(5, BigDecimal.valueOf(30_000_000)),
     FIRST(6, BigDecimal.valueOf(2_000_000_000));
 
-    private int matchCount;
-    private BigDecimal prize;
+    private final int matchCount;
+    private final BigDecimal prize;
 
     LottoRank(int matchCount, BigDecimal prize) {
         this.matchCount = matchCount;
@@ -22,8 +22,8 @@ public enum LottoRank {
 
     public static Optional<LottoRank> of(int matchCount, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(winningPrize -> winningPrize.matchCount == matchCount)
-                .map(winningPrize -> checkSeconPrize(winningPrize, matchBonus))
+                .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                .map(lottoRank -> checkSeconPrize(lottoRank, matchBonus))
                 .findFirst();
     }
 
@@ -40,10 +40,6 @@ public enum LottoRank {
 
     public BigDecimal prize() {
         return prize;
-    }
-
-    public static Stream<LottoRank> stream() {
-        return Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST);
     }
 
 }

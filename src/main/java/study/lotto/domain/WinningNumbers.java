@@ -1,16 +1,16 @@
 package study.lotto.domain;
 
 public class WinningNumbers {
-    LottoNumbers lottoNumbers;
+    Lotto lotto;
     LottoNumber bonusNumber;
 
-    public WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        this.lottoNumbers = lottoNumbers;
+    public WinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumbers lottoNumbers() {
-        return lottoNumbers;
+    public Lotto lottoNumbers() {
+        return lotto;
     }
 
     public LottoNumber bonusNumber() {

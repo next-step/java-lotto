@@ -23,8 +23,8 @@ public class ResultView {
 
     public void purchasedLottos(PurchasedLottos purchasedLottos) {
         System.out.printf(PURCHASE_MESSAGE,purchasedLottos.count());
-        for (LottoNumbers lottoNumbers : purchasedLottos.values()) {
-            System.out.println(lottoNumbers.lottoNumbers().stream().map(LottoNumber::value).collect(Collectors.toList()));
+        for (Lotto lotto : purchasedLottos.values()) {
+            System.out.println(lotto.lotto().stream().map(LottoNumber::value).collect(Collectors.toList()));
         }
     }
 

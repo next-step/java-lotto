@@ -2,22 +2,45 @@ package study.lotto.domain;
 
 import study.lotto.exception.WrongLottoNumberException;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int LOTTONUMBER_FROM = 1;
+    public static final int LOTTONUMBER_TO = 45;
+    public static final List<Integer> AVAILABLE_LOTTONUMBERS = IntStream.rangeClosed(LOTTONUMBER_FROM, LOTTONUMBER_TO).boxed().collect(Collectors.toList());
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
+
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        validateLottoNumber(lottoNumber);
+    static {
+        for (int i = LOTTONUMBER_FROM; i <= LOTTONUMBER_TO ; i++) {
+            LOTTO_NUMBER_MAP.put(i, new LottoNumber(i));
+        }
+    }
+
+
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    public static void validateLottoNumber(int number) {
-        if (!LottoGame.AVAILABLE_LOTTONUMBERS.contains(number)) {
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = LOTTO_NUMBER_MAP.get(number);
+        if (lottoNumber == null) {
             throw new WrongLottoNumberException();
         }
+        return lottoNumber;
     }
+
+    public static LottoNumber of(String stringNumber) {
+        return of(Integer.parseInt(stringNumber));
+    }
+
 
     public int value() {
         return lottoNumber;

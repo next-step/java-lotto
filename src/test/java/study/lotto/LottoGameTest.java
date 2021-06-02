@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import study.lotto.domain.*;
 import study.lotto.exception.DuplicateBonusBallException;
-import study.lotto.util.LottoNumberGenerator;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -27,7 +26,6 @@ public class LottoGameTest {
         ResultView resultView = new ResultView();
         lottoGame = new LottoGame(inputView, resultView);
     }
-
 
     @DisplayName("입력한 금액만큼 구매 가능한 장수를 확인한다")
     @ParameterizedTest
@@ -53,9 +51,9 @@ public class LottoGameTest {
     public void checkPrizeTest() {
         //given
         PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
-        LottoNumbers lottoNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
-        LottoNumber bonusNumber = new LottoNumber(7);
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers,bonusNumber);
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningNumbers winningNumbers = new WinningNumbers(lotto,bonusNumber);
 
         //when
         WinningResult winningResult = lottoGame.checkPrize(purchasedLottos, winningNumbers);
@@ -67,12 +65,12 @@ public class LottoGameTest {
         assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(2);
     }
 
-    private List<LottoNumbers> generatePurchaseLottos() {
-        List<LottoNumbers> PurchasedLottos = new ArrayList<>();
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,15,16")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,14,15,16")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,12,3,14,15,6")));
+    private List<Lotto> generatePurchaseLottos() {
+        List<Lotto> PurchasedLottos = new ArrayList<>();
+        PurchasedLottos.add(new Lotto("1,2,3,4,5,6"));
+        PurchasedLottos.add(new Lotto("1,2,3,4,15,16"));
+        PurchasedLottos.add(new Lotto("1,2,3,14,15,16"));
+        PurchasedLottos.add(new Lotto("1,12,3,14,15,6"));
         return PurchasedLottos;
     }
 
@@ -87,8 +85,8 @@ public class LottoGameTest {
     @DisplayName("당첨 번호와 보너스 볼 중복시 에러")
     @Test
     public void inputWinningNumber() {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
-        LottoNumber bonusNumber = new LottoNumber(6);
+        Lotto winningNumbers = new Lotto("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(6);
         assertThatThrownBy(() -> lottoGame.validateBonusNumber(winningNumbers, bonusNumber))
                 .isInstanceOf(DuplicateBonusBallException.class);
     }

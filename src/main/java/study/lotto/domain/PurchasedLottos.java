@@ -1,25 +1,24 @@
 package study.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PurchasedLottos {
-    List<LottoNumbers> lottoNumbers;
+    List<Lotto> lottoNumbers;
 
     public PurchasedLottos(int purchaseCount) {
 
         this.lottoNumbers = IntStream.range(0,purchaseCount)
-                .mapToObj(i -> LottoNumbers.randomNumbers())
+                .mapToObj(i -> Lotto.randomNumbers())
                 .collect(Collectors.toList());
     }
 
-    public PurchasedLottos(List<LottoNumbers> lottoNumbers) {
+    public PurchasedLottos(List<Lotto> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumbers> values() {
+    public List<Lotto> values() {
         return lottoNumbers;
     }
 
