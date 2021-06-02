@@ -14,7 +14,6 @@ public class WinningLottoTicket {
 
     public LottoRank getRankOfTicket(LottoTicket lottoTicket){
         int totalNumContains = 0;
-        boolean hasBonus = false;
         for (int i=0; i<lottoTicket.size(); i++){
             totalNumContains += howManyContains(lottoTicket.get(i));
         }
