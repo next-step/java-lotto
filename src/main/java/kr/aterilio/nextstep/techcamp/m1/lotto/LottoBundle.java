@@ -45,4 +45,8 @@ public class LottoBundle {
         }
         return result;
     }
+
+    public int paid() {
+        return lottoBundle.size() * PRICE_PER_LOTTO;
+    }
 }

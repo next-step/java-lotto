@@ -7,6 +7,7 @@ public class StringUtil {
 
     private static final int INDEX_NOT_FOUND = -1;
     private static final int IDX_GROUP_1 = 1;
+    private static final int UNIT_POW_FOR_FLOOR = 10;
 
     private static final String EMPTY_STRING = "";
     private static final String REGEX_NUMERIC = "^[0-9-]+$"; // 음수도 숫자이므로 정규식에 - 문자 추가
@@ -69,5 +70,10 @@ public class StringUtil {
         if (!isNumeric(target)) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
         }
+    }
+
+    public static String floorFloatWithPointPosition(float original, int pointPosition) {
+        double unit = Math.pow(UNIT_POW_FOR_FLOOR, pointPosition);
+        return String.format("%." + pointPosition + "f", Math.floor(original*unit)/unit);
     }
 }
