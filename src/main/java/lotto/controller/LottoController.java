@@ -17,11 +17,14 @@ public class LottoController {
 
         int money = inputView.money();
         while (!lottoMachine.validateMoney(money)) {
-            System.out.println("금액을 천원 단위로 입력 하세요.");
+            resultView.printInputMoneyError();
             money = inputView.money();
         }
 
-        List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(lottoMachine.buyCount(money));
+        int buyCount = lottoMachine.buyCount(money);
+        int manualBuyCount = inputView.manualBuyCount();
+
+        List<LottoNumbers> lottoNumbers = lottoMachine.autoLottoNumbers(buyCount - manualBuyCount);
         resultView.print(lottoNumbers);
 
         String numbers = inputView.numbers();

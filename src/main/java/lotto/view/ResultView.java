@@ -19,6 +19,10 @@ public class ResultView {
         System.out.println();
     }
 
+    public void printInputMoneyError(){
+        System.out.println("금액을 천원 단위로 입력 하세요.");
+    }
+
     public void printBonusBallError(){
         System.out.println("보너스 볼은 당첨 번호와 달라야 합니다.");
     }

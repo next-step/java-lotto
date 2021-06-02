@@ -21,6 +21,17 @@ public class InputView {
         }
     }
 
+    public int manualBuyCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException inputMismatchException) {
+            System.out.println("수동 구매 개수는 정수만 입력 가능합니다.");
+            scanner = new Scanner(System.in);
+            return manualBuyCount();
+        }
+    }
+
     public String numbers() {
         scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
