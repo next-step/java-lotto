@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.exception.BuyCountErrorException;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -55,5 +57,11 @@ public class LottoMachine {
     public boolean useAbleBonusBall(String numbers, LottoNumber bonusBall) {
         return Arrays.stream(numbers.split(","))
                 .noneMatch(bonusBall::isSameNumber);
+    }
+
+    public void buyCountValid(int buyCount, int manualBuyCount) {
+        if (manualBuyCount > buyCount) {
+            throw new BuyCountErrorException();
+        }
     }
 }
