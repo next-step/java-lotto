@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private static final int LOTTO_TICKET_PRICE = 1000;
+    private static final int FIRST_INDEX = 0;
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(Money money, LottoGenerateStrategy lottoGenerateStrategy) {
-        lottoTickets = giveLottoTickets(money, lottoGenerateStrategy);
+    public LottoTickets(int count, LottoGenerateStrategy lottoGenerateStrategy) {
+        lottoTickets = giveLottoTickets(count, lottoGenerateStrategy);
     }
 
-    private List<LottoTicket> giveLottoTickets(Money money, LottoGenerateStrategy lottoGenerateStrategy) {
-        int lottoCount = money.calcLottoCount(LOTTO_TICKET_PRICE);
+    public void addFirst(List<LottoTicket> lottoTickets) {
+        this.lottoTickets.addAll(FIRST_INDEX, lottoTickets);
+    }
 
+    private List<LottoTicket> giveLottoTickets(int count, LottoGenerateStrategy lottoGenerateStrategy) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < count; i++) {
             lottoTickets.add(new LottoTicket(lottoGenerateStrategy.generateLottoNumbers()));
         }
 
@@ -28,7 +30,7 @@ public class LottoTickets {
     }
 
     public Money calcInvestment() {
-        return new Money(LOTTO_TICKET_PRICE * lottoTickets.size());
+        return new Money(LottoTicket.LOTTO_TICKET_PRICE * lottoTickets.size());
     }
 
     public void checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus, LottoStatement lottoStatement) {

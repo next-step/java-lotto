@@ -1,13 +1,21 @@
 package lottoauto;
 
+import java.util.List;
+
 public class LottoGame {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
         outputView.enterPurChaseAmount();
-        LottoGenerateStrategy autoStrategy = new AutoStrategy();
-        LottoTickets lottoTickets = new LottoTickets(new Money(inputView.nextInt()), autoStrategy);
+        Money money = new Money(inputView.nextInt());
+
+        int manualTicketCount = outputView.enterManualTicketCount(inputView);
+        List<String> manualTicketNumbers = outputView.enterManualTicketNumbers(manualTicketCount, inputView);
+
+        LottoCounter lottoCounter = new LottoCounter(money, manualTicketCount);
+        LottoTickets lottoTickets = lottoCounter.generateLottoTickets(manualTicketNumbers);
+
         outputView.printLottoTickets(lottoTickets);
 
         outputView.enterWinningNumbers();

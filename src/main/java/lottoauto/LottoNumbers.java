@@ -48,13 +48,13 @@ public class LottoNumbers {
     }
 
     public boolean checkHitBonus(WinningNumbersWithBonus winningNumbersWithBonus) {
-        boolean result = false;
-
         for (LottoNumber lottoNumber: lottoNumbers) {
-            result = result || winningNumbersWithBonus.isHitBonusNumber(lottoNumber);
+            if (winningNumbersWithBonus.isHitBonusNumber(lottoNumber)) {
+                return true;
+            }
         }
 
-        return result;
+        return false;
     }
 
     public HitCount checkHitCount(WinningNumbersWithBonus winningNumbersWithBonus) {
