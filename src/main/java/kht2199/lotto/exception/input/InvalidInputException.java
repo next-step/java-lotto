@@ -13,6 +13,11 @@ public class InvalidInputException extends DomainException {
 		this.error = error;
 	}
 
+	public InvalidInputException(InvalidInputError error, Throwable cause) {
+		super(cause);
+		this.error = error;
+	}
+
 	public InvalidInputError getError() {
 		return error;
 	}

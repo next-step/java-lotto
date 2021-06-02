@@ -4,15 +4,18 @@ import static java.lang.System.*;
 
 import java.util.Map;
 
-import kht2199.Rank;
-import kht2199.lotto.LottoWinningResult;
-import kht2199.lotto.data.LottoList;
+import kht2199.lotto.entity.Rank;
+import kht2199.lotto.entity.LottoAssets;
+import kht2199.lotto.entity.LottoWinningResult;
+import kht2199.lotto.entity.LottoList;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
+import kht2199.lotto.exception.LottoGameStateException;
 import kht2199.lotto.exception.LottoListEmptyException;
-import kht2199.lotto.exception.assets.AssetsException;
+import kht2199.lotto.exception.assets.AssetsNotEnoughException;
 import kht2199.lotto.exception.input.InvalidInputError;
 import kht2199.lotto.exception.input.InvalidInputException;
+import kht2199.lotto.exception.number.LottoNumberRangeException;
 
 /**
  *
@@ -20,50 +23,43 @@ import kht2199.lotto.exception.input.InvalidInputException;
  */
 public class ResultView {
 
-	public void handleException(AssetsException e) {
-		print(e.getMessage());
-	}
-
-	public void printInsertAssets() {
-		print("구입금액을 입력해 주세요.");
-	}
-
-	public void printPurchased(LottoList list) {
-		print(list.size() + "개를 구매했습니다");
-	}
-
 	public void printLottoList(LottoList lottoList) {
+		int auto = lottoList.countAuto();
+		int size = lottoList.size();
+		print(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", size - auto, auto));
 		print(lottoList.toString());
 	}
 
-	public void printAskWinningNumbers() {
-		print("지난 주 당첨 번호를 입력해 주세요.");
-	}
-
-	public void printResultStatistics(LottoWinningResult result, int assetsUsed) {
+	public void printResultStatistics(LottoWinningResult result, LottoAssets assets) {
 		print("당첨 통계");
 		print("---------");
-		Map<Rank, Integer> matchedPrizeMap = result.getMatchedPrizeMap();
-		matchedPrizeMap.forEach(this::printResultOfMatched);
-		print(String.format("총 수익률은 %1f입니다.", result.rate(assetsUsed)));
+		// 어떻게 print 할 것인지 ResultView 에서 결정하기 위해, toString 미구현.
+		Map<Rank, Integer> matchedPrizeMap = result.rankPrizeMap();
+		for (Rank value : Rank.range(3, 6, false)) {
+			printResultOfMatched(value, matchedPrizeMap.get(value));
+		}
+		int totalPrize = result.getTotalPrize();
+		int assetsUsed = assets.getAssetsUsed();
+		print(String.format("총 수익률은 %.2f입니다.", rate(totalPrize, assetsUsed)));
 	}
 
 	/**
 	 * 5등의 경우, 보너스 볼 일치여부까지 출력한다.
 	 */
-	protected void printResultOfMatched(Rank rank, int prize) {
+	private void printResultOfMatched(Rank rank, int prize) {
 		String format = "%d개 일치 (%d원)- %d개";
 		int countOfMatched = rank.getWinningMoney() == 0 ? 0 : prize / rank.getWinningMoney();
-		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
 		if (rank == Rank.SECOND) {
 			format = "5개 일치, 보너스 볼 일치(%d) - %d개";
 			print(String.format(format, Rank.SECOND.getWinningMoney(), countOfMatched));
+			return;
 		}
+		print(String.format(format, rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatched));
 	}
 
 	public void printException(DomainException e) {
 		if (e instanceof InvalidInputException) {
-			print(inputErrorToMessage((InvalidInputException)e));
+			print(inputErrorToMessage((InvalidInputException) e));
 		}
 
 		if (e instanceof LottoBonusNumberDuplicatedException) {
@@ -73,7 +69,16 @@ public class ResultView {
 		if (e instanceof LottoListEmptyException) {
 			print("구매가능한 로또가 없습니다.");
 		}
-		// TODO print for domain exceptions.
+		if (e instanceof LottoGameStateException) {
+			print("게임상태가 유효하지 않습니다. " + e.getMessage());
+		}
+		if (e instanceof LottoNumberRangeException) {
+			print("로또 번호가 유효하지 않습니다.");
+		}
+		if (e instanceof AssetsNotEnoughException) {
+			print("금액이 부족합니다.");
+			e.printStackTrace();
+		}
 	}
 
 	public void printException(NumberFormatException e) {
@@ -98,11 +103,17 @@ public class ResultView {
 		throw new RuntimeException(exception);
 	}
 
-	private void print(String message) {
+	public void print(String message) {
 		out.println(message);
 	}
 
-	public void printAskBonusNumber() {
-		print("보너스 볼을 입력해 주세요.");
+	/**
+	 * 수익률을 계산한다.
+	 *
+	 * @param assets 사용한 자산.
+	 * @return 수익률 범위 0~1
+	 */
+	public float rate(int totalPrize, int assets) {
+		return (float) totalPrize / assets;
 	}
 }
