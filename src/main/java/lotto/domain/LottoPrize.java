@@ -51,6 +51,14 @@ public enum LottoPrize {
         return winningPrize;
     }
 
+    public void setWinningCount(int winningCount) {
+        this.winningCount = winningCount;
+    }
+
+    public void setWinningPrize(long winningPrize) {
+        this.winningPrize = winningPrize;
+    }
+
     public static void printResult() {
         for (LottoPrize prize : values()) {
             printLottoPrize(prize);

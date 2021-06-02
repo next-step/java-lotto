@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static lotto.domain.LottoPrize.*;
 
 class LottoPrizeTest {
+
+    @BeforeEach
+    void setUp() {
+        for (LottoPrize prize : LottoPrize.values()) {
+            prize.setWinningPrize(0);
+            prize.setWinningCount(0);
+        }
+    }
 
     @DisplayName("종목별 당첨 횟수와 당첨 금액 합계 카운트")
     @Test
