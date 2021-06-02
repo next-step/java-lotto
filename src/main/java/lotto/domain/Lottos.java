@@ -29,9 +29,14 @@ public class Lottos {
             int matchCount = lotto.getMatchCount(winningLotto);
             LottoPrize.findByMatchCount(matchCount).updateWinningResult(matchCount);
         }
+        printResult();
     }
 
-    public void printLottos() {
+    private void printResult() {
+        LottoPrize.printResult();
+    }
+
+    private void printLottos() {
         lottos.forEach(Lotto::printLotto);
     }
 

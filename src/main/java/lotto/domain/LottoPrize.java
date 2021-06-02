@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import static lotto.io.OutputView.*;
 
 public enum LottoPrize {
 
@@ -11,8 +12,8 @@ public enum LottoPrize {
     NONE(0, 0)
     ;
 
-    final int matchCount;
-    final int matchPrize;
+    public final int matchCount;
+    public final int matchPrize;
     private int winningCount;
     private long winningPrize;
 
@@ -48,5 +49,11 @@ public enum LottoPrize {
 
     public long getWinningPrize() {
         return winningPrize;
+    }
+
+    public static void printResult() {
+        for (LottoPrize prize : values()) {
+            printLottoPrize(prize);
+        }
     }
 }
