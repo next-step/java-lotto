@@ -17,17 +17,43 @@ public class LottoRankTest {
     public void winningPrizeValuesTest() {
         List<LottoRank> lottoRankList = Arrays.asList(LottoRank.values());
 
-        assertThat(lottoRankList).containsExactly(LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND,
-                LottoRank.FIRST);
+        assertThat(lottoRankList).containsExactly(LottoRank.MISS, LottoRank.FIFTH,
+                LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
     }
 
-    @DisplayName("등수당 일치 개수, 당첨금액 확인")
+    @DisplayName("5등 당첨")
     @Test
-    public void winningPrizeTest() {
-        assertThat(LottoRank.FOURTH.matchCount()).isEqualTo(3);
-        assertThat(LottoRank.FOURTH.prize()).isEqualTo(BigDecimal.valueOf(5000));
-        assertThat(LottoRank.FIRST.matchCount()).isEqualTo(6);
-        assertThat(LottoRank.FIRST.prize()).isEqualTo(BigDecimal.valueOf(2000000000));
+    public void rankFifth(){
+        assertThat(LottoRank.FIFTH).isEqualTo(LottoRank.of(3, false));
+        assertThat(LottoRank.FIFTH).isEqualTo(LottoRank.of(3, true));
+    }
+
+    @DisplayName("4등 당첨")
+    @Test
+    public void rankFourth(){
+        assertThat(LottoRank.FOURTH).isEqualTo(LottoRank.of(4, false));
+        assertThat(LottoRank.FOURTH).isEqualTo(LottoRank.of(4, true));
+    }
+
+    @DisplayName("3등 당첨")
+    @Test
+    public void rankThrid(){
+        assertThat(LottoRank.THIRD).isEqualTo(LottoRank.of(5, false));
+        assertThat(LottoRank.THIRD).isNotEqualTo(LottoRank.of(5, true));
+    }
+
+    @DisplayName("2등 당첨")
+    @Test
+    public void rankSecond(){
+        assertThat(LottoRank.SECOND).isNotEqualTo(LottoRank.of(5, false));
+        assertThat(LottoRank.SECOND).isEqualTo(LottoRank.of(5, true));
+    }
+
+    @DisplayName("1등 당첨")
+    @Test
+    public void rankFirst(){
+        assertThat(LottoRank.FIRST).isEqualTo(LottoRank.of(6, false));
+        assertThat(LottoRank.FIRST).isEqualTo(LottoRank.of(6, true));
     }
 
 }

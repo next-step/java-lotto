@@ -1,19 +1,24 @@
 package study.lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningNumbers {
-    Lotto lotto;
+    Lotto winningLotto;
     LottoNumber bonusNumber;
 
-    public WinningNumbers(Lotto lotto, LottoNumber bonusNumber) {
-        this.lotto = lotto;
+    public WinningNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
     public Lotto lottoNumbers() {
-        return lotto;
+        return winningLotto;
     }
 
     public LottoNumber bonusNumber() {
         return bonusNumber;
     }
+
+
 }

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_PRIZE_RESULT_MESSAGE = "%d개 일치%s(%s원)- %d개\n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %,.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n";
 
@@ -21,8 +21,8 @@ public class ResultView {
         return "본전";
     }
 
-    public void purchasedLottos(PurchasedLottos purchasedLottos) {
-        System.out.printf(PURCHASE_MESSAGE,purchasedLottos.count());
+    public void purchasedLottos(int count, PurchasedLottos purchasedLottos) {
+        System.out.printf(PURCHASE_MESSAGE, count, purchasedLottos.count());
         for (Lotto lotto : purchasedLottos.values()) {
             System.out.println(lotto.lotto().stream().map(LottoNumber::value).collect(Collectors.toList()));
         }

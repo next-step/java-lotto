@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum LottoRank {
+    MISS(0, BigDecimal.ZERO),
     FIFTH(3, BigDecimal.valueOf(5_000)),
     FOURTH(4, BigDecimal.valueOf(50_000)),
     THIRD(5, BigDecimal.valueOf(1_500_000)),
@@ -20,11 +21,12 @@ public enum LottoRank {
         this.prize = prize;
     }
 
-    public static Optional<LottoRank> of(int matchCount, boolean matchBonus) {
+    public static LottoRank of(int matchCount, boolean matchBonus) {
+
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.matchCount == matchCount)
                 .map(lottoRank -> checkSeconPrize(lottoRank, matchBonus))
-                .findFirst();
+                .findFirst().orElse(MISS);
     }
 
     private static LottoRank checkSeconPrize(LottoRank lottoRank, boolean matchBonus) {

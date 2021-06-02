@@ -1,11 +1,12 @@
 package study.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PurchasedLottos {
-    List<Lotto> lottoNumbers;
+    List<Lotto> lottoNumbers = new ArrayList<>();
 
     public PurchasedLottos(int purchaseCount) {
 
@@ -18,11 +19,18 @@ public class PurchasedLottos {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public PurchasedLottos() {
+    }
+
     public List<Lotto> values() {
         return lottoNumbers;
     }
 
     public int count() {
         return lottoNumbers.size();
+    }
+
+    public void add(List<Lotto> values) {
+        lottoNumbers.addAll(values);
     }
 }

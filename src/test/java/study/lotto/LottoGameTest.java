@@ -40,7 +40,8 @@ public class LottoGameTest {
     @ParameterizedTest
     @CsvSource({"14000,14", "2000,2", "1500,1", "400,0"})
     public void purchaseTest(BigDecimal purchaseAmount, int expected) {
-        PurchasedLottos purchasedLottos = lottoGame.purchase(purchaseAmount);
+        int count = lottoGame.purchaseableNumber(purchaseAmount);
+        PurchasedLottos purchasedLottos = lottoGame.purchase(count);
         assertThat(purchasedLottos.count()).isEqualTo(expected);
 
     }
