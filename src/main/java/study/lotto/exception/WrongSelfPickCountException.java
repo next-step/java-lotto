@@ -1,6 +1,5 @@
 package study.lotto.exception;
 
-import study.lotto.domain.LottoGame;
 
 public class WrongSelfPickCountException extends RuntimeException{
 

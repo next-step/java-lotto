@@ -1,6 +1,5 @@
 package study.lotto.exception;
 
-import study.lotto.domain.LottoGame;
 import study.lotto.domain.LottoNumber;
 
 public class WrongLottoNumberException extends RuntimeException{
