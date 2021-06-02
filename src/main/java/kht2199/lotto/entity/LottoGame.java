@@ -1,7 +1,5 @@
 package kht2199.lotto.entity;
 
-import static kht2199.lotto.entity.LottoGameState.*;
-
 import kht2199.lotto.LottoGenerator;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
 import kht2199.lotto.exception.assets.AssetsNotEnoughException;

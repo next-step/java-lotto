@@ -1,11 +1,11 @@
 package kht2199.lotto.view;
 
-import static kht2199.lotto.entity.LottoGameState.*;
+import static kht2199.lotto.LottoGameState.*;
 
 import kht2199.lotto.entity.Lotto;
 import kht2199.lotto.entity.LottoAssets;
 import kht2199.lotto.entity.LottoGame;
-import kht2199.lotto.entity.LottoGameState;
+import kht2199.lotto.LottoGameState;
 import kht2199.lotto.entity.LottoList;
 import kht2199.lotto.entity.LottoNumber;
 import kht2199.lotto.entity.LottoWinningResult;

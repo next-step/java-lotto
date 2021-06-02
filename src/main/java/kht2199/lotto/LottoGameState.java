@@ -1,5 +1,9 @@
-package kht2199.lotto.entity;
+package kht2199.lotto;
 
+import kht2199.lotto.entity.Lotto;
+import kht2199.lotto.entity.LottoGame;
+import kht2199.lotto.entity.LottoList;
+import kht2199.lotto.entity.LottoNumber;
 import kht2199.lotto.exception.DomainException;
 import kht2199.lotto.exception.LottoBonusNumberDuplicatedException;
 import kht2199.lotto.exception.assets.AssetsException;
