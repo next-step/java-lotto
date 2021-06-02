@@ -31,10 +31,8 @@ public class LottoWinningResult {
 	 */
 	public void updateLottoWinningNumbers(LottoList list) {
 		lottoPrizeResult.reset();
-		for (Lotto lotto : list.getList()) {
-			Rank rank = lotto.calculateRank(winningNumber, bonusNumber);
-			lottoPrizeResult.addWinningMoney(rank);
-		}
+		Rank[] ranks = list.calculateRanks(winningNumber, bonusNumber);
+		lottoPrizeResult.addWinningMoney(ranks);
 	}
 
 	public int getTotalPrize() {

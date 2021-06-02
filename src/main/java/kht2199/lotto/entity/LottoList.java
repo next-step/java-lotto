@@ -57,4 +57,9 @@ public class LottoList {
 		return sb.toString().trim();
 	}
 
+	public Rank[] calculateRanks(Lotto winningNumber, LottoNumber bonusNumber) {
+		return list.stream()
+			.map(lotto -> lotto.calculateRank(winningNumber, bonusNumber))
+			.toArray(Rank[]::new);
+	}
 }

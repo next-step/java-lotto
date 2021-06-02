@@ -15,9 +15,11 @@ public class LottoPrizeResult {
 		reset();
 	}
 
-	void addWinningMoney(Rank rank) {
-		Integer totalPrize = matchedPrizeMap.get(rank);
-		matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
+	void addWinningMoney(Rank... ranks) {
+		for (Rank rank : ranks) {
+			Integer totalPrize = matchedPrizeMap.get(rank);
+			matchedPrizeMap.put(rank, totalPrize + rank.getWinningMoney());
+		}
 	}
 
 	int totalPrize() {
