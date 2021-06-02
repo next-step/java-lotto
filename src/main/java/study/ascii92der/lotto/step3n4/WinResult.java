@@ -8,12 +8,13 @@ public class WinResult {
     private final int buyLottoCount;
     private List<LottoResult> lottoResults;
 
-    public WinResult(List<Lotto> lottos, WinningLotto winningLotto) {
-        lottoResults = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            lottoResults.add(new LottoResult(lotto, winningLotto));
-        }
-        buyLottoCount = lottoResults.size();
+    public WinResult(Lottos lottos, WinningLotto winningLotto) {
+        this(lottos.matchResults(winningLotto));
+    }
+
+    public WinResult(List<LottoResult> lottoResults) {
+        this.lottoResults = lottoResults;
+        this.buyLottoCount = lottoResults.size();
     }
 
     public int result(LottoWinner lottoWinner) {

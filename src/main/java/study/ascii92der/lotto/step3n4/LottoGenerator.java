@@ -25,12 +25,12 @@ public class LottoGenerator {
         return new Lotto(this.numberList.subList(LOTTO_INDEX_START, LOTTO_INDEX_END));
     }
 
-    public List<Lotto> generateLottos(LottoPrice lottoPrice) {
+    public Lottos generateLottos(LottoPrice lottoPrice) {
         List<Lotto> lottosList = new ArrayList<>();
         for (int i = 0; i < lottoPrice.lottoCount(); i++) {
             lottosList.add(this.generate());
         }
-        return lottosList;
+        return new Lottos(lottosList);
     }
 
 }
