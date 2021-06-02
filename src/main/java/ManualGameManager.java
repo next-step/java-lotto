@@ -20,7 +20,7 @@ public class ManualGameManager extends BonusLottoGameManager {
     protected Ticket purchaseLotto() {
         Budget budget = InputView.budgetLottoPrice();
         int manualCount = InputView.manualLottoCount();
-        LottoStore store = new ManualLottoStore(budget, LOTTO_PRICE_PER, manualCount);
+        LottoStore store = new ManualLottoStore(budget, lottoPrice(), manualCount);
         OutputView.purchaseCountResult(store.purchaseCount());
         return store.produceLotto();
     }

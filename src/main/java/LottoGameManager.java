@@ -10,7 +10,7 @@ import lotto.store.Ticket;
 
 public class LottoGameManager {
 
-    protected static final int LOTTO_PRICE_PER = 1_000;
+    private static final int LOTTO_PRICE_PER = 1_000;
 
     protected LottoGameManager() {
     }
@@ -29,7 +29,7 @@ public class LottoGameManager {
 
     protected Ticket purchaseLotto() {
         Budget budget = InputView.budgetLottoPrice();
-        LottoStore store = new LottoStore(budget, LOTTO_PRICE_PER);
+        LottoStore store = new LottoStore(budget, lottoPrice());
         OutputView.purchaseCountResult(store.purchaseCount());
         return store.produceLotto();
     }
@@ -43,6 +43,10 @@ public class LottoGameManager {
     protected void calculate(Ticket purchased, LottoNumbers winning) {
         StatisticsCalculator calculator = new StatisticsCalculator(purchased, winning);
         OutputView.sendMessage(calculator.toString());
+    }
+
+    protected int lottoPrice() {
+        return LOTTO_PRICE_PER;
     }
 
 }
