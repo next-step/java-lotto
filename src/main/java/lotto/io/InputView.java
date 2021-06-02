@@ -1,6 +1,7 @@
 package lotto.io;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.util.SplitUtil;
 
 import java.util.List;
@@ -14,10 +15,11 @@ public class InputView {
 
     private static final Scanner scan = new Scanner(System.in);
 
-    public static int requestPurchaseAmount() {
+    public static LottoMoney requestPurchaseAmount() {
         try {
             print(REQUEST_PURCHASE_AMOUNT);
-            return Integer.parseInt(scan.nextLine());
+            int inputMoney = Integer.parseInt(scan.nextLine());
+            return new LottoMoney(inputMoney);
         } catch (Exception e) {
             print(e.getMessage());
             return requestPurchaseAmount();
