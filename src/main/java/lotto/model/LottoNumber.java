@@ -37,15 +37,11 @@ public class LottoNumber {
     }
 
     private static int validateAndParseInt(String lottoNumber) {
-        int number;
-
         try {
-            number = Integer.parseInt(lottoNumber);
+            return Integer.parseInt(lottoNumber);
         } catch (Exception e) {
             throw new WrongNumberException();
         }
-
-        return number;
     }
 
     public boolean isSameNumber(String numberString) {

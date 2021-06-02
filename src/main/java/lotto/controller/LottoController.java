@@ -4,8 +4,6 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoController {
 
     public void lotto() {
@@ -26,7 +24,7 @@ public class LottoController {
         int autoBuyCount = buyCount - manualBuyCount;
         lottoMachine.buyCountValid(buyCount, manualBuyCount);
 
-        List<LottoNumbers> lottoNumbers = lottoMachine.lottoNumbers(inputView.manualBuy(manualBuyCount), autoBuyCount);
+        Lottos lottoNumbers = lottoMachine.lottoNumbers(inputView.manualBuy(manualBuyCount), autoBuyCount);
 
         resultView.print(manualBuyCount, autoBuyCount);
         resultView.print(lottoNumbers);

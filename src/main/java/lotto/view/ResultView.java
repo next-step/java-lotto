@@ -2,17 +2,17 @@ package lotto.view;
 
 import lotto.model.LottoNumbers;
 import lotto.model.LottoRanking;
+import lotto.model.Lottos;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void print(List<LottoNumbers> lottoNumbers) {
+    public void print(Lottos lottoNumbers) {
 
-        lottoNumbers.stream()
+        lottoNumbers.lottos().stream()
                 .map(LottoNumbers::lottoNumbers)
                 .forEach(System.out::println);
 

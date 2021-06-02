@@ -33,15 +33,10 @@ public class LottoMachine {
         return IntStream.range(0, buyCount).mapToObj(i -> oneLottoNumbers()).collect(Collectors.toList());
     }
 
-    public List<LottoNumbers> lottoNumbers(List<String> manualLotto, int autoBuyCount) {
+    public Lottos lottoNumbers(List<String> manualLotto, int autoBuyCount) {
         List<LottoNumbers> manualLottoNumbers = manualLottoNumbers(manualLotto);
         List<LottoNumbers> autoLottoNumbers = autoLottoNumbers(autoBuyCount);
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-
-        lottoNumbers.addAll(manualLottoNumbers);
-        lottoNumbers.addAll(autoLottoNumbers);
-
-        return lottoNumbers;
+        return new Lottos(manualLottoNumbers, autoLottoNumbers);
     }
 
     public int buyCount(int money) {
