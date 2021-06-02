@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class WinningResult {
     private static final Map<LottoRank, Integer> winningResult = new LinkedHashMap<>();
+    private TotalPrize totalPrize = new TotalPrize();
 
     public WinningResult() {
         for (LottoRank value : LottoRank.values()) {
@@ -23,6 +24,7 @@ public class WinningResult {
         LottoRank winningPrize = LottoRank.of(matchCount, matchBonus);
         if (!winningPrize.equals(LottoRank.MISS)) {
             winningResult.computeIfPresent(winningPrize, (lottoRank, integer) -> integer+1);
+            totalPrize.add(winningPrize.prize());
         }
     }
 
@@ -31,10 +33,6 @@ public class WinningResult {
     }
 
     public BigDecimal totalPrize() {
-        BigDecimal totalPrize = BigDecimal.ZERO;
-        for (LottoRank lottoRank : winningResult.keySet()) {
-            totalPrize = totalPrize.add(lottoRank.prize().multiply(BigDecimal.valueOf(winningResult.get(lottoRank))));
-        }
-        return totalPrize;
+        return totalPrize.value();
     }
 }
