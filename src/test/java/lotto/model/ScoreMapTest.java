@@ -7,7 +7,6 @@ class ScoreMapTest {
     @Test
     void test(){
         ScoreMap scoreMap = new ScoreMap();
-        scoreMap.updateByMatchCount(1);
 
     }
 }
