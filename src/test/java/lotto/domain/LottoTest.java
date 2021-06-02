@@ -14,7 +14,7 @@ class LottoTest {
   void rank() {
     // Given
     WinningNumber winningNumber = new WinningNumber(new int[]{1, 2, 3, 4, 5, 6}, 7);
-    Lotto lotto = new Lotto(numberCount -> Arrays.asList(1, 2, 3, 7, 8, 9));
+    Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 7, 8, 9));
 
     // When
     Rank actualRank = lotto.getRankBy(winningNumber);
