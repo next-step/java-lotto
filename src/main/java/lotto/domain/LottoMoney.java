@@ -16,6 +16,10 @@ public class LottoMoney {
         }
     }
 
+    public int getLottoTicketCount() {
+        return value / LOTTO_PRICE;
+    }
+
     public int getValue() {
         return value;
     }
