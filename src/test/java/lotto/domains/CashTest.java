@@ -17,4 +17,11 @@ public class CashTest {
         assertThrows(IllegalArgumentException.class, () -> new Cash(-1000));
         assertThrows(IllegalArgumentException.class, () -> new Cash(999));
     }
+
+    @Test
+    void n개의_로또_구매가능한지_여부_반환_테스트() {
+        assertThat(new Cash(1000).isPurchasesAvailable(2)).isFalse();
+        assertThat(new Cash(2000).isPurchasesAvailable(2)).isTrue();
+        assertThat(new Cash(3000).isPurchasesAvailable(2)).isTrue();
+    }
 }

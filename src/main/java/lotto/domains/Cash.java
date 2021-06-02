@@ -18,4 +18,8 @@ public class Cash {
             throw new IllegalArgumentException("1000 보다 큰숫자를 입력해주세요");
         }
     }
+
+    public boolean isPurchasesAvailable(int count) {
+        return numberOfPurchasesAvailable() >= count;
+    }
 }

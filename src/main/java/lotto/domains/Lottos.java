@@ -1,6 +1,7 @@
 package lotto.domains;
 
 import lotto.enums.MatchingInfo;
+import lotto.enums.PurchasingWay;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,28 +12,30 @@ public class Lottos {
     private final static int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottoList;
-    
+
     public Lottos(List<Lotto> lottoList) {
         this.lottoList = new ArrayList<>(lottoList);
-    }
-
-    public int count() {
-        return lottoList.size();
     }
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(this.lottoList);
     }
 
-    public void matchingWinningNumbersAndBonusNumber(LottoNumbers winningNumbers, int bonusNumber) {
+    public void matchingWinningNumbersAndBonusNumber(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            lotto.matching(winningNumbers, bonusNumber);
+            lotto.matching(winningLotto);
         }
     }
 
     public int countOfMatchingNumber(MatchingInfo matchingInfo) {
         return (int) lottoList.stream()
-                .filter(p -> p.matchingInfo() == matchingInfo)
+                .filter(lotto -> lotto.matchingInfo() == matchingInfo)
+                .count();
+    }
+
+    public int countOfPurchasingWay(PurchasingWay purchasingWay) {
+        return (int) lottoList.stream()
+                .filter(lotto -> lotto.purchasingWay() == purchasingWay)
                 .count();
     }
 
@@ -41,4 +44,6 @@ public class Lottos {
                 .mapToDouble(lotto -> lotto.matchingInfo().getPayout())
                 .sum() / (lottoList.size() * LOTTO_PRICE);
     }
+
+
 }

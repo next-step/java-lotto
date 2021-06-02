@@ -13,6 +13,6 @@ public class LottoSubstituteNumbersTest {
 
     @Test
     void 로또후보번호_불변객체_테스트() {
-        assertThrows(UnsupportedOperationException.class, () ->LottoSubstituteNumbers.sixLottoNumbers().add(100));
+        assertThrows(UnsupportedOperationException.class, () -> LottoSubstituteNumbers.sixLottoNumbers().add(LottoNumber.of(45)));
     }
 }
