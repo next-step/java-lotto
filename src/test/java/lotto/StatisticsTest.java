@@ -40,11 +40,12 @@ public class StatisticsTest {
 	@Test
 	@DisplayName("당첨 현황 테스트")
 	void statistics() {
-		Statistics statistics = lottos.statistics(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThat(statistics.status(Prize.SIX)).isEqualTo(0);
-		assertThat(statistics.status(Prize.FIVE)).isEqualTo(0);
-		assertThat(statistics.status(Prize.FOUR)).isEqualTo(0);
-		assertThat(statistics.status(Prize.THREE)).isEqualTo(1);
+		Statistics statistics = lottos.statistics(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		assertThat(statistics.status(Prize.FIRST)).isEqualTo(0);
+		assertThat(statistics.status(Prize.SECOND)).isEqualTo(0);
+		assertThat(statistics.status(Prize.THIRD)).isEqualTo(0);
+		assertThat(statistics.status(Prize.FOURTH)).isEqualTo(0);
+		assertThat(statistics.status(Prize.FIFTH)).isEqualTo(1);
 	}
 }
 

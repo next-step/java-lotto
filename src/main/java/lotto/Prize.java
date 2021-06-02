@@ -1,26 +1,34 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Prize {
-	SIX(6, new Money(2000000000)),
-	FIVE(5, new Money(1500000)),
-	FOUR(4, new Money(50000)),
-	THREE(3, new Money(5000)),
-	NOTHING(-1, new Money(0));
+	FIRST(6, new Money(2_000_000_000), false),
+	SECOND(5, new Money(30_000_000), true),
+	THIRD(5, new Money(1_500_000), false),
+	FOURTH(4, new Money(50_000), false),
+	FIFTH(3, new Money(5_000), false),
+	NOTHING(0, new Money(0), false);
 
 	private final int count;
 	private final Money win;
+	private final boolean requiredBonusBall;
 
-	Prize(int count, Money winAmount) {
+	Prize(int count, Money win, boolean requiredBonusBall) {
 		this.count = count;
-		this.win = winAmount;
+		this.win = win;
+		this.requiredBonusBall = requiredBonusBall;
 	}
 
-	public static Prize findByCount(int count) {
-		Prize findResult = NOTHING;
-		for (Prize prize : values()) {
-			findResult = (prize.count() == count) ? prize : findResult;
-		}
-		return findResult;
+	public static Prize valueOf(int count, boolean bonusBall) {
+		return Arrays.stream(values())
+			.filter(rank -> rank.isMatched(count, bonusBall))
+			.findAny()
+			.orElse(NOTHING);
+	}
+
+	private boolean isMatched(int count, boolean matchBonusBall) {
+		return this.count == count && (!this.requiredBonusBall || matchBonusBall);
 	}
 
 	public int count() {

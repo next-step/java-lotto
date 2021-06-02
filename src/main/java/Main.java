@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import lotto.Lottos;
@@ -24,7 +25,8 @@ public class Main {
 		resultView.printNumbers(lottoDtos);
 
 		List<Integer> prizeNumbers = inputView.askPrizeNumbers();
-		Statistics statistics = lottos.statistics(prizeNumbers);
+		int bonusNumber = inputView.askBonusNumber();
+		Statistics statistics = lottos.statistics(prizeNumbers, bonusNumber);
 
 		List<PrizeDto> prizeDtos = createPrizeDtos(statistics);
 		resultView.output(prizeDtos);
@@ -46,6 +48,7 @@ public class Main {
 		for (List<Integer> numbers : lottos.allNumbers()) {
 			lottoDtos.add(new LottoDto(numbers));
 		}
+		Collections.reverse(lottoDtos);
 		return lottoDtos;
 	}
 }

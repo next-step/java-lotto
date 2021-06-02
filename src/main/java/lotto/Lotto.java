@@ -45,15 +45,17 @@ public final class Lotto {
 		return numbers;
 	}
 
-	private boolean contain(LottoNo lottoNumber) {
-		return lottoNumbers.contains(lottoNumber);
+	public Prize result(WinLotto winLotto) {
+		int count = 0;
+		boolean matchBonus = false;
+		for (LottoNo lottoNumber : lottoNumbers) {
+			count = winLotto.contains(lottoNumber) ? count + 1 : count;
+			matchBonus = matchBonus || winLotto.isBonusNumber(lottoNumber);
+		}
+		return Prize.valueOf(count, matchBonus);
 	}
 
-	public Prize result(Lotto win) {
-		int count = 0;
-		for (LottoNo lottoNumber : lottoNumbers) {
-			count = win.contain(lottoNumber) ? count + 1 : count;
-		}
-		return Prize.findByCount(count);
+	public boolean contains(LottoNo lottoNo) {
+		return lottoNumbers.contains(lottoNo);
 	}
 }
