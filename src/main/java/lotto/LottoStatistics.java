@@ -7,7 +7,7 @@ import static lotto.Lotto.LOTTO_PRICE;
 
 public class LottoStatistics {
     public static int getLottoBuyingCount(Money money) {
-        return Math.round(money.value() / LOTTO_PRICE);
+        return (money.value() / LOTTO_PRICE);
     }
 
     public static double calculateLottoTicketProfit(LottoTicket lottoTicket) {
