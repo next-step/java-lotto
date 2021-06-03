@@ -12,12 +12,12 @@ public class LottoAutoController {
     public void start() {
         LottoAutoInputView inputView = new LottoAutoInputView();
         LottoAutoResultView resultView = new LottoAutoResultView();
-        AutoLotto autoLotto = new AutoLotto();
+        AutoLottos autoLottos = new AutoLottos();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
 
-        List<Lotto> lottos = autoLotto.setLotto(quantity);
+        List<Lotto> lottos = autoLottos.setLotto(quantity);
         resultView.printLotto(quantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
