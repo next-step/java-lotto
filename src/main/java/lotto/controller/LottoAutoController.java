@@ -4,7 +4,6 @@ import lotto.model.*;
 import lotto.view.LottoAutoInputView;
 import lotto.view.LottoAutoResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoAutoController {
@@ -12,26 +11,19 @@ public class LottoAutoController {
     public void start() {
         LottoAutoInputView inputView = new LottoAutoInputView();
         LottoAutoResultView resultView = new LottoAutoResultView();
+        AutoLotto autoLotto = new AutoLotto();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
 
-        List<LottoModel> lottos = setLotto(quantity);
+        List<Lotto> lottos = autoLotto.setLotto(quantity);
         resultView.printLotto(quantity, lottos);
 
         WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
 
-        WinningResult winningResult = new WinningResult();
-        winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
-        resultView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
-    }
+        WinningResult winningResult = new WinningResult(lottos, winningLotto);
 
-    public List<LottoModel> setLotto(int quantity) {
-        List<LottoModel> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(new LottoModel());
-        }
-        return lottos;
+        resultView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
     private float getEarningRate(int earningPrice, int purchasePrice) {
