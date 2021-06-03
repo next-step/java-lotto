@@ -12,35 +12,36 @@ public class Lottos {
     public void countWinningResults(List<Integer> winningNumbers, int bonusNumber) {
         for (Lotto lotto : lottos) {
             int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
-            boolean bonus = lotto.contains(bonusNumber);
-            addNumberOfWinning(numberOfWinningNumbers, bonus);
+            boolean existenceOfbonusNumber = lotto.contains(bonusNumber);
+            addNumberOfWinning(numberOfWinningNumbers, existenceOfbonusNumber);
         }
     }
 
-    public static void addNumberOfWinning(int numberOfWinningNumbers, boolean bonus) {
+    int fifth = 0;
+    int fourth = 0;
+    int third = 0;
+    int second = 0;
+    int first = 0;
+
+    public void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfbonusNumber) {
         if (numberOfWinningNumbers == 3) {
-            int number = map.get("numberOfFifthPlace");
-            map.put("numberOfFifthPlace", ++number);
+            fifth++;
         }
 
         if (numberOfWinningNumbers == 4) {
-            int number = map.get("numberOfFourthPlace");
-            map.put("numberOfFourthPlace", ++number);
+            fourth++;
         }
 
-        if (numberOfWinningNumbers == 5 && !bonus) {
-            int number = map.get("numberOfThirdPlace");
-            map.put("numberOfThirdPlace", ++number);
+        if (numberOfWinningNumbers == 5 && !existenceOfbonusNumber) {
+            third++;
         }
 
-        if (numberOfWinningNumbers == 5 && bonus) {
-            int number = map.get("numberOfSecondPlace");
-            map.put("numberOfSecondPlace", ++number);
+        if (numberOfWinningNumbers == 5 && existenceOfbonusNumber) {
+            second++;
         }
 
         if (numberOfWinningNumbers == 6) {
-            int number = map.get("numberOfFirstPlace");
-            map.put("numberOfFirstPlace", ++number);
+            first++;
         }
     }
 
@@ -49,10 +50,10 @@ public class Lottos {
     }
 
     public int getEarningPrice() {
-        return (WinningPrice.FIFTH_PRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
-                + WinningPrice.FOURTH_PRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
-                + WinningPrice.THIRD_PRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
-                + WinningPrice.SECOND_PRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
-                + WinningPrice.FIRST_PRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
+        return WinningPrice.FIFTH_PRICE.getPrice() * fifth
+                + WinningPrice.FOURTH_PRICE.getPrice() * fourth
+                + WinningPrice.THIRD_PRICE.getPrice() * third
+                + WinningPrice.SECOND_PRICE.getPrice() * second
+                + WinningPrice.FIRST_PRICE.getPrice() * first;
     }
 }

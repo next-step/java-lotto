@@ -31,4 +31,30 @@
 //    public static int getNumberOfFifthPlace() {
 //        return map.get("numberOfFifthPlace");
 //    }
+//
+//    public static void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfbonusNumber) {
+//        if (numberOfWinningNumbers == 3) {
+//            int number = map.get("numberOfFifthPlace");
+//            map.put("numberOfFifthPlace", ++number);
+//        }
+//
+//        if (numberOfWinningNumbers == 4) {
+//            int number = map.get("numberOfFourthPlace");
+//            map.put("numberOfFourthPlace", ++number);
+//        }
+//
+//        if (numberOfWinningNumbers == 5 && !existenceOfbonusNumber) {
+//            int number = map.get("numberOfThirdPlace");
+//            map.put("numberOfThirdPlace", ++number);
+//        }
+//
+//        if (numberOfWinningNumbers == 5 && existenceOfbonusNumber) {
+//            int number = map.get("numberOfSecondPlace");
+//            map.put("numberOfSecondPlace", ++number);
+//        }
+//
+//        if (numberOfWinningNumbers == 6) {
+//            int number = map.get("numberOfFirstPlace");
+//            map.put("numberOfFirstPlace", ++number);
+//        }
 //}
