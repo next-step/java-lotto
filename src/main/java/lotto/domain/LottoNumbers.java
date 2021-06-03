@@ -17,10 +17,20 @@ public class LottoNumbers {
         validateDuplicateLottoNumbers();
     }
 
+    public LottoNumbers(String[] numbers) {
+        lottoNumbers = new ArrayList<LottoNo>();
+        for (String number : numbers)
+            lottoNumbers.add(new LottoNo(Integer.parseInt(number)));
+        validateDuplicateLottoNumbers();
+    }
+
     private void validateDuplicateLottoNumbers() {
         Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
-        if (transSet.size() !=6)
+        if (transSet.size() < 6)
             throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
+
+        if (transSet.size() > 6)
+            throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
     }
 
     public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {

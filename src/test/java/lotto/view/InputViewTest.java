@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.common.MessageCode;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +25,19 @@ class InputViewTest {
     @Test
     public void parsingInputLottoNumbers_String파싱해서_LottoNumber로_변환_검증() {
         InputView inputView = new InputView();
-        String inputLottoNumber = "1,5,8,21,23,31,34";
+        String inputLottoNumber = "1,5,8,21,23,31";
         LottoNumbers lottoNumbers = inputView.parsingInputLottoNumbers(inputLottoNumber);
         assertThat(lottoNumbers.contains(1)).isTrue();
         assertThat(lottoNumbers.contains(5)).isTrue();
         assertThat(lottoNumbers.contains(23)).isTrue();
+    }
+
+    @Test
+    public void parsingInputLottoNumbers_exception_로또개수초과_검증() {
+        InputView inputView = new InputView();
+        String inputLottoNumber = "1,5,8,21,23,31,34";
+        assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage((MessageCode.INVALID_OVER_LOTTO_NUMBERS.message()));
     }
 }

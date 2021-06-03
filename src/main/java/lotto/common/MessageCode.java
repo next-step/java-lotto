@@ -10,7 +10,8 @@ public enum MessageCode {
     INVALID_INPUT_MONEY("1000원 이상 입력해 주세요"),
     INVALID_INPUT_MANUAL_LOTTO_NUMBER("구매 가능한 개수를 초과했습니다."),
     INVALID_INPUT_LOTTO_NUMBER_COUNT("로또 번호는 6개 입력해야 합니다."),
-    INVALID_DUP_LOTTO_NUMBERS("로또 번호는 중복될 수 없습니다.");
+    INVALID_DUP_LOTTO_NUMBERS("로또 번호는 중복될 수 없습니다."),
+    INVALID_OVER_LOTTO_NUMBERS("로또 번호가 6개를 초과했습니다.");
     private final String message;
 
     MessageCode(String message) {

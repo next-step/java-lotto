@@ -1,29 +1,29 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoNumbers {
-    private List<LottoNo> winningLottoNumbers;
+    private LottoNumbers winningLottoNumbers;
     private LottoNo bonusNumber;
 
     public WinningLottoNumbers(String inputWinningLottoNumberString, String inputBonusNumber) {
-        winningLottoNumbers = new ArrayList<LottoNo>();
         winningLottoNumbers = parsingInputString(inputWinningLottoNumberString);
-
         bonusNumber = new LottoNo(Integer.parseInt(inputBonusNumber));
     }
 
-    private List<LottoNo> parsingInputString(String inputLastWonLottoNumberString) {
+    public WinningLottoNumbers() {
+
+    }
+
+    public LottoNumbers parsingInputString(String inputLastWonLottoNumberString) {
+
         String[] numbers = inputLastWonLottoNumberString.split(",");
-        for (int i = 0; i < numbers.length; i++) {
-            winningLottoNumbers.add(new LottoNo(Integer.parseInt(numbers[i])));
-        }
+        winningLottoNumbers = new LottoNumbers(numbers);
         return winningLottoNumbers;
     }
 
     public boolean containsMain(int number) {
-        return winningLottoNumbers.contains(new LottoNo(number));
+        return winningLottoNumbers.contains(number);
     }
 
     public boolean containsBonus(int number) {
@@ -62,4 +62,5 @@ public class WinningLottoNumbers {
 
         return false;
     }
+
 }

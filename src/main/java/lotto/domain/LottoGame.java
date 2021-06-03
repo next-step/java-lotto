@@ -22,7 +22,7 @@ public class LottoGame {
 
         ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
         for (int i=0; i<lottoNumbersList.count(); i++)
-            resultAllLottoScores.updateResult(winningLottoNumbers.matchLottoNumbers(lottoNumbersList.lottoNumberList(i)));
+            resultAllLottoScores.updateResult(winningLottoNumbers.matchLottoNumbers((lottoNumbersList.lottoNumberList(i))));
         resultView.printLottoGameResult(resultAllLottoScores, inputMoney);
     }
 

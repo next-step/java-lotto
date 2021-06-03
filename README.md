@@ -68,4 +68,4 @@
 ## TO-DO
 * 에러 처리 추가 구현
 * 에러 처리 테스트 케이스 구현
-* LottoNumbersList 의 멤버 변수를 LottoNumbers로 바꾸기
+
