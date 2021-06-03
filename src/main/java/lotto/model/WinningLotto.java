@@ -1,33 +1,17 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
     List<Integer> winningNumbers;
     int bonusNumber;
 
-    public WinningLotto(String winningNumbers, String bonusNumber) {
-        this.winningNumbers = convertWinningNumbersToInt(winningNumbers);
-        this.bonusNumber = convertBonusNumberToInt(bonusNumber);
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
 
         checkWinningNumbers(this.winningNumbers);
         checkBonusNumber(this.bonusNumber);
-    }
-
-    public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
-        List<Integer> winningNumbers = new ArrayList<>();
-        String[] splitWinningNumbers = winningStringNumbers.split(", ");
-        for (int i = 0; i < splitWinningNumbers.length; i++) {
-            int number = Integer.parseInt(splitWinningNumbers[i]);
-            winningNumbers.add(number);
-        }
-        return winningNumbers;
-    }
-
-    private int convertBonusNumberToInt(String bonusStringNumber) {
-        int bonusNumber = Integer.parseInt(bonusStringNumber);
-        return bonusNumber;
     }
 
     private void checkWinningNumbers(List<Integer> winningNumbers) {
