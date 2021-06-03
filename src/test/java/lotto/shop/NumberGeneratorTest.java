@@ -2,8 +2,8 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import lotto.lotto.Lotto;
@@ -21,16 +21,13 @@ public class NumberGeneratorTest {
         assertThat(number.size()).isEqualTo(Lotto.MAX_COUNT);
     }
 
-    @RepeatedTest(100)
+    @Test
     @DisplayName("숫자 유효성 체크")
     void checkNumber() {
         //given
         //when
-        List<Integer> numbers = NumberGenerator.generate();
         //then
-        for (int number : numbers) {
-            assertThat(number).isGreaterThan(0);
-            assertThat(number).isLessThanOrEqualTo(45);
-        }
+        assertThat(LottoNumber.MIN_NUMBER).isEqualTo(1);
+        assertThat(LottoNumber.MAX_NUMBER).isEqualTo(45);
     }
 }
