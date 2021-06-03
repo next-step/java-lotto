@@ -21,7 +21,7 @@ public class LottoManualController {
         int autoQuantity = quantity - manualQuantity;
 
         List<String> manualNumbers = inputView.inputManualLottoNumbers(manualQuantity);
-        List<Lotto> lottos = manualLottos.setLotto(manualQuantity, autoQuantity, manualNumbers);
+        Lottos lottos = new Lottos(manualLottos.setLotto(manualQuantity, autoQuantity, manualNumbers));
 
         outputView.printLottos(manualQuantity, autoQuantity, lottos);
 
@@ -31,7 +31,7 @@ public class LottoManualController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
-        outputView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
+        outputView.outputWinningStatistics(lottos.getEarningRate(lottos.getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
@@ -47,17 +47,5 @@ public class LottoManualController {
     private int convertBonusNumberToInt(String bonusStringNumber) {
         int bonusNumber = Integer.parseInt(bonusStringNumber);
         return bonusNumber;
-    }
-
-    private float getEarningRate(int earningPrice, int purchasePrice) {
-        return (float) earningPrice / (float) purchasePrice;
-    }
-
-    public int getEarningPrice() {
-        return (WinningPrice.FIFTH_PRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
-                + WinningPrice.FOURTH_PRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
-                + WinningPrice.THIRD_PRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
-                + WinningPrice.SECOND_PRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
-                + WinningPrice.FIRST_PRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
     }
 }

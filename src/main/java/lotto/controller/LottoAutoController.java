@@ -17,7 +17,7 @@ public class LottoAutoController {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
 
-        List<Lotto> lottos = autoLottos.setLotto(quantity);
+        Lottos lottos = new Lottos(autoLottos.setLotto(quantity));
         outputView.printLotto(quantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
@@ -26,7 +26,7 @@ public class LottoAutoController {
 
         WinningResult winningResult = new WinningResult(lottos, winningLotto);
 
-        outputView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
+        outputView.outputWinningStatistic(lottos.getEarningRate(lottos.getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
@@ -42,17 +42,5 @@ public class LottoAutoController {
     private int convertBonusNumberToInt(String bonusStringNumber) {
         int bonusNumber = Integer.parseInt(bonusStringNumber);
         return bonusNumber;
-    }
-
-    private float getEarningRate(int earningPrice, int purchasePrice) {
-        return (float) earningPrice / (float) purchasePrice;
-    }
-
-    private int getEarningPrice() {
-        return (WinningPrice.FIFTH_PRICE.getPrice() * WinningResult.getNumberOfFifthPlace()
-                + WinningPrice.FOURTH_PRICE.getPrice() * WinningResult.getNumberOfFourthPlace()
-                + WinningPrice.THIRD_PRICE.getPrice() * WinningResult.getNumberOfThirdPlace()
-                + WinningPrice.SECOND_PRICE.getPrice() * WinningResult.getNumberOfSecondPlace()
-                + WinningPrice.FIRST_PRICE.getPrice() * WinningResult.getNumberOfFirstPlace());
     }
 }
