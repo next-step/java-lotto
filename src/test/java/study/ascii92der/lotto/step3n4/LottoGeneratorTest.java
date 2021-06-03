@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3;
+package study.ascii92der.lotto.step3n4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,8 @@ public class LottoGeneratorTest {
 
     @Test
     @DisplayName("로또 번호 자동 생성 테스트")
-    void lottoNumberGeneratorTest() {
+    void create() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        assertThat(lottoGenerator.generate().size()).isEqualTo(6);
+        assertThat(lottoGenerator.generate()).isInstanceOf(Lotto.class);
     }
 }
