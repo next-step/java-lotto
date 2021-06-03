@@ -9,8 +9,9 @@ public class ConsoleView {
     private final static String EARN = "이득";
     private final static String EVEN = "본전";
     private final static String LOSS = "손해";
-    private final static String MATCH_MESSAGE = "%s개 일치 (%s원)- %s개";
+    private final static String MATCH_MESSAGE = "%s개 일치 %s (%s원)- %s개";
     private final static String PROFIT_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private final static String BONUS_MESSAGE = "보너스 볼 일치";
 
     public ConsoleView() {
     }
@@ -35,10 +36,11 @@ public class ConsoleView {
     public static void printScoreMap(LottoResult lottoResult){
         ScoreMap scoreMap = lottoResult.getScoreMap();
         for(LottoRank lottoRank : scoreMap.getKeySet() ){
-            if(lottoRank == null){
+            if(lottoRank.getPrize() == 0){
                 continue;
             }
             String message = String.format(MATCH_MESSAGE, lottoRank.getMatchCount(),
+                    lottoRank.hasBonus() ? BONUS_MESSAGE : "",
                     lottoRank.getPrize(), scoreMap.getNumMatchCount(lottoRank));
             System.out.println(message);
         }

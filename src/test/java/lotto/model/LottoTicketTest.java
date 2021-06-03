@@ -16,11 +16,4 @@ class LottoTicketTest {
         assertThat(actual.contains(new LottoNumber(3))).isFalse();
     }
 
-    @Test
-    void 정렬_테스트(){
-        LottoTicket actual = new LottoTicket(Arrays.asList(new LottoNumber(3), new LottoNumber(1), new LottoNumber(2))).sort();
-        LottoTicket expected = new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)));
-
-        assertThat(actual).isEqualTo(expected);
-    }
 }
