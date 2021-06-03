@@ -16,6 +16,7 @@ public class LottoManager {
     }
 
     public static void main(String[] args) {
+
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         LottoManager manager = new LottoManager(inputView,resultView);
@@ -26,8 +27,15 @@ public class LottoManager {
     private void playLotto() {
         int money = inputView.takeMoney();
 
-        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl(new RandomStrategy());
-        Lottos lottos = new Lottos(factory,money);
+        // 수동 카운트
+        int manualCount = inputView.takeManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = inputView.takeManualLottoNumbers(manualCount);
+
+        Lottos lottos = new Lottos(money);
+        lottos.addLottos(manualLottoNumbers);
+
+        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl();
+        lottos.addLottos(factory);
 
         resultView.showLottoGames(lottos);
 

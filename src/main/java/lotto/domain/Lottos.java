@@ -5,16 +5,22 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Lottos implements Iterable<Lotto>{
+    private int money;
     private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(LottoNumberFactory factory, int money) {
-        this.addLottos(factory,money);
+        this.money = money;
+        this.addLottos(factory);
     }
 
     public Lottos(List<List<Integer>> lottos) {
         for( List<Integer> lotto : lottos) {
             this.addCustomLotto(lotto);
         }
+    }
+
+    public Lottos(int money) {
+        this.money = money;
     }
 
     private void addCustomLotto(List<Integer> customNumbers) {
@@ -25,11 +31,18 @@ public class Lottos implements Iterable<Lotto>{
         lottos.add(new Lotto(factory));
     }
 
-    public void addLottos(LottoNumberFactory factory, int money) {
+    public void addLottos(LottoNumberFactory factory) {
         int lottoCount = money / Lotto.PRICE;
 
         for (int i = 0; i < lottoCount; i++) {
             this.addRandomLotto(factory);
+        }
+    }
+
+    public void addLottos(List<List<Integer>> lottoNumbers) {
+        int count = Math.min(lottoNumbers.size(), money / Lotto.PRICE);
+        for (int i = 0; i < count; i++) {
+            this.addCustomLotto(lottoNumbers.get(i));
         }
     }
 

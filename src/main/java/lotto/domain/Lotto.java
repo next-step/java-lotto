@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoGame;
 import lotto.exception.InvalidLottoNumber;
 
 import java.util.*;
