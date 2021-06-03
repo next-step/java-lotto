@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Lotto {
     private static final int NUMBER_OF_NUMBERS = 6;
-    private static final int MIN_LOTTO_NUMBER = 0;
+    private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
     private List<Integer> numbers = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Lotto {
 
     public Lotto() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        for (int j = MIN_LOTTO_NUMBER; j < MAX_LOTTO_NUMBER; j++) {
+        for (int j = MIN_LOTTO_NUMBER; j <= MAX_LOTTO_NUMBER; j++) {
             lottoNumbers.add(j);
         }
 
