@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottos {
-    List<Lotto> lottos = new ArrayList<>();
-
     public List<Lotto> setLotto(int manualQuantity, int autoQuantity, List<String> manualNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+
         setManualLottos(manualQuantity, manualNumbers, lottos);
         setAutoLottos(autoQuantity, lottos);
 
