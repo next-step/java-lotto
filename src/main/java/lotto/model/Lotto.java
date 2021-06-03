@@ -16,7 +16,7 @@ public class Lotto {
         setManualLotto(splitManualNumbers);
     }
 
-    public String[] splitBySeparator(String manualNumbers) {
+    private String[] splitBySeparator(String manualNumbers) {
         String separator = ", ";
         return manualNumbers.split(separator);
     }
@@ -44,7 +44,7 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
-    public void addNumber(int number) {
+    private void addNumber(int number) {
         numbers.add(number);
     }
 

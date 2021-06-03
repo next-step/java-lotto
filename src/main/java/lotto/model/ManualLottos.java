@@ -13,13 +13,13 @@ public class ManualLottos {
         return lottos;
     }
 
-    public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<Lotto> lottos) {
+    private void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<Lotto> lottos) {
         for (int i = 0; i < manualQuantity; i++) {
             lottos.add(new Lotto(manualNumbersString.get(i)));
         }
     }
 
-    public void setAutoLottos(int autoQuantity, List<Lotto> lottos) {
+    private void setAutoLottos(int autoQuantity, List<Lotto> lottos) {
         for (int i = 0; i < autoQuantity; i++) {
             lottos.add(new Lotto());
         }

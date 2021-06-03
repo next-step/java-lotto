@@ -33,7 +33,7 @@ public class LottoManualController {
         outputView.outputEarningRate(lottos.calculateEarningRate(lottoPrice.getPrice()));
     }
 
-    public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
+    private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
         for (int i = 0; i < splitWinningNumbers.length; i++) {

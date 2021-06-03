@@ -30,7 +30,7 @@ public class Lottos {
         winningResult.add(first);
     }
 
-    public void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfBonusNumber) {
+    private void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfBonusNumber) {
         if (numberOfWinningNumbers == 3) {
             fifth++;
         }
@@ -57,7 +57,7 @@ public class Lottos {
         return (float) earningPrice / (float) purchasePrice;
     }
 
-    public int calculateEarningPrice() {
+    private int calculateEarningPrice() {
         return WinningPrice.FIFTH_PRICE.getPrice() * fifth
                 + WinningPrice.FOURTH_PRICE.getPrice() * fourth
                 + WinningPrice.THIRD_PRICE.getPrice() * third
