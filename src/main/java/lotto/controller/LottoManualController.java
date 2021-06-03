@@ -14,7 +14,7 @@ public class LottoManualController {
         LottoManualOutputView outputView = new LottoManualOutputView();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
-        int quantity = lottoPrice.getQuantity();
+        int quantity = lottoPrice.calculateLottoQuantity();
         int manualQuantity = inputView.inputManualLottoQuantity();
         int autoQuantity = quantity - manualQuantity;
 
@@ -30,7 +30,7 @@ public class LottoManualController {
 
         lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         outputView.outputWinningResults(lottos.getWinningResults());
-        outputView.outputEarningRate(lottos.getEarningRate(LottoPrice.getPrice()));
+        outputView.outputEarningRate(lottos.calculateEarningRate(LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {

@@ -11,7 +11,7 @@ public class LottoPrice {
         return price;
     }
 
-    public int getQuantity() {
+    public int calculateLottoQuantity() {
         return price / 1_000;
     }
 }

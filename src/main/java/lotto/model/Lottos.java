@@ -52,16 +52,12 @@ public class Lottos {
         }
     }
 
-    public List<Integer> getWinningResults() {
-        return winningResult;
-    }
-
-    public float getEarningRate(int purchasePrice) {
-        int earningPrice = getEarningPrice();
+    public float calculateEarningRate(int purchasePrice) {
+        int earningPrice = calculateEarningPrice();
         return (float) earningPrice / (float) purchasePrice;
     }
 
-    public int getEarningPrice() {
+    public int calculateEarningPrice() {
         return WinningPrice.FIFTH_PRICE.getPrice() * fifth
                 + WinningPrice.FOURTH_PRICE.getPrice() * fourth
                 + WinningPrice.THIRD_PRICE.getPrice() * third
@@ -71,5 +67,9 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public List<Integer> getWinningResults() {
+        return winningResult;
     }
 }
