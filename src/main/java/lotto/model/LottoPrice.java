@@ -1,13 +1,13 @@
 package lotto.model;
 
 public class LottoPrice {
-    private static int price;
+    private int price;
 
     public LottoPrice(int price) {
         this.price = price;
     }
 
-    public static int getPrice() {
+    public int getPrice() {
         return price;
     }
 
