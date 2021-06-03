@@ -34,7 +34,7 @@ public class LottoNumberTest {
         //given
         //when
         //then
-        assertThat(LottoNumber.of(1).equals(LottoNumber.of(1))).isTrue();
+        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
     }
 
     @Test
@@ -42,9 +42,7 @@ public class LottoNumberTest {
     void testCache() {
         //given
         //when
-        LottoNumber lottoNumber1 = LottoNumber.of(1);
-        LottoNumber lottoNumber2 = LottoNumber.of(1);
         //then
-        assertThat(lottoNumber1 == lottoNumber2).isTrue();
+        assertThat(LottoNumber.of(1)).isSameAs(LottoNumber.of(1));
     }
 }
