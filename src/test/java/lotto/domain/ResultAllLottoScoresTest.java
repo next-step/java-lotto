@@ -8,7 +8,7 @@ class ResultAllLottoScoresTest {
     @Test
     public void updateResult_3등로또당첨_HASHMAP_추가_확인() {
         ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
-        MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(3,false);
+        MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(3,true);
 
         resultAllLottoScores.updateResult(matchStatusOfALotto);
         assertThat(resultAllLottoScores.result().get(ResultScoreEnum.FIFTH)).isEqualTo(1);

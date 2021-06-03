@@ -35,9 +35,6 @@
   * 등수별 테스트
 * LottoNumbers.contains indent depth 수정
 
-## 작업중
-* 에러 처리 구현하기
-
 ## 재설계
 * LottoNo : 로또 번호 1개
   * int 원시값포장
@@ -65,6 +62,10 @@
   * 수동번호 생성
   * WiningLottoNumbers.matchLottoNumbers를 LottoNumberList만큼 반복해서 실행
   
-
 * ResultView
   * 로또 당첨 결과값 출력
+
+## TO-DO
+* 에러 처리 추가 구현
+* 에러 처리 테스트 케이스 구현
+* LottoNumbersList 의 멤버 변수를 LottoNumbers로 바꾸기

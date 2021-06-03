@@ -34,4 +34,12 @@ class LottoNumbersTest {
             assertThat(lottoNumbers.lottoNumbers().get(i).lottNo() < lottoNumbers.lottoNumbers().get(i+1).lottNo()).isTrue();
         }
     }
+
+    @Test
+    public void LottoNumbers_중복번호_검증() {
+        int[] numbers = {1,1,3,4,5,6};
+        assertThatThrownBy(() -> new LottoNumbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
+    }
 }

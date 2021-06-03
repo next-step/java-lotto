@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import lotto.common.MessageCode;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumbers {
     private List<LottoNo> lottoNumbers;
@@ -10,6 +14,13 @@ public class LottoNumbers {
         lottoNumbers = new ArrayList<LottoNo>();
         for (int number : numbers)
             lottoNumbers.add(new LottoNo(number));
+        validateDuplicateLottoNumbers();
+    }
+
+    private void validateDuplicateLottoNumbers() {
+        Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
+        if (transSet.size() !=6)
+            throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
     }
 
     public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {

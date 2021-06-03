@@ -22,11 +22,12 @@ public class WinningLottoNumbersTest {
 
     @Test
     public void matchLottoNumbers_당첨번호비교결과값검증() {
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6","7");
-        int[] numbers = {1,2,3,4,5,7};
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("2,3,5,8,22,23","6");
+        int[] numbers = {1,2,3,4,5,6};
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
-        MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(5, true);
+        MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(3, true);
         assertThat(winningLottoNumbers.matchLottoNumbers(lottoNumbers)).isEqualTo(matchStatusOfALotto);
     }
+
 }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.common.Constant;
 import lotto.common.MessageCode;
 import lotto.domain.LottoNumbers;
 
@@ -14,12 +15,24 @@ public class InputView {
 
     public int inputMoneyForLotto() {
         System.out.println(MessageCode.INPUT_MONEY_FOR_LOTTO.message());
-        return scan.nextInt();
+        return inputMoneyValidate(scan.nextInt());
     }
 
-    public int inputManualLottoBuyCount() {
+    public int inputMoneyValidate(int inputMoney) {
+        if (inputMoney < 1000)
+            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_MONEY.message());
+        return inputMoney;
+    }
+
+    public int inputManualLottoBuyCount(int inputMoney) {
         System.out.println(MessageCode.INPUT_MANUAL_BUY_LOTTO_COUNT.message());
-        return scan.nextInt();
+        return inputManualLottoBuyCountValidate(scan.nextInt(), inputMoney);
+    }
+
+    private int inputManualLottoBuyCountValidate(int buyCount, int inputMoney) {
+        if (inputMoney < buyCount * Constant.LOTTO_PRICE.value())
+            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_MANUAL_LOTTO_NUMBER.message());
+        return buyCount;
     }
 
     public String inputWinningLottoNumbers() {
@@ -38,10 +51,14 @@ public class InputView {
         for (int i = 0; i < manualBuyLottoCount; i++)
             manualLottoNumbers[i] = scan.next();
 
-        LottoNumbers[] lottoNumbersArray = new LottoNumbers[manualBuyLottoCount];
-        lottoNumbersArray = convertingStringToLottoNumbersArray(manualLottoNumbers);
-
+        LottoNumbers[]  lottoNumbersArray = convertingStringToLottoNumbersArray(manualLottoNumbers);
+        //validateManualLottoNumbers(manualLottoNumbers);
         return lottoNumbersArray;
+    }
+
+    private void validateManualLottoNumbers(String[] manualLottoNumbers) {
+        if (manualLottoNumbers.length != 6)
+            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message());
     }
 
     public LottoNumbers[] convertingStringToLottoNumbersArray(String[] manualLottoNumbers) {

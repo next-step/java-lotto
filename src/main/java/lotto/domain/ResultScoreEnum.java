@@ -24,7 +24,8 @@ public enum ResultScoreEnum {
     }
 
     public void printResult(int wonCount) {
-        System.out.println(printResult + "-" + wonCount + "개");
+        if (this != MISS)
+            System.out.println(printResult + "-" + wonCount + "개");
     }
 
     public int getWonMoney(int wonCount) {
@@ -33,7 +34,8 @@ public enum ResultScoreEnum {
 
     public static ResultScoreEnum valueOf(int countOfMatch, boolean matchBonus) {
         Optional<ResultScoreEnum> result = Arrays.stream(values())
-                .filter(resultScoreEnum -> resultScoreEnum.countOfMatch == countOfMatch && resultScoreEnum.matchBonus == matchBonus)
+                .filter(resultScoreEnum -> (resultScoreEnum.countOfMatch == countOfMatch) ||
+                        (countOfMatch == 5 && resultScoreEnum.countOfMatch == countOfMatch && resultScoreEnum.matchBonus == matchBonus))
                 .findFirst();
 
         return result.orElseGet(() -> ResultScoreEnum.MISS);
