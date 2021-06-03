@@ -58,7 +58,7 @@ public class LottoGame {
 
     public PurchasedLottos selfPick(PurchaseCount purchaseCount) {
         int selfPickLottoCount = inputView.inputSelfPickLottoCount();
-        purchaseCount.isAvailable(selfPickLottoCount);
+        purchaseCount.isaAvailable(selfPickLottoCount);
         if (selfPickLottoCount < 1) {
             return new PurchasedLottos();
         }

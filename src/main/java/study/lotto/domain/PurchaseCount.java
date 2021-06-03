@@ -22,7 +22,7 @@ public class PurchaseCount {
         return purchaseCount;
     }
 
-    public void isAvailable(int selfPickLottoCount) {
+    public void isaAvailable(int selfPickLottoCount) {
         if (purchaseCount < selfPickLottoCount) {
             throw new WrongSelfPickCountException();
         }
