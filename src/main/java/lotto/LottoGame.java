@@ -54,7 +54,7 @@ public class LottoGame {
     }
 
     private static void printLotto(LottoTicket lottoTicket, int selfQuantity) {
-        OutputView.printLottoQuantity(selfQuantity, lottoTicket.matchingCount() - selfQuantity);
+        OutputView.printLottoQuantity(selfQuantity, lottoTicket.quantity() - selfQuantity);
         OutputView.printLottoTicket(lottoTicket);
         OutputView.printWinningNumber();
     }

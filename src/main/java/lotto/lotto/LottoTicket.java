@@ -24,7 +24,7 @@ public class LottoTicket {
         return lottoResult;
     }
 
-    public int matchingCount() {
+    public int quantity() {
         return lottoTickets.size();
     }
 
