@@ -7,18 +7,18 @@ import java.util.List;
 public class Lotto {
     private static final int MAX_LOTTO_RANGE = 45;
     private static final int SINGLE_LOTTO_DIGIT = 6;
-    private static final List<Integer> lottoNumPool = initLottoNum();
+    private static final List<LottoNumber> lottoNumPool = initLottoNum();
 
     public static final int LOTTO_PRICE = 1000;
 
-    private List<Integer> lottoNum;
+    private List<LottoNumber> lottoNum;
     private LottoWin lottoWin;
 
     public Lotto() {
         this.generateLottoNum();
     }
 
-    public List<Integer> lottoNum() {
+    public List<LottoNumber> lottoNum() {
         return this.lottoNum;
     }
 
@@ -27,28 +27,13 @@ public class Lotto {
     }
 
 
-    public void calculateWin(List<Integer> winList) {
+    public void calculateWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
         int matchNum = this.countWin(winList);
-        if (LottoWin.FIRST_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FIRST_PLACE;
-            return;
-        }
-        if (LottoWin.SECOND_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.SECOND_PLACE;
-            return;
-        }
-        if (LottoWin.THIRD_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.THIRD_PLACE;
-            return;
-        }
-        if (LottoWin.FOURTH_PLACE.matchNum() == matchNum) {
-            this.lottoWin = LottoWin.FOURTH_PLACE;
-            return;
-        }
-        this.lottoWin = LottoWin.LAST_PLACE;
+        boolean matchBonus = this.lottoNum.contains(bonusNumber);
+        this.lottoWin = LottoWin.valueOf(matchNum, matchBonus);
     }
 
-    private int countWin(List<Integer> winList) {
+    private int countWin(List<LottoNumber> winList) {
         int winNum = 0;
         for (int i = 0; i < winList.size(); i++) {
             winNum += this.getWinCount(winList.get(i));
@@ -56,21 +41,21 @@ public class Lotto {
         return winNum;
     }
 
-    private int getWinCount(int targetNum) {
+    private int getWinCount(LottoNumber targetNum) {
         if (this.isWinNumber(targetNum)) {
             return 1;
         }
         return 0;
     }
 
-    private boolean isWinNumber(int targetNum) {
+    private boolean isWinNumber(LottoNumber targetNum) {
         return this.lottoNum.contains(targetNum);
     }
 
-    private static List<Integer> initLottoNum() {
-        List<Integer> lottoNumPool = new ArrayList<>();
+    private static List<LottoNumber> initLottoNum() {
+        List<LottoNumber> lottoNumPool = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_RANGE; i++) {
-            lottoNumPool.add(i);
+            lottoNumPool.add(new LottoNumber(i));
         }
         return lottoNumPool;
     }

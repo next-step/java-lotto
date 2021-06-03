@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +21,39 @@ class LottoTest {
     void lottoWin() {
 
         for (LottoWin lottoWin : LottoWin.values()) {
-            LottoWin targetLottoWIn = lottoWin;
-            List<Integer> lottoNum = lotto.lottoNum();
-            List<Integer> win = new ArrayList<>();
-            for (int i = 0; i < targetLottoWIn.matchNum(); i++) {
-                win.add(lottoNum.get(i));
-            }
-            for (int i = lottoNum.size() - 1; i >= targetLottoWIn.matchNum(); i--) {
-                win.add(lottoNum.get(i) + 100);
-            }
-            lotto.calculateWin(win);
+            List<LottoNumber> lottoNum = lotto.lottoNum();
+            List<LottoNumber> targetLottoWinNumber = this.getTargetLottoWinNumber(lottoWin, lottoNum);
 
-            assertThat(lotto.lottoWin()).isEqualTo(targetLottoWIn);
+            if (lottoWin == LottoWin.SECOND_PLACE) {
+                lotto.calculateWin(targetLottoWinNumber, lottoNum.get(lottoNum.size() - 1));
+            }
+            if (lottoWin != LottoWin.SECOND_PLACE) {
+                lotto.calculateWin(targetLottoWinNumber, getNotWinLottoNumber(targetLottoWinNumber));
+            }
+
+            assertThat(lotto.lottoWin()).isEqualTo(lottoWin);
         }
+    }
+
+    private List<LottoNumber> getTargetLottoWinNumber(LottoWin lottoWin, List<LottoNumber> baseLottoNumber) {
+        List<LottoNumber> targetLottoWinNumber = new ArrayList<>();
+        // 일치하는 갯수만큼 타겟값에 로또 번호를 넣어줌
+        for (int i = 0; i < lottoWin.matchNum(); i++) {
+            targetLottoWinNumber.add(baseLottoNumber.get(i));
+        }
+        // 남은 값들은 불일치 값으로 로또 번호를 넣어줌
+        for (int i = baseLottoNumber.size() - 1; i >= lottoWin.matchNum(); i--) {
+            targetLottoWinNumber.add(getNotWinLottoNumber(baseLottoNumber));
+        }
+        return targetLottoWinNumber;
+    }
+
+    private LottoNumber getNotWinLottoNumber(List<LottoNumber> lottoNumbers) {
+        for (int i = 1; i < 46; i++) {
+            if (!lottoNumbers.contains(new LottoNumber(i))) {
+                return new LottoNumber(i);
+            }
+        }
+        return new LottoNumber(46);
     }
 }

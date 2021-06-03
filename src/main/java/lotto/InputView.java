@@ -10,26 +10,37 @@ public class InputView {
     private static final String START_WORDING = "구입금액을 입력해주세요";
 
     private static final String LAST_WEEK_WIN_NUMBER_WORDING = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_WORDING = "보너스 볼을 입력해 주세요.";
 
 
-    public static int getBuyingMoney() {
+    public static Money getBuyingMoney() {
         System.out.println(START_WORDING);
         String input = SCANNER.nextLine();
-        return Integer.parseInt(input);
+        int inputNumber = Integer.parseInt(input);
+        return new Money(inputNumber);
     }
 
-    public static String getLastWeekWinNumber() {
+    public static WinningLotto getLastWeekWinNumber() {
         System.out.println(LAST_WEEK_WIN_NUMBER_WORDING);
         String input = SCANNER.nextLine();
-        return input;
+        return convertWinNumberStringToIntegerList(input);
     }
 
-    public static List<Integer> convertWinNumberStringToIntegerList(String winNumber) {
-        String[] splitString = winNumber.split(",");
-        List<Integer> winNumberList = new ArrayList<>();
-        for (int i = 0; i < splitString.length; i++) {
-            winNumberList.add(Integer.parseInt(splitString[i]));
-        }
-        return winNumberList;
+    public static LottoNumber getBonusWinNumber() {
+        System.out.println(BONUS_NUMBER_WORDING);
+        String input = SCANNER.nextLine();
+        int number = Integer.parseInt(input);
+        return new LottoNumber(number);
     }
+
+    public static WinningLotto convertWinNumberStringToIntegerList(String winNumber) {
+        String[] splitString = winNumber.split(",");
+        List<LottoNumber> winNumberList = new ArrayList<>();
+        for (String s : splitString) {
+            int number = Integer.parseInt(s);
+            winNumberList.add(new LottoNumber(number));
+        }
+        return new WinningLotto(winNumberList);
+    }
+
 }
