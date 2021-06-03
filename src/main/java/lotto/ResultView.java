@@ -1,7 +1,7 @@
 package lotto;
 
 public class ResultView {
-	public static final String LOTTO_PURCHASE_OUTPUT = "%d개를 구매했습니다.";
+	public static final String LOTTO_PURCHASE_OUTPUT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	public static final String LOTTO_RESULT = "당첨 통계 \n ---------";
 	public static final String TOTAL_REVENUE = "총 수익률은 %.2f입니다.";
 
@@ -9,8 +9,8 @@ public class ResultView {
 		System.out.println(msg);
 	}
 
-	public static void print(String msg, int num) {
-		System.out.println(String.format(msg, num));
+	public static void print(String msg, int num1, int num2) {
+		System.out.println(String.format(msg, num1, num2));
 	}
 
 	public static void print(String msg, float num) {
@@ -28,9 +28,10 @@ public class ResultView {
 		ResultView.print(ResultView.TOTAL_REVENUE, lottoMatchResult.getProfit());
 	}
 
-	public static void printPurchaseResult(Lottos purchasedLotto) {
-		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, purchasedLotto.lottoCount());
-		purchasedLotto.getLottos().forEach(lotto -> ResultView.print(lotto.toString()));
+	public static void printPurchaseResult(Lottos auto, Lottos manual) {
+		ResultView.print(ResultView.LOTTO_PURCHASE_OUTPUT, auto.lottoCount(), manual.lottoCount());
+		ResultView.print(auto.toString());
+		ResultView.print(manual.toString());
 	}
 
 	private static String matchingCountMessage(LottoPrize lottoPrize) {

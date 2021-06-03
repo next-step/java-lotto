@@ -23,4 +23,9 @@ public class Lottos {
 	public List<LottoPrize> comparePrize(WinningLotto winningLotto) {
 		return lottos.stream().map(lotto -> lotto.compare(winningLotto)).filter(Objects::nonNull).collect(Collectors.toList());
 	}
+
+	@Override
+	public String toString() {
+		return lottos.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+	}
 }

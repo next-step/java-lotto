@@ -14,22 +14,34 @@ public class LottoMachine {
 		.mapToObj(LottoNumber::new).collect(Collectors.toList());
 
 	private int money;
-	private Lottos purchasedLotto;
 
 	public LottoMachine(int money) {
+		if(money < LOTTO_PRICE) {
+			throw new IllegalArgumentException("로또 최소 금액은 1000원입니다.");
+		}
 		this.money = money;
-		this.purchasedLotto = purchase();
 	}
 
-	public Lottos getPurchasedLotto() {
-		return purchasedLotto;
+	public Lottos purchaseManual(List<Lotto> manualLottos) {
+		if(isOverManualLottoCount(money, manualLottos.size())) {
+			throw new IllegalArgumentException("구매할 수 있는 최대 갯수를 넘었습니다.");
+		}
+		return new Lottos(manualLottos);
 	}
 
-	private Lottos purchase() {
-		return new Lottos(Stream.generate(this::generateLotto).limit(maxPurchaseLottoCount()).collect(Collectors.toList()));
+	public Lottos purchaseAuto(int count) {
+		return new Lottos(Stream.generate(this::generateLotto).limit(count).collect(Collectors.toList()));
 	}
 
-	private int maxPurchaseLottoCount() {
+	public int purchaseLottoCount() {
+		return this.money / LOTTO_PRICE;
+	}
+
+	private boolean isOverManualLottoCount(int money, int manualLottoCount) {
+		return manualLottoCount > maxPurchaseLottoCount(money);
+	}
+
+	private int maxPurchaseLottoCount(int money) {
 		return money / LOTTO_PRICE;
 	}
 

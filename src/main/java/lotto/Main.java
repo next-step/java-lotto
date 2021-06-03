@@ -1,14 +1,20 @@
 package lotto;
 
-public class Main {
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+public class Main {
 	public static void main(String[] args) {
 		LottoMachine lottoMachine = new LottoMachine(InputView.inputMoney());
-		ResultView.printPurchaseResult(lottoMachine.getPurchasedLotto());
+		Lottos manuals = lottoMachine.purchaseManual(InputView.inputManualLotto());
+		Lottos autos = lottoMachine.purchaseAuto(lottoMachine.purchaseLottoCount() - manuals.lottoCount());
+		Lottos purchaseAll = new Lottos(Stream.concat(autos.getLottos().stream(),
+			manuals.getLottos().stream()).collect(Collectors.toList()));
 
-		WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumber(), InputView.inputBonusNumber());
+		ResultView.printPurchaseResult(autos, manuals);
 
-		LottoMatchResult lottoMatchResult = new LottoMatchResult(lottoMachine.getPurchasedLotto(), winningLotto);
+		WinningLotto winningLotto = new WinningLotto(InputView.inputLottoNumber(), InputView.inputBonusNumber());
+		LottoMatchResult lottoMatchResult = new LottoMatchResult(purchaseAll, winningLotto);
 		ResultView.printResult(lottoMatchResult);
 	}
 }
