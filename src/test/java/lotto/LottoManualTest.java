@@ -1,7 +1,6 @@
-package lottotest;
+package lotto;
 
-import lotto.controller.LottoAutoController;
-import lotto.model.WinningLotto;
+import lotto.controller.LottoManualController;
 import lotto.model.WinningPrice;
 import lotto.model.WinningResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,32 +12,31 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoAutoTest {
-    LottoAutoController controller;
+public class LottoManualTest {
+    LottoManualController controller;
 
     @BeforeEach
     void setUp() {
-        controller = new LottoAutoController();
+        controller = new LottoManualController();
     }
 
     @DisplayName(value = "당첨번호를 입력하면 정수들로 나타내준다.")
     @Test
     void convert_WinningNumbers_to_Integers() {
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
         List<Integer> winningNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             winningNumbers.add(i + 1);
         }
-        assertThat(winningLotto.getWinningNumbers()).isEqualTo(winningNumbers);
+        assertThat(controller.convertWinningNumbersToInt("1, 2, 3, 4, 5, 6")).isEqualTo(winningNumbers);
     }
 
-    @DisplayName(value = "당첨금액 enum 에서 당첨금액을 가져와 보여준다.")
+    @DisplayName(value = "당첨결과 enum 에서 당첨금액을 가져와 보여준다.")
     @Test
     void show_winningPrice() {
         assertThat(WinningPrice.FIFTH_PRICE.getPrice()).isEqualTo(5000);
     }
 
-    @DisplayName(value = "당첨결과 클래스 에서 당첨횟수를 가져와 보여준다.")
+    @DisplayName(value = "당첨결과 enum 에서 당첨횟수를 가져와 보여준다.")
     @Test
     void show_The_Number_of_Winnings() {
         WinningResult winningResult = new WinningResult();

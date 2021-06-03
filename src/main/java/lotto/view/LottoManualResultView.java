@@ -1,15 +1,15 @@
 package lotto.view;
 
-import lotto.model.LottoModel;
+import lotto.model.Lotto;
 import lotto.model.WinningResult;
 
 import java.util.List;
 
 public class LottoManualResultView {
-    public void printLottos(int manualQuantity, int autoQuantity, List<LottoModel> lottos) {
+    public void printLottos(int manualQuantity, int autoQuantity, List<Lotto> lottos) {
         System.out.println();
         System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + autoQuantity + "개를 구매했습니다.");
-        for (LottoModel lotto : lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
     }

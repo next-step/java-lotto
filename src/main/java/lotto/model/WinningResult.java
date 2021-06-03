@@ -1,12 +1,12 @@
 package lotto.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class WinningResult {
-    static HashMap<String, Integer> map = new HashMap<String, Integer>();
+    static
 
-    public WinningResult() {
+    public WinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
+        getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         map.put("numberOfFirstPlace", 0);
         map.put("numberOfSecondPlace", 0);
         map.put("numberOfThirdPlace", 0);
@@ -34,6 +34,13 @@ public class WinningResult {
         return map.get("numberOfFifthPlace");
     }
 
+    public void getWinningResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+        for (Lotto lotto : lottos) {
+            String result = lotto.result(winningNumbers, bonusNumber);
+            WinningResult.addNumberOfWinning(result);
+        }
+    }
+
     public static void addNumberOfWinning(int numberOfWinningNumbers, boolean bonus) {
         if (numberOfWinningNumbers == 3) {
             int number = map.get("numberOfFifthPlace");
@@ -58,14 +65,6 @@ public class WinningResult {
         if (numberOfWinningNumbers == 6) {
             int number = map.get("numberOfFirstPlace");
             map.put("numberOfFirstPlace", ++number);
-        }
-    }
-
-    public void getWinningResult(List<LottoModel> lottos, List<Integer> winningNumbers, int bonusNumber) {
-        for (LottoModel lotto : lottos) {
-            int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
-            boolean bonus = lotto.contains(bonusNumber);
-            WinningResult.addNumberOfWinning(numberOfWinningNumbers, bonus);
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoManualController {
 
-    public void start(List<LottoModel> lottos) {
+    public void start(List<Lotto> lottos) {
         LottoManualInputView inputView = new LottoManualInputView();
         LottoManualResultView resultView = new LottoManualResultView();
 
@@ -31,15 +31,15 @@ public class LottoManualController {
         resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
-    public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<LottoModel> lottos) {
+    public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<Lotto> lottos) {
         for (int i = 0; i < manualQuantity; i++) {
-            lottos.add(new LottoModel(manualNumbersString.get(i)));
+            lottos.add(new Lotto(manualNumbersString.get(i)));
         }
     }
 
-    public void setAutoLottos(int autoQuantity, List<LottoModel> lottos) {
+    public void setAutoLottos(int autoQuantity, List<Lotto> lottos) {
         for (int i = 0; i < autoQuantity; i++) {
-            lottos.add(new LottoModel());
+            lottos.add(new Lotto());
         }
     }
 
