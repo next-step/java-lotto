@@ -47,36 +47,6 @@ public class Lotto {
         numbers.add(number);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public String result(List<Integer> winningNumbers, int bonusNumber) {
-        int numberOfWinningNumbers = countWinningNumbers(winningNumbers);
-        boolean bonus = contains(bonusNumber);
-
-        if (numberOfWinningNumbers == 3) {
-            return "5등";
-        }
-
-        if (numberOfWinningNumbers == 4) {
-            return "4등";
-        }
-
-        if (numberOfWinningNumbers == 5 && !bonus) {
-            return "3등";
-        }
-
-        if (numberOfWinningNumbers == 5 && bonus) {
-            return "2등";
-        }
-
-        if (numberOfWinningNumbers == 6) {
-            return "1등";
-        }
-        return "당첨되지 않았습니다.";
-    }
-
     public int countWinningNumbers(List<Integer> winningNumbers) {
         int count = 0;
         for (int i = 0; i < numberOfNumbers; i++) {
@@ -89,5 +59,9 @@ public class Lotto {
 
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
