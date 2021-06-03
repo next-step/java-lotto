@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.entity.Number;
 import lotto.domain.generator.AutomaticLottoNumbersGenerator;
 import lotto.domain.generator.LottoNumbersGenerator;
+import lotto.domain.generator.ManualLottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,17 +15,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumbersGeneratorTest {
 
-    private LottoNumbersGenerator lottoNumbersGenerator;
+    private LottoNumbersGenerator autoGenerator;
+    private ManualLottoNumberGenerator manualGenerator;
 
     @BeforeEach
     public void setup(){
-        lottoNumbersGenerator = new AutomaticLottoNumbersGenerator();
+        autoGenerator = new AutomaticLottoNumbersGenerator();
+        manualGenerator = new ManualLottoNumberGenerator();
     }
 
     @Test
     @DisplayName("로또 자동 생성기 테스트")
-    public void 자동_로또_생성(){
-        List<Number> numbers = lottoNumbersGenerator.generateNumber();
+    public void 자동_로또_넘버_생성(){
+        List<Number> numbers = autoGenerator.generateNumber();
         assertThat(numbers.size()).isEqualTo(6);
         for (Number number : numbers) {
             assertThat(number).isBetween(Number.of(1), Number.of(45));
@@ -32,10 +35,20 @@ public class LottoNumbersGeneratorTest {
     }
 
     @Test
+    @DisplayName("로또 수동 생성기 테스트")
+    public void 수동_로또_넘버_생성(){
+        String test = "1,2,3,4,5,6";
+        List<Number> numbers = manualGenerator.generateNumber(test);
+        numbers.forEach(number -> {
+            assertThat(number).isInstanceOf(Number.class);
+        });
+    }
+
+    @Test
     @DisplayName("로또 정렬 기능 테스트")
     public void 로또_정렬_확인(){
-        List<Number> numbers = lottoNumbersGenerator.generateNumber();
-        lottoNumbersGenerator.sortNumbers(numbers);
+        List<Number> numbers = autoGenerator.generateNumber();
+        autoGenerator.sortNumbers(numbers);
         Number number;
         Number nextNumber;
         for (int i = 0; i < (numbers.size() - 1) ; i++) {
