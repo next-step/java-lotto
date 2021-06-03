@@ -22,7 +22,7 @@ public class LottoNumbers {
     }
 
     public boolean contains(int number) {
-        for(LottoNo lottoNo:lottoNumbers) {
+        for (LottoNo lottoNo : lottoNumbers) {
             if (lottoNo.lottNo() == number)
                 return true;
         }

@@ -7,7 +7,7 @@ public class ResultAllLottoScores {
 
     public ResultAllLottoScores() {
         ResultScoreEnum resultScoreEnum[] = ResultScoreEnum.values();
-        for(ResultScoreEnum state : resultScoreEnum) {
+        for (ResultScoreEnum state : resultScoreEnum) {
             resultMap.put(state, 0);
         }
     }

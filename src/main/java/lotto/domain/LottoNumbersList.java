@@ -13,7 +13,7 @@ public class LottoNumbersList {
 
     public LottoNumbersList(LottoNumbers[] lottoNumbersArray) {
         lottoNumbersList = new ArrayList<LottoNumbers>();
-        for ( LottoNumbers lottoNumbers : lottoNumbersArray)
+        for (LottoNumbers lottoNumbers : lottoNumbersArray)
             lottoNumbersList.add(lottoNumbers);
     }
 
@@ -32,14 +32,4 @@ public class LottoNumbersList {
     public LottoNumbers lottoNumberList(int i) {
         return lottoNumbersList.get(i);
     }
-
-/*    public ResultAllLottoScores countMatchedNumbersList(LastWonLottoNumber lastWonLottoNumber) {
-        ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
-        MatchStatusOfALotto matchStatusOfALotto = null;
-        for (int i = 0; i < lottoNumbersList.size(); i++) {
-            matchStatusOfALotto = lottoNumbersList.get(i).countMatchedNumbers(lastWonLottoNumber);
-            resultAllLottoScores.updateResult(matchStatusOfALotto);
-        }
-        return resultAllLottoScores;
-    }*/
 }

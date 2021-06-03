@@ -13,7 +13,7 @@ public class LottoNo {
     }
 
     private void validateLottoNo(int lottoNo) {
-        if ( lottoNo > 45 || lottoNo < 1)
+        if (lottoNo > 45 || lottoNo < 1)
             throw new IllegalArgumentException(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
     }
 

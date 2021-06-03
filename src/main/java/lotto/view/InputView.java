@@ -7,9 +7,6 @@ import java.util.Scanner;
 
 public class InputView {
     Scanner scan;
-    private String inputLastWonLottoNumber;
-    private String inputBonusNumber;
-    private int inputAmount;
 
     public InputView() {
         scan = new Scanner(System.in);
@@ -25,21 +22,9 @@ public class InputView {
         return scan.nextInt();
     }
 
-    public int getInputAmount() {
-        return inputAmount;
-    }
-
     public String inputWinningLottoNumbers() {
         System.out.println(MessageCode.INPUT_WINNING_LOTTO_NUMBERS.message());
         return scan.next();
-    }
-
-    public String getInputLastWonLottoNumbers() {
-        return inputLastWonLottoNumber;
-    }
-
-    public String getInputBonusNumber() {
-        return inputBonusNumber;
     }
 
     public String inputBonusLottoNumber() {
@@ -49,8 +34,8 @@ public class InputView {
 
     public LottoNumbers[] inputManualLottoNumbers(int manualBuyLottoCount) {
         System.out.println(MessageCode.INPUT_MANUAL_LOTTO_NUMBERS.message());
-        String [] manualLottoNumbers = new String[manualBuyLottoCount];
-        for(int i=0; i<manualBuyLottoCount; i++)
+        String[] manualLottoNumbers = new String[manualBuyLottoCount];
+        for (int i = 0; i < manualBuyLottoCount; i++)
             manualLottoNumbers[i] = scan.next();
 
         LottoNumbers[] lottoNumbersArray = new LottoNumbers[manualBuyLottoCount];
@@ -62,7 +47,7 @@ public class InputView {
     public LottoNumbers[] convertingStringToLottoNumbersArray(String[] manualLottoNumbers) {
         LottoNumbers[] lottoNumbers = new LottoNumbers[manualLottoNumbers.length];
 
-        for(int i=0; i<manualLottoNumbers.length; i++) {
+        for (int i = 0; i < manualLottoNumbers.length; i++) {
             lottoNumbers[i] = parsingInputLottoNumbers(manualLottoNumbers[i]);
         }
 
@@ -72,7 +57,7 @@ public class InputView {
     public LottoNumbers parsingInputLottoNumbers(String manualLottoNumbers) {
         String[] stringNumbers = manualLottoNumbers.split(",");
         int[] intNumbers = new int[stringNumbers.length];
-        for (int i =0; i<stringNumbers.length; i ++) {
+        for (int i = 0; i < stringNumbers.length; i++) {
             intNumbers[i] = Integer.parseInt(stringNumbers[i]);
         }
         LottoNumbers lottoNumbers = new LottoNumbers(intNumbers);

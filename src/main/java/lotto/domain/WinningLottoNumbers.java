@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.common.Constant;
-import lotto.common.MessageCode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,21 +22,6 @@ public class WinningLottoNumbers {
         return winningLottoNumbers;
     }
 
-/*    private int validateNumber(String splitNumber) {
-        if (!isNumeric(splitNumber))
-            throw new RuntimeException(MessageCode.INVALID_LOTTO_NUMBER_TYPE.message());
-
-        int number = Integer.parseInt(splitNumber);
-        if (number > Constant.MAX_LOTTO_NUMBER.value())
-            throw new RuntimeException(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
-
-        return number;
-    }*/
-
-    private boolean isNumeric(String splitNumber) {
-        return splitNumber.matches("[+-]?\\d*(\\.\\d+)?");
-    }
-
     public boolean containsMain(int number) {
         return winningLottoNumbers.contains(new LottoNo(number));
     }
@@ -49,15 +31,6 @@ public class WinningLottoNumbers {
             return true;
 
         return false;
-    }
-
-    public List<LottoNo> getWinningLottoNumbers() {
-        return winningLottoNumbers;
-    }
-
-    public Integer getBonusNumber() {
-        //return bonusNumber;
-        return 0;
     }
 
     public MatchStatusOfALotto matchLottoNumbers(LottoNumbers lottoNumbers) {
@@ -72,12 +45,11 @@ public class WinningLottoNumbers {
         MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(sameNumberCount, isSameBonusNumber);
 
         return matchStatusOfALotto;
-        //return matchStatusOfALotto.getResultScore();
     }
 
     private int increaseIfSameNumber(LottoNo targetLottoNo, int sameNumberCount) {
         if (containsMain(targetLottoNo.lottNo()))
-            return sameNumberCount+1;
+            return sameNumberCount + 1;
         return sameNumberCount;
     }
 

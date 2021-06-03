@@ -36,7 +36,7 @@
 * LottoNumbers.contains indent depth 수정
 
 ## 작업중
-* 수동 로또 번호 입력 -> 로또 리스트로 변환하는 부분
+* 에러 처리 구현하기
 
 ## 재설계
 * LottoNo : 로또 번호 1개
