@@ -29,8 +29,7 @@ public class LottoManualController {
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        WinningResult winningResult = new WinningResult();
-        winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
+        lottos.getWinningResult(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         outputView.outputWinningStatistics(lottos.getEarningRate(lottos.getEarningPrice(), LottoPrice.getPrice()));
     }
 

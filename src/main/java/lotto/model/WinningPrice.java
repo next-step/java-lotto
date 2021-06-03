@@ -19,8 +19,6 @@ public enum WinningPrice {
         map.put(FIFTH_PRICE.getPrice(), )
     }
 
-
-
     public int getPrice() {
         return price;
     }
@@ -60,7 +58,7 @@ public enum WinningPrice {
         for (Lotto lotto : lottos) {
             int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
             boolean bonus = lotto.contains(bonusNumber);
-            WinningResult.addNumberOfWinning(numberOfWinningNumbers, bonus);
+            addNumberOfWinning(numberOfWinningNumbers, bonus);
         }
     }
 }
