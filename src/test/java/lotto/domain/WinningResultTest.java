@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static java.util.Collections.EMPTY_LIST;
 import static lotto.domain.WinningResult.BONUS_NUMBER_DUPLICATE_ERROR_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -59,7 +60,7 @@ public class WinningResultTest {
         final WinningResult winningResult = new WinningResult(answerLotto, BONUS_LOTTO_NUMBER);
 
         //when
-        winningResult.matchWinningLotto(lottos);
+        winningResult.matchWinningLotto(new Lottos(lottos, EMPTY_LIST));
         final Map<LottoResult, Integer> lottoResultCounts = winningResult.getLottoResultCounts();
 
         //then

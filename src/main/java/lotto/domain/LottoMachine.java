@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,14 +13,8 @@ public final class LottoMachine {
         this.lottoPrice = lottoPrice;
     }
 
-    public List<Lotto> pullSlot(final Money money, final LottoNumberGenerator lottoNumberGenerator) {
-        validateMoney(money);
-        final int lottoCount = getLottoCount(money);
-        final List<Lotto> lottos = new ArrayList<>(lottoCount);
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoNumberGenerator));
-        }
-        return lottos;
+    public List<Lotto> pullSlot(final PurchaseInformation purchaseInformation, final LottoNumberGenerator lottoNumberGenerator) {
+        return lottoNumberGenerator.drawLots(purchaseInformation.getLottoCount());
     }
 
     private void validateMoney(final Money toPurchaseMoney) {
@@ -30,7 +23,8 @@ public final class LottoMachine {
         }
     }
 
-    private int getLottoCount(final Money money) {
+    public int getPurchableLottoCount(final Money money) {
+        validateMoney(money);
         return money.getMoney() / lottoPrice.getMoney();
     }
 }

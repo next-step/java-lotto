@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,14 +55,14 @@ public final class WinningResult {
         return lottoResultCounts;
     }
 
-    public void matchWinningLotto(final List<Lotto> purchasedLottos) {
-        for (final Lotto lotto : purchasedLottos) {
+    public void matchWinningLotto(final Lottos purchasedLottos) {
+        for (final Lotto lotto : purchasedLottos.getLottos()) {
             addLottoResult(getLottoResult(lotto));
         }
     }
 
     private LottoResult getLottoResult(final Lotto unidentifiedLotto) {
         return LottoResult.findByMatchCount(unidentifiedLotto.matchCount(winningLotto),
-                unidentifiedLotto.matchBonusNumber(bonusLottoNumber));
+                unidentifiedLotto.isContains(bonusLottoNumber));
     }
 }

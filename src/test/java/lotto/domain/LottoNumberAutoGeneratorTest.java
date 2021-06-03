@@ -9,17 +9,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberAutoGeneratorTest {
 
-    @DisplayName("로또번호는 자동생성될 때 6개의 로또번호를 받는다.")
+    @DisplayName("로또번호를 자동으로 구매할 때 요청 횟수 만큼 6개의 로또번호를 각각 받는다.")
     @Test
-    void lotto_generator_draw_lots() {
+    void lotto_auto_generator_draw_lots() {
         //given
+        final int lottoCount = 10;
         final int expected = 6;
-        final LottoNumberAutoGenerator lottoNumberAutoGenerator = new LottoNumberAutoGenerator();
+        final LottoNumberGenerator lottoNumberAutoGenerator = new LottoNumberAutoGenerator();
 
         //when
-        final List<LottoNumber> lottoNumbers = lottoNumberAutoGenerator.drawLots();
+        final List<Lotto> lottoNumbers = lottoNumberAutoGenerator.drawLots(lottoCount);
 
         //then
-        assertThat(lottoNumbers.size()).isEqualTo(expected);
+        assertThat(lottoNumbers.size()).isEqualTo(lottoCount);
+        for (final Lotto lottoNumber : lottoNumbers) {
+            assertThat(lottoNumber.size()).isEqualTo(expected);
+        }
     }
 }
