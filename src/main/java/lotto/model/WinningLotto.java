@@ -3,19 +3,19 @@ package lotto.model;
 import java.util.List;
 
 public class WinningLotto {
-    private List<Integer> winningNumbers;
+    private Lotto winningNumber;
     private int bonusNumber;
 
-    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
+    public WinningLotto(Lotto winningNumber, int bonusNumber) {
+        this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
 
-        checkWinningNumbers(this.winningNumbers);
+        checkWinningNumbers(this.winningNumber);
         checkBonusNumber(this.bonusNumber);
     }
 
-    private void checkWinningNumbers(List<Integer> winningNumbers) {
-        for (int number : winningNumbers) {
+    private void checkWinningNumbers(Lotto winningNumber) {
+        for (int number : winningNumber.getNumbers()) {
             checkNumber(number);
         }
     }
@@ -30,8 +30,8 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public Lotto getWinningNumber() {
+        return winningNumber;
     }
 
     public int getBonusNumber() {

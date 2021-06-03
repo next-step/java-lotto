@@ -17,7 +17,7 @@ public class Lottos {
     int second = 0;
     int first = 0;
 
-    public void countWinningResults(List<Integer> winningNumbers, int bonusNumber) {
+    public void countWinningResults(Lotto winningNumbers, int bonusNumber) {
         for (Lotto lotto : lottos) {
             int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
             boolean existenceOfBonusNumber = lotto.contains(bonusNumber);

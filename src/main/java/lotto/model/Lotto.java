@@ -48,10 +48,10 @@ public class Lotto {
         numbers.add(number);
     }
 
-    public int countWinningNumbers(List<Integer> winningNumbers) {
+    public int countWinningNumbers(Lotto winningNumbers) {
         int count = 0;
         for (int i = 0; i < NUMBER_OF_NUMBERS; i++) {
-            if (numbers.contains(winningNumbers.get(i))) {
+            if (numbers.contains(winningNumbers.getNumbers().get(i))) {
                 count++;
             }
         }
