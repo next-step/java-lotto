@@ -9,13 +9,13 @@ public class Lotto {
     private static final String NUMBER_DELIMITER = ", |,";
     public static final int LOTTO_SIZE = 6;
 
-    private Set<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<LottoNumber> lotto) {
+    private Lotto(Set<LottoNumber> lotto) {
         if (lotto.size() != LOTTO_SIZE) {
             throw new WrongLottoSizeException();
         }
-        this.lotto = lotto;
+        this.lotto = Collections.unmodifiableSet(lotto);
     }
 
 

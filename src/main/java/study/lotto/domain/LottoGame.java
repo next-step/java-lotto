@@ -1,7 +1,6 @@
 package study.lotto.domain;
 
 import study.lotto.exception.DuplicateBonusBallException;
-import study.lotto.exception.WrongSelfPickCountException;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -10,9 +9,10 @@ import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static study.lotto.domain.PurchaseCount.LOTTO_PRICE;
+
 public class LottoGame {
 
-    public static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
     private final InputView inputView;
     private final ResultView resultView;
 
@@ -23,9 +23,9 @@ public class LottoGame {
 
     public void play() {
         BigDecimal purchaseAmount = inputView.inputPurchaseAmount();
-        PurchasedLottos purchasedLottos = purchase(purchaseableNumber(purchaseAmount));
+        PurchasedLottos purchasedLottos = purchase(new PurchaseCount(purchaseAmount));
         WinningLotto winningLotto = inputWinninLotto();
-        WinningResult winningResult = checkPrize(purchasedLottos, winningLotto);
+        WinningResult winningResult = WinningResult.of(purchasedLottos, winningLotto);
         printResult(purchaseAmount, winningResult);
     }
 
@@ -47,41 +47,23 @@ public class LottoGame {
         }
     }
 
-    public PurchasedLottos purchase(int count) {
-        PurchasedLottos purchasedLottos = selfPick(count);
-        int selfPickCount = purchasedLottos.count();
-        PurchasedLottos randomPick = new PurchasedLottos(count - selfPickCount);
-        resultView.purchasedLottos(selfPickCount, randomPick);
+    public PurchasedLottos purchase(PurchaseCount purchaseCount) {
+        PurchasedLottos purchasedLottos = selfPick(purchaseCount);
+        PurchasedLottos randomPick = new PurchasedLottos(purchaseCount.availableCount(purchasedLottos.count()));
+        resultView.purchasedLottos(purchasedLottos.count(), randomPick);
         purchasedLottos.add(randomPick.values());
 
         return purchasedLottos;
     }
 
-    public PurchasedLottos selfPick(int count) {
+    public PurchasedLottos selfPick(PurchaseCount purchaseCount) {
         int selfPickLottoCount = inputView.inputSelfPickLottoCount();
-        validateSelfPickCount(count, selfPickLottoCount);
+        purchaseCount.isAvailable(selfPickLottoCount);
         if (selfPickLottoCount < 1) {
             return new PurchasedLottos();
         }
         List<String> selfPickLottoList = inputView.inputSelfPickLotto(selfPickLottoCount);
         return new PurchasedLottos(selfPickLottoList.stream().map(Lotto::new).collect(Collectors.toList()));
-    }
-
-    private void validateSelfPickCount(int count, int selfPickLottoCount) {
-        if (count < selfPickLottoCount) {
-            throw new WrongSelfPickCountException();
-        }
-    }
-
-    public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningLotto winningLotto) {
-        WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : purchasedLottos.values()) {
-            int matchCount = lotto.matchWinningNumberCount(winningLotto.lotto());
-            boolean matchBonus = lotto.isMatchBonus(winningLotto.bonusNumber());
-            winningResult.addPrize(matchCount, matchBonus);
-        }
-
-        return winningResult;
     }
 
     public BigDecimal profitRate(BigDecimal purchaseAmount, BigDecimal prizeAmount) {

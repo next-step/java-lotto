@@ -31,7 +31,7 @@ public class ResultView {
 
     public void winningResult(WinningResult winningResult, BigDecimal profitRate) {
         System.out.println(RESULT_MESSAGE);
-        for (LottoRank lottoRank : winningResult.value().keySet()) {
+        for (LottoRank lottoRank : LottoRank.prizeableRank()) {
             System.out.printf(WINNING_PRIZE_RESULT_MESSAGE,
                     lottoRank.matchCount(),
                     secondPrizeMessage(lottoRank),

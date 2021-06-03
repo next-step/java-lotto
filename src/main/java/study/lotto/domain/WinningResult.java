@@ -5,28 +5,43 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningResult {
-    private static final Map<LottoRank, Integer> winningResult = new LinkedHashMap<>();
-    private TotalPrize totalPrize = new TotalPrize();
+    private final Map<LottoRank, Integer> winningResult;
+    private final TotalPrize totalPrize;
 
-    public WinningResult() {
-        for (LottoRank value : LottoRank.values()) {
-            addWitoutMiss(winningResult, value);
-        }
+    private WinningResult(Map<LottoRank, Integer> winningResult, TotalPrize totalPrize) {
+        this.winningResult = winningResult;
+        this.totalPrize = totalPrize;
     }
 
-    private static void addWitoutMiss(Map<LottoRank, Integer> winningPrizeIntegerMap, LottoRank lottoRank) {
-        if (!lottoRank.equals(LottoRank.MISS)) {
-            winningPrizeIntegerMap.put(lottoRank, 0);
+    public static WinningResult of(PurchasedLottos purchasedLottos, WinningLotto winningLotto) {
+        Map<LottoRank, Integer> newWinningResult = initializeMap();
+        TotalPrize newTotalPrize = new TotalPrize(BigDecimal.ZERO);
+        for (Lotto lotto : purchasedLottos.values()) {
+            LottoRank winningPrize = winningPrize(lotto, winningLotto);
+            addWinningCount(newWinningResult, winningPrize);
+            newTotalPrize = newTotalPrize.add(winningPrize.prize());
         }
+        return new WinningResult(newWinningResult,newTotalPrize);
     }
 
-    public void addPrize(int matchCount, boolean matchBonus) {
-        LottoRank winningPrize = LottoRank.of(matchCount, matchBonus);
-        if (!winningPrize.equals(LottoRank.MISS)) {
-            winningResult.computeIfPresent(winningPrize, (lottoRank, integer) -> integer+1);
-            totalPrize.add(winningPrize.prize());
+    private static Map<LottoRank, Integer> initializeMap() {
+        Map<LottoRank, Integer> newWinningResultMap = new LinkedHashMap<>();
+        for (LottoRank lottoRank : LottoRank.prizeableRank()) {
+            newWinningResultMap.put(lottoRank, 0);
         }
+        return newWinningResultMap;
     }
+
+    private static LottoRank winningPrize(Lotto lotto, WinningLotto winningLotto) {
+        int matchCount = lotto.matchWinningNumberCount(winningLotto.lotto());
+        boolean matchBonus = lotto.isMatchBonus(winningLotto.bonusNumber());
+        return LottoRank.of(matchCount, matchBonus);
+    }
+
+    private static void addWinningCount(Map<LottoRank, Integer> newWinningResult, LottoRank winningPrize) {
+        newWinningResult.computeIfPresent(winningPrize, (lottoRank, integer) -> integer+1);
+    }
+
 
     public Map<LottoRank, Integer> value() {
         return winningResult;

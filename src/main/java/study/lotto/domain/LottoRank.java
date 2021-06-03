@@ -2,6 +2,8 @@ package study.lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     MISS(0, BigDecimal.ZERO),
@@ -44,6 +46,12 @@ public enum LottoRank {
 
     public BigDecimal prize() {
         return prize;
+    }
+
+    public static List<LottoRank> prizeableRank() {
+        return Arrays.stream(values())
+                .filter(lottoRank -> !lottoRank.equals(MISS))
+                .collect(Collectors.toList());
     }
 
 }

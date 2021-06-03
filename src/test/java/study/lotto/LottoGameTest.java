@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import study.lotto.domain.*;
 import study.lotto.exception.DuplicateBonusBallException;
+import study.lotto.view.DummyInputView;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -22,9 +23,15 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        InputView inputView = new InputView();
+        InputView inputView = new DummyInputView();
         ResultView resultView = new ResultView();
         lottoGame = new LottoGame(inputView, resultView);
+    }
+
+    @DisplayName("실행 테스트(1등, 2등 수동 입력)")
+    @Test
+    void play() {
+        lottoGame.play();
     }
 
     @DisplayName("입력한 금액만큼 구매 가능한 장수를 확인한다")
@@ -35,34 +42,6 @@ public class LottoGameTest {
         assertThat(lottoGame.purchaseableNumber(purchaseAmount)).isEqualTo(expected);
     }
 
-    @DisplayName("당첨개수 확인")
-    @Test
-    public void checkPrizeTest() {
-        //given
-        PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
-        Lotto lotto = new Lotto("1,2,3,4,5,6");
-        LottoNumber bonusNumber = LottoNumber.of(7);
-        WinningLotto winningLotto = new WinningLotto(lotto,bonusNumber);
-
-        //when
-        WinningResult winningResult = lottoGame.checkPrize(purchasedLottos, winningLotto);
-
-        //then
-        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(winningResult.value().get(LottoRank.FIFTH)).isEqualTo(1);
-    }
-
-    private List<Lotto> generatePurchaseLottos() {
-        List<Lotto> PurchasedLottos = new ArrayList<>();
-        PurchasedLottos.add(new Lotto("1,2,3,4,5,6"));
-        PurchasedLottos.add(new Lotto("1,2,3,4,5,7"));
-        PurchasedLottos.add(new Lotto("1,2,3,4,5,16"));
-        PurchasedLottos.add(new Lotto("1,12,3,14,15,6"));
-        return PurchasedLottos;
-    }
 
     @DisplayName("수익률 확인")
     @ParameterizedTest
