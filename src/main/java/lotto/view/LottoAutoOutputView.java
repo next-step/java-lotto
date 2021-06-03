@@ -5,7 +5,7 @@ import lotto.model.WinningResult;
 
 import java.util.List;
 
-public class LottoAutoResultView {
+public class LottoAutoOutputView {
     public void printLotto(int quantity, List<Lotto> lottos) {
         System.out.println(quantity + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {

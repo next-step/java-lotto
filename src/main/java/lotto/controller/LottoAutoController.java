@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.model.*;
 import lotto.view.LottoAutoInputView;
-import lotto.view.LottoAutoResultView;
+import lotto.view.LottoAutoOutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,14 @@ public class LottoAutoController {
 
     public void start() {
         LottoAutoInputView inputView = new LottoAutoInputView();
-        LottoAutoResultView resultView = new LottoAutoResultView();
+        LottoAutoOutputView outputView = new LottoAutoOutputView();
         AutoLottos autoLottos = new AutoLottos();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
 
         List<Lotto> lottos = autoLottos.setLotto(quantity);
-        resultView.printLotto(quantity, lottos);
+        outputView.printLotto(quantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
@@ -26,7 +26,7 @@ public class LottoAutoController {
 
         WinningResult winningResult = new WinningResult(lottos, winningLotto);
 
-        resultView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
+        outputView.outputWinningStatistic(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {

@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.model.*;
 import lotto.view.LottoManualInputView;
-import lotto.view.LottoManualResultView;
+import lotto.view.LottoManualOutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class LottoManualController {
 
     public void start() {
         LottoManualInputView inputView = new LottoManualInputView();
-        LottoManualResultView resultView = new LottoManualResultView();
+        LottoManualOutputView outputView = new LottoManualOutputView();
         ManualLottos manualLottos = new ManualLottos();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
@@ -23,7 +23,7 @@ public class LottoManualController {
         List<String> manualNumbers = inputView.inputManualLottoNumbers(manualQuantity);
         List<Lotto> lottos = manualLottos.setLotto(manualQuantity, autoQuantity, manualNumbers);
 
-        resultView.printLottos(manualQuantity, autoQuantity, lottos);
+        outputView.printLottos(manualQuantity, autoQuantity, lottos);
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
@@ -31,7 +31,7 @@ public class LottoManualController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
-        resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
+        outputView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
