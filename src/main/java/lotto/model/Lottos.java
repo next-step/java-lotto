@@ -1,20 +1,14 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
+    private List<Integer> winningResult = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public void countWinningResults(List<Integer> winningNumbers, int bonusNumber) {
-        for (Lotto lotto : lottos) {
-            int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
-            boolean existenceOfbonusNumber = lotto.contains(bonusNumber);
-            addNumberOfWinning(numberOfWinningNumbers, existenceOfbonusNumber);
-        }
     }
 
     int fifth = 0;
@@ -23,7 +17,20 @@ public class Lottos {
     int second = 0;
     int first = 0;
 
-    public void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfbonusNumber) {
+    public void countWinningResults(List<Integer> winningNumbers, int bonusNumber) {
+        for (Lotto lotto : lottos) {
+            int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
+            boolean existenceOfBonusNumber = lotto.contains(bonusNumber);
+            addNumberOfWinning(numberOfWinningNumbers, existenceOfBonusNumber);
+        }
+        winningResult.add(fifth);
+        winningResult.add(fourth);
+        winningResult.add(third);
+        winningResult.add(second);
+        winningResult.add(first);
+    }
+
+    public void addNumberOfWinning(int numberOfWinningNumbers, boolean existenceOfBonusNumber) {
         if (numberOfWinningNumbers == 3) {
             fifth++;
         }
@@ -32,11 +39,11 @@ public class Lottos {
             fourth++;
         }
 
-        if (numberOfWinningNumbers == 5 && !existenceOfbonusNumber) {
+        if (numberOfWinningNumbers == 5 && !existenceOfBonusNumber) {
             third++;
         }
 
-        if (numberOfWinningNumbers == 5 && existenceOfbonusNumber) {
+        if (numberOfWinningNumbers == 5 && existenceOfBonusNumber) {
             second++;
         }
 
@@ -45,7 +52,12 @@ public class Lottos {
         }
     }
 
-    public float getEarningRate(int earningPrice, int purchasePrice) {
+    public List<Integer> getWinningResults() {
+        return winningResult;
+    }
+
+    public float getEarningRate(int purchasePrice) {
+        int earningPrice = getEarningPrice();
         return (float) earningPrice / (float) purchasePrice;
     }
 
@@ -55,5 +67,9 @@ public class Lottos {
                 + WinningPrice.THIRD_PRICE.getPrice() * third
                 + WinningPrice.SECOND_PRICE.getPrice() * second
                 + WinningPrice.FIRST_PRICE.getPrice() * first;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

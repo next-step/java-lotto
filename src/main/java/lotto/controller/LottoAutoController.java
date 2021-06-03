@@ -12,21 +12,21 @@ public class LottoAutoController {
     public void start() {
         LottoAutoInputView inputView = new LottoAutoInputView();
         LottoAutoOutputView outputView = new LottoAutoOutputView();
-        AutoLottos autoLottos = new AutoLottos();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
 
+        AutoLottos autoLottos = new AutoLottos();
         Lottos lottos = new Lottos(autoLottos.setLotto(quantity));
-        outputView.printLotto(quantity, lottos);
+        outputView.printLotto(quantity, lottos.getLottos());
 
         List<Integer> winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        WinningResult winningResult = new WinningResult(lottos, winningLotto);
-
-        outputView.outputWinningStatistic(lottos.getEarningRate(lottos.getEarningPrice(), LottoPrice.getPrice()));
+        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
+        outputView.outputWinningResults(lottos.getWinningResults());
+        outputView.outputEarningRate(lottos.getEarningRate(LottoPrice.getPrice()));
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
