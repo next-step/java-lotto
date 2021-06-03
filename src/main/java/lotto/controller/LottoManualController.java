@@ -9,9 +9,10 @@ import java.util.List;
 
 public class LottoManualController {
 
-    public void start(List<Lotto> lottos) {
+    public void start() {
         LottoManualInputView inputView = new LottoManualInputView();
         LottoManualResultView resultView = new LottoManualResultView();
+        ManualLotto manualLotto = new ManualLotto();
 
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.getQuantity();
@@ -20,8 +21,8 @@ public class LottoManualController {
         int autoQuantity = quantity - manualQuantity;
 
         List<String> manualNumbers = inputView.inputManualLottoNumbers(manualQuantity);
-        setManualLottos(manualQuantity, manualNumbers, lottos);
-        setAutoLottos(autoQuantity, lottos);
+        List<Lotto> lottos = manualLotto.setLotto(manualQuantity, autoQuantity, manualNumbers);
+
         resultView.printLottos(manualQuantity, autoQuantity, lottos);
 
         WinningLotto winningLotto = new WinningLotto(inputView.inputWinningNumbers(), inputView.inputBonusNumber());
@@ -29,18 +30,6 @@ public class LottoManualController {
         WinningResult winningResult = new WinningResult();
         winningResult.getWinningResult(lottos, winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         resultView.outputWinningStatistics(getEarningRate(getEarningPrice(), LottoPrice.getPrice()));
-    }
-
-    public void setManualLottos(int manualQuantity, List<String> manualNumbersString, List<Lotto> lottos) {
-        for (int i = 0; i < manualQuantity; i++) {
-            lottos.add(new Lotto(manualNumbersString.get(i)));
-        }
-    }
-
-    public void setAutoLottos(int autoQuantity, List<Lotto> lottos) {
-        for (int i = 0; i < autoQuantity; i++) {
-            lottos.add(new Lotto());
-        }
     }
 
     public List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
