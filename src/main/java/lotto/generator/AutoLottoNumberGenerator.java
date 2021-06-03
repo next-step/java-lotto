@@ -38,6 +38,14 @@ public class AutoLottoNumberGenerator implements Generator {
         return new LottoNumbers(pickedNumbers);
     }
 
+    public List<LottoNumbers> generate(int repeats) {
+        List<LottoNumbers> result = new ArrayList<>(repeats);
+        for (int i = 0; i < repeats; i ++) {
+            result.add(generate());
+        }
+        return result;
+    }
+
     private List<Integer> pickNumbers() {
         shuffle();
         return LOTTO_RANDOM_SET.subList(RANDOM_RANGE_START, RANDOM_RANGE_END);

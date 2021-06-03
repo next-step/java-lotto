@@ -19,10 +19,26 @@ public class MessageLottoNumberGenerator implements Generator {
             .collect(Collectors.toList());
     }
 
+    public MessageLottoNumberGenerator() {
+        this.numbers = Collections.emptyList();
+    }
+
+    public static LottoNumbers of(String message) {
+        MessageLottoNumberGenerator generator = new MessageLottoNumberGenerator(message);
+        return generator.generate();
+    }
+
     @Override
     public LottoNumbers generate() {
         Collections.sort(numbers);
         return new LottoNumbers(numbers);
+    }
+
+    public LottoNumbers generate(String message) {
+        List<String> numbers = Arrays.asList(StringCalculator.tokenizing(message, ", "));
+        return new LottoNumbers(numbers.stream()
+            .map(Integer::valueOf)
+            .collect(Collectors.toList()));
     }
 
     protected List<Integer> numbers() {

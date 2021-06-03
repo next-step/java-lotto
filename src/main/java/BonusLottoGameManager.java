@@ -6,7 +6,7 @@ import lotto.store.Ticket;
 
 public class BonusLottoGameManager extends LottoGameManager {
 
-    private BonusLottoGameManager() {
+    protected BonusLottoGameManager() {
         super();
     }
 

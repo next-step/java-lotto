@@ -1,3 +1,15 @@
+# 로또 수동 추첨 번호 입력 기능 추가
+
+## to-do list
+
+1. 구매입력 금액
+    - 에러처리가 없음 추가 필요
+2. 수동으로 구매할 개수 입력
+    - 구매 입력으로 부터 나온 개수와 비교
+    - 이 회수를 어떻게 저장해야 할까?
+3. 회수 만큼 `MessageLottoNumberGenerator` 로 로또 숫자를 입력받는다
+4. 기존의 코드를 재사용하자
+
 # 문자열 덧셈 계산기
 
 ## 기능 요구사항
@@ -20,26 +32,30 @@
 
 ## 객체
 
-├── LottoGameManager.java: 로또 게임을 시작하고 종료하는 관리자이다.
-├── calculator
-│   └── StringCalculator.java: 앞선 step1, 2 의 계산기이다. 사용자가 입력한 당첨 번호에 사용한다
-├── interaction : user interface 를 맞는다
-│    ├── InputView.java
-│    └── OutputView.java
-└── lotto
-├── LottoNumber.java: 로또 번호 하나
-├── LottoNumbers.java: 로또 한 세트이다
-├── generator
-│   ├── AutoLottoNumberGenerator.java: 랜덤을 사용해 로또 번호를 생성한다. 가게에서 파는 로또 머신의 역항
-│   ├── Generator.java: 로또 번호 생성기의 interface 이다.
-│   └── MessageLottoNumberGenerator.java: 사용자가 입력한 문자열을 로또 한벌로 만들어주는 역할을 한다
-├── statistics
-│    ├── Earn.java: 로또 번호 매칭이 되었을 때 각 등급별 가격을 명시한다
-│    ├── Statistic.java: 로또 하나에 대해 얼마나 매칭되었는지, 그래서 얼마를 벌었는지 통계를 내어준다
-│    └── StatisticsCalculator.java: 사용자가 구매한 금액의 모든 로또를 계산한다
-└── store
-├── LottoStore.java: 로또를 판매한다, 또한 확장성을 고려해 로또의 가격을 정할 수 있다
-└── Ticket.java: 유저가 한번 구매한 모든 로또는 티켓으로 발급된다
+├── BonusLottoGameManager.java: Bonus 번호가 들어간 게임을 시작하고 종료하는 관리자 이다.
+├── LottoGameManager.java: 로또 게임을 시작하고 종료하는 관리자이다.  
+├── calculator  
+│   └── StringCalculator.java: 앞선 step1, 2 의 계산기이다. 사용자가 입력한 당첨 번호에 사용한다  
+├── interaction : user interface 를 맞는다  
+│    ├── InputView.java  
+│    └── OutputView.java  
+└── lotto  
+    ├── BonusLotto.java: 보너스 번호 lotto 이다  
+    ├── LottoNumber.java: 로또 번호 하나  
+    ├── LottoNumbers.java: 로또 한 세트이다  
+    ├── generator  
+    │   ├── AutoLottoNumberGenerator.java: 랜덤을 사용해 로또 번호를 생성한다. 가게에서 파는 로또 머신의 역항  
+    │   ├── BonusLottoGenerator.java : 보너스 번호를 포함한 게임의 번호 생성기 이다.
+    │   ├── Generator.java: 로또 번호 생성기의 interface 이다.  
+    │   └── MessageLottoNumberGenerator.java: 사용자가 입력한 문자열을 로또 한벌로 만들어주는 역할을 한다  
+    ├── statistics  
+    │    ├── Earn.java: 로또 번호 매칭이 되었을 때 각 등급별 가격을 명시한다  
+    │    ├── Profit.java: 이익을 계산하는데 사용한다  
+    │    ├── Statistic.java: 로또 하나에 대해 얼마나 매칭되었는지, 그래서 얼마를 벌었는지 통계를 내어준다  
+    │    └── StatisticsCalculator.java: 사용자가 구매한 금액의 모든 로또를 계산한다  
+    └── store  
+        ├── LottoStore.java: 로또를 판매한다, 또한 확장성을 고려해 로또의 가격을 정할 수 있다  
+        └── Ticket.java: 유저가 한번 구매한 모든 로또는 티켓으로 발급된다  
 
 ## 고려한 내용
 
