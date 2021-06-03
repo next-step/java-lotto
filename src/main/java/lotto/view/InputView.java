@@ -46,8 +46,12 @@ public class InputView {
         while (lottoNumbers.size() != Lotto.NUMBER_COUNT) {
             lottoNumbers = new ArrayList(parseLottoNumbers());
         }
-        enter();
         return lottoNumbers;
+    }
+
+    public Integer takeBonusNumber() {
+        output.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(input.nextLine());
     }
 
     private List<Integer> parseLottoNumbers() {
@@ -75,9 +79,6 @@ public class InputView {
         return numbers;
     }
 
-    public void enter() {
-        output.println("");
-    }
 
 
 }

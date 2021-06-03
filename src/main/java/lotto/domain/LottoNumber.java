@@ -1,12 +1,24 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumber;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private Number number;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
-    public LottoNumber(Number number) {
+    private int number;
+
+    public LottoNumber(int number) {
+        verifyNumber(number);
         this.number = number;
+    }
+
+    private void verifyNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new InvalidLottoNumber(String.format("%s %d", InvalidLottoNumber.INVALID_LOTTO_NUMBER, number));
+        }
     }
 
     @Override
@@ -14,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return Objects.equals(number, that.number);
+        return number == that.number;
     }
 
     @Override
@@ -24,11 +36,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return number.compareTo(o.number);
+        return number - o.number;
     }
 
     @Override
     public String toString() {
-        return number.toString();
+        return Integer.toString(number);
     }
 }

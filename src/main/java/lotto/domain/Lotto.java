@@ -1,23 +1,37 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoGame;
+import lotto.exception.InvalidLottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     public static final int PRICE = 1_000;
     public static final int NUMBER_COUNT = 6;
 
-    private Set<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-    public Lotto(Set<LottoNumber> lotto) {
-        if (lotto.size() != NUMBER_COUNT) {
-            throw new InvalidLottoGame(String.format("%s %s",InvalidLottoGame.INVALID_LOTTO_GAME,lotto.size()));
+    public Lotto(LottoNumberFactory factory) {
+        for (int i = 0; i < NUMBER_COUNT; i++) {
+            lottoNumbers.add(factory.generateNumber());
         }
-        lottoNumbers = lotto;
+    }
+
+    public Lotto(List<Integer> numbers) {
+        verifyLottoNumbers(numbers);
+        for (int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+    }
+
+    public Lotto(Integer... numbers) {
+        this(Arrays.asList(numbers));
+    }
+
+    public static void verifyLottoNumbers(List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != NUMBER_COUNT) {
+            throw new InvalidLottoNumber(numbers.toString());
+        }
     }
 
     public Rank matchCount(Lotto other) {
@@ -35,7 +49,7 @@ public class Lotto {
         return count;
     }
 
-    private boolean containsNumber(LottoNumber number) {
+    public boolean containsNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 

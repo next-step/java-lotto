@@ -4,8 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-    private static final int DELIMITER_INDEX_IN_ARRAY = 0;
-    private static final int SPLIT_DATA_INDEX_IN_ARRAY = 1;
     private static final Pattern VALID_DATA_PATTERN = Pattern.compile("^[0-9]+$");
     private static final String DEFAULT_DELIMITER = ",|;";
     private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
@@ -34,15 +32,6 @@ public class StringAddCalculator {
 //        String splitData = delimiterAndSplitData[SPLIT_DATA_INDEX_IN_ARRAY];
 //
 //        return splitDataWithDelimiter(splitData, delimiter);
-    }
-
-    private String[] getDelimiterAndSplitData(String data) {
-        Matcher delimiterMatcher = DELIMITER_PATTERN.matcher(data);
-        if (delimiterMatcher.find()) {
-            return new String[] {Pattern.quote(delimiterMatcher.group(DELIMITER_GROUP_INDEX_IN_MATCHER)),
-                    delimiterMatcher.group(SPLIT_DATA_GROUP_INDEX_IN_MATCHER)};
-        }
-        return new String[] { DEFAULT_DELIMITER, data};
     }
 
     private String[] splitDataWithDelimiter(String splitData, String delimiter) {
