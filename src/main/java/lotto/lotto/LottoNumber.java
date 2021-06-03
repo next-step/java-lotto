@@ -2,6 +2,7 @@ package lotto.lotto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import lotto.error.ErrorMessage;
 
@@ -22,17 +23,11 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        checkNumber(number);
-        return NUMBERS.get(number);
+        return Optional.ofNullable(NUMBERS.get(number))
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER));
     }
 
     public int getNumber() {
         return number;
-    }
-
-    private static void checkNumber(int number) {
-        if (NUMBERS.get(number) == null) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
-        }
     }
 }
