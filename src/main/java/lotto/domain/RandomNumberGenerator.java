@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class RandomNumberGenerator implements NumberGenerator {
 
@@ -13,12 +15,10 @@ public final class RandomNumberGenerator implements NumberGenerator {
   }
 
   @Override
-  public List<Integer> generateNumbersOf(Integer numberCount) {
-    ArrayList<Integer> numbers = new ArrayList<>();
-    for (int count = 0; count < numberCount; count++) {
-      numbers.add(random.nextInt(45) + 1);
-    }
-
-    return numbers;
+  public List<Integer> generateNumbers() {
+    return IntStream
+        .range(0, 6)
+        .mapToObj(count -> random.nextInt(45) + 1)
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 }

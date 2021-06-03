@@ -11,17 +11,13 @@ import java.util.Objects;
 public final class Lotto {
 
   private final List<Integer> numbers;
-  private static final Integer NUMBER_COUNT = 6;
   private Rank rank;
 
   public Lotto(NumberGenerator numberGenerator) {
-    numbers = numberGenerator.generateNumbersOf(NUMBER_COUNT);
-    print(numbers);
-  }
+    numbers = numberGenerator.generateNumbers();
 
-  private void print(List<Integer> numbers) {
     Collections.sort(numbers);
-    System.out.println(Arrays.toString(numbers.toArray()));
+    MessagePrinter.print(Arrays.toString(numbers.toArray()));
   }
 
   public Rank getRankBy(WinningNumber winningNumber) {

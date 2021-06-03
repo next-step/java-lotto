@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface NumberGenerator {
 
-  List<Integer> generateNumbersOf(Integer numberCount);
+  List<Integer> generateNumbers();
 }
