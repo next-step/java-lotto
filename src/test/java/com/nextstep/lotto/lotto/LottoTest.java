@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -82,7 +81,7 @@ public class LottoTest {
 				return list;
 			}
 		});
-		List<LottoNumber> list = new ArrayList<>();
+		Set<LottoNumber> list = new HashSet<>();
 		list.add(new LottoNumber(1));
 		list.add(new LottoNumber(2));
 		list.add(new LottoNumber(3));
@@ -108,7 +107,7 @@ public class LottoTest {
 				return list;
 			}
 		});
-		List<LottoNumber> list = new ArrayList<>();
+		Set<LottoNumber> list = new HashSet<>();
 		list.add(new LottoNumber(1));
 		list.add(new LottoNumber(2));
 		list.add(new LottoNumber(3));

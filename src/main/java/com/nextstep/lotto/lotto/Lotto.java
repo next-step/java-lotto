@@ -18,7 +18,7 @@ public class Lotto {
 		}
 	}
 
-	public int matchCount(List<LottoNumber> winningLotto) {
+	public int matchCount(Set<LottoNumber> winningLotto) {
 		int count = 0;
 		for (LottoNumber number : numbers) {
 			if (winningLotto.contains(number)) {
