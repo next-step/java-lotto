@@ -21,18 +21,18 @@ public class InputView {
 
     public static List<Lotto> inputLottos(int selfLottoQuantity) {
         return IntStream.range(0, selfLottoQuantity)
-                .mapToObj(i -> new Lotto(InputView.inputLottoNumbers()))
+                .mapToObj(i -> InputView.inputLottoNumbers())
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> inputLottoNumbers() {
+    public static Lotto inputLottoNumbers() {
         String input = SCANNER.nextLine();
         String[] lottoNumbers = input.split(NUMBER_DELIMITER);
         checkLottoNumbers(lottoNumbers);
-        return Stream.of(lottoNumbers)
+        return new Lotto(Stream.of(lottoNumbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private static int toInteger(String input) {

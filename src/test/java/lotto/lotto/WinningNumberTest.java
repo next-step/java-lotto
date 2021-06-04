@@ -12,7 +12,7 @@ class WinningNumberTest {
     @DisplayName("보너스 넘버가 중복 될 경우 에러")
     void contains() {
         //given
-        WinningNumber 당첨_번호 = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber 당첨_번호 = new WinningNumber(Lotto.of(1, 2, 3, 4, 5, 6));
         LottoNumber 보너스_번호 = LottoNumber.of(1);
         //when
         boolean 포함_여부 = 당첨_번호.contains(보너스_번호);
