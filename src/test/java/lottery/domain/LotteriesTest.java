@@ -28,13 +28,13 @@ public class LotteriesTest {
         WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(10, 2, 34, 4, 5, 6)));
 
         //when
-        MatchCountPair pair = lotteries.matchAllAndAddCounts(winnerLottery);
+        MatchCountPair pair = lotteries.match(winnerLottery);
 
         assertAll(
-                () -> assertThat(pair.countByMatchCount(MatchCount.THREE)).isEqualTo(0),
-                () -> assertThat(pair.countByMatchCount(MatchCount.FOUR)).isEqualTo(3),
-                () -> assertThat(pair.countByMatchCount(MatchCount.FIVE)).isEqualTo(0),
-                () -> assertThat(pair.countByMatchCount(MatchCount.SIX)).isEqualTo(0)
+                () -> assertThat(pair.countByRank(Rank.FOUR)).isEqualTo(0),
+                () -> assertThat(pair.countByRank(Rank.THIRD)).isEqualTo(3),
+                () -> assertThat(pair.countByRank(Rank.SECOND)).isEqualTo(0),
+                () -> assertThat(pair.countByRank(Rank.FIRST)).isEqualTo(0)
         );
     }
 }
