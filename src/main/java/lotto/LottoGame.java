@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumber;
 import lotto.lotto.WinningNumber;
@@ -9,9 +11,6 @@ import lotto.shop.Money;
 import lotto.shop.Shop;
 import lotto.ui.OutputView;
 import lotto.ui.InputView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoGame {
     public static void start() {

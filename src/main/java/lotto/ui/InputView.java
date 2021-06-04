@@ -27,7 +27,9 @@ public class InputView {
 
     public static List<Integer> inputLottoNumbers() {
         String input = SCANNER.nextLine();
-        return Stream.of(input.split(NUMBER_DELIMITER))
+        String[] lottoNumbers = input.split(NUMBER_DELIMITER);
+        checkLottoNumbers(lottoNumbers);
+        return Stream.of(lottoNumbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
@@ -37,8 +39,8 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    private static void checkAnswer(String[] winningNumber) {
-        if (winningNumber.length != Lotto.MAX_COUNT) {
+    private static void checkLottoNumbers(String[] lottoInputNumbers) {
+        if (lottoInputNumbers.length != Lotto.MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ANSWER);
         }
     }
