@@ -72,11 +72,11 @@ public class ResultView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void printAllLotteryNumbers(List<Lottery> lotteries) {
-        for (Lottery lottery : lotteries) {
+    public static void printAllLotteryNumbers(List<LotteryNumbers> lotteries) {
+        for (LotteryNumbers lottery : lotteries) {
             printInitLotteryNumber();
 
-            printLotteryNumbers(lottery.retrieveNumbers());
+            printLotteryNumbers(lottery.numbers());
 
             printCloseLotteryNumbers();
         }

@@ -2,11 +2,10 @@ package lottery.domain;
 
 import java.util.Objects;
 
-import static lottery.domain.Lottery.DEFAULT_LOTTERY_PRICE;
-
 public class Price {
 
     public static final int MINIMUM_PRICE = 0;
+    private static final Integer DEFAULT_LOTTERY_PRICE = 1_000;
 
     private final Integer price;
 

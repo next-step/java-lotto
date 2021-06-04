@@ -14,8 +14,7 @@ public class LotteryStore {
 
         WinnerLottery winnerLottery = receiptWinnerLottery(lotteries);
 
-        LotteryFactory lotteryFactory = new LotteryFactory();
-        MatchCountPair matchCountPair = lotteryFactory.matchAll(lotteries, winnerLottery);
+        MatchCountPair matchCountPair = lotteries.matchAllAndAddCounts(winnerLottery);
 
         ResultView.printToStatisticWinner();
 
