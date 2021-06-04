@@ -18,8 +18,11 @@ public class Main {
 	private static final ResultView resultView = new ResultView();
 
 	public static void main(String[] args) {
-		long amount = inputView.askAmount();
-		Lottos lottos = Store.buy(new Money(amount));
+		Money amount = new Money(inputView.askAmount());
+		List<List<Integer>> manualNumbers = inputView.askManual();
+		Lottos lottos = Store.buy(amount, manualNumbers);
+		amount = amount.minus(Store.LOTTO_PRICE.multiply(manualNumbers.size()));
+		lottos.add(Store.buy(amount));
 
 		List<LottoDto> lottoDtos = createLottoDtos(lottos);
 		resultView.printNumbers(lottoDtos);
