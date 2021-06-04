@@ -27,11 +27,11 @@ public class LottoManualController {
         lottos.addAll(manualLotto.createLottos(manualQuantity, manualNumbers));
         outputView.printLottos(manualQuantity, autoQuantity, lottos);
 
-        Lotto winningNumber = new Lotto(inputView.inputWinningNumbers());
+        Lotto winningNumbers = new Lotto(convertWinningNumbersToInt(inputView.inputWinningNumbers()));
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        lottos.countWinningResults(winningLotto.getWinningNumber(), winningLotto.getBonusNumber());
+        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
         outputView.outputWinningResults(lottos.getWinningResults());
         outputView.outputEarningRate(lottos.calculateEarningRate(lottoPrice.getPrice()));
     }

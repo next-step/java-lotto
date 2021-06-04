@@ -1,19 +1,19 @@
 package lotto.model;
 
 public class WinningLotto {
-    private Lotto winningNumber;
+    private Lotto winningNumbers;
     private int bonusNumber;
 
-    public WinningLotto(Lotto winningNumber, int bonusNumber) {
-        this.winningNumber = winningNumber;
+    public WinningLotto(Lotto winningNumbers, int bonusNumber) {
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
 
-        checkWinningNumbers(this.winningNumber);
+        checkWinningNumbers(this.winningNumbers);
         checkBonusNumber(this.bonusNumber);
     }
 
-    private void checkWinningNumbers(Lotto winningNumber) {
-        for (int number : winningNumber.getNumbers()) {
+    private void checkWinningNumbers(Lotto winningNumbers) {
+        for (int number : winningNumbers.getNumbers()) {
             checkNumber(number);
         }
     }
@@ -28,8 +28,8 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getWinningNumber() {
-        return winningNumber;
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 
     public int getBonusNumber() {
