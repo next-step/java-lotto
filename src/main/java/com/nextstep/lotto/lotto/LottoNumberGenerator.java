@@ -15,7 +15,7 @@ public class LottoNumberGenerator {
 		}
 	}
 
-	public List<LottoNumber> getRandomNumbers() {
+	public List<LottoNumber> makeRandomNumbers() {
 		Collections.shuffle(rangeNumbers);
 		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
@@ -23,5 +23,4 @@ public class LottoNumberGenerator {
 		}
 		return lottoNumbers;
 	}
-
 }

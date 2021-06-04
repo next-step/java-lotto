@@ -1,52 +1,49 @@
 package com.nextstep.lotto.lotto;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
-import com.nextstep.lotto.utill.Printable;
-
-public class Lotto implements Printable {
+public class Lotto {
 
 	public static final int LOTTO_SIZE = 6;
-	private static final String STRING_DELIMITER = ", ";
 	private static final String LOTTO_NUMBER_CAN_ONLY_6_DIGITS = "로또의 숫자는 6개만 가능합니다.";
-	private List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> numbers;
 
-	public Lotto() {
-		generateNumbers();
-	}
-
-	public Lotto(List<LottoNumber> lottoNumbers) {
-		Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
-		if (lottoNumberSet.size() != LOTTO_SIZE) {
+	public Lotto(LottoNumberGenerator lottoNumberGenerator) {
+		this.numbers = new HashSet<>(lottoNumberGenerator.makeRandomNumbers());
+		if (this.numbers.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException(LOTTO_NUMBER_CAN_ONLY_6_DIGITS);
 		}
-		this.lottoNumbers = lottoNumbers;
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
-		return this.lottoNumbers;
+	public int matchCount(List<LottoNumber> winningLotto) {
+		int count = 0;
+		for (LottoNumber number : numbers) {
+			if (winningLotto.contains(number)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
-	public int size() {
-		return this.lottoNumbers.size();
+	public Set<LottoNumber> numbers() {
+		return numbers;
 	}
 
 	@Override
-	public void print() {
-		Collections.sort(lottoNumbers);
-		StringJoiner stringJoiner = new StringJoiner(STRING_DELIMITER);
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			stringJoiner.add(String.valueOf(lottoNumber.getNumber()));
-		}
-		System.out.println("[" + stringJoiner + "]");
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(numbers, lotto.numbers);
 	}
 
-	private void generateNumbers() {
-		LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-		lottoNumbers = lottoNumberGenerator.getRandomNumbers();
+	@Override
+	public int hashCode() {
+		return Objects.hash(numbers);
 	}
 }

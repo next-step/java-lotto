@@ -1,26 +1,41 @@
 package com.nextstep.lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class LottoInput {
+import com.nextstep.lotto.lotto.LottoNumber;
 
-	String BUY_LOTTO_MESSAGE = "구입금액을 입력해주세요.";
-	String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+public class LottoInput {
+	private static final String SPLIT_REGEX = ",";
+	private static final String NUMBER_CHECK_REGEX = "\\d+";
+	private static final String MESSAGE_ONLY_NUMBERS_CAN_ENTER = "숫자만 입력가능합니다.";
+
+	private Scanner scanner = new Scanner(System.in);
 
 	public int inputMoney() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println(BUY_LOTTO_MESSAGE);
-
-		int money = scanner.nextInt();
-		return money;
+		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public String inputWinningNumber() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println(INPUT_WINNING_NUMBER);
+	public List<LottoNumber> inputWinningNumber() {
+		String input = scanner.nextLine();
+		String[] winningNumber = convertStringToArray(input);
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		for (String number : winningNumber) {
+			lottoNumbers.add(new LottoNumber(convertStringToInt(number)));
+		}
 
-		String winningNumbers = scanner.nextLine();
-		return winningNumbers;
+		return lottoNumbers;
 	}
 
+	private String[] convertStringToArray(String input) {
+		return input.split(SPLIT_REGEX);
+	}
+
+	private int convertStringToInt(String input) {
+		if (!input.matches(NUMBER_CHECK_REGEX)) {
+			throw new IllegalArgumentException(MESSAGE_ONLY_NUMBERS_CAN_ENTER);
+		}
+		return Integer.parseInt(input);
+	}
 }

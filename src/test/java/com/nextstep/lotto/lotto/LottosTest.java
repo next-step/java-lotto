@@ -2,17 +2,73 @@ package com.nextstep.lotto.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-	@DisplayName("구입한 로또 개수만큼 로또가 저장되어있는지 테스트")
-	@ParameterizedTest
-	@ValueSource(ints = {1, 3, 5, 6})
-	void 구입한_로또개수만큼_로또가_저장되는지_테스트(int lottoCount) {
-		Lottos lottos = new Lottos(lottoCount);
-		assertThat(lottos.getLottos().size()).isEqualTo(lottoCount);
+	@Test
+	void create() {
+		List<Lotto> lottoList = new ArrayList<>();
+		Lottos lottos = new Lottos(lottoList);
+		assertThat(lottos).isNotNull();
+	}
+
+	@Test
+	void 결과값_도출() {
+
+		List<Lotto> lottoList = new ArrayList<>();
+		lottoList.add(new Lotto(new LottoNumberGenerator() {
+			@Override
+			public List<LottoNumber> makeRandomNumbers() {
+				List<LottoNumber> list = new ArrayList<>();
+				list.add(new LottoNumber(1));
+				list.add(new LottoNumber(2));
+				list.add(new LottoNumber(3));
+				list.add(new LottoNumber(4));
+				list.add(new LottoNumber(5));
+				list.add(new LottoNumber(6));
+				return list;
+			}
+		}));
+		lottoList.add(new Lotto(new LottoNumberGenerator() {
+			@Override
+			public List<LottoNumber> makeRandomNumbers() {
+				List<LottoNumber> list = new ArrayList<>();
+				list.add(new LottoNumber(1));
+				list.add(new LottoNumber(2));
+				list.add(new LottoNumber(3));
+				list.add(new LottoNumber(4));
+				list.add(new LottoNumber(5));
+				list.add(new LottoNumber(6));
+				return list;
+			}
+		}));
+		lottoList.add(new Lotto(new LottoNumberGenerator() {
+			@Override
+			public List<LottoNumber> makeRandomNumbers() {
+				List<LottoNumber> list = new ArrayList<>();
+				list.add(new LottoNumber(1));
+				list.add(new LottoNumber(2));
+				list.add(new LottoNumber(3));
+				list.add(new LottoNumber(4));
+				list.add(new LottoNumber(5));
+				list.add(new LottoNumber(6));
+				return list;
+			}
+		}));
+
+		List<LottoNumber> list = new ArrayList<>();
+		list.add(new LottoNumber(1));
+		list.add(new LottoNumber(2));
+		list.add(new LottoNumber(3));
+		list.add(new LottoNumber(4));
+		list.add(new LottoNumber(5));
+		list.add(new LottoNumber(6));
+		Lottos lottos = new Lottos(lottoList);
+		WinningLotto winningLotto = new WinningLotto(list);
+		assertThat(lottos.matchRank(winningLotto).size()).isEqualTo(3);
 	}
 }

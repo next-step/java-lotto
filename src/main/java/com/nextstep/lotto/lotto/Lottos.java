@@ -1,29 +1,25 @@
 package com.nextstep.lotto.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.nextstep.lotto.utill.Printable;
+import com.nextstep.lotto.result.LottoResult;
 
-public class Lottos implements Printable {
+public class Lottos {
+	private final List<Lotto> userLottos;
 
-	private List<Lotto> lottos;
-
-	public Lottos(int lottoCount) {
-		lottos = new ArrayList<>();
-		for (int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto());
-		}
+	public Lottos(List<Lotto> userLottos) {
+		this.userLottos = userLottos;
 	}
 
-	public List<Lotto> getLottos() {
-		return lottos;
+	public LottoResult matchRank(WinningLotto winningLotto) {
+		LottoResult lottoResult = new LottoResult();
+		for (Lotto lotto : userLottos) {
+			lottoResult.addResult(winningLotto.matchRank(lotto));
+		}
+		return lottoResult;
 	}
 
-	@Override
-	public void print() {
-		for (Lotto lotto : lottos) {
-			lotto.print();
-		}
+	public List<Lotto> userLottos() {
+		return this.userLottos;
 	}
 }
