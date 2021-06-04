@@ -4,32 +4,32 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    FAIL(MatchCount.ZERO, 0),
-    FIFTH(MatchCount.THREE, 5_000),
-    THIRD(MatchCount.FOUR, 50_000),
-    SECOND(MatchCount.FIVE, 1_500_000),
-    FIRST(MatchCount.SIX, 2000_000_000);
+    FAIL(0, 0),
+    FOUR(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2000_000_000);
 
-    private final MatchCount matchCount;
+    private final Integer matchCount;
     private final Integer profit;
 
-    Rank(MatchCount matchCount, Integer profit) {
+    Rank(Integer matchCount, Integer profit) {
         this.matchCount = matchCount;
         this.profit = profit;
     }
 
-    public static Rank valueOf(MatchCount matchCount) {
+    public static Rank valueOf(Integer matchCount) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.matchCount.equals(matchCount))
                 .findFirst()
-                .orElseThrow(IllegalAccessError::new);
-    }
-
-    public int matchCount() {
-        return matchCount.count();
+                .orElse(FAIL);
     }
 
     public Integer profit() {
         return profit;
+    }
+
+    public Integer matchCount() {
+        return matchCount;
     }
 }

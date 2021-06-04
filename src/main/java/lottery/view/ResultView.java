@@ -19,16 +19,15 @@ public class ResultView {
     public static final int START_INDEX = 0;
     public static final int LINE_DELIMITER_SIZE = 7;
 
-    public static void printResultProfit(int profit) {
+    public static void printResultProfit(String profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
     }
 
     public static void printMatchCountAndProfit(MatchCountPair matchCountPair) {
-        for (MatchCount matchCount : MatchCount.values()) {
-            Rank rank = Rank.valueOf(matchCount);
+        for (Rank rank : Rank.values()) {
             printMatchCount(rank.matchCount());
             pintProfit(rank.profit());
-            printCount(matchCountPair.countByMatchCount(matchCount));
+            printCount(matchCountPair.countByRank(rank));
         }
     }
 

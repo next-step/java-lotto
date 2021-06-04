@@ -1,7 +1,7 @@
 package lottery.view;
 
 import lottery.domain.LotteryNumbers;
-import lottery.domain.Price;
+import lottery.domain.Money;
 import lottery.domain.WinnerLottery;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,8 +13,8 @@ public class Reception {
 
     public static final String INPUT_DELIMITER = ",";
 
-    public static Price receiptPrice() {
-        return new Price(receiptNumber());
+    public static Money receiptPrice() {
+        return new Money(receiptNumber());
     }
 
     public static WinnerLottery receiptWinnerLottery(String input) {

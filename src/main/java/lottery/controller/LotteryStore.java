@@ -6,19 +6,19 @@ import lottery.view.ResultView;
 
 public class LotteryStore {
     public static void main(String[] args) {
-        Price price = receiptPrice();
+        Money money = receiptPrice();
 
-        GenerateCount generateCount = generateCount(price);
+        GenerateCount generateCount = generateCount(money);
 
         Lotteries lotteries = new Lotteries(generateCount, new RandomNumberGenerator());
 
         WinnerLottery winnerLottery = receiptWinnerLottery(lotteries);
 
-        MatchCountPair matchCountPair = lotteries.matchAllAndAddCounts(winnerLottery);
+        MatchCountPair matchCountPair = lotteries.match(winnerLottery);
 
         ResultView.printToStatisticWinner();
 
-        calculateAndPrintProfit(matchCountPair);
+        calculateAndPrintProfit(money, matchCountPair);
     }
 
     private static WinnerLottery receiptWinnerLottery(Lotteries lotteries) {
@@ -26,10 +26,10 @@ public class LotteryStore {
         return receiptWinnerLottery();
     }
 
-    private static void calculateAndPrintProfit(MatchCountPair matchCountPair) {
-        Profit totalProfit = matchCountPair.calculateTotalProfit();
+    private static void calculateAndPrintProfit(Money money, MatchCountPair matchCountPair) {
+        int jackpot = matchCountPair.calculateTotalJackpot();
         ResultView.printMatchCountAndProfit(matchCountPair);
-        ResultView.printResultProfit(totalProfit.profit());
+        ResultView.printResultProfit(new Profit(money, jackpot).toString());
     }
 
     private static WinnerLottery receiptWinnerLottery() {
@@ -37,13 +37,13 @@ public class LotteryStore {
         return Reception.receiptWinnerLottery(Reception.receiptString());
     }
 
-    private static GenerateCount generateCount(Price price) {
-        GenerateCount generateCount = new GenerateCount(price.calculatePerLottery());
+    private static GenerateCount generateCount(Money money) {
+        GenerateCount generateCount = new GenerateCount(money.calculatePerLottery());
         ResultView.printGenerateCount(generateCount);
         return generateCount;
     }
 
-    private static Price receiptPrice() {
+    private static Money receiptPrice() {
         ResultView.printToReceiptPrice();
         return Reception.receiptPrice();
     }
