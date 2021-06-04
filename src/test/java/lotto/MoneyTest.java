@@ -10,6 +10,8 @@ class MoneyTest {
 	@DisplayName("생성")
 	void create() {
 		assertThat(new Money(1000)).isNotNull();
+		assertThatIllegalArgumentException().isThrownBy(() -> new Money(-1))
+			.withMessage("금액은 음수가 될 수 없습니다.");
 	}
 
 	@Test
@@ -30,4 +32,9 @@ class MoneyTest {
 		assertThat(new Money(3000).divide(new Money(1000))).isEqualTo(3.0);
 	}
 
+	@Test
+	@DisplayName("금액 차감")
+	void minus() {
+		assertThat(new Money(3000).minus(new Money(1000))).isEqualTo(new Money(2000));
+	}
 }

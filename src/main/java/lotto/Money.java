@@ -6,6 +6,9 @@ public class Money {
 	private final long money;
 
 	public Money(long money) {
+		if (money < 0) {
+			throw new IllegalArgumentException("금액은 음수가 될 수 없습니다.");
+		}
 		this.money = money;
 	}
 
@@ -45,4 +48,7 @@ public class Money {
 		return money;
 	}
 
+	public Money minus(Money value) {
+		return new Money(money - value.money);
+	}
 }
