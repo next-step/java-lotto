@@ -2,45 +2,65 @@ package study.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.domain.LottoRank;
-import study.lotto.domain.WinningResult;
+import study.lotto.domain.*;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningResultTest {
 
-    @DisplayName("일치 개수가 주어졌을때 개수 증가 확인")
-    @Test
-    void WinningLottoTest() {
-        WinningResult winningResult = new WinningResult();
-        winningResult.addPrize(2, true);
-        winningResult.addPrize(3, true);
-        winningResult.addPrize(3, true);
-        winningResult.addPrize(5, true);
-        winningResult.addPrize(5, false);
-        winningResult.addPrize(6, true);
-        winningResult.addPrize(6, true);
 
-        assertThat(winningResult.value().get(LottoRank.FIFTH)).isEqualTo(2);
-        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
+    @DisplayName("당첨개수 확인")
+    @Test
+    public void checkPrizeTest() {
+        //given
+        PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningLotto winningLotto = new WinningLotto(lotto,bonusNumber);
+
+        //when
+        WinningResult winningResult = WinningResult.of(purchasedLottos, winningLotto);
+
+        //then
+        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(1);
         assertThat(winningResult.value().get(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(2);
+        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(winningResult.value().get(LottoRank.FIFTH)).isEqualTo(1);
     }
+
+    private List<Lotto> generatePurchaseLottos() {
+        List<Lotto> PurchasedLottos = new ArrayList<>();
+        PurchasedLottos.add(new Lotto("1,2,3,4,5,6"));
+        PurchasedLottos.add(new Lotto("1,2,3,4,5,7"));
+        PurchasedLottos.add(new Lotto("1,2,3,4,5,16"));
+        PurchasedLottos.add(new Lotto("1,12,3,14,15,6"));
+        return PurchasedLottos;
+    }
+
 
     @DisplayName("총 상금 확인")
     @Test
     void WinningLottoPrizeTest() {
-        WinningResult winningResult = new WinningResult();
-        winningResult.addPrize(5, false);
-        winningResult.addPrize(5, true);
+        //given
+        PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
+        Lotto lotto = new Lotto("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningLotto winningLotto = new WinningLotto(lotto,bonusNumber);
 
-        BigDecimal totalPrize = LottoRank.THIRD.prize();
+        //when
+        WinningResult winningResult = WinningResult.of(purchasedLottos, winningLotto);
+
+        //then
+        BigDecimal totalPrize = LottoRank.FIFTH.prize();
+        totalPrize = totalPrize.add(LottoRank.THIRD.prize());
         totalPrize = totalPrize.add(LottoRank.SECOND.prize());
-
+        totalPrize = totalPrize.add(LottoRank.FIRST.prize());
         assertThat(winningResult.totalPrize()).isEqualTo(totalPrize);
     }
 }

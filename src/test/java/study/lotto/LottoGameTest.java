@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import study.lotto.domain.*;
 import study.lotto.exception.DuplicateBonusBallException;
-import study.lotto.util.LottoNumberGenerator;
+import study.lotto.view.DummyInputView;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -23,11 +23,16 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        InputView inputView = new InputView();
+        InputView inputView = new DummyInputView();
         ResultView resultView = new ResultView();
         lottoGame = new LottoGame(inputView, resultView);
     }
 
+    @DisplayName("실행 테스트(1등, 2등 수동 입력)")
+    @Test
+    void play() {
+        lottoGame.play();
+    }
 
     @DisplayName("입력한 금액만큼 구매 가능한 장수를 확인한다")
     @ParameterizedTest
@@ -37,44 +42,6 @@ public class LottoGameTest {
         assertThat(lottoGame.purchaseableNumber(purchaseAmount)).isEqualTo(expected);
     }
 
-
-    @DisplayName("구매 금액만큼 로또장수가 구매된다")
-    @ParameterizedTest
-    @CsvSource({"14000,14", "2000,2", "1500,1", "400,0"})
-    public void purchaseTest(BigDecimal purchaseAmount, int expected) {
-        PurchasedLottos purchasedLottos = lottoGame.purchase(purchaseAmount);
-        assertThat(purchasedLottos.count()).isEqualTo(expected);
-
-    }
-
-
-    @DisplayName("당첨개수 확인")
-    @Test
-    public void checkPrizeTest() {
-        //given
-        PurchasedLottos purchasedLottos = new PurchasedLottos(generatePurchaseLottos());
-        LottoNumbers lottoNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
-        LottoNumber bonusNumber = new LottoNumber(7);
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers,bonusNumber);
-
-        //when
-        WinningResult winningResult = lottoGame.checkPrize(purchasedLottos, winningNumbers);
-
-        //then
-        assertThat(winningResult.value().get(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.SECOND)).isEqualTo(0);
-        assertThat(winningResult.value().get(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(winningResult.value().get(LottoRank.FOURTH)).isEqualTo(2);
-    }
-
-    private List<LottoNumbers> generatePurchaseLottos() {
-        List<LottoNumbers> PurchasedLottos = new ArrayList<>();
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,15,16")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,14,15,16")));
-        PurchasedLottos.add(new LottoNumbers(LottoNumberGenerator.markedNumbers("1,12,3,14,15,6")));
-        return PurchasedLottos;
-    }
 
     @DisplayName("수익률 확인")
     @ParameterizedTest
@@ -87,9 +54,9 @@ public class LottoGameTest {
     @DisplayName("당첨 번호와 보너스 볼 중복시 에러")
     @Test
     public void inputWinningNumber() {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers("1,2,3,4,5,6"));
-        LottoNumber bonusNumber = new LottoNumber(6);
-        assertThatThrownBy(() -> lottoGame.validateBonusNumber(winningNumbers, bonusNumber))
+        Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(6);
+        assertThatThrownBy(() -> lottoGame.validateBonusNumber(winningLotto, bonusNumber))
                 .isInstanceOf(DuplicateBonusBallException.class);
     }
 

@@ -6,24 +6,31 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PurchasedLottos {
-    List<LottoNumbers> lottoNumbers;
+    List<Lotto> lottos = new ArrayList<>();
 
     public PurchasedLottos(int purchaseCount) {
 
-        this.lottoNumbers = IntStream.range(0,purchaseCount)
-                .mapToObj(i -> LottoNumbers.randomNumbers())
+        this.lottos = IntStream.range(0,purchaseCount)
+                .mapToObj(i -> Lotto.randomLotto())
                 .collect(Collectors.toList());
     }
 
-    public PurchasedLottos(List<LottoNumbers> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public PurchasedLottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public List<LottoNumbers> values() {
-        return lottoNumbers;
+    public PurchasedLottos() {
+    }
+
+    public List<Lotto> values() {
+        return lottos;
     }
 
     public int count() {
-        return lottoNumbers.size();
+        return lottos.size();
+    }
+
+    public void add(List<Lotto> values) {
+        lottos.addAll(values);
     }
 }

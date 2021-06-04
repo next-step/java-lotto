@@ -3,39 +3,51 @@ package study.lotto.domain;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class WinningResult {
-    private Map<LottoRank, Integer> winningResult;
+    private final Map<LottoRank, Integer> winningResult;
+    private final TotalPrize totalPrize;
 
-    public WinningResult() {
-        this.winningResult = initializeWinningPrize();
+    private WinningResult(Map<LottoRank, Integer> winningResult, TotalPrize totalPrize) {
+        this.winningResult = winningResult;
+        this.totalPrize = totalPrize;
     }
 
-    private Map<LottoRank, Integer> initializeWinningPrize() {
-        Map<LottoRank, Integer> winningPrizeIntegerMap = new LinkedHashMap<>();
-        for (LottoRank value : LottoRank.values()) {
-            winningPrizeIntegerMap.put(value, 0);
+    public static WinningResult of(PurchasedLottos purchasedLottos, WinningLotto winningLotto) {
+        Map<LottoRank, Integer> newWinningResult = initializeMap();
+        TotalPrize newTotalPrize = new TotalPrize(BigDecimal.ZERO);
+        for (Lotto lotto : purchasedLottos.values()) {
+            LottoRank winningPrize = winningPrize(lotto, winningLotto);
+            addWinningCount(newWinningResult, winningPrize);
+            newTotalPrize = newTotalPrize.add(winningPrize.prize());
         }
-
-        return winningPrizeIntegerMap;
+        return new WinningResult(newWinningResult,newTotalPrize);
     }
 
-
-    public void addPrize(int matchCount, boolean matchBonus) {
-        Optional<LottoRank> winningPrize = LottoRank.of(matchCount, matchBonus);
-        winningPrize.ifPresent(w -> winningResult.computeIfPresent(w, (key, count) -> count+1));
+    private static Map<LottoRank, Integer> initializeMap() {
+        Map<LottoRank, Integer> newWinningResultMap = new LinkedHashMap<>();
+        for (LottoRank lottoRank : LottoRank.prizeableRank()) {
+            newWinningResultMap.put(lottoRank, 0);
+        }
+        return newWinningResultMap;
     }
+
+    private static LottoRank winningPrize(Lotto lotto, WinningLotto winningLotto) {
+        int matchCount = lotto.matchWinningNumberCount(winningLotto.lotto());
+        boolean matchBonus = lotto.isMatchBonus(winningLotto.bonusNumber());
+        return LottoRank.of(matchCount, matchBonus);
+    }
+
+    private static void addWinningCount(Map<LottoRank, Integer> newWinningResult, LottoRank winningPrize) {
+        newWinningResult.computeIfPresent(winningPrize, (lottoRank, integer) -> integer+1);
+    }
+
 
     public Map<LottoRank, Integer> value() {
         return winningResult;
     }
 
     public BigDecimal totalPrize() {
-        BigDecimal totalPrize = BigDecimal.ZERO;
-        for (LottoRank lottoRank : winningResult.keySet()) {
-            totalPrize = totalPrize.add(lottoRank.prize().multiply(BigDecimal.valueOf(winningResult.get(lottoRank))));
-        }
-        return totalPrize;
+        return totalPrize.value();
     }
 }

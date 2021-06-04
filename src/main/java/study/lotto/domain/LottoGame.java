@@ -1,7 +1,6 @@
 package study.lotto.domain;
 
 import study.lotto.exception.DuplicateBonusBallException;
-import study.lotto.util.LottoNumberGenerator;
 import study.lotto.view.InputView;
 import study.lotto.view.ResultView;
 
@@ -9,16 +8,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static study.lotto.domain.PurchaseCount.LOTTO_PRICE;
 
 public class LottoGame {
 
-    public static final int MARK_SIZE = 6;
-    public static final int LOTTONUMBER_FROM = 1;
-    public static final int LOTTONUMBER_TO = 45;
-    public static final List<Integer> AVAILABLE_LOTTONUMBERS = IntStream.rangeClosed(LOTTONUMBER_FROM, LOTTONUMBER_TO).boxed().collect(Collectors.toList());
-
-    private static final BigDecimal LOTTO_PRICE = BigDecimal.valueOf(1000);
     private final InputView inputView;
     private final ResultView resultView;
 
@@ -29,49 +23,51 @@ public class LottoGame {
 
     public void play() {
         BigDecimal purchaseAmount = inputView.inputPurchaseAmount();
-        PurchasedLottos purchasedLottos = purchase(purchaseAmount);
-        WinningNumbers winningNumbers = inputWinninNumbers();
-        WinningResult winningResult = checkPrize(purchasedLottos, winningNumbers);
+        PurchasedLottos purchasedLottos = purchase(new PurchaseCount(purchaseAmount));
+        WinningLotto winningLotto = inputWinninLotto();
+        WinningResult winningResult = WinningResult.of(purchasedLottos, winningLotto);
         printResult(purchaseAmount, winningResult);
-    }
-
-    private WinningNumbers inputWinninNumbers() {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoNumberGenerator.markedNumbers(inputView.inputWinningNumbers()));
-        LottoNumber bonusNumber = inputView.inputBonusNumber();
-        validateBonusNumber(winningNumbers, bonusNumber);
-        return new WinningNumbers(winningNumbers, bonusNumber);
-
-    }
-
-    public void validateBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.lottoNumbers().contains(bonusNumber)) {
-            throw new DuplicateBonusBallException();
-        }
     }
 
     public int purchaseableNumber(BigDecimal amount) {
         return amount.divide(LOTTO_PRICE,0, RoundingMode.DOWN).intValue();
     }
 
-    public PurchasedLottos purchase(BigDecimal purchaseAmount) {
-        PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseableNumber(purchaseAmount));
-        resultView.purchasedLottos(purchasedLottos);
+    private WinningLotto inputWinninLotto() {
+        Lotto winningLotto = new Lotto(inputView.inputWinningLotto());
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
+        validateBonusNumber(winningLotto, bonusNumber);
+
+        return new WinningLotto(winningLotto, bonusNumber);
+    }
+
+    public void validateBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new DuplicateBonusBallException();
+        }
+    }
+
+    public PurchasedLottos purchase(PurchaseCount purchaseCount) {
+        PurchasedLottos purchasedLottos = selfPick(purchaseCount);
+        PurchasedLottos randomPick = new PurchasedLottos(purchaseCount.availableCount(purchasedLottos.count()));
+        resultView.purchasedLottos(purchasedLottos.count(), randomPick);
+        purchasedLottos.add(randomPick.values());
+
         return purchasedLottos;
     }
 
-    public WinningResult checkPrize(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
-        WinningResult winningResult = new WinningResult();
-        for (LottoNumbers lottoNumbers : purchasedLottos.values()) {
-            int matchCount = lottoNumbers.matchWinningNumberCount(winningNumbers.lottoNumbers());
-            boolean matchBonus = lottoNumbers.isMatchBonus(winningNumbers.bonusNumber());
-            winningResult.addPrize(matchCount, matchBonus);
+    public PurchasedLottos selfPick(PurchaseCount purchaseCount) {
+        int selfPickLottoCount = inputView.inputSelfPickLottoCount();
+        purchaseCount.isaAvailable(selfPickLottoCount);
+        if (selfPickLottoCount < 1) {
+            return new PurchasedLottos();
         }
-
-        return winningResult;
+        List<String> selfPickLottoList = inputView.inputSelfPickLotto(selfPickLottoCount);
+        return new PurchasedLottos(selfPickLottoList.stream().map(Lotto::new).collect(Collectors.toList()));
     }
 
     public BigDecimal profitRate(BigDecimal purchaseAmount, BigDecimal prizeAmount) {
-        return prizeAmount.divide(purchaseAmount.divide(LOTTO_PRICE, 0, RoundingMode.FLOOR),2, RoundingMode.HALF_UP);
+        return prizeAmount.divide(purchaseAmount,2, RoundingMode.HALF_UP);
     }
 
     public void printResult(BigDecimal purchaseAmount, WinningResult winningResult) {
