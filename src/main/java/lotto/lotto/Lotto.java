@@ -10,11 +10,6 @@ public class Lotto {
     public static final int MAX_COUNT = 6;
     private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<LottoNumber> numbers) {
-        checkNumber(numbers);
-        this.numbers = numbers;
-    }
-
     public Lotto(List<Integer> numbers) {
         checkNumber(numbers);
         this.numbers = numbers.stream()
