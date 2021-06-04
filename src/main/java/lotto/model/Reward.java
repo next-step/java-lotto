@@ -32,7 +32,7 @@ public enum Reward {
     }
 
     public static Reward getReward(WinningState winningState) {
-        if (winningState.isSecondPrizeState(SECOND_PRIZE_COUNT_CONDITION, SECOND_PRIZE_BONUS_BALL_CONDITION)) {
+        if (winningState.isSpecificPrizeState(SECOND_PRIZE_COUNT_CONDITION, SECOND_PRIZE_BONUS_BALL_CONDITION)) {
             return SECOND_PRIZE;
         }
 

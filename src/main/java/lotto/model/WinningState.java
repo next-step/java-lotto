@@ -9,8 +9,8 @@ public class WinningState {
         this.bonusBallMatchSuccess = bonusBallMatchSuccess;
     }
 
-    public boolean isSecondPrizeState(int secondPrizeCountCondition, boolean secondPrizeBonusBallCondition) {
-        return matchedCount == secondPrizeCountCondition && bonusBallMatchSuccess == secondPrizeBonusBallCondition;
+    public boolean isSpecificPrizeState(int specificPrizeCountCondition, boolean specificPrizeBonusBallCondition) {
+        return matchedCount == specificPrizeCountCondition && bonusBallMatchSuccess == specificPrizeBonusBallCondition;
     }
 
     public int getMatchedCount() {
