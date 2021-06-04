@@ -18,7 +18,7 @@ public class AutoLotto {
         }
     }
 
-    public List<Lotto> setLotto(int quantity) {
+    public List<Lotto> createLottos(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(new Lotto(createLottoNumbers()));
