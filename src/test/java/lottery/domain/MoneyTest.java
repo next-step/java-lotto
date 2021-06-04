@@ -8,13 +8,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class PriceTest {
+class MoneyTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-10, -2341, -1})
     @DisplayName("금액은 0원이상 이어야 한다.")
     void validatePrice_test(int price) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Price(price));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Money(price));
     }
 
     @ParameterizedTest
@@ -22,10 +22,10 @@ class PriceTest {
     @DisplayName("금액에 따른 로또 구매 가능 개수를 가져온다.")
     void calculatePerLottery_test(int inputPrice, int expectedLotteryCount) {
         //given
-        Price price = new Price(inputPrice);
+        Money money = new Money(inputPrice);
 
         //when
-        int lotteryCount = price.calculatePerLottery();
+        int lotteryCount = money.calculatePerLottery();
 
         //then
         assertThat(lotteryCount).isEqualTo(expectedLotteryCount);

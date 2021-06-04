@@ -2,21 +2,21 @@ package lottery.domain;
 
 import java.util.Objects;
 
-public class Price {
+public class Money {
 
     public static final int MINIMUM_PRICE = 0;
     private static final Integer DEFAULT_LOTTERY_PRICE = 1_000;
 
-    private final Integer price;
+    private final Integer money;
 
-    public Price(int price) {
-        validatePrice(price);
+    public Money(int money) {
+        validatePrice(money);
 
-        this.price = price;
+        this.money = money;
     }
 
     public int calculatePerLottery() {
-        return price / DEFAULT_LOTTERY_PRICE;
+        return money / DEFAULT_LOTTERY_PRICE;
     }
 
     private void validatePrice(int price) {
@@ -25,16 +25,19 @@ public class Price {
         }
     }
 
+    public double toDouble() {
+        return (double) money;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Price price1 = (Price) o;
-        return Objects.equals(price, price1.price);
+        Money money1 = (Money) o;
+        return Objects.equals(money, money1.money);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price);
+        return Objects.hash(money);
     }
 }
