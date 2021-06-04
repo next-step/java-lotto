@@ -32,7 +32,7 @@ public class Prizes {
     }
 
     private int makePrizeMoney() {
-        Integer prizeMoney = INITIALIZE_NUMBER;
+        int prizeMoney = INITIALIZE_NUMBER;
 
         for (Reward reward : Reward.values()) {
             prizeMoney += reward.getPrizeMoney() * prizes.get(reward.getPrizeMoney());
@@ -42,7 +42,9 @@ public class Prizes {
     }
 
     public BigDecimal makeYield(int purchaseAmount) {
-        return BigDecimal.valueOf(this.prizeMoney).divide(BigDecimal.valueOf(purchaseAmount));
+        BigDecimal prizeMoney = BigDecimal.valueOf(this.prizeMoney);
+
+        return prizeMoney.divide(BigDecimal.valueOf(purchaseAmount));
     }
 
     public Map<Integer, Integer> getPrizes() {
