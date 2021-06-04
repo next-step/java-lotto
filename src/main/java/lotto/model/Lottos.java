@@ -58,11 +58,11 @@ public class Lottos {
     }
 
     private int calculateEarningPrice() {
-        return WinningResult.FIFTH_PRICE.getPrice() * fifth
-                + WinningResult.FOURTH_PRICE.getPrice() * fourth
-                + WinningResult.THIRD_PRICE.getPrice() * third
-                + WinningResult.SECOND_PRICE.getPrice() * second
-                + WinningResult.FIRST_PRICE.getPrice() * first;
+        return WinningResult.FIFTH_PRICE.getWinningAmount() * fifth
+                + WinningResult.FOURTH_PRICE.getWinningAmount() * fourth
+                + WinningResult.THIRD_PRICE.getWinningAmount() * third
+                + WinningResult.SECOND_PRICE.getWinningAmount() * second
+                + WinningResult.FIRST_PRICE.getWinningAmount() * first;
     }
 
     public List<Lotto> getLottos() {

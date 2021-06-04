@@ -7,13 +7,13 @@ public enum WinningResult {
     SECOND_PRICE(30_000_000),
     FIRST_PRICE(2_000_000_000);
 
-    private int price;
+    private int winningAmount;
 
-    WinningResult(int price) {
-        this.price = price;
+    WinningResult(int winningAmount) {
+        this.winningAmount = winningAmount;
     }
 
-    public int getPrice() {
-        return price;
+    public int getWinningAmount() {
+        return winningAmount;
     }
 }
