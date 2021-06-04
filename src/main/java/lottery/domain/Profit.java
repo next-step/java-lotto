@@ -6,22 +6,18 @@ public class Profit {
 
     public static final int DEFAULT_PROFIT = 0;
 
-    private int profit;
+    private final double profit;
 
-    public Profit() {
-        this.profit = DEFAULT_PROFIT;
+    public Profit(Money money, int jackpot) {
+        this.profit = calculate(money, jackpot);
     }
 
-    public Profit(int profit) {
+    public Profit(double profit) {
         this.profit = profit;
     }
 
-    public void add(int profit) {
-        this.profit += profit;
-    }
-
-    public int profit() {
-        return profit;
+    private double calculate(Money inputMoney, int jackpot) {
+        return (double) jackpot / inputMoney.toDouble();
     }
 
     @Override
@@ -35,5 +31,10 @@ public class Profit {
     @Override
     public int hashCode() {
         return Objects.hash(profit);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(profit);
     }
 }
