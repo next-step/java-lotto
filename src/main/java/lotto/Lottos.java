@@ -1,14 +1,13 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> lottos) {
-		this.lottos = Collections.unmodifiableList(lottos);
+		this.lottos = lottos;
 	}
 
 	public int count() {
@@ -31,5 +30,9 @@ public class Lottos {
 			allNumbers.add(lotto.numbers());
 		}
 		return allNumbers;
+	}
+
+	public void add(Lottos newLottos) {
+		this.lottos.addAll(newLottos.lottos);
 	}
 }
