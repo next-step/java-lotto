@@ -1,6 +1,6 @@
 package lotto.model;
 
-public enum WinningPrice {
+public enum WinningResult {
     FIFTH_PRICE(5_000),
     FOURTH_PRICE(50_000),
     THIRD_PRICE(1_500_000),
@@ -9,7 +9,7 @@ public enum WinningPrice {
 
     private int price;
 
-    WinningPrice(int price) {
+    WinningResult(int price) {
         this.price = price;
     }
 
