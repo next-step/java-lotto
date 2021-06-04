@@ -10,7 +10,6 @@ public class AutoLotto {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     List<Integer> numbers = new ArrayList<>();
-    List<Integer> lottoNumbers = new ArrayList<>();
 
     public AutoLotto() {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
@@ -28,6 +27,8 @@ public class AutoLotto {
 
     public List<Integer> createLottoNumbers() {
         Collections.shuffle(numbers);
+
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
             lottoNumbers.add(numbers.get(i));
         }
