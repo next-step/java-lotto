@@ -4,12 +4,19 @@ import java.util.Objects;
 
 public class Profit {
 
-    public static final int DEFAULT_PROFIT = 0;
+    public static final int MINIMUM_JACKPOT = 1;
 
     private final double profit;
 
     public Profit(Money money, int jackpot) {
+        validateJackpot(jackpot);
         this.profit = calculate(money, jackpot);
+    }
+
+    private void validateJackpot(int jackpot) {
+        if (jackpot < MINIMUM_JACKPOT) {
+            throw new IllegalArgumentException("수익은 1보다 작을 수 없습니다. : " + jackpot);
+        }
     }
 
     public Profit(double profit) {
