@@ -39,6 +39,7 @@ public class LottoManualController {
         lottos.addAll(manualLotto.createLottos(manualQuantity, manualNumbers));
         return new Lottos(lottos);
     }
+
     private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
