@@ -4,14 +4,15 @@ import lotto.model.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
 
 public class LottoController {
     public void run() {
-        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
-        int purchasedLottoCount = purchaseCalculator.CalculatePurchasableCount();
+        purchaseCalculator purchaseCalculator = new purchaseCalculator(Input.inputMoneyForPurchase());
+        int purchasedLottoCount = purchaseCalculator.calculatePurchasableCount();
 
         Output.printPurchasableMessage(purchasedLottoCount);
 
@@ -19,14 +20,15 @@ public class LottoController {
         Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
         WinningLotto winningLotto = makeWinningLotto();
-        Prizes prizes = new Prizes(bunchOfLotto.makeRewards(winningLotto));
+        Prizes prizes = bunchOfLotto.makeRewards(winningLotto);
+        BigDecimal yield = prizes.makeYield(purchaseCalculator.getPurchaseAmount());
 
-        Output.printWinStatics(prizes, purchaseCalculator);
+        Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
     public WinningLotto makeWinningLotto() {
         Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());
-        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(Input.inputBonusNumber()));
+        LottoNumber bonusBall = new LottoNumber(Input.inputBonusNumber());
 
         return new WinningLotto(winningNumbers, bonusBall);
     }

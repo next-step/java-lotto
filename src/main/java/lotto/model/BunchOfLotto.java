@@ -17,9 +17,9 @@ public class BunchOfLotto {
         return Collections.unmodifiableList(bunchOfLotto);
     }
 
-    public List<Reward> makeRewards(WinningLotto winningLotto) {
-        return bunchOfLotto.stream()
+    public Prizes makeRewards(WinningLotto winningLotto) {
+        return new Prizes(bunchOfLotto.stream()
                 .map((lotto) -> Reward.getReward(winningLotto.makeWinningState(lotto)))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }

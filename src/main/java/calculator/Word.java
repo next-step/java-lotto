@@ -23,6 +23,29 @@ public class Word {
         return convertExpressionsToNumbers(makeNumbersInGeneralExpression(expression));
     }
 
+    public boolean isCustomInput(String expression) {
+        String[] inputs = expression.split("");
+        isEmptyOrNull(expression);
+
+        return !(ONLY_NUMBER_REGEX_PATTERN.matcher(inputs[FIRST_INDEX]).matches());
+    }
+
+    public void isEmptyOrNull(String text) {
+        if (text == null || text.isEmpty()) {
+            throw new IllegalArgumentException("입력이 NULL 이거나 없습니다.");
+        }
+    }
+
+    private List<Integer> convertExpressionsToNumbers(List<String> stringExpressions) {
+        List<Integer> numbers = stringExpressions.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        notNegativeValidation(numbers);
+
+        return numbers;
+    }
+
     private List<String> makeNumbersInCustomExpression(String customExpressions) {
         customExpressions = customExpressions.replaceAll(NOT_NUMBER_REGEX, " ");
 
@@ -33,37 +56,14 @@ public class Word {
         return Arrays.asList(expression.split(SEPARATOR));
     }
 
-    List<Integer> convertExpressionsToNumbers(List<String> stringExpressions) {
-        List<Integer> numbers = stringExpressions.stream()
-                .map((string) -> Integer.parseInt(string))
-                .collect(Collectors.toList());
-
-        notNegativeValidation(numbers);
-
-        return numbers;
-    }
-
-    public boolean isCustomInput(String expression) {
-        String[] inputs = expression.split("");
-        isEmptyOrNull(expression);
-
-        return !(ONLY_NUMBER_REGEX_PATTERN.matcher(inputs[FIRST_INDEX]).matches());
-    }
-
-    public String findCustomSeparator(String customExpression) {
-        isEmptyOrNull(customExpression);
-        return customExpression.split("")[CUSTOM_LETTER_INDEX];
-    }
-
     public void notNegativeValidation(List<Integer> numbers) {
         if (Collections.min(numbers) < POSITIVE_NUMBER) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_MESSAGE);
         }
     }
 
-    public void isEmptyOrNull(String text) {
-        if (text == null || text.isEmpty()) {
-            throw new IllegalArgumentException("입력이 NULL 이거나 없습니다.");
-        }
+    public String findCustomSeparator(String customExpression) {
+        isEmptyOrNull(customExpression);
+        return customExpression.split("")[CUSTOM_LETTER_INDEX];
     }
 }

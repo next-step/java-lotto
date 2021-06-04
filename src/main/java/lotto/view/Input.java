@@ -18,8 +18,8 @@ public class Input {
         return scanner.nextLine();
     }
 
-    public static String inputBonusNumber() {
+    public static int inputBonusNumber() {
         printInputBonusBall();
-        return scanner.nextLine();
+        return Integer.parseInt(scanner.nextLine());
     }
 }

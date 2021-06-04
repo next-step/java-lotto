@@ -11,7 +11,7 @@ public class PurchaseCalculatorTest {
     @Test
     void countPurchasableTest() {
         int purchaseAmount = 14000;
-        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(purchaseAmount);
-        assertThat(purchaseCalculator.CalculatePurchasableCount()).isEqualTo(14);
+        purchaseCalculator purchaseCalculator = new purchaseCalculator(purchaseAmount);
+        assertThat(purchaseCalculator.calculatePurchasableCount()).isEqualTo(14);
     }
 }

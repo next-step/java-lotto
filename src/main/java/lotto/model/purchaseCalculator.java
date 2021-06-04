@@ -1,15 +1,15 @@
 package lotto.model;
 
-public class PurchaseCalculator {
+public class purchaseCalculator {
     private static final int LOTTERY_PRICE = 1000;
 
     private final int purchaseAmount;
 
-    public PurchaseCalculator(int purchaseAmount) {
+    public purchaseCalculator(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int CalculatePurchasableCount() {
+    public int calculatePurchasableCount() {
         return purchaseAmount / LOTTERY_PRICE;
     }
 

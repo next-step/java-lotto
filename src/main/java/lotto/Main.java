@@ -4,7 +4,7 @@ import lotto.controller.LottoController;
 
 public class Main {
     public static void main(String[] args) {
-        LottoController lottoMachine = new LottoController();
-        lottoMachine.run();
+        LottoController lottoController = new LottoController();
+        lottoController.run();
     }
 }

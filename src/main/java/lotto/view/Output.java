@@ -48,11 +48,11 @@ public class Output {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
     }
 
-    public static void printWinStatics(Prizes prizes, PurchaseCalculator purchaseCalculator) {
+    public static void printWinStatics(Map<Integer, Integer> prizes, BigDecimal yield) {
         System.out.println(WIN_STATIC_MESSAGE);
         System.out.println(SEPARATOR);
-        printPrize(prizes.getPrizes());
-        printYield(prizes.makeYield(purchaseCalculator.getPurchaseAmount()));
+        printPrize(prizes);
+        printYield((yield));
     }
 
     public static void printPrize(Map<Integer, Integer> prizes) {
