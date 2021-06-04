@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManualController {
+    LottoManualInputView inputView = new LottoManualInputView();
+    LottoManualOutputView outputView = new LottoManualOutputView();
+    AutoLotto autoLotto = new AutoLotto();
+    ManualLotto manualLotto = new ManualLotto();
 
     public void start() {
-        LottoManualInputView inputView = new LottoManualInputView();
-        LottoManualOutputView outputView = new LottoManualOutputView();
-
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.calculateLottoQuantity();
         int manualQuantity = inputView.inputManualLottoQuantity();
@@ -20,12 +21,8 @@ public class LottoManualController {
 
         List<String> manualNumbers = inputView.inputManualLottoNumbers(manualQuantity);
 
-        AutoLotto autoLotto = new AutoLotto();
-        ManualLotto manualLotto = new ManualLotto();
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(autoLotto.createLottos(autoQuantity));
-        lottos.addAll(manualLotto.createLottos(manualQuantity, manualNumbers));
-        outputView.printLottos(manualQuantity, autoQuantity, lottos);
+        Lottos lottos = createLottos(autoQuantity, manualQuantity, manualNumbers);
+        outputView.printLottos(manualQuantity, autoQuantity, lottos.getLottos());
 
         Lotto winningNumbers = new Lotto(convertWinningNumbersToInt(inputView.inputWinningNumbers()));
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
@@ -36,6 +33,12 @@ public class LottoManualController {
         outputView.outputEarningRate(lottos.calculateEarningRate(lottoPrice.getPrice()));
     }
 
+    private Lottos createLottos(int autoQuantity, int manualQuantity, List<String> manualNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(autoLotto.createLottos(autoQuantity));
+        lottos.addAll(manualLotto.createLottos(manualQuantity, manualNumbers));
+        return new Lottos(lottos);
+    }
     private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");

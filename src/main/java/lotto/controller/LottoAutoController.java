@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoAutoController {
+    LottoAutoInputView inputView = new LottoAutoInputView();
+    LottoAutoOutputView outputView = new LottoAutoOutputView();
+    AutoLotto autoLotto = new AutoLotto();
 
     public void start() {
-        LottoAutoInputView inputView = new LottoAutoInputView();
-        LottoAutoOutputView outputView = new LottoAutoOutputView();
-
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.calculateLottoQuantity();
 
-        AutoLotto autoLotto = new AutoLotto();
         Lottos lottos = new Lottos(autoLotto.createLottos(quantity));
         outputView.printLotto(quantity, lottos.getLottos());
 
