@@ -9,7 +9,7 @@ public class Lotteries {
 
     public static final int START_INDEX = 0;
 
-    private final ImmutableList<Lottery> lotteries;
+    private final ImmutableList<LotteryNumbers> lotteries;
 
     public Lotteries(GenerateCount count, NumberGenerator generator) {
         lotteries = ImmutableList.copyOf(generateLotteries(count, generator));
@@ -18,25 +18,25 @@ public class Lotteries {
     public MatchCountPair matchAllAndAddCounts(WinnerLottery winnerLottery) {
         MatchCountPair matchCountPair = new MatchCountPair();
 
-        for (Lottery lottery : lotteries) {
-            int matchCount = winnerLottery.match(lottery.numbers());
+        for (LotteryNumbers lottery : lotteries) {
+            int matchCount = winnerLottery.match(lottery);
             matchCountPair.addMatchCountPair(MatchCount.valueOf(matchCount));
         }
 
         return matchCountPair;
     }
 
-    private List<Lottery> generateLotteries(GenerateCount generateCount, NumberGenerator generator) {
-        List<Lottery> lotteries = new ArrayList<>();
+    private List<LotteryNumbers> generateLotteries(GenerateCount generateCount, NumberGenerator generator) {
+        List<LotteryNumbers> lotteries = new ArrayList<>();
 
         for (int index = START_INDEX; index < generateCount.count(); index++) {
-            lotteries.add(new Lottery(new LotteryNumbers(generator.generate())));
+            lotteries.add(new LotteryNumbers(generator.generate()));
         }
 
         return lotteries;
     }
 
-    public List<Lottery> lotteries() {
+    public List<LotteryNumbers> lotteries() {
         return lotteries;
     }
 
