@@ -28,16 +28,9 @@ public class WinningLotto {
     }
 
     private int makeWinningCount(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningLottoNumbers) {
-        return winningLottoNumbers.stream()
-                .mapToInt((winningLottoNumber) -> compareWithWinningLotto(lottoNumbers, winningLottoNumber))
-                .sum();
-    }
-
-    private int compareWithWinningLotto(Set<LottoNumber> lottoNumbers, LottoNumber winningLottoNumber) {
-        if (lottoNumbers.contains(winningLottoNumber)) {
-            return 1;
-        }
-        return 0;
+        return (int) lottoNumbers.stream()
+                .filter((lottoNumber) -> winningLottoNumbers.contains(lottoNumber))
+                .count();
     }
 
     private boolean checkBonusCount(Lotto lotto, LottoNumber bonusNumber) {

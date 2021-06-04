@@ -1,6 +1,7 @@
-package lotto.model;
+package lotto.util;
 
-import lotto.util.BunchOfLottoGenerator;
+import lotto.model.Lotto;
+import lotto.model.purchaseCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
