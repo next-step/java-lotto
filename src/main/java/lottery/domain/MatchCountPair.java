@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.HashMap;
@@ -10,49 +11,58 @@ import static lottery.domain.WinnerLottery.MATCH_COUNT;
 
 public class MatchCountPair {
 
-    private ImmutableMap<MatchCount, Integer> pair;
+    public static final int MINIMUM_JACKPOT = 0;
+    private final ImmutableMap<Rank, Integer> pair;
 
-    public MatchCountPair() {
-        this.pair = ImmutableMap.copyOf(initializeMatchCountPairs());
+    public MatchCountPair(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries) {
+        this.pair = matchAllAndAddCounts(winnerLottery, lotteries);
     }
 
-    private Map<MatchCount, Integer> initializeMatchCountPairs() {
-        Map<MatchCount, Integer> matchCountPairs = new HashMap<>();
+    private ImmutableMap<Rank, Integer> matchAllAndAddCounts(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries) {
+        Map<Rank, Integer> pair = initializeMatchCountPairs();
 
-        for (MatchCount matchCount : MatchCount.values()) {
-            matchCountPairs.put(matchCount, DEFAULT_MATCH_COUNT);
+        for (LotteryNumbers lottery : lotteries) {
+            Rank rank = findMatchCount(winnerLottery, lottery);
+            pair.put(rank, addMatchCount(pair, rank));
+        }
+
+        return ImmutableMap.copyOf(pair);
+    }
+
+    private Rank findMatchCount(WinnerLottery winnerLottery, LotteryNumbers lottery) {
+        return Rank.valueOf(winnerLottery.match(lottery));
+    }
+
+    private Map<Rank, Integer> initializeMatchCountPairs() {
+        Map<Rank, Integer> matchCountPairs = new HashMap<>();
+
+        for (Rank rank : Rank.values()) {
+            matchCountPairs.put(rank, DEFAULT_MATCH_COUNT);
         }
 
         return matchCountPairs;
     }
 
-    void addMatchCountPair(MatchCount matchCount) {
-        Map<MatchCount, Integer> newPair = new HashMap<>(pair);
-        newPair.put(matchCount, addMatchCount(pair, matchCount));
-        pair = ImmutableMap.copyOf(newPair);
-    }
+    public int calculateTotalJackpot() {
+        int totalProfit = MINIMUM_JACKPOT;
 
-    public Profit calculateTotalProfit() {
-        Profit totalProfit = new Profit();
-
-        for (MatchCount matchCount : pair.keySet()) {
-            Integer count = pair.get(matchCount);
-            Rank rank = Rank.valueOf(matchCount);
-            totalProfit.add(calculateProfit(count, rank));
+        for (Rank rank : pair.keySet()) {
+            int profit = calculateJackpot(pair.get(rank), rank);
+            totalProfit += profit;
         }
 
         return totalProfit;
     }
 
-    private int calculateProfit(Integer count, Rank rank) {
+    private int calculateJackpot(Integer count, Rank rank) {
         return count * rank.profit();
     }
 
-    private int addMatchCount(Map<MatchCount, Integer> matchCountPairs, MatchCount matchCount) {
-        return matchCountPairs.getOrDefault(matchCount, DEFAULT_MATCH_COUNT) + MATCH_COUNT;
+    private int addMatchCount(Map<Rank, Integer> matchCountPairs, Rank rank) {
+        return matchCountPairs.getOrDefault(rank, DEFAULT_MATCH_COUNT) + MATCH_COUNT;
     }
 
-    public Integer countByMatchCount(MatchCount index) {
-        return pair.get(index);
+    public Integer countByRank(Rank rank) {
+        return pair.get(rank);
     }
 }
