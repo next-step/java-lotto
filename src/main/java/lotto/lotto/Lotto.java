@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,14 +32,20 @@ public class Lotto {
         return numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
+    public static Lotto of(int ...numbers) {
+        return new Lotto(Arrays.stream(numbers)
+                .boxed()
+                .collect(Collectors.toList()));
+    }
+
     private void checkNumber(List<Integer> numbers) {
         if (numbers.size() != MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
         }
     }
 
-    private void checkNumber(Set<LottoNumber> numbers) {
-        if (numbers.size() != MAX_COUNT) {
+    private static void checkNumber(int ...numbers) {
+        if (numbers.length != MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
         }
     }

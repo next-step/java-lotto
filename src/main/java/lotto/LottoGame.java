@@ -46,7 +46,7 @@ public class LottoGame {
 
     private static LottoTicket inputSelfLottoNumber(int selfLottoQuantity, int autoLottoQuantity) {
         List<Lotto> lottos = InputView.inputLottos(selfLottoQuantity);
-        return new LottoTicket(lottos, autoLottoQuantity);
+        return new LottoTicket(autoLottoQuantity, lottos);
     }
 
     private static void printLotto(LottoTicket lottoTicket, int selfQuantity) {

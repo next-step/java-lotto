@@ -2,10 +2,6 @@ package lotto.shop;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +29,7 @@ public class ShopTest {
         Money 초기_금액 = new Money(10000);
         //when
         int 로또_자동_개수 = shop.buyAutoLotto(초기_금액);
-        LottoTicket 로또_티켓 = new LottoTicket(new ArrayList<>(), 로또_자동_개수);
+        LottoTicket 로또_티켓 = new LottoTicket(로또_자동_개수);
         //then
         assertThat(로또_티켓.quantity()).isEqualTo(10);
     }
@@ -67,7 +63,7 @@ public class ShopTest {
         Money 초기_금액 = new Money(10000);
         //when
         int 로또_자동_개수 = shop.buyAutoLotto(초기_금액);
-        LottoTicket 로또_티켓 = new LottoTicket(new ArrayList<>(), 로또_자동_개수);
+        LottoTicket 로또_티켓 = new LottoTicket(로또_자동_개수);
         //then
         assertThat(로또_티켓.quantity()).isEqualTo(10);
     }
@@ -76,12 +72,12 @@ public class ShopTest {
     @DisplayName("번호가 맞는지")
     void testAnswer() {
         //given
-        WinningNumber 당첨_번호 = new WinningNumber(로또_당첨_번호_생성());
+        int 자동_로또_개수 = 0;
+        WinningNumber 당첨_번호 = WinningNumber.of(1, 2, 3, 4, 5, 6);
 
-        List<Lotto> 내가_선택한_번호 = new ArrayList<>();
-        내가_선택한_번호.add(new Lotto(Arrays.asList(1, 2, 3, 33, 34, 35)));
+        Lotto 수동_로또 = Lotto.of(1, 2, 3, 10, 11, 12);
         LottoNumber 보너스_번호 = LottoNumber.of(45);
-        LottoTicket 로또_티켓 = new LottoTicket(내가_선택한_번호, 0);
+        LottoTicket 로또_티켓 = new LottoTicket(자동_로또_개수, 수동_로또);
         //when
         LottoResult 결과 = 로또_티켓.matchWinningNumber(당첨_번호, 보너스_번호);
         //then
@@ -92,11 +88,11 @@ public class ShopTest {
     @DisplayName("2등 당첨")
     void testSecond() {
         //given
-        WinningNumber 당첨_번호 = new WinningNumber(로또_당첨_번호_생성());
+        int 자동_로또_개수 = 0;
+        WinningNumber 당첨_번호 = WinningNumber.of(1, 2, 3, 4, 5, 6);
 
-        List<Lotto> 내가_선택한_번호 = new ArrayList<>();
-        내가_선택한_번호.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16)));
-        LottoTicket 로또_티켓 = new LottoTicket(내가_선택한_번호, 0);
+        Lotto 내가_선택한_번호 = Lotto.of(1, 2, 3, 4, 5, 16);
+        LottoTicket 로또_티켓 = new LottoTicket(자동_로또_개수, 내가_선택한_번호);
         LottoNumber 보너스_번호 = LottoNumber.of(16);
         //when
         LottoResult 결과 = 로또_티켓.matchWinningNumber(당첨_번호, 보너스_번호);
@@ -109,9 +105,11 @@ public class ShopTest {
     @DisplayName("보너스 넘버가 중복 될 경우 에러")
     void checkDuplicateBonusNumber() {
         //given
-        WinningNumber 당첨_번호 = new WinningNumber(로또_당첨_번호_생성());
+        int 자동_로또_개수 = 0;
+        WinningNumber 당첨_번호 = WinningNumber.of(1, 2, 3, 4, 5, 6);
+
         LottoNumber 보너스_번호 = LottoNumber.of(1);
-        LottoTicket 빈_로또_티켓 = new LottoTicket(new ArrayList<>(), 0);
+        LottoTicket 빈_로또_티켓 = new LottoTicket(자동_로또_개수);
         //when
         //then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -144,18 +142,11 @@ public class ShopTest {
     void buySelfAutoLotto() {
         //given
         //when
-        Money 남은_금액 = shop.buySelfLotto(new Money(10000), 5);
-        List<Lotto> 로또_수동 = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            로또_수동.add(new Lotto(로또_당첨_번호_생성()));
-        }
+        Money 남은_금액 = shop.buySelfLotto(new Money(2000), 1);
         int 자동_횟수 = shop.buyAutoLotto(남은_금액);
-        LottoTicket 로또_티켓 = new LottoTicket(로또_수동, 자동_횟수);
+        Lotto 로또_수동 = Lotto.of(1, 2, 3, 4, 5, 6);
+        LottoTicket 로또_티켓 = new LottoTicket(자동_횟수, 로또_수동);
         //then
-        assertThat(로또_티켓.tickets().size()).isEqualTo(10);
-    }
-
-    private List<Integer> 로또_당첨_번호_생성() {
-        return Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(로또_티켓.tickets().size()).isEqualTo(2);
     }
 }

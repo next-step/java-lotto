@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lotto.error.ErrorMessage;
@@ -8,8 +10,13 @@ import lotto.shop.NumberGenerator;
 public class LottoTicket {
     private final List<Lotto> lottoTickets;
 
-    public LottoTicket(List<Lotto> selfLottoList, int autoLottoQuantity) {
+    public LottoTicket(int autoLottoQuantity, List<Lotto> selfLottoList) {
         lottoTickets = selfLottoList;
+        selectAuto(autoLottoQuantity);
+    }
+
+    public LottoTicket(int autoLottoQuantity, Lotto... selfLottoList) {
+        lottoTickets = new ArrayList<>(Arrays.asList(selfLottoList));
         selectAuto(autoLottoQuantity);
     }
 
