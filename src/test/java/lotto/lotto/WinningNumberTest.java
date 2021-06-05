@@ -2,8 +2,7 @@ package lotto.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,13 +12,11 @@ class WinningNumberTest {
     @DisplayName("보너스 넘버가 중복 될 경우 에러")
     void contains() {
         //given
-        Set<LottoNumber> numbers = new HashSet<>();
-        numbers.add(new LottoNumber(1));
-        WinningNumber winningNumber = new WinningNumber(numbers);
-        LottoNumber bonusNumber = new LottoNumber(1);
+        WinningNumber 당첨_번호 = new WinningNumber(Lotto.of(1, 2, 3, 4, 5, 6));
+        LottoNumber 보너스_번호 = LottoNumber.of(1);
         //when
-        boolean contains = winningNumber.contains(bonusNumber);
+        boolean 포함_여부 = 당첨_번호.contains(보너스_번호);
         //then
-        assertThat(contains).isTrue();
+        assertThat(포함_여부).isTrue();
     }
 }

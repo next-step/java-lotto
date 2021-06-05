@@ -1,11 +1,11 @@
 package lotto.lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import lotto.error.ErrorMessage;
-import lotto.ui.InputView;
 
 public class Lotto {
     public static final int MAX_COUNT = 6;
@@ -14,7 +14,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         checkNumber(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
@@ -30,6 +30,12 @@ public class Lotto {
 
     public boolean isContainBonus(LottoNumber bonusNumber) {
         return numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
+    }
+
+    public static Lotto of(int ...numbers) {
+        return new Lotto(Arrays.stream(numbers)
+                .boxed()
+                .collect(Collectors.toList()));
     }
 
     private void checkNumber(List<Integer> numbers) {

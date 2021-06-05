@@ -1,13 +1,13 @@
 package lotto.ui;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import lotto.error.ErrorMessage;
 import lotto.lotto.Lotto;
-import lotto.lotto.LottoNumber;
 import lotto.shop.Money;
 
 public class InputView {
@@ -19,27 +19,33 @@ public class InputView {
         return new Money(toInteger(input));
     }
 
-    public static Set<LottoNumber> inputWinningNumber() {
+    public static List<Lotto> inputLottos(int selfLottoQuantity) {
+        return IntStream.range(0, selfLottoQuantity)
+                .mapToObj(i -> InputView.inputLottoNumbers())
+                .collect(Collectors.toList());
+    }
+
+    public static Lotto inputLottoNumbers() {
         String input = SCANNER.nextLine();
-        String[] winningNumber = input.split(NUMBER_DELIMITER);
-        checkAnswer(winningNumber);
-        return Arrays.stream(winningNumber)
+        String[] lottoNumbers = input.split(NUMBER_DELIMITER);
+        checkLottoNumbers(lottoNumbers);
+        return new Lotto(Stream.of(lottoNumbers)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .boxed()
+                .collect(Collectors.toList()));
     }
 
     private static int toInteger(String input) {
         return Integer.parseInt(input);
     }
 
-    private static void checkAnswer(String[] winningNumber) {
-        if (winningNumber.length != Lotto.MAX_COUNT) {
+    private static void checkLottoNumbers(String[] lottoInputNumbers) {
+        if (lottoInputNumbers.length != Lotto.MAX_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ANSWER);
         }
     }
 
-    public static int inputBonusNumber() {
-        return SCANNER.nextInt();
+    public static int inputNumber() {
+        return toInteger(SCANNER.nextLine());
     }
 }
