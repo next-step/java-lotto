@@ -1,5 +1,7 @@
 package study.ascii92der.lotto.step3to5;
 
+import java.util.Objects;
+
 public class LottoPrice {
 
     public static final int LOTTO_PRICE = 1000;
@@ -15,5 +17,22 @@ public class LottoPrice {
 
     public int lottoCount() {
         return money / LOTTO_PRICE;
+    }
+
+    public LottoPrice differenceLottoPrice(LottoPrice lottoPrice) {
+        return new LottoPrice(this.money - lottoPrice.money);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoPrice that = (LottoPrice) o;
+        return money == that.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }

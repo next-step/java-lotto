@@ -23,5 +23,11 @@ public class LottoPriceTest {
         assertThatThrownBy(() -> new LottoPrice(-14000)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoPrice.ERROR_MASSAGE_NOT_ENOUGH_INPUT_MONEY);
     }
-    
+
+    @Test
+    void differenceLottoPrice() {
+        LottoPrice lottoPrice = new LottoPrice(15000);
+        LottoPrice manualLottoPrice = new LottoPrice(10000);
+        assertThat(lottoPrice.differenceLottoPrice(manualLottoPrice)).isEqualTo(new LottoPrice(5000));
+    }
 }
