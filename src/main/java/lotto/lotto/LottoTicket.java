@@ -35,6 +35,10 @@ public class LottoTicket {
         return lottoTickets.size();
     }
 
+    public int autoQuantity(int selfQuantity) {
+        return lottoTickets.size() - selfQuantity;
+    }
+
     private void checkDuplicateBonusNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER);
