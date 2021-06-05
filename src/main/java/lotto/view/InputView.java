@@ -17,14 +17,7 @@ public final class InputView {
     }
 
     public static Lotto receiveWinningNumbers() {
-        String[] receiveNumbers = SCANNER.nextLine().replaceAll(" ", "")
-                .split(",");
-        Number[] numbers = new Number[receiveNumbers.length];
-        for (int i = 0; i < receiveNumbers.length; i++) {
-            validate(receiveNumbers[i]);
-            numbers[i] = Number.of(receiveNumbers[i]);
-        }
-        return new Lotto(numbers);
+        return stringToLottoNumbers();
     }
 
     public static Number receiveBonusNumber() {
@@ -33,11 +26,42 @@ public final class InputView {
         return Number.of(bonusNumber);
     }
 
+    public static int receiveManualLottoSize() {
+        String lottoSize = SCANNER.nextLine();
+        validate(lottoSize);
+        return Integer.parseInt(lottoSize);
+    }
+
+    public static Lotto[] receiveManualLottoNumberOfPurchases(int size) {
+        Lotto[] lottos = new Lotto[size];
+        for (int i = 0; i < size; i++) {
+            lottos[i] = receiveManualLottoNumbers();
+        }
+        return lottos;
+    }
+
+    private static Lotto receiveManualLottoNumbers() {
+        return stringToLottoNumbers();
+    }
+
+    private static Lotto stringToLottoNumbers() {
+        String[] receiveNumbers = SCANNER.nextLine()
+                .replaceAll(" ", "")
+                .split(",");
+        Number[] numbers = new Number[receiveNumbers.length];
+
+        for (int i = 0; i < receiveNumbers.length; i++) {
+            validate(receiveNumbers[i]);
+            numbers[i] = Number.of(receiveNumbers[i]);
+        }
+        return new Lotto(numbers);
+    }
+
     public static void validate(String input) {
         validateNumber(input);
         validatePositiveNumber(input);
     }
-    
+
     private static void validateNumber(String input) {
         try {
             Integer.parseInt(input);
@@ -51,5 +75,4 @@ public final class InputView {
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
     }
-
 }

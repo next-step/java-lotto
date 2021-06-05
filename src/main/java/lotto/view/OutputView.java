@@ -9,12 +9,13 @@ import java.math.BigDecimal;
 
 public final class OutputView {
     private static final String BUY_LOTTO_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String PURCHASE_COMPLETION_MESSAGE = "%d 개를 구매했습니다. \n";
-    private static final String WINNERS_MESSAGE = "%s가 최종 우승했습니다.";
+    private static final String PURCHASE_COMPLETION_MESSAGE = "수동으로 %d 장, 자동으로 %d 개를 구매했습니다. \n";
     private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String PROFIT_RATE_RESULT_MESSAGE = "총 수익률은 %.2f 입니다.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_SIZE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final String HYPHEN = "---------";
 
@@ -28,8 +29,8 @@ public final class OutputView {
         System.out.println(BUY_LOTTO_MESSAGE);
     }
 
-    public static void printPurchaseCompletion(int lottoCount) {
-        System.out.printf(PURCHASE_COMPLETION_MESSAGE, lottoCount);
+    public static void printPurchaseCompletion(int manualLottoCount, int automaticLottoCount) {
+        System.out.printf(PURCHASE_COMPLETION_MESSAGE, manualLottoCount, automaticLottoCount);
     }
 
     public static void printLottoList(LottoList lottoList) {
@@ -62,4 +63,13 @@ public final class OutputView {
     public static void printReceiveBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
     }
+
+    public static void printManualLottoSize(){
+        System.out.println(MANUAL_LOTTO_SIZE_MESSAGE);
+    }
+
+    public static void printManualLottoNumbers(){
+        System.out.println(MANUAL_LOTTO_NUMBERS);
+    }
+
 }
