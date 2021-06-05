@@ -12,7 +12,7 @@ public class LottoManualController {
     LottoManualOutputView outputView = new LottoManualOutputView();
     AutoLotto autoLotto = new AutoLotto();
     ManualLotto manualLotto = new ManualLotto();
-    WinningResult winningResult ;
+    WinningResult winningResult;
 
     public void start() {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());

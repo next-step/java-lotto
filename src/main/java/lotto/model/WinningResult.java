@@ -8,7 +8,7 @@ public enum WinningResult {
     FIRST_PRICE(2_000_000_000);
 
     private int winningAmount;
-    private int[] numberOfWins ;
+    private int[] numberOfWins;
 
     WinningResult(int winningAmount) {
         this.winningAmount = winningAmount;

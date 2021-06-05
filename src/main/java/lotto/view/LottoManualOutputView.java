@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.model.Lotto;
-import lotto.model.WinningResult;
 
 import java.util.List;
 
