@@ -25,9 +25,9 @@ public class LottoPriceTest {
     }
 
     @Test
+    @DisplayName("로또 차액 구하기")
     void differenceLottoPrice() {
         LottoPrice lottoPrice = new LottoPrice(15000);
-        LottoPrice manualLottoPrice = new LottoPrice(10000);
-        assertThat(lottoPrice.differenceLottoPrice(manualLottoPrice)).isEqualTo(new LottoPrice(5000));
+        assertThat(lottoPrice.differenceLottoPrice(10)).isEqualTo(new LottoPrice(5000));
     }
 }
