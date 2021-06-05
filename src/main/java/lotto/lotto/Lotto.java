@@ -43,10 +43,4 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
         }
     }
-
-    private static void checkNumber(int ...numbers) {
-        if (numbers.length != MAX_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_COUNT);
-        }
-    }
 }
