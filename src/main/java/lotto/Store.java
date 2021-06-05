@@ -1,29 +1,22 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Store {
 	public static final Money LOTTO_PRICE = new Money(1_000L);
 
-	public static Lottos buy(Money amount) {
-		List<Lotto> lottos = new ArrayList<>();
-
-		int count = (int)amount.divide(LOTTO_PRICE);
-		for (int i = 0; i < count; i++) {
-			Lotto lotto = Lotto.publish();
-			lottos.add(lotto);
-		}
-		return new Lottos(lottos);
-	}
-
 	public static Lottos buy(Money amount, List<List<Integer>> manualNumbers) {
-		canBuyLottos(amount, manualNumbers.size());
+		int manualCount = manualNumbers.size();
+		canBuyLottos(amount, manualCount);
 
-		List<Lotto> lottos = new ArrayList<>();
-		for (List<Integer> manualNumber : manualNumbers) {
-			lottos.add(new Lotto(manualNumber));
-		}
+		List<Lotto> lottos = manualNumbers.stream().map(Lotto::new).collect(Collectors.toList());
+
+		amount = amount.minus(Store.LOTTO_PRICE.multiply(manualCount));
+		int autoCount = (int)amount.divide(LOTTO_PRICE);
+		IntStream.range(0, autoCount).mapToObj(i -> Lotto.publish()).forEach(lottos::add);
+
 		return new Lottos(lottos);
 	}
 

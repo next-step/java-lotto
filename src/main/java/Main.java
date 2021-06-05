@@ -21,8 +21,6 @@ public class Main {
 		Money amount = new Money(inputView.askAmount());
 		List<List<Integer>> manualNumbers = inputView.askManual();
 		Lottos lottos = Store.buy(amount, manualNumbers);
-		amount = amount.minus(Store.LOTTO_PRICE.multiply(manualNumbers.size()));
-		lottos.add(Store.buy(amount));
 
 		List<LottoDto> lottoDtos = createLottoDtos(lottos);
 		resultView.printNumbers(lottoDtos);
