@@ -3,7 +3,9 @@ package com.nextstep.lotto.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,57 +20,30 @@ public class LottosTest {
 
 	@Test
 	void 결과값_도출() {
+		Set<LottoNumber> lottoNumbers = new HashSet<>();
+		lottoNumbers.add(new LottoNumber(1));
+		lottoNumbers.add(new LottoNumber(2));
+		lottoNumbers.add(new LottoNumber(3));
+		lottoNumbers.add(new LottoNumber(4));
+		lottoNumbers.add(new LottoNumber(5));
+		lottoNumbers.add(new LottoNumber(6));
 
 		List<Lotto> lottoList = new ArrayList<>();
-		lottoList.add(new Lotto(new LottoNumberGenerator() {
-			@Override
-			public List<LottoNumber> makeRandomNumbers() {
-				List<LottoNumber> list = new ArrayList<>();
-				list.add(new LottoNumber(1));
-				list.add(new LottoNumber(2));
-				list.add(new LottoNumber(3));
-				list.add(new LottoNumber(4));
-				list.add(new LottoNumber(5));
-				list.add(new LottoNumber(6));
-				return list;
-			}
-		}));
-		lottoList.add(new Lotto(new LottoNumberGenerator() {
-			@Override
-			public List<LottoNumber> makeRandomNumbers() {
-				List<LottoNumber> list = new ArrayList<>();
-				list.add(new LottoNumber(1));
-				list.add(new LottoNumber(2));
-				list.add(new LottoNumber(3));
-				list.add(new LottoNumber(4));
-				list.add(new LottoNumber(5));
-				list.add(new LottoNumber(6));
-				return list;
-			}
-		}));
-		lottoList.add(new Lotto(new LottoNumberGenerator() {
-			@Override
-			public List<LottoNumber> makeRandomNumbers() {
-				List<LottoNumber> list = new ArrayList<>();
-				list.add(new LottoNumber(1));
-				list.add(new LottoNumber(2));
-				list.add(new LottoNumber(3));
-				list.add(new LottoNumber(4));
-				list.add(new LottoNumber(5));
-				list.add(new LottoNumber(6));
-				return list;
-			}
-		}));
+		lottoList.add(new Lotto(lottoNumbers));
+		lottoList.add(new Lotto(lottoNumbers));
+		lottoList.add(new Lotto(lottoNumbers));
 
-		List<LottoNumber> list = new ArrayList<>();
-		list.add(new LottoNumber(1));
-		list.add(new LottoNumber(2));
-		list.add(new LottoNumber(3));
-		list.add(new LottoNumber(4));
-		list.add(new LottoNumber(5));
-		list.add(new LottoNumber(6));
 		Lottos lottos = new Lottos(lottoList);
-		WinningLotto winningLotto = new WinningLotto(list);
+
+		Set<LottoNumber> winningNumbers = new HashSet<>();
+		winningNumbers.add(new LottoNumber(1));
+		winningNumbers.add(new LottoNumber(2));
+		winningNumbers.add(new LottoNumber(3));
+		winningNumbers.add(new LottoNumber(4));
+		winningNumbers.add(new LottoNumber(5));
+		winningNumbers.add(new LottoNumber(6));
+		WinningLotto winningLotto = new WinningLotto(winningNumbers);
+
 		assertThat(lottos.matchRank(winningLotto).size()).isEqualTo(3);
 	}
 }

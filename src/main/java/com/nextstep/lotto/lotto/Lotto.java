@@ -1,7 +1,6 @@
 package com.nextstep.lotto.lotto;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,21 +10,19 @@ public class Lotto {
 	private static final String LOTTO_NUMBER_CAN_ONLY_6_DIGITS = "로또의 숫자는 6개만 가능합니다.";
 	private final Set<LottoNumber> numbers;
 
-	public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-		this.numbers = new HashSet<>(lottoNumberGenerator.makeRandomNumbers());
+	public Lotto(Set<LottoNumber> lottoNumbers) {
+		this.numbers = new HashSet<>(lottoNumbers);
 		if (this.numbers.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException(LOTTO_NUMBER_CAN_ONLY_6_DIGITS);
 		}
 	}
 
 	public int matchCount(Set<LottoNumber> winningLotto) {
-		int count = 0;
-		for (LottoNumber number : numbers) {
-			if (winningLotto.contains(number)) {
-				count++;
-			}
-		}
-		return count;
+		return Math.toIntExact(
+			numbers.stream()
+			.filter(number -> winningLotto.contains(number))
+			.count()
+		);
 	}
 
 	public Set<LottoNumber> numbers() {

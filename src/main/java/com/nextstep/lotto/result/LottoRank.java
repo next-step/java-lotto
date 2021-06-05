@@ -17,30 +17,6 @@ public enum LottoRank {
 		this.reward = reward;
 	}
 
-	public static LottoRank match(int matchCount) {
-		if (matchCount < FIFTH_RANK.matchCount) {
-			return NO_RANK;
-		}
-
-		if (FIRST_RANK.matchCount == matchCount) {
-			return FIRST_RANK;
-		}
-
-		if (THIRD_RANK.matchCount == matchCount) {
-			return THIRD_RANK;
-		}
-
-		if (FOURTH_RANK.matchCount == matchCount) {
-			return FOURTH_RANK;
-		}
-
-		if (FIFTH_RANK.matchCount == matchCount) {
-			return FIFTH_RANK;
-		}
-
-		return null;
-	}
-
 	public static LottoRank valueOf(int matchCount) {
 		return Arrays.stream(LottoRank.values())
 			.filter(c -> c.matchCount == matchCount)

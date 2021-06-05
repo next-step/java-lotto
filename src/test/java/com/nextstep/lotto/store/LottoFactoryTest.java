@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class LottoMakerTest {
+public class LottoFactoryTest {
 	@Test
 	void create() {
-		LottoMaker lottoMaker = new LottoMaker(3);
-		assertThat(lottoMaker).isNotNull();
+		LottoFactory lottoFactory = new LottoFactory(3);
+		assertThat(lottoFactory).isNotNull();
 	}
 }

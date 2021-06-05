@@ -1,8 +1,8 @@
 package com.nextstep.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.nextstep.lotto.lotto.LottoNumber;
 
@@ -11,16 +11,16 @@ public class LottoInput {
 	private static final String NUMBER_CHECK_REGEX = "\\d+";
 	private static final String MESSAGE_ONLY_NUMBERS_CAN_ENTER = "숫자만 입력가능합니다.";
 
-	private Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 
 	public int inputMoney() {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public List<LottoNumber> inputWinningNumber() {
+	public Set<LottoNumber> inputWinningNumber() {
 		String input = scanner.nextLine();
 		String[] winningNumber = convertStringToArray(input);
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		for (String number : winningNumber) {
 			lottoNumbers.add(new LottoNumber(convertStringToInt(number)));
 		}

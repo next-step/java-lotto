@@ -2,11 +2,13 @@ package com.nextstep.lotto.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumberGenerator {
 
-	private List<Integer> rangeNumbers;
+	private final List<Integer> rangeNumbers;
 
 	public LottoNumberGenerator() {
 		rangeNumbers = new ArrayList<>();
@@ -15,9 +17,9 @@ public class LottoNumberGenerator {
 		}
 	}
 
-	public List<LottoNumber> makeRandomNumbers() {
+	public Set<LottoNumber> makeRandomNumbers() {
 		Collections.shuffle(rangeNumbers);
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
 			lottoNumbers.add(new LottoNumber(rangeNumbers.get(i)));
 		}
