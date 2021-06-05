@@ -11,6 +11,7 @@ public class LottoAutoController {
     LottoAutoInputView inputView = new LottoAutoInputView();
     LottoAutoOutputView outputView = new LottoAutoOutputView();
     AutoLotto autoLotto = new AutoLotto();
+    WinningResult winningResult ;
 
     public void start() {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
@@ -23,9 +24,9 @@ public class LottoAutoController {
         int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber());
-        outputView.outputWinningResults(lottos.getWinningResults());
-        outputView.outputEarningRate(lottos.calculateEarningRate(lottoPrice.getPrice()));
+        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
+        outputView.outputWinningResults(winningResult.getNumberOfWins());
+        outputView.outputEarningRate(lottos.calculateEarningRate(winningResult.calculateEarningPrice(), lottoPrice.getPrice()));
     }
 
     private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
