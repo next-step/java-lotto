@@ -1,29 +1,44 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoStore;
 import lotto.domain.Result;
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.Number;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+
+import static lotto.view.InputView.*;
+import static lotto.view.OutputView.*;
 
 public final class LottoController {
+    private LottoStore lottoStore;
+    private LottoList lottoList;
 
     public void start() {
-        OutputView.printBuyLotto();
-        LottoBuyer lottoBuyer = new LottoBuyer(InputView.receivePurchaseAmount());
-        LottoStore lottoStore = new LottoStore();
-        LottoList lottoList = lottoStore.toSell(lottoBuyer.payMoney());
-        OutputView.printPurchaseCompletion(lottoList.size());
-        OutputView.printLottoList(lottoList);
-        OutputView.printReceiveWinningNumber();
-        Lotto winningLotto = InputView.receiveWinningNumbers();
-        OutputView.printReceiveBonusNumber();
-        Number bonusNumber = InputView.receiveBonusNumber();
-        Result result = new Result(winningLotto, bonusNumber);
-        result.confirm(lottoList, lottoStore.price());
-        OutputView.printStatistics(result.profitRate(), result.rank());
+        purchasing();
+        printReceiveWinningNumber();
+        statistics();
     }
+    private void purchasing() {
+        printBuyLotto();
+        LottoBuyer lottoBuyer = new LottoBuyer(receivePurchaseAmount());
+        lottoStore = new LottoStore();
+        printManualLottoSize();
+        int manualLottoSize = receiveManualLottoSize();
+        printManualLottoNumbers();
+        lottoList = lottoStore.toSell(lottoBuyer.payMoney(), receiveManualLottoNumberOfPurchases(manualLottoSize));
+        printPurchaseCompletion(manualLottoSize, lottoList.size() - manualLottoSize);
+        printLottoList(lottoList);
+    }
+
+    private Number bonus() {
+        printReceiveBonusNumber();
+        return receiveBonusNumber();
+    }
+
+    private void statistics() {
+        Result result = new Result(receiveWinningNumbers(), bonus());
+        result.confirm(lottoList, lottoStore.price());
+        printStatistics(result.profitRate(), result.rank());
+    }
+
 }

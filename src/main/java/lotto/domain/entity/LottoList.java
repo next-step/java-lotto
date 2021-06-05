@@ -10,10 +10,17 @@ public final class LottoList {
 
     private final List<Lotto> lottoList = new ArrayList<>();
 
-    public LottoList(int purchaseCount) {
-        for (int i = 0; i < purchaseCount; i++) {
+    public LottoList(int automaticLottoPurchaseCount) {
+        for (int i = 0; i < automaticLottoPurchaseCount; i++) {
             lottoList.add(new Lotto(new AutomaticLottoNumbersGenerator()));
         }
+    }
+
+    public LottoList(int automaticLottoPurchaseCount, Lotto... manualLottos) {
+        for (int i = 0; i < automaticLottoPurchaseCount; i++) {
+            lottoList.add(new Lotto(new AutomaticLottoNumbersGenerator()));
+        }
+        lottoList.addAll(0, Arrays.asList(manualLottos));
     }
 
     public LottoList(Lotto... lottoArrays) {
