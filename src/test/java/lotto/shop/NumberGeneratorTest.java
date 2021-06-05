@@ -20,14 +20,4 @@ public class NumberGeneratorTest {
         //then
         assertThat(number.size()).isEqualTo(Lotto.MAX_COUNT);
     }
-
-    @Test
-    @DisplayName("숫자 유효성 체크")
-    void checkNumber() {
-        //given
-        //when
-        //then
-        assertThat(LottoNumber.MIN_NUMBER).isEqualTo(1);
-        assertThat(LottoNumber.MAX_NUMBER).isEqualTo(45);
-    }
 }

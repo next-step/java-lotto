@@ -45,4 +45,14 @@ public class LottoNumberTest {
         //then
         assertThat(LottoNumber.of(1)).isSameAs(LottoNumber.of(1));
     }
+
+    @Test
+    @DisplayName("숫자 유효성 체크")
+    void checkNumber() {
+        //given
+        //when
+        //then
+        assertThat(LottoNumber.MIN_NUMBER).isEqualTo(1);
+        assertThat(LottoNumber.MAX_NUMBER).isEqualTo(45);
+    }
 }
