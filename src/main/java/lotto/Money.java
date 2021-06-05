@@ -3,10 +3,12 @@ package lotto;
 import java.util.Objects;
 
 public class Money {
+	public static final Long MIN_AMOUNT = 0L;
+
 	private final long money;
 
 	public Money(long money) {
-		if (money < 0) {
+		if (money < MIN_AMOUNT) {
 			throw new IllegalArgumentException("금액은 음수가 될 수 없습니다.");
 		}
 		this.money = money;
