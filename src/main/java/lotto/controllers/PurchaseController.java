@@ -17,26 +17,19 @@ public class PurchaseController implements Controller {
     @Override
     public void run() {
         Display.show(Message.PURCHASE);
+        Purchase purchase = buyTickets(Keyboard.read());
 
-        int ticketAmount = buyTickets(Keyboard.read());
-
-        Display.show(Message.TICKET_AMOUNT, ticketAmount);
-
-        toTicketingController();
+        Display.show(Message.TICKET_AMOUNT, purchase.ticketsAmount());
     }
 
-    protected int buyTickets(String money) {
+    protected Purchase buyTickets(String money) {
         Purchase purchase = new Purchase(money);
         savePurchase(purchase);
-        return purchase.ticketsAmount();
+        return purchase;
     }
 
     private void savePurchase(Purchase purchase) {
         this.lotto.storage().savePurchase(purchase);
-    }
-
-    private void toTicketingController() {
-        this.lotto.toTicketingController();
     }
 
 }

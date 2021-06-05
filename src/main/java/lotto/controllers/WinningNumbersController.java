@@ -22,8 +22,6 @@ public class WinningNumbersController implements Controller {
         BonusNumber bonusNumber = askBonusNumber();
 
         saveWinningNumbers(winningTicket, bonusNumber);
-
-        toResultController();
     }
 
     private Ticket askWinningTicket() {
@@ -41,7 +39,4 @@ public class WinningNumbersController implements Controller {
         this.lotto.storage().saveWinningNumbers(winningNumbers);
     }
 
-    private void toResultController() {
-        this.lotto.toResultController();
-    }
 }

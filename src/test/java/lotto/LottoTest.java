@@ -16,11 +16,4 @@ public class LottoTest {
         assertThat(lotto.isRunning()).isTrue();
     }
 
-    @DisplayName("로또 종료")
-    @Test
-    void end() {
-        lotto.toEndController();
-        assertThat(lotto.isRunning()).isFalse();
-    }
-
 }

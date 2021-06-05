@@ -1,8 +1,11 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
+import lotto.controllers.EndController;
 import lotto.controllers.TicketingController;
 import lotto.controllers.Controller;
-import lotto.controllers.EndController;
 import lotto.controllers.PurchaseController;
 import lotto.controllers.ResultController;
 import lotto.controllers.WinningNumbersController;
@@ -10,54 +13,42 @@ import lotto.views.Display;
 
 public class Lotto {
 
-    private Controller ticketingController;
-    private Controller winningNumbersController;
-    private Controller resultController;
-    private Controller endController;
-
-    private Controller controller;
     private Model model;
+    private Controller controller;
+    private Iterator<Controller> controllers;
 
     public Lotto(Model model) {
-        this.ticketingController = new TicketingController(this);
-        this.winningNumbersController = new WinningNumbersController(this);
-        this.resultController = new ResultController(this);
-        this.endController = new EndController();
-
-        this.controller = new PurchaseController(this);
         this.model = model;
+        this.controllers = Arrays.asList(
+            new PurchaseController(this),
+            new TicketingController(this),
+            new WinningNumbersController(this),
+            new ResultController(this),
+            new EndController()
+        ).iterator();
+
+        next();
     }
 
     public void run() {
         try {
             controller.run();
+            next();
         } catch (Exception e) {
             Display.error(e.getMessage());
         }
     }
 
     public boolean isRunning() {
-        return !this.controller.equals(this.endController);
+        return controllers.hasNext();
+    }
+
+    public void next() {
+        controller = controllers.next();
     }
 
     public Model storage() {
-        return this.model;
-    }
-
-    public void toEndController() {
-        this.controller = this.endController;
-    }
-
-    public void toTicketingController() {
-        this.controller = this.ticketingController;
-    }
-
-    public void toWinningNumbersController() {
-        this.controller = this.winningNumbersController;
-    }
-
-    public void toResultController() {
-        this.controller = this.resultController;
+        return model;
     }
 
 }

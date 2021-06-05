@@ -33,8 +33,6 @@ public class TicketingController implements Controller {
 
         Display.show(Message.AUTOMATIC_TICKETING, manualTickets, automatedTickets);
         Display.show(allTickets);
-
-        toWinningTicketController();
     }
 
     protected Purchase loadPurchase() {
@@ -55,9 +53,5 @@ public class TicketingController implements Controller {
 
     protected void saveTickets(Tickets tickets) {
         this.lotto.storage().saveTickets(tickets);
-    }
-
-    private void toWinningTicketController() {
-        this.lotto.toWinningNumbersController();
     }
 }

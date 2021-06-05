@@ -25,8 +25,6 @@ public class ResultController implements Controller {
         EarningRate earningRate = new EarningRate(scores, purchase);
 
         Reporter.report(scores, earningRate);
-
-        toEndController();
     }
 
     private Tickets loadTickets() {
@@ -41,7 +39,4 @@ public class ResultController implements Controller {
         return this.lotto.storage().loadWinningNumbers();
     }
 
-    private void toEndController() {
-        this.lotto.toEndController();
-    }
 }
