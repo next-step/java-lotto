@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3n4;
+package study.ascii92der.lotto.step3to5;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,5 +23,5 @@ public class LottoPriceTest {
         assertThatThrownBy(() -> new LottoPrice(-14000)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoPrice.ERROR_MASSAGE_NOT_ENOUGH_INPUT_MONEY);
     }
-
+    
 }

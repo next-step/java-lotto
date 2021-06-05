@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3n4;
+package study.ascii92der.lotto.step3to5;
 
 public class LottoGame {
     private final InputView inputView;
