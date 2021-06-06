@@ -28,9 +28,8 @@ public enum LottoWin {
 
     public static LottoWin valueOf(int matchNum, boolean matchBonus) {
         return Arrays.stream(LottoWin.values())
-                .filter(v -> {
-                    return lottoWinBonusFilter(v, matchNum, matchBonus);
-                }).findFirst()
+                .filter(v -> lottoWinBonusFilter(v, matchNum, matchBonus))
+                .findFirst()
                 .orElse(LAST_PLACE);
     }
 
