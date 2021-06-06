@@ -25,7 +25,7 @@ public class LottoGame {
     }
 
     public WinningLottoNumbers getWinningNumbers(String winningNumbers, int bonusNumber) {
-        winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonusNumber);
+        winningLottoNumbers = new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
         return winningLottoNumbers;
     }
 
