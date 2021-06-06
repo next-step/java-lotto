@@ -44,11 +44,11 @@ public class OutputView {
     }
 
     private static String getLottoWinTemplate(LottoTicket lottoTicket) {
-        String output = getLottoWinCountString(LottoWin.FIFTH_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIFTH_PLACE));
-        output += getLottoWinCountString(LottoWin.FOURTH_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE));
-        output += getLottoWinCountString(LottoWin.THIRD_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.THIRD_PLACE));
-        output += getLottoWinCountString(LottoWin.SECOND_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.SECOND_PLACE));
-        output += getLottoWinCountString(LottoWin.FIRST_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE));
+        List<LottoWin> lottoWins = LottoWin.getOutputList();
+        String output = "";
+        for (LottoWin lottoWin : lottoWins) {
+            output += getLottoWinCountString(lottoWin, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), lottoWin));
+        }
         return output;
     }
 
