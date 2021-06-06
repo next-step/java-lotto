@@ -2,13 +2,19 @@ package lotto.domains;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.ManualTicketsBuilder;
 import lotto.exceptions.CashOutOfBoundsException;
 import lotto.exceptions.InvalidNumberException;
+import lotto.exceptions.NumberOutOfBoundsException;
 
 public class PurchaseTest {
 
@@ -38,12 +44,26 @@ public class PurchaseTest {
         });
     }
 
-    @DisplayName("실제 결제금 계산")
-    @ParameterizedTest(name = "지불: \"{0}\", 결제: \"{1}\"")
-    @CsvSource(value = {"1000,1000", "12345,12000"})
-    void payment(String input, int expected) {
-        Purchase purchase = new Purchase(input);
-        assertThat(purchase.payment()).isEqualTo(expected);
+    @DisplayName("수동 로또 개수 범위가 0 ~ 구매한 로또 수 사이가 아니면 에러 발생")
+    @ParameterizedTest(name = "구입 금액: {0}, {1}개 선택은 불가능")
+    @CsvSource(value = {"1000,-1", "12345,13"})
+    void selectManualAmount_OutOfBounds_ExceptionThrown(String cash, int amount) {
+        Purchase purchase = new Purchase(cash);
+        assertThatExceptionOfType(NumberOutOfBoundsException.class).isThrownBy(() -> {
+            purchase.selectManualAmount(amount);
+        });
+    }
+
+    @DisplayName("수동 로또 1 + 자동 로또 2 = 전체 로또 3")
+    @Test
+    void amount() {
+        Purchase purchase = new Purchase("3000");
+        purchase.selectManualAmount(1);
+        Tickets tickets = new Tickets(Collections.singletonList(new Ticket("1,2,3,4,5,6")));
+
+        assertThat(purchase.skipManualTickets()).isFalse();
+        assertThat(purchase.isNotSameAsManualAmount(tickets)).isFalse();
+        assertThat(purchase.automatedAmount()).isEqualTo(2);
     }
 
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.exceptions.TicketsOutOfBoundsException;
+import lotto.domains.Purchase;
 
 public class AutomaticTicketingTest {
 
@@ -26,18 +26,10 @@ public class AutomaticTicketingTest {
 
     @DisplayName("로또 N개를 생성한다.")
     @ParameterizedTest(name = "입력: \"{0}\", 출력: \"{1}\"")
-    @CsvSource(value = {"1:1", "3:3"}, delimiter = ':')
-    void newTickets(int input, int expected) {
-        assertThat(automaticTicketing.newTickets(input).size()).isEqualTo(expected);
-    }
-
-    @DisplayName("로또 음수를 입력하면 에러가 발생한다.")
-    @ParameterizedTest(name = "입력: \"{0}\"")
-    @ValueSource(ints = {-1})
-    void newTickets(int input) {
-        assertThatExceptionOfType(TicketsOutOfBoundsException.class).isThrownBy(() -> {
-            automaticTicketing.newTickets(input);
-        });
+    @CsvSource(value = {"1000:1", "3000:3"}, delimiter = ':')
+    void newTickets(String cash, int expected) {
+        Purchase purchase = new Purchase(cash);
+        assertThat(automaticTicketing.newTickets(purchase).size()).isEqualTo(expected);
     }
 
 }

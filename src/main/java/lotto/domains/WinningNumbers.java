@@ -28,8 +28,4 @@ public class WinningNumbers {
         return Prize.valueOf(count);
     }
 
-    public String print() {
-        return this.winningTicket + " + " + this.bonusNumber;
-    }
-
 }

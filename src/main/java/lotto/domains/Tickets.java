@@ -8,6 +8,8 @@ import lotto.exceptions.NullTicketsException;
 
 public class Tickets {
 
+    private static final int TICKET_PRICE = 1000;
+
     private List<Ticket> tickets;
 
     public Tickets(List<Ticket> tickets) {
@@ -22,10 +24,14 @@ public class Tickets {
         return this.tickets.size();
     }
 
-    public Tickets append(Tickets other) {
+    public int payment() {
+        return size() * TICKET_PRICE;
+    }
+
+    public void append(Tickets other) {
         List<Ticket> newTickets = new ArrayList<>(this.tickets);
         newTickets.addAll(other.tickets);
-        return new Tickets(newTickets);
+        this.tickets = newTickets;
     }
 
     public Scores scores(WinningNumbers winningNumbers) {

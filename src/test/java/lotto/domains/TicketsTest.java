@@ -45,6 +45,12 @@ public class TicketsTest {
         assertThat(tickets.size()).isEqualTo(ticketList.size());
     }
 
+    @DisplayName("실제 결제금 계산")
+    @Test
+    void payment() {
+        assertThat(tickets.payment()).isEqualTo(8000);
+    }
+
     @DisplayName("두 티켓 목록을 합친다.")
     @Test
     void append() {
@@ -54,8 +60,9 @@ public class TicketsTest {
                 new Ticket("1,2,3,5,8,21")
             )
         );
-        Tickets newTickets = other.append(tickets);
-        assertThat(newTickets.size()).isEqualTo(other.size() + ticketList.size());
+        int size = other.size();
+        other.append(tickets);
+        assertThat(other.size()).isEqualTo(size + ticketList.size());
     }
 
     @DisplayName("빈 티켓 목록을 합친다.")
@@ -63,8 +70,8 @@ public class TicketsTest {
     void appendZero() {
         Tickets one = new Tickets(Collections.emptyList());
         Tickets other = new Tickets(Collections.emptyList());
-        Tickets newTickets = one.append(other);
-        assertThat(newTickets.size()).isEqualTo(0);
+        one.append(other);
+        assertThat(one.size()).isEqualTo(0);
     }
 
     @DisplayName("당첨된 티켓 수를 센다.")
@@ -80,4 +87,5 @@ public class TicketsTest {
             new Tickets(null);
         });
     }
+
 }

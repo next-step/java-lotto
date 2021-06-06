@@ -1,6 +1,7 @@
 package lotto.controllers;
 
-import lotto.Lotto;
+import java.util.Optional;
+
 import lotto.domains.BonusNumber;
 import lotto.domains.Ticket;
 import lotto.domains.WinningNumbers;
@@ -8,35 +9,70 @@ import lotto.enums.Message;
 import lotto.views.Display;
 import lotto.views.Keyboard;
 
-public class WinningNumbersController implements Controller {
+public final class WinningNumbersController {
 
-    private Lotto lotto;
-
-    public WinningNumbersController(Lotto lotto) {
-        this.lotto = lotto;
+    private WinningNumbersController() {
     }
 
-    @Override
-    public void run() {
-        Ticket winningTicket = askWinningTicket();
-        BonusNumber bonusNumber = askBonusNumber();
+    public static WinningNumbers run() {
+        Optional<WinningNumbers> winningNumbers = Optional.empty();
 
-        saveWinningNumbers(winningTicket, bonusNumber);
+        while (!winningNumbers.isPresent()) {
+            winningNumbers = tryAskWinningNumbers();
+        }
+
+        return winningNumbers.get();
     }
 
-    private Ticket askWinningTicket() {
-        Display.show(Message.WINNING_TICKET);
-        return new Ticket(Keyboard.read());
+    private static Optional<WinningNumbers> tryAskWinningNumbers() {
+        try {
+            Ticket winningTicket = askWinningTicket();
+            BonusNumber bonusNumber = askBonusNumber();
+            return Optional.of(new WinningNumbers(winningTicket, bonusNumber));
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+            return Optional.empty();
+        }
     }
 
-    private BonusNumber askBonusNumber() {
-        Display.show(Message.BONUS_NUMBER);
-        return new BonusNumber(Keyboard.read());
+    private static Ticket askWinningTicket() {
+        Optional<Ticket> ticket = Optional.empty();
+
+        while (!ticket.isPresent()) {
+            ticket = tryAskWinningTicket();
+        }
+
+        return ticket.get();
     }
 
-    protected void saveWinningNumbers(Ticket ticket, BonusNumber number) {
-        WinningNumbers winningNumbers = new WinningNumbers(ticket, number);
-        this.lotto.storage().saveWinningNumbers(winningNumbers);
+    private static Optional<Ticket> tryAskWinningTicket() {
+        try {
+            Display.show(Message.WINNING_TICKET);
+            return Optional.of(new Ticket(Keyboard.read()));
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+            return Optional.empty();
+        }
+    }
+
+    private static BonusNumber askBonusNumber() {
+        Optional<BonusNumber> bonusNumber = Optional.empty();
+
+        while (!bonusNumber.isPresent()) {
+            bonusNumber = tryAskBonusNumber();
+        }
+
+        return bonusNumber.get();
+    }
+
+    private static Optional<BonusNumber> tryAskBonusNumber() {
+        try {
+            Display.show(Message.BONUS_NUMBER);
+            return Optional.of(new BonusNumber(Keyboard.read()));
+        } catch (Exception e) {
+            Display.error(e.getMessage());
+            return Optional.empty();
+        }
     }
 
 }
