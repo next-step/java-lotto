@@ -3,15 +3,14 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
     public Lotto getAutoLotto() {
-        List<Integer> lotto = new ArrayList<>();
-        Collections.shuffle(LottoNumbers.lotto_number_list);
-        for (int i = 0; i < LottoConstants.LOTTO_SELECT_NUM; i++) {
-            lotto.add(LottoNumbers.lotto_number_list.get(i));
-        }
+        List<Integer> lotto = LottoNumbers.lotto_number_list.stream()
+                .limit(LottoConstants.LOTTO_SELECT_NUM)
+                .collect(Collectors.toList());
         return new Lotto(lotto);
     }
 

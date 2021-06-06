@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -11,6 +12,7 @@ public class LottoNumbers {
         for (int i = LottoConstants.LOTTO_MIN_NUM; i <= LottoConstants.LOTTO_MAX_NUM; i++) {
             lotto_number_list.add(i);
         }
+        Collections.shuffle(lotto_number_list);
     }
 
 
