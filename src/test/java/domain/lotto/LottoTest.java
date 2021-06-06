@@ -1,9 +1,6 @@
 package domain.lotto;
 
-import static org.assertj.core.api.Assertions.*;
-
 import org.assertj.core.api.Assertions;
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
@@ -63,7 +61,7 @@ public class LottoTest {
         AllLotto allLotto = new AllLotto();
         allLotto.lottoPapers.add(input_numberList);
         ComparisonLottoNumber comparisonLottoNumber = new ComparisonLottoNumber();
-        List<Integer> resultCount = comparisonLottoNumber.comparison(allLotto, winning_numbers,bonus_number);
+        List<Integer> resultCount = comparisonLottoNumber.comparison(allLotto, winning_numbers, bonus_number);
         Assertions.assertThat(resultCount.get(0)).isEqualTo(7);
     }
 
@@ -73,7 +71,7 @@ public class LottoTest {
         List<Integer> resultCount = new ArrayList<>();
         resultCount.add(1);//0등
         resultCount.add(5);//3등
-   //     resultCount.add(6);//1등
+        //     resultCount.add(6);//1등
         resultCount.add(7);//2등
         resultCount.add(4);//4등
         resultCount.add(3);//5등
@@ -81,6 +79,7 @@ public class LottoTest {
         List<Match> matches = rank.rankCondition(resultCount);
         Assertions.assertThat(matches).contains(Match.FIRST);
     }
+
     @DisplayName("입력된 등수의 갯수")
     @Test
     public void rankCount() {
@@ -94,9 +93,10 @@ public class LottoTest {
         Rank rank = new Rank();
         List<Match> matches = rank.rankCondition(resultCount);
         RankCount rankCount = new RankCount();
-        HashMap<Integer,Integer> result = rankCount.run(matches);
+        HashMap<Integer, Integer> result = rankCount.run(matches);
         Assertions.assertThat(result.get(5000)).isEqualTo(1);
     }
+
     @DisplayName("당첨통계의 수익률 계산")
     @Test
     public void revenue() {
@@ -110,9 +110,9 @@ public class LottoTest {
         Rank rank = new Rank();
         List<Match> matches = rank.rankCondition(resultCount);
         RankCount rankCount = new RankCount();
-        HashMap<Integer,Integer> result = rankCount.run(matches);
+        HashMap<Integer, Integer> result = rankCount.run(matches);
         Revenue revenue = new Revenue();
-        double revenueRate = revenue.statistics(14000,result);
+        double revenueRate = revenue.statistics(14000, result);
 
     }
 }

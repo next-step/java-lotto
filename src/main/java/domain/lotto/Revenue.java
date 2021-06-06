@@ -11,7 +11,7 @@ public class Revenue {
         result.forEach((integer, integer2) -> {
             revenue_sum.updateAndGet(v -> new Double((double) (v + integer * integer2)));
         });
-        revenue = Math.floor(revenue_sum.get()/price*100)/100;
+        revenue = Math.floor(revenue_sum.get() / price * 100) / 100;
         return revenue;
     }
 }

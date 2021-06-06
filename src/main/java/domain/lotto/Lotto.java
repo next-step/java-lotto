@@ -1,7 +1,6 @@
 package domain.lotto;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lotto {
     private static final int LOTTO_NUMBERS_SIZE = 6;
