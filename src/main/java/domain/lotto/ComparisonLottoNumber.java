@@ -20,7 +20,6 @@ public class ComparisonLottoNumber {
                 matchCount += 2;
             }
             resultCount.add(matchCount);
-            System.out.println(resultCount);
         });
 
         return resultCount;

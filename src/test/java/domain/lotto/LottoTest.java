@@ -11,7 +11,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class LottoTest {
 
@@ -85,12 +87,32 @@ public class LottoTest {
         List<Integer> resultCount = new ArrayList<>();
         resultCount.add(1);//0등
         resultCount.add(5);//3등
-        //     resultCount.add(6);//1등
+        resultCount.add(6);//1등
         resultCount.add(7);//2등
         resultCount.add(4);//4등
         resultCount.add(3);//5등
         Rank rank = new Rank();
         List<Match> matches = rank.rankCondition(resultCount);
-        Assertions.assertThat(matches).contains(Match.FIRST);
+        RankCount rankCount = new RankCount();
+        HashMap<Integer,Integer> result = rankCount.run(matches);
+        Assertions.assertThat(result.get(5000)).isEqualTo(1);
+    }
+    @DisplayName("당첨통계의 수익률 계산")
+    @Test
+    public void revenue() {
+        List<Integer> resultCount = new ArrayList<>();
+//        resultCount.add(1);//0등
+//        resultCount.add(5);//3등
+//        resultCount.add(6);//1등
+//        resultCount.add(7);//2등
+//        resultCount.add(4);//4등
+        resultCount.add(3);//5등
+        Rank rank = new Rank();
+        List<Match> matches = rank.rankCondition(resultCount);
+        RankCount rankCount = new RankCount();
+        HashMap<Integer,Integer> result = rankCount.run(matches);
+        Revenue revenue = new Revenue();
+        double revenueRate = revenue.statistics(14000,result);
+
     }
 }
