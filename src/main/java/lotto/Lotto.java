@@ -18,6 +18,10 @@ public class Lotto {
         this.generateLottoNum();
     }
 
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        lottoNum = lottoNumbers;
+    }
+
     public List<LottoNumber> lottoNum() {
         return this.lottoNum;
     }
