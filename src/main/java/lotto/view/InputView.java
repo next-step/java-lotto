@@ -52,13 +52,7 @@ public class InputView {
             manualLottoNumbers[i] = scan.next();
 
         LottoNumbers[]  lottoNumbersArray = convertingStringToLottoNumbersArray(manualLottoNumbers);
-        //validateManualLottoNumbers(manualLottoNumbers);
         return lottoNumbersArray;
-    }
-
-    private void validateManualLottoNumbers(String[] manualLottoNumbers) {
-        if (manualLottoNumbers.length != 6)
-            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message());
     }
 
     public LottoNumbers[] convertingStringToLottoNumbersArray(String[] manualLottoNumbers) {

@@ -9,9 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoNoTest {
 
     @Test
-    public void Lotto_Number_숫자범위_검증() {
+    public void Lotto_Number_숫자범위_검증_오류() {
         assertThatThrownBy(() -> new LottoNo(46))
                 .isInstanceOf(IllegalArgumentException.class).hasMessage(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
     }
-
 }

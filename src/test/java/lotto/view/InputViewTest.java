@@ -40,4 +40,13 @@ class InputViewTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage((MessageCode.INVALID_OVER_LOTTO_NUMBERS.message()));
     }
+
+    @Test
+    public void parsingInputLottoNumbers_exception_로또개수6보다적은오류_검증() {
+        InputView inputView = new InputView();
+        String inputLottoNumber = "1,5,8,21,23";
+        assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message()));
+    }
 }

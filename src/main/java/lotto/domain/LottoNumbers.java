@@ -14,23 +14,26 @@ public class LottoNumbers {
         lottoNumbers = new ArrayList<LottoNo>();
         for (int number : numbers)
             lottoNumbers.add(new LottoNo(number));
-        validateDuplicateLottoNumbers();
+        validateLottoNumbers();
     }
 
     public LottoNumbers(String[] numbers) {
         lottoNumbers = new ArrayList<LottoNo>();
         for (String number : numbers)
             lottoNumbers.add(new LottoNo(Integer.parseInt(number)));
-        validateDuplicateLottoNumbers();
+        validateLottoNumbers();
     }
 
-    private void validateDuplicateLottoNumbers() {
+    private void validateLottoNumbers() {
+        if (lottoNumbers.size() > 6)
+            throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
+
+        if (lottoNumbers.size() < 6)
+            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message());
+
         Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
         if (transSet.size() < 6)
             throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
-
-        if (transSet.size() > 6)
-            throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
     }
 
     public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
