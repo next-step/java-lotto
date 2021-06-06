@@ -8,9 +8,9 @@ public class LottoMachine {
 
     public Lotto getAutoLotto() {
         List<Integer> lotto = new ArrayList<>();
-        Collections.shuffle(LottoNumbers.lotto_number_list);
+        Collections.shuffle(LottoNumbers.lottoNumberList);
         for (int i = 0; i < LottoConstants.LOTTO_SELECT_NUM; i++) {
-            lotto.add(LottoNumbers.lotto_number_list.get(i));
+            lotto.add(LottoNumbers.lottoNumberList.get(i));
         }
         return new Lotto(lotto);
     }
