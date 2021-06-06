@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
     @DisplayName("6개 초과 들어갔을때")
@@ -34,7 +33,7 @@ class LottoTest {
     @DisplayName("45 초과 숫자가 들어갔을때")
     @Test
     void throwIllegalArgumentException2_2() {
-        assertThatThrownBy(() ->new Lotto("1,2,3,4,5,46")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,46")).isInstanceOf(IllegalArgumentException.class);
     }
 
 

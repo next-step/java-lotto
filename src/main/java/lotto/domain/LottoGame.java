@@ -9,6 +9,7 @@ public class LottoGame {
     WinningLottoNumbers winningLottoNumbers;
 
     LottoMachine lottoMachine = new LottoMachine();
+
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
     }

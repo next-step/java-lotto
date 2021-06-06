@@ -16,9 +16,9 @@ public class WinningStatistics {
 
     public String yield() {
 
-        BigDecimal purchaseAmount =  new BigDecimal(String.valueOf(purchaseAmount()));
+        BigDecimal purchaseAmount = new BigDecimal(String.valueOf(purchaseAmount()));
         BigDecimal total = new BigDecimal(String.valueOf(total()));
-        BigDecimal yield =total.divide(purchaseAmount,2,BigDecimal.ROUND_DOWN);
+        BigDecimal yield = total.divide(purchaseAmount, 2, BigDecimal.ROUND_DOWN);
 
         return yield.toString();
     }

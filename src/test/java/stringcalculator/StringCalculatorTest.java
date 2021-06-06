@@ -1,20 +1,16 @@
 package stringcalculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,6 +23,7 @@ class StringCalculatorTest {
     void emptyOrNull(String test) {
         assertThat(stringCalculator.calculator(test)).isZero();
     }
+
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1"})
@@ -69,9 +66,9 @@ class StringCalculatorTest {
     void split() {
 
         assertAll("calculator",
-                ()-> assertEquals(stringCalculator.getDelimiter("1,2:3:4"),Arrays.asList(1,2,3,4)),
-                ()-> assertEquals(stringCalculator.getDelimiter("//;\n1;2;3"),Arrays.asList(1,2,3)),
-                ()-> assertEquals(stringCalculator.getDelimiter("//;\n1,2:3;4"),Arrays.asList(123,4))
+                () -> assertEquals(stringCalculator.getDelimiter("1,2:3:4"), Arrays.asList(1, 2, 3, 4)),
+                () -> assertEquals(stringCalculator.getDelimiter("//;\n1;2;3"), Arrays.asList(1, 2, 3)),
+                () -> assertEquals(stringCalculator.getDelimiter("//;\n1,2:3;4"), Arrays.asList(123, 4))
         );
     }
 
