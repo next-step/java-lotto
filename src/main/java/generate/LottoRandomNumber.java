@@ -5,29 +5,39 @@ import java.util.List;
 import java.util.Random;
 
 import static domain.Lotto.LOTTO_MAX_NUMBER;
-import static domain.Lotto.LOTTO_NUMBER_LENGTH;
 
 public class LottoRandomNumber {
+	private List<Integer> lottoNumbers;
 
-	public static List<Integer> numbers () {
-		List<Integer> lottoNumbers = new ArrayList<>();
+	public LottoRandomNumber() {
+		lottoNumbers = new ArrayList<>();
+	}
 
-		for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-			Random random = new Random();
-
-			int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
-
-			if (checkDuplicate(lottoNumbers, randomNumber)) {
-				lottoNumbers.add(randomNumber);
-				continue;
-			}
-
-			i--;
-		}
+	public List<Integer> numbers (List<Integer> getRandomNumber) {
+		lottoNumbers.addAll(getRandomNumber);
 		return lottoNumbers;
 	}
 
-	private static Boolean checkDuplicate (List<Integer> lottoNumbers, int aRandomNumber) {
-		return !lottoNumbers.contains(aRandomNumber);
+	public List<Integer> getRandomNumber(Integer length) {
+		List<Integer> randoms = new ArrayList<>();
+
+		for (int i = 0; i < length; i ++ ) {
+			Random random = new Random();
+			int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
+
+			if (checkDuplicate(randomNumber)) {
+				randoms.add(randomNumber);
+			}
+		}
+
+		return randoms;
+	}
+
+	private Boolean checkDuplicate (int aRandomNumber) {
+		if (lottoNumbers.contains(aRandomNumber)){
+			return Boolean.TRUE;
+		}
+
+		return Boolean.FALSE;
 	}
 }

@@ -2,17 +2,21 @@ package generate;
 
 import org.junit.jupiter.api.RepeatedTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static domain.Lotto.LOTTO_NUMBER_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRandomNumberTest {
 
 	@RepeatedTest (100)
 	public void 로또번호자동생성 () {
-		List<Integer> randomNumbers = LottoRandomNumber.numbers();
+		LottoRandomNumber lottoRandomNumber = new LottoRandomNumber();
 
-		assertThat(randomNumbers.size()).isEqualTo(6);
+		List<Integer> randomNumbers =lottoRandomNumber.numbers(getRandomNumber(LOTTO_NUMBER_LENGTH));
+
+		assertThat(6).isEqualTo(randomNumbers.size());
 
 		assertThat(randomNumbers)
 				.containsOnlyOnce(
@@ -23,5 +27,17 @@ class LottoRandomNumberTest {
 						randomNumbers.get(4),
 						randomNumbers.get(5)
 				);
+	}
+
+	private List<Integer> getRandomNumber(Integer length) {
+		List<Integer> randoms = new ArrayList<>();
+		randoms.add(1);
+		randoms.add(2);
+		randoms.add(3);
+		randoms.add(4);
+		randoms.add(5);
+		randoms.add(6);
+
+		return randoms;
 	}
 }
