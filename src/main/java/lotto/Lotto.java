@@ -26,30 +26,8 @@ public class Lotto {
         return lottoWin;
     }
 
-
-    public void calculateWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
-        int matchNum = this.countWin(winList);
-        boolean matchBonus = this.lottoNum.contains(bonusNumber);
-        this.lottoWin = LottoWin.valueOf(matchNum, matchBonus);
-    }
-
-    private int countWin(List<LottoNumber> winList) {
-        int winNum = 0;
-        for (int i = 0; i < winList.size(); i++) {
-            winNum += this.getWinCount(winList.get(i));
-        }
-        return winNum;
-    }
-
-    private int getWinCount(LottoNumber targetNum) {
-        if (this.isWinNumber(targetNum)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private boolean isWinNumber(LottoNumber targetNum) {
-        return this.lottoNum.contains(targetNum);
+    public void setLottoWin(LottoWin lottoWin) {
+        this.lottoWin = lottoWin;
     }
 
     private static List<LottoNumber> initLottoNum() {

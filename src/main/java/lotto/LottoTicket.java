@@ -20,7 +20,8 @@ public class LottoTicket {
     public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<LottoNumber> winList = winningLotto.value();
         for (Lotto lotto : lottoList) {
-            lotto.calculateWin(winList, bonusNumber);
+            LottoWin lottoWin=LottoWinCompare.compareWinning(lotto.lottoNum(),winList,bonusNumber);
+            lotto.setLottoWin(lottoWin);
         }
     }
 

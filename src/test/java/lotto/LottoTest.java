@@ -20,19 +20,8 @@ class LottoTest {
     @Test
     void lottoWin() {
 
-        for (LottoWin lottoWin : LottoWin.values()) {
-            List<LottoNumber> lottoNum = lotto.lottoNum();
-            List<LottoNumber> targetLottoWinNumber = this.getTargetLottoWinNumber(lottoWin, lottoNum);
-
-            if (lottoWin == LottoWin.SECOND_PLACE) {
-                lotto.calculateWin(targetLottoWinNumber, lottoNum.get(lottoNum.size() - 1));
-            }
-            if (lottoWin != LottoWin.SECOND_PLACE) {
-                lotto.calculateWin(targetLottoWinNumber, getNotWinLottoNumber(targetLottoWinNumber));
-            }
-
-            assertThat(lotto.lottoWin()).isEqualTo(lottoWin);
-        }
+        lotto.setLottoWin(LottoWin.FOURTH_PLACE);
+        assertThat(lotto.lottoWin()).isEqualTo(LottoWin.FOURTH_PLACE);
     }
 
     private List<LottoNumber> getTargetLottoWinNumber(LottoWin lottoWin, List<LottoNumber> baseLottoNumber) {
