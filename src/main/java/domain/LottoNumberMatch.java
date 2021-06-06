@@ -16,10 +16,6 @@ public class LottoNumberMatch {
 		return lotto.rank(Rank.valueOf(matchCount)).countOfMatch();
 	}
 	public static Boolean matchBonus (int bonusBall, Lotto lotto) {
-		if (lotto.contains(bonusBall)) {
-			return Boolean.TRUE;
-		}
-
-		return Boolean.FALSE;
+		return lotto.contains(bonusBall);
 	}
 }
