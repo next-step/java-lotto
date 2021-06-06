@@ -22,12 +22,11 @@ class StringCalculatorTest {
     StringCalculator stringCalculator = new StringCalculator();
 
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
+    @ParameterizedTest
     @NullAndEmptySource
-    @Test
     void emptyOrNull(String test) {
         assertThat(stringCalculator.calculator(test)).isZero();
     }
-
     @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1"})
