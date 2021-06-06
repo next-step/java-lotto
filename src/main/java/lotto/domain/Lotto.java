@@ -6,11 +6,17 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Lotto {
+
+    final static String WHITE_SPACE = " ";
+    final static String EMPTY = "";
+    final static String COMMA_DELIMITER = ",";
+
+
     private List<Integer> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        for (String lottoNumberStr : lottoNumbersStr.split(",| ,")) {
+        for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
             int lottoNumber = Integer.valueOf(lottoNumberStr);
             Lotto.throwIllegalArgumentException_lottoRange(lottoNumber);
             lottoNumbers.add(lottoNumber);
