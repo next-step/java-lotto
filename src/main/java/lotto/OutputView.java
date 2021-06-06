@@ -12,10 +12,10 @@ public class OutputView {
     private static final String TOTAL_MATCH_WORDING_PROFIT = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)";
 
     private static final String LOTTO_WIN_RESULT_WORDING = "당첨 통계\n---------";
-    private static final String LOTTO_BUY_WORDING = "%s개를 구매했습니다.";
+    private static final String LOTTO_BUY_WORDING = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
 
-    public static void printBuyingCount(int num) {
-        System.out.println(format(LOTTO_BUY_WORDING, num));
+    public static void printBuyingCount(int manualNum, int autoNum) {
+        System.out.println(format(LOTTO_BUY_WORDING, manualNum, autoNum));
     }
 
     public static void outputLottoList(LottoTicket lottoTicket) {
