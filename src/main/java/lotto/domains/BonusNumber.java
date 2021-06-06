@@ -5,8 +5,8 @@ import lotto.tool.Converter;
 
 public class BonusNumber {
 
-    public static final int MIN_VALUE = 1;
-    public static final int MAX_VALUE = 45;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
 
     private int bonusNumber;
 

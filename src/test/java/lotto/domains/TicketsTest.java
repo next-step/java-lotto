@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.enums.Prize;
-import lotto.exceptions.EmptyTicketsException;
+import lotto.exceptions.NullTicketsException;
 
 public class TicketsTest {
 
@@ -45,6 +45,35 @@ public class TicketsTest {
         assertThat(tickets.size()).isEqualTo(ticketList.size());
     }
 
+    @DisplayName("실제 결제금 계산")
+    @Test
+    void payment() {
+        assertThat(tickets.payment()).isEqualTo(8000);
+    }
+
+    @DisplayName("두 티켓 목록을 합친다.")
+    @Test
+    void append() {
+        Tickets other = new Tickets(
+            Arrays.asList(
+                new Ticket("1,2,3,5,8,13"),
+                new Ticket("1,2,3,5,8,21")
+            )
+        );
+        int size = other.size();
+        other.append(tickets);
+        assertThat(other.size()).isEqualTo(size + ticketList.size());
+    }
+
+    @DisplayName("빈 티켓 목록을 합친다.")
+    @Test
+    void appendZero() {
+        Tickets one = new Tickets(Collections.emptyList());
+        Tickets other = new Tickets(Collections.emptyList());
+        one.append(other);
+        assertThat(one.size()).isEqualTo(0);
+    }
+
     @DisplayName("당첨된 티켓 수를 센다.")
     @Test
     void countPrize() {
@@ -54,16 +83,9 @@ public class TicketsTest {
     @DisplayName("티켓 리스트가 null이면 에러 발생")
     @Test
     void guard_Null_ExceptionThrown() {
-        assertThatExceptionOfType(EmptyTicketsException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(NullTicketsException.class).isThrownBy(() -> {
             new Tickets(null);
         });
     }
 
-    @DisplayName("티켓 리스트가 크기가 0이면 에러 발생")
-    @Test
-    void guard_Empty_ExceptionThrown() {
-        assertThatExceptionOfType(EmptyTicketsException.class).isThrownBy(() -> {
-            new Tickets(Collections.emptyList());
-        });
-    }
 }
