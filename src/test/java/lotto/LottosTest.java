@@ -49,5 +49,23 @@ public class LottosTest {
 			assertThat(inputNumbers.get(i)).containsSequence(allNumbers.get(i));
 		}
 	}
+
+	@Test
+	@DisplayName("로또 추가")
+	void addLotto() {
+		List<List<Integer>> newNumbers = new ArrayList<>();
+		newNumbers.add(Arrays.asList(12, 18, 22, 26, 36, 37));
+		newNumbers.add(Arrays.asList(5, 22, 31, 32, 36, 37));
+		newNumbers.add(Arrays.asList(13, 24, 26, 33, 41, 42));
+
+		List<Lotto> newLottos = new ArrayList<>();
+		for (List<Integer> numbers : newNumbers) {
+			newLottos.add(new Lotto(numbers));
+		}
+		lottos.add(new Lottos(newLottos));
+
+		newNumbers.addAll(inputNumbers);
+		assertThat(lottos.allNumbers()).containsAnyElementsOf(newNumbers);
+	}
 }
 
