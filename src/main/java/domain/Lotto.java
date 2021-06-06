@@ -24,6 +24,10 @@ public class Lotto {
 		return numbers;
 	}
 
+	public Boolean contains(int ballNumber) {
+		return this.numbers.contains(ballNumber);
+	}
+
 	public Rank rank (Rank rank) {
 		return this.rank = rank;
 	}
