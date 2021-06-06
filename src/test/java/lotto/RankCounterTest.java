@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankCounterTest {
@@ -22,14 +24,14 @@ public class RankCounterTest {
     @BeforeEach
     public void setUp(){
         lottoList = new LottoList(
-                new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)) // 1등
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(10)) // 2등
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(11)) // 3등
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(20), new Number(21)) // 4등
-                , new Lotto(new Number(1), new Number(2), new Number(3), new Number(20), new Number(21), new Number(22)) // 5등
+                new Lotto(Arrays.asList(1,2,3,4,5,6)) // 1등
+                , new Lotto(Arrays.asList(1,2,3,4,5,10)) // 2등
+                , new Lotto(Arrays.asList(1,2,3,4,5,11)) // 3등
+                , new Lotto(Arrays.asList(1,2,3,4,20,21)) // 4등
+                , new Lotto(Arrays.asList(1,2,3,20,21,22)) // 5등
         );
-        winningLotto = new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6));
-        bonusNumber = new Number(10);
+        winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        bonusNumber = Number.of(10);
     }
 
     @Test
@@ -55,7 +57,7 @@ public class RankCounterTest {
             assertThat(integer).isNull();
         });
 
-        lottoList = new LottoList(new Lotto(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6))); // 1등
+        lottoList = new LottoList(new Lotto(Arrays.asList(1,2,3,4,5,6))); // 1등
         rankCounter.counting(lottoList, winningLotto, bonusNumber);
         rankCounter.entryForEach((rank, integer) -> {
             assertThat(rank.winningMoney()).isEqualTo(Rank.FIRST.winningMoney());

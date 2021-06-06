@@ -14,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumbersGeneratorTest {
 
-    private LottoNumbersGenerator lottoNumbersGenerator;
+    private LottoNumbersGenerator autoGenerator;
 
     @BeforeEach
     public void setup(){
-        lottoNumbersGenerator = new AutomaticLottoNumbersGenerator();
+        autoGenerator = new AutomaticLottoNumbersGenerator();
     }
 
     @Test
     @DisplayName("로또 자동 생성기 테스트")
-    public void 자동_로또_생성(){
-        List<Number> numbers = lottoNumbersGenerator.generateNumber();
+    public void 자동_로또_넘버_생성(){
+        List<Number> numbers = autoGenerator.generateNumber();
         assertThat(numbers.size()).isEqualTo(6);
         for (Number number : numbers) {
-            assertThat(number).isBetween(new Number(1), new Number(45));
+            assertThat(number).isBetween(Number.of(1), Number.of(45));
         }
     }
 
     @Test
     @DisplayName("로또 정렬 기능 테스트")
     public void 로또_정렬_확인(){
-        List<Number> numbers = lottoNumbersGenerator.generateNumber();
-        lottoNumbersGenerator.sortNumbers(numbers);
+        List<Number> numbers = autoGenerator.generateNumber();
+        autoGenerator.sortNumbers(numbers);
         Number number;
         Number nextNumber;
         for (int i = 0; i < (numbers.size() - 1) ; i++) {

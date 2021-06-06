@@ -21,11 +21,11 @@ public enum Rank {
         this.matchBonus = matchBonus;
     }
 
-    private int getCountOfMatch() {
+    private int countOfMatch() {
         return countOfMatch;
     }
 
-    private boolean getMatchBonus() {
+    private boolean matchBonus() {
         return matchBonus;
     }
 
@@ -35,13 +35,13 @@ public enum Rank {
 
     public static Rank valueOfCountWithMatchBonus(int count, boolean matchBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getCountOfMatch() == count && rank.getMatchBonus() == isMatchBonus(rank, matchBonus))
+                .filter(rank -> rank.countOfMatch() == count && rank.matchBonus() == isMatchBonus(rank, matchBonus))
                 .findAny()
                 .orElse(Rank.MISS);
     }
 
     private static boolean isMatchBonus(Rank rank, boolean matchBonus) {
-        return rank.getCountOfMatch() == 5 && matchBonus;
+        return rank.countOfMatch() == 5 && matchBonus;
     }
 
     @Override
