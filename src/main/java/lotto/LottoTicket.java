@@ -13,6 +13,19 @@ public class LottoTicket {
         }
     }
 
+    public LottoTicket(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
+    public void addLotto(int num) {
+        if (lottoList == null) {
+            lottoList = new ArrayList<>();
+        }
+        for (int i = 0; i < num; i++) {
+            lottoList.add(new Lotto());
+        }
+    }
+
     public List<Lotto> lottoList() {
         return lottoList;
     }
@@ -20,7 +33,7 @@ public class LottoTicket {
     public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<LottoNumber> winList = winningLotto.value();
         for (Lotto lotto : lottoList) {
-            LottoWin lottoWin=LottoWinCompare.compareWinning(lotto.lottoNum(),winList,bonusNumber);
+            LottoWin lottoWin = LottoWinCompare.compareWinning(lotto.lottoNum(), winList, bonusNumber);
             lotto.setLottoWin(lottoWin);
         }
     }
