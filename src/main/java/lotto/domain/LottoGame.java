@@ -30,7 +30,6 @@ public class LottoGame {
         return winningLottoNumbers;
     }
 
-
     public WinningStatistics getWinning() {
         List<Rank> list = new ArrayList<>();
         for (Lotto lotto : lottoList) {
@@ -63,13 +62,11 @@ public class LottoGame {
         return numberOfWinnings;
     }
 
-
     public void getManualLotto(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
             Lotto lotto = new Lotto(manualLottoStr);
             lottoList.add(lotto);
         }
     }
-
 
 }
