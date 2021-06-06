@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class WinningStatistics {
@@ -13,13 +14,10 @@ public class WinningStatistics {
         return statistics;
     }
 
-    public double yield() {
-        double yield = purchaseAmount() / total();
+    public String yield() {
+        BigDecimal yield = new BigDecimal(purchaseAmount()).divide(new BigDecimal(total()),2);
 
-        if (Double.isInfinite(yield)) {
-            return 0;
-        }
-        return yield;
+        return yield.toString();
     }
 
     private double purchaseAmount() {
