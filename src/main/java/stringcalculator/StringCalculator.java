@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    final static int ZERO=0;
+    final static int ZERO = 0;
 
     public int calculator(String str) {
         int result;
@@ -19,7 +19,7 @@ public class StringCalculator {
     }
 
     private String emptyOrNull(String str) {
-        if (str == null || str == "") {
+        if (str == null || str.equals("")) {
             str = "0";
         }
         return str;
