@@ -8,12 +8,12 @@ public class LottoGame {
     LottoList lottoList = new LottoList();
     WinningLottoNumbers winningLottoNumbers;
 
+    LottoMachine lottoMachine = new LottoMachine();
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
     }
 
     public Lotto getLotto() {
-        LottoMachine lottoMachine = new LottoMachine();
         return lottoMachine.getAutoLotto();
     }
 
@@ -29,6 +29,7 @@ public class LottoGame {
 
         return winningLottoNumbers;
     }
+
 
     public WinningStatistics getWinning() {
         List<Rank> list = new ArrayList<>();
@@ -62,11 +63,12 @@ public class LottoGame {
         return numberOfWinnings;
     }
 
-    public void getManualLotto(List<String> manualLottoList) {
+
+    public void getManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
-            Lotto lotto = new Lotto(manualLottoStr);
-            lottoList.add(lotto);
+            lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
         }
     }
+
 
 }
