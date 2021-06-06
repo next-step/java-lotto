@@ -18,7 +18,7 @@ public class WinningLottoNumbers {
     public LottoNumbers parsingInputString(String inputLastWonLottoNumberString) {
 
         String[] numbers = inputLastWonLottoNumberString.split(",");
-        winningLottoNumbers = new LottoNumbers(numbers);
+        winningLottoNumbers = LottoNumbers.generateWinningLottoOf(numbers);
         return winningLottoNumbers;
     }
 

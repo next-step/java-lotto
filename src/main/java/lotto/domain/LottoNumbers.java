@@ -10,14 +10,26 @@ import java.util.Set;
 public class LottoNumbers {
     private List<LottoNo> lottoNumbers;
 
-    public LottoNumbers(int[] numbers) {
+    public static LottoNumbers generateManualOf(int[] numbers) {
+        return new LottoNumbers(numbers);
+    }
+
+    public static LottoNumbers generateAutoOf(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+        return new LottoNumbers(new LottoNumberGenerator());
+    }
+
+    public static LottoNumbers generateWinningLottoOf(String[] numbers) {
+        return new LottoNumbers(numbers);
+    }
+
+    private LottoNumbers(int[] numbers) {
         lottoNumbers = new ArrayList<LottoNo>();
         for (int number : numbers)
             lottoNumbers.add(new LottoNo(number));
         validateLottoNumbers();
     }
 
-    public LottoNumbers(String[] numbers) {
+    private LottoNumbers(String[] numbers) {
         lottoNumbers = new ArrayList<LottoNo>();
         for (String number : numbers)
             lottoNumbers.add(new LottoNo(Integer.parseInt(number)));
@@ -36,7 +48,7 @@ public class LottoNumbers {
             throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
     }
 
-    public LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+    private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         lottoNumbers = new ArrayList<LottoNo>();
         lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();
     }

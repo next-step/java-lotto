@@ -71,7 +71,8 @@ public class InputView {
         for (int i = 0; i < stringNumbers.length; i++) {
             intNumbers[i] = Integer.parseInt(stringNumbers[i]);
         }
-        LottoNumbers lottoNumbers = new LottoNumbers(intNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.generateManualOf(intNumbers);
+
         return lottoNumbers;
     }
 
