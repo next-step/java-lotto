@@ -15,7 +15,10 @@ public class WinningStatistics {
     }
 
     public String yield() {
-        BigDecimal yield = new BigDecimal(purchaseAmount()).divide(new BigDecimal(total()),2);
+
+        BigDecimal purchaseAmount =  new BigDecimal(String.valueOf(purchaseAmount()));
+        BigDecimal total = new BigDecimal(String.valueOf(total()));
+        BigDecimal yield =total.divide(purchaseAmount,2,BigDecimal.ROUND_DOWN);
 
         return yield.toString();
     }
