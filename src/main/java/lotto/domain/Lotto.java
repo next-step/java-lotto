@@ -11,7 +11,6 @@ public class Lotto {
     final static String EMPTY = "";
     final static String COMMA_DELIMITER = ",";
 
-
     private List<Integer> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
