@@ -27,11 +27,19 @@ public final class Number implements Comparable<Number> {
     }
 
     public static Number of(String text) {
+        validateStringToNumber(text);
         return of(Integer.parseInt(text));
     }
 
-    private static void validate(int number){
-        if(numbers.get(number) == null){
+    private static void validateStringToNumber(String text) {
+        String numberPattern = "[+-]?\\d*(\\.\\d+)?";
+        if (!text.matches(numberPattern)) {
+            throw new NumberFormatException("숫자만 입력 가능합니다.");
+        }
+    }
+
+    private static void validate(int number) {
+        if (numbers.get(number) == null) {
             throw new IllegalArgumentException("로또 숫자 범위는 1 ~ 45 사이입니다.");
         }
     }

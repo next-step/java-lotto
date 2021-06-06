@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.entity.LottoList;
 import lotto.domain.entity.LottoPrice;
+import lotto.domain.generator.AutomaticLottoNumbersGenerator;
 
 import java.math.BigDecimal;
 
@@ -32,11 +33,11 @@ public final class LottoStore {
     }
 
     private LottoList generateLotto(int automaticLottoPurchaseCount) {
-        return new LottoList(automaticLottoPurchaseCount);
+        return new LottoList(automaticLottoPurchaseCount, new AutomaticLottoNumbersGenerator());
     }
 
     private LottoList generateLotto(int automaticLottoPurchaseCount, Lotto[] manualLottos) {
-        return new LottoList(automaticLottoPurchaseCount, manualLottos);
+        return new LottoList(automaticLottoPurchaseCount, new AutomaticLottoNumbersGenerator(), manualLottos);
     }
 
 }

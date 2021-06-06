@@ -10,24 +10,26 @@ import static lotto.view.InputView.*;
 import static lotto.view.OutputView.*;
 
 public final class LottoController {
-    private LottoStore lottoStore;
-    private LottoList lottoList;
+    private final LottoStore lottoStore;
+
+    public LottoController(LottoStore lottoStore) {
+        this.lottoStore = lottoStore;
+    }
 
     public void start() {
-        purchasing();
-        printReceiveWinningNumber();
-        statistics();
+        statistics(lottoStore, purchasing(lottoStore));
     }
-    private void purchasing() {
+
+    private LottoList purchasing(LottoStore lottoStore) {
         printBuyLotto();
         LottoBuyer lottoBuyer = new LottoBuyer(receivePurchaseAmount());
-        lottoStore = new LottoStore();
         printManualLottoSize();
         int manualLottoSize = receiveManualLottoSize();
         printManualLottoNumbers();
-        lottoList = lottoStore.toSell(lottoBuyer.payMoney(), receiveManualLottoNumberOfPurchases(manualLottoSize));
+        LottoList lottoList = lottoStore.toSell(lottoBuyer.payMoney(), receiveManualLottoNumberOfPurchases(manualLottoSize));
         printPurchaseCompletion(manualLottoSize, lottoList.size() - manualLottoSize);
         printLottoList(lottoList);
+        return lottoList;
     }
 
     private Number bonus() {
@@ -35,10 +37,10 @@ public final class LottoController {
         return receiveBonusNumber();
     }
 
-    private void statistics() {
+    private void statistics(LottoStore lottoStore, LottoList lottoList) {
+        printReceiveWinningNumber();
         Result result = new Result(receiveWinningNumbers(), bonus());
         result.confirm(lottoList, lottoStore.price());
         printStatistics(result.profitRate(), result.rank());
     }
-
 }

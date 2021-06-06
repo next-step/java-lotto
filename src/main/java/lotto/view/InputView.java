@@ -17,7 +17,7 @@ public final class InputView {
     }
 
     public static Lotto receiveWinningNumbers() {
-        return stringToLottos();
+        return stringToLotto();
     }
 
     public static Number receiveBonusNumber() {
@@ -41,10 +41,10 @@ public final class InputView {
     }
 
     private static Lotto receiveManualLottoNumbers() {
-        return stringToLottos();
+        return stringToLotto();
     }
 
-    private static Lotto stringToLottos() {
+    private static Lotto stringToLotto() {
         String[] receiveNumbers = SCANNER.nextLine()
                 .replaceAll(" ", "")
                 .split(",");
