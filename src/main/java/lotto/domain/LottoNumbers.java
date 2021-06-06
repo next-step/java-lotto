@@ -58,10 +58,18 @@ public class LottoNumbers {
     }
 
     public boolean contains(int number) {
+        boolean result = false;
         for (LottoNo lottoNo : lottoNumbers) {
-            if (lottoNo.lottNo() == number)
-                return true;
+            result = isSame(lottoNo, number, result);
         }
+        return result;
+    }
+
+    private boolean isSame(LottoNo lottoNo, int number, boolean result) {
+        if (result == true)
+            return true;
+        if (lottoNo.lottNo() == number && result == false)
+            return true;
         return false;
     }
 

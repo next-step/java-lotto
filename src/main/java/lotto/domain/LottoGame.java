@@ -1,4 +1,5 @@
 package lotto.domain;
+
 import lotto.common.Constant;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -21,13 +22,13 @@ public class LottoGame {
         WinningLottoNumbers winningLottoNumbers = generateWinningLottoNumbers();
 
         ResultAllLottoScores resultAllLottoScores = new ResultAllLottoScores();
-        for (int i=0; i<lottoNumbersList.count(); i++)
+        for (int i = 0; i < lottoNumbersList.count(); i++)
             resultAllLottoScores.updateResult(winningLottoNumbers.matchLottoNumbers((lottoNumbersList.lottoNumberList(i))));
         resultView.printLottoGameResult(resultAllLottoScores, inputMoney);
     }
 
     public WinningLottoNumbers generateWinningLottoNumbers() {
-        String inputWinningLottoNumbers =  inputView.inputWinningLottoNumbers();
+        String inputWinningLottoNumbers = inputView.inputWinningLottoNumbers();
         String inputBonusLottoNumber = inputView.inputBonusLottoNumber();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputWinningLottoNumbers, inputBonusLottoNumber);
         return winningLottoNumbers;
@@ -46,14 +47,14 @@ public class LottoGame {
     }
 
     public LottoNumbersList generateManualLottoNumbersList(LottoNumbersList lottoNumbersList, int manualBuyLottoCount) {
-        LottoNumbers[] lottoNumbers  = inputView.inputManualLottoNumbers(manualBuyLottoCount);
-        for (int i=0; i<lottoNumbers.length; i++)
+        LottoNumbers[] lottoNumbers = inputView.inputManualLottoNumbers(manualBuyLottoCount);
+        for (int i = 0; i < lottoNumbers.length; i++)
             lottoNumbersList.appendLottoNumber(lottoNumbers[i]);
         return lottoNumbersList;
     }
 
     public LottoNumbersList generateAutoLottoNumbersLit(LottoNumbersList lottoNumbersList, int autoBuyLottoCount) {
-        for( int i=0; i<autoBuyLottoCount; i++)
+        for (int i = 0; i < autoBuyLottoCount; i++)
             lottoNumbersList.appendLottoNumber(LottoNumbers.generateAutoOf(new LottoNumberGenerator()));
 
         return lottoNumbersList;

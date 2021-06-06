@@ -51,7 +51,7 @@ public class InputView {
         for (int i = 0; i < manualBuyLottoCount; i++)
             manualLottoNumbers[i] = scan.next();
 
-        LottoNumbers[]  lottoNumbersArray = convertingStringToLottoNumbersArray(manualLottoNumbers);
+        LottoNumbers[] lottoNumbersArray = convertingStringToLottoNumbersArray(manualLottoNumbers);
         return lottoNumbersArray;
     }
 
