@@ -7,4 +7,7 @@ public class LottoConstants {
     final static int LOTTO_MIN_NUM = 1;
     final static int LOTTO_SELECT_NUM = 6;
 
+    private LottoConstants() {
+        throw new AssertionError();
+    }
 }
