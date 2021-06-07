@@ -4,24 +4,22 @@ import java.util.Objects;
 
 public class Profit {
 
-    public static final int MINIMUM_JACKPOT = 1;
-
     private final double profit;
 
-    public Profit(Money money, int jackpot) {
+    public Profit(Money money, Money jackpot) {
         validateJackpot(jackpot);
 
-        this.profit = money.divide(jackpot);
-    }
-
-    private void validateJackpot(int jackpot) {
-        if (jackpot < MINIMUM_JACKPOT) {
-            throw new IllegalArgumentException("수익은 1보다 작을 수 없습니다. : " + jackpot);
-        }
+        this.profit = jackpot.divide(money);
     }
 
     public Profit(double profit) {
         this.profit = profit;
+    }
+
+    private void validateJackpot(Money jackpot) {
+        if (jackpot.isBiggerThanMinimumJackpot()) {
+            throw new IllegalArgumentException("수익은 1보다 작을 수 없습니다. : " + jackpot);
+        }
     }
 
     @Override

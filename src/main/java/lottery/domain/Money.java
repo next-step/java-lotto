@@ -6,6 +6,7 @@ public class Money {
 
     public static final int MINIMUM_PRICE = 0;
     public static final int DEFAULT_LOTTERY_PRICE = 1_000;
+    public static final int MINIMUM_JACKPOT = 1;
 
     private final int money;
 
@@ -15,14 +16,18 @@ public class Money {
         this.money = money;
     }
 
-    public int divide(int inputMoney) {
-        return money / inputMoney;
+    public int divide(Money inputMoney) {
+        return money / inputMoney.money;
     }
 
     private void validatePrice(int price) {
         if (price < MINIMUM_PRICE) {
             throw new IllegalArgumentException("금액은 0원이상 이어야 합니다.");
         }
+    }
+
+    boolean isBiggerThanMinimumJackpot() {
+        return money < MINIMUM_JACKPOT;
     }
 
     @Override
