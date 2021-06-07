@@ -4,6 +4,8 @@ import lottery.domain.*;
 import lottery.view.Reception;
 import lottery.view.ResultView;
 
+import static lottery.domain.Money.DEFAULT_LOTTERY_PRICE;
+
 public class LotteryStore {
     public static void main(String[] args) {
         Money money = receiptPrice();
@@ -38,7 +40,7 @@ public class LotteryStore {
     }
 
     private static GenerateCount generateCount(Money money) {
-        GenerateCount generateCount = new GenerateCount(money.calculatePerLottery());
+        GenerateCount generateCount = new GenerateCount(money.divide(DEFAULT_LOTTERY_PRICE));
         ResultView.printGenerateCount(generateCount);
         return generateCount;
     }

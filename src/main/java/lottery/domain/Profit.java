@@ -10,7 +10,8 @@ public class Profit {
 
     public Profit(Money money, int jackpot) {
         validateJackpot(jackpot);
-        this.profit = calculate(money, jackpot);
+
+        this.profit = money.divide(jackpot);
     }
 
     private void validateJackpot(int jackpot) {
@@ -21,10 +22,6 @@ public class Profit {
 
     public Profit(double profit) {
         this.profit = profit;
-    }
-
-    private double calculate(Money inputMoney, int jackpot) {
-        return (double) jackpot / inputMoney.toDouble();
     }
 
     @Override
