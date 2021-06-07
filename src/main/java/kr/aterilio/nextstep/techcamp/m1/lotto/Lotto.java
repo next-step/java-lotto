@@ -59,7 +59,7 @@ public class Lotto {
     }
 
     private void validateElementCount(Integer[] elements) {
-        if (elements.length < LOTTO_ELEMENT_COUNT) {
+        if (elements.length != LOTTO_ELEMENT_COUNT) {
             throw new IllegalArgumentException(MSG_ERR_REQUIRED_ELEMENT_COUNT);
         }
     }
