@@ -9,8 +9,8 @@ public class ResultView {
     public static final String PRINT_RESULT = "당첨 통계";
     public static final String PRINT_TOTAL_EARNING_RATE = "총 수익률은 %.2f입니다.%n";
 
-    public void printLottoCount(int manualLottoCount, LottoPrice balanceLottoPrice) {
-        System.out.printf(PRINT_BUY_LOTTO_COUNT, manualLottoCount, balanceLottoPrice.lottoCount());
+    public void printLottoCount(LottoPrice manualLottoPrice, LottoPrice balanceLottoPrice) {
+        System.out.printf(PRINT_BUY_LOTTO_COUNT, manualLottoPrice.lottoCount(), balanceLottoPrice.lottoCount());
     }
 
     public void printLottoNumbers(Lottos lottos) {

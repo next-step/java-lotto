@@ -26,16 +26,16 @@ public class InputView {
         return new LottoPrice(Integer.parseInt(scanner.nextLine()));
     }
 
-    public int inputManualLottoCount() {
+    public LottoPrice inputManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT);
-        return Integer.parseInt(scanner.nextLine());
+        return new LottoPrice(Integer.parseInt(scanner.nextLine()) * LottoPrice.LOTTO_PRICE);
     }
 
-    public Lottos inputManualLottos(int manualLottoCount) {
+    public Lottos inputManualLottos(LottoPrice manualLottoPrice) {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
 
         List<Lotto> lottosList = new ArrayList<>();
-        for (int count = 0; count < manualLottoCount; count++) {
+        for (int count = 0; count < manualLottoPrice.lottoCount(); count++) {
             List<Integer> lottoNumbers =
                     Arrays.stream(
                             scanner.nextLine().split(LOTTO_NUMBER_SEPARATOR))
