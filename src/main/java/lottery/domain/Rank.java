@@ -19,18 +19,15 @@ public enum Rank {
         this.profit = profit;
     }
 
-    public static Rank valueOf(int matchCount) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> isSameMatchCount(matchCount, rank))
-                .findFirst()
-                .orElse(FAIL);
-    }
-
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         if (matchBonus && isSameMatchCount(matchCount, SECOND)) {
             return SECOND;
         }
 
+        return valueOf(matchCount);
+    }
+
+    public static Rank valueOf(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> isSameMatchCount(matchCount, rank))
                 .findFirst()
