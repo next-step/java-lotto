@@ -19,6 +19,10 @@ public class ResultView {
     public static final int START_INDEX = 0;
     public static final int LINE_DELIMITER_SIZE = 7;
 
+    public static void printToReceiptBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public static void printResultProfit(String profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
     }

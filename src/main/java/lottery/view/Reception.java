@@ -37,7 +37,7 @@ public class Reception {
         return scanner.nextLine();
     }
 
-    public static Integer receiptNumber() {
+    public static int receiptNumber() {
         Scanner scanner = makeScanner();
         return scanner.nextInt();
     }

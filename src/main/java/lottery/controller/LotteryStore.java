@@ -16,12 +16,16 @@ public class LotteryStore {
 
         WinnerLottery winnerLottery = receiptWinnerLottery(lotteries);
 
-        int bonusBall = 0;
-        MatchCountPair matchCountPair = lotteries.match(winnerLottery, bonusBall);
+        MatchCountPair matchCountPair = lotteries.match(winnerLottery, receiptBonusBall());
 
         ResultView.printToStatisticWinner();
 
         calculateAndPrintProfit(money, matchCountPair);
+    }
+
+    private static int receiptBonusBall() {
+        ResultView.printToReceiptBonusBall();
+        return Reception.receiptNumber();
     }
 
     private static WinnerLottery receiptWinnerLottery(Lotteries lotteries) {
