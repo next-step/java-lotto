@@ -6,8 +6,7 @@ import java.util.TreeMap;
 public class LottoResult {
 
     private static final int DEFAULT_COUNT = 0;
-    private static final int EMPTY_COUNT = 0;
-    private static final String MSG_PRIZE_NONE = "당첨된 내역이 없습니다.\n";
+    private static final int INIT_COUNT = 0;
 
     private int prizeMoney = 0;
     private float rateOfReturn = 0.f;
@@ -27,15 +26,22 @@ public class LottoResult {
     }
 
     private void collects(Map<Integer, Integer> matchResult) {
-        matchCounts.clear();
+        clear();
         for(Map.Entry<Integer, Integer> entry : matchResult.entrySet()) {
             RESULT_RANK rank = RESULT_RANK.valueOf(entry.getKey());
             collectByRank(rank, entry.getValue());
         }
     }
 
+    private void clear() {
+        matchCounts.clear();
+        for(RESULT_RANK rank : RESULT_RANK.values()) {
+            collectByRank(rank, INIT_COUNT);
+        }
+    }
+
     private void collectByRank(RESULT_RANK rank, Integer count) {
-        if (rank == RESULT_RANK.RANK_NONE || count == EMPTY_COUNT) {
+        if (rank == RESULT_RANK.RANK_NONE) {
             return;
         }
         matchCounts.put(rank, count);
@@ -60,18 +66,7 @@ public class LottoResult {
         return prizeMoney;
     }
 
-    public boolean none() {
-        return matchCounts.isEmpty();
-    }
-
     public String detail() {
-        if (none()) {
-            return MSG_PRIZE_NONE;
-        }
-        return makeDetail();
-    }
-
-    private String makeDetail() {
         StringBuilder sb = new StringBuilder();
         for(Map.Entry<RESULT_RANK, Integer> entry : matchCounts.entrySet()) {
             sb.append(String.format("%s - %d개\n", entry.getKey().detail(), entry.getValue()));

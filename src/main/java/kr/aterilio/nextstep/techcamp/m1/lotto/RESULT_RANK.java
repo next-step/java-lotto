@@ -8,6 +8,8 @@ public enum RESULT_RANK {
     RANK_MATCH_5(5, 1_500_000),
     RANK_MATCH_6(6, 2_000_000_000);
 
+    private static final String DETAIL_NONE = "";
+    
     private final int matchCount;
     private final int prizeMoney;
 
@@ -36,6 +38,9 @@ public enum RESULT_RANK {
     }
 
     public String detail() {
+        if (this == RESULT_RANK.RANK_NONE) {
+            return DETAIL_NONE;
+        }
         return String.format("%d개 일치(%d원)", matchCount, prizeMoney);
     }
 }
