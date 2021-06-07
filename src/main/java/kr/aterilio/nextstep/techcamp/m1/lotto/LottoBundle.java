@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class LottoBundle {
 
-    public static final int INTERVAL_COUNT_INCREASE = 1;
-    public static final int PRICE_PER_LOTTO = 1000;
-    public static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
+    private static final int INTERVAL_COUNT_INCREASE = 1;
+    private static final int PRICE_PER_LOTTO = 1000;
+    private static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
 
     private final List<Lotto> lottoBundle = new ArrayList<>();
 

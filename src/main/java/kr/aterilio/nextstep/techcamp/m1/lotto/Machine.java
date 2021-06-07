@@ -7,11 +7,11 @@ import java.util.stream.IntStream;
 
 public class Machine {
 
-    public static final int IDX_START = 0;
-    public static final int IDX_END_NOT_CLOSED = 6;
+    private static final int IDX_START = 0;
+    private static final int IDX_END_NOT_CLOSED = 6;
 
     private static final List<Integer> numberPool;
-    public static final Integer[] EMPTY_INT_ARRAY = {0};
+    private static final Integer[] EMPTY_INT_ARRAY = {0};
 
     static {
         numberPool = IntStream.rangeClosed(Lotto.LOTTO_BALL_MIN, Lotto.LOTTO_BALL_MAX)

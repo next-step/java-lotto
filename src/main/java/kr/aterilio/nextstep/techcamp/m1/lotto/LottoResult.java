@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LottoResult {
 
-    public static final int DEFAULT_COUNT = 0;
+    private static final int DEFAULT_COUNT = 0;
 
     private int prizeMoney = 0;
     private float rateOfReturn = 0.f;
