@@ -19,8 +19,8 @@ public class LottoPrice {
         return money / LOTTO_PRICE;
     }
 
-    public LottoPrice differenceLottoPrice(int manualLottoCount) {
-        return new LottoPrice(this.money - manualLottoCount * LOTTO_PRICE);
+    public LottoPrice differenceLottoPrice(LottoPrice manualLottoPrice) {
+        return new LottoPrice(this.money - manualLottoPrice.lottoCount() * LOTTO_PRICE);
     }
 
     @Override
