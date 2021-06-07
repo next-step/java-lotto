@@ -1,22 +1,32 @@
 package domain.lotto;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public enum Rank{//class Rank {
-    FIRST(6,false, 10_000),
-    SECOND(5,true, 5_000);
-    //private static final Rank FIRST = new Rank(6,false,10_000);
-    private final int matchCount;
-    private final boolean matchBonus;
-    private final int price;
-    private Rank(final int matchCount, final boolean matchBonus, final int price){
-        this.matchCount  = matchCount;
-        this.matchBonus = matchBonus;
-        this.price  =price;
+public class Rank {
+    private List<Match> matches = new ArrayList<>();
+
+    public List<Match> rankCondition(List<Integer> resultCount) {
+        for (int resultOne : resultCount) {
+            if (resultOne == 0 || resultOne == 1 || resultOne == 2) {
+                matches.add(Match.NONE);
+            }
+            if (resultOne == 3) {
+                matches.add(Match.FIFTH);
+            }
+            if (resultOne == 4) {
+                matches.add(Match.FOURTH);
+            }
+            if (resultOne == 5) {
+                matches.add(Match.THIRD);
+            }
+            if (resultOne == 7) {
+                matches.add(Match.SECOND);
+            }
+            if (resultOne == 6) {
+                matches.add(Match.FIRST);
+            }
+        }
+        return matches;
     }
-    public int getMatchCount(){
-        return this.matchCount;
-    }
-
-
 }
