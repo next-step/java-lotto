@@ -1,5 +1,6 @@
 package lottery.view;
 
+import lottery.domain.BonusBall;
 import lottery.domain.LotteryNumbers;
 import lottery.domain.Money;
 import lottery.domain.WinnerLottery;
@@ -12,6 +13,10 @@ import java.util.Scanner;
 public class Reception {
 
     public static final String INPUT_DELIMITER = ",";
+
+    public static BonusBall receiptBonusBall(WinnerLottery winnerLottery) {
+        return new BonusBall(winnerLottery, receiptNumber());
+    }
 
     public static Money receiptPrice() {
         return new Money(receiptNumber());
