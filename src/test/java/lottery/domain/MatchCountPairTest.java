@@ -18,7 +18,7 @@ class MatchCountPairTest {
             new LotteryNumbers(List.of(9, 4, 12, 23, 29, 35))
     );
 
-    private final MatchCountPair MATCH_PAIR = new MatchCountPair(WINNER_LOTTERY, LOTTERIES);
+    private final MatchCountPair MATCH_PAIR = new MatchCountPair(WINNER_LOTTERY, LOTTERIES, 20);
 
     @Test
     @DisplayName("맞춘 개수에 대한 건수를 증가시킨다.")

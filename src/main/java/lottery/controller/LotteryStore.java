@@ -16,7 +16,8 @@ public class LotteryStore {
 
         WinnerLottery winnerLottery = receiptWinnerLottery(lotteries);
 
-        MatchCountPair matchCountPair = lotteries.match(winnerLottery);
+        int bonusBall = 0;
+        MatchCountPair matchCountPair = lotteries.match(winnerLottery, bonusBall);
 
         ResultView.printToStatisticWinner();
 
@@ -31,7 +32,7 @@ public class LotteryStore {
     private static void calculateAndPrintProfit(Money money, MatchCountPair matchCountPair) {
         int jackpot = matchCountPair.calculateTotalJackpot();
         ResultView.printMatchCountAndProfit(matchCountPair);
-        ResultView.printResultProfit(new Profit(money, jackpot).toString());
+        ResultView.printResultProfit(new Profit(money, new Money(jackpot)).toString());
     }
 
     private static WinnerLottery receiptWinnerLottery() {
@@ -40,7 +41,7 @@ public class LotteryStore {
     }
 
     private static GenerateCount generateCount(Money money) {
-        GenerateCount generateCount = new GenerateCount(money.divide(DEFAULT_LOTTERY_PRICE));
+        GenerateCount generateCount = new GenerateCount(money.divide(new Money(DEFAULT_LOTTERY_PRICE)));
         ResultView.printGenerateCount(generateCount);
         return generateCount;
     }
