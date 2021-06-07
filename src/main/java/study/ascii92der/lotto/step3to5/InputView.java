@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static final String INPUT_MONEY = "구입금액을 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     public static final String INPUT_WINNER_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-
+    public static final String LOTTO_NUMBER_SEPARATOR = ",";
     private final Scanner scanner;
 
     public InputView(InputStream inputStream) {
@@ -20,6 +23,26 @@ public class InputView {
     public LottoPrice inputMoney() {
         System.out.println(INPUT_MONEY);
         return new LottoPrice(Integer.parseInt(scanner.nextLine()));
+    }
+
+    public int inputManualLottoCount() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public Lottos inputManualLottos(int manualLottoCount) {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
+
+        List<Lotto> lottosList = new ArrayList<>();
+        for (int count = 0; count < manualLottoCount; count++) {
+            List<Integer> lottoNumbers =
+                    Arrays.stream(
+                            scanner.nextLine().split(LOTTO_NUMBER_SEPARATOR))
+                            .map(Integer::parseInt)
+                            .collect(Collectors.toList());
+            lottosList.add(new Lotto(lottoNumbers));
+        }
+        return new Lottos(lottosList);
     }
 
     public Lotto inputWinnerNumbers() {
