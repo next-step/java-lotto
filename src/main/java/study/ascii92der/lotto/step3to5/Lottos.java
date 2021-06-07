@@ -22,4 +22,9 @@ public class Lottos {
         lottos.forEach(lotto -> sb.append(lotto.toString()));
         return sb.toString();
     }
+
+    public Lottos merge(Lottos manualLottos) {
+        this.lottos.addAll(manualLottos.lottos);
+        return this;
+    }
 }
