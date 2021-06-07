@@ -34,4 +34,8 @@ public enum RESULT_RANK {
     public int prize() {
         return this.prizeMoney;
     }
+
+    public String detail() {
+        return String.format("%d개 일치(%d원)", matchCount, prizeMoney);
+    }
 }

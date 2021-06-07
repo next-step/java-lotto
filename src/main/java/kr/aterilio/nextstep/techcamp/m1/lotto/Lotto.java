@@ -67,4 +67,8 @@ public class Lotto {
     public int count() {
         return lottoBalls.size();
     }
+
+    public String join() {
+        return lottoBalls.toString();
+    }
 }

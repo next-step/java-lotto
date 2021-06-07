@@ -49,4 +49,16 @@ public class LottoBundle {
     public int paid() {
         return lottoBundle.size() * PRICE_PER_LOTTO;
     }
+
+    public String join() {
+        StringBuilder sb = new StringBuilder();
+        for(Lotto lotto : lottoBundle) {
+            sb.append(lotto.join()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public boolean empty() {
+        return lottoBundle.isEmpty();
+    }
 }
