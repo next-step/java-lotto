@@ -5,18 +5,19 @@ import java.util.TreeMap;
 
 public class LottoResult {
 
-    private static final int DEFAULT_COUNT = 0;
-    private static final int INIT_COUNT = 0;
+    private static final int EMPTY_COUNT = 0;
+    private static final int EMPTY_PAID = 0;
+    private static final float NONE_RETURN_RATE = 0.f;
 
-    private int prizeMoney = 0;
-    private float rateOfReturn = 0.f;
+    private final int prizeMoney;
+    private final float rateOfReturn;
 
     private final Map<ResultRank, Integer> matchCounts;
 
     public LottoResult(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
         matchCounts = judge(luckyNumbers, lottoBundles);
         prizeMoney = calculatePrizeMoney(matchCounts);
-        rateOfReturn = calculateRateOfReturn(lottoBundles.paid());
+        rateOfReturn = calculateRateOfReturn(prizeMoney, lottoBundles.paid());
     }
 
     private Map<ResultRank, Integer> judge(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
@@ -36,7 +37,7 @@ public class LottoResult {
         // 정렬 출력을 위해 TreeMap 으로 변경
         Map<ResultRank, Integer> collection = new TreeMap<>();
         for (ResultRank rank : ResultRank.values()) {
-            collectByRank(collection, rank, INIT_COUNT);
+            collectByRank(collection, rank, EMPTY_COUNT);
         }
         return collection;
     }
@@ -56,12 +57,15 @@ public class LottoResult {
         return prizeMoney;
     }
 
-    private float calculateRateOfReturn(int paid) {
+    private float calculateRateOfReturn(int prizeMoney, int paid) {
+        if (paid == EMPTY_PAID) {
+            return NONE_RETURN_RATE;
+        }
         return (float) prizeMoney / paid;
     }
 
     public int is(ResultRank rankMatch) {
-        return matchCounts.getOrDefault(rankMatch, DEFAULT_COUNT);
+        return matchCounts.getOrDefault(rankMatch, EMPTY_COUNT);
     }
 
     public int prizeMoney() {
