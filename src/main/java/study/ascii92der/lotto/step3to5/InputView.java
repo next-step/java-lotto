@@ -14,6 +14,7 @@ public class InputView {
     public static final String INPUT_WINNER_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public static final String LOTTO_NUMBER_SEPARATOR = ",";
+
     private final Scanner scanner;
 
     public InputView(InputStream inputStream) {
@@ -47,11 +48,11 @@ public class InputView {
 
     public Lotto inputWinnerNumbers() {
         System.out.println(INPUT_WINNER_NUMBERS);
-        List<Integer> winingNumbers = new ArrayList<>();
-
-        Arrays.stream(scanner.nextLine().split(","))
-                .map(Integer::parseInt)
-                .forEach(winingNumbers::add);
+        List<Integer> winingNumbers =
+                Arrays.stream(
+                        scanner.nextLine().split(LOTTO_NUMBER_SEPARATOR))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
 
         return new Lotto(winingNumbers);
     }
@@ -60,4 +61,5 @@ public class InputView {
         System.out.println(INPUT_BONUS_NUMBER);
         return new LottoNumber(Integer.parseInt(scanner.nextLine()));
     }
+
 }

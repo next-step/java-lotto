@@ -13,6 +13,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lotto) {
 
+        Collections.sort(lotto);
         lottoNumbers = new ArrayList<>();
         lotto.stream().map(LottoNumber::new).forEach(lottoNumbers::add);
 
@@ -48,9 +49,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        Comparator<LottoNumber> compareByLottoNumber = LottoNumber::compareTo;
-        lottoNumbers.sort(compareByLottoNumber);
-
         return "[" +
                 lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(",")) +
                 "]" +
