@@ -7,7 +7,7 @@ public class LottoResult {
 
     private static final int DEFAULT_COUNT = 0;
     private static final int EMPTY_COUNT = 0;
-    private static final String MSG_PRIZE_NONE = "당첨된 내역이 없습니다.";
+    private static final String MSG_PRIZE_NONE = "당첨된 내역이 없습니다.\n";
 
     private int prizeMoney = 0;
     private float rateOfReturn = 0.f;
