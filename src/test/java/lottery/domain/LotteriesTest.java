@@ -31,8 +31,8 @@ public class LotteriesTest {
         MatchCountPair pair = lotteries.match(winnerLottery);
 
         assertAll(
-                () -> assertThat(pair.countByRank(Rank.FOUR)).isEqualTo(0),
-                () -> assertThat(pair.countByRank(Rank.THIRD)).isEqualTo(3),
+                () -> assertThat(pair.countByRank(Rank.FOURTH)).isEqualTo(3),
+                () -> assertThat(pair.countByRank(Rank.THIRD)).isEqualTo(0),
                 () -> assertThat(pair.countByRank(Rank.SECOND)).isEqualTo(0),
                 () -> assertThat(pair.countByRank(Rank.FIRST)).isEqualTo(0)
         );

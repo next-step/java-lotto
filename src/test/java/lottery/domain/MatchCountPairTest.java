@@ -25,7 +25,9 @@ class MatchCountPairTest {
     void matchAll_test() {
         //then
         assertAll(
-                () -> assertThat(MATCH_PAIR.countByRank(Rank.FOUR)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FAIL)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FOURTH)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.THIRD)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.SECOND)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.FIRST)).isEqualTo(1)
