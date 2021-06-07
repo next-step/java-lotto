@@ -25,7 +25,7 @@ class MoneyTest {
         Money money = new Money(inputPrice);
 
         //when
-        int lotteryCount = money.calculatePerLottery();
+        int lotteryCount = money.divide(1000);
 
         //then
         assertThat(lotteryCount).isEqualTo(expectedLotteryCount);
