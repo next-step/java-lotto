@@ -15,7 +15,7 @@ public class Lotteries {
         lotteries = ImmutableList.copyOf(generateLotteries(count, generator));
     }
 
-    public MatchCountPair match(WinnerLottery winnerLottery, int bonusBall) {
+    public MatchCountPair match(WinnerLottery winnerLottery, BonusBall bonusBall) {
         return new MatchCountPair(winnerLottery, lotteries, bonusBall);
     }
 

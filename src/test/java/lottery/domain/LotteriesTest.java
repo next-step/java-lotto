@@ -28,7 +28,7 @@ public class LotteriesTest {
         WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(10, 2, 34, 4, 5, 6)));
 
         //when
-        MatchCountPair pair = lotteries.match(winnerLottery, 45);
+        MatchCountPair pair = lotteries.match(winnerLottery, new BonusBall(winnerLottery, 45));
 
         assertAll(
                 () -> assertThat(pair.countByRank(Rank.FOURTH)).isEqualTo(3),
@@ -46,7 +46,7 @@ public class LotteriesTest {
         WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 45)));
 
         //when
-        MatchCountPair pair = lotteries.match(winnerLottery, 6);
+        MatchCountPair pair = lotteries.match(winnerLottery, new BonusBall(winnerLottery, 6));
 
         //then
         assertThat(pair.countByRank(Rank.SECOND)).isEqualTo(1);

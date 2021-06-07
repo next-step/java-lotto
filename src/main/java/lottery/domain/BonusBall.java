@@ -2,7 +2,7 @@ package lottery.domain;
 
 public class BonusBall {
 
-    private LotteryNumber bonusBall;
+    private final LotteryNumber bonusBall;
 
     public BonusBall(WinnerLottery winnerLottery, int number) {
         LotteryNumber bonusBall = new LotteryNumber(number);
@@ -12,5 +12,9 @@ public class BonusBall {
         }
 
         this.bonusBall = bonusBall;
+    }
+
+    public LotteryNumber bonusBall() {
+        return bonusBall;
     }
 }
