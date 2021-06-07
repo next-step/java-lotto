@@ -21,7 +21,7 @@ public class LuckyNumbersTest {
 
     @DisplayName("입력받는 당첨 번호의 갯수가 6개가 아니면 예외가 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"4,3,2,1", "5, 2, 3"})
+    @ValueSource(strings = {"4,3,2,1", "5, 2, 3", "1,2,3,4,5,6,7"})
     public void createLuckyNumbersFailed_count(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
             new LuckyNumbers(inputLuckyNumbers);
