@@ -29,10 +29,22 @@ public class ResultView {
 
     public static void printMatchCountAndProfit(MatchCountPair matchCountPair) {
         for (Rank rank : Rank.values()) {
+            printMatchCountWithBonusWhenSecond(rank);
+
             printMatchCount(rank.matchCount());
             pintProfit(rank.profit());
             printCount(matchCountPair.countByRank(rank));
         }
+    }
+
+    private static void printMatchCountWithBonusWhenSecond(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            printMatchCountWithBonus(rank.matchCount());
+        }
+    }
+
+    private static void printMatchCountWithBonus(int matchCount) {
+        System.out.print(matchCount + "개 일치, 보너스볼 일치");
     }
 
     private static void printCount(int count) {
