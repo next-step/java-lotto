@@ -8,8 +8,8 @@ import java.util.Map;
 public class LottoBundle {
 
     private static final int INTERVAL_COUNT_INCREASE = 1;
-    private static final int PRICE_PER_LOTTO = 1000;
     private static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
+    private static final String LINE_SEPARATOR = "\n";
 
     private final List<Lotto> lottoBundle = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class LottoBundle {
 
     private void buy(int money) {
         validateNegative(money);
-        for (int i = money / PRICE_PER_LOTTO; i > 0; --i) {
+        for (int i = money / Lotto.PRICE_PER_LOTTO; i > 0; --i) {
             lottoBundle.add(new Lotto(Machine.draw()));
         }
     }
@@ -40,20 +40,20 @@ public class LottoBundle {
 
     public Map<Integer, Integer> matchCounts(LuckyNumbers luckyNumbers) {
         Map<Integer, Integer> result = new HashMap<>();
-        for(Lotto lotto : lottoBundle) {
+        for (Lotto lotto : lottoBundle) {
             result.merge(luckyNumbers.matchCount(lotto), INTERVAL_COUNT_INCREASE, Integer::sum);
         }
         return result;
     }
 
     public int paid() {
-        return lottoBundle.size() * PRICE_PER_LOTTO;
+        return lottoBundle.size() * Lotto.PRICE_PER_LOTTO;
     }
 
     public String join() {
         StringBuilder sb = new StringBuilder();
-        for(Lotto lotto : lottoBundle) {
-            sb.append(lotto.join()).append("\n");
+        for (Lotto lotto : lottoBundle) {
+            sb.append(lotto.join()).append(LINE_SEPARATOR);
         }
         return sb.toString();
     }

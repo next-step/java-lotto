@@ -47,10 +47,10 @@ public class LottoResultTest {
         );
         Integer[] expectedCount = parseExpected(expected);
 
-        assertThat(lottoResult.is(RESULT_RANK.RANK_MATCH_6)).isEqualTo(expectedCount[0]);
-        assertThat(lottoResult.is(RESULT_RANK.RANK_MATCH_5)).isEqualTo(expectedCount[1]);
-        assertThat(lottoResult.is(RESULT_RANK.RANK_MATCH_4)).isEqualTo(expectedCount[2]);
-        assertThat(lottoResult.is(RESULT_RANK.RANK_MATCH_3)).isEqualTo(expectedCount[3]);
+        assertThat(lottoResult.is(ResultRank.RANK_MATCH_6)).isEqualTo(expectedCount[0]);
+        assertThat(lottoResult.is(ResultRank.RANK_MATCH_5)).isEqualTo(expectedCount[1]);
+        assertThat(lottoResult.is(ResultRank.RANK_MATCH_4)).isEqualTo(expectedCount[2]);
+        assertThat(lottoResult.is(ResultRank.RANK_MATCH_3)).isEqualTo(expectedCount[3]);
     }
 
     private Integer[] parseExpected(String expected) {
@@ -112,7 +112,7 @@ public class LottoResultTest {
     private LottoBundle parseLottoBundles(String lottoBundle) {
         String[] lottoArray = lottoBundle.split(":");
         List<Lotto> lottoList = new ArrayList<>();
-        for(String lotto : lottoArray) {
+        for (String lotto : lottoArray) {
             lottoList.add(new Lotto(LottoParser.parse(lotto)));
         }
         return new LottoBundle(lottoList);

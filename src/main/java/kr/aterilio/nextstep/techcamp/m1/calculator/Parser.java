@@ -45,7 +45,7 @@ public class Parser {
 
     private static Integer[] convertToIntegers(String[] inputs) {
         Integer[] numbers = new Integer[inputs.length];
-        for(int i = inputs.length-1; i >= 0; --i) {
+        for (int i = inputs.length-1; i >= 0; --i) {
             validateNumeric(inputs[i]);
             int number = Integer.parseInt(inputs[i]);
             validatePositive(number);

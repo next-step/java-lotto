@@ -11,54 +11,56 @@ public class LottoResult {
     private int prizeMoney = 0;
     private float rateOfReturn = 0.f;
 
-    // 정렬 출력을 위해 TreeMap 으로 변경
-    private final Map<RESULT_RANK, Integer> matchCounts = new TreeMap<>();
+    private final Map<ResultRank, Integer> matchCounts;
 
     public LottoResult(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
-        judge(luckyNumbers, lottoBundles);
+        matchCounts = judge(luckyNumbers, lottoBundles);
+        prizeMoney = calculatePrizeMoney(matchCounts);
+        rateOfReturn = calculateRateOfReturn(lottoBundles.paid());
     }
 
-    private void judge(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
-        Map<Integer, Integer> matchResult = lottoBundles.matchCounts(luckyNumbers);
-        collects(matchResult);
-        calculatePrizeMoney();
-        calculateRateOfReturn(lottoBundles.paid());
+    private Map<ResultRank, Integer> judge(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
+        return collects(lottoBundles.matchCounts(luckyNumbers));
     }
 
-    private void collects(Map<Integer, Integer> matchResult) {
-        clear();
-        for(Map.Entry<Integer, Integer> entry : matchResult.entrySet()) {
-            RESULT_RANK rank = RESULT_RANK.valueOf(entry.getKey());
-            collectByRank(rank, entry.getValue());
+    private Map<ResultRank, Integer> collects(Map<Integer, Integer> matchResult) {
+        Map<ResultRank, Integer> collection = init();
+        for (Map.Entry<Integer, Integer> entry : matchResult.entrySet()) {
+            ResultRank rank = ResultRank.valueOf(entry.getKey());
+            collectByRank(collection, rank, entry.getValue());
         }
+        return collection;
     }
 
-    private void clear() {
-        matchCounts.clear();
-        for(RESULT_RANK rank : RESULT_RANK.values()) {
-            collectByRank(rank, INIT_COUNT);
+    private Map<ResultRank, Integer> init() {
+        // 정렬 출력을 위해 TreeMap 으로 변경
+        Map<ResultRank, Integer> collection = new TreeMap<>();
+        for (ResultRank rank : ResultRank.values()) {
+            collectByRank(collection, rank, INIT_COUNT);
         }
+        return collection;
     }
 
-    private void collectByRank(RESULT_RANK rank, Integer count) {
-        if (rank == RESULT_RANK.RANK_NONE) {
+    private void collectByRank(Map<ResultRank, Integer> collection, ResultRank rank, Integer count) {
+        if (rank.isNone()) {
             return;
         }
-        matchCounts.put(rank, count);
+        collection.put(rank, count);
     }
 
-    public void calculatePrizeMoney() {
-        prizeMoney = 0;
-        for (Map.Entry<RESULT_RANK, Integer> entry : matchCounts.entrySet()) {
+    public int calculatePrizeMoney(final Map<ResultRank, Integer> matchResults) {
+        int prizeMoney = 0;
+        for (Map.Entry<ResultRank, Integer> entry : matchResults.entrySet()) {
             prizeMoney += entry.getKey().prize() * entry.getValue();
         }
+        return prizeMoney;
     }
 
-    private void calculateRateOfReturn(int paid) {
-        rateOfReturn = (float) prizeMoney / paid;
+    private float calculateRateOfReturn(int paid) {
+        return (float) prizeMoney / paid;
     }
 
-    public int is(RESULT_RANK rankMatch) {
+    public int is(ResultRank rankMatch) {
         return matchCounts.getOrDefault(rankMatch, DEFAULT_COUNT);
     }
 
@@ -68,7 +70,7 @@ public class LottoResult {
 
     public String detail() {
         StringBuilder sb = new StringBuilder();
-        for(Map.Entry<RESULT_RANK, Integer> entry : matchCounts.entrySet()) {
+        for (Map.Entry<ResultRank, Integer> entry : matchCounts.entrySet()) {
             sb.append(String.format("%s - %d개\n", entry.getKey().detail(), entry.getValue()));
         }
         return sb.toString();

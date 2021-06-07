@@ -12,7 +12,9 @@ public class ResultView {
 
     public void printBundle(LottoBundle lottoBundle) {
         System.out.println(lottoBundle.count() + "개를 구매했습니다.");
-        System.out.println(lottoBundle.join());
+        if (!lottoBundle.empty()) {
+            System.out.println(lottoBundle.join());
+        }
     }
 
     public void printResult(LottoResult lottoResult) {
@@ -34,6 +36,6 @@ public class ResultView {
         if (rateOfReturn < RATE_PRINCIPAL) {
             return MSG_LOSS_PRINCIPAL;
         }
-        return "";
+        return StringUtil.EMPTY_STRING;
     }
 }

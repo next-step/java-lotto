@@ -11,6 +11,9 @@ public class Lotto {
     public static final int LOTTO_BALL_MIN = 1;
     public static final int LOTTO_BALL_MAX = 45;
 
+    public static final int PRICE_PER_LOTTO = 1000;
+    public static final String MSG_PRICE_TAG = "장당 " + PRICE_PER_LOTTO + "원";
+
     private static final int LOTTO_ELEMENT_COUNT = 6;
 
     private static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
