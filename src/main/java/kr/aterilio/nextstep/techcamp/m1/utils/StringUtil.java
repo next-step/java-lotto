@@ -1,15 +1,17 @@
-package kr.aterilio.nextstep.techcamp.m1.calculator;
+package kr.aterilio.nextstep.techcamp.m1.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
 
-    private static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = "";
 
-    private static final String REGEX_NUMERIC = "^[0-9]+$";
     private static final int INDEX_NOT_FOUND = -1;
     private static final int IDX_GROUP_1 = 1;
+    private static final int UNIT_POW_FOR_FLOOR = 10;
+
+    private static final String REGEX_NUMERIC = "^[0-9-]+$"; // 음수도 숫자이므로 정규식에 - 문자 추가
 
     public static boolean isEmpty(String data) {
         return data == null || EMPTY_STRING.equals(data.trim());
@@ -53,5 +55,26 @@ public class StringUtil {
             return StringUtil.EMPTY_STRING;
         }
         return matcher.group(groupIndex);
+    }
+
+    public static Integer[] convertToIntegerArray(String[] targets) {
+        Integer[] convert = new Integer[targets.length];
+        for (int i = targets.length-1; i >= 0; --i) {
+            String target = targets[i].trim();
+            validateNumeric(target);
+            convert[i] = Integer.parseInt(target);
+        }
+        return convert;
+    }
+
+    private static void validateNumeric(String target) {
+        if (!isNumeric(target)) {
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
+    }
+
+    public static String floorFloatWithPointPosition(float original, int pointPosition) {
+        double unit = Math.pow(UNIT_POW_FOR_FLOOR, pointPosition);
+        return String.format("%." + pointPosition + "f", Math.floor(original*unit)/unit);
     }
 }

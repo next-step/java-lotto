@@ -1,5 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.calculator;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
+
 public class StringAddCalculator {
 
     private static final int RESULT_NONE = 0;
