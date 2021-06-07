@@ -9,7 +9,7 @@ public class RankTest {
     @Test
     @DisplayName("enum equals 학습 테스트")
     public void rankTest() {
-        assertThat(Rank.fiveNumbersMatch).isEqualTo(Rank.fiveNumbersMatch);
-        assertThat(Rank.fiveNumbersMatch == Rank.fiveNumbersMatch).isTrue();
+        assertThat(Rank.THIRD).isEqualTo(Rank.THIRD);
+        assertThat(Rank.THIRD == Rank.THIRD).isTrue();
     }
 }

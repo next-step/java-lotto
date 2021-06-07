@@ -31,11 +31,9 @@ public class LottoManager {
         int manualCount = inputView.takeManualLottoCount();
         List<List<Integer>> manualLottoNumbers = inputView.takeManualLottoNumbers(manualCount);
 
-        Lottos lottos = new Lottos(money);
-        lottos.addLottos(manualLottoNumbers);
-
         LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl();
-        lottos.addLottos(factory);
+        // 동적으로 변경되지 않고 처음 입력받은 갯수만큼만 생성하므로 생성자 초기화가 좋은 방식이다.
+        Lottos lottos = new Lottos(money, manualLottoNumbers, factory);
 
         resultView.showLottoGames(lottos);
 

@@ -23,6 +23,12 @@ public class Lottos implements Iterable<Lotto>{
         this.money = money;
     }
 
+    public Lottos(int money, List<List<Integer>> lottos, LottoNumberFactory factory) {
+        this.money = money;
+        addLottos(lottos);
+        addLottos(factory);
+    }
+
     private void addCustomLotto(List<Integer> customNumbers) {
         lottos.add(new Lotto(customNumbers));
     }
@@ -31,7 +37,7 @@ public class Lottos implements Iterable<Lotto>{
         lottos.add(new Lotto(factory));
     }
 
-    public void addLottos(LottoNumberFactory factory) {
+    private void addLottos(LottoNumberFactory factory) {
         int lottoCount = money / Lotto.PRICE;
 
         for (int i = 0; i < lottoCount; i++) {
@@ -39,7 +45,7 @@ public class Lottos implements Iterable<Lotto>{
         }
     }
 
-    public void addLottos(List<List<Integer>> lottoNumbers) {
+    private void addLottos(List<List<Integer>> lottoNumbers) {
         int count = Math.min(lottoNumbers.size(), money / Lotto.PRICE);
         for (int i = 0; i < count; i++) {
             this.addCustomLotto(lottoNumbers.get(i));

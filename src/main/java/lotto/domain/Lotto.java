@@ -33,12 +33,12 @@ public class Lotto {
         }
     }
 
-    public Rank matchCount(Lotto other) {
+    public Rank matchCount(Lotto other, boolean bonusMatch) {
         int count = 0;
         for (LottoNumber number : lottoNumbers) {
             count = other.increaseCountIfContains(number,count);
         }
-        return Rank.of(count);
+        return Rank.of(count,bonusMatch);
     }
 
     private int increaseCountIfContains(LottoNumber number, int count) {

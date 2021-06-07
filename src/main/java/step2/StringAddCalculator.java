@@ -5,11 +5,6 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final Pattern VALID_DATA_PATTERN = Pattern.compile("^[0-9]+$");
-    private static final String DEFAULT_DELIMITER = ",|;";
-    private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    private static final int DELIMITER_GROUP_INDEX_IN_MATCHER = 1;
-    private static final int SPLIT_DATA_GROUP_INDEX_IN_MATCHER = 2;
-
 
     public int calculate(String data) {
         if (data == null || data.isEmpty()) {

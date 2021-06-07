@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class InputView {
     private static final String REQUEST_MONEY_INPUT_MESSAGE = "구입금을 입력해 주세요.";
     private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String REQUEST_WIN_LOTTO_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String DELIMITER = "\\s*,\\s*";
     private static final String MANUAL_LOTTO_COUNT_INPUT_MESSAGE= "수동으로 구매할 로또 수를 입력해 주세요.";

@@ -41,12 +41,12 @@ public class ResultView {
     }
 
     private void appendStatics(StringBuffer buffer, Rank rank, Integer count) {
-        if( rank == Rank.nothing) {
+        if( rank == Rank.NONE) {
             return;
         }
         buffer.append(rank.matchCount())
                 .append("개 일치");
-        if (rank == Rank.fiveNumbersMatchWithBonusNumber) {
+        if (rank == Rank.SECOND) {
             buffer.append(BONUS_MATCH_MESSAGE);
         }
         buffer.append(" (")
