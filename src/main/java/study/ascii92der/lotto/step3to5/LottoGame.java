@@ -11,28 +11,25 @@ public class LottoGame {
 
     public void run() {
 
-        LottoPrice lottoPrice = insertMoney();
-
-        Lottos lottos = generateLottos(lottoPrice);
-
-        resultLotto(lottos);
-    }
-
-    private LottoPrice insertMoney() {
         LottoPrice lottoPrice = inputView.inputMoney();
-        resultView.printLottoCount(lottoPrice);
 
-        return lottoPrice;
-    }
+        int manualLottoCount = inputView.inputManualLottoCount();
 
-    private Lottos generateLottos(LottoPrice lottoPrice) {
-        Lottos lottos = (new LottoGenerator()).generateLottos(lottoPrice);
-        resultView.printLottoNumbers(lottos);
+        Lottos manualLottos = inputView.inputManualLottos(manualLottoCount);
 
-        return lottos;
+        LottoPrice balanceLottoPrice = lottoPrice.differenceLottoPrice(manualLottoCount);
+
+        resultView.printLottoCount(manualLottoCount, balanceLottoPrice);
+
+        Lottos autoLottos = (new LottoGenerator()).generateLottos(lottoPrice);
+
+        Lottos totalLottos = autoLottos.merge(manualLottos);
+
+        resultLotto(totalLottos);
     }
 
     private void resultLotto(Lottos lottos) {
+        resultView.printLottoNumbers(lottos);
         WinningLotto winningLotto = new WinningLotto(inputView.inputWinnerNumbers(),
                 inputView.inputBonusNumber());
 
