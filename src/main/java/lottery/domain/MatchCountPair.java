@@ -27,15 +27,11 @@ public class MatchCountPair {
         Map<Rank, Integer> pair = initializeMatchCountPairs();
 
         for (LotteryNumbers lottery : lotteries) {
-            Rank rank = findMatchCount(winnerLottery, lottery, matchBonusBall(bonusBall, lottery));
+            Rank rank = findMatchCount(winnerLottery, lottery, bonusBall.match(lottery));
             pair.put(rank, addMatchCount(pair, rank));
         }
 
         return ImmutableMap.copyOf(pair);
-    }
-
-    private boolean matchBonusBall(BonusBall bonusBall, LotteryNumbers lottery) {
-        return lottery.contains(bonusBall.bonusBall());
     }
 
     private Rank findMatchCount(WinnerLottery winnerLottery, LotteryNumbers lottery, boolean matchBonus) {

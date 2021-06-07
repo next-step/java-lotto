@@ -14,7 +14,7 @@ public class BonusBall {
         this.bonusBall = bonusBall;
     }
 
-    public LotteryNumber bonusBall() {
-        return bonusBall;
+    public boolean match(LotteryNumbers lottery) {
+        return lottery.contains(bonusBall);
     }
 }
