@@ -14,4 +14,8 @@ public class BonusBall {
             throw new IllegalArgumentException(Lotto.MSG_ERR_OUT_OF_RANGE);
         }
     }
+
+    public int ball() {
+        return this.bonusBall;
+    }
 }

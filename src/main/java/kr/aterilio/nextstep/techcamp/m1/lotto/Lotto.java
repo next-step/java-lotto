@@ -75,4 +75,8 @@ public class Lotto {
     public String join() {
         return lottoBalls.toString();
     }
+
+    public boolean contains(int number) {
+        return lottoBalls.contains(number);
+    }
 }
