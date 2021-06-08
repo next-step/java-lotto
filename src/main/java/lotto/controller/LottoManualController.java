@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManualController {
-    LottoManualInputView inputView = new LottoManualInputView();
-    LottoManualOutputView outputView = new LottoManualOutputView();
-    AutoLotto autoLotto = new AutoLotto();
-    ManualLotto manualLotto = new ManualLotto();
-    WinningResult winningResult;
+    private LottoManualInputView inputView = new LottoManualInputView();
+    private LottoManualOutputView outputView = new LottoManualOutputView();
+    private AutoLotto autoLotto = new AutoLotto();
+    private ManualLotto manualLotto = new ManualLotto();
+    private WinningResult winningResult;
 
     public void start() {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
