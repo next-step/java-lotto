@@ -16,15 +16,7 @@ public class AutoLotto {
         }
     }
 
-    public List<Lotto> createLottos(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(createLottoNumbers()));
-        }
-        return lottos;
-    }
-
-    private List<LottoNumber> createLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(numbers);
 
         List<Integer> selectedNumbers = new ArrayList<>();

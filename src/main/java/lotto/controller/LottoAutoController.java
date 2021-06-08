@@ -17,7 +17,7 @@ public class LottoAutoController {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
         int quantity = lottoPrice.calculateLottoQuantity();
 
-        Lottos lottos = new Lottos(autoLotto.createLottos(quantity));
+        Lottos lottos = new Lottos(quantity);
         outputView.printLotto(quantity, lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());

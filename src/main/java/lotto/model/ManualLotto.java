@@ -6,15 +6,7 @@ import java.util.List;
 public class ManualLotto {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-    public List<Lotto> createLottos(int quantity, List<String> manualNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(createLottoNumbers(manualNumbers.get(i))));
-        }
-        return lottos;
-    }
-
-    private List<LottoNumber> createLottoNumbers(String manualNumbers) {
+    public List<LottoNumber> createLottoNumbers(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
         List<LottoNumber> lottoNumbers = addLottoNumbers(splitManualNumbers);
         return lottoNumbers;
