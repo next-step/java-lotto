@@ -28,10 +28,10 @@ class LottoTicketTest {
     }
 
     @Test
-    void addLotto(){
-        LottoTicket lottoTicket=new LottoTicket(LOTTO_NUM);
+    void addLotto() {
+        LottoTicket lottoTicket = new LottoTicket(LOTTO_NUM);
         lottoTicket.addLotto(1);
-        assertThat(lottoTicket.lottoList().size()).isEqualTo(LOTTO_NUM+1);
+        assertThat(lottoTicket.lottoList().size()).isEqualTo(LOTTO_NUM + 1);
     }
 
     @Test

@@ -21,6 +21,9 @@ public class LottoTicket {
     }
 
     public void addLotto(int num) {
+        if (num < 1) {
+            throw new RuntimeException("로또는 하나이상 추가해야합니다.");
+        }
         if (lottoList == null) {
             lottoList = new ArrayList<>();
         }
