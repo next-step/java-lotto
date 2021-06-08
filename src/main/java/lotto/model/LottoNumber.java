@@ -14,6 +14,13 @@ public class LottoNumber {
         }
     }
 
+    public boolean isSame(LottoNumber lottoNumber) {
+        if (number == lottoNumber.getNumber()) {
+            return true;
+        }
+        return false;
+    }
+
     public int getNumber() {
         return number;
     }

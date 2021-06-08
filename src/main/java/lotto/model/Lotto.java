@@ -12,9 +12,11 @@ public class Lotto {
 
     public int countWinningNumbers(Lotto winningNumbers) {
         int count = 0;
-        for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            if (lottoNumbers.contains(winningNumbers.getNumbers().get(i))) {
-                count++;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            for(LottoNumber winningNumber : winningNumbers.getNumbers()) {
+                if(lottoNumber.isSame(winningNumber)) {
+                    count++;
+                }
             }
         }
         return count;
