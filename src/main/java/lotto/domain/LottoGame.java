@@ -23,12 +23,11 @@ public class LottoGame {
         return winningLottoNumbers;
     }
 
-
-
-    public void getManualLottoList(List<String> manualLottoList) {
+    public LottoList getManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
             lottoList.getManualLotto(manualLottoStr);
         }
+        return lottoList;
     }
 
     public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
