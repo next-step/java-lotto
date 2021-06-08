@@ -12,13 +12,6 @@ class LottoTest {
     private static final int LOTTO_LENGTH = 6;
 
     @Test
-    void lottoWin() {
-        Lotto lotto = new Lotto();
-        lotto.setLottoWin(LottoWin.FOURTH_PLACE);
-        assertThat(lotto.lottoWin()).isEqualTo(LottoWin.FOURTH_PLACE);
-    }
-
-    @Test
     void lotto() {
         List<LottoNumber> lottoNumber=makeLottoNumber();
         Lotto lotto = new Lotto(lottoNumber);
