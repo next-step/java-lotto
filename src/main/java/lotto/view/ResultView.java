@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public void resultLottoList(LottoList lottoList) {
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList.getLottoList()) {
             System.out.println(lotto.getLottoNumbers());
         }
     }

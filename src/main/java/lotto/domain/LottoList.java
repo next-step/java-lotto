@@ -50,4 +50,8 @@ public class LottoList {
     public void getManualLotto(String manualLottoStr) {
         lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
     }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
 }
