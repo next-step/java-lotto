@@ -51,7 +51,6 @@ public class StringCalculator {
         if (Integer.valueOf(c) < ZERO) throw new RuntimeException("음수불가");
     }
 
-
     public int sum(List<Integer> strcharList) {
         return strcharList.stream().reduce((a, b) -> Integer.sum(a, b)).get();
     }

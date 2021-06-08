@@ -1,13 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
     LottoList lottoList;
     WinningLottoNumbers winningLottoNumbers;
-
 
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;

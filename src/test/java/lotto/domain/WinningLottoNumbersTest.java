@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoNumbersTest {
 
-
     @DisplayName("보너스 숫자가 당첨번호와 같을때")
     @Test
     void throwIllegalArgumentException3() {

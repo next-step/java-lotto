@@ -46,7 +46,6 @@ public class LottoList {
         return numberOfWinnings;
     }
 
-
     public void getManualLotto(String manualLottoStr) {
         lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
     }
