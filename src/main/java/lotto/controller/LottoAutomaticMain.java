@@ -16,9 +16,8 @@ public class LottoAutomaticMain {
         resultView.resultBuyPrice(buyCount);
         resultView.resultLottoList(lottoGame.getLottoList(buyCount));
 
-        lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
 
-        resultView.resultStatistics(lottoGame.getWinning());
+        resultView.resultStatistics(lottoGame.getWinning( lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber())));
 
     }
 }

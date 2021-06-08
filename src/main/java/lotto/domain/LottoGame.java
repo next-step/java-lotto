@@ -23,39 +23,15 @@ public class LottoGame {
         return winningLottoNumbers;
     }
 
-    public WinningStatistics getWinning() {
-        List<Rank> list = new ArrayList<>();
-        for (Lotto lotto : lottoList.getLottoList()) {
-            int numberOfWinnings = 0;
-            numberOfWinnings = getNumberOfWinnings(lotto, numberOfWinnings);
-            boolean bonus = false;
-            bonus = isBonus(lotto, bonus);
-            Rank rank = Rank.getRank(numberOfWinnings, bonus);
-            list.add(rank);
-        }
 
-        return new WinningStatistics(list.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting())));
-    }
-
-    private boolean isBonus(Lotto lotto, boolean bonus) {
-        if (lotto.getLottoNumbers().contains(winningLottoNumbers.getBonusNumber())) {
-            bonus = true;
-        }
-        return bonus;
-    }
-
-    private int getNumberOfWinnings(Lotto lotto, int numberOfWinnings) {
-        for (int lottoNumber : lotto.getLottoNumbers()) {
-            if (winningLottoNumbers.getWinningLottoNumbers().getLottoNumbers().contains(lottoNumber)) {
-                numberOfWinnings++;
-            }
-        }
-        return numberOfWinnings;
-    }
 
     public void getManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
             lottoList.getManualLotto(manualLottoStr);
         }
+    }
+
+    public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
+        return lottoList.getWinning(winningNumbers);
     }
 }

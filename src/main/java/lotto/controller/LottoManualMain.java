@@ -19,9 +19,7 @@ public class LottoManualMain {
 
         resultView.resultLottoList(lottoGame.getLottoList(buyCount - manualBuyCount));
 
-        lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber());
-
-        resultView.resultStatistics(lottoGame.getWinning());
+        resultView.resultStatistics(lottoGame.getWinning(lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber())));
 
     }
 }
