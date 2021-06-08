@@ -30,13 +30,13 @@ public class LottoStatics {
         return total;
     }
 
-    public int getRankCount(int targetRank) {
-        return ranks.get(Rank.of(targetRank));
+    public int getRankCount(Rank rank) {
+        return ranks.get(rank);
     }
 
     public Map<Rank, Integer> rankCounts() {
         Map<Rank, Integer> counts = new HashMap<>(ranks);
-        counts.remove(Rank.nothing);
+        counts.remove(Rank.NONE);
         return counts;
     }
 

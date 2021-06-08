@@ -18,7 +18,7 @@ public class WinLottoTest {
     public void bonusNumberRankTest() {
         WinLotto winLotto = new WinLotto(new Lotto(1,2,3,4,5,6),10);
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,10));
-        assertThat(Rank.fiveNumbersMatchWithBonusNumber == winLotto.matchCount(lotto)).isTrue();
+        assertThat(Rank.SECOND == winLotto.matchCount(lotto)).isTrue();
     }
 
     @ParameterizedTest

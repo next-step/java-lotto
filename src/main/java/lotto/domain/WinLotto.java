@@ -17,17 +17,7 @@ public class WinLotto {
     }
 
     public Rank matchCount(Lotto other) {
-        Rank matchRank = lotto.matchCount(other);
-        if ( matchRank == Rank.fiveNumbersMatch) {
-            matchRank = rankWithBonusNumber(other);
-        }
-        return matchRank;
-    }
-
-    private Rank rankWithBonusNumber(Lotto other) {
-        if (other.containsNumber(bonusNumber)) {
-            return Rank.fiveNumbersMatchWithBonusNumber;
-        }
-        return  Rank.fiveNumbersMatch;
+        boolean bonusMatch = other.containsNumber(bonusNumber);
+        return lotto.matchCount(other, bonusMatch);
     }
 }

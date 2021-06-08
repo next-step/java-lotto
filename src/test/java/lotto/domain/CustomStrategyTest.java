@@ -25,11 +25,10 @@ public class CustomStrategyTest {
     @DisplayName("정해진 숫자를 제대로 generate하는지 테스트")
     @MethodSource("provideCustomNumbers")
     public void generRateNumberTest(List<Integer> customNumbers) {
-        factory.setGenerateStrategy(new CustomStrategy(customNumbers));
-        Lotto factoryLotto = new Lotto(factory);
+        Lotto factoryLotto = new Lotto(customNumbers);
         Lotto customLotto = new Lotto(customNumbers);
 
-        assertThat(factoryLotto.matchCount(customLotto)).isEqualTo(Rank.sixNumbersMatch);
+        assertThat(factoryLotto.matchCount(customLotto,false)).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("6개보다 작은 갯수가 들어오면 에러발생")

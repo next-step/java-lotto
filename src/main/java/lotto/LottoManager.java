@@ -16,6 +16,7 @@ public class LottoManager {
     }
 
     public static void main(String[] args) {
+
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         LottoManager manager = new LottoManager(inputView,resultView);
@@ -26,8 +27,13 @@ public class LottoManager {
     private void playLotto() {
         int money = inputView.takeMoney();
 
-        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl(new RandomStrategy());
-        Lottos lottos = new Lottos(factory,money);
+        // 수동 카운트
+        int manualCount = inputView.takeManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = inputView.takeManualLottoNumbers(manualCount);
+
+        LottoNumberFactoryImpl factory = new LottoNumberFactoryImpl();
+        // 동적으로 변경되지 않고 처음 입력받은 갯수만큼만 생성하므로 생성자 초기화가 좋은 방식이다.
+        Lottos lottos = new Lottos(money, manualLottoNumbers, factory);
 
         resultView.showLottoGames(lottos);
 

@@ -61,3 +61,9 @@
    - 팩토리로 랜덤 번호, 수동 번호를 generate한다. Lottos -> Lotto -> RandomGenerator or CustomGenerator
 3. Lottos는 수동, 자동을 동적으로 결정해서 생성할 수 있다.
 4. factory 전략을 바꾸기 위해서 매번 setStrategy를 호출해줘야함 어떻게 중복을 처리할 수 없을까?
+
+## 로또(수동)
+
+### 기능목록
+1. [x] 사용자 입력 에러처리
+2. [x] 수동 로또 번호를 사용자 입력을 통해서 받기

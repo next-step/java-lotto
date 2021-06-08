@@ -35,7 +35,7 @@ public class LottoTest {
         LottoNumberFactory  myLottoFactory = new LottoNumberFactoryImpl(CustomStrategy.of(myLottoNumbers));
         Lotto winLotto = new Lotto(lastWeekFactory);
         Lotto myLotto = new Lotto(myLottoFactory);
-        assertThat(winLotto.matchCount(myLotto)).isEqualTo(Rank.of(matchCount));
+        assertThat(winLotto.matchCount(myLotto,false)).isEqualTo(Rank.of(matchCount, false));
     }
 
     private static Stream<Arguments> provideLottoNumbers() {

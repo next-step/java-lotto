@@ -10,9 +10,10 @@ import java.util.Scanner;
 public class InputView {
     private static final String REQUEST_MONEY_INPUT_MESSAGE = "구입금을 입력해 주세요.";
     private static final String WRONG_INPUT_MESSAGE = "잘못된 입력입니다. 다시 입력해주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
-    private static final String REQUEST_WIN_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_WIN_LOTTO_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String DELIMITER = "\\s*,\\s*";
+    private static final String MANUAL_LOTTO_COUNT_INPUT_MESSAGE= "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBERS_INPUT_MESSAGE= "수동으로 구매할 번호를 입력해 주세요.";
 
     private Scanner input = new Scanner(System.in);
     private PrintStream output = new PrintStream(System.out);
@@ -23,7 +24,6 @@ public class InputView {
         while(money <= 0) {
             money = parseMoney();
         }
-        output.println(String.format(LOTTO_COUNT_MESSAGE, money / Lotto.PRICE));
         return money;
     }
 
@@ -42,7 +42,7 @@ public class InputView {
 
     public List<Integer> takeLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
-        output.println(REQUEST_WIN_LOTTO_NUMBER_MESSAGE);
+        output.println(REQUEST_WIN_LOTTO_NUMBER_INPUT_MESSAGE);
         while (lottoNumbers.size() != Lotto.NUMBER_COUNT) {
             lottoNumbers = new ArrayList(parseLottoNumbers());
         }
@@ -79,6 +79,35 @@ public class InputView {
         return numbers;
     }
 
+    public int takeManualLottoCount() {
+        output.println(MANUAL_LOTTO_COUNT_INPUT_MESSAGE);
+        return nextInt();
+    }
 
+    private int nextInt() {
+        Integer nextInt = null;
+        while(nextInt == null) {
+            nextInt = parseCount(input.nextLine());
+        }
+        return nextInt;
+    }
+
+    private Integer parseCount(String userInput) {
+        try {
+            return Integer.parseInt(userInput);
+        } catch(NumberFormatException e) {
+            showErrorMessage();
+        }
+        return null;
+    }
+
+    public List<List<Integer>> takeManualLottoNumbers(int count) {
+        output.println(MANUAL_LOTTO_NUMBERS_INPUT_MESSAGE);
+        List<List<Integer>> lottoNumbers = new ArrayList<>();
+        for( int i = 0; i < count; i++) {
+            lottoNumbers.add(parseLottoNumbers());
+        }
+        return lottoNumbers;
+    }
 
 }

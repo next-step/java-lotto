@@ -13,13 +13,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoStaticsTest {
 
-    LottoNumberFactory factory;
-
-    @BeforeEach
-    public void setUp() {
-        factory = new LottoNumberFactoryImpl();
-    }
-
     @ParameterizedTest
     @MethodSource("provideLottoNumbersWithRankCount")
     public void 로또통계(List<List<Integer>> lottoNumbers, List<String> matchingCounts) {
@@ -29,7 +22,7 @@ public class LottoStaticsTest {
         for( String matchingCount : matchingCounts) {
             int rank = Integer.parseInt(matchingCount.split(",")[0]);
             int rankCount = Integer.parseInt(matchingCount.split(",")[1]);
-            assertThat(statics.getRankCount(rank)).isEqualTo(rankCount);
+            assertThat(statics.getRankCount(Rank.of(rank,false))).isEqualTo(rankCount);
         }
     }
 

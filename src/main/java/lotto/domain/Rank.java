@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    nothing(0,0),
-    threeNumbersMatch(3,5_000),
-    fourNumbersMatch(4,50_000),
-    fiveNumbersMatch(5,1_500_000),
-    fiveNumbersMatchWithBonusNumber(5,30_000_000),
-    sixNumbersMatch(6,2_000_000_000)
+    NONE(0,0),
+    FIFTH(3,5_000),
+    FOURTH(4,50_000),
+    THIRD(5,1_500_000),
+    SECOND(5,30_000_000),
+    FIRST(6,2_000_000_000)
     ;
 
     private int matchCount;
@@ -34,16 +34,22 @@ public enum Rank {
         return 0;
     }
 
-    public static Rank of(int matchCount) {
-        return Arrays.asList(
-                Rank.nothing,
-                Rank.nothing,
-                Rank.nothing,
-                Rank.threeNumbersMatch,
-                Rank.fourNumbersMatch,
-                Rank.fiveNumbersMatch,
-                Rank.sixNumbersMatch
+    public static Rank of(int matchCount, boolean bonusMatch) {
+        Rank rank = Arrays.asList(
+                Rank.NONE,
+                Rank.NONE,
+                Rank.NONE,
+                Rank.FIFTH,
+                Rank.FOURTH,
+                Rank.THIRD,
+                Rank.FIRST
         ).get(matchCount);
+
+        if( bonusMatch && Rank.THIRD == rank ) {
+            return Rank.SECOND;
+        }
+
+        return rank;
     }
 
     public int matchCount() {
