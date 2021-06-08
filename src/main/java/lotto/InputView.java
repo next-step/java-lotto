@@ -22,16 +22,16 @@ public class InputView {
         return new Money(inputNumber);
     }
 
-    public static int getManualLottoCount() {
+    public static BuyingCount getManualLottoCount() {
         System.out.println(MANUAL_LOTTO_WORDING);
         String input = SCANNER.nextLine();
-        return Integer.parseInt(input);
+        return new BuyingCount(Integer.parseInt(input));
     }
 
-    public static List<Lotto> getManualLottoNumber(int manualLottoCount) {
+    public static List<Lotto> getManualLottoNumber(BuyingCount manualLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBER_WORDING);
-        for (int i = 0; i < manualLottoCount; i++) {
+        for (int i = 0; i < manualLottoCount.buyingCount(); i++) {
             String input = SCANNER.nextLine();
             lottoList.add(convertWinNumberStringToLotto(input));
         }

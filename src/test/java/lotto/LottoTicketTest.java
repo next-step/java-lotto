@@ -30,7 +30,7 @@ class LottoTicketTest {
     @Test
     void addLotto() {
         LottoTicket lottoTicket = new LottoTicket(LOTTO_NUM);
-        lottoTicket.addLotto(1);
+        lottoTicket.addLotto(new BuyingCount(1));
         assertThat(lottoTicket.lottoList().size()).isEqualTo(LOTTO_NUM + 1);
     }
 
@@ -53,7 +53,7 @@ class LottoTicketTest {
 
         // when
         // then
-        assertThatThrownBy(() -> lottoTicket.addLotto(-1))
+        assertThatThrownBy(() -> lottoTicket.addLotto(new BuyingCount(-1)))
                 .isInstanceOf(RuntimeException.class);
     }
 

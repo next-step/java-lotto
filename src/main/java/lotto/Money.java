@@ -14,9 +14,9 @@ public class Money {
         return this.money;
     }
 
-    public void buyLotto(int number) {
-        validateBuyingLotto(number);
-        money = money - number * LOTTO_PRICE;
+    public void buyLotto(BuyingCount number) {
+        validateBuyingLotto(number.buyingCount());
+        money = money - number.buyingCount() * LOTTO_PRICE;
     }
 
     private void validateMoney(int num) {

@@ -21,14 +21,11 @@ public class LottoTicket {
         this.lottoList = lottoList;
     }
 
-    public void addLotto(int num) {
-        if (num < 1) {
-            throw new RuntimeException("로또는 하나이상 추가해야합니다.");
-        }
+    public void addLotto(BuyingCount num) {
         if (lottoList == null) {
             lottoList = new ArrayList<>();
         }
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < num.buyingCount(); i++) {
             lottoList.add(new Lotto());
         }
     }
@@ -45,7 +42,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumWithIdx(int idx) {
-        if (idx > this.lottoList.size() || idx < 0) {
+        if (idx >= this.lottoList.size() || idx < 0) {
             return Collections.emptyList();
         }
         return this.lottoList.get(idx).lottoNum();

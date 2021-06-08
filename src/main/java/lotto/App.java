@@ -13,13 +13,13 @@ public class App {
     private static LottoTicket buyLottoTicket() {
         Money buyingMoney = InputView.getBuyingMoney();
 
-        int manualLottoNum = InputView.getManualLottoCount();
-        buyingMoney.buyLotto(manualLottoNum);
-        LottoTicket lottoTicket = new LottoTicket(InputView.getManualLottoNumber(manualLottoNum));
+        BuyingCount manualLottoBuyingNum = InputView.getManualLottoCount();
+        buyingMoney.buyLotto(manualLottoBuyingNum);
+        LottoTicket lottoTicket = new LottoTicket(InputView.getManualLottoNumber(manualLottoBuyingNum));
 
-        int AutoLottoNum = getLottoBuyingCount(buyingMoney);
-        OutputView.printBuyingCount(manualLottoNum, AutoLottoNum);
-        lottoTicket.addLotto(AutoLottoNum);
+        BuyingCount autoLottoBuyingNum = getLottoBuyingCount(buyingMoney);
+        OutputView.printBuyingCount(manualLottoBuyingNum, autoLottoBuyingNum);
+        lottoTicket.addLotto(autoLottoBuyingNum);
         return lottoTicket;
     }
 

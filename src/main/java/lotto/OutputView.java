@@ -14,8 +14,8 @@ public class OutputView {
     private static final String LOTTO_WIN_RESULT_WORDING = "당첨 통계\n---------";
     private static final String LOTTO_BUY_WORDING = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
 
-    public static void printBuyingCount(int manualNum, int autoNum) {
-        System.out.println(format(LOTTO_BUY_WORDING, manualNum, autoNum));
+    public static void printBuyingCount(BuyingCount manualNum, BuyingCount autoNum) {
+        System.out.println(format(LOTTO_BUY_WORDING, manualNum.buyingCount(), autoNum.buyingCount()));
     }
 
     public static void outputLottoList(LottoTicket lottoTicket) {
