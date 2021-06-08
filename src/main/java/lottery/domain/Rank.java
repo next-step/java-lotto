@@ -21,11 +21,15 @@ public enum Rank {
         this.matchBonusBall = matchBonusBall;
     }
 
-    public static Rank valueOf(int matchCount, boolean matchBonus) {
+    public static Rank valueOf(int matchCount, boolean matchBonusBall) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isSameMatchCount(matchCount) && rank.matchBonusBall == matchBonus)
+                .filter(rank -> rank.isSameMatchCount(matchCount) && rank.matchBonusBall(matchBonusBall))
                 .findFirst()
                 .orElse(FAIL);
+    }
+
+    private boolean matchBonusBall(boolean matchBonusBall) {
+        return this.matchBonusBall == matchBonusBall;
     }
 
     private boolean isSameMatchCount(int matchCount) {
