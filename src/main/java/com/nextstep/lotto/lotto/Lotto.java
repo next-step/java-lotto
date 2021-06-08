@@ -17,12 +17,10 @@ public class Lotto {
 		}
 	}
 
-	public int matchCount(Set<LottoNumber> winningLotto) {
-		return Math.toIntExact(
-			numbers.stream()
-			.filter(number -> winningLotto.contains(number))
-			.count()
-		);
+	public int match(Lotto winningLotto) {
+		return Math.toIntExact(numbers.stream()
+			.filter(winningLotto.numbers::contains)
+			.count());
 	}
 
 	public Set<LottoNumber> numbers() {

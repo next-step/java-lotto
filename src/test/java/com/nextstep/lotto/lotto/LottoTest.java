@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
 	Set<LottoNumber> winningNumbers = new HashSet<>();
+	Lotto winningLotto;
 
 	@BeforeEach
 	void setUp() {
@@ -20,6 +21,8 @@ public class LottoTest {
 		winningNumbers.add(new LottoNumber(4));
 		winningNumbers.add(new LottoNumber(5));
 		winningNumbers.add(new LottoNumber(6));
+
+		winningLotto = new Lotto(winningNumbers);
 	}
 
 	@Test
@@ -68,7 +71,7 @@ public class LottoTest {
 	@Test
 	void 매칭되는_숫자_개수_6개() {
 		Lotto lotto = new Lotto(winningNumbers);
-		assertThat(lotto.matchCount(winningNumbers)).isEqualTo(6);
+		assertThat(lotto.match(winningLotto)).isEqualTo(6);
 	}
 
 	@Test
@@ -82,7 +85,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(7));
 
 		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.matchCount(winningNumbers)).isEqualTo(5);
+		assertThat(lotto.match(winningLotto)).isEqualTo(5);
 	}
 
 	@Test
@@ -96,7 +99,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(8));
 
 		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.matchCount(winningNumbers)).isEqualTo(4);
+		assertThat(lotto.match(winningLotto)).isEqualTo(4);
 	}
 
 	@Test
@@ -110,6 +113,6 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(9));
 
 		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.matchCount(winningNumbers)).isEqualTo(3);
+		assertThat(lotto.match(winningLotto)).isEqualTo(3);
 	}
 }
