@@ -18,8 +18,9 @@ class LottoWinCompareTest {
     void compareWinning() {
         for (LottoWin lottoWin : LottoWin.values()) {
             List<LottoNumber> targetLottoNums = makeLottoNumberList(lottoWin, FAIL_NUMBER);
-            int bonusNumber=lottoWin==LottoWin.SECOND_PLACE?FAIL_NUMBER:BONUS_NUMBER;
-            LottoWin comparedLottoWin = LottoWinCompare.compareWinning(targetLottoNums, baseLottoNums, new LottoNumber(bonusNumber));
+            Lotto lotto = new Lotto(targetLottoNums);
+            int bonusNumber = lottoWin == LottoWin.SECOND_PLACE ? FAIL_NUMBER : BONUS_NUMBER;
+            LottoWin comparedLottoWin = LottoWinCompare.compareWinning(lotto, baseLottoNums, new LottoNumber(bonusNumber));
             assertThat(lottoWin).isEqualTo(comparedLottoWin);
         }
     }

@@ -3,9 +3,9 @@ package lotto;
 import java.util.List;
 
 public class LottoWinCompare {
-    public static LottoWin compareWinning(List<LottoNumber> lottoNumbers, List<LottoNumber> winList, LottoNumber bonusNumber) {
-        int matchNum = countWin(lottoNumbers, winList);
-        boolean matchBonus = lottoNumbers.stream().anyMatch(v -> v.value() == bonusNumber.value());
+    public static LottoWin compareWinning(Lotto lotto, List<LottoNumber> winList, LottoNumber bonusNumber) {
+        int matchNum = countWin(lotto.lottoNum(), winList);
+        boolean matchBonus = lotto.lottoNum().stream().anyMatch(v -> v.value() == bonusNumber.value());
         return LottoWin.valueOf(matchNum, matchBonus);
     }
 

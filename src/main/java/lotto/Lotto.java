@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+
 public class Lotto {
-    private static final int MAX_LOTTO_RANGE = 45;
     private static final int SINGLE_LOTTO_DIGIT = 6;
     private static final List<LottoNumber> lottoNumPool = initLottoNum();
 
@@ -31,12 +32,12 @@ public class Lotto {
     }
 
     public void calculateLottoWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
-        this.lottoWin = LottoWinCompare.compareWinning(this.lottoNum, winList, bonusNumber);
+        this.lottoWin = LottoWinCompare.compareWinning(this, winList, bonusNumber);
     }
 
     private static List<LottoNumber> initLottoNum() {
         List<LottoNumber> lottoNumPool = new ArrayList<>();
-        for (int i = 1; i <= MAX_LOTTO_RANGE; i++) {
+        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumPool.add(new LottoNumber(i));
         }
         return lottoNumPool;
