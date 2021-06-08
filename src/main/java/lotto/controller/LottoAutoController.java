@@ -21,7 +21,7 @@ public class LottoAutoController {
         outputView.printLotto(quantity, lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbersToInt(inputView.inputWinningNumbers());
-        int bonusNumber = inputView.inputBonusNumber();
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
@@ -30,11 +30,11 @@ public class LottoAutoController {
     }
 
     private Lotto convertWinningNumbersToInt(String winningStringNumbers) {
-        List<Integer> winningNumbers = new ArrayList<>();
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
         for (String splitWinningNumber : splitWinningNumbers) {
             int number = Integer.parseInt(splitWinningNumber);
-            winningNumbers.add(number);
+            winningNumbers.add(new LottoNumber(number));
         }
         return new Lotto(winningNumbers);
     }

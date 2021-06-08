@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Lotto {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -20,11 +20,16 @@ public class Lotto {
         return count;
     }
 
-    public boolean contains(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber bonusNumber) {
+        for(LottoNumber lottoNumber : lottoNumbers) {
+            if(lottoNumber.getNumber() == bonusNumber.getNumber()) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
 }

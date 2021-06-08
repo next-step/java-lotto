@@ -25,8 +25,8 @@ public class LottoManualController {
         Lottos lottos = createLottos(autoQuantity, manualQuantity, manualNumbers);
         outputView.printLottos(manualQuantity, autoQuantity, lottos.getLottos());
 
-        Lotto winningNumbers = new Lotto(convertWinningNumbersToInt(inputView.inputWinningNumbers()));
-        int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
+        Lotto winningNumbers = new Lotto(convertWinningNumbers(inputView.inputWinningNumbers()));
+        LottoNumber bonusNumber = convertBonusNumber(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
@@ -41,18 +41,18 @@ public class LottoManualController {
         return new Lottos(lottos);
     }
 
-    private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
-        List<Integer> winningNumbers = new ArrayList<>();
+    private List<LottoNumber> convertWinningNumbers(String winningStringNumbers) {
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
         for (int i = 0; i < splitWinningNumbers.length; i++) {
             int number = Integer.parseInt(splitWinningNumbers[i]);
-            winningNumbers.add(number);
+            winningNumbers.add(new LottoNumber(number));
         }
         return winningNumbers;
     }
 
-    private int convertBonusNumberToInt(String bonusStringNumber) {
+    private LottoNumber convertBonusNumber(String bonusStringNumber) {
         int bonusNumber = Integer.parseInt(bonusStringNumber);
-        return bonusNumber;
+        return new LottoNumber(bonusNumber);
     }
 }

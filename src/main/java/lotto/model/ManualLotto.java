@@ -14,9 +14,9 @@ public class ManualLotto {
         return lottos;
     }
 
-    private List<Integer> createLottoNumbers(String manualNumbers) {
+    private List<LottoNumber> createLottoNumbers(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
-        List<Integer> lottoNumbers = addLottoNumbers(splitManualNumbers);
+        List<LottoNumber> lottoNumbers = addLottoNumbers(splitManualNumbers);
         return lottoNumbers;
     }
 
@@ -25,10 +25,10 @@ public class ManualLotto {
         return manualNumbers.split(separator);
     }
 
-    private List<Integer> addLottoNumbers(String[] manualNumbers) {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> addLottoNumbers(String[] manualNumbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            lottoNumbers.add(convertToInt(manualNumbers[i]));
+            lottoNumbers.add(new LottoNumber(convertToInt(manualNumbers[i])));
         }
         return lottoNumbers;
     }

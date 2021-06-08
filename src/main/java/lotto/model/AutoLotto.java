@@ -24,14 +24,19 @@ public class AutoLotto {
         return lottos;
     }
 
-    private List<Integer> createLottoNumbers() {
+    private List<LottoNumber> createLottoNumbers() {
         Collections.shuffle(numbers);
 
-        List<Integer> lottoNumbers = new ArrayList<>();
+        List<Integer> selectedNumbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            lottoNumbers.add(numbers.get(i));
+            selectedNumbers.add(numbers.get(i));
         }
-        Collections.sort(lottoNumbers);
+        Collections.sort(selectedNumbers);
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int selectedNumber : selectedNumbers) {
+            lottoNumbers.add(new LottoNumber(selectedNumber));
+        }
         return lottoNumbers;
     }
 }

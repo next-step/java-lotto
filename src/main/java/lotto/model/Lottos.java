@@ -9,7 +9,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void countWinningResults(Lotto winningNumbers, int bonusNumber, WinningResult winningResult) {
+    public void countWinningResults(Lotto winningNumbers, LottoNumber bonusNumber, WinningResult winningResult) {
         for (Lotto lotto : lottos) {
             int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
             boolean existenceOfBonusNumber = lotto.contains(bonusNumber);
