@@ -32,8 +32,8 @@ public class LottoAutoController {
     private Lotto convertWinningNumbersToInt(String winningStringNumbers) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
-        for (int i = 0; i < splitWinningNumbers.length; i++) {
-            int number = Integer.parseInt(splitWinningNumbers[i]);
+        for (String splitWinningNumber : splitWinningNumbers) {
+            int number = Integer.parseInt(splitWinningNumber);
             winningNumbers.add(number);
         }
         return new Lotto(winningNumbers);
