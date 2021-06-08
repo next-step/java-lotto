@@ -30,8 +30,8 @@ public class Lotto {
         return lottoWin;
     }
 
-    public void setLottoWin(LottoWin lottoWin) {
-        this.lottoWin = lottoWin;
+    public void calculateLottoWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
+        this.lottoWin = LottoWinCompare.compareWinning(this.lottoNum, winList, bonusNumber);
     }
 
     private static List<LottoNumber> initLottoNum() {

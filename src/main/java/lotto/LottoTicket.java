@@ -33,8 +33,7 @@ public class LottoTicket {
     public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<LottoNumber> winList = winningLotto.value();
         for (Lotto lotto : lottoList) {
-            LottoWin lottoWin = LottoWinCompare.compareWinning(lotto.lottoNum(), winList, bonusNumber);
-            lotto.setLottoWin(lottoWin);
+            lotto.calculateLottoWin(winList, bonusNumber);
         }
     }
 
