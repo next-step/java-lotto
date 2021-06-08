@@ -20,9 +20,9 @@ public class Lotto {
         return count;
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
+    public boolean contains(LottoNumber number) {
         for(LottoNumber lottoNumber : lottoNumbers) {
-            if(lottoNumber.getNumber() == bonusNumber.getNumber()) {
+            if(lottoNumber.getNumber() == number.getNumber()) {
                 return true;
             }
         }
