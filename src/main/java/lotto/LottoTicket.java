@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -44,6 +45,9 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumWithIdx(int idx) {
+        if (idx > this.lottoList.size() || idx < 0) {
+            return Collections.emptyList();
+        }
         return this.lottoList.get(idx).lottoNum();
     }
 
