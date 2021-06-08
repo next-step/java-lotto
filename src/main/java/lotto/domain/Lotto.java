@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,10 +11,10 @@ public class Lotto {
     final static String EMPTY = "";
     final static String COMMA_DELIMITER = ",";
 
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
-        List<Integer> lottoNumbers = new ArrayList<>();
+        Set<Integer> lottoNumbers = new HashSet<>();
         for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
             int lottoNumber = Integer.valueOf(lottoNumberStr);
             Lotto.throwIllegalArgumentException_lottoRange(lottoNumber);
@@ -22,14 +22,15 @@ public class Lotto {
         }
         throwIllegalArgumentException_lottoSize(lottoNumbers);
 
-        Collections.sort(lottoNumbers);
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
+
         this.lottoNumbers = lottoNumbers;
 
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
+    public Lotto(Set<Integer> lottoNumbers) {
 
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
         throwIllegalArgumentException_lottoSize(lottoNumbers);
         for (int lottoNumber : lottoNumbers) {
             throwIllegalArgumentException_lottoRange(lottoNumber);
@@ -37,11 +38,11 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    private static void throwIllegalArgumentException_lottoSize(List<Integer> winningLottoNumbers) {
+    private static void throwIllegalArgumentException_lottoSize(Set<Integer> winningLottoNumbers) {
         if (new HashSet<>(winningLottoNumbers).size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
             throw new IllegalArgumentException("로또 번호는 6개여야한다, 중복된 숫자가 들어가서는 안됩니다.");
         }
