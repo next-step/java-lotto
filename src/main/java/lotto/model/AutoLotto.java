@@ -26,7 +26,7 @@ public class AutoLotto {
         Collections.sort(selectedNumbers);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for(int selectedNumber : selectedNumbers) {
+        for (int selectedNumber : selectedNumbers) {
             lottoNumbers.add(new LottoNumber(selectedNumber));
         }
         return lottoNumbers;
