@@ -1,27 +1,27 @@
 package study.ascii92der.lotto.step3to5;
 
 public class LottoGame {
-    private final InputView inputView;
-    private final ResultView resultView;
+    private final LottoInput lottoInput;
+    private final LottoOutput lottoOutput;
     public static final String ERROR_MASSAGE_INPUT_NUMBER = "숫자를 입력해주세요.";
     public static final String ERROR_MASSAGE_INPUT_INVALID = "입력 값이 올바르지 않습니다. ";
 
-    public LottoGame(InputView inputView, ResultView resultView) {
-        this.inputView = inputView;
-        this.resultView = resultView;
+    public LottoGame(LottoInput lottoInput, LottoOutput lottoOutput) {
+        this.lottoInput = lottoInput;
+        this.lottoOutput = lottoOutput;
     }
 
     public void run() {
         try {
-            LottoPrice lottoPrice = inputView.inputMoney();
+            LottoPrice lottoPrice = lottoInput.inputMoney();
 
-            LottoPrice manualLottoPrice = inputView.inputManualLottoCount();
+            LottoPrice manualLottoPrice = lottoInput.inputManualLottoCount();
 
             LottoPrice balanceLottoPrice = lottoPrice.differenceLottoPrice(manualLottoPrice);
 
-            Lottos manualLottos = inputView.inputManualLottos(manualLottoPrice);
+            Lottos manualLottos = lottoInput.inputManualLottos(manualLottoPrice);
 
-            resultView.printLottoCount(manualLottoPrice, balanceLottoPrice);
+            lottoOutput.printLottoCount(manualLottoPrice, balanceLottoPrice);
 
             Lottos autoLottos = (new LottoGenerator()).generateLottos(balanceLottoPrice);
 
@@ -34,12 +34,12 @@ public class LottoGame {
     }
 
     private void resultLotto(Lottos lottos) {
-        resultView.printLottoNumbers(lottos);
-        WinningLotto winningLotto = new WinningLotto(inputView.inputWinnerNumbers(),
-                inputView.inputBonusNumber());
+        lottoOutput.printLottoNumbers(lottos);
+        WinningLotto winningLotto = new WinningLotto(lottoInput.inputWinnerNumbers(),
+                lottoInput.inputBonusNumber());
 
         WinResult winResult = new WinResult(lottos, winningLotto);
-        resultView.printWinnerResult(winResult);
+        lottoOutput.printWinnerResult(winResult);
 
     }
 
