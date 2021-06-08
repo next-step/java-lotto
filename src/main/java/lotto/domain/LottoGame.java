@@ -5,23 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-    LottoList lottoList = new LottoList();
+    LottoList lottoList;
     WinningLottoNumbers winningLottoNumbers;
 
-    LottoMachine lottoMachine = new LottoMachine();
 
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
     }
 
-    public Lotto getLotto() {
-        return lottoMachine.getAutoLotto();
-    }
-
     public LottoList getLottoList(int buyCount) {
-        for (int i = 0; i < buyCount; i++) {
-            lottoList.add(getLotto());
-        }
+        lottoList = new LottoList(buyCount);
         return lottoList;
     }
 
@@ -32,9 +25,8 @@ public class LottoGame {
 
     public WinningStatistics getWinning() {
         List<Rank> list = new ArrayList<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoList.getLottoList()) {
             int numberOfWinnings = 0;
-
             numberOfWinnings = getNumberOfWinnings(lotto, numberOfWinnings);
             boolean bonus = false;
             bonus = isBonus(lotto, bonus);
@@ -42,8 +34,7 @@ public class LottoGame {
             list.add(rank);
         }
 
-        return new WinningStatistics(list.stream()
-                .collect(Collectors.groupingBy(x -> x, Collectors.counting())));
+        return new WinningStatistics(list.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting())));
     }
 
     private boolean isBonus(Lotto lotto, boolean bonus) {
@@ -64,7 +55,7 @@ public class LottoGame {
 
     public void getManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
-            lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
+            lottoList.getManualLotto(manualLottoStr);
         }
     }
 }
