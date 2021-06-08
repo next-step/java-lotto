@@ -9,7 +9,7 @@ public class LottoMachine {
     public Lotto getAutoLotto() {
         Collections.shuffle(LottoNumbers.lottoNumberList);
         List<Integer> lotto = LottoNumbers.lottoNumberList.stream()
-                .limit(LottoConstants.LOTTO_SELECT_NUM)
+                .limit(LottoConstants.NUMBER_COUNT_PER_GAME)
                 .collect(Collectors.toList());
         return new Lotto(lotto);
     }
