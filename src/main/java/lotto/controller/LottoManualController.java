@@ -26,7 +26,7 @@ public class LottoManualController {
         outputView.printLottos(manualQuantity, autoQuantity, lottos.getLottos());
 
         Lotto winningNumbers = new Lotto(convertWinningNumbers(inputView.inputWinningNumbers()));
-        LottoNumber bonusNumber = convertBonusNumber(inputView.inputBonusNumber());
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
@@ -49,10 +49,5 @@ public class LottoManualController {
             winningNumbers.add(new LottoNumber(number));
         }
         return winningNumbers;
-    }
-
-    private LottoNumber convertBonusNumber(String bonusStringNumber) {
-        int bonusNumber = Integer.parseInt(bonusStringNumber);
-        return new LottoNumber(bonusNumber);
     }
 }
