@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MatchCountPairTest {
 
-    private final WinnerLottery WINNER_LOTTERY = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)));
+    private final WinnerLottery WINNER_LOTTERY = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)), new BonusBall(20));
     private final ImmutableList<LotteryNumbers> LOTTERIES = ImmutableList.of(
             new LotteryNumbers(List.of(1, 2, 3, 10, 25, 45)),
             new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)),
             new LotteryNumbers(List.of(9, 4, 12, 23, 29, 35))
     );
 
-    private final MatchCountPair MATCH_PAIR = new MatchCountPair(WINNER_LOTTERY, LOTTERIES, new BonusBall(WINNER_LOTTERY, 20));
+    private final MatchCountPair MATCH_PAIR = new MatchCountPair(WINNER_LOTTERY, LOTTERIES);
 
     @Test
     @DisplayName("맞춘 개수에 대한 건수를 증가시킨다.")

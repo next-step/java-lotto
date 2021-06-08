@@ -15,19 +15,18 @@ public class MatchCountPair {
 
     private final ImmutableMap<Rank, Integer> pair;
 
-    public MatchCountPair(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries, BonusBall bonusBall) {
-        this.pair = matchAllAndAddCounts(winnerLottery, lotteries, bonusBall);
+    public MatchCountPair(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries) {
+        this.pair = matchAllAndAddCounts(winnerLottery, lotteries);
     }
 
     private ImmutableMap<Rank, Integer> matchAllAndAddCounts(
             WinnerLottery winnerLottery,
-            ImmutableList<LotteryNumbers> lotteries,
-            BonusBall bonusBall
+            ImmutableList<LotteryNumbers> lotteries
     ) {
         Map<Rank, Integer> pair = initializeMatchCountPairs();
 
         for (LotteryNumbers lottery : lotteries) {
-            Rank rank = findMatchCount(winnerLottery, lottery, bonusBall.match(lottery));
+            Rank rank = findMatchCount(winnerLottery, lottery, winnerLottery.matchBonusBall(lottery));
             pair.put(rank, addMatchCount(pair, rank));
         }
 

@@ -25,10 +25,10 @@ public class LotteriesTest {
     void match_test() {
         //given
         Lotteries lotteries = new Lotteries(new GenerateCount(3), new MockNumberGenerator());
-        WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(10, 2, 34, 4, 5, 6)));
+        WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(10, 2, 34, 4, 5, 6)), new BonusBall(45));
 
         //when
-        MatchCountPair pair = lotteries.match(winnerLottery, new BonusBall(winnerLottery, 45));
+        MatchCountPair pair = lotteries.match(winnerLottery);
 
         assertAll(
                 () -> assertThat(pair.countByRank(Rank.FOURTH)).isEqualTo(3),
@@ -43,10 +43,10 @@ public class LotteriesTest {
     void matchWithBonusBall_test() {
         //given
         Lotteries lotteries = new Lotteries(new GenerateCount(1), new MockNumberGenerator());
-        WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 45)));
+        WinnerLottery winnerLottery = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 45)), new BonusBall(6));
 
         //when
-        MatchCountPair pair = lotteries.match(winnerLottery, new BonusBall(winnerLottery, 6));
+        MatchCountPair pair = lotteries.match(winnerLottery);
 
         //then
         assertThat(pair.countByRank(Rank.SECOND)).isEqualTo(1);
