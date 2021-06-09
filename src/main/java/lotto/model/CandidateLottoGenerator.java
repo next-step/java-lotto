@@ -11,7 +11,7 @@ public class CandidateLottoGenerator {
     public static CandidateLottoNumbers generate(){
         List<LottoNumber> lottoNumbers = new ArrayList<LottoNumber>();
         for (int i=MIN_LOTTO_NUMBER; i<MAX_LOTTO_LIMIT; i++){
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.of(i));
         }
         return new CandidateLottoNumbers(lottoNumbers);
     }

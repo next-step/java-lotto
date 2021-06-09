@@ -34,7 +34,7 @@ public class InputHandler {
         System.out.println(INPUT_WINNING_LOTTO_BONUS_NUMBER);
         Scanner scan = new Scanner(System.in);
         Integer bonusNumber  = scan.nextInt();
-        return new LottoNumber(bonusNumber);
+        return LottoNumber.of(bonusNumber);
     }
 
     public static LottoTicket askWinningNumbers(){
@@ -48,7 +48,7 @@ public class InputHandler {
         validate(tokens);
         List<LottoNumber> result = new ArrayList<>();
         for (String token : tokens) {
-            result.add(new LottoNumber(Integer.parseInt(token)));
+            result.add(LottoNumber.of(Integer.parseInt(token)));
         }
         return new LottoTicket(result);
     }

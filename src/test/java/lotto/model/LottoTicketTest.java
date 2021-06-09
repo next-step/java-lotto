@@ -10,10 +10,10 @@ class LottoTicketTest {
 
     @Test
     void 객체생성_테스트(){
-        LottoTicket actual = new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2)));
-        assertThat(actual.contains(new LottoNumber(1))).isTrue();
-        assertThat(actual.contains(new LottoNumber(2))).isTrue();
-        assertThat(actual.contains(new LottoNumber(3))).isFalse();
+        LottoTicket actual = new LottoTicket(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2)));
+        assertThat(actual.contains(LottoNumber.of(1))).isTrue();
+        assertThat(actual.contains(LottoNumber.of(2))).isTrue();
+        assertThat(actual.contains(LottoNumber.of(3))).isFalse();
     }
 
 }
