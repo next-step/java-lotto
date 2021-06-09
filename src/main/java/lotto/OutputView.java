@@ -12,10 +12,10 @@ public class OutputView {
     private static final String TOTAL_MATCH_WORDING_PROFIT = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 이득라는 의미임)";
 
     private static final String LOTTO_WIN_RESULT_WORDING = "당첨 통계\n---------";
-    private static final String LOTTO_BUY_WORDING = "%s개를 구매했습니다.";
+    private static final String LOTTO_BUY_WORDING = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
 
-    public static void printBuyingCount(int num) {
-        System.out.println(format(LOTTO_BUY_WORDING, num));
+    public static void printBuyingCount(BuyingCount manualNum, BuyingCount autoNum) {
+        System.out.println(format(LOTTO_BUY_WORDING, manualNum.buyingCount(), autoNum.buyingCount()));
     }
 
     public static void outputLottoList(LottoTicket lottoTicket) {
@@ -44,11 +44,11 @@ public class OutputView {
     }
 
     private static String getLottoWinTemplate(LottoTicket lottoTicket) {
-        String output = getLottoWinCountString(LottoWin.FIFTH_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIFTH_PLACE));
-        output += getLottoWinCountString(LottoWin.FOURTH_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FOURTH_PLACE));
-        output += getLottoWinCountString(LottoWin.THIRD_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.THIRD_PLACE));
-        output += getLottoWinCountString(LottoWin.SECOND_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.SECOND_PLACE));
-        output += getLottoWinCountString(LottoWin.FIRST_PLACE, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), LottoWin.FIRST_PLACE));
+        List<LottoWin> lottoWins = LottoWin.getOutputList();
+        String output = "";
+        for (LottoWin lottoWin : lottoWins) {
+            output += getLottoWinCountString(lottoWin, LottoStatistics.countLottoWinNumMatch(lottoTicket.lottoList(), lottoWin));
+        }
         return output;
     }
 

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+
 public class Lotto {
-    private static final int MAX_LOTTO_RANGE = 45;
     private static final int SINGLE_LOTTO_DIGIT = 6;
     private static final List<LottoNumber> lottoNumPool = initLottoNum();
 
@@ -18,6 +19,10 @@ public class Lotto {
         this.generateLottoNum();
     }
 
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        lottoNum = lottoNumbers;
+    }
+
     public List<LottoNumber> lottoNum() {
         return this.lottoNum;
     }
@@ -26,35 +31,13 @@ public class Lotto {
         return lottoWin;
     }
 
-
-    public void calculateWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
-        int matchNum = this.countWin(winList);
-        boolean matchBonus = this.lottoNum.contains(bonusNumber);
-        this.lottoWin = LottoWin.valueOf(matchNum, matchBonus);
-    }
-
-    private int countWin(List<LottoNumber> winList) {
-        int winNum = 0;
-        for (int i = 0; i < winList.size(); i++) {
-            winNum += this.getWinCount(winList.get(i));
-        }
-        return winNum;
-    }
-
-    private int getWinCount(LottoNumber targetNum) {
-        if (this.isWinNumber(targetNum)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private boolean isWinNumber(LottoNumber targetNum) {
-        return this.lottoNum.contains(targetNum);
+    public void calculateLottoWin(List<LottoNumber> winList, LottoNumber bonusNumber) {
+        this.lottoWin = LottoWinCompare.compareWinning(this, winList, bonusNumber);
     }
 
     private static List<LottoNumber> initLottoNum() {
         List<LottoNumber> lottoNumPool = new ArrayList<>();
-        for (int i = 1; i <= MAX_LOTTO_RANGE; i++) {
+        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumPool.add(new LottoNumber(i));
         }
         return lottoNumPool;

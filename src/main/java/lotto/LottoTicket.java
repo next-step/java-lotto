@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -13,6 +14,22 @@ public class LottoTicket {
         }
     }
 
+    public LottoTicket(List<Lotto> lottoList) {
+        if (lottoList == null) {
+            lottoList = new ArrayList<>();
+        }
+        this.lottoList = lottoList;
+    }
+
+    public void addLotto(BuyingCount num) {
+        if (lottoList == null) {
+            lottoList = new ArrayList<>();
+        }
+        for (int i = 0; i < num.buyingCount(); i++) {
+            lottoList.add(new Lotto());
+        }
+    }
+
     public List<Lotto> lottoList() {
         return lottoList;
     }
@@ -20,11 +37,14 @@ public class LottoTicket {
     public void compareWinList(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<LottoNumber> winList = winningLotto.value();
         for (Lotto lotto : lottoList) {
-            lotto.calculateWin(winList, bonusNumber);
+            lotto.calculateLottoWin(winList, bonusNumber);
         }
     }
 
     public List<LottoNumber> getLottoNumWithIdx(int idx) {
+        if (idx >= this.lottoList.size() || idx < 0) {
+            return Collections.emptyList();
+        }
         return this.lottoList.get(idx).lottoNum();
     }
 

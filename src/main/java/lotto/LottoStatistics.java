@@ -6,8 +6,8 @@ import java.util.List;
 import static lotto.Lotto.LOTTO_PRICE;
 
 public class LottoStatistics {
-    public static int getLottoBuyingCount(Money money) {
-        return (money.value() / LOTTO_PRICE);
+    public static BuyingCount getLottoBuyingCount(Money money) {
+        return new BuyingCount(money.value() / LOTTO_PRICE);
     }
 
     public static double calculateLottoTicketProfit(LottoTicket lottoTicket) {

@@ -1,6 +1,9 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoWin {
     FIRST_PLACE(6, 2000000000),
@@ -28,11 +31,18 @@ public enum LottoWin {
 
     public static LottoWin valueOf(int matchNum, boolean matchBonus) {
         return Arrays.stream(LottoWin.values())
-                .filter(v -> {
-                    return lottoWinBonusFilter(v, matchNum, matchBonus);
-                }).findFirst()
+                .filter(v -> lottoWinBonusFilter(v, matchNum, matchBonus))
+                .findFirst()
                 .orElse(LAST_PLACE);
     }
+
+    public static List<LottoWin> getOutputList() {
+        return Arrays.stream(LottoWin.values())
+                .filter(v -> v != LAST_PLACE)
+                .sorted(Comparator.comparing(LottoWin::matchNum))
+                .collect(Collectors.toList());
+    }
+
 
     private static boolean lottoWinBonusFilter(LottoWin lottoWin, int matchNum, boolean matchBonus) {
         if (lottoWin == SECOND_PLACE) {
