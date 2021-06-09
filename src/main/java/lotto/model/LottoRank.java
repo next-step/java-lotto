@@ -15,6 +15,7 @@ public enum LottoRank {
     private final int matchCount;
     private final int prize;
     private final boolean hasBonus;
+    private final static int SPECIAL_MATCH_COUNT = 5;
 
     LottoRank(int matchCount, int prize, boolean hasBonus) {
         this.matchCount = matchCount;
@@ -23,13 +24,14 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchCount, boolean hasBonus) {
-        LottoRank matchingLottoRank = Arrays.stream(values())
-                .filter(rank -> (rank.matchCount == matchCount))
-                .findFirst()
-                .orElseThrow(RuntimeException::new);
-        if (matchingLottoRank.equals(LottoRank.MATCH_COUNT_FIVE) && hasBonus){
+        if (matchCount == SPECIAL_MATCH_COUNT && hasBonus){
             return LottoRank.MATCH_COUNT_FIVE_AND_BONUS;
         }
+        LottoRank matchingLottoRank = Arrays.stream(values())
+                .filter(rank -> (rank.matchCount == matchCount) && (rank.hasBonus == false) )
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
+
         return matchingLottoRank;
     }
 
