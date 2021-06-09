@@ -40,10 +40,6 @@ public class Lotto {
 		return bonusNumber.equals(bonusNumber);
 	}
 
-	public Set<LottoNumber> numbers() {
-		return numbers;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
