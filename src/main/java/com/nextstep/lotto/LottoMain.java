@@ -29,6 +29,7 @@ public class LottoMain {
 
 		lottoOutput.printWinningNumber();
 		Set<LottoNumber> winningNumbers = lottoInput.inputWinningNumber();
+		lottoOutput.printBonusNumber();
 		LottoNumber bonusNumber = lottoInput.inputBonusNumber();
 		Lotto winning = new Lotto(winningNumbers, bonusNumber);
 		WinningLotto winningLotto = new WinningLotto(winning, bonusNumber);

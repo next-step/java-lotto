@@ -4,5 +4,6 @@ import java.util.Set;
 
 public interface LottoNumberGenerator {
 	Set<LottoNumber> makeRandomNumbers();
+
 	LottoNumber makeBonusNumber();
 }

@@ -1,6 +1,7 @@
 package com.nextstep.lotto.result;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,21 +25,22 @@ public class LottoResult {
 		return sumReward / money;
 	}
 
-	public Map<Integer, Integer> statistics() {
-		Map<Integer, Integer> resultMap = setUpMap();
-		for (LottoRank lottoRank : this.results) {
-			if (lottoRank.getMatchCount() > 0) {
-				resultMap.put(lottoRank.getMatchCount(), resultMap.getOrDefault(lottoRank.getMatchCount(), 0) + 1);
-			}
-		}
+	public Map<LottoRank, Integer> statistics() {
+		Map<LottoRank, Integer> resultMap = setUpMap();
+		this.results.stream()
+			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
+			.forEach(lottoRank -> resultMap.put(lottoRank, resultMap.getOrDefault(lottoRank, 0) + 1));
+
 		return resultMap;
 	}
 
-	private Map<Integer, Integer> setUpMap() {
-		Map<Integer, Integer> map = new TreeMap<>();
-		for (int i = LottoRank.FIFTH_RANK.getMatchCount(); i <= LottoRank.FIRST_RANK.getMatchCount(); i++) {
-			map.put(i, 0);
-		}
+	private Map<LottoRank, Integer> setUpMap() {
+		Map<LottoRank, Integer> map = new TreeMap<>();
+		Arrays.asList(LottoRank.values())
+			.stream()
+			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
+			.forEach(lottoRank -> map.put(lottoRank, 0));
+
 		return map;
 	}
 }
