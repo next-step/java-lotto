@@ -21,7 +21,7 @@ public class ViewInput {
         return validateExpense(scan.nextInt());
     }
 
-    public static int askAvailableNumLottoTicket(int expense){
+    public static int getAvailableNumLottoTicket(int expense){
         int numLottoTicket = (expense / PRICE_LOTTO_TICKET);
         System.out.println(String.format(INPUT_NUM_TICKET_MESSAGE, numLottoTicket));
         return numLottoTicket;

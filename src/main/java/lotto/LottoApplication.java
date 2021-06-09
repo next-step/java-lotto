@@ -12,7 +12,7 @@ public class LottoApplication {
     public static void main(String[] args){
 
         int expense = ViewInput.askExpense();
-        int numLottoTicket = ViewInput.askAvailableNumLottoTicket(expense);
+        int numLottoTicket = ViewInput.getAvailableNumLottoTicket(expense);
         LottoController lottoController = new LottoController(CandidateLottoGenerator.generate());
         List<LottoTicket> userLottoTickets = lottoController.generate(numLottoTicket);
         ConsoleView.printLotto(userLottoTickets);
