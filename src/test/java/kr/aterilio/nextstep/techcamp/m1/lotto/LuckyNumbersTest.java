@@ -11,11 +11,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LuckyNumbersTest {
 
+    private static final int BONUS_BALL = 45;
+
     @DisplayName("입력받는 당첨 번호는 쉼표(,)로 분리되는 숫자의 나열이며 공백은 무시한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "5, 2, 3, 1, 6, 7:6"}, delimiter = ':')
     public void createLuckyNumbers(String inputLuckyNumbers, int count) {
-        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         assertThat(luckyNumbers.count()).isEqualTo(count);
     }
 
@@ -24,7 +26,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"4,3,2,1", "5, 2, 3", "1,2,3,4,5,6,7"})
     public void createLuckyNumbersFailed_count(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("6개");
     }
@@ -34,7 +36,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"4,3,t,1", "5, t, 3"})
     public void createLuckyNumbersFailed_notInteger(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자");
     }
@@ -44,7 +46,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"1,2,3,4,5,46", "-1,2,3,4,5,6"})
     public void createLuckyNumbersFailed_outOfRange(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("범위");
     }
@@ -54,7 +56,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"1,2,3,4,5,1", "6,2,3,4,5,6"})
     public void createLuckyNumbersFailed_duplicated(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복");
     }
@@ -70,7 +72,7 @@ public class LuckyNumbersTest {
     }, delimiter = ':')
     public void judgeMatchCount(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
         Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
-        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
-        assertThat(luckyNumbers.matchCount(lotto)).isEqualTo(expected);
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
+        assertThat(luckyNumbers.rank(lotto)).isEqualTo(expected);
     }
 }

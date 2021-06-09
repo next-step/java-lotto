@@ -7,10 +7,6 @@ public class LuckyNumbers {
     private final Lotto luckyNumber;
     private final BonusBall bonusBall;
 
-    public LuckyNumbers(String inputLuckyNumbers) {
-        this(inputLuckyNumbers, 0);
-    }
-
     public LuckyNumbers(String inputLuckyNumbers, int bonusBall) {
         this.luckyNumber = new Lotto(LottoParser.parse(inputLuckyNumbers));
         this.bonusBall = new BonusBall(bonusBall);
@@ -27,7 +23,9 @@ public class LuckyNumbers {
         return luckyNumber.count();
     }
 
-    public int matchCount(Lotto lotto) {
-        return luckyNumber.matchCount(lotto);
+    public ResultRank rank(Lotto lotto) {
+        return ResultRank.valueOf(
+                luckyNumber.matchCount(lotto), lotto.contains(bonusBall.ball())
+        );
     }
 }

@@ -21,14 +21,15 @@ public class LottoResult {
     }
 
     private Map<ResultRank, Integer> judge(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
-        return collects(lottoBundles.matchCounts(luckyNumbers));
+        return collects(
+                lottoBundles.matchCounts(luckyNumbers)
+        );
     }
 
-    private Map<ResultRank, Integer> collects(Map<Integer, Integer> matchResult) {
+    private Map<ResultRank, Integer> collects(Map<ResultRank, Integer> matchResult) {
         Map<ResultRank, Integer> collection = init();
-        for (Map.Entry<Integer, Integer> entry : matchResult.entrySet()) {
-            ResultRank rank = ResultRank.valueOf(entry.getKey());
-            collectByRank(collection, rank, entry.getValue());
+        for (Map.Entry<ResultRank, Integer> entry : matchResult.entrySet()) {
+            collectByRank(collection, entry.getKey(), entry.getValue());
         }
         return collection;
     }

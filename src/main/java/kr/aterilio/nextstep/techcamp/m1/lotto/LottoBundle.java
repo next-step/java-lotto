@@ -38,10 +38,10 @@ public class LottoBundle {
         return lottoBundle.size();
     }
 
-    public Map<Integer, Integer> matchCounts(LuckyNumbers luckyNumbers) {
-        Map<Integer, Integer> result = new HashMap<>();
+    public Map<ResultRank, Integer> matchCounts(LuckyNumbers luckyNumbers) {
+        Map<ResultRank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottoBundle) {
-            result.merge(luckyNumbers.matchCount(lotto), INTERVAL_COUNT_INCREASE, Integer::sum);
+            result.merge(luckyNumbers.rank(lotto), INTERVAL_COUNT_INCREASE, Integer::sum);
         }
         return result;
     }

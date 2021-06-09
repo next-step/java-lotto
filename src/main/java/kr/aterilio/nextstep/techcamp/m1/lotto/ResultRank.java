@@ -4,37 +4,43 @@ import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 
 public enum ResultRank {
 
-    RANK_NONE(0, 0),
-    RANK_MATCH_3(3, 5_000),
-    RANK_MATCH_4(4, 50_000),
-    RANK_MATCH_5(5, 1_500_000),
-    RANK_MATCH_6(6, 2_000_000_000);
+    NONE(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000);
     
     private final int matchCount;
     private final int prizeMoney;
+    private final boolean matchBonus;
 
     ResultRank(int matchCount, int prizeMoney) {
+        this(matchCount, prizeMoney, false);
+    }
+
+    ResultRank(int matchCount, int prizeMoney, boolean matchBonus) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
+        this.matchBonus = matchBonus;
     }
 
-    public static ResultRank valueOf(int matchCount) {
-        ResultRank result = RANK_NONE;
+    public static ResultRank valueOf(int matchCount, boolean matchBonus) {
+        ResultRank result = NONE;
         for (ResultRank rank : ResultRank.values()) {
-            result = rank.matchOrDefault(matchCount, result);
+            result = rank.matchOrDefault(matchCount, matchBonus, result);
         }
         return result;
     }
 
-    public boolean isNone() {
-        return this == ResultRank.RANK_NONE;
-    }
-
-    public ResultRank matchOrDefault(int matchCount, ResultRank result) {
-        if (this.matchCount == matchCount) {
-            return this;
+    private ResultRank matchOrDefault(int matchCount, boolean matchBonus, ResultRank result) {
+        if (this.matchCount != matchCount) {
+            return result;
         }
-        return result;
+        if (this.matchCount == SECOND.matchCount && this.matchBonus != matchBonus) {
+            return result;
+        }
+        return this;
     }
 
     public int prize() {
@@ -45,6 +51,17 @@ public enum ResultRank {
         if (isNone()) {
             return StringUtil.EMPTY_STRING;
         }
-        return String.format("%d개 일치(%d원)", matchCount, prizeMoney);
+        return String.format("%d개 일치%s(%d원)", matchCount, bonusDesc(), prizeMoney);
+    }
+
+    private String bonusDesc() {
+        if (matchBonus) {
+            return ", 보너스 볼 일치";
+        }
+        return StringUtil.EMPTY_STRING;
+    }
+
+    public boolean isNone() {
+        return this == ResultRank.NONE;
     }
 }
