@@ -37,12 +37,12 @@ public class InputHandler {
         return new LottoNumber(bonusNumber);
     }
 
-    public static List<LottoNumber> askWinningNumbers(){
+    public static LottoTicket askWinningNumbers(){
         System.out.println(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
         return getLottoNumbers();
     }
 
-    private static List<LottoNumber> getLottoNumbers() {
+    private static LottoTicket getLottoNumbers() {
         Scanner scan = new Scanner(System.in);
         String[] tokens = scan.nextLine().replaceAll("\\s", "").split(",");
         validate(tokens);
@@ -50,7 +50,7 @@ public class InputHandler {
         for (String token : tokens) {
             result.add(new LottoNumber(Integer.parseInt(token)));
         }
-        return result;
+        return new LottoTicket(result);
     }
 
     private static int validateExpense(int expense){
@@ -87,7 +87,7 @@ public class InputHandler {
         System.out.println(COMMENT_GUIDE_INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         for (int i=0; i<numManualLottoTicket; i++){
-            manualLottoTickets.add(new LottoTicket(getLottoNumbers()));
+            manualLottoTickets.add(getLottoNumbers());
         }
         return manualLottoTickets;
     }

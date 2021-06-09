@@ -22,9 +22,8 @@ public class LottoApplication {
         totalLottoTickets.addAll(manualLottoTickets);
         totalLottoTickets.addAll(autoLottoTickets);
         OutputHandler.printLotto(totalLottoTickets);
-        List<LottoNumber> winningNumbers = InputHandler.askWinningNumbers();
-        LottoNumber bonusNumber = InputHandler.askBonusNumber();
-        LottoResult lottoResult = lottoController.run(new WinningLottoTicket(winningNumbers, bonusNumber),totalLottoTickets ,totalExpense);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputHandler.askWinningNumbers(), InputHandler.askBonusNumber());
+        LottoResult lottoResult = lottoController.run(winningLottoTicket, totalLottoTickets, totalExpense);
         OutputHandler.printScoreMap(lottoResult);
         OutputHandler.printResult(lottoResult);
 
