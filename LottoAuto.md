@@ -44,19 +44,45 @@
 - [x] 당첨 결과를 출력한다.
 - [x] 총 수익률(당첨금액/구매금액) 을 계산하여 출력한다.
 
-### lotto.model.LottoAutoModel 의 역할
+### lotto.mode.LottoNumber 의 기능
+- (int) number
+- LottoNumber#LottoNumber : 생성자
+- LottoNumber#checkNumber : 1부터 45까지의 수인지 확인
+- LottoNumber#isSame : 다른 LottoNumber 와 일치 여부
+- LottoNumber#getNumber : getter
+
+### lotto.model.Lotto 의 기능
+- (List<LottoNumber>) lottoNumbers
+- Lotto#Lotto : 생성자
+- Lotto#countWinningNumbers : 당첨번호 포함 갯수
+- Lotto#contains : LottoNumber 포함 여부
+- Lotto#getNumbers : getter
+
+### lotto.model.Lottos 의 기능
+- (List<Lotto>) lottos
+- Lottos#Lottos : 로또 자동 생성자
+- Lottos#Lottos : 로또 수동 생성자
+- Lottos#createAutoLottos : 로또 자동 생성
+- Lottos#createManualLottos : 로또 수동 생성
+- Lottos#countWinningResults : 당첨 결과 집계
+- Lottos#calculateEarningRate : 총 수익률 집계
+- Lottos#getLottos : getter
+
+### lotto.model.LottoAutoModel 의 기능
 - 1부터 45까지의 숫자를 갖고 있다.
 - 1부터 45까지의 숫자를 섞어서 6개의 숫자를 자동으로 선정한다.
 - 외부에서 로또 번호들을 볼 수 있다.
 - 외부로부터 당첨번호와 보너스번호를 입력받으면 몇등에 당첨되었는지 반환해준다.
 
-### lotto.view.LottoAutoInputView 의 역할
+### lotto.view.LottoAutoInputView 의 기능
 - 사용자로부터 로또구매금액을 입력받는다.
-- 사용자로부터 당첨번호와 보너스번호를 입력받는다.
+- 사용자로부터 당첨번호를 입력받는다.
+- 사용자로부터 보너스번호를 입력받는다.
 
-- 사용자에게 로또구매갯수를 출력해준다.
+### lotto.view.LottoAutoOutputView 의 기능
+- 사용자에게 로또 자동 구매갯수를 출력해준다.
 - 사용자가 구매한 로또별로 자동으로 고른 6개의 번호를 출력해준다.
+- 사용자가 구매한 로또들의 당첨 결과를 출력해준다.
+- 사용자가 구매한 로또들의 총 수익률을 출력해준다.
 
-- 사용자가 구매한 로또들의 당첨 결과와 총 수익률을 출력해준다.
-
-### lotto.controller.LottoAutoController 의 역할
+### lotto.controller.LottoAutoController 의 기능
