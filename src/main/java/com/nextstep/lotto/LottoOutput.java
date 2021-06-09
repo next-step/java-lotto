@@ -14,7 +14,7 @@ public class LottoOutput {
 	private static final String MESSAGE_NUMBER_MATCH_STRING = "%d개 일치 (%d원)- %d 개";
 	private static final String MESSAGE_NUMBER_MATCH_SECOND_STRING = "%d개 일치, 보너스 볼 일치(%d원)- %d 개";
 	private static final String MESSAGE_REVENUE_RATIO_STRING = "총 수익률은 %.2f 입니다.";
-	public static final String MESSAGE_INPUT_BONUS_BALL = "보너스볼을 입력해주세요.";
+	private static final String MESSAGE_INPUT_BONUS_BALL = "보너스볼을 입력해주세요.";
 
 	public void printMoneyForLotto() {
 		System.out.println(MESSAGE_INPUT_BUY_LOTTO_MESSAGE);
