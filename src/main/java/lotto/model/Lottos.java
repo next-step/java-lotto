@@ -11,8 +11,8 @@ public class Lottos {
     }
 
     public Lottos(int autoQuantity, int manualQuantity, List<String> manualNumbers) {
-        createAutoLottos(autoQuantity);
         createManualLottos(manualQuantity, manualNumbers);
+        createAutoLottos(autoQuantity);
     }
 
     private void createAutoLottos(int quantity) {
