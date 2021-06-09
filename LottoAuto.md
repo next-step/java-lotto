@@ -6,7 +6,7 @@
 
 ## 프로그래밍 요구 사항
 - 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-    - 기본적으로 Google Java Style Guide을 원칙으로 한다.
+    - 기본적으로 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) 을 원칙으로 한다.
     - 단, 들여쓰기는 '2 spaces'가 아닌 '4 spaces'로 한다.
 - indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
     - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
@@ -76,6 +76,28 @@
 - `AutoLotto#AutoLotto` : 생성자. 1부터 45까지의 숫자 생성
 - `AutoLotto#createLottoNumbers` : 1부터 45까지의 숫자를 섞어서 자동으로 선택한 6개의 숫자를 로또번호들로 생성
 
+### lotto.model.LottoPrice 의 기능
+- (int) price 
+- `LottoPrice#LottoPrice` : 생성자
+- `LottoPrice#getPrice` : getter
+- `LottoPrice#calculateLottoQuantity` : 로또 갯수 계산
+
+### lotto.model.WinningLotto 의 기능
+- (Lotto) winningNumbers
+- (LottoNumber) bonusNumber
+- `WinningLotto#WinningLotto` : 생성자
+- `WinningLotto#getWinningNumbers` : getter
+- `WinningLotto#getBonusNumber` : getter
+
+### lotto.model.WinningResult 의 기능
+- (int) winningAmount
+- (List<Integer>) numberOfWins
+- `WinningResult#WinningResult` : 생성자
+- `WinningResult#addNumberOfWinning` : 당첨 횟수 저장
+- `WinningResult#calculateEarningPrice` : 총 수익 계산
+- `WinningResult#getWinningAmount` : getter
+- `WinningResult#getNumberOfWins` : getter
+
 ### lotto.view.LottoAutoInputView 의 기능
 - `LottoAutoInputView#inputPrice` : 사용자로부터 로또구매금액을 입력받는다.
 - `LottoAutoInputView#inputWinningNumbers` : 사용자로부터 당첨번호를 입력받는다.
@@ -87,3 +109,5 @@
 - `LottoAutoOutputView#outputEarningRate` : 사용자가 구매한 로또들의 총 수익률을 출력해준다.
 
 ### lotto.controller.LottoAutoController 의 기능
+- `LottoAutoController#start` : 시작. 흐름 제어
+- `LottoAutoController#convertWinningNumbers` : 입력받은 당첨번호를 로또로 생성
