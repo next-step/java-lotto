@@ -12,16 +12,16 @@ public class LottoAutoOutputView {
         }
     }
 
-    public void outputWinningResults(int[] numberOfWins) {
+    public void outputWinningResults(List<Integer> numberOfWins) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        System.out.println("3개 일치 (5000원)- " + numberOfWins[0] + "개");
-        System.out.println("4개 일치 (50000원)- " + numberOfWins[1] + "개");
-        System.out.println("5개 일치 (1500000원)- " + numberOfWins[2] + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + numberOfWins[3] + "개");
-        System.out.println("6개 일치 (2000000000원)- " + numberOfWins[4] + "개");
+        System.out.println("3개 일치 (5000원)- " + numberOfWins.get(0) + "개");
+        System.out.println("4개 일치 (50000원)- " + numberOfWins.get(1) + "개");
+        System.out.println("5개 일치 (1500000원)- " + numberOfWins.get(2) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + numberOfWins.get(3) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + numberOfWins.get(4) + "개");
     }
 
     public void outputEarningRate(float earningRate) {
