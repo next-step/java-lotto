@@ -3,25 +3,29 @@ package lotto;
 import lotto.controller.LottoController;
 import lotto.model.*;
 
-import lotto.view.ConsoleView;
-import lotto.view.ViewInput;
+import lotto.view.OutputHandler;
+import lotto.view.InputHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args){
-
-        int expense = ViewInput.askExpense();
-        int numLottoTicket = ViewInput.askAvailableNumLottoTicket(expense);
         LottoController lottoController = new LottoController(CandidateLottoGenerator.generate());
-        List<LottoTicket> userLottoTickets = lottoController.generate(numLottoTicket);
-        ConsoleView.printLotto(userLottoTickets);
-
-        List<LottoNumber> winningNumbers = ViewInput.askWinningNumbers();
-        LottoNumber bonusNumber = ViewInput.askBonusNumber();
-        LottoResult lottoResult = lottoController.run(new WinningLottoTicket(winningNumbers, bonusNumber),userLottoTickets ,expense);
-        ConsoleView.printScoreMap(lottoResult);
-        ConsoleView.printResult(lottoResult);
+        int totalExpense = InputHandler.askExpense();
+        int totalNumLottoTicket = InputHandler.getAvailableNumLottoTicket(totalExpense);
+        int numManualLottoTicket = InputHandler.askNumManualLottoTicket();
+        int numAutoLottoTickets = totalNumLottoTicket - numManualLottoTicket;
+        List<LottoTicket> manualLottoTickets = InputHandler.askManualLottoTickets(numManualLottoTicket);
+        List<LottoTicket> autoLottoTickets = lottoController.generate(numAutoLottoTickets);
+        List<LottoTicket> totalLottoTickets = new ArrayList<>();
+        totalLottoTickets.addAll(manualLottoTickets);
+        totalLottoTickets.addAll(autoLottoTickets);
+        OutputHandler.printLotto(totalLottoTickets);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputHandler.askWinningNumbers(), InputHandler.askBonusNumber());
+        LottoResult lottoResult = lottoController.run(winningLottoTicket, totalLottoTickets, totalExpense);
+        OutputHandler.printScoreMap(lottoResult);
+        OutputHandler.printResult(lottoResult);
 
     }
 }

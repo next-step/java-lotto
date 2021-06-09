@@ -1,14 +1,23 @@
 package lotto.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
-    private final int MIN_LOTTO_NUM = 1;
-    private final int MAX_LOTTO_NUM = 45;
+    private static final int MIN_LOTTO_NUM = 1;
+    private static final int MAX_LOTTO_NUM = 45;
     private final String OUT_OF_NUMER_RANGE_MESSAGE = "out of number range";
     private int lottoNumber;
+    private static Map<Integer, LottoNumber> reusableLottoNumbers = new HashMap<>();
 
-    public LottoNumber(int lottoNumber) {
+    static {
+        for (int i = MIN_LOTTO_NUM; i<= MAX_LOTTO_NUM; i++){
+            reusableLottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = validate(lottoNumber);
     }
 
@@ -17,6 +26,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
             throw new RuntimeException(OUT_OF_NUMER_RANGE_MESSAGE);
         }
         return number;
+    }
+
+    public static LottoNumber of(int number){
+        LottoNumber preparedLottoNumber = reusableLottoNumbers.get(number);
+        if(preparedLottoNumber == null){
+            throw new RuntimeException("올바르지 않은 로또 생성 시도입니다");
+        }
+        return preparedLottoNumber;
     }
 
     @Override

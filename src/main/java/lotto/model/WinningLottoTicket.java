@@ -5,10 +5,10 @@ import java.util.List;
 
 public class WinningLottoTicket {
 
-    private List<LottoNumber> winningLottoNumbers;
+    private LottoTicket winningLottoTicket;
     private LottoNumber bonusNumber;
-    public WinningLottoTicket(List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
-        this.winningLottoNumbers = winningLottoNumbers;
+    public WinningLottoTicket(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
@@ -21,7 +21,7 @@ public class WinningLottoTicket {
     }
 
     private int howManyContains(LottoNumber lottoNumber){
-        if (winningLottoNumbers.contains(lottoNumber)){
+        if (winningLottoTicket.contains(lottoNumber)){
             return 1;
         }
         return 0;

@@ -16,6 +16,13 @@ class LottoRankTest {
         assertThat(actual).isEqualTo(LottoRank.MATCH_COUNT_FIVE_AND_BONUS);
     }
 
+    @DisplayName("5개일치_not보너스넘버")
+    @Test
+    void matchCount5AndNotBonusTest(){
+        LottoRank actual = LottoRank.of(5, false);
+        assertThat(actual).isEqualTo(LottoRank.MATCH_COUNT_FIVE);
+    }
+
     @DisplayName("보너스넘버만_가진경우")
     @Test
     void matchCountNot5AndBonusTest(){
