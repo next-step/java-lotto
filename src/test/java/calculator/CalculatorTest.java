@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     private Calculator calculator;
@@ -18,7 +18,7 @@ public class CalculatorTest {
 
     @Test
     public void sumNumbers() {
-        List<Integer> numbers = Arrays.asList(2,3);
+        List<Integer> numbers = Arrays.asList(2, 3);
         assertThat(calculator.sumNumbers(numbers)).isEqualTo(5);
     }
 }

@@ -3,7 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningResultTest {
     @DisplayName("로또 1등을 찾을 수 있다.")
@@ -45,7 +45,7 @@ public class WinningResultTest {
     @Test
     void findRankElse() {
         assertThat(Rank.findLottoRank(0, false))
-                .isEqualTo(Rank.WHACK);
+                .isEqualTo(Rank.NOT_IN_RANK);
     }
 
     @DisplayName("로또의 수익률을 계산할 수 있다.")

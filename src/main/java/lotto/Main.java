@@ -18,10 +18,10 @@ public class Main {
         String winningNumberInput = Input.insertWinningNumber();
         Output.showBonusNumber();
         int bonusNumber = Input.insertBonusNumber();
-        WinningNumber winningNumber = lottoCreator.
+        WinningLotto winningLotto = lottoCreator.
                 makeWinningNumber(winningNumberInput, bonusNumber);
 
-        WinningResult winningResult = new WinningResult(lottoTickets, winningNumber);
-        Output.showWinningStatus(winningResult, winningResult.calculateYield(purchase));
+        WinningResult winningResult = new WinningResult(lottoTickets, winningLotto, purchase);
+        Output.showWinningStatus(winningResult);
     }
 }

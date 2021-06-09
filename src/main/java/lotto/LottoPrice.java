@@ -1,9 +1,11 @@
 package lotto;
 
-public class LottoPrice {
-    private static final int lottoPrice = 1000;
+import java.math.BigDecimal;
 
-    public int getLottoPrice() {
+public class LottoPrice {
+    private static final BigDecimal lottoPrice = new BigDecimal(1000);
+
+    public BigDecimal getLottoPrice() {
         return lottoPrice;
     }
 }

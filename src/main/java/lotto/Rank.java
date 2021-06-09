@@ -8,9 +8,12 @@ public enum Rank {
     THIRD_PLACE(5, false, 1_500_000),
     FOURTH_PLACE(4, false, 50_000),
     FIFTH_PLACE(3, false, 5_000),
-    WHACK(0, false, 0);
+    NOT_IN_RANK(0, false, 0);
 
-    private int winningCount, winningPrize;
+    private static final int SECOND_PLACE_COUNT_CONDITION = 5;
+
+    private int winningCount;
+    private int winningPrize;
     private boolean secondJudgement;
 
     Rank(int winningCount, boolean secondJudgement, int winningPrize) {
@@ -20,17 +23,17 @@ public enum Rank {
     }
 
     public static Rank findLottoRank(int winningCount, boolean bonusBall) {
-        if (winningCount == 5) {
+        if (winningCount == SECOND_PLACE_COUNT_CONDITION) {
             return Arrays.stream(Rank.values())
                     .filter(rank -> rank.hasWinningCount(winningCount) &&
                             rank.hasWinningBonus(bonusBall))
                     .findFirst()
-                    .orElse(WHACK);
+                    .orElse(NOT_IN_RANK);
         }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.hasWinningCount(winningCount))
                 .findFirst()
-                .orElse(WHACK);
+                .orElse(NOT_IN_RANK);
     }
 
     private boolean hasWinningCount(int winningCount) {

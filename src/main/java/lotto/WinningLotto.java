@@ -2,11 +2,11 @@ package lotto;
 
 import java.util.List;
 
-public class WinningNumber {
+public class WinningLotto {
     private List<LottoNumber> winningNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningNumber(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

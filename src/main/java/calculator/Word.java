@@ -15,12 +15,9 @@ public class Word {
         return Arrays.asList(expression.split(SEPARATOR));
     }
 
-    public Boolean isCustomInput(String expression) {
+    public boolean isCustomInput(String expression) {
         String[] inputs = expression.split("");
-        if(inputs[0] == IS_NUMBER){
-            return false;
-        }
-        return true;
+        return !inputs[0].equals(IS_NUMBER);
     }
 
     public List<String> customSeparate(String customExpression) {
@@ -30,21 +27,19 @@ public class Word {
     public String findCustomSeparator(String customExpression) {
         return customSeparate(customExpression).get(CUSTOM_LETTER_INDEX);
     }
-    public void validation(List<String> numbers){
+
+    public void validation(List<String> numbers) {
 
         List<Integer> intNumbers = new ArrayList();
-        for(String number :numbers) {
+        for (String number : numbers) {
             intNumbers.add(Integer.parseInt(number));
         }
-        if(Collections.min(intNumbers) < 0){
+        if (Collections.min(intNumbers) < 0) {
             throw new RuntimeException(NEGATIVE_NUMBER_MESSAGE);
         }
     }
 
     public boolean isEmptyOrNull(String text) {
-        if (text == null ||text.isEmpty()){
-            return true;
-        }
-        return false;
+        return text == null || text.isEmpty();
     }
 }

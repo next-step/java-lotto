@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
@@ -9,7 +10,11 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public boolean putLottoTicket(LottoTicket lottoTicket) {
+        return lottoTickets.add(lottoTicket);
+    }
+
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

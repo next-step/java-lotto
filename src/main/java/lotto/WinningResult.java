@@ -1,58 +1,59 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class WinningResult {
     private static final int HUNDREDTHS_PLACE = 100;
-    private List<Rank> results = new ArrayList<>();
+    private static final int RANK_INITIAL_COUNT = 0;
+    private List<Rank> foundRanks = new ArrayList<>();
+    private HashMap<Rank, Integer> results = new HashMap<>();
+    private int foundRankCount;
+    private double yield;
 
-    public WinningResult(LottoTickets lottoTickets, WinningNumber winningNumber) {
+    public WinningResult(LottoTickets lottoTickets, WinningLotto winningLotto, int purchase) {
+        resetResult();
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            Rank lottoRank = Rank.findLottoRank(winningNumber.getWinningCount(lottoTicket),
-                    winningNumber.isWinningBonusNumber(lottoTicket));
-            results.add(lottoRank);
+            Rank lottoRank = Rank.findLottoRank(winningLotto.getWinningCount(lottoTicket),
+                    winningLotto.isWinningBonusNumber(lottoTicket));
+            foundRanks.add(lottoRank);
+        }
+        countFoundRank();
+        calculateYield(purchase);
+    }
+
+    private void resetResult() {
+        for (Rank rank : Rank.values()) {
+            results.put(rank, RANK_INITIAL_COUNT);
         }
     }
 
-    public int countFifthPlace() {
-        return (int) results.stream()
-                .filter(rank -> rank.equals(Rank.FIFTH_PLACE))
-                .count();
+    private void countFoundRank() {
+        for (Rank rank : foundRanks) {
+            foundRankCount = (int) foundRanks.stream()
+                    .filter(foundRank -> foundRank.equals(rank))
+                    .count();
+            results.put(rank, foundRankCount);
+        }
     }
 
-    public int countFourthPlace() {
-        return (int) results.stream()
-                .filter(rank -> rank.equals(Rank.FOURTH_PLACE))
-                .count();
+    public void calculateYield(int purchase) {
+        yield = Math.floor((sumWinningPrize() / (double) purchase) * HUNDREDTHS_PLACE)
+                / HUNDREDTHS_PLACE;
     }
 
-    public int countThirdPlace() {
-        return (int) results.stream()
-                .filter(rank -> rank.equals(Rank.THIRD_PLACE))
-                .count();
-    }
-
-    public int countSecondPlace() {
-        return (int) results.stream()
-                .filter(rank -> rank.equals(Rank.SECOND_PLACE))
-                .count();
-    }
-
-    public int countFirstPlace() {
-        return (int) results.stream()
-                .filter(rank -> rank.equals(Rank.FIRST_PLACE))
-                .count();
-    }
-
-    public double sumWinningPrize() {
-        return results.stream()
+    private double sumWinningPrize() {
+        return foundRanks.stream()
                 .mapToInt(Rank::getWinningPrize)
                 .sum();
     }
 
-    public double calculateYield(int purchase) {
-        return Math.floor((sumWinningPrize() / (double) purchase) * HUNDREDTHS_PLACE)
-                / HUNDREDTHS_PLACE;
+    public HashMap<Rank, Integer> getResults() {
+        return results;
+    }
+
+    public double getYield() {
+        return yield;
     }
 }

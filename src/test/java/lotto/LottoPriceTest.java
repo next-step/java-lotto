@@ -20,7 +20,7 @@ class LottoPriceTest {
     @DisplayName("로또 1장의 금액은 1000원이다.")
     @Test
     void lottoPriceTest() {
-        assertThat(lottoPrice.getLottoPrice()).isEqualTo(1000);
+        assertThat(lottoPrice.getLottoPrice().intValue()).isEqualTo(1000);
     }
 
     @DisplayName("로또의 갯수는 구매금액 / 로또금액 이다.")
