@@ -1,5 +1,6 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,11 +12,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LuckyNumbersTest {
 
+    private static final int BONUS_BALL = 45;
+
     @DisplayName("입력받는 당첨 번호는 쉼표(,)로 분리되는 숫자의 나열이며 공백은 무시한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "5, 2, 3, 1, 6, 7:6"}, delimiter = ':')
     public void createLuckyNumbers(String inputLuckyNumbers, int count) {
-        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
+        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         assertThat(luckyNumbers.count()).isEqualTo(count);
     }
 
@@ -24,7 +27,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"4,3,2,1", "5, 2, 3", "1,2,3,4,5,6,7"})
     public void createLuckyNumbersFailed_count(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("6개");
     }
@@ -34,7 +37,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"4,3,t,1", "5, t, 3"})
     public void createLuckyNumbersFailed_notInteger(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자");
     }
@@ -44,7 +47,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"1,2,3,4,5,46", "-1,2,3,4,5,6"})
     public void createLuckyNumbersFailed_outOfRange(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("범위");
     }
@@ -54,7 +57,7 @@ public class LuckyNumbersTest {
     @ValueSource(strings = {"1,2,3,4,5,1", "6,2,3,4,5,6"})
     public void createLuckyNumbersFailed_duplicated(String inputLuckyNumbers) {
         assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers);
+            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복");
     }
@@ -62,15 +65,15 @@ public class LuckyNumbersTest {
     @DisplayName("당첨 번호와 주어진 로또의 일치하는 갯수를 판단한다.")
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6:1,2,3,4,5,6:6",
-            "1,2,3,4,5,6:1,2,3,4,5,7:5",
-            "1,2,3,4,5,6:1,2,3,4,7,8:4",
-            "1,2,3,4,5,6:1,2,3,7,8,9:3",
-            "1,2,3,4,5,6:1,2,7,8,9,10:2",
+            "1,2,3,4,5,6+7:1,2,3,4,5,6:FIRST",
+            "1,2,3,4,5,6+7:1,2,3,4,5,7:SECOND",
+            "1,2,3,4,5,6+7:1,2,3,4,5,8:THIRD",
+            "1,2,3,4,5,6+7:1,2,3,4,7,8:FOURTH",
+            "1,2,3,4,5,6+7:1,2,3,7,8,9:FIFTH",
     }, delimiter = ':')
-    public void judgeMatchCount(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
+    public void judgeMatchCount(String inputLuckyNumbers, String inputLottoNumbers, ResultRank expected) {
         Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
-        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers);
-        assertThat(luckyNumbers.matchCount(lotto)).isEqualTo(expected);
+        LuckyNumbers luckyNumbers = JUnitParser.parseLuckyNumber(inputLuckyNumbers);
+        assertThat(luckyNumbers.rank(lotto)).isEqualTo(expected);
     }
 }

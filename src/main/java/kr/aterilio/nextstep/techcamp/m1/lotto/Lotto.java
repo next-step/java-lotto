@@ -16,8 +16,9 @@ public class Lotto {
 
     private static final int LOTTO_ELEMENT_COUNT = 6;
 
-    private static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
-    private static final String MSG_ERR_DUPLICATE = "로또를 구성하는 수 중에 중복된 값이 있습니다.";
+    public static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
+    public static final String MSG_ERR_DUPLICATE = "로또를 구성하는 수 중에 중복된 값이 있습니다.";
+
     private static final String MSG_ERR_REQUIRED_ELEMENT_COUNT = "입력된 요소는 " + LOTTO_ELEMENT_COUNT + "개 여야 합니다.";
 
     private final List<Integer> lottoBalls = new ArrayList<>();
@@ -73,5 +74,9 @@ public class Lotto {
 
     public String join() {
         return lottoBalls.toString();
+    }
+
+    public boolean contains(int number) {
+        return lottoBalls.contains(number);
     }
 }

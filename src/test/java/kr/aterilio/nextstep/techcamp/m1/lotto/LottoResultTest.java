@@ -1,64 +1,65 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    @DisplayName("당첨 번호와 주어진 로또의 일치하는 갯수에 따른 당첨금을 판단한다.")
+    @DisplayName("당첨 번호와 보너스 볼 일치 갯수에 따라 당첨금이 정해진다.")
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6:1,2,3,4,5,6:2000000000",
-            "1,2,3,4,5,6:1,2,3,4,5,7:1500000",
-            "1,2,3,4,5,6:1,2,3,4,7,8:50000",
-            "1,2,3,4,5,6:1,2,3,7,8,9:5000",
-            "1,2,3,4,5,6:1,2,7,8,9,10:0",
+            "1,2,3,4,5,6:1,2,3,4,5,6+7:2000000000",
+            "1,2,3,4,5,6:1,2,3,4,5,7+6:30000000",
+            "1,2,3,4,5,6:1,2,3,4,5,7+8:1500000",
+            "1,2,3,4,5,6:1,2,3,4,7,8+9:50000",
+            "1,2,3,4,5,6:1,2,3,7,8,9+10:5000",
+            "1,2,3,4,5,6:1,2,7,8,9,10+11:0",
     }, delimiter = ':')
-    public void judgePrizeMoney(String luckyNumber, String lottoBundle, int expected) {
-        LottoResult lottoResult = new LottoResult(
-                new LuckyNumbers(luckyNumber), parseLottoBundles(lottoBundle)
-        );
+    public void judgePrizeMoney(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
+        Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
+        List<Lotto> lottoList = Collections.singletonList(lotto);
+        LottoBundle lottoBundle = new LottoBundle(lottoList);
+
+        LuckyNumbers luckyNumbers = JUnitParser.parseLuckyNumber(inputLuckyNumbers);
+
+        LottoResult lottoResult = new LottoResult(luckyNumbers, lottoBundle);
         assertThat(lottoResult.prizeMoney()).isEqualTo(expected);
     }
 
     @DisplayName("각 일치 갯수에 따른 당첨 횟수를 누적으로 표기한다.")
     @ParameterizedTest
     @CsvSource(value = {
-            //expected = 1ST:2ND:3RD:4TH (count)
-            "1,2,3,4,5,6|1,2,3,4,5,6|1:0:0:0",
-            "1,2,3,4,5,6|1,2,3,4,5,7|0:1:0:0",
-            "1,2,3,4,5,6|1,2,3,4,7,8|0:0:1:0",
-            "1,2,3,4,5,6|1,2,3,7,8,9|0:0:0:1",
-            "1,2,3,4,5,6|1,2,7,8,9,10|0:0:0:0",
-            "1,2,3,4,5,6|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,7,8:1,2,3,7,8,9:1,2,7,8,9,10|1:1:1:1",
-            "1,2,3,4,5,6|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,7,8:1,2,3,7,8,9:1,2,3,7,8,9|1:1:1:2",
+            //expected = 1ST:2ND:3RD:4TH:5TH (count)
+            "1,2,3,4,5,6+7|1,2,3,4,5,6|1:0:0:0:0",
+            "1,2,3,4,5,6+7|1,2,3,4,5,7|0:1:0:0:0",
+            "1,2,3,4,5,6+7|1,2,3,4,5,8|0:0:1:0:0",
+            "1,2,3,4,5,6+7|1,2,3,4,7,8|0:0:0:1:0",
+            "1,2,3,4,5,6+7|1,2,3,7,8,9|0:0:0:0:1",
+            "1,2,3,4,5,6+7|1,2,7,8,9,10|0:0:0:0:0",
+            "1,2,3,4,5,6+7|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,5,8:1,2,3,4,7,8:1,2,3,7,8,9:1,2,7,8,9,10|1:1:1:1:1",
+            "1,2,3,4,5,6+7|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,5,8:1,2,3,4,7,8:1,2,3,4,7,8:1,2,3,7,8,9|1:1:1:2:1",
     }, delimiter = '|')
     public void resultCount(String luckyNumber, String lottoBundle, String expected) {
         LottoResult lottoResult = new LottoResult(
-                new LuckyNumbers(luckyNumber), parseLottoBundles(lottoBundle)
+                JUnitParser.parseLuckyNumber(luckyNumber), JUnitParser.parseLottoBundles(lottoBundle)
         );
-        Integer[] expectedCount = parseExpected(expected);
+        Integer[] expectedCount = JUnitParser.parseExpected(expected);
 
-        assertThat(lottoResult.is(ResultRank.RANK_MATCH_6)).isEqualTo(expectedCount[0]);
-        assertThat(lottoResult.is(ResultRank.RANK_MATCH_5)).isEqualTo(expectedCount[1]);
-        assertThat(lottoResult.is(ResultRank.RANK_MATCH_4)).isEqualTo(expectedCount[2]);
-        assertThat(lottoResult.is(ResultRank.RANK_MATCH_3)).isEqualTo(expectedCount[3]);
+        assertThat(lottoResult.is(ResultRank.FIRST)).isEqualTo(expectedCount[0]);
+        assertThat(lottoResult.is(ResultRank.SECOND)).isEqualTo(expectedCount[1]);
+        assertThat(lottoResult.is(ResultRank.THIRD)).isEqualTo(expectedCount[2]);
+        assertThat(lottoResult.is(ResultRank.FOURTH)).isEqualTo(expectedCount[3]);
+        assertThat(lottoResult.is(ResultRank.FIFTH)).isEqualTo(expectedCount[4]);
     }
-
-    private Integer[] parseExpected(String expected) {
-        return StringUtil.convertToIntegerArray(
-                expected.split(":")
-        );
-    }
-
 
     private static final int UNIT_POINT_POSITION = 2;
 
@@ -81,40 +82,36 @@ public class LottoResultTest {
     @ParameterizedTest
     @CsvSource(value = {
             // 2_000_000_000 / 1_000 = 2_000_000
-            "1,2,3,4,5,6|1,2,3,4,5,6|2000000.00",
+            "1,2,3,4,5,6+7|1,2,3,4,5,6|2000000.00",
+            // 30_000_000 / 1_000 = 30_000
+            "1,2,3,4,5,6+7|1,2,3,4,5,7|30000.00",
             // 1_500_000 / 1_000 = 1_500
-            "1,2,3,4,5,6|1,2,3,4,5,7|1500.00",
+            "1,2,3,4,5,6+7|1,2,3,4,5,8|1500.00",
             // 50_000 / 1_000 = 50
-            "1,2,3,4,5,6|1,2,3,4,7,8|50.00",
+            "1,2,3,4,5,6+7|1,2,3,4,7,8|50.00",
             // 5_000 / 1_000 = 5
-            "1,2,3,4,5,6|1,2,3,7,8,9|5.00",
+            "1,2,3,4,5,6+7|1,2,3,7,8,9|5.00",
             // 0 / 1_000 = 0
-            "1,2,3,4,5,6|1,2,7,8,9,10|0.00",
-            // 2_001_555_000 / 5_000 = 400_311
-            "1,2,3,4,5,6|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,7,8:1,2,3,7,8,9:1,2,7,8,9,10|400311.00",
-            // 2_001_560_000 / 5_000 = 400_312
-            "1,2,3,4,5,6|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,7,8:1,2,3,7,8,9:1,2,3,7,8,9|400312.00",
-            // / 5_000 / 14_000
-            "1,2,3,4,5,6|" + SPEC_TEST_CASE + "|0.35",
+            "1,2,3,4,5,6+7|1,2,7,8,9,10|0.00",
+            // 2_031_555_000 / 6_000 = 338_592.50
+            "1,2,3,4,5,6+7|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,5,8:1,2,3,4,7,8:1,2,3,7,8,9:1,2,7,8,9,10|338592.50",
+            // 2_031_605_000 / 6_000 = 338_600.84
+            "1,2,3,4,5,6+7|1,2,3,4,5,6:1,2,3,4,5,7:1,2,3,4,5,8:1,2,3,4,7,8:1,2,3,4,7,8:1,2,3,7,8,9|338600.84",
+            // / 5_000 / 14_000 = 0.35
+            "1,2,3,4,5,6+7|" + SPEC_TEST_CASE + "|0.35",
     }, delimiter = '|')
     public void rateOfReturn(String luckyNumber, String lottoBundle, String expected) {
         LottoResult lottoResult = new LottoResult(
-                new LuckyNumbers(luckyNumber), parseLottoBundles(lottoBundle)
+                JUnitParser.parseLuckyNumber(luckyNumber), JUnitParser.parseLottoBundles(lottoBundle)
         );
 
         String expectedRate = StringUtil.floorFloatWithPointPosition(
                 lottoResult.rateOfReturn(), UNIT_POINT_POSITION
         );
 
-        assertThat(expectedRate).isEqualTo(expected);
-    }
+        System.out.println(lottoResult.detail());
+        System.out.println("prizeMoney : " + lottoResult.prizeMoney());
 
-    private LottoBundle parseLottoBundles(String lottoBundle) {
-        String[] lottoArray = lottoBundle.split(":");
-        List<Lotto> lottoList = new ArrayList<>();
-        for (String lotto : lottoArray) {
-            lottoList.add(new Lotto(LottoParser.parse(lotto)));
-        }
-        return new LottoBundle(lottoList);
+        assertThat(expectedRate).isEqualTo(expected);
     }
 }

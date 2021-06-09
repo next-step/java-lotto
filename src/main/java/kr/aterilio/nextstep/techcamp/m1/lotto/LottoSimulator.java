@@ -21,7 +21,8 @@ public class LottoSimulator {
         resultView.printBundle(lottoBundle);
 
         String luckyNumber = inputView.inputLuckyNumber();
-        LuckyNumbers luckyNumbers = new LuckyNumbers(luckyNumber);
+        int bonusBall = inputView.inputBonusBall();
+        LuckyNumbers luckyNumbers = new LuckyNumbers(luckyNumber, bonusBall);
         LottoResult lottoResult = new LottoResult(luckyNumbers, lottoBundle);
         resultView.printResult(lottoResult);
 
