@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoNumber;
+import lotto.model.LottoTicket;
 
 import java.rmi.server.ExportException;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class ViewInput {
     public final static String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public final static String INPUT_WINNING_LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     public final static String COMMENT_ASK_NUMBER_OF_MANUAL_LOTTOTICKETS = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public final static String COMMENT_GUIDE_INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     public final static Integer PRICE_LOTTO_TICKET = 1000;
 
     public static int askExpense(){
@@ -37,6 +39,10 @@ public class ViewInput {
 
     public static List<LottoNumber> askWinningNumbers(){
         System.out.println(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
+        return getLottoNumbers();
+    }
+
+    private static List<LottoNumber> getLottoNumbers() {
         Scanner scan = new Scanner(System.in);
         String[] tokens = scan.nextLine().replaceAll("\\s", "").split(",");
         validate(tokens);
@@ -75,5 +81,14 @@ public class ViewInput {
         System.out.println(COMMENT_ASK_NUMBER_OF_MANUAL_LOTTOTICKETS);
         Scanner scan = new Scanner(System.in);
         return scan.nextInt();
+    }
+
+    public static List<LottoTicket> askManualLottoTickets(int numManualLottoTicket) {
+        System.out.println(COMMENT_GUIDE_INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        for (int i=0; i<numManualLottoTicket; i++){
+            manualLottoTickets.add(new LottoTicket(getLottoNumbers()));
+        }
+        return manualLottoTickets;
     }
 }
