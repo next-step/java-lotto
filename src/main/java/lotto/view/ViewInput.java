@@ -13,6 +13,7 @@ public class ViewInput {
     public final static String INPUT_NUM_TICKET_MESSAGE = "%s개를 구매했습니다.";
     public final static String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public final static String INPUT_WINNING_LOTTO_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    public final static String COMMENT_ASK_NUMBER_OF_MANUAL_LOTTOTICKETS = "수동으로 구매할 로또 수를 입력해 주세요.";
     public final static Integer PRICE_LOTTO_TICKET = 1000;
 
     public static int askExpense(){
@@ -68,5 +69,11 @@ public class ViewInput {
             e.printStackTrace();
             System.exit(-1);
         }
+    }
+
+    public static int askNumManualLottoTicket() {
+        System.out.println(COMMENT_ASK_NUMBER_OF_MANUAL_LOTTOTICKETS);
+        Scanner scan = new Scanner(System.in);
+        return scan.nextInt();
     }
 }
