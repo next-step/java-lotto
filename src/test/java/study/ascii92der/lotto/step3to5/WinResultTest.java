@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3n4;
+package study.ascii92der.lotto.step3to5;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

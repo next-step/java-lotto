@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3n4;
+package study.ascii92der.lotto.step3to5;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,5 +21,10 @@ public class Lottos {
         StringBuilder sb = new StringBuilder();
         lottos.forEach(lotto -> sb.append(lotto.toString()));
         return sb.toString();
+    }
+
+    public Lottos merge(Lottos manualLottos) {
+        this.lottos.addAll(manualLottos.lottos);
+        return this;
     }
 }

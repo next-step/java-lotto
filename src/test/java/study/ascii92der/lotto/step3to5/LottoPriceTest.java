@@ -1,4 +1,4 @@
-package study.ascii92der.lotto.step3n4;
+package study.ascii92der.lotto.step3to5;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,4 +24,10 @@ public class LottoPriceTest {
                 .hasMessageContaining(LottoPrice.ERROR_MASSAGE_NOT_ENOUGH_INPUT_MONEY);
     }
 
+    @Test
+    @DisplayName("로또 차액 구하기")
+    void differenceLottoPrice() {
+        LottoPrice lottoPrice = new LottoPrice(15000);
+        assertThat(lottoPrice.differenceLottoPrice(new LottoPrice(10))).isEqualTo(new LottoPrice(5000));
+    }
 }
