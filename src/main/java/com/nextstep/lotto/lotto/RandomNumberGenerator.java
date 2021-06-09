@@ -26,4 +26,9 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
 		}
 		return lottoNumbers;
 	}
+
+	@Override
+	public LottoNumber makeBonusNumber() {
+		return new LottoNumber(rangeNumbers.get(Lotto.LOTTO_SIZE));
+	}
 }

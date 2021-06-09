@@ -28,8 +28,10 @@ public class LottoMain {
 		lottoOutput.printLottos(lottos);
 
 		lottoOutput.printWinningNumber();
-		Lotto winningNumbers = lottoInput.inputWinningNumber();
-		WinningLotto winningLotto = new WinningLotto(winningNumbers);
+		Set<LottoNumber> winningNumbers = lottoInput.inputWinningNumber();
+		LottoNumber bonusNumber = lottoInput.inputBonusNumber();
+		Lotto winning = new Lotto(winningNumbers, bonusNumber);
+		WinningLotto winningLotto = new WinningLotto(winning, bonusNumber);
 
 		LottoResult lottoResult = lottos.matchRank(winningLotto);
 		lottoOutput.printStatistics(lottoResult);

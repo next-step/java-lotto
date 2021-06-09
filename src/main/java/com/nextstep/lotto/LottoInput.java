@@ -18,7 +18,7 @@ public class LottoInput {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public Lotto inputWinningNumber() {
+	public Set<LottoNumber> inputWinningNumber() {
 		String input = scanner.nextLine();
 		String[] winningNumber = convertStringToArray(input);
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
@@ -26,7 +26,12 @@ public class LottoInput {
 			lottoNumbers.add(new LottoNumber(convertStringToInt(number)));
 		}
 
-		return new Lotto(lottoNumbers);
+		return lottoNumbers;
+	}
+
+	public LottoNumber inputBonusNumber() {
+		String input = scanner.nextLine();
+		return new LottoNumber(Integer.parseInt(input));
 	}
 
 	private String[] convertStringToArray(String input) {

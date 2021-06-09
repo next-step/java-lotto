@@ -14,6 +14,7 @@ public class WinningLottoTest {
 
 	Set<LottoNumber> winningNumbers = new HashSet<>();
 	Lotto lotto;
+	LottoNumber bonusNumber;
 
 	@BeforeEach
 	void setUp() {
@@ -23,19 +24,20 @@ public class WinningLottoTest {
 		winningNumbers.add(new LottoNumber(4));
 		winningNumbers.add(new LottoNumber(5));
 		winningNumbers.add(new LottoNumber(6));
+		bonusNumber = new LottoNumber(10);
 
-		lotto = new Lotto(winningNumbers);
+		lotto = new Lotto(winningNumbers, bonusNumber);
 	}
 
 	@Test
 	void create() {
-		WinningLotto winningLotto = new WinningLotto(lotto);
+		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 		assertThat(winningLotto).isNotNull();
 	}
 
 	@Test
 	void 당첨번호와_비교해서_6개_매칭() {
-		WinningLotto winningLotto = new WinningLotto(lotto);
+		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		lottoNumbers.add(new LottoNumber(1));
@@ -44,14 +46,14 @@ public class WinningLottoTest {
 		lottoNumbers.add(new LottoNumber(4));
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(6));
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 
 		assertThat(winningLotto.matchRank(lotto)).isEqualTo(LottoRank.FIRST_RANK);
 	}
 
 	@Test
 	void 당첨번호와_비교해서_5개_매칭() {
-		WinningLotto winningLotto = new WinningLotto(lotto);
+		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		lottoNumbers.add(new LottoNumber(1));
@@ -60,13 +62,13 @@ public class WinningLottoTest {
 		lottoNumbers.add(new LottoNumber(4));
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(7));
-		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(winningLotto.matchRank(lotto)).isEqualTo(LottoRank.THIRD_RANK);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
+		assertThat(winningLotto.matchRank(lotto)).isEqualTo(LottoRank.SECOND_RANK);
 	}
 
 	@Test
 	void 당첨번호와_비교해서_4개_매칭() {
-		WinningLotto winningLotto = new WinningLotto(lotto);
+		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		lottoNumbers.add(new LottoNumber(1));
@@ -75,13 +77,13 @@ public class WinningLottoTest {
 		lottoNumbers.add(new LottoNumber(4));
 		lottoNumbers.add(new LottoNumber(7));
 		lottoNumbers.add(new LottoNumber(8));
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(winningLotto.matchRank(lotto)).isEqualTo(LottoRank.FOURTH_RANK);
 	}
 
 	@Test
 	void 당첨번호와_비교해서_3개_매칭() {
-		WinningLotto winningLotto = new WinningLotto(lotto);
+		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		lottoNumbers.add(new LottoNumber(1));
@@ -90,7 +92,7 @@ public class WinningLottoTest {
 		lottoNumbers.add(new LottoNumber(7));
 		lottoNumbers.add(new LottoNumber(8));
 		lottoNumbers.add(new LottoNumber(9));
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(winningLotto.matchRank(lotto)).isEqualTo(LottoRank.FIFTH_RANK);
 	}
 }

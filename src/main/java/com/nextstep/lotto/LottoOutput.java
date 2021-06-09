@@ -62,7 +62,7 @@ public class LottoOutput {
 		for (Integer matchCount : lottoResult.statistics().keySet()) {
 			String format = String.format(MESSAGE_NUMBER_MATCH_STRING
 				, matchCount
-				, LottoRank.valueOf(matchCount).getReward()
+				, LottoRank.valueOf(matchCount, true).getReward()
 				, lottoResult.statistics().get(matchCount)
 			);
 

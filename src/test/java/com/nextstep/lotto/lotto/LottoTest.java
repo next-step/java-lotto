@@ -12,6 +12,7 @@ public class LottoTest {
 
 	Set<LottoNumber> winningNumbers = new HashSet<>();
 	Lotto winningLotto;
+	LottoNumber bonusNumber;
 
 	@BeforeEach
 	void setUp() {
@@ -21,8 +22,9 @@ public class LottoTest {
 		winningNumbers.add(new LottoNumber(4));
 		winningNumbers.add(new LottoNumber(5));
 		winningNumbers.add(new LottoNumber(6));
+		bonusNumber = new LottoNumber(20);
 
-		winningLotto = new Lotto(winningNumbers);
+		winningLotto = new Lotto(winningNumbers, bonusNumber);
 	}
 
 	@Test
@@ -35,7 +37,8 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(6));
 
-		Lotto lotto = new Lotto(lottoNumbers);
+		LottoNumber bonusNumber = new LottoNumber(7);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(lotto).isNotNull();
 	}
 
@@ -49,7 +52,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 
 		assertThatThrownBy(() ->
-			new Lotto(lottoNumbers)
+			new Lotto(lottoNumbers, bonusNumber)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -64,13 +67,13 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 
 		assertThatThrownBy(() ->
-			new Lotto(lottoNumbers)
+			new Lotto(lottoNumbers, bonusNumber)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 매칭되는_숫자_개수_6개() {
-		Lotto lotto = new Lotto(winningNumbers);
+		Lotto lotto = new Lotto(winningNumbers, bonusNumber);
 		assertThat(lotto.match(winningLotto)).isEqualTo(6);
 	}
 
@@ -84,7 +87,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(7));
 
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(lotto.match(winningLotto)).isEqualTo(5);
 	}
 
@@ -98,7 +101,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(7));
 		lottoNumbers.add(new LottoNumber(8));
 
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(lotto.match(winningLotto)).isEqualTo(4);
 	}
 
@@ -112,7 +115,13 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(8));
 		lottoNumbers.add(new LottoNumber(9));
 
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
 		assertThat(lotto.match(winningLotto)).isEqualTo(3);
+	}
+
+	@Test
+	void bonusNumber_match() {
+		Lotto lotto = new Lotto(winningNumbers, bonusNumber);
+		assertThat(lotto.isBonusNumberMatch(bonusNumber)).isTrue();
 	}
 }

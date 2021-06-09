@@ -4,12 +4,15 @@ import com.nextstep.lotto.result.LottoRank;
 
 public class WinningLotto {
 	private final Lotto winningLotto;
+	private final LottoNumber bonusNumber;
 
-	public WinningLotto(Lotto winningLotto) {
+	public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
 		this.winningLotto = winningLotto;
+		this.bonusNumber = bonusNumber;
 	}
 
 	public LottoRank matchRank(Lotto lotto) {
-		return LottoRank.valueOf(lotto.match(winningLotto));
+		boolean isBonusMatch = lotto.isBonusNumberMatch(bonusNumber);
+		return LottoRank.valueOf(lotto.match(winningLotto), isBonusMatch);
 	}
 }

@@ -14,7 +14,7 @@ public class LottoFactory {
 	public static Lottos createLottos(int lottoCount) {
 		return new Lottos(IntStream.range(0, lottoCount)
 			.mapToObj(i -> randomNumberGenerator.makeRandomNumbers())
-			.map(Lotto::new)
+			.map(numbers -> new Lotto(numbers, randomNumberGenerator.makeBonusNumber()))
 			.collect(Collectors.toList()));
 	}
 }
