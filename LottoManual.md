@@ -34,5 +34,3 @@
 - 사용자가 구매한 로또들의 당첨 결과와 총 수익률을 출력해준다.
 
 ### lotto.controller.LottoManualController 의 역할
-
-
