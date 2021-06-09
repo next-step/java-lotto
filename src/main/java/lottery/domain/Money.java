@@ -5,9 +5,10 @@ import java.util.Objects;
 public class Money {
 
     public static final int MINIMUM_PRICE = 0;
-    private static final Integer DEFAULT_LOTTERY_PRICE = 1_000;
+    public static final int DEFAULT_LOTTERY_PRICE = 1_000;
+    public static final int MINIMUM_JACKPOT = 1;
 
-    private final Integer money;
+    private final int money;
 
     public Money(int money) {
         validatePrice(money);
@@ -15,8 +16,8 @@ public class Money {
         this.money = money;
     }
 
-    public int calculatePerLottery() {
-        return money / DEFAULT_LOTTERY_PRICE;
+    public int divide(Money inputMoney) {
+        return money / inputMoney.money;
     }
 
     private void validatePrice(int price) {
@@ -25,9 +26,10 @@ public class Money {
         }
     }
 
-    public double toDouble() {
-        return (double) money;
+    boolean isBiggerThanMinimumJackpot() {
+        return money < MINIMUM_JACKPOT;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

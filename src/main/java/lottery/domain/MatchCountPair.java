@@ -12,25 +12,29 @@ import static lottery.domain.WinnerLottery.MATCH_COUNT;
 public class MatchCountPair {
 
     public static final int MINIMUM_JACKPOT = 0;
+
     private final ImmutableMap<Rank, Integer> pair;
 
     public MatchCountPair(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries) {
         this.pair = matchAllAndAddCounts(winnerLottery, lotteries);
     }
 
-    private ImmutableMap<Rank, Integer> matchAllAndAddCounts(WinnerLottery winnerLottery, ImmutableList<LotteryNumbers> lotteries) {
+    private ImmutableMap<Rank, Integer> matchAllAndAddCounts(
+            WinnerLottery winnerLottery,
+            ImmutableList<LotteryNumbers> lotteries
+    ) {
         Map<Rank, Integer> pair = initializeMatchCountPairs();
 
         for (LotteryNumbers lottery : lotteries) {
-            Rank rank = findMatchCount(winnerLottery, lottery);
+            Rank rank = findMatchCount(winnerLottery, lottery, winnerLottery.matchBonusBall(lottery));
             pair.put(rank, addMatchCount(pair, rank));
         }
 
         return ImmutableMap.copyOf(pair);
     }
 
-    private Rank findMatchCount(WinnerLottery winnerLottery, LotteryNumbers lottery) {
-        return Rank.valueOf(winnerLottery.match(lottery));
+    private Rank findMatchCount(WinnerLottery winnerLottery, LotteryNumbers lottery, boolean matchBonus) {
+        return Rank.valueOf(winnerLottery.match(lottery), matchBonus);
     }
 
     private Map<Rank, Integer> initializeMatchCountPairs() {

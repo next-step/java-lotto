@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MatchCountPairTest {
 
-    private final WinnerLottery WINNER_LOTTERY = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)));
+    private final WinnerLottery WINNER_LOTTERY = new WinnerLottery(new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)), new BonusBall(20));
     private final ImmutableList<LotteryNumbers> LOTTERIES = ImmutableList.of(
             new LotteryNumbers(List.of(1, 2, 3, 10, 25, 45)),
             new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6)),
@@ -25,7 +25,9 @@ class MatchCountPairTest {
     void matchAll_test() {
         //then
         assertAll(
-                () -> assertThat(MATCH_PAIR.countByRank(Rank.FOUR)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FAIL)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(MATCH_PAIR.countByRank(Rank.FOURTH)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.THIRD)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.SECOND)).isEqualTo(0),
                 () -> assertThat(MATCH_PAIR.countByRank(Rank.FIRST)).isEqualTo(1)

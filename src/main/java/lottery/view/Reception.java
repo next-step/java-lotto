@@ -1,5 +1,6 @@
 package lottery.view;
 
+import lottery.domain.BonusBall;
 import lottery.domain.LotteryNumbers;
 import lottery.domain.Money;
 import lottery.domain.WinnerLottery;
@@ -13,11 +14,15 @@ public class Reception {
 
     public static final String INPUT_DELIMITER = ",";
 
+    public static BonusBall receiptBonusBall() {
+        return new BonusBall(receiptNumber());
+    }
+
     public static Money receiptPrice() {
         return new Money(receiptNumber());
     }
 
-    public static WinnerLottery receiptWinnerLottery(String input) {
+    public static LotteryNumbers receiptWinnerLottery(String input) {
         String[] splitInput = splitAndTrimInput(input);
 
         List<Integer> winnerLottery = new ArrayList<>();
@@ -25,7 +30,7 @@ public class Reception {
             winnerLottery.add(Integer.parseInt(number));
         }
 
-        return new WinnerLottery(new LotteryNumbers(winnerLottery));
+        return new LotteryNumbers(winnerLottery);
     }
 
     private static String[] splitAndTrimInput(String input) {
@@ -37,7 +42,7 @@ public class Reception {
         return scanner.nextLine();
     }
 
-    public static Integer receiptNumber() {
+    public static int receiptNumber() {
         Scanner scanner = makeScanner();
         return scanner.nextInt();
     }

@@ -19,16 +19,32 @@ public class ResultView {
     public static final int START_INDEX = 0;
     public static final int LINE_DELIMITER_SIZE = 7;
 
+    public static void printToReceiptBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public static void printResultProfit(String profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
     }
 
     public static void printMatchCountAndProfit(MatchCountPair matchCountPair) {
         for (Rank rank : Rank.values()) {
+            printMatchCountWithBonusWhenSecond(rank);
+
             printMatchCount(rank.matchCount());
             pintProfit(rank.profit());
             printCount(matchCountPair.countByRank(rank));
         }
+    }
+
+    private static void printMatchCountWithBonusWhenSecond(Rank rank) {
+        if (rank.equals(Rank.SECOND)) {
+            printMatchCountWithBonus(rank.matchCount());
+        }
+    }
+
+    private static void printMatchCountWithBonus(int matchCount) {
+        System.out.print(matchCount + "개 일치, 보너스볼 일치");
     }
 
     private static void printCount(int count) {
