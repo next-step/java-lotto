@@ -8,9 +8,10 @@ public class AddFunction {
     public int add(String text) {
         String newText = stringCalculator.isEmptyText(text);
         List<String> splitText = stringCalculator.splitText(newText);
+        List<String> notNegativeText=stringCalculator.notNegative(splitText);
         int result = 0;
 
-        for (String number : splitText) {
+        for (String number : notNegativeText) {
             result += Integer.parseInt(number);
         }
 

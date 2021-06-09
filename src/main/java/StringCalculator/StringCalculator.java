@@ -15,9 +15,11 @@ public class StringCalculator {
         return !text.matches(".*[0-9]*");
     }
 
-    public String notNegative(final String text) {
-        if (Integer.parseInt(text) < 0) {
-            throw new AdderException("음수는 불가능합니다");
+    public List<String> notNegative(final List<String> text) {
+        for (int i = 0; i < text.size(); i++) {
+            if (Integer.parseInt(text.get(i)) < 0) {
+                throw new AdderException("음수는 불가능합니다");
+            }
         }
         return text;
     }
