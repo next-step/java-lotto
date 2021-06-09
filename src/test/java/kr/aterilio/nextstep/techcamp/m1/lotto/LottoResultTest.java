@@ -1,12 +1,12 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,15 +29,10 @@ public class LottoResultTest {
         List<Lotto> lottoList = Collections.singletonList(lotto);
         LottoBundle lottoBundle = new LottoBundle(lottoList);
 
-        LuckyNumbers luckyNumbers = parseLuckyNumber(inputLuckyNumbers);
+        LuckyNumbers luckyNumbers = JUnitParser.parseLuckyNumber(inputLuckyNumbers);
 
         LottoResult lottoResult = new LottoResult(luckyNumbers, lottoBundle);
         assertThat(lottoResult.prizeMoney()).isEqualTo(expected);
-    }
-
-    private LuckyNumbers parseLuckyNumber(String luckyNumberWithBonusBall) {
-        String[] split = luckyNumberWithBonusBall.split("\\+");
-        return new LuckyNumbers(split[0], Integer.parseInt(split[1]));
     }
 
     @DisplayName("각 일치 갯수에 따른 당첨 횟수를 누적으로 표기한다.")
@@ -55,9 +50,9 @@ public class LottoResultTest {
     }, delimiter = '|')
     public void resultCount(String luckyNumber, String lottoBundle, String expected) {
         LottoResult lottoResult = new LottoResult(
-                parseLuckyNumber(luckyNumber), parseLottoBundles(lottoBundle)
+                JUnitParser.parseLuckyNumber(luckyNumber), JUnitParser.parseLottoBundles(lottoBundle)
         );
-        Integer[] expectedCount = parseExpected(expected);
+        Integer[] expectedCount = JUnitParser.parseExpected(expected);
 
         assertThat(lottoResult.is(ResultRank.FIRST)).isEqualTo(expectedCount[0]);
         assertThat(lottoResult.is(ResultRank.SECOND)).isEqualTo(expectedCount[1]);
@@ -65,13 +60,6 @@ public class LottoResultTest {
         assertThat(lottoResult.is(ResultRank.FOURTH)).isEqualTo(expectedCount[3]);
         assertThat(lottoResult.is(ResultRank.FIFTH)).isEqualTo(expectedCount[4]);
     }
-
-    private Integer[] parseExpected(String expected) {
-        return StringUtil.convertToIntegerArray(
-                expected.split(":")
-        );
-    }
-
 
     private static final int UNIT_POINT_POSITION = 2;
 
@@ -114,7 +102,7 @@ public class LottoResultTest {
     }, delimiter = '|')
     public void rateOfReturn(String luckyNumber, String lottoBundle, String expected) {
         LottoResult lottoResult = new LottoResult(
-                parseLuckyNumber(luckyNumber), parseLottoBundles(lottoBundle)
+                JUnitParser.parseLuckyNumber(luckyNumber), JUnitParser.parseLottoBundles(lottoBundle)
         );
 
         String expectedRate = StringUtil.floorFloatWithPointPosition(
@@ -125,14 +113,5 @@ public class LottoResultTest {
         System.out.println("prizeMoney : " + lottoResult.prizeMoney());
 
         assertThat(expectedRate).isEqualTo(expected);
-    }
-
-    private LottoBundle parseLottoBundles(String lottoBundle) {
-        String[] lottoArray = lottoBundle.split(":");
-        List<Lotto> lottoList = new ArrayList<>();
-        for (String lotto : lottoArray) {
-            lottoList.add(new Lotto(LottoParser.parse(lotto)));
-        }
-        return new LottoBundle(lottoList);
     }
 }

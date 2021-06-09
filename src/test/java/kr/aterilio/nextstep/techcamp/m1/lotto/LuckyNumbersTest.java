@@ -1,5 +1,6 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -64,15 +65,15 @@ public class LuckyNumbersTest {
     @DisplayName("당첨 번호와 주어진 로또의 일치하는 갯수를 판단한다.")
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6:1,2,3,4,5,6:6",
-            "1,2,3,4,5,6:1,2,3,4,5,7:5",
-            "1,2,3,4,5,6:1,2,3,4,7,8:4",
-            "1,2,3,4,5,6:1,2,3,7,8,9:3",
-            "1,2,3,4,5,6:1,2,7,8,9,10:2",
+            "1,2,3,4,5,6+7:1,2,3,4,5,6:FIRST",
+            "1,2,3,4,5,6+7:1,2,3,4,5,7:SECOND",
+            "1,2,3,4,5,6+7:1,2,3,4,5,8:THIRD",
+            "1,2,3,4,5,6+7:1,2,3,4,7,8:FOURTH",
+            "1,2,3,4,5,6+7:1,2,3,7,8,9:FIFTH",
     }, delimiter = ':')
-    public void judgeMatchCount(String inputLottoNumbers, String inputLuckyNumbers, int expected) {
+    public void judgeMatchCount(String inputLuckyNumbers, String inputLottoNumbers, ResultRank expected) {
         Lotto lotto = new Lotto(LottoParser.parse(inputLottoNumbers));
-        LuckyNumbers luckyNumbers = new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
+        LuckyNumbers luckyNumbers = JUnitParser.parseLuckyNumber(inputLuckyNumbers);
         assertThat(luckyNumbers.rank(lotto)).isEqualTo(expected);
     }
 }
