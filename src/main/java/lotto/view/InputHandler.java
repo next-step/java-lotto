@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class ViewInput {
+public class InputHandler {
     public final static String INPUT_EXPENSE_MESSAGE = "구입금액을 입력해 주세요.";
     public final static String INPUT_NUM_TICKET_MESSAGE = "%s개를 구매했습니다.";
     public final static String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";

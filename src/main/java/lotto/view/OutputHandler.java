@@ -5,7 +5,7 @@ import lotto.model.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class ConsoleView {
+public class OutputHandler {
     private final static String EARN = "이득";
     private final static String EVEN = "본전";
     private final static String LOSS = "손해";
@@ -13,7 +13,7 @@ public class ConsoleView {
     private final static String PROFIT_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private final static String BONUS_MESSAGE = "보너스 볼 일치";
 
-    public ConsoleView() {
+    public OutputHandler() {
     }
 
     public static void printLotto(List<LottoTicket> lottoTickets){
