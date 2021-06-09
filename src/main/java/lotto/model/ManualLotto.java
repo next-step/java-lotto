@@ -20,12 +20,8 @@ public class ManualLotto {
     private List<LottoNumber> addLottoNumbers(String[] manualNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            lottoNumbers.add(new LottoNumber(convertToInt(manualNumbers[i])));
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(manualNumbers[i])));
         }
         return lottoNumbers;
-    }
-
-    private int convertToInt(String number) {
-        return Integer.parseInt(number);
     }
 }
