@@ -13,7 +13,8 @@ public class LottoBundle {
 
     private static final String LINE_SEPARATOR = "\n";
     private static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
-    private static final String MSG_ERR_INSUFFICIENCY = "구매할 금액이 충분하지 않습니다.";
+    private static final String MSG_ERR_INSUFFICIENCY_MONEY = "구매할 금액이 충분하지 않습니다.";
+    private static final String MSG_ERR_INSUFFICIENCY_MANUAL_COUNT = "입력하신 수동 구매 횟수와 로또 갯수가 일치하지 않습니다.";
 
     private final List<Lotto> lottoBundle = new ArrayList<>();
 
@@ -21,13 +22,20 @@ public class LottoBundle {
         buy(money);
     }
 
-    public LottoBundle(int money, int manualCount) {
-        validateSufficiency(money, manualCount);
+    public LottoBundle(int money, int manualCount, List<Lotto> boughtLotto) {
+        validateSufficiencyMoney(money, boughtLotto.size());
+        validateSufficiencyManualCount(manualCount, boughtLotto.size());
     }
 
-    private void validateSufficiency(int money, int manualCount) {
+    private void validateSufficiencyManualCount(int manualCount, int inputCount) {
+        if (manualCount != inputCount) {
+            throw new IllegalArgumentException(MSG_ERR_INSUFFICIENCY_MANUAL_COUNT);
+        }
+    }
+
+    private void validateSufficiencyMoney(int money, int manualCount) {
         if (!buyable(money, manualCount)) {
-            throw new IllegalArgumentException(MSG_ERR_INSUFFICIENCY);
+            throw new IllegalArgumentException(MSG_ERR_INSUFFICIENCY_MONEY);
         }
     }
 
