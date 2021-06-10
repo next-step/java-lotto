@@ -1,27 +1,25 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Machine {
 
     private static final int IDX_START = 0;
     private static final int IDX_END_NOT_CLOSED = 6;
 
-    private static final List<Integer> numberPool;
-    private static final Integer[] EMPTY_INT_ARRAY = {0};
+    private static final List<LottoBall> numberPool;
 
     static {
-        numberPool = IntStream.rangeClosed(Lotto.LOTTO_BALL_MIN, Lotto.LOTTO_BALL_MAX)
-                              .boxed()
-                              .collect(Collectors.toList());
+        numberPool = new ArrayList<>();
+        for (int i = LottoBall.MIN; i < LottoBall.MAX; i++) {
+            numberPool.add(new LottoBall(i));
+        }
     }
 
-    public static Integer[] draw() {
+    public static Lotto draw() {
         Collections.shuffle(numberPool);
-        return  numberPool.subList(IDX_START, IDX_END_NOT_CLOSED)
-                          .toArray(EMPTY_INT_ARRAY);
+        return new Lotto(numberPool.subList(IDX_START, IDX_END_NOT_CLOSED));
     }
 }
