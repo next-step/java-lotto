@@ -25,6 +25,16 @@ public class LottoBundle {
     public LottoBundle(int money, int manualCount, List<Lotto> boughtLotto) {
         validateSufficiencyMoney(money, boughtLotto.size());
         validateSufficiencyManualCount(manualCount, boughtLotto.size());
+        buyManual(boughtLotto);
+        buy(remains(money, manualCount));
+    }
+
+    private void buyManual(List<Lotto> boughtLotto) {
+        lottoBundle.addAll(boughtLotto);
+    }
+
+    private int remains(int money, int manualCount) {
+        return money - (manualCount * Lotto.PRICE_PER_LOTTO);
     }
 
     private void validateSufficiencyManualCount(int manualCount, int inputCount) {
@@ -44,7 +54,7 @@ public class LottoBundle {
     }
 
     public LottoBundle(List<Lotto> boughtLotto) {
-        this.lottoBundle.addAll(boughtLotto);
+        buyManual(boughtLotto);
     }
 
     private void buy(int money) {

@@ -57,6 +57,18 @@ public class LottoBundleTest {
                 .hasMessageContaining("일치하지 않습니다");
     }
 
+    @DisplayName("'수동으로 구매할 로또 수' 만큼의 금액을 제외한 잔액만큼 추첨 번호를 자동으로 추첨하여 구매한다.")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "2000_1_1,2,3,4,5,6_2",
+            "4000_1_1,2,3,4,5,6_4",
+    }, delimiter = '_')
+    public void buyLotto_withManual(int money, int manualCount, String manualBuyLotto, int totalCount) {
+        List<Lotto> lotteries = parseLottoList(manualBuyLotto);
+        LottoBundle lottoBundle = new LottoBundle(money, manualCount, lotteries);
+        assertThat(lottoBundle.count()).isEqualTo(totalCount);
+    }
+
     private List<Lotto> parseLottoList(String manualBuyLotto) {
         String[] splits = manualBuyLotto.split(SPLIT_TOKEN_LOTTERIES);
         List<Lotto> list = new ArrayList<>();
