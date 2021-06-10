@@ -8,11 +8,11 @@ public class LottoResult {
     private final int prizeMoney;
     private final float rateOfReturn;
 
-    private final LottoResultCount resultCount;
+    private final LottoResultDetail resultDetail;
 
     public LottoResult(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
-        resultCount = new LottoResultCount(lottoBundles.matchCounts(luckyNumbers));
-        prizeMoney = resultCount.calculatePrizeMoney();
+        resultDetail = new LottoResultDetail(lottoBundles.matchCounts(luckyNumbers));
+        prizeMoney = resultDetail.calculatePrizeMoney();
         rateOfReturn = calculateRateOfReturn(prizeMoney, lottoBundles.paid());
     }
 
@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     public int is(ResultRank rankMatch) {
-        return resultCount.is(rankMatch);
+        return resultDetail.is(rankMatch);
     }
 
     public int prizeMoney() {
@@ -32,7 +32,7 @@ public class LottoResult {
     }
 
     public String detail() {
-        return resultCount.detail();
+        return resultDetail.detail();
     }
 
     public float rateOfReturn() {

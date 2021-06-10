@@ -3,13 +3,13 @@ package kr.aterilio.nextstep.techcamp.m1.lotto;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LottoResultCount {
+public class LottoResultDetail {
 
     private static final int EMPTY_COUNT = 0;
 
     private final Map<ResultRank, Integer> resultCount;
 
-    public LottoResultCount(Map<ResultRank, Integer> resultCount) {
+    public LottoResultDetail(Map<ResultRank, Integer> resultCount) {
         this.resultCount = collects(resultCount);
     }
 
