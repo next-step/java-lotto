@@ -37,15 +37,7 @@ public class LottoResultDetail {
         collection.put(rank, count);
     }
 
-    public int calculatePrizeMoney() {
-        int prizeMoney = 0;
-        for (Map.Entry<ResultRank, Integer> entry : resultCount.entrySet()) {
-            prizeMoney += entry.getKey().prize() * entry.getValue();
-        }
-        return prizeMoney;
-    }
-
-    public int is(ResultRank rankMatch) {
+    public int of(ResultRank rankMatch) {
         return resultCount.getOrDefault(rankMatch, EMPTY_COUNT);
     }
 

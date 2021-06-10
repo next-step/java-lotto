@@ -2,6 +2,10 @@ package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum ResultRank {
 
     NONE(0, 0),
@@ -25,6 +29,12 @@ public enum ResultRank {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.matchBonus = matchBonus;
+    }
+
+    public static ResultRank[] valuesReverse() {
+        List<ResultRank> list = Arrays.asList(ResultRank.values());
+        Collections.reverse(list);
+        return (ResultRank[]) list.toArray();
     }
 
     public static ResultRank valueOf(int matchCount, boolean matchBonus) {
