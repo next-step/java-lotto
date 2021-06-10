@@ -10,7 +10,9 @@ public enum ResultRank {
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000);
-    
+
+    private static final String MSG_ERR_OUT_OF_RANGE = "로또 결과의 판정이 범위를 벗어났습니다.";
+
     private final int matchCount;
     private final int prizeMoney;
     private final boolean matchBonus;
@@ -26,18 +28,37 @@ public enum ResultRank {
     }
 
     public static ResultRank valueOf(int matchCount, boolean matchBonus) {
+        validateRange(matchCount);
+        if (SECOND.matchCount == matchCount) {
+            return valueOf2ndOr3rd(matchBonus);
+        }
+        return findRank(matchCount);
+    }
+
+    private static void validateRange(int matchCount) {
+        if (matchCount < NONE.matchCount || matchCount > FIRST.matchCount) {
+            throw new IllegalArgumentException(MSG_ERR_OUT_OF_RANGE);
+        }
+    }
+
+    private static ResultRank valueOf2ndOr3rd(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    private static ResultRank findRank(int matchCount) {
         ResultRank result = NONE;
-        for (ResultRank rank : ResultRank.values()) {
-            result = rank.matchOrDefault(matchCount, matchBonus, result);
+        ResultRank[] resultRanks = ResultRank.values();
+        for (ResultRank rank : resultRanks) {
+            result = rank.matchOrDefault(matchCount, result);
         }
         return result;
     }
 
-    private ResultRank matchOrDefault(int matchCount, boolean matchBonus, ResultRank result) {
+    private ResultRank matchOrDefault(int matchCount, ResultRank result) {
         if (this.matchCount != matchCount) {
-            return result;
-        }
-        if (this.matchCount == SECOND.matchCount && this.matchBonus != matchBonus) {
             return result;
         }
         return this;
