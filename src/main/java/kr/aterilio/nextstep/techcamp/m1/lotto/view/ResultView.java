@@ -18,7 +18,7 @@ public class ResultView {
     }
 
     public void printResult(LottoResult lottoResult) {
-        float rateOfReturn = lottoResult.rateOfReturn();
+        float rateOfReturn = lottoResult.earningsRate();
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

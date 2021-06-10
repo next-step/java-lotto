@@ -5,30 +5,23 @@ import kr.aterilio.nextstep.techcamp.m1.lotto.LuckyNumbers;
 
 public class LottoResult {
 
-    private final PrizeMoney prizeMoney;
-    private final EarningsRate earningsRate;
-
     private final LottoResultDetail resultDetail;
+    private final LottoResultStats resultStats;
 
     public LottoResult(LuckyNumbers luckyNumbers, LottoBundle lottoBundles) {
         resultDetail = new LottoResultDetail(lottoBundles.matchCounts(luckyNumbers));
-        prizeMoney = new PrizeMoney(resultDetail);
-        earningsRate = new EarningsRate(prizeMoney.value(), lottoBundles.paid());
-    }
-
-    public int countOf(ResultRank rankMatch) {
-        return resultDetail.of(rankMatch);
+        resultStats = new LottoResultStats(resultDetail, lottoBundles.paid());
     }
 
     public int prizeMoney() {
-        return prizeMoney.value();
+        return resultStats.prizeMoney();
+    }
+
+    public float earningsRate() {
+        return resultStats.earningsRate();
     }
 
     public String detail() {
         return resultDetail.detail();
-    }
-
-    public float rateOfReturn() {
-        return earningsRate.value();
     }
 }
