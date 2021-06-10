@@ -1,5 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.ResultRank;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

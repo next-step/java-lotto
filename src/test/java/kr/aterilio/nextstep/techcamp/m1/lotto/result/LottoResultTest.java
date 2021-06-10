@@ -1,5 +1,8 @@
-package kr.aterilio.nextstep.techcamp.m1.lotto;
+package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
+import kr.aterilio.nextstep.techcamp.m1.lotto.Lotto;
+import kr.aterilio.nextstep.techcamp.m1.lotto.LottoBundle;
+import kr.aterilio.nextstep.techcamp.m1.lotto.LuckyNumbers;
 import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 import org.junit.jupiter.api.DisplayName;

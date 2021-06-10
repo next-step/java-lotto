@@ -1,4 +1,4 @@
-package kr.aterilio.nextstep.techcamp.m1.lotto;
+package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
 public class EarningsRate {
 

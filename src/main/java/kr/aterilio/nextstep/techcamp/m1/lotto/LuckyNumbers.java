@@ -1,5 +1,6 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.ResultRank;
 import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
 
 public class LuckyNumbers {

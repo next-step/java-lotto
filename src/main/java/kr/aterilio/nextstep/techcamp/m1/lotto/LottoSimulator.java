@@ -1,5 +1,6 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.LottoResult;
 import kr.aterilio.nextstep.techcamp.m1.lotto.view.InputView;
 import kr.aterilio.nextstep.techcamp.m1.lotto.view.ResultView;
 

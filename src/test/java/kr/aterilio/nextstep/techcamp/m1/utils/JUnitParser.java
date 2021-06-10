@@ -1,14 +1,10 @@
 package kr.aterilio.nextstep.techcamp.m1.utils;
 
-import kr.aterilio.nextstep.techcamp.m1.lotto.Lotto;
-import kr.aterilio.nextstep.techcamp.m1.lotto.LottoBundle;
-import kr.aterilio.nextstep.techcamp.m1.lotto.LottoResultDetail;
 import kr.aterilio.nextstep.techcamp.m1.lotto.LuckyNumbers;
-import kr.aterilio.nextstep.techcamp.m1.lotto.ResultRank;
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.LottoResultDetail;
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.ResultRank;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

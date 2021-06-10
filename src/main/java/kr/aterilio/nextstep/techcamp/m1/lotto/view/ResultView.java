@@ -1,7 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto.view;
 
 import kr.aterilio.nextstep.techcamp.m1.lotto.LottoBundle;
-import kr.aterilio.nextstep.techcamp.m1.lotto.LottoResult;
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.LottoResult;
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 
 public class ResultView {

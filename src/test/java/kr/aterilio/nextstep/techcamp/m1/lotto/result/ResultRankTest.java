@@ -1,4 +1,4 @@
-package kr.aterilio.nextstep.techcamp.m1.lotto;
+package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
