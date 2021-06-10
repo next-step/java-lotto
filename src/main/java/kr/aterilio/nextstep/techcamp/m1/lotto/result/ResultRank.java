@@ -2,10 +2,6 @@ package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public enum ResultRank {
 
     NONE(0, 0),
@@ -16,6 +12,7 @@ public enum ResultRank {
     FIRST(6, 2_000_000_000);
 
     private static final String MSG_ERR_OUT_OF_RANGE = "로또 결과의 판정이 범위를 벗어났습니다.";
+    private static final String FORMAT_DETAIL = "%d개 일치%s(%d원)";
 
     private final int matchCount;
     private final int prizeMoney;
@@ -29,12 +26,6 @@ public enum ResultRank {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
         this.matchBonus = matchBonus;
-    }
-
-    public static ResultRank[] valuesReverse() {
-        List<ResultRank> list = Arrays.asList(ResultRank.values());
-        Collections.reverse(list);
-        return (ResultRank[]) list.toArray();
     }
 
     public static ResultRank valueOf(int matchCount, boolean matchBonus) {
@@ -82,7 +73,7 @@ public enum ResultRank {
         if (isNone()) {
             return StringUtil.EMPTY_STRING;
         }
-        return String.format("%d개 일치%s(%d원)", matchCount, bonusDesc(), prizeMoney);
+        return String.format(FORMAT_DETAIL, matchCount, bonusDesc(), prizeMoney);
     }
 
     private String bonusDesc() {
