@@ -10,13 +10,29 @@ import java.util.Map;
 public class LottoBundle {
 
     private static final int INTERVAL_COUNT_INCREASE = 1;
-    private static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
+
     private static final String LINE_SEPARATOR = "\n";
+    private static final String MSG_ERR_PRICE_NEGATIVE = "구입 금액은 0원 이상이어야 합니다.";
+    private static final String MSG_ERR_INSUFFICIENCY = "구매할 금액이 충분하지 않습니다.";
 
     private final List<Lotto> lottoBundle = new ArrayList<>();
 
     public LottoBundle(int money) {
         buy(money);
+    }
+
+    public LottoBundle(int money, int manualCount) {
+        validateSufficiency(money, manualCount);
+    }
+
+    private void validateSufficiency(int money, int manualCount) {
+        if (!buyable(money, manualCount)) {
+            throw new IllegalArgumentException(MSG_ERR_INSUFFICIENCY);
+        }
+    }
+
+    private boolean buyable(int money, int manualCount) {
+        return manualCount * Lotto.PRICE_PER_LOTTO <= money;
     }
 
     public LottoBundle(List<Lotto> boughtLotto) {

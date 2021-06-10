@@ -27,4 +27,14 @@ public class LottoBundleTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0원 이상");
     }
+
+    @DisplayName("'수동으로 구매할 로또 수'가 구매 금액으로 구매할 수 있는 것보다 클 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1000,2"})
+    public void buyLottoFailed_insufficientMoney(int money, int manualCount) {
+        assertThatThrownBy(() -> {
+            new LottoBundle(money, manualCount);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("충분하지 않습니다");
+    }
 }
