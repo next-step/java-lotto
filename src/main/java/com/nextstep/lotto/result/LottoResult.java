@@ -18,7 +18,7 @@ public class LottoResult {
 	}
 
 	public double revenueRatio(int money) {
-		int sumReward = 0;
+		double sumReward = 0;
 		for (LottoRank lottoRank : results) {
 			sumReward += lottoRank.getReward();
 		}
@@ -36,8 +36,7 @@ public class LottoResult {
 
 	private Map<LottoRank, Integer> setUpMap() {
 		Map<LottoRank, Integer> map = new TreeMap<>();
-		Arrays.asList(LottoRank.values())
-			.stream()
+		Arrays.stream(LottoRank.values())
 			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
 			.forEach(lottoRank -> map.put(lottoRank, 0));
 

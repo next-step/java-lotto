@@ -12,7 +12,7 @@ public class WinningLotto {
 	}
 
 	public LottoRank matchRank(Lotto lotto) {
-		boolean isBonusMatch = lotto.isBonusNumberMatch(bonusNumber);
+		boolean isBonusMatch = lotto.contains(bonusNumber);
 		return LottoRank.valueOf(lotto.match(winningLotto), isBonusMatch);
 	}
 }

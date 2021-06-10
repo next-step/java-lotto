@@ -11,15 +11,15 @@ public class RandomNumberGeneratorTest {
 	@Test
 	void create_randomNumbers() {
 		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-		Set<LottoNumber> randomNumbers = randomNumberGenerator.makeRandomNumbers();
+		Set<LottoNumber> randomNumbers = randomNumberGenerator.makeNumbers();
 		assertThat(randomNumbers.size()).isEqualTo(6);
 	}
 
 	@RepeatedTest(10)
 	void create_bonusNumber() {
 		RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-		Set<LottoNumber> randomNumbers = randomNumberGenerator.makeRandomNumbers();
-		LottoNumber bonusNumber = randomNumberGenerator.makeBonusNumber();
+		Set<LottoNumber> randomNumbers = randomNumberGenerator.makeNumbers();
+		LottoNumber bonusNumber = randomNumberGenerator.makeNumber();
 		assertThat(randomNumbers.contains(bonusNumber)).isFalse();
 	}
 }

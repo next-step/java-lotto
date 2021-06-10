@@ -31,7 +31,7 @@ public class LottoMain {
 		Set<LottoNumber> winningNumbers = lottoInput.inputWinningNumber();
 		lottoOutput.printBonusNumber();
 		LottoNumber bonusNumber = lottoInput.inputBonusNumber();
-		Lotto winning = new Lotto(winningNumbers, bonusNumber);
+		Lotto winning = new Lotto(winningNumbers);
 		WinningLotto winningLotto = new WinningLotto(winning, bonusNumber);
 
 		LottoResult lottoResult = lottos.matchRank(winningLotto);

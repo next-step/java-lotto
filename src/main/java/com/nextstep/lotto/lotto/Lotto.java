@@ -12,32 +12,21 @@ public class Lotto {
 
 	public static final int LOTTO_SIZE = 6;
 	private static final String LOTTO_NUMBER_CAN_ONLY_6_DIGITS = "로또의 숫자는 6개만 가능합니다.";
-	public static final String BONUS_NUMBER_DO_NOT_ALLOWED_DUPLICATE = "보너스 볼은 로또 번호 6개와 달라야 합니다.";
 	public static final String DELIMITER = ", ";
 
 	private final Set<LottoNumber> numbers;
-	private final LottoNumber bonusNumber;
 
-	public Lotto(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+	public Lotto(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_SIZE) {
 			throw new IllegalArgumentException(LOTTO_NUMBER_CAN_ONLY_6_DIGITS);
 		}
-		if (lottoNumbers.contains(bonusNumber)) {
-			throw new IllegalArgumentException(BONUS_NUMBER_DO_NOT_ALLOWED_DUPLICATE);
-		}
 		this.numbers = new HashSet<>(lottoNumbers);
-		this.bonusNumber = bonusNumber;
-
 	}
 
 	public int match(Lotto winningLotto) {
 		return Math.toIntExact(numbers.stream()
 			.filter(winningLotto.numbers::contains)
 			.count());
-	}
-
-	public boolean isBonusNumberMatch(LottoNumber bonusNumber) {
-		return bonusNumber.equals(bonusNumber);
 	}
 
 	@Override
@@ -64,6 +53,10 @@ public class Lotto {
 		for (LottoNumber lottoNumber : lottoNumbers) {
 			stringJoiner.add(String.valueOf(lottoNumber));
 		}
-		return "[ " + stringJoiner + " ( " + bonusNumber + " )" + " ]";
+		return "[ " + stringJoiner + " ]";
+	}
+
+	public boolean contains(LottoNumber bonusNumber) {
+		return numbers.contains(bonusNumber);
 	}
 }

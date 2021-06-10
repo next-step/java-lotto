@@ -18,7 +18,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
 	}
 
 	@Override
-	public Set<LottoNumber> makeRandomNumbers() {
+	public Set<LottoNumber> makeNumbers() {
 		Collections.shuffle(rangeNumbers);
 		Set<LottoNumber> lottoNumbers = new HashSet<>();
 		for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
@@ -28,7 +28,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
 	}
 
 	@Override
-	public LottoNumber makeBonusNumber() {
+	public LottoNumber makeNumber() {
 		return new LottoNumber(rangeNumbers.get(Lotto.LOTTO_SIZE));
 	}
 }

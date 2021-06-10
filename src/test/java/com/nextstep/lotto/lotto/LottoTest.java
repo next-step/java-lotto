@@ -24,7 +24,7 @@ public class LottoTest {
 		winningNumbers.add(new LottoNumber(6));
 		bonusNumber = new LottoNumber(20);
 
-		winningLotto = new Lotto(winningNumbers, bonusNumber);
+		winningLotto = new Lotto(winningNumbers);
 	}
 
 	@Test
@@ -37,8 +37,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(6));
 
-		LottoNumber bonusNumber = new LottoNumber(7);
-		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
+		Lotto lotto = new Lotto(lottoNumbers);
 		assertThat(lotto).isNotNull();
 	}
 
@@ -52,7 +51,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 
 		assertThatThrownBy(() ->
-			new Lotto(lottoNumbers, bonusNumber)
+			new Lotto(lottoNumbers)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -67,13 +66,13 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 
 		assertThatThrownBy(() ->
-			new Lotto(lottoNumbers, bonusNumber)
+			new Lotto(lottoNumbers)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 매칭되는_숫자_개수_6개() {
-		Lotto lotto = new Lotto(winningNumbers, bonusNumber);
+		Lotto lotto = new Lotto(winningNumbers);
 		assertThat(lotto.match(winningLotto)).isEqualTo(6);
 	}
 
@@ -87,7 +86,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(5));
 		lottoNumbers.add(new LottoNumber(7));
 
-		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
+		Lotto lotto = new Lotto(lottoNumbers);
 		assertThat(lotto.match(winningLotto)).isEqualTo(5);
 	}
 
@@ -101,7 +100,7 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(7));
 		lottoNumbers.add(new LottoNumber(8));
 
-		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
+		Lotto lotto = new Lotto(lottoNumbers);
 		assertThat(lotto.match(winningLotto)).isEqualTo(4);
 	}
 
@@ -115,13 +114,21 @@ public class LottoTest {
 		lottoNumbers.add(new LottoNumber(8));
 		lottoNumbers.add(new LottoNumber(9));
 
-		Lotto lotto = new Lotto(lottoNumbers, bonusNumber);
+		Lotto lotto = new Lotto(lottoNumbers);
 		assertThat(lotto.match(winningLotto)).isEqualTo(3);
 	}
 
 	@Test
-	void bonusNumber_match() {
-		Lotto lotto = new Lotto(winningNumbers, bonusNumber);
-		assertThat(lotto.isBonusNumberMatch(bonusNumber)).isTrue();
+	void name() {
+		Set<LottoNumber> lottoNumbers = new HashSet<>();
+		lottoNumbers.add(new LottoNumber(1));
+		lottoNumbers.add(new LottoNumber(2));
+		lottoNumbers.add(new LottoNumber(3));
+		lottoNumbers.add(new LottoNumber(7));
+		lottoNumbers.add(new LottoNumber(8));
+		lottoNumbers.add(new LottoNumber(9));
+
+		Lotto lotto = new Lotto(lottoNumbers);
+		assertThat(lotto.contains(new LottoNumber(8))).isTrue();
 	}
 }

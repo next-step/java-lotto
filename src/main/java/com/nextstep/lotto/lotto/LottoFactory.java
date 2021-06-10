@@ -5,16 +5,16 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-	private static RandomNumberGenerator randomNumberGenerator;
+	private static LottoNumberGenerator lottoNumberGenerator;
 
-	public LottoFactory(RandomNumberGenerator randomNumberGenerator) {
-		this.randomNumberGenerator = randomNumberGenerator;
+	public LottoFactory(RandomNumberGenerator lottoNumberGenerator) {
+		this.lottoNumberGenerator = lottoNumberGenerator;
 	}
 
 	public static Lottos createLottos(int lottoCount) {
 		return new Lottos(IntStream.range(0, lottoCount)
-			.mapToObj(i -> randomNumberGenerator.makeRandomNumbers())
-			.map(numbers -> new Lotto(numbers, randomNumberGenerator.makeBonusNumber()))
+			.mapToObj(i -> lottoNumberGenerator.makeNumbers())
+			.map(numbers -> new Lotto(numbers))
 			.collect(Collectors.toList()));
 	}
 }
