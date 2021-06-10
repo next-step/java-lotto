@@ -1,6 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -10,6 +11,7 @@ public class EarningsRateTest {
 
     private static final int UNIT_POINT_POSITION = 2;
 
+    @DisplayName("당첨 결과에 따른 당첨 통계 수익률을 표기한다.")
     @ParameterizedTest
     @CsvSource(value = {
             "2000000000,1000,2000000.00",

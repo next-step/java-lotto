@@ -1,6 +1,7 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto.result;
 
 import kr.aterilio.nextstep.techcamp.m1.utils.JUnitParser;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -8,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeMoneyTest {
 
+    @DisplayName("당첨 결과에 따른 당첨금을 계산한다.")
     @ParameterizedTest
     @CsvSource(value = {
             "FIRST:1|SECOND:0|THIRD:0|FOURTH:0|FIFTH:0=2000000000",
