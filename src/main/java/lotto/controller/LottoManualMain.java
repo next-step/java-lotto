@@ -19,13 +19,11 @@ public class LottoManualMain {
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         int manualBuyCount = inputView.inputManualBuyPrice();
         lottoGame.purchaseLotteries(buyCount - manualBuyCount);
-
         List<String> manualLottoList = inputView.inputManualLotto(manualBuyCount);
-        resultView.resultLottoList( lottoGame.resolveManualLottoList(manualLottoList));
-
-        String winningNumber = inputView.inputWinningLottoNumber() ;
+        resultView.resultLottoList(lottoGame.resolveManualLottoList(manualLottoList));
+        String winningNumber = inputView.inputWinningLottoNumber();
         int bonusNumber = inputView.inputBonusNumber();
-        WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers(winningNumber,bonusNumber);
+        WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers(winningNumber, bonusNumber);
         WinningStatistics winningStatistics = lottoGame.getWinning(winningLottoNumbers);
         resultView.resultStatistics(winningStatistics);
     }
