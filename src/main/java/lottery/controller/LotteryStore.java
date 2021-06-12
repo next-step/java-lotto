@@ -12,44 +12,45 @@ public class LotteryStore {
     public static void main(String[] args) {
         Money money = receiptPrice();
 
+        Lotteries lotteries = generateAndPrintAllLotteries(money);
+
+        WinnerLottery winnerLottery = generateAndPrintWinnerLottery();
+
+        matchResultAndPrintResult(money, lotteries, winnerLottery);
+    }
+
+    private static Money receiptPrice() {
+        Reception.printToReceiptPrice();
+        return Reception.receiptPrice();
+    }
+
+    private static Lotteries generateAndPrintAllLotteries(Money money) {
         Reception.printToReceiptManualLotteryCount();
 
-        int receiptCountOfTotal = money.divide(new Money(DEFAULT_LOTTERY_PRICE));
+        int receiptCountOfTotal = calculateTotalCountByInputMoney(money);
         int receiptCountOfManual = Reception.receiptNumber();
 
         GenerateCount manual = GenerateCount.ofManualLottery(receiptCountOfTotal, receiptCountOfManual);
         GenerateCount auto = GenerateCount.ofAutoLottery(receiptCountOfTotal - receiptCountOfManual);
 
         Reception.printToReceiptManualLottery();
-
         List<LotteryNumbers> manualLotteryNumbers = Reception.receiptManualLotteries(receiptCountOfManual);
 
         ResultView.printGenerateCount(auto, manual);
 
         Lotteries lotteries = new Lotteries(auto, new RandomNumberGenerator(), manualLotteryNumbers);
-
         ResultView.printAllLotteryNumbers(lotteries.lotteries());
+        return lotteries;
+    }
 
+    private static int calculateTotalCountByInputMoney(Money money) {
+        return money.divide(new Money(DEFAULT_LOTTERY_PRICE));
+    }
+
+    private static WinnerLottery generateAndPrintWinnerLottery() {
         LotteryNumbers winnerNumbers = receiptWinnerLottery();
         BonusBall bonusBall = receiptBonusBall();
-        WinnerLottery winnerLottery = new WinnerLottery(winnerNumbers, bonusBall);
-
-        MatchCountPair matchCountPair = lotteries.match(winnerLottery);
-
-        ResultView.printToStatisticWinner();
-
-        calculateAndPrintProfit(money, matchCountPair);
-    }
-
-    private static BonusBall receiptBonusBall() {
-        Reception.printToReceiptBonusBall();
-        return Reception.receiptBonusBall();
-    }
-
-    private static void calculateAndPrintProfit(Money money, MatchCountPair matchCountPair) {
-        int jackpot = matchCountPair.calculateTotalJackpot();
-        ResultView.printMatchCountAndProfit(matchCountPair);
-        ResultView.printResultProfit(new Profit(money, new Money(jackpot)).toString());
+        return new WinnerLottery(winnerNumbers, bonusBall);
     }
 
     private static LotteryNumbers receiptWinnerLottery() {
@@ -57,8 +58,20 @@ public class LotteryStore {
         return Reception.receiptAndMakeLotteryNumbers();
     }
 
-    private static Money receiptPrice() {
-        Reception.printToReceiptPrice();
-        return Reception.receiptPrice();
+    private static BonusBall receiptBonusBall() {
+        Reception.printToReceiptBonusBall();
+        return Reception.receiptBonusBall();
+    }
+
+    private static void matchResultAndPrintResult(Money money, Lotteries lotteries, WinnerLottery winnerLottery) {
+        MatchCountPair matchCountPair = lotteries.match(winnerLottery);
+        ResultView.printToStatisticWinner();
+        calculateAndPrintProfit(money, matchCountPair);
+    }
+
+    private static void calculateAndPrintProfit(Money money, MatchCountPair matchCountPair) {
+        int jackpot = matchCountPair.calculateTotalJackpot();
+        ResultView.printMatchCountAndProfit(matchCountPair);
+        ResultView.printResultProfit(new Profit(money, new Money(jackpot)).toString());
     }
 }
