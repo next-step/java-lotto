@@ -14,7 +14,7 @@ public class LottoMachine {
         return new Lotto(lotto);
     }
 
-    public Lotto getManualLotto(String manualLottoStr) {
+    public Lotto generateManualLotto(String manualLottoStr) {
         return new Lotto(manualLottoStr);
     }
 }
