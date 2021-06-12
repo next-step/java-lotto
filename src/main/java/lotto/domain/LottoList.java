@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoList {
 
@@ -12,7 +11,7 @@ public class LottoList {
     public LottoList(int buyCount) {
         lottoMachine = new LottoMachine();
         for (int i = 0; i < buyCount; i++) {
-            lottoList.add(lottoMachine.getAutoLotto());
+            lottoList.add(lottoMachine.generateAutoLotto());
         }
     }
 
