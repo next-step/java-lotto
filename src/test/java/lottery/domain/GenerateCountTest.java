@@ -14,7 +14,16 @@ public class GenerateCountTest {
     void validateGenerateCount_test(int count) {
         //when
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new GenerateCount(count)
+                () -> GenerateCount.ofAutoLottery(count)
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-10, -1, 5})
+    @DisplayName("수동 로또인 경우 0개 미만이거나 총 로또개수를 초과하면 안된다.")
+    void validateManualLotteriesCount_test(int countOfManualLotteries) {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> GenerateCount.ofManualLottery(4, countOfManualLotteries)
         );
     }
 }
