@@ -14,10 +14,9 @@ public class LottoManualMain {
 
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         int manualBuyCount = inputView.inputManualBuyPrice();
+        lottoGame.getLottoList(buyCount - manualBuyCount);
 
-        lottoGame.getManualLottoList(inputView.inputManualLotto(manualBuyCount));
-
-        resultView.resultLottoList(lottoGame.getLottoList(buyCount - manualBuyCount));
+        resultView.resultLottoList( lottoGame.getManualLottoList(inputView.inputManualLotto(manualBuyCount)));
 
         resultView.resultStatistics(lottoGame.getWinning(lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber())));
 
