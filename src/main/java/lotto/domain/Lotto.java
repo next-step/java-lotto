@@ -14,9 +14,9 @@ public class Lotto {
     private Set<Integer> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
-        Set<Integer> lottoNumbers = new HashSet<>();
+        Set<Integer> lottoNumbers = new LinkedHashSet<>();
         for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
-            int lottoNumber = Integer.valueOf(lottoNumberStr);
+            int lottoNumber = Integer.parseInt(lottoNumberStr);
             Lotto.throwIllegalArgumentException_lottoRange(lottoNumber);
             lottoNumbers.add(lottoNumber);
         }
