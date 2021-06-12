@@ -22,7 +22,7 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource({"1,1", "2,2", "15,15"})
     void getLottoList(int buyCount, int result) {
-        LottoList lottoList = lottoGame.getLottoList(buyCount);
+        LottoList lottoList = lottoGame.purchaseLotteries(buyCount);
         assertThat(lottoList.getLottoList().size()).isEqualTo(result);
     }
 
