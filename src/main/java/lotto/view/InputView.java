@@ -12,7 +12,7 @@ public class InputView {
         return scan.nextInt();
     }
 
-    public String inputWinningLottoNumbers() {
+    public String inputWinningLottoNumber() {
         System.out.println("지난주 당첨 번호를 입력해주세요.");
         return scan.next();
     }

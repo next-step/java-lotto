@@ -18,7 +18,7 @@ public class LottoManualMain {
 
         resultView.resultLottoList( lottoGame.resolveManualLottoList(inputView.inputManualLotto(manualBuyCount)));
 
-        resultView.resultStatistics(lottoGame.getWinning(lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber())));
+        resultView.resultStatistics(lottoGame.getWinning(lottoGame.getWinningNumbers(inputView.inputWinningLottoNumber(), inputView.inputBonusNumber())));
 
     }
 }
