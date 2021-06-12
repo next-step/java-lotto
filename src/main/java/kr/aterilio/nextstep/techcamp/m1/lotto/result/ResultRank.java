@@ -8,24 +8,19 @@ public enum ResultRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000, true),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private static final String MSG_ERR_OUT_OF_RANGE = "로또 결과의 판정이 범위를 벗어났습니다.";
     private static final String FORMAT_DETAIL = "%d개 일치%s(%d원)";
+    private static final String MSG_DESC_BONUS_MATCHED = ", 보너스 볼 일치";
 
     private final int matchCount;
     private final int prizeMoney;
-    private final boolean matchBonus;
 
     ResultRank(int matchCount, int prizeMoney) {
-        this(matchCount, prizeMoney, false);
-    }
-
-    ResultRank(int matchCount, int prizeMoney, boolean matchBonus) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
-        this.matchBonus = matchBonus;
     }
 
     public static ResultRank valueOf(int matchCount, boolean matchBonus) {
@@ -77,8 +72,8 @@ public enum ResultRank {
     }
 
     private String bonusDesc() {
-        if (matchBonus) {
-            return ", 보너스 볼 일치";
+        if (this == SECOND) {
+            return MSG_DESC_BONUS_MATCHED;
         }
         return StringUtil.EMPTY_STRING;
     }
