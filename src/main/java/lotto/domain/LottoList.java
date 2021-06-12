@@ -46,8 +46,10 @@ public class LottoList {
         return numberOfWinnings;
     }
 
-    public void getManualLotto(String manualLottoStr) {
-        lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
+    public void resolveManualLottoList(List<String> manualLottoList) {
+        for (String manualLottoStr : manualLottoList) {
+            lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
+        }
     }
 
     public List<Lotto> getLottoList() {

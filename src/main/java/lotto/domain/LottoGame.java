@@ -10,7 +10,7 @@ public class LottoGame {
         return buyPrice / LottoConstants.PRICE;
     }
 
-    public LottoList getLottoList(int buyCount) {
+    public LottoList purchaseLotteries(int buyCount) {
         lottoList = new LottoList(buyCount);
         return lottoList;
     }
@@ -20,10 +20,8 @@ public class LottoGame {
         return winningLottoNumbers;
     }
 
-    public LottoList getManualLottoList(List<String> manualLottoList) {
-        for (String manualLottoStr : manualLottoList) {
-            lottoList.getManualLotto(manualLottoStr);
-        }
+    public LottoList resolveManualLottoList(List<String> manualLottoList) {
+        lottoList.resolveManualLottoList(manualLottoList);
         return lottoList;
     }
 
