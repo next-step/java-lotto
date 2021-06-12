@@ -6,6 +6,7 @@ import java.util.TreeMap;
 public class LottoResultDetail {
 
     private static final int EMPTY_COUNT = 0;
+    private static final String FORMAT_DETAIL = "%s - %d개\n";
 
     private final Map<ResultRank, Integer> resultCount;
 
@@ -16,7 +17,7 @@ public class LottoResultDetail {
     private Map<ResultRank, Integer> collects(Map<ResultRank, Integer> resultCount) {
         Map<ResultRank, Integer> collection = init();
         for (Map.Entry<ResultRank, Integer> entry : resultCount.entrySet()) {
-            collectByRank(collection, entry.getKey(), entry.getValue());
+            collection.put(entry.getKey(), entry.getValue());
         }
         return collection;
     }
@@ -25,16 +26,10 @@ public class LottoResultDetail {
         // 정렬 출력을 위해 TreeMap 사용
         Map<ResultRank, Integer> collection = new TreeMap<>();
         for (ResultRank rank : ResultRank.values()) {
-            collectByRank(collection, rank, EMPTY_COUNT);
+            collection.put(rank, EMPTY_COUNT);
         }
+        collection.remove(ResultRank.NONE);
         return collection;
-    }
-
-    private void collectByRank(Map<ResultRank, Integer> collection, ResultRank rank, Integer count) {
-        if (rank.isNone()) {
-            return;
-        }
-        collection.put(rank, count);
     }
 
     public int of(ResultRank rankMatch) {
@@ -44,7 +39,7 @@ public class LottoResultDetail {
     public String detail() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<ResultRank, Integer> entry : resultCount.entrySet()) {
-            sb.append(String.format("%s - %d개\n", entry.getKey().detail(), entry.getValue()));
+            sb.append(String.format(FORMAT_DETAIL, entry.getKey().detail(), entry.getValue()));
         }
         return sb.toString();
     }
