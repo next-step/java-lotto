@@ -117,18 +117,4 @@ public class LottoTest {
 		Lotto lotto = new Lotto(lottoNumbers);
 		assertThat(lotto.match(winningLotto)).isEqualTo(3);
 	}
-
-	@Test
-	void name() {
-		Set<LottoNumber> lottoNumbers = new HashSet<>();
-		lottoNumbers.add(new LottoNumber(1));
-		lottoNumbers.add(new LottoNumber(2));
-		lottoNumbers.add(new LottoNumber(3));
-		lottoNumbers.add(new LottoNumber(7));
-		lottoNumbers.add(new LottoNumber(8));
-		lottoNumbers.add(new LottoNumber(9));
-
-		Lotto lotto = new Lotto(lottoNumbers);
-		assertThat(lotto.contains(new LottoNumber(8))).isTrue();
-	}
 }

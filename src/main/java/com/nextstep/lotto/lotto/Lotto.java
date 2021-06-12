@@ -1,18 +1,15 @@
 package com.nextstep.lotto.lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class Lotto {
 
 	public static final int LOTTO_SIZE = 6;
 	private static final String LOTTO_NUMBER_CAN_ONLY_6_DIGITS = "로또의 숫자는 6개만 가능합니다.";
-	public static final String DELIMITER = ", ";
 
 	private final Set<LottoNumber> numbers;
 
@@ -24,9 +21,20 @@ public class Lotto {
 	}
 
 	public int match(Lotto winningLotto) {
-		return Math.toIntExact(numbers.stream()
+		final long count = numbers.stream()
 			.filter(winningLotto.numbers::contains)
-			.count());
+			.count();
+
+		return Math.toIntExact(count);
+	}
+
+	public boolean contains(LottoNumber bonusNumber) {
+		return numbers.contains(bonusNumber);
+	}
+
+	public List<LottoNumber> numbers() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>(this.numbers);
+		return lottoNumbers;
 	}
 
 	@Override
@@ -42,21 +50,5 @@ public class Lotto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(numbers);
-	}
-
-	@Override
-	public String toString() {
-		StringJoiner stringJoiner = new StringJoiner(DELIMITER);
-		List<LottoNumber> lottoNumbers = new ArrayList<>(numbers);
-		Collections.sort(lottoNumbers);
-
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			stringJoiner.add(String.valueOf(lottoNumber));
-		}
-		return "[ " + stringJoiner + " ]";
-	}
-
-	public boolean contains(LottoNumber bonusNumber) {
-		return numbers.contains(bonusNumber);
 	}
 }

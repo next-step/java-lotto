@@ -1,12 +1,20 @@
 package com.nextstep.lotto;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.StringJoiner;
+
 import com.nextstep.lotto.lotto.Lotto;
+import com.nextstep.lotto.lotto.LottoNumber;
 import com.nextstep.lotto.lotto.Lottos;
 import com.nextstep.lotto.result.LottoRank;
 import com.nextstep.lotto.result.LottoResult;
 
 public class LottoOutput {
 
+	public static final String DELIMITER = ", ";
 	private static final String MESSAGE_INPUT_BUY_LOTTO_MESSAGE = "구입금액을 입력해주세요.";
 	private static final String MESSAGE_NUMBER_OF_LOTTO = "%d개를 구매했습니다.";
 	private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
@@ -37,21 +45,24 @@ public class LottoOutput {
 	}
 
 	private void printLotto(Lotto lotto) {
-		System.out.println(lotto);
+		StringJoiner stringJoiner = new StringJoiner(DELIMITER);
+		List<LottoNumber> lottoNumbers = lotto.numbers();
+		Collections.sort(lottoNumbers);
+
+		for (LottoNumber lottoNumber : lottoNumbers) {
+			stringJoiner.add(String.valueOf(lottoNumber));
+		}
+
+		System.out.println("[ " + stringJoiner + " ]");
 	}
 
 	public void printStatistics(LottoResult lottoResult) {
 		System.out.println();
 		System.out.println(MESSAGE_STATISTICS_HEAD_STRING);
 
-		StringBuilder stringBuilder = new StringBuilder();
-		for (LottoRank rank : lottoResult.statistics().keySet()) {
-			String format = getFormatString(lottoResult, rank);
-			stringBuilder.append(format);
-			stringBuilder.append(System.lineSeparator());
-		}
-
-		System.out.println(stringBuilder);
+		Arrays.stream(LottoRank.values())
+			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
+			.forEach(lottoRank -> System.out.println(getFormatString(lottoResult, lottoRank)));
 	}
 
 	public void printRevenueRatio(Double ratio) {
@@ -63,17 +74,15 @@ public class LottoOutput {
 	}
 
 	private String getFormatString(LottoResult lottoResult, LottoRank rank) {
+		String format = MESSAGE_NUMBER_MATCH_STRING;
 		if (rank == LottoRank.SECOND_RANK) {
-			return String.format(MESSAGE_NUMBER_MATCH_SECOND_STRING
-				, rank.getMatchCount()
-				, LottoRank.valueOf(rank.getMatchCount(), true).getReward()
-				, lottoResult.statistics().get(rank)
-			);
+			format = MESSAGE_NUMBER_MATCH_SECOND_STRING;
 		}
-		return String.format(MESSAGE_NUMBER_MATCH_STRING
+
+		return String.format(format
 			, rank.getMatchCount()
 			, LottoRank.valueOf(rank.getMatchCount(), false).getReward()
-			, lottoResult.statistics().get(rank)
+			, Optional.ofNullable(lottoResult.statistics().get(rank)).orElse(0L)
 		);
 	}
 }

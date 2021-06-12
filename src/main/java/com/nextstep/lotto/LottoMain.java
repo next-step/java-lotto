@@ -24,7 +24,7 @@ public class LottoMain {
 		lottoOutput.printLottoCount(lottoStore.lottoCount());
 
 		LottoFactory lottoFactory = new LottoFactory(new RandomNumberGenerator());
-		Lottos lottos = lottoFactory.createLottos(lottoStore.lottoCount());
+		Lottos lottos = lottoFactory.create(lottoStore.lottoCount());
 		lottoOutput.printLottos(lottos);
 
 		lottoOutput.printWinningNumber();

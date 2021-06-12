@@ -20,7 +20,7 @@ public class LottoFactoryTest {
 	void create_lottos() {
 		RandomNumberGenerator lottoNumberGenerator = new RandomNumberGenerator();
 		LottoFactory lottoFactory = new LottoFactory(lottoNumberGenerator);
-		Lottos lottos = lottoFactory.createLottos(3);
+		Lottos lottos = lottoFactory.create(3);
 		assertThat(lottos).isNotNull();
 	}
 

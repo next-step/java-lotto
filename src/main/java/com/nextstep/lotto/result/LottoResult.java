@@ -1,10 +1,10 @@
 package com.nextstep.lotto.result;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 	private List<LottoRank> results = new ArrayList<>();
@@ -25,21 +25,9 @@ public class LottoResult {
 		return sumReward / money;
 	}
 
-	public Map<LottoRank, Integer> statistics() {
-		Map<LottoRank, Integer> resultMap = setUpMap();
-		this.results.stream()
+	public Map<LottoRank, Long> statistics() {
+		return this.results.stream()
 			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
-			.forEach(lottoRank -> resultMap.put(lottoRank, resultMap.getOrDefault(lottoRank, 0) + 1));
-
-		return resultMap;
-	}
-
-	private Map<LottoRank, Integer> setUpMap() {
-		Map<LottoRank, Integer> map = new TreeMap<>();
-		Arrays.stream(LottoRank.values())
-			.filter(lottoRank -> lottoRank.getMatchCount() > 0)
-			.forEach(lottoRank -> map.put(lottoRank, 0));
-
-		return map;
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 }
