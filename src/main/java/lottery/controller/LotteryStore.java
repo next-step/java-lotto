@@ -4,15 +4,29 @@ import lottery.domain.*;
 import lottery.view.Reception;
 import lottery.view.ResultView;
 
+import java.util.List;
+
 import static lottery.domain.Money.DEFAULT_LOTTERY_PRICE;
 
 public class LotteryStore {
     public static void main(String[] args) {
         Money money = receiptPrice();
 
-        GenerateCount generateCount = generateCount(money);
+        Reception.printToReceiptManualLotteryCount();
 
-        Lotteries lotteries = new Lotteries(generateCount, new RandomNumberGenerator());
+        int receiptCountOfTotal = money.divide(new Money(DEFAULT_LOTTERY_PRICE));
+        int receiptCountOfManual = Reception.receiptNumber();
+
+        GenerateCount manual = GenerateCount.ofManualLottery(receiptCountOfTotal, receiptCountOfManual);
+        GenerateCount auto = GenerateCount.ofAutoLottery(receiptCountOfTotal - receiptCountOfManual);
+
+        Reception.printToReceiptManualLottery();
+
+        List<LotteryNumbers> manualLotteryNumbers = Reception.receiptManualLotteries(receiptCountOfManual);
+
+        ResultView.printGenerateCount(auto, manual);
+
+        Lotteries lotteries = new Lotteries(auto, new RandomNumberGenerator(), manualLotteryNumbers);
 
         ResultView.printAllLotteryNumbers(lotteries.lotteries());
 
@@ -28,7 +42,7 @@ public class LotteryStore {
     }
 
     private static BonusBall receiptBonusBall() {
-        ResultView.printToReceiptBonusBall();
+        Reception.printToReceiptBonusBall();
         return Reception.receiptBonusBall();
     }
 
@@ -39,18 +53,12 @@ public class LotteryStore {
     }
 
     private static LotteryNumbers receiptWinnerLottery() {
-        ResultView.printToReceiptWinnerLotteryNumbers();
-        return Reception.receiptWinnerLottery(Reception.receiptString());
-    }
-
-    private static GenerateCount generateCount(Money money) {
-        GenerateCount generateCount = new GenerateCount(money.divide(new Money(DEFAULT_LOTTERY_PRICE)));
-        ResultView.printGenerateCount(generateCount);
-        return generateCount;
+        Reception.printToReceiptWinnerLotteryNumbers();
+        return Reception.receiptAndMakeLotteryNumbers();
     }
 
     private static Money receiptPrice() {
-        ResultView.printToReceiptPrice();
+        Reception.printToReceiptPrice();
         return Reception.receiptPrice();
     }
 }

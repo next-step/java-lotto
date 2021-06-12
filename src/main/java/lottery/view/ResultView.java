@@ -19,9 +19,6 @@ public class ResultView {
     public static final int START_INDEX = 0;
     public static final int LINE_DELIMITER_SIZE = 7;
 
-    public static void printToReceiptBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-    }
 
     public static void printResultProfit(String profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
@@ -83,10 +80,6 @@ public class ResultView {
         System.out.println("당첨 통계");
     }
 
-    public static void printToReceiptWinnerLotteryNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
     public static void printAllLotteryNumbers(List<LotteryNumbers> lotteries) {
         for (LotteryNumbers lottery : lotteries) {
             printInitLotteryNumber();
@@ -123,11 +116,7 @@ public class ResultView {
         System.out.println(CLOSE_LOTTERY_NUMBERS);
     }
 
-    public static void printGenerateCount(GenerateCount generateCount) {
-        System.out.println(generateCount.toString() + "개를 구매했습니다.");
-    }
-
-    public static void printToReceiptPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
+    public static void printGenerateCount(GenerateCount auto, GenerateCount manual) {
+        System.out.println("수동으로 " + manual.toString() + "개, 자동으로 " +  auto.toString() + "개를 구매했습니다.");
     }
 }
