@@ -4,7 +4,6 @@ import java.util.List;
 
 public class LottoGame {
     LottoList lottoList;
-    WinningLottoNumbers winningLottoNumbers;
 
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
@@ -16,8 +15,7 @@ public class LottoGame {
     }
 
     public WinningLottoNumbers getWinningNumbers(String winningNumbers, int bonusNumber) {
-        winningLottoNumbers = new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
-        return winningLottoNumbers;
+        return new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
     }
 
     public LottoList resolveManualLottoList(List<String> manualLottoList) {
