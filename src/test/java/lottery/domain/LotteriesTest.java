@@ -5,11 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static lottery.domain.ManualLotteriesTest.TEST_LOTTERY_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LotteriesTest {
+
+    public static final List<LotteryNumbers> TEST_LOTTERY_NUMBERS = List.of(
+            new LotteryNumbers(List.of(10, 15, 24, 39, 40, 45)),
+            new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6))
+    );
 
     @Test
     @DisplayName("입력한 개수만큼 로또를 생성한다.")

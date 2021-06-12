@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class Reception {
 
+    public static final int MINIMUM_COUNT = 0;
+
     public static final String INPUT_DELIMITER = ",";
 
     public static void printToReceiptManualLottery() {
@@ -44,7 +46,7 @@ public class Reception {
     public static List<LotteryNumbers> receiptManualLotteries(int receiptCountOfManual) {
         List<LotteryNumbers> lotteryNumbers = new ArrayList<>();
 
-        for (int count = 0; count < receiptCountOfManual; count++) {
+        for (int count = MINIMUM_COUNT; count < receiptCountOfManual; count++) {
             lotteryNumbers.add(receiptAndMakeLotteryNumbers());
         }
 
