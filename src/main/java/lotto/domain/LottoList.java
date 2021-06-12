@@ -47,7 +47,7 @@ public class LottoList {
 
     public void resolveManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
-            lottoList.add(lottoMachine.getManualLotto(manualLottoStr));
+            lottoList.add(lottoMachine.generateManualLotto(manualLottoStr));
         }
     }
 
