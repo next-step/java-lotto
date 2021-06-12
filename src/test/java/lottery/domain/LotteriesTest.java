@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lottery.domain.ManualLotteriesTest.TEST_LOTTERY_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -19,6 +20,17 @@ public class LotteriesTest {
         //then
         assertThat(lotteries.size()).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("자동 로또 생성 개수만큼 생성한 것과 수동 로또를 합친 로또 번호들을 생성한다.")
+    void generateAutoAndManualLotteries_test() {
+        //when
+        Lotteries lotteries = new Lotteries(new GenerateCount(5), new MockNumberGenerator(), TEST_LOTTERY_NUMBERS);
+
+        //then
+        assertThat(lotteries.size()).isEqualTo(7);
+    }
+
 
     @Test
     @DisplayName("생성된 로또들의 일치하는 개수에 대한 건수를 만든다.")
