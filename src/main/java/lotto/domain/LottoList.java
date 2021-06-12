@@ -17,17 +17,17 @@ public class LottoList {
     }
 
     public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
-        List<Rank> list = new ArrayList<>();
+        List<Rank> lottoRankList = new ArrayList<>();
         for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
             numberOfWinnings = getNumberOfWinnings(lotto, numberOfWinnings, winningNumbers.getWinningLottoNumbers());
             boolean bonus = false;
             bonus = isBonus(lotto, bonus, winningNumbers.getBonusNumber());
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
-            list.add(rank);
+            lottoRankList.add(rank);
         }
 
-        return new WinningStatistics(list.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting())));
+        return new WinningStatistics(lottoRankList);
     }
 
     private boolean isBonus(Lotto lotto, boolean bonus, int bonusNumber) {

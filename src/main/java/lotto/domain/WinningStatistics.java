@@ -1,13 +1,15 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private Map<Rank, Long> statistics;
 
-    public WinningStatistics(Map<Rank, Long> statistics) {
-        this.statistics = statistics;
+    public WinningStatistics(List<Rank> lottoRankList) {
+        statistics = lottoRankList.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
     }
 
     public Map<Rank, Long> getStatistics() {
