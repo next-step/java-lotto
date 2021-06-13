@@ -1,21 +1,18 @@
 package com.nextstep.lotto.lotto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.nextstep.lotto.result.LottoRank;
 
 public class WinningLotto {
-	private final Set<LottoNumber> numbers;
+	private final Lotto winningLotto;
+	private final LottoNumber bonusNumber;
 
-	public WinningLotto(Set<LottoNumber> numbers) {
-		this.numbers = new HashSet<>(numbers);
-		if (this.numbers.size() != Lotto.LOTTO_SIZE) {
-			throw new IllegalArgumentException();
-		}
+	public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+		this.winningLotto = winningLotto;
+		this.bonusNumber = bonusNumber;
 	}
 
 	public LottoRank matchRank(Lotto lotto) {
-		return LottoRank.valueOf(lotto.matchCount(numbers));
+		boolean isBonusMatch = lotto.contains(bonusNumber);
+		return LottoRank.valueOf(lotto.match(winningLotto), isBonusMatch);
 	}
 }

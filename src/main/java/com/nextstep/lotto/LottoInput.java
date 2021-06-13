@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.nextstep.lotto.lotto.Lotto;
 import com.nextstep.lotto.lotto.LottoNumber;
 
 public class LottoInput {
@@ -26,6 +27,11 @@ public class LottoInput {
 		}
 
 		return lottoNumbers;
+	}
+
+	public LottoNumber inputBonusNumber() {
+		String input = scanner.nextLine();
+		return new LottoNumber(Integer.parseInt(input));
 	}
 
 	private String[] convertStringToArray(String input) {
