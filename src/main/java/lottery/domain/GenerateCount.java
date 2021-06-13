@@ -29,7 +29,7 @@ public class GenerateCount {
         return new GenerateCount(countOfManualLotteries);
     }
 
-    public static void validateManualLottery(int countOfTotalLotteries, int countOfManualLotteries) {
+    private static void validateManualLottery(int countOfTotalLotteries, int countOfManualLotteries) {
         validateMinimumCount(countOfManualLotteries);
         validateMaximumCount(countOfTotalLotteries, countOfManualLotteries);
     }
