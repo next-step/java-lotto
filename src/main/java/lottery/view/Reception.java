@@ -54,7 +54,7 @@ public class Reception {
     }
 
     public static LotteryNumbers receiptAndMakeLotteryNumbers() {
-        return Reception.makeLotteryNumbers(Reception.receiptString());
+        return makeLotteryNumbers(Reception.receiptString());
     }
 
     public static LotteryNumbers makeLotteryNumbers(String input) {
