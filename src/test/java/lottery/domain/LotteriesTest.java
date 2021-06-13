@@ -10,6 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LotteriesTest {
 
+    public static final List<LotteryNumbers> TEST_LOTTERY_NUMBERS = List.of(
+            new LotteryNumbers(List.of(10, 15, 24, 39, 40, 45)),
+            new LotteryNumbers(List.of(1, 2, 3, 4, 5, 6))
+    );
+
     @Test
     @DisplayName("입력한 개수만큼 로또를 생성한다.")
     void generateLotteries_test() {
@@ -19,6 +24,17 @@ public class LotteriesTest {
         //then
         assertThat(lotteries.size()).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("자동 로또 생성 개수만큼 생성한 것과 수동 로또를 합친 로또 번호들을 생성한다.")
+    void generateAutoAndManualLotteries_test() {
+        //when
+        Lotteries lotteries = new Lotteries(new GenerateCount(5), new MockNumberGenerator(), TEST_LOTTERY_NUMBERS);
+
+        //then
+        assertThat(lotteries.size()).isEqualTo(7);
+    }
+
 
     @Test
     @DisplayName("생성된 로또들의 일치하는 개수에 대한 건수를 만든다.")

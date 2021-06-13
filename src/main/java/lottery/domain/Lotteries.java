@@ -12,14 +12,27 @@ public class Lotteries {
     private final ImmutableList<LotteryNumbers> lotteries;
 
     public Lotteries(GenerateCount count, NumberGenerator generator) {
-        lotteries = ImmutableList.copyOf(generateLotteries(count, generator));
+        lotteries = ImmutableList.copyOf(generateAutoLotteris(count, generator));
+    }
+
+    public Lotteries(GenerateCount auto, NumberGenerator generator, List<LotteryNumbers> manualLotteries) {
+        this.lotteries = ImmutableList.copyOf(mergeAutoWithManual(auto, generator, manualLotteries));
+    }
+
+    private List<LotteryNumbers> mergeAutoWithManual(
+            GenerateCount auto, NumberGenerator generator,
+            List<LotteryNumbers> manualLotteries
+    ) {
+        List<LotteryNumbers> autoLotteryNumbers = generateAutoLotteris(auto, generator);
+        autoLotteryNumbers.addAll(manualLotteries);
+        return autoLotteryNumbers;
     }
 
     public MatchCountPair match(WinnerLottery winnerLottery) {
         return new MatchCountPair(winnerLottery, lotteries);
     }
 
-    private List<LotteryNumbers> generateLotteries(GenerateCount generateCount, NumberGenerator generator) {
+    private List<LotteryNumbers> generateAutoLotteris(GenerateCount generateCount, NumberGenerator generator) {
         List<LotteryNumbers> lotteries = new ArrayList<>();
 
         for (int index = START_INDEX; index < generateCount.count(); index++) {

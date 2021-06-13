@@ -16,17 +16,13 @@ public class WinnerLottery {
     }
 
     private void validateBonusBall(BonusBall bonusBall) {
-        if (contains(bonusBall.bonusBall())) {
+        if (bonusBall.match(winnerNumbers)) {
             throw new IllegalArgumentException("보너스볼은 당첨 번호와 포함되면 안됩니다. : " + bonusBall);
         }
     }
 
     public int match(LotteryNumbers input) {
         return winnerNumbers.match(input);
-    }
-
-    public boolean contains(LotteryNumber lotteryNumber) {
-        return winnerNumbers.contains(lotteryNumber);
     }
 
     public boolean matchBonusBall(LotteryNumbers lottery) {
