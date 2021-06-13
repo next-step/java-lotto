@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class GenerateCountTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0, -1, -20})
-    @DisplayName("로또 생성 개수가 1개미만인 경우 예외처리한다.")
+    @ValueSource(ints = {-1, -10, -20})
+    @DisplayName("자동 로또 생성 개수가 0개미만인 경우 예외처리한다.")
     void validateGenerateCount_test(int count) {
         //when
         assertThatIllegalArgumentException().isThrownBy(

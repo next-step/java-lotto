@@ -2,8 +2,7 @@ package lottery.domain;
 
 public class GenerateCount {
 
-    public static final int MINIMUM = 1;
-    public static final int MINIMUM_MANUAL_LOTTERY_COUNT = 0;
+    public static final int MINIMUM = 0;
 
     private final int count;
 
@@ -35,7 +34,7 @@ public class GenerateCount {
     }
 
     private static void validateMinimumCount(int countOfManualLotteries) {
-        if (countOfManualLotteries < MINIMUM_MANUAL_LOTTERY_COUNT) {
+        if (countOfManualLotteries < MINIMUM) {
             throw new IllegalArgumentException("잘못된 수동 로또 개수를 입력하였습니다 : " + countOfManualLotteries);
         }
     }
