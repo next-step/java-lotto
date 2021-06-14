@@ -21,6 +21,10 @@ public class Output {
     private static final String SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
     private static final String FIRST_PRIZE_MESSAGE = "6개 일치 (2000000000원)- %d 개";
 
+    protected Output() {
+
+    }
+
     public static void printStartMessage() {
         System.out.println(INPUT_PURCHASE_MESSAGE);
     }

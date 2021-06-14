@@ -10,9 +10,6 @@ public enum Reward {
     SECOND_PRIZE(5, true, 30_000_000),
     FIRST_PRIZE(6, false, 2_000_000_000);
 
-    private static final int SECOND_PRIZE_COUNT_CONDITION = 5;
-    private static final boolean SECOND_PRIZE_BONUS_BALL_CONDITION = true;
-
     private final int matchCount;
     private final boolean bonusBall;
     private final int prizeMoney;
@@ -31,13 +28,13 @@ public enum Reward {
         return this.matchCount;
     }
 
-    public static Reward getReward(WinningState winningState) {
-        if (winningState.isSpecificPrizeState(SECOND_PRIZE_COUNT_CONDITION, SECOND_PRIZE_BONUS_BALL_CONDITION)) {
+    public static Reward getReward(int matchCount, boolean bonusBall) {
+        if (matchCount == SECOND_PRIZE.matchCount && bonusBall == SECOND_PRIZE.bonusBall) {
             return SECOND_PRIZE;
         }
 
         return Arrays.stream(Reward.values())
-                .filter(reward -> reward.getMatchCount() == winningState.getMatchedCount())
+                .filter(reward -> reward.getMatchCount() == matchCount)
                 .findAny()
                 .orElse(SIXTH_PRIZE);
     }

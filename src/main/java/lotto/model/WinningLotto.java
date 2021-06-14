@@ -20,24 +20,14 @@ public class WinningLotto {
         }
     }
 
-    public WinningState makeWinningState(Lotto lotto) {
-        int winningCount = makeWinningCount(lotto.getLottoNumbers(), getLottoNumbers());
-        WinningState winningState = new WinningState(winningCount, checkBonusCount(lotto, this.bonusBall));
-
-        return winningState;
-    }
-
-    private int makeWinningCount(Set<LottoNumber> lottoNumbers, Set<LottoNumber> winningLottoNumbers) {
+    public int makeWinningCount(Set<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> winningLottoNumbers = winningLotto.getLottoNumbers();
         return (int) lottoNumbers.stream()
                 .filter((lottoNumber) -> winningLottoNumbers.contains(lottoNumber))
                 .count();
     }
 
-    private boolean checkBonusCount(Lotto lotto, LottoNumber bonusNumber) {
-        return lotto.contain(bonusNumber);
-    }
-
-    public Set<LottoNumber> getLottoNumbers() {
-        return winningLotto.getLottoNumbers();
+    public boolean checkBonusCount(Lotto lotto) {
+        return lotto.contain(this.bonusBall);
     }
 }

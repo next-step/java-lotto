@@ -13,10 +13,8 @@ public class RewardTest {
     @Test
     @DisplayName("로또번호와 똑같은 숫자에 따른 상금이 같은지 비교한다.")
     void getRewardTest() {
-        WinningState secondPrize = new WinningState(5, true);
-        WinningState thirdPrize = new WinningState(5, false);
-        Reward secondReward = getReward(secondPrize);
-        Reward thirdReward = getReward(thirdPrize);
+        Reward secondReward = getReward(5, true);
+        Reward thirdReward = getReward(5, false);
 
         assertAll(
                 () -> assertThat(thirdReward.getPrizeMoney()).isEqualTo(1_500_000),

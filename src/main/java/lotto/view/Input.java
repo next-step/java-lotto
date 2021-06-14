@@ -7,6 +7,10 @@ import static lotto.view.Output.*;
 public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
+    protected Input() {
+
+    }
+
     public static Integer inputMoneyForPurchase() {
         printStartMessage();
         String purchase = scanner.nextLine();
