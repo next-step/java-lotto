@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.util.LottoGenerator;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -10,13 +11,25 @@ import java.util.Set;
 import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
 
 public class LottoController {
+    private static final String CAN_NOT_PURCHASE_MESSAGE = "구입가능한 금액을 초과했습니다";
+    private static final int PURCHASABLE_COUNT = 0;
+
     public void run() {
         purchaseCalculator purchaseCalculator = new purchaseCalculator(Input.inputMoneyForPurchase());
-        int purchasedLottoCount = purchaseCalculator.calculatePurchasableCount();
+        int purchasableLottoCount = purchaseCalculator.calculatePurchasableCount();
 
-        Output.printPurchasableMessage(purchasedLottoCount);
+        int manualLottoCount = Input.inputManualLottoCount();
+        Output.printInputManualLottoNumberMessage();
+        validateManualLottoCount(purchasableLottoCount, manualLottoCount);
 
-        BunchOfLotto bunchOfLotto = new BunchOfLotto(purchasedLottoCount);
+        BunchOfLotto bunchOfLotto = new BunchOfLotto();
+        addSeveralManualLotto(bunchOfLotto, manualLottoCount);
+
+        int autoLottoCount = purchasableLottoCount - manualLottoCount;
+
+        Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
+        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(autoLottoCount).getBunchOfLotto());
+
         Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
         WinningLotto winningLotto = makeWinningLotto();
@@ -26,7 +39,20 @@ public class LottoController {
         Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
-    public WinningLotto makeWinningLotto() {
+    private void addSeveralManualLotto(BunchOfLotto bunchOfLotto, int autoLottoCount) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            String inputNumber = Input.inputManualLottoNumber();
+            bunchOfLotto.addLotto(LottoGenerator.makeManualLotto(inputNumber));
+        }
+    }
+
+    private void validateManualLottoCount(int purchasableLottoCount, int manualLottoCount) {
+        if (purchasableLottoCount - manualLottoCount < PURCHASABLE_COUNT) {
+            throw new IllegalArgumentException(CAN_NOT_PURCHASE_MESSAGE);
+        }
+    }
+
+    private WinningLotto makeWinningLotto() {
         Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());
         LottoNumber bonusBall = new LottoNumber(Input.inputBonusNumber());
 

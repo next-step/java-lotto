@@ -14,7 +14,7 @@ public class BunchOfLottoGenerator {
         List<Lotto> bunchOfLotto = new ArrayList<>();
 
         for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLotto.add(LottoGenerator.makeLotto());
+            bunchOfLotto.add(LottoGenerator.makeAutoLotto());
         }
 
         return bunchOfLotto;

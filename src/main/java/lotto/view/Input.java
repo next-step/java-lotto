@@ -11,10 +11,19 @@ public class Input {
 
     }
 
-    public static Integer inputMoneyForPurchase() {
+    public static int inputMoneyForPurchase() {
         printStartMessage();
         String purchase = scanner.nextLine();
         return Integer.parseInt(purchase);
+    }
+
+    public static int inputManualLottoCount() {
+        Output.printInputManualLottoCountMessage();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static String inputManualLottoNumber() {
+        return scanner.nextLine();
     }
 
     public static String inputWinningNumbers() {

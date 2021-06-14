@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class Output {
+    private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 로또 번호를 입력해 주세요.";
     private static final String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해주세요.";
-    private static final String PURCHASABLE_MESSAGE = "%d 개를 구매했습니다.";
+    private static final String PURCHASED_MESSAGE = "수동으로 %d 개, 자동으로 %d 개를 구매했습니다.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String WIN_STATIC_MESSAGE = "당첨 통계";
@@ -25,12 +27,20 @@ public class Output {
 
     }
 
+    public static void printInputManualLottoCountMessage() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+    }
+
+    public static void printInputManualLottoNumberMessage() {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+    }
+
     public static void printStartMessage() {
         System.out.println(INPUT_PURCHASE_MESSAGE);
     }
 
-    public static void printPurchasableMessage(Integer purchased) {
-        System.out.println(String.format(PURCHASABLE_MESSAGE, purchased));
+    public static void printPurchasedMessage(int manualLottoCount, int autoLottoCount) {
+        System.out.println(String.format(PURCHASED_MESSAGE, manualLottoCount, autoLottoCount));
     }
 
     public static void printLottoNumbers(Set<LottoNumber> lottoNumbers) {
