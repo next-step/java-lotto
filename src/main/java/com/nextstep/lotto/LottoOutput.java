@@ -11,25 +11,40 @@ import com.nextstep.lotto.lotto.LottoNumber;
 import com.nextstep.lotto.lotto.Lottos;
 import com.nextstep.lotto.result.LottoRank;
 import com.nextstep.lotto.result.LottoResult;
+import com.nextstep.lotto.store.LottoStore;
 
 public class LottoOutput {
 
 	public static final String DELIMITER = ", ";
 	private static final String MESSAGE_INPUT_BUY_LOTTO_MESSAGE = "구입금액을 입력해주세요.";
-	private static final String MESSAGE_NUMBER_OF_LOTTO = "%d개를 구매했습니다.";
+	private static final String MESSAGE_NUMBER_OF_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String MESSAGE_STATISTICS_HEAD_STRING = "당첨 통계";
 	private static final String MESSAGE_NUMBER_MATCH_STRING = "%d개 일치 (%d원)- %d 개";
 	private static final String MESSAGE_NUMBER_MATCH_SECOND_STRING = "%d개 일치, 보너스 볼 일치(%d원)- %d 개";
 	private static final String MESSAGE_REVENUE_RATIO_STRING = "총 수익률은 %.2f 입니다.";
 	private static final String MESSAGE_INPUT_BONUS_BALL = "보너스볼을 입력해주세요.";
+	public static final String MESSAGE_INPUT_COUNT_OF_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String MESSAGE_INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
 	public void printMoneyForLotto() {
 		System.out.println(MESSAGE_INPUT_BUY_LOTTO_MESSAGE);
 	}
 
-	public void printLottoCount(int count) {
-		System.out.println(String.format(MESSAGE_NUMBER_OF_LOTTO, count));
+	public void printManualLottoCount() {
+		System.out.println(MESSAGE_INPUT_COUNT_OF_MANUAL_LOTTO);
+	}
+
+	public void printLottoCount(LottoStore lottoStore) {
+		System.out.println();
+		System.out.println(
+			String.format(MESSAGE_NUMBER_OF_LOTTO, lottoStore.manualLottoCount(), lottoStore.autoLottoCount()));
+	}
+
+	public void printManualLottoInput(int manualLottoCount) {
+		if (manualLottoCount > 0) {
+			System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_NUMBERS);
+		}
 	}
 
 	public void printWinningNumber() {
@@ -38,7 +53,6 @@ public class LottoOutput {
 	}
 
 	public void printLottos(Lottos lottos) {
-		System.out.println();
 		for (Lotto lotto : lottos.userLottos()) {
 			printLotto(lotto);
 		}

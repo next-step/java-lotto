@@ -1,5 +1,6 @@
 package com.nextstep.lotto;
 
+import java.util.List;
 import java.util.Set;
 
 import com.nextstep.lotto.lotto.Lotto;
@@ -16,19 +17,27 @@ public class LottoMain {
 	public static void main(String[] args) {
 		LottoInput lottoInput = new LottoInput();
 		LottoOutput lottoOutput = new LottoOutput();
+		LottoFactory lottoFactory = new LottoFactory(new RandomNumberGenerator());
 
 		lottoOutput.printMoneyForLotto();
 		int money = lottoInput.inputMoney();
 
-		LottoStore lottoStore = new LottoStore(money);
-		lottoOutput.printLottoCount(lottoStore.lottoCount());
+		lottoOutput.printManualLottoCount();
+		int manualLottoCount = lottoInput.inputManualLottoCount();
 
-		LottoFactory lottoFactory = new LottoFactory(new RandomNumberGenerator());
-		Lottos lottos = lottoFactory.create(lottoStore.lottoCount());
+		LottoStore lottoStore = new LottoStore(money, manualLottoCount);
+
+		lottoOutput.printManualLottoInput(lottoStore.manualLottoCount());
+
+		List<Lotto> lottoList = lottoInput.inputManualLotto(lottoStore.manualLottoCount());
+		Lottos lottos = new Lottos(lottoList);
+		lottos.add(lottoFactory.create(lottoStore.autoLottoCount()));
+
+		lottoOutput.printLottoCount(lottoStore);
 		lottoOutput.printLottos(lottos);
 
 		lottoOutput.printWinningNumber();
-		Set<LottoNumber> winningNumbers = lottoInput.inputWinningNumber();
+		Set<LottoNumber> winningNumbers = lottoInput.inputNumber();
 		lottoOutput.printBonusNumber();
 		LottoNumber bonusNumber = lottoInput.inputBonusNumber();
 		Lotto winning = new Lotto(winningNumbers);

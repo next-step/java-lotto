@@ -1,5 +1,6 @@
 package com.nextstep.lotto.lotto;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,5 +17,9 @@ public class LottoFactory {
 			.mapToObj(i -> lottoNumberGenerator.makeNumbers())
 			.map(numbers -> new Lotto(numbers))
 			.collect(Collectors.toList()));
+	}
+
+	public Lottos createManualLottos(List<Lotto> lottos) {
+		return new Lottos(lottos);
 	}
 }
