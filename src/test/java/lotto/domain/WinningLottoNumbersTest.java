@@ -44,5 +44,18 @@ public class WinningLottoNumbersTest {
         assertThat(winningLottoNumbers.matchLottoNumbers(lottoNumbers)).isEqualTo(matchStatusOfALotto);
     }
 
+    @Test
+    public void containsMain_검증() {
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", "11");
+        assertThat(winningLottoNumbers.containsMain(1)).isTrue();
+        assertThat(winningLottoNumbers.containsMain(11)).isFalse();
+    }
+
+    @Test
+    public void containsBonus_검증() {
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", "11");
+        assertThat(winningLottoNumbers.containsBonus(1)).isFalse();
+        assertThat(winningLottoNumbers.containsBonus(11)).isTrue();
+    }
 
 }

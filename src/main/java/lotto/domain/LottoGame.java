@@ -13,7 +13,7 @@ public class LottoGame {
         resultView = new ResultView();
     }
 
-    public void LottoStart() {
+    public void lottoStart() {
         int inputMoney = inputView.inputMoneyForLotto();
         int manualBuyLottoCount = inputView.inputManualLottoBuyCount(inputMoney);
         int autoBuyLottoCount = getAutoBuyLottoCount(inputMoney, manualBuyLottoCount);

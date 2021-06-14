@@ -22,4 +22,14 @@ class LottoNumbersListTest {
         assertThat(lottoNumbersList.lottoNumberList(0).contains(1)).isTrue();
     }
 
+    @Test
+    public void appendLottoNumber_검증() {
+        int[] numbers1 = {1,2,3,4,5,6};
+        int[] numbers2 = {10,11,23,24,35,36};
+        LottoNumbersList lottoNumbersList = new LottoNumbersList();
+        lottoNumbersList.appendLottoNumber(LottoNumbers.generateManualOf(numbers1));
+        lottoNumbersList.appendLottoNumber(LottoNumbers.generateManualOf(numbers2));
+
+        assertThat(lottoNumbersList.count()).isEqualTo(2);
+    }
 }
