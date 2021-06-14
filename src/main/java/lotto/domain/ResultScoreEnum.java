@@ -35,7 +35,7 @@ public enum ResultScoreEnum {
     public static ResultScoreEnum valueOf(int countOfMatch, boolean matchBonus) {
         Optional<ResultScoreEnum> result = Arrays.stream(values())
                 .filter(resultScoreEnum -> (resultScoreEnum.countOfMatch == countOfMatch) ||
-                        (countOfMatch == 5 && resultScoreEnum.countOfMatch == countOfMatch && resultScoreEnum.matchBonus == matchBonus))
+                        (resultScoreEnum.countOfMatch == countOfMatch && resultScoreEnum.matchBonus == matchBonus))
                 .findFirst();
 
         return result.orElseGet(() -> ResultScoreEnum.MISS);
