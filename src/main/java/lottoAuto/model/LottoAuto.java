@@ -22,7 +22,7 @@ public class LottoAuto {
     }
 
     public UserLottos inputUserLottoNumber(int amount) {
-        UserLottos userLottos = lottoRandom.setLotto(amount);
+        UserLottos userLottos = lottoRandom.createLottoAuto(amount);
 
         return userLottos;
     }

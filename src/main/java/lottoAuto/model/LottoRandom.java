@@ -10,7 +10,7 @@ public class LottoRandom {
     private static final int LOTTO_NUMBER = 45;
     private static final int LOTTO_NUMBER_EACH = 6;
 
-    public UserLottos setLotto(int amount) {
+    public UserLottos createLottoAuto(int amount) {
         List<UserLotto> lotto = new ArrayList<>();
 
         for (int x = 0; x < amount; x++) {
