@@ -12,8 +12,8 @@ public class LottoAuto {
         return userLottos;
     }
 
-    public Lotto inputWinningNumber(String winningNumber_string) {
-        String[] splitString = winningNumber_string.split(",");
+    public Lotto inputWinningNumber(String winningNumberString) {
+        String[] splitString = winningNumberString.split(",");
 
         for (int i = 0; i < splitString.length; i++) {
             winningNumber.add(Integer.valueOf(splitString[i]));
