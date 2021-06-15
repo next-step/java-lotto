@@ -1,7 +1,5 @@
 package lottoAuto.model;
 
-import java.beans.beancontext.BeanContext;
-
 public class LottoResult {
     private int count;
     private Boolean isBonus;
