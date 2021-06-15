@@ -2,7 +2,6 @@ package lotto.business;
 
 import lotto.interfaces.Play;
 import lotto.objects.AllNumbers;
-import lotto.objects.MatchCount;
 import lotto.objects.Lotto;
 import lotto.objects.Lottos;
 import lotto.objects.WinningType;
