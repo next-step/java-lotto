@@ -31,7 +31,7 @@ class LottoGameTest {
     void getWinningNumbers() {
         WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers("1,2,3,4,5,6", 7);
 
-        assertThat(winningLottoNumbers.getWinningLottoNumbers().getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(winningLottoNumbers.getWinningLottoNumbers().getLottoNumbers()).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         assertThat(winningLottoNumbers.getBonusNumber()).isEqualTo(7);
     }
 
