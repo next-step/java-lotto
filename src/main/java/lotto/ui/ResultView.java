@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static PlayLotto playLotto;
-    private WinningStatistics winningStatistics;
 
     public void showCreatedLottos(int totalLotto, Lottos createdLottos) {
         playLotto = new PlayLotto();
