@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 
     public Lotto generateAutoLotto() {
-        Collections.shuffle((List<?>) LottoNumberList.lottoNumberList);
+        Collections.shuffle( LottoNumberList.lottoNumberList);
         Set<LottoNumber> lotto = LottoNumberList.lottoNumberList.stream()
                 .limit(LottoConstants.NUMBER_COUNT_PER_GAME)
                 .collect(Collectors.toSet());

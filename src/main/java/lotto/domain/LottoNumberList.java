@@ -8,7 +8,7 @@ import java.util.TreeSet;
 //1부터 45까지의 로또 번호
 public class LottoNumberList {
 
-    public static Set<LottoNumber> lottoNumberList = new TreeSet<>();
+    public static List<LottoNumber> lottoNumberList = new ArrayList<>();
 
     static {
         for (int i = LottoConstants.LOTTO_MIN_NUM; i <= LottoConstants.LOTTO_MAX_NUM; i++) {
