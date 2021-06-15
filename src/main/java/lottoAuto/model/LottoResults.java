@@ -1,6 +1,7 @@
 package lottoAuto.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +55,7 @@ public class LottoResults {
                 .sum()
                 ;
 
-        return new BigDecimal(String.valueOf(sum)).divide(new BigDecimal(String.valueOf(price)));
-    }
-
-    public List<LottoResult> getLottoResult() {
-        return lottoResults;
+        return new BigDecimal(String.valueOf(sum)).divide(new BigDecimal(String.valueOf(price)),2, RoundingMode.FLOOR);
     }
 
 }
