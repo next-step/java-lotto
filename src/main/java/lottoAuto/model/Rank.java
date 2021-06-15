@@ -10,29 +10,29 @@ public enum Rank {
     FIFTH(3, 5000,"3개 일치 (5000원)", false),
     NO_MATCH(0, 0, "일치 하는 거 없음",false);
 
-    private int matchWinning;
+    private int numberOfWinnings;
     private int prize;
     private String message;
     private boolean isBonus;
 
-    Rank(int matchWinning, int prize, String message, boolean isBonus) {
-        this.matchWinning = matchWinning;
+    Rank(int numberOfWinnings, int prize, String message, boolean isBonus) {
+        this.numberOfWinnings = numberOfWinnings;
         this.prize = prize;
         this.message = message;
         this.isBonus = isBonus;
     }
 
     public static Rank findByRank(LottoResult lottoResult) {
-        if (lottoResult.getCount() == SECOND.matchWinning && lottoResult.getBonus()) {
+        if (lottoResult.getCount() == SECOND.numberOfWinnings && lottoResult.getBonus()) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchWinning == lottoResult.getCount() && !rank.isBonus)
+                .filter(rank -> rank.numberOfWinnings == lottoResult.getCount() && !rank.isBonus)
                 .findAny()
                 .orElse(NO_MATCH);
     }
 
-    public static int getPrize(Rank rank,Long count) {
+    public static int calculatePrize(Rank rank, Long count) {
         return rank.prize * Integer.valueOf(String.valueOf(count));
     }
 
