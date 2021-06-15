@@ -12,6 +12,4 @@ public class LottoNumbers {
             lottoNumberList.add(i);
         }
     }
-
-
 }

@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.LottoGame;
+import lotto.domain.WinningLottoNumbers;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,8 +16,12 @@ public class LottoAutomaticMain {
 
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         resultView.resultBuyPrice(buyCount);
-        resultView.resultLottoList(lottoGame.getLottoList(buyCount));
-        resultView.resultStatistics(lottoGame.getWinning(lottoGame.getWinningNumbers(inputView.inputWinningLottoNumbers(), inputView.inputBonusNumber())));
+        resultView.resultLottoList(lottoGame.purchaseLotteries(buyCount));
+        String winningNumber = inputView.inputWinningLottoNumber();
+        int bonusNumber = inputView.inputBonusNumber();
+        WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers(winningNumber, bonusNumber);
+        WinningStatistics winningStatistics = lottoGame.getWinning(winningLottoNumbers);
+        resultView.resultStatistics(winningStatistics);
 
     }
 }

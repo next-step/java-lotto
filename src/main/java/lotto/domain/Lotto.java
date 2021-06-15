@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,9 +13,9 @@ public class Lotto {
     private Set<Integer> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
-        Set<Integer> lottoNumbers = new HashSet<>();
+        Set<Integer> lottoNumbers = new LinkedHashSet<>();
         for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
-            int lottoNumber = Integer.valueOf(lottoNumberStr);
+            int lottoNumber = Integer.parseInt(lottoNumberStr);
             Lotto.throwIllegalArgumentException_lottoRange(lottoNumber);
             lottoNumbers.add(lottoNumber);
         }
@@ -43,8 +42,8 @@ public class Lotto {
     }
 
     private static void throwIllegalArgumentException_lottoSize(Set<Integer> winningLottoNumbers) {
-        if (new HashSet<>(winningLottoNumbers).size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
-            throw new IllegalArgumentException("로또 번호는 6개여야한다, 중복된 숫자가 들어가서는 안됩니다.");
+        if (winningLottoNumbers.size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
+            throw new IllegalArgumentException("로또 번호는 6개여야합니다.");
         }
     }
 

@@ -4,26 +4,22 @@ import java.util.List;
 
 public class LottoGame {
     LottoList lottoList;
-    WinningLottoNumbers winningLottoNumbers;
 
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
     }
 
-    public LottoList getLottoList(int buyCount) {
+    public LottoList purchaseLotteries(int buyCount) {
         lottoList = new LottoList(buyCount);
         return lottoList;
     }
 
     public WinningLottoNumbers getWinningNumbers(String winningNumbers, int bonusNumber) {
-        winningLottoNumbers = new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
-        return winningLottoNumbers;
+        return new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
     }
 
-    public LottoList getManualLottoList(List<String> manualLottoList) {
-        for (String manualLottoStr : manualLottoList) {
-            lottoList.getManualLotto(manualLottoStr);
-        }
+    public LottoList resolveManualLottoList(List<String> manualLottoList) {
+        lottoList.resolveManualLottoList(manualLottoList);
         return lottoList;
     }
 
