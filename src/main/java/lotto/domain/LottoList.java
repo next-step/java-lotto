@@ -32,13 +32,9 @@ public class LottoList {
     }
 
     private int getNumberOfWinnings(Lotto lotto, Lotto winningLotto) {
-        int numberOfWinnings =0;
-        for (int lottoNumber : lotto.getLottoNumbers()) {
-            if (winningLotto.getLottoNumbers().contains(lottoNumber)) {
-                numberOfWinnings++;
-            }
-        }
-        return numberOfWinnings;
+        return (int) lotto.getLottoNumbers().stream()
+                .filter(lottoNumber -> winningLotto.getLottoNumbers().contains(lottoNumber))
+                .count();
     }
 
     public void resolveManualLottoList(List<String> manualLottoList) {
