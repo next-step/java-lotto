@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AllNumbers {
+public class LottoNumbers {
     private List<Integer> allNumbers;
 
-    public AllNumbers() {
+    public LottoNumbers() {
         List<Integer> initNumbers = new ArrayList<>();
 
         for (int i = 0; i < 45; i++) {

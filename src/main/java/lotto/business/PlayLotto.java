@@ -1,7 +1,7 @@
 package lotto.business;
 
 import lotto.interfaces.Play;
-import lotto.objects.AllNumbers;
+import lotto.objects.LottoNumbers;
 import lotto.objects.Lotto;
 import lotto.objects.Lottos;
 import lotto.objects.WinningType;
@@ -37,7 +37,7 @@ public class PlayLotto implements Play {
     }
 
     public Lotto generateLotto(Lotto lotto) {
-        AllNumbers allNumbers = new AllNumbers();
+        LottoNumbers allNumbers = new LottoNumbers();
 
         List<Integer> randomNumbers = allNumbers.getRandomNumbers();
 
