@@ -1,12 +1,11 @@
 package lotto.objects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumbers {
     private static final int LOTTO_MIN_NUMBER = 0;
     private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int NUMBER_COUNT_PER_GAME = 6;
 
     private List<Integer> allNumbers;
 
@@ -17,12 +16,17 @@ public class LottoNumbers {
             initNumbers.add(i + 1);
         }
 
+        Collections.shuffle(initNumbers);
+
         this.allNumbers = initNumbers;
     }
 
-    public List<Integer> getRandomNumbers() {
-        Collections.shuffle(allNumbers);
+    public Lotto getRandomNumbers() {
+        List<Integer> lotto = new ArrayList<>();
+        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
+            lotto.add(allNumbers.get(i));
+        }
 
-        return allNumbers;
+        return new Lotto(new HashSet<>(lotto));
     }
 }

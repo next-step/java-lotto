@@ -9,7 +9,7 @@ public interface Play {
     int buyLotto(int money);
     int getRandomNumber();
     ArrayList<Integer> createLotto();
-    Lotto generateLotto(Lotto lotto);
+    Lotto generateLotto();
     WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto);
     WinningType compareBonusNumber(int bonusNumber, Lotto myLotto);
     WinningType findSameNumbers(Lotto initLotto, Lotto myLotto, int bonusBallNumber);

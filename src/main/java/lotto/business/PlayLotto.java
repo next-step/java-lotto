@@ -36,16 +36,10 @@ public class PlayLotto implements Play {
         return lotto;
     }
 
-    public Lotto generateLotto(Lotto lotto) {
+    public Lotto generateLotto() {
         LottoNumbers allNumbers = new LottoNumbers();
 
-        List<Integer> randomNumbers = allNumbers.getRandomNumbers();
-
-        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
-            lotto.addNumber(randomNumbers.get(i));
-        }
-
-        return lotto;
+        return allNumbers.getRandomNumbers();
     }
 
     public WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto) {
@@ -90,9 +84,7 @@ public class PlayLotto implements Play {
         Lottos lottos = new Lottos();
 
         for (int i = 0; i < totalLotto; i++) {
-            Lotto lotto = new Lotto();
-
-            lottos.addLotto(generateLotto(lotto));
+            lottos.addLotto(generateLotto());
         }
 
         return lottos;
