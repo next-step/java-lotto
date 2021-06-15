@@ -20,8 +20,7 @@ public class LottoList {
         for (Lotto lotto : lottoList) {
             int numberOfWinnings = 0;
             numberOfWinnings = getNumberOfWinnings(lotto, numberOfWinnings, winningNumbers.getWinningLottoNumbers());
-            boolean bonus = false;
-            bonus = isBonus(lotto, bonus, winningNumbers.getBonusNumber());
+            boolean bonus = isBonus(lotto, winningNumbers.getBonusNumber());
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
             lottoRankList.add(rank);
         }
@@ -29,11 +28,8 @@ public class LottoList {
         return new WinningStatistics(lottoRankList);
     }
 
-    private boolean isBonus(Lotto lotto, boolean bonus, int bonusNumber) {
-        if (lotto.getLottoNumbers().contains(bonusNumber)) {
-            bonus = true;
-        }
-        return bonus;
+    private boolean isBonus(Lotto lotto, int bonusNumber) {
+        return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
     private int getNumberOfWinnings(Lotto lotto, int numberOfWinnings, Lotto winningLotto) {
