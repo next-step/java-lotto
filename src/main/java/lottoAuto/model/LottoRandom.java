@@ -10,15 +10,15 @@ public class LottoRandom {
     private static final int LOTTO_NUMBER = 45;
     private static final int LOTTO_NUMBER_EACH = 6;
 
-    public Lottos setLotto(int amount) {
+    public UserLottos setLotto(int amount) {
         List<Lotto> lotto = new ArrayList<>();
 
         for (int x = 0; x < amount; x++) {
             Lotto lottoNumbers = getLottoNumber();
             lotto.add(lottoNumbers);
         }
-        Lottos lottos = new Lottos(lotto);
-        return lottos;
+        UserLottos userLottos = new UserLottos(lotto);
+        return userLottos;
     }
 
     private Lotto getLottoNumber() {

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottosTest {
+class UserLottosTest {
 
     private List<Lotto> lottos = new ArrayList<>();
     private List<Integer> lotto = new ArrayList<>();
@@ -29,10 +29,10 @@ class LottosTest {
 
     @Test
     public void getStatistic(){
-        Lottos userLottos = new Lottos(this.lottos);
+        UserLottos userLottos = new UserLottos(this.lottos);
         Lotto winningLotto = new Lotto(this.lotto);
 
-        LottoResults lottoResults = getStatistic(userLottos.getLotto(),winningLotto);
+        LottoResults lottoResults = getStatistic(userLottos.getUserLottoNumbers(),winningLotto);
         assertThat(lottoResults.getLottoResult().get(0).getCount()).isEqualTo(5);
         assertThat(lottoResults.getLottoResult().get(0).getBonus()).isEqualTo(true);
         assertThat(lottoResults.getLottoResult().get(1).getCount()).isEqualTo(1);
@@ -45,7 +45,7 @@ class LottosTest {
 
         for (Lotto userLotto : userLottos) {
 
-            LottoResult lottoResult = new LottoResult(getCount(userLotto.getNumbers(), winningLotto.getNumbers()),hasBonus(userLotto.getNumbers(),bonus));
+            LottoResult lottoResult = new LottoResult(getCount(userLotto.getLottoNumbers(), winningLotto.getLottoNumbers()),hasBonus(userLotto.getLottoNumbers(),bonus));
             lottoResults.add(lottoResult);
         }
         return lottoResults;

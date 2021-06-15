@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoStatistic {
-    private List<Lotto> userLottos;
+    private UserLottos userLottos;
     private Lotto winningLotto;
     private int bonus;
 
-    public LottoStatistic(Lottos userLottos, Lotto winningLotto, int bonus) {
-        this.userLottos = userLottos.getLotto();
+    public LottoStatistic(UserLottos userLottos, Lotto winningLotto, int bonus) {
+        this.userLottos = userLottos;
         this.winningLotto = winningLotto;
         this.bonus = bonus;
     }
@@ -17,8 +17,8 @@ public class LottoStatistic {
     public Map<Rank, Long> getStatistic() {
         LottoResults lottoResults = new LottoResults();
 
-        for (Lotto userLotto : userLottos) {
-            LottoResult lottoResult = new LottoResult(getCount(userLotto.getNumbers(), winningLotto.getNumbers()), hasBonus(userLotto.getNumbers(), bonus));
+        for (Lotto userLotto : userLottos.getUserLottoNumbers()) {
+            LottoResult lottoResult = new LottoResult(getCount(userLotto.getLottoNumbers(), winningLotto.getLottoNumbers()), hasBonus(userLotto.getLottoNumbers(), bonus));
             lottoResults.add(lottoResult);
         }
 
@@ -42,9 +42,12 @@ public class LottoStatistic {
     }
 
     public double getRevenue(int price, Map<Rank, Long> resultMap) {
-        int sum = resultMap.entrySet().stream().mapToInt(rankLongEntry ->Rank.getPrize(rankLongEntry.getKey(),rankLongEntry.getValue())).sum();
-        double revenue = sum / price;
-        return revenue;
+        int sum = resultMap.entrySet().stream()
+                .mapToInt(rankLongEntry ->Rank.getPrize(rankLongEntry.getKey(),rankLongEntry.getValue()))
+                .sum()
+                ;
+
+        return sum / price;
     }
 
 }

@@ -13,7 +13,7 @@ public class LottoAutoApplication {
         int amount = ResultView.showAmount(price);
 
         LottoAuto lottoAuto = new LottoAuto();
-        Lottos userLottos = lottoAuto.inputUserLottoNumber(amount);
+        UserLottos userLottos = lottoAuto.inputUserLottoNumber(amount);
         ResultView.showUserLotto(userLottos);
 
         String winningLottoString = InputView.inputWinningNumber();

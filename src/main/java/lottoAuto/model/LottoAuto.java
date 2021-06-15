@@ -7,8 +7,8 @@ public class LottoAuto {
     private LottoRandom lottoRandom = new LottoRandom();
     private List<Integer> winningNumber = new ArrayList<>();
 
-    public Lottos inputUserLottoNumber(int amount) {
-        Lottos userLottos = lottoRandom.setLotto(amount);
+    public UserLottos inputUserLottoNumber(int amount) {
+        UserLottos userLottos = lottoRandom.setLotto(amount);
         return userLottos;
     }
 

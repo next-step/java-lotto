@@ -1,10 +1,8 @@
 package lottoAuto.view;
 
 import lottoAuto.model.*;
-import lottoAuto.vo.LottoResultVo;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ResultView {
     private static final int LOTTO_PRICE = 1000;
@@ -15,9 +13,9 @@ public class ResultView {
         return amount;
     }
 
-    public static void showUserLotto(Lottos lottos) {
-        for (Lotto lotto : lottos.getLotto()) {
-            System.out.println(lotto.getNumbers());
+    public static void showUserLotto(UserLottos userLottos) {
+        for (Lotto lotto : userLottos.getUserLottoNumbers()) {
+            System.out.println(lotto.getLottoNumbers());
         }
     }
 
