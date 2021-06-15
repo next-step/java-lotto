@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,15 +7,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoCreator {
-    LottoNumbers numbers = new LottoNumbers();
+    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
 
-    private static final int LOTTO_COUNT = 6;
+    public static final int FIRST_NUMBERS = 1;
+    public static final int LAST_NUMBERS = 45;
 
+    static {
+        for (int i = FIRST_NUMBERS; i < LAST_NUMBERS; i++) {
+            LOTTO_NUMBERS.add(i);
+        }
+    }
 
-    public void buyLottos(int num,List<Integer> lottoNumbers){
-        Lottos lottos = new Lottos(num,lottoNumbers);
-
-    };
+    public void buyLotto(int num, List<Integer> lottoNumbers) {
+    }
 
 
 //    public List<Integer> chooseLottoNumbers() {

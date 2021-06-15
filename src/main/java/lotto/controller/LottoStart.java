@@ -1,21 +1,29 @@
-package lotto;
+package lotto.controller;
 
-import java.util.List;
+import lotto.domain.LottoCreator;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPurchase;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
 import java.util.Scanner;
 
-public class View {
+public class LottoStart {
 
     public static void main(String[] args) {
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
         LottoCreator lottoCreator = new LottoCreator();
-        LottoPurchase lottoPurchase = new LottoPurchase();
-        LottoNumbers numbers = new LottoNumbers();
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("구입금액을 입력해 주세요.");
-        int lottoCount = lottoPurchase.buyLotto(scanner.nextInt());
-        System.out.println(lottoCount + "개를 구매했습니다.");
-        List<Integer> lottoNumbers = numbers.lottoNumbers;
-        lottoCreator.buyLottos(lottoCount,lottoNumbers);
+        outputView.payAmount();
+        inputView.countLotto();
+
+        outputView.lastWeekNumbers();
+
+        outputView.lastWeekBonus();
+
+//        List<Integer> lottoNumbers = numbers.lottoNumbers;
+//        lottoCreator.buyLottos(lottoCount,lottoNumbers);
 //        lottoCreator.shuffleLottoNumbers();
 //        lotto.getLottos(lottoCount);
 //

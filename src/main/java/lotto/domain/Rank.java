@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum Rank {
     MATCH_3(3, false, 5_000),
