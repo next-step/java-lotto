@@ -10,25 +10,27 @@ import java.util.Map;
 public class LottoAutoController {
 
     public static void main(String[] args) {
-        LottoAuto lottoAuto = new LottoAuto();
+        LottoCalculator lottoCalculator = new LottoCalculator();
 
         int price = InputView.inputPrice();
-        int amount = lottoAuto.calculateAmount(price);
+        int amount = lottoCalculator.calculateAmount(price);
         ResultView.showAmount(amount);
 
-        UserLottos userLottos = lottoAuto.inputUserLottoNumber(amount);
-        ResultView.showUserLotto(userLottos);
+        Lottos lottos = new Lottos(amount);
+        ResultView.showUserLotto(lottos);
 
-        String winningLottoString = InputView.inputWinningNumber();
+        String winningLottoNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
 
-        WinningLotto winningLotto = lottoAuto.inputWinningNumber(winningLottoString,bonusBall);
+        WinningLotto winningLotto = new WinningLotto(StringUtil.splitWinningNumber(winningLottoNumber), bonusBall);
 
-        LottoResults lottoResults = new LottoResults(userLottos,winningLotto,bonusBall);
-        Map<Rank,Long> resultMap = lottoResults.lottoRankCounting();
+        LottoResults lottoResults = lottos.matchWinningLotto(winningLotto);
+        lottoResults.matchBonusBall(lottos, bonusBall);
 
+        Map<Rank, Long> resultMap = lottoResults.lottoRankCounting();
         ResultView.showWinningStatistic(resultMap);
-        BigDecimal revenue = lottoResults.getRevenue(price,resultMap);
+
+        BigDecimal revenue = lottoCalculator.getRevenue(price, resultMap);
         ResultView.showRevenue(revenue);
     }
 }

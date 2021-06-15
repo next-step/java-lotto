@@ -1,19 +1,24 @@
 package lottoAuto.model;
 
+import java.util.List;
+
 public class LottoResult {
     private int count;
-    private Boolean isBonus;
+    private boolean hasBonusBall;
 
-    public LottoResult(int count,Boolean isBonus) {
+    public LottoResult(int count) {
         this.count = count;
-        this.isBonus = isBonus;
+    }
+
+    public void add(List<Lotto> lottos, int bonusBall) {
+        this.hasBonusBall = lottos.contains(bonusBall);
     }
 
     public int getCount() {
         return count;
     }
 
-    public Boolean getBonus() {
-        return isBonus;
+    public boolean isHasBonusBall() {
+        return hasBonusBall;
     }
 }

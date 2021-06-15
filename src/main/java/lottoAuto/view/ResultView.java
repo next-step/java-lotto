@@ -1,18 +1,20 @@
 package lottoAuto.view;
 
-import lottoAuto.model.*;
+import lottoAuto.model.Lotto;
+import lottoAuto.model.Lottos;
+import lottoAuto.model.Rank;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Map;
 
 public class ResultView {
     public static void showAmount(int amount) {
         System.out.println(amount + "개를 구매했습니다.");
     }
 
-    public static void showUserLotto(UserLottos userLottos) {
-        for (UserLotto userLotto : userLottos.getUserLottoNumbers()) {
-            System.out.println(userLotto.getLottoNumbers());
+    public static void showUserLotto(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getLottoNumbers());
         }
     }
 
@@ -20,10 +22,11 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        collect.entrySet().stream().forEach(rankLongEntry -> System.out.println(Rank.getMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue()));
+        collect.entrySet().stream()
+                .forEach(rankLongEntry -> System.out.println(Rank.getMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue()));
     }
 
-    public static void showRevenue(BigDecimal revenue){
-        System.out.println("총 수익률은 "+revenue+"입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    public static void showRevenue(BigDecimal revenue) {
+        System.out.println("총 수익률은 " + revenue + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
