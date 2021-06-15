@@ -6,6 +6,7 @@ import java.util.List;
 public class LottoAuto {
     private static final int LOTTO_PRICE = 1000;
     private static final String CHECK_LOTTO_PRICE_MESSAGE = "로또 1장의 가격은 1000원입니다.";
+    private static final String SPLIT_WINNING_LOTTO = ",";
 
     private LottoRandom lottoRandom = new LottoRandom();
 
@@ -35,7 +36,7 @@ public class LottoAuto {
     private List<Integer> splitWinningNumber(String winningLottoString){
         List<Integer> winningNumbers = new ArrayList<>();
 
-        String[] splitedWinningNumbers = winningLottoString.split(",");
+        String[] splitedWinningNumbers = winningLottoString.split(SPLIT_WINNING_LOTTO);
         for (int i = 0; i < splitedWinningNumbers.length; i++) {
             winningNumbers.add(Integer.valueOf(splitedWinningNumbers[i]));
         }
