@@ -18,8 +18,7 @@ public class LottoList {
     public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
         List<Rank> lottoRankList = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            int numberOfWinnings = 0;
-            numberOfWinnings = getNumberOfWinnings(lotto, numberOfWinnings, winningNumbers.getWinningLottoNumbers());
+            int numberOfWinnings = getNumberOfWinnings(lotto, winningNumbers.getWinningLottoNumbers());
             boolean bonus = isBonus(lotto, winningNumbers.getBonusNumber());
             Rank rank = Rank.getRank(numberOfWinnings, bonus);
             lottoRankList.add(rank);
@@ -32,7 +31,8 @@ public class LottoList {
         return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
-    private int getNumberOfWinnings(Lotto lotto, int numberOfWinnings, Lotto winningLotto) {
+    private int getNumberOfWinnings(Lotto lotto, Lotto winningLotto) {
+        int numberOfWinnings =0;
         for (int lottoNumber : lotto.getLottoNumbers()) {
             if (winningLotto.getLottoNumbers().contains(lottoNumber)) {
                 numberOfWinnings++;
