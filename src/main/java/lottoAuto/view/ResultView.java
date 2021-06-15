@@ -21,13 +21,11 @@ public class ResultView {
         }
     }
 
-    public static Map<Rank, Long> showWinningStatistic(LottoResults lottoResults) {
+    public static void showWinningStatistic(Map<Rank, Long> collect) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        Map<Rank, Long> collect = lottoResults.getLottoResult().stream().collect(Collectors.groupingBy(x -> Rank.findByRank(x), Collectors.counting()));
         collect.entrySet().stream().forEach(rankLongEntry -> System.out.println(Rank.getMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue()));
-        return collect;
     }
 
     public static void showRevenue(double revenue){

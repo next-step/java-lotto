@@ -21,9 +21,9 @@ public class LottoAutoApplication {
         int bonusBall = InputView.inputBonusBall();
 
         LottoStatistic lottoStatistic = new LottoStatistic(userLottos,winningLotto,bonusBall);
-        LottoResults lottoResults = lottoStatistic.getStatistic();
+        Map<Rank,Long> resultMap = lottoStatistic.getStatistic();
 
-        Map<Rank,Long> resultMap = ResultView.showWinningStatistic(lottoResults);
+        ResultView.showWinningStatistic(resultMap);
         double revenue = lottoStatistic.getRevenue(price,resultMap);
         ResultView.showRevenue(revenue);
     }

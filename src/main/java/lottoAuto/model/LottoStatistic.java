@@ -1,6 +1,7 @@
 package lottoAuto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoStatistic {
     private List<Lotto> userLottos;
@@ -13,16 +14,16 @@ public class LottoStatistic {
         this.bonus = bonus;
     }
 
-    public LottoResults getStatistic() {
-
+    public Map<Rank, Long> getStatistic() {
         LottoResults lottoResults = new LottoResults();
 
         for (Lotto userLotto : userLottos) {
-
             LottoResult lottoResult = new LottoResult(getCount(userLotto.getNumbers(), winningLotto.getNumbers()), hasBonus(userLotto.getNumbers(), bonus));
             lottoResults.add(lottoResult);
         }
-        return lottoResults;
+
+        return lottoResults.getLottoResult().stream()
+                .collect(Collectors.groupingBy(x -> Rank.findByRank(x), Collectors.counting()));
     }
 
     private int getCount(List<Integer> userLottoNumbers, List<Integer> winningLottoNumbers) {
