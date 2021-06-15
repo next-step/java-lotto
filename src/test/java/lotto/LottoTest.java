@@ -52,26 +52,4 @@ public class LottoTest {
         assertThat(counter.getCount()).isEqualTo(1);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6,7:3,4,5,6,7,8:5", "21,3,2,43,5,8,13:1,5,3,44,25,9:2"}, delimiter = ':')
-    void compareNumbers(String lastNumbers, String myNumbers, String expected) {
-        String[] splitedLastNumbers = lastNumbers.split(",");
-        String[] splitedMyNumbers = myNumbers.split(",");
-
-        Set<Integer> lastLottoNumbers = new HashSet<>();
-        Set<Integer> myLottoNumbers = new HashSet<>();
-
-        for (String number : splitedLastNumbers) {
-            lastLottoNumbers.add(Integer.valueOf(number));
-        }
-        for (String number : splitedMyNumbers) {
-            myLottoNumbers.add(Integer.valueOf(number));
-        }
-
-        Lotto lastLotto = new Lotto(lastLottoNumbers);
-        Lotto myLotto = new Lotto(myLottoNumbers);
-
-        assertThat(playLotto.compareNumbers(lastLotto, myLotto)).isEqualTo(Integer.valueOf(expected));
-    }
-
 }

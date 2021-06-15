@@ -55,14 +55,6 @@ public class PlayLotto implements Play {
         }
     }
 
-    public int compareNumbers(Lotto initLotto, Lotto myLotto) { // not use
-        Counter count = new Counter();
-        for (int i = 0; i < NUMBER_COUNT_PER_GAME + 1; i++) {
-            countSameNumbers(initLotto, myLotto, count, i);
-        }
-        return count.getCount();
-    }
-
     public WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto) {
         if (count == WinningType.THREE.getCounts()) {
             return WinningType.THREE;
