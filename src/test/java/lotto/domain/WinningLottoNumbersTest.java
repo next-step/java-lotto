@@ -10,14 +10,14 @@ public class WinningLottoNumbersTest {
 
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,22,33,4,5,6,", "7");
 
-        assertThat(winningLottoNumbers.containsMain(1)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(22)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(33)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(4)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(5)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(6)).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(1))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(22))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(33))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(4))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(5))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(6))).isTrue();
 
-        assertThat(winningLottoNumbers.containsBonus(7)).isTrue();
+        assertThat(winningLottoNumbers.containsBonus(new LottoNo(7))).isTrue();
     }
 
     @Test
@@ -26,12 +26,12 @@ public class WinningLottoNumbersTest {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers();
         LottoNumbers lottoNumbers = winningLottoNumbers.parsingInputString("1,2,3,4,5,6");
 
-        assertThat(lottoNumbers.contains(1)).isTrue();
-        assertThat(lottoNumbers.contains(2)).isTrue();
-        assertThat(lottoNumbers.contains(3)).isTrue();
-        assertThat(lottoNumbers.contains(4)).isTrue();
-        assertThat(lottoNumbers.contains(5)).isTrue();
-        assertThat(lottoNumbers.contains(6)).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(1))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(2))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(3))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(4))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(5))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(6))).isTrue();
     }
 
     @Test
@@ -47,15 +47,15 @@ public class WinningLottoNumbersTest {
     @Test
     public void containsMain_검증() {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", "11");
-        assertThat(winningLottoNumbers.containsMain(1)).isTrue();
-        assertThat(winningLottoNumbers.containsMain(11)).isFalse();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(1))).isTrue();
+        assertThat(winningLottoNumbers.containsMain(new LottoNo(11))).isFalse();
     }
 
     @Test
     public void containsBonus_검증() {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,4,5,6", "11");
-        assertThat(winningLottoNumbers.containsBonus(1)).isFalse();
-        assertThat(winningLottoNumbers.containsBonus(11)).isTrue();
+        assertThat(winningLottoNumbers.containsBonus(new LottoNo(1))).isFalse();
+        assertThat(winningLottoNumbers.containsBonus(new LottoNo(11))).isTrue();
     }
 
 }

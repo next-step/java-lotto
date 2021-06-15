@@ -47,18 +47,18 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNo targetLottoNo) {
         boolean result = false;
         for (LottoNo lottoNo : lottoNumbers) {
-            result = isSame(lottoNo, number, result);
+            result = isSame(lottoNo, targetLottoNo, result);
         }
         return result;
     }
 
-    private boolean isSame(LottoNo lottoNo, int number, boolean result) {
+    private boolean isSame(LottoNo lottoNo, LottoNo targetLottoNo, boolean result) {
         if (result == true)
             return true;
-        if (lottoNo.lottNo() == number && result == false)
+        if (lottoNo.equals(targetLottoNo) && result == false)
             return true;
         return false;
     }

@@ -19,7 +19,7 @@ class LottoNumbersListTest {
 
         LottoNumbersList lottoNumbersList = new LottoNumbersList(lottoNumbersArray);
         assertThat(lottoNumbersList.count()).isEqualTo(2);
-        assertThat(lottoNumbersList.lottoNumberList(0).contains(1)).isTrue();
+        assertThat(lottoNumbersList.lottoNumberList(0).contains(new LottoNo(1))).isTrue();
     }
 
     @Test

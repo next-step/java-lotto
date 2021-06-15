@@ -2,6 +2,7 @@ package lotto.common;
 
 public enum Constant {
     MAX_LOTTO_NUMBER(45),
+    MIN_LOTTO_NUMBER(1),
     LOTTO_NUMBER_COUNT(6),
     LOTTO_PRICE(1000);
 

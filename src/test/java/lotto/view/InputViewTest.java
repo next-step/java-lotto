@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.common.MessageCode;
+import lotto.domain.LottoNo;
 import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +17,10 @@ class InputViewTest {
         lottoNumbersArray[0] = "1,2,3,4,5,6";
         lottoNumbersArray[1] = "7,8,9,10,11,12";
         LottoNumbers[] lottoNumbers = inputView.convertingStringToLottoNumbersArray(lottoNumbersArray);
-        assertThat(lottoNumbers[0].contains(1)).isTrue();
-        assertThat(lottoNumbers[0].contains(2)).isTrue();
-        assertThat(lottoNumbers[0].contains(3)).isTrue();
-        assertThat(lottoNumbers[0].contains(4)).isTrue();
+        assertThat(lottoNumbers[0].contains(new LottoNo(1))).isTrue();
+        assertThat(lottoNumbers[0].contains(new LottoNo(2))).isTrue();
+        assertThat(lottoNumbers[0].contains(new LottoNo(3))).isTrue();
+        assertThat(lottoNumbers[0].contains(new LottoNo(4))).isTrue();
     }
 
     @Test
@@ -27,9 +28,9 @@ class InputViewTest {
         InputView inputView = new InputView();
         String inputLottoNumber = "1,5,8,21,23,31";
         LottoNumbers lottoNumbers = inputView.parsingInputLottoNumbers(inputLottoNumber);
-        assertThat(lottoNumbers.contains(1)).isTrue();
-        assertThat(lottoNumbers.contains(5)).isTrue();
-        assertThat(lottoNumbers.contains(23)).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(1))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(5))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(23))).isTrue();
     }
 
     @Test

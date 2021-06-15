@@ -13,7 +13,7 @@ class LottoNumbersTest {
     public void LottoNumbers_수동생성_검증() {
         int[] numbers = {1,2,3,4,5,6};
         LottoNumbers lottoNumbers = LottoNumbers.generateManualOf(numbers);
-        assertThat(lottoNumbers.contains(1)).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNo(1))).isTrue();
     }
 
     @Test

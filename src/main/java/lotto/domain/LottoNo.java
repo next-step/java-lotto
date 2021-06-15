@@ -1,12 +1,11 @@
 package lotto.domain;
 
+import lotto.common.Constant;
 import lotto.common.MessageCode;
 
 import java.util.Objects;
 
 public class LottoNo {
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MIN_LOTTO_NUMBER = 1;
     private int lottoNo;
 
     public LottoNo(int lottoNo) {
@@ -15,7 +14,7 @@ public class LottoNo {
     }
 
     private void validateLottoNo(int lottoNo) {
-        if (lottoNo > MAX_LOTTO_NUMBER || lottoNo < MIN_LOTTO_NUMBER)
+        if (lottoNo > Constant.MAX_LOTTO_NUMBER.value() || lottoNo < Constant.MIN_LOTTO_NUMBER.value())
             throw new IllegalArgumentException(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
     }
 
