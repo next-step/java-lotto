@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class LottoRandom {
-    private Random random = new Random();
+    private static final Random RANDOM = new Random();
     private static final int LOTTO_NUMBER = 45;
     private static final int LOTTO_NUMBER_EACH = 6;
 
@@ -25,7 +25,7 @@ public class LottoRandom {
         List<Integer> num = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_NUMBER_EACH; i++) {
-            num.add(random.nextInt(LOTTO_NUMBER) + 1);
+            num.add(RANDOM.nextInt(LOTTO_NUMBER) + 1);
         }
         Collections.shuffle(num);
         Collections.sort(num);
