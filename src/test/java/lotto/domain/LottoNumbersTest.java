@@ -25,7 +25,6 @@ class LottoNumbersTest {
 
     @Test
     public void LottoNumbers_자동생성_소팅_검증() {
-        //LottoNumbers lottoNumbers = LottoNumbers.generateAutoOf(new LottoNumberGenerator());
         LottoNumbers lottoNumbers = LottoNumbers.generateAutoOf(LottoNumberGenerator.getInstance());
 
         for( int i=0; i< Constant.LOTTO_NUMBER_COUNT.value()-1; i++) {

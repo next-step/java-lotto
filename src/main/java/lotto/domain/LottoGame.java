@@ -55,7 +55,6 @@ public class LottoGame {
 
     public LottoNumbersList generateAutoLottoNumbersLit(LottoNumbersList lottoNumbersList, int autoBuyLottoCount) {
         for (int i = 0; i < autoBuyLottoCount; i++)
-            //lottoNumbersList.appendLottoNumber(LottoNumbers.generateAutoOf(new LottoNumberGenerator()));
             lottoNumbersList.appendLottoNumber(LottoNumbers.generateAutoOf(LottoNumberGenerator.getInstance()));
 
         return lottoNumbersList;

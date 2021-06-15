@@ -15,13 +15,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generateAutoOf(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
-        //return new LottoNumbers(new LottoNumberGenerator());
         return new LottoNumbers(LottoNumberGenerator.getInstance());
-
-    }
-
-    public static LottoNumbers generateWinningLottoOf(String[] numbers) {
-        return new LottoNumbers(numbers);
     }
 
     private LottoNumbers(int[] numbers) {

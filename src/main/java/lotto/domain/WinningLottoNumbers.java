@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class WinningLottoNumbers {
@@ -17,8 +18,9 @@ public class WinningLottoNumbers {
 
     public LottoNumbers parsingInputString(String inputLastWonLottoNumberString) {
 
-        String[] numbers = inputLastWonLottoNumberString.split(",");
-        winningLottoNumbers = LottoNumbers.generateWinningLottoOf(numbers);
+        int[] numbers = Arrays.asList(inputLastWonLottoNumberString.split(","))
+                .stream().mapToInt(Integer::parseInt).toArray();
+        winningLottoNumbers = LottoNumbers.generateManualOf(numbers);
         return winningLottoNumbers;
     }
 
