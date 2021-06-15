@@ -1,14 +1,13 @@
 package lotto;
 
 import lotto.business.PlayLotto;
-import lotto.objects.Counter;
+import lotto.objects.MatchCount;
 import lotto.objects.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
@@ -45,7 +44,7 @@ public class LottoTest {
     void countSameNumbers(int index) {
         Lotto lastWeekLWinningLotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
         Lotto thisWeekMyLotto = new Lotto(new HashSet<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
-        Counter counter = new Counter();
+        MatchCount counter = new MatchCount();
 
         PlayLotto.countSameNumbers(lastWeekLWinningLotto, thisWeekMyLotto, counter, index);
 

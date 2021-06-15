@@ -1,6 +1,6 @@
 package lotto.objects;
 
-public class Counter {
+public class MatchCount {
     private int count = 0;
 
     public void add(int number) {

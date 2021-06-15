@@ -2,7 +2,7 @@ package lotto.business;
 
 import lotto.interfaces.Play;
 import lotto.objects.AllNumbers;
-import lotto.objects.Counter;
+import lotto.objects.MatchCount;
 import lotto.objects.Lotto;
 import lotto.objects.Lottos;
 import lotto.objects.WinningType;
@@ -49,9 +49,9 @@ public class PlayLotto implements Play {
         return lotto;
     }
 
-    public static void countSameNumbers(Lotto initLotto, Lotto myLotto, Counter count, int index) {
+    public static void countSameNumbers(Lotto initLotto, Lotto myLotto, MatchCount matchCount, int index) {
         if (myLotto.getNumbers().contains(initLotto.getNumbers().get(index))) {
-            count.add(1);
+            matchCount.add(1);
         }
     }
 
@@ -79,12 +79,12 @@ public class PlayLotto implements Play {
     }
 
     public WinningType findSameNumbers(Lotto initLotto, Lotto myLotto, int bonusBallNumber) {
-        Counter count = new Counter();
+        MatchCount matchCount = new MatchCount();
         for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
-            countSameNumbers(initLotto, myLotto, count, i);
+            countSameNumbers(initLotto, myLotto, matchCount, i);
         }
 
-        return decideWinningType(count.getCount(), bonusBallNumber, myLotto);
+        return decideWinningType(matchCount.getCount(), bonusBallNumber, myLotto);
     }
 
     public List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int bonusBallNumber) {
