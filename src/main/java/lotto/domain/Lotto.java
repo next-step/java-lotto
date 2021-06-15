@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class Lotto {
     public Lotto(Set<LottoNumber> lottoNumbers) {
 
         lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(TreeSet::new));
-        throwIllegalArgumentException_lottoSize(lottoNumbers);
+        throwIllegalArgumentExceptionLottoSize(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
     }
@@ -37,7 +36,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private static void throwIllegalArgumentException_lottoSize(Set<LottoNumber> winningLottoNumbers) {
+    private static void throwIllegalArgumentExceptionLottoSize(Set<LottoNumber> winningLottoNumbers) {
         if (winningLottoNumbers.size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
             throw new IllegalArgumentException("로또 번호는 6개여야합니다.");
         }
