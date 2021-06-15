@@ -28,4 +28,14 @@ public class Lotto {
         numbers.add(number);
     }
 
+    public int countSameNumbers(Lotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(lottoNumber -> winningLotto.contains(lottoNumber))
+                .count();
+    }
+
+    private boolean contains(Integer lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
 }

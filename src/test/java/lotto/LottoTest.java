@@ -1,54 +1,52 @@
 package lotto;
 
-import lotto.business.PlayLotto;
-import lotto.objects.MatchCount;
 import lotto.objects.Lotto;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-
-    private PlayLotto playLotto;
+    public Lotto myLotto;
 
     @BeforeEach
     void setUp() {
-        playLotto = new PlayLotto();
+        myLotto = new Lotto(new HashSet<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {14000})
-    void buyLotto(int money) {
-        assertThat(playLotto.buyLotto(money)).isEqualTo(14);
+    @ValueSource(ints = {7})
+    void addNumber(int number) {
+        Lotto winngingLotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        winngingLotto.addNumber(number);
+        assertThat(winngingLotto.getNumbers()).usingFieldByFieldElementComparator().isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     }
 
     @Test
-    void getRandomNumber() {
-        assertThat(playLotto.getRandomNumber()).isBetween(1, 45);
-    }
-
-    @RepeatedTest(value = 6)
-    void createLotto(RepetitionInfo repetitionInfo) {
-        assertThat(playLotto.createLotto().get(repetitionInfo.getCurrentRepetition() - 1)).isBetween(1, 45);
+    void getNumbers() {
+        Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto.getNumbers()).usingFieldByFieldElementComparator().isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
-    void countSameNumbers(int index) {
-        Lotto lastWeekLWinningLotto = new Lotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-        Lotto thisWeekMyLotto = new Lotto(new HashSet<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
-        MatchCount counter = new MatchCount();
+    @CsvSource(value = {"1,2,3,4,5,6:4", "1,2,3,4,5,6,7:5"}, delimiter = ':')
+    void countSameNumbers(String value1, String value2) {
+        String[] numbers = value1.split(",");
+        List<Integer> lottoNumbers = Arrays.stream(numbers).map(number -> Integer.parseInt(number)).collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(new HashSet<>(lottoNumbers));
 
-        PlayLotto.countSameNumbers(lastWeekLWinningLotto, thisWeekMyLotto, counter, index);
+        int expected = Integer.parseInt(value2);
 
-        assertThat(counter.getCount()).isEqualTo(1);
+        int matchCount = myLotto.countSameNumbers(winningLotto);
+
+        assertThat(matchCount).isEqualTo(expected);
     }
-
 }

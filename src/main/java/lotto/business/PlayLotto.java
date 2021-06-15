@@ -49,12 +49,6 @@ public class PlayLotto implements Play {
         return lotto;
     }
 
-    public static void countSameNumbers(Lotto initLotto, Lotto myLotto, MatchCount matchCount, int index) {
-        if (myLotto.getNumbers().contains(initLotto.getNumbers().get(index))) {
-            matchCount.add(1);
-        }
-    }
-
     public WinningType decideWinningType(int count, int bonusNumber, Lotto myLotto) {
         if (count == WinningType.THREE.getCounts()) {
             return WinningType.THREE;
@@ -79,12 +73,9 @@ public class PlayLotto implements Play {
     }
 
     public WinningType findSameNumbers(Lotto initLotto, Lotto myLotto, int bonusBallNumber) {
-        MatchCount matchCount = new MatchCount();
-        for (int i = 0; i < NUMBER_COUNT_PER_GAME; i++) {
-            countSameNumbers(initLotto, myLotto, matchCount, i);
-        }
+        int matchCount = myLotto.countSameNumbers(initLotto);
 
-        return decideWinningType(matchCount.getCount(), bonusBallNumber, myLotto);
+        return decideWinningType(matchCount, bonusBallNumber, myLotto);
     }
 
     public List<WinningType> getWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int bonusBallNumber) {
