@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.common.Constant;
 import lotto.common.MessageCode;
 
 import java.util.ArrayList;
@@ -26,21 +27,17 @@ public class LottoNumbers {
     }
 
     private void validateLottoNumbers() {
-        if (lottoNumbers.size() > 6)
+        if (lottoNumbers.size() > Constant.LOTTO_NUMBER_COUNT.value())
             throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
 
-        if (lottoNumbers.size() < 6)
+        if (lottoNumbers.size() < Constant.LOTTO_NUMBER_COUNT.value())
             throw new IllegalArgumentException(MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message());
 
         Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
-        if (transSet.size() < 6)
+        if (transSet.size() < Constant.LOTTO_NUMBER_COUNT.value())
             throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
     }
 
-/*    private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
-        lottoNumbers = new ArrayList<LottoNo>();
-        lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();
-    }*/
     private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         lottoNumbers = new ArrayList<LottoNo>();
         lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();
