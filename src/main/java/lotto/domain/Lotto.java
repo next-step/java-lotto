@@ -43,8 +43,8 @@ public class Lotto {
     }
 
     private static void throwIllegalArgumentException_lottoSize(Set<Integer> winningLottoNumbers) {
-        if (new HashSet<>(winningLottoNumbers).size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
-            throw new IllegalArgumentException("로또 번호는 6개여야한다, 중복된 숫자가 들어가서는 안됩니다.");
+        if (winningLottoNumbers.size() != LottoConstants.NUMBER_COUNT_PER_GAME) {
+            throw new IllegalArgumentException("로또 번호는 6개여야합니다.");
         }
     }
 
