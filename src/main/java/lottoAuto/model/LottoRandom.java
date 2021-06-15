@@ -11,17 +11,17 @@ public class LottoRandom {
     private static final int LOTTO_NUMBER_EACH = 6;
 
     public UserLottos setLotto(int amount) {
-        List<Lotto> lotto = new ArrayList<>();
+        List<UserLotto> lotto = new ArrayList<>();
 
         for (int x = 0; x < amount; x++) {
-            Lotto lottoNumbers = getLottoNumber();
-            lotto.add(lottoNumbers);
+            UserLotto userLottoNumbers = getLottoNumber();
+            lotto.add(userLottoNumbers);
         }
         UserLottos userLottos = new UserLottos(lotto);
         return userLottos;
     }
 
-    private Lotto getLottoNumber() {
+    private UserLotto getLottoNumber() {
         List<Integer> num = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_NUMBER_EACH; i++) {
@@ -29,8 +29,8 @@ public class LottoRandom {
         }
         Collections.shuffle(num);
         Collections.sort(num);
-        Lotto lotto = new Lotto(num);
+        UserLotto userLotto = new UserLotto(num);
 
-        return lotto;
+        return userLotto;
     }
 }
