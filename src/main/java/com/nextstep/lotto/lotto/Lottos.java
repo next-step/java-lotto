@@ -24,9 +24,7 @@ public class Lottos {
 	}
 
 	public void add(Lottos lottos) {
-		for (Lotto lotto : lottos.userLottos) {
-			this.userLottos.add(lotto);
-		}
+		this.userLottos.addAll(lottos.userLottos);
 	}
 
 }
