@@ -15,7 +15,7 @@ public class LottoGame {
     }
 
     public WinningLottoNumbers getWinningNumbers(String winningNumbers, int bonusNumber) {
-        return new WinningLottoNumbers(new Lotto(winningNumbers), bonusNumber);
+        return new WinningLottoNumbers(new Lotto(winningNumbers), new LottoNumber(bonusNumber));
     }
 
     public LottoList resolveManualLottoList(List<String> manualLottoList) {

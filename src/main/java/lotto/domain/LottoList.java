@@ -27,13 +27,13 @@ public class LottoList {
         return new WinningStatistics(lottoRankList);
     }
 
-    private boolean isBonus(Lotto lotto, int bonusNumber) {
-        return lotto.getLottoNumbers().contains(bonusNumber);
+    private boolean isBonus(Lotto lotto, LottoNumber bonusNumber) {
+        return lotto.containsNumber(bonusNumber);
     }
 
     private int getNumberOfWinnings(Lotto lotto, Lotto winningLotto) {
         return (int) lotto.getLottoNumbers().stream()
-                .filter(lottoNumber -> winningLotto.getLottoNumbers().contains(lottoNumber))
+                .filter(lottoNumber -> winningLotto.containsNumber(lottoNumber))
                 .count();
     }
 

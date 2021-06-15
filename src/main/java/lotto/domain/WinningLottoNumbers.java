@@ -2,9 +2,9 @@ package lotto.domain;
 
 public class WinningLottoNumbers {
     private Lotto winningLottoNumbers;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLottoNumbers(Lotto winningLottoNumbers, int bonusNumber) {
+    public WinningLottoNumbers(Lotto winningLottoNumbers, LottoNumber bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers;
 
         if (winningLottoNumbers.getLottoNumbers().contains(bonusNumber)) {
@@ -14,7 +14,7 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
