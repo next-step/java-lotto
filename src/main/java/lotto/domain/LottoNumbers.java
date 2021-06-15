@@ -25,13 +25,6 @@ public class LottoNumbers {
         validateLottoNumbers();
     }
 
-    private LottoNumbers(String[] numbers) {
-        lottoNumbers = new ArrayList<LottoNo>();
-        for (String number : numbers)
-            lottoNumbers.add(new LottoNo(Integer.parseInt(number)));
-        validateLottoNumbers();
-    }
-
     private void validateLottoNumbers() {
         if (lottoNumbers.size() > 6)
             throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
