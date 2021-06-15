@@ -15,7 +15,9 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generateAutoOf(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
-        return new LottoNumbers(new LottoNumberGenerator());
+        //return new LottoNumbers(new LottoNumberGenerator());
+        return new LottoNumbers(LottoNumberGenerator.getInstance());
+
     }
 
     public static LottoNumbers generateWinningLottoOf(String[] numbers) {
@@ -48,6 +50,10 @@ public class LottoNumbers {
             throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
     }
 
+/*    private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
+        lottoNumbers = new ArrayList<LottoNo>();
+        lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();
+    }*/
     private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
         lottoNumbers = new ArrayList<LottoNo>();
         lottoNumbers = lottoNumberGeneratorStrategy.generateLottoNumber();

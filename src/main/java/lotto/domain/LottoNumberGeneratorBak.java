@@ -7,19 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumberGenerator implements LottoNumberGeneratorStrategy {
-    private static LottoNumberGenerator instance = new LottoNumberGenerator();
+public class LottoNumberGeneratorBak implements LottoNumberGeneratorStrategy {
     private static List<LottoNo> lottoNumberRange;
 
-    private LottoNumberGenerator() {
-        setLottoNumberRange();
-    }
-
-    public static LottoNumberGenerator getInstance() {
-        return instance;
-    }
-
-    private void setLottoNumberRange() {
+    public LottoNumberGeneratorBak() {
         lottoNumberRange = new ArrayList<LottoNo>();
         for (int i = 1; i <= Constant.MAX_LOTTO_NUMBER.value(); i++) {
             lottoNumberRange.add(new LottoNo(i));
