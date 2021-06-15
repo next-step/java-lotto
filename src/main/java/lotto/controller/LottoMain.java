@@ -9,12 +9,12 @@ import lotto.view.ResultView;
 import java.util.List;
 
 public class LottoMain {
-    static InputView inputView = new InputView();
-    static ResultView resultView = new ResultView();
 
-    static LottoGame lottoGame = new LottoGame();
 
     public static void main(String[] args) {
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
+        LottoGame lottoGame = new LottoGame();
 
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         int manualBuyCount = inputView.inputManualBuyPrice();
