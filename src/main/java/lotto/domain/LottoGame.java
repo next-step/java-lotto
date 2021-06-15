@@ -27,14 +27,14 @@ public class LottoGame {
         resultView.printLottoGameResult(resultAllLottoScores, inputMoney);
     }
 
-    public WinningLottoNumbers generateWinningLottoNumbers() {
+    private WinningLottoNumbers generateWinningLottoNumbers() {
         String inputWinningLottoNumbers = inputView.inputWinningLottoNumbers();
         String inputBonusLottoNumber = inputView.inputBonusLottoNumber();
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(inputWinningLottoNumbers, inputBonusLottoNumber);
         return winningLottoNumbers;
     }
 
-    public LottoNumbersList generateBuyingLottoNumbers(int manualBuyLottoCount, int autoBuyLottoCount) {
+    private LottoNumbersList generateBuyingLottoNumbers(int manualBuyLottoCount, int autoBuyLottoCount) {
         LottoNumbersList lottoNumbersList = new LottoNumbersList();
         if (manualBuyLottoCount > 0)
             lottoNumbersList = generateManualLottoNumbersList(lottoNumbersList, manualBuyLottoCount);
@@ -46,14 +46,14 @@ public class LottoGame {
         return lottoNumbersList;
     }
 
-    public LottoNumbersList generateManualLottoNumbersList(LottoNumbersList lottoNumbersList, int manualBuyLottoCount) {
+    private LottoNumbersList generateManualLottoNumbersList(LottoNumbersList lottoNumbersList, int manualBuyLottoCount) {
         LottoNumbers[] lottoNumbers = inputView.inputManualLottoNumbers(manualBuyLottoCount);
         for (int i = 0; i < lottoNumbers.length; i++)
             lottoNumbersList.appendLottoNumber(lottoNumbers[i]);
         return lottoNumbersList;
     }
 
-    public LottoNumbersList generateAutoLottoNumbersLit(LottoNumbersList lottoNumbersList, int autoBuyLottoCount) {
+    private LottoNumbersList generateAutoLottoNumbersLit(LottoNumbersList lottoNumbersList, int autoBuyLottoCount) {
         for (int i = 0; i < autoBuyLottoCount; i++)
             lottoNumbersList.appendLottoNumber(LottoNumbers.generateAutoOf(LottoNumberGenerator.getInstance()));
 
