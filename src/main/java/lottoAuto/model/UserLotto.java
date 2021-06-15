@@ -3,10 +3,10 @@ package lottoAuto.model;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class UserLotto {
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public UserLotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

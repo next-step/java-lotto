@@ -4,13 +4,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class WinningLotto {
-    private List<Lotto> winningLottoNumbers;
+    private List<Integer> winningLottoNumbers;
+    private int bonusBall;
 
-    public WinningLotto(List<Lotto> winningLottoNumbers){
+    public WinningLotto(List<Integer> winningLottoNumbers,int bonusBall){
         this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusBall = bonusBall;
     }
 
-    public List<Lotto> getWinningLottoNumbers() {
+    public List<Integer> getWinningLottoNumbers() {
         return Collections.unmodifiableList(winningLottoNumbers);
     }
 }

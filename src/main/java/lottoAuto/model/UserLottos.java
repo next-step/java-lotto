@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserLottos {
-    private List<Lotto> userLottoNumbers;
+    private List<UserLotto> userUserLottoNumbers;
 
-    public UserLottos(List<Lotto> userLottoNumbers){
-        this.userLottoNumbers = userLottoNumbers;
+    public UserLottos(List<UserLotto> userUserLottoNumbers){
+        this.userUserLottoNumbers = userUserLottoNumbers;
     }
 
-    public List<Lotto> getUserLottoNumbers() {
-        return Collections.unmodifiableList(userLottoNumbers);
+    public List<UserLotto> getUserLottoNumbers() {
+        return Collections.unmodifiableList(userUserLottoNumbers);
     }
 
 }
