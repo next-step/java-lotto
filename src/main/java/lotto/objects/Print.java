@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 final public class Print {
+    public final String mention;
+
+    public Print(String mention) {
+        this.mention = mention;
+    }
+
     public static void printPurchase(int amount) {
         System.out.println(amount + "개를 구매했습니다.");
     }
@@ -42,6 +48,10 @@ final public class Print {
             mention.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
 
+        System.out.println(mention);
+    }
+
+    public void printMention() {
         System.out.println(mention);
     }
 }
