@@ -3,25 +3,26 @@ package lottoAuto.view;
 import java.util.Scanner;
 
 public class InputView {
-    private Scanner scanner = new Scanner(System.in);
+    private static final  Scanner SCANNER = new Scanner(System.in);
+    private static final String INPUT_PRICE_MESSGAE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    public int inputPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
-        int price = scanner.nextInt();
-        return price;
+    public static int inputPrice() {
+        System.out.println(INPUT_PRICE_MESSGAE);
+
+        return SCANNER.nextInt();
     }
 
-    public String inputWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningLottoString = scanner.next();
+    public static String inputWinningNumber() {
+        System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
 
-        return winningLottoString;
+        return SCANNER.next();
     }
 
-    public int inputBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusBall = scanner.nextInt();
+    public static int inputBonusBall() {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
 
-        return bonusBall;
+        return SCANNER.nextInt();
     }
 }
