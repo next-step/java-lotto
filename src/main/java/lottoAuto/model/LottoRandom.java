@@ -14,14 +14,14 @@ public class LottoRandom {
         List<UserLotto> lotto = new ArrayList<>();
 
         for (int x = 0; x < amount; x++) {
-            UserLotto userLottoNumbers = getLottoNumber();
+            UserLotto userLottoNumbers = createLottoNumber();
             lotto.add(userLottoNumbers);
         }
         UserLottos userLottos = new UserLottos(lotto);
         return userLottos;
     }
 
-    private UserLotto getLottoNumber() {
+    private UserLotto createLottoNumber() {
         List<Integer> num = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_NUMBER_EACH; i++) {
