@@ -7,4 +7,5 @@ public class Lottoes {
 
     public Lottoes() {
     }
+
 }
