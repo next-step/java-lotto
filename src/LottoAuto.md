@@ -79,8 +79,13 @@
 - [x] 당첨 결과를 출력한다.
 - [x] 총 수익률(당첨금액/구매금액) 을 계산하여 출력한다.
 
-### lotto.mode.LottoNumber 의 기능
+### lotto.model.LottoNumber 의 기능
+- (Map<Integer, LottoNumber>) NUMBERS
+- (int) MIN_NUMBER
+- (int) MAX_NUMBER  
 - (int) number
+- `LottoNumber#static` : 1부터 45까지의 로또 숫자 생성
+- `LottoNumber#of` : factory method  
 - `LottoNumber#LottoNumber` : 생성자
 - `LottoNumber#checkNumber` : 1부터 45까지의 수인지 확인
 - `LottoNumber#isSame` : 다른 LottoNumber 와 일치 여부
