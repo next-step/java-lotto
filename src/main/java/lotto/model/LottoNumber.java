@@ -1,9 +1,25 @@
 package lotto.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LottoNumber {
+    private static final Map<Integer, LottoNumber> NUMBERS = new HashMap<>();
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private int number;
 
-    public LottoNumber(int number) {
+    static {
+        for (int number = MIN_NUMBER; number < MAX_NUMBER; number++) {
+            NUMBERS.put(number, new LottoNumber(number));
+        }
+    }
+
+    public static LottoNumber of(int number) {
+        return NUMBERS.get(number);
+    }
+
+    private LottoNumber(int number) {
         checkNumber(number);
         this.number = number;
     }
