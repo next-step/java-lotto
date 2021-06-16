@@ -68,4 +68,9 @@ public class LottoBall implements Comparable<LottoBall> {
         }
         return this.ball == ((LottoBall) obj).ball;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(ball);
+    }
 }
