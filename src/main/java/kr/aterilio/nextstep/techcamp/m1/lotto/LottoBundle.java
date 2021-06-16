@@ -65,7 +65,7 @@ public class LottoBundle {
     private void buy(int money) {
         validateNegative(money);
         for (int i = money / Lotto.PRICE_PER_LOTTO; i > 0; --i) {
-            lottoBundle.add(Machine.draw());
+            lottoBundle.add(LottoMachine.draw());
         }
     }
 

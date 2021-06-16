@@ -2,6 +2,8 @@ package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import kr.aterilio.nextstep.techcamp.m1.utils.StringUtil;
 
+import java.util.Optional;
+
 public class LottoBall implements Comparable<LottoBall> {
 
     public static final int MIN = 1;
@@ -12,22 +14,23 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private final int ball;
 
-    private LottoBall(int ball) {
+    public LottoBall(int ball) {
         validateRange(ball);
         this.ball = ball;
     }
 
     public static LottoBall of(String ball) {
         validateNumeric(ball);
-        return new LottoBall(Integer.parseInt(ball));
+        return of(Integer.parseInt(ball));
     }
 
     public static LottoBall of(int ball) {
-        return new LottoBall(ball);
+        Optional<LottoBall> lottoBall = LottoMachine.of(ball);
+        return lottoBall.orElseThrow(() -> new IllegalArgumentException(MSG_ERR_OUT_OF_RANGE));
     }
 
-    private static void validateNumeric(String target) {
-        if (!StringUtil.isNumeric(target)) {
+    private static void validateNumeric(String ball) {
+        if (!StringUtil.isNumeric(ball)) {
             throw new IllegalArgumentException(MSG_ERR_NOT_NUMERIC);
         }
     }
