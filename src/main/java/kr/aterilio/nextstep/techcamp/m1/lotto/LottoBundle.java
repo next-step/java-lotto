@@ -2,10 +2,7 @@ package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import kr.aterilio.nextstep.techcamp.m1.lotto.result.ResultRank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoBundle {
 
@@ -16,10 +13,12 @@ public class LottoBundle {
     private static final String MSG_ERR_INSUFFICIENCY_MONEY = "구매할 금액이 충분하지 않습니다.";
     private static final String MSG_ERR_INSUFFICIENCY_MANUAL_COUNT = "입력하신 수동 구매 횟수와 로또 갯수가 일치하지 않습니다.";
 
+    private static final LottoBundle EMPTY_MANUAL = new LottoBundle(0, Collections.emptyList());
+
     private final List<Lotto> lottoBundle = new ArrayList<>();
 
     public LottoBundle(int money) {
-        buy(money);
+        this(money, EMPTY_MANUAL);
     }
 
     // for manual lotto
@@ -29,11 +28,11 @@ public class LottoBundle {
     }
 
     public LottoBundle(int totalBudget, LottoBundle manualLotto) {
+        validateNegative(totalBudget);
         validateSufficiencyMoney(totalBudget, manualLotto.count());
         buyManual(manualLotto.lottoBundle);
         buy(remains(totalBudget, manualLotto.count()));
     }
-
     private void buyManual(List<Lotto> boughtLotto) {
         lottoBundle.addAll(boughtLotto);
     }
@@ -54,6 +53,12 @@ public class LottoBundle {
         }
     }
 
+    private void validateNegative(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException(MSG_ERR_PRICE_NEGATIVE);
+        }
+    }
+
     private boolean buyable(int money, int manualCount) {
         return manualCount * Lotto.PRICE_PER_LOTTO <= money;
     }
@@ -63,15 +68,8 @@ public class LottoBundle {
     }
 
     private void buy(int money) {
-        validateNegative(money);
         for (int i = money / Lotto.PRICE_PER_LOTTO; i > 0; --i) {
             lottoBundle.add(LottoMachine.draw());
-        }
-    }
-
-    private void validateNegative(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException(MSG_ERR_PRICE_NEGATIVE);
         }
     }
 
