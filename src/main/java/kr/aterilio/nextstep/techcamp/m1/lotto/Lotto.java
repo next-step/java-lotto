@@ -18,7 +18,7 @@ public class Lotto {
 
     private final Set<LottoBall> lottoBalls;
 
-    public Lotto(Integer[] lottoNumbers) {
+    public Lotto(LottoBall[] lottoNumbers) {
         this.lottoBalls = pick(lottoNumbers);
         validateDuplicate();
     }
@@ -34,11 +34,11 @@ public class Lotto {
         return matches.size();
     }
 
-    private Set<LottoBall> pick(Integer[] lottoNumbers) {
-        validateElementCount(lottoNumbers);
+    private Set<LottoBall> pick(LottoBall[] lottoNumbers) {
+        validateElementCount(lottoNumbers.length);
         Set<LottoBall> lottoBalls = new TreeSet<>();
         for (int i = lottoNumbers.length; i > 0; --i) {
-            lottoBalls.add(new LottoBall(lottoNumbers[i-1]));
+            lottoBalls.add(lottoNumbers[i-1]);
         }
         return lottoBalls;
     }
@@ -49,8 +49,8 @@ public class Lotto {
         }
     }
 
-    private void validateElementCount(Integer[] elements) {
-        if (elements.length != LOTTO_ELEMENT_COUNT) {
+    private void validateElementCount(int elementCount) {
+        if (elementCount != LOTTO_ELEMENT_COUNT) {
             throw new IllegalArgumentException(MSG_ERR_REQUIRED_ELEMENT_COUNT);
         }
     }

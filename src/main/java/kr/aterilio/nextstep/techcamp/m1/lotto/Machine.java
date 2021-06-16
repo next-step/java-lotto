@@ -14,7 +14,7 @@ public class Machine {
     static {
         numberPool = new ArrayList<>();
         for (int i = LottoBall.MIN; i < LottoBall.MAX; i++) {
-            numberPool.add(new LottoBall(i));
+            numberPool.add(LottoBall.of(i));
         }
     }
 

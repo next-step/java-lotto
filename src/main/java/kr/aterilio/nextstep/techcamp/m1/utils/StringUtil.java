@@ -53,22 +53,6 @@ public class StringUtil {
         return matcher.group(IDX_GROUP_1);
     }
 
-    public static Integer[] convertToIntegerArray(String[] targets) {
-        Integer[] convert = new Integer[targets.length];
-        for (int i = targets.length-1; i >= 0; --i) {
-            String target = targets[i].trim();
-            validateNumeric(target);
-            convert[i] = Integer.parseInt(target);
-        }
-        return convert;
-    }
-
-    private static void validateNumeric(String target) {
-        if (!isNumeric(target)) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
-        }
-    }
-
     public static String floorFloatWithPointPosition(float original, int pointPosition) {
         double unit = Math.pow(UNIT_POW_FOR_FLOOR, pointPosition);
         return String.format("%." + pointPosition + "f", Math.floor(original*unit)/unit);

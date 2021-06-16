@@ -5,7 +5,7 @@ public class BonusBall {
     private final LottoBall bonusBall;
 
     public BonusBall(int bonusBall) {
-        this.bonusBall = new LottoBall(bonusBall);
+        this.bonusBall = LottoBall.of(bonusBall);
     }
 
     public int ball() {
