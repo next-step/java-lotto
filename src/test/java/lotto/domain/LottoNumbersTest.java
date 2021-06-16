@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.common.Constant;
 import lotto.common.MessageCode;
+import lotto.exceptions.DuplicatedLottoNumbersException;
+import lotto.exceptions.NumberRangeException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +22,9 @@ class LottoNumbersTest {
     public void LottoNumbers_수동생성_숫자범위_검증() {
         int[] numbers = {1,2,3,4,5,50};
         assertThatThrownBy(() -> LottoNumbers.generateManualOf(numbers))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
+                .isInstanceOf(NumberRangeException.class).hasMessage(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
+        assertThatThrownBy(() -> LottoNumbers.generateManualOf(numbers))
+                .isInstanceOf(NumberRangeException.class).hasMessage(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
     }
 
     @Test
@@ -36,7 +40,7 @@ class LottoNumbersTest {
     public void LottoNumbers_중복번호_검증() {
         int[] numbers = {1,1,3,4,5,6};
         assertThatThrownBy(() -> LottoNumbers.generateManualOf(numbers))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(DuplicatedLottoNumbersException.class)
                 .hasMessage(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
     }
 }

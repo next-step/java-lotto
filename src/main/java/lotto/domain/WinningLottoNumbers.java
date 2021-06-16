@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class WinningLottoNumbers {
     private LottoNumbers winningLottoNumbers;

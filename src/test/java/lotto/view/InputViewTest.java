@@ -3,6 +3,10 @@ package lotto.view;
 import lotto.common.MessageCode;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoNumbers;
+import lotto.exceptions.ManualLottoCountException;
+import lotto.exceptions.MoneyNotEnoughException;
+import lotto.exceptions.OverSixLottoCountException;
+import lotto.exceptions.UnderSixLottoCountException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +42,7 @@ class InputViewTest {
         InputView inputView = new InputView();
         String inputLottoNumber = "1,5,8,21,23,31,34";
         assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(OverSixLottoCountException.class)
                 .hasMessage((MessageCode.INVALID_OVER_LOTTO_NUMBERS.message()));
     }
 
@@ -47,7 +51,23 @@ class InputViewTest {
         InputView inputView = new InputView();
         String inputLottoNumber = "1,5,8,21,23";
         assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(UnderSixLottoCountException.class)
                 .hasMessage((MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message()));
+    }
+
+    @Test
+    public void inputMoney_1000미만금액_검증() {
+        InputView inputView = new InputView();
+        assertThatThrownBy( ()-> inputView.inputMoneyValidate(800))
+                .isInstanceOf(MoneyNotEnoughException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_MONEY.message()));
+    }
+
+    @Test
+    public void inputManualLottoBuyCountValidate_구매가능한수동로또개수_검증() {
+        InputView inputView = new InputView();
+        assertThatThrownBy( ()-> inputView.inputManualLottoBuyCountValidate(3, 2000))
+                .isInstanceOf(ManualLottoCountException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_MANUAL_LOTTO_NUMBER.message()));
     }
 }

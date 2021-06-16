@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.common.Constant;
 import lotto.common.MessageCode;
 import lotto.domain.LottoNumbers;
+import lotto.exceptions.ManualLottoCountException;
+import lotto.exceptions.MoneyNotEnoughException;
 
 import java.util.Scanner;
 
@@ -20,7 +22,7 @@ public class InputView {
 
     public int inputMoneyValidate(int inputMoney) {
         if (inputMoney < 1000)
-            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_MONEY.message());
+            throw new MoneyNotEnoughException();
         return inputMoney;
     }
 
@@ -29,9 +31,9 @@ public class InputView {
         return inputManualLottoBuyCountValidate(scan.nextInt(), inputMoney);
     }
 
-    private int inputManualLottoBuyCountValidate(int buyCount, int inputMoney) {
+    public int inputManualLottoBuyCountValidate(int buyCount, int inputMoney) {
         if (inputMoney < buyCount * Constant.LOTTO_PRICE.value())
-            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_MANUAL_LOTTO_NUMBER.message());
+            throw new ManualLottoCountException();
         return buyCount;
     }
 

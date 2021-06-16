@@ -2,11 +2,15 @@ package lotto.domain;
 
 import lotto.common.Constant;
 import lotto.common.MessageCode;
+import lotto.exceptions.DuplicatedLottoNumbersException;
+import lotto.exceptions.OverSixLottoCountException;
+import lotto.exceptions.UnderSixLottoCountException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class LottoNumbers {
     private List<LottoNo> lottoNumbers;
@@ -28,14 +32,14 @@ public class LottoNumbers {
 
     private void validateLottoNumbers() {
         if (lottoNumbers.size() > Constant.LOTTO_NUMBER_COUNT.value())
-            throw new IllegalArgumentException(MessageCode.INVALID_OVER_LOTTO_NUMBERS.message());
+            throw new OverSixLottoCountException();
 
         if (lottoNumbers.size() < Constant.LOTTO_NUMBER_COUNT.value())
-            throw new IllegalArgumentException(MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message());
+            throw new UnderSixLottoCountException();
 
         Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
         if (transSet.size() < Constant.LOTTO_NUMBER_COUNT.value())
-            throw new IllegalArgumentException(MessageCode.INVALID_DUP_LOTTO_NUMBERS.message());
+            throw new DuplicatedLottoNumbersException();
     }
 
     private LottoNumbers(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
@@ -61,6 +65,10 @@ public class LottoNumbers {
         if (lottoNo.equals(targetLottoNo) && result == false)
             return true;
         return false;
+    }
+
+    public void foreach(Consumer<LottoNo> lottoNo) {
+        lottoNumbers.forEach(lottoNo);
     }
 
     public List<Integer> showLottoNoList() {

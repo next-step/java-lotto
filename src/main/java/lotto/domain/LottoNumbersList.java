@@ -25,8 +25,8 @@ public class LottoNumbersList {
         return lottoNumbersList.size();
     }
 
-    public void foreach(Consumer<LottoNumbers> lamda) {
-        lottoNumbersList.forEach(lamda);
+    public void foreach(Consumer<LottoNumbers> lottoNumbers) {
+        lottoNumbersList.forEach(lottoNumbers);
     }
 
     public LottoNumbers lottoNumberList(int i) {

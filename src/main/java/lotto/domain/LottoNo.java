@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.common.Constant;
 import lotto.common.MessageCode;
+import lotto.exceptions.NumberRangeException;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class LottoNo {
 
     private void validateLottoNo(int lottoNo) {
         if (lottoNo > Constant.MAX_LOTTO_NUMBER.value() || lottoNo < Constant.MIN_LOTTO_NUMBER.value())
-            throw new IllegalArgumentException(MessageCode.INVALID_LOTTO_NUMBER_RANGE.message());
+            throw new NumberRangeException();
     }
 
     public int lottNo() {
