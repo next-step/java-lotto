@@ -33,26 +33,6 @@ public class LuckyNumbersTest {
                 .hasMessageContaining("6개");
     }
 
-    @DisplayName("당첨 번호에 숫자가 아닌 값이 입력되면 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"4,3,t,1", "5, t, 3"})
-    public void createLuckyNumbersFailed_notInteger(String inputLuckyNumbers) {
-        assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("숫자");
-    }
-
-    @DisplayName("당첨 번호에 1-45 범위에 속하지 않는 숫자가 있으면 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,46", "-1,2,3,4,5,6"})
-    public void createLuckyNumbersFailed_outOfRange(String inputLuckyNumbers) {
-        assertThatThrownBy(()-> {
-            new LuckyNumbers(inputLuckyNumbers, BONUS_BALL);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("범위");
-    }
-
     @DisplayName("당첨 번호에 중복된 숫자가 있으면 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,1", "6,2,3,4,5,6"})
