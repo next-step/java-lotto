@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Machine {
+public class LottoMachine {
 
     private static final int IDX_START = 0;
     private static final int IDX_END_NOT_CLOSED = 6;
