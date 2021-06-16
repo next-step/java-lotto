@@ -28,6 +28,13 @@ public class LottoBall implements Comparable<LottoBall> {
         return ball == number;
     }
 
+    public boolean findOrDefault(int number, boolean defaultValue) {
+        if (isEqualTo(number)) {
+            return true;
+        }
+        return defaultValue;
+    }
+
     @Override
     public int compareTo(LottoBall that) {
         return Integer.compare(this.ball, that.ball);

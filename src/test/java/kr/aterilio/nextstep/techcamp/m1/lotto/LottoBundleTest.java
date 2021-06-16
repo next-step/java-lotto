@@ -41,18 +41,18 @@ public class LottoBundleTest {
     public void buyLottoFailed_insufficientMoney(int money, int manualCount, String manualBuyLotto) {
         List<Lotto> lotteries = parseLottoList(manualBuyLotto);
         assertThatThrownBy(() -> {
-            new LottoBundle(money, manualCount, lotteries);
+            new LottoBundle(money, new LottoBundle(manualCount, lotteries));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("충분하지 않습니다");
     }
 
-    @DisplayName("입력한 추첨 번호의 갯수가 '수동으로 구매할 로또 수' 보다 작을 경우 예외가 발생한다.")
+    @DisplayName("입력한 추첨 번호의 갯수가 '수동으로 구매할 로또 수' 와 일치하지 않을 경우 예외가 발생한다.")
     @ParameterizedTest
     @CsvSource(value = {"2000_2_1,2,3,4,5,6"}, delimiter = '_')
     public void buyLottoFailed_insufficientCount(int money, int manualCount, String manualBuyLotto) {
         List<Lotto> lotteries = parseLottoList(manualBuyLotto);
         assertThatThrownBy(() -> {
-            new LottoBundle(money, manualCount, lotteries);
+            new LottoBundle(manualCount, lotteries);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("일치하지 않습니다");
     }
@@ -65,7 +65,8 @@ public class LottoBundleTest {
     }, delimiter = '_')
     public void buyLotto_withManual(int money, int manualCount, String manualBuyLotto, int totalCount) {
         List<Lotto> lotteries = parseLottoList(manualBuyLotto);
-        LottoBundle lottoBundle = new LottoBundle(money, manualCount, lotteries);
+        LottoBundle manualLottoBundle = new LottoBundle(manualCount, lotteries);
+        LottoBundle lottoBundle = new LottoBundle(money, manualLottoBundle);
         assertThat(lottoBundle.count()).isEqualTo(totalCount);
     }
 

@@ -22,11 +22,16 @@ public class LottoBundle {
         buy(money);
     }
 
-    public LottoBundle(int money, int manualCount, List<Lotto> boughtLotto) {
-        validateSufficiencyMoney(money, boughtLotto.size());
+    // for manual lotto
+    public LottoBundle(int manualCount, List<Lotto> boughtLotto) {
         validateSufficiencyManualCount(manualCount, boughtLotto.size());
         buyManual(boughtLotto);
-        buy(remains(money, manualCount));
+    }
+
+    public LottoBundle(int totalBudget, LottoBundle manualLotto) {
+        validateSufficiencyMoney(totalBudget, manualLotto.count());
+        buyManual(manualLotto.lottoBundle);
+        buy(remains(totalBudget, manualLotto.count()));
     }
 
     private void buyManual(List<Lotto> boughtLotto) {

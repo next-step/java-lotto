@@ -45,16 +45,12 @@ public class StringUtil {
         return INDEX_NOT_FOUND;
     }
 
-    public static String extractRegEx(String target, String regex) {
-        return extractRegEx(target, regex, IDX_GROUP_1);
-    }
-
-    public static String extractRegEx(String target, String regex, int groupIndex) {
+    public static String extractRegExGroupFirst(String target, String regex) {
         Matcher matcher = findRegEx(target, regex);
         if (!matcher.find()) {
             return StringUtil.EMPTY_STRING;
         }
-        return matcher.group(groupIndex);
+        return matcher.group(IDX_GROUP_1);
     }
 
     public static Integer[] convertToIntegerArray(String[] targets) {

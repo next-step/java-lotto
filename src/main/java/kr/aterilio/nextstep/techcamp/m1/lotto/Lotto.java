@@ -66,14 +66,7 @@ public class Lotto {
     public boolean contains(int number) {
         boolean find = false;
         for (LottoBall lottoBall : lottoBalls) {
-            find = findOrDefault(lottoBall, number, find);
-        }
-        return find;
-    }
-
-    private boolean findOrDefault(LottoBall lottoBall, int number, boolean find) {
-        if (lottoBall.isEqualTo(number)) {
-            return true;
+            find = lottoBall.findOrDefault(number, find);
         }
         return find;
     }
