@@ -22,4 +22,9 @@ public class Lottos {
 	public List<Lotto> userLottos() {
 		return this.userLottos;
 	}
+
+	public void add(Lottos lottos) {
+		this.userLottos.addAll(lottos.userLottos);
+	}
+
 }

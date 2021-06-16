@@ -17,11 +17,10 @@ public class LottoFactoryTest {
 	}
 
 	@Test
-	void create_lottos() {
+	void create_auto_lottos() {
 		RandomNumberGenerator lottoNumberGenerator = new RandomNumberGenerator();
 		LottoFactory lottoFactory = new LottoFactory(lottoNumberGenerator);
 		Lottos lottos = lottoFactory.create(3);
-		assertThat(lottos).isNotNull();
+		assertThat(lottos.userLottos().size()).isEqualTo(3);
 	}
-
 }
