@@ -34,7 +34,7 @@ public class LottoAutoController {
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
         for (String splitWinningNumber : splitWinningNumbers) {
             int number = Integer.parseInt(splitWinningNumber);
-            winningNumbers.add(new LottoNumber(number));
+            winningNumbers.add(LottoNumber.of(number));
         }
         return new Lotto(winningNumbers);
     }

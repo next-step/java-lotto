@@ -20,7 +20,7 @@ public class ManualLotto {
     private List<LottoNumber> addLottoNumbers(String[] manualNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(manualNumbers[i])));
+            lottoNumbers.add(LottoNumber.of(Integer.parseInt(manualNumbers[i])));
         }
         return lottoNumbers;
     }

@@ -39,7 +39,7 @@ public class LottoManualController {
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
         for (int i = 0; i < splitWinningNumbers.length; i++) {
             int number = Integer.parseInt(splitWinningNumbers[i]);
-            winningNumbers.add(new LottoNumber(number));
+            winningNumbers.add(LottoNumber.of(number));
         }
         return new Lotto(winningNumbers);
     }

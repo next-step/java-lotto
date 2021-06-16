@@ -27,7 +27,7 @@ public class AutoLotto {
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int selectedNumber : selectedNumbers) {
-            lottoNumbers.add(new LottoNumber(selectedNumber));
+            lottoNumbers.add(LottoNumber.of(selectedNumber));
         }
         return lottoNumbers;
     }
