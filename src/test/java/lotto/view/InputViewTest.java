@@ -3,10 +3,7 @@ package lotto.view;
 import lotto.common.MessageCode;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoNumbers;
-import lotto.exceptions.ManualLottoCountException;
-import lotto.exceptions.MoneyNotEnoughException;
-import lotto.exceptions.OverSixLottoCountException;
-import lotto.exceptions.UnderSixLottoCountException;
+import lotto.exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,7 +49,7 @@ class InputViewTest {
         String inputLottoNumber = "1,5,8,21,23";
         assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
                 .isInstanceOf(UnderSixLottoCountException.class)
-                .hasMessage((MessageCode.INVALID_INPUT_LOTTO_NUMBER_COUNT.message()));
+                .hasMessage((MessageCode.INVALID_UNDER_LOTTO_NUMBER_COUNT.message()));
     }
 
     @Test
@@ -69,5 +66,21 @@ class InputViewTest {
         assertThatThrownBy( ()-> inputView.inputManualLottoBuyCountValidate(3, 2000))
                 .isInstanceOf(ManualLottoCountException.class)
                 .hasMessage((MessageCode.INVALID_INPUT_MANUAL_LOTTO_NUMBER.message()));
+    }
+
+    @Test
+    public void validateInputFormat_검증() {
+        InputView inputView = new InputView();
+        assertThatThrownBy( ()-> inputView.validateInputFormat("1,2,,,"))
+                .isInstanceOf(InputFormatException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_FORMAT_NUMBERS.message()));
+
+        assertThatThrownBy( ()-> inputView.validateInputFormat("1,2,fd,s"))
+                .isInstanceOf(InputFormatException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_FORMAT_NUMBERS.message()));
+
+        assertThatThrownBy( ()-> inputView.validateInputFormat("12,122,111,33,5,4,"))
+                .isInstanceOf(InputFormatException.class)
+                .hasMessage((MessageCode.INVALID_INPUT_FORMAT_NUMBERS.message()));
     }
 }

@@ -1,15 +1,11 @@
 package lotto.domain;
 
 import lotto.common.Constant;
-import lotto.common.MessageCode;
 import lotto.exceptions.DuplicatedLottoNumbersException;
 import lotto.exceptions.OverSixLottoCountException;
 import lotto.exceptions.UnderSixLottoCountException;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class LottoNumbers {
@@ -20,24 +16,25 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generateAutoOf(LottoNumberGeneratorStrategy lottoNumberGeneratorStrategy) {
-        return new LottoNumbers(LottoNumberGenerator.getInstance());
+        return new LottoNumbers(new LottoNumberGenerator());
     }
 
     private LottoNumbers(int[] numbers) {
+        validateLottoNumbers(numbers);
         lottoNumbers = new ArrayList<LottoNo>();
         for (int number : numbers)
             lottoNumbers.add(new LottoNo(number));
-        validateLottoNumbers();
     }
 
-    private void validateLottoNumbers() {
-        if (lottoNumbers.size() > Constant.LOTTO_NUMBER_COUNT.value())
+    public void validateLottoNumbers(int [] numbers) {
+
+        if (numbers.length > Constant.LOTTO_NUMBER_COUNT.value())
             throw new OverSixLottoCountException();
 
-        if (lottoNumbers.size() < Constant.LOTTO_NUMBER_COUNT.value())
+        if (numbers.length < Constant.LOTTO_NUMBER_COUNT.value())
             throw new UnderSixLottoCountException();
 
-        Set<LottoNo> transSet = new HashSet<>(lottoNumbers);
+        Set<int[]> transSet = new HashSet<>(Arrays.asList(numbers));
         if (transSet.size() < Constant.LOTTO_NUMBER_COUNT.value())
             throw new DuplicatedLottoNumbersException();
     }

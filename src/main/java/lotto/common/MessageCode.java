@@ -9,9 +9,10 @@ public enum MessageCode {
     INVALID_LOTTO_NUMBER_RANGE("1부터 45까지 숫자만 입력 가능합니다."),
     INVALID_INPUT_MONEY("1000원 이상 입력해 주세요"),
     INVALID_INPUT_MANUAL_LOTTO_NUMBER("구매 가능한 개수를 초과했습니다."),
-    INVALID_INPUT_LOTTO_NUMBER_COUNT("로또 번호는 6개보다 작습니다."),
+    INVALID_UNDER_LOTTO_NUMBER_COUNT("로또 번호는 6개보다 작습니다."),
     INVALID_DUP_LOTTO_NUMBERS("로또 번호는 중복될 수 없습니다."),
-    INVALID_OVER_LOTTO_NUMBERS("로또 번호가 6개를 초과했습니다.");
+    INVALID_OVER_LOTTO_NUMBERS("로또 번호가 6개를 초과했습니다."),
+    INVALID_INPUT_FORMAT_NUMBERS("입력 형식이 올바르지 않습니다.(숫자,숫자,숫자,숫자,숫자,숫자)");
     private final String message;
 
     MessageCode(String message) {

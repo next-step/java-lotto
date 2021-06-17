@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.common.Constant;
 import lotto.common.MessageCode;
 import lotto.domain.LottoNumbers;
+import lotto.exceptions.InputFormatException;
 import lotto.exceptions.ManualLottoCountException;
 import lotto.exceptions.MoneyNotEnoughException;
 
@@ -68,6 +69,7 @@ public class InputView {
     }
 
     public LottoNumbers parsingInputLottoNumbers(String manualLottoNumbers) {
+        validateInputFormat(manualLottoNumbers);
         String[] stringNumbers = manualLottoNumbers.split(",");
         int[] intNumbers = new int[stringNumbers.length];
         for (int i = 0; i < stringNumbers.length; i++) {
@@ -78,4 +80,10 @@ public class InputView {
         return lottoNumbers;
     }
 
+    public void validateInputFormat(String inputLottoNumbers) {
+        String regExp = "^[0-9]*,[0-9]*,[0-9]*,[0-9]*,[0-9]*,[0-9]*$";
+
+        if(!inputLottoNumbers.matches(regExp))
+            throw new InputFormatException();
+    }
 }
