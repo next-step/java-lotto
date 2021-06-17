@@ -6,7 +6,14 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자 갯수는 6개여야 합니다.");
+        }
     }
 
     public int countWinningNumbers(Lotto winningNumbers) {
