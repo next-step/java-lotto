@@ -10,7 +10,6 @@ import java.util.List;
 public class LottoAutoController {
     private LottoAutoInputView inputView = new LottoAutoInputView();
     private LottoAutoOutputView outputView = new LottoAutoOutputView();
-    private AutoLotto autoLotto = new AutoLotto();
     private WinningResult winningResult;
 
     public void start() {
