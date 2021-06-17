@@ -22,7 +22,7 @@ public class Lottos {
         }
     }
 
-    public void createManualLottos(int quantity, List<String> manualNumbers) {
+    private void createManualLottos(int quantity, List<String> manualNumbers) {
         ManualLotto manualLotto = new ManualLotto();
         for (int i = 0; i < quantity; i++) {
             lottos.add(new Lotto(manualLotto.createLottoNumbers(manualNumbers.get(i))));
