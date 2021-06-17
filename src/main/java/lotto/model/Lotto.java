@@ -11,11 +11,9 @@ public class Lotto {
 
     public int countWinningNumbers(Lotto winningNumbers) {
         int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            for (LottoNumber winningNumber : winningNumbers.getNumbers()) {
-                if (lottoNumber.isSame(winningNumber)) {
-                    count++;
-                }
+        for(LottoNumber winningNumber : winningNumbers.getNumbers()) {
+            if(lottoNumbers.contains(winningNumber)) {
+                count++;
             }
         }
         return count;
@@ -23,7 +21,7 @@ public class Lotto {
 
     public boolean contains(LottoNumber number) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.getNumber() == number.getNumber()) {
+            if (lottoNumber.isSame(number)) {
                 return true;
             }
         }
