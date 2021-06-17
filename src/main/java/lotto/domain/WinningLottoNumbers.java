@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class WinningLottoNumbers {
     private LottoNumbers winningLottoNumbers;
@@ -37,12 +38,13 @@ public class WinningLottoNumbers {
         int sameNumberCount = 0;
         boolean isSameBonusNumber = false;
 
+        Iterator<LottoNo> iterator= lottoNumbers.iterator();
 
-        for (LottoNo lottoNo : lottoNumbers.lottoNumbers()) {
+        while (iterator.hasNext()) {
+            LottoNo lottoNo = iterator.next();
             sameNumberCount = increaseIfSameNumber(lottoNo, sameNumberCount);
             isSameBonusNumber = setTrueIfSameBonusNumber(lottoNo, isSameBonusNumber);
         }
-
 
         MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(sameNumberCount, isSameBonusNumber);
 

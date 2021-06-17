@@ -66,15 +66,15 @@ public class LottoNumbers {
         return false;
     }
 
-    public void foreach(Consumer<LottoNo> lottoNo) {
-        lottoNumbers.forEach(lottoNo);
-    }
-
     public List<Integer> showLottoNoList() {
         List<Integer> lottoNoArray = new ArrayList<Integer>();
         for (LottoNo lottoNo : lottoNumbers)
             lottoNoArray.add(lottoNo.lottNo());
 
         return lottoNoArray;
+    }
+
+    public Iterator<LottoNo> iterator() {
+        return lottoNumbers.iterator();
     }
 }
