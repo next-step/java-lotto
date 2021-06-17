@@ -29,7 +29,7 @@ public class Parser {
     }
 
     private static String[] splitUnits(String formula) {
-        String customDelimiter = StringUtil.extractRegEx(formula, REGEX_CUSTOM_DELIMITER);
+        String customDelimiter = StringUtil.extractRegExGroupFirst(formula, REGEX_CUSTOM_DELIMITER);
         if (StringUtil.isEmpty(customDelimiter)) {
             return StringUtil.split(formula, REGEX_SPLIT_BY);
         }

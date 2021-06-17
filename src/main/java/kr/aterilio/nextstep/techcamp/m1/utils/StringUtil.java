@@ -45,32 +45,12 @@ public class StringUtil {
         return INDEX_NOT_FOUND;
     }
 
-    public static String extractRegEx(String target, String regex) {
-        return extractRegEx(target, regex, IDX_GROUP_1);
-    }
-
-    public static String extractRegEx(String target, String regex, int groupIndex) {
+    public static String extractRegExGroupFirst(String target, String regex) {
         Matcher matcher = findRegEx(target, regex);
         if (!matcher.find()) {
             return StringUtil.EMPTY_STRING;
         }
-        return matcher.group(groupIndex);
-    }
-
-    public static Integer[] convertToIntegerArray(String[] targets) {
-        Integer[] convert = new Integer[targets.length];
-        for (int i = targets.length-1; i >= 0; --i) {
-            String target = targets[i].trim();
-            validateNumeric(target);
-            convert[i] = Integer.parseInt(target);
-        }
-        return convert;
-    }
-
-    private static void validateNumeric(String target) {
-        if (!isNumeric(target)) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
-        }
+        return matcher.group(IDX_GROUP_1);
     }
 
     public static String floorFloatWithPointPosition(float original, int pointPosition) {

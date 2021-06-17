@@ -1,69 +1,56 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
-
-    public static final int LOTTO_BALL_MIN = 1;
-    public static final int LOTTO_BALL_MAX = 45;
 
     public static final int PRICE_PER_LOTTO = 1000;
     public static final String MSG_PRICE_TAG = "장당 " + PRICE_PER_LOTTO + "원";
 
     private static final int LOTTO_ELEMENT_COUNT = 6;
 
-    public static final String MSG_ERR_OUT_OF_RANGE = "로또를 구성하는 수가 범위를 벗어났습니다.";
     public static final String MSG_ERR_DUPLICATE = "로또를 구성하는 수 중에 중복된 값이 있습니다.";
 
     private static final String MSG_ERR_REQUIRED_ELEMENT_COUNT = "입력된 요소는 " + LOTTO_ELEMENT_COUNT + "개 여야 합니다.";
 
-    private final List<Integer> lottoBalls = new ArrayList<>();
+    private final Set<LottoBall> lottoBalls;
 
-    public Lotto(Integer[] lottoNumbers) {
-        pick(lottoNumbers);
-        validateRange();
+    public Lotto(LottoBall[] lottoNumbers) {
+        this.lottoBalls = pick(lottoNumbers);
         validateDuplicate();
     }
 
+    public Lotto(List<LottoBall> lottoBalls) {
+        this.lottoBalls = new TreeSet<>();
+        this.lottoBalls.addAll(lottoBalls);
+    }
+
     public int matchCount(Lotto that) {
-        List<Integer> matches = new ArrayList<>(this.lottoBalls);
+        List<LottoBall> matches = new ArrayList<>(this.lottoBalls);
         matches.retainAll(that.lottoBalls);
         return matches.size();
     }
 
-    private void pick(Integer[] lottoNumbers) {
-        validateElementCount(lottoNumbers);
+    private Set<LottoBall> pick(LottoBall[] lottoNumbers) {
+        validateElementCount(lottoNumbers.length);
+        Set<LottoBall> lottoBalls = new TreeSet<>();
         for (int i = lottoNumbers.length; i > 0; --i) {
             lottoBalls.add(lottoNumbers[i-1]);
         }
-        Collections.sort(lottoBalls);
-    }
-
-    private void validateRange() {
-        for (Integer ball : lottoBalls) {
-            isOutOfRange(ball);
-        }
-    }
-
-    private void isOutOfRange(Integer ball) {
-        if (ball < LOTTO_BALL_MIN || ball > LOTTO_BALL_MAX) {
-            throw new IllegalArgumentException(MSG_ERR_OUT_OF_RANGE);
-        }
+        return lottoBalls;
     }
 
     private void validateDuplicate() {
-        Set<Integer> distinct = new HashSet<>(lottoBalls);
-        if (distinct.size() != lottoBalls.size()) {
+        if (lottoBalls.size() != LOTTO_ELEMENT_COUNT) {
             throw new IllegalArgumentException(MSG_ERR_DUPLICATE);
         }
     }
 
-    private void validateElementCount(Integer[] elements) {
-        if (elements.length != LOTTO_ELEMENT_COUNT) {
+    private void validateElementCount(int elementCount) {
+        if (elementCount != LOTTO_ELEMENT_COUNT) {
             throw new IllegalArgumentException(MSG_ERR_REQUIRED_ELEMENT_COUNT);
         }
     }
@@ -77,6 +64,10 @@ public class Lotto {
     }
 
     public boolean contains(int number) {
-        return lottoBalls.contains(number);
+        boolean find = false;
+        for (LottoBall lottoBall : lottoBalls) {
+            find = lottoBall.findOrDefault(number, find);
+        }
+        return find;
     }
 }

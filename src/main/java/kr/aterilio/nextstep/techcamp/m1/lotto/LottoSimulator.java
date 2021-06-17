@@ -1,7 +1,11 @@
 package kr.aterilio.nextstep.techcamp.m1.lotto;
 
+import kr.aterilio.nextstep.techcamp.m1.lotto.result.LottoResult;
 import kr.aterilio.nextstep.techcamp.m1.lotto.view.InputView;
 import kr.aterilio.nextstep.techcamp.m1.lotto.view.ResultView;
+import kr.aterilio.nextstep.techcamp.m1.utils.LottoParser;
+
+import java.util.List;
 
 public class LottoSimulator {
 
@@ -13,12 +17,16 @@ public class LottoSimulator {
     public static void main(String[] args) {
 
         int money = inputView.inputMoney();
-        LottoBundle lottoBundle = new LottoBundle(money);
+        int countManual = inputView.inputCountManual();
+        List<String> manual = inputView.inputManual(countManual);
+
+        LottoBundle manualLottoBundle = new LottoBundle(countManual, LottoParser.parses(manual));
+        LottoBundle lottoBundle = new LottoBundle(money, manualLottoBundle);
 
         if (lottoBundle.empty()) {
             throw new IllegalArgumentException(MSG_ERR_LESS_MONEY);
         }
-        resultView.printBundle(lottoBundle);
+        resultView.printBundle(countManual, lottoBundle);
 
         String luckyNumber = inputView.inputLuckyNumber();
         int bonusBall = inputView.inputBonusBall();
