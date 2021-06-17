@@ -37,7 +37,7 @@ public class WinningLottoNumbersTest {
     @Test
     public void matchLottoNumbers_당첨번호비교결과값검증() {
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers("1,2,3,14,15,16", "7");
-        int[] numbers = {1,2,3,4,5,6};
+        int[] numbers = {1,2,3,44,5,6};
         LottoNumbers lottoNumbers = LottoNumbers.generateManualOf(numbers);
 
         MatchStatusOfALotto matchStatusOfALotto = new MatchStatusOfALotto(3, false);

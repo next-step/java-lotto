@@ -7,6 +7,7 @@ import lotto.exceptions.UnderSixLottoCountException;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private List<LottoNo> lottoNumbers;
@@ -34,7 +35,8 @@ public class LottoNumbers {
         if (numbers.length < Constant.LOTTO_NUMBER_COUNT.value())
             throw new UnderSixLottoCountException();
 
-        Set<int[]> transSet = new HashSet<>(Arrays.asList(numbers));
+        List numbersList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+        Set<Integer> transSet = new HashSet<>(numbersList);
         if (transSet.size() < Constant.LOTTO_NUMBER_COUNT.value())
             throw new DuplicatedLottoNumbersException();
     }

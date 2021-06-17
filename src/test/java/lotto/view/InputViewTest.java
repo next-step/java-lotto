@@ -35,24 +35,6 @@ class InputViewTest {
     }
 
     @Test
-    public void parsingInputLottoNumbers_exception_로또개수초과_검증() {
-        InputView inputView = new InputView();
-        String inputLottoNumber = "1,5,8,21,23,31,34";
-        assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
-                .isInstanceOf(OverSixLottoCountException.class)
-                .hasMessage((MessageCode.INVALID_OVER_LOTTO_NUMBERS.message()));
-    }
-
-    @Test
-    public void parsingInputLottoNumbers_exception_로또개수6보다적은오류_검증() {
-        InputView inputView = new InputView();
-        String inputLottoNumber = "1,5,8,21,23";
-        assertThatThrownBy( ()-> inputView.parsingInputLottoNumbers(inputLottoNumber))
-                .isInstanceOf(UnderSixLottoCountException.class)
-                .hasMessage((MessageCode.INVALID_UNDER_LOTTO_NUMBER_COUNT.message()));
-    }
-
-    @Test
     public void inputMoney_1000미만금액_검증() {
         InputView inputView = new InputView();
         assertThatThrownBy( ()-> inputView.inputMoneyValidate(800))
