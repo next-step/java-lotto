@@ -38,7 +38,7 @@ final public class Print {
         }
     }
 
-    public static void printYield(Map<Object, Long> result, int money) {
+    public static void printYield(Map<Object, Long> result, Money money) {
         double yield = Profit.getProfit(result, money);
 
         StringBuffer mention = new StringBuffer();

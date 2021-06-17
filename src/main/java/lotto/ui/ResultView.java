@@ -1,6 +1,5 @@
 package lotto.ui;
 
-import lotto.business.PlayLotto;
 import lotto.objects.*;
 
 import java.util.List;
@@ -8,22 +7,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static PlayLotto playLotto;
-
-    public void showCreatedLottos(int totalLotto, Lottos createdLottos) {
-        playLotto = new PlayLotto();
-
-        Print.printPurchase(totalLotto);
+    public void showCreatedLottos(LottoMachine lottoMachine, Lottos createdLottos) {
+        Print.printPurchase(lottoMachine.getTotal());
 
         for (Lotto lotto : createdLottos.getLottos()) {
             Print.printLottoNumbers(lotto);
         }
     }
 
-    public void showWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, int money, int bonusBallNumber) {
+    public void showWinningStatistics(Lottos createdLottos, Lotto lastWinningLotto, Money money, BonusBall bonusBall) {
         Print.printStatistics();
 
-        List<WinningType> wins = playLotto.getWinningStatistics(createdLottos, lastWinningLotto, bonusBallNumber);
+        Matching matching = new Matching(createdLottos, lastWinningLotto, bonusBall);
+        List<WinningType> wins = matching.getWinningStatistics();
 
         Map<Object, Long> result = wins.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 

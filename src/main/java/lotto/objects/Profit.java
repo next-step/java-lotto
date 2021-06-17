@@ -3,14 +3,14 @@ package lotto.objects;
 import java.util.Map;
 
 public class Profit {
-    static double getProfit(Map<Object, Long> result, int money) {
+    static double getProfit(Map<Object, Long> result, Money money) {
         Long sum = 0L;
 
         for (Map.Entry<Object, Long> entry : result.entrySet()) {
             sum += getPrize(entry);
         }
 
-        return (double) Math.round(sum * 100 / money) / 100.0;
+        return (double) Math.round(sum * 100 / money.getMoney()) / 100.0;
     }
 
     static int getPrize(Map.Entry<Object, Long> entry) {
