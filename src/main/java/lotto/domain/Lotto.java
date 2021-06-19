@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -13,20 +14,15 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
+         lottoNumbers = new TreeSet<>();
         for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
             LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(lottoNumberStr));
              lottoNumbers.add(lottoNumber);
         }
-        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(TreeSet::new));
-
-        this.lottoNumbers = lottoNumbers;
 
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-
-        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(TreeSet::new));
         throwIllegalArgumentExceptionLottoSize(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
@@ -45,4 +41,5 @@ public class Lotto {
     public boolean containsNumber(LottoNumber lottoNumber) {
        return lottoNumbers.contains(lottoNumber);
     }
+
 }

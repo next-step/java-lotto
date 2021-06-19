@@ -1,9 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
-import lotto.domain.Rank;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
+
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -12,9 +11,11 @@ public class ResultView {
     }
 
     public void resultLottoList(LottoList lottoList) {
-        for (Lotto lotto : lottoList.getLottoList()) {
-            System.out.println(lotto.getLottoNumbers());
-        }
+        lottoList.getLottoList().stream().forEach(
+                lotto -> System.out.println(lotto.getLottoNumbers().stream()
+                        .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+                        .collect(Collectors.joining(",","[","]"))
+                ));
     }
 
     public void resultStatistics(WinningStatistics winning) {
