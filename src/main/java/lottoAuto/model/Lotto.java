@@ -7,9 +7,9 @@ public class Lotto {
     private static final String CHECK_USER_LOTTO_COUNT_MESSAGE = "로또 번호는 6개여야 합니다.";
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         checkWinningLottoNumbersCount(lottoNumbers.size());
         this.lottoNumbers = lottoNumbers;
     }
@@ -20,14 +20,14 @@ public class Lotto {
         }
     }
 
-    public int getCorrectCount(List<Integer> winningLottoNumbers) {
+    public int getCorrectCount(List<LottoNumber> winningLottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count()
                 ;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 }

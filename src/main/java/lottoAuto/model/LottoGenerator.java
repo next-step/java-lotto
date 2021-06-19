@@ -13,10 +13,11 @@ public class LottoGenerator {
 
     public Lotto createLotto() {
         Collections.shuffle(LottoNumbers.lottoNumbers);
-        List<Integer> lotto = LottoNumbers.lottoNumbers.stream()
+        List<LottoNumber> lotto = LottoNumbers.lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_SIZE)
+                .map(lottoNumber -> new LottoNumber(lottoNumber))
+                .sorted()
                 .collect(Collectors.toList());
-        Collections.sort(lotto);
 
         return new Lotto(lotto);
     }

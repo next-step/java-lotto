@@ -12,7 +12,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public List<Integer> getWinningLotto() {
+    public List<LottoNumber> getWinningLotto() {
         return Collections.unmodifiableList(winningLotto.getLottoNumbers());
     }
 }
