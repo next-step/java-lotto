@@ -1,6 +1,5 @@
 package domain;
 
-import generate.LottoRandomNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

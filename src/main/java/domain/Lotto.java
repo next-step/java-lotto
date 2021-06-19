@@ -25,7 +25,7 @@ public class Lotto {
 		return numbers;
 	}
 
-	public Boolean contains(int ballNumber) {
+	public Boolean contains (int ballNumber) {
 		return this.numbers.contains(ballNumber);
 	}
 

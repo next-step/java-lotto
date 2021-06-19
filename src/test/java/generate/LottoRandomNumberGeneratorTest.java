@@ -2,7 +2,6 @@ package generate;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static domain.Lotto.LOTTO_NUMBER_LENGTH;
