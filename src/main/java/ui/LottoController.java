@@ -25,9 +25,7 @@ public class LottoController {
 
 			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(lottoAmount);
 
-			for (Lotto lotto : lottoOrderGroup.lottos()) {
-				System.out.println(lotto);
-			}
+			printOrderGroup(lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
 			System.out.println(ASK_LOTTO_WINNER_NUMBER);
@@ -39,21 +37,32 @@ public class LottoController {
 
 			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusNumber, lottoOrderGroup.lottos());
 			analysis.matchSetting();
-			System.out.println(); // 줄바꿈용
-			System.out.println(PRINT_ANALYSIS_TITLE);
-			System.out.println(PRINT_LINE);
-			System.out.printf(MATCH_3_NUMBERS + "%d개%n", analysis.match3());
-			System.out.printf(MATCH_4_NUMBERS + "%d개%n", analysis.match4());
-			System.out.printf(MATCH_5_NUMBERS_N_BONUS + "%d개%n", analysis.match5_bonus());
-			System.out.printf(MATCH_5_NUMBERS + "%d개%n", analysis.match5());
-			System.out.printf(MATCH_6_NUMBERS + "%d개%n", analysis.match6());
 
-			System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
+			printAnalysis(analysis);
 		}
 	}
 
 	private int validBonusBall (String trim) {
 		return Integer.parseInt(trim);
+	}
+
+	private void printOrderGroup (LottoOrderGroup group) {
+		for (Lotto lotto : group.lottos()) {
+			System.out.println(lotto);
+		}
+	}
+
+	private void printAnalysis (LottoOrderGroupStatics analysis) {
+		System.out.println(); // 줄바꿈용
+		System.out.println(PRINT_ANALYSIS_TITLE);
+		System.out.println(PRINT_LINE);
+		System.out.printf(MATCH_3_NUMBERS + "%d개%n", analysis.match3());
+		System.out.printf(MATCH_4_NUMBERS + "%d개%n", analysis.match4());
+		System.out.printf(MATCH_5_NUMBERS_N_BONUS + "%d개%n", analysis.match5_bonus());
+		System.out.printf(MATCH_5_NUMBERS + "%d개%n", analysis.match5());
+		System.out.printf(MATCH_6_NUMBERS + "%d개%n", analysis.match6());
+
+		System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 	}
 
 	private Integer validMoney (String inputMoney) {
