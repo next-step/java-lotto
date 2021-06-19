@@ -64,6 +64,7 @@ public class LottoOrderGroupStatics {
 						+ (match5 * Rank.SECOND.money())
 						+ (match6 * Rank.FIRST.money())
 		);
+
 		if (rewards.compareTo(new BigDecimal(0)) == 0) {
 			return "0";
 		}

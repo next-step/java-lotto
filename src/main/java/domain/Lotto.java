@@ -1,5 +1,6 @@
 package domain;
 
+import generate.LottoRandomNumberGenerator;
 import ui.Rank;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public class Lotto {
 	private final List<Integer> numbers;
 	private Rank rank = Rank.NOT_YET;
 
-	public Lotto (List<Integer> numbers) {
-		this.numbers = numbers;
+	public Lotto (LottoRandomNumberGenerator lottoGenerator) {
+		this.numbers = lottoGenerator.randomNumber(LOTTO_NUMBER_LENGTH);
 	}
 
 	@Override

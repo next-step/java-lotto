@@ -1,19 +1,20 @@
 package domain;
 
+import generate.LottoRandomNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static domain.LottoFixture.로또_생성;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoNumberMatchTest {
 	@Test
 	public void 번호일치테스트_6자리_전부_일치_GREEN () {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-		final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
@@ -31,7 +32,7 @@ class LottoNumberMatchTest {
 
 		assertThat(lottoNumber.contains(bonus)).isFalse();
 
-		final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(lottoNumber);
 
 		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
@@ -49,7 +50,7 @@ class LottoNumberMatchTest {
 
 		assertThat(lottoNumber.contains(bonus)).isTrue();
 
-		final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(lottoNumber);
 
 		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
@@ -62,7 +63,7 @@ class LottoNumberMatchTest {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 8, 7);
 
-		final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(lottoNumber);
 
 		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
@@ -75,8 +76,7 @@ class LottoNumberMatchTest {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 9, 8, 7);
 
-		final Lotto lotto = new Lotto(lottoNumber);
-
+		final Lotto lotto = 로또_생성(lottoNumber);
 		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
 		assertThat(allMached).isEqualTo(3);
@@ -88,7 +88,7 @@ class LottoNumberMatchTest {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
 
-		final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(lottoNumber);
 
 		final Integer nothingMatched = LottoNumberMatch.matchCount(winNumber, lotto);
 

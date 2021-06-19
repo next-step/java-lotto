@@ -1,6 +1,6 @@
 package generate;
 
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 import static domain.Lotto.LOTTO_NUMBER_LENGTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoRandomNumberTest {
+class LottoRandomNumberGeneratorTest {
 
-	@RepeatedTest (100)
+	@Test
 	public void 로또번호자동생성 () {
-		LottoRandomNumber lottoRandomNumber = new LottoRandomNumber();
+		DefaultLottoRandomNumberGenerator defaultLottoRandomNumber = new DefaultLottoRandomNumberGenerator();
 
-		List<Integer> randomNumbers =lottoRandomNumber.numbers(getRandomNumber(LOTTO_NUMBER_LENGTH));
+		List<Integer> randomNumbers = defaultLottoRandomNumber.numbers(getRandomNumber(LOTTO_NUMBER_LENGTH));
 
 		assertThat(6).isEqualTo(randomNumbers.size());
 

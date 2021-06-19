@@ -1,29 +1,28 @@
 package domain;
 
-import generate.LottoRandomNumber;
+import generate.DefaultLottoRandomNumberGenerator;
+import generate.LottoRandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static domain.Lotto.LOTTO_NUMBER_LENGTH;
-
 public class LottoOrderGroup {
 	private final List<Lotto> lottos;
+	private final LottoRandomNumberGenerator lottoGenerator = new DefaultLottoRandomNumberGenerator();
 
 	public LottoOrderGroup (Integer numberOfLotto) {
-		this.lottos = generateLotto(numberOfLotto);
+		this.lottos = generateLottos(numberOfLotto);
 	}
 
 	public List<Lotto> lottos () {
 		return lottos;
 	}
 
-	public List<Lotto> generateLotto (Integer numberOfLotto) {
+	public List<Lotto> generateLottos (Integer numberOfLotto) {
 		List<Lotto> lottos = new ArrayList<>();
-		LottoRandomNumber lottoRandomNumber = new LottoRandomNumber();
 
 		for (int i = 0; i < numberOfLotto; i++) {
-			lottos.add(new Lotto(lottoRandomNumber.numbers(lottoRandomNumber.getRandomNumber(LOTTO_NUMBER_LENGTH))));
+			lottos.add(new Lotto(lottoGenerator));
 		}
 
 		return lottos;

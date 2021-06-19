@@ -6,10 +6,10 @@ import java.util.Random;
 
 import static domain.Lotto.LOTTO_MAX_NUMBER;
 
-public class LottoRandomNumber {
+public class DefaultLottoRandomNumberGenerator implements LottoRandomNumberGenerator {
 	private List<Integer> lottoNumbers;
 
-	public LottoRandomNumber() {
+	public DefaultLottoRandomNumberGenerator () {
 		lottoNumbers = new ArrayList<>();
 	}
 
@@ -18,10 +18,10 @@ public class LottoRandomNumber {
 		return lottoNumbers;
 	}
 
-	public List<Integer> getRandomNumber(Integer length) {
+	public List<Integer> randomNumber (Integer length) {
 		List<Integer> randoms = new ArrayList<>();
 
-		for (int i = 0; i < length; i ++ ) {
+		for (int i = 0; i < length; i++) {
 			Random random = new Random();
 			int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
 
@@ -34,7 +34,7 @@ public class LottoRandomNumber {
 	}
 
 	private Boolean checkDuplicate (int aRandomNumber) {
-		if (lottoNumbers.contains(aRandomNumber)){
+		if (lottoNumbers.contains(aRandomNumber)) {
 			return Boolean.TRUE;
 		}
 
