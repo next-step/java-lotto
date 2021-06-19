@@ -12,9 +12,9 @@ class LottoRandomNumberGeneratorTest {
 
 	@Test
 	public void 로또번호자동생성 () {
-		DefaultLottoRandomNumberGenerator defaultLottoRandomNumber = new DefaultLottoRandomNumberGenerator();
+		LottoRandomNumberGenerator lottoGenerator = new DefaultLottoRandomNumberGenerator();
 
-		List<Integer> randomNumbers = defaultLottoRandomNumber.numbers(getRandomNumber(LOTTO_NUMBER_LENGTH));
+		List<Integer> randomNumbers = lottoGenerator.randomNumber(LOTTO_NUMBER_LENGTH);
 
 		assertThat(6).isEqualTo(randomNumbers.size());
 
@@ -27,17 +27,5 @@ class LottoRandomNumberGeneratorTest {
 						randomNumbers.get(4),
 						randomNumbers.get(5)
 				);
-	}
-
-	private List<Integer> getRandomNumber(Integer length) {
-		List<Integer> randoms = new ArrayList<>();
-		randoms.add(1);
-		randoms.add(2);
-		randoms.add(3);
-		randoms.add(4);
-		randoms.add(5);
-		randoms.add(6);
-
-		return randoms;
 	}
 }
