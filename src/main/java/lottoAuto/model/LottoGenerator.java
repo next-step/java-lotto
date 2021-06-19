@@ -1,7 +1,7 @@
 package lottoAuto.model;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
@@ -13,11 +13,10 @@ public class LottoGenerator {
 
     public Lotto createLotto() {
         Collections.shuffle(LottoNumbers.lottoNumbers);
-        List<LottoNumber> lotto = LottoNumbers.lottoNumbers.stream()
+        Set<LottoNumber> lotto = LottoNumbers.lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_SIZE)
                 .map(lottoNumber -> new LottoNumber(lottoNumber))
-                .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         return new Lotto(lotto);
     }

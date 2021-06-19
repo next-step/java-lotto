@@ -1,7 +1,7 @@
 package lottoAuto.model;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class WinningLotto {
     private Lotto winningLotto;
@@ -12,7 +12,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public List<LottoNumber> getWinningLotto() {
-        return Collections.unmodifiableList(winningLotto.getLottoNumbers());
+    public Set<LottoNumber> getWinningLotto() {
+        return Collections.unmodifiableSet(winningLotto.getLottoNumbers());
     }
 }

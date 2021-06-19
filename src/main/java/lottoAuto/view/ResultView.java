@@ -1,10 +1,12 @@
 package lottoAuto.view;
 
 import lottoAuto.model.Lotto;
+import lottoAuto.model.LottoNumber;
 import lottoAuto.model.Lottos;
 import lottoAuto.model.Rank;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ResultView {
@@ -14,7 +16,12 @@ public class ResultView {
 
     public static void showUserLotto(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getLottoNumbers());
+            Iterator<LottoNumber> iterator = lotto.getLottoNumbers().iterator();
+            while (iterator.hasNext()) {
+                LottoNumber lottoNumber = iterator.next();
+                System.out.print(lottoNumber.getLottoNumber() + " ");
+            }
+            System.out.println();
         }
     }
 

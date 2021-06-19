@@ -1,17 +1,18 @@
 package lottoAuto.model;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Lotto {
     private static final String CHECK_USER_LOTTO_COUNT_MESSAGE = "로또 번호는 6개여야 합니다.";
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         checkWinningLottoNumbersCount(lottoNumbers.size());
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public void checkWinningLottoNumbersCount(int winningLottoNumbersCount) {
@@ -20,14 +21,14 @@ public class Lotto {
         }
     }
 
-    public int getCorrectCount(List<LottoNumber> winningLottoNumbers) {
+    public int getCorrectCount(Set<LottoNumber> winningLottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count()
                 ;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }
