@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void resultBuyPrice(int buyCount) {
-        System.out.println(buyCount + "개를 구매했습니다.");
+    public void resultBuyPrice(int buyCount , int manualBuyCount) {
+        System.out.println("수동으로 "+manualBuyCount+"장, 자동으로 "+ buyCount + "개를 구매했습니다.");
     }
 
     public void resultLottoList(LottoList lottoList) {
