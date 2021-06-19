@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -18,7 +19,7 @@ public class Lotto {
             lottoNumbers.add(lottoNumber);
         }
         throwIllegalArgumentExceptionLottoSize(lottoNumbers);
-
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toCollection(TreeSet::new));
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
