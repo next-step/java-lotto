@@ -10,10 +10,8 @@ import java.util.Map;
 public class LottoAutoController {
 
     public static void main(String[] args) {
-        LottoCalculator lottoCalculator = new LottoCalculator();
-
         int price = InputView.inputPrice();
-        int amount = lottoCalculator.calculateAmount(price);
+        int amount = LottoCalculator.calculateAmount(price);
         ResultView.showAmount(amount);
 
         Lottos lottos = new Lottos(amount);
@@ -30,7 +28,7 @@ public class LottoAutoController {
         Map<Rank, Long> resultMap = lottoResults.lottoRankCounting();
         ResultView.showWinningStatistic(resultMap);
 
-        BigDecimal revenue = lottoCalculator.getRevenue(price, resultMap);
+        BigDecimal revenue = LottoCalculator.getRevenue(price, resultMap);
         ResultView.showRevenue(revenue);
     }
 }
