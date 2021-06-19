@@ -10,7 +10,6 @@ import java.util.List;
 
 public class LottoMain {
 
-
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
@@ -21,7 +20,7 @@ public class LottoMain {
         int autoBuyCount = buyCount - manualBuyCount;
         lottoGame.purchaseLotteries(autoBuyCount);
         List<String> manualLottoList = inputView.inputManualLotto(manualBuyCount);
-        resultView.resultBuyPrice(autoBuyCount,manualBuyCount);
+        resultView.resultBuyPrice(autoBuyCount, manualBuyCount);
         resultView.resultLottoList(lottoGame.resolveManualLottoList(manualLottoList));
         String winningNumber = inputView.inputWinningLottoNumber();
         int bonusNumber = inputView.inputBonusNumber();

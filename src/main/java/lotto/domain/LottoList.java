@@ -24,7 +24,7 @@ public class LottoList {
             lottoRankList.add(rank);
         }
 
-        return new WinningStatistics(lottoRankList , lottoList.size());
+        return new WinningStatistics(lottoRankList, lottoList.size());
     }
 
     private boolean isBonus(Lotto lotto, LottoNumber bonusNumber) {

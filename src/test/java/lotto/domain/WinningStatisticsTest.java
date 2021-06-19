@@ -4,17 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningStatisticsTest {
     public WinningStatistics winningStatistics;
     List<Rank> lottoRankList;
+
     @BeforeEach
     void set() {
         lottoRankList = new ArrayList<>();
@@ -24,7 +22,7 @@ class WinningStatisticsTest {
     @Test
     void purchaseAmount() {
 
-        winningStatistics = new WinningStatistics(lottoRankList,10);
+        winningStatistics = new WinningStatistics(lottoRankList, 10);
 
         assertThat(winningStatistics.purchaseAmount()).isEqualTo(10000);
 
@@ -35,7 +33,7 @@ class WinningStatisticsTest {
     void total_5() {
         lottoRankList.add(Rank.FIFTH);
 
-        winningStatistics = new WinningStatistics(lottoRankList,1);
+        winningStatistics = new WinningStatistics(lottoRankList, 1);
 
         assertThat(winningStatistics.total()).isEqualTo(5000);
 
@@ -47,12 +45,11 @@ class WinningStatisticsTest {
         lottoRankList.add(Rank.FIFTH);
         lottoRankList.add(Rank.FIRST);
 
-        winningStatistics = new WinningStatistics(lottoRankList,10);
+        winningStatistics = new WinningStatistics(lottoRankList, 10);
 
         assertThat(winningStatistics.total()).isEqualTo(2000005000);
 
     }
-
 
     @DisplayName("수익률")
     @Test
@@ -60,7 +57,7 @@ class WinningStatisticsTest {
         lottoRankList.add(Rank.FIFTH);
         lottoRankList.add(Rank.FIRST);
 
-        winningStatistics = new WinningStatistics(lottoRankList,10);
+        winningStatistics = new WinningStatistics(lottoRankList, 10);
 
         assertThat(winningStatistics.yield()).isEqualTo("200000.50");
 

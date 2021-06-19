@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -14,10 +12,10 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(String lottoNumbersStr) {
-         lottoNumbers = new TreeSet<>();
+        lottoNumbers = new TreeSet<>();
         for (String lottoNumberStr : lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)) {
             LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(lottoNumberStr));
-             lottoNumbers.add(lottoNumber);
+            lottoNumbers.add(lottoNumber);
         }
         throwIllegalArgumentExceptionLottoSize(lottoNumbers);
 
@@ -40,10 +38,10 @@ public class Lotto {
     }
 
     public boolean containsNumber(LottoNumber lottoNumber) {
-       return lottoNumbers.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public boolean winningLottoNumbersContainsBonusNumber(LottoNumber bonusNumber){
+    public boolean winningLottoNumbersContainsBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }

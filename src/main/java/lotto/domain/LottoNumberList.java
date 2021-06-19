@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 //1부터 45까지의 로또 번호
 public class LottoNumberList {

@@ -1,20 +1,22 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoList;
+import lotto.domain.Rank;
+import lotto.domain.WinningStatistics;
 
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void resultBuyPrice(int buyCount , int manualBuyCount) {
-        System.out.println("수동으로 "+manualBuyCount+"장, 자동으로 "+ buyCount + "개를 구매했습니다.");
+    public void resultBuyPrice(int buyCount, int manualBuyCount) {
+        System.out.println("수동으로 " + manualBuyCount + "장, 자동으로 " + buyCount + "개를 구매했습니다.");
     }
 
     public void resultLottoList(LottoList lottoList) {
         lottoList.getLottoList().stream().forEach(
                 lotto -> System.out.println(lotto.getLottoNumbers().stream()
                         .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
-                        .collect(Collectors.joining(",","[","]"))
+                        .collect(Collectors.joining(",", "[", "]"))
                 ));
     }
 

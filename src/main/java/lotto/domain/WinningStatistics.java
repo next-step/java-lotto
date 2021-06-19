@@ -7,8 +7,9 @@ import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private Map<Rank, Long> statistics;
-private int buyCount;
-    public WinningStatistics(List<Rank> lottoRankList,int buyCount) {
+    private int buyCount;
+
+    public WinningStatistics(List<Rank> lottoRankList, int buyCount) {
         statistics = lottoRankList.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
         this.buyCount = buyCount;
     }
