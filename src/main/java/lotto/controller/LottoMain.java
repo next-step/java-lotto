@@ -18,10 +18,10 @@ public class LottoMain {
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
         int manualBuyCount = inputView.inputManualBuyPrice();
         int autoBuyCount = buyCount - manualBuyCount;
-        lottoGame.purchaseLotteries(autoBuyCount);
+        lottoGame.purchaseAutoLottoList(autoBuyCount);
         List<String> manualLottoList = inputView.inputManualLotto(manualBuyCount);
         resultView.resultBuyPrice(autoBuyCount, manualBuyCount);
-        resultView.resultLottoList(lottoGame.resolveManualLottoList(manualLottoList));
+        resultView.resultLottoList(lottoGame.purchaseManualLottoList(manualLottoList));
         String winningNumber = inputView.inputWinningLottoNumber();
         int bonusNumber = inputView.inputBonusNumber();
         WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers(winningNumber, bonusNumber);

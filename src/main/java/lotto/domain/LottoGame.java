@@ -3,14 +3,14 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGame {
-    LottoList lottoList;
+    LottoList lottoList = new LottoList();
 
     public int getBuyCount(int buyPrice) {
         return buyPrice / LottoConstants.PRICE;
     }
 
-    public LottoList purchaseLotteries(int buyCount) {
-        lottoList = new LottoList(buyCount);
+    public LottoList purchaseAutoLottoList(int buyCount) {
+        lottoList.purchaseAutoLottoList(buyCount);
         return lottoList;
     }
 
@@ -18,8 +18,8 @@ public class LottoGame {
         return new WinningLottoNumbers(new Lotto(winningNumbers), new LottoNumber(bonusNumber));
     }
 
-    public LottoList resolveManualLottoList(List<String> manualLottoList) {
-        lottoList.resolveManualLottoList(manualLottoList);
+    public LottoList purchaseManualLottoList(List<String> manualLottoList) {
+        lottoList.purchaseManualLottoList(manualLottoList);
         return lottoList;
     }
 
