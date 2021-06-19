@@ -17,19 +17,20 @@ public class DefaultLottoRandomNumberGenerator implements LottoRandomNumberGener
 			Random random = new Random();
 			int newRandomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
 
-			if (!isDuplicate(randoms, newRandomNumber, i)) {
+			if (!isDuplicate(randoms, newRandomNumber)) {
 				randoms.add(newRandomNumber);
+			} else {
+				--i;
 			}
 		}
 
 		return randoms;
 	}
 
-	private Boolean isDuplicate (List<Integer> randoms, int aRandomNumber, int iterator) {
+	private Boolean isDuplicate (List<Integer> randoms, int aRandomNumber) {
 		if (randoms.contains(aRandomNumber)) {
 			return Boolean.TRUE;
 		}
-		--iterator;
 		return Boolean.FALSE;
 	}
 }
