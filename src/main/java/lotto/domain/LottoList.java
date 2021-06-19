@@ -8,8 +8,7 @@ public class LottoList {
     private List<Lotto> lottoList = new ArrayList<>();
     private LottoMachine lottoMachine;
 
-
-    public void purchaseAutoLottoList(int buyCount){
+    public void purchaseAutoLottoList(int buyCount) {
         lottoMachine = new LottoMachine();
         for (int i = 0; i < buyCount; i++) {
             lottoList.add(lottoMachine.generateAutoLotto());
@@ -21,6 +20,7 @@ public class LottoList {
             lottoList.add(lottoMachine.generateManualLotto(manualLottoStr));
         }
     }
+
     public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
         List<Rank> lottoRankList = new ArrayList<>();
 
@@ -43,8 +43,6 @@ public class LottoList {
                 .filter(lottoNumber -> winningLotto.containsNumber(lottoNumber))
                 .count();
     }
-
-
 
     public List<Lotto> getLottoList() {
         return lottoList;
