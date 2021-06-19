@@ -9,7 +9,7 @@ public class LottoNumbers {
 
     public static List<Integer> lottoNumbers = new ArrayList<>();
 
-    public static void addLottoNumber() {
+    static {
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.add(i);
         }
