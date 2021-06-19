@@ -25,7 +25,7 @@ public class Lotto {
         }
     }
 
-    public int getCorrectCount(Set<LottoNumber> winningLottoNumbers) {
+    public int countWinningLottoNumbers(Set<LottoNumber> winningLottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count()

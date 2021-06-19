@@ -18,7 +18,7 @@ public class Lottos {
     public LottoResults matchWinningLotto(WinningLotto winningLotto) {
         LottoResults lottoResults = new LottoResults();
         lottos.stream()
-                .map(lotto -> new LottoResult(lotto.getCorrectCount(winningLotto.getWinningLotto())))
+                .map(lotto -> new LottoResult(lotto.countWinningLottoNumbers(winningLotto.getWinningLotto())))
                 .forEach(lottoResults::add);
         return lottoResults;
     }
