@@ -7,9 +7,10 @@ import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private Map<Rank, Long> statistics;
-
-    public WinningStatistics(List<Rank> lottoRankList) {
+private int buyCount;
+    public WinningStatistics(List<Rank> lottoRankList,int buyCount) {
         statistics = lottoRankList.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+        this.buyCount = buyCount;
     }
 
     public Map<Rank, Long> getStatistics() {
@@ -25,11 +26,11 @@ public class WinningStatistics {
         return yield.toString();
     }
 
-    private double purchaseAmount() {
-        return statistics.size() * LottoConstants.PRICE;
+    public double purchaseAmount() {
+        return buyCount * LottoConstants.PRICE;
     }
 
-    private double total() {
+    public double total() {
         long total = 0L;
         for (Rank rank : Rank.values()) {
             total += rank.getMoney() * statistics.getOrDefault(rank, 0L);
