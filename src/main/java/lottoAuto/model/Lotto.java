@@ -11,12 +11,12 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        checkWinningLottoNumbersCount(lottoNumbers.size());
+        checkLottoNumbersCount(lottoNumbers.size());
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
-    public void checkWinningLottoNumbersCount(int winningLottoNumbersCount) {
-        if (winningLottoNumbersCount < LOTTO_NUMBERS_SIZE) {
+    public void checkLottoNumbersCount(int lottoNumbersSize) {
+        if (lottoNumbersSize < LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(CHECK_USER_LOTTO_COUNT_MESSAGE);
         }
     }
