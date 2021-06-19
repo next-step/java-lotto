@@ -19,6 +19,7 @@ public class Lotto {
             LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(lottoNumberStr));
              lottoNumbers.add(lottoNumber);
         }
+        throwIllegalArgumentExceptionLottoSize(lottoNumbers);
 
     }
 
