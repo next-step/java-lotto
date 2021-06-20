@@ -9,17 +9,22 @@ import java.util.List;
 import java.util.Scanner;
 
 import static domain.Lotto.LOTTO_NUMBER_LENGTH;
+import static domain.Lotto.LOTTO_PRICE;
 import static ui.IOMessage.*;
-import static util.LottoPrice.LOTTO_PRICE;
+import static util.InputValidation.*;
 
 public class LottoController {
 	private final Scanner scanner = new Scanner(System.in);
 
-	public void insertMoney () {
+	public void insertMoney() {
 		while (true) {
 			System.out.println(ASK_INSERTMONEY);
 
-			final Integer lottoAmount = validMoney(scanner.nextLine().trim());
+			String inputMoney = scanner.nextLine().trim();
+
+			if (!checkInputMoney(inputMoney)) continue;
+
+			final Integer lottoAmount = calcLottoAmount(inputMoney);
 
 			System.out.println(lottoAmount + PURCHASE_MENT_SURFIX);
 

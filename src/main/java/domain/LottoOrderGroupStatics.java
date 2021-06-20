@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import static util.LottoPrice.LOTTO_PRICE;
+import static domain.Lotto.LOTTO_PRICE;
 
 public class LottoOrderGroupStatics {
 	private final List<Integer> winnerNumbers;

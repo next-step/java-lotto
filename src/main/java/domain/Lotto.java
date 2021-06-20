@@ -8,6 +8,8 @@ import java.util.List;
 public class Lotto {
 	public static final Integer LOTTO_NUMBER_LENGTH = 6;
 	public static final Integer LOTTO_MAX_NUMBER = 44;
+	public static final Integer LOTTO_MIN_NUMBER = 1;
+	public static final Integer LOTTO_PRICE = 1000;
 
 	private final List<Integer> numbers;
 	private Rank rank = Rank.NOT_YET;
