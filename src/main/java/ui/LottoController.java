@@ -35,12 +35,13 @@ public class LottoController {
 			System.out.println(); // 줄바꿈용
 			System.out.println(ASK_LOTTO_WINNER_NUMBER);
 
-			final List<Integer> winnerNumbers = validWinnerNumbers(scanner.nextLine().trim());
+			final Lotto winnerNumbers = askLottoWinnerNumber();
 
 			System.out.println(ASK_LOTTO_BONUS_BALL);
-			final int bonusNumber = validBonusBall(scanner.nextLine().trim());
 
-			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusNumber, lottoOrderGroup.lottos());
+			final Integer bonusBall = askBonusNumber(winnerNumbers);
+
+			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusBall, lottoOrderGroup.lottos());
 			analysis.matchSetting();
 
 			printAnalysis(analysis);

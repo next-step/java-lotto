@@ -6,9 +6,9 @@ public class LottoNumberMatch {
 	private LottoNumberMatch() {
 	}
 
-	public static Integer matchCount(Lotto winNumber, Lotto lotto) {
+	public static Integer matchCount(Lotto winnerNumber, Lotto lotto) {
 		int matchCount = 0;
-		for (Integer number : winNumber.numbers()) {
+		for (Integer number : winnerNumber.numbers()) {
 			matchCount = lotto.numbers().contains(number) ? matchCount + 1 : matchCount;
 		}
 
