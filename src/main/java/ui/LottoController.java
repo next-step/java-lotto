@@ -26,9 +26,23 @@ public class LottoController {
 
 			final Integer lottoAmount = calcLottoAmount(inputMoney);
 
-			System.out.println(lottoAmount + PURCHASE_MENT_SURFIX);
+			System.out.println(ASK_HAND_INPUT);
 
-			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(lottoAmount);
+			String inputHandAmount = scanner.nextLine().trim();
+
+			if (!checkNumberFormat(inputHandAmount)) continue;
+
+			final Integer handLottoAmount = parseInteger(inputHandAmount);
+
+			System.out.println(ASK_HAND_INPUT_LOTTO_NUMBERS);
+
+			askHandLotto(handLottoAmount);
+
+			Integer autoAmount = lottoAmount - handLottoAmount;
+
+			System.out.println("수동으로 " + handLottoAmount + "장, 자동으로" + (autoAmount) + PURCHASE_MENT_SURFIX);
+
+			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(autoAmount);
 
 			printOrderGroup(lottoOrderGroup);
 
@@ -48,6 +62,20 @@ public class LottoController {
 		}
 	}
 
+	private List<Lotto> askHandLotto(Integer handAmount) {
+		List<Lotto> handLottos = new ArrayList<>();
+
+		while (handAmount > 0) {
+			String handLine = scanner.nextLine().trim();
+			if (!checkInputLottoNumbers(handLine)) continue;
+
+			handLottos.add(setLotto(handLine));
+			--handAmount;
+		}
+
+		return handLottos;
+	}
+
 	private Integer askBonusNumber(Lotto winnerNumbers) {
 		while (true) {
 			String bonusInput = scanner.nextLine().trim();
@@ -65,7 +93,7 @@ public class LottoController {
 		while (true) {
 			String winnerLottoNumber = scanner.nextLine().trim();
 			if (!checkInputLottoNumbers(winnerLottoNumber)) continue;
-			return setWinnerNumbers(winnerLottoNumber);
+			return setLotto(winnerLottoNumber);
 		}
 	}
 
@@ -92,7 +120,7 @@ public class LottoController {
 		System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 	}
 
-	private Lotto setWinnerNumbers(String winnerNumbers) {
+	private Lotto setLotto(String winnerNumbers) {
 		String[] stringNumbers = winnerNumbers.split(",");
 		List<Integer> lotto = new ArrayList<>();
 
