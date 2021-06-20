@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static domain.Lotto.*;
+import static domain.Lotto.LOTTO_NUMBER_LENGTH;
 import static ui.IOMessage.*;
+import static util.LottoPrice.LOTTO_PRICE;
 
 public class LottoController {
 	private final Scanner scanner = new Scanner(System.in);
@@ -24,37 +25,54 @@ public class LottoController {
 
 			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(lottoAmount);
 
-			for (Lotto lotto : lottoOrderGroup.lottos()) {
-				System.out.println(lotto);
-			}
+			printOrderGroup(lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
 			System.out.println(ASK_LOTTO_WINNER_NUMBER);
 
 			final List<Integer> winnerNumbers = validWinnerNumbers(scanner.nextLine().trim());
 
-			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, lottoOrderGroup);
-			analysis.matchSetting();
-			System.out.println(); // 줄바꿈용
-			System.out.println(PRINT_ANALYSIS_TITLE);
-			System.out.println(PRINT_LINE);
-			System.out.printf(MATCH_3_NUMBERS + "%d개%n", analysis.match3());
-			System.out.printf(MATCH_4_NUMBERS + "%d개%n", analysis.match4());
-			System.out.printf(MATCH_5_NUMBERS + "%d개%n", analysis.match5());
-			System.out.printf(MATCH_6_NUMBERS + "%d개%n", analysis.match6());
+			System.out.println(ASK_LOTTO_BONUS_BALL);
+			final int bonusNumber = validBonusBall(scanner.nextLine().trim());
 
-			System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
+			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusNumber, lottoOrderGroup.lottos());
+			analysis.matchSetting();
+
+			printAnalysis(analysis);
 		}
+	}
+
+	private int validBonusBall (String trim) {
+		return Integer.parseInt(trim);
+	}
+
+	private void printOrderGroup (LottoOrderGroup group) {
+		for (Lotto lotto : group.lottos()) {
+			System.out.println(lotto);
+		}
+	}
+
+	private void printAnalysis (LottoOrderGroupStatics analysis) {
+		System.out.println(); // 줄바꿈용
+		System.out.println(PRINT_ANALYSIS_TITLE);
+		System.out.println(PRINT_LINE);
+		System.out.printf(MATCH_3_NUMBERS + "%d개%n", analysis.match3());
+		System.out.printf(MATCH_4_NUMBERS + "%d개%n", analysis.match4());
+		System.out.printf(MATCH_5_NUMBERS_N_BONUS + "%d개%n", analysis.match5_bonus());
+		System.out.printf(MATCH_5_NUMBERS + "%d개%n", analysis.match5());
+		System.out.printf(MATCH_6_NUMBERS + "%d개%n", analysis.match6());
+
+		System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 	}
 
 	private Integer validMoney (String inputMoney) {
 		final int money = Integer.parseInt(inputMoney);
 
-		if (money % 1000 > 0) {
-			throw new NumberFormatException("1000원단위로 입력해주세요.");
+		if (money % LOTTO_PRICE > 0) {
+			throw new NumberFormatException(LOTTO_PRICE + "원단위로 입력해주세요.");
 		}
 
-		return money / 1000;
+		return money / LOTTO_PRICE;
 	}
 
 	private List<Integer> validWinnerNumbers (String winnerNumbers) {

@@ -5,70 +5,92 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static domain.LottoFixture.로또_생성;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoNumberMatchTest {
-   @Test
-   public void 번호일치테스트_6자리_전부_일치_GREEN() {
-     List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-     List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+	@Test
+	public void 번호일치테스트_6자리_전부_일치_GREEN () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-     final Lotto lotto = new Lotto(lottoNumber);
+		final Lotto lotto = 로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-     final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
-       assertThat(6).isEqualTo(allMached);
-       assertThat(6).isEqualTo(lotto.rank().countOfMatch());
-   }
+		assertThat(6).isEqualTo(allMached);
+		assertThat(6).isEqualTo(lotto.rank().countOfMatch());
+	}
 
-  @Test
-  public void 번호일치테스트_5자리_일치_GREEN() {
-    List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 7);
+	@Test
+	public void 번호일치테스트_5자리_일치_보너스불일치_GREEN () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-    final Lotto lotto = new Lotto(lottoNumber);
+		int bonus = 8;
 
-    final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 7);
 
-    assertThat(allMached).isEqualTo(5);
-    assertThat(lotto.rank().countOfMatch()).isEqualTo(5);
-  }
+		assertThat(lottoNumber.contains(bonus)).isFalse();
 
-  @Test
-  public void 번호일치테스트_4자리_일치_GREEN() {
-    List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 8, 7);
+		final Lotto lotto = 로또_생성(lottoNumber);
 
-    final Lotto lotto = new Lotto(lottoNumber);
+		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
-    final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		assertThat(allMached).isEqualTo(5);
+		assertThat(lotto.rank().countOfMatch()).isEqualTo(5);
+	}
 
-    assertThat(allMached).isEqualTo(4);
-    assertThat(lotto.rank().countOfMatch()).isEqualTo(4);
-  }
+	@Test
+	public void 번호일치테스트_5자리_일치_보너스일치_GREEN () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-  @Test
-  public void 번호일치테스트_3자리_일치_GREEN() {
-    List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 9, 8, 7);
+		int bonus = 7;
 
-    final Lotto lotto = new Lotto(lottoNumber);
+		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 7);
 
-    final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		assertThat(lottoNumber.contains(bonus)).isTrue();
 
-    assertThat(allMached).isEqualTo(3);
-    assertThat(lotto.rank().countOfMatch()).isEqualTo(3);
-  }
+		final Lotto lotto = 로또_생성(lottoNumber);
 
-  @Test
-  public void 번호일치테스트_맞는번호없음() {
-    List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> lottoNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
+		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
 
-    final Lotto lotto = new Lotto(lottoNumber);
+		assertThat(allMached).isEqualTo(5);
+		assertThat(lotto.rank().countOfMatch()).isEqualTo(5);
+	}
 
-    final Integer nothingMatched = LottoNumberMatch.matchCount(winNumber, lotto);
+	@Test
+	public void 번호일치테스트_4자리_일치_GREEN () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 8, 7);
 
-    assertThat(nothingMatched).isEqualTo(0);
-  }
+		final Lotto lotto = 로또_생성(lottoNumber);
+
+		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+
+		assertThat(allMached).isEqualTo(4);
+		assertThat(lotto.rank().countOfMatch()).isEqualTo(4);
+	}
+
+	@Test
+	public void 번호일치테스트_3자리_일치_GREEN () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 9, 8, 7);
+
+		final Lotto lotto = 로또_생성(lottoNumber);
+		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+
+		assertThat(allMached).isEqualTo(3);
+		assertThat(lotto.rank().countOfMatch()).isEqualTo(3);
+	}
+
+	@Test
+	public void 번호일치테스트_맞는번호없음 () {
+		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> lottoNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
+
+		final Lotto lotto = 로또_생성(lottoNumber);
+
+		final Integer nothingMatched = LottoNumberMatch.matchCount(winNumber, lotto);
+
+		assertThat(nothingMatched).isEqualTo(0);
+	}
 }

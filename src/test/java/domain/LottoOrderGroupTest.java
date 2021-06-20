@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoOrderGroupTest {
 	@Test
-	public void 주문그룹_생성_테스트(){
+	public void 주문그룹_생성_테스트 () {
 		int size = 3;
 
 		final LottoOrderGroup orderGroup = new LottoOrderGroup(size);
