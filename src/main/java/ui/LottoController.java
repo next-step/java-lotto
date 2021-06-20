@@ -48,17 +48,38 @@ public class LottoController {
 		}
 	}
 
-	private int validBonusBall (String trim) {
-		return Integer.parseInt(trim);
+	private Integer askBonusNumber(Lotto winnerNumbers) {
+		while (true) {
+			String bonusInput = scanner.nextLine().trim();
+
+			if (!checkInputLottoNumber(bonusInput)) continue;
+			Integer bonusNumber = parseInteger(bonusInput);
+
+			if (!isContainBonus(winnerNumbers, bonusNumber)) continue;
+
+			return bonusNumber;
+		}
 	}
 
-	private void printOrderGroup (LottoOrderGroup group) {
+	private Lotto askLottoWinnerNumber() {
+		while (true) {
+			String winnerLottoNumber = scanner.nextLine().trim();
+			if (!checkInputLottoNumbers(winnerLottoNumber)) continue;
+			return setWinnerNumbers(winnerLottoNumber);
+		}
+	}
+
+	private Integer calcLottoAmount(String inputMoney) {
+		return Integer.parseInt(inputMoney) / LOTTO_PRICE;
+	}
+
+	private void printOrderGroup(LottoOrderGroup group) {
 		for (Lotto lotto : group.lottos()) {
 			System.out.println(lotto);
 		}
 	}
 
-	private void printAnalysis (LottoOrderGroupStatics analysis) {
+	private void printAnalysis(LottoOrderGroupStatics analysis) {
 		System.out.println(); // 줄바꿈용
 		System.out.println(PRINT_ANALYSIS_TITLE);
 		System.out.println(PRINT_LINE);
@@ -71,29 +92,14 @@ public class LottoController {
 		System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 	}
 
-	private Integer validMoney (String inputMoney) {
-		final int money = Integer.parseInt(inputMoney);
-
-		if (money % LOTTO_PRICE > 0) {
-			throw new NumberFormatException(LOTTO_PRICE + "원단위로 입력해주세요.");
-		}
-
-		return money / LOTTO_PRICE;
-	}
-
-	private List<Integer> validWinnerNumbers (String winnerNumbers) {
+	private Lotto setWinnerNumbers(String winnerNumbers) {
 		String[] stringNumbers = winnerNumbers.split(",");
-
-		if (stringNumbers.length != LOTTO_NUMBER_LENGTH) {
-			throw new IllegalArgumentException("6자리 숫자를 ,을 이용해 입력해 주세요.");
-		}
-
-		List<Integer> numbers = new ArrayList<>();
+		List<Integer> lotto = new ArrayList<>();
 
 		for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-			numbers.add(Integer.parseInt(stringNumbers[i]));
+			lotto.add(Integer.parseInt(stringNumbers[i]));
 		}
 
-		return numbers;
+		return new Lotto(lotto);
 	}
 }
