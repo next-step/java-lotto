@@ -18,6 +18,10 @@ public class Lotto {
 		this.numbers = lottoGenerator.randomNumber(LOTTO_NUMBER_LENGTH);
 	}
 
+	public Lotto (List<Integer> winnerNumbers) {
+		this.numbers = winnerNumbers;
+	}
+
 	@Override
 	public String toString () {
 		return numbers.toString();

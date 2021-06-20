@@ -15,7 +15,7 @@ class LottoNumberMatchTest {
 
 		final Lotto lotto = 로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(6).isEqualTo(allMached);
 		assertThat(6).isEqualTo(lotto.rank().countOfMatch());
@@ -33,7 +33,7 @@ class LottoNumberMatchTest {
 
 		final Lotto lotto = 로또_생성(lottoNumber);
 
-		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(allMached).isEqualTo(5);
 		assertThat(lotto.rank().countOfMatch()).isEqualTo(5);
@@ -51,7 +51,7 @@ class LottoNumberMatchTest {
 
 		final Lotto lotto = 로또_생성(lottoNumber);
 
-		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(allMached).isEqualTo(5);
 		assertThat(lotto.rank().countOfMatch()).isEqualTo(5);
@@ -64,7 +64,7 @@ class LottoNumberMatchTest {
 
 		final Lotto lotto = 로또_생성(lottoNumber);
 
-		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(allMached).isEqualTo(4);
 		assertThat(lotto.rank().countOfMatch()).isEqualTo(4);
@@ -76,7 +76,7 @@ class LottoNumberMatchTest {
 		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 9, 8, 7);
 
 		final Lotto lotto = 로또_생성(lottoNumber);
-		final Integer allMached = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer allMached = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(allMached).isEqualTo(3);
 		assertThat(lotto.rank().countOfMatch()).isEqualTo(3);
@@ -89,7 +89,7 @@ class LottoNumberMatchTest {
 
 		final Lotto lotto = 로또_생성(lottoNumber);
 
-		final Integer nothingMatched = LottoNumberMatch.matchCount(winNumber, lotto);
+		final Integer nothingMatched = LottoNumberMatch.matchCount(new Lotto(winNumber), lotto);
 
 		assertThat(nothingMatched).isEqualTo(0);
 	}

@@ -18,7 +18,7 @@ class LottoOrderGroupStaticsTest {
 		lottos.add(로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
 		LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(
-				Arrays.asList(1, 2, 3, 4, 5, 6)
+				new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
 				, 7
 				, lottos
 		);
@@ -40,7 +40,7 @@ class LottoOrderGroupStaticsTest {
 		lottos.add(로또_생성(Arrays.asList(35, 36, 37, 38, 39, 40)));
 
 		LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(
-				Arrays.asList(1, 2, 3, 8, 9, 10)
+				new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10))
 				, 7
 				, lottos
 		);
