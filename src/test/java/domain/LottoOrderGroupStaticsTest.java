@@ -10,6 +10,7 @@ import java.util.List;
 import static domain.Lotto.LOTTO_PRICE;
 import static domain.LottoFixture.로또_생성;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static util.LottoPrice.LOTTO_PRICE;
 
 class LottoOrderGroupStaticsTest {
 	@Test
