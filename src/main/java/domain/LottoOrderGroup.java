@@ -10,15 +10,19 @@ public class LottoOrderGroup {
 	private final List<Lotto> lottos;
 	private final LottoRandomNumberGenerator lottoGenerator = new DefaultLottoRandomNumberGenerator();
 
-	public LottoOrderGroup (Integer numberOfLotto) {
+	public LottoOrderGroup(Integer numberOfLotto) {
 		this.lottos = generateLottos(numberOfLotto);
 	}
 
-	public List<Lotto> lottos () {
+	public void addHandLottos(List<Lotto> handLottos) {
+		lottos.addAll(handLottos);
+	}
+
+	public List<Lotto> lottos() {
 		return lottos;
 	}
 
-	public List<Lotto> generateLottos (Integer numberOfLotto) {
+	public List<Lotto> generateLottos(Integer numberOfLotto) {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < numberOfLotto; i++) {
