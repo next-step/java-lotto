@@ -10,5 +10,5 @@ public interface LottoRandomNumberGenerator {
 	 * @param length
 	 * @return
 	 */
-	List<Integer> randomNumber (Integer length);
+	List<Integer> randomNumber(Integer length);
 }

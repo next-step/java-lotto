@@ -7,10 +7,10 @@ import java.util.Random;
 import static domain.Lotto.LOTTO_MAX_NUMBER;
 
 public class DefaultLottoRandomNumberGenerator implements LottoRandomNumberGenerator {
-	public DefaultLottoRandomNumberGenerator () {
+	public DefaultLottoRandomNumberGenerator() {
 	}
 
-	public List<Integer> randomNumber (Integer length) {
+	public List<Integer> randomNumber(Integer length) {
 		List<Integer> randoms = new ArrayList<>();
 
 		for (int i = 0; i < length; i++) {
@@ -27,7 +27,7 @@ public class DefaultLottoRandomNumberGenerator implements LottoRandomNumberGener
 		return randoms;
 	}
 
-	private Boolean isDuplicate (List<Integer> randoms, int aRandomNumber) {
+	private Boolean isDuplicate(List<Integer> randoms, int aRandomNumber) {
 		if (randoms.contains(aRandomNumber)) {
 			return Boolean.TRUE;
 		}

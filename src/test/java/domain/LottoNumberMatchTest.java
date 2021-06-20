@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoNumberMatchTest {
 	@Test
-	public void 번호일치테스트_6자리_전부_일치_GREEN () {
+	public void 번호일치테스트_6자리_전부_일치_GREEN() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		final Lotto lotto = 로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -22,7 +22,7 @@ class LottoNumberMatchTest {
 	}
 
 	@Test
-	public void 번호일치테스트_5자리_일치_보너스불일치_GREEN () {
+	public void 번호일치테스트_5자리_일치_보너스불일치_GREEN() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		int bonus = 8;
@@ -40,7 +40,7 @@ class LottoNumberMatchTest {
 	}
 
 	@Test
-	public void 번호일치테스트_5자리_일치_보너스일치_GREEN () {
+	public void 번호일치테스트_5자리_일치_보너스일치_GREEN() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		int bonus = 7;
@@ -58,7 +58,7 @@ class LottoNumberMatchTest {
 	}
 
 	@Test
-	public void 번호일치테스트_4자리_일치_GREEN () {
+	public void 번호일치테스트_4자리_일치_GREEN() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 8, 7);
 
@@ -71,7 +71,7 @@ class LottoNumberMatchTest {
 	}
 
 	@Test
-	public void 번호일치테스트_3자리_일치_GREEN () {
+	public void 번호일치테스트_3자리_일치_GREEN() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 9, 8, 7);
 
@@ -83,7 +83,7 @@ class LottoNumberMatchTest {
 	}
 
 	@Test
-	public void 번호일치테스트_맞는번호없음 () {
+	public void 번호일치테스트_맞는번호없음() {
 		List<Integer> winNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumber = Arrays.asList(7, 8, 9, 10, 11, 12);
 

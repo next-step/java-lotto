@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoOrderGroupTest {
 	@Test
-	public void 자동_주문그룹_생성_테스트 () {
+	public void 자동_주문그룹_생성_테스트() {
 		int size = 3;
 
 		final LottoOrderGroup orderGroup = new LottoOrderGroup(size);
@@ -19,7 +19,7 @@ class LottoOrderGroupTest {
 	}
 
 	@Test
-	public void 수동_주문그룹_생성_테스트(){
+	public void 수동_주문그룹_생성_테스트() {
 		final LottoOrderGroup orderGroup = new LottoOrderGroup(0);
 
 		List<Lotto> handLottos = new ArrayList<>();
@@ -27,7 +27,7 @@ class LottoOrderGroupTest {
 
 		handLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		handLottos.add(new Lotto(Arrays.asList(8,9, 11, 4, 5, 7)));
+		handLottos.add(new Lotto(Arrays.asList(8, 9, 11, 4, 5, 7)));
 
 		orderGroup.addHandLottos(handLottos);
 
@@ -37,7 +37,7 @@ class LottoOrderGroupTest {
 	}
 
 	@Test
-	public void 수동_주문그룹_혼합_생성_테스트(){
+	public void 수동_주문그룹_혼합_생성_테스트() {
 		final LottoOrderGroup orderGroup = new LottoOrderGroup(3);
 
 		List<Lotto> handLottos = new ArrayList<>();
@@ -45,7 +45,7 @@ class LottoOrderGroupTest {
 
 		handLottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-		handLottos.add(new Lotto(Arrays.asList(8,9, 11, 4, 5, 7)));
+		handLottos.add(new Lotto(Arrays.asList(8, 9, 11, 4, 5, 7)));
 
 		orderGroup.addHandLottos(handLottos);
 

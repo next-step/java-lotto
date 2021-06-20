@@ -20,20 +20,20 @@ public class LottoOrderGroupStatics {
 	private Integer match5_bonus = 0;
 	private Integer match6 = 0;
 
-	public LottoOrderGroupStatics (Lotto winnerNumbers, Integer bonusBall, List<Lotto> lottoOrderGroup) {
+	public LottoOrderGroupStatics(Lotto winnerNumbers, Integer bonusBall, List<Lotto> lottoOrderGroup) {
 		this.winnerNumbers = winnerNumbers;
 		this.lottoOrderGroup = lottoOrderGroup;
 		this.bonusBall = bonusBall;
 	}
 
-	public void matchSetting () {
+	public void matchSetting() {
 		for (Lotto lotto : lottoOrderGroup) {
 			final Integer matchCount = matchCount(winnerNumbers, lotto);
 			match(matchCount, matchBonus(bonusBall, lotto));
 		}
 	}
 
-	private void match (Integer matchCount, Boolean bonusMatch) {
+	private void match(Integer matchCount, Boolean bonusMatch) {
 		if (matchCount == 3) {
 			match3++;
 		}
@@ -48,7 +48,7 @@ public class LottoOrderGroupStatics {
 		}
 	}
 
-	private void checkBonus (Boolean bonusMatch) {
+	private void checkBonus(Boolean bonusMatch) {
 		if (bonusMatch) {
 			match5_bonus++;
 			return;
@@ -56,7 +56,7 @@ public class LottoOrderGroupStatics {
 		match5++;
 	}
 
-	public String yield () {
+	public String yield() {
 		final BigDecimal lottoAmount = new BigDecimal(lottoOrderGroup.size());
 
 		final BigDecimal rewards = new BigDecimal(
@@ -74,23 +74,23 @@ public class LottoOrderGroupStatics {
 		return rewards.divide(lottoAmount.multiply(new BigDecimal(LOTTO_PRICE)), 2, RoundingMode.HALF_EVEN).toString();
 	}
 
-	public Integer match3 () {
+	public Integer match3() {
 		return match3;
 	}
 
-	public Integer match4 () {
+	public Integer match4() {
 		return match4;
 	}
 
-	public Integer match5 () {
+	public Integer match5() {
 		return match5;
 	}
 
-	public Integer match5_bonus () {
+	public Integer match5_bonus() {
 		return match5_bonus;
 	}
 
-	public Integer match6 () {
+	public Integer match6() {
 		return match6;
 	}
 }

@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoOrderGroupStaticsTest {
 	@Test
-	public void 수익률_계산_자연수_1장_1등 () {
+	public void 수익률_계산_자연수_1장_1등() {
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
@@ -30,7 +30,7 @@ class LottoOrderGroupStaticsTest {
 	}
 
 	@Test
-	public void 수익률_계산_자연수_소숫 () {
+	public void 수익률_계산_자연수_소숫() {
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		lottos.add(로또_생성(Arrays.asList(11, 12, 13, 14, 15, 16)));
