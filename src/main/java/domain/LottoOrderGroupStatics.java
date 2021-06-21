@@ -6,32 +6,34 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import static util.LottoPrice.LOTTO_PRICE;
+import static domain.Lotto.LOTTO_PRICE;
+import static domain.LottoNumberMatch.matchBonus;
+import static domain.LottoNumberMatch.matchCount;
 
 public class LottoOrderGroupStatics {
-	private final List<Integer> winnerNumbers;
+	private final Lotto winnerNumbers;
 	private final List<Lotto> lottoOrderGroup;
-	private final int bonusBall;
+	private final Integer bonusBall;
 	private Integer match3 = 0;
 	private Integer match4 = 0;
 	private Integer match5 = 0;
 	private Integer match5_bonus = 0;
 	private Integer match6 = 0;
 
-	public LottoOrderGroupStatics (List<Integer> winnerNumbers, int bonusBall, List<Lotto> lottoOrderGroup) {
+	public LottoOrderGroupStatics(Lotto winnerNumbers, Integer bonusBall, List<Lotto> lottoOrderGroup) {
 		this.winnerNumbers = winnerNumbers;
 		this.lottoOrderGroup = lottoOrderGroup;
 		this.bonusBall = bonusBall;
 	}
 
-	public void matchSetting () {
+	public void matchSetting() {
 		for (Lotto lotto : lottoOrderGroup) {
-			final Integer matchCount = LottoNumberMatch.matchCount(winnerNumbers, lotto);
-			match(matchCount, LottoNumberMatch.matchBonus(bonusBall, lotto));
+			final Integer matchCount = matchCount(winnerNumbers, lotto);
+			match(matchCount, matchBonus(bonusBall, lotto));
 		}
 	}
 
-	private void match (Integer matchCount, Boolean bonusMatch) {
+	private void match(Integer matchCount, Boolean bonusMatch) {
 		if (matchCount == 3) {
 			match3++;
 		}
@@ -46,7 +48,7 @@ public class LottoOrderGroupStatics {
 		}
 	}
 
-	private void checkBonus (Boolean bonusMatch) {
+	private void checkBonus(Boolean bonusMatch) {
 		if (bonusMatch) {
 			match5_bonus++;
 			return;
@@ -54,7 +56,7 @@ public class LottoOrderGroupStatics {
 		match5++;
 	}
 
-	public String yield () {
+	public String yield() {
 		final BigDecimal lottoAmount = new BigDecimal(lottoOrderGroup.size());
 
 		final BigDecimal rewards = new BigDecimal(
@@ -72,23 +74,23 @@ public class LottoOrderGroupStatics {
 		return rewards.divide(lottoAmount.multiply(new BigDecimal(LOTTO_PRICE)), 2, RoundingMode.HALF_EVEN).toString();
 	}
 
-	public Integer match3 () {
+	public Integer match3() {
 		return match3;
 	}
 
-	public Integer match4 () {
+	public Integer match4() {
 		return match4;
 	}
 
-	public Integer match5 () {
+	public Integer match5() {
 		return match5;
 	}
 
-	public Integer match5_bonus () {
+	public Integer match5_bonus() {
 		return match5_bonus;
 	}
 
-	public Integer match6 () {
+	public Integer match6() {
 		return match6;
 	}
 }

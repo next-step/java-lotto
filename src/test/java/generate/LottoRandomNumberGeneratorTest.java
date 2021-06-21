@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoRandomNumberGeneratorTest {
 
 	@Test
-	public void 로또번호자동생성 () {
+	public void 로또번호자동생성() {
 		LottoRandomNumberGenerator lottoGenerator = new DefaultLottoRandomNumberGenerator();
 
 		List<Integer> randomNumbers = lottoGenerator.randomNumber(LOTTO_NUMBER_LENGTH);

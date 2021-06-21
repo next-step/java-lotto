@@ -12,12 +12,12 @@ public enum Rank {
 	private final Integer countOfMatch;
 	private final Integer money;
 
-	Rank (Integer countOfMatch, Integer money) {
+	Rank(Integer countOfMatch, Integer money) {
 		this.countOfMatch = countOfMatch;
 		this.money = money;
 	}
 
-	public static Rank valueOf (Integer countOfMatch) {
+	public static Rank valueOf(Integer countOfMatch) {
 		Rank[] ranks = values();
 		for (Rank rank : ranks) {
 			if (rank.countOfMatch() == countOfMatch) {
@@ -27,11 +27,11 @@ public enum Rank {
 		return Rank.NONE;
 	}
 
-	public Integer money () {
+	public Integer money() {
 		return money;
 	}
 
-	public Integer countOfMatch () {
+	public Integer countOfMatch() {
 		return countOfMatch;
 	}
 }

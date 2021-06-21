@@ -15,4 +15,6 @@ public class IOMessage {
 	public static final String MATCH_5_NUMBERS_N_BONUS = "5개 일치, 보너스 볼 일치 (" + SECOND_BONUS + "원)-";
 	public static final String MATCH_6_NUMBERS = "6개 일치 (" + FIRST + "원)-";
 	public static final String MINUS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+	public static final String ASK_HAND_INPUT = "수동으로 구매할 로또 수를 입력해 주세요.";
+	public static final String ASK_HAND_INPUT_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 }

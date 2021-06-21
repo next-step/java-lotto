@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static domain.Lotto.LOTTO_PRICE;
 import static domain.LottoFixture.로또_생성;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static util.LottoPrice.LOTTO_PRICE;
 
 class LottoOrderGroupStaticsTest {
 	@Test
-	public void 수익률_계산_자연수_1장_1등 () {
+	public void 수익률_계산_자연수_1장_1등() {
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
 		LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(
-				Arrays.asList(1, 2, 3, 4, 5, 6)
+				new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
 				, 7
 				, lottos
 		);
@@ -30,7 +31,7 @@ class LottoOrderGroupStaticsTest {
 	}
 
 	@Test
-	public void 수익률_계산_자연수_소숫 () {
+	public void 수익률_계산_자연수_소숫() {
 		List<Lotto> lottos = new ArrayList<>();
 		lottos.add(로또_생성(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		lottos.add(로또_생성(Arrays.asList(11, 12, 13, 14, 15, 16)));
@@ -40,7 +41,7 @@ class LottoOrderGroupStaticsTest {
 		lottos.add(로또_생성(Arrays.asList(35, 36, 37, 38, 39, 40)));
 
 		LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(
-				Arrays.asList(1, 2, 3, 8, 9, 10)
+				new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10))
 				, 7
 				, lottos
 		);

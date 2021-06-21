@@ -9,50 +9,105 @@ import java.util.List;
 import java.util.Scanner;
 
 import static domain.Lotto.LOTTO_NUMBER_LENGTH;
+import static domain.Lotto.LOTTO_PRICE;
 import static ui.IOMessage.*;
-import static util.LottoPrice.LOTTO_PRICE;
+import static util.InputValidation.*;
 
 public class LottoController {
 	private final Scanner scanner = new Scanner(System.in);
 
-	public void insertMoney () {
+	public void insertMoney() {
 		while (true) {
 			System.out.println(ASK_INSERTMONEY);
 
-			final Integer lottoAmount = validMoney(scanner.nextLine().trim());
+			String inputMoney = scanner.nextLine().trim();
 
-			System.out.println(lottoAmount + PURCHASE_MENT_SURFIX);
+			if (!checkInputMoney(inputMoney)) continue;
 
-			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(lottoAmount);
+			final Integer lottoAmount = calcLottoAmount(inputMoney);
+
+			System.out.println(ASK_HAND_INPUT);
+
+			String inputHandAmount = scanner.nextLine().trim();
+
+			if (!checkNumberFormat(inputHandAmount)) continue;
+
+			final Integer handLottoAmount = parseInteger(inputHandAmount);
+
+			System.out.println(ASK_HAND_INPUT_LOTTO_NUMBERS);
+
+			askHandLotto(handLottoAmount);
+
+			Integer autoAmount = lottoAmount - handLottoAmount;
+
+			System.out.println("수동으로 " + handLottoAmount + "장, 자동으로" + (autoAmount) + PURCHASE_MENT_SURFIX);
+
+			final LottoOrderGroup lottoOrderGroup = new LottoOrderGroup(autoAmount);
 
 			printOrderGroup(lottoOrderGroup);
 
 			System.out.println(); // 줄바꿈용
 			System.out.println(ASK_LOTTO_WINNER_NUMBER);
 
-			final List<Integer> winnerNumbers = validWinnerNumbers(scanner.nextLine().trim());
+			final Lotto winnerNumbers = askLottoWinnerNumber();
 
 			System.out.println(ASK_LOTTO_BONUS_BALL);
-			final int bonusNumber = validBonusBall(scanner.nextLine().trim());
 
-			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusNumber, lottoOrderGroup.lottos());
+			final Integer bonusBall = askBonusNumber(winnerNumbers);
+
+			LottoOrderGroupStatics analysis = new LottoOrderGroupStatics(winnerNumbers, bonusBall, lottoOrderGroup.lottos());
 			analysis.matchSetting();
 
 			printAnalysis(analysis);
 		}
 	}
 
-	private int validBonusBall (String trim) {
-		return Integer.parseInt(trim);
+	private List<Lotto> askHandLotto(Integer handAmount) {
+		List<Lotto> handLottos = new ArrayList<>();
+
+		while (handAmount > 0) {
+			String handLine = scanner.nextLine().trim();
+			if (!checkInputLottoNumbers(handLine)) continue;
+
+			handLottos.add(setLotto(handLine));
+			--handAmount;
+		}
+
+		return handLottos;
 	}
 
-	private void printOrderGroup (LottoOrderGroup group) {
+	private Integer askBonusNumber(Lotto winnerNumbers) {
+		while (true) {
+			String bonusInput = scanner.nextLine().trim();
+
+			if (!checkInputLottoNumber(bonusInput)) continue;
+			Integer bonusNumber = parseInteger(bonusInput);
+
+			if (!isContainBonus(winnerNumbers, bonusNumber)) continue;
+
+			return bonusNumber;
+		}
+	}
+
+	private Lotto askLottoWinnerNumber() {
+		while (true) {
+			String winnerLottoNumber = scanner.nextLine().trim();
+			if (!checkInputLottoNumbers(winnerLottoNumber)) continue;
+			return setLotto(winnerLottoNumber);
+		}
+	}
+
+	private Integer calcLottoAmount(String inputMoney) {
+		return Integer.parseInt(inputMoney) / LOTTO_PRICE;
+	}
+
+	private void printOrderGroup(LottoOrderGroup group) {
 		for (Lotto lotto : group.lottos()) {
 			System.out.println(lotto);
 		}
 	}
 
-	private void printAnalysis (LottoOrderGroupStatics analysis) {
+	private void printAnalysis(LottoOrderGroupStatics analysis) {
 		System.out.println(); // 줄바꿈용
 		System.out.println(PRINT_ANALYSIS_TITLE);
 		System.out.println(PRINT_LINE);
@@ -65,29 +120,14 @@ public class LottoController {
 		System.out.printf("총 수익률은 %s입니다.%n", analysis.yield());
 	}
 
-	private Integer validMoney (String inputMoney) {
-		final int money = Integer.parseInt(inputMoney);
-
-		if (money % LOTTO_PRICE > 0) {
-			throw new NumberFormatException(LOTTO_PRICE + "원단위로 입력해주세요.");
-		}
-
-		return money / LOTTO_PRICE;
-	}
-
-	private List<Integer> validWinnerNumbers (String winnerNumbers) {
+	private Lotto setLotto(String winnerNumbers) {
 		String[] stringNumbers = winnerNumbers.split(",");
-
-		if (stringNumbers.length != LOTTO_NUMBER_LENGTH) {
-			throw new IllegalArgumentException("6자리 숫자를 ,을 이용해 입력해 주세요.");
-		}
-
-		List<Integer> numbers = new ArrayList<>();
+		List<Integer> lotto = new ArrayList<>();
 
 		for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-			numbers.add(Integer.parseInt(stringNumbers[i]));
+			lotto.add(Integer.parseInt(stringNumbers[i]));
 		}
 
-		return numbers;
+		return new Lotto(lotto);
 	}
 }
