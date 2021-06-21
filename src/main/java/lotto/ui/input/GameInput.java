@@ -1,7 +1,8 @@
 package lotto.ui.input;
 
-import lotto.ui.output.GameOutput;
 import lotto.ui.output.Output;
+import lotto.util.StringUtils;
+
 import java.io.InputStream;
 import java.util.*;
 
@@ -16,7 +17,9 @@ public class GameInput implements Input {
 
     @Override
     public String request(String message) {
-        response(message);
+        if (StringUtils.isNotEmpty(message)) {
+            response(message);
+        }
 
         return scanner.nextLine();
     }
@@ -24,26 +27,5 @@ public class GameInput implements Input {
     @Override
     public void response(String message) {
         output.println(message);
-    }
-
-    public void alertWarn(String message) {
-        output.error(message);
-        output.println(String.format("다시 입력해 주시기 바랍니다.", GameOutput.NEW_LINE));
-    }
-
-    public String requestAfterNewLine(String message) {
-        output.println("");
-
-        return request(message);
-    }
-
-    public List<String> requestForMultipleValues(int count, String message) {
-        List<String> answers = new ArrayList<>(Arrays.asList(requestAfterNewLine(message)));
-
-        while (answers.size() < count) {
-            answers.add(scanner.nextLine());
-        }
-
-        return answers;
     }
 }

@@ -3,6 +3,8 @@ package lotto.core.omr;
 import lotto.core.SixBall;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
+import lotto.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +18,18 @@ public class OmrCard {
         this.omrList = new ArrayList<>();
     }
 
-    public void marking(SixBall sixBall) {
+    public void marking(final SixBall sixBall) {
         Omr omr = new Omr(sixBall);
         omrList.add(omr);
     }
 
-    public Map<Rank, List<Omr>> grade(Round round) {
+    public void auto(final int count) {
+        for (int i = 0; i < count; i++) {
+            marking(SixBall.valueOf());
+        }
+    }
+
+    public Map<Rank, List<Omr>> grade(final Round round) {
         return omrList.stream().collect(Collectors.groupingBy(x -> x.grade(round)));
     }
 

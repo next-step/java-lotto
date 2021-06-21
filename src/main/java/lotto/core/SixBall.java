@@ -1,5 +1,7 @@
 package lotto.core;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
