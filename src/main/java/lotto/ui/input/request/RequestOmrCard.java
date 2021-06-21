@@ -18,8 +18,8 @@ public class RequestOmrCard extends Request<OmrCard> {
 
     @Override
     public OmrCard input() {
-        step1();
-        step2();
+        requestLottoCount();
+        requestManual();
 
         OmrCard omrCard = lottoDTO.toEntity();
 
@@ -28,7 +28,7 @@ public class RequestOmrCard extends Request<OmrCard> {
         return omrCard;
     }
 
-    private void step1() {
+    private void requestLottoCount() {
         request(() -> lottoDTO.howMoney(input.request("구입금액을 입력해 주세요.")));
         output.println("");
 
@@ -38,7 +38,7 @@ public class RequestOmrCard extends Request<OmrCard> {
         }
     }
 
-    private void step2() {
+    private void requestManual() {
         request(() -> lottoDTO.setManualNumberBuyCount(input.request("수동으로 구매할 로또 수를 입력해 주세요.")));
         output.println("");
 
