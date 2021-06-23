@@ -36,8 +36,8 @@ public class LottoController {
         Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
-    private BunchOfLotto makeBunchOfManualLotto(int manualLottoCount){
-        BunchOfLotto bunchOfLotto= new BunchOfLotto();
+    private BunchOfLotto makeBunchOfManualLotto(int manualLottoCount) {
+        BunchOfLotto bunchOfLotto = new BunchOfLotto();
 
         for (int i = 0; i < manualLottoCount; i++) {
             String inputNumber = Input.inputManualLottoNumber();

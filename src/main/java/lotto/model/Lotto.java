@@ -29,4 +29,8 @@ public class Lotto {
     public Set<LottoNumber> getLottoNumbers() {
         return new HashSet<>(lottoNumbers);
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }

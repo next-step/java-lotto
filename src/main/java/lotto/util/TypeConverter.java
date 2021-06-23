@@ -12,7 +12,7 @@ public class TypeConverter {
     }
 
     public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
-       return Arrays.stream(inputSting.split(COMMA))
+        return Arrays.stream(inputSting.split(COMMA))
                 .map(splitString -> Integer.parseInt(splitString))
                 .map(splitInteger -> new LottoNumber(splitInteger))
                 .collect(Collectors.toSet());
