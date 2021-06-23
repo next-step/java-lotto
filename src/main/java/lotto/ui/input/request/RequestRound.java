@@ -5,24 +5,33 @@ import lotto.dto.WinningBallDTO;
 import lotto.ui.input.Input;
 import lotto.ui.output.Output;
 
-public class RequestRound extends Request<Round> {
-    private final WinningBallDTO winningBallDTO;
+public class RequestRound {
+    private final Output output;
+    private final Input<String> input;
 
     public RequestRound(final Output output, final Input<String> input) {
-        super(output, input);
-        winningBallDTO = new WinningBallDTO();
+        this.output = output;
+        this.input = input;
     }
 
-    @Override
     public Round input() {
-        request(() -> winningBallDTO.setFixedBalls(input.request("지난 주 당첨 번호를 입력해 주세요.")));
+        WinningBallDTO winningBallDTO;
+        try {
+            winningBallDTO = createRound();
+        } catch (Exception e) {
+            output.error(e.getMessage());
+            return input();
+        }
 
-        Round round = request(() -> {
-            winningBallDTO.setBounsBall(input.request("보너스 볼을 입력해 주세요."));
+        return winningBallDTO.toRound();
+    }
 
-            return winningBallDTO.toRound();
-        });
+    private WinningBallDTO createRound() {
+        WinningBallDTO winningBallDTO = new WinningBallDTO();
 
-        return round;
+        winningBallDTO.setFixedBalls(input.request("지난 주 당첨 번호를 입력해 주세요."));
+        winningBallDTO.setBounsBall(input.request("보너스 볼을 입력해 주세요."));
+
+        return winningBallDTO;
     }
 }

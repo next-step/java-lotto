@@ -7,42 +7,45 @@ import lotto.ui.output.Output;
 import java.util.stream.Collectors;
 import static lotto.ui.output.GameOutput.NEW_LINE;
 
-public class RequestOmrCard extends Request<OmrCard> {
-    private final LottoPurchaseDTO lottoDTO;
+public class RequestOmrCard {
+    private final Output output;
+    private final Input<String> input;
 
     public RequestOmrCard(final Output output, final Input<String> input) {
-        super(output, input);
-
-        lottoDTO = new LottoPurchaseDTO();
+        this.output = output;
+        this.input = input;
     }
 
-    @Override
     public OmrCard input() {
-        requestLottoCount();
-        requestManual();
-
-        OmrCard omrCard = lottoDTO.toOmrCard();
+        OmrCard omrCard;
+        try {
+            omrCard = createOmrCard();
+        } catch (Exception e) {
+            output.error(e.getMessage());
+            return input();
+        }
 
         print(omrCard);
 
         return omrCard;
     }
 
-    private void requestLottoCount() {
-        request(() -> lottoDTO.setMoney(input.request("구입금액을 입력해 주세요.")));
-        output.println("");
-    }
+    private OmrCard createOmrCard() {
+        LottoPurchaseDTO lottoDTO = new LottoPurchaseDTO();
 
-    private void requestManual() {
-        request(() -> lottoDTO.setManualCount(input.request("수동으로 구매할 로또 수를 입력해 주세요.")));
+        lottoDTO.setMoney(input.request("구입금액을 입력해 주세요."));
         output.println("");
 
-        request(() -> lottoDTO.appendManualSixBalls(input.request("수동으로 구매할 번호를 입력해 주세요.")));
+        lottoDTO.setManualCount(input.request("수동으로 구매할 로또 수를 입력해 주세요."));
+        output.println("");
 
-        for (int i = 0; i < lottoDTO.getManualCount() - 1; i++) {
-            request(() -> lottoDTO.appendManualSixBalls(input.request("")));
+        output.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < lottoDTO.getManualCount(); i++) {
+            lottoDTO.appendManualSixBalls(input.request(""));
         }
         output.println("");
+
+        return lottoDTO.toOmrCard();
     }
 
     private void print(final OmrCard omrCard) {
