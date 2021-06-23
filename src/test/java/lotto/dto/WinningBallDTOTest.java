@@ -3,7 +3,6 @@ package lotto.dto;
 import lotto.core.Machine;
 import lotto.core.exception.LottoRuleException;
 import lotto.core.round.Round;
-import lotto.dto.WinningBallDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ class WinningBallDTOTest {
         winningBallDTO.setBounsBall("7");
 
         //Then
-        Round round = winningBallDTO.toEntity();
+        Round round = winningBallDTO.toRound();
         assertAll(
             () -> assertThat(round.getSixBall().contains(Machine.draw(1))).isTrue(),
             () -> assertThat(round.getSixBall().contains(Machine.draw(2))).isTrue(),
@@ -81,7 +80,7 @@ class WinningBallDTOTest {
         winningBallDTO.setFixedBalls("1, 2, 3, 4, 5, 6");
         winningBallDTO.setBounsBall(String.valueOf(bouns));
 
-        assertThatThrownBy(() -> winningBallDTO.toEntity())
+        assertThatThrownBy(() -> winningBallDTO.toRound())
                 .isInstanceOf(LottoRuleException.class)
                 .hasMessageContaining("보너스 볼").hasMessageContaining("당첨 번호에 포함");
     }

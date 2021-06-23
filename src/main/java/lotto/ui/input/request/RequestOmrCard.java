@@ -21,7 +21,7 @@ public class RequestOmrCard extends Request<OmrCard> {
         requestLottoCount();
         requestManual();
 
-        OmrCard omrCard = lottoDTO.toEntity();
+        OmrCard omrCard = lottoDTO.toOmrCard();
 
         print(omrCard);
 

@@ -10,7 +10,7 @@ import lotto.util.StringUtils;
 
 @Getter
 @ToString
-public class WinningBallDTO extends BaseRequestDTO<Round> {
+public class WinningBallDTO {
     private SixBall fixedBall;
     private Ball bounsBall;
 
@@ -38,8 +38,15 @@ public class WinningBallDTO extends BaseRequestDTO<Round> {
         }
     }
 
-    @Override
-    public Round toEntity() {
+    public Round toRound() {
         return new Round(fixedBall, bounsBall);
+    }
+
+    private int parseIntElseThrow(final String textMoney, String errorMessage) {
+        try {
+            return Integer.parseInt(textMoney);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }

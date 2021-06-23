@@ -11,7 +11,7 @@ import static lotto.ui.Program.PRICE_OF_ONE_GAME;
 
 @Getter
 @ToString
-public class LottoPurchaseDTO extends BaseRequestDTO<OmrCard> {
+public class LottoPurchaseDTO {
     private int totalCount;
     private int autoCount;
     private int manualCount;
@@ -41,8 +41,7 @@ public class LottoPurchaseDTO extends BaseRequestDTO<OmrCard> {
         }
     }
 
-    @Override
-    public OmrCard toEntity() {
+    public OmrCard toOmrCard() {
         OmrCard omrCard = new OmrCard();
 
         //maanual
@@ -84,5 +83,13 @@ public class LottoPurchaseDTO extends BaseRequestDTO<OmrCard> {
             throw new IllegalArgumentException(String.format("수동으로 최대 %d개만 살수있습니다.", totalCount));
         }
         return manualCount;
+    }
+
+    private int parseIntElseThrow(final String textMoney, String errorMessage) {
+        try {
+            return Integer.parseInt(textMoney);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }

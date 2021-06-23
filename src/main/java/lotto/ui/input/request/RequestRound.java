@@ -20,7 +20,7 @@ public class RequestRound extends Request<Round> {
         Round round = request(() -> {
             winningBallDTO.setBounsBall(input.request("보너스 볼을 입력해 주세요."));
 
-            return winningBallDTO.toEntity();
+            return winningBallDTO.toRound();
         });
 
         return round;

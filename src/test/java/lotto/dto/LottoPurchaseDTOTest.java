@@ -1,7 +1,6 @@
 package lotto.dto;
 
 import lotto.core.omr.OmrCard;
-import lotto.dto.LottoPurchaseDTO;
 import lotto.ui.Program;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +34,7 @@ class LottoPurchaseDTOTest {
         }
 
         //Then
-        OmrCard omrCard = lottoPurchaseDTO.toEntity();
+        OmrCard omrCard = lottoPurchaseDTO.toOmrCard();
         assertAll(
             () -> assertThat(omrCard.size()).isEqualTo(expectedTotal),
             () -> assertThat(lottoPurchaseDTO.getManualCount()).isEqualTo(manual),
