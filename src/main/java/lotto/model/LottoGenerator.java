@@ -10,9 +10,9 @@ import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
 
 public class LottoGenerator {
     private static final String CAN_NOT_INPUT_NULL_MESSAGE = "공백은 입력 할 수 없습니다.";
-    private static final List<Integer> numbers =
+    private static final List<LottoNumber> numbers =
             IntStream.rangeClosed(1, 45)
-                    .boxed()
+                    .mapToObj(number -> new LottoNumber(number))
                     .collect(Collectors.toList());
 
     private LottoGenerator() {
@@ -46,7 +46,7 @@ public class LottoGenerator {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (int i = 0; i < CORRECT_LOTTO_NUMBERS_SIZE; i++) {
-            lottoNumbers.add(new LottoNumber(numbers.get(i)));
+            lottoNumbers.add(numbers.get(i));
         }
 
         return new Lotto(lottoNumbers);
