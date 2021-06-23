@@ -3,17 +3,17 @@ package lotto.model;
 import lotto.util.TypeConverter;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
 
 public class LottoGenerator {
     private static final String CAN_NOT_INPUT_NULL_MESSAGE = "공백은 입력 할 수 없습니다.";
-    private static final List<Integer> numbers = new ArrayList<>(
-            Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-                    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-                    41, 42, 43, 44, 45));
+    private static final List<Integer> numbers =
+            IntStream.rangeClosed(1, 45)
+                    .boxed()
+                    .collect(Collectors.toList());
 
     private LottoGenerator() {
     }
