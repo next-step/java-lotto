@@ -26,7 +26,7 @@ public class BunchOfLottoTest {
     @Test
     void addBunchOfLottoTest() {
         BunchOfLotto bunchOfLotto = new BunchOfLotto();
-        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(5));
+        bunchOfLotto.addBunchOfLotto(LottoGenerator.makeBunchOfAutoLotto(5));
 
         assertThat(bunchOfLotto.getBunchOfLotto().size()).isEqualTo(5);
     }
@@ -38,7 +38,7 @@ public class BunchOfLottoTest {
 
         Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, incorrectBonusBall);
-        BunchOfLotto bunchOfLotto = new BunchOfLotto(1);
+        BunchOfLotto bunchOfLotto = LottoGenerator.makeBunchOfAutoLotto(1);
 
         assertThat(bunchOfLotto.makeRewards(winningLotto).getClass()).isEqualTo(Prizes.class);
     }

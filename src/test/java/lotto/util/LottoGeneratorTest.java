@@ -1,6 +1,9 @@
-package lotto.model;
+package lotto.util;
 
-import lotto.util.LottoGenerator;
+import lotto.model.BunchOfLotto;
+import lotto.model.Lotto;
+import lotto.model.PurchaseCalculator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,5 +25,15 @@ public class LottoGeneratorTest {
     void makeManualLottoTest(String inputNumber) {
 
         assertThat(LottoGenerator.makeManualLotto(inputNumber).getClass()).isEqualTo(Lotto.class);
+    }
+
+    @DisplayName("로또생성기는 구입 가능한 로또의 수 만큼 자동 로또를 발급한다.")
+    @Test
+    void getBunchOfAutoLottoTest() {
+        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(14000);
+        int purchasedLottoCount = purchaseCalculator.getPurchasableCount();
+        BunchOfLotto bunchOfLotto = LottoGenerator.makeBunchOfAutoLotto(purchasedLottoCount);
+
+        Assertions.assertThat(bunchOfLotto.getBunchOfLotto().size()).isEqualTo(purchasedLottoCount);
     }
 }

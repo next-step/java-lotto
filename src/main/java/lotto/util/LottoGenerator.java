@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.model.BunchOfLotto;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
@@ -26,6 +27,16 @@ public class LottoGenerator {
         if (inputNumber == null) {
             throw new IllegalArgumentException(CAN_NOT_INPUT_NULL_MESSAGE);
         }
+    }
+
+    public static BunchOfLotto makeBunchOfAutoLotto(int purchasedLottoCount) {
+        BunchOfLotto bunchOfLotto = new BunchOfLotto();
+
+        for (int i = 0; i < purchasedLottoCount; i++) {
+            bunchOfLotto.addLotto(LottoGenerator.makeAutoLotto());
+        }
+
+        return new BunchOfLotto(bunchOfLotto);
     }
 
     public static Lotto makeAutoLotto() {

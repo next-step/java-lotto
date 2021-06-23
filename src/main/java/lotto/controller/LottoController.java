@@ -25,7 +25,7 @@ public class LottoController {
 
         purchaseCalculator.buySomeBunchOfLotto(autoLottoCount);
         Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
-        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(autoLottoCount));
+        bunchOfLotto.addBunchOfLotto(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
 
         Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
