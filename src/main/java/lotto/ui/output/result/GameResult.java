@@ -42,7 +42,7 @@ public class GameResult {
 
     private int count(Rank rank) {
         return Optional.ofNullable(result.get(rank))
-            .orElse(Collections.EMPTY_LIST)
+            .orElse(Collections.emptyList())
             .size();
     }
 

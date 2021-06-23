@@ -6,7 +6,7 @@ import lotto.util.StringUtils;
 import java.io.InputStream;
 import java.util.*;
 
-public class GameInput implements Input {
+public class GameInput implements Input<String> {
     private final Scanner scanner;
     private final Output output;
 
