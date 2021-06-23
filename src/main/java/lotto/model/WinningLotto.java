@@ -19,15 +19,18 @@ public class WinningLotto {
             throw new IllegalArgumentException(BONUS_BALL_CONTAIN_LOTTO_NUMBER_MESSAGE);
         }
     }
+    public Reward getReward(Lotto lotto){
+        return Reward.getReward(makeWinningCount(lotto.getLottoNumbers()), checkBonusCount(lotto));
+    }
 
-    public int makeWinningCount(Set<LottoNumber> lottoNumbers) {
+    private int makeWinningCount(Set<LottoNumber> lottoNumbers) {
         Set<LottoNumber> winningLottoNumbers = winningLotto.getLottoNumbers();
         return (int) lottoNumbers.stream()
-                .filter((lottoNumber) -> winningLottoNumbers.contains(lottoNumber))
+                .filter(winningLottoNumbers::contains)
                 .count();
     }
 
-    public boolean checkBonusCount(Lotto lotto) {
+    private boolean checkBonusCount(Lotto lotto) {
         return lotto.contain(this.bonusBall);
     }
 }

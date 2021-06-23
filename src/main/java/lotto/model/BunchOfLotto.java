@@ -20,7 +20,7 @@ public class BunchOfLotto {
 
     public Prizes makeRewards(WinningLotto winningLotto) {
         List<Reward> prizes = bunchOfLotto.stream()
-                .map(lotto -> Reward.getReward(winningLotto.makeWinningCount(lotto.getLottoNumbers()), winningLotto.checkBonusCount(lotto)))
+                .map(lotto -> winningLotto.getReward(lotto))
                 .collect(Collectors.toList());
 
         return new Prizes(prizes);
@@ -30,8 +30,8 @@ public class BunchOfLotto {
         this.bunchOfLotto.add(lotto);
     }
 
-    public void addBunchOfLotto(List<Lotto> bunchOfLotto) {
-        this.bunchOfLotto.addAll(bunchOfLotto);
+    public void addBunchOfLotto(BunchOfLotto bunchOfLotto) {
+        this.bunchOfLotto.addAll(bunchOfLotto.getBunchOfLotto());
     }
 
     public List<Lotto> getBunchOfLotto() {
