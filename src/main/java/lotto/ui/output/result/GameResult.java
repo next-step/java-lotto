@@ -4,7 +4,6 @@ import lotto.core.omr.Omr;
 import lotto.core.omr.OmrCard;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
-import lotto.ui.Program;
 import lotto.util.RateUtils;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +17,7 @@ public class GameResult {
 
     public GameResult(OmrCard omrCard, Round round) {
         this.result = omrCard.grade(round);
-        this.totalPrice = calcTotalPrice(omrCard);
+        this.totalPrice = omrCard.getTotalPrice();
         this.totalWinningMoney = calcTotalWinningMoney();
     }
 
@@ -44,10 +43,6 @@ public class GameResult {
         return Optional.ofNullable(result.get(rank))
             .orElse(Collections.emptyList())
             .size();
-    }
-
-    private double calcTotalPrice(OmrCard omrCard) {
-        return omrCard.size() * Program.PRICE_OF_ONE_GAME;
     }
 
     private double calcTotalWinningMoney() {

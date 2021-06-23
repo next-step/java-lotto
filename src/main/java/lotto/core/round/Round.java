@@ -14,21 +14,21 @@ public class Round {
     private final SixBall sixBall;
     private final Ball bonusBall;
 
-    public Round(SixBall sixBall, int bonus) {
+    public Round(WinSixBall sixBall, int bonus) {
         this(DEFAULT_ROUND, sixBall, Machine.draw(bonus));
     }
 
-    public Round(SixBall sixBall, Ball bonusBall) {
+    public Round(WinSixBall sixBall, Ball bonusBall) {
         this(DEFAULT_ROUND, sixBall, bonusBall);
     }
 
-    public Round(int round, SixBall sixBall, int bonus) {
+    public Round(int round, WinSixBall sixBall, int bonus) {
         this(round, sixBall, Machine.draw(bonus));
     }
 
-    public Round(int round, SixBall sixBall, Ball bonusBall) {
+    public Round(int round, WinSixBall sixBall, Ball bonusBall) {
         this.round = round;
-        this.sixBall = sixBall;
+        this.sixBall = sixBall.toSixBall();
         this.bonusBall = bonusBall;
 
         if (validation()) {

@@ -3,6 +3,7 @@ package lotto.core.omr;
 import lotto.core.SixBall;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
+import lotto.core.round.WinSixBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -17,7 +18,7 @@ class OmrCardTest {
     @DisplayName("OMR 카드 다중 마킹후 당첨번호와 비교")
     public void missTest() {
         //Given
-        OmrCard omrCard = new OmrCard();
+        OmrCard omrCard = new OmrCard(Purchase.valueOf(5000));
 
         omrCard.marking(SixBall.valueOf(1, 2, 3, 4, 5, 6));
         omrCard.marking(SixBall.valueOf(1, 2, 3, 4, 5, 16));
@@ -26,7 +27,7 @@ class OmrCardTest {
         omrCard.marking(SixBall.valueOf(31, 32, 33, 34, 35, 36));
 
         //When
-        Round round = new Round(SixBall.valueOf(1, 2, 3, 4, 5, 6), 7);
+        Round round = new Round(WinSixBall.valueOf(1, 2, 3, 4, 5, 6), 7);
 
         //Then
         Map<Rank, List<Omr>> rankListMap = omrCard.grade(round);

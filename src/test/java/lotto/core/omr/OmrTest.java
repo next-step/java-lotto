@@ -3,6 +3,7 @@ package lotto.core.omr;
 import lotto.core.SixBall;
 import lotto.core.round.Rank;
 import lotto.core.round.Round;
+import lotto.core.round.WinSixBall;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class OmrTest {
 
     @BeforeAll
     public static void mySixBall() {
-        round = new Round(SixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6), WIN_BONUS);
+        round = new Round(WinSixBall.valueOf(WIN_NUM1, WIN_NUM2, WIN_NUM3, WIN_NUM4, WIN_NUM5, WIN_NUM6), WIN_BONUS);
     }
 
     @Test

@@ -29,31 +29,24 @@ public class RequestOmrCard extends Request<OmrCard> {
     }
 
     private void requestLottoCount() {
-        request(() -> lottoDTO.howMoney(input.request("구입금액을 입력해 주세요.")));
+        request(() -> lottoDTO.setMoney(input.request("구입금액을 입력해 주세요.")));
         output.println("");
-
-        if (lottoDTO.isChange()) {
-            input.response((String.format("거스름돈 %d원을 돌려드립니다.", lottoDTO.getChange())));
-            output.println("");
-        }
     }
 
     private void requestManual() {
-        request(() -> lottoDTO.setManualNumberBuyCount(input.request("수동으로 구매할 로또 수를 입력해 주세요.")));
+        request(() -> lottoDTO.setManualCount(input.request("수동으로 구매할 로또 수를 입력해 주세요.")));
         output.println("");
 
-        if (lottoDTO.isManual()) {
-            request(() -> lottoDTO.appendManualSixBalls(input.request("수동으로 구매할 번호를 입력해 주세요.")));
+        request(() -> lottoDTO.appendManualSixBalls(input.request("수동으로 구매할 번호를 입력해 주세요.")));
 
-            for (int i = 0; i < lottoDTO.getManualCount() - 1; i++) {
-                request(() -> lottoDTO.appendManualSixBalls(input.request("")));
-            }
-            output.println("");
+        for (int i = 0; i < lottoDTO.getManualCount() - 1; i++) {
+            request(() -> lottoDTO.appendManualSixBalls(input.request("")));
         }
+        output.println("");
     }
 
     private void print(final OmrCard omrCard) {
-        output.println(lottoDTO.result());
+        output.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", omrCard.getManualCount(), omrCard.getAutoCount()));
         output.println(
                 omrCard.stream()
                         .map(omr -> omr.toString())

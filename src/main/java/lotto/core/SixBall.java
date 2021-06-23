@@ -1,7 +1,5 @@
 package lotto.core;
 
-import lombok.EqualsAndHashCode;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,10 +37,6 @@ public class SixBall {
 
     public boolean contains(Ball ball) {
         return balls.contains(ball);
-    }
-
-    public static boolean isLengthValidation(int length) {
-        return length < LENGTH;
     }
 
     @Override

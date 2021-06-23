@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -51,20 +50,6 @@ class WinningBallDTOTest {
                 .hasMessageContaining("숫자만 가능");
     }
 
-    @DisplayName("로또 당첨번호가 중복이 포함되거나 6개 이하를 입력하는 경우")
-    @Test
-    public void toRoundException2() {
-        assertAll(
-            () -> assertThatThrownBy(() -> winningBallDTO.setFixedBalls("1, 2, 3"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호는 총").hasMessageContaining("개를 입력"),
-
-            () ->assertThatThrownBy(() -> winningBallDTO.setFixedBalls("1, 1, 3, 4, 5, 6"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호는 총").hasMessageContaining("개를 입력")
-        );
-    }
-
     @DisplayName("로또 보너스 당첨번호가 숫자가 아닌 경우")
     @Test
     public void toRoundException3() {
@@ -83,6 +68,28 @@ class WinningBallDTOTest {
         assertThatThrownBy(() -> winningBallDTO.toRound())
                 .isInstanceOf(LottoRuleException.class)
                 .hasMessageContaining("보너스 볼").hasMessageContaining("당첨 번호에 포함");
+    }
+
+    @DisplayName("로또 당첨번호가 6개 이하를 입력하는 경우")
+    @Test
+    public void toRoundException5() {
+        winningBallDTO.setFixedBalls("1, 2, 3, 4");
+        winningBallDTO.setBounsBall("45");
+
+        assertThatThrownBy(() -> winningBallDTO.toRound())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호는 총").hasMessageContaining("개를 입력");
+    }
+
+    @DisplayName("로또 당첨번호가 중복이 포함되는 경우")
+    @Test
+    public void toRoundException6() {
+        winningBallDTO.setFixedBalls("1, 1, 1, 4, 5, 6");
+        winningBallDTO.setBounsBall("45");
+
+        assertThatThrownBy(() -> winningBallDTO.toRound())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호는 총").hasMessageContaining("개를 입력");
     }
 
 }
