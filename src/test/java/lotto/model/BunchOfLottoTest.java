@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.util.BunchOfLottoGenerator;
 import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
 
-import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
+import static lotto.util.TypeConverter.convertStringToLottoNumberSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BunchOfLottoTest {
@@ -27,7 +26,7 @@ public class BunchOfLottoTest {
     @Test
     void addBunchOfLottoTest() {
         BunchOfLotto bunchOfLotto = new BunchOfLotto();
-        bunchOfLotto.addBunchOfLotto(BunchOfLottoGenerator.makeBunchOfLotto(5));
+        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(5));
 
         assertThat(bunchOfLotto.getBunchOfLotto().size()).isEqualTo(5);
     }

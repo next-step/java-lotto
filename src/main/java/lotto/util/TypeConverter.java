@@ -5,17 +5,16 @@ import lotto.model.LottoNumber;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TypeConvert {
+public class TypeConverter {
     private static final String COMMA = ",";
 
-    private TypeConvert() {
+    private TypeConverter() {
     }
 
     public static Set<LottoNumber> convertStringToLottoNumberSet(String inputSting) {
-        List<String> stringList = Arrays.asList(inputSting.split(COMMA));
-
-        return stringList.stream()
-                .map((element) -> new LottoNumber(Integer.parseInt(element)))
+       return Arrays.stream(inputSting.split(COMMA))
+                .map(splitString -> Integer.parseInt(splitString))
+                .map(splitInteger -> new LottoNumber(splitInteger))
                 .collect(Collectors.toSet());
     }
 }
