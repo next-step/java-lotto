@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.util.LottoGenerator;
+import lotto.model.LottoGenerator;
 import lotto.view.Input;
 import lotto.view.Output;
 

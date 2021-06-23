@@ -1,17 +1,19 @@
-package lotto.util;
+package lotto.model;
 
-import lotto.model.BunchOfLotto;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
+import lotto.util.TypeConverter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import static lotto.model.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
 
 public class LottoGenerator {
     private static final String CAN_NOT_INPUT_NULL_MESSAGE = "공백은 입력 할 수 없습니다.";
+    private static final List<Integer> numbers = new ArrayList<>(
+            Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                    31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+                    41, 42, 43, 44, 45));
 
     private LottoGenerator() {
     }
@@ -40,16 +42,13 @@ public class LottoGenerator {
     }
 
     public static Lotto makeAutoLotto() {
+        Collections.shuffle(numbers);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        while (lottoNumbers.size() < CORRECT_LOTTO_NUMBERS_SIZE) {
-            lottoNumbers.add(new LottoNumber(makeRandomNumber()));
+        for (int i = 0; i < CORRECT_LOTTO_NUMBERS_SIZE; i++) {
+            lottoNumbers.add(new LottoNumber(numbers.get(i)));
         }
 
         return new Lotto(lottoNumbers);
-    }
-
-    private static Integer makeRandomNumber() {
-        return (int) (Math.random() * CANDIDATE_LOTTO_NUMBER_SIZE) + 1;
     }
 }
