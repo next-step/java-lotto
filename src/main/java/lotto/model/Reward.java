@@ -11,12 +11,12 @@ public enum Reward {
     FIRST_PRIZE(6, false, 2_000_000_000);
 
     private final int matchCount;
-    private final boolean bonusBall;
+    private final boolean isBonusBallMatched;
     private final int prizeMoney;
 
-    Reward(int matchCount, boolean bonusBall, int reward) {
+    Reward(int matchCount, boolean isBonusBallMatched, int reward) {
         this.matchCount = matchCount;
-        this.bonusBall = bonusBall;
+        this.isBonusBallMatched = isBonusBallMatched;
         this.prizeMoney = reward;
     }
 
@@ -24,17 +24,13 @@ public enum Reward {
         return prizeMoney;
     }
 
-    private int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public static Reward getReward(int matchCount, boolean bonusBall) {
-        if (matchCount == SECOND_PRIZE.matchCount && bonusBall == SECOND_PRIZE.bonusBall) {
+    public static Reward getReward(int matchCount, boolean isBonusBallMatched) {
+        if (matchCount == SECOND_PRIZE.matchCount && isBonusBallMatched == SECOND_PRIZE.isBonusBallMatched) {
             return SECOND_PRIZE;
         }
 
         return Arrays.stream(Reward.values())
-                .filter(reward -> reward.getMatchCount() == matchCount)
+                .filter(reward -> reward.matchCount == matchCount)
                 .findAny()
                 .orElse(SIXTH_PRIZE);
     }
