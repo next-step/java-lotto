@@ -8,27 +8,24 @@ import lotto.view.Output;
 import java.math.BigDecimal;
 import java.util.Set;
 
-import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
+import static lotto.util.TypeConverter.convertStringToLottoNumberSet;
 
 public class LottoController {
-    private static final String CAN_NOT_PURCHASE_MESSAGE = "구입가능한 금액을 초과했습니다";
-    private static final int PURCHASABLE_COUNT = 0;
 
     public void run() {
-        purchaseCalculator purchaseCalculator = new purchaseCalculator(Input.inputMoneyForPurchase());
-        int purchasableLottoCount = purchaseCalculator.calculatePurchasableCount();
-
+        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
         int manualLottoCount = Input.inputManualLottoCount();
-        Output.printInputManualLottoNumberMessage();
-        validateManualLottoCount(purchasableLottoCount, manualLottoCount);
-
         BunchOfLotto bunchOfLotto = new BunchOfLotto();
-        addSeveralManualLotto(bunchOfLotto, manualLottoCount);
 
-        int autoLottoCount = purchasableLottoCount - manualLottoCount;
+        Output.printInputManualLottoNumberMessage();
+        purchaseCalculator.buySomeBunchOfLotto(manualLottoCount);
+        bunchOfLotto.addBunchOfLotto(makeBunchOfManualLotto(manualLottoCount));
 
+        int autoLottoCount = purchaseCalculator.getPurchasableCount();
+
+        purchaseCalculator.buySomeBunchOfLotto(autoLottoCount);
         Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
-        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(autoLottoCount).getBunchOfLotto());
+        bunchOfLotto.addBunchOfLotto(new BunchOfLotto(autoLottoCount));
 
         Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
 
@@ -39,18 +36,16 @@ public class LottoController {
         Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
-    private void addSeveralManualLotto(BunchOfLotto bunchOfLotto, int autoLottoCount) {
-        for (int i = 0; i < autoLottoCount; i++) {
+    private BunchOfLotto makeBunchOfManualLotto(int manualLottoCount){
+        BunchOfLotto bunchOfLotto= new BunchOfLotto();
+
+        for (int i = 0; i < manualLottoCount; i++) {
             String inputNumber = Input.inputManualLottoNumber();
             bunchOfLotto.addLotto(LottoGenerator.makeManualLotto(inputNumber));
         }
+        return bunchOfLotto;
     }
 
-    private void validateManualLottoCount(int purchasableLottoCount, int manualLottoCount) {
-        if (purchasableLottoCount - manualLottoCount < PURCHASABLE_COUNT) {
-            throw new IllegalArgumentException(CAN_NOT_PURCHASE_MESSAGE);
-        }
-    }
 
     private WinningLotto makeWinningLotto() {
         Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());

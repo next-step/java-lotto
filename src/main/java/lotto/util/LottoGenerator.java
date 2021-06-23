@@ -3,10 +3,8 @@ package lotto.util;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static lotto.model.Lotto.CANDIDATE_LOTTO_NUMBER_SIZE;
 import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
@@ -19,12 +17,7 @@ public class LottoGenerator {
 
     public static Lotto makeManualLotto(String inputNumber) {
         validateInputNumber(inputNumber);
-
-        Set<LottoNumber> lottoNumbers =
-                Arrays.stream(inputNumber.split(","))
-                        .map(splitString -> Integer.parseInt(splitString))
-                        .map(splitInteger -> new LottoNumber(splitInteger))
-                        .collect(Collectors.toSet());
+        Set<LottoNumber> lottoNumbers = TypeConverter.convertStringToLottoNumberSet(inputNumber);
 
         return new Lotto(lottoNumbers);
     }
