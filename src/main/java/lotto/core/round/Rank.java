@@ -2,7 +2,9 @@ package lotto.core.round;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -59,20 +61,20 @@ public enum Rank {
         return this.winningMoney > 0;
     }
 
-    public static Rank[] winningValues() {
+    public static List<Rank> winningValues() {
         return values(Rank::isWinning);
     }
 
-    public static Rank[] duplicateMatchValues() {
+    public static List<Rank> duplicateMatchValues() {
         return values(Rank::isDuplicateMatch);
     }
 
-    private static Rank[] values(Predicate<Rank> predicate) {
+    private static List<Rank> values(Predicate<Rank> predicate) {
         Rank[] ranks = Rank.values();
 
         return Arrays.stream(ranks)
                 .filter(predicate)
                 .sorted(Comparator.comparing(Rank::winningMoney))
-                .toArray(Rank[]::new);
+                .collect(Collectors.toList());
     }
 }

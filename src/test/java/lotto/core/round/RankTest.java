@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 등급")
@@ -68,7 +70,7 @@ class RankTest {
     @Test
     @DisplayName("당청금이 존재하는 등급 확인")
     public void winningValuesTest() {
-        Rank[] ranks = Rank.winningValues();
+        List<Rank> ranks = Rank.winningValues();
 
         assertThat(ranks).containsExactly(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
@@ -76,7 +78,7 @@ class RankTest {
     @Test
     @DisplayName("로또 정답갯수가 동일한 등급 확인")
     public void duplicateMatchValuesTest() {
-        Rank[] ranks = Rank.duplicateMatchValues();
+        List<Rank> ranks = Rank.duplicateMatchValues();
 
         assertThat(ranks).containsExactly(Rank.THIRD, Rank.SECOND);
     }

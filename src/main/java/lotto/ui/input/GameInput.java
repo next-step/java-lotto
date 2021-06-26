@@ -1,12 +1,14 @@
 package lotto.ui.input;
 
 import lotto.ui.output.Output;
-import java.io.InputStream;
-import java.util.Scanner;
+import lotto.util.StringUtils;
 
-public class GameInput implements Input {
-    private Scanner scanner;
-    private Output output;
+import java.io.InputStream;
+import java.util.*;
+
+public class GameInput implements Input<String> {
+    private final Scanner scanner;
+    private final Output output;
 
     public GameInput(InputStream stream, Output output) {
         this.scanner = new Scanner(stream);
@@ -15,7 +17,9 @@ public class GameInput implements Input {
 
     @Override
     public String request(String message) {
-        response(message);
+        if (StringUtils.isNotEmpty(message)) {
+            response(message);
+        }
 
         return scanner.nextLine();
     }
@@ -23,10 +27,5 @@ public class GameInput implements Input {
     @Override
     public void response(String message) {
         output.println(message);
-    }
-
-    public void redirectResponse(String message) {
-        output.error(message);
-        output.println("다시 입력해 주시기 바랍니다.\n");
     }
 }

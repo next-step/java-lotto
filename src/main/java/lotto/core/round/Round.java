@@ -1,11 +1,12 @@
 package lotto.core.round;
 
+import lombok.Getter;
 import lotto.core.Ball;
 import lotto.core.Machine;
 import lotto.core.SixBall;
 import lotto.core.exception.LottoRuleException;
-import java.util.stream.Stream;
 
+@Getter
 public class Round {
     private static final int DEFAULT_ROUND = 0;
 
@@ -13,26 +14,40 @@ public class Round {
     private final SixBall sixBall;
     private final Ball bonusBall;
 
-    public Round(SixBall sixBall, int bonus) {
-        this(DEFAULT_ROUND, sixBall, bonus);
+    public Round(WinSixBall sixBall, int bonus) {
+        this(DEFAULT_ROUND, sixBall, Machine.draw(bonus));
     }
 
-    public Round(int round, SixBall sixBall, int bonus) {
+    public Round(WinSixBall sixBall, Ball bonusBall) {
+        this(DEFAULT_ROUND, sixBall, bonusBall);
+    }
+
+    public Round(int round, WinSixBall sixBall, int bonus) {
+        this(round, sixBall, Machine.draw(bonus));
+    }
+
+    public Round(int round, WinSixBall sixBall, Ball bonusBall) {
         this.round = round;
-        this.sixBall = sixBall;
-        this.bonusBall = Machine.draw(bonus);
+        this.sixBall = sixBall.toSixBall();
+        this.bonusBall = bonusBall;
 
         if (validation()) {
             throw new LottoRuleException("보너스 볼이 당첨 번호에 포함되어 있습니다.");
         }
     }
 
-    public Stream<Ball> stream() {
-        return sixBall.stream();
+    public Rank grade(final SixBall sixBall) {
+        return Rank.valueOf(matchCount(sixBall), isMatchBonus(sixBall));
     }
 
-    public Ball getBonusBall() {
-        return bonusBall;
+    private int matchCount(final SixBall expectedSixBall) {
+        return (int) sixBall.stream()
+                .filter(expectedSixBall::contains)
+                .count();
+    }
+
+    private boolean isMatchBonus(SixBall sixBall) {
+        return sixBall.contains(bonusBall);
     }
 
     private boolean validation() {

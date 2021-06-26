@@ -8,34 +8,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OmrCard {
-    public static final int PRICE = 1000;
     private final List<Omr> omrList;
+    private final Purchase purchase;
 
-    public OmrCard() {
+    protected OmrCard(Purchase purchase) {
+        this.purchase = purchase;
         this.omrList = new ArrayList<>();
     }
 
-    public static boolean isValidateMinimumAmount(int money) {
-        return money < PRICE;
-    }
-
-    public void marking(SixBall sixBall) {
+    public void marking(final SixBall sixBall) {
         Omr omr = new Omr(sixBall);
         omrList.add(omr);
     }
 
-    public Map<Rank, List<Omr>> grade(Round round) {
-        return omrList.stream().collect(Collectors.groupingBy(x->x.grade(round)));
+    public void auto(final int count) {
+        for (int i = 0; i < count; i++) {
+            marking(SixBall.valueOf());
+        }
     }
 
-    public int size() {
-        return omrList.size();
+    public Map<Rank, List<Omr>> grade(final Round round) {
+        return omrList.stream().collect(Collectors.groupingBy(x -> x.grade(round)));
+    }
+
+    public int getTotalPrice() {
+        return purchase.getTotalPrice();
+    }
+
+    public int getAutoCount() {
+        return purchase.getAutoCount();
+    }
+
+    public int getManualCount() {
+        return purchase.getManualCount();
+    }
+
+    public Stream<Omr> stream() {
+        return omrList.stream();
     }
 
     @Override
     public String toString() {
-        return String.format("구입 갯수 : %d\n조회 : %s", size(), omrList.toString());
+        return omrList.toString();
     }
 }

@@ -4,15 +4,17 @@ import lotto.core.omr.OmrCard;
 import lotto.core.round.Round;
 import lotto.ui.input.GameInput;
 import lotto.ui.input.Input;
-import lotto.ui.input.info.OmrCardInputData;
-import lotto.ui.input.info.RoundInputData;
+import lotto.ui.input.request.RequestOmrCard;
+import lotto.ui.input.request.RequestRound;
 import lotto.ui.output.GameOutput;
 import lotto.ui.output.Output;
 import lotto.ui.output.report.GameReport;
+import lotto.ui.output.report.NextStepProblemGameGameReport;
+import lotto.ui.output.result.GameResult;
 
 public class Program {
-    private Output output;
-    private Input input;
+    private final Output output;
+    private final Input<String> input;
 
     public Program() {
         this.output = new GameOutput(System.out);
@@ -20,11 +22,17 @@ public class Program {
     }
 
     public void run() {
-        OmrCard omrCard = new OmrCardInputData(input).request();
-        Round round = new RoundInputData(input).request();
+        OmrCard omrCard = new RequestOmrCard(output, input).input();
+        Round round = new RequestRound(output, input).input();
 
-        GameReport report = new GameReport(omrCard, round);
-        report.print(output);
+        reportPrint(omrCard, round);
+    }
+
+    private void reportPrint(final OmrCard omrCard, final Round round) {
+        GameResult gameResult = new GameResult(omrCard, round);
+        GameReport gameReport = new NextStepProblemGameGameReport();
+
+        output.println(gameReport.format(gameResult));
     }
 
 }

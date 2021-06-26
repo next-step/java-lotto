@@ -12,13 +12,7 @@ public class Omr {
     }
 
     protected Rank grade(Round round) {
-        int count = (int) round.stream()
-                .filter(sixBall::contains)
-                .count();
-
-        boolean matchBonus = sixBall.contains(round.getBonusBall());
-
-        return Rank.valueOf(count, matchBonus);
+        return round.grade(sixBall);
     }
 
     @Override
