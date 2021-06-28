@@ -32,7 +32,7 @@
   * [x] Lotto : [set(LottoNumber)] 로또
   * [ ] Lottos : [List(Lotto)] 로또 목록
   * [x] LottoMachine : 로또 추첨기 return Lotto
-  * [ ] ShuffleStrategy : 셔플
+  * [ ] [??] ShuffleStrategy : 셔플
   * [ ] Rank : [Enum] 순위 
   * [ ] WinningStatistics : [Map<Rank, long>] 당첨통계 
   
