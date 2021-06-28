@@ -10,7 +10,6 @@ import java.util.List;
 public class LottoAutoController {
     private LottoAutoInputView inputView = new LottoAutoInputView();
     private LottoAutoOutputView outputView = new LottoAutoOutputView();
-    private WinningResult winningResult;
 
     public void start() {
         LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
@@ -23,9 +22,9 @@ public class LottoAutoController {
         LottoNumber bonusNumber = inputView.inputBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
-        outputView.outputWinningResults(winningResult.getNumberOfWins());
-        outputView.outputEarningRate(lottos.calculateEarningRate(winningResult.calculateEarningPrice(), lottoPrice.getPrice()));
+        WinningResults winningResults = lottos.countWinningResults(winningLotto);
+        outputView.outputWinningResults(winningResults.getWinningResults());
+        outputView.outputEarningRate(winningResults.calculateEarningRate(lottoPrice.getPrice()));
     }
 
     private Lotto convertWinningNumbers(String winningStringNumbers) {
