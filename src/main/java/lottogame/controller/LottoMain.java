@@ -1,5 +1,6 @@
 package lottogame.controller;
 
+import lottogame.model.Lotto;
 import lottogame.service.LottoGame;
 import lottogame.view.InputView;
 import lottogame.view.OutputView;
@@ -23,6 +24,9 @@ public class LottoMain {
         lottoGame.purchaseManualLottoList(manualLottoList);
         lottoGame.purchaseAutoLottoList(autoBuyCount);
         outputView.resultLottoList(lottoGame.getLottos());
+        Lotto winningLotto = lottoGame.getWinningLotto(inputView.inputWinningLottoNumber());
+        int bonusNumber = inputView.inputBonusNumber();
+
 
     }
 }

@@ -22,7 +22,7 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
-    public Lotto generateManualLotto(String lottoNumbersStr) {
+    public Lotto generateLotto(String lottoNumbersStr) {
 
         Set<LottoNumber> lottoNumbers = new TreeSet<>(
                 Arrays.asList(lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)).stream()

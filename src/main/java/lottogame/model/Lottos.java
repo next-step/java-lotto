@@ -16,7 +16,7 @@ public class Lottos {
 
     public void purchaseManualLottoList(List<String> manualLottoList) {
         for (String manualLottoStr : manualLottoList) {
-            lottos.add(lottoMachine.generateManualLotto(manualLottoStr));
+            lottos.add(lottoMachine.generateLotto(manualLottoStr));
         }
     }
 

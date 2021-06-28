@@ -1,6 +1,8 @@
 package lottogame.service;
 
 
+import lottogame.model.Lotto;
+import lottogame.model.LottoMachine;
 import lottogame.model.Lottos;
 
 import java.util.List;
@@ -25,5 +27,10 @@ public class LottoGame {
 
     public Lottos getLottos() {
         return lottos;
+    }
+
+    public Lotto getWinningLotto(String inputWinningLottoNumber) {
+        LottoMachine lottoMachine = new LottoMachine();
+        return lottoMachine.generateLotto(inputWinningLottoNumber);
     }
 }
