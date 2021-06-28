@@ -27,8 +27,9 @@
 * model
   * [ ] LottoNumber : [int] 로또 숫자 1 ~ 45
     * [x] 로또 번호 1부터 45까지만 들어가는 예외 처리
+    * [x] 로또번호 정렬을 위한 Comparable 인터페이스 사용
   * [x] LottoNumbers : [List(LottoNumber)] 로또 숫자 목록
-  * [ ] Lotto : [set(LottoNumber)] 로또
+  * [x] Lotto : [set(LottoNumber)] 로또
   * [ ] Lottos : [List(Lotto)] 로또 목록
   * [ ] LottoMachine : 로또 자동 추첨기 return Lotto
   * [ ] ShuffleStrategy : 셔플
