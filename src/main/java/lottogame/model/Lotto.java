@@ -22,4 +22,8 @@ public class Lotto {
     public Set<LottoNumber> getNumbers() {
         return numbers;
     }
+
+    public boolean winningLottoNumbersContainsBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }
