@@ -23,8 +23,9 @@ class LottoNumberTest {
     }
 
     @DisplayName(value = "두 로또넘버는 다르다.")
-    @Test
-    void both_lottonumber_is_different() {
-        assertThat(LottoNumber.of(1).isSame(LottoNumber.of(2))).isFalse();
+    @ParameterizedTest
+    @ValueSource(ints = {2, 3, 4, 5, 6, 7})
+    void both_lottonumber_is_different(final int number) {
+        assertThat(LottoNumber.of(1).isSame(LottoNumber.of(number))).isFalse();
     }
 }
