@@ -1,7 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
@@ -29,16 +31,18 @@ public class Lottos {
         }
     }
 
-    public void countWinningResults(Lotto winningNumbers, LottoNumber bonusNumber, WinningResult winningResult) {
-        for (Lotto lotto : lottos) {
-            int numberOfWinningNumbers = lotto.countWinningNumbers(winningNumbers);
-            boolean existenceOfBonusNumber = lotto.contains(bonusNumber);
-            winningResult.addNumberOfWinning(numberOfWinningNumbers, existenceOfBonusNumber);
+    public WinningResults countWinningResults(WinningLotto winningLotto) {
+        Map<WinningResult, Integer> results = new HashMap<>();
+        for (WinningResult value : WinningResult.values()) {
+            results.put(value, 0);
         }
-    }
-
-    public float calculateEarningRate(int earningPrice, int purchasePrice) {
-        return (float) earningPrice / (float) purchasePrice;
+        for (Lotto lotto : lottos) {
+            int numberOfWinningNumbers = winningLotto.countWinningNumbers(lotto);
+            boolean existenceOfBonusNumber = winningLotto.containsBonusNumber(lotto);
+            WinningResult winningResult = WinningResult.addNumberOfWinning(numberOfWinningNumbers, existenceOfBonusNumber);
+            results.put(winningResult, results.get(winningResult) + 1);
+        }
+        return new WinningResults(results);
     }
 
     public List<Lotto> getLottos() {
