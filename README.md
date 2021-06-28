@@ -13,19 +13,27 @@
 
 ## 기능 요구사항
 ###1단계 - 로또 (자동)
-* [x] 구매금액 입력
-* [x] 구매금액 입력에 따른 <b>구매 개수</b> 구하기
-* [x] 로또 번호 추첨 하기
-  * [x] 로또 번호 범위 리스트 (1~45) 객체 
-  * [x] 로또 리스트에서 랜덤 추출 한 로또 (6개) 리스트 객체
-  * [x] 구매 개수 만큼 로또를 담는 로또 리스트 객체
-* [x] 구매 로또 리스트 출력
-* [x] 지난 주 당첨 번호 입력
-* [x] 보너스 볼 입력
-* [x] 당첨 통계 구하기
-  * [x] 로또 당첨 순위 구하기
-    * [x] 로또 순위 Enum
-  * [x] 로또 당첨 순위 개수를 리스트 담기
-  * [x] 수익률 구하기
+
+* input view
+  * [ ] 구매금액 입력 
+  * [ ] 수동으로 구매할 로또 수 입력
+  * [ ] 수동으로 (수동으로 구매할 로또 수만큼) 구매할 번호 입력
+  * [ ] 지난주 당첨 번호 입력
+  * [ ] 보너스 볼 입력
+* output view
+  * [ ] 수동&자동으로 뽑은 로또리스트 출력
+  * [ ] 당첨 통계
+  
+* model
+  * [ ] LottoNumber : [int] 로또 숫자 1 ~ 45
+  * [ ] LottoNumbers : [List(LottoNumber)] 로또 숫자 목록
+  * [ ] Lotto : [set(LottoNumber)] 로또
+  * [ ] Lottos : [List(Lotto)] 로또 목록
+  * [ ] LottoMachine : 로또 자동 추첨기 return Lotto
+  * [ ] ShuffleStrategy : 셔플
+  * [ ] Rank : [Enum] 순위 
+  * [ ] WinningStatistics : [Map<Rank, long>] 당첨통계 
+  
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
