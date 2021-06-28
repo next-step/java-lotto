@@ -15,7 +15,15 @@ public class LottoGame {
         return buyPrice / PRICE;
     }
 
-    public Lottos purchaseManualLottoList(List<String> manualLottoList) {
-        return lottos.purchaseManualLottoList(manualLottoList);
+    public void purchaseManualLottoList(List<String> manualLottoList) {
+        lottos.purchaseManualLottoList(manualLottoList);
+    }
+
+    public void purchaseAutoLottoList(int autoBuyCount) {
+         lottos.purchaseAutoLottoList(autoBuyCount);
+    }
+
+    public Lottos getLottos() {
+        return lottos;
     }
 }

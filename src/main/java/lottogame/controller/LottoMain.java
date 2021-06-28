@@ -19,7 +19,10 @@ public class LottoMain {
 
         List<String> manualLottoList = inputView.inputManualLotto(manualBuyCount);
         outputView.resultBuyPrice(autoBuyCount, manualBuyCount);
-        outputView.resultLottoList(lottoGame.purchaseManualLottoList(manualLottoList));
+
+        lottoGame.purchaseManualLottoList(manualLottoList);
+        lottoGame.purchaseAutoLottoList(autoBuyCount);
+        outputView.resultLottoList(lottoGame.getLottos());
 
     }
 }
