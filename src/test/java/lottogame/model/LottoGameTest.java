@@ -1,7 +1,7 @@
-package lotto.domain;
+package lottogame.model;
 
+import lottogame.service.LottoGame;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,17 +22,8 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource({"1,1", "2,2", "15,15"})
     void getLottoList(int buyCount, int result) {
-        LottoList lottoList = lottoGame.purchaseLotteries(buyCount);
-        assertThat(lottoList.getLottoList().size()).isEqualTo(result);
-    }
-
-    @DisplayName("지난주 당첨 번호 입력 결과 테스트")
-    @Test
-    void getWinningNumbers() {
-        WinningLottoNumbers winningLottoNumbers = lottoGame.getWinningNumbers("1,2,3,4,5,6", 7);
-
-        assertThat(winningLottoNumbers.getWinningLottoNumbers().getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(winningLottoNumbers.getBonusNumber()).isEqualTo(7);
+        lottoGame.purchaseAutoLottoList(buyCount);
+        assertThat(lottoGame.getLottos().getLottos().size()).isEqualTo(result);
     }
 
 }

@@ -1,4 +1,4 @@
-package lotto.view;
+package lottogame.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +9,6 @@ public class InputView {
 
     public int inputBuyPrice() {
         System.out.println("구입 금액을 입력해 주세요.");
-        return scan.nextInt();
-    }
-
-    public String inputWinningLottoNumber() {
-        System.out.println("지난주 당첨 번호를 입력해주세요.");
-        return scan.next();
-    }
-
-    public int inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해주세요");
         return scan.nextInt();
     }
 
@@ -35,4 +25,15 @@ public class InputView {
         }
         return manualLottoList;
     }
+
+    public String inputWinningLottoNumber() {
+        System.out.println("지난주 당첨 번호를 입력해주세요.");
+        return scan.next();
+    }
+
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요");
+        return scan.nextInt();
+    }
+
 }

@@ -13,19 +13,33 @@
 
 ## 기능 요구사항
 ###1단계 - 로또 (자동)
-*[x] 구매금액 입력
-*[x] 구매금액 입력에 따른 <b>구매 개수</b> 구하기
-*[ ] 로또 번호 추첨 하기
-  *[x] 로또 번호 범위 리스트 (1~45) 객체 
-  *[x] 로또 리스트에서 랜덤 추출 한 로또 (6개) 리스트 객체
-  *[x] 구매 개수 만큼 로또를 담는 로또 리스트 객체
-*[x] 구매 로또 리스트 출력
-*[ ] 지난 주 당첨 번호 입력
-*[ ] 보너스 볼 입력
-*[ ] 당첨 통계 구하기
-  *[ ] 로또 당첨 순위 구하기
-    *[ ] 로또 순위 Enum
-  *[ ] 로또 당첨 순위 개수를 리스트 담기
-  *[ ] 수익률 구하기
+
+* input view
+  * [x] 구매금액 입력 
+  * [x] 수동으로 구매할 로또 수 입력
+  * [x] 수동으로 (수동으로 구매할 로또 수만큼) 구매할 번호 입력
+  * [x] 지난주 당첨 번호 입력
+  * [x] 보너스 볼 입력
+* output view
+  * [x] 수동&자동으로 뽑은 로또리스트 출력
+  * [x] 당첨 통계
+
+* model
+  * [x] LottoNumber : [int] 로또 숫자 1 ~ 45
+    * [x] 로또 번호 1부터 45까지만 들어가는 예외 처리
+    * [x] 로또번호 정렬을 위한 Comparable 인터페이스 사용
+  * [x] LottoNumbers : [List(LottoNumber)] 로또 숫자 목록
+  * [x] Lotto : [set(LottoNumber)] 로또
+  * [x] Lottos : [List(Lotto)] 로또 목록
+  * [x] LottoMachine : 로또 추첨기 return Lotto
+  * [x] WinningLottoNumbers : [Lotto , LottoNumber]지난주 당첨 번호와 보너스 번호 
+  * [ ] [??] ShuffleStrategy : 셔플
+  * [x] Rank : [Enum] 순위 
+  * [x] WinningStatistics : [Map<Rank, long>] 당첨통계 
+  
+* service
+  * [x] 로또 수동으로 리스트 만들기
+  * [x] 로또 자동으로 리스트 만들기
+
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
