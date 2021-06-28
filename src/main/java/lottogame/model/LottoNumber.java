@@ -2,7 +2,7 @@ package lottogame.model;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     final static int LOTTO_MAX_NUM = 45;
@@ -31,6 +31,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         final LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(number);
