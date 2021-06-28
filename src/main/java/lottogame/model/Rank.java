@@ -10,6 +10,8 @@ public enum Rank {
     FIFTH(5_000, (matchCount, isBonusMatch) -> matchCount == 3, "3개 일치"),
     MISS(0, (matchCount, isBonusMatch) -> false, "꽝");
 
+    final static int BONUS_COUNT = 5;
+
     private int money;
     private WinningStrategy condition;
     private String message;
@@ -31,7 +33,7 @@ public enum Rank {
     public static Rank getRank(int matchCount, boolean isBonusMatch) {
         return Arrays.stream(values())
                 .filter(rank -> {
-                    if (matchCount == 5) return isBonusMatch ? rank == SECOND : rank == THIRD;
+                    if (matchCount == BONUS_COUNT) return isBonusMatch ? rank == SECOND : rank == THIRD;
                     return true;
                 })
                 .filter(rank -> rank.condition.winning(matchCount, isBonusMatch))
