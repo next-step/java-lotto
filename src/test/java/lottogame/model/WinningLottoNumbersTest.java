@@ -1,4 +1,4 @@
-package lotto.domain;
+package lottogame.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoNumbersTest {
+    LottoMachine lottoMachine = new LottoMachine();
 
     @DisplayName("보너스 숫자가 당첨번호와 같을때")
     @Test
     void throwIllegalArgumentException3() {
-        assertThatThrownBy(() -> new WinningLottoNumbers(new Lotto("1,2,3,4,5,6"), new LottoNumber(6))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLottoNumbers( lottoMachine.generateLotto("1,2,3,4,5,6"), new LottoNumber(6))).isInstanceOf(IllegalArgumentException.class);
     }
 }

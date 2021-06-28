@@ -1,5 +1,6 @@
-package lotto.domain;
+package lottogame.model;
 
+import lottogame.service.LottoGame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,8 +22,8 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource({"1,1", "2,2", "15,15"})
     void getLottoList(int buyCount, int result) {
-        LottoList lottoList = lottoGame.purchaseAutoLottoList(buyCount);
-        assertThat(lottoList.getLottoList().size()).isEqualTo(result);
+        lottoGame.purchaseAutoLottoList(buyCount);
+        assertThat(lottoGame.getLottos().getLottos().size()).isEqualTo(result);
     }
 
 }

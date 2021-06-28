@@ -1,8 +1,6 @@
 package lottogame.model;
 
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +43,7 @@ public class Lottos {
                 .filter(lottoNumber -> winningLotto.containsNumber(lottoNumber))
                 .count();
     }
+
     public boolean isBonus(Lotto lotto, LottoNumber bonusNumber) {
         return lotto.containsNumber(bonusNumber);
     }
