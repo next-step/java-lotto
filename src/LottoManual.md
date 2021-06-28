@@ -111,7 +111,7 @@
 - `Lottos#calculateEarningRate` : 총 수익률 집계
 - `Lottos#getLottos` : getter
 
-### lotto.model.AutoLotto 의 기능
+### lotto.model.AutoLottoMaker 의 기능
 - MIN_NUMBER
 - MAX_NUMBER
 - NUMBER_OF_LOTTO_NUMBERS
@@ -119,7 +119,7 @@
 - `AutoLotto#AutoLotto` : 생성자. 1부터 45까지의 숫자 생성
 - `AutoLotto#createLottoNumbers` : 1부터 45까지의 숫자를 섞어서 자동으로 선택한 6개의 숫자를 로또번호들로 생성 
 
-### lotto.model.ManualLotto 의 기능
+### lotto.model.ManualLottoMaker 의 기능
 - NUMBER_OF_LOTTO_NUMBERS
 - `ManualLotto#createLottoNumbers` : 사용자로부터 입력받은 수동번호를 로또번호들로 생성
 - `ManualLotto#splitBySeparator` : 문자열을 구분자로 분리

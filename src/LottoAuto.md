@@ -108,7 +108,7 @@
 - `Lottos#calculateEarningRate` : 총 수익률 집계
 - `Lottos#getLottos` : getter
 
-### lotto.model.AutoLotto 의 기능
+### lotto.model.AutoLottoMaker 의 기능
 - MIN_NUMBER
 - MAX_NUMBER
 - NUMBER_OF_LOTTO_NUMBERS

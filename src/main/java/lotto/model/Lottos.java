@@ -18,16 +18,16 @@ public class Lottos {
     }
 
     private void createAutoLottos(int quantity) {
-        AutoLotto autoLotto = new AutoLotto();
+        AutoLottoMaker autoLottoMaker = new AutoLottoMaker();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(autoLotto.createLottoNumbers()));
+            lottos.add(autoLottoMaker.createLotto());
         }
     }
 
     private void createManualLottos(int quantity, List<String> manualNumbers) {
-        ManualLotto manualLotto = new ManualLotto();
+        ManualLottoMaker manualLottoMaker = new ManualLottoMaker();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(manualLotto.createLottoNumbers(manualNumbers.get(i))));
+            lottos.add(manualLottoMaker.createLotto(manualNumbers.get(i)));
         }
     }
 

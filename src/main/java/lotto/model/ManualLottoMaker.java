@@ -3,13 +3,13 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualLotto {
+public class ManualLottoMaker {
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-    public List<LottoNumber> createLottoNumbers(String manualNumbers) {
+    public Lotto createLotto(String manualNumbers) {
         String[] splitManualNumbers = splitBySeparator(manualNumbers);
         List<LottoNumber> lottoNumbers = addLottoNumbers(splitManualNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
     private String[] splitBySeparator(String manualNumbers) {
