@@ -116,7 +116,7 @@
 - `AutoLotto#AutoLotto` : 생성자. 1부터 45까지의 숫자 생성
 - `AutoLotto#createLottoNumbers` : 1부터 45까지의 숫자를 섞어서 자동으로 선택한 6개의 숫자를 로또번호들로 생성
 
-### lotto.model.LottoPrice 의 기능
+### lotto.model.Cashier 의 기능
 - (int) price 
 - `LottoPrice#LottoPrice` : 생성자
 - `LottoPrice#getPrice` : getter

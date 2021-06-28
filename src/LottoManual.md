@@ -125,7 +125,7 @@
 - `ManualLotto#splitBySeparator` : 문자열을 구분자로 분리
 - `ManualLotto#addLottoNumbers ` : 분리된 문자열을 로또번호들로 변경
 
-### lotto.model.LottoPrice 의 기능
+### lotto.model.Cashier 의 기능
 - (int) price
 - `LottoPrice#LottoPrice` : 생성자
 - `LottoPrice#getPrice` : getter

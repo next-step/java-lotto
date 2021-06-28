@@ -12,8 +12,8 @@ public class LottoAutoController {
     private LottoAutoOutputView outputView = new LottoAutoOutputView();
 
     public void start() {
-        LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
-        int quantity = lottoPrice.calculateLottoQuantity();
+        Cashier cashier = new Cashier(inputView.inputPrice());
+        int quantity = cashier.calculateLottoQuantity();
 
         Lottos lottos = new Lottos(quantity);
         outputView.printLotto(quantity, lottos.getLottos());
@@ -24,7 +24,7 @@ public class LottoAutoController {
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
         outputView.outputWinningResults(winningResults.getWinningResults());
-        outputView.outputEarningRate(winningResults.calculateEarningRate(lottoPrice.getPrice()));
+        outputView.outputEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
     }
 
     private Lotto convertWinningNumbers(String winningStringNumbers) {
