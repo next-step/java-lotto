@@ -1,9 +1,7 @@
 package lottogame.service;
 
 
-import lottogame.model.Lotto;
-import lottogame.model.LottoMachine;
-import lottogame.model.Lottos;
+import lottogame.model.*;
 
 import java.util.List;
 
@@ -33,4 +31,8 @@ public class LottoGame {
         LottoMachine lottoMachine = new LottoMachine();
         return lottoMachine.generateLotto(inputWinningLottoNumber);
     }
+    public WinningStatistics getWinning(WinningLottoNumbers winningNumbers) {
+        return lottos.getWinning(winningNumbers);
+    }
+
 }

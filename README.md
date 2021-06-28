@@ -22,20 +22,20 @@
   * [x] 보너스 볼 입력
 * output view
   * [x] 수동&자동으로 뽑은 로또리스트 출력
-  * [ ] 당첨 통계
+  * [x] 당첨 통계
 
 * model
-  * [ ] LottoNumber : [int] 로또 숫자 1 ~ 45
+  * [x] LottoNumber : [int] 로또 숫자 1 ~ 45
     * [x] 로또 번호 1부터 45까지만 들어가는 예외 처리
     * [x] 로또번호 정렬을 위한 Comparable 인터페이스 사용
   * [x] LottoNumbers : [List(LottoNumber)] 로또 숫자 목록
   * [x] Lotto : [set(LottoNumber)] 로또
-  * [ ] Lottos : [List(Lotto)] 로또 목록
+  * [x] Lottos : [List(Lotto)] 로또 목록
   * [x] LottoMachine : 로또 추첨기 return Lotto
-  * [ ] WinningLottoNumbers : [Lotto , LottoNumber]지난주 당첨 번호와 보너스 번호 
+  * [x] WinningLottoNumbers : [Lotto , LottoNumber]지난주 당첨 번호와 보너스 번호 
   * [ ] [??] ShuffleStrategy : 셔플
-  * [ ] Rank : [Enum] 순위 
-  * [ ] WinningStatistics : [Map<Rank, long>] 당첨통계 
+  * [x] Rank : [Enum] 순위 
+  * [x] WinningStatistics : [Map<Rank, long>] 당첨통계 
   
 * service
   * [x] 로또 수동으로 리스트 만들기

@@ -26,4 +26,9 @@ public class Lotto {
     public boolean winningLottoNumbersContainsBonusNumber(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
+
+    public boolean containsNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
 }

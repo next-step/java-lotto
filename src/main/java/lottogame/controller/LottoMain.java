@@ -3,6 +3,7 @@ package lottogame.controller;
 import lottogame.model.Lotto;
 import lottogame.model.LottoNumber;
 import lottogame.model.WinningLottoNumbers;
+import lottogame.model.WinningStatistics;
 import lottogame.service.LottoGame;
 import lottogame.view.InputView;
 import lottogame.view.OutputView;
@@ -29,7 +30,8 @@ public class LottoMain {
         Lotto winningLotto = lottoGame.getWinningLotto(inputView.inputWinningLottoNumber());
         LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningLotto, bonusNumber);
-
+        WinningStatistics winningStatistics = lottoGame.getWinning(winningLottoNumbers);
+        outputView.resultStatistics(winningStatistics);
 
     }
 }

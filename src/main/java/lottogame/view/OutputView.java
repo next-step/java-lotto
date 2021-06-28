@@ -1,7 +1,10 @@
 package lottogame.view;
 
 import lottogame.model.Lottos;
+import lottogame.model.Rank;
+import lottogame.model.WinningStatistics;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -16,5 +19,19 @@ public class OutputView {
                         .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                         .collect(Collectors.joining(",", "[", "]"))
                 ));
+    }
+
+    public void resultStatistics(WinningStatistics winning) {
+
+        Arrays.stream(Rank.values()).filter(rank -> rank != Rank.MISS).forEach(rank -> {
+            if (winning.getStatistics().get(rank) != null) {
+                System.out.println(rank.getMessage() + "(" + rank.getMoney() + "원) - " + winning.getStatistics().get(rank) + "개");
+            } else {
+                System.out.println(rank.getMessage() + "(" + rank.getMoney() + "원) - " + 0 + "개");
+            }
+        });
+
+        System.out.println("총 수익률 은 " + winning.yield() + "입니다");
+
     }
 }
