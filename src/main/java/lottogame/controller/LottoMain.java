@@ -12,6 +12,7 @@ public class LottoMain {
         LottoGame lottoGame = new LottoGame();
 
         int buyCount = lottoGame.getBuyCount(inputView.inputBuyPrice());
+        int manualBuyCount = inputView.inputManualBuyPrice();
 
     }
 }
