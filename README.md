@@ -17,13 +17,13 @@
 * input view
   * [x] 구매금액 입력 
   * [x] 수동으로 구매할 로또 수 입력
-  * [ ] 수동으로 (수동으로 구매할 로또 수만큼) 구매할 번호 입력
+  * [x] 수동으로 (수동으로 구매할 로또 수만큼) 구매할 번호 입력
   * [ ] 지난주 당첨 번호 입력
   * [ ] 보너스 볼 입력
 * output view
-  * [ ] 수동&자동으로 뽑은 로또리스트 출력
+  * [x] 수동&자동으로 뽑은 로또리스트 출력
   * [ ] 당첨 통계
-  
+
 * model
   * [ ] LottoNumber : [int] 로또 숫자 1 ~ 45
     * [x] 로또 번호 1부터 45까지만 들어가는 예외 처리
@@ -36,6 +36,9 @@
   * [ ] Rank : [Enum] 순위 
   * [ ] WinningStatistics : [Map<Rank, long>] 당첨통계 
   
+* service
+  * [x] 로또 수동으로 리스트 만들기
+  * [x] 로또 자동으로 리스트 만들기
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

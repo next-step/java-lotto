@@ -8,7 +8,9 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-
+    final static String WHITE_SPACE = " ";
+    final static String EMPTY = "";
+    final static String COMMA_DELIMITER = ",";
     final static int NUMBER_COUNT_PER_GAME = 6;
 
     public Lotto generateAutoLotto() {
@@ -23,7 +25,7 @@ public class LottoMachine {
     public Lotto generateManualLotto(String lottoNumbersStr) {
 
         Set<LottoNumber> lottoNumbers = new TreeSet<>(
-                Arrays.asList(lottoNumbersStr).stream()
+                Arrays.asList(lottoNumbersStr.replace(WHITE_SPACE, EMPTY).split(COMMA_DELIMITER)).stream()
                         .map(number -> Integer.valueOf(number))
                         .map(LottoNumber::new)
                         .collect(Collectors.toSet()));

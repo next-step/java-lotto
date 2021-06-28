@@ -19,4 +19,7 @@ public class Lotto {
         }
     }
 
+    public Set<LottoNumber> getNumbers() {
+        return numbers;
+    }
 }
