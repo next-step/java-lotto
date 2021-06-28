@@ -29,7 +29,11 @@ public enum Rank {
     }
 
     public static Rank getRank(int matchCount, boolean isBonusMatch) {
-        return Arrays.stream(Rank.values())
+        return Arrays.stream(values())
+                .filter(rank -> {
+                    if (matchCount == 5) return isBonusMatch ? rank == SECOND : rank == THIRD;
+                    return true;
+                })
                 .filter(rank -> rank.condition.winning(matchCount, isBonusMatch))
                 .findFirst()
                 .orElse(MISS);
