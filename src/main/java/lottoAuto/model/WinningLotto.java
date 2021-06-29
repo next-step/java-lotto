@@ -12,11 +12,15 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public Set<LottoNumber> getWinningLotto() {
-        return Collections.unmodifiableSet(winningLotto.getLottoNumbers());
+    public int countWinningLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        return (int) winningLotto.getLottoNumbers().stream()
+                .filter(lottoNumbers::contains)
+                .count()
+                ;
     }
 
-    public int getBonusBall() {
-        return bonusBall;
+    public boolean hasBonusBall(){
+        return winningLotto.getLottoNumbers().stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
     }
 }

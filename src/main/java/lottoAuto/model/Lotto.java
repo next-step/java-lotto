@@ -26,19 +26,7 @@ public class Lotto {
     }
 
     public LottoResult makeLottoResult(WinningLotto winningLotto){
-        return new LottoResult(countWinningLottoNumbers(winningLotto.getWinningLotto()),hasBonusBall(winningLotto.getBonusBall()));
-    }
-
-    private int countWinningLottoNumbers(Set<LottoNumber> winningLottoNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(winningLottoNumbers::contains)
-                .count()
-                ;
-    }
-
-    private boolean hasBonusBall(int bonusBall){
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
+        return new LottoResult(winningLotto.countWinningLottoNumbers(lottoNumbers), winningLotto.hasBonusBall());
     }
 
     public Set<LottoNumber> getLottoNumbers() {
