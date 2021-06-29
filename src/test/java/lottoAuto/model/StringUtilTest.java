@@ -11,9 +11,8 @@ public class StringUtilTest {
     @Test
     public void splitWinningNumberTest() {
         StringUtil stringUtil = new StringUtil();
-
         Lotto lotto = stringUtil.makeLotto("1,2,3,4,5,6");
 
-        assertThat(6).isEqualTo(lotto.getLottoNumbers().size());
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 }
