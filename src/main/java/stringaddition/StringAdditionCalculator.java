@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
 
-    private static final Pattern pattern = Pattern.compile("\\d+");
+    private static final Pattern PATTERN = Pattern.compile("\\d+");
 
     public String input() {
         Scanner scanner = new Scanner(System.in);
@@ -14,7 +14,7 @@ public class StringAdditionCalculator {
     }
 
     public int one(String text) {
-        if (pattern.matcher(text).matches()) {
+        if (PATTERN.matcher(text).matches()) {
             int number = Integer.parseInt(text);
             return number;
         }
