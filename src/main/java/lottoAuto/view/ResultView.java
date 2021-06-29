@@ -4,7 +4,6 @@ import lottoAuto.model.*;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
-import java.util.Map;
 
 public class ResultView {
     public static void showAmount(int amount) {

@@ -18,7 +18,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank findByRank(int countMatchWinningNumbers,boolean hasBonusBall) {
+    public static Rank findByRank(int countMatchWinningNumbers, boolean hasBonusBall) {
         if (countMatchWinningNumbers == SECOND.numberOfWinnings && hasBonusBall) {
             return SECOND;
         }
@@ -28,8 +28,8 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    public static String makeMessage(Rank rank){
-        return rank.numberOfWinnings+"개 일치 ("+rank.prize+"원)";
+    public static String makeMessage(Rank rank) {
+        return rank.numberOfWinnings + "개 일치 (" + rank.prize + "원)";
     }
 
     public static int calculatePrize(Rank rank, Long count) {

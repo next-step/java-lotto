@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +14,7 @@ public class LottoTest {
     private WinningLotto winningLottoTest;
 
     @BeforeEach
-    public void set(){
+    public void set() {
         Set<LottoNumber> winningNumbers = new HashSet<>();
         winningNumbers.add(new LottoNumber(1));
         winningNumbers.add(new LottoNumber(2));
@@ -25,7 +23,7 @@ public class LottoTest {
         winningNumbers.add(new LottoNumber(5));
         winningNumbers.add(new LottoNumber(6));
         Lotto winningLotto = new Lotto(winningNumbers);
-        winningLottoTest = new WinningLotto(winningLotto,7);
+        winningLottoTest = new WinningLotto(winningLotto, 7);
     }
 
     @DisplayName("로또 번호는 6개이하면 예외를 발생시킨다.")
@@ -56,7 +54,7 @@ public class LottoTest {
 
     @DisplayName("Lotto객체는 LottoResult객체를 반환할 수 있다.")
     @Test
-    public void makeLottoResult(){
+    public void makeLottoResult() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(2));

@@ -1,8 +1,5 @@
 package lottoAuto.model;
 
-import java.math.BigDecimal;
-import java.util.Map;
-
 public class LottoCalculator {
     private static final int LOTTO_PRICE = 1000;
     private static final String CHECK_LOTTO_PRICE_MESSAGE = "로또 1장의 가격은 1000원입니다.";

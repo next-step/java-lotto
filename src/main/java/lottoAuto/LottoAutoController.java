@@ -17,21 +17,21 @@ public class LottoAutoController {
         WinningLotto winningLotto = makeWinningLotto();
         LottoResults lottoResults = lottos.matchWinningLotto(winningLotto);
 
-        Revenue revenue = new Revenue(lottoResults.lottoRankCounting(),price);
+        Revenue revenue = new Revenue(lottoResults.lottoRankCounting(), price);
         ResultView.showWinningStatistic(revenue);
         ResultView.showRevenue(revenue.calculateRevenue());
     }
 
-    private static int makeAmount(int price){
+    private static int makeAmount(int price) {
         return LottoCalculator.calculateAmount(price);
     }
 
-    private static Lottos makeLottos(int amount){
+    private static Lottos makeLottos(int amount) {
         LottoGenerator lottoGenerator = new LottoGenerator(amount);
         return new Lottos(lottoGenerator.getLottos());
     }
 
-    private static WinningLotto makeWinningLotto(){
+    private static WinningLotto makeWinningLotto() {
         String winningLottoNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         return new WinningLotto(StringUtil.makeLotto(winningLottoNumber), bonusBall);

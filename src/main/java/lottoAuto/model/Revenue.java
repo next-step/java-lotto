@@ -7,12 +7,12 @@ public class Revenue {
     private Map<Rank, Long> resultMap;
     private int price;
 
-    public Revenue(Map<Rank, Long> resultMap,int price){
+    public Revenue(Map<Rank, Long> resultMap, int price) {
         this.resultMap = resultMap;
         this.price = price;
     }
 
-    public BigDecimal calculateRevenue(){
+    public BigDecimal calculateRevenue() {
         int sum = resultMap.entrySet().stream()
                 .mapToInt(rankLongEntry -> Rank.calculatePrize(rankLongEntry.getKey(), rankLongEntry.getValue()))
                 .sum();

@@ -13,7 +13,7 @@ public class WinningLottoTest {
     private WinningLotto winningLottoTest;
 
     @BeforeEach
-    public void set(){
+    public void set() {
         Set<LottoNumber> winningNumbers = new HashSet<>();
         winningNumbers.add(new LottoNumber(1));
         winningNumbers.add(new LottoNumber(2));
@@ -22,12 +22,12 @@ public class WinningLottoTest {
         winningNumbers.add(new LottoNumber(5));
         winningNumbers.add(new LottoNumber(6));
         Lotto winningLotto = new Lotto(winningNumbers);
-        winningLottoTest = new WinningLotto(winningLotto,7);
+        winningLottoTest = new WinningLotto(winningLotto, 7);
     }
 
     @DisplayName("로또 당첨 번호와 몇개나 일치하는지 구할 수 있다.")
     @Test
-    public void countWinningLottoNumbers(){
+    public void countWinningLottoNumbers() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(2));
@@ -42,7 +42,7 @@ public class WinningLottoTest {
 
     @DisplayName("보너스 볼을 포함하고 있는지 알 수 있다.")
     @Test
-    public void hashBonusBallTest(){
+    public void hashBonusBallTest() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(2));
