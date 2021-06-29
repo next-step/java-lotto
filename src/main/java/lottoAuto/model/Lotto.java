@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     public LottoResult makeLottoResult(WinningLotto winningLotto){
-        return new LottoResult(winningLotto.countWinningLottoNumbers(lottoNumbers), winningLotto.hasBonusBall());
+        return new LottoResult(winningLotto.countWinningLottoNumbers(lottoNumbers), winningLotto.hasBonusBall(lottoNumbers));
     }
 
     public Set<LottoNumber> getLottoNumbers() {

@@ -14,13 +14,17 @@ public class WinningLotto {
 
     public int countWinningLottoNumbers(Set<LottoNumber> lottoNumbers) {
         return (int) winningLotto.getLottoNumbers().stream()
-                .filter(lottoNumbers::contains)
-                .count()
-                ;
+                .filter((winningLottoNumber) -> hasWinningLottoNumber(winningLottoNumber,lottoNumbers))
+                .count();
     }
 
-    public boolean hasBonusBall(){
-        return winningLotto.getLottoNumbers().stream()
+    private boolean hasWinningLottoNumber(LottoNumber winningLottoNumber,Set<LottoNumber> lottoNumbers){
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(winningLottoNumber.getLottoNumber()));
+    }
+
+    public boolean hasBonusBall(Set<LottoNumber> lottoNumbers){
+        return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
     }
 }
