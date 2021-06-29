@@ -18,7 +18,7 @@ public class LottoResults {
 
     public Map<Rank, Long> lottoRankCounting() {
         return lottoResults.stream()
-                .collect(Collectors.groupingBy(x -> Rank.findByRank(x), Collectors.counting()));
+                .collect(Collectors.groupingBy(x -> x.findByRank(), Collectors.counting()));
     }
 
 }

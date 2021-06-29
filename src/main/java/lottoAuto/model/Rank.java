@@ -18,12 +18,12 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank findByRank(LottoResult lottoResult) {
-        if (lottoResult.getCountMatchWinningNumbers() == SECOND.numberOfWinnings && lottoResult.getHasBonusBall()) {
+    public static Rank findByRank(int countMatchWinningNumbers,boolean hasBonusBall) {
+        if (countMatchWinningNumbers == SECOND.numberOfWinnings && hasBonusBall) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.numberOfWinnings == lottoResult.getCountMatchWinningNumbers() && !lottoResult.getHasBonusBall())
+                .filter(rank -> rank.numberOfWinnings == countMatchWinningNumbers && hasBonusBall)
                 .findAny()
                 .orElse(NO_MATCH);
     }

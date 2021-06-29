@@ -9,11 +9,7 @@ public class LottoResult {
         this.hasBonusBall = hasBonusBall;
     }
 
-    public int getCountMatchWinningNumbers() {
-        return countMatchWinningNumbers;
-    }
-
-    public boolean getHasBonusBall() {
-        return hasBonusBall;
+    public Rank findByRank(){
+        return Rank.findByRank(countMatchWinningNumbers,hasBonusBall);
     }
 }
