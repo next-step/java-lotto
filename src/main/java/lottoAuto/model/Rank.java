@@ -23,7 +23,7 @@ public enum Rank {
     }
 
     public static Rank findByRank(LottoResult lottoResult) {
-        if (lottoResult.getCount() == SECOND.numberOfWinnings && lottoResult.isHasBonusBall()) {
+        if (lottoResult.getCount() == SECOND.numberOfWinnings && lottoResult.getHasBonusBall()) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())

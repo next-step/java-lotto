@@ -19,7 +19,7 @@ public class LottoResult {
         return count;
     }
 
-    public boolean isHasBonusBall() {
+    public boolean getHasBonusBall() {
         return hasBonusBall;
     }
 }
