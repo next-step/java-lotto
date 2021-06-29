@@ -19,11 +19,11 @@ public enum Rank {
     }
 
     public static Rank findByRank(LottoResult lottoResult) {
-        if (lottoResult.getCount() == SECOND.numberOfWinnings && lottoResult.getHasBonusBall()) {
+        if (lottoResult.getCountMatchWinningNumbers() == SECOND.numberOfWinnings && lottoResult.getHasBonusBall()) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.numberOfWinnings == lottoResult.getCount() && !lottoResult.getHasBonusBall())
+                .filter(rank -> rank.numberOfWinnings == lottoResult.getCountMatchWinningNumbers() && !lottoResult.getHasBonusBall())
                 .findAny()
                 .orElse(NO_MATCH);
     }

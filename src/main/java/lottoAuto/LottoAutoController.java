@@ -26,7 +26,6 @@ public class LottoAutoController {
         WinningLotto winningLotto = new WinningLotto(StringUtil.splitWinningNumber(winningLottoNumber), bonusBall);
 
         LottoResults lottoResults = lottos.matchWinningLotto(winningLotto);
-        lottoResults.matchBonusBall(lottos, bonusBall);
 
         Revenue revenue = new Revenue(lottoResults.lottoRankCounting(),price);
         ResultView.showWinningStatistic(revenue);

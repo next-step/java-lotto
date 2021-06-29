@@ -16,11 +16,6 @@ public class LottoResults {
         lottoResults.add(lottoResult);
     }
 
-    public void matchBonusBall(Lottos lottos, int bonus) {
-        lottoResults.stream()
-                .forEach(lottoResult -> lottoResult.containBonusBall(lottos.getLottos(), bonus));
-    }
-
     public Map<Rank, Long> lottoRankCounting() {
         return lottoResults.stream()
                 .collect(Collectors.groupingBy(x -> Rank.findByRank(x), Collectors.counting()));

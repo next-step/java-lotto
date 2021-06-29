@@ -25,14 +25,18 @@ public class Lotto {
         }
     }
 
-    public int countWinningLottoNumbers(Set<LottoNumber> winningLottoNumbers) {
+    public LottoResult makeLottoResult(WinningLotto winningLotto){
+        return new LottoResult(countWinningLottoNumbers(winningLotto.getWinningLotto()),hasBonusBall(winningLotto.getBonusBall()));
+    }
+
+    private int countWinningLottoNumbers(Set<LottoNumber> winningLottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count()
                 ;
     }
 
-    public boolean hasBonusBall(int bonusBall){
+    private boolean hasBonusBall(int bonusBall){
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
     }

@@ -15,4 +15,8 @@ public class WinningLotto {
     public Set<LottoNumber> getWinningLotto() {
         return Collections.unmodifiableSet(winningLotto.getLottoNumbers());
     }
+
+    public int getBonusBall() {
+        return bonusBall;
+    }
 }
