@@ -35,6 +35,6 @@ public class LottoTest {
         boolean result = lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
 
-        assertThat(true).isEqualTo(result);
+        assertThat(result).isEqualTo(true);
     }
 }

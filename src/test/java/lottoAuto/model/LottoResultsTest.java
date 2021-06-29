@@ -20,6 +20,6 @@ public class LottoResultsTest {
 
         Map<Rank,Long> result = new HashMap<>();
         result.put(Rank.SECOND,Long.valueOf("1"));
-        assertThat(result).isEqualTo(lottoResults.lottoRankCounting());
+        assertThat(lottoResults.lottoRankCounting()).isEqualTo(result);
     }
 }
