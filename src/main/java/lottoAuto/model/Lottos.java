@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos;
-    private LottoGenerator lottoGenerator;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -17,6 +16,7 @@ public class Lottos {
         lottos.stream()
                 .map(lotto -> new LottoResult(lotto.countWinningLottoNumbers(winningLotto.getWinningLotto())))
                 .forEach(lottoResults::add);
+
         return lottoResults;
     }
 

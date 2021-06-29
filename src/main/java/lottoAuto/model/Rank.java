@@ -28,6 +28,10 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
+    public static String makeMessage(Rank rank){
+        return rank.numberOfWinnings+"개 일치 ("+rank.prize+"원)";
+    }
+
     public static int calculatePrize(Rank rank, Long count) {
         return rank.prize * Integer.valueOf(String.valueOf(count));
     }

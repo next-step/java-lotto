@@ -27,7 +27,8 @@ public class ResultView {
         System.out.println("--------");
 
         revenue.getResultMap().entrySet().stream()
-                .forEach(rankLongEntry -> System.out.println(Rank.getMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue()));
+                .filter(rankLongEntry -> rankLongEntry.getKey() != Rank.NO_MATCH)
+                .forEach(rankLongEntry -> System.out.println(Rank.makeMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue() + "개"));
     }
 
     public static void showRevenue(BigDecimal revenue) {
