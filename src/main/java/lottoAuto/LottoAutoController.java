@@ -8,7 +8,7 @@ public class LottoAutoController {
 
     public static void main(String[] args) {
         int price = InputView.inputPrice();
-        int amount = LottoCalculator.calculateAmount(price);
+        int amount = makeAmount(price);
         ResultView.showAmount(amount);
 
         Lottos lottos = makeLottos(amount);
@@ -22,16 +22,18 @@ public class LottoAutoController {
         ResultView.showRevenue(revenue.calculateRevenue());
     }
 
+    private static int makeAmount(int price){
+        return LottoCalculator.calculateAmount(price);
+    }
+
     private static Lottos makeLottos(int amount){
         LottoGenerator lottoGenerator = new LottoGenerator(amount);
-
         return new Lottos(lottoGenerator.getLottos());
     }
 
     private static WinningLotto makeWinningLotto(){
         String winningLottoNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
-
         return new WinningLotto(StringUtil.makeLotto(winningLottoNumber), bonusBall);
     }
 }
