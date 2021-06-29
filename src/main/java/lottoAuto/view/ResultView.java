@@ -1,9 +1,6 @@
 package lottoAuto.view;
 
-import lottoAuto.model.Lotto;
-import lottoAuto.model.LottoNumber;
-import lottoAuto.model.Lottos;
-import lottoAuto.model.Rank;
+import lottoAuto.model.*;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -25,11 +22,11 @@ public class ResultView {
         }
     }
 
-    public static void showWinningStatistic(Map<Rank, Long> collect) {
+    public static void showWinningStatistic(Revenue revenue) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        collect.entrySet().stream()
+        revenue.getResultMap().entrySet().stream()
                 .forEach(rankLongEntry -> System.out.println(Rank.getMessage(rankLongEntry.getKey()) + " - " + rankLongEntry.getValue()));
     }
 

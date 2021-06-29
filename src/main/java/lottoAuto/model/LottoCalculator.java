@@ -17,12 +17,4 @@ public class LottoCalculator {
             throw new IllegalArgumentException(CHECK_LOTTO_PRICE_MESSAGE);
         }
     }
-
-    public static BigDecimal getRevenue(int price, Map<Rank, Long> resultMap) {
-        int sum = resultMap.entrySet().stream()
-                .mapToInt(rankLongEntry -> Rank.calculatePrize(rankLongEntry.getKey(), rankLongEntry.getValue()))
-                .sum();
-
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(price));
-    }
 }

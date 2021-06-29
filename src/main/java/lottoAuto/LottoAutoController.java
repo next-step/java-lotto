@@ -25,10 +25,9 @@ public class LottoAutoController {
         LottoResults lottoResults = lottos.matchWinningLotto(winningLotto);
         lottoResults.matchBonusBall(lottos, bonusBall);
 
-        Map<Rank, Long> resultMap = lottoResults.lottoRankCounting();
-        ResultView.showWinningStatistic(resultMap);
+        Revenue revenue = new Revenue(lottoResults.lottoRankCounting(),price);
+        ResultView.showWinningStatistic(revenue);
 
-        BigDecimal revenue = LottoCalculator.getRevenue(price, resultMap);
-        ResultView.showRevenue(revenue);
+        ResultView.showRevenue(revenue.calculateRevenue());
     }
 }
