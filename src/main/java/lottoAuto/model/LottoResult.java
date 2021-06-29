@@ -10,8 +10,9 @@ public class LottoResult {
         this.count = count;
     }
 
-    public void add(List<Lotto> lottos, int bonusBall) {
-        this.hasBonusBall = lottos.contains(bonusBall);
+    public void containBonusBall(List<Lotto> lottos, int bonusBall) {
+        lottos.stream()
+                .forEach(lotto -> this.hasBonusBall = lotto.hasBonusBall(bonusBall));
     }
 
     public int getCount() {

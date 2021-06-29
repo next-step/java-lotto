@@ -32,6 +32,11 @@ public class Lotto {
                 ;
     }
 
+    public boolean hasBonusBall(int bonusBall){
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }

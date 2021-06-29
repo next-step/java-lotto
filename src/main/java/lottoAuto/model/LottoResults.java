@@ -18,7 +18,7 @@ public class LottoResults {
 
     public void matchBonusBall(Lottos lottos, int bonus) {
         lottoResults.stream()
-                .forEach(lottoResult -> lottoResult.add(lottos.getLottos(), bonus));
+                .forEach(lottoResult -> lottoResult.containBonusBall(lottos.getLottos(), bonus));
     }
 
     public Map<Rank, Long> lottoRankCounting() {

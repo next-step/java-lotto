@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoTest {
@@ -21,5 +22,19 @@ public class LottoTest {
         lottoNumbers.add(new LottoNumber(3));
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(lottoNumbers));
+    }
+
+    @Test
+    public void hasBonusBall(){
+        int bonusBall = 3;
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        lottoNumbers.add(new LottoNumber(1));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(3));
+
+        boolean result = lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(bonusBall));
+
+        assertThat(true).isEqualTo(result);
     }
 }
