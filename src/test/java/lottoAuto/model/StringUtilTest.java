@@ -12,7 +12,7 @@ public class StringUtilTest {
     public void splitWinningNumberTest() {
         StringUtil stringUtil = new StringUtil();
 
-        Lotto lotto = stringUtil.splitWinningNumber("1,2,3,4,5,6");
+        Lotto lotto = stringUtil.makeLotto("1,2,3,4,5,6");
 
         assertThat(6).isEqualTo(lotto.getLottoNumbers().size());
     }

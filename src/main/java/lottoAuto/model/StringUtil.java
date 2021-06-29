@@ -6,7 +6,7 @@ import java.util.Set;
 public class StringUtil {
     private static final String SPLIT_WINNING_LOTTO = ",";
 
-    public static Lotto splitWinningNumber(String winningLottoNumber) {
+    public static Lotto makeLotto(String winningLottoNumber) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         String[] splitedWinningNumbers = winningLottoNumber.split(SPLIT_WINNING_LOTTO);

@@ -4,11 +4,6 @@ import lottoAuto.model.*;
 import lottoAuto.view.InputView;
 import lottoAuto.view.ResultView;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class LottoAutoController {
 
     public static void main(String[] args) {
@@ -23,7 +18,7 @@ public class LottoAutoController {
         String winningLottoNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
 
-        WinningLotto winningLotto = new WinningLotto(StringUtil.splitWinningNumber(winningLottoNumber), bonusBall);
+        WinningLotto winningLotto = new WinningLotto(StringUtil.makeLotto(winningLottoNumber), bonusBall);
 
         LottoResults lottoResults = lottos.matchWinningLotto(winningLotto);
 
