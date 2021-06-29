@@ -3,7 +3,7 @@ package stringaddition;
 public class StringAdditionCalculatorMain {
     public static void main(String[] args) {
         StringAdditionCalculator calculator = new StringAdditionCalculator();
-        String text = calculator.input();
-        calculator.add(text);
+
+        calculator.add(InputView.inputText());
     }
 }

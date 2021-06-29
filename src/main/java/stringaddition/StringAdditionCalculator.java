@@ -5,15 +5,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
-
     private static final Pattern PATTERN = Pattern.compile("\\d+");
 
-    public String input() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+    public int add(String text) {
+        if (text == null || text.isEmpty()) {
+            return 0;
+        }
+        if (text.contains("-")) {
+            throw new RuntimeException();
+        }
+        if (text.length() == 1) {
+            return one(text);
+        }
+        if (text.contains(":") || text.contains(",")) {
+            return colon(text);
+        }
+        if (text.contains("//") && text.contains(("\n"))) {
+            return custom(text);
+        }
+        throw new RuntimeException();
     }
 
-    public int one(String text) {
+    private int one(String text) {
         if (PATTERN.matcher(text).matches()) {
             int number = Integer.parseInt(text);
             return number;
@@ -21,7 +34,7 @@ public class StringAdditionCalculator {
         throw new RuntimeException();
     }
 
-    public int colon(String text) {
+    private int colon(String text) {
         String[] tokens = text.split(",|:");
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i] == "" || tokens[i].isEmpty()) {
@@ -40,7 +53,7 @@ public class StringAdditionCalculator {
         return sum;
     }
 
-    public int custom(String text) {
+    private int custom(String text) {
         Matcher m = Pattern.compile("^//(.)\n(.*)").matcher(text);
         int sum = 0;
         if (m.find()) {
@@ -50,25 +63,5 @@ public class StringAdditionCalculator {
             sum = sum(tokens);
         }
         return sum;
-    }
-
-    public int add(String text) {
-        if (text == null || text.isEmpty()) {
-            return 0;
-        }
-        if (text.contains("-")) {
-            throw new RuntimeException();
-        }
-        if (text.length() == 1) {
-            return one(text);
-        }
-        if (text.contains(":") || text.contains(",")) {
-            return colon(text);
-        }
-        if (text.contains("//") && text.contains(("\n"))) {
-            System.out.println("test");
-            return custom(text);
-        }
-        throw new RuntimeException();
     }
 }
