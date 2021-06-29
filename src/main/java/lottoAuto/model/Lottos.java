@@ -5,14 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
     private LottoGenerator lottoGenerator;
 
-    public Lottos(int amount) {
-        lottoGenerator = new LottoGenerator();
-        for (int i = 0; i < amount; i++) {
-            lottos.add(lottoGenerator.createLotto());
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public LottoResults matchWinningLotto(WinningLotto winningLotto) {

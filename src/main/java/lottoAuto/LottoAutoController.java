@@ -5,6 +5,8 @@ import lottoAuto.view.InputView;
 import lottoAuto.view.ResultView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoAutoController {
@@ -14,7 +16,8 @@ public class LottoAutoController {
         int amount = LottoCalculator.calculateAmount(price);
         ResultView.showAmount(amount);
 
-        Lottos lottos = new Lottos(amount);
+        LottoGenerator lottoGenerator = new LottoGenerator(amount);
+        Lottos lottos = new Lottos(lottoGenerator.getLottos());
         ResultView.showUserLotto(lottos);
 
         String winningLottoNumber = InputView.inputWinningNumber();
