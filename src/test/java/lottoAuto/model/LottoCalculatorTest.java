@@ -12,8 +12,8 @@ public class LottoCalculatorTest {
     @Test
     public void calculateAmountTest() {
         LottoCalculator lottoCalculator = new LottoCalculator();
-
-        assertThat(4).isEqualTo(lottoCalculator.calculateAmount(4000));
+        int amount = lottoCalculator.calculateAmount(4000);
+        assertThat(amount).isEqualTo(4);
     }
 
     @DisplayName("로또 계산기는 로또 1장 가격 이하이면 예외를 발생시킨다.")

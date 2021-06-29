@@ -7,6 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -81,13 +84,6 @@ class StringAdditionCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3"})
     void customDelimiter(final String text) {
-        assertThat(calculator.add(text)).isSameAs(6);
-    }
-
-    @DisplayName(value = "//와 \n 문자 사이에 커스텀 구분자와 기존 구분자 (, 와 :)를 혼용할 수 있다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2,3"})
-    void customAndColons(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
 }

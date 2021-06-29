@@ -54,7 +54,7 @@ public class StringAdditionCalculator {
     }
 
     private int custom(String text) {
-        Matcher m = Pattern.compile("^//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         int sum = 0;
         if (m.find()) {
             String customDelimiter = m.group(1);
