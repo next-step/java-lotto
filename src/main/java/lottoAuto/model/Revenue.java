@@ -13,11 +13,11 @@ public class Revenue {
     }
 
     public BigDecimal calculateRevenue() {
-        int sum = resultMap.entrySet().stream()
-                .mapToInt(rankLongEntry -> Rank.calculatePrize(rankLongEntry.getKey(), rankLongEntry.getValue()))
-                .sum();
+        BigDecimal sum = resultMap.entrySet().stream()
+                .map(rankLongEntry -> Rank.calculatePrize(rankLongEntry.getKey(), rankLongEntry.getValue()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(price));
+        return sum.divide(BigDecimal.valueOf(price));
     }
 
     public Map<Rank, Long> getResultMap() {

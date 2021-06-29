@@ -1,5 +1,6 @@
 package lottoAuto.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
@@ -32,7 +33,7 @@ public enum Rank {
         return rank.numberOfWinnings + "개 일치 (" + rank.prize + "원)";
     }
 
-    public static int calculatePrize(Rank rank, Long count) {
-        return rank.prize * Integer.valueOf(String.valueOf(count));
+    public static BigDecimal calculatePrize(Rank rank, Long count) {
+        return BigDecimal.valueOf(rank.prize).multiply(BigDecimal.valueOf(count));
     }
 }
