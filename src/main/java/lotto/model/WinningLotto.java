@@ -26,7 +26,7 @@ public class WinningLotto {
 
     private int makeWinningCount(Set<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningLotto::contains)
+                .filter(winningLotto::contain)
                 .count();
     }
 
