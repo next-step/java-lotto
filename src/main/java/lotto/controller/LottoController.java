@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.model.LottoGenerator;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -14,15 +13,13 @@ public class LottoController {
 
     public void run() {
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
-        int manualLottoCount = Input.inputManualLottoCount();
-        BunchOfLotto bunchOfLotto = new BunchOfLotto();
 
+        int manualLottoCount = Input.inputManualLottoCount();
         Output.printInputManualLottoNumberMessage();
         purchaseCalculator.buySomeBunchOfLotto(manualLottoCount);
-        bunchOfLotto.addBunchOfLotto(makeBunchOfManualLotto(manualLottoCount));
+        BunchOfLotto bunchOfLotto = new BunchOfLotto(makeBunchOfManualLotto(manualLottoCount));
 
         int autoLottoCount = purchaseCalculator.getPurchasableCount();
-
         purchaseCalculator.buySomeBunchOfLotto(autoLottoCount);
         Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
         bunchOfLotto.addBunchOfLotto(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
@@ -45,7 +42,6 @@ public class LottoController {
         }
         return bunchOfLotto;
     }
-
 
     private WinningLotto makeWinningLotto() {
         Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());
