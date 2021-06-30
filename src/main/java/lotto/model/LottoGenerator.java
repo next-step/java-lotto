@@ -2,15 +2,16 @@ package lotto.model;
 
 import lotto.util.TypeConverter;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.model.Lotto.CORRECT_LOTTO_NUMBERS_SIZE;
-
 public class LottoGenerator {
     private static final String CAN_NOT_INPUT_NULL_MESSAGE = "공백은 입력 할 수 없습니다.";
-    private static final List<LottoNumber> numbers =
+    private static final List<LottoNumber> LOTTO_NUMBERS =
             IntStream.rangeClosed(1, 45)
                     .mapToObj(number -> new LottoNumber(number))
                     .collect(Collectors.toList());
@@ -41,13 +42,9 @@ public class LottoGenerator {
         return new BunchOfLotto(bunchOfLotto);
     }
 
-    public static Lotto makeAutoLotto() {
-        Collections.shuffle(numbers);
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        for (int i = 0; i < CORRECT_LOTTO_NUMBERS_SIZE; i++) {
-            lottoNumbers.add(numbers.get(i));
-        }
+    private static Lotto makeAutoLotto() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        Set<LottoNumber> lottoNumbers = new HashSet<>(LOTTO_NUMBERS.subList(0,6));
 
         return new Lotto(lottoNumbers);
     }

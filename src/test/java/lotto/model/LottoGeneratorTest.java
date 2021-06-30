@@ -13,7 +13,7 @@ public class LottoGeneratorTest {
     @DisplayName("자동 로또 생성 되는지 테스트")
     @Test
     void makeLottoTest() {
-        assertThat(LottoGenerator.makeAutoLotto().getClass()).isEqualTo(Lotto.class);
+        assertThat(LottoGenerator.makeBunchOfAutoLotto(1).getBunchOfLotto().get(0).getClass()).isEqualTo(Lotto.class);
     }
 
     @DisplayName("수동 로또 생성 테스트")
