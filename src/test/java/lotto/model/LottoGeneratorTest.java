@@ -28,7 +28,7 @@ public class LottoGeneratorTest {
     @Test
     void getBunchOfAutoLottoTest() {
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(14000);
-        int purchasedLottoCount = purchaseCalculator.getPurchasableCount();
+        int purchasedLottoCount = purchaseCalculator.getPurchasableLottoCounts();
         BunchOfLotto bunchOfLotto = LottoGenerator.makeBunchOfAutoLotto(purchasedLottoCount);
 
         Assertions.assertThat(bunchOfLotto.getBunchOfLotto().size()).isEqualTo(purchasedLottoCount);

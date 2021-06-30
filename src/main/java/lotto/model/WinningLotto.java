@@ -21,7 +21,7 @@ public class WinningLotto {
     }
 
     public Reward getReward(Lotto lotto) {
-        return Reward.getReward(makeWinningCount(lotto.getLottoNumbers()), checkBonusCount(lotto));
+        return Reward.makeReward(makeWinningCount(lotto.getLottoNumbers()), checkBonusCount(lotto));
     }
 
     private int makeWinningCount(Set<LottoNumber> lottoNumbers) {
