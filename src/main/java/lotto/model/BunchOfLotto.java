@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +8,7 @@ public class BunchOfLotto {
     private final List<Lotto> bunchOfLotto;
 
     public BunchOfLotto(BunchOfLotto bunchOfLotto) {
-        this.bunchOfLotto = bunchOfLotto.getBunchOfLotto();
+        this.bunchOfLotto = new ArrayList<>(bunchOfLotto.getBunchOfLotto());
     }
 
     public BunchOfLotto() {
@@ -33,6 +32,6 @@ public class BunchOfLotto {
     }
 
     public List<Lotto> getBunchOfLotto() {
-        return Collections.unmodifiableList(bunchOfLotto);
+        return new ArrayList<>(bunchOfLotto);
     }
 }
