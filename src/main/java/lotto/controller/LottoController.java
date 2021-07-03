@@ -16,11 +16,11 @@ public class LottoController {
 
         int manualLottoCount = Input.inputManualLottoCount();
         Output.printInputManualLottoNumberMessage();
-        purchaseCalculator.buySomeBunchOfLotto(manualLottoCount);
+        purchaseCalculator.purchaseBunchOfLotto(manualLottoCount);
         BunchOfLotto bunchOfLotto = new BunchOfLotto(makeBunchOfManualLotto(manualLottoCount));
 
         int autoLottoCount = purchaseCalculator.getPurchasableLottoCounts();
-        purchaseCalculator.buySomeBunchOfLotto(autoLottoCount);
+        purchaseCalculator.purchaseBunchOfLotto(autoLottoCount);
         Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
         bunchOfLotto.addBunchOfLotto(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
 
