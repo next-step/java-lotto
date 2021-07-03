@@ -17,7 +17,7 @@ public class BunchOfLotto {
 
     public Prizes makeRewards(WinningLotto winningLotto) {
         List<Reward> prizes = bunchOfLotto.stream()
-                .map(lotto -> winningLotto.getReward(lotto))
+                .map(lotto -> winningLotto.makeReward(lotto))
                 .collect(Collectors.toList());
 
         return new Prizes(prizes);

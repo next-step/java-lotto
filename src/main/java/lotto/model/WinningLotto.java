@@ -20,12 +20,12 @@ public class WinningLotto {
         }
     }
 
-    public Reward getReward(Lotto lotto) {
-        return Reward.makeReward(makeWinningCount(lotto.getLottoNumbers()), checkBonusCount(lotto));
+    public Reward makeReward(Lotto lotto) {
+        return Reward.makeReward(makeWinningCount(lotto), checkBonusCount(lotto));
     }
 
-    private int makeWinningCount(Set<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers.stream()
+    private int makeWinningCount(Lotto lotto) {
+        return (int) lotto.getLottoNumbers().stream()
                 .filter(winningLotto::contain)
                 .count();
     }
