@@ -2,10 +2,7 @@ package lotto.model;
 
 import lotto.util.TypeConverter;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,8 +40,9 @@ public class LottoGenerator {
     }
 
     private static Lotto makeAutoLotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        Set<LottoNumber> lottoNumbers = new HashSet<>(LOTTO_NUMBERS.subList(0,6));
+        List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(LOTTO_NUMBERS);
+        Collections.shuffle(shuffleLottoNumbers);
+        Set<LottoNumber> lottoNumbers = new HashSet<>(shuffleLottoNumbers.subList(0,6));
 
         return new Lotto(lottoNumbers);
     }
