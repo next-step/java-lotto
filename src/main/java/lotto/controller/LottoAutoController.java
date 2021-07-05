@@ -23,8 +23,8 @@ public class LottoAutoController {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
-        outputView.outputWinningResults(winningResults.getWinningResults());
-        outputView.outputEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
+        outputView.printWinningResults(winningResults.getWinningResults());
+        outputView.printEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
     }
 
     private Lotto convertWinningNumbers(String winningStringNumbers) {
