@@ -20,13 +20,13 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber of(int number) {
-        return NUMBERS.get(number);
-    }
-
     private LottoNumber(int number) {
         checkNumber(number);
         this.number = number;
+    }
+
+    public static LottoNumber of(int number) {
+        return NUMBERS.get(number);
     }
 
     private void checkNumber(int number) {
