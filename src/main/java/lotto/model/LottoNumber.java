@@ -36,10 +36,7 @@ public class LottoNumber {
     }
 
     public boolean isSame(LottoNumber lottoNumber) {
-        if (number == lottoNumber.getNumber()) {
-            return true;
-        }
-        return false;
+        return number == lottoNumber.number;
     }
 
     public int getNumber() {
