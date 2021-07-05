@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.model.LottoNumber;
-
 import java.util.Scanner;
 
 public class LottoAutoInputView {

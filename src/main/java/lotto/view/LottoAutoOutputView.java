@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.WinningResult;
-import lotto.model.WinningResults;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class LottoAutoOutputView {
         System.out.println("--------");
 
         for (WinningResult value : WinningResult.values()) {
-            if(value == WinningResult.SECOND_PRICE) {
+            if (value == WinningResult.SECOND_PRICE) {
                 System.out.println(value.getCountOfWinningNumber() + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + winningResults.get(value) + "개");
                 continue;
             }
