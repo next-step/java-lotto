@@ -33,8 +33,8 @@ public class LottoManualController {
     private Lotto convertWinningNumbers(String winningStringNumbers) {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
-        for (int i = 0; i < splitWinningNumbers.length; i++) {
-            int number = Integer.parseInt(splitWinningNumbers[i]);
+        for (String splitWinningNumber : splitWinningNumbers) {
+            int number = Integer.parseInt(splitWinningNumber);
             winningNumbers.add(LottoNumber.of(number));
         }
         return new Lotto(winningNumbers);
