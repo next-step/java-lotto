@@ -17,10 +17,10 @@ public class Lotto {
         }
     }
 
-    public int countWinningNumbers(Lotto winningNumbers) {
+    public int countWinningNumbers(Lotto winningLotto) {
         int count = 0;
-        for(LottoNumber winningNumber : winningNumbers.getNumbers()) {
-            if(lottoNumbers.contains(winningNumber)) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winningLotto.contains(lottoNumber)) {
                 count++;
             }
         }
