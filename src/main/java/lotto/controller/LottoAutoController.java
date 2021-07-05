@@ -13,10 +13,9 @@ public class LottoAutoController {
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());
-        int quantity = cashier.calculateLottoQuantity();
 
-        Lottos lottos = new Lottos(quantity);
-        outputView.printLotto(quantity, lottos.getLottos());
+        Lottos lottos = new Lottos(cashier.getLottoQuantity());
+        outputView.printLotto(cashier.getLottoQuantity(), lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
