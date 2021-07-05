@@ -1,6 +1,7 @@
 package lotto.model;
 
 public class Cashier {
+    private static final int LOTTO_PRICE = 1_000;
     private int price;
 
     public Cashier(int price) {
@@ -8,7 +9,7 @@ public class Cashier {
     }
 
     public int calculateLottoQuantity() {
-        return price / 1_000;
+        return price / LOTTO_PRICE;
     }
 
     public int calculateAutoLottoQuantity(int manualQuantity) {
