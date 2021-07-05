@@ -17,7 +17,7 @@ public class Lotto {
         }
     }
 
-    private void checkLottoNumbers() {
+    public void checkLottoNumbers() {
         boolean accordance = false;
         for (int i = 0; i < LOTTO_SIZE; i++) {
             for (int j = 0; j < i; j++) {
