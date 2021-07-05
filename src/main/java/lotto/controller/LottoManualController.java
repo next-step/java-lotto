@@ -13,7 +13,6 @@ public class LottoManualController {
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());
-        int quantity = cashier.calculateLottoQuantity();
         int manualQuantity = inputView.inputManualLottoQuantity();
         int autoQuantity = cashier.calculateAutoLottoQuantity(manualQuantity);
 
