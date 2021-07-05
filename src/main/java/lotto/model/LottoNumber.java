@@ -30,7 +30,7 @@ public class LottoNumber {
     }
 
     private void checkNumber(int number) {
-        if (number < 1 || 45 < number) {
+        if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new IllegalArgumentException("당첨번호는 1부터 45까지의 숫자입니다.");
         }
     }
