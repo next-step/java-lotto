@@ -17,6 +17,20 @@ public class Lotto {
         }
     }
 
+    private void checkLottoNumbers() {
+        boolean accordance = false;
+        for (int i = 0; i < LOTTO_SIZE; i++) {
+            for (int j = 0; j < i; j++) {
+                if (lottoNumbers.get(i) == lottoNumbers.get(j)) {
+                    accordance = true;
+                }
+            }
+        }
+        if (accordance) {
+            throw new IllegalArgumentException("로또 번호는 모두 달라야 합니다.");
+        }
+    }
+
     public int countWinningNumbers(Lotto winningLotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
