@@ -23,6 +23,7 @@ public class Lotto {
             for (int j = 0; j < i; j++) {
                 if (lottoNumbers.get(i) == lottoNumbers.get(j)) {
                     accordance = true;
+                    break;
                 }
             }
         }
