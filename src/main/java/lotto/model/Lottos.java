@@ -12,7 +12,7 @@ public class Lottos {
         createAutoLottos(quantity);
     }
 
-    public Lottos(int autoQuantity, int manualQuantity, List<String> manualNumbers) {
+    public Lottos(int manualQuantity, int autoQuantity, List<String> manualNumbers) {
         createManualLottos(manualQuantity, manualNumbers);
         createAutoLottos(autoQuantity);
     }
