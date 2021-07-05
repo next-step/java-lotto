@@ -9,11 +9,6 @@ public class LottoNumber {
     private static final int MAX_NUMBER = 45;
     private int number;
 
-    @Override
-    public String toString() {
-        return number + "";
-    }
-
     static {
         for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
             NUMBERS.put(number, new LottoNumber(number));
@@ -39,7 +34,8 @@ public class LottoNumber {
         return number == lottoNumber.number;
     }
 
-    public int getNumber() {
-        return number;
+    @Override
+    public String toString() {
+        return number + "";
     }
 }
