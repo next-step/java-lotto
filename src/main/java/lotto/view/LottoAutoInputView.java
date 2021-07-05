@@ -21,10 +21,10 @@ public class LottoAutoInputView {
         return scanner.nextLine();
     }
 
-    public LottoNumber inputBonusNumber() {
+    public int inputBonusNumber() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.of(scanner.nextInt());
+        return scanner.nextInt();
     }
 }

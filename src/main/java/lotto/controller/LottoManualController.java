@@ -22,7 +22,7 @@ public class LottoManualController {
         outputView.printLottos(manualQuantity, autoQuantity, lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
-        LottoNumber bonusNumber = inputView.inputBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
