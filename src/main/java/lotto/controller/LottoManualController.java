@@ -26,7 +26,6 @@ public class LottoManualController {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
-        lottos.countWinningResults(winningLotto);
         outputView.outputWinningResults(winningResults.getWinningResults());
         outputView.outputEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
     }
