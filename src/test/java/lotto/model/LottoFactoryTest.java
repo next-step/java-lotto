@@ -13,16 +13,19 @@ public class LottoFactoryTest {
     void setUp() {
         lottoFactory = new LottoFactory();
     }
+
     @DisplayName(value = "자동 로또 갯수만큼 생성하기")
     @Test
     void create_auto_lottos() {
         List<Lotto> lottos = lottoFactory.createAutoLottos(3);
+        System.out.println("자동 로또 갯수만큼 생성하기");
         for(Lotto lotto : lottos) {
             for(LottoNumber lottoNumber : lotto.getNumbers()) {
                 System.out.print(lottoNumber.toString() + " ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     @DisplayName(value = "수동 로또 갯수만큼 생성하기")
@@ -33,6 +36,7 @@ public class LottoFactoryTest {
         manualNumbers.add("2, 3, 4, 5, 6, 7");
         manualNumbers.add("3, 4, 5, 6, 7, 8");
         List<Lotto> lottos = lottoFactory.createManualLottos(3, manualNumbers);
+        System.out.println("수동 로또 갯수만큼 생성하기");
         for(Lotto lotto : lottos) {
             for(LottoNumber lottoNumber : lotto.getNumbers()) {
                 System.out.print(lottoNumber.toString() + " ");
