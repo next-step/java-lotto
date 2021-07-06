@@ -33,6 +33,19 @@ public class Lotto {
         }
     }
 
+    public void sort() {
+        List<Integer> lottoValues = new ArrayList<>();
+        for(LottoNumber lottoNumber : this.lottoNumbers) {
+            lottoValues.add(Integer.parseInt(lottoNumber.toString()));
+        }
+        lottoValues.sort(null);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int lottoValue : lottoValues) {
+            lottoNumbers.add(LottoNumber.of(lottoValue));
+        }
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
     public int countWinningNumbers(Lotto winningLotto) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
