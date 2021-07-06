@@ -91,6 +91,7 @@
 - [x] `Lotto#Lotto` : 생성자
 - [x] `Lotto#checkLottoSize` : 로또 번호 갯수 확인
 - [x] `Lotto#checkLottoNumbers` : 로또 번호들이 서로 겹치는지 확인
+- [x] `Lotto#sort` : 로또 번호 오름차순 정렬
 - [x] `Lotto#countWinningNumbers` : 당첨번호 포함 갯수
 - [x] `Lotto#contains` : LottoNumber 포함 여부
 - [x] `Lotto#getNumbers` : getter
