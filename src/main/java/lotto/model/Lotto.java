@@ -1,30 +1,71 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-    private List<Integer> lottoNumbers;
+    private static final int LOTTO_SIZE = 6;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        checkLottoSize(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public int countWinningNumbers(Lotto winningNumbers) {
+    private void checkLottoSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 숫자 갯수는 6개여야 합니다.");
+        }
+    }
+
+    public void checkLottoNumbers() {
+        boolean accordance = false;
+        for (int i = 0; i < LOTTO_SIZE; i++) {
+            for (int j = 0; j < i; j++) {
+                if (lottoNumbers.get(i) == lottoNumbers.get(j)) {
+                    accordance = true;
+                    break;
+                }
+            }
+        }
+        if (accordance) {
+            throw new IllegalArgumentException("로또 번호는 모두 달라야 합니다.");
+        }
+    }
+
+    public void sort() {
+        List<Integer> lottoValues = new ArrayList<>();
+        for(LottoNumber lottoNumber : this.lottoNumbers) {
+            lottoValues.add(Integer.parseInt(lottoNumber.toString()));
+        }
+        lottoValues.sort(null);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int lottoValue : lottoValues) {
+            lottoNumbers.add(LottoNumber.of(lottoValue));
+        }
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    public int countWinningNumbers(Lotto winningLotto) {
         int count = 0;
-        for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            if (lottoNumbers.contains(winningNumbers.getNumbers().get(i))) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winningLotto.contains(lottoNumber)) {
                 count++;
             }
         }
         return count;
     }
 
-    public boolean contains(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.isSame(number)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public List<Integer> getNumbers() {
-        return lottoNumbers;
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 }

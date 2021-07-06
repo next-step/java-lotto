@@ -8,39 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoAutoController {
-    LottoAutoInputView inputView = new LottoAutoInputView();
-    LottoAutoOutputView outputView = new LottoAutoOutputView();
-    AutoLotto autoLotto = new AutoLotto();
-    WinningResult winningResult;
+    private LottoAutoInputView inputView = new LottoAutoInputView();
+    private LottoAutoOutputView outputView = new LottoAutoOutputView();
+    private LottoFactory lottoFactory = new LottoFactory();
 
     public void start() {
-        LottoPrice lottoPrice = new LottoPrice(inputView.inputPrice());
-        int quantity = lottoPrice.calculateLottoQuantity();
+        Cashier cashier = new Cashier(inputView.inputPrice());
 
-        Lottos lottos = new Lottos(autoLotto.createLottos(quantity));
-        outputView.printLotto(quantity, lottos.getLottos());
+        List<Lotto> autoLottos = lottoFactory.createAutoLottos(cashier.getLottoQuantity());
+        Lottos lottos = new Lottos(autoLottos);
+        outputView.printLotto(cashier.getLottoQuantity(), lottos.getLottos());
 
-        Lotto winningNumbers = new Lotto(convertWinningNumbersToInt(inputView.inputWinningNumbers()));
-        int bonusNumber = convertBonusNumberToInt(inputView.inputBonusNumber());
+        Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        lottos.countWinningResults(winningLotto.getWinningNumbers(), winningLotto.getBonusNumber(), winningResult);
-        outputView.outputWinningResults(winningResult.getNumberOfWins());
-        outputView.outputEarningRate(lottos.calculateEarningRate(winningResult.calculateEarningPrice(), lottoPrice.getPrice()));
+        WinningResults winningResults = lottos.countWinningResults(winningLotto);
+        outputView.printWinningResults(winningResults.getWinningResults());
+        outputView.printEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
     }
 
-    private List<Integer> convertWinningNumbersToInt(String winningStringNumbers) {
-        List<Integer> winningNumbers = new ArrayList<>();
+    private Lotto convertWinningNumbers(String winningStringNumbers) {
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         String[] splitWinningNumbers = winningStringNumbers.split(", ");
-        for (int i = 0; i < splitWinningNumbers.length; i++) {
-            int number = Integer.parseInt(splitWinningNumbers[i]);
-            winningNumbers.add(number);
+        for (String splitWinningNumber : splitWinningNumbers) {
+            int number = Integer.parseInt(splitWinningNumber);
+            winningNumbers.add(LottoNumber.of(number));
         }
-        return winningNumbers;
-    }
-
-    private int convertBonusNumberToInt(String bonusStringNumber) {
-        int bonusNumber = Integer.parseInt(bonusStringNumber);
-        return bonusNumber;
+        return new Lotto(winningNumbers);
     }
 }
