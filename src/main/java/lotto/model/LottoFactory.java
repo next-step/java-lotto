@@ -40,7 +40,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static Lotto createAutoLotto() {
+    private static Lotto createAutoLotto() {
         Collections.shuffle(numbers);
 
         return new Lotto(numbers.stream()
@@ -48,7 +48,7 @@ public class LottoFactory {
                 .collect(Collectors.toList()));
     }
 
-    public static Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
+    private static Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 }
