@@ -70,95 +70,73 @@
 - 줄여 쓰지 않는다(축약 금지).
 - 일급 컬렉션을 쓴다.
 
-## Lotto Manual 구현 기능 목록
-- [x] 사용자로부터 로또 구매 금액을 입력받는다.
-- [x] 구매 금액만큼 로또 수량을 계산한다.
-- [x] 사용자로부터 로또 수동 구매 갯수를 입력받는다.
-- [x] 로또 수동 갯수와 로또 자동 갯수를 계산한다.
-- [x] 로또 수동 갯수만큼 번호들을 입력받는다.
-- [x] 로또 자동 갯수만큼 자동으로 번호를 생성한다.
-- [x] 로또 객체들을 생성한다.
+## 기능 구현 목록
+**Cashier**
+- [x] `Cashier#Cashier` : 생성자
+- [x] `Cashier#calculateAutoLottoQuantity` : 자동 로또 갯수 계산
+- [x] `Cashier#getPrice` : getter
+- [x] `Cashier#getLottoQuantity` : getter
+- [x] `Cashier#getAutoQuantity` : getter
+- [x] `Cashier#getManualQuantity` : getter
 
-- [x] 사용자로부터 지난 주 로또 당첨번호와 보너스번호를 입력받는다.
-- [x] 로또 번호들과 당첨번호와 보너스번호를 비교한다.
-- [x] 로또 한 장마다 몇 개의 번호가 당첨번호와 동일한지 비교하여 센다.
-- [x] 동일한 번호 갯수가 3개일 경우 5등, 4개일 경우 4등, 5개일 경우 3등 혹은 2등, 6개일 경우 1등이다.
-- [x] 동일한 번호 갯수가 5개이고 보너스번호도 가지고 있다면 2등, 그렇지 않다면 3등이다.
-- [x] 당첨 결과를 출력한다.
-- [x] 총 수익률(당첨금액/구매금액) 을 계산하여 출력한다.
+**LottoNumber**
+- [x] `static` : 1부터 45까지 로또 숫자 생성
+- [x] `LottoNumber#LottoNumber` : 생성자
+- [x] `LottoNumber#of` : static factory method
+- [x] `LottoNumber#checkNumber` : 1부터 45까지의 수인지 확인
+- [x] `LottoNumber#isSame` : 다른 LottoNumber 와 일치 여부
+- [x] `LottoNumber#toString` : 로또 번호 숫자값 반환
 
-### lotto.mode.LottoNumber 의 기능
-- (int) number
-- `LottoNumber#LottoNumber` : 생성자
-- `LottoNumber#checkNumber` : 1부터 45까지의 수인지 확인
-- `LottoNumber#isSame` : 다른 LottoNumber 와 일치 여부
-- `LottoNumber#getNumber` : getter
+**LottoFactory**
+- [x] `static` : 1부터 45까지 로또 번호 생성
+- [x] `LottoFactory#createAutoLottos` : 자동 로또 갯수만큼 생성
+- [x] `LottoFactory#createManualLottos` : 수동 로또 갯수만큼 생성
+- [x] `LottoFactory#createAutoLotto` : 자동 로또 생성
+- [x] `LottoFactory#createManualLotto` : 수동 로또 생성
 
-### lotto.model.Lotto 의 기능
-- (List<LottoNumber>) lottoNumbers
-- `Lotto#Lotto` : 생성자
-- `Lotto#countWinningNumbers` : 당첨번호 포함 갯수
-- `Lotto#contains` : LottoNumber 포함 여부
-- `Lotto#getNumbers` : getter
+**Lotto**
+- [x] `Lotto#Lotto` : 생성자
+- [x] `Lotto#checkLottoSize` : 로또 번호 갯수 확인
+- [x] `Lotto#checkLottoNumbers` : 로또 번호들이 서로 겹치는지 확인
+- [x] `Lotto#countWinningNumbers` : 당첨번호 포함 갯수
+- [x] `Lotto#contains` : LottoNumber 포함 여부
+- [x] `Lotto#getNumbers` : getter
 
-### lotto.model.Lottos 의 기능
-- (List<Lotto>) lottos
-- `Lottos#Lottos` : 로또 자동 생성자
-- `Lottos#Lottos` : 로또 수동 생성자
-- `Lottos#createAutoLottos` : 로또 자동 생성
-- `Lottos#createManualLottos` : 로또 수동 생성
-- `Lottos#countWinningResults` : 당첨 결과 집계
-- `Lottos#calculateEarningRate` : 총 수익률 집계
-- `Lottos#getLottos` : getter
+**Lottos**
+- [x] `Lottos#Lottos` : 생성자
+- [x] `Lottos#countWinningResults` : 당첨 결과 집계
+- [x] `Lottos#getLottos` : getter
 
-### lotto.model.AutoLottoMaker 의 기능
-- MIN_NUMBER
-- MAX_NUMBER
-- NUMBER_OF_LOTTO_NUMBERS
-- (List<Integer>) numbers
-- `AutoLotto#AutoLotto` : 생성자. 1부터 45까지의 숫자 생성
-- `AutoLotto#createLottoNumbers` : 1부터 45까지의 숫자를 섞어서 자동으로 선택한 6개의 숫자를 로또번호들로 생성 
+**WinningLotto**
+- [x] `WinningLotto#WinningLotto` : 생성자
+- [x] `WinningLotto#checkBonusNumber` : 당첨번호 중 보너스번호와 동일한 번호가 있는지 확인
+- [x] `WinningLotto#countWinningNumbers` : 입력받은 lotto 의 당첨번호 갯수 세기
+- [x] `WinningLotto#containsBonusNumber` : 입력받은 lotto 의 보너스번호 존재여부 확인
 
-### lotto.model.ManualLottoMaker 의 기능
-- NUMBER_OF_LOTTO_NUMBERS
-- `ManualLotto#createLottoNumbers` : 사용자로부터 입력받은 수동번호를 로또번호들로 생성
-- `ManualLotto#splitBySeparator` : 문자열을 구분자로 분리
-- `ManualLotto#addLottoNumbers ` : 분리된 문자열을 로또번호들로 변경
+**WinningResult(enum)**
+- [x] `WinningResult#WinningResult` : 생성자
+- [x] `WinningResult#addNumberOfWinning` : 당첨 횟수 저장
+- [x] `WinningResult#calculateEarningPrice` : 총 수익 계산
+- [x] `WinningResult#getWinningAmount` : getter
+- [x] `WinningResult#getNumberOfWins` : getter
 
-### lotto.model.Cashier 의 기능
-- (int) price
-- `LottoPrice#LottoPrice` : 생성자
-- `LottoPrice#getPrice` : getter
-- `LottoPrice#calculateLottoQuantity` : 로또 갯수 계산
+**WinningResults**
+- [x] `WinningResults#WinningResults` : 생성자
+- [x] `WinningResults#calculateEarningRate` : 당첨결과 총 수익률 계산
+- [x] `WinningResults#getWinningResults` : getter
 
-### lotto.model.WinningLotto 의 기능
-- (Lotto) winningNumbers
-- (LottoNumber) bonusNumber
-- `WinningLotto#WinningLotto` : 생성자
-- `WinningLotto#getWinningNumbers` : getter
-- `WinningLotto#getBonusNumber` : getter
+**LottoManualInputView**
+- [x] `LottoManualInputView#inputPrice` : 로또구매금액 입력
+- [x] `LottoManualInputView#inputManualLottoQuantity` : 수동 로또 구매 갯수 입력
+- [x] `LottoManualInputView#inputManualLottoNumbers` : 수동 로또 번호 입력
+- [x] `LottoManualInputView#inputWinningNumbers` : 당첨번호 입력
+- [x] `LottoManualInputView#inputBonusNumber` : 보너스번호 입력
 
-### lotto.model.WinningResult 의 기능
-- (int) winningAmount
-- (List<Integer>) numberOfWins
-- `WinningResult#WinningResult` : 생성자
-- `WinningResult#addNumberOfWinning` : 당첨 횟수 저장
-- `WinningResult#calculateEarningPrice` : 총 수익 계산
-- `WinningResult#getWinningAmount` : getter
-- `WinningResult#getNumberOfWins` : getter
+**LottoManualOutputView**
+- [x] `LottoManualOutputView#printLotto` : 로또 수동, 자동 구매갯수 출력. 로또별 6개의 번호 출력
+- [x] `LottoManualOutputView#printWinningResults` : 로또 당첨 결과 출력
+- [x] `LottoManualOutputView#printEarningRate` : 로또 총 수익률 출력
 
-### lotto.view.LottoManualInputView 의 기능
-- `LottoManualInputView#inputPrice` : 사용자로부터 로또구매금액을 입력받는다.
-- `LottoManualInputView#inputManualLottoQuantity` : 사용자로부터 로또수동갯수를 입력받는다.
-- `LottoManualInputView#inputManualLottoNumbers` : 사용자로부터 로또수동번호들을 입력받는다.
-- `LottoManualInputView#inputWinningNumbers` : 사용자로부터 당첨번호를 입력받는다.
-- `LottoManualInputView#inputBonusNumber` : 사용자로부터 보너스번호를 입력받는다.
-
-### lotto.view.LottoManualOutputView 의 기능
-- `LottoManualOutputView#printLottos` : 사용자에게 로또 수동, 자동 구매갯수를 출력해준다. 사용자가 구매한 로또별로 6개의 번호를 출력해준다.
-- `LottoManualOutputView#outputWinningResults` : 사용자가 구매한 로또들의 당첨 결과를 출력해준다.
-- `LottoManualOutputView#outputEarningRate` : 사용자가 구매한 로또들의 총 수익률을 출력해준다.
-
-### lotto.controller.LottoManualController 의 기능
-- `LottoManualController#start` : 시작. 흐름 제어
-- `LottoManualController#convertWinningNumbers` : 입력받은 당첨번호를 로또로 생성
+**LottoManualController**
+- [x] `LottoManualController#start` : 시작. 흐름 제어
+- [x] `LottoManualController#convertWinningNumbers` : 문자열로 입력받은 당첨번호를 로또로 변환
