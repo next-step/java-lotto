@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.Map;
 
 public class WinningResults {
-
     private final Map<WinningResult, Integer> winningResults;
 
     public WinningResults(Map<WinningResult, Integer> winningResults) {
