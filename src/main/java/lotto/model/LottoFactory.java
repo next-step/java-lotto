@@ -16,11 +16,34 @@ public class LottoFactory {
         }
     }
 
+    public List<Lotto> createAutoLottos(int quantity) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            lottos.add(createAutoLotto());
+        }
+        return lottos;
+    }
+
+    public List<Lotto> createManualLottos(int quantity, List<String> manualNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < quantity; i++) {
+            String separator = ", ";
+            String[] splitManualNumbers = manualNumbers.get(i).split(separator);
+            List<LottoNumber> lottoNumbers = new ArrayList<>();
+            for (int j = 0; j < LOTTO_SIZE; j++) {
+                int lottoNumber = Integer.parseInt(splitManualNumbers[j]);
+                lottoNumbers.add(LottoNumber.of(lottoNumber));
+            }
+            lottos.add(createManualLotto(lottoNumbers));
+        }
+        return lottos;
+    }
+
     public static Lotto createAutoLotto() {
         Collections.shuffle(numbers);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i< LOTTO_SIZE;i++) {
+        for (int i = 0; i < LOTTO_SIZE; i++) {
             lottoNumbers.add(numbers.get(i));
         }
         //Collections.sort(lottoNumbers);

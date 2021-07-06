@@ -6,35 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
-    private static final int LOTTO_SIZE = 6;
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public Lottos(int quantity) {
-        createAutoLottos(quantity);
-    }
-
-    public Lottos(int manualQuantity, int autoQuantity, List<String> manualNumbers) {
-        createManualLottos(manualQuantity, manualNumbers);
-        createAutoLottos(autoQuantity);
-    }
-
-    public void createAutoLottos(int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(LottoFactory.createAutoLotto());
-        }
-    }
-
-    public void createManualLottos(int quantity, List<String> manualNumbers) {
-        for (int i = 0; i < quantity; i++) {
-            String separator = ", ";
-            String[] splitManualNumbers = manualNumbers.get(i).split(separator);
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-            for (int j = 0; j < LOTTO_SIZE; j++) {
-                int lottoNumber = Integer.parseInt(splitManualNumbers[j]);
-                lottoNumbers.add(LottoNumber.of(lottoNumber));
-            }
-            lottos.add(LottoFactory.createManualLotto(lottoNumbers));
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public WinningResults countWinningResults(WinningLotto winningLotto) {

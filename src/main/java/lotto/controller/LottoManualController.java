@@ -10,6 +10,7 @@ import java.util.List;
 public class LottoManualController {
     private LottoManualInputView inputView = new LottoManualInputView();
     private LottoManualOutputView outputView = new LottoManualOutputView();
+    private LottoFactory lottoFactory = new LottoFactory();
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());
@@ -17,7 +18,12 @@ public class LottoManualController {
 
         List<String> manualNumbers = inputView.inputManualLottoNumbers(cashier.getManualQuantity());
 
-        Lottos lottos = new Lottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), manualNumbers);
+        List<Lotto> autoLottos = lottoFactory.createManualLottos(cashier.getManualQuantity(), manualNumbers);
+        List<Lotto> manualLottos = lottoFactory.createAutoLottos(cashier.getAutoQuantity());
+        List<Lotto> joinedLottos = new ArrayList<>();
+        joinedLottos.addAll(autoLottos);
+        joinedLottos.addAll(manualLottos);
+        Lottos lottos = new Lottos(joinedLottos);
         outputView.printLottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());

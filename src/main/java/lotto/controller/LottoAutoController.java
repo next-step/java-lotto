@@ -10,11 +10,13 @@ import java.util.List;
 public class LottoAutoController {
     private LottoAutoInputView inputView = new LottoAutoInputView();
     private LottoAutoOutputView outputView = new LottoAutoOutputView();
+    private LottoFactory lottoFactory = new LottoFactory();
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());
 
-        Lottos lottos = new Lottos(cashier.getLottoQuantity());
+        List<Lotto> autoLottos = lottoFactory.createAutoLottos(cashier.getLottoQuantity());
+        Lottos lottos = new Lottos(autoLottos);
         outputView.printLotto(cashier.getLottoQuantity(), lottos.getLottos());
 
         Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
