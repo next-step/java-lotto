@@ -43,9 +43,13 @@ public class LottoFactory {
     private static Lotto createAutoLotto() {
         Collections.shuffle(numbers);
 
-        return new Lotto(numbers.stream()
-                .limit(LOTTO_SIZE)
-                .collect(Collectors.toList()));
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int i = 0; i< LOTTO_SIZE;i++) {
+            lottoNumbers.add(numbers.get(i));
+        }
+        Lotto lotto = new Lotto(lottoNumbers);
+        lotto.sort();
+        return lotto;
     }
 
     private static Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
