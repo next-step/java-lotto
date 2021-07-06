@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
     private static final int MIN_NUMBER = 1;
@@ -42,12 +43,9 @@ public class LottoFactory {
     public static Lotto createAutoLotto() {
         Collections.shuffle(numbers);
 
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            lottoNumbers.add(numbers.get(i));
-        }
-        //Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
+        return new Lotto(numbers.stream()
+                .limit(LOTTO_SIZE)
+                .collect(Collectors.toList()));
     }
 
     public static Lotto createManualLotto(List<LottoNumber> lottoNumbers) {
