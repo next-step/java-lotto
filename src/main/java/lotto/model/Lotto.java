@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -8,7 +9,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void checkLottoSize(List<LottoNumber> lottoNumbers) {
@@ -52,6 +53,6 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 }
