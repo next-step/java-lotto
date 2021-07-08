@@ -10,15 +10,14 @@ public class LottoCount {
     }
 
     public void purchaseLotto(int purchaseCount) {
-        isPurchasable(purchaseCount);
+        validatePurchasable(purchaseCount);
         this.purchasableLottoCount = purchasableLottoCount - purchaseCount;
     }
 
-    private boolean isPurchasable(int purchaseCount) {
+    private void validatePurchasable(int purchaseCount) {
         if (purchasableLottoCount < purchaseCount) {
             throw new IllegalArgumentException(CAN_NOT_PURCHASE_MESSAGE);
         }
-        return true;
     }
 
     public int getPurchasableLottoCount() {
