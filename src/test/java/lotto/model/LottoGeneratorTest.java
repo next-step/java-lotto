@@ -13,7 +13,7 @@ public class LottoGeneratorTest {
     @DisplayName("자동 로또 생성 되는지 테스트")
     @Test
     void makeLottoTest() {
-        assertThat(LottoGenerator.makeBunchOfAutoLotto(1).getBunchOfLotto().get(0).getClass()).isEqualTo(Lotto.class);
+        assertThat(LottoGenerator.makeBunchOfAutoLotto(1).getLottos().get(0).getClass()).isEqualTo(Lotto.class);
     }
 
     @DisplayName("수동 로또 생성 테스트")
@@ -29,8 +29,8 @@ public class LottoGeneratorTest {
     void getBunchOfAutoLottoTest() {
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(14000);
         int purchasedLottoCount = purchaseCalculator.getPurchasableLottoCounts();
-        BunchOfLotto bunchOfLotto = LottoGenerator.makeBunchOfAutoLotto(purchasedLottoCount);
+        Lottos lottos = LottoGenerator.makeBunchOfAutoLotto(purchasedLottoCount);
 
-        Assertions.assertThat(bunchOfLotto.getBunchOfLotto().size()).isEqualTo(purchasedLottoCount);
+        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(purchasedLottoCount);
     }
 }

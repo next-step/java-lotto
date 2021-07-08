@@ -11,7 +11,7 @@ public class PurchaseCalculator {
         this.lottoCount = new LottoCount(purchaseAmount / LOTTERY_PRICE);
     }
 
-    public void purchaseBunchOfLotto(int purchaseCount) {
+    public void purchaseLottos(int purchaseCount) {
         this.lottoCount.purchaseLotto(purchaseCount);
     }
 

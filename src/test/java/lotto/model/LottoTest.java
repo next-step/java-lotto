@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
+    private static final int CORRECT_LOTTO_NUMBERS_SIZE = 6;
 
     @DisplayName("로또 생성시 로또 번호 리스트의 길이가 6이 아니면 에러.")
     @ParameterizedTest
@@ -47,10 +48,10 @@ public class LottoTest {
     @DisplayName("로또에서 로또 번호 리스트를 가져올 수 있다.")
     @Test
     void getLottoNumbersTest() {
-        Lotto lotto = LottoGenerator.makeBunchOfAutoLotto(1).getBunchOfLotto().get(0);
+        Lotto lotto = LottoGenerator.makeBunchOfAutoLotto(1).getLottos().get(0);
 
         assertThat(lotto
                 .getLottoNumbers()
-                .size()).isEqualTo(Lotto.CORRECT_LOTTO_NUMBERS_SIZE);
+                .size()).isEqualTo(CORRECT_LOTTO_NUMBERS_SIZE);
     }
 }

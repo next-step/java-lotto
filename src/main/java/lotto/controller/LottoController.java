@@ -5,6 +5,8 @@ import lotto.view.Input;
 import lotto.view.Output;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static lotto.util.TypeConverter.convertStringToLottoNumberSet;
@@ -16,31 +18,31 @@ public class LottoController {
 
         int manualLottoCount = Input.inputManualLottoCount();
         Output.printInputManualLottoNumberMessage();
-        purchaseCalculator.purchaseBunchOfLotto(manualLottoCount);
-        BunchOfLotto bunchOfLotto = new BunchOfLotto(makeBunchOfManualLotto(manualLottoCount));
+        purchaseCalculator.purchaseLottos(manualLottoCount);
+        Lottos lottos = new Lottos(makeBunchOfManualLotto(manualLottoCount));
 
         int autoLottoCount = purchaseCalculator.getPurchasableLottoCounts();
-        purchaseCalculator.purchaseBunchOfLotto(autoLottoCount);
+        purchaseCalculator.purchaseLottos(autoLottoCount);
         Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
-        bunchOfLotto.addBunchOfLotto(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
+        lottos.addLottos(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
 
-        Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
+        Output.printBunchOfLottoNumbers(lottos.getLottos());
 
         WinningLotto winningLotto = makeWinningLotto();
-        Prizes prizes = bunchOfLotto.makeRewards(winningLotto);
+        Prizes prizes = lottos.makeRewards(winningLotto);
         BigDecimal yield = prizes.makeYield(purchaseCalculator.getPurchaseAmount());
 
         Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
-    private BunchOfLotto makeBunchOfManualLotto(int manualLottoCount) {
-        BunchOfLotto bunchOfLotto = new BunchOfLotto();
+    private List<Lotto>  makeBunchOfManualLotto(int manualLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < manualLottoCount; i++) {
             String inputNumber = Input.inputManualLottoNumber();
-            bunchOfLotto.addLotto(LottoGenerator.makeManualLotto(inputNumber));
+            lottos.add(LottoGenerator.makeManualLotto(inputNumber));
         }
-        return bunchOfLotto;
+        return lottos;
     }
 
     private WinningLotto makeWinningLotto() {

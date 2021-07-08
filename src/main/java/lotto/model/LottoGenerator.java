@@ -29,14 +29,14 @@ public class LottoGenerator {
         }
     }
 
-    public static BunchOfLotto makeBunchOfAutoLotto(int purchasedLottoCount) {
-        BunchOfLotto bunchOfLotto = new BunchOfLotto();
+    public static Lottos makeBunchOfAutoLotto(int purchasedLottoCount) {
+        List<Lotto> bunchOfLotto = new ArrayList<>();
 
         for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLotto.addLotto(LottoGenerator.makeAutoLotto());
+            bunchOfLotto.add(LottoGenerator.makeAutoLotto());
         }
 
-        return new BunchOfLotto(bunchOfLotto);
+        return new Lottos(bunchOfLotto);
     }
 
     private static Lotto makeAutoLotto() {
