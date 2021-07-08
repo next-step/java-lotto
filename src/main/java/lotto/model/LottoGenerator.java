@@ -18,7 +18,12 @@ public class LottoGenerator {
 
     public static Lotto makeManualLotto(String inputNumber) {
         validateInputNumber(inputNumber);
-        Set<LottoNumber> lottoNumbers = TypeConverter.convertStringToLottoNumberSet(inputNumber);
+        Set<Integer> lottoNumbersIndex = TypeConverter.convertStringToIntegerSet(inputNumber);
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        for(int index : lottoNumbersIndex){
+            lottoNumbers.add(LOTTO_NUMBERS.get(index));
+        }
 
         return new Lotto(lottoNumbers);
     }
