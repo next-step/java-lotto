@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static lotto.util.TypeConverter.convertStringToLottoNumberSet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottosTest {
     @DisplayName("수동으로 생성된 로또 추가")
@@ -18,27 +19,33 @@ public class LottosTest {
         Lottos lottos = new Lottos();
         lottos.addLotto(LottoGenerator.makeManualLotto(inputNumber));
 
-        assertThat(lottos.getLottos().size()).isEqualTo(1);
+        assertThat(lottos.getLottos()).hasSize(1);
     }
 
     @DisplayName("자동으로 생성된 로또들 추가")
     @Test
     void addBunchOfLottoTest() {
         Lottos lottos = new Lottos();
-        lottos.addLottos(LottoGenerator.makeBunchOfAutoLotto(5));
+        lottos.addLottos(LottoGenerator.makeAutoLottos(5));
 
-        assertThat(lottos.getLottos().size()).isEqualTo(5);
+        assertThat(lottos.getLottos()).hasSize(5);
     }
 
-    @Test
-    void makeRewardTest() {
-        String winningNumber = "1,2,3,11,22,33";
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,11,22,33"})
+    void makeRewardsTest(String winningNumber) {
         LottoNumber incorrectBonusBall = new LottoNumber(7);
-
         Set<LottoNumber> winningLottoNumbers = convertStringToLottoNumberSet((winningNumber));
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, incorrectBonusBall);
-        Lottos lottos = LottoGenerator.makeBunchOfAutoLotto(1);
 
-        assertThat(lottos.makeRewards(winningLotto).getClass()).isEqualTo(Prizes.class);
+        Lottos lottos = new Lottos();
+        String lottoNumbers = "1,2,3,11,44,45";
+        Lotto lotto = LottoGenerator.makeManualLotto(lottoNumbers);
+        lottos.addLotto(lotto);
+
+        assertAll(
+                () -> assertThat(lottos.makePrizes(winningLotto).getPrizes()).hasSize(6),
+                () -> assertThat(lottos.makePrizes(winningLotto).getPrizes().get(Reward.FOURTH_PRIZE)).isEqualTo(1)
+        );
     }
 }

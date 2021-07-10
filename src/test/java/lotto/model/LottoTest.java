@@ -48,7 +48,7 @@ public class LottoTest {
     @DisplayName("로또에서 로또 번호 리스트를 가져올 수 있다.")
     @Test
     void getLottoNumbersTest() {
-        Lotto lotto = LottoGenerator.makeBunchOfAutoLotto(1).getLottos().get(0);
+        Lotto lotto = LottoGenerator.makeAutoLottos(1).getLottos().get(0);
 
         assertThat(lotto
                 .getLottoNumbers()

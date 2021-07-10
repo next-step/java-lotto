@@ -62,19 +62,19 @@ public class Output {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
     }
 
-    public static void printWinStatics(Map<Integer, Integer> prizes, BigDecimal yield) {
+    public static void printWinStatics(Map<Reward, Integer> prizes, BigDecimal yield) {
         System.out.println(WIN_STATIC_MESSAGE);
         System.out.println(SEPARATOR);
         printPrize(prizes);
         printYield((yield));
     }
 
-    public static void printPrize(Map<Integer, Integer> prizes) {
-        printFirstPrize(prizes.get(Reward.FIRST_PRIZE.getPrizeMoney()));
-        printSecondPrize(prizes.get(Reward.SECOND_PRIZE.getPrizeMoney()));
-        printThirdPrize(prizes.get(Reward.THIRD_PRIZE.getPrizeMoney()));
-        printForthPrize(prizes.get(Reward.FOURTH_PRIZE.getPrizeMoney()));
-        printFifthPrize(prizes.get(Reward.FIFTH_PRIZE.getPrizeMoney()));
+    public static void printPrize(Map<Reward, Integer> prizes) {
+        printFirstPrize(prizes.get(Reward.FIRST_PRIZE));
+        printSecondPrize(prizes.get(Reward.SECOND_PRIZE));
+        printThirdPrize(prizes.get(Reward.THIRD_PRIZE));
+        printForthPrize(prizes.get(Reward.FOURTH_PRIZE));
+        printFifthPrize(prizes.get(Reward.FIFTH_PRIZE));
     }
 
     private static void printFirstPrize(Integer winCount) {

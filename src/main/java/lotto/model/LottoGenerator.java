@@ -36,14 +36,14 @@ public class LottoGenerator {
         }
     }
 
-    public static Lottos makeBunchOfAutoLotto(int purchasedLottoCount) {
-        List<Lotto> bunchOfLotto = new ArrayList<>();
+    public static Lottos makeAutoLottos(int purchasedLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLotto.add(makeAutoLotto());
+            lottos.add(makeAutoLotto());
         }
 
-        return new Lottos(bunchOfLotto);
+        return new Lottos(lottos);
     }
 
     private static Lotto makeAutoLotto() {

@@ -27,10 +27,10 @@ public class PrizesTest {
         Prizes prizes = new Prizes(rewards);
 
         assertAll(
-                () -> assertThat(prizes.getPrizes().get(5000)).isEqualTo(2),
-                () -> assertThat(prizes.getPrizes().get(50000)).isEqualTo(1),
-                () -> assertThat(prizes.getPrizes().get(1500000)).isEqualTo(1),
-                () -> assertThat(prizes.getPrizes().get(30000000)).isEqualTo(0)
+                () -> assertThat(prizes.getPrizes().get(FIFTH_PRIZE)).isEqualTo(2),
+                () -> assertThat(prizes.getPrizes().get(FOURTH_PRIZE)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(THIRD_PRIZE)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(FIRST_PRIZE)).isEqualTo(0)
         );
     }
 

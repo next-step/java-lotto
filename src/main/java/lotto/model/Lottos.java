@@ -15,12 +15,12 @@ public class Lottos {
         this.lottos = new ArrayList<>();
     }
 
-    public Prizes makeRewards(WinningLotto winningLotto) {
-        List<Reward> prizes = lottos.stream()
+    public Prizes makePrizes(WinningLotto winningLotto) {
+        List<Reward> rewards = lottos.stream()
                 .map(lotto -> winningLotto.makeReward(lotto))
                 .collect(Collectors.toList());
 
-        return new Prizes(prizes);
+        return new Prizes(rewards);
     }
 
     public void addLotto(Lotto lotto) {

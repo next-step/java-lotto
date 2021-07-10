@@ -23,12 +23,12 @@ public class LottoController {
 
         lottoCounts.purchaseAutoLotto();
         Output.printPurchasedMessage(lottoCounts.getManualLottoCount(), lottoCounts.getAutoLottoCount());
-        lottos.addLottos(LottoGenerator.makeBunchOfAutoLotto(lottoCounts.getAutoLottoCount()));
+        lottos.addLottos(LottoGenerator.makeAutoLottos(lottoCounts.getAutoLottoCount()));
 
         Output.printBunchOfLottoNumbers(lottos.getLottos());
 
         WinningLotto winningLotto = makeWinningLotto();
-        Prizes prizes = lottos.makeRewards(winningLotto);
+        Prizes prizes = lottos.makePrizes(winningLotto);
         BigDecimal yield = prizes.makeYield(purchaseCalculator.getPurchaseAmount());
 
         Output.printWinStatics(prizes.getPrizes(), yield);
