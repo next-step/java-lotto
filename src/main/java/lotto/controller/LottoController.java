@@ -5,28 +5,46 @@ import lotto.view.Input;
 import lotto.view.Output;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-import static lotto.util.TypeConvert.convertStringToLottoNumberSet;
+import static lotto.util.TypeConverter.convertStringToLottoNumberSet;
 
 public class LottoController {
+
     public void run() {
-        purchaseCalculator purchaseCalculator = new purchaseCalculator(Input.inputMoneyForPurchase());
-        int purchasedLottoCount = purchaseCalculator.calculatePurchasableCount();
+        PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
+        LottoCounts lottoCounts = new LottoCounts(purchaseCalculator.getPurchasableLottoCounts());
 
-        Output.printPurchasableMessage(purchasedLottoCount);
+        lottoCounts.purchaseManualLotto(Input.inputManualLottoCount());
+        Output.printInputManualLottoNumberMessage();
+        Lottos lottos = new Lottos(makeBunchOfManualLotto(lottoCounts.getManualLottoCount()));
 
-        BunchOfLotto bunchOfLotto = new BunchOfLotto(purchasedLottoCount);
-        Output.printBunchOfLottoNumbers(bunchOfLotto.getBunchOfLotto());
+        lottoCounts.purchaseAutoLotto();
+        Output.printPurchasedMessage(lottoCounts.getManualLottoCount(), lottoCounts.getAutoLottoCount());
+        lottos.addLottos(LottoGenerator.makeAutoLottos(lottoCounts.getAutoLottoCount()));
+
+        Output.printBunchOfLottoNumbers(lottos.getLottos());
 
         WinningLotto winningLotto = makeWinningLotto();
-        Prizes prizes = bunchOfLotto.makeRewards(winningLotto);
+        Prizes prizes = lottos.makePrizes(winningLotto);
         BigDecimal yield = prizes.makeYield(purchaseCalculator.getPurchaseAmount());
 
         Output.printWinStatics(prizes.getPrizes(), yield);
     }
 
-    public WinningLotto makeWinningLotto() {
+    private List<Lotto>  makeBunchOfManualLotto(int manualLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < manualLottoCount; i++) {
+            String inputNumber = Input.inputManualLottoNumber();
+            lottos.add(LottoGenerator.makeManualLotto(inputNumber));
+        }
+        return lottos;
+    }
+
+    private WinningLotto makeWinningLotto() {
         Set<LottoNumber> winningNumbers = convertStringToLottoNumberSet(Input.inputWinningNumbers());
         LottoNumber bonusBall = new LottoNumber(Input.inputBonusNumber());
 

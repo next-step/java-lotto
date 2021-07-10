@@ -3,23 +3,18 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Reward {
-    SIXTH_PRIZE(0, false, 0),
-    FIFTH_PRIZE(3, false, 5_000),
-    FOURTH_PRIZE(4, false, 50_000),
-    THIRD_PRIZE(5, false, 1_500_000),
-    SECOND_PRIZE(5, true, 30_000_000),
-    FIRST_PRIZE(6, false, 2_000_000_000);
-
-    private static final int SECOND_PRIZE_COUNT_CONDITION = 5;
-    private static final boolean SECOND_PRIZE_BONUS_BALL_CONDITION = true;
+    SIXTH_PRIZE(0, 0),
+    FIFTH_PRIZE(3, 5_000),
+    FOURTH_PRIZE(4, 50_000),
+    THIRD_PRIZE(5, 1_500_000),
+    SECOND_PRIZE(5, 30_000_000),
+    FIRST_PRIZE(6, 2_000_000_000);
 
     private final int matchCount;
-    private final boolean bonusBall;
     private final int prizeMoney;
 
-    Reward(int matchCount, boolean bonusBall, int reward) {
+    Reward(int matchCount, int reward) {
         this.matchCount = matchCount;
-        this.bonusBall = bonusBall;
         this.prizeMoney = reward;
     }
 
@@ -27,17 +22,13 @@ public enum Reward {
         return prizeMoney;
     }
 
-    private int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public static Reward getReward(WinningState winningState) {
-        if (winningState.isSpecificPrizeState(SECOND_PRIZE_COUNT_CONDITION, SECOND_PRIZE_BONUS_BALL_CONDITION)) {
+    public static Reward makeReward(int matchCount, boolean isBonusBallMatched) {
+        if (matchCount == SECOND_PRIZE.matchCount && isBonusBallMatched) {
             return SECOND_PRIZE;
         }
 
         return Arrays.stream(Reward.values())
-                .filter(reward -> reward.getMatchCount() == winningState.getMatchedCount())
+                .filter(reward -> reward.matchCount == matchCount)
                 .findAny()
                 .orElse(SIXTH_PRIZE);
     }

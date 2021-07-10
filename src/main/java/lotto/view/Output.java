@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class Output {
+    private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 로또 번호를 입력해 주세요.";
     private static final String INPUT_PURCHASE_MESSAGE = "구입금액을 입력해주세요.";
-    private static final String PURCHASABLE_MESSAGE = "%d 개를 구매했습니다.";
+    private static final String PURCHASED_MESSAGE = "수동으로 %d 개, 자동으로 %d 개를 구매했습니다.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String WIN_STATIC_MESSAGE = "당첨 통계";
@@ -21,12 +23,24 @@ public class Output {
     private static final String SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치(30000000원)- %d 개";
     private static final String FIRST_PRIZE_MESSAGE = "6개 일치 (2000000000원)- %d 개";
 
+    protected Output() {
+
+    }
+
+    public static void printInputManualLottoCountMessage() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+    }
+
+    public static void printInputManualLottoNumberMessage() {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+    }
+
     public static void printStartMessage() {
         System.out.println(INPUT_PURCHASE_MESSAGE);
     }
 
-    public static void printPurchasableMessage(Integer purchased) {
-        System.out.println(String.format(PURCHASABLE_MESSAGE, purchased));
+    public static void printPurchasedMessage(int manualLottoCount, int autoLottoCount) {
+        System.out.println(String.format(PURCHASED_MESSAGE, manualLottoCount, autoLottoCount));
     }
 
     public static void printLottoNumbers(Set<LottoNumber> lottoNumbers) {
@@ -48,19 +62,19 @@ public class Output {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
     }
 
-    public static void printWinStatics(Map<Integer, Integer> prizes, BigDecimal yield) {
+    public static void printWinStatics(Map<Reward, Integer> prizes, BigDecimal yield) {
         System.out.println(WIN_STATIC_MESSAGE);
         System.out.println(SEPARATOR);
         printPrize(prizes);
         printYield((yield));
     }
 
-    public static void printPrize(Map<Integer, Integer> prizes) {
-        printFirstPrize(prizes.get(Reward.FIRST_PRIZE.getPrizeMoney()));
-        printSecondPrize(prizes.get(Reward.SECOND_PRIZE.getPrizeMoney()));
-        printThirdPrize(prizes.get(Reward.THIRD_PRIZE.getPrizeMoney()));
-        printForthPrize(prizes.get(Reward.FOURTH_PRIZE.getPrizeMoney()));
-        printFifthPrize(prizes.get(Reward.FIFTH_PRIZE.getPrizeMoney()));
+    public static void printPrize(Map<Reward, Integer> prizes) {
+        printFirstPrize(prizes.get(Reward.FIRST_PRIZE));
+        printSecondPrize(prizes.get(Reward.SECOND_PRIZE));
+        printThirdPrize(prizes.get(Reward.THIRD_PRIZE));
+        printForthPrize(prizes.get(Reward.FOURTH_PRIZE));
+        printFifthPrize(prizes.get(Reward.FIFTH_PRIZE));
     }
 
     private static void printFirstPrize(Integer winCount) {

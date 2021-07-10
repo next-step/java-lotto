@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +27,21 @@ public class PrizesTest {
         Prizes prizes = new Prizes(rewards);
 
         assertAll(
-                () -> assertThat(prizes.getPrizes().get(5000)).isEqualTo(2),
-                () -> assertThat(prizes.getPrizes().get(50000)).isEqualTo(1),
-                () -> assertThat(prizes.getPrizes().get(1500000)).isEqualTo(1),
-                () -> assertThat(prizes.getPrizes().get(30000000)).isEqualTo(0)
+                () -> assertThat(prizes.getPrizes().get(FIFTH_PRIZE)).isEqualTo(2),
+                () -> assertThat(prizes.getPrizes().get(FOURTH_PRIZE)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(THIRD_PRIZE)).isEqualTo(1),
+                () -> assertThat(prizes.getPrizes().get(FIRST_PRIZE)).isEqualTo(0)
         );
+    }
+
+    @Test
+    void makeYieldTest() {
+        List<Reward> rewards = new ArrayList<>();
+
+        rewards.add(FIFTH_PRIZE);
+        rewards.add(FOURTH_PRIZE);
+
+        Prizes prizes = new Prizes(rewards);
+        assertThat(prizes.makeYield(1000)).isEqualTo(BigDecimal.valueOf(55));
     }
 }
