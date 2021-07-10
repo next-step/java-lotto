@@ -11,21 +11,21 @@ public class LottoCounts {
         this.purchasableLottoCount = purchasableLottoCount;
     }
 
-    public void purchaseManualLotto(int manualLottoCount) {
-        purchaseLottos(manualLottoCount);
-        this.manualLottoCount = manualLottoCount;
-        this.autoLottoCount = purchasableLottoCount - manualLottoCount;
-        this.purchasableLottoCount = purchasableLottoCount - manualLottoCount;
+    public void purchaseManualLotto(int lottoCount) {
+        purchaseLottos(lottoCount);
+        this.manualLottoCount += lottoCount;
+        this.autoLottoCount = this.purchasableLottoCount - this.manualLottoCount;
+        this.purchasableLottoCount = this.purchasableLottoCount - lottoCount;
     }
 
     public void purchaseAutoLotto() {
         purchaseLottos(autoLottoCount);
-        this.purchasableLottoCount = purchasableLottoCount - autoLottoCount;
+        this.purchasableLottoCount = this.purchasableLottoCount - this.autoLottoCount;
     }
 
     private void purchaseLottos(int purchaseCount) {
         validatePurchasable(purchaseCount);
-        this.purchasableLottoCount = purchasableLottoCount - purchaseCount;
+        this.purchasableLottoCount = this.purchasableLottoCount - purchaseCount;
     }
 
     private void validatePurchasable(int purchaseCount) {
