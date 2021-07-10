@@ -15,16 +15,15 @@ public class LottoController {
 
     public void run() {
         PurchaseCalculator purchaseCalculator = new PurchaseCalculator(Input.inputMoneyForPurchase());
+        LottoCounts lottoCounts = new LottoCounts(purchaseCalculator.getPurchasableLottoCounts());
 
-        int manualLottoCount = Input.inputManualLottoCount();
+        lottoCounts.purchaseManualLotto(Input.inputManualLottoCount());
         Output.printInputManualLottoNumberMessage();
-        purchaseCalculator.purchaseLottos(manualLottoCount);
-        Lottos lottos = new Lottos(makeBunchOfManualLotto(manualLottoCount));
+        Lottos lottos = new Lottos(makeBunchOfManualLotto(lottoCounts.getManualLottoCount()));
 
-        int autoLottoCount = purchaseCalculator.getPurchasableLottoCounts();
-        purchaseCalculator.purchaseLottos(autoLottoCount);
-        Output.printPurchasedMessage(manualLottoCount, autoLottoCount);
-        lottos.addLottos(LottoGenerator.makeBunchOfAutoLotto(autoLottoCount));
+        lottoCounts.purchaseAutoLotto();
+        Output.printPurchasedMessage(lottoCounts.getManualLottoCount(), lottoCounts.getAutoLottoCount());
+        lottos.addLottos(LottoGenerator.makeBunchOfAutoLotto(lottoCounts.getAutoLottoCount()));
 
         Output.printBunchOfLottoNumbers(lottos.getLottos());
 

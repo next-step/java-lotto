@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final String CAN_NOT_INPUT_NULL_MESSAGE = "공백은 입력 할 수 없습니다.";
+    private static final int FIRST_LOTTO_NUMBER_INDEX = 0;
+    private static final int LAST_LOTTO_NUMBER_INDEX = 6;
     private static final List<LottoNumber> LOTTO_NUMBERS =
             IntStream.rangeClosed(1, 45)
                     .mapToObj(number -> new LottoNumber(number))
@@ -21,7 +23,7 @@ public class LottoGenerator {
         Set<Integer> lottoNumbersIndex = TypeConverter.convertStringToIntegerSet(inputNumber);
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        for(int index : lottoNumbersIndex){
+        for (int index : lottoNumbersIndex) {
             lottoNumbers.add(LOTTO_NUMBERS.get(index));
         }
 
@@ -38,7 +40,7 @@ public class LottoGenerator {
         List<Lotto> bunchOfLotto = new ArrayList<>();
 
         for (int i = 0; i < purchasedLottoCount; i++) {
-            bunchOfLotto.add(LottoGenerator.makeAutoLotto());
+            bunchOfLotto.add(makeAutoLotto());
         }
 
         return new Lottos(bunchOfLotto);
@@ -47,7 +49,10 @@ public class LottoGenerator {
     private static Lotto makeAutoLotto() {
         List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(LOTTO_NUMBERS);
         Collections.shuffle(shuffleLottoNumbers);
-        Set<LottoNumber> lottoNumbers = new HashSet<>(shuffleLottoNumbers.subList(0,6));
+        Set<LottoNumber> lottoNumbers =
+                new HashSet<>(
+                        shuffleLottoNumbers.subList(FIRST_LOTTO_NUMBER_INDEX, LAST_LOTTO_NUMBER_INDEX)
+                );
 
         return new Lotto(lottoNumbers);
     }
