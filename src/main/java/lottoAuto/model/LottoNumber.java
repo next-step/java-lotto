@@ -1,7 +1,8 @@
 package lottoAuto.model;
 
+import static lottoAuto.model.LottoNumbers.MAX_LOTTO_NUMBER;
+
 public class LottoNumber {
-    private static final int OVER_LOTTO_NUMBER = 45;
     private static final int ZERO_LOTTO_NUMBER = 0;
     private static final String OVER_LOTTO_NUMBER_MESSAGE = "로또 번호는 45이하여야 합니다.";
     private static final String ZERO_LOTTO_NUMBER_MESSAGE = "로또 번호는 0이 아니어야 합니다.";
@@ -15,7 +16,7 @@ public class LottoNumber {
     }
 
     private void validateLottoNumber(int lottoNumber) {
-        if (lottoNumber > OVER_LOTTO_NUMBER) {
+        if (lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(OVER_LOTTO_NUMBER_MESSAGE);
         }
         if (lottoNumber == ZERO_LOTTO_NUMBER) {
