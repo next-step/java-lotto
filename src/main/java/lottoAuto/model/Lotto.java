@@ -27,7 +27,7 @@ public class Lotto {
 
     private boolean hasNumber(WinningLotto winningLotto){
         return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.hasNumber(winningLotto.getBonusBall()));
+                .anyMatch(lottoNumber -> lottoNumber.isNumber(winningLotto.getBonusBall()));
     }
 
     public Set<LottoNumber> getLottoNumbers() {

@@ -26,7 +26,7 @@ public class LottoNumber {
         }
     }
 
-    public boolean hasNumber(int number) {
+    public boolean isNumber(int number) {
         return lottoNumber == number;
     }
 

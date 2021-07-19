@@ -24,6 +24,6 @@ public class LottoNumberTest {
     @Test
     public void hasNumberTest() {
         LottoNumber lottoNumber = new LottoNumber(30);
-        assertThat(lottoNumber.hasNumber(30)).isTrue();
+        assertThat(lottoNumber.isNumber(30)).isTrue();
     }
 }
