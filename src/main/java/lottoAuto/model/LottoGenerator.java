@@ -28,6 +28,6 @@ public class LottoGenerator {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }
