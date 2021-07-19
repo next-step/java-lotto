@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoCalculatorTest {
@@ -19,8 +20,7 @@ public class LottoCalculatorTest {
     @DisplayName("로또 계산기는 로또 1장 가격 이하이면 예외를 발생시킨다.")
     @Test
     public void checkLottoPriceTest() {
-        LottoCalculator lottoCalculator = new LottoCalculator();
-
-        assertThrows(IllegalArgumentException.class, () -> lottoCalculator.calculateAmount(500));
+        assertThatThrownBy(() -> LottoCalculator.calculateAmount(500))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
