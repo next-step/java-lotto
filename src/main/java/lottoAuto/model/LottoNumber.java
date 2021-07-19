@@ -4,11 +4,11 @@ public class LottoNumber {
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        invalidateLottoNumber(lottoNumber);
+        validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
-    private void invalidateLottoNumber(int lottoNumber) {
+    private void validateLottoNumber(int lottoNumber) {
         if (lottoNumber > 45) {
             throw new IllegalArgumentException("로또 번호는 45이하여야 합니다.");
         }
