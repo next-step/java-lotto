@@ -22,7 +22,12 @@ public class Lotto {
     }
 
     public LottoResult makeLottoResult(WinningLotto winningLotto) {
-        return new LottoResult(winningLotto.countWinningLottoNumbers(lottoNumbers), winningLotto.hasBonusBall(lottoNumbers));
+        return new LottoResult(winningLotto.countWinningLottoNumbers(lottoNumbers), hasNumber(winningLotto));
+    }
+
+    private boolean hasNumber(WinningLotto winningLotto){
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.hasNumber(winningLotto.getBonusBall()));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
