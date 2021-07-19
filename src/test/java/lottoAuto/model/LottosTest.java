@@ -22,7 +22,7 @@ public class LottosTest {
         winningNumbers.add(new LottoNumber(5));
         winningNumbers.add(new LottoNumber(6));
         Lotto winningLotto = new Lotto(winningNumbers);
-        winningLottoTest = new WinningLotto(winningLotto, 7);
+        winningLottoTest = new WinningLotto(winningLotto, new LottoNumber(7));
     }
 
     @DisplayName("Lottos객체는 Lotto 결과 상태를 가진 객체를 반환한다.")

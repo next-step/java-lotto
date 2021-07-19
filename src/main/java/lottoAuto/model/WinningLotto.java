@@ -4,9 +4,9 @@ import java.util.Set;
 
 public class WinningLotto {
     private Lotto winningLotto;
-    private int bonusBall;
+    private LottoNumber bonusBall;
 
-    public WinningLotto(Lotto winningLotto, int bonusBall) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }
@@ -23,6 +23,6 @@ public class WinningLotto {
     }
 
     public int getBonusBall() {
-        return bonusBall;
+        return bonusBall.getLottoNumber();
     }
 }

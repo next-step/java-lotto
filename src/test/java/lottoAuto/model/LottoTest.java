@@ -23,7 +23,7 @@ public class LottoTest {
         winningNumbers.add(new LottoNumber(5));
         winningNumbers.add(new LottoNumber(6));
         Lotto winningLotto = new Lotto(winningNumbers);
-        winningLottoTest = new WinningLotto(winningLotto, 7);
+        winningLottoTest = new WinningLotto(winningLotto, new LottoNumber(7));
     }
 
     @DisplayName("로또 번호는 6개이하면 예외를 발생시킨다.")

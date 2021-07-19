@@ -34,6 +34,6 @@ public class LottoAutoController {
     private static WinningLotto makeWinningLotto() {
         String winningLottoNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
-        return new WinningLotto(StringUtil.makeLotto(winningLottoNumber), bonusBall);
+        return new WinningLotto(StringUtil.makeLotto(winningLottoNumber), new LottoNumber(bonusBall));
     }
 }
