@@ -24,7 +24,7 @@ public enum Rank {
             return SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.numberOfWinnings == countMatchWinningNumbers && rank != SECOND && !hasBonusBall)
+                .filter(rank -> rank.numberOfWinnings == countMatchWinningNumbers && rank != SECOND)
                 .findAny()
                 .orElse(NO_MATCH);
     }
