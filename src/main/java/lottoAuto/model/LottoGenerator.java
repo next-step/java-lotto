@@ -18,10 +18,9 @@ public class LottoGenerator {
     }
 
     private Lotto createLotto() {
-        Collections.shuffle(LottoNumbers.lottoNumbers);
-        Set<LottoNumber> lotto = LottoNumbers.lottoNumbers.stream()
+        Collections.shuffle(Numbers.lottoNumbers);
+        Set<LottoNumber> lotto = Numbers.lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_SIZE)
-                .map(lottoNumber -> new LottoNumber(lottoNumber))
                 .collect(Collectors.toSet());
 
         return new Lotto(lotto);

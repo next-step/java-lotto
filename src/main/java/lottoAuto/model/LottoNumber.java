@@ -1,6 +1,6 @@
 package lottoAuto.model;
 
-import static lottoAuto.model.LottoNumbers.MAX_LOTTO_NUMBER;
+import static lottoAuto.model.Numbers.MAX_LOTTO_NUMBER;
 
 public class LottoNumber {
     private static final int ZERO_LOTTO_NUMBER = 0;
