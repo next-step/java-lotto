@@ -18,9 +18,7 @@ public class LottoManualController {
         Lottos lottos = LottoFactory.createLottos(convertNumbersListToLottoList(inputView.inputManualLottoNumbers(cashier.getManualQuantity())), cashier.getAutoQuantity());
         outputView.printLottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), lottos.getLottos());
 
-        Lotto winningNumbers = convertNumbersToLotto(inputView.inputWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = createWinningLotto();
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
         outputView.printWinningResults(winningResults.getWinningResults());
@@ -43,5 +41,11 @@ public class LottoManualController {
             numbers.add(LottoNumber.of(number));
         }
         return new Lotto(numbers);
+    }
+
+    private WinningLotto createWinningLotto() {
+        Lotto winningNumbers = convertNumbersToLotto(inputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }
