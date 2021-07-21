@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoAutoController {
-    private LottoAutoInputView inputView = new LottoAutoInputView();
-    private LottoAutoOutputView outputView = new LottoAutoOutputView();
-    private LottoFactory lottoFactory = new LottoFactory();
+    private final LottoAutoInputView inputView = new LottoAutoInputView();
+    private final LottoAutoOutputView outputView = new LottoAutoOutputView();
+    private final LottoFactory lottoFactory = new LottoFactory();
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());

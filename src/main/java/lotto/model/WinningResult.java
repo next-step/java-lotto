@@ -8,8 +8,8 @@ public enum WinningResult {
     SECOND_PRICE(5, 30_000_000),
     FIRST_PRICE(6, 2_000_000_000);
 
-    private int countOfWinningNumber;
-    private int winningAmount;
+    private final int countOfWinningNumber;
+    private final int winningAmount;
 
     WinningResult(int countOfWinningNumber, int winningAmount) {
         this.countOfWinningNumber = countOfWinningNumber;

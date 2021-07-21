@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManualController {
-    private LottoManualInputView inputView = new LottoManualInputView();
-    private LottoManualOutputView outputView = new LottoManualOutputView();
+    private final LottoManualInputView inputView = new LottoManualInputView();
+    private final LottoManualOutputView outputView = new LottoManualOutputView();
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());

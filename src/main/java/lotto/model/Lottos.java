@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);

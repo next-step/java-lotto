@@ -8,7 +8,7 @@ public class LottoNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    private int number;
+    private final int number;
 
     static {
         for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {

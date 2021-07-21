@@ -7,7 +7,7 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoSize(lottoNumbers);
