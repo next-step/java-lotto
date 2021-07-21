@@ -8,11 +8,11 @@ public class LottoFactory {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
-    private static List<LottoNumber> numbers = new ArrayList<>();
+    private static final List<LottoNumber> NUMBERS = new ArrayList<>();
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            numbers.add(LottoNumber.of(i));
+            NUMBERS.add(LottoNumber.of(i));
         }
     }
 
@@ -32,11 +32,11 @@ public class LottoFactory {
     }
 
     private static Lotto createAutoLotto() {
-        Collections.shuffle(numbers);
+        Collections.shuffle(NUMBERS);
 
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            lottoNumbers.add(numbers.get(i));
+            lottoNumbers.add(NUMBERS.get(i));
         }
         Lotto lotto = new Lotto(lottoNumbers);
         lotto.sort();
