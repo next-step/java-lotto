@@ -17,9 +17,7 @@ public class LottoAutoController {
         Lottos lottos = new Lottos(LottoFactory.createAutoLottos(cashier.getLottoQuantity()));
         outputView.printLotto(cashier.getLottoQuantity(), lottos.getLottos());
 
-        Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = createWinningLotto();
 
         WinningResults winningResults = lottos.countWinningResults(winningLotto);
         outputView.printWinningResults(winningResults.getWinningResults());
@@ -34,5 +32,12 @@ public class LottoAutoController {
             winningNumbers.add(LottoNumber.of(number));
         }
         return new Lotto(winningNumbers);
+    }
+
+    private WinningLotto createWinningLotto() {
+        Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        return winningLotto;
     }
 }
