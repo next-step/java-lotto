@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoManualInputView {
-
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
 

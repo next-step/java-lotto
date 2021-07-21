@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.Scanner;
 
 public class LottoAutoInputView {
-
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
 

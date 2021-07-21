@@ -2,6 +2,7 @@ package lotto.model;
 
 public class Cashier {
     private static final int LOTTO_PRICE = 1_000;
+
     private int price;
     private int lottoQuantity;
     private int autoQuantity;
