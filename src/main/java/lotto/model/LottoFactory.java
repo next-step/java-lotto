@@ -39,7 +39,6 @@ public class LottoFactory {
             lottoNumbers.add(numbers.get(i));
         }
         Lotto lotto = new Lotto(lottoNumbers);
-        lotto.sort();
         return lotto;
     }
 }

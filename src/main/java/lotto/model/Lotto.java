@@ -11,7 +11,7 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoSize(lottoNumbers);
         checkLottoNumbers(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(sort(lottoNumbers));
     }
 
     private void checkLottoSize(List<LottoNumber> lottoNumbers) {
@@ -35,17 +35,17 @@ public class Lotto {
         }
     }
 
-    public void sort() {
+    private List<LottoNumber> sort(List<LottoNumber> lottoNumbers) {
         List<Integer> lottoValues = new ArrayList<>();
-        for(LottoNumber lottoNumber : this.lottoNumbers) {
+        for(LottoNumber lottoNumber : lottoNumbers) {
             lottoValues.add(Integer.parseInt(lottoNumber.toString()));
         }
         Collections.sort(lottoValues);
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        List<LottoNumber> sortedlottoNumbers = new ArrayList<>();
         for(int lottoValue : lottoValues) {
-            lottoNumbers.add(LottoNumber.of(lottoValue));
+            sortedlottoNumbers.add(LottoNumber.of(lottoValue));
         }
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        return new ArrayList<>(sortedlottoNumbers);
     }
 
     public int countWinningNumbers(Lotto winningLotto) {
