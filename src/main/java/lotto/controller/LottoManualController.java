@@ -15,12 +15,7 @@ public class LottoManualController {
         Cashier cashier = new Cashier(inputView.inputPrice());
         cashier.calculateAutoLottoQuantity(inputView.inputManualLottoQuantity());
 
-        List<Lotto> manualLottos = convertNumbersListToLottoList(inputView.inputManualLottoNumbers(cashier.getManualQuantity()));
-        List<Lotto> autoLottos = LottoFactory.createAutoLottos(cashier.getAutoQuantity());
-        List<Lotto> joinedLottos = new ArrayList<>();
-        joinedLottos.addAll(manualLottos);
-        joinedLottos.addAll(autoLottos);
-        Lottos lottos = new Lottos(joinedLottos);
+        Lottos lottos = LottoFactory.createLottos(convertNumbersListToLottoList(inputView.inputManualLottoNumbers(cashier.getManualQuantity())), cashier.getAutoQuantity());
         outputView.printLottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), lottos.getLottos());
 
         Lotto winningNumbers = convertNumbersToLotto(inputView.inputWinningNumbers());
