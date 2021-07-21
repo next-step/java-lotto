@@ -32,11 +32,11 @@ public class LottoFactory {
     }
 
     private static Lotto createAutoLotto() {
-        Collections.shuffle(NUMBERS);
-
+        List<LottoNumber> numbers = new ArrayList<>(NUMBERS);
+        Collections.shuffle(numbers);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_SIZE; i++) {
-            lottoNumbers.add(NUMBERS.get(i));
+            lottoNumbers.add(numbers.get(i));
         }
         Lotto lotto = new Lotto(lottoNumbers);
         lotto.sort();
