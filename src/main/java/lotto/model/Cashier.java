@@ -5,17 +5,10 @@ public class Cashier {
 
     private final int price;
     private final int lottoQuantity;
-    private int autoQuantity;
-    private int manualQuantity;
 
     public Cashier(int price) {
         this.price = price;
         lottoQuantity = price / LOTTO_PRICE;
-    }
-
-    public void calculateAutoLottoQuantity(int manualQuantity) {
-        autoQuantity = lottoQuantity - manualQuantity;
-        this.manualQuantity = manualQuantity;
     }
 
     public int getPrice() {
@@ -24,13 +17,5 @@ public class Cashier {
 
     public int getLottoQuantity() {
         return lottoQuantity;
-    }
-
-    public int getAutoQuantity() {
-        return autoQuantity;
-    }
-
-    public int getManualQuantity() {
-        return manualQuantity;
     }
 }

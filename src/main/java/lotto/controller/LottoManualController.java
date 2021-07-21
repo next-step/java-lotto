@@ -13,10 +13,11 @@ public class LottoManualController {
 
     public void start() {
         Cashier cashier = new Cashier(inputView.inputPrice());
-        cashier.calculateAutoLottoQuantity(inputView.inputManualLottoQuantity());
+        Counter counter = new Counter(cashier.getLottoQuantity());
+        counter.calculateAutoQuantity(inputView.inputManualLottoQuantity());
 
-        Lottos lottos = LottoFactory.createLottos(convertNumbersListToLottoList(inputView.inputManualLottoNumbers(cashier.getManualQuantity())), cashier.getAutoQuantity());
-        outputView.printLottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), lottos.getLottos());
+        Lottos lottos = LottoFactory.createLottos(convertNumbersListToLottoList(inputView.inputManualLottoNumbers(counter.getManualQuantity())), counter.getAutoQuantity());
+        outputView.printLottos(counter.getManualQuantity(), counter.getAutoQuantity(), lottos.getLottos());
 
         WinningLotto winningLotto = createWinningLotto();
 
