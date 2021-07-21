@@ -17,7 +17,7 @@ public class LottoFactory {
         }
     }
 
-    public List<Lotto> createAutoLottos(int quantity) {
+    public static List<Lotto> createAutoLottos(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(createAutoLotto());
@@ -25,7 +25,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    public List<Lotto> createManualLottos(int quantity, List<String> manualNumbers) {
+    public static List<Lotto> createManualLottos(int quantity, List<String> manualNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             String separator = ", ";
