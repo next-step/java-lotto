@@ -9,6 +9,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkLottoSize(lottoNumbers);
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -18,7 +19,7 @@ public class Lotto {
         }
     }
 
-    public void checkLottoNumbers() {
+    private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
         boolean accordance = false;
         for (int i = 0; i < LOTTO_SIZE; i++) {
             for (int j = 0; j < i; j++) {

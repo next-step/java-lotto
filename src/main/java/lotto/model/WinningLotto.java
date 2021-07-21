@@ -5,7 +5,6 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
-        winningNumbers.checkLottoNumbers();
         checkBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
