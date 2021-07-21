@@ -11,8 +11,8 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    Lottos lottos;
-    WinningLotto winningLotto;
+    private Lottos lottos;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {

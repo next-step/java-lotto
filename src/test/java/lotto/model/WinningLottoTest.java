@@ -10,9 +10,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
-    WinningLotto winningLotto;
-    Lotto oddLotto;
-    Lotto evenLotto;
+    private WinningLotto winningLotto;
+    private Lotto oddLotto;
+    private Lotto evenLotto;
 
     @BeforeEach
     void setUp() {

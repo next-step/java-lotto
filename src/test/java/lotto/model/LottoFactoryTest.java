@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class LottoFactoryTest {
-    LottoFactory lottoFactory;
+    private LottoFactory lottoFactory;
 
     @BeforeEach
     void setUp() {

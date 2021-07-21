@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LottoTest {
-    Lotto lotto;
-    Lotto winningLotto;
+    private Lotto lotto;
+    private Lotto winningLotto;
 
     @BeforeEach
     void setUp() {
