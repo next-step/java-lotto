@@ -25,21 +25,6 @@ public class LottoFactory {
         return lottos;
     }
 
-    public static List<Lotto> createManualLottos(int quantity, List<String> manualNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            String separator = ", ";
-            String[] splitManualNumbers = manualNumbers.get(i).split(separator);
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-            for (int j = 0; j < LOTTO_SIZE; j++) {
-                int lottoNumber = Integer.parseInt(splitManualNumbers[j]);
-                lottoNumbers.add(LottoNumber.of(lottoNumber));
-            }
-            lottos.add(createManualLotto(lottoNumbers));
-        }
-        return lottos;
-    }
-
     private static Lotto createAutoLotto() {
         Collections.shuffle(numbers);
 

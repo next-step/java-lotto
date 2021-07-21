@@ -15,17 +15,15 @@ public class LottoManualController {
         Cashier cashier = new Cashier(inputView.inputPrice());
         cashier.calculateAutoLottoQuantity(inputView.inputManualLottoQuantity());
 
-        List<String> manualNumbers = inputView.inputManualLottoNumbers(cashier.getManualQuantity());
-
-        List<Lotto> autoLottos = LottoFactory.createManualLottos(cashier.getManualQuantity(), manualNumbers);
-        List<Lotto> manualLottos = LottoFactory.createAutoLottos(cashier.getAutoQuantity());
+        List<Lotto> manualLottos = convertNumbersListToLottoList(inputView.inputManualLottoNumbers(cashier.getManualQuantity()));
+        List<Lotto> autoLottos = LottoFactory.createAutoLottos(cashier.getAutoQuantity());
         List<Lotto> joinedLottos = new ArrayList<>();
-        joinedLottos.addAll(autoLottos);
         joinedLottos.addAll(manualLottos);
+        joinedLottos.addAll(autoLottos);
         Lottos lottos = new Lottos(joinedLottos);
         outputView.printLottos(cashier.getManualQuantity(), cashier.getAutoQuantity(), lottos.getLottos());
 
-        Lotto winningNumbers = convertWinningNumbers(inputView.inputWinningNumbers());
+        Lotto winningNumbers = convertNumbersToLotto(inputView.inputWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(inputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
@@ -34,13 +32,21 @@ public class LottoManualController {
         outputView.printEarningRate(winningResults.calculateEarningRate(cashier.getPrice()));
     }
 
-    private Lotto convertWinningNumbers(String winningStringNumbers) {
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        String[] splitWinningNumbers = winningStringNumbers.split(", ");
-        for (String splitWinningNumber : splitWinningNumbers) {
-            int number = Integer.parseInt(splitWinningNumber);
-            winningNumbers.add(LottoNumber.of(number));
+    private List<Lotto> convertNumbersListToLottoList(List<String> stringNumbersList) {
+        List<Lotto> lottos = new ArrayList<>();
+        for(String stringNumbers : stringNumbersList) {
+            lottos.add(convertNumbersToLotto(stringNumbers));
         }
-        return new Lotto(winningNumbers);
+        return lottos;
+    }
+
+    private Lotto convertNumbersToLotto(String stringNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>();
+        String[] splitNumbers = stringNumbers.split(", ");
+        for (String splitNumber : splitNumbers) {
+            int number = Integer.parseInt(splitNumber);
+            numbers.add(LottoNumber.of(number));
+        }
+        return new Lotto(numbers);
     }
 }
