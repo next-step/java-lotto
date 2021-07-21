@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -39,7 +40,7 @@ public class Lotto {
         for(LottoNumber lottoNumber : this.lottoNumbers) {
             lottoValues.add(Integer.parseInt(lottoNumber.toString()));
         }
-        lottoValues.sort(null);
+        Collections.sort(lottoValues);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for(int lottoValue : lottoValues) {
             lottoNumbers.add(LottoNumber.of(lottoValue));
