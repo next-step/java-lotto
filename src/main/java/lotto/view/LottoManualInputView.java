@@ -10,7 +10,16 @@ public class LottoManualInputView {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+
+        int price = scanner.nextInt();
+        checkPrice(price);
+        return price;
+    }
+
+    private void checkPrice(int price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("로또 구매 금액은 0 이상이어야 합니다.");
+        }
     }
 
     public int inputManualLottoQuantity() {
@@ -18,7 +27,16 @@ public class LottoManualInputView {
 
         System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+
+        int quantity = scanner.nextInt();
+        checkQuantity(quantity);
+        return quantity;
+    }
+
+    private void checkQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("수동 로또 수는 0 이상이어야 합니다.");
+        }
     }
 
     public List<String> inputManualLottoNumbers(int manualQuantity) {
