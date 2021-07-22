@@ -23,7 +23,8 @@ class ExpressionTokenizerTest {
 
     private static Stream<Arguments> split() {
         return Stream.of(
-                Arguments.of("123,45,678", Arrays.asList("123", "45", "678"))
+                Arguments.of("123,45,678", Arrays.asList("123", "45", "678")),
+                Arguments.of("//-\n123-45-678", Arrays.asList("123", "45", "678"))
         );
     }
 }
