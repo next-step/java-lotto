@@ -9,8 +9,8 @@ public class CustomTokenizer implements Tokenizer {
     private static final int EXPRESSION_GROUP_INDEX = 2;
 
     @Override
-    public String[] split(String inputString) {
-        Matcher matcher = CUSTOM_EXPRESSION_PATTERN.matcher(inputString);
+    public String[] split(String customExpression) {
+        Matcher matcher = CUSTOM_EXPRESSION_PATTERN.matcher(customExpression);
 
         validate(matcher);
 

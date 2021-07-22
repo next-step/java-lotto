@@ -19,7 +19,7 @@ public class StringAddCalculator {
         String[] numberTokens = ExpressionTokenizer.split(expression);
 
         return Arrays.stream(numberTokens)
-                .map(NaturalNumber::of)
+                .map(NaturalNumber::from)
                 .mapToInt(NaturalNumber::toInt)
                 .sum();
     }

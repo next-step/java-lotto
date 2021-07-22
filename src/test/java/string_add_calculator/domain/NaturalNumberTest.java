@@ -15,7 +15,7 @@ public class NaturalNumberTest {
     @ValueSource(strings = {"0", "5", "10"})
     @ParameterizedTest
     void initNaturalNumber(String numberString) {
-        assertThat(NaturalNumber.of(numberString).toInt()).isEqualTo(Integer.parseInt(numberString));
+        assertThat(NaturalNumber.from(numberString).toInt()).isEqualTo(Integer.parseInt(numberString));
     }
 
     @DisplayName("음수나 숫자가 아닌 문자열이 혹은 null 이 들어오면 RuntimeException 을 던진다.")
@@ -23,6 +23,6 @@ public class NaturalNumberTest {
     @NullAndEmptySource
     @ParameterizedTest
     void throwExceptionWhenNotNaturalNumber(String inputString) {
-        assertThatThrownBy(() -> NaturalNumber.of(inputString)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> NaturalNumber.from(inputString)).isInstanceOf(RuntimeException.class);
     }
 }

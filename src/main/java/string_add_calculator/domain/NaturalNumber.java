@@ -16,7 +16,7 @@ public class NaturalNumber {
         }
     }
 
-    public static NaturalNumber of(String numberString) {
+    public static NaturalNumber from(String numberString) {
         return new NaturalNumber(numberString);
     }
 
