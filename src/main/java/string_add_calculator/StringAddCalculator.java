@@ -1,5 +1,6 @@
 package string_add_calculator;
 
+import string_add_calculator.domain.NaturalNumber;
 import util.StringUtils;
 
 import java.util.Arrays;
@@ -16,19 +17,8 @@ public class StringAddCalculator {
         String[] numberStrings = expressionString.split("[,|:]");
 
         return Arrays.stream(numberStrings)
-                .mapToInt(StringAddCalculator::parseNaturalNumber)
+                .map(NaturalNumber::of)
+                .mapToInt(NaturalNumber::toInt)
                 .sum();
-    }
-
-    private static int parseNaturalNumber(String x) {
-        try {
-            int number = Integer.parseInt(x);
-            if (number < 0) {
-                throw new RuntimeException();
-            }
-            return number;
-        } catch (Exception e) {
-            throw new RuntimeException("Split token is not natural number : " + x);
-        }
     }
 }
