@@ -16,7 +16,19 @@ public class StringAddCalculator {
         String[] numberStrings = expressionString.split("[,|:]");
 
         return Arrays.stream(numberStrings)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(StringAddCalculator::parseNaturalNumber)
                 .sum();
+    }
+
+    private static int parseNaturalNumber(String x) {
+        try {
+            int number = Integer.parseInt(x);
+            if (number < 0) {
+                throw new RuntimeException();
+            }
+            return number;
+        } catch (Exception e) {
+            throw new RuntimeException("Split token is not natural number : " + x);
+        }
     }
 }
