@@ -1,6 +1,7 @@
 package string_add_calculator;
 
 import string_add_calculator.domain.NaturalNumber;
+import string_add_calculator.tokenizer.ExpressionTokenizer;
 import util.StringUtils;
 
 import java.util.Arrays;
@@ -9,14 +10,14 @@ public class StringAddCalculator {
 
     private StringAddCalculator() {}
 
-    public static int calculate(String expressionString) {
-        if (StringUtils.isEmpty(expressionString)) {
+    public static int calculate(String expression) {
+        if (StringUtils.isEmpty(expression)) {
             return 0;
         }
 
-        String[] numberStrings = expressionString.split("[,|:]");
+        String[] numberTokens = ExpressionTokenizer.split(expression);
 
-        return Arrays.stream(numberStrings)
+        return Arrays.stream(numberTokens)
                 .map(NaturalNumber::of)
                 .mapToInt(NaturalNumber::toInt)
                 .sum();

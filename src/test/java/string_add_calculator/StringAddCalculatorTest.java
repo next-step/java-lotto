@@ -22,7 +22,7 @@ public class StringAddCalculatorTest {
         assertThat(StringAddCalculator.calculate(inputString)).isZero();
     }
 
-    @DisplayName(",와 :로 분리하여 값들을 모두 더한 후 반환한다.")
+    @DisplayName(",와 :로 혹은 커스텀 구분자로 분리하여 값들을 모두 더한 후 반환한다.")
     @MethodSource
     @ParameterizedTest
     void splitUsingCommaAndColonThenReturnItsElements(String expressionString, int expectedValue) {
@@ -33,7 +33,9 @@ public class StringAddCalculatorTest {
         return Stream.of(
                 Arguments.of("1,2,3", 6),
                 Arguments.of("1:2:3", 6),
-                Arguments.of("1,2:3", 6)
+                Arguments.of("1,2:3", 6),
+                Arguments.of("//-\n1-2-3", 6),
+                Arguments.of("// \n1 2 3", 6)
         );
     }
 
