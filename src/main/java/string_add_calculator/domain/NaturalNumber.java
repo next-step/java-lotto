@@ -23,4 +23,8 @@ public class NaturalNumber {
     public int toInt() {
         return number;
     }
+
+    public boolean add(NaturalNumber anotherNaturalNumber) {
+        return false;
+    }
 }
