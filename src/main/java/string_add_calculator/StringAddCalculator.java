@@ -1,11 +1,11 @@
 package string_add_calculator;
 
-import java.util.Objects;
+import util.StringUtils;
 
 public class StringAddCalculator {
 
-    public int calculate(String inputString) {
-        if (Objects.isNull(inputString) || inputString.isEmpty()) {
+    public int calculate(String expressionString) {
+        if (StringUtils.isEmpty(expressionString)) {
             return 0;
         }
 
