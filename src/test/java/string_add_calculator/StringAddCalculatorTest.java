@@ -14,6 +14,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     void returnZeroWhenInputIsNullOrEmpty(String inputString) {
         StringAddCalculator stringAddCalculator = new StringAddCalculator();
+
         assertThat(stringAddCalculator.calculate(inputString)).isZero();
     }
 }
