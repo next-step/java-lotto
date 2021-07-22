@@ -6,7 +6,7 @@ import string_add_calculator.tokenizer.Tokenizer;
 
 public class Fixture {
     public static Tokenizer DEFAULT_TOKENIZER = new DefaultTokenizer();
-    public static Tokenizer CUSTOM_TOKENIZER = new CustomTokenizer();
+    public static CustomTokenizer CUSTOM_TOKENIZER = new CustomTokenizer();
 
     private Fixture() {}
 }

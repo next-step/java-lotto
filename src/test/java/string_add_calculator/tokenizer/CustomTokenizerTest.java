@@ -29,4 +29,19 @@ class CustomTokenizerTest {
                 Arguments.of("//-\n1-2-3", Arrays.asList("1", "2", "3"))
         );
     }
+
+    @DisplayName("식이 커스텀 식인지 확인한다")
+    @MethodSource
+    @ParameterizedTest
+    void isCustomExpression(String customExpression, boolean expectedValue) {
+        assertThat(CUSTOM_TOKENIZER.isCustomExpression(customExpression)).isEqualTo(expectedValue);
+    }
+
+    private static Stream<Arguments> isCustomExpression() {
+        return Stream.of(
+                Arguments.of("//-\n1 2 3", true),
+                Arguments.of("//\1,2,3", false),
+                Arguments.of("/\n1,2,3", false)
+        );
+    }
 }
