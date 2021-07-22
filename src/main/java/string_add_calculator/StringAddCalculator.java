@@ -7,12 +7,13 @@ import util.StringUtils;
 import java.util.Arrays;
 
 public class StringAddCalculator {
+    private static final int ZERO = 0;
 
     private StringAddCalculator() {}
 
     public static int calculate(String expression) {
         if (StringUtils.isEmpty(expression)) {
-            return 0;
+            return ZERO;
         }
 
         String[] numberTokens = ExpressionTokenizer.split(expression);
