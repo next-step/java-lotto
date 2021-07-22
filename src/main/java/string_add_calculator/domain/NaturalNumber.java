@@ -5,6 +5,8 @@ import util.StringUtils;
 import java.util.Objects;
 
 public class NaturalNumber {
+    public static final int ZERO_VALUE = 0;
+    public static final NaturalNumber ZERO = new NaturalNumber(ZERO_VALUE);
     private final int number;
 
     private NaturalNumber(String numberString) {

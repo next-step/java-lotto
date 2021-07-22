@@ -6,21 +6,22 @@ import util.StringUtils;
 
 import java.util.Arrays;
 
+import static string_add_calculator.domain.NaturalNumber.ZERO_VALUE;
+
 public class StringAddCalculator {
-    private static final int ZERO = 0;
 
     private StringAddCalculator() {}
 
     public static int calculate(String expression) {
         if (StringUtils.isEmpty(expression)) {
-            return ZERO;
+            return ZERO_VALUE;
         }
 
         String[] numberTokens = ExpressionTokenizer.split(expression);
 
         return Arrays.stream(numberTokens)
                 .map(NaturalNumber::from)
-                .mapToInt(NaturalNumber::toInt)
-                .sum();
+                .reduce(NaturalNumber.ZERO, NaturalNumber::add)
+                .toInt();
     }
 }
