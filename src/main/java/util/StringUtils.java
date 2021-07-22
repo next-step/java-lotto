@@ -13,6 +13,10 @@ public class StringUtils {
     }
 
     public static boolean isNaturalNumber(String numberString) {
+        if (isEmpty(numberString)) {
+            return false;
+        }
+
         return NATURAL_NUMBER_PATTERN.matcher(numberString)
                 .matches();
     }
