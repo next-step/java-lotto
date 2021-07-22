@@ -2,12 +2,19 @@ package string_add_calculator.domain;
 
 import util.StringUtils;
 
+import java.util.Objects;
+
 public class NaturalNumber {
     private final int number;
 
     private NaturalNumber(String numberString) {
         validate(numberString);
         this.number = Integer.parseInt(numberString);
+    }
+
+    private NaturalNumber(int number) {
+        validate(String.valueOf(number));
+        this.number = number;
     }
 
     private void validate(String numberString) {
@@ -24,7 +31,20 @@ public class NaturalNumber {
         return number;
     }
 
-    public boolean add(NaturalNumber anotherNaturalNumber) {
-        return false;
+    public NaturalNumber add(NaturalNumber anotherNaturalNumber) {
+        return new NaturalNumber(this.number + anotherNaturalNumber.number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NaturalNumber that = (NaturalNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
