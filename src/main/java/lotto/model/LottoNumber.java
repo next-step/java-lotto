@@ -39,4 +39,14 @@ public class LottoNumber {
     public String toString() {
         return number + "";
     }
+
+    public boolean equals(Object obj) {
+        if(obj instanceof LottoNumber) {
+            LottoNumber lottoNumber = (LottoNumber) obj;
+            if(obj.equals(number)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

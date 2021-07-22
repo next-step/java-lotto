@@ -61,7 +61,7 @@ public class Lotto {
 
     public boolean contains(LottoNumber number) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.isSame(number)) {
+            if (lottoNumber.equals(number)) {
                 return true;
             }
         }
