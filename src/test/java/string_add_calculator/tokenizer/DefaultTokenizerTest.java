@@ -10,14 +10,16 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static string_add_calculator.fixture.Fixture.DEFAULT_TOKENIZER;
 
-@DisplayName("토크나이저 클래스 테스트")
-class TokenizerTest {
+@DisplayName("기본 토크나이저 클래스 테스트")
+class DefaultTokenizerTest {
+
     @DisplayName("받아온 문자열을 , 와 : 로 쪼갠후 쪼개진 문자 배열로 반환한다.")
     @MethodSource
     @ParameterizedTest
     void split(String inputString, List<String> expectedTokens) {
-        assertThat(Tokenizer.split(inputString)).containsAll(expectedTokens);
+        assertThat(DEFAULT_TOKENIZER.split(inputString)).containsAll(expectedTokens);
     }
 
     private static Stream<Arguments> split() {
