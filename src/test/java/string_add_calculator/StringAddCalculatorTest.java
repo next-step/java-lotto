@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -18,21 +17,17 @@ public class StringAddCalculatorTest {
     @NullAndEmptySource
     @ParameterizedTest
     void returnZeroWhenInputIsNullOrEmpty(String inputString) {
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
-
-        assertThat(stringAddCalculator.calculate(inputString)).isZero();
+        assertThat(StringAddCalculator.calculate(inputString)).isZero();
     }
 
     @DisplayName(",와 :로 분리하여 값들을 모두 더한 후 반환한다.")
     @MethodSource
     @ParameterizedTest
-    void splitUsingCommaAndColonAndReturnItsElements(String expressionString, int expectedValue) {
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
-
-        assertThat(stringAddCalculator.calculate(expressionString)).isEqualTo(expectedValue);
+    void splitUsingCommaAndColonThenReturnItsElements(String expressionString, int expectedValue) {
+        assertThat(StringAddCalculator.calculate(expressionString)).isEqualTo(expectedValue);
     }
 
-    private static Stream<Arguments> splitUsingCommaAndColonAndReturnItsElements() {
+    private static Stream<Arguments> splitUsingCommaAndColonThenReturnItsElements() {
         return Stream.of(
                 Arguments.of("1,2,3", 6),
                 Arguments.of("1:2:3", 6),

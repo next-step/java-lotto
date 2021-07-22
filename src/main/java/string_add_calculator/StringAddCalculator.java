@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    public int calculate(String expressionString) {
+    private StringAddCalculator() {}
+
+    public static int calculate(String expressionString) {
         if (StringUtils.isEmpty(expressionString)) {
             return 0;
         }
