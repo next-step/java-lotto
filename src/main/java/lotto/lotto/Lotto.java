@@ -9,7 +9,7 @@ public class Lotto {
         this.lottoTickets = lottoTickets;
     }
 
-    public static Object init(int payment, LottoTickets lottoTickets) {
+    public static Lotto init(int payment, LottoTickets lottoTickets) {
         return new Lotto(payment, lottoTickets);
     }
 }
