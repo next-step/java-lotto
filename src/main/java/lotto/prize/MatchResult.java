@@ -28,4 +28,12 @@ public class MatchResult {
     public static MatchResult init(Money payment, Map<LottoPrize, Integer> matchResult) {
         return new MatchResult(payment, matchResult);
     }
+
+    public int matchCount(LottoPrize lottoPrize) {
+        return matchResult.get(lottoPrize);
+    }
+
+    public double calculateEarningsRate() {
+        return 0.0;
+    }
 }

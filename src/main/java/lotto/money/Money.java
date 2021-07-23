@@ -24,4 +24,8 @@ public class Money {
     public int getAffordableCount(Money price) {
         return this.money / price.money;
     }
+
+    public int toInt() {
+        return money;
+    }
 }

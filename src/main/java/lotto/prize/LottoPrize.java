@@ -3,6 +3,7 @@ package lotto.prize;
 import lotto.money.Money;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -33,7 +34,17 @@ public enum LottoPrize {
         return LOTTO_PRIZES.get(matchCount);
     }
 
-    private int getMatchCount() {
+    public static List<LottoPrize> getWinningPrizes() {
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize != NONE)
+                .collect(Collectors.toList());
+    }
+
+    public int getMatchCount() {
         return matchCount;
+    }
+
+    public Money getPrizeMoney() {
+        return prizeMoney;
     }
 }
