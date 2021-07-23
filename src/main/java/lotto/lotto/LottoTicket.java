@@ -25,6 +25,8 @@ public class LottoTicket {
     }
 
     public LottoPrize matchPrize(WinningNumbers winningNumbers) {
-        return null;
+        int matchCount = lottoNumbers.match(winningNumbers);
+
+        return LottoPrize.of(matchCount);
     }
 }
