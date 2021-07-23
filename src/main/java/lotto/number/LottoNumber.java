@@ -42,7 +42,7 @@ public class LottoNumber {
         );
     }
 
-    private int toInt() {
+    public int toInt() {
         return number;
     }
 }

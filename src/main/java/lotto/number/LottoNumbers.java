@@ -2,6 +2,7 @@ package lotto.number;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
@@ -41,5 +42,11 @@ public class LottoNumbers {
     protected boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber::equals);
+    }
+
+    public List<Integer> toInts() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toInt)
+                .collect(Collectors.toList());
     }
 }
