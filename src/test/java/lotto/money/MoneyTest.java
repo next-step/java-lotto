@@ -3,7 +3,11 @@ package lotto.money;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,4 +29,20 @@ class MoneyTest {
         assertThatThrownBy(() -> Money.init(money)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("금액을 전달하면 구매 가능한 갯수를 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void getAffordableCount(Money price, int expectedCount) {
+        Money money = Money.init(10_000);
+
+        assertThat(money.getAffordableCount(price)).isEqualTo(expectedCount);
+    }
+
+    private static Stream<Arguments> getAffordableCount() {
+        return Stream.of(
+                Arguments.of(Money.init(10_000), 1),
+                Arguments.of(Money.init(1_000), 10),
+                Arguments.of(Money.init(100), 100)
+        );
+    }
 }
