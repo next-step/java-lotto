@@ -38,4 +38,10 @@ public class LottoTest {
                 Arguments.of(-1, null)
         );
     }
+
+    @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
+    @Test
+    void matchPrize() {
+
+    }
 }
