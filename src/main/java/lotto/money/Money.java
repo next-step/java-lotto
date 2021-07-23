@@ -1,7 +1,8 @@
 package lotto.money;
 
 public class Money {
-    public static final int ZERO = 0;
+    public static final int ZERO_VALUE = 0;
+    public static final Money ZERO = Money.init(ZERO_VALUE);
 
     private final int money;
 
@@ -12,8 +13,8 @@ public class Money {
     }
 
     private void validate(int money) {
-        if (money < ZERO) {
-            throw new IllegalArgumentException("Money value should be equal or greater than " + ZERO);
+        if (money < ZERO_VALUE) {
+            throw new IllegalArgumentException("Money value should be equal or greater than " + ZERO_VALUE);
         }
     }
 
@@ -27,5 +28,17 @@ public class Money {
 
     public int toInt() {
         return money;
+    }
+
+    public Money addition(Money anotherMoney) {
+        return Money.init(money + anotherMoney.money);
+    }
+
+    public int multiply(int operand) {
+        return money * operand;
+    }
+
+    public double earningRate(Money payment) {
+        return (double) payment.money / this.money;
     }
 }
