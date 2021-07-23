@@ -1,4 +1,4 @@
-package string_add_calculator.tokenizer;
+package calculator.stringadder.tokenizer;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

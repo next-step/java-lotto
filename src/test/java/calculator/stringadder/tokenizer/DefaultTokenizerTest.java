@@ -1,4 +1,4 @@
-package string_add_calculator.tokenizer;
+package calculator.stringadder.tokenizer;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static string_add_calculator.fixture.Fixture.DEFAULT_TOKENIZER;
+import static calculator.stringadder.fixture.Fixture.DEFAULT_TOKENIZER;
 
 @DisplayName("기본 토크나이저 클래스 테스트")
 class DefaultTokenizerTest {

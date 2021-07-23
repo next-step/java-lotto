@@ -1,4 +1,4 @@
-package string_add_calculator.domain;
+package calculator.stringadder.domain;
 
 import util.StringUtils;
 

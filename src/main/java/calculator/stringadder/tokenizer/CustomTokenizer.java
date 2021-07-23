@@ -1,4 +1,4 @@
-package string_add_calculator.tokenizer;
+package calculator.stringadder.tokenizer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,7 +1,6 @@
-package string_add_calculator.tokenizer;
+package calculator.stringadder.tokenizer;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static string_add_calculator.fixture.Fixture.CUSTOM_TOKENIZER;
+import static calculator.stringadder.fixture.Fixture.CUSTOM_TOKENIZER;
 
 @DisplayName("구분자를 자유롭게 커스터마이징 할 수 있는 커스텀 토크나이저 클래스 테스트")
 class CustomTokenizerTest {

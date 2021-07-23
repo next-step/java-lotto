@@ -1,12 +1,12 @@
-package string_add_calculator;
+package calculator.stringadder;
 
-import string_add_calculator.domain.NaturalNumber;
-import string_add_calculator.tokenizer.ExpressionTokenizer;
+import calculator.stringadder.domain.NaturalNumber;
+import calculator.stringadder.tokenizer.ExpressionTokenizer;
 import util.StringUtils;
 
 import java.util.Arrays;
 
-import static string_add_calculator.domain.NaturalNumber.ZERO_VALUE;
+import static calculator.stringadder.domain.NaturalNumber.ZERO_VALUE;
 
 public class StringAddCalculator {
 

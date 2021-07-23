@@ -1,4 +1,4 @@
-package string_add_calculator.tokenizer;
+package calculator.stringadder.tokenizer;
 
 public class DefaultTokenizer implements Tokenizer {
     private static final String SPLIT_REGEX = "[,|:]";

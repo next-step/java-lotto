@@ -1,5 +1,6 @@
-package string_add_calculator;
+package calculator.stringadder;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,7 +20,7 @@ public class StringAddCalculatorTest {
     @NullAndEmptySource
     @ParameterizedTest
     void returnZeroWhenInputIsNullOrEmpty(String inputString) {
-        assertThat(StringAddCalculator.calculate(inputString)).isZero();
+        Assertions.assertThat(StringAddCalculator.calculate(inputString)).isZero();
     }
 
     @DisplayName(",와 :로 혹은 커스텀 구분자로 분리하여 값들을 모두 더한 후 반환한다.")
