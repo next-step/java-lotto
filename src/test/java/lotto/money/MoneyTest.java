@@ -2,6 +2,7 @@ package lotto.money;
 
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -43,6 +44,21 @@ class MoneyTest {
                 Arguments.of(Money.init(10_000), 1),
                 Arguments.of(Money.init(1_000), 10),
                 Arguments.of(Money.init(100), 100)
+        );
+    }
+
+    @DisplayName("두 금액을 더하면 더한만큼의 새 금액을 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void addition(Money money, Money anotherMoney, Money expectedMoney) {
+        assertThat(money.addition(anotherMoney)).isEqualTo(expectedMoney);
+    }
+
+    private static Stream<Arguments> addition() {
+        return Stream.of(
+                Arguments.of(Money.init(5_000), Money.init(500), Money.init(5_500)),
+                Arguments.of(Money.init(5_000), Money.init(0), Money.init(5_000)),
+                Arguments.of(Money.init(5_000), Money.init(5_000), Money.init(10_000))
         );
     }
 }
