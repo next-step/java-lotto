@@ -1,9 +1,9 @@
 package lotto.helper;
 
+import lotto.lotto.LottoTicket;
 import lotto.lotto.LottoTickets;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumberGenerator;
-import lotto.lotto.LottoTicket;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 
@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Generator {
     private Generator() {}

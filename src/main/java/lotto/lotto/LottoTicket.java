@@ -1,6 +1,5 @@
 package lotto.lotto;
 
-import lotto.dto.LottoTicketDto;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;

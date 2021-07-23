@@ -1,7 +1,6 @@
 package lotto.number;
 
 import lotto.helper.Generator;
-import lotto.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
