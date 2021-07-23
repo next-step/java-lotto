@@ -34,14 +34,13 @@ public class MatchResult {
 
     public double calculateEarningsRate() {
         Money totalEarnings = Arrays.stream(LottoPrize.values())
-                .mapToInt(this::calculateEarning)
-                .mapToObj(Money::init)
+                .map(this::calculateEarning)
                 .reduce(Money.ZERO, Money::addition);
 
         return totalEarnings.earningRate(payment);
     }
 
-    private int calculateEarning(LottoPrize lottoPrize) {
+    private Money calculateEarning(LottoPrize lottoPrize) {
         return lottoPrize.getPrizeMoney()
                 .multiply(matchCount(lottoPrize));
     }

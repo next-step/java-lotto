@@ -76,4 +76,19 @@ class MoneyTest {
                 Arguments.of(Money.init(5_000), Money.init(5_000), 1)
         );
     }
+
+    @DisplayName("금액과 곱할 수를 전달하면 곱한 금액을 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void multiply(Money money, int operand, Money expectedCount) {
+        assertThat(money.multiply(operand)).isEqualTo(expectedCount);
+    }
+
+    private static Stream<Arguments> multiply() {
+        return Stream.of(
+                Arguments.of(Money.init(5_000), 10, Money.init(50_000)),
+                Arguments.of(Money.init(5_000), 50, Money.init(250_000)),
+                Arguments.of(Money.init(5_000), 1, Money.init(5_000))
+        );
+    }
 }

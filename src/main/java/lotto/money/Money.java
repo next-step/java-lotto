@@ -36,8 +36,8 @@ public class Money {
         return Money.init(money + anotherMoney.money);
     }
 
-    public int multiply(int operand) {
-        return money * operand;
+    public Money multiply(int operand) {
+        return Money.init(money * operand);
     }
 
     public double earningRate(Money payment) {
