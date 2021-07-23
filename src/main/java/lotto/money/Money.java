@@ -1,8 +1,13 @@
 package lotto.money;
 
 public class Money {
+    private final int money;
 
-    public static Object init(int payment) {
-        return null;
+    public Money(int money) {
+        this.money = money;
+    }
+
+    public static Money init(int payment) {
+        return new Money(payment);
     }
 }
