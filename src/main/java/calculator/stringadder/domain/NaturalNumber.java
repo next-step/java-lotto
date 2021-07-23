@@ -16,8 +16,7 @@ public class NaturalNumber {
     }
 
     private NaturalNumber(int number) {
-        validate(String.valueOf(number));
-        this.number = number;
+        this(String.valueOf(number));
     }
 
     private void validate(String numberString) {
