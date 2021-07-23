@@ -22,7 +22,7 @@ public class ResultView {
                 .map(LottoTicketDto::getNumbers)
                 .map(List::toArray)
                 .map(Arrays::toString)
-                .forEach(System.out::println);
+                .forEach(ResultView::printStatement);
     }
 
     public static void printMatchResult(MatchResult matchResult) {

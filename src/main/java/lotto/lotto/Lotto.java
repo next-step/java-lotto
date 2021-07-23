@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Lotto {
-
     private final Money payment;
     private final LottoTickets lottoTickets;
 

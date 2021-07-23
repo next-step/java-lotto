@@ -1,6 +1,6 @@
 package lotto.lotto;
 
-import lotto.helper.Generator;
+import lotto.helper.Fixture;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
@@ -31,16 +31,8 @@ class LottoTicketsTest {
     @DisplayName("당첨 번호를 전달 받으면 결과를 계산하여 등수별로 몇개인지 반환한다.")
     @Test
     void matchWinningNumbers() {
-        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
-        LottoTickets lottoTickets = LottoTickets.from(
-                Arrays.asList(
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 30),
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 31),
-                        Generator.lottoTicket(5, 10, 15, 20, 26, 31),
-                        Generator.lottoTicket(5, 10, 15, 21, 26, 31),
-                        Generator.lottoTicket(5, 10, 16, 21, 26, 31)
-                )
-        );
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         Map<LottoPrize, Long> matchResult = lottoTickets.matchWinningNumbers(winningNumbers);
 

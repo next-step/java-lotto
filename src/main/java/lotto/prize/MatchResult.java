@@ -9,7 +9,6 @@ import java.util.Objects;
 import static lotto.money.Money.ZERO_VALUE;
 
 public class MatchResult {
-
     private final Money payment;
     private final Map<LottoPrize, Long> matchResult;
 

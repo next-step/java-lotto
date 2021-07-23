@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
@@ -47,16 +48,8 @@ public class LottoTest {
     @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
     @Test
     void matchPrize() {
-        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
-        LottoTickets lottoTickets = LottoTickets.from(
-                Arrays.asList(
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 30),
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 31),
-                        Generator.lottoTicket(5, 10, 15, 20, 26, 31),
-                        Generator.lottoTicket(5, 10, 15, 21, 26, 31),
-                        Generator.lottoTicket(5, 10, 16, 21, 26, 31)
-                )
-        );
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
         MatchResult matchResult = lotto.match(winningNumbers);
@@ -68,16 +61,8 @@ public class LottoTest {
     @DisplayName("수익률 계산")
     @Test
     void earningRate() {
-        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
-        LottoTickets lottoTickets = LottoTickets.from(
-                Arrays.asList(
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 30),
-                        Generator.lottoTicket(5, 10, 15, 20, 25, 31),
-                        Generator.lottoTicket(5, 10, 15, 20, 26, 31),
-                        Generator.lottoTicket(5, 10, 15, 21, 26, 31),
-                        Generator.lottoTicket(5, 10, 16, 21, 26, 31)
-                )
-        );
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         int payment = 10_000;
         Lotto lotto = Lotto.of(Money.from(payment), lottoTickets);

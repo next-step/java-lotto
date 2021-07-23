@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.number.LottoNumberGenerator;
 import lotto.number.WinningNumbers;
@@ -12,7 +13,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static lotto.helper.Generator.winningNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -36,7 +36,7 @@ class LottoTicketTest {
     @MethodSource
     @ParameterizedTest
     void matchPrize(LottoTicket lottoTicket, LottoPrize expectedLottoPrize) {
-        WinningNumbers winningNumbers = winningNumbers(5, 10, 15, 20, 25, 30);
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
 
         assertThat(lottoTicket.matchPrize(winningNumbers)).isEqualTo(expectedLottoPrize);
     }
