@@ -1,6 +1,8 @@
 package lotto.lotto;
 
 import lotto.money.Money;
+import lotto.number.WinningNumbers;
+import lotto.prize.MatchResult;
 
 import java.util.Objects;
 
@@ -28,5 +30,13 @@ public class Lotto {
 
     public static Lotto init(Money payment, LottoTickets lottoTickets) {
         return new Lotto(payment, lottoTickets);
+    }
+
+    public MatchResult match(WinningNumbers winningNumbers) {
+        return null;
+    }
+
+    public Object getLottoTickets() {
+        return null;
     }
 }
