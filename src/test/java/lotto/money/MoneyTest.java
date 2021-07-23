@@ -61,4 +61,19 @@ class MoneyTest {
                 Arguments.of(Money.init(5_000), Money.init(5_000), Money.init(10_000))
         );
     }
+
+    @DisplayName("금액과 가격을 전달하면 구매할 수 있는 개수를 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void affordableCount(Money money, Money price, int expectedCount) {
+        assertThat(money.getAffordableCount(price)).isEqualTo(expectedCount);
+    }
+
+    private static Stream<Arguments> affordableCount() {
+        return Stream.of(
+                Arguments.of(Money.init(5_000), Money.init(500), 10),
+                Arguments.of(Money.init(5_000), Money.init(100), 50),
+                Arguments.of(Money.init(5_000), Money.init(5_000), 1)
+        );
+    }
 }
