@@ -3,6 +3,7 @@ package lotto.lotto;
 import lotto.money.Money;
 import lotto.number.LottoNumberGenerator;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,9 +19,17 @@ public class LottoMachine {
     }
 
     public static Lotto buy(Money payment) {
+        validate(payment);
+
         LottoTickets lottoTickets = buyAutoTicket(payment);
 
         return Lotto.init(payment, lottoTickets);
+    }
+
+    private static void validate(Money payment) {
+        if (Objects.isNull(payment)) {
+            throw new IllegalArgumentException("Payment can't be null");
+        }
     }
 
     private static LottoTickets buyAutoTicket(Money payment) {
