@@ -1,4 +1,4 @@
-package lotto.ticker;
+package lotto.lotto;
 
 import lotto.number.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;

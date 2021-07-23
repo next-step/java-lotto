@@ -2,7 +2,7 @@ package lotto.helper;
 
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumberGenerator;
-import lotto.ticker.LottoTicket;
+import lotto.lotto.LottoTicket;
 
 import java.util.Arrays;
 import java.util.List;
