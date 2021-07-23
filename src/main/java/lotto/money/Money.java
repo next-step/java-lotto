@@ -21,7 +21,7 @@ public class Money {
         return new Money(payment);
     }
 
-    public boolean getAffordableCount(Money price) {
-        return false;
+    public int getAffordableCount(Money price) {
+        return this.money / price.money;
     }
 }
