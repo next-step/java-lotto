@@ -41,7 +41,7 @@ public class Money {
     }
 
     public double earningRate(Money payment) {
-        return (double) payment.money / this.money;
+        return (double) this.money / payment.money;
     }
 
     @Override
