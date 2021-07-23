@@ -1,6 +1,7 @@
 package lotto.prize;
 
 
+import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,7 @@ class MatchResultTest {
     @DisplayName("당첨 결과는 처음 지불한 금액과 상금 매치 결과를 가지고 초기화 한다.")
     @Test
     void initMatchResult() {
-        int payment = 10_000;
+        Money payment = Money.init(10_000);
         Map<LottoPrize, Integer> matchResult = Collections.emptyMap();
 
         assertThat(MatchResult.init(payment, matchResult)).isInstanceOf(MatchResult.class);
@@ -29,15 +30,15 @@ class MatchResultTest {
     @DisplayName("당첨 결과중 지불 금액과 매치 결과는 null 일 수 없다.")
     @MethodSource
     @ParameterizedTest
-    void initException(int payment, Map<LottoPrize, Integer> matchResult) {
+    void initException(Money payment, Map<LottoPrize, Integer> matchResult) {
         assertThatThrownBy(() -> MatchResult.init(payment, matchResult)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> initException() {
         return Stream.of(
-                Arguments.of(-1, Collections.emptyMap()),
-                Arguments.of(1, null),
-                Arguments.of(-1, null)
+                Arguments.of(null, Collections.emptyMap()),
+                Arguments.of(Money.init(1), null),
+                Arguments.of(null, null)
         );
     }
 
