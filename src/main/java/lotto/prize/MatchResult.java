@@ -4,7 +4,15 @@ import java.util.Map;
 
 public class MatchResult {
 
-    public static Object init(int payment, Map<LottoPrize, Integer> matchResult) {
-        return null;
+    private final int payment;
+    private final Map<LottoPrize, Integer> matchResult;
+
+    public MatchResult(int payment, Map<LottoPrize, Integer> matchResult) {
+        this.payment = payment;
+        this.matchResult = matchResult;
+    }
+
+    public static MatchResult init(int payment, Map<LottoPrize, Integer> matchResult) {
+        return new MatchResult(payment, matchResult);
     }
 }
