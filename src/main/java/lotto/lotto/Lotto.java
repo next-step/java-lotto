@@ -26,10 +26,6 @@ public class Lotto {
         }
     }
 
-    public static Lotto init(int payment, LottoTickets lottoTickets) {
-        return new Lotto(Money.init(payment), lottoTickets);
-    }
-
     public static Lotto init(Money payment, LottoTickets lottoTickets) {
         return new Lotto(payment, lottoTickets);
     }

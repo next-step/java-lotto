@@ -12,12 +12,6 @@ public class LottoMachine {
 
     private LottoMachine() {}
 
-    public static Lotto buy(int payment) {
-        LottoTickets lottoTickets = buyAutoTicket(Money.init(payment));
-
-        return Lotto.init(payment, lottoTickets);
-    }
-
     public static Lotto buy(Money payment) {
         validate(payment);
 
