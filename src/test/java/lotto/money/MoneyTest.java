@@ -91,4 +91,19 @@ class MoneyTest {
                 Arguments.of(Money.init(5_000), 1, Money.init(5_000))
         );
     }
+
+    @DisplayName("원금과 최종 금액을 전달하면 수익률을 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void earningRate(Money payment, Money earnings, double expectedRate) {
+        assertThat(earnings.earningRate(payment)).isEqualTo(expectedRate);
+    }
+
+    private static Stream<Arguments> earningRate() {
+        return Stream.of(
+                Arguments.of(Money.init(5_000), Money.init(5_000), 1.0),
+                Arguments.of(Money.init(5_000), Money.init(250_000), 50.0),
+                Arguments.of(Money.init(5_000), Money.init(500), 0.1)
+        );
+    }
 }
