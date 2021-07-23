@@ -1,10 +1,12 @@
 package lotto.prize;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,5 +31,14 @@ class LottoPrizeTest {
                 Arguments.of(1, LottoPrize.NONE),
                 Arguments.of(0, LottoPrize.NONE)
         );
+    }
+
+    @DisplayName("상금이 있는 등수만 뽑아내기.")
+    @Test
+    void getWinningPrize() {
+        List<LottoPrize> winningPrizes = LottoPrize.getWinningPrizes();
+
+        assertThat(winningPrizes).doesNotContain(LottoPrize.NONE);
+        assertThat(winningPrizes.size()).isNotZero();
     }
 }
