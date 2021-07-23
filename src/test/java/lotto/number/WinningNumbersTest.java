@@ -16,22 +16,21 @@ import static lotto.helper.Generator.lottoNumbersOf;
 import static lotto.number.LottoNumbers.NUMBER_OF_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("로또 숫자 그룹 테스트")
-class LottoNumbersTest {
+@DisplayName("당첨 번호 클래스 테스트")
+class WinningNumbersTest {
 
-    @DisplayName("로또 번호 그룹은 " + NUMBER_OF_LOTTO_NUMBERS + "개의 로또 번호가지고 생성한다.")
+    @DisplayName("당첨 번호 그룹은 " + NUMBER_OF_LOTTO_NUMBERS + "개의 로또 번호가지고 생성한다.")
     @Test
     void initLottoNumbers() {
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, NUMBER_OF_LOTTO_NUMBERS)
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
 
-        assertThat(LottoNumbers.from(lottoNumbers)).isNotNull();
+        assertThat(WinningNumbers.from(lottoNumbers)).isNotNull();
     }
 
-    @DisplayName("로또 번호 생성시에 번호 수가" + NUMBER_OF_LOTTO_NUMBERS + "개가 아닌 경우나 null 이 올 경우 예외를 던진다.")
+    @DisplayName("당첨 번호 생성시 번호 수가 " + NUMBER_OF_LOTTO_NUMBERS + "개가 아니거나 null 이 올 경우 예외를 던진다.")
     @NullSource
     @MethodSource
     @ParameterizedTest
