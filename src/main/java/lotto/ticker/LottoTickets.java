@@ -3,7 +3,13 @@ package lotto.ticker;
 import java.util.List;
 
 public class LottoTickets {
-    public static Object from(List<LottoTicket> generateNumberOfLottoTicket) {
-        return null;
+    private final List<LottoTicket> lottoTickets;
+
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
+    public static LottoTickets from(List<LottoTicket> lottoTickets) {
+        return new LottoTickets(lottoTickets);
     }
 }
