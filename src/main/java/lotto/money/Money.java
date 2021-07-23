@@ -1,5 +1,7 @@
 package lotto.money;
 
+import java.util.Objects;
+
 public class Money {
     public static final int ZERO_VALUE = 0;
     public static final Money ZERO = Money.init(ZERO_VALUE);
@@ -40,5 +42,18 @@ public class Money {
 
     public double earningRate(Money payment) {
         return (double) payment.money / this.money;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money1 = (Money) o;
+        return money == money1.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
