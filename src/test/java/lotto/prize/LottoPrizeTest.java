@@ -25,7 +25,7 @@ class LottoPrizeTest {
                 Arguments.of(5, LottoPrize.SECOND),
                 Arguments.of(4, LottoPrize.THIRD),
                 Arguments.of(3, LottoPrize.FOURTH),
-                Arguments.of(2, LottoPrize.FIFTH),
+                Arguments.of(2, LottoPrize.NONE),
                 Arguments.of(1, LottoPrize.NONE),
                 Arguments.of(0, LottoPrize.NONE)
         );
