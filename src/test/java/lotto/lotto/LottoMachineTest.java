@@ -11,7 +11,7 @@ class LottoMachineTest {
     @DisplayName("돈을 받아 가능한 수의 로또 티켓을 가진 로또를 반환한다.")
     @Test
     void buyLotto() {
-        assertThat(LottoMachine.buy(10_000)).isNotNull();
+        assertThat(LottoMachine.buy(10_000)).isInstanceOf(Lotto.class);
     }
 
 }
