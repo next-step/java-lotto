@@ -2,6 +2,7 @@ package lotto.dto;
 
 import lotto.lotto.LottoTicket;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicketDto {
@@ -9,6 +10,8 @@ public class LottoTicketDto {
 
     private LottoTicketDto(final LottoTicket lottoTicket) {
         this.lottoNumbers = lottoTicket.getNumbers();
+
+        Collections.sort(lottoNumbers);
     }
 
     public static LottoTicketDto of(final LottoTicket lottoTicket) {
