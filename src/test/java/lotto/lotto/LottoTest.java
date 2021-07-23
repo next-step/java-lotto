@@ -64,4 +64,30 @@ public class LottoTest {
         Arrays.stream(LottoPrize.values())
                 .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
     }
+
+    @DisplayName("수익률 계산")
+    @Test
+    void earningRate() {
+        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
+        LottoTickets lottoTickets = LottoTickets.from(
+                Arrays.asList(
+                        Generator.lottoTicket(5, 10, 15, 20, 25, 30),
+                        Generator.lottoTicket(5, 10, 15, 20, 25, 31),
+                        Generator.lottoTicket(5, 10, 15, 20, 26, 31),
+                        Generator.lottoTicket(5, 10, 15, 21, 26, 31),
+                        Generator.lottoTicket(5, 10, 16, 21, 26, 31)
+                )
+        );
+
+        int payment = 10_000;
+        Lotto lotto = Lotto.init(Money.init(payment), lottoTickets);
+        int expectedEarning = Arrays.stream(LottoPrize.values())
+                .map(LottoPrize::getPrizeMoney)
+                .mapToInt(Money::toInt)
+                .sum();
+
+        MatchResult matchResult = lotto.match(winningNumbers);
+
+        assertThat(matchResult.calculateEarningsRate()).isEqualTo((double) expectedEarning / payment);
+    }
 }
