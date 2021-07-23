@@ -25,10 +25,6 @@ public class MatchResult {
         }
     }
 
-    public static MatchResult init(int payment, Map<LottoPrize, Integer> matchResult) {
-        return new MatchResult(Money.init(payment), matchResult);
-    }
-
     public static MatchResult init(Money payment, Map<LottoPrize, Integer> matchResult) {
         return new MatchResult(payment, matchResult);
     }
