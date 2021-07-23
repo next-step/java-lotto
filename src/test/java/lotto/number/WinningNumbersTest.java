@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static lotto.helper.Generator.lottoNumbersOf;
+import static lotto.helper.Generator.lottoNumberList;
 import static lotto.number.LottoNumbers.NUMBER_OF_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -40,8 +40,8 @@ class WinningNumbersTest {
 
     private static Stream<Arguments> initLottoNumbersException() {
         return Stream.of(
-                Arguments.of(lottoNumbersOf(1, 2, 3, 4, 5)),
-                Arguments.of(lottoNumbersOf(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(lottoNumberList(1, 2, 3, 4, 5)),
+                Arguments.of(lottoNumberList(1, 2, 3, 4, 5, 6, 7))
         );
     }
 }

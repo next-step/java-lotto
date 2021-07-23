@@ -3,6 +3,8 @@ package lotto.helper;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumberGenerator;
 import lotto.lotto.LottoTicket;
+import lotto.number.LottoNumbers;
+import lotto.number.WinningNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.stream.IntStream;
 public class Generator {
     private Generator() {}
 
-    public static List<LottoNumber> lottoNumbersOf(int... numbers) {
+    public static List<LottoNumber> lottoNumberList(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
@@ -22,5 +24,17 @@ public class Generator {
         return IntStream.rangeClosed(0, numberOfLottoTicket)
                 .mapToObj(x -> LottoTicket.from(LottoNumberGenerator.generate()))
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers lottoNumbers(int... numbers) {
+        return LottoNumbers.from(lottoNumberList(numbers));
+    }
+
+    public static LottoTicket lottoTicket(int... numbers) {
+        return LottoTicket.from(lottoNumbers(numbers));
+    }
+
+    public static WinningNumbers winningNumbers(int... numbers) {
+        return WinningNumbers.from(lottoNumberList(numbers));
     }
 }

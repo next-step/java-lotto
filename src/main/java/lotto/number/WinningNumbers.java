@@ -8,4 +8,8 @@ public class WinningNumbers extends LottoNumbers {
         super(lottoNumbers);
     }
 
+    public static WinningNumbers from(List<LottoNumber> lottoNumbers) {
+        return new WinningNumbers(lottoNumbers);
+    }
+
 }

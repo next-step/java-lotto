@@ -1,6 +1,8 @@
 package lotto.lotto;
 
 import lotto.number.LottoNumbers;
+import lotto.number.WinningNumbers;
+import lotto.prize.LottoPrize;
 
 import java.util.Objects;
 
@@ -20,5 +22,9 @@ public class LottoTicket {
 
     public static LottoTicket from(LottoNumbers lottoNumbers) {
         return new LottoTicket(lottoNumbers);
+    }
+
+    public LottoPrize matchPrize(WinningNumbers winningNumbers) {
+        return null;
     }
 }
