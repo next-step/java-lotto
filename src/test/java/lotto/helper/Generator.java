@@ -1,7 +1,6 @@
 package lotto.helper;
 
 import lotto.number.LottoNumber;
-import lotto.number.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
