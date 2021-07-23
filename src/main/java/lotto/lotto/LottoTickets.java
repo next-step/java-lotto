@@ -1,7 +1,10 @@
 package lotto.lotto;
 
+import lotto.dto.LottoTicketDto;
+
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -20,5 +23,11 @@ public class LottoTickets {
 
     public static LottoTickets from(List<LottoTicket> lottoTickets) {
         return new LottoTickets(lottoTickets);
+    }
+
+    public List<LottoTicketDto> getLottoTicketDtos() {
+        return lottoTickets.stream()
+                .map(LottoTicketDto::of)
+                .collect(Collectors.toList());
     }
 }

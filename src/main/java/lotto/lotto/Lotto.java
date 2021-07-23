@@ -1,9 +1,11 @@
 package lotto.lotto;
 
+import lotto.dto.LottoTicketDto;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
 import lotto.prize.MatchResult;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
@@ -36,7 +38,7 @@ public class Lotto {
         return null;
     }
 
-    public Object getLottoTickets() {
-        return null;
+    public List<LottoTicketDto> getLottoTickets() {
+        return lottoTickets.getLottoTicketDtos();
     }
 }
