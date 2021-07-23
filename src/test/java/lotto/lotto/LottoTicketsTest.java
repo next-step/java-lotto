@@ -1,7 +1,13 @@
 package lotto.lotto;
 
+import lotto.helper.Generator;
+import lotto.number.WinningNumbers;
+import lotto.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.Map;
 
 import static lotto.helper.Generator.lottoTicketList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,5 +26,25 @@ class LottoTicketsTest {
     @Test
     void throwExceptionWhenInitValueIsNull() {
         assertThatThrownBy(() -> LottoTickets.from(null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("당첨 번호를 전달 받으면 결과를 계산하여 등수별로 몇개인지 반환한다.")
+    @Test
+    void matchWinningNumbers() {
+        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
+        LottoTickets lottoTickets = LottoTickets.from(
+                Arrays.asList(
+                        Generator.lottoTicket(5, 10, 15, 20, 25, 30),
+                        Generator.lottoTicket(5, 10, 15, 20, 25, 31),
+                        Generator.lottoTicket(5, 10, 15, 20, 26, 31),
+                        Generator.lottoTicket(5, 10, 15, 21, 26, 31),
+                        Generator.lottoTicket(5, 10, 16, 21, 26, 31)
+                )
+        );
+
+        Map<LottoPrize, Long> matchResult = lottoTickets.matchWinningNumbers(winningNumbers);
+
+        Arrays.stream(LottoPrize.values())
+                .forEach(lottoPrize -> assertThat(matchResult.get(lottoPrize)).isEqualTo(1));
     }
 }
