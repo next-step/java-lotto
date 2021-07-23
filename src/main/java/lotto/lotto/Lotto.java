@@ -1,22 +1,24 @@
 package lotto.lotto;
 
+import lotto.money.Money;
+
 import java.util.Objects;
 
 public class Lotto {
-    private static final int MINIMUM_PAYMENT = 0;
 
-    private final int payment;
+    private final Money payment;
     private final LottoTickets lottoTickets;
 
-    public Lotto(int payment, LottoTickets lottoTickets) {
+    public Lotto(Money payment, LottoTickets lottoTickets) {
         validate(payment, lottoTickets);
+
         this.payment = payment;
         this.lottoTickets = lottoTickets;
     }
 
-    private void validate(int payment, LottoTickets lottoTickets) {
-        if (payment < MINIMUM_PAYMENT) {
-            throw new IllegalArgumentException("Payment must larger than " + MINIMUM_PAYMENT);
+    private void validate(Money payment, LottoTickets lottoTickets) {
+        if (Objects.isNull(payment)) {
+            throw new IllegalArgumentException("Money can't be null");
         }
 
         if (Objects.isNull(lottoTickets)) {
@@ -25,6 +27,10 @@ public class Lotto {
     }
 
     public static Lotto init(int payment, LottoTickets lottoTickets) {
+        return new Lotto(Money.init(payment), lottoTickets);
+    }
+
+    public static Lotto init(Money payment, LottoTickets lottoTickets) {
         return new Lotto(payment, lottoTickets);
     }
 }

@@ -1,6 +1,7 @@
 package lotto.lotto;
 
 import lotto.helper.Generator;
+import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,24 +19,24 @@ public class LottoTest {
     @DisplayName("로또 구매 정보는 구매 금액과 로또 티켓 그룹을 가지고 생성 한다.")
     @Test
     void initLotto() {
-        int payment = 10_000;
+        Money payment = Money.init(10_000);
         LottoTickets lottoTickets = Generator.autoLottoTickets(5);
 
         assertThat(Lotto.init(payment, lottoTickets)).isNotNull();
     }
 
-    @DisplayName("구매 금액이 음수이거나 로또 그룹이 null 일 경우 예외를 발생한다.")
+    @DisplayName("구매 금액이나 로또 그룹이 null 일 경우 예외를 발생한다.")
     @MethodSource
     @ParameterizedTest
-    void initLottoException(int payment, LottoTickets lottoTickets) {
+    void initLottoException(Money payment, LottoTickets lottoTickets) {
         assertThatThrownBy(() -> Lotto.init(payment, lottoTickets)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> initLottoException() {
         return Stream.of(
-                Arguments.of(-1, Generator.autoLottoTickets(5)),
-                Arguments.of(1, null),
-                Arguments.of(-1, null)
+                Arguments.of(null, Generator.autoLottoTickets(5)),
+                Arguments.of(Money.init(1), null),
+                Arguments.of(null, null)
         );
     }
 
