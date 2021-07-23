@@ -3,9 +3,11 @@ package lotto.lotto;
 import lotto.dto.LottoTicketDto;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
+import lotto.prize.LottoPrize;
 import lotto.prize.MatchResult;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Lotto {
@@ -35,7 +37,9 @@ public class Lotto {
     }
 
     public MatchResult match(WinningNumbers winningNumbers) {
-        return null;
+        Map<LottoPrize, Long> lottoPrizes = lottoTickets.matchWinningNumbers(winningNumbers);
+
+        return MatchResult.init(payment, lottoPrizes);
     }
 
     public List<LottoTicketDto> getLottoTickets() {

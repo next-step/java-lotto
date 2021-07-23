@@ -1,9 +1,13 @@
 package lotto.lotto;
 
 import lotto.dto.LottoTicketDto;
+import lotto.number.WinningNumbers;
+import lotto.prize.LottoPrize;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
@@ -29,5 +33,11 @@ public class LottoTickets {
         return lottoTickets.stream()
                 .map(LottoTicketDto::of)
                 .collect(Collectors.toList());
+    }
+
+    public Map<LottoPrize, Long> matchWinningNumbers(WinningNumbers winningNumbers) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.matchPrize(winningNumbers))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

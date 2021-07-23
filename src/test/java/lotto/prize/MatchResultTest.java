@@ -22,7 +22,7 @@ class MatchResultTest {
     @Test
     void initMatchResult() {
         Money payment = Money.init(10_000);
-        Map<LottoPrize, Integer> matchResult = Collections.emptyMap();
+        Map<LottoPrize, Long> matchResult = Collections.emptyMap();
 
         assertThat(MatchResult.init(payment, matchResult)).isInstanceOf(MatchResult.class);
     }
@@ -30,7 +30,7 @@ class MatchResultTest {
     @DisplayName("당첨 결과중 지불 금액과 매치 결과는 null 일 수 없다.")
     @MethodSource
     @ParameterizedTest
-    void initException(Money payment, Map<LottoPrize, Integer> matchResult) {
+    void initException(Money payment, Map<LottoPrize, Long> matchResult) {
         assertThatThrownBy(() -> MatchResult.init(payment, matchResult)).isInstanceOf(IllegalArgumentException.class);
     }
 
