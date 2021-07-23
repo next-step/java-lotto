@@ -19,7 +19,7 @@ public class LottoConsoleGame {
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
         MatchResult matchResult = lotto.match(winningNumbers);
 
-        ResultView.printLottoTickets(matchResult);
+        ResultView.printMatchResult(matchResult);
     }
 
 }
