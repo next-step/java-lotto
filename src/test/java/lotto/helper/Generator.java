@@ -20,7 +20,7 @@ public class Generator {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicket> generateNumberOfLottoTicket(int numberOfLottoTicket) {
+    public static List<LottoTicket> lottoTicketList(int numberOfLottoTicket) {
         return IntStream.rangeClosed(0, numberOfLottoTicket)
                 .mapToObj(x -> LottoTicket.from(LottoNumberGenerator.generate()))
                 .collect(Collectors.toList());

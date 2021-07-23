@@ -3,7 +3,7 @@ package lotto.lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.helper.Generator.generateNumberOfLottoTicket;
+import static lotto.helper.Generator.lottoTicketList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -13,7 +13,7 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓 그룹은 로또 티켓 여러장으로 초기화 한다.")
     @Test
     void initLottoTickets() {
-        assertThat(LottoTickets.from(generateNumberOfLottoTicket(5))).isInstanceOf(LottoTickets.class);
+        assertThat(LottoTickets.from(lottoTicketList(5))).isInstanceOf(LottoTickets.class);
     }
 
     @DisplayName("들어온 초기화 값이 null 일 경우 예외를 던진다.")
