@@ -1,11 +1,15 @@
 package lotto.ticker;
 
-import lotto.number.LottoNumber;
-
-import java.util.List;
+import lotto.number.LottoNumbers;
 
 public class LottoTicket {
-    public static boolean from(List<LottoNumber> lottoNumbersOf) {
-        return false;
+    private final LottoNumbers lottoNumbers;
+
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket from(LottoNumbers lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 }

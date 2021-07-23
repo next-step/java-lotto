@@ -1,9 +1,9 @@
 package lotto.ticker;
 
+import lotto.number.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.helper.Generator.lottoNumbersOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -13,7 +13,7 @@ class LottoTicketTest {
     @DisplayName("로또 한장은 로또 숫자 그룹을 가지고 초기화 한다.")
     @Test
     void initLottoTicket() {
-        assertThat(LottoTicket.from(lottoNumbersOf(1, 2, 3, 4, 5, 6))).isInstanceOf(LottoTicket.class);
+        assertThat(LottoTicket.from(LottoNumberGenerator.generate())).isInstanceOf(LottoTicket.class);
     }
 
 }
