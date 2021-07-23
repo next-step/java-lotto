@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
+import static lotto.money.Money.ZERO_VALUE;
+
 public class MatchResult {
 
     private final Money payment;
@@ -46,6 +48,10 @@ public class MatchResult {
     }
 
     public int matchCount(LottoPrize lottoPrize) {
+        if (!matchResult.containsKey(lottoPrize)) {
+            return ZERO_VALUE;
+        }
+
         return matchResult.get(lottoPrize)
                 .intValue();
     }

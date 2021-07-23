@@ -1,5 +1,6 @@
 package lotto.number;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,8 @@ public class LottoNumberGenerator {
     }
 
     private static List<LottoNumber> extractLottoNumber() {
-        return LOTTO_NUMBER_POOL.subList(BASE_INDEX, NUMBER_OF_LOTTO_NUMBERS);
+        return Collections.unmodifiableList(
+                new ArrayList<>(LOTTO_NUMBER_POOL.subList(BASE_INDEX, NUMBER_OF_LOTTO_NUMBERS))
+        );
     }
 }

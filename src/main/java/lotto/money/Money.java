@@ -16,7 +16,7 @@ public class Money {
 
     private void validate(int money) {
         if (money < ZERO_VALUE) {
-            throw new IllegalArgumentException("Money value should be equal or greater than " + ZERO_VALUE);
+            throw new IllegalArgumentException("Money value should be equal or greater than " + ZERO_VALUE + " but it was " + money);
         }
     }
 
