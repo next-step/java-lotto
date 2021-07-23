@@ -13,7 +13,7 @@ class LottoTicketTest {
     @DisplayName("로또 한장은 로또 숫자 그룹을 가지고 초기화 한다.")
     @Test
     void initLottoTicket() {
-        assertThat(lottoNumbersOf(1, 2, 3, 4, 5, 6)).isInstanceOf(LottoTicket.class);
+        assertThat(LottoTicket.from(lottoNumbersOf(1, 2, 3, 4, 5, 6))).isInstanceOf(LottoTicket.class);
     }
 
 }
