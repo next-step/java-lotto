@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Money {
     public static final int ZERO_VALUE = 0;
-    public static final Money ZERO = Money.init(ZERO_VALUE);
+    public static final Money ZERO = Money.from(ZERO_VALUE);
 
     private final int money;
 
@@ -20,7 +20,7 @@ public class Money {
         }
     }
 
-    public static Money init(int payment) {
+    public static Money from(int payment) {
         return new Money(payment);
     }
 
@@ -33,11 +33,11 @@ public class Money {
     }
 
     public Money addition(Money anotherMoney) {
-        return Money.init(money + anotherMoney.money);
+        return Money.from(money + anotherMoney.money);
     }
 
     public Money multiply(int operand) {
-        return Money.init(money * operand);
+        return Money.from(money * operand);
     }
 
     public double earningRate(Money payment) {

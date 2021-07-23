@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoMachine {
-    public static final Money PRICE_OF_A_TICKET = Money.init(1_000);
+    public static final Money PRICE_OF_A_TICKET = Money.from(1_000);
 
     private LottoMachine() {}
 
@@ -17,7 +17,7 @@ public class LottoMachine {
 
         LottoTickets lottoTickets = buyAutoTicket(payment);
 
-        return Lotto.init(payment, lottoTickets);
+        return Lotto.of(payment, lottoTickets);
     }
 
     private static void validate(Money payment) {

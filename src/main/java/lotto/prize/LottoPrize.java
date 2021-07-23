@@ -9,11 +9,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LottoPrize {
-    FIRST(6, Money.init(2_000_000_000)),
-    SECOND(5, Money.init(1_500_000)),
-    THIRD(4, Money.init(50_000)),
-    FOURTH(3, Money.init(5_000)),
-    NONE(0, Money.init(0));
+    FIRST(6, Money.from(2_000_000_000)),
+    SECOND(5, Money.from(1_500_000)),
+    THIRD(4, Money.from(50_000)),
+    FOURTH(3, Money.from(5_000)),
+    NONE(0, Money.from(0));
 
     private static final Map<Integer, LottoPrize> LOTTO_PRIZES = Arrays.stream(LottoPrize.values())
             .collect(Collectors.toMap(LottoPrize::getMatchCount, Function.identity()));

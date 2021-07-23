@@ -20,7 +20,7 @@ public class InputView {
     public static Money inputPayment() {
         printStatement(INPUT_PAYMENT_STATEMENT);
 
-        return Money.init(getInt());
+        return Money.from(getInt());
     }
 
     public static WinningNumbers inputWinningNumbers() {

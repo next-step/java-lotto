@@ -30,7 +30,7 @@ public class MatchResult {
         }
     }
 
-    public static MatchResult init(Money payment, Map<LottoPrize, Long> matchResult) {
+    public static MatchResult of(Money payment, Map<LottoPrize, Long> matchResult) {
         return new MatchResult(payment, matchResult);
     }
 

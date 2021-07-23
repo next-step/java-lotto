@@ -19,30 +19,30 @@ class MoneyTest {
     @ValueSource(ints = {0, 10, 100})
     @ParameterizedTest
     void initMoney(int monet) {
-        assertThat(Money.init(monet)).isInstanceOf(Money.class);
+        assertThat(Money.from(monet)).isInstanceOf(Money.class);
     }
 
     @DisplayName("초기화 하는 돈이 0 미만일 경우 예외를 발생시킨다.")
     @ValueSource(ints = {-1, -5})
     @ParameterizedTest
     void initMoneyException(int money) {
-        assertThatThrownBy(() -> Money.init(money)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Money.from(money)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("금액을 전달하면 구매 가능한 갯수를 반환한다.")
     @MethodSource
     @ParameterizedTest
     void getAffordableCount(Money price, int expectedCount) {
-        Money money = Money.init(10_000);
+        Money money = Money.from(10_000);
 
         assertThat(money.getAffordableCount(price)).isEqualTo(expectedCount);
     }
 
     private static Stream<Arguments> getAffordableCount() {
         return Stream.of(
-                Arguments.of(Money.init(10_000), 1),
-                Arguments.of(Money.init(1_000), 10),
-                Arguments.of(Money.init(100), 100)
+                Arguments.of(Money.from(10_000), 1),
+                Arguments.of(Money.from(1_000), 10),
+                Arguments.of(Money.from(100), 100)
         );
     }
 
@@ -55,9 +55,9 @@ class MoneyTest {
 
     private static Stream<Arguments> addition() {
         return Stream.of(
-                Arguments.of(Money.init(5_000), Money.init(500), Money.init(5_500)),
-                Arguments.of(Money.init(5_000), Money.init(0), Money.init(5_000)),
-                Arguments.of(Money.init(5_000), Money.init(5_000), Money.init(10_000))
+                Arguments.of(Money.from(5_000), Money.from(500), Money.from(5_500)),
+                Arguments.of(Money.from(5_000), Money.from(0), Money.from(5_000)),
+                Arguments.of(Money.from(5_000), Money.from(5_000), Money.from(10_000))
         );
     }
 
@@ -70,9 +70,9 @@ class MoneyTest {
 
     private static Stream<Arguments> affordableCount() {
         return Stream.of(
-                Arguments.of(Money.init(5_000), Money.init(500), 10),
-                Arguments.of(Money.init(5_000), Money.init(100), 50),
-                Arguments.of(Money.init(5_000), Money.init(5_000), 1)
+                Arguments.of(Money.from(5_000), Money.from(500), 10),
+                Arguments.of(Money.from(5_000), Money.from(100), 50),
+                Arguments.of(Money.from(5_000), Money.from(5_000), 1)
         );
     }
 
@@ -85,9 +85,9 @@ class MoneyTest {
 
     private static Stream<Arguments> multiply() {
         return Stream.of(
-                Arguments.of(Money.init(5_000), 10, Money.init(50_000)),
-                Arguments.of(Money.init(5_000), 50, Money.init(250_000)),
-                Arguments.of(Money.init(5_000), 1, Money.init(5_000))
+                Arguments.of(Money.from(5_000), 10, Money.from(50_000)),
+                Arguments.of(Money.from(5_000), 50, Money.from(250_000)),
+                Arguments.of(Money.from(5_000), 1, Money.from(5_000))
         );
     }
 
@@ -100,9 +100,9 @@ class MoneyTest {
 
     private static Stream<Arguments> earningRate() {
         return Stream.of(
-                Arguments.of(Money.init(5_000), Money.init(5_000), 1.0),
-                Arguments.of(Money.init(5_000), Money.init(250_000), 50.0),
-                Arguments.of(Money.init(5_000), Money.init(500), 0.1)
+                Arguments.of(Money.from(5_000), Money.from(5_000), 1.0),
+                Arguments.of(Money.from(5_000), Money.from(250_000), 50.0),
+                Arguments.of(Money.from(5_000), Money.from(500), 0.1)
         );
     }
 }

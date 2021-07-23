@@ -32,14 +32,14 @@ public class Lotto {
         }
     }
 
-    public static Lotto init(Money payment, LottoTickets lottoTickets) {
+    public static Lotto of(Money payment, LottoTickets lottoTickets) {
         return new Lotto(payment, lottoTickets);
     }
 
     public MatchResult match(WinningNumbers winningNumbers) {
         Map<LottoPrize, Long> lottoPrizes = lottoTickets.matchWinningNumbers(winningNumbers);
 
-        return MatchResult.init(payment, lottoPrizes);
+        return MatchResult.of(payment, lottoPrizes);
     }
 
     public List<LottoTicketDto> getLottoTickets() {

@@ -15,7 +15,7 @@ class LottoMachineTest {
     @Test
     void buyLotto() {
         int payment = 10_000;
-        Lotto lotto = LottoMachine.buy(Money.init(payment));
+        Lotto lotto = LottoMachine.buy(Money.from(payment));
 
         assertThat(lotto).isNotNull();
         assertThat(lotto.getLottoTickets().size()).isEqualTo(payment / PRICE_OF_A_TICKET.toInt());

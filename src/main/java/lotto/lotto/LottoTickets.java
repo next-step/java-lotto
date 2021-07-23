@@ -31,7 +31,7 @@ public class LottoTickets {
 
     public List<LottoTicketDto> getLottoTicketDtos() {
         return lottoTickets.stream()
-                .map(LottoTicketDto::of)
+                .map(LottoTicketDto::from)
                 .collect(Collectors.toList());
     }
 

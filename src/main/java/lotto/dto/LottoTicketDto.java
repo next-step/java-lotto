@@ -14,7 +14,7 @@ public class LottoTicketDto {
         Collections.sort(lottoNumbers);
     }
 
-    public static LottoTicketDto of(final LottoTicket lottoTicket) {
+    public static LottoTicketDto from(final LottoTicket lottoTicket) {
         return new LottoTicketDto(lottoTicket);
     }
 
