@@ -42,7 +42,6 @@ public class WinningNumbers extends LottoNumbers {
     public MatchInfo match(LottoNumbers lottoNumbers) {
         int matchCount = matchCount(lottoNumbers);
         boolean bonusMath = lottoNumbers.contains(bonusNumber);
-        System.out.println(matchCount + " " + bonusMath + " " + bonusNumber.toInt());
 
         return MatchInfo.of(matchCount, bonusMath);
     }

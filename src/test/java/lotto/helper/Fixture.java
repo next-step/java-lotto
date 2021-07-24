@@ -23,4 +23,8 @@ public class Fixture {
     public static WinningNumbers winningNumbers() {
         return Generator.winningNumbers(5, 10, 15, 20, 25, 30);
     }
+
+    public static WinningNumbers winningNumbers2() {
+        return Generator.winningNumbers2(31, 5, 10, 15, 20, 25, 30);
+    }
 }

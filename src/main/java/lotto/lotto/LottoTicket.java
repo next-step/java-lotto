@@ -4,6 +4,7 @@ import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
 import lotto.prize.LottoPrizeTemp;
+import lotto.prize.MatchInfo;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,9 +34,9 @@ public class LottoTicket {
     }
 
     public LottoPrizeTemp matchPrize2(WinningNumbers winningNumbers) {
-        int matchCount = lottoNumbers.match(winningNumbers);
+        MatchInfo matchInfo = winningNumbers.match(lottoNumbers);
 
-        return LottoPrizeTemp.of(matchCount, false);
+        return LottoPrizeTemp.evaluate(matchInfo);
     }
 
     public List<Integer> getNumbers() {

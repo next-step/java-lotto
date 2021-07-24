@@ -23,6 +23,14 @@ public class MatchInfo {
         return bonusMatch;
     }
 
+    public boolean isCountEqual(int count) {
+        return matchCount == count;
+    }
+
+    public boolean isCountUnder(int count) {
+        return matchCount < count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

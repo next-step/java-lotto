@@ -58,7 +58,7 @@ class LottoTicketTest {
     @MethodSource
     @ParameterizedTest
     void matchPrize2(LottoTicket lottoTicket, LottoPrizeTemp expectedLottoPrize) {
-        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        WinningNumbers winningNumbers = Fixture.winningNumbers2();
 
         assertThat(lottoTicket.matchPrize2(winningNumbers)).isEqualTo(expectedLottoPrize);
     }
@@ -67,11 +67,11 @@ class LottoTicketTest {
         return Stream.of(
                 Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 30), LottoPrizeTemp.FIRST),
                 Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 31), LottoPrizeTemp.SECOND),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrizeTemp.THIRD),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrizeTemp.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 32), LottoPrizeTemp.THIRD),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrizeTemp.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrizeTemp.FIFTH),
                 Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrizeTemp.NONE),
-                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE),
-                Arguments.of(Generator.lottoTicket(6, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE)
+                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE)
         );
     }
 }
