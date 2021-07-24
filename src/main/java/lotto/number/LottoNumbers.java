@@ -1,7 +1,5 @@
 package lotto.number;
 
-import lotto.prize.MatchInfo;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +11,7 @@ public class LottoNumbers {
 
     protected final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);

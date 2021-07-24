@@ -11,7 +11,7 @@ import java.util.Objects;
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
+    private LottoTicket(LottoNumbers lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }

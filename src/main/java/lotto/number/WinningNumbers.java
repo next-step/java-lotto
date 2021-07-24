@@ -9,7 +9,7 @@ public class WinningNumbers extends LottoNumbers {
 
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+    private WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         super(lottoNumbers);
 
         validate(bonusNumber);

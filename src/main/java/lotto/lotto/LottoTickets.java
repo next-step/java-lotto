@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    private LottoTickets(List<LottoTicket> lottoTickets) {
         validate(lottoTickets);
 
         this.lottoTickets = lottoTickets;
