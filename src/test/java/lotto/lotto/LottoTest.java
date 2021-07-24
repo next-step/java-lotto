@@ -5,7 +5,7 @@ import lotto.helper.Generator;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrizeTemp;
-import lotto.prize.MatchResult2;
+import lotto.prize.MatchResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -52,7 +52,7 @@ public class LottoTest {
         LottoTickets lottoTickets = Fixture.lottoTickets2();
 
         Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
-        MatchResult2 matchResult = lotto.match(winningNumbers);
+        MatchResult matchResult = lotto.match(winningNumbers);
 
         Arrays.stream(LottoPrizeTemp.values())
                 .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
@@ -71,7 +71,7 @@ public class LottoTest {
                 .mapToInt(Money::toInt)
                 .sum();
 
-        MatchResult2 matchResult = lotto.match(winningNumbers);
+        MatchResult matchResult = lotto.match(winningNumbers);
 
         assertThat(matchResult.calculateEarningsRate()).isEqualTo((double) expectedEarning / payment);
     }

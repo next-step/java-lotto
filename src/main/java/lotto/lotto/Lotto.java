@@ -4,7 +4,7 @@ import lotto.dto.LottoTicketDto;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrizeTemp;
-import lotto.prize.MatchResult2;
+import lotto.prize.MatchResult;
 
 import java.util.List;
 import java.util.Map;
@@ -35,10 +35,10 @@ public class Lotto {
         return new Lotto(payment, lottoTickets);
     }
 
-    public MatchResult2 match(WinningNumbers winningNumbers) {
+    public MatchResult match(WinningNumbers winningNumbers) {
         Map<LottoPrizeTemp, Long> lottoPrizes = lottoTickets.matchWinningNumbers(winningNumbers);
 
-        return MatchResult2.of(payment, lottoPrizes);
+        return MatchResult.of(payment, lottoPrizes);
     }
 
     public List<LottoTicketDto> getLottoTickets() {
