@@ -60,6 +60,19 @@ public class LottoTest {
                 .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
     }
 
+    @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
+    @Test
+    void matchPrize2() {
+        WinningNumbers winningNumbers = Fixture.winningNumbers2();
+        LottoTickets lottoTickets = Fixture.lottoTickets2();
+
+        Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
+        MatchResult2 matchResult = lotto.match2(winningNumbers);
+
+        Arrays.stream(LottoPrizeTemp.values())
+                .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
+    }
+
     @DisplayName("수익률 계산")
     @Test
     void earningRate() {
