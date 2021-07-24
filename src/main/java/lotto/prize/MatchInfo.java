@@ -15,10 +15,6 @@ public class MatchInfo {
         return new MatchInfo(matchCount, bonusMatch);
     }
 
-    public int matchCount() {
-        return matchCount;
-    }
-
     public boolean isBonusMatch() {
         return bonusMatch;
     }

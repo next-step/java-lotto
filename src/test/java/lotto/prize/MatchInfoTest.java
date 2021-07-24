@@ -25,4 +25,36 @@ class MatchInfoTest {
                 Arguments.of(5, false, MatchInfo.of(5, false))
         );
     }
+
+    @DisplayName("매치 카운트를 전달받아 동일한 값인지 비교한다.")
+    @MethodSource
+    @ParameterizedTest
+    void isCountEqual(int count, boolean expectedValue) {
+        MatchInfo matchInfo = MatchInfo.of(5, true);
+
+        assertThat(matchInfo.isCountEqual(count)).isEqualTo(expectedValue);
+    }
+
+    private static Stream<Arguments> isCountEqual() {
+        return Stream.of(
+                Arguments.of(5, true),
+                Arguments.of(10, false)
+        );
+    }
+
+    @DisplayName("매치 카운트를 전달받아 그 값보다 작은값인지 비교한다.")
+    @MethodSource
+    @ParameterizedTest
+    void isCountUnder(int count, boolean expectedValue) {
+        MatchInfo matchInfo = MatchInfo.of(5, true);
+
+        assertThat(matchInfo.isCountUnder(count)).isEqualTo(expectedValue);
+    }
+
+    private static Stream<Arguments> isCountUnder() {
+        return Stream.of(
+                Arguments.of(5, false),
+                Arguments.of(10, true)
+        );
+    }
 }
