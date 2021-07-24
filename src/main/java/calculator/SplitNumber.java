@@ -12,20 +12,7 @@ public class SplitNumber {
 
     public int splitNumberToInt() {
         return Arrays.stream(split)
-                .mapToInt(this::getValue)
+                .mapToInt(s -> new PositiveNumber(s).getNumber())
                 .sum();
-    }
-
-    private int getValue(String str) {
-        int num = Integer.parseInt(str);
-        validate(num);
-
-        return num;
-    }
-
-    private void validate(int num) {
-        if (num < 0) {
-            throw new RuntimeException("음수를 입력할 수 없습니다.");
-        }
     }
 }
