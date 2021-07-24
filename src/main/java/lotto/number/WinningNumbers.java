@@ -1,5 +1,8 @@
 package lotto.number;
 
+import lotto.lotto.Lotto;
+import lotto.prize.MatchInfo;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -34,5 +37,25 @@ public class WinningNumbers extends LottoNumbers {
 
     public static WinningNumbers of(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         return new WinningNumbers(lottoNumbers, bonusNumber);
+    }
+
+    public MatchInfo match(LottoNumbers lottoNumbers) {
+        int matchCount = matchCount(lottoNumbers);
+        boolean bonusMath = contains(bonusNumber);
+
+        return MatchInfo.of(matchCount, bonusMath);
+    }
+
+    private int matchCount(LottoNumbers lottoNumbers) {
+        return Math.toIntExact(
+                this.lottoNumbers.stream()
+                        .filter(lottoNumbers::contains)
+                        .count()
+        );
+    }
+
+    protected boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber::equals);
     }
 }

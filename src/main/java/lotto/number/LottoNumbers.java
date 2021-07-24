@@ -1,5 +1,7 @@
 package lotto.number;
 
+import lotto.prize.MatchInfo;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -49,7 +51,15 @@ public class LottoNumbers {
         );
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    protected int matchCount(WinningNumbers winningNumbers) {
+        return Math.toIntExact(
+                lottoNumbers.stream()
+                        .filter(winningNumbers::contains)
+                        .count()
+        );
+    }
+
+    protected boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber::equals);
     }

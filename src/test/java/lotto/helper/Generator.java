@@ -44,4 +44,8 @@ public class Generator {
     public static WinningNumbers winningNumbers(int... numbers) {
         return WinningNumbers.from(lottoNumberList(numbers));
     }
+
+    public static WinningNumbers winningNumbers2(int bonusNumber, int... numbers) {
+        return WinningNumbers.of(lottoNumberList(numbers), LottoNumber.from(bonusNumber));
+    }
 }

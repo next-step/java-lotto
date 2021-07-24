@@ -1,5 +1,7 @@
 package lotto.prize;
 
+import java.util.Objects;
+
 public class MatchInfo {
     private final int matchCount;
     private final boolean bonusMatch;
@@ -11,5 +13,26 @@ public class MatchInfo {
 
     public static MatchInfo of(int matchCount, boolean bonusMatch) {
         return new MatchInfo(matchCount, bonusMatch);
+    }
+
+    public int matchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusMatch() {
+        return bonusMatch;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchInfo matchInfo = (MatchInfo) o;
+        return matchCount == matchInfo.matchCount && bonusMatch == matchInfo.bonusMatch;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCount, bonusMatch);
     }
 }
