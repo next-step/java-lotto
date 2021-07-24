@@ -38,7 +38,7 @@ public class Generator {
     public static LottoTickets autoLottoTickets(int size) {
         return IntStream.rangeClosed(0, size)
                 .mapToObj(x -> LottoTicket.from(LottoNumberGenerator.generate()))
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::from));
     }
 
     public static WinningNumbers winningNumbers(int bonusNumber, int... numbers) {
