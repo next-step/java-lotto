@@ -67,4 +67,13 @@ class LottoNumbersTest {
                 Arguments.of(Generator.lottoNumbers(6, 11, 16, 21, 26, 31), 0)
         );
     }
+
+    @DisplayName("로또 번호는 중복이 있어서는 안된다. 중복이 있을 경우 예외를 발생 시킨다.")
+    @Test
+    void duplicationCheck() {
+        List<LottoNumber> lottoNumbers = lottoNumberList(1, 2, 3, 4, 5, 5);
+
+        assertThatThrownBy(() -> LottoNumbers.from(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
