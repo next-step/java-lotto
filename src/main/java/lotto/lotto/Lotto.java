@@ -37,13 +37,7 @@ public class Lotto {
         return new Lotto(payment, lottoTickets);
     }
 
-    public MatchResult match(WinningNumbers winningNumbers) {
-        Map<LottoPrize, Long> lottoPrizes = lottoTickets.matchWinningNumbers(winningNumbers);
-
-        return MatchResult.of(payment, lottoPrizes);
-    }
-
-    public MatchResult2 match2(WinningNumbers winningNumbers) {
+    public MatchResult2 match(WinningNumbers winningNumbers) {
         Map<LottoPrizeTemp, Long> lottoPrizes = lottoTickets.matchWinningNumbers2(winningNumbers);
 
         return MatchResult2.of(payment, lottoPrizes);

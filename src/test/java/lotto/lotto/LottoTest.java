@@ -4,9 +4,7 @@ import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
-import lotto.prize.LottoPrize;
 import lotto.prize.LottoPrizeTemp;
-import lotto.prize.MatchResult;
 import lotto.prize.MatchResult2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,46 +47,15 @@ public class LottoTest {
 
     @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
     @Test
-    void matchPrize() {
-        WinningNumbers winningNumbers = Fixture.winningNumbers();
-        LottoTickets lottoTickets = Fixture.lottoTickets();
-
-        Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
-        MatchResult matchResult = lotto.match(winningNumbers);
-
-        Arrays.stream(LottoPrize.values())
-                .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
-    }
-
-    @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
-    @Test
     void matchPrize2() {
         WinningNumbers winningNumbers = Fixture.winningNumbers2();
         LottoTickets lottoTickets = Fixture.lottoTickets2();
 
         Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
-        MatchResult2 matchResult = lotto.match2(winningNumbers);
+        MatchResult2 matchResult = lotto.match(winningNumbers);
 
         Arrays.stream(LottoPrizeTemp.values())
                 .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
-    }
-
-    @DisplayName("수익률 계산")
-    @Test
-    void earningRate() {
-        WinningNumbers winningNumbers = Fixture.winningNumbers();
-        LottoTickets lottoTickets = Fixture.lottoTickets();
-
-        int payment = 10_000;
-        Lotto lotto = Lotto.of(Money.from(payment), lottoTickets);
-        int expectedEarning = Arrays.stream(LottoPrize.values())
-                .map(LottoPrize::getPrizeMoney)
-                .mapToInt(Money::toInt)
-                .sum();
-
-        MatchResult matchResult = lotto.match(winningNumbers);
-
-        assertThat(matchResult.calculateEarningsRate()).isEqualTo((double) expectedEarning / payment);
     }
 
     @DisplayName("수익률 계산")
@@ -104,7 +71,7 @@ public class LottoTest {
                 .mapToInt(Money::toInt)
                 .sum();
 
-        MatchResult2 matchResult = lotto.match2(winningNumbers);
+        MatchResult2 matchResult = lotto.match(winningNumbers);
 
         assertThat(matchResult.calculateEarningsRate()).isEqualTo((double) expectedEarning / payment);
     }

@@ -4,7 +4,6 @@ import lotto.lotto.Lotto;
 import lotto.lotto.LottoMachine;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
-import lotto.prize.MatchResult;
 import lotto.prize.MatchResult2;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,7 +17,7 @@ public class LottoConsoleGame {
         ResultView.printLottoTickets(lotto.getLottoTickets());
 
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
-        MatchResult2 matchResult = lotto.match2(winningNumbers);
+        MatchResult2 matchResult = lotto.match(winningNumbers);
 
         ResultView.printMatchResult(matchResult);
     }
