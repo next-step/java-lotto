@@ -12,7 +12,7 @@ public class SplitNumber {
 
     public int splitNumberToInt() {
         return Arrays.stream(split)
-                .mapToInt(s -> new PositiveNumber(s).getNumber())
+                .mapToInt(s -> PositiveNumber.of(s).initNumber())
                 .sum();
     }
 }
