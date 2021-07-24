@@ -1,18 +1,28 @@
 package lotto.number;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
+
+        checkDuplication();
+    }
+
+    private void checkDuplication() {
+        if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException("Lotto numbers duplicated");
+        }
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
