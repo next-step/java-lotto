@@ -21,6 +21,6 @@ class SplitTypeTest {
     @Test
     void get_custom_pattern() {
         // 개행 문자가 CsvSource 에서 정상적으로 인식이 안되서 별도의 테스트로 분리
-        assertThat(SplitType.getSplitType("//;\n1;2;3-CUSTOM")).isEqualTo(SplitType.CUSTOM);
+        assertThat(SplitType.getSplitType("//;\n1;2;3")).isEqualTo(SplitType.USER_DEFINE);
     }
 }

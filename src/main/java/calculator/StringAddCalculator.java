@@ -7,12 +7,12 @@ public class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static int splitAndSum(String str) {
-        if (isEmpty(str)) {
+    public static int splitAndSum(String separateStr) {
+        if (isEmpty(separateStr)) {
             return ZERO_VALUE;
         }
 
-        SplitNumber splitNumbers = getSplitter(str);
+        SplitNumber splitNumbers = getSplitter(separateStr);
 
         return splitNumbers.splitNumberToInt();
     }

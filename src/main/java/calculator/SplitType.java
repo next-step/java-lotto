@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum SplitType {
 
     DEFAULT(new DefaultSplitter(), Pattern.compile(",|:")),
-    CUSTOM(new CustomSplitter(), Pattern.compile("//(.)\n(.*)")),
+    USER_DEFINE(new UserDefineSplitter(), Pattern.compile("//(.)\n(.*)")),
     SINGLE(new SingleSplitter(), Pattern.compile("^[0-9]*$"));
 
     private final Splitter splitter;
@@ -17,9 +17,9 @@ public enum SplitType {
         this.pattern = pattern;
     }
 
-    public static SplitType getSplitType(String str) {
+    public static SplitType getSplitType(String separateStr) {
         return Arrays.stream(values())
-                .filter(f -> f.pattern.matcher(str).find())
+                .filter(f -> f.pattern.matcher(separateStr).find())
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
