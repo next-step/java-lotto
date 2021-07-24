@@ -12,4 +12,7 @@ public class WinningNumbers extends LottoNumbers {
         return new WinningNumbers(lottoNumbers);
     }
 
+    public static boolean of(List<LottoNumber> lottoNumbers, int i) {
+        return false;
+    }
 }
