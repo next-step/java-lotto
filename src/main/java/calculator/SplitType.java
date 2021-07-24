@@ -1,34 +1,51 @@
 package calculator;
 
+import calculator.exception.NotFoundSplitTypeException;
+
 import java.util.Arrays;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SplitType {
 
-    DEFAULT(new DefaultSplitter(), Pattern.compile(",|:")),
-    USER_DEFINE(new UserDefineSplitter(), Pattern.compile("//(.)\n(.*)")),
-    SINGLE(new SingleSplitter(), Pattern.compile("^[0-9]*$"));
+    DEFAULT(SplitType::splitTypeDefault, Pattern.compile(",|:")),
+    SINGLE(SplitType::splitTypeSingle, Pattern.compile("^[0-9]*$")),
+    USER_DEFINE(SplitType::splitTypeUserDefine, Pattern.compile("//(.)\n(.*)"));
 
-    private final Splitter splitter;
+    private final StringSeparate separate;
     private final Pattern pattern;
 
-    SplitType(Splitter splitter, Pattern pattern) {
-        this.splitter = splitter;
+    SplitType(StringSeparate stringSeparate, Pattern pattern) {
+        this.separate = stringSeparate;
         this.pattern = pattern;
     }
 
-    public static SplitType getSplitType(String separateStr) {
+    public static SplitNumber split(String separateStr) {
         return Arrays.stream(values())
                 .filter(f -> f.pattern.matcher(separateStr).find())
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .map(s -> s.separate.split(s.pattern, separateStr))
+                .orElseThrow(() -> new NotFoundSplitTypeException(separateStr));
     }
 
-    public Splitter getSplitter() {
-        return splitter;
+    private static SplitNumber splitTypeDefault(Pattern separatePattern, String separateStr) {
+        return new SplitNumber(separatePattern.split(separateStr));
     }
 
-    public Pattern getPattern() {
-        return pattern;
+    private static SplitNumber splitTypeSingle(Pattern separatePattern, String separateStr) {
+        return new SplitNumber(new String[]{separateStr});
+    }
+
+    private static SplitNumber splitTypeUserDefine(Pattern separatePattern, String separateStr) {
+        Matcher matcher = separatePattern.matcher(separateStr);
+        if (!matcher.find()) {
+            throw new NotFoundSplitTypeException(separateStr);
+        }
+        int delimiterGroup = 1;
+        int patternGroup = 2;
+        String customDelimiter = matcher.group(delimiterGroup);
+        String[] split = matcher.group(patternGroup).split(customDelimiter);
+
+        return new SplitNumber(split);
     }
 }

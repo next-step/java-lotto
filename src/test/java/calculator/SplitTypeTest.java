@@ -1,26 +1,27 @@
 package calculator;
 
+import calculator.exception.NotFoundSplitTypeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SplitTypeTest {
 
-    @DisplayName("구분자가 일치하는 타입을 리턴 받는다.")
+    @DisplayName("해당하는 구분자가 있을 경우 SplitNumber 인스턴스를 리턴받는다")
     @ParameterizedTest
-    @CsvSource(value = {"1,2:3-DEFAULT", "10-SINGLE"}, delimiter = '-')
-    void get_split_type(String str, SplitType type) {
-        System.out.println("str = " + str);
-        assertThat(SplitType.getSplitType(str)).isEqualTo(type);
+    @ValueSource(strings = {"1,2:3", "10", "//;\n1;2;3"})
+    void split(String str) {
+        assertThat(SplitType.split(str)).isInstanceOf(SplitNumber.class);
     }
 
-    @DisplayName("커스텀 구분자와 일치하는 타입을 리턴 받는다")
+    @DisplayName("해당하는 구분자가 없을 경우 NotFoundSplitTypeException 이 발생한다.")
     @Test
-    void get_custom_pattern() {
-        // 개행 문자가 CsvSource 에서 정상적으로 인식이 안되서 별도의 테스트로 분리
-        assertThat(SplitType.getSplitType("//;\n1;2;3")).isEqualTo(SplitType.USER_DEFINE);
+    void not_found_split_type() {
+        assertThatThrownBy(() -> SplitType.split("!2!3"))
+                .isInstanceOf(NotFoundSplitTypeException.class);
     }
 }

@@ -12,16 +12,9 @@ public class StringAddCalculator {
             return ZERO_VALUE;
         }
 
-        SplitNumber splitNumbers = getSplitter(separateStr);
+        SplitNumber splitNumbers = SplitType.split(separateStr);
 
         return splitNumbers.splitNumberToInt();
-    }
-
-    private static SplitNumber getSplitter(String str) {
-        SplitType splitType= SplitType.getSplitType(str);
-        Splitter splitter = splitType.getSplitter();
-
-        return splitter.split(str);
     }
 
     private static boolean isEmpty(String str) {
