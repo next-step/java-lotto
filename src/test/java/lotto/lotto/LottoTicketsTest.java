@@ -31,8 +31,8 @@ class LottoTicketsTest {
     @DisplayName("당첨 번호를 전달 받으면 결과를 계산하여 등수별로 몇개인지 반환한다.")
     @Test
     void matchWinningNumbers() {
-        WinningNumbers winningNumbers = Fixture.winningNumbers2();
-        LottoTickets lottoTickets = Fixture.lottoTickets2();
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         Map<LottoPrize, Long> matchResult = lottoTickets.matchWinningNumbers(winningNumbers);
 

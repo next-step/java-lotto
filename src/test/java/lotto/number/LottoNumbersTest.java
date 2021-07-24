@@ -50,7 +50,7 @@ class LottoNumbersTest {
     @MethodSource
     @ParameterizedTest
     void matchCount(LottoNumbers lottoNumbers, int expectedMatchCount) {
-        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
+        WinningNumbers winningNumbers = Generator.winningNumbers(31, 5, 10, 15, 20, 25, 30);
 
         assertThat(lottoNumbers.match(winningNumbers)).isEqualTo(expectedMatchCount);
     }

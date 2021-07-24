@@ -41,11 +41,7 @@ public class Generator {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
-    public static WinningNumbers winningNumbers(int... numbers) {
-        return WinningNumbers.from(lottoNumberList(numbers));
-    }
-
-    public static WinningNumbers winningNumbers2(int bonusNumber, int... numbers) {
+    public static WinningNumbers winningNumbers(int bonusNumber, int... numbers) {
         return WinningNumbers.of(lottoNumberList(numbers), LottoNumber.from(bonusNumber));
     }
 }

@@ -48,8 +48,8 @@ public class LottoTest {
     @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
     @Test
     void matchPrize() {
-        WinningNumbers winningNumbers = Fixture.winningNumbers2();
-        LottoTickets lottoTickets = Fixture.lottoTickets2();
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
         MatchResult matchResult = lotto.match(winningNumbers);
@@ -61,8 +61,8 @@ public class LottoTest {
     @DisplayName("수익률 계산")
     @Test
     void earningRate() {
-        WinningNumbers winningNumbers = Fixture.winningNumbers2();
-        LottoTickets lottoTickets = Fixture.lottoTickets2();
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+        LottoTickets lottoTickets = Fixture.lottoTickets();
 
         int payment = 10_000;
         Lotto lotto = Lotto.of(Money.from(payment), lottoTickets);

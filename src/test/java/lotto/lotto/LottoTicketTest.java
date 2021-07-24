@@ -36,7 +36,7 @@ class LottoTicketTest {
     @MethodSource
     @ParameterizedTest
     void matchPrize(LottoTicket lottoTicket, LottoPrize expectedLottoPrize) {
-        WinningNumbers winningNumbers = Fixture.winningNumbers2();
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
 
         assertThat(lottoTicket.matchPrize(winningNumbers)).isEqualTo(expectedLottoPrize);
     }
