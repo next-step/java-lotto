@@ -12,7 +12,7 @@ public class MatchResult {
     private final Money payment;
     private final Map<LottoPrize, Long> matchResult;
 
-    public MatchResult(Money payment, Map<LottoPrize, Long> matchResult) {
+    private MatchResult(Money payment, Map<LottoPrize, Long> matchResult) {
         validate(payment, matchResult);
 
         this.payment = payment;

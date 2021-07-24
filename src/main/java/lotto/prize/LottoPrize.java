@@ -25,13 +25,6 @@ public enum LottoPrize {
         this.judge = judge;
     }
 
-    public static LottoPrize of(int matchCount, boolean bonusMatch) {
-        return Arrays.stream(LottoPrize.values())
-                .filter(lottoPrize -> lottoPrize.judge.apply(MatchInfo.of(matchCount, bonusMatch)))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Illegal match info count " + matchCount + ", bonus match is" + bonusMatch));
-    }
-
     public static LottoPrize evaluate(MatchInfo matchInfo) {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.judge.apply(matchInfo))
