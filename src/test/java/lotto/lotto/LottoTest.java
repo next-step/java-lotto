@@ -47,7 +47,7 @@ public class LottoTest {
 
     @DisplayName("당첨 번호를 전달 받아 당첨 정보를 반환한다.")
     @Test
-    void matchPrize2() {
+    void matchPrize() {
         WinningNumbers winningNumbers = Fixture.winningNumbers2();
         LottoTickets lottoTickets = Fixture.lottoTickets2();
 
@@ -60,7 +60,7 @@ public class LottoTest {
 
     @DisplayName("수익률 계산")
     @Test
-    void earningRate2() {
+    void earningRate() {
         WinningNumbers winningNumbers = Fixture.winningNumbers2();
         LottoTickets lottoTickets = Fixture.lottoTickets2();
 
