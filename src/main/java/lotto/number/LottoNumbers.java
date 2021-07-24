@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    protected final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);

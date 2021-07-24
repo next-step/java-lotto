@@ -1,6 +1,7 @@
 package lotto.number;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WinningNumbers extends LottoNumbers {
 
@@ -9,7 +10,22 @@ public class WinningNumbers extends LottoNumbers {
     public WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         super(lottoNumbers);
 
+        validate(bonusNumber);
+        checkDuplication(bonusNumber);
+
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validate(LottoNumber bonusNumber) {
+        if (Objects.isNull(bonusNumber)) {
+            throw new IllegalArgumentException("Bonus number can't be null");
+        }
+    }
+
+    private void checkDuplication(LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("Bonus number already in lotto numbers");
+        }
     }
 
     public static WinningNumbers from(List<LottoNumber> lottoNumbers) {
