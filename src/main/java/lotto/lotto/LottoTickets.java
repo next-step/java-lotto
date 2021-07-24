@@ -3,6 +3,7 @@ package lotto.lotto;
 import lotto.dto.LottoTicketDto;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
+import lotto.prize.LottoPrizeTemp;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,12 @@ public class LottoTickets {
     public Map<LottoPrize, Long> matchWinningNumbers(WinningNumbers winningNumbers) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.matchPrize(winningNumbers))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    public Map<LottoPrizeTemp, Long> matchWinningNumbers2(WinningNumbers winningNumbers) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.matchPrize2(winningNumbers))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
