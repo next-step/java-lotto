@@ -43,22 +43,6 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public int match(WinningNumbers winningNumbers) {
-        return Math.toIntExact(
-                lottoNumbers.stream()
-                        .filter(winningNumbers::contains)
-                        .count()
-        );
-    }
-
-    protected int matchCount(WinningNumbers winningNumbers) {
-        return Math.toIntExact(
-                lottoNumbers.stream()
-                        .filter(winningNumbers::contains)
-                        .count()
-        );
-    }
-
     protected boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber::equals);

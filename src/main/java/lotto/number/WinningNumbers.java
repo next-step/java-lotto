@@ -1,6 +1,5 @@
 package lotto.number;
 
-import lotto.lotto.Lotto;
 import lotto.prize.MatchInfo;
 
 import java.util.List;
@@ -29,10 +28,6 @@ public class WinningNumbers extends LottoNumbers {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("Bonus number already in lotto numbers");
         }
-    }
-
-    public static WinningNumbers from(List<LottoNumber> lottoNumbers) {
-        return new WinningNumbers(lottoNumbers, LottoNumber.from(45));
     }
 
     public static WinningNumbers of(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
