@@ -60,7 +60,7 @@ class LottoTicketTest {
     void matchPrize2(LottoTicket lottoTicket, LottoPrizeTemp expectedLottoPrize) {
         WinningNumbers winningNumbers = Fixture.winningNumbers();
 
-        assertThat(lottoTicket.matchPrize(winningNumbers)).isEqualTo(expectedLottoPrize);
+        assertThat(lottoTicket.matchPrize2(winningNumbers)).isEqualTo(expectedLottoPrize);
     }
 
     private static Stream<Arguments> matchPrize2() {
