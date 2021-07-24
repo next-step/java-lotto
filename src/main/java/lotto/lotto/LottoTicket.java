@@ -3,6 +3,7 @@ package lotto.lotto;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
+import lotto.prize.LottoPrizeTemp;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +30,12 @@ public class LottoTicket {
         int matchCount = lottoNumbers.match(winningNumbers);
 
         return LottoPrize.of(matchCount);
+    }
+
+    public LottoPrizeTemp matchPrize2(WinningNumbers winningNumbers) {
+        int matchCount = lottoNumbers.match(winningNumbers);
+
+        return LottoPrizeTemp.of(matchCount, false);
     }
 
     public List<Integer> getNumbers() {

@@ -5,6 +5,7 @@ import lotto.helper.Generator;
 import lotto.number.LottoNumberGenerator;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
+import lotto.prize.LottoPrizeTemp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,6 +51,27 @@ class LottoTicketTest {
                 Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrize.NONE),
                 Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrize.NONE),
                 Arguments.of(Generator.lottoTicket(6, 11, 16, 21, 26, 31), LottoPrize.NONE)
+        );
+    }
+
+    @DisplayName("당첨 번호를 가지고 등수를 반환한다.")
+    @MethodSource
+    @ParameterizedTest
+    void matchPrize2(LottoTicket lottoTicket, LottoPrizeTemp expectedLottoPrize) {
+        WinningNumbers winningNumbers = Fixture.winningNumbers();
+
+        assertThat(lottoTicket.matchPrize(winningNumbers)).isEqualTo(expectedLottoPrize);
+    }
+
+    private static Stream<Arguments> matchPrize2() {
+        return Stream.of(
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 30), LottoPrizeTemp.FIRST),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 31), LottoPrizeTemp.SECOND),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrizeTemp.THIRD),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrizeTemp.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrizeTemp.NONE),
+                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE),
+                Arguments.of(Generator.lottoTicket(6, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE)
         );
     }
 }
