@@ -44,4 +44,12 @@ class WinningNumbersTest {
                 Arguments.of(lottoNumberList(1, 2, 3, 4, 5, 6, 7))
         );
     }
+
+    @DisplayName("당첨 번호는 중복이 있어서는 안된다. 중복이 있을 경우 예외를 발생 시킨다.")
+    @Test
+    void duplicationCheck() {
+        List<LottoNumber> lottoNumbers = lottoNumberList(1, 2, 3, 4, 5, 5);
+
+        assertThatThrownBy(() -> WinningNumbers.from(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
