@@ -41,7 +41,8 @@ public class WinningNumbers extends LottoNumbers {
 
     public MatchInfo match(LottoNumbers lottoNumbers) {
         int matchCount = matchCount(lottoNumbers);
-        boolean bonusMath = contains(bonusNumber);
+        boolean bonusMath = lottoNumbers.contains(bonusNumber);
+        System.out.println(matchCount + " " + bonusMath + " " + bonusNumber.toInt());
 
         return MatchInfo.of(matchCount, bonusMath);
     }
@@ -52,10 +53,5 @@ public class WinningNumbers extends LottoNumbers {
                         .filter(lottoNumbers::contains)
                         .count()
         );
-    }
-
-    protected boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber::equals);
     }
 }

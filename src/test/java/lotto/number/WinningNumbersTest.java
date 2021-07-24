@@ -47,21 +47,22 @@ class WinningNumbersTest {
     @MethodSource
     @ParameterizedTest
     void matchCount(LottoNumbers lottoNumbers, MatchInfo matchInfo) {
-        WinningNumbers winningNumbers = Generator.winningNumbers(31, 5, 10, 15, 20, 25, 30);
+        WinningNumbers winningNumbers = Generator.winningNumbers2(31, 5, 10, 15, 20, 25, 30);
 
-        assertThat(winningNumbers.match(lottoNumbers)).isEqualTo(matchInfo.matchCount());
+        assertThat(winningNumbers.match(lottoNumbers)).isEqualTo(matchInfo);
     }
 
 
     private static Stream<Arguments> matchCount() {
         return Stream.of(
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 30), 6),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 31), 5),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 26, 31), 4),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 21, 26, 31), 3),
-                Arguments.of(Generator.lottoNumbers(5, 10, 16, 21, 26, 31), 2),
-                Arguments.of(Generator.lottoNumbers(5, 11, 16, 21, 26, 31), 1),
-                Arguments.of(Generator.lottoNumbers(6, 11, 16, 21, 26, 31), 0)
+                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 30), MatchInfo.of(6, false)),
+                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 31), MatchInfo.of(5, true)),
+                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 32), MatchInfo.of(5, false)),
+                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 26, 32), MatchInfo.of(4, false)),
+                Arguments.of(Generator.lottoNumbers(5, 10, 15, 21, 26, 32), MatchInfo.of(3, false)),
+                Arguments.of(Generator.lottoNumbers(5, 10, 16, 21, 26, 32), MatchInfo.of(2, false)),
+                Arguments.of(Generator.lottoNumbers(5, 11, 16, 21, 26, 32), MatchInfo.of(1, false)),
+                Arguments.of(Generator.lottoNumbers(6, 11, 16, 21, 26, 32), MatchInfo.of(0, false))
         );
     }
 
