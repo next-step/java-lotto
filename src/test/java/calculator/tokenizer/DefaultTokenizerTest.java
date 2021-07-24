@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DefaultTokenizerTest {
-    private DefaultTokenizer tokenizer = new DefaultTokenizer();
+    private Tokenizer tokenizer = new Tokenizer();
 
     /**
      * 요구사항에 정의 된 기본 토큰은 쉼표(,)와 콜론(:)이다.
