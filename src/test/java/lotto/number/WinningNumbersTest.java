@@ -25,7 +25,7 @@ class WinningNumbersTest {
     void initLottoNumbers() {
         List<LottoNumber> lottoNumbers = lottoNumberList(1, 2, 3, 4, 5, 6);
 
-        assertThat(WinningNumbers.of(lottoNumbers, 7)).isNotNull();
+        assertThat(WinningNumbers.of(lottoNumbers, LottoNumber.from(7))).isNotNull();
     }
 
     @DisplayName("당첨 번호 생성시 번호 수가 " + NUMBER_OF_LOTTO_NUMBERS + "개가 아니거나 null 이 올 경우 예외를 던진다.")
