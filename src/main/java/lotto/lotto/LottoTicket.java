@@ -27,13 +27,7 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public LottoPrize matchPrize(WinningNumbers winningNumbers) {
-        int matchCount = lottoNumbers.match(winningNumbers);
-
-        return LottoPrize.of(matchCount);
-    }
-
-    public LottoPrizeTemp matchPrize2(WinningNumbers winningNumbers) {
+    public LottoPrizeTemp matchPrize(WinningNumbers winningNumbers) {
         MatchInfo matchInfo = winningNumbers.match(lottoNumbers);
 
         return LottoPrizeTemp.evaluate(matchInfo);
