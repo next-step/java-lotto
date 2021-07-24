@@ -4,7 +4,7 @@ import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.number.LottoNumberGenerator;
 import lotto.number.WinningNumbers;
-import lotto.prize.LottoPrizeTemp;
+import lotto.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +35,7 @@ class LottoTicketTest {
     @DisplayName("당첨 번호를 가지고 등수를 반환한다.")
     @MethodSource
     @ParameterizedTest
-    void matchPrize(LottoTicket lottoTicket, LottoPrizeTemp expectedLottoPrize) {
+    void matchPrize(LottoTicket lottoTicket, LottoPrize expectedLottoPrize) {
         WinningNumbers winningNumbers = Fixture.winningNumbers2();
 
         assertThat(lottoTicket.matchPrize(winningNumbers)).isEqualTo(expectedLottoPrize);
@@ -43,13 +43,13 @@ class LottoTicketTest {
 
     private static Stream<Arguments> matchPrize() {
         return Stream.of(
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 30), LottoPrizeTemp.FIRST),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 31), LottoPrizeTemp.SECOND),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 32), LottoPrizeTemp.THIRD),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrizeTemp.FOURTH),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrizeTemp.FIFTH),
-                Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrizeTemp.NONE),
-                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrizeTemp.NONE)
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 30), LottoPrize.FIRST),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 31), LottoPrize.SECOND),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 32), LottoPrize.THIRD),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrize.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrize.FIFTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrize.NONE),
+                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrize.NONE)
         );
     }
 }

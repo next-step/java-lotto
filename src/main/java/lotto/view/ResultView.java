@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.dto.LottoTicketDto;
-import lotto.prize.LottoPrizeTemp;
+import lotto.prize.LottoPrize;
 import lotto.prize.MatchResult;
 
 import java.util.Arrays;
@@ -29,14 +29,14 @@ public class ResultView {
     public static void printMatchResult(MatchResult matchResult) {
         printStatement(WINNING_PRIZE_STATISTICS_STATEMENT);
 
-        LottoPrizeTemp.getWinningPrizes()
+        LottoPrize.getWinningPrizes()
                 .forEach(lottoPrize -> printPrizeResult(lottoPrize, matchResult));
 
         printStatement(String.format(EARNINGS_RATE_FORMAT, matchResult.calculateEarningsRate()));
     }
 
-    private static void printPrizeResult(LottoPrizeTemp lottoPrize, MatchResult matchResult) {
-        String resultFormat = lottoPrize == LottoPrizeTemp.SECOND ?
+    private static void printPrizeResult(LottoPrize lottoPrize, MatchResult matchResult) {
+        String resultFormat = lottoPrize == LottoPrize.SECOND ?
                 SECOND_PRIZE_RESULT_FORMAT :
                 PRIZE_RESULT_FORMAT;
 

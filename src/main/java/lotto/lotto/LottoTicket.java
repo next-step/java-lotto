@@ -3,7 +3,6 @@ package lotto.lotto;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
-import lotto.prize.LottoPrizeTemp;
 import lotto.prize.MatchInfo;
 
 import java.util.List;
@@ -27,10 +26,10 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
-    public LottoPrizeTemp matchPrize(WinningNumbers winningNumbers) {
+    public LottoPrize matchPrize(WinningNumbers winningNumbers) {
         MatchInfo matchInfo = winningNumbers.match(lottoNumbers);
 
-        return LottoPrizeTemp.evaluate(matchInfo);
+        return LottoPrize.evaluate(matchInfo);
     }
 
     public List<Integer> getNumbers() {

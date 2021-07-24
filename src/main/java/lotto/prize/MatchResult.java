@@ -10,16 +10,16 @@ import static lotto.money.Money.ZERO_VALUE;
 
 public class MatchResult {
     private final Money payment;
-    private final Map<LottoPrizeTemp, Long> matchResult;
+    private final Map<LottoPrize, Long> matchResult;
 
-    public MatchResult(Money payment, Map<LottoPrizeTemp, Long> matchResult) {
+    public MatchResult(Money payment, Map<LottoPrize, Long> matchResult) {
         validate(payment, matchResult);
 
         this.payment = payment;
         this.matchResult = matchResult;
     }
 
-    private void validate(Money payment, Map<LottoPrizeTemp, Long> matchResult) {
+    private void validate(Money payment, Map<LottoPrize, Long> matchResult) {
         if (Objects.isNull(payment)) {
             throw new IllegalArgumentException("Payment can't be null");
         }
@@ -29,24 +29,24 @@ public class MatchResult {
         }
     }
 
-    public static MatchResult of(Money payment, Map<LottoPrizeTemp, Long> matchResult) {
+    public static MatchResult of(Money payment, Map<LottoPrize, Long> matchResult) {
         return new MatchResult(payment, matchResult);
     }
 
     public double calculateEarningsRate() {
-        Money totalEarnings = Arrays.stream(LottoPrizeTemp.values())
+        Money totalEarnings = Arrays.stream(LottoPrize.values())
                 .map(this::calculateEarning)
                 .reduce(Money.ZERO, Money::addition);
 
         return totalEarnings.earningRate(payment);
     }
 
-    private Money calculateEarning(LottoPrizeTemp lottoPrize) {
+    private Money calculateEarning(LottoPrize lottoPrize) {
         return lottoPrize.getPrizeMoney()
                 .multiply(matchCount(lottoPrize));
     }
 
-    public int matchCount(LottoPrizeTemp lottoPrize) {
+    public int matchCount(LottoPrize lottoPrize) {
         if (!matchResult.containsKey(lottoPrize)) {
             return ZERO_VALUE;
         }

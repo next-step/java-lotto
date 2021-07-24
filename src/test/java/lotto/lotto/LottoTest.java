@@ -4,7 +4,7 @@ import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.money.Money;
 import lotto.number.WinningNumbers;
-import lotto.prize.LottoPrizeTemp;
+import lotto.prize.LottoPrize;
 import lotto.prize.MatchResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class LottoTest {
         Lotto lotto = Lotto.of(Money.from(10_000), lottoTickets);
         MatchResult matchResult = lotto.match(winningNumbers);
 
-        Arrays.stream(LottoPrizeTemp.values())
+        Arrays.stream(LottoPrize.values())
                 .forEach(lottoPrize -> assertThat(matchResult.matchCount(lottoPrize)).isEqualTo(1));
     }
 
@@ -66,8 +66,8 @@ public class LottoTest {
 
         int payment = 10_000;
         Lotto lotto = Lotto.of(Money.from(payment), lottoTickets);
-        int expectedEarning = Arrays.stream(LottoPrizeTemp.values())
-                .map(LottoPrizeTemp::getPrizeMoney)
+        int expectedEarning = Arrays.stream(LottoPrize.values())
+                .map(LottoPrize::getPrizeMoney)
                 .mapToInt(Money::toInt)
                 .sum();
 

@@ -2,7 +2,7 @@ package lotto.lotto;
 
 import lotto.helper.Fixture;
 import lotto.number.WinningNumbers;
-import lotto.prize.LottoPrizeTemp;
+import lotto.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,9 +34,9 @@ class LottoTicketsTest {
         WinningNumbers winningNumbers = Fixture.winningNumbers2();
         LottoTickets lottoTickets = Fixture.lottoTickets2();
 
-        Map<LottoPrizeTemp, Long> matchResult = lottoTickets.matchWinningNumbers(winningNumbers);
+        Map<LottoPrize, Long> matchResult = lottoTickets.matchWinningNumbers(winningNumbers);
 
-        Arrays.stream(LottoPrizeTemp.values())
+        Arrays.stream(LottoPrize.values())
                 .forEach(lottoPrize -> assertThat(matchResult.get(lottoPrize)).isEqualTo(1));
     }
 }
