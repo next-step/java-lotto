@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoMachine {
+public final class LottoMachine {
     public static final Money PRICE_OF_A_TICKET = Money.from(1_000);
 
     private LottoMachine() {}

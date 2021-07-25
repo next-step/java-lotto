@@ -2,7 +2,7 @@ package lotto.prize;
 
 import java.util.Objects;
 
-public class MatchInfo {
+public final class MatchInfo {
     private final int matchCount;
     private final boolean bonusMatch;
 

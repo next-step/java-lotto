@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 
 import static lotto.money.Money.ZERO_VALUE;
 
-public class InputView {
+public final class InputView {
     private static final String INPUT_PAYMENT_STATEMENT = "구입금액을 입력해 주세요.";
     private static final String INPUT_NUMBER_OF_MANUAL_LOTTO_STATEMENT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS_STATEMENT = "수동으로 구매할 번호를 입력해 주세요.";

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Lotto {
+public final class Lotto {
     private final Money payment;
     private final PaymentInfo paymentInfo;
     private final LottoTickets lottoTickets;

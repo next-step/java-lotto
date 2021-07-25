@@ -8,7 +8,7 @@ import lotto.prize.MatchInfo;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoTicket {
+public final class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
     private LottoTicket(LottoNumbers lottoNumbers) {

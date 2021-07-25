@@ -5,7 +5,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public final class LottoNumber {
     public static final int MIN_OF_LOTTO_NUMBER = 1;
     public static final int MAX_OF_LOTTO_NUMBER = 45;
 

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static lotto.lotto.LottoMachine.PRICE_OF_A_TICKET;
 
-public class PaymentInfo {
+public final class PaymentInfo {
     private final Money payment;
     private final int numberOfManualLottoTickets;
 

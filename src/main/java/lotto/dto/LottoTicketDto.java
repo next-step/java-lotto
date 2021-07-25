@@ -5,7 +5,7 @@ import lotto.lotto.LottoTicket;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTicketDto {
+public final class LottoTicketDto {
     private final List<Integer> lottoNumbers;
 
     private LottoTicketDto(final LottoTicket lottoTicket) {

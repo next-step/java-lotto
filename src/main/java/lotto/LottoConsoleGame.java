@@ -10,7 +10,7 @@ import lotto.prize.MatchResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-public class LottoConsoleGame {
+public final class LottoConsoleGame {
 
     public static void main(String[] args) {
         Money payment = InputView.inputPayment();

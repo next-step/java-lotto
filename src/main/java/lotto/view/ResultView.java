@@ -10,7 +10,7 @@ import java.util.List;
 
 import static lotto.lotto.LottoMachine.PRICE_OF_A_TICKET;
 
-public class ResultView {
+public final class ResultView {
     private static final String BUY_RESULT_STATEMENT_FORMAT = "수동으로 %d 장, 자동으로 %d 개를 구매했습니다.";
     private static final String WINNING_PRIZE_STATISTICS_STATEMENT = "당첨 통계" + System.lineSeparator() + "----------";
     private static final String PRIZE_RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
