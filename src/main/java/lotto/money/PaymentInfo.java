@@ -38,4 +38,10 @@ public class PaymentInfo {
     public Money payment() {
         return payment;
     }
+
+    public long getAffordableCount(Money price) {
+        int affordableCount = payment.getAffordableCount(price);
+
+        return affordableCount - numberOfManualLottoTickets;
+    }
 }

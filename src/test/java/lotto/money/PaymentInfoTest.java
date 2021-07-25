@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static lotto.lotto.LottoMachine.PRICE_OF_A_TICKET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -55,6 +56,22 @@ class PaymentInfoTest {
         return Stream.of(
                 Arguments.of(Money.from(5_000), Generator.autoLottoTickets(6)),
                 Arguments.of(Money.from(5_000), Generator.autoLottoTickets(10))
+        );
+    }
+
+    @DisplayName("구매 금액은 수동 로또의 갯수 * 로또 하나 당 금액을 초과할 수 없다.")
+    @MethodSource
+    @ParameterizedTest
+    void affordableCount(Money payment, LottoTickets manualLottoNumbers, int affordableCount) {
+        PaymentInfo paymentInfo = PaymentInfo.of(payment, manualLottoNumbers);
+
+        assertThat(paymentInfo.getAffordableCount(PRICE_OF_A_TICKET)).isEqualTo(affordableCount);
+    }
+
+    private static Stream<Arguments> affordableCount() {
+        return Stream.of(
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(5), 0),
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(2), 3)
         );
     }
 }
