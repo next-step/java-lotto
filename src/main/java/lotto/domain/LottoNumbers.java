@@ -11,21 +11,21 @@ public class LottoNumbers {
 
     private final List<Integer> lottoNumbers;
 
-    private LottoNumbers(SeparateNumber separateNumber) {
-        this.lottoNumbers = toLottoNumbers(separateNumber);
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        if (!isValid(lottoNumbers)) {
+            throw new IllegalLottoNumberCountException(lottoNumbers.size());
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers of(String separateNumber) {
-        return new LottoNumbers(SeparateNumber.of(separateNumber));
+        SeparateNumber number = SeparateNumber.of(separateNumber);
+        return new LottoNumbers(number.initLottoNumbers());
     }
 
-    private List<Integer> toLottoNumbers(SeparateNumber separateNumber) {
-        List<Integer> numbers = separateNumber.initLottoNumbers();
+    private boolean isValid(List<Integer> numbers) {
         Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
-        int size = nonDuplicateNumbers.size();
-        if (size != LottoNumber.LOTTO_NUMBER_SIZE) {
-            throw new IllegalLottoNumberCountException(size);
-        }
-        return numbers;
+
+        return nonDuplicateNumbers.size() == LottoNumber.LOTTO_NUMBER_SIZE;
     }
 }
