@@ -10,11 +10,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("구매 정보를 담고 있는 클래스 테스트")
 class PaymentInfoTest {
 
-    @DisplayName("구매 정보는, 구매 금액과 수동 로또 티켓을 가지고 초기화 한다.")
+    @DisplayName("구매 정보는 구매 금액과 수동 로또 티켓을 가지고 초기화 한다.")
     @MethodSource
     @ParameterizedTest
     void init(Money payment, LottoTickets manualLottoNumbers) {
@@ -23,8 +24,23 @@ class PaymentInfoTest {
 
     private static Stream<Arguments> init() {
         return Stream.of(
-                Arguments.of(Money.from(5000), Generator.autoLottoTickets(5)),
-                Arguments.of(Money.from(5000), Generator.autoLottoTickets(2))
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(5)),
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(0))
+        );
+    }
+
+    @DisplayName("구매 정보중 금액 혹은 수동 로또 티켓이 null 일 경우 예외를 던진다.")
+    @MethodSource
+    @ParameterizedTest
+    void initException(Money payment, LottoTickets manualLottoNumbers) {
+        assertThatThrownBy(() -> PaymentInfo.of(payment, manualLottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> initException() {
+        return Stream.of(
+                Arguments.of(null, Generator.autoLottoTickets(5)),
+                Arguments.of(Money.from(5_000), null),
+                Arguments.of(null, null)
         );
     }
 }
