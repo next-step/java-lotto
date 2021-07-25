@@ -18,8 +18,8 @@ class PaymentInfoTest {
     @DisplayName("구매 정보는 구매 금액과 수동 로또 티켓을 가지고 초기화 한다.")
     @MethodSource
     @ParameterizedTest
-    void init(Money payment, LottoTickets manualLottoNumbers) {
-        assertThat(PaymentInfo.of(payment, manualLottoNumbers)).isNotNull();
+    void init(Money payment, LottoTickets manualLottoTickets) {
+        assertThat(PaymentInfo.of(payment, manualLottoTickets)).isNotNull();
     }
 
     private static Stream<Arguments> init() {
@@ -54,7 +54,7 @@ class PaymentInfoTest {
     private static Stream<Arguments> illegalStateOfInit() {
         return Stream.of(
                 Arguments.of(Money.from(5_000), Generator.autoLottoTickets(6)),
-                Arguments.of(Money.from(5_000), 10)
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(10))
         );
     }
 }

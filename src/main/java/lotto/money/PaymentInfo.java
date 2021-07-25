@@ -4,6 +4,8 @@ import lotto.lotto.LottoTickets;
 
 import java.util.Objects;
 
+import static lotto.lotto.LottoMachine.PRICE_OF_A_TICKET;
+
 public class PaymentInfo {
     private final Money payment;
     private final int numberOfManualLottoTickets;
@@ -22,6 +24,12 @@ public class PaymentInfo {
 
         if (Objects.isNull(manualLottoTickets)) {
             throw new IllegalArgumentException("LottoTickets can't be null");
+        }
+
+        if (payment.getAffordableCount(PRICE_OF_A_TICKET) < manualLottoTickets.size()) {
+            System.out.println(payment.getAffordableCount(PRICE_OF_A_TICKET));
+            System.out.println(manualLottoTickets.size());
+            throw new IllegalStateException("Money to buy ManualLottoTickets over payment");
         }
     }
 
