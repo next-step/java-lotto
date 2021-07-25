@@ -19,6 +19,10 @@ public final class MatchInfo {
         return bonusMatch;
     }
 
+    public boolean nonBonusMatch() {
+        return !bonusMatch;
+    }
+
     public boolean isCountEqual(int count) {
         return matchCount == count;
     }
