@@ -27,8 +27,6 @@ public class PaymentInfo {
         }
 
         if (payment.getAffordableCount(PRICE_OF_A_TICKET) < manualLottoTickets.size()) {
-            System.out.println(payment.getAffordableCount(PRICE_OF_A_TICKET));
-            System.out.println(manualLottoTickets.size());
             throw new IllegalStateException("Money to buy ManualLottoTickets over payment");
         }
     }

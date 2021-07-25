@@ -44,4 +44,8 @@ public class LottoTickets {
     public int size() {
         return lottoTickets.size();
     }
+
+    public void merge(LottoTickets anotherLottoTickets) {
+
+    }
 }
