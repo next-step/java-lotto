@@ -43,4 +43,18 @@ class PaymentInfoTest {
                 Arguments.of(null, null)
         );
     }
+
+    @DisplayName("구매 금액은 수동 로또의 갯수 * 로또 하나 당 금액을 초과할 수 없다.")
+    @MethodSource
+    @ParameterizedTest
+    void illegalStateOfInit(Money payment, LottoTickets manualLottoNumbers) {
+        assertThatThrownBy(() -> PaymentInfo.of(payment, manualLottoNumbers)).isInstanceOf(IllegalStateException.class);
+    }
+
+    private static Stream<Arguments> illegalStateOfInit() {
+        return Stream.of(
+                Arguments.of(Money.from(5_000), Generator.autoLottoTickets(6)),
+                Arguments.of(Money.from(5_000), 10)
+        );
+    }
 }
