@@ -34,4 +34,8 @@ public class PaymentInfo {
     public static PaymentInfo of(Money payment, LottoTickets manualLottoTickets) {
         return new PaymentInfo(payment, manualLottoTickets);
     }
+
+    public Money payment() {
+        return payment;
+    }
 }

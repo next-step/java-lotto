@@ -3,6 +3,7 @@ package lotto.lotto;
 import lotto.helper.Fixture;
 import lotto.helper.Generator;
 import lotto.money.Money;
+import lotto.money.PaymentInfo;
 import lotto.number.WinningNumbers;
 import lotto.prize.LottoPrize;
 import lotto.prize.MatchResult;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("로또 구매 정보를 담고 있는 로또 클래스")
+@DisplayName("로또 구매 정보와 로또를 담고 있는 로또 클래스")
 public class LottoTest {
 
     @DisplayName("로또 구매 정보는 구매 금액과 로또 티켓 그룹을 가지고 생성 한다.")
@@ -28,6 +29,16 @@ public class LottoTest {
         LottoTickets lottoTickets = Generator.autoLottoTickets(5);
 
         assertThat(Lotto.of(payment, lottoTickets)).isNotNull();
+    }
+
+    @DisplayName("로또는 구매 정보와 로또 티켓 그룹을 가지고 생성 한다.")
+    @Test
+    void initLotto2() {
+        Money payment = Money.from(10_000);
+        LottoTickets lottoTickets = Generator.autoLottoTickets(5);
+        PaymentInfo paymentInfo = PaymentInfo.of(payment, lottoTickets);
+
+        assertThat(Lotto.of(paymentInfo, lottoTickets)).isNotNull();
     }
 
     @DisplayName("구매 금액이나 로또 그룹이 null 일 경우 예외를 발생한다.")
