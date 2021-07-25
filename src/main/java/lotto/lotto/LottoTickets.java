@@ -46,6 +46,6 @@ public class LottoTickets {
     }
 
     public void merge(LottoTickets anotherLottoTickets) {
-
+        lottoTickets.addAll(anotherLottoTickets.lottoTickets);
     }
 }
