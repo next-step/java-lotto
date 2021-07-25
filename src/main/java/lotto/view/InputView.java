@@ -39,7 +39,7 @@ public class InputView {
         printStatement(INPUT_MANUAL_LOTTO_NUMBERS_STATEMENT);
 
 
-        return IntStream.rangeClosed(ZERO_VALUE, numberOfManualLotto)
+        return IntStream.range(ZERO_VALUE, numberOfManualLotto)
                 .mapToObj(i -> inputLottoNumbers())
                 .map(LottoNumbers::from)
                 .map(LottoTicket::from)

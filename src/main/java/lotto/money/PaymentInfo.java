@@ -44,4 +44,8 @@ public class PaymentInfo {
 
         return affordableCount - numberOfManualLottoTickets;
     }
+
+    public int getNumberOfManualLottoTickets() {
+        return numberOfManualLottoTickets;
+    }
 }

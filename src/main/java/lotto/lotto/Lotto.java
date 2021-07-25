@@ -69,4 +69,8 @@ public class Lotto {
     public List<LottoTicketDto> getLottoTickets() {
         return lottoTickets.getLottoTicketDtos();
     }
+
+    public PaymentInfo paymentInfo() {
+        return paymentInfo;
+    }
 }
