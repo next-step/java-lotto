@@ -8,7 +8,7 @@ public class Money {
 
     private final int money;
 
-    public Money(int money) {
+    private Money(int money) {
         validate(money);
 
         this.money = money;

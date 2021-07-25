@@ -45,11 +45,11 @@ class LottoTicketTest {
         return Stream.of(
                 Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 30), LottoPrize.FIRST),
                 Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 31), LottoPrize.SECOND),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrize.THIRD),
-                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrize.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 25, 32), LottoPrize.THIRD),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 20, 26, 31), LottoPrize.FOURTH),
+                Arguments.of(Generator.lottoTicket(5, 10, 15, 21, 26, 31), LottoPrize.FIFTH),
                 Arguments.of(Generator.lottoTicket(5, 10, 16, 21, 26, 31), LottoPrize.NONE),
-                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrize.NONE),
-                Arguments.of(Generator.lottoTicket(6, 11, 16, 21, 26, 31), LottoPrize.NONE)
+                Arguments.of(Generator.lottoTicket(5, 11, 16, 21, 26, 31), LottoPrize.NONE)
         );
     }
 }

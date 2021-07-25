@@ -1,6 +1,5 @@
 package lotto.prize;
 
-
 import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

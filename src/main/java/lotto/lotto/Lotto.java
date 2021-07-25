@@ -14,7 +14,7 @@ public class Lotto {
     private final Money payment;
     private final LottoTickets lottoTickets;
 
-    public Lotto(Money payment, LottoTickets lottoTickets) {
+    private Lotto(Money payment, LottoTickets lottoTickets) {
         validate(payment, lottoTickets);
 
         this.payment = payment;

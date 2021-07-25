@@ -46,25 +46,12 @@ class LottoNumbersTest {
         );
     }
 
-    @DisplayName("로또 번호와 당첨 번호를 가지고 몇개의 번호가 일치하는지 반환한다.")
-    @MethodSource
-    @ParameterizedTest
-    void matchCount(LottoNumbers lottoNumbers, int expectedMatchCount) {
-        WinningNumbers winningNumbers = Generator.winningNumbers(5, 10, 15, 20, 25, 30);
+    @DisplayName("로또 번호는 중복이 있어서는 안된다. 중복이 있을 경우 예외를 발생 시킨다.")
+    @Test
+    void duplicationCheck() {
+        List<LottoNumber> lottoNumbers = lottoNumberList(1, 2, 3, 4, 5, 5);
 
-        assertThat(lottoNumbers.match(winningNumbers)).isEqualTo(expectedMatchCount);
+        assertThatThrownBy(() -> LottoNumbers.from(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
-
-    private static Stream<Arguments> matchCount() {
-        return Stream.of(
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 30), 6),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 25, 31), 5),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 20, 26, 31), 4),
-                Arguments.of(Generator.lottoNumbers(5, 10, 15, 21, 26, 31), 3),
-                Arguments.of(Generator.lottoNumbers(5, 10, 16, 21, 26, 31), 2),
-                Arguments.of(Generator.lottoNumbers(5, 11, 16, 21, 26, 31), 1),
-                Arguments.of(Generator.lottoNumbers(6, 11, 16, 21, 26, 31), 0)
-        );
-    }
 }

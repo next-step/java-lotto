@@ -13,6 +13,7 @@ public class Fixture {
                 Arrays.asList(
                         Generator.lottoTicket(5, 10, 15, 20, 25, 30),
                         Generator.lottoTicket(5, 10, 15, 20, 25, 31),
+                        Generator.lottoTicket(5, 10, 15, 20, 25, 32),
                         Generator.lottoTicket(5, 10, 15, 20, 26, 31),
                         Generator.lottoTicket(5, 10, 15, 21, 26, 31),
                         Generator.lottoTicket(5, 10, 16, 21, 26, 31)
@@ -21,6 +22,6 @@ public class Fixture {
     }
 
     public static WinningNumbers winningNumbers() {
-        return Generator.winningNumbers(5, 10, 15, 20, 25, 30);
+        return Generator.winningNumbers(31, 5, 10, 15, 20, 25, 30);
     }
 }
