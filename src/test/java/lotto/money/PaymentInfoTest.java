@@ -21,10 +21,10 @@ class PaymentInfoTest {
         assertThat(PaymentInfo.of(payment, manualLottoNumbers)).isNotNull();
     }
 
-    private static Stream<Arguments> of() {
+    private static Stream<Arguments> init() {
         return Stream.of(
                 Arguments.of(Money.from(5000), Generator.autoLottoTickets(5)),
-                Arguments.of(Money.from(5000), Generator.autoLottoTickets(10))
+                Arguments.of(Money.from(5000), Generator.autoLottoTickets(2))
         );
     }
 }
