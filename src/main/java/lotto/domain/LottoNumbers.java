@@ -28,6 +28,13 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public long match(LottoNumbers lottoTickets) {
+        List<Integer> buyTicket = lottoTickets.getLottoNumbers();
+        return buyTicket.stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
+    }
+
     private boolean isValid(List<Integer> numbers) {
         Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
 
