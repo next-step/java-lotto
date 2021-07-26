@@ -28,11 +28,13 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public long match(LottoNumbers lottoTickets) {
+    public int match(LottoNumbers lottoTickets) {
         List<Integer> buyTicket = lottoTickets.getLottoNumbers();
+        int sumValue = 1;
+        int startIndex = 0;
         return buyTicket.stream()
                 .filter(this.lottoNumbers::contains)
-                .count();
+                .map(e -> sumValue).reduce(startIndex, Integer::sum);
     }
 
     private boolean isValid(List<Integer> numbers) {
