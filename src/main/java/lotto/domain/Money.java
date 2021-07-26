@@ -19,6 +19,10 @@ public class Money {
         return new Money(number);
     }
 
+    public static int purchaseMoney(int ticketCount) {
+        return ticketCount * MONEY_UNIT;
+    }
+
     public long lottoTicketCount() {
         return number / MONEY_UNIT;
     }
