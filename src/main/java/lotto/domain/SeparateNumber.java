@@ -24,6 +24,10 @@ public class SeparateNumber {
         return new SeparateNumber(separateStr);
     }
 
+    public List<Integer> initLottoNumbers() {
+        return lottoNumbers;
+    }
+
     private boolean isValid(String separateStr) {
         return SEPARATE_PATTERN.matcher(separateStr).find();
     }
@@ -38,10 +42,6 @@ public class SeparateNumber {
         }
 
         return result;
-    }
-
-    public List<Integer> initLottoNumbers() {
-        return lottoNumbers;
     }
 
     private void validationLottoNumber(int number) {
