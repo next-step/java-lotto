@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
 
@@ -28,8 +29,8 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("구분자를 기준으로 분리")
     void splitTest() {
-        int result = StringCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+        int result = StringCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
@@ -37,5 +38,17 @@ public class StringCalculatorTest {
     void customSeparatorSplitTest() {
         int result = StringCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수 예외")
+    void minusExcpetionTest() {
+        assertThatThrownBy(() -> StringCalculator.splitAndSum("1,2,c")).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("문자 예외")
+    void notNumberExceptionTest() {
+        assertThatThrownBy(() -> StringCalculator.splitAndSum("-1:2,3")).isInstanceOf(RuntimeException.class);
     }
 }

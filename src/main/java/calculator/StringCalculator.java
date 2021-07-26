@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     private static final String SPLIT_TOKEN = ",|:";
     private static final String CUSTOM_SPLIT_TOKEN = "//(.)\n(.*)";
+    private static final String NUMERIC_REG_EXP = "^[0-9]+$";
 
 
     public static int splitAndSum(String text) {
@@ -45,8 +46,15 @@ public class StringCalculator {
     private static int sum(String[] text) {
         int sum = 0;
         for(int i = 0; i < text.length; i++) {
-            sum += Integer.parseInt(text[i]);
+            sum += isPlusNumber(text[i]);
         }
         return sum;
+    }
+
+    private static int isPlusNumber(String text) {
+        if(!text.matches(NUMERIC_REG_EXP)) {
+            throw new RuntimeException("음수나 문자는 더할수가 없습니다.");
+        }
+        return Integer.parseInt(text);
     }
 }
