@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.lotto.LottoTicket;
+import lotto.lotto.LottoTickets;
 import lotto.money.Money;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
@@ -9,9 +11,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class InputView {
+import static lotto.money.Money.ZERO_VALUE;
+
+public final class InputView {
     private static final String INPUT_PAYMENT_STATEMENT = "구입금액을 입력해 주세요.";
+    private static final String INPUT_NUMBER_OF_MANUAL_LOTTO_STATEMENT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBERS_STATEMENT = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS_STATEMENT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_STATEMENT = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ",";
@@ -24,6 +31,25 @@ public class InputView {
         printStatement(INPUT_PAYMENT_STATEMENT);
 
         return Money.from(getInt());
+    }
+
+    public static LottoTickets inputManualLottoTickets() {
+        int numberOfManualLotto = inputNumberOfManualLotto();
+
+        printStatement(INPUT_MANUAL_LOTTO_NUMBERS_STATEMENT);
+
+
+        return IntStream.range(ZERO_VALUE, numberOfManualLotto)
+                .mapToObj(i -> inputLottoNumbers())
+                .map(LottoNumbers::from)
+                .map(LottoTicket::from)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::from));
+    }
+
+    private static int inputNumberOfManualLotto() {
+        printStatement(INPUT_NUMBER_OF_MANUAL_LOTTO_STATEMENT);
+
+        return getInt();
     }
 
     public static WinningNumbers inputWinningNumbers() {

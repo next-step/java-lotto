@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoTickets {
+public final class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
@@ -39,5 +39,13 @@ public class LottoTickets {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.matchPrize(winningNumbers))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    public int size() {
+        return lottoTickets.size();
+    }
+
+    public void merge(LottoTickets anotherLottoTickets) {
+        lottoTickets.addAll(anotherLottoTickets.lottoTickets);
     }
 }

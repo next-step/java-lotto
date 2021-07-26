@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public enum LottoPrize {
     FIRST(6, 2_000_000_000, (matchInfo) -> matchInfo.isCountEqual(6)),
     SECOND(5, 30_000_000, (matchInfo) -> matchInfo.isCountEqual(5) && matchInfo.isBonusMatch()),
-    THIRD(5, 1_500_000, (matchInfo) -> matchInfo.isCountEqual(5) && !matchInfo.isBonusMatch()),
+    THIRD(5, 1_500_000, (matchInfo) -> matchInfo.isCountEqual(5) && matchInfo.nonBonusMatch()),
     FOURTH(4, 50_000, (matchInfo) -> matchInfo.isCountEqual(4)),
     FIFTH(3, 5_000, (matchInfo) -> matchInfo.isCountEqual(3)),
     NONE(0, 0, (matchInfo) -> matchInfo.isCountUnder(3));

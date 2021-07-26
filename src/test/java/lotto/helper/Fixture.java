@@ -1,6 +1,8 @@
 package lotto.helper;
 
 import lotto.lotto.LottoTickets;
+import lotto.money.Money;
+import lotto.money.PaymentInfo;
 import lotto.number.WinningNumbers;
 
 import java.util.Arrays;
@@ -23,5 +25,9 @@ public class Fixture {
 
     public static WinningNumbers winningNumbers() {
         return Generator.winningNumbers(31, 5, 10, 15, 20, 25, 30);
+    }
+
+    public static PaymentInfo paymentInfo() {
+        return PaymentInfo.of(Money.from(1000), Generator.autoLottoTickets(1));
     }
 }

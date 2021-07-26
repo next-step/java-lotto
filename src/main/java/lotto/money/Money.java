@@ -2,7 +2,7 @@ package lotto.money;
 
 import java.util.Objects;
 
-public class Money {
+public final class Money {
     public static final int ZERO_VALUE = 0;
     public static final Money ZERO = Money.from(ZERO_VALUE);
 

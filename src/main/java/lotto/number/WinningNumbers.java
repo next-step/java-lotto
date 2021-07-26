@@ -5,8 +5,7 @@ import lotto.prize.MatchInfo;
 import java.util.List;
 import java.util.Objects;
 
-public class WinningNumbers extends LottoNumbers {
-
+public final class WinningNumbers extends AbstractLottoNumbers {
     private final LottoNumber bonusNumber;
 
     private WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
