@@ -25,4 +25,17 @@ public class StringCalculatorTest {
         assertThat(result).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("구분자를 기준으로 분리")
+    void splitTest() {
+        int result = StringCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자로 분리")
+    void customSeparatorSplitTest() {
+        int result = StringCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
