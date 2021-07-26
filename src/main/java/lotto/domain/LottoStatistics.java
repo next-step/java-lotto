@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 public class LottoStatistics {
 
+    private static final int DEFAULT_SUMMARY_VALUE = 0;
+    private static final int SUMMARY_INCREASE_VALUE = 1;
     private static final int DIVIDE_SCALE = 2;
     private final Map<LottoMatchType, Integer> statisticsMap;
     private final List<LottoNumbers> buyLotto;
@@ -34,19 +36,19 @@ public class LottoStatistics {
         matchNumbers().forEach(k -> {
             LottoMatchType matchType = LottoMatchType.findMatchCount(k);
             profitMoney += matchType.getWinMoney();
-            statisticsMap.put(matchType, statisticsMap.getOrDefault(matchType, 0) + 1);
+            statisticsMap.put(matchType, statisticsMap.getOrDefault(matchType, DEFAULT_SUMMARY_VALUE) + SUMMARY_INCREASE_VALUE);
         });
     }
 
     public double profitRate() {
-        int purchaseMoney = Money.purchaseMoney(this.buyLotto.size());
+        int purchaseMoney = Money.purchaseMoney(buyLotto.size());
         BigDecimal total = BigDecimal.valueOf(purchaseMoney);
         BigDecimal profit = BigDecimal.valueOf(profitMoney);
         return profit.divide(total, DIVIDE_SCALE, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
     private IntStream matchNumbers() {
-        return this.buyLotto.stream()
+        return buyLotto.stream()
                 .mapToInt(s -> s.match(winLotto));
     }
 }

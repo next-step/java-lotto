@@ -12,14 +12,14 @@ public enum LottoMatchType {
 
     LottoMatchType(int matchCount, int winMoney) {
         this.matchCount = matchCount;
-        WinMoney = winMoney;
+        this.winMoney = winMoney;
     }
 
-    private int matchCount;
-    private int WinMoney;
+    private final int matchCount;
+    private final int winMoney;
 
     public int getWinMoney() {
-        return WinMoney;
+        return winMoney;
     }
 
     public static LottoMatchType findMatchCount(int count) {
