@@ -22,12 +22,18 @@ public class ResultView {
         System.out.println("---------");
 
         Map<LottoMatchType, Integer> statisticsMap = statistics.getStatisticsMap();
-        for (Map.Entry<LottoMatchType, Integer> set : statisticsMap.entrySet()) {
-            LottoMatchType type = set.getKey();
-            System.out.println(type.getMatchCount() + "개 일치 (" + type.getWinMoney() + "원)" + "- " + set.getValue() + "개");
+        for (LottoMatchType type : LottoMatchType.values()) {
+            Integer matchCount = getMatchCount(statisticsMap.get(type));
+            System.out.println(type.getMatchCount() + "개 일치 (" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
         }
-
         profitPrint(statistics.profitRate());
+    }
+
+    private static Integer getMatchCount(Integer count) {
+        if (count == null) {
+            return 0;
+        }
+        return count;
     }
 
     private static void profitPrint(double profitRate) {
