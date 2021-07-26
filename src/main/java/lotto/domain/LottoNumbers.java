@@ -37,6 +37,11 @@ public class LottoNumbers {
                 .map(e -> sumValue).reduce(startIndex, Integer::sum);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
+
     private boolean isValid(List<Integer> numbers) {
         Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
 

@@ -4,9 +4,9 @@ package lotto.domain;
 import lotto.util.LottoNumber;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
@@ -14,9 +14,9 @@ public class LottoTickets {
 
     private static final int START_INDEX = 0;
     private final List<LottoNumbers> lottoNumbers;
-    private final List<Integer> generateNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+    private final Integer[] generateNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
             .boxed()
-            .collect(Collectors.toList());
+            .toArray(Integer[]::new);
 
     private LottoTickets(Money money) {
         this.lottoNumbers = buyLotto(money);
@@ -40,8 +40,10 @@ public class LottoTickets {
     }
 
     private LottoNumbers generateLottoNumbers() {
-        Collections.shuffle(generateNumbers);
-        List<Integer> numbers = generateNumbers.subList(START_INDEX, LottoNumber.LOTTO_NUMBER_SIZE);
+        Integer[] clone = generateNumbers.clone();
+        List<Integer> cloneList = Arrays.asList(clone);
+        Collections.shuffle(cloneList);
+        List<Integer> numbers = cloneList.subList(START_INDEX, LottoNumber.LOTTO_NUMBER_SIZE);
         Collections.sort(numbers);
 
         return new LottoNumbers(numbers);

@@ -22,6 +22,10 @@ public enum LottoMatchType {
         return winMoney;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static LottoMatchType findMatchCount(int count) {
         return Arrays.stream(values())
                 .filter(f -> f.matchCount == count)
