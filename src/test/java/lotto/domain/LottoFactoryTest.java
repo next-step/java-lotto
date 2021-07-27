@@ -13,8 +13,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-@DisplayName("로또 숫자 팩토리")
-class LottoNumberFactoryTest {
+@DisplayName("로또 팩토리")
+class LottoFactoryTest {
 
     @DisplayName("[성공] 랜덤 숫자 가져오기")
     @Test
@@ -22,7 +22,7 @@ class LottoNumberFactoryTest {
         // given
 
         // when
-        List<Integer> getNumbers = LottoNumberFactory.createRandomNumbers();
+        List<Integer> getNumbers = LottoFactory.createRandomNumbers();
 
         // then
         assertThat(getNumbers.stream()
@@ -44,7 +44,7 @@ class LottoNumberFactoryTest {
         // given
 
         // when
-        boolean result = LottoNumberFactory.isValid(numbers);
+        boolean result = LottoFactory.isValid(numbers);
 
         // then
         assertThat(result).isTrue();
@@ -66,7 +66,7 @@ class LottoNumberFactoryTest {
         // given
 
         // when
-        boolean result = LottoNumberFactory.isValid(numbers);
+        boolean result = LottoFactory.isValid(numbers);
 
         // then
         assertThat(result).isFalse();

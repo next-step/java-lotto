@@ -4,27 +4,27 @@ import static lotto.common.Properties.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoNumberFactory;
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoFactory;
+import lotto.domain.Lotto;
 import lotto.view.InputView;
 
 public class LottoMachineController {
 
     public static void main(String[] args) {
-        List<LottoNumbers> purchasedLottos = createPurchasedLottos();
-        LottoNumbers winningNumber = createWinningLotto(InputView.inputWinningNumbers());
+        List<Lotto> purchasedLottos = createPurchasedLottos();
+        Lotto winningLotto = createWinningLotto(InputView.inputWinningNumbers());
 
     }
 
-    private static LottoNumbers createWinningLotto(List<Integer> integers) {
-        return new LottoNumbers(integers);
+    private static Lotto createWinningLotto(List<Integer> integers) {
+        return new Lotto(integers);
     }
 
-    private static List<LottoNumbers> createPurchasedLottos() {
+    private static List<Lotto> createPurchasedLottos() {
         long totalAmount = InputView.inputTotalAmount();
-        List<LottoNumbers> purchasedLottos = new ArrayList<>();
+        List<Lotto> purchasedLottos = new ArrayList<>();
         for (int i = 0; i < totalAmount / LOTTO_PRICE; i++) {
-            purchasedLottos.add(new LottoNumbers(LottoNumberFactory.createRandomNumbers()));
+            purchasedLottos.add(new Lotto(LottoFactory.createRandomNumbers()));
         }
 
         return purchasedLottos;

@@ -10,8 +10,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-@DisplayName("로또 숫자들")
-class LottoNumbersTest {
+@DisplayName("로또")
+class LottoTest {
 
     public static Stream<Arguments> notValidLottoNumbers() {
         return Stream.of(
@@ -29,7 +29,7 @@ class LottoNumbersTest {
         // given
 
         // when
-        Assertions.assertThrows(InvalidLottoNumberException.class, () -> new LottoNumbers(numbers));
+        Assertions.assertThrows(InvalidLottoNumberException.class, () -> new Lotto(numbers));
 
         // then
 
