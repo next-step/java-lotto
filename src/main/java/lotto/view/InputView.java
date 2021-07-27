@@ -14,7 +14,7 @@ public class InputView {
 
     public int buyLotto() {
         System.out.println("구매할 로또 금액을 입력하세요.");
-        return sc.nextInt();
+        return validateLotto(sc.nextInt());
     }
 
     public int validateLotto(int price) {
@@ -25,8 +25,11 @@ public class InputView {
         if (price < REFERENCE_PRICE) {
             throw new IllegalArgumentException("돈이 천원보다 작습니다.");
         }
-
         count = price / REFERENCE_PRICE;
+        return price;
+    }
+
+    public int getCount() {
         System.out.println(count + "개를 구매했습니다.");
         return count;
     }

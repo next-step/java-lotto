@@ -14,7 +14,7 @@ public class LottoGame {
         Lottos lottos = new Lottos();
 
         int price = inputView.buyLotto();
-        lottos.addLotto(inputView.validateLotto(price));
+        lottos.addLotto(inputView.getCount());
 
         for(int i = 0; i < lottos.getSize(); i++) {
             resultView.lottoList(lottos.getLotto(i));
