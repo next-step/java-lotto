@@ -11,35 +11,34 @@ public class StringSplitter {
 		}
 
 		String[] split = text.split(DELIMITER);
-		hasNegative(split);
+		validate(split);
 
 		return split;
 	}
 
-	private void hasNegative(String[] split) {
+	private void validate(String[] split) {
 		for (String s : split) {
-			validationInt(s);
+			invalidText(s);
+			validInt(s);
 		}
 	}
 
-	private void validationInt(String s) {
+	private void validInt(String s) {
 		if (isNegative(s)) {
 			throw new SplitException();
 		}
 	}
 
 	private boolean isNegative(String s) {
-		return isInt(s) < 0;
+		return Integer.parseInt(s) < 0;
 	}
 
-	private int isInt(String s) {
-		int parseInt = 0;
+	private void invalidText(String s) {
 		try {
-			parseInt = Integer.parseInt(s);
+			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
 			throw new SplitException("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
 		}
-		return parseInt;
 	}
 
 	private boolean isBlank(String text) {
