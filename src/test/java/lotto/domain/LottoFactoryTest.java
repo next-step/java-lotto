@@ -20,6 +20,19 @@ class LottoFactoryTest {
         );
     }
 
+    @DisplayName("[성공] 생성 - 당첨 로또")
+    @ParameterizedTest
+    @MethodSource("validLottoNumbers")
+    public void createWinning(List<Integer> numbers) {
+        // given
+
+        // when
+        Lotto lotto = LottoFactory.createWinning(numbers);
+
+        // then
+        assertThat(LottoFactory.isValid(lotto.getValues())).isTrue();
+    }
+
     @DisplayName("[성공] 검증")
     @ParameterizedTest
     @MethodSource("validLottoNumbers")

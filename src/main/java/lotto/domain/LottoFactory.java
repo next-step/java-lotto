@@ -24,6 +24,10 @@ public class LottoFactory {
         return new Lotto(randomNumbers);
     }
 
+    public static Lotto createWinning(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
     public static boolean isValid(List<Integer> checkNumbers) {
         if (!numbers.containsAll(checkNumbers)) {
             return false;

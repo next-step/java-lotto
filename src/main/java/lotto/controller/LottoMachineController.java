@@ -19,7 +19,7 @@ public class LottoMachineController {
     }
 
     private static Lotto createWinningLotto(List<Integer> integers) {
-        return new Lotto(integers);
+        return LottoFactory.createWinning(integers);
     }
 
     private static List<Lotto> createPurchasedLottos() {
