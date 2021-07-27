@@ -28,7 +28,7 @@ public class StringAddCalculator {
         return Arrays.asList(input.split(SPLIT_KEYWORD));
     }
 
-    private static void checkValidation(List<String> tokens) {
+    private void checkValidation(List<String> tokens) {
         tokens.stream()
                 .filter(i -> Integer.parseInt(i) < 0)
                 .findAny()
