@@ -7,11 +7,23 @@ import java.util.stream.Collectors;
 
 public class StringAddCalculator {
 
-    public static final String DELIMITER = ",|:";
     public static final int DEFAULT_VALUE = 0;
+    public static final int MINIMUM_INPUT_NUMBER = 0;
+    public static final String DELIMITER = ",|:";
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    public static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "숫자가 아니거나 음수인 값은 올 수 없습니다.";
 
-    public List<Integer> splitAndReturnNumberList(String input) {
+    public int splitAndSum(String input) {
+        return add(splitAndReturnNumberList(input));
+    }
+
+    private int add(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    private List<Integer> splitAndReturnNumberList(String input) {
         if (input == null || input.isEmpty()) {
             return Collections.singletonList(DEFAULT_VALUE);
         }
@@ -33,15 +45,10 @@ public class StringAddCalculator {
     }
 
     private boolean valid(String input) {
-        if (Integer.parseInt(input) < 0) {
-            throw new IllegalArgumentException("숫자가 아니거나 음수인 값은 올 수 없습니다.");
+        if (Integer.parseInt(input) < MINIMUM_INPUT_NUMBER) {
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
         }
         return true;
     }
 
-    public int add(List<Integer> numbers) {
-        return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-    }
 }

@@ -5,9 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,48 +17,35 @@ public class StringAddCalculatorTest {
         stringAddCalculator = new StringAddCalculator();
     }
 
-    //1. 쉼표 또는 콜론을 구분자로 문자열을 분리한다.
-    //1. 숫자들의 합을 반환한다 (기본 값은 0이다.)
-    //1. 커스텀 구분자를 지정 할 수 있다. ("//" 와 "\n 사이" 문자)
-    //1. 숫자 외에, 음수를 전달하면 에러가 발생한다.
-
-    @ParameterizedTest
+    @ParameterizedTest(name = "{displayName} [{index}] {0} ")
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "1:2,3"})
-    @DisplayName("문자열을 쉼표, 혹은 콜론으로 구분하여 숫자를 리스트로 반환한다.")
+    @DisplayName("문자열을 쉼표, 혹은 콜론으로 구분한다.")
     void splitStringAndReturnNumberList(String input) {
-        List<Integer> result = stringAddCalculator.splitAndReturnNumberList(input);
-        assertThat(result).containsExactly(1, 2, 3);
+        int result = stringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(6);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{displayName} [{index}] {0} ")
     @NullAndEmptySource
-    @DisplayName("빈 문자열 입력시 0 하나를 원소로 가지는 리스트를 반환한다.")
+    @DisplayName("빈 문자열 혹은 NULL 입력시 0 을 반환한다.")
     void splitEmptyStringAndReturnNumberList(String input) {
-        List<Integer> result = stringAddCalculator.splitAndReturnNumberList(input);
-        assertThat(result).containsExactly(0);
+        int result = stringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(0);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"-1,2,3"})
+    @ParameterizedTest(name = "{displayName} [{index}] {0} ")
+    @ValueSource(strings = {"-1,2,3", "x:2:3"})
     @DisplayName("숫자 외에, 음수를 전달하면 에러가 발생한다.")
     void splitInvalidParameter(String input) {
-        assertThatThrownBy(() -> stringAddCalculator.splitAndReturnNumberList(input))
+        assertThatThrownBy(() -> stringAddCalculator.splitAndSum(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("커스텀 구분자를 지정 할 수 있다. // \n 사이")
+    @DisplayName("커스텀 구분자를 지정 할 수 있다.")
     void splitCustomStringAndReturnNumberList() {
-        List<Integer> result = stringAddCalculator.splitAndReturnNumberList("//;\n1;2;3");
-        assertThat(result).containsExactly(1, 2, 3);
-    }
-
-    @Test
-    @DisplayName("숫자를 원소로 갖는 리스트의 합을 반환한다.")
-    void addListNumber() {
-        int result = stringAddCalculator.add(Arrays.asList(1, 2, 3));
+        int result = stringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
-
 
 }
