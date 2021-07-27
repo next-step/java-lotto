@@ -16,4 +16,10 @@ public class StringAddCalculator {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public int add(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }

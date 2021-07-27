@@ -3,10 +3,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,5 +39,12 @@ public class StringAddCalculatorTest {
     void splitEmptyStringAndReturnNumberList(String input) {
         List<Integer> result = stringAddCalculator.splitAndReturnNumberList(input);
         assertThat(result).containsExactly(0);
+    }
+
+    @Test
+    @DisplayName("숫자를 원소로 갖는 리스트의 합을 반환한다.")
+    void addListNumber() {
+        int result = stringAddCalculator.add(Arrays.asList(1, 2, 3));
+        assertThat(result).isEqualTo(6);
     }
 }
