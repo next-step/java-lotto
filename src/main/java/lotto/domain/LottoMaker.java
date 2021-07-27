@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
@@ -6,7 +6,11 @@ public class LottoMaker {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
 
-    public List<Integer> makeLotto() {
+    public static Lotto run() {
+        return new Lotto(makeLotto());
+    }
+
+    private static List<Integer> makeLotto() {
         HashSet<Integer> lottoMaker = new HashSet<>();
 
         while (lottoMaker.size() < LOTTO_COUNT) {
