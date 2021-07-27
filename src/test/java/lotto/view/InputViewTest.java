@@ -10,7 +10,7 @@ class InputViewTest {
     @DisplayName("로또 구매금액만큼 로또 생성")
     void createLottoTest() {
         InputView inputView = new InputView();
-        inputView.buyLotto(3000);
+        inputView.validateLotto(3000);
     }
 
     @Test
@@ -18,7 +18,7 @@ class InputViewTest {
     void priceExceptionTest() {
         InputView inputView = new InputView();
 
-        assertThatThrownBy(() -> inputView.buyLotto(999))
+        assertThatThrownBy(() -> inputView.validateLotto(999))
                                           .isInstanceOf(IllegalArgumentException.class)
                                           .hasMessageContaining("천원 단위로 입력해야 합니다.");
     }
@@ -28,7 +28,7 @@ class InputViewTest {
     void priceExceptionTest2() {
         InputView inputView = new InputView();
 
-        assertThatThrownBy(() -> inputView.buyLotto(900))
+        assertThatThrownBy(() -> inputView.validateLotto(900))
                                           .isInstanceOf(IllegalArgumentException.class)
                                           .hasMessageContaining("작습니다.");
     }
