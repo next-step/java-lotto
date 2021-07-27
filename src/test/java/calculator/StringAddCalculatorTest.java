@@ -45,4 +45,12 @@ class StringAddCalculatorTest {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
 	}
 
+	@DisplayName("음수 또는 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생한다.")
+	@ValueSource(strings = {"-1,2,3", "a,b,c", "1,a,-1"})
+	@ParameterizedTest
+	void invalidInputText(String inputText) {
+		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(inputText))
+			.isInstanceOf(RuntimeException.class);
+	}
+
 }
