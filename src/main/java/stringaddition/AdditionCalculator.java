@@ -3,11 +3,14 @@ package stringaddition;
 public class AdditionCalculator {
 
 	public int sum(String formula) {
-		StringSplitter splitter = new StringSplitter();
-		String[] numbers = splitter.split(formula);
+		String[] numbers = new StringSplitter().split(formula);
+		return sum(numbers);
+	}
+
+	private int sum(String[] numbers) {
 		int solution = 0;
-		for (String numberString : numbers) {
-			solution += Integer.parseInt(numberString);
+		for (String number : numbers) {
+			solution += Integer.parseInt(number);
 		}
 		return solution;
 	}
