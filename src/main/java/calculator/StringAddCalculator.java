@@ -6,7 +6,7 @@ public class StringAddCalculator {
 
 	private static final int NULL_OR_EMPTY_VALUE = 0;
 	private static final int ONLY_ONE_NUMBER = 1;
-	private static final String DELIMITER = ",";
+	private static final String DELIMITER = ",|:";
 
 	private StringAddCalculator() {
 	}

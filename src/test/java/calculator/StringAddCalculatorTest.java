@@ -31,4 +31,11 @@ class StringAddCalculatorTest {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(3);
 	}
 
+	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+	@ValueSource(strings = "1,2:3")
+	@ParameterizedTest
+	void variousDelimiter(String inputText) {
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
+	}
+
 }
