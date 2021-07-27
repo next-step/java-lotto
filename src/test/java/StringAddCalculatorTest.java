@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -38,6 +39,14 @@ public class StringAddCalculatorTest {
     void splitEmptyStringAndReturnNumberList(String input) {
         List<Integer> result = stringAddCalculator.splitAndReturnNumberList(input);
         assertThat(result).containsExactly(0);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3"})
+    @DisplayName("숫자 외에, 음수를 전달하면 에러가 발생한다.")
+    void splitInvalidParameter(String input) {
+        assertThatThrownBy(() -> stringAddCalculator.splitAndReturnNumberList(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
