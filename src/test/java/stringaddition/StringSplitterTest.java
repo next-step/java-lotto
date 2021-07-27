@@ -2,6 +2,7 @@ package stringaddition;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -97,6 +98,19 @@ class StringSplitterTest {
 		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
 		                                              .hasMessage("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
 
+	}
+
+	@Test
+	@DisplayName("커스텀 구분자로 분리하여 문자열 반환")
+	void test() throws Exception {
+		//given
+		String customDelimiter = "//^\n1^2^3";
+
+		//when
+		String[] split = splitter.split(customDelimiter);
+
+		//then
+		assertThat(split).containsExactly("1", "2", "3");
 	}
 
 }
