@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.NotNaturalNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +52,7 @@ class StringAddCalculatorTest {
     @DisplayName("음수가 입력될 경우 RuntimeException을 반환한다")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> calculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(NotNaturalNumberException.class)
                 .hasMessage("Not a natural number.");
     }
 }
