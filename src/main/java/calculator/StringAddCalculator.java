@@ -63,7 +63,7 @@ public class StringAddCalculator {
 	}
 
 	private static boolean hasSingleNumber(String inputText) {
-		return inputText.length() == SINGLE_NUMBER;
+		return inputText.length() == SINGLE_NUMBER && toInt(inputText) >= ZERO;
 	}
 
 	private static boolean isBlank(String inputText) {
