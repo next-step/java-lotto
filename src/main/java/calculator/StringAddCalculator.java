@@ -8,7 +8,10 @@ public class StringAddCalculator {
 	}
 
 	public static int splitAndSum(String inputText) {
-		return NULL_OR_EMPTY_VALUE;
+		if (inputText == null || inputText.isEmpty()) {
+			return NULL_OR_EMPTY_VALUE;
+		}
+		return Integer.parseInt(inputText);
 	}
 
 }
