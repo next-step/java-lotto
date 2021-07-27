@@ -1,5 +1,6 @@
 package stringaddition;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,12 +14,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringSplitterTest {
 
+	private StringSplitter splitter;
+
+	@BeforeEach
+	void setUp() {
+		splitter = new StringSplitter();
+	}
+
 	@ParameterizedTest(name = "지정된 기본 구분자로 문자열 분리 {index} [{arguments}]")
 	@MethodSource(value = "splitStrings")
 	@DisplayName("지정된 기본 구분자로 문자열 분리")
 	void split(String text, String[] texts) throws Exception {
 		//given
-		StringSplitter splitter = new StringSplitter();
 
 		//when
 		String[] result = splitter.split(text);
@@ -45,7 +52,6 @@ class StringSplitterTest {
 	@DisplayName("null 또는 빈 문자열인 경우 0 반환")
 	void null_or_blank_text(String text) throws Exception {
 		//given
-		StringSplitter splitter = new StringSplitter();
 
 		//when
 		String[] result = splitter.split(text);
@@ -71,7 +77,6 @@ class StringSplitterTest {
 	@DisplayName("음수를 포함한 문자열을 입력한 경우 RuntimeException")
 	void negative_text(String text) throws Exception {
 		//given
-		StringSplitter splitter = new StringSplitter();
 
 		//when, then
 		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
@@ -87,7 +92,6 @@ class StringSplitterTest {
 	@DisplayName("숫자가 아닌 문자를 포함한 문자열을 입력한 경우 RuntimeException")
 	void wrong_text(String text) throws Exception {
 		//given
-		StringSplitter splitter = new StringSplitter();
 
 		//when, then
 		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
