@@ -9,13 +9,11 @@ public class Money {
     private final long number;
 
     private Money(long number) {
+        validate(number);
         this.number = number;
     }
 
     public static Money of(long number) {
-        if (!isValid(number)) {
-            throw new IllegalMoneyNumberException(number);
-        }
         return new Money(number);
     }
 
@@ -23,11 +21,17 @@ public class Money {
         return ticketCount * MONEY_UNIT;
     }
 
+    public static long lottoTicketCount(int money) {
+        return money / MONEY_UNIT;
+    }
+
     public long lottoTicketCount() {
         return number / MONEY_UNIT;
     }
 
-    private static boolean isValid(long number) {
-        return number > 0 && number % MONEY_UNIT == EXCHANGE;
+    private static void validate(long number) {
+        if (number < MONEY_UNIT || (number % MONEY_UNIT) != EXCHANGE) {
+            throw new IllegalMoneyNumberException(number);
+        }
     }
 }

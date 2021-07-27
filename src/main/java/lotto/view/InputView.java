@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Money;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -23,6 +25,6 @@ public class InputView {
     }
 
     public static void printBuyCount(int money) {
-        System.out.println(money + INPUT_BUY_COUNT);
+        System.out.println(Money.lottoTicketCount(money) + INPUT_BUY_COUNT);
     }
 }

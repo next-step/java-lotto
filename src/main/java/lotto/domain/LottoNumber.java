@@ -24,12 +24,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
-    private void validate(int number) {
-        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalLottoNumberException(number);
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,5 +45,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber number) {
         return this.number - number.initNumber();
+    }
+
+    private void validate(int number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
+            throw new IllegalLottoNumberException(number);
+        }
     }
 }

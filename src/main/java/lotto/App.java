@@ -8,8 +8,7 @@ import lotto.view.ResultView;
 public class App {
 
     public static void main(String[] args) {
-        int money = buyTicket();
-        Lottos buyTickets = Lottos.of(money);
+        Lottos buyTickets = Lottos.of(buyTicket());
         ResultView.printBuyTicket(buyTickets);
 
         LottoNumbers winTicket = getWinTicket();
@@ -18,8 +17,7 @@ public class App {
     }
 
     private static LottoNumbers getWinTicket() {
-        String winTicketStr = InputView.getInputWinNumbers();
-        return LottoNumbers.of(winTicketStr);
+        return LottoNumbers.of(InputView.getInputWinNumbers());
     }
 
     private static int buyTicket() {
