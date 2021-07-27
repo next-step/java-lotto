@@ -41,7 +41,6 @@ class StringSplitterTest {
 				Arguments.of("1,2:3", new String[]{"1", "2", "3"}),
 				Arguments.of("1:2:3", new String[]{"1", "2", "3"}),
 				Arguments.of("1,2,3", new String[]{"1", "2", "3"}),
-				Arguments.of(":123,", new String[]{"", "123"}),
 				Arguments.of("1", new String[]{"1"}),
 				Arguments.of(",", new String[]{}),
 				Arguments.of(",,", new String[]{})
