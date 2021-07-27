@@ -14,16 +14,21 @@ class StringAddCalculatorTest {
 	@NullAndEmptySource
 	@ParameterizedTest
 	void nullOrEmpty(String inputText) {
-		int result = StringAddCalculator.splitAndSum(inputText);
-		assertThat(result).isZero();
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isZero();
 	}
 
 	@DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
 	@ValueSource(strings = {"1", "2", "3"})
 	@ParameterizedTest
 	void oneNumber(String inputText) {
-		int result = StringAddCalculator.splitAndSum(inputText);
-		assertThat(result).isEqualTo(Integer.parseInt(inputText));
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(Integer.parseInt(inputText));
+	}
+
+	@DisplayName("숫자 2개를 구분자(,)로 입력할 경우 두 숫자의 합을 반환한다.")
+	@ValueSource(strings = {"1,2"})
+	@ParameterizedTest
+	void twoNumber(String inputText) {
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(3);
 	}
 
 }
