@@ -34,7 +34,14 @@ class StringAddCalculatorTest {
 	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
 	@ValueSource(strings = "1,2:3")
 	@ParameterizedTest
-	void variousDelimiter(String inputText) {
+	void colonAsDelimiter(String inputText) {
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
+	}
+
+	@DisplayName("'//'와 '\n' 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+	@ValueSource(strings = "//;\n1;2;3")
+	@ParameterizedTest
+	void customDelimiter(String inputText) {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
 	}
 
