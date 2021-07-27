@@ -1,5 +1,6 @@
 package stringaddition;
 
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringSplitterTest {
 
@@ -39,6 +42,29 @@ class StringSplitterTest {
 				Arguments.of("1", new String[]{"1"}),
 				Arguments.of(",", new String[]{}),
 				Arguments.of(",,", new String[]{})
+		);
+	}
+
+	@ParameterizedTest(name = "빈 문자열 {index} [{arguments}]")
+	@MethodSource(value = "nullOrBlank")
+	@DisplayName("null 또는 빈 문자열인 경우 0 반환")
+	void null_or_blank_text(String text) throws Exception {
+		//given
+		StringSplitter splitter = new StringSplitter();
+
+		//when
+		String[] result = splitter.split(text);
+
+		//then
+		assertThat(result).containsExactly("0");
+
+	}
+
+	private static Stream<Arguments> nullOrBlank() {
+		return Stream.of(
+				Arguments.of((String)null),
+				Arguments.of(""),
+				Arguments.of(" ")
 		);
 	}
 
