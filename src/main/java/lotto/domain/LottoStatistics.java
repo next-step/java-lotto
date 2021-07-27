@@ -20,7 +20,7 @@ public class LottoStatistics {
     public LottoStatistics(LottoNumbers winLotto, List<LottoNumbers> buyLotto) {
         this.winLotto = winLotto;
         this.buyLotto = buyLotto;
-        statisticsMap = new EnumMap<>(LottoMatchType.class);
+        this.statisticsMap = new EnumMap<>(LottoMatchType.class);
         this.profitMoney = 0;
     }
 

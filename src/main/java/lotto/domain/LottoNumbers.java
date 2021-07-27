@@ -13,9 +13,7 @@ public class LottoNumbers {
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (!isValid(lottoNumbers)) {
-            throw new IllegalLottoNumberCountException(lottoNumbers.size());
-        }
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -30,11 +28,9 @@ public class LottoNumbers {
 
     public int match(LottoNumbers lottoTickets) {
         List<Integer> buyTicket = lottoTickets.getLottoNumbers();
-        int sumValue = 1;
-        int startIndex = 0;
-        return buyTicket.stream()
+        return (int) buyTicket.stream()
                 .filter(this.lottoNumbers::contains)
-                .map(e -> sumValue).reduce(startIndex, Integer::sum);
+                .count();
     }
 
     @Override
@@ -42,9 +38,11 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    private boolean isValid(List<Integer> numbers) {
+    private void validate(List<Integer> numbers) {
         Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
-
-        return nonDuplicateNumbers.size() == LottoNumber.LOTTO_NUMBER_SIZE;
+        int size = nonDuplicateNumbers.size();
+        if (size != LottoNumber.LOTTO_NUMBER_SIZE) {
+            throw new IllegalLottoNumberCountException(size);
+        }
     }
 }
