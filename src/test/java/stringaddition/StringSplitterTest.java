@@ -99,11 +99,11 @@ class StringSplitterTest {
 
 	}
 
-	@Test
+	@ParameterizedTest
+	@MethodSource("customDelimiters")
 	@DisplayName("커스텀 구분자로 분리하여 문자열 반환")
-	void test() throws Exception {
+	void custom_delimiter(String customDelimiter) throws Exception {
 		//given
-		String customDelimiter = "//;\n1;2;3";
 
 		//when
 		String[] split = splitter.split(customDelimiter);
@@ -112,4 +112,11 @@ class StringSplitterTest {
 		assertThat(split).containsExactly("1", "2", "3");
 	}
 
+	private static Stream<Arguments> customDelimiters() {
+		return Stream.of(
+				Arguments.of("//;\n1;2;3"),
+				Arguments.of("//_\n1_2_3"),
+				Arguments.of("///\n1/2/3")
+		);
+	}
 }
