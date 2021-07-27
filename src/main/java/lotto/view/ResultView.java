@@ -1,10 +1,9 @@
 package lotto.view;
 
 import lotto.domain.LottoMatchType;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Lottos;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -12,8 +11,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printBuyTicket(List<LottoNumbers> lottoTickets) {
-        lottoTickets.forEach(System.out::println);
+    public static void printBuyTicket(Lottos lottoTickets) {
+        lottoTickets.getLottos().forEach(System.out::println);
     }
 
     public static void printStatistics(LottoStatistics statistics) {
