@@ -1,11 +1,8 @@
 package stringaddition;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,7 +10,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringSplitterTest {
 
@@ -37,7 +33,6 @@ class StringSplitterTest {
 				Arguments.of("1,2:3", new String[]{"1", "2", "3"}),
 				Arguments.of("1:2:3", new String[]{"1", "2", "3"}),
 				Arguments.of("1,2,3", new String[]{"1", "2", "3"}),
-				Arguments.of("1,2 3", new String[]{"1", "2 3"}),
 				Arguments.of(":123,", new String[]{"", "123"}),
 				Arguments.of("1", new String[]{"1"}),
 				Arguments.of(",", new String[]{}),
@@ -66,6 +61,22 @@ class StringSplitterTest {
 				Arguments.of(""),
 				Arguments.of(" ")
 		);
+	}
+
+	@ParameterizedTest(name = "음수 포함 여부 {index} [{arguments}]")
+	@ValueSource(strings = {
+			"-1",
+			"1,2:3,-4"
+	})
+	@DisplayName("음수를 포함한 문자열을 입력한 경우 RuntimeException")
+	void negative_text(String text) throws Exception {
+		//given
+		StringSplitter splitter = new StringSplitter();
+
+		//when, then
+		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
+		                                              .hasMessage("음수를 포함한 문자열은 계산할 수 없습니다.");
+
 	}
 
 }

@@ -9,7 +9,27 @@ public class StringSplitter {
 		if (isBlank(text)) {
 			return ZERO;
 		}
-		return text.split(DELIMITER);
+
+		String[] split = text.split(DELIMITER);
+		hasNegative(split);
+
+		return split;
+	}
+
+	private void hasNegative(String[] split) {
+		for (String s : split) {
+			validationInt(s);
+		}
+	}
+
+	private void validationInt(String s) {
+		if (isNegative(s)) {
+			throw new SplitException();
+		}
+	}
+
+	private boolean isNegative(String s) {
+		return Integer.parseInt(s) < 0;
 	}
 
 	private boolean isBlank(String text) {
