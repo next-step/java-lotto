@@ -104,7 +104,7 @@ class StringSplitterTest {
 	@DisplayName("커스텀 구분자로 분리하여 문자열 반환")
 	void test() throws Exception {
 		//given
-		String customDelimiter = "//^\n1^2^3";
+		String customDelimiter = "//;\n1;2;3";
 
 		//when
 		String[] split = splitter.split(customDelimiter);

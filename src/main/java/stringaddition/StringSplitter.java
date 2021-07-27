@@ -1,5 +1,8 @@
 package stringaddition;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringSplitter {
 
 	private static final String DELIMITER = ",|:";
@@ -10,7 +13,16 @@ public class StringSplitter {
 			return ZERO;
 		}
 
-		String[] split = text.split(DELIMITER);
+		String[] split;
+		if (text.startsWith("//")) {
+			Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
+			matcher.find();
+			String customDelimiter = matcher.group(1);
+			split = matcher.group(2).split(customDelimiter);
+		} else {
+			split = text.split(DELIMITER);
+		}
+
 		validate(split);
 
 		return split;
