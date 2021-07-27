@@ -11,16 +11,12 @@ import static java.util.Arrays.stream;
 public class StringAddCalculator {
     private static final Tokenizer defaultTokenizer = new Tokenizer();
     private static final CustomDelimTokenizer CUSTOM_DELIM_TOKENIZER = new CustomDelimTokenizer();
-
-    private static StringAddCalculator calculator = null;
+    private static final StringAddCalculator calculator = new StringAddCalculator();
 
     private StringAddCalculator() {
     }
 
     public static StringAddCalculator getInstance() {
-        if (Objects.isNull(calculator)) {
-            calculator = new StringAddCalculator();
-        }
         return calculator;
     }
 
@@ -28,7 +24,6 @@ public class StringAddCalculator {
         if (Objects.isNull(str) || str.isBlank()) {
             return NaturalNumber.ZERO;
         }
-
         return sum(split(str));
     }
 
