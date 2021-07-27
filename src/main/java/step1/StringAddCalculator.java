@@ -40,7 +40,7 @@ public class StringAddCalculator {
 
     private static int addNumber(int result, String number) {
         if(!validation(number)){
-            throw new RuntimeException("에러");
+            throw new RuntimeException("입력값이 올바르지 않습니다. 0이상의 숫자와 구분값만 입력 가능합니다.");
         }
         result += Integer.valueOf(number);
         return result;
