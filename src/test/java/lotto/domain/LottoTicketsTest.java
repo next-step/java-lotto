@@ -17,7 +17,7 @@ class LottoTicketsTest {
         LottoTickets tickets = LottoTickets.of(14000);
         List<LottoNumbers> lottoTickets = tickets.getLottoTickets();
         LottoNumbers lottoNumbers = lottoTickets.get(0);
-        Set<Integer> set = new HashSet<>(lottoNumbers.getLottoNumbers());
+        Set<LottoNumber> set = new HashSet<>(lottoNumbers.getLottoNumbers());
 
         assertThat(lottoTickets.size()).isEqualTo(14);
         assertThat(set.size()).isEqualTo(6);

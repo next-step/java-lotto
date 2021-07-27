@@ -1,33 +1,41 @@
 package lotto.domain;
 
 import lotto.exception.IllegalLottoNumberCountException;
-import lotto.util.LottoNumber;
+import lotto.exception.IllegalSeparateException;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private static final Pattern SEPARATE_PATTERN = Pattern.compile(",");
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        validate(lottoNumbers);
+        this(toLottoNumbers(lottoNumbers));
+    }
+
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        lottoNumberCountValidate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers of(String separateNumber) {
-        SeparateNumber number = SeparateNumber.of(separateNumber);
-        return new LottoNumbers(number.initLottoNumbers());
+        if(!SEPARATE_PATTERN.matcher(separateNumber).find()){
+            throw new IllegalSeparateException();
+        }
+        return new LottoNumbers(toLottoNumbers(separateNumber));
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public int match(LottoNumbers lottoTickets) {
-        List<Integer> buyTicket = lottoTickets.getLottoNumbers();
+        Set<LottoNumber> buyTicket = lottoTickets.getLottoNumbers();
         return (int) buyTicket.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
@@ -38,9 +46,27 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    private void validate(List<Integer> numbers) {
-        Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
-        int size = nonDuplicateNumbers.size();
+    private static Set<LottoNumber> toLottoNumbers(String separateStr) {
+        String[] split = SEPARATE_PATTERN.split(separateStr);
+        Set<LottoNumber> result = new TreeSet<>();
+        for (String strNumber : split) {
+            result.add(LottoNumber.of(strNumber));
+        }
+
+        return result;
+    }
+
+    private static Set<LottoNumber> toLottoNumbers(List<Integer> numbers) {
+        Set<LottoNumber> result = new TreeSet<>();
+        for (Integer number : numbers) {
+            result.add(new LottoNumber(number));
+        }
+
+        return result;
+    }
+
+    private void lottoNumberCountValidate(Set<LottoNumber> numbers) {
+        int size = numbers.size();
         if (size != LottoNumber.LOTTO_NUMBER_SIZE) {
             throw new IllegalLottoNumberCountException(size);
         }
