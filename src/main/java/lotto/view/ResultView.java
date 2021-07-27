@@ -1,12 +1,15 @@
 package lotto.view;
 
 import lotto.domain.LottoMatchType;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 
 import java.util.Map;
 
 public class ResultView {
+
+    private static final LottoStatistics statistics = new LottoStatistics();
 
     private ResultView() {
     }
@@ -15,8 +18,8 @@ public class ResultView {
         lottoTickets.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatistics(LottoStatistics statistics) {
-        statistics.summary();
+    public static void printStatistics(Lottos buyLotto, LottoNumbers winLotto) {
+        statistics.summary(buyLotto, winLotto);
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -25,7 +28,7 @@ public class ResultView {
             Integer matchCount = getMatchCount(statisticsMap.get(type));
             System.out.println(type.getMatchCount() + "개 일치 (" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
         }
-        profitPrint(statistics.profitRate());
+        profitPrint(statistics.profitRate(buyLotto));
     }
 
     private static Integer getMatchCount(Integer count) {

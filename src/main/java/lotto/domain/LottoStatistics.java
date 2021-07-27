@@ -10,27 +10,19 @@ public class LottoStatistics {
     private static final int SUMMARY_INCREASE_VALUE = 1;
     private static final int DIVIDE_SCALE = 2;
     private final Map<LottoMatchType, Integer> statisticsMap;
-    private final Lottos buyLotto;
-    private final LottoNumbers winLotto;
     private double profitMoney;
 
 
-    public LottoStatistics(LottoNumbers winLotto, Lottos buyLotto) {
-        this.winLotto = winLotto;
-        this.buyLotto = buyLotto;
+    public LottoStatistics() {
         this.statisticsMap = new EnumMap<>(LottoMatchType.class);
         this.profitMoney = 0;
-    }
-
-    public static LottoStatistics of(LottoNumbers winTicket, Lottos buyTicket) {
-        return new LottoStatistics(winTicket, buyTicket);
     }
 
     public Map<LottoMatchType, Integer> getStatisticsMap() {
         return statisticsMap;
     }
 
-    public void summary() {
+    public void summary(Lottos buyLotto, LottoNumbers winLotto) {
         buyLotto.mapToInt(winLotto)
                 .forEach(k -> {
                     LottoMatchType matchType = LottoMatchType.findMatchCount(k);
@@ -39,7 +31,7 @@ public class LottoStatistics {
                 });
     }
 
-    public double profitRate() {
+    public double profitRate(Lottos buyLotto) {
         int purchaseMoney = Money.purchaseMoney(buyLotto.getLottos().size());
         BigDecimal total = BigDecimal.valueOf(purchaseMoney);
         BigDecimal profit = BigDecimal.valueOf(profitMoney);

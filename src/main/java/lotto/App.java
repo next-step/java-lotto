@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -15,8 +14,7 @@ public class App {
 
         LottoNumbers winTicket = getWinTicket();
 
-        LottoStatistics statistics = LottoStatistics.of(winTicket, buyTickets);
-        ResultView.printStatistics(statistics);
+        ResultView.printStatistics(buyTickets, winTicket);
     }
 
     private static LottoNumbers getWinTicket() {
