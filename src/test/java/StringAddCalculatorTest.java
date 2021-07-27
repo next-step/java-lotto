@@ -20,7 +20,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest(name = "{displayName} [{index}] {0} ")
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "1:2,3"})
     @DisplayName("문자열을 쉼표, 혹은 콜론으로 구분한다.")
-    void splitStringAndReturnNumberList(String input) {
+    void splitStringAndAdd(String input) {
         int result = stringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(6);
     }
@@ -28,9 +28,16 @@ public class StringAddCalculatorTest {
     @ParameterizedTest(name = "{displayName} [{index}] {0} ")
     @NullAndEmptySource
     @DisplayName("빈 문자열 혹은 NULL 입력시 0 을 반환한다.")
-    void splitEmptyStringAndReturnNumberList(String input) {
+    void splitEmptyStringAndAdd(String input) {
         int result = stringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("숫자 하나만 입력시 그대로 반환한다.")
+    void splitSingleStringAndAdd() {
+        int result = stringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
     }
 
     @ParameterizedTest(name = "{displayName} [{index}] {0} ")
@@ -43,7 +50,7 @@ public class StringAddCalculatorTest {
 
     @Test
     @DisplayName("커스텀 구분자를 지정 할 수 있다.")
-    void splitCustomStringAndReturnNumberList() {
+    void splitCustomStringAndAdd() {
         int result = stringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
