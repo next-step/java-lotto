@@ -8,4 +8,8 @@ public class SplitException extends RuntimeException {
 		super(DEFAULT_MESSAGE);
 	}
 
+	public SplitException(String message) {
+		super(message);
+	}
+
 }

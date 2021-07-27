@@ -29,7 +29,17 @@ public class StringSplitter {
 	}
 
 	private boolean isNegative(String s) {
-		return Integer.parseInt(s) < 0;
+		return isInt(s) < 0;
+	}
+
+	private int isInt(String s) {
+		int parseInt = 0;
+		try {
+			parseInt = Integer.parseInt(s);
+		} catch (NumberFormatException e) {
+			throw new SplitException("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
+		}
+		return parseInt;
 	}
 
 	private boolean isBlank(String text) {

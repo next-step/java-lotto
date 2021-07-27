@@ -91,7 +91,7 @@ class StringSplitterTest {
 
 		//when, then
 		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
-		                                              .hasMessage("숫자가 아닌 문자를 포함한 문자열은 계산할 수 없습니다.");
+		                                              .hasMessage("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
 
 	}
 
