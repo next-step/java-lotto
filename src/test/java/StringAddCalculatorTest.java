@@ -2,7 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -42,9 +41,18 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("커스텀 구분자를 지정 할 수 있다. // \n 사이")
+    void splitCustomStringAndReturnNumberList() {
+        List<Integer> result = stringAddCalculator.splitAndReturnNumberList("//;\n1;2;3");
+        assertThat(result).containsExactly(1, 2, 3);
+    }
+
+    @Test
     @DisplayName("숫자를 원소로 갖는 리스트의 합을 반환한다.")
     void addListNumber() {
         int result = stringAddCalculator.add(Arrays.asList(1, 2, 3));
         assertThat(result).isEqualTo(6);
     }
+
+
 }
