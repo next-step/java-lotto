@@ -9,7 +9,7 @@ public class StringAddCalculator {
     private static final String SPLIT_KEYWORD = "[,:]";
 
     public static int splitAndSum(String input) {
-        if(input==null || input.isEmpty()){
+        if (input == null || input.isEmpty()) {
             return 0;
         }
         List<String> tokens = splitTokens(input);
@@ -17,7 +17,7 @@ public class StringAddCalculator {
         return tokens.stream().mapToInt(Integer::parseInt).sum();
     }
 
-    private static List<String> splitTokens(String input){
+    private static List<String> splitTokens(String input) {
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
@@ -26,11 +26,11 @@ public class StringAddCalculator {
         return Arrays.asList(input.split(SPLIT_KEYWORD));
     }
 
-    private static void checkValidation(List<String> tokens){
+    private static void checkValidation(List<String> tokens) {
         tokens.stream()
-                .filter(i->Integer.parseInt(i) < 0)
+                .filter(i -> Integer.parseInt(i) < 0)
                 .findAny()
-                .map(i->{
+                .map(i -> {
                     throw new RuntimeException("0 이상의 숫자를 입력해주세요.");
                 });
     }
