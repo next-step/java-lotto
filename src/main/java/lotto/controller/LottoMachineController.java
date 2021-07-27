@@ -7,11 +7,13 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoMachineController {
 
     public static void main(String[] args) {
         List<Lotto> purchasedLottos = createPurchasedLottos();
+        ResultView.printPurchasedLottos(purchasedLottos);
         Lotto winningLotto = createWinningLotto(InputView.inputWinningNumbers());
 
     }

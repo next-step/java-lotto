@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.exception.InvalidLottoNumberException;
 
@@ -16,5 +17,9 @@ public class Lotto {
         if (!LottoFactory.isValid(numbers)) {
             throw new InvalidLottoNumberException();
         }
+    }
+
+    public List<Integer> getValues() {
+        return Collections.unmodifiableList(numbers);
     }
 }
