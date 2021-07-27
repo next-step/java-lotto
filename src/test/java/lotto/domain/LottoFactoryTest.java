@@ -1,34 +1,17 @@
 package lotto.domain;
 
-import static lotto.common.Properties.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @DisplayName("로또 팩토리")
 class LottoFactoryTest {
-
-    @DisplayName("[성공] 랜덤 숫자 가져오기")
-    @Test
-    public void getRandomNumbers() {
-        // given
-
-        // when
-        List<Integer> getNumbers = LottoFactory.createRandomNumbers();
-
-        // then
-        assertThat(getNumbers.stream()
-            .distinct()
-            .collect(Collectors.toList())).hasSize(LOTTO_NUMBER_COUNT);
-    }
 
     public static Stream<Arguments> validLottoNumbers() {
         return Stream.of(
@@ -37,7 +20,7 @@ class LottoFactoryTest {
         );
     }
 
-    @DisplayName("[성공] 검증 - 유효하지 않은 로또 번호")
+    @DisplayName("[성공] 검증")
     @ParameterizedTest
     @MethodSource("validLottoNumbers")
     public void valid(List<Integer> numbers) {

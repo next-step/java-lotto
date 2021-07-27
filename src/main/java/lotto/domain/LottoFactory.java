@@ -15,12 +15,13 @@ public class LottoFactory {
         .boxed()
         .collect(Collectors.toList());
 
-    public static List<Integer> createRandomNumbers() {
+    public static Lotto createRandom() {
         Collections.shuffle(numbers);
-
-        return numbers.stream()
+        List<Integer> randomNumbers = numbers.stream()
             .limit(LOTTO_NUMBER_COUNT)
             .collect(Collectors.toList());
+
+        return new Lotto(randomNumbers);
     }
 
     public static boolean isValid(List<Integer> checkNumbers) {

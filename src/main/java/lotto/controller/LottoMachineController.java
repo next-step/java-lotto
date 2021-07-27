@@ -4,8 +4,8 @@ import static lotto.common.Properties.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoFactory;
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.view.InputView;
 
 public class LottoMachineController {
@@ -24,7 +24,7 @@ public class LottoMachineController {
         long totalAmount = InputView.inputTotalAmount();
         List<Lotto> purchasedLottos = new ArrayList<>();
         for (int i = 0; i < totalAmount / LOTTO_PRICE; i++) {
-            purchasedLottos.add(new Lotto(LottoFactory.createRandomNumbers()));
+            purchasedLottos.add(LottoFactory.createRandom());
         }
 
         return purchasedLottos;
