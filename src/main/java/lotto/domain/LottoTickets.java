@@ -42,7 +42,6 @@ public class LottoTickets {
         List<Integer> cloneList = Arrays.asList(clone);
         Collections.shuffle(cloneList);
         List<Integer> numbers = cloneList.subList(START_INDEX, LottoNumber.LOTTO_NUMBER_SIZE);
-        Collections.sort(numbers);
 
         return new LottoNumbers(numbers);
     }

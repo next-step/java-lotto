@@ -3,11 +3,9 @@ package lotto.domain;
 import lotto.exception.IllegalLottoNumberCountException;
 import lotto.exception.IllegalSeparateException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -24,10 +22,13 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(String separateNumber) {
-        if(!SEPARATE_PATTERN.matcher(separateNumber).find()){
-            throw new IllegalSeparateException();
-        }
-        return new LottoNumbers(toLottoNumbers(separateNumber));
+        separateValidate(separateNumber);
+        String[] split = SEPARATE_PATTERN.split(separateNumber);
+        List<Integer> list = Arrays.stream(split)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(list);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
@@ -46,21 +47,9 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    private static Set<LottoNumber> toLottoNumbers(String separateStr) {
-        String[] split = SEPARATE_PATTERN.split(separateStr);
-        Set<LottoNumber> result = new TreeSet<>();
-        for (String strNumber : split) {
-            result.add(LottoNumber.of(strNumber));
-        }
-
-        return result;
-    }
-
     private static Set<LottoNumber> toLottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> result = new TreeSet<>();
-        for (Integer number : numbers) {
-            result.add(new LottoNumber(number));
-        }
+        numbers.forEach(s -> result.add(new LottoNumber(s)));
 
         return result;
     }
@@ -69,6 +58,12 @@ public class LottoNumbers {
         int size = numbers.size();
         if (size != LottoNumber.LOTTO_NUMBER_SIZE) {
             throw new IllegalLottoNumberCountException(size);
+        }
+    }
+
+    private static void separateValidate(String separateNumber) {
+        if(!SEPARATE_PATTERN.matcher(separateNumber).find()){
+            throw new IllegalSeparateException();
         }
     }
 }
