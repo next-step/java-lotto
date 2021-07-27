@@ -9,15 +9,15 @@ import java.util.Objects;
 import static java.util.Arrays.stream;
 
 public class StringAddCalculator {
-    private static final Tokenizer defaultTokenizer = new Tokenizer();
+    private static final Tokenizer DEFAULT_TOKENIZER = new Tokenizer();
     private static final CustomDelimTokenizer CUSTOM_DELIM_TOKENIZER = new CustomDelimTokenizer();
-    private static final StringAddCalculator calculator = new StringAddCalculator();
+    private static final StringAddCalculator CALCULATOR = new StringAddCalculator();
 
     private StringAddCalculator() {
     }
 
     public static StringAddCalculator getInstance() {
-        return calculator;
+        return CALCULATOR;
     }
 
     public int splitAndSum(String str) {
@@ -31,7 +31,7 @@ public class StringAddCalculator {
         if (CUSTOM_DELIM_TOKENIZER.isCustomExpression(str)) {
             return CUSTOM_DELIM_TOKENIZER.tokenize(str);
         }
-        return defaultTokenizer.tokenize(str);
+        return DEFAULT_TOKENIZER.tokenize(str);
     }
 
     private int sum(String... numbers) {
