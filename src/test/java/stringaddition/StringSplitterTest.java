@@ -79,4 +79,20 @@ class StringSplitterTest {
 
 	}
 
+	@ParameterizedTest(name = "숫자가 아닌 문자 포함 여부 {index} [{arguments}]")
+	@ValueSource(strings = {
+			"일,이",
+			"1:2,삼"
+	})
+	@DisplayName("숫자가 아닌 문자를 포함한 문자열을 입력한 경우 RuntimeException")
+	void wrong_text(String text) throws Exception {
+		//given
+		StringSplitter splitter = new StringSplitter();
+
+		//when, then
+		assertThatThrownBy(() -> splitter.split(text)).isInstanceOf(SplitException.class)
+		                                              .hasMessage("숫자가 아닌 문자를 포함한 문자열은 계산할 수 없습니다.");
+
+	}
+
 }
