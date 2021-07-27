@@ -3,7 +3,7 @@ package calculator.tokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomTokenizer extends Tokenizer {
+public class CustomDelimTokenizer extends Tokenizer {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//([^\\d\\-]{1})\n(.*)$"); // 문자열시작//(숫자나 -가 아닌 아무 문자열 하나)\n(임의의 문자열)문자열끝
 
     private static final int DELIMITER_GROUP_INDEX = 1;

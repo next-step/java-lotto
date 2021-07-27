@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.model.NaturalNumber;
-import calculator.tokenizer.CustomTokenizer;
+import calculator.tokenizer.CustomDelimTokenizer;
 import calculator.tokenizer.Tokenizer;
 
 import java.util.Objects;
@@ -10,7 +10,7 @@ import static java.util.Arrays.stream;
 
 public class StringAddCalculator {
     private static final Tokenizer defaultTokenizer = new Tokenizer();
-    private static final CustomTokenizer customTokenizer = new CustomTokenizer();
+    private static final CustomDelimTokenizer CUSTOM_DELIM_TOKENIZER = new CustomDelimTokenizer();
 
     private static StringAddCalculator calculator = null;
 
@@ -33,8 +33,8 @@ public class StringAddCalculator {
     }
 
     private String[] split(String str) {
-        if (customTokenizer.isCustomExpression(str)) {
-            return customTokenizer.tokenize(str);
+        if (CUSTOM_DELIM_TOKENIZER.isCustomExpression(str)) {
+            return CUSTOM_DELIM_TOKENIZER.tokenize(str);
         }
         return defaultTokenizer.tokenize(str);
     }
