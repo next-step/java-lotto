@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("문자열 덧셈 계산기 테스트")
 public class CalculatorTest {
@@ -24,14 +23,13 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @DisplayName("숫자 이외의 값이나 음수가 전달될 경우 예외가 발생한다.")
+    @DisplayName("숫자 이외의 값이나 음수가 전달될 경우 RuntimeException 예외가 발생한다.")
     @ValueSource(strings = {"-1,1", "1,a", "1,a,-1"})
     @ParameterizedTest
     void must_throw_exception_not_natural_number(String input) {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Calculator.calculate(input);
-        });
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> Calculator.calculate(input));
     }
 
     @DisplayName("기본구분자로 분리하여 값들을 모두 더한 후 반환한다.")
