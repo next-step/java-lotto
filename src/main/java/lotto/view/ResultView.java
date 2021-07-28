@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 
-import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private static final int FIRST_REWARD = 20000000;
@@ -10,52 +10,15 @@ public class ResultView {
     private static final int THIRD_REWARD = 50000;
     private static final int FORTH_REWARD = 5000;
 
-    private int count = 0;
-    private int first = 0;
-    private int second = 0;
-    private int third = 0;
-    private int forth = 0;
-
-    public void correctCheck(Lotto lotto, List<Integer> correctNumbers) {
-        count = 0;
-        List<Integer> list = lotto.getLotto();
-        for(int i = 0 ; i < correctNumbers.size(); i++) {
-            getCorrectCount(list, correctNumbers, i);
-        }
-        addRank(count);
-    }
-
-    private void getCorrectCount(List<Integer> list, List<Integer> correctNumbers, int index) {
-        if (list.contains(correctNumbers.get(index))) {
-            count++;
-        }
-    }
-
     public void lottoList(Lotto lotto) {
         System.out.println(lotto.getLotto());
     }
 
-    private void addRank(int checkCount) {
-        switch (checkCount) {
-            case 6:
-                first++;
-                break;
-            case 5:
-                second++;
-                break;
-            case 4:
-                third++;
-                break;
-            case 3:
-                forth++;
-                break;
-            default:
-                break;
-        }
-    }
-
-
-    public void printResult(int price) {
+    public void printResult(Map<String, Object> resultMap, int price) {
+        int first = (int) resultMap.get("first");
+        int second = (int) resultMap.get("second");
+        int third = (int) resultMap.get("third");
+        int forth = (int) resultMap.get("forth");
         System.out.println("당첨 통계");
 
         System.out.println("-----------");
@@ -67,5 +30,9 @@ public class ResultView {
 
         double result = ((first * FIRST_REWARD) + (second * SECOND_REWARD) + (third * THIRD_REWARD) + (forth * FORTH_REWARD)) / price;
         System.out.println("총 수익률은 : " + result + "입니다.");
+    }
+
+    public void printCount(int count) {
+        System.out.println(count + "개 구매했습니다.");
     }
 }

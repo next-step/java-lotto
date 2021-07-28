@@ -1,33 +1,37 @@
 package lotto;
 
-import lotto.domain.Lottos;
+import lotto.controller.LottoMachine;
+import lotto.domain.Lotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
     public static void main(String[] args) {
         InputView inputView = new InputView();
+        LottoMachine lottoMachine = new LottoMachine();
         ResultView resultView = new ResultView();
-        Lottos lottos = new Lottos();
 
         int price = inputView.buyLotto();
-        lottos.addLotto(inputView.getCount());
 
-        for(int i = 0; i < lottos.getSize(); i++) {
-            resultView.lottoList(lottos.getLotto(i));
+        int count = lottoMachine.run(price);
+        resultView.printCount(count);
+
+        List<Lotto> lottos = lottoMachine.addLottos(count);
+
+        for (Lotto lotto: lottos) {
+            resultView.lottoList(lotto);
         }
 
         List<Integer> correctNumbers = inputView.lastWeekendNumber();
 
-        Collections.sort(correctNumbers);
-
-        for(int i = 0; i < lottos.getSize(); i++) {
-            resultView.correctCheck(lottos.getLotto(i), correctNumbers);
+        for (Lotto lotto: lottos) {
+            lottoMachine.lotteryJackpot(lotto, correctNumbers);
         }
+        Map<String, Object> result = lottoMachine.lotteryRewards();
 
-        resultView.printResult(price);
+        resultView.printResult(result, price);
     }
 }

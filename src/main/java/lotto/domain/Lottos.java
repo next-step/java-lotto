@@ -4,19 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public void addLotto(int count) {
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos addLotto(int count) {
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoMaker.run());
+            lottoList.add(LottoMaker.run());
         }
+        return new Lottos(lottoList);
     }
 
-    public Lotto getLotto(int index) {
-        return lottos.get(index);
-    }
-
-    public int getSize() {
-        return lottos.size();
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
