@@ -51,4 +51,6 @@ public class LottoTest {
     public void newAutoTest() {
         Lotto.newAuto();
     }
+
+
 }
