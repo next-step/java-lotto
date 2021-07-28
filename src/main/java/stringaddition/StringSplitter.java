@@ -9,6 +9,8 @@ public class StringSplitter {
 	private static final String DELIMITER = "[,:]";
 	private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
 
+	private NationalNumber nationalNumber = new NationalNumber();
+
 	public String[] split(String text) {
 		if (isBlank(text)) {
 			return ZERO;
@@ -31,26 +33,7 @@ public class StringSplitter {
 
 	private void validate(String[] split) {
 		for (String s : split) {
-			invalidText(s);
-			validInt(s);
-		}
-	}
-
-	private void validInt(String s) {
-		if (isNegative(s)) {
-			throw new SplitException();
-		}
-	}
-
-	private boolean isNegative(String s) {
-		return Integer.parseInt(s) < 0;
-	}
-
-	private void invalidText(String s) {
-		try {
-			Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			throw new SplitException("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
+			nationalNumber.isValid(s);
 		}
 	}
 
