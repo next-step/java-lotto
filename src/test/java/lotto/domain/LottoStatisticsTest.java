@@ -33,9 +33,9 @@ class LottoStatisticsTest {
     void statistics() {
         Map<LottoMatchType, Integer> statisticsMap = statistics.getStatisticsMap();
 
-        assertThat(statisticsMap.get(LottoMatchType.SIX)).isEqualTo(1);
-        assertThat(statisticsMap.get(LottoMatchType.FIVE)).isEqualTo(1);
-        assertThat(statisticsMap.get(LottoMatchType.THREE)).isEqualTo(2);
+        assertThat(statisticsMap.get(LottoMatchType.FIRST)).isEqualTo(1);
+        assertThat(statisticsMap.get(LottoMatchType.THIRD)).isEqualTo(1);
+        assertThat(statisticsMap.get(LottoMatchType.FIFTH)).isEqualTo(2);
         assertThat(statisticsMap.get(LottoMatchType.MISS)).isEqualTo(1);
     }
 

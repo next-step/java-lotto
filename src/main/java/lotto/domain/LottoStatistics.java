@@ -25,7 +25,7 @@ public class LottoStatistics {
     public void summary(Lottos buyLotto, LottoNumbers winLotto) {
         buyLotto.mapToInt(winLotto)
                 .forEach(k -> {
-                    LottoMatchType matchType = LottoMatchType.findMatchCount(k);
+                    LottoMatchType matchType = LottoMatchType.findMatchCount(k, false); // TODO 하드 코딩 제거
                     profitMoney += matchType.getWinMoney();
                     statisticsMap.put(matchType, statisticsMap.getOrDefault(matchType, DEFAULT_SUMMARY_VALUE) + SUMMARY_INCREASE_VALUE);
                 });
