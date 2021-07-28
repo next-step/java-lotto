@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.IllegalLottoNumberException;
 
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -11,14 +12,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final int number;
+    private static final LottoNumber[] lottoNumberCache = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .toArray(LottoNumber[]::new);
 
     public LottoNumber(int number) {
-        validate(number);
         this.number = number;
     }
 
     public static LottoNumber of(String number) {
-        return new LottoNumber(Integer.parseInt(number));
+        int parseInt = Integer.parseInt(number);
+        validate(parseInt);
+        if (lottoNumberCache[parseInt] != null) {
+            return lottoNumberCache[parseInt];
+        }
+        return new LottoNumber(parseInt);
     }
 
     public int initNumber() {
@@ -48,7 +56,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return this.number - number.initNumber();
     }
 
-    private void validate(int number) {
+    private static void validate(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalLottoNumberException(number);
         }
