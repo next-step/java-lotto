@@ -8,7 +8,7 @@ import lotto.auto.strategy.AutoLotto;
 
 import java.util.List;
 
-public class ConsoleApp {
+public final class ConsoleApp {
     public static void main(String[] args) {
         LottoMachine lottoMachine = LottoMachine.from(AutoLotto.init());
 
