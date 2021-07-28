@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,8 +19,13 @@ public class LottoTest {
     })
     @ParameterizedTest
     public void lottoTest_생성자(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers =
+                numbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toSet());
+
         assertThat(
-                new Lotto(numbers)
+                new Lotto(lottoNumbers)
         ).isNotNull();
     }
 
@@ -31,8 +38,8 @@ public class LottoTest {
     })
     @ParameterizedTest
     public void lottoTest_생성자_유효성에러(List<Integer> numbers) {
-        assertThatThrownBy(() -> {
-            lottoTest_생성자(numbers);
-        })
+        assertThatThrownBy(() ->
+            lottoTest_생성자(numbers)
+        );
     }
 }
