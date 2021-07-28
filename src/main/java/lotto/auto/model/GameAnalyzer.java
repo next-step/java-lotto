@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static lotto.auto.context.ConstantContext.GAME_PRICE;
 
-public class GameAnalyzer {
+public final class GameAnalyzer {
     private final List<LottoGame> lottoGames;
 
     private GameAnalyzer(final List<LottoGame> lottoGames) {

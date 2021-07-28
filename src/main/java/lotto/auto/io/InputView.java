@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.stream;
 
-public class InputView {
+public final class InputView {
     private static final String DELIMITER = ", ";
     private static final String INPUT_PAYMENT_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";

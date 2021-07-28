@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 import static lotto.auto.context.ConstantContext.GAME_PRICE;
 
-public class TicketMaster {
+public final class TicketMaster {
     private final LottoRule lottoRule;
 
     private TicketMaster(final LottoRule lottoRule) {

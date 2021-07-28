@@ -9,7 +9,7 @@ import java.util.Map;
 import static lotto.auto.context.ConstantContext.EARNINGS_RATE_KEY;
 import static lotto.auto.context.ConstantContext.MATCH_TABLE_KEY;
 
-public class LottoMachine {
+public final class LottoMachine {
     private final TicketMaster ticketMaster;
 
     private LottoMachine(final LottoRule lottoRule) {

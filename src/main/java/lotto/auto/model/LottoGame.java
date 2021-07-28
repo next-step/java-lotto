@@ -3,7 +3,7 @@ package lotto.auto.model;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoGame {
+public final class LottoGame {
     private final List<Integer> tickets;
 
     private LottoGame(final List<Integer> tickets) {

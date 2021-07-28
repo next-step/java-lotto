@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static lotto.auto.context.ConstantContext.*;
 
-public class ResultView {
+public final class ResultView {
     private static final String NEW_LINE = System.lineSeparator();
     private static final String DISPLAY_PURCHASES_COUNT_FORMAT = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계" + NEW_LINE + "---------";

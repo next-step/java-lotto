@@ -1,6 +1,6 @@
 package lotto.auto.context;
 
-public class ConstantContext {
+public final class ConstantContext {
     public static final String MATCH_TABLE_KEY = "matchTable";
     public static final String EARNINGS_RATE_KEY = "earningsRateKey";
 
