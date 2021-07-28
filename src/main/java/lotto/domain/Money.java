@@ -4,7 +4,7 @@ import lotto.exception.OutOfRangeException;
 
 import java.util.Objects;
 
-public class Money extends Number {
+public final class Money extends Number {
     private final int value;
 
     private static final int MIN_VALUE = 0;
@@ -13,6 +13,10 @@ public class Money extends Number {
         this.value = value;
 
         validNumber();
+    }
+
+    public Money division(Money money) {
+        return new Money(this.value / money.value);
     }
 
     public static Money empty() {

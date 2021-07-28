@@ -4,7 +4,7 @@ import lotto.exception.OutOfRangeException;
 
 import java.util.Objects;
 
-public class LottoNumber extends Number {
+public final class LottoNumber extends Number {
     private final int value;
 
     public static final int MIN_VALUE = 1;

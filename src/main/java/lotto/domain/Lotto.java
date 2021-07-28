@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto implements Iterable<LottoNumber> {
+public final class Lotto implements Iterable<LottoNumber> {
     private final Set<LottoNumber> values;
 
     private static final int LOTTO_NUMBER_SIZE = 6;
