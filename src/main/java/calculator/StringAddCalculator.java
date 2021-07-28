@@ -17,10 +17,8 @@ public class StringAddCalculator {
             return 0;
         }
 
-        // int result = 0;
-
         List<Integer> numbers = split(input);
-        // result = sum(numbers);
+
         // 숫자인지아닌지 사이즈비교
 
         return sum(numbers);
@@ -43,7 +41,7 @@ public class StringAddCalculator {
     }
 
     private static void addByIsNumber(String input, List<Integer> numbers) {
-        if(input.matches(IS_NUMBER_REGEX)) {
+        if (input.matches(IS_NUMBER_REGEX)) {
             numbers.add(Integer.parseInt(input));
         }
     }
@@ -51,7 +49,7 @@ public class StringAddCalculator {
     private static int sum(List<Integer> numbers) {
         int result = 0;
 
-        for(int number : numbers) {
+        for (int number : numbers) {
             result += number;
         }
 
