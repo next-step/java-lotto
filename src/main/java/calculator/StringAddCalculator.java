@@ -8,11 +8,7 @@ public class StringAddCalculator {
 
 	private static final int NULL_OR_EMPTY_RESULT = 0;
 	private static final int SINGLE_NUMBER = 1;
-	private static final int INDEX_OF_CUSTOM_DELIMITER = 1;
-	private static final int INDEX_OF_NUMBERS = 2;
 	private static final int ZERO = 0;
-	private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-	private static final String DELIMITER = "[,:]";
 	private static final String MESSAGE_INVALID_NUMBER = "유효하지 않은 숫자입니다.";
 
 	private StringAddCalculator() {
@@ -27,16 +23,7 @@ public class StringAddCalculator {
 			return Integer.parseInt(inputText);
 		}
 
-		return sum(split(inputText));
-	}
-
-	private static String[] split(String inputText) {
-		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(inputText);
-		if (matcher.find()) {
-			String customDelimiter = matcher.group(INDEX_OF_CUSTOM_DELIMITER);
-			return matcher.group(INDEX_OF_NUMBERS).split(customDelimiter);
-		}
-		return inputText.split(DELIMITER);
+		return sum(Splitter.split(inputText));
 	}
 
 	private static int sum(String[] numbers) {
