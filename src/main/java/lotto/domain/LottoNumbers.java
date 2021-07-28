@@ -12,21 +12,21 @@ public class LottoNumbers {
     private static final Pattern SEPARATE_PATTERN = Pattern.compile(",");
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        this(toLottoNumbers(lottoNumbers));
-    }
-
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         lottoNumberCountValidate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        this(toLottoNumbers(lottoNumbers));
+    }
+
     public static LottoNumbers of(String separateNumber) {
         separateValidate(separateNumber);
         String[] split = SEPARATE_PATTERN.split(separateNumber);
-        List<Integer> list = Arrays.stream(split)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        Set<LottoNumber> list = Arrays.stream(split)
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new));
 
         return new LottoNumbers(list);
     }
