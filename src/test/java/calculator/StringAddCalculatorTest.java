@@ -18,7 +18,7 @@ class StringAddCalculatorTest {
 	}
 
 	@DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
-	@ValueSource(strings = {"1", "2", "3"})
+	@ValueSource(strings = {"0", "1", "2", "3"})
 	@ParameterizedTest
 	void oneNumber(String inputText) {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(Integer.parseInt(inputText));
@@ -31,7 +31,7 @@ class StringAddCalculatorTest {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(3);
 	}
 
-	@DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+	@DisplayName("구분자로 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
 	@ValueSource(strings = "1,2:3")
 	@ParameterizedTest
 	void colonAsDelimiter(String inputText) {
@@ -39,14 +39,14 @@ class StringAddCalculatorTest {
 	}
 
 	@DisplayName("'//'와 '\n' 문자 사이에 커스텀 구분자를 지정할 수 있다.")
-	@ValueSource(strings = "//;\n1;2;3")
+	@ValueSource(strings = {"//;\n1;2;3", "//@\n1@2@3"})
 	@ParameterizedTest
 	void customDelimiter(String inputText) {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
 	}
 
 	@DisplayName("음수 또는 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생한다.")
-	@ValueSource(strings = {"-1,2,3", "a,b,c", "1,a,-1"})
+	@ValueSource(strings = {"-1,2,3", "a,b,c", "1,a,-1", ",-1,a"})
 	@ParameterizedTest
 	void invalidInputText(String inputText) {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(inputText))
