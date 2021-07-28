@@ -15,10 +15,8 @@ public class ResultView {
     public static void printWinningStatistics(Map<Integer, Integer> matchLottoCounts) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.printf("3개 일치 (%d원)- %d개%n", LottoPrizeMoney.findByMatchNumberCount(3), matchLottoCounts.get(3));
-        System.out.printf("4개 일치 (%d원)- %d개%n", LottoPrizeMoney.findByMatchNumberCount(4), matchLottoCounts.get(4));
-        System.out.printf("5개 일치 (%d원)- %d개%n", LottoPrizeMoney.findByMatchNumberCount(5), matchLottoCounts.get(5));
-        System.out.printf("6개 일치 (%d원)- %d개%n", LottoPrizeMoney.findByMatchNumberCount(6), matchLottoCounts.get(6));
+        matchLottoCounts.keySet().forEach(
+            key -> System.out.printf("%d개 일치 (%d원)- %d개%n", key, LottoPrizeMoney.findByMatchNumberCount(3), matchLottoCounts.get(3)));
     }
 
     public static void printEarningRate(double earningRate) {
