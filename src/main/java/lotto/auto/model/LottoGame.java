@@ -1,7 +1,7 @@
 package lotto.auto.model;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoGame {
     private final List<Integer> tickets;
@@ -11,14 +11,15 @@ public class LottoGame {
     }
 
     public static LottoGame from(final List<Integer> tickets) {
+        Objects.requireNonNull(tickets);
         return new LottoGame(tickets);
     }
 
-    public Iterator<Integer> iterator() {
-        return tickets.iterator();
+    public boolean contains(int number) {
+        return tickets.contains(number);
     }
 
-    public int size(){
+    public int size() {
         return tickets.size();
     }
 
