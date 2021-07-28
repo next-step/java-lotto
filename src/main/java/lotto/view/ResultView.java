@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoMatchType;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.Map;
 
@@ -18,8 +15,8 @@ public class ResultView {
         lottoTickets.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatistics(Lottos buyLotto, LottoNumbers winLotto) {
-        statistics.summary(buyLotto, winLotto);
+    public static void printStatistics(Lottos buyLotto, LottoBonus lottoBonus) {
+        statistics.summary(buyLotto, lottoBonus);
         System.out.println("당첨 통계");
         System.out.println("---------");
 

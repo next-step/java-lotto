@@ -22,10 +22,10 @@ public class LottoStatistics {
         return statisticsMap;
     }
 
-    public void summary(Lottos buyLotto, LottoNumbers winLotto) {
-        buyLotto.mapToInt(winLotto)
+    public void summary(Lottos buyLotto, LottoBonus lottoBonus) {
+        buyLotto.mapToResult(lottoBonus)
                 .forEach(k -> {
-                    LottoMatchType matchType = LottoMatchType.findMatchCount(k, false); // TODO 하드 코딩 제거
+                    LottoMatchType matchType = LottoMatchType.findMatchCount(k.getCount(), k.isMatchBonus());
                     profitMoney += matchType.getWinMoney();
                     statisticsMap.put(matchType, statisticsMap.getOrDefault(matchType, DEFAULT_SUMMARY_VALUE) + SUMMARY_INCREASE_VALUE);
                 });

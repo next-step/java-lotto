@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -21,8 +21,8 @@ public class Lottos {
         return new Lottos(buy.getLottoTickets());
     }
 
-    public IntStream mapToInt(LottoNumbers winLotto) {
+    public Stream<LottoResult> mapToResult(LottoBonus lottoBonus) {
         return lottoNumbers.stream()
-                .mapToInt(s -> s.match(winLotto));
+                .map(lottoBonus::toResult);
     }
 }
