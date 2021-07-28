@@ -14,12 +14,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AdditionStringTest {
     @ValueSource(strings = {
+            "//=\n1=2:3",   // 금지된 커스텀 구분자
+            "//-\n1,2-3",   // 금지된 커스텀 구분자
             "1,:3,4,2",     // 숫자 이외
             "1;3,4,2",      // 숫자 이외
             "1,2,3,-1,4"    // 음수
     })
     @ParameterizedTest
-    public void intValue_숫자이외_음수(String formula) {
+    public void intValue_금지된커스텀구분자_숫자이외_음수(String formula) {
         assertThatThrownBy(() ->
             new AdditionString(formula).intValue()
         ).isInstanceOf(InvalidFormulaException.class);
