@@ -6,11 +6,11 @@ import java.util.List;
 public class LottoGame {
     private final List<Integer> tickets;
 
-    private LottoGame(List<Integer> tickets) {
+    private LottoGame(final List<Integer> tickets) {
         this.tickets = tickets;
     }
 
-    public static LottoGame from(List<Integer> tickets) {
+    public static LottoGame from(final List<Integer> tickets) {
         return new LottoGame(tickets);
     }
 

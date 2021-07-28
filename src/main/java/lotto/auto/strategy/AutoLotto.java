@@ -10,7 +10,7 @@ import static java.util.Collections.sort;
 import static java.util.stream.IntStream.rangeClosed;
 
 public final class AutoLotto implements LottoRule {
-    private List<Integer> tickets;
+    private final List<Integer> tickets;
 
     private AutoLotto() {
         this.tickets = new ArrayList<>();
