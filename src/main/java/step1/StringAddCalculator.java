@@ -5,17 +5,22 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+
+    public static final String REGEX = "//(.)\n(.*)";
+    private static Pattern pattern = Pattern.compile(REGEX);
+    ;
+
     public static int splitAndSum(String express) {
-        if(express == null || "".equals(express)){
+        if (express == null || "".equals(express)) {
             return 0;
         }
         return calculate(express);
     }
 
     private static int calculate(String express) {
-        try{
+        try {
             return Integer.valueOf(express);
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             return calculateString(express);
         }
     }
@@ -23,14 +28,14 @@ public class StringAddCalculator {
     private static int calculateString(String express) {
         String[] numbers = splitString(express);
         int result = 0;
-        for(String number : numbers){
+        for (String number : numbers) {
             result = addNumber(result, number);
         }
         return result;
     }
 
-    private static String[] splitString(String express){
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(express);
+    private static String[] splitString(String express) {
+        Matcher m = pattern.matcher(express);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
@@ -39,7 +44,7 @@ public class StringAddCalculator {
     }
 
     private static int addNumber(int result, String number) {
-        if(!validation(number)){
+        if (!validation(number)) {
             throw new RuntimeException("입력값이 올바르지 않습니다. 0이상의 숫자와 구분값만 입력 가능합니다.");
         }
         result += Integer.valueOf(number);
@@ -48,12 +53,12 @@ public class StringAddCalculator {
 
     private static boolean validation(String number) {
         int num = 0;
-        try{
+        try {
             num = Integer.valueOf(number);
-            if(num < 0){
+            if (num < 0) {
                 return false;
             }
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             return false;
         }
         return true;
