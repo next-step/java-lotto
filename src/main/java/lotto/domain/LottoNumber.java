@@ -7,6 +7,8 @@ public class LottoNumber extends Number {
 
     public LottoNumber(int value) {
         this.value = value;
+
+        validNumber();
     }
 
     private void validNumber() {
@@ -17,21 +19,21 @@ public class LottoNumber extends Number {
 
     @Override
     public int intValue() {
-        return 0;
+        return value;
     }
 
     @Override
     public long longValue() {
-        return 0;
+        return intValue();
     }
 
     @Override
     public float floatValue() {
-        return 0;
+        return intValue();
     }
 
     @Override
     public double doubleValue() {
-        return 0;
+        return intValue();
     }
 }
