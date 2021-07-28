@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,11 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
+    @DisplayName("newManual Test")
     @ValueSource(strings = {
             "1,10,20,30,40,45"
     })
     @ParameterizedTest
-    public void lottoTest_수동생성(String strNumbers) {
+    public void newManualTest(String strNumbers) {
         Set<LottoNumber> lottoNumbers = Arrays.stream(strNumbers.split(","))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
@@ -32,20 +34,21 @@ public class LottoTest {
         ).isNotNull();
     }
 
-    // Lotto의 size 메소드를 테스트 후 제거할것
+    @DisplayName("newManual Test - OutOfSizeException")
     @ValueSource(strings = {
             "1,2,3,4,5",
             "1,2,3,4,5,6,7"
     })
     @ParameterizedTest
-    public void lottoTest_수동생성_OutOfSizeException(String strNumbers) {
+    public void newManualTest_OutOfSizeException(String strNumbers) {
         assertThatThrownBy(() ->
-                lottoTest_수동생성(strNumbers)
+                newManualTest(strNumbers)
         ).isInstanceOf(OutOfSizeException.class);
     }
 
+    @DisplayName("newAuto Test")
     @Test
-    public void lottoTest_자동생성() {
+    public void newAutoTest() {
         Lotto.newAuto();
     }
 }

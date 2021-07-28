@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,11 @@ public final class LottoList {
     }
 
     public static LottoList newAuto(int size) {
-        return null;
+        List<Lotto> newValues = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            newValues.add(Lotto.newAuto());
+        }
+        return new LottoList(newValues);
     }
 
     public int size() {
