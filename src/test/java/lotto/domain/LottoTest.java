@@ -21,14 +21,14 @@ public class LottoTest {
             "1,10,20,30,40,45"
     })
     @ParameterizedTest
-    public void lottoTest_생성자(String strNumbers) {
+    public void lottoTest_수동생성(String strNumbers) {
         Set<LottoNumber> lottoNumbers = Arrays.stream(strNumbers.split(","))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
         assertThat(
-                new Lotto(lottoNumbers)
+                Lotto.newManual(lottoNumbers)
         ).isNotNull();
     }
 
@@ -38,9 +38,14 @@ public class LottoTest {
             "1,2,3,4,5,6,7"
     })
     @ParameterizedTest
-    public void lottoTest_생성자_유효성에러_OutOfSizeException(String strNumbers) {
+    public void lottoTest_수동생성_OutOfSizeException(String strNumbers) {
         assertThatThrownBy(() ->
-                lottoTest_생성자(strNumbers)
+                lottoTest_수동생성(strNumbers)
         ).isInstanceOf(OutOfSizeException.class);
+    }
+
+    @ParameterizedTest
+    public void lottoTest_자동생성() {
+        Lotto.newAuto();
     }
 }
