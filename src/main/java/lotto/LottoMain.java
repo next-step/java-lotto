@@ -12,6 +12,8 @@ public class LottoMain {
 		LottoMachine lottoMachine = new LottoMachine();
 		List<LottoTicket> lottoTickets = lottoMachine.issueLottoTickets(InputView.inputPrice());
 		InputView.showLottoTickets(lottoTickets);
+
+		String winningNumbers = InputView.inputWinningNumbers();
 	}
 
 }
