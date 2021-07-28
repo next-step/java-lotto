@@ -2,9 +2,7 @@ package stringaddcalculator;
 
 import stringaddcalculator.exception.InvalidFormulaException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +35,9 @@ public final class AdditionString extends Number {
 
         String parsedFormula = matcher.group("FORMULA");
         String customDelimiter = matcher.group("DELIMITER");
+
+        if (Objects.nonNull(customDelimiter))
+            validCustomDelimiter(customDelimiter);
 
         String replaceFormat = String.format(DELIMITER_REPLACE_FORMAT, customDelimiter);
         return parsedFormula.split(replaceFormat);
