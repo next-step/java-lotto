@@ -36,8 +36,16 @@ class StringAddCalculatorTest {
 
     @DisplayName("숫자 두개를 컴마(,)을 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
-    @CsvSource(value = {"7,8:15", "5,5:10", "10,20:30"}, delimiter = ':')
+    @CsvSource(value = {"7,8$15", "5,5$10", "10,20$30"}, delimiter = '$')
     void splitAndSum_쉼표구분자(String input, int output) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(output);
+    }
+
+    @DisplayName("숫자 두개를 콜론(:)을 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"7:8$15", "5:5$10", "10:20$30"}, delimiter = '$')
+    void splitAndSum_쉼표_또는_콜론_구분자(String input, int output) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(output);
     }
