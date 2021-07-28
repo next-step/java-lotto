@@ -2,9 +2,9 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,7 +29,7 @@ class StringAddCalculatorTest {
 	}
 
 	@DisplayName("숫자 2개를 구분자(,)로 입력할 경우 두 숫자의 합을 반환한다.")
-	@CsvSource(value = {"1,2=3", "4,5=9"}, delimiter = '=')
+	@CsvSource(value = {"1,2=3", "4,5=9"}, delimiter = DELIMITER)
 	@ParameterizedTest
 	void twoNumber(String inputText, int result) {
 		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(result);
@@ -43,10 +43,10 @@ class StringAddCalculatorTest {
 	}
 
 	@DisplayName("'//'와 '\n' 문자 사이에 커스텀 구분자를 지정할 수 있다.")
-	@ValueSource(strings = {"//;\n1;2;3", "//@\n1@2@3"})
+	@MethodSource("customDelimiterArguments")
 	@ParameterizedTest
-	void customDelimiter(String inputText) {
-		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(6);
+	void customDelimiter(String inputText, int result) {
+		assertThat(StringAddCalculator.splitAndSum(inputText)).isEqualTo(result);
 	}
 
 	@DisplayName("음수 또는 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생한다.")
@@ -55,6 +55,13 @@ class StringAddCalculatorTest {
 	void invalidInputText(String inputText) {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(inputText))
 			.isInstanceOf(RuntimeException.class);
+	}
+
+	private static Stream<Arguments> customDelimiterArguments() {
+		return Stream.of(
+				Arguments.of("//;\n1;2;3", 6),
+				Arguments.of("//@\n4@5@6", 15)
+		);
 	}
 
 }
