@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import stringaddcalculator.exception.InvalidFormulaException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,50 +22,47 @@ public class AdditionStringTest {
     public void intValue_숫자이외_음수(String formula) {
         assertThatThrownBy(() ->
             new AdditionString(formula).intValue()
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(InvalidFormulaException.class);
     }
 
     @Test
     public void intValue_빈문자열_Null() {
         String[] formulas = new String[] {
                 " ", "       ", null
-        }
+        };
         for (String iFormula : formulas) {
             assertThat(
                     new AdditionString(iFormula).intValue()
-            ).isEqualsTo(0);
+            ).isEqualTo(0);
         }
     }
 
-    @ValueSource(ints = {
+    @ValueSource(strings = {
             "1",
             "12",
-            "123"
+            "123",
+            "12",
+            "2000"
     })
     @ParameterizedTest
-    public void intValue_숫자하나(int number) {
-        assertThat(
-                new AdditionString(
-                        String.valueOf(number)
-                ).intValue()
-        ).isEqualsTo(number);
-    }
-
-    @CsvSource(value = {
-            "1:3,4,2=10"
-    }, delimiter = '=')
-    @ParameterizedTest
-    public void intValue_구분자_콜론(String formula, int result) {
+    public void intValue_숫자하나(String formula) {
         assertThat(
                 new AdditionString(formula).intValue()
-        ).isEqualsTo(result);
+        ).isEqualTo(Integer.parseInt(formula));
+    }
+
+    @Test
+    public void intValue_구분자_콜론() {
+        assertThat(
+                new AdditionString("1:3,4,2").intValue()
+        ).isEqualTo(10);
     }
 
     @Test
     public void intValue_커스텀구분자() {
         Map<String, Integer> formulaAndResultMap = new HashMap<>();
         formulaAndResultMap.put("//$\n1$2$3,4:5", 15);
-        formulaAndResultMap.put("//;\\n1;2;3", 6);
+        formulaAndResultMap.put("//;\n1;2;3", 6);
 
         for (Map.Entry<String, Integer> iEntry : formulaAndResultMap.entrySet()) {
             String iFormula = iEntry.getKey();
@@ -72,7 +70,7 @@ public class AdditionStringTest {
 
             assertThat(
                     new AdditionString(iFormula).intValue()
-            ).isEqualsTo(iResult);
+            ).isEqualTo(iResult);
         }
     }
 }
