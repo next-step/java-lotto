@@ -3,13 +3,20 @@ package lotto.view;
 import lotto.domain.Money;
 
 public class FakeInputView implements InputView {
-    private int intMoney;
-    public FakeInputView(int intMoney) {
+    private final int intMoney;
+    private final String prizeNumbers;
+    public FakeInputView(int intMoney, String prizeNumbers) {
         this.intMoney = intMoney;
+        this.prizeNumbers = prizeNumbers;
     }
 
     @Override
-    public Money inputMoney() {
-        return new Money(intMoney);
+    public int inputMoney() {
+        return intMoney;
+    }
+
+    @Override
+    public String inputPrizeNumbers() {
+        return prizeNumbers;
     }
 }

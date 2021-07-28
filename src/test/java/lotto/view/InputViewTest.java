@@ -16,9 +16,18 @@ class InputViewTest {
             10000
     })
     @ParameterizedTest
-    public void inputMoney(int intMoney) {
-        Money expertMoney = new Money(intMoney);
-        assertThat(new FakeInputView(intMoney).inputMoney())
-                .isEqualTo(expertMoney);
+    public void inputViewTest_구매할금액(int intMoney) {
+        assertThat(new FakeInputView(intMoney, "").inputMoney())
+                .isEqualTo(intMoney);
+    }
+
+    @ValueSource(strings = {
+            "1,2,3,4,5,6",
+            "11,22,33,44,45"
+    })
+    @ParameterizedTest
+    public void inputViewTest_당첨로또번호(String strPrizeNumbers) {
+        assertThat(new FakeInputView(0, strPrizeNumbers).inputPrizeNumbers())
+                .isEqualTo(strPrizeNumbers);
     }
 }

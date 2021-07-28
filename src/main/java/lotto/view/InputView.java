@@ -1,7 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Money;
 
 public interface InputView {
-    Money inputMoney();
+    int inputMoney();
+
+    String inputPrizeNumbers();
 }
