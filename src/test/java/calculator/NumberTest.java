@@ -14,7 +14,7 @@ class NumberTest {
     @Test
     void create() {
         Number number = new Number("1");
-        assertThat(number.getNumber()).isEqualTo(1);
+        assertThat(number.intValue()).isEqualTo(1);
     }
 
     @DisplayName("음수 또는 숫자가 아닌 문자가 전달되면 RuntimeException 예외가 발생한다.")

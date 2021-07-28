@@ -40,7 +40,7 @@ public class Number {
         return Integer.parseInt(number);
     }
 
-    public int getNumber() {
+    public int intValue() {
         return number;
     }
 }

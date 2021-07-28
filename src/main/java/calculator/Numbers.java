@@ -26,13 +26,13 @@ public class Numbers {
 
     public int sum() {
         return numbers.stream()
-                .mapToInt(Number::getNumber)
+                .mapToInt(Number::intValue)
                 .sum();
     }
 
     public List<Integer> getNumbers() {
         return numbers.stream()
-                .map(Number::getNumber)
+                .map(Number::intValue)
                 .collect(Collectors.toList());
     }
 }
