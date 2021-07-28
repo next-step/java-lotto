@@ -10,7 +10,7 @@ public class StringAddCalculator {
     private static final String CUSTOM_SPLIT_PATTERN = "//(.)\n(.*)";
     private static final String ERROR_MSG = "0 이상의 숫자를 입력해주세요.";
 
-    public int splitAndSum(String input) {
+    public int calculate(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
