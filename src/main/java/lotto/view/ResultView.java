@@ -23,7 +23,7 @@ public class ResultView {
         Map<LottoMatchType, Integer> statisticsMap = statistics.getStatisticsMap();
         for (LottoMatchType type : LottoMatchType.values()) {
             Integer matchCount = getMatchCount(statisticsMap.get(type));
-            System.out.println(type.getMatchCount() + "개 일치 (" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
+            System.out.println(type.getMatchCount() + "개 일치"+ type.getDescription()+ "(" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
         }
         profitPrint(statistics.profitRate(buyLotto));
     }

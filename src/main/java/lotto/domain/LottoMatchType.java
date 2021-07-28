@@ -4,20 +4,22 @@ import java.util.Arrays;
 
 public enum LottoMatchType {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    MISS(0, 0, ""),
+    FIFTH(3, 5_000, ""),
+    FOURTH(4, 50_000, ""),
+    THIRD(5, 1_500_000, ""),
+    SECOND(5, 30_000_000, ", 보너스 볼 일치"),
+    FIRST(6, 2_000_000_000, "");
 
-    LottoMatchType(int matchCount, int winMoney) {
+    LottoMatchType(int matchCount, int winMoney, String description) {
         this.matchCount = matchCount;
         this.winMoney = winMoney;
+        this.description = description;
     }
 
     private final int matchCount;
     private final int winMoney;
+    private final String description;
 
     public int getWinMoney() {
         return winMoney;
@@ -25,6 +27,10 @@ public enum LottoMatchType {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public static LottoMatchType findMatchCount(int count, boolean matchBonus) {
