@@ -22,8 +22,7 @@ class NumberTest {
     @ParameterizedTest
     void invalidNumber(String number) {
         assertThatThrownBy(() -> new Number(number))
-            .isInstanceOf(RuntimeException.class)
-            .hasMessageContaining(Number.MESSAGE_INVALID_NUMBER);
+            .isInstanceOf(RuntimeException.class);
     }
 
 }

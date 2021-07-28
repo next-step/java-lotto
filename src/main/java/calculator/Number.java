@@ -1,8 +1,11 @@
 package calculator;
 
+import calculator.exception.EmptyNumberException;
+import calculator.exception.NegativeNumberException;
+import calculator.exception.NonNumericNumberException;
+
 public class Number {
 
-    public static final String MESSAGE_INVALID_NUMBER = "유효하지 않은 숫자입니다";
     private static final int ZERO = 0;
 
     private final int number;
@@ -14,8 +17,26 @@ public class Number {
     }
 
     private void validateNumber(String number) {
-        if (isEmpty(number) || !isNumeric(number) || isNegative(number)) {
-            throw new RuntimeException(String.format("%s: %s", MESSAGE_INVALID_NUMBER, number));
+        validateNumberIsEmpty(number);
+        validateNumberIsNumeric(number);
+        validateNumberIsNegative(number);
+    }
+
+    private void validateNumberIsNegative(String number) {
+        if (isNegative(number)) {
+            throw new NegativeNumberException(number);
+        }
+    }
+
+    private void validateNumberIsNumeric(String number) {
+        if (!isNumeric(number)) {
+            throw new NonNumericNumberException(number);
+        }
+    }
+
+    private void validateNumberIsEmpty(String number) {
+        if (isEmpty(number)) {
+            throw new EmptyNumberException(number);
         }
     }
 

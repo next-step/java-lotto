@@ -54,8 +54,7 @@ class StringAddCalculatorTest {
 	@ParameterizedTest
 	void invalidInputText(String inputText) {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum(inputText))
-			.isInstanceOf(RuntimeException.class)
-			.hasMessageContaining(Number.MESSAGE_INVALID_NUMBER);
+			.isInstanceOf(RuntimeException.class);
 	}
 
 	private static Stream<Arguments> customDelimiterArguments() {
