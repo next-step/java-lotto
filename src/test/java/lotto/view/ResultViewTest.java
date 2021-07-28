@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoFactory;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,10 +15,10 @@ class ResultViewTest {
 
     public static Stream<Arguments> validLotto() {
         return Stream.of(
-            Arguments.of(Arrays.asList(LottoFactory.createRandom(),
-                LottoFactory.createRandom(),
-                LottoFactory.createRandom(),
-                LottoFactory.createRandom()
+            Arguments.of(Arrays.asList(LottoFactory.createNormal(),
+                LottoFactory.createNormal(),
+                LottoFactory.createNormal(),
+                LottoFactory.createNormal()
             )));
     }
 

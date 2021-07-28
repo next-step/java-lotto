@@ -1,12 +1,12 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.exception.InvalidLottoNumberException;
+import lotto.domain.lotto.exception.InvalidLottoNumberException;
 
-public class Lotto {
+public abstract class Lotto {
 
-    private final List<Integer> numbers;
+    protected final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validationNumbers(numbers);

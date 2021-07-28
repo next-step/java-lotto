@@ -1,10 +1,11 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.exception.InvalidLottoNumberException;
-import org.junit.jupiter.api.Assertions;
+import lotto.domain.lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,7 +30,7 @@ class LottoTest {
         // given
 
         // when
-        Assertions.assertThrows(InvalidLottoNumberException.class, () -> new Lotto(numbers));
+        assertThrows(InvalidLottoNumberException.class, () -> new NormalLotto(numbers));
 
         // then
 

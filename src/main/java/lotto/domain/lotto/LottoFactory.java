@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static lotto.common.Properties.LOTTO_NUMBER_COUNT;
 import static lotto.common.Properties.LOTTO_NUMBER_MAX;
@@ -15,17 +15,17 @@ public class LottoFactory {
         .boxed()
         .collect(Collectors.toList());
 
-    public static Lotto createRandom() {
+    public static Lotto createNormal() {
         Collections.shuffle(numbers);
         List<Integer> randomNumbers = numbers.stream()
             .limit(LOTTO_NUMBER_COUNT)
             .collect(Collectors.toList());
 
-        return new Lotto(randomNumbers);
+        return new NormalLotto(randomNumbers);
     }
 
     public static Lotto createWinning(List<Integer> numbers) {
-        return new Lotto(numbers);
+        return new WinningLotto(numbers);
     }
 
     public static boolean isValid(List<Integer> checkNumbers) {

@@ -1,4 +1,4 @@
-package lotto.domain.exception;
+package lotto.domain.lotto.exception;
 
 public class InvalidLottoNumberException extends RuntimeException {
 
