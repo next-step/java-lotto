@@ -50,23 +50,16 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(output);
     }
 
-
-
-    /*
     @DisplayName("\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정하여 사용")
-    @ParameterizedTest
-    @CsvSource(value = {"7:8$15", "5:5$10", "10:20$30"}, delimiter = '$')
+    @Test
     void splitAndSum_custom_구분자() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+        result = StringAddCalculator.splitAndSum("//&\n4&6&8");
+        assertThat(result).isEqualTo(18);
     }
 
-    @Test
-    void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
-    }
-
+    /*
     @Test
     void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
