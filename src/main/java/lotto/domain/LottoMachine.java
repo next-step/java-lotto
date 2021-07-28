@@ -28,7 +28,7 @@ public class LottoMachine {
 
 	public List<LottoTicket> issueLottoTickets(int price) {
 		return IntStream.range(FIRST_INDEX, numberOfLottoTickets(price))
-				.mapToObj(index -> new LottoTicket())
+				.mapToObj(index -> new LottoTicket(pickRandomNumbers()))
 				.collect(Collectors.toList());
 	}
 
