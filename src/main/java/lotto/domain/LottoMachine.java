@@ -18,11 +18,10 @@ public class LottoMachine {
 		this.numbers = initializeNumbers();
 	}
 
-	public List<Integer> pickRandomNumbers() {
+	public List<LottoNumber> pickRandomNumbers() {
 		Collections.shuffle(numbers);
 		return IntStream.range(FIRST_INDEX, SIXTH_INDEX)
-				.mapToObj(numbers::get)
-				.sorted()
+				.mapToObj(index -> new LottoNumber(numbers.get(index)))
 				.collect(Collectors.toList());
 	}
 
