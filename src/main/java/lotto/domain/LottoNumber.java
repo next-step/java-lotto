@@ -5,6 +5,9 @@ import lotto.exception.OutOfRangeException;
 public class LottoNumber extends Number {
     private final int value;
 
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
+
     public LottoNumber(int value) {
         this.value = value;
 
@@ -12,7 +15,7 @@ public class LottoNumber extends Number {
     }
 
     private void validNumber() {
-        if (value < 1 || value > 45) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new OutOfRangeException();
         }
     }

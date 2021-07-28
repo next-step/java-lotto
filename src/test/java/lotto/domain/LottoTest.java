@@ -44,7 +44,7 @@ public class LottoTest {
         ).isInstanceOf(OutOfSizeException.class);
     }
 
-    @ParameterizedTest
+    @Test
     public void lottoTest_자동생성() {
         Lotto.newAuto();
     }
