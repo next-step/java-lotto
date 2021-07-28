@@ -25,7 +25,7 @@ public enum LottoPrizeMoney {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoPrizeMoney find(int matchNumberCount) {
-        return map.get(matchNumberCount);
+    public static long findByMatchNumberCount(int matchNumberCount) {
+        return map.get(matchNumberCount).prizeMoney;
     }
 }

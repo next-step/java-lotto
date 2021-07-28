@@ -8,9 +8,9 @@ public class WinningLotto extends Lotto {
         super(numbers);
     }
 
-    public long matchNumberCount(Lotto lotto) {
-        return lotto.numbers.stream()
+    public int matchNumberCount(Lotto lotto) {
+        return Math.toIntExact(lotto.numbers.stream()
             .filter(numbers::contains)
-            .count();
+            .count());
     }
 }

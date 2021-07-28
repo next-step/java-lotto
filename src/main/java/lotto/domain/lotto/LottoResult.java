@@ -1,19 +1,19 @@
 package lotto.domain.lotto;
 
 import static lotto.common.Properties.LOTTO_PRICE;
-import static lotto.common.Properties.LOTTO_PRIZE_MONEYS;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.common.LottoPrizeMoney;
 
 public class LottoResult {
 
-    private final Map<Long, Integer> matchLottoCounts = new HashMap<Long, Integer>() {{
-        put(3L, 0);
-        put(4L, 0);
-        put(5L, 0);
-        put(6L, 0);
+    private final Map<Integer, Integer> matchLottoCounts = new HashMap<Integer, Integer>() {{
+        put(3, 0);
+        put(4, 0);
+        put(5, 0);
+        put(6, 0);
     }};
     private final double earningRate;
 
@@ -28,13 +28,13 @@ public class LottoResult {
 
     private double calculateEarningRate(int purchaseLottoCount) {
         long prizeMoney = matchLottoCounts.keySet().stream()
-            .mapToLong(key -> LOTTO_PRIZE_MONEYS.get(key) * matchLottoCounts.get(key))
+            .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
             .sum();
 
         return prizeMoney / (double) (LOTTO_PRICE * purchaseLottoCount);
     }
 
-    public Map<Long, Integer> getMatchLottoCounts() {
+    public Map<Integer, Integer> getMatchLottoCounts() {
         return matchLottoCounts;
     }
 
