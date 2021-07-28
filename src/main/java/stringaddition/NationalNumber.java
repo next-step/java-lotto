@@ -7,7 +7,7 @@ public class NationalNumber {
 	public void isValid(String s) {
 		validateText(s);
 		if (isNegative(s)) {
-			throw new SplitException();
+			throw new NationalNumberException();
 		}
 	}
 
@@ -19,7 +19,7 @@ public class NationalNumber {
 		try {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
-			throw new SplitException("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
+			throw new NationalNumberException("숫자가 아닌 문자를 포함하는 문자열은 계산할 수 없습니다.");
 		}
 	}
 

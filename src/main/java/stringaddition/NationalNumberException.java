@@ -1,14 +1,14 @@
 package stringaddition;
 
-public class SplitException extends RuntimeException {
+public class NationalNumberException extends RuntimeException {
 
 	private static final String DEFAULT_MESSAGE = "음수를 포함한 문자열은 계산할 수 없습니다.";
 
-	public SplitException() {
+	public NationalNumberException() {
 		super(DEFAULT_MESSAGE);
 	}
 
-	public SplitException(String message) {
+	public NationalNumberException(String message) {
 		super(message);
 	}
 
