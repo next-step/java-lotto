@@ -8,8 +8,10 @@ public class StringSplitter {
 	private static final String[] ZERO = {"0"};
 	private static final String DELIMITER = "[,:]";
 	private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+	private static final int CUSTOM_DELIMITER_GROUP = 1;
+	private static final int CUSTOM_TEXT_GROUP = 2;
 
-	private NationalNumber nationalNumber = new NationalNumber();
+	private final NationalNumber nationalNumber = new NationalNumber();
 
 	public String[] split(String text) {
 		if (isBlank(text)) {
@@ -25,8 +27,8 @@ public class StringSplitter {
 	private String[] customSplit(String text) {
 		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
 		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			return matcher.group(2).split(customDelimiter);
+			String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP);
+			return matcher.group(CUSTOM_TEXT_GROUP).split(customDelimiter);
 		}
 		return text.split(DELIMITER);
 	}
