@@ -29,9 +29,17 @@ public class NaturalNumberTest {
     }
 
     @Test
-    @DisplayName("팩토리 메서드에 숫자 외의 String 값을 인자로 주었을 때")
+    @DisplayName("숫자 외의 String 값을 인자로 주었을 때")
     void valueOf_non_numerical_input() {
         assertThatThrownBy(() -> NaturalNumber.valueOf("asdf")).isInstanceOf(
                 RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("덧셈 구현")
+    void add() {
+        NaturalNumber one = NaturalNumber.valueOf(1);
+        NaturalNumber two = NaturalNumber.valueOf(2);
+        assertThat(NaturalNumber.sum(one, two)).isEqualTo(NaturalNumber.valueOf(3));
     }
 }

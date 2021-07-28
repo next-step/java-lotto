@@ -29,6 +29,14 @@ public class NaturalNumber {
         }
     }
 
+    public static NaturalNumber sum(NaturalNumber a, NaturalNumber b) {
+        return NaturalNumber.valueOf(a.number + b.number);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
