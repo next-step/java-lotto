@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String DELIMITER = "[,:]";
+    public static final String DEFAULT_DELIMITERS = "[,:]";
     public static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
     public static final int CUSTOM_DELIMITER_GROUP = 1;
     public static final int TEXT_GROUP = 2;
@@ -27,7 +27,7 @@ public class StringAddCalculator {
             String customDelimiter = m.group(CUSTOM_DELIMITER_GROUP);
             return m.group(TEXT_GROUP).split(customDelimiter);
         }
-        return text.split(DELIMITER);
+        return text.split(DEFAULT_DELIMITERS);
     }
 
     private static boolean isNullOrEmpty(String text) {
