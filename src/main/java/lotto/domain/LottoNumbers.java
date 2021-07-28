@@ -38,7 +38,7 @@ public class LottoNumbers {
     public int match(LottoNumbers lottoTickets) {
         Set<LottoNumber> buyTicket = lottoTickets.getLottoNumbers();
         return (int) buyTicket.stream()
-                .filter(this.lottoNumbers::contains)
+                .filter(this::contains)
                 .count();
     }
 
