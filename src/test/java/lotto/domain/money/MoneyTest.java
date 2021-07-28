@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.money;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,5 +23,15 @@ class MoneyTest {
     public void should_throw_exception_input_value_under_than_lowest_amount() throws Exception {
         //arrange, act, assert
         assertThatIllegalArgumentException().isThrownBy(() -> Money.of(100));
+    }
+
+    @DisplayName("로또가격 (천원)과 비교하여 현재 Money로 몇개를 살수 있는지 count한다")
+    @Test
+    public void should_get_available_purchase_count() throws Exception {
+        //arrange
+        Money money = Money.of(14000);
+
+        //act, assert
+        assertThat(money.getPurchasableQuantity(Money.of(1000))).isEqualTo(14);
     }
 }

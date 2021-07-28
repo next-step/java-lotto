@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.money;
 
 public class Money {
     private static final int LOWEST_AMOUNT = 1000;
@@ -17,6 +17,14 @@ public class Money {
         if (money < LOWEST_AMOUNT) {
             throw new IllegalArgumentException(LOWEST_AMOUNT + " 보다 작을 수 없습니다.");
         }
+    }
+
+    public int getPurchasableQuantity(Money price) {
+        return amount / price.getAmount();
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     @Override
