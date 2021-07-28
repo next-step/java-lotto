@@ -16,9 +16,9 @@ class InputViewTest {
             10000
     })
     @ParameterizedTest
-    public void inputMoney(int money) {
-        Money expertMoney = new Money(money);
-        assertThat(new FakeInputView(money).inputMoney())
+    public void inputMoney(int intMoney) {
+        Money expertMoney = new Money(intMoney);
+        assertThat(new FakeInputView(intMoney).inputMoney())
                 .isEqualTo(expertMoney);
     }
 }

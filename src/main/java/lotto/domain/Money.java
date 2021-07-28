@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.exception.OutOfRangeException;
 
+import java.util.Objects;
+
 public class Money extends Number {
     private final int value;
 
@@ -41,6 +43,24 @@ public class Money extends Number {
     @Override
     public double doubleValue() {
         return intValue();
+    }
+
+    @Override
+    public boolean equals(Object compareValue) {
+        if (this == compareValue) return true;
+        if (compareValue == null || getClass() != compareValue.getClass()) return false;
+        Money money = (Money) compareValue;
+        return value == money.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 
     private static class InnerClazz {
