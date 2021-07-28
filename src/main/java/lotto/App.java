@@ -1,19 +1,12 @@
-package racing;
+package lotto;
 
-import racing.domain.Players;
-import racing.service.RacingGame;
-import racing.view.InputView;
-import racing.view.GameResultView;
+import lotto.view.InputView;
 
 public class App {
 
     public static void main(String[] args) {
-        Players players = InputView.inputPlayersOfCar();
-        int countNumber = InputView.inputNumberOfCount();
+        int price = InputView.inputPurchaseMoney();
 
-        RacingGame racingGame = RacingGame.initialize(players, countNumber);
-        GameResultView resultView = racingGame.playGame();
 
-        resultView.printResult();
     }
 }

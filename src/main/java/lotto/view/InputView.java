@@ -1,35 +1,22 @@
-package racing.view;
-
-import racing.domain.CarNameException;
-import racing.domain.Players;
+package lotto.view;
 
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String INPUT_PLAYERS_OF_CAR = "경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).";
-    private static final String INPUT_NUMBER_OF_COUNT = "시도할 회수는 몇 회 인가요?";
+    private static final String INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
 
     private InputView() {
     }
 
-    public static Players inputPlayersOfCar() {
-        System.out.println(INPUT_PLAYERS_OF_CAR);
+    public static int inputPurchaseMoney() {
+        System.out.println(INPUT_PURCHASE_MONEY);
 
-        try {
-            return InputCarPlayer.createPlayers(scanner.nextLine());
-        } catch (CarNameException exception) {
-            System.out.println(exception.getMessage());
-            return inputPlayersOfCar();
-        }
+        return changeIntInputValue();
     }
 
-    public static int inputNumberOfCount() {
-        System.out.println(INPUT_NUMBER_OF_COUNT);
-        return getNextInt();
+    private static int changeIntInputValue() {
+        return Integer.parseInt(scanner.nextLine().trim());
     }
 
-    private static int getNextInt() {
-        return scanner.nextInt();
-    }
 }
