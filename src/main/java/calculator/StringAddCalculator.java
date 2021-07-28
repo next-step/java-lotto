@@ -7,39 +7,48 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    public static final int NULL_OR_EMPTY = 0;
+    public static final int INITIAL_VALUE = 0;
+    public static final int GET_FIRST_GROUP = 1;
+    public static final int GET_SECOND_GROUP = 2;
     public static final String IS_NUMBER_REGEX = "[0-9]+";
     public static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
     public static final Pattern CUSTOM_SEPARATOR = Pattern.compile("//(.)\n(.*)");
+    public static final String IS_NOT_DUAL_NUMBER_ERROR_MESSAGE = "입력 값이 음수이거나 숫자가 아닙니다.";
 
-    public StringAddCalculator() {
+    private StringAddCalculator() {
     }
 
     public static int splitAndSum(String input) {
-        // validate
-        if (input == null || input.isEmpty()) {
-            return 0;
+        if (isNullOrEmpty(input)) {
+            return NULL_OR_EMPTY;
         }
 
-        // 숫자인지아닌지 사이즈비교
+        String[] splitInputs = split(input);
+        List<Integer> numbers = parsingNumber(splitInputs);
 
-        List<Integer> numbers = split(input);
+        validateNumbers(splitInputs, numbers);
 
         return sum(numbers);
     }
 
-    private static List<Integer> split(String input) {
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
+    private static String[] split(String input) {
         Matcher matcher = CUSTOM_SEPARATOR.matcher(input);
 
         if (matcher.find()) {
-            return parsingNumber(splitByCustomSeparator(matcher));
+            return splitByCustomSeparator(matcher);
         }
 
-        return parsingNumber(splitByDefaultSeparator(input));
+        return splitByDefaultSeparator(input);
     }
 
     private static String[] splitByCustomSeparator(Matcher matcher) {
-        String customDelimiter = matcher.group(1);
-        return matcher.group(2).split(customDelimiter);
+        String customDelimiter = matcher.group(GET_FIRST_GROUP);
+        return matcher.group(GET_SECOND_GROUP).split(customDelimiter);
     }
 
     private static String[] splitByDefaultSeparator(String input) {
@@ -62,8 +71,14 @@ public class StringAddCalculator {
         }
     }
 
+    private static void validateNumbers(String[] splitInputs, List<Integer> numbers) {
+        if (splitInputs.length != numbers.size()) {
+            throw new RuntimeException(IS_NOT_DUAL_NUMBER_ERROR_MESSAGE);
+        }
+    }
+
     private static int sum(List<Integer> numbers) {
-        int result = 0;
+        int result = INITIAL_VALUE;
 
         for (int number : numbers) {
             result += number;

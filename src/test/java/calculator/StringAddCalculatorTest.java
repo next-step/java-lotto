@@ -7,14 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class StringAddCalculatorTest {
-
-    @Test
-    void create() {
-        StringAddCalculator stringAddCalculator = new StringAddCalculator();
-        assertThat(stringAddCalculator).isInstanceOf(StringAddCalculator.class);
-    }
 
     @DisplayName("null 또는 빈 문자일 경우 0을 반환")
     @Test
@@ -28,10 +23,10 @@ class StringAddCalculatorTest {
 
     @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환")
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 5, 9})
-    void splitAndSum_숫자하나() {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    @ValueSource(strings = {"0", "1", "5", "9"})
+    void splitAndSum_숫자하나(String input) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(Integer.parseInt(input));
     }
 
     @DisplayName("숫자 두개를 컴마(,)을 구분자로 입력할 경우 두 숫자의 합을 반환")
@@ -44,7 +39,7 @@ class StringAddCalculatorTest {
 
     @DisplayName("숫자 두개를 콜론(:)을 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
-    @CsvSource(value = {"7:8:5$20", "3:2,5$10","5:5$10", "10:20$30"}, delimiter = '$')
+    @CsvSource(value = {"7:8:5$20", "3:2,5$10", "5:5$10", "10:20$30"}, delimiter = '$')
     void splitAndSum_쉼표_또는_콜론_구분자(String input, int output) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(output);
@@ -59,12 +54,12 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(18);
     }
 
-    /*
-    @Test
-    void splitAndSum_negative() throws Exception {
+    @DisplayName("음수 또는 숫자 이외의 값을 입력할 경우 RuntimeException 예외를 throw")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "a,b,c", "//;\n1;2;a"})
+    public void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class).withFailMessage("입력 값이 음수이거나 숫자가 아닙니다.");
     }
-    */
 
 }
