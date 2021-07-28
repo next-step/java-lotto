@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +23,14 @@ class StringAddCalculatorTest {
 
         result = StringAddCalculator.splitAndSum("");
         assertThat(result).isEqualTo(0);
+    }
+
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 5, 9})
+    void splitAndSum_숫자하나() {
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
     }
 
     /*
