@@ -2,7 +2,9 @@ package stringaddcalculator;
 
 import stringaddcalculator.exception.InvalidFormulaException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +12,7 @@ import java.util.regex.Pattern;
 public final class AdditionString extends Number {
     private final String formula;
 
+    private static final String FORBIDDEN_CUSTOM_DELIMITERS = "=-";
     private static final String DELIMITER_REPLACE_FORMAT = "[,:%s]";
     private static final Pattern CUSTOM_DELIMITER = Pattern.compile(
             "^(//(?<DELIMITER>.)\\n)?(?<FORMULA>.*)$"
@@ -19,7 +22,8 @@ public final class AdditionString extends Number {
     }
 
     private void validCustomDelimiter(String delimiter) {
-
+        if (FORBIDDEN_CUSTOM_DELIMITERS.contains(delimiter))
+            throw new InvalidFormulaException(delimiter + " 문자는 커스텀 구분자로 사용할 수 없습니다.");
     }
 
     private boolean isEmptyFormula() {
