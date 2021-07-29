@@ -16,7 +16,7 @@ public class LottoFactory {
         .boxed()
         .collect(Collectors.toList());
 
-    public static Lotto createNormal() {
+    public static NormalLotto createNormal() {
         Collections.shuffle(numbers);
         List<Integer> randomNumbers = numbers.stream()
             .limit(LOTTO_NUMBER_COUNT)
@@ -25,7 +25,7 @@ public class LottoFactory {
         return new NormalLotto(randomNumbers);
     }
 
-    public static Lotto createWinning(List<Integer> numbers) {
+    public static WinningLotto createWinning(List<Integer> numbers) {
         return new WinningLotto(numbers);
     }
 

@@ -22,7 +22,7 @@ public class LottoMachineController {
     }
 
     private static WinningLotto createWinningLotto(List<Integer> integers) {
-        return (WinningLotto) LottoFactory.createWinning(integers);
+        return LottoFactory.createWinning(integers);
     }
 
     private static List<Lotto> createPurchasedLottos() {
