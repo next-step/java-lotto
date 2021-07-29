@@ -40,7 +40,9 @@ class LottoTicketTest {
 	}
 
 	private static Stream<Arguments> winningLottoNumbersArguments() {
-		return Stream.of(Arguments.of(WinningLottoNumbers.from("1,2,3,4,5,6"), Arrays.asList(1, 2, 3, 4, 5, 6)));
+		return Stream.of(
+			Arguments.of(WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)), Arrays.asList(1, 2, 3, 4, 5, 6))
+		);
 	}
 
 	private static Stream<Arguments> compareTwoLottoTicketsArguments() {

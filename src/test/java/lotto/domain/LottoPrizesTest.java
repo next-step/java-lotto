@@ -34,13 +34,13 @@ class LottoPrizesTest {
 	}
 
 	@DisplayName("총 수익률을 계산한다.")
-	@MethodSource("profitRateArguments")
+	@MethodSource("earningsRateArguments")
 	@ParameterizedTest
-	void profitRate(LottoPrizes lottoPrizes, int money, double profitRate) {
-		assertThat(lottoPrizes.profitRate(money)).isEqualTo(profitRate);
+	void earningsRate(LottoPrizes lottoPrizes, int money, double earningsRate) {
+		assertThat(lottoPrizes.earningsRate(money)).isEqualTo(earningsRate);
 	}
 
-	private static Stream<Arguments> profitRateArguments() {
+	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
 			Arguments.of(LottoPrizes.from(Arrays.asList(THREE_NUMBERS, FOUR_NUMBERS)), 100_000, 0.55),
 			Arguments.of(LottoPrizes.from(Arrays.asList(FOUR_NUMBERS, SIX_NUMBERS)), 200_000, 10_000.25)

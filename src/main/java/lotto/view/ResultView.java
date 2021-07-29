@@ -1,7 +1,6 @@
 package lotto.view;
 
-import static lotto.domain.LottoPrize.*;
-
+import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.LottoPrize;
@@ -12,10 +11,12 @@ import lotto.domain.LottoTickets;
 public class ResultView {
 
 	private static final String MESSAGE_BOUGHT_LOTTO_TICKET_COUNT = "%s개를 구매했습니다.%n";
-	private static final String MESSAGE_WINNING_STATISTICS = "당첨 통계\n---------\n";
+	private static final String MESSAGE_WINNING_STATISTICS = "\n당첨 통계\n---------";
 	private static final String MESSAGE_WINNING_LOTTO_TICKET_COUNT = "%d개 일치 (%d)원- %d개%n";
-	private static final String MESSAGE_TOTAL_PROFIT_RATE = "총 수익률은 %s입니다.";
+	private static final String MESSAGE_TOTAL_EARNINGS_RATE = "총 수익률은 %s입니다.";
 	private static final String DECIMAL_POINT = "%.2f";
+	public static final String MESSAGE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+	public static final String MESSAGE_PROFIT = "(개이득)";
 
 	private ResultView() {
 	}
@@ -28,14 +29,18 @@ public class ResultView {
 
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
-		for (LottoPrize lottoPrize : values()) {
-			LottoPrizes winningPrizes = totalLottoPrizes.countOf(lottoPrize);
-			printLottoPrizePerRank(winningPrizes, lottoPrize);
-		}
+		Arrays.stream(LottoPrize.values())
+			.filter(lottoPrize -> lottoPrize.prizeMoney() > 0)
+			.forEach(lottoPrize -> printLottoPrizePerRank(totalLottoPrizes.countOf(lottoPrize), lottoPrize));
 	}
 
-	public static void showProfitRate(double profitRate) {
-		System.out.printf(MESSAGE_TOTAL_PROFIT_RATE, String.format(DECIMAL_POINT, profitRate));
+	public static void showEarningsRate(double earningsRate) {
+		System.out.printf(MESSAGE_TOTAL_EARNINGS_RATE, String.format(DECIMAL_POINT, earningsRate));
+		if (earningsRate < 1) {
+			System.out.print(MESSAGE_LOSS);
+			return;
+		}
+		System.out.print(MESSAGE_PROFIT);
 	}
 
 	private static void printLottoPrizePerRank(LottoPrizes winningPrizes, LottoPrize lottoPrize) {

@@ -30,7 +30,7 @@ public class LottoPrizes {
 				.sum();
 	}
 
-	public double profitRate(int money) {
+	public double earningsRate(int money) {
 		return (double) winningMoney() / money;
 	}
 
