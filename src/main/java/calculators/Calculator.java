@@ -9,23 +9,27 @@ import java.util.stream.Collectors;
 public class Calculator {
 
     private final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+    private final String COMMA = ",";
+    private final String COLON = ":";
 
     public Integer calculate(String input) {
         List<Integer> numbers = splitNumbers(input);
         return numbers.stream().reduce(0, Integer::sum);
     }
 
-    private List<Integer> splitNumbers(String input) {
-        String separator = ":";
+    private List<Integer> splitNumbers(String text) {
+        String separator = COLON;
 
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = pattern.matcher(text);
+        String input = text;
 
         if (matcher.matches()) {
             separator = matcher.group(1);
             input = matcher.group(2);
         }
-        input = input.replaceAll(separator, ",");
-        String[] separatedInputs = input.split(",");
+
+        input = input.replaceAll(separator, COMMA);
+        String[] separatedInputs = input.split(COMMA);
 
         checkValidInput(separatedInputs);
 

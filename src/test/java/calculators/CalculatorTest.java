@@ -15,7 +15,6 @@ class CalculatorTest {
     @DisplayName("기본 구분자 입력받아 합 반환하기")
     void basicSeparator() {
         final String input = "1,2:3";
-
         Calculator c = new Calculator();
         int sum = c.calculate(input);
 
