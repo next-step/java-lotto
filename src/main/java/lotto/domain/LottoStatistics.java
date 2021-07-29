@@ -16,7 +16,7 @@ public final class LottoStatistics {
         float totalPrizeAmount = rankings.entrySet().stream()
                 .mapToInt(iEntrySet ->
                     iEntrySet.getKey().prizeAmount(
-                            iEntrySet.getValue().intValue()
+                            iEntrySet.getValue()
                     ).intValue()
                 ).sum();
         float totalPurchaseAmount = Lotto.PRICE.multiply(totalSize()).intValue();

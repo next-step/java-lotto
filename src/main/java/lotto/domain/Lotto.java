@@ -57,7 +57,15 @@ public final class Lotto implements Iterable<LottoNumber> {
     }
 
     public LottoRank rank(Lotto prizeLotto) {
-        return LottoRank.FIRST_PLACE;
+        return LottoRank.of(
+                containsCount(prizeLotto.values)
+        );
+    }
+
+    private int containsCount(Set<LottoNumber> lottoNumbers) {
+        return (int) values.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     /* 지금부터 Forward 메서드 */
