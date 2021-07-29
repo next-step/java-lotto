@@ -1,9 +1,7 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoPrize;
+import lotto.domain.LottoPrizes;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLottoNumbers;
@@ -20,7 +18,7 @@ public class LottoMain {
 		String winningNumbers = InputView.inputWinningNumbers();
 		LottoTicket winningLottoTicket = LottoTicket.from(WinningLottoNumbers.from(winningNumbers));
 
-		List<LottoPrize> lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
+		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 	}
 
 }
