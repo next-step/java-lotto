@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class InputView {
 
@@ -12,14 +13,15 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static int inputPrice() {
+	public static int inputMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
 		return SCANNER.nextInt();
 	}
 
-	public static void showLottoTickets(List<LottoTicket> lottoTickets) {
-		System.out.printf("%s개를 구매했습니다.%n", lottoTickets.size());
-		lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.getNumbers()));
+	public static void showLottoTickets(LottoTickets lottoTickets) {
+		List<LottoTicket> tickets = lottoTickets.getLottoTickets();
+		System.out.printf("%s개를 구매했습니다.%n", tickets.size());
+		tickets.forEach(lottoTicket -> System.out.println(lottoTicket.getNumbers()));
 	}
 
 	public static String inputWinningNumbers() {

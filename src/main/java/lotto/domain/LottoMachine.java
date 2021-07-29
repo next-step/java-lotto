@@ -25,14 +25,15 @@ public class LottoMachine {
 				.collect(Collectors.toList());
 	}
 
-	public List<LottoTicket> issueLottoTickets(int price) {
-		return IntStream.range(FIRST_INDEX, numberOfLottoTickets(price))
-				.mapToObj(index -> LottoTicket.from(pickRandomNumbers()))
-				.collect(Collectors.toList());
+	public LottoTickets issueLottoTickets(int money) {
+		List<LottoTicket> lottoTickets = IntStream.range(FIRST_INDEX, calculateLottoTicketCount(money))
+			.mapToObj(index -> LottoTicket.from(pickRandomNumbers()))
+			.collect(Collectors.toList());
+		return LottoTickets.from(lottoTickets);
 	}
 
-	private int numberOfLottoTickets(int price) {
-		return price / PRICE_PER_TICKET;
+	private int calculateLottoTicketCount(int money) {
+		return money / PRICE_PER_TICKET;
 	}
 
 	private List<Integer> initializeNumbers() {

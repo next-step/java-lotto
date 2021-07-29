@@ -23,9 +23,9 @@ class LottoMachineTest {
 	@DisplayName("로또 구입 금액을 입력하면 로또 발급 기계는 구입 금액에 해당하는 로또를 발급한다.")
 	@CsvSource(value = {"10000,10", "5500,5"})
 	@ParameterizedTest
-	void issueLottoTickets(int price, int numberOfLottoTickets) {
-		List<LottoTicket> lottoTickets = lottoMachine.issueLottoTickets(price);
-		assertThat(lottoTickets).hasSize(numberOfLottoTickets);
+	void issueLottoTickets(int money, int numberOfLottoTickets) {
+		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(money);
+		assertThat(lottoTickets.getLottoTickets()).hasSize(numberOfLottoTickets);
 	}
 
 }
