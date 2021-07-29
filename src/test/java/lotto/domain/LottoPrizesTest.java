@@ -29,8 +29,9 @@ class LottoPrizesTest {
 	@MethodSource("countLottoPrizesPerRankArguments")
 	@ParameterizedTest
 	void countLottoPrizesPerRank(LottoPrizes totalLottoPrizes, LottoPrize lottoPrize, int count, int winningMoney) {
-		assertThat(totalLottoPrizes.prizesOf(lottoPrize).size()).isEqualTo(count);
-		assertThat(totalLottoPrizes.prizesOf(lottoPrize).winningMoney()).isEqualTo(winningMoney);
+		LottoPrizes lottoPrizes = totalLottoPrizes.prizesOf(lottoPrize);
+		assertThat(lottoPrizes.size()).isEqualTo(count);
+		assertThat(lottoPrizes.winningMoney()).isEqualTo(winningMoney);
 	}
 
 	@DisplayName("총 수익률을 계산한다.")
