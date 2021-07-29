@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.util.DivisionNumber;
+import lotto.util.number.DivisionNumber;
+import lotto.util.number.MultiplicationNumber;
 
 import java.util.Map;
 
@@ -13,13 +14,13 @@ public final class LottoStatistics {
     }
 
     public DivisionNumber yield() {
-        float totalPrizeAmount = rankings.entrySet().stream()
-                .mapToInt(iEntrySet ->
+        Number totalPrizeAmount = rankings.entrySet().stream()
+                .mapToLong(iEntrySet ->
                     iEntrySet.getKey().prizeAmount(
                             iEntrySet.getValue()
-                    ).intValue()
+                    ).longValue()
                 ).sum();
-        float totalPurchaseAmount = Lotto.PRICE.multiply(totalSize()).intValue();
+        Number totalPurchaseAmount = new MultiplicationNumber(Lotto.PRICE, totalSize());
 
         return new DivisionNumber(totalPrizeAmount, totalPurchaseAmount);
     }

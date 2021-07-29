@@ -2,18 +2,14 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.exception.OutOfRangeException;
 import lotto.util.Money;
-import lotto.util.DivisionNumber;
+import lotto.util.number.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public final class LottoSolution {
     public static void main(String[] args) {

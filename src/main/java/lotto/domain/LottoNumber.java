@@ -5,18 +5,19 @@ import lotto.exception.OutOfRangeException;
 import java.util.Objects;
 
 public final class LottoNumber extends Number {
-    private final int value;
+    private final Number value;
 
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
 
-    public LottoNumber(int value) {
+    public LottoNumber(Number value) {
         this.value = value;
 
         validNumber();
     }
 
     private void validNumber() {
+        int value = intValue();
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new OutOfRangeException();
         }
@@ -24,22 +25,22 @@ public final class LottoNumber extends Number {
 
     @Override
     public int intValue() {
-        return value;
+        return value.intValue();
     }
 
     @Override
     public long longValue() {
-        return intValue();
+        return value.longValue();
     }
 
     @Override
     public float floatValue() {
-        return intValue();
+        return value.floatValue();
     }
 
     @Override
     public double doubleValue() {
-        return intValue();
+        return value.doubleValue();
     }
 
     @Override

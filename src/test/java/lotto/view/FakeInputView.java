@@ -1,16 +1,18 @@
 package lotto.view;
 
+import lotto.view.InputView;
+
 public class FakeInputView implements InputView {
-    private final long intMoney;
+    private final long longMoney;
     private final String prizeNumbers;
-    public FakeInputView(long intMoney, String prizeNumbers) {
-        this.intMoney = intMoney;
+    public FakeInputView(long longMoney, String prizeNumbers) {
+        this.longMoney = longMoney;
         this.prizeNumbers = prizeNumbers;
     }
 
     @Override
     public long inputMoney() {
-        return intMoney;
+        return longMoney;
     }
 
     @Override

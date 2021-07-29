@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.util.Money;
+import lotto.util.number.MultiplicationNumber;
 
 import java.util.Arrays;
 
@@ -28,11 +29,9 @@ public enum LottoRank {
     }
 
     public Money prizeAmount(Number count) {
-        return prizeAmount(count.intValue());
-    }
-
-    public Money prizeAmount(int count) {
-        return prizeAmount.multiply(count);
+        return new Money(
+                new MultiplicationNumber(prizeAmount, count)
+        );
     }
 
     public static LottoRank of(int matchesCount) {
