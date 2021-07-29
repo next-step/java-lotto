@@ -7,14 +7,14 @@ public class LottoNumber {
 
     private int value;
 
-    LottoNumber(int value){
-        validateValue();
-        this.value = value;
+    LottoNumber(int value) {
+        this.value = validateValue(value);
     }
 
-    private void validateValue(){
-        if(value < MIN_VALUE || value > MAX_VALUE){
+    private int validateValue(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException(FAIL_MESSAGE);
         }
+        return value;
     }
 }

@@ -13,7 +13,14 @@ class LottoNumberTest {
     @DisplayName("1-45 범위를 벗어나면 에러")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
-    void validateValue(int value){
-        assertThatThrownBy(()->new LottoNumber(value)).isInstanceOf(IllegalArgumentException.class);
+    void validateValue_fail(int value) {
+        assertThatThrownBy(() -> new LottoNumber(value)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("1-45 범위의 숫자 입력")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    void validateValue_success(int value) {
+        assertThat(new LottoNumber(value)).isNotNull();
     }
 }
