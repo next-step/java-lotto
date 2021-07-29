@@ -29,7 +29,7 @@ class LottoListTest {
     void statisticsTest(int size) {
         assertThat(
                 LottoList.newAuto(size)
-                        .statistics()
+                        .statistics(Lotto.newAuto())
                         .totalSize()
         ).isEqualTo(size);
     }

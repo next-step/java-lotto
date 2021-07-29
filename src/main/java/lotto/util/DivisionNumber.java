@@ -18,7 +18,7 @@ public class DivisionNumber extends Number {
 
     @Override
     public long longValue() {
-        return intValue();
+        return leftNumber.longValue() / rightNumber.longValue();
     }
 
     @Override

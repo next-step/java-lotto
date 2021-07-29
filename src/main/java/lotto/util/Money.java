@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Objects;
 
 public final class Money extends Number {
-    private final int value;
+    private final long value;
 
     private static final int MIN_VALUE = 0;
 
-    public Money(int value) {
+    public Money(long value) {
         this.value = value;
 
         validNumber();
@@ -23,26 +23,26 @@ public final class Money extends Number {
     }
 
     public Money addition(Number number) {
-        return addition(number.intValue());
+        return addition(number.longValue());
     }
 
-    public Money addition(int number) {
+    public Money addition(long number) {
         return new Money(this.value + number);
     }
 
     public Money division(Number number) {
-        return division(number.intValue());
+        return division(number.longValue());
     }
 
-    public Money division(int number) {
+    public Money division(long number) {
         return new Money(this.value / number);
     }
 
     public Money multiply(Number number) {
-        return multiply(number.intValue());
+        return multiply(number.longValue());
     }
 
-    public Money multiply(int number) {
+    public Money multiply(long number) {
         return new Money(this.value * number);
     }
 
@@ -58,22 +58,22 @@ public final class Money extends Number {
 
     @Override
     public int intValue() {
-        return value;
+        return (int) value;
     }
 
     @Override
     public long longValue() {
-        return intValue();
+        return value;
     }
 
     @Override
     public float floatValue() {
-        return intValue();
+        throw new ClassCastException("float 타입이 아닙니다.");
     }
 
     @Override
     public double doubleValue() {
-        return intValue();
+        throw new ClassCastException("double 타입이 아닙니다.");
     }
 
     @Override

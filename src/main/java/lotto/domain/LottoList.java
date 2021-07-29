@@ -1,12 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public final class LottoList {
+public final class LottoList implements Iterable<Lotto> {
     private final List<Lotto> values;
 
     private LottoList(List<Lotto> values) {
@@ -25,14 +22,19 @@ public final class LottoList {
         return new LottoList(newValues);
     }
 
-    public LottoStatistics statistics() {
+    public LottoStatistics statistics(Lotto prizeLotto) {
         Map<LottoRank, Long> data = this.values.stream().collect(
-                Collectors.groupingBy(Lotto::rank, Collectors.counting())
+                Collectors.groupingBy(iLotto -> iLotto.rank(prizeLotto), Collectors.counting())
         );
         return new LottoStatistics(data);
     }
 
     public int size() {
         return values.size();
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return values.iterator();
     }
 }

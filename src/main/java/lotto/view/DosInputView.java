@@ -27,7 +27,7 @@ public final class DosInputView implements InputView {
     }
 
     @Override
-    public int inputMoney() {
+    public long inputMoney() {
         return inputNumber(Text.INPUT_MONEY);
     }
 

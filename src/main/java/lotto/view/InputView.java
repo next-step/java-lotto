@@ -1,7 +1,7 @@
 package lotto.view;
 
 public interface InputView {
-    int inputMoney();
+    long inputMoney();
 
     String inputPrizeNumbers();
 }
