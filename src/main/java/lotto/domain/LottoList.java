@@ -10,6 +10,7 @@ public final class LottoList implements Iterable<Lotto> {
 
     private LottoList(List<Lotto> values) {
         this.values = values;
+        validSize();
     }
 
     public static LottoList newAuto(Number numberSize) {
