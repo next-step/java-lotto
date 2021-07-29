@@ -26,11 +26,12 @@ public class LottoGame {
         }
 
         List<Integer> correctNumbers = inputView.lastWeekendNumber();
+        int bonusNumber = inputView.bonusNumber();
 
         for (Lotto lotto: lottos) {
-            lottoMachine.lotteryJackpot(lotto, correctNumbers);
+            lottoMachine.lotteryJackpot(lotto, correctNumbers, bonusNumber);
         }
-        Map<String, Object> result = lottoMachine.lotteryRewards();
+        Map<String, Integer> result = lottoMachine.lotteryRewards();
 
         resultView.printResult(result, price);
     }

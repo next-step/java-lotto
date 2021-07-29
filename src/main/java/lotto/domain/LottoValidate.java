@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +8,6 @@ public class LottoValidate {
     private static final int REMAINDER_VALUE = 10;
 
     private int count = 0;
-    private int first = 0;
-    private int second = 0;
-    private int third = 0;
-    private int forth = 0;
 
     public int priceValidation(int price) {
         if (price % REMAINDER_VALUE != 0) {
@@ -29,13 +24,18 @@ public class LottoValidate {
         return (int) Math.floor(price / REFERENCE_PRICE);
     }
 
-    public void correctCheck(Lotto lotto, List<Integer> correctNumbers) {
+    public void correctCheck(Lotto lotto, List<Integer> correctNumbers, int bonusNumber) {
         count = 0;
         List<Integer> list = lotto.getLotto();
         for(int i = 0 ; i < correctNumbers.size(); i++) {
             getCorrectCount(list, correctNumbers, i);
         }
-        addRank(count);
+
+        bonusCheck(lotto, bonusNumber);
+    }
+
+    private void bonusCheck(Lotto lotto, int bonusNumber) {
+        Rank.valueOf(count, bonusNumCheck(lotto.getLotto(), bonusNumber));
     }
 
     private void getCorrectCount(List<Integer> list, List<Integer> correctNumbers, int index) {
@@ -44,31 +44,16 @@ public class LottoValidate {
         }
     }
 
-    private void addRank(int checkCount) {
-        switch (checkCount) {
-            case 6:
-                first++;
-                break;
-            case 5:
-                second++;
-                break;
-            case 4:
-                third++;
-                break;
-            case 3:
-                forth++;
-                break;
-            default:
-                break;
+    private boolean bonusNumCheck(List<Integer> list, int bonusNumber) {
+        if (list.contains(bonusNumber)) {
+            count++;
+            return true;
         }
+
+        return false;
     }
 
-    public Map<String, Object> lotteryRewards() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("first", first);
-        map.put("second", second);
-        map.put("third", third);
-        map.put("forth", forth);
-        return map;
+    public Map<String, Integer> lotteryRewards() {
+        return Rank.lotteryRewards();
     }
 }
