@@ -8,13 +8,13 @@ public class LottoNumber {
     private int value;
 
     LottoNumber(int value) {
-        this.value = validateValue(value);
+        validate(value);
+        this.value = value;
     }
 
-    private int validateValue(int value) {
+    private void validate(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException(FAIL_MESSAGE);
         }
-        return value;
     }
 }
