@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.util;
 
 import lotto.exception.OutOfRangeException;
 
+import java.util.List;
 import java.util.Objects;
 
 public final class Money extends Number {
@@ -13,6 +14,12 @@ public final class Money extends Number {
         this.value = value;
 
         validNumber();
+    }
+
+    public static Money sum(List<Money> moneyList) {
+        return new Money(moneyList.stream().mapToInt(
+                iMoney -> iMoney.intValue()
+        ).sum());
     }
 
     public Money addition(Number number) {

@@ -13,13 +13,15 @@ class LottoStatisticsTest {
     @DisplayName("yield Test")
     @Test
     void yield() {
-        Map<LottoRank, Integer> data = new HashMap<>();
-        data.put(LottoRank.FIRST_PLACE, 1);
-        data.put(LottoRank.SECOND_PLACE, 1);
-        data.put(LottoRank.THREE_PLACE, 1);
-        data.put(LottoRank.FOUR_PLACE, 1);
+        Long SIZE_ONE = (long) 1;
 
-        DivisionNumber expertMoney = new DivisionNumber(2000000000 + 1500000 +50000 + 5000, Lotto.PRICE.multiply(4));
+        Map<LottoRank, Long> data = new HashMap<>();
+        data.put(LottoRank.FIRST_PLACE, SIZE_ONE);
+        data.put(LottoRank.SECOND_PLACE, SIZE_ONE);
+        data.put(LottoRank.THREE_PLACE, SIZE_ONE);
+        data.put(LottoRank.FOUR_PLACE, SIZE_ONE);
+
+        DivisionNumber expertMoney = new DivisionNumber(2000000000 + 1500000 + 50000 + 5000, Lotto.PRICE.multiply(4));
         System.out.println(expertMoney.intValue());
 
         LottoStatistics lottoStatistics = new LottoStatistics(data);
@@ -33,9 +35,9 @@ class LottoStatisticsTest {
     @DisplayName("count Test")
     @Test
     void count() {
-        Map<LottoRank, Integer> data = new HashMap<>();
-        data.put(LottoRank.THREE_PLACE, 5);
-        data.put(LottoRank.FOUR_PLACE, 10);
+        Map<LottoRank, Long> data = new HashMap<>();
+        data.put(LottoRank.THREE_PLACE, (long) 5);
+        data.put(LottoRank.FOUR_PLACE, (long) 10);
 
         LottoStatistics lottoStatistics = new LottoStatistics(data);
         assertThat(lottoStatistics.size(LottoRank.THREE_PLACE))

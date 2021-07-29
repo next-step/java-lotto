@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.OutOfSizeException;
+import lotto.util.Money;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +44,10 @@ public final class Lotto implements Iterable<LottoNumber> {
             newNumbers.add(iterator.next());
         }
         return newNumbers;
+    }
+
+    public LottoRank rank() {
+        return LottoRank.FIRST_PLACE;
     }
 
     /* 지금부터 Forward 메서드 */

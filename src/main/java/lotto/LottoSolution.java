@@ -2,7 +2,8 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
-import lotto.domain.Money;
+import lotto.domain.LottoStatistics;
+import lotto.util.Money;
 import lotto.util.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;

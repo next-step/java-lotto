@@ -15,9 +15,22 @@ class LottoListTest {
             0, 10, 100
     })
     @ParameterizedTest
-    void newAutoText(int size) {
+    void newAutoTest(int size) {
         assertThat(
                 LottoList.newAuto(size).size()
+        ).isEqualTo(size);
+    }
+
+    @ValueSource(ints = {
+            0, 10, 100
+    })
+    @DisplayName("statistics Test")
+    @ParameterizedTest
+    void statisticsTest(int size) {
+        assertThat(
+                LottoList.newAuto(size)
+                        .statistics()
+                        .totalSize()
         ).isEqualTo(size);
     }
 }
