@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
     @DisplayName("생성자 테스트")
@@ -16,7 +15,8 @@ class LottoNumberTest {
     })
     @ParameterizedTest
     public void ctorTest(int number) {
-        assertThat(new LottoNumber(number).intValue())
+        //noinspection AssertBetweenInconvertibleTypes
+        assertThat(new LottoNumber(number))
                 .isEqualTo(number);
     }
 

@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.view.InputView;
-
 public class FakeInputView implements InputView {
     private final long longMoney;
     private final String prizeNumbers;

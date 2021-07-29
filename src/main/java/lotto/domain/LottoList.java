@@ -10,11 +10,8 @@ public final class LottoList implements Iterable<Lotto> {
         this.values = values;
     }
 
-    public static LottoList newAuto(Number size) {
-        return newAuto(size.intValue());
-    }
-
-    public static LottoList newAuto(int size) {
+    public static LottoList newAuto(Number numberSize) {
+        int size = numberSize.intValue();
         List<Lotto> newValues = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             newValues.add(Lotto.newAuto());
@@ -28,6 +25,8 @@ public final class LottoList implements Iterable<Lotto> {
         );
         return new LottoStatistics(data);
     }
+
+    /* 이하 Forward 메소드들 */
 
     public int size() {
         return values.size();

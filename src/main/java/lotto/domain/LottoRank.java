@@ -6,7 +6,7 @@ import lotto.util.number.MultiplicationNumber;
 import java.util.Arrays;
 
 public enum LottoRank {
-    LAST_PLACE  (2, new Money(0)),
+    LAST_PLACE  (new Money(0)),
     FOUR_PLACE  (3, new Money(5000)),
     THREE_PLACE (4, new Money(50000)),
     SECOND_PLACE(5, new Money(1500000)),
@@ -15,22 +15,20 @@ public enum LottoRank {
     private final int matchesCount;
     private final Money prizeAmount;
 
+    private static final String TO_STRING_FORMAT = "%s개 일치 (%s원)";
+
+    LottoRank(Money prizeAmount) {
+        this(-1, prizeAmount);
+    }
+
     LottoRank(int matchesCount, Money prizeAmount) {
         this.matchesCount = matchesCount;
         this.prizeAmount = prizeAmount;
     }
 
-    public int matchesCount() {
-        return matchesCount;
-    }
-
-    public Money prizeAmount() {
-        return prizeAmount;
-    }
-
-    public Money prizeAmount(Number count) {
+    public Money prizeAmount(Number lottoSize) {
         return new Money(
-                new MultiplicationNumber(prizeAmount, count)
+                new MultiplicationNumber(prizeAmount, lottoSize)
         );
     }
 
@@ -38,5 +36,12 @@ public enum LottoRank {
         return Arrays.stream(values()).filter(
                 iLottoRank -> iLottoRank.matchesCount == matchesCount
         ).findFirst().orElse(LAST_PLACE);
+    }
+
+    @Override
+    public String toString() {
+        return String.format(TO_STRING_FORMAT,
+                this.matchesCount, this.prizeAmount
+        );
     }
 }

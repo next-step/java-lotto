@@ -22,6 +22,6 @@ public final class MultiplicationNumber extends CalculationNumber {
 
     @Override
     public double doubleValue() {
-        return leftNumber.doubleValue() * leftNumber.doubleValue();
+        return leftNumber.doubleValue() * rightNumber.doubleValue();
     }
 }

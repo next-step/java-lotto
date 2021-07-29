@@ -10,9 +10,11 @@ import java.util.stream.IntStream;
 public final class Lotto implements Iterable<LottoNumber> {
     private final Set<LottoNumber> values;
 
+    public static final  Money  PRICE = new Money(1000);
+
     private static final String LOTTO_NUMBER_DELIMITER = ",";
-    public static final Money PRICE = new Money(1000);
-    private static final int NUMBER_SIZE = 6;
+    private static final int    NUMBER_SIZE = 6;
+
     private static final List<LottoNumber> NUMBER_TEMPLATE =
             IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
                     .mapToObj(LottoNumber::new)
@@ -68,7 +70,6 @@ public final class Lotto implements Iterable<LottoNumber> {
                 .count();
     }
 
-    /* 지금부터 Forward 메서드 */
     @Override
     public Iterator<LottoNumber> iterator() {
         return values.iterator();

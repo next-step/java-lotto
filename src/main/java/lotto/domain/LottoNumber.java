@@ -45,10 +45,10 @@ public final class LottoNumber extends Number {
 
     @Override
     public boolean equals(Object compareValue) {
-        if (this == compareValue) return true;
-        if (compareValue == null || getClass() != compareValue.getClass()) return false;
-        LottoNumber that = (LottoNumber) compareValue;
-        return value == that.value;
+        if (!(compareValue instanceof Number))
+            return false;
+        Number that = (Number) compareValue;
+        return intValue() == that.intValue();
     }
 
     @Override

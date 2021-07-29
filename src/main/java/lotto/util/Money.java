@@ -1,9 +1,8 @@
 package lotto.util;
 
-import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 
-import java.util.List;
+import java.util.Objects;
 
 @SuppressWarnings("SpellCheckingInspection")
 public final class Money extends Number {
@@ -45,5 +44,18 @@ public final class Money extends Number {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    @Override
+    public boolean equals(Object compareValue) {
+        if (!(compareValue instanceof Number))
+            return false;
+        Number thar = (Number) compareValue;
+        return value.longValue() == thar.longValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

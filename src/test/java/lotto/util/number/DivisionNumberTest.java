@@ -1,12 +1,10 @@
-package lotto.util;
+package lotto.util.number;
 
-import lotto.util.number.DivisionNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DivisionNumberTest {
-
     @Test
     void equalsTest() {
         assertThat(
@@ -26,5 +24,24 @@ class DivisionNumberTest {
                         new DivisionNumber(20, 8)
                 )
         ).isTrue();
+
+        assertThat(
+                new DivisionNumber(10, 4)
+        ).isEqualTo(2.5f);
+    }
+
+    @Test
+    void hashCodeTest() {
+        assertThat(
+                new DivisionNumber(10, 4).hashCode()
+        ).isEqualTo(
+                new DivisionNumber(25, 10).hashCode()
+        );
+
+        assertThat(
+                new DivisionNumber(40, 4).hashCode()
+        ).isEqualTo(
+                new DivisionNumber(20, 2).hashCode()
+        );
     }
 }
