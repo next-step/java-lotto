@@ -16,7 +16,7 @@ public final class LottoList implements Iterable<Lotto> {
     public static LottoList newAuto(Number numberSize) {
         int size = numberSize.intValue();
 
-        List<Lotto> newValues = new ArrayList<>(size);
+        List<Lotto> newValues = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             newValues.add(Lotto.newAuto());
         }
