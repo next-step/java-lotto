@@ -21,9 +21,14 @@ public class InputView {
         return lastLottos;
     }
 
+    public int bonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요");
+        return sc.nextInt();
+    }
+
     private List<Integer> makeCorrectNumber(String text) {
         return Arrays.stream(text.split(","))
-                     .map(str -> Integer.parseInt(str))
+                     .map(Integer::parseInt)
                      .collect(Collectors.toList());
     }
 }
