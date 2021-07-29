@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static lotto.common.Properties.LOTTO_PRICE;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class LottoResult {
     }
 
     public Map<Integer, Integer> getMatchLottoCounts() {
-        return matchLottoCounts;
+        return Collections.unmodifiableMap(matchLottoCounts);
     }
 
     public double getEarningRate() {
