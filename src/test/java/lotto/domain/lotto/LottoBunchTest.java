@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.lotto.number.LottoNumber;
+import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.prize.LottoPrize;
 import lotto.domain.prize.MatchResult;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ class LottoBunchTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        Lotto lotto = Lotto.of(lottoNumbers);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
 
         //act
         LottoBunch lottoBunch = LottoBunch.of(Arrays.asList(lotto));
@@ -64,7 +65,7 @@ class LottoBunchTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        Lotto lotto = Lotto.of(lottoNumbers);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
         List<LottoNumber> lottoNumbersFirst = Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
@@ -73,7 +74,7 @@ class LottoBunchTest {
                 LottoNumber.of(15),
                 LottoNumber.of(16)
         );
-        Lotto lottoFirst = Lotto.of(lottoNumbersFirst);
+        Lotto lottoFirst = Lotto.of(LottoNumbers.of(lottoNumbersFirst));
         LottoBunch lottoBunch = LottoBunch.of(Arrays.asList(lotto, lottoFirst));
         List<LottoNumber> winningLottoNumbers = Arrays.asList(
                 LottoNumber.of(1),
@@ -83,7 +84,7 @@ class LottoBunchTest {
                 LottoNumber.of(15),
                 LottoNumber.of(16)
         );
-        WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(winningLottoNumbers));
         Set<LottoPrize> expectedLottoPrize = new HashSet<>(Arrays.asList(LottoPrize.FOURTH, LottoPrize.FIRST));
         List<Long> expectedCount = Arrays.asList(1L, 1L);
 

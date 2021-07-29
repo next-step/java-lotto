@@ -18,13 +18,6 @@ class MoneyTest {
         assertThat(money).isEqualTo(Money.of(2000));
     }
 
-//    @DisplayName("입력 금액이 최저금액인 천원보다 작으면 IllegalArgumentException을 반환한다")
-//    @Test
-//    public void should_throw_exception_input_value_under_than_lowest_amount() throws Exception {
-//        //arrange, act, assert
-//        assertThatIllegalArgumentException().isThrownBy(() -> Money.of(100));
-//    }
-
     @DisplayName("로또가격 (천원)과 비교하여 현재 Money로 몇개를 살수 있는지 count한다")
     @Test
     public void should_get_available_purchase_count() throws Exception {

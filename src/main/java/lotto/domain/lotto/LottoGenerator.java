@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.lotto.Lotto.LOTTO_NUMBER_COUNT;
 import static lotto.domain.lotto.number.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.lotto.number.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.domain.lotto.number.LottoNumbers.LOTTO_NUMBER_COUNT;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_MAKER_INITIAL_INDEX = 0;

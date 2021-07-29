@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.lotto.number.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.money.Money;
 
 import java.util.Arrays;
@@ -26,11 +27,12 @@ public class InputView {
     public static WinningLotto inputWinningNumbers() {
         printStatement(INPUT_WINNING_NUMBERS_STATEMENT);
 
-        return WinningLotto.of(Arrays.stream(readNumbers())
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
+        return WinningLotto.of(
+                LottoNumbers.of(Arrays.stream(readNumbers())
+                        .map(String::trim)
+                        .mapToInt(Integer::parseInt)
+                        .mapToObj(LottoNumber::of)
+                        .collect(Collectors.toList())));
     }
 
     private static void printStatement(String statement) {

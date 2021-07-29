@@ -11,13 +11,20 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public static void main(String[] args) {
+        LottoBunch lottoBunch = purchaseLottoBunch();
+        calculateWinningStatistics(lottoBunch);
+    }
+
+    private static LottoBunch purchaseLottoBunch() {
         Money money = InputView.inputPurchaseMoney();
         LottoBunch lottoBunch = LottoService.purchase(money);
+        ResultView.printLottos(lottoBunch);
+        return lottoBunch;
+    }
 
+    private static void calculateWinningStatistics(LottoBunch lottoBunch) {
         WinningLotto winningLotto = InputView.inputWinningNumbers();
         MatchResult matchResult = LottoService.matchWinningNumber(lottoBunch, winningLotto);
-
-        ResultView.printLottos(lottoBunch);
         ResultView.printMatchResult(matchResult);
     }
 

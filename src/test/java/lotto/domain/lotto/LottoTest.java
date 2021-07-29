@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.lotto.number.LottoNumber;
+import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.prize.LottoPrize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class LottoTest {
         );
 
         //act
-        Lotto lotto = Lotto.of(lottoNumbers);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
 
         //assert
         assertThat(lotto.getLottoNumbers()).isEqualTo(lottoNumbers);
@@ -46,7 +47,7 @@ class LottoTest {
         );
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(LottoNumbers.of(lottoNumbers)));
     }
 
     @DisplayName("LottoNUmber 6개 보다 크면 IllegalArgumentException을 리턴한다")
@@ -64,7 +65,7 @@ class LottoTest {
         );
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(lottoNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(LottoNumbers.of(lottoNumbers)));
     }
 
     @DisplayName("WinningLottoNumber와 매치가 되면 LottoPrize 값을 반환한다 ")
@@ -79,7 +80,7 @@ class LottoTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         );
-        Lotto lotto = Lotto.of(lottoNumbers);
+        Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
         List<LottoNumber> winningLottoNumbers = Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
@@ -88,7 +89,7 @@ class LottoTest {
                 LottoNumber.of(15),
                 LottoNumber.of(16)
         );
-        WinningLotto winningLotto = WinningLotto.of(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(winningLottoNumbers));
 
         //act
         LottoPrize lottoPrize = lotto.match(winningLotto);

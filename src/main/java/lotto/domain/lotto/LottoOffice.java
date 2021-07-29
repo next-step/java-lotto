@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 
+import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.money.Money;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class LottoOffice {
     
     public LottoBunch purchase() {
         List<Lotto> lottos = Stream.generate(LottoGenerator::generate)
+                .map(LottoNumbers::of)
                 .map(Lotto::of)
                 .limit(money.getPurchasableQuantity(LOTTO_PRICE_OF_SINGLE))
                 .collect(Collectors.toList());
