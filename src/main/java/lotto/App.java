@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoBonus;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
@@ -12,12 +14,18 @@ public class App {
         ResultView.printBuyTicket(buyTickets);
 
         LottoNumbers winTicket = getWinTicket();
+        LottoNumber bonusNumber = getBonusNumber();
 
-        ResultView.printStatistics(buyTickets, winTicket);
+        ResultView.printStatistics(buyTickets, LottoBonus.of(winTicket, bonusNumber));
     }
 
     private static LottoNumbers getWinTicket() {
         return LottoNumbers.of(InputView.getInputWinNumbers());
+    }
+
+    private static LottoNumber getBonusNumber() {
+        String inputBonusNumber = InputView.getInputBonusNumber();
+        return LottoNumber.of(inputBonusNumber);
     }
 
     private static int buyTicket() {
