@@ -1,12 +1,9 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-
-	private static final String DELIMITER = ",";
 
 	private final List<LottoNumber> lottoNumbers;
 
@@ -20,12 +17,8 @@ public class LottoTicket {
 								.collect(Collectors.toList()));
 	}
 
-	public static LottoTicket from(String winningNumbers) {
-		String[] numbers = winningNumbers.trim().split(DELIMITER);
-		List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-											.map(number -> new LottoNumber(Integer.parseInt(number)))
-											.collect(Collectors.toList());
-		return new LottoTicket(lottoNumbers);
+	public static LottoTicket from(WinningLottoNumbers winningNumbers) {
+		return from(winningNumbers.getWinningNumbers());
 	}
 
 	public List<Integer> getNumbers() {
@@ -37,9 +30,8 @@ public class LottoTicket {
 
 	public LottoPrize compareTo(LottoTicket lottoTicket) {
 		long count = lottoNumbers.stream()
-			.filter(lottoTicket.lottoNumbers::contains)
-			.count();
-
+						.filter(lottoTicket.lottoNumbers::contains)
+						.count();
 		return LottoPrize.fromMatchCount(count);
 	}
 }
