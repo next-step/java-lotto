@@ -33,6 +33,20 @@ class LottoPrizesTest {
 		assertThat(totalLottoPrizes.countOf(lottoPrize).winningMoney()).isEqualTo(winningMoney);
 	}
 
+	@DisplayName("총 수익률을 계산한다.")
+	@MethodSource("profitRateArguments")
+	@ParameterizedTest
+	void profitRate(LottoPrizes lottoPrizes, int money, double profitRate) {
+		assertThat(lottoPrizes.profitRate(money)).isEqualTo(profitRate);
+	}
+
+	private static Stream<Arguments> profitRateArguments() {
+		return Stream.of(
+			Arguments.of(LottoPrizes.from(Arrays.asList(THREE_NUMBERS, FOUR_NUMBERS)), 100_000, 0.55),
+			Arguments.of(LottoPrizes.from(Arrays.asList(FOUR_NUMBERS, SIX_NUMBERS)), 200_000, 10_000.25)
+		);
+	}
+
 	private static Stream<Arguments> countLottoPrizesPerRankArguments() {
 		List<LottoPrize> totalLottoPrizes = createLottoPrizes();
 		return Stream.of(

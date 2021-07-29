@@ -34,6 +34,10 @@ public class ResultView {
 		}
 	}
 
+	public static void showProfitRate(double profitRate) {
+		System.out.printf(MESSAGE_TOTAL_PROFIT_RATE, String.format(DECIMAL_POINT, profitRate));
+	}
+
 	private static void printLottoPrizePerRank(LottoPrizes winningPrizes, LottoPrize lottoPrize) {
 		System.out.printf(MESSAGE_WINNING_LOTTO_TICKET_COUNT, lottoPrize.matchCount(), lottoPrize.prizeMoney(), winningPrizes.size());
 	}

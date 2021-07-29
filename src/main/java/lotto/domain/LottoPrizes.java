@@ -30,6 +30,10 @@ public class LottoPrizes {
 				.sum();
 	}
 
+	public double profitRate(int money) {
+		return (double) winningMoney() / money;
+	}
+
 	public int size() {
 		return lottoPrizes.size();
 	}

@@ -21,6 +21,7 @@ public class LottoMain {
 
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 		ResultView.showLottoPrizes(lottoPrizes);
+		ResultView.showProfitRate(lottoPrizes.profitRate(money));
 	}
 
 }
