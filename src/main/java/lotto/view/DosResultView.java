@@ -18,7 +18,7 @@ public class DosResultView implements ResultView {
     @Override
     public void printLottoStatistics(LottoStatistics lottoStatistics) {
         System.out.println(Text.RESULT_TITLE);
-        for (LottoRank iLottoRank : LottoRank.values()) {
+        for (LottoRank iLottoRank : LottoRank.displayRanks()) {
             System.out.println(
                     Text.LOTTO_RANK.format(
                             iLottoRank,

@@ -4,6 +4,8 @@ import lotto.util.Money;
 import lotto.util.number.MultiplicationNumber;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     LAST_PLACE  (new Money(0)),
@@ -36,6 +38,12 @@ public enum LottoRank {
         return Arrays.stream(values()).filter(
                 iLottoRank -> iLottoRank.matchesCount == matchesCount
         ).findFirst().orElse(LAST_PLACE);
+    }
+
+    public static List<LottoRank> displayRanks() {
+        return Arrays.stream(values())
+                .filter(iLottoRank -> iLottoRank.matchesCount > 0)
+                .collect(Collectors.toList());
     }
 
     @Override
