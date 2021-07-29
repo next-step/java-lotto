@@ -27,9 +27,11 @@ public enum LottoPrize {
 				.orElseThrow(IllegalArgumentException::new);
 	}
 
+	public long matchCount() {
+		return matchCount;
+	}
+
 	public int prizeMoney() {
 		return prizeMoney;
 	}
-
-
 }

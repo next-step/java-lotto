@@ -17,10 +17,6 @@ public class LottoPrizes {
 		return new LottoPrizes(lottoPrizes);
 	}
 
-	public int size() {
-		return lottoPrizes.size();
-	}
-
 	public LottoPrizes countOf(LottoPrize lottoPrize) {
 		List<LottoPrize> prizes = lottoPrizes.stream()
 									.filter(prize -> prize.equals(lottoPrize))
@@ -32,5 +28,9 @@ public class LottoPrizes {
 		return lottoPrizes.stream()
 				.mapToInt(LottoPrize::prizeMoney)
 				.sum();
+	}
+
+	public int size() {
+		return lottoPrizes.size();
 	}
 }
