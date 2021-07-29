@@ -5,6 +5,8 @@ import static java.util.stream.Collectors.*;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.exception.InvalidLottoNumberSizeException;
+
 public class WinningLottoNumbers {
 
 	private static final int VALID_NUMBER_SIZE = 6;
@@ -29,7 +31,7 @@ public class WinningLottoNumbers {
 
 	private void validateWinningNumbers(List<Integer> winningNumbers) {
 		if (hasInvalidSize(winningNumbers)) {
-			throw new IllegalArgumentException();
+			throw new InvalidLottoNumberSizeException();
 		}
 	}
 

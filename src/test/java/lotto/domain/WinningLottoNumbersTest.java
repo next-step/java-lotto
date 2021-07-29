@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import lotto.exception.InvalidLottoNumberSizeException;
+
 class WinningLottoNumbersTest {
 
 	@DisplayName("지난 주 당첨 번호 문자열로 새로운 객체를 생성한다.")
@@ -20,7 +22,7 @@ class WinningLottoNumbersTest {
 		assertThat(winningLottoNumbers.getWinningNumbers()).contains(1, 2, 3, 4, 5, 6).doesNotHaveDuplicates();
 	}
 
-	@DisplayName("지난 주 당첨 번호가 중복되거나, 6개보다 적거나 많으면 IllegalArgumentException 예외가 발생한다.")
+	@DisplayName("지난 주 당첨 번호가 중복되거나, 6개보다 적거나 많으면 InvalidLottoNumberSizeException 예외가 발생한다.")
 	@ValueSource(strings = {"1,2,3,4,5,5", "1,2,3,4,5", "1,2,3,4,5,6,7"})
 	@ParameterizedTest
 	void duplicateWinningNumbers(String winningNumbers) {
@@ -29,7 +31,7 @@ class WinningLottoNumbersTest {
 									.collect(toList());
 
 		assertThatThrownBy(() -> WinningLottoNumbers.from(numbers))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(InvalidLottoNumberSizeException.class);
 	}
 
 }

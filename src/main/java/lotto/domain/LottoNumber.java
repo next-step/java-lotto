@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.exception.InvalidLottoNumberException;
+
 public class LottoNumber {
 
 	private static final int START_NUMBER = 1;
@@ -20,7 +22,7 @@ public class LottoNumber {
 
 	private void validateNumber(int number) {
 		if (isInvalid(number)) {
-			throw new IllegalArgumentException();
+			throw new InvalidLottoNumberException(number);
 		}
 	}
 
