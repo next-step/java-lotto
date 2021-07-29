@@ -6,9 +6,10 @@ public class LottoNumber {
 
     public static final int BOTTOM_OF_RANGE = 1;
     public static final int TOP_OF_RANGE = 45;
-    public static final String OUT_OF_BOUNDS_MESSAGE = "로또 숫자의 범위는 1 ~ 45 입니다.";
+    public static final String OUT_OF_BOUNDS_MESSAGE =
+            "로또 숫자의 범위는 " + BOTTOM_OF_RANGE + " ~ " + 45 + " 입니다.";
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
         if (lottoNumber < BOTTOM_OF_RANGE || lottoNumber > TOP_OF_RANGE) {
