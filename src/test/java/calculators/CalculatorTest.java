@@ -1,16 +1,16 @@
 package calculators;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculatorTest {
 
     @Test
     @DisplayName("기본 구분자 입력받아 합 반환하기")
-    void basic_separator() {
+    void basicSeparator() {
         final String input = "1,2:3";
 
         Calculator c = new Calculator();
@@ -21,11 +21,31 @@ class CalculatorTest {
 
     @Test
     @DisplayName("커스텀 구분자 입력받아 합 반환하기")
-    void custom_separator() {
+    void customSeparator() {
         final String input = "//;\n1;2;3";
         Calculator c = new Calculator();
         int sum = c.calculate(input);
 
-        Assertions.assertEquals(sum, 6);
+        assertEquals(sum, 6);
+    }
+
+    @Test
+    @DisplayName("음수가 전달되는 경우 Runtime 에러 발생")
+    void negative() {
+        assertThrows(RuntimeException.class, () -> {
+            final String input = "//;\n-1;2;3";
+            Calculator c = new Calculator();
+            c.calculate(input);
+        });
+    }
+
+    @Test
+    @DisplayName("문자 값이 전달되는 경우 Runtime 에러 발생")
+    void text() {
+        assertThrows(RuntimeException.class, () -> {
+            final String input = "//;\na;2;3";
+            Calculator c = new Calculator();
+            c.calculate(input);
+        });
     }
 }
