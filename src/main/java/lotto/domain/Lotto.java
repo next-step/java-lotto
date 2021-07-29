@@ -12,8 +12,8 @@ public class Lotto {
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 있습니다.";
     private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "1부터 45 사이의 숫자를 등록해야 합니다.";
     private static final int LIMIT_SIZE = 6;
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     public Lotto(List<Integer> numbers) {
         validateNumber(numbers);
@@ -43,9 +43,9 @@ public class Lotto {
 
     private boolean checkNumbersRange(List<Integer> numbers) {
         long count = numbers.stream()
-                .filter(number -> number < MIN_VALUE || number > MAX_VALUE)
+                .filter(number -> number < MIN_NUMBER || number > MAX_NUMBER)
                 .count();
-        return count >= MIN_VALUE;
+        return count >= MIN_NUMBER;
     }
 
 }

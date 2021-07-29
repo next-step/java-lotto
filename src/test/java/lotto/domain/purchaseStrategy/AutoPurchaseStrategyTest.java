@@ -1,4 +1,4 @@
-package calculator.purchaseStrategy;
+package lotto.domain.purchaseStrategy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AutoPurchaseStrategyTest {
 
     private static final int LIMIT_SIZE = 6;
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     @DisplayName("6개의 숫자 반환")
     @Test
@@ -23,7 +23,7 @@ class AutoPurchaseStrategyTest {
     void generateLottoNumber_1부터_45까지_숫자() {
         PurchaseStrategy purchaseStrategy = new AutoPurchaseStrategy();
         for(int number : purchaseStrategy.generateLottoNumber()) {
-            assertThat(number).isBetween(MIN_VALUE,MAX_VALUE);
+            assertThat(number).isBetween(MIN_NUMBER,MAX_NUMBER);
         }
     }
 

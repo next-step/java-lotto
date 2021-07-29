@@ -1,4 +1,4 @@
-package calculator.purchaseStrategy;
+package lotto.domain.purchaseStrategy;
 
 import java.util.List;
 
