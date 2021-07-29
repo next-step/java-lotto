@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,6 +25,13 @@ class LottoTicketTest {
 	void winningLottoTicket(String winningNumbers) {
 		LottoTicket winningLottoTicket = LottoTicket.from(winningNumbers);
 		assertThat(winningLottoTicket.getNumbers()).contains(1, 2, 3, 4, 5, 6);
+	}
+
+	@DisplayName("구매한 로또와 지난 주 당첨 번호를 갖는 로또를 비교한다.")
+	@Test
+	void compare() {
+		LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+
 	}
 
 }

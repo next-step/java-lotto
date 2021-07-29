@@ -14,12 +14,14 @@ public class LottoTicket {
 		this.lottoNumbers = numbers;
 	}
 
-	public static LottoTicket from(List<LottoNumber> numbers) {
-		return new LottoTicket(numbers);
+	public static LottoTicket from(List<Integer> numbers) {
+		return new LottoTicket(numbers.stream()
+								.map(LottoNumber::new)
+								.collect(Collectors.toList()));
 	}
 
 	public static LottoTicket from(String winningNumbers) {
-		String[] numbers = winningNumbers.split(DELIMITER);
+		String[] numbers = winningNumbers.trim().split(DELIMITER);
 		List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
 											.map(number -> new LottoNumber(Integer.parseInt(number)))
 											.collect(Collectors.toList());
