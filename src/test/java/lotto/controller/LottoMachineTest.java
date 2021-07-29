@@ -30,10 +30,10 @@ class LottoMachineTest {
 
         lottoMachine.lotteryJackpot(lotto, correctNumbers, bonusNumber);
 
-        Map<String, Integer> result = lottoMachine.lotteryRewards();
+        Map<Rank, Integer> result = lottoMachine.lotteryRewards();
         System.out.println(result.toString());
 
-        assertThat(result.get(Rank.FIRST.getGrade())).isEqualTo(1);
+        assertThat(result.get(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -45,9 +45,9 @@ class LottoMachineTest {
 
         lottoMachine.lotteryJackpot(lotto, correctNumbers, bonusNumber);
 
-        Map<String, Integer> result = lottoMachine.lotteryRewards();
+        Map<Rank, Integer> result = lottoMachine.lotteryRewards();
 
-        assertThat(result.get(Rank.SECOND.getGrade())).isEqualTo(1);
+        assertThat(result.get(Rank.SECOND)).isEqualTo(1);
     }
 
     @Test
@@ -59,9 +59,9 @@ class LottoMachineTest {
 
         lottoMachine.lotteryJackpot(lotto, correctNumbers, bonusNumber);
 
-        Map<String, Integer> result = lottoMachine.lotteryRewards();
+        Map<Rank, Integer> result = lottoMachine.lotteryRewards();
 
-        assertThat(result.get(Rank.THIRD.getGrade())).isEqualTo(1);
+        assertThat(result.get(Rank.THIRD)).isEqualTo(1);
     }
 
 }

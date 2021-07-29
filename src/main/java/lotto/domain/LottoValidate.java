@@ -56,7 +56,7 @@ public class LottoValidate {
         return false;
     }
 
-    public Map<String, Integer> lotteryRewards() {
+    public Map<Rank, Integer> lotteryRewards() {
         return Case.lotteryRewards();
     }
 }

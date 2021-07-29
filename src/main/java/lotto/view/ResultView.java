@@ -22,12 +22,12 @@ public class ResultView {
         System.out.println(lotto.getLotto());
     }
 
-    public void printResult(Map<String, Integer> resultMap, int price) {
-        int first = resultMap.get(FIRST.getGrade());
-        int second = resultMap.get(SECOND.getGrade());
-        int third = resultMap.get(THIRD.getGrade());
-        int forth = resultMap.get(FORTH.getGrade());
-        int fifth = resultMap.get(FIFTH.getGrade());
+    public void printResult(Map<Rank, Integer> resultMap, int price) {
+        int first = resultMap.get(FIRST);
+        int second = resultMap.get(SECOND);
+        int third = resultMap.get(THIRD);
+        int forth = resultMap.get(FORTH);
+        int fifth = resultMap.get(FIFTH);
 
         System.out.println("당첨 통계");
 

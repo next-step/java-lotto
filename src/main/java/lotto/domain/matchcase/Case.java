@@ -14,13 +14,13 @@ public abstract class Case {
 
     public abstract void addMatchCount();
 
-    public static Map<String, Integer> lotteryRewards() {
-        Map<String, Integer> map = new HashMap<>();
-        map.put(Rank.FIRST.getGrade(), first);
-        map.put(Rank.SECOND.getGrade(), second);
-        map.put(Rank.THIRD.getGrade(), third);
-        map.put(Rank.FORTH.getGrade(), forth);
-        map.put(Rank.FIFTH.getGrade(), fifth);
+    public static Map<Rank, Integer> lotteryRewards() {
+        Map<Rank, Integer> map = new HashMap<>();
+        map.put(Rank.FIRST, first);
+        map.put(Rank.SECOND, second);
+        map.put(Rank.THIRD, third);
+        map.put(Rank.FORTH, forth);
+        map.put(Rank.FIFTH, fifth);
         return map;
     }
 }

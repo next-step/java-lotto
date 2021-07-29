@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoValidate;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class LottoMachine {
         lottoValidate.correctCheck(lotto, correctNumbers, bonusNumber);
     }
 
-    public Map<String, Integer> lotteryRewards() {
+    public Map<Rank, Integer> lotteryRewards() {
         return lottoValidate.lotteryRewards();
     }
 }
