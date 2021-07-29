@@ -22,7 +22,7 @@ public final class LottoStatistics {
         return new DivisionNumber(totalPrizeAmount, totalPurchaseAmount);
     }
 
-    private int totalSize() {
+    public int totalSize() {
         return rankings.values().stream()
                 .mapToInt(i -> i)
                 .sum();
