@@ -25,7 +25,7 @@ class LottoMachineTest {
 	@ParameterizedTest
 	void issueLottoTickets(int money, int numberOfLottoTickets) {
 		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(money);
-		assertThat(lottoTickets.getLottoTickets()).hasSize(numberOfLottoTickets);
+		assertThat(lottoTickets.getTickets()).hasSize(numberOfLottoTickets);
 	}
 
 }

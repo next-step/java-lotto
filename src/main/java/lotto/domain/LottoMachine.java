@@ -9,9 +9,10 @@ public class LottoMachine {
 
 	private static final int FIRST_NUMBER = 1;
 	private static final int LAST_NUMBER = 45;
-	private static final int FIRST_INDEX = 0;
-	private static final int SIXTH_INDEX = 6;
+	private static final int INDEX_OF_FIRST_NUMBER = 0;
+	private static final int INDEX_OF_SEVENTH_NUMBER = 6;
 	private static final int PRICE_PER_TICKET = 1_000;
+
 	private final List<Integer> numbers;
 
 	public LottoMachine() {
@@ -20,13 +21,13 @@ public class LottoMachine {
 
 	public List<Integer> pickRandomNumbers() {
 		Collections.shuffle(numbers);
-		return IntStream.range(FIRST_INDEX, SIXTH_INDEX)
+		return IntStream.range(INDEX_OF_FIRST_NUMBER, INDEX_OF_SEVENTH_NUMBER)
 				.mapToObj(numbers::get)
 				.collect(Collectors.toList());
 	}
 
 	public LottoTickets issueLottoTickets(int money) {
-		List<LottoTicket> lottoTickets = IntStream.range(FIRST_INDEX, calculateLottoTicketCount(money))
+		List<LottoTicket> lottoTickets = IntStream.range(INDEX_OF_FIRST_NUMBER, calculateLottoTicketCount(money))
 			.mapToObj(index -> LottoTicket.from(pickRandomNumbers()))
 			.collect(Collectors.toList());
 		return LottoTickets.from(lottoTickets);
@@ -38,7 +39,7 @@ public class LottoMachine {
 
 	private List<Integer> initializeNumbers() {
 		return IntStream.rangeClosed(FIRST_NUMBER, LAST_NUMBER)
-			.boxed()
-			.collect(Collectors.toList());
+				.boxed()
+				.collect(Collectors.toList());
 	}
 }

@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLottoNumbers {
 
@@ -17,7 +19,7 @@ public class WinningLottoNumbers {
 	public static WinningLottoNumbers from(List<Integer> winningNumbers) {
 		List<Integer> collect = winningNumbers.stream()
 									.distinct()
-									.collect(Collectors.toList());
+									.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 		return new WinningLottoNumbers(collect);
 	}
 

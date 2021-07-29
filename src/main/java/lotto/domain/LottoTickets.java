@@ -7,10 +7,10 @@ import java.util.List;
 
 public class LottoTickets {
 
-	private List<LottoTicket> lottoTickets;
+	private final List<LottoTicket> tickets;
 
-	private LottoTickets(List<LottoTicket> lottoTickets) {
-		this.lottoTickets = lottoTickets;
+	private LottoTickets(List<LottoTicket> tickets) {
+		this.tickets = tickets;
 	}
 
 	public static LottoTickets from(List<LottoTicket> lottoTickets) {
@@ -18,13 +18,13 @@ public class LottoTickets {
 	}
 
 	public LottoPrizes getLottoPrizes(LottoTicket winningLottoTicket) {
-		List<LottoPrize> lottoPrizes = lottoTickets.stream()
+		List<LottoPrize> lottoPrizes = tickets.stream()
 										.map(lottoTicket -> lottoTicket.compareTo(winningLottoTicket))
 										.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 		return LottoPrizes.from(lottoPrizes);
 	}
 
-	public List<LottoTicket> getLottoTickets() {
-		return lottoTickets;
+	public List<LottoTicket> getTickets() {
+		return tickets;
 	}
 }

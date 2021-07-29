@@ -19,9 +19,13 @@ public class LottoNumber {
 	}
 
 	private void validateNumber(int number) {
-		if (number < START_NUMBER || number > LAST_NUMBER) {
+		if (isInvalid(number)) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private boolean isInvalid(int number) {
+		return number < START_NUMBER || number > LAST_NUMBER;
 	}
 
 	@Override

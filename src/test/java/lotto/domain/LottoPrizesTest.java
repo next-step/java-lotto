@@ -29,8 +29,8 @@ class LottoPrizesTest {
 	@MethodSource("countLottoPrizesPerRankArguments")
 	@ParameterizedTest
 	void countLottoPrizesPerRank(LottoPrizes totalLottoPrizes, LottoPrize lottoPrize, int count, int winningMoney) {
-		assertThat(totalLottoPrizes.countOf(lottoPrize).size()).isEqualTo(count);
-		assertThat(totalLottoPrizes.countOf(lottoPrize).winningMoney()).isEqualTo(winningMoney);
+		assertThat(totalLottoPrizes.prizesOf(lottoPrize).size()).isEqualTo(count);
+		assertThat(totalLottoPrizes.prizesOf(lottoPrize).winningMoney()).isEqualTo(winningMoney);
 	}
 
 	@DisplayName("총 수익률을 계산한다.")
@@ -43,7 +43,7 @@ class LottoPrizesTest {
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
 			Arguments.of(LottoPrizes.from(Arrays.asList(THREE_NUMBERS, FOUR_NUMBERS)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOUR_NUMBERS, SIX_NUMBERS)), 200_000, 10_000.25)
+			Arguments.of(LottoPrizes.from(Arrays.asList(FOUR_NUMBERS, ALL_NUMBERS)), 200_000, 10_000.25)
 		);
 	}
 
@@ -55,7 +55,7 @@ class LottoPrizesTest {
 			createArgumentsFrom(totalLottoPrizes, THREE_NUMBERS, 2),
 			createArgumentsFrom(totalLottoPrizes, FOUR_NUMBERS, 3),
 			createArgumentsFrom(totalLottoPrizes, FIVE_NUMBERS, 4),
-			createArgumentsFrom(totalLottoPrizes, SIX_NUMBERS, 2)
+			createArgumentsFrom(totalLottoPrizes, ALL_NUMBERS, 2)
 		);
 	}
 
@@ -76,8 +76,8 @@ class LottoPrizesTest {
 		lottoPrizes.add(FIVE_NUMBERS);
 		lottoPrizes.add(FIVE_NUMBERS);
 		lottoPrizes.add(FIVE_NUMBERS);
-		lottoPrizes.add(SIX_NUMBERS);
-		lottoPrizes.add(SIX_NUMBERS);
+		lottoPrizes.add(ALL_NUMBERS);
+		lottoPrizes.add(ALL_NUMBERS);
 		return lottoPrizes;
 	}
 

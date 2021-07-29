@@ -15,7 +15,7 @@ class LottoTicketsTest {
 	void create() {
 		List<LottoTicket> lottoTickets = createLottoTickets();
 		LottoTickets tickets = LottoTickets.from(lottoTickets);
-		assertThat(tickets.getLottoTickets()).hasSize(lottoTickets.size());
+		assertThat(tickets.getTickets()).hasSize(lottoTickets.size());
 	}
 
 	private List<LottoTicket> createLottoTickets() {

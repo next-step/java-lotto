@@ -49,13 +49,13 @@ class LottoTicketTest {
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		return Stream.of(
-			Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), winningNumbers, LottoPrize.NO_NUMBER),
+			Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), winningNumbers, LottoPrize.NO_NUMBERS),
 			Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), winningNumbers, LottoPrize.ONE_NUMBER),
 			Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), winningNumbers, LottoPrize.TWO_NUMBERS),
 			Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), winningNumbers, LottoPrize.THREE_NUMBERS),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), winningNumbers, LottoPrize.FOUR_NUMBERS),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), winningNumbers, LottoPrize.FIVE_NUMBERS),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), winningNumbers, LottoPrize.SIX_NUMBERS)
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), winningNumbers, LottoPrize.ALL_NUMBERS)
 		);
 	}
 

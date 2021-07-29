@@ -7,25 +7,25 @@ import java.util.List;
 
 public class LottoPrizes {
 
-	private final List<LottoPrize> lottoPrizes;
+	private final List<LottoPrize> prizes;
 
-	private LottoPrizes(List<LottoPrize> lottoPrizes) {
-		this.lottoPrizes = lottoPrizes;
+	private LottoPrizes(List<LottoPrize> prizes) {
+		this.prizes = prizes;
 	}
 
 	public static LottoPrizes from(List<LottoPrize> lottoPrizes) {
-		return new LottoPrizes(lottoPrizes);
+		return new LottoPrizes(Collections.unmodifiableList(lottoPrizes));
 	}
 
-	public LottoPrizes countOf(LottoPrize lottoPrize) {
-		List<LottoPrize> prizes = lottoPrizes.stream()
-									.filter(prize -> prize.equals(lottoPrize))
-									.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-		return LottoPrizes.from(prizes);
+	public LottoPrizes prizesOf(LottoPrize lottoPrize) {
+		List<LottoPrize> prizesOfRank = prizes.stream()
+											.filter(prize -> prize.equals(lottoPrize))
+											.collect(collectingAndThen(toList(), Collections::unmodifiableList));
+		return LottoPrizes.from(prizesOfRank);
 	}
 
 	public int winningMoney() {
-		return lottoPrizes.stream()
+		return prizes.stream()
 				.mapToInt(LottoPrize::prizeMoney)
 				.sum();
 	}
@@ -35,6 +35,6 @@ public class LottoPrizes {
 	}
 
 	public int size() {
-		return lottoPrizes.size();
+		return prizes.size();
 	}
 }

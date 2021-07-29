@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -14,7 +16,7 @@ public class LottoTicket {
 	public static LottoTicket from(List<Integer> numbers) {
 		return new LottoTicket(numbers.stream()
 								.map(LottoNumber::new)
-								.collect(Collectors.toList()));
+								.collect(collectingAndThen(toList(), Collections::unmodifiableList)));
 	}
 
 	public static LottoTicket from(WinningLottoNumbers winningNumbers) {
@@ -25,11 +27,11 @@ public class LottoTicket {
 		return lottoNumbers.stream()
 				.map(LottoNumber::getNumber)
 				.sorted()
-				.collect(Collectors.toList());
+				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	public LottoPrize compareTo(LottoTicket lottoTicket) {
-		long count = lottoNumbers.stream()
+		int count = (int) lottoNumbers.stream()
 						.filter(lottoTicket.lottoNumbers::contains)
 						.count();
 		return LottoPrize.fromMatchCount(count);
