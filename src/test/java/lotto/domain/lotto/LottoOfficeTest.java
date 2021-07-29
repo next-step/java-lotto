@@ -4,9 +4,17 @@ import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoOfficeTest {
+
+    @DisplayName("Money가 null이면 LottoOffice를 만들수 없다")
+    @Test
+    public void throw_exception_money_is_null() throws Exception {
+        //arrange, act, assert
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoOffice.of(null));
+    }
 
     @DisplayName("금액에 맞는 로또를 반환한다")
     @Test
@@ -16,10 +24,10 @@ class LottoOfficeTest {
         LottoOffice lottoOffice = LottoOffice.of(money);
 
         //act
-        LottoBunch lottoBunch = lottoOffice.purchase();
+        LottoPackage lottoPackage = lottoOffice.purchase();
 
         //assert
-        assertThat(lottoBunch.getAllLottoCount()).isEqualTo(14);
+        assertThat(lottoPackage.getAllLottoCount()).isEqualTo(14);
     }
 
 }

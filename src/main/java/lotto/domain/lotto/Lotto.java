@@ -5,13 +5,22 @@ import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.prize.LottoPrize;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
     private Lotto(LottoNumbers lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validate(LottoNumbers lottoNumbers) {
+        if (Objects.isNull(lottoNumbers)) {
+            throw new IllegalArgumentException("로또번호들의 값은 항상 있어야합니다");
+        }
     }
 
     public static Lotto of(LottoNumbers lottoNumbers) {
@@ -22,7 +31,10 @@ public class Lotto {
         return LottoPrize.of(lottoNumbers.match(winningLotto));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers.getLottoNumbers();
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

@@ -1,9 +1,8 @@
 package lotto.domain.prize;
 
+import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,20 +18,35 @@ class MatchResultTest {
         Map<LottoPrize, Long> matchMap = new HashMap<LottoPrize, Long>() {{
                 put(LottoPrize.FIRST, 1L);
         }};
+        Money money = Money.of(1000);
 
         //act
-        MatchResult matchResult = MatchResult.of(matchMap);
+        MatchResult matchResult = MatchResult.of(matchMap, money);
 
         //assert
         assertThat(matchResult.getMatchResult().size()).isEqualTo(1);
     }
 
+    @DisplayName("Money null이면 MatchResult객체를 만든다")
+    @Test
+    public void should_throw_exception_money_null() throws Exception {
+        //arrange
+        Map<LottoPrize, Long> matchMap = new HashMap<LottoPrize, Long>() {{
+            put(LottoPrize.FIRST, 1L);
+        }};
+        Money money = null;
+
+        //act, assert
+        assertThatIllegalArgumentException().isThrownBy(()
+                -> MatchResult.of(matchMap, money));
+    }
+
     @DisplayName("매치된 로또 결과가 null이면 MatchResult객체를 만든다")
-    @NullAndEmptySource
-    @ParameterizedTest
-    public void should_throw_exception_null_or_empty_match_map(Map<LottoPrize, Long> matchMap) throws Exception {
+    @Test
+    public void should_throw_exception_null_or_empty_match_map() throws Exception {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> MatchResult.of(matchMap));
+        assertThatIllegalArgumentException().isThrownBy(()
+                -> MatchResult.of(null, Money.of(1000)));
     }
 
     @DisplayName("매치된 로또 결과가 있을경우 match count를 반환한다")
@@ -42,7 +56,7 @@ class MatchResultTest {
         Map<LottoPrize, Long> matchMap = new HashMap<LottoPrize, Long>() {{
             put(LottoPrize.FIRST, 1L);
         }};
-        MatchResult matchResult = MatchResult.of(matchMap);
+        MatchResult matchResult = MatchResult.of(matchMap, Money.of(1000));
 
         //act
         int matchCount = matchResult.matchCount(LottoPrize.FIRST);
@@ -58,12 +72,43 @@ class MatchResultTest {
         Map<LottoPrize, Long> matchMap = new HashMap<LottoPrize, Long>() {{
             put(LottoPrize.FIRST, 1L);
         }};
-        MatchResult matchResult = MatchResult.of(matchMap);
+        MatchResult matchResult = MatchResult.of(matchMap, Money.of(1000));
 
         //act
         int matchCount = matchResult.matchCount(LottoPrize.SECOND);
 
         //assert
         assertThat(matchCount).isEqualTo(0);
+    }
+
+    @DisplayName("매치된 로또 결과의 수익률을 계산한다")
+    @Test
+    public void should_calculate_earning() throws Exception {
+        //arrange
+        Map<LottoPrize, Long> matchMap = getLottoPrizeLongMap();
+        Money money = Money.of(14_000);
+        MatchResult matchResult = MatchResult.of(matchMap, money);
+
+        double expectedRate = getExpectedRate(matchMap, money);
+
+        //act
+        double rate = matchResult.calculateEarningsRate();
+
+        //assert
+        assertThat(rate).isEqualTo(expectedRate);
+    }
+
+    private Map<LottoPrize, Long> getLottoPrizeLongMap() {
+        return new HashMap<LottoPrize, Long>() {{
+            put(LottoPrize.FOURTH, 1L);
+            put(LottoPrize.THIRD, 1L);
+        }};
+    }
+
+    private double getExpectedRate(Map<LottoPrize, Long> matchMap, Money money) {
+        int expectedPrizeMoneyAmount = matchMap.keySet().stream()
+                .map(LottoPrize::getPrizeMoneyAmount)
+                .reduce(0, Integer::sum);
+        return (double) expectedPrizeMoneyAmount / money.getAmount();
     }
 }

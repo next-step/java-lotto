@@ -6,6 +6,7 @@ import lotto.domain.lotto.number.LottoNumbers;
 import lotto.domain.money.Money;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class InputView {
     }
 
     public static Money inputPurchaseMoney() {
-        System.out.println(INPUT_PURCHASE_MONEY);
+        printStatement(INPUT_PURCHASE_MONEY);
 
         return Money.of(changeIntInputValue());
     }
@@ -27,12 +28,15 @@ public class InputView {
     public static WinningLotto inputWinningNumbers() {
         printStatement(INPUT_WINNING_NUMBERS_STATEMENT);
 
-        return WinningLotto.of(
-                LottoNumbers.of(Arrays.stream(readNumbers())
-                        .map(String::trim)
-                        .mapToInt(Integer::parseInt)
-                        .mapToObj(LottoNumber::of)
-                        .collect(Collectors.toList())));
+        List<LottoNumber> lottoNumbers = Arrays.stream(readNumbers())
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        printStatement("\n");
+
+        return WinningLotto.of(LottoNumbers.of(lottoNumbers));
     }
 
     private static void printStatement(String statement) {
@@ -40,8 +44,7 @@ public class InputView {
     }
 
     private static String[] readNumbers() {
-        return scanner.nextLine()
-                .split(NUMBER_DELIMITER);
+        return scanner.nextLine().split(NUMBER_DELIMITER);
     }
 
     private static int changeIntInputValue() {

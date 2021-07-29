@@ -1,6 +1,5 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.number;
 
-import lotto.domain.lotto.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,5 +35,15 @@ class LottoNumberTest {
 
         //act, assert
         assertThat(lottoNumber.getNumberString()).isEqualTo("23");
+    }
+
+    @DisplayName("실제값을 리턴한다")
+    @Test
+    public void should_return_value() throws Exception {
+        //arrange
+        LottoNumber lottoNumber = LottoNumber.of(23);
+
+        //act, assert
+        assertThat(lottoNumber.getNumber()).isEqualTo(23);
     }
 }

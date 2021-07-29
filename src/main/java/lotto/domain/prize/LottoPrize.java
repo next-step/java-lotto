@@ -37,6 +37,8 @@ public enum LottoPrize {
     public static List<LottoPrize> getWinningPrizes() {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize != NONE)
+                .sorted((leftPrize, rightPrize) ->
+                        Integer.compare(rightPrize.ordinal(), leftPrize.ordinal()))
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +46,11 @@ public enum LottoPrize {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
+    public Money getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getPrizeMoneyAmount() {
         return prizeMoney.getAmount();
     }
 }

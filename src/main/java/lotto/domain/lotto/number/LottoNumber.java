@@ -11,14 +11,18 @@ public class LottoNumber {
         this.number = number;
     }
 
+    private void validate(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또번호는 1 ~ 45 사이여야 합니다");
+        }
+    }
+
     public static LottoNumber of(int number) {
         return new LottoNumber(number);
     }
 
-    private void validate(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException();
-        }
+    public int getNumber() {
+        return number;
     }
 
     public String getNumberString() {

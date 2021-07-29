@@ -1,5 +1,6 @@
 package lotto.domain.prize;
 
+import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,21 +47,39 @@ class LottoPrizeTest {
         );
     }
 
-    @DisplayName("등수별 상금 테스트")
+    @DisplayName("등수별 상금  테스트")
     @MethodSource
     @ParameterizedTest
-    void should_get_prize_money(LottoPrize lottoPrize, int expectedValue) {
+    void should_get_prize_money_amount(LottoPrize lottoPrize, int expectedValue) {
         //arrange, act, assert
-        assertThat(lottoPrize.getPrizeMoney()).isEqualTo(expectedValue);
+        assertThat(lottoPrize.getPrizeMoneyAmount()).isEqualTo(expectedValue);
     }
 
-    private static Stream<Arguments> should_get_prize_money() {
+    private static Stream<Arguments> should_get_prize_money_amount() {
         return Stream.of(
                 Arguments.of(LottoPrize.FIRST, 2_000_000_000),
                 Arguments.of(LottoPrize.SECOND, 1_500_000),
                 Arguments.of(LottoPrize.THIRD, 50_000),
                 Arguments.of(LottoPrize.FOURTH, 5_000),
                 Arguments.of(LottoPrize.NONE, 0)
+        );
+    }
+
+    @DisplayName("등수별 상금 테스트")
+    @MethodSource
+    @ParameterizedTest
+    void should_get_prize_money(LottoPrize lottoPrize, Money expectedValue) {
+        //arrange, act, assert
+        assertThat(lottoPrize.getPrizeMoney()).isEqualTo(expectedValue);
+    }
+
+    private static Stream<Arguments> should_get_prize_money() {
+        return Stream.of(
+                Arguments.of(LottoPrize.FIRST, Money.of(2_000_000_000)),
+                Arguments.of(LottoPrize.SECOND, Money.of(1_500_000)),
+                Arguments.of(LottoPrize.THIRD, Money.of(50_000)),
+                Arguments.of(LottoPrize.FOURTH, Money.of(5_000)),
+                Arguments.of(LottoPrize.NONE, Money.of(0))
         );
     }
 }
