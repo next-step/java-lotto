@@ -1,15 +1,16 @@
 package lotto.domain.lotto;
 
-import static lotto.common.Properties.LOTTO_NUMBER_COUNT;
-import static lotto.common.Properties.LOTTO_NUMBER_MAX;
-import static lotto.common.Properties.LOTTO_NUMBER_MIN;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
+
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    public static final long LOTTO_PRICE = 1000;
 
     private final static List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
         .boxed()
@@ -38,5 +39,9 @@ public class LottoFactory {
         }
 
         return true;
+    }
+
+    public static long getLottoPrice() {
+        return LOTTO_PRICE;
     }
 }

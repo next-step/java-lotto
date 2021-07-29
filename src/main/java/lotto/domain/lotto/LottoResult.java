@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.common.Properties.LOTTO_PRICE;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +30,7 @@ public class LottoResult {
             .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
             .sum();
 
-        return prizeMoney / (double) (LOTTO_PRICE * purchaseLottoCount);
+        return prizeMoney / (double) (LottoFactory.getLottoPrice() * purchaseLottoCount);
     }
 
     public Map<Integer, Integer> getMatchLottoCounts() {

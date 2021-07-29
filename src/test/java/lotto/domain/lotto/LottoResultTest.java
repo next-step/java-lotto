@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.common.Properties.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -80,22 +79,22 @@ class LottoResultTest {
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(3) / (double) (LOTTO_PRICE * 1)
+                LottoPrizeMoney.findByMatchNumberCount(3) / (double) (LottoFactory.getLottoPrice() * 1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(4) / (double) (LOTTO_PRICE * 1)
+                LottoPrizeMoney.findByMatchNumberCount(4) / (double) (LottoFactory.getLottoPrice() * 1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(5) / (double) (LOTTO_PRICE * 1)
+                LottoPrizeMoney.findByMatchNumberCount(5) / (double) (LottoFactory.getLottoPrice() * 1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoPrizeMoney.findByMatchNumberCount(6) / (double) (LOTTO_PRICE * 1)
+                LottoPrizeMoney.findByMatchNumberCount(6) / (double) (LottoFactory.getLottoPrice() * 1)
             ));
     }
 

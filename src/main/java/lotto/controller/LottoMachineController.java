@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import static lotto.common.Properties.LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
@@ -30,7 +28,7 @@ public class LottoMachineController {
     private static List<Lotto> createPurchasedLottos() {
         long totalAmount = InputView.inputTotalAmount();
         List<Lotto> purchasedLottos = new ArrayList<>();
-        for (int i = 0; i < totalAmount / LOTTO_PRICE; i++) {
+        for (int i = 0; i < totalAmount / LottoFactory.getLottoPrice(); i++) {
             purchasedLottos.add(LottoFactory.createNormal());
         }
 
