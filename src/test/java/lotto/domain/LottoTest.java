@@ -52,5 +52,21 @@ public class LottoTest {
         Lotto.newAuto();
     }
 
+    @CsvSource( value = {
+            "1,2,3,4,5,6|1,2,3,4,5,6|FIRST_PLACE",
+            "1,2,3,4,5,6|1,2,3,4,5,7|SECOND_PLACE",
+            "1,2,3,4,5,6|1,2,3,4,7,8|THREE_PLACE",
+            "1,2,3,4,5,6|1,2,3,7,8,9|FOUR_PLACE"
+    }, delimiter = '|')
+    @DisplayName("rank Test")
+    @ParameterizedTest
+    public void rankTest(String strLottoNumbers, String strPrizeLottoNumbers, String rankName) {
+        Lotto lotto = Lotto.parse(strLottoNumbers);
+        Lotto prizeLotto = Lotto.parse(strPrizeLottoNumbers);
 
+        LottoRank expertRank = LottoRank.valueOf(rankName);
+
+        assertThat(lotto.rank(prizeLotto))
+                .isEqualTo(expertRank);
+    }
 }

@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 public final class Lotto implements Iterable<LottoNumber> {
     private final Set<LottoNumber> values;
 
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     public static final Money PRICE = new Money(1000);
     private static final int NUMBER_SIZE = 6;
     private static final List<LottoNumber> NUMBER_TEMPLATE =
@@ -27,8 +28,17 @@ public final class Lotto implements Iterable<LottoNumber> {
         return new Lotto(numbers);
     }
 
-    public static synchronized Lotto newAuto() {
+    public static Lotto newAuto() {
         return new Lotto(randomNumbers());
+    }
+
+    public static Lotto parse(String strLottoNumbers) {
+        return Lotto.newManual(Arrays.stream(
+                strLottoNumbers.split(LOTTO_NUMBER_DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet())
+        );
     }
 
     private void validValues() {
@@ -46,7 +56,7 @@ public final class Lotto implements Iterable<LottoNumber> {
         return newNumbers;
     }
 
-    public LottoRank rank() {
+    public LottoRank rank(Lotto prizeLotto) {
         return LottoRank.FIRST_PLACE;
     }
 
@@ -54,5 +64,23 @@ public final class Lotto implements Iterable<LottoNumber> {
     @Override
     public Iterator<LottoNumber> iterator() {
         return values.iterator();
+    }
+
+    @Override
+    public boolean equals(Object compareValue) {
+        if (this == compareValue) return true;
+        if (compareValue == null || getClass() != compareValue.getClass()) return false;
+        Lotto that = (Lotto) compareValue;
+        return Objects.equals(values, that.values);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values);
+    }
+
+    @Override
+    public String toString() {
+        return values.toString();
     }
 }
