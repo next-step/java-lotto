@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoPrizes;
 import lotto.domain.LottoTicket;
