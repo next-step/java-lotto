@@ -4,7 +4,7 @@ import lotto.exception.OutOfRangeException;
 
 import java.util.Objects;
 
-public final class LottoNumber extends Number {
+public final class LottoNumber extends Number implements Comparable<LottoNumber> {
     private final Number value;
 
     public static final int MIN_VALUE = 1;
@@ -59,5 +59,10 @@ public final class LottoNumber extends Number {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber compareValue) {
+        return Integer.compare(intValue(), compareValue.intValue());
     }
 }

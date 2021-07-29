@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class Lotto implements Iterable<LottoNumber> {
-    private final Set<LottoNumber> values;
+    private final List<LottoNumber> values;
 
     public static final  Money  PRICE = new Money(1000);
 
@@ -21,7 +21,8 @@ public final class Lotto implements Iterable<LottoNumber> {
                     .collect(Collectors.toList());
 
     private Lotto(Set<LottoNumber> numbers) {
-        this.values = numbers;
+        this.values = new ArrayList<>(numbers);
+        Collections.sort(this.values);
 
         validValues();
     }
@@ -35,8 +36,9 @@ public final class Lotto implements Iterable<LottoNumber> {
     }
 
     public static Lotto parse(String strLottoNumbers) {
+        String removedSpaceNumbers = strLottoNumbers.replaceAll(" +", "");
         return Lotto.newManual(Arrays.stream(
-                strLottoNumbers.split(LOTTO_NUMBER_DELIMITER))
+                removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet())
@@ -64,7 +66,7 @@ public final class Lotto implements Iterable<LottoNumber> {
         );
     }
 
-    private int containsCount(Set<LottoNumber> lottoNumbers) {
+    private int containsCount(List<LottoNumber> lottoNumbers) {
         return (int) values.stream()
                 .filter(lottoNumbers::contains)
                 .count();

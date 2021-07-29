@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.OutOfSizeException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,11 +14,17 @@ public final class LottoList implements Iterable<Lotto> {
 
     public static LottoList newAuto(Number numberSize) {
         int size = numberSize.intValue();
+
         List<Lotto> newValues = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             newValues.add(Lotto.newAuto());
         }
         return new LottoList(newValues);
+    }
+
+    private void validSize() {
+        if (Objects.isNull(values) || values.size() <= 0)
+            throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
     }
 
     public LottoStatistics statistics(Lotto prizeLotto) {

@@ -9,7 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoSolutionTest {
     @DisplayName("runTest")
     @CsvSource(value = {
-            "10000000000000|1,2,3,4,5,6"
+            "10000000000000|1,2,3,4,5,6",
+            "10000000000000|1 ,2, 3,4,5 ,6"
     }, delimiter = '|')
     @ParameterizedTest
     public void runTest(long longMoney, String strPrizeNumbers) {
