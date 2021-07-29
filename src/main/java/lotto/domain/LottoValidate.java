@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.matchcase.Case;
+import lotto.domain.matchcase.RankMatcher;
+
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +38,7 @@ public class LottoValidate {
     }
 
     private void bonusCheck(Lotto lotto, int bonusNumber) {
-        Rank.valueOf(count, bonusNumCheck(lotto.getLotto(), bonusNumber));
+        RankMatcher.gradeMatcher(count, bonusNumCheck(lotto.getLotto(), bonusNumber));
     }
 
     private void getCorrectCount(List<Integer> list, List<Integer> correctNumbers, int index) {
@@ -54,6 +57,6 @@ public class LottoValidate {
     }
 
     public Map<String, Integer> lotteryRewards() {
-        return Rank.lotteryRewards();
+        return Case.lotteryRewards();
     }
 }
