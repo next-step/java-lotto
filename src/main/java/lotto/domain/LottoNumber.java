@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
 	private static final int START_NUMBER = 1;
@@ -20,5 +22,20 @@ public class LottoNumber {
 		if (number < START_NUMBER || number > LAST_NUMBER) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoNumber that = (LottoNumber)o;
+		return number == that.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number);
 	}
 }

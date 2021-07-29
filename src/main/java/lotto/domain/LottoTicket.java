@@ -34,4 +34,12 @@ public class LottoTicket {
 				.sorted()
 				.collect(Collectors.toList());
 	}
+
+	public LottoPrize compareTo(LottoTicket lottoTicket) {
+		long count = lottoNumbers.stream()
+			.filter(lottoTicket.lottoNumbers::contains)
+			.count();
+
+		return LottoPrize.fromMatchCount(count);
+	}
 }
