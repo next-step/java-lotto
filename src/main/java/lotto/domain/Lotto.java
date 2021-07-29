@@ -79,8 +79,12 @@ public final class Lotto implements Iterable<LottoNumber> {
 
     @Override
     public boolean equals(Object compareValue) {
-        if (this == compareValue) return true;
-        if (compareValue == null || getClass() != compareValue.getClass()) return false;
+        if (this == compareValue) {
+            return true;
+        }
+        if (compareValue == null || getClass() != compareValue.getClass()) {
+            return false;
+        }
         Lotto that = (Lotto) compareValue;
         return Objects.equals(values, that.values);
     }

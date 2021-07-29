@@ -13,8 +13,9 @@ public abstract class CalculationNumber extends Number {
 
     @Override
     public final boolean equals(Object compareValue) {
-        if (!(compareValue instanceof Number))
+        if (!(compareValue instanceof Number)) {
             return false;
+        }
         Number that = (Number) compareValue;
         return (Objects.equals(intValue(), that.intValue()) && Objects.equals(longValue(), that.longValue())) || // 정수
                 (Objects.equals(doubleValue(), that.doubleValue()) && Objects.equals(floatValue(), that.floatValue())); // 소수

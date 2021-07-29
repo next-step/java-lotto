@@ -24,8 +24,9 @@ public final class LottoList implements Iterable<Lotto> {
     }
 
     private void validSize() {
-        if (Objects.isNull(values) || values.size() <= 0)
+        if (Objects.isNull(values) || values.size() <= 0) {
             throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
+        }
     }
 
     public LottoStatistics statistics(Lotto prizeLotto) {

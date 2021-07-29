@@ -48,8 +48,9 @@ public final class Money extends Number {
 
     @Override
     public boolean equals(Object compareValue) {
-        if (!(compareValue instanceof Number))
+        if (!(compareValue instanceof Number)) {
             return false;
+        }
         Number thar = (Number) compareValue;
         return value.longValue() == thar.longValue();
     }

@@ -45,8 +45,9 @@ public final class LottoNumber extends Number implements Comparable<LottoNumber>
 
     @Override
     public boolean equals(Object compareValue) {
-        if (!(compareValue instanceof Number))
+        if (!(compareValue instanceof Number)) {
             return false;
+        }
         Number that = (Number) compareValue;
         return intValue() == that.intValue();
     }
