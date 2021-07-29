@@ -1,19 +1,36 @@
 package lotto.domain;
 
+import lotto.util.DivisionNumber;
+
 import java.util.Map;
 
 public final class LottoStatistics {
-    private final Map<LottoRank, Integer> rank;
+    // LottoRank, Size
+    private final Map<LottoRank, Integer> rankings;
 
-    public LottoStatistics(Map<LottoRank, Integer> rank) {
-        this.rank = rank;
+    public LottoStatistics(Map<LottoRank, Integer> rankings) {
+        this.rankings = rankings;
     }
 
-    public Money yield() {
-        return null;
+    public DivisionNumber yield() {
+        float totalPrizeAmount = rankings.entrySet().stream()
+                .mapToInt(iEntrySet ->
+                        iEntrySet.getKey().prizeAmount(iEntrySet.getValue()).intValue()
+                ).sum();
+        float totalPurchaseAmount = Lotto.PRICE.multiply(totalSize()).intValue();
+
+        return new DivisionNumber(totalPrizeAmount, totalPurchaseAmount);
     }
 
-    public int count(LottoRank lottoRank) {
-        return 0;
+    private int totalSize() {
+        return rankings.values().stream()
+                .mapToInt(i -> i)
+                .sum();
+    }
+
+    public int size(LottoRank lottoRank) {
+        if (!rankings.containsKey(lottoRank))
+            return 0;
+        return rankings.get(lottoRank);
     }
 }

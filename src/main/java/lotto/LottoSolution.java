@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.Money;
 import lotto.util.DivisionNumber;
@@ -19,8 +20,6 @@ public final class LottoSolution {
     private final InputView inputView;
     private final ResultView resultView;
 
-    private static final Money LOTTO_PRICE = new Money(1000);
-
     public LottoSolution(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
@@ -37,7 +36,7 @@ public final class LottoSolution {
 
     private LottoList buyLotto(int intMoney) {
         Money money = new Money(intMoney);
-        DivisionNumber lottoSize = new DivisionNumber(money, LOTTO_PRICE);
+        DivisionNumber lottoSize = new DivisionNumber(money, Lotto.PRICE);
         return LottoList.newAuto(lottoSize);
     }
 }

@@ -15,8 +15,28 @@ public final class Money extends Number {
         validNumber();
     }
 
-    public Money division(Money money) {
-        return new Money(this.value / money.value);
+    public Money addition(Number number) {
+        return addition(number.intValue());
+    }
+
+    public Money addition(int number) {
+        return new Money(this.value + number);
+    }
+
+    public Money division(Number number) {
+        return division(number.intValue());
+    }
+
+    public Money division(int number) {
+        return new Money(this.value / number);
+    }
+
+    public Money multiply(Number number) {
+        return multiply(number.intValue());
+    }
+
+    public Money multiply(int number) {
+        return new Money(this.value * number);
     }
 
     public static Money empty() {
