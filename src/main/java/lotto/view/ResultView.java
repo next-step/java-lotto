@@ -1,34 +1,45 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.Rank;
 
 import java.util.Map;
 
 public class ResultView {
-    private static final int FIRST_REWARD = 20000000;
-    private static final int SECOND_REWARD = 1500000;
-    private static final int THIRD_REWARD = 50000;
-    private static final int FORTH_REWARD = 5000;
+    private static final Rank FIRST = Rank.FIRST;
+    private static final Rank SECOND = Rank.SECOND;
+    private static final Rank THIRD = Rank.THIRD;
+    private static final Rank FORTH = Rank.FORTH;
+    private static final Rank FIFTH = Rank.FIFTH;
+
+    private final int firstReward = FIRST.getReward();
+    private final int secondReward = SECOND.getReward();
+    private final int thirdReward = THIRD.getReward();
+    private final int forthReward = FORTH.getReward();
+    private final int fifthReward = FIFTH.getReward();
 
     public void lottoList(Lotto lotto) {
         System.out.println(lotto.getLotto());
     }
 
-    public void printResult(Map<String, Object> resultMap, int price) {
-        int first = (int) resultMap.get("first");
-        int second = (int) resultMap.get("second");
-        int third = (int) resultMap.get("third");
-        int forth = (int) resultMap.get("forth");
+    public void printResult(Map<String, Integer> resultMap, int price) {
+        int first = resultMap.get(FIRST.getGrade());
+        int second = resultMap.get(SECOND.getGrade());
+        int third = resultMap.get(THIRD.getGrade());
+        int forth = resultMap.get(FORTH.getGrade());
+        int fifth = resultMap.get(FIFTH.getGrade());
+
         System.out.println("당첨 통계");
 
         System.out.println("-----------");
 
-        System.out.println("1등(" + FIRST_REWARD + "원) : " + first + "개");
-        System.out.println("2등(" + SECOND_REWARD + "원) : " + second + "개");
-        System.out.println("3등(" + THIRD_REWARD + "원) : " + third + "개");
-        System.out.println("4등(" + FORTH_REWARD + "원) : " + forth + "개");
+        System.out.println("1등(" + firstReward + "원) : " + first + "개");
+        System.out.println("2등(" + secondReward + "원) : " + second + "개");
+        System.out.println("3등(" + thirdReward + "원) : " + third + "개");
+        System.out.println("4등(" + forthReward + "원) : " + forth + "개");
+        System.out.println("5등(" + fifthReward + "원) : " + forth + "개");
 
-        double result = ((first * FIRST_REWARD) + (second * SECOND_REWARD) + (third * THIRD_REWARD) + (forth * FORTH_REWARD)) / price;
+        double result = ((first * firstReward) + (second * secondReward) + (third * thirdReward) + (forth * forthReward) + (fifth * fifthReward)) / price;
         System.out.println("총 수익률은 : " + result + "입니다.");
     }
 
