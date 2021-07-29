@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoBonus;
+import lotto.domain.WinningLotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
@@ -16,7 +16,7 @@ public class App {
         LottoNumbers winTicket = getWinTicket();
         LottoNumber bonusNumber = getBonusNumber();
 
-        ResultView.printStatistics(buyTickets, LottoBonus.of(winTicket, bonusNumber));
+        ResultView.printStatistics(buyTickets, WinningLotto.of(winTicket, bonusNumber));
     }
 
     private static LottoNumbers getWinTicket() {

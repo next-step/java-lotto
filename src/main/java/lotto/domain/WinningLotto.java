@@ -2,19 +2,19 @@ package lotto.domain;
 
 import lotto.exception.IllegalBonusNumberException;
 
-public class LottoBonus {
+public class WinningLotto {
 
     private final LottoNumbers winNumber;
     private final LottoNumber bonusNumber;
 
-    private LottoBonus(LottoNumbers winNumber, LottoNumber bonusNumber) {
+    private WinningLotto(LottoNumbers winNumber, LottoNumber bonusNumber) {
         validate(winNumber, bonusNumber);
         this.winNumber = winNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public static LottoBonus of(LottoNumbers winNumber, LottoNumber bonusNumber) {
-        return new LottoBonus(winNumber, bonusNumber);
+    public static WinningLotto of(LottoNumbers winNumber, LottoNumber bonusNumber) {
+        return new WinningLotto(winNumber, bonusNumber);
     }
 
     public LottoResult toResult(LottoNumbers lottoNumbers) {

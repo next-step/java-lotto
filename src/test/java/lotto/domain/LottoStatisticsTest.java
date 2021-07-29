@@ -28,7 +28,7 @@ class LottoStatisticsTest {
                 LottoNumbers.of("1,2,11,12,13,14"),
                 LottoNumbers.of("1,2,3,12,13,14")
         ));
-        statistics.summary(buyTicket, LottoBonus.of(winTicket, bonusNumber));
+        statistics.summary(buyTicket, WinningLotto.of(winTicket, bonusNumber));
     }
 
     @DisplayName("당점번호와 구매한 티켓 리스트를 받아서 통계를 기록한다.")

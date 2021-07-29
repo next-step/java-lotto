@@ -4,6 +4,8 @@ import lotto.domain.*;
 
 import java.util.Map;
 
+import static lotto.domain.LottoMatchType.*;
+
 public class ResultView {
 
     private static final LottoStatistics statistics = new LottoStatistics();
@@ -15,17 +17,24 @@ public class ResultView {
         lottoTickets.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatistics(Lottos buyLotto, LottoBonus lottoBonus) {
-        statistics.summary(buyLotto, lottoBonus);
+    public static void printStatistics(Lottos buyLotto, WinningLotto winningLotto) {
+        statistics.summary(buyLotto, winningLotto);
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         Map<LottoMatchType, Integer> statisticsMap = statistics.getStatisticsMap();
-        for (LottoMatchType type : LottoMatchType.values()) {
+        for (LottoMatchType type : values()) {
             Integer matchCount = getMatchCount(statisticsMap.get(type));
-            System.out.println(type.getMatchCount() + "개 일치"+ type.getDescription()+ "(" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
+            System.out.println(type.getMatchCount() + "개 일치" + description(type) + "(" + type.getWinMoney() + "원)" + "- " + matchCount + "개");
         }
         profitPrint(statistics.profitRate(buyLotto));
+    }
+
+    private static String description(LottoMatchType type) {
+        if(type == SECOND) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
     private static Integer getMatchCount(Integer count) {

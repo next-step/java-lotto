@@ -21,8 +21,8 @@ public class Lottos {
         return new Lottos(buy.getLottoTickets());
     }
 
-    public Stream<LottoResult> mapToResult(LottoBonus lottoBonus) {
+    public Stream<LottoResult> mapToResult(WinningLotto winningLotto) {
         return lottoNumbers.stream()
-                .map(lottoBonus::toResult);
+                .map(winningLotto::toResult);
     }
 }
