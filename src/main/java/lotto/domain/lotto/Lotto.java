@@ -1,28 +1,26 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.number.LottoNumber;
+import lotto.domain.prize.LottoPrize;
+
 import java.util.List;
 
-public class Lotto {
-    public static final int LOTTO_NUMBER_COUNT = 6;
-
-    private final List<LottoNumber> lottoNumbers;
+public class Lotto extends BaseLotto {
 
     private Lotto(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        super(lottoNumbers);
     }
 
     public static Lotto of(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    private void validate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
+    public LottoPrize match(WinningLotto winningLotto) {
+        int count = Math.toIntExact(
+                lottoNumbers.stream()
+                        .filter(winningLotto.getLottoNumbers()::contains)
+                        .count());
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return LottoPrize.of(count);
     }
 }

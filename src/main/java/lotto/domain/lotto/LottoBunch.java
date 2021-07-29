@@ -1,7 +1,11 @@
 package lotto.domain.lotto;
 
+import lotto.domain.prize.MatchResult;
+
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoBunch {
 
@@ -29,4 +33,11 @@ public class LottoBunch {
     public int getAllLottoCount() {
         return lottos.size();
     }
+
+    public MatchResult match(WinningLotto winningLotto) {
+        return MatchResult.of(lottos.stream()
+                .map(lotto -> lotto.match(winningLotto))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+    }
+
 }

@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.number.LottoNumber;
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.money.Money;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -16,20 +17,20 @@ public class InputView {
     private InputView() {
     }
 
-    public static int inputPurchaseMoney() {
+    public static Money inputPurchaseMoney() {
         System.out.println(INPUT_PURCHASE_MONEY);
 
-        return changeIntInputValue();
+        return Money.of(changeIntInputValue());
     }
 
-    public static List<LottoNumber> inputWinningNumbers() {
+    public static WinningLotto inputWinningNumbers() {
         printStatement(INPUT_WINNING_NUMBERS_STATEMENT);
 
-        return Arrays.stream(readNumbers())
+        return WinningLotto.of(Arrays.stream(readNumbers())
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private static void printStatement(String statement) {

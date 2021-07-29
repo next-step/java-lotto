@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.number;
 
 public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;

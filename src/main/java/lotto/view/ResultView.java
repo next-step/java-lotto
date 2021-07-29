@@ -1,7 +1,9 @@
 package lotto.view;
 
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.number.LottoNumber;
 import lotto.domain.lotto.LottoBunch;
+import lotto.domain.prize.LottoPrize;
+import lotto.domain.prize.MatchResult;
 
 import java.util.stream.Collectors;
 
@@ -23,6 +25,25 @@ public class ResultView {
                 )
                 .forEach(ResultView::printStatement);
 
+    }
+
+    public static void printMatchResult(MatchResult matchResult) {
+        printStatement(WINNING_PRIZE_STATISTICS_STATEMENT);
+
+        LottoPrize.getWinningPrizes()
+                .forEach(lottoPrize -> printPrizeResult(lottoPrize, matchResult));
+
+    }
+
+    private static void printPrizeResult(LottoPrize lottoPrize, MatchResult matchResult) {
+        String result = String.format(
+                PRIZE_RESULT_FORMAT,
+                lottoPrize.getMatchCount(),
+                lottoPrize.getPrizeMoney(),
+                matchResult.matchCount(lottoPrize)
+        );
+
+        printStatement(result);
     }
 
     private static void printStatement(String statement) {
