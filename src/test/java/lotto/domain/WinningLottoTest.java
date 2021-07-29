@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoResult;
 import lotto.exception.IllegalBonusNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
