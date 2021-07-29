@@ -18,8 +18,6 @@ class LottoValidateTest {
     @Test
     @DisplayName("로또 금액 예외(천원단위가 아닐때)")
     void priceExceptionTest() {
-        InputView inputView = new InputView();
-
         assertThatThrownBy(() -> lottoValidate.priceValidation(999))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("천원 단위로 입력해야 합니다.");
