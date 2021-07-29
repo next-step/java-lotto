@@ -2,12 +2,13 @@ package calculators;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Calculator {
 
-    private final String PREFIX = "//";
-    private final String SUFFIX = "\n";
+    private final Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
     public Integer calculate(String input) {
         List<Integer> numbers = splitNumbers(input);
@@ -17,11 +18,11 @@ public class Calculator {
     private List<Integer> splitNumbers(String input) {
         String separator = ":";
 
-        if (input.startsWith(PREFIX) && input.contains(SUFFIX)) {
-            int start = input.indexOf(PREFIX);
-            int end = input.indexOf(SUFFIX);
-            separator = input.substring(start + 2, end);
-            input = input.substring(end + 1);
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.matches()) {
+            separator = matcher.group(1);
+            input = matcher.group(2);
         }
         input = input.replaceAll(separator, ",");
         String[] split = input.split(",");
