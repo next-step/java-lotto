@@ -38,8 +38,12 @@ public final class Lotto implements Iterable<LottoNumber> {
 
     public int containsCount(Lotto that) {
         return (int) that.values.stream()
-                .filter(values::contains)
+                .filter(this::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
     }
 
     @Override

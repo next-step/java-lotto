@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.dto.WinningLottoRequest;
 import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
@@ -50,9 +51,11 @@ public final class LottoSolution {
     }
 
     private WinningLotto inputWinningLottoNumbers() {
-        String strPrizeNumbers = inputView.inputPrizeNumbers();
+        WinningLottoRequest winningLottoRequest = inputView.inputWinningLotto();
+        String strPrizeNumbers = winningLottoRequest.lottoNumbers();
+        int bonusNumber = winningLottoRequest.bonusNumber();
         return new WinningLotto(
-                Lotto.of(strPrizeNumbers)
+                Lotto.of(strPrizeNumbers), new LottoNumber(bonusNumber)
         );
     }
 }

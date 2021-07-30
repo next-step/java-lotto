@@ -21,8 +21,16 @@ public class DosResultView implements ResultView {
 
     private List<LottoRank> displayLottoRanks() {
         return Arrays.stream(LottoRank.values())
-                .filter(iLottoRank -> iLottoRank.matchesCount() > 0)
+                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
                 .collect(Collectors.toList());
+    }
+
+    private Text lottoRankText(LottoRank lottoRank) {
+        return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
+    }
+
+    private Text yieldText(float yield) {
+        return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
     }
 
     @Override
@@ -30,7 +38,7 @@ public class DosResultView implements ResultView {
         System.out.println(Text.RESULT_TITLE);
         for (LottoRank iLottoRank : displayLottoRanks()) {
             System.out.println(
-                    Text.LOTTO_RANK.format(
+                    lottoRankText(iLottoRank).format(
                             iLottoRank.matchesCount(),
                             iLottoRank.prizeAmount(),
                             lottoStatistics.size(iLottoRank)
@@ -38,9 +46,10 @@ public class DosResultView implements ResultView {
             );
         }
         float yield = lottoStatistics.yield().floatValue();
-        Text resultText = yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
         System.out.println(
-                resultText.format(lottoStatistics.yield().floatValue())
+                yieldText(yield).format(
+                        lottoStatistics.yield().floatValue()
+                )
         );
     }
 
@@ -53,6 +62,7 @@ public class DosResultView implements ResultView {
         PURCHASED_LOTTO_SIZE("%d개를 구매 했습니다."),
         RESULT_TITLE("당첨 통계\n---------"),
         LOTTO_RANK("%s개 일치 (%s원) - %d개"),
+        LOTTO_SECOND_RANK("%s개 일치, 보너스볼 일치 (%s원) - %d개"),
         YIELD("총 수익률은 %.2f 입니다."),
         YIELD_LOSS("총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 

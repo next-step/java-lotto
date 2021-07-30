@@ -21,6 +21,10 @@ public final class Money extends Number {
         }
     }
 
+    public boolean hasMoney() {
+        return longValue() > 0;
+    }
+
     @Override
     public int intValue() {
         return value.intValue();
