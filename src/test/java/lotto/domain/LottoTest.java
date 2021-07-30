@@ -34,16 +34,4 @@ class LottoTest {
         }).withMessageMatching("중복된 숫자가 있습니다.");
     }
 
-    @DisplayName("범위를 벗어난 숫자가 있을 경우 예외 throw")
-    @Test
-    void validate_범위를_벗어난_숫자() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,60,6)));
-        }).withMessageMatching("1부터 45 사이의 숫자를 등록해야 합니다.");
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,-6)));
-        }).withMessageMatching("1부터 45 사이의 숫자를 등록해야 합니다.");
-    }
-
 }

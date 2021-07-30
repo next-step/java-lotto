@@ -1,23 +1,27 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private static final String IS_NULL_OR_NOT_SIX_ERROR_MESSAGE = "6개의 숫자를 등록해야 합니다.";
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 있습니다.";
-    private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "1부터 45 사이의 숫자를 등록해야 합니다.";
     private static final int LIMIT_SIZE = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     public Lotto(List<Integer> numbers) {
         validateNumber(numbers);
-        this.numbers = numbers;
+        addLottoNumber(numbers);
+    }
+
+    private void addLottoNumber(List<Integer> numbers) {
+        for(int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
     }
 
     private void validateNumber(List<Integer> numbers) {
@@ -26,9 +30,6 @@ public class Lotto {
         }
         if(checkDuplicateNumbers(numbers)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
-        }
-        if(checkNumbersRange(numbers)) {
-            throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
     }
 
@@ -41,11 +42,12 @@ public class Lotto {
         return numbersSet.size() != numbers.size();
     }
 
+    /*
     private boolean checkNumbersRange(List<Integer> numbers) {
         long count = numbers.stream()
                 .filter(number -> number < MIN_NUMBER || number > MAX_NUMBER)
                 .count();
         return count >= MIN_NUMBER;
     }
-
+    */
 }
