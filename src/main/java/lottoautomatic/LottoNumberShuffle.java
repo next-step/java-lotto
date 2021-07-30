@@ -31,12 +31,12 @@ public class LottoNumberShuffle implements LottoNumberGenerator {
 		for (int i = NUMBERS_RANGE_START; i < NUMBERS_RANGE_END; i++) {
 			numbers.add(defaultNumbers.get(i));
 		}
-		sortNumbers(numbers);
-		return numbers;
+		return sortNumbers(numbers);
 	}
 
-	private void sortNumbers(List<Integer> numbers) {
+	private List<Integer> sortNumbers(List<Integer> numbers) {
 		Collections.sort(numbers);
+		return numbers;
 	}
 
 
