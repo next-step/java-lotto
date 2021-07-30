@@ -9,7 +9,7 @@ import lotto.exception.InvalidLottoNumbersSizeException;
 
 public class LottoTicket {
 
-	public static final int VALID_LOTTO_NUMBERS_SIZE = 6;
+	private static final int VALID_LOTTO_NUMBERS_SIZE = 6;
 
 	private final List<LottoNumber> lottoNumbers;
 
