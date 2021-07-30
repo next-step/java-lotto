@@ -34,7 +34,7 @@ class LottoPrizesTest {
 		assertThat(lottoPrizes.winningMoney()).isEqualTo(winningMoney);
 	}
 
-	@DisplayName("총 수익률을 계산한다.")
+	@DisplayName("구입한 금액과 구매한 로또의 당첨금으로 총 수익률을 계산한다.")
 	@MethodSource("earningsRateArguments")
 	@ParameterizedTest
 	void earningsRate(LottoPrizes lottoPrizes, int money, double earningsRate) {
@@ -43,20 +43,18 @@ class LottoPrizesTest {
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(LottoPrizes.from(Arrays.asList(THREE_NUMBERS, FOUR_NUMBERS)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOUR_NUMBERS, ALL_NUMBERS)), 200_000, 10_000.25)
+			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, THIRD)), 100_000, 0.55),
+			Arguments.of(LottoPrizes.from(Arrays.asList(THIRD, FIRST)), 200_000, 10_000.25)
 		);
 	}
 
 	private static Stream<Arguments> countLottoPrizesPerRankArguments() {
 		List<LottoPrize> totalLottoPrizes = createLottoPrizes();
 		return Stream.of(
-			createArgumentsFrom(totalLottoPrizes, ONE_NUMBER, 1),
-			createArgumentsFrom(totalLottoPrizes, TWO_NUMBERS, 1),
-			createArgumentsFrom(totalLottoPrizes, THREE_NUMBERS, 2),
-			createArgumentsFrom(totalLottoPrizes, FOUR_NUMBERS, 3),
-			createArgumentsFrom(totalLottoPrizes, FIVE_NUMBERS, 4),
-			createArgumentsFrom(totalLottoPrizes, ALL_NUMBERS, 2)
+			createArgumentsFrom(totalLottoPrizes, FOURTH, 2),
+			createArgumentsFrom(totalLottoPrizes, THIRD, 3),
+			createArgumentsFrom(totalLottoPrizes, SECOND, 4),
+			createArgumentsFrom(totalLottoPrizes, FIRST, 2)
 		);
 	}
 
@@ -66,19 +64,19 @@ class LottoPrizesTest {
 
 	private static List<LottoPrize> createLottoPrizes() {
 		List<LottoPrize> lottoPrizes = new ArrayList<>();
-		lottoPrizes.add(ONE_NUMBER);
-		lottoPrizes.add(TWO_NUMBERS);
-		lottoPrizes.add(THREE_NUMBERS);
-		lottoPrizes.add(THREE_NUMBERS);
-		lottoPrizes.add(FOUR_NUMBERS);
-		lottoPrizes.add(FOUR_NUMBERS);
-		lottoPrizes.add(FOUR_NUMBERS);
-		lottoPrizes.add(FIVE_NUMBERS);
-		lottoPrizes.add(FIVE_NUMBERS);
-		lottoPrizes.add(FIVE_NUMBERS);
-		lottoPrizes.add(FIVE_NUMBERS);
-		lottoPrizes.add(ALL_NUMBERS);
-		lottoPrizes.add(ALL_NUMBERS);
+		lottoPrizes.add(NONE);
+		lottoPrizes.add(NONE);
+		lottoPrizes.add(FOURTH);
+		lottoPrizes.add(FOURTH);
+		lottoPrizes.add(THIRD);
+		lottoPrizes.add(THIRD);
+		lottoPrizes.add(THIRD);
+		lottoPrizes.add(SECOND);
+		lottoPrizes.add(SECOND);
+		lottoPrizes.add(SECOND);
+		lottoPrizes.add(SECOND);
+		lottoPrizes.add(FIRST);
+		lottoPrizes.add(FIRST);
 		return lottoPrizes;
 	}
 

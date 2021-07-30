@@ -17,7 +17,6 @@ public class ResultView {
 	private static final String DECIMAL_POINT = "%.2f";
 	private static final String MESSAGE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 	private static final String MESSAGE_PROFIT = "(개이득)";
-	private static final int ZERO = 0;
 	private static final int BASE_EARNINGS_RATE = 1;
 
 	private ResultView() {
@@ -32,7 +31,6 @@ public class ResultView {
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		Arrays.stream(LottoPrize.values())
-			.filter(lottoPrize -> lottoPrize.prizeMoney() > ZERO)
 			.forEach(lottoPrize -> printLottoPrizePerRank(totalLottoPrizes.prizesOf(lottoPrize), lottoPrize));
 	}
 
