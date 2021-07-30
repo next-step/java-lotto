@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.IllegalFormatConversionException;
+
 public class AddCommand {
     private final String value;
 
@@ -17,5 +19,13 @@ public class AddCommand {
 
     public static boolean hasCustomDelimiter(AddCommand addCommand) {
         return addCommand.value.matches("^//(.)\\n(.*)");
+    }
+
+    public int toInt() {
+        if (!isOnlyDigit(this)) {
+            throw new IllegalFormatConversionException('s', String.class);
+        }
+
+        return Integer.parseInt(this.value);
     }
 }
