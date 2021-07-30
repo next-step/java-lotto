@@ -1,8 +1,12 @@
 package stringCalculator;
 
+import java.util.Arrays;
+
 public class StringCalculator {
 
   private String text;
+
+  public static final String SPLIT_MARK = ",|:";
 
   public static final String DEFAULT_VALUE = "0";
 
@@ -22,6 +26,14 @@ public class StringCalculator {
   }
 
   public String[] getSplitValues() {
-    return text.split(",|:");
+    return text.split(SPLIT_MARK);
+  }
+
+  public int getSumValues() {
+    return Arrays.stream(getSplitValues()).mapToInt(this::toInt).sum();
+  }
+
+  private int toInt(String s) {
+    return Integer.parseInt(s);
   }
 }
