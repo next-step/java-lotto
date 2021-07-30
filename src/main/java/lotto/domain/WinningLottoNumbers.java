@@ -26,12 +26,12 @@ public class WinningLottoNumbers {
 	}
 
 	public List<Integer> getWinningNumbers() {
-		return winningNumbers;
+		return Collections.unmodifiableList(winningNumbers);
 	}
 
 	private void validateWinningNumbers(List<Integer> winningNumbers) {
 		if (hasInvalidSize(winningNumbers)) {
-			throw new InvalidLottoNumberSizeException();
+			throw new InvalidLottoNumberSizeException(winningNumbers.size());
 		}
 	}
 

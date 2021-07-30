@@ -10,15 +10,17 @@ import lotto.exception.InvalidLottoNumbersSizeException;
 public class LottoTicket {
 
 	public static final int VALID_LOTTO_NUMBERS_SIZE = 6;
+
 	private final List<LottoNumber> lottoNumbers;
 
 	private LottoTicket(List<LottoNumber> numbers) {
+		validateLottoNumbers(numbers);
 		this.lottoNumbers = numbers;
 	}
 
 	public static LottoTicket from(List<Integer> numbers) {
-		validateLottoNumbers(numbers);
 		return new LottoTicket(numbers.stream()
+								.distinct()
 								.map(LottoNumber::new)
 								.collect(collectingAndThen(toList(), Collections::unmodifiableList)));
 	}
@@ -41,13 +43,13 @@ public class LottoTicket {
 		return LottoPrize.fromMatchCount(count);
 	}
 
-	private static void validateLottoNumbers(List<Integer> numbers) {
+	private static void validateLottoNumbers(List<LottoNumber> numbers) {
 		if (hasInvalidSize(numbers)) {
-			throw new InvalidLottoNumbersSizeException();
+			throw new InvalidLottoNumbersSizeException(numbers.size());
 		}
 	}
 
-	private static boolean hasInvalidSize(List<Integer> numbers) {
+	private static boolean hasInvalidSize(List<LottoNumber> numbers) {
 		return numbers.size() != VALID_LOTTO_NUMBERS_SIZE;
 	}
 }

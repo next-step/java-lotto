@@ -29,10 +29,10 @@ public class InputView {
 
 	public static WinningLottoNumbers inputWinningNumbers() {
 		System.out.println(INPUT_WINNING_NUMBERS);
-		List<Integer> collect = IntStream.range(INDEX_OF_FIRST_NUMBER, INDEX_OF_SEVENTH_NUMBER)
-									.mapToObj(i -> Integer.parseInt(SCANNER.next().replace(DELIMITER, BLANK)))
+		List<Integer> numbers = IntStream.range(INDEX_OF_FIRST_NUMBER, INDEX_OF_SEVENTH_NUMBER)
+									.mapToObj(index -> Integer.parseInt(SCANNER.next().replace(DELIMITER, BLANK)))
 									.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-		return WinningLottoNumbers.from(collect);
+		return WinningLottoNumbers.from(numbers);
 	}
 
 }
