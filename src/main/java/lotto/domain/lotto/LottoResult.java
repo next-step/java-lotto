@@ -31,7 +31,7 @@ public class LottoResult {
             Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
         }};
         purchasedLottos.stream()
-            .map(lotto -> Rank.valueOf(winningLotto.matchNumberCount(lotto)))
+            .map(lotto -> Rank.valueOf(winningLotto.matchNumberCount(lotto), winningLotto.matchBonusNumber(lotto)))
             .forEach(matchCount -> winningLottoCounts.put(matchCount, winningLottoCounts.get(matchCount) + 1));
 
         return Collections.unmodifiableMap(winningLottoCounts);

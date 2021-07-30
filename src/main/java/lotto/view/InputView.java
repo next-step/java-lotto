@@ -40,4 +40,11 @@ public class InputView {
             throw new InvalidParseIntegerException();
         }
     }
+
+    public static int inputWinningBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String input = scanner.nextLine();
+
+        return parseInteger(input);
+    }
 }

@@ -31,23 +31,4 @@ class RankTest {
         // then
         assertThat(rank).isEqualTo(expected);
     }
-
-    @DisplayName("[성공] 가져오기 - withoutMatchBonus")
-    @ParameterizedTest
-    @CsvSource(value = {
-        "6,FIRST",
-        "5,THIRD",
-        "4,FOURTH",
-        "3,FIFTH",
-        "2,MISS",
-    })
-    public void valueOf_withoutMatchBonus(int countOfMatch, Rank matchBonus) {
-        // given
-
-        // when
-        Rank rank = Rank.valueOf(countOfMatch);
-
-        // then
-        assertThat(rank).isEqualTo(matchBonus);
-    }
 }

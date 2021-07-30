@@ -16,15 +16,12 @@ public class LottoMachineController {
         List<NormalLotto> purchasedLottos = purchaseLotto();
         ResultView.printPurchasedLottos(purchasedLottos);
         Set<Integer> winningNumbers = InputView.inputWinningNumbers();
-        WinningLotto winningLotto = createWinningLotto(winningNumbers);
+        int winningBonusNumber = InputView.inputWinningBonusNumber();
+        WinningLotto winningLotto = LottoFactory.createWinning(winningNumbers, winningBonusNumber);
 
         LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
         ResultView.printWinningStatistics(lottoResult.getWinningLottoCounts());
         ResultView.printEarningRate(lottoResult.getEarningRate());
-    }
-
-    private static WinningLotto createWinningLotto(Set<Integer> integers) {
-        return LottoFactory.createWinning(integers);
     }
 
     private static List<NormalLotto> purchaseLotto() {

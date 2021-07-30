@@ -24,7 +24,7 @@ class LottoResultTest {
     public static Stream<Arguments> matchLottoCounts() {
         return Stream.of(
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 10, 11, 12))),
                 new HashMap<Rank, Integer>() {{
                     Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
@@ -32,7 +32,7 @@ class LottoResultTest {
                 }}
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 11, 12))),
                 new HashMap<Rank, Integer>() {{
                     Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
@@ -40,7 +40,7 @@ class LottoResultTest {
                 }}
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 12))),
                 new HashMap<Rank, Integer>() {{
                     Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
@@ -48,7 +48,7 @@ class LottoResultTest {
                 }}
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
                 new HashMap<Rank, Integer>() {{
                     Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
@@ -74,24 +74,29 @@ class LottoResultTest {
     public static Stream<Arguments> earningRateLotto() {
         return Stream.of(
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 10, 11, 12))),
-                Rank.valueOf(3).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.FIFTH.getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 11, 12))),
-                Rank.valueOf(4).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.FOURTH.getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 12))),
-                Rank.valueOf(5).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.THIRD.getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
-                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
+                new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 10))),
+                Rank.SECOND.getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
+            ),
+            Arguments.of(
+                new WinningLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10),
                 new NormalLotto(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                Rank.valueOf(6).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.FIRST.getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ));
     }
 

@@ -18,17 +18,16 @@ public class LottoFactory {
         return new NormalLotto(randomNumbers);
     }
 
-    public static WinningLotto createWinning(Set<Integer> numbers) {
-        validation(numbers);
-        return new WinningLotto(numbers);
+    public static WinningLotto createWinning(Set<Integer> numbers, int bonusNumber) {
+        validationWinningLotto(numbers, bonusNumber);
+        return new WinningLotto(numbers, bonusNumber);
     }
 
-    private static void validation(Set<Integer> checkNumbers) {
-        if (!LottoNumber.isValid(checkNumbers)) {
-            throw new InvalidLottoNumberException();
-        }
-
-        if (checkNumbers.size() != LOTTO_NUMBER_COUNT) {
+    private static void validationWinningLotto(Set<Integer> checkNumbers, int bonusNumber) {
+        if (checkNumbers.contains(bonusNumber)
+            || !LottoNumber.isValid(checkNumbers)
+            || !LottoNumber.isValid(bonusNumber)
+            || checkNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoNumberException();
         }
     }

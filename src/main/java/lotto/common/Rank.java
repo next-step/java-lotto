@@ -38,8 +38,4 @@ public enum Rank {
             .findFirst()
             .orElse(MISS);
     }
-
-    public static Rank valueOf(int countOfMatch) {
-        return valueOf(countOfMatch, false);
-    }
 }
