@@ -10,14 +10,18 @@ public class StringCalculator {
     this.text = validationText(inputText);
   }
 
-  private String validationText(String inputText) {
-    if(inputText == null || inputText.isEmpty()){
-      inputText = DEFAULT_VALUE;
+  private String validationText(String text) {
+    if(text == null || text.isEmpty()){
+      return DEFAULT_VALUE;
     }
-    return inputText;
+    return text;
   }
 
   public String getText() {
     return text;
+  }
+
+  public String[] getSplitValues() {
+    return text.split(",|:");
   }
 }
