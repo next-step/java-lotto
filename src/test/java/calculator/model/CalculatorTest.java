@@ -8,11 +8,37 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
+	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
+
 	@Test
 	@DisplayName("계산기의 문자열이 빈값이면 예외가 발생된다.")
 	public void validStringEmptyCheck() {
 		assertThrows(IllegalArgumentException.class, () -> Calculator.createCalculator("")
 		);
+	}
+
+	@Test
+	@DisplayName("문자열을 입력하는 패턴에 따라 분리한다.")
+	public void stringToSplit() {
+		Calculator calculator = Calculator.createCalculator("11");
+
+		String[] result = calculator.stringToSplit(",", "1,2,3");
+
+		assertThat(result).containsExactly("1", "2", "3");
+	}
+
+	@Test
+	@DisplayName("문자열을 입력하는 패턴에 따라 분리한다.")
+	public void patternResult() {
+		Calculator calculator = Calculator.createCalculator("1:2:3");
+
+		String[] result = calculator.patternResult(PATTERN_REG_EXP, "1,2,3");
+
+		assertThat(result).containsExactly("1", "2", "3");
+
+		String[] result2 = calculator.patternResult(PATTERN_REG_EXP, "//,\n1,2,3");
+
+		assertThat(result2).containsExactly("1", "2", "3");
 	}
 
 	@Test
