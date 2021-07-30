@@ -21,7 +21,8 @@ public class DosResultView implements ResultView {
         for (LottoRank iLottoRank : LottoRank.displayRanks()) {
             System.out.println(
                     Text.LOTTO_RANK.format(
-                            iLottoRank,
+                            iLottoRank.matchesCount(),
+                            iLottoRank.prizeAmount(),
                             lottoStatistics.size(iLottoRank)
                     )
             );
@@ -41,7 +42,7 @@ public class DosResultView implements ResultView {
     private enum Text {
         PURCHASED_LOTTO_SIZE("%d개를 구매 했습니다."),
         RESULT_TITLE("당첨 통계\n---------"),
-        LOTTO_RANK("%s - %d개"),
+        LOTTO_RANK("%s개 일치 (%s원) - %d개"),
         YIELD("총 수익률은 %.2f 입니다."),
         YIELD_LOSS("총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 

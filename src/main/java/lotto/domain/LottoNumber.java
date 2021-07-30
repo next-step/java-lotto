@@ -4,52 +4,31 @@ import lotto.exception.OutOfRangeException;
 
 import java.util.Objects;
 
-public final class LottoNumber extends Number implements Comparable<LottoNumber> {
-    private final Number value;
-
+public final class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
 
-    public LottoNumber(Number value) {
+    private final int value;
+
+    public LottoNumber(int value) {
+        validateValue(value);
+
         this.value = value;
-
-        validNumber();
     }
 
-    private void validNumber() {
-        int value = intValue();
+    private void validateValue(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
-            throw new OutOfRangeException();
+            throw new OutOfRangeException("로또 번호는 1부터 45까지의 숫자만 유효합니다.");
         }
-    }
-
-    @Override
-    public int intValue() {
-        return value.intValue();
-    }
-
-    @Override
-    public long longValue() {
-        return value.longValue();
-    }
-
-    @Override
-    public float floatValue() {
-        return value.floatValue();
-    }
-
-    @Override
-    public double doubleValue() {
-        return value.doubleValue();
     }
 
     @Override
     public boolean equals(Object compareValue) {
-        if (!(compareValue instanceof Number)) {
+        if (!(compareValue instanceof LottoNumber)) {
             return false;
         }
-        Number that = (Number) compareValue;
-        return intValue() == that.intValue();
+        LottoNumber that = (LottoNumber) compareValue;
+        return value == that.value;
     }
 
     @Override
@@ -64,6 +43,6 @@ public final class LottoNumber extends Number implements Comparable<LottoNumber>
 
     @Override
     public int compareTo(LottoNumber compareValue) {
-        return Integer.compare(intValue(), compareValue.intValue());
+        return Integer.compare(value, compareValue.value);
     }
 }

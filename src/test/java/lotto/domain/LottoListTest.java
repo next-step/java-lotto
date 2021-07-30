@@ -16,7 +16,7 @@ class LottoListTest {
     @ParameterizedTest
     void newAutoTest(int size) {
         assertThat(
-                LottoList.newAuto(size).size()
+                LottoList.generate(size).size()
         ).isEqualTo(size);
     }
 
@@ -37,9 +37,22 @@ class LottoListTest {
     @ParameterizedTest
     void statisticsTest(int size) {
         assertThat(
-                LottoList.newAuto(size)
-                        .statistics(Lotto.newAuto())
+                LottoList.generate(size)
+                        .statistics(Lotto.parse("1,2,3,4,5,6"))
                         .totalSize()
         ).isEqualTo(size);
     }
+
+    @ValueSource(ints = {
+            10, 100
+    })
+    @DisplayName("generate Test")
+    @ParameterizedTest
+    void generateTest(int size) {
+        assertThat(
+                LottoList.generate(size).size()
+        ).isEqualTo(size);
+    }
+
+
 }

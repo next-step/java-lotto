@@ -5,8 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
     @DisplayName("생성자 테스트")
@@ -15,9 +14,10 @@ class LottoNumberTest {
     })
     @ParameterizedTest
     public void ctorTest(int number) {
-        //noinspection AssertBetweenInconvertibleTypes
-        assertThat(new LottoNumber(number))
-                .isEqualTo(number);
+        //noinspection
+        assertThatCode(() ->
+                new LottoNumber(number)
+        ).doesNotThrowAnyException();
     }
 
     @DisplayName("생성자 테스트 - OutOfRangeException")
@@ -27,7 +27,7 @@ class LottoNumberTest {
     @ParameterizedTest
     public void ctorTest_OutOfRangeException(int number) {
         assertThatThrownBy(() ->
-            ctorTest(number)
+                new LottoNumber(number)
         ).isInstanceOf(OutOfRangeException.class);
     }
 }

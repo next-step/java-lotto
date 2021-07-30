@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import lotto.util.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRankTest {
+    @SuppressWarnings("AssertBetweenInconvertibleTypes")
     @CsvSource({
             "LAST_PLACE,10,0",
             "FIRST_PLACE,10,20000000000",

@@ -1,63 +1,39 @@
 package lotto.domain;
 
 import lotto.exception.OutOfSizeException;
-import lotto.util.Money;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public final class Lotto implements Iterable<LottoNumber> {
+    public static final Money PRICE = new Money(1000);
+    public static final int NUMBER_SIZE = 6;
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
+
     private final List<LottoNumber> values;
 
-    public static final  Money  PRICE = new Money(1000);
+    public Lotto(List<LottoNumber> numbers) {
+        validateValues(numbers);
 
-    private static final String LOTTO_NUMBER_DELIMITER = ",";
-    private static final int    NUMBER_SIZE = 6;
-
-    private static final List<LottoNumber> NUMBER_TEMPLATE =
-            IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
-                    .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toList());
-
-    private Lotto(Set<LottoNumber> numbers) {
         this.values = new ArrayList<>(numbers);
         Collections.sort(this.values);
-
-        validValues();
-    }
-
-    public static Lotto newManual(Set<LottoNumber> numbers) {
-        return new Lotto(numbers);
-    }
-
-    public static Lotto newAuto() {
-        return new Lotto(randomNumbers());
     }
 
     public static Lotto parse(String strLottoNumbers) {
         String removedSpaceNumbers = strLottoNumbers.replaceAll(" +", "");
-        return Lotto.newManual(Arrays.stream(
+        return new Lotto(Arrays.stream(
                 removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet())
+                .collect(Collectors.toList())
         );
     }
 
-    private void validValues() {
-        if (values.size() != NUMBER_SIZE) {
+    private void validateValues(List<LottoNumber> values) {
+        long distinctSize = values.stream().distinct().count();
+        if (distinctSize != NUMBER_SIZE || values.size() != NUMBER_SIZE) {
             throw new OutOfSizeException("로또 번호가 6개가 아닙니다.");
         }
-    }
-
-    private static synchronized Set<LottoNumber> randomNumbers() {
-        Set<LottoNumber> newNumbers = new HashSet<>();
-        Collections.shuffle(NUMBER_TEMPLATE);
-        for (Iterator<LottoNumber> iterator = NUMBER_TEMPLATE.iterator(); newNumbers.size() < 6;) {
-            newNumbers.add(iterator.next());
-        }
-        return newNumbers;
     }
 
     public LottoRank rank(Lotto prizeLotto) {

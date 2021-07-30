@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
+
 class LottoSolutionTest {
     @DisplayName("runTest")
     @CsvSource(value = {
@@ -14,6 +16,8 @@ class LottoSolutionTest {
     }, delimiter = '|')
     @ParameterizedTest
     public void runTest(long longMoney, String strPrizeNumbers) {
-        new LottoSolution(new FakeInputView(longMoney, strPrizeNumbers), new DosFakeResultView()).run();
+        assertThatCode(() ->
+            new LottoSolution(new FakeInputView(longMoney, strPrizeNumbers), new DosFakeResultView()).run()
+        ).doesNotThrowAnyException();
     }
 }

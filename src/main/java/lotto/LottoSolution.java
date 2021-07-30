@@ -6,7 +6,7 @@ import lotto.domain.LottoStatistics;
 import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
-import lotto.util.Money;
+import lotto.domain.Money;
 import lotto.util.number.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
@@ -49,7 +49,7 @@ public final class LottoSolution {
     private LottoList buyLotto(long longMoney) {
         Money money = new Money(longMoney);
         DivisionNumber lottoSize = new DivisionNumber(money, Lotto.PRICE);
-        return LottoList.newAuto(lottoSize);
+        return LottoList.generate(lottoSize);
     }
 
     private Lotto inputPrizeLottoNumbers() {
