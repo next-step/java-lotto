@@ -1,22 +1,29 @@
 package lotto;
 
-import lotto.domain.WinningLotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class App {
 
     public static void main(String[] args) {
-        Lottos buyTickets = Lottos.of(buyTicket());
-        ResultView.printBuyTicket(buyTickets);
+        Lottos buyTickets = buyAutoTicket();
+        Lottos buyManualTickets = buyManualTicket();
+        buyManualTickets.concat(buyTickets);
+
+        ResultView.printBuyTicket(buyManualTickets, buyTickets);
 
         LottoNumbers winTicket = getWinTicket();
         LottoNumber bonusNumber = getBonusNumber();
 
-        ResultView.printStatistics(buyTickets, WinningLotto.of(winTicket, bonusNumber));
+        ResultView.printStatistics(buyManualTickets, WinningLotto.of(winTicket, bonusNumber));
     }
 
     private static LottoNumbers getWinTicket() {
@@ -24,14 +31,20 @@ public class App {
     }
 
     private static LottoNumber getBonusNumber() {
-        String inputBonusNumber = InputView.getInputBonusNumber();
-        return LottoNumber.of(inputBonusNumber);
+        return LottoNumber.of(InputView.getInputBonusNumber());
     }
 
-    private static int buyTicket() {
-        int money = InputView.getInputBuyMoney();
-        InputView.printBuyCount(money);
+    private static Lottos buyAutoTicket() {
+        return Lottos.of(InputView.getInputBuyMoney());
+    }
 
-        return money;
+    private static Lottos buyManualTicket() {
+        int buyCount = InputView.getManualTicket();
+        InputView.printManualNumbers();
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        IntStream.range(0, buyCount)
+                .forEach(s -> lottoNumbers.add(LottoNumbers.of(InputView.getNextLine())));
+
+        return new Lottos(lottoNumbers);
     }
 }

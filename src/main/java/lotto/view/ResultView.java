@@ -13,10 +13,6 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printBuyTicket(Lottos lottoTickets) {
-        lottoTickets.getLottos().forEach(System.out::println);
-    }
-
     public static void printStatistics(Lottos buyLotto, WinningLotto winningLotto) {
         statistics.summary(buyLotto, winningLotto);
         System.out.println("당첨 통계");
@@ -51,5 +47,11 @@ public class ResultView {
             return;
         }
         System.out.println("기준이 1이기 때문에 결과적으로 이득이라는 의미임");
+    }
+
+    public static void printBuyTicket(Lottos manualTickets, Lottos autoTickets) {
+        int manualCount = manualTickets.size() - autoTickets.size();
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoTickets.size() + "개를 구매했습니다.");
+        manualTickets.getLottos().forEach(System.out::println);
     }
 }

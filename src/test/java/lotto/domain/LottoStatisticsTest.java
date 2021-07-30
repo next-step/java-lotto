@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -47,5 +46,21 @@ class LottoStatisticsTest {
     @Test
     void calculate_profitRate() {
         assertThat(statistics.profitRate(buyTicket)).isEqualTo(338585);
+    }
+
+    @DisplayName("로또 객체 2개를 하나로 합친다.")
+    @Test
+    void lotto_concat() {
+        List<LottoNumbers> autoList = new ArrayList<>();
+        List<LottoNumbers> manualList = new ArrayList<>();
+        autoList.add((LottoNumbers.of("1,2,3,4,5,6")));
+        manualList.add(LottoNumbers.of("11,12,13,14,15,16"));
+        Lottos auto = new Lottos(autoList);
+        Lottos manual = new Lottos(manualList);
+
+        manual.concat(auto);
+
+        assertThat(manual.getLottos().get(0)).isEqualTo(manualList.get(0));
+        assertThat(manual.size()).isEqualTo(2);
     }
 }

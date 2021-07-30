@@ -27,4 +27,12 @@ public class Lottos {
         return lottoNumbers.stream()
                 .map(winningLotto::toResult);
     }
+
+    public int size() {
+        return lottoNumbers.size();
+    }
+
+    public void concat(Lottos lottos) {
+        lottoNumbers.addAll(lottos.getLottos());
+    }
 }
