@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import lotto.domain.LottoPrize;
@@ -31,6 +32,8 @@ public class ResultView {
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		Arrays.stream(LottoPrize.values())
+			.filter(lottoPrize -> lottoPrize != LottoPrize.NONE)
+			.sorted(Comparator.comparingInt(LottoPrize::prizeMoney))
 			.forEach(lottoPrize -> printLottoPrizePerRank(totalLottoPrizes.prizesOf(lottoPrize), lottoPrize));
 	}
 
