@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.lotto.exception.InvalidLottoNumberException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,30 +22,17 @@ class LottoFactoryTest {
         );
     }
 
-    @DisplayName("[성공] 생성 - 당첨 로또")
+    @DisplayName("[성공] 당첨 로또 생성")
     @ParameterizedTest
     @MethodSource("validLottoNumbers")
     public void createWinning(List<Integer> numbers) {
         // given
 
         // when
-        Lotto lotto = LottoFactory.createWinning(numbers);
+        WinningLotto winningLotto = LottoFactory.createWinning(numbers);
 
         // then
-        assertThat(LottoFactory.isValid(lotto.getValues())).isTrue();
-    }
-
-    @DisplayName("[성공] 검증")
-    @ParameterizedTest
-    @MethodSource("validLottoNumbers")
-    public void valid(List<Integer> numbers) {
-        // given
-
-        // when
-        boolean result = LottoFactory.isValid(numbers);
-
-        // then
-        assertThat(result).isTrue();
+        assertThat(winningLotto.getValues()).hasSize(6);
     }
 
     public static Stream<Arguments> notValidLottoNumbers() {
@@ -55,16 +44,16 @@ class LottoFactoryTest {
         );
     }
 
-    @DisplayName("[실패] 검증 - 유효하지 않은 로또 번호")
+    @DisplayName("[실패] 당첨 로또 생성 - 유효하지 않은 로또 번호")
     @ParameterizedTest
     @MethodSource("notValidLottoNumbers")
-    public void notValid(List<Integer> numbers) {
+    public void createWinning_notValid(List<Integer> numbers) {
         // given
 
         // when
-        boolean result = LottoFactory.isValid(numbers);
+        Assertions.assertThrows(InvalidLottoNumberException.class, () -> LottoFactory.createWinning(numbers));
 
         // then
-        assertThat(result).isFalse();
+
     }
 }

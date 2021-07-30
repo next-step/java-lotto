@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class LottoNumber {
 
-    public static final int LOTTO_NUMBER_MIN = 1;
-    public static final int LOTTO_NUMBER_MAX = 45;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
 
     private final static Random RANDOM = new Random();
 

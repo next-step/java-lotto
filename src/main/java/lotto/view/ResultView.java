@@ -4,11 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import lotto.common.Rank;
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.NormalLotto;
 
 public class ResultView {
 
-    public static void printPurchasedLottos(List<Lotto> purchasedLottos) {
+    public static void printPurchasedLottos(List<NormalLotto> purchasedLottos) {
         System.out.println(purchasedLottos.size() + "개를 구매했습니다.");
         purchasedLottos.forEach(lotto -> System.out.println(lotto.getValues()));
     }

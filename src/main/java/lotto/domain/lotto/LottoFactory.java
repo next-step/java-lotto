@@ -1,44 +1,38 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Set;
+import lotto.domain.lotto.exception.InvalidLottoNumberException;
 
 public class LottoFactory {
 
-    public static final int LOTTO_NUMBER_MIN = 1;
-    public static final int LOTTO_NUMBER_MAX = 45;
-    public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final long LOTTO_PRICE = 1000;
-
-    private final static List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
-        .boxed()
-        .collect(Collectors.toList());
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final long LOTTO_PRICE = 1000;
 
     public static NormalLotto createNormal() {
-        Collections.shuffle(numbers);
-        List<Integer> randomNumbers = numbers.stream()
-            .limit(LOTTO_NUMBER_COUNT)
-            .collect(Collectors.toList());
+        Set<Integer> randomNumbers = new HashSet<>();
+        while (randomNumbers.size() < LOTTO_NUMBER_COUNT) {
+            randomNumbers.add(LottoNumber.create());
+        }
 
-        return new NormalLotto(randomNumbers);
+        return new NormalLotto(new ArrayList<>(randomNumbers));
     }
 
     public static WinningLotto createWinning(List<Integer> numbers) {
+        validation(numbers);
         return new WinningLotto(numbers);
     }
 
-    public static boolean isValid(List<Integer> checkNumbers) {
-        if (!numbers.containsAll(checkNumbers)) {
-            return false;
+    private static void validation(List<Integer> checkNumbers) {
+        if (!LottoNumber.isValid(checkNumbers)) {
+            throw new InvalidLottoNumberException();
         }
 
         if (checkNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
-            return false;
+            throw new InvalidLottoNumberException();
         }
-
-        return true;
     }
 
     public static int possiblePurchaseLottoCount(long totalAmount) {

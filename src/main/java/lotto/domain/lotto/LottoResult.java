@@ -9,10 +9,10 @@ import lotto.common.Rank;
 
 public class LottoResult {
 
-    private final List<Lotto> purchasedLottos;
+    private final List<NormalLotto> purchasedLottos;
     private final WinningLotto winningLotto;
 
-    public LottoResult(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
+    public LottoResult(List<NormalLotto> purchasedLottos, WinningLotto winningLotto) {
         this.purchasedLottos = purchasedLottos;
         this.winningLotto = winningLotto;
     }
