@@ -28,7 +28,7 @@ public class StringCalculatorTest {
     String input = "1,2:3";
 
     StringCalculator stringCalculator = new StringCalculator(input);
-    String[] values = stringCalculator.getSplitValues();
+    String[] values = stringCalculator.getSplitValues("[,:]");
 
     assertThat(values).containsExactly("1","2","3");
   }
@@ -38,8 +38,23 @@ public class StringCalculatorTest {
   @CsvSource(value = {"1,2:3|6","3,3:6|12","2,5:7|14"},delimiter = '|')
   void sumTextTest(String input, int expected) {
     StringCalculator stringCalculator = new StringCalculator(input);
-    int result = stringCalculator.getSumValues();
+    int result = stringCalculator.getSumValues(stringCalculator.getSplitValues("[,:]"));
 
     assertThat(result).isEqualTo(expected);
+  }
+
+  @DisplayName("입력받는 커스텀문자열을 기준으로 합을 리턴하는 테스트.")
+  @Test
+  void customSplitTest() {
+    String input = "//;\n1;2;3";
+    StringCalculator stringCalculator = new StringCalculator(input);
+    int result = stringCalculator.getCustomSplitSum();
+
+    assertThat(result).isEqualTo(6);
+
+    String input2 = "1,2:3";
+    StringCalculator stringCalculator2 = new StringCalculator(input2);
+    int result2 = stringCalculator2.getCustomSplitSum();
+    assertThat(result2).isEqualTo(6);
   }
 }

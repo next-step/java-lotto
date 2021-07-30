@@ -1,12 +1,16 @@
 package stringCalculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
   private String text;
 
-  public static final String SPLIT_MARK = ",|:";
+  public static final String CUSTOM_PATTEN = "//(.)\n(.*)";
+
+  public static final String SPLIT_MARK = "[,:]";
 
   public static final String DEFAULT_VALUE = "0";
 
@@ -25,15 +29,29 @@ public class StringCalculator {
     return text;
   }
 
-  public String[] getSplitValues() {
-    return text.split(SPLIT_MARK);
+  public String[] getSplitValues(String pattern) {
+    if(pattern.equals(SPLIT_MARK)){
+      return text.split(SPLIT_MARK);
+    }
+    return getText().split(pattern);
   }
 
-  public int getSumValues() {
-    return Arrays.stream(getSplitValues()).mapToInt(this::toInt).sum();
+  public int getSumValues(String[] values) {
+    return Arrays.stream(values).mapToInt(this::toInt).sum();
   }
 
   private int toInt(String s) {
     return Integer.parseInt(s);
+  }
+
+  public int getCustomSplitSum() {
+    Matcher m = Pattern.compile(CUSTOM_PATTEN).matcher(getText());
+
+    if (m.find()) {
+      String customDelimiter = m.group(1);
+      text = m.group(2);
+      return getSumValues(getSplitValues(customDelimiter));
+    }
+    return getSumValues(getSplitValues(SPLIT_MARK));
   }
 }
