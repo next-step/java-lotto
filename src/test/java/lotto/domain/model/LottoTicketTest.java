@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -54,7 +54,7 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또에 당첨 번호에 포함된 숫자가 없다.")
-    void findRank_miss() {
+    void countMatches_none() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
         Rank rank = lottoTicket.findRank(winningTicket);
         assertThat(rank).isEqualTo(Rank.MISS);
@@ -62,9 +62,49 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또가 당첨 번호와 일치한다.")
+    void countMatches_all() {
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int actual = lottoTicket.countMatches(winningTicket);
+        assertThat(actual).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("로또가 1등 당첨되었다.")
     void findRank_first() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
         Rank rank = lottoTicket.findRank(winningTicket);
         assertThat(rank).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("로또가 3등 당첨되었다.")
+    void findRank_third() {
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Rank rank = lottoTicket.findRank(winningTicket);
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @Test
+    @DisplayName("로또가 4등 당첨되었다.")
+    void findRank_fourth() {
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 7, 8));
+        Rank rank = lottoTicket.findRank(winningTicket);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("로또가 5등 당첨되었다.")
+    void findRank_fifth() {
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Rank rank = lottoTicket.findRank(winningTicket);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 결과 꽝!")
+    void findRank_miss() {
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Rank rank = lottoTicket.findRank(winningTicket);
+        assertThat(rank).isEqualTo(Rank.MISS);
     }
 }
