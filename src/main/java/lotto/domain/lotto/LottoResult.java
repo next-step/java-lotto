@@ -30,7 +30,7 @@ public class LottoResult {
             .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
             .sum();
 
-        return prizeMoney / (double) (LottoFactory.getLottoPrice() * purchaseLottoCount);
+        return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchaseLottoCount);
     }
 
     public Map<Integer, Integer> getMatchLottoCounts() {

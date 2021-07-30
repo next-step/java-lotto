@@ -79,22 +79,22 @@ class LottoResultTest {
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(3) / (double) (LottoFactory.getLottoPrice() * 1)
+                LottoPrizeMoney.findByMatchNumberCount(3) / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(4) / (double) (LottoFactory.getLottoPrice() * 1)
+                LottoPrizeMoney.findByMatchNumberCount(4) / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(5) / (double) (LottoFactory.getLottoPrice() * 1)
+                LottoPrizeMoney.findByMatchNumberCount(5) / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoPrizeMoney.findByMatchNumberCount(6) / (double) (LottoFactory.getLottoPrice() * 1)
+                LottoPrizeMoney.findByMatchNumberCount(6) / (double) LottoFactory.calculateTotalAmount(1)
             ));
     }
 

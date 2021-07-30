@@ -41,7 +41,11 @@ public class LottoFactory {
         return true;
     }
 
-    public static long getLottoPrice() {
-        return LOTTO_PRICE;
+    public static int possiblePurchaseLottoCount(long totalAmount) {
+        return (int) (totalAmount / LOTTO_PRICE);
+    }
+
+    public static long calculateTotalAmount(int purchasedLottoCount) {
+        return purchasedLottoCount * LOTTO_PRICE;
     }
 }

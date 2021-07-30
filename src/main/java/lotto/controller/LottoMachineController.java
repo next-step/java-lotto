@@ -12,9 +12,10 @@ import lotto.view.ResultView;
 public class LottoMachineController {
 
     public static void main(String[] args) {
-        List<Lotto> purchasedLottos = createPurchasedLottos();
+        List<Lotto> purchasedLottos = purchaseLotto();
         ResultView.printPurchasedLottos(purchasedLottos);
-        WinningLotto winningLotto = createWinningLotto(InputView.inputWinningNumbers());
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        WinningLotto winningLotto = createWinningLotto(winningNumbers);
 
         LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
         ResultView.printWinningStatistics(lottoResult.getMatchLottoCounts());
@@ -25,10 +26,12 @@ public class LottoMachineController {
         return LottoFactory.createWinning(integers);
     }
 
-    private static List<Lotto> createPurchasedLottos() {
+    private static List<Lotto> purchaseLotto() {
         long totalAmount = InputView.inputTotalAmount();
+        int possiblePurchaseLottoCount = LottoFactory.possiblePurchaseLottoCount(totalAmount);
+
         List<Lotto> purchasedLottos = new ArrayList<>();
-        for (int i = 0; i < totalAmount / LottoFactory.getLottoPrice(); i++) {
+        for (int i = 0; i < possiblePurchaseLottoCount; i++) {
             purchasedLottos.add(LottoFactory.createNormal());
         }
 
