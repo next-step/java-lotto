@@ -8,6 +8,9 @@ public class StringDigitsAdder {
     }
 
     public int calculate() {
+        if (AddCommand.isEmpty(this.addCommand)) {
+            return 0;
+        }
         return -1;
     }
 }

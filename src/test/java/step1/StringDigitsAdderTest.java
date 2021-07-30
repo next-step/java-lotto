@@ -1,5 +1,6 @@
 package step1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,7 +8,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringDigitsAdderTest {
     @Test
-    public void splitAndSum_null_또는_빈문자() {
+    @DisplayName("null_또는_빈문자")
+    public void calculateTest1() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder(null);
 
         int result = stringDigitsAdder.calculate();
@@ -20,7 +22,8 @@ public class StringDigitsAdderTest {
     }
 
     @Test
-    public void splitAndSum_숫자하나() {
+    @DisplayName("숫자하나")
+    public void calculateTest2() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("1");
 
         int result = stringDigitsAdder.calculate();
@@ -28,7 +31,8 @@ public class StringDigitsAdderTest {
     }
 
     @Test
-    public void splitAndSum_쉼표구분자() {
+    @DisplayName("쉼표구분자")
+    public void calculateTest3() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("1,2");
 
         int result = stringDigitsAdder.calculate();
@@ -36,7 +40,8 @@ public class StringDigitsAdderTest {
     }
 
     @Test
-    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+    @DisplayName("쉼표_또는_콜론_구분자")
+    public void calculateTest4() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("1,2:3");
 
         int result = stringDigitsAdder.calculate();
@@ -44,7 +49,8 @@ public class StringDigitsAdderTest {
     }
 
     @Test
-    public void splitAndSum_custom_구분자() throws Exception {
+    @DisplayName("custom_구분자")
+    public void calculateTest5() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("//;\n1;2;3");
 
         int result = stringDigitsAdder.calculate();
@@ -52,10 +58,10 @@ public class StringDigitsAdderTest {
     }
 
     @Test
-    public void splitAndSum_negative() throws Exception {
+    @DisplayName("negative exception throw")
+    public void calculateTest6() {
         StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("//;\n1;2;3");
 
-        assertThatThrownBy(() -> stringDigitsAdder.calculate())
-                .isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(stringDigitsAdder::calculate).isInstanceOf(RuntimeException.class);
     }
 }
