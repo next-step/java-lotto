@@ -29,7 +29,7 @@
 ## TODO
 * [X] Lotto 도메인 객체를 만든다. 들어온 숫자배열에 대해 검증을 해야한다. (배열은 size 6, 요소는 1~45 사이의 숫자인지)
 * [X] AutoPurchaseStrategy 도메인을 만든다. 1~45 사이 6개의 정수형 변수를 요소로 가진 List을 반환한다.
-* [ ] LottoMachine 도메인 객체를 만든다. 구입전략과 구입금액을 입력받고 횟수에 따른 List<Lotto>를 생성/반환 (구입금액에 대한 유효성 검사)
+* [X] LottoShop 도메인 객체를 만든다. 구입전략과 구입금액을 입력받고 횟수에 따른 List<Lotto>를 생성/반환 (구입금액에 대한 유효성 검사)
 * [ ] WinningMoney Enum 클래스를 만든다. 당첨번호와 받은 Lotto 숫자를 대조하여 당첨여부를 확인한다.
 * [ ] WinningStatistics 도메인 객체를 만든다. 당첨번호와 List<Lotto>를 입력받는다. (당첨번호에 대한 유효성 검사)
 * [ ] InputView UI 객체를 만든다. 구입금액과 당첨번호를 입력받는다.

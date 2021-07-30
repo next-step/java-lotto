@@ -1,19 +1,23 @@
 package lotto.domain;
 
+import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
 import lotto.domain.purchaseStrategy.PurchaseStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine {
+public class LottoShop {
 
     private static final String BELOW_MIN_AMOUNT_ERROR_MESSAGE = "최소 1000원 이상 지불하셔야 합니다.";
     private static final int LOTTO_PRICE = 1000;
-    private static final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public LottoMachine(int amount, PurchaseStrategy purchaseStrategy) {
+    public List<Lotto> buyLotto(int amount, PurchaseStrategy purchaseStrategy) {
         validateAmount(amount);
-        // purchaseStrategy.generateLottoNumber();
+
+        printLotto(amount, purchaseStrategy);
+
+        return lottos;
     }
 
     private void validateAmount(int amount) {
@@ -22,8 +26,10 @@ public class LottoMachine {
         }
     }
 
-    public List<Lotto> drawing() {
-        return lottos;
+    private void printLotto(int amount, PurchaseStrategy purchaseStrategy) {
+        for(int i = 0; i < amount/LOTTO_PRICE; i++) {
+            lottos.add(new Lotto(purchaseStrategy.generateLottoNumber()));
+        }
     }
 
 }
