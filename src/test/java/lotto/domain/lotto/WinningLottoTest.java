@@ -17,33 +17,33 @@ class WinningLottoTest {
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-                3L
+                3
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 11, 12)),
-                4L
+                4
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 12)),
-                5L
+                5
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                6L
+                6
             ));
     }
 
     @DisplayName("[성공] 일치하는 번호의 개수")
     @ParameterizedTest
     @MethodSource("validLotto")
-    public void matchCount(WinningLotto winningLotto, NormalLotto normalLotto, long expected) {
+    public void matchCount(WinningLotto winningLotto, NormalLotto normalLotto, int expected) {
         // given
 
         // when
-        long matchCount = winningLotto.matchNumberCount(normalLotto);
+        int matchCount = winningLotto.matchNumberCount(normalLotto);
 
         // then
         assertThat(matchCount).isEqualTo(expected);

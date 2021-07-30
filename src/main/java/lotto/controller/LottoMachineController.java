@@ -27,7 +27,7 @@ public class LottoMachineController {
     }
 
     private static List<NormalLotto> purchaseLotto() {
-        long totalAmount = InputView.inputTotalAmount();
+        int totalAmount = InputView.inputTotalAmount();
         int possiblePurchaseLottoCount = LottoFactory.possiblePurchaseLottoCount(totalAmount);
 
         List<NormalLotto> purchasedLottos = new ArrayList<>();

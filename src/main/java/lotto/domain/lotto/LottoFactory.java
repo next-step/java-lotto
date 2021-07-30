@@ -9,7 +9,7 @@ import lotto.domain.lotto.exception.InvalidLottoNumberException;
 public class LottoFactory {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final long LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     public static NormalLotto createNormal() {
         Set<Integer> randomNumbers = new HashSet<>();
@@ -35,11 +35,11 @@ public class LottoFactory {
         }
     }
 
-    public static int possiblePurchaseLottoCount(long totalAmount) {
-        return (int) (totalAmount / LOTTO_PRICE);
+    public static int possiblePurchaseLottoCount(int totalAmount) {
+        return totalAmount / LOTTO_PRICE;
     }
 
-    public static long calculateTotalAmount(int purchasedLottoCount) {
+    public static int calculateTotalAmount(int purchasedLottoCount) {
         return purchasedLottoCount * LOTTO_PRICE;
     }
 }

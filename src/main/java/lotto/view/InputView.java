@@ -10,16 +10,16 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static long inputTotalAmount() {
+    public static int inputTotalAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = scanner.nextLine();
 
-        return parseLong(input);
+        return parseInteger(input);
     }
 
-    private static long parseLong(String input) {
+    private static int parseInteger(String input) {
         try {
-            return Long.parseLong(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException ex) {
             throw new InvalidParseIntegerException();
         }
