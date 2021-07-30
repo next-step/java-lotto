@@ -1,14 +1,15 @@
 package calculator.model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import calculator.utils.ErrorMessage;
 import calculator.utils.Validation;
 
 public class Calculator {
 
-	private static final String PARALLEL_TEXT = "//";
-	private static final String NEW_LINE_TEXT = "\n";
-
-	private boolean SPECIAL_TEXT_EXIST = false;
+	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
+	private static final String DEFAULT_REG_EXP = ",|:";
 
 	private final String calculatorValue;
 	private final Calculation calculation;
@@ -23,32 +24,12 @@ public class Calculator {
 		return new Calculator(calculatorValue);
 	}
 
-	public boolean getSpecialTextExist(String specialText) {
-		return calculatorValue.contains(specialText);
-	}
-
-	public boolean getAllSpecialTextExist() {
-		if (getSpecialTextExist(PARALLEL_TEXT) && getSpecialTextExist(NEW_LINE_TEXT)) {
-			SPECIAL_TEXT_EXIST = true;
-		}
-		return SPECIAL_TEXT_EXIST;
-	}
-
 	public int calculate() {
-		boolean specialTextExist = getAllSpecialTextExist();
-		if(specialTextExist){
-			return notSpecialTextCalculate();
+		Matcher matcher = Pattern.compile(PATTERN_REG_EXP).matcher(calculatorValue);
+		if (matcher.find()) {
+			return calculation.calculate(matcher.group(1), matcher.group(2));
 		}
-		return specialTextCalculate();
+		return calculation.calculate(DEFAULT_REG_EXP, calculatorValue);
 	}
-
-	private int notSpecialTextCalculate() {
-		return calculation.notSpecialTextCalculate(calculatorValue);
-	}
-
-	private int specialTextCalculate() {
-		return 0;
-	}
-
 
 }
