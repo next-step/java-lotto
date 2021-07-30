@@ -53,8 +53,6 @@ public class AddCommandTest {
         int result = addCommand.execute();
         assertThat(result).isEqualTo(6);
 
-
-
         AddCommand addCommand2 = new AddCommand("//;\n1;2;3");
 
         int result2 = addCommand2.execute();
