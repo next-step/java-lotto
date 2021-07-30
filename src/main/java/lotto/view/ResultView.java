@@ -12,7 +12,7 @@ public class ResultView {
 
 	private static final String MESSAGE_BOUGHT_LOTTO_TICKET_COUNT = "%s개를 구매했습니다.%n";
 	private static final String MESSAGE_WINNING_STATISTICS = "\n당첨 통계\n---------";
-	private static final String MESSAGE_WINNING_LOTTO_TICKET_COUNT = "%d개 일치 (%d)원- %d개%n";
+	private static final String MESSAGE_WINNING_LOTTO_TICKET_COUNT = "%d개 일치 (%,d)원- %d개%n";
 	private static final String MESSAGE_TOTAL_EARNINGS_RATE = "총 수익률은 %s입니다.";
 	private static final String DECIMAL_POINT = "%.2f";
 	private static final String MESSAGE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
