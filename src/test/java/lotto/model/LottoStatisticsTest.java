@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 class LottoStatisticsTest {
     private LottoStatistics lottoStatistics;
@@ -14,11 +15,8 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         int payment = 3_000;
-        Lottos lottos = Lottos.from(List.of(
-                                            Lotto.from(List.of(1, 2, 3, 4, 5, 6)))
-                                   );
-        lottos.scratch(WinningNumber.from("1, 2, 3, 7, 8, 9"));
-        lottoStatistics = LottoStatistics.from(payment, lottos);
+        Lottos lottos = Lottos.from(List.of(Lotto.from(Set.of(1, 2, 3, 4, 5, 6))));
+        lottoStatistics = LottoStatistics.from(payment, lottos.scratch(WinningNumber.from("1, 2, 3, 7, 8, 9")));
     }
 
     @Test
@@ -33,6 +31,6 @@ class LottoStatisticsTest {
     @DisplayName("수익률을 계산한다")
     void getEarningsRate() {
         double earningsRate = lottoStatistics.getEarningsRate();
-        Assertions.assertThat(earningsRate).isEqualTo(0.6);
+        Assertions.assertThat(earningsRate).isEqualTo(1.6666666666666667);
     }
 }

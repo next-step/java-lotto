@@ -4,9 +4,9 @@ import lotto.model.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import static java.util.Collections.shuffle;
-import static java.util.Collections.sort;
 import static java.util.stream.IntStream.rangeClosed;
 
 public class AutoLottoStrategy implements LottoRuleStrategy {
@@ -26,8 +26,6 @@ public class AutoLottoStrategy implements LottoRuleStrategy {
     @Override
     public Lotto ticketing() {
         shuffle(NUMBERS);
-        ArrayList<Integer> numbers = new ArrayList<>(this.NUMBERS.subList(0, 6));
-        sort(numbers);
-        return Lotto.from(numbers);
+        return Lotto.from(new TreeSet<>(this.NUMBERS.subList(0, 6)));
     }
 }

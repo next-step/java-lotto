@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lottos {
     private final List<Lotto> lottos;
 
@@ -16,10 +18,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public Lottos scratch(final WinningNumber winningNumber) {
+    public List<LottoPrize> scratch(final WinningNumber winningNumber) {
         validate(winningNumber);
-        lottos.forEach(lotto -> lotto.scratch(winningNumber));
-        return this;
+        return lottos.stream()
+                     .map(lotto -> lotto.scratch(winningNumber))
+                     .collect(toList());
     }
 
     public Stream<Lotto> stream() {

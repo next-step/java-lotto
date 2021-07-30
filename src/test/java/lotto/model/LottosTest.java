@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 class LottosTest {
     private Lottos lottos;
@@ -13,17 +14,19 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = Lottos.from(List.of(
-                                     Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
-                                     Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
-                                     Lotto.from(List.of(1, 2, 3, 4, 5, 6)))
+                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)),
+                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)),
+                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)))
                             );
     }
 
     @Test
-    @DisplayName("가지고 있는 로또를 모두 긁고 자신을 반환한다")
+    @DisplayName("가지고 있는 로또를 모두 긁고 결과를 반환한다. 총 당첨금은 15,000원이다")
     void scratch() {
-        Lottos scratchLottos = lottos.scratch(WinningNumber.from("1, 2, 3, 4, 5, 6"));
-        Assertions.assertThat(lottos).isEqualTo(scratchLottos);
+        Assertions.assertThat(lottos.scratch(WinningNumber.from("1, 2, 3, 7, 8, 9")).stream()
+                                    .map(LottoPrize::getPrizeMoney)
+                                    .reduce(0, Integer::sum))
+                  .isEqualTo(15_000);
     }
 
     @Test
