@@ -9,22 +9,24 @@ public class DefaultSumCalculator implements SumCalculator {
 
     @Override
     public int sum(List<String> tokens) {
-
         return tokens.stream()
-                .mapToInt(token -> {
-                    int number;
+                .mapToInt(this::convertStringToNumber)
+                .sum();
+    }
 
-                    try {
-                        number =  Integer.parseInt(token);
-                    } catch (NumberFormatException e) {
-                        throw new RuntimeException(NUMBER_FORMAT_EXCEPTION);
-                    }
+    private int convertStringToNumber(String token) {
+        int number;
 
-                    if (number < 0) {
-                        throw new RuntimeException(CAN_NEGATIVE_EXCEPTION);
-                    }
+        try {
+            number =  Integer.parseInt(token);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(NUMBER_FORMAT_EXCEPTION);
+        }
 
-                    return number;
-                }).sum();
+        if (number < 0) {
+            throw new RuntimeException(CAN_NEGATIVE_EXCEPTION);
+        }
+
+        return number;
     }
 }
