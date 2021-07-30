@@ -29,6 +29,6 @@ public class StringAddCalculator {
     }
 
     private String[] getNumbers(String input) {
-        return input.split(",");
+        return input.split(",|:");
     }
 }
