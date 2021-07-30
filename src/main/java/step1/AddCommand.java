@@ -4,8 +4,10 @@ import java.util.IllegalFormatConversionException;
 
 public class AddCommand {
     private final String value;
+    private final Delimiters delimiters;
 
     public AddCommand(String value) {
+        this.delimiters = DelimitersFactory.createDelimiters(value);
         this.value = value;
     }
 
@@ -17,10 +19,6 @@ public class AddCommand {
         return addCommand.value.matches("^\\d+$");
     }
 
-    public static boolean hasCustomDelimiter(AddCommand addCommand) {
-        return addCommand.value.matches("^//(.)\\n(.*)");
-    }
-
     public int toInt() {
         if (!isOnlyDigit(this)) {
             throw new IllegalFormatConversionException('s', String.class);
@@ -28,4 +26,17 @@ public class AddCommand {
 
         return Integer.parseInt(this.value);
     }
+
+    public static boolean containsNegative(AddCommand addCommand) {
+        return addCommand.value.matches(".*-\\d+.*");
+    }
+
+    public int execute() {
+        return this.delimiters.parse(this.value)
+                .stream()
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
+    }
+
+
 }

@@ -28,14 +28,6 @@ public class AddCommandTest {
     }
 
     @Test
-    @DisplayName("커스텀 구분자가 있는지 확인")
-    void hasCustomDelimiterTest() {
-        assertThat(AddCommand.hasCustomDelimiter(new AddCommand("1.1"))).isFalse();
-
-        assertThat(AddCommand.hasCustomDelimiter(new AddCommand("//;\n1;2;3"))).isTrue();
-    }
-
-    @Test
     @DisplayName("toInt 테스트")
     void toIntTest() {
         assertThat(new AddCommand("1").toInt()).isEqualTo(1);
@@ -45,5 +37,27 @@ public class AddCommandTest {
     @DisplayName("toInt exception 테스트")
     void toIntExceptionTest() {
         assertThatThrownBy(() -> new AddCommand("1.1").toInt()).isInstanceOf(IllegalFormatConversionException.class);
+    }
+
+    @Test
+    @DisplayName("음수를 포함하는지 확인하는 메소드 테스트")
+    void containsNegativeTest() {
+        assertThat(AddCommand.containsNegative(new AddCommand("-1,2,3"))).isTrue();
+    }
+
+    @Test
+    @DisplayName("문자열 덧셈이 정상적으로 실행되는지 테스트")
+    void executeTest() {
+        AddCommand addCommand = new AddCommand("1,2:3");
+
+        int result = addCommand.execute();
+        assertThat(result).isEqualTo(6);
+
+
+
+        AddCommand addCommand2 = new AddCommand("//;\n1;2;3");
+
+        int result2 = addCommand2.execute();
+        assertThat(result2).isEqualTo(6);
     }
 }

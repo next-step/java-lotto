@@ -60,7 +60,7 @@ public class StringDigitsAdderTest {
     @Test
     @DisplayName("negative exception throw")
     public void calculateTest6() {
-        StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("//;\n1;2;3");
+        StringDigitsAdder stringDigitsAdder = new StringDigitsAdder("-1,2,3");
 
         assertThatThrownBy(stringDigitsAdder::calculate).isInstanceOf(RuntimeException.class);
     }

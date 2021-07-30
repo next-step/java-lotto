@@ -1,11 +1,9 @@
 package step1;
 
 public class StringDigitsAdder {
-    private Delimiters delimiters;
     private final AddCommand addCommand;
 
     public StringDigitsAdder(String rawInput) {
-        this.delimiters = new Delimiters();
         this.addCommand = new AddCommand(rawInput);
     }
 
@@ -18,10 +16,10 @@ public class StringDigitsAdder {
             return addCommand.toInt();
         }
 
-        if (AddCommand.hasCustomDelimiter(this.addCommand)) {
-            int i = 1 + 1;
+        if (AddCommand.containsNegative(this.addCommand)) {
+            throw new RuntimeException("입력 문자열에 음수가 포함될 수 없습니다.");
         }
 
-        return -1;
+        return this.addCommand.execute();
     }
 }
