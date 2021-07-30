@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.common.LottoPrizeMoney;
+import lotto.common.Rank;
 
 public class LottoResult {
 
@@ -17,9 +17,9 @@ public class LottoResult {
     }
 
     public double getEarningRate() {
-        Map<Integer, Integer> matchLottoCounts = getMatchLottoCounts();
-        long prizeMoney = matchLottoCounts.keySet().stream()
-            .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
+        Map<Integer, Integer> matchCounts = getMatchLottoCounts();
+        int prizeMoney = matchCounts.keySet().stream()
+            .mapToInt(matchCount -> Rank.valueOf(matchCount).getWinningMoney() * matchCounts.get(matchCount))
             .sum();
 
         return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchasedLottos.size());

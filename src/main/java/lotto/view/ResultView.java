@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.common.LottoPrizeMoney;
+import lotto.common.Rank;
 import lotto.domain.lotto.Lotto;
 
 public class ResultView {
@@ -15,8 +15,12 @@ public class ResultView {
     public static void printWinningStatistics(Map<Integer, Integer> matchLottoCounts) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        matchLottoCounts.keySet().forEach(
-            key -> System.out.printf("%d개 일치 (%d원)- %d개%n", key, LottoPrizeMoney.findByMatchNumberCount(key), matchLottoCounts.get(key)));
+        matchLottoCounts.keySet()
+            .forEach(matchCount -> {
+                int winningMoney = Rank.valueOf(matchCount).getWinningMoney();
+                Integer count = matchLottoCounts.get(matchCount);
+                System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, winningMoney, count);
+            });
     }
 
     public static void printEarningRate(double earningRate) {

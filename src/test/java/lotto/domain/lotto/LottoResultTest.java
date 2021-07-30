@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
-import lotto.common.LottoPrizeMoney;
+import lotto.common.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -79,22 +79,22 @@ class LottoResultTest {
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(3) / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.valueOf(3).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 11, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(4) / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.valueOf(4).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 12)),
-                LottoPrizeMoney.findByMatchNumberCount(5) / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.valueOf(5).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ),
             Arguments.of(
                 new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new NormalLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoPrizeMoney.findByMatchNumberCount(6) / (double) LottoFactory.calculateTotalAmount(1)
+                Rank.valueOf(6).getWinningMoney() / (double) LottoFactory.calculateTotalAmount(1)
             ));
     }
 
