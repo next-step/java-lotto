@@ -29,6 +29,15 @@ public class StringAddCalculator {
     }
 
     private String[] getNumbers(String input) {
+        if(input.contains("//") && input.contains("\\n")){
+            String prefix = input.substring(0, 5);
+            String suffix = input.substring(5, input.length());
+
+            String slashRemoveString = prefix.replace("//", "");
+            String delimiter = slashRemoveString.replace("\\n", "");
+
+            return suffix.split(delimiter);
+        }
         return input.split(",|:");
     }
 }
