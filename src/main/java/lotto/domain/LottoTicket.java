@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    public static final int SIZE = 6;
-    public static final String SIZE_EXCEPTION = "로또 티켓은 " + SIZE + "개의 숫자가 필요합니다.";
+    public static final int TICKET_SIZE = 6;
+    public static final String SIZE_EXCEPTION = "로또 티켓은 " + TICKET_SIZE + "개의 숫자가 필요합니다.";
     public static final String DUPLICATE_EXCEPTION = "반복된 숫자가 로또 티켓에 있습니다.";
 
     private final List<LottoNumber> lottoNumbers;
@@ -33,7 +33,7 @@ public class LottoTicket {
     }
 
     private static void validateSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != SIZE) {
+        if (lottoNumbers.size() != TICKET_SIZE) {
             throw new IllegalArgumentException(SIZE_EXCEPTION);
         }
     }
@@ -42,8 +42,8 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int countMatches(LottoTicket winningTicket) {
-        // no loss of data from casting to int since SIZE == 6
+    private int countMatches(LottoTicket winningTicket) {
+        // no loss of data from casting to int since TICKET_SIZE == 6
         return (int) lottoNumbers.stream().filter(winningTicket::contains).count();
     }
 

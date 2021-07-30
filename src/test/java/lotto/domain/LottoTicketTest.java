@@ -54,21 +54,6 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또에 당첨 번호에 포함된 숫자가 없다.")
-    void countMatches_none() {
-        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
-        int actual = lottoTicket.countMatches(winningTicket);
-        assertThat(actual).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("로또가 당첨 번호와 일치한다.")
-    void countMatches_all() {
-        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int actual = lottoTicket.countMatches(winningTicket);
-        assertThat(actual).isEqualTo(6);
-    }
-
-    @Test
     void findRank_miss() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
         Rank rank = lottoTicket.findRank(winningTicket);
@@ -76,6 +61,7 @@ public class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("로또가 당첨 번호와 일치한다.")
     void findRank_first() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
         Rank rank = lottoTicket.findRank(winningTicket);
