@@ -12,6 +12,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import lotto.exception.InvalidLottoNumbersSizeException;
+
 class LottoTicketTest {
 
 	@DisplayName("로또 1장은 중복되지 않는 6개의 번호를 갖는다.")
@@ -20,6 +22,14 @@ class LottoTicketTest {
 		LottoMachine lottoMachine = new LottoMachine();
 		LottoTicket lottoTicket = LottoTicket.from(lottoMachine.pickRandomNumbers());
 		assertThat(lottoTicket.getNumbers()).hasSize(6).doesNotHaveDuplicates();
+	}
+
+	@DisplayName("로또 1장 생성 시 번호가 6개가 아니면 InvalidLottoNumbersSizeException 예외가 발생한다.")
+	@MethodSource("invalidLottoNumbersSizeArguments")
+	@ParameterizedTest
+	void invalidLottoNumbersSize(List<Integer> lottoNumbers) {
+		assertThatThrownBy(() -> LottoTicket.from(lottoNumbers))
+			.isInstanceOf(InvalidLottoNumbersSizeException.class);
 	}
 
 	@DisplayName("지난 주 당첨 번호로 로또를 생성한다.")
@@ -37,6 +47,13 @@ class LottoTicketTest {
 		LottoTicket boughtLottoTicket = LottoTicket.from(boughtLottoNumbers);
 		LottoTicket winningLottoTicket = LottoTicket.from(winningLottoNumbers);
 		assertThat(boughtLottoTicket.compareTo(winningLottoTicket)).isEqualTo(prize);
+	}
+
+	private static Stream<Arguments> invalidLottoNumbersSizeArguments() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+		);
 	}
 
 	private static Stream<Arguments> winningLottoNumbersArguments() {
