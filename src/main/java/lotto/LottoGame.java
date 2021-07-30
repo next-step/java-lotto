@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoMachine;
 import lotto.domain.Lotto;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,11 +27,12 @@ public class LottoGame {
         }
 
         List<Integer> correctNumbers = inputView.lastWeekendNumber();
+        int bonusNumber = inputView.bonusNumber();
 
         for (Lotto lotto: lottos) {
-            lottoMachine.lotteryJackpot(lotto, correctNumbers);
+            lottoMachine.lotteryJackpot(lotto, correctNumbers, bonusNumber);
         }
-        Map<String, Object> result = lottoMachine.lotteryRewards();
+        Map<Rank, Integer> result = lottoMachine.lotteryRewards();
 
         resultView.printResult(result, price);
     }
