@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.domain.lotto.LottoPackage;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.money.Money;
 import lotto.domain.prize.LottoPrize;
@@ -26,23 +26,24 @@ class LottoServiceTest {
     @ParameterizedTest
     public void shoud_return_lottopackage(int money, int expectedCount) throws Exception {
         //arrange, act
-        LottoPackage lottoPackage = LottoService.purchase(Money.of(money));
+        Lottos lottos = LottoService.purchase(Money.of(money));
 
         //assert
-        assertThat(lottoPackage.getLottos().size()).isEqualTo(expectedCount);
+        assertThat(lottos.size()).isEqualTo(expectedCount);
     }
 
     @DisplayName("구매한 LottoPackage와 WinningLotto를 LottoService의 match를 통해 match결과를 받을 수 있다")
     @Test
     public void shoud_return_matchResult() throws Exception {
         //arrange
-        LottoPackage lottoPackage = LottoPackage.of(getLottos(), Money.of(2000));
+        Lottos lottos = getLottos();
+        Money money = Money.of(2000);
         WinningLotto winningLotto = getWinningLotto();
         Set<LottoPrize> expectedLottoPrize = new HashSet<>(Arrays.asList(LottoPrize.FOURTH, LottoPrize.FIRST));
         List<Long> expectedCount = Arrays.asList(1L, 1L);
 
         //act
-        MatchResult matchResult = LottoService.match(lottoPackage, winningLotto);
+        MatchResult matchResult = LottoService.match(lottos, money, winningLotto);
 
         //assert
         assertAll(

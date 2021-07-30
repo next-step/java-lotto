@@ -15,8 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class MoneyTest {
 
     @DisplayName("0원 이상이면 Money를 만들 수 있다")
-    @ValueSource(ints = {0, 1})
-    @ParameterizedTest
+    @Test
     public void should_make_object_over_1_money() throws Exception {
         //arrange
         int moneyAmount = 1;
@@ -34,16 +33,6 @@ class MoneyTest {
     public void should_throw_exception_under_0_money(int money) throws Exception {
         //arrange, act, assert
         assertThatIllegalArgumentException().isThrownBy(() -> Money.of(money));
-    }
-
-    @DisplayName("입력 금액이 최저금액인 천원보다 크면 Money객체를 생성한다")
-    @Test
-    public void should_make_object_over_input_value_more_than_lowest_amount() throws Exception {
-        //arrange
-        Money money = Money.of(2000);
-
-        //act, assert
-        assertThat(money).isEqualTo(Money.of(2000));
     }
 
     @DisplayName("로또가격 (천원)과 비교하여 현재 Money로 몇개를 살수 있는지 count한다")

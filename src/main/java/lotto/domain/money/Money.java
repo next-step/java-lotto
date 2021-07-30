@@ -1,9 +1,9 @@
 package lotto.domain.money;
 
 public class Money {
-    public static final int LOWEST_AMOUNT = 1_000;
     public static final int MIN_AMOUNT = 0;
     public static final Money MIN = Money.of(MIN_AMOUNT);
+
     private final int amount;
 
     private Money(int money) {

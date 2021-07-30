@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.lotto.LottoPackage;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.prize.LottoPrize;
 import lotto.domain.prize.MatchResult;
 
@@ -15,10 +15,10 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottos(LottoPackage lottoPackage) {
-        printStatement(String.format(BUY_RESULT_STATEMENT_FORMAT, lottoPackage.getAllLottoCount()));
+    public static void printLottos(Lottos lottos) {
+        printStatement(String.format(BUY_RESULT_STATEMENT_FORMAT, lottos.size()));
 
-        lottoPackage.getLottos().stream()
+        lottos.getLottos().stream()
                 .map(ResultView::makeLottoNumberResult)
                 .forEach(ResultView::printStatement);
 

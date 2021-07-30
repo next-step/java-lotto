@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.lotto.LottoPackage;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.prize.MatchResult;
 import lotto.domain.money.Money;
@@ -11,20 +11,16 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public static void main(String[] args) {
-        LottoPackage lottoPackage = purchaseLotto();
-        calculateWinningStatistics(lottoPackage);
-    }
-
-    private static LottoPackage purchaseLotto() {
         Money money = InputView.inputPurchaseMoney();
-        LottoPackage lottoPackage = LottoService.purchase(money);
-        ResultView.printLottos(lottoPackage);
-        return lottoPackage;
+        Lottos lottos = LottoService.purchase(money);
+        ResultView.printLottos(lottos);
+
+        calculateWinningStatistics(money, lottos);
     }
 
-    private static void calculateWinningStatistics(LottoPackage lottoPackage) {
+    private static void calculateWinningStatistics(Money money, Lottos lottos) {
         WinningLotto winningLotto = InputView.inputWinningNumbers();
-        MatchResult matchResult = LottoService.match(lottoPackage, winningLotto);
+        MatchResult matchResult = LottoService.match(lottos, money, winningLotto);
         ResultView.printMatchResult(matchResult);
     }
 

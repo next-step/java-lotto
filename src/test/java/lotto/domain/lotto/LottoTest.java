@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
-    @DisplayName("LottoNumber 리스트를 가지고 Loot객체를 만든다")
+    @DisplayName("LottoNumber 리스트를 가지고 Lotto객체를 만든다")
     @Test
     public void should_make_object_with_lotto_obj_list() throws Exception {
         //arrange

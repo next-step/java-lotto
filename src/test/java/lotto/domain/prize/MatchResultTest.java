@@ -27,7 +27,7 @@ class MatchResultTest {
         assertThat(matchResult.getMatchResult().size()).isEqualTo(1);
     }
 
-    @DisplayName("Money null이면 MatchResult객체를 만든다")
+    @DisplayName("Money null이면 IllegalArgumentException이 발생한다")
     @Test
     public void should_throw_exception_money_null() throws Exception {
         //arrange
@@ -41,12 +41,16 @@ class MatchResultTest {
                 -> MatchResult.of(matchMap, money));
     }
 
-    @DisplayName("매치된 로또 결과가 null이면 MatchResult객체를 만든다")
+    @DisplayName("매치된 로또 결과가 null이면 IllegalArgumentException이 발생한다")
     @Test
     public void should_throw_exception_null_or_empty_match_map() throws Exception {
-        //arrange, act, assert
+        //arrange
+        Map<LottoPrize, Long> matchMap = null;
+        Money money = Money.of(1000);
+
+        //act, assert
         assertThatIllegalArgumentException().isThrownBy(()
-                -> MatchResult.of(null, Money.of(1000)));
+                -> MatchResult.of(matchMap, money));
     }
 
     @DisplayName("매치된 로또 결과가 있을경우 match count를 반환한다")

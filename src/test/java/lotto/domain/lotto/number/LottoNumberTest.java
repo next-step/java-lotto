@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoNumberTest {
-    @DisplayName("입력 금액이 최저금액인 천원보다 크면 Money객체를 생성한다")
+    @DisplayName("1과 45사이의 숫자일경우 LottoNumber가 생성된다")
     @Test
     public void should_make_object_over_input_value_more_than_lowest_amount() throws Exception {
         //arrange
@@ -25,16 +25,6 @@ class LottoNumberTest {
     public void should_throw_exception_input_value_under_than_lowest_amount(int number) throws Exception {
         //arrange, act, assert
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(number));
-    }
-
-    @DisplayName("실제값의 문자형태로 변경하여 리턴한다")
-    @Test
-    public void should_return_string_value() throws Exception {
-        //arrange
-        LottoNumber lottoNumber = LottoNumber.of(23);
-
-        //act, assert
-        assertThat(lottoNumber.getNumberString()).isEqualTo("23");
     }
 
     @DisplayName("실제값을 리턴한다")
