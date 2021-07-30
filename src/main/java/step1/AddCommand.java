@@ -37,6 +37,4 @@ public class AddCommand {
                 .map(Integer::parseInt)
                 .reduce(0, Integer::sum);
     }
-
-
 }

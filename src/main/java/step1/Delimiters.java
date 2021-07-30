@@ -34,7 +34,6 @@ public class Delimiters {
         }
 
         Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN_REGEX).matcher(rawInput);
-
         if (m.find()) {
             return m.group(1);
         }
