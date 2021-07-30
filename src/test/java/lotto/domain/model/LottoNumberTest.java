@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,5 +22,29 @@ public class LottoNumberTest {
     void constructor_in_range() {
         assertThat(LottoNumber.valueOf(1)).isEqualTo(LottoNumber.valueOf(1));
         assertThat(LottoNumber.valueOf(45)).isEqualTo(LottoNumber.valueOf(45));
+    }
+
+    @Test
+    @DisplayName("두 수를 비교했을 때 첫번째 숫자가 두번째 숫자보다 작다.")
+    void comparable_less_than() {
+        LottoNumber one = LottoNumber.valueOf(1);
+        LottoNumber two = LottoNumber.valueOf(2);
+        assertThat(one.compareTo(two) < 0).isTrue();
+    }
+
+    @Test
+    @DisplayName("두 수를 비교해서 크기가 같다.")
+    void comparable_equals() {
+        LottoNumber number = LottoNumber.valueOf(2);
+        LottoNumber sameNumber = LottoNumber.valueOf(2);
+        assertThat(number.compareTo(sameNumber) == 0).isTrue();
+    }
+
+    @Test
+    @DisplayName("두 수를 비교했을 때 첫번째 숫자가 두번째 숫자보다 크다.")
+    void comparable_greater_than() {
+        LottoNumber one = LottoNumber.valueOf(1);
+        LottoNumber two = LottoNumber.valueOf(2);
+        assertThat(two.compareTo(one) > 0).isTrue();
     }
 }

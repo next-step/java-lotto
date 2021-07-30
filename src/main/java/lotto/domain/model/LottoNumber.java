@@ -1,8 +1,8 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int BOTTOM_OF_RANGE = 1;
     public static final int TOP_OF_RANGE = 45;
@@ -20,6 +20,11 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int number) {
         return new LottoNumber(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber that) {
+        return Integer.compare(this.lottoNumber, that.lottoNumber);
     }
 
     @Override
