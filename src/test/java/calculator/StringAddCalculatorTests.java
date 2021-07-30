@@ -4,6 +4,7 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,5 +19,16 @@ public class StringAddCalculatorTests {
         int result = stringAddCalculator.calculate(input);
 
         assertThat(result).isEqualTo(0);
+    }
+
+    @DisplayName("숫자하나 만 넣었을 때 넣은 숫자 반환하는 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "3"})
+    void inputOneNumberTest(String input){
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+
+        int result = stringAddCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(Integer.parseInt(input));
     }
 }

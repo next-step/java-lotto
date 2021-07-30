@@ -7,6 +7,11 @@ public class StringAddCalculator {
         if (input.isEmpty() || input == null) {
             return 0;
         }
+
+        if(input.length() == 1){
+            return Integer.parseInt(input);
+        }
+
         return result;
     }
 }
