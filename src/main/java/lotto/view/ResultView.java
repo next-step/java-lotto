@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         matchLottoCounts.keySet().forEach(
-            key -> System.out.printf("%d개 일치 (%d원)- %d개%n", key, LottoPrizeMoney.findByMatchNumberCount(3), matchLottoCounts.get(3)));
+            key -> System.out.printf("%d개 일치 (%d원)- %d개%n", key, LottoPrizeMoney.findByMatchNumberCount(key), matchLottoCounts.get(key)));
     }
 
     public static void printEarningRate(double earningRate) {
