@@ -9,16 +9,14 @@ import calculator.utils.Validation;
 
 public class Calculation {
 
-	private static final String SPLIT_PARAMETER = ",|:";
-
-	public int notSpecialTextCalculate(String calculatorValue) {
-		String[] result = notSpecialSplit(calculatorValue);
+	public int calculate(String regexp, String calculatorValue) {
+		String[] result = stringToSplit(calculatorValue, regexp);
 		List<String> characters = StringArrayToList(result);
-		return calculate(characters);
+		return plusCalculate(characters);
 	}
 
-	public String[] notSpecialSplit(String textValue) {
-		return stringToSplit(textValue, SPLIT_PARAMETER);
+	public String[] stringToSplit(String textValue, String regexp) {
+		return textValue.split(regexp);
 	}
 
 	public List<String> StringArrayToList(String[] result) {
@@ -27,13 +25,13 @@ public class Calculation {
 		return characters;
 	}
 
-	public int calculate(List<String> characters) {
-		int calculateResult = 0;
+	public int plusCalculate(List<String> characters) {
+		int result = 0;
 		for (String character : characters) {
 			Validation.validNumberTypeCheck(character, ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
-			calculateResult = calculateReturnValue(calculateResult,character);
+			result = calculateReturnValue(result, character);
 		}
-		return calculateResult;
+		return result;
 	}
 
 	public int calculateReturnValue(int calculateResult, String character) {
@@ -41,12 +39,8 @@ public class Calculation {
 	}
 
 	public int toInt(String character) {
-		Validation.validPositiveNumber(Integer.parseInt(character),ErrorMessage.NUMBER_POSITIVE_ERROR_MESSAGE);
+		Validation.validPositiveNumber(Integer.parseInt(character), ErrorMessage.NUMBER_POSITIVE_ERROR_MESSAGE);
 		return Integer.parseInt(character);
-	}
-
-	public String[] stringToSplit(String inputValue, String regexp) {
-		return inputValue.split(regexp);
 	}
 
 }
