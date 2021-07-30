@@ -42,6 +42,10 @@ public class Lotto {
         return numbersSet.size() != numbers.size();
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
     /*
     private boolean checkNumbersRange(List<Integer> numbers) {
         long count = numbers.stream()
