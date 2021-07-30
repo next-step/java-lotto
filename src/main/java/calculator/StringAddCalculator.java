@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 
     public int calculate(String input) {
@@ -20,7 +22,9 @@ public class StringAddCalculator {
 
     private Integer sum(String[] numbers) {
         Integer result;
-        result = Integer.parseInt(numbers[0])+ Integer.parseInt(numbers[1]);
+        result = Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .sum();
         return result;
     }
 

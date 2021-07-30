@@ -43,4 +43,15 @@ public class StringAddCalculatorTests {
 
         assertThat(result).isEqualTo(Integer.parseInt(expected));
     }
+
+    @DisplayName("숫자가 여러개의 , 를 포함 할 때 합을 반환하는 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3 : 6", "2,3,5,7,9: 26", "3,8,10,13,100 : 134"} , delimiter = ':')
+    void commaAddMultiNumberTest(String input, String expected){
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+
+        int result = stringAddCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(Integer.parseInt(expected));
+    }
 }
