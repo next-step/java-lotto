@@ -30,7 +30,12 @@ public class LottoNumberGenerator {
 		for (int i = NUMBERS_RANGE_START; i < NUMBERS_RANGE_END; i++) {
 			numbers.add(defaultNumbers.get(i));
 		}
+		sortNumbers(numbers);
 		return numbers;
+	}
+
+	private void sortNumbers(List<Integer> numbers) {
+		Collections.sort(numbers);
 	}
 
 
