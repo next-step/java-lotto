@@ -11,8 +11,8 @@ public class CalculatorInputView {
 		scanner = new Scanner(System.in);
 	}
 
-	public String requestView(){
+	public String requestView() {
 		System.out.println(REQUEST_MESSAGE);
-		return scanner.next();
+		return scanner.next().replace("\\n", "\n");
 	}
 }
