@@ -12,9 +12,8 @@ public class Lotto {
 	}
 
 	private void generateNumbers() {
-		for (int i = 0; i < 6; i++) {
-			NUMBERS.add(i+1);
-		}
+		LottoNumberGenerator generator = new LottoNumberGenerator();
+		NUMBERS.addAll(generator.generate());
 	}
 
 	public List<Integer> numbers() {
