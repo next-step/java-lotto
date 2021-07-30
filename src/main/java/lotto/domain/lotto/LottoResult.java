@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,26 +18,22 @@ public class LottoResult {
     }
 
     public double getEarningRate() {
-        Map<Integer, Integer> matchCounts = getMatchLottoCounts();
-        int prizeMoney = matchCounts.keySet().stream()
-            .mapToInt(matchCount -> Rank.valueOf(matchCount).getWinningMoney() * matchCounts.get(matchCount))
+        Map<Rank, Integer> winningLottoCounts = getWinningLottoCounts();
+        int prizeMoney = winningLottoCounts.keySet().stream()
+            .mapToInt(matchCount -> matchCount.getWinningMoney() * winningLottoCounts.get(matchCount))
             .sum();
 
         return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchasedLottos.size());
     }
 
-    public Map<Integer, Integer> getMatchLottoCounts() {
-        Map<Integer, Integer> matchLottoCounts = new HashMap<Integer, Integer>() {{
-            put(3, 0);
-            put(4, 0);
-            put(5, 0);
-            put(6, 0);
+    public Map<Rank, Integer> getWinningLottoCounts() {
+        Map<Rank, Integer> winningLottoCounts = new HashMap<Rank, Integer>() {{
+            Arrays.stream(Rank.values()).forEach(r -> put(r, 0));
         }};
         purchasedLottos.stream()
-            .map(winningLotto::matchNumberCount)
-            .filter(matchCount -> matchCount > 2)
-            .forEach(matchCount -> matchLottoCounts.put(matchCount, matchLottoCounts.get(matchCount) + 1));
+            .map(lotto -> Rank.valueOf(winningLotto.matchNumberCount(lotto)))
+            .forEach(matchCount -> winningLottoCounts.put(matchCount, winningLottoCounts.get(matchCount) + 1));
 
-        return Collections.unmodifiableMap(matchLottoCounts);
+        return Collections.unmodifiableMap(winningLottoCounts);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import lotto.common.Rank;
@@ -12,15 +13,12 @@ public class ResultView {
         purchasedLottos.forEach(lotto -> System.out.println(lotto.getValues()));
     }
 
-    public static void printWinningStatistics(Map<Integer, Integer> matchLottoCounts) {
+    public static void printWinningStatistics(Map<Rank, Integer> winningLottoCounts) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        matchLottoCounts.keySet()
-            .forEach(matchCount -> {
-                int winningMoney = Rank.valueOf(matchCount).getWinningMoney();
-                Integer count = matchLottoCounts.get(matchCount);
-                System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, winningMoney, count);
-            });
+        winningLottoCounts.keySet().stream()
+            .sorted(Comparator.naturalOrder())
+            .forEach(r -> System.out.printf("%d개 일치 (%d원)- %d개%n", r.getCountOfMatch(), r.getWinningMoney(), winningLottoCounts.get(r)));
     }
 
     public static void printEarningRate(double earningRate) {

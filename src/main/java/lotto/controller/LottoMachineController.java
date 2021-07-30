@@ -18,7 +18,7 @@ public class LottoMachineController {
         WinningLotto winningLotto = createWinningLotto(winningNumbers);
 
         LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
-        ResultView.printWinningStatistics(lottoResult.getMatchLottoCounts());
+        ResultView.printWinningStatistics(lottoResult.getWinningLottoCounts());
         ResultView.printEarningRate(lottoResult.getEarningRate());
     }
 
