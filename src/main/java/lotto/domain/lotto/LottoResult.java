@@ -8,36 +8,35 @@ import lotto.common.LottoPrizeMoney;
 
 public class LottoResult {
 
-    private final Map<Integer, Integer> matchLottoCounts = new HashMap<Integer, Integer>() {{
-        put(3, 0);
-        put(4, 0);
-        put(5, 0);
-        put(6, 0);
-    }};
-    private final double earningRate;
+    private final List<Lotto> purchasedLottos;
+    private final WinningLotto winningLotto;
 
     public LottoResult(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
-        purchasedLottos.stream()
-            .map(winningLotto::matchNumberCount)
-            .filter(matchCount -> matchCount > 2)
-            .forEach(matchCount -> this.matchLottoCounts.put(matchCount, this.matchLottoCounts.get(matchCount) + 1));
-
-        this.earningRate = calculateEarningRate(purchasedLottos.size());
+        this.purchasedLottos = purchasedLottos;
+        this.winningLotto = winningLotto;
     }
 
-    private double calculateEarningRate(int purchaseLottoCount) {
+    public double getEarningRate() {
+        Map<Integer, Integer> matchLottoCounts = getMatchLottoCounts();
         long prizeMoney = matchLottoCounts.keySet().stream()
             .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
             .sum();
 
-        return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchaseLottoCount);
+        return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchasedLottos.size());
     }
 
     public Map<Integer, Integer> getMatchLottoCounts() {
-        return Collections.unmodifiableMap(matchLottoCounts);
-    }
+        Map<Integer, Integer> matchLottoCounts = new HashMap<Integer, Integer>() {{
+            put(3, 0);
+            put(4, 0);
+            put(5, 0);
+            put(6, 0);
+        }};
+        purchasedLottos.stream()
+            .map(winningLotto::matchNumberCount)
+            .filter(matchCount -> matchCount > 2)
+            .forEach(matchCount -> matchLottoCounts.put(matchCount, matchLottoCounts.get(matchCount) + 1));
 
-    public double getEarningRate() {
-        return earningRate;
+        return Collections.unmodifiableMap(matchLottoCounts);
     }
 }
