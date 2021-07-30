@@ -13,11 +13,11 @@ public class DefaultDelimiterSplitter implements DelimiterSplitter {
     @Override
     public List<String> split(String text) {
 
-        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
 
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return Arrays.asList(m.group(2).split(customDelimiter));
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return Arrays.asList(matcher.group(2).split(customDelimiter));
         }
 
         return Arrays.asList(text.split(DEFAULT_DELIMITER_PATTERN));
