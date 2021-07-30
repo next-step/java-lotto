@@ -3,7 +3,8 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.Assertions;
@@ -17,15 +18,15 @@ class LottoFactoryTest {
 
     public static Stream<Arguments> validLottoNumbers() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            Arguments.of(Arrays.asList(1, 2, 4, 15, 20, 45))
+            Arguments.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+            Arguments.of(new HashSet<>(Arrays.asList(1, 2, 4, 15, 20, 45)))
         );
     }
 
     @DisplayName("[성공] 당첨 로또 생성")
     @ParameterizedTest
     @MethodSource("validLottoNumbers")
-    public void createWinning(List<Integer> numbers) {
+    public void createWinning(Set<Integer> numbers) {
         // given
 
         // when
@@ -37,17 +38,17 @@ class LottoFactoryTest {
 
     public static Stream<Arguments> notValidLottoNumbers() {
         return Stream.of(
-            Arguments.of(Arrays.asList(0, 1, 2, 3, 4, 5)),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 5)),
-            Arguments.of(Arrays.asList(0, 5, 6, 7, 15, 46)),
-            Arguments.of(Arrays.asList(1, 2, 6, 7))
+            Arguments.of(new HashSet<>(Arrays.asList(0, 1, 2, 3, 4, 5))),
+            Arguments.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 5))),
+            Arguments.of(new HashSet<>(Arrays.asList(0, 5, 6, 7, 15, 46))),
+            Arguments.of(new HashSet<>(Arrays.asList(1, 2, 6, 7)))
         );
     }
 
     @DisplayName("[실패] 당첨 로또 생성 - 유효하지 않은 로또 번호")
     @ParameterizedTest
     @MethodSource("notValidLottoNumbers")
-    public void createWinning_notValid(List<Integer> numbers) {
+    public void createWinning_notValid(Set<Integer> numbers) {
         // given
 
         // when

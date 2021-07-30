@@ -1,17 +1,17 @@
 package lotto.domain.lotto;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class NormalLotto {
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public NormalLotto(List<Integer> numbers) {
+    public NormalLotto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getValues() {
-        return Collections.unmodifiableList(numbers);
+    public Set<Integer> getValues() {
+        return Collections.unmodifiableSet(numbers);
     }
 }

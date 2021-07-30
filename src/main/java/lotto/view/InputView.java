@@ -1,8 +1,8 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.view.exception.InvalidParseIntegerException;
 
@@ -25,17 +25,17 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Set<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         return parseIntegers(input, ",");
     }
 
-    private static List<Integer> parseIntegers(String input, String delimiter) {
+    private static Set<Integer> parseIntegers(String input, String delimiter) {
         try {
             return Arrays.stream(input.split(delimiter))
                 .mapToInt(Integer::valueOf).boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         } catch (NumberFormatException ex) {
             throw new InvalidParseIntegerException();
         }

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.NormalLotto;
@@ -14,7 +15,7 @@ public class LottoMachineController {
     public static void main(String[] args) {
         List<NormalLotto> purchasedLottos = purchaseLotto();
         ResultView.printPurchasedLottos(purchasedLottos);
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        Set<Integer> winningNumbers = InputView.inputWinningNumbers();
         WinningLotto winningLotto = createWinningLotto(winningNumbers);
 
         LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
@@ -22,7 +23,7 @@ public class LottoMachineController {
         ResultView.printEarningRate(lottoResult.getEarningRate());
     }
 
-    private static WinningLotto createWinningLotto(List<Integer> integers) {
+    private static WinningLotto createWinningLotto(Set<Integer> integers) {
         return LottoFactory.createWinning(integers);
     }
 

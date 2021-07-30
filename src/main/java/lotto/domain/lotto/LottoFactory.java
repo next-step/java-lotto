@@ -1,8 +1,6 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
 
@@ -17,20 +15,20 @@ public class LottoFactory {
             randomNumbers.add(LottoNumber.create());
         }
 
-        return new NormalLotto(new ArrayList<>(randomNumbers));
+        return new NormalLotto(randomNumbers);
     }
 
-    public static WinningLotto createWinning(List<Integer> numbers) {
+    public static WinningLotto createWinning(Set<Integer> numbers) {
         validation(numbers);
         return new WinningLotto(numbers);
     }
 
-    private static void validation(List<Integer> checkNumbers) {
+    private static void validation(Set<Integer> checkNumbers) {
         if (!LottoNumber.isValid(checkNumbers)) {
             throw new InvalidLottoNumberException();
         }
 
-        if (checkNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
+        if (checkNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoNumberException();
         }
     }

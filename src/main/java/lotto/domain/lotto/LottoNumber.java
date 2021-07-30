@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class LottoNumber {
 
@@ -10,7 +10,7 @@ public class LottoNumber {
 
     private final static Random RANDOM = new Random();
 
-    public static boolean isValid(List<Integer> values) {
+    public static boolean isValid(Set<Integer> values) {
         return values.stream().allMatch(LottoNumber::isValid);
     }
 
