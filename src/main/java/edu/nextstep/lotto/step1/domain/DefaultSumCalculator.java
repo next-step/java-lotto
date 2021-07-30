@@ -18,7 +18,7 @@ public class DefaultSumCalculator implements SumCalculator {
         int number;
 
         try {
-            number =  Integer.parseInt(token);
+            number = Integer.parseInt(token);
         } catch (NumberFormatException e) {
             throw new RuntimeException(NUMBER_FORMAT_EXCEPTION);
         }
