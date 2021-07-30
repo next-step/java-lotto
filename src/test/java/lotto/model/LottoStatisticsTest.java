@@ -16,7 +16,7 @@ class LottoStatisticsTest {
     void setUp() {
         int payment = 3_000;
         Lottos lottos = Lottos.from(List.of(Lotto.from(Set.of(1, 2, 3, 4, 5, 6))));
-        lottoStatistics = LottoStatistics.from(payment, lottos.scratch(WinningNumber.from("1, 2, 3, 7, 8, 9")));
+        lottoStatistics = LottoStatistics.from(payment, lottos.scratch(WinningLotto.from("1, 2, 3, 7, 8, 9")));
     }
 
     @Test

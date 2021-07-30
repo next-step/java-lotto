@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
+    private static final int NUMBER_OF_LOTTO_COUNT = 6;
+
     private final Set<Integer> numbers;
 
     private Lotto(final Set<Integer> numbers) {
@@ -15,11 +17,19 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public LottoPrize scratch(final WinningNumber winningNumber) {
-        return LottoPrize.findByMatchCount((int) winningNumber.read()
-                                                              .stream()
-                                                              .filter(numbers::contains)
-                                                              .count());
+    public LottoPrize scratch(final WinningLotto winningLotto) {
+        Objects.requireNonNull(winningLotto, "winningLotto must be not null.");
+        return LottoPrize.findByMatchCount(winningLotto.matchCount(this));
+    }
+
+    public boolean isSizeValid() {
+        return numbers.size() == NUMBER_OF_LOTTO_COUNT;
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        return (int) winningLotto.numbers.stream()
+                                         .filter(numbers::contains)
+                                         .count();
     }
 
     @Override

@@ -18,20 +18,16 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<LottoPrize> scratch(final WinningNumber winningNumber) {
-        validate(winningNumber);
+    public List<LottoPrize> scratch(final WinningLotto winningLotto) {
+        validate(winningLotto);
         return lottos.stream()
-                     .map(lotto -> lotto.scratch(winningNumber))
+                     .map(lotto -> lotto.scratch(winningLotto))
                      .collect(toList());
     }
 
-    public Stream<Lotto> stream() {
-        return lottos.stream();
-    }
-
-    private void validate(final WinningNumber winningNumber) {
-        Objects.requireNonNull(winningNumber, "winningNumbers must be not null.");
-        if (!winningNumber.isSizeValid()) {
+    private void validate(final WinningLotto winningLotto) {
+        Objects.requireNonNull(winningLotto, "winningNumbers must be not null.");
+        if (!winningLotto.isSizeValid()) {
             throw new IllegalArgumentException("there must be 6 numbers.");
         }
     }

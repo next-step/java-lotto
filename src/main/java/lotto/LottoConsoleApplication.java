@@ -18,9 +18,9 @@ public class LottoConsoleApplication {
         ResultView.printLottoNumber(lottos);
 
         String winningNumbers = InputView.inputWinningNumbers();
-        WinningNumber winningNumber = WinningNumber.from(winningNumbers);
+        WinningLotto winningLotto = WinningLotto.from(winningNumbers);
 
-        List<LottoPrize> lottoPrizes = lottos.scratch(winningNumber);
+        List<LottoPrize> lottoPrizes = lottos.scratch(winningLotto);
         LottoStatistics lottoStatistics = LottoStatistics.from(payment, lottoPrizes);
         ResultView.printStatistic(lottoStatistics);
     }
