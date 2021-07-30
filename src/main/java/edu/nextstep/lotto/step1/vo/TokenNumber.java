@@ -3,7 +3,7 @@ package edu.nextstep.lotto.step1.vo;
 public class TokenNumber {
 
     private static final String NUMBER_FORMAT_EXCEPTION = "숫자만 입력 가능합니다.";
-    private static final String CAN_NEGATIVE_EXCEPTION = "음수는 사용할 수 없습니다.";
+    private static final String CAN_NOT_NEGATIVE_EXCEPTION = "음수는 사용할 수 없습니다.";
 
     private final int number;
 
@@ -21,7 +21,7 @@ public class TokenNumber {
         }
 
         if (number < 0) {
-            throw new RuntimeException(CAN_NEGATIVE_EXCEPTION);
+            throw new RuntimeException(CAN_NOT_NEGATIVE_EXCEPTION);
         }
 
         return number;
