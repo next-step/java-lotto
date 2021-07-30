@@ -9,13 +9,13 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumberGeneratorTest {
+class LottoNumberShuffleTest {
 
 	@Test
 	@DisplayName("로또 번호 6개 생성")
 	void lotto_numbers_generate() throws Exception {
 		//given
-		LottoNumberGenerator generator = new LottoNumberGenerator();
+		LottoNumberShuffle generator = new LottoNumberShuffle();
 
 		//when
 		List<Integer> numbers = generator.generate();
@@ -29,7 +29,7 @@ class LottoNumberGeneratorTest {
 	@DisplayName("로또 번호 6개 중복 확인")
 	void lotto_numbers_overlap() throws Exception {
 		//given
-		LottoNumberGenerator generator = new LottoNumberGenerator();
+		LottoNumberShuffle generator = new LottoNumberShuffle();
 
 		//when
 		List<Integer> numbers = generator.generate();
@@ -44,7 +44,7 @@ class LottoNumberGeneratorTest {
 	@DisplayName("로또 번호 6개 오름차순")
 	void lotto_numbers_sort() throws Exception {
 		//given
-		LottoNumberGenerator generator = new LottoNumberGenerator();
+		LottoNumberShuffle generator = new LottoNumberShuffle();
 
 		//when
 		List<Integer> numbers = generator.generate();

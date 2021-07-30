@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -15,13 +16,31 @@ class LottoTest {
 	void lotto_has_6_numbers() throws Exception {
 		//given
 		Lotto lotto = new Lotto();
+		List<Integer> defaultNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 		//when
+		lotto.generateNumbers(() -> defaultNumbers);
 		List<Integer> numbers = lotto.numbers();
 
 		//then
-		assertThat(numbers).hasSize(6);
+		assertThat(numbers).hasSize(defaultNumbers.size());
 	}
+
+
+	@Test
+	@DisplayName("로또의 번호가 6개가 아닌 경우 예외")
+	void lotto_number_size_exception() throws Exception {
+		//given
+		Lotto lotto = new Lotto();
+
+		//when
+		List<Integer> defaultNumbers = Arrays.asList(1, 2, 3, 4, 5);
+
+		//then
+		assertThatThrownBy(() -> lotto.generateNumbers(() -> defaultNumbers)).isInstanceOf(IllegalStateException.class);
+	}
+
+
 
 	@Test
 	@DisplayName("지난주 당첨 번호와 비교")
