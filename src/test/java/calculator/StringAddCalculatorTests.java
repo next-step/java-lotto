@@ -3,6 +3,7 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,7 +22,7 @@ public class StringAddCalculatorTests {
         assertThat(result).isEqualTo(0);
     }
 
-    @DisplayName("숫자하나 만 넣었을 때 넣은 숫자 반환하는 테스트")
+    @DisplayName("숫자 하나 만 넣었을 때 넣은 숫자 반환하는 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3"})
     void inputOneNumberTest(String input){
@@ -30,5 +31,16 @@ public class StringAddCalculatorTests {
         int result = stringAddCalculator.calculate(input);
 
         assertThat(result).isEqualTo(Integer.parseInt(input));
+    }
+
+    @DisplayName("숫자 사이에 , 넣었을 때 두 숫자의 합을 반환하는 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2 : 3", "2,3: 5", "3,4 : 7"} , delimiter = ':')
+    void commaAddTest(String input, String expected){
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+
+        int result = stringAddCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(Integer.parseInt(expected));
     }
 }
