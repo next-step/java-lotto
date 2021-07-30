@@ -52,7 +52,7 @@ public final class LottoSolution {
     private WinningLotto inputWinningLottoNumbers() {
         String strPrizeNumbers = inputView.inputPrizeNumbers();
         return new WinningLotto(
-                Lotto.parse(strPrizeNumbers)
+                Lotto.of(strPrizeNumbers)
         );
     }
 }

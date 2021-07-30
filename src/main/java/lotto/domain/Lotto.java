@@ -13,13 +13,13 @@ public final class Lotto implements Iterable<LottoNumber> {
     private final List<LottoNumber> values;
 
     public Lotto(List<LottoNumber> numbers) {
-        validateValues(numbers);
+        validateNumberSize(numbers);
 
         this.values = new ArrayList<>(numbers);
         Collections.sort(this.values);
     }
 
-    public static Lotto parse(String strLottoNumbers) {
+    public static Lotto of(String strLottoNumbers) {
         String removedSpaceNumbers = strLottoNumbers.replaceAll(" +", "");
         return new Lotto(Arrays.stream(
                 removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
@@ -29,7 +29,7 @@ public final class Lotto implements Iterable<LottoNumber> {
         );
     }
 
-    private void validateValues(List<LottoNumber> values) {
+    private void validateNumberSize(List<LottoNumber> values) {
         long distinctSize = values.stream().distinct().count();
         if (distinctSize != NUMBER_SIZE || values.size() != NUMBER_SIZE) {
             throw new OutOfSizeException("로또 번호가 6개가 아닙니다.");
@@ -41,6 +41,7 @@ public final class Lotto implements Iterable<LottoNumber> {
                 .filter(values::contains)
                 .count();
     }
+
     @Override
     public Iterator<LottoNumber> iterator() {
         return values.iterator();

@@ -15,7 +15,7 @@ public final class LottoList implements Iterable<Lotto> {
     private final List<Lotto> values;
 
     private LottoList(List<Lotto> values) {
-        validateValues(values);
+        validateListSize(values);
 
         this.values = values;
     }
@@ -29,7 +29,7 @@ public final class LottoList implements Iterable<Lotto> {
         return new LottoList(newValues);
     }
 
-    private void validateValues(List<Lotto> values) {
+    private void validateListSize(List<Lotto> values) {
         if (Objects.isNull(values) || values.size() <= 0) {
             throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
         }

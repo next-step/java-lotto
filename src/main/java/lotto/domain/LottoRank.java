@@ -44,10 +44,4 @@ public enum LottoRank {
                 iLottoRank -> iLottoRank.matchesCount == matchesCount
         ).findFirst().orElse(LAST_PLACE);
     }
-
-    public static List<LottoRank> displayRanks() {
-        return Arrays.stream(values())
-                .filter(iLottoRank -> iLottoRank.matchesCount > 0)
-                .collect(Collectors.toList());
-    }
 }
