@@ -17,7 +17,7 @@ public enum LottoRank {
     private final Money prizeAmount;
 
     LottoRank(Money prizeAmount) {
-        this(-1, prizeAmount);
+        this(0, prizeAmount);
     }
 
     LottoRank(int matchesCount, Money prizeAmount) {
