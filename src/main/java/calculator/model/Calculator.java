@@ -11,12 +11,18 @@ public class Calculator {
 	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
 	private static final String DEFAULT_REG_EXP = ",|:";
 
-	private final String calculatorValue;
 	private final Calculation calculation;
 
 	private Calculator(String calculatorValue) {
-		this.calculatorValue = calculatorValue;
-		calculation = new Calculation();
+		calculation = new Calculation(patternResult(PATTERN_REG_EXP,calculatorValue));
+	}
+
+	public String[] patternResult(String regExp, String calculatorValue) {
+		Matcher matcher = Pattern.compile(regExp).matcher(calculatorValue);
+		if (matcher.find()) {
+			return stringToSplit(matcher.group(1),matcher.group(2));
+		}
+		return stringToSplit(DEFAULT_REG_EXP,calculatorValue);
 	}
 
 	public static Calculator createCalculator(String calculatorValue) {
@@ -25,11 +31,11 @@ public class Calculator {
 	}
 
 	public int calculate() {
-		Matcher matcher = Pattern.compile(PATTERN_REG_EXP).matcher(calculatorValue);
-		if (matcher.find()) {
-			return calculation.calculate(matcher.group(1), matcher.group(2));
-		}
-		return calculation.calculate(DEFAULT_REG_EXP, calculatorValue);
+		return calculation.calculate();
+	}
+
+	public String[] stringToSplit(String regexp, String textValue) {
+		return textValue.split(regexp);
 	}
 
 }
