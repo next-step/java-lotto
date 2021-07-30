@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoPrize.*;
+import static lotto.domain.LottoTicketsTest.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -78,13 +79,6 @@ class LottoPrizesTest {
 		lottoPrizes.add(FIRST);
 		lottoPrizes.add(FIRST);
 		return lottoPrizes;
-	}
-
-	private List<LottoTicket> createLottoTickets() {
-		return Arrays.asList(
-			LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-			LottoTicket.from(Arrays.asList(7, 8, 9, 10, 11, 12))
-		);
 	}
 
 }

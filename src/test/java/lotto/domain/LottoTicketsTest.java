@@ -13,16 +13,15 @@ class LottoTicketsTest {
 	@DisplayName("구매한 로또 티켓을 포장하는 LottoTickets 객체를 생성한다.")
 	@Test
 	void create() {
-		List<LottoTicket> lottoTickets = createLottoTickets();
-		LottoTickets tickets = LottoTickets.from(lottoTickets);
-		assertThat(tickets.getTickets()).hasSize(lottoTickets.size());
+		List<LottoTicket> tickets = createLottoTickets();
+		LottoTickets lottoTickets = LottoTickets.from(tickets);
+		assertThat(lottoTickets.getTickets()).hasSize(tickets.size());
 	}
 
-	private List<LottoTicket> createLottoTickets() {
+	public static List<LottoTicket> createLottoTickets() {
 		return Arrays.asList(
-				LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-				LottoTicket.from(Arrays.asList(7, 8, 9, 10, 11, 12))
+			LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+			LottoTicket.from(Arrays.asList(7, 8, 9, 10, 11, 12))
 		);
 	}
-
 }
