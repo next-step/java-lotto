@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-	private static final List<Integer> NUMBERS = new ArrayList<>();
+	private final List<Integer> numbers = new ArrayList<>();
 	public Lotto() {
 	}
 
@@ -13,24 +13,24 @@ public class Lotto {
 		if (generator.generate().size() != 6) {
 			throw new IllegalStateException();
 		}
-		NUMBERS.addAll(generator.generate());
+		numbers.addAll(generator.generate());
 	}
 
 	public List<Integer> numbers() {
-		return NUMBERS;
+		return numbers;
 	}
 
 
 	public int match(List<Integer> lastWeekNumbers) {
-		int matchedNumber = 0;
+		int matchedCount = 0;
 		for (Integer lastWeekNumber : lastWeekNumbers) {
-			matchedNumber += sameNumber(matchedNumber, lastWeekNumber);
+			matchedCount += getMatchedCount(lastWeekNumber);
 		}
-		return matchedNumber;
+		return matchedCount;
 	}
 
-	private int sameNumber(int matchedNumber, Integer lastWeekNumber) {
-		return NUMBERS.contains(lastWeekNumber) ? 1 : 0;
+	private int getMatchedCount(Integer lastWeekNumber) {
+		return numbers.contains(lastWeekNumber) ? 1 : 0;
 	}
 
 }

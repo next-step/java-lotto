@@ -2,9 +2,13 @@ package lottoautomatic;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -42,21 +46,29 @@ class LottoTest {
 
 
 
-	@Test
+	@ParameterizedTest
+	@MethodSource("matchNumbers")
 	@DisplayName("지난주 당첨 번호와 비교")
-	void compare_numbers() throws Exception {
+	void match_numbers(List<Integer> lottoNumbers, int matchedCount) throws Exception {
 		//given
 		Lotto lotto = new Lotto();
 		List<Integer> lastWeekNumbers = Arrays.asList(1,2,3,4,5,6);
 
 		//when
+		lotto.generateNumbers(() -> lottoNumbers);
 		int matchesNumber = lotto.match(lastWeekNumbers);
 
 		//then
-		//테스트가 불가하다!
-		//몇개 맞을지 알 수 없다..
-		//전략패턴이 필요하다.
+		assertThat(matchesNumber).isEqualTo(matchedCount);
+	}
 
+	private static Stream<Arguments> matchNumbers() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
+			Arguments.of(Arrays.asList(1,2,3,4,5,11), 5),
+			Arguments.of(Arrays.asList(1,2,3,4,11,12), 4),
+			Arguments.of(Arrays.asList(1,2,3,11,12,13), 3)
+		);
 	}
 
 }
