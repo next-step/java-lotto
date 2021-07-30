@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.view.exception.InvalidInputTotalAmountException;
 import lotto.view.exception.InvalidParseIntegerException;
 
 public class InputView {
@@ -14,16 +13,8 @@ public class InputView {
     public static long inputTotalAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = scanner.nextLine();
-        long totalAmount = parseLong(input);
-        validationInputTotalAmount(totalAmount);
 
-        return Long.parseLong(input);
-    }
-
-    private static void validationInputTotalAmount(long totalAmount) {
-        if (totalAmount < 0) {
-            throw new InvalidInputTotalAmountException();
-        }
+        return parseLong(input);
     }
 
     private static long parseLong(String input) {
