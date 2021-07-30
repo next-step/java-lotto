@@ -36,9 +36,12 @@ class LottoListTest {
     @DisplayName("statistics Test")
     @ParameterizedTest
     void statisticsTest(int size) {
+        WinningLotto winningLotto = new WinningLotto(
+                Lotto.parse("1,2,3,4,5,6")
+        );
         assertThat(
                 LottoList.generate(size)
-                        .statistics(Lotto.parse("1,2,3,4,5,6"))
+                        .statistics(winningLotto)
                         .totalSize()
         ).isEqualTo(size);
     }

@@ -40,9 +40,9 @@ public final class LottoList implements Iterable<Lotto> {
         return NUMBER_TEMPLATE.subList(0, Lotto.NUMBER_SIZE);
     }
 
-    public LottoStatistics statistics(Lotto prizeLotto) {
+    public LottoStatistics statistics(WinningLotto winningLotto) {
         Map<LottoRank, Long> data = this.values.stream().collect(
-                Collectors.groupingBy(iLotto -> iLotto.rank(prizeLotto), Collectors.counting())
+                Collectors.groupingBy(winningLotto::rank, Collectors.counting())
         );
         return new LottoStatistics(data);
     }

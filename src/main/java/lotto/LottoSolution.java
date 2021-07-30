@@ -1,12 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
-import lotto.domain.LottoStatistics;
+import lotto.domain.*;
 import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
-import lotto.domain.Money;
 import lotto.util.number.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
@@ -36,8 +33,8 @@ public final class LottoSolution {
             LottoList lottoList = buyLotto(money);
             resultView.printLottoList(lottoList);
 
-            Lotto prizeLotto = inputPrizeLottoNumbers();
-            LottoStatistics lottoStatistics = lottoList.statistics(prizeLotto);
+            WinningLotto winningLotto = inputWinningLottoNumbers();
+            LottoStatistics lottoStatistics = lottoList.statistics(winningLotto);
             resultView.printLottoStatistics(lottoStatistics);
         } catch (InvalidFormulaException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
             resultView.printException(e);
@@ -52,8 +49,10 @@ public final class LottoSolution {
         return LottoList.generate(lottoSize);
     }
 
-    private Lotto inputPrizeLottoNumbers() {
+    private WinningLotto inputWinningLottoNumbers() {
         String strPrizeNumbers = inputView.inputPrizeNumbers();
-        return Lotto.parse(strPrizeNumbers);
+        return new WinningLotto(
+                Lotto.parse(strPrizeNumbers)
+        );
     }
 }

@@ -36,18 +36,11 @@ public final class Lotto implements Iterable<LottoNumber> {
         }
     }
 
-    public LottoRank rank(Lotto prizeLotto) {
-        return LottoRank.of(
-                containsCount(prizeLotto.values)
-        );
-    }
-
-    private int containsCount(List<LottoNumber> lottoNumbers) {
-        return (int) values.stream()
-                .filter(lottoNumbers::contains)
+    public int containsCount(Lotto that) {
+        return (int) that.values.stream()
+                .filter(values::contains)
                 .count();
     }
-
     @Override
     public Iterator<LottoNumber> iterator() {
         return values.iterator();
