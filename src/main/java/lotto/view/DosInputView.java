@@ -14,6 +14,7 @@ public final class DosInputView implements InputView {
 
     private int inputNumber(Text guideText) {
         String input = inputLine(guideText);
+
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -36,6 +37,7 @@ public final class DosInputView implements InputView {
     public WinningLottoRequest inputWinningLotto() {
         String winningLottoNumbers = inputLine(Text.INPUT_WINNING_NUMBERS);
         int bonusNumber = inputNumber(Text.INPUT_BONUS_NUMBER);
+
         return new WinningLottoRequest(winningLottoNumbers, bonusNumber);
     }
 

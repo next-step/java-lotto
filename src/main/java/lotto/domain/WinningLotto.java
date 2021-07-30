@@ -6,7 +6,8 @@ public class WinningLotto {
     private final Lotto value;
     private final LottoNumber bonusNumber;
     public WinningLotto(Lotto value, LottoNumber bonusNumber) {
-        validateOverlapBonusNumber(value, bonusNumber); // TODO :: 테스트 만들기
+        validateOverlapBonusNumber(value, bonusNumber);
+
         this.value = value;
         this.bonusNumber = bonusNumber;
     }
@@ -18,8 +19,9 @@ public class WinningLotto {
     }
 
     private boolean isSecondPlace(LottoRank lottoRank, Lotto lotto) {
-        if (lottoRank != LottoRank.THREE_PLACE)
+        if (lottoRank != LottoRank.THREE_PLACE) {
             return false;
+        }
         return lotto.contains(bonusNumber);
     }
 

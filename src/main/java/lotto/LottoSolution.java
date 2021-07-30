@@ -5,6 +5,7 @@ import lotto.domain.dto.WinningLottoRequest;
 import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
+import lotto.exception.OverlapNumberException;
 import lotto.util.number.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
@@ -37,7 +38,7 @@ public final class LottoSolution {
             WinningLotto winningLotto = inputWinningLottoNumbers();
             LottoStatistics lottoStatistics = lottoList.statistics(winningLotto);
             resultView.printLottoStatistics(lottoStatistics);
-        } catch (InvalidFormulaException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
+        } catch (OverlapNumberException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
             resultView.printException(e);
         } catch (Exception e) {
             resultView.printException(new RuntimeException("오류가 발생 했습니다!"));

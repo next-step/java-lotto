@@ -15,8 +15,9 @@ public class DosResultView implements ResultView {
         System.out.println(Text.PURCHASED_LOTTO_SIZE.format(
                 lottoList.size()
         ));
-        for (Lotto iLotto : lottoList)
+        for (Lotto iLotto : lottoList) {
             System.out.println(iLotto);
+        }
     }
 
     private List<LottoRank> displayLottoRanks() {
