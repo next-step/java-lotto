@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-
 	@Test
 	@DisplayName("계산기의 문자열이 빈값이면 예외가 발생된다.")
 	public void validStringEmptyCheck() {
@@ -17,45 +16,18 @@ class CalculatorTest {
 	}
 
 	@Test
-	@DisplayName("문자열에 '//' 값이 있으면 true, 없으면 false 를 반환한다.")
-	public void specialStringExistCheck() {
-		Calculator calculator = Calculator.createCalculator("nextstep");
-		boolean result = calculator.getSpecialTextExist("//");
+	@DisplayName("계산기의 문자열에 따라 덧셈 계산기에 의하여 계산된 값이 반환된다.")
+	public void plusCalculator() {
+		Calculator calculator = Calculator.createCalculator("//:\n1:2:3:4");
+		int result1 = calculator.calculate();
 
-		assertThat(result).isFalse();
+		assertThat(result1).isEqualTo(10);
 
-		Calculator calculator2 = Calculator.createCalculator("//nextstep");
-		boolean result2 = calculator2.getSpecialTextExist("//");
+		Calculator calculator2 = Calculator.createCalculator("1:2:3,4,5");
+		int result2 = calculator2.calculate();
 
-		assertThat(result2).isTrue();
-	}
+		assertThat(result2).isEqualTo(15);
 
-	@Test
-	@DisplayName("문자열에 '\n' 값이 있으면 true, 없으면 false 를 반환한다.")
-	public void specialTextExistCheck() {
-		Calculator calculator = Calculator.createCalculator("nextstep");
-		boolean result = calculator.getSpecialTextExist("//");
-
-		assertThat(result).isFalse();
-
-		Calculator calculator2 = Calculator.createCalculator("\nnextstep");
-		boolean result2 = calculator2.getSpecialTextExist("\n");
-
-		assertThat(result2).isTrue();
-	}
-
-	@Test
-	@DisplayName("문자열에 '// \n' 값이 있으면 true, 없으면 false 를 반환한다.")
-	public void specialTextNotingOrExistCheck() {
-		Calculator calculator = Calculator.createCalculator("nextstep");
-		boolean result = calculator.getAllSpecialTextExist();
-
-		assertThat(result).isFalse();
-
-		Calculator calculator2 = Calculator.createCalculator("//:\n nextstep");
-		boolean result2 = calculator2.getAllSpecialTextExist();
-
-		assertThat(result2).isTrue();
 	}
 
 }
