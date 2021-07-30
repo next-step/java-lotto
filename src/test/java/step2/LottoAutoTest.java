@@ -2,11 +2,22 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import step2.domain.*;
 import step2.lottoPlace.LottoPlace;
+import step2.lottoPlace.LottoPlaceChecker;
 import step2.view.InputView;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -59,17 +70,6 @@ public class LottoAutoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("일치하는 번호 숫자에 따라 등수를 구한다")
-    @CsvSource(value = {"3:FORTH", "4:THIRD", "5:SECOND", "6:FIRST"}, delimiter = ':')
-    public void getPlaceByCorrectNum(int correctNum, LottoPlace expected) {
-        //given, when
-        LottoPlace lottoPlace = LottoPlace.findPlaceByCorrectNum(correctNum);
-
-        //then
-        assertThat(lottoPlace).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
     @DisplayName("내 로또번호와 지난 주 로또번호를 합쳐서 중복을 제거한 카운트로 등수를 구한다.")
     @CsvSource(value = {"9:FORTH", "8:THIRD", "7:SECOND", "6:FIRST"}, delimiter = ':')
     public void getPlaceByDistinctNum(int distinctNum, LottoPlace expected) {
@@ -89,5 +89,43 @@ public class LottoAutoTest {
 
         //then
         assertThat(price).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("구매한 로또들의 전체 상금을 구한다")
+    @CsvSource(value = {"FIRST:SECOND:2001500000", "THIRD:FORTH:55000", "FIRST:FORTH:2000005000"}, delimiter = ':')
+    public void getTotalPrice(LottoPlace place1, LottoPlace place2, long expected) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        //given
+        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(Arrays.asList(1,2,3,4,5,6));
+        Method calculateTotalPrice = lottoPlaceChecker.getClass().getDeclaredMethod("calculateTotalPrice", List.class);
+        calculateTotalPrice.setAccessible(true);
+
+        //when
+        long price = (long) calculateTotalPrice.invoke(lottoPlaceChecker, Arrays.asList(place1, place2));
+
+        //then
+        assertThat(price).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("전체 상금과 구매한 비용의 비율을 구한다.")
+    @MethodSource("getRateOfTotalPriceSource")
+    public void getRateOfTotalPrice(List<LottoPlace> lottoPlaces, int cost, BigDecimal expected) {
+        //given
+        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(Arrays.asList(1,2,3,4,5,6));
+
+        //when
+        BigDecimal result = lottoPlaceChecker.calculateWinnerRate(lottoPlaces, cost);
+
+        //then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> getRateOfTotalPriceSource() {
+        return Stream.of(
+            Arguments.arguments(Arrays.asList(LottoPlace.FIRST, LottoPlace.SECOND), 2000, BigDecimal.valueOf(1000750)),
+            Arguments.arguments(Arrays.asList(LottoPlace.THIRD, LottoPlace.FORTH), 2000, BigDecimal.valueOf(27.5)),
+            Arguments.arguments(Arrays.asList(LottoPlace.FIRST, LottoPlace.FORTH), 2000, BigDecimal.valueOf(1000002.5))
+        );
     }
 }

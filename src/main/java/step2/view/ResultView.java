@@ -27,6 +27,8 @@ public class ResultView {
     public static void showResult(List<Integer> lastWeekLottoNum, Lottos lottos) {
         LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(lastWeekLottoNum);
         List<LottoPlace> lottoPlaces = lottoPlaceChecker.getLottoPlace(lottos);
+        BigDecimal winnerRate = lottoPlaceChecker.calculateWinnerRate(lottoPlaces, lottos.getTotalCost());
+
         showResult();
 
         showForth(lottoPlaces);
@@ -34,11 +36,10 @@ public class ResultView {
         showSecond(lottoPlaces);
         showFirst(lottoPlaces);
 
-        showWinnerRate(lottoPlaces);
+        showWinnerRate(winnerRate);
     }
 
-    private static void showWinnerRate(List<LottoPlace> lottoPlaces) {
-        BigDecimal winnerRate = calculateWinnerRate(lottoPlaces);
+    private static void showWinnerRate(BigDecimal winnerRate) {
         System.out.println("총 수익률은 " + winnerRate + "입니다. (기준 1)");
     }
 
@@ -65,15 +66,5 @@ public class ResultView {
     private static void showFirst(List<LottoPlace> lottoPlaces) {
         long first = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.FIRST).count();
         System.out.println("6개 일치 (2000000000원) - " + first + "개");
-    }
-
-    private static BigDecimal calculateWinnerRate(List<LottoPlace> lottoPlaces) {
-        int sum = calculateTotalPrice(lottoPlaces);
-        long payed = (long) lottoPlaces.size() * Shop.LOTTO_PRICE;
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(payed));
-    }
-
-    private static int calculateTotalPrice(List<LottoPlace> lottoPlaces) {
-        return lottoPlaces.stream().mapToInt(LottoPlace::getPrice).sum();
     }
 }
