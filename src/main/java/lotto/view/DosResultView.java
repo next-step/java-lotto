@@ -5,6 +5,10 @@ import lotto.domain.LottoList;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DosResultView implements ResultView {
     @Override
     public void printLottoList(LottoList lottoList) {
@@ -15,10 +19,16 @@ public class DosResultView implements ResultView {
             System.out.println(iLotto);
     }
 
+    private List<LottoRank> displayLottoRanks() {
+        return Arrays.stream(LottoRank.values())
+                .filter(iLottoRank -> iLottoRank.matchesCount() > 0)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void printLottoStatistics(LottoStatistics lottoStatistics) {
         System.out.println(Text.RESULT_TITLE);
-        for (LottoRank iLottoRank : LottoRank.displayRanks()) {
+        for (LottoRank iLottoRank : displayLottoRanks()) {
             System.out.println(
                     Text.LOTTO_RANK.format(
                             iLottoRank.matchesCount(),

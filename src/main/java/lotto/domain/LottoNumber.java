@@ -11,12 +11,12 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     private final int value;
 
     public LottoNumber(int value) {
-        validateValue(value);
+        validateNumberRange(value);
 
         this.value = value;
     }
 
-    private void validateValue(int value) {
+    private void validateNumberRange(int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new OutOfRangeException("로또 번호는 1부터 45까지의 숫자만 유효합니다.");
         }
