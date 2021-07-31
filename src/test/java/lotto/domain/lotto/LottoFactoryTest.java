@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
+import lotto.domain.lotto.exception.InvalidBonusLottoNumberException;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
 import lotto.domain.lotto.exception.InvalidTotalAmountException;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +41,6 @@ class LottoFactoryTest {
 
     public static Stream<Arguments> notValidLottoNumbers() {
         return Stream.of(
-            Arguments.of(new HashSet<>(Arrays.asList(10, 1, 2, 3, 4, 5)), 5),
             Arguments.of(new HashSet<>(Arrays.asList(0, 1, 2, 3, 4, 5)), 6),
             Arguments.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 5)), 6),
             Arguments.of(new HashSet<>(Arrays.asList(0, 5, 6, 7, 15, 46)), 9),
@@ -56,6 +56,26 @@ class LottoFactoryTest {
 
         // when
         assertThrows(InvalidLottoNumberException.class, () -> LottoFactory.createWinning(numbers, bonusNumber));
+
+        // then
+
+    }
+
+    public static Stream<Arguments> notValidBonusLottoNumbers() {
+        return Stream.of(
+            Arguments.of(new HashSet<>(Arrays.asList(10, 1, 2, 3, 4, 5)), 5),
+            Arguments.of(new HashSet<>(Arrays.asList(10, 1, 2, 3, 4, 5)), 46)
+        );
+    }
+
+    @DisplayName("[실패] 당첨 로또 생성 - 유효하지 않은 보너스 번호")
+    @ParameterizedTest
+    @MethodSource("notValidBonusLottoNumbers")
+    public void createWinning_notValidBonusNumber(Set<Integer> numbers, int bonusNumber) {
+        // given
+
+        // when
+        assertThrows(InvalidBonusLottoNumberException.class, () -> LottoFactory.createWinning(numbers, bonusNumber));
 
         // then
 

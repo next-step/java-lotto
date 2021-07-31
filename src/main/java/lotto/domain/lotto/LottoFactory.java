@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Set;
+import lotto.domain.lotto.exception.InvalidBonusLottoNumberException;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
 import lotto.domain.lotto.exception.InvalidTotalAmountException;
 import lotto.domain.number.LottoNumber;
@@ -20,10 +21,13 @@ public class LottoFactory {
     }
 
     private static void validationWinningLotto(Set<Integer> checkNumbers, int bonusNumber) {
-        if (checkNumbers.contains(bonusNumber)
-            || !LottoNumber.isValid(checkNumbers)
-            || !LottoNumber.isValid(bonusNumber)) {
+        if (!LottoNumber.isValid(checkNumbers)) {
             throw new InvalidLottoNumberException();
+        }
+
+        if (checkNumbers.contains(bonusNumber)
+            || !LottoNumber.isValid(bonusNumber)) {
+            throw new InvalidBonusLottoNumberException();
         }
     }
 
