@@ -6,15 +6,18 @@ import java.util.stream.IntStream;
 
 public class Shop {
 
-    private static final int PRICE_PER_PIECE = 1000;
+    private final int amountPerPiece;
 
-    public Lottos issue(int price) {
-        List<Lotto> lottos = this.calculate(price);
-        return new Lottos(lottos);
+    public Shop(int amountPerPiece) {
+        this.amountPerPiece = amountPerPiece;
     }
 
-    private List<Lotto> calculate(int price) {
-        int count = price / PRICE_PER_PIECE;
+    public Lottos issue(int purchaseAmount) {
+        return new Lottos(this.calculate(purchaseAmount));
+    }
+
+    private List<Lotto> calculate(final int purchaseAmount) {
+        int count = purchaseAmount / amountPerPiece;
         return IntStream.range(0, count)
                 .mapToObj(r -> new Lotto())
                 .collect(Collectors.toList());

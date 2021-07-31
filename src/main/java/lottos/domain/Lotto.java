@@ -1,8 +1,8 @@
 package lottos.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import lottos.domain.exceptions.LottoSizeIncorrectException;
+
+import java.util.*;
 
 public class Lotto {
 
@@ -13,16 +13,19 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new LottoSizeIncorrectException();
+        }
         this.elements = numbers;
     }
 
     private List<Integer> getRandomNumbers() {
-        List<Integer> randoms = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        Set<Integer> randoms = new HashSet<>();
+        while (randoms.size() != 6) {
             int number = (int) (Math.random() * 45) + 1;
             randoms.add(number);
         }
-        return randoms;
+        return new ArrayList<>(randoms);
     }
 
     public List<Integer> getElements() {
@@ -30,12 +33,12 @@ public class Lotto {
     }
 
     public int match(Lotto lotto) {
-        int matchCount = 0;
+        int countOfMatches = 0;
         for (int number : lotto.getElements()) {
             if (elements.contains(number)) {
-                matchCount++;
+                countOfMatches++;
             }
         }
-        return matchCount;
+        return countOfMatches;
     }
 }
