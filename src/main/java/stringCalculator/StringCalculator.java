@@ -3,37 +3,26 @@ package stringCalculator;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import stringCalculator.domain.StringValue;
 
 public class StringCalculator {
 
-  private String text;
+  private StringValue stringValue;
 
   public static final String CUSTOM_PATTEN = "//(.)\n(.*)";
 
   public static final String SPLIT_MARK = "[,:]";
 
-  public static final String DEFAULT_VALUE = "0";
-
   public StringCalculator(String inputText) {
-    this.text = validationText(inputText);
+    stringValue = new StringValue(inputText);
   }
 
-  private String validationText(String text) {
-    if(text == null || text.isEmpty()){
-      return DEFAULT_VALUE;
-    }
-    return text;
-  }
-
-  public String getText() {
-    return text;
+  public String getStringValue() {
+    return stringValue.getStringValue();
   }
 
   public String[] getSplitValues(String pattern) {
-    if(pattern.equals(SPLIT_MARK)){
-      return text.split(SPLIT_MARK);
-    }
-    return getText().split(pattern);
+    return stringValue.getSplit(pattern);
   }
 
   public int getSumValues(String[] values) {
@@ -45,11 +34,11 @@ public class StringCalculator {
   }
 
   public int getCustomSplitSum() {
-    Matcher m = Pattern.compile(CUSTOM_PATTEN).matcher(getText());
+    Matcher m = Pattern.compile(CUSTOM_PATTEN).matcher(getStringValue());
 
     if (m.find()) {
       String customDelimiter = m.group(1);
-      text = m.group(2);
+      stringValue = new StringValue(m.group(2));
       return getSumValues(getSplitValues(customDelimiter));
     }
     return getSumValues(getSplitValues(SPLIT_MARK));

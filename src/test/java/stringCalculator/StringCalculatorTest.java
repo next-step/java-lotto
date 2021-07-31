@@ -19,7 +19,7 @@ public class StringCalculatorTest {
 
     StringCalculator stringCalculator = new StringCalculator(input);
 
-    assertThat(Integer.parseInt(stringCalculator.getText())).isEqualTo(0);
+    assertThat(Integer.parseInt(stringCalculator.getStringValue())).isEqualTo(0);
   }
 
   @DisplayName("입력받은 문자열에서 \",\" 또는 \":을\" 구분자로 자르는 테스트.")
