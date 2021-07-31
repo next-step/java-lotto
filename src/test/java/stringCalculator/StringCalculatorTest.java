@@ -52,4 +52,13 @@ public class StringCalculatorTest {
         assertThatThrownBy(() -> stringCalculator.checkNegativeNumberOrNotNumber(notNumberString))
                 .isInstanceOf(NumberFormatException.class);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자")
+    void customSeparatorTest(){
+        String customSeparatorContainString = "//a\n1a2a3";
+        String[] strings = StringUtil.customSeparator(customSeparatorContainString);
+        assertThat(strings).contains("1","2","3");
+    }
+
 }
