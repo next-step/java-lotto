@@ -9,10 +9,11 @@ class LottoRankTest {
     @SuppressWarnings("AssertBetweenInconvertibleTypes")
     @CsvSource({
             "LAST_PLACE,10,0",
-            "FIRST_PLACE,10,20000000000",
-            "SECOND_PLACE,10,15000000",
-            "THREE_PLACE,10,500000",
-            "FOUR_PLACE,10,50000",
+            "FIRST_PLACE,100,200000000000",
+            "SECOND_PLACE,10,300000000",
+            "THREE_PLACE,10,15000000",
+            "FOUR_PLACE,10,500000",
+            "FIVE_PLACE,10,50000"
     })
     @ParameterizedTest
     void prizeAmountTest(String enumName, int lottoSize, long expertMoneyValue) {
@@ -24,11 +25,12 @@ class LottoRankTest {
     }
 
     @CsvSource({
+            "0,LAST_PLACE",
             "1,LAST_PLACE",
             "2,LAST_PLACE",
-            "3,FOUR_PLACE",
-            "4,THREE_PLACE",
-            "5,SECOND_PLACE",
+            "3,FIVE_PLACE",
+            "4,FOUR_PLACE",
+            "5,THREE_PLACE",
             "6,FIRST_PLACE"
     })
     @ParameterizedTest

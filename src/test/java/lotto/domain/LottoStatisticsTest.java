@@ -17,9 +17,9 @@ class LottoStatisticsTest {
     void yieldTest() {
         Map<LottoRank, Long> data = new HashMap<>();
         data.put(FIRST_PLACE, SIZE_ONE);
-        data.put(SECOND_PLACE, SIZE_ONE);
         data.put(THREE_PLACE, SIZE_ONE);
         data.put(FOUR_PLACE, SIZE_ONE);
+        data.put(FIVE_PLACE, SIZE_ONE);
 
         LottoStatistics lottoStatistics = new LottoStatistics(data);
 
@@ -30,7 +30,7 @@ class LottoStatisticsTest {
         );
         DivisionNumber yield = lottoStatistics.yield();
 
-        //noinspection AssertBetweenInconvertibleTypes
+        //noinspection
         assertThat(yield)
                 .isEqualTo(
                         expertYield
@@ -42,8 +42,8 @@ class LottoStatisticsTest {
     void totalSizeTest() {
         Map<LottoRank, Long> data = new HashMap<>();
         data.put(LAST_PLACE, (long) 12);
-        data.put(THREE_PLACE, (long) 100);
-        data.put(LottoRank.FOUR_PLACE, (long) 10);
+        data.put(FOUR_PLACE, (long) 100);
+        data.put(LottoRank.FIVE_PLACE, (long) 10);
 
         LottoStatistics lottoStatistics = new LottoStatistics(data);
         assertThat(lottoStatistics.totalSize())
@@ -54,13 +54,13 @@ class LottoStatisticsTest {
     @Test
     void sizeTest() {
         Map<LottoRank, Long> data = new HashMap<>();
-        data.put(THREE_PLACE, (long) 5);
-        data.put(LottoRank.FOUR_PLACE, (long) 10);
+        data.put(FOUR_PLACE, (long) 5);
+        data.put(LottoRank.FIVE_PLACE, (long) 10);
 
         LottoStatistics lottoStatistics = new LottoStatistics(data);
-        assertThat(lottoStatistics.size(THREE_PLACE))
+        assertThat(lottoStatistics.size(FOUR_PLACE))
                 .isEqualTo(5);
-        assertThat(lottoStatistics.size(LottoRank.FOUR_PLACE))
+        assertThat(lottoStatistics.size(LottoRank.FIVE_PLACE))
                 .isEqualTo(10);
     }
 }

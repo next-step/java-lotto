@@ -1,9 +1,11 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.dto.WinningLottoRequest;
 import lotto.exception.NumberNotSupportException;
 import lotto.exception.OutOfRangeException;
 import lotto.exception.OutOfSizeException;
+import lotto.exception.OverlapNumberException;
 import lotto.util.number.DivisionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
@@ -36,7 +38,7 @@ public final class LottoSolution {
             WinningLotto winningLotto = inputWinningLottoNumbers();
             LottoStatistics lottoStatistics = lottoList.statistics(winningLotto);
             resultView.printLottoStatistics(lottoStatistics);
-        } catch (InvalidFormulaException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
+        } catch (OverlapNumberException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
             resultView.printException(e);
         } catch (Exception e) {
             resultView.printException(new RuntimeException("오류가 발생 했습니다!"));
@@ -50,9 +52,11 @@ public final class LottoSolution {
     }
 
     private WinningLotto inputWinningLottoNumbers() {
-        String strPrizeNumbers = inputView.inputPrizeNumbers();
+        WinningLottoRequest winningLottoRequest = inputView.inputWinningLotto();
+        String strPrizeNumbers = winningLottoRequest.lottoNumbers();
+        int bonusNumber = winningLottoRequest.bonusNumber();
         return new WinningLotto(
-                Lotto.parse(strPrizeNumbers)
+                Lotto.of(strPrizeNumbers), new LottoNumber(bonusNumber)
         );
     }
 }

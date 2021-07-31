@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.OutOfSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -16,7 +15,7 @@ public class LottoTest {
     @ParameterizedTest
     public void ctorTest(String strNumbers) {
         assertThatCode(() ->
-            Lotto.parse(strNumbers)
+            Lotto.of(strNumbers)
         ).doesNotThrowAnyException();
     }
 
@@ -30,7 +29,7 @@ public class LottoTest {
     @ParameterizedTest
     public void ctorTest_OutOfSizeException(String strNumbers) {
         assertThatThrownBy(() ->
-                Lotto.parse(strNumbers)
+                Lotto.of(strNumbers)
         ).isInstanceOf(OutOfSizeException.class);
     }
 }

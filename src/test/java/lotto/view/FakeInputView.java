@@ -1,12 +1,14 @@
 package lotto.view;
 
+import lotto.domain.dto.WinningLottoRequest;
+
 public class FakeInputView implements InputView {
     private final long longMoney;
-    private final String prizeNumbers;
+    private final WinningLottoRequest winningLottoRequest;
 
-    public FakeInputView(long longMoney, String prizeNumbers) {
+    public FakeInputView(long longMoney, WinningLottoRequest winningLottoRequest) {
         this.longMoney = longMoney;
-        this.prizeNumbers = prizeNumbers;
+        this.winningLottoRequest = winningLottoRequest;
     }
 
     @Override
@@ -15,7 +17,7 @@ public class FakeInputView implements InputView {
     }
 
     @Override
-    public String inputPrizeNumbers() {
-        return prizeNumbers;
+    public WinningLottoRequest inputWinningLotto() {
+        return winningLottoRequest;
     }
 }

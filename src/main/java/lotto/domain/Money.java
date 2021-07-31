@@ -10,15 +10,19 @@ public final class Money extends Number {
     private final Number value;
 
     public Money(Number value) {
-        validateNumber(value);
+        validatePositiveMoney(value);
 
         this.value = value;
     }
 
-    private void validateNumber(Number value) {
+    private void validatePositiveMoney(Number value) {
         if (value.longValue() < MIN_VALUE) {
             throw new OutOfRangeException("돈은 음수일 수 없습니다.");
         }
+    }
+
+    public boolean hasMoney() {
+        return longValue() > 0;
     }
 
     @Override
