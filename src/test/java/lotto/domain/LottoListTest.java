@@ -37,7 +37,7 @@ class LottoListTest {
     @ParameterizedTest
     void statisticsTest(int size) {
         WinningLotto winningLotto = new WinningLotto(
-                Lotto.of("1,2,3,4,5,6"), new LottoNumber(7)
+                Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7)
         );
         assertThat(
                 LottoList.generate(size)

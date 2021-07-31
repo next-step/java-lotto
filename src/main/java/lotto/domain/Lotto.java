@@ -24,7 +24,7 @@ public final class Lotto implements Iterable<LottoNumber> {
         return new Lotto(Arrays.stream(
                 removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList())
         );
     }

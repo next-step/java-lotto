@@ -18,7 +18,7 @@ class WinningLottoTest {
         assertThatCode(() ->
                 new WinningLotto(
                         Lotto.of(strLottoNumbers),
-                        new LottoNumber(bonusNumber)
+                        LottoNumber.of(bonusNumber)
                 )
         ).doesNotThrowAnyException();
     }
@@ -33,7 +33,7 @@ class WinningLottoTest {
         assertThatThrownBy(() ->
                 new WinningLotto(
                         Lotto.of(strLottoNumbers),
-                        new LottoNumber(bonusNumber)
+                        LottoNumber.of(bonusNumber)
                 )
         ).isInstanceOf(OverlapNumberException.class);
     }
@@ -41,7 +41,7 @@ class WinningLottoTest {
 
     @CsvSource(value = {
             "1,2,3,4,5,6|1,2,3,4,5,6|45|FIRST_PLACE",   // 1등 :: 6개 일치
-            "1,2,3,4,5,45|1,2,3,4,5,6|45|SECOND_PLACE",   // 2등 :: 5개 + 보너스 볼 일치
+            "1,2,3,4,5,45|1,2,3,4,5,6|45|SECOND_PLACE", // 2등 :: 5개 + 보너스 볼 일치
             "1,2,3,4,5,6|1,2,3,4,5,7|45|THREE_PLACE",   // 3등 :: 5개 일치
             "1,2,3,4,5,6|1,2,3,4,11,12|45|FOUR_PLACE",  // 4등 :: 4개 일치
             "1,2,3,4,5,6|1,2,3,10,11,12|45|FIVE_PLACE", // 5등 :: 3개 일치
@@ -58,7 +58,7 @@ class WinningLottoTest {
     public void rankTest(String strLottoNumbers, String strWinningLottoNumbers, int bonusNumber, String rankName) {
         Lotto lotto = Lotto.of(strLottoNumbers);
         WinningLotto winningLotto = new WinningLotto(
-                Lotto.of(strWinningLottoNumbers), new LottoNumber(bonusNumber)
+                Lotto.of(strWinningLottoNumbers), LottoNumber.of(bonusNumber)
         );
 
         LottoRank expertRank = LottoRank.valueOf(rankName);

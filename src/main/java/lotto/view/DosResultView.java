@@ -11,6 +11,16 @@ import java.util.stream.Collectors;
 
 public class DosResultView implements ResultView {
     @Override
+    public void printException(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    @Override
+    public void printLine(String text) {
+        System.out.println(text);
+    }
+
+    @Override
     public void printLottoList(LottoList lottoList) {
         System.out.println(Text.PURCHASED_LOTTO_SIZE.format(
                 lottoList.size()
@@ -18,20 +28,6 @@ public class DosResultView implements ResultView {
         for (Lotto iLotto : lottoList) {
             System.out.println(iLotto);
         }
-    }
-
-    private List<LottoRank> displayLottoRanks() {
-        return Arrays.stream(LottoRank.values())
-                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
-                .collect(Collectors.toList());
-    }
-
-    private Text lottoRankText(LottoRank lottoRank) {
-        return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
-    }
-
-    private Text yieldText(float yield) {
-        return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
     }
 
     @Override
@@ -54,9 +50,18 @@ public class DosResultView implements ResultView {
         );
     }
 
-    @Override
-    public void printException(Exception e) {
-        System.out.println(e.getMessage());
+    private List<LottoRank> displayLottoRanks() {
+        return Arrays.stream(LottoRank.values())
+                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
+                .collect(Collectors.toList());
+    }
+
+    private Text lottoRankText(LottoRank lottoRank) {
+        return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
+    }
+
+    private Text yieldText(float yield) {
+        return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
     }
 
     private enum Text {

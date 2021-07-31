@@ -1,9 +1,10 @@
 package lotto.view;
 
 import lotto.domain.dto.WinningLottoRequest;
-import lotto.exception.InvalidFormatStringException;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public final class DosInputView implements InputView {
     private final Scanner scanner;
@@ -18,7 +19,8 @@ public final class DosInputView implements InputView {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new InvalidFormatStringException("숫자만 입력 해주세요.");
+            System.out.println("숫자의 형식이 아닙니다.");
+            return inputNumber(guideText);
         }
     }
 
@@ -28,6 +30,15 @@ public final class DosInputView implements InputView {
         return scanner.nextLine();
     }
 
+    private String inputLottoNumbers() {
+        String strLottoNumbers = inputLine(Text.INPUT_WINNING_NUMBERS);
+        if (!RegexPatterns.LOTTO_NUMBER.test(strLottoNumbers)) {
+            System.out.println("로또 번호의 형식이 아닙니다.");
+            return inputLottoNumbers();
+        }
+        return strLottoNumbers;
+    }
+
     @Override
     public long inputMoney() {
         return inputNumber(Text.INPUT_MONEY);
@@ -35,7 +46,7 @@ public final class DosInputView implements InputView {
 
     @Override
     public WinningLottoRequest inputWinningLotto() {
-        String winningLottoNumbers = inputLine(Text.INPUT_WINNING_NUMBERS);
+        String winningLottoNumbers = inputLottoNumbers();
         int bonusNumber = inputNumber(Text.INPUT_BONUS_NUMBER);
 
         return new WinningLottoRequest(winningLottoNumbers, bonusNumber);
@@ -55,6 +66,22 @@ public final class DosInputView implements InputView {
         @Override
         public String toString() {
             return str;
+        }
+    }
+
+    private enum RegexPatterns {
+        LOTTO_NUMBER(
+                Pattern.compile("[0-9\\s*]+(,[0-9\\s*]+){5}")
+        );
+
+        private final Pattern pattern;
+
+        RegexPatterns(Pattern pattern) {
+            this.pattern = pattern;
+        }
+
+        public boolean test(String text) {
+            return pattern.matcher(text).matches();
         }
     }
 }

@@ -10,4 +10,6 @@ public interface ResultView {
     void printLottoStatistics(LottoStatistics lottoStatistics);
 
     void printException(Exception e);
+
+    void printLine(String text);
 }

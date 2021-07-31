@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public final class LottoList implements Iterable<Lotto> {
     private static final List<LottoNumber> NUMBER_TEMPLATE =
-            IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
-                    .mapToObj(LottoNumber::new)
+            IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
+                    .mapToObj(LottoNumber::of)
                     .collect(Collectors.toList());
 
     private final List<Lotto> values;
