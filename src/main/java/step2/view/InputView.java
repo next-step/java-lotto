@@ -46,8 +46,8 @@ public class InputView {
     }
 
     private static void validateLottoNum(List<Integer> nums) {
-        if (nums.stream().anyMatch(i -> i > 46 || i <= 0)) {
-            throw new RuntimeException("로또 번호는 1 ~ 46 사이의 번호여야 합니다");
+        if (nums.stream().anyMatch(i -> i > 45 || i <= 0)) {
+            throw new RuntimeException("로또 번호는 1 ~ 45 사이의 번호여야 합니다");
         }
 
         if (nums.size() != LOTTO_NUM_SIZE) {

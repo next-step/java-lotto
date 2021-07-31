@@ -4,6 +4,7 @@ import step2.domain.Lotto;
 import step2.domain.Lottos;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -22,21 +23,21 @@ public class LottoPlaceChecker {
     public List<LottoPlace> getLottoPlace(Lottos lottos) {
         List<LottoPlace> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int distinctNum = getDistinctNum(lotto);
-            results.add(LottoPlace.findPlaceByDistinctNum(distinctNum));
+            int correctNum = getCorrectNum(lotto);
+            results.add(LottoPlace.findPlaceByCorrectNum(correctNum));
         }
         return results;
     }
 
-    private int getDistinctNum(Lotto lotto) {
-        return (int) Stream.concat(lastWeekLottoNums.stream(), lotto.getLottoNums().stream())
-            .distinct()
+    private int getCorrectNum(Lotto lotto) {
+        return (int) lotto.getLottoNums().stream()
+            .filter(lastWeekLottoNums::contains)
             .count();
     }
 
     public BigDecimal calculateWinnerRate(List<LottoPlace> lottoPlaces, int totalCost) {
         long sum = calculateTotalPrice(lottoPlaces);
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(totalCost));
+        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(totalCost), 6, RoundingMode.HALF_EVEN);
     }
 
     private static long calculateTotalPrice(List<LottoPlace> lottoPlaces) {

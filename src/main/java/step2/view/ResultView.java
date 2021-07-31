@@ -50,21 +50,21 @@ public class ResultView {
 
     private static void showForth(List<LottoPlace> lottoPlaces) {
         long forth = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.FORTH).count();
-        System.out.println("3개 일치 (5000원) - " + forth + "개");
+        System.out.println(LottoPlace.FORTH.getCorrectNum() + "개 일치 (" + LottoPlace.FORTH.getPrice() + "원) - " + forth + "개");
     }
 
     private static void showThird(List<LottoPlace> lottoPlaces) {
         long third = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.THIRD).count();
-        System.out.println("4개 일치 (50000원) - " + third + "개");
+        System.out.println(LottoPlace.THIRD.getCorrectNum() + "개 일치 (" + LottoPlace.THIRD.getPrice() + "원) - " + third + "개");
     }
 
     private static void showSecond(List<LottoPlace> lottoPlaces) {
         long second = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.SECOND).count();
-        System.out.println("5개 일치 (1500000원) - " + second + "개");
+        System.out.println(LottoPlace.SECOND.getCorrectNum() + "개 일치 (" + LottoPlace.SECOND.getPrice() + "원) - " + second + "개");
     }
 
     private static void showFirst(List<LottoPlace> lottoPlaces) {
         long first = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.FIRST).count();
-        System.out.println("6개 일치 (2000000000원) - " + first + "개");
+        System.out.println(LottoPlace.FIRST.getCorrectNum()+ "개 일치 (" + LottoPlace.FIRST.getPrice() + "원) - " + first + "개");
     }
 }

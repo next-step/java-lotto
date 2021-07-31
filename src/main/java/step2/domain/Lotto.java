@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private static final List<Integer> lottoRange = Stream.iterate(1, n -> n + 1).limit(46).collect(Collectors.toList());
+    private static final List<Integer> lottoRange = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
 
     private final List<Integer> lottoNums;
 

@@ -2,12 +2,13 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import step2.domain.*;
+import step2.domain.Lotto;
+import step2.domain.Lottos;
+import step2.domain.Shop;
 import step2.lottoPlace.LottoPlace;
 import step2.lottoPlace.LottoPlaceChecker;
 import step2.view.InputView;
@@ -26,7 +27,7 @@ public class LottoAutoTest {
 
     @ParameterizedTest
     @DisplayName("지난주 로또 금액을 제대로 입력}")
-    @CsvSource(value = {"1,2,3,4,5,6", "10,11,12,13,14,15", "46,45,44,43,42,41"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6", "10,11,12,13,14,15", "45,44,43,42,41,40"}, delimiter = ':')
     public void successLottoInput(String input) {
         //given, when, then
         InputView.getLastWeekLottoNum(input);
@@ -70,11 +71,11 @@ public class LottoAutoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("내 로또번호와 지난 주 로또번호를 합쳐서 중복을 제거한 카운트로 등수를 구한다.")
-    @CsvSource(value = {"9:FORTH", "8:THIRD", "7:SECOND", "6:FIRST"}, delimiter = ':')
-    public void getPlaceByDistinctNum(int distinctNum, LottoPlace expected) {
+    @DisplayName("일치하는 번호 갯수로 등수를 구한다")
+    @CsvSource(value = {"3:FORTH", "4:THIRD", "5:SECOND", "6:FIRST"}, delimiter = ':')
+    public void getPlaceByDistinctNum(int correctNum, LottoPlace expected) {
         //given, when
-        LottoPlace lottoPlace = LottoPlace.findPlaceByDistinctNum(distinctNum);
+        LottoPlace lottoPlace = LottoPlace.findPlaceByCorrectNum(correctNum);
 
         //then
         assertThat(lottoPlace).isEqualTo(expected);
@@ -118,7 +119,7 @@ public class LottoAutoTest {
         BigDecimal result = lottoPlaceChecker.calculateWinnerRate(lottoPlaces, cost);
 
         //then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualByComparingTo(expected);
     }
 
     static Stream<Arguments> getRateOfTotalPriceSource() {
