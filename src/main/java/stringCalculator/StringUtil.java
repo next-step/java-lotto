@@ -4,18 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
-    public static String[] separator(String inputString) {
-        return inputString.split(",|;");
+    public static String[] complicatedSeparator(String inputString) {
+        String separator = ",|;";
+        Matcher matcher = getCustomMatcher(inputString);
+        if(matcher.find()){
+            separator = separator + "|" + matcher.group(1);
+            return matcher.group(2).split(separator);
+        }
+        return inputString.split(separator);
     }
 
-
-    public static String[] customSeparator(String customSeparatorContainString) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(customSeparatorContainString);
-        if(matcher.find()){
-            String customSeparator = matcher.group(1);
-            String[] test = matcher.group(2).split(customSeparator);
-            return test;
-        }
-        return separator(customSeparatorContainString);
+    private static Matcher getCustomMatcher(String inputString){
+        return Pattern.compile("//(.)\n(.*)").matcher(inputString);
     }
 }
