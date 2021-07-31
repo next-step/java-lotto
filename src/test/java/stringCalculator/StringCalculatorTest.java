@@ -23,9 +23,9 @@ public class StringCalculatorTest {
 
     @Test
     @DisplayName("문자열 구분자")
-    void seperatorTest(){
+    void separatorTest(){
         String inputString = "1,2;3;";
-        String[] stringArray = StringUtil.seperator(inputString);
+        String[] stringArray = StringUtil.separator(inputString);
         assertThat(stringArray).contains("1","2","3");
     }
 

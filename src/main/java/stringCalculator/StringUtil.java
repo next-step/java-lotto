@@ -1,7 +1,9 @@
 package stringCalculator;
 
 public class StringUtil {
-    public static String[] seperator(String inputString) {
+    public static String[] separator(String inputString) {
         return inputString.split(",|;");
     }
+
+
 }
