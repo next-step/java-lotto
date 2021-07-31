@@ -69,9 +69,9 @@ class LottoTicketTest {
 			Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), winningNumbers, LottoPrize.NONE),
 			Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), winningNumbers, LottoPrize.NONE),
 			Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), winningNumbers, LottoPrize.NONE),
-			Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), winningNumbers, LottoPrize.FOURTH),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), winningNumbers, LottoPrize.THIRD),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), winningNumbers, LottoPrize.SECOND),
+			Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), winningNumbers, LottoPrize.FIFTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), winningNumbers, LottoPrize.FOURTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), winningNumbers, LottoPrize.THIRD),
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), winningNumbers, LottoPrize.FIRST)
 		);
 	}

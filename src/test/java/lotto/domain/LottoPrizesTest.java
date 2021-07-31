@@ -44,17 +44,17 @@ class LottoPrizesTest {
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, THIRD)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(THIRD, FIRST)), 200_000, 10_000.25)
+			Arguments.of(LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 100_000, 0.55),
+			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 200_000, 10_000.25)
 		);
 	}
 
 	private static Stream<Arguments> countLottoPrizesPerRankArguments() {
 		List<LottoPrize> totalLottoPrizes = createLottoPrizes();
 		return Stream.of(
-			createArgumentsFrom(totalLottoPrizes, FOURTH, 2),
-			createArgumentsFrom(totalLottoPrizes, THIRD, 3),
-			createArgumentsFrom(totalLottoPrizes, SECOND, 4),
+			createArgumentsFrom(totalLottoPrizes, FIFTH, 2),
+			createArgumentsFrom(totalLottoPrizes, FOURTH, 3),
+			createArgumentsFrom(totalLottoPrizes, THIRD, 4),
 			createArgumentsFrom(totalLottoPrizes, FIRST, 2)
 		);
 	}
@@ -67,15 +67,15 @@ class LottoPrizesTest {
 		List<LottoPrize> lottoPrizes = new ArrayList<>();
 		lottoPrizes.add(NONE);
 		lottoPrizes.add(NONE);
+		lottoPrizes.add(FIFTH);
+		lottoPrizes.add(FIFTH);
 		lottoPrizes.add(FOURTH);
 		lottoPrizes.add(FOURTH);
+		lottoPrizes.add(FOURTH);
 		lottoPrizes.add(THIRD);
 		lottoPrizes.add(THIRD);
 		lottoPrizes.add(THIRD);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
+		lottoPrizes.add(THIRD);
 		lottoPrizes.add(FIRST);
 		lottoPrizes.add(FIRST);
 		return lottoPrizes;
