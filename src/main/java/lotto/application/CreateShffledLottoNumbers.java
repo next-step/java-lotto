@@ -18,6 +18,7 @@ public class CreateShffledLottoNumbers implements CreateLottoNumbersStrategy {
             lottoNumbers.add(LottoNumberRange.getLottoNumberRange().get(lottoRangeListIndex));
             lottoRangeListIndex++;
         }
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 }
