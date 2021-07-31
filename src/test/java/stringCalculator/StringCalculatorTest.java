@@ -14,11 +14,11 @@ public class StringCalculatorTest {
     void isEmptyOrNullTest(){
         String emptyString = "";
         String nullString = null;
-        boolean emptyResult = stringCalculator.isCorrectString(emptyString);
-        boolean nullResult = stringCalculator.isCorrectString(nullString);
+        boolean emptyResult = stringCalculator.isEmptyOrNull(emptyString);
+        boolean nullResult = stringCalculator.isEmptyOrNull(nullString);
 
-        assertThat(emptyResult).isFalse();
-        assertThat(nullResult).isFalse();
+        assertThat(emptyResult).isTrue();
+        assertThat(nullResult).isTrue();
     }
 
     @Test
@@ -45,5 +45,12 @@ public class StringCalculatorTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @Test
+    @DisplayName("문자열 덧셈 계산기")
+    void stringPlusCalculate(){
+        String inputString = "//a\n1a2,3;4";
+        int result = stringCalculator.calculate(inputString);
+        assertThat(result).isEqualTo(10);
+    }
 
 }
