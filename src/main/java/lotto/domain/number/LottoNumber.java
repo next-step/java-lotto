@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain.number;
 
 import java.util.Random;
 import java.util.Set;

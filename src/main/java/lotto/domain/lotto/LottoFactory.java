@@ -2,6 +2,8 @@ package lotto.domain.lotto;
 
 import java.util.Set;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 
 public class LottoFactory {
 
