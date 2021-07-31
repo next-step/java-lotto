@@ -27,7 +27,7 @@ class NumberGeneratorTest {
     @DisplayName("기본 구분자 입력받아 Numbers 반환하기")
     void basicSeparator() {
         final String input = "1,2:3";
-        List<Number> numbers = numberGenerator.getNumbers(input);
+        List<Number> numbers = numberGenerator.createNumbers(input);
         List<Number> result = Arrays.asList(Number.from("1"), Number.from("2"), Number.from("3"));
         assertEquals(numbers, result);
     }
@@ -36,7 +36,7 @@ class NumberGeneratorTest {
     @DisplayName("커스텀 구분자 입력받아 Numbers 반환하기")
     void customSeparator() {
         final String input = "//;\n1;2;3";
-        List<Number> numbers = numberGenerator.getNumbers(input);
+        List<Number> numbers = numberGenerator.createNumbers(input);
         List<Number> result = Arrays.asList(Number.from("1"), Number.from("2"), Number.from("3"));
         assertEquals(numbers, result);
     }
@@ -46,7 +46,7 @@ class NumberGeneratorTest {
     void negative() {
         assertThrows(RuntimeException.class, () -> {
             final String input = "//;\n-1;2;3";
-            numberGenerator.getNumbers(input);
+            numberGenerator.createNumbers(input);
         });
     }
 
@@ -55,7 +55,7 @@ class NumberGeneratorTest {
     void text() {
         assertThrows(RuntimeException.class, () -> {
             final String input = "//;\na;2;3";
-            numberGenerator.getNumbers(input);
+            numberGenerator.createNumbers(input);
         });
     }
 
@@ -65,7 +65,7 @@ class NumberGeneratorTest {
     @DisplayName("null, empty ,공백일 경우 RuntimeException 발생")
     void blank(final String input) {
         assertThrows(RuntimeException.class, () -> {
-            numberGenerator.getNumbers(input);
+            numberGenerator.createNumbers(input);
         });
     }
 }

@@ -1,5 +1,8 @@
 package calculators.vo;
 
+import calculators.exceptions.NegativeNumberException;
+import calculators.exceptions.NonNumericException;
+
 import java.util.Objects;
 
 public class Number {
@@ -10,10 +13,10 @@ public class Number {
         try {
             this.value = Integer.parseInt(input);
             if (value < 0) {
-                throw new RuntimeException("음수는 사용할 수 없습니다.");
+                throw new NegativeNumberException();
             }
         } catch (NumberFormatException e) {
-            throw new RuntimeException("숫자만 사용 가능합니다.");
+            throw new NonNumericException();
         }
     }
 

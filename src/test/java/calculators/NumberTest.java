@@ -4,8 +4,7 @@ import calculators.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NumberTest {
 
@@ -14,7 +13,8 @@ public class NumberTest {
     void positiveNumberAndZero() {
         final String input = "1";
         assertDoesNotThrow(() -> {
-            Number.from(input);
+            Number number = Number.from(input);
+            assertEquals(number.getValue(), Integer.parseInt(input));
         });
     }
 
