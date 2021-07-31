@@ -19,11 +19,16 @@ public enum LottoPrize {
 		this.prizeMoney = prizeMoney;
 	}
 
-	static LottoPrize fromMatchCount(int matchCount) {
-		return Arrays.stream(values())
-				.filter(prize -> prize.matchCount == matchCount)
-				.findFirst()
-				.orElse(LottoPrize.NONE);
+	static LottoPrize fromMatchCount(int matchCount, boolean hasBonusNumber) {
+		LottoPrize lottoPrize = Arrays.stream(values())
+									.filter(prize -> prize.matchCount == matchCount)
+									.findFirst()
+									.orElse(LottoPrize.NONE);
+
+		if (lottoPrize == SECOND && !hasBonusNumber) {
+			return THIRD;
+		}
+		return lottoPrize;
 	}
 
 	public long matchCount() {

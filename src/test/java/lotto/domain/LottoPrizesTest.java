@@ -22,7 +22,8 @@ class LottoPrizesTest {
 	void create() {
 		List<LottoTicket> tickets = createLottoTickets();
 		LottoTickets lottoTickets = LottoTickets.from(tickets);
-		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		LottoNumber bonusNumber = new LottoNumber(45);
+		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
 		assertThat(lottoPrizes.size()).isEqualTo(tickets.size());
 	}
 

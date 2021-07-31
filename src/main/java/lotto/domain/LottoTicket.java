@@ -36,11 +36,12 @@ public class LottoTicket {
 				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
-	public LottoPrize compareTo(LottoTicket lottoTicket) {
+	public LottoPrize compareTo(LottoTicket lottoTicket, LottoNumber bonusNumber) {
 		int count = (int) lottoNumbers.stream()
 						.filter(lottoTicket.lottoNumbers::contains)
 						.count();
-		return LottoPrize.fromMatchCount(count);
+
+		return LottoPrize.fromMatchCount(count, lottoNumbers.contains(bonusNumber));
 	}
 
 	private static void validateLottoNumbers(List<LottoNumber> numbers) {
@@ -52,4 +53,5 @@ public class LottoTicket {
 	private static boolean hasInvalidSize(List<LottoNumber> numbers) {
 		return numbers.size() != VALID_LOTTO_NUMBERS_SIZE;
 	}
+
 }

@@ -17,9 +17,9 @@ public class LottoTickets {
 		return new LottoTickets(Collections.unmodifiableList(lottoTickets));
 	}
 
-	public LottoPrizes getLottoPrizes(LottoTicket winningLottoTicket) {
+	public LottoPrizes getLottoPrizes(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
 		List<LottoPrize> lottoPrizes = tickets.stream()
-										.map(lottoTicket -> lottoTicket.compareTo(winningLottoTicket))
+										.map(lottoTicket -> lottoTicket.compareTo(winningLottoTicket, bonusNumber))
 										.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 		return LottoPrizes.from(lottoPrizes);
 	}

@@ -43,10 +43,14 @@ class LottoTicketTest {
 	@DisplayName("구매한 로또와 지난 주 당첨 번호를 갖는 로또를 비교한다.")
 	@MethodSource("compareTwoLottoTicketsArguments")
 	@ParameterizedTest
-	void compareTwoLottoTickets(List<Integer> boughtLottoNumbers, List<Integer> winningLottoNumbers, LottoPrize prize) {
+	void compareTwoLottoTickets(List<Integer> boughtLottoNumbers,
+								List<Integer> winningLottoNumbers,
+								LottoNumber bonusNumber,
+								LottoPrize prize) {
+
 		LottoTicket boughtLottoTicket = LottoTicket.from(boughtLottoNumbers);
 		LottoTicket winningLottoTicket = LottoTicket.from(winningLottoNumbers);
-		assertThat(boughtLottoTicket.compareTo(winningLottoTicket)).isEqualTo(prize);
+		assertThat(boughtLottoTicket.compareTo(winningLottoTicket, bonusNumber)).isEqualTo(prize);
 	}
 
 	private static Stream<Arguments> invalidLottoNumbersSizeArguments() {
@@ -64,15 +68,17 @@ class LottoTicketTest {
 
 	private static Stream<Arguments> compareTwoLottoTicketsArguments() {
 		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		LottoNumber bonusNumber = new LottoNumber(13);
 
 		return Stream.of(
-			Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), winningNumbers, LottoPrize.NONE),
-			Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), winningNumbers, LottoPrize.NONE),
-			Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), winningNumbers, LottoPrize.NONE),
-			Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), winningNumbers, LottoPrize.FIFTH),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), winningNumbers, LottoPrize.FOURTH),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), winningNumbers, LottoPrize.THIRD),
-			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), winningNumbers, LottoPrize.FIRST)
+			Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), winningNumbers, bonusNumber, LottoPrize.NONE),
+			Arguments.of(Arrays.asList(1, 7, 8, 9, 10, 11), winningNumbers, bonusNumber, LottoPrize.NONE),
+			Arguments.of(Arrays.asList(1, 2, 7, 8, 9, 10), winningNumbers, bonusNumber, LottoPrize.NONE),
+			Arguments.of(Arrays.asList(1, 2, 3, 7, 8, 9), winningNumbers, bonusNumber, LottoPrize.FIFTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9), winningNumbers, bonusNumber, LottoPrize.FOURTH),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 9), winningNumbers, bonusNumber, LottoPrize.THIRD),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 13), winningNumbers, bonusNumber, LottoPrize.SECOND),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), winningNumbers, bonusNumber, LottoPrize.FIRST)
 		);
 	}
 
