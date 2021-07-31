@@ -10,7 +10,7 @@ public class PlayLotto {
     public List<Lotto> createLotto(int cash) {
         int lottoCount = cash / LOTTO_PRICE;
         for(int i=0; i<lottoCount; i++){
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(new CreateShffledLottoNumbers()));
         }
         return lottos;
     }

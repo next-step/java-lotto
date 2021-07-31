@@ -29,7 +29,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성")
     void createLottoTest(){
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new CreateShffledLottoNumbers());
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
