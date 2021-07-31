@@ -15,9 +15,9 @@ class WinningLottoTicketTest {
 	@DisplayName("로또 당첨 번호와 보너스 번호가 중복되면 예외가 발생한다.")
 	@Test
 	void invalidBonusNumber() {
-		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		int bonusNumber = 6;
-		assertThatThrownBy(() -> WinningLottoTicket.from(winningNumbers, bonusNumber))
+		assertThatThrownBy(() -> WinningLottoTicket.from(lottoNumbers, bonusNumber))
 			.isInstanceOf(InvalidBonusNumberException.class);
 	}
 
@@ -25,8 +25,8 @@ class WinningLottoTicketTest {
 	@Test
 	void compareTo() {
 		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-		LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7));
-		LottoPrize lottoPrize = winningLottoTicket.compareTo(lottoTicket);
+		LottoTicket boughtLottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7));
+		LottoPrize lottoPrize = winningLottoTicket.compareTo(boughtLottoTicket);
 		assertThat(lottoPrize).isEqualTo(LottoPrize.SECOND);
 	}
 
