@@ -1,6 +1,8 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -16,10 +18,11 @@ class StringAddCalculatorTest {
         assertThat(result).isZero();
     }
 
-    @Test
-    void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(1);
+    @CsvSource(value = {"1:1", "10:10", "99:99"}, delimiter = ':')
+    @ParameterizedTest(name = "{0}이 들어오면 {1}을 돌려준다")
+    void splitAndSum_숫자하나(String given, int expected) throws Exception {
+        int result = StringAddCalculator.splitAndSum(given);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -33,6 +36,7 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
 
     @Test
     void splitAndSum_custom_구분자() throws Exception {
