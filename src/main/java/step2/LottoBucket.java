@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoBucket {
@@ -10,9 +11,9 @@ public class LottoBucket {
     }
 
     public void addLottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
-        Lotto lotto = new Lotto(lottoNumberGenerator);
+        List<Integer> numbers = lottoNumberGenerator.generateNumbersForLotto();
 
-        this.lottoes.add(lotto);
+        this.lottoes.add(new Lotto(numbers));
     }
 
     public int size() {

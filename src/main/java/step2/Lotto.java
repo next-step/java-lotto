@@ -8,9 +8,7 @@ public class Lotto {
 
     private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> numbers = lottoNumberGenerator.generateRandomNumbersForLotto();
-
+    public Lotto(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("주어진 숫자의 갯수가 6보다 작거나 큽니다.");
         }
