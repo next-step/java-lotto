@@ -1,29 +1,26 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
-import java.util.Set;
-
 public class WinningLotto {
 
-    private final Set<Integer> numbers;
+    private final LottoNumbers numbers;
     private final int bonusNumber;
 
-    public WinningLotto(Set<Integer> numbers, int bonusNumber) {
+    public WinningLotto(LottoNumbers numbers, int bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
     public int matchNumberCount(NormalLotto lotto) {
-        return Math.toIntExact(lotto.getValues().stream()
-            .filter(numbers::contains)
-            .count());
+        return lotto.getNumbers()
+            .matchCount(numbers);
     }
 
     public boolean matchBonusNumber(NormalLotto lotto) {
-        return lotto.getValues().contains(bonusNumber);
+        return lotto.getNumbers()
+            .contains(bonusNumber);
     }
 
-    public Set<Integer> getValues() {
-        return Collections.unmodifiableSet(numbers);
+    public LottoNumbers getNumbers() {
+        return numbers;
     }
 }

@@ -10,7 +10,7 @@ public class ResultView {
 
     public static void printPurchasedLottos(List<NormalLotto> purchasedLottos) {
         System.out.println(purchasedLottos.size() + "개를 구매했습니다.");
-        purchasedLottos.forEach(lotto -> System.out.println(lotto.getValues()));
+        purchasedLottos.forEach(lotto -> System.out.println(lotto.getNumbers().getValues()));
     }
 
     public static void printWinningStatistics(Map<Rank, Integer> winningLottoCounts) {

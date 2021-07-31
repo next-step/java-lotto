@@ -33,7 +33,7 @@ class LottoFactoryTest {
         WinningLotto winningLotto = LottoFactory.createWinning(numbers, bonusNumber);
 
         // then
-        assertThat(winningLotto.getValues()).hasSize(6);
+        assertThat(winningLotto).isNotNull();
     }
 
     public static Stream<Arguments> notValidLottoNumbers() {
