@@ -26,7 +26,7 @@ class WinningLottoTicketTest {
 	void compareTo() {
 		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		LottoTicket boughtLottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7));
-		LottoPrize lottoPrize = winningLottoTicket.compareTo(boughtLottoTicket);
+		LottoPrize lottoPrize = winningLottoTicket.match(boughtLottoTicket);
 		assertThat(lottoPrize).isEqualTo(LottoPrize.SECOND);
 	}
 

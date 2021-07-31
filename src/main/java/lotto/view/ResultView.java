@@ -32,7 +32,7 @@ public class ResultView {
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		Arrays.stream(LottoPrize.values())
-			.filter(lottoPrize -> lottoPrize != LottoPrize.NONE)
+			.filter(LottoPrize::isNone)
 			.sorted(Comparator.comparingInt(LottoPrize::prizeMoney))
 			.forEach(lottoPrize -> printLottoPrizePerRank(totalLottoPrizes.prizesOf(lottoPrize), lottoPrize));
 	}

@@ -41,7 +41,7 @@ public class LottoTicket {
 						.filter(lottoTicket.lottoNumbers::contains)
 						.count();
 
-		return LottoPrize.fromMatchCount(count, lottoNumbers.contains(bonusNumber));
+		return LottoPrize.from(count, lottoNumbers.contains(bonusNumber));
 	}
 
 	public int matchCount(LottoTicket winningTicket) {

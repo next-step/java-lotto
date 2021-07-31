@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.WinningLottoNumbers;
 
 public class InputView {
@@ -37,9 +36,9 @@ public class InputView {
 		return WinningLottoNumbers.from(numbers);
 	}
 
-	public static LottoNumber inputBonusNumber() {
+	public static int inputBonusNumber() {
 		System.out.println(INPUT_BONUS_NUMBER);
-		return new LottoNumber(SCANNER.nextInt());
+		return SCANNER.nextInt();
 	}
 
 }

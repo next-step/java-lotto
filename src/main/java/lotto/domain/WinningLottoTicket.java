@@ -19,10 +19,12 @@ public class WinningLottoTicket {
 		return new WinningLottoTicket(LottoTicket.from(winningNumbers), new LottoNumber(bonusNumber));
 	}
 
-	public LottoPrize compareTo(LottoTicket lottoTicket) {
-		int matchCount = lottoTicket.matchCount(winningTicket);
-		boolean hasBonusNumber = lottoTicket.contains(bonusNumber);
-		return LottoPrize.fromMatchCount(matchCount, hasBonusNumber);
+	public static WinningLottoTicket from(WinningLottoNumbers winningLottoNumbers, int bonusNumber) {
+		return from(winningLottoNumbers.getWinningNumbers(), bonusNumber);
+	}
+
+	public LottoPrize match(LottoTicket lottoTicket) {
+		return LottoPrize.from(lottoTicket.matchCount(winningTicket), lottoTicket.contains(bonusNumber));
 	}
 
 	private void validateBonusNumber(LottoTicket winningTicket, LottoNumber bonusNumber) {

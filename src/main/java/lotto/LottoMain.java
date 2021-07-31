@@ -1,11 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrizes;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLottoNumbers;
+import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,9 +17,9 @@ public class LottoMain {
 		ResultView.showLottoTickets(lottoTickets);
 
 		WinningLottoNumbers winningLottoNumbers = InputView.inputWinningNumbers();
-		LottoNumber bonusNumber = InputView.inputBonusNumber();
-		LottoTicket winningLottoTicket = LottoTicket.from(winningLottoNumbers);
-		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket, bonusNumber);
+		int bonusNumber = InputView.inputBonusNumber();
+		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, bonusNumber);
+		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 		ResultView.showLottoPrizes(lottoPrizes);
 		ResultView.showEarningsRate(lottoPrizes.earningsRate(money));
 	}
