@@ -1,16 +1,20 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.dto.WinningLottoRequest;
-import lotto.exception.*;
+import lotto.domain.dto.LottoBuyInfo;
+import lotto.domain.dto.WinningLottoInfo;
+import lotto.exception.InvalidInputException;
+import lotto.util.number.CalculationNumber;
 import lotto.util.number.DivisionNumber;
+import lotto.util.number.MultiplicationNumber;
+import lotto.util.number.SubtractionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import stringaddcalculator.exception.InvalidFormulaException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoSolution {
     public static void main(String[] args) {
@@ -30,11 +34,13 @@ public final class LottoSolution {
 
     public void run() {
         try {
-            long money = inputView.inputMoney();
-            LottoList lottoList = buyLotto(money);
-            resultView.printLottoList(lottoList);
+            LottoBuyInfo lottoBuyInfo = inputView.inputLottoBuyInfo();
+            LottoList lottoList = buyLottoList(lottoBuyInfo);
+            resultView.printLottoList(lottoList, lottoBuyInfo.manualLottoList().size());
 
-            WinningLotto winningLotto = inputWinningLottoNumbers();
+            WinningLottoInfo winningLottoInfo = inputView.inputWinningLottoInfo();
+            WinningLotto winningLotto = inputWinningLottoNumbers(winningLottoInfo);
+
             LottoStatistics lottoStatistics = lottoList.statistics(winningLotto);
             resultView.printLottoStatistics(lottoStatistics);
         } catch (Exception e) {
@@ -42,17 +48,34 @@ public final class LottoSolution {
         }
     }
 
-    private LottoList buyLotto(long longMoney) {
-        Money money = new Money(longMoney);
-        DivisionNumber lottoSize = new DivisionNumber(money, Lotto.PRICE);
-        return LottoList.generate(lottoSize);
+    private LottoList buyLottoList(LottoBuyInfo buyInfo) {
+        List<Lotto> manualLottoList =
+                buyInfo.manualLottoList().stream()
+                        .map(Lotto::of)
+                        .collect(Collectors.toList());
+
+        CalculationNumber autoLottoSize = new SubtractionNumber(
+                new DivisionNumber(buyInfo.money(), Lotto.PRICE),
+                manualLottoList.size()
+        );
+
+        if (autoLottoSize.isNegative()) {
+            throw new InvalidInputException("로또를 구매할 금액이 부족합니다.");
+        }
+        return newLottoList(autoLottoSize, manualLottoList);
     }
 
-    private WinningLotto inputWinningLottoNumbers() {
-        WinningLottoRequest winningLottoRequest = inputView.inputWinningLotto();
+    private LottoList newLottoList(CalculationNumber autoLottoSize, List<Lotto> manualLottoList) {
+        if (autoLottoSize.isPositive()) {
+            return LottoList.generate(autoLottoSize)
+                    .add(manualLottoList);
+        }
+        return new LottoList(manualLottoList);
+    }
 
-        String strWiningNumbers = winningLottoRequest.lottoNumbers();
-        int bonusNumber = winningLottoRequest.bonusNumber();
+    private WinningLotto inputWinningLottoNumbers(WinningLottoInfo winningLottoInfo) {
+        String strWiningNumbers = winningLottoInfo.lottoNumbers();
+        int bonusNumber = winningLottoInfo.bonusNumber();
 
         return new WinningLotto(
                 Lotto.of(strWiningNumbers), LottoNumber.of(bonusNumber)

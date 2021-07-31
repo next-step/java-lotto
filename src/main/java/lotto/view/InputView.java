@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.domain.dto.WinningLottoRequest;
+import lotto.domain.dto.LottoBuyInfo;
+import lotto.domain.dto.WinningLottoInfo;
 
 public interface InputView {
-    long inputMoney();
+    LottoBuyInfo inputLottoBuyInfo();
 
-    WinningLottoRequest inputWinningLotto();
+    WinningLottoInfo inputWinningLottoInfo();
 }

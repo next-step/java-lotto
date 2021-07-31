@@ -14,7 +14,7 @@ public final class LottoList implements Iterable<Lotto> {
 
     private final List<Lotto> values;
 
-    private LottoList(List<Lotto> values) {
+    public LottoList(List<Lotto> values) {
         validateListSize(values);
 
         this.values = values;
@@ -22,7 +22,7 @@ public final class LottoList implements Iterable<Lotto> {
 
     private void validateListSize(List<Lotto> values) {
         if (Objects.isNull(values) || values.size() <= 0) {
-            throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
+            throw new OutOfSizeException("구매할 로또가 없습니다.");
         }
     }
 
@@ -45,6 +45,12 @@ public final class LottoList implements Iterable<Lotto> {
                 Collectors.groupingBy(winningLotto::rank, Collectors.counting())
         );
         return new LottoStatistics(data);
+    }
+
+    public LottoList add(List<Lotto> lottoList) {
+        List<Lotto> newLottoList = new ArrayList<>(this.values);
+        newLottoList.addAll(lottoList);
+        return new LottoList(newLottoList);
     }
 
     /* 이하 Forward 메소드들 */

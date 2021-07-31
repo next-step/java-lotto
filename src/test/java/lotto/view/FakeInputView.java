@@ -1,23 +1,24 @@
 package lotto.view;
 
-import lotto.domain.dto.WinningLottoRequest;
+import lotto.domain.dto.LottoBuyInfo;
+import lotto.domain.dto.WinningLottoInfo;
 
 public class FakeInputView implements InputView {
-    private final long longMoney;
-    private final WinningLottoRequest winningLottoRequest;
+    private final LottoBuyInfo lottoBuyInfo;
+    private final WinningLottoInfo winningLottoRequest;
 
-    public FakeInputView(long longMoney, WinningLottoRequest winningLottoRequest) {
-        this.longMoney = longMoney;
+    public FakeInputView(LottoBuyInfo lottoBuyInfo, WinningLottoInfo winningLottoRequest) {
+        this.lottoBuyInfo = lottoBuyInfo;
         this.winningLottoRequest = winningLottoRequest;
     }
 
     @Override
-    public long inputMoney() {
-        return longMoney;
+    public LottoBuyInfo inputLottoBuyInfo() {
+        return lottoBuyInfo;
     }
 
     @Override
-    public WinningLottoRequest inputWinningLotto() {
+    public WinningLottoInfo inputWinningLottoInfo() {
         return winningLottoRequest;
     }
 }

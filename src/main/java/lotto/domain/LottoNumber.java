@@ -11,11 +11,6 @@ import java.util.stream.IntStream;
 public final class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
-    private static final List<LottoNumber> TEMPLATE = Collections.unmodifiableList(
-            IntStream.range(MIN_VALUE, MAX_VALUE + 1)
-                    .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toList())
-    );
 
     private final int value;
 
@@ -29,7 +24,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
         validateNumberRange(value);
 
         int index = value - 1;
-        return TEMPLATE.get(index);
+        return InnerClazz.TEMPLATE.get(index);
     }
 
     private static void validateNumberRange(int value) {
@@ -60,5 +55,13 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber compareValue) {
         return Integer.compare(value, compareValue.value);
+    }
+
+    private static class InnerClazz {
+        private static final List<LottoNumber> TEMPLATE = Collections.unmodifiableList(
+                IntStream.range(MIN_VALUE, MAX_VALUE + 1)
+                        .mapToObj(LottoNumber::new)
+                        .collect(Collectors.toList())
+        );
     }
 }
