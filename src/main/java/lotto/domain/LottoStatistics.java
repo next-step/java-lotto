@@ -22,8 +22,8 @@ public class LottoStatistics {
         return statisticsMap;
     }
 
-    public void summary(Lottos buyLotto, LottoBonus lottoBonus) {
-        buyLotto.mapToResult(lottoBonus)
+    public void summary(Lottos buyLotto, WinningLotto winningLotto) {
+        buyLotto.mapToResult(winningLotto)
                 .forEach(k -> {
                     LottoMatchType matchType = LottoMatchType.findMatchCount(k.getCount(), k.isMatchBonus());
                     profitMoney += matchType.getWinMoney();

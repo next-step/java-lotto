@@ -21,12 +21,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(String number) {
-        int parseInt = Integer.parseInt(number);
-        validate(parseInt);
-        if (lottoNumberCache[parseInt - 1] != null) {
-            return lottoNumberCache[parseInt - 1];
-        }
-        return new LottoNumber(parseInt);
+        return of(Integer.parseInt(number));
+    }
+
+    public static LottoNumber of(int number) {
+        validate(number);
+        return lottoNumberCache[number - 1];
     }
 
     public int initNumber() {
