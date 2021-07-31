@@ -25,4 +25,12 @@ public class LottoTest {
         assertThat(lottoNumberRange).isEqualTo(lottoNumberRange1);
         assertThat(lottoNumberRange.size()).isEqualTo(45);
     }
+
+    @Test
+    @DisplayName("로또 생성")
+    void createLottoTest(){
+        Lotto lotto = new Lotto();
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
 }
