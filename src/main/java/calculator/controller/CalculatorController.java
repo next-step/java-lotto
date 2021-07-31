@@ -7,13 +7,11 @@ import calculator.view.CalculatorOutputView;
 public class CalculatorController {
 
 	public static void main(String[] args) {
-		CalculatorInputView calculatorInputView = new CalculatorInputView();
-		String inputValue = calculatorInputView.requestView();
+		String inputValue = CalculatorInputView.requestView();
 
-		Calculator calculator = Calculator.createCalculator(inputValue);
+		Calculator calculator =  new Calculator(inputValue);
 
-		CalculatorOutputView calculatorOutputView = new CalculatorOutputView();
-		calculatorOutputView.calculateResultView(calculator.calculate());
+		CalculatorOutputView.calculateResultView(calculator.calculate());
 
 	}
 }
