@@ -25,7 +25,7 @@ public class StringAddCalculatorTests {
     @DisplayName("숫자 하나 만 넣었을 때 넣은 숫자 반환하는 테스트")
     @ParameterizedTest
     @CsvSource(value = {"1, 1", "2, 2", "3, 3"})
-    void inputOneNumberTest(String input,int expected) {
+    void inputOneNumberTest(String input, int expected) {
         int result = StringAddCalculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
@@ -74,6 +74,15 @@ public class StringAddCalculatorTests {
     void negativeExceptionTest(String input) {
         assertThatThrownBy(() -> StringAddCalculator.calculate(input))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("custom 구분자 기본 구분자가 혼합으로 사용 될 때 합을 반환하는 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"//#\\n//&\\n1#2&3,10:11 = 27"}, delimiter = '=')
+    void combinationTest(String input, int expected) {
+        int result = StringAddCalculator.calculate(input);
+
+        assertThat(result).isEqualTo(expected);
     }
 
 
