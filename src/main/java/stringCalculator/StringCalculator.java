@@ -13,8 +13,8 @@ public class StringCalculator {
         return result;
     }
 
-    public void checkNegativeNumber(String negativeNumber) {
-        if(Integer.parseInt(negativeNumber)<0){
+    public void checkNegativeNumberOrNotNumber(String inCorrectNumber) {
+        if(Integer.parseInt(inCorrectNumber)<0){
             throw new IllegalArgumentException("0 이상의 수를 입력하세요.");
         }
     }

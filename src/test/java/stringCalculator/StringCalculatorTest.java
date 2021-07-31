@@ -1,6 +1,5 @@
 package stringCalculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,10 +41,15 @@ public class StringCalculatorTest {
     @DisplayName("음수 확인")
     void negativeNumberExceptionTest(){
         String negativeNumber = "-1";
-        assertThatThrownBy(()-> stringCalculator.checkNegativeNumber(negativeNumber))
+        assertThatThrownBy(()-> stringCalculator.checkNegativeNumberOrNotNumber(negativeNumber))
                 .isInstanceOf(IllegalArgumentException.class);
-
     }
 
-
+    @Test
+    @DisplayName("숫자 외의 값 확인")
+    void notNumberExceptionTest() {
+        String notNumberString = "a";
+        assertThatThrownBy(() -> stringCalculator.checkNegativeNumberOrNotNumber(notNumberString))
+                .isInstanceOf(NumberFormatException.class);
+    }
 }
