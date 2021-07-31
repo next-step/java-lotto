@@ -54,10 +54,14 @@ public class Number {
     }
 
     private boolean isNegative(String number) {
-        return toInt(number) < ZERO;
+        try {
+            return toInt(number) < ZERO;
+        } catch (NumberFormatException e) {
+            throw new NonNumericNumberException(number);
+        }
     }
 
-    private int toInt(String number) {
+    private int toInt(String number) throws NumberFormatException {
         return Integer.parseInt(number);
     }
 
