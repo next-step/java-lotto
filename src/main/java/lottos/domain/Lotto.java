@@ -1,4 +1,4 @@
-package lottos;
+package lottos.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +10,10 @@ public class Lotto {
 
     public Lotto() {
         this.elements = getRandomNumbers();
+    }
+
+    public Lotto(List<Integer> numbers) {
+        this.elements = numbers;
     }
 
     private List<Integer> getRandomNumbers() {
