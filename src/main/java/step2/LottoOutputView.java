@@ -8,4 +8,8 @@ public class LottoOutputView {
     public static void printLottoAll(LottoBucket lottoBucket) {
         System.out.println(lottoBucket.toString());
     }
+
+    public static void printLottoWinStatistics() {
+        ;
+    }
 }
