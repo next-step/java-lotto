@@ -10,7 +10,7 @@ public class StringAddCalculator {
     private static final String PREFIX_CUSTOM_DELIMITER = "//";
     private static final String SUFFIX_CUSTOM_DELIMITER = "\\n";
 
-    public int calculate(String input) {
+    public static int calculate(String input) {
         if ("".equals(input) || input == null) {
             return 0;
         }
@@ -28,7 +28,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    private void negativeNumberCheck(String[] numbers) {
+    private static void negativeNumberCheck(String[] numbers) {
         List<Integer> result = Arrays.stream(numbers)
                 .filter(number -> Integer.parseInt(number) < 0)
                 .map(Integer::parseInt)
@@ -39,7 +39,7 @@ public class StringAddCalculator {
         }
     }
 
-    private Integer sum(String[] numbers) {
+    private static Integer sum(String[] numbers) {
         Integer result;
         result = Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
@@ -47,18 +47,18 @@ public class StringAddCalculator {
         return result;
     }
 
-    private String[] getNumbers(String input) {
+    private static String[] getNumbers(String input) {
         if (isCustomDelimiter(input)) {
             return getSplitNumbersByCustomDelimiter(input);
         }
         return splitNumbersByNormalDelimiter(input);
     }
 
-    private boolean isCustomDelimiter(String input) {
+    private static boolean isCustomDelimiter(String input) {
         return input.contains(PREFIX_CUSTOM_DELIMITER) && input.contains(SUFFIX_CUSTOM_DELIMITER);
     }
 
-    private String[] getSplitNumbersByCustomDelimiter(String input) {
+    private static String[] getSplitNumbersByCustomDelimiter(String input) {
         String prefix = input.substring(0, 5);
         String suffix = input.substring(5, input.length());
 
@@ -68,7 +68,7 @@ public class StringAddCalculator {
         return suffix.split(delimiter);
     }
 
-    private String[] splitNumbersByNormalDelimiter(String input) {
+    private static String[] splitNumbersByNormalDelimiter(String input) {
         return input.split(NORMAL_REGEX);
     }
 }
