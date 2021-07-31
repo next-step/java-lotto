@@ -2,35 +2,17 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CalculatorTest {
 
-	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
+class CalculatorTest {
 
 	@Test
 	@DisplayName("계산기의 문자열이 빈값이면 예외가 발생된다.")
 	public void validStringEmptyCheck() {
 		assertThrows(IllegalArgumentException.class, () -> new Calculator("")
 		);
-	}
-
-	@Test
-	@DisplayName("문자열을 입력하는 패턴에 따라 분리한다.")
-	public void patternResult() {
-		Calculator calculator = new Calculator("1:2:3");
-
-		List<Character> result = calculator.patternResult(PATTERN_REG_EXP, "1,2,3");
-
-		assertThat(result).extracting("character").containsExactly(1, 2, 3);
-
-		List<Character> result2 = calculator.patternResult(PATTERN_REG_EXP, "//,\n1,2,3");
-
-		assertThat(result2).extracting("character").containsExactly(1, 2, 3);
 	}
 
 	@Test
