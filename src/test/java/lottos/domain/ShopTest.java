@@ -1,7 +1,5 @@
-package lottos;
+package lottos.domain;
 
-import lottos.domain.Lottos;
-import lottos.domain.Shop;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

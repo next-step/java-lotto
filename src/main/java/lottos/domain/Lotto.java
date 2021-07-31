@@ -28,4 +28,14 @@ public class Lotto {
     public List<Integer> getElements() {
         return Collections.unmodifiableList(elements);
     }
+
+    public int match(Lotto lotto) {
+        int matchCount = 0;
+        for (int number : lotto.getElements()) {
+            if (elements.contains(number)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
 }
