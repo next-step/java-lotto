@@ -56,39 +56,39 @@ public class LottoTicketTest {
     @DisplayName("로또가 1등 당첨되었다.")
     void findRank_first() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.FIRST);
+        LottoRank lottoRank = lottoTicket.findRank(winningTicket);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
     @DisplayName("로또가 3등 당첨되었다.")
     void findRank_third() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.THIRD);
+        LottoRank lottoRank = lottoTicket.findRank(winningTicket);
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
     }
 
     @Test
     @DisplayName("로또가 4등 당첨되었다.")
     void findRank_fourth() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 7, 8));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        LottoRank lottoRank = lottoTicket.findRank(winningTicket);
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
 
     @Test
     @DisplayName("로또가 5등 당첨되었다.")
     void findRank_fifth() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 7, 8, 9));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.FIFTH);
+        LottoRank lottoRank = lottoTicket.findRank(winningTicket);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIFTH);
     }
 
     @Test
     @DisplayName("로또 당첨 결과 꽝!")
     void findRank_miss() {
         LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 9, 10, 11, 12));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.MISS);
+        LottoRank lottoRank = lottoTicket.findRank(winningTicket);
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
     }
 }

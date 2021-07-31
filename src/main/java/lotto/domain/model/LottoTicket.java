@@ -17,12 +17,6 @@ public class LottoTicket {
         validateSizeAndDuplicate(this.lottoNumbers);
     }
 
-    private void validateSizeAndDuplicate(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(SIZE_OR_DUPLICATE);
-        }
-    }
-
     public static LottoTicket createFromList(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
@@ -38,8 +32,18 @@ public class LottoTicket {
         return (int) lottoNumbers.stream().filter(winningTicket::contains).count();
     }
 
-    public Rank findRank(LottoTicket winningTicket) {
+    public LottoRank findRank(LottoTicket winningTicket) {
         int countOfMatch = countMatches(winningTicket);
-        return Rank.valueOf(countOfMatch);
+        return LottoRank.valueOf(countOfMatch);
+    }
+
+    private void validateSizeAndDuplicate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(SIZE_OR_DUPLICATE);
+        }
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
