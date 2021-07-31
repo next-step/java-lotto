@@ -15,10 +15,10 @@ public class LottoTest {
     void lottoNumbersTest() {
         List<Integer> numbers = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(()-> numbers)).isInstanceOf(IllegalArgumentException.class);
 
         List<Integer> numbers2 = Stream.of(1, 2, 3, 4, 5, 6, 7).collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new Lotto(numbers2)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(() -> numbers2)).isInstanceOf(IllegalArgumentException.class);
     }
 }

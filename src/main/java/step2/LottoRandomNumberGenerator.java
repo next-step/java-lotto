@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoRandomNumberGenerator implements LottoNumberGenerator{
     private final static int LOWER_BOUND = 0;
-    private final static int UPPER_BOUND = 45;
+    private final static int UPPER_BOUND = 46;
 
     @Override
     public List<Integer> generateRandomNumbersForLotto() {

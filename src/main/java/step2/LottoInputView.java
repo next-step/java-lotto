@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
-    public int getBudgetWithPrompt() {
+    public static int getBudgetWithPrompt() {
         System.out.println("구입금액을 입력해 주세요.");
 
         try (Scanner scanner = new Scanner(System.in)) {
@@ -14,7 +14,7 @@ public class LottoInputView {
         }
     }
 
-    public List<Integer> getLastDrawNumbersWithPrompt() {
+    public static List<Integer> getLastDrawNumbersWithPrompt() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         try (Scanner scanner = new Scanner(System.in)) {
@@ -24,7 +24,7 @@ public class LottoInputView {
         }
     }
 
-    private List<Integer> parseLastDrawNumbersString(String lastDrawResultString) {
+    private static List<Integer> parseLastDrawNumbersString(String lastDrawResultString) {
         return Arrays.stream(lastDrawResultString.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

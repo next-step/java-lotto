@@ -1,7 +1,11 @@
 package step2;
 
 public class LottoOutputView {
-    public void printLottoQuantity(int quantity) {
-        System.out.printf("%d개를 구매했습니다.%n", quantity);
+    public static void printLottoQuantity(LottoBucket lottoBucket) {
+        System.out.printf("%d개를 구매했습니다.%n", lottoBucket.size());
+    }
+
+    public static void printLottoAll(LottoBucket lottoBucket) {
+        System.out.println(lottoBucket.toString());
     }
 }
