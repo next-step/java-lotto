@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.OutOfRangeException;
-import lotto.util.number.MultiplicationNumber;
 
 import java.util.Objects;
 

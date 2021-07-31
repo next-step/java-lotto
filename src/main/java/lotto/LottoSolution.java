@@ -6,7 +6,6 @@ import lotto.domain.dto.WinningLottoInfo;
 import lotto.exception.InvalidInputException;
 import lotto.util.number.CalculationNumber;
 import lotto.util.number.DivisionNumber;
-import lotto.util.number.MultiplicationNumber;
 import lotto.util.number.SubtractionNumber;
 import lotto.view.DosInputView;
 import lotto.view.DosResultView;
