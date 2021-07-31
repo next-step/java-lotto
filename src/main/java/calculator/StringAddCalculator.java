@@ -11,7 +11,7 @@ public class StringAddCalculator {
     private static final String SUFFIX_CUSTOM_DELIMITER = "\\n";
 
     public int calculate(String input) {
-        if (input.isEmpty() || input == null) {
+        if ("".equals(input) || input == null) {
             return 0;
         }
 
