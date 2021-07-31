@@ -35,7 +35,7 @@ public final class LottoSolution {
         try {
             LottoBuyInfo lottoBuyInfo = inputView.inputLottoBuyInfo();
             LottoList lottoList = buyLottoList(lottoBuyInfo);
-            resultView.printLottoList(lottoList, lottoBuyInfo.manualLottoList().size());
+            resultView.printLottoList(lottoList, lottoBuyInfo.manualLottoSize());
 
             WinningLottoInfo winningLottoInfo = inputView.inputWinningLottoInfo();
             WinningLotto winningLotto = inputWinningLottoNumbers(winningLottoInfo);

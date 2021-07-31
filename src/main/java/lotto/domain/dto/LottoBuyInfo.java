@@ -18,4 +18,8 @@ public class LottoBuyInfo {
     public List<String> manualLottoList() {
         return ManualLottoList;
     }
+
+    public int manualLottoSize() {
+        return manualLottoList().size();
+    }
 }
