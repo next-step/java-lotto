@@ -16,4 +16,13 @@ public class LottoTest {
         List<Lotto> lottos = playLotto.createLotto(cash);
         assertThat(lottos.size()).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("로또 범위 static list")
+    void lottoNumberRangeTest(){
+        List<Integer> lottoNumberRange = LottoNumberRange.getLottoNumberRange();
+        List<Integer> lottoNumberRange1 = LottoNumberRange.getLottoNumberRange();
+        assertThat(lottoNumberRange).isEqualTo(lottoNumberRange1);
+        assertThat(lottoNumberRange.size()).isEqualTo(45);
+    }
 }
