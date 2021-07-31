@@ -23,15 +23,13 @@ public class StringAddCalculator {
 
         negativeNumberCheck(numbers);
 
-        int result = sum(numbers);
-
-        return result;
+        return sum(numbers);
     }
 
     private static void negativeNumberCheck(String[] numbers) {
         List<Integer> result = Arrays.stream(numbers)
-                .filter(number -> Integer.parseInt(number) < 0)
                 .map(Integer::parseInt)
+                .filter(number -> number < 0)
                 .collect(Collectors.toList());
 
         if (!result.isEmpty()) {
@@ -39,8 +37,8 @@ public class StringAddCalculator {
         }
     }
 
-    private static Integer sum(String[] numbers) {
-        Integer result;
+    private static int sum(String[] numbers) {
+        int result;
         result = Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
