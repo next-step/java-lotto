@@ -20,6 +20,7 @@ public class StringValue {
     if(text == null || text.isEmpty()){
       return DEFAULT_VALUE;
     }
+
     return text;
   }
 

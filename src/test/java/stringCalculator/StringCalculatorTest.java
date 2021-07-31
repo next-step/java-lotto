@@ -1,6 +1,7 @@
 package stringCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import stringCalculator.domain.StringValue;
 
 public class StringCalculatorTest {
 
@@ -56,5 +59,25 @@ public class StringCalculatorTest {
     StringCalculator stringCalculator2 = new StringCalculator(input2);
     int result2 = stringCalculator2.getCustomSplitSum();
     assertThat(result2).isEqualTo(6);
+  }
+
+  @DisplayName("숫자가 아닌값 검증 테스트.")
+  @ParameterizedTest
+  @ValueSource(strings = {"a","-1","가"})
+  void validationNumberFormatTest(String input) {
+    StringCalculator value = new StringCalculator(input);
+    assertThatThrownBy(() -> value.checkNumberFormat(value.getStringValue()))
+        .isInstanceOf(RuntimeException.class);
+  }
+
+  @DisplayName("정상적인 입력값 타입별 합연산 테스트.")
+  @ParameterizedTest
+  @ValueSource(strings = {"3,3","1,2:3","//;\n1;2;3"})
+  void anyTypeOfValueTest(String input) {
+
+    StringCalculator stringCalculator = new StringCalculator(input);
+    int result = stringCalculator.getCustomSplitSum();
+
+    assertThat(result).isEqualTo(6);
   }
 }

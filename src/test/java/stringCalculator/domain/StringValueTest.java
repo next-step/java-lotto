@@ -14,4 +14,5 @@ class StringValueTest {
 
     assertThat(targetValue).isEqualTo(new StringValue("1"));
   }
+
 }

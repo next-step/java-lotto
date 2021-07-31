@@ -26,7 +26,7 @@ public class StringCalculator {
   }
 
   public int getSumValues(String[] values) {
-    return Arrays.stream(values).mapToInt(this::toInt).sum();
+    return Arrays.stream(values).mapToInt(s -> toInt(checkNumberFormat(s))).sum();
   }
 
   private int toInt(String s) {
@@ -42,5 +42,14 @@ public class StringCalculator {
       return getSumValues(getSplitValues(customDelimiter));
     }
     return getSumValues(getSplitValues(SPLIT_MARK));
+  }
+
+  public String checkNumberFormat(String text) {
+    Pattern pattern = Pattern.compile("^[0-9]*$");
+    Matcher matcher = pattern.matcher(text);
+    if(!matcher.matches()){
+      throw new RuntimeException("0 이상의 자연수를 입력해주세요.");
+    }
+    return text;
   }
 }
