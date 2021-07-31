@@ -37,10 +37,8 @@ public final class LottoSolution {
             WinningLotto winningLotto = inputWinningLottoNumbers();
             LottoStatistics lottoStatistics = lottoList.statistics(winningLotto);
             resultView.printLottoStatistics(lottoStatistics);
-        } catch (OverlapNumberException | NumberNotSupportException | OutOfSizeException | OutOfRangeException e) {
-            resultView.printException(e);
         } catch (Exception e) {
-            resultView.printLine("오류가 발생 했습니다!");
+            resultView.printException(e);
         }
     }
 

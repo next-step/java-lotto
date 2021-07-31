@@ -20,7 +20,6 @@ public enum LottoRank {
         this.prizeAmount = prizeAmount;
     }
 
-
     public int matchesCount() {
         return matchesCount;
     }

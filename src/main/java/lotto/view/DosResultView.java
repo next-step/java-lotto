@@ -16,11 +16,6 @@ public class DosResultView implements ResultView {
     }
 
     @Override
-    public void printLine(String text) {
-        System.out.println(text);
-    }
-
-    @Override
     public void printLottoList(LottoList lottoList) {
         System.out.println(Text.PURCHASED_LOTTO_SIZE.format(
                 lottoList.size()
@@ -50,12 +45,6 @@ public class DosResultView implements ResultView {
         );
     }
 
-    private List<LottoRank> displayLottoRanks() {
-        return Arrays.stream(LottoRank.values())
-                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
-                .collect(Collectors.toList());
-    }
-
     private Text lottoRankText(LottoRank lottoRank) {
         return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
     }
@@ -63,6 +52,14 @@ public class DosResultView implements ResultView {
     private Text yieldText(float yield) {
         return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
     }
+
+    private List<LottoRank> displayLottoRanks() {
+        return Arrays.stream(LottoRank.values())
+                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
+                .collect(Collectors.toList());
+    }
+
+
 
     private enum Text {
         PURCHASED_LOTTO_SIZE("%d개를 구매 했습니다."),

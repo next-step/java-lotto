@@ -20,6 +20,12 @@ public final class LottoList implements Iterable<Lotto> {
         this.values = values;
     }
 
+    private void validateListSize(List<Lotto> values) {
+        if (Objects.isNull(values) || values.size() <= 0) {
+            throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
+        }
+    }
+
     public static LottoList generate(Number lottoSize) {
         int size = lottoSize.intValue();
 
@@ -27,12 +33,6 @@ public final class LottoList implements Iterable<Lotto> {
                 .mapToObj(i -> new Lotto(randomLottoNumbers()))
                 .collect(Collectors.toList());
         return new LottoList(newValues);
-    }
-
-    private void validateListSize(List<Lotto> values) {
-        if (Objects.isNull(values) || values.size() <= 0) {
-            throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
-        }
     }
 
     private static synchronized List<LottoNumber> randomLottoNumbers() {

@@ -13,6 +13,15 @@ public final class DosInputView implements InputView {
         this.scanner = new Scanner(System.in);
     }
 
+    private String inputLottoNumbers() {
+        String strLottoNumbers = inputLine(Text.INPUT_WINNING_NUMBERS);
+        if (!RegexPatterns.LOTTO_NUMBER.test(strLottoNumbers)) {
+            System.out.println("로또 번호의 형식이 아닙니다.");
+            return inputLottoNumbers();
+        }
+        return strLottoNumbers;
+    }
+
     private int inputNumber(Text guideText) {
         String input = inputLine(guideText);
 
@@ -28,15 +37,6 @@ public final class DosInputView implements InputView {
         System.out.println(guideText.toString());
 
         return scanner.nextLine();
-    }
-
-    private String inputLottoNumbers() {
-        String strLottoNumbers = inputLine(Text.INPUT_WINNING_NUMBERS);
-        if (!RegexPatterns.LOTTO_NUMBER.test(strLottoNumbers)) {
-            System.out.println("로또 번호의 형식이 아닙니다.");
-            return inputLottoNumbers();
-        }
-        return strLottoNumbers;
     }
 
     @Override
