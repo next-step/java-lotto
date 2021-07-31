@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.application.CreateShffledLottoNumbers;
+import lotto.application.PlayLotto;
+import lotto.domain.Lotto;
+import lotto.util.LottoNumberRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
