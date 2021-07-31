@@ -26,11 +26,11 @@ class CalculatorTest {
 
 		List<Character> result = calculator.patternResult(PATTERN_REG_EXP, "1,2,3");
 
-		assertThat(result).extracting("character").containsExactly(1,2,3);
+		assertThat(result).extracting("character").containsExactly(1, 2, 3);
 
 		List<Character> result2 = calculator.patternResult(PATTERN_REG_EXP, "//,\n1,2,3");
 
-		assertThat(result2).extracting("character").containsExactly(1,2,3);
+		assertThat(result2).extracting("character").containsExactly(1, 2, 3);
 	}
 
 	@Test

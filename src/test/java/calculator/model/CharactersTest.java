@@ -12,7 +12,7 @@ class CharactersTest {
 
 	@Test
 	@DisplayName("문자열입력시 정보를 저장후 그 값만 반환한다.")
-	public void sumValues(){
+	public void sumValues() {
 		Character character1 = new Character(1);
 		Character character2 = new Character(2);
 		Character character3 = new Character(3);
@@ -25,7 +25,7 @@ class CharactersTest {
 
 		List<Character> result = characters.getCharacters();
 
-		assertThat(result).extracting("character").containsExactly(1,2,3);
+		assertThat(result).extracting("character").containsExactly(1, 2, 3);
 	}
 
 }
