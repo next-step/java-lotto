@@ -19,7 +19,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("6개 보다 적거나 많은 숫자를 전달하면 IllegalArgumentException 예외를 throw 한다.")
+    @DisplayName("6개 이외의 개수의 숫자를 생성자에 전달하면 IllegalArgumentException 예외를 throw 한다.")
     void createFromList_out_of_bounds() {
         List<Integer> tooManyNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThatThrownBy(() -> LottoTicket.createFromList(tooManyNumbers)).isInstanceOf(
@@ -46,26 +46,10 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("번호가 로또에 포함되자 않았다.")
+    @DisplayName("번호가 로또에 포함되어 있지 않다.")
     void contains_number_not_in_ticket() {
         LottoNumber lottoNumber = LottoNumber.valueOf(8);
         assertThat(lottoTicket.contains(lottoNumber)).isFalse();
-    }
-
-    @Test
-    @DisplayName("로또에 당첨 번호에 포함된 숫자가 없다.")
-    void countMatches_none() {
-        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Rank rank = lottoTicket.findRank(winningTicket);
-        assertThat(rank).isEqualTo(Rank.MISS);
-    }
-
-    @Test
-    @DisplayName("로또가 당첨 번호와 일치한다.")
-    void countMatches_all() {
-        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int actual = lottoTicket.countMatches(winningTicket);
-        assertThat(actual).isEqualTo(6);
     }
 
     @Test
@@ -103,7 +87,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 당첨 결과 꽝!")
     void findRank_miss() {
-        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(7, 8, 9, 10, 11, 12));
+        LottoTicket winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 9, 10, 11, 12));
         Rank rank = lottoTicket.findRank(winningTicket);
         assertThat(rank).isEqualTo(Rank.MISS);
     }

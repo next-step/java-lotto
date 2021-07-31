@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     public static final int LOTTO_SIZE = 6;
-    public static final String SIZE_OR_DUPLICATE_EXCEPTION = "숫자의 개수가 맞지 않거나 반복된 수가 있습니다.";
+    public static final String SIZE_OR_DUPLICATE = "숫자의 개수가 맞지 않거나 반복된 수가 있습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -19,7 +19,7 @@ public class LottoTicket {
 
     private void validateSizeAndDuplicate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(SIZE_OR_DUPLICATE_EXCEPTION);
+            throw new IllegalArgumentException(SIZE_OR_DUPLICATE);
         }
     }
 
@@ -33,7 +33,7 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int countMatches(LottoTicket winningTicket) {
+    private int countMatches(LottoTicket winningTicket) {
         // no loss of data from casting to int since LOTTO_SIZE == 6
         return (int) lottoNumbers.stream().filter(winningTicket::contains).count();
     }

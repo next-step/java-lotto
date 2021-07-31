@@ -24,6 +24,9 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
+        if (countOfMatch < FIFTH.countOfMatch) {
+            return MISS;
+        }
         return countToRank.get(countOfMatch);
     }
 
