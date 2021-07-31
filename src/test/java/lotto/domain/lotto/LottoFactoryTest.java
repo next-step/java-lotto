@@ -1,16 +1,18 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
-import org.junit.jupiter.api.Assertions;
+import lotto.domain.lotto.exception.InvalidTotalAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 @DisplayName("로또 팩토리")
@@ -53,9 +55,41 @@ class LottoFactoryTest {
         // given
 
         // when
-        Assertions.assertThrows(InvalidLottoNumberException.class, () -> LottoFactory.createWinning(numbers, bonusNumber));
+        assertThrows(InvalidLottoNumberException.class, () -> LottoFactory.createWinning(numbers, bonusNumber));
 
         // then
 
+    }
+
+    @DisplayName("[성공] 로또 구매 가능 매수")
+    @ParameterizedTest
+    @CsvSource(value = {
+        "1000,1",
+        "2000,2",
+        "3500,3",
+    })
+    public void possiblePurchaseLottoCount(int totalAmount, int expected) {
+        // given
+
+        // when
+        int purchaseLottoCount = LottoFactory.possiblePurchaseLottoCount(totalAmount);
+
+        // then
+        assertThat(purchaseLottoCount).isEqualTo(expected);
+    }
+
+    @DisplayName("[실패] 로또 구매 가능 매수 - 너무 적은 액수")
+    @ParameterizedTest
+    @CsvSource(value = {
+        "500",
+        "-1000",
+    })
+    public void possiblePurchaseLottoCount_tooSmallAmount(int totalAmount) {
+        // given
+
+        // when
+        assertThrows(InvalidTotalAmountException.class, () -> LottoFactory.possiblePurchaseLottoCount(totalAmount));
+
+        // then
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.Set;
 import lotto.domain.lotto.exception.InvalidLottoNumberException;
+import lotto.domain.lotto.exception.InvalidTotalAmountException;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
@@ -27,6 +28,10 @@ public class LottoFactory {
     }
 
     public static int possiblePurchaseLottoCount(int totalAmount) {
+        if (totalAmount < LOTTO_PRICE) {
+            throw new InvalidTotalAmountException(LOTTO_PRICE);
+        }
+
         return totalAmount / LOTTO_PRICE;
     }
 
