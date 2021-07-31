@@ -22,6 +22,6 @@ public class ResultView {
     }
 
     public static void printEarningRate(double earningRate) {
-        System.out.println("총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
+        System.out.println("총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }
