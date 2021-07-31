@@ -12,7 +12,7 @@ public class StringAddCalculator {
     private static final String OR = "|";
     private static final String BLANK = "";
 
-    public static int calculate(String input) {
+    public int calculate(String input) {
         if ("".equals(input) || input == null) {
             return 0;
         }
@@ -28,7 +28,7 @@ public class StringAddCalculator {
         return sum(numbers);
     }
 
-    private static void negativeNumberCheck(String[] numbers) {
+    private void negativeNumberCheck(String[] numbers) {
         List<Integer> result = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .filter(number -> number < 0)
@@ -39,7 +39,7 @@ public class StringAddCalculator {
         }
     }
 
-    private static int sum(String[] numbers) {
+    private int sum(String[] numbers) {
         int result;
         result = Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
@@ -47,7 +47,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    private static String[] parse(String input) {
+    private String[] parse(String input) {
 
         Matcher m = Pattern.compile(CUSTOM_REGEX).matcher(input);
 
