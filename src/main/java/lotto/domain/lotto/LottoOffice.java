@@ -12,6 +12,8 @@ public class LottoOffice {
     public static final int LOWEST_AMOUNT = 1_000;
     private static final Money LOTTO_PRICE_OF_SINGLE = Money.of(LOWEST_AMOUNT);
 
+    private LottoOffice() {}
+
     public static Lottos purchase(Money money) {
         List<Lotto> lottos = Stream.generate(LottoNumberGenerator::generate)
                 .map(LottoNumbers::of)
