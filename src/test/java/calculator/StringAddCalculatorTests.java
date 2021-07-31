@@ -1,8 +1,7 @@
 package calculator;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -35,7 +34,6 @@ public class StringAddCalculatorTests {
     @ParameterizedTest
     @CsvSource(value = {"1,2 : 3", "2,3: 5", "3,4 : 7"}, delimiter = ':')
     void commaAddTest(String input, int expected) {
-        ;
         int result = StringAddCalculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
@@ -60,12 +58,11 @@ public class StringAddCalculatorTests {
     }
 
     @DisplayName("숫자가 custom 구분자를 포함 할 때 합을 반환하는 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3 = 6", "//&\\n2&4&6&8&10 = 30", "//#\\n3#8#10#13#100 = 134"}, delimiter = '=')
-    void customAddTest(String input, int expected) {
-        int result = StringAddCalculator.calculate(input);
+    @Test
+    void customAddTest() {
+        int result = StringAddCalculator.calculate("//;\n1;2;3");
 
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(6);
     }
 
     @DisplayName("음수 전달 시 RuntimeException 예외 발생")
@@ -77,12 +74,11 @@ public class StringAddCalculatorTests {
     }
 
     @DisplayName("custom 구분자 기본 구분자가 혼합으로 사용 될 때 합을 반환하는 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"//#\\n//&\\n1#2&3,10:11 = 27"}, delimiter = '=')
-    void combinationTest(String input, int expected) {
-        int result = StringAddCalculator.calculate(input);
+    @Test
+    void combinationTest() {
+        int result = StringAddCalculator.calculate("//#\n//&\n1#2&3,10:11");
 
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(27);
     }
 
 
