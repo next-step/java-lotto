@@ -53,6 +53,22 @@ class LottoTicketTest {
 		assertThat(boughtLottoTicket.compareTo(winningLottoTicket, bonusNumber)).isEqualTo(prize);
 	}
 
+	@DisplayName("두 로또 티켓을 비교하여 일치하는 번호의 개수를 구한다.")
+	@Test
+	void matchCount() {
+		LottoTicket lottoTicket1 = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoTicket lottoTicket2 = LottoTicket.from(Arrays.asList(1, 7, 8, 9, 10, 11));
+		assertThat(lottoTicket1.matchCount(lottoTicket2)).isEqualTo(1);
+	}
+
+	@DisplayName("로또 티켓이 특정 번호를 포함하는지 확인한다.")
+	@Test
+	void containsBonusNumber() {
+		LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumber bonusNumber = new LottoNumber(6);
+		assertThat(lottoTicket.contains(bonusNumber)).isTrue();
+	}
+
 	private static Stream<Arguments> invalidLottoNumbersSizeArguments() {
 		return Stream.of(
 			Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),

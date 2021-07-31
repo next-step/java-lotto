@@ -44,6 +44,16 @@ public class LottoTicket {
 		return LottoPrize.fromMatchCount(count, lottoNumbers.contains(bonusNumber));
 	}
 
+	public int matchCount(LottoTicket winningTicket) {
+		return (int) lottoNumbers.stream()
+						.filter(winningTicket.lottoNumbers::contains)
+						.count();
+	}
+
+	public boolean contains(LottoNumber bonusNumber) {
+		return lottoNumbers.contains(bonusNumber);
+	}
+
 	private static void validateLottoNumbers(List<LottoNumber> numbers) {
 		if (hasInvalidSize(numbers)) {
 			throw new InvalidLottoNumbersSizeException(numbers.size());
@@ -53,5 +63,4 @@ public class LottoTicket {
 	private static boolean hasInvalidSize(List<LottoNumber> numbers) {
 		return numbers.size() != VALID_LOTTO_NUMBERS_SIZE;
 	}
-
 }
