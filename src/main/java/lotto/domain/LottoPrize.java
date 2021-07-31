@@ -19,7 +19,7 @@ public enum LottoPrize {
 		this.prizeMoney = prizeMoney;
 	}
 
-	static LottoPrize from(int matchCount, boolean hasBonusNumber) {
+	public static LottoPrize from(int matchCount, boolean hasBonusNumber) {
 		LottoPrize lottoPrize = Arrays.stream(values())
 									.filter(prize -> prize.matchCount == matchCount)
 									.findFirst()

@@ -25,25 +25,6 @@ public class LottoTicket {
 								.collect(collectingAndThen(toList(), Collections::unmodifiableList)));
 	}
 
-	public static LottoTicket from(WinningLottoNumbers winningNumbers) {
-		return from(winningNumbers.getWinningNumbers());
-	}
-
-	public List<Integer> getNumbers() {
-		return lottoNumbers.stream()
-				.map(LottoNumber::getNumber)
-				.sorted()
-				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-	}
-
-	public LottoPrize compareTo(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-		int count = (int) lottoNumbers.stream()
-						.filter(lottoTicket.lottoNumbers::contains)
-						.count();
-
-		return LottoPrize.from(count, lottoNumbers.contains(bonusNumber));
-	}
-
 	public int matchCount(LottoTicket winningTicket) {
 		return (int) lottoNumbers.stream()
 						.filter(winningTicket.lottoNumbers::contains)
@@ -52,6 +33,13 @@ public class LottoTicket {
 
 	public boolean contains(LottoNumber bonusNumber) {
 		return lottoNumbers.contains(bonusNumber);
+	}
+
+	public List<Integer> getNumbers() {
+		return lottoNumbers.stream()
+			.map(LottoNumber::getNumber)
+			.sorted()
+			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	private static void validateLottoNumbers(List<LottoNumber> numbers) {
