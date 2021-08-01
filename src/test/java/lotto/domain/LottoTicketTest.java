@@ -20,7 +20,7 @@ class LottoTicketTest {
 	@Test
 	void lottoTicketHasNonDuplicateSixNumber() {
 		LottoMachine lottoMachine = new LottoMachine();
-		LottoTicket lottoTicket = LottoTicket.from(lottoMachine.pickRandomNumbers());
+		LottoTicket lottoTicket = LottoTicket.from(lottoMachine.pickRandomLottoNumbers());
 		assertThat(lottoTicket.getNumbers()).hasSize(6).doesNotHaveDuplicates();
 	}
 

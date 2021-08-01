@@ -15,13 +15,13 @@ public class LottoMain {
 	public static void main(String[] args) {
 		int money = InputView.inputMoney();
 		int manualLottoTicketsCount = InputView.inputManualLottoTicketsCount();
-		List<LottoNumbers> manualLottoTicketNumbers = InputView.inputManualLottoTicketNumbers(manualLottoTicketsCount);
+		List<LottoNumbers> manualLottoTicketNumbers = InputView.inputManualLottoNumbers(manualLottoTicketsCount);
 
 		LottoMachine lottoMachine = new LottoMachine();
 		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(money);
 		ResultView.showLottoTickets(lottoTickets);
 
-		LottoNumbers winningLottoNumbers = InputView.inputWinningNumbers();
+		LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
 		int bonusNumber = InputView.inputBonusNumber();
 		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, bonusNumber);
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);

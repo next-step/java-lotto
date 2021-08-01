@@ -15,8 +15,8 @@ class LottoMachineTest {
 
 	@DisplayName("로또 발급 기계는 무작위로 6개의 번호를 뽑는다.")
 	@Test
-	void pickSixRandomNumber() {
-		List<Integer> numbers = lottoMachine.pickRandomNumbers();
+	void pickRandomLottoNumbers() {
+		List<Integer> numbers = lottoMachine.pickRandomLottoNumbers();
 		assertThat(numbers).hasSize(6).doesNotHaveDuplicates();
 	}
 

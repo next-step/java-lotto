@@ -19,7 +19,7 @@ public class LottoMachine {
 		this.numbers = initializeNumbers();
 	}
 
-	public List<Integer> pickRandomNumbers() {
+	public List<Integer> pickRandomLottoNumbers() {
 		Collections.shuffle(numbers);
 		return IntStream.range(INITIAL_INDEX, COUNT_OF_LOTTO_NUMBERS)
 				.mapToObj(numbers::get)
@@ -28,7 +28,7 @@ public class LottoMachine {
 
 	public LottoTickets issueLottoTickets(int money) {
 		List<LottoTicket> lottoTickets = IntStream.range(INITIAL_INDEX, calculateLottoTicketCount(money))
-											.mapToObj(index -> LottoTicket.from(pickRandomNumbers()))
+											.mapToObj(index -> LottoTicket.from(pickRandomLottoNumbers()))
 											.collect(Collectors.toList());
 		return LottoTickets.from(lottoTickets);
 	}
