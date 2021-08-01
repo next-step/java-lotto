@@ -29,4 +29,26 @@ public class LottoMachineTests {
 
         System.out.println("lotto Number : " + lottoNumber.value());
     }
+
+    @DisplayName("수익률 구하기 테스트")
+    @Test
+    void calculateProfitRateTest(){
+        LottoNumber winningLottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
+
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
+
+        LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 45));
+
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(lottoNumber, lottoNumber2));
+
+        WinningStatistics winningStatistics = new WinningStatistics(winningLottoNumber, lottoNumbers);
+
+        LottoMachine lottoMachine = new LottoMachine(14000);
+
+        double result = lottoMachine.calculateProfitRate(winningStatistics);
+
+        assertThat(result).isEqualTo(142964.29);
+
+
+    }
 }

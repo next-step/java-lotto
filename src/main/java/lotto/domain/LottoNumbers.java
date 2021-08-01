@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +23,7 @@ public class LottoNumbers {
     public int[] calculateStatics(LottoNumber winningLottoNumber) {
         int[] statistics = new int[4];
 
-        for (LottoNumber lottoNumber : lottoNumbers){
+        for (LottoNumber lottoNumber : lottoNumbers) {
             long count = lottoNumber.countOfMatch(winningLottoNumber);
             makeStatistics(statistics, count);
         }
@@ -32,17 +31,14 @@ public class LottoNumbers {
     }
 
     private void makeStatistics(int[] arr, long count) {
-        if(count == 3){
-            arr[0] ++;
-        }
-        else if(count == 4){
-            arr[1] ++;
-        }
-        else if(count == 5){
-            arr[2] ++;
-        }
-        else if(count == 6){
-            arr[3] ++;
+        if (count == 3) {
+            arr[0]++;
+        } else if (count == 4) {
+            arr[1]++;
+        } else if (count == 5) {
+            arr[2]++;
+        } else if (count == 6) {
+            arr[3]++;
         }
     }
 }
