@@ -2,7 +2,7 @@ package step2;
 
 import java.util.stream.IntStream;
 
-public class LottoOutputView {
+public class LottoResultView {
     public static void printLottoQuantity(LottoBucket lottoBucket) {
         System.out.printf("%d개를 구매했습니다.%n", lottoBucket.size());
     }

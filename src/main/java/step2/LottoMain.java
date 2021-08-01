@@ -11,8 +11,8 @@ public class LottoMain {
             LottoStore lottoStore = new LottoStore();
             LottoBucket lottoBucket = lottoStore.buyLottoEntriesByRandomNumber(budget, new LottoRandomNumberGenerator());
 
-            LottoOutputView.printLottoQuantity(lottoBucket);
-            LottoOutputView.printAllLottoEntries(lottoBucket);
+            LottoResultView.printLottoQuantity(lottoBucket);
+            LottoResultView.printAllLottoEntries(lottoBucket);
 
             List<Integer> numbers = LottoInputView.getLastDrawNumbersWithPrompt(scanner);
             LottoEntry lastDrawnLottoEntry = new LottoEntry(numbers);
@@ -20,8 +20,8 @@ public class LottoMain {
             LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(lastDrawnLottoEntry);
             lottoWinStatistics.addLottoSamples(lottoBucket);
 
-            LottoOutputView.printLottoWinStatus(lottoWinStatistics);
-            LottoOutputView.printProfitRate(lottoWinStatistics);
+            LottoResultView.printLottoWinStatus(lottoWinStatistics);
+            LottoResultView.printProfitRate(lottoWinStatistics);
         } catch(Exception e) {
             e.printStackTrace();
         }
