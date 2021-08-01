@@ -8,7 +8,7 @@ public class Money {
 
 	private static final int PRICE_PER_LOTTO_TICKET = 1000;
 
-	private int amount;
+	private final int amount;
 
 	public Money(int amount) {
 		validateMoneyAmount(amount);
