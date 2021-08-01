@@ -36,6 +36,12 @@ public class Lottos {
         return lottos.isEmpty();
     }
 
+    public Map<LottoPrize, Long> calculateMatch(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> lotto.match(winningLotto))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
     public Lottos combine(Lottos anotherLottos) {
         if (isEmptyLottos(anotherLottos)) {
             return this;
@@ -57,9 +63,4 @@ public class Lottos {
         );
     }
 
-    public Map<LottoPrize, Long> calculateMatch(WinningLotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.match(winningLotto))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
 }
