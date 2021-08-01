@@ -26,13 +26,5 @@ public class CharacterTest {
 		assertThat(character1.getCharacter()).isEqualTo(1);
 		assertThat(character2.getCharacter()).isEqualTo(3);
 		assertThat(character3.getCharacter()).isEqualTo(5);
-
-		Character character4 = new Character(1);
-		Character character5 = new Character(3);
-		Character character6 = new Character(5);
-
-		assertThat(character1).isEqualTo(character4);
-		assertThat(character2).isEqualTo(character5);
-		assertThat(character3).isEqualTo(character6);
 	}
 }
