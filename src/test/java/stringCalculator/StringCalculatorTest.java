@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringCalculator.domain.StringValue;
+import stringCalculator.service.StringCalculator;
 
 public class StringCalculatorTest {
 

@@ -1,15 +1,16 @@
-package stringCalculator;
+package stringCalculator.service;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import stringCalculator.domain.StringValue;
+import stringCalculator.message.Message;
 
 public class StringCalculator {
 
   private StringValue stringValue;
 
-  public static final String CUSTOM_PATTEN = "//(.)\n(.*)";
+  public static final String CUSTOM_PATTEN = "//(.)\\n(.*)";
 
   public static final String SPLIT_MARK = "[,:]";
 
@@ -34,6 +35,7 @@ public class StringCalculator {
   }
 
   public int getCustomSplitSum() {
+
     Matcher m = Pattern.compile(CUSTOM_PATTEN).matcher(getStringValue());
 
     if (m.find()) {
@@ -41,6 +43,7 @@ public class StringCalculator {
       stringValue = new StringValue(m.group(2));
       return getSumValues(getSplitValues(customDelimiter));
     }
+
     return getSumValues(getSplitValues(SPLIT_MARK));
   }
 
@@ -48,7 +51,7 @@ public class StringCalculator {
     Pattern pattern = Pattern.compile("^[0-9]*$");
     Matcher matcher = pattern.matcher(text);
     if(!matcher.matches()){
-      throw new RuntimeException("0 이상의 자연수를 입력해주세요.");
+      throw new RuntimeException(Message.MSG_ERROR_NUMBER_TYPE);
     }
     return text;
   }
