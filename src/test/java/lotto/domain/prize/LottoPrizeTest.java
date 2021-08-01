@@ -14,23 +14,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoPrizeTest {
-    @DisplayName("당첨된 갯수를 넘겨주면 해당하는 등수를 반환한다.")
+    @DisplayName("당첨된 갯수와 보너스넘버 매칭여부를 넘겨주면 해당하는 등수를 반환한다.")
     @MethodSource
     @ParameterizedTest
-    void should_return_prize_match_count(int matchCount, LottoPrize expectedLottoPrize) {
-        //arrange, act, assert
-        assertThat(LottoPrize.of(matchCount)).isEqualTo(expectedLottoPrize);
+    void should_return_prize_match_count(int matchCount, boolean isMatch, LottoPrize expectedLottoPrize) {
+        //arrange
+        MatchInfo matchInfo = MatchInfo.of(matchCount, isMatch);
+
+        //act, assert
+        assertThat(LottoPrize.of(matchInfo)).isEqualTo(expectedLottoPrize);
     }
 
     private static Stream<Arguments> should_return_prize_match_count() {
         return Stream.of(
-                Arguments.of(6, LottoPrize.FIRST),
-                Arguments.of(5, LottoPrize.SECOND),
-                Arguments.of(4, LottoPrize.THIRD),
-                Arguments.of(3, LottoPrize.FOURTH),
-                Arguments.of(2, LottoPrize.NONE),
-                Arguments.of(1, LottoPrize.NONE),
-                Arguments.of(0, LottoPrize.NONE)
+                Arguments.of(6, false, LottoPrize.FIRST),
+                Arguments.of(5, true, LottoPrize.SECOND_BONUS),
+                Arguments.of(5, false, LottoPrize.SECOND),
+                Arguments.of(4, false, LottoPrize.THIRD),
+                Arguments.of(3, false, LottoPrize.FOURTH),
+                Arguments.of(2, false, LottoPrize.NONE),
+                Arguments.of(1, false, LottoPrize.NONE),
+                Arguments.of(0, false, LottoPrize.NONE)
         );
     }
 
@@ -58,6 +62,7 @@ class LottoPrizeTest {
     private static Stream<Arguments> should_get_prize_money_amount() {
         return Stream.of(
                 Arguments.of(LottoPrize.FIRST, 2_000_000_000),
+                Arguments.of(LottoPrize.SECOND_BONUS, 30_000_000),
                 Arguments.of(LottoPrize.SECOND, 1_500_000),
                 Arguments.of(LottoPrize.THIRD, 50_000),
                 Arguments.of(LottoPrize.FOURTH, 5_000),
@@ -76,6 +81,7 @@ class LottoPrizeTest {
     private static Stream<Arguments> should_get_prize_money() {
         return Stream.of(
                 Arguments.of(LottoPrize.FIRST, Money.of(2_000_000_000)),
+                Arguments.of(LottoPrize.SECOND_BONUS, Money.of(30_000_000)),
                 Arguments.of(LottoPrize.SECOND, Money.of(1_500_000)),
                 Arguments.of(LottoPrize.THIRD, Money.of(50_000)),
                 Arguments.of(LottoPrize.FOURTH, Money.of(5_000)),

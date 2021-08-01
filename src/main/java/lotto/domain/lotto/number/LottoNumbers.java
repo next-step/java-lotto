@@ -1,6 +1,7 @@
 package lotto.domain.lotto.number;
 
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.prize.MatchInfo;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,14 +29,26 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public int match(WinningLotto winningLotto) {
-        return Math.toIntExact(
-                lottoNumbers.stream()
-                        .filter(winningLotto::contains)
-                        .count());
-    }
-
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber::equals);
+    }
+
+    public MatchInfo match(WinningLotto winningLotto) {
+        return MatchInfo.of(matchCount(winningLotto), matchBonusNumber(winningLotto));
+    }
+
+    private int matchCount(WinningLotto winningLotto) {
+        return Math.toIntExact(lottoNumbers.stream().filter(winningLotto::contains).count());
+    }
+
+    private boolean matchBonusNumber(WinningLotto winningLotto) {
+        return lottoNumbers.stream().anyMatch(winningLotto::containsBonusNumber);
+    }
+
 }
+

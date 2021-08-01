@@ -66,7 +66,12 @@ public class LottoFixture {
 
     public static WinningLotto getWinningLotto() {
         List<LottoNumber> winningLottoNumbers = createOneToSixLottoNumberSequence();
+        LottoNumber bonusNumber = getWinningLottoNumber();
 
-        return WinningLotto.of(LottoNumbers.of(winningLottoNumbers));
+        return WinningLotto.of(LottoNumbers.of(winningLottoNumbers), bonusNumber);
+    }
+
+    public static LottoNumber getWinningLottoNumber() {
+        return LottoNumber.of(43);
     }
 }

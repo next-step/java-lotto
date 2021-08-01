@@ -1,6 +1,7 @@
 package lotto.domain.lotto.number;
 
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.prize.MatchInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import static lotto.fixture.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoNumbersTest {
     @DisplayName("LottoNumber 6개 이면 LottoNumbers 객체를 만든다")
@@ -52,12 +54,16 @@ class LottoNumbersTest {
         //arrange
         List<LottoNumber> lottoNumberList = createOneToSixLottoNumberSequence();
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(createOneToThreeAndDifferentThreeNumberSequence()));
+        LottoNumber bonusNumber = LottoNumber.of(43);
+        WinningLotto winningLotto = WinningLotto.of(
+                LottoNumbers.of(createOneToThreeAndDifferentThreeNumberSequence()),
+                bonusNumber
+        );
 
         //act
-        int matchCount = lottoNumbers.match(winningLotto);
+        MatchInfo matchInfo = lottoNumbers.match(winningLotto);
 
         //assert
-        assertThat(matchCount).isEqualTo(3);
+        assertTrue(matchInfo.isEqualCount(3));
     }
 }

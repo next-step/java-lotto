@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.fixture.LottoFixture.createOneToSixLottoNumberSequence;
-import static lotto.fixture.LottoFixture.createOneToThreeAndDifferentThreeNumberSequence;
+import static lotto.fixture.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -45,7 +44,10 @@ class LottoTest {
         //arrange
         List<LottoNumber> lottoNumbers = createOneToSixLottoNumberSequence();
         Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(createOneToThreeAndDifferentThreeNumberSequence()));
+        WinningLotto winningLotto = WinningLotto.of(
+                LottoNumbers.of(createOneToThreeAndDifferentThreeNumberSequence()),
+                getWinningLottoNumber()
+        );
 
         //act
         LottoPrize lottoPrize = lotto.match(winningLotto);
