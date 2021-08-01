@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 import lotto.exception.InvalidBonusNumberException;
 
 public class WinningLottoTicket {
@@ -15,12 +13,8 @@ public class WinningLottoTicket {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public static WinningLottoTicket from(List<Integer> winningNumbers, int bonusNumber) {
-		return new WinningLottoTicket(LottoTicket.from(winningNumbers), new LottoNumber(bonusNumber));
-	}
-
 	public static WinningLottoTicket from(WinningLottoNumbers winningLottoNumbers, int bonusNumber) {
-		return from(winningLottoNumbers.getWinningNumbers(), bonusNumber);
+		return new WinningLottoTicket(LottoTicket.from(winningLottoNumbers.getWinningNumbers()), new LottoNumber(bonusNumber));
 	}
 
 	public LottoPrize match(LottoTicket lottoTicket) {
