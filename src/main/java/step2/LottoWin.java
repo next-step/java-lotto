@@ -19,7 +19,7 @@ public enum LottoWin {
         this.matchCondition = matchCondition;
     }
 
-    public static LottoWin getMatchWinResult(LottoEntry lottoEntry1, LottoEntry lottoEntry2) {
+    public static LottoWin getMatchResult(LottoEntry lottoEntry1, LottoEntry lottoEntry2) {
         int match = lottoEntry1.countMatch(lottoEntry2);
 
         return fromMatch(match).orElse(LottoWin.NONE_WIN);

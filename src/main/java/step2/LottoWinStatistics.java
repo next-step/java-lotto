@@ -10,7 +10,7 @@ public class LottoWinStatistics {
     }
 
     public void addLottoSample(LottoEntry sampleLottoEntry) {
-        LottoWin lottoWin = LottoWin.getMatchWinResult(winnersLottoEntry, sampleLottoEntry);
+        LottoWin lottoWin = LottoWin.getMatchResult(winnersLottoEntry, sampleLottoEntry);
         lottoWinGroups.addLottoOnLottoWinGroup(lottoWin, sampleLottoEntry);
     }
 
