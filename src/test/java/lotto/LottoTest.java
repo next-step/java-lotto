@@ -24,15 +24,6 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 범위 static list")
-    void lottoNumberRangeTest(){
-        List<Integer> lottoNumberRange = LottoNumberRange.getLottoNumberRange();
-        List<Integer> lottoNumberRange1 = LottoNumberRange.getLottoNumberRange();
-        assertThat(lottoNumberRange).isEqualTo(lottoNumberRange1);
-        assertThat(lottoNumberRange.size()).isEqualTo(45);
-    }
-
-    @Test
     @DisplayName("로또 생성")
     void createLottoTest(){
         Lotto lotto = new Lotto(new CreateShffledLottoNumbers());
@@ -49,4 +40,6 @@ public class LottoTest {
 
         assertThat(winningLotto.getLottoNumbers()).contains(1,2,3,4,5,6);
     }
+
+
 }
