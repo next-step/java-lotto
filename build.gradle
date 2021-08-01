@@ -7,7 +7,7 @@ sourceCompatibility = 11
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile){
-        options.compilerArgs << "-Xlint:unchecked"
+        options.compilerArgs << '-Xlint:unchecked'
     }
 }
 
@@ -17,8 +17,8 @@ repositories {
 
 dependencies {
     testImplementation(
-            "org.junit.jupiter:junit-jupiter:5.7.2",
-            "org.assertj:assertj-core:3.19.0"
+            'org.junit.jupiter:junit-jupiter:5.7.2',
+            'org.assertj:assertj-core:3.19.0'
     )
 }
 
@@ -46,7 +46,6 @@ task jacoco(type: Test) {
             ':jacocoTestReport',
             ':jacocoTestCoverageVerification'
     )
-
 
     tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
 }
