@@ -22,10 +22,6 @@ public class LottoResult {
         return new LottoResult();
     }
 
-    public static LottoResult createFromMap(Map<LottoRank, Integer> rankToCount) {
-        return new LottoResult(rankToCount);
-    }
-
     public int getCountByRank(LottoRank lottoRank) {
         return rankToCount.get(lottoRank);
     }

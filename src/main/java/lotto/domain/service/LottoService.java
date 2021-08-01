@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.model.LottoMoney;
 import lotto.domain.model.LottoNumber;
+import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoTickets;
 
@@ -32,4 +33,9 @@ public class LottoService {
         return LottoTicket.createFromList(numbers);
     }
 
+    public static double profitPercent(LottoResult lottoResult, LottoMoney lottoMoney) {
+        int sumMoney = lottoResult.sumWinningMoney();
+        int amount = lottoMoney.getAmount();
+        return (double)sumMoney / amount;
+    }
 }

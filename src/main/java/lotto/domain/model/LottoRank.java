@@ -2,7 +2,11 @@ package lotto.domain.model;
 
 import static java.util.stream.Collectors.toMap;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -28,6 +32,16 @@ public enum LottoRank {
             return MISS;
         }
         return countToRank.get(countOfMatch);
+    }
+
+    public static List<LottoRank> getPrintableValues() {
+        List<LottoRank> values = Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank.getCountOfMatch()
+                        >= LottoRank.FIFTH.getCountOfMatch())
+                .collect(
+                        Collectors.toList());
+        Collections.reverse(values);
+        return values;
     }
 
     public int getCountOfMatch() {
