@@ -26,6 +26,19 @@ class LottoFactoryTest {
         );
     }
 
+    @DisplayName("[성공] 일반 로또 생성")
+    @ParameterizedTest
+    @MethodSource("validLottoNumbers")
+    public void createNormal(Set<Integer> numbers) {
+        // given
+
+        // when
+        NormalLotto normalLotto = LottoFactory.createNormal(numbers);
+
+        // then
+        assertThat(normalLotto).isNotNull();
+    }
+
     @DisplayName("[성공] 당첨 로또 생성")
     @ParameterizedTest
     @MethodSource("validLottoNumbers")
