@@ -1,3 +1,5 @@
+package step1;
+
 import org.junit.jupiter.api.Test;
 import step1.StringAddCalculator;
 

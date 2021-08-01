@@ -7,8 +7,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringAddCalculator {
+    static private final Pattern p = Pattern.compile("//(.)\n(.*)");
+
     static public int splitAndSum(String text) {
-        if (text == null || text.isEmpty()) return 0;
+        if (text == null || text.isEmpty()) {
+            return 0;
+        }
 
         List<Integer> tokens = split(text);
         validateTokens(tokens);
@@ -16,7 +20,7 @@ public class StringAddCalculator {
     }
 
     static private List<Integer> split(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = p.matcher(text);
 
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -38,7 +42,9 @@ public class StringAddCalculator {
     }
 
     static private void validateTokens(List<Integer> tokens) {
-        if (tokens.stream().anyMatch(StringAddCalculator::isNegative)) throw new RuntimeException();
+        if (tokens.stream().anyMatch(StringAddCalculator::isNegative)) {
+            throw new RuntimeException("입력값으로 음수가 들어왔습니다.");
+        }
     }
 
     static private boolean isNegative(int i) {
