@@ -64,11 +64,11 @@ public class ResultView {
 	}
 
 	private static void printMatchCount(LottoPrize lottoPrize) {
+		String message = MESSAGE_MATCH_COUNT_OF_PRIZE;
 		if (lottoPrize == LottoPrize.SECOND) {
-			System.out.printf(MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE, lottoPrize.matchCount());
-			return;
+			message = MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE;
 		}
-		System.out.printf(MESSAGE_MATCH_COUNT_OF_PRIZE, lottoPrize.matchCount());
+		System.out.printf(message, lottoPrize.matchCount());
 	}
 
 }
