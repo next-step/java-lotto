@@ -6,22 +6,22 @@ public final class DivisionNumber extends CalculationNumber {
     }
 
     @Override
-    public int intValue() {
+    protected Integer calculateInteger(Number leftNumber, Number rightNumber) {
         return leftNumber.intValue() / rightNumber.intValue();
     }
 
     @Override
-    public long longValue() {
+    protected Long calculateLong(Number leftNumber, Number rightNumber) {
         return leftNumber.longValue() / rightNumber.longValue();
     }
 
     @Override
-    public float floatValue() {
+    protected Float calculateFloat(Number leftNumber, Number rightNumber) {
         return leftNumber.floatValue() / rightNumber.floatValue();
     }
 
     @Override
-    public double doubleValue() {
-        return leftNumber.doubleValue() / leftNumber.doubleValue();
+    protected Double calculateDouble(Number leftNumber, Number rightNumber) {
+        return leftNumber.doubleValue() / rightNumber.doubleValue();
     }
 }

@@ -18,17 +18,9 @@ public class WinningLotto {
         }
     }
 
-    private boolean isSecondPlace(LottoRank lottoRank, Lotto lotto) {
-        if (lottoRank != LottoRank.THREE_PLACE) {
-            return false;
-        }
-        return lotto.contains(bonusNumber);
-    }
-
     public LottoRank rank(Lotto lotto) {
-        LottoRank lottoRank = LottoRank.of(
-                this.value.containsCount(lotto)
+        return LottoRank.of(
+                this.value.containsCount(lotto), lotto.contains(bonusNumber)
         );
-        return isSecondPlace(lottoRank, lotto) ? LottoRank.SECOND_PLACE : lottoRank;
     }
 }

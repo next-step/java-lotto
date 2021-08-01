@@ -8,16 +8,22 @@ import java.util.stream.IntStream;
 
 public final class LottoList implements Iterable<Lotto> {
     private static final List<LottoNumber> NUMBER_TEMPLATE =
-            IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE)
-                    .mapToObj(LottoNumber::new)
+            IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
+                    .mapToObj(LottoNumber::of)
                     .collect(Collectors.toList());
 
     private final List<Lotto> values;
 
-    private LottoList(List<Lotto> values) {
+    public LottoList(List<Lotto> values) {
         validateListSize(values);
 
         this.values = values;
+    }
+
+    private void validateListSize(List<Lotto> values) {
+        if (Objects.isNull(values) || values.size() <= 0) {
+            throw new OutOfSizeException("구매할 로또가 없습니다.");
+        }
     }
 
     public static LottoList generate(Number lottoSize) {
@@ -27,12 +33,6 @@ public final class LottoList implements Iterable<Lotto> {
                 .mapToObj(i -> new Lotto(randomLottoNumbers()))
                 .collect(Collectors.toList());
         return new LottoList(newValues);
-    }
-
-    private void validateListSize(List<Lotto> values) {
-        if (Objects.isNull(values) || values.size() <= 0) {
-            throw new OutOfSizeException("0개의 로또를 구매할 수 없습니다.");
-        }
     }
 
     private static synchronized List<LottoNumber> randomLottoNumbers() {
@@ -45,6 +45,12 @@ public final class LottoList implements Iterable<Lotto> {
                 Collectors.groupingBy(winningLotto::rank, Collectors.counting())
         );
         return new LottoStatistics(data);
+    }
+
+    public LottoList add(List<Lotto> lottoList) {
+        List<Lotto> newLottoList = new ArrayList<>(this.values);
+        newLottoList.addAll(lottoList);
+        return new LottoList(newLottoList);
     }
 
     /* 이하 Forward 메소드들 */

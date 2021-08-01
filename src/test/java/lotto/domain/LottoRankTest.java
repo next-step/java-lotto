@@ -25,19 +25,20 @@ class LottoRankTest {
     }
 
     @CsvSource({
-            "0,LAST_PLACE",
-            "1,LAST_PLACE",
-            "2,LAST_PLACE",
-            "3,FIVE_PLACE",
-            "4,FOUR_PLACE",
-            "5,THREE_PLACE",
-            "6,FIRST_PLACE"
+            "0,false,LAST_PLACE",
+            "1,false,LAST_PLACE",
+            "2,false,LAST_PLACE",
+            "3,false,FIVE_PLACE",
+            "4,false,FOUR_PLACE",
+            "5,false,THREE_PLACE",
+            "5,true,SECOND_PLACE",
+            "6,false,FIRST_PLACE"
     })
     @ParameterizedTest
-    void ofTest(int matchesCount, String expertEnumName) {
+    void ofTest(int matchesCount, boolean bonusNumber, String expertEnumName) {
         LottoRank expertLottoRank = LottoRank.valueOf(expertEnumName);
 
-        assertThat(LottoRank.of(matchesCount))
+        assertThat(LottoRank.of(matchesCount, bonusNumber))
                 .isEqualTo(expertLottoRank);
     }
 }

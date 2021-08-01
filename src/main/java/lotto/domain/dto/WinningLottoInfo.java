@@ -1,10 +1,10 @@
 package lotto.domain.dto;
 
-public class WinningLottoRequest {
+public class WinningLottoInfo {
     private final String lottoNumbers;
     private final int bonusNumber;
 
-    public WinningLottoRequest(String lottoNumbers, int bonusNumber) {
+    public WinningLottoInfo(String lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }

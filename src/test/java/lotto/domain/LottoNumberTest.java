@@ -8,26 +8,26 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
-    @DisplayName("생성자 테스트")
+    @DisplayName("of 테스트")
     @ValueSource(ints = {
             1, 45
     })
     @ParameterizedTest
-    public void ctorTest(int number) {
+    public void ofTest(int number) {
         //noinspection
         assertThatCode(() ->
-                new LottoNumber(number)
+                LottoNumber.of(number)
         ).doesNotThrowAnyException();
     }
 
-    @DisplayName("생성자 테스트 - OutOfRangeException")
+    @DisplayName("of 테스트 - OutOfRangeException")
     @ValueSource(ints = {
             0, 46
     })
     @ParameterizedTest
     public void ctorTest_OutOfRangeException(int number) {
         assertThatThrownBy(() ->
-                new LottoNumber(number)
+                LottoNumber.of(number)
         ).isInstanceOf(OutOfRangeException.class);
     }
 }

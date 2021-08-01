@@ -19,21 +19,21 @@ public final class Lotto implements Iterable<LottoNumber> {
         Collections.sort(this.values);
     }
 
-    public static Lotto of(String strLottoNumbers) {
-        String removedSpaceNumbers = strLottoNumbers.replaceAll(" +", "");
-        return new Lotto(Arrays.stream(
-                removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())
-        );
-    }
-
     private void validateNumberSize(List<LottoNumber> values) {
         long distinctSize = values.stream().distinct().count();
         if (distinctSize != NUMBER_SIZE || values.size() != NUMBER_SIZE) {
             throw new OutOfSizeException("로또 번호가 6개가 아닙니다.");
         }
+    }
+
+    public static Lotto of(String strLottoNumbers) {
+        String removedSpaceNumbers = strLottoNumbers.replaceAll(" +", "");
+        return new Lotto(Arrays.stream(
+                removedSpaceNumbers.split(LOTTO_NUMBER_DELIMITER))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 
     public int containsCount(Lotto that) {

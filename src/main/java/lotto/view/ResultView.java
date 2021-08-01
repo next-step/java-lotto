@@ -5,7 +5,7 @@ import lotto.domain.LottoStatistics;
 
 
 public interface ResultView {
-    void printLottoList(LottoList lottoList);
+    void printLottoList(LottoList lottoList, int manualLottoSize);
 
     void printLottoStatistics(LottoStatistics lottoStatistics);
 

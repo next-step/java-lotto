@@ -11,27 +11,23 @@ import java.util.stream.Collectors;
 
 public class DosResultView implements ResultView {
     @Override
-    public void printLottoList(LottoList lottoList) {
+    public void printException(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    private void printEmptyLine() {
+        System.out.println();
+    }
+
+    @Override
+    public void printLottoList(LottoList lottoList, int manualLottoSize) {
         System.out.println(Text.PURCHASED_LOTTO_SIZE.format(
-                lottoList.size()
+                manualLottoSize, lottoList.size() - manualLottoSize
         ));
         for (Lotto iLotto : lottoList) {
             System.out.println(iLotto);
         }
-    }
-
-    private List<LottoRank> displayLottoRanks() {
-        return Arrays.stream(LottoRank.values())
-                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
-                .collect(Collectors.toList());
-    }
-
-    private Text lottoRankText(LottoRank lottoRank) {
-        return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
-    }
-
-    private Text yieldText(float yield) {
-        return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
+        printEmptyLine();
     }
 
     @Override
@@ -46,21 +42,35 @@ public class DosResultView implements ResultView {
                     )
             );
         }
+        printEmptyLine();
+
         float yield = lottoStatistics.yield().floatValue();
         System.out.println(
                 yieldText(yield).format(
                         lottoStatistics.yield().floatValue()
                 )
         );
+        printEmptyLine();
     }
 
-    @Override
-    public void printException(Exception e) {
-        System.out.println(e.getMessage());
+    private Text lottoRankText(LottoRank lottoRank) {
+        return lottoRank == LottoRank.SECOND_PLACE ? Text.LOTTO_SECOND_RANK : Text.LOTTO_RANK;
     }
+
+    private Text yieldText(float yield) {
+        return yield < 1 ? Text.YIELD_LOSS : Text.YIELD;
+    }
+
+    private List<LottoRank> displayLottoRanks() {
+        return Arrays.stream(LottoRank.values())
+                .filter(iLottoRank -> iLottoRank.prizeAmount().hasMoney())
+                .collect(Collectors.toList());
+    }
+
+
 
     private enum Text {
-        PURCHASED_LOTTO_SIZE("%d개를 구매 했습니다."),
+        PURCHASED_LOTTO_SIZE("수동으로 %d장, 자동으로 %d개를 구매 했습니다."),
         RESULT_TITLE("당첨 통계\n---------"),
         LOTTO_RANK("%s개 일치 (%s원) - %d개"),
         LOTTO_SECOND_RANK("%s개 일치, 보너스볼 일치 (%s원) - %d개"),
