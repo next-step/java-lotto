@@ -7,10 +7,10 @@ public class LottoMachine {
     int purchaseLottoCount;
     LottoNumber lottoNumber;
 
-    static int AMOUNT_PER_LOTTO = 1000;
+    static int PRICE_OF_LOTTO = 1000;
 
     public LottoMachine(int purchaseAmount){
-        purchaseLottoCount = purchaseAmount / AMOUNT_PER_LOTTO;
+        purchaseLottoCount = purchaseAmount / PRICE_OF_LOTTO;
     }
 
     public int getPurchaseLottoCount(){

@@ -33,8 +33,6 @@ public class LottoNumber {
 
 
     public String value() {
-        return "LottoNumber{" +
-                "pickedNumbers=" + pickedNumbers +
-                '}';
+        return pickedNumbers.toString();
     }
 }
