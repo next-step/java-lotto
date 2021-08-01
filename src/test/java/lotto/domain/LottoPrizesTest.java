@@ -20,9 +20,11 @@ class LottoPrizesTest {
 	@DisplayName("로또 당첨 결과를 생성한다.")
 	@Test
 	void create() {
+		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, 7);
 		List<LottoTicket> tickets = createLottoTickets();
 		LottoTickets lottoTickets = LottoTickets.from(tickets);
-		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 		assertThat(lottoPrizes.size()).isEqualTo(tickets.size());
 	}
 
@@ -44,17 +46,17 @@ class LottoPrizesTest {
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, THIRD)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(THIRD, FIRST)), 200_000, 10_000.25)
+			Arguments.of(LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 100_000, 0.55),
+			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 200_000, 10_000.25)
 		);
 	}
 
 	private static Stream<Arguments> countLottoPrizesPerRankArguments() {
 		List<LottoPrize> totalLottoPrizes = createLottoPrizes();
 		return Stream.of(
-			createArgumentsFrom(totalLottoPrizes, FOURTH, 2),
-			createArgumentsFrom(totalLottoPrizes, THIRD, 3),
-			createArgumentsFrom(totalLottoPrizes, SECOND, 4),
+			createArgumentsFrom(totalLottoPrizes, FIFTH, 2),
+			createArgumentsFrom(totalLottoPrizes, FOURTH, 3),
+			createArgumentsFrom(totalLottoPrizes, THIRD, 4),
 			createArgumentsFrom(totalLottoPrizes, FIRST, 2)
 		);
 	}
@@ -67,15 +69,15 @@ class LottoPrizesTest {
 		List<LottoPrize> lottoPrizes = new ArrayList<>();
 		lottoPrizes.add(NONE);
 		lottoPrizes.add(NONE);
+		lottoPrizes.add(FIFTH);
+		lottoPrizes.add(FIFTH);
 		lottoPrizes.add(FOURTH);
 		lottoPrizes.add(FOURTH);
+		lottoPrizes.add(FOURTH);
 		lottoPrizes.add(THIRD);
 		lottoPrizes.add(THIRD);
 		lottoPrizes.add(THIRD);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
-		lottoPrizes.add(SECOND);
+		lottoPrizes.add(THIRD);
 		lottoPrizes.add(FIRST);
 		lottoPrizes.add(FIRST);
 		return lottoPrizes;

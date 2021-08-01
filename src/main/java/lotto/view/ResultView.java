@@ -13,7 +13,10 @@ public class ResultView {
 
 	private static final String MESSAGE_BOUGHT_LOTTO_TICKET_COUNT = "%s개를 구매했습니다.%n";
 	private static final String MESSAGE_WINNING_STATISTICS = "\n당첨 통계\n---------";
-	private static final String MESSAGE_WINNING_LOTTO_TICKET_COUNT = "%d개 일치 (%,d)원- %d개%n";
+	private static final String MESSAGE_MATCH_COUNT_OF_PRIZE = "%d개 일치 ";
+	private static final String MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE = "%d개 일치, 보너스 볼 일치 ";
+	private static final String MESSAGE_PRIZE_MONEY_OF_PRIZE = "(%,d원) - ";
+	private static final String MESSAGE_COUNT_OF_PRIZES_PER_RANK = "%d개%n";
 	private static final String MESSAGE_TOTAL_EARNINGS_RATE = "총 수익률은 %s입니다.";
 	private static final String DECIMAL_POINT = "%.2f";
 	private static final String MESSAGE_LOSS = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -32,7 +35,7 @@ public class ResultView {
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
 		System.out.println(MESSAGE_WINNING_STATISTICS);
 		Arrays.stream(LottoPrize.values())
-			.filter(lottoPrize -> lottoPrize != LottoPrize.NONE)
+			.filter(lottoPrize -> !lottoPrize.isNone())
 			.sorted(Comparator.comparingInt(LottoPrize::prizeMoney))
 			.forEach(lottoPrize -> printLottoPrizePerRank(totalLottoPrizes.prizesOf(lottoPrize), lottoPrize));
 	}
@@ -47,7 +50,25 @@ public class ResultView {
 	}
 
 	private static void printLottoPrizePerRank(LottoPrizes winningPrizes, LottoPrize lottoPrize) {
-		System.out.printf(MESSAGE_WINNING_LOTTO_TICKET_COUNT, lottoPrize.matchCount(), lottoPrize.prizeMoney(), winningPrizes.size());
+		printMatchCount(lottoPrize);
+		printPrizeMoney(lottoPrize);
+		printWinningPrizesPerRank(winningPrizes);
+	}
+
+	private static void printWinningPrizesPerRank(LottoPrizes winningPrizes) {
+		System.out.printf(MESSAGE_COUNT_OF_PRIZES_PER_RANK, winningPrizes.size());
+	}
+
+	private static void printPrizeMoney(LottoPrize lottoPrize) {
+		System.out.printf(MESSAGE_PRIZE_MONEY_OF_PRIZE, lottoPrize.prizeMoney());
+	}
+
+	private static void printMatchCount(LottoPrize lottoPrize) {
+		String message = MESSAGE_MATCH_COUNT_OF_PRIZE;
+		if (lottoPrize == LottoPrize.SECOND) {
+			message = MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE;
+		}
+		System.out.printf(message, lottoPrize.matchCount());
 	}
 
 }

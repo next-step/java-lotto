@@ -19,10 +19,10 @@ public class WinningLottoNumbers {
 	}
 
 	public static WinningLottoNumbers from(List<Integer> winningNumbers) {
-		List<Integer> collect = winningNumbers.stream()
+		List<Integer> numbers = winningNumbers.stream()
 									.distinct()
 									.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-		return new WinningLottoNumbers(collect);
+		return new WinningLottoNumbers(numbers);
 	}
 
 	public List<Integer> getWinningNumbers() {

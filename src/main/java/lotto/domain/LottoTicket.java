@@ -25,22 +25,21 @@ public class LottoTicket {
 								.collect(collectingAndThen(toList(), Collections::unmodifiableList)));
 	}
 
-	public static LottoTicket from(WinningLottoNumbers winningNumbers) {
-		return from(winningNumbers.getWinningNumbers());
+	public int matchCount(LottoTicket winningTicket) {
+		return (int) lottoNumbers.stream()
+						.filter(winningTicket.lottoNumbers::contains)
+						.count();
+	}
+
+	public boolean contains(LottoNumber bonusNumber) {
+		return lottoNumbers.contains(bonusNumber);
 	}
 
 	public List<Integer> getNumbers() {
 		return lottoNumbers.stream()
-				.map(LottoNumber::getNumber)
-				.sorted()
-				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-	}
-
-	public LottoPrize compareTo(LottoTicket lottoTicket) {
-		int count = (int) lottoNumbers.stream()
-						.filter(lottoTicket.lottoNumbers::contains)
-						.count();
-		return LottoPrize.fromMatchCount(count);
+			.map(LottoNumber::getNumber)
+			.sorted()
+			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	private static void validateLottoNumbers(List<LottoNumber> numbers) {
