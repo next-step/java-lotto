@@ -14,15 +14,13 @@ class CalculatorUtilsTest {
 	@Test
 	@DisplayName("문자열을 입력하는 패턴에 컬렉션에의하여 분리한다.")
 	public void returnToArray() {
-		CalculatorUtils calculatorUtils = new CalculatorUtils("1,2,3");
-
-		List<Character> result = calculatorUtils.createCharacters();
+		String inputValue1 = "1,2,3";
+		List<Character> result = CalculatorUtils.createCharacters(inputValue1);
 
 		assertThat(result).extracting("character").containsExactly(1, 2, 3);
 
-		CalculatorUtils calculatorUtils2 = new CalculatorUtils("//,\n1,2,3");
-
-		List<Character> result2 = calculatorUtils2.createCharacters();
+		String inputValue2 = "//,\n1,2,3";
+		List<Character> result2 = CalculatorUtils.createCharacters(inputValue2);
 
 		assertThat(result2).extracting("character").containsExactly(1, 2, 3);
 	}

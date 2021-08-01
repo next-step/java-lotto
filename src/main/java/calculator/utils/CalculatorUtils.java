@@ -13,28 +13,20 @@ public class CalculatorUtils {
 	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
 	private static final String DEFAULT_REG_EXP = "[,:]";
 
-	private final String[] characterArray;
-
-	public CalculatorUtils(String calculatorValue) {
-		characterArray = getPatternResult(calculatorValue);
-	}
-
-	private String[] getPatternResult(String calculatorValue) {
+	public static List<Character> createCharacters(String calculatorValue) {
 		Matcher matcher = Pattern.compile(PATTERN_REG_EXP).matcher(calculatorValue);
 		if (matcher.find()) {
-			return matcher.group(2).split(matcher.group(1));
+			return Arrays.stream(matcher.group(2).split(matcher.group(1)))
+				.map(text -> new Character(toInt(text)))
+				.collect(Collectors.toList());
 		}
-		return calculatorValue.split(DEFAULT_REG_EXP);
-	}
-
-	public List<Character> createCharacters() {
-		return Arrays.stream(characterArray)
+		return Arrays.stream(calculatorValue.split(DEFAULT_REG_EXP))
 			.map(text -> new Character(toInt(text)))
 			.collect(Collectors.toList());
 	}
 
-	public int toInt(String character) {
-		Validation.validNumberTypeCheck(character, ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
+	private static int toInt(String character) {
+		Validation.validNumberTypeCheck(character);
 		return Integer.parseInt(character);
 	}
 }
