@@ -12,13 +12,16 @@ public class LottoMain {
             LottoBucket lottoBucket = lottoStore.buyLottoEntriesByRandomNumber(budget, new LottoRandomNumberGenerator());
 
             LottoOutputView.printLottoQuantity(lottoBucket);
-            LottoOutputView.printLottoAll(lottoBucket);
+            LottoOutputView.printAllLottoEntries(lottoBucket);
 
             List<Integer> numbers = LottoInputView.getLastDrawNumbersWithPrompt(scanner);
             LottoEntry lastDrawnLottoEntry = new LottoEntry(numbers);
 
             LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(lastDrawnLottoEntry);
+            lottoWinStatistics.addLottoSamples(lottoBucket);
 
+            LottoOutputView.printLottoWinStatus(lottoWinStatistics);
+            LottoOutputView.printProfitRate(lottoWinStatistics);
         } catch(Exception e) {
             e.printStackTrace();
         }

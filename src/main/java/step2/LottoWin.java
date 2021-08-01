@@ -25,7 +25,7 @@ public enum LottoWin {
         return fromMatch(match).orElse(LottoWin.NONE_WIN);
     }
 
-    private static Optional<LottoWin> fromMatch(int match) {
+    public static Optional<LottoWin> fromMatch(int match) {
         return Stream.of(values())
                 .filter(w -> w.matchCondition.test(match))
                 .findFirst();

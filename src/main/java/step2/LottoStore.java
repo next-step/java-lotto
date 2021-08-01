@@ -3,7 +3,7 @@ package step2;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-    private static final int LOTTO_UNIT_PRICE = 1000;
+    public static final int LOTTO_UNIT_PRICE = 1000;
 
     public static int getAvailableQuantityByBudget(int budget) {
         return budget / LOTTO_UNIT_PRICE;
