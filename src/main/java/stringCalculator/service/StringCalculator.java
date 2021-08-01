@@ -10,6 +10,8 @@ public class StringCalculator {
 
   private StringValue stringValue;
 
+  public static final String NUMBER_FORMAT_PATTEN = "^[0-9]*$";
+
   public static final String CUSTOM_PATTEN = "//(.)\\n(.*)";
 
   public static final String SPLIT_MARK = "[,:]";
@@ -48,7 +50,7 @@ public class StringCalculator {
   }
 
   public String checkNumberFormat(String text) {
-    Pattern pattern = Pattern.compile("^[0-9]*$");
+    Pattern pattern = Pattern.compile(NUMBER_FORMAT_PATTEN);
     Matcher matcher = pattern.matcher(text);
     if(!matcher.matches()){
       throw new RuntimeException(Message.MSG_ERROR_NUMBER_TYPE);

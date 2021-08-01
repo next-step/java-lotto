@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class StringValue {
 
-  private String stringValue;
+  private String inputValue;
 
   public static final String DEFAULT_VALUE = "0";
 
   public StringValue(String stringValue) {
-    this.stringValue = validationText(stringValue);
+    this.inputValue = validationText(stringValue);
   }
 
   public String getStringValue() {
-    return stringValue;
+    return inputValue;
   }
 
   private String validationText(String text) {
