@@ -39,4 +39,12 @@ class MoneyTest {
 		assertThat(money.balanceAfterBuyingNumberOfLottoTickets(5)).isEqualTo(new Money(4000));
 	}
 
+	@DisplayName("최초 구매 금액과 총 당첨금으로 총 수익률을 계산한다.")
+	@Test
+	void calculateEarningsRate() {
+		Money money = new Money(100000);
+		Money totalPrizeMoney = new Money(15000);
+		assertThat(money.earningsRate(totalPrizeMoney)).isEqualTo(0.15);
+	}
+
 }

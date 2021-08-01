@@ -23,6 +23,10 @@ public class Money {
 		return new Money(amount - (PRICE_PER_LOTTO_TICKET * lottoTicketsCount));
 	}
 
+	public double earningsRate(Money totalPrizeMoney) {
+		return (double) totalPrizeMoney.amount / amount;
+	}
+
 	private void validateMoneyAmount(int amount) {
 		if (isInsufficientForBuyingLottoTicket(amount)) {
 			throw new InsufficientMoneyException(amount);
