@@ -33,7 +33,7 @@ public class InputView {
         printStatement(INPUT_BONUS_NUMBER_STATEMENT);
         LottoNumber bonusNumber = LottoNumber.of(changeIntInputValue());
 
-        printStatement("\n");
+        printStatement(System.lineSeparator());
 
         return WinningLotto.of(LottoNumbers.of(lottoNumbers), bonusNumber);
     }
