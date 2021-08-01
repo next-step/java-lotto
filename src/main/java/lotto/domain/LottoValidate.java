@@ -5,12 +5,20 @@ import lotto.domain.matchcase.RankMatcher;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoValidate {
     private static final int REFERENCE_PRICE = 1000;
     private static final int REMAINDER_VALUE = 10;
+    private static final int MAX_LENGTH = 6;
 
     private int count = 0;
+
+    public static void duplicateValidate(Set<Integer> lottos) {
+        if(lottos.size() != MAX_LENGTH) {
+            throw new IllegalArgumentException("번호는 중복이 될 수 없습니다.");
+        }
+    }
 
     public int priceValidation(int price) {
         if (price % REMAINDER_VALUE != 0) {

@@ -10,8 +10,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos addLotto(int count) {
+    public static Lottos addLotto(int count, List<Lotto> manualLists) {
         List<Lotto> lottoList = new ArrayList<>();
+
+        lottoList.addAll(manualLists);
+
         for (int i = 0; i < count; i++) {
             lottoList.add(LottoMaker.run());
         }
