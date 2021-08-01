@@ -1,8 +1,13 @@
 package lotto;
 
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String args[]){
@@ -11,12 +16,16 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
         int lottoCount = lottoMachine.getPurchaseLottoCount();
-
         ResultView.countOfLotto(lottoCount);
 
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
         for(int i = 0 ; i < lottoMachine.getPurchaseLottoCount(); i++){
-            ResultView.printLottoNumber(lottoMachine.generateLottoNumber());
+            LottoNumber lottoNumber = lottoMachine.generateLottoNumber();
+            ResultView.printLottoNumber(lottoNumber);
+            lottoNumberList.add(lottoNumber);
         }
+
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
 
     }
 }
