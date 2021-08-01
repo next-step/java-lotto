@@ -27,5 +27,6 @@ public class LottoApplication {
 
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
 
+        LottoNumber winningLottoNumber = new LottoNumber(InputView.getWinningNumber());
     }
 }
