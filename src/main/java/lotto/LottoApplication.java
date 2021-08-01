@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -28,5 +29,8 @@ public class LottoApplication {
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
 
         LottoNumber winningLottoNumber = new LottoNumber(InputView.getWinningNumber());
+
+        ResultView.printWinningStatistics(new WinningStatistics(winningLottoNumber, lottoNumbers));
+
     }
 }

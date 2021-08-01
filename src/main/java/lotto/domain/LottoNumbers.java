@@ -21,7 +21,7 @@ public class LottoNumbers {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int[] contains(LottoNumber winningLottoNumber) {
+    public int[] calculateStatics(LottoNumber winningLottoNumber) {
         int[] statistics = new int[4];
 
         for (LottoNumber lottoNumber : lottoNumbers){
