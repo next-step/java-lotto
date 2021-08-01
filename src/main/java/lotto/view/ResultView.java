@@ -12,7 +12,7 @@ import lotto.domain.LottoTickets;
 public class ResultView {
 
 	private static final String MESSAGE_BOUGHT_LOTTO_TICKET_COUNT = "%s개를 구매했습니다.%n";
-	private static final String MESSAGE_WINNING_STATISTICS = "\n당첨 통계\n---------";
+	private static final String MESSAGE_WINNING_STATISTICS = System.lineSeparator() + "당첨 통계" + System.lineSeparator() + "---------";
 	private static final String MESSAGE_MATCH_COUNT_OF_PRIZE = "%d개 일치 ";
 	private static final String MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE = "%d개 일치, 보너스 볼 일치 ";
 	private static final String MESSAGE_PRIZE_MONEY_OF_PRIZE = "(%,d원) - ";
