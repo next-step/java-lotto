@@ -8,15 +8,17 @@ public class LottoMain {
         try(Scanner scanner = new Scanner(System.in)) {
             int budget = LottoInputView.getBudgetWithPrompt(scanner);
 
-            LottoService lottoService = new LottoService(budget);
-            LottoBucket lottoBucket = lottoService.generateLottoes(new LottoRandomNumberGenerator());
+            LottoStore lottoStore = new LottoStore();
+            LottoBucket lottoBucket = lottoStore.buyLottoEntriesByRandomNumber(budget, new LottoRandomNumberGenerator());
 
             LottoOutputView.printLottoQuantity(lottoBucket);
             LottoOutputView.printLottoAll(lottoBucket);
 
             List<Integer> numbers = LottoInputView.getLastDrawNumbersWithPrompt(scanner);
+            LottoEntry lastDrawnLottoEntry = new LottoEntry(numbers);
 
-            Lotto lastDrawnLotto = new Lotto(numbers);
+            LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(lastDrawnLottoEntry);
+
         } catch(Exception e) {
             e.printStackTrace();
         }

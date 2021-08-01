@@ -1,30 +1,31 @@
 package step2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoBucket {
+public class LottoBucket implements Iterable<LottoEntry> {
 
-    private final List<Lotto> lottoes;
+    private final List<LottoEntry> lottoEntries;
 
     public LottoBucket() {
-        this.lottoes = new ArrayList<>();
+        this.lottoEntries = new ArrayList<>();
     }
 
-    public void addLotto(Lotto lotto) {
-        this.lottoes.add(lotto);
+    public void add(LottoEntry lottoEntry) {
+        this.lottoEntries.add(lottoEntry);
     }
 
-    public void addRandomLotto(LottoNumberGenerator lottoNumberGenerator) {
+    public void add(LottoNumberGenerator lottoNumberGenerator) {
         List<Integer> numbers = lottoNumberGenerator.generateNumbersForLotto();
 
-        this.addLotto(new Lotto(numbers));
+        this.add(new LottoEntry(numbers));
     }
 
     public int size() {
-        return lottoes.size();
+        return lottoEntries.size();
     }
 
     @Override
@@ -32,18 +33,23 @@ public class LottoBucket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoBucket that = (LottoBucket) o;
-        return Objects.equals(lottoes, that.lottoes);
+        return Objects.equals(lottoEntries, that.lottoEntries);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoes);
+        return Objects.hash(lottoEntries);
     }
 
     @Override
     public String toString() {
-        return lottoes.stream()
-                .map(Lotto::toString)
+        return lottoEntries.stream()
+                .map(LottoEntry::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public Iterator<LottoEntry> iterator() {
+        return this.lottoEntries.iterator();
     }
 }

@@ -11,7 +11,7 @@ public class LottoRandomNumberGenerator implements LottoNumberGenerator {
     @Override
     public List<Integer> generateNumbersForLotto() {
         return new Random()
-                .ints(Lotto.LOTTO_NUMBER_SIZE, LOWER_BOUND, UPPER_BOUND)
+                .ints(LottoEntry.LOTTO_NUMBER_SIZE, LOWER_BOUND, UPPER_BOUND)
                 .boxed()
                 .collect(Collectors.toList());
     }

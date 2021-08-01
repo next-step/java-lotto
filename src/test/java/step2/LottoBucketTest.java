@@ -13,7 +13,7 @@ public class LottoBucketTest {
 
         int before = lottoBucket.size();
 
-        lottoBucket.addRandomLotto(new LottoRandomNumberGenerator());
+        lottoBucket.add(new LottoRandomNumberGenerator());
 
         int after = lottoBucket.size();
 

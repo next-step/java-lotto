@@ -19,7 +19,13 @@ public enum LottoWin {
         this.matchCondition = matchCondition;
     }
 
-    public static Optional<LottoWin> fromMatch(int match) {
+    public static LottoWin getMatchWinResult(LottoEntry lottoEntry1, LottoEntry lottoEntry2) {
+        int match = lottoEntry1.countMatch(lottoEntry2);
+
+        return fromMatch(match).orElse(LottoWin.NONE_WIN);
+    }
+
+    private static Optional<LottoWin> fromMatch(int match) {
         return Stream.of(values())
                 .filter(w -> w.matchCondition.test(match))
                 .findFirst();
