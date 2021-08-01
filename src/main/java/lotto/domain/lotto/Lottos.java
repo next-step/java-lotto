@@ -37,14 +37,14 @@ public class Lottos {
     }
 
     public Lottos combine(Lottos anotherLottos) {
-        if (isNullOrEmptyLottos(anotherLottos)) {
+        if (isEmptyLottos(anotherLottos)) {
             return this;
         }
 
         return Lottos.of(getCombinedLottos(anotherLottos));
     }
 
-    private boolean isNullOrEmptyLottos(Lottos anotherLottos) {
+    private boolean isEmptyLottos(Lottos anotherLottos) {
         return Objects.isNull(anotherLottos) || anotherLottos.isEmpty();
     }
 
