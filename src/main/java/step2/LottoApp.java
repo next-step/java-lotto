@@ -26,6 +26,6 @@ public class LottoApp {
 
         Map<Integer,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber());
 
-        ResultView.showResult(result,buyMoney,market.getWINNINGS());
+        ResultView.showResult(result,buyMoney);
     }
 }

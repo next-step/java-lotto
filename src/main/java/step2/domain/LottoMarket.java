@@ -8,14 +8,7 @@ public class LottoMarket {
     private final int PRICE = 1000;
     private LottoMachine machine;
     private LottoList myLottoList;
-    private final Map<Integer,Integer> WINNINGS = new HashMap<Integer,Integer>(){
-        {
-            put(3,5000);
-            put(4,50000);
-            put(5,1500000);
-            put(6,2000000000);
-        }
-    };
+
     public LottoMarket(LottoMachine machine, LottoList list) {
         this.machine = machine;
         this.myLottoList = list;
@@ -65,7 +58,4 @@ public class LottoMarket {
         }
     }
 
-    public Map<Integer, Integer> getWINNINGS() {
-        return WINNINGS;
-    }
 }

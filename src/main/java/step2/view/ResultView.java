@@ -1,6 +1,7 @@
 package step2.view;
 
 import step2.domain.Lotto;
+import step2.domain.Winnings;
 
 import java.util.List;
 import java.util.Map;
@@ -14,14 +15,14 @@ public class ResultView {
         }
     }
 
-    public static void showResult(Map<Integer, Integer> result, int money, Map<Integer, Integer> WINNINGS) {
+    public static void showResult(Map<Integer, Integer> result, int money) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
         int totalMoney = 0;
         for (int correctCount : result.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", correctCount, WINNINGS.get(correctCount), result.get(correctCount));
+            System.out.printf("%d개 일치 (%d원)- %d개\n", correctCount, Winnings.find(correctCount), result.get(correctCount));
             if (result.get(correctCount) > 0) {
-                totalMoney += WINNINGS.get(correctCount) * result.get(correctCount);
+                totalMoney += Winnings.find(correctCount) * result.get(correctCount);
             }
         }
         System.out.printf("총 수익률은 %.2f 입니다.",calculateYield(money,totalMoney));
