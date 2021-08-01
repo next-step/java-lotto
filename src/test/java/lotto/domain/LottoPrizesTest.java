@@ -20,8 +20,8 @@ class LottoPrizesTest {
 	@DisplayName("로또 당첨 결과를 생성한다.")
 	@Test
 	void create() {
-		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, 7);
+		LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningNumbers, 7);
 		List<LottoTicket> tickets = createLottoTickets();
 		LottoTickets lottoTickets = LottoTickets.from(tickets);
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);

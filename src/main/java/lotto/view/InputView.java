@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.LottoNumbers;
 
 public class InputView {
 
@@ -29,17 +29,21 @@ public class InputView {
 		return SCANNER.nextInt();
 	}
 
-	public static int inputNumberOfManualLottoTickets() {
+	public static int inputManualLottoTicketsCount() {
 		System.out.println(INPUT_NUMBER_OF_MANUAL_LOTTO_TICKETS);
 		return SCANNER.nextInt();
 	}
 
-	public static WinningLottoNumbers inputWinningNumbers() {
+	public static LottoNumbers inputWinningNumbers() {
 		System.out.println(INPUT_WINNING_NUMBERS);
-		List<Integer> numbers = IntStream.range(INDEX_OF_FIRST_NUMBER, INDEX_OF_SEVENTH_NUMBER)
-									.mapToObj(index -> Integer.parseInt(SCANNER.next().replace(DELIMITER, BLANK)))
-									.collect(collectingAndThen(toList(), Collections::unmodifiableList));
-		return WinningLottoNumbers.from(numbers);
+		List<Integer> numbers = lottoTicketNumbersFromUser();
+		return LottoNumbers.from(numbers);
+	}
+
+	private static List<Integer> lottoTicketNumbersFromUser() {
+		return IntStream.range(INDEX_OF_FIRST_NUMBER, INDEX_OF_SEVENTH_NUMBER)
+				.mapToObj(index -> Integer.parseInt(SCANNER.next().replace(DELIMITER, BLANK)))
+				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	public static int inputBonusNumber() {
