@@ -41,13 +41,11 @@ public class LottoMachineTests {
 
         LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(lottoNumber, lottoNumber2));
 
-        WinningStatistics winningStatistics = new WinningStatistics(winningLottoNumber, lottoNumbers);
-
         LottoMachine lottoMachine = new LottoMachine(14000);
 
-        double result = lottoMachine.calculateProfitRate(winningStatistics);
+        double result = lottoMachine.calculateProfitRate(lottoNumbers.getMatchingRecords(winningLottoNumber));
 
-        assertThat(result).isEqualTo(142964.29);
+        assertThat(result).isEqualTo(142964.2857142857);
 
 
     }

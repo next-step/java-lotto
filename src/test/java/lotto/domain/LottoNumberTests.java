@@ -14,6 +14,6 @@ public class LottoNumberTests {
     void generateLottoNumberTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
 
-        assertThat(lottoNumber.value()).isEqualTo(Arrays.asList(8, 21, 23, 41, 42, 43));
+        assertThat(lottoNumber.value()).isEqualTo(Arrays.asList(8, 21, 23, 41, 42, 43).toString());
     }
 }

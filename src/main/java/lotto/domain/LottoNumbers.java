@@ -20,17 +20,17 @@ public class LottoNumbers {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int[] calculateStatics(LottoNumber winningLottoNumber) {
-        int[] statistics = new int[4];
+    public int[] getMatchingRecords(LottoNumber winningLottoNumber) {
+        int[] matchingRecords = new int[4];
 
         for (LottoNumber lottoNumber : lottoNumbers) {
             long count = lottoNumber.countOfMatch(winningLottoNumber);
-            makeStatistics(statistics, count);
+            mappingRecordsToCountOfMatch(matchingRecords, count);
         }
-        return statistics;
+        return matchingRecords;
     }
 
-    private void makeStatistics(int[] arr, long count) {
+    private void mappingRecordsToCountOfMatch(int[] arr, long count) {
         if (count == 3) {
             arr[0]++;
         } else if (count == 4) {

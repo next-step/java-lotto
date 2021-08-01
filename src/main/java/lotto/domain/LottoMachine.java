@@ -28,11 +28,9 @@ public class LottoMachine {
         return new LottoNumber();
     }
 
-    public double calculateProfitRate(WinningStatistics winningStatistics) {
+    public double calculateProfitRate(int[] matchingRecords) {
 
-        int[] matchesRecords = winningStatistics.getMatchesRecord();
-
-        double totalAmount = (matchesRecords[0] * 5000 + matchesRecords[1] * 50000 + matchesRecords[2] * 1500000 + matchesRecords[3] * 2000000000);
+        double totalAmount = (matchingRecords[0] * 5000 + matchingRecords[1] * 50000 + matchingRecords[2] * 1500000 + matchingRecords[3] * 2000000000);
 
         double profitRate = totalAmount / purchaseAmount;
 

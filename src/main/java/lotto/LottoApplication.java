@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -30,11 +29,11 @@ public class LottoApplication {
 
         LottoNumber winningLottoNumber = new LottoNumber(InputView.getWinningNumber());
 
-        WinningStatistics winningStatistics = new WinningStatistics(winningLottoNumber, lottoNumbers);
+        int[] matchingRecords = lottoNumbers.getMatchingRecords(winningLottoNumber);
 
-        ResultView.printWinningStatistics(winningStatistics);
+        ResultView.printWinningStatistics(matchingRecords);
 
-        ResultView.printProfitRate(lottoMachine.calculateProfitRate(winningStatistics));
+        ResultView.printProfitRate(lottoMachine.calculateProfitRate(matchingRecords));
 
     }
 }

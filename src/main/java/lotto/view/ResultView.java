@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.WinningStatistics;
 
 public class ResultView {
     private static String COUNT_OF_LOTTO_QUESTION = "개를 구입했습니다.";
@@ -14,8 +13,7 @@ public class ResultView {
         System.out.println(lottoNumber.value());
     }
 
-    public static void printWinningStatistics(WinningStatistics winningStatistics) {
-        int[] matchesRecord = winningStatistics.getMatchesRecord();
+    public static void printWinningStatistics(int[] matchesRecord) {
 
         System.out.println("당첨 통계");
 
