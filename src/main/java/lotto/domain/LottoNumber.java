@@ -9,8 +9,8 @@ public class LottoNumber {
     private List<Integer> shuffledNumbers;
     private List<Integer> pickedNumbers;
 
-    private static final int LOTTO_TOP_BOUND = 45;
-    private static final int LOTTO_BOTTOM_BOUND = 1;
+    private static final int MIN_LOTTO_NUMBER  = 1;
+    private static final int MAX_LOTTO_NUMBER  = 45;
     private static final int COUNT_OF_PICK = 6;
 
     public LottoNumber() {
@@ -25,7 +25,7 @@ public class LottoNumber {
 
     private void shuffled() {
         shuffledNumbers = new ArrayList<>();
-        for (int i = LOTTO_BOTTOM_BOUND; i <= LOTTO_TOP_BOUND; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             shuffledNumbers.add(i);
         }
 
