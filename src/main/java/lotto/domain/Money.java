@@ -19,6 +19,10 @@ public class Money {
 		return amount / PRICE_PER_LOTTO_TICKET;
 	}
 
+	public Money balanceAfterBuyingNumberOfLottoTickets(int lottoTicketsCount) {
+		return new Money(amount - (PRICE_PER_LOTTO_TICKET * lottoTicketsCount));
+	}
+
 	private void validateMoneyAmount(int amount) {
 		if (isInsufficientForBuyingLottoTicket(amount)) {
 			throw new InsufficientMoneyException(amount);

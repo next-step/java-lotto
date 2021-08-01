@@ -32,4 +32,11 @@ class MoneyTest {
 		assertThat(money.availableLottoTicketsCount()).isEqualTo(expectedLottoTicketsCount);
 	}
 
+	@DisplayName("로또 티켓을 구매할 경우 로또 티켓 매수만큼의 금액을 차감한다.")
+	@Test
+	void subtractPriceOfLottoTickets() {
+		Money money = new Money(9000);
+		assertThat(money.balanceAfterBuyingNumberOfLottoTickets(5)).isEqualTo(new Money(4000));
+	}
+
 }
