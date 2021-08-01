@@ -24,4 +24,8 @@ public class LottoList {
         }
         return this.lottoList.get(idx);
     }
+
+    public List<Lotto> getAll() {
+        return lottoList;
+    }
 }

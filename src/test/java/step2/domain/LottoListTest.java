@@ -22,11 +22,6 @@ class LottoListTest {
     static void makeMachine() {
         strategy = new LottoNumStrategy() {
             @Override
-            public int makeNumber() {
-                return 0;
-            }
-
-            @Override
             public Lotto makeLotto() {
                 return Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
             }

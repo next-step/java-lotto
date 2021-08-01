@@ -26,4 +26,5 @@ public class LottoMachine {
     public List<Integer> makeLotto() {
         return strategy.makeLotto().getNumbers();
     }
+
 }
