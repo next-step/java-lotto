@@ -8,10 +8,14 @@ public class Lotto {
     private LottoNumbers lottoNumbers;
 
     public Lotto(CreateLottoNumbersStrategy createLottoNumbersStrategy) {
-        lottoNumbers = new LottoNumbers(createLottoNumbersStrategy.getNumbersList());
+        this.lottoNumbers = new LottoNumbers(createLottoNumbersStrategy.getNumbersList());
+    }
+
+    public Lotto(LottoNumbers lottoNumbers){
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers.getLottoNumbers();
+        return this.lottoNumbers.getLottoNumbers();
     }
 }
