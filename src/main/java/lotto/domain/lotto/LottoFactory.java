@@ -1,47 +1,45 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Set;
+import lotto.domain.lotto.exception.InvalidBonusLottoNumberException;
+import lotto.domain.lotto.exception.InvalidLottoNumberException;
+import lotto.domain.lotto.exception.InvalidTotalAmountException;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 
 public class LottoFactory {
 
-    public static final int LOTTO_NUMBER_MIN = 1;
-    public static final int LOTTO_NUMBER_MAX = 45;
-    public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final long LOTTO_PRICE = 1000;
-
-    private final static List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
-        .boxed()
-        .collect(Collectors.toList());
+    private static final int LOTTO_PRICE = 1000;
 
     public static NormalLotto createNormal() {
-        Collections.shuffle(numbers);
-        List<Integer> randomNumbers = numbers.stream()
-            .limit(LOTTO_NUMBER_COUNT)
-            .collect(Collectors.toList());
-
-        return new NormalLotto(randomNumbers);
+        return new NormalLotto(LottoNumbers.create());
     }
 
-    public static WinningLotto createWinning(List<Integer> numbers) {
-        return new WinningLotto(numbers);
+    public static WinningLotto createWinning(Set<Integer> numbers, int bonusNumber) {
+        validationWinningLotto(numbers, bonusNumber);
+        return new WinningLotto(LottoNumbers.create(numbers), bonusNumber);
     }
 
-    public static boolean isValid(List<Integer> checkNumbers) {
-        if (!numbers.containsAll(checkNumbers)) {
-            return false;
+    private static void validationWinningLotto(Set<Integer> checkNumbers, int bonusNumber) {
+        if (!LottoNumber.isValid(checkNumbers)) {
+            throw new InvalidLottoNumberException();
         }
 
-        if (checkNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
-            return false;
+        if (checkNumbers.contains(bonusNumber)
+            || !LottoNumber.isValid(bonusNumber)) {
+            throw new InvalidBonusLottoNumberException();
         }
-
-        return true;
     }
 
-    public static long getLottoPrice() {
-        return LOTTO_PRICE;
+    public static int possiblePurchaseLottoCount(int totalAmount) {
+        if (totalAmount < LOTTO_PRICE) {
+            throw new InvalidTotalAmountException(LOTTO_PRICE);
+        }
+
+        return totalAmount / LOTTO_PRICE;
+    }
+
+    public static int calculateTotalAmount(int purchasedLottoCount) {
+        return purchasedLottoCount * LOTTO_PRICE;
     }
 }

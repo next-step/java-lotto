@@ -1,10 +1,16 @@
 package lotto.domain.lotto;
 
-import java.util.List;
+import lotto.domain.number.LottoNumbers;
 
-public class NormalLotto extends Lotto {
+public class NormalLotto {
 
-    public NormalLotto(List<Integer> numbers) {
-        super(numbers);
+    private final LottoNumbers numbers;
+
+    public NormalLotto(LottoNumbers numbers) {
+        this.numbers = numbers;
+    }
+
+    public LottoNumbers getNumbers() {
+        return numbers;
     }
 }

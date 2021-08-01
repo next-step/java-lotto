@@ -2,9 +2,10 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.lotto.Lotto;
+import java.util.Set;
 import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.LottoResult;
+import lotto.domain.lotto.NormalLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,23 +13,23 @@ import lotto.view.ResultView;
 public class LottoMachineController {
 
     public static void main(String[] args) {
-        List<Lotto> purchasedLottos = createPurchasedLottos();
+        List<NormalLotto> purchasedLottos = purchaseLotto();
         ResultView.printPurchasedLottos(purchasedLottos);
-        WinningLotto winningLotto = createWinningLotto(InputView.inputWinningNumbers());
+        Set<Integer> winningNumbers = InputView.inputWinningNumbers();
+        int winningBonusNumber = InputView.inputWinningBonusNumber();
+        WinningLotto winningLotto = LottoFactory.createWinning(winningNumbers, winningBonusNumber);
 
         LottoResult lottoResult = new LottoResult(purchasedLottos, winningLotto);
-        ResultView.printWinningStatistics(lottoResult.getMatchLottoCounts());
+        ResultView.printWinningStatistics(lottoResult.getWinningLottoCounts());
         ResultView.printEarningRate(lottoResult.getEarningRate());
     }
 
-    private static WinningLotto createWinningLotto(List<Integer> integers) {
-        return LottoFactory.createWinning(integers);
-    }
+    private static List<NormalLotto> purchaseLotto() {
+        int totalAmount = InputView.inputTotalAmount();
+        int possiblePurchaseLottoCount = LottoFactory.possiblePurchaseLottoCount(totalAmount);
 
-    private static List<Lotto> createPurchasedLottos() {
-        long totalAmount = InputView.inputTotalAmount();
-        List<Lotto> purchasedLottos = new ArrayList<>();
-        for (int i = 0; i < totalAmount / LottoFactory.getLottoPrice(); i++) {
+        List<NormalLotto> purchasedLottos = new ArrayList<>();
+        for (int i = 0; i < possiblePurchaseLottoCount; i++) {
             purchasedLottos.add(LottoFactory.createNormal());
         }
 

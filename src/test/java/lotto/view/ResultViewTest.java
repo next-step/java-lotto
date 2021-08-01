@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoFactory;
+import lotto.domain.lotto.NormalLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,7 +25,7 @@ class ResultViewTest {
     @DisplayName("구매한 로또 출력")
     @ParameterizedTest
     @MethodSource("validLotto")
-    public void printPurchasedLottos(List<Lotto> purchasedLottos) {
+    public void printPurchasedLottos(List<NormalLotto> purchasedLottos) {
         // given
 
         // when

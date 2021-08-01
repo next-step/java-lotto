@@ -1,16 +1,28 @@
 package lotto.domain.lotto;
 
-import java.util.List;
+import lotto.domain.number.LottoNumbers;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
 
-    public WinningLotto(List<Integer> numbers) {
-        super(numbers);
+    private final LottoNumbers numbers;
+    private final int bonusNumber;
+
+    public WinningLotto(LottoNumbers numbers, int bonusNumber) {
+        this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public int matchNumberCount(Lotto lotto) {
-        return Math.toIntExact(lotto.numbers.stream()
-            .filter(numbers::contains)
-            .count());
+    public int matchNumberCount(NormalLotto lotto) {
+        return lotto.getNumbers()
+            .matchCount(numbers);
+    }
+
+    public boolean matchBonusNumber(NormalLotto lotto) {
+        return lotto.getNumbers()
+            .contains(bonusNumber);
+    }
+
+    public LottoNumbers getNumbers() {
+        return numbers;
     }
 }

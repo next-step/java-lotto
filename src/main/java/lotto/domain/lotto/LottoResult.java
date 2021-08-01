@@ -1,43 +1,38 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.common.LottoPrizeMoney;
+import java.util.stream.Collectors;
+import lotto.common.Rank;
 
 public class LottoResult {
 
-    private final Map<Integer, Integer> matchLottoCounts = new HashMap<Integer, Integer>() {{
-        put(3, 0);
-        put(4, 0);
-        put(5, 0);
-        put(6, 0);
-    }};
-    private final double earningRate;
+    private final List<NormalLotto> purchasedLottos;
+    private final WinningLotto winningLotto;
 
-    public LottoResult(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
-        purchasedLottos.stream()
-            .map(winningLotto::matchNumberCount)
-            .filter(matchCount -> matchCount > 2)
-            .forEach(matchCount -> this.matchLottoCounts.put(matchCount, this.matchLottoCounts.get(matchCount) + 1));
-
-        this.earningRate = calculateEarningRate(purchasedLottos.size());
-    }
-
-    private double calculateEarningRate(int purchaseLottoCount) {
-        long prizeMoney = matchLottoCounts.keySet().stream()
-            .mapToLong(key -> LottoPrizeMoney.findByMatchNumberCount(key) * matchLottoCounts.get(key))
-            .sum();
-
-        return prizeMoney / (double) (LottoFactory.getLottoPrice() * purchaseLottoCount);
-    }
-
-    public Map<Integer, Integer> getMatchLottoCounts() {
-        return Collections.unmodifiableMap(matchLottoCounts);
+    public LottoResult(List<NormalLotto> purchasedLottos, WinningLotto winningLotto) {
+        this.purchasedLottos = purchasedLottos;
+        this.winningLotto = winningLotto;
     }
 
     public double getEarningRate() {
-        return earningRate;
+        Map<Rank, Integer> winningLottoCounts = getWinningLottoCounts();
+        int prizeMoney = winningLottoCounts.keySet().stream()
+            .mapToInt(matchCount -> matchCount.getWinningMoney() * winningLottoCounts.get(matchCount))
+            .sum();
+
+        return prizeMoney / (double) LottoFactory.calculateTotalAmount(purchasedLottos.size());
+    }
+
+    public Map<Rank, Integer> getWinningLottoCounts() {
+        Map<Rank, Integer> winningLottoCounts = Arrays.stream(Rank.values())
+            .collect(Collectors.toMap(r -> r, r -> 0));
+        purchasedLottos.stream()
+            .map(lotto -> Rank.valueOf(winningLotto.matchNumberCount(lotto), winningLotto.matchBonusNumber(lotto)))
+            .forEach(matchCount -> winningLottoCounts.put(matchCount, winningLottoCounts.get(matchCount) + 1));
+
+        return Collections.unmodifiableMap(winningLottoCounts);
     }
 }
