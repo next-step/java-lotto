@@ -6,7 +6,7 @@ import lotto.exception.InsufficientMoneyException;
 
 public class Money {
 
-	private static final int PRICE_PER_TICKET = 1000;
+	private static final int PRICE_PER_LOTTO_TICKET = 1000;
 
 	private int amount;
 
@@ -16,7 +16,7 @@ public class Money {
 	}
 
 	public int availableLottoTicketsCount() {
-		return amount / PRICE_PER_TICKET;
+		return amount / PRICE_PER_LOTTO_TICKET;
 	}
 
 	private void validateMoneyAmount(int amount) {
@@ -26,7 +26,7 @@ public class Money {
 	}
 
 	private boolean isInsufficientForBuyingLottoTicket(int amount) {
-		return amount < PRICE_PER_TICKET;
+		return amount < PRICE_PER_LOTTO_TICKET;
 	}
 
 	@Override

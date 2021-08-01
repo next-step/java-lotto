@@ -19,7 +19,7 @@ class MoneyTest {
 
 	@DisplayName("금액이 1,000원 미만일 경우 로또를 살 수 없으므로 예외가 발생한다.")
 	@Test
-	void lackOfMoney() {
+	void insufficientMoney() {
 		assertThatThrownBy(() -> new Money(900))
 			.isInstanceOf(InsufficientMoneyException.class);
 	}
