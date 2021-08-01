@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApplication {
-    public static void main(String args[]){
+    public static void main(String args[]) {
         int purchaseAmount = InputView.getPurchaseAmount();
 
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
@@ -20,7 +20,7 @@ public class LottoApplication {
         ResultView.countOfLotto(lottoCount);
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for(int i = 0 ; i < lottoMachine.getPurchaseLottoCount(); i++){
+        for (int i = 0; i < lottoMachine.getPurchaseLottoCount(); i++) {
             LottoNumber lottoNumber = lottoMachine.generateLottoNumber();
             ResultView.printLottoNumber(lottoNumber);
             lottoNumberList.add(lottoNumber);
@@ -30,7 +30,11 @@ public class LottoApplication {
 
         LottoNumber winningLottoNumber = new LottoNumber(InputView.getWinningNumber());
 
-        ResultView.printWinningStatistics(new WinningStatistics(winningLottoNumber, lottoNumbers));
+        WinningStatistics winningStatistics = new WinningStatistics(winningLottoNumber, lottoNumbers);
+
+        ResultView.printWinningStatistics(winningStatistics);
+
+        ResultView.printProfitRate(lottoMachine.calculateProfitRate(winningStatistics));
 
     }
 }

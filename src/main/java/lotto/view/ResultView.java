@@ -26,4 +26,8 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + Integer.toString(matchesRecord[2]) + "개");
         System.out.println("6개 일치 (2000000000원)- " + Integer.toString(matchesRecord[3]) + "개");
     }
+
+    public static void printProfitRate(double profitRate) {
+        System.out.println("총 수익률은 " + Math.floor(profitRate * 100) / 100.0 + "입니다.");
+    }
 }

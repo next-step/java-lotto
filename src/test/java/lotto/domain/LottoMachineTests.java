@@ -13,7 +13,7 @@ public class LottoMachineTests {
     @DisplayName("구입 금액을 넣었을때 올바른 개수가 return 되는 지 test")
     @ParameterizedTest
     @CsvSource(value = {"14000,14", "14500,14", "100000,100"})
-    void getPurchaseCountTest(int purchaseAmount, int expected){
+    void getPurchaseCountTest(int purchaseAmount, int expected) {
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
         assertThat(lottoMachine.getPurchaseLottoCount()).isEqualTo(expected);
@@ -32,7 +32,7 @@ public class LottoMachineTests {
 
     @DisplayName("수익률 구하기 테스트")
     @Test
-    void calculateProfitRateTest(){
+    void calculateProfitRateTest() {
         LottoNumber winningLottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
 
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));

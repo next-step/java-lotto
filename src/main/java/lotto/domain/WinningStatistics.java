@@ -5,7 +5,6 @@ public class WinningStatistics {
 
     public WinningStatistics(LottoNumber winningLottoNumber, LottoNumbers lottoNumbers) {
         matchesRecord = lottoNumbers.calculateStatics(winningLottoNumber);
-
     }
 
     public int[] getMatchesRecord() {
