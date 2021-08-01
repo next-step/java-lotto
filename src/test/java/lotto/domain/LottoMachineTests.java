@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTests {
@@ -18,4 +20,13 @@ public class LottoMachineTests {
     }
 
 
+    @DisplayName("랜덤 번호 테스트")
+    @Test
+    void generateLottoNumberTest() {
+        LottoMachine lottoMachine = new LottoMachine(14000);
+
+        LottoNumber lottoNumber = lottoMachine.generateLottoNumber();
+
+        System.out.println("lotto Number : " + lottoNumber.value());
+    }
 }
