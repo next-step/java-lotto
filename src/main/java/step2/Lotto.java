@@ -16,6 +16,10 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(numbers);
     }
 
+    public int countMatch(Lotto lotto) {
+        return this.lottoNumbers.countMatch(lotto.lottoNumbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

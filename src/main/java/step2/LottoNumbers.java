@@ -12,6 +12,12 @@ public class LottoNumbers {
         this.valueList = valueList;
     }
 
+    public int countMatch(LottoNumbers lottoNumbers) {
+        return (int) this.valueList.stream()
+                .filter(lottoNumbers.valueList::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

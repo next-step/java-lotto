@@ -1,19 +1,26 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoBucket {
-    private final Lottoes lottoes;
+
+    private final List<Lotto> lottoes;
 
     public LottoBucket() {
-        this.lottoes = new Lottoes();
+        this.lottoes = new ArrayList<>();
     }
 
-    public void addLottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
+    public void addLotto(Lotto lotto) {
+        this.lottoes.add(lotto);
+    }
+
+    public void addRandomLotto(LottoNumberGenerator lottoNumberGenerator) {
         List<Integer> numbers = lottoNumberGenerator.generateNumbersForLotto();
 
-        this.lottoes.add(new Lotto(numbers));
+        this.addLotto(new Lotto(numbers));
     }
 
     public int size() {
@@ -35,6 +42,8 @@ public class LottoBucket {
 
     @Override
     public String toString() {
-        return lottoes.toString();
+        return lottoes.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

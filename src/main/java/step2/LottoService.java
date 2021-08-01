@@ -19,7 +19,7 @@ public class LottoService {
         LottoBucket lottoBucket = new LottoBucket();
 
         IntStream.range(0, getLottoQuantityByBudget(this.budget))
-                        .forEach(x -> lottoBucket.addLottoNumbers(lottoNumberGenerator));
+                        .forEach(x -> lottoBucket.addRandomLotto(lottoNumberGenerator));
 
         return lottoBucket;
     }
