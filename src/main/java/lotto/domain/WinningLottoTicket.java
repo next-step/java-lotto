@@ -14,7 +14,7 @@ public class WinningLottoTicket {
 	}
 
 	public static WinningLottoTicket from(WinningLottoNumbers winningLottoNumbers, int bonusNumber) {
-		return new WinningLottoTicket(LottoTicket.from(winningLottoNumbers.getWinningNumbers()), new LottoNumber(bonusNumber));
+		return new WinningLottoTicket(winningLottoNumbers.toLottoTicket(), new LottoNumber(bonusNumber));
 	}
 
 	public LottoPrize match(LottoTicket lottoTicket) {

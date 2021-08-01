@@ -18,8 +18,8 @@ class WinningLottoNumbersTest {
 	@DisplayName("지난 주 당첨 번호 문자열로 새로운 객체를 생성한다.")
 	@Test
 	void create() {
-		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThat(winningLottoNumbers.getWinningNumbers()).contains(1, 2, 3, 4, 5, 6).doesNotHaveDuplicates();
+		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		assertThat(WinningLottoNumbers.from(winningNumbers)).isEqualTo(WinningLottoNumbers.from(winningNumbers));
 	}
 
 	@DisplayName("지난 주 당첨 번호가 중복되거나, 6개보다 적거나 많으면 InvalidLottoNumberSizeException 예외가 발생한다.")

@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import lotto.exception.InvalidLottoNumberSizeException;
 
@@ -25,8 +26,8 @@ public class WinningLottoNumbers {
 		return new WinningLottoNumbers(numbers);
 	}
 
-	public List<Integer> getWinningNumbers() {
-		return Collections.unmodifiableList(winningNumbers);
+	public LottoTicket toLottoTicket() {
+		return LottoTicket.from(winningNumbers);
 	}
 
 	private void validateWinningNumbers(List<Integer> winningNumbers) {
@@ -37,5 +38,18 @@ public class WinningLottoNumbers {
 
 	private boolean hasInvalidSize(List<Integer> winningNumbers) {
 		return winningNumbers.size() != VALID_NUMBER_SIZE;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		WinningLottoNumbers that = (WinningLottoNumbers) o;
+		return Objects.equals(winningNumbers, that.winningNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(winningNumbers);
 	}
 }
