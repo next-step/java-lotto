@@ -12,7 +12,7 @@ import java.util.*;
 
 import static lotto.fixture.LottoFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottosTest {
@@ -31,12 +31,12 @@ class LottosTest {
         assertThat(lottos.size()).isEqualTo(1);
     }
 
-    @DisplayName("LottoNumber 6개 보다작으면 IllegalArgumentException을 리턴한다")
+    @DisplayName("LottoNumber 6개 보다작으면 IllegalStateException을 리턴한다")
     @NullAndEmptySource
     @ParameterizedTest
     public void should_throw_exception_under_count_6_lotto_number(List<Lotto> lottos) throws Exception {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> Lottos.of(lottos));
+        assertThatIllegalStateException().isThrownBy(() -> Lottos.of(lottos));
     }
 
 

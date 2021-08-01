@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static lotto.fixture.LottoFixture.*;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,25 +27,25 @@ class LottoNumbersTest {
         assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(new HashSet(lottoNumberList));
     }
 
-    @DisplayName("LottoNumber 6개 보다작으면 IllegalArgumentException을 리턴한다")
+    @DisplayName("LottoNumber 6개 보다작으면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_under_count_6_lotto_number() throws Exception {
         //arrange
         List<LottoNumber> lottoNumbers = createOneToFiveLottoNumberSequence();
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.of(lottoNumbers));
+        assertThatIllegalStateException().isThrownBy(() -> LottoNumbers.of(lottoNumbers));
     }
 
 
-    @DisplayName("LottoNUmber 6개 보다 크면 IllegalArgumentException을 리턴한다")
+    @DisplayName("LottoNUmber 6개 보다 크면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_over_count_6_lotto_number() throws Exception {
         //arrange
         List<LottoNumber> lottoNumbers = createOneToSevenLottoNumberSequence();
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.of(lottoNumbers));
+        assertThatIllegalStateException().isThrownBy(() -> LottoNumbers.of(lottoNumbers));
     }
 
     @DisplayName("WinningLottoNumber와 매치가 되면 매치되는 count를 계산하여 반환한다")

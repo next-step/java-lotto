@@ -2,23 +2,21 @@ package lotto.domain.lotto;
 
 import lotto.domain.prize.LottoPrize;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottos) {
+    protected Lottos(List<Lotto> lottos) {
         validate(lottos);
         this.lottos = lottos;
     }
 
-    private void validate(List<Lotto> lottos) {
+    protected void validate(List<Lotto> lottos) {
         if (Objects.isNull(lottos) || lottos.isEmpty()) {
-            throw new IllegalArgumentException("lotto 리스트는 null이거나 empty면 안됩니다");
+            throw new IllegalStateException("lotto 리스트는 null이거나 empty면 안됩니다");
         }
     }
 
@@ -32,6 +30,27 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public boolean isEmpty() {
+        return lottos.isEmpty();
+    }
+
+    public Lottos combine(Lottos anotherLottos) {
+        if (anotherLottos == null) {
+            return this;
+        }
+
+        return Lottos.of(getCombinedLottos(anotherLottos));
+    }
+
+    private List<Lotto> getCombinedLottos(Lottos anotherLottos) {
+        return Collections.unmodifiableList(
+                new ArrayList<Lotto>() {{
+                    addAll(anotherLottos.getLottos());
+                    addAll(lottos);
+                }}
+        );
     }
 
     public Map<LottoPrize, Long> calculateMatch(WinningLotto winningLotto) {

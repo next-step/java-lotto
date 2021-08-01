@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class MatchResultTest {
@@ -27,7 +27,7 @@ class MatchResultTest {
         assertThat(matchResult.getMatchResult().size()).isEqualTo(1);
     }
 
-    @DisplayName("Money null이면 IllegalArgumentException이 발생한다")
+    @DisplayName("Money null이면 IllegalStateException이 발생한다")
     @Test
     public void should_throw_exception_money_null() throws Exception {
         //arrange
@@ -37,11 +37,11 @@ class MatchResultTest {
         Money money = null;
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(()
+        assertThatIllegalStateException().isThrownBy(()
                 -> MatchResult.of(matchMap, money));
     }
 
-    @DisplayName("매치된 로또 결과가 null이면 IllegalArgumentException이 발생한다")
+    @DisplayName("매치된 로또 결과가 null이면 IllegalStateException이 발생한다")
     @Test
     public void should_throw_exception_null_or_empty_match_map() throws Exception {
         //arrange
@@ -49,7 +49,7 @@ class MatchResultTest {
         Money money = Money.of(1000);
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(()
+        assertThatIllegalStateException().isThrownBy(()
                 -> MatchResult.of(matchMap, money));
     }
 

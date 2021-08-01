@@ -13,7 +13,7 @@ public class Money {
 
     private void validate(int money) {
         if (money < MIN_AMOUNT) {
-            throw new IllegalArgumentException("Money값은 " + MIN_AMOUNT + " 이상 이어야합니다.");
+            throw new IllegalStateException("Money값은 " + MIN_AMOUNT + " 이상 이어야합니다.");
         }
     }
 
@@ -21,16 +21,16 @@ public class Money {
         return new Money(money);
     }
 
-    public int getPurchasableQuantity(Money price) {
-        return amount / price.getAmount();
-    }
-
     public int getAmount() {
         return amount;
     }
 
+    public int getAffordableCount(Money baseMoney) {
+        return this.amount / baseMoney.amount;
+    }
+
     public Money addition(Money anotherMoney) {
-        return Money.of(amount + anotherMoney.amount);
+        return Money.of(amount + anotherMoney.getAmount());
     }
 
     public Money multiply(int operand) {
@@ -38,7 +38,7 @@ public class Money {
     }
 
     public double earningRate(Money money) {
-        return (double) this.amount / money.amount;
+        return (double) this.amount / money.getAmount();
     }
 
     @Override

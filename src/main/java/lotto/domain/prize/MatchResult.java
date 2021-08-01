@@ -19,11 +19,11 @@ public class MatchResult {
 
     private void validate(Map<LottoPrize, Long> matchResult, Money money) {
         if (Objects.isNull(matchResult)) {
-            throw new IllegalArgumentException("matchResult는 null이면 안됩니다");
+            throw new IllegalStateException("matchResult는 null이면 안됩니다");
         }
 
         if (Objects.isNull(money)) {
-            throw new IllegalArgumentException("Money는 값이 있어야합니다");
+            throw new IllegalStateException("Money는 값이 있어야합니다");
         }
     }
 

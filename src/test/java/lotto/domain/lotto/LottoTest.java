@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.fixture.LottoFixture.*;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -31,11 +31,11 @@ class LottoTest {
         assertThat(lotto.getLottoNumbers()).isEqualTo(expectedLottoNumbers);
     }
 
-    @DisplayName("LottoNumber 리스트가 null이면 IllegalArgumentException을 리턴한다")
+    @DisplayName("LottoNumber 리스트가 null이면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_under_count_6_lotto_number() throws Exception {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(null));
+        assertThatIllegalStateException().isThrownBy(() -> Lotto.of(null));
     }
 
     @DisplayName("WinningLottoNumber와 매치가 되면 LottoPrize 값을 반환한다 ")

@@ -22,7 +22,7 @@ public class CustomTokenizer implements Tokenizer {
 
     private Matcher validate(Matcher matcher) {
         if (isNotFound(matcher)) {
-            throw new IllegalArgumentException("형식에 맞는 케이스를 찾지 못했습니다.");
+            throw new IllegalStateException("형식에 맞는 케이스를 찾지 못했습니다.");
         }
 
         return matcher;
