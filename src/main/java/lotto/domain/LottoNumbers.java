@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<LottoNumber> lottoNumbers){
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -15,8 +16,33 @@ public class LottoNumbers {
     }
 
     public String value() {
-        return "[" +lottoNumbers.stream()
+        return "[" + lottoNumbers.stream()
                 .map(lottoNumber -> lottoNumber.value())
                 .collect(Collectors.joining(", ")) + "]";
+    }
+
+    public int[] contains(LottoNumber winningLottoNumber) {
+        int[] statistics = new int[4];
+
+        for (LottoNumber lottoNumber : lottoNumbers){
+            long count = lottoNumber.countOfMatch(winningLottoNumber);
+            makeStatistics(statistics, count);
+        }
+        return statistics;
+    }
+
+    private void makeStatistics(int[] arr, long count) {
+        if(count == 3){
+            arr[0] ++;
+        }
+        else if(count == 4){
+            arr[1] ++;
+        }
+        else if(count == 5){
+            arr[2] ++;
+        }
+        else if(count == 6){
+            arr[3] ++;
+        }
     }
 }

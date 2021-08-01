@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
     int purchaseLottoCount;
-    LottoNumber lottoNumber;
+    private LottoNumber lottoNumber;
 
     static int PRICE_OF_LOTTO = 1000;
 
-    public LottoMachine(int purchaseAmount){
+    public LottoMachine(int purchaseAmount) {
         purchaseLottoCount = purchaseAmount / PRICE_OF_LOTTO;
     }
 
-    public int getPurchaseLottoCount(){
+    public int getPurchaseLottoCount() {
         return purchaseLottoCount;
     }
 
@@ -23,7 +22,7 @@ public class LottoMachine {
         return lottoNumber;
     }
 
-    public LottoNumber generateLottoNumber(){
+    public LottoNumber generateLottoNumber() {
         return new LottoNumber();
     }
 }

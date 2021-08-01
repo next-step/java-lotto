@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumber {
-    List<Integer> shuffledNumbers;
-    List<Integer> pickedNumbers;
+    private List<Integer> shuffledNumbers;
+    private List<Integer> pickedNumbers;
 
     public LottoNumber() {
         shuffled();
@@ -35,5 +35,13 @@ public class LottoNumber {
 
     public String value() {
         return pickedNumbers.toString();
+    }
+
+    public long countOfMatch(LottoNumber winningLottoNumber) {
+
+        return winningLottoNumber.pickedNumbers.stream()
+                .filter(number -> this.pickedNumbers.contains(number))
+                .count();
+
     }
 }
