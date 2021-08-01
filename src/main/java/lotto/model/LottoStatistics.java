@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private static final int ZERO_VALUE = 0;
     private static final int INCREASE_VALUE = 1;
 
     private final Map<LottoPrize, Integer> statisticsMap;
@@ -24,16 +23,16 @@ public class LottoStatistics {
     }
 
     private void calculateStatistics(final List<LottoPrize> lottoPrizes) {
-        lottoPrizes.forEach(lottoPrize -> statisticsMap.put(lottoPrize, statisticsMap.getOrDefault(lottoPrize, ZERO_VALUE) + INCREASE_VALUE));
+        lottoPrizes.forEach(lottoPrize -> statisticsMap.put(lottoPrize, statisticsMap.getOrDefault(lottoPrize, 0) + INCREASE_VALUE));
     }
 
     private void calculateEarningsRate(final int payment, final List<LottoPrize> lottoPrizes) {
         int totalProfitMoney = lottoPrizes.stream()
                                           .map(LottoPrize::getPrizeMoney)
-                                          .reduce(ZERO_VALUE, Integer::sum);
+                                          .reduce(0, Integer::sum);
 
-        if (totalProfitMoney == ZERO_VALUE) {
-            this.earningsRate = ZERO_VALUE;
+        if (totalProfitMoney == 0) {
+            this.earningsRate = 0;
             return;
         }
 

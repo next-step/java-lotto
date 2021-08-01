@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 class LottosTest {
     private Lottos lottos;
@@ -14,9 +13,9 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = Lottos.from(List.of(
-                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)),
-                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)),
-                                     Lotto.from(Set.of(1, 2, 3, 4, 5, 6)))
+                                     Lotto.from("1, 2, 3, 4, 5, 6"),
+                                     Lotto.from("1, 2, 3, 4, 5, 6"),
+                                     Lotto.from("1, 2, 3, 4, 5, 6"))
                             );
     }
 

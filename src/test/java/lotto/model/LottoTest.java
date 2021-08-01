@@ -5,14 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 class LottoTest {
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        lotto = Lotto.from(Set.of(1, 2, 3, 4, 5, 6));
+        lotto = Lotto.from("1, 2, 3, 4, 5, 6");
     }
 
     @Test

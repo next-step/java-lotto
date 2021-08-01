@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 class LottoStatisticsTest {
     private LottoStatistics lottoStatistics;
@@ -15,7 +14,7 @@ class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         int payment = 3_000;
-        Lottos lottos = Lottos.from(List.of(Lotto.from(Set.of(1, 2, 3, 4, 5, 6))));
+        Lottos lottos = Lottos.from(List.of(Lotto.from("1, 2, 3, 4, 5, 6")));
         lottoStatistics = LottoStatistics.from(payment, lottos.scratch(WinningLotto.from("1, 2, 3, 7, 8, 9")));
     }
 
