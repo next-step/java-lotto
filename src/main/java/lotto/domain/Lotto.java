@@ -18,4 +18,9 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers.getLottoNumbers();
     }
+
+
+    public int checkWinning(Lotto fourthLotto) {
+        return this.lottoNumbers.checkWinning(fourthLotto.getLottoNumbers());
+    }
 }
