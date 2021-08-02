@@ -9,8 +9,8 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
     private static final String ZERO_OR_POSITIVE_NUMBER_PATTERN = "^[0-9]+$";
     private static final String OR = "|";
-    private static final int SECOND_GROUP_INDEX = 1;
-    private static final int THIRD_GROUP_INDEX = 2;
+    private static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
+    private static final int INPUT_REMOVED_CUSTOMER_DELIMITER_GROUP_INDEX = 2;
     private static final int DEFAULT_SUM_VALUE = 0;
     private static final int INITIAL_SUM_VALUE = 0;
 
@@ -47,7 +47,7 @@ public class Calculator {
         String delimiters = DEFAULT_DELIMITERS;
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(SECOND_GROUP_INDEX);
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_GROUP_INDEX);
             delimiters += OR + customDelimiter;
         }
         return delimiters;
@@ -56,7 +56,7 @@ public class Calculator {
     private static String getInputRemovedCustomDelimiter(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         if (matcher.find()) {
-            return matcher.group(THIRD_GROUP_INDEX);
+            return matcher.group(INPUT_REMOVED_CUSTOMER_DELIMITER_GROUP_INDEX);
         }
         return input;
     }
