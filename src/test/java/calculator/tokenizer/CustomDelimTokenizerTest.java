@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CustomTokenizerTest {
-    private CustomTokenizer tokenizer = new CustomTokenizer();
+class CustomDelimTokenizerTest {
+    private CustomDelimTokenizer tokenizer = new CustomDelimTokenizer();
 
     @Test
     @DisplayName("정상적인 값이 입력되면 문자열이 정상적으로 분리된다")

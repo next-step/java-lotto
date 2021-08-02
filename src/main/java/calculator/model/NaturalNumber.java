@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.exception.NotNaturalNumberException;
+
 import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
@@ -19,7 +21,7 @@ public class NaturalNumber {
 
     private static void validate(String naturalNumber) {
         if (!NATURAL_NUMBER_PATTERN.matcher(naturalNumber).matches()) {
-            throw new RuntimeException("Not a natural number.");
+            throw new NotNaturalNumberException();
         }
     }
 }
