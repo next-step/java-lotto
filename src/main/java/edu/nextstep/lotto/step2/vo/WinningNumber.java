@@ -1,8 +1,9 @@
 package edu.nextstep.lotto.step2.vo;
 
-public class WinningNumber {
+import edu.nextstep.lotto.common.BusinessException;
+import edu.nextstep.lotto.step2.error.LottoError;
 
-    private static final String NUMBER_FORMAT_EXCEPTION = "숫자만 입력 가능합니다.";
+public class WinningNumber {
 
     private final int number;
 
@@ -16,7 +17,7 @@ public class WinningNumber {
         try {
             number = Integer.parseInt(text.trim());
         } catch (NumberFormatException e) {
-            throw new RuntimeException(NUMBER_FORMAT_EXCEPTION);
+            throw new BusinessException(LottoError.INVALID_VALUE_NOT_NUMBER_FORMAT);
         }
 
         return number;

@@ -1,5 +1,8 @@
 package edu.nextstep.lotto.step2.view;
 
+import edu.nextstep.lotto.common.BusinessException;
+import edu.nextstep.lotto.step2.error.LottoError;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -10,7 +13,12 @@ public class InputView {
 
     public int getPurchaseAmount() {
         System.out.println(QUESTION_PURCHASE_AMOUNT);
-        return Integer.parseInt(scanner.nextLine());
+
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new BusinessException(LottoError.INVALID_VALUE_NOT_NUMBER_FORMAT);
+        }
     }
 
     public String getWinningNumber() {
