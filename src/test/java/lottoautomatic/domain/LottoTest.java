@@ -1,6 +1,5 @@
 package lottoautomatic.domain;
 
-import lottoautomatic.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,7 +46,7 @@ class LottoTest {
 
 
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "지난주 당첨 번호와 비교 {index} [{arguments}]")
 	@MethodSource("matchNumbers")
 	@DisplayName("지난주 당첨 번호와 비교")
 	void match_numbers(List<Integer> lottoNumbers, int matchedCount) throws Exception {
@@ -57,7 +56,7 @@ class LottoTest {
 
 		//when
 		lotto.generateNumbers(() -> lottoNumbers);
-		int matchesNumber = lotto.matchingCount(lastWeekNumbers);
+		int matchesNumber = lotto.matchingQuantityFrom(lastWeekNumbers);
 
 		//then
 		assertThat(matchesNumber).isEqualTo(matchedCount);

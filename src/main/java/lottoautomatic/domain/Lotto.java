@@ -6,8 +6,6 @@ import java.util.List;
 public class Lotto {
 
 	private final List<Integer> numbers = new ArrayList<>();
-	public Lotto() {
-	}
 
 	public void generateNumbers(LottoNumberGenerator generator) {
 		if (generator.generate().size() != 6) {
@@ -20,8 +18,7 @@ public class Lotto {
 		return numbers;
 	}
 
-
-	public int matchingCount(List<Integer> lastWeekNumbers) {
+	public int matchingQuantityFrom(List<Integer> lastWeekNumbers) {
 		int matchedCount = 0;
 		for (Integer lastWeekNumber : lastWeekNumbers) {
 			matchedCount += getMatchedCount(lastWeekNumber);
@@ -31,6 +28,11 @@ public class Lotto {
 
 	private int getMatchedCount(Integer lastWeekNumber) {
 		return numbers.contains(lastWeekNumber) ? 1 : 0;
+	}
+
+	@Override
+	public String toString() {
+		return numbers().toString();
 	}
 
 }
