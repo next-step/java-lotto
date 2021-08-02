@@ -1,14 +1,22 @@
-//package lotto.domain;
-//
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//
-//import java.util.Arrays;
-//
-//import static org.assertj.core.api.Assertions.assertThat;
-//
-//public class LottoNumbersTests {
-//
+package lotto.domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class LottoNumbersTests {
+
+    @DisplayName("로또 번호 담는 일급 객체 생성 테스트")
+    @Test
+    void createLottoNumbersTest() {
+
+        assertThat(LottoNumbers.of(Arrays.asList(new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)))).isEqualTo(LottoNumbers.of(Arrays.asList(new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9))));
+
+    }
+
 //    @DisplayName("로또 번호 담는 일급 객체 생성 테스트")
 //    @Test
 //    void createLottoNumbersTest() {
@@ -34,4 +42,4 @@
 //
 //        assertThat(Arrays.toString(lottoNumbers.getMatchingRecords(winningLottoNumber))).isEqualTo("[0, 0, 1, 1]");
 //    }
-//}
+}
