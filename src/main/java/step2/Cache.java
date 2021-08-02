@@ -3,6 +3,7 @@ package step2;
 public class Cache implements Money {
 
     private static final String NEGATIVE_MONEY_EXCEPTION = "돈은 음수가 될 수 없습니다.";
+    private static final Integer ZERO = 0;
 
     private final int cache;
 
@@ -12,7 +13,7 @@ public class Cache implements Money {
     }
 
     private void validateMoney(int cache) {
-        if (cache < 0) {
+        if (cache < ZERO) {
             throw new IllegalArgumentException(NEGATIVE_MONEY_EXCEPTION);
         }
     }
