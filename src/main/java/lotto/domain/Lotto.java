@@ -14,17 +14,17 @@ public class Lotto {
     private static final int LIMIT_SIZE = 6;
 
     public Lotto(List<Integer> numbers) {
-        validateNumber(numbers);
-        addLottoNumber(numbers);
+        validateNumbers(numbers);
+        addLottoNumbers(numbers);
     }
 
-    private void addLottoNumber(List<Integer> numbers) {
+    private void addLottoNumbers(List<Integer> numbers) {
         for(int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
     }
 
-    private void validateNumber(List<Integer> numbers) {
+    private void validateNumbers(List<Integer> numbers) {
         if(isNullOrEmpty(numbers) || numbers.size() != LIMIT_SIZE) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }

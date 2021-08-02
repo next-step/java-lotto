@@ -28,15 +28,6 @@ class LottoShopTest {
         }).withMessageMatching("최소 1000원 이상 지불하셔야 합니다.");
     }
 
-    /*
-    @DisplayName("구입금액이 1000원 이상일때 객체 생성")
-    @ParameterizedTest
-    @ValueSource(ints = {1000, 1500, 2000})
-    void validateAmount_구입가격이_1000원_이상(int input) {
-        assertThat(lottoShop.buyLotto(input)).isInstanceOf(LottoShop.class);
-    }
-    */
-
     @DisplayName("로또용지가 넣은 돈만큼 나오는지 확인")
     @ParameterizedTest
     @CsvSource(value = {"1700:1", "5600:5", "20000:20"}, delimiter = ':')

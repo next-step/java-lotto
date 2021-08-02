@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -9,6 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class RankTest {
+
+    @DisplayName("등수유형별로 생성되는지 확인")
+    @Test
+    void test() {
+        assertThat(Rank.values().length).isEqualTo(5);
+    }
 
     @DisplayName("맞춘 횟수에 맞는 당첨금")
     @ParameterizedTest

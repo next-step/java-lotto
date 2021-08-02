@@ -8,11 +8,11 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        checkNumbersRange(number);
+        validateNumber(number);
         this.number = number;
     }
 
-    private void checkNumbersRange(int number) {
+    private void validateNumber(int number) {
         if(number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }

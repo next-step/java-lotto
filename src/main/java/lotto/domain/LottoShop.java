@@ -14,9 +14,7 @@ public class LottoShop {
 
     public List<Lotto> buyLotto(int amount, PurchaseStrategy purchaseStrategy) {
         validateAmount(amount);
-
         printLotto(amount, purchaseStrategy);
-
         return lottos;
     }
 
