@@ -7,14 +7,14 @@ public enum Rank {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-    private final int hitsCount;
+    private final int hitCount;
     private final int winningMoney;
     private static final int MIN_HITS_COUNT = 0;
     private static final int MAX_HITS_COUNT = 6;
     private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "맞춘 횟수는 0에서 6 사이여야 합니다.";
 
-    Rank(int hitsCount, int winningMoney) {
-        this.hitsCount = hitsCount;
+    Rank(int hitCount, int winningMoney) {
+        this.hitCount = hitCount;
         this.winningMoney = winningMoney;
     }
 
@@ -22,7 +22,7 @@ public enum Rank {
         validateHitsCount(hitsCount);
 
         for(Rank rank : values()) {
-            if(hitsCount == rank.getHitsCount()) {
+            if(hitsCount == rank.getHitCount()) {
                 return rank.getWinningMoney();
             }
         }
@@ -32,7 +32,7 @@ public enum Rank {
     public static Rank returnRank(int hitsCount) {
         validateHitsCount(hitsCount);
         for(Rank rank : values()) {
-            if(hitsCount == rank.getHitsCount()) {
+            if(hitsCount == rank.getHitCount()) {
                 return rank;
             }
         }
@@ -45,8 +45,8 @@ public enum Rank {
         }
     }
 
-    public int getHitsCount() {
-        return this.hitsCount;
+    public int getHitCount() {
+        return this.hitCount;
     }
 
     public int getWinningMoney() {

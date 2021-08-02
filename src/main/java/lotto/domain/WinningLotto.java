@@ -2,20 +2,26 @@ package lotto.domain;
 
 public class WinningLotto extends Lotto{
 
+    private static final int MISS_HIT_COUNT = 0;
     private static final int INIT_COUNT = 0;
+    private static final int CUT_LINE_COUNT = 3;
 
     public WinningLotto(String input) {
         super(input);
     }
 
-    public int getMatchingCount(Lotto lotto) {
-        int hitsCount = 0;
+    public boolean checkRank(Lotto lotto, Rank rank) {
+        return getMatchingCount(lotto) == rank.getHitCount();
+    }
+
+    private int getMatchingCount(Lotto lotto) {
+        int hitsCount = INIT_COUNT;
 
         for(LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             hitsCount += containsNumber(lottoNumber);
         }
 
-        return hitsCount;
+        return checkCutLine(hitsCount);
     }
 
     private int containsNumber(LottoNumber lottoNumber) {
@@ -28,16 +34,15 @@ public class WinningLotto extends Lotto{
         return count;
     }
 
+    private int checkCutLine(int hitsCount) {
+        if(hitsCount < CUT_LINE_COUNT) {
+            return MISS_HIT_COUNT;
+        }
+        return hitsCount;
+    }
 
 
-
-
-
-
-
-
-
-
+    /*
     public int getMatchingLottoNumberCount(Rank rank, Lottos purchasedLottos) {
         int matchingCount = INIT_COUNT;
         int hitsCount = INIT_COUNT;
@@ -96,5 +101,5 @@ public class WinningLotto extends Lotto{
 
         return prize;
     }
-
+    */
 }
