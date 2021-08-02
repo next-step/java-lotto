@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game {
+    public static final String YIELD_FORMAT = "%.2f";
     private final List<Lotto> lottoList;
     private Lotto previousLotto;
 
@@ -16,8 +17,8 @@ public class Game {
     }
 
     public int getNumberOfRightLotto(int rightNumber) {
-        return (int) lottoList.stream().
-                filter(lotto -> lotto.getCountOfRightNumber(previousLotto) == rightNumber)
+        return (int) lottoList.stream()
+                .filter(lotto -> lotto.isCountOfRightNumber(previousLotto, rightNumber))
                 .count();
     }
 
@@ -27,14 +28,10 @@ public class Game {
                 .mapToLong(Long::valueOf)
                 .sum();
 
-        return String.format("%.2f", totalWinMoney / (lottoList.size() * LottoMachine.LOTTO_PRICE * 1f) - 0.005f);
+        return String.format(YIELD_FORMAT, totalWinMoney / (lottoList.size() * LottoMachine.LOTTO_PRICE * 1f) - 0.005f);
     }
 
     public List<Lotto> getLottoList() {
         return lottoList;
-    }
-
-    public int getLottoSize() {
-        return lottoList.size();
     }
 }

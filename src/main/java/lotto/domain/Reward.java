@@ -7,8 +7,8 @@ public enum Reward {
     FIVE(5, 1500000),
     SIX(6, 2000000000);
 
-    private int rightNumberCount;
-    private int money;
+    private final int rightNumberCount;
+    private final int money;
 
     public int getRightNumberCount() {
         return rightNumberCount;

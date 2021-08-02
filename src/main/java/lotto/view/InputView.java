@@ -10,20 +10,19 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    public static final String INPUT_BUY_MONEY_MESSAGE = "구매금액을 입력해 주새요.";
-    public static final String INPUT_PREVIOUS_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String SPLIT_DELIMITER = ",";
+
     private static Scanner scanner;
 
     public static int inputBuyMoney() {
         scanner = new Scanner(System.in);
-        System.out.println(INPUT_BUY_MONEY_MESSAGE);
+        System.out.println("구매금액을 입력해 주새요.");
         return scanner.nextInt();
     }
 
     public static Lotto inputPreviousLottoNumber() {
         scanner = new Scanner(System.in);
-        System.out.println(INPUT_PREVIOUS_LOTTO_NUMBER_MESSAGE);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputLottoNumberString = scanner.nextLine();
 
         Set<Ball> lottoNumberSet = Arrays.stream(inputLottoNumberString.split(SPLIT_DELIMITER))

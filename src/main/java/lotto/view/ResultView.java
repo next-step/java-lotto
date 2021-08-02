@@ -7,7 +7,7 @@ import lotto.domain.Reward;
 public class ResultView {
 
     public static void resultLottoCount(Game game) {
-        System.out.println(game.getLottoSize() + "개를 구매했습니다.");
+        System.out.println(game.getLottoList().size() + "개를 구매했습니다.");
     }
 
     public static void resultLottoNumbers(Game game) {

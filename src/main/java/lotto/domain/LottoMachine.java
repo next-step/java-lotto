@@ -5,15 +5,13 @@ import java.util.*;
 public class LottoMachine {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
-    public static final int MAX_NUMBER = 45;
-    public static final int MIN_NUMBER = 1;
     public static final int LOTTO_PRICE = 1000;
 
-    private static List<Ball> ballList = initList();
+    private static final List<Ball> ballList = initList();
 
     private static List<Ball> initList() {
-        List<Ball> ballList = new ArrayList<>(MAX_NUMBER);
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+        List<Ball> ballList = new ArrayList<>(Ball.MAX_NUMBER);
+        for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
             ballList.add(new Ball(i));
         }
         return ballList;

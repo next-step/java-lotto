@@ -17,19 +17,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GameTest {
 
     Game game;
-    Set<Ball> ballSet123456;
 
     @BeforeEach
     void setUp() {
 
         List<Lotto> lottoList = new ArrayList<>(14);
 
-        ballSet123456 = Sets.newLinkedHashSet(new Ball(1),
+        Set<Ball> ballSet123456 = Sets.newLinkedHashSet(new Ball(1),
                 new Ball(2),
                 new Ball(3),
                 new Ball(4),
                 new Ball(5),
                 new Ball(6));
+
         LinkedHashSet<Ball> ballSet = Sets.newLinkedHashSet(
                 new Ball(10),
                 new Ball(11),
@@ -37,6 +37,7 @@ public class GameTest {
                 new Ball(13),
                 new Ball(14),
                 new Ball(15));
+
         LinkedHashSet<Ball> previousBallSet = Sets.newLinkedHashSet(
                 new Ball(10),
                 new Ball(11),
@@ -57,7 +58,7 @@ public class GameTest {
     @Test
     @DisplayName("게임 생성")
     void create() {
-        assertThat(game.getLottoSize()).isEqualTo(14);
+        assertThat(game.getLottoList()).hasSize(14);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class GameTest {
     void createRandom() {
         List<Lotto> lottoList = LottoMachine.buyRandomLotto(5000);
         Game game = new Game(lottoList);
-        assertThat(game.getLottoSize()).isEqualTo(5);
+        assertThat(game.getLottoList()).hasSize(5);
     }
 
     @ParameterizedTest
@@ -78,7 +79,7 @@ public class GameTest {
     @Test
     @DisplayName("수익률 계산하기")
     void getYield() {
-        assertThat(game.getLottoSize()).isEqualTo(14);
+        assertThat(game.getLottoList()).hasSize(14);
         assertThat(game.getYield()).isEqualTo("0.35");
     }
 }

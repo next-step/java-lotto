@@ -9,17 +9,20 @@ public class Lotto {
 
     public static final int NUMBER_SIZE = 6;
     public static final String VALID_NUMBER_COUNT = "로또 번호 갯수는 " + NUMBER_SIZE + "개가 되어야합니다. (중복된 숫자도 오면 안됩니다.)";
+
     private final Set<Ball> balls;
 
     public Lotto(Set<Ball> balls) {
         validNumberCountSize(balls);
-        this.balls = balls;
+        this.balls = balls.stream().
+                sorted().
+                collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public int getCountOfRightNumber(Lotto previousLotto) {
-        return (int) balls.stream().
+    public boolean isCountOfRightNumber(Lotto previousLotto, int count) {
+        return balls.stream().
                 filter(previousLotto.balls::contains)
-                .count();
+                .count() == count;
     }
 
     private void validNumberCountSize(Set<Ball> balls) {
@@ -29,10 +32,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return balls.stream().
-                sorted().
-                collect(Collectors.toCollection(LinkedHashSet::new)).
-                toString();
+        return balls.toString();
     }
 
     @Override
