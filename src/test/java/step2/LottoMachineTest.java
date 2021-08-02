@@ -13,9 +13,9 @@ class LottoMachineTest {
         int givenMoney = 10000;
         int expectedNumberOfLotto = 10;
 
-        LottoMachine lottoMachine = new LottoMachine();
+
         // When
-        List<Lotto> lottos = lottoMachine.createLottos(givenMoney);
+        List<Lotto> lottos = LottoMachine.createLottos(givenMoney);
 
         // Then
 
