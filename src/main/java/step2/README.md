@@ -2,9 +2,9 @@
 
 - [ ] 일정한 금액을 투입하고 투입 금액만큼의 로또를 구입 할 수 있어야한다. #LottoGame#main()
 - [ ] 사용자는 로또를 구입 할 수 있다 #User#buyLotto()
-    - [ ] 로또 기계에서 로또를 살 수 있다. #LottoMachine#sell()
-        - [ ] 투입 금액만큼의 로또를 만든다. #Lotto#createLotto()
-            - [ ] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #NumberGenerator#createLottoNumbers()
+    - [ ] 로또 기계에서 투입 금액만큼의 로또를 살 수 있다. #LottoMachine#sell()
+        - [x] 로또를 만든다. #Lotto#createLotto()
+    - [ ] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #NumberGenerator#createLottoNumbers()
     - [ ] 사용자는 지갑에 돈을 인출 할 수 있다. #Wallet#withDrow()
     - [ ] 사용자는 지갑에 돈을 저장 할 수 있다. #Wallet#save()
 - [ ] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
