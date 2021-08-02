@@ -1,5 +1,6 @@
-package lottoautomatic;
+package lottoautomatic.domain;
 
+import lottoautomatic.domain.LottoNumberShuffle;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

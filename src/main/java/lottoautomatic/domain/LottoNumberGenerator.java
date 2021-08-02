@@ -1,4 +1,4 @@
-package lottoautomatic;
+package lottoautomatic.domain;
 
 import java.util.List;
 
