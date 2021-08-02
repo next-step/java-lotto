@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StringUtil {
     public static String[] separator(String inputString){
-        return inputString.split(",");
+        return inputString.split(", |,");
     }
 
     public static List<Integer> StringArrayToIntegerList(String[] inputStringArray) {

@@ -20,9 +20,15 @@ public class PlayLotto {
     private static int THIRD_INDEX = 3;
     private static int FOURTH_INDEX = 4;
 
-    public static List<Lotto> createLotto(int cash) {
+    public static int calculateLottoCount(int cash) {
+        if(cash % 1000 == 0) {
+            throw new RuntimeException("1000원 단위로 입력하세요.");
+        }
+        return cash / LOTTO_PRICE;
+    }
+
+    public static List<Lotto> createLotto(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = cash / LOTTO_PRICE;
         for(int i=0; i<lottoCount; i++){
             lottos.add(new Lotto(new CreateShffledLottoNumbers()));
         }
@@ -45,7 +51,7 @@ public class PlayLotto {
     }
 
 
-    public static double calculateProfit(int cash, int[] winningArray) {
+    public static double calculateProfitRate(int cash, int[] winningArray) {
         int totalMoney = 0;
         for (int index = 0; index < winningArray.length; index++) {
             totalMoney += calculate(index, winningArray[index]);

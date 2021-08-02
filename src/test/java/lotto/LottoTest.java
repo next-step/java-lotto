@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -78,7 +77,7 @@ public class LottoTest {
     void profitTest(int none, int firstCount, int secondCount, int thirdCound, int fourthCount, double testProfit){
         int cash = 14000;
         int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCound, fourthCount};
-        double profit = PlayLotto.calculateProfit(cash,prizeArray);
+        double profit = PlayLotto.calculateProfitRate(cash,prizeArray);
         assertThat(profit).isEqualTo(testProfit);
     }
 }
