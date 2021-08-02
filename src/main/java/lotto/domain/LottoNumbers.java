@@ -5,14 +5,6 @@ import java.util.List;
 
 public class LottoNumbers {
     private List<Integer> lottoNumbers = new LinkedList<>();
-    private final int FOURTH_COUNT = 3;
-    private final int FOURTH = 4;
-    private final int THIRD_COUNT = 4;
-    private final int THIRD = 3;
-    private final int SECOND_COUNT = 5;
-    private final int SECOND = 2;
-    private final int FIRST_COUNT = 6;
-    private final int FIRST = 1;
     private final int NONE = 0;
     private final int PLUS = 1;
 
@@ -40,18 +32,7 @@ public class LottoNumbers {
     }
 
     private int getWinning(int containCount) {
-        if (containCount == FIRST_COUNT) {
-            return FIRST;
-        }
-        if (containCount == SECOND_COUNT) {
-            return SECOND;
-        }
-        if (containCount == THIRD_COUNT) {
-            return THIRD;
-        }
-        if (containCount == FOURTH_COUNT) {
-            return FOURTH;
-        }
-        return NONE;
+        LottoPrize lottoPrize = LottoPrize.findLottoPrizeOfCount(containCount);
+        return lottoPrize.getPrize();
     }
 }

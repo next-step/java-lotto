@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoPrize;
 
 import java.util.List;
+
+import static lotto.domain.LottoPrize.*;
 
 public class ResultView {
 
@@ -31,22 +34,22 @@ public class ResultView {
     }
 
     public static void printPrizeResult(int[] prizeArray){
-        for (int i = prizeArray.length-1; i > 0; i--) {
-            printPrize(i, prizeArray[i]);
+        for (int prize = prizeArray.length-1; prize > 0; prize--) {
+            printPrize(prize, prizeArray[prize]);
         }
     }
 
-    private static void printPrize(int i, int count) {
-        if (i == 4) {
+    private static void printPrize(int prize, int count) {
+        if (prize == FOURTH.getPrize()) {
             printFourthResult(count);
         }
-        if (i == 3) {
+        if (prize == THIRD.getPrize()) {
             printThirdResult(count);
         }
-        if (i == 2) {
+        if (prize == SECOND.getPrize()) {
             printSecondResult(count);
         }
-        if (i == 1) {
+        if (prize == FIRST.getPrize()) {
             printFirstResult(count);
         }
     }

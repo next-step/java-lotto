@@ -20,7 +20,7 @@ public class Lotto {
     }
 
 
-    public int checkWinning(Lotto fourthLotto) {
-        return this.lottoNumbers.checkWinning(fourthLotto.getLottoNumbers());
+    public int checkWinning(Lotto lotto) {
+        return this.lottoNumbers.checkWinning(lotto.getLottoNumbers());
     }
 }
