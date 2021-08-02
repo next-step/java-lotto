@@ -11,6 +11,10 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
+    public LottoNumber winOfLotto(List<Integer> winOfNumbers) {
+        return new LottoNumber(winOfNumbers);
+    }
+
     public static List<Lotto> createLottos(Wallet wallet) {
         final int lottoCount = wallet.currentMoney().money() / LOTTO_PRICE;
 
