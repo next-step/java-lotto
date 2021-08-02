@@ -1,13 +1,13 @@
 package calculator.model;
 
-import calculator.utils.CalculatorUtils;
+import calculator.utils.RegexComposer;
 
 public class Calculator {
 
 	private final Characters characters;
 
 	public Calculator(String calculatorValue) {
-		characters = new Characters(CalculatorUtils.createCharacters(calculatorValue));
+		characters = new Characters(RegexComposer.createCharacters(calculatorValue));
 	}
 
 	public int calculate() {
