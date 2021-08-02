@@ -13,9 +13,13 @@ public class InputView {
     }
 
     public static String inputWinningNumber() {
-        scanner.nextLine();
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        try{
+            scanner.nextLine();
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            return scanner.nextLine();
+        }finally {
+            scanner.close();
+        }
     }
 
     public static void closeScanner() {
