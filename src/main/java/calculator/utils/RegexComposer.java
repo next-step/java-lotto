@@ -8,13 +8,19 @@ import java.util.stream.Collectors;
 
 import calculator.model.Character;
 
-public class CalculatorUtils {
+public class RegexComposer {
 
 	private static final String PATTERN_REG_EXP = "^//(.)\n(.*)$";
 	private static final String DEFAULT_REG_EXP = "[,:]";
+	private static final Pattern pattern = Pattern.compile(PATTERN_REG_EXP);
+
+	private RegexComposer() {
+
+	}
 
 	public static List<Character> createCharacters(String calculatorValue) {
-		Matcher matcher = Pattern.compile(PATTERN_REG_EXP).matcher(calculatorValue);
+		Validation.validStringEmptyCheck(calculatorValue);
+		Matcher matcher = pattern.matcher(calculatorValue);
 		if (matcher.find()) {
 			return Arrays.stream(matcher.group(2).split(matcher.group(1)))
 				.map(text -> new Character(toInt(text)))
