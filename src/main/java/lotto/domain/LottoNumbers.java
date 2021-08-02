@@ -1,18 +1,34 @@
 package lotto.domain;
 
-import java.util.List;
+import lotto.exception.InvalidLottoNumberCountException;
+
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<LottoNumber> lottoNumbers) {
+    private static final int NORMAL_LOTTO_NUMBER_COUNT = 6;
+
+    private final Set<LottoNumber> lottoNumbers;
+
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers of(List<LottoNumber> lottoNumbers) {
+    public static LottoNumbers of(Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         return new LottoNumbers(lottoNumbers);
+    }
+
+    private static void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != NORMAL_LOTTO_NUMBER_COUNT) {
+            throw new InvalidLottoNumberCountException();
+        }
+    }
+
+    public int size() {
+        return lottoNumbers.size();
     }
 
     @Override
@@ -28,11 +44,12 @@ public class LottoNumbers {
         return Objects.hash(lottoNumbers);
     }
 
-    //    public String value() {
-//        return "[" + lottoNumbers.stream()
-//                .map(lottoNumber -> lottoNumber.value())
-//                .collect(Collectors.joining(", ")) + "]";
-//    }
+    @Override
+    public String toString() {
+        return "[" + lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.toString())
+                .collect(Collectors.joining(", ")) + "]";
+    }
 //
 //    public int[] getMatchingRecords(LottoNumber winningLottoNumber) {
 //        int[] matchingRecords = new int[4];
