@@ -8,7 +8,7 @@ public class StringUtil {
         return inputString.split(", |,");
     }
 
-    public static List<Integer> StringArrayToIntegerList(String[] inputStringArray) {
+    public static List<Integer> stringArrayToIntegerList(String[] inputStringArray) {
         List<Integer> integerList = new LinkedList<>();
         for (String inputString : inputStringArray) {
             integerList.add(Integer.parseInt(inputString));

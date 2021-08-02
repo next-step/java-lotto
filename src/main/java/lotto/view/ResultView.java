@@ -28,7 +28,7 @@ public class ResultView {
     }
 
     public static void printPrizeResult(int[] prizeArray){
-        for (int i=prizeArray.length-1; i>0; i--) {
+        for (int i = prizeArray.length-1; i > 0; i--) {
             printPrize(i, prizeArray[i]);
         }
     }

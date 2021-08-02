@@ -24,7 +24,7 @@ public class UtilTest {
     void separatorTest(){
         String inputString = "1,2,3,4,5,6";
         String[] inputStringArray = StringUtil.separator(inputString);
-        List<Integer> lottoNumbers = StringUtil.StringArrayToIntegerList(inputStringArray);
+        List<Integer> lottoNumbers = StringUtil.stringArrayToIntegerList(inputStringArray);
         assertThat(lottoNumbers).contains(1,2,3,4,5,6);
     }
 }

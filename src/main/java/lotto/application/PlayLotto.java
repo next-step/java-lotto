@@ -21,7 +21,7 @@ public class PlayLotto {
     private static int FOURTH_INDEX = 4;
 
     public static int calculateLottoCount(int cash) {
-        if (cash % 1000 != 0) {
+        if (cash % LOTTO_PRICE != 0) {
             throw new RuntimeException("1000원 단위로 입력하세요.");
         }
         return cash / LOTTO_PRICE;
@@ -29,7 +29,7 @@ public class PlayLotto {
 
     public static List<Lotto> createLotto(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i<lottoCount; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(new CreateShffledLottoNumbers()));
         }
         return lottos;
@@ -45,7 +45,7 @@ public class PlayLotto {
     }
 
     private static Lotto createWinningLotto(String winningNumberString) {
-        List<Integer> winningNumberList = StringUtil.StringArrayToIntegerList(StringUtil.separator(winningNumberString));
+        List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumberList);
         return new Lotto(winningLottoNumbers);
     }
