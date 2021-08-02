@@ -1,11 +1,11 @@
 package step2.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoMarket {
 
-    private final int PRICE = 1000;
+    private static final int PRICE = 1000;
+
     private LottoMachine machine;
     private LottoList myLottoList;
 
@@ -22,40 +22,48 @@ public class LottoMarket {
         return PRICE * count;
     }
 
-    public Map<Integer,Integer> checkNumToWinner(Lotto winner){
-        Map<Integer,Integer> result = new HashMap<>();
+    public Map<Winnings, Integer> checkNumToWinner(Lotto winner) {
+        List<Winnings> result = new ArrayList<>();
 
-        result.put(3,0);
-        result.put(4,0);
-        result.put(5,0);
-        result.put(6,0);
-
-        for(Lotto myLotto : myLottoList.getAll()){
+        for (Lotto myLotto : myLottoList.getAll()) {
             int matchCount = matchLotto(winner, myLotto);
             putResult(result, matchCount);
         }
-        return result;
+        return listToMap(result);
     }
 
     private int matchLotto(Lotto winner, Lotto myLotto) {
         int count = 0;
-        for(int number : myLotto.getNumbers()){
+        for (int number : myLotto.getNumbers()) {
             count = checkLotto(winner, number, count);
         }
         return count;
     }
 
     private int checkLotto(Lotto winner, int number, int count) {
-        if(winner.getNumbers().contains(number)){
+        if (winner.getNumbers().contains(number)) {
             count++;
         }
         return count;
     }
 
-    private void putResult(Map<Integer, Integer> result, int matchCount) {
-        if(matchCount >= 3){
-            result.put(matchCount, result.get(matchCount)+1);
+    private void putResult(List<Winnings> result, int matchCount) {
+        if (matchCount >= 3) {
+            result.add(Winnings.find(matchCount));
         }
+    }
+
+    private Map<Winnings, Integer> listToMap(List<Winnings> result) {
+        Map<Winnings, Integer> resultMap = new LinkedHashMap<>();
+
+        for (Winnings winnings : Winnings.values()) {
+            resultMap.put(winnings, 0);
+        }
+        resultMap.remove(Winnings.NOTHING);
+        for (Winnings WINNINGS : result) {
+            resultMap.put(WINNINGS, resultMap.get(WINNINGS) + 1);
+        }
+        return resultMap;
     }
 
 }

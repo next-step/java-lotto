@@ -1,11 +1,11 @@
 package step2.domain;
 
 public enum Winnings {
-    FIRST(6,2000000000),
-    SECOND(5,1500000),
-    THIRD(4,50000),
-    FOURTH(3,5000),
-    NOTHING(0,0);
+    NOTHING(0, 0),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private int price;
@@ -15,12 +15,29 @@ public enum Winnings {
         this.price = price;
     }
 
-    public static int find(int count){
-        for(Winnings WIN : values()){
-            if(WIN.matchCount == count){
+    public static int findPrice(int count) {
+        for (Winnings WIN : values()) {
+            if (WIN.matchCount == count) {
                 return WIN.price;
             }
         }
         return NOTHING.price;
+    }
+
+    public static Winnings find(int count) {
+        for (Winnings WIN : values()) {
+            if (WIN.matchCount == count) {
+                return WIN;
+            }
+        }
+        return NOTHING;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

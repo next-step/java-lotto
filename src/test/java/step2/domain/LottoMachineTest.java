@@ -29,6 +29,6 @@ class LottoMachineTest {
         };
 
         LottoMachine machine = LottoMachine.of(strategy);
-        assertThat(machine.makeLotto()).containsExactly(1,2,3,4,5,6);
+        assertThat(machine.makeLotto().getNumbers()).containsExactly(1,2,3,4,5,6);
     }
 }

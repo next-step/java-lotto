@@ -41,8 +41,8 @@ class LottoMarketTest {
 
         market.buy(1000);
 
-        assertThat(market.checkNumToWinner(Lotto.from(Arrays.asList(1,2,3,4,5,6))).get(6))
-                .isEqualTo(1);
+        assertThat(market.checkNumToWinner(Lotto.from(Arrays.asList(1,2,3,4,5,6))).get(0))
+                .isEqualTo(Winnings.FIRST);
     }
 
 }

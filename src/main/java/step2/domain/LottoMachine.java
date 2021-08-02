@@ -2,8 +2,6 @@ package step2.domain;
 
 import step2.strategy.LottoNumStrategy;
 
-import java.util.List;
-
 public class LottoMachine {
 
     private LottoNumStrategy strategy;
@@ -23,8 +21,8 @@ public class LottoMachine {
         return new LottoMachine(strategy);
     }
 
-    public List<Integer> makeLotto() {
-        return strategy.makeLotto().getNumbers();
+    public Lotto makeLotto() {
+        return strategy.makeLotto();
     }
 
 }

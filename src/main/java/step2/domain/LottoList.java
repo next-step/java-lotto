@@ -15,12 +15,12 @@ public class LottoList {
     }
 
     public void buyLotto(LottoMachine machine) {
-        this.lottoList.add(Lotto.from(machine.makeLotto()));
+        this.lottoList.add(machine.makeLotto());
     }
 
     public Lotto getLotto(int idx) {
-        if(idx > lottoList.size()){
-            throw new IllegalArgumentException(String.format("입력한 인덱스(%d) 가 리스트 사이즈를 초과하엿습니다.",idx));
+        if (idx > lottoList.size()) {
+            throw new IllegalArgumentException(String.format("입력한 인덱스(%d) 가 리스트 사이즈를 초과하엿습니다.", idx));
         }
         return this.lottoList.get(idx);
     }

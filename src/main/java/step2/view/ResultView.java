@@ -15,22 +15,31 @@ public class ResultView {
         }
     }
 
-    public static void showResult(Map<Integer, Integer> result, int money) {
+    public static void showResult(Map<Winnings, Integer> result, int money) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
         int totalMoney = 0;
-        for (int correctCount : result.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", correctCount, Winnings.find(correctCount), result.get(correctCount));
-            if (result.get(correctCount) > 0) {
-                totalMoney += Winnings.find(correctCount) * result.get(correctCount);
+        for (Winnings WINNINGS : result.keySet()) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", WINNINGS.getMatchCount(), WINNINGS.getPrice(), result.get(WINNINGS));
+            if (result.get(WINNINGS) > 0) {
+                totalMoney += WINNINGS.getPrice() * result.get(WINNINGS);
             }
         }
-        System.out.printf("총 수익률은 %.2f 입니다.",calculateYield(money,totalMoney));
+        double yield = calculateYield(money, totalMoney);
+        String comment = getComment(yield);
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s)", yield, comment);
+    }
+
+    private static String getComment(double yield) {
+        if(yield >= 1){
+            return "이득이라는 의미임";
+        }
+        return "손해라는 의미임";
     }
 
     private static double calculateYield(int money, int totalMoney) {
-        if(totalMoney != 0){
-            return 1.0*totalMoney/money;
+        if (totalMoney != 0) {
+            return 1.0 * totalMoney / money;
         }
         return 0;
     }

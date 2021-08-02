@@ -1,20 +1,21 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final int LOTTO_SIZE = 6;
-    private final int MINIMUN = 1;
-    private final int MAXIMUN = 45;
+    private static final int LOTTO_SIZE = 6;
+    private static final int MINIMUM = 1;
+    private static final int MAXIMUM = 45;
 
     private List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
         validation(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<Integer>(numbers);
     }
 
     public static Lotto from(List<Integer> list) {
@@ -23,7 +24,7 @@ public class Lotto {
 
     private void validation(List<Integer> list) {
         if (list.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 길이는 6개 이어야 합니다.");
+            throw new IllegalArgumentException(String.format("로또 길이는 %d개 이어야 합니다.", LOTTO_SIZE));
         }
         if (isDuplicate(list)) {
             throw new IllegalArgumentException("숫자가 중복 되어있습니다.");
@@ -35,7 +36,7 @@ public class Lotto {
 
     private boolean isNumbersOutOfBoundary(List<Integer> list) {
         for (int num : list) {
-            if (num < MINIMUN || num > MAXIMUN) {
+            if (num < MINIMUM || num > MAXIMUM) {
                 return true;
             }
         }
@@ -47,18 +48,18 @@ public class Lotto {
         return set.size() != LOTTO_SIZE;
     }
 
+    public List<Integer> getNumbers() {
+        arrangeNumbers();
+        return new ArrayList<Integer>(numbers);
+    }
+
+    private void arrangeNumbers() {
+        this.numbers = numbers.stream().sorted((n1, n2) -> n1.compareTo(n2)).collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         arrangeNumbers();
         return this.numbers.toString();
-    }
-
-    public List<Integer> getNumbers() {
-        arrangeNumbers();
-        return numbers;
-    }
-
-    private void arrangeNumbers(){
-        this.numbers = numbers.stream().sorted((n1,n2) -> n1.compareTo(n2)).collect(Collectors.toList());
     }
 }

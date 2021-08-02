@@ -3,10 +3,12 @@ package step2;
 import step2.domain.LottoList;
 import step2.domain.LottoMachine;
 import step2.domain.LottoMarket;
+import step2.domain.Winnings;
 import step2.strategy.RandomLottoNum;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoApp {
@@ -24,8 +26,8 @@ public class LottoApp {
 
         ResultView.showList(myLottoList.getAll());
 
-        Map<Integer,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber());
+        Map<Winnings,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber());
 
-        ResultView.showResult(result,buyMoney);
+        ResultView.showResult(result, buyMoney);
     }
 }

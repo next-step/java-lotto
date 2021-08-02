@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -65,5 +66,22 @@ class LottoTest {
     void showNumbersASC() {
         Lotto lotto = Lotto.from(Arrays.asList(9, 5, 4, 3, 8, 1));
         assertThat(lotto.getNumbers()).containsExactly(1, 3, 4, 5, 8, 9);
+    }
+
+    @DisplayName("로또 내부 리스트 방어적 복사")
+    @Test
+    void addNumberToNumberList() {
+        List<Lotto> list = new ArrayList<>();
+        list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        list.stream().forEach(vo -> vo.getNumbers().add(7));
+        list.stream().forEach(vo -> vo.getNumbers().add(8));
+        list.stream().forEach(vo -> vo.getNumbers().add(9));
+
+        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }

@@ -3,10 +3,8 @@ package step2.view;
 import step2.domain.Lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
@@ -16,15 +14,15 @@ public class InputView {
         return Integer.valueOf(scanner.nextLine());
     }
 
-    public static Lotto inputWinnerNumber(){
+    public static Lotto inputWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] numbers = scanner.nextLine().split(",");
         return Lotto.from(convertStrToNum(numbers));
     }
 
-    public static List<Integer> convertStrToNum(String[] numbers){
+    public static List<Integer> convertStrToNum(String[] numbers) {
         List<Integer> result = new ArrayList<>();
-        for(String number : numbers){
+        for (String number : numbers) {
             result.add(Integer.valueOf(number));
         }
         return result;
