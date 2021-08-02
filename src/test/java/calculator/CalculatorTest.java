@@ -15,7 +15,7 @@ public class CalculatorTest {
         String input = null;
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 0);
+        assertEquals(Calculator.splitAndSum(input), 0);
     }
 
     @DisplayName("빈 문자열을 입력하면 0을 반환해야 한다.")
@@ -25,7 +25,7 @@ public class CalculatorTest {
         String input = "";
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 0);
+        assertEquals(Calculator.splitAndSum(input), 0);
     }
 
     @DisplayName("숫자를 하나 입력하면, 해당 숫자를 반환해야 한다.")
@@ -35,7 +35,7 @@ public class CalculatorTest {
         String input = "1";
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 1);
+        assertEquals(Calculator.splitAndSum(input), 1);
     }
 
     @DisplayName("쉼표(,) 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
@@ -45,7 +45,7 @@ public class CalculatorTest {
         String input = "1,2";
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 3);
+        assertEquals(Calculator.splitAndSum(input), 3);
     }
 
     @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
@@ -55,7 +55,7 @@ public class CalculatorTest {
         String input = "1,2:3";
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 6);
+        assertEquals(Calculator.splitAndSum(input), 6);
     }
 
     @DisplayName("커스텀 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
@@ -65,6 +65,6 @@ public class CalculatorTest {
         String input = "//;\n1;2;3";
 
         // when, then
-        assertEquals(Calculator.calculateAddition(input), 6);
+        assertEquals(Calculator.splitAndSum(input), 6);
     }
 }

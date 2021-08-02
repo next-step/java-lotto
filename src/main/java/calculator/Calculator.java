@@ -10,7 +10,7 @@ public class Calculator {
     private static final int SECOND_GROUP_INDEX = 1;
     private static final int THIRD_GROUP_INDEX = 2;
 
-    public static int calculateAddition(String input) {
+    public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
             return 0;
         }
