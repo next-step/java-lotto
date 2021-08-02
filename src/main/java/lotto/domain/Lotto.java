@@ -6,7 +6,6 @@ import static java.util.Collections.sort;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.strategy.GenerateLottoNumber;
-import lotto.strategy.RealGenerateLottoNumber;
 
 public class Lotto {
 
@@ -15,12 +14,16 @@ public class Lotto {
   public Lotto() {
   }
 
+  public Lotto(GenerateLottoNumber generateLottoNumber) {
+    creatLotte(generateLottoNumber);
+  }
+
   public List<LottoNumber> getLotto() {
     return lotto;
   }
 
   public void creatLotte(GenerateLottoNumber generateLottoNumber) {
-    generateLottoNumber = new RealGenerateLottoNumber(1,46);
+
     List<LottoNumber> numberPull = generateLottoNumber.createNumberPull();
     shuffle(numberPull);
 
