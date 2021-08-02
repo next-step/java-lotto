@@ -17,4 +17,13 @@ class StringAddCalculatorTest {
 
 		assertThat(result).isEqualTo(expected);
 	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"//+\n1+2,3=6", "//@\n1,2@3=6"}, delimiter = '=')
+	@DisplayName("커스텀 구분자를 추가 후 분리하여 덧셈")
+	void addCustomSeparatorSuccess(String input, int expected) {
+		int result = StringAddCalculator.splitAndAdd(input);
+
+		assertThat(result).isEqualTo(expected);
+	}
 }
