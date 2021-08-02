@@ -3,7 +3,7 @@ package edu.nextstep.lotto.step2.domain;
 import java.util.function.BiFunction;
 
 public enum WinningAmount {
-    FOURTH(3, 5000L,((lottoList, winningList) -> lottoList.getMatchResult(winningList, 3) * 5000L)),
+    FOURTH(3, 5000L, ((lottoList, winningList) -> lottoList.getMatchResult(winningList, 3) * 5000L)),
     THIRD(4, 50000L, ((lottoList, winningList) -> lottoList.getMatchResult(winningList, 4) * 50000L)),
     SECOND(5, 1500000L, ((lottoList, winningList) -> lottoList.getMatchResult(winningList, 5) * 1500000L)),
     FIRST(6, 2000000000L, ((lottoList, winningList) -> lottoList.getMatchResult(winningList, 6) * 2000000000L));

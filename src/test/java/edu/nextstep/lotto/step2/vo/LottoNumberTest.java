@@ -10,7 +10,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호 생성 테스트")
     @Test
     void create() {
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumber lottoNumber = new LottoNumber(new DefaultLottoShuffle());
         assertThat(lottoNumber.getLottoNumbers().size()).isEqualTo(6);
     }
 }
