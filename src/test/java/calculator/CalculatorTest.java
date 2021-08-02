@@ -20,4 +20,17 @@ public class CalculatorTest {
         // then
         assertThat(numbers).containsExactly(1, 2, 3);
     }
+
+    @DisplayName("//와 \\n 사이에 위치하는 문자를 커스텀 구분자로 사용할 수 있다.")
+    @Test
+    public void customDelimiterTest() {
+        // given
+        String input = "//;\\n1;2;3";
+
+        // when
+        int[] numbers = Calculator.extractNumbers(input);
+
+        // then
+        assertThat(numbers).containsExactly(1, 2, 3);
+    }
 }
