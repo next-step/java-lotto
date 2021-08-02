@@ -23,7 +23,7 @@ class UserTest {
     }
 
     @Test
-    void 사용자는_10000이_있는_지갑에서_10000을_인출_할_수_있다() {
+    void _10000이_있는_지갑에서_10000을_인출_할_수_있다() {
         // Given
         Wallet givenWallet = new Wallet(new Cache(10000));
         String givenName = "Pobi";
@@ -36,5 +36,6 @@ class UserTest {
         // Then
         assertThat(actualMoney).isEqualTo(expectedMoney);
     }
+
 
 }

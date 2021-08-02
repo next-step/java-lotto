@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Cache implements Money {
 
-    private static final String NEGATIVE_MONEY_EXCEPTION = "돈은 음수가 될 수 없습니다.";
+    private static final String NEGATIVE_MONEY_EXCEPTION = "돈이 없습니다.";
     private static final Integer ZERO = 0;
 
     private final Integer money;
