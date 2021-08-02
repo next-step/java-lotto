@@ -49,7 +49,7 @@ public enum Rank {
         return this.hitsCount;
     }
 
-    private int getWinningMoney() {
+    public int getWinningMoney() {
         return this.winningMoney;
     }
 

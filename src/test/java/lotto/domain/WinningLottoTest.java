@@ -12,6 +12,20 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class WinningLottoTest {
 
+    private Lottos setLottos() {
+        List<Lotto> Lottolist = new ArrayList<>();
+        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,40,45)));  // 6개일치
+        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,40,42))); // 5개일치
+        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,41,42))); // 4개일치
+        Lottolist.add(new Lotto(Arrays.asList(11,12,23,35,40,45))); // 3개일치
+        Lottolist.add(new Lotto(Arrays.asList(5,15,20,31,32,33))); // 3개일치
+        Lottolist.add(new Lotto(Arrays.asList(5,15,30,31,32,33))); // 2개일치
+        Lottolist.add(new Lotto(Arrays.asList(6,7,8,9,10,11))); // 0개일치
+        Lottolist.add(new Lotto(Arrays.asList(21,22,23,24,25,26))); // 0개일치
+        Lottolist.add(new Lotto(Arrays.asList(36,37,38,39,41,42))); // 0개일치
+        return new Lottos(Lottolist);
+    }
+
     @DisplayName("객체생성")
     @Test
     void create() {
@@ -42,27 +56,43 @@ class WinningLottoTest {
         }).withMessageMatching("중복된 숫자가 있습니다.");
     }
 
+    @DisplayName("같은 번호가 몇개인지 반환")
+    @Test
+    void getMatchingCount_같은_번호_갯수_반환() {
+        WinningLotto winningLotto = new WinningLotto("5,15,20,35,40,45");
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,15,20,35,40,45)))).isEqualTo(6);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,15,20,35,40,1)))).isEqualTo(5);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,15,20,35,1,2)))).isEqualTo(4);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,15,20,1,2,3)))).isEqualTo(3);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,15,1,2,3,4)))).isEqualTo(2);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(5,1,2,3,4,6)))).isEqualTo(1);
+        assertThat(winningLotto.getMatchingCount(new Lotto(Arrays.asList(1,2,3,4,6,7)))).isEqualTo(0);
+    }
+
     @DisplayName("해당등수에 당첨된 로또가 몇갠지 반환")
     @Test
-    void getMatchingLottoNumberCount_해당_등수에_맞는_로또_갯수() {
+    void getMatchingLottoNumberCount_등수에_맞는_로또_갯수() {
         WinningLotto winningLotto = new WinningLotto("5,15,20,35,40,45");
-        List<Lotto> Lottolist = new ArrayList<>();
-        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,40,45)));  // 6개일치
-        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,40,42))); // 5개일치
-        Lottolist.add(new Lotto(Arrays.asList(5,15,20,35,41,42))); // 4개일치
-        Lottolist.add(new Lotto(Arrays.asList(11,12,23,35,40,45))); // 3개일치
-        Lottolist.add(new Lotto(Arrays.asList(5,15,20,31,32,33))); // 3개일치
-        Lottolist.add(new Lotto(Arrays.asList(5,15,30,31,32,33))); // 2개일치
-        Lottolist.add(new Lotto(Arrays.asList(6,7,8,9,10,11))); // 0개일치
-        Lottolist.add(new Lotto(Arrays.asList(21,22,23,24,25,26))); // 0개일치
-        Lottolist.add(new Lotto(Arrays.asList(36,37,38,39,41,42))); // 0개일치
-        Lottos lottos = new Lottos(Lottolist);
+        Lottos lottos = setLottos();
 
         assertThat(winningLotto.getMatchingLottoNumberCount(Rank.FIRST, lottos)).isEqualTo(1);
         assertThat(winningLotto.getMatchingLottoNumberCount(Rank.SECOND, lottos)).isEqualTo(1);
         assertThat(winningLotto.getMatchingLottoNumberCount(Rank.THIRD, lottos)).isEqualTo(1);
         assertThat(winningLotto.getMatchingLottoNumberCount(Rank.FOURTH, lottos)).isEqualTo(2);
         assertThat(winningLotto.getMatchingLottoNumberCount(Rank.MISS, lottos)).isEqualTo(3);
+    }
+
+    @DisplayName("해당등수에 당첨된 로또의 당첨금의 합을 반환")
+    @Test
+    void getMatchingLottoPrize_등수에_해당하는_로또_당첨금의_합() {
+        WinningLotto winningLotto = new WinningLotto("5,15,20,35,40,45");
+        Lottos lottos = setLottos();
+
+        assertThat(winningLotto.getMatchingLottoPrize(Rank.FIRST, lottos)).isEqualTo(2000_000_000);
+        assertThat(winningLotto.getMatchingLottoPrize(Rank.SECOND, lottos)).isEqualTo(1_500_000);
+        assertThat(winningLotto.getMatchingLottoPrize(Rank.THIRD, lottos)).isEqualTo(50_000);
+        assertThat(winningLotto.getMatchingLottoPrize(Rank.FOURTH, lottos)).isEqualTo(10_000);
+        assertThat(winningLotto.getMatchingLottoPrize(Rank.MISS, lottos)).isEqualTo(0);
     }
 
 }

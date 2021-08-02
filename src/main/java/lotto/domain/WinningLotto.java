@@ -8,6 +8,36 @@ public class WinningLotto extends Lotto{
         super(input);
     }
 
+    public int getMatchingCount(Lotto lotto) {
+        int hitsCount = 0;
+
+        for(LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            hitsCount += containsNumber(lottoNumber);
+        }
+
+        return hitsCount;
+    }
+
+    private int containsNumber(LottoNumber lottoNumber) {
+        int count = INIT_COUNT;
+
+        if(this.getLottoNumbers().contains(lottoNumber)) {
+            count++;
+        }
+
+        return count;
+    }
+
+
+
+
+
+
+
+
+
+
+
     public int getMatchingLottoNumberCount(Rank rank, Lottos purchasedLottos) {
         int matchingCount = INIT_COUNT;
         int hitsCount = INIT_COUNT;
@@ -48,6 +78,23 @@ public class WinningLotto extends Lotto{
         }
 
         return matchingCount;
+    }
+
+    // 수익률계산
+    public int getMatchingLottoPrize(Rank rank, Lottos purchasedLottos) {
+        int prize = 0;
+
+        int hitsCount = INIT_COUNT;
+
+        for(Lotto lotto : purchasedLottos.getLottos()) {
+            hitsCount = countHit(lotto);
+
+            if(isEqualsHitsCounts(rank, hitsCount) != 0) {
+                prize += rank.getWinningMoney();
+            }
+        }
+
+        return prize;
     }
 
 }
