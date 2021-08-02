@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class RandomNumbers implements Numbers {
+public class RandomLottoNumbers implements LottoNumbers {
     private static final int BOUND = 45;
     private static final int SIZE = 6;
 

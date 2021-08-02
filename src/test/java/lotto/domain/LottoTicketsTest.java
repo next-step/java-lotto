@@ -10,8 +10,8 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTest {
-    private static Numbers numbers;
+class LottoTicketsTest {
+    private static LottoNumbers lottoNumbers;
 
     @BeforeAll
     static void setUp() {
@@ -22,12 +22,19 @@ class LottoTest {
                 new LottoNumber(4),
                 new LottoNumber(5),
                 new LottoNumber(6)));
-        numbers = () -> lottoNumbers;
+        LottoTicketsTest.lottoNumbers = () -> lottoNumbers;
     }
 
-    @DisplayName("로또 생성 성공")
+    @DisplayName("로또 티켓 구매 성공")
     @Test
     void new_success() {
-        assertThat(new Lotto(numbers));
+        assertThat(new LottoTickets(new Money(1000), lottoNumbers));
     }
+
+    @DisplayName("로또 티켓 구입 개수 확인")
+    @Test
+    void size() {
+        assertThat(new LottoTickets(new Money(10000), lottoNumbers).size()).isEqualTo(10);
+    }
+
 }
