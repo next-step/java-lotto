@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -52,12 +53,22 @@ public class LottoTest {
     @CsvSource({"1,2,3,9,10,11,4","1,2,3,4,9,10,3","1,2,3,4,5,9,2","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
     @DisplayName("등수 확인")
     void fourthTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
-        List<Integer> fourthNumbers = Arrays.asList(number1,number2,number3,number4,number5,number6);
-        LottoNumbers fourthLottoNumbers = new LottoNumbers(fourthNumbers);
-        Lotto fourthLotto = new Lotto(fourthLottoNumbers);
-        int prizeNumber = winningLotto.checkWinning(fourthLotto);
+        List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        Lotto lotto = new Lotto(lottoNumbers);
+        int prizeNumber = winningLotto.checkWinning(lotto);
         assertThat(prizeNumber).isEqualTo(testPrizeNumber);
     }
 
-
+    @ParameterizedTest
+    @CsvSource({"1,2,3,9,10,11,4","1,2,3,4,9,10,3","1,2,3,4,5,9,2","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
+    @DisplayName("로또게임")
+    void playLottoTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+        String winningNumberString = "1,2,3,4,5,6";
+        List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        Lotto lotto = new Lotto(lottoNumbers);
+        int[] prizeArray = PlayLotto.playLotto(winningNumberString, Arrays.asList(lotto));
+        assertThat(prizeArray[testPrizeNumber]).isEqualTo(1);
+    }
 }
