@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +33,6 @@ public class Game {
     }
 
     public List<Lotto> getLottoList() {
-        return lottoList;
+        return new ArrayList<>(lottoList);
     }
 }
