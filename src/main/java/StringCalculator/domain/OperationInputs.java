@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class OperationInputs {
 
-    private static final String CUSTOM_DELIMITER_INPUT_PATTERN = "\\//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_INPUT_PATTERN = "//(.)\n(.*)";
 
     private final Operands operands;
     private final OperateStrategy strategy;
@@ -15,8 +15,8 @@ public class OperationInputs {
 
     public OperationInputs(String userInput, OperateStrategy strategy) {
 
-        this.strategy = strategy;
         this.operands = prepareOperands(userInput);
+        this.strategy = strategy;
     }
 
     private Operands prepareOperands(String userInput) {
