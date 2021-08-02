@@ -5,6 +5,9 @@ import lotto.domain.Lotto;
 import java.util.List;
 
 public class ResultView {
+
+    private ResultView() {}
+
     public static void printLottoCount(int lottoCount){
         System.out.println(lottoCount + "개를 구매했습니다.");
     }

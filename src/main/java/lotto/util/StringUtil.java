@@ -6,6 +6,8 @@ import java.util.List;
 public class StringUtil {
     private static final String SEPARATOR = ", |,";
 
+    private StringUtil() {}
+
     public static String[] separator(String inputString){
         return inputString.split(SEPARATOR);
     }
