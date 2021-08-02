@@ -13,12 +13,10 @@ class LottoMachineTest {
         int givenMoney = 10000;
         int expectedNumberOfLotto = 10;
 
-
         // When
         List<Lotto> lottos = LottoMachine.createLottos(givenMoney);
 
         // Then
-
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
     }
 
