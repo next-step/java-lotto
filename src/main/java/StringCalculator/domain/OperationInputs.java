@@ -1,6 +1,5 @@
 package StringCalculator.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +7,7 @@ import java.util.stream.Collectors;
 public class OperationInputs {
 
     private static final String DEFAULT_DELIMITER_REGEX = ",|:";
-    private static final int ZERO = 0;
+    private static final String ZERO_STRING = "0";
 
     private final List<Integer> operands;
     private final OperateStrategy strategy;
@@ -27,24 +26,25 @@ public class OperationInputs {
     }
 
     private List<Integer> generateOperands(String userInput) {
-        List<Integer> operands = new ArrayList<>();
-        splitStringByDelimiter(userInput);
+        String[] splitStrings = splitStringByDelimiter(userInput);
+        List<Integer> operands = convertStringArrayToIntList(splitStrings);
 
         return operands;
     }
 
-    private List<Integer> splitStringByDelimiter(String userInput) {
-
-        if (checkNullOrEmpty(userInput)) {
-            List<Integer> operands = new ArrayList<>();
-            operands.add(ZERO);
-            return operands;
-        }
-
-        return Arrays.stream(userInput.split(DEFAULT_DELIMITER_REGEX))
+    private List<Integer> convertStringArrayToIntList(String[] splitStrings) {
+        return Arrays.stream(splitStrings)
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
+    }
+
+    private String[] splitStringByDelimiter(String userInput) {
+
+        if (checkNullOrEmpty(userInput)) {
+            return new String[]{ZERO_STRING};
+        }
+        return userInput.split(DEFAULT_DELIMITER_REGEX);
 
     }
 
@@ -53,5 +53,14 @@ public class OperationInputs {
             return true;
         }
         return false;
+    }
+
+
+    public List<Integer> getOperands() {
+        return operands;
+    }
+
+    public OperateStrategy getStrategy() {
+        return strategy;
     }
 }
