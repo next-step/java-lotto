@@ -18,9 +18,9 @@ public class LottoNumberGenerator {
         }
 
         Collections.shuffle(lottoNumberList);
-        List<Integer> integers = lottoNumberList.subList(0, 6);
-        integers.sort(Comparator.naturalOrder());
-        return integers;
+        List<Integer> numbers = new ArrayList<>(lottoNumberList.subList(0, 6));
+        numbers.sort(Comparator.naturalOrder());
+        return numbers;
 
     }
 
