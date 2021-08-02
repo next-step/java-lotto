@@ -8,10 +8,11 @@ public class Calculator {
     private String text;
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
+    private Matcher matcher;
 
     public Calculator(String text) {
         this.text = text;
+        this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(this.text);
     }
 
     public boolean checkEmptyAndNull() {
@@ -21,8 +22,11 @@ public class Calculator {
         return false;
     }
 
-    public boolean checkNotNegativeNumber() {
+    public boolean checkOnlyNumber() {
         String[] numbers = text.split(DELIMITER);
+        if (numbers.length >1){
+            return false;
+        }
         for (String number : numbers) {
             isNegativeNumber(number);
         }
