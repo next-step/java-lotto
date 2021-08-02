@@ -32,4 +32,26 @@ class StringAddCalculatorTest {
 
 		assertThat(result).isEqualTo(6);
 	}
+
+	@Test
+	@DisplayName("음수를 입력했을때 예외 발생")
+	void checkNegativeNumbers() {
+		stringAddCalculator = new StringAddCalculator("-1;2,3");
+
+		assertThatExceptionOfType(IllegalArgumentException.class)
+			.isThrownBy(() -> {
+				stringAddCalculator.splitAndAdd();
+			}).withMessage("양수만 입력이 가능합니다.");
+	}
+
+	@Test
+	@DisplayName("입력된 숫자 검증")
+	void checkNumber() {
+		stringAddCalculator = new StringAddCalculator("dd;ff,3");
+
+		assertThatExceptionOfType(IllegalArgumentException.class)
+			.isThrownBy(() -> {
+				stringAddCalculator.splitAndAdd();
+			}).withMessage("숫자가 아닙니다.");
+	}
 }
