@@ -29,13 +29,23 @@ public enum Rank {
         return 0;
     }
 
+    public static Rank returnRank(int hitsCount) {
+        validateHitsCount(hitsCount);
+        for(Rank rank : values()) {
+            if(hitsCount == rank.getHitsCount()) {
+                return rank;
+            }
+        }
+        return MISS;
+    }
+
     private static void validateHitsCount(int hitsCount) {
         if(hitsCount < MIN_HITS_COUNT || hitsCount > MAX_HITS_COUNT) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
     }
 
-    private int getHitsCount() {
+    public int getHitsCount() {
         return this.hitsCount;
     }
 
