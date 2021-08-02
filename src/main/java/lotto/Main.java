@@ -19,5 +19,6 @@ public class Main {
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
 
+
     }
 }

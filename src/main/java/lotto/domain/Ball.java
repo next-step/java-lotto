@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Ball {
+public class Ball implements Comparable<Ball> {
 
     private final int number;
 
@@ -14,6 +14,16 @@ public class Ball {
     private void validNumberRange(int number) {
         if (number <= 0 || number >= 46)
             throw new IllegalArgumentException("공 숫자는 1~45 만 올 수 있습니다.");
+    }
+
+    @Override
+    public int compareTo(Ball o) {
+        return this.number - o.number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
     @Override

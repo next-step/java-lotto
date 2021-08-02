@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -17,6 +19,14 @@ public class Lotto {
     private void validNumberCountSize(Set<Ball> balls) {
         if (balls.size() != NUMBER_SIZE)
             throw new IllegalArgumentException(VALID_NUMBER_COUNT);
+    }
+
+    @Override
+    public String toString() {
+        return balls.stream().
+                sorted().
+                collect(Collectors.toCollection(LinkedHashSet::new)).
+                toString();
     }
 
     @Override
