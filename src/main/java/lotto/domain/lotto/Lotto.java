@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validate(LottoNumbers lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
-            throw new IllegalArgumentException("로또번호들의 값은 항상 있어야합니다");
+            throw new IllegalStateException("로또번호들의 값은 항상 있어야합니다");
         }
     }
 

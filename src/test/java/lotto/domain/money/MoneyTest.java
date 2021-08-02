@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class MoneyTest {
@@ -32,17 +32,7 @@ class MoneyTest {
     @ParameterizedTest
     public void should_throw_exception_under_0_money(int money) throws Exception {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> Money.of(money));
-    }
-
-    @DisplayName("로또가격 (천원)과 비교하여 현재 Money로 몇개를 살수 있는지 count한다")
-    @Test
-    public void should_get_available_purchase_count() throws Exception {
-        //arrange
-        Money money = Money.of(14000);
-
-        //act, assert
-        assertThat(money.getPurchasableQuantity(Money.of(1000))).isEqualTo(14);
+        assertThatIllegalStateException().isThrownBy(() -> Money.of(money));
     }
 
     @DisplayName("두 Money 더하면 더한 Money를 반환한다.")
@@ -86,5 +76,20 @@ class MoneyTest {
                 Arguments.of(Money.of(1_000), Money.of(1_000), 1.0),
                 Arguments.of(Money.of(1_000), Money.of(10_000), 10.0)
         );
+    }
+
+    @DisplayName("구매가능 기준액대비 입력받은 금액으로 살 수 있는 로또 장수를 계산한다")
+    @Test
+    public void should_calculate_affordable_count() throws Exception {
+        //arrange
+        Money money = Money.of(3_000);
+        Money baseMoney = Money.of(1_000);
+        int expectedCount = 3;
+
+        //act
+        int count = money.getAffordableCount(baseMoney);
+
+        //assert
+        assertThat(count).isEqualTo(expectedCount);
     }
 }

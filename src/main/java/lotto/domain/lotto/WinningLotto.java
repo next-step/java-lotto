@@ -23,13 +23,13 @@ public class WinningLotto {
 
     private void validateLottoNumbers(LottoNumbers lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
-            throw new IllegalArgumentException("로또번호들의 값은 항상 있어야합니다");
+            throw new IllegalStateException("로또번호들의 값은 항상 있어야합니다");
         }
     }
 
     private void validateBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         if (Objects.isNull(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 null이면 안됩니다");
+            throw new IllegalStateException("보너스 번호는 null이면 안됩니다");
         }
 
         checkDuplicatedBonusNumber(lottoNumbers, bonusNumber);
@@ -37,7 +37,7 @@ public class WinningLotto {
 
     private void checkDuplicatedBonusNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("Bonus number already in lotto numbers");
+            throw new IllegalStateException("보너스 번호는 기존 로또번호에 중복될 수 없습니다.");
         }
     }
 
@@ -51,6 +51,6 @@ public class WinningLotto {
     }
 
     public boolean containsBonusNumber(LottoNumber lottoNumber) {
-        return bonusNumber.getNumber() == lottoNumber.getNumber();
+        return bonusNumber.equals(lottoNumber);
     }
 }

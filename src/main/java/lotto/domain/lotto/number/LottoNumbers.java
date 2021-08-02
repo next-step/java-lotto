@@ -21,7 +21,7 @@ public class LottoNumbers {
 
     private void validate(Set<LottoNumber> lottoNumberSet) {
         if (Objects.isNull(lottoNumberSet) || lottoNumberSet.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또번호는 총 6개여야 합니다");
+            throw new IllegalStateException("로또번호는 총 6개여야 합니다");
         }
     }
 

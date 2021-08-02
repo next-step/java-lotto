@@ -74,4 +74,19 @@ public class LottoFixture {
     public static LottoNumber getWinningLottoNumber() {
         return LottoNumber.of(43);
     }
+
+    public static Lottos getOneManaualLottos() {
+        List<LottoNumber> lottoNumberList = createOneToSixLottoNumberSequence();
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
+        Lotto lotto = Lotto.of(lottoNumbers);
+        return Lottos.of(Arrays.asList(lotto));
+    }
+
+    public static Lottos getFiveManaualLottos() {
+        List<LottoNumber> lottoNumberList = createOneToSixLottoNumberSequence();
+        LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
+        Lotto lotto = Lotto.of(lottoNumbers);
+        return Lottos.of(Arrays.asList(lotto, lotto, lotto, lotto, lotto));
+    }
+
 }

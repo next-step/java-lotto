@@ -9,7 +9,7 @@ import java.util.List;
 
 import static lotto.fixture.LottoFixture.createOneToSixLottoNumberSequence;
 import static lotto.fixture.LottoFixture.getWinningLottoNumber;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
@@ -31,14 +31,14 @@ class WinningLottoTest {
         );
     }
 
-    @DisplayName("LottoNumbers가 null이면 IllegalArgumentException을 리턴한다")
+    @DisplayName("LottoNumbers가 null이면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_lottonumbers_null() throws Exception {
         //arrange, act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(null, getWinningLottoNumber()));
+        assertThatIllegalStateException().isThrownBy(() -> WinningLotto.of(null, getWinningLottoNumber()));
     }
 
-    @DisplayName("보너스 번호가 null이면 IllegalArgumentException을 리턴한다")
+    @DisplayName("보너스 번호가 null이면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_bonus_lottonumber_null() throws Exception {
         //arrange
@@ -48,10 +48,10 @@ class WinningLottoTest {
         LottoNumber bonusNumber = null;
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(lottoNumbers, bonusNumber));
+        assertThatIllegalStateException().isThrownBy(() -> WinningLotto.of(lottoNumbers, bonusNumber));
     }
 
-    @DisplayName("보너스 번호가 당첨 로또 번호와 중복되면 IllegalArgumentException을 리턴한다")
+    @DisplayName("보너스 번호가 당첨 로또 번호와 중복되면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_bonus_duplicate_winnig_lotto_numbers() throws Exception {
         //arrange
@@ -61,7 +61,7 @@ class WinningLottoTest {
         LottoNumber bonusNumber = LottoNumber.of(1);
 
         //act, assert
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(lottoNumbers, bonusNumber));
+        assertThatIllegalStateException().isThrownBy(() -> WinningLotto.of(lottoNumbers, bonusNumber));
     }
 
     @DisplayName("일치하는 로또 넘버가 있으면 true를 리턴한다")
