@@ -8,11 +8,11 @@ import java.util.List;
 import lotto.strategy.GenerateLottoNumber;
 import lotto.strategy.RealGenerateLottoNumber;
 
-public class Lotte {
+public class Lotto {
 
   private List<LottoNumber> lotto = new ArrayList<>();
 
-  public Lotte() {
+  public Lotto() {
   }
 
   public List<LottoNumber> getLotto() {

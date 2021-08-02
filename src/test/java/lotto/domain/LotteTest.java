@@ -39,7 +39,7 @@ class LotteTest {
   @DisplayName("중복없는 숫자 6개를 가져와 로또 하나 생성 테스트.")
   @Test
   void 로또한장생성() {
-    Lotte lotte = new Lotte();
+    Lotto lotte = new Lotto();
 
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(1,7);
     lotte.creatLotte(generateLottoNumber);
