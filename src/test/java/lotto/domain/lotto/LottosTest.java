@@ -31,12 +31,11 @@ class LottosTest {
         assertThat(lottos.size()).isEqualTo(1);
     }
 
-    @DisplayName("LottoNumber 6개 보다작으면 IllegalStateException을 리턴한다")
-    @NullAndEmptySource
-    @ParameterizedTest
-    public void should_throw_exception_under_count_6_lotto_number(List<Lotto> lottos) throws Exception {
+    @DisplayName("lottos가 null이면 IllegalStateException을 리턴한다")
+    @Test
+    public void should_throw_exception_under_count_6_lotto_number() throws Exception {
         //arrange, act, assert
-        assertThatIllegalStateException().isThrownBy(() -> Lottos.of(lottos));
+        assertThatIllegalStateException().isThrownBy(() -> Lottos.of(null));
     }
 
 

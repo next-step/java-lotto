@@ -25,7 +25,7 @@ class ManualLottosTest {
         Lotto lotto = Lotto.of(LottoNumbers.of(lottoNumbers));
 
         //act
-        ManualLottos lottos = ManualLottos.of(Arrays.asList(lotto));
+        Lottos lottos = Lottos.of(Arrays.asList(lotto));
 
         //assert
         assertThat(lottos.size()).isEqualTo(1);
@@ -35,14 +35,14 @@ class ManualLottosTest {
     @Test
     public void should_throw_exception_under_count_6_lotto_number() throws Exception {
         //arrange, act, assert
-        assertThatIllegalStateException().isThrownBy(() -> ManualLottos.of(null));
+        assertThatIllegalStateException().isThrownBy(() -> Lottos.of(null));
     }
 
     @DisplayName("LottoNumber 6개 보다작으면 IllegalStateException을 리턴한다")
     @Test
     public void should_throw_exception_under_count_6_lotto_number_2() throws Exception {
         //arrange, act, assert
-        assertDoesNotThrow(() -> ManualLottos.of(new ArrayList<>()));
+        assertDoesNotThrow(() -> Lottos.of(new ArrayList<>()));
     }
 
 }

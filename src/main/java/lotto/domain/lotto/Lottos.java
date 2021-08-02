@@ -15,8 +15,8 @@ public class Lottos {
     }
 
     protected void validate(List<Lotto> lottos) {
-        if (Objects.isNull(lottos) || lottos.isEmpty()) {
-            throw new IllegalStateException("lotto 리스트는 null이거나 empty면 안됩니다");
+        if (Objects.isNull(lottos)) {
+            throw new IllegalStateException("lotto 리스트는 null이면 안됩니다");
         }
     }
 

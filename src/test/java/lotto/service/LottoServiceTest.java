@@ -26,7 +26,7 @@ class LottoServiceTest {
     public void shoud_return_lottopackage(int moneyAmount, int expectedCount) throws Exception {
         //arrange
         Money money = Money.of(moneyAmount);
-        ManualLottos manualLottos = null;
+        Lottos manualLottos = null;
         PaymentInfo paymentInfo = PaymentInfo.of(money, manualLottos);
 
         Lottos lottos = LottoService.purchase(paymentInfo, manualLottos);
@@ -40,7 +40,7 @@ class LottoServiceTest {
     public void shoud_return_lottopackage_with_manual_lotto() throws Exception {
         //arrange
         Money money = Money.of(2000);
-        ManualLottos manualLottos = getOneManaualLottos();
+        Lottos manualLottos = getOneManaualLottos();
         PaymentInfo paymentInfo = PaymentInfo.of(money, manualLottos);
 
         //act
