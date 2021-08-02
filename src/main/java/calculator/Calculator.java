@@ -11,12 +11,23 @@ public class Calculator {
     private static final int THIRD_GROUP_INDEX = 2;
 
     public static int calculateAddition(String input) {
+        if (isNullOrEmpty(input)) {
+            return 0;
+        }
+
         int[] numbers = extractNumbers(input);
         return Arrays.stream(numbers)
                 .reduce(0, Integer::sum);
     }
 
-    static int[] extractNumbers(String input) {
+    private static boolean isNullOrEmpty(String input) {
+        if (input == null || input.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static int[] extractNumbers(String input) {
         String delimiters = DEFAULT_DELIMITERS;
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
