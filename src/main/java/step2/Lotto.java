@@ -1,17 +1,16 @@
 package step2;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
 
     private final List<Integer> numbers;
 
-    private Lotto(Integer[] numbers) {
-        this.numbers = Arrays.asList(numbers);
+    private Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public static Lotto create(Integer[] expectedArrays) {
+    public static Lotto create(List<Integer> expectedArrays) {
         return new Lotto(expectedArrays);
     }
 
