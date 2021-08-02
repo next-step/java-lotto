@@ -15,4 +15,8 @@ public class Wallet {
     public static Wallet save(Integer money) {
         return new Wallet(money);
     }
+
+    public Integer withDraw(Integer money) {
+        return 0;
+    }
 }
