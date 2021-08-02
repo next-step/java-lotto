@@ -29,7 +29,8 @@ public class LottoTest {
     @DisplayName("금액에 따른 로또 생성")
     void lottoCountTest(){
         int cash = 14000;
-        List<Lotto> lottos = playLotto.createLotto(cash);
+        int lottoCount = PlayLotto.calculateLottoCount(cash);
+        List<Lotto> lottos = playLotto.createLotto(lottoCount);
         assertThat(lottos.size()).isEqualTo(14);
     }
 

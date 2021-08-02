@@ -9,8 +9,8 @@ public class LottoNumberRange {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
 
-    private LottoNumberRange(){
-        for(int i=LOTTO_START_NUMBER; i<=LOTTO_END_NUMBER; i++){
+    private LottoNumberRange() {
+        for (int i=LOTTO_START_NUMBER; i<=LOTTO_END_NUMBER; i++) {
             lottoNumberRangeList.add(i);
         }
     }

@@ -14,7 +14,7 @@ public class CreateShffledLottoNumbers implements CreateLottoNumbersStrategy {
         List<Integer> lottoNumbers = new LinkedList<>();
         Collections.shuffle(LottoNumberRange.getLottoNumberRange());
         int lottoRangeListIndex = 0;
-        while(lottoNumbers.size()<LOTTO_NUMBER_MAX_COUNT){
+        while (lottoNumbers.size()<LOTTO_NUMBER_MAX_COUNT) {
             lottoNumbers.add(LottoNumberRange.getLottoNumberRange().get(lottoRangeListIndex));
             lottoRangeListIndex++;
         }
