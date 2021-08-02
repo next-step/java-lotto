@@ -7,6 +7,9 @@ import java.util.List;
 
 public class LottoNumberGenerator {
 
+    private LottoNumberGenerator() {
+    }
+
     private static final List<Integer> lottoNumberList = new ArrayList<>();
 
     public static List<Integer> create() {
