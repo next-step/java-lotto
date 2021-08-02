@@ -38,9 +38,19 @@ public class CalculatorTest {
         assertEquals(Calculator.calculateAddition(input), 1);
     }
 
+    @DisplayName("쉼표(,) 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
+    @Test
+    public void addNumbersOfCommaDelimiterInputTest() {
+        // given
+        String input = "1,2";
+
+        // when, then
+        assertEquals(Calculator.calculateAddition(input), 3);
+    }
+
     @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
     @Test
-    public void addNumbersTest() {
+    public void addNumbersOfCommaOrColonDelimiterInputTest() {
         // given
         String input = "1,2:3";
 
