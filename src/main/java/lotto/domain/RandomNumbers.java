@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomNumbers implements Numbers {
     private static final int BOUND = 45;
+    private static final int SIZE = 6;
 
     @Override
-    public List<LottoNumber> generateNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+    public Set<LottoNumber> generateNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        while(lottoNumbers.size() < SIZE) {
             lottoNumbers.add(new LottoNumber(generateRandomInt()));
         }
         return lottoNumbers;

@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 class Lotto {
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     Lotto(Numbers numbers) {
         lottoNumbers = numbers.generateNumbers();
