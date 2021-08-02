@@ -6,6 +6,8 @@ public class LotteryDraw {
 
   private int money;
 
+  private Lotties lotties;
+
   public static final int EACH_LOTTO_COST = 1000;
 
   public LotteryDraw(int money) {
@@ -13,12 +15,21 @@ public class LotteryDraw {
   }
 
   public void checkInputValue() {
-    if (money % 1000 != 0) {
+    if (Operation.chooseOperation("%").calculation(money,EACH_LOTTO_COST) != 0) {
       throw new RuntimeException("금액을 정상적으로 입력해주세요.");
     }
   }
 
   public int getNumberOfLotto() {
-    return money / EACH_LOTTO_COST;
+    return Operation.chooseOperation("/").calculation(money,EACH_LOTTO_COST);
+  }
+
+  public void buyLotties() {
+    checkInputValue();
+    lotties = new Lotties(getNumberOfLotto());
+  }
+
+  public Lotties getLottiesInfo() {
+    return lotties;
   }
 }
