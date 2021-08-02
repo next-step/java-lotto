@@ -14,7 +14,7 @@ class LottoMachineTest {
         int expectedNumberOfLotto = 10;
 
         // When
-        List<Lotto> lottos = LottoMachine.createLottos(new Wallet(givenMoney));
+        List<Lotto> lottos = LottoMachine.createLottos(Wallet.save(givenMoney));
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
