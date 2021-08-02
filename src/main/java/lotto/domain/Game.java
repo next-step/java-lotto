@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Game {
@@ -18,6 +19,15 @@ public class Game {
         return (int) lottoList.stream().
                 filter(lotto -> lotto.getCountOfRightNumber(previousLotto) == rightNumber)
                 .count();
+    }
+
+    public String getYield() {
+        long totalWinMoney = Arrays.stream(Reward.values())
+                .map(reward -> getNumberOfRightLotto(reward.getRightNumberCount()) * reward.getMoney())
+                .mapToLong(Long::valueOf)
+                .sum();
+
+        return String.format("%.2f", totalWinMoney / (lottoList.size() * LottoMachine.LOTTO_PRICE * 1f) - 0.005f);
     }
 
     public List<Lotto> getLottoList() {

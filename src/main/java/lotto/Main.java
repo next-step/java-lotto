@@ -21,5 +21,6 @@ public class Main {
 
         game.setPreviousLotto(InputView.inputPreviousLottoNumber());
         ResultView.resultLottoReward(game);
+        ResultView.getYield(game);
     }
 }
