@@ -12,7 +12,11 @@ public class User {
         this.wallet = wallet;
     }
 
-    public List<Lotto> buyLotto(Wallet givenWallet) {
-        return LottoMachine.createLottos(givenWallet);
+    public List<Lotto> buyLotto() {
+        return LottoMachine.createLottos(wallet);
+    }
+
+    public Money withDraw(Money money) {
+        return wallet.withDraw(money);
     }
 }

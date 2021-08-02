@@ -7,25 +7,34 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class UserTest {
 
-
     @Test
-    void 사용자는_10000원으로_로또를_10개_살_수_있다() {
+    void _10000원으로_로또를_10개_살_수_있다() {
         // Given
-        int givenWallet = 10000;
-        User user = new User("Pobi");
+        Cache givenCache = new Cache(10000);
+        Wallet givenWallet = new Wallet(givenCache);
+        String givenName = "Pobi";
+        User user = new User(givenName, givenWallet);
+
         // When
-        List<Lotto> userLottos = user.buyLotto(Wallet.save(givenWallet));
+        List<Lotto> userLottos = user.buyLotto();
+
         // Then
         assertThat(userLottos.size()).isEqualTo(10);
     }
 
     @Test
-    void 사용자는_돈을_지갑에_돈을_보관_할_수_있다() {
+    void 사용자는_10000이_있는_지갑에서_10000을_인출_할_수_있다() {
         // Given
-        Wallet wallet = Wallet.save(10000);
+        Wallet givenWallet = new Wallet(new Cache(10000));
+        String givenName = "Pobi";
+        User user = new User(givenName, givenWallet);
+        Money expectedMoney = new Cache(10000);
+
         // When
+        Money actualMoney = user.withDraw(new Cache(10000));
 
         // Then
-
+        assertThat(actualMoney).isEqualTo(expectedMoney);
     }
+
 }
