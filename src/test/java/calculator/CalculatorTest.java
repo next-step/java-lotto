@@ -2,7 +2,10 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("문자열 덧셈 계산기 테스트")
@@ -66,5 +69,15 @@ public class CalculatorTest {
 
         // when, then
         assertEquals(Calculator.splitAndSum(input), 6);
+    }
+
+    @DisplayName("숫자 이외의 값 또는 음수를 입력하면, 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"(,5,)", "-1,2,3"})
+    public void nonNumericOrNegativeNumberInputExceptionTest(String input) {
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Calculator.splitAndSum(input))
+                .withMessage("숫자는 0 또는 양수이어야 합니다.");
     }
 }

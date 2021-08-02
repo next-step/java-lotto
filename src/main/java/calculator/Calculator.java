@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     private static final String DEFAULT_DELIMITERS = ",|:";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String ZERO_OR_POSITIVE_NUMBER_PATTERN = "^[0-9]+$";
     private static final String OR = "|";
     private static final int SECOND_GROUP_INDEX = 1;
     private static final int THIRD_GROUP_INDEX = 2;
@@ -29,7 +31,7 @@ public class Calculator {
 
     private static int[] extractNumbers(String input) {
         String delimiters = DEFAULT_DELIMITERS;
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(SECOND_GROUP_INDEX);
             delimiters += OR + customDelimiter;
@@ -37,8 +39,21 @@ public class Calculator {
         }
 
         String[] numbers = input.split(delimiters);
+        validateZeroOrPositiveNumber(numbers);
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .toArray();
+    }
+
+    private static void validateZeroOrPositiveNumber(String[] numbers) {
+        for (String number : numbers) {
+            validateZeroOrPositiveNumber(number);
+        }
+    }
+
+    private static void validateZeroOrPositiveNumber(String number) {
+        if (!number.matches(ZERO_OR_POSITIVE_NUMBER_PATTERN)) {
+            throw new IllegalArgumentException("숫자는 0 또는 양수이어야 합니다.");
+        }
     }
 }
