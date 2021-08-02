@@ -56,7 +56,7 @@ class LottoTest {
 
 		//when
 		lotto.generateNumbers(() -> lottoNumbers);
-		int matchesNumber = lotto.match(lastWeekNumbers);
+		int matchesNumber = lotto.matchingCount(lastWeekNumbers);
 
 		//then
 		assertThat(matchesNumber).isEqualTo(matchedCount);

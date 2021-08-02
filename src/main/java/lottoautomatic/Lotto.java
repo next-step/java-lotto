@@ -21,7 +21,7 @@ public class Lotto {
 	}
 
 
-	public int match(List<Integer> lastWeekNumbers) {
+	public int matchingCount(List<Integer> lastWeekNumbers) {
 		int matchedCount = 0;
 		for (Integer lastWeekNumber : lastWeekNumbers) {
 			matchedCount += getMatchedCount(lastWeekNumber);
