@@ -22,16 +22,20 @@ public class LottoApplication {
 
         Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
         for (int i = 0; i < lottoMachine.getPurchaseLottoCount(); i++) {
-            lottoNumbersSet.add(lottoMachine.generateLottoNumber());
+            LottoNumbers lottoNumbers = lottoMachine.generateLottoNumber();
+            ResultView.printLottoNumber(lottoNumbers);
+            lottoNumbersSet.add(lottoNumbers);
         }
         //중복 있을 때 추가적으로 생성
         for(int i = 0; i <  lottoMachine.getPurchaseLottoCount() - lottoNumbersSet.size(); i++){
-            lottoNumbersSet.add(lottoMachine.generateLottoNumber());
+            LottoNumbers lottoNumbers = lottoMachine.generateLottoNumber();
+            ResultView.printLottoNumber(lottoNumbers);
+            lottoNumbersSet.add(lottoNumbers);
         }
-//
-//        LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
-//
-//        LottoNumber winningLottoNumber = new LottoNumber(InputView.getWinningNumber());
+
+        LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
+
+        System.out.println(winningLottoNumbers);
 //
 //        int[] matchingRecords = lottoNumbers.getMatchingRecords(winningLottoNumber);
 //
