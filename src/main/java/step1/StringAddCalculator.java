@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static final String REGEX = "//(.)\n(.*)";
+
     private final static Pattern pattern = Pattern.compile(REGEX);
+
 
     public static int splitAndSum(String express) {
         if (express == null || "".equals(express)) {
