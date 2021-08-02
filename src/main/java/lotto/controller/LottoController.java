@@ -40,7 +40,7 @@ public class LottoController {
 
     private static LottoMoney lottoMoneyInput() {
         int amount = InputView.askHowMuch();
-        return LottoMoney.valueOf(amount);
+        return LottoMoney.of(amount);
     }
 
     private static LottoTicket createWinningLottoFromInput() {

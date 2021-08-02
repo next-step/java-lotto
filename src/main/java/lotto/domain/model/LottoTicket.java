@@ -12,14 +12,22 @@ public class LottoTicket {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new TreeSet<>(lottoNumbers);
-        validateSizeAndDuplicate(this.lottoNumbers);
+    private LottoTicket(Set<LottoNumber> lottoNumbers) {
+        validateSizeAndDuplicate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
+    public static LottoTicket of(List<LottoNumber> lottoNumbers) {
+        TreeSet<LottoNumber> lottoNumbersSet = new TreeSet<>(lottoNumbers);
+        return new LottoTicket(lottoNumbersSet);
+    }
+
+//    public static LottoTicket of()
+
     public static LottoTicket createFromList(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new));
         return new LottoTicket(lottoNumbers);
     }
 

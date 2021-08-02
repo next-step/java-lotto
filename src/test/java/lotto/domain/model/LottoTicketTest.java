@@ -41,14 +41,14 @@ public class LottoTicketTest {
     @Test
     @DisplayName("번호가 로또에 포함되어 있다.")
     void contains_number_in_ticket() {
-        LottoNumber lottoNumber = LottoNumber.valueOf(6);
+        LottoNumber lottoNumber = LottoNumber.of(6);
         assertThat(lottoTicket.contains(lottoNumber)).isTrue();
     }
 
     @Test
     @DisplayName("번호가 로또에 포함되어 있지 않다.")
     void contains_number_not_in_ticket() {
-        LottoNumber lottoNumber = LottoNumber.valueOf(8);
+        LottoNumber lottoNumber = LottoNumber.of(8);
         assertThat(lottoTicket.contains(lottoNumber)).isFalse();
     }
 

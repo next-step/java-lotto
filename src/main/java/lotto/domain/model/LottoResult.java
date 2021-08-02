@@ -2,6 +2,7 @@ package lotto.domain.model;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoResult {
@@ -10,7 +11,7 @@ public class LottoResult {
 
     private LottoResult() {
         rankToCount = Stream.of(LottoRank.values())
-                .collect(java.util.stream.Collectors.toMap(e -> e, e -> 0));
+                .collect(Collectors.toMap(e -> e, e -> 0));
     }
 
     private LottoResult(Map<LottoRank, Integer> rankToCount) {
@@ -35,7 +36,9 @@ public class LottoResult {
     }
 
     public int sumWinningMoney() {
-        return rankToCount.entrySet().stream().map(e -> e.getKey().getWinningMoney() * e.getValue())
+        return rankToCount.entrySet()
+                .stream()
+                .map(e -> e.getKey().getWinningMoney() * e.getValue())
                 .reduce(0, Integer::sum);
     }
 

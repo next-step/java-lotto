@@ -14,7 +14,7 @@ public class LottoServiceTest {
     @Test
     @DisplayName("수익률을 (유효 수숫점 두자리) 계산한다.")
     void profitPercent() {
-        LottoMoney lottoMoney = LottoMoney.valueOf(14000);
+        LottoMoney lottoMoney = LottoMoney.of(14000);
         LottoResult lottoResult = LottoResult.createEmpty();
         lottoResult.update(LottoRank.FIFTH);
         double profitPercent = LottoService.profitPercent(lottoResult, lottoMoney);

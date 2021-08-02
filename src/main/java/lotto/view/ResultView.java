@@ -24,7 +24,7 @@ public class ResultView {
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
         Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
-        List<Integer> numbers = lottoNumbers.stream().map(LottoNumber::getLottoNumber)
+        List<Integer> numbers = lottoNumbers.stream().map(LottoNumber::value)
                 .collect(Collectors.toList());
         System.out.println(numbers);
     }
