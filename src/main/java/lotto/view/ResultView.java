@@ -10,7 +10,7 @@ public class ResultView {
     }
 
     public static void printLottoNumber(LottoNumber lottoNumber) {
-        System.out.println(lottoNumber.value());
+//        System.out.println(lottoNumber.value());
     }
 
     public static void printWinningStatistics(int[] matchesRecord) {

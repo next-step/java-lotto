@@ -14,31 +14,31 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public String value() {
-        return "[" + lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.value())
-                .collect(Collectors.joining(", ")) + "]";
-    }
-
-    public int[] getMatchingRecords(LottoNumber winningLottoNumber) {
-        int[] matchingRecords = new int[4];
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            long count = lottoNumber.countOfMatch(winningLottoNumber);
-            mappingRecordsToCountOfMatch(matchingRecords, count);
-        }
-        return matchingRecords;
-    }
-
-    private void mappingRecordsToCountOfMatch(int[] arr, long count) {
-        if (count == 3) {
-            arr[0]++;
-        } else if (count == 4) {
-            arr[1]++;
-        } else if (count == 5) {
-            arr[2]++;
-        } else if (count == 6) {
-            arr[3]++;
-        }
-    }
+//    public String value() {
+//        return "[" + lottoNumbers.stream()
+//                .map(lottoNumber -> lottoNumber.value())
+//                .collect(Collectors.joining(", ")) + "]";
+//    }
+//
+//    public int[] getMatchingRecords(LottoNumber winningLottoNumber) {
+//        int[] matchingRecords = new int[4];
+//
+//        for (LottoNumber lottoNumber : lottoNumbers) {
+//            long count = lottoNumber.countOfMatch(winningLottoNumber);
+//            mappingRecordsToCountOfMatch(matchingRecords, count);
+//        }
+//        return matchingRecords;
+//    }
+//
+//    private void mappingRecordsToCountOfMatch(int[] arr, long count) {
+//        if (count == 3) {
+//            arr[0]++;
+//        } else if (count == 4) {
+//            arr[1]++;
+//        } else if (count == 5) {
+//            arr[2]++;
+//        } else if (count == 6) {
+//            arr[3]++;
+//        }
+//    }
 }
