@@ -10,7 +10,7 @@ public class User {
         this.name = name;
     }
 
-    public List<Lotto> buyLotto(Integer givenWallet) {
+    public List<Lotto> buyLotto(Wallet givenWallet) {
         return LottoMachine.createLottos(givenWallet);
     }
 }
