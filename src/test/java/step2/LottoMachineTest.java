@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class LottoMachineTest {
 
     @Test
-    void 투입_금액만큼_로또를_만든다() {
+    void _10000원으로_로또를_10개_만든다() {
         // Given
         int givenMoney = 10000;
         int expectedNumberOfLotto = 10;
