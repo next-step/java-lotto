@@ -19,4 +19,12 @@ public class User {
     public Money withDraw(Money money) {
         return wallet.withDraw(money);
     }
+
+    public void save(Cache cache) {
+        wallet.save(cache);
+    }
+
+    public Wallet myWallet() {
+        return wallet;
+    }
 }

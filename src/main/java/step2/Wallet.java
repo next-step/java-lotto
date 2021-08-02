@@ -10,8 +10,8 @@ public class Wallet {
         this.cache = cache;
     }
 
-    public void save(Money cache) {
-        this.cache = cache.sum(cache);
+    public void save(Money otherCache) {
+        this.cache = cache.sum(otherCache);
     }
 
     public Money currentMoney() {
