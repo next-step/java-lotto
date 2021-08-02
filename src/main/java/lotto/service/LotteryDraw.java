@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Lotties;
+import lotto.domain.Lotto;
 
 public class LotteryDraw {
 
@@ -8,10 +9,16 @@ public class LotteryDraw {
 
   private Lotties lotties;
 
+  private Lotto wininLotto;
+
   public static final int EACH_LOTTO_COST = 1000;
 
   public LotteryDraw(int money) {
     this.money = money;
+  }
+
+  public LotteryDraw() {
+
   }
 
   public void checkInputValue() {
@@ -31,5 +38,16 @@ public class LotteryDraw {
 
   public Lotties getLottiesInfo() {
     return lotties;
+  }
+
+  public Lotto inputWinningNumbers(String winningLottery) {
+
+    checkWinningLottery();
+    String[] winScoreArray= winningLottery.trim().split(",");
+    return new Lotto(winScoreArray);
+  }
+
+  private void checkWinningLottery() {
+
   }
 }

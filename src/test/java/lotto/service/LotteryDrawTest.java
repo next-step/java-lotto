@@ -3,6 +3,10 @@ package lotto.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,5 +45,14 @@ class LotteryDrawTest {
     lotteryDraw.buyLotties();
 
     assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
+  }
+
+  @DisplayName("당첨번호 입력해서 로또객체 생성 테스트.")
+  @Test
+  void 당첨번호로또생성() {
+
+    LotteryDraw lotteryDraw = new LotteryDraw();
+    Lotto lotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
+    assertThat(lotto.getWinLotto().size()).isEqualTo(6);
   }
 }
