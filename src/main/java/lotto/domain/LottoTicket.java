@@ -9,4 +9,10 @@ class LottoTicket {
         this.lottoNumbers = lottoNumbers.generateNumbers();
     }
 
+    public WinAmount getWinAmount(LottoNumbers winNumbers) {
+        int matchCount = (int) winNumbers.generateNumbers().stream()
+                .filter(i -> this.lottoNumbers.contains(i))
+                .count();
+        return WinAmount.valueOfMatchCount(matchCount);
+    }
 }

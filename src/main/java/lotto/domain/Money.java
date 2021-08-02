@@ -11,6 +11,10 @@ public class Money {
         this.value = value;
     }
 
+    int getValue() {
+        return value;
+    }
+
     int countLotto() {
         return value / MIN_PRICE;
     }
