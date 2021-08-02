@@ -11,15 +11,17 @@ public class Calculator {
     private static final String OR = "|";
     private static final int SECOND_GROUP_INDEX = 1;
     private static final int THIRD_GROUP_INDEX = 2;
+    private static final int DEFAULT_SUM_VALUE = 0;
+    private static final int INITIAL_SUM_VALUE = 0;
 
     public static int splitAndSum(String input) {
         if (isNullOrEmpty(input)) {
-            return 0;
+            return DEFAULT_SUM_VALUE;
         }
 
         int[] numbers = extractNumbers(input);
         return Arrays.stream(numbers)
-                .reduce(0, Integer::sum);
+                .reduce(INITIAL_SUM_VALUE, Integer::sum);
     }
 
     private static boolean isNullOrEmpty(String input) {
