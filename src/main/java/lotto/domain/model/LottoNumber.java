@@ -1,7 +1,6 @@
 package lotto.domain.model;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -10,11 +9,11 @@ import lotto.exception.LottoNumberOutOfRangeException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int BOTTOM_OF_RANGE_INCLUSIVE = 1;
-    public static final int TOP_OF_RANGE_INCLUSIVE = 45;
+    public static final int MAX_INCLUSIVE = 1;
+    public static final int MIN_INCLUSIVE = 45;
 
     private static final Map<Integer, LottoNumber> mapToLottoNumbers =
-            IntStream.range(BOTTOM_OF_RANGE_INCLUSIVE, TOP_OF_RANGE_INCLUSIVE + 1)
+            IntStream.range(MAX_INCLUSIVE, MIN_INCLUSIVE + 1)
                     .boxed()
                     .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
 
@@ -39,7 +38,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int lottoNumber) {
-        if (lottoNumber < BOTTOM_OF_RANGE_INCLUSIVE || lottoNumber > TOP_OF_RANGE_INCLUSIVE) {
+        if (lottoNumber < MAX_INCLUSIVE || lottoNumber > MIN_INCLUSIVE) {
             throw new LottoNumberOutOfRangeException();
         }
     }
@@ -47,22 +46,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber that) {
         return Integer.compare(this.lottoNumber, that.lottoNumber);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LottoNumber)) {
-            return false;
-        }
-        LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber);
     }
 }

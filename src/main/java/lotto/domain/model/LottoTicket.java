@@ -1,20 +1,27 @@
 package lotto.domain.model;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.exception.InvalidLottoTicketException;
 
 public class LottoTicket {
 
+    public static final String COMMA_SPACE_DELIMITER = "\\s*,\\s*";
     public static final int LOTTO_SIZE = 6;
-    public static final String SIZE_OR_DUPLICATE = "숫자의 개수가 맞지 않거나 반복된 수가 있습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(Set<LottoNumber> lottoNumbers) {
-        validateSizeAndDuplicate(lottoNumbers);
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket of(Set<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public static LottoTicket of(List<LottoNumber> lottoNumbers) {
@@ -22,13 +29,12 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbersSet);
     }
 
-//    public static LottoTicket of()
-
-    public static LottoTicket createFromList(List<Integer> numbers) {
-        Set<LottoNumber> lottoNumbers = numbers.stream()
+    public static LottoTicket of(String text) {
+        String[] tokens = text.split(COMMA_SPACE_DELIMITER);
+        List<LottoNumber> lottoNumbers = Arrays.stream(tokens)
                 .map(LottoNumber::of)
-                .collect(Collectors.toCollection(TreeSet::new));
-        return new LottoTicket(lottoNumbers);
+                .collect(Collectors.toList());
+        return of(lottoNumbers);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -36,7 +42,7 @@ public class LottoTicket {
     }
 
     private int countMatches(LottoTicket winningTicket) {
-        // no loss of data from casting to int since LOTTO_SIZE == 6
+        // safe from overflow when casting to int since LOTTO_SIZE == 6
         return (int) lottoNumbers.stream().filter(winningTicket::contains).count();
     }
 
@@ -45,13 +51,15 @@ public class LottoTicket {
         return LottoRank.valueOf(countOfMatch);
     }
 
-    private void validateSizeAndDuplicate(Set<LottoNumber> lottoNumbers) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(SIZE_OR_DUPLICATE);
+            throw new InvalidLottoTicketException();
         }
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> toInts() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::value)
+                .collect(Collectors.toList());
     }
 }

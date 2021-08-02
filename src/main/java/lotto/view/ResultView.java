@@ -1,9 +1,5 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.model.LottoNumber;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoRank;
 import lotto.domain.model.LottoTicket;
@@ -13,7 +9,8 @@ public class ResultView {
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
-        lottoTickets.getTicketList().forEach(ResultView::printLottoTicket);
+        lottoTickets.getTicketList()
+                .forEach(ResultView::printLottoTicket);
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
@@ -23,10 +20,7 @@ public class ResultView {
     }
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
-        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
-        List<Integer> numbers = lottoNumbers.stream().map(LottoNumber::value)
-                .collect(Collectors.toList());
-        System.out.println(numbers);
+        System.out.println(lottoTicket.toInts());
     }
 
     private static void printResultByRank(LottoResult lottoResult, LottoRank lottoRank) {

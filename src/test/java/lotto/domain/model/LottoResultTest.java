@@ -13,7 +13,7 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoResult = LottoResult.createEmpty();
+        lottoResult = LottoResult.empty();
     }
 
     @ParameterizedTest

@@ -18,20 +18,20 @@ public class LottoTicketsTest {
 
     @BeforeEach
     void setUp() {
-        winningTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        firstPrizeTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        thirdPrizeTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 5, 7));
-        fourthPrizeTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 4, 7, 8));
-        fifthPrizeTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 3, 7, 8, 9));
-        noPrizeTicket = LottoTicket.createFromList(Arrays.asList(1, 2, 9, 10, 11, 12));
+        winningTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        firstPrizeTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        thirdPrizeTicket = LottoTicket.of("1, 2, 3, 4, 5, 7");
+        fourthPrizeTicket = LottoTicket.of("1, 2, 3, 4, 7, 8");
+        fifthPrizeTicket = LottoTicket.of("1, 2, 3, 7, 8, 9");
+        noPrizeTicket = LottoTicket.of("1, 2, 9, 10, 11, 12");
     }
 
     @Test
     void match() {
         List<LottoTicket> ticketList = Arrays.asList(firstPrizeTicket, thirdPrizeTicket);
-        LottoTickets lottoTickets = LottoTickets.createFromTicketList(ticketList);
+        LottoTickets lottoTickets = LottoTickets.of(ticketList);
 
-        LottoResult expectedResults = LottoResult.createEmpty();
+        LottoResult expectedResults = LottoResult.empty();
         expectedResults.update(LottoRank.FIRST, 1);
         expectedResults.update(LottoRank.THIRD, 1);
 

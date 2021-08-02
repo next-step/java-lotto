@@ -10,21 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LottoMoneyTest {
 
     @Test
-    @DisplayName("생성자가 1_000원을 전달 받는다.")
-    void valueOf_1000_won() {
-        LottoMoney lottoMoney = LottoMoney.of(1_000);
-        assertThat(lottoMoney).isEqualTo(LottoMoney.of(1_000));
-    }
-
-    @Test
-    @DisplayName("생성자가 14_000원을 전달 받는다.")
-    void valueOf_14000_won() {
-        LottoMoney lottoMoney = LottoMoney.of(14_000);
-        assertThat(lottoMoney).isEqualTo(LottoMoney.of(14_000));
-    }
-
-    @Test
-    @DisplayName("생성자가 400원을 전달 받으면 IllegalArgumentException 을 throw 한다.")
+    @DisplayName("생성자가 400원을 전달 받으면 InvalidLottoMoneyException 을 throw 한다.")
     void valueOf_400_won_invalid() {
         assertThatThrownBy(() -> LottoMoney.of(400)).isInstanceOf(
                 InvalidLottoMoneyException.class);

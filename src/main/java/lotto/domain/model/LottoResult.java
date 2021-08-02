@@ -7,19 +7,16 @@ import java.util.stream.Stream;
 
 public class LottoResult {
 
-    private final Map<LottoRank, Integer> rankToCount;
+    private final Map<LottoRank, Integer> rankToCount = Stream.of(LottoRank.values())
+            .collect(Collectors.toMap(e -> e, e -> 0));
 
-    private LottoResult() {
-        rankToCount = Stream.of(LottoRank.values())
-                .collect(Collectors.toMap(e -> e, e -> 0));
-    }
+    private LottoResult() {}
 
     private LottoResult(Map<LottoRank, Integer> rankToCount) {
-        this();
         this.rankToCount.putAll(rankToCount);
     }
 
-    public static LottoResult createEmpty() {
+    public static LottoResult empty() {
         return new LottoResult();
     }
 

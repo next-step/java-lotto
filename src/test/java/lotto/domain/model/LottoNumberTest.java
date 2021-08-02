@@ -13,22 +13,16 @@ public class LottoNumberTest {
     @DisplayName("펙토리 메서드는 캐싱되어 있는 인스턴스를 반환한다.")
     void givenOfNumber_whenOfSameNumber_thenSameInstance() {
         assertThat(LottoNumber.of(1) == LottoNumber.of(1)).isTrue();
+        assertThat(LottoNumber.of(45) == LottoNumber.of(45)).isTrue();
     }
 
     @Test
-    @DisplayName("생성자가 1 ~ 45 범위 외의 숫자를 전달 받으면 IllegalArgumentException throw 한다.")
+    @DisplayName("생성자가 1 ~ 45 범위 외의 숫자를 전달 받으면 LottoNumberOutOfRangeException throw 한다.")
     void constructor_number_out_of_range() {
         assertThatThrownBy(() -> LottoNumber.of(0)).isInstanceOf(
                LottoNumberOutOfRangeException.class);
         assertThatThrownBy(() -> LottoNumber.of(46)).isInstanceOf(
                 LottoNumberOutOfRangeException.class);
-    }
-
-    @Test
-    @DisplayName("생성자가 1 ~ 45 숫자를 받늗다.")
-    void constructor_in_range() {
-        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
-        assertThat(LottoNumber.of(45)).isEqualTo(LottoNumber.of(45));
     }
 
     @Test

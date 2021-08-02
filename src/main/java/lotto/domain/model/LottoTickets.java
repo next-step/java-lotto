@@ -10,12 +10,12 @@ public class LottoTickets {
         this.ticketList = ticketList;
     }
 
-    public static LottoTickets createFromTicketList(List<LottoTicket> ticketList) {
+    public static LottoTickets of(List<LottoTicket> ticketList) {
         return new LottoTickets(ticketList);
     }
 
     public LottoResult match(LottoTicket winningTicket) {
-        LottoResult lottoResult = LottoResult.createEmpty();
+        LottoResult lottoResult = LottoResult.empty();
         for (LottoTicket lottoTicket : ticketList) {
             LottoRank lottoRank = lottoTicket.findRank(winningTicket);
             lottoResult.update(lottoRank);

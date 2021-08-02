@@ -1,6 +1,5 @@
 package lotto.domain.model;
 
-import java.util.Objects;
 import lotto.exception.InvalidLottoMoneyException;
 
 public class LottoMoney {
@@ -35,22 +34,5 @@ public class LottoMoney {
 
     public int getAmount() {
         return amount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LottoMoney)) {
-            return false;
-        }
-        LottoMoney money = (LottoMoney) o;
-        return amount == money.amount;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(amount);
     }
 }

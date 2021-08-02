@@ -36,10 +36,8 @@ public enum LottoRank {
 
     public static List<LottoRank> getPrintableValues() {
         List<LottoRank> values = Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getCountOfMatch()
-                        >= LottoRank.FIFTH.getCountOfMatch())
-                .collect(
-                        Collectors.toList());
+                .filter(rank -> rank.getCountOfMatch() >= FIFTH.getCountOfMatch())
+                .collect(Collectors.toList());
         Collections.reverse(values);
         return values;
     }

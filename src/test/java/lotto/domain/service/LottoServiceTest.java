@@ -15,7 +15,7 @@ public class LottoServiceTest {
     @DisplayName("수익률을 (유효 수숫점 두자리) 계산한다.")
     void profitPercent() {
         LottoMoney lottoMoney = LottoMoney.of(14000);
-        LottoResult lottoResult = LottoResult.createEmpty();
+        LottoResult lottoResult = LottoResult.empty();
         lottoResult.update(LottoRank.FIFTH);
         double profitPercent = LottoService.profitPercent(lottoResult, lottoMoney);
         assertThat(profitPercent).isCloseTo(0.35, Assertions.offset(0.01));
