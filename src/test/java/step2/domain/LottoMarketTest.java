@@ -8,14 +8,13 @@ import step2.strategy.RandomLottoNum;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMarketTest {
 
     @DisplayName("로또 갯수만큼 사기")
     @Test
     void countLottoList(){
-        LottoList list = LottoList.create();
+        Lotteries list = Lotteries.create();
         LottoMachine machine = LottoMachine.of(new RandomLottoNum());
 
         LottoMarket market = new LottoMarket(machine, list);
@@ -28,7 +27,7 @@ class LottoMarketTest {
     @DisplayName("로또 번호 확인하기")
     @Test
     void checkLottoNumTest(){
-        LottoList list = LottoList.create();
+        Lotteries list = Lotteries.create();
         LottoNumStrategy strategy = new LottoNumStrategy() {
             @Override
             public Lotto makeLotto() {

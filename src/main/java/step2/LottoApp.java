@@ -1,6 +1,6 @@
 package step2;
 
-import step2.domain.LottoList;
+import step2.domain.Lotteries;
 import step2.domain.LottoMachine;
 import step2.domain.LottoMarket;
 import step2.domain.Winnings;
@@ -8,7 +8,6 @@ import step2.strategy.RandomLottoNum;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoApp {
@@ -18,7 +17,7 @@ public class LottoApp {
 
     private static void buyLotto() {
         int money = InputView.inputMoney();
-        LottoList myLottoList = LottoList.create();
+        Lotteries myLottoList = Lotteries.create();
 
         LottoMarket market = new LottoMarket(LottoMachine.of(new RandomLottoNum()),
                 myLottoList);

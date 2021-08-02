@@ -7,9 +7,9 @@ public class LottoMarket {
     private static final int PRICE = 1000;
 
     private LottoMachine machine;
-    private LottoList myLottoList;
+    private Lotteries myLottoList;
 
-    public LottoMarket(LottoMachine machine, LottoList list) {
+    public LottoMarket(LottoMachine machine, Lotteries list) {
         this.machine = machine;
         this.myLottoList = list;
     }

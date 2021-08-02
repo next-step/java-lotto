@@ -3,11 +3,11 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoList {
+public class Lotteries {
     private List<Lotto> lottoList = new ArrayList<>();
 
-    public static LottoList create() {
-        return new LottoList();
+    public static Lotteries create() {
+        return new Lotteries();
     }
 
     public int getSize() {

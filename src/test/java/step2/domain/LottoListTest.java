@@ -15,7 +15,7 @@ class LottoListTest {
 
     private static LottoNumStrategy strategy;
     private static LottoMachine machine;
-    private static LottoList lottoList;
+    private static Lotteries lottoList;
 
     @DisplayName("로또머신 임시로 생성")
     @BeforeAll
@@ -32,7 +32,7 @@ class LottoListTest {
     @DisplayName("로또 리스트 계속 초기화")
     @BeforeEach
     void makeList(){
-        lottoList = LottoList.create();
+        lottoList = Lotteries.create();
     }
 
     @DisplayName("객체가 생성되었는지 확인한다.")
