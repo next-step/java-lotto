@@ -14,6 +14,7 @@ public class LottoNumbers {
     private final int FIRST_COUNT = 6;
     private final int FIRST = 1;
     private final int NONE = 0;
+    private final int PLUS = 1;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -33,9 +34,9 @@ public class LottoNumbers {
 
     private int addContainWinningNUmber(List<Integer> compareToLottoNumbers, Integer lottoNumber) {
         if (compareToLottoNumbers.contains(lottoNumber)) {
-            return 1;
+            return PLUS;
         }
-        return 0;
+        return NONE;
     }
 
     private int getWinning(int containCount) {
