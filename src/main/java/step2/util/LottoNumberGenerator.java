@@ -1,4 +1,4 @@
-package step2;
+package step2.util;
 
 import java.util.ArrayList;
 import java.util.Collections;

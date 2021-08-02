@@ -1,6 +1,8 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.Lotto;
+import step2.domain.LottoNumber;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
