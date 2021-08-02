@@ -1,13 +1,14 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
     private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String OR = "|";
-    private static final String CUSTOM_DELIMITER_OPEN_WRAPPER = "//";
-    private static final String CUSTOM_DELIMITER_CLOSE_WRAPPER = "\\n";
-    private static final int FIRST_INDEX = 0;
+    private static final int SECOND_GROUP_INDEX = 1;
+    private static final int THIRD_GROUP_INDEX = 2;
 
     public static int calculateAddition(String input) {
         int[] numbers = extractNumbers(input);
@@ -17,31 +18,16 @@ public class Calculator {
 
     static int[] extractNumbers(String input) {
         String delimiters = DEFAULT_DELIMITERS;
-        if (hasCustomDelimiter(input)) {
-            delimiters += OR + getCustomDelimiter(input);
-            input = getCustomDelimiterInputRemoved(input);
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(SECOND_GROUP_INDEX);
+            delimiters += OR + customDelimiter;
+            input = matcher.group(THIRD_GROUP_INDEX);
         }
 
         String[] numbers = input.split(delimiters);
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .toArray();
-    }
-
-    private static boolean hasCustomDelimiter(String input) {
-        return input.indexOf(CUSTOM_DELIMITER_OPEN_WRAPPER) == FIRST_INDEX
-                && input.contains(CUSTOM_DELIMITER_CLOSE_WRAPPER);
-    }
-
-    private static String getCustomDelimiter(String input) {
-        int customDelimiterStartPosition = CUSTOM_DELIMITER_OPEN_WRAPPER.length();
-        int customDelimiterEndPosition = input.indexOf(CUSTOM_DELIMITER_CLOSE_WRAPPER);
-        return input.substring(customDelimiterStartPosition, customDelimiterEndPosition);
-    }
-
-    private static String getCustomDelimiterInputRemoved(String input) {
-        int customDelimiterCloseWrapperEndPosition
-                = input.indexOf(CUSTOM_DELIMITER_CLOSE_WRAPPER) + CUSTOM_DELIMITER_CLOSE_WRAPPER.length();
-        return input.substring(customDelimiterCloseWrapperEndPosition);
     }
 }
