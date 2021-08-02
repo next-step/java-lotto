@@ -15,6 +15,10 @@ public class LottoFactory {
         return new NormalLotto(LottoNumbers.create());
     }
 
+    public static NormalLotto createNormal(Set<Integer> numbers) {
+        return new NormalLotto(LottoNumbers.create(numbers));
+    }
+
     public static WinningLotto createWinning(Set<Integer> numbers, int bonusNumber) {
         validationWinningLotto(numbers, bonusNumber);
         return new WinningLotto(LottoNumbers.create(numbers), bonusNumber);

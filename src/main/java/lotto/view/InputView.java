@@ -17,6 +17,13 @@ public class InputView {
         return parseInteger(input);
     }
 
+    public static int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = scanner.nextLine();
+
+        return parseInteger(input);
+    }
+
     private static int parseInteger(String input) {
         try {
             return Integer.parseInt(input);
@@ -28,6 +35,13 @@ public class InputView {
     public static Set<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
+
+        return parseIntegers(input, ",");
+    }
+
+    public static Set<Integer> inputManualNumbers() {
+        String input = scanner.nextLine();
+
         return parseIntegers(input, ",");
     }
 
