@@ -8,6 +8,7 @@ public class Calculator {
     private String text;
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
 
     public Calculator(String text) {
         this.text = text;
@@ -39,12 +40,24 @@ public class Calculator {
         return Integer.valueOf(text);
     }
 
-    public int addNumbers(String numbers[]) {
+    public int calculate() {
+        if (checkCustomDelimiter()) {
+           return addNumbers(matcher.group(1));
+        }
+
+       return addNumbers(DELIMITER);
+    }
+    public boolean checkCustomDelimiter() {
+        return matcher.find();
+    }
+
+    public int addNumbers(String delimiter) {
+        String[] numbers = text.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            isNegativeNumber(number);
             sum += Integer.valueOf(number);
         }
+
         return sum;
     }
 
