@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class UtilTest {
     @Test
@@ -26,5 +26,21 @@ public class UtilTest {
         String[] inputStringArray = StringUtil.separator(inputString);
         List<Integer> lottoNumbers = StringUtil.stringArrayToIntegerList(inputStringArray);
         assertThat(lottoNumbers).contains(1,2,3,4,5,6);
+    }
+
+    @Test
+    @DisplayName("당첨 로또 중복 번호 확인")
+    void dupleInputNumber(){
+        String inputString = "1,1,1,1,1,1";
+        assertThatThrownBy(() -> StringUtil.stringArrayToIntegerList(StringUtil.separator(inputString)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨 로또 6개 아닐 경우 확인")
+    void notMaxCountInputNumber(){
+        String inputString = "1,1,1,1,1";
+        assertThatThrownBy(() -> StringUtil.stringArrayToIntegerList(StringUtil.separator(inputString)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
