@@ -26,10 +26,10 @@ class LottoServiceTest {
     public void shoud_return_lottopackage(int moneyAmount, int expectedCount) throws Exception {
         //arrange
         Money money = Money.of(moneyAmount);
-        ManaualLottos manaualLottos = null;
-        PaymentInfo paymentInfo = PaymentInfo.of(money, manaualLottos);
+        ManualLottos manualLottos = null;
+        PaymentInfo paymentInfo = PaymentInfo.of(money, manualLottos);
 
-        Lottos lottos = LottoService.purchase(paymentInfo, manaualLottos);
+        Lottos lottos = LottoService.purchase(paymentInfo, manualLottos);
 
         //assert
         assertThat(lottos.size()).isEqualTo(expectedCount);
@@ -40,11 +40,11 @@ class LottoServiceTest {
     public void shoud_return_lottopackage_with_manual_lotto() throws Exception {
         //arrange
         Money money = Money.of(2000);
-        ManaualLottos manaualLottos = getOneManaualLottos();
-        PaymentInfo paymentInfo = PaymentInfo.of(money, manaualLottos);
+        ManualLottos manualLottos = getOneManaualLottos();
+        PaymentInfo paymentInfo = PaymentInfo.of(money, manualLottos);
 
         //act
-        Lottos resultLottos = LottoOffice.purchase(paymentInfo, manaualLottos);
+        Lottos resultLottos = LottoOffice.purchase(paymentInfo, manualLottos);
 
         //assert
         assertThat(resultLottos.size()).isEqualTo(2);

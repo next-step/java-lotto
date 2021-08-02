@@ -30,7 +30,7 @@ class LottoOfficeTest {
     public void should_return_count_of_lotto_in_money_when_with_manual_lottos() throws Exception {
         //arrange
         Money money = Money.of(14000);
-        ManaualLottos lottos = getOneManaualLottos();
+        ManualLottos lottos = getOneManaualLottos();
         PaymentInfo paymentInfo = PaymentInfo.of(money, lottos);
 
         //act

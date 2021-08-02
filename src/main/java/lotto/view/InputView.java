@@ -1,8 +1,7 @@
 package lotto.view;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManaualLottos;
+import lotto.domain.lotto.ManualLottos;
 import lotto.domain.lotto.number.LottoNumber;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.number.LottoNumbers;
@@ -39,14 +38,14 @@ public class InputView {
         return changeIntInputValue();
     }
 
-    public static ManaualLottos inputManualLottoTickets(int count) {
+    public static ManualLottos inputManualLottoTickets(int count) {
         printStatement(INPUT_MANUAL_LOTTO_NUMBERS);
 
         return IntStream.range(MIN_COUNT_MANUAL_LOTTO, count)
                 .mapToObj(i -> getLottoNumbers())
                 .map(LottoNumbers::of)
                 .map(Lotto::of)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), ManaualLottos::of));
+                .collect(Collectors.collectingAndThen(Collectors.toList(), ManualLottos::of));
     }
 
 

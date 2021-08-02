@@ -2,7 +2,7 @@ package lotto.fixture;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManaualLottos;
+import lotto.domain.lotto.ManualLottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.number.LottoNumber;
 import lotto.domain.lotto.number.LottoNumbers;
@@ -76,18 +76,18 @@ public class LottoFixture {
         return LottoNumber.of(43);
     }
 
-    public static ManaualLottos getOneManaualLottos() {
+    public static ManualLottos getOneManaualLottos() {
         List<LottoNumber> lottoNumberList = createOneToSixLottoNumberSequence();
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
         Lotto lotto = Lotto.of(lottoNumbers);
-        return ManaualLottos.of(Arrays.asList(lotto));
+        return ManualLottos.of(Arrays.asList(lotto));
     }
 
-    public static ManaualLottos getFiveManaualLottos() {
+    public static ManualLottos getFiveManaualLottos() {
         List<LottoNumber> lottoNumberList = createOneToSixLottoNumberSequence();
         LottoNumbers lottoNumbers = LottoNumbers.of(lottoNumberList);
         Lotto lotto = Lotto.of(lottoNumbers);
-        return ManaualLottos.of(Arrays.asList(lotto, lotto, lotto, lotto, lotto));
+        return ManualLottos.of(Arrays.asList(lotto, lotto, lotto, lotto, lotto));
     }
 
 }

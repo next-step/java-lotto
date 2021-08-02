@@ -3,14 +3,14 @@ package lotto.domain.lotto;
 import java.util.List;
 import java.util.Objects;
 
-public class ManaualLottos extends Lottos {
+public class ManualLottos extends Lottos {
 
-    protected ManaualLottos(List<Lotto> lottos) {
+    protected ManualLottos(List<Lotto> lottos) {
         super(lottos);
     }
 
-    public static ManaualLottos of(List<Lotto> lottos) {
-        return new ManaualLottos(lottos);
+    public static ManualLottos of(List<Lotto> lottos) {
+        return new ManualLottos(lottos);
     }
 
     @Override

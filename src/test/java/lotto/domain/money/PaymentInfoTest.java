@@ -1,6 +1,6 @@
 package lotto.domain.money;
 
-import lotto.domain.lotto.ManaualLottos;
+import lotto.domain.lotto.ManualLottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class PaymentInfoTest {
     void should_create_paymentInfo() {
         //arrange
         Money money = Money.of(1_000);
-        ManaualLottos lottos = getOneManaualLottos();
+        ManualLottos lottos = getOneManaualLottos();
 
         //act
         PaymentInfo paymentInfo = PaymentInfo.of(money, lottos);
@@ -39,7 +39,7 @@ class PaymentInfoTest {
     void throw_exception_manauallottos_over_than_money() {
         //arrange
         Money money = Money.of(1_000);
-        ManaualLottos lottos = getFiveManaualLottos();
+        ManualLottos lottos = getFiveManaualLottos();
 
         //act, assert
         assertThatIllegalStateException().isThrownBy(() -> PaymentInfo.of(money, lottos));
@@ -50,7 +50,7 @@ class PaymentInfoTest {
     void can_purcahse_lotos_auto_with_manaual() {
         //arrange
         Money money = Money.of(7_000);
-        ManaualLottos lottos = getFiveManaualLottos();
+        ManualLottos lottos = getFiveManaualLottos();
         PaymentInfo paymentInfo = PaymentInfo.of(money, lottos);
         int expectRemainCount = 2;
 
