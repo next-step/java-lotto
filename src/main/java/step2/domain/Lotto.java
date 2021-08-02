@@ -14,8 +14,9 @@ public class Lotto {
     private List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
-        validation(numbers);
-        this.numbers = new ArrayList<Integer>(numbers);
+        List<Integer> inputList = new ArrayList<Integer>(numbers);
+        validation(inputList);
+        this.numbers = inputList;
     }
 
     public static Lotto from(List<Integer> list) {
