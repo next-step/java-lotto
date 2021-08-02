@@ -41,7 +41,7 @@ public class CalculatorTest {
         assertEquals(Calculator.splitAndSum(input), 1);
     }
 
-    @DisplayName("쉼표(,) 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
+    @DisplayName("쉼표(,)를 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
     @Test
     public void addNumbersOfCommaDelimiterInputTest() {
         // given
