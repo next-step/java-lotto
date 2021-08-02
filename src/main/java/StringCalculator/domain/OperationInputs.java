@@ -1,75 +1,51 @@
 package StringCalculator.domain;
 
-import StringCalculator.exception.WrongInputException;
-import java.util.Arrays;
+import StringCalculator.util.StringUtils;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OperationInputs {
 
-    private static final String DEFAULT_DELIMITER_REGEX = ",|:";
-    private static final String ALLOWED_OPERANDS_REGEX = "\\d*";
-    private static final String ZERO_STRING = "0";
+    private static final String CUSTOM_DELIMITER_INPUT_PATTERN = "\\//(.)\n(.*)";
 
-    private final List<Integer> operands;
+    private final Operands operands;
     private final OperateStrategy strategy;
 
 
     public OperationInputs(String userInput, OperateStrategy strategy) {
-        List<Integer> operands = generateOperands(userInput);
 
         this.strategy = strategy;
-        this.operands = operands;
+        this.operands = prepareOperands(userInput);
     }
 
-    public OperationInputs(List<Integer> operands, OperateStrategy strategy) {
-        this.strategy = strategy;
-        this.operands = operands;
-    }
+    private Operands prepareOperands(String userInput) {
 
-    private List<Integer> generateOperands(String userInput) {
-        String[] splitStrings = splitStringByDelimiter(userInput);
-        List<Integer> operands = convertStringArrayToIntList(splitStrings);
+        if (hasCustomDelimiterString(userInput)) {
+            Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_INPUT_PATTERN).matcher(userInput);
+            matcher.find();
+            String customDelimiter = matcher.group(1);
+            String operandString = matcher.group(2);
 
-        return operands;
-    }
-
-    private List<Integer> convertStringArrayToIntList(String[] splitStrings) {
-        return Arrays.stream(splitStrings)
-            .filter(s -> {
-                if (isNotAllowedOperand(s)) {
-                    throw new WrongInputException(String.format("'%s'는 유효한 피연산자가 아닙니다.", s));
-                }
-                return true;
-            })
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .collect(Collectors.toList());
-    }
-
-    private boolean isNotAllowedOperand(String s) {
-        return !s.matches(ALLOWED_OPERANDS_REGEX);
-    }
-
-    private String[] splitStringByDelimiter(String userInput) {
-
-        if (checkNullOrEmpty(userInput)) {
-            return new String[]{ZERO_STRING};
+            return Operands.createByCustomDelimiter(operandString, customDelimiter);
         }
-        return userInput.split(DEFAULT_DELIMITER_REGEX);
+
+        return Operands.createByDefaultDelimiter(userInput);
 
     }
 
-    private boolean checkNullOrEmpty(String userInput) {
-        if (userInput == null || userInput.trim().isEmpty()) {
-            return true;
+    private boolean hasCustomDelimiterString(String userInput) {
+
+        if (StringUtils.checkNullOrEmpty(userInput)) {
+            return false;
         }
-        return false;
+
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_INPUT_PATTERN).matcher(userInput);
+        return matcher.find();
     }
 
-
-    public List<Integer> getOperands() {
-        return operands;
+    public List<Integer> getOperandsList() {
+        return operands.value();
     }
 
     public OperateStrategy getStrategy() {
