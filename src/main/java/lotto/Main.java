@@ -19,6 +19,7 @@ public class Main {
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
 
-
+        game.setPreviousLotto(InputView.inputPreviousLottoNumber());
+        ResultView.resultLottoReward(game);
     }
 }

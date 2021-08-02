@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Game;
 import lotto.domain.Lotto;
+import lotto.domain.Reward;
 
 public class ResultView {
 
@@ -17,6 +18,11 @@ public class ResultView {
     }
 
     public static void resultLottoReward(Game game) {
-
+        for (Reward reward : Reward.values()) {
+            System.out.println(
+                    reward.getRightNumberCount() + "개 일치 ("
+                            + reward.getMoney() + "원)- " +
+                            game.getNumberOfRightLotto(reward.getRightNumberCount()) + "개");
+        }
     }
 }

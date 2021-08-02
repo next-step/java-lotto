@@ -4,14 +4,20 @@ import java.util.List;
 
 public class Game {
     private final List<Lotto> lottoList;
-    private Lotto PreviousLotto;
+    private Lotto previousLotto;
 
     public Game(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
     public void setPreviousLotto(Lotto previousLotto) {
-        this.PreviousLotto = previousLotto;
+        this.previousLotto = previousLotto;
+    }
+
+    public int getNumberOfRightLotto(int rightNumber) {
+        return (int) lottoList.stream().
+                filter(lotto -> lotto.getCountOfRightNumber(previousLotto) == rightNumber)
+                .count();
     }
 
     public List<Lotto> getLottoList() {

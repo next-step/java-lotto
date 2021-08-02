@@ -16,6 +16,12 @@ public class Lotto {
         this.balls = balls;
     }
 
+    public int getCountOfRightNumber(Lotto previousLotto) {
+        return (int) balls.stream().
+                filter(previousLotto.balls::contains)
+                .count();
+    }
+
     private void validNumberCountSize(Set<Ball> balls) {
         if (balls.size() != NUMBER_SIZE)
             throw new IllegalArgumentException(VALID_NUMBER_COUNT);
