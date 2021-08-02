@@ -23,14 +23,9 @@ public class Calculator {
     }
 
     public boolean checkOnlyNumber() {
-        String[] numbers = text.split(DELIMITER);
-        if (numbers.length >1){
-            return false;
-        }
-        for (String number : numbers) {
-            isNegativeNumber(number);
-        }
-        return true;
+
+        return text.matches("[0-9]");
+
     }
 
     public void isNegativeNumber(String number) {
