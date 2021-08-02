@@ -2,7 +2,9 @@ package lotto.step1;
 
 
 public class Validation {
-    private final String text;
+
+    private String text;
+    private static final String DELIMITER = ",|:";
 
     public Validation(String text) {
         this.text = text;
@@ -15,5 +17,4 @@ public class Validation {
     public boolean checkOnlyNumber() {
         return text.matches("[0-9]");
     }
-
 }

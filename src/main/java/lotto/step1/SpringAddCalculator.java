@@ -9,6 +9,12 @@ public class SpringAddCalculator {
     }
 
     public int splitAndSum(String text) {
-        return 0;
+       if (validation.checkEmptyAndNull()) {
+           return 0;
+       }
+
+       if (validation.checkNotNegativeNumber()) {
+           return Integer.valueOf(text);
+       }
     }
 }
