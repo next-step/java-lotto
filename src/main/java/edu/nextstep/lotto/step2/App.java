@@ -1,5 +1,6 @@
 package edu.nextstep.lotto.step2;
 
+import edu.nextstep.lotto.common.BusinessException;
 import edu.nextstep.lotto.step2.domain.LottoList;
 import edu.nextstep.lotto.step2.domain.WinningList;
 import edu.nextstep.lotto.step2.view.InputView;
@@ -11,16 +12,22 @@ public class App {
     private static final ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
-        int purchaseAmount = inputView.getPurchaseAmount();
 
-        LottoList lottoList = new LottoList(purchaseAmount);
+        try {
+            int purchaseAmount = inputView.getPurchaseAmount();
 
-        resultView.outputNumberOfPurchase(lottoList);
-        resultView.outputLottoList(lottoList);
+            LottoList lottoList = new LottoList(purchaseAmount);
 
-        WinningList winningList = new WinningList(inputView.getWinningNumber());
+            resultView.outputNumberOfPurchase(lottoList);
+            resultView.outputLottoList(lottoList);
 
-        resultView.outputStatistics(lottoList, winningList);
-        resultView.outputRate(lottoList, winningList, purchaseAmount);
+            WinningList winningList = new WinningList(inputView.getWinningNumber());
+
+            resultView.outputStatistics(lottoList, winningList);
+            resultView.outputRate(lottoList, winningList, purchaseAmount);
+
+        } catch (BusinessException e) {
+            System.out.printf("code: %s, message: %s", e.getCode(), e.getMessage());
+        }
     }
 }

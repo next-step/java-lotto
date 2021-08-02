@@ -15,4 +15,13 @@ public class BusinessException extends RuntimeException {
         this.code = error.name();
         this.message = error.getMessage();
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
 }
