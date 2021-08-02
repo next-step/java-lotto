@@ -17,6 +17,12 @@ class CalculatorTest {
         Calculator calculator = new Calculator("3");
         Assertions.assertThat(calculator.checkOnlyNumber()).isTrue();
     }
+    @Test
+    @DisplayName("문자열로 숫자 하나를 입력 했는지 검증 하는 테스트2")
+    void onlyNumberTest2() {
+        Calculator calculator = new Calculator("s");
+        Assertions.assertThat(calculator.checkOnlyNumber()).isFalse();
+    }
 
     @Test
     @DisplayName("음수를 포함했을 때 예외처리 하는 테스트")
@@ -31,5 +37,13 @@ class CalculatorTest {
         Calculator calculator = new Calculator("//;\n1;2;3");
         assertThat(calculator.checkCustomDelimiter()).isTrue();
     }
+
+    @Test
+    @DisplayName("문자열에 커스텀 구분자가 있는지 확인하는 테스트2")
+    void checkCustomDelimiter2() {
+        Calculator calculator = new Calculator("//.\n3.4.2");
+        assertThat(calculator.checkCustomDelimiter()).isTrue();
+    }
+
 
 }

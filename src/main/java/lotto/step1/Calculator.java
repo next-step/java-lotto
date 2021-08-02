@@ -23,16 +23,13 @@ public class Calculator {
     }
 
     public boolean checkOnlyNumber() {
-
         return text.matches("[0-9]");
-
     }
 
     public void isNegativeNumber(String number) {
         if (Integer.valueOf(number) < 0) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
-
     }
 
     public int printNumber() {
@@ -41,11 +38,15 @@ public class Calculator {
 
     public int calculate() {
         if (checkCustomDelimiter()) {
-           return addNumbers(matcher.group(1));
+            text = matcher.group(2);
+            System.out.println("---"+matcher.group(1));
+            String delimiter = DELIMITER + "|" + matcher.group(1);
+            return addNumbers(delimiter);
         }
 
-       return addNumbers(DELIMITER);
+        return addNumbers(DELIMITER);
     }
+
     public boolean checkCustomDelimiter() {
         return matcher.find();
     }
@@ -54,6 +55,7 @@ public class Calculator {
         String[] numbers = text.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
+            isNegativeNumber(number);
             sum += Integer.valueOf(number);
         }
 

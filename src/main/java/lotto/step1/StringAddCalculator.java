@@ -9,14 +9,14 @@ public class StringAddCalculator {
     }
 
     public int splitAndSum() {
-       if (calculator.checkEmptyAndNull()) {
-           return 0;
-       }
+        if (calculator.checkEmptyAndNull()) {
+            return 0;
+        }
 
-       if (calculator.checkNotNegativeNumber()) {
-           return calculator.printNumber();
-       }
+        if (calculator.checkOnlyNumber()) {
+            return calculator.printNumber();
+        }
 
-       return calculator.calculate();
+        return calculator.calculate();
     }
 }
