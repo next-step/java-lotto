@@ -68,7 +68,17 @@ public class LottoTest {
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
-        int[] prizeArray = PlayLotto.playLotto(winningNumberString, Arrays.asList(lotto));
-        assertThat(prizeArray[testPrizeNumber]).isEqualTo(1);
+        int[] winningArray = PlayLotto.playLotto(winningNumberString, Arrays.asList(lotto));
+        assertThat(winningArray[testPrizeNumber]).isEqualTo(1);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"10,0,1,0,2,107.86","13,1,0,0,0,14285.71","12,0,0,0,2,0.71"})
+    @DisplayName("수익률 계산")
+    void profitTest(int none, int firstCount, int secondCount, int thirdCound, int fourthCount, double testProfit){
+        int cash = 14000;
+        int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCound, fourthCount};
+        double profit = PlayLotto.calculateProfit(cash,prizeArray);
+        assertThat(profit).isEqualTo(testProfit);
     }
 }
