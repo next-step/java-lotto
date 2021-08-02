@@ -28,6 +28,16 @@ public class CalculatorTest {
         assertEquals(Calculator.calculateAddition(input), 0);
     }
 
+    @DisplayName("숫자를 하나 입력하면, 해당 숫자를 반환해야 한다.")
+    @Test
+    public void singleNumberInputTest() {
+        // given
+        String input = "1";
+
+        // when, then
+        assertEquals(Calculator.calculateAddition(input), 1);
+    }
+
     @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열의 숫자 합을 계산할 수 있다.")
     @Test
     public void addNumbersTest() {
