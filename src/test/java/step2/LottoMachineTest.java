@@ -10,11 +10,11 @@ class LottoMachineTest {
     @Test
     void _10000원으로_로또를_10개_만든다() {
         // Given
-        int givenMoney = 10000;
+        Cache givenCache = new Cache(10000);
         int expectedNumberOfLotto = 10;
 
         // When
-        List<Lotto> lottos = LottoMachine.createLottos(Wallet.save(givenMoney));
+        List<Lotto> lottos = LottoMachine.createLottos(Wallet.save(givenCache));
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
