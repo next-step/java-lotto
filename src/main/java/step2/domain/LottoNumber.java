@@ -19,8 +19,16 @@ public class LottoNumber {
                 throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION);
             }
         }
-
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+            "numbers=" + numbers +
+            '}';
+    }
 }
