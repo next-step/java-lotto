@@ -1,5 +1,6 @@
 package StringCalculator.domain;
 
+import StringCalculator.exception.WrongInputException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 public class OperationInputs {
 
     private static final String DEFAULT_DELIMITER_REGEX = ",|:";
+    private static final String ALLOWED_OPERANDS_REGEX = "\\d*";
     private static final String ZERO_STRING = "0";
 
     private final List<Integer> operands;
@@ -34,9 +36,19 @@ public class OperationInputs {
 
     private List<Integer> convertStringArrayToIntList(String[] splitStrings) {
         return Arrays.stream(splitStrings)
+            .filter(s -> {
+                if (isNotAllowedOperand(s)) {
+                    throw new WrongInputException(String.format("'%s'는 유효한 피연산자가 아닙니다.", s));
+                }
+                return true;
+            })
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
+    }
+
+    private boolean isNotAllowedOperand(String s) {
+        return !s.matches(ALLOWED_OPERANDS_REGEX);
     }
 
     private String[] splitStringByDelimiter(String userInput) {
