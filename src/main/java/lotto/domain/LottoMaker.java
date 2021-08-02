@@ -10,6 +10,10 @@ public class LottoMaker {
         return new Lotto(makeLotto());
     }
 
+    public static Lotto manual(Set<Integer> lottoList) {
+        return new Lotto(makeManualLotto(lottoList));
+    }
+
     private static List<Integer> makeLotto() {
         HashSet<Integer> lottoMaker = new HashSet<>();
 
@@ -20,6 +24,12 @@ public class LottoMaker {
         List<Integer> lotto = new ArrayList<>(lottoMaker);
         Collections.sort(lotto);
 
+        return lotto;
+    }
+
+    private static List<Integer> makeManualLotto(Set<Integer> manualLotto) {
+        List<Integer> lotto = new ArrayList<>(manualLotto);
+        Collections.sort(lotto);
         return lotto;
     }
 

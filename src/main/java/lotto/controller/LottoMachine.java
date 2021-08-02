@@ -15,8 +15,8 @@ public class LottoMachine {
         return lottoValidate.priceValidation(price);
     }
 
-    public List<Lotto> addLottos(int count) {
-        return Lottos.addLotto(count).getLottos();
+    public List<Lotto> addLottos(int count, List<Lotto> manualLists) {
+        return Lottos.addLotto(count, manualLists).getLottos();
     }
 
     public void lotteryJackpot(Lotto lotto, List<Integer> correctNumbers, int bonusNumber) {

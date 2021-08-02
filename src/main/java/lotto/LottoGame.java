@@ -18,9 +18,14 @@ public class LottoGame {
         int price = inputView.buyLotto();
 
         int count = lottoMachine.run(price);
-        resultView.printCount(count);
+        int manualCount = inputView.buyManualLotto();
+        count = manualCount;
 
-        List<Lotto> lottos = lottoMachine.addLottos(count);
+        List<Lotto> manualList = inputView.manualLottoNumber(manualCount);
+
+        resultView.printCount(count, manualCount);
+
+        List<Lotto> lottos = lottoMachine.addLottos(count, manualList);
 
         for (Lotto lotto: lottos) {
             resultView.lottoList(lotto);

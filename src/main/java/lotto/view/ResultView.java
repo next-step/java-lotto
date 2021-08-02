@@ -43,7 +43,7 @@ public class ResultView {
         System.out.println("총 수익률은 : " + result + "입니다.");
     }
 
-    public void printCount(int count) {
-        System.out.println(count + "개 구매했습니다.");
+    public void printCount(int count, int manualCount) {
+        System.out.println("수동 " + manualCount + "개, 자동 " + count + "개 구매했습니다.");
     }
 }
