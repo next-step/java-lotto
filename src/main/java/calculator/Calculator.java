@@ -9,6 +9,12 @@ public class Calculator {
     private static final String CUSTOM_DELIMITER_CLOSE_WRAPPER = "\\n";
     private static final int FIRST_INDEX = 0;
 
+    public static int calculateAddition(String input) {
+        int[] numbers = extractNumbers(input);
+        return Arrays.stream(numbers)
+                .reduce(0, Integer::sum);
+    }
+
     static int[] extractNumbers(String input) {
         String delimiters = DEFAULT_DELIMITERS;
         if (hasCustomDelimiter(input)) {

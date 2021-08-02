@@ -2,8 +2,11 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("문자열 덧셈 계산기 테스트")
 public class CalculatorTest {
@@ -32,5 +35,13 @@ public class CalculatorTest {
 
         // then
         assertThat(numbers).containsExactly(1, 2, 3);
+    }
+
+    @DisplayName("숫자의 합을 계산할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3=6", "//;\\n1;2;3=6"}, delimiter = '=')
+    public void addNumbersTest(String input, String sum) {
+        // when, then
+        assertEquals(Calculator.calculateAddition(input), Integer.parseInt(sum));
     }
 }
