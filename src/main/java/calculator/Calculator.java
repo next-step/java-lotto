@@ -30,19 +30,33 @@ public class Calculator {
     }
 
     private static int[] extractNumbers(String input) {
+        String delimiters = getDelimitersOf(input);
+        String numbersWithDelimiters = getInputRemovedCustomDelimiter(input);
+
+        String[] numbers = numbersWithDelimiters.split(delimiters);
+        validateZeroOrPositiveNumber(numbers);
+
+        return Arrays.stream(numbers)
+                .mapToInt(Integer::parseInt)
+                .toArray();
+    }
+
+    private static String getDelimitersOf(String input) {
         String delimiters = DEFAULT_DELIMITERS;
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(SECOND_GROUP_INDEX);
             delimiters += OR + customDelimiter;
-            input = matcher.group(THIRD_GROUP_INDEX);
         }
+        return delimiters;
+    }
 
-        String[] numbers = input.split(delimiters);
-        validateZeroOrPositiveNumber(numbers);
-        return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .toArray();
+    private static String getInputRemovedCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+        if (matcher.find()) {
+            return matcher.group(THIRD_GROUP_INDEX);
+        }
+        return input;
     }
 
     private static void validateZeroOrPositiveNumber(String[] numbers) {
