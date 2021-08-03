@@ -1,13 +1,13 @@
 package step3.strategy;
 
+import lotto.strategy.LottoMatcher;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.Lotto;
-import step3.domain.Winning;
+import lotto.domain.Lotto;
+import lotto.domain.Winning;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

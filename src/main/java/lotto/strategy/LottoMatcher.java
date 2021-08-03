@@ -1,8 +1,8 @@
-package step3.strategy;
+package lotto.strategy;
 
-import step3.domain.Lotto;
-import step3.domain.WinnerLotto;
-import step3.domain.Winning;
+import lotto.domain.Lotto;
+import lotto.domain.WinnerLotto;
+import lotto.domain.Winning;
 
 public class LottoMatcher {
     public int matchLotto(Lotto myLotto, Lotto winner) {

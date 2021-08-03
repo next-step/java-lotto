@@ -1,5 +1,6 @@
 package step3.domain;
 
+import lotto.domain.Winning;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,12 +1,12 @@
-package step3;
+package lotto;
 
-import step3.domain.Lotteries;
-import step3.domain.LottoMachine;
-import step3.domain.LottoMarket;
-import step3.domain.Winning;
-import step3.strategy.RandomLottoNum;
-import step3.view.InputView;
-import step3.view.ResultView;
+import lotto.strategy.RandomLottoNum;
+import lotto.domain.Lotteries;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoMarket;
+import lotto.domain.Winning;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Map;
 

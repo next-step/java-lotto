@@ -1,6 +1,6 @@
-package step3.view;
+package lotto.view;
 
-import step3.domain.Lotto;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package step3.domain;
+package lotto.domain;
 
 public class WinnerLotto {
     private Lotto lotto;

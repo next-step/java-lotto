@@ -1,6 +1,6 @@
-package step3.domain;
+package lotto.domain;
 
-import step3.strategy.LottoMatcher;
+import lotto.strategy.LottoMatcher;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

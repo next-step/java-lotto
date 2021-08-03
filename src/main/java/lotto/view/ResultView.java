@@ -1,7 +1,7 @@
-package step3.view;
+package lotto.view;
 
-import step3.domain.Lotto;
-import step3.domain.Winning;
+import lotto.domain.Lotto;
+import lotto.domain.Winning;
 
 import java.util.List;
 import java.util.Map;
