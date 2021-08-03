@@ -27,9 +27,9 @@ public class ResultView {
         System.out.println("--------");
 
         System.out.println("3개 일치 (5000원)- " + result.getOrDefault(LottoRankEnum.THREE_MATCH, DEFAULT_COUNT) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.getOrDefault(LottoRankEnum.FOUR_MATCH,DEFAULT_COUNT) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.getOrDefault(LottoRankEnum.FIVE_MATCH,DEFAULT_COUNT)  + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRankEnum.ALL_MATCH,DEFAULT_COUNT) + "개");
+        System.out.println("4개 일치 (50000원)- " + result.getOrDefault(LottoRankEnum.FOUR_MATCH, DEFAULT_COUNT) + "개");
+        System.out.println("5개 일치 (1500000원)- " + result.getOrDefault(LottoRankEnum.FIVE_MATCH, DEFAULT_COUNT) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRankEnum.ALL_MATCH, DEFAULT_COUNT) + "개");
     }
 
     public static void printProfitRate(double profitRate) {

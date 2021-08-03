@@ -40,12 +40,5 @@ public class LottoMachine {
 
     }
 
-    public double calculateProfitRate(int[] matchingRecords) {
 
-        double totalAmount = (matchingRecords[0] * 5000 + matchingRecords[1] * 50000 + matchingRecords[2] * 1500000 + matchingRecords[3] * 2000000000);
-
-        double profitRate = totalAmount / purchaseAmount;
-
-        return profitRate;
-    }
 }

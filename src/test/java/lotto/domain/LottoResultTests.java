@@ -31,4 +31,22 @@ public class LottoResultTests {
 
         assertThat(lottoResult.getLottoResult().get(LottoRankEnum.ALL_MATCH)).isEqualTo(1);
     }
+
+    @DisplayName("결과로 수익 계산이 올바른 지 테스트")
+    @Test
+    void validLottoCalculateProfitTest(){
+        LottoNumbers lottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+
+        LottoNumbers winningLottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+
+        Set<LottoNumbers> totalLottoNumbers = new HashSet<>();
+
+        totalLottoNumbers.add(lottoNumbers);
+
+        LottoResult lottoResult = LottoResult.of(totalLottoNumbers, winningLottoNumbers);
+
+        assertThat(lottoResult.calculateProfitRate(14000)).isEqualTo(142857.14285714287);
+    }
 }

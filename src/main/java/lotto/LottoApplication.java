@@ -33,9 +33,10 @@ public class LottoApplication {
 
         LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
 
-        ResultView.printWinningStatistics(LottoResult.of(totalLottoNumbers, winningLottoNumbers));
+        LottoResult lottoResult = LottoResult.of(totalLottoNumbers, winningLottoNumbers);
 
-//        ResultView.printProfitRate(lottoMachine.calculateProfitRate(matchingRecords));
+        ResultView.printWinningStatistics(lottoResult);
+        ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));
 
     }
 }

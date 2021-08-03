@@ -23,7 +23,7 @@ public class InputView {
         System.out.println(GET_WINNING_NUMBER_QUESTION);
         scanner.nextLine();
         String winningNumberString = scanner.nextLine();
-        String trimWinningNumberString = winningNumberString.replace(" ","");
+        String trimWinningNumberString = winningNumberString.replace(" ", "");
         return Arrays.stream(trimWinningNumberString.split(",|, | ,"))
                 .map(number -> LottoNumber.of(Integer.parseInt(number)))
                 .collect(Collectors.toSet());
