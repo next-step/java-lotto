@@ -39,7 +39,7 @@ public class LottoResult {
 		return result.containsKey(quantity) ? result.get(quantity) + 1 : 1;
 	}
 
-	public String rate() {
+	public double rate() {
 		return rate(profitCount());
 	}
 
@@ -51,9 +51,8 @@ public class LottoResult {
 		return totalProfitCount;
 	}
 
-	private String rate(double totalProfitCount) {
-		double rate = totalProfitCount / lottos.size();
-		return String.format("%.2f", rate);
+	private double rate(double totalProfitCount) {
+		return totalProfitCount / lottos.size();
 	}
 
 	public Map<LottoProfit, Integer> value() {

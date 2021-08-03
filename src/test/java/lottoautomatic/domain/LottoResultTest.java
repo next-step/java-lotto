@@ -48,7 +48,7 @@ class LottoResultTest {
 	@ParameterizedTest(name = "당첨률 {index} [{arguments}]")
 	@MethodSource
 	@DisplayName("당첨률")
-	void rate(List<Integer> buyFirstLottoNumbers, List<Integer> buySecondLottoNumbers, String expectedRate) throws Exception {
+	void rate(List<Integer> buyFirstLottoNumbers, List<Integer> buySecondLottoNumbers, double expectedRate) throws Exception {
 		//given
 		Lottos lottos = new Lottos();
 		lottos.buy(1000, () -> buyFirstLottoNumbers);
@@ -57,7 +57,7 @@ class LottoResultTest {
 		lottoResult.match(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		//when
-		String rate = lottoResult.rate();
+		double rate = lottoResult.rate();
 
 		//then
 		assertThat(rate).isEqualTo(expectedRate);

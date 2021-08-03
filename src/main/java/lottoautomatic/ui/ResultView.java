@@ -44,7 +44,8 @@ public class ResultView {
 	}
 
 	private void printResultRate(LottoResult lottoResult) {
-		System.out.printf(PROFIT_RATE_MESSAGE, lottoResult.rate());
+		double rate = lottoResult.rate();
+		System.out.printf(PROFIT_RATE_MESSAGE, String.format("%.2f", rate));
 	}
 
 	private void printResultEach(Map<LottoProfit, Integer> match) {
