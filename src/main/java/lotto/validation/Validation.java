@@ -1,5 +1,7 @@
 package lotto.validation;
 
+import java.util.List;
+
 import lotto.utils.ErrorMessage;
 
 public class Validation {
@@ -33,6 +35,12 @@ public class Validation {
 	public static void validLottoSizeCheck(String[] value) {
 		if (value.length != LOTTO_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
+		}
+	}
+
+	public static void validDuplicateNumberCheck(List<Integer> values) {
+		if (values.size() != values.stream().distinct().count()) {
+			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
 		}
 	}
 }
