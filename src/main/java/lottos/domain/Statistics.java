@@ -6,18 +6,18 @@ import java.util.List;
 public class Statistics {
 
     private Integer purchaseAmount;
-    private List<LottoResult> lottoResults;
+    private List<Result> results;
 
-    public Statistics(int purchaseAmount, List<LottoResult> lottoResults) {
+    public Statistics(int purchaseAmount, List<Result> results) {
         this.purchaseAmount = purchaseAmount;
-        this.lottoResults = lottoResults;
+        this.results = results;
     }
 
     public int getPurchaseAmount() {
         return purchaseAmount;
     }
 
-    public List<LottoResult> getLottoResults() {
-        return Collections.unmodifiableList(lottoResults);
+    public List<Result> getLottoResults() {
+        return Collections.unmodifiableList(results);
     }
 }

@@ -13,7 +13,7 @@ public class Calculator {
     }
 
     public Integer calculate(String input) {
-        List<Number> numbers = numberGenerator.createNumbers(input);
+        List<Number> numbers = numberGenerator.parse(input);
         return numbers.stream()
                 .map(Number::getValue)
                 .reduce(0, Integer::sum);

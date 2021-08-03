@@ -4,33 +4,26 @@ import java.util.Objects;
 
 public class Result {
 
-    private int nameOfMatches;
-    private int countOfMatches;
+    private WinningPrize winningPrize;
 
-    public Result(int nameOfMatches, int countOfMatches) {
-        this.nameOfMatches = nameOfMatches;
-        this.countOfMatches = countOfMatches;
+    public Result(WinningPrize winningPrize) {
+        this.winningPrize = winningPrize;
     }
 
-    public int getNameOfMatches() {
-        return nameOfMatches;
-    }
-
-    public int getCountOfMatches() {
-        return countOfMatches;
+    public WinningPrize getWinningPrize() {
+        return winningPrize;
     }
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Result result = (Result) o;
-        return nameOfMatches == result.nameOfMatches && countOfMatches == result.countOfMatches;
+        Result that = (Result) o;
+        return winningPrize == that.winningPrize;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameOfMatches, countOfMatches);
+        return Objects.hash(winningPrize);
     }
 }

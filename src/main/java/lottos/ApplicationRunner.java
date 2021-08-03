@@ -1,32 +1,32 @@
 package lottos;
 
 
-import lottos.controller.ConsoleInputView;
-import lottos.controller.ConsoleOutputView;
-import lottos.domain.*;
+import lottos.controller.LottoConsoleController;
+import lottos.domain.Lotto;
+import lottos.domain.Result;
+import lottos.domain.Statistics;
+import lottos.view.LottoConsoleView;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ApplicationRunner {
 
+    private static final int AMOUNT_PER_PIECE = 1000;
+
     public static void main(String[] args) {
 
-        ConsoleInputView consoleInputView = new ConsoleInputView();
-        int purchaseAmount = consoleInputView.buy();
+        LottoConsoleController lottoConsoleController = new LottoConsoleController();
 
-        final int amountPerPiece = 1000;
-        final WinningPrizes winningPrizes = new WinningPrizes(Arrays.asList(0, 0, 0, 5000, 50000, 1500000, 2000000000));
+        List<Lotto> purchaseLottos = lottoConsoleController.buy(AMOUNT_PER_PIECE);
 
-        LottoGame lottoGame = new LottoGame(winningPrizes, amountPerPiece);
-        Lottos purchaseLottos = lottoGame.start(purchaseAmount);
+        LottoConsoleView lottoConsoleView = new LottoConsoleView();
+        lottoConsoleView.printLottos(purchaseLottos);
 
-        ConsoleOutputView consoleOutputView = new ConsoleOutputView();
-        consoleOutputView.printLottos(purchaseLottos);
+        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto();
 
-        Lotto lastWeekWiningLotto = new Lotto(consoleInputView.lastWeeksWinningNumbers());
-        List<LottoResult> lottoResults = lottoGame.match(lastWeekWiningLotto, purchaseLottos);
+        final int purchaseAmount = purchaseLottos.size() * AMOUNT_PER_PIECE;
+        List<Result> results = lastWeekWiningLotto.match(purchaseLottos);
 
-        consoleOutputView.printStatistics(new Statistics(purchaseAmount, lottoResults));
+        lottoConsoleView.printStatistics(new Statistics(purchaseAmount, results));
     }
 }

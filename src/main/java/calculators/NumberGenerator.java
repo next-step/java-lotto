@@ -17,7 +17,7 @@ public class NumberGenerator {
     private static final int NUMERIC_TEXT_INDEX = 2;
     private static final Pattern pattern = Pattern.compile(CUSTOM_SEPARATOR_PARSER_REGEX);
 
-    public List<Number> createNumbers(String input) {
+    public List<Number> parse(String input) {
         String commaSeparatedNumericText = changeCommaSeparatedNumericText(input);
         String[] separatedInputs = commaSeparatedNumericText.split(COMMA);
         return Arrays.stream(separatedInputs)
