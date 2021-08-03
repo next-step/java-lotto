@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoPrize {
-    FIRST(6,1,200000000),
-    SECOND(5,2,1500000),
-    THIRD(4,3,50000),
-    FOURTH(3,4,5000),
-    NONE(0,0,0)
+    FIRST(6, 1, 2_000_000_000),
+    SECOND(5, 2, 1_500_000),
+    THIRD(4, 3, 50_000),
+    FOURTH(3, 4, 5_000),
+    NONE(0, 0, 0)
     ;
     private int count;
     private int prize;
