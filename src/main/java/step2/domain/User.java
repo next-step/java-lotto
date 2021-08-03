@@ -12,10 +12,6 @@ public class User {
         this.wallet = wallet;
     }
 
-    public List<Lotto> buyLotto(LottoMachine lottoMachine) {
-        return lottoMachine.createLottos(wallet);
-    }
-
     public Money withDraw(Money money) {
         return wallet.withDraw(money);
     }
