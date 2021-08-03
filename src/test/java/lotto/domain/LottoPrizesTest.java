@@ -40,14 +40,14 @@ class LottoPrizesTest {
 	@DisplayName("구입한 금액과 구매한 로또의 당첨금으로 총 수익률을 계산한다.")
 	@MethodSource("earningsRateArguments")
 	@ParameterizedTest
-	void earningsRate(Money money, LottoPrizes lottoPrizes, double earningsRate) {
-		assertThat(money.earningsRate(lottoPrizes.winningMoney())).isEqualTo(earningsRate);
+	void earningsRate(LottoMoney lottoMoney, LottoPrizes lottoPrizes, double earningsRate) {
+		assertThat(lottoMoney.earningsRate(lottoPrizes.winningMoney())).isEqualTo(earningsRate);
 	}
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(new Money(100_000), LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 0.55),
-			Arguments.of(new Money(200_000), LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 10_000.25)
+			Arguments.of(new LottoMoney(100_000), LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 0.55),
+			Arguments.of(new LottoMoney(200_000), LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 10_000.25)
 		);
 	}
 

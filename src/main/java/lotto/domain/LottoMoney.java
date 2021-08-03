@@ -4,13 +4,13 @@ import lotto.exception.InsufficientMoneyException;
 
 import java.util.Objects;
 
-public class Money {
+public class LottoMoney {
 
 	private static final int PRICE_PER_LOTTO_TICKET = 1000;
 
 	private final int amount;
 
-	public Money(int amount) {
+	public LottoMoney(int amount) {
 		validateMoneyAmount(amount);
 		this.amount = amount;
 	}
@@ -39,8 +39,8 @@ public class Money {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Money money = (Money)o;
-		return amount == money.amount;
+		LottoMoney lottoMoney = (LottoMoney)o;
+		return amount == lottoMoney.amount;
 	}
 
 	@Override

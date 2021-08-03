@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.Money;
+import lotto.domain.LottoMoney;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,9 +27,9 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static Money inputMoney() {
+	public static LottoMoney inputMoney() {
 		System.out.println(INPUT_MONEY);
-		return new Money(SCANNER.nextInt());
+		return new LottoMoney(SCANNER.nextInt());
 	}
 
 	public static int inputManualLottoTicketsCount() {

@@ -9,18 +9,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class MoneyTest {
+class LottoMoneyTest {
 
-	@DisplayName("금액을 포장하는 Money 객체를 생성한다.")
+	@DisplayName("금액을 포장하는 LottoMoney 객체를 생성한다.")
 	@Test
 	void create() {
-		assertThat(new Money(1000)).isEqualTo(new Money(1000));
+		assertThat(new LottoMoney(1000)).isEqualTo(new LottoMoney(1000));
 	}
 
 	@DisplayName("금액이 1,000원 미만일 경우 로또를 살 수 없으므로 예외가 발생한다.")
 	@Test
 	void insufficientMoney() {
-		assertThatThrownBy(() -> new Money(900))
+		assertThatThrownBy(() -> new LottoMoney(900))
 			.isInstanceOf(InsufficientMoneyException.class);
 	}
 
@@ -28,15 +28,15 @@ class MoneyTest {
 	@CsvSource(value = {"10000,10", "5500,5"})
 	@ParameterizedTest
 	void calculateLottoTicketsCount(int amount, int expectedLottoTicketsCount) {
-		Money money = new Money(amount);
-		assertThat(money.availableLottoTicketsCount()).isEqualTo(expectedLottoTicketsCount);
+		LottoMoney lottoMoney = new LottoMoney(amount);
+		assertThat(lottoMoney.availableLottoTicketsCount()).isEqualTo(expectedLottoTicketsCount);
 	}
 
 	@DisplayName("최초 구매 금액과 총 당첨금으로 총 수익률을 계산한다.")
 	@Test
 	void calculateEarningsRate() {
-		Money money = new Money(100000);
-		assertThat(money.earningsRate(15000)).isEqualTo(0.15);
+		LottoMoney lottoMoney = new LottoMoney(100000);
+		assertThat(lottoMoney.earningsRate(15000)).isEqualTo(0.15);
 	}
 
 }
