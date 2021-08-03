@@ -17,17 +17,6 @@ import lotto.model.Prize;
 class SearchPrizeTest {
 
 	@Test
-	@DisplayName("로또번호와 당첨번호를 입력하면 일치개수를 나타난다.")
-	public void getMatchLottoCount() {
-		List<Integer> lastWinNumbers = getLottoNumbers(1, 3, 5, 7, 9);
-		List<Integer> lottoGame = getLottoNumbers(1, 3, 5, 10, 12);
-		SearchPrize searchPrize = new SearchPrize();
-		int count = searchPrize.getMatchLottoStatus(lottoGame, lastWinNumbers);
-
-		assertThat(count).isEqualTo(3);
-	}
-
-	@Test
 	@DisplayName("로또게임별 내용에따라 당첨번호를 입력하면 일치개수를 나타난다.")
 	public void getMatchLottoGames() {
 		List<Integer> lastWinNumbers = getLottoNumbers(1, 3, 5, 7, 9);

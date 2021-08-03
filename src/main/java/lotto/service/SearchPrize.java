@@ -32,7 +32,7 @@ public class SearchPrize {
 		return winPrizes;
 	}
 
-	public int getMatchLottoStatus(List<Integer> lottoGame, List<Integer> lastWinNumbers) {
+	private int getMatchLottoStatus(List<Integer> lottoGame, List<Integer> lastWinNumbers) {
 		return (int)lottoGame.stream().filter(lastWinNumbers::contains).count();
 	}
 }
