@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         int buyMoney = InputView.inputBuyMoney();
 
-        List<Lotto> lottoList = LottoMachine.buyRandomLotto(buyMoney);
-        Game game = new Game(lottoList);
+        List<Lotto> lottos = LottoMachine.buyRandomLotto(buyMoney);
+        Game game = new Game(lottos);
 
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
