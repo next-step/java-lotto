@@ -9,11 +9,11 @@ public class LottoMachine {
     private static final List<Ball> BALLS = initList();
 
     private static List<Ball> initList() {
-        List<Ball> ballList = new ArrayList<>(Ball.MAX_NUMBER);
+        List<Ball> balls = new ArrayList<>(Ball.MAX_NUMBER);
         for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
-            ballList.add(new Ball(i));
+            balls.add(new Ball(i));
         }
-        return ballList;
+        return balls;
     }
 
     public static List<Lotto> buyRandomLotto(int totalMoney) {

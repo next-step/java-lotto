@@ -7,11 +7,11 @@ import lotto.domain.Reward;
 public class ResultView {
 
     public static void resultLottoCount(Game game) {
-        System.out.println(game.getLottoList().size() + "개를 구매했습니다.");
+        System.out.println(game.getLottos().size() + "개를 구매했습니다.");
     }
 
     public static void resultLottoNumbers(Game game) {
-        for (Lotto lotto : game.getLottoList()) {
+        for (Lotto lotto : game.getLottos()) {
             System.out.println(lotto);
         }
         System.out.println();
@@ -21,7 +21,7 @@ public class ResultView {
         for (Reward reward : Reward.values()) {
             System.out.println(
                     reward.getRightNumberCount() + "개 일치 (" + reward.getMoney() + "원)- " +
-                            game.getNumberOfRightLotto(reward.getRightNumberCount()) + "개");
+                            game.countSameNumber(reward.getRightNumberCount()) + "개");
         }
     }
 

@@ -58,7 +58,7 @@ public class GameTest {
     @Test
     @DisplayName("게임 생성")
     void create() {
-        assertThat(game.getLottoList()).hasSize(14);
+        assertThat(game.getLottos()).hasSize(14);
     }
 
     @Test
@@ -66,20 +66,20 @@ public class GameTest {
     void createRandom() {
         List<Lotto> lottoList = LottoMachine.buyRandomLotto(5000);
         Game game = new Game(lottoList);
-        assertThat(game.getLottoList()).hasSize(5);
+        assertThat(game.getLottos()).hasSize(5);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"3:1", "4:0", "5:0", "6:0"}, delimiter = ':')
     @DisplayName("일치하는 번호 갯수 출력")
     void getNumberOfRightNumber(int rightNumber, int expected) {
-        assertThat(game.getNumberOfRightLotto(rightNumber)).isEqualTo(expected);
+        assertThat(game.countSameNumber(rightNumber)).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("수익률 계산하기")
     void getYield() {
-        assertThat(game.getLottoList()).hasSize(14);
+        assertThat(game.getLottos()).hasSize(14);
         assertThat(game.getYield()).isEqualTo("0.35");
     }
 }
