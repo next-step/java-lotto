@@ -34,9 +34,13 @@ public enum LottoRank {
         return countToRank.get(countOfMatch);
     }
 
-    public static List<LottoRank> getPrintableValues() {
+    public boolean isNotMiss() {
+        return this != MISS;
+    }
+
+    public static List<LottoRank> getValuesForPrinting() {
         List<LottoRank> values = Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getCountOfMatch() >= FIFTH.getCountOfMatch())
+                .filter(LottoRank::isNotMiss)
                 .collect(Collectors.toList());
         Collections.reverse(values);
         return values;

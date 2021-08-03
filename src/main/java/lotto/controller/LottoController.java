@@ -21,27 +21,23 @@ public class LottoController {
         this.lottoMoney = lottoMoney;
     }
 
-    public static LottoController fromUserInput() {
-        LottoMoney lottoMoney = lottoMoneyInput();
-        LottoTickets randomTickets = LottoService.createRandomTickets(lottoMoney);
-        ResultView.printLottoTickets(randomTickets);
-        LottoTicket winningTicket = winningLottoFromInput();
-        return new LottoController(randomTickets, winningTicket, lottoMoney);
-    }
-
-    private static LottoMoney lottoMoneyInput() {
+    public static LottoController fromInput() {
         int amount = InputView.askHowMuch();
-        return LottoMoney.of(amount);
-    }
+        LottoMoney lottoMoney = LottoMoney.of(amount);
+        LottoTickets randomTickets = LottoService.randomTickets(lottoMoney);
+        ResultView.printLottoTickets(randomTickets);
 
-    private static LottoTicket winningLottoFromInput() {
-        String text = InputView.askForWinningLotto();
-        return LottoTicket.of(text);
+        String winningLottoText = InputView.askForWinningLotto();
+        LottoTicket winningTicket = LottoTicket.of(winningLottoText);
+
+        return new LottoController(randomTickets, winningTicket, lottoMoney);
     }
 
     public void run() {
         LottoResult lottoResult = userTickets.match(winningTicket);
+
         ResultView.printLottoResult(lottoResult);
+
         double profitPercent = LottoService.profitPercent(lottoResult, lottoMoney);
         ResultView.printProfitPercent(profitPercent);
     }

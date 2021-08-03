@@ -21,15 +21,15 @@ public class LottoService {
                     .map(LottoNumber::of)
                     .collect(Collectors.toList());
 
-    public static LottoTickets createRandomTickets(LottoMoney lottoMoney) {
+    public static LottoTickets randomTickets(LottoMoney lottoMoney) {
         int numberOfTickets = lottoMoney.numberOfTickets();
         List<LottoTicket> lottoTickets = IntStream.range(0, numberOfTickets)
-                .mapToObj(i -> createRandomTicket())
+                .mapToObj(i -> randomTicket())
                 .collect(Collectors.toList());
         return LottoTickets.of(lottoTickets);
     }
 
-    private static LottoTicket createRandomTicket() {
+    private static LottoTicket randomTicket() {
         Collections.shuffle(ALL_NUMBERS);
         List<LottoNumber> lottoNumbers = ALL_NUMBERS.subList(0, LottoTicket.LOTTO_SIZE);
         return LottoTicket.of(lottoNumbers);

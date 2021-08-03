@@ -42,7 +42,9 @@ public class LottoTicket {
 
     private int countMatches(LottoTicket winningTicket) {
         // safe from overflow when casting to int since LOTTO_SIZE == 6
-        return (int) lottoNumbers.stream().filter(winningTicket::contains).count();
+        return (int) lottoNumbers.stream()
+                .filter(winningTicket::contains)
+                .count();
     }
 
     public LottoRank findRank(LottoTicket winningTicket) {

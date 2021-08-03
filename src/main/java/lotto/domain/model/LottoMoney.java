@@ -21,7 +21,6 @@ public class LottoMoney {
         return of(Integer.parseInt(text));
     }
 
-    // TODO: move to a difference class?
     public int numberOfTickets() {
         return amount / LOTTO_PRICE;
     }

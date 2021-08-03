@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.LottoTicketDto;
 import lotto.domain.model.LottoResult;
 import lotto.domain.model.LottoRank;
 import lotto.domain.model.LottoTickets;
@@ -10,17 +9,14 @@ public class ResultView {
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
         lottoTickets.getTickets()
-                .forEach(ResultView::printLottoTicket);
+                .forEach(ticket -> System.out.println(ticket.values()));
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        printHeader();
-        LottoRank.getPrintableValues()
-                .forEach(lottoRank -> printResultByRank(lottoResult, lottoRank));
-    }
-
-    private static void printLottoTicket(LottoTicketDto lottoTicket) {
-        System.out.println(lottoTicket.values());
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        LottoRank.getValuesForPrinting()
+                .forEach(rank -> printResultByRank(lottoResult, rank));
     }
 
     private static void printResultByRank(LottoResult lottoResult, LottoRank lottoRank) {
@@ -37,10 +33,5 @@ public class ResultView {
             return;
         }
         System.out.println(message + "이익이라는 의미임)");
-    }
-
-    private static void printHeader() {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
     }
 }

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.dto;
 
 import java.util.List;
 import lotto.domain.model.LottoTicket;
