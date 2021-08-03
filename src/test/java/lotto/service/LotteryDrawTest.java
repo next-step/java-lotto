@@ -4,9 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import lotto.domain.Lotties;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
+import lotto.strategy.GenerateLottoNumber;
+import lotto.strategy.TestGenerateLottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -52,7 +53,25 @@ class LotteryDrawTest {
   void 당첨번호로또생성() {
 
     LotteryDraw lotteryDraw = new LotteryDraw();
+
     Lotto lotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
+
+    System.out.println("lotto = " + lotto.getWinLotto().size());
     assertThat(lotto.getWinLotto().size()).isEqualTo(6);
   }
+
+  @DisplayName("당첨번호와 로또 비교 비교 테스트.")
+  @Test
+  void 당첨번호와로또비교() {
+    LotteryDraw lotteryDraw = new LotteryDraw(1000);
+    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(1,7);
+    lotteryDraw.buyLotties(generateLottoNumber);
+    Lotties lotties = lotteryDraw.getLottiesInfo();
+
+    Lotto winLotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
+
+    List<Integer> result = lotteryDraw.matchLottoInfo(lotties, winLotto);
+    assertThat(result).containsExactly(6);
+  }
+
 }
