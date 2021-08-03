@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -17,6 +18,7 @@ public class Utils {
 
 	public static String returnPercent(int getTotalWinMoney, int money) {
 		NumberFormat formatter = new DecimalFormat(NUMBER_FORMAT_PATTERN);
+		formatter.setRoundingMode(RoundingMode.DOWN);
 		return formatter.format((double)(getTotalWinMoney) / (double)(money));
 	}
 
