@@ -4,6 +4,8 @@ import lotto.application.CreateLottoNumbersStrategy;
 
 import java.util.List;
 
+import static lotto.domain.LottoPrize.*;
+
 public class Lotto {
     private LottoNumbers lottoNumbers;
     private BonusNumber bonusNumber;
@@ -25,8 +27,17 @@ public class Lotto {
         return this.lottoNumbers.getLottoNumbers();
     }
 
-    public int checkWinning(Lotto lotto) {
-        return this.lottoNumbers.checkWinning(lotto.getLottoNumbers());
+    public int checkWinning(Lotto comparedLotto) {
+        int prize = this.lottoNumbers.checkWinning(comparedLotto.getLottoNumbers());
+        prize = checkBonusNumber(comparedLotto, prize);
+        return prize;
+    }
+
+    private int checkBonusNumber(Lotto lotto, int prize) {
+        if (prize == SECOND.getPrize() && !lotto.isContainBonusNumber(bonusNumber.getBonusNumber())) {
+            prize = THIRD.getPrize();
+        }
+        return prize;
     }
 
     public int getBonusNumber() {

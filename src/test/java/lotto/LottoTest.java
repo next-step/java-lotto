@@ -53,9 +53,9 @@ public class LottoTest {
 
     // 배열로 넘기는 테스트를 찾지 못해서 이렇게 6개의 매개변수 테스트를 진행했는데 배열로 넘기는 방법이 있나요??
     @ParameterizedTest
-    @CsvSource({"1,2,3,9,10,11,4","1,2,3,4,9,10,3","1,2,3,4,5,9,2","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
+    @CsvSource({"1,2,3,9,10,11,5","1,2,3,4,9,10,4","1,2,3,4,5,9,3","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
     @DisplayName("등수 확인")
-    void fourthTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+    void prizeTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
@@ -64,7 +64,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,2,3,9,10,11,4","1,2,3,4,9,10,3","1,2,3,4,5,9,2","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
+    @CsvSource({"1,2,3,9,10,11,5","1,2,3,4,9,10,4","1,2,3,4,5,9,3","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
     @DisplayName("로또게임")
     void playLottoTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
         String winningNumberString = "1,2,3,4,5,6";
@@ -78,9 +78,9 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"10,0,1,0,2,107.86","13,1,0,0,0,14285.71","12,0,0,0,2,0.71"})
     @DisplayName("수익률 계산")
-    void profitTest(int none, int firstCount, int secondCount, int thirdCound, int fourthCount, double testProfit){
+    void profitTest(int none, int firstCount, int secondCount, int thirdCount, int fourthCount, double testProfit){
         int cash = 14000;
-        int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCound, fourthCount};
+        int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCount, fourthCount};
         double profit = PlayLotto.calculateProfitRate(cash,prizeArray);
         assertThat(profit).isEqualTo(testProfit);
     }
@@ -107,5 +107,16 @@ public class LottoTest {
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
         assertThat(lotto.isContainBonusNumber(winningLotto.getBonusNumber()));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,2,3,4,5,45,2","1,2,3,4,5,10,3"})
+    @DisplayName("2등 3등 처리")
+    void isSecondOrThird(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+        List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        Lotto lotto = new Lotto(lottoNumbers);
+        int prizeNumber = winningLotto.checkWinning(lotto);
+        assertThat(prizeNumber).isEqualTo(testPrizeNumber);
     }
 }

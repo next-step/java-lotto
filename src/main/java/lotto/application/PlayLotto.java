@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayLotto {
     private static int LOTTO_PRICE = 1000;
-    private static int WINNING_TOTAL_INDEX = 5;
+    private static int WINNING_TOTAL_INDEX = 6;
 
     public static int calculateLottoCount(int cash) {
         if (cash % LOTTO_PRICE != 0) {
