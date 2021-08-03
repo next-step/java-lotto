@@ -3,7 +3,7 @@ package step3;
 import step3.domain.Lotteries;
 import step3.domain.LottoMachine;
 import step3.domain.LottoMarket;
-import step3.domain.Winnings;
+import step3.domain.Winning;
 import step3.strategy.RandomLottoNum;
 import step3.view.InputView;
 import step3.view.ResultView;
@@ -24,8 +24,8 @@ public class LottoApp {
         int buyMoney = market.buy(money);
 
         ResultView.showList(myLottoList.getAll());
-
-        Map<Winnings,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber());
+        int bonus = InputView.inputBonus();
+        Map<Winning,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(), bonus);
 
         ResultView.showResult(result, buyMoney);
     }

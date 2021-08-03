@@ -1,7 +1,7 @@
 package step3.view;
 
 import step3.domain.Lotto;
-import step3.domain.Winnings;
+import step3.domain.Winning;
 
 import java.util.List;
 import java.util.Map;
@@ -15,14 +15,18 @@ public class ResultView {
         }
     }
 
-    public static void showResult(Map<Winnings, Integer> result, int money) {
+    public static void showResult(Map<Winning, Integer> result, int money) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
         int totalMoney = 0;
-        for (Winnings WINNINGS : result.keySet()) {
-            System.out.printf("%d개 일치 (%d원)- %d개\n", WINNINGS.getMatchCount(), WINNINGS.getPrice(), result.get(WINNINGS));
-            if (result.get(WINNINGS) > 0) {
-                totalMoney += WINNINGS.getPrice() * result.get(WINNINGS);
+        for (Winning winning : result.keySet()) {
+            if (winning.equals(Winning.SECOND)) {
+                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", winning.getMatchCount(), winning.getPrice(), result.get(winning));
+            } else {
+                System.out.printf("%d개 일치 (%d원)- %d개\n", winning.getMatchCount(), winning.getPrice(), result.get(winning));
+            }
+            if (result.get(winning) > 0) {
+                totalMoney += winning.getPrice() * result.get(winning);
             }
         }
         double yield = calculateYield(money, totalMoney);
@@ -31,7 +35,7 @@ public class ResultView {
     }
 
     private static String getComment(double yield) {
-        if(yield >= 1){
+        if (yield >= 1) {
             return "이득이라는 의미임";
         }
         return "손해라는 의미임";

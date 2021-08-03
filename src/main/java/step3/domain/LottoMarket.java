@@ -1,5 +1,7 @@
 package step3.domain;
 
+import step3.strategy.LottoMatcher;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ public class LottoMarket {
 
     private LottoMachine machine;
     private Lotteries myLottoList;
+    private LottoMatcher matcher = new LottoMatcher();
 
     public LottoMarket(LottoMachine machine, Lotteries list) {
         this.machine = machine;
@@ -25,46 +28,32 @@ public class LottoMarket {
         return PRICE * count;
     }
 
-    public Map<Winnings, Integer> checkNumToWinner(Lotto winner) {
-        List<Winnings> result = new ArrayList<>();
+    public Map<Winning, Integer> checkNumToWinner(Lotto winner, int bonus) {
+        List<Winning> result = new ArrayList<>();
 
         for (Lotto myLotto : myLottoList.getAll()) {
-            int matchCount = matchLotto(winner, myLotto);
-            putResult(result, matchCount);
+            int matchCount = matcher.matchLotto(winner, myLotto);
+            boolean matchBonus = matcher.checkSeconds(myLotto, bonus);
+            Winning winning = matcher.getWinning(matchCount,matchBonus);
+            if(!winning.isNotThing()){
+                result.add(winning);
+            }
+
         }
         return listToMap(result);
     }
 
-    private int matchLotto(Lotto winner, Lotto myLotto) {
-        int count = 0;
-        for (int number : myLotto.getNumbers()) {
-            count = checkLotto(winner, number, count);
-        }
-        return count;
-    }
 
-    private int checkLotto(Lotto winner, int number, int count) {
-        if (winner.getNumbers().contains(number)) {
-            count++;
-        }
-        return count;
-    }
 
-    private void putResult(List<Winnings> result, int matchCount) {
-        if (matchCount >= 3) {
-            result.add(Winnings.find(matchCount));
-        }
-    }
+    private Map<Winning, Integer> listToMap(List<Winning> result) {
+        Map<Winning, Integer> resultMap = new LinkedHashMap<>();
 
-    private Map<Winnings, Integer> listToMap(List<Winnings> result) {
-        Map<Winnings, Integer> resultMap = new LinkedHashMap<>();
-
-        for (Winnings winnings : Winnings.values()) {
-            resultMap.put(winnings, 0);
+        for (Winning winning : Winning.values()) {
+            resultMap.put(winning, 0);
         }
-        resultMap.remove(Winnings.NOTHING);
-        for (Winnings WINNINGS : result) {
-            resultMap.put(WINNINGS, resultMap.get(WINNINGS) + 1);
+        resultMap.remove(Winning.NOTHING);
+        for (Winning Winning : result) {
+            resultMap.put(Winning, resultMap.get(Winning) + 1);
         }
         return resultMap;
     }

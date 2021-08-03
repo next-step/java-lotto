@@ -1,6 +1,6 @@
 package step3.domain;
 
-public enum Winnings {
+public enum Winning {
     NOTHING(0, 0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
@@ -11,24 +11,15 @@ public enum Winnings {
     private int matchCount;
     private int price;
 
-    Winnings(int matchCount, int price) {
+    Winning(int matchCount, int price) {
         this.matchCount = matchCount;
         this.price = price;
     }
 
-    public static int findPrice(int count) {
-        for (Winnings WIN : values()) {
-            if (WIN.matchCount == count) {
-                return WIN.price;
-            }
-        }
-        return NOTHING.price;
-    }
-
-    public static Winnings find(int count) {
-        for (Winnings WIN : values()) {
-            if (WIN.matchCount == count) {
-                return WIN;
+    public static Winning find(int count) {
+        for (Winning winning : values()) {
+            if (winning.matchCount == count) {
+                return winning;
             }
         }
         return NOTHING;
@@ -40,5 +31,9 @@ public enum Winnings {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean isNotThing(){
+        return NOTHING.equals(this);
     }
 }
