@@ -1,5 +1,7 @@
 package step3.domain;
 
+import java.util.Arrays;
+
 public enum Winning {
     NOTHING(0, 0),
     FIFTH(3, 5000),
@@ -25,13 +27,14 @@ public enum Winning {
             return THIRD;
         }
 
-        for (Winning winning : values()) {
-            if (winning.matchCount == count) {
-                return winning;
-            }
-        }
+        return Arrays.stream(values())
+                .filter(winning -> isaBoolean(count, winning))
+                .findFirst()
+                .orElse(NOTHING);
+    }
 
-        return NOTHING;
+    private static boolean isaBoolean(int count, Winning winning) {
+        return winning.matchCount == count;
     }
 
     public int getMatchCount() {

@@ -34,15 +34,14 @@ public class LottoMarket {
         for (Lotto myLotto : myLottoList.getAll()) {
             int matchCount = matcher.matchLotto(winner, myLotto);
             boolean matchBonus = matcher.checkSeconds(myLotto, bonus);
-            Winning winning = matcher.getWinning(matchCount,matchBonus);
-            if(!winning.isNotThing()){
+            Winning winning = matcher.getWinning(matchCount, matchBonus);
+            if (!winning.isNotThing()) {
                 result.add(winning);
             }
 
         }
         return listToMap(result);
     }
-
 
 
     private Map<Winning, Integer> listToMap(List<Winning> result) {
