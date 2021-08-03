@@ -15,8 +15,9 @@ public class Ball implements Comparable<Ball> {
     }
 
     private void validNumberRange(int number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER)
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("공 숫자는 " + MIN_NUMBER + "~" + MAX_NUMBER + " 만 올 수 있습니다.");
+        }
     }
 
     @Override
