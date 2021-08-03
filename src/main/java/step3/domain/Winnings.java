@@ -2,9 +2,10 @@ package step3.domain;
 
 public enum Winnings {
     NOTHING(0, 0),
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
+    FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000);
 
     private int matchCount;
