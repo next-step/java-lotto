@@ -25,6 +25,12 @@ public class LottoNumber {
         return numbers;
     }
 
+    public int correctCount(List<Integer> numbers) {
+        return (int) this.numbers.stream()
+            .filter(numbers::contains)
+            .count();
+    }
+
     @Override
     public String toString() {
         return "LottoNumber{" +
