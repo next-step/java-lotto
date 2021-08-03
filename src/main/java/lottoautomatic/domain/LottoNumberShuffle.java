@@ -1,8 +1,6 @@
 package lottoautomatic.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumberShuffle implements LottoNumberGenerator {
 
@@ -20,21 +18,16 @@ public class LottoNumberShuffle implements LottoNumberGenerator {
 	}
 
 	@Override
-	public List<Integer> generate() {
+	public Set<LottoNumber> generate() {
 		Collections.shuffle(defaultNumbers);
 		return selectNumbers();
 	}
 
-	private List<Integer> selectNumbers() {
-		List<Integer> numbers = new ArrayList<>();
+	private Set<LottoNumber> selectNumbers() {
+		Set<LottoNumber> numbers = new TreeSet<>();
 		for (int i = NUMBERS_RANGE_START; i < NUMBERS_RANGE_END; i++) {
-			numbers.add(defaultNumbers.get(i));
+			numbers.add(new LottoNumber(defaultNumbers.get(i)));
 		}
-		return sortNumbers(numbers);
-	}
-
-	private List<Integer> sortNumbers(List<Integer> numbers) {
-		Collections.sort(numbers);
 		return numbers;
 	}
 

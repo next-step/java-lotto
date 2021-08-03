@@ -1,9 +1,9 @@
 package lottoautomatic.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public interface LottoNumberGenerator {
 
-	List<Integer> generate();
+	Set<LottoNumber> generate();
 
 }

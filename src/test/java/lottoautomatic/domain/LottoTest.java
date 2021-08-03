@@ -8,6 +8,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,12 +22,20 @@ class LottoTest {
 	@DisplayName("로또는 6개의 번호를 가진다.")
 	void lotto_has_6_numbers() throws Exception {
 		//given
-		Lotto lotto = new Lotto();
-		List<Integer> defaultNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Set<LottoNumber> defaultNumbers = new TreeSet<LottoNumber>(
+				Arrays.asList(
+						new LottoNumber(1),
+						new LottoNumber(2),
+						new LottoNumber(3),
+						new LottoNumber(4),
+						new LottoNumber(5),
+						new LottoNumber(6))
+		);
+		Lotto lotto = new Lotto(defaultNumbers);
+
 
 		//when
-		lotto.generateNumbers(() -> defaultNumbers);
-		List<Integer> numbers = lotto.numbers();
+		Set<LottoNumber> numbers = lotto.numbers();
 
 		//then
 		assertThat(numbers).hasSize(defaultNumbers.size());
@@ -35,13 +46,19 @@ class LottoTest {
 	@DisplayName("로또의 번호가 6개가 아닌 경우 예외")
 	void lotto_number_size_exception() throws Exception {
 		//given
-		Lotto lotto = new Lotto();
+		Set<LottoNumber> defaultNumbers = new TreeSet<LottoNumber>(
+				Arrays.asList(
+						new LottoNumber(1),
+						new LottoNumber(2),
+						new LottoNumber(3),
+						new LottoNumber(4),
+						new LottoNumber(5))
+		);
 
 		//when
-		List<Integer> defaultNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
 		//then
-		assertThatThrownBy(() -> lotto.generateNumbers(() -> defaultNumbers)).isInstanceOf(LottoNumbersSizeException.class);
+		assertThatThrownBy(() -> new Lotto(defaultNumbers)).isInstanceOf(LottoNumbersSizeException.class);
 	}
 
 
@@ -49,13 +66,12 @@ class LottoTest {
 	@ParameterizedTest(name = "지난주 당첨 번호와 비교 {index} [{arguments}]")
 	@MethodSource("matchNumbers")
 	@DisplayName("지난주 당첨 번호와 비교")
-	void match_numbers(List<Integer> lottoNumbers, int matchedCount) throws Exception {
+	void match_numbers(Set<LottoNumber> lottoNumbers, int matchedCount) throws Exception {
 		//given
-		Lotto lotto = new Lotto();
+		Lotto lotto = new Lotto(lottoNumbers);
 		List<Integer> lastWeekNumbers = Arrays.asList(1,2,3,4,5,6);
 
 		//when
-		lotto.generateNumbers(() -> lottoNumbers);
 		int matchesNumber = lotto.matchingQuantityFrom(lastWeekNumbers);
 
 		//then
@@ -64,11 +80,14 @@ class LottoTest {
 
 	private static Stream<Arguments> matchNumbers() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
-			Arguments.of(Arrays.asList(1,2,3,4,5,11), 5),
-			Arguments.of(Arrays.asList(1,2,3,4,11,12), 4),
-			Arguments.of(Arrays.asList(1,2,3,11,12,13), 3)
+			Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6),
+			Arguments.of(toSet(Arrays.asList(1,2,3,4,5,11)), 5),
+			Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4),
+			Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3)
 		);
 	}
 
+	private static Set<LottoNumber> toSet(List<Integer> list) {
+		return list.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
+	}
 }

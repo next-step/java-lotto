@@ -16,8 +16,7 @@ public class Lottos {
 	}
 
 	private void addLotto(LottoNumberGenerator generator) {
-		Lotto lotto = new Lotto();
-		lotto.generateNumbers(generator);
+		Lotto lotto = new Lotto(generator.generate());
 		lottoList.add(lotto);
 	}
 

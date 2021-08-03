@@ -55,7 +55,7 @@
   - [x] 당첨 통계 출력
 * 피드백
   - [x] LottoNumber 원시값 포장
-  - [ ] List<Integer>를 Set<LottoNumber>로 변경
+  - [x] List<Integer>를 Set<LottoNumber>로 변경
   - [x] 매직넘버 상수 치환
   - [x] List<Integer> 반환 시 불변 객체로 반환
   - [x] 인스턴스변수, 멤버변수 구분 개행 추가
