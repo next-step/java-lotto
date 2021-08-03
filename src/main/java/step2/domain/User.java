@@ -1,9 +1,13 @@
 package step2.domain;
 
+import java.util.List;
+
 public class User {
 
     private final String name;
     private final Wallet wallet;
+
+    private List<Lotto> lottos;
 
     public User(String name, Wallet wallet) {
         this.name = name;
@@ -24,5 +28,13 @@ public class User {
 
     public Wallet myWallet() {
         return wallet;
+    }
+
+    public void buyLotto(LottoMachine lottoMachine) {
+        this.lottos = lottoMachine.sell(myWallet().currentMoney());
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
