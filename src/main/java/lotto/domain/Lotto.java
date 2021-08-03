@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,14 +12,12 @@ public class Lotto {
 
     public Lotto(Set<Ball> balls) {
         validNumberCountSize(balls);
-        this.balls = balls.stream().
-                sorted().
-                collect(Collectors.toCollection(LinkedHashSet::new));
+        this.balls = balls;
     }
 
     public boolean isCountOfRightNumber(Lotto previousLotto, int count) {
-        return balls.stream().
-                filter(previousLotto.balls::contains)
+        return balls.stream()
+                .filter(previousLotto.balls::contains)
                 .count() == count;
     }
 
@@ -32,19 +29,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return balls.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Lotto)) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(balls, lotto.balls);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(balls);
+        return balls.stream()
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new)).toString();
     }
 }
