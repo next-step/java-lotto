@@ -1,18 +1,22 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.*;
 
-class LottoTicket {
-    private Set<LottoNumber> lottoNumbers;
+public class LottoTicket {
+    private List<Integer> lottoNumbers;
 
-    LottoTicket(LottoNumbers lottoNumbers) {
+    public LottoTicket(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers.generateNumbers();
     }
 
-    public WinAmount getWinAmount(LottoNumbers winNumbers) {
+    WinAmount getWinAmount(LottoNumbers winNumbers) {
         int matchCount = (int) winNumbers.generateNumbers().stream()
                 .filter(i -> this.lottoNumbers.contains(i))
                 .count();
         return WinAmount.valueOfMatchCount(matchCount);
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

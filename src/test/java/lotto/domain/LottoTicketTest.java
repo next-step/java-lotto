@@ -5,8 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,13 +14,7 @@ class LottoTicketTest {
 
     @BeforeAll
     static void setUp() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicketTest.lottoNumbers = () -> lottoNumbers;
     }
 

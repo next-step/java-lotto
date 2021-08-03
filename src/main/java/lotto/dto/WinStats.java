@@ -18,6 +18,9 @@ public class WinStats {
         return yield;
     }
 
+    public Map<WinAmount, Integer> getMatchMap() {
+        return matchMap;
+    }
 
     @Override
     public String toString() {

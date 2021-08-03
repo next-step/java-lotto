@@ -24,7 +24,7 @@ public enum WinAmount {
         return FAIL;
     }
 
-    int getMatchCount() {
+    public int getMatchCount() {
         return this.matchCount;
     }
 

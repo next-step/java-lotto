@@ -6,8 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +15,7 @@ class LottoTicketsTest {
 
     @BeforeAll
     static void setUp() {
-        Set<LottoNumber> customNumbers = new HashSet<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        List<Integer> customNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         lottoNumbers = () -> customNumbers;
     }
 
@@ -41,24 +34,10 @@ class LottoTicketsTest {
     @DisplayName("당첨 통계")
     @Test
     void getWinStats_fix() {
-        Set<LottoNumber> customNumbers = new HashSet<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        List<Integer> customNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         LottoNumbers winNumbers = () -> customNumbers;
-        Set<LottoNumber> customNumbers2 = new HashSet<>(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(10),
-                new LottoNumber(11),
-                new LottoNumber(12)));
-        LottoNumbers randomLottoNumbers = () -> customNumbers2;
 
-        WinStats result = new LottoTickets(new Money(3000), randomLottoNumbers).getWinStats(winNumbers);
+        WinStats result = new LottoTickets(new Money(3000), lottoNumbers).getWinStats(winNumbers);
         System.out.println(result.toString());
         assertThat(result.getYield()).isEqualTo(0.002f);
     }

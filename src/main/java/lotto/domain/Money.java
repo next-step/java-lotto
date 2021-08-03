@@ -6,7 +6,7 @@ public class Money {
 
     private int value;
 
-    Money(int value) {
+    public Money(int value) {
         validate(value);
         this.value = value;
     }

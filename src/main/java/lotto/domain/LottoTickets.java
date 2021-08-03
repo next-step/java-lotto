@@ -5,7 +5,7 @@ import lotto.dto.WinStats;
 import java.util.*;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
     private Money money;
 
     public LottoTickets(Money money, LottoNumbers lottoNumbers) {
@@ -22,7 +22,11 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    WinStats getWinStats(LottoNumbers winNumbers) {
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
+
+    public WinStats getWinStats(LottoNumbers winNumbers) {
         Map<WinAmount, Integer> matchMap = new HashMap<>();
         long amount = 0;
 
@@ -34,10 +38,13 @@ public class LottoTickets {
             }
         }
 
-        float yield = 0;
-        if (amount > 0) {
-            yield = (float) money.getValue() / amount / 100;
+        return new WinStats(matchMap, calculateYield(amount));
+    }
+
+    private float calculateYield(long amount) {
+        if (amount == 0) {
+            return 0;
         }
-        return new WinStats(matchMap, yield);
+        return (float) amount / money.getValue();
     }
 }
