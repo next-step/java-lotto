@@ -33,8 +33,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-            "numbers=" + numbers +
-            '}';
+        return numbers.toString();
     }
 }

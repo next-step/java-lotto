@@ -1,7 +1,5 @@
 package step2.domain;
 
-import java.util.List;
-
 public class Lotto {
 
     private final LottoNumber numbers;
@@ -20,8 +18,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-            "numbers=" + numbers +
-            '}';
+        return numbers.toString();
     }
 }
