@@ -11,8 +11,8 @@
         - [x] 돈이 없는데 인출을 하면 IllegalArgument 발생
     - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #User#save()
         - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #Wallet#save()
-- [ ] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
-- [ ] 로또 수익률을 보여준다. #LottoStatistics#profic()
+- [x] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
+- [] 로또 수익률을 보여준다. #LottoStatistics#profic()
 - [x] 로또 당첨 번호를 입력 할 수 있다. #LottoMachine#winOfLotto()
 
 ### 프로그래밍 요구사항

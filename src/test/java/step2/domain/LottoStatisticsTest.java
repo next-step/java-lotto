@@ -1,6 +1,7 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +21,26 @@ class LottoStatisticsTest {
 
         LottoNumber winOfLottoNumber = lottoMachine.winOfLotto(Arrays.asList(3, 4, 5, 6, 7, 8));
         List<Lotto> lottos = lottoMachine.createLottos(new Wallet(new Cache(3000)));
-        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber);
 
         // When
-        lottoStatistics.lottoOfStatistics(lottos);
+        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos);
 
         // Then
-        assertThat(expectedLottoStrategy).isEqualTo(lottoStatistics.calculate());
+        assertThat(expectedLottoStrategy).isEqualTo(lottoStatistics.resultOfLottos());
+    }
+
+    @Test
+    void 당청된_수익률을_보여준다() {
+        long expectedLottoProfit = 500L;
+        Integer[] givenNumbers = {3, 4, 5, 6, 7, 8};
+        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenNumbers)));
+        LottoNumber winOfLottoNumber = lottoMachine.winOfLotto(Arrays.asList(3, 4, 5, 1, 2, 10));
+        List<Lotto> lottos = lottoMachine.createLottos(new Wallet(new Cache(1000)));
+
+        // When
+        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos);
+
+        // Then
+        assertThat(lottoStatistics.getProfit()).isEqualTo(BigDecimal.valueOf(expectedLottoProfit));
     }
 }
