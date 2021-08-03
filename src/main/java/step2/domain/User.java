@@ -1,15 +1,17 @@
 package step2.domain;
 
-import java.util.List;
-
 public class User {
 
     private final String name;
     private final Wallet wallet;
-    
+
     public User(String name, Wallet wallet) {
         this.name = name;
         this.wallet = wallet;
+    }
+
+    public Money withDraw() {
+        return wallet.withDraw();
     }
 
     public Money withDraw(Money money) {

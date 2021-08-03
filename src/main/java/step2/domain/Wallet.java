@@ -18,6 +18,10 @@ public class Wallet {
         return cache;
     }
 
+    public Money withDraw() {
+        return withDraw(cache);
+    }
+
     public Money withDraw(Money cache) {
         currentMoney().minus(cache);
         return currentMoney();

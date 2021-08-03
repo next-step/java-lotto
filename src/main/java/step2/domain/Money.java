@@ -4,7 +4,7 @@ public interface Money {
 
     Money minus(Money other);
 
-    int money();
+    int amount();
 
     Money sum(Money cache);
 

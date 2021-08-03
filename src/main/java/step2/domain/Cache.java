@@ -20,18 +20,18 @@ public class Cache implements Money {
         }
     }
 
-    public int money() {
+    public int amount() {
         return money;
     }
 
     @Override
     public Money sum(Money cache) {
-        return new Cache(this.money() + cache.money());
+        return new Cache(this.amount() + cache.amount());
     }
 
     @Override
     public Money minus(Money other) {
-        return new Cache(this.money() - other.money());
+        return new Cache(this.amount() - other.amount());
     }
 
     @Override
