@@ -12,7 +12,10 @@ public class DefaultLottoShuffle implements LottoShuffle {
 
     @Override
     public List<Integer> shuffle() {
-        List<Integer> fullLottoNumbers = IntStream.range(1, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
+        List<Integer> fullLottoNumbers = IntStream.range(1, LOTTO_MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+
         Collections.shuffle(fullLottoNumbers);
 
         List<Integer> lottoNumbers = fullLottoNumbers.subList(0, LOTTO_MAX_COUNT);
