@@ -22,10 +22,7 @@ public class LottoMatcher {
     }
 
     public Winning getWinning(int matchCount, boolean matchBonus) {
-        if(matchCount == 5 && matchBonus){
-            return Winning.SECOND;
-        }
-        return Winning.find(matchCount);
+        return Winning.find(matchCount,matchBonus);
     }
 
     public boolean checkSeconds(Lotto myLotto, int bonus){

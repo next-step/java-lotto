@@ -16,12 +16,21 @@ public enum Winning {
         this.price = price;
     }
 
-    public static Winning find(int count) {
+    public static Winning find(int count, boolean matchBonus) {
+        if (count == SECOND.getMatchCount() && matchBonus) {
+            return SECOND;
+        }
+
+        if (count == THIRD.getMatchCount() && !matchBonus) {
+            return THIRD;
+        }
+
         for (Winning winning : values()) {
             if (winning.matchCount == count) {
                 return winning;
             }
         }
+
         return NOTHING;
     }
 
@@ -33,7 +42,7 @@ public enum Winning {
         return price;
     }
 
-    public boolean isNotThing(){
+    public boolean isNotThing() {
         return NOTHING.equals(this);
     }
 }
