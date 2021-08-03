@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Lotto {
 
+
+	public static final int NUMBERS_SIZE_LIMIT = 6;
 	private final List<Integer> numbers = new ArrayList<>();
 
 	public void generateNumbers(LottoNumberGenerator generator) {
-		if (generator.generate().size() != 6) {
+		if (generator.generate().size() != NUMBERS_SIZE_LIMIT) {
 			throw new IllegalStateException();
 		}
 		numbers.addAll(generator.generate());
