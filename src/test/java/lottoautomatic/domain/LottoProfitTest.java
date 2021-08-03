@@ -1,6 +1,5 @@
 package lottoautomatic.domain;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,18 +10,16 @@ import static org.assertj.core.api.Assertions.*;
 class LottoProfitTest {
 
 	@Test
-	@DisplayName("잘못된 일치 수를 입력하는 경우")
+	@DisplayName("잘못된 일치 수를 입력하는 경우 기본값 리턴")
 	void lotto_profit() throws Exception {
 		//given
 		int quantity = 7;
 
 		//when
-		ThrowingCallable newLottoProfit = () -> LottoProfit.from(quantity);
+		LottoProfit profit = LottoProfit.from(quantity);
 
 		//then
-		assertThatThrownBy(newLottoProfit).isInstanceOf(LottoProfitQuantityException.class)
-		                                  .hasMessage("당첨번호 일치 수가 올바르지 않습니다.");
-
+		assertThat(profit).isEqualTo(LottoProfit.ZERO);
 	}
 
 	@ParameterizedTest(name = "당첨당 합산 금액 {index} [{arguments}]")

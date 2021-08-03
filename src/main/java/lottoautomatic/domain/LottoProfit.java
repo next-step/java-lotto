@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public enum LottoProfit {
 
+	ZERO(0, 0),
 	THREE(3, 5_000),
 	FOUR(4, 50_000),
 	FIVE(5, 1_500_000),
@@ -21,7 +22,7 @@ public enum LottoProfit {
 		return Arrays.stream(LottoProfit.values())
 		             .filter(profit -> profit.quantity == quantity)
 		             .findFirst()
-		             .orElseThrow(LottoProfitQuantityException::new);
+		             .orElseGet(() -> ZERO);
 	}
 
 	public long profit(int matchingCount) {
