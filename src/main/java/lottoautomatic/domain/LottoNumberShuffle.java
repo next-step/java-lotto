@@ -10,14 +10,12 @@ public class LottoNumberShuffle implements LottoNumberGenerator {
 	private static final int NUMBERS_RANGE_END = 6;
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
-	private static final List<Integer> defaultNumbers = initDefaultNumbers();
+	private static final List<Integer> defaultNumbers = new ArrayList<>();
 
-	private static List<Integer> initDefaultNumbers() {
-		List<Integer> defaultNumbers = new ArrayList<>();
+	static {
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
 			defaultNumbers.add(i);
 		}
-		return defaultNumbers;
 	}
 
 	@Override
