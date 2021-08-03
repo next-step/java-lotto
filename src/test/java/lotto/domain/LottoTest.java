@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
@@ -25,7 +24,6 @@ public class LottoTest {
     @DisplayName("로또 생성")
     void create() {
         Lotto lotto = new Lotto(ballSet);
-        assertThat(lotto).isEqualTo(new Lotto(ballSet));
     }
 
     @Test

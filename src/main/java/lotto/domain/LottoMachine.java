@@ -6,7 +6,7 @@ public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private static final List<Ball> ballList = initList();
+    private static final List<Ball> BALLS = initList();
 
     private static List<Ball> initList() {
         List<Ball> ballList = new ArrayList<>(Ball.MAX_NUMBER);
@@ -27,12 +27,7 @@ public class LottoMachine {
     }
 
     private static Set<Ball> get6RandomBall() {
-        Set<Ball> ballSet = new HashSet<>();
-
-        while (ballSet.size() != Lotto.NUMBER_SIZE) {
-            Collections.shuffle(ballList);
-            ballSet.add(ballList.get(0));
-        }
-        return ballSet;
+        Collections.shuffle(BALLS);
+        return new HashSet<>(BALLS.subList(0, 6));
     }
 }
