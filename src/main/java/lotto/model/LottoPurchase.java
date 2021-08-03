@@ -1,10 +1,10 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import lotto.utils.Utils;
 import lotto.validation.Validation;
@@ -17,9 +17,10 @@ public class LottoPurchase {
 	private final LottoGames lottoGames;
 
 	public LottoPurchase(int lottoCount) {
-		List<LottoGame> lottoCreateGame = IntStream.range(START_INCLUSIVE, Utils.returnThousandUnit(lottoCount))
-			.mapToObj(i -> new LottoGame(LottoMachine.createLottoNumber()))
-			.collect(Collectors.toList());
+		List<LottoGame> lottoCreateGame = new ArrayList<>();
+		for (int i = START_INCLUSIVE; i < Utils.returnThousandUnit(lottoCount); i++) {
+			lottoCreateGame.add(new LottoGame(LottoMachine.createLottoNumber()));
+		}
 		lottoGames = new LottoGames(lottoCreateGame);
 	}
 
