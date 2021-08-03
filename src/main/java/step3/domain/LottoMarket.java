@@ -30,11 +30,9 @@ public class LottoMarket {
 
     public Map<Winning, Integer> checkNumToWinner(Lotto winner, int bonus) {
         List<Winning> result = new ArrayList<>();
-
+        WinnerLotto winnerLotto = WinnerLotto.of(winner,bonus);
         for (Lotto myLotto : myLottoList.getAll()) {
-            int matchCount = matcher.matchLotto(winner, myLotto);
-            boolean matchBonus = matcher.checkSeconds(myLotto, bonus);
-            Winning winning = matcher.getWinning(matchCount, matchBonus);
+            Winning winning = matcher.getWinning(myLotto, winnerLotto);
             if (!winning.isNotThing()) {
                 result.add(winning);
             }

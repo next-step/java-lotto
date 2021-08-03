@@ -19,21 +19,33 @@ public enum Winning {
     }
 
     public static Winning find(int count, boolean matchBonus) {
-        if (count == SECOND.getMatchCount() && matchBonus) {
-            return SECOND;
+        if(count < FIFTH.getMatchCount()){
+            return NOTHING;
         }
 
-        if (count == THIRD.getMatchCount() && !matchBonus) {
-            return THIRD;
+        if (isSecondOrThird(count)) {
+            return winningSecondAndThird(matchBonus);
         }
 
         return Arrays.stream(values())
-                .filter(winning -> isaBoolean(count, winning))
+                .filter(winning -> matchCount(count, winning))
                 .findFirst()
-                .orElse(NOTHING);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
-    private static boolean isaBoolean(int count, Winning winning) {
+    private static Winning winningSecondAndThird(boolean matchBonus) {
+        if(matchBonus){
+            return SECOND;
+        }
+        return THIRD;
+
+    }
+
+    private static boolean isSecondOrThird(int count) {
+        return count == SECOND.getMatchCount();
+    }
+
+    private static boolean matchCount(int count, Winning winning) {
         return winning.matchCount == count;
     }
 
