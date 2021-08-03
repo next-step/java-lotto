@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static edu.nextstep.lotto.step2.domain.WinningAmount.*;
+import static edu.nextstep.lotto.step2.domain.WinningAmount.values;
 
 public class LottoList {
 
