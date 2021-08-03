@@ -26,18 +26,20 @@ class LottosTest {
     @DisplayName("값을 가져오는지 size 확인")
     @Test
     void getLottos_값을가져오는지() {
-
         List<Lotto> Lottolist = new ArrayList<>();
         Lottolist.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
         Lottolist.add(new Lotto(Arrays.asList(11,12,13,14,15,16)));
         Lottolist.add(new Lotto(Arrays.asList(21,22,23,24,25,26)));
         Lottos lottos = new Lottos(Lottolist);
 
-        assertThat(lottos.getLottos().size()).isEqualTo(3);
+        assertThat(lottos.size()).isEqualTo(3);
     }
 
+    @DisplayName("당첨로또와 비교하여 List<Result> 반환")
+    @Test
+    void test() {
 
-
+    }
 
 
 }

@@ -1,11 +1,13 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.*;
 import lotto.domain.purchaseStrategy.PurchaseStrategy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class LottoShop {
+public class LottoMachine {
 
     private static final String BELOW_MIN_AMOUNT_ERROR_MESSAGE = "최소 1000원 이상 지불하셔야 합니다.";
     private static final int LOTTO_PRICE = 1000;
@@ -30,12 +32,12 @@ public class LottoShop {
         return lottos;
     }
 
-    public Map<Rank, Integer> checkLottoMatching(WinningLotto winningLotto, Lottos purchasedLottos) {
-        Map<Rank, Integer> matchingInfo = new HashMap<>();
+    public Map<Rank, MatchingCount> checkLottoMatching(WinningLotto winningLotto, Lottos purchasedLottos) {
+        Map<Rank, MatchingCount> matchingInfo = new HashMap<>();
 
         for(Rank rank : Rank.values()) {
             int matchingCount = getRankCount(winningLotto, purchasedLottos, rank);
-            matchingInfo.put(rank, matchingCount);
+            matchingInfo.put(rank, new MatchingCount(matchingCount));
         }
 
         return matchingInfo;
@@ -51,13 +53,13 @@ public class LottoShop {
         return matchingCount;
     }
 
-    public double calculateProfits(Map<Rank, Integer> matcingInfo) {
+    public double calculateProfits(Map<Rank, MatchingCount> matcingInfo) {
         int totalPrize = INIT_COUNT;
         int lottoCount = INIT_COUNT;
 
         for(Rank rank : matcingInfo.keySet()) {
-            totalPrize += rank.getWinningMoney() * matcingInfo.get(rank);
-            lottoCount += matcingInfo.get(rank);
+            totalPrize += rank.getWinningMoney() * matcingInfo.get(rank).getMatchingCount();
+            lottoCount += matcingInfo.get(rank).getMatchingCount();
         }
 
         return Math.round((double)totalPrize / (lottoCount * LOTTO_PRICE) * 100)/ 100.0;

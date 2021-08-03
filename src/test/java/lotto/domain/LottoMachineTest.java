@@ -1,10 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.LottoShop;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,13 +14,13 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LottoShopTest {
+class LottoMachineTest {
 
-    LottoShop lottoShop;
+    LottoMachine lottoMachine;
 
     @BeforeEach
     void setUp() {
-        lottoShop = new LottoShop();
+        lottoMachine = new LottoMachine();
     }
 
     @DisplayName("구입금액이 1000원 미만일때 예외 throw")
@@ -32,7 +28,7 @@ class LottoShopTest {
     @ValueSource(ints = {999, 0, -1000})
     void validateAmount_구입가격이_1000원_미만(int input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottoShop.buyLotto(input, new AutoPurchaseStrategy());
+            lottoMachine.buyLotto(input, new AutoPurchaseStrategy());
         }).withMessageMatching("최소 1000원 이상 지불하셔야 합니다.");
     }
 
@@ -40,7 +36,7 @@ class LottoShopTest {
     @ParameterizedTest
     @CsvSource(value = {"1700:1", "5600:5", "20000:20"}, delimiter = ':')
     void validateAmount_로또용지(int amount, int lottoCount) {
-        assertThat(lottoShop.buyLotto(amount, new AutoPurchaseStrategy()).getLottos().size()).isEqualTo(lottoCount);
+        assertThat(lottoMachine.buyLotto(amount, new AutoPurchaseStrategy()).getLottos().size()).isEqualTo(lottoCount);
     }
 
     @DisplayName("번호 매칭 확인")
@@ -58,13 +54,13 @@ class LottoShopTest {
         Lottolist.add(new Lotto(Arrays.asList(21,22,23,24,25,26))); // 0개일치 > MISS
         Lottolist.add(new Lotto(Arrays.asList(36,37,38,39,41,42))); // 0개일치 > MISS
 
-        Map<Rank, Integer> matcingInfo = lottoShop.checkLottoMatching(winningLotto, new Lottos(Lottolist));
+        Map<Rank, MatchingCount> matcingInfo = lottoMachine.checkLottoMatching(winningLotto, new Lottos(Lottolist));
 
-        assertThat(matcingInfo.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(matcingInfo.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(matcingInfo.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(matcingInfo.get(Rank.FOURTH)).isEqualTo(2);
-        assertThat(matcingInfo.get(Rank.MISS)).isEqualTo(4);
+        assertThat(matcingInfo.get(Rank.FIRST).getMatchingCount()).isEqualTo(1);
+        assertThat(matcingInfo.get(Rank.SECOND).getMatchingCount()).isEqualTo(1);
+        assertThat(matcingInfo.get(Rank.THIRD).getMatchingCount()).isEqualTo(1);
+        assertThat(matcingInfo.get(Rank.FOURTH).getMatchingCount()).isEqualTo(2);
+        assertThat(matcingInfo.get(Rank.MISS).getMatchingCount()).isEqualTo(4);
     }
     
     @DisplayName("상금 총합을 계산해서 반환")
@@ -76,9 +72,9 @@ class LottoShopTest {
         firstLottolist.add(new Lotto(Arrays.asList(5,15,20,31,32,33)));
         firstLottolist.add(new Lotto(Arrays.asList(36,37,38,39,41,42)));
 
-        Map<Rank, Integer> matcingInfo = lottoShop.checkLottoMatching(winningLotto, new Lottos(firstLottolist));
+        Map<Rank, MatchingCount> matcingInfo = lottoMachine.checkLottoMatching(winningLotto, new Lottos(firstLottolist));
 
-        assertThat(lottoShop.calculateProfits(matcingInfo)).isEqualTo(2.5);
+        assertThat(lottoMachine.calculateProfits(matcingInfo)).isEqualTo(2.5);
 
 
         winningLotto = new WinningLotto("1,2,3,4,5,6");
@@ -99,9 +95,9 @@ class LottoShopTest {
         secondLottolist.add(new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)));
         secondLottolist.add(new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
 
-        matcingInfo = lottoShop.checkLottoMatching(winningLotto, new Lottos(secondLottolist));
+        matcingInfo = lottoMachine.checkLottoMatching(winningLotto, new Lottos(secondLottolist));
 
-        assertThat(lottoShop.calculateProfits(matcingInfo)).isEqualTo(0.36);
+        assertThat(lottoMachine.calculateProfits(matcingInfo)).isEqualTo(0.36);
     }
 
 }

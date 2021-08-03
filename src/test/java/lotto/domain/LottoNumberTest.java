@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,11 +26,19 @@ class LottoNumberTest {
         }).withMessageMatching("1부터 45 사이의 숫자를 등록해야 합니다.");
     }
 
-    @DisplayName("입력한 번호를 반환")
+    @DisplayName("입력한 번호와 같을 경우 true")
     @ParameterizedTest
-    @ValueSource(ints = {1, 7, 15, 37})
-    void getLottoNumber_입력한_번호를_반환(int input) {
-        assertThat(new LottoNumber(input).getLottoNumber()).isEqualTo(input);
+    @CsvSource(value = {"1:1", "7:7", "15:15", "37:37"}, delimiter = ':')
+    void getLottoNumber_입력한_번호와_같을_경우_true(int input, int compareNUmber) {
+        assertThat(new LottoNumber(input).isEqualsNumber(compareNUmber)).isTrue();
     }
+
+    @DisplayName("입력한 번호와 다를 경우 false")
+    @ParameterizedTest
+    @CsvSource(value = {"1:10", "7:8", "15:20", "37:40"}, delimiter = ':')
+    void getLottoNumber_입력한_번호와_다를_경우_false(int input, int compareNUmber) {
+        assertThat(new LottoNumber(input).isEqualsNumber(compareNUmber)).isFalse();
+    }
+
 
 }

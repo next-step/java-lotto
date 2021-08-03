@@ -34,6 +34,6 @@
 * [X] LottoNumber 도메인 클래스를 만든다. 1~45 사이의 숫자인지 검증한다.
 * [X] Lottos 도메인 클래스를 만든다.
 * [X] winningLotto 도메인 클래스를 만든다. 당첨번호와 List<Lotto>를 입력받는다. (당첨번호에 대한 유효성 검사)
-* [ ] LottoShop 클래스에 당첨통계 기능을 추가한다.
+* [X] LottoMachine 클래스에 당첨통계 기능을 추가한다.
 * [ ] InputView UI 클래스를 만든다. 구입금액과 당첨번호를 입력받는다.
 * [ ] OutputView UI 클래스를 만든다. 당첨통계와 총 수익률을 보여준다.

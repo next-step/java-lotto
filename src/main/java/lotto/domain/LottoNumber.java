@@ -20,8 +20,8 @@ public class LottoNumber {
         }
     }
 
-    public int getLottoNumber() {
-        return this.number;
+    public boolean isEqualsNumber(int input) {
+        return this.number == input;
     }
 
     @Override
