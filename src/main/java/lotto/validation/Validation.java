@@ -6,12 +6,14 @@ public class Validation {
 
 	private static final String INT_REG_EXP = "^\\d+$";
 	private static final int MONEY_UNIT = 1000;
+	public static final int LOTTO_LENGTH = 6;
+	public static final int ZERO_POINT = 0;
 
 	private Validation() {
 	}
 
 	public static void validThousandUnitCheck(int value) {
-		if (value % MONEY_UNIT != 0) {
+		if (value % MONEY_UNIT != ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_THOUSAND_UNIT_MESSAGE);
 		}
 	}
@@ -29,7 +31,7 @@ public class Validation {
 	}
 
 	public static void validLottoSizeCheck(String[] value) {
-		if (value.length != 6) {
+		if (value.length != LOTTO_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
 		}
 	}
