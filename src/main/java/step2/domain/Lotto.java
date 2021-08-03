@@ -14,8 +14,8 @@ public class Lotto {
         return new Lotto(lottoNumber);
     }
 
-    public List<Integer> numbers() {
-        return numbers.getNumbers();
+    public LottoNumber numbers() {
+        return numbers;
     }
 
     @Override

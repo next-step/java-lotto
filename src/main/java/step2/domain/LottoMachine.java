@@ -7,11 +7,11 @@ public class LottoMachine {
 
     private static final Integer LOTTO_PRICE = 1000;
 
-    private final LottoNumberStrategy numberStrategy;
+    private final LottoStrategy numberStrategy;
 
     private LottoNumber winOfLotto;
 
-    private LottoMachine(LottoNumberStrategy numberStrategy) {
+    public LottoMachine(LottoStrategy numberStrategy) {
         this.numberStrategy = numberStrategy;
     }
 

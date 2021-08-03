@@ -21,7 +21,7 @@ public class LottoStatistics {
         int count = 0;
 
         for (Lotto lotto : lottos) {
-            List<Integer> numbers = lotto.numbers();
+            List<Integer> numbers = lotto.numbers().getNumbers();
             for (Integer number : numbers) {
                 if (winOfLottoNumbers.contains(number)) {
                     count++;
@@ -31,6 +31,7 @@ public class LottoStatistics {
             if (count >= MINIMAL_SUCCESS_NUMBER) {
                 resultOfLottos.put(count, resultOfLottos.getOrDefault(count, 0) + 1);
             }
+
             count = 0;
         }
     }

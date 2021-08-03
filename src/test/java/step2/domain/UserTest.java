@@ -16,7 +16,7 @@ class UserTest {
         User user = new User(givenName, givenWallet);
 
         // When
-        List<Lotto> userLottos = user.buyLotto();
+        List<Lotto> userLottos = user.buyLotto(new LottoMachine(new RandomStrategy()));
 
         // Then
         assertThat(userLottos.size()).isEqualTo(10);
