@@ -3,7 +3,6 @@ package lotto;
 import lotto.exception.InvalidLottoRankException;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public enum LottoRankEnum {
     THREE_MATCH(3, 5000),

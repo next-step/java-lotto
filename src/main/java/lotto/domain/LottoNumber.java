@@ -41,42 +41,4 @@ public class LottoNumber {
     public String toString() {
         return Integer.toString(lottoNumber);
     }
-    //    public LottoNumber() {
-//        shuffled();
-//        picked();
-//    }
-
-//    private void picked() {
-//
-//    }
-//
-//    private void shuffled() {
-//        List<Integer> shuffledNumbers = new ArrayList<>();
-//        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-//            shuffledNumbers.add(i);
-//        }
-//
-//        Collections.shuffle(shuffledNumbers);
-//
-//        pickedNumbers = shuffledNumbers.subList(0, COUNT_OF_PICK);
-//        Collections.sort(pickedNumbers);
-//
-//    }
-//
-//    public LottoNumber(List<Integer> lottoNumbers) {
-//        this.pickedNumbers = lottoNumbers;
-//    }
-//
-//
-//    public String value() {
-//        return pickedNumbers.toString();
-//    }
-//
-//    public long countOfMatch(LottoNumber winningLottoNumber) {
-//
-//        return winningLottoNumber.pickedNumbers.stream()
-//                .filter(number -> this.pickedNumbers.contains(number))
-//                .count();
-//
-//    }
 }

@@ -1,15 +1,10 @@
 package lotto.domain;
 
 import lotto.LottoRankEnum;
-import lotto.exception.InvalidLottoNumberCountException;
 import lotto.exception.InvalidLottoRankException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -19,7 +14,6 @@ public class LottoRankEnumTest {
     @DisplayName("로또를 몇개 맞았는지 수로 RankEnum 이 일치하는지 테스트")
     @Test
     void rankEnumTest() {
-
         LottoRankEnum lottoRankEnum = LottoRankEnum.valueOf(3);
 
         assertThat(lottoRankEnum).isEqualTo(LottoRankEnum.THREE_MATCH);
