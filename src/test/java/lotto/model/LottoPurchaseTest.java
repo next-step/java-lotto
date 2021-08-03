@@ -11,15 +11,14 @@ import org.junit.jupiter.api.Test;
 
 class LottoPurchaseTest {
 
-
 	@Test
 	@DisplayName("입력된 로또게임 장수 만큼 로또게임이 생성된다.")
 	public void createMoneyByLottoGame() {
-		LottoPurchase lottoPurchase = new LottoPurchase(4);
+		LottoPurchase lottoPurchase = new LottoPurchase(4000);
 
 		assertThat(lottoPurchase.resultLottoGame().size()).isEqualTo(4);
 
-		LottoPurchase lottoPurchase2 = new LottoPurchase(6);
+		LottoPurchase lottoPurchase2 = new LottoPurchase(6000);
 
 		assertThat(lottoPurchase2.resultLottoGame().size()).isEqualTo(6);
 	}
@@ -28,17 +27,17 @@ class LottoPurchaseTest {
 	@DisplayName("로또게임시 결과값을 반환한다.")
 	public void resultLottoStatus() {
 		List<LottoGame> lottoGame = new ArrayList<>();
-		lottoGame.add(getLottoGame(1,2,3,4,5,7));
-		lottoGame.add(getLottoGame(1,2,3,4,5,9));
-		lottoGame.add(getLottoGame(1,2,3,4,5,6));
-		lottoGame.add(getLottoGame(7,9,15,21,28,39));
-		lottoGame.add(getLottoGame(2,2,3,32,38,45));
+		lottoGame.add(getLottoGame(1, 2, 3, 4, 5, 7));
+		lottoGame.add(getLottoGame(1, 2, 3, 4, 5, 9));
+		lottoGame.add(getLottoGame(1, 2, 3, 4, 5, 6));
+		lottoGame.add(getLottoGame(7, 9, 15, 21, 28, 39));
+		lottoGame.add(getLottoGame(2, 2, 3, 32, 38, 45));
 		LottoGames lottoGames = new LottoGames(lottoGame);
 		LottoPurchase lottoPurchase = new LottoPurchase(lottoGames);
 		Map<Prize, Integer> result = lottoPurchase.confirmWinLottoNumber("1,2,3,4,5,6");
 
-		assertThat(result.size()).isEqualTo(2);
 		assertThat(result.get(Prize.THIRD)).isEqualTo(2);
+		assertThat(result.get(Prize.FIRST)).isEqualTo(1);
 
 	}
 
