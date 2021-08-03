@@ -1,9 +1,8 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoMachine {
 
@@ -16,9 +15,10 @@ public class LottoMachine {
 	}
 
 	public static List<Integer> createLottoNumber() {
-		List<Integer> lottoBalls = IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
-			.boxed()
-			.collect(Collectors.toList());
+		List<Integer> lottoBalls = new ArrayList<>();
+		for (int i = LOTTO_START_NUMBER; i < LOTTO_END_NUMBER; i++) {
+			lottoBalls.add(i);
+		}
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE);
 	}
