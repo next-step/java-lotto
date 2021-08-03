@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.util.Utils;
+import step2.util.CalcUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class LottoStatistics {
             sum.addAndGet(count * lottoRank.getMoney());
         });
 
-        profit = Utils.lottoPercent(sum.get(), lottoCount * LOTTO_PRICE);
+        profit = CalcUtils.lottoPercent(sum.get(), lottoCount * LOTTO_PRICE);
     }
 
     private void calculateLottoResult(int count) {
