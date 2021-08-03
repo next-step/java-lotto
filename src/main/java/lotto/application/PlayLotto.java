@@ -27,8 +27,8 @@ public class PlayLotto {
         return lottos;
     }
 
-    public static int[] playLotto(String winningNumberString, List<Lotto> lottos){
-        Lotto winningLotto = createWinningLotto(winningNumberString);
+    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos){
+        Lotto winningLotto = createWinningLotto(winningNumberString, bonusNumber);
         int[] winningArray = new int[WINNING_TOTAL_INDEX];
         for (Lotto lotto : lottos) {
             winningArray[winningLotto.checkWinning(lotto)]++;
@@ -36,10 +36,10 @@ public class PlayLotto {
         return winningArray;
     }
 
-    private static Lotto createWinningLotto(String winningNumberString) {
+    private static Lotto createWinningLotto(String winningNumberString, int bonusNumber) {
         List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumberList);
-        return new Lotto(winningLottoNumbers);
+        return new Lotto(winningLottoNumbers, bonusNumber);
     }
 
 

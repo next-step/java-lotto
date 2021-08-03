@@ -68,19 +68,20 @@ public class LottoTest {
     @DisplayName("로또게임")
     void playLottoTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
         String winningNumberString = "1,2,3,4,5,6";
+        int bonusNumber = 45;
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
-        int[] winningArray = PlayLotto.playLotto(winningNumberString, Arrays.asList(lotto));
+        int[] winningArray = PlayLotto.playLotto(winningNumberString, bonusNumber, Arrays.asList(lotto));
         assertThat(winningArray[testPrizeNumber]).isEqualTo(1);
     }
 
     @ParameterizedTest
-    @CsvSource({"10,0,1,0,2,107.86","13,1,0,0,0,14285.71","12,0,0,0,2,0.71"})
+    @CsvSource({"10,0,0,1,0,2,107.86","13,1,0,0,0,0,142857.14","12,0,0,0,0,2,0.71"})
     @DisplayName("수익률 계산")
-    void profitTest(int none, int firstCount, int secondCount, int thirdCount, int fourthCount, double testProfit){
+    void profitTest(int none, int firstCount, int secondCount, int thirdCount, int fourthCount, int fifthCount, double testProfit){
         int cash = 14000;
-        int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCount, fourthCount};
+        int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCount, fourthCount, fifthCount};
         double profit = PlayLotto.calculateProfitRate(cash,prizeArray);
         assertThat(profit).isEqualTo(testProfit);
     }
