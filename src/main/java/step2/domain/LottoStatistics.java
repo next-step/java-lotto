@@ -1,19 +1,20 @@
 package step2.domain;
 
-import java.math.BigDecimal;
+import step2.util.Utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LottoStatistics {
 
     private static final Integer MINIMAL_SUCCESS_NUMBER = 3;
-    private static final long LOTTO_PRICE = 1000L;
+    private static final int LOTTO_PRICE = 1000;
 
     private final Map<Integer, Integer> resultOfLottos = new HashMap<>();
     private final LottoNumber winOfLottoNumber;
 
-    private BigDecimal profit;
+    private double profit;
 
     public LottoStatistics(LottoNumber winOfLottoNumber, List<Lotto> lottos) {
         this.winOfLottoNumber = winOfLottoNumber;
@@ -29,27 +30,14 @@ public class LottoStatistics {
     }
 
     private void calculateLottoProfit(int lottoCount) {
-        final int[] sum = {0};
+        AtomicInteger sum = new AtomicInteger();
 
-        resultOfLottos.forEach((key, value) -> {
-            if (key == 3) {
-                sum[0] += value * 5000;
-            }
-
-            if (key == 4) {
-                sum[0] += value * 50000;
-            }
-
-            if (key == 5) {
-                sum[0] += value * 1500000;
-            }
-
-            if (key == 6) {
-                sum[0] += value * 2000000000;
-            }
+        resultOfLottos.forEach((rank, count) -> {
+            LottoRank lottoRank = LottoRank.find(rank);
+            sum.addAndGet(count * lottoRank.getMoney());
         });
 
-        profit = BigDecimal.valueOf(sum[0] / (lottoCount * LOTTO_PRICE) * 100);
+        profit = Utils.lottoPercent(sum.get(), lottoCount * LOTTO_PRICE);
     }
 
     private void calculateLottoResult(int count) {
@@ -62,7 +50,7 @@ public class LottoStatistics {
         return resultOfLottos;
     }
 
-    public BigDecimal getProfit() {
+    public Double getProfit() {
         return profit;
     }
 }
