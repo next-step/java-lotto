@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
 	private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
+	private static final int SEPARATOR_GROUP = 1;
+	private static final int FORMULA_GROUP = 2;
 
 	private final Matcher matcher;
 	private String separators = ",;";
@@ -37,8 +39,8 @@ public class StringAddCalculator {
 
 	private void addCustomSeparator() {
 		if (hasCustomSeparator()) {
-			addSeparator(matcher.group(1));
-			input = matcher.group(2);
+			addSeparator(matcher.group(SEPARATOR_GROUP));
+			input = matcher.group(FORMULA_GROUP);
 		}
 	}
 
