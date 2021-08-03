@@ -15,7 +15,8 @@ public class MainApplication {
         List<Lotto> lottos = PlayLotto.createLotto(lottoCount);
         ResultView.printLottos(lottos);
         String winningNumberString = InputView.inputWinningNumber();
-        int[] winningArray = PlayLotto.playLotto(winningNumberString, lottos);
+        int bonusNumber = InputView.inputBonusNumber();
+        int[] winningArray = PlayLotto.playLotto(winningNumberString, bonusNumber, lottos);
         double profitRate = PlayLotto.calculateProfitRate(cash,winningArray);
         ResultView.printResultSubject();
         ResultView.printPrizeResult(winningArray);

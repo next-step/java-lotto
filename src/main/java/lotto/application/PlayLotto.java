@@ -48,7 +48,7 @@ public class PlayLotto {
         for (int index = 0; index < winningArray.length; index++) {
             totalMoney += calculate(index, winningArray[index]);
         }
-        return Math.round((((float) totalMoney / cash) * 100)) / 100.0;
+        return Math.round((((double) totalMoney / cash) * 100)) / 100.0;
     }
 
     private static int calculate(int winningIndex, int count) {
