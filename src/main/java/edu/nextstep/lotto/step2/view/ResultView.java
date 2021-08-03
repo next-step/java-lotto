@@ -7,8 +7,6 @@ import edu.nextstep.lotto.step2.domain.WinningList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static edu.nextstep.lotto.step2.domain.WinningAmount.values;
-
 public class ResultView {
 
     private static final String NEW_LINE = "\n";
@@ -23,7 +21,7 @@ public class ResultView {
     }
 
     public void outputStatistics(LottoList lottoList, WinningList winningList) {
-        Arrays.stream(values())
+        Arrays.stream(WinningAmount.values())
                 .sorted(Comparator.comparing(WinningAmount::getCount))
                 .forEach(amount -> System.out.print(ViewMessage.getStatisticsMessage(lottoList, winningList, amount)));
     }
