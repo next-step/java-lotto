@@ -15,7 +15,7 @@ public class LottoMachine {
         this.numberStrategy = numberStrategy;
     }
 
-    public List<Lotto> createLottos(Wallet wallet) {
+    public List<Lotto> sell(Wallet wallet) {
         final int lottoCount = wallet.currentMoney().money() / LOTTO_PRICE;
 
         List<Lotto> lottos = new ArrayList<>();

@@ -17,7 +17,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         // When
-        List<Lotto> lottos = lottoMachine.createLottos(new Wallet(givenCache));
+        List<Lotto> lottos = lottoMachine.sell(new Wallet(givenCache));
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
