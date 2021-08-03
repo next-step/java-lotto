@@ -41,7 +41,7 @@ class LottoTest {
 		List<Integer> defaultNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
 		//then
-		assertThatThrownBy(() -> lotto.generateNumbers(() -> defaultNumbers)).isInstanceOf(IllegalStateException.class);
+		assertThatThrownBy(() -> lotto.generateNumbers(() -> defaultNumbers)).isInstanceOf(LottoNumbersSizeException.class);
 	}
 
 

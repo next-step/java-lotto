@@ -11,7 +11,7 @@ public class Lotto {
 
 	public void generateNumbers(LottoNumberGenerator generator) {
 		if (generator.generate().size() != NUMBERS_SIZE_LIMIT) {
-			throw new IllegalStateException();
+			throw new LottoNumbersSizeException();
 		}
 		numbers.addAll(generator.generate());
 	}

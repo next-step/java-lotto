@@ -20,7 +20,9 @@ class LottoProfitTest {
 		ThrowingCallable newLottoProfit = () -> LottoProfit.from(quantity);
 
 		//then
-		assertThatThrownBy(newLottoProfit).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(newLottoProfit).isInstanceOf(LottoProfitQuantityException.class)
+		                                  .hasMessage("당첨번호 일치 수가 올바르지 않습니다.");
+
 	}
 
 	@ParameterizedTest(name = "당첨당 합산 금액 {index} [{arguments}]")

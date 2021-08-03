@@ -21,7 +21,7 @@ public enum LottoProfit {
 		return Arrays.stream(LottoProfit.values())
 		             .filter(profit -> profit.quantity == quantity)
 		             .findFirst()
-		             .orElseThrow(IllegalArgumentException::new);
+		             .orElseThrow(LottoProfitQuantityException::new);
 	}
 
 	public long profit(int matchingCount) {
