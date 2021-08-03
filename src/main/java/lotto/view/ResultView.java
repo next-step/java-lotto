@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPrize;
 
 import java.util.List;
 
@@ -40,13 +39,13 @@ public class ResultView {
     }
 
     private static void printPrize(int prize, int count) {
-        if (prize == FOURTH.getPrize()) {
+        if (prize == FIFTH.getPrize()) {
             printFourthResult(count);
         }
-        if (prize == THIRD.getPrize()) {
+        if (prize == FOURTH.getPrize()) {
             printThirdResult(count);
         }
-        if (prize == SECOND.getPrize()) {
+        if (prize == THIRD.getPrize()) {
             printSecondResult(count);
         }
         if (prize == FIRST.getPrize()) {

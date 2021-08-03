@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum LottoPrize {
     FIRST(6, 1, 2_000_000_000),
-    SECOND(5, 2, 1_500_000),
-    THIRD(4, 3, 50_000),
-    FOURTH(3, 4, 5_000),
+    SECONDE(5, 2, 30_000_000),
+    THIRD(5, 3, 1_500_000),
+    FOURTH(4, 4, 50_000),
+    FIFTH(3, 5, 5_000),
     NONE(0, 0, 0)
     ;
     private int count;
