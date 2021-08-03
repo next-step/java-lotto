@@ -5,6 +5,7 @@ import lotto.application.PlayLotto;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -89,5 +90,7 @@ public class LottoTest {
     void bonusNumber() {
         String bonusNumberString = "45";
         BonusNumber bonusNumber = new BonusNumber(bonusNumberString);
+        winningLotto.createBonusNumber(bonusNumberString);
+        assertThat(winningLotto.getBonusNumber()).isEqualTo(bonusNumber);
     }
 }
