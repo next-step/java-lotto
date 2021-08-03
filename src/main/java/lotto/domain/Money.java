@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.InsufficientMoneyException;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Money {
@@ -20,12 +19,8 @@ public class Money {
 		return amount / PRICE_PER_LOTTO_TICKET;
 	}
 
-	public Money balanceAfterBuyingNumberOfLottoTickets(int lottoTicketsCount) {
-		return new Money(amount - (PRICE_PER_LOTTO_TICKET * lottoTicketsCount));
-	}
-
-	public double earningsRate(Money totalPrizeMoney) {
-		return (double) totalPrizeMoney.amount / amount;
+	public double earningsRate(int totalPrizeMoney) {
+		return (double) totalPrizeMoney / amount;
 	}
 
 	private void validateMoneyAmount(int amount) {

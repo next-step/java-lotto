@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
+import lotto.exception.InsufficientMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.exception.InsufficientMoneyException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
 
@@ -32,19 +32,11 @@ class MoneyTest {
 		assertThat(money.availableLottoTicketsCount()).isEqualTo(expectedLottoTicketsCount);
 	}
 
-	@DisplayName("로또 티켓을 구매할 경우 로또 티켓 매수만큼의 금액을 차감한다.")
-	@Test
-	void subtractPriceOfLottoTickets() {
-		Money money = new Money(9000);
-		assertThat(money.balanceAfterBuyingNumberOfLottoTickets(5)).isEqualTo(new Money(4000));
-	}
-
 	@DisplayName("최초 구매 금액과 총 당첨금으로 총 수익률을 계산한다.")
 	@Test
 	void calculateEarningsRate() {
 		Money money = new Money(100000);
-		Money totalPrizeMoney = new Money(15000);
-		assertThat(money.earningsRate(totalPrizeMoney)).isEqualTo(0.15);
+		assertThat(money.earningsRate(15000)).isEqualTo(0.15);
 	}
 
 }

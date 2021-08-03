@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import static lotto.domain.LottoPrize.*;
-import static lotto.domain.LottoTicketsTest.*;
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static lotto.domain.LottoPrize.*;
+import static lotto.domain.LottoTicketsTest.createLottoTickets;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoPrizesTest {
 
@@ -40,14 +40,14 @@ class LottoPrizesTest {
 	@DisplayName("구입한 금액과 구매한 로또의 당첨금으로 총 수익률을 계산한다.")
 	@MethodSource("earningsRateArguments")
 	@ParameterizedTest
-	void earningsRate(LottoPrizes lottoPrizes, int money, double earningsRate) {
-		assertThat(lottoPrizes.earningsRate(money)).isEqualTo(earningsRate);
+	void earningsRate(Money money, LottoPrizes lottoPrizes, double earningsRate) {
+		assertThat(money.earningsRate(lottoPrizes.winningMoney())).isEqualTo(earningsRate);
 	}
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 200_000, 10_000.25)
+			Arguments.of(new Money(100_000), LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 0.55),
+			Arguments.of(new Money(200_000), LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 10_000.25)
 		);
 	}
 

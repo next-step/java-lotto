@@ -1,10 +1,10 @@
 package lotto;
 
-import java.util.List;
-
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoMain {
 
@@ -23,6 +23,7 @@ public class LottoMain {
 		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, bonusNumber);
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 		ResultView.showLottoPrizes(lottoPrizes);
+		ResultView.showEarningsRate(money.earningsRate(lottoPrizes.winningMoney()));
 	}
 
 }
