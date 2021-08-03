@@ -7,7 +7,9 @@
 ---
 
 ## Todo
-  
+- LottoController 의 생성자 인자를 줄인다: User 라는 객체가 입급 급액과 자신 tickets 들을 갖는다.
+- LottoTicketDto 를 만든다. 
+
 ## In progress
 
 ## Done ✅

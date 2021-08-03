@@ -1,7 +1,6 @@
 package lotto.domain.model;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -47,8 +46,7 @@ public class LottoTicket {
     }
 
     public LottoRank findRank(LottoTicket winningTicket) {
-        int countOfMatch = countMatches(winningTicket);
-        return LottoRank.valueOf(countOfMatch);
+        return LottoRank.of(countMatches(winningTicket));
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {

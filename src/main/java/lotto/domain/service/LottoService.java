@@ -3,7 +3,6 @@ package lotto.domain.service;
 import static lotto.domain.model.LottoNumber.*;
 import static lotto.domain.model.LottoNumber.MAX_INCLUSIVE;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +23,9 @@ public class LottoService {
 
     public static LottoTickets createRandomTickets(LottoMoney lottoMoney) {
         int numberOfTickets = lottoMoney.numberOfTickets();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < numberOfTickets; i++) {
-            LottoTicket randomTicket = createRandomTicket();
-            lottoTickets.add(randomTicket);
-        }
+        List<LottoTicket> lottoTickets = IntStream.range(0, numberOfTickets)
+                .mapToObj(i -> createRandomTicket())
+                .collect(Collectors.toList());
         return LottoTickets.of(lottoTickets);
     }
 

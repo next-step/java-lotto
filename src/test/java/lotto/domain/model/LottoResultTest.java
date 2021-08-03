@@ -18,7 +18,7 @@ public class LottoResultTest {
 
     @ParameterizedTest
     @EnumSource(LottoRank.class)
-    @DisplayName("생성 직후 모든 상금 등급에 따른 개수가 0이다.")
+    @DisplayName("생성 직후 모든 상금 등급의 개수가 0 이다.")
     void getCount_init_correctly(LottoRank lottoRank) {
         assertThat(lottoResult.getCountByRank(lottoRank)).isEqualTo(0);
     }

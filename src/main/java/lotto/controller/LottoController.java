@@ -14,23 +14,19 @@ public class LottoController {
     private final LottoTicket winningTicket;
     private final LottoMoney lottoMoney;
 
-    public LottoController(LottoTickets userTickets, LottoTicket winningTicket,
+    private LottoController(LottoTickets userTickets, LottoTicket winningTicket,
             LottoMoney lottoMoney) {
         this.userTickets = userTickets;
         this.winningTicket = winningTicket;
         this.lottoMoney = lottoMoney;
     }
 
-    public static LottoController createFromUserInput() {
+    public static LottoController fromUserInput() {
         LottoMoney lottoMoney = lottoMoneyInput();
-        LottoTickets randomTickets = createTicketsFromUserAmount(lottoMoney);
+        LottoTickets randomTickets = LottoService.createRandomTickets(lottoMoney);
         ResultView.printLottoTickets(randomTickets);
-        LottoTicket winningTicket = createWinningLottoFromInput();
+        LottoTicket winningTicket = winningLottoFromInput();
         return new LottoController(randomTickets, winningTicket, lottoMoney);
-    }
-
-    private static LottoTickets createTicketsFromUserAmount(LottoMoney lottoMoney) {
-        return LottoService.createRandomTickets(lottoMoney);
     }
 
     private static LottoMoney lottoMoneyInput() {
@@ -38,7 +34,7 @@ public class LottoController {
         return LottoMoney.of(amount);
     }
 
-    private static LottoTicket createWinningLottoFromInput() {
+    private static LottoTicket winningLottoFromInput() {
         String text = InputView.askForWinningLotto();
         return LottoTicket.of(text);
     }

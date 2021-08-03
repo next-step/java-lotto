@@ -27,7 +27,7 @@ public enum LottoRank {
         this.winningMoney = winningMoney;
     }
 
-    public static LottoRank valueOf(int countOfMatch) {
+    public static LottoRank of(int countOfMatch) {
         if (countOfMatch < FIFTH.countOfMatch) {
             return MISS;
         }

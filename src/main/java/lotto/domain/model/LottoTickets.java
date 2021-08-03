@@ -1,6 +1,10 @@
 package lotto.domain.model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lotto.LottoTicketDto;
 
 public class LottoTickets {
 
@@ -15,16 +19,16 @@ public class LottoTickets {
     }
 
     public LottoResult match(LottoTicket winningTicket) {
-        LottoResult lottoResult = LottoResult.empty();
-        for (LottoTicket lottoTicket : ticketList) {
-            LottoRank lottoRank = lottoTicket.findRank(winningTicket);
-            lottoResult.update(lottoRank);
-        }
-        return lottoResult;
+        Map<LottoRank, Integer> rankToCount = ticketList.stream()
+                .map(ticket -> ticket.findRank(winningTicket))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(x -> 1)));
+        return LottoResult.of(rankToCount);
     }
 
-    public List<LottoTicket> getTicketList() {
-        return ticketList;
+    public List<LottoTicketDto> getTickets() {
+        return ticketList.stream()
+                .map(LottoTicketDto::of)
+                .collect(Collectors.toList());
     }
 
     public int size() {
