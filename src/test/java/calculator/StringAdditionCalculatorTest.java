@@ -45,4 +45,27 @@ class StringAdditionCalculatorTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource
+    void 커스텀구분자가_포함된_문자열을_입력받으면_그_구분자를_기준으로_문자열이_분리된다(String input, String[] expected) {
+        assertThat(stringAdditionCalculator.splitWithCustomDelimiter(input)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> 커스텀구분자가_포함된_문자열을_입력받으면_그_구분자를_기준으로_문자열이_분리된다() {
+        return Stream.of(
+                Arguments.of(
+                        "//;\n1;2;3",
+                        new String[] {"1", "2", "3"}
+                ),
+                Arguments.of(
+                        "//-\n4-5-6",
+                        new String[] {"4", "5", "6"}
+                ),
+                Arguments.of(
+                        "//~\n7~8~9",
+                        new String[] {"7", "8", "9"}
+                )
+        );
+    }
+
 }
