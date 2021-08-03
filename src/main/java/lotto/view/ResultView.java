@@ -10,6 +10,10 @@ public class ResultView {
     private static String COUNT_OF_LOTTO_QUESTION = "개를 구입했습니다.";
     private static int DEFAULT_COUNT = 0;
 
+    private ResultView() {
+
+    }
+
     public static void countOfLotto(int lottoCount) {
         System.out.println(lottoCount + COUNT_OF_LOTTO_QUESTION);
     }
