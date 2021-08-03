@@ -22,7 +22,7 @@ public class LottoTest {
     Lotto winningLotto;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
         int bonusNumber = 45;
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
@@ -30,7 +30,7 @@ public class LottoTest {
     }
     @Test
     @DisplayName("금액에 따른 로또 생성")
-    void lottoCountTest(){
+    void lottoCountTest() {
         int cash = 14000;
         int lottoCount = PlayLotto.calculateLottoCount(cash);
         List<Lotto> lottos = playLotto.createLotto(lottoCount);
@@ -39,7 +39,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또 생성")
-    void createLottoTest(){
+    void createLottoTest() {
         Lotto lotto = new Lotto(new CreateShffledLottoNumbers());
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -55,7 +55,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"1,2,3,9,10,11,5","1,2,3,4,9,10,4","1,2,3,4,5,9,3","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
     @DisplayName("등수 확인")
-    void prizeTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+    void prizeTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber) {
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
@@ -66,7 +66,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"1,2,3,9,10,11,5","1,2,3,4,9,10,4","1,2,3,4,5,9,3","1,2,3,4,5,6,1","9,10,11,12,13,14,0"})
     @DisplayName("로또게임")
-    void playLottoTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+    void playLottoTest(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber) {
         String winningNumberString = "1,2,3,4,5,6";
         int bonusNumber = 45;
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
@@ -79,7 +79,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"10,0,0,1,0,2,107.86","13,1,0,0,0,0,142857.14","12,0,0,0,0,2,0.71"})
     @DisplayName("수익률 계산")
-    void profitTest(int none, int firstCount, int secondCount, int thirdCount, int fourthCount, int fifthCount, double testProfit){
+    void profitTest(int none, int firstCount, int secondCount, int thirdCount, int fourthCount, int fifthCount, double testProfit) {
         int cash = 14000;
         int[] prizeArray = new int[]{none, firstCount, secondCount, thirdCount, fourthCount, fifthCount};
         double profit = PlayLotto.calculateProfitRate(cash,prizeArray);
@@ -103,7 +103,7 @@ public class LottoTest {
 
     @Test
     @DisplayName("보너스볼 일치 확인")
-    void isContainBonusNumberTest(){
+    void isContainBonusNumberTest() {
         List<Integer> lottoNumberList = Arrays.asList(10,11,12,13,14,45);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);
@@ -113,7 +113,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"1,2,3,4,5,45,2","1,2,3,4,5,10,3"})
     @DisplayName("2등 3등 처리")
-    void isSecondOrThird(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber){
+    void isSecondOrThird(int number1, int number2, int number3, int number4, int number5, int number6, int testPrizeNumber) {
         List<Integer> lottoNumberList = Arrays.asList(number1,number2,number3,number4,number5,number6);
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
         Lotto lotto = new Lotto(lottoNumbers);

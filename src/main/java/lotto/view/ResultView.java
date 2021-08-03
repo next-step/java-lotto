@@ -53,22 +53,22 @@ public class ResultView {
         }
     }
 
-    private static void printFourthResult(int count){
+    private static void printFourthResult(int count) {
         System.out.printf("3개 일치 (5000원)- %d개" ,count);
         System.out.println();
     }
 
-    private static void printThirdResult(int count){
+    private static void printThirdResult(int count) {
         System.out.printf("4개 일치 (50000원)- %d개" ,count);
         System.out.println();
     }
 
-    private static void printSecondResult(int count){
+    private static void printSecondResult(int count) {
         System.out.printf("5개 일치 (1500000원)- %d개" ,count);
         System.out.println();
     }
 
-    private static void printFirstResult(int count){
+    private static void printFirstResult(int count) {
         System.out.printf("6개 일치 (2000000000원)- %d개" ,count);
         System.out.println();
     }
