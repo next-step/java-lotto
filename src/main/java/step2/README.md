@@ -4,11 +4,11 @@
 - [x] 사용자는 로또를 구입 할 수 있다 #User#buyLotto()
     - [x] 로또 기계에서 투입 금액만큼의 로또를 살 수 있다. #LottoMachine#createLottos()
         - [x] 로또를 만든다. #Lotto#createLotto()
-            - [x] 음수로 된 로또 번호가 들어 올 시에 IllegalArgument 발생 
+            - [x] 음수로 된 로또 번호가 들어 올 시에 IllegalArgument 발생
     - [x] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #LottoNumberGenerator#create()
     - [x] 사용자는 돈을 뺄 수 있다. #User#withDrow()
-      - [x] 지갑은 돈을 뺄 수 있다. #Wallet#withDrow()
-        - [x] 돈이 없는데 인출을 하면 IllegalArgument 발생
+        - [x] 지갑은 돈을 뺄 수 있다. #Wallet#withDrow()
+            - [x] 돈이 없는데 인출을 하면 IllegalArgument 발생
     - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #User#save()
         - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #Wallet#save()
 - [x] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
