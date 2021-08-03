@@ -1,10 +1,10 @@
 package lottoautomatic.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-
 
 	public static final int NUMBERS_SIZE_LIMIT = 6;
 	private final List<Integer> numbers = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Lotto {
 	}
 
 	public List<Integer> numbers() {
-		return numbers;
+		return Collections.unmodifiableList(numbers);
 	}
 
 	public int matchingQuantityFrom(List<Integer> lastWeekNumbers) {
