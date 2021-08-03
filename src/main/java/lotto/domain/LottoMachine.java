@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class LottoMachine {
 
@@ -14,11 +11,8 @@ public class LottoMachine {
     private static final int LOTTO_GENERATION_COUNT_RANGE_END = 6;
 
     private int purchaseLottoCount;
-    private int purchaseAmount;
-
 
     public LottoMachine(int purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
         purchaseLottoCount = purchaseAmount / PRICE_OF_LOTTO;
     }
 
@@ -36,7 +30,13 @@ public class LottoMachine {
 
         Collections.shuffle(lottoNumberList);
 
-        return LottoNumbers.of(new HashSet<>(lottoNumberList.subList(LOTTO_GENERATION_COUNT_RANGE_START, LOTTO_GENERATION_COUNT_RANGE_END)));
+        List<LottoNumber> pickedLottoNumbers = lottoNumberList.subList(LOTTO_GENERATION_COUNT_RANGE_START, LOTTO_GENERATION_COUNT_RANGE_END);
+
+        Collections.sort(pickedLottoNumbers);
+
+        LottoNumbers test = LottoNumbers.of(new TreeSet<>(pickedLottoNumbers));
+
+        return test;
 
     }
 

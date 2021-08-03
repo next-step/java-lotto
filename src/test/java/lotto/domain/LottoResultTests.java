@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,11 +17,11 @@ public class LottoResultTests {
 
     @DisplayName("로또 결과를 잘 가져오는지 테스트")
     @Test
-    void getLottoResultTest(){
-        LottoNumbers lottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+    void getLottoResultTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
                 LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
 
-        LottoNumbers winningLottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+        LottoNumbers winningLottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
                 LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
 
         Set<LottoNumbers> totalLottoNumbers = new HashSet<>();
@@ -34,11 +35,11 @@ public class LottoResultTests {
 
     @DisplayName("결과로 수익 계산이 올바른 지 테스트")
     @Test
-    void validLottoCalculateProfitTest(){
-        LottoNumbers lottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+    void validLottoCalculateProfitTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
                 LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
 
-        LottoNumbers winningLottoNumbers = LottoNumbers.of(new HashSet<>(Arrays.asList(
+        LottoNumbers winningLottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
                 LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
 
         Set<LottoNumbers> totalLottoNumbers = new HashSet<>();

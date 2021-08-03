@@ -1,28 +1,27 @@
 package lotto.domain;
 
-import lotto.LottoRankEnum;
 import lotto.exception.InvalidLottoNumberCountException;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     private static final int TOTAL_LOTTO_NUMBERS_COUNT = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final TreeSet<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    private LottoNumbers(TreeSet<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers of(Set<LottoNumber> lottoNumbers) {
+    public static LottoNumbers of(TreeSet<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         return new LottoNumbers(lottoNumbers);
     }
 
-    private static void validate(Set<LottoNumber> lottoNumbers) {
+    private static void validate(TreeSet<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != TOTAL_LOTTO_NUMBERS_COUNT) {
             throw new InvalidLottoNumberCountException();
         }
