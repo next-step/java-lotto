@@ -1,13 +1,14 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
@@ -24,7 +25,7 @@ class LottoMachineTest {
 	@CsvSource(value = {"10000,10", "5500,5"})
 	@ParameterizedTest
 	void issueLottoTickets(int money, int numberOfLottoTickets) {
-		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(money);
+		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(new Money(money), new ArrayList<>());
 		assertThat(lottoTickets.getTickets()).hasSize(numberOfLottoTickets);
 	}
 

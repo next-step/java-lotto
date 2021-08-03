@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.Objects;
-
 import lotto.exception.InsufficientMoneyException;
+
+import java.util.List;
+import java.util.Objects;
 
 public class Money {
 

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +12,6 @@ public class LottoMachine {
 	private static final int LAST_NUMBER = 45;
 	private static final int INITIAL_INDEX = 0;
 	private static final int COUNT_OF_LOTTO_NUMBERS = 6;
-	private static final int PRICE_PER_TICKET = 1_000;
 
 	private final List<Integer> numbers;
 
@@ -26,15 +26,29 @@ public class LottoMachine {
 				.collect(Collectors.toList());
 	}
 
-	public LottoTickets issueLottoTickets(int money) {
-		List<LottoTicket> lottoTickets = IntStream.range(INITIAL_INDEX, calculateLottoTicketCount(money))
-											.mapToObj(index -> LottoTicket.from(pickRandomLottoNumbers()))
-											.collect(Collectors.toList());
+	public LottoTickets issueLottoTickets(Money money, List<LottoNumbers> manualLottoTicketNumbers) {
+		int availableLottoTicketsCount = money.availableLottoTicketsCount();
+		int autoLottoTicketsCount = availableLottoTicketsCount - manualLottoTicketNumbers.size();
+		List<LottoTicket> autoLottoTickets = issueAutoLottoTickets(autoLottoTicketsCount);
+		List<LottoTicket> manualLottoTickets = issueManualLottoTickets(manualLottoTicketNumbers);
+
+		List<LottoTicket> lottoTickets = new ArrayList<>();
+		lottoTickets.addAll(manualLottoTickets);
+		lottoTickets.addAll(autoLottoTickets);
+
 		return LottoTickets.from(lottoTickets);
 	}
 
-	private int calculateLottoTicketCount(int money) {
-		return money / PRICE_PER_TICKET;
+	private List<LottoTicket> issueManualLottoTickets(List<LottoNumbers> manualLottoTicketNumbers) {
+		return manualLottoTicketNumbers.stream()
+				.map(LottoNumbers::toLottoTicket)
+				.collect(Collectors.toList());
+	}
+
+	private List<LottoTicket> issueAutoLottoTickets(int autoLottoTicketsCount) {
+		return IntStream.range(INITIAL_INDEX, autoLottoTicketsCount)
+				.mapToObj(index -> LottoTicket.from(pickRandomLottoNumbers()))
+				.collect(Collectors.toList());
 	}
 
 	private List<Integer> initializeNumbers() {
