@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum LottoPrize {
     FIRST(6, 1, 2_000_000_000),
-    SECONDE(5, 2, 30_000_000),
+    SECOND(5, 2, 30_000_000),
     THIRD(5, 3, 1_500_000),
     FOURTH(4, 4, 50_000),
     FIFTH(3, 5, 5_000),
@@ -32,21 +32,21 @@ public enum LottoPrize {
         return money;
     }
 
-    public static LottoPrize findLottoPrizeOfCount(int count){
+    public static LottoPrize findLottoPrizeOfCount(int count) {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.getCount() == count)
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public static LottoPrize findLottoPrizeOfPrize(int prize){
+    public static LottoPrize findLottoPrizeOfPrize(int prize) {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.getPrize() == prize)
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public int calculate(int count){
+    public int calculate(int count) {
         return this.money * count;
     }
 

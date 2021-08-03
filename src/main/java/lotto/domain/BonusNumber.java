@@ -1,24 +1,22 @@
 package lotto.domain;
 
-import java.util.Objects;
-
 public class BonusNumber {
     private int bonusNumber;
+    private final int LOTTO_START_NUMBER = 0;
+    private final int LOTTO_END_NUMBER = 45;
 
-    public BonusNumber(String bonusNumberString) {
-        bonusNumber = Integer.parseInt(bonusNumberString);
+    public BonusNumber(int bonusNumber) {
+        validateBonusNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BonusNumber that = (BonusNumber) o;
-        return bonusNumber == that.bonusNumber;
+    public int getBonusNumber() {
+        return this.bonusNumber;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(bonusNumber);
+    private void validateBonusNumber(int bonusNumber) {
+        if (bonusNumber < LOTTO_START_NUMBER || bonusNumber > LOTTO_END_NUMBER) {
+            throw new IllegalArgumentException("보너스 번호는 0 ~ 45 숫자를 입력해야 합니다.");
+        }
     }
 }

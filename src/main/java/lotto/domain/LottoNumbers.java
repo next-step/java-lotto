@@ -35,4 +35,8 @@ public class LottoNumbers {
         LottoPrize lottoPrize = LottoPrize.findLottoPrizeOfCount(containCount);
         return lottoPrize.getPrize();
     }
+
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

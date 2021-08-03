@@ -5,7 +5,6 @@ import lotto.application.PlayLotto;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     PlayLotto playLotto = new PlayLotto();
@@ -24,8 +24,9 @@ public class LottoTest {
     @BeforeEach
     void setup(){
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        int bonusNumber = 45;
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
-        winningLotto = new Lotto(winningLottoNumbers);
+        winningLotto = new Lotto(winningLottoNumbers, bonusNumber);
     }
     @Test
     @DisplayName("금액에 따른 로또 생성")
@@ -84,13 +85,27 @@ public class LottoTest {
         assertThat(profit).isEqualTo(testProfit);
     }
 
-
     @Test
     @DisplayName("보너스 볼 추가")
-    void bonusNumber() {
-        String bonusNumberString = "45";
-        BonusNumber bonusNumber = new BonusNumber(bonusNumberString);
-        winningLotto.createBonusNumber(bonusNumberString);
+    void bonusNumberTest() {
+        int bonusNumber = 45;
         assertThat(winningLotto.getBonusNumber()).isEqualTo(bonusNumber);
+
+        int notValidateBonusNumber = -1;
+        assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+
+        int notValidateBonusNumber1 = 46;
+        assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("보너스볼 일치 확인")
+    void isContainBonusNumberTest(){
+        List<Integer> lottoNumberList = Arrays.asList(10,11,12,13,14,45);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.isContainBonusNumber(winningLotto.getBonusNumber()));
     }
 }

@@ -12,7 +12,12 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(createLottoNumbersStrategy.getNumbersList());
     }
 
-    public Lotto(LottoNumbers lottoNumbers){
+    public Lotto(LottoNumbers lottoNumbers, int bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = new BonusNumber(bonusNumber);
+    }
+
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -20,16 +25,15 @@ public class Lotto {
         return this.lottoNumbers.getLottoNumbers();
     }
 
-
     public int checkWinning(Lotto lotto) {
         return this.lottoNumbers.checkWinning(lotto.getLottoNumbers());
     }
 
-    public void createBonusNumber(String bonusNumberString) {
-        this.bonusNumber = new BonusNumber(bonusNumberString);
+    public int getBonusNumber() {
+        return this.bonusNumber.getBonusNumber();
     }
 
-    public BonusNumber getBonusNumber() {
-        return this.bonusNumber;
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return this.lottoNumbers.isContainBonusNumber(bonusNumber);
     }
 }
