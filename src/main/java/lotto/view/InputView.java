@@ -23,9 +23,9 @@ public class InputView {
         System.out.println(GET_WINNING_NUMBER_QUESTION);
         scanner.nextLine();
         String winningNumberString = scanner.nextLine();
-
-        return Arrays.stream(winningNumberString.split(", "))
-                .map(string -> LottoNumber.of(Integer.parseInt(string)))
+        String trimWinningNumberString = winningNumberString.replace(" ","");
+        return Arrays.stream(trimWinningNumberString.split(",|, | ,"))
+                .map(number -> LottoNumber.of(Integer.parseInt(number)))
                 .collect(Collectors.toSet());
     }
 }

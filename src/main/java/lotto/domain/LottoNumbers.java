@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoRankEnum;
 import lotto.exception.InvalidLottoNumberCountException;
 
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final int NORMAL_LOTTO_NUMBER_COUNT = 6;
+    private static final int TOTAL_LOTTO_NUMBERS_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -22,7 +23,7 @@ public class LottoNumbers {
     }
 
     private static void validate(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != NORMAL_LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.size() != TOTAL_LOTTO_NUMBERS_COUNT) {
             throw new InvalidLottoNumberCountException();
         }
     }
@@ -30,6 +31,17 @@ public class LottoNumbers {
     public int size() {
         return lottoNumbers.size();
     }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public int getMatchCount(LottoNumbers winningLottoNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> winningLottoNumbers.contains(number))
+                .count();
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -50,26 +62,4 @@ public class LottoNumbers {
                 .map(lottoNumber -> lottoNumber.toString())
                 .collect(Collectors.joining(", ")) + "]";
     }
-//
-//    public int[] getMatchingRecords(LottoNumber winningLottoNumber) {
-//        int[] matchingRecords = new int[4];
-//
-//        for (LottoNumber lottoNumber : lottoNumbers) {
-//            long count = lottoNumber.countOfMatch(winningLottoNumber);
-//            mappingRecordsToCountOfMatch(matchingRecords, count);
-//        }
-//        return matchingRecords;
-//    }
-//
-//    private void mappingRecordsToCountOfMatch(int[] arr, long count) {
-//        if (count == 3) {
-//            arr[0]++;
-//        } else if (count == 4) {
-//            arr[1]++;
-//        } else if (count == 5) {
-//            arr[2]++;
-//        } else if (count == 6) {
-//            arr[3]++;
-//        }
-//    }
 }
