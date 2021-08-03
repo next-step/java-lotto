@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game {
-    public static final String YIELD_FORMAT = "%.2f";
     private final List<Lotto> lottoList;
     private Lotto previousLotto;
 
@@ -29,7 +28,7 @@ public class Game {
                 .mapToLong(Long::valueOf)
                 .sum();
 
-        return String.format(YIELD_FORMAT, totalWinMoney / (lottoList.size() * LottoMachine.LOTTO_PRICE * 1f) - 0.005f);
+        return String.format("%.2f", totalWinMoney / (lottoList.size() * LottoMachine.LOTTO_PRICE * 1f) - 0.005f);
     }
 
     public List<Lotto> getLottoList() {

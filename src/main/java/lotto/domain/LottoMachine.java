@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LottoMachine {
 
-    public static final int LOTTO_NUMBER_SIZE = 6;
     public static final int LOTTO_PRICE = 1000;
 
     private static final List<Ball> ballList = initList();
@@ -30,7 +29,7 @@ public class LottoMachine {
     private static Set<Ball> get6RandomBall() {
         Set<Ball> ballSet = new HashSet<>();
 
-        while (ballSet.size() != LOTTO_NUMBER_SIZE) {
+        while (ballSet.size() != Lotto.NUMBER_SIZE) {
             Collections.shuffle(ballList);
             ballSet.add(ballList.get(0));
         }
