@@ -26,7 +26,7 @@ public class LottoNumberShuffle implements LottoNumberGenerator {
 	private Set<LottoNumber> selectNumbers() {
 		Set<LottoNumber> numbers = new TreeSet<>();
 		for (int i = NUMBERS_RANGE_START; i < NUMBERS_RANGE_END; i++) {
-			numbers.add(new LottoNumber(defaultNumbers.get(i)));
+			numbers.add(LottoNumber.valueOf(defaultNumbers.get(i)));
 		}
 		return numbers;
 	}

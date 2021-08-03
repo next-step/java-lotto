@@ -72,7 +72,7 @@ class LottoResultTest {
 	}
 
 	private static Set<LottoNumber> toSet(List<Integer> list) {
-		return list.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new));
+		return list.stream().map(LottoNumber::valueOf).collect(Collectors.toCollection(TreeSet::new));
 	}
 
 }

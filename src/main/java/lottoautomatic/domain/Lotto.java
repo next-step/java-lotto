@@ -34,7 +34,7 @@ public class Lotto {
 	private int sumMatchedCount(Integer lastWeekNumber) {
 		int matchCount = 0;
 		for (LottoNumber number : numbers) {
-			matchCount += number.equals(new LottoNumber(lastWeekNumber)) ? 1 : 0;
+			matchCount += number.equals(LottoNumber.valueOf(lastWeekNumber)) ? 1 : 0;
 		}
 		return matchCount;
 	}
