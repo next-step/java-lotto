@@ -1,9 +1,11 @@
 package edu.nextstep.lotto.step2.view;
 
 import edu.nextstep.lotto.step2.domain.LottoList;
+import edu.nextstep.lotto.step2.domain.WinningAmount;
 import edu.nextstep.lotto.step2.domain.WinningList;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static edu.nextstep.lotto.step2.domain.WinningAmount.values;
 import static edu.nextstep.lotto.step2.view.ResultMessage.*;
@@ -23,6 +25,7 @@ public class ResultView {
 
     public void outputStatistics(LottoList lottoList, WinningList winningList) {
         Arrays.stream(values())
+                .sorted(Comparator.comparing(WinningAmount::getCount))
                 .forEach(amount -> System.out.print(getStatisticsMessage(lottoList, winningList, amount)));
     }
 
