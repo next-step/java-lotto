@@ -13,14 +13,15 @@ class LottoGamesTest {
 
 	@ParameterizedTest
 	@DisplayName("로또게임들을 등록하면 게임에 관한 내용이 반환된다.")
-	@CsvSource(value = {"1,21,43","2,8,24","30,37,41"})
-	public void createLottoGames(int firstNumber, int secondNumber, int thirdNumber){
+	@CsvSource(value = {"1,21,43", "2,8,24", "30,37,41"})
+	public void createLottoGames(int firstNumber, int secondNumber, int thirdNumber) {
 		List<LottoGame> lottoGame = new ArrayList<>();
-		lottoGame.add(getLottoGame(firstNumber,secondNumber,thirdNumber));
+		lottoGame.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
 		LottoGames lottoGames = new LottoGames(lottoGame);
 
 		assertThat(lottoGames.getLottoGames().size()).isEqualTo(1);
-		assertThat(lottoGames.getLottoGames().get(0).getLottoGame()).containsExactly(firstNumber,secondNumber,thirdNumber);
+		assertThat(lottoGames.getLottoGames().get(0).getLottoGame()).containsExactly(firstNumber, secondNumber,
+			thirdNumber);
 	}
 
 	private LottoGame getLottoGame(int firstNumber, int secondNumber, int thirdNumber) {

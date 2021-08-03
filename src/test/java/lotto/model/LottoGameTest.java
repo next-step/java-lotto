@@ -12,7 +12,7 @@ class LottoGameTest {
 
 	@Test
 	@DisplayName("숫자로 이루어진 컬렉션을 입력하면 반환한다.")
-	public void createLottoGame(){
+	public void createLottoGame() {
 		List<Integer> lottoNumbers = new ArrayList<>();
 		lottoNumbers.add(1);
 		lottoNumbers.add(13);
@@ -22,7 +22,7 @@ class LottoGameTest {
 		LottoGame lottoGame = new LottoGame(lottoNumbers);
 
 		assertThat(lottoGame.getLottoGame().size()).isEqualTo(4);
-		assertThat(lottoGame.getLottoGame()).containsExactly(1,13,26,32);
+		assertThat(lottoGame.getLottoGame()).containsExactly(1, 13, 26, 32);
 	}
 
 }
