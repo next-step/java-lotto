@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Lottos {
 
-	private static final int AMOUNT_UNIT = 1000;
+	private static final int AMOUNT_UNIT = 1_000;
 
 	private final List<Lotto> lottoList = new ArrayList<>();
 
