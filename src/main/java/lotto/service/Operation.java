@@ -4,6 +4,15 @@ import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
 
 public enum Operation {
+  PLUS("+", (a, b)-> {
+    return a + b;
+  }),
+  MINUS("-", (a, b)-> {
+    return a - b;
+  }),
+  MULTIPLE("*", (a, b) -> {
+    return a * b;
+  }),
   DIVISION_SHARE("/", (a, b) -> {
     if(a == 0 || b ==0){
       throw new ArithmeticException();

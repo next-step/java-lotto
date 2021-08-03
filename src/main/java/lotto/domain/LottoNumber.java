@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparator<LottoNumber> {
 
   private int number;
 
@@ -10,27 +11,16 @@ public class LottoNumber implements Comparable<LottoNumber>{
     this.number = number;
   }
 
+  public LottoNumber() {
+  }
+
   public int getNumber() {
     return number;
   }
 
   @Override
-  public int compareTo(LottoNumber lottoNumber) {
-    return checkGreaterThanInputValue(lottoNumber);
-  }
-
-  private int checkGreaterThanInputValue(LottoNumber lottoNumber) {
-    if(this.number < lottoNumber.getNumber()){
-      return -1;
-    }
-    return checkLessThanInputValue(lottoNumber);
-  }
-
-  private int checkLessThanInputValue(LottoNumber lottoNumber) {
-    if(this.number < lottoNumber.getNumber()){
-      return 1;
-    }
-    return 0;
+  public int compare(LottoNumber num1, LottoNumber num2) {
+    return Integer.compare(num1.getNumber(), num2.getNumber());
   }
 
   @Override

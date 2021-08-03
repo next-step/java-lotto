@@ -2,20 +2,18 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import lotto.strategy.GenerateLottoNumber;
-import lotto.strategy.RealGenerateLottoNumber;
 
 public class Lotties {
 
   List<Lotto> lotties = new ArrayList<>();
 
-  GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber(1,46);
-
   public Lotties() {
   }
 
-  public Lotties(int count) {
-    createLotties(count,generateLottoNumber);
+  public Lotties(int count, GenerateLottoNumber generateLottoNumber) {
+    createLotties(count, generateLottoNumber);
   }
 
   public List<Lotto> getLotties() {
@@ -23,8 +21,20 @@ public class Lotties {
   }
 
   public void createLotties(int count, GenerateLottoNumber generateLottoNumber) {
-    for(int i = 0; i < count; i++){
-      lotties.add(new Lotto(generateLottoNumber));
+    IntStream.range(0, count).forEach(i -> lotties.add(new Lotto(generateLottoNumber)));
+  }
+
+  public int getMatchLotties(Lotto lotty, Lotto winLotto) {
+    int count = 0;
+    for (LottoNumber lottoNumber : lotty.getLotto()) {
+      if (winLotto.getWinLotto().contains(lottoNumber)) {
+        count++;
+      }
     }
+    return count;
+  }
+
+  public static Lotto getWinningLotto(String[] inputValues) {
+    return new Lotto(inputValues);
   }
 }
