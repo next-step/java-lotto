@@ -14,5 +14,6 @@
 - [ ] 유효성 체크 기능의 구현
   - [ ] 분리된 문자열이 자연수인지 확인 기능(isNaturalNumber)의 구현
   - [ ] 분리된 문자열이 빈문자열 또는 null 확인 기능(isNullOrEmpty)의 구현
-  - [ ] 분리된 문자열 배열의 음수를 포함 확인 기능의(containsNegativeNumber)의 구현
+  - [ ] 분리된 문자열 배열의 자연수를 포함여부 확인 기능(containsNaturalNumber)의 구현
 - [ ] 쉼표(,)나 콜론(:) 또는 커스텀 구분자로 문자열을 구분 후 이를 더하는 기능(splitAndSum)의 구현
+  - [ ] 숫자 이외의 값 또는 음수가 전달되면 RuntimeException 예외를 throw하도록 구현
