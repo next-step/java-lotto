@@ -17,8 +17,18 @@ public class LottoResult {
 		result.put(LottoProfit.SIX, 0);
 	}
 
-	public void match(List<Integer> winningNumbers) {
+	public void match(String winningNumberText) {
+		List<Integer> winningNumbers = changeList(winningNumberText);
 		putIntoMap(winningNumbers);
+	}
+
+	private List<Integer> changeList(String winningNumberText) {
+		String[] split = winningNumberText.split(",");
+		List<Integer> winningNumbers = new ArrayList<>();
+		for (String s : split) {
+			winningNumbers.add(Integer.parseInt(s.trim()));
+		}
+		return winningNumbers;
 	}
 
 	private void putIntoMap(List<Integer> winningNumbers) {

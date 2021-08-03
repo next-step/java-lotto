@@ -1,7 +1,5 @@
 package lottoautomatic.ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -11,7 +9,7 @@ public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private final int money;
-	private List<Integer> winningNumbers = new ArrayList<>();
+	private String winningNumbers;
 
 
 	public InputView() {
@@ -25,20 +23,10 @@ public class InputView {
 
 	public void inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
-		String inputNumbers = scanner.nextLine();
-
-		initWinningNumbers(inputNumbers);
-
+		winningNumbers = scanner.nextLine();
 	}
 
-	private void initWinningNumbers(String inputNumbers) {
-		String[] strings = inputNumbers.split(",");
-		for (String string : strings) {
-			winningNumbers.add(Integer.parseInt(string.trim()));
-		}
-	}
-
-	public List<Integer> getWinningNumbers() {
+	public String getWinningNumbers() {
 		return winningNumbers;
 	}
 

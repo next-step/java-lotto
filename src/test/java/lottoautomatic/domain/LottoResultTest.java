@@ -25,7 +25,7 @@ class LottoResultTest {
 		Lottos lottos = new Lottos();
 		lottos.buy(1000, () -> lottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
-		lottoResult.match(Arrays.asList(1, 2, 3, 4, 5, 6));
+		lottoResult.match("1, 2, 3, 4, 5, 6");
 
 		//when
 		Map<LottoProfit, Integer> result = lottoResult.value();
@@ -54,7 +54,7 @@ class LottoResultTest {
 		lottos.buy(1000, () -> buyFirstLottoNumbers);
 		lottos.buy(1000, () -> buySecondLottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
-		lottoResult.match(Arrays.asList(1, 2, 3, 4, 5, 6));
+		lottoResult.match("1, 2, 3, 4, 5, 6");
 
 		//when
 		double rate = lottoResult.rate();
