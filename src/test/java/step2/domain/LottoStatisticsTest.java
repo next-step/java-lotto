@@ -19,7 +19,7 @@ class LottoStatisticsTest {
 
         LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(3, 4, 5, 6, 7, 8)));
 
-        LottoNumber winOfLottoNumber = lottoMachine.winOfLotto(Arrays.asList(3, 4, 5, 6, 7, 8));
+        LottoNumber winOfLottoNumber = new LottoNumber(Arrays.asList(3, 4, 5, 1, 2, 10));
         List<Lotto> lottos = lottoMachine.sell(new Cache(3000));
 
         // When
@@ -34,7 +34,7 @@ class LottoStatisticsTest {
         long expectedLottoProfit = 500L;
         Integer[] givenNumbers = {3, 4, 5, 6, 7, 8};
         LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenNumbers)));
-        LottoNumber winOfLottoNumber = lottoMachine.winOfLotto(Arrays.asList(3, 4, 5, 1, 2, 10));
+        LottoNumber winOfLottoNumber = new LottoNumber(Arrays.asList(3, 4, 5, 1, 2, 10));
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When

@@ -9,8 +9,6 @@ public class LottoMachine {
 
     private final LottoStrategy numberStrategy;
 
-    private LottoNumber winOfLotto;
-
     public LottoMachine(LottoStrategy numberStrategy) {
         this.numberStrategy = numberStrategy;
     }
@@ -27,8 +25,4 @@ public class LottoMachine {
         return lottos;
     }
 
-    public LottoNumber winOfLotto(List<Integer> winOfNumbers) {
-        this.winOfLotto = new LottoNumber(winOfNumbers);
-        return winOfLotto;
-    }
 }
