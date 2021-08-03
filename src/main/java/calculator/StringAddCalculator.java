@@ -9,7 +9,7 @@ public class StringAddCalculator {
 	private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
 
 	private final Matcher matcher;
-	private String seperators = ",;";
+	private String separators = ",;";
 	private String input;
 
 	public StringAddCalculator(String input) {
@@ -26,7 +26,7 @@ public class StringAddCalculator {
 	}
 
 	private String[] splitString() {
-		return input.split("[" + seperators + "]");
+		return input.split("[" + separators + "]");
 	}
 
 	private int addStringElements(String[] elements) {
@@ -48,7 +48,7 @@ public class StringAddCalculator {
 
 	private void addSeparator(String separator) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(seperators);
-		seperators = sb.append(separator).toString();
+		sb.append(separators);
+		separators = sb.append(separator).toString();
 	}
 }
