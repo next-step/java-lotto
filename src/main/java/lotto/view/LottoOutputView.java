@@ -13,6 +13,7 @@ public class LottoOutputView {
 
 	private static final String RESULT_START_MESSAGE = "당첨 통계";
 	private static final String DASH_LINE = "---------";
+	public static final int ZERO_POINT = 0;
 
 	public static void resultLottoNumbers(List<LottoGame> resultLottoGame) {
 		for (LottoGame lottoGame : resultLottoGame) {
@@ -42,14 +43,15 @@ public class LottoOutputView {
 	}
 
 	private static int getTotalWinMoney(Map<Prize, Integer> resultLottoStatus) {
-		return resultLottoStatus.keySet()
-			.stream()
-			.mapToInt(winnerResult -> (winnerResult.getWinningMoney() * resultLottoStatus.get(winnerResult)))
-			.sum();
+		int sum = 0;
+		for (Prize winnerResult : resultLottoStatus.keySet()) {
+			sum += (winnerResult.getWinningMoney() * resultLottoStatus.get(winnerResult));
+		}
+		return sum;
 	}
 
 	private static void getResultStatusPrint(Map<Prize, Integer> resultLottoStatus, Prize result) {
-		if (result.getWinningMoney() > 0) {
+		if (result.getWinningMoney() > ZERO_POINT) {
 			System.out.println(result.getCountOfMatch() +
 				"개 일치" +
 				"(" + result.getWinningMoney() + ")" +
