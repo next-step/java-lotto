@@ -12,13 +12,17 @@ import static edu.nextstep.lotto.step2.domain.WinningAmount.values;
 
 public class LottoList {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private final List<LottoNumber> lottoNumberList;
 
     public LottoList(int purchaseAmount) {
         lottoNumberList = IntStream.range(0, purchaseAmount / LOTTO_PRICE)
                 .mapToObj(idx -> new LottoNumber(new DefaultLottoShuffle()))
                 .collect(Collectors.toList());
+    }
+
+    public LottoList(List<LottoNumber> lottoNumberList) {
+        this.lottoNumberList = lottoNumberList;
     }
 
     public List<LottoNumber> getLottoList() {

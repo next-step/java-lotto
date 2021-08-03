@@ -12,6 +12,10 @@ public class LottoNumber {
         lottoNumbers = lottoShuffle.shuffle();
     }
 
+    public LottoNumber(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
