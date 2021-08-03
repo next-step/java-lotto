@@ -25,6 +25,7 @@ public class LottoInputView {
 			money = scanner.nextInt();
 			Validation.validThousandUnitCheck(money);
 			System.out.println(Utils.returnThousandUnit(money) + BUY_RESULT_MESSAGE);
+			scanner.nextLine();
 		} catch (InputMismatchException e) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
@@ -33,7 +34,7 @@ public class LottoInputView {
 
 	public static String lastWinLottoNumberView() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
-		return scanner.next();
+		return scanner.nextLine();
 	}
 
 }
