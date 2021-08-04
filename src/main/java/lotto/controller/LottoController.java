@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
+import lotto.Message.Message;
 import lotto.domain.Lotto;
 import lotto.service.LotteryDraw;
 import lotto.view.InputView;
@@ -12,16 +13,15 @@ public class LottoController {
 
   public static void main(String[] args) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(InputView.inputValueWithMessage("구입금액을 입력해 주세요."));
+    LotteryDraw lotteryDraw = new LotteryDraw(InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
 
     Lotto lotto = lotteryDraw.inputWinningNumbers(
-        InputView.inputStringValueWithMessage("지난주 당첨번호를 입력해 주세요."));
+        InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO));
 
     new LottiesDrawingView(lotteryDraw);
 
     Map<Integer, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.getLottiesInfo(), lotto);
-
 
     new ResultView(matchResult,lotteryDraw.gradingScore(matchResult));
 

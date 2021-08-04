@@ -3,6 +3,8 @@ package lotto.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -11,6 +13,7 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.strategy.GenerateLottoNumber;
 import lotto.strategy.TestGenerateLottoNumber;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,12 +25,20 @@ class LotteryDrawTest {
   @DisplayName("입력받은 금액을 천원단위로 받는지 검증 테스트")
   @ParameterizedTest
   @ValueSource(ints = {1, 10, 100, 999, 1999})
-  void 금액입력값검증(int input) {
+  void 금액입력값검증(int input){
 
     LotteryDraw lotteryDraw = new LotteryDraw(input);
 
-    assertThatThrownBy(lotteryDraw::checkInputValue)
-        .isInstanceOf(RuntimeException.class);
+    try {
+      Method createLotteyrDraw = lotteryDraw.getClass()
+          .getDeclaredMethod("checkInputValue");
+      createLotteyrDraw.setAccessible(true);
+
+      assertThatThrownBy((ThrowingCallable) createLotteyrDraw.invoke(lotteryDraw)).isInstanceOf(RuntimeException.class);
+    } catch (NoSuchMethodException e) {
+    } catch (IllegalAccessException e) {
+    } catch (InvocationTargetException e) {
+    }
   }
 
   @DisplayName("천원단위 금액을 받아서 구매하는 장수를 카운트 테스트.")
@@ -35,9 +46,23 @@ class LotteryDrawTest {
   @CsvSource(value = {"1000,1", "2000,2", "10000,10"})
   void 천원단위구매장수확인(int cost, int count) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(cost);
+    LotteryDraw lotteryDraw = new LotteryDraw(cost,true);
 
-    assertThat(lotteryDraw.getNumberOfLotto()).isEqualTo(count);
+    try {
+
+      Method getNumberOfLotto = lotteryDraw.getClass()
+          .getDeclaredMethod("getNumberOfLotto");
+      getNumberOfLotto.setAccessible(true);
+
+      assertThat(getNumberOfLotto.invoke(lotteryDraw)).isEqualTo(count);
+
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    }
   }
 
   @DisplayName("금액기준 로또 구매 테스트.")
@@ -45,10 +70,19 @@ class LotteryDrawTest {
   @CsvSource(value = {"1000,1", "2000,2", "10000,10"})
   void 금액기준로또구매(int cost, int count) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(cost);
-    lotteryDraw.buyLotties();
+    LotteryDraw lotteryDraw = new LotteryDraw(cost,true);
 
-    assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
+    try {
+
+      Method buyLotties = lotteryDraw.getClass()
+          .getDeclaredMethod("buyLotties");
+      buyLotties.setAccessible(true);
+
+      assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
+
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    }
   }
 
   @DisplayName("당첨번호 입력해서 로또객체 생성 테스트.")
@@ -64,8 +98,8 @@ class LotteryDrawTest {
   @DisplayName("당첨번호와 로또 비교하여 해당 등수에 로또객체를 적재하는 테스트.")
   @Test
   void 당첨번호와로또비교후등수별정리() {
-    LotteryDraw lotteryDraw = new LotteryDraw(1000);
-    List<Integer> testLotto = createTestLotto(11,2,33,44,5,6);
+    LotteryDraw lotteryDraw = new LotteryDraw(1000,true);
+    List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
 
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
     lotteryDraw.buyLotties(generateLottoNumber);
@@ -78,7 +112,8 @@ class LotteryDrawTest {
     assertThat(result.get(3).size()).isEqualTo(1);
   }
 
-  private List<Integer> createTestLotto(int num1, int num2, int num3, int num4, int num5, int num6) {
+  private List<Integer> createTestLotto(int num1, int num2, int num3, int num4, int num5,
+      int num6) {
     List<Integer> testLotto = new ArrayList<>();
     testLotto.add(num1);
     testLotto.add(num2);
@@ -93,14 +128,14 @@ class LotteryDrawTest {
   @DisplayName("수익률 계산 테스트.")
   @Test
   void 로또수익률계산() {
-    List<Integer> testLotto = createTestLotto(11,2,33,44,5,6);
+    List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
     Lotto lotto = new Lotto(generateLottoNumber);
 
     Map<Integer, List<Lotto>> result = new LinkedHashMap<>();
     result.put(3, Collections.singletonList(lotto));
 
-    LotteryDraw lotteryDraw = new LotteryDraw(14000);
+    LotteryDraw lotteryDraw = new LotteryDraw(14000,true);
 
     assertThat(lotteryDraw.gradingScore(result)).isEqualTo("0.35");
   }

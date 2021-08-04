@@ -2,6 +2,7 @@ package lotto.service;
 
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
+import lotto.Message.Message;
 
 public enum Operation {
   PLUS("+", (a, b)-> {
@@ -47,6 +48,6 @@ public enum Operation {
     return Arrays.stream(Operation.values())
         .filter(v -> v.getOperation().equals(operation))
         .findAny()
-        .orElseThrow(() -> new IllegalArgumentException("일치하는 연산자가 없습니다."));
+        .orElseThrow(() -> new IllegalArgumentException(Message.MSG_ERROR_MISS_MATCH_OPERATION));
   }
 }

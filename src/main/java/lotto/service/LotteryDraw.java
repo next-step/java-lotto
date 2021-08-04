@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.Message.Message;
 import lotto.domain.Lotties;
 import lotto.domain.Lotto;
 import lotto.strategy.GenerateLottoNumber;
@@ -29,7 +30,7 @@ public class LotteryDraw {
 
   private static final int INT_ZERO = 0;
 
-  private static final int LITMIT_MATCH_NUMBER = 3;
+  private static final int LIMIT_MATCH_NUMBER = 3;
 
   GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber(START, END);
 
@@ -38,24 +39,38 @@ public class LotteryDraw {
     buyLotties();
   }
 
+  public LotteryDraw(int money, Boolean testType) {
+    this.money = money;
+    buyLotties(testType);
+  }
+
   public LotteryDraw() {
 
   }
 
-  public void checkInputValue() {
-    if (Operation.chooseOperation("%").calculation(money, EACH_LOTTO_COST) != 0) {
-      throw new RuntimeException("금액을 정상적으로 입력해주세요.");
+  private void checkInputValue() {
+    if (Operation.chooseOperation("%").calculation(money, EACH_LOTTO_COST) != INT_ZERO) {
+      throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
   }
 
-  public int getNumberOfLotto() {
+  private int getNumberOfLotto() {
     return Operation.chooseOperation("/").calculation(money, EACH_LOTTO_COST);
   }
 
-  public void buyLotties() {
+  private void buyLotties() {
     checkInputValue();
     lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
-    System.out.println(lotties.getLotties().size()+"개를 구매했습니다.");
+
+    System.out.println(lotties.getLotties().size() + Message.MSG_BUY_LOTTO_COUNT);
+  }
+
+  private void buyLotties(Boolean testType) {
+    checkInputValue();
+    lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
+    if (!testType) {
+      System.out.println(lotties.getLotties().size() + Message.MSG_BUY_LOTTO_COUNT);
+    }
   }
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {
@@ -77,14 +92,14 @@ public class LotteryDraw {
     lotties.getLotties().forEach(
         lotty -> categoriesRank.get(matchLottoRating(lotties, winLotto, lotty)).add(lotty));
 
-    categoriesRank.remove(0);
+    categoriesRank.remove(INT_ZERO);
 
     return categoriesRank;
   }
 
   private int matchLottoRating(Lotties lotties, Lotto winLotto, Lotto lotty) {
     int matchLotties = lotties.getMatchLotties(lotty, winLotto);
-    if (matchLotties < LITMIT_MATCH_NUMBER) {
+    if (matchLotties < LIMIT_MATCH_NUMBER) {
       return INT_ZERO;
     }
     return matchLotties;
