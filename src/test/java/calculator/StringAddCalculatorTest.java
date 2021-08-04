@@ -25,4 +25,13 @@ class StringAddCalculatorTest {
         assertThat(result).isZero();
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 0})
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    void oneNumber(int input){
+        int result = StringAddCalculator.calculate(String.valueOf(input));
+        assertThat(result).isEqualTo(input);
+    }
+
+
 }
