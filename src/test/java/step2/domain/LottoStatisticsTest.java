@@ -2,6 +2,11 @@ package step2.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoMachine;
+import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.LottoStatistics;
+import step2.domain.money.Cache;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

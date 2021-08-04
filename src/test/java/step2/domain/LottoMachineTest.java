@@ -1,6 +1,9 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoMachine;
+import step2.domain.money.Cache;
 import java.util.Arrays;
 import java.util.List;
 

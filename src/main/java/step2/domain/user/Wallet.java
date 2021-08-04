@@ -1,5 +1,6 @@
-package step2.domain;
+package step2.domain.user;
 
+import step2.domain.money.Money;
 import java.util.Objects;
 
 public class Wallet {

@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.lotto;
 
 import step2.util.LottoNumberGenerator;
 import java.util.List;

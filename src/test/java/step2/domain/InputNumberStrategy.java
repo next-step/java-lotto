@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.domain.lotto.LottoStrategy;
 import java.util.List;
 
 public class InputNumberStrategy implements LottoStrategy {

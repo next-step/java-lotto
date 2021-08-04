@@ -1,8 +1,8 @@
 package step2.view;
 
-import step2.domain.Lotto;
-import step2.domain.LottoRank;
-import step2.domain.LottoStatistics;
+import step2.domain.lotto.Lotto;
+import step2.domain.lotto.LottoRank;
+import step2.domain.lotto.LottoStatistics;
 import step2.domain.ResultOfLottos;
 import java.util.List;
 
