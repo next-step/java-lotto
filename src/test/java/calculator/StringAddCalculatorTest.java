@@ -68,5 +68,12 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("'*' 구분자로 열거되어있는 경우 덧셈 결과를 리턴한다.")
+    void customDelimiter() {
+        String input = "//;\n1;2;3";
+        int result = StringAddCalculator.calculate(input);
+        assertThat(result).isEqualTo(6);
+    }
 
 }
