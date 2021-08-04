@@ -21,6 +21,11 @@ public class Profit {
     }
 
     @Override
+    public String toString() {
+        return profit + "";
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
