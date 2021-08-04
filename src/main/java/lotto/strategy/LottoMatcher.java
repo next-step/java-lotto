@@ -30,7 +30,7 @@ public class LottoMatcher {
         return getWinning(matchCount, matchBonus);
     }
 
-    public boolean checkSeconds(Lotto myLotto, int bonus) {
+    public boolean checkSeconds(Lotto myLotto, LottoNum bonus) {
         if (myLotto.getNumbers().contains(bonus)) {
             return true;
         }

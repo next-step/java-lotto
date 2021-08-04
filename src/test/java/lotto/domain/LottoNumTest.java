@@ -24,9 +24,4 @@ class LottoNumTest {
         assertThat(num1).isEqualTo(LottoNum.of(30));
     }
 
-    @Test
-    void test() {
-        assertThat(2_000).isEqualTo(2000);
-    }
-
 }

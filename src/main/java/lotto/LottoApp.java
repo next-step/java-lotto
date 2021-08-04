@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNum;
 import lotto.strategy.RandomLottoNum;
 import lotto.domain.Lotteries;
 import lotto.action.LottoMachine;
@@ -24,7 +25,7 @@ public class LottoApp {
         int buyMoney = market.buy(money);
 
         ResultView.showList(myLottoList.getAll());
-        int bonus = InputView.inputBonus();
+        LottoNum bonus = InputView.inputBonus();
         Map<Winning,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(), bonus);
 
         ResultView.showResult(result, buyMoney);

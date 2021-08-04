@@ -2,14 +2,14 @@ package lotto.domain;
 
 public class WinnerLotto {
     private Lotto lotto;
-    private int bonus;
+    private LottoNum bonus;
 
-    private WinnerLotto(Lotto lotto, int bonus) {
+    private WinnerLotto(Lotto lotto, LottoNum bonus) {
         this.lotto = lotto;
         this.bonus = bonus;
     }
 
-    public static WinnerLotto of(Lotto lotto, int bonus){
+    public static WinnerLotto of(Lotto lotto, LottoNum bonus){
         return new WinnerLotto(lotto, bonus);
     }
 
@@ -17,7 +17,7 @@ public class WinnerLotto {
         return lotto;
     }
 
-    public int getBonus() {
+    public LottoNum getBonus() {
         return bonus;
     }
 }

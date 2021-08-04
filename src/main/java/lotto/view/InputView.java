@@ -29,8 +29,8 @@ public class InputView {
         return result;
     }
 
-    public static int inputBonus() {
+    public static LottoNum inputBonus() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.valueOf(scanner.nextLine());
+        return LottoNum.of(scanner.nextLine());
     }
 }

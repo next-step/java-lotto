@@ -1,9 +1,6 @@
 package lotto.action;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.WinnerLotto;
-import lotto.domain.Winning;
+import lotto.domain.*;
 import lotto.strategy.LottoMatcher;
 
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ public class LottoMarket {
         return PRICE * count;
     }
 
-    public Map<Winning, Integer> checkNumToWinner(Lotto winner, int bonus) {
+    public Map<Winning, Integer> checkNumToWinner(Lotto winner, LottoNum bonus) {
         List<Winning> result = new ArrayList<>();
         WinnerLotto winnerLotto = WinnerLotto.of(winner,bonus);
         for (Lotto myLotto : myLottoList.getAll()) {

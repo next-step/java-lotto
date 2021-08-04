@@ -4,6 +4,7 @@ import lotto.action.LottoMachine;
 import lotto.action.LottoMarket;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 import lotto.domain.Winning;
 import lotto.strategy.LottoNumStrategy;
 import lotto.strategy.RandomLottoNum;
@@ -45,7 +46,7 @@ class LottoMarketTest {
 
         market.buy(1000);
 
-        assertThat(market.checkNumToWinner(Lotto.from(Arrays.asList(1,2,3,4,5,6)),7).get(Winning.FIRST))
+        assertThat(market.checkNumToWinner(Lotto.from(Arrays.asList(1,2,3,4,5,6)), LottoNum.of(7)).get(Winning.FIRST))
                 .isEqualTo(1);
     }
 
