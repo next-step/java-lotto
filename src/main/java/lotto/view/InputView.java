@@ -1,13 +1,13 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.Lotto;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -26,5 +26,10 @@ public class InputView {
             result.add(Integer.valueOf(number));
         }
         return result;
+    }
+
+    public static int inputBonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.valueOf(scanner.nextLine());
     }
 }

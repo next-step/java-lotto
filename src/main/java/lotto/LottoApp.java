@@ -1,12 +1,12 @@
-package step2;
+package lotto;
 
-import step2.domain.Lotteries;
-import step2.domain.LottoMachine;
-import step2.domain.LottoMarket;
-import step2.domain.Winnings;
-import step2.strategy.RandomLottoNum;
-import step2.view.InputView;
-import step2.view.ResultView;
+import lotto.strategy.RandomLottoNum;
+import lotto.domain.Lotteries;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoMarket;
+import lotto.domain.Winning;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.Map;
 
@@ -24,8 +24,8 @@ public class LottoApp {
         int buyMoney = market.buy(money);
 
         ResultView.showList(myLottoList.getAll());
-
-        Map<Winnings,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber());
+        int bonus = InputView.inputBonus();
+        Map<Winning,Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(), bonus);
 
         ResultView.showResult(result, buyMoney);
     }

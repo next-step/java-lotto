@@ -1,6 +1,6 @@
-package step2.strategy;
+package lotto.strategy;
 
-import step2.domain.Lotto;
+import lotto.domain.Lotto;
 
 public interface LottoNumStrategy {
     Lotto makeLotto();

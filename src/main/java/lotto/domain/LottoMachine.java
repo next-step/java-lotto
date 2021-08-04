@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.strategy.LottoNumStrategy;
+import lotto.strategy.LottoNumStrategy;
 
 public class LottoMachine {
 
