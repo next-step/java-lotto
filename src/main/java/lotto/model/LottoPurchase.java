@@ -9,18 +9,13 @@ public class LottoPurchase {
 
 	public static final int START_INCLUSIVE = 0;
 
-	private final LottoGames lottoGames;
-
-	public LottoPurchase(int buyMoney) {
+	public List<LottoGame> lottoTicketPurchase(int buyMoney) {
+		int ticketNumber = TicketCalculation.getLottoTicketNumber(buyMoney);
 		List<LottoGame> lottoCreateGame = new ArrayList<>();
-		for (int i = START_INCLUSIVE; i < TicketCalculation.getLottoTicketNumber(buyMoney); i++) {
+		for (int i = START_INCLUSIVE; i < ticketNumber; i++) {
 			lottoCreateGame.add(new LottoGame(LottoMachine.createLottoNumber()));
 		}
-		lottoGames = new LottoGames(lottoCreateGame);
-	}
-
-	public List<LottoGame> resultLottoGame() {
-		return lottoGames.getLottoGames();
+		return lottoCreateGame;
 	}
 
 }
