@@ -2,8 +2,7 @@ package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -17,24 +16,21 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<LottoPrize> scratch(final WinningLotto winningLotto) {
-        validate(winningLotto);
-        return lottos.stream()
-                     .map(lotto -> lotto.scratch(winningLotto))
-                     .collect(toList());
-    }
-
-    private void validate(final WinningLotto winningLotto) {
-        Objects.requireNonNull(winningLotto, "winningNumbers must be not null.");
-        if (!winningLotto.isSizeValid()) {
-            throw new IllegalArgumentException("there must be 6 numbers.");
-        }
+    public Stream<Lotto> stream() {
+        return lottos.stream();
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        lottos.stream().forEach(lotto -> stringBuilder.append(lotto.toString() + System.lineSeparator()));
+        lottos.stream()
+              .map(Lotto::toString)
+              .map(this::appendNewLine)
+              .forEach(stringBuilder::append);
         return stringBuilder.toString();
+    }
+
+    private String appendNewLine(final String lotto) {
+        return lotto + System.lineSeparator();
     }
 }
