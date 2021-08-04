@@ -7,6 +7,7 @@ import lotto.exception.InputMachTypeException;
 import lotto.utils.ErrorMessage;
 import lotto.utils.TicketCalculation;
 import lotto.validation.MoneyUnitCheckValidation;
+import lotto.validation.NumberPositiveValidation;
 
 public class LottoInputView {
 
@@ -23,6 +24,7 @@ public class LottoInputView {
 		System.out.println(BUY_MONEY_MESSAGE);
 		try {
 			money = scanner.nextInt();
+			NumberPositiveValidation.validPositiveCheck(money);
 			MoneyUnitCheckValidation.validThousandUnitCheck(money);
 			System.out.println(TicketCalculation.getLottoTicketNumber(money) + BUY_RESULT_MESSAGE);
 			scanner.nextLine();
