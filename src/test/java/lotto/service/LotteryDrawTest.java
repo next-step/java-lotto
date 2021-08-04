@@ -73,7 +73,9 @@ class LotteryDrawTest {
   void 금액기준로또구매(int cost, int count) {
 
     LotteryDraw lotteryDraw = new LotteryDraw(cost);
-    lotteryDraw.buyLotties();
+    List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
+    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
+    lotteryDraw.buyLotties(generateLottoNumber);
 
     assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
   }

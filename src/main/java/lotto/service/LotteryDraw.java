@@ -23,17 +23,13 @@ public class LotteryDraw {
 
   private static final int EACH_LOTTO_COST = 1000;
 
-  private static final int START = 1;
-
-  private static final int END = 46;
-
   private static final String PROFIT_RATE_FORMAT = "#.##";
 
   private static final int INT_ZERO = 0;
 
   private static final int LIMIT_MATCH_NUMBER = 3;
 
-  GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber(START, END);
+
 
   public LotteryDraw(int money) {
     this.lottoMoney = new LottoMoney(money);
@@ -51,11 +47,6 @@ public class LotteryDraw {
 
   private int getNumberOfLotto() {
     return Operation.chooseOperation("/").calculation(lottoMoney.getMoney(), EACH_LOTTO_COST);
-  }
-
-  public void buyLotties() {
-    checkInputValue();
-    lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
   }
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {

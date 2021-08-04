@@ -7,18 +7,16 @@ import lotto.domain.LottoNumber;
 
 public class RealGenerateLottoNumber implements GenerateLottoNumber{
 
-  private int startIndex;
+  private static final int START = 1;
 
-  private int endIndex;
+  private static final int END = 46;
 
-  public RealGenerateLottoNumber(int start, int end) {
-    this.startIndex = start;
-    this.endIndex = end;
+  public RealGenerateLottoNumber() {
   }
 
   @Override
   public List<LottoNumber> createNumberPull() {
-    return IntStream.range(startIndex, endIndex)
+    return IntStream.range(START, END)
         .mapToObj(i -> new LottoNumber(i)).collect(Collectors.toList());
   }
 }
