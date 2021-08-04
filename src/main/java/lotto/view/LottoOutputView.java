@@ -7,7 +7,7 @@ import java.util.Map;
 import lotto.model.LottoGame;
 import lotto.model.Prize;
 import lotto.utils.PrizeComparator;
-import lotto.utils.Utils;
+import lotto.utils.PrizeRate;
 
 public class LottoOutputView {
 
@@ -33,7 +33,7 @@ public class LottoOutputView {
 		for (Prize result : getSortByResultValue(resultLottoStatus)) {
 			getResultStatusPrint(resultLottoStatus, result);
 		}
-		System.out.println("총 수익률은 " + Utils.getPrizeEarningRate(getTotalWinMoney, money) + "입니다.");
+		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(getTotalWinMoney, money) + "입니다.");
 	}
 
 	private static List<Prize> getSortByResultValue(Map<Prize, Integer> resultLottoStatus) {

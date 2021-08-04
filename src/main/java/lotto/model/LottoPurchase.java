@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.service.SearchPrize;
-import lotto.utils.Utils;
+import lotto.utils.TicketCalculation;
 import lotto.validation.EmptyCheckValidation;
 import lotto.validation.LottoSizeValidation;
 import lotto.validation.NumberTypeValidation;
@@ -21,7 +21,7 @@ public class LottoPurchase {
 
 	public LottoPurchase(int buyMoney) {
 		List<LottoGame> lottoCreateGame = new ArrayList<>();
-		for (int i = START_INCLUSIVE; i < Utils.getLottoTicketNumber(buyMoney); i++) {
+		for (int i = START_INCLUSIVE; i < TicketCalculation.getLottoTicketNumber(buyMoney); i++) {
 			lottoCreateGame.add(new LottoGame(LottoMachine.createLottoNumber()));
 		}
 		lottoGames = new LottoGames(lottoCreateGame);

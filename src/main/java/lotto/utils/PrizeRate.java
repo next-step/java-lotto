@@ -4,16 +4,11 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-public class Utils {
+public class PrizeRate {
 
-	private static final int THOUSAND_UNIT = 1000;
 	public static final String NUMBER_FORMAT_PATTERN = "0.##";
 
-	private Utils() {
-	}
-
-	public static int getLottoTicketNumber(int money) {
-		return money / THOUSAND_UNIT;
+	private PrizeRate() {
 	}
 
 	public static String getPrizeEarningRate(int getTotalWinMoney, int money) {
@@ -21,5 +16,4 @@ public class Utils {
 		formatter.setRoundingMode(RoundingMode.DOWN);
 		return formatter.format((double)(getTotalWinMoney) / (double)(money));
 	}
-
 }
