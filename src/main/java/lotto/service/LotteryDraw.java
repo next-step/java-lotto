@@ -11,7 +11,6 @@ import lotto.domain.Lotties;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.strategy.GenerateLottoNumber;
-import lotto.strategy.RealGenerateLottoNumber;
 
 public class LotteryDraw {
 
@@ -28,8 +27,6 @@ public class LotteryDraw {
   private static final int INT_ZERO = 0;
 
   private static final int LIMIT_MATCH_NUMBER = 3;
-
-
 
   public LotteryDraw(int money) {
     this.lottoMoney = new LottoMoney(money);
