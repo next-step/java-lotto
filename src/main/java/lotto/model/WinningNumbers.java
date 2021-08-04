@@ -11,7 +11,7 @@ public class WinningNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public WinningNumbers(List<Integer> numbers) {
+    WinningNumbers(List<Integer> numbers) {
         validateCount(numbers);
         validateUnique(numbers);
         this.numbers = numbers.stream()
@@ -30,5 +30,9 @@ public class WinningNumbers {
         if (numbers.size() > uniqueNumbers.size()) {
             throw new IllegalArgumentException("당첨 번호가 중복 되었습니다.");
         }
+    }
+
+    List<LottoNumber> getNumbers() {
+        return numbers;
     }
 }
