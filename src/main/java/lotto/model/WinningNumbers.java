@@ -9,13 +9,13 @@ import static java.util.stream.Collectors.toList;
 public class WinningNumbers {
     private static final int WINNING_NUMBER_COUNT = 6;
 
-    private final List<WinningNumber> numbers;
+    private final List<LottoNumber> numbers;
 
     public WinningNumbers(List<Integer> numbers) {
         validateCount(numbers);
         validateUnique(numbers);
         this.numbers = numbers.stream()
-                .map(WinningNumber::new)
+                .map(LottoNumber::new)
                 .collect(toList());
     }
 
