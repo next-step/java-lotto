@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.LottoRankEnum;
+import lotto.LottoRank;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResult {
 
@@ -12,31 +12,32 @@ public class LottoResult {
     private final int INCREASE_COUNT = 1;
     private final int DEFAULT_COUNT = 0;
 
-    private final Map<LottoRankEnum, Integer> lottoResult;
+    private final Map<LottoRank, Integer> lottoResult;
 
-    private LottoResult(Set<LottoNumbers> totalLottoNumbers, LottoNumbers winningLottoNumbers) {
+    private LottoResult(CollectionOflLottoNumbers collectionOflLottoNumbers, LottoNumbers winningLottoNumbers) {
         lottoResult = new HashMap<>();
 
-        for (LottoNumbers lottoNumbers : totalLottoNumbers) {
+        for (LottoNumbers lottoNumbers : collectionOflLottoNumbers.getCollectionOfLottoNumbers()) {
             int matchCount = lottoNumbers.getMatchCount(winningLottoNumbers);
 
             setRankEnumByMatchCount(matchCount);
         }
     }
 
-    public static LottoResult of(Set<LottoNumbers> totalLottoNumbers, LottoNumbers winningLottoNumbers) {
-        return new LottoResult(totalLottoNumbers, winningLottoNumbers);
+    public static LottoResult of(CollectionOflLottoNumbers collectionOflLottoNumbers, LottoNumbers winningLottoNumbers) {
+        return new LottoResult(collectionOflLottoNumbers, winningLottoNumbers);
     }
 
     private void setRankEnumByMatchCount(int matchCount) {
         if (matchCount > MATCH_COUNT_BOUND) {
-            LottoRankEnum key = LottoRankEnum.valueOf(matchCount);
+            LottoRank key = LottoRank.valueOf(matchCount);
             lottoResult.put(key, lottoResult.getOrDefault(key, DEFAULT_COUNT) + INCREASE_COUNT);
         }
     }
 
-    public Map<LottoRankEnum, Integer> getLottoResult() {
-        return lottoResult;
+    public Map<LottoRank, Integer> getLottoResult() {
+
+        return Collections.unmodifiableMap(lottoResult);
     }
 
     public double calculateProfitRate(double purchaseAmount) {

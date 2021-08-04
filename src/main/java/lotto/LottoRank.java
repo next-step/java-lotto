@@ -4,19 +4,19 @@ import lotto.exception.InvalidLottoRankException;
 
 import java.util.Arrays;
 
-public enum LottoRankEnum {
-    THREE_MATCH(3, 5000),
-    FOUR_MATCH(4, 50000),
-    FIVE_MATCH(5, 1500000),
-    ALL_MATCH(6, 2000000000);
+public enum LottoRank {
+    THREE_MATCH(3, 5_000),
+    FOUR_MATCH(4, 50_000),
+    FIVE_MATCH(5, 1_500_000),
+    ALL_MATCH(6, 2_000_000_000),
+    OUT_OF_RANK(0, 0);
 
     private int countOfMatch;
     private int price;
 
-    private LottoRankEnum(int countOfMatch, int price) {
+    LottoRank(int countOfMatch, int price) {
         this.countOfMatch = countOfMatch;
         this.price = price;
-
     }
 
     public int getCountOfMatch() {
@@ -27,10 +27,10 @@ public enum LottoRankEnum {
         return price;
     }
 
-    public static LottoRankEnum valueOf(int countOfMatch) {
-        return Arrays.stream(LottoRankEnum.values())
+    public static LottoRank valueOf(int countOfMatch) {
+        return Arrays.stream(LottoRank.values())
                 .filter(lottoRankEnum -> lottoRankEnum.getCountOfMatch() == countOfMatch)
                 .findFirst()
-                .orElseThrow(InvalidLottoRankException::new);
+                .orElse(OUT_OF_RANK);
     }
 }

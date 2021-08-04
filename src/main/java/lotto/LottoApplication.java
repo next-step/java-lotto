@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.CollectionOflLottoNumbers;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
@@ -24,16 +25,12 @@ public class LottoApplication {
             ResultView.printLottoNumber(generateLottoNumbers);
             totalLottoNumbers.add(generateLottoNumbers);
         }
-        //중복 있을 때 추가적으로 생성
-        for (int i = 0; i < lottoMachine.getPurchaseLottoCount() - totalLottoNumbers.size(); i++) {
-            LottoNumbers generateLottoNumbers = lottoMachine.generateLottoNumber();
-            ResultView.printLottoNumber(generateLottoNumbers);
-            totalLottoNumbers.add(generateLottoNumbers);
-        }
+
+        CollectionOflLottoNumbers collectionOflLottoNumbers = CollectionOflLottoNumbers.of(totalLottoNumbers);
 
         LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
 
-        LottoResult lottoResult = LottoResult.of(totalLottoNumbers, winningLottoNumbers);
+        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoNumbers);
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));

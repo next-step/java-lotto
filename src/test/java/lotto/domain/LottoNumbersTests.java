@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.LottoRank;
 import lotto.exception.InvalidLottoNumberCountException;
 import lotto.exception.LottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,18 +51,15 @@ public class LottoNumbersTests {
                 }).withMessageMatching("로또 숫자는 반드시 6개 여야 합니다.");
     }
 
-//
-//    @DisplayName("지난주 우승 번호로 로또 맞은 갯수들 기록 가져오는 테스트")
-//    @Test
-//    void getMatchRecordsTests() {
-//        LottoNumber winningLottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
-//
-//        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
-//
-//        LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(8, 21, 23, 41, 42, 45));
-//
-//        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(lottoNumber, lottoNumber2));
-//
-//        assertThat(Arrays.toString(lottoNumbers.getMatchingRecords(winningLottoNumber))).isEqualTo("[0, 0, 1, 1]");
-//    }
+    @DisplayName("일치하는 갯수를 잘 가져오는지 테스트")
+    @Test
+    void getMatchCountTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+
+        LottoNumbers winningLottoNumbers = LottoNumbers.of(new TreeSet<>(Arrays.asList(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
+
+        assertThat(lottoNumbers.getMatchCount(winningLottoNumbers)).isEqualTo(6);
+    }
 }

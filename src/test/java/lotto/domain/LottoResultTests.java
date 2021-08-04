@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.LottoRankEnum;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +26,9 @@ public class LottoResultTests {
 
         totalLottoNumbers.add(lottoNumbers);
 
-        LottoResult lottoResult = LottoResult.of(totalLottoNumbers, winningLottoNumbers);
+        LottoResult lottoResult = LottoResult.of(CollectionOflLottoNumbers.of(totalLottoNumbers), winningLottoNumbers);
 
-        assertThat(lottoResult.getLottoResult().get(LottoRankEnum.ALL_MATCH)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().get(LottoRank.ALL_MATCH)).isEqualTo(1);
     }
 
     @DisplayName("결과로 수익 계산이 올바른 지 테스트")
@@ -46,7 +44,7 @@ public class LottoResultTests {
 
         totalLottoNumbers.add(lottoNumbers);
 
-        LottoResult lottoResult = LottoResult.of(totalLottoNumbers, winningLottoNumbers);
+        LottoResult lottoResult = LottoResult.of(CollectionOflLottoNumbers.of(totalLottoNumbers), winningLottoNumbers);
 
         assertThat(lottoResult.calculateProfitRate(14000)).isEqualTo(142857.14285714287);
     }

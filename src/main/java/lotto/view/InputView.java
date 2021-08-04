@@ -11,7 +11,7 @@ public class InputView {
     private static String GET_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
     private static String BLANK = "";
     private static String SPACE = " ";
-    private static String SPLIT_CUSTOM_REGEX = "\",|, | ,\"";
+    private static String SPLIT_CUSTOM_REGEX = ",|, | ,";
 
     private InputView() {
 

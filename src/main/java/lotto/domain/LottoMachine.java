@@ -34,11 +34,6 @@ public class LottoMachine {
 
         Collections.sort(pickedLottoNumbers);
 
-        LottoNumbers test = LottoNumbers.of(new TreeSet<>(pickedLottoNumbers));
-
-        return test;
-
+        return LottoNumbers.of(new TreeSet<>(pickedLottoNumbers));
     }
-
-
 }
