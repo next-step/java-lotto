@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,11 +13,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("문자열 덧셈 계산기")
 class StringAddCalculatorTest {
 
+    private StringAddCalculator stringAddCalculator;
+
+    @BeforeEach
+    void setUp() {
+        stringAddCalculator = new StringAddCalculator();
+    }
+
     @DisplayName("빈 문자열 또는 null 입력시 0을 반환")
     @ParameterizedTest
     @NullAndEmptySource
     void emptyAndNullReturnZeroTest(String input) {
-        int actual = StringAddCalculator.exec(input);
+        int actual = stringAddCalculator.exec(input);
         assertThat(actual).isEqualTo(0);
     }
 
@@ -24,7 +32,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1=1", "5=5", "9=9"}, delimiter = '=')
     void singleStringReturnInteger(String input, int expected) {
-        int actual = StringAddCalculator.exec(input);
+        int actual = stringAddCalculator.exec(input);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -32,7 +40,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2=3", "3,5=8", "2,7=9", "2,8=10"}, delimiter = '=')
     void doubleStringWithCommaReturnSumTest(String input, int expected) {
-        int actual = StringAddCalculator.exec(input);
+        int actual = stringAddCalculator.exec(input);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -40,7 +48,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"3,5:1=9", "8,10:2=20", "1,2:3,4=10", "1,1:2,3:3=10"}, delimiter = '=')
     void separatorCommaAndColonSumTest(String input, int expected) {
-        int actual = StringAddCalculator.exec(input);
+        int actual = stringAddCalculator.exec(input);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -48,7 +56,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"'//;\n1;2;3'=6", "'//_\n5_4_1'=10", "'//n\n3n3n3'=9"}, delimiter = '=')
     void customSeparatorSumTest(String input, int expected) {
-        int actual = StringAddCalculator.exec(input);
+        int actual = stringAddCalculator.exec(input);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -57,8 +65,8 @@ class StringAddCalculatorTest {
     @ValueSource(strings = {"-1,2,3", "1,-2,3", "1,-2,-3"})
     void negativeInputRuntimeExceptionTest(String input) {
 
-        assertThatThrownBy(() -> StringAddCalculator.exec(input))
-                .isInstanceOf(RuntimeException.class)
+        assertThatThrownBy(() -> stringAddCalculator.exec(input))
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("input negative numbers");
     }
 }

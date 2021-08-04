@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    private static final int EMPTY_NUMBER = 0;
+    private final int EMPTY_NUMBER = 0;
 
-    private StringAddCalculator() {
+    public StringAddCalculator() {
     }
 
-    public static int exec(String input) {
+    public int exec(String input) {
 
-        if (isEmptyOrNull(input)) {
+        if (isNullOrEmpty(input)) {
             return EMPTY_NUMBER;
         }
 
@@ -24,29 +24,29 @@ public class StringAddCalculator {
         return sumResult(strings);
     }
 
-    private static boolean isEmptyOrNull(String s) {
-        return s == null || s.isEmpty();
+    private boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
     }
 
-    private static boolean isStringSingle(String s) {
-        return s.length() == 1;
+    private boolean isStringSingle(String input) {
+        return input.length() == 1;
     }
 
-    private static String[] collectStringNumbers(String s) {
-        CalculatorParser calculatorParser = new CalculatorParser(s);
+    private String[] collectStringNumbers(String input) {
+        CalculatorParser calculatorParser = new CalculatorParser(input);
         return calculatorParser.split();
     }
 
-    private static int sumResult(String[] numbers) {
+    private int sumResult(String[] numbers) {
         return Arrays.stream(numbers)
-                .mapToInt(StringAddCalculator::parseInt)
+                .mapToInt(this::parseInt)
                 .sum();
     }
 
-    private static int parseInt(String str) {
+    private int parseInt(String str) {
         int number = Integer.parseInt(str);
         if (number < 0) {
-            throw new RuntimeException("input negative numbers");
+            throw new IllegalArgumentException("input negative numbers");
         }
         return number;
     }

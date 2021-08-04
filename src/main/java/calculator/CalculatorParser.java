@@ -13,20 +13,19 @@ public class CalculatorParser {
     private String separator;
     private String expression;
 
-    public CalculatorParser(String s) {
-        if (!isCustomExpression(s)) {
-            separator = DEFAULT_SEPARATOR_REGEX;
-            expression = s;
+    public CalculatorParser(String input) {
+
+        separator = DEFAULT_SEPARATOR_REGEX;
+        expression = input;
+
+        Matcher matcher = CUSTOM_PATTERN.matcher(input);
+        if (isCustomExpression(matcher)) {
+            setCustomExpression(matcher);
         }
     }
 
-    private boolean isCustomExpression(String s) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(s);
-        if (matcher.find()) {
-            setCustomExpression(matcher);
-            return true;
-        }
-        return false;
+    private boolean isCustomExpression(Matcher matcher) {
+        return matcher.find();
     }
 
     private void setCustomExpression(Matcher matcher) {
