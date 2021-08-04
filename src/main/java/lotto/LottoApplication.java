@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.CollectionOflLottoNumbers;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -29,6 +26,8 @@ public class LottoApplication {
         CollectionOflLottoNumbers collectionOflLottoNumbers = CollectionOflLottoNumbers.of(totalLottoNumbers);
 
         LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
+
+        LottoNumber bonusNumber = LottoNumber.of(InputView.getBonusNumber());
 
         LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoNumbers);
 
