@@ -18,4 +18,8 @@ public class Lotto {
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
+
+    int getNumberSize() {
+        return lottoNumbers.size();
+    }
 }
