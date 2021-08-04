@@ -6,6 +6,7 @@ import java.util.Map;
 import lotto.model.LottoGame;
 import lotto.model.LottoPurchase;
 import lotto.model.Prize;
+import lotto.service.SearchPrize;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -20,7 +21,8 @@ public class LottoController {
 		LottoOutputView.lottoNumbersList(resultLottoGame);
 
 		String lastWinNumber = LottoInputView.lastWinLottoNumberView();
-		Map<Prize, Integer> winPrize = lottoPurchase.confirmWinLottoNumber(lastWinNumber);
+		SearchPrize searchPrize = new SearchPrize();
+		Map<Prize, Integer> winPrize = searchPrize.confirmWinLottoNumber(resultLottoGame, lastWinNumber);
 		LottoOutputView.resultLottoPrizeView(winPrize, money);
 	}
 }

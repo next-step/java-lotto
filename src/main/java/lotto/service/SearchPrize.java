@@ -6,16 +6,32 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.model.LottoGame;
-import lotto.model.LottoGames;
 import lotto.model.Prize;
 import lotto.validation.DuplicateNumberValidation;
+import lotto.validation.EmptyCheckValidation;
+import lotto.validation.LottoSizeValidation;
+import lotto.validation.NumberTypeValidation;
 
 public class SearchPrize {
 
-	private final Map<Prize, Integer> winPrizes;
+	public static final String LAST_WIN_NUMBER_REGEX = ",";
 
-	public SearchPrize() {
-		this.winPrizes = setupWinCondition();
+	public Map<Prize, Integer> confirmWinLottoNumber(List<LottoGame> lottoGames, String lastWinNumber) {
+		EmptyCheckValidation.validEmptyCheck(lastWinNumber);
+		return drawWinPrize(lottoGames, getLastWinNumbers(lastWinNumber));
+	}
+
+	private List<Integer> getLastWinNumbers(String lastWinNumber) {
+		String[] lastWinNumbers = lastWinNumber.split(LAST_WIN_NUMBER_REGEX);
+		LottoSizeValidation.validLottoSizeCheck(lastWinNumbers);
+		return Arrays.stream(lastWinNumbers)
+			.map(this::toInt)
+			.collect(Collectors.toList());
+	}
+
+	private Integer toInt(String value) {
+		NumberTypeValidation.validNumberTypeCheck(value.trim());
+		return Integer.parseInt(value.trim());
 	}
 
 	private Map<Prize, Integer> setupWinCondition() {
@@ -23,15 +39,19 @@ public class SearchPrize {
 			.collect(Collectors.toMap(winnerResult -> winnerResult, winnerResult -> 0, (a, b) -> b));
 	}
 
-	public Map<Prize, Integer> drawWinPrize(LottoGames lottoGames, List<Integer> lastWinNumbers) {
+	public Map<Prize, Integer> drawWinPrize(List<LottoGame> lottoGames, List<Integer> lastWinNumbers) {
+		Map<Prize, Integer> winPrizes = setupWinCondition();
 		DuplicateNumberValidation.validDuplicateNumberCheck(lastWinNumbers);
-		for (LottoGame lottoGame : lottoGames.getLottoGames()) {
-			Prize winnersStatus = Prize.getWinnersStatus(
-				getMatchLottoStatus(lottoGame.getLottoGame(), lastWinNumbers));
-			int count = winPrizes.get(winnersStatus);
-			winPrizes.put(winnersStatus, count + 1);
+		for (LottoGame lottoGame : lottoGames) {
+			Prize winnersStatus = getLottoMatch(lastWinNumbers, lottoGame);
+			winPrizes.put(winnersStatus, winPrizes.get(winnersStatus) + 1);
 		}
 		return winPrizes;
+	}
+
+	private Prize getLottoMatch(List<Integer> lastWinNumbers, LottoGame lottoGame) {
+		return Prize.getWinnersStatus(
+			getMatchLottoStatus(lottoGame.getLottoGame(), lastWinNumbers));
 	}
 
 	private int getMatchLottoStatus(List<Integer> lottoGame, List<Integer> lastWinNumbers) {
