@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("로또 테스트")
 public class LottoTest {
 
-    @DisplayName("로또의 번호 개수는 6개이어여 한다.")
+    @DisplayName("로또의 번호 개수는 6개이어야 한다.")
     @Test
     public void lottoNumberCountTest() {
         // given
