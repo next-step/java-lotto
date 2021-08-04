@@ -42,6 +42,7 @@ public class ResultView {
         System.out.println("3개 일치 (5000원)- " + result.getOrDefault(LottoRank.THREE_MATCH, DEFAULT_COUNT) + "개");
         System.out.println("4개 일치 (50000원)- " + result.getOrDefault(LottoRank.FOUR_MATCH, DEFAULT_COUNT) + "개");
         System.out.println("5개 일치 (1500000원)- " + result.getOrDefault(LottoRank.FIVE_MATCH, DEFAULT_COUNT) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + result.getOrDefault(LottoRank.FIVE_MATCH_WITH_BONUS, DEFAULT_COUNT) + "개");
         System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRank.ALL_MATCH, DEFAULT_COUNT) + "개");
     }
 

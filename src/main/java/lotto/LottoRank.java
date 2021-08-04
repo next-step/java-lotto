@@ -5,10 +5,11 @@ import lotto.exception.InvalidLottoRankException;
 import java.util.Arrays;
 
 public enum LottoRank {
-    THREE_MATCH(3, 5_000),
-    FOUR_MATCH(4, 50_000),
-    FIVE_MATCH(5, 1_500_000),
     ALL_MATCH(6, 2_000_000_000),
+    FIVE_MATCH_WITH_BONUS(5, 30_000_000),
+    FIVE_MATCH(5, 1_500_000),
+    FOUR_MATCH(4, 50_000),
+    THREE_MATCH(3, 5_000),
     OUT_OF_RANK(0, 0);
 
     private int countOfMatch;

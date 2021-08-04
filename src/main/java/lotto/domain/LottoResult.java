@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private final int MATCH_COUNT_BOUND = 2;
     private final int INCREASE_COUNT = 1;
     private final int DEFAULT_COUNT = 0;
 
@@ -29,10 +28,8 @@ public class LottoResult {
     }
 
     private void setRankEnumByMatchCount(int matchCount) {
-        if (matchCount > MATCH_COUNT_BOUND) {
-            LottoRank key = LottoRank.valueOf(matchCount);
-            lottoResult.put(key, lottoResult.getOrDefault(key, DEFAULT_COUNT) + INCREASE_COUNT);
-        }
+        LottoRank key = LottoRank.valueOf(matchCount);
+        lottoResult.put(key, lottoResult.getOrDefault(key, DEFAULT_COUNT) + INCREASE_COUNT);
     }
 
     public Map<LottoRank, Integer> getLottoResult() {

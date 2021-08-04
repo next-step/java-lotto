@@ -31,6 +31,8 @@ public class LottoResultTests {
         assertThat(lottoResult.getLottoResult().get(LottoRank.ALL_MATCH)).isEqualTo(1);
     }
 
+
+
     @DisplayName("결과로 수익 계산이 올바른 지 테스트")
     @Test
     void validLottoCalculateProfitTest() {
