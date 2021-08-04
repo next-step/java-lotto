@@ -8,6 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ResultOfLottos {
 
+    private static final Integer WIN_COUNT_ZERO = 0;
+
     private final Map<Integer, Integer> resultOfLottos;
 
     public ResultOfLottos() {
@@ -31,10 +33,14 @@ public class ResultOfLottos {
 
 
     public void put(int count) {
-        resultOfLottos.put(count, resultOfLottos.getOrDefault(count, 0) + 1);
+        resultOfLottos.put(count, resultOfLottos.getOrDefault(count, WIN_COUNT_ZERO) + 1);
     }
 
-    public Integer count(int rank) {
+    public Integer winCount(int rank) {
+        if (!resultOfLottos.containsKey(rank)) {
+            return WIN_COUNT_ZERO;
+        }
+
         return resultOfLottos.get(rank);
     }
 
