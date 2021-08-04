@@ -33,5 +33,11 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(input);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "-1,-2", "1,2,-3"})
+    @DisplayName("음수를 입력할 경우 RuntimeException 이 발생해야 한다.")
+    void minusInput(String input){
+        assertThatThrownBy(() -> StringAddCalculator.calculate(input)).isInstanceOf(RuntimeException.class);
+    }
 
 }
