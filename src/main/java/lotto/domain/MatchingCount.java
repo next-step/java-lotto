@@ -2,17 +2,17 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class MatchingCount {
+public final class MatchingCount {
 
     private final int matchingCount;
     private static final int INIT = 0;
     private static final int ADD = 1;
 
     public MatchingCount() {
-        this.matchingCount = INIT;
+        this(INIT);
     }
 
-    public MatchingCount(int matchingCount) {
+    public MatchingCount(final int matchingCount) {
         this.matchingCount = matchingCount;
     }
 
@@ -20,7 +20,7 @@ public class MatchingCount {
         return this.matchingCount;
     }
 
-    public MatchingCount addMatchingCount(boolean command) {
+    public MatchingCount addMatchingCount(final boolean command) {
         if (command) {
             return new MatchingCount(this.matchingCount + ADD);
         }

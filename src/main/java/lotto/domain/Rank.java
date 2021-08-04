@@ -13,24 +13,33 @@ public enum Rank {
     private static final int MAX_HITS_COUNT = 6;
     private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "맞춘 횟수는 0에서 6 사이여야 합니다.";
 
-    Rank(MatchingCount matchingCount, int winningMoney) {
+    Rank(final MatchingCount matchingCount, final int winningMoney) {
         this.matchingCount = matchingCount;
         this.winningMoney = winningMoney;
     }
 
-    public static Rank returnRank(MatchingCount matchingCount) {
+    public static Rank returnRank(final MatchingCount matchingCount) {
         validateMatchingCount(matchingCount);
 
+        Rank matchingRank = MISS;
         for (Rank rank : values()) {
-            if (matchingCount.equals(rank.getMatchingCount())) {
-                return rank;
-            }
+            matchingRank = findMatchingRank(matchingCount, rank, matchingRank);
         }
 
+        return matchingRank;
+    }
+
+    private static Rank findMatchingRank(final MatchingCount matchingCount, final Rank rank, final Rank matchingRank) {
+        if (matchingRank != MISS) {
+            return matchingRank;
+        }
+        if (matchingCount.equals(rank.getMatchingCount())) {
+            return rank;
+        }
         return MISS;
     }
 
-    private static void validateMatchingCount(MatchingCount matchingCount) {
+    private static void validateMatchingCount(final MatchingCount matchingCount) {
         if (matchingCount.getMatchingCount() < MIN_HITS_COUNT || matchingCount.getMatchingCount() > MAX_HITS_COUNT) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }

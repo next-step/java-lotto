@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoPurchaseStrategy implements PurchaseStrategy {
+public final class AutoPurchaseStrategy implements PurchaseStrategy {
 
     private static final int LIMIT_SIZE = 6;
     private static final int MIN_NUMBER = 1;
@@ -15,8 +15,8 @@ public class AutoPurchaseStrategy implements PurchaseStrategy {
 
     public List<Integer> generateLottoNumber() {
         Collections.shuffle(lottoNumber);
-        List<Integer> pickedNumber = new ArrayList<>();
 
+        List<Integer> pickedNumber = new ArrayList<>();
         for (int i = 0; i < LIMIT_SIZE; i++) {
             pickedNumber.add(lottoNumber.get(i));
         }

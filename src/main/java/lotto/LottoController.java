@@ -5,9 +5,9 @@ import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.*;
+import java.util.Map;
 
-public class LottoController {
+public final class LottoController {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();

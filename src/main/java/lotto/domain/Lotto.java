@@ -11,19 +11,19 @@ public class Lotto {
     private static final int LIMIT_SIZE = 6;
     private static final String SEPARATOR = ",";
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         validateNumbers(numbers);
         addLottoNumber(numbers);
     }
 
-    public Lotto(String input) {
+    public Lotto(final String input) {
         validateInput(input);
         List<Integer> numbers = splitNumbers(input);
         validateNumbers(numbers);
         addLottoNumber(numbers);
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(final List<Integer> numbers) {
         if (numbers == null || numbers.isEmpty() || numbers.size() != LIMIT_SIZE) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }
@@ -32,23 +32,23 @@ public class Lotto {
         }
     }
 
-    private boolean checkDuplicateNumbers(List<Integer> numbers) {
+    private boolean checkDuplicateNumbers(final List<Integer> numbers) {
         Set<Integer> numbersSet = new HashSet<>(numbers);
         return numbersSet.size() != numbers.size();
     }
 
-    private void validateInput(String input) {
+    private void validateInput(final String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }
     }
 
-    private List<Integer> splitNumbers(String input) {
+    private List<Integer> splitNumbers(final String input) {
         String[] dividedNumbers = input.trim().split(SEPARATOR);
         return Arrays.stream(dividedNumbers).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    private void addLottoNumber(List<Integer> numbers) {
+    private void addLottoNumber(final List<Integer> numbers) {
         Collections.sort(numbers);
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
@@ -59,7 +59,7 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public boolean matchingNumber(LottoNumber lottoNumber) {
+    public boolean matchingNumber(final LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
