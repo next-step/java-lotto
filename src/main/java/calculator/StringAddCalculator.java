@@ -1,13 +1,10 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     private static final int EMPTY_NUMBER = 0;
-    private static final String DEFAULT_SEPARATOR_DELIMITER_REGEX = ",|:";
 
     private StringAddCalculator() {
     }
@@ -36,17 +33,8 @@ public class StringAddCalculator {
     }
 
     private static String[] collectStringNumbers(String s) {
-        Matcher match = Pattern.compile("//(.)\n(.*)").matcher(s);
-        if (match.find()) {
-            String separator = match.group(1);
-            String input = match.group(2);
-            return splitStringByDelimiter(input, separator);
-        }
-        return splitStringByDelimiter(s, DEFAULT_SEPARATOR_DELIMITER_REGEX);
-    }
-
-    private static String[] splitStringByDelimiter(String s, String delimiter) {
-        return s.split(delimiter);
+        CalculatorParser calculatorParser = new CalculatorParser(s);
+        return calculatorParser.split();
     }
 
     private static int sumResult(String[] numbers) {
