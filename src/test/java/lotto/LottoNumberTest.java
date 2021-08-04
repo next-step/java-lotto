@@ -14,10 +14,10 @@ public class LottoNumberTest {
     @Test
     public void getAllLottoNumbers_새로운_컬렉션_객체() {
         // given, when
-        List<LottoNumber> firstLottoNumbers = LottoNumber.getAllLottoNumbers();
-        List<LottoNumber> secondLottoNumbersTwo = LottoNumber.getAllLottoNumbers();
+        List<LottoNumber> firstAllLottoNumbers = LottoNumber.getAllLottoNumbers();
+        List<LottoNumber> secondAllLottoNumbers = LottoNumber.getAllLottoNumbers();
 
         // then
-        assertNotSame(firstLottoNumbers, secondLottoNumbersTwo);
+        assertNotSame(firstAllLottoNumbers, secondAllLottoNumbers);
     }
 }
