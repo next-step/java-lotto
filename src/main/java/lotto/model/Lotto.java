@@ -33,4 +33,11 @@ public class Lotto {
     int getNumbersSize() {
         return numbers.size();
     }
+
+    int getEqualNumberCount(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> equalLottoNumbers = lottoNumbers.stream()
+                .filter(numbers::contains)
+                .collect(toList());
+        return equalLottoNumbers.size();
+    }
 }
