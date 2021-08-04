@@ -10,7 +10,7 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    Lottos(int purchaseAmount) {
+    public Lottos(int purchaseAmount) {
         validatePurchasableAmount(purchaseAmount);
 
         int lottoCount = purchaseAmount / ONE_LOTTO_PRICE;
@@ -25,11 +25,11 @@ public class Lottos {
         }
     }
 
-    int getSize() {
+    public int getSize() {
         return lottos.size();
     }
 
-    List<Lotto> getLottos() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 }

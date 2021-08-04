@@ -11,7 +11,7 @@ public class WinningNumbers {
 
     private final List<LottoNumber> numbers;
 
-    WinningNumbers(List<Integer> numbers) {
+    public WinningNumbers(List<Integer> numbers) {
         validateCount(numbers);
         validateUnique(numbers);
         this.numbers = numbers.stream()

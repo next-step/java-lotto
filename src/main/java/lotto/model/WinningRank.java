@@ -28,6 +28,14 @@ public enum WinningRank {
         this.winningMoneyAmount = winningMoneyAmount;
     }
 
+    public int getAnswerCount() {
+        return answerCount;
+    }
+
+    public int getWinningMoneyAmount() {
+        return winningMoneyAmount;
+    }
+
     public static List<WinningRank> findWinningRanks(Lottos lottos, WinningNumbers winningNumbers) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
