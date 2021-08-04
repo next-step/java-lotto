@@ -15,7 +15,7 @@ public class LottoOutputView {
 	private static final String DASH_LINE = "---------";
 	public static final int ZERO_POINT = 0;
 
-	public static void resultLottoNumbers(List<LottoGame> resultLottoGame) {
+	public static void lottoNumbersList(List<LottoGame> resultLottoGame) {
 		for (LottoGame lottoGame : resultLottoGame) {
 			lottoGameView(lottoGame);
 		}
@@ -26,7 +26,7 @@ public class LottoOutputView {
 		System.out.println(lottoGame.getLottoGame());
 	}
 
-	public static void resultLottoView(Map<Prize, Integer> resultLottoStatus, int money) {
+	public static void resultLottoPrizeView(Map<Prize, Integer> resultLottoStatus, int money) {
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int getTotalWinMoney = getTotalWinMoney(resultLottoStatus);

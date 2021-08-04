@@ -17,10 +17,10 @@ public class LottoController {
 
 		List<LottoGame> resultLottoGame = lottoPurchase.resultLottoGame();
 
-		LottoOutputView.resultLottoNumbers(resultLottoGame);
+		LottoOutputView.lottoNumbersList(resultLottoGame);
 
 		String lastWinNumber = LottoInputView.lastWinLottoNumberView();
 		Map<Prize, Integer> winPrize = lottoPurchase.confirmWinLottoNumber(lastWinNumber);
-		LottoOutputView.resultLottoView(winPrize, money);
+		LottoOutputView.resultLottoPrizeView(winPrize, money);
 	}
 }
