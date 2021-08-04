@@ -15,13 +15,17 @@ public class LottoNumber {
     }
 
     private void validateNumber(int number) {
-        if(number < MIN_NUMBER || number > MAX_NUMBER) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
     }
 
     public boolean isEqualsNumber(int input) {
         return this.number == input;
+    }
+
+    public int getNumber() {
+        return this.number;
     }
 
     @Override

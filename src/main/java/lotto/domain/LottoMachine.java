@@ -12,6 +12,7 @@ public class LottoMachine {
     private static final String BELOW_MIN_AMOUNT_ERROR_MESSAGE = "최소 1000원 이상 지불하셔야 합니다.";
     private static final int LOTTO_PRICE = 1000;
     private static final int INIT_COUNT = 0;
+    private static final boolean ADD_COMMAND = true;
 
     public Lottos buyLotto(int amount, PurchaseStrategy purchaseStrategy) {
         validateAmount(amount);
@@ -19,50 +20,53 @@ public class LottoMachine {
     }
 
     private void validateAmount(int amount) {
-        if(amount < LOTTO_PRICE) {
+        if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(BELOW_MIN_AMOUNT_ERROR_MESSAGE);
         }
     }
 
     private List<Lotto> printLotto(int amount, PurchaseStrategy purchaseStrategy) {
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = INIT_COUNT; i < amount/LOTTO_PRICE; i++) {
+
+        for (int i = INIT_COUNT; i < amount / LOTTO_PRICE; i++) {
             lottos.add(new Lotto(purchaseStrategy.generateLottoNumber()));
         }
+
         return lottos;
     }
 
-    public Map<Rank, MatchingCount> checkLottoMatching(WinningLotto winningLotto, Lottos purchasedLottos) {
-        Map<Rank, MatchingCount> matchingInfo = new HashMap<>();
+    public Map<Rank, MatchingCount> makeStatisticsWinnings(Lottos lottos, Lotto winningLotto) {
+        Map<Rank, MatchingCount> winnings = new HashMap<>();
 
-        for(Rank rank : Rank.values()) {
-            int matchingCount = getRankCount(winningLotto, purchasedLottos, rank);
-            matchingInfo.put(rank, new MatchingCount(matchingCount));
+        for (Lotto lotto : lottos.getLottos()) {
+            MatchingCount matchingCount = matchingNumbers(lotto, winningLotto);
+            Rank rank = Rank.returnRank(matchingCount);
+
+            winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getMatchingCount()).addMatchingCount(ADD_COMMAND));
         }
 
-        return matchingInfo;
+        return winnings;
     }
 
-    private int getRankCount(WinningLotto winningLotto, Lottos purchasedLottos, Rank rank) {
-        int matchingCount = 0;
+    private MatchingCount matchingNumbers(Lotto lotto, Lotto winningLotto) {
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        MatchingCount matchingCount = new MatchingCount();
 
-        for(Lotto lotto : purchasedLottos.getLottos()) {
-            matchingCount = winningLotto.checkRank(lotto, rank) ? ++matchingCount : matchingCount;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchingCount = matchingCount.addMatchingCount(winningLotto.matchingNumber(lottoNumber));
         }
 
         return matchingCount;
     }
 
-    public double calculateProfits(Map<Rank, MatchingCount> matcingInfo) {
-        int totalPrize = INIT_COUNT;
-        int lottoCount = INIT_COUNT;
+    public double calculateEarningsRate(Map<Rank, MatchingCount> winnings, int totalCount) {
+        int totalPrize = 0;
 
-        for(Rank rank : matcingInfo.keySet()) {
-            totalPrize += rank.getWinningMoney() * matcingInfo.get(rank).getMatchingCount();
-            lottoCount += matcingInfo.get(rank).getMatchingCount();
+        for (Rank rank : winnings.keySet()) {
+            totalPrize += rank.getWinningMoney() * winnings.get(rank).getMatchingCount();
         }
 
-        return Math.round((double)totalPrize / (lottoCount * LOTTO_PRICE) * 100)/ 100.0;
+        return Math.round((float) totalPrize / (totalCount * 10)) / 100.0;
     }
 
 }

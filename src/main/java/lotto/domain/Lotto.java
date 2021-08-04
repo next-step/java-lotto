@@ -18,16 +18,16 @@ public class Lotto {
 
     public Lotto(String input) {
         validateInput(input);
-        List<Integer> numbers =  splitNumbers(input);
+        List<Integer> numbers = splitNumbers(input);
         validateNumbers(numbers);
         addLottoNumber(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        if(numbers == null || numbers.isEmpty() || numbers.size() != LIMIT_SIZE) {
+        if (numbers == null || numbers.isEmpty() || numbers.size() != LIMIT_SIZE) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }
-        if(checkDuplicateNumbers(numbers)) {
+        if (checkDuplicateNumbers(numbers)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
         }
     }
@@ -38,7 +38,7 @@ public class Lotto {
     }
 
     private void validateInput(String input) {
-        if(input == null || input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }
     }
@@ -50,13 +50,17 @@ public class Lotto {
 
     private void addLottoNumber(List<Integer> numbers) {
         Collections.sort(numbers);
-        for(int number : numbers) {
+        for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
     }
 
-    public boolean containsLottoNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
+    public boolean matchingNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
 }

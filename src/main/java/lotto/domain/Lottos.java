@@ -13,18 +13,17 @@ public class Lottos {
     }
 
     private void validateLottos(List<Lotto> lottos) {
-        if(lottos == null || lottos.isEmpty()) {
+        if (lottos == null || lottos.isEmpty()) {
             throw new IllegalArgumentException(IS_NULL_OR_EMPTY_ERROR_MESSAGE);
         }
     }
 
-    public int size() {
+    public int count() {
         return lottos.size();
     }
 
-    /*
     public List<Lotto> getLottos() {
         return this.lottos;
     }
-    */
+
 }

@@ -1,51 +1,33 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoController {
 
     public static void main(String[] args) {
-
-        /*
-        Scanner scanner = new Scanner(System.in);
+        InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
         LottoMachine lottoMachine = new LottoMachine();
 
-        System.out.println("구입금액을 입력해 주세요.");
-
-        int amount = scanner.nextInt();
+        int amount = inputView.inputAmount();
         Lottos lottos = lottoMachine.buyLotto(amount, new AutoPurchaseStrategy());
+        int totalCount = lottos.count();
 
-        for(Lotto lotto : lottos.getLottos()) {
-            for(LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+        resultView.printLottoCount(totalCount);
+        resultView.printLottos(lottos);
 
-            }
-        }
-        */
+        Lotto winningLotto = new Lotto(inputView.inputWinningNumbers());
+        Map<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
+        double earningsRate = lottoMachine.calculateEarningsRate(winnings, totalCount);
 
-
-
-        /*
-        private String EnterTxt() {
-            return scanner.next();
-        }
-
-        private int EnterNumber() {
-            return scanner.nextInt();
-        }
-        */
-
-
-
-
+        resultView.printStatistics(winnings);
+        resultView.printEarningsRate(earningsRate);
+        inputView.endInput();
     }
-
-
-
 
 }
