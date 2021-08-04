@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import lotto.strategy.GenerateLottoNumber;
 import lotto.strategy.TestGenerateLottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LotteTest {
 
@@ -41,13 +44,7 @@ class LotteTest {
   @Test
   void 로또한장생성() {
     Lotto lotte = new Lotto();
-    List<Integer> testLotto = new ArrayList<>();
-    testLotto.add(1);
-    testLotto.add(2);
-    testLotto.add(3);
-    testLotto.add(4);
-    testLotto.add(5);
-    testLotto.add(6);
+    List<Integer> testLotto = createTestLotto(1,2,3,4,5,6);
 
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0,6,testLotto);
     lotte.creatLotte(generateLottoNumber);
@@ -62,4 +59,24 @@ class LotteTest {
     assertThat(checkValues.size()).isEqualTo(6);
   }
 
+  @DisplayName("동일한 로또번호가 들어가면 에러가 발생하는지 테스트.")
+  @ParameterizedTest
+  @CsvSource(value = {"1:1:1:1:1:1","1:2:3:4:4:5"})
+  void 동일로또번호방지(String input) {
+
+    assertThatThrownBy(()->new Lotto(input.split(":"))).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  private List<Integer> createTestLotto(int num1, int num2, int num3, int num4, int num5,
+      int num6) {
+    List<Integer> testLotto = new ArrayList<>();
+    testLotto.add(num1);
+    testLotto.add(num2);
+    testLotto.add(num3);
+    testLotto.add(num4);
+    testLotto.add(num5);
+    testLotto.add(num6);
+
+    return testLotto;
+  }
 }

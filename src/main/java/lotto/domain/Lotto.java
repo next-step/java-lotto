@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import lotto.Message.Message;
 import lotto.strategy.GenerateLottoNumber;
 
 public class Lotto  implements Comparator<LottoNumber> {
@@ -29,9 +30,17 @@ public class Lotto  implements Comparator<LottoNumber> {
   public Lotto(String[] winScoreArray) {
 
     for (String score : winScoreArray) {
+      checkDuplicateNumbers(Integer.parseInt(score.trim()));
       winLotto.add(new LottoNumber(Integer.parseInt(score.trim())));
     }
     sort(winLotto, new LottoNumber());
+  }
+
+  private void checkDuplicateNumbers(int targetNumber) {
+
+    if(winLotto.contains(new LottoNumber(targetNumber))){
+      throw new IllegalArgumentException(Message.MSG_ERROR_SAME_LOTTO_NUMBER);
+    }
   }
 
   public List<LottoNumber> getLotto() {
