@@ -9,12 +9,13 @@ import java.util.Map;
 import lotto.Message.Message;
 import lotto.domain.Lotties;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.strategy.GenerateLottoNumber;
 import lotto.strategy.RealGenerateLottoNumber;
 
 public class LotteryDraw {
 
-  private int money;
+  private LottoMoney lottoMoney;
 
   private Lotties lotties;
 
@@ -35,7 +36,7 @@ public class LotteryDraw {
   GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber(START, END);
 
   public LotteryDraw(int money) {
-    this.money = money;
+    this.lottoMoney = new LottoMoney(money);
   }
 
   public LotteryDraw() {
@@ -43,13 +44,13 @@ public class LotteryDraw {
   }
 
   private void checkInputValue() {
-    if (Operation.chooseOperation("%").calculation(money, EACH_LOTTO_COST) != INT_ZERO) {
+    if (Operation.chooseOperation("%").calculation(lottoMoney.getMoney(), EACH_LOTTO_COST) != INT_ZERO) {
       throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
   }
 
   private int getNumberOfLotto() {
-    return Operation.chooseOperation("/").calculation(money, EACH_LOTTO_COST);
+    return Operation.chooseOperation("/").calculation(lottoMoney.getMoney(), EACH_LOTTO_COST);
   }
 
   public void buyLotties() {
@@ -120,7 +121,7 @@ public class LotteryDraw {
     DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
     format.setRoundingMode(RoundingMode.DOWN);
 
-    return format.format((double) totalWinningRewards / (double) money);
+    return format.format((double) totalWinningRewards / (double) lottoMoney.getMoney());
   }
 
 }
