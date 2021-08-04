@@ -33,7 +33,7 @@ public class LottoOutputView {
 		for (Prize result : getSortByResultValue(resultLottoStatus)) {
 			getResultStatusPrint(resultLottoStatus, result);
 		}
-		System.out.println("총 수익률은 " + Utils.returnPercent(getTotalWinMoney, money) + "입니다.");
+		System.out.println("총 수익률은 " + Utils.getPrizeEarningRate(getTotalWinMoney, money) + "입니다.");
 	}
 
 	private static List<Prize> getSortByResultValue(Map<Prize, Integer> resultLottoStatus) {

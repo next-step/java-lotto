@@ -9,10 +9,10 @@ public class LottoGame {
 
 	public LottoGame(List<Integer> lottoGame) {
 		this.lottoGame = lottoGame;
+		Collections.sort(lottoGame);
 	}
 
 	public List<Integer> getLottoGame() {
-		Collections.sort(lottoGame);
 		return Collections.unmodifiableList(lottoGame);
 	}
 }

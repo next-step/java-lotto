@@ -12,11 +12,11 @@ public class Utils {
 	private Utils() {
 	}
 
-	public static int returnThousandUnit(int value) {
-		return value / THOUSAND_UNIT;
+	public static int getLottoTicketNumber(int money) {
+		return money / THOUSAND_UNIT;
 	}
 
-	public static String returnPercent(int getTotalWinMoney, int money) {
+	public static String getPrizeEarningRate(int getTotalWinMoney, int money) {
 		NumberFormat formatter = new DecimalFormat(NUMBER_FORMAT_PATTERN);
 		formatter.setRoundingMode(RoundingMode.DOWN);
 		return formatter.format((double)(getTotalWinMoney) / (double)(money));

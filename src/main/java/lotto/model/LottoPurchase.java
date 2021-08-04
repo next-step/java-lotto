@@ -21,7 +21,7 @@ public class LottoPurchase {
 
 	public LottoPurchase(int buyMoney) {
 		List<LottoGame> lottoCreateGame = new ArrayList<>();
-		for (int i = START_INCLUSIVE; i < Utils.returnThousandUnit(buyMoney); i++) {
+		for (int i = START_INCLUSIVE; i < Utils.getLottoTicketNumber(buyMoney); i++) {
 			lottoCreateGame.add(new LottoGame(LottoMachine.createLottoNumber()));
 		}
 		lottoGames = new LottoGames(lottoCreateGame);
