@@ -11,13 +11,19 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     Lotto() {
+        this.numbers = generateNumbers();
+    }
+
+    private List<LottoNumber> generateNumbers() {
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
+
         List<LottoNumber> numbers = allLottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(toList());
         Collections.sort(numbers);
-        this.numbers = numbers;
+
+        return numbers;
     }
 
     List<LottoNumber> getNumbers() {
