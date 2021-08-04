@@ -97,15 +97,17 @@ public class LotteryDraw {
     int totalWinningRewards = 0;
 
     for (Integer ratingNumber : result.keySet()) {
-      totalWinningRewards = result.get(ratingNumber).size() * Rank.matchRank(ratingNumber).getWinningMoney();
+      totalWinningRewards += result.get(ratingNumber).size() * Rank.matchRank(ratingNumber).getWinningMoney();
     }
 
     return formattingValue(totalWinningRewards);
   }
 
   private String formattingValue(int totalWinningRewards) {
+
     DecimalFormat format = new DecimalFormat("#.##");
     format.setRoundingMode(RoundingMode.DOWN);
+
     return format.format((double) totalWinningRewards / (double) money);
   }
 }
