@@ -8,10 +8,8 @@ import java.util.Map;
 
 public class ResultView {
 
-    private static final String NUMBER_OF_COUNT_SUFFIX = "개를 구매했습니다.";
-
     public static void printCount(List<Lotto> lottos) {
-        System.out.println(lottos.size() + NUMBER_OF_COUNT_SUFFIX);
+        System.out.println(lottos.size() + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
@@ -36,17 +34,4 @@ public class ResultView {
         });
     }
 
-
- /*   public void printResult(CarStadium carStadium) {
-        carStadium.getAllCars().forEach(this::print);
-        System.out.println();
-    }
-
-    private void print(Car car) {
-        System.out.print(car.getName() + " : ");
-        for (int i = 0; i < car.getMovedCount(); i++) {
-            System.out.print("-");
-        }
-        System.out.println();
-    }*/
 }
