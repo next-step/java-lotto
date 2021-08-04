@@ -24,7 +24,7 @@ public class LottoNumberTest {
 
     @DisplayName("모든 로또 번호를 조회할 때 마다, 로또 번호 객체는 재사용되어야 한다.")
     @Test
-    public void getAllLottoNumbers_로또_번호_객체_재사용() {
+    public void getAllLottoNumbers_모든_로또_번호_조회시_객체_재사용() {
         // given, when
         List<LottoNumber> firstAllLottoNumbers = LottoNumber.getAllLottoNumbers();
         List<LottoNumber> secondAllLottoNumbers = LottoNumber.getAllLottoNumbers();
@@ -33,6 +33,17 @@ public class LottoNumberTest {
         for (int i = 0; i < firstAllLottoNumbers.size(); i++) {
             assertSame(firstAllLottoNumbers.get(i), secondAllLottoNumbers.get(i));
         }
+    }
+
+    @DisplayName("로또 번호를 생성할 때, 로또 번호 객체는 재사용되어야 한다.")
+    @Test
+    public void getAllLottoNumbers_로또_번호_생성시_객체_재사용() {
+        // given, when
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(1);
+        LottoNumber secondLottoNumber = LottoNumber.valueOf(1);
+
+        // then
+        assertSame(firstLottoNumber, secondLottoNumber);
     }
 
     @DisplayName("모든 로또 번호는 1이상 45이하의 번호로 이루어져 있어야 한다.")
