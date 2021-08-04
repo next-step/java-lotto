@@ -11,7 +11,7 @@ public class StringAdder {
                 .toInt();
     }
 
-    public List<PositiveNumber> getPositiveNumbers(Expression expression) {
+    private List<PositiveNumber> getPositiveNumbers(Expression expression) {
         return TokenizeStrategyFactory.getTokenizeStrategy(expression)
                 .split(expression)
                 .stream()
