@@ -31,11 +31,11 @@ public class Calculator {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
-
+    
     public int printNumber() {
         return Integer.valueOf(text);
     }
-
+    
     public int addNumbers(String numbers[]) {
         int sum = 0;
         for (String number : numbers) {
