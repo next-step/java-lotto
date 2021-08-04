@@ -40,4 +40,22 @@ class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.calculate(input)).isInstanceOf(RuntimeException.class);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3;6", "4,5,6;15", "7,8,9;24"}, delimiter = ';')
+    @DisplayName("','구분자로 숫자만 열거되어있는 경우 덧셈을 수행한다.")
+    void comma(String input, int expected) {
+        int result = StringAddCalculator.calculate(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {"1:2:3;6", "4:5:6;15", "7:8:9;24"}, delimiter = ';'
+    )
+    @DisplayName("':' 구분자로 숫자만 열거되어있는 경우 덧셈을 수행한다.")
+    void colon(String input, int expected) {
+        int result = StringAddCalculator.calculate(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
