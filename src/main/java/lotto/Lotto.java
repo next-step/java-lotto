@@ -19,7 +19,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    int getNumberSize() {
+    List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    int getNumbersSize() {
         return numbers.size();
     }
 }
