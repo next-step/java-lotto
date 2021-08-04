@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayLotto {
     private static int LOTTO_PRICE = 1000;
-    private static int WINNING_TOTAL_INDEX = 5;
+    private static int WINNING_TOTAL_INDEX = 6;
 
     public static int calculateLottoCount(int cash) {
         if (cash % LOTTO_PRICE != 0) {
@@ -27,8 +27,8 @@ public class PlayLotto {
         return lottos;
     }
 
-    public static int[] playLotto(String winningNumberString, List<Lotto> lottos){
-        Lotto winningLotto = createWinningLotto(winningNumberString);
+    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos){
+        Lotto winningLotto = createWinningLotto(winningNumberString, bonusNumber);
         int[] winningArray = new int[WINNING_TOTAL_INDEX];
         for (Lotto lotto : lottos) {
             winningArray[winningLotto.checkWinning(lotto)]++;
@@ -36,10 +36,10 @@ public class PlayLotto {
         return winningArray;
     }
 
-    private static Lotto createWinningLotto(String winningNumberString) {
+    private static Lotto createWinningLotto(String winningNumberString, int bonusNumber) {
         List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumberList);
-        return new Lotto(winningLottoNumbers);
+        return new Lotto(winningLottoNumbers, bonusNumber);
     }
 
 
@@ -48,7 +48,7 @@ public class PlayLotto {
         for (int index = 0; index < winningArray.length; index++) {
             totalMoney += calculate(index, winningArray[index]);
         }
-        return Math.round((((float) totalMoney / cash) * 100)) / 100.0;
+        return Math.round((((double) totalMoney / cash) * 100)) / 100.0;
     }
 
     private static int calculate(int winningIndex, int count) {

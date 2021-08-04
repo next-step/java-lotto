@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPrize;
 
 import java.util.List;
 
@@ -40,6 +39,9 @@ public class ResultView {
     }
 
     private static void printPrize(int prize, int count) {
+        if (prize == FIFTH.getPrize()) {
+            printFifthResult(count);
+        }
         if (prize == FOURTH.getPrize()) {
             printFourthResult(count);
         }
@@ -54,23 +56,28 @@ public class ResultView {
         }
     }
 
-    private static void printFourthResult(int count){
-        System.out.printf("3개 일치 (5000원)- %d개" ,count);
+    private static void printFifthResult(int count) {
+        System.out.printf("3개 일치 (5000원) - %d개" ,count);
         System.out.println();
     }
 
-    private static void printThirdResult(int count){
-        System.out.printf("4개 일치 (50000원)- %d개" ,count);
+    private static void printFourthResult(int count) {
+        System.out.printf("4개 일치 (50000원) - %d개" ,count);
         System.out.println();
     }
 
-    private static void printSecondResult(int count){
-        System.out.printf("5개 일치 (1500000원)- %d개" ,count);
+    private static void printThirdResult(int count) {
+        System.out.printf("5개 일치 (1500000원) - %d개" ,count);
         System.out.println();
     }
 
-    private static void printFirstResult(int count){
-        System.out.printf("6개 일치 (2000000000원)- %d개" ,count);
+    private static void printSecondResult(int count) {
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개" ,count);
+        System.out.println();
+    }
+
+    private static void printFirstResult(int count) {
+        System.out.printf("6개 일치 (2000000000원) - %d개" ,count);
         System.out.println();
     }
 

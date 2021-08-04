@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoPrize {
-    FIRST(6,1,200000000),
-    SECOND(5,2,1500000),
-    THIRD(4,3,50000),
-    FOURTH(3,4,5000),
-    NONE(0,0,0)
+    FIRST(6, 1, 2_000_000_000),
+    SECOND(5, 2, 30_000_000),
+    THIRD(5, 3, 1_500_000),
+    FOURTH(4, 4, 50_000),
+    FIFTH(3, 5, 5_000),
+    NONE(0, 0, 0)
     ;
     private int count;
     private int prize;
@@ -31,21 +32,21 @@ public enum LottoPrize {
         return money;
     }
 
-    public static LottoPrize findLottoPrizeOfCount(int count){
+    public static LottoPrize findLottoPrizeOfCount(int count) {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.getCount() == count)
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public static LottoPrize findLottoPrizeOfPrize(int prize){
+    public static LottoPrize findLottoPrizeOfPrize(int prize) {
         return Arrays.stream(LottoPrize.values())
                 .filter(lottoPrize -> lottoPrize.getPrize() == prize)
                 .findFirst()
                 .orElse(NONE);
     }
 
-    public int calculate(int count){
+    public int calculate(int count) {
         return this.money * count;
     }
 
