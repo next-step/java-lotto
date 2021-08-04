@@ -3,8 +3,8 @@ package step2.view;
 import step2.domain.Lotto;
 import step2.domain.LottoRank;
 import step2.domain.LottoStatistics;
+import step2.domain.ResultOfLottos;
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
 
@@ -27,11 +27,11 @@ public class ResultView {
         System.out.println("총 수익률은 " + profit + "% 입니다.");
     }
 
-    private static void printLottoStatistics(Map<Integer, Integer> resultOfLottos) {
-        resultOfLottos.forEach((rank, count) -> {
+    private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
+        for (int rank = 3; rank < 7; rank++) {
             LottoRank lottoRank = LottoRank.find(rank);
-            System.out.println(lottoRank.getRank() + "개 일치 (" + lottoRank.getMoney() + " 원) - " + count);
-        });
+            System.out.println(lottoRank.getRank() + "개 일치 (" + lottoRank.getMoney() + " 원) - " + resultOfLottos.count(rank));
+        }
     }
 
 }

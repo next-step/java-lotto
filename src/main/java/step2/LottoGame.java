@@ -5,6 +5,7 @@ import step2.domain.LottoMachine;
 import step2.domain.LottoNumber;
 import step2.domain.LottoStatistics;
 import step2.domain.RandomStrategy;
+import step2.domain.ResultOfLottos;
 import step2.domain.User;
 import step2.domain.Wallet;
 import step2.view.InputView;
@@ -32,7 +33,6 @@ public class LottoGame {
 
         LottoNumber winOfLottoNumber = new LottoNumber(winOfLottoNumbers);
 
-        ResultView.printLottoStatistics(new LottoStatistics(winOfLottoNumber, user.getLottos()));
-
+        ResultView.printLottoStatistics(new LottoStatistics(winOfLottoNumber, user.getLottos(), new ResultOfLottos()));
     }
 }

@@ -23,6 +23,7 @@ class LottoStatisticsTest {
         // Given
         Map<Integer, Integer> expectedLottoStrategy = new HashMap<>();
         expectedLottoStrategy.put(3, 1);
+        ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedLottoStrategy);
 
         Integer[] givenNumbers = {3, 4, 5, 6, 7, 8};
 
@@ -30,10 +31,10 @@ class LottoStatisticsTest {
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
-        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos);
+        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos, new ResultOfLottos());
 
         // Then
-        assertThat(expectedLottoStrategy).isEqualTo(lottoStatistics.resultOfLottos());
+        assertThat(expectedResultOfLottos).isEqualTo(lottoStatistics.resultOfLottos());
     }
 
     @Test
@@ -44,7 +45,8 @@ class LottoStatisticsTest {
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
-        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos);
+
+        LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos, new ResultOfLottos());
 
         // Then
         assertThat(lottoStatistics.getProfit()).isEqualTo(expectedLottoProfit);
