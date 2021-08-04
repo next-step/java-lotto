@@ -12,18 +12,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		if (invalidRange(number)) {
 			throw new LottoNumberException();
 		}
-		return LottoNumberCache.caches[cachesIndex(number)];
+		return LottoNumberCache.caches[number];
 	}
 
 	private static boolean invalidRange(int number) {
 		return number < LottoNumberCache.MIN_NUMBER || number > LottoNumberCache.MAX_NUMBER;
 	}
 
-	private static int cachesIndex(int number) {
-		return number - 1;
-	}
-
-	public int getNumber() {
+		public int getNumber() {
 		return number;
 	}
 
@@ -66,10 +62,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		static final LottoNumber[] caches;
 
 		static {
-			caches = new LottoNumber[MAX_NUMBER];
+			caches = new LottoNumber[MAX_NUMBER + 1];
 
 			for (int i = MIN_NUMBER; i <= MAX_NUMBER ; i++) {
-				caches[cachesIndex(i)] = new LottoNumber(i);
+				caches[i] = new LottoNumber(i);
 			}
 		}
 
