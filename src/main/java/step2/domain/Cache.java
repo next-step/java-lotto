@@ -20,7 +20,7 @@ public class Cache implements Money {
         }
     }
 
-    public int amount() {
+    public Integer amount() {
         return money;
     }
 
