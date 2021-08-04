@@ -12,15 +12,11 @@ public class StringAdder {
     }
 
     public List<PositiveNumber> getPositiveNumbers(Expression expression) {
-        return getTokenizeStrategy(expression).split(expression)
+        return TokenizeStrategyFactory.getTokenizeStrategy(expression)
+                .split(expression)
                 .stream()
                 .map(PositiveNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private TokenizeStrategy getTokenizeStrategy(Expression expression) {
-        return CustomTokenizeStrategy.containCustomDelimiter(expression)
-                ? new CustomTokenizeStrategy()
-                : new DefaultTokenizeStrategy();
-    }
 }

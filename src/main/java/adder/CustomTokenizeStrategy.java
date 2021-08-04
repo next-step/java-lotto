@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 public class CustomTokenizeStrategy implements TokenizeStrategy {
 
     public static final String NO_MATCHER_FOUND = "문자열 내에 일치하는 패턴이 없습니다";
-    private static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    public static final Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+
     private static final int DELIMITER_GROUP = 1;
     private static final int EXPRESSION_GROUP = 2;
 
@@ -36,8 +37,4 @@ public class CustomTokenizeStrategy implements TokenizeStrategy {
         return matcher.group(DELIMITER_GROUP);
     }
 
-    public static boolean containCustomDelimiter(Expression expression) {
-        return expression.getMatchers(DELIMITER_PATTERN)
-                .matches();
-    }
 }

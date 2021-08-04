@@ -29,18 +29,4 @@ class CustomTokenizeStrategyTest {
         assertThat(numbers).containsExactly(expectedOne, expectedTwo, expectedThree);
     }
 
-    @Test
-    @DisplayName("containCustomDelimiter 테스트")
-    public void containCustomDelimiter() {
-        // given
-        Expression expression = new Expression("//;\n1;2;3");
-        boolean expected = true;
-
-        // when
-        boolean result = CustomTokenizeStrategy.containCustomDelimiter(expression);
-
-        // then
-        assertThat(result).isEqualTo(expected);
-    }
-
 }
