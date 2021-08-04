@@ -15,6 +15,24 @@ public class Calculator {
         this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(this.text);
     }
 
+    public int calculate() {
+        if (checkEmptyAndNull()) {
+            return 0;
+        }
+
+        if (checkOnlyNumber()) {
+            return printNumber();
+        }
+
+        if (checkCustomDelimiter()) {
+            text = matcher.group(2);
+            String delimiter = DELIMITER + "|" + matcher.group(1);
+            return addNumbers(delimiter);
+        }
+
+        return addNumbers(DELIMITER);
+    }
+
     public boolean checkEmptyAndNull() {
         if (text.equals("") || text.equals(" ") || text.isEmpty()) {
             return true;
@@ -34,17 +52,6 @@ public class Calculator {
 
     public int printNumber() {
         return Integer.valueOf(text);
-    }
-
-    public int calculate() {
-        if (checkCustomDelimiter()) {
-            text = matcher.group(2);
-            System.out.println("---"+matcher.group(1));
-            String delimiter = DELIMITER + "|" + matcher.group(1);
-            return addNumbers(delimiter);
-        }
-
-        return addNumbers(DELIMITER);
     }
 
     public boolean checkCustomDelimiter() {
