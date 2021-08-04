@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     private String text;
+    private Validation validation;
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private Matcher matcher;
@@ -13,35 +14,25 @@ public class Calculator {
     public Calculator(String text) {
         this.text = text;
         this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(this.text);
+        this.validation = new Validation(text);
     }
 
     public int calculate() {
-        if (checkEmptyAndNull()) {
+        if (validation.checkEmptyAndNull()) {
             return 0;
         }
 
-        if (checkOnlyNumber()) {
+        if (validation.checkOnlyNumber()) {
             return printNumber();
         }
 
-        if (checkCustomDelimiter()) {
+        if (validation.checkCustomDelimiter()) {
             text = matcher.group(2);
             String delimiter = DELIMITER + "|" + matcher.group(1);
             return addNumbers(delimiter);
         }
 
         return addNumbers(DELIMITER);
-    }
-
-    public boolean checkEmptyAndNull() {
-        if (text.equals("") || text.equals(" ") || text.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean checkOnlyNumber() {
-        return text.matches("[0-9]");
     }
 
     public void isNegativeNumber(String number) {
@@ -52,10 +43,6 @@ public class Calculator {
 
     public int printNumber() {
         return Integer.valueOf(text);
-    }
-
-    public boolean checkCustomDelimiter() {
-        return matcher.find();
     }
 
     public int addNumbers(String delimiter) {
