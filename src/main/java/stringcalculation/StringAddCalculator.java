@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
+    private static final String NUMBER_PATTERN = "[0-9]";
+
     public static int splitAndSum(String inputText) {
         if (!validText(inputText)) {
             return 0;
@@ -30,17 +32,16 @@ public class StringAddCalculator {
         return text.split(regExp);
     }
 
-    public static int validNumber(String number) {
-        int parseNumber = 0;
-        try {
-            parseNumber = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+    public static void validNumber(String number) {
+        if (!number.matches(NUMBER_PATTERN)) {
             throw new RuntimeException();
         }
-        if (parseNumber < 0) {
+    }
+
+    public static void validNegative(int number) {
+        if (number < 0) {
             throw new RuntimeException();
         }
-        return parseNumber;
     }
 
     public static boolean validText(String inputText) {
@@ -52,8 +53,11 @@ public class StringAddCalculator {
 
     public static int sum(String[] operandArr) {
         int result = 0;
-        for (String number : operandArr) {
-            result += validNumber(number);
+        for (String numberStr : operandArr) {
+            validNumber(numberStr);
+            int number = Integer.parseInt(numberStr);
+            validNegative(number);
+            result += number;
         }
         return result;
     }
