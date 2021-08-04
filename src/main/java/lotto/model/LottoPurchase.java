@@ -13,9 +13,14 @@ public class LottoPurchase {
 		int ticketNumber = TicketCalculation.getLottoTicketNumber(buyMoney);
 		List<LottoGame> lottoCreateGame = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < ticketNumber; i++) {
-			lottoCreateGame.add(new LottoGame(LottoMachine.createLottoNumber()));
+			List<Integer> lottoNumbers = createLottoNumber();
+			lottoCreateGame.add(new LottoGame(lottoNumbers));
 		}
 		return lottoCreateGame;
+	}
+
+	private List<Integer> createLottoNumber() {
+		return new ArrayList<>(LottoMachine.createLottoNumber());
 	}
 
 }
