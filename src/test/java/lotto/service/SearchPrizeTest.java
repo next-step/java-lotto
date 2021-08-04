@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
 import lotto.model.Prize;
+import lotto.model.WinPrizes;
 
 class SearchPrizeTest {
 
@@ -31,11 +31,11 @@ class SearchPrizeTest {
 		List<Lotto> lottoGame = new ArrayList<>();
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 10, 12)));
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 7, 12)));
-		Map<Prize, Integer> result = searchPrize.drawWinPrize(lottoGame, lastWinNumbers);
+		WinPrizes winPrizes = searchPrize.drawWinPrize(lottoGame, lastWinNumbers);
 
-		assertThat(result.size()).isEqualTo(5);
-		assertThat(result.get(Prize.FIFTH)).isEqualTo(1);
-		assertThat(result.get(Prize.FOURTH)).isEqualTo(1);
+		assertThat(winPrizes.winPrizeSize()).isEqualTo(5);
+		assertThat(winPrizes.searchWinPrizeGrade(Prize.FIFTH)).isEqualTo(1);
+		assertThat(winPrizes.searchWinPrizeGrade(Prize.FOURTH)).isEqualTo(1);
 	}
 
 	@Test
@@ -48,10 +48,10 @@ class SearchPrizeTest {
 		lotto.add(getLottoGame(7, 9, 15, 21, 28, 39));
 		lotto.add(getLottoGame(2, 2, 3, 32, 38, 45));
 
-		Map<Prize, Integer> result = searchPrize.confirmWinLottoNumber(lotto, "1,2,3,4,5,6");
+		WinPrizes result = searchPrize.confirmWinLottoNumber(lotto, "1,2,3,4,5,6");
 
-		assertThat(result.get(Prize.THIRD)).isEqualTo(2);
-		assertThat(result.get(Prize.FIRST)).isEqualTo(1);
+		assertThat(result.searchWinPrizeGrade(Prize.THIRD)).isEqualTo(2);
+		assertThat(result.searchWinPrizeGrade(Prize.FIRST)).isEqualTo(1);
 
 	}
 
