@@ -2,6 +2,9 @@ package calculator;
 
 public class StringUtils {
 
+	private static final String EMPTY = "";
+	private static final String INTEGER_PATTERN = "-?\\d+";
+
 	private StringUtils() {
 
 	}
@@ -13,12 +16,11 @@ public class StringUtils {
 	}
 
 	private static void validate(String value) {
-		if ("".equals(value)) {
+		if (EMPTY.equals(value)) {
 			throw new IllegalArgumentException("문자열에 빈값을 입력 할 수 없습니다.");
 		}
 
-		System.out.println(value);
-		if (!value.matches("-?\\d+")) {
+		if (!value.matches(INTEGER_PATTERN)) {
 			throw new IllegalArgumentException("숫자가 아닙니다.");
 		}
 	}
