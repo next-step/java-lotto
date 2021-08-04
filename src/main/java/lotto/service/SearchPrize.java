@@ -23,7 +23,7 @@ public class SearchPrize {
 			.collect(Collectors.toMap(winnerResult -> winnerResult, winnerResult -> 0, (a, b) -> b));
 	}
 
-	public Map<Prize, Integer> getWinPrizes(LottoGames lottoGames, List<Integer> lastWinNumbers) {
+	public Map<Prize, Integer> drawWinPrize(LottoGames lottoGames, List<Integer> lastWinNumbers) {
 		DuplicateNumberValidation.validDuplicateNumberCheck(lastWinNumbers);
 		for (LottoGame lottoGame : lottoGames.getLottoGames()) {
 			Prize winnersStatus = Prize.getWinnersStatus(

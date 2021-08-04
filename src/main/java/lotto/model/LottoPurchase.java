@@ -38,7 +38,7 @@ public class LottoPurchase {
 	public Map<Prize, Integer> confirmWinLottoNumber(String lastWinNumber) {
 		EmptyCheckValidation.validEmptyCheck(lastWinNumber);
 		SearchPrize searchPrize = new SearchPrize();
-		return searchPrize.getWinPrizes(lottoGames, getLastWinNumbers(lastWinNumber));
+		return searchPrize.drawWinPrize(lottoGames, getLastWinNumbers(lastWinNumber));
 	}
 
 	private List<Integer> getLastWinNumbers(String lastWinNumber) {
