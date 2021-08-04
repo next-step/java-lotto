@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
     private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
     private static final String NUMBER_PATTERN = "[0-9]";
+    private static final String BASE_DELIMITER_PATTERN = "[,:%s]";
+    private static final int DELIMITER_GROUP = 1;
+    private static final int OPERAND_GROUP = 2;
 
     public static int splitAndSum(String inputText) {
         if (!validText(inputText)) {
@@ -22,13 +25,12 @@ public class StringAddCalculator {
 
     public static String[] getOperandArr(String text) {
         Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(text);
-        String customDelimiter;
-        String regExp = "[,:^]+";
+        String customDelimiter = "";
         if (m.find()) {
-            customDelimiter = m.group(1);
-            text = m.group(2);
-            regExp = "[,:"+customDelimiter+"^]+";
+            customDelimiter = m.group(DELIMITER_GROUP);
+            text = m.group(OPERAND_GROUP);
         }
+        String regExp = String.format(BASE_DELIMITER_PATTERN, customDelimiter);
         return text.split(regExp);
     }
 
