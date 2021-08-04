@@ -11,23 +11,24 @@ public class Delimiter {
 
     public Delimiter(String text) {
         this.text = text;
-        this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(text);
+        this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(this.text);
     }
 
-    public boolean checkCustomDelimiter() {
+    public boolean isCustomDelimiter() {
         return matcher.find();
     }
 
     public String getCustomDelimiter() {
-            text = matcher.group(2);
-            if (isOriginalContainsCustom(matcher.group(1))){
-                return DELIMITER;
-            }
-            return DELIMITER+"|"+matcher.group(2);
+        matcher.matches();
+        return matcher.group(1);
     }
 
-    public boolean isOriginalContainsCustom(String customDelimiter){
-
-        return DELIMITER.contains(customDelimiter);
+    public String[] getNumbers() {
+        if (isCustomDelimiter()) {
+            text = matcher.group(2);
+            String delimiter = getCustomDelimiter();
+            return text.split(delimiter);
+        }
+        return text.split(DELIMITER);
     }
 }
