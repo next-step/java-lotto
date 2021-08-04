@@ -58,4 +58,15 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(
+            value = {"1:2,3,4;10", "4,5:6;15", "7,8:9;24"}, delimiter = ';'
+    )
+    @DisplayName("',' ':' 구분자가 혼합되어있을 경우 덧셈 결과를 리턴한다.")
+    void mixed(String input, int expected) {
+        int result = StringAddCalculator.calculate(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
+
 }
