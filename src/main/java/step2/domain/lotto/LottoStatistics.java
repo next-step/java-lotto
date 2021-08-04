@@ -1,8 +1,6 @@
 package step2.domain.lotto;
 
 import step2.domain.ResultOfLottos;
-import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoNumber;
 import step2.util.CalcUtils;
 import java.util.List;
 

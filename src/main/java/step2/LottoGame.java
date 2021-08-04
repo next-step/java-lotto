@@ -1,11 +1,11 @@
 package step2;
 
-import step2.domain.money.Cache;
+import step2.domain.ResultOfLottos;
 import step2.domain.lotto.LottoMachine;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoStatistics;
 import step2.domain.lotto.RandomStrategy;
-import step2.domain.ResultOfLottos;
+import step2.domain.money.Cache;
 import step2.domain.user.User;
 import step2.domain.user.Wallet;
 import step2.view.InputView;
