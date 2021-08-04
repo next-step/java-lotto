@@ -10,7 +10,6 @@ public class LottoStatistics {
     private final ResultOfLottos resultOfLottos;
     private final LottoNumber winOfLottoNumber;
 
-    //private double profit;
     private final Profit profit;
 
     public LottoStatistics(LottoNumber winOfLottoNumber, List<Lotto> lottos, ResultOfLottos resultOfLottos) {
