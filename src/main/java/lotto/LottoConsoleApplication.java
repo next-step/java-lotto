@@ -1,6 +1,10 @@
 package lotto;
 
-import lotto.model.*;
+import lotto.model.LottoShop;
+import lotto.model.LottoStatistics;
+import lotto.model.Lottos;
+import lotto.model.WinningLotto;
+import lotto.prize.LottoPrize;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,9 +22,10 @@ public class LottoConsoleApplication {
         ResultView.printLottoNumber(lottos);
 
         String winningNumbers = InputView.inputWinningNumbers();
-        WinningLotto winningLotto = WinningLotto.from(winningNumbers);
+        String bonusNumber = InputView.inputBonusNumber();
+        WinningLotto winningLotto = WinningLotto.from(winningNumbers, bonusNumber);
 
-        List<LottoPrize> lottoPrizes = lottos.scratch(winningLotto);
+        List<LottoPrize> lottoPrizes = winningLotto.matchResults(lottos);
         LottoStatistics lottoStatistics = LottoStatistics.from(payment, lottoPrizes);
         ResultView.printStatistic(lottoStatistics);
     }
