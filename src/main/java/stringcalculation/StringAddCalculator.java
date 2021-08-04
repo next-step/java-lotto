@@ -47,10 +47,7 @@ public class StringAddCalculator {
     }
 
     public static boolean validText(String inputText) {
-        if (Objects.isNull(inputText) || inputText.trim().length() == 0) {
-            return false;
-        }
-        return true;
+        return !Objects.isNull(inputText) && inputText.trim().length() != 0;
     }
 
     public static int sum(String[] operandArr) {
