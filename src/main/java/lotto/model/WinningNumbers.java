@@ -15,7 +15,7 @@ public class WinningNumbers {
         validateCount(numbers);
         validateUnique(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(toList());
     }
 
