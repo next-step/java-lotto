@@ -14,10 +14,10 @@ public class CustomTokenizeStrategy implements TokenizeStrategy {
 
     @Override
     public List<String> split(Expression expression) {
-        return getExpressionAndSplit(expression.getMatchers(DELIMITER_PATTERN));
+        return getSplitExpressions(expression.getMatchers(DELIMITER_PATTERN));
     }
 
-    private List<String> getExpressionAndSplit(Matcher matcher) {
+    private List<String> getSplitExpressions(Matcher matcher) {
         validateMatcher(matcher);
         return new Expression(getNumbers(matcher))
                 .split(getDelimiter(matcher));
