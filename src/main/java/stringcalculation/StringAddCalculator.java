@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
     public static int splitAndSum(String inputText) {
         if (!validText(inputText)) {
             return 0;
@@ -18,7 +19,7 @@ public class StringAddCalculator {
     }
 
     public static String[] getOperandArr(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(text);
         String customDelimiter;
         String regExp = "[,:^]+";
         if (m.find()) {
@@ -42,7 +43,7 @@ public class StringAddCalculator {
         return parseNumber;
     }
 
-    public static Boolean validText(String inputText) {
+    public static boolean validText(String inputText) {
         if (Objects.isNull(inputText) || inputText.trim().length() == 0) {
             return false;
         }
