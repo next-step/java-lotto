@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,5 +15,13 @@ class LottoMoneyTest {
 
     assertThat(lottoMoney.getMoney()).isEqualTo(1000);
     assertThat(lottoMoney.equals(new LottoMoney(1000)));
+  }
+
+  @DisplayName("0미만의 음수값으로 금액 입력 검증 테스트.")
+  @Test
+  void 최소금액제한() {
+    assertThatThrownBy(
+        ()-> new LottoMoney(-1)
+    ).isInstanceOf(IllegalArgumentException.class);
   }
 }
