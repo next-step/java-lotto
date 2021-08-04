@@ -6,7 +6,7 @@ import java.util.Scanner;
 import lotto.exception.InputMachTypeException;
 import lotto.utils.ErrorMessage;
 import lotto.utils.Utils;
-import lotto.validation.Validation;
+import lotto.validation.MoneyUnitCheckValidation;
 
 public class LottoInputView {
 
@@ -23,7 +23,7 @@ public class LottoInputView {
 		System.out.println(BUY_MONEY_MESSAGE);
 		try {
 			money = scanner.nextInt();
-			Validation.validThousandUnitCheck(money);
+			MoneyUnitCheckValidation.validThousandUnitCheck(money);
 			System.out.println(Utils.returnThousandUnit(money) + BUY_RESULT_MESSAGE);
 			scanner.nextLine();
 		} catch (InputMismatchException e) {

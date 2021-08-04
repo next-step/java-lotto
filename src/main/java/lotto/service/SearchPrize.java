@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import lotto.model.LottoGame;
 import lotto.model.LottoGames;
 import lotto.model.Prize;
-import lotto.validation.Validation;
+import lotto.validation.DuplicateNumberValidation;
 
 public class SearchPrize {
 
@@ -24,7 +24,7 @@ public class SearchPrize {
 	}
 
 	public Map<Prize, Integer> getWinPrizes(LottoGames lottoGames, List<Integer> lastWinNumbers) {
-		Validation.validDuplicateNumberCheck(lastWinNumbers);
+		DuplicateNumberValidation.validDuplicateNumberCheck(lastWinNumbers);
 		for (LottoGame lottoGame : lottoGames.getLottoGames()) {
 			Prize winnersStatus = Prize.getWinnersStatus(
 				getMatchLottoStatus(lottoGame.getLottoGame(), lastWinNumbers));

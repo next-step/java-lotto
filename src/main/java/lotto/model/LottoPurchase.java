@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 
 import lotto.service.SearchPrize;
 import lotto.utils.Utils;
-import lotto.validation.Validation;
+import lotto.validation.EmptyCheckValidation;
+import lotto.validation.LottoSizeValidation;
+import lotto.validation.NumberTypeValidation;
 
 public class LottoPurchase {
 
@@ -34,21 +36,21 @@ public class LottoPurchase {
 	}
 
 	public Map<Prize, Integer> confirmWinLottoNumber(String lastWinNumber) {
-		Validation.validEmptyCheck(lastWinNumber);
+		EmptyCheckValidation.validEmptyCheck(lastWinNumber);
 		SearchPrize searchPrize = new SearchPrize();
 		return searchPrize.getWinPrizes(lottoGames, getLastWinNumbers(lastWinNumber));
 	}
 
 	private List<Integer> getLastWinNumbers(String lastWinNumber) {
 		String[] lastWinNumbers = lastWinNumber.split(LAST_WIN_NUMBER_REGEX);
-		Validation.validLottoSizeCheck(lastWinNumbers);
+		LottoSizeValidation.validLottoSizeCheck(lastWinNumbers);
 		return Arrays.stream(lastWinNumbers)
 			.map(this::toInt)
 			.collect(Collectors.toList());
 	}
 
 	private Integer toInt(String value) {
-		Validation.validNumberTypeCheck(value.trim());
+		NumberTypeValidation.validNumberTypeCheck(value.trim());
 		return Integer.parseInt(value.trim());
 	}
 }
