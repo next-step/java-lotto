@@ -8,6 +8,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final List<LottoNumber> ALL_LOTTO_NUMBERS = new ArrayList<>();
 
+    private int number;
+
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
     static {
         setUpAllLottoNumbers();
     }
@@ -20,12 +26,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static List<LottoNumber> getAllLottoNumbers() {
         return new ArrayList<>(ALL_LOTTO_NUMBERS);
-    }
-
-    private int number;
-
-    private LottoNumber(int number) {
-        this.number = number;
     }
 
     int getNumber() {
