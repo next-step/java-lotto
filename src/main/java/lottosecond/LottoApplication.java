@@ -17,6 +17,7 @@ public class LottoApplication {
 		resultView.printLottos();
 
 		inputView.inputLastWinningNumbers();
+		inputView.inputBonusNumber();
 
 		resultView.printResult(inputView.getWinningNumbers());
 	}
