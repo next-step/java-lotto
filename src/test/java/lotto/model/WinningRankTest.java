@@ -25,9 +25,9 @@ public class WinningRankTest {
         WinningNumbers FourthWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
 
         // then
-        assertSame(WinningRank.getWinningRankOf(lotto, firstWinningNumbers), WinningRank.FIRST_PLACE);
-        assertSame(WinningRank.getWinningRankOf(lotto, secondWinningNumbers), WinningRank.SECOND_PLACE);
-        assertSame(WinningRank.getWinningRankOf(lotto, ThirdWinningNumbers), WinningRank.THIRD_PLACE);
-        assertSame(WinningRank.getWinningRankOf(lotto, FourthWinningNumbers), WinningRank.FOURTH_PLACE);
+        assertSame(WinningRank.findWinningRankOf(lotto, firstWinningNumbers), WinningRank.FIRST_PLACE);
+        assertSame(WinningRank.findWinningRankOf(lotto, secondWinningNumbers), WinningRank.SECOND_PLACE);
+        assertSame(WinningRank.findWinningRankOf(lotto, ThirdWinningNumbers), WinningRank.THIRD_PLACE);
+        assertSame(WinningRank.findWinningRankOf(lotto, FourthWinningNumbers), WinningRank.FOURTH_PLACE);
     }
 }
