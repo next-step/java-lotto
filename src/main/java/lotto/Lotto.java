@@ -11,8 +11,9 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     Lotto() {
-        Collections.shuffle(LottoNumber.ALL_LOTTO_NUMBERS);
-        List<LottoNumber> numbers = LottoNumber.ALL_LOTTO_NUMBERS.stream()
+        List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
+        Collections.shuffle(allLottoNumbers);
+        List<LottoNumber> numbers = allLottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .collect(toList());
         Collections.sort(numbers);
