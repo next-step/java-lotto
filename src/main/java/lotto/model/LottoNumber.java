@@ -25,7 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    static LottoNumber of(int number) {
+    static LottoNumber valueOf(int number) {
         int numberIndex = number - GAP_BETWEEN_NUMBER_AND_INDEX_OF_ALL_LOTTO_NUMBERS;
         return ALL_LOTTO_NUMBERS.get(numberIndex);
     }
