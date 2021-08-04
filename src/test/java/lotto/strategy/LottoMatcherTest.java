@@ -1,4 +1,4 @@
-package step3.strategy;
+package lotto.strategy;
 
 import lotto.strategy.LottoMatcher;
 import org.junit.jupiter.api.BeforeAll;

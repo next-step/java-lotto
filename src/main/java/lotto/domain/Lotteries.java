@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.action.LottoMachine;
+
 import java.util.ArrayList;
 import java.util.List;
 

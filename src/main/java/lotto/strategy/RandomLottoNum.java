@@ -1,6 +1,7 @@
 package lotto.strategy;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 
 import java.util.ArrayList;
 import java.util.Collections;

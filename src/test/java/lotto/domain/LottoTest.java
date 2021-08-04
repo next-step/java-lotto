@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,10 +31,10 @@ class LottoTest {
     @DisplayName("숫자 리스트를 받아 Lotto 생성하기. 출력")
     @Test
     void createLottoTest() {
-        List list = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.from(list);
 
-        assertThat(lotto.toString()).isEqualTo(list.toString());
+        assertThat(lotto).isEqualTo(Lotto.from(list));
     }
 
     @DisplayName("로또 길이(6)가 맞지 않으면 에러발생")
@@ -58,30 +59,35 @@ class LottoTest {
     void isBoundary_in_1to45(List<Integer> list) {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> Lotto.from(list)
-        ).withMessageContaining("유효하지 않");
+        ).withMessageContaining("범위");
     }
 
     @DisplayName("로또 출력시 숫자는 오름차순으로 나온다.")
     @Test
     void showNumbersASC() {
         Lotto lotto = Lotto.from(Arrays.asList(9, 5, 4, 3, 8, 1));
-        assertThat(lotto.getNumbers()).containsExactly(1, 3, 4, 5, 8, 9);
+        assertThat(lotto.getNumbers()).containsExactly(
+                LottoNum.of(1),LottoNum.of(3),LottoNum.of(4),LottoNum.of(5),LottoNum.of(8),LottoNum.of(9)
+        );
     }
 
     @DisplayName("로또 내부 리스트 방어적 복사")
     @Test
     void addNumberToNumberList() {
         List<Lotto> list = new ArrayList<>();
+
         list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
         list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
         list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        list.stream().forEach(vo -> vo.getNumbers().add(7));
-        list.stream().forEach(vo -> vo.getNumbers().add(8));
-        list.stream().forEach(vo -> vo.getNumbers().add(9));
+        list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(7)));
+        list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(8)));
+        list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(9)));
 
-        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(list.get(0).getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        Lotto expectedLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(list.get(0)).isEqualTo(expectedLotto);
+        assertThat(list.get(1)).isEqualTo(expectedLotto);
+        assertThat(list.get(2)).isEqualTo(expectedLotto);
     }
 }

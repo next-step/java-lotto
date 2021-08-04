@@ -1,13 +1,16 @@
-package step2.domain;
+package lotto.action;
 
+import lotto.action.LottoMachine;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
+import lotto.strategy.LottoNumStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.strategy.LottoNumStrategy;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMachineTest {
     // 로또 생성기.
@@ -29,6 +32,6 @@ class LottoMachineTest {
         };
 
         LottoMachine machine = LottoMachine.of(strategy);
-        assertThat(machine.makeLotto().getNumbers()).containsExactly(1,2,3,4,5,6);
+        assertThat(machine.makeLotto()).isEqualTo(Lotto.from(Arrays.asList(1,2,3,4,5,6)));
     }
 }

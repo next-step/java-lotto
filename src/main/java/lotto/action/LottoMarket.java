@@ -1,5 +1,9 @@
-package lotto.domain;
+package lotto.action;
 
+import lotto.domain.Lotteries;
+import lotto.domain.Lotto;
+import lotto.domain.WinnerLotto;
+import lotto.domain.Winning;
 import lotto.strategy.LottoMatcher;
 
 import java.util.ArrayList;

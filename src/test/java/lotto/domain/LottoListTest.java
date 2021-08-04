@@ -1,10 +1,11 @@
-package step2.domain;
+package lotto.domain;
 
+import lotto.action.LottoMachine;
+import lotto.strategy.LottoNumStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.strategy.LottoNumStrategy;
 
 import java.util.Arrays;
 
@@ -61,8 +62,8 @@ class LottoListTest {
         lottoList.buyLotto(machine);
 
         assertThat(lottoList.getSize()).isEqualTo(1);
-        assertThat(lottoList.getLotto(0).getNumbers())
-                .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoList.getLotto(0))
+                .isEqualTo(Lotto.from(Arrays.asList(1,2,3,4,5,6)));
     }
 
 }

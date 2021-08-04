@@ -1,13 +1,14 @@
 package lotto.strategy;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNum;
 import lotto.domain.WinnerLotto;
 import lotto.domain.Winning;
 
 public class LottoMatcher {
     public int matchLotto(Lotto myLotto, Lotto winner) {
         int count = 0;
-        for (int number : myLotto.getNumbers()) {
+        for (LottoNum number : myLotto.getNumbers()) {
             if(checkLotto(winner, number)){
                 count++;
             }
@@ -15,7 +16,7 @@ public class LottoMatcher {
         return count;
     }
 
-    private boolean checkLotto(Lotto winner, int number) {
+    private boolean checkLotto(Lotto winner, LottoNum number) {
         return winner.getNumbers().contains(number);
     }
 

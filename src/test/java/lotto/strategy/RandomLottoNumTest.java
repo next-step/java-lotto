@@ -1,5 +1,6 @@
-package step2.strategy;
+package lotto.strategy;
 
+import lotto.strategy.RandomLottoNum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

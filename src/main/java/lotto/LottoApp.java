@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.strategy.RandomLottoNum;
 import lotto.domain.Lotteries;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoMarket;
+import lotto.action.LottoMachine;
+import lotto.action.LottoMarket;
 import lotto.domain.Winning;
 import lotto.view.InputView;
 import lotto.view.ResultView;

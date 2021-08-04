@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.action;
 
+import lotto.domain.Lotto;
 import lotto.strategy.LottoNumStrategy;
 
 public class LottoMachine {
