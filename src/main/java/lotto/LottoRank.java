@@ -12,6 +12,8 @@ public enum LottoRank {
     THREE_MATCH(3, 5_000),
     OUT_OF_RANK(0, 0);
 
+    private static final int FIVE = 5;
+
     private int countOfMatch;
     private int price;
 
@@ -28,10 +30,17 @@ public enum LottoRank {
         return price;
     }
 
-    public static LottoRank valueOf(int countOfMatch) {
+    public static LottoRank valueOf(int countOfMatch, boolean bonusMatch) {
+        if (bonusMatch && countOfMatch == FIVE) {
+            return FIVE_MATCH_WITH_BONUS;
+        }
+        if (!bonusMatch && countOfMatch == FIVE) {
+            return FIVE_MATCH;
+        }
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRankEnum -> lottoRankEnum.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(OUT_OF_RANK);
+
     }
 }

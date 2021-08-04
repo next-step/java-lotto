@@ -27,9 +27,9 @@ public class LottoApplication {
 
         LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
 
-        LottoNumber bonusNumber = LottoNumber.of(InputView.getBonusNumber());
+        LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusNumber());
 
-        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoNumbers);
+        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoNumbers, bonusLottoNumber);
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));

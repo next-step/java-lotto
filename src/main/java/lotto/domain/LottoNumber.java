@@ -10,11 +10,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int lottoNumber;
 
-    private static LottoNumber[] AllLottoNumberConst = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+    private static LottoNumber[] lottoNumberConst = new LottoNumber[MAX_LOTTO_NUMBER + 1];
 
     static {
-        for(int i = MIN_LOTTO_NUMBER ; i <= MAX_LOTTO_NUMBER; i++){
-            AllLottoNumberConst[i] = new LottoNumber(i);
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            lottoNumberConst[i] = new LottoNumber(i);
         }
     }
 
@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(int lottoNumber) {
         validate(lottoNumber);
-        return AllLottoNumberConst[lottoNumber];
+        return lottoNumberConst[lottoNumber];
     }
 
     private static void validate(int lottoNumber) {
@@ -32,6 +32,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new LottoNumberRangeException();
         }
     }
+
     public String value() {
         return Integer.toString(lottoNumber);
     }
