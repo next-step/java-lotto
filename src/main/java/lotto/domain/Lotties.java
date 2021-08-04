@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import static java.util.stream.IntStream.range;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import lotto.strategy.GenerateLottoNumber;
 
 public class Lotties {
@@ -21,7 +22,7 @@ public class Lotties {
   }
 
   public void createLotties(int count, GenerateLottoNumber generateLottoNumber) {
-    IntStream.range(0, count).forEach(i -> lotties.add(new Lotto(generateLottoNumber)));
+    range(0, count).forEach(i -> lotties.add(new Lotto(generateLottoNumber)));
   }
 
   public int getMatchLotties(Lotto lotty, Lotto winLotto) {

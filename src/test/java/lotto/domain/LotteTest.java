@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,14 +25,14 @@ class LotteTest {
 
     assertThat(numberPull
         .stream()
-        .map(lotto->lotto.getNumber())
+        .map(LottoNumber::getNumber)
         .findFirst()
         .get()).isEqualTo(1);
 
     assertThat(numberPull
         .stream()
         .skip(numberPull.size()-1)
-        .map(lotto->lotto.getNumber())
+        .map(LottoNumber::getNumber)
         .findFirst()
         .get()).isEqualTo(45);
   }
@@ -40,8 +41,15 @@ class LotteTest {
   @Test
   void 로또한장생성() {
     Lotto lotte = new Lotto();
+    List<Integer> testLotto = new ArrayList<>();
+    testLotto.add(1);
+    testLotto.add(2);
+    testLotto.add(3);
+    testLotto.add(4);
+    testLotto.add(5);
+    testLotto.add(6);
 
-    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(1,7);
+    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0,6,testLotto);
     lotte.creatLotte(generateLottoNumber);
 
     assertThat(lotte.getLotto().size()).isEqualTo(6);
