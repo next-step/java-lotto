@@ -1,12 +1,12 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import lotto.model.LottoGame;
 import lotto.model.Prize;
+import lotto.utils.PrizeComparator;
 import lotto.utils.Utils;
 
 public class LottoOutputView {
@@ -38,7 +38,7 @@ public class LottoOutputView {
 
 	private static List<Prize> getSortByResultValue(Map<Prize, Integer> resultLottoStatus) {
 		List<Prize> resultPrize = new ArrayList<>(resultLottoStatus.keySet());
-		resultPrize.sort(Collections.reverseOrder());
+		resultPrize.sort(new PrizeComparator());
 		return resultPrize;
 	}
 

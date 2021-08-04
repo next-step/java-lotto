@@ -31,4 +31,5 @@ public enum Prize {
 			.findFirst()
 			.orElse(MISS);
 	}
+
 }
