@@ -1,16 +1,12 @@
 package lotto.step1;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Calculator {
 
     private String text;
     private Validation validation;
     private Delimiter delimiter;
-    private Matcher matcher;
-    private static final String DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final int NEGATIVE_NUMBER_CONDITION = 0;
+    private static final int PRINT_NUMBER = 0;
 
     public Calculator(String text) {
         this.text = text;
@@ -20,24 +16,18 @@ public class Calculator {
 
     public int calculate() {
         if (validation.checkEmptyAndNull()) {
-            return 0;
+            return PRINT_NUMBER;
         }
 
         if (validation.checkOnlyNumber()) {
             return printNumber();
         }
 
-        if (delimiter.checkCustomDelimiter()) {
-            text = matcher.group(2);
-            String delimiter = DELIMITER + "|" + matcher.group(1);
-            return addNumbers(delimiter);
-        }
-
-        return addNumbers(DELIMITER);
+        return addNumbers(delimiter.getNumbers());
     }
 
     public void isNegativeNumber(String number) {
-        if (Integer.valueOf(number) < 0) {
+        if (Integer.valueOf(number) < NEGATIVE_NUMBER_CONDITION) {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
@@ -46,14 +36,12 @@ public class Calculator {
         return Integer.valueOf(text);
     }
 
-    public int addNumbers(String delimiter) {
-        String[] numbers = text.split(delimiter);
+    public int addNumbers(String numbers[]) {
         int sum = 0;
         for (String number : numbers) {
             isNegativeNumber(number);
             sum += Integer.valueOf(number);
         }
-
         return sum;
     }
 
