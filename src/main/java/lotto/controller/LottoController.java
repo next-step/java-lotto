@@ -14,14 +14,15 @@ public class LottoController {
   public static void main(String[] args) {
 
     LotteryDraw lotteryDraw = new LotteryDraw(InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
+    lotteryDraw.buyLotties();
 
-    Lotto lotto = lotteryDraw.inputWinningNumbers(
-        InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO));
-
-    new LottiesDrawingView(lotteryDraw);
+    new ResultView(lotteryDraw.getLottiesInfo().getLotties().size());
 
     Map<Integer, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
-        lotteryDraw.getLottiesInfo(), lotto);
+        lotteryDraw.getLottiesInfo(), lotteryDraw.inputWinningNumbers(
+            InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
+
+    new LottiesDrawingView(lotteryDraw);
 
     new ResultView(matchResult,lotteryDraw.gradingScore(matchResult));
 

@@ -36,12 +36,6 @@ public class LotteryDraw {
 
   public LotteryDraw(int money) {
     this.money = money;
-    buyLotties();
-  }
-
-  public LotteryDraw(int money, Boolean testType) {
-    this.money = money;
-    buyLotties(testType);
   }
 
   public LotteryDraw() {
@@ -58,19 +52,9 @@ public class LotteryDraw {
     return Operation.chooseOperation("/").calculation(money, EACH_LOTTO_COST);
   }
 
-  private void buyLotties() {
+  public void buyLotties() {
     checkInputValue();
     lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
-
-    System.out.println(lotties.getLotties().size() + Message.MSG_BUY_LOTTO_COUNT);
-  }
-
-  private void buyLotties(Boolean testType) {
-    checkInputValue();
-    lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
-    if (!testType) {
-      System.out.println(lotties.getLotties().size() + Message.MSG_BUY_LOTTO_COUNT);
-    }
   }
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {
@@ -138,4 +122,5 @@ public class LotteryDraw {
 
     return format.format((double) totalWinningRewards / (double) money);
   }
+
 }

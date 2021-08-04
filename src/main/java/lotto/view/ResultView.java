@@ -26,4 +26,8 @@ public class ResultView {
 
     System.out.println(Message.MSG_WINNING_PROFIT+ profitRate + Message.MSG_WINNING_PROFIT_INFO);
   }
+
+  public ResultView(int count) {
+    System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
+  }
 }

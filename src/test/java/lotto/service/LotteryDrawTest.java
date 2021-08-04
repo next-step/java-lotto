@@ -34,7 +34,9 @@ class LotteryDrawTest {
           .getDeclaredMethod("checkInputValue");
       createLotteyrDraw.setAccessible(true);
 
-      assertThatThrownBy((ThrowingCallable) createLotteyrDraw.invoke(lotteryDraw)).isInstanceOf(RuntimeException.class);
+      assertThatThrownBy(
+          (ThrowingCallable) createLotteyrDraw.invoke(lotteryDraw)).isInstanceOf(RuntimeException.class);
+
     } catch (NoSuchMethodException e) {
     } catch (IllegalAccessException e) {
     } catch (InvocationTargetException e) {
@@ -46,7 +48,7 @@ class LotteryDrawTest {
   @CsvSource(value = {"1000,1", "2000,2", "10000,10"})
   void 천원단위구매장수확인(int cost, int count) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(cost,true);
+    LotteryDraw lotteryDraw = new LotteryDraw(cost);
 
     try {
 
@@ -70,19 +72,10 @@ class LotteryDrawTest {
   @CsvSource(value = {"1000,1", "2000,2", "10000,10"})
   void 금액기준로또구매(int cost, int count) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(cost,true);
+    LotteryDraw lotteryDraw = new LotteryDraw(cost);
+    lotteryDraw.buyLotties();
 
-    try {
-
-      Method buyLotties = lotteryDraw.getClass()
-          .getDeclaredMethod("buyLotties");
-      buyLotties.setAccessible(true);
-
-      assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
-
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
-    }
+    assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
   }
 
   @DisplayName("당첨번호 입력해서 로또객체 생성 테스트.")
@@ -98,7 +91,7 @@ class LotteryDrawTest {
   @DisplayName("당첨번호와 로또 비교하여 해당 등수에 로또객체를 적재하는 테스트.")
   @Test
   void 당첨번호와로또비교후등수별정리() {
-    LotteryDraw lotteryDraw = new LotteryDraw(1000,true);
+    LotteryDraw lotteryDraw = new LotteryDraw(1000);
     List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
 
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
@@ -135,7 +128,7 @@ class LotteryDrawTest {
     Map<Integer, List<Lotto>> result = new LinkedHashMap<>();
     result.put(3, Collections.singletonList(lotto));
 
-    LotteryDraw lotteryDraw = new LotteryDraw(14000,true);
+    LotteryDraw lotteryDraw = new LotteryDraw(14000);
 
     assertThat(lotteryDraw.gradingScore(result)).isEqualTo("0.35");
   }
