@@ -5,15 +5,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static java.util.Arrays.stream;
+import static java.lang.Math.toIntExact;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 public class Lotto {
-    private static final String DELIMITER = ", ";
-
-    private static final int NUMBER_OF_LOTTO_COUNT = 6;
-
     private final Set<LottoNumber> numbers;
 
     private Lotto(final Collection<LottoNumber> numbers) {
@@ -32,28 +27,17 @@ public class Lotto {
 
     public static Lotto from(final String string) {
         Objects.requireNonNull(string, "numbers must be not null.");
-        return new Lotto(parseIntegerSet(string));
+        return new Lotto(LottoNumber.aggregate(string));
     }
 
-    private static Set<LottoNumber> parseIntegerSet(final String winningNumber) {
-        return stream(winningNumber.split(DELIMITER))
-                .map(LottoNumber::from)
-                .collect(toSet());
+    public int getMatchCount(final Collection<LottoNumber> winningNumber) {
+        return toIntExact(winningNumber.stream()
+                                       .filter(numbers::contains)
+                                       .count());
     }
 
-    public LottoPrize scratch(final WinningLotto winningLotto) {
-        Objects.requireNonNull(winningLotto, "winningLotto must be not null.");
-        return LottoPrize.findByMatchCount(winningLotto.matchCount(this));
-    }
-
-    public boolean isSizeValid() {
-        return numbers.size() == NUMBER_OF_LOTTO_COUNT;
-    }
-
-    public int matchCount(Lotto winningLotto) {
-        return (int) winningLotto.numbers.stream()
-                                         .filter(numbers::contains)
-                                         .count();
+    public boolean isMatchBonus(final LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
