@@ -4,6 +4,7 @@ import step2.domain.ResultOfLottos;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoRank;
 import step2.domain.lotto.LottoStatistics;
+import step2.domain.lotto.Profit;
 import java.util.List;
 
 public class ResultView {
@@ -23,7 +24,7 @@ public class ResultView {
         printLottoProfit(lottoStatistics.getProfit());
     }
 
-    private static void printLottoProfit(double profit) {
+    private static void printLottoProfit(Profit profit) {
         System.out.println("총 수익률은 " + profit + "% 입니다.");
     }
 

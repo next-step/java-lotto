@@ -6,6 +6,7 @@ import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoMachine;
 import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoStatistics;
+import step2.domain.lotto.Profit;
 import step2.domain.money.Cache;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,13 +45,12 @@ class LottoStatisticsTest {
 
     @Test
     void 당청된_수익률을_보여준다() {
-        long expectedLottoProfit = 5;
+        Profit expectedLottoProfit = new Profit(5);
         Integer[] givenNumbers = {3, 4, 5, 6, 7, 8};
         LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenNumbers)));
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
-
         LottoStatistics lottoStatistics = new LottoStatistics(winOfLottoNumber, lottos, new ResultOfLottos());
 
         // Then

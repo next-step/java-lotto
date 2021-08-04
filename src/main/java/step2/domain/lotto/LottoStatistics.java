@@ -1,24 +1,24 @@
 package step2.domain.lotto;
 
 import step2.domain.ResultOfLottos;
-import step2.util.CalcUtils;
 import java.util.List;
 
 public class LottoStatistics {
 
     private static final Integer MINIMAL_SUCCESS_NUMBER = 3;
-    private static final int LOTTO_PRICE = 1000;
 
     private final ResultOfLottos resultOfLottos;
     private final LottoNumber winOfLottoNumber;
 
-    private double profit;
+    //private double profit;
+    private final Profit profit;
 
     public LottoStatistics(LottoNumber winOfLottoNumber, List<Lotto> lottos, ResultOfLottos resultOfLottos) {
         this.winOfLottoNumber = winOfLottoNumber;
         this.resultOfLottos = resultOfLottos;
+
         lottoOfStatistics(lottos);
-        calculateLottoProfit(lottos.size());
+        this.profit = calculateLottoProfit(lottos.size());
     }
 
     private void lottoOfStatistics(List<Lotto> lottos) {
@@ -28,9 +28,8 @@ public class LottoStatistics {
         }
     }
 
-    private void calculateLottoProfit(int lottoCount) {
-        Integer sum = resultOfLottos.sumMoney();
-        profit = CalcUtils.lottoPercent(sum, lottoCount * LOTTO_PRICE);
+    private Profit calculateLottoProfit(int lottoCount) {
+        return Profit.calcLottoProfit(resultOfLottos.sumMoney(), lottoCount);
     }
 
     private void calculateLottoResult(int count) {
@@ -43,7 +42,7 @@ public class LottoStatistics {
         return resultOfLottos;
     }
 
-    public Double getProfit() {
+    public Profit getProfit() {
         return profit;
     }
 }
