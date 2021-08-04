@@ -9,11 +9,10 @@ public class InputView {
     Scanner scanner = new Scanner(System.in);
     return scanner.nextInt();
   }
+
   public static String inputStringValueWithMessage(String message) {
     System.out.println(message);
     Scanner scanner = new Scanner(System.in);
     return scanner.nextLine();
   }
-
-
 }

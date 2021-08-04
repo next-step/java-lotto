@@ -8,6 +8,8 @@ import lotto.strategy.GenerateLottoNumber;
 
 public class Lotties {
 
+  private static final int INT_ZERO = 0;
+
   List<Lotto> lotties = new ArrayList<>();
 
   public Lotties() {
@@ -21,12 +23,12 @@ public class Lotties {
     return lotties;
   }
 
-  public void createLotties(int count, GenerateLottoNumber generateLottoNumber) {
-    range(0, count).forEach(i -> lotties.add(new Lotto(generateLottoNumber)));
+  private void createLotties(int count, GenerateLottoNumber generateLottoNumber) {
+    range(INT_ZERO, count).forEach(i -> lotties.add(new Lotto(generateLottoNumber)));
   }
 
   public int getMatchLotties(Lotto lotty, Lotto winLotto) {
-    int count = 0;
+    int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
       if (winLotto.getWinLotto().contains(lottoNumber)) {
         count++;

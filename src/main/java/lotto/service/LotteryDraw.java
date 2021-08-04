@@ -17,18 +17,25 @@ public class LotteryDraw {
 
   private Lotties lotties;
 
-  public static final String SPLIT_MARK = ",";
+  private static final String SPLIT_MARK = ",";
 
-  public static final int EACH_LOTTO_COST = 1000;
+  private static final int EACH_LOTTO_COST = 1000;
 
-  public static final int START = 1;
+  private static final int START = 1;
 
-  public static final int END = 46;
+  private static final int END = 46;
+
+  private static final String PROFIT_RATE_FORMAT = "#.##";
+
+  private static final int INT_ZERO = 0;
+
+  private static final int LITMIT_MATCH_NUMBER = 3;
 
   GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber(START, END);
 
   public LotteryDraw(int money) {
     this.money = money;
+    buyLotties();
   }
 
   public LotteryDraw() {
@@ -48,6 +55,7 @@ public class LotteryDraw {
   public void buyLotties() {
     checkInputValue();
     lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
+    System.out.println(lotties.getLotties().size()+"개를 구매했습니다.");
   }
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {
@@ -68,13 +76,16 @@ public class LotteryDraw {
     Map<Integer, List<Lotto>> categoriesRank = createRatingInfo();
     lotties.getLotties().forEach(
         lotty -> categoriesRank.get(matchLottoRating(lotties, winLotto, lotty)).add(lotty));
+
+    categoriesRank.remove(0);
+
     return categoriesRank;
   }
 
   private int matchLottoRating(Lotties lotties, Lotto winLotto, Lotto lotty) {
     int matchLotties = lotties.getMatchLotties(lotty, winLotto);
-    if (matchLotties < 3){
-      return 0;
+    if (matchLotties < LITMIT_MATCH_NUMBER) {
+      return INT_ZERO;
     }
     return matchLotties;
   }
@@ -94,10 +105,12 @@ public class LotteryDraw {
 
   public String gradingScore(Map<Integer, List<Lotto>> result) {
 
-    int totalWinningRewards = 0;
+    int totalWinningRewards = INT_ZERO;
 
     for (Integer ratingNumber : result.keySet()) {
-      totalWinningRewards += result.get(ratingNumber).size() * Rank.matchRank(ratingNumber).getWinningMoney();
+      totalWinningRewards += Operation.chooseOperation("*")
+          .calculation(result.get(ratingNumber).size(),
+              Rank.matchRank(ratingNumber).getWinningMoney());
     }
 
     return formattingValue(totalWinningRewards);
@@ -105,7 +118,7 @@ public class LotteryDraw {
 
   private String formattingValue(int totalWinningRewards) {
 
-    DecimalFormat format = new DecimalFormat("#.##");
+    DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
     format.setRoundingMode(RoundingMode.DOWN);
 
     return format.format((double) totalWinningRewards / (double) money);

@@ -4,9 +4,9 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.service.LotteryDraw;
 
-public class LottiesDrawing {
+public class LottiesDrawingView {
 
-  public LottiesDrawing(LotteryDraw lotteryDraw) {
+  public LottiesDrawingView(LotteryDraw lotteryDraw) {
     lotteryDraw.getLottiesInfo().getLotties()
         .stream()
         .map(lotty -> lotty.getLotto()
