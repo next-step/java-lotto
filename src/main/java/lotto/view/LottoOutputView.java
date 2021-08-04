@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import lotto.model.LottoGame;
+import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.utils.PrizeComparator;
 import lotto.utils.PrizeRate;
@@ -15,15 +15,15 @@ public class LottoOutputView {
 	private static final String DASH_LINE = "---------";
 	public static final int ZERO_POINT = 0;
 
-	public static void lottoNumbersList(List<LottoGame> resultLottoGame) {
-		for (LottoGame lottoGame : resultLottoGame) {
-			lottoGameView(lottoGame);
+	public static void lottoNumbersList(List<Lotto> resultLotto) {
+		for (Lotto lotto : resultLotto) {
+			lottoGameView(lotto);
 		}
 		System.out.print("\n");
 	}
 
-	private static void lottoGameView(LottoGame lottoGame) {
-		System.out.println(lottoGame.getLottoGame());
+	private static void lottoGameView(Lotto lotto) {
+		System.out.println(lotto.getLotto());
 	}
 
 	public static void resultLottoPrizeView(Map<Prize, Integer> resultLottoStatus, int money) {

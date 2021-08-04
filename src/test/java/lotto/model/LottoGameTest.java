@@ -6,23 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoGameTest {
 
-	@Test
-	@DisplayName("숫자로 이루어진 컬렉션을 입력하면 반환한다.")
-	public void createLottoGame() {
+	@ParameterizedTest
+	@DisplayName("로또게임들을 등록하면 게임에 관한 내용이 반환된다.")
+	@CsvSource(value = {"1,21,43", "2,8,24", "30,37,41"})
+	public void createLottoGames(int firstNumber, int secondNumber, int thirdNumber) {
+		List<Lotto> lotto = new ArrayList<>();
+		lotto.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
+		LottoGame lottoGame = new LottoGame(lotto);
+
+		assertThat(lottoGame.getLottoGame().size()).isEqualTo(1);
+		assertThat(lottoGame.getLottoGame().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
+			thirdNumber);
+	}
+
+	private Lotto getLottoGame(int firstNumber, int secondNumber, int thirdNumber) {
 		List<Integer> lottoNumbers = new ArrayList<>();
-		lottoNumbers.add(1);
-		lottoNumbers.add(13);
-		lottoNumbers.add(26);
-		lottoNumbers.add(32);
-
-		LottoGame lottoGame = new LottoGame(lottoNumbers);
-
-		assertThat(lottoGame.getLottoGame().size()).isEqualTo(4);
-		assertThat(lottoGame.getLottoGame()).containsExactly(1, 13, 26, 32);
+		lottoNumbers.add(firstNumber);
+		lottoNumbers.add(secondNumber);
+		lottoNumbers.add(thirdNumber);
+		return new Lotto(lottoNumbers);
 	}
 
 }

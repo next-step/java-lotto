@@ -5,14 +5,13 @@ import java.util.List;
 
 public class LottoGame {
 
-	private final List<Integer> lottoGame;
+	private final List<Lotto> lottoGame;
 
-	public LottoGame(List<Integer> lottoGame) {
-		this.lottoGame = lottoGame;
-		Collections.sort(this.lottoGame);
+	public LottoGame(List<Lotto> lottoGame) {
+		this.lottoGame = Collections.unmodifiableList(lottoGame);
 	}
 
-	public List<Integer> getLottoGame() {
+	public List<Lotto> getLottoGame() {
 		return lottoGame;
 	}
 }

@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.Map;
 
-import lotto.model.LottoGame;
+import lotto.model.Lotto;
 import lotto.model.LottoPurchase;
 import lotto.model.Prize;
 import lotto.service.SearchPrize;
@@ -16,11 +16,12 @@ public class LottoController {
 		int money = LottoInputView.buyRequestView();
 		LottoPurchase lottoPurchase = new LottoPurchase();
 
-		List<LottoGame> resultLottoGame = lottoPurchase.lottoTicketPurchase(money);
+		List<Lotto> resultLottoGame = lottoPurchase.lottoTicketPurchase(money);
 
 		LottoOutputView.lottoNumbersList(resultLottoGame);
 
 		String lastWinNumber = LottoInputView.lastWinLottoNumberView();
+
 		SearchPrize searchPrize = new SearchPrize();
 		Map<Prize, Integer> winPrize = searchPrize.confirmWinLottoNumber(resultLottoGame, lastWinNumber);
 		LottoOutputView.resultLottoPrizeView(winPrize, money);

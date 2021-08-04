@@ -11,7 +11,7 @@ class LottoPurchaseTest {
 	public LottoPurchase lottoPurchase;
 
 	@BeforeEach
-	void setup(){
+	void setup() {
 		lottoPurchase = new LottoPurchase();
 	}
 
