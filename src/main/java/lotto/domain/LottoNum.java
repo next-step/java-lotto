@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class LottoNum implements Comparable<LottoNum>{
 
-    private static final int MAXIMUM = 45;
-    private static final int MINIMUM = 1;
+    public static final int MAXIMUM = 45;
+    public static final int MINIMUM = 1;
     private static final Map<Integer, LottoNum> cacheMap = new HashMap<>();
 
     private int number;

@@ -47,4 +47,8 @@ public class ResultView {
         }
         return 0;
     }
+
+    public static void nothingToDo() {
+        System.out.println("금액이 부족합니다. 앱을 종료합니다.");
+    }
 }

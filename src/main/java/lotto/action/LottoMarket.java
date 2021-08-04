@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class LottoMarket {
 
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
 
     private LottoMachine machine;
     private Lotteries myLottoList;
