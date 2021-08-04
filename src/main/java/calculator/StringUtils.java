@@ -9,13 +9,7 @@ public class StringUtils {
 	public static int toInt(String value) {
 		validate(value);
 
-		int intValue = Integer.parseInt(value);
-
-		if (intValue < 0) {
-			throw new IllegalArgumentException("양수만 입력이 가능합니다.");
-		}
-
-		return intValue;
+		return new NationalNumber(value).getValue();
 	}
 
 	private static void validate(String value) {
