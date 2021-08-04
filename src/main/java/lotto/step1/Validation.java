@@ -17,7 +17,4 @@ public class Validation {
         return text.matches("[0-9]");
     }
 
-    public boolean checkCustomDelimiter() {
-        return matcher.find();
-    }
 }

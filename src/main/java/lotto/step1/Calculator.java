@@ -7,13 +7,14 @@ public class Calculator {
 
     private String text;
     private Validation validation;
+    private Delimiter delimiter;
+    private Matcher matcher;
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private Matcher matcher;
 
     public Calculator(String text) {
         this.text = text;
-        this.matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(this.text);
+        this.delimiter = new Delimiter(text);
         this.validation = new Validation(text);
     }
 
@@ -26,7 +27,7 @@ public class Calculator {
             return printNumber();
         }
 
-        if (validation.checkCustomDelimiter()) {
+        if (delimiter.checkCustomDelimiter()) {
             text = matcher.group(2);
             String delimiter = DELIMITER + "|" + matcher.group(1);
             return addNumbers(delimiter);
