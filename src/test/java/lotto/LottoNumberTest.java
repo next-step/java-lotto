@@ -47,4 +47,14 @@ public class LottoNumberTest {
                     .isBetween(1, 45);
         }
     }
+
+    @DisplayName("모든 로또 번호는 45개 번호로 이루어져 있어야 한다.")
+    @Test
+    public void getAllLottoNumbers_로또_번호는_45개() {
+        // given, when
+        List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
+
+        // then
+        assertEquals(allLottoNumbers.size(), 45);
+    }
 }
