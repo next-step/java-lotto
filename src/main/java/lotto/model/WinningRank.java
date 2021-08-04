@@ -31,10 +31,13 @@ public enum WinningRank {
     public static List<WinningRank> getWinningRanksOf(Lottos lottos, WinningNumbers winningNumbers) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int correctAnswerCount = lotto.getEqualNumberCount(winningNumbers.getNumbers());
-            WinningRank winningRank = ANSWER_COUNT_WINNING_RANK_MAP.get(correctAnswerCount);
-            winningRanks.add(winningRank);
+            winningRanks.add(getWinningRankOf(lotto, winningNumbers));
         }
         return winningRanks;
+    }
+
+    static WinningRank getWinningRankOf(Lotto lotto, WinningNumbers winningNumbers) {
+        int correctAnswerCount = lotto.getEqualNumberCount(winningNumbers.getNumbers());
+        return ANSWER_COUNT_WINNING_RANK_MAP.get(correctAnswerCount);
     }
 }
