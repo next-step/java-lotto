@@ -28,15 +28,15 @@ public enum WinningRank {
         this.winningMoneyAmount = winningMoneyAmount;
     }
 
-    public static List<WinningRank> findWinningRanksOf(Lottos lottos, WinningNumbers winningNumbers) {
+    public static List<WinningRank> findWinningRanks(Lottos lottos, WinningNumbers winningNumbers) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            winningRanks.add(findWinningRankOf(lotto, winningNumbers));
+            winningRanks.add(findWinningRank(lotto, winningNumbers));
         }
         return winningRanks;
     }
 
-    static WinningRank findWinningRankOf(Lotto lotto, WinningNumbers winningNumbers) {
+    static WinningRank findWinningRank(Lotto lotto, WinningNumbers winningNumbers) {
         int correctAnswerCount = lotto.getEqualNumberCount(winningNumbers.getNumbers());
         return ANSWER_COUNT_WINNING_RANK_MAP.get(correctAnswerCount);
     }
