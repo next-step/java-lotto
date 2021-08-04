@@ -1,27 +1,34 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
+import lotto.exception.InvalidLottoNumbersSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.exception.InvalidLottoNumbersSizeException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
 
-	@DisplayName("로또 1장은 중복되지 않는 6개의 번호를 갖는다.")
+	@DisplayName("로또 티켓 1장은 중복되지 않는 6개의 번호를 가져야 한다.")
 	@Test
 	void lottoTicketHasNonDuplicateSixNumber() {
-		LottoMachine lottoMachine = new LottoMachine();
-		LottoTicket lottoTicket = LottoTicket.from(lottoMachine.pickRandomNumbers());
+		LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 		assertThat(lottoTicket.getNumbers()).hasSize(6).doesNotHaveDuplicates();
+	}
+
+	@DisplayName("로또 번호가 중복되면 로또 티켓 생성 시 InvalidLottoNumbersSizeException 예외가 발생한다.")
+	@Test
+	void duplicateLottoNumber() {
+		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+		assertThatThrownBy(() -> LottoTicket.from(lottoNumbers))
+			.isInstanceOf(InvalidLottoNumbersSizeException.class);
 	}
 
 	@DisplayName("로또 1장 생성 시 번호가 6개가 아니면 InvalidLottoNumbersSizeException 예외가 발생한다.")

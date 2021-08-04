@@ -1,27 +1,27 @@
 package lotto.domain;
 
-import static lotto.domain.LottoPrize.*;
-import static lotto.domain.LottoTicketsTest.*;
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static lotto.domain.LottoPrize.*;
+import static lotto.domain.LottoTicketsTest.createLottoTickets;
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoPrizesTest {
 
 	@DisplayName("로또 당첨 결과를 생성한다.")
 	@Test
 	void create() {
-		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, 7);
+		LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningNumbers, 7);
 		List<LottoTicket> tickets = createLottoTickets();
 		LottoTickets lottoTickets = LottoTickets.from(tickets);
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
@@ -40,14 +40,14 @@ class LottoPrizesTest {
 	@DisplayName("구입한 금액과 구매한 로또의 당첨금으로 총 수익률을 계산한다.")
 	@MethodSource("earningsRateArguments")
 	@ParameterizedTest
-	void earningsRate(LottoPrizes lottoPrizes, int money, double earningsRate) {
-		assertThat(lottoPrizes.earningsRate(money)).isEqualTo(earningsRate);
+	void earningsRate(LottoMoney lottoMoney, LottoPrizes lottoPrizes, double earningsRate) {
+		assertThat(lottoMoney.earningsRate(lottoPrizes.winningMoney())).isEqualTo(earningsRate);
 	}
 
 	private static Stream<Arguments> earningsRateArguments() {
 		return Stream.of(
-			Arguments.of(LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 100_000, 0.55),
-			Arguments.of(LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 200_000, 10_000.25)
+			Arguments.of(new LottoMoney(100_000), LottoPrizes.from(Arrays.asList(FIFTH, FOURTH)), 0.55),
+			Arguments.of(new LottoMoney(200_000), LottoPrizes.from(Arrays.asList(FOURTH, FIRST)), 10_000.25)
 		);
 	}
 

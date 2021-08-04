@@ -37,9 +37,9 @@ public class LottoTicket {
 
 	public List<Integer> getNumbers() {
 		return lottoNumbers.stream()
-			.map(LottoNumber::getNumber)
-			.sorted()
-			.collect(collectingAndThen(toList(), Collections::unmodifiableList));
+				.map(LottoNumber::getNumber)
+				.sorted()
+				.collect(collectingAndThen(toList(), Collections::unmodifiableList));
 	}
 
 	private static void validateLottoNumbers(List<LottoNumber> numbers) {

@@ -13,8 +13,8 @@ public class WinningLottoTicket {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public static WinningLottoTicket from(WinningLottoNumbers winningLottoNumbers, int bonusNumber) {
-		return new WinningLottoTicket(LottoTicket.from(winningLottoNumbers.getWinningNumbers()), new LottoNumber(bonusNumber));
+	public static WinningLottoTicket from(LottoNumbers lottoNumbers, int bonusNumber) {
+		return new WinningLottoTicket(lottoNumbers.toLottoTicket(), new LottoNumber(bonusNumber));
 	}
 
 	public LottoPrize match(LottoTicket lottoTicket) {

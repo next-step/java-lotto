@@ -18,9 +18,9 @@ class WinningLottoTicketTest {
 	@DisplayName("로또 당첨 번호와 보너스 번호가 중복되면 InvalidBonusNumberException 예외가 발생한다.")
 	@Test
 	void invalidBonusNumber() {
-		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 		int bonusNumber = 6;
-		assertThatThrownBy(() -> WinningLottoTicket.from(winningLottoNumbers, bonusNumber))
+		assertThatThrownBy(() -> WinningLottoTicket.from(lottoNumbers, bonusNumber))
 			.isInstanceOf(InvalidBonusNumberException.class);
 	}
 
@@ -32,8 +32,8 @@ class WinningLottoTicketTest {
 	}
 
 	private static Stream<Arguments> lottoTicketMatchArguments() {
-		WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, 7);
+		LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(lottoNumbers, 7);
 
 		return Stream.of(
 			Arguments.of(winningLottoTicket, LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoPrize.FIRST),

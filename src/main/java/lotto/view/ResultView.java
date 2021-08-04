@@ -1,18 +1,18 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoPrizes;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public class ResultView {
 
-	private static final String MESSAGE_BOUGHT_LOTTO_TICKET_COUNT = "%s개를 구매했습니다.%n";
-	private static final String MESSAGE_WINNING_STATISTICS = "\n당첨 통계\n---------";
+	private static final String MESSAGE_BOUGHT_LOTTO_TICKETS_COUNT = "%n수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
+	private static final String MESSAGE_WINNING_STATISTICS = "%n당첨 통계%n---------%n";
 	private static final String MESSAGE_MATCH_COUNT_OF_PRIZE = "%d개 일치 ";
 	private static final String MESSAGE_MATCH_COUNT_OF_SECOND_PRIZE = "%d개 일치, 보너스 볼 일치 ";
 	private static final String MESSAGE_PRIZE_MONEY_OF_PRIZE = "(%,d원) - ";
@@ -26,14 +26,18 @@ public class ResultView {
 	private ResultView() {
 	}
 
+	public static void showLottoTicketsCount(int totalAvailableLottoTicketsCount, int manualLottoTicketsCount) {
+		int autoLottoTicketsCount = totalAvailableLottoTicketsCount - manualLottoTicketsCount;
+		System.out.printf(MESSAGE_BOUGHT_LOTTO_TICKETS_COUNT, manualLottoTicketsCount, autoLottoTicketsCount);
+	}
+
 	public static void showLottoTickets(LottoTickets lottoTickets) {
 		List<LottoTicket> tickets = lottoTickets.getTickets();
-		System.out.printf(MESSAGE_BOUGHT_LOTTO_TICKET_COUNT, tickets.size());
 		tickets.forEach(lottoTicket -> System.out.println(lottoTicket.getNumbers()));
 	}
 
 	public static void showLottoPrizes(LottoPrizes totalLottoPrizes) {
-		System.out.println(MESSAGE_WINNING_STATISTICS);
+		System.out.printf(MESSAGE_WINNING_STATISTICS);
 		Arrays.stream(LottoPrize.values())
 			.filter(lottoPrize -> !lottoPrize.isNone())
 			.sorted(Comparator.comparingInt(LottoPrize::prizeMoney))
@@ -70,5 +74,4 @@ public class ResultView {
 		}
 		System.out.printf(message, lottoPrize.matchCount());
 	}
-
 }

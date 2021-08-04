@@ -1,27 +1,29 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoPrizes;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningLottoNumbers;
-import lotto.domain.WinningLottoTicket;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoMain {
 
 	public static void main(String[] args) {
-		int money = InputView.inputMoney();
+		LottoMoney lottoMoney = InputView.inputMoney();
+		int manualLottoTicketsCount = InputView.inputManualLottoTicketsCount();
+		List<LottoNumbers> manualLottoTicketNumbers = InputView.inputManualLottoNumbers(manualLottoTicketsCount);
+
 		LottoMachine lottoMachine = new LottoMachine();
-		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(money);
+		LottoTickets lottoTickets = lottoMachine.issueLottoTickets(lottoMoney, manualLottoTicketNumbers);
+		ResultView.showLottoTicketsCount(lottoMoney.availableLottoTicketsCount(), manualLottoTicketsCount);
 		ResultView.showLottoTickets(lottoTickets);
 
-		WinningLottoNumbers winningLottoNumbers = InputView.inputWinningNumbers();
+		LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
 		int bonusNumber = InputView.inputBonusNumber();
 		WinningLottoTicket winningLottoTicket = WinningLottoTicket.from(winningLottoNumbers, bonusNumber);
 		LottoPrizes lottoPrizes = lottoTickets.getLottoPrizes(winningLottoTicket);
 		ResultView.showLottoPrizes(lottoPrizes);
-		ResultView.showEarningsRate(lottoPrizes.earningsRate(money));
+		ResultView.showEarningsRate(lottoMoney.earningsRate(lottoPrizes.winningMoney()));
 	}
 
 }
