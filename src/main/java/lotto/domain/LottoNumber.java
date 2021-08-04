@@ -6,7 +6,7 @@ import lotto.Message.Message;
 
 public class LottoNumber implements Comparator<LottoNumber> {
 
-  private int number;
+  private final int number;
   
   public static final int LIMIT_NUMBER = 45;
 
@@ -18,10 +18,11 @@ public class LottoNumber implements Comparator<LottoNumber> {
   }
 
   public LottoNumber() {
+    number = 0;
   }
 
   public int getNumber() {
-    return number;
+    return this.number;
   }
 
   @Override
