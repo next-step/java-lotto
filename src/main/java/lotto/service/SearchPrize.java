@@ -1,5 +1,6 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -8,54 +9,61 @@ import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
-import lotto.validation.DuplicateNumberValidation;
-import lotto.validation.EmptyCheckValidation;
-import lotto.validation.LottoSizeValidation;
-import lotto.validation.NumberTypeValidation;
+import lotto.utils.ErrorMessage;
 
 public class SearchPrize {
 
-	public static final String LAST_WIN_NUMBER_REGEX = ",";
+	private static final String LAST_WIN_NUMBER_REGEX = ",";
+	private static final String INT_REG_EXP = "^\\d+$";
+	private static final int LOTTO_LENGTH = 6;
 
-	public WinPrizes confirmWinLottoNumber(List<Lotto> lottoGame, String lastWinNumber) {
-		EmptyCheckValidation.validEmptyCheck(lastWinNumber);
-		return drawWinPrize(lottoGame, getLastWinNumbers(lastWinNumber));
-	}
-
-	private List<Integer> getLastWinNumbers(String lastWinNumber) {
+	public static WinPrizes confirmWinLottoNumber(List<Lotto> lottoGame, String lastWinNumber) {
+		validEmptyCheck(lastWinNumber);
 		String[] lastWinNumbers = lastWinNumber.split(LAST_WIN_NUMBER_REGEX);
-		LottoSizeValidation.validLottoSizeCheck(lastWinNumbers);
-		return Arrays.stream(lastWinNumbers)
-			.map(this::toInt)
-			.collect(Collectors.toList());
+		validLottoSizeCheck(lastWinNumbers);
+		List<Integer> lottoNumbers = new ArrayList<>();
+		for (String lottoNumber : lastWinNumbers) {
+			validNumberTypeCheck(lottoNumber.trim());
+			Integer integer = Integer.parseInt(lottoNumber.trim());
+			lottoNumbers.add(integer);
+		}
+		validDuplicateNumberCheck(lottoNumbers);
+		return drawWinPrize(lottoGame, lottoNumbers);
 	}
 
-	private Integer toInt(String value) {
-		NumberTypeValidation.validNumberTypeCheck(value.trim());
-		return Integer.parseInt(value.trim());
-	}
-
-	public WinPrizes drawWinPrize(List<Lotto> lottoGame, List<Integer> lastWinNumbers) {
-		Map<Prize, Integer> winPrizes = setupWinCondition();
-		DuplicateNumberValidation.validDuplicateNumberCheck(lastWinNumbers);
+	private static WinPrizes drawWinPrize(List<Lotto> lottoGame, List<Integer> lastWinNumbers) {
+		Map<Prize, Integer> winPrizes = Arrays.stream(Prize.values())
+			.collect(Collectors.toMap(winnerResult -> winnerResult, winnerResult -> 0, (a, b) -> b));
 		for (Lotto lotto : lottoGame) {
-			Prize winnersStatus = getLottoMatch(lastWinNumbers, lotto);
+			Prize winnersStatus = Prize.getWinnersStatus(
+				(int)lotto.getLotto().stream().filter(lastWinNumbers::contains).count());
 			winPrizes.put(winnersStatus, winPrizes.get(winnersStatus) + 1);
 		}
 		return new WinPrizes(winPrizes);
 	}
 
-	private Map<Prize, Integer> setupWinCondition() {
-		return Arrays.stream(Prize.values())
-			.collect(Collectors.toMap(winnerResult -> winnerResult, winnerResult -> 0, (a, b) -> b));
+	private static void validLottoSizeCheck(String[] value) {
+		if (value.length != LOTTO_LENGTH) {
+			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
+		}
 	}
 
-	private Prize getLottoMatch(List<Integer> lastWinNumbers, Lotto lotto) {
-		return Prize.getWinnersStatus(
-			getMatchLottoStatus(lotto.getLotto(), lastWinNumbers));
+	private static void validEmptyCheck(String lastWinNumber) {
+		if (lastWinNumber.isEmpty()) {
+			throw new IllegalArgumentException(ErrorMessage.EMPTY_ERROR_MESSAGE);
+		}
 	}
 
-	private int getMatchLottoStatus(List<Integer> lottoGame, List<Integer> lastWinNumbers) {
-		return (int)lottoGame.stream().filter(lastWinNumbers::contains).count();
+	private static void validNumberTypeCheck(String value) {
+		if (!value.matches(INT_REG_EXP)) {
+			throw new IllegalArgumentException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
+		}
 	}
+
+	private static void validDuplicateNumberCheck(List<Integer> values) {
+		if (values.size() != values.stream().distinct().count()) {
+			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
+		}
+	}
+
 }
