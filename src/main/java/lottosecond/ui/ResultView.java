@@ -38,7 +38,7 @@ public class ResultView {
 		LottoResult lottoResult = new LottoResult(lottos);
 		lottoResult.match(winningNumbers, bonusNumber);
 
-		printResultEach(lottoResult.value());
+		printResultEach(lottoResult);
 		printResultRate(lottoResult);
 	}
 
@@ -47,8 +47,9 @@ public class ResultView {
 		System.out.printf(PROFIT_RATE_MESSAGE, String.format("%.2f", rate));
 	}
 
-	private void printResultEach(Map<LottoProfit, Integer> match) {
-		for (Map.Entry<LottoProfit, Integer> profit : match.entrySet()) {
+	private void printResultEach(LottoResult lottoResult) {
+		Map<LottoProfit, Integer> result = lottoResult.value();
+		for (Map.Entry<LottoProfit, Integer> profit : result.entrySet()) {
 			System.out.printf(messageTemplate(profit), profit.getKey().getQuantity(), profit.getKey().getProfitUnit(), profit.getValue());
 		}
 	}

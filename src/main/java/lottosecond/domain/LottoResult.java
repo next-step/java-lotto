@@ -1,9 +1,6 @@
 package lottosecond.domain;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResult {
 
@@ -93,7 +90,7 @@ public class LottoResult {
 	}
 
 	public Map<LottoProfit, Integer> value() {
-		return result;
+		return Collections.unmodifiableMap(result);
 	}
 
 }
