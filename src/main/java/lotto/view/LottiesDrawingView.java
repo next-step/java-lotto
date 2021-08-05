@@ -7,7 +7,7 @@ import lotto.service.LotteryDraw;
 public class LottiesDrawingView {
 
   public LottiesDrawingView(LotteryDraw lotteryDraw) {
-    lotteryDraw.getLotteriesInfo().getLotteries()
+    lotteryDraw.getLotteriesInfo().getLottos()
         .stream()
         .map(lotty -> lotty.getLotto()
             .stream()

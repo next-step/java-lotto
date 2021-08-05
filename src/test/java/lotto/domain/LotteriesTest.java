@@ -30,6 +30,6 @@ class LotteriesTest {
 
     createLotteries.invoke(lotteries, count, values);
 
-    assertThat(lotteries.getLotteries().size()).isEqualTo(count);
+    assertThat(lotteries.getLottos().size()).isEqualTo(count);
   }
 }

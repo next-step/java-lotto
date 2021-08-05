@@ -9,7 +9,7 @@ public class Lotteries {
 
   private static final int INT_ZERO = 0;
 
-  private final List<Lotto> lotteries = new ArrayList<>();
+  private final List<Lotto> lottos = new ArrayList<>();
 
   public Lotteries(int count, final List<Integer> numberPull) {
     createLotteries(count, numberPull);
@@ -19,14 +19,14 @@ public class Lotteries {
 
   }
 
-  public List<Lotto> getLotteries() {
-    return lotteries;
+  public List<Lotto> getLottos() {
+    return lottos;
   }
 
   private void createLotteries(int count,List<Integer> numberPull) {
     range(INT_ZERO, count)
         .mapToObj(i -> new Lotto(numberPull))
-        .forEach(lotteries::add);
+        .forEach(lottos::add);
   }
 
   public int getMatchLotteries(Lotto lotty, Lotto winLotto) {

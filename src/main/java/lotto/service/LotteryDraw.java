@@ -60,7 +60,7 @@ public class LotteryDraw {
   public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotteries, Lotto winLotto) {
 
     Map<Integer, List<Lotto>> categoriesRank = createRatingInfo();
-    lotteries.getLotteries().forEach(
+    lotteries.getLottos().forEach(
         lotty -> categoriesRank.get(matchLottoRating(winLotto, lotty)).add(lotty));
 
     categoriesRank.remove(INT_ZERO);
