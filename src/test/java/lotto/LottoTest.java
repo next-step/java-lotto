@@ -129,4 +129,12 @@ public class LottoTest {
         int autoLottoCount = PlayLotto.calculateAutoLottoCount(cash, manualLottoCount);
         assertThat(autoLottoCount).isEqualTo(11);
     }
+
+    @Test
+    @DisplayName("수동 로또 생성")
+    void createManualLottoTest() {
+        List<String> manualLottoNumbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+        List<Lotto> manualLottos = PlayLotto.createManualLotto(manualLottoNumbers);
+        assertThat(manualLottos.size()).isEqualTo(3);
+    }
 }

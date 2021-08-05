@@ -6,6 +6,7 @@ import lotto.domain.LottoPrize;
 import lotto.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PlayLotto {
@@ -37,7 +38,7 @@ public class PlayLotto {
         return lottos;
     }
 
-    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos){
+    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos) {
         Lotto winningLotto = createWinningLotto(winningNumberString, bonusNumber);
         int[] winningArray = new int[WINNING_TOTAL_INDEX];
         for (Lotto lotto : lottos) {
@@ -47,9 +48,13 @@ public class PlayLotto {
     }
 
     private static Lotto createWinningLotto(String winningNumberString, int bonusNumber) {
-        List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumberList);
+        LottoNumbers winningLottoNumbers = createLottoNumbers(winningNumberString);
         return new Lotto(winningLottoNumbers, bonusNumber);
+    }
+
+    private static LottoNumbers createLottoNumbers(String winningNumberString) {
+        List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
+        return new LottoNumbers(winningNumberList);
     }
 
 
@@ -64,5 +69,13 @@ public class PlayLotto {
     private static int calculate(int winningIndex, int count) {
         LottoPrize lottoPrize = LottoPrize.findLottoPrizeOfPrize(winningIndex);
         return lottoPrize.calculate(count);
+    }
+
+    public static List<Lotto> createManualLotto(List<String> manualLottoNumbers) {
+        List<Lotto> manualLottos = new LinkedList<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            manualLottos.add(new Lotto(createLottoNumbers(manualLottoNumber)));
+        }
+        return manualLottos;
     }
 }
