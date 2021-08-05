@@ -10,6 +10,5 @@ public class LottoApp {
         System.out.println(lastLottoNum);
 
         LottoMachine lottoMachine = new LottoMachine(lastLottoNum);
-
     }
 }

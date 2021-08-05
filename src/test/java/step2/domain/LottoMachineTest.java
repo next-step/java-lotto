@@ -3,6 +3,8 @@ package step2.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +17,10 @@ class LottoMachineTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-
+    @Test
+    void 로또_발행() {
+        LottoMachine lottoMachine = new LottoMachine();
+        System.out.println(Arrays.toString(lottoMachine.issueLotto()));
+    }
 
 }
