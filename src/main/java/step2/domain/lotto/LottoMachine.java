@@ -20,7 +20,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.create(new LottoNumber(numberStrategy.createNumbers())));
+            lottos.add(Lotto.create(numberStrategy.createNumbers()));
         }
 
         return lottos;

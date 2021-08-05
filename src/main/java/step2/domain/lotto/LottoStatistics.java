@@ -8,11 +8,11 @@ public class LottoStatistics {
     private static final Integer MINIMAL_SUCCESS_NUMBER = 3;
 
     private final ResultOfLottos resultOfLottos;
-    private final LottoNumber winOfLottoNumber;
+    private final Lotto winOfLottoNumber;
 
     private final Profit profit;
 
-    public LottoStatistics(LottoNumber winOfLottoNumber, List<Lotto> lottos, ResultOfLottos resultOfLottos) {
+    public LottoStatistics(Lotto winOfLottoNumber, List<Lotto> lottos, ResultOfLottos resultOfLottos) {
         this.winOfLottoNumber = winOfLottoNumber;
         this.resultOfLottos = resultOfLottos;
 
@@ -22,8 +22,7 @@ public class LottoStatistics {
 
     private void lottoOfStatistics(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            List<Integer> numbers = lotto.numbers().getNumbers();
-            calculateLottoResult(winOfLottoNumber.correctCount(numbers));
+            calculateLottoResult(winOfLottoNumber.correctCount(lotto.numbers()));
         }
     }
 

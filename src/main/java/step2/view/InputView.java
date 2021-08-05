@@ -1,6 +1,6 @@
 package step2.view;
 
-import java.util.List;
+import step2.domain.lotto.Lotto;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,13 +16,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputWinOfLottoNumber() {
+    public static Lotto inputWinOfLottoNumber() {
         System.out.println(NUMBER_OF_LOTTO);
         String winOfLottoNum = scanner.next();
 
-        return Stream.of(winOfLottoNum.split(","))
+        return new Lotto(Stream.of(winOfLottoNum.split(","))
             .map(Integer::parseInt)
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
     }
 
 

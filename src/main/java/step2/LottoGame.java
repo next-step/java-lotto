@@ -3,7 +3,6 @@ package step2;
 import step2.domain.ResultOfLottos;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoMachine;
-import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoStatistics;
 import step2.domain.lotto.RandomStrategy;
 import step2.domain.money.Cache;
@@ -28,10 +27,8 @@ public class LottoGame {
         ResultView.printCount(user.getLottos());
         ResultView.printLottos(user.getLottos());
 
-        List<Integer> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
+        Lotto winOfLottoNumbers = InputView.inputWinOfLottoNumber();
 
-        LottoNumber winOfLottoNumber = new LottoNumber(winOfLottoNumbers);
-
-        ResultView.printLottoStatistics(new LottoStatistics(winOfLottoNumber, user.getLottos(), new ResultOfLottos()));
+        ResultView.printLottoStatistics(new LottoStatistics(winOfLottoNumbers, user.getLottos(), new ResultOfLottos()));
     }
 }

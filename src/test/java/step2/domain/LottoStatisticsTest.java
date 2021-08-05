@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoMachine;
-import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoRank;
 import step2.domain.lotto.LottoStatistics;
 import step2.domain.lotto.Profit;
@@ -18,11 +17,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoStatisticsTest {
 
-    private LottoNumber winOfLottoNumber;
+    private Lotto winOfLottoNumber;
 
     @BeforeEach
     void setUp() {
-        winOfLottoNumber = new LottoNumber(Arrays.asList(3, 4, 5, 1, 2, 10));
+        winOfLottoNumber = new Lotto(Arrays.asList(3, 4, 5, 1, 2, 10));
     }
 
     @Test
