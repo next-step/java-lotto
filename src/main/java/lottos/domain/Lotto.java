@@ -9,32 +9,32 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int COUNT_OF_LOTTO = 6;
-    private List<Integer> elements;
+    private List<Integer> numbers;
 
     public Lotto(LottoGenerator generator) {
-        this.elements = generator.generate();
+        this.numbers = generator.generate();
     }
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() != COUNT_OF_LOTTO) {
             throw new LottoSizeIncorrectException();
         }
-        this.elements = numbers;
+        this.numbers = numbers;
     }
 
-    public List<Integer> getElements() {
-        return Collections.unmodifiableList(elements);
+    public List<Integer> elements() {
+        return Collections.unmodifiableList(numbers);
     }
 
-    public Result match(Lotto lotto) {
-        int countOfMatchers = (int) (lotto.getElements()
+    public LottoResult match(Lotto lotto) {
+        int countOfMatchers = (int) (lotto.elements()
                 .stream()
-                .filter(elements::contains)
+                .filter(numbers::contains)
                 .count());
-        return new Result(WinningPrize.findByNumberOfMatchers(countOfMatchers));
+        return new LottoResult(Prize.findByNumberOfMatchers(countOfMatchers));
     }
 
-    public List<Result> match(List<Lotto> lottos) {
+    public List<LottoResult> match(List<Lotto> lottos) {
         return lottos.stream()
                 .map(this::match)
                 .collect(Collectors.toList());

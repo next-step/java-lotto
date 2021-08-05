@@ -1,6 +1,5 @@
 package lottos.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,14 +14,17 @@ public class Shop {
         this.amountPerPiece = amountPerPiece;
     }
 
-    public List<Lotto> issue(int purchaseAmount) {
-        return new ArrayList<>(this.calculate(purchaseAmount));
-    }
+    public Lottos issue(final int purchaseAmount) {
+        int purchaseCount = calculatePurchaseCount(purchaseAmount);
 
-    private List<Lotto> calculate(final int purchaseAmount) {
-        int count = purchaseAmount / amountPerPiece;
-        return IntStream.range(0, count)
+        List<Lotto> lottos = IntStream.range(0, purchaseCount)
                 .mapToObj(r -> new Lotto(generator))
                 .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    private int calculatePurchaseCount(int purchaseAmount) {
+        return purchaseAmount / amountPerPiece;
     }
 }

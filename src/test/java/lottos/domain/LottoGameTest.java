@@ -19,9 +19,9 @@ class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = {100, 1000, 14000, 30000})
     void 로또_랜덤_게임_시작(final int purchaseAmount) {
-        LottoGame lottoGame = new LottoGame(new LottoRandomGenerator());
-        List<Lotto> lottos = lottoGame.start(purchaseAmount, AMOUNT_PER_PIECE);
-        assertEquals(lottos.size(), purchaseAmount / AMOUNT_PER_PIECE);
+        LottoGame lottoGame = new LottoGame();
+        Lottos lottos = lottoGame.start(purchaseAmount, AMOUNT_PER_PIECE);
+        assertEquals(lottos.elements().size(), purchaseAmount / AMOUNT_PER_PIECE);
     }
 
     @ParameterizedTest
@@ -36,12 +36,12 @@ class LottoGameTest {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
-        List<Result> results = winningLotto.match(lottos);
-        Result result = results.stream()
+        List<LottoResult> lottoResults = winningLotto.match(lottos);
+        LottoResult lottoResult = lottoResults.stream()
                 .findFirst()
                 .orElseThrow(RuntimeException::new);
 
         //then
-        assertEquals(result.getWinningPrize(), WinningPrize.findByNumberOfMatchers(count));
+        assertEquals(lottoResult.getPrize(), Prize.findByNumberOfMatchers(count));
     }
 }

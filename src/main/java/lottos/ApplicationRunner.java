@@ -3,11 +3,14 @@ package lottos;
 
 import lottos.controller.LottoConsoleController;
 import lottos.domain.Lotto;
-import lottos.domain.Result;
+import lottos.domain.LottoResult;
+import lottos.domain.Lottos;
 import lottos.domain.Statistics;
-import lottos.view.LottoConsoleView;
+import lottos.view.LottoConsoleInputView;
+import lottos.view.LottoConsoleOutputView;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class ApplicationRunner {
 
@@ -15,18 +18,21 @@ public class ApplicationRunner {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
+        LottoConsoleInputView lottoConsoleInputView = new LottoConsoleInputView();
+        LottoConsoleOutputView lottoConsoleOutputView = new LottoConsoleOutputView();
         LottoConsoleController lottoConsoleController = new LottoConsoleController();
 
-        List<Lotto> purchaseLottos = lottoConsoleController.buy(AMOUNT_PER_PIECE);
+        int purchaseAmount = lottoConsoleInputView.enterPurchaseAmount(scanner, AMOUNT_PER_PIECE);
+        Lottos purchaseLottos = lottoConsoleController.buy(purchaseAmount, AMOUNT_PER_PIECE);
+        lottoConsoleOutputView.printLottos(purchaseLottos);
 
-        LottoConsoleView lottoConsoleView = new LottoConsoleView();
-        lottoConsoleView.printLottos(purchaseLottos);
+        String lastWeeksNumberText = lottoConsoleInputView.enterLastWeeksNumbers(scanner);
+        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto(lastWeeksNumberText);
+        List<LottoResult> lottoResults = purchaseLottos.match(lastWeekWiningLotto);
+        lottoConsoleOutputView.printStatistics(new Statistics(purchaseAmount, lottoResults));
 
-        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto();
-
-        final int purchaseAmount = purchaseLottos.size() * AMOUNT_PER_PIECE;
-        List<Result> results = lastWeekWiningLotto.match(purchaseLottos);
-
-        lottoConsoleView.printStatistics(new Statistics(purchaseAmount, results));
+        scanner.close();
     }
 }

@@ -1,17 +1,15 @@
 package lottos.domain;
 
-import java.util.List;
 
 public class LottoGame {
 
-    private LottoGenerator generator;
+    public LottoGame() {
 
-    public LottoGame(LottoGenerator generator) {
-        this.generator = generator;
     }
 
-    public List<Lotto> start(int purchaseAmount, int pricePerPiece) {
-        Shop shop = new Shop(generator, pricePerPiece);
+    public Lottos start(int purchaseAmount, int amountPerPiece) {
+
+        Shop shop = new Shop(new LottoRandomGenerator(), amountPerPiece);
         return shop.issue(purchaseAmount);
     }
 }
