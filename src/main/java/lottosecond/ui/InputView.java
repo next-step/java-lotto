@@ -19,22 +19,28 @@ public class InputView {
 		this.money = Integer.parseInt(scanner.nextLine());
 	}
 
-	public int getMoney() {
-		return money;
-	}
+
 
 	public void inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
 		winningNumbers = scanner.nextLine();
 	}
 
+	public void inputBonusNumber() {
+		System.out.println(BONUS_NUMBER);
+		this.bonusNumber = Integer.parseInt(scanner.nextLine());
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
 	public String getWinningNumbers() {
 		return winningNumbers;
 	}
 
-	public void inputBonusNumber() {
-		System.out.println(BONUS_NUMBER);
-		this.bonusNumber = Integer.parseInt(scanner.nextLine());
+	public int getBonusNumber() {
+		return bonusNumber;
 	}
 
 }
