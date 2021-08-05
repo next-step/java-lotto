@@ -46,4 +46,8 @@ public class Lotto {
 		return numbers().toString();
 	}
 
+	public boolean hasBonus(int bonusNumber) {
+		return numbers.contains(LottoNumber.valueOf(bonusNumber));
+	}
+
 }

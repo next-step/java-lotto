@@ -87,6 +87,29 @@ class LottoTest {
 		);
 	}
 
+
+
+	@ParameterizedTest(name = "보너스 번호 포함여부 {index} [{arguments}]")
+	@MethodSource("matchBonusNumber")
+	@DisplayName("보너스 번호 포함여부")
+	void match_bonus(Set<LottoNumber> lottoNumbers, int bonusNumber, boolean expected) throws Exception {
+		//given
+		Lotto lotto = new Lotto(lottoNumbers);
+
+		//when
+		boolean actual = lotto.hasBonus(bonusNumber);
+
+		//then
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	private static Stream<Arguments> matchBonusNumber() {
+		return Stream.of(
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, true),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 7, false)
+		);
+	}
+
 	private static Set<LottoNumber> toSet(List<Integer> list) {
 		return list.stream().map(LottoNumber::valueOf).collect(Collectors.toCollection(TreeSet::new));
 	}
