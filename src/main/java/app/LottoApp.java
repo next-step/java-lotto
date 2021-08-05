@@ -20,6 +20,11 @@ public class LottoApp {
     private static void buyLotto() {
         Money money = InputView.inputMoney();
 
+        if(money.getMoney() < LottoMarket.PRICE){
+            ResultView.nothingToDo();
+            return;
+        }
+
         Lotteries myLottoList = Lotteries.create();
 
         LottoMarket market = new LottoMarket(LottoMachine.of(new RandomLottoNum()),

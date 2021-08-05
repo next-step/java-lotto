@@ -30,8 +30,6 @@ public class InputView {
                 String errorMsg = e.getMessage();
                 if (errorMsg.contains(NEGATIVE_SYMBOL)) {
                     System.out.println("잘못된 금액입니다. 다시 입력해 주세요.");
-                } else {
-                    System.out.println("로또 1장이상(" + LottoMarket.PRICE + "원)의 금액을 입력해야 합니다.");
                 }
             }
         }
