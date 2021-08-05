@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.message.Message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ class LottoMoneyTest {
   void 최소금액제한() {
     assertThatThrownBy(
         ()-> new LottoMoney(-1)
-    ).isInstanceOf(IllegalArgumentException.class);
+    ).isInstanceOf(IllegalArgumentException.class)
+        .hasMessage(Message.MSG_ERROR_LIMIT_MONEY);
   }
 }

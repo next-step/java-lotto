@@ -8,13 +8,19 @@ public class LottoNumber implements Comparator<LottoNumber> {
 
   private final int number;
   
-  public static final int LIMIT_NUMBER = 45;
+  public static final int LIMIT_MAX_NUMBER = 45;
 
-  public LottoNumber(int number) {
-    if(number > LIMIT_NUMBER){
+  public static final int LIMIT_MIN_NUMBER = 0;
+
+  public LottoNumber(final int number) {
+    if(isWrongNumber(number)){
       throw new IllegalArgumentException(Message.MSG_ERROR_LIMIT_LOTTO_NUMBER);
     }
     this.number = number;
+  }
+
+  private boolean isWrongNumber(final int number) {
+    return number > LIMIT_MAX_NUMBER || number < LIMIT_MIN_NUMBER;
   }
 
   public LottoNumber() {

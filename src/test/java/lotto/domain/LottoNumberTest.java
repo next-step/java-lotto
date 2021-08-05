@@ -10,7 +10,7 @@ class LottoNumberTest {
 
   @DisplayName("로또번호 입력 최대값 검증.")
   @ParameterizedTest
-  @ValueSource(ints = {46,47,100,1000})
+  @ValueSource(ints = {46,47,100,1000,-1,-10})
   void 로또한자리최대번호값검증(int input) {
     assertThatThrownBy(
         ()->new LottoNumber(input))
