@@ -1,6 +1,7 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class LotteryDraw {
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
-    return Lotteries.getWinningLotto(winningLottery.trim().split(SPLIT_MARK));
+    return Lotteries.getWinningLotto(new ArrayList<>(Arrays.asList(winningLottery.trim().split(SPLIT_MARK))));
   }
 
   public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotteries, Lotto winLotto) {

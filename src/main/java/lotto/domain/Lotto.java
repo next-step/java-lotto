@@ -25,9 +25,9 @@ public class Lotto  implements Comparator<LottoNumber> {
     creatLotte(generateLottoNumber);
   }
 
-  public Lotto(String[] winScoreArray) {
+  public Lotto(List<String> winningNumbers) {
 
-    for (String score : winScoreArray) {
+    for (String score : winningNumbers) {
       checkDuplicateNumbers(Integer.parseInt(score.trim()));
       lotto.add(new LottoNumber(Integer.parseInt(score.trim())));
     }

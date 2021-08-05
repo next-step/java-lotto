@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,8 +64,8 @@ class LotteTest {
   @ParameterizedTest
   @CsvSource(value = {"1:1:1:1:1:1","1:2:3:4:4:5"})
   void 동일로또번호방지(String input) {
-
-    assertThatThrownBy(()->new Lotto(input.split(":"))).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> new Lotto(new ArrayList<>(Arrays.asList(input.split(":")))))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   private List<Integer> createTestLotto(int num1, int num2, int num3, int num4, int num5,

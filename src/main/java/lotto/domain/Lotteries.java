@@ -37,7 +37,7 @@ public class Lotteries {
     return count;
   }
 
-  public static Lotto getWinningLotto(String[] inputValues) {
+  public static Lotto getWinningLotto(List<String> inputValues) {
     return new Lotto(inputValues);
   }
 }
