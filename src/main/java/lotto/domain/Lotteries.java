@@ -10,7 +10,7 @@ public class Lotteries {
 
   private static final int INT_ZERO = 0;
 
-  private List<Lotto> lotteries = new ArrayList<>();
+  private final List<Lotto> lotteries = new ArrayList<>();
 
   public Lotteries() {
   }

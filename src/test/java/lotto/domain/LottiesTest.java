@@ -18,7 +18,7 @@ class LottiesTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 2, 3, 4})
   void 입력한만큼로또생성(int count) {
-    Lotteries lotties = new Lotteries();
+    Lotteries lotteries = new Lotteries();
     List<Integer> testLotto = new ArrayList<>();
     testLotto.add(1);
     testLotto.add(2);
@@ -28,14 +28,14 @@ class LottiesTest {
     testLotto.add(6);
 
     try {
-      Method createLotties = lotties.getClass()
-          .getDeclaredMethod("createLotties", int.class, GenerateLottoNumber.class);
-      createLotties.setAccessible(true);
+      Method createLotteries = lotteries.getClass()
+          .getDeclaredMethod("createLotteries", int.class, GenerateLottoNumber.class);
+      createLotteries.setAccessible(true);
 
       GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
-      createLotties.invoke(lotties, count, generateLottoNumber);
+      createLotteries.invoke(lotteries, count, generateLottoNumber);
 
-      assertThat(lotties.getLotteries().size()).isEqualTo(count);
+      assertThat(lotteries.getLotteries().size()).isEqualTo(count);
     } catch (NoSuchMethodException e) {
       e.printStackTrace();
     } catch (InvocationTargetException e) {
