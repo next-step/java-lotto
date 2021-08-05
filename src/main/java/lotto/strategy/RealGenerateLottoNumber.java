@@ -1,9 +1,8 @@
 package lotto.strategy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
 
 public class RealGenerateLottoNumber implements GenerateLottoNumber{
 
@@ -15,8 +14,12 @@ public class RealGenerateLottoNumber implements GenerateLottoNumber{
   }
 
   @Override
-  public List<LottoNumber> createNumberPull() {
-    return IntStream.range(START, END)
-        .mapToObj(i -> new LottoNumber(i)).collect(Collectors.toList());
+  public List<Integer> createNumberPull() {
+    List<Integer> numbers = new ArrayList<>();
+    for(int i = START; i < END; i++){
+      numbers.add(i);
+    }
+    Collections.shuffle(numbers);
+    return numbers;
   }
 }

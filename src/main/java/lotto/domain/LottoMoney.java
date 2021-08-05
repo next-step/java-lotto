@@ -2,8 +2,8 @@ package lotto.domain;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import lotto.service.Operation;
 import lotto.message.Message;
+import lotto.service.Operation;
 
 public class LottoMoney {
 

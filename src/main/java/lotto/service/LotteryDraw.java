@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.message.Message;
-import lotto.strategy.GenerateLottoNumber;
 
 public class LotteryDraw {
 
@@ -43,9 +43,9 @@ public class LotteryDraw {
     return lottoMoney.calculateMoney("/", EACH_LOTTO_COST);
   }
 
-  public void buyLotteries(GenerateLottoNumber generateLottoNumber) {
+  public void buyLotteries(final List<Integer> numberPull) {
     checkInputValue();
-    lotteries = new Lotteries(getNumberOfLotto(), generateLottoNumber);
+    lotteries = new Lotteries(getNumberOfLotto(),numberPull);
   }
 
   public Lotteries getLotteriesInfo() {
@@ -53,7 +53,8 @@ public class LotteryDraw {
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
-    return Lotteries.getWinningLotto(new ArrayList<>(Arrays.asList(winningLottery.trim().split(SPLIT_MARK))));
+    return Lotteries.getWinningLotto(Arrays.stream(winningLottery.trim().split(SPLIT_MARK))
+        .map(Integer::parseInt).collect(Collectors.toList()));
   }
 
   public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotteries, Lotto winLotto) {
@@ -89,16 +90,13 @@ public class LotteryDraw {
   }
 
   public String gradingScore(Map<Integer, List<Lotto>> result) {
-
-    int totalWinningRewards = INT_ZERO;
-
-    for (Integer ratingNumber : result.keySet()) {
-      totalWinningRewards += Operation.chooseOperation("*")
-          .calculation(result.get(ratingNumber).size(),
-              Rank.matchRank(ratingNumber).getWinningMoney());
-    }
-
-    return lottoMoney.getReward(totalWinningRewards);
+    return lottoMoney.getReward(result.keySet()
+        .stream()
+        .mapToInt(
+            ratingNumber -> Operation.chooseOperation("*")
+                .calculation(result.get(ratingNumber).size(),
+                    Rank.matchRank(ratingNumber).getWinningMoney()))
+        .sum());
   }
 
 }

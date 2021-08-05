@@ -1,15 +1,16 @@
 package lotto.domain;
 
+import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.strategy.GenerateLottoNumber;
-import lotto.strategy.TestGenerateLottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,42 +18,65 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LotteTest {
 
-  @DisplayName("1~45 로또번호 리스트 생성 테스트.")
+  @DisplayName("6개의 번호로 로또 생성 테스트.")
   @Test
-  void 로또번호리스트생성() {
+  void 로또번호생성() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    List<Integer> values = new ArrayList<>();
+    range(1, 7).forEach(values::add);
 
-    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(1,46);
+    Lotto lotto = new Lotto();
 
-    List<LottoNumber> numberPull = generateLottoNumber.createNumberPull();
+    Method creatLotteNumber = lotto.getClass()
+        .getDeclaredMethod("creatLotteNumber", List.class);
+    creatLotteNumber.setAccessible(true);
+    creatLotteNumber.invoke(lotto, values);
 
-    assertThat(numberPull.size()).isEqualTo(45);
+    assertThat(lotto.getLotto().size()).isEqualTo(6);
+  }
 
-    assertThat(numberPull
+  @DisplayName("로또번호 목록에서 6개를 담아서 정렬되는지 테스트")
+  @Test
+  void 로또번호정렬() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    List<Integer> values = new ArrayList<>();
+    range(1, 7).forEach(values::add);
+
+    Lotto lotto = new Lotto();
+
+    Method creatLotteNumber = lotto.getClass()
+        .getDeclaredMethod("creatLotteNumber", List.class);
+    creatLotteNumber.setAccessible(true);
+    creatLotteNumber.invoke(lotto, values);
+
+    assertThat(lotto.getLotto()
         .stream()
         .map(LottoNumber::getNumber)
         .findFirst()
         .get()).isEqualTo(1);
 
-    assertThat(numberPull
+    assertThat(lotto.getLotto()
         .stream()
-        .skip(numberPull.size()-1)
+        .skip(lotto.getLotto().size() - 1)
         .map(LottoNumber::getNumber)
         .findFirst()
-        .get()).isEqualTo(45);
+        .get()).isEqualTo(6);
   }
 
   @DisplayName("중복없는 숫자 6개를 가져와 로또 하나 생성 테스트.")
   @Test
-  void 로또한장생성() {
-    Lotto lotte = new Lotto();
-    List<Integer> testLotto = createTestLotto(1,2,3,4,5,6);
+  void 로또한장생성() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    List<Integer> values = new ArrayList<>();
+    range(1, 7).forEach(values::add);
 
-    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0,6,testLotto);
-    lotte.creatLotte(generateLottoNumber);
+    Lotto lotto = new Lotto();
 
-    assertThat(lotte.getLotto().size()).isEqualTo(6);
+    Method creatLotteNumber = lotto.getClass()
+        .getDeclaredMethod("creatLotteNumber", List.class);
+    creatLotteNumber.setAccessible(true);
+    creatLotteNumber.invoke(lotto, values);
 
-    Set<Integer> checkValues = lotte.getLotto()
+    assertThat(lotto.getLotto().size()).isEqualTo(6);
+
+    Set<Integer> checkValues = lotto.getLotto()
         .stream()
         .map(LottoNumber::getNumber)
         .collect(Collectors.toSet());
@@ -62,22 +86,14 @@ class LotteTest {
 
   @DisplayName("동일한 로또번호가 들어가면 에러가 발생하는지 테스트.")
   @ParameterizedTest
-  @CsvSource(value = {"1:1:1:1:1:1","1:2:3:4:4:5"})
+  @CsvSource(value = {"1:1:1:1:1:1", "1:2:3:4:4:5"})
   void 동일로또번호방지(String input) {
-    assertThatThrownBy(() -> new Lotto(new ArrayList<>(Arrays.asList(input.split(":")))))
-        .isInstanceOf(IllegalArgumentException.class);
+
+    assertThatThrownBy(() -> new Lotto(
+        Arrays.stream(input.split(":"))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList()))
+    ).isInstanceOf(IllegalArgumentException.class);
   }
 
-  private List<Integer> createTestLotto(int num1, int num2, int num3, int num4, int num5,
-      int num6) {
-    List<Integer> testLotto = new ArrayList<>();
-    testLotto.add(num1);
-    testLotto.add(num2);
-    testLotto.add(num3);
-    testLotto.add(num4);
-    testLotto.add(num5);
-    testLotto.add(num6);
-
-    return testLotto;
-  }
 }

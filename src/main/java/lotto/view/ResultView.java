@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.message.Message;
 import lotto.domain.Lotto;
+import lotto.message.Message;
 import lotto.service.Rank;
 
 public class ResultView {

@@ -4,7 +4,6 @@ import static java.util.stream.IntStream.range;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.strategy.GenerateLottoNumber;
 
 public class Lotteries {
 
@@ -12,32 +11,40 @@ public class Lotteries {
 
   private final List<Lotto> lotteries = new ArrayList<>();
 
-  public Lotteries() {
+  public Lotteries(int count, final List<Integer> numberPull) {
+    createLotteries(count, numberPull);
   }
 
-  public Lotteries(int count, GenerateLottoNumber generateLottoNumber) {
-    createLotteries(count, generateLottoNumber);
+  public Lotteries() {
+
   }
 
   public List<Lotto> getLotteries() {
     return lotteries;
   }
 
-  private void createLotteries(int count, GenerateLottoNumber generateLottoNumber) {
-    range(INT_ZERO, count).forEach(i -> lotteries.add(new Lotto(generateLottoNumber)));
+  private void createLotteries(int count,List<Integer> numberPull) {
+    range(INT_ZERO, count)
+        .mapToObj(i -> new Lotto(numberPull))
+        .forEach(lotteries::add);
   }
 
   public int getMatchLotteries(Lotto lotty, Lotto winLotto) {
     int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
-      if (winLotto.getLotto().contains(lottoNumber)) {
-        count++;
-      }
+      count = checkContainValues(winLotto, count, lottoNumber);
     }
     return count;
   }
 
-  public static Lotto getWinningLotto(List<String> inputValues) {
+  private int checkContainValues(final Lotto winLotto, int count, final LottoNumber lottoNumber) {
+    if (winLotto.getLotto().contains(lottoNumber)) {
+      count++;
+    }
+    return count;
+  }
+
+  public static Lotto getWinningLotto(List<Integer> inputValues) {
     return new Lotto(inputValues);
   }
 }
