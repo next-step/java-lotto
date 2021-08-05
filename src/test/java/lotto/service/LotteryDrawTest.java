@@ -75,7 +75,7 @@ class LotteryDrawTest {
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
     lotteryDraw.buyLotties(generateLottoNumber);
 
-    assertThat(lotteryDraw.getLottiesInfo().getLotties().size()).isEqualTo(count);
+    assertThat(lotteryDraw.getLottiesInfo().getLotteries().size()).isEqualTo(count);
   }
 
   @DisplayName("당첨번호 입력해서 로또객체 생성 테스트.")
@@ -85,7 +85,7 @@ class LotteryDrawTest {
     LotteryDraw lotteryDraw = new LotteryDraw();
     Lotto lotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
 
-    assertThat(lotto.getWinLotto().size()).isEqualTo(6);
+    assertThat(lotto.getLotto().size()).isEqualTo(6);
   }
 
   @DisplayName("당첨번호와 로또 비교하여 해당 등수에 로또객체를 적재하는 테스트.")

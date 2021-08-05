@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.message.Message;
-import lotto.domain.Lotties;
+import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.strategy.GenerateLottoNumber;
@@ -16,7 +16,7 @@ public class LotteryDraw {
 
   private LottoMoney lottoMoney;
 
-  private Lotties lotties;
+  private Lotteries lotties;
 
   private static final String PROFIT_RATE_FORMAT = "#.##";
 
@@ -48,21 +48,21 @@ public class LotteryDraw {
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {
     checkInputValue();
-    lotties = new Lotties(getNumberOfLotto(), generateLottoNumber);
+    lotties = new Lotteries(getNumberOfLotto(), generateLottoNumber);
   }
 
-  public Lotties getLottiesInfo() {
+  public Lotteries getLottiesInfo() {
     return lotties;
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
-    return Lotties.getWinningLotto(winningLottery.trim().split(SPLIT_MARK));
+    return Lotteries.getWinningLotto(winningLottery.trim().split(SPLIT_MARK));
   }
 
-  public Map<Integer, List<Lotto>> matchLottoInfo(Lotties lotties, Lotto winLotto) {
+  public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotties, Lotto winLotto) {
 
     Map<Integer, List<Lotto>> categoriesRank = createRatingInfo();
-    lotties.getLotties().forEach(
+    lotties.getLotteries().forEach(
         lotty -> categoriesRank.get(matchLottoRating(lotties, winLotto, lotty)).add(lotty));
 
     categoriesRank.remove(INT_ZERO);
@@ -70,7 +70,7 @@ public class LotteryDraw {
     return categoriesRank;
   }
 
-  private int matchLottoRating(Lotties lotties, Lotto winLotto, Lotto lotty) {
+  private int matchLottoRating(Lotteries lotties, Lotto winLotto, Lotto lotty) {
     int matchLotties = lotties.getMatchLotties(lotty, winLotto);
     if (matchLotties < LIMIT_MATCH_NUMBER) {
       return INT_ZERO;

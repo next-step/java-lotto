@@ -18,7 +18,7 @@ public class LottoController {
 
     lotteryDraw.buyLotties(new RealGenerateLottoNumber());
 
-    new ResultView(lotteryDraw.getLottiesInfo().getLotties().size());
+    new ResultView(lotteryDraw.getLottiesInfo().getLotteries().size());
 
     new LottiesDrawingView(lotteryDraw);
 

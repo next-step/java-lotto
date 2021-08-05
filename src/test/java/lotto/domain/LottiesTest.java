@@ -18,7 +18,7 @@ class LottiesTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 2, 3, 4})
   void 입력한만큼로또생성(int count) {
-    Lotties lotties = new Lotties();
+    Lotteries lotties = new Lotteries();
     List<Integer> testLotto = new ArrayList<>();
     testLotto.add(1);
     testLotto.add(2);
@@ -35,7 +35,7 @@ class LottiesTest {
       GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
       createLotties.invoke(lotties, count, generateLottoNumber);
 
-      assertThat(lotties.getLotties().size()).isEqualTo(count);
+      assertThat(lotties.getLotteries().size()).isEqualTo(count);
     } catch (NoSuchMethodException e) {
       e.printStackTrace();
     } catch (InvocationTargetException e) {
