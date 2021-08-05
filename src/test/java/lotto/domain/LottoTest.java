@@ -11,13 +11,22 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
+	private final List<Integer> buyNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+
 	@Test
 	@DisplayName("원하는 숫자로 로또 번호가 생성이 되었는가")
 	void generateDesiredLottoNumber() {
-		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+		Lotto lotto = new Lotto(buyNumbers);
 
-		Lotto lotto = new Lotto(list);
+		assertThat(lotto.equals(new Lotto(buyNumbers))).isTrue();
+	}
 
-		assertThat(lotto.equals(new Lotto(list))).isTrue();
+	@Test
+	@DisplayName("당첨 번호와 3개 동일하면 4등")
+	void figureOutRank() {
+		Lotto buyLotto = new Lotto(buyNumbers);
+		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10, 11));
+
+		assertThat(buyLotto.figureOutRank(winningLotto)).isEqualTo(4);
 	}
 }
