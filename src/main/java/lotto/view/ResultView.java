@@ -10,8 +10,9 @@ public class ResultView {
 
     private ResultView() {}
 
-    public static void printLottoCount(int lottoCount){
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(int lottoCount, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoCount, lottoCount);
+        System.out.println();
     }
 
     public static void printLottos(List<Lotto> lottos) {
