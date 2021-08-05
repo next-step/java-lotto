@@ -38,10 +38,6 @@ public class Lotto {
         return numbers;
     }
 
-    int getNumbersSize() {
-        return numbers.size();
-    }
-
     int getEqualNumberCount(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> equalLottoNumbers = lottoNumbers.stream()
                 .filter(numbers::contains)

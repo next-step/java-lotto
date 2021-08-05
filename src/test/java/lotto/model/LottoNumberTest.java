@@ -51,11 +51,13 @@ public class LottoNumberTest {
     public void getAllLottoNumbers_로또_번호는_1이상_45이하() {
         // given, when
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
+        LottoNumber firstLottoNumber = new LottoNumber(1);
+        LottoNumber lastLottoNumber = new LottoNumber(45);
 
         // then
         for (LottoNumber number : allLottoNumbers) {
-            assertThat(number.getNumber())
-                    .isBetween(1, 45);
+            assertThat(number)
+                    .isBetween(firstLottoNumber, lastLottoNumber);
         }
     }
 

@@ -15,23 +15,23 @@ public class LottoTest {
     @Test
     public void lottoNumberCountTest() {
         // given
-        Lotto lotto = new Lotto();
+        List<LottoNumber> lottoNumbers = new Lotto().getNumbers();
 
         // when, then
-        assertEquals(lotto.getNumbersSize(), 6);
+        assertEquals(lottoNumbers.size(), 6);
     }
 
     @DisplayName("로또 번호는 중복되지 않은 번호로 이루어져 있어야 한다.")
     @Test
     public void nonDuplicatedLottoNumbersTest() {
         // given
-        Lotto lotto = new Lotto();
+        List<LottoNumber> lottoNumbers = new Lotto().getNumbers();
 
         // when
-        Set<LottoNumber> lottoNumbers = new HashSet<>(lotto.getNumbers());
+        Set<LottoNumber> nonDuplicatedLottoNumbers = new HashSet<>(lottoNumbers);
 
         // then
-        assertEquals(lotto.getNumbersSize(), lottoNumbers.size());
+        assertEquals(lottoNumbers.size(), nonDuplicatedLottoNumbers.size());
     }
 
     @DisplayName("로또 번호는 오름차순으로 정렬되어 있어야 한다.")
