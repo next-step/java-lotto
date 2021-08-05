@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.domain.lotto.LottoRank;
+import step2.domain.lotto.LottoNumber;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,33 +9,33 @@ public class ResultOfLottos {
 
     private static final Integer WIN_COUNT_ZERO = 0;
 
-    private final Map<LottoRank, Integer> resultOfLottos;
+    private final Map<LottoNumber, Integer> resultOfLottos;
 
     public ResultOfLottos() {
-        this(new EnumMap<>(LottoRank.class));
+        this(new EnumMap<>(LottoNumber.class));
     }
 
-    public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
+    public ResultOfLottos(Map<LottoNumber, Integer> resultOfLottos) {
         this.resultOfLottos = resultOfLottos;
     }
 
     public Integer sumMoney() {
         return resultOfLottos.keySet()
             .stream()
-            .map(lottoRank -> lottoRank.getMoney() * resultOfLottos.get(lottoRank))
-            .reduce(Integer::sum).orElse(0);
+            .map(lottoNumber -> lottoNumber.getWinMoney() * resultOfLottos.get(lottoNumber))
+            .reduce(Integer::sum).orElse(WIN_COUNT_ZERO);
     }
 
-    public void put(LottoRank lottoRank) {
-        resultOfLottos.put(lottoRank, resultOfLottos.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
+    public void put(LottoNumber lottoNumber) {
+        resultOfLottos.put(lottoNumber, resultOfLottos.getOrDefault(lottoNumber, WIN_COUNT_ZERO) + 1);
     }
 
-    public Integer winCount(LottoRank rank) {
-        if (!resultOfLottos.containsKey(rank)) {
+    public Integer winCount(LottoNumber lottoNumber) {
+        if (!resultOfLottos.containsKey(lottoNumber)) {
             return WIN_COUNT_ZERO;
         }
 
-        return resultOfLottos.get(rank);
+        return resultOfLottos.get(lottoNumber);
     }
 
     @Override

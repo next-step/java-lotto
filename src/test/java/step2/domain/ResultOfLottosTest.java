@@ -1,7 +1,7 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.lotto.LottoRank;
+import step2.domain.lotto.LottoNumber;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -12,13 +12,13 @@ class ResultOfLottosTest {
     @Test
     void sumMoney() {
         // Given
-        Map<LottoRank, Integer> givenResultLotto = new EnumMap<>(LottoRank.class);
-        givenResultLotto.put(LottoRank._3_RANK, 1);
-        givenResultLotto.put(LottoRank._4_RANK, 1);
+        Map<LottoNumber, Integer> givenResultLotto = new EnumMap<>(LottoNumber.class);
+        givenResultLotto.put(LottoNumber._3_NUMBER, 1);
+        givenResultLotto.put(LottoNumber._4_NUMBER, 1);
 
         Integer sum = givenResultLotto.keySet()
             .stream()
-            .map(lottoRank -> lottoRank.getMoney() * givenResultLotto.get(lottoRank))
+            .map(lottoRank -> lottoRank.getWinMoney() * givenResultLotto.get(lottoRank))
             .reduce(Integer::sum).orElse(0);
 
         // When

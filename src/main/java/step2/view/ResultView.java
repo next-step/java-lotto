@@ -2,7 +2,7 @@ package step2.view;
 
 import step2.domain.ResultOfLottos;
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoRank;
+import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoStatistics;
 import step2.domain.lotto.Profit;
 import java.util.List;
@@ -30,8 +30,8 @@ public class ResultView {
 
     private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
         for (int rank = 3; rank < 7; rank++) {
-            LottoRank lottoRank = LottoRank.find(rank);
-            System.out.println(lottoRank.getRank() + "개 일치 (" + lottoRank.getMoney() + " 원) - " + resultOfLottos.winCount(lottoRank));
+            LottoNumber lottoNumber = LottoNumber.find(rank);
+            System.out.println(lottoNumber.getNumber() + "개 일치 (" + lottoNumber.getWinMoney() + " 원) - " + resultOfLottos.winCount(lottoNumber));
         }
     }
 
