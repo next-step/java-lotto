@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.message;
 
 public class ErrorMessage {
 	public static final String NUMBER_TYPE_ERROR_MESSAGE = "숫자만 입력 가능합니다.";
