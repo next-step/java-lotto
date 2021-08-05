@@ -13,8 +13,6 @@ import step2.domain.user.Wallet;
 import step2.view.InputView;
 import step2.view.ResultView;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoGame {
 
@@ -30,10 +28,7 @@ public class LottoGame {
         ResultView.printCount(user.getLottos());
         ResultView.printLottos(user.getLottos());
 
-        String[] lastWinOfLottoNumber = InputView.inputWinOfLottoNumber().split(",");
-        List<Integer> winOfLottoNumbers = Stream.of(lastWinOfLottoNumber)
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+        List<Integer> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
 
         LottoNumber winOfLottoNumber = new LottoNumber(winOfLottoNumbers);
 
