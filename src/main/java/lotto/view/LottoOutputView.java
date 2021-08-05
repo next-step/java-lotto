@@ -15,7 +15,7 @@ public class LottoOutputView {
 	private static final String DASH_LINE = "---------";
 	public static final int ZERO_POINT = 0;
 
-	public static void printTicketCount(int money) {
+	public static void printLottoTicketCount(int money) {
 		System.out.println(LottoTicketCalculator.calculatorLottoTicketCount(money) + BUY_RESULT_MESSAGE);
 	}
 
@@ -35,12 +35,12 @@ public class LottoOutputView {
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();
 		for (Prize result : winPrizes.drawResultWinPrizes()) {
-			getResultStatusPrint(winPrizes, result);
+			printResultStatus(winPrizes, result);
 		}
 		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, money) + "입니다.");
 	}
 
-	private static void getResultStatusPrint(WinPrizes winPrizes, Prize prize) {
+	private static void printResultStatus(WinPrizes winPrizes, Prize prize) {
 		if (prize.getWinningMoney() > ZERO_POINT) {
 			System.out.println(prize.getCountOfMatch() +
 				"개 일치" +

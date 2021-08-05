@@ -16,7 +16,7 @@ public class LottoController {
 
 		List<Lotto> lotteries = LottoPurchase.buyLotteries(money);
 
-		LottoOutputView.printTicketCount(money);
+		LottoOutputView.printLottoTicketCount(money);
 		LottoOutputView.printLottoList(lotteries);
 
 		String lastWinNumber = LottoInputView.requestLastWinLottoNumber();

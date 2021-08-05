@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
-import lotto.utils.ErrorMessage;
+import lotto.message.ErrorMessage;
 
 public class SearchPrize {
 

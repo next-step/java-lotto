@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import lotto.exception.InputMachTypeException;
-import lotto.utils.ErrorMessage;
+import lotto.message.ErrorMessage;
 
 public class LottoInputView {
 
