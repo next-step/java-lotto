@@ -32,7 +32,7 @@ public class LottoTest {
     @DisplayName("금액에 따른 로또 생성")
     void lottoCountTest() {
         int cash = 14000;
-        int lottoCount = PlayLotto.calculateLottoCount(cash);
+        int lottoCount = PlayLotto.calculateAutoLottoCount(cash, 0);
         List<Lotto> lottos = playLotto.createLotto(lottoCount);
         assertThat(lottos.size()).isEqualTo(14);
     }
@@ -119,5 +119,14 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         int prizeNumber = winningLotto.checkWinning(lotto);
         assertThat(prizeNumber).isEqualTo(testPrizeNumber);
+    }
+
+    @Test
+    @DisplayName("수동 구매")
+    void manualLottoTest() {
+        int manualLottoCount = 3;
+        int cash = 14000;
+        int autoLottoCount = PlayLotto.calculateAutoLottoCount(cash, manualLottoCount);
+        assertThat(autoLottoCount).isEqualTo(11);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class MainApplication {
     public static void main(String[] args) {
         int cash = InputView.inputCash();
-        int lottoCount = PlayLotto.calculateLottoCount(cash);
+        int lottoCount = PlayLotto.calculateAutoLottoCount(cash, 0);
         ResultView.printLottoCount(lottoCount);
         List<Lotto> lottos = PlayLotto.createLotto(lottoCount);
         ResultView.printLottos(lottos);

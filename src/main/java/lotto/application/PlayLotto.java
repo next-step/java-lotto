@@ -12,11 +12,21 @@ public class PlayLotto {
     private static int LOTTO_PRICE = 1000;
     private static int WINNING_TOTAL_INDEX = 6;
 
-    public static int calculateLottoCount(int cash) {
-        if (cash % LOTTO_PRICE != 0) {
-            throw new RuntimeException("1000원 단위로 입력하세요.");
+    public static int calculateAutoLottoCount(int cash, int manualLottoCount) {
+        validateArgument(cash,manualLottoCount);
+        return cash / LOTTO_PRICE - manualLottoCount;
+    }
+
+    private static void validateArgument(int cash, int manualLottoCount) {
+        if (cash <= 0) {
+            throw new IllegalArgumentException("구입금액은 0원 이상으로 입력해주세요.");
         }
-        return cash / LOTTO_PRICE;
+        if (cash % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("1000원 단위로 입력하세요.");
+        }
+        if (manualLottoCount < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 0이상이어야 합니다.");
+        }
     }
 
     public static List<Lotto> createLotto(int lottoCount) {
