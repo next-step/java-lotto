@@ -15,7 +15,8 @@ class LottoNumberTest {
 	@ParameterizedTest(name = "로또 번호 크기 비교 {index} [{arguments}]")
 	@CsvSource(value = {
 			"1,2,-1",
-			"2,1,1"
+			"2,1,1",
+			"1,1,0",
 	})
 	@DisplayName("로또 번호 크기 비교")
 	void lotto_number_compare(int firstNumber, int secondNumber, int compareTo) throws Exception {

@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return number < LottoNumberCache.MIN_NUMBER || number > LottoNumberCache.MAX_NUMBER;
 	}
 
-		public int getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
@@ -67,12 +67,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		static {
 			caches = new LottoNumber[MAX_NUMBER + 1];
 
-			for (int i = MIN_NUMBER; i <= MAX_NUMBER ; i++) {
+			for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
 				caches[i] = new LottoNumber(i);
 			}
 		}
 
-		private LottoNumberCache() {}
+		private LottoNumberCache() {
+		}
 
 	}
 
