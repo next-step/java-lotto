@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RealGenerateLottoNumber implements GenerateLottoNumber{
+public class RealGenerateLottoNumber {
 
   private static final int START = 1;
 
@@ -13,7 +13,6 @@ public class RealGenerateLottoNumber implements GenerateLottoNumber{
   public RealGenerateLottoNumber() {
   }
 
-  @Override
   public List<Integer> createNumberPull() {
     List<Integer> numbers = new ArrayList<>();
     for(int i = START; i < END; i++){

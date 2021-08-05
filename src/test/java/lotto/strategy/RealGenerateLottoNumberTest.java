@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class RealGenerateLottoNumberTest {
 
-  GenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber();
+  RealGenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber();
 
   @DisplayName("1~45까지 로또번호 생성 테스트.")
   @Test
