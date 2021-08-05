@@ -1,24 +1,20 @@
 package lotto.service;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.message.Message;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
+import lotto.message.Message;
 import lotto.strategy.GenerateLottoNumber;
 
 public class LotteryDraw {
 
   private LottoMoney lottoMoney;
 
-  private Lotteries lotties;
-
-  private static final String PROFIT_RATE_FORMAT = "#.##";
+  private Lotteries lotteries;
 
   private static final String SPLIT_MARK = ",";
 
@@ -46,36 +42,37 @@ public class LotteryDraw {
     return lottoMoney.calculateMoney("/", EACH_LOTTO_COST);
   }
 
-  public void buyLotties(GenerateLottoNumber generateLottoNumber) {
+  public void buyLotteries(GenerateLottoNumber generateLottoNumber) {
     checkInputValue();
-    lotties = new Lotteries(getNumberOfLotto(), generateLottoNumber);
+    lotteries = new Lotteries(getNumberOfLotto(), generateLottoNumber);
   }
 
-  public Lotteries getLottiesInfo() {
-    return lotties;
+  public Lotteries getLotteriesInfo() {
+    return lotteries;
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
     return Lotteries.getWinningLotto(winningLottery.trim().split(SPLIT_MARK));
   }
 
-  public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotties, Lotto winLotto) {
+  public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotteries, Lotto winLotto) {
 
     Map<Integer, List<Lotto>> categoriesRank = createRatingInfo();
-    lotties.getLotteries().forEach(
-        lotty -> categoriesRank.get(matchLottoRating(lotties, winLotto, lotty)).add(lotty));
+    lotteries.getLotteries().forEach(
+        lotty -> categoriesRank.get(matchLottoRating(winLotto, lotty)).add(lotty));
 
     categoriesRank.remove(INT_ZERO);
 
     return categoriesRank;
   }
 
-  private int matchLottoRating(Lotteries lotties, Lotto winLotto, Lotto lotty) {
-    int matchLotties = lotties.getMatchLotties(lotty, winLotto);
-    if (matchLotties < LIMIT_MATCH_NUMBER) {
+  private int matchLottoRating(Lotto winLotto, Lotto lotty) {
+    int matchLotteries = lotteries.getMatchLotteries(lotty, winLotto);
+
+    if (matchLotteries < LIMIT_MATCH_NUMBER) {
       return INT_ZERO;
     }
-    return matchLotties;
+    return matchLotteries;
   }
 
   private Map<Integer, List<Lotto>> createRatingInfo() {
@@ -104,11 +101,4 @@ public class LotteryDraw {
     return lottoMoney.getReward(totalWinningRewards);
   }
 
-  private String formattingValue(double reward) {
-
-    DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
-    format.setRoundingMode(RoundingMode.DOWN);
-
-    return format.format(reward);
-  }
 }

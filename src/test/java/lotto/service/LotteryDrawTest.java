@@ -73,9 +73,9 @@ class LotteryDrawTest {
     LotteryDraw lotteryDraw = new LotteryDraw(cost);
     List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
-    lotteryDraw.buyLotties(generateLottoNumber);
+    lotteryDraw.buyLotteries(generateLottoNumber);
 
-    assertThat(lotteryDraw.getLottiesInfo().getLotteries().size()).isEqualTo(count);
+    assertThat(lotteryDraw.getLotteriesInfo().getLotteries().size()).isEqualTo(count);
   }
 
   @DisplayName("당첨번호 입력해서 로또객체 생성 테스트.")
@@ -95,11 +95,11 @@ class LotteryDrawTest {
     List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
 
     GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
-    lotteryDraw.buyLotties(generateLottoNumber);
+    lotteryDraw.buyLotteries(generateLottoNumber);
 
     Lotto winLotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
 
-    Map<Integer, List<Lotto>> result = lotteryDraw.matchLottoInfo(lotteryDraw.getLottiesInfo(),
+    Map<Integer, List<Lotto>> result = lotteryDraw.matchLottoInfo(lotteryDraw.getLotteriesInfo(),
         winLotto);
 
     assertThat(result.get(3).size()).isEqualTo(1);

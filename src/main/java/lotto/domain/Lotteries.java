@@ -27,7 +27,7 @@ public class Lotteries {
     range(INT_ZERO, count).forEach(i -> lotteries.add(new Lotto(generateLottoNumber)));
   }
 
-  public int getMatchLotties(Lotto lotty, Lotto winLotto) {
+  public int getMatchLotteries(Lotto lotty, Lotto winLotto) {
     int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
       if (winLotto.getLotto().contains(lottoNumber)) {
