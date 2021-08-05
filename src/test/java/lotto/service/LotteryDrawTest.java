@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -118,21 +116,6 @@ class LotteryDrawTest {
     testLotto.add(num6);
 
     return testLotto;
-  }
-
-  @DisplayName("수익률 계산 테스트.")
-  @Test
-  void 로또수익률계산() {
-    List<Integer> testLotto = createTestLotto(11, 2, 33, 44, 5, 6);
-    GenerateLottoNumber generateLottoNumber = new TestGenerateLottoNumber(0, 6, testLotto);
-    Lotto lotto = new Lotto(generateLottoNumber);
-
-    Map<Integer, List<Lotto>> result = new LinkedHashMap<>();
-    result.put(3, Collections.singletonList(lotto));
-
-    LotteryDraw lotteryDraw = new LotteryDraw(14000);
-
-    assertThat(lotteryDraw.gradingScore(result)).isEqualTo("0.35");
   }
 
 }

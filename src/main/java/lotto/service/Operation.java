@@ -36,7 +36,7 @@ public enum Operation {
     this.intBinaryOperator = intBinaryOperator;
   }
 
-  protected int calculation(int num1, int num2){
+  public int calculation(int num1, int num2){
     return intBinaryOperator.applyAsInt(num1, num2);
   }
 

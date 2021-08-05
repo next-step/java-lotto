@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import lotto.message.Message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoMoneyTest {
 
@@ -14,7 +16,6 @@ class LottoMoneyTest {
   void 금액주입시객체생성() {
     LottoMoney lottoMoney = new LottoMoney(1000);
 
-    assertThat(lottoMoney.getMoney()).isEqualTo(1000);
     assertThat(lottoMoney.equals(new LottoMoney(1000)));
   }
 
@@ -25,5 +26,14 @@ class LottoMoneyTest {
         ()-> new LottoMoney(-1)
     ).isInstanceOf(IllegalArgumentException.class)
         .hasMessage(Message.MSG_ERROR_LIMIT_MONEY);
+  }
+
+  @DisplayName("구매후 당첨된 금액기준으로 수익률을 계산하는 테스트.")
+  @ParameterizedTest
+  @CsvSource(value = {"14000,5000,0.35","10000,0,0"})
+  void 당첨금수익률(int money, int winMoney, String targetReward) {
+    LottoMoney lottoMoney = new LottoMoney(money);
+    String reward = lottoMoney.getReward(winMoney);
+    assertThat(reward).isEqualTo(targetReward);
   }
 }

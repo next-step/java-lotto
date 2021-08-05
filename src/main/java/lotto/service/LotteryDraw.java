@@ -18,11 +18,11 @@ public class LotteryDraw {
 
   private Lotties lotties;
 
+  private static final String PROFIT_RATE_FORMAT = "#.##";
+
   private static final String SPLIT_MARK = ",";
 
   private static final int EACH_LOTTO_COST = 1000;
-
-  private static final String PROFIT_RATE_FORMAT = "#.##";
 
   private static final int INT_ZERO = 0;
 
@@ -37,13 +37,13 @@ public class LotteryDraw {
   }
 
   private void checkInputValue() {
-    if (Operation.chooseOperation("%").calculation(lottoMoney.getMoney(), EACH_LOTTO_COST) != INT_ZERO) {
+    if (lottoMoney.calculateMoney("%", EACH_LOTTO_COST) != INT_ZERO) {
       throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
   }
 
   private int getNumberOfLotto() {
-    return Operation.chooseOperation("/").calculation(lottoMoney.getMoney(), EACH_LOTTO_COST);
+    return lottoMoney.calculateMoney("/", EACH_LOTTO_COST);
   }
 
   public void buyLotties(GenerateLottoNumber generateLottoNumber) {
@@ -101,15 +101,14 @@ public class LotteryDraw {
               Rank.matchRank(ratingNumber).getWinningMoney());
     }
 
-    return formattingValue(totalWinningRewards);
+    return lottoMoney.getReward(totalWinningRewards);
   }
 
-  private String formattingValue(int totalWinningRewards) {
+  private String formattingValue(double reward) {
 
     DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
     format.setRoundingMode(RoundingMode.DOWN);
 
-    return format.format((double) totalWinningRewards / (double) lottoMoney.getMoney());
+    return format.format(reward);
   }
-
 }
