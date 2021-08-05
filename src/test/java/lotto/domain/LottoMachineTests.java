@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTests {
@@ -23,8 +22,8 @@ public class LottoMachineTests {
     void generateLottoNumbersTest() {
         LottoMachine lottoMachine = new LottoMachine(14000);
 
-        LottoNumbers lottoNumbers = lottoMachine.generateLottoNumber();
+        LottoTicket lottoTicket = lottoMachine.generateLottoNumber();
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoTicket.size()).isEqualTo(6);
     }
 }

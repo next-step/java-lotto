@@ -13,17 +13,17 @@ public class LottoResult {
 
     private final Map<LottoRank, Integer> lottoResult;
 
-    private LottoResult(CollectionOflLottoNumbers collectionOflLottoNumbers, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
+    private LottoResult(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
         lottoResult = new HashMap<>();
 
-        for (LottoNumbers lottoNumbers : collectionOflLottoNumbers.getCollectionOfLottoNumbers()) {
-            int matchCount = lottoNumbers.getMatchCount(winningLottoNumbers);
-            setRankEnumByMatchCount(matchCount, lottoNumbers.contains(bonusLottoNumber));
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            int matchCount = lottoTicket.getMatchCount(winningLottoTicket);
+            setRankEnumByMatchCount(matchCount, lottoTicket.contains(bonusLottoNumber));
         }
     }
 
-    public static LottoResult of(CollectionOflLottoNumbers collectionOflLottoNumbers, LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
-        return new LottoResult(collectionOflLottoNumbers, winningLottoNumbers, bonusLottoNumber);
+    public static LottoResult of(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        return new LottoResult(lottoTickets, winningLottoTicket, bonusLottoNumber);
     }
 
     private void setRankEnumByMatchCount(int matchCount, boolean bonusMatch) {

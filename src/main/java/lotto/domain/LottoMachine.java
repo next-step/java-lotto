@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
 
 public class LottoMachine {
 
@@ -20,7 +23,7 @@ public class LottoMachine {
         return purchaseLottoCount;
     }
 
-    public LottoNumbers generateLottoNumber() {
+    public LottoTicket generateLottoNumber() {
 
         List<LottoNumber> lottoNumberList = new ArrayList<>();
 
@@ -34,6 +37,6 @@ public class LottoMachine {
 
         Collections.sort(pickedLottoNumbers);
 
-        return LottoNumbers.of(new TreeSet<>(pickedLottoNumbers));
+        return LottoTicket.of(new TreeSet<>(pickedLottoNumbers));
     }
 }

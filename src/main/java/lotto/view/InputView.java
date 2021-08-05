@@ -1,18 +1,12 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Scanner;
 
 public class InputView {
-    private static Scanner scanner = new Scanner(System.in);
-    private static String GET_PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
-    private static String GET_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
-    private static String GET_BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
-    private static String BLANK = "";
-    private static String SPACE = " ";
-    private static String SPLIT_CUSTOM_REGEX = ",|, | ,";
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String GET_PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
+    private static final String GET_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String GET_BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
 
@@ -23,14 +17,10 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static TreeSet<LottoNumber> getWinningNumber() {
+    public static String getWinningNumber() {
         System.out.println(GET_WINNING_NUMBER_QUESTION);
         scanner.nextLine();
-        String winningNumberString = scanner.nextLine();
-        String trimWinningNumberString = winningNumberString.replace(SPACE, BLANK);
-        return Arrays.stream(trimWinningNumberString.split(SPLIT_CUSTOM_REGEX))
-                .map(number -> LottoNumber.of(Integer.parseInt(number)))
-                .collect(Collectors.toCollection(TreeSet::new));
+        return scanner.nextLine();
     }
 
     public static int getBonusNumber() {

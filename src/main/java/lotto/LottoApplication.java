@@ -4,7 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LottoApplication {
     public static void main(String args[]) {
@@ -15,21 +16,21 @@ public class LottoApplication {
         int lottoCount = lottoMachine.getPurchaseLottoCount();
         ResultView.countOfLotto(lottoCount);
 
-        Set<LottoNumbers> totalLottoNumbers = new HashSet<>();
+        Set<LottoTicket> totalLottoTickets = new HashSet<>();
 
         for (int i = 0; i < lottoMachine.getPurchaseLottoCount(); i++) {
-            LottoNumbers generateLottoNumbers = lottoMachine.generateLottoNumber();
-            ResultView.printLottoNumber(generateLottoNumbers);
-            totalLottoNumbers.add(generateLottoNumbers);
+            LottoTicket generateLottoTicket = lottoMachine.generateLottoNumber();
+            ResultView.printLottoNumber(generateLottoTicket);
+            totalLottoTickets.add(generateLottoTicket);
         }
 
-        CollectionOflLottoNumbers collectionOflLottoNumbers = CollectionOflLottoNumbers.of(totalLottoNumbers);
+        LottoTickets collectionOflLottoNumbers = LottoTickets.of(totalLottoTickets);
 
-        LottoNumbers winningLottoNumbers = LottoNumbers.of(InputView.getWinningNumber());
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(InputView.getWinningNumber());
 
         LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusNumber());
 
-        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoNumbers, bonusLottoNumber);
+        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoTicket, bonusLottoNumber);
 
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));

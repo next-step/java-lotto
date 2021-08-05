@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.LottoRank;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
 
 import java.util.Map;
 import java.util.Set;
@@ -21,11 +21,11 @@ public class ResultView {
         System.out.println(lottoCount + COUNT_OF_LOTTO_QUESTION);
     }
 
-    public static void printLottoNumber(LottoNumbers lottoNumbers) {
-        Set<LottoNumber> lottoNumberSet = lottoNumbers.getLottoNumbers();
+    public static void printLottoNumber(LottoTicket lottoTicket) {
+        Set<LottoNumber> lottoNumberSet = lottoTicket.getLottoTicket();
 
         String result = "[" + lottoNumberSet.stream()
-                .map(lottoNumber -> lottoNumber.value())
+                .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
                 .collect(Collectors.joining(", ")) + "]";
 
         System.out.println(result);
@@ -39,11 +39,11 @@ public class ResultView {
 
         System.out.println("--------");
 
-        System.out.println("3개 일치 (5000원)- " + result.getOrDefault(LottoRank.THREE_MATCH, DEFAULT_COUNT) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.getOrDefault(LottoRank.FOUR_MATCH, DEFAULT_COUNT) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.getOrDefault(LottoRank.FIVE_MATCH, DEFAULT_COUNT) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + result.getOrDefault(LottoRank.FIVE_MATCH_WITH_BONUS, DEFAULT_COUNT) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRank.ALL_MATCH, DEFAULT_COUNT) + "개");
+        System.out.println("3개 일치 (5000원)- " + result.getOrDefault(LottoRank.FIFTH, DEFAULT_COUNT) + "개");
+        System.out.println("4개 일치 (50000원)- " + result.getOrDefault(LottoRank.FOURTH, DEFAULT_COUNT) + "개");
+        System.out.println("5개 일치 (1500000원)- " + result.getOrDefault(LottoRank.THIRD, DEFAULT_COUNT) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + result.getOrDefault(LottoRank.SECOND, DEFAULT_COUNT) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRank.FIRST, DEFAULT_COUNT) + "개");
     }
 
     public static void printProfitRate(double profitRate) {

@@ -33,8 +33,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public String value() {
-        return Integer.toString(lottoNumber);
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
