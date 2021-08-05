@@ -14,7 +14,6 @@ public class LottoNumberTests {
     @DisplayName("로또 번호 생성 테스트")
     @Test
     void createLottoNumberTest() {
-
         assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
         assertThat(LottoNumber.of(45)).isEqualTo(LottoNumber.of(45));
     }
@@ -27,7 +26,15 @@ public class LottoNumberTests {
                 .isThrownBy(() -> {
                     LottoNumber.of(46);
                 }).withMessageMatching("로또 숫자는 1 ~ 45 사이의 숫자만 가능 합니다.");
+    }
 
+    @DisplayName("로또 번호 생성시 로또 번호 생성 범위 넘었을 때 exception 테스트")
+    @Test
+    void createAnotherEdgeLottoNumberExceptionTest() {
 
+        assertThatExceptionOfType(LottoNumberRangeException.class)
+                .isThrownBy(() -> {
+                    LottoNumber.of(0);
+                }).withMessageMatching("로또 숫자는 1 ~ 45 사이의 숫자만 가능 합니다.");
     }
 }
