@@ -82,7 +82,6 @@ public class LotteryDraw {
     categoriesRank.put(Rank.FIFTH.getCountOfMatch(), new ArrayList<>());
     categoriesRank.put(Rank.FOURTH.getCountOfMatch(), new ArrayList<>());
     categoriesRank.put(Rank.THIRD.getCountOfMatch(), new ArrayList<>());
-    categoriesRank.put(Rank.SECOND.getCountOfMatch(), new ArrayList<>());
     categoriesRank.put(Rank.FIRST.getCountOfMatch(), new ArrayList<>());
     categoriesRank.put(Rank.MISS.getCountOfMatch(), new ArrayList<>());
 
