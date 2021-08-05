@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class LottoMachineTest {
     @Test
     void 로또_당첨번호_에러_메세지_확인() {
-        assertThatThrownBy(()-> new LottoMachine("1,2, 3, 4, 5, 6"))
+        assertThatThrownBy(()-> new LottoMachine("1,2, 3, 4, 5, 6",6))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(()-> new LottoMachine("1, 2, 3, 4, 5"))
+        assertThatThrownBy(()-> new LottoMachine("1, 2, 3, 4, 5",6))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
