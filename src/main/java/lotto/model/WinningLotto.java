@@ -5,22 +5,21 @@ import lotto.prize.MatchInformation;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
 public class WinningLotto {
-    private final Set<LottoNumber> winningNumber;
+    private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
 
-    private WinningLotto(final Set<LottoNumber> lottoNumbers, final LottoNumber bonusNumber) {
-        this.winningNumber = lottoNumbers;
+    private WinningLotto(final Lotto winningNumber, final LottoNumber bonusNumber) {
+        this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
     public static WinningLotto from(final String winningNumber, final String bonusNumber) {
         validateConstructor(winningNumber, bonusNumber);
-        return new WinningLotto(LottoNumber.aggregate(winningNumber), LottoNumber.from(bonusNumber));
+        return new WinningLotto(Lotto.from(winningNumber), LottoNumber.from(bonusNumber));
     }
 
     private static void validateConstructor(String winningNumber, String bonusNumber) {
@@ -48,7 +47,6 @@ public class WinningLotto {
     }
 
     public boolean isMatchBonus(final Lotto lotto) {
-        return lotto.isMatchBonus(bonusNumber);
+        return lotto.contains(bonusNumber);
     }
-
 }
