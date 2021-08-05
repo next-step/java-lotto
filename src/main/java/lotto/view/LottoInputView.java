@@ -20,7 +20,7 @@ public class LottoInputView {
 	private LottoInputView() {
 	}
 
-	public static int buyRequestView() {
+	public static int buyRequest() {
 		int money;
 		System.out.println(BUY_MONEY_MESSAGE);
 		try {
@@ -35,7 +35,7 @@ public class LottoInputView {
 		return money;
 	}
 
-	public static String lastWinLottoNumberView() {
+	public static String requestLastWinLottoNumber() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
 		return scanner.nextLine();
 	}
