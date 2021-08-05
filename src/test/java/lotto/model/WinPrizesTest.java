@@ -15,15 +15,15 @@ class WinPrizesTest {
 	@DisplayName("로또 등수를입력하면 당첨내역중에 일치한 등수확인 가능하다.")
 	public void searchWinPrizeGrade() {
 		WinPrizes winPrizes = new WinPrizes(getWinPrize());
-		int thirdWinners = winPrizes.searchWinPrizeGrade(Prize.FIFTH);
+		int thirdWinners = winPrizes.findWinPrizeGrade(Prize.FIFTH);
 
 		assertThat(thirdWinners).isEqualTo(100);
 
-		int fourthWinners = winPrizes.searchWinPrizeGrade(Prize.FOURTH);
+		int fourthWinners = winPrizes.findWinPrizeGrade(Prize.FOURTH);
 
 		assertThat(fourthWinners).isEqualTo(20);
 
-		int firstWinners = winPrizes.searchWinPrizeGrade(Prize.FIRST);
+		int firstWinners = winPrizes.findWinPrizeGrade(Prize.FIRST);
 
 		assertThat(firstWinners).isEqualTo(2);
 	}
@@ -53,7 +53,7 @@ class WinPrizesTest {
 		List<Prize> prizes = winPrizes.drawResultWinPrizes();
 
 		assertThat(prizes.size()).isEqualTo(5);
-		assertThat(winPrizes.searchWinPrizeGrade(prizes.get(1))).isEqualTo(5);
+		assertThat(winPrizes.findWinPrizeGrade(prizes.get(1))).isEqualTo(5);
 	}
 
 	private Map<Prize, Integer> getWinPrize() {

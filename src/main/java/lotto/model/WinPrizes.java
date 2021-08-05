@@ -14,7 +14,7 @@ public class WinPrizes {
 		this.winPrizes = winPrizes;
 	}
 
-	public int searchWinPrizeGrade(Prize prize) {
+	public int findWinPrizeGrade(Prize prize) {
 		return winPrizes.get(prize);
 	}
 

@@ -45,7 +45,7 @@ public class LottoOutputView {
 			System.out.println(prize.getCountOfMatch() +
 				"개 일치" +
 				"(" + prize.getWinningMoney() + ")" +
-				"-" + winPrizes.searchWinPrizeGrade(prize) + "개");
+				"-" + winPrizes.findWinPrizeGrade(prize) + "개");
 		}
 	}
 

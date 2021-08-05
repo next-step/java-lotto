@@ -25,8 +25,8 @@ class SearchPrizeTest {
 		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(lottoGame, "1,3,5,7,9,17");
 
 		assertThat(winPrizes.getWinPrizeSize()).isEqualTo(5);
-		assertThat(winPrizes.searchWinPrizeGrade(Prize.FIFTH)).isEqualTo(1);
-		assertThat(winPrizes.searchWinPrizeGrade(Prize.FOURTH)).isEqualTo(1);
+		assertThat(winPrizes.findWinPrizeGrade(Prize.FIFTH)).isEqualTo(1);
+		assertThat(winPrizes.findWinPrizeGrade(Prize.FOURTH)).isEqualTo(1);
 	}
 
 	@Test
@@ -41,8 +41,8 @@ class SearchPrizeTest {
 
 		WinPrizes result = SearchPrize.confirmWinLottoNumber(lotto, "1,2,3,4,5,6");
 
-		assertThat(result.searchWinPrizeGrade(Prize.THIRD)).isEqualTo(2);
-		assertThat(result.searchWinPrizeGrade(Prize.FIRST)).isEqualTo(1);
+		assertThat(result.findWinPrizeGrade(Prize.THIRD)).isEqualTo(2);
+		assertThat(result.findWinPrizeGrade(Prize.FIRST)).isEqualTo(1);
 	}
 
 	@Test
