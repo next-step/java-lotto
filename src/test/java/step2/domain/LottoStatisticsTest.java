@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.lotto.Lotto;
 import step2.domain.lotto.LottoMachine;
 import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.LottoRank;
 import step2.domain.lotto.LottoStatistics;
 import step2.domain.lotto.Profit;
 import step2.domain.money.Cache;
@@ -27,8 +28,8 @@ class LottoStatisticsTest {
     @Test
     void 당첨된_통계를_보여준다() {
         // Given
-        Map<Integer, Integer> expectedLottoStrategy = new HashMap<>();
-        expectedLottoStrategy.put(3, 1);
+        Map<LottoRank, Integer> expectedLottoStrategy = new HashMap<>();
+        expectedLottoStrategy.put(LottoRank.find(3), 1);
         ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedLottoStrategy);
 
         Integer[] givenNumbers = {3, 4, 5, 6, 7, 8};

@@ -31,7 +31,7 @@ public class ResultView {
     private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
         for (int rank = 3; rank < 7; rank++) {
             LottoRank lottoRank = LottoRank.find(rank);
-            System.out.println(lottoRank.getRank() + "개 일치 (" + lottoRank.getMoney() + " 원) - " + resultOfLottos.winCount(rank));
+            System.out.println(lottoRank.getRank() + "개 일치 (" + lottoRank.getMoney() + " 원) - " + resultOfLottos.winCount(lottoRank));
         }
     }
 

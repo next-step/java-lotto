@@ -1,6 +1,7 @@
 package step2.domain;
 
 import step2.domain.lotto.LottoRank;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -10,33 +11,30 @@ public class ResultOfLottos {
 
     private static final Integer WIN_COUNT_ZERO = 0;
 
-    private final Map<Integer, Integer> resultOfLottos;
+    private final Map<LottoRank, Integer> resultOfLottos;
 
     public ResultOfLottos() {
         this(new HashMap<>());
     }
 
-    public ResultOfLottos(Map<Integer, Integer> resultOfLottos) {
+    public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
         this.resultOfLottos = resultOfLottos;
     }
 
     public Integer sumMoney() {
         AtomicInteger sum = new AtomicInteger(0);
 
-        resultOfLottos.forEach((rank, count) -> {
-            LottoRank lottoRank = LottoRank.find(rank);
-            sum.set(count * lottoRank.getMoney());
-        });
+        resultOfLottos.forEach((lottoRank, count) -> sum.set(count * lottoRank.getMoney()));
 
         return sum.get();
     }
 
 
-    public void put(int count) {
-        resultOfLottos.put(count, resultOfLottos.getOrDefault(count, WIN_COUNT_ZERO) + 1);
+    public void put(LottoRank lottoRank) {
+        resultOfLottos.put(lottoRank, resultOfLottos.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
     }
 
-    public Integer winCount(int rank) {
+    public Integer winCount(LottoRank rank) {
         if (!resultOfLottos.containsKey(rank)) {
             return WIN_COUNT_ZERO;
         }
