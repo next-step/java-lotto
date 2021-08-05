@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import lotto.exception.InputMachTypeException;
 import lotto.utils.ErrorMessage;
-import lotto.utils.TicketCalculator;
+import lotto.utils.LottoTicketCalculator;
 
 public class LottoInputView {
 
@@ -27,7 +27,7 @@ public class LottoInputView {
 			money = scanner.nextInt();
 			validPositiveCheck(money);
 			validThousandUnitCheck(money);
-			System.out.println(TicketCalculator.calculatorTicketCount(money) + BUY_RESULT_MESSAGE);
+			System.out.println(LottoTicketCalculator.calculatorLottoTicketCount(money) + BUY_RESULT_MESSAGE);
 			scanner.nextLine();
 		} catch (InputMismatchException e) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
