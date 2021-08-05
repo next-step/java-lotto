@@ -16,14 +16,14 @@ public class Lotteries {
   }
 
   public Lotteries(int count, GenerateLottoNumber generateLottoNumber) {
-    createLotties(count, generateLottoNumber);
+    createLotteries(count, generateLottoNumber);
   }
 
   public List<Lotto> getLotteries() {
     return lotteries;
   }
 
-  private void createLotties(int count, GenerateLottoNumber generateLottoNumber) {
+  private void createLotteries(int count, GenerateLottoNumber generateLottoNumber) {
     range(INT_ZERO, count).forEach(i -> lotteries.add(new Lotto(generateLottoNumber)));
   }
 
