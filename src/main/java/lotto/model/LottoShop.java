@@ -4,9 +4,9 @@ import lotto.strategy.AutoLottoStrategy;
 import lotto.strategy.LottoRuleStrategy;
 
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.IntStream.range;
 
 public class LottoShop {
     private static final LottoRuleStrategy LOTTO_STRATEGY = AutoLottoStrategy.getInstance();
@@ -27,13 +27,13 @@ public class LottoShop {
 
     public Lottos buy(final int payment) {
         validate(payment);
-        int numberOfPurchases = payment / LOTTO_PRICE;
-        return Lottos.from(range(0, numberOfPurchases)
-                                   .mapToObj(this::getLotto)
-                                   .collect(toList()));
+        final int numberOfPurchases = payment / LOTTO_PRICE;
+        return Lottos.from(Stream.generate(this::getLotto)
+                                 .limit(numberOfPurchases)
+                                 .collect(toList()));
     }
 
-    private Lotto getLotto(final int notUse) {
+    private Lotto getLotto() {
         return LOTTO_STRATEGY.ticketing();
     }
 
