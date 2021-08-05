@@ -27,11 +27,11 @@ public class LottoOutputView {
 	public static void resultLottoPrizeView(WinPrizes winPrizes, int money) {
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
-		int getTotalWinMoney = winPrizes.getTotalMoney();
+		int totalWinningMoney = winPrizes.getTotalWinningMoney();
 		for (Prize result : winPrizes.resultWinPrizes()) {
 			getResultStatusPrint(winPrizes, result);
 		}
-		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(getTotalWinMoney, money) + "입니다.");
+		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, money) + "입니다.");
 	}
 
 	private static void getResultStatusPrint(WinPrizes winPrizes, Prize result) {
