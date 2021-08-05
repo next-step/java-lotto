@@ -1,6 +1,8 @@
 package stringaddcalculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -38,6 +40,13 @@ public class StringAddCalculatorTest {
     public void splitAndSum_custom_구분자() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "x,2:3"})
+    public void splitAndSum_negative(String expression) throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(expression))
+                .isInstanceOf(RuntimeException.class);
     }
 
 }

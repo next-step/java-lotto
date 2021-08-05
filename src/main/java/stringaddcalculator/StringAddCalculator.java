@@ -12,7 +12,6 @@ public class StringAddCalculator {
 
 
     public static int splitAndSum(String expression) {
-
         if (StringUtil.isBlank(expression)) {
             return 0;
         }
@@ -29,8 +28,21 @@ public class StringAddCalculator {
 
     private static int sumSplitExpression(String[] splitExpression) {
         return Arrays.stream(splitExpression)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(StringAddCalculator::toInt)
                 .reduce(0, (total, number) -> total + number)
                 ;
     }
+
+    private static int toInt(String str){
+        try{
+            int result = Integer.parseInt(str);
+            if(result < 0){
+                throw new IllegalArgumentException("0 또는 자연수만 입력하세요.");
+            }
+            return result;
+        }catch(NumberFormatException e){
+            throw new IllegalArgumentException("0 또는 자연수만 입력하세요.");
+        }
+    }
+
 }
