@@ -18,7 +18,7 @@ public class Lotto {
 	}
 
 	private boolean validateSize(int size) {
-		return size!= NUMBERS_SIZE_LIMIT;
+		return size != NUMBERS_SIZE_LIMIT;
 	}
 
 	public Set<LottoNumber> numbers() {
@@ -37,13 +37,13 @@ public class Lotto {
 		return numbers.contains(LottoNumber.valueOf(lastWeekNumber)) ? 1 : 0;
 	}
 
+	public boolean hasBonus(int bonusNumber) {
+		return numbers.contains(LottoNumber.valueOf(bonusNumber));
+	}
+
 	@Override
 	public String toString() {
 		return numbers().toString();
-	}
-
-	public boolean hasBonus(int bonusNumber) {
-		return numbers.contains(LottoNumber.valueOf(bonusNumber));
 	}
 
 }
