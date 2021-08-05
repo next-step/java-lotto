@@ -15,9 +15,9 @@ class LottoGameTest {
 	@DisplayName("로또게임들을 등록하면 게임에 관한 내용이 반환된다.")
 	@CsvSource(value = {"1,21,43", "2,8,24", "30,37,41"})
 	public void createLottoGames(int firstNumber, int secondNumber, int thirdNumber) {
-		List<Lotto> lotto = new ArrayList<>();
-		lotto.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
-		LottoGame lottoGame = new LottoGame(lotto);
+		List<Lotto> lotteries = new ArrayList<>();
+		lotteries.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
+		LottoGame lottoGame = new LottoGame(lotteries);
 
 		assertThat(lottoGame.getLotteries().size()).isEqualTo(1);
 		assertThat(lottoGame.getLotteries().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
