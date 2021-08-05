@@ -34,9 +34,12 @@ public class LottoOutputView {
 		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, money) + "입니다.");
 	}
 
-	private static void getResultStatusPrint(WinPrizes winPrizes, Prize result) {
-		if (result.getWinningMoney() > ZERO_POINT) {
-			System.out.println(winPrizes.winPrizeStatus(result));
+	private static void getResultStatusPrint(WinPrizes winPrizes, Prize prize) {
+		if (prize.getWinningMoney() > ZERO_POINT) {
+			System.out.println(prize.getCountOfMatch() +
+				"개 일치" +
+				"(" + prize.getWinningMoney() + ")" +
+				"-" + winPrizes.searchWinPrizeGrade(prize) + "개");
 		}
 	}
 
