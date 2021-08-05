@@ -30,8 +30,4 @@ public class Lottos {
 		return Collections.unmodifiableList(lottoList);
 	}
 
-	public int totalAmount() {
-		return AMOUNT_UNIT * size();
-	}
-
 }
