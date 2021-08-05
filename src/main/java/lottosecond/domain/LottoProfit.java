@@ -8,6 +8,7 @@ public enum LottoProfit {
 	THREE(3, 5_000),
 	FOUR(4, 50_000),
 	FIVE(5, 1_500_000),
+	FIVE_BONUS(5, 30_000_000),
 	SIX(6, 2_000_000_000);
 
 	private final int quantity;
@@ -18,7 +19,10 @@ public enum LottoProfit {
 		this.profitUnit = profitUnit;
 	}
 
-	public static LottoProfit from(int quantity) {
+	public static LottoProfit from(int quantity, boolean matchBonus) {
+		if (quantity == 5 && matchBonus) {
+			return FIVE_BONUS;
+		}
 		return Arrays.stream(LottoProfit.values())
 		             .filter(profit -> profit.quantity == quantity)
 		             .findFirst()

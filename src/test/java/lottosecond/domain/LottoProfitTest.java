@@ -16,7 +16,7 @@ class LottoProfitTest {
 		int quantity = 7;
 
 		//when
-		LottoProfit profit = LottoProfit.from(quantity);
+		LottoProfit profit = LottoProfit.from(quantity, false);
 
 		//then
 		assertThat(profit).isEqualTo(LottoProfit.ZERO);
@@ -24,24 +24,40 @@ class LottoProfitTest {
 
 	@ParameterizedTest(name = "당첨당 합산 금액 {index} [{arguments}]")
 	@CsvSource(value = {
-			"3,1,5000",
-			"3,2,10000",
-			"4,1,50000",
-			"4,2,100000",
-			"5,1,1500000",
-			"5,2,3000000",
-			"6,1,2000000000",
-			"6,2,4000000000"
+			"3,1,true,5000",
+			"3,2,false,10000",
+			"4,1,true,50000",
+			"4,2,false,100000",
+			"5,1,false,1500000",
+			"5,2,false,3000000",
+			"5,1,true,30000000",
+			"5,2,true,60000000",
+			"6,1,true,2000000000",
+			"6,2,false,4000000000"
 	})
-	void profit_sum(int quantity, int matchingCount, long totalProfit) throws Exception {
+	void profit_sum(int quantity, int matchingCount, boolean matchBonus, long totalProfit) throws Exception {
 		//given
-		LottoProfit lottoProfit = LottoProfit.from(quantity);
+		LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
 
 		//when
 		long profit = lottoProfit.profit(matchingCount);
 
 		//then
 		assertThat(profit).isEqualTo(totalProfit);
+	}
+
+	@Test
+	@DisplayName("보너스 번호 일치")
+	void match_bonus() throws Exception {
+		//given
+		int quantity = 5;
+
+		//when
+		LottoProfit profit = LottoProfit.from(quantity, true);
+
+		//then
+		assertThat(profit).isEqualTo(LottoProfit.FIVE_BONUS);
+
 	}
 
 }
