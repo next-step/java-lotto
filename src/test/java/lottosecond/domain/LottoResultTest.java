@@ -17,16 +17,16 @@ class LottoResultTest {
 	@ParameterizedTest(name = "당첨 등수별 수량 {index} [{arguments}]")
 	@MethodSource
 	@DisplayName("당첨 등수별 수량")
-	void match(Set<LottoNumber> lottoNumbers, int quantity, int matchingCount) throws Exception {
+	void match(Set<LottoNumber> lottoNumbers, int quantity, boolean matchBonus, int matchingCount) throws Exception {
 		//given
 		Lottos lottos = new Lottos();
 		lottos.buy(1000, () -> lottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
-		lottoResult.match("1, 2, 3, 4, 5, 6");
+		lottoResult.match("1, 2, 3, 4, 5, 6", 7);
 
 		//when
 		Map<LottoProfit, Integer> result = lottoResult.value();
-		LottoProfit lottoProfit = LottoProfit.from(quantity);
+		LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
 
 		//then
 		assertThat(result).containsEntry(lottoProfit, matchingCount);
@@ -35,10 +35,14 @@ class LottoResultTest {
 
 	private static Stream<Arguments> match() {
 		return Stream.of(
-				Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,11)), 5, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, 1)
+				Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3, false, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3, true, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4, false, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4, true, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,11)), 5, false, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,7)), 5, true, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, false, 1),
+				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, true, 1)
 		);
 	}
 
@@ -51,7 +55,7 @@ class LottoResultTest {
 		lottos.buy(1000, () -> buyFirstLottoNumbers);
 		lottos.buy(1000, () -> buySecondLottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
-		lottoResult.match("1, 2, 3, 4, 5, 6");
+		lottoResult.match("1, 2, 3, 4, 5, 6", 7);
 
 		//when
 		double rate = lottoResult.rate();

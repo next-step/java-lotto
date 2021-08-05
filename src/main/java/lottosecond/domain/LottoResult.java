@@ -18,11 +18,12 @@ public class LottoResult {
 		result.put(LottoProfit.THREE, 0);
 		result.put(LottoProfit.FOUR, 0);
 		result.put(LottoProfit.FIVE, 0);
+		result.put(LottoProfit.FIVE_BONUS, 0);
 		result.put(LottoProfit.SIX, 0);
 	}
 
-	public void match(String winningNumberText) {
-		putIntoMap(toList(winningNumberText));
+	public void match(String winningNumberText, int bonusNumber) {
+		putIntoMap(toList(winningNumberText), bonusNumber);
 	}
 
 	private List<Integer> toList(String winningNumberText) {
@@ -56,16 +57,17 @@ public class LottoResult {
 		}
 	}
 
-	private void putIntoMap(List<Integer> winningNumbers) {
+	private void putIntoMap(List<Integer> winningNumbers, int bonusNumber) {
 		for (Lotto lotto : lottos.toList()) {
 			int quantity = lotto.matchingQuantityFrom(winningNumbers);
-			putResult(quantity);
+			boolean matchBonus = lotto.hasBonus(bonusNumber);
+			putResult(quantity, matchBonus);
 		}
 	}
 
-	private void putResult(int quantity) {
+	private void putResult(int quantity, boolean matchBonus) {
 		if (quantity > MATCHING_STANDARD) {
-			LottoProfit lottoProfit = LottoProfit.from(quantity);
+			LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
 			result.put(lottoProfit, getMatchingCount(lottoProfit));
 		}
 	}
