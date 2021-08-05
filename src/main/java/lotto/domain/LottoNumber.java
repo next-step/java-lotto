@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Comparator;
 import java.util.Objects;
-import lotto.Message.Message;
+import lotto.message.Message;
 
 public class LottoNumber implements Comparator<LottoNumber> {
 

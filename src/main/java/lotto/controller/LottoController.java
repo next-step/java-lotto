@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
-import lotto.Message.Message;
+import lotto.message.Message;
 import lotto.domain.Lotto;
 import lotto.service.LotteryDraw;
 import lotto.strategy.RealGenerateLottoNumber;
@@ -20,11 +20,11 @@ public class LottoController {
 
     new ResultView(lotteryDraw.getLottiesInfo().getLotties().size());
 
+    new LottiesDrawingView(lotteryDraw);
+
     Map<Integer, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.getLottiesInfo(), lotteryDraw.inputWinningNumbers(
             InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
-
-    new LottiesDrawingView(lotteryDraw);
 
     new ResultView(matchResult,lotteryDraw.gradingScore(matchResult));
 

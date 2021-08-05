@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.Message.Message;
+import lotto.message.Message;
 import lotto.domain.Lotto;
 import lotto.service.Rank;
 
@@ -19,7 +19,7 @@ public class ResultView {
     for (Integer ratingNumber : matchResult.keySet()) {
       System.out.println(ratingNumber + "개 일치 ("
           + Rank.matchRank(ratingNumber).getWinningMoney()
-          + ") - "
+          + "원) - "
           + matchResult.get(ratingNumber).size()
           + "개");
     }

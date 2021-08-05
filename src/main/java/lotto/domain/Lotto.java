@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import lotto.Message.Message;
+import lotto.message.Message;
 import lotto.strategy.GenerateLottoNumber;
 
 public class Lotto  implements Comparator<LottoNumber> {

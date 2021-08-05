@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.Message.Message;
+import lotto.message.Message;
 
 public class LottoMoney {
 

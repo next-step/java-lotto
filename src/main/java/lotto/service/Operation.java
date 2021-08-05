@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
-import lotto.Message.Message;
+import lotto.message.Message;
 
 public enum Operation {
   PLUS("+", (a, b)-> {

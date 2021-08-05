@@ -14,5 +14,6 @@ public class LottiesDrawingView {
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList()))
         .forEach(System.out::println);
+    System.out.print("\n");
   }
 }

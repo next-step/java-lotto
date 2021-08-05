@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.Message.Message;
+import lotto.message.Message;
 import lotto.domain.Lotties;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
