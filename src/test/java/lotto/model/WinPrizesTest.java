@@ -32,7 +32,7 @@ class WinPrizesTest {
 	@DisplayName("전체 당첨등급에 대해서 반환한다.")
 	public void totalPrizeGradeNumber() {
 		WinPrizes winPrizes = new WinPrizes(getWinPrize());
-		int prizeGradeNumber = winPrizes.winPrizeSize();
+		int prizeGradeNumber = winPrizes.getWinPrizeSize();
 
 		assertThat(prizeGradeNumber).isEqualTo(5);
 	}
@@ -50,7 +50,7 @@ class WinPrizesTest {
 	@DisplayName("당첨에 대한 정보를 알수있다.")
 	public void resultWinPrize(){
 		WinPrizes winPrizes = new WinPrizes(getWinPrizeTotalMoney());
-		List<Prize> prizes = winPrizes.resultWinPrizes();
+		List<Prize> prizes = winPrizes.drawResultWinPrizes();
 
 		assertThat(prizes.size()).isEqualTo(5);
 		assertThat(winPrizes.searchWinPrizeGrade(prizes.get(1))).isEqualTo(5);

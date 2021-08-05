@@ -18,7 +18,7 @@ public class WinPrizes {
 		return winPrizes.get(prize);
 	}
 
-	public int winPrizeSize() {
+	public int getWinPrizeSize() {
 		return winPrizes.size();
 	}
 
@@ -29,7 +29,7 @@ public class WinPrizes {
 			.sum();
 	}
 
-	public List<Prize> resultWinPrizes() {
+	public List<Prize> drawResultWinPrizes() {
 		List<Prize> resultPrize = new ArrayList<>(winPrizes.keySet());
 		resultPrize.sort(new PrizeComparator());
 		return resultPrize;

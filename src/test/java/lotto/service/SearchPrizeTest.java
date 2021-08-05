@@ -24,7 +24,7 @@ class SearchPrizeTest {
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 7, 12, 34)));
 		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(lottoGame, "1,3,5,7,9,17");
 
-		assertThat(winPrizes.winPrizeSize()).isEqualTo(5);
+		assertThat(winPrizes.getWinPrizeSize()).isEqualTo(5);
 		assertThat(winPrizes.searchWinPrizeGrade(Prize.FIFTH)).isEqualTo(1);
 		assertThat(winPrizes.searchWinPrizeGrade(Prize.FOURTH)).isEqualTo(1);
 	}

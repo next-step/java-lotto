@@ -28,7 +28,7 @@ public class LottoOutputView {
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();
-		for (Prize result : winPrizes.resultWinPrizes()) {
+		for (Prize result : winPrizes.drawResultWinPrizes()) {
 			getResultStatusPrint(winPrizes, result);
 		}
 		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, money) + "입니다.");
