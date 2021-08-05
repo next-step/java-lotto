@@ -6,10 +6,16 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static java.lang.Math.toIntExact;
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 public class Lotto {
     private final Set<LottoNumber> numbers;
+
+    private static final String DELIMITER = ", ";
+
+    private static final int NUMBER_OF_LOTTO_COUNT = 6;
 
     private Lotto(final Collection<LottoNumber> numbers) {
         this.numbers = new TreeSet<>(numbers);
@@ -27,17 +33,33 @@ public class Lotto {
 
     public static Lotto from(final String string) {
         Objects.requireNonNull(string, "numbers must be not null.");
-        return new Lotto(LottoNumber.aggregate(string));
+        return new Lotto(aggregate(string));
     }
 
-    public int getMatchCount(final Collection<LottoNumber> winningNumber) {
-        return toIntExact(winningNumber.stream()
-                                       .filter(numbers::contains)
-                                       .count());
+    private static Set<LottoNumber> aggregate(final String winningNumber) {
+        Set<LottoNumber> lottoNumbers = stream(winningNumber.split(DELIMITER))
+                .map(LottoNumber::from)
+                .collect(toSet());
+
+        validateAggregate(lottoNumbers);
+
+        return lottoNumbers;
     }
 
-    public boolean isMatchBonus(final LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    private static void validateAggregate(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != NUMBER_OF_LOTTO_COUNT) {
+            throw new IllegalArgumentException("Set<LottoNumber> size must be " + NUMBER_OF_LOTTO_COUNT);
+        }
+    }
+
+    public int getMatchCount(Lotto winningLotto) {
+        return toIntExact(winningLotto.numbers.stream()
+                                              .filter(this::contains)
+                                              .count());
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override

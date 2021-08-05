@@ -2,21 +2,15 @@ package lotto.model;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import static java.lang.Integer.parseInt;
-import static java.util.Arrays.stream;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
 import static java.util.stream.IntStream.rangeClosed;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final String DELIMITER = ", ";
-
     public static final int MIN_OF_LOTTO_NUMBER = 1;
     public static final int MAX_OF_LOTTO_NUMBER = 45;
-    private static final int NUMBER_OF_LOTTO_COUNT = 6;
 
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = rangeClosed(MIN_OF_LOTTO_NUMBER, MAX_OF_LOTTO_NUMBER)
             .mapToObj(LottoNumber::new)
@@ -47,22 +41,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public int toInt() {
         return number;
-    }
-
-    public static Set<LottoNumber> aggregate(final String winningNumber) {
-        Set<LottoNumber> lottoNumbers = stream(winningNumber.split(DELIMITER))
-                .map(LottoNumber::from)
-                .collect(toSet());
-
-        validateAggregate(lottoNumbers);
-
-        return lottoNumbers;
-    }
-
-    private static void validateAggregate(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != NUMBER_OF_LOTTO_COUNT) {
-            throw new IllegalArgumentException("Set<LottoNumber> size must be " + NUMBER_OF_LOTTO_COUNT);
-        }
     }
 
     @Override
