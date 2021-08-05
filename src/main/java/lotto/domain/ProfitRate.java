@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class ProfitRate {
-    double profitRate;
+    private final double profitRate;
 
     private ProfitRate(double profitRate) {
         this.profitRate = profitRate;
