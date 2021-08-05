@@ -13,13 +13,10 @@ public class InputView {
 	private String winningNumbers;
 	private int bonusNumber;
 
-
 	public InputView() {
 		System.out.println(HOW_MUCH);
 		this.money = Integer.parseInt(scanner.nextLine());
 	}
-
-
 
 	public void inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
