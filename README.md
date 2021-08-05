@@ -7,3 +7,43 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+---
+# 로또 요구사항 분석
+
+#### LotteryNumber (로또 숫자)
+
+- 1~45 사이의 숫자 1개를 가진다
+
+
+#### Lottery (로또)
+
+- 중복되지 않는 LotteryNumber (로또 숫자)를 6개를 가진다
+- 다른 Lottery (로또)와 비교하여 당첨 여부를 판단해 WinningLottoCriteria (로또 당첨 기준) 정보를 반환한다
+- 1개당 1000원
+
+
+#### Lotteries (로또 리스트)
+
+- 여러개의 Lottery (로또) 를 가진다
+- LotteryStatistic (로또 통계) 를 제공한다
+
+
+#### LotteryResult (로또 결과)
+
+- 로또 당첨 기준 점수, 상금 정보를 제공한다
+
+
+#### CreatingLotteryStrategy (로또 생성 전략) / RandomCreatingLotteryStrategy (랜덤 로또 생성 전략)
+
+- Lottery (로또) 를 랜덤으로 생성한다
+
+
+#### WinningLotteryStrategy (로또 당첨 전략) / MatchWinningLotteryStrategy (매칭 로또 당첨 전략)
+
+- Lottery (로또)와 당첨번호를 비교하여 당첨 여부를 판단해 WinningLottoCriteria (로또 당첨 기준) 정보를 반환한다
+
+
+
+
