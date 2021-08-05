@@ -1,10 +1,12 @@
 package app.view;
 
 import app.action.LottoMarket;
+import app.domain.ManualCount;
+import app.domain.Money;
 import app.domain.lotto.Lotteries;
 import app.domain.lotto.Lotto;
 import app.domain.lotto.LottoNum;
-import app.domain.Money;
+import app.domain.lotto.WinnerLotto;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -42,10 +44,21 @@ public class InputView {
         return number;
     }
 
-    public static Lotto inputWinnerNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] numbers = scanner.nextLine().split(",");
-        return Lotto.from(convertStrToNum(numbers));
+    public static WinnerLotto inputWinnerNumber(LottoNum bonus) {
+        WinnerLotto lotto = null;
+        while (true) {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            String[] numbers = scanner.nextLine().split(",");
+            try {
+                lotto = WinnerLotto.of(Lotto.from(convertStrToNum(numbers)), bonus);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+        }
+
+        return lotto;
     }
 
     public static List<Integer> convertStrToNum(String[] numbers) {
@@ -71,21 +84,38 @@ public class InputView {
     }
 
     public static Money inputManual(Lotteries lotteries, Money money) {
-        int count = 0;
-        int manualMoney = 0;
-        while(true){
+        ManualCount count = null;
+        count = inputManualCount(money);
+        int manualMoney = count.getCount() * LottoMarket.PRICE;
+        buyLottoManually(lotteries, count);
+
+        return Money.of(money.getMoney() - manualMoney);
+    }
+
+    private static ManualCount inputManualCount(Money money) {
+        ManualCount count = null;
+
+        while (true) {
             System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-            count = Integer.valueOf(scanner.nextLine());
-            manualMoney = count * LottoMarket.PRICE;
-            if(money.getMoney() > manualMoney){
+            count = ManualCount.of(scanner.nextLine());
+            if (money.getMoney() >= count.getCount() * LottoMarket.PRICE) {
                 break;
             }
-            System.out.printf("구입할수 있는 최대 갯수는 %d개 입니다.\n",money.getMoney()/LottoMarket.PRICE);
+            System.out.printf("구입할수 있는 최대 갯수는 %d개 입니다.\n", money.getMoney() / LottoMarket.PRICE);
         }
+        return count;
+    }
 
-        for(int i=0; i<count; i++){
-
+    private static void buyLottoManually(Lotteries lotteries, ManualCount count) {
+        for (int i = 0; i < count.getCount(); i++) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            try {
+                lotteries.addManualLotto(Lotto.from(scanner.nextLine()));
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다.");
+                i--;
+                continue;
+            }
         }
-        return Money.of(money.getMoney()-manualMoney);
     }
 }

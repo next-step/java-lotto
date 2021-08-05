@@ -4,6 +4,7 @@ import app.domain.*;
 import app.domain.lotto.Lotteries;
 import app.domain.lotto.Lotto;
 import app.domain.lotto.LottoNum;
+import app.domain.lotto.WinnerLotto;
 import app.strategy.LottoNumStrategy;
 import app.strategy.RandomLottoNum;
 import org.junit.jupiter.api.DisplayName;
@@ -44,7 +45,7 @@ class LottoMarketTest {
 
         market.buy(Money.of(1000));
 
-        assertThat(market.checkNumToWinner(Lotto.from(Arrays.asList(1,2,3,4,5,6)), LottoNum.of(7)).get(Winning.FIRST))
+        assertThat(market.checkNumToWinner(WinnerLotto.of(Lotto.from(Arrays.asList(1,2,3,4,5,6)), LottoNum.of(7))).get(Winning.FIRST))
                 .isEqualTo(1);
     }
 

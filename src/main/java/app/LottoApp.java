@@ -29,9 +29,9 @@ public class LottoApp {
 
 
         int buyMoney = market.buy(manualCountMoney);
-        ResultView.showList(myLottoList.getAll());
+        ResultView.showList(myLottoList.getAll(),manualCountMoney);
         LottoNum bonus = InputView.inputBonus();
-        Map<Winning, Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(), bonus);
+        Map<Winning, Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(bonus));
 
         ResultView.showResult(result, buyMoney);
     }

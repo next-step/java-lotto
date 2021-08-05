@@ -3,11 +3,19 @@ package app.domain;
 public class ManualCount {
     private int count;
 
-    public ManualCount(int count) {
+    private ManualCount(int count) {
         if(count <0){
-            throw new IllegalArgumentException("1이상 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
         this.count = count;
+    }
+
+    public static ManualCount of(int number) {
+        return new ManualCount(number);
+    }
+
+    public static ManualCount of(String number) {
+        return new ManualCount(Integer.valueOf(number));
     }
 
     public int getCount() {

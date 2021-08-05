@@ -15,7 +15,7 @@ public class Money {
     }
 
     private void validation(int money) {
-        if(money < LottoMarket.PRICE){
+        if(money < 0){
             throw new IllegalArgumentException("객체 생성 Error "+money);
         }
     }

@@ -1,5 +1,7 @@
 package app.view;
 
+import app.action.LottoMarket;
+import app.domain.Money;
 import app.domain.lotto.Lotto;
 import app.domain.Winning;
 
@@ -8,8 +10,9 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void showList(List<Lotto> lottoList) {
-        System.out.printf("자동으로 %d개를 구매했습니다.\n", lottoList.size());
+    public static void showList(List<Lotto> lottoList, Money money) {
+        int randomLottoCount = money.getMoney()/ LottoMarket.PRICE;
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", lottoList.size()-(randomLottoCount), randomLottoCount);
         for (Lotto lotto : lottoList) {
             System.out.println(lotto);
         }
