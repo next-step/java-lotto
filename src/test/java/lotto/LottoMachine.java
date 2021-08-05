@@ -6,8 +6,10 @@ import java.util.List;
 public class LottoMachine {
     private final List<Lotto> lotties;
 
-    public LottoMachine(int money) {
-        validMoney(money);
+    public LottoMachine(final int money) {
+        if (!validMoney(money)) {
+            throw new RuntimeException();
+        }
         this.lotties = createLotto(money);
     }
 
@@ -19,10 +21,8 @@ public class LottoMachine {
         return lotties;
     }
 
-    private void validMoney(int money) {
-        if (money % 1000 != 0) {
-            throw new RuntimeException("1000원 단위로 구입하세요");
-        }
+    private boolean validMoney(int money) {
+        return money % 1000 == 0;
     }
 
     public int lottiesCount() {
