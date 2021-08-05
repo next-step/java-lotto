@@ -13,9 +13,8 @@ public class LottoController {
 
 	public static void main(String[] args) {
 		int money = LottoInputView.buyRequestView();
-		LottoPurchase lottoPurchase = new LottoPurchase();
 
-		List<Lotto> resultLottoGame = lottoPurchase.lottoTicketPurchase(money);
+		List<Lotto> resultLottoGame = LottoPurchase.lottoTicketPurchase(money);
 
 		LottoOutputView.lottoNumbersList(resultLottoGame);
 

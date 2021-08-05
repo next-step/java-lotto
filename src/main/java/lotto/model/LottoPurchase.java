@@ -9,7 +9,7 @@ public class LottoPurchase {
 
 	public static final int START_INCLUSIVE = 0;
 
-	public List<Lotto> lottoTicketPurchase(int buyMoney) {
+	public static List<Lotto> lottoTicketPurchase(int buyMoney) {
 		int ticketNumber = TicketCalculation.getLottoTicketNumber(buyMoney);
 		List<Lotto> lottoCreateGame = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < ticketNumber; i++) {
@@ -19,7 +19,7 @@ public class LottoPurchase {
 		return lottoCreateGame;
 	}
 
-	private List<Integer> createLottoNumber() {
+	private static List<Integer> createLottoNumber() {
 		return new ArrayList<>(LottoMachine.createLottoNumber());
 	}
 
