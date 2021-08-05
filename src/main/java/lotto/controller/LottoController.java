@@ -14,14 +14,13 @@ public class LottoController {
 	public static void main(String[] args) {
 		int money = LottoInputView.buyRequestView();
 
-		List<Lotto> resultLottoGame = LottoPurchase.lottoTicketPurchase(money);
+		List<Lotto> obtainLotteries = LottoPurchase.buyLotteries(money);
 
-		LottoOutputView.lottoNumbersList(resultLottoGame);
+		LottoOutputView.lottoNumbersList(obtainLotteries);
 
 		String lastWinNumber = LottoInputView.lastWinLottoNumberView();
 
-		SearchPrize searchPrize = new SearchPrize();
-		WinPrizes winPrizes = searchPrize.confirmWinLottoNumber(resultLottoGame, lastWinNumber);
+		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(obtainLotteries, lastWinNumber);
 		LottoOutputView.resultLottoPrizeView(winPrizes, money);
 	}
 }

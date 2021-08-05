@@ -19,8 +19,8 @@ class LottoGameTest {
 		lotto.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
 		LottoGame lottoGame = new LottoGame(lotto);
 
-		assertThat(lottoGame.getLottoGame().size()).isEqualTo(1);
-		assertThat(lottoGame.getLottoGame().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
+		assertThat(lottoGame.getLotteries().size()).isEqualTo(1);
+		assertThat(lottoGame.getLotteries().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
 			thirdNumber);
 	}
 
