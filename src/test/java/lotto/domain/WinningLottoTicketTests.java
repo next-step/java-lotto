@@ -9,7 +9,7 @@ public class WinningLottoTicketTests {
 
     @DisplayName("정상정인 input(, 정상적으로) 생성 테스트")
     @Test
-    void validInputTest() {
+    void validInputCreateTest() {
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
 
         assertThat(winningLottoTicket).isEqualTo(WinningLottoTicket.of("1, 2, 3, 4, 5, 6"));
@@ -17,7 +17,7 @@ public class WinningLottoTicketTests {
 
     @DisplayName(", 띄어쓰기 멋대로 했을 때 생성 테스트")
     @Test
-    void spaceInputTest() {
+    void spaceInputCreateTest() {
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1,2 ,  3, 4, 5,6");
 
         assertThat(winningLottoTicket).isEqualTo(WinningLottoTicket.of("1,2 ,  3, 4, 5,6"));

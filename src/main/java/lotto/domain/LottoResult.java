@@ -36,14 +36,12 @@ public class LottoResult {
         return Collections.unmodifiableMap(lottoResult);
     }
 
-    public double calculateProfitRate(double purchaseAmount) {
+    public ProfitRate calculateProfitRate(double purchaseAmount) {
 
         double totalAmount = lottoResult.keySet().stream()
                 .mapToDouble(key -> lottoResult.getOrDefault(key, 0) * key.getPrice())
                 .sum();
 
-        double profitRate = totalAmount / purchaseAmount;
-
-        return profitRate;
+        return ProfitRate.of(totalAmount / purchaseAmount);
     }
 }

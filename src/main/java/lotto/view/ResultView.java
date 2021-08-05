@@ -4,6 +4,7 @@ import lotto.LottoRank;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.ProfitRate;
 
 import java.util.Map;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000원)- " + result.getOrDefault(LottoRank.FIRST, DEFAULT_COUNT) + "개");
     }
 
-    public static void printProfitRate(double profitRate) {
-        System.out.println("총 수익률은 " + Math.floor(profitRate * 100) / 100.0 + "입니다.");
+    public static void printProfitRate(ProfitRate profitRate) {
+        System.out.println("총 수익률은 " + Math.floor(profitRate.value() * 100) / 100.0 + "입니다.");
     }
 }
