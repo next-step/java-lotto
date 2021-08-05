@@ -99,6 +99,10 @@ public class LottoTest {
         int notValidateBonusNumber1 = 46;
         assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber1))
                 .isInstanceOf(IllegalArgumentException.class);
+
+        int notValidateBonusNumber2 = 46;
+        assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -136,5 +140,16 @@ public class LottoTest {
         List<String> manualLottoNumbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
         List<Lotto> manualLottos = PlayLotto.createManualLotto(manualLottoNumbers);
         assertThat(manualLottos.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 당첨번호에 포함될 경우")
+    void isContainBonusNumberWinningLottoTest(){
+        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        int bonusNumber = 6;
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
+        assertThatThrownBy(() ->
+            new Lotto(winningLottoNumbers, bonusNumber)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

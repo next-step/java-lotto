@@ -16,7 +16,14 @@ public class Lotto {
 
     public Lotto(LottoNumbers lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
+        validateBonusNumber(bonusNumber);
         this.bonusNumber = new BonusNumber(bonusNumber);
+    }
+
+    private void validateBonusNumber(int bonusNumber) {
+        if(lottoNumbers.isContainBonusNumber(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호에 들어갈 수 없습니다.");
+        }
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
@@ -33,8 +40,8 @@ public class Lotto {
         return prize;
     }
 
-    private int checkBonusNumber(Lotto lotto, int prize) {
-        if (prize == SECOND.getPrize() && !lotto.isContainBonusNumber(bonusNumber.getBonusNumber())) {
+    private int checkBonusNumber(Lotto comparedLotto, int prize) {
+        if (prize == SECOND.getPrize() && !comparedLotto.isContainBonusNumber(bonusNumber.getBonusNumber())) {
             prize = THIRD.getPrize();
         }
         return prize;
