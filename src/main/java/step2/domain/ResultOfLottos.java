@@ -2,7 +2,6 @@ package step2.domain;
 
 import step2.domain.lotto.LottoRank;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,7 +13,7 @@ public class ResultOfLottos {
     private final Map<LottoRank, Integer> resultOfLottos;
 
     public ResultOfLottos() {
-        this(new HashMap<>());
+        this(new EnumMap<>(LottoRank.class));
     }
 
     public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
