@@ -1,7 +1,6 @@
 package step2.domain.user;
 
 import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoMachine;
 import step2.domain.money.Cache;
 import step2.domain.money.Money;
 import java.util.List;
@@ -34,8 +33,8 @@ public class User {
         return wallet;
     }
 
-    public void buyLotto(LottoMachine lottoMachine) {
-        this.lottos = lottoMachine.sell(myWallet().currentMoney());
+    public void buyLotto(List<Lotto> boughtLottos) {
+        this.lottos = boughtLottos;
     }
 
     public List<Lotto> getLottos() {
