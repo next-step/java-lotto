@@ -20,7 +20,7 @@ public enum LottoProfit {
 	}
 
 	public static LottoProfit from(int quantity, boolean matchBonus) {
-		if (quantity == 5 && matchBonus) {
+		if (quantity == FIVE_BONUS.getQuantity() && matchBonus) {
 			return FIVE_BONUS;
 		}
 		return Arrays.stream(LottoProfit.values())
