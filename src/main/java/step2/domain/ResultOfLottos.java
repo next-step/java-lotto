@@ -4,7 +4,6 @@ import step2.domain.lotto.LottoRank;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ResultOfLottos {
 
@@ -21,13 +20,11 @@ public class ResultOfLottos {
     }
 
     public Integer sumMoney() {
-        AtomicInteger sum = new AtomicInteger(0);
-
-        resultOfLottos.forEach((lottoRank, count) -> sum.set(count * lottoRank.getMoney()));
-
-        return sum.get();
+        return resultOfLottos.keySet()
+            .stream()
+            .map(lottoRank -> lottoRank.getMoney() * resultOfLottos.get(lottoRank))
+            .reduce(Integer::sum).orElse(0);
     }
-
 
     public void put(LottoRank lottoRank) {
         resultOfLottos.put(lottoRank, resultOfLottos.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
