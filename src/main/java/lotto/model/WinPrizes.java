@@ -22,7 +22,7 @@ public class WinPrizes {
 		return winPrizes.size();
 	}
 
-	public int getTotalMoney() {
+	public int getTotalWinningMoney() {
 		return winPrizes.keySet()
 			.stream()
 			.mapToInt(winnerResult -> (winnerResult.getWinningMoney() * winPrizes.get(winnerResult)))
@@ -35,10 +35,4 @@ public class WinPrizes {
 		return resultPrize;
 	}
 
-	public String winPrizeStatus(Prize prize) {
-		return prize.getCountOfMatch() +
-			"개 일치" +
-			"(" + prize.getWinningMoney() + ")" +
-			"-" + searchWinPrizeGrade(prize) + "개";
-	}
 }

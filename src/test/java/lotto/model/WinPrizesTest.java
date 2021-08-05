@@ -41,7 +41,7 @@ class WinPrizesTest {
 	@DisplayName("전체 당첨금의 금액을 알수 있다.")
 	public void getTotalMoney() {
 		WinPrizes winPrizes = new WinPrizes(getWinPrizeTotalMoney());
-		int getTotalMoney = winPrizes.getTotalMoney();
+		int getTotalMoney = winPrizes.getTotalWinningMoney();
 
 		assertThat(getTotalMoney).isEqualTo(25000);
 	}
