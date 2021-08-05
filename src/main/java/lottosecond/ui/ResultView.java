@@ -13,6 +13,7 @@ public class ResultView {
 	private static final String MATCH_RESULT = "\n당첨 통계";
 	private static final String DIVISION_LINE = "--------";
 	private static final String MATCH_FOR_EACH_MESSAGE = "%d개 일치 (%d원) - %d개%n";
+	private static final String MATCH_FOR_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개%n";
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n";
 
 	private final Lottos lottos;
@@ -30,12 +31,12 @@ public class ResultView {
 	}
 
 
-	public void printResult(String winningNumbers) {
+	public void printResult(String winningNumbers, int bonusNumber) {
 		System.out.println(MATCH_RESULT);
 		System.out.println(DIVISION_LINE);
 
 		LottoResult lottoResult = new LottoResult(lottos);
-		lottoResult.match(winningNumbers);
+		lottoResult.match(winningNumbers, bonusNumber);
 
 		printResultEach(lottoResult.value());
 		printResultRate(lottoResult);
@@ -49,8 +50,16 @@ public class ResultView {
 
 	private void printResultEach(Map<LottoProfit, Integer> match) {
 		for (Map.Entry<LottoProfit, Integer> profit : match.entrySet()) {
-			System.out.printf(MATCH_FOR_EACH_MESSAGE, profit.getKey().getQuantity(), profit.getKey().getProfitUnit(), profit.getValue());
+			String message = messageTemplate(profit);
+			System.out.printf(message, profit.getKey().getQuantity(), profit.getKey().getProfitUnit(), profit.getValue());
 		}
+	}
+
+	private String messageTemplate(Map.Entry<LottoProfit, Integer> profit) {
+		if (profit.getKey().equals(LottoProfit.FIVE_BONUS)) {
+			return MATCH_FOR_BONUS_MESSAGE;
+		}
+		return MATCH_FOR_EACH_MESSAGE;
 	}
 
 }
