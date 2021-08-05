@@ -28,17 +28,13 @@ public class Lotto {
 	public int matchingQuantityFrom(List<Integer> lastWeekNumbers) {
 		int matchedCount = 0;
 		for (Integer lastWeekNumber : lastWeekNumbers) {
-			matchedCount += sumMatchedCount(lastWeekNumber);
+			matchedCount += getMatchedCount(lastWeekNumber);
 		}
 		return matchedCount;
 	}
 
-	private int sumMatchedCount(Integer lastWeekNumber) {
-		int matchCount = 0;
-		for (LottoNumber number : numbers) {
-			matchCount += number.equals(LottoNumber.valueOf(lastWeekNumber)) ? 1 : 0;
-		}
-		return matchCount;
+	private int getMatchedCount(Integer lastWeekNumber) {
+		return numbers.contains(LottoNumber.valueOf(lastWeekNumber)) ? 1 : 0;
 	}
 
 	@Override
