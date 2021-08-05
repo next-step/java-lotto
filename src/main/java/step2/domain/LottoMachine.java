@@ -1,10 +1,10 @@
 package step2.domain;
 
-import java.lang.reflect.Array;
+import step2.view.ResultView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class LottoMachine {
     private static String[] lastLottoNumArray;
@@ -12,6 +12,7 @@ public class LottoMachine {
     private static final int COUNT_OF_LOTTO = 6;
     private static int numOfLotto;
     private static int[] matchedLottoRecordArray = new int[COUNT_OF_LOTTO];
+    private static ResultView resultView = new ResultView();
 
     public LottoMachine(String lastLottoNum, int numOfLotto) {
         this.lastLottoNumArray = checkValidInput(lastLottoNum);
@@ -50,6 +51,7 @@ public class LottoMachine {
         for (int i = 0; i < COUNT_OF_LOTTO; i++) {
             lotto[i] = lottoNumberList.get(i);
         }
+        resultView.printIssuedLottoNumber(lotto);
         return lotto;
     }
 

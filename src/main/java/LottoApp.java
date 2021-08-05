@@ -7,7 +7,6 @@ public class LottoApp {
 
         int numOfLotto = inputView.requestInput();
         String lastLottoNum = inputView.requestLottoNumber();
-        System.out.println(lastLottoNum);
 
         LottoMachine lottoMachine = new LottoMachine(lastLottoNum, numOfLotto);
         lottoMachine.run();
