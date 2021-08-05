@@ -3,12 +3,13 @@ package stringaddcalculator;
 import stringaddcalculator.util.StringUtil;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
     private static final String DELIMITER = ",|:";
-    private static final String CUSTOM_PREFIX = "//";
-    private static final String CUSTOM_SUFFIX = "\n";
+
 
     public static int splitAndSum(String expression) {
 
@@ -16,12 +17,11 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (expression.startsWith(CUSTOM_PREFIX)) {
-            int lastIndex = expression.indexOf(CUSTOM_SUFFIX);
-            String customDelimiter = expression.substring(CUSTOM_PREFIX.length(), lastIndex);
-            String truncatedExpression = expression.substring(lastIndex + CUSTOM_SUFFIX.length());
-
-            return sumSplitExpression(truncatedExpression.split(customDelimiter));
+        Matcher matchResult = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        if (matchResult.find()) {
+            String customDelimiter = matchResult.group(1);
+            String[] tokens= matchResult.group(2).split(customDelimiter);
+            return sumSplitExpression(tokens);
         }
 
         return sumSplitExpression(expression.split(DELIMITER));
