@@ -11,9 +11,9 @@ public class PrizeRate {
 	private PrizeRate() {
 	}
 
-	public static String getPrizeEarningRate(int getTotalWinMoney, int money) {
+	public static String getPrizeEarningRate(int totalWiningMoney, int money) {
 		NumberFormat formatter = new DecimalFormat(NUMBER_FORMAT_PATTERN);
 		formatter.setRoundingMode(RoundingMode.DOWN);
-		return formatter.format((double)(getTotalWinMoney) / (double)(money));
+		return formatter.format((double)(totalWiningMoney) / (double)(money));
 	}
 }

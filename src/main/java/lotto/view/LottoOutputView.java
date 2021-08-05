@@ -5,22 +5,28 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
+import lotto.utils.LottoTicketCalculator;
 import lotto.utils.PrizeRate;
 
 public class LottoOutputView {
 
+	private static final String BUY_RESULT_MESSAGE = "개를 구매했습니다.";
 	private static final String RESULT_START_MESSAGE = "당첨 통계";
 	private static final String DASH_LINE = "---------";
 	public static final int ZERO_POINT = 0;
 
+	public static void printTicketCount(int money) {
+		System.out.println(LottoTicketCalculator.calculatorLottoTicketCount(money) + BUY_RESULT_MESSAGE);
+	}
+
 	public static void printLottoList(List<Lotto> resultLotto) {
 		for (Lotto lotto : resultLotto) {
-			lottoGameView(lotto);
+			printLottoGameView(lotto);
 		}
 		System.out.print("\n");
 	}
 
-	private static void lottoGameView(Lotto lotto) {
+	private static void printLottoGameView(Lotto lotto) {
 		System.out.println(lotto.getLotto());
 	}
 
