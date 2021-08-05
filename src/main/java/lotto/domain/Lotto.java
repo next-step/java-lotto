@@ -3,12 +3,21 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.enums.Rank;
+
 public class Lotto {
 
 	private final List<Integer> lottoNumbers;
 
 	public Lotto(List<Integer> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	public Rank figureOutRank(Lotto winningLotto) {
+		long matchNumberCount = lottoNumbers.stream()
+										.filter(winningLotto.lottoNumbers::contains)
+										.count();
+		return Rank.of(matchNumberCount);
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.enums.Rank;
+
 class LottoTest {
 
 	private final List<Integer> buyNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
@@ -27,6 +29,6 @@ class LottoTest {
 		Lotto buyLotto = new Lotto(buyNumbers);
 		Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10, 11));
 
-		assertThat(buyLotto.figureOutRank(winningLotto)).isEqualTo(4);
+		assertThat(buyLotto.figureOutRank(winningLotto)).isEqualTo(Rank.FOURTH);
 	}
 }
