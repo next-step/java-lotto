@@ -9,11 +9,11 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers.generateNumbers();
     }
 
-    WinAmount getWinAmount(LottoNumbers winNumbers) {
+    WinAmount getWinAmount(LottoNumbers winNumbers, int bonusNumber) {
         int matchCount = (int) winNumbers.generateNumbers().stream()
                 .filter(i -> this.lottoNumbers.contains(i))
                 .count();
-        return WinAmount.valueOfMatchCount(matchCount, false);
+        return WinAmount.valueOfMatchCount(matchCount, this.lottoNumbers.contains(bonusNumber));
     }
 
     public List<Integer> getLottoNumbers() {

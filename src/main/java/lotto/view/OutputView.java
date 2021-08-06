@@ -11,6 +11,7 @@ public class OutputView {
     private static final String MSG_PURCHASE = "개를 구매했습니다.";
     private static final String MSG_WIN_STATS = "당첨 통계\n" + "---------";
     private static final String MSG_WIN_COUNT = "%d개 일치 (%d원)- %d개\n";
+    private static final String MSG_WIN_COUNT_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String MSG_YIELD = "총 수익률은 %.2f입니다.";
     private static final String MSG_YIELD_LOSE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String MSG_YIELD_WIN = "(오늘 로또 사러 갑니다)";
@@ -29,7 +30,13 @@ public class OutputView {
         // 일치 통계
         Map<WinAmount, Integer> maps = winStats.getMatchMap();
         Set<WinAmount> keys = maps.keySet();
-        keys.forEach(i -> System.out.printf(MSG_WIN_COUNT, i.getMatchCount(), i.getReward(), maps.get(i)));
+        keys.forEach(i -> {
+            String msg = MSG_WIN_COUNT;
+            if(i == WinAmount.SECOND){
+                msg = MSG_WIN_COUNT_SECOND;
+            }
+            System.out.printf(msg, i.getMatchCount(), i.getReward(), maps.get(i));
+        });
 
         // 수익률
         float yield = winStats.getYield();
