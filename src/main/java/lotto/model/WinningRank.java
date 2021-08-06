@@ -45,7 +45,7 @@ public enum WinningRank {
     }
 
     static WinningRank findWinningRank(Lotto lotto, WinningNumbers winningNumbers) {
-        int correctAnswerCount = lotto.getEqualNumberCount(winningNumbers.getNumbers());
+        int correctAnswerCount = lotto.findEqualNumberCount(winningNumbers.getNumbers());
         return ANSWER_COUNT_WINNING_RANK_MAP.get(correctAnswerCount);
     }
 }

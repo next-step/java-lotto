@@ -36,7 +36,7 @@ public class Lotto {
         return numbers;
     }
 
-    int getEqualNumberCount(List<LottoNumber> lottoNumbers) {
+    int findEqualNumberCount(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> equalLottoNumbers = lottoNumbers.stream()
                 .filter(numbers::contains)
                 .collect(toList());
