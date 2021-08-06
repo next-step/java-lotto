@@ -27,5 +27,4 @@ public class LottoMachine {
 		Collections.shuffle(lottoBalls);
 		return lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE);
 	}
-
 }
