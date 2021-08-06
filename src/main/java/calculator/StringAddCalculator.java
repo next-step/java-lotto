@@ -10,11 +10,33 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final int NUMBERS_JOINED_BY_DELIMITER_GROUP = 2;
     private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final String INVALID_INPUT_EXCEPTION_MESSAGE_FORMAT = "유효하지 않은 입력입니다. input: %s";
+    private static final String NEGATIVE_INTEGER_EXCEPTION_MESSAGE_FORMAT = "입력 값 중, 음수가 존재합니다. numberString: %s";
 
     public int calculate(String input) {
-        return Arrays.stream(parse(input))
-                .mapToInt(Integer::parseInt)
+        try {
+            return calculate(parse(input));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format(INVALID_INPUT_EXCEPTION_MESSAGE_FORMAT, input));
+        }
+    }
+
+    private int calculate(String[] stringsParsedByDelimiter) {
+        return Arrays.stream(stringsParsedByDelimiter)
+                .mapToInt(this::convertStringToNonNegativeInteger)
                 .sum();
+    }
+
+    private int convertStringToNonNegativeInteger(String numberString) {
+        int number = Integer.parseInt(numberString);
+        validateNonNegativeInteger(number);
+        return number;
+    }
+
+    private void validateNonNegativeInteger(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(String.format(NEGATIVE_INTEGER_EXCEPTION_MESSAGE_FORMAT, number));
+        }
     }
 
     private String[] parse(String input) {

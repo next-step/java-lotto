@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringAddCalculatorTest {
 
@@ -19,6 +20,14 @@ class StringAddCalculatorTest {
     @CsvSource(value = {"//;\\n1;2;3=6", "//+\\n1+2=3"}, delimiter = '=')
     public void addByCustomDelimiterTest(String input, int expectedResult) {
         assertThat(calculator.calculate(input)).isEqualTo(expectedResult);
+    }
+
+    @ParameterizedTest(name = "숫자 이외의 값 또는 음수를 전달하는 경우 예외가 발생한다.")
+    @CsvSource(value = {"-1,2,3", "a,2,3"})
+    public void invalidInputExceptionTest(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.calculate(input))
+                .withMessageContaining(input);
     }
 
 }
