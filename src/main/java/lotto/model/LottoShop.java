@@ -1,15 +1,12 @@
 package lotto.model;
 
-import lotto.strategy.AutoLottoStrategy;
-import lotto.strategy.LottoRuleStrategy;
-
 import java.util.Objects;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
-    private static final LottoRuleStrategy LOTTO_STRATEGY = AutoLottoStrategy.getInstance();
+    private static final LottoMachine LOTTO_MACHINE = LottoMachine.getInstance();
 
     public static final int LOTTO_PRICE = 1_000;
 
@@ -40,6 +37,6 @@ public class LottoShop {
     }
 
     private Lotto getLotto() {
-        return LOTTO_STRATEGY.ticketing();
+        return LOTTO_MACHINE.auto();
     }
 }

@@ -15,7 +15,7 @@ public class Lotto {
 
     private static final String DELIMITER = ", ";
 
-    private static final int NUMBER_OF_LOTTO_COUNT = 6;
+    public static final int NUMBER_OF_LOTTO_COUNT = 6;
 
     private Lotto(final Collection<LottoNumber> numbers) {
         this.numbers = new TreeSet<>(numbers);
