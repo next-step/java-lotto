@@ -9,37 +9,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPlaceChecker {
-    private final List<Integer> lastWeekLottoNums;
+    private final LastWeekLotto lastWeekLotto;
 
-    private LottoPlaceChecker(List<Integer> lastWeekLottoNums) {
-        this.lastWeekLottoNums = lastWeekLottoNums;
+    private LottoPlaceChecker(LastWeekLotto lastWeekLotto) {
+        this.lastWeekLotto = lastWeekLotto;
     }
 
-    public static LottoPlaceChecker of(List<Integer> lastWeekLottoNums) {
-        return new LottoPlaceChecker(lastWeekLottoNums);
+    public static LottoPlaceChecker of(LastWeekLotto lastWeekLotto) {
+        return new LottoPlaceChecker(lastWeekLotto);
     }
 
     public List<LottoPlace> getLottoPlace(Lottos lottos) {
         List<LottoPlace> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
             int correctNum = getCorrectNum(lotto);
-            results.add(LottoPlace.findPlaceByCorrectNum(correctNum));
+            boolean isBonusNumCorrect = isBonusNumCorrect(lotto);
+            results.add(LottoPlace.findPlaceByCorrectNum(correctNum, isBonusNumCorrect));
         }
         return results;
     }
 
     private int getCorrectNum(Lotto lotto) {
-        return (int) lotto.getLottoNums().stream()
-            .filter(lastWeekLottoNums::contains)
+        return (int) lotto.getLottoNums()
+            .stream()
+            .filter(lastWeekLotto.getLottoNums()::contains)
             .count();
+    }
+
+    private boolean isBonusNumCorrect(Lotto lotto) {
+        return lotto.getLottoNums()
+            .stream()
+            .anyMatch(i -> i == lastWeekLotto.getBonusNum());
     }
 
     public BigDecimal calculateWinnerRate(List<LottoPlace> lottoPlaces, int totalCost) {
         long sum = calculateTotalPrice(lottoPlaces);
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(totalCost), 6, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(sum)
+            .divide(BigDecimal.valueOf(totalCost), 6, RoundingMode.HALF_EVEN);
     }
 
     private static long calculateTotalPrice(List<LottoPlace> lottoPlaces) {
-        return lottoPlaces.stream().mapToLong(LottoPlace::getPrice).sum();
+        return lottoPlaces.stream()
+            .mapToLong(LottoPlace::getPrice)
+            .sum();
     }
 }

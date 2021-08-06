@@ -1,6 +1,7 @@
 package step3;
 
 import step3.domain.Lottos;
+import step3.lottoPlace.LastWeekLotto;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -11,7 +12,7 @@ public class App {
         Lottos lottos = InputView.buyLotto();
         ResultView.showCurrent(lottos);
 
-        List<Integer> lastWeekLottoNum = InputView.lastWeekLottoNum();
-        ResultView.showResult(lastWeekLottoNum, lottos);
+        LastWeekLotto lastWeekLotto = InputView.lastWeekLottoNum();
+        ResultView.showResult(lastWeekLotto, lottos);
     }
 }

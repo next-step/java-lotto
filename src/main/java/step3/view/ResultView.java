@@ -1,6 +1,7 @@
 package step3.view;
 
 import step3.domain.Lottos;
+import step3.lottoPlace.LastWeekLotto;
 import step3.lottoPlace.LottoPlace;
 import step3.lottoPlace.LottoPlaceChecker;
 
@@ -24,8 +25,8 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void showResult(List<Integer> lastWeekLottoNum, Lottos lottos) {
-        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(lastWeekLottoNum);
+    public static void showResult(LastWeekLotto lastWeekLotto, Lottos lottos) {
+        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(lastWeekLotto);
         List<LottoPlace> lottoPlaces = lottoPlaceChecker.getLottoPlace(lottos);
         BigDecimal winnerRate = lottoPlaceChecker.calculateWinnerRate(lottoPlaces, lottos.getTotalCost());
 

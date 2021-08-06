@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
+
     private final int cost;
 
     public Lottos(int count, int cost) {
