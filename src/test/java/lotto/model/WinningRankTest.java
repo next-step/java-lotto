@@ -15,9 +15,13 @@ public class WinningRankTest {
     @Test
     public void winningRankResultTest() {
         // given
-        List<LottoNumber> lottoNumbers = LottoNumber.getAllLottoNumbers()
-                .subList(0, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto() {
+            @Override
+            protected List<LottoNumber> generateNumbers() {
+                return LottoNumber.getAllLottoNumbers()
+                        .subList(0, 6);
+            }
+        };
 
         WinningNumbers firstWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningNumbers secondWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));

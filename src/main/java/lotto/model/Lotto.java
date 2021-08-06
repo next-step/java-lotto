@@ -18,11 +18,7 @@ public class Lotto {
         this.numbers = generateNumbers();
     }
 
-    Lotto(List<LottoNumber> lottoNumbers) {
-        this.numbers = lottoNumbers;
-    }
-
-    private List<LottoNumber> generateNumbers() {
+    protected List<LottoNumber> generateNumbers() {
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
