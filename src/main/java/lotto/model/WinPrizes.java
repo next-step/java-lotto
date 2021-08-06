@@ -31,9 +31,9 @@ public class WinPrizes {
 	}
 
 	public List<Prize> drawResultWinPrizes() {
-		List<Prize> prizes = new ArrayList<>(this.winPrizes.keySet());
-		prizes.sort(new PrizeComparator());
-		return prizes;
+		List<Prize> winPrizes = new ArrayList<>(this.winPrizes.keySet());
+		winPrizes.sort(new PrizeComparator());
+		return winPrizes;
 	}
 
 	public int getLottoCount() {
