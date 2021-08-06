@@ -21,6 +21,6 @@ public class LottoController {
 		Lotto lastWinningLotto = LottoInputView.inputLastWinningLotto();
 
 		WinPrizes winPrizes = SearchPrize.drawWinPrize(lottos, lastWinningLotto);
-		LottoOutputView.displayLottoPrize(winPrizes, lottoCount);
+		LottoOutputView.displayLottoPrize(winPrizes);
 	}
 }

@@ -29,8 +29,8 @@ public class LottoOutputView {
 		System.out.println(lotto.getLotto());
 	}
 
-	public static void displayLottoPrize(WinPrizes winPrizes, int lottoCount) {
-		int money = LottoCountCalculator.calculateLottoMoney(lottoCount);
+	public static void displayLottoPrize(WinPrizes winPrizes) {
+		int money = LottoCountCalculator.calculateLottoMoney(winPrizes.getLottoCount());
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();

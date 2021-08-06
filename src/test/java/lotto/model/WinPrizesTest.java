@@ -56,6 +56,16 @@ class WinPrizesTest {
 		assertThat(winPrizes.findWinPrizeGrade(prizes.get(1))).isEqualTo(5);
 	}
 
+	@Test
+	@DisplayName("로또에 참여한 숫자를 알수있다.")
+	public void getJoinLottos() {
+		WinPrizes winPrizes = new WinPrizes(getWinPrize());
+
+		int lottoCount = winPrizes.getLottoCount();
+
+		assertThat(lottoCount).isEqualTo(332);
+	}
+
 	private Map<Prize, Integer> getWinPrize() {
 		Map<Prize, Integer> getWinPrize = new HashMap<>();
 		getWinPrize.put(Prize.MISS, 200);

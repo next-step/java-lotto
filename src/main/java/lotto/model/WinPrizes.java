@@ -36,4 +36,7 @@ public class WinPrizes {
 		return prizes;
 	}
 
+	public int getLottoCount() {
+		return winPrizes.values().stream().mapToInt(lottoCount -> lottoCount).sum();
+	}
 }
