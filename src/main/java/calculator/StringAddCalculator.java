@@ -15,8 +15,9 @@ public class StringAddCalculator {
     private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public int calculate(String input) {
-        if (verify(input))
+        if (verify(input)) {
             return DEFAULT_RESULT;
+        }
         return getSum(split(input));
     }
 
