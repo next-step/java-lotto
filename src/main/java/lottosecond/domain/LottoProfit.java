@@ -19,7 +19,7 @@ public enum LottoProfit {
 		this.profitUnit = profitUnit;
 	}
 
-	public static LottoProfit from(int quantity, boolean matchBonus) {
+	public static LottoProfit of(int quantity, boolean matchBonus) {
 		if (quantity == FIVE_BONUS.quantity && matchBonus) {
 			return FIVE_BONUS;
 		}

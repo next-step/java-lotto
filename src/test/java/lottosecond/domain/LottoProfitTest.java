@@ -16,7 +16,7 @@ class LottoProfitTest {
 		int quantity = 7;
 
 		//when
-		LottoProfit profit = LottoProfit.from(quantity, false);
+		LottoProfit profit = LottoProfit.of(quantity, false);
 
 		//then
 		assertThat(profit).isEqualTo(LottoProfit.ZERO);
@@ -37,7 +37,7 @@ class LottoProfitTest {
 	})
 	void profit_sum(int quantity, int matchingCount, boolean matchBonus, long totalProfit) throws Exception {
 		//given
-		LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
+		LottoProfit lottoProfit = LottoProfit.of(quantity, matchBonus);
 
 		//when
 		long profit = lottoProfit.profit(matchingCount);
@@ -53,7 +53,7 @@ class LottoProfitTest {
 		int quantity = 5;
 
 		//when
-		LottoProfit profit = LottoProfit.from(quantity, true);
+		LottoProfit profit = LottoProfit.of(quantity, true);
 
 		//then
 		assertThat(profit).isEqualTo(LottoProfit.FIVE_BONUS);

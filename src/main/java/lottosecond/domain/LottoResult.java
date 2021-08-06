@@ -35,7 +35,7 @@ public class LottoResult {
 
 	private void putResult(int quantity, boolean matchBonus) {
 		if (quantity > MATCHING_STANDARD) {
-			LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
+			LottoProfit lottoProfit = LottoProfit.of(quantity, matchBonus);
 			result.put(lottoProfit, getMatchingCount(lottoProfit));
 		}
 	}

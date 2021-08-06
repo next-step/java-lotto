@@ -47,7 +47,7 @@ class LottoResultTest {
 
 		//when
 		Map<LottoProfit, Integer> result = lottoResult.value();
-		LottoProfit lottoProfit = LottoProfit.from(quantity, matchBonus);
+		LottoProfit lottoProfit = LottoProfit.of(quantity, matchBonus);
 
 		//then
 		assertThat(result).containsEntry(lottoProfit, matchingCount);
