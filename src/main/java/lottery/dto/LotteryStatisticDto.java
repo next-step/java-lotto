@@ -1,6 +1,6 @@
 package lottery.dto;
 
-import lottery.domain.lottery.LotteryResult;
+import lottery.domain.LotteryResult;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lottery.domain.lottery.LotteryResult.*;
+import static lottery.domain.LotteryResult.*;
 
 public class LotteryStatisticDto {
 
@@ -27,7 +27,7 @@ public class LotteryStatisticDto {
         return defaultLotteryResultMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().toDto(entry.getValue()))
-                .sorted(Comparator.comparingInt(LotteryResultDto::getCashPrize))
+                .sorted(Comparator.comparing(LotteryResultDto::getCashPrize))
                 .collect(Collectors.toList());
     }
 

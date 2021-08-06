@@ -1,7 +1,7 @@
 package lottery.domain.winningstrategy;
 
-import lottery.domain.lottery.Lottery;
-import lottery.domain.lottery.LotteryResult;
+import lottery.domain.Lottery;
+import lottery.domain.LotteryResult;
 
 public interface WinningLotteryStrategy {
 

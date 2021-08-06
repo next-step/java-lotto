@@ -1,9 +1,9 @@
 package lottery.domain.winningstrategy;
 
-import lottery.domain.lottery.Lottery;
-import lottery.domain.lottery.LotteryResult;
+import lottery.domain.Lottery;
+import lottery.domain.LotteryResult;
 
-import static lottery.domain.lottery.LotteryResult.getLotteryResult;
+import static lottery.domain.LotteryResult.getLotteryResult;
 
 public class MatchWinningLotteryStrategy implements WinningLotteryStrategy {
 

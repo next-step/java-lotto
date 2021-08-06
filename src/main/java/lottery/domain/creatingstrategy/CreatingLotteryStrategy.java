@@ -1,8 +1,9 @@
 package lottery.domain.creatingstrategy;
 
-import lottery.domain.lottery.Lotteries;
+import lottery.domain.Lotteries;
+import lottery.domain.Money;
 
 public interface CreatingLotteryStrategy {
 
-    Lotteries getLotteries(int money);
+    Lotteries getLotteries(Money money);
 }
