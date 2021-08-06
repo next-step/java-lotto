@@ -2,10 +2,13 @@ package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("로또 번호 테스트")
@@ -85,5 +88,25 @@ public class LottoNumberTest {
         assertEquals(oneLottoNumber.compareTo(twoLottoNumber), -1);
         assertEquals(threeLottoNumber.compareTo(oneLottoNumber), 1);
         assertEquals(twoLottoNumber.compareTo(threeLottoNumber), -1);
+    }
+
+    @DisplayName("로또 번호 생성시, 1이상 45 이하의 번호가 아니면 Exception이 발생한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    public void createOutOfBoundsLottoNumberExceptionTest(int number) {
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumber(number))
+                .withMessage("로또 번호는 1이상 45이하의 숫자이어야 합니다.");
+    }
+
+    @DisplayName("로또 번호 조회시, 1이상 45 이하의 번호가 아니면 Exception이 발생한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    public void getOutOfBoundsLottoNumberExceptionTest(int number) {
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoNumber.valueOf(number))
+                .withMessage("로또 번호는 1이상 45이하의 숫자이어야 합니다.");
     }
 }
