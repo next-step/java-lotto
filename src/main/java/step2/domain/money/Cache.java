@@ -51,11 +51,4 @@ public class Cache implements Money {
         return Objects.hash(money);
     }
 
-    @Override
-    public String
-    toString() {
-        return "Cache{" +
-            "money=" + money +
-            '}';
-    }
 }
