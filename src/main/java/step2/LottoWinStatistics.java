@@ -2,10 +2,12 @@ package step2;
 
 public class LottoWinStatistics {
 
-    private final LottoEntry winnersLottoEntry;
+    private final LottoPrice lottoPrice;
+    private final DrawnLotto winnersLottoEntry;
     private final LottoWinGroups lottoWinGroups = new LottoWinGroups();
 
-    public LottoWinStatistics(LottoEntry winnersLottoEntry) {
+    public LottoWinStatistics(LottoPrice price, DrawnLotto winnersLottoEntry) {
+        this.lottoPrice = price;
         this.winnersLottoEntry = winnersLottoEntry;
     }
 
@@ -18,17 +20,17 @@ public class LottoWinStatistics {
         lottoBucket.forEach(this::addLottoSample);
     }
 
-    public double getProfitRate(int lottoUnitPrice) {
-        int totalCost = lottoUnitPrice * this.lottoWinGroups.countAllLottoEntries();
+    public double getProfitRate() {
+        int totalCost = this.lottoPrice.getQuote(this.lottoWinGroups.countAllLottoEntries());
+
+        if (totalCost == 0) {
+            return 0.0;
+        }
 
         double earning = this.lottoWinGroups.keySet().stream()
                 .map(w -> w.prize() * this.lottoWinGroups.get(w).size())
                 .reduce(Integer::sum)
                 .orElse(0);
-
-        if (totalCost == 0) {
-            return 0.0;
-        }
 
         return earning / totalCost;
     }

@@ -3,16 +3,16 @@ package step2;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-    public static final int LOTTO_UNIT_PRICE = 1000;
+    private final LottoPrice lottoPrice;
 
-    public static int getAvailableQuantityByBudget(int budget) {
-        return budget / LOTTO_UNIT_PRICE;
+    public LottoStore(LottoPrice lottoPrice) {
+        this.lottoPrice = lottoPrice;
     }
 
-    public LottoBucket buyLottoEntriesByRandomNumber(int budget, LottoNumberGenerator lottoNumberGenerator) {
+    public LottoBucket buyLottoEntries(int budget, LottoNumberGenerator lottoNumberGenerator) {
         LottoBucket lottoBucket = new LottoBucket();
 
-        IntStream.range(0, getAvailableQuantityByBudget(budget))
+        IntStream.range(0, lottoPrice.getMaxQuantity(budget))
                 .forEach(x -> lottoBucket.add(lottoNumberGenerator));
 
         return lottoBucket;

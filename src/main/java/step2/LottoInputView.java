@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 public class LottoInputView {
 
-    public static int getBudgetWithPrompt(Scanner scanner) {
-        System.out.println("구입금액을 입력해 주세요.");
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-        return scanner.nextInt();
+    public static int getBudgetWithPrompt(String message) {
+        return getIntegerWithMessage(message);
     }
 
-    public static List<Integer> getLastDrawNumbersWithPrompt(Scanner scanner) {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();     // 엔터값 제거
+    public static List<Integer> getLastDrawNumbersWithPrompt(String message) {
+        System.out.println(message);
+        SCANNER.nextLine();     // 엔터값 제거
 
-        return parseLastDrawNumbersString(scanner.nextLine());
+        return parseLastDrawNumbersString(SCANNER.nextLine());
     }
 
     private static List<Integer> parseLastDrawNumbersString(String lastDrawResultString) {
@@ -25,5 +25,15 @@ public class LottoInputView {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public static int getBonusNumberWithPrompt(String message) {
+        return getIntegerWithMessage(message);
+    }
+
+    private static int getIntegerWithMessage(String message) {
+        System.out.println(message);
+
+        return SCANNER.nextInt();
     }
 }

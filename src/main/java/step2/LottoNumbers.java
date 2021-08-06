@@ -18,6 +18,18 @@ public class LottoNumbers {
                 .count();
     }
 
+    public boolean contains(int number) {
+        return this.valueList.contains(number);
+    }
+
+    public String toOutputString() {
+        return "[" +
+                valueList.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "))
+                + "]";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,14 +41,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(valueList);
-    }
-
-    @Override
-    public String toString() {
-        return "[" +
-                valueList.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", "))
-                + "]";
     }
 }
