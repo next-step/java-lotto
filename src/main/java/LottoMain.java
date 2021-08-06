@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Records;
 import lotto.view.InputView;
@@ -12,9 +13,12 @@ public class LottoMain {
 
 	private static int money;
 
+	private static LottoCount lottoCount;
+
 	public static void main(String[] args) {
-		this.money = InputView.inputMoney();
-		int lottoCount = money/1000;
+
+		money = InputView.inputMoney();
+		lottoCount = new LottoCount(money);
 
 		ResultView.outputLottoCount(lottoCount);
 
