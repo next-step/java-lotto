@@ -5,7 +5,6 @@ import java.util.*;
 public class LottoResult {
 
 	private static final int MATCHING_STANDARD = 2;
-	private static final String WINNING_NUMBER_MESSAGE = "당첨번호는 숫자만 입력 가능합니다.";
 
 	private final Map<LottoProfit, Integer> result = new EnumMap<>(LottoProfit.class);
 	private final Lottos lottos;
@@ -21,24 +20,6 @@ public class LottoResult {
 
 	public void match(Lotto winningNumberText, LottoNumber bonusNumber) {
 		putIntoMap(winningNumberText, bonusNumber);
-	}
-
-	private List<Integer> toList(String[] split) {
-		List<Integer> winningNumbers = new ArrayList<>();
-		for (String s : split) {
-			winningNumbers.add(toInt(s));
-		}
-		return winningNumbers;
-	}
-
-	private int toInt(String s) {
-		int number;
-		try {
-			number = Integer.parseInt(s.trim());
-		} catch (NumberFormatException e) {
-			throw new NumberFormatException(WINNING_NUMBER_MESSAGE);
-		}
-		return number;
 	}
 
 	private void putIntoMap(Lotto winningNumbers, LottoNumber bonusNumber) {
