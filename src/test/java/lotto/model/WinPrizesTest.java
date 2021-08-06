@@ -48,7 +48,7 @@ class WinPrizesTest {
 
 	@Test
 	@DisplayName("당첨에 대한 정보를 알수있다.")
-	public void resultWinPrize(){
+	public void resultWinPrize() {
 		WinPrizes winPrizes = new WinPrizes(getWinPrizeTotalMoney());
 		List<Prize> prizes = winPrizes.drawResultWinPrizes();
 

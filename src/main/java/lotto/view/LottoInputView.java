@@ -15,7 +15,7 @@ public class LottoInputView {
 	private static final String LAST_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String LAST_WIN_NUMBER_REGEX = ",";
 	private static final String INT_REG_EXP = "^\\d+$";
-	private static final int LOTTO_LENGTH = 6;
+	private static final int LOTTO_NUMBER_LENGTH = 6;
 	private static final int MONEY_UNIT = 1000;
 	public static final int ZERO_POINT = 0;
 	private static final Scanner scanner = new Scanner(System.in);
@@ -52,9 +52,9 @@ public class LottoInputView {
 		return lottoNumbers;
 	}
 
-	private static int toInt(String lotto) {
-		checkNumberType(lotto.trim());
-		return Integer.parseInt(lotto.trim());
+	private static int toInt(String lottoNumber) {
+		checkNumberType(lottoNumber.trim());
+		return Integer.parseInt(lottoNumber.trim());
 	}
 
 	private static void checkLottoEmpty(String lotto) {
@@ -63,14 +63,14 @@ public class LottoInputView {
 		}
 	}
 
-	private static void checkNumberType(String lotto) {
-		if (!lotto.matches(INT_REG_EXP)) {
+	private static void checkNumberType(String lottoNumber) {
+		if (!lottoNumber.matches(INT_REG_EXP)) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
 	}
 
-	private static void checkLottoSize(List<Integer> lotto) {
-		if (lotto.size() != LOTTO_LENGTH) {
+	private static void checkLottoSize(List<Integer> lottoNumbers) {
+		if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
 		}
 	}
