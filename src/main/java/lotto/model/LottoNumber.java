@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
 import static java.util.function.Function.identity;
@@ -43,7 +44,24 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber o) {
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(final LottoNumber o) {
         return this.number - o.number;
     }
 }

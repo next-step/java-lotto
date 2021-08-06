@@ -5,16 +5,17 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static java.lang.Math.toIntExact;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 public class Lotto {
+    private final Set<LottoNumber> numbers;
+
     private static final String DELIMITER = ", ";
 
     private static final int NUMBER_OF_LOTTO_COUNT = 6;
-
-    private final Set<LottoNumber> numbers;
 
     private Lotto(final Collection<LottoNumber> numbers) {
         this.numbers = new TreeSet<>(numbers);
@@ -32,28 +33,33 @@ public class Lotto {
 
     public static Lotto from(final String string) {
         Objects.requireNonNull(string, "numbers must be not null.");
-        return new Lotto(parseIntegerSet(string));
+        return new Lotto(aggregate(string));
     }
 
-    private static Set<LottoNumber> parseIntegerSet(final String winningNumber) {
-        return stream(winningNumber.split(DELIMITER))
+    private static Set<LottoNumber> aggregate(final String winningNumber) {
+        Set<LottoNumber> lottoNumbers = stream(winningNumber.split(DELIMITER))
                 .map(LottoNumber::from)
                 .collect(toSet());
+
+        validateAggregate(lottoNumbers);
+
+        return lottoNumbers;
     }
 
-    public LottoPrize scratch(final WinningLotto winningLotto) {
-        Objects.requireNonNull(winningLotto, "winningLotto must be not null.");
-        return LottoPrize.findByMatchCount(winningLotto.matchCount(this));
+    private static void validateAggregate(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != NUMBER_OF_LOTTO_COUNT) {
+            throw new IllegalArgumentException("Set<LottoNumber> size must be " + NUMBER_OF_LOTTO_COUNT);
+        }
     }
 
-    public boolean isSizeValid() {
-        return numbers.size() == NUMBER_OF_LOTTO_COUNT;
+    public int getMatchCount(Lotto winningLotto) {
+        return toIntExact(winningLotto.numbers.stream()
+                                              .filter(this::contains)
+                                              .count());
     }
 
-    public int matchCount(Lotto winningLotto) {
-        return (int) winningLotto.numbers.stream()
-                                         .filter(numbers::contains)
-                                         .count();
+    public boolean contains(final LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override
