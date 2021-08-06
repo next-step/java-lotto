@@ -10,7 +10,22 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
-    
+
+    public int matchingTicket(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchCount = getMatchCount(winningNumbers, lottoNumber, matchCount);
+        }
+        return matchCount;
+    }
+
+    private int getMatchCount(List<Integer> winningNumbers, LottoNumber lottoNumber, int matchCount) {
+        if (winningNumbers.contains(lottoNumber.getNumber())) {
+            matchCount++;
+        }
+        return matchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

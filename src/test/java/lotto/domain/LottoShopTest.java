@@ -16,8 +16,8 @@ public class LottoShopTest {
         LottoShop lottoShop = new LottoShop(1000);
 
         // when
-        LottoWallet lottoWallet = lottoShop.buy(10_000L, lottoGenerator);
-        int actual = lottoWallet.size();
+        LottoTickets lottoTickets = lottoShop.buy(10_000L, lottoGenerator);
+        int actual = lottoTickets.size();
 
         // then
         assertThat(actual).isEqualTo(10);
