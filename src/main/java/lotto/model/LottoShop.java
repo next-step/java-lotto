@@ -1,8 +1,10 @@
 package lotto.model;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
@@ -22,12 +24,18 @@ public class LottoShop {
         return instance;
     }
 
-    public Lottos buy(final int payment) {
+    public Lottos buy(final int payment, final int autoNumberOfPurchases, final String... manualNumbers) {
         validate(payment);
-        final int numberOfPurchases = payment / LOTTO_PRICE;
-        return Lottos.from(Stream.generate(this::getLotto)
-                                 .limit(numberOfPurchases)
-                                 .collect(toList()));
+
+        List<Lotto> lottos = stream(manualNumbers)
+                .map(this::getManualLotto)
+                .collect(toList());
+
+        lottos.addAll(Stream.generate(this::getAutoLotto)
+                            .limit(autoNumberOfPurchases)
+                            .collect(toList()));
+
+        return Lottos.from(lottos);
     }
 
     private void validate(final int payment) {
@@ -36,7 +44,11 @@ public class LottoShop {
         }
     }
 
-    private Lotto getLotto() {
+    private Lotto getManualLotto(String lottoNumber) {
+        return LOTTO_MACHINE.manual(lottoNumber);
+    }
+
+    private Lotto getAutoLotto() {
         return LOTTO_MACHINE.auto();
     }
 }
