@@ -1,7 +1,7 @@
 package calculator.common;
 
 public class CustomSeparatorParser {
-    public String parse(String s) {
-        return String.valueOf(s.charAt(2));
+    public String parse(String value) {
+        return String.valueOf(value.charAt(2));
     }
 }
