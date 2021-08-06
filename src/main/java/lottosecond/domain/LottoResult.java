@@ -19,7 +19,7 @@ public class LottoResult {
 		result.put(LottoProfit.SIX, 0);
 	}
 
-	public void match(Lotto winningNumberText, int bonusNumber) {
+	public void match(Lotto winningNumberText, LottoNumber bonusNumber) {
 		putIntoMap(winningNumberText, bonusNumber);
 	}
 
@@ -41,7 +41,7 @@ public class LottoResult {
 		return number;
 	}
 
-	private void putIntoMap(Lotto winningNumbers, int bonusNumber) {
+	private void putIntoMap(Lotto winningNumbers, LottoNumber bonusNumber) {
 		for (Lotto lotto : lottos.toList()) {
 			int quantity = lotto.matchingQuantityFrom(winningNumbers);
 			boolean matchBonus = lotto.hasBonus(bonusNumber);

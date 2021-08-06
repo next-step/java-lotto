@@ -1,6 +1,7 @@
 package lottosecond.ui;
 
 import lottosecond.domain.Lotto;
+import lottosecond.domain.LottoNumber;
 import lottosecond.domain.Money;
 
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class InputView {
 
 	private final Money money;
 	private Lotto winningNumbers;
-	private int bonusNumber;
+	private LottoNumber bonusNumber;
 
 	public InputView() {
 		System.out.println(HOW_MUCH);
@@ -28,7 +29,7 @@ public class InputView {
 
 	public void inputBonusNumber() {
 		System.out.println(BONUS_NUMBER);
-		this.bonusNumber = Integer.parseInt(scanner.nextLine());
+		this.bonusNumber = LottoNumber.valueOf(Integer.parseInt(scanner.nextLine()));
 	}
 
 	public Money getMoney() {
@@ -39,7 +40,7 @@ public class InputView {
 		return winningNumbers;
 	}
 
-	public int getBonusNumber() {
+	public LottoNumber getBonusNumber() {
 		return bonusNumber;
 	}
 

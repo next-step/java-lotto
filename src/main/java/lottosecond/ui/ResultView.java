@@ -1,9 +1,6 @@
 package lottosecond.ui;
 
-import lottosecond.domain.Lotto;
-import lottosecond.domain.LottoProfit;
-import lottosecond.domain.LottoResult;
-import lottosecond.domain.Lottos;
+import lottosecond.domain.*;
 
 import java.util.Map;
 
@@ -31,7 +28,7 @@ public class ResultView {
 	}
 
 
-	public void printResult(Lotto winningNumbers, int bonusNumber) {
+	public void printResult(Lotto winningNumbers, LottoNumber bonusNumber) {
 		System.out.println(MATCH_RESULT);
 		System.out.println(DIVISION_LINE);
 

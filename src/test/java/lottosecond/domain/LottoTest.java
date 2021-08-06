@@ -97,7 +97,7 @@ class LottoTest {
 		Lotto lotto = new Lotto(lottoNumbers);
 
 		//when
-		boolean actual = lotto.hasBonus(bonusNumber);
+		boolean actual = lotto.hasBonus(LottoNumber.valueOf(bonusNumber));
 
 		//then
 		assertThat(actual).isEqualTo(expected);

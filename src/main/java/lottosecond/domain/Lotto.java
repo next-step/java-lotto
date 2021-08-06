@@ -53,8 +53,8 @@ public class Lotto {
 		return matchedCount;
 	}
 
-	public boolean hasBonus(int bonusNumber) {
-		return numbers.contains(LottoNumber.valueOf(bonusNumber));
+	public boolean hasBonus(LottoNumber bonusNumber) {
+		return numbers.contains(bonusNumber);
 	}
 
 	@Override
