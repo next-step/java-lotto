@@ -1,0 +1,19 @@
+package lotto;
+
+import java.util.*;
+
+public class Lotties {
+    private final List<Lotto> lotties;
+
+    public Lotties(List<Lotto> lotties) {
+        this.lotties = new ArrayList<>(lotties);
+    }
+
+    public int getCount() {
+        return lotties.size();
+    }
+
+    public List<Lotto> getLotties() {
+        return lotties;
+    }
+}
