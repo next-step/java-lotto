@@ -20,7 +20,7 @@ public class LottoMachine {
 	}
 
 	private LottoMachine() {
-		throw new IllegalArgumentException(LOTTO_MACHINE_CREATE_MESSAGE);
+		throw new AssertionError(LOTTO_MACHINE_CREATE_MESSAGE);
 	}
 
 	public static List<Integer> createLottoNumber() {
