@@ -9,9 +9,18 @@ public class Lotto {
     public Lotto(NumberGenerator numberGenerator) {
         this.numberGenerator  = numberGenerator;
         this.lottoNums = createRandomNums();
+        sortLottoNums();
     }
 
     private Set<Integer> createRandomNums() {
         return numberGenerator.generateNumber();
+    }
+
+    private void sortLottoNums() {
+        lottoNums.stream().sorted();
+    }
+
+    public Set<Integer> getLottoNums() {
+        return lottoNums;
     }
 }
