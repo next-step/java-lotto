@@ -12,6 +12,6 @@ class LottosTest {
 	void generateAutoLottos() {
 		assertDoesNotThrow(() -> {
 			Lottos.generateAutoLottos(5);
-		})
+		});
 	}
 }
