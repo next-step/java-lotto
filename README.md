@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 1단계 - 자동차 경주(리팩토링) Todo-List 🎯
+## 1단계 - 문자열 덧셈 계산기 Todo-List 🎯
 - [X] 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 구분하는 기능(splitWithCommaOrColon) 구현
 - [X] 커스텀 구분자로 문자열을 구분하는 기능(splitWithCustomDelimiter)의 구현
 - [X] 유효성 체크 기능의 구현
