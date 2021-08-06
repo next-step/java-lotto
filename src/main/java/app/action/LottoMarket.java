@@ -1,9 +1,9 @@
 package app.action;
 
-import app.domain.*;
+import app.domain.Money;
+import app.domain.Winning;
 import app.domain.lotto.Lotteries;
 import app.domain.lotto.Lotto;
-import app.domain.lotto.LottoNum;
 import app.domain.lotto.WinnerLotto;
 import app.strategy.LottoMatcher;
 
@@ -26,7 +26,7 @@ public class LottoMarket {
     }
 
     public int buy(Money money) {
-        int count = money.getMoney() / PRICE;
+        int count = money.getCount(PRICE);
         for (int i = 0; i < count; i++) {
             myLottoList.buyLotto(machine);
         }

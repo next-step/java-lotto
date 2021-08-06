@@ -20,7 +20,7 @@ public class Lotteries {
         this.lottoList.add(machine.makeLotto());
     }
 
-    public void addManualLotto(Lotto lotto){
+    public void addManualLotto(Lotto lotto) {
         lottoList.add(lotto);
     }
 

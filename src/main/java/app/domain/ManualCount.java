@@ -4,7 +4,7 @@ public class ManualCount {
     private int count;
 
     private ManualCount(int count) {
-        if(count <0){
+        if (count < 0) {
             throw new IllegalArgumentException("음수가 입력되었습니다.");
         }
         this.count = count;

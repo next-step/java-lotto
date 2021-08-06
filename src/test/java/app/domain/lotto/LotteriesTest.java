@@ -1,8 +1,6 @@
-package app.domain;
+package app.domain.lotto;
 
 import app.action.LottoMachine;
-import app.domain.lotto.Lotteries;
-import app.domain.lotto.Lotto;
 import app.strategy.LottoNumStrategy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +12,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LottoListTest {
+class LotteriesTest {
 
     private static LottoNumStrategy strategy;
     private static LottoMachine machine;
@@ -34,7 +32,7 @@ class LottoListTest {
 
     @DisplayName("로또 리스트 계속 초기화")
     @BeforeEach
-    void makeList(){
+    void makeList() {
         lottoList = Lotteries.create();
     }
 
@@ -65,7 +63,7 @@ class LottoListTest {
 
         assertThat(lottoList.getSize()).isEqualTo(1);
         assertThat(lottoList.getLotto(0))
-                .isEqualTo(Lotto.from(Arrays.asList(1,2,3,4,5,6)));
+                .isEqualTo(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
 }

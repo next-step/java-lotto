@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoNum implements Comparable<LottoNum>{
+public class LottoNum implements Comparable<LottoNum> {
 
     public static final int MAXIMUM = 45;
     public static final int MINIMUM = 1;
@@ -25,7 +25,7 @@ public class LottoNum implements Comparable<LottoNum>{
         return cacheMap.get(number);
     }
 
-    public static LottoNum of(String number){
+    public static LottoNum of(String number) {
         return LottoNum.of(Integer.valueOf(number));
     }
 
@@ -46,6 +46,6 @@ public class LottoNum implements Comparable<LottoNum>{
 
     @Override
     public String toString() {
-        return String.valueOf(number) ;
+        return String.valueOf(number);
     }
 }

@@ -1,15 +1,15 @@
 package app.strategy;
 
+import app.domain.Winning;
 import app.domain.lotto.Lotto;
 import app.domain.lotto.LottoNum;
 import app.domain.lotto.WinnerLotto;
-import app.domain.Winning;
 
 public class LottoMatcher {
     public int matchLotto(Lotto myLotto, Lotto winner) {
         int count = 0;
         for (LottoNum number : myLotto.getNumbers()) {
-            if(checkLotto(winner, number)){
+            if (checkLotto(winner, number)) {
                 count++;
             }
         }

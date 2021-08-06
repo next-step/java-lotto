@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private static final int MINIMUM = 1;
-    private static final int MAXIMUM = 45;
 
     private List<LottoNum> numbers;
 
@@ -27,9 +25,6 @@ public class Lotto {
                 .map(str -> LottoNum.of(str.trim()))
                 .collect(Collectors.toList()));
     }
-//    public static Lotto from(List<Integer> list){
-//        return new Lotto(list.stream().map(LottoNum::of).collect(Collectors.toList()));
-//    }
 
     private void validation(List<LottoNum> list) {
         if (list.size() != LOTTO_SIZE) {
@@ -39,7 +34,6 @@ public class Lotto {
             throw new IllegalArgumentException("숫자가 중복 되어있습니다.");
         }
     }
-
 
     private boolean isDuplicate(List<LottoNum> list) {
         Set<LottoNum> set = new HashSet<>(list);
@@ -52,21 +46,23 @@ public class Lotto {
     }
 
     private void arrangeNumbers() {
-        this.numbers = numbers.stream().sorted((n1, n2) -> n1.compareTo(n2)).collect(Collectors.toList());
+        this.numbers = numbers.stream().sorted(LottoNum::compareTo).collect(Collectors.toList());
     }
 
-    public int matchLotto(Lotto winner) {
+    public int matchLotto(List<LottoNum> winnerNumberList) {
         int count = 0;
-        for (LottoNum number : this.getNumbers()) {
-            if (winner.getNumbers().contains(number)) {
+        for (LottoNum number : this.numbers) {
+            if (winnerNumberList.contains(number)) {
                 count++;
             }
         }
         return count;
     }
-    public boolean contains(LottoNum bonus){
+
+    public boolean contains(LottoNum bonus) {
         return numbers.contains(bonus);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

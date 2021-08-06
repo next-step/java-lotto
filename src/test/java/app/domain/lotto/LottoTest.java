@@ -1,7 +1,5 @@
-package app.domain;
+package app.domain.lotto;
 
-import app.domain.lotto.Lotto;
-import app.domain.lotto.LottoNum;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -67,9 +65,8 @@ class LottoTest {
     @Test
     void showNumbersASC() {
         Lotto lotto = Lotto.from(Arrays.asList(9, 5, 4, 3, 8, 1));
-        assertThat(lotto.getNumbers()).containsExactly(
-                LottoNum.of(1),LottoNum.of(3),LottoNum.of(4),LottoNum.of(5),LottoNum.of(8),LottoNum.of(9)
-        );
+        assertThat(lotto.getNumbers()).isSorted();
+
     }
 
     @DisplayName("로또 내부 리스트 방어적 복사")
@@ -78,25 +75,20 @@ class LottoTest {
         List<Lotto> list = new ArrayList<>();
 
         list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        list.add(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(7)));
-        list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(8)));
-        list.stream().forEach(vo -> vo.getNumbers().add(LottoNum.of(9)));
 
         Lotto expectedLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(list.get(0)).isEqualTo(expectedLotto);
-        assertThat(list.get(1)).isEqualTo(expectedLotto);
-        assertThat(list.get(2)).isEqualTo(expectedLotto);
+
     }
 
     @DisplayName("문자열 받아서 로또 생성")
     @Test
-    void createByString(){
+    void createByString() {
         String list = "1,2,3,4,5,6";
         Lotto lotto = Lotto.from(list);
-        assertThat(lotto).isEqualTo(Lotto.from(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(lotto).isEqualTo(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

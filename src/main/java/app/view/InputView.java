@@ -69,13 +69,13 @@ public class InputView {
 
     public static LottoNum inputBonus() {
         LottoNum result = null;
-        while(true){
+        while (true) {
             System.out.println("보너스 볼을 입력해 주세요.");
             try {
                 result = LottoNum.of(scanner.nextLine());
                 break;
-            }catch (IllegalArgumentException e){
-                System.out.println(String.format("%d ~ %d 숫자만 입력할 수 있습니다.",LottoNum.MINIMUM,LottoNum.MAXIMUM));
+            } catch (IllegalArgumentException e) {
+                System.out.println(String.format("%d ~ %d 숫자만 입력할 수 있습니다.", LottoNum.MINIMUM, LottoNum.MAXIMUM));
             }
         }
         return result;

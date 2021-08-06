@@ -1,7 +1,5 @@
 package app.domain;
 
-import app.action.LottoMarket;
-
 public class Money {
     private int money;
 
@@ -10,17 +8,21 @@ public class Money {
         this.money = money;
     }
 
-    public static Money of(int money){
+    public static Money of(int money) {
         return new Money(money);
     }
 
     private void validation(int money) {
-        if(money < 0){
-            throw new IllegalArgumentException("객체 생성 Error "+money);
+        if (money < 0) {
+            throw new IllegalArgumentException("Error 0 이상만 입력 가능합니다. " + money);
         }
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public int getCount(int price) {
+        return this.money / price;
     }
 }

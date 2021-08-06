@@ -2,10 +2,10 @@ package app;
 
 import app.action.LottoMachine;
 import app.action.LottoMarket;
-import app.domain.lotto.Lotteries;
-import app.domain.lotto.LottoNum;
 import app.domain.Money;
 import app.domain.Winning;
+import app.domain.lotto.Lotteries;
+import app.domain.lotto.LottoNum;
 import app.strategy.RandomLottoNum;
 import app.view.InputView;
 import app.view.ResultView;
@@ -20,7 +20,7 @@ public class LottoApp {
     private static void buyLotto() {
         Money money = InputView.inputMoney();
 
-        if(money.getMoney() < LottoMarket.PRICE){
+        if (money.getMoney() < LottoMarket.PRICE) {
             ResultView.nothingToDo();
             return;
         }
@@ -32,9 +32,9 @@ public class LottoApp {
 
         Money manualCountMoney = InputView.inputManual(myLottoList, money);
 
-
         int buyMoney = market.buy(manualCountMoney);
-        ResultView.showList(myLottoList.getAll(),manualCountMoney);
+
+        ResultView.showList(myLottoList.getAll(), manualCountMoney);
         LottoNum bonus = InputView.inputBonus();
         Map<Winning, Integer> result = market.checkNumToWinner(InputView.inputWinnerNumber(bonus));
 
