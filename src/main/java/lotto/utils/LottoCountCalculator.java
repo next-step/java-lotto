@@ -14,4 +14,5 @@ public class LottoCountCalculator {
 	public static int calculateLottoMoney(int lottoCount) {
 		return lottoCount * THOUSAND_UNIT;
 	}
+
 }
