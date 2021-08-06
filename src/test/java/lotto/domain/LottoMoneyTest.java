@@ -23,14 +23,25 @@ class LottoMoneyTest {
   @Test
   void 최소금액제한() {
     assertThatThrownBy(
-        ()-> new LottoMoney(-1)
-    ).isInstanceOf(IllegalArgumentException.class)
+        () -> new LottoMoney(-1)
+    )
+        .isInstanceOf(IllegalArgumentException.class)
         .hasMessage(Message.MSG_ERROR_LIMIT_MONEY);
+  }
+
+  @DisplayName("입력한 금액이 천원단위 인지 검증 테스트.")
+  @Test
+  void 로또한장단위금액확인() {
+    assertThatThrownBy(
+        () -> new LottoMoney(1)
+    )
+        .isInstanceOf(RuntimeException.class)
+        .hasMessage(Message.MSG_ERROR_WRONG_MONEY);
   }
 
   @DisplayName("구매후 당첨된 금액기준으로 수익률을 계산하는 테스트.")
   @ParameterizedTest
-  @CsvSource(value = {"14000,5000","10000,0"})
+  @CsvSource(value = {"14000,5000", "10000,0"})
   void 당첨금수익률(int money, int winMoney) {
     LottoMoney lottoMoney = new LottoMoney(money);
     double reward = lottoMoney.getReward(winMoney);

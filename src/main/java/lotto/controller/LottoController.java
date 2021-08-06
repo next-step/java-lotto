@@ -5,26 +5,29 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
+import lotto.service.LottoGameApplication;
 import lotto.view.InputView;
 import lotto.view.LotteriesDrawingView;
 import lotto.view.ResultView;
 
 public class LottoController {
 
-  public static void main(String[] args) {
+  public static void main(String[] l) {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
+    LottoGameApplication gameApplication = new LottoGameApplication(
+        InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
+    gameApplication.buyLotteries();
 
-    lotteryDraw.buyLotteries();
+    ResultView.drawCountOfBuyLotteries(gameApplication.getNumberOfLotto());
 
-    ResultView.drawCountOfBuyLotteries(lotteryDraw.getLotteriesInfo().getLottos().size());
+    LotteriesDrawingView.drawLotteriesView(gameApplication);
 
-    LotteriesDrawingView.drawLotteriesView(lotteryDraw);
+    LotteryDraw lotteryDraw = new LotteryDraw(gameApplication);
 
     Map<Integer, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
-        lotteryDraw.getLotteriesInfo(), lotteryDraw.inputWinningNumbers(
+        lotteryDraw.inputWinningNumbers(
             InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
 
-    ResultView.drawResult(matchResult,lotteryDraw.gradingScore(matchResult));
+    ResultView.drawResult(matchResult, lotteryDraw.gradingScore(matchResult));
   }
 }

@@ -10,10 +10,9 @@ import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.message.Message;
+import lotto.view.InputView;
 
 public class LotteryDraw {
-
-  private static final int EACH_LOTTO_COST = 1000;
 
   private static final int INT_ZERO = 0;
 
@@ -21,60 +20,27 @@ public class LotteryDraw {
 
   private static final String SPLIT_MARK = ",";
 
-  private LottoMoney lottoMoney;
-
   private Lotteries lotteries;
 
-  public LotteryDraw(int money) {
-    this.lottoMoney = new LottoMoney(money);
-  }
+  private LottoMoney lottoMoney;
 
-  public LotteryDraw() {
-
-  }
-
-  private void checkInputValue() {
-    if (lottoMoney.calculateMoney(Operation.DIVISION_REMAINDER, EACH_LOTTO_COST) != INT_ZERO) {
-      throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
-    }
-  }
-
-  private int getNumberOfLotto() {
-    return lottoMoney.calculateMoney(Operation.DIVISION_SHARE, EACH_LOTTO_COST);
-  }
-
-  public void buyLotteries() {
-    checkInputValue();
-    lotteries = new Lotteries(getNumberOfLotto());
-  }
-
-  public Lotteries getLotteriesInfo() {
-    return lotteries;
+  public LotteryDraw(final LottoGameApplication gameApplication) {
+    this.lottoMoney = gameApplication.lottoMoney;
+    this.lotteries = gameApplication.getLotteriesInfo();
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
-    return Lotteries.getWinningLotto(Arrays.stream(winningLottery.trim().split(SPLIT_MARK))
-        .map(Integer::parseInt).collect(Collectors.toList()));
+    return Lotteries.getWinningLotto(splitWinningNumbers(winningLottery));
   }
 
-  public Map<Integer, List<Lotto>> matchLottoInfo(Lotteries lotteries, Lotto winLotto) {
-
-    Map<Integer, List<Lotto>> categoriesRank = createRatingInfo();
-    lotteries.getLottos().forEach(
-        lotty -> categoriesRank.get(matchLottoRating(winLotto, lotty)).add(lotty));
-
-    categoriesRank.remove(INT_ZERO);
-
-    return categoriesRank;
+  private List<Integer> splitWinningNumbers(final String winningLottery) {
+    return Arrays.stream(winningLottery.trim().split(SPLIT_MARK))
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
   }
 
-  private int matchLottoRating(Lotto winLotto, Lotto lotty) {
-    int matchLotteries = lotteries.getMatchLotteries(lotty, winLotto);
-
-    if (matchLotteries < LIMIT_MATCH_NUMBER) {
-      return INT_ZERO;
-    }
-    return matchLotteries;
+  public Map<Integer, List<Lotto>> matchLottoInfo(Lotto winLotto) {
+    return lotteries.getInputMatchTotalInfo(createRatingInfo(),winLotto);
   }
 
   private Map<Integer, List<Lotto>> createRatingInfo() {
@@ -90,10 +56,14 @@ public class LotteryDraw {
   }
 
   public double gradingScore(Map<Integer, List<Lotto>> result) {
-    return lottoMoney.getReward(result.keySet()
-        .stream()
-        .mapToInt(ratingNumber -> Operation.chooseOperation("*").calculation(result.get(ratingNumber).size(),Rank.matchRank(ratingNumber).getWinningMoney()))
-        .sum());
+    int sum = result.keySet().stream()
+        .mapToInt(ratingNumber -> getCalculation(result, ratingNumber)).sum();
+    return lottoMoney.getReward(sum);
+  }
+
+  private int getCalculation(final Map<Integer, List<Lotto>> result, final Integer ratingNumber) {
+    return Operation.chooseOperation("*").calculation(result.get(ratingNumber).size(),
+        Rank.matchRank(ratingNumber).getWinningMoney());
   }
 
 }
