@@ -4,6 +4,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Collections.shuffle;
 
@@ -18,8 +19,8 @@ public class AutoLottoStrategy extends LottoRuleStrategy {
 
     @Override
     public Lotto ticketing() {
-        ArrayList<LottoNumber> lottoNumberArrayList = new ArrayList<>(LOTTO_NUMBERS_RANGE);
-        shuffle(lottoNumberArrayList);
-        return Lotto.from(lottoNumberArrayList.subList(0, 6));
+        List<LottoNumber> list = new ArrayList<>(LOTTO_NUMBERS_RANGE);
+        shuffle(list);
+        return Lotto.from(list.subList(0, 6));
     }
 }
