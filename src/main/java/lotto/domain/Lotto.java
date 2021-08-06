@@ -5,22 +5,22 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private static final String IS_NULL_OR_NOT_SIX_ERROR_MESSAGE = "6개의 숫자를 등록해야 합니다.";
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 있습니다.";
     private static final int LIMIT_SIZE = 6;
     private static final String SEPARATOR = ",";
+
+    public final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(final List<Integer> numbers) {
         validateNumbers(numbers);
         addLottoNumber(numbers);
     }
 
-    public Lotto(final String input) {
+    public static Lotto valueOf(final String input) {
         validateInput(input);
         List<Integer> numbers = splitNumbers(input);
-        validateNumbers(numbers);
-        addLottoNumber(numbers);
+        return new Lotto(numbers);
     }
 
     private void validateNumbers(final List<Integer> numbers) {
@@ -37,13 +37,13 @@ public class Lotto {
         return numbersSet.size() != numbers.size();
     }
 
-    private void validateInput(final String input) {
+    private static void validateInput(final String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
         }
     }
 
-    private List<Integer> splitNumbers(final String input) {
+    private static List<Integer> splitNumbers(final String input) {
         String[] dividedNumbers = input.trim().split(SEPARATOR);
         return Arrays.stream(dividedNumbers).map(Integer::parseInt).collect(Collectors.toList());
     }
@@ -59,8 +59,21 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public boolean matchingNumber(final LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    public MatchingCount getMatchingCount(Lotto winningLotto) {
+        MatchingCount matchingCount = new MatchingCount();
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchingCount = winningLotto.containNumber(lottoNumber, matchingCount);
+        }
+
+        return matchingCount;
+    }
+
+    public MatchingCount containNumber(final LottoNumber lottoNumber, MatchingCount matchingCount) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return matchingCount.addMatchingCount();
+        }
+        return matchingCount;
     }
 
 }

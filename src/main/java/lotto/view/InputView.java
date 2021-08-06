@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public final class InputView {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public void endInput() {
-        scanner.close();
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public int inputAmount() {

@@ -4,9 +4,10 @@ import java.util.Objects;
 
 public final class MatchingCount {
 
-    private final int matchingCount;
     private static final int INIT = 0;
     private static final int ADD = 1;
+
+    private final int matchingCount;
 
     public MatchingCount() {
         this(INIT);
@@ -20,11 +21,8 @@ public final class MatchingCount {
         return this.matchingCount;
     }
 
-    public MatchingCount addMatchingCount(final boolean command) {
-        if (command) {
-            return new MatchingCount(this.matchingCount + ADD);
-        }
-        return this;
+    public MatchingCount addMatchingCount() {
+        return new MatchingCount(this.matchingCount + ADD);
     }
 
     @Override

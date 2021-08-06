@@ -4,17 +4,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MatchingCountTest {
 
     @DisplayName("일치한 횟수 더하기")
+    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void addMatchingCount_일치한_횟수_더하기() {
         MatchingCount matchingCount = new MatchingCount();
-        assertThat(matchingCount).isEqualTo(new MatchingCount());
+        MatchingCount addMatchingCount = matchingCount.addMatchingCount();
 
-        matchingCount = matchingCount.addMatchingCount(true);
-        assertThat(matchingCount).isEqualTo(new MatchingCount(1));
+        assertAll(
+                () -> assertThat(matchingCount).isEqualTo(new MatchingCount()),
+                () -> assertThat(addMatchingCount).isEqualTo(new MatchingCount(1))
+        );
     }
 
 }
