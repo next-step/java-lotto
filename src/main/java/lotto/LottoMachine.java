@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private final List<Lotto> lotties;
+    private final Lotties lotties;
+    private final int lottoCount;
 
-    public LottoMachine( int money) {
+    public LottoMachine(final int money) {
         if (!validMoney(money)) {
             throw new RuntimeException();
         }
-        this.lotties = createRandomLotties(money);
+        this.lottoCount = money / 1000;
+        this.lotties = new Lotties(createRandomLotties(money));
     }
 
     private List<Lotto> createRandomLotties(final int money) {
@@ -25,7 +27,15 @@ public class LottoMachine {
         return money % 1000 == 0;
     }
 
+    public Lotties getLotties() {
+        return lotties;
+    }
+
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
     public int lottiesCount() {
-        return lotties.size();
+        return lotties.getCount();
     }
 }
