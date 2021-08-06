@@ -30,10 +30,10 @@ class LottoMoneyTest {
 
   @DisplayName("구매후 당첨된 금액기준으로 수익률을 계산하는 테스트.")
   @ParameterizedTest
-  @CsvSource(value = {"14000,5000,0.35","10000,0,0"})
-  void 당첨금수익률(int money, int winMoney, String targetReward) {
+  @CsvSource(value = {"14000,5000","10000,0"})
+  void 당첨금수익률(int money, int winMoney) {
     LottoMoney lottoMoney = new LottoMoney(money);
-    String reward = lottoMoney.getReward(winMoney);
-    assertThat(reward).isEqualTo(targetReward);
+    double reward = lottoMoney.getReward(winMoney);
+    assertThat(reward).isEqualTo((double) winMoney / (double) money);
   }
 }

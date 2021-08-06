@@ -4,6 +4,7 @@ import static java.util.stream.IntStream.range;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.strategy.GenerateLottoNumber;
 
 public class Lotteries {
 
@@ -11,8 +12,8 @@ public class Lotteries {
 
   private final List<Lotto> lottos = new ArrayList<>();
 
-  public Lotteries(int count, final List<Integer> numberPull) {
-    createLotteries(count, numberPull);
+  public Lotteries(int count) {
+    createLotteries(count);
   }
 
   public Lotteries() {
@@ -23,9 +24,9 @@ public class Lotteries {
     return lottos;
   }
 
-  private void createLotteries(int count,List<Integer> numberPull) {
+  private void createLotteries(int count) {
     range(INT_ZERO, count)
-        .mapToObj(i -> new Lotto(numberPull))
+        .mapToObj(i -> new Lotto(GenerateLottoNumber.createNumberPull()))
         .forEach(lottos::add);
   }
 

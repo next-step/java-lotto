@@ -13,17 +13,17 @@ import lotto.message.Message;
 
 public class LotteryDraw {
 
-  private LottoMoney lottoMoney;
-
-  private Lotteries lotteries;
-
-  private static final String SPLIT_MARK = ",";
-
   private static final int EACH_LOTTO_COST = 1000;
 
   private static final int INT_ZERO = 0;
 
   private static final int LIMIT_MATCH_NUMBER = 3;
+
+  private static final String SPLIT_MARK = ",";
+
+  private LottoMoney lottoMoney;
+
+  private Lotteries lotteries;
 
   public LotteryDraw(int money) {
     this.lottoMoney = new LottoMoney(money);
@@ -34,18 +34,18 @@ public class LotteryDraw {
   }
 
   private void checkInputValue() {
-    if (lottoMoney.calculateMoney("%", EACH_LOTTO_COST) != INT_ZERO) {
+    if (lottoMoney.calculateMoney(Operation.DIVISION_REMAINDER, EACH_LOTTO_COST) != INT_ZERO) {
       throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
   }
 
   private int getNumberOfLotto() {
-    return lottoMoney.calculateMoney("/", EACH_LOTTO_COST);
+    return lottoMoney.calculateMoney(Operation.DIVISION_SHARE, EACH_LOTTO_COST);
   }
 
-  public void buyLotteries(final List<Integer> numberPull) {
+  public void buyLotteries() {
     checkInputValue();
-    lotteries = new Lotteries(getNumberOfLotto(),numberPull);
+    lotteries = new Lotteries(getNumberOfLotto());
   }
 
   public Lotteries getLotteriesInfo() {
@@ -89,13 +89,10 @@ public class LotteryDraw {
     return categoriesRank;
   }
 
-  public String gradingScore(Map<Integer, List<Lotto>> result) {
+  public double gradingScore(Map<Integer, List<Lotto>> result) {
     return lottoMoney.getReward(result.keySet()
         .stream()
-        .mapToInt(
-            ratingNumber -> Operation.chooseOperation("*")
-                .calculation(result.get(ratingNumber).size(),
-                    Rank.matchRank(ratingNumber).getWinningMoney()))
+        .mapToInt(ratingNumber -> Operation.chooseOperation("*").calculation(result.get(ratingNumber).size(),Rank.matchRank(ratingNumber).getWinningMoney()))
         .sum());
   }
 

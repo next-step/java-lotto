@@ -2,43 +2,27 @@ package lotto.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.NoSuchElementException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RealGenerateLottoNumberTest {
 
-  RealGenerateLottoNumber generateLottoNumber = new RealGenerateLottoNumber();
-
-  @DisplayName("1~45까지 로또번호 생성 테스트.")
+  @DisplayName("로또번호 6개 생성 테스트.")
   @Test
   void 로또번호리스트생성() {
 
-
-    assertThat(generateLottoNumber.createNumberPull().size()).isEqualTo(45);
+    assertThat(GenerateLottoNumber.createNumberPull().size()).isEqualTo(6);
   }
 
-  @DisplayName("로또번호생성 최대값 확인 테스트.")
+  @DisplayName("생성되는 번호 중 중복이 있는지 테스트.")
   @Test
-  void 최대값체크테스트() {
+  void 중복된번호가주입되는지여부() {
+    Set<Integer> duplicateCheck = new HashSet<>();
 
-    Integer maxValue = generateLottoNumber.createNumberPull().stream()
-        .mapToInt(number -> number)
-        .max()
-        .orElseThrow(NoSuchElementException::new);
-
-    assertThat(maxValue).isEqualTo(45);
-  }
-
-  @DisplayName("로또번호생성 최소값 확인 테스트.")
-  @Test
-  void 최소값체크테스트() {
-
-    Integer minValue = generateLottoNumber.createNumberPull().stream()
-        .mapToInt(number -> number)
-        .min()
-        .orElseThrow(NoSuchElementException::new);
-
-    assertThat(minValue).isEqualTo(1);
+    duplicateCheck.addAll(GenerateLottoNumber.createNumberPull());
+    assertThat(duplicateCheck.size()).isEqualTo(6);
   }
 }

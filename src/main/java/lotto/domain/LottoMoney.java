@@ -7,11 +7,9 @@ import lotto.service.Operation;
 
 public class LottoMoney {
 
+  private static final int LIMIT_MIN_NUMBER = 0;
+
   private final int money;
-
-  public static final int LIMIT_MIN_NUMBER = 0;
-
-  private static final String PROFIT_RATE_FORMAT = "#.##";
 
   public LottoMoney(int money) {
 
@@ -21,19 +19,12 @@ public class LottoMoney {
     this.money = money;
   }
 
-  public int calculateMoney(String mark, final int eachLottoCost) {
-    return Operation.chooseOperation(mark).calculation(money,eachLottoCost);
+  public int calculateMoney(Operation mark, final int eachLottoCost) {
+    return Operation.chooseOperation(mark.getOperation()).calculation(money,eachLottoCost);
   }
 
-  public String getReward(final double totalWinningRewards) {
-    return formattingValue(totalWinningRewards / (double) money);
+  public double getReward(final double totalWinningRewards) {
+    return totalWinningRewards / (double) money;
   }
 
-  private String formattingValue(double reward) {
-
-    DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
-    format.setRoundingMode(RoundingMode.DOWN);
-
-    return format.format(reward);
-  }
 }

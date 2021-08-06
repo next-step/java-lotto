@@ -5,7 +5,6 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
-import lotto.strategy.RealGenerateLottoNumber;
 import lotto.view.InputView;
 import lotto.view.LottiesDrawingView;
 import lotto.view.ResultView;
@@ -16,7 +15,7 @@ public class LottoController {
 
     LotteryDraw lotteryDraw = new LotteryDraw(InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
 
-    lotteryDraw.buyLotteries(new RealGenerateLottoNumber().createNumberPull());
+    lotteryDraw.buyLotteries();
 
     new ResultView(lotteryDraw.getLotteriesInfo().getLottos().size());
 

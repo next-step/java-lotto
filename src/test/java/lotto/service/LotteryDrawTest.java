@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,8 @@ class LotteryDrawTest {
   void 금액입력값검증(int input){
 
     LotteryDraw lotteryDraw = new LotteryDraw(input);
-
-    List<Integer> values = new ArrayList<>();
-    range(1, 7).forEach(values::add);
-
     assertThatThrownBy(()->
-        lotteryDraw.buyLotteries(values)
+        lotteryDraw.buyLotteries()
     ).isInstanceOf(RuntimeException.class);
   }
 
@@ -63,14 +60,19 @@ class LotteryDrawTest {
   void 당첨번호와로또비교후등수별정리() {
 
     LotteryDraw lotteryDraw = new LotteryDraw(1000);
+    lotteryDraw.buyLotteries();
 
     List<Integer> values = new ArrayList<>();
     range(1, 7).forEach(values::add);
-    lotteryDraw.buyLotteries(values);
+    Lotto testLotto = new Lotto(values);
+
+    Lotteries lotteriesInfo = lotteryDraw.getLotteriesInfo();
+    List<Lotto> testLottos = lotteriesInfo.getLottos();
+    testLottos.add(testLotto);
 
     Lotto winLotto = lotteryDraw.inputWinningNumbers("11,12,13,4,5,6");
 
-    Map<Integer, List<Lotto>> result = lotteryDraw.matchLottoInfo(lotteryDraw.getLotteriesInfo(),
+    Map<Integer, List<Lotto>> result = lotteryDraw.matchLottoInfo(lotteriesInfo,
         winLotto);
 
     assertThat(result.get(3).size()).isEqualTo(1);

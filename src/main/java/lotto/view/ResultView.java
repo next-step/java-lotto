@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -8,7 +10,9 @@ import lotto.service.Rank;
 
 public class ResultView {
 
-  public ResultView(Map<Integer, List<Lotto>> matchResult, String profitRate) {
+  private static final String PROFIT_RATE_FORMAT = "#.##";
+
+  public ResultView(Map<Integer, List<Lotto>> matchResult, double profitRate) {
 
     System.out.println(
             "\n" +
@@ -24,10 +28,18 @@ public class ResultView {
           + "개");
     }
 
-    System.out.println(Message.MSG_WINNING_PROFIT+ profitRate + Message.MSG_WINNING_PROFIT_INFO);
+    System.out.println(Message.MSG_WINNING_PROFIT+ formattingValue(profitRate) + Message.MSG_WINNING_PROFIT_INFO);
   }
 
   public ResultView(int count) {
     System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
+  }
+
+  private String formattingValue(double profitRate) {
+
+    DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
+    format.setRoundingMode(RoundingMode.DOWN);
+
+    return format.format(profitRate);
   }
 }

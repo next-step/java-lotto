@@ -6,11 +6,11 @@ import lotto.message.Message;
 
 public class LottoNumber implements Comparator<LottoNumber> {
 
-  private final int number;
-  
   public static final int LIMIT_MAX_NUMBER = 45;
 
   public static final int LIMIT_MIN_NUMBER = 0;
+
+  private final int number;
 
   public LottoNumber(final int number) {
     if(isWrongNumber(number)){

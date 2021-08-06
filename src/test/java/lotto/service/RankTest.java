@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RankTest {
 
@@ -17,11 +18,24 @@ class RankTest {
     assertThat(Rank.matchRank(countOfMatch).getCountOfMatch()).isEqualTo(result);
   }
 
-  @DisplayName("Rank countOfMatch 값에 따른 winningMoney을 제대로 반환하는지 테스트.")
-  @ParameterizedTest
-  @CsvSource(value = {"3,5000","4,50000","5,1500000","6,2000000000"})
-  void getWinningMoney(int countOfMatch, int winningMoney) {
-    assertThat(Rank.matchRank(countOfMatch).getWinningMoney()).isEqualTo(winningMoney);
+  @DisplayName("Rank에 정의된 countOfMatch 확인 테스트.")
+  @Test
+  void getCountOfMatch() {
+    assertThat(Rank.MISS.getCountOfMatch()).isEqualTo(0);
+    assertThat(Rank.FIFTH.getCountOfMatch()).isEqualTo(3);
+    assertThat(Rank.FOURTH.getCountOfMatch()).isEqualTo(4);
+    assertThat(Rank.THIRD.getCountOfMatch()).isEqualTo(5);
+    assertThat(Rank.FIRST.getCountOfMatch()).isEqualTo(6);
+  }
+
+  @DisplayName("Rank에 정의된 winningMoney 확인 테스트.")
+  @Test
+  void getWinningMoney() {
+    assertThat(Rank.MISS.getWinningMoney()).isEqualTo(0);
+    assertThat(Rank.FIFTH.getWinningMoney()).isEqualTo(5000);
+    assertThat(Rank.FOURTH.getWinningMoney()).isEqualTo(50000);
+    assertThat(Rank.THIRD.getWinningMoney()).isEqualTo(1500000);
+    assertThat(Rank.FIRST.getWinningMoney()).isEqualTo(2000000000);
   }
 
 }

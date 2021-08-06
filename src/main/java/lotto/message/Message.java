@@ -10,7 +10,7 @@ public class Message {
   public static final String MSG_WINNING_STATISTICS_WORD = "당첨 통계";
   public static final String MSG_WINNING_PROFIT = "총 수익률은 ";
   public static final String MSG_WINNING_PROFIT_INFO = "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-  public static final String MSG_ERROR_LIMIT_LOTTO_NUMBER = "입력값은 45를 초과할 수 없습니다.";
+  public static final String MSG_ERROR_LIMIT_LOTTO_NUMBER = "입력값은 1 ~ 45까지 가능합니다.";
   public static final String MSG_ERROR_SAME_LOTTO_NUMBER = "중복된 숫자를 입력할 수 없습니다.";
   public static final String MSG_ERROR_LIMIT_MONEY = "최소금액은 0원 부터입니다.";
 }
