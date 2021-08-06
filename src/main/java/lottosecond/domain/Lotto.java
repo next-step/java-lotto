@@ -3,12 +3,25 @@ package lottosecond.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
 	public static final int NUMBERS_SIZE_LIMIT = 6;
 
 	private final Set<LottoNumber> numbers;
+
+	public Lotto(List<Integer> numbers) {
+		this(toSet(numbers));
+	}
+
+	private static Set<LottoNumber> toSet(List<Integer> numbers) {
+		Set<LottoNumber> lottoNumbers = new TreeSet<>();
+		for (Integer number : numbers) {
+			lottoNumbers.add(LottoNumber.valueOf(number));
+		}
+		return lottoNumbers;
+	}
 
 	public Lotto(Set<LottoNumber> numbers) {
 		if (validateSize(numbers.size())) {
@@ -25,16 +38,12 @@ public class Lotto {
 		return Collections.unmodifiableSet(numbers);
 	}
 
-	public int matchingQuantityFrom(List<Integer> lastWeekNumbers) {
+	public int matchingQuantityFrom(Lotto lastWeekNumbers) {
 		int matchedCount = 0;
-		for (Integer lastWeekNumber : lastWeekNumbers) {
-			matchedCount += getMatchedCount(lastWeekNumber);
+		for (LottoNumber lastWeekNumber : lastWeekNumbers.numbers()) {
+			matchedCount += numbers.contains(lastWeekNumber) ? 1 : 0;
 		}
 		return matchedCount;
-	}
-
-	private int getMatchedCount(Integer lastWeekNumber) {
-		return numbers.contains(LottoNumber.valueOf(lastWeekNumber)) ? 1 : 0;
 	}
 
 	public boolean hasBonus(int bonusNumber) {
