@@ -7,7 +7,7 @@ import lotto.enums.Rank;
 
 public class Lotto {
 
-	private static final int LOTTO_NUMBERS_LENGTH = 7;
+	private static final int LOTTO_NUMBERS_LENGTH = 6;
 
 	private final List<Integer> lottoNumbers;
 

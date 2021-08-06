@@ -7,7 +7,7 @@ import lotto.utils.RandomUtils;
 
 public class Lottos {
 
-	private static final int LOTTO_NUMBERS_LENGTH = 7;
+	private static final int LOTTO_NUMBERS_LENGTH = 6;
 
 	private final List<Lotto> lottos;
 

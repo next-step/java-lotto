@@ -1,13 +1,17 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.enums.Rank;
 
 class RevenueRecordTest {
 
@@ -16,16 +20,19 @@ class RevenueRecordTest {
 	void winLottoRevenue() {
 		List<Lotto> lottos = new ArrayList<>(5);
 
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+		Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		RevenueRecord revenueRecord = new RevenueRecord(lottos);
 
-		revenueRecord.aggregate(winLotto);
+		Map<Rank, Integer> records = revenueRecord.aggregate(winLotto)
+									.getRecords();
+
+		assertThat(records.get(Rank.FIRST)).isEqualTo(5);
 	}
 }
