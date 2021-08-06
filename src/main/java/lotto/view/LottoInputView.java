@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import lotto.exception.InputMachTypeException;
@@ -18,21 +17,21 @@ public class LottoInputView {
 	private LottoInputView() {
 	}
 
-	public static int buyLottos() {
+	public static int buyLottos() throws RuntimeException {
 		int money;
 		System.out.println(BUY_MONEY_MESSAGE);
-		try {
+
+		if (scanner.hasNextInt()) {
 			money = scanner.nextInt();
 			verifyPositive(money);
 			verifyThousandUnit(money);
 			scanner.nextLine();
-		} catch (InputMismatchException e) {
-			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
+			return LottoCountCalculator.calculateLottoCount(money);
 		}
-		return LottoCountCalculator.calculateLottoCount(money);
+		throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 	}
 
-	public static String requestLastWinLottoNumber() {
+	public static String inputLastWinningNumbers() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
 		return scanner.nextLine();
 	}
