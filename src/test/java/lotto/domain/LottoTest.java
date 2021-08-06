@@ -31,4 +31,13 @@ class LottoTest {
 
 		assertThat(buyLotto.figureOutRank(winningLotto)).isEqualTo(Rank.FOURTH);
 	}
+
+	@Test
+	@DisplayName("로또 번호가 8개 경우 예외 테스트")
+	void validLottoNumbersLength() {
+		assertThatExceptionOfType(IllegalArgumentException.class)
+			.isThrownBy(() -> {
+				new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+			}).withMessage("로또 번호는 7개의 숫자여야 합니다.");
+	}
 }
