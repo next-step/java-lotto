@@ -29,4 +29,8 @@ public class ResultView {
 	public static void outputLottoNumbers(Rank rank, Integer count) {
 		System.out.println(rank.getMatchNumberCount() + "개 일치 (" + rank.getReward() + ") - " + count + "개");
 	}
+
+	public static void outputYield(int money, long sumRevenue) {
+		System.out.printf("총 수익률은 %.2f 입니다.\n", (double) sumRevenue / money);
+	}
 }

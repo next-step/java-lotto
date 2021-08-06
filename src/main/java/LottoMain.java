@@ -16,15 +16,15 @@ public class LottoMain {
 	private static Lottos lottos;
 
 	public static void main(String[] args) {
-
 		buyLotto(InputView.inputMoney());
 
+		ResultView.outputNewLine();
 		Lotto winLotto = winLotto(InputView.inputWinLottoNumbers());
+		ResultView.outputNewLine();
+
 		Records records = lottos.toRevenueRecord().aggregate(winLotto);
 
-		records.getRecords().forEach((key, value) -> System.out.println(key.getMatchNumberCount() + "개 일치 (" + key.getReward() + ") - " + value + "개"));
-
-		System.out.println(records.sumRevenue());
+		outputStatistics(records);
 	}
 
 	private static void buyLotto(int money) {
@@ -48,5 +48,11 @@ public class LottoMain {
 										.collect(Collectors.toList());
 
 		return new Lotto(lottoNumbers);
+	}
+
+	private static void outputStatistics(Records records) {
+		ResultView.outputStatisticsTitle();
+		records.getRecords().forEach(ResultView::outputLottoNumbers);
+		ResultView.outputYield(money, records.sumRevenue());
 	}
 }
