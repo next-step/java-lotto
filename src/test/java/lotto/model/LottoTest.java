@@ -51,4 +51,19 @@ public class LottoTest {
         assertThat(lotto.getNumbers())
                 .containsExactlyElementsOf(sortedLottoNumbers);
     }
+
+    @DisplayName("같은 로또 번호의 개수를 찾는 기능이 정상 동작해야 한다.")
+    @Test
+    public void findEqualNumberCountTest() {
+        // given
+        List<LottoNumber> lottoNumbers = LottoNumber.getAllLottoNumbers()
+                .subList(0, 6);
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        List<LottoNumber> otherLottoNumbers = LottoNumber.getAllLottoNumbers()
+                .subList(3, 9);
+
+        // when, then
+        assertEquals(lotto.findEqualNumberCount(otherLottoNumbers), 3);
+    }
 }
