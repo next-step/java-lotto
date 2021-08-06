@@ -13,7 +13,7 @@ public class SearchPrize {
 
 	public static WinPrizes drawWinPrize(Lottos lottos, Lotto lastWinningLotto) {
 		Map<Prize, Integer> winPrizes = Arrays.stream(Prize.values())
-			.collect(Collectors.toMap(winPrize -> winPrize, winnerResult -> 0, (a, b) -> b));
+			.collect(Collectors.toMap(prize -> prize, prize -> 0, (a, b) -> b));
 		for (Lotto lotto : lottos.getLottos()) {
 			Prize winPrize = Prize.getWinnersStatus(
 				(int)lotto.getLotto().stream().filter(lastWinningLotto.getLotto()::contains).count());
