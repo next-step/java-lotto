@@ -35,4 +35,24 @@ class RevenueRecordTest {
 
 		assertThat(records.get(Rank.FIRST)).isEqualTo(5);
 	}
+
+	@Test
+	@DisplayName("로또 5개 중 5개 모두 당첨 금액")
+	void sumRevenue() {
+		List<Lotto> lottos = new ArrayList<>(5);
+
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+		Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+		RevenueRecord revenueRecord = new RevenueRecord(lottos);
+
+		Records records = revenueRecord.aggregate(winLotto);
+
+		assertThat(records.sumRevenue()).isEqualTo(10000000000L);
+	}
 }
