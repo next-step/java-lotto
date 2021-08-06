@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import lotto.exception.WrongLottoNumberException;
 
 public class LottoNumber {
@@ -19,4 +20,28 @@ public class LottoNumber {
         }
 
     }
+
+    public int value() {
+        return lottoNumber;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber number = (LottoNumber) o;
+        return lottoNumber == number.lottoNumber;
+    }
+
+
 }
