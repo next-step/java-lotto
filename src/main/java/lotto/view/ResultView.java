@@ -12,10 +12,13 @@ public class ResultView {
 
   private static final String PROFIT_RATE_FORMAT = "#.##";
 
-  public ResultView(Map<Integer, List<Lotto>> matchResult, double profitRate) {
+  public static void drawCountOfBuyLotteries(final int count) {
+    System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
+  }
 
+  public static void drawResult(final Map<Integer, List<Lotto>> matchResult, final double gradingScore) {
     System.out.println(
-            "\n" +
+        "\n" +
             Message.MSG_WINNING_STATISTICS_WORD +
             "\n" +
             "------------------------------------");
@@ -28,18 +31,15 @@ public class ResultView {
           + "개");
     }
 
-    System.out.println(Message.MSG_WINNING_PROFIT+ formattingValue(profitRate) + Message.MSG_WINNING_PROFIT_INFO);
+    System.out.println(
+        Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + Message.MSG_WINNING_PROFIT_INFO);
+    }
+
+    private static String formattingValue(double profitRate){
+
+      DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
+      format.setRoundingMode(RoundingMode.DOWN);
+
+      return format.format(profitRate);
+    }
   }
-
-  public ResultView(int count) {
-    System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
-  }
-
-  private String formattingValue(double profitRate) {
-
-    DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
-    format.setRoundingMode(RoundingMode.DOWN);
-
-    return format.format(profitRate);
-  }
-}
