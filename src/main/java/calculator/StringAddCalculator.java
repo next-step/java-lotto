@@ -1,5 +1,7 @@
 package calculator;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,15 +11,16 @@ public class StringAddCalculator {
     public static final String DEFAULT_DELIMITER = ",|:";
     public static final String PIPE = "|";
     public static final int DEFAULT_RESULT = 0;
-    public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\\n(.*)";
+    public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n";
+    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
-    public static int calculate(String input) {
+    public int calculate(String input) {
         if (verify(input))
             return DEFAULT_RESULT;
         return getSum(split(input));
     }
 
-    private static boolean verify(String input) {
+    private boolean verify(String input) {
         if (input == null || input.isEmpty()) {
             return true;
         }
@@ -27,23 +30,26 @@ public class StringAddCalculator {
         return false;
     }
 
-    private static int getSum(String[] split) {
-        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
+    private String[] split(String input) {
+        String delimiter = getDelimiter(input);
+        return getExpression(input).split(delimiter);
     }
 
-    public static String[] split(String input) {
-        Matcher matcher = getCustomDelimiterMatcher(input);
-        if (matcher.find()) {
-            return matcher.group(2).split(getCustomDelimiter(matcher.group(1)));
+    private String getDelimiter(String input) {
+        String delimiter = DEFAULT_DELIMITER;
+        Matcher matcher = pattern.matcher(input);
+        while (matcher.find()) {
+            delimiter += PIPE + matcher.group(1);
         }
-        return input.split(DEFAULT_DELIMITER);
+        return delimiter;
     }
 
-    private static Matcher getCustomDelimiterMatcher(String input) {
-        return Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+    private String getExpression(String input) {
+        String[] split = pattern.split(input);
+        return split[split.length - 1];
     }
 
-    private static String getCustomDelimiter(String delimiter) {
-        return DEFAULT_DELIMITER + PIPE + delimiter;
+    private int getSum(String[] split) {
+        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
     }
 }
