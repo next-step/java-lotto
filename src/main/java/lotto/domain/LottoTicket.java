@@ -13,7 +13,7 @@ public class LottoTicket {
         int matchCount = (int) winNumbers.generateNumbers().stream()
                 .filter(i -> this.lottoNumbers.contains(i))
                 .count();
-        return WinAmount.valueOfMatchCount(matchCount);
+        return WinAmount.valueOfMatchCount(matchCount, false);
     }
 
     public List<Integer> getLottoNumbers() {
