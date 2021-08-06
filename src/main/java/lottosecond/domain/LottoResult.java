@@ -19,13 +19,8 @@ public class LottoResult {
 		result.put(LottoProfit.SIX, 0);
 	}
 
-	public void match(String winningNumberText, int bonusNumber) {
-		putIntoMap(toLotto(winningNumberText), bonusNumber);
-	}
-
-	private Lotto toLotto(String winningNumberText) {
-		String[] winningNumberTexts = winningNumberText.split(",");
-		return new Lotto(toList(winningNumberTexts));
+	public void match(Lotto winningNumberText, int bonusNumber) {
+		putIntoMap(winningNumberText, bonusNumber);
 	}
 
 	private List<Integer> toList(String[] split) {

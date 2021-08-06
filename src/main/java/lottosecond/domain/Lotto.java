@@ -1,9 +1,7 @@
 package lottosecond.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,8 +9,17 @@ public class Lotto {
 
 	private final Set<LottoNumber> numbers;
 
+	public Lotto(String numbersText) {
+		this(toSet(toList(numbersText)));
+	}
+
 	public Lotto(List<Integer> numbers) {
 		this(toSet(numbers));
+	}
+
+	private static List<Integer> toList(String text) {
+		String[] numberTexts = text.split(",");
+		return Arrays.stream(numberTexts).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
 	}
 
 	private static Set<LottoNumber> toSet(List<Integer> numbers) {

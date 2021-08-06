@@ -1,5 +1,6 @@
 package lottosecond.ui;
 
+import lottosecond.domain.Lotto;
 import lottosecond.domain.Money;
 
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private final Money money;
-	private String winningNumbers;
+	private Lotto winningNumbers;
 	private int bonusNumber;
 
 	public InputView() {
@@ -22,7 +23,7 @@ public class InputView {
 
 	public void inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
-		winningNumbers = scanner.nextLine();
+		winningNumbers = new Lotto(scanner.nextLine());
 	}
 
 	public void inputBonusNumber() {
@@ -34,7 +35,7 @@ public class InputView {
 		return money;
 	}
 
-	public String getWinningNumbers() {
+	public Lotto getWinningNumbers() {
 		return winningNumbers;
 	}
 

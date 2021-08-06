@@ -31,7 +31,7 @@ public class ResultView {
 	}
 
 
-	public void printResult(String winningNumbers, int bonusNumber) {
+	public void printResult(Lotto winningNumbers, int bonusNumber) {
 		System.out.println(MATCH_RESULT);
 		System.out.println(DIVISION_LINE);
 
