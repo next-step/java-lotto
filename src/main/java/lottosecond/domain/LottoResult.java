@@ -20,14 +20,12 @@ public class LottoResult {
 	}
 
 	public void match(String winningNumberText, int bonusNumber) {
-		putIntoMap(toList(winningNumberText), bonusNumber);
+		putIntoMap(toLotto(winningNumberText), bonusNumber);
 	}
 
-	private List<Integer> toList(String winningNumberText) {
-		String[] split = winningNumberText.split(",");
-		validateWinningNumbers(split);
-
-		return toList(split);
+	private Lotto toLotto(String winningNumberText) {
+		String[] winningNumberTexts = winningNumberText.split(",");
+		return new Lotto(toList(winningNumberTexts));
 	}
 
 	private List<Integer> toList(String[] split) {
@@ -48,13 +46,7 @@ public class LottoResult {
 		return number;
 	}
 
-	private void validateWinningNumbers(String[] split) {
-		if (split.length != 6) {
-			throw new LottoNumbersSizeException();
-		}
-	}
-
-	private void putIntoMap(List<Integer> winningNumbers, int bonusNumber) {
+	private void putIntoMap(Lotto winningNumbers, int bonusNumber) {
 		for (Lotto lotto : lottos.toList()) {
 			int quantity = lotto.matchingQuantityFrom(winningNumbers);
 			boolean matchBonus = lotto.hasBonus(bonusNumber);
