@@ -13,7 +13,8 @@ public class StringParser {
     public static int[] parser(String s) {
         Matcher matcher = CUSTOM_PATTERN.matcher(s);
         if (matcher.find()) {
-            return split(matcher.group(EXPRESSION_GROUP_NUMBER), String.join("|", DELIMITER, matcher.group(SEPARATOR_GROUP_NUMBER)));
+            String delimiter = String.join("|", DELIMITER, matcher.group(SEPARATOR_GROUP_NUMBER));
+            return split(matcher.group(EXPRESSION_GROUP_NUMBER), delimiter);
         }
 
         return Arrays.stream(s.split(DELIMITER)).
