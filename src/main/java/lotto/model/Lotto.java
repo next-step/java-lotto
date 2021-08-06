@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.exception.LottoNumberSizeException;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -43,7 +45,7 @@ public class Lotto {
 
     private static void validateAggregate(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_COUNT) {
-            throw new IllegalArgumentException("Set<LottoNumber> size must be " + NUMBER_OF_LOTTO_COUNT);
+            throw new LottoNumberSizeException("the lotto numbers must be " + NUMBER_OF_LOTTO_COUNT);
         }
     }
 
