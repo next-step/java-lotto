@@ -10,9 +10,9 @@ class LottoPurchaseTest {
 	@Test
 	@DisplayName("입력된 로또게임 장수 만큼 로또게임이 생성된다.")
 	public void createMoneyByLottoGame() {
-		assertThat(LottoPurchase.buyLotteries(4000).size()).isEqualTo(4);
+		assertThat(LottoPurchase.buyLottos(4000).size()).isEqualTo(4);
 
-		assertThat(LottoPurchase.buyLotteries(6000).size()).isEqualTo(6);
+		assertThat(LottoPurchase.buyLottos(6000).size()).isEqualTo(6);
 	}
 
 }

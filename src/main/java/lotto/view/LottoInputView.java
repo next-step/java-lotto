@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
+import lotto.utils.LottoCountCalculator;
 
 public class LottoInputView {
 
@@ -17,18 +18,18 @@ public class LottoInputView {
 	private LottoInputView() {
 	}
 
-	public static int buyRequest() {
+	public static int buyLottos() {
 		int money;
 		System.out.println(BUY_MONEY_MESSAGE);
 		try {
 			money = scanner.nextInt();
-			validPositiveCheck(money);
-			validThousandUnitCheck(money);
+			verifyPositive(money);
+			verifyThousandUnit(money);
 			scanner.nextLine();
 		} catch (InputMismatchException e) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
-		return money;
+		return LottoCountCalculator.calculateLottoCount(money);
 	}
 
 	public static String requestLastWinLottoNumber() {
@@ -36,13 +37,13 @@ public class LottoInputView {
 		return scanner.nextLine();
 	}
 
-	private static void validThousandUnitCheck(int money) {
+	private static void verifyThousandUnit(int money) {
 		if (money % MONEY_UNIT != ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_THOUSAND_UNIT_MESSAGE);
 		}
 	}
 
-	private static void validPositiveCheck(int money) {
+	private static void verifyPositive(int money) {
 		if (money < 0) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_POSITIVE_MESSAGE);
 		}

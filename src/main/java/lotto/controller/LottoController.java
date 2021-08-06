@@ -12,16 +12,16 @@ import lotto.view.LottoOutputView;
 public class LottoController {
 
 	public static void main(String[] args) {
-		int money = LottoInputView.buyRequest();
+		int lottoCount = LottoInputView.buyLottos();
 
-		List<Lotto> lotteries = LottoPurchase.buyLotteries(money);
+		List<Lotto> lottos = LottoPurchase.buyLottos(lottoCount);
 
-		LottoOutputView.printLottoTicketCount(money);
-		LottoOutputView.printLottoList(lotteries);
+		LottoOutputView.printLottoTicketCount(lottoCount);
+		LottoOutputView.printLottoList(lottos);
 
 		String lastWinNumber = LottoInputView.requestLastWinLottoNumber();
 
-		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(lotteries, lastWinNumber);
-		LottoOutputView.displayLottoPrize(winPrizes, money);
+		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(lottos, lastWinNumber);
+		LottoOutputView.displayLottoPrize(winPrizes, lottoCount);
 	}
 }

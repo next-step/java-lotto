@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
-import lotto.utils.LottoTicketCalculator;
+import lotto.utils.LottoCountCalculator;
 import lotto.utils.PrizeRate;
 
 public class LottoOutputView {
@@ -15,12 +15,12 @@ public class LottoOutputView {
 	private static final String DASH_LINE = "---------";
 	public static final int ZERO_POINT = 0;
 
-	public static void printLottoTicketCount(int money) {
-		System.out.println(LottoTicketCalculator.calculatorLottoTicketCount(money) + BUY_RESULT_MESSAGE);
+	public static void printLottoTicketCount(int lottoCount) {
+		System.out.println(lottoCount + BUY_RESULT_MESSAGE);
 	}
 
-	public static void printLottoList(List<Lotto> resultLotto) {
-		for (Lotto lotto : resultLotto) {
+	public static void printLottoList(List<Lotto> lottos) {
+		for (Lotto lotto : lottos) {
 			printLottoGameView(lotto);
 		}
 		System.out.print("\n");
@@ -30,7 +30,8 @@ public class LottoOutputView {
 		System.out.println(lotto.getLotto());
 	}
 
-	public static void displayLottoPrize(WinPrizes winPrizes, int money) {
+	public static void displayLottoPrize(WinPrizes winPrizes, int lottoCount) {
+		int money = LottoCountCalculator.calculateLottoMoney(lottoCount);
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();
