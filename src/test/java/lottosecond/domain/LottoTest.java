@@ -69,7 +69,7 @@ class LottoTest {
 	void match_numbers(Set<LottoNumber> lottoNumbers, int matchedCount) throws Exception {
 		//given
 		Lotto lotto = new Lotto(lottoNumbers);
-		List<Integer> lastWeekNumbers = Arrays.asList(1,2,3,4,5,6);
+		Lotto lastWeekNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
 
 		//when
 		int matchesNumber = lotto.matchingQuantityFrom(lastWeekNumbers);
