@@ -1,6 +1,7 @@
 package lottosecond.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,9 +11,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoResultTest {
 
+	@Test
+	@DisplayName("당첨 번호와 보너스 번호 중복 예외")
+	void duplicate_bonus_number() throws Exception {
+		//given
+		Lottos lottos = new Lottos();
+		lottos.buy(1000, () -> toSet(Arrays.asList(1,2,3,4,5,6)));
+
+		LottoResult lottoResult = new LottoResult(lottos);
+
+		Lotto winningNumbers = new Lotto("1, 2, 3, 4, 5, 6");
+		LottoNumber bonusNumber = LottoNumber.valueOf(6);
+
+		//when
+
+		//then
+		assertThatThrownBy(() -> lottoResult.match(winningNumbers, bonusNumber))
+				.isInstanceOf(LottoBonusNumberException.class);
+
+	}
 
 	@ParameterizedTest(name = "당첨 등수별 수량 {index} [{arguments}]")
 	@MethodSource

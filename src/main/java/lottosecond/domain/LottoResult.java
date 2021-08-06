@@ -18,8 +18,11 @@ public class LottoResult {
 		result.put(LottoProfit.SIX, 0);
 	}
 
-	public void match(Lotto winningNumberText, LottoNumber bonusNumber) {
-		putIntoMap(winningNumberText, bonusNumber);
+	public void match(Lotto winningNumbers, LottoNumber bonusNumber) {
+		if (winningNumbers.hasBonus(bonusNumber)) {
+			throw new LottoBonusNumberException();
+		}
+		putIntoMap(winningNumbers, bonusNumber);
 	}
 
 	private void putIntoMap(Lotto winningNumbers, LottoNumber bonusNumber) {
