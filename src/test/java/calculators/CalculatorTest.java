@@ -16,7 +16,7 @@ class CalculatorTest {
 
     @BeforeEach
     void setUp() {
-        calculator = new Calculator();
+        calculator = new Calculator(new NumberGenerator());
     }
 
     @Test
