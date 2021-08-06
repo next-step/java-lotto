@@ -11,13 +11,13 @@ import lotto.model.WinPrizes;
 
 public class SearchPrize {
 
-	public static WinPrizes drawWinPrize(List<Lotto> lotteries, List<Integer> lastWinNumbers) {
+	public static WinPrizes drawWinPrize(List<Lotto> lottos, List<Integer> lastWinningLottos) {
 		Map<Prize, Integer> winPrizes = Arrays.stream(Prize.values())
-			.collect(Collectors.toMap(winnerResult -> winnerResult, winnerResult -> 0, (a, b) -> b));
-		for (Lotto lotto : lotteries) {
-			Prize winnersStatus = Prize.getWinnersStatus(
-				(int)lotto.getLotto().stream().filter(lastWinNumbers::contains).count());
-			winPrizes.put(winnersStatus, winPrizes.get(winnersStatus) + 1);
+			.collect(Collectors.toMap(winPrize -> winPrize, winnerResult -> 0, (a, b) -> b));
+		for (Lotto lotto : lottos) {
+			Prize winPrize = Prize.getWinnersStatus(
+				(int)lotto.getLotto().stream().filter(lastWinningLottos::contains).count());
+			winPrizes.put(winPrize, winPrizes.get(winPrize) + 1);
 		}
 		return new WinPrizes(winPrizes);
 	}

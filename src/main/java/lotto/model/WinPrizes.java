@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class WinPrizes {
 	private final Map<Prize, Integer> winPrizes;
 
 	public WinPrizes(Map<Prize, Integer> winPrizes) {
-		this.winPrizes = winPrizes;
+		this.winPrizes = Collections.unmodifiableMap(winPrizes);
 	}
 
 	public int findWinPrizeGrade(Prize prize) {
@@ -25,14 +26,14 @@ public class WinPrizes {
 	public int getTotalWinningMoney() {
 		return winPrizes.keySet()
 			.stream()
-			.mapToInt(winnerResult -> (winnerResult.getWinningMoney() * winPrizes.get(winnerResult)))
+			.mapToInt(winPrize -> (winPrize.getWinningMoney() * winPrizes.get(winPrize)))
 			.sum();
 	}
 
 	public List<Prize> drawResultWinPrizes() {
-		List<Prize> resultPrize = new ArrayList<>(winPrizes.keySet());
-		resultPrize.sort(new PrizeComparator());
-		return resultPrize;
+		List<Prize> prizes = new ArrayList<>(this.winPrizes.keySet());
+		prizes.sort(new PrizeComparator());
+		return prizes;
 	}
 
 }
