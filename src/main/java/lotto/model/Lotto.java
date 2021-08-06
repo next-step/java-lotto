@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,8 +9,7 @@ public class Lotto {
 
 	public Lotto(List<Integer> lottoNumbers) {
 		Collections.sort(lottoNumbers);
-		this.lottoNumbers = new ArrayList<>();
-		this.lottoNumbers.addAll(Collections.unmodifiableList(lottoNumbers));
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
 	public List<Integer> getLotto() {

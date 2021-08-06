@@ -23,8 +23,8 @@ public class LottoMachine {
 		throw new AssertionError(LOTTO_MACHINE_CREATE_MESSAGE);
 	}
 
-	public static List<Integer> createLottoNumbers() {
+	public static LottoBalls createLottoNumbers() {
 		Collections.shuffle(lottoBalls);
-		return lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE);
+		return  new LottoBalls(lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE));
 	}
 }
