@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import lotto.enums.Rank;
 
@@ -39,5 +40,12 @@ public class Lotto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
+	}
+
+	@Override
+	public String toString() {
+		return lottoNumbers.stream()
+						.map(Object::toString)
+						.collect(Collectors.joining(", "));
 	}
 }

@@ -23,6 +23,8 @@ public class InputView {
 	public static String inputWinLottoNumbers() {
 		System.out.println(INPUT_LOTTO_NUMBERS_TEXT);
 
+		SCANNER.nextLine();
+
 		return SCANNER.nextLine();
 	}
 }

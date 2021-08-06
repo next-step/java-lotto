@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ public class Records {
 	private final Map<Rank, Integer> records;
 
 	public Records() {
-		this.records = new HashMap<>();
+		this.records = new LinkedHashMap<>();
 		this.records.put(Rank.FOURTH, 0);
 		this.records.put(Rank.THIRD, 0);
 		this.records.put(Rank.SECOND, 0);

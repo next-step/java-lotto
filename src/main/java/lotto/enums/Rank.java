@@ -27,4 +27,8 @@ public enum Rank {
 	public long getReward() {
 		return reward;
 	}
+
+	public long getMatchNumberCount() {
+		return matchNumberCount;
+	}
 }

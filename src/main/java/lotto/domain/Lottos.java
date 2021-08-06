@@ -24,4 +24,12 @@ public class Lottos {
 
 		return new Lottos(lottos);
 	}
+
+	public RevenueRecord toRevenueRecord() {
+		return new RevenueRecord(lottos);
+	}
+
+	public List<Lotto> getLottos() {
+		return lottos;
+	}
 }
