@@ -26,11 +26,6 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public static Lotto from(final TreeSet<LottoNumber> numbers) {
-        Objects.requireNonNull(numbers, "numbers must be not null.");
-        return new Lotto(numbers);
-    }
-
     public static Lotto from(final String string) {
         Objects.requireNonNull(string, "numbers must be not null.");
         return new Lotto(aggregate(string));
