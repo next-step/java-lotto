@@ -22,7 +22,10 @@ public class LottoApplication {
         List<Integer> inputWinNumbers = inputView.inputWinNumbers();
         LottoNumbers winNumbers = () -> inputWinNumbers;
 
+        // 2등 보너스볼 입력
+        int bonusNumber = inputView.inputBonusNumber();
+
         // 당첨 통계
-        outputView.printWinStats(lottoTickets.getWinStats(winNumbers));
+        outputView.printWinStats(lottoTickets.getWinStats(winNumbers, bonusNumber));
     }
 }

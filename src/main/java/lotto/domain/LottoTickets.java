@@ -26,12 +26,12 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public WinStats getWinStats(LottoNumbers winNumbers) {
+    public WinStats getWinStats(LottoNumbers winNumbers, int bonusNumber) {
         Map<WinAmount, Integer> matchMap = new HashMap<>();
         long amount = 0;
 
         for (LottoTicket i : lottoTickets) {
-            WinAmount winAmount = i.getWinAmount(winNumbers);
+            WinAmount winAmount = i.getWinAmount(winNumbers, bonusNumber);
             if (winAmount != WinAmount.FAIL) {
                 matchMap.put(winAmount, matchMap.getOrDefault(winAmount, 0) + 1);
                 amount += winAmount.getReward();
