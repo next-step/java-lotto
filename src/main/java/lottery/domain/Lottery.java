@@ -1,4 +1,4 @@
-package lottery.domain.lottery;
+package lottery.domain;
 
 import lottery.domain.winningstrategy.WinningLotteryStrategy;
 import lottery.dto.LotteryDto;
@@ -11,7 +11,7 @@ public class Lottery {
     public static final String NON_NULL = "입력값은 null 일 수 없습니다";
     public static final String INVALID_LOTTERY_NUMBERS_SIZE = "로또 숫자는 6개여야 합니다 -> ";
     public static final String DUPLICATED_LOTTERY_NUMBERS = "로또에서 중복된 숫자는 존재 할 수 없습니다";
-    public static final int PRICE = 1000;
+    public static final Money PRICE = new Money(1000);
     public static final int LOTTERY_NUMBERS_SIZE = 6;
 
     private final Set<LotteryNumber> lotteryNumbers;
@@ -50,7 +50,7 @@ public class Lottery {
         }
     }
 
-    private void requireValidLotteryNumbersSize(int lotteryNumbersSize) {
+    private void requireValidLotteryNumbersSize(final int lotteryNumbersSize) {
         if (lotteryNumbersSize != LOTTERY_NUMBERS_SIZE) {
             throw new IllegalArgumentException(INVALID_LOTTERY_NUMBERS_SIZE + lotteryNumbersSize);
         }

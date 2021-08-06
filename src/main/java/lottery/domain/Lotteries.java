@@ -1,4 +1,4 @@
-package lottery.domain.lottery;
+package lottery.domain;
 
 import lottery.domain.winningstrategy.WinningLotteryStrategy;
 import lottery.dto.LotteryDto;
@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static lottery.domain.Lottery.PRICE;
 
 public class Lotteries {
 
@@ -51,7 +53,7 @@ public class Lotteries {
     }
 
     private long getTotalLotteriesPrice() {
-        return (long) lotteries.size() * Lottery.PRICE;
+        return PRICE.multiply(lotteries.size());
     }
 
     private void validateLotteries(final List<Lottery> lotteries) {

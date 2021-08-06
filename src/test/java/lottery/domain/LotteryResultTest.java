@@ -1,13 +1,13 @@
-package lottery.domain.lottery;
+package lottery.domain;
 
-import lottery.domain.lottery.LotteryResult;
+import lottery.domain.LotteryResult;
 import lottery.dto.LotteryResultDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lottery.domain.lottery.LotteryResult.*;
+import static lottery.domain.LotteryResult.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryResultTest {
@@ -58,7 +58,9 @@ class LotteryResultTest {
     public void getTotalCashPrize() {
         // given
         long count = 10;
-        long expected = FIVE_MATCHES.toDto(0).getCashPrize() * count;
+        long expected = FIVE_MATCHES.toDto(0)
+                .getCashPrize()
+                .multiply(count);
 
         // when
         long totalCashPrize = FIVE_MATCHES.getTotalCashPrize(count);

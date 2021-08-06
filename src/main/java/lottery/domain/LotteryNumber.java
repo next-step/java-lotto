@@ -1,4 +1,4 @@
-package lottery.domain.lottery;
+package lottery.domain;
 
 import lottery.dto.LotteryNumberDto;
 
@@ -12,7 +12,7 @@ public class LotteryNumber {
 
     private final int lotteryNumber;
 
-    public LotteryNumber(int lotteryNumber) {
+    public LotteryNumber(final int lotteryNumber) {
         validateLotteryNumber(lotteryNumber);
         this.lotteryNumber = lotteryNumber;
     }
@@ -21,7 +21,7 @@ public class LotteryNumber {
         return new LotteryNumberDto(lotteryNumber);
     }
 
-    private void validateLotteryNumber(int lotteryNumber) {
+    private void validateLotteryNumber(final int lotteryNumber) {
         if (lotteryNumber < MIN || lotteryNumber > MAX) {
             throw new IllegalArgumentException(INVALID_NUMBER + lotteryNumber);
         }
