@@ -47,16 +47,16 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(LEFT_SQUARE_BRACKET);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(LEFT_SQUARE_BRACKET);
         for (LottoNumber number : numbers) {
-            stringBuffer.append(number);
-            stringBuffer.append(COMMA);
-            stringBuffer.append(ONE_BLANK_SPACE);
+            stringBuilder.append(number);
+            stringBuilder.append(COMMA);
+            stringBuilder.append(ONE_BLANK_SPACE);
         }
-        stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(COMMA));
-        stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(ONE_BLANK_SPACE));
-        stringBuffer.append(RIGHT_SQUARE_BRACKET);
-        return stringBuffer.toString();
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(COMMA));
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(ONE_BLANK_SPACE));
+        stringBuilder.append(RIGHT_SQUARE_BRACKET);
+        return stringBuilder.toString();
     }
 }
