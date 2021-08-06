@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,10 +9,10 @@ public class LottoPurchase {
 
 	public static final int START_INCLUSIVE = 0;
 
-	public static List<Lotto> buyLottos(int lottoCount) {
-		return IntStream.range(START_INCLUSIVE, lottoCount)
+	public static Lottos buyLottos(int lottoCount) {
+		return new Lottos(IntStream.range(START_INCLUSIVE, lottoCount)
 			.mapToObj(i -> new Lotto(GenerateLotto.generateLottoNumbers()))
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 	}
 
 }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
 
@@ -21,7 +22,7 @@ class SearchPrizeTest {
 		List<Lotto> lottoGame = new ArrayList<>();
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 10, 12, 21)));
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 7, 12, 34)));
-		WinPrizes winPrizes = SearchPrize.drawWinPrize(lottoGame, getLottoNumbers(1, 3, 5, 7, 9, 17));
+		WinPrizes winPrizes = SearchPrize.drawWinPrize(new Lottos(lottoGame), new Lotto(getLottoNumbers(1, 3, 5, 7, 9, 17)));
 
 		assertThat(winPrizes.getWinPrizeSize()).isEqualTo(5);
 		assertThat(winPrizes.findWinPrizeGrade(Prize.FIFTH)).isEqualTo(1);
@@ -38,7 +39,7 @@ class SearchPrizeTest {
 		lotto.add(getLottoGame(7, 9, 15, 21, 28, 39));
 		lotto.add(getLottoGame(2, 2, 3, 32, 38, 45));
 
-		WinPrizes result = SearchPrize.drawWinPrize(lotto, getLottoNumbers(1, 2, 3, 4, 5, 6));
+		WinPrizes result = SearchPrize.drawWinPrize(new Lottos(lotto), new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6)));
 
 		assertThat(result.findWinPrizeGrade(Prize.THIRD)).isEqualTo(2);
 		assertThat(result.findWinPrizeGrade(Prize.FIRST)).isEqualTo(1);

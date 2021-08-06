@@ -1,8 +1,7 @@
 package lotto.view;
 
-import java.util.List;
-
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
 import lotto.utils.LottoCountCalculator;
@@ -19,8 +18,8 @@ public class LottoOutputView {
 		System.out.println(lottoCount + BUY_RESULT_MESSAGE);
 	}
 
-	public static void printLottoList(List<Lotto> lottos) {
-		for (Lotto lotto : lottos) {
+	public static void printLottoList(Lottos lottos) {
+		for (Lotto lotto : lottos.getLottos()) {
 			printLottoGameView(lotto);
 		}
 		System.out.print("\n");

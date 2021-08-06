@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
+import lotto.model.Lotto;
 import lotto.utils.LottoCountCalculator;
 
 public class LottoInputView {
@@ -36,11 +37,11 @@ public class LottoInputView {
 		throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 	}
 
-	public static List<Integer> inputLastWinningLotto() {
+	public static Lotto inputLastWinningLotto() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
 		String lastWinningLotto = scanner.nextLine();
 		checkLottoEmpty(lastWinningLotto);
-		return toList(lastWinningLotto);
+		return new Lotto(toList(lastWinningLotto));
 	}
 
 	private static List<Integer> toList(String lotto) {
@@ -92,5 +93,4 @@ public class LottoInputView {
 			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
 		}
 	}
-
 }
