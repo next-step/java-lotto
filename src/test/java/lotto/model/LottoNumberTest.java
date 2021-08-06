@@ -70,4 +70,20 @@ public class LottoNumberTest {
         // then
         assertEquals(allLottoNumbers.size(), 45);
     }
+
+    @DisplayName("LottoNumber.class의 compareTo() 메소드는 로또 번호를 비교한다.")
+    @Test
+    public void compareToLottoNumberTest() {
+        // given
+        LottoNumber oneLottoNumber = new LottoNumber(1);
+        LottoNumber otherOneLottoNumber = new LottoNumber(1);
+        LottoNumber twoLottoNumber = new LottoNumber(2);
+        LottoNumber threeLottoNumber = new LottoNumber(3);
+
+        // when, then
+        assertEquals(oneLottoNumber.compareTo(otherOneLottoNumber), 0);
+        assertEquals(oneLottoNumber.compareTo(twoLottoNumber), -1);
+        assertEquals(threeLottoNumber.compareTo(oneLottoNumber), 1);
+        assertEquals(twoLottoNumber.compareTo(threeLottoNumber), -1);
+    }
 }
