@@ -25,9 +25,6 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return true;
         }
-        if (input.contains("-")) {
-            throw new RuntimeException("음수가 포함되어 있습니다. input : " + input);
-        }
         return false;
     }
 
@@ -51,6 +48,14 @@ public class StringAddCalculator {
     }
 
     private int getSum(String[] split) {
+        if (hasMinus(split))
+            throw new RuntimeException("음수가 포함되어 있습니다.");
         return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
+    }
+
+    private boolean hasMinus(String[] split) {
+        return Arrays.stream(split).mapToInt(Integer::parseInt)
+                .filter(number -> number < 0)
+                .findAny().isPresent();
     }
 }
