@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.common;
 
 public class CustomSeparatorParser {
     public String parse(String s) {

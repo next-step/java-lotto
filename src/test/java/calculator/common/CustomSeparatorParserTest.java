@@ -1,5 +1,6 @@
-package calculator.domain;
+package calculator.common;
 
+import calculator.common.CustomSeparatorParser;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
