@@ -12,6 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private int number;
 
     LottoNumber(int number) {
+        validateRange(number);
         this.number = number;
     }
 
@@ -26,8 +27,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     static LottoNumber valueOf(int number) {
+        validateRange(number);
         int numberIndex = number - GAP_BETWEEN_NUMBER_AND_INDEX_OF_ALL_LOTTO_NUMBERS;
         return ALL_LOTTO_NUMBERS.get(numberIndex);
+    }
+
+    private static void validateRange(int number) {
+        if (number < MIN || number > MAX) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d이상 %d이하의 숫자이어야 합니다.", MIN, MAX));
+        }
     }
 
     static List<LottoNumber> getAllLottoNumbers() {
