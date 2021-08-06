@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoShop {
+public final class LottoShop {
 
     private final int lottoPrizePrice;
 

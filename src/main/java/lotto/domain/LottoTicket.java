@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoTicket {
+public final class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchingTicket(List<Integer> winningNumbers) {
+    public int matchingTicket(final List<Integer> winningNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
             matchCount = getMatchCount(winningNumbers, lottoNumber, matchCount);
@@ -19,7 +19,7 @@ public class LottoTicket {
         return matchCount;
     }
 
-    private int getMatchCount(List<Integer> winningNumbers, LottoNumber lottoNumber, int matchCount) {
+    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber, int matchCount) {
         if (winningNumbers.contains(lottoNumber.getNumber())) {
             matchCount++;
         }
