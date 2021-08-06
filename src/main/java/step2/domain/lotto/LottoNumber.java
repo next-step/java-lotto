@@ -3,10 +3,10 @@ package step2.domain.lotto;
 import java.util.Arrays;
 
 public enum LottoNumber {
-    _3_NUMBER(3, 5000),
-    _4_NUMBER(4, 50000),
-    _5_NUMBER(5, 1500000),
-    _6_NUMBER(6, 2000000000);
+    THREE_MATCHES(3, 5000),
+    FOUR_MATCHES(4, 50000),
+    FIVE_MATCHES(5, 1500000),
+    SIX_MATCHES(6, 2000000000);
 
     private final Integer number;
     private final Integer winMoney;
@@ -20,7 +20,7 @@ public enum LottoNumber {
         return Arrays.stream(LottoNumber.values())
             .filter(lottoRank -> lottoRank.number.equals(number))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("랭크를 찾을 수 없습니다."));
+            .orElseThrow(() -> new IllegalArgumentException("맞은 개수를 찾을 수 없습니다."));
     }
 
     public Integer getWinMoney() {

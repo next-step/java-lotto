@@ -13,8 +13,8 @@ class ResultOfLottosTest {
     void sumMoney() {
         // Given
         Map<LottoNumber, Integer> givenResultLotto = new EnumMap<>(LottoNumber.class);
-        givenResultLotto.put(LottoNumber._3_NUMBER, 1);
-        givenResultLotto.put(LottoNumber._4_NUMBER, 1);
+        givenResultLotto.put(LottoNumber.THREE_MATCHES, 1);
+        givenResultLotto.put(LottoNumber.FOUR_MATCHES, 1);
 
         Integer sum = givenResultLotto.keySet()
             .stream()
