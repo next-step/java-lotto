@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,24 @@ public class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
+    @DisplayName("수익률 확인")
+    void profitRateTest() {
+        // given
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 11, 12, 13)
+                .map(LottoNumber::new).collect(Collectors.toList());
+
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(new LottoTicket(lottoNumbers));
+
+        // when
+        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
+        String actual = lottoStatistic.getProfitRate(10000);
+
+        // then
+        assertThat(actual).isEqualTo("0.50");
     }
 
     @Test

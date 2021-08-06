@@ -13,4 +13,15 @@ public final class LottoStatistic {
     public Integer getRankCount(final LottoRank lottoRank) {
         return statistic.getOrDefault(lottoRank, 0);
     }
+
+    // 수익률 계산
+    public String getProfitRate(double amount) {
+        double totalSum = 0;
+        for (Map.Entry<LottoRank, Integer> entry : statistic.entrySet()) {
+            if ( entry.getValue() > 0 ) {
+                totalSum += entry.getKey().AMOUNT;
+            }
+        }
+        return String.format("%.2f", totalSum / amount);
+    }
 }
