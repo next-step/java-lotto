@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.common.IntegerParser;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,7 +13,7 @@ public class CalculatorTest {
         //given
         Calculator calculator = new Calculator();
         //when
-        int result = calculator.addEachAll(new String[]{"1", "2", "3"});
+        int result = calculator.addEachAll(new String[]{"1", "2", "3"}, new IntegerParser());
         //then
         assertThat(result).isEqualTo(6);
     }
@@ -23,7 +24,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         //when
         //then
-        assertThatThrownBy(() -> calculator.addEachAll(new String[]{"1", "2", "a"}))
+        assertThatThrownBy(() -> calculator.addEachAll(new String[]{"1", "2", "a"}, new IntegerParser()))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("잘못된 인자를 전달하였습니다.");
     }
@@ -34,7 +35,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         //when
         //then
-        assertThatThrownBy(() -> calculator.addEachAll(new String[]{"1", "2", "-1"}))
+        assertThatThrownBy(() -> calculator.addEachAll(new String[]{"1", "2", "-1"}, new IntegerParser()))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("음수는 사용할 수 없습니다.");
     }

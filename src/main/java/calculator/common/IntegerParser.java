@@ -2,18 +2,14 @@ package calculator.common;
 
 public class IntegerParser {
 
-    private IntegerParser(){
-
-    }
-
-    public static int parse(String element) {
+    public int parse(String element) {
         int value;
         value = parseWithValidation(element);
         validateValueIsPositive(value);
         return value;
     }
 
-    private static int parseWithValidation(String element) {
+    private int parseWithValidation(String element) {
         int value;
         try {
             value = Integer.parseInt(element);
@@ -23,7 +19,7 @@ public class IntegerParser {
         return value;
     }
 
-    private static void validateValueIsPositive(int value) {
+    private void validateValueIsPositive(int value) {
         if (value < 0) {
             throw new RuntimeException("음수는 사용할 수 없습니다.");
         }
