@@ -12,6 +12,11 @@
 ---
 # 로또 요구사항 분석
 
+#### Money (돈)
+
+- 0 보다 작을 수 없다
+
+
 #### LotteryNumber (로또 숫자)
 
 - 1~45 사이의 숫자 1개를 가진다
@@ -43,7 +48,6 @@
 #### WinningLotteryStrategy (로또 당첨 전략) / MatchWinningLotteryStrategy (매칭 로또 당첨 전략)
 
 - Lottery (로또)와 당첨번호를 비교하여 당첨 여부를 판단해 WinningLottoCriteria (로또 당첨 기준) 정보를 반환한다
-
 
 
 
