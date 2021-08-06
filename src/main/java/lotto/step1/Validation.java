@@ -9,7 +9,7 @@ public class Validation {
     }
 
     public boolean checkEmptyAndNull() {
-        return text.isEmpty() || text == null;
+        return text == null || text.isEmpty();
     }
 
     public boolean checkOnlyNumber() {
