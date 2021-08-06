@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.LottoShop;
 import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
 import lotto.prize.LottoPrize;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class ResultView {
     private static final String NEW_LINE = System.lineSeparator();
-    private static final String DISPLAY_PURCHASES_COUNT_FORMAT = "%d개를 구매했습니다.";
+    private static final String DISPLAY_PURCHASES_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계" + NEW_LINE + "---------";
     private static final String PRIZE_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String BONUS_PRIZE_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
@@ -18,8 +17,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printGameCount(final int money) {
-        println(String.format(DISPLAY_PURCHASES_COUNT_FORMAT, (money / LottoShop.LOTTO_PRICE)));
+    public static void printGameCount(final int manualCount, final int autoCount) {
+        println(String.format(DISPLAY_PURCHASES_COUNT_FORMAT, manualCount, autoCount));
     }
 
     public static void printLottoNumber(final Lottos lottos) {
