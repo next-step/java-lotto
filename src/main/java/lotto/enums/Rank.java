@@ -3,16 +3,16 @@ package lotto.enums;
 import java.util.Arrays;
 
 public enum Rank {
-	NOTHING(0L, 0),
-	FOURTH(3L, 5000),
-	THIRD(4L, 50000),
-	SECOND(5L, 1500000),
-	FIRST(6L, 2000000000);
+	NOTHING(0L, 0L),
+	FOURTH(3L, 5000L),
+	THIRD(4L, 50000L),
+	SECOND(5L, 1500000L),
+	FIRST(6L, 2000000000L);
 
 	private final long matchNumberCount;
-	private final int reward;
+	private final long reward;
 
-	Rank(long matchNumberCount, int reward) {
+	Rank(long matchNumberCount, long reward) {
 		this.matchNumberCount = matchNumberCount;
 		this.reward = reward;
 	}
@@ -24,7 +24,7 @@ public enum Rank {
 					.orElse(NOTHING);
 	}
 
-	public int getReward() {
+	public long getReward() {
 		return reward;
 	}
 }

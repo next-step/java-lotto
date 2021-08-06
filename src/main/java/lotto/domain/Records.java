@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.enums.Rank;
 
@@ -23,5 +26,15 @@ public class Records {
 
 	public Map<Rank, Integer> getRecords() {
 		return records;
+	}
+
+	public long sumRevenue() {
+		return records.keySet().stream()
+							.mapToLong(this::sumRecordRevenue)
+							.sum();
+	}
+
+	private long sumRecordRevenue(Rank rank) {
+		return rank.getReward() * records.get(rank);
 	}
 }
