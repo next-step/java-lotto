@@ -10,15 +10,21 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final int NUMBERS_JOINED_BY_DELIMITER_GROUP = 2;
     private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int RESULT_FOR_EMPTY_INPUT = 0;
+    private static final int MINIMUM_NON_NEGATIVE_INTEGER = 0;
     private static final String INVALID_INPUT_EXCEPTION_MESSAGE_FORMAT = "유효하지 않은 입력입니다. input: %s";
     private static final String NEGATIVE_INTEGER_EXCEPTION_MESSAGE_FORMAT = "입력 값 중, 음수가 존재합니다. numberString: %s";
 
     public int calculate(String input) {
         try {
-            return calculate(parse(input));
+            return isEmpty(input) ? RESULT_FOR_EMPTY_INPUT : calculate(parse(input));
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format(INVALID_INPUT_EXCEPTION_MESSAGE_FORMAT, input));
         }
+    }
+
+    private boolean isEmpty(String input) {
+        return input == null || input.isEmpty();
     }
 
     private int calculate(String[] stringsParsedByDelimiter) {
@@ -34,7 +40,7 @@ public class StringAddCalculator {
     }
 
     private void validateNonNegativeInteger(int number) {
-        if (number < 0) {
+        if (number < MINIMUM_NON_NEGATIVE_INTEGER) {
             throw new IllegalArgumentException(String.format(NEGATIVE_INTEGER_EXCEPTION_MESSAGE_FORMAT, number));
         }
     }
