@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String DEFAULT_DELIMITER = ",|:";
-    public static final String PIPE = "|";
-    public static final int DEFAULT_RESULT = 0;
-    public static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n";
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final String PIPE = "|";
+    private static final int DEFAULT_RESULT = 0;
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n";
     private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public int calculate(String input) {
