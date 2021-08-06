@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 public class LottoPrice {
     private final int unitPrice;

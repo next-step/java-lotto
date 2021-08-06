@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.Arrays;
 import java.util.EnumMap;
