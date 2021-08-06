@@ -17,9 +17,9 @@ public class StringParser {
             return split(matcher.group(EXPRESSION_GROUP_NUMBER), delimiter);
         }
 
-        return Arrays.stream(s.split(DELIMITER)).
-                mapToInt(Integer::parseInt).
-                toArray();
+        return Arrays.stream(s.split(DELIMITER))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     private static int[] split(String s, String delimiter) {
