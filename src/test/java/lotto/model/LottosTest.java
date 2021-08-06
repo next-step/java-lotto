@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class LottoGameTest {
+class LottosTest {
 
 	@ParameterizedTest
 	@DisplayName("로또게임들을 등록하면 게임에 관한 내용이 반환된다.")
@@ -17,10 +17,10 @@ class LottoGameTest {
 	public void createLottoGames(int firstNumber, int secondNumber, int thirdNumber) {
 		List<Lotto> lotteries = new ArrayList<>();
 		lotteries.add(getLottoGame(firstNumber, secondNumber, thirdNumber));
-		LottoGame lottoGame = new LottoGame(lotteries);
+		Lottos lottos = new Lottos(lotteries);
 
-		assertThat(lottoGame.getLotteries().size()).isEqualTo(1);
-		assertThat(lottoGame.getLotteries().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
+		assertThat(lottos.getLottos().size()).isEqualTo(1);
+		assertThat(lottos.getLottos().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
 			thirdNumber);
 	}
 

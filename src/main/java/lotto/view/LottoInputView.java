@@ -1,9 +1,9 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
@@ -28,67 +28,67 @@ public class LottoInputView {
 		System.out.println(BUY_MONEY_MESSAGE);
 		if (scanner.hasNextInt()) {
 			money = scanner.nextInt();
+			checkThousandUnit(money);
+			checkPositive(money);
 			scanner.nextLine();
-			return LottoCountCalculator.calculateLottoCount(checkThousandUnit(checkPositive(money)));
+			return LottoCountCalculator.calculateLottoCount(money);
 		}
 		throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 	}
 
-	public static List<Integer> inputLastWinningNumbers() {
+	public static List<Integer> inputLastWinningLotto() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
-		String lastWinningNumber = scanner.nextLine();
-		checkEmptyCheck(lastWinningNumber);
-		return toList(lastWinningNumber);
+		String lastWinningLotto = scanner.nextLine();
+		checkLottoEmpty(lastWinningLotto);
+		return toList(lastWinningLotto);
 	}
 
-	private static List<Integer> toList(String lastWinningNumber) {
-		String[] lastWinNumbers = lastWinningNumber.split(LAST_WIN_NUMBER_REGEX);
-		checkLottoSizeCheck(lastWinningNumber.split(LAST_WIN_NUMBER_REGEX));
-		List<Integer> lottoNumbers = new ArrayList<>();
-		Arrays.stream(lastWinNumbers).forEach(lottoNumber -> lottoNumbers.add(toInt(lottoNumber)));
-		checkDuplicateNumberCheck(lottoNumbers);
+	private static List<Integer> toList(String lotto) {
+		List<Integer> lottoNumbers = Arrays.stream(lotto.split(LAST_WIN_NUMBER_REGEX))
+			.map(LottoInputView::toInt)
+			.collect(Collectors.toList());
+		checkLottoSize(lottoNumbers);
+		checkDuplicateNumber(lottoNumbers);
 		return lottoNumbers;
 	}
 
-	private static int toInt(String lottoNumber) {
-		checkNumberTypeCheck(lottoNumber.trim());
-		return Integer.parseInt(lottoNumber.trim());
+	private static int toInt(String lotto) {
+		checkNumberType(lotto.trim());
+		return Integer.parseInt(lotto.trim());
 	}
 
-	private static void checkEmptyCheck(String lastWinNumbers) {
-		if (lastWinNumbers.isEmpty()) {
+	private static void checkLottoEmpty(String lotto) {
+		if (lotto.isEmpty()) {
 			throw new IllegalArgumentException(ErrorMessage.EMPTY_ERROR_MESSAGE);
 		}
 	}
 
-	private static void checkNumberTypeCheck(String lastWinNumber) {
-		if (!lastWinNumber.matches(INT_REG_EXP)) {
+	private static void checkNumberType(String lotto) {
+		if (!lotto.matches(INT_REG_EXP)) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
 	}
 
-	private static void checkLottoSizeCheck(String[] lastWinNumbers) {
-		if (lastWinNumbers.length != LOTTO_LENGTH) {
+	private static void checkLottoSize(List<Integer> lotto) {
+		if (lotto.size() != LOTTO_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
 		}
 	}
 
-	private static int checkThousandUnit(int money) {
+	private static void checkThousandUnit(int money) {
 		if (money % MONEY_UNIT != ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_THOUSAND_UNIT_MESSAGE);
 		}
-		return money;
 	}
 
-	private static int checkPositive(int money) {
+	private static void checkPositive(int money) {
 		if (money < 0) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_POSITIVE_MESSAGE);
 		}
-		return money;
 	}
 
-	private static void checkDuplicateNumberCheck(List<Integer> lastWinNumbers) {
-		if (lastWinNumbers.size() != lastWinNumbers.stream().distinct().count()) {
+	private static void checkDuplicateNumber(List<Integer> lottoNumbers) {
+		if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
 			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
 		}
 	}

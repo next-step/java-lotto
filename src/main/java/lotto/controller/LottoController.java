@@ -16,12 +16,12 @@ public class LottoController {
 
 		List<Lotto> lottos = LottoPurchase.buyLottos(lottoCount);
 
-		LottoOutputView.printLottoTicketCount(lottoCount);
+		LottoOutputView.printLottoCount(lottoCount);
 		LottoOutputView.printLottoList(lottos);
 
-		List<Integer> lastWinningNumbers = LottoInputView.inputLastWinningNumbers();
+		List<Integer> lastWinningLotto = LottoInputView.inputLastWinningLotto();
 
-		WinPrizes winPrizes = SearchPrize.drawWinPrize(lottos, lastWinningNumbers);
+		WinPrizes winPrizes = SearchPrize.drawWinPrize(lottos, lastWinningLotto);
 		LottoOutputView.displayLottoPrize(winPrizes, lottoCount);
 	}
 }
