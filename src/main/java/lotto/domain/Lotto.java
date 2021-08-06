@@ -7,9 +7,15 @@ import lotto.enums.Rank;
 
 public class Lotto {
 
+	private static final int LOTTO_NUMBERS_LENGTH = 7;
+
 	private final List<Integer> lottoNumbers;
 
 	public Lotto(List<Integer> lottoNumbers) {
+		if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
+			throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBERS_LENGTH + "개의 숫자여야 합니다.");
+		}
+
 		this.lottoNumbers = lottoNumbers;
 	}
 
