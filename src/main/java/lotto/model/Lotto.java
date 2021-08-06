@@ -26,12 +26,10 @@ public class Lotto {
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
-        List<LottoNumber> numbers = allLottoNumbers.stream()
+        return allLottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
+                .sorted()
                 .collect(toList());
-        Collections.sort(numbers);
-
-        return numbers;
     }
 
     List<LottoNumber> getNumbers() {
