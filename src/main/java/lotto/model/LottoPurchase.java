@@ -12,7 +12,7 @@ public class LottoPurchase {
 	public static List<Lotto> buyLottos(int lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = START_INCLUSIVE; i < lottoCount; i++) {
-			List<Integer> lottoNumbers = GenerateLotto.GenerateLottoNumbers();
+			List<Integer> lottoNumbers = GenerateLotto.generateLottoNumbers();
 			lottos.add(new Lotto(lottoNumbers));
 		}
 		return lottos;

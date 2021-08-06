@@ -19,7 +19,7 @@ public class LottoController {
 		LottoOutputView.printLottoTicketCount(lottoCount);
 		LottoOutputView.printLottoList(lottos);
 
-		String lastWinNumber = LottoInputView.requestLastWinLottoNumber();
+		String lastWinNumber = LottoInputView.inputLastWinningNumbers();
 
 		WinPrizes winPrizes = SearchPrize.confirmWinLottoNumber(lottos, lastWinNumber);
 		LottoOutputView.displayLottoPrize(winPrizes, lottoCount);
