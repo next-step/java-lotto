@@ -25,6 +25,6 @@ public class LottoMachine {
 
 	public static LottoBalls createLottoNumbers() {
 		Collections.shuffle(lottoBalls);
-		return  new LottoBalls(lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE));
+		return new LottoBalls(lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE));
 	}
 }
