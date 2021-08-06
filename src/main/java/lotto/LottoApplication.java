@@ -20,7 +20,12 @@ public class LottoApplication {
 
         // 당첨번호 입력
         List<Integer> inputWinNumbers = inputView.inputWinNumbers();
-        LottoNumbers winNumbers = () -> inputWinNumbers;
+        LottoNumbers winNumbers = new LottoNumbers() {
+            @Override
+            public List<Integer> generateNumbers() {
+                return inputWinNumbers;
+            }
+        };
 
         // 2등 보너스볼 입력
         int bonusNumber = inputView.inputBonusNumber();
