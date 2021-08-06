@@ -6,12 +6,14 @@ import java.util.List;
 
 public class Lottos {
 
-	private static final int AMOUNT_UNIT = 1_000;
-
 	private final List<Lotto> lottoList = new ArrayList<>();
 
-	public void buy(int amount, LottoNumberGenerator generator) {
-		int lottoCount = amount / AMOUNT_UNIT;
+	public void buy(int money, LottoNumberGenerator generator) {
+		buy(new Money(money), generator);
+	}
+
+	public void buy(Money money, LottoNumberGenerator generator) {
+		int lottoCount = money.getLottoCount();
 		for (int i = 0; i < lottoCount; i++) {
 			addLotto(generator);
 		}

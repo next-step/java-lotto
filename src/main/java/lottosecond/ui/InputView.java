@@ -1,5 +1,7 @@
 package lottosecond.ui;
 
+import lottosecond.domain.Money;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -9,13 +11,13 @@ public class InputView {
 	private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 	private static final Scanner scanner = new Scanner(System.in);
 
-	private final int money;
+	private final Money money;
 	private String winningNumbers;
 	private int bonusNumber;
 
 	public InputView() {
 		System.out.println(HOW_MUCH);
-		this.money = Integer.parseInt(scanner.nextLine());
+		this.money = new Money(scanner.nextLine());
 	}
 
 	public void inputLastWinningNumbers() {
@@ -28,7 +30,7 @@ public class InputView {
 		this.bonusNumber = Integer.parseInt(scanner.nextLine());
 	}
 
-	public int getMoney() {
+	public Money getMoney() {
 		return money;
 	}
 
