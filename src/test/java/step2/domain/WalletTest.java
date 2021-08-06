@@ -1,5 +1,6 @@
 package step2.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.money.Cache;
 import step2.domain.money.Money;
@@ -23,18 +24,19 @@ class WalletTest {
         assertThat(actualMoney).isEqualTo(expectedRemainMoney);
     }
 
+    @DisplayName("10000원이_있는_지갑에서_7000원을_인출하면_지갑에_3000원이_있다")
     @Test
-    void _10000원이_있는_지갑에서_5000원을_인출하면_지갑에_5000원이_있다() {
+    void withDarw() {
         // given
-        Wallet expectedWallet = new Wallet(new Cache(5000));
-        Cache withDrawCache = new Cache(5000);
-        Cache expectedRemainMoney = new Cache(5000);
+        Wallet expectedWallet = new Wallet(new Cache(10000));
+        Cache withDrawCache = new Cache(3000);
+        Cache expectedRemainMoney = new Cache(7000);
 
         // when
-        Money actualMoney = expectedWallet.withDraw(withDrawCache);
+        expectedWallet.withDraw(withDrawCache);
 
         // then
-        assertThat(actualMoney).isEqualTo(expectedWallet.currentMoney());
+        assertThat(expectedWallet.currentMoney()).isEqualTo(expectedRemainMoney);
     }
 
 }

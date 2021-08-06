@@ -24,8 +24,8 @@ public class Wallet {
     }
 
     public Money withDraw(Money cache) {
-        currentMoney().minus(cache);
-        return currentMoney();
+        this.cache = currentMoney().minus(cache);
+        return cache;
     }
 
     @Override
