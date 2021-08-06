@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
     private static final int GAP_BETWEEN_NUMBER_AND_INDEX_OF_ALL_LOTTO_NUMBERS = 1;
     private static final List<LottoNumber> ALL_LOTTO_NUMBERS = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void setUpAllLottoNumbers() {
-        for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
+        for (int number = MIN; number <= MAX; number++) {
             ALL_LOTTO_NUMBERS.add(new LottoNumber(number));
         }
     }

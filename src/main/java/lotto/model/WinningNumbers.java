@@ -7,7 +7,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toList;
 
 public class WinningNumbers {
-    private static final int WINNING_NUMBER_COUNT = 6;
+    private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -20,8 +20,8 @@ public class WinningNumbers {
     }
 
     private void validateCount(List<Integer> numbers) {
-        if (numbers.size() != WINNING_NUMBER_COUNT) {
-            throw new IllegalArgumentException(String.format("당첨 번호는 %d개 이어야 합니다.", WINNING_NUMBER_COUNT));
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("당첨 번호는 %d개 이어야 합니다.", NUMBER_COUNT));
         }
     }
 

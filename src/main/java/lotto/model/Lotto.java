@@ -6,7 +6,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int NUMBER_COUNT = 6;
     private static final String LEFT_SQUARE_BRACKET = "[";
     private static final String COMMA = ",";
     private static final String ONE_BLANK_SPACE = " ";
@@ -27,7 +27,7 @@ public class Lotto {
         Collections.shuffle(allLottoNumbers);
 
         return allLottoNumbers.stream()
-                .limit(LOTTO_NUMBER_COUNT)
+                .limit(NUMBER_COUNT)
                 .sorted()
                 .collect(toList());
     }
