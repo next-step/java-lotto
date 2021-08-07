@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import static java.util.stream.IntStream.range;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import lotto.strategy.GenerateLottoNumber;
 
 public class Lotteries {
@@ -20,7 +19,6 @@ public class Lotteries {
   }
 
   public Lotteries() {
-
   }
 
   public List<Lotto> getLottos() {
@@ -28,8 +26,8 @@ public class Lotteries {
   }
 
   private void createLotteries(int count) {
-    range(INT_ZERO, count)
-        .mapToObj(i -> new Lotto(GenerateLottoNumber.createNumberPull()))
+    Stream.generate(() -> new Lotto(GenerateLottoNumber.createNumberPull()))
+        .limit(count)
         .forEach(lottos::add);
   }
 

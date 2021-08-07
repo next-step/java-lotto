@@ -24,9 +24,6 @@ class LotteriesTest {
 
     createLotteries.invoke(lotteries, count);
 
-    for (Lotto lotto : lotteries.getLottos()) {
-      System.out.println("lotto = " + lotto);
-    }
     assertThat(lotteries.getLottos().size()).isEqualTo(count);
   }
 }
