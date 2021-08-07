@@ -14,8 +14,8 @@ public class LottoMoney {
   private final int money;
 
   public LottoMoney(int money) {
-    checkEnoughValue(money);
     checkMinimumValue(money);
+    checkEnoughValue(money);
     this.money = money;
   }
 

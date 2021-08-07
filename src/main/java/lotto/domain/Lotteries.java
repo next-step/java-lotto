@@ -71,7 +71,4 @@ public class Lotteries {
     return count;
   }
 
-  public static Lotto getWinningLotto(List<Integer> inputValues) {
-    return new Lotto(inputValues);
-  }
 }
