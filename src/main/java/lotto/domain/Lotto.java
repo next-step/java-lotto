@@ -19,16 +19,16 @@ public class Lotto {
         return this.award == award ? true : false;
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
-    }
-
     public Award getAward() {
         return award;
     }
 
     public LottoNumbers getNumbers() {
         return lottoNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
