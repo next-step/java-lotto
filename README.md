@@ -9,7 +9,8 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## toDo
-1. 구입 금액 입력 받기
+
+1. Input 확인
    - null 값 인 경우 0을 반환
    - "" 값 인 경우 0을 반환
 2. 문자열에 구분자가 있는 경우
