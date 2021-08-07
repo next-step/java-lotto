@@ -7,19 +7,24 @@ public class RandomNumGenerator implements NumberGenerator {
     private static final int LOTTO_NUMBERS_COUNT = 6;
     private static final int LOTTO_MAX_NUM = 44;
 
-
-    private final Set<Integer> randomNumbers;
+    private final List<Integer> randomNumbers;
 
     public RandomNumGenerator() {
-        this.randomNumbers = new HashSet<>();
+        this.randomNumbers = new ArrayList<>();
     }
 
     @Override
-    public Set<Integer> generateNumber() {
+    public List<Integer> generateNumber() {
         while (randomNumbers.size() < LOTTO_NUMBERS_COUNT) {
-            randomNumbers.add(RANDOM.nextInt(LOTTO_MAX_NUM) + 1);
+            int random = RANDOM.nextInt(LOTTO_MAX_NUM) + 1;
+            if (!validDuplicate(random)) {
+                randomNumbers.add(random);
+            }
         }
-        return Collections.unmodifiableSet(randomNumbers);
+        return randomNumbers;
     }
 
+    private boolean validDuplicate(int i) {
+        return randomNumbers.contains(i);
+    }
 }
