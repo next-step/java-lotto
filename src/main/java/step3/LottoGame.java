@@ -1,10 +1,13 @@
 package step3;
 
-import step3.domain.ResultOfLottos;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoMachine;
+import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoStatistics;
+import step3.domain.lotto.Profit;
 import step3.domain.lotto.RandomStrategy;
+import step3.domain.lotto.ResultOfLottos;
+import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
 import step3.domain.money.Money;
 import step3.domain.user.User;
@@ -28,7 +31,13 @@ public class LottoGame {
         ResultView.printLottos(user.getLottos());
 
         Lotto winOfLottoNumbers = InputView.inputWinOfLottoNumber();
+        LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
 
-        ResultView.printLottoStatistics(new LottoStatistics(winOfLottoNumbers, user.getLottos(), new ResultOfLottos()));
+        WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
+
+        ResultOfLottos resultOfLottos = LottoStatistics.calcLottoOfStatistics(winOfLotto, user.getLottos());
+        Profit profit = LottoStatistics.calculateLottoProfit(resultOfLottos, user.getLottos().size());
+
+        ResultView.printLottoStatistics(resultOfLottos, profit);
     }
 }
