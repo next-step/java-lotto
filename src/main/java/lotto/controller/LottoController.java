@@ -13,7 +13,7 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-  public static void main(String[] l) {
+  public static void main(String[] args) {
 
     LottoGameApplication gameApplication = new LottoGameApplication(
         InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
