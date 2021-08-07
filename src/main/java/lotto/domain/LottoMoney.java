@@ -14,29 +14,21 @@ public class LottoMoney {
   private final int money;
 
   public LottoMoney(int money) {
-    this.money = checkEnoughValue(checkMinimumValue(money));
+    checkEnoughValue(money);
+    checkMinimumValue(money);
+    this.money = money;
   }
 
-  private int checkMinimumValue(final int money) {
-    if(isLessThanLimit(money)){
+  private void checkMinimumValue(final int money) {
+    if(money < LIMIT_MIN_NUMBER){
       throw new IllegalArgumentException(Message.MSG_ERROR_LIMIT_MONEY);
     }
-    return money;
   }
 
-  private boolean isLessThanLimit(final int money) {
-    return money < LIMIT_MIN_NUMBER;
-  }
-
-  private int checkEnoughValue(int money) {
-    if (isNotEnough(money)) {
+  private void checkEnoughValue(int money) {
+    if (calculateMoney(Operation.DIVISION_REMAINDER, EACH_LOTTO_COST, money) != INT_ZERO) {
       throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
-    return money;
-  }
-
-  private boolean isNotEnough(int money) {
-    return calculateMoney(Operation.DIVISION_REMAINDER, EACH_LOTTO_COST, money) != INT_ZERO;
   }
 
   public int calculateMoney(Operation mark, final int eachLottoCost, int money) {
