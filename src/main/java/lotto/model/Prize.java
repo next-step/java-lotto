@@ -1,6 +1,9 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Prize {
 	FIRST(6, 2_000_000_000),
@@ -25,11 +28,16 @@ public enum Prize {
 		return winningMoney;
 	}
 
+	public static List<Prize> getPrizeByMoneySort() {
+		return Arrays.stream(Prize.values())
+			.sorted(Comparator.comparing(Prize::getWinningMoney))
+			.collect(Collectors.toList());
+	}
+
 	public static Prize getWinnersStatus(int countOfMatch) {
 		return Arrays.stream(Prize.values())
 			.filter(r -> r.countOfMatch == countOfMatch)
 			.findFirst()
 			.orElse(MISS);
 	}
-
 }
