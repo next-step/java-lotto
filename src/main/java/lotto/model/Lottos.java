@@ -1,9 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1_000;
@@ -14,9 +12,11 @@ public class Lottos {
         validatePurchasableAmount(purchaseAmount);
 
         int lottoCount = purchaseAmount / LOTTO_PRICE;
-        this.lottos = Stream.generate(Lotto::new)
-                .limit(lottoCount)
-                .collect(toList());
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto(new RandomLottoNumberGenerating()));
+        }
+        this.lottos = lottos;
     }
 
     private void validatePurchasableAmount(int purchaseAmount) {

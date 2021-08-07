@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -15,13 +14,8 @@ public class WinningRankTest {
     @Test
     public void winningRankResultTest() {
         // given
-        Lotto lotto = new Lotto() {
-            @Override
-            protected List<LottoNumber> generateNumbers() {
-                return LottoNumber.getAllLottoNumbers()
-                        .subList(0, 6);
-            }
-        };
+        Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
+                .subList(0, 6));
 
         WinningNumbers firstWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningNumbers secondWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));

@@ -1,12 +1,10 @@
 package lotto.model;
 
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
-    private static final int NUMBER_COUNT = 6;
     private static final String LEFT_SQUARE_BRACKET = "[";
     private static final String COMMA = ",";
     private static final String ONE_BLANK_SPACE = " ";
@@ -14,18 +12,8 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    Lotto() {
-        this.numbers = generateNumbers();
-    }
-
-    protected List<LottoNumber> generateNumbers() {
-        List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
-        Collections.shuffle(allLottoNumbers);
-
-        return allLottoNumbers.stream()
-                .limit(NUMBER_COUNT)
-                .sorted()
-                .collect(toList());
+    Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategy) {
+        this.numbers = lottoNumberGeneratingStrategy.generateNumbers();
     }
 
     List<LottoNumber> getNumbers() {

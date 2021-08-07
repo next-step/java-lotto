@@ -15,7 +15,7 @@ public class LottoTest {
     @Test
     public void lottoNumberCountTest() {
         // given
-        List<LottoNumber> lottoNumbers = new Lotto().getNumbers();
+        List<LottoNumber> lottoNumbers = new Lotto(new RandomLottoNumberGenerating()).getNumbers();
 
         // when, then
         assertEquals(lottoNumbers.size(), 6);
@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     public void nonDuplicatedLottoNumbersTest() {
         // given
-        List<LottoNumber> lottoNumbers = new Lotto().getNumbers();
+        List<LottoNumber> lottoNumbers = new Lotto(new RandomLottoNumberGenerating()).getNumbers();
 
         // when
         Set<LottoNumber> nonDuplicatedLottoNumbers = new HashSet<>(lottoNumbers);
@@ -38,7 +38,7 @@ public class LottoTest {
     @Test
     public void sortedLottoNumbersTest() {
         // given
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new RandomLottoNumberGenerating());
 
         // when
         List<LottoNumber> sortedLottoNumbers = new ArrayList<>();
@@ -56,13 +56,8 @@ public class LottoTest {
     @Test
     public void findEqualNumberCountTest() {
         // given
-        Lotto lotto = new Lotto() {
-            @Override
-            protected List<LottoNumber> generateNumbers() {
-                return LottoNumber.getAllLottoNumbers()
-                        .subList(0, 6);
-            }
-        };
+        Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
+                .subList(0, 6));
 
         List<LottoNumber> otherLottoNumbers = LottoNumber.getAllLottoNumbers()
                 .subList(3, 9);
