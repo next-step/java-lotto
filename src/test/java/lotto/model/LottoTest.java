@@ -21,8 +21,8 @@ class LottoTest {
 
 		Lotto lotto = new Lotto(lottoNumbers);
 
-		assertThat(lotto.getLotto().size()).isEqualTo(4);
-		assertThat(lotto.getLotto()).containsExactly(1, 13, 26, 32);
+		assertThat(lotto.getLottoNumbers().size()).isEqualTo(4);
+		assertThat(lotto.getLottoNumbers()).containsExactly(1, 13, 26, 32);
 	}
 
 }

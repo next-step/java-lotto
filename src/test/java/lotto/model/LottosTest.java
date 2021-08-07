@@ -20,7 +20,7 @@ class LottosTest {
 		Lottos lottos = new Lottos(lotteries);
 
 		assertThat(lottos.getLottos().size()).isEqualTo(1);
-		assertThat(lottos.getLottos().get(0).getLotto()).containsExactly(firstNumber, secondNumber,
+		assertThat(lottos.getLottos().get(0).getLottoNumbers()).containsExactly(firstNumber, secondNumber,
 			thirdNumber);
 	}
 
