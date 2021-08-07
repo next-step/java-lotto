@@ -10,17 +10,17 @@ public class LotteriesConsoleOutput {
 
     private static final String PURCHASE_COUNT = "개를 구매했습니다.\n";
 
-    public void printLotteries(final List<LotteryDto> lotteryDtos) {
+    public static void printLotteries(final List<LotteryDto> lotteryDtos) {
         System.out.println(getLotteriesAsString(lotteryDtos));
     }
 
-    private String getLotteriesAsString(final List<LotteryDto> lotteryDtos) {
+    private static String getLotteriesAsString(final List<LotteryDto> lotteryDtos) {
         return lotteryDtos.stream()
-                .map(this::getLotteryNumbersAsString)
+                .map(LotteriesConsoleOutput::getLotteryNumbersAsString)
                 .collect(Collectors.joining("\n", lotteryDtos.size() + PURCHASE_COUNT, "\n"));
     }
 
-    private String getLotteryNumbersAsString(final LotteryDto lotteryDto) {
+    private static String getLotteryNumbersAsString(final LotteryDto lotteryDto) {
         return lotteryDto.getLotteryNumberDtos()
                 .stream()
                 .map(LotteryNumberDto::getLotteryNumber)
