@@ -16,11 +16,17 @@ public final class LottoStatistic {
 
     public String getProfitRate(double amount) {
         double totalSum = 0;
-        for (Map.Entry<LottoRank, Integer> entry : statistic.entrySet()) {
-            if ( entry.getValue() > 0 ) {
-                totalSum += entry.getKey().AMOUNT * entry.getValue();
-            }
+        for (LottoRank lottoRank : statistic.keySet()) {
+            totalSum = sum(totalSum, lottoRank);
         }
         return String.format("%.2f", totalSum / amount);
+    }
+
+    private double sum(double totalSum, LottoRank lottoRank) {
+        Integer matchingCount = statistic.get(lottoRank);
+        if (matchingCount > 0) {
+            totalSum += lottoRank.AMOUNT * matchingCount;
+        }
+        return totalSum;
     }
 }
