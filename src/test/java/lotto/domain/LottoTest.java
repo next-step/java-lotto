@@ -11,32 +11,14 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("로또번호 일치 테스트")
-public class LottoTicketsTest {
+@DisplayName("로또 통합 테스트")
+public class LottoTest {
 
     private List<Integer> winningNumbers;
 
     @BeforeEach
     void setUp() {
         winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-    }
-
-    @Test
-    @DisplayName("수익률 확인")
-    void profitRateTest() {
-        // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 11, 12, 13)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
-
-        // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        String actual = lottoStatistic.getProfitRate(10000);
-
-        // then
-        assertThat(actual).isEqualTo("0.50");
     }
 
     @Test
@@ -131,5 +113,23 @@ public class LottoTicketsTest {
 
         // then
         assertThat(actual).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("수익률 확인")
+    void profitRateTest() {
+        // given
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 11, 12, 13)
+                .map(LottoNumber::new).collect(Collectors.toList());
+
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(new LottoTicket(lottoNumbers));
+
+        // when
+        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
+        String actual = lottoStatistic.getProfitRate(10000);
+
+        // then
+        assertThat(actual).isEqualTo("0.50");
     }
 }
