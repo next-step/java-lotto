@@ -1,9 +1,13 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static lotto.StringUtil.split;
 
 public class LottoMachine {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Lotties lotties;
     private final int lottoCount;
 
@@ -11,20 +15,20 @@ public class LottoMachine {
         if (!validMoney(money)) {
             throw new RuntimeException();
         }
-        this.lottoCount = money / 1000;
+        this.lottoCount = money / LOTTO_PRICE;
         this.lotties = new Lotties(createRandomLotties(money));
     }
 
     private List<Lotto> createRandomLotties(final int money) {
         List<Lotto> lotties = new ArrayList<>();
-        for(int i = 0; i < money / 1000; i++) {
+        for(int i = 0; i < money / LOTTO_PRICE; i++) {
             lotties.add(new Lotto(new RandomNumGenerator()));
         }
         return lotties;
     }
 
     private boolean validMoney(int money) {
-        return money % 1000 == 0;
+        return money % LOTTO_PRICE == 0;
     }
 
     public Lotties getLotties() {
