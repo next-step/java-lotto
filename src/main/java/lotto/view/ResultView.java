@@ -16,16 +16,16 @@ public class ResultView {
     System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
   }
 
-  public static void drawResult(final Map<Integer, List<Lotto>> matchResult, final double gradingScore) {
+  public static void drawResult(final Map<Rank, List<Lotto>> matchResult, final double gradingScore) {
     System.out.println(
         "\n" +
             Message.MSG_WINNING_STATISTICS_WORD +
             "\n" +
             "------------------------------------");
 
-    for (Integer ratingNumber : matchResult.keySet()) {
+    for (Rank ratingNumber : matchResult.keySet()) {
       System.out.println(ratingNumber + "개 일치 ("
-          + Rank.matchRank(ratingNumber).getWinningMoney()
+          + Rank.matchRank(ratingNumber.getCountOfMatch()).getWinningMoney()
           + "원) - "
           + matchResult.get(ratingNumber).size()
           + "개");

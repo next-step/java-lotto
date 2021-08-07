@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
+import lotto.service.Rank;
 import lotto.view.InputView;
 import lotto.view.LotteriesDrawingView;
 import lotto.view.ResultView;
@@ -24,7 +25,7 @@ public class LottoController {
 
     LotteryDraw lotteryDraw = new LotteryDraw(gameApplication);
 
-    Map<Integer, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
+    Map<Rank, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.inputWinningNumbers(
             InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
 

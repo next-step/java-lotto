@@ -33,31 +33,31 @@ public class LotteryDraw {
         .collect(Collectors.toList());
   }
 
-  public Map<Integer, List<Lotto>> matchLottoInfo(Lotto winLotto) {
+  public Map<Rank, List<Lotto>> matchLottoInfo(Lotto winLotto) {
     return lotteries.getInputMatchTotalInfo(createRatingInfo(),winLotto);
   }
 
-  private Map<Integer, List<Lotto>> createRatingInfo() {
-    Map<Integer, List<Lotto>> categoriesRank = new LinkedHashMap<>();
+  private Map<Rank, List<Lotto>> createRatingInfo() {
+    Map<Rank, List<Lotto>> categoriesRank = new LinkedHashMap<>();
 
-    categoriesRank.put(Rank.FIFTH.getCountOfMatch(), new ArrayList<>());
-    categoriesRank.put(Rank.FOURTH.getCountOfMatch(), new ArrayList<>());
-    categoriesRank.put(Rank.THIRD.getCountOfMatch(), new ArrayList<>());
-    categoriesRank.put(Rank.FIRST.getCountOfMatch(), new ArrayList<>());
-    categoriesRank.put(Rank.MISS.getCountOfMatch(), new ArrayList<>());
+    categoriesRank.put(Rank.FIFTH, new ArrayList<>());
+    categoriesRank.put(Rank.FOURTH, new ArrayList<>());
+    categoriesRank.put(Rank.THIRD, new ArrayList<>());
+    categoriesRank.put(Rank.FIRST, new ArrayList<>());
+    categoriesRank.put(Rank.MISS, new ArrayList<>());
 
     return categoriesRank;
   }
 
-  public double gradingScore(Map<Integer, List<Lotto>> result) {
+  public double gradingScore(Map<Rank, List<Lotto>> result) {
     int sum = result.keySet().stream()
-        .mapToInt(ratingNumber -> getCalculation(result, ratingNumber)).sum();
+        .mapToInt(ratingNumber -> getCalculation(result, ratingNumber.getCountOfMatch())).sum();
     return lottoMoney.getReward(sum);
   }
 
-  private int getCalculation(final Map<Integer, List<Lotto>> result, final Integer ratingNumber) {
-    return Operation.chooseOperation(Operation.MULTIPLE).calculation(result.get(ratingNumber).size(),
-        Rank.matchRank(ratingNumber).getWinningMoney());
+  private int getCalculation(final Map<Rank, List<Lotto>> result, final Integer ratingNumber) {
+    return Operation.chooseOperation(Operation.MULTIPLE)
+        .calculation(result.get(ratingNumber).size(), Rank.matchRank(ratingNumber).getWinningMoney());
   }
 
 }

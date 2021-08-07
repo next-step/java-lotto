@@ -39,10 +39,10 @@ class LotteryDrawTest {
     testLottos.add(testLotto);
 
     LotteryDraw lotteryDraw = new LotteryDraw(gameApplication);
-    Lotto winLotto = lotteryDraw.inputWinningNumbers("11,12,13,4,5,6");
+    Lotto winLotto = lotteryDraw.inputWinningNumbers("4,5,6,11,12,13");
 
-    Map<Integer, List<Lotto>> result = lotteryDraw.matchLottoInfo(winLotto);
+    Map<Rank, List<Lotto>> result = lotteryDraw.matchLottoInfo(winLotto);
 
-    assertThat(result.get(3).size()).isEqualTo(1);
+    assertThat(result.get(Rank.FIFTH).size()).isEqualTo(1);
   }
 }

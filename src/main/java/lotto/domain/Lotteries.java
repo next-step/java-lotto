@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+import lotto.service.Rank;
 import lotto.strategy.GenerateLottoNumber;
 
 public class Lotteries {
@@ -31,35 +32,23 @@ public class Lotteries {
         .forEach(lottos::add);
   }
 
-  public Map<Integer, List<Lotto>> getInputMatchTotalInfo(
-      final Map<Integer, List<Lotto>> categoriesRank, Lotto winLotto) {
+  public Map<Rank, List<Lotto>> getInputMatchTotalInfo(
+      final Map<Rank, List<Lotto>> categoriesRank, Lotto winLotto) {
+
     for (Lotto lotto : lottos) {
-      categoriesRank.get(matchLottoRating(winLotto, lotto)).add(lotto);
+      categoriesRank.get(getMatchLotteries(winLotto, lotto)).add(lotto);
     }
 
-    categoriesRank.remove(INT_ZERO);
+    categoriesRank.remove(Rank.MISS);
     return categoriesRank;
   }
 
-  private int matchLottoRating(Lotto winLotto, Lotto lotty) {
-    int matchLotteries = getMatchLotteries(lotty, winLotto);
-
-    if (isLessThanLimit(matchLotteries)) {
-      return INT_ZERO;
-    }
-    return matchLotteries;
-  }
-
-  private boolean isLessThanLimit(final int matchLotteries) {
-    return matchLotteries < LIMIT_MATCH_NUMBER;
-  }
-
-  public int getMatchLotteries(Lotto lotty, Lotto winLotto) {
+  public Rank getMatchLotteries(Lotto lotty, Lotto winLotto) {
     int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
       count = checkContainValues(winLotto, count, lottoNumber);
     }
-    return count;
+    return Rank.matchRank(count);
   }
 
   private int checkContainValues(final Lotto winLotto, int count, final LottoNumber lottoNumber) {
