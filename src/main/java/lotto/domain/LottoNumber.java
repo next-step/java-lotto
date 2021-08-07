@@ -13,14 +13,14 @@ public class LottoNumber implements Comparator<LottoNumber> {
   private final int number;
 
   public LottoNumber(final int number) {
-    if(isWrongNumber(number)){
-      throw new IllegalArgumentException(Message.MSG_ERROR_LIMIT_LOTTO_NUMBER);
-    }
+    isWrongNumber(number);
     this.number = number;
   }
 
-  private boolean isWrongNumber(final int number) {
-    return number > LIMIT_MAX_NUMBER || number < LIMIT_MIN_NUMBER;
+  private void isWrongNumber(final int number) {
+    if(number > LIMIT_MAX_NUMBER || number < LIMIT_MIN_NUMBER){
+      throw new IllegalArgumentException(Message.MSG_ERROR_LIMIT_LOTTO_NUMBER);
+    }
   }
 
   public LottoNumber() {
