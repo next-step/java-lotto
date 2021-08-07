@@ -39,6 +39,12 @@ public class ResultView {
 
 	private void printResultEach(Map<LottoProfit, Integer> match) {
 		for (Map.Entry<LottoProfit, Integer> profit : match.entrySet()) {
+			printNotZero(profit);
+		}
+	}
+
+	private void printNotZero(Map.Entry<LottoProfit, Integer> profit) {
+		if (profit.getKey() != LottoProfit.ZERO) {
 			System.out.printf(messageTemplate(profit), profit.getKey().getQuantity(), profit.getKey().getProfitUnit(), profit.getValue());
 		}
 	}

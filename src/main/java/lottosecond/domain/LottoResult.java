@@ -5,17 +5,16 @@ import java.util.*;
 public class LottoResult {
 
 	private static final int MATCHING_STANDARD = 2;
+	private static final int DEFAULT_MATCH_COUNT = 0;
 
 	private final Map<LottoProfit, Integer> result = new EnumMap<>(LottoProfit.class);
 	private final Lottos lottos;
 
 	public LottoResult(Lottos lottos) {
 		this.lottos = lottos;
-		result.put(LottoProfit.THREE, 0);
-		result.put(LottoProfit.FOUR, 0);
-		result.put(LottoProfit.FIVE, 0);
-		result.put(LottoProfit.FIVE_BONUS, 0);
-		result.put(LottoProfit.SIX, 0);
+		for (LottoProfit lottoProfit : LottoProfit.values()) {
+			result.put(lottoProfit, DEFAULT_MATCH_COUNT);
+		}
 	}
 
 	public void match(String winningNumbers, int bonusNumber) {
