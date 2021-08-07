@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.exception.LackMoneyException;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -26,9 +24,7 @@ public class LottoShop {
         return instance;
     }
 
-    public Lottos buy(final int payment, final int autoNumberOfPurchases, final String... manualNumbers) {
-        validate(payment);
-
+    public Lottos buy(final Money payment, final int autoNumberOfPurchases, final String... manualNumbers) {
         List<Lotto> lottos = stream(manualNumbers)
                 .map(this::getManualLotto)
                 .collect(toList());
@@ -38,12 +34,6 @@ public class LottoShop {
                             .collect(toList()));
 
         return Lottos.from(lottos);
-    }
-
-    private void validate(final int payment) {
-        if (payment < LOTTO_PRICE) {
-            throw new LackMoneyException();
-        }
     }
 
     private Lotto getManualLotto(String lottoNumber) {

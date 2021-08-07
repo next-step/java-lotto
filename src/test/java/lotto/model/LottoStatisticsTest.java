@@ -21,7 +21,7 @@ class LottoStatisticsTest {
                                             Lotto.from("1, 2, 3, 4, 5, 7"),
                                             Lotto.from("1, 2, 3, 4, 5, 6")));
         WinningLotto winningLotto = WinningLotto.from("1, 2, 3, 4, 5, 6", "7");
-        lottoStatistics = LottoStatistics.from(payment, winningLotto.matchResults(lottos));
+        lottoStatistics = LottoStatistics.from(Money.from(payment), winningLotto.matchResults(lottos));
     }
 
     @Test

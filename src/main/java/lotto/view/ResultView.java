@@ -40,7 +40,7 @@ public class ResultView {
     private static String getFormatString(Map<LottoPrize, Integer> statisticsMap, LottoPrize lottoPrize) {
         return String.format(findMessageFormat(lottoPrize),
                              lottoPrize.getMatchCount(),
-                             lottoPrize.getPrizeMoney(),
+                             lottoPrize.getPrizeMoney().toInt(),
                              statisticsMap.get(lottoPrize));
     }
 

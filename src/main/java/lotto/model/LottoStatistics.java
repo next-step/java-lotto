@@ -13,14 +13,14 @@ public class LottoStatistics {
     private final Map<LottoPrize, Integer> statisticsMap;
     private double earningsRate;
 
-    private LottoStatistics(final int payment, final List<LottoPrize> lottoPrizes) {
+    private LottoStatistics(final Money payment, final List<LottoPrize> lottoPrizes) {
         this.statisticsMap = new EnumMap<>(LottoPrize.class);
 
         calculateStatistics(lottoPrizes);
         calculateEarningsRate(payment, lottoPrizes);
     }
 
-    public static LottoStatistics from(final int payment, final List<LottoPrize> lottoPrizes) {
+    public static LottoStatistics from(final Money payment, final List<LottoPrize> lottoPrizes) {
         return new LottoStatistics(payment, lottoPrizes);
     }
 
@@ -28,17 +28,12 @@ public class LottoStatistics {
         lottoPrizes.forEach(lottoPrize -> statisticsMap.put(lottoPrize, statisticsMap.getOrDefault(lottoPrize, 0) + INCREASE_VALUE));
     }
 
-    private void calculateEarningsRate(final int payment, final List<LottoPrize> lottoPrizes) {
-        int totalProfitMoney = lottoPrizes.stream()
-                                          .map(LottoPrize::getPrizeMoney)
-                                          .reduce(0, Integer::sum);
+    private void calculateEarningsRate(final Money payment, final List<LottoPrize> lottoPrizes) {
+        Money totalProfitMoney = lottoPrizes.stream()
+                                            .map(LottoPrize::getPrizeMoney)
+                                            .reduce(Money.ZERO, Money::addition);
 
-        if (totalProfitMoney == 0) {
-            this.earningsRate = 0;
-            return;
-        }
-
-        this.earningsRate = (double) totalProfitMoney / payment;
+        this.earningsRate = totalProfitMoney.earningRate(payment);
     }
 
     public Map<LottoPrize, Integer> getStatisticsMap() {
