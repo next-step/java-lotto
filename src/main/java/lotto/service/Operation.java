@@ -44,9 +44,9 @@ public enum Operation {
     return operationMark;
   }
 
-  public static Operation chooseOperation(String operation){
+  public static Operation chooseOperation(Operation operation){
     return Arrays.stream(Operation.values())
-        .filter(v -> v.getOperation().equals(operation))
+        .filter(v -> v.equals(operation))
         .findAny()
         .orElseThrow(() -> new IllegalArgumentException(Message.MSG_ERROR_MISS_MATCH_OPERATION));
   }

@@ -40,7 +40,7 @@ public class LottoMoney {
   }
 
   public int calculateMoney(Operation mark, final int eachLottoCost, int money) {
-    return Operation.chooseOperation(mark.getOperation()).calculation(money,eachLottoCost);
+    return Operation.chooseOperation(mark).calculation(money,eachLottoCost);
   }
 
   public double getReward(final double totalWinningRewards) {

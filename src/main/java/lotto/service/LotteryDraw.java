@@ -56,7 +56,7 @@ public class LotteryDraw {
   }
 
   private int getCalculation(final Map<Integer, List<Lotto>> result, final Integer ratingNumber) {
-    return Operation.chooseOperation("*").calculation(result.get(ratingNumber).size(),
+    return Operation.chooseOperation(Operation.MULTIPLE).calculation(result.get(ratingNumber).size(),
         Rank.matchRank(ratingNumber).getWinningMoney());
   }
 
