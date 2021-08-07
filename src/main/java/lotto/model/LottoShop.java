@@ -1,15 +1,14 @@
 package lotto.model;
 
-import lotto.strategy.AutoLottoStrategy;
-import lotto.strategy.LottoRuleStrategy;
-
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoShop {
-    private static final LottoRuleStrategy LOTTO_STRATEGY = AutoLottoStrategy.getInstance();
+    private static final LottoMachine LOTTO_MACHINE = LottoMachine.getInstance();
 
     public static final int LOTTO_PRICE = 1_000;
 
@@ -25,21 +24,23 @@ public class LottoShop {
         return instance;
     }
 
-    public Lottos buy(final int payment) {
-        validate(payment);
-        final int numberOfPurchases = payment / LOTTO_PRICE;
-        return Lottos.from(Stream.generate(this::getLotto)
-                                 .limit(numberOfPurchases)
-                                 .collect(toList()));
+    public Lottos buy(final Money payment, final int autoNumberOfPurchases, final String... manualNumbers) {
+        List<Lotto> lottos = stream(manualNumbers)
+                .map(this::getManualLotto)
+                .collect(toList());
+
+        lottos.addAll(Stream.generate(this::getAutoLotto)
+                            .limit(autoNumberOfPurchases)
+                            .collect(toList()));
+
+        return Lottos.from(lottos);
     }
 
-    private Lotto getLotto() {
-        return LOTTO_STRATEGY.ticketing();
+    private Lotto getManualLotto(String lottoNumber) {
+        return LOTTO_MACHINE.manual(lottoNumber);
     }
 
-    private void validate(final int payment) {
-        if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException("don't have enough money.");
-        }
+    private Lotto getAutoLotto() {
+        return LOTTO_MACHINE.auto();
     }
 }

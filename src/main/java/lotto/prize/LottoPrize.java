@@ -1,73 +1,38 @@
 package lotto.prize;
 
-import java.util.function.Predicate;
+import lotto.model.Money;
 
 import static java.util.Arrays.stream;
 
 public enum LottoPrize {
-    FIRST(6, 2_000_000_000) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountEq(matchCount);
-        }
-    },
-    SECOND(5, 30_000_000) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountEq(matchCount) && matchInfo.isMatchBonus();
-        }
-    },
-    THIRD(5, 1_500_000) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountEq(matchCount) && !matchInfo.isMatchBonus();
-        }
-    },
-    FOURTH(4, 50_000) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountEq(matchCount);
-        }
-    },
-    FIFTH(3, 5_000) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountEq(matchCount);
-        }
-    },
-    NONE(0, 0) {
-        @Override
-        boolean judge(final MatchInformation matchInfo, final int matchCount) {
-            return matchInfo.isMatchCountNone(matchCount);
-        }
-    };
+    FIRST(6, Money.from(2_000_000_000)),
+    SECOND(5, Money.from(30_000_000)),
+    THIRD(5, Money.from(1_500_000)),
+    FOURTH(4, Money.from(50_000)),
+    FIFTH(3, Money.from(5_000)),
+    NONE(0, Money.from(0));
 
     private final int matchCount;
-    private final int prizeMoney;
+    private final Money prizeMoney;
 
-    abstract boolean judge(final MatchInformation matchInfo, int matchCount);
-
-    LottoPrize(final int matchCount, final int prizeMoney) {
+    LottoPrize(final int matchCount, final Money prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
     public static LottoPrize valueOf(final MatchInformation matchInformation) {
         return stream(values())
-                .filter(getLottoPrizePredicate(matchInformation))
+                .filter(prize -> matchInformation.isMatchCountEq(prize.matchCount))
+                .filter(prize -> !prize.equals(SECOND) || matchInformation.isMatchBonus())
                 .findFirst()
                 .orElse(LottoPrize.NONE);
-    }
-
-    private static Predicate<LottoPrize> getLottoPrizePredicate(final MatchInformation matchInformation) {
-        return lottoPrize -> lottoPrize.judge(matchInformation, lottoPrize.matchCount);
     }
 
     public int getMatchCount() {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
+    public Money getPrizeMoney() {
         return prizeMoney;
     }
 }

@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.exception.LottoNumberGenerationException;
+import lotto.exception.LottoNumberRangeException;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -23,19 +26,28 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(final int number) {
-        validate(number);
+        validateContainsKey(number);
         return LOTTO_NUMBERS.get(number);
     }
 
     public static LottoNumber from(final String number) {
-        int parseInt = parseInt(number);
-        validate(parseInt);
+        int parseInt = validateParseInt(number);
+        validateContainsKey(parseInt);
         return LOTTO_NUMBERS.get(parseInt);
     }
 
-    private static void validate(final int number) {
-        if (!LOTTO_NUMBERS.containsKey(number)) {
-            throw new IllegalArgumentException("lotto number must be greater than " + MIN_OF_LOTTO_NUMBER + " and less than " + MAX_OF_LOTTO_NUMBER);
+    private static int validateParseInt(final String number) {
+        try {
+            return parseInt(number);
+        }
+        catch (NumberFormatException o_O) {
+            throw new LottoNumberGenerationException(o_O.getMessage() + ". please check your input.");
+        }
+    }
+
+    private static void validateContainsKey(final int parseInt) {
+        if (!LOTTO_NUMBERS.containsKey(parseInt)) {
+            throw new LottoNumberRangeException();
         }
     }
 

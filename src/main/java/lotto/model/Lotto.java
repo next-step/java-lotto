@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.exception.LottoNumberSizeException;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -15,18 +17,13 @@ public class Lotto {
 
     private static final String DELIMITER = ", ";
 
-    private static final int NUMBER_OF_LOTTO_COUNT = 6;
+    public static final int NUMBER_OF_LOTTO_COUNT = 6;
 
     private Lotto(final Collection<LottoNumber> numbers) {
         this.numbers = new TreeSet<>(numbers);
     }
 
     public static Lotto from(final Collection<LottoNumber> numbers) {
-        Objects.requireNonNull(numbers, "numbers must be not null.");
-        return new Lotto(numbers);
-    }
-
-    public static Lotto from(final TreeSet<LottoNumber> numbers) {
         Objects.requireNonNull(numbers, "numbers must be not null.");
         return new Lotto(numbers);
     }
@@ -48,7 +45,7 @@ public class Lotto {
 
     private static void validateAggregate(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_COUNT) {
-            throw new IllegalArgumentException("Set<LottoNumber> size must be " + NUMBER_OF_LOTTO_COUNT);
+            throw new LottoNumberSizeException("the lotto numbers must be " + NUMBER_OF_LOTTO_COUNT);
         }
     }
 

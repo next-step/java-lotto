@@ -1,32 +1,46 @@
 package lotto;
 
-import lotto.model.LottoShop;
-import lotto.model.LottoStatistics;
-import lotto.model.Lottos;
-import lotto.model.WinningLotto;
-import lotto.prize.LottoPrize;
+import lotto.exception.LackMoneyException;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
+import static lotto.model.LottoShop.getInstance;
 
 public class LottoConsoleApplication {
+    private static final LottoShop LOTTO_SHOP = getInstance();
+
     public static void main(String[] args) {
-        LottoShop shop = LottoShop.getInstance();
+        final Money payment = Money.from(InputView.inputPayment());
+        final int manualLottoCount = InputView.inputManualLottoCount();
 
-        int payment = InputView.inputPayment();
-        Lottos lottos = shop.buy(payment);
+        validate(payment, manualLottoCount);
 
-        ResultView.printGameCount(payment);
+        final int autoNumberOfPurchases = getAutoNumberOfPurchases(payment, manualLottoCount);
 
+        printGameInformation(payment,
+                             manualLottoCount,
+                             autoNumberOfPurchases,
+                             LOTTO_SHOP.buy(payment,
+                                            autoNumberOfPurchases,
+                                            InputView.inputManualLottoNumbers(manualLottoCount)));
+    }
+
+    private static void validate(final Money payment, final int manualLottoCount) {
+        if (payment.isLackMoney(manualLottoCount)) {
+            throw new LackMoneyException();
+        }
+    }
+
+    private static int getAutoNumberOfPurchases(final Money payment, final int manualLottoCount) {
+        return payment.subtraction(Money.convert(manualLottoCount)).getNumberOfPurchases();
+    }
+
+    private static void printGameInformation(final Money payment, final int manualLottoCount, final int autoNumberOfPurchases, final Lottos lottos) {
+        ResultView.printGameCount(manualLottoCount, autoNumberOfPurchases);
         ResultView.printLottoNumber(lottos);
-
-        String winningNumbers = InputView.inputWinningNumbers();
-        String bonusNumber = InputView.inputBonusNumber();
-        WinningLotto winningLotto = WinningLotto.from(winningNumbers, bonusNumber);
-
-        List<LottoPrize> lottoPrizes = winningLotto.matchResults(lottos);
-        LottoStatistics lottoStatistics = LottoStatistics.from(payment, lottoPrizes);
-        ResultView.printStatistic(lottoStatistics);
+        ResultView.printStatistic(LottoStatistics.from(payment,
+                                                       WinningLotto.from(InputView.inputWinningNumbers(),
+                                                                         InputView.inputBonusNumber()).matchResults(lottos)));
     }
 }

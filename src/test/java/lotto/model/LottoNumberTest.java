@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.exception.LottoNumberRangeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호가 1~45가 아닌 경우 예외를 던진다")
     void exception() {
         Assertions.assertThatThrownBy(() -> LottoNumber.from(46))
-                  .isInstanceOf(IllegalArgumentException.class)
+                  .isInstanceOf(LottoNumberRangeException.class)
                   .hasMessage("lotto number must be greater than 1 and less than 45");
     }
 }

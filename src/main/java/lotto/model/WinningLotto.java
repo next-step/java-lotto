@@ -9,11 +9,11 @@ import java.util.Objects;
 import static java.util.stream.Collectors.toList;
 
 public class WinningLotto {
-    private final Lotto winningNumber;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    private WinningLotto(final Lotto winningNumber, final LottoNumber bonusNumber) {
-        this.winningNumber = winningNumber;
+    private WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -43,7 +43,7 @@ public class WinningLotto {
     }
 
     private int getMatchCount(final Lotto lotto) {
-        return lotto.getMatchCount(winningNumber);
+        return lotto.getMatchCount(winningLotto);
     }
 
     public boolean isMatchBonus(final Lotto lotto) {
