@@ -10,8 +10,7 @@ public class LottoApplication {
 	public static void main(String[] args) {
 		InputView inputView = new InputView();
 
-		Lottos lottos = new Lottos();
-		lottos.buy(inputView.getMoney(), new LottoNumberShuffle());
+		Lottos lottos = new Lottos(inputView.getMoney(), new LottoNumberShuffle());
 
 		ResultView resultView = new ResultView(lottos);
 		resultView.printLottos();
