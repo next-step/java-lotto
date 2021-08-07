@@ -1,13 +1,14 @@
 package step3.view;
 
-import step3.domain.ResultOfLottos;
 import step3.domain.lotto.Lotto;
-import step3.domain.lotto.LottoRank;
-import step3.domain.lotto.LottoStatistics;
 import step3.domain.lotto.Profit;
+import step3.domain.lotto.ResultOfLottos;
 import java.util.List;
 
 public class ResultView {
+
+    private ResultView() {
+    }
 
     public static void printCount(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
@@ -17,11 +18,12 @@ public class ResultView {
         lottos.forEach(lotto -> System.out.println(lotto.numbers().toString()));
     }
 
-    public static void printLottoStatistics(LottoStatistics lottoStatistics) {
+    public static void printLottoStatistics(ResultOfLottos resultOfLottos, Profit profit) {
         System.out.println("당첨 통계");
         System.out.println("-----------");
-        printLottoStatistics(lottoStatistics.resultOfLottos());
-        printLottoProfit(lottoStatistics.getProfit());
+
+        printLottoStatistics(resultOfLottos);
+        printLottoProfit(profit);
     }
 
     private static void printLottoProfit(Profit profit) {
@@ -29,10 +31,8 @@ public class ResultView {
     }
 
     private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
-        for (int rank = 3; rank < 7; rank++) {
-            LottoRank lottoRank = LottoRank.find(rank);
-            System.out.println(lottoRank.getNumber() + "개 일치 (" + lottoRank.getWinMoney() + " 원) - " + resultOfLottos.winCount(lottoRank));
-        }
+        resultOfLottos.getResultOfLottos().forEach((lottoMatch, integer) ->
+            System.out.println(lottoMatch.getNumber() + "개 일치 (" + lottoMatch.getWinMoney() + " 원) - " + resultOfLottos.winCount(lottoMatch)));
     }
 
 }
