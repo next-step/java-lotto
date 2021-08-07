@@ -8,16 +8,17 @@ import lottosecond.ui.ResultView;
 public class LottoApplication {
 
 	public static void main(String[] args) {
-		InputView inputView = new InputView();
 
-		Lottos lottos = new Lottos(inputView.getMoney(), new LottoNumberShuffle());
+		int money = InputView.inputMoney();
+		Lottos lottos = new Lottos(money, new LottoNumberShuffle());
 
-		ResultView resultView = new ResultView();
-		resultView.printLottos(lottos);
+		ResultView.printLottos(lottos);
 
-		String winningNumbers = inputView.inputLastWinningNumbers();
-		int bonusNumber = inputView.inputBonusNumber();
+		String winningNumbers = InputView.inputLastWinningNumbers();
+		int bonusNumber = InputView.inputBonusNumber();
 
-		resultView.printResult(lottos, winningNumbers, bonusNumber);
+		ResultView.printResult(lottos, winningNumbers, bonusNumber);
+
 	}
+
 }

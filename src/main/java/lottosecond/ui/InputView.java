@@ -9,29 +9,23 @@ public class InputView {
 	private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 	private static final Scanner scanner = new Scanner(System.in);
 
-	private final int money;
-
-	public InputView() {
+	public static int inputMoney() {
 		System.out.println(HOW_MUCH);
-		this.money = inputIntValue();
+		return inputIntValue();
 	}
 
-	private int inputIntValue() {
+	private static int inputIntValue() {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public String inputLastWinningNumbers() {
+	public static String inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
 		return scanner.nextLine();
 	}
 
-	public int inputBonusNumber() {
+	public static int inputBonusNumber() {
 		System.out.println(BONUS_NUMBER);
 		return inputIntValue();
-	}
-
-	public int getMoney() {
-		return money;
 	}
 
 }
