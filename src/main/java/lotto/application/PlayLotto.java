@@ -6,17 +6,28 @@ import lotto.domain.LottoPrize;
 import lotto.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PlayLotto {
     private static int LOTTO_PRICE = 1000;
     private static int WINNING_TOTAL_INDEX = 6;
 
-    public static int calculateLottoCount(int cash) {
-        if (cash % LOTTO_PRICE != 0) {
-            throw new RuntimeException("1000원 단위로 입력하세요.");
+    public static int calculateAutoLottoCount(int cash, int manualLottoCount) {
+        validateArgument(cash,manualLottoCount);
+        return cash / LOTTO_PRICE - manualLottoCount;
+    }
+
+    private static void validateArgument(int cash, int manualLottoCount) {
+        if (cash <= 0) {
+            throw new IllegalArgumentException("구입금액은 0원 이상으로 입력해주세요.");
         }
-        return cash / LOTTO_PRICE;
+        if (cash % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("1000원 단위로 입력하세요.");
+        }
+        if (manualLottoCount < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 0이상이어야 합니다.");
+        }
     }
 
     public static List<Lotto> createLotto(int lottoCount) {
@@ -27,7 +38,7 @@ public class PlayLotto {
         return lottos;
     }
 
-    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos){
+    public static int[] playLotto(String winningNumberString, int bonusNumber, List<Lotto> lottos) {
         Lotto winningLotto = createWinningLotto(winningNumberString, bonusNumber);
         int[] winningArray = new int[WINNING_TOTAL_INDEX];
         for (Lotto lotto : lottos) {
@@ -37,9 +48,13 @@ public class PlayLotto {
     }
 
     private static Lotto createWinningLotto(String winningNumberString, int bonusNumber) {
-        List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumberList);
+        LottoNumbers winningLottoNumbers = createLottoNumbers(winningNumberString);
         return new Lotto(winningLottoNumbers, bonusNumber);
+    }
+
+    private static LottoNumbers createLottoNumbers(String winningNumberString) {
+        List<Integer> winningNumberList = StringUtil.stringArrayToIntegerList(StringUtil.separator(winningNumberString));
+        return new LottoNumbers(winningNumberList);
     }
 
 
@@ -54,5 +69,13 @@ public class PlayLotto {
     private static int calculate(int winningIndex, int count) {
         LottoPrize lottoPrize = LottoPrize.findLottoPrizeOfPrize(winningIndex);
         return lottoPrize.calculate(count);
+    }
+
+    public static List<Lotto> createManualLotto(List<String> manualLottoNumbers) {
+        List<Lotto> manualLottos = new LinkedList<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            manualLottos.add(new Lotto(createLottoNumbers(manualLottoNumber)));
+        }
+        return manualLottos;
     }
 }

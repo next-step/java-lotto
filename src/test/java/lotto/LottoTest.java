@@ -32,7 +32,7 @@ public class LottoTest {
     @DisplayName("금액에 따른 로또 생성")
     void lottoCountTest() {
         int cash = 14000;
-        int lottoCount = PlayLotto.calculateLottoCount(cash);
+        int lottoCount = PlayLotto.calculateAutoLottoCount(cash, 0);
         List<Lotto> lottos = playLotto.createLotto(lottoCount);
         assertThat(lottos.size()).isEqualTo(14);
     }
@@ -99,6 +99,10 @@ public class LottoTest {
         int notValidateBonusNumber1 = 46;
         assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber1))
                 .isInstanceOf(IllegalArgumentException.class);
+
+        int notValidateBonusNumber2 = 46;
+        assertThatThrownBy(() -> new BonusNumber(notValidateBonusNumber1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -119,5 +123,33 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
         int prizeNumber = winningLotto.checkWinning(lotto);
         assertThat(prizeNumber).isEqualTo(testPrizeNumber);
+    }
+
+    @Test
+    @DisplayName("수동 구매")
+    void manualLottoTest() {
+        int manualLottoCount = 3;
+        int cash = 14000;
+        int autoLottoCount = PlayLotto.calculateAutoLottoCount(cash, manualLottoCount);
+        assertThat(autoLottoCount).isEqualTo(11);
+    }
+
+    @Test
+    @DisplayName("수동 로또 생성")
+    void createManualLottoTest() {
+        List<String> manualLottoNumbers = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44");
+        List<Lotto> manualLottos = PlayLotto.createManualLotto(manualLottoNumbers);
+        assertThat(manualLottos.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 당첨번호에 포함될 경우")
+    void isContainBonusNumberWinningLottoTest(){
+        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        int bonusNumber = 6;
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
+        assertThatThrownBy(() ->
+            new Lotto(winningLottoNumbers, bonusNumber)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
