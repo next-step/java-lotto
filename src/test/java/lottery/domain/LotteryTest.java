@@ -1,8 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.Lottery;
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryResult;
 import lottery.domain.winningstrategy.MatchWinningLotteryStrategy;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;

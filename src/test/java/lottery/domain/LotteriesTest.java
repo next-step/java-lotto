@@ -1,9 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.Lotteries;
-import lottery.domain.Lottery;
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryResult;
 import lottery.domain.winningstrategy.MatchWinningLotteryStrategy;
 import lottery.dto.LotteryResultDto;
 import lottery.dto.LotteryStatisticDto;
@@ -15,9 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lottery.domain.Lottery.PRICE;
-import static lottery.domain.LotteryResult.SIX_MATCHES;
-import static lottery.domain.LotteryResult.THREE_MATCHES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteriesTest {
@@ -29,7 +22,7 @@ class LotteriesTest {
         List<Lottery> lotteryList = Arrays.asList(getLottery(1, 6));
         Lotteries lotteries = new Lotteries(lotteryList);
         Lottery winningLottery = getLottery(1, 6);
-        double expectedEarningsRate = getEarningsRate(SIX_MATCHES, 1);
+        double expectedEarningsRate = getEarningsRate(LotteryResult.SIX_MATCHES, 1);
 
         // when
         LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
@@ -48,7 +41,7 @@ class LotteriesTest {
         List<Lottery> lotteryList = Arrays.asList(getLottery(4, 9), getLottery(11, 16));
         Lotteries lotteries = new Lotteries(lotteryList);
         Lottery winningLottery = getLottery(1, 6);
-        double expectedEarningsRate = getEarningsRate(THREE_MATCHES, 2);
+        double expectedEarningsRate = getEarningsRate(LotteryResult.THREE_MATCHES, 2);
 
         // when
         LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
@@ -79,6 +72,6 @@ class LotteriesTest {
     private double getEarningsRate(LotteryResult lotteryResult, int lotteryCount) {
         return lotteryResult.toDto(0)
                 .getCashPrize()
-                .divide(PRICE.multiply(lotteryCount));
+                .divide(Lottery.PRICE.multiply(lotteryCount));
     }
 }

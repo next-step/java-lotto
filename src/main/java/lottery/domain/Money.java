@@ -1,23 +1,22 @@
 package lottery.domain;
 
 import java.util.Objects;
-
-import static java.lang.Integer.parseInt;
-import static lottery.domain.Lottery.PRICE;
+import java.util.regex.Pattern;
 
 public class Money implements Comparable<Money> {
 
     public static final String NON_NULL = "입력값은 null 일 수 없습니다";
     public static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
     public static final String LESS_THAN_ZERO = "입력값은 0 보다 커야 합니다 -> ";
-    public static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 (로또 가격: " + PRICE + ") -> ";
+    public static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 (로또 가격: " + Lottery.PRICE + ") -> ";
     private static final int ZERO = 0;
+    private static Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private final int money;
 
     public Money(final String money) {
         validateMoney(money);
-        this.money = parseInt(money);
+        this.money = Integer.parseInt(money);
     }
 
     public Money(final int money) {
@@ -27,7 +26,7 @@ public class Money implements Comparable<Money> {
 
     public int getBuyableLotteryCount() {
         requireOverLotteryPrice();
-        return money / PRICE.money;
+        return money / Lottery.PRICE.money;
     }
 
     public long multiply(long number) {
@@ -41,7 +40,7 @@ public class Money implements Comparable<Money> {
     private void validateMoney(final String money) {
         requireNonNull(money);
         requireNumber(money);
-        requirePositiveNumber(parseInt(money));
+        requirePositiveNumber(Integer.parseInt(money));
     }
 
     private void requirePositiveNumber(final int money) {
@@ -51,7 +50,7 @@ public class Money implements Comparable<Money> {
     }
 
     private void requireOverLotteryPrice() {
-        if (money < PRICE.money) {
+        if (money < Lottery.PRICE.money) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY + money);
         }
     }

@@ -10,8 +10,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lottery.domain.Lottery.PRICE;
-
 public class Lotteries {
 
     public static final String NON_NULL = "입력값은 null 일 수 없습니다";
@@ -53,7 +51,7 @@ public class Lotteries {
     }
 
     private long getTotalLotteriesPrice() {
-        return PRICE.multiply(lotteries.size());
+        return Lottery.PRICE.multiply(lotteries.size());
     }
 
     private void validateLotteries(final List<Lottery> lotteries) {

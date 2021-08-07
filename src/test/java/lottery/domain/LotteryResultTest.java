@@ -1,13 +1,11 @@
 package lottery.domain;
 
-import lottery.domain.LotteryResult;
 import lottery.dto.LotteryResultDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lottery.domain.LotteryResult.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteryResultTest {
@@ -16,7 +14,7 @@ class LotteryResultTest {
     @ValueSource(ints = {0, 1, 2})
     public void getBlankLotteryResult(int score) {
         // given
-        LotteryResult expected = BLANK;
+        LotteryResult expected = LotteryResult.BLANK;
 
         // when
         LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
@@ -30,7 +28,7 @@ class LotteryResultTest {
     public void getLotteryResult() {
         // given
         int score = 3;
-        LotteryResult expected = THREE_MATCHES;
+        LotteryResult expected = LotteryResult.THREE_MATCHES;
 
         // when
         LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
@@ -43,7 +41,7 @@ class LotteryResultTest {
     @DisplayName("notBlank 테스트")
     public void notBlank() {
         // given
-        LotteryResult lotteryResult = SIX_MATCHES;
+        LotteryResult lotteryResult = LotteryResult.SIX_MATCHES;
         boolean expected = true;
 
         // when
@@ -58,12 +56,12 @@ class LotteryResultTest {
     public void getTotalCashPrize() {
         // given
         long count = 10;
-        long expected = FIVE_MATCHES.toDto(0)
+        long expected = LotteryResult.FIVE_MATCHES.toDto(0)
                 .getCashPrize()
                 .multiply(count);
 
         // when
-        long totalCashPrize = FIVE_MATCHES.getTotalCashPrize(count);
+        long totalCashPrize = LotteryResult.FIVE_MATCHES.getTotalCashPrize(count);
 
         // then
         assertThat(totalCashPrize).isEqualTo(expected);
@@ -74,10 +72,10 @@ class LotteryResultTest {
     public void toDto() {
         // given
         long count = 10;
-        LotteryResultDto expected = FIVE_MATCHES.toDto(count);
+        LotteryResultDto expected = LotteryResult.FIVE_MATCHES.toDto(count);
 
         // when
-        LotteryResultDto lotteryResultDto = FIVE_MATCHES.toDto(count);
+        LotteryResultDto lotteryResultDto = LotteryResult.FIVE_MATCHES.toDto(count);
 
         // then
         assertThat(lotteryResultDto.getCount()).isEqualTo(expected.getCount());

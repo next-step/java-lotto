@@ -9,8 +9,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lottery.domain.LotteryResult.*;
-
 public class LotteryStatisticDto {
 
     private final List<LotteryResultDto> lotteryResultDtos;
@@ -32,7 +30,11 @@ public class LotteryStatisticDto {
     }
 
     private Map<LotteryResult, Long> getDefaultLotteryResultMap() {
-        return Stream.of(THREE_MATCHES, FOUR_MATCHES, FIVE_MATCHES, SIX_MATCHES)
+        return Stream.of(
+                LotteryResult.THREE_MATCHES,
+                LotteryResult.FOUR_MATCHES,
+                LotteryResult.FIVE_MATCHES,
+                LotteryResult.SIX_MATCHES)
                 .collect(Collectors.toMap(Function.identity(), v -> 0L));
     }
 
