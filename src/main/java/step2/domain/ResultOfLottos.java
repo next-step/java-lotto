@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.LottoRank;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,13 +9,13 @@ public class ResultOfLottos {
 
     private static final Integer WIN_COUNT_ZERO = 0;
 
-    private final Map<LottoNumber, Integer> resultOfLottos;
+    private final Map<LottoRank, Integer> resultOfLottos;
 
     public ResultOfLottos() {
-        this(new EnumMap<>(LottoNumber.class));
+        this(new EnumMap<>(LottoRank.class));
     }
 
-    public ResultOfLottos(Map<LottoNumber, Integer> resultOfLottos) {
+    public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
         this.resultOfLottos = resultOfLottos;
     }
 
@@ -26,16 +26,16 @@ public class ResultOfLottos {
             .reduce(Integer::sum).orElse(WIN_COUNT_ZERO);
     }
 
-    public void put(LottoNumber lottoNumber) {
-        resultOfLottos.put(lottoNumber, resultOfLottos.getOrDefault(lottoNumber, WIN_COUNT_ZERO) + 1);
+    public void put(LottoRank lottoRank) {
+        resultOfLottos.put(lottoRank, resultOfLottos.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
     }
 
-    public Integer winCount(LottoNumber lottoNumber) {
-        if (!resultOfLottos.containsKey(lottoNumber)) {
+    public Integer winCount(LottoRank lottoRank) {
+        if (!resultOfLottos.containsKey(lottoRank)) {
             return WIN_COUNT_ZERO;
         }
 
-        return resultOfLottos.get(lottoNumber);
+        return resultOfLottos.get(lottoRank);
     }
 
     @Override

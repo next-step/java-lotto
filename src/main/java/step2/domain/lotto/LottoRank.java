@@ -2,7 +2,7 @@ package step2.domain.lotto;
 
 import java.util.Arrays;
 
-public enum LottoNumber {
+public enum LottoRank {
     THREE_MATCHES(3, 5_000),
     FOUR_MATCHES(4, 50_000),
     FIVE_MATCHES(5, 1_500_000),
@@ -11,13 +11,13 @@ public enum LottoNumber {
     private final Integer number;
     private final Integer winMoney;
 
-    LottoNumber(int number, int winMoney) {
+    LottoRank(int number, int winMoney) {
         this.number = number;
         this.winMoney = winMoney;
     }
 
-    public static LottoNumber find(Integer number) {
-        return Arrays.stream(LottoNumber.values())
+    public static LottoRank find(Integer number) {
+        return Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank.number.equals(number))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("맞은 개수를 찾을 수 없습니다."));

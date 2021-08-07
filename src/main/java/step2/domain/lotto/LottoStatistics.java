@@ -32,7 +32,7 @@ public class LottoStatistics {
 
     private void calculateLottoResult(int count) {
         if (count >= MINIMAL_SUCCESS_NUMBER) {
-            resultOfLottos.put(LottoNumber.find(count));
+            resultOfLottos.put(LottoRank.find(count));
         }
     }
 
