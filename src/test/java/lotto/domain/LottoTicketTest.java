@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTicketTest {
 
-
     @ParameterizedTest
     @MethodSource("provideValidLottoNumbers")
     @DisplayName("로또티켓이 6숫자를 가지고, 중복되는 숫자가 없으면 예외를 던지지 않는다.")
