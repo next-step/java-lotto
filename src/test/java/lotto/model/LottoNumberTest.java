@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -75,19 +76,15 @@ public class LottoNumberTest {
     }
 
     @DisplayName("LottoNumber.class의 compareTo() 메소드는 로또 번호를 비교한다.")
-    @Test
-    public void compareToLottoNumberTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"1:1:0", "1:2:-1", "3:1:1", "2:3:-1"}, delimiter = ':')
+    public void compareToLottoNumberTest(int number, int otherNumber, int result) {
         // given
-        LottoNumber oneLottoNumber = new LottoNumber(1);
-        LottoNumber otherOneLottoNumber = new LottoNumber(1);
-        LottoNumber twoLottoNumber = new LottoNumber(2);
-        LottoNumber threeLottoNumber = new LottoNumber(3);
+        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber otherLottoNumber = new LottoNumber(otherNumber);
 
         // when, then
-        assertEquals(oneLottoNumber.compareTo(otherOneLottoNumber), 0);
-        assertEquals(oneLottoNumber.compareTo(twoLottoNumber), -1);
-        assertEquals(threeLottoNumber.compareTo(oneLottoNumber), 1);
-        assertEquals(twoLottoNumber.compareTo(threeLottoNumber), -1);
+        assertEquals(lottoNumber.compareTo(otherLottoNumber), result);
     }
 
     @DisplayName("로또 번호 생성시, 1이상 45 이하의 번호가 아니면 Exception이 발생한다.")
