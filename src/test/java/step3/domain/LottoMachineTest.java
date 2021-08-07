@@ -3,6 +3,7 @@ package step3.domain;
 import org.junit.jupiter.api.Test;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoMachine;
+import step3.domain.lotto.LottoNumber;
 import step3.domain.money.Cache;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,8 @@ class LottoMachineTest {
         Cache givenCache = new Cache(10000);
         int expectedNumberOfLotto = 10;
 
-        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(
+            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
 
         // When
         List<Lotto> lottos = lottoMachine.sell(givenCache);
