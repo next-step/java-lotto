@@ -1,7 +1,8 @@
-package step2.domain;
+package step3.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.lotto.Lotto;
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,8 @@ class LottoTest {
     @Test
     void 로또_생성_기능() {
         // Given && When
-        List<Integer> givenLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> givenLottoNumber = Arrays
+            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
 
         // When
         Lotto lotto = Lotto.create(givenLottoNumber);

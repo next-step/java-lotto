@@ -1,7 +1,7 @@
-package step2.domain;
+package step3.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.lotto.LottoRank;
+import step3.domain.lotto.LottoRank;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -13,8 +13,8 @@ class ResultOfLottosTest {
     void sumMoney() {
         // Given
         Map<LottoRank, Integer> givenResultLotto = new EnumMap<>(LottoRank.class);
-        givenResultLotto.put(LottoRank.THREE_MATCHES, 1);
-        givenResultLotto.put(LottoRank.FOUR_MATCHES, 1);
+        givenResultLotto.put(LottoRank.THREE_MATCH, 1);
+        givenResultLotto.put(LottoRank.FOUR_MATCH, 1);
 
         Integer sum = givenResultLotto.keySet()
             .stream()
@@ -26,8 +26,6 @@ class ResultOfLottosTest {
 
         // Then
         assertThat(sum).isEqualTo(expectedResoutOfMoney);
-
-
     }
 
 }
