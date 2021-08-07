@@ -1,52 +1,55 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
-    private static final String NOT_VALID_ARGUMENT_EXIST_STATEMENT = "음수 또는 숫자이외 값이 존재합니다";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
-    public String[] splitWithCommaOrColon(String expression) {
-        return expression.split(",|:");
-    }
+    private Tokens splitWithCustomDelimiter(String expression) {
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(expression);
 
-    public String[] splitWithCustomDelimiter(String expression) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] tokens= m.group(2).split(customDelimiter);
-            return tokens;
+        List<String> customDelimiterList = new ArrayList<>();
+        expression = extractExpression(expression, matcher, customDelimiterList);
+
+        String delimiters = ",|:";
+        if (customDelimiterList.size() > 0) {
+            delimiters = String.join("|", customDelimiterList);
         }
-        return splitWithCommaOrColon(expression);
+        return new Tokens(expression.split(delimiters));
     }
 
-    private static boolean isNaturalNumber(String expression) {
+    private String extractExpression(String expression, Matcher matcher, final List<String> customDelimiterList) {
+        while (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            customDelimiterList.add(customDelimiter);
+            expression = expression.substring(matcher.start(2));
+            matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(expression);
+        }
+        return expression;
+    }
+
+    private boolean isNaturalNumber(String expression) {
         Pattern pattern = Pattern.compile("\\d+");
         return pattern.matcher(expression).matches();
     }
 
-    private static boolean isNullOrEmpty(String expression) {
+    private boolean isNullOrEmpty(String expression) {
         return Objects.isNull(expression) || "".equals(expression);
     }
 
-    private static boolean containsNaturalNumber(String[] expressions) {
-        return Arrays.asList(expressions)
-                .stream()
-                .anyMatch(token -> !isNaturalNumber(token));
-    }
-
     public int splitAndSum(String expression) {
-        if (isNullOrEmpty(expression)) return 0;
-        if (isNaturalNumber(expression)) Integer.parseInt(expression);
+        if (isNullOrEmpty(expression)) {
+            return 0;
+        }
 
-        String[] tokens = splitWithCustomDelimiter(expression);
-        if (containsNaturalNumber(tokens)) throw new RuntimeException(NOT_VALID_ARGUMENT_EXIST_STATEMENT);
+        if (isNaturalNumber(expression)) {
+            return Integer.parseInt(expression);
+        }
 
-        return Arrays.asList(tokens)
-                .stream()
-                .map(Integer::parseInt)
-                .reduce(0, (firstOperand, secondOperand) -> firstOperand + secondOperand);
+        return splitWithCustomDelimiter(expression).sum();
     }
 }
