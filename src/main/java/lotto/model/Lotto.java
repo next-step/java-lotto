@@ -12,7 +12,7 @@ public class Lotto {
 		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public List<Integer> getLotto() {
+	public List<Integer> getLottoNumbers() {
 		return lottoNumbers;
 	}
 }
