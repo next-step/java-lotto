@@ -27,7 +27,9 @@ public class LottoInputView {
 		if (!scanner.hasNextInt()) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
-		return new Money(scanner.nextInt());
+		Money money = new Money(scanner.nextInt());
+		scanner.nextLine();
+		return money;
 	}
 
 	public static Lotto inputLastWinningLotto() {
