@@ -5,27 +5,23 @@ import java.util.function.IntBinaryOperator;
 import lotto.message.Message;
 
 public enum Operation {
-  PLUS("+", (number1, number2)-> {
-    return number1 + number2;
-  }),
-  MINUS("-", (number1, number2)-> {
-    return number1 - number2;
-  }),
-  MULTIPLE("*", (number1, number2) -> {
-    return number1 * number2;
-  }),
+  PLUS("+", (number1, number2)-> number1 + number2),
+  MINUS("-", (number1, number2)-> number1 - number2),
+  MULTIPLE("*", (number1, number2) -> number1 * number2),
   DIVISION_SHARE("/", (number1, number2) -> {
-    if(number1 == 0 || number2 ==0){
-      throw new ArithmeticException();
-    }
+    isWrongNumber(number1, number2);
     return number1 / number2;
   }),
   DIVISION_REMAINDER("%", (number1, number2)->{
-    if(number1 == 0 || number2 ==0){
-      throw new ArithmeticException();
-    }
+    isWrongNumber(number1, number2);
     return number1 % number2;
   });
+
+  private static void isWrongNumber(final int number1, final int number2) {
+    if (number1 == 0 || number2 == 0) {
+      throw new ArithmeticException();
+    }
+  }
 
   private final String operationMark;
 

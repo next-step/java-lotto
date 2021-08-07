@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.service.Operation.*;
+
 import lotto.message.Message;
 import lotto.service.Operation;
 
@@ -26,13 +28,13 @@ public class LottoMoney {
   }
 
   private void checkEnoughValue(int money) {
-    if (calculateMoney(Operation.DIVISION_REMAINDER, EACH_LOTTO_COST, money) != INT_ZERO) {
+    if (calculateMoney(DIVISION_REMAINDER, EACH_LOTTO_COST, money) != INT_ZERO) {
       throw new RuntimeException(Message.MSG_ERROR_WRONG_MONEY);
     }
   }
 
   public int calculateMoney(Operation mark, final int eachLottoCost, int money) {
-    return Operation.chooseOperation(mark).calculation(money,eachLottoCost);
+    return chooseOperation(mark).calculation(money,eachLottoCost);
   }
 
   public double getReward(final double totalWinningRewards) {
