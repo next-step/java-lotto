@@ -8,7 +8,14 @@ public final class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
+        validationCheck(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validationCheck(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("different number size");
+        }
     }
 
     public int matchingTicket(final List<Integer> winningNumbers) {
