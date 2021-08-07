@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
 
@@ -23,4 +22,10 @@ class LottoNumberTest {
                 .doesNotThrowAnyException();
     }
 
+    @ParameterizedTest(name = "로또 숫자 동등성 테스트")
+    @ValueSource(ints = {1, 23, 45})
+    public void lottoNumberEqualsAndHashcodeTest(int number) {
+        assertThat(LottoNumber.of(number))
+                .isEqualTo(LottoNumber.of(number));
+    }
 }

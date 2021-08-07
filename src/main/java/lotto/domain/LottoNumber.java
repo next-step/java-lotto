@@ -22,4 +22,22 @@ public class LottoNumber {
     public static LottoNumber of(int number) {
         return new LottoNumber(number);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (!(other instanceof LottoNumber)) return false;
+        LottoNumber that = (LottoNumber) other;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
