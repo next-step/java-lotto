@@ -56,9 +56,7 @@ public class Money implements Comparable<Money> {
     }
 
     private void requireNumber(String number) {
-        try {
-            parseInt(number);
-        } catch(NumberFormatException e) {
+        if (!NUMBER_PATTERN.matcher(number).matches()) {
             throw new IllegalArgumentException(NOT_NUMBER + number);
         }
     }
