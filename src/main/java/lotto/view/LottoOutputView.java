@@ -19,25 +19,19 @@ public class LottoOutputView {
 	}
 
 	public static void printLottoList(Lottos lottos) {
-		for (Lotto lotto : lottos.getLottos()) {
-			printLottoGameView(lotto);
-		}
+		lottos.getLottos().stream().map(Lotto::getLotto).forEach(System.out::println);
 		System.out.print("\n");
 	}
 
-	private static void printLottoGameView(Lotto lotto) {
-		System.out.println(lotto.getLotto());
-	}
-
 	public static void displayLottoPrize(WinPrizes winPrizes) {
-		int money = LottoCountCalculator.calculateLottoMoney(winPrizes.getLottoCount());
+		int purchaseMoney = LottoCountCalculator.calculateLottoMoney(winPrizes.getLottoCount());
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();
 		for (Prize prize : winPrizes.drawResultWinPrizes()) {
 			printResultStatus(winPrizes, prize);
 		}
-		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, money) + "입니다.");
+		System.out.println("총 수익률은 " + PrizeRate.getPrizeEarningRate(totalWinningMoney, purchaseMoney) + "입니다.");
 	}
 
 	private static void printResultStatus(WinPrizes winPrizes, Prize prize) {
