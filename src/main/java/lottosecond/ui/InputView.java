@@ -10,34 +10,28 @@ public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private final int money;
-	private String winningNumbers;
-	private int bonusNumber;
 
 	public InputView() {
 		System.out.println(HOW_MUCH);
-		this.money = Integer.parseInt(scanner.nextLine());
+		this.money = inputIntValue();
 	}
 
-	public void inputLastWinningNumbers() {
+	private int inputIntValue() {
+		return Integer.parseInt(scanner.nextLine());
+	}
+
+	public String inputLastWinningNumbers() {
 		System.out.println(LAST_WINNING_NUMBERS);
-		winningNumbers = scanner.nextLine();
+		return scanner.nextLine();
 	}
 
-	public void inputBonusNumber() {
+	public int inputBonusNumber() {
 		System.out.println(BONUS_NUMBER);
-		this.bonusNumber = Integer.parseInt(scanner.nextLine());
+		return inputIntValue();
 	}
 
 	public int getMoney() {
 		return money;
-	}
-
-	public String getWinningNumbers() {
-		return winningNumbers;
-	}
-
-	public int getBonusNumber() {
-		return bonusNumber;
 	}
 
 }

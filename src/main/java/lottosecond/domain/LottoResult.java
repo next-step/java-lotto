@@ -18,6 +18,10 @@ public class LottoResult {
 		result.put(LottoProfit.SIX, 0);
 	}
 
+	public void match(String winningNumbers, int bonusNumber) {
+		match(new Lotto(winningNumbers), LottoNumber.valueOf(bonusNumber));
+	}
+
 	public void match(Lotto winningNumbers, LottoNumber bonusNumber) {
 		if (winningNumbers.contains(bonusNumber)) {
 			throw new LottoBonusNumberException();

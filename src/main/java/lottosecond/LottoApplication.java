@@ -12,12 +12,12 @@ public class LottoApplication {
 
 		Lottos lottos = new Lottos(inputView.getMoney(), new LottoNumberShuffle());
 
-		ResultView resultView = new ResultView(lottos);
-		resultView.printLottos();
+		ResultView resultView = new ResultView();
+		resultView.printLottos(lottos);
 
-		inputView.inputLastWinningNumbers();
-		inputView.inputBonusNumber();
+		String winningNumbers = inputView.inputLastWinningNumbers();
+		int bonusNumber = inputView.inputBonusNumber();
 
-		resultView.printResult(inputView.getWinningNumbers(), inputView.getBonusNumber());
+		resultView.printResult(lottos, winningNumbers, bonusNumber);
 	}
 }
