@@ -15,6 +15,7 @@ public class StringAddCalculator {
     public static final String DEFAULT_SEPARATOR_REGEX = "[,:]";
     public static final Pattern CUSTOM_SEPARATOR = Pattern.compile("//(.)\n(.*)");
     public static final String IS_NOT_DUAL_NUMBER_ERROR_MESSAGE = "입력 값이 음수이거나 숫자가 아닙니다.";
+    public static final Pattern DUAL_NUMBER_PATTERN = Pattern.compile(IS_NUMBER_REGEX);
 
     private StringAddCalculator() {
     }
@@ -66,7 +67,7 @@ public class StringAddCalculator {
     }
 
     private static void addByIsNumber(String input, List<Integer> numbers) {
-        if (input.matches(IS_NUMBER_REGEX)) {
+        if (DUAL_NUMBER_PATTERN.matcher(input).matches()) {
             numbers.add(Integer.parseInt(input));
         }
     }
