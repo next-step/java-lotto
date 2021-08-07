@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
 import lotto.model.Lotto;
-import lotto.utils.LottoCountCalculator;
+import lotto.model.Money;
 
 public class LottoInputView {
 
@@ -17,24 +17,17 @@ public class LottoInputView {
 	private static final String LAST_WIN_NUMBER_REGEX = ",";
 	private static final String INT_REG_EXP = "^\\d+$";
 	private static final int LOTTO_NUMBER_LENGTH = 6;
-	private static final int MONEY_UNIT = 1000;
-	public static final int ZERO_POINT = 0;
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private LottoInputView() {
 	}
 
-	public static int buyLottos() throws RuntimeException {
-		int money;
+	public static Money buyLottos() {
 		System.out.println(BUY_MONEY_MESSAGE);
-		if (scanner.hasNextInt()) {
-			money = scanner.nextInt();
-			checkThousandUnit(money);
-			checkPositive(money);
-			scanner.nextLine();
-			return LottoCountCalculator.calculateLottoCount(money);
+		if (!scanner.hasNextInt()) {
+			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
-		throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
+		return new Money(scanner.nextInt());
 	}
 
 	public static Lotto inputLastWinningLotto() {
@@ -73,18 +66,6 @@ public class LottoInputView {
 	private static void checkLottoSize(List<Integer> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
-		}
-	}
-
-	private static void checkThousandUnit(int money) {
-		if (money % MONEY_UNIT != ZERO_POINT) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBER_THOUSAND_UNIT_MESSAGE);
-		}
-	}
-
-	private static void checkPositive(int money) {
-		if (money < 0) {
-			throw new IllegalArgumentException(ErrorMessage.NUMBER_POSITIVE_MESSAGE);
 		}
 	}
 
