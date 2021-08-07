@@ -13,16 +13,16 @@ public class WinnerLotto {
 	private static final String INT_REG_EXP = "^\\d+$";
 	private static final int LOTTO_NUMBER_LENGTH = 6;
 
-	private final List<Integer> winnerNumbers;
+	private final List<LottoNumber> winnerNumbers;
 
 	public WinnerLotto(String winnerNumbers) {
 		checkLottoEmpty(winnerNumbers);
 		this.winnerNumbers = Collections.unmodifiableList(toList(winnerNumbers));
 	}
 
-	private List<Integer> toList(String winnerNumbers) {
-		List<Integer> lottoNumbers = Arrays.stream(winnerNumbers.split(LAST_WIN_NUMBER_REGEX))
-			.map(this::toInt)
+	private List<LottoNumber> toList(String winnerNumbers) {
+		List<LottoNumber> lottoNumbers = Arrays.stream(winnerNumbers.split(LAST_WIN_NUMBER_REGEX))
+			.map(s -> new LottoNumber(toInt(s)))
 			.collect(Collectors.toList());
 		checkLottoSize(lottoNumbers);
 		checkDuplicateNumber(lottoNumbers);
@@ -34,7 +34,7 @@ public class WinnerLotto {
 		return Integer.parseInt(winnerNumbers.trim());
 	}
 
-	public List<Integer> getWinnerLotto() {
+	public List<LottoNumber> getWinnerLotto() {
 		return winnerNumbers;
 	}
 
@@ -50,13 +50,13 @@ public class WinnerLotto {
 		}
 	}
 
-	private static void checkLottoSize(List<Integer> lottoNumbers) {
+	private static void checkLottoSize(List<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
 			throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_SIZE);
 		}
 	}
 
-	private static void checkDuplicateNumber(List<Integer> lottoNumbers) {
+	private static void checkDuplicateNumber(List<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
 			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
 		}

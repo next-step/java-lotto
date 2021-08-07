@@ -20,15 +20,16 @@ class LottosTest {
 		Lottos lottos = new Lottos(lotteries);
 
 		assertThat(lottos.getLottos().size()).isEqualTo(1);
-		assertThat(lottos.getLottos().get(0).getLottoNumbers()).containsExactly(firstNumber, secondNumber,
-			thirdNumber);
+		assertThat(lottos.getLottos().get(0).getLottoNumbers()).containsExactly(new LottoNumber(firstNumber),
+			new LottoNumber(secondNumber),
+			new LottoNumber(thirdNumber));
 	}
 
 	private Lotto getLottoGame(int firstNumber, int secondNumber, int thirdNumber) {
-		List<Integer> lottoNumbers = new ArrayList<>();
-		lottoNumbers.add(firstNumber);
-		lottoNumbers.add(secondNumber);
-		lottoNumbers.add(thirdNumber);
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(new LottoNumber(firstNumber));
+		lottoNumbers.add(new LottoNumber(secondNumber));
+		lottoNumbers.add(new LottoNumber(thirdNumber));
 		return new Lotto(lottoNumbers);
 	}
 

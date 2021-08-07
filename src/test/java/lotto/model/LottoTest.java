@@ -13,16 +13,16 @@ class LottoTest {
 	@Test
 	@DisplayName("숫자로 이루어진 컬렉션을 입력하면 반환한다.")
 	public void createLottoGame() {
-		List<Integer> lottoNumbers = new ArrayList<>();
-		lottoNumbers.add(1);
-		lottoNumbers.add(13);
-		lottoNumbers.add(26);
-		lottoNumbers.add(32);
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		lottoNumbers.add(new LottoNumber(1));
+		lottoNumbers.add(new LottoNumber(13));
+		lottoNumbers.add(new LottoNumber(26));
+		lottoNumbers.add(new LottoNumber(32));
 
 		Lotto lotto = new Lotto(lottoNumbers);
 
 		assertThat(lotto.getLottoNumbers().size()).isEqualTo(4);
-		assertThat(lotto.getLottoNumbers()).containsExactly(1, 13, 26, 32);
+		assertThat(lotto.getLottoNumbers()).containsExactly(new LottoNumber(1), new LottoNumber(13), new LottoNumber(26), new LottoNumber(32));
 	}
 
 }

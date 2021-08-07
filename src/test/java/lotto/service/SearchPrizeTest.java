@@ -3,13 +3,13 @@ package lotto.service;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
@@ -47,19 +47,21 @@ class SearchPrizeTest {
 	}
 
 	private Lotto getLottoGame(int value1, int value2, int value3, int value4, int value5, int value6) {
-		List<Integer> lottoNumber = new ArrayList<>();
-		lottoNumber.add(value1);
-		lottoNumber.add(value2);
-		lottoNumber.add(value3);
-		lottoNumber.add(value4);
-		lottoNumber.add(value5);
-		lottoNumber.add(value6);
+		List<LottoNumber> lottoNumber = new ArrayList<>();
+		lottoNumber.add(new LottoNumber(value1));
+		lottoNumber.add(new LottoNumber(value2));
+		lottoNumber.add(new LottoNumber(value3));
+		lottoNumber.add(new LottoNumber(value4));
+		lottoNumber.add(new LottoNumber(value5));
+		lottoNumber.add(new LottoNumber(value6));
 		return new Lotto(lottoNumber);
 	}
 
-	private List<Integer> getLottoNumbers(Integer... numbers) {
-		List<Integer> lottoNumbers = new ArrayList<>();
-		Collections.addAll(lottoNumbers, numbers);
+	private List<LottoNumber> getLottoNumbers(Integer... numbers) {
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		for (Integer number : numbers) {
+			lottoNumbers.add(new LottoNumber(number));
+		}
 		return lottoNumbers;
 	}
 }

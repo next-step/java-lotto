@@ -1,6 +1,13 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.Prize;
@@ -20,8 +27,16 @@ public class LottoOutputView {
 	}
 
 	public static void printLottoList(Lottos lottos) {
-		lottos.getLottos().stream().map(Lotto::getLottoNumbers).forEach(System.out::println);
+		lottos.getLottos().stream().map(LottoOutputView::getLottoNumbers).forEach(System.out::println);
 		System.out.print("\n");
+	}
+
+	private static List<Integer> getLottoNumbers(Lotto lotto) {
+		return lotto.getLottoNumbers()
+			.stream()
+			.map(LottoNumber::getLottoNumber)
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	public static void displayLottoPrize(WinPrizes winPrizes) {

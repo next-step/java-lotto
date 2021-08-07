@@ -53,7 +53,7 @@ class WinPrizesTest {
 		List<Prize> prizes = winPrizes.winLottos();
 
 		assertThat(prizes.size()).isEqualTo(5);
-		assertThat(winPrizes.findWinPrizeGrade(prizes.get(1))).isEqualTo(5);
+		assertThat(winPrizes.findWinPrizeGrade(prizes.get(0))).isEqualTo(5);
 	}
 
 	@Test
