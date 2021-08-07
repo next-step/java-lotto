@@ -1,8 +1,8 @@
-package step2.domain.user;
+package step3.domain.user;
 
-import step2.domain.lotto.Lotto;
-import step2.domain.money.Cache;
-import step2.domain.money.Money;
+import step3.domain.lotto.Lotto;
+import step3.domain.money.Cache;
+import step3.domain.money.Money;
 import java.util.List;
 
 public class User {

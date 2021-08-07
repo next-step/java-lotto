@@ -1,6 +1,6 @@
-package step2.domain;
+package step3.domain;
 
-import step2.domain.lotto.LottoRank;
+import step3.domain.lotto.LottoRank;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;

@@ -1,7 +1,7 @@
-package step2.view;
+package step3.view;
 
-import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoNumber;
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoNumber;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

@@ -1,4 +1,4 @@
-package step2.domain.money;
+package step3.domain.money;
 
 public interface Money {
 

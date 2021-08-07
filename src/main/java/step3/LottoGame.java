@@ -1,16 +1,16 @@
-package step2;
+package step3;
 
-import step2.domain.ResultOfLottos;
-import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoMachine;
-import step2.domain.lotto.LottoStatistics;
-import step2.domain.lotto.RandomStrategy;
-import step2.domain.money.Cache;
-import step2.domain.money.Money;
-import step2.domain.user.User;
-import step2.domain.user.Wallet;
-import step2.view.InputView;
-import step2.view.ResultView;
+import step3.domain.ResultOfLottos;
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoMachine;
+import step3.domain.lotto.LottoStatistics;
+import step3.domain.lotto.RandomStrategy;
+import step3.domain.money.Cache;
+import step3.domain.money.Money;
+import step3.domain.user.User;
+import step3.domain.user.Wallet;
+import step3.view.InputView;
+import step3.view.ResultView;
 import java.util.List;
 
 public class LottoGame {

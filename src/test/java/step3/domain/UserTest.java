@@ -1,10 +1,10 @@
-package step2.domain;
+package step3.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.money.Cache;
-import step2.domain.money.Money;
-import step2.domain.user.User;
-import step2.domain.user.Wallet;
+import step3.domain.money.Cache;
+import step3.domain.money.Money;
+import step3.domain.user.User;
+import step3.domain.user.Wallet;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

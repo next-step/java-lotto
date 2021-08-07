@@ -1,10 +1,10 @@
-package step2.view;
+package step3.view;
 
-import step2.domain.ResultOfLottos;
-import step2.domain.lotto.Lotto;
-import step2.domain.lotto.LottoRank;
-import step2.domain.lotto.LottoStatistics;
-import step2.domain.lotto.Profit;
+import step3.domain.ResultOfLottos;
+import step3.domain.lotto.Lotto;
+import step3.domain.lotto.LottoRank;
+import step3.domain.lotto.LottoStatistics;
+import step3.domain.lotto.Profit;
 import java.util.List;
 
 public class ResultView {

@@ -1,12 +1,12 @@
-package step2.domain.lotto;
+package step3.domain.lotto;
 
-import step2.util.LottoNumberGenerator;
+import step3.util.LottoNumberGenerator;
 import java.util.List;
 
 public class RandomStrategy implements LottoStrategy {
 
     @Override
-    public List<Integer> createNumbers() {
+    public List<LottoNumber> createNumbers() {
         return LottoNumberGenerator.create();
     }
 }
