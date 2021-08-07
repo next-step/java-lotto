@@ -1,20 +1,19 @@
-package lotto.domain.model;
+package lotto.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import lotto.domain.model.LottoRank;
 
 public class LottoResult {
 
-    private final Map<LottoRank, Integer> rankToCount = Stream.of(LottoRank.values())
-            .collect(Collectors.toMap(Function.identity(), e -> 0));
+    private final Map<LottoRank, Integer> rankToCount = new HashMap<>();
 
-    private LottoResult() {}
+    private LottoResult() {
+    }
 
-    private LottoResult(Map<LottoRank, Integer> rawRankToCount) {
-        this.rankToCount.putAll(rawRankToCount);
+    private LottoResult(Map<LottoRank, Integer> rankToCount) {
+        this.rankToCount.putAll(rankToCount);
     }
 
     public static LottoResult empty() {
@@ -25,19 +24,16 @@ public class LottoResult {
         return new LottoResult(rankToCount);
     }
 
+    public void add(LottoRank lottoRank) {
+        int count = rankToCount.getOrDefault(lottoRank, 0);
+        rankToCount.put(lottoRank, count + 1);
+    }
+
     public int getCountByRank(LottoRank lottoRank) {
-        return rankToCount.get(lottoRank);
+        return rankToCount.getOrDefault(lottoRank, 0);
     }
 
-    public void update(LottoRank lottoRank, int count) {
-        rankToCount.put(lottoRank, rankToCount.get(lottoRank) + count);
-    }
-
-    public void update(LottoRank lottoRank) {
-        update(lottoRank, 1);
-    }
-
-    public int sumWinningMoney() {
+    public int totalPrizeMoney() {
         return rankToCount.entrySet()
                 .stream()
                 .map(e -> e.getKey().getWinningMoney() * e.getValue())

@@ -1,61 +1,49 @@
 package lotto.domain.model;
 
-import static lotto.domain.model.LottoRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.List;
+import lotto.dto.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {
 
-    private LottoTicket winningTicket;
-    private LottoTicket firstPrizeTicket;
-    private LottoTicket thirdPrizeTicket;
-    private LottoTicket fourthPrizeTicket;
-    private LottoTicket fifthPrizeTicket;
-    private LottoTicket noPrizeTicket;
+    private WinningTicket winningTicket;
+    private List<LottoTicket> ticketList;
+    private LottoResult expected;
 
     @BeforeEach
     void setUp() {
-        winningTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
-        firstPrizeTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
-        thirdPrizeTicket = LottoTicket.of("1, 2, 3, 4, 5, 7");
-        fourthPrizeTicket = LottoTicket.of("1, 2, 3, 4, 7, 8");
-        fifthPrizeTicket = LottoTicket.of("1, 2, 3, 7, 8, 9");
-        noPrizeTicket = LottoTicket.of("1, 2, 9, 10, 11, 12");
+        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        winningTicket = WinningTicket.of(lottoTicket, bonusNumber);
+
+        ticketList = new ArrayList<>(Arrays.asList(
+                LottoTicket.of("1, 2, 3, 4, 5, 7"),
+                LottoTicket.of("1, 2, 3, 4, 5, 6")
+        ));
+
+        expected = LottoResult.empty();
+        expected.add(LottoRank.FIRST);
+        expected.add(LottoRank.SECOND);
     }
 
     @Test
-    void match_one_first_one_third() {
-        LottoTickets lottoTickets = LottoTickets.of(
-                Arrays.asList(firstPrizeTicket, thirdPrizeTicket));
-
-        LottoResult expectedResults = LottoResult.empty();
-        expectedResults.update(FIRST, 1);
-        expectedResults.update(THIRD, 1);
-
-        LottoResult actualResults = lottoTickets.match(winningTicket);
-        assertThat(actualResults).isEqualTo(expectedResults);
+    void match_SingleCount() {
+        LottoTickets lottoTickets = LottoTickets.of(ticketList);
+        LottoResult lottoResult = lottoTickets.match(winningTicket);
+        assertThat(lottoResult).isEqualTo(expected);
     }
 
     @Test
-    void match_two_fourth_one_fifth_one_miss() {
-        LottoTickets lottoTickets = LottoTickets.of(
-                Arrays.asList(fourthPrizeTicket, fifthPrizeTicket, noPrizeTicket,
-                        fourthPrizeTicket));
-
-        Map<LottoRank, Integer> rankToCount = Stream.of(new Object[][]{
-                {FOURTH, 2},
-                {FIFTH, 1},
-                {MISS, 1}
-        }).collect(Collectors.toMap(data -> (LottoRank) data[0], data -> (int) data[1]));
-        LottoResult expected = LottoResult.of(rankToCount);
-
-        LottoResult actual = lottoTickets.match(winningTicket);
-        assertThat(actual).isEqualTo(expected);
+    void match_MultipleCounts() {
+        ticketList.add(LottoTicket.of("1, 2, 3, 4, 5, 7"));
+        expected.add(LottoRank.SECOND);
+        LottoTickets lottoTickets = LottoTickets.of(ticketList);
+        LottoResult lottoResult = lottoTickets.match(winningTicket);
+        assertThat(lottoResult).isEqualTo(expected);
     }
 }

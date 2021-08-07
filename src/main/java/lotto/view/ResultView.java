@@ -1,37 +1,58 @@
 package lotto.view;
 
-import lotto.domain.model.LottoResult;
+import java.util.Arrays;
+import java.util.List;
+import lotto.dto.LottoResult;
 import lotto.domain.model.LottoRank;
-import lotto.domain.model.LottoTickets;
+import lotto.dto.LottoTicketDto;
 
 public class ResultView {
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
-        lottoTickets.getTickets()
-                .forEach(ticket -> System.out.println(ticket.values()));
+    public static final String NEWLINE = System.lineSeparator();
+    public static final String TICKET_HEADER_TEMPLATE = "%d개를 구매했습니다.";
+    public static final String RESULT_HEADER = NEWLINE + "당첨 통계" + NEWLINE + "---------";
+    public static final String RANK_RESULT_TEMPLATE = "%d개 일치 (%d원)";
+    public static final String RANK_SECOND_RESULT_TEMPLATE = "%d개 일치, 보너스 볼 일치(%d원)";
+    public static final String PROFIT_TEMPLATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
+    public static final String LOSS_TEMPLATE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
+    public static void printLottoTickets(List<LottoTicketDto> tickets) {
+        String headerMessage = String.format(TICKET_HEADER_TEMPLATE, tickets.size());
+        System.out.println(headerMessage);
+        tickets.forEach(ticket -> System.out.println(ticket.values()));
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        LottoRank.getValuesForPrinting()
-                .forEach(rank -> printResultByRank(lottoResult, rank));
+        System.out.println(RESULT_HEADER);
+        Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.MISS)
+                .forEach(rank -> printRankResult(lottoResult, rank));
     }
 
-    private static void printResultByRank(LottoResult lottoResult, LottoRank lottoRank) {
-        int countMatch = lottoRank.getCountOfMatch();
-        int moneyRank = lottoRank.getWinningMoney();
-        int countRank = lottoResult.getCountByRank(lottoRank);
-        System.out.printf("%d개 일치 (%d원)- %d개\n", countMatch, moneyRank, countRank);
+    private static void printRankResult(LottoResult lottoResult, LottoRank lottoRank) {
+        String prefix = rankMessage(lottoRank);
+        int countByRank = lottoResult.getCountByRank(lottoRank);
+        String message = String.format(prefix + " - %d개", countByRank);
+        System.out.println(message);
     }
 
-    public static void printProfitPercent(double profitPercent) {
-        String message = String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 ", profitPercent);
-        if (profitPercent < 1.0) {
-            System.out.println(message + "손해라는 의미임)");
-            return;
+    private static String rankMessage(LottoRank lottoRank) {
+        int countOfMatch = lottoRank.getCountOfMatch();
+        int winningMoney = lottoRank.getWinningMoney();
+        if (lottoRank == LottoRank.SECOND) {
+            return String.format(RANK_SECOND_RESULT_TEMPLATE, countOfMatch, winningMoney);
         }
-        System.out.println(message + "이익이라는 의미임)");
+        return String.format(RANK_RESULT_TEMPLATE, countOfMatch, winningMoney);
+    }
+
+    public static void printProfit(double profitPercent) {
+        System.out.println(profitMessage(profitPercent));
+    }
+
+    private static String profitMessage(double profitPercent) {
+        if (profitPercent < 1.0) {
+            return String.format(LOSS_TEMPLATE, profitPercent);
+        }
+        return String.format(PROFIT_TEMPLATE, profitPercent);
     }
 }

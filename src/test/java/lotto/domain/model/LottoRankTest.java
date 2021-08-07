@@ -1,61 +1,42 @@
 package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.DisplayName;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 
 public class LottoRankTest {
 
-    @Test
-    @DisplayName("일치하는 수의 개수가 1등이다.")
-    void of_first() {
-        LottoRank first = LottoRank.of(6);
-        assertThat(first).isEqualTo(LottoRank.FIRST);
+    @ParameterizedTest(name = "{index} LottoRank.of({0}, {1}) == {2}")
+    @MethodSource
+    void of_returnsCorrectLottoRank(int countOfMatch, boolean matchBonus, LottoRank expected) {
+        LottoRank lottoRank = LottoRank.of(countOfMatch, matchBonus);
+        assertThat(lottoRank).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> of_returnsCorrectLottoRank() {
+        return Stream.of(
+                Arguments.of(6, false, LottoRank.FIRST),
+                Arguments.of(5, true, LottoRank.SECOND),
+                Arguments.of(5, false, LottoRank.THIRD),
+                Arguments.of(4, true, LottoRank.FOURTH),
+                Arguments.of(4, false, LottoRank.FOURTH),
+                Arguments.of(3, true, LottoRank.FIFTH),
+                Arguments.of(3, false, LottoRank.FIFTH),
+                Arguments.of(2, true, LottoRank.MISS),
+                Arguments.of(2, false, LottoRank.MISS)
+        );
     }
 
     @Test
-    @DisplayName("일치하는 수의 개수가 3등이다.")
-    void of_third() {
-        LottoRank third = LottoRank.of(5);
-        assertThat(third).isEqualTo(LottoRank.THIRD);
-    }
-
-    @Test
-    @DisplayName("일치하는 수의 개수가 4등이다.")
-    void of_fourth() {
-        LottoRank first = LottoRank.of(4);
-        assertThat(first).isEqualTo(LottoRank.FOURTH);
-    }
-
-    @Test
-    @DisplayName("일치하는 수의 개수가 5등이다.")
-    void of_fifth() {
-        LottoRank first = LottoRank.of(3);
-        assertThat(first).isEqualTo(LottoRank.FIFTH);
-    }
-
-    @Test
-    @DisplayName("일치하는 수의 개수가 꽝이다.")
-    void of_miss() {
-        LottoRank first = LottoRank.of(3);
-        assertThat(first).isEqualTo(LottoRank.FIFTH);
-    }
-
-    @ParameterizedTest
-    @EnumSource(
-            value = LottoRank.class,
-            names = {"MISS"},
-            mode = EnumSource.Mode.EXCLUDE)
-    void isNotMiss_true(LottoRank lottoRank) {
-        assertThat(lottoRank.isNotMiss()).isTrue();
-    }
-
-    @Test
-    @DisplayName("MISS 등급은 MISS 등급이 아니라고 인지한다.")
-    void isNotMiss_false() {
-        assertThat(LottoRank.MISS.isNotMiss()).isFalse();
+    void of_throwsIllegalArgumentException() {
+        assertThatThrownBy(() ->
+                LottoRank.of(7, true)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
