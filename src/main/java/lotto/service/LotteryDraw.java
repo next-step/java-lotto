@@ -23,6 +23,10 @@ public class LotteryDraw {
     this.lotteries = gameApplication.getLotteriesInfo();
   }
 
+  public LotteryDraw() {
+
+  }
+
   public Lotto inputWinningNumbers(String winningLottery) {
     return Lotto.getWinningLotto(splitWinningNumbers(winningLottery));
   }
@@ -57,7 +61,7 @@ public class LotteryDraw {
 
   private int getCalculation(final Map<Rank, List<Lotto>> result, final Integer ratingNumber) {
     return Operation.chooseOperation(Operation.MULTIPLE)
-        .calculation(result.get(ratingNumber).size(), Rank.matchRank(ratingNumber).getWinningMoney());
+        .calculation(result.get(Rank.matchRank(ratingNumber)).size(), Rank.matchRank(ratingNumber).getWinningMoney());
   }
 
 }

@@ -11,8 +11,6 @@ public class Lotteries {
 
   private static final int INT_ZERO = 0;
 
-  private static final int LIMIT_MATCH_NUMBER = 3;
-
   private final List<Lotto> lottos = new ArrayList<>();
 
   public Lotteries(int count) {
@@ -43,7 +41,7 @@ public class Lotteries {
     return categoriesRank;
   }
 
-  public Rank getMatchLotteries(Lotto lotty, Lotto winLotto) {
+  private Rank getMatchLotteries(Lotto lotty, Lotto winLotto) {
     int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
       count = checkContainValues(winLotto, count, lottoNumber);
