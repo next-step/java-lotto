@@ -17,12 +17,12 @@ public enum Prize {
     private final int prizeAmount;
     private final int numberOfMatches;
 
-    Prize(int prizeAmount, int numberOfMatches) {
+    Prize(final int prizeAmount, final int numberOfMatches) {
         this.prizeAmount = prizeAmount;
         this.numberOfMatches = numberOfMatches;
     }
 
-    public static Prize findByNumberOfMatchers(int count) {
+    public static Prize findByNumberOfMatchers(final int count) {
         return Arrays.stream(Prize.values())
                 .filter(winningPrize -> winningPrize.numberOfMatches == count)
                 .findAny()

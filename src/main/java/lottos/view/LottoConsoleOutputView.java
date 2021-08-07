@@ -14,17 +14,16 @@ import java.util.stream.Collectors;
 
 public class LottoConsoleOutputView {
 
-    public void printLottos(Lottos lottos) {
+    public void printLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.elements()) {
             System.out.println(lotto.elements());
         }
         System.out.println();
     }
 
-    public void printStatistics(Statistics statistics) {
-        printIntroStatistics();
-        printNumberOfMatches(statistics);
-        printYield(statistics);
+    public void printPurchaseCount(final Lottos lottos) {
+        int purchaseCount = lottos.elements().size();
+        System.out.printf("%d개를 구매했습니다.%n", purchaseCount);
     }
 
     private void printIntroStatistics() {
@@ -33,7 +32,13 @@ public class LottoConsoleOutputView {
         System.out.println("----------");
     }
 
-    private void printNumberOfMatches(Statistics statistics) {
+    public void printStatistics(final Statistics statistics) {
+        printIntroStatistics();
+        printNumberOfMatches(statistics);
+        printYield(statistics);
+    }
+
+    private void printNumberOfMatches(final Statistics statistics) {
         Map<Prize, List<Prize>> prizeMap = statistics.groupingByPrize();
 
         List<Prize> winningPrizes = Arrays.stream(Prize.values())
@@ -50,7 +55,7 @@ public class LottoConsoleOutputView {
         }
     }
 
-    private void printYield(Statistics statistics) {
+    private void printYield(final Statistics statistics) {
         Double yield = statistics.calculateYield();
         System.out.printf("수익률은 %.2f입니다.", yield);
     }

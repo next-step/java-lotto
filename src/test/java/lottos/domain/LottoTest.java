@@ -2,6 +2,9 @@ package lottos.domain;
 
 import lottos.domain.exceptions.LottoSizeIncorrectException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 
@@ -9,9 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
+    private LottoGenerator generator = new LottoRandomGenerator();
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @CsvSource(value = {"1,2,3,4,5:6", "1,2,3,4,5,6,7"}, delimiter = ':')
+    void 여섯개의_숫자로_이루어진_로또가_아니면_에러(final String numbersText) {
+        assertThrows(LottoSizeIncorrectException.class, () -> new Lotto(numbersText));
+    }
+
     @Test
     void 로또_랜덤_생성() {
-        Lotto lotto = new Lotto(new LottoRandomGenerator());
+        Lotto lotto = new Lotto(generator.generate());
 
         assertEquals(lotto.elements().size(), 6);
         for (Integer number : lotto.elements()) {

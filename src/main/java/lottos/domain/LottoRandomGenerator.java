@@ -23,7 +23,7 @@ public class LottoRandomGenerator implements LottoGenerator {
     }
 
     private List<Integer> getNumbers() {
-        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
+        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }

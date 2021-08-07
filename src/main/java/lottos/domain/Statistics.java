@@ -9,7 +9,7 @@ public class Statistics {
     private int purchaseAmount;
     private List<LottoResult> lottoResults;
 
-    public Statistics(int purchaseAmount, List<LottoResult> lottoResults) {
+    public Statistics(final int purchaseAmount, final List<LottoResult> lottoResults) {
         this.purchaseAmount = purchaseAmount;
         this.lottoResults = lottoResults;
     }

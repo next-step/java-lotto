@@ -14,22 +14,21 @@ import java.util.Scanner;
 
 public class ApplicationRunner {
 
-    private static final int AMOUNT_PER_PIECE = 1000;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        LottoConsoleInputView lottoConsoleInputView = new LottoConsoleInputView();
+        LottoConsoleInputView lottoConsoleInputView = new LottoConsoleInputView(scanner);
         LottoConsoleOutputView lottoConsoleOutputView = new LottoConsoleOutputView();
         LottoConsoleController lottoConsoleController = new LottoConsoleController();
 
-        int purchaseAmount = lottoConsoleInputView.enterPurchaseAmount(scanner, AMOUNT_PER_PIECE);
-        Lottos purchaseLottos = lottoConsoleController.buy(purchaseAmount, AMOUNT_PER_PIECE);
+        int purchaseAmount = lottoConsoleInputView.enterPurchaseAmount();
+        Lottos purchaseLottos = lottoConsoleController.buy(purchaseAmount);
+        lottoConsoleOutputView.printPurchaseCount(purchaseLottos);
         lottoConsoleOutputView.printLottos(purchaseLottos);
 
-        String lastWeeksNumberText = lottoConsoleInputView.enterLastWeeksNumbers(scanner);
-        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto(lastWeeksNumberText);
+        String lastWeeksNumbersText = lottoConsoleInputView.enterLastWeeksNumbers();
+        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto(lastWeeksNumbersText);
         List<LottoResult> lottoResults = purchaseLottos.match(lastWeekWiningLotto);
         lottoConsoleOutputView.printStatistics(new Statistics(purchaseAmount, lottoResults));
 
