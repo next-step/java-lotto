@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.exception.LackMoneyException;
 import lotto.model.LottoShop;
 import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
@@ -47,7 +48,7 @@ public class LottoConsoleApplication {
 
     private static void validate(final int payment, final int manualLottoCount) {
         if (payment < manualLottoCount * LOTTO_PRICE) {
-            throw new IllegalArgumentException("don't have enough money to buy a lotto. Exit the game.");
+            throw new LackMoneyException();
         }
     }
 
