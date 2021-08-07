@@ -1,10 +1,12 @@
 ### 기능 요구사항
 
-- [ ] 일정한 금액을 투입하고 투입 금액만큼의 로또를 구입 할 수 있어야한다. #LottoGame#main()
+- [x] 일정한 금액을 투입하고 투입 금액만큼의 로또를 구입 할 수 있어야한다. #LottoGame#main()
 - [x] 사용자는 로또를 구입 할 수 있다 #User#buyLotto()
     - [x] 로또 기계에서 투입 금액만큼의 로또를 살 수 있다. #LottoMachine#createLottos()
         - [x] 로또를 만든다. #Lotto#createLotto()
-            - [x] 음수로 된 로또 번호가 들어 올 시에 IllegalArgument 발생
+          - [ ] 2등을 위해 추가 번호를 하나 더 추첨한다. 
+            - [ ] 1~45 숫자가 아니면 IllegalArgument 발생
+            - [ ] 6개의 숫자가 아니면 IllegalArgument 발생
     - [x] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #LottoNumberGenerator#create()
     - [x] 사용자는 돈을 뺄 수 있다. #User#withDrow()
         - [x] 지갑은 돈을 뺄 수 있다. #Wallet#withDrow()
@@ -12,6 +14,7 @@
     - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #User#save()
         - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #Wallet#save()
 - [x] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
+    - [ ] 당첨 통계에 2등도 추가해야 한다.
 - [] 로또 수익률을 보여준다. #LottoStatistics#profic()
 - [x] 로또 당첨 번호를 입력 할 수 있다. #LottoMachine#winOfLotto()
 
@@ -30,4 +33,3 @@
     - 참고문서: https://google.github.io/styleguide/javaguide.html 또는 https://myeonguni.tistory.com/1596
 - [ ] else 예약어를 쓰지 않는다.
     - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
-    
