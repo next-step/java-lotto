@@ -1,44 +1,42 @@
 package lotto.controller;
 
 import lotto.domain.model.LottoMoney;
-import lotto.domain.model.LottoResult;
+import lotto.domain.model.LottoNumber;
+import lotto.dto.LottoResult;
 import lotto.domain.model.LottoTicket;
 import lotto.domain.model.LottoTickets;
+import lotto.domain.model.WinningTicket;
 import lotto.domain.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
 
-    private final LottoTickets userTickets;
-    private final LottoTicket winningTicket;
-    private final LottoMoney lottoMoney;
-
-    private LottoController(LottoTickets userTickets, LottoTicket winningTicket,
-            LottoMoney lottoMoney) {
-        this.userTickets = userTickets;
-        this.winningTicket = winningTicket;
-        this.lottoMoney = lottoMoney;
+    private static WinningTicket askForWinningTicket() {
+        String ticketText = InputView.winningLotto();
+        String bonusText = InputView.bonusBall();
+        LottoTicket lottoTicket = LottoTicket.of(ticketText);
+        LottoNumber bonusNumber = LottoNumber.of(bonusText);
+        return WinningTicket.of(lottoTicket, bonusNumber);
     }
 
-    public static LottoController fromInput() {
-        int amount = InputView.askHowMuch();
-        LottoMoney lottoMoney = LottoMoney.of(amount);
-        LottoTickets randomTickets = LottoService.randomTickets(lottoMoney);
-        ResultView.printLottoTickets(randomTickets);
+    public static void run() {
+        // money
+        int amountOfMoney = InputView.howMuch();
+        LottoMoney money = LottoMoney.of(amountOfMoney);
 
-        String winningLottoText = InputView.askForWinningLotto();
-        LottoTicket winningTicket = LottoTicket.of(winningLottoText);
+        // tickets
+        int numberOfTickets = money.numberOfTickets();
+        LottoTickets lottoTickets = LottoService.generateRandomTickets(numberOfTickets);
+        ResultView.printLottoTickets(lottoTickets.getTicketDtos());
 
-        return new LottoController(randomTickets, winningTicket, lottoMoney);
-    }
-
-    public void run() {
-        LottoResult lottoResult = userTickets.match(winningTicket);
-
+        // winning ticket
+        WinningTicket winningTicket = askForWinningTicket();
+        LottoResult lottoResult = lottoTickets.match(winningTicket);
         ResultView.printLottoResult(lottoResult);
 
-        double profitPercent = LottoService.profitPercent(lottoResult, lottoMoney);
-        ResultView.printProfitPercent(profitPercent);
+        // profit
+        double profitMargin = LottoService.profitMargin(lottoResult, money);
+        ResultView.printProfit(profitMargin);
     }
 }

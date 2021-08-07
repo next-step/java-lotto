@@ -40,15 +40,11 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    private int countMatches(LottoTicket winningTicket) {
-        // safe from overflow when casting to int since LOTTO_SIZE == 6
+    public int countMatches(LottoTicket winningTicket) {
+        // safe to downcast since LOTTO_SIZE == 6
         return (int) lottoNumbers.stream()
                 .filter(winningTicket::contains)
                 .count();
-    }
-
-    public LottoRank findRank(LottoTicket winningTicket) {
-        return LottoRank.of(countMatches(winningTicket));
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
