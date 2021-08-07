@@ -8,9 +8,7 @@ public class Lottos {
 
 	private final List<Lotto> lottos = new ArrayList<>();
 
-	public Lottos () {
-
-	}
+	public Lottos() {}
 
 	public Lottos(int money, LottoNumberGenerator generator) {
 		buy(new Money(money), generator);
