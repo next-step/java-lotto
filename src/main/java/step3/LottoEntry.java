@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LottoEntry {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final LottoNumbers lottoNumbers;
+    protected final LottoNumbers lottoNumbers;
 
     public LottoEntry(List<Integer> numbers) {
         validate(numbers);
@@ -24,6 +24,10 @@ public class LottoEntry {
         return this.lottoNumbers.countMatch(lottoEntry.lottoNumbers);
     }
 
+    public boolean contains(int number) {
+        return this.lottoNumbers.contains(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,8 +41,7 @@ public class LottoEntry {
         return Objects.hash(lottoNumbers);
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public String toNumbersString() {
+        return lottoNumbers.toOutputString();
     }
 }

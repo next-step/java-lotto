@@ -1,4 +1,4 @@
-package step2;
+package step3;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,6 +28,12 @@ public class LottoBucket implements Iterable<LottoEntry> {
         return lottoEntries.size();
     }
 
+    public String toOutputString() {
+        return lottoEntries.stream()
+                .map(LottoEntry::toNumbersString)
+                .collect(Collectors.joining("\n"));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,13 +45,6 @@ public class LottoBucket implements Iterable<LottoEntry> {
     @Override
     public int hashCode() {
         return Objects.hash(lottoEntries);
-    }
-
-    @Override
-    public String toString() {
-        return lottoEntries.stream()
-                .map(LottoEntry::toString)
-                .collect(Collectors.joining("\n"));
     }
 
     @Override
