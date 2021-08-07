@@ -12,7 +12,7 @@ import lotto.model.WinPrizes;
 public class SearchPrize {
 
 	public static WinPrizes drawWinPrize(Lottos lottos, Lotto lastWinningLotto) {
-		Map<Prize, Integer> winPrizes = Prize.getPrizeByMoneySort()
+		Map<Prize, Integer> winPrizes = Prize.getValuesMoneySort()
 			.stream()
 			.collect(Collectors.toMap(prize -> prize, prize -> 0, (a, b) -> b, LinkedHashMap::new));
 		for (Lotto lotto : lottos.getLottos()) {

@@ -28,7 +28,7 @@ public class WinPrizes {
 			.sum();
 	}
 
-	public List<Prize> winTheLotto() {
+	public List<Prize> winLottos() {
 		return new ArrayList<>(this.winPrizes.keySet());
 	}
 

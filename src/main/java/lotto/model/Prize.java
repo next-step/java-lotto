@@ -28,7 +28,7 @@ public enum Prize {
 		return winningMoney;
 	}
 
-	public static List<Prize> getPrizeByMoneySort() {
+	public static List<Prize> getValuesMoneySort() {
 		return Arrays.stream(Prize.values())
 			.sorted(Comparator.comparing(Prize::getWinningMoney))
 			.collect(Collectors.toList());
