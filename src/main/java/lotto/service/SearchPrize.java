@@ -16,7 +16,7 @@ public class SearchPrize {
 			.collect(Collectors.toMap(prize -> prize, prize -> 0, (a, b) -> b));
 		for (Lotto lotto : lottos.getLottos()) {
 			Prize winPrize = Prize.getWinnersStatus(
-				(int)lotto.getLotto().stream().filter(lastWinningLotto.getLotto()::contains).count());
+				(int)lotto.getLottoNumbers().stream().filter(lastWinningLotto.getLottoNumbers()::contains).count());
 			winPrizes.put(winPrize, winPrizes.get(winPrize) + 1);
 		}
 		return new WinPrizes(winPrizes);
