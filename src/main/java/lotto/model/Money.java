@@ -29,7 +29,7 @@ public class Money {
 	}
 
 	private static void checkPositive(int money) {
-		if (money < 0) {
+		if (money < ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_POSITIVE_MESSAGE);
 		}
 	}

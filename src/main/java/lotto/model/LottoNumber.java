@@ -6,6 +6,8 @@ import lotto.message.ErrorMessage;
 
 public class LottoNumber {
 
+	public static final int MINIMUM_NUMBER = 0;
+	public static final int MAXIMUM_NUMBER = 45;
 	private final int lottoNumber;
 
 	public LottoNumber(int lottoNumber) {
@@ -18,7 +20,7 @@ public class LottoNumber {
 	}
 
 	private void checkNumberRange(int lottoNumber) {
-		if (lottoNumber < 0 || lottoNumber > 45) {
+		if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE_MESSAGE);
 		}
 	}

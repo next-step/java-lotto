@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
+import lotto.model.Lotto;
 import lotto.model.Money;
-import lotto.model.WinnerLotto;
 
 public class LottoInputView {
 
@@ -26,8 +26,8 @@ public class LottoInputView {
 		return money;
 	}
 
-	public static WinnerLotto inputLastWinningLotto() {
+	public static Lotto inputLastWinningLotto() {
 		System.out.println(LAST_WIN_NUMBER_MESSAGE);
-		return new WinnerLotto(scanner.nextLine());
+		return new Lotto(scanner.nextLine());
 	}
 }

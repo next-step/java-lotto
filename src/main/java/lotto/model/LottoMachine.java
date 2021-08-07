@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -23,8 +24,11 @@ public class LottoMachine {
 		throw new AssertionError(LOTTO_MACHINE_CREATE_MESSAGE);
 	}
 
-	public static LottoBalls createLottoNumbers() {
+	public static Lotto createLottoNumbers() {
 		Collections.shuffle(lottoBalls);
-		return new LottoBalls(lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE));
+		return new Lotto(lottoBalls.subList(LOTTO_START_SIZE, LOTTO_END_SIZE)
+			.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toList()));
 	}
 }
