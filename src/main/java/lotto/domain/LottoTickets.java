@@ -34,4 +34,8 @@ public final class LottoTickets {
         }
         return new LottoStatistic(hashMap);
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }
