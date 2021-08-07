@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoMachine;
-import step3.domain.lotto.LottoRank;
 import step3.domain.lotto.LottoNumber;
+import step3.domain.lotto.LottoRank;
 import step3.domain.lotto.LottoStatistics;
 import step3.domain.lotto.Profit;
 import step3.domain.lotto.ResultOfLottos;
@@ -39,10 +39,11 @@ class LottoStatisticsTest {
 
         ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedResult);
 
-        LottoNumber[] givenLottoNumbers = {new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
-            new LottoNumber(10)};
+        List<LottoNumber> givenLottoNumbers = Arrays
+            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
+                new LottoNumber(10));
 
-        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenLottoNumbers)));
+        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
@@ -62,10 +63,11 @@ class LottoStatisticsTest {
 
         ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedLottoStrategy);
 
-        LottoNumber[] givenNumbers = {new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(11), new LottoNumber(12),
-            new LottoNumber(13)};
+        List<LottoNumber> givenLottoNumbers = Arrays
+            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
+                new LottoNumber(10));
 
-        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenNumbers)));
+        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
@@ -79,9 +81,11 @@ class LottoStatisticsTest {
     @Test
     void profilt() {
         Profit expectedLottoProfit = new Profit(5);
-        LottoNumber[] givenNumbers = {new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(12), new LottoNumber(13),
-            new LottoNumber(14)};
-        LottoMachine lottoMachine = new LottoMachine(new InputNumberStrategy(Arrays.asList(givenNumbers)));
+        List<LottoNumber> givenLottoNumbers = Arrays
+            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
+                new LottoNumber(10));
+
+        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         ResultOfLottos resultOfLottos = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
