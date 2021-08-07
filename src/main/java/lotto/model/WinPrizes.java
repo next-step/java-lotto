@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import lotto.utils.PrizeComparator;
-
 public class WinPrizes {
 
 	private final Map<Prize, Integer> winPrizes;
@@ -30,10 +28,8 @@ public class WinPrizes {
 			.sum();
 	}
 
-	public List<Prize> drawResultWinPrizes() {
-		List<Prize> winPrizes = new ArrayList<>(this.winPrizes.keySet());
-		winPrizes.sort(new PrizeComparator());
-		return winPrizes;
+	public List<Prize> winTheLotto() {
+		return new ArrayList<>(this.winPrizes.keySet());
 	}
 
 	public int getLottoCount() {

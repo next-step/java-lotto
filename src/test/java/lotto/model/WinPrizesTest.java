@@ -50,7 +50,7 @@ class WinPrizesTest {
 	@DisplayName("당첨에 대한 정보를 알수있다.")
 	public void resultWinPrize() {
 		WinPrizes winPrizes = new WinPrizes(getWinPrizeTotalMoney());
-		List<Prize> prizes = winPrizes.drawResultWinPrizes();
+		List<Prize> prizes = winPrizes.winTheLotto();
 
 		assertThat(prizes.size()).isEqualTo(5);
 		assertThat(winPrizes.findWinPrizeGrade(prizes.get(1))).isEqualTo(5);
