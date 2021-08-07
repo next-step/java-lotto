@@ -19,7 +19,7 @@ public class LottoResult {
 	}
 
 	public void match(Lotto winningNumbers, LottoNumber bonusNumber) {
-		if (winningNumbers.hasBonus(bonusNumber)) {
+		if (winningNumbers.contains(bonusNumber)) {
 			throw new LottoBonusNumberException();
 		}
 		putIntoMap(winningNumbers, bonusNumber);
@@ -28,7 +28,7 @@ public class LottoResult {
 	private void putIntoMap(Lotto winningNumbers, LottoNumber bonusNumber) {
 		for (Lotto lotto : lottos.toList()) {
 			int quantity = lotto.matchingQuantityFrom(winningNumbers);
-			boolean matchBonus = lotto.hasBonus(bonusNumber);
+			boolean matchBonus = lotto.contains(bonusNumber);
 			putResult(quantity, matchBonus);
 		}
 	}

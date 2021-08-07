@@ -47,14 +47,14 @@ public class Lotto {
 
 	public int matchingQuantityFrom(Lotto lastWeekNumbers) {
 		int matchedCount = 0;
-		for (LottoNumber lastWeekNumber : lastWeekNumbers.numbers()) {
-			matchedCount += numbers.contains(lastWeekNumber) ? 1 : 0;
+		for (LottoNumber lastWeekNumber : lastWeekNumbers.numbers) {
+			matchedCount += contains(lastWeekNumber) ? 1 : 0;
 		}
 		return matchedCount;
 	}
 
-	public boolean hasBonus(LottoNumber bonusNumber) {
-		return numbers.contains(bonusNumber);
+	public boolean contains(LottoNumber lottoNumber) {
+		return numbers.contains(lottoNumber);
 	}
 
 	@Override
