@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Lottos {
 
-	private final List<Lotto> lottoList = new ArrayList<>();
+	private final List<Lotto> lottos = new ArrayList<>();
 
 	public void buy(int money, LottoNumberGenerator generator) {
 		buy(new Money(money), generator);
@@ -21,15 +21,15 @@ public class Lottos {
 
 	private void addLotto(LottoNumberGenerator generator) {
 		Lotto lotto = new Lotto(generator.generate());
-		lottoList.add(lotto);
+		lottos.add(lotto);
 	}
 
 	public int size() {
-		return lottoList.size();
+		return lottos.size();
 	}
 
 	public List<Lotto> toList() {
-		return Collections.unmodifiableList(lottoList);
+		return Collections.unmodifiableList(lottos);
 	}
 
 }
