@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.exception.LackMoneyException;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -40,7 +42,7 @@ public class LottoShop {
 
     private void validate(final int payment) {
         if (payment < LOTTO_PRICE) {
-            throw new IllegalArgumentException("don't have enough money.");
+            throw new LackMoneyException();
         }
     }
 
