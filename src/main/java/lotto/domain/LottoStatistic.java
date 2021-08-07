@@ -25,7 +25,7 @@ public final class LottoStatistic {
     private double sum(double totalSum, LottoRank lottoRank) {
         Integer matchingCount = statistic.get(lottoRank);
         if (matchingCount > 0) {
-            totalSum += lottoRank.AMOUNT * matchingCount;
+            totalSum += lottoRank.getAmount() * matchingCount;
         }
         return totalSum;
     }

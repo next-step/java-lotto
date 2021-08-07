@@ -18,7 +18,7 @@ public class LottoApplication {
         LottoTickets lottoTickets = lottoShop.buy(purchaseAmount, lottoGenerator);
 
         // 내가 산 로또 출력
-        ResultView.showLottoTickets(lottoTickets);
+        ResultView.showBuyLottoTickets(lottoTickets);
 
         // 당첨 번호 입력
         List<Integer> winningNumbers = InputView.getWinningNumber();

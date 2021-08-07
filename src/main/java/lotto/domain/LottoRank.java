@@ -10,26 +10,26 @@ public enum LottoRank {
     FOURTH_PLACE(3, 5_000),
     NO_PLACE(0, 0);
 
-    protected final int MATCH_COUNT;
-    protected final long AMOUNT;
+    private final int matchCount;
+    private final long amount;
 
     LottoRank(int matchCount, long amount) {
-        MATCH_COUNT = matchCount;
-        AMOUNT = amount;
+        this.matchCount = matchCount;
+        this.amount = amount;
     }
 
     public static LottoRank of(int matchCount) {
         return Arrays.stream(values())
-                .filter(rank -> rank.MATCH_COUNT == matchCount)
+                .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(NO_PLACE);
     }
 
-    public int getMATCH_COUNT() {
-        return MATCH_COUNT;
+    public int getMatchCount() {
+        return matchCount;
     }
 
-    public long getAMOUNT() {
-        return AMOUNT;
+    public long getAmount() {
+        return amount;
     }
 }

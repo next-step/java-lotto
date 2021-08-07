@@ -18,9 +18,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void showLottoTickets(LottoTickets lottoTickets) {
+    public static void showBuyLottoTickets(LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-
         showBuyCountInfo(lottoTicketList.size());
         for (LottoTicket lottoTicket : lottoTicketList) {
             System.out.println(lottoTicket);
@@ -32,30 +31,33 @@ public class ResultView {
     }
 
     public static void showLottoResult(LottoStatistic lottoStatistic, long amount) {
-
         System.out.println();
         System.out.println(RESULT_MESSAGE_PRE);
         System.out.println(RESULT_MESSAGE_LINE);
 
-        showLottoDetailResult(lottoStatistic);
+        showLottoStatistic(lottoStatistic);
         showLottoProfitRate(lottoStatistic, amount);
     }
 
-    private static void showLottoDetailResult(LottoStatistic lottoStatistic) {
-        showDetailMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE);
-        showDetailMatchInfo(lottoStatistic, LottoRank.THIRD_PACE);
-        showDetailMatchInfo(lottoStatistic, LottoRank.SECOND_PLACE);
-        showDetailMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE);
+    private static void showLottoStatistic(LottoStatistic lottoStatistic) {
+        showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.THIRD_PACE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND_PLACE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE);
     }
 
-    private static void showDetailMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank) {
-        System.out.printf(RESULT_DETAIL_TEMPLATE, lottoRank.getMATCH_COUNT(), lottoRank.getAMOUNT(), lottoStatistic.getRankCount(lottoRank));
+    private static void showLottoMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank) {
+        System.out.printf(
+                RESULT_DETAIL_TEMPLATE,
+                lottoRank.getMatchCount(),
+                lottoRank.getAmount(),
+                lottoStatistic.getRankCount(lottoRank)
+        );
         System.out.println();
     }
 
     private static void showLottoProfitRate(LottoStatistic lottoStatistic, long amount) {
         String profitRate = lottoStatistic.getProfitRate(amount);
-        System.out.println(String.format(RESULT_PROFIT_TEMPLATE, profitRate));
+        System.out.printf(RESULT_PROFIT_TEMPLATE + "%n", profitRate);
     }
-
 }

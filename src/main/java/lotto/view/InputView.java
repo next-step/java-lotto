@@ -10,7 +10,6 @@ public class InputView {
     private static final String MESSAGE_INPUT_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String NUMBER_SEPARATOR = ",";
-
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputView() {
@@ -28,7 +27,7 @@ public class InputView {
         System.out.println(MESSAGE_INPUT_WINNING_NUMBER);
         String input = SCANNER.nextLine();
 
-        String[] inputArr = input.trim().split(NUMBER_SEPARATOR);
+        String[] inputArr = input.split(NUMBER_SEPARATOR);
 
         return Arrays.stream(inputArr)
                 .map(String::trim)
