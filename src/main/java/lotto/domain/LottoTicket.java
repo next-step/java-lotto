@@ -43,4 +43,8 @@ public class LottoTicket {
             throw new WrongLottoTicketException("로또티켓은 6개의 숫자를 가져야만 합니다.");
         }
     }
+
+    public List<LottoNumber> value() {
+        return lottoNumbers;
+    }
 }
