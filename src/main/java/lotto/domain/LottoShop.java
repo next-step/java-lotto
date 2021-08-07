@@ -5,10 +5,9 @@ import java.util.List;
 
 public final class LottoShop {
 
-    private final int lottoPrizePrice;
+    private static final int LOTTO_PRIZE_PRICE = 1000;
 
-    public LottoShop(final int lottoPrizePrice) {
-        this.lottoPrizePrice = lottoPrizePrice;
+    public LottoShop() {
     }
 
     public LottoTickets buy(final long price, final LottoGenerator lottoGenerator) {
@@ -17,7 +16,7 @@ public final class LottoShop {
     }
 
     private long getPurchaseCount(final long price) {
-        return Math.floorDiv(price, lottoPrizePrice);
+        return Math.floorDiv(price, LOTTO_PRIZE_PRICE);
     }
 
     private LottoTickets buyLottoBatch(final long purchaseCount, final LottoGenerator lottoGenerator) {
