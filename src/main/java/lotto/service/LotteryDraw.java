@@ -9,14 +9,8 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
-import lotto.message.Message;
-import lotto.view.InputView;
 
 public class LotteryDraw {
-
-  private static final int INT_ZERO = 0;
-
-  private static final int LIMIT_MATCH_NUMBER = 3;
 
   private static final String SPLIT_MARK = ",";
 

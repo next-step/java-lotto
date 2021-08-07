@@ -17,8 +17,8 @@ public class GenerateLottoNumber {
   private static final List<Integer> numbers = new ArrayList<>();
 
   static {
-    for(int i = START; i < END; i++){
-      numbers.add(i);
+    for(int number = START; number < END; number++){
+      numbers.add(number);
     }
   }
   public GenerateLottoNumber() {

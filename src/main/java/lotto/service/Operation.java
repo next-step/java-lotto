@@ -5,26 +5,26 @@ import java.util.function.IntBinaryOperator;
 import lotto.message.Message;
 
 public enum Operation {
-  PLUS("+", (a, b)-> {
-    return a + b;
+  PLUS("+", (number1, number2)-> {
+    return number1 + number2;
   }),
-  MINUS("-", (a, b)-> {
-    return a - b;
+  MINUS("-", (number1, number2)-> {
+    return number1 - number2;
   }),
-  MULTIPLE("*", (a, b) -> {
-    return a * b;
+  MULTIPLE("*", (number1, number2) -> {
+    return number1 * number2;
   }),
-  DIVISION_SHARE("/", (a, b) -> {
-    if(a == 0 || b ==0){
+  DIVISION_SHARE("/", (number1, number2) -> {
+    if(number1 == 0 || number2 ==0){
       throw new ArithmeticException();
     }
-    return a / b;
+    return number1 / number2;
   }),
-  DIVISION_REMAINDER("%", (a, b)->{
-    if(a == 0 || b ==0){
+  DIVISION_REMAINDER("%", (number1, number2)->{
+    if(number1 == 0 || number2 ==0){
       throw new ArithmeticException();
     }
-    return a % b;
+    return number1 % number2;
   });
 
   private final String operationMark;
