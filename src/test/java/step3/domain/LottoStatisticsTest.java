@@ -32,7 +32,7 @@ class LottoStatisticsTest {
     }
 
     @Test
-    void _보너스를_폼함한_2등은_150000원이다() {
+    void 보너스를_폼함한_2등의_금액은_150000원이다() {
         // Given
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
         expectedResult.put(LottoRank.find(5, true), 1);
