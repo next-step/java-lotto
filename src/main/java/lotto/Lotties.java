@@ -16,4 +16,11 @@ public class Lotties {
     public List<Lotto> getLotties() {
         return lotties;
     }
+
+    public void sameNumberCount(List<Integer> winningNumber) {
+        for (int i = 0; i < lotties.size(); i++) {
+            lotties.get(i).getLottoRank(winningNumber);
+        }
+    }
+
 }
