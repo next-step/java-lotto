@@ -9,7 +9,7 @@ import lotto.model.Lottos;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
 
-public class SearchPrize {
+public class PrizeStatus {
 
 	public static final int ADDITION_PRIZE_COUNT = 1;
 	public static final int INITIAL_PRIZE_COUNT = 0;

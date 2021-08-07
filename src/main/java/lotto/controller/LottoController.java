@@ -5,7 +5,7 @@ import lotto.model.LottoPurchase;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinPrizes;
-import lotto.service.SearchPrize;
+import lotto.service.PrizeStatus;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -21,7 +21,7 @@ public class LottoController {
 
 		Lotto winnerLotto = LottoInputView.inputLastWinningLotto();
 
-		WinPrizes winPrizes = SearchPrize.findWinPrize(lottos, winnerLotto);
+		WinPrizes winPrizes = PrizeStatus.findWinPrize(lottos, winnerLotto);
 		LottoOutputView.displayLottoPrize(winPrizes);
 	}
 }

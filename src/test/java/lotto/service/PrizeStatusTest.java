@@ -14,7 +14,7 @@ import lotto.model.Lottos;
 import lotto.model.Prize;
 import lotto.model.WinPrizes;
 
-class SearchPrizeTest {
+class PrizeStatusTest {
 
 	@Test
 	@DisplayName("로또게임별 내용에따라 당첨번호를 입력하면 일치개수를 나타난다.")
@@ -22,7 +22,7 @@ class SearchPrizeTest {
 		List<Lotto> lottoGame = new ArrayList<>();
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 10, 12, 21)));
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 7, 12, 34)));
-		WinPrizes winPrizes = SearchPrize.findWinPrize(new Lottos(lottoGame), new Lotto("1,2,3,4,5,6"));
+		WinPrizes winPrizes = PrizeStatus.findWinPrize(new Lottos(lottoGame), new Lotto("1,2,3,4,5,6"));
 
 		assertThat(winPrizes.getWinPrizeSize()).isEqualTo(5);
 		assertThat(winPrizes.findWinPrizeGrade(Prize.FIFTH)).isEqualTo(2);
@@ -39,7 +39,7 @@ class SearchPrizeTest {
 		lotto.add(getLottoGame(7, 9, 15, 21, 28, 39));
 		lotto.add(getLottoGame(2, 3, 5, 32, 38, 45));
 
-		WinPrizes result = SearchPrize.findWinPrize(new Lottos(lotto), new Lotto("1,2,3,4,5,6"));
+		WinPrizes result = PrizeStatus.findWinPrize(new Lottos(lotto), new Lotto("1,2,3,4,5,6"));
 
 		assertThat(result.findWinPrizeGrade(Prize.THIRD)).isEqualTo(2);
 		assertThat(result.findWinPrizeGrade(Prize.FIRST)).isEqualTo(1);
