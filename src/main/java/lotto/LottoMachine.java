@@ -42,4 +42,11 @@ public class LottoMachine {
     public int lottiesCount() {
         return lotties.getCount();
     }
+
+    public void confirmLotto(String winningNumber) {
+        lotties.sameNumberCount(Arrays.stream(split(winningNumber))
+                .map(Integer::valueOf)
+                .sorted()
+                .collect(Collectors.toList()));
+    }
 }
