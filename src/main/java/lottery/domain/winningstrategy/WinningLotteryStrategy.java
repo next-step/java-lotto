@@ -5,5 +5,5 @@ import lottery.domain.LotteryResult;
 
 public interface WinningLotteryStrategy {
 
-    LotteryResult getScore(Lottery lottery);
+    LotteryResult getLotteryResult(Lottery lottery);
 }
