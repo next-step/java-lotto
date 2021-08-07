@@ -11,18 +11,17 @@ public class Lotto implements Comparator<LottoNumber> {
   private final List<LottoNumber> lotto = new ArrayList<>();
 
   public Lotto(List<Integer> numberPull) {
+    checkDuplicateNumbers(numberPull);
     creatLotteNumber(numberPull);
   }
 
   public Lotto() {
   }
 
-  private int checkDuplicateNumbers(int targetNumber) {
-
-    if (lotto.contains(new LottoNumber(targetNumber))) {
+  private void checkDuplicateNumbers(final List<Integer> numberPull) {
+    if(numberPull.size() != numberPull.stream().distinct().count()){
       throw new IllegalArgumentException(Message.MSG_ERROR_SAME_LOTTO_NUMBER);
     }
-    return targetNumber;
   }
 
   public List<LottoNumber> getLotto() {
@@ -31,7 +30,7 @@ public class Lotto implements Comparator<LottoNumber> {
 
   private void creatLotteNumber(final List<Integer> numberPull) {
     numberPull.forEach(number -> {
-      lotto.add(new LottoNumber(checkDuplicateNumbers(number)));
+      lotto.add(new LottoNumber(number));
     });
     lotto.sort(new LottoNumber());
   }

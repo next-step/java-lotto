@@ -12,7 +12,7 @@ class LotteriesTest {
 
   @DisplayName("입력 갯수만큼 로또 생성 테스트.")
   @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4})
+  @ValueSource(ints = {1,2,3,4})
   void 입력한만큼로또생성(int count)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
@@ -24,6 +24,9 @@ class LotteriesTest {
 
     createLotteries.invoke(lotteries, count);
 
+    for (Lotto lotto : lotteries.getLottos()) {
+      System.out.println("lotto = " + lotto);
+    }
     assertThat(lotteries.getLottos().size()).isEqualTo(count);
   }
 }
