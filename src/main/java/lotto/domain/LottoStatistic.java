@@ -1,24 +1,26 @@
 package lotto.domain;
 
-import java.util.Map;
+import java.util.List;
 
 public final class LottoStatistic {
 
-    private Map<LottoRank, Integer> statistic;
+    private final List<LottoRank> statistic;
 
-    public LottoStatistic(final Map<LottoRank, Integer> statistic) {
+    public LottoStatistic(final List<LottoRank> statistic) {
         this.statistic = statistic;
     }
 
-    public Integer getRankCount(final LottoRank lottoRank) {
-        return statistic.getOrDefault(lottoRank, 0);
+    public int getRankCount(final LottoRank lottoRank) {
+        return (int) statistic.stream()
+                .filter(obj -> obj.equals(lottoRank))
+                .count();
     }
 
     public double getProfitRate(double amount) {
-        double totalSum = 0;
-        for (LottoRank lottoRank : statistic.keySet()) {
-            totalSum += lottoRank.getAmount() * statistic.get(lottoRank);
-        }
+        double totalSum = statistic.stream()
+                .mapToDouble(LottoRank::getAmount)
+                .reduce(0, Double::sum);
+
         return totalSum / amount;
     }
 }

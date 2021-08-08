@@ -26,11 +26,11 @@ public final class LottoTickets {
     }
 
     public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers) {
-        Map<LottoRank, Integer> lottoStatistic = new HashMap<>();
+        List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchingCount = lottoTicket.matchingTicket(winningNumbers);
             LottoRank lottoRank = LottoRank.of(matchingCount);
-            lottoStatistic.put(lottoRank, lottoStatistic.getOrDefault(lottoRank, 0) + 1);
+            lottoStatistic.add(lottoRank);
         }
         return new LottoStatistic(lottoStatistic);
     }
