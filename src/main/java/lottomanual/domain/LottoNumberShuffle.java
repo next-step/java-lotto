@@ -2,7 +2,7 @@ package lottomanual.domain;
 
 import java.util.*;
 
-public class LottoNumberShuffle implements LottoNumberGenerator {
+public class LottoNumberShuffle {
 
 	private static final int NUMBERS_RANGE_START = 0;
 	private static final int NUMBERS_RANGE_END = 6;
@@ -17,13 +17,12 @@ public class LottoNumberShuffle implements LottoNumberGenerator {
 		}
 	}
 
-	@Override
-	public Set<LottoNumber> generate() {
+	public static Set<LottoNumber> generate() {
 		Collections.shuffle(defaultNumbers);
 		return selectNumbers();
 	}
 
-	private Set<LottoNumber> selectNumbers() {
+	private static Set<LottoNumber> selectNumbers() {
 		Set<LottoNumber> numbers = new TreeSet<>();
 		for (int i = NUMBERS_RANGE_START; i < NUMBERS_RANGE_END; i++) {
 			numbers.add(LottoNumber.valueOf(defaultNumbers.get(i)));

@@ -3,6 +3,7 @@ package lottomanual.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class Lottos {
 
@@ -10,23 +11,23 @@ public class Lottos {
 
 	public Lottos() {}
 
-	public Lottos(int money, LottoNumberGenerator generator) {
-		buy(new Money(money), generator);
+	public Lottos(int money, Set<LottoNumber> lottoNumbers) {
+		buy(new Money(money), lottoNumbers);
 	}
 
-	public void buy(int money, LottoNumberGenerator generator) {
-		buy(new Money(money), generator);
+	public void buy(int money, Set<LottoNumber> lottoNumbers) {
+		buy(new Money(money), lottoNumbers);
 	}
 
-	public void buy(Money money, LottoNumberGenerator generator) {
+	public void buy(Money money, Set<LottoNumber> lottoNumbers) {
 		int lottoCount = money.getLottoCount();
 		for (int i = 0; i < lottoCount; i++) {
-			addLotto(generator);
+			addLotto(lottoNumbers);
 		}
 	}
 
-	private void addLotto(LottoNumberGenerator generator) {
-		Lotto lotto = new Lotto(generator.generate());
+	private void addLotto(Set<LottoNumber> lottoNumbers) {
+		Lotto lotto = new Lotto(lottoNumbers);
 		lottos.add(lotto);
 	}
 

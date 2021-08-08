@@ -17,7 +17,7 @@ class LottosTest {
 	@DisplayName("금액별 로또 수량")
 	void lotto_by_amount_create(int amount, int lottoCount) throws Exception {
 		//given
-		Lottos lottos = new Lottos(amount, new LottoNumberShuffle());
+		Lottos lottos = new Lottos(amount, LottoNumberShuffle.generate());
 
 		//when
 		int size = lottos.size();
@@ -39,7 +39,7 @@ class LottosTest {
 		Lottos lottos = new Lottos();
 
 		//when
-		lottos.buy(amount, new LottoNumberShuffle());
+		lottos.buy(amount, LottoNumberShuffle.generate());
 		int size = lottos.size();
 
 		//then

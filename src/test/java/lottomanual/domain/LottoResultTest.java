@@ -20,7 +20,7 @@ class LottoResultTest {
 	void duplicate_bonus_number() throws Exception {
 		//given
 		Lottos lottos = new Lottos();
-		lottos.buy(1000, () -> toSet(Arrays.asList(1,2,3,4,5,6)));
+		lottos.buy(1000, toSet(Arrays.asList(1,2,3,4,5,6)));
 
 		LottoResult lottoResult = new LottoResult(lottos);
 
@@ -41,7 +41,7 @@ class LottoResultTest {
 	void match(Set<LottoNumber> lottoNumbers, int quantity, boolean matchBonus, int matchingCount) throws Exception {
 		//given
 		Lottos lottos = new Lottos();
-		lottos.buy(1000, () -> lottoNumbers);
+		lottos.buy(1000, lottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
 		lottoResult.match(new Lotto("1, 2, 3, 4, 5, 6"), LottoNumber.valueOf(7));
 
@@ -73,8 +73,8 @@ class LottoResultTest {
 	void rate(Set<LottoNumber> buyFirstLottoNumbers, Set<LottoNumber> buySecondLottoNumbers, double expectedRate) throws Exception {
 		//given
 		Lottos lottos = new Lottos();
-		lottos.buy(1000, () -> buyFirstLottoNumbers);
-		lottos.buy(1000, () -> buySecondLottoNumbers);
+		lottos.buy(1000, buyFirstLottoNumbers);
+		lottos.buy(1000, buySecondLottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
 		lottoResult.match(new Lotto("1, 2, 3, 4, 5, 6"), LottoNumber.valueOf(7));
 
