@@ -29,4 +29,8 @@ public class PurchaseAmount {
     public static PurchaseAmount of(int amount) {
         return new PurchaseAmount(amount);
     }
+
+    public int getPurchaseQuantity() {
+        return amount / PRICE_PER_PIECE;
+    }
 }
