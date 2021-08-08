@@ -20,8 +20,8 @@ public class ResultView {
     public static void resultLottoReward(Game game) {
         for (Reward reward : Reward.values()) {
             System.out.println(
-                    reward.getRightNumberCount() + "개 일치 (" + reward.getMoney() + "원)- " +
-                            game.countSameNumber(reward.getRightNumberCount()) + "개");
+                    reward.getSameNumberCount() + "개 일치 (" + reward.getMoney() + "원)- " +
+                            game.countReward(reward) + "개");
         }
     }
 

@@ -52,7 +52,7 @@ public class GameTest {
         lottoList.add(new Lotto(ballSet));
 
         game = new Game(lottoList);
-        game.setPreviousLotto(new Lotto(previousBallSet));
+        game.createRewards(new Lotto(previousBallSet));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class GameTest {
     @CsvSource(value = {"3:1", "4:0", "5:0", "6:0"}, delimiter = ':')
     @DisplayName("일치하는 번호 갯수 출력")
     void getNumberOfRightNumber(int rightNumber, int expected) {
-        assertThat(game.countSameNumber(rightNumber)).isEqualTo(expected);
+        assertThat(game.countReward(Reward.getRewardFromSameNumberCount(rightNumber))).isEqualTo(expected);
     }
 
     @Test

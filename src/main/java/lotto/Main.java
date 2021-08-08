@@ -19,7 +19,7 @@ public class Main {
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
 
-        game.setPreviousLotto(InputView.inputPreviousLottoNumber());
+        game.createRewards(InputView.inputPreviousLottoNumber());
         ResultView.resultLottoReward(game);
         ResultView.getYield(game);
     }
