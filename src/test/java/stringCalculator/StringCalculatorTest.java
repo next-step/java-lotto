@@ -80,4 +80,11 @@ public class StringCalculatorTest {
 
     assertThat(result).isEqualTo(6);
   }
+
+  @DisplayName("숫자하나만 입력하면 그대로를 반환하는 테스트.")
+  @Test
+  void checkNumberReturnTest() {
+    StringCalculator stringCalculator = new StringCalculator("1");
+    assertThat(stringCalculator.getCustomSplitSum()).isEqualTo(1);
+  }
 }
