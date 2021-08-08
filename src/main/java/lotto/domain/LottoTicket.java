@@ -28,9 +28,9 @@ public final class LottoTicket {
         return matchCount;
     }
 
-    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber, int matchCount) {
+    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber, final int matchCount) {
         if (winningNumbers.contains(lottoNumber.getNumber())) {
-            matchCount++;
+            return matchCount + 1;
         }
         return matchCount;
     }
