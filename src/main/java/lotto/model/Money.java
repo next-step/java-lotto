@@ -18,7 +18,7 @@ public class Money {
 		return money;
 	}
 
-	public int getLottoCountByMoney() {
+	public int countLotto() {
 		return money / MONEY_UNIT;
 	}
 
