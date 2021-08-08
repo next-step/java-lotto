@@ -21,7 +21,7 @@ public class InputView {
     public static Lotto inputWinOfLottoNumber() {
         System.out.println(NUMBER_OF_LOTTO);
         String winOfLottoNum = scanner.next();
-
+        System.out.println(winOfLottoNum);
         return Lotto.create(Stream.of(winOfLottoNum.split(","))
             .map(Integer::parseInt)
             .map(LottoNumber::new)
@@ -31,6 +31,7 @@ public class InputView {
     public static LottoNumber inputBonusOfLottoNumber() {
         System.out.println(NUMBER_OF_BONUS);
         int winOfLottoNum = scanner.nextInt();
+        System.out.println(winOfLottoNum);
         return new LottoNumber(winOfLottoNum);
     }
 

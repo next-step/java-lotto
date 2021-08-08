@@ -32,7 +32,9 @@ public class ResultView {
 
     private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
         resultOfLottos.getResultOfLottos().forEach((lottoMatch, integer) ->
-            System.out.println(lottoMatch.getNumber() + "개 일치 (" + lottoMatch.getWinMoney() + " 원) - " + resultOfLottos.winCount(lottoMatch)));
+            System.out.println(lottoMatch.getNumber() + "개 일치 ("
+                + lottoMatch.getWinMoney() + " 원) - "
+                + resultOfLottos.winCount(lottoMatch) + "개"));
     }
 
 }
