@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lotto.exception.WrongLottoTicketException;
 
 public class LottoTicket {
@@ -46,5 +47,13 @@ public class LottoTicket {
 
     public List<LottoNumber> value() {
         return lottoNumbers;
+    }
+
+
+    public static LottoTicket generateByIntegerList(List<Integer> integerNumbers) {
+        List<LottoNumber> lottoNumbers = integerNumbers.stream()
+            .map(e -> new LottoNumber(e))
+            .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
     }
 }
