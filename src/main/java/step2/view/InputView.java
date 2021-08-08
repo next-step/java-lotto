@@ -18,9 +18,9 @@ public class InputView {
         return numOfLotto;
     }
 
-    public String requestLottoNumber() {
+    public String requestWinningLottoNumber() {
         System.out.println(INPUT_LAST_LOTTO_NUMBER);
-        String lastLottoNum = sc.nextLine();
-        return lastLottoNum;
+        String lastWinningLottoNum = sc.nextLine();
+        return lastWinningLottoNum;
     }
 }

@@ -5,9 +5,8 @@ public class LottoApp {
         InputView inputView = new InputView();
 
         int numOfLotto = inputView.requestInput();
-        String lastLottoNum = inputView.requestLottoNumber();
+        String lastWinningLottoNum = inputView.requestWinningLottoNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(lastLottoNum, numOfLotto);
-        lottoMachine.run();
+
     }
 }
