@@ -4,10 +4,8 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
-    private final int EMPTY_NUMBER = 0;
+    private static final int EMPTY_NUMBER = 0;
 
-    public StringAddCalculator() {
-    }
 
     public int exec(String input) {
 
