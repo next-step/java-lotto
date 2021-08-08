@@ -24,6 +24,7 @@ public class LottoSimulator {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         LottoTicket lottoTicket = getLottoTicket(purchaseAmount);
         LottoNumbers winningLottoNumbers = getWinningLottoNumbers();
+        outputView.printMatchResult(lottoTicket.match(winningLottoNumbers));
     }
 
     private PurchaseAmount getPurchaseAmount() {

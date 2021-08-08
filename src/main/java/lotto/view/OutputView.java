@@ -2,15 +2,32 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
+import lotto.domain.MatchResult;
 
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class OutputView {
 
     private static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "%d개를 구매했습니다.%n";
+    private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "%d개를 구매했습니다. %n";
+    private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개 %n";
+    private static final String MATCHES_RESULT_MASSAGE = "당첨 통계";
+    private static final int DEFAULT_AMOUNT = 0;
+    private static final int MATCHES_MINIMUM = 0;
+    private static final int MATCHES_MAXIMUM = 6;
+    private static final Map<Integer, Integer> WINNING_AMOUNT;
+    static {
+        WINNING_AMOUNT = new HashMap<>();
+        WINNING_AMOUNT.put(3, 5000);
+        WINNING_AMOUNT.put(4, 15000);
+        WINNING_AMOUNT.put(5, 5000000);
+        WINNING_AMOUNT.put(6, 2000000000);
+    }
 
     private final PrintStream printStream;
 
@@ -40,5 +57,15 @@ public class OutputView {
 
     public void printWinningLottoNumbersInputMessage() {
         printStream.println(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
+    }
+
+    public void printMatchResult(MatchResult matchResult) {
+        printStream.println(MATCHES_RESULT_MASSAGE);
+        IntStream.rangeClosed(MATCHES_MINIMUM, MATCHES_MAXIMUM)
+                .forEach(matches -> printMatchCount(matches, matchResult.getTotalMatches(matches)));
+    }
+
+    private void printMatchCount(int matches, int count) {
+        printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, matches, WINNING_AMOUNT.getOrDefault(matches, DEFAULT_AMOUNT), count);
     }
 }
