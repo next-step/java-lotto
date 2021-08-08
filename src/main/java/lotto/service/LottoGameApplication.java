@@ -7,24 +7,18 @@ public class LottoGameApplication {
 
   private static final int EACH_LOTTO_COST = 1000;
 
-  public LottoMoney lottoMoney;
+  private final LottoMoney lottoMoney;
 
-  private Lotteries lotteries;
-
-  public LottoGameApplication(int money) {
-    this.lottoMoney = new LottoMoney(money);
+  public LottoGameApplication(LottoMoney money) {
+    this.lottoMoney = money;
   }
 
   public int getNumberOfLotto() {
     return lottoMoney.countLottoToMoney(Operation.DIVISION_SHARE, EACH_LOTTO_COST);
   }
 
-  public void buyLotteries() {
-    lotteries = new Lotteries(getNumberOfLotto());
-  }
-
-  public Lotteries getLotteriesInfo() {
-    return lotteries;
+  public Lotteries createLotteries() {
+    return new Lotteries(getNumberOfLotto());
   }
 
 }

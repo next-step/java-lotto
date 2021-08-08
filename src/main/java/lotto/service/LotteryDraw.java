@@ -18,13 +18,12 @@ public class LotteryDraw {
 
   private LottoMoney lottoMoney;
 
-  public LotteryDraw(final LottoGameApplication gameApplication) {
-    this.lottoMoney = gameApplication.lottoMoney;
-    this.lotteries = gameApplication.getLotteriesInfo();
+  public LotteryDraw() {
   }
 
-  public LotteryDraw() {
-
+  public LotteryDraw(final Lotteries lotteries, final LottoMoney lottoMoney) {
+    this.lottoMoney = lottoMoney;
+    this.lotteries = lotteries;
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {

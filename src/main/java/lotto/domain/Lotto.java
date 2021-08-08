@@ -29,10 +29,8 @@ public class Lotto implements Comparator<LottoNumber> {
   }
 
   private void creatLotteNumber(final List<Integer> numberPull) {
-    numberPull.forEach(number -> {
-      lotto.add(new LottoNumber(number));
-    });
-    lotto.sort(new LottoNumber());
+    numberPull.forEach(number -> lotto.add(new LottoNumber(number)));
+    lotto.sort(this);
   }
 
   public static Lotto getWinningLotto(List<Integer> inputValues) {

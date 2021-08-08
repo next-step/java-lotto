@@ -2,7 +2,9 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
+import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
@@ -15,15 +17,19 @@ public class LottoController {
 
   public static void main(String[] args) {
 
-    LottoGameApplication gameApplication = new LottoGameApplication(
+    LottoMoney lottoMoney = new LottoMoney(
         InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
-    gameApplication.buyLotteries();
+
+    LottoGameApplication gameApplication = new LottoGameApplication(
+        lottoMoney);
+
+    Lotteries lotteries = gameApplication.createLotteries();
 
     ResultView.drawCountOfBuyLotteries(gameApplication.getNumberOfLotto());
 
-    LotteriesDrawingView.drawLotteriesView(gameApplication);
+    LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(gameApplication);
+    LotteryDraw lotteryDraw = new LotteryDraw(lotteries,lottoMoney);
 
     Map<Rank, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.inputWinningNumbers(

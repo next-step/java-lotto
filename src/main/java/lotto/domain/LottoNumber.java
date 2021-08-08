@@ -23,10 +23,6 @@ public class LottoNumber implements Comparator<LottoNumber> {
     }
   }
 
-  public LottoNumber() {
-    number = 0;
-  }
-
   public int getNumber() {
     return this.number;
   }

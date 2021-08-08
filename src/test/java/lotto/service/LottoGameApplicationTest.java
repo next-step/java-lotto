@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import lotto.domain.LottoMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +17,7 @@ class LottoGameApplicationTest {
   void 천원단위구매장수확인(int cost, int count)
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-    LottoGameApplication gameApplication = new LottoGameApplication(cost);
+    LottoGameApplication gameApplication = new LottoGameApplication(new LottoMoney(cost));
     Method getNumberOfLotto = gameApplication.getClass()
         .getDeclaredMethod("getNumberOfLotto");
     getNumberOfLotto.setAccessible(true);
