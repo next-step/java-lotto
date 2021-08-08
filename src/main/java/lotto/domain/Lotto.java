@@ -16,7 +16,7 @@ public class Lotto {
     }
 
     public boolean isWinner(Award award) {
-        return this.award == award ? true : false;
+        return this.award == award;
     }
 
     public Award getAward() {
