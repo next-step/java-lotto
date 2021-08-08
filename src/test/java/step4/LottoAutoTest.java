@@ -2,6 +2,7 @@ package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -53,6 +55,27 @@ public class LottoAutoTest {
 
         //then
         assertThat(lottos.size()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("금액과 수동 로또 개수로 전체 구입 개수 찾기")
+    @MethodSource("buyLottoSource")
+    public void buyLottoManual(List<List<Integer>> manualLottoNums, int cost, int expected) {
+        //given, when
+        Lottos lottos = Shop.buyLotto(cost, manualLottoNums);
+
+        //then
+        assertThat(lottos.size()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("구매한 전체 로또 금액보다 수동으로 구매할 로또 카운트가 더 많을 경우")
+    @MethodSource("buyLottoErrorSource")
+    public void buyLottoError(List<List<Integer>> manualLottoNums, int cost) {
+        //given, when, then
+        assertThatThrownBy(() -> {
+            Shop.buyLotto(cost, manualLottoNums);
+        }).isInstanceOf(RuntimeException.class);
     }
 
     @DisplayName("중복되지 않는 로또 번호 6개 생성")
@@ -100,8 +123,7 @@ public class LottoAutoTest {
     @CsvSource(value = {"FIRST:SECOND:2030000000", "THIRD:FORTH:1550000", "FIRST:FORTH:2000050000"}, delimiter = ':')
     public void getTotalPrice(LottoPlace place1, LottoPlace place2, long expected) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //given
-        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(LastWeekLotto.of(
-            Arrays.asList(1, 2, 3, 4, 5, 6),
+        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(LastWeekLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),
             7
         ));
         Method calculateTotalPrice = lottoPlaceChecker.getClass()
@@ -120,8 +142,7 @@ public class LottoAutoTest {
     @MethodSource("getRateOfTotalPriceSource")
     public void getRateOfTotalPrice(List<LottoPlace> lottoPlaces, int cost, BigDecimal expected) {
         //given
-        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(LastWeekLotto.of(
-            Arrays.asList(1, 2, 3, 4, 5, 6),
+        LottoPlaceChecker lottoPlaceChecker = LottoPlaceChecker.of(LastWeekLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),
             7
         ));
 
@@ -132,11 +153,74 @@ public class LottoAutoTest {
         assertThat(result).isEqualByComparingTo(expected);
     }
 
+    @ParameterizedTest
+    @DisplayName("로또 번호와 지난 주 로또 번호로 등수 확인")
+    @MethodSource("getLottoPlaceSource")
+    public void checkPlace(List<Integer> nums, List<Integer> lastWeekNums, int bonusNum, LottoPlace expected) {
+        //given
+        Lottos lottos = Lottos.createLottos(0, Collections.singletonList(nums), 1000);
+        LastWeekLotto lastWeekLotto = LastWeekLotto.of(lastWeekNums, bonusNum);
+        LottoPlaceChecker placeChecker = LottoPlaceChecker.of(lastWeekLotto);
+
+        //when
+        List<LottoPlace> lottoPlace = placeChecker.getLottoPlace(lottos);
+
+        //then
+        for (LottoPlace place : lottoPlace) {
+            assertThat(place).isEqualTo(expected);
+        }
+    }
+
+    static Stream<Arguments> getLottoPlaceSource() {
+        return Stream.of(
+            Arguments.arguments(Arrays.asList(1,2,3,4,5,6), Arrays.asList(1,2,3,4,5,6), 7, LottoPlace.FIRST),
+            Arguments.arguments(Arrays.asList(1,2,3,4,5,7), Arrays.asList(1,2,3,4,5,6), 7, LottoPlace.SECOND),
+            Arguments.arguments(Arrays.asList(1,2,3,4,5,7), Arrays.asList(1,2,3,4,5,6), 8, LottoPlace.THIRD),
+            Arguments.arguments(Arrays.asList(1,2,3,4,7,8), Arrays.asList(1,2,3,4,5,6), 7, LottoPlace.FORTH),
+            Arguments.arguments(Arrays.asList(1,2,3,9,7,8), Arrays.asList(1,2,3,4,5,6), 7, LottoPlace.FIFTH)
+        );
+    }
+
     static Stream<Arguments> getRateOfTotalPriceSource() {
         return Stream.of(
             Arguments.arguments(Arrays.asList(LottoPlace.FIRST, LottoPlace.SECOND), 2000, BigDecimal.valueOf(1015000)),
             Arguments.arguments(Arrays.asList(LottoPlace.THIRD, LottoPlace.FORTH), 2000, BigDecimal.valueOf(775)),
             Arguments.arguments(Arrays.asList(LottoPlace.FIRST, LottoPlace.FORTH), 2000, BigDecimal.valueOf(1000025))
+        );
+    }
+
+    static Stream<Arguments> buyLottoSource() {
+        return Stream.of(Arguments.arguments(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+            Arrays.asList(1, 2, 3, 4, 5, 6)
+        ), 10000, 10), Arguments.arguments(
+            Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6)
+            ),
+            10000,
+            10
+        ), Arguments.arguments(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+            Arrays.asList(1, 2, 3, 4, 5, 6),
+            Arrays.asList(1, 2, 3, 4, 5, 6),
+            Arrays.asList(1, 2, 3, 4, 5, 6)
+        ), 15000, 15));
+    }
+
+    static Stream<Arguments> buyLottoErrorSource() {
+        return Stream.of(
+            Arguments.arguments(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6)), 1000),
+            Arguments.arguments(
+                Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                    Arrays.asList(1, 2, 3, 4, 5, 6),
+                    Arrays.asList(1, 2, 3, 4, 5, 6)
+                ),
+                2000
+            ),
+            Arguments.arguments(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 6)
+            ), 3000)
         );
     }
 }
