@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class RandomLottoNumbers implements LottoNumbers {
+public class RandomLottoNumbers {
     private static List<Integer> LOTTO_NUMBERS = new ArrayList<>();
     private static final int BOUND = 45;
     private static final int SIZE = 6;
@@ -13,16 +13,11 @@ public class RandomLottoNumbers implements LottoNumbers {
         }
     }
 
-    @Override
-    public List<Integer> generateNumbers() {
-        Collections.shuffle(LOTTO_NUMBERS);
-
+    public LottoTicket generateNumbers() {
         List<Integer> randomLottoNumbers = new ArrayList<>();
         for (int i = 0; i < SIZE; i++) {
             randomLottoNumbers.add(LOTTO_NUMBERS.get(i));
         }
-        Collections.sort(randomLottoNumbers);
-
-        return randomLottoNumbers;
+        return new LottoTicket(randomLottoNumbers);
     }
 }

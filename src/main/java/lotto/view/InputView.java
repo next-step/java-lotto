@@ -32,7 +32,7 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public int inputBonusNumber(){
+    public int inputBonusNumber() {
         System.out.println(MSG_BONUS_NUMBER);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();

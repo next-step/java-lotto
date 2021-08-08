@@ -8,30 +8,24 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
     private Money money;
 
-    public LottoTickets(Money money, LottoNumbers lottoNumbers) {
-        int size = money.countLotto();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumbers));
+    public LottoTickets(Money money, List<LottoTicket> lottoTickets) {
+        if (money.countLotto() < lottoTickets.size()) {
+            throw new IllegalArgumentException("로또 구입 금액이 부족합니다.");
         }
         this.lottoTickets = lottoTickets;
         this.money = money;
-    }
-
-    public int size() {
-        return lottoTickets.size();
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
 
-    public WinStats getWinStats(LottoNumbers winNumbers, int bonusNumber) {
+    public WinStats getWinStats(WinLotto winLotto) {
         Map<WinAmount, Integer> matchMap = new HashMap<>();
         long amount = 0;
 
         for (LottoTicket i : lottoTickets) {
-            WinAmount winAmount = i.getWinAmount(winNumbers, bonusNumber);
+            WinAmount winAmount = i.getWinAmount(winLotto);
             if (winAmount != WinAmount.FAIL) {
                 matchMap.put(winAmount, matchMap.getOrDefault(winAmount, 0) + 1);
                 amount += winAmount.getReward();
@@ -46,5 +40,19 @@ public class LottoTickets {
             return 0;
         }
         return (float) amount / money.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets) &&
+                Objects.equals(money, that.money);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets, money);
     }
 }
