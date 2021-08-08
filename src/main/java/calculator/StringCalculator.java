@@ -5,8 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    static final String NUMBER_REG_EXP = "^[0-9]+$";
-    static final String DELIMITER_REG_EXP = "//(.)\\n(.*)";
+    private static final String NUMBER_REG_EXP = "^[0-9]+$";
+    private static final String DELIMITER_REG_EXP = "//(.)\\n(.*)";
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final int DELIMITER_GROUP = 1;
+    private static final int NUMBER_GROUP = 2;
 
     public static int splitAndSum(String inputString) {
         if (inputString == null || inputString.isEmpty()) {
@@ -16,27 +19,34 @@ public class StringCalculator {
         return sumNumbers(convertStringArrayToIntArray(splitArray));
     }
 
-    public static String[] splitInputString(String inputString) {
+    private static String[] splitInputString(String inputString) {
         Matcher matcher = Pattern.compile(DELIMITER_REG_EXP).matcher(inputString);
         if (matcher.find()) {
-            String delimiter = matcher.group(1);
-            return matcher.group(2).split(delimiter);
+            String delimiter = matcher.group(DELIMITER_GROUP);
+            return matcher.group(NUMBER_GROUP).split(delimiter);
         }
-        return inputString.split(",|:");
+        return inputString.split(DEFAULT_DELIMITER);
     }
 
-    public static int[] convertStringArrayToIntArray(String[] splitArray) {
-        return Arrays.stream(splitArray).mapToInt(StringCalculator::stringToInt).toArray();
+    private static int[] convertStringArrayToIntArray(String[] splitArray) {
+        return Arrays.stream(splitArray)
+                     .mapToInt(StringCalculator::stringToInt)
+                     .toArray();
     }
 
-    public static int sumNumbers(int[] splitNumbers) {
-        return Arrays.stream(splitNumbers).sum();
+    private static int sumNumbers(int[] splitNumbers) {
+        return Arrays.stream(splitNumbers)
+                     .sum();
     }
 
-    public static int stringToInt(String strNumber) {
-        if (!Pattern.compile(NUMBER_REG_EXP).matcher(strNumber).find()) {
-            throw new IllegalArgumentException("0 이상의 숫자만 입력하세요.");
-        }
+    private static int stringToInt(String strNumber) {
+        validateNumber(strNumber);
         return Integer.parseInt(strNumber);
+    }
+
+    private static void validateNumber(String strNumber) {
+        if (!Pattern.compile(NUMBER_REG_EXP).matcher(strNumber).find()) {
+            throw new InvalidInputException("0 이상의 숫자만 입력하세요.");
+        }
     }
 }
