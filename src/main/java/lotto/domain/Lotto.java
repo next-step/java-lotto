@@ -13,14 +13,16 @@ public class Lotto {
 
 	private static final int LOTTO_NUMBERS_LENGTH = 6;
 
-	private final Set<Integer> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
 	public Lotto(List<Integer> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
 			throw new LottoValidationException("로또 번호는 " + LOTTO_NUMBERS_LENGTH + "개의 숫자여야 합니다.");
 		}
 
-		this.lottoNumbers = new TreeSet<>(lottoNumbers);
+		this.lottoNumbers = lottoNumbers.stream()
+			.map(LottoNumber::new)
+			.collect(Collectors.toCollection(TreeSet::new));
 	}
 
 	public Rank figureOutRank(Lotto winningLotto) {
@@ -48,7 +50,7 @@ public class Lotto {
 	@Override
 	public String toString() {
 		return lottoNumbers.stream()
-						.map(Object::toString)
+						.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
 						.collect(Collectors.joining(", "));
 	}
 }
