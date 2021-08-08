@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoChanceResolver {
+public class ChanceResolver {
 
     public static final int AMOUNT_FOR_CHANCE = 1000;
 
