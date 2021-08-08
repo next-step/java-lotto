@@ -11,8 +11,8 @@ public class Lottos {
 
 	public Lottos() {}
 
-	public Lottos(int money, Set<LottoNumber> lottoNumbers) {
-		buy(new Money(money), lottoNumbers);
+	public Lottos(int money) {
+		buy(new Money(money));
 	}
 
 	public Lottos(String[] lottoNumbers) {
@@ -21,20 +21,19 @@ public class Lottos {
 		}
 	}
 
-	public void buy(int money, Set<LottoNumber> lottoNumbers) {
-		buy(new Money(money), lottoNumbers);
+	public Lottos(Set<LottoNumber> lottoNumbers) {
+		buy(lottoNumbers);
 	}
 
-	public void buy(Money money, Set<LottoNumber> lottoNumbers) {
+	public void buy(Set<LottoNumber> lottoNumbers) {
+		lottos.add(new Lotto(lottoNumbers));
+	}
+
+	public void buy(Money money) {
 		int lottoCount = money.getLottoCount();
 		for (int i = 0; i < lottoCount; i++) {
-			addLotto(lottoNumbers);
+			lottos.add(new Lotto(LottoNumberShuffle.generate()));
 		}
-	}
-
-	private void addLotto(Set<LottoNumber> lottoNumbers) {
-		Lotto lotto = new Lotto(lottoNumbers);
-		lottos.add(lotto);
 	}
 
 	public int size() {
