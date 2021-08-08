@@ -22,7 +22,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        IntStream.range(1, 7).forEach(number -> numbers.add(new LottoNumber(number)));
+        IntStream.rangeClosed(1, 6).forEach(number -> numbers.add(new LottoNumber(number)));
         lottoNumbers = new LottoNumbers(numbers);
     }
 
@@ -36,7 +36,7 @@ class LottoNumbersTest {
     @DisplayName("LottoNumbers 생성 시 리스트의 사이즈가 6이 아니면 IllegalArgumentException이 발생한다")
     void sizeException() {
         List<LottoNumber> numbers = new ArrayList<>();
-        IntStream.range(1, 6).forEach(number -> numbers.add(new LottoNumber(number)));
+        IntStream.rangeClosed(1, 5).forEach(number -> numbers.add(new LottoNumber(number)));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers))
                 .withMessage("LottoNumbers의 사이즈가 잘못 입력되었습니다. 입력 사이즈 : " + numbers.size());
     }
@@ -45,7 +45,7 @@ class LottoNumbersTest {
     @DisplayName("중복된 숫자로 LottoNumbers생성 시 IllegalArgumentException이 발생한다.")
     void duplicateNumbers(){
         List<LottoNumber> numbers = new ArrayList<>();
-        IntStream.range(1, 7).forEach(number -> numbers.add(new LottoNumber(1)));
+        IntStream.rangeClosed(1, 6).forEach(number -> numbers.add(new LottoNumber(1)));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers));
 
     }

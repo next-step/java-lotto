@@ -14,7 +14,7 @@ public class LottoNumberGenerator {
     private static final List<LottoNumber> lottoNumbersPool = new ArrayList<>();
 
     static {
-        IntStream.range(1, 46)
+        IntStream.rangeClosed(1, 45)
                 .forEach(number -> lottoNumbersPool.add(new LottoNumber(number)));
     }
 

@@ -29,7 +29,7 @@ class LottoTest {
     void setUp() {
         randomLotto = new Lotto(new ListMixStrategy());
         sortedLotto = new Lotto(new ListSortStrategy());
-        IntStream.range(1, 7).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
+        IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
     }
 
     @Test
