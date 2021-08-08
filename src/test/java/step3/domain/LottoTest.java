@@ -3,6 +3,7 @@ package step3.domain;
 import org.junit.jupiter.api.Test;
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,4 +24,6 @@ class LottoTest {
         // Then
         assertThat(lotto.numbers()).isEqualTo(givenLottoNumber);
     }
+
+
 }

@@ -12,12 +12,12 @@ import step3.domain.lotto.Profit;
 import step3.domain.lotto.ResultOfLottos;
 import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static step3.domain.LottoNumbersFactory.buildLottoNumbers;
 
 class LottoStatisticsTest {
 
@@ -25,8 +25,7 @@ class LottoStatisticsTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winOfLottoNumbers = Lotto.create(Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        Lotto winOfLottoNumbers = Lotto.create(buildLottoNumbers(1, 2, 3, 4, 5, 6));
         LottoNumber givenBonusNumber = new LottoNumber(10);
         givenWinOfLotto = new WinOfLotto(winOfLottoNumbers, givenBonusNumber);
     }
@@ -39,9 +38,7 @@ class LottoStatisticsTest {
 
         ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedResult);
 
-        List<LottoNumber> givenLottoNumbers = Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
-                new LottoNumber(10));
+        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 8, 10);
 
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
@@ -63,9 +60,7 @@ class LottoStatisticsTest {
 
         ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedLottoStrategy);
 
-        List<LottoNumber> givenLottoNumbers = Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
-                new LottoNumber(10));
+        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
@@ -77,13 +72,11 @@ class LottoStatisticsTest {
         assertThat(expectedResultOfLottos).isEqualTo(resultOfLottos);
     }
 
-    @DisplayName("3등에 당첨되면 수익률은 5")
+    @DisplayName("3등에 당첨되면 수익률은 5가 된다")
     @Test
     void profilt() {
         Profit expectedLottoProfit = new Profit(5);
-        List<LottoNumber> givenLottoNumbers = Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(7),
-                new LottoNumber(10));
+        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
@@ -96,4 +89,6 @@ class LottoStatisticsTest {
         // Then
         assertThat(profit).isEqualTo(expectedLottoProfit);
     }
+
+
 }
