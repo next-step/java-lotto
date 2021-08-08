@@ -1,29 +1,56 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
-	@DisplayName("rest and colon Add Test")
-	@ParameterizedTest
-	@CsvSource(value = {"1,2|3", "1,2:3|6"}, delimiter = '|')
-	void add_calculate(String inputParam, Integer resultParam) {
+	private Calculator calculator;
+
+	@BeforeEach
+	void init() {
 		Calculator calculator = new Calculator();
-		Integer result = calculator.calculate(inputParam);
-		assertThat(resultParam).isEqualTo(result);
 	}
 
-	@DisplayName("input null - result zero test")
 	@Test
-	void check_null() {
-		String input = "";
-		Calculator calculator = new Calculator();
-		Integer result = calculator.calculate(input);
+	public void splitAndSum_null_또는_빈문자() {
+		int result = calculator.calculate(null);
 		assertThat(result).isEqualTo(0);
+
+		result = calculator.calculate("");
+		assertThat(result).isEqualTo(0);
+	}
+
+	@Test
+	public void splitAndSum_숫자하나() throws Exception {
+		int result = calculator.calculate("1");
+		assertThat(result).isEqualTo(1);
+	}
+
+	@Test
+	public void splitAndSum_쉼표구분자() throws Exception {
+		int result = calculator.calculate("1,2");
+		assertThat(result).isEqualTo(3);
+	}
+
+	@Test
+	public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
+		int result = calculator.calculate("1,2:3");
+		assertThat(result).isEqualTo(6);
+	}
+
+	@Test
+	public void splitAndSum_custom_구분자() throws Exception {
+		int result = calculator.calculate("//;\n1;2;3");
+		assertThat(result).isEqualTo(6);
+	}
+
+	@Test
+	public void splitAndSum_negative() throws Exception {
+		assertThatThrownBy(() -> calculator.calculate("-1,2,3"))
+						.isInstanceOf(RuntimeException.class);
 	}
 }
