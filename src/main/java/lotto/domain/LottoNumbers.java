@@ -34,6 +34,10 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public static int requiredSize() {
+        return LOTTO_NUMBERS_SIZE;
+    }
+
     public int hit(LottoNumbers other) {
         return (int) lottoNumbers.stream()
                         .filter(other::contains)
