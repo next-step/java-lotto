@@ -23,7 +23,7 @@ public class LottoStatisticTest {
     }
 
     @Test
-    @DisplayName("로또 당첨 확인")
+    @DisplayName("로또 여러개 당첨 확인")
     void lottoMatchTwoTest() {
         // given
         List<LottoNumber> sixMatchLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)

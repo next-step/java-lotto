@@ -17,16 +17,8 @@ public final class LottoStatistic {
     public Double getProfitRate(double amount) {
         double totalSum = 0;
         for (LottoRank lottoRank : statistic.keySet()) {
-            totalSum = sum(totalSum, lottoRank);
+            totalSum += lottoRank.getAmount() * statistic.get(lottoRank);
         }
         return totalSum / amount;
-    }
-
-    private double sum(double totalSum, LottoRank lottoRank) {
-        Integer matchingCount = statistic.get(lottoRank);
-        if (matchingCount > 0) {
-            totalSum += lottoRank.getAmount() * matchingCount;
-        }
-        return totalSum;
     }
 }
