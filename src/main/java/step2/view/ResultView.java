@@ -13,14 +13,11 @@ public class ResultView {
         int totalRevenue = 0;
         System.out.println("당첨 통계");
         System.out.println("-------");
-        for (int i = 3; i <= 6; i++) {
-
-//            System.out.println(num+"개 일치 ("+charge[num]+") "+matchedLottoRecordArray[i]+"개");
+        for (int i = 1; i <= 6; i++) {
             System.out.printf("%s 개 일치 (%s) %s개\n",i,charge[i],matchedLottoRecordArray[i]);
             totalRevenue += charge[i] * matchedLottoRecordArray[i];
         }
-        System.out.println(totalRevenue);
-        System.out.println(numOfLotto);
+
         double yield =  totalRevenue / (double)(numOfLotto * 1000);
         printResultMessage(yield);
 

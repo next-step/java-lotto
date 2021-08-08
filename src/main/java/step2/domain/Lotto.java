@@ -20,7 +20,12 @@ public class Lotto {
         for (int i = 0; i < NUM_OF_LOTTO_NUMBER; i++) {
             lotto.add(lottoNumberList.get(i));
         }
+        printIssuedLottoNumber(lotto);
         return lotto;
+    }
+
+    private void printIssuedLottoNumber(ArrayList lotto) {
+        System.out.println(lotto);
     }
 
     public ArrayList<Integer> makeLottoNumberList() {

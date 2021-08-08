@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LastWinningLottoNumberCheckerTest {
@@ -25,10 +28,10 @@ class LastWinningLottoNumberCheckerTest {
     @Test
     void validatePositiveLottoNum() {
         String lastWinningLottoNum1 = "1, 2, 3, 4, 5, 6";
-        int[] lastWinningLottoNum2 = {1, 46};
-        int[] lastWinningLottoNum3 = {0};
-        int[] lastWinningLottoNum4 = {47};
-        int[] lastWinningLottoNum5 = {-1};
+        ArrayList<Integer> lastWinningLottoNum2 = new ArrayList<>(Arrays.asList(1, 46));
+        ArrayList<Integer> lastWinningLottoNum3 = new ArrayList<>(Arrays.asList(0));
+        ArrayList<Integer> lastWinningLottoNum4 = new ArrayList<>(Arrays.asList(47));
+        ArrayList<Integer> lastWinningLottoNum5 = new ArrayList<>(Arrays.asList(-1));
         LastWinningLottoNumberChecker lastWinningLottoNumberChecker = new LastWinningLottoNumberChecker(lastWinningLottoNum1);
         lastWinningLottoNumberChecker.lottoLoop(lastWinningLottoNum2);
         Assertions.assertThatThrownBy(() -> lastWinningLottoNumberChecker.lottoLoop(lastWinningLottoNum3)).isInstanceOf(IllegalArgumentException.class);
