@@ -18,12 +18,6 @@ public class LottoBucket implements Iterable<LottoEntry> {
         this.lottoEntries.add(lottoEntry);
     }
 
-    public void add(LottoNumberGenerator lottoNumberGenerator) {
-        List<Integer> numbers = lottoNumberGenerator.generateNumbersForLotto();
-
-        this.add(new LottoEntry(numbers));
-    }
-
     public int size() {
         return lottoEntries.size();
     }

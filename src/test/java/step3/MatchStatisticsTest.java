@@ -48,8 +48,8 @@ public class MatchStatisticsTest {
 
         lottoWinStatistics.addLottoSamples(lottoBucket);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(Match.THREE_MATCH)).isEqualTo(1);
+        assertThat(lottoWinStatistics.countLottoEntriesByMatch(Match.THREE_MATCH)).isEqualTo(1);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(Match.FOUR_MATCH)).isEqualTo(0);
+        assertThat(lottoWinStatistics.countLottoEntriesByMatch(Match.FOUR_MATCH)).isEqualTo(0);
     }
 }

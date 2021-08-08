@@ -3,6 +3,8 @@ package step3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoBucketTest {
@@ -13,7 +15,7 @@ public class LottoBucketTest {
 
         int before = lottoBucket.size();
 
-        lottoBucket.add(new LottoRandomNumberGenerator());
+        lottoBucket.add(new LottoEntry(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         int after = lottoBucket.size();
 

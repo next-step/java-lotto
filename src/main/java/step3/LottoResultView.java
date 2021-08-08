@@ -21,7 +21,7 @@ public class LottoResultView {
         List<String> outputList =  Arrays.stream(Match.values())
                 .filter(win -> win.matchCount() > 0)
                 .map(win -> {
-                    int count = lottoWinStatistics.countLottoEntriesByLottoWin(win);
+                    int count = lottoWinStatistics.countLottoEntriesByMatch(win);
 
                     return String.format("%d개 일치%s (%d원)- %d개",
                             win.matchCount(), getBonusBallString(win), win.prize(), count);

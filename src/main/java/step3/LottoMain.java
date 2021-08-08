@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoMain {
-    private final static int LOTTO_UNIT_PRICE = 1000;
+    private static final int LOTTO_UNIT_PRICE = 1000;
 
     public static void main(String[] args) {
         try(Scanner scanner = new Scanner(System.in)) {
