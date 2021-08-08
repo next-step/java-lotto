@@ -1,3 +1,5 @@
+package step2;
+
 import step2.domain.LottoMachine;
 import step2.util.Calculator;
 import step2.view.InputView;

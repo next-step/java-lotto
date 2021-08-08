@@ -1,6 +1,7 @@
 package step2.util;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoMachine;
 
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
-
+    @DisplayName("로또 결과 저장이 잘 되고 있는지 확인")
     @Test
     void test() {
 

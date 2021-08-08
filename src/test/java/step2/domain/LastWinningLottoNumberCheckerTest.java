@@ -3,11 +3,10 @@ package step2.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.util.LastWinningLottoNumberChecker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LastWinningLottoNumberCheckerTest {
     @DisplayName("사용자에게 입력 받은 당첨 번호의 갯수가 6개인지 확인")

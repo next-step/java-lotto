@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.util.LastWinningLottoNumberChecker;
+
 import java.util.ArrayList;
 
 public class LottoMachine {
