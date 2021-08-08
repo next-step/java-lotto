@@ -18,7 +18,7 @@ public class LottoNumberTest {
     }
 
     @DisplayName("로또 숫자 범위 외 값 입력시 IllegalArgumentException 발생")
-    @ParameterizedTest(name = "{index} {displayName} {arguments}")
+    @ParameterizedTest(name = "{index}. {displayName}, arguments: {arguments}")
     @ValueSource(ints = {0, 46, -5})
     void create_ThrowsIllegalArgumentException_IfInputIsOutOfLottoNumberRange(int input) {
         assertThatIllegalArgumentException().isThrownBy(
