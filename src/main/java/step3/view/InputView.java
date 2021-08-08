@@ -1,7 +1,7 @@
 package step3.view;
 
-import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoNumber;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,14 +18,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Lotto inputWinOfLottoNumber() {
+    public static List<LottoNumber> inputWinOfLottoNumber() {
         System.out.println(NUMBER_OF_LOTTO);
         String winOfLottoNum = scanner.next();
         System.out.println(winOfLottoNum);
-        return Lotto.create(Stream.of(winOfLottoNum.split(","))
+        return Stream.of(winOfLottoNum.split(","))
             .map(Integer::parseInt)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
     }
 
     public static LottoNumber inputBonusOfLottoNumber() {

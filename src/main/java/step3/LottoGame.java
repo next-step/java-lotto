@@ -30,7 +30,7 @@ public class LottoGame {
         ResultView.printCount(user.getLottos());
         ResultView.printLottos(user.getLottos());
 
-        Lotto winOfLottoNumbers = InputView.inputWinOfLottoNumber();
+        List<LottoNumber> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
         LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
 
         WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);

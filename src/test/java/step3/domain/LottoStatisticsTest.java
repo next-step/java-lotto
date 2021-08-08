@@ -25,7 +25,7 @@ class LottoStatisticsTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winOfLottoNumbers = Lotto.create(buildLottoNumbers(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> winOfLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumber givenBonusNumber = new LottoNumber(10);
         givenWinOfLotto = new WinOfLotto(winOfLottoNumbers, givenBonusNumber);
     }

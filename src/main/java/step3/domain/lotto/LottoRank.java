@@ -25,7 +25,8 @@ public enum LottoRank {
             .findAny()
             .orElse(LottoRank.ZERO_MATCH);
 
-        if (lottoNumber.getNumber() == 5 && matchBonus) {
+        // 2등인 경우
+        if (lottoNumber.getNumber() == 6 && matchBonus) {
             return FIVE_BONUS_MATCH;
         }
 

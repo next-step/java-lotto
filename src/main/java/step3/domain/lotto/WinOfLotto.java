@@ -1,27 +1,20 @@
 package step3.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinOfLotto {
 
-    private final LottoNumber bonusNumber;
     private final List<LottoNumber> winOfResultWithBonus;
+    private final LottoNumber bonusNumber;
 
-    public WinOfLotto(Lotto winOfLottos, LottoNumber bonusNumber) {
+    public WinOfLotto(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
         validateWinOfLottos(winOfLottos, bonusNumber);
+        this.winOfResultWithBonus = winOfLottos;
         this.bonusNumber = bonusNumber;
-        this.winOfResultWithBonus = joinWinOfLottoWithBonus(winOfLottos, bonusNumber);
     }
 
-    private List<LottoNumber> joinWinOfLottoWithBonus(Lotto winOfLottos, LottoNumber bonusNumber) {
-        List<LottoNumber> joinLottoNumbers = new ArrayList<>(winOfLottos.numbers());
-        joinLottoNumbers.add(bonusNumber);
-        return joinLottoNumbers;
-    }
-
-    private void validateWinOfLottos(Lotto winOfLottos, LottoNumber bonusNumber) {
-        if (winOfLottos.numbers().contains(bonusNumber)) {
+    private void validateWinOfLottos(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
+        if (winOfLottos.contains(bonusNumber)) {
             throw new IllegalArgumentException("이미 존재하는 로또 번호입니다.");
         }
     }
