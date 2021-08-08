@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
 	NOTHING(0L, 0L),
-	FOURTH(3L, 5000L),
-	THIRD(4L, 50000L),
-	SECOND(5L, 1500000L),
-	FIRST(6L, 2000000000L);
+	FOURTH(3L, 5_000L),
+	THIRD(4L, 50_000L),
+	SECOND(5L, 1_500_000L),
+	FIRST(6L, 2_000_000_000L);
 
 	private final long matchNumberCount;
 	private final long reward;
