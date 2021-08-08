@@ -31,6 +31,6 @@ public class AllPossibleLottoNumbers {
 
     public List<LottoNumber> drawRandomSixNumbers() {
         Collections.shuffle(possibleLottoNumbers);
-        return possibleLottoNumbers.subList(0, 6);
+        return new ArrayList<>(possibleLottoNumbers.subList(0, 6));
     }
 }

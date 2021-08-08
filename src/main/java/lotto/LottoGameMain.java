@@ -8,6 +8,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketVendor;
 import lotto.ticketingway.AutoNumberGeneratingWay;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoGameMain {
 
@@ -17,6 +18,9 @@ public class LottoGameMain {
 
         LottoTicketVendor vendor = new LottoTicketVendor(new AutoNumberGeneratingWay());
         List<LottoTicket> playerTickets = vendor.buyLottoTickets(moneyForGame);
+
+        OutputView outputView = OutputView.getInstance();
+        outputView.showPlayerTicketNumbers(playerTickets);
 
         List<Integer> winnerNumbers = inputView.askWinnerNumbers();
         LottoTicket winnerTicket = LottoTicket.generateByIntegerList(winnerNumbers);
