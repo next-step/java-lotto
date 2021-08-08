@@ -26,9 +26,4 @@ public class Lotto {
     public LottoNumbers getNumbers() {
         return lottoNumbers;
     }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
-    }
 }

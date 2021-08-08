@@ -32,11 +32,4 @@ public class Lottos {
         return lottos;
     }
 
-    @Override
-    public String toString() {
-        return String.join("\n",
-                lottos.stream()
-                        .map(lotto -> lotto.toString())
-                        .collect(Collectors.toList()));
-    }
 }
