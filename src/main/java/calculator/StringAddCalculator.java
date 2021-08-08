@@ -6,7 +6,6 @@ public class StringAddCalculator {
 
     private static final int EMPTY_NUMBER = 0;
 
-
     public int exec(String input) {
 
         if (isNullOrEmpty(input)) {
@@ -18,7 +17,6 @@ public class StringAddCalculator {
         }
 
         String[] strings = collectStringNumbers(input);
-
         return sumResult(strings);
     }
 
