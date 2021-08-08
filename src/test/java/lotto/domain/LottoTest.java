@@ -127,7 +127,8 @@ public class LottoTest {
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        String actual = lottoStatistic.getProfitRate(10000);
+        Double profitRate = lottoStatistic.getProfitRate(10000);
+        String actual = String.format("%.2f", profitRate);
 
         // then
         assertThat(actual).isEqualTo("0.50");

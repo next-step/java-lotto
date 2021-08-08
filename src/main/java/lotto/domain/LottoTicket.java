@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public final class LottoTicket {
 
+    private static final int LOTTO_TICKET_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
@@ -13,7 +15,7 @@ public final class LottoTicket {
     }
 
     private void validationCheck(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("different number size");
         }
     }

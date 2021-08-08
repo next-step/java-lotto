@@ -14,12 +14,12 @@ public final class LottoStatistic {
         return statistic.getOrDefault(lottoRank, 0);
     }
 
-    public String getProfitRate(double amount) {
+    public Double getProfitRate(double amount) {
         double totalSum = 0;
         for (LottoRank lottoRank : statistic.keySet()) {
             totalSum = sum(totalSum, lottoRank);
         }
-        return String.format("%.2f", totalSum / amount);
+        return totalSum / amount;
     }
 
     private double sum(double totalSum, LottoRank lottoRank) {

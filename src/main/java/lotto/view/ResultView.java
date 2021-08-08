@@ -57,7 +57,7 @@ public class ResultView {
     }
 
     private static void showLottoProfitRate(LottoStatistic lottoStatistic, long amount) {
-        String profitRate = lottoStatistic.getProfitRate(amount);
-        System.out.printf(RESULT_PROFIT_TEMPLATE + "%n", profitRate);
+        Double profitRate = lottoStatistic.getProfitRate(amount);
+        System.out.printf(RESULT_PROFIT_TEMPLATE + "%n", String.format("%.2f", profitRate));
     }
 }

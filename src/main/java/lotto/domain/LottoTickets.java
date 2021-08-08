@@ -26,13 +26,13 @@ public final class LottoTickets {
     }
 
     public LottoStatistic matching(final List<Integer> winningNumbers) {
-        Map<LottoRank, Integer> hashMap = new HashMap<>();
+        Map<LottoRank, Integer> lottoStatistic = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchingCount = lottoTicket.matchingTicket(winningNumbers);
             LottoRank lottoRank = LottoRank.of(matchingCount);
-            hashMap.put(lottoRank, hashMap.getOrDefault(lottoRank, 0) + 1);
+            lottoStatistic.put(lottoRank, lottoStatistic.getOrDefault(lottoRank, 0) + 1);
         }
-        return new LottoStatistic(hashMap);
+        return new LottoStatistic(lottoStatistic);
     }
 
     public List<LottoTicket> getLottoTickets() {
