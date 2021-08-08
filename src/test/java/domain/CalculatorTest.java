@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
 
+	@DisplayName("rest and colon Add Test")
 	@ParameterizedTest
 	@CsvSource(value = {"1,2|3", "1,2:3|6"}, delimiter = '|')
 	void add_calculate(String inputParam, Integer resultParam) {
@@ -16,6 +18,7 @@ public class CalculatorTest {
 		assertThat(resultParam).isEqualTo(result);
 	}
 
+	@DisplayName("input null - result zero test")
 	@Test
 	void check_null() {
 		String input = "";
