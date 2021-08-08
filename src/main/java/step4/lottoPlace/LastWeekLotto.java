@@ -1,5 +1,7 @@
 package step4.lottoPlace;
 
+import step4.validator.LottoValidator;
+
 import java.util.List;
 
 public class LastWeekLotto {
@@ -13,14 +15,16 @@ public class LastWeekLotto {
     }
 
     public static LastWeekLotto of(List<Integer> lastWeekLottoNum, int bonusNum) {
+        LottoValidator.validateLottoNum(lastWeekLottoNum);
+        LottoValidator.validateBonusNum(bonusNum);
         return new LastWeekLotto(lastWeekLottoNum, bonusNum);
     }
 
-    public List<Integer> getLottoNums() {
-        return this.lastWeekLottoNum;
+    public boolean contains(int num) {
+        return this.lastWeekLottoNum.contains(num);
     }
 
-    public int getBonusNum() {
-        return bonusNum;
+    public boolean isBonusNumCorrect(int num) {
+        return this.bonusNum == num;
     }
 }
