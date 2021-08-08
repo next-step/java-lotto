@@ -12,7 +12,7 @@ public class Lotto {
     }
 
     public void drawLotto(LottoNumbers winnerNumbers) {
-        award = Award.findBy(lottoNumbers.sameAs(winnerNumbers));
+        award = Award.findBy(lottoNumbers.countContains(winnerNumbers));
     }
 
     public boolean isWinner(Award award) {

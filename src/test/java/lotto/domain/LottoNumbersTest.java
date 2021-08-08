@@ -3,10 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -56,7 +54,7 @@ class LottoNumbersTest {
         List<LottoNumber> numbers = new ArrayList<>();
         IntStream.range(4, 10).forEach(number -> numbers.add(new LottoNumber(number)));
         winnerNumbers = new LottoNumbers(numbers);
-        assertThat(lottoNumbers.sameAs(winnerNumbers)).isEqualTo(3);
+        assertThat(lottoNumbers.countContains(winnerNumbers)).isEqualTo(3);
     }
 
     @Test

@@ -42,7 +42,7 @@ public class LottoNumbers {
         }
     }
 
-    public int sameAs(LottoNumbers winnerNumbers) {
+    public int countContains(LottoNumbers winnerNumbers) {
         int numbers = 0;
         for (LottoNumber winnerNumber : winnerNumbers.getLottoNumbers()) {
             numbers += contains(winnerNumber);
