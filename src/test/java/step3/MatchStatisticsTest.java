@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoWinStatisticsTest {
+public class MatchStatisticsTest {
     private final LottoPrice lottoPrice = new LottoPrice(1000);
     private final List<Integer> numbers = Stream.of(1, 2, 3, 4, 5, 6).collect(Collectors.toList());
     private final LottoEntry[] lottoEntries = new LottoEntry[] {
@@ -48,8 +48,8 @@ public class LottoWinStatisticsTest {
 
         lottoWinStatistics.addLottoSamples(lottoBucket);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(LottoWin.THREE_MATCH)).isEqualTo(1);
+        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(Match.THREE_MATCH)).isEqualTo(1);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(LottoWin.FOUR_MATCH)).isEqualTo(0);
+        assertThat(lottoWinStatistics.countLottoEntriesByLottoWin(Match.FOUR_MATCH)).isEqualTo(0);
     }
 }

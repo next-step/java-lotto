@@ -12,8 +12,8 @@ public class LottoWinStatistics {
     }
 
     public void addLottoSample(LottoEntry sampleLottoEntry) {
-        LottoWin lottoWin = LottoWin.getMatchResult(winnersLottoEntry, sampleLottoEntry);
-        lottoWinGroups.addLottoOnLottoWinGroup(lottoWin, sampleLottoEntry);
+        Match match = Match.getMatchResult(winnersLottoEntry, sampleLottoEntry);
+        lottoWinGroups.addLottoOnLottoWinGroup(match, sampleLottoEntry);
     }
 
     public void addLottoSamples(LottoBucket lottoBucket) {
@@ -35,7 +35,7 @@ public class LottoWinStatistics {
         return earning / totalCost;
     }
 
-    public int countLottoEntriesByLottoWin(LottoWin lottoWin) {
-        return this.lottoWinGroups.countLottoEntriesByLottoWin(lottoWin);
+    public int countLottoEntriesByLottoWin(Match match) {
+        return this.lottoWinGroups.countLottoEntriesByLottoWin(match);
     }
 }

@@ -18,7 +18,7 @@ public class LottoResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<String> outputList =  Arrays.stream(LottoWin.values())
+        List<String> outputList =  Arrays.stream(Match.values())
                 .filter(win -> win.matchCount() > 0)
                 .map(win -> {
                     int count = lottoWinStatistics.countLottoEntriesByLottoWin(win);
@@ -37,7 +37,7 @@ public class LottoResultView {
         return outputList;
     }
 
-    private static String getBonusBallString(LottoWin win) {
+    private static String getBonusBallString(Match win) {
         return win.bonusMatch() ? ", 보너스 볼" : "";
     }
 

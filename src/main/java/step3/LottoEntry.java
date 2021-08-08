@@ -1,27 +1,31 @@
 package step3;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoEntry {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    protected final LottoNumbers lottoNumbers;
+    protected final Set<Integer> lottoNumbers;
 
     public LottoEntry(List<Integer> numbers) {
-        validate(numbers);
-
-        this.lottoNumbers = new LottoNumbers(numbers);
+        this.lottoNumbers = new LinkedHashSet<>(numbers);
+        validate();
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+    private void validate() {
+        if (this.lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("주어진 숫자의 갯수가 6보다 작거나 큽니다.");
         }
     }
 
-    public int countMatch(LottoEntry lottoEntry) {
-        return this.lottoNumbers.countMatch(lottoEntry.lottoNumbers);
+    public int countMatch(LottoEntry lottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     public boolean contains(int number) {
@@ -42,6 +46,10 @@ public class LottoEntry {
     }
 
     public String toNumbersString() {
-        return lottoNumbers.toOutputString();
+        return "[" +
+                this.lottoNumbers.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "))
+                + "]";
     }
 }

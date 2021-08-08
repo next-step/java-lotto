@@ -6,18 +6,18 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoWinGroups {
-    private final Map<LottoWin, LottoBucket> lottoBucketByLottoWin = new EnumMap<LottoWin, LottoBucket>(LottoWin.class) {{
-        Arrays.stream(LottoWin.values())
+    private final Map<Match, LottoBucket> lottoBucketByLottoWin = new EnumMap<Match, LottoBucket>(Match.class) {{
+        Arrays.stream(Match.values())
                 .forEach(w -> put(w, new LottoBucket()));
     }};
 
-    public void addLottoOnLottoWinGroup(LottoWin lottoWinGroup, LottoEntry lottoEntry) {
-        LottoBucket lottoBucket = this.lottoBucketByLottoWin.get(lottoWinGroup);
+    public void addLottoOnLottoWinGroup(Match matchGroup, LottoEntry lottoEntry) {
+        LottoBucket lottoBucket = this.lottoBucketByLottoWin.get(matchGroup);
         lottoBucket.add(lottoEntry);
     }
 
-    public int countLottoEntriesByLottoWin(LottoWin lottoWin) {
-        return this.lottoBucketByLottoWin.get(lottoWin).size();
+    public int countLottoEntriesByLottoWin(Match match) {
+        return this.lottoBucketByLottoWin.get(match).size();
     }
 
     public int countAllLottoEntries() {
@@ -26,11 +26,11 @@ public class LottoWinGroups {
                 .reduce(Integer::sum).orElse(0);
     }
 
-    public Set<LottoWin> keySet() {
+    public Set<Match> keySet() {
         return this.lottoBucketByLottoWin.keySet();
     }
 
-    public LottoBucket get(LottoWin lottoWin) {
-        return this.lottoBucketByLottoWin.get(lottoWin);
+    public LottoBucket get(Match match) {
+        return this.lottoBucketByLottoWin.get(match);
     }
 }
