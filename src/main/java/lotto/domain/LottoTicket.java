@@ -39,12 +39,6 @@ public class LottoTicket {
         return lottoTicket.contains(lottoNumber);
     }
 
-    public int getMatchCount(WinningLottoTicket winningLottoTicket) {
-        return (int) lottoTicket.stream()
-                .filter(number -> winningLottoTicket.contains(number))
-                .count();
-    }
-
 
     @Override
     public boolean equals(Object o) {

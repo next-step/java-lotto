@@ -9,7 +9,7 @@ public class ProfitRate {
         this.profitRate = profitRate;
     }
 
-    public static ProfitRate of(double profitRate){
+    public static ProfitRate of(double profitRate) {
         return new ProfitRate(profitRate);
     }
 

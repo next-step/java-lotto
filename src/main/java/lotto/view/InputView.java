@@ -1,12 +1,19 @@
 package lotto.view;
 
-import java.util.Scanner;
+import lotto.domain.LottoNumber;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String GET_PURCHASE_AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
     private static final String GET_WINNING_NUMBER_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String GET_BONUS_NUMBER_QUESTION = "보너스 볼을 입력해 주세요.";
+
+    private static final String BLANK = "";
+    private static final String SPACE = " ";
+    private static final String SPLIT_CUSTOM_REGEX = ",|, | ,";
 
     private InputView() {
 
@@ -17,10 +24,22 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String getWinningNumber() {
+    public static List<Integer> getWinningNumber() {
         System.out.println(GET_WINNING_NUMBER_QUESTION);
-        scanner.nextLine();
-        return scanner.nextLine();
+        String LottoNumbers = scanner.nextLine();
+        String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
+        return makeWinningNubmer(trimWinningNumberString);
+    }
+
+    private static List<Integer> makeWinningNubmer(String trimWinningNumberString) {
+        return Arrays.stream(trimWinningNumberString.split(SPLIT_CUSTOM_REGEX))
+                .map(number -> Integer.parseInt(number))
+                .collect(Collectors.toList());
+    }
+
+    private String replaceBlank(String LottoNumbers) {
+        String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
+        return trimWinningNumberString;
     }
 
     public static int getBonusNumber() {

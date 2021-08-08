@@ -46,15 +46,4 @@ public class LottoTicketTests {
                             LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(5))));
                 }).withMessageMatching("로또 숫자는 반드시 6개 여야 합니다.");
     }
-
-    @DisplayName("일치하는 갯수를 잘 가져오는지 테스트")
-    @Test
-    void getMatchCountTest() {
-        LottoTicket lottoTicket = LottoTicket.of(new TreeSet<>(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
-
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2,3, 4 ,5 6");
-
-        assertThat(lottoTicket.getMatchCount(winningLottoTicket)).isEqualTo(6);
-    }
 }

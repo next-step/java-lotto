@@ -29,14 +29,14 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean bonusMatch) {
-        if (bonusMatch && countOfMatch == FIVE) {
+        if (bonusMatch && countOfMatch == SECOND.getCountOfMatch()) {
             return SECOND;
         }
-        if (!bonusMatch && countOfMatch == FIVE) {
+        if (!bonusMatch && countOfMatch == THIRD.getCountOfMatch()) {
             return THIRD;
         }
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRankEnum -> lottoRankEnum.getCountOfMatch() == countOfMatch)
+                .filter(lottoRankEnum -> lottoRankEnum.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(OUT_OF_RANK);
 

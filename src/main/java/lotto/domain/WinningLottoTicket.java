@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import lotto.LottoRank;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
@@ -12,26 +11,28 @@ public class WinningLottoTicket {
     private static final String SPLIT_CUSTOM_REGEX = ",|, | ,";
 
     private final Set<LottoNumber> winningLottoTicket;
+    private final LottoNumber bonusLottoNumber;
 
-    private WinningLottoTicket(String winningLottoTicketString) {
-        String trimWinningNumberString = replaceBlank(winningLottoTicketString);
+    private WinningLottoTicket(List<Integer> winningLottoNumberList, LottoNumber bonusLottoNumber) {
+        this.winningLottoTicket = makeWinningLottoTicket(winningLottoNumberList);
 
-        this.winningLottoTicket = makeWinningLottoTicketByString(trimWinningNumberString);
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    public static WinningLottoTicket of(String winningLottoTicketString) {
-        return new WinningLottoTicket(winningLottoTicketString);
+    public static WinningLottoTicket of(List<Integer> winningLottoNumberList, LottoNumber bonusLottoNumber) {
+        return new WinningLottoTicket(winningLottoNumberList, bonusLottoNumber);
     }
 
-    private Set<LottoNumber> makeWinningLottoTicketByString(String trimWinningNumberString) {
-        return Arrays.stream(trimWinningNumberString.split(SPLIT_CUSTOM_REGEX))
-                .map(number -> LottoNumber.of(Integer.parseInt(number)))
+    private Set<LottoNumber> makeWinningLottoTicket(List<Integer> winningLottoNumberList) {
+        return winningLottoNumberList.stream()
+                .map(winningLottoNumber -> LottoNumber.of(winningLottoNumber))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    private String replaceBlank(String LottoNumbers) {
-        String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
-        return trimWinningNumberString;
+    public int getCountOfMatch(LottoTicket lottoTicket) {
+        return (int) winningLottoTicket.stream()
+                .filter(lottoNumber -> lottoTicket.contains(lottoNumber))
+                .count();
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -49,5 +50,12 @@ public class WinningLottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(winningLottoTicket);
+    }
+
+    public LottoRank match(LottoTicket lottoTicket) {
+        int countOfMatch = getCountOfMatch(lottoTicket);
+        boolean bonusMatch = lottoTicket.contains(bonusLottoNumber);
+
+        return LottoRank.valueOf(countOfMatch, bonusMatch);
     }
 }
