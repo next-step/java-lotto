@@ -55,7 +55,6 @@ public class StringAddCalculator {
 
     private boolean hasMinus(String[] split) {
         return Arrays.stream(split).mapToInt(Integer::parseInt)
-                .filter(number -> number < 0)
-                .findAny().isPresent();
+                .anyMatch(number -> number < 0);
     }
 }
