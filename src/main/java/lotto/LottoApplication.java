@@ -15,12 +15,22 @@ public class LottoApplication {
 
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
-        int lottoCount = lottoMachine.getPurchaseLottoCount();
-        ResultView.countOfLotto(lottoCount);
+        int manualLottoCount = InputView.getManualLottoTicketCount();
 
         List<LottoTicket> totalLottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < lottoMachine.getPurchaseLottoCount(); i++) {
+        InputView.manualLottoNumberQuestion();
+
+        for(int i = 0 ; i < manualLottoCount; i++){
+            totalLottoTickets.add(LottoTicket.of(InputView.getManualLottoNumber()));
+        }
+
+        int lottoTotalCount = lottoMachine.getPurchaseLottoCount();
+        int autoLottoCount = lottoTotalCount - manualLottoCount;
+        ResultView.countOfLotto(manualLottoCount, autoLottoCount);
+
+
+        for (int i = 0; i < autoLottoCount; i++) {
             LottoTicket generateLottoTicket = lottoMachine.generateLottoNumber();
             ResultView.printLottoNumber(generateLottoTicket);
             totalLottoTickets.add(generateLottoTicket);

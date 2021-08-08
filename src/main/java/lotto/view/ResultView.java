@@ -7,15 +7,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static String COUNT_OF_LOTTO_QUESTION = "개를 구입했습니다.";
     private static int DEFAULT_COUNT = 0;
 
     private ResultView() {
 
     }
 
-    public static void countOfLotto(int lottoCount) {
-        System.out.println(lottoCount + COUNT_OF_LOTTO_QUESTION);
+    public static void countOfLotto(int manualCount, int autoCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구입했습니다.");
     }
 
     public static void printLottoNumber(LottoTicket lottoTicket) {
