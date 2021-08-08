@@ -12,7 +12,7 @@ public class CalculatorTest {
 
 	@BeforeEach
 	void init() {
-		Calculator calculator = new Calculator();
+		calculator = new Calculator();
 	}
 
 	@Test

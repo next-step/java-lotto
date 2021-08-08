@@ -2,10 +2,10 @@ package domain;
 
 public class Calculator {
 
-	private static final Integer INIT_SUM = 0;
+	private static final int INIT_SUM = 0;
 
 	public Integer calculate(final String input) {
-		if (input.isEmpty()) {
+		if ("".equals(input) || input == null) {
 			return INIT_SUM;
 		}
 		String[] numbers = input.split(",|:");
@@ -13,7 +13,7 @@ public class Calculator {
 	}
 
 	private Integer getResult(final String[] numbers) {
-		Integer sum = INIT_SUM;
+		int sum = INIT_SUM;
 		for (String number : numbers) {
 			sum += Integer.parseInt(number);
 		}
