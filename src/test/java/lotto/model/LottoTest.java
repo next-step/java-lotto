@@ -52,17 +52,16 @@ public class LottoTest {
                 .containsExactlyElementsOf(sortedLottoNumbers);
     }
 
-    @DisplayName("같은 로또 번호의 개수를 찾는 기능이 정상 동작해야 한다.")
+    @DisplayName("같은 당첨 로또 번호의 개수를 찾는 기능이 정상 동작해야 한다.")
     @Test
     public void findEqualNumberCountTest() {
         // given
         Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
                 .subList(0, 6));
 
-        List<LottoNumber> otherLottoNumbers = LottoNumber.getAllLottoNumbers()
-                .subList(3, 9);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         // when, then
-        assertEquals(lotto.findEqualNumberCount(otherLottoNumbers), 3);
+        assertEquals(lotto.findEqualNumberCount(winningNumbers), 3);
     }
 }

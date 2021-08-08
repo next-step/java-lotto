@@ -2,8 +2,6 @@ package lotto.model;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class Lotto {
     private static final String LEFT_SQUARE_BRACKET = "[";
     private static final String COMMA = ",";
@@ -20,11 +18,15 @@ public class Lotto {
         return numbers;
     }
 
-    int findEqualNumberCount(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> equalLottoNumbers = lottoNumbers.stream()
+    int findEqualNumberCount(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.getNumbers()
+                .stream()
                 .filter(numbers::contains)
-                .collect(toList());
-        return equalLottoNumbers.size();
+                .count();
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     @Override
