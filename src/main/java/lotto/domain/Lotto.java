@@ -33,10 +33,6 @@ public class Lotto implements Comparator<LottoNumber> {
     lotto.sort(this);
   }
 
-  public static Lotto getWinningLotto(List<Integer> inputValues) {
-    return new Lotto(inputValues);
-  }
-
   @Override
   public int compare(LottoNumber num1, LottoNumber num2) {
     return Integer.compare(num1.getNumber(), num2.getNumber());

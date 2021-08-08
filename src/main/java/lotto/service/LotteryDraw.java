@@ -27,7 +27,7 @@ public class LotteryDraw {
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
-    return Lotto.getWinningLotto(splitWinningNumbers(winningLottery));
+    return new Lotto(splitWinningNumbers(winningLottery));
   }
 
   private List<Integer> splitWinningNumbers(final String winningLottery) {

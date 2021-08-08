@@ -46,7 +46,7 @@ class LotteriesTest {
 
     assertThat(
         checkContainValues.invoke(lotteries,
-            Lotto.getWinningLotto(createTestWinLotto(21, 22, 23, 11, 12, 13)),
+            new Lotto(createTestWinLotto(21, 22, 23, 11, 12, 13)),
             0,
             new LottoNumber(21)))
         .isEqualTo(1);
@@ -63,19 +63,19 @@ class LotteriesTest {
     getMatchLotteries.setAccessible(true);
 
     assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        Lotto.getWinningLotto(createTestWinLotto(21, 22, 23, 11, 12, 13)))).isEqualTo(Rank.MISS);
+        new Lotto(createTestWinLotto(21, 22, 23, 11, 12, 13)))).isEqualTo(Rank.MISS);
 
     assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        Lotto.getWinningLotto(createTestWinLotto(1, 2, 3, 11, 12, 13)))).isEqualTo(Rank.FIFTH);
+        new Lotto(createTestWinLotto(1, 2, 3, 11, 12, 13)))).isEqualTo(Rank.FIFTH);
 
     assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        Lotto.getWinningLotto(createTestWinLotto(1, 2, 3, 4, 12, 13)))).isEqualTo(Rank.FOURTH);
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 12, 13)))).isEqualTo(Rank.FOURTH);
 
     assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        Lotto.getWinningLotto(createTestWinLotto(1, 2, 3, 4, 5, 13)))).isEqualTo(Rank.THIRD);
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 13)))).isEqualTo(Rank.THIRD);
 
     assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        Lotto.getWinningLotto(createTestWinLotto(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
   }
 
   @DisplayName("로또값을 비교해서 Rank 각 등급에 맞는 match값을 기준으로 자료구조에 적재되는지 테스트.")
@@ -95,7 +95,7 @@ class LotteriesTest {
     lotteries.getLottos().add(createTestLottoOneToSix());
 
     Map<Rank, List<Lotto>> result = lotteries.getInputMatchTotalInfo(categoriesRank,
-        Lotto.getWinningLotto(createTestWinLotto(1, 2, 3, 4, 5, 6)));
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)));
 
     assertThat(result.get(Rank.FIRST).size()).isEqualTo(1);
   }
