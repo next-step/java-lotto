@@ -42,6 +42,15 @@ class LottoNumbersTest {
     }
 
     @Test
+    @DisplayName("중복된 숫자로 LottoNumbers생성 시 IllegalArgumentException이 발생한다.")
+    void duplicateNumbers(){
+        List<LottoNumber> numbers = new ArrayList<>();
+        IntStream.range(1, 7).forEach(number -> numbers.add(new LottoNumber(1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers));
+
+    }
+
+    @Test
     @DisplayName("LottoNumbers.sameAs 함수를 호출하면 당첨 숫자의 개수를 리턴한다.")
     void sameAs() {
         List<LottoNumber> numbers = new ArrayList<>();
