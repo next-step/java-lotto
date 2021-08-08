@@ -14,7 +14,7 @@ public class Lotties {
     }
 
     public List<Lotto> getLotties() {
-        return lotties;
+        return Collections.unmodifiableList(lotties);
     }
 
     public void sameNumberCount(List<Integer> winningNumber) {
