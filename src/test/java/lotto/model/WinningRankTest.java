@@ -25,7 +25,7 @@ public class WinningRankTest {
         LottoNumber matchedBonusNumber = LottoNumber.valueOf(6);
         LottoNumber notMatchedBonusNumber = LottoNumber.valueOf(10);
 
-        // then
+        // when, then
         assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(firstWinningNumbers, notMatchedBonusNumber)),
                 WinningRank.FIRST_PLACE);
 
