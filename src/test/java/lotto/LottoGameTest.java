@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.model.LottoGame;
+import lotto.model.LottoNumbers;
+import lotto.model.LottoTicket;
 import lotto.type.Winning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,21 +24,22 @@ public class LottoGameTest {
     private static final String TEST_WINNING_NUMBER = "2,4,6,8,10,12";
 
     LottoGame lottoGame = new LottoGame();
-    List<List<Integer>> lottoNumbers = new ArrayList<>();
+    LottoTicket lottoTicket;
+
 
     @BeforeEach
     void settingGame() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoGame.settingWinningNumber(TEST_WINNING_NUMBER);
-        List<Integer> firstPrizeNumber = Arrays.stream(TEST_WINNING_NUMBER.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        LottoNumbers firstPrizeNumber = new LottoNumbers(TEST_WINNING_NUMBER);
         lottoNumbers.add(firstPrizeNumber);
-        List<Integer> secondPrizeNumber = getNumbers("3,4,6,8,10,12");
+        LottoNumbers secondPrizeNumber = new LottoNumbers("3,4,6,8,10,12");
         lottoNumbers.add(secondPrizeNumber);
-        List<Integer> thirdPrizeNumber = getNumbers("3,5,6,8,10,12");
+        LottoNumbers thirdPrizeNumber = new LottoNumbers("3,5,6,8,10,12");
         lottoNumbers.add(thirdPrizeNumber);
-        List<Integer> unWinningNumber = getNumbers("1,3,5,7,9,11");
+        LottoNumbers unWinningNumber = new LottoNumbers("1,3,5,7,9,11");
         lottoNumbers.add(unWinningNumber);
+        lottoTicket = new LottoTicket(lottoNumbers);
     }
 
     @Test
@@ -48,8 +51,8 @@ public class LottoGameTest {
     @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
     void 로또_산만큼_로또_자동_생성(int amount, int gameCount) {
         lottoGame.getLottoAmount(amount);
-        List<List<Integer>> lottoNumbers = lottoGame.generateNumbers();
-        assertThat(lottoNumbers.size()).isEqualTo(gameCount);
+        LottoTicket lottoTicket = lottoGame.getLottoTicket();
+        assertThat(lottoTicket.getTicketInfo().size()).isEqualTo(gameCount);
     }
 
 
@@ -57,7 +60,7 @@ public class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"6:true", "5:true", "4:true", "3:false"}, delimiter = ':')
     void 당첨번호갯수별_로또_당첨_현황(int winningCount, boolean result) {
-        Map<Winning, Integer> winningCountMap = lottoGame.setWinningCount(lottoNumbers);
+        Map<Winning, Integer> winningCountMap = lottoGame.setWinningCount(lottoTicket);
         assertThat(winningCountMap
                 .containsKey(Winning.findByWinning(winningCount)))
                 .isEqualTo(result);
@@ -73,11 +76,6 @@ public class LottoGameTest {
             .isEqualTo(profitRate);
     }
 
-    private List<Integer> getNumbers(String number) {
-        return Arrays.stream(number.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
 
     private Map<Winning, Integer> 삼등_1개_4등_2개() {
         Map<Winning, Integer> winningMap = new HashMap<>();

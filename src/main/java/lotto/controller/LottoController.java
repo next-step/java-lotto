@@ -1,11 +1,11 @@
 package lotto.controller;
 
 import lotto.model.LottoGame;
+import lotto.model.LottoTicket;
 import lotto.type.Winning;
 import lotto.view.Input;
 import lotto.view.Result;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -25,13 +25,13 @@ public class LottoController {
             return;
         }
 
-        List<List<Integer>> lottoNumbers = lottoGame.generateNumbers();
-        Result.printLottoNumbers(lottoNumbers);
+        LottoTicket lottoTicket = lottoGame.getLottoTicket();
+        Result.printLottoNumbers(lottoTicket.getTicketInfo());
 
-        gameStart(lottoNumbers);
+        gameStart(lottoTicket);
     }
 
-    private void gameStart(List<List<Integer>> lottoNumbers) {
+    private void gameStart(LottoTicket lottoTicket) {
         String inputNumbers = Input.getPastLottoNumber();
         try {
             lottoGame.settingWinningNumber(inputNumbers);
@@ -39,7 +39,7 @@ public class LottoController {
             Result.notValidNumber();
             return;
         }
-        Map<Winning, Integer> winningCount = lottoGame.setWinningCount(lottoNumbers);
+        Map<Winning, Integer> winningCount = lottoGame.setWinningCount(lottoTicket);
         Result.printWinningResult(winningCount);
 
         double margin = lottoGame.getMargin(winningCount);

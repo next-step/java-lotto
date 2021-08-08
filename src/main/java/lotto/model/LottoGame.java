@@ -3,7 +3,6 @@ package lotto.model;
 import lotto.type.Winning;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
@@ -15,9 +14,9 @@ public class LottoGame {
     private int gameCount = 0;
     private WinningNumber winningNumber;
 
-    public List<LottoNumbers> generateNumbers() {
+    public LottoTicket getLottoTicket() {
         LottoTicket lottoTicket = new LottoTicket();
-        return lottoTicket.getTicket(this.gameCount);
+        return lottoTicket.generateNumbers(this.gameCount);
     }
 
     public int getLottoAmount(int purchaseAmount) {
@@ -33,14 +32,15 @@ public class LottoGame {
         winningNumber = new WinningNumber(numberText);
     }
 
-    public Map<Winning, Integer> setWinningCount(List<List<Integer>> lottoNumbers) {
+    public Map<Winning, Integer> setWinningCount(LottoTicket lottoTicket) {
         Map<Winning, Integer> winningCount = new HashMap<>();
-        for (List<Integer> lottoNumber : lottoNumbers) {
-            int count = winningNumber.checkOverlapNumber(lottoNumber);
+        for (LottoNumbers lottoNumbers : lottoTicket.getTicketInfo()) {
+            int count = winningNumber.checkOverlapNumber(lottoNumbers.selectedNumber());
             setCount(winningCount, count);
         }
         return winningCount;
     }
+
 
     private void setCount(Map<Winning, Integer> winningCount, int overlapCount) {
         int count = 1;

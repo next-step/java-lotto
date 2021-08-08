@@ -17,10 +17,13 @@ public class WinningNumber {
         }
     }
 
+
     public int checkOverlapNumber(List<Integer> lottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(number -> winningNumbers.contains(number))
                 .count();
     }
+
+
 
 }

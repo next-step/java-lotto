@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.LottoNumbers;
+import lotto.model.LottoTicket;
 import lotto.type.Winning;
 
 import java.util.List;
@@ -31,9 +33,9 @@ public class Result {
                                 .collect(Collectors.joining(","))));
     }
 
-    public static void printLottoNumbers(List<List<Integer>> lottoNumbers) {
-        for (List<Integer> numbers : lottoNumbers) {
-            printLottoNumber(numbers);
+    public static void printLottoNumbers(List<LottoNumbers> numbers) {
+        for (LottoNumbers number: numbers) {
+            printLottoNumber(number.selectedNumber());
         }
     }
 
