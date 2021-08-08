@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.StringUtil.split;
+import static lotto.util.StringUtil.split;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;

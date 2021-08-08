@@ -1,4 +1,4 @@
-package lotto;
+package lotto.util;
 
 public class StringUtil {
     private static final String DELIMITER = ",";

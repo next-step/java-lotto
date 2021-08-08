@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
