@@ -28,14 +28,14 @@ public class LottoGameTest {
     @BeforeEach
     void settingGame() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoGame.settingWinningNumber(TEST_WINNING_NUMBER);
+        lottoGame.settingWinningNumber(TEST_WINNING_NUMBER, 1);
         LottoNumbers firstPrizeNumber = new LottoNumbers(TEST_WINNING_NUMBER);
         lottoNumbers.add(firstPrizeNumber);
-        LottoNumbers secondPrizeNumber = new LottoNumbers("3,4,6,8,10,12");
+        LottoNumbers secondPrizeNumber = new LottoNumbers("1,4,6,8,10,12");
         lottoNumbers.add(secondPrizeNumber);
-        LottoNumbers thirdPrizeNumber = new LottoNumbers("3,5,6,8,10,12");
+        LottoNumbers thirdPrizeNumber = new LottoNumbers("3,4,6,8,10,12");
         lottoNumbers.add(thirdPrizeNumber);
-        LottoNumbers unWinningNumber = new LottoNumbers("1,3,5,7,9,11");
+        LottoNumbers unWinningNumber = new LottoNumbers("3,5,7,9,11,13");
         lottoNumbers.add(unWinningNumber);
         lottoTicket = new LottoTicket(lottoNumbers);
     }
@@ -55,11 +55,11 @@ public class LottoGameTest {
 
 
     @ParameterizedTest
-    @CsvSource(value = {"6:true", "5:true", "4:true", "3:false"}, delimiter = ':')
-    void 당첨번호갯수별_로또_당첨_현황(int winningCount, boolean result) {
+    @CsvSource(value = {"6:false:true", "5:true:true", "5:false:true", "3:false:false"}, delimiter = ':')
+    void 당첨번호갯수별_로또_당첨_현황(int winningCount, boolean matchBonus, boolean result) {
         Map<Winning, Integer> winningCountMap = lottoGame.setWinningCount(lottoTicket);
         assertThat(winningCountMap
-                .containsKey(Winning.findByWinning(winningCount)))
+                .containsKey(Winning.findByWinning(winningCount, matchBonus)))
                 .isEqualTo(result);
 
     }
@@ -68,16 +68,16 @@ public class LottoGameTest {
     @CsvSource(value = {"15000:4", "30000:2", "200000:0.3"}, delimiter = ':')
     void 수익률_계산(int amount, double profitRate) {
         lottoGame.getLottoAmount(amount);
-        Map<Winning, Integer> winningMap = this.삼등_1개_4등_2개();
+        Map<Winning, Integer> winningMap = this.사등_1개_오등_2개();
         assertThat(lottoGame.getMargin(winningMap))
                 .isEqualTo(profitRate);
     }
 
 
-    private Map<Winning, Integer> 삼등_1개_4등_2개() {
+    private Map<Winning, Integer> 사등_1개_오등_2개() {
         Map<Winning, Integer> winningMap = new HashMap<>();
-        winningMap.put(Winning.THIRD, 1);
-        winningMap.put(Winning.FOURTH, 2);
+        winningMap.put(Winning.FOURTH, 1);
+        winningMap.put(Winning.FIFTH, 2);
         return winningMap;
     }
 

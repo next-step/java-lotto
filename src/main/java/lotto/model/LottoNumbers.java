@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ public class LottoNumbers {
     private List<Integer> lottoNumber;
 
     public LottoNumbers() {
+        this.lottoNumber = new ArrayList<>();
     }
 
     public LottoNumbers(String numbers) {

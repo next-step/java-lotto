@@ -1,28 +1,16 @@
 package lotto.model;
 
-
-import lotto.util.LottoNumberUtil;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumber {
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private List<Integer> winningNumbers;
 
-    public WinningNumber(String numbers) {
-        for (String winningNumber : numbers.split(",")) {
-            int number = Integer.parseInt(winningNumber);
-            LottoNumberUtil.validNumber(number);
-            winningNumbers.add(number);
-        }
+    public WinningNumber(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
-
-    public int checkOverlapNumber(List<Integer> lottoNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(number -> winningNumbers.contains(number))
-                .count();
+    public boolean containsNumber(int number) {
+        return this.winningNumbers.contains(number);
     }
-
 
 }

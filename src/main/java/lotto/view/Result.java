@@ -11,11 +11,12 @@ public class Result {
 
     private static final String LOTTO_AMOUNT_MESSAGE = "%s개를 구매했습니다";
     private static final String LOTTO_NUMBER_LIST = "[%s]";
-    private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d";
+    private static final String WINNING_RESULT_MESSAGE = "%d개 일치%s (%d원) - %d";
     private static final String MARGIN_MESSAGE = "총 수익율은 %.2f입니다. (%s)";
     private static final String BENEFIT_MESSAGE = "개이득";
     private static final String LOSS_MESSAGE = "손해";
     private static final String NON_VALID_NUMBER_MESSAGE = "유효하지 않은 번호입니다.";
+    private static final String BONUS_NUMBER_MESSABE = ", 보너스 볼 일치";
     private static final int MINIMUM_MARGIN = 1;
 
 
@@ -48,7 +49,11 @@ public class Result {
         if (winningCount.containsKey(winning)) {
             count = winningCount.get(winning);
         }
-        System.out.println(String.format(WINNING_RESULT_MESSAGE, winning.getCount(), winning.getReward(), count));
+        String matchedBonusMessage = "";
+        if (winning.getBonus()) {
+            matchedBonusMessage = BONUS_NUMBER_MESSABE;
+        }
+        System.out.println(String.format(WINNING_RESULT_MESSAGE, winning.getCount(), matchedBonusMessage, winning.getReward(), count));
     }
 
     public static void printMargin(double margin) {

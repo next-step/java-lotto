@@ -4,7 +4,6 @@ import lotto.type.Winning;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
@@ -14,7 +13,7 @@ public class LottoGame {
 
     private int purchaseAmount = 0;
     private int gameCount = 0;
-    private WinningNumber winningNumber;
+    private WinningNumbers winningNumbers;
 
     public LottoTicket getLottoTicket() {
         return new LottoTicket(new ArrayList<>())
@@ -30,32 +29,39 @@ public class LottoGame {
         return this.gameCount;
     }
 
-    public void settingWinningNumber(String numberText) {
-        winningNumber = new WinningNumber(numberText);
+    public void settingWinningNumber(String numberText, int bonusNumber) {
+        winningNumbers = new WinningNumbers(numberText, bonusNumber);
     }
 
     public Map<Winning, Integer> setWinningCount(LottoTicket lottoTicket) {
         Map<Winning, Integer> winningCount = new HashMap<>();
         for (LottoNumbers lottoNumbers : lottoTicket.getTicketInfo()) {
-            int count = winningNumber.checkOverlapNumber(lottoNumbers.selectedNumber());
-            setCount(winningCount, count);
+            setCount(winningCount, lottoNumbers);
         }
         return winningCount;
     }
 
+    private boolean matchedBonus(LottoNumbers lottoNumbers, int count) {
+        if (count == 5) {
+            return winningNumbers.checkBonusNumber(lottoNumbers.selectedNumber());
+        }
+        return false;
+    }
 
-    private void setCount(Map<Winning, Integer> winningCount, int overlapCount) {
+    private void setCount(Map<Winning, Integer> winningCount, LottoNumbers lottoNumbers) {
         int count = 1;
+        int overlapCount = winningNumbers.checkOverlapNumber(lottoNumbers.selectedNumber());
         if (overlapCount < LOTTO_WINNING_MIN_COUNT) {
             return;
         }
-        Winning winning = Winning.findByWinning(overlapCount);
+        Winning winning = Winning.findByWinning(overlapCount, matchedBonus(lottoNumbers, overlapCount));
         if (winningCount.containsKey(winning)) {
             count = winningCount.get(winning);
             count += 1;
         }
         winningCount.put(winning, count);
     }
+
 
     public double getMargin(Map<Winning, Integer> winningCount) {
         double result = 0;

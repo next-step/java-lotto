@@ -19,16 +19,20 @@ public class WinningNumberTest {
 
     @BeforeEach
     void settingWinningNumber() {
-        winningNumber = new WinningNumber(TEST_NUMBER);
+        winningNumber = new WinningNumber(Arrays.stream(TEST_NUMBER.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     @Test
-    void 당첨번호_몇개인지_체크() {
+    void 당첨번호_포함인지_체크() {
         List<Integer> lottoNumber = Arrays.stream(TEST_NUMBER.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        assertThat(winningNumber.checkOverlapNumber(lottoNumber))
-                .isEqualTo(6);
+        for (int number : lottoNumber) {
+            assertThat(winningNumber.containsNumber(number))
+                    .isTrue();
+        }
     }
 
 
