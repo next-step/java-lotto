@@ -15,6 +15,12 @@ public class Lottos {
 		buy(new Money(money), lottoNumbers);
 	}
 
+	public Lottos(String[] lottoNumbers) {
+		for (String lottoNumber : lottoNumbers) {
+			lottos.add(new Lotto(lottoNumber));
+		}
+	}
+
 	public void buy(int money, Set<LottoNumber> lottoNumbers) {
 		buy(new Money(money), lottoNumbers);
 	}

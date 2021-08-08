@@ -1,6 +1,7 @@
 package lottomanual.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -44,5 +45,20 @@ class LottosTest {
 
 		//then
 		assertThat(size).isEqualTo(lottoCount);
+	}
+
+	@Test
+	@DisplayName("수동 번호 구매")
+	void lotto_buy_manual() throws Exception {
+		//given
+		String[] lottoNumbers = {"1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"};
+
+		//when
+		Lottos lottos = new Lottos(lottoNumbers);
+		int size = lottos.size();
+
+		//then
+		assertThat(size).isEqualTo(2);
+
 	}
 }
