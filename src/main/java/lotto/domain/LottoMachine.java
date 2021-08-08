@@ -40,7 +40,7 @@ public class LottoMachine {
     }
 
     public int lottiesCount() {
-        return lotties.getCount();
+        return lotties.getLottiesSize();
     }
 
     public void confirmLotto(String winningNumber) {
