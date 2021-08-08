@@ -25,7 +25,7 @@ public final class LottoTickets {
         lottoTickets.add(lottoTicket);
     }
 
-    public LottoStatistic matching(final List<Integer> winningNumbers) {
+    public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers) {
         Map<LottoRank, Integer> lottoStatistic = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchingCount = lottoTicket.matchingTicket(winningNumbers);

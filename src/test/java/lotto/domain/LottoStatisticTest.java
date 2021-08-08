@@ -42,7 +42,7 @@ public class LottoStatisticTest {
         lottoTickets.add(new LottoTicket(FourMatchLottoNumbers3));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
         int countMatchSix = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
         int countMatchFive = lottoStatistic.getRankCount(LottoRank.SECOND_PLACE);
         int countMatchFour = lottoStatistic.getRankCount(LottoRank.THIRD_PACE);
@@ -72,7 +72,7 @@ public class LottoStatisticTest {
         lottoTickets.add(new LottoTicket(lottoNumbers2));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
         int actual = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
 
         // then
@@ -90,7 +90,7 @@ public class LottoStatisticTest {
         lottoTickets.add(new LottoTicket(lottoNumbers));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
         Double profitRate = lottoStatistic.getProfitRate(10000);
         String actual = String.format("%.2f", profitRate);
 

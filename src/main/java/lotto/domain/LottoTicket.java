@@ -10,11 +10,11 @@ public final class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
-        validationCheck(lottoNumbers);
+        validateLottoTicketSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validationCheck(List<LottoNumber> lottoNumbers) {
+    private void validateLottoTicketSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("different number size");
         }
