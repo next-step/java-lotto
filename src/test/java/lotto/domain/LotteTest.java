@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.message.Message;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -96,4 +97,15 @@ class LotteTest {
     ).isInstanceOf(IllegalArgumentException.class);
   }
 
+  @DisplayName("로또 입력 갯수 6개 미달 여부 판별 테스트.")
+  @Test
+  void 로또번호입력개수검증() {
+
+    List<Integer> values = new ArrayList<>();
+    range(1, 1).forEach(values::add);
+
+    assertThatThrownBy(() ->new Lotto(values))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessage(Message.MSG_ERROR_INPUT_LOTTO_SIZE);
+  }
 }

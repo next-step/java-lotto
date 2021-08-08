@@ -2,9 +2,7 @@ package lotto.view;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.List;
-import java.util.Map;
-import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.message.Message;
 import lotto.service.Rank;
 
@@ -16,18 +14,18 @@ public class ResultView {
     System.out.println(count + Message.MSG_BUY_LOTTO_COUNT);
   }
 
-  public static void drawResult(final Map<Rank, List<Lotto>> matchResult, final double gradingScore) {
+  public static void drawResult(LottoResult matchResult, final double gradingScore) {
     System.out.println(
         "\n" +
             Message.MSG_WINNING_STATISTICS_WORD +
             "\n" +
             "------------------------------------");
 
-    for (Rank ratingNumber : matchResult.keySet()) {
-      System.out.println(ratingNumber + "개 일치 ("
-          + Rank.matchRank(ratingNumber.getCountOfMatch()).getWinningMoney()
+    for (Rank rank : matchResult.getCategoriesRank().keySet()) {
+      System.out.println(rank.getCountOfMatch() + "개 일치 ("
+          + Rank.matchRank(rank.getCountOfMatch()).getWinningMoney()
           + "원) - "
-          + matchResult.get(ratingNumber).size()
+          + matchResult.getCategoriesRank().get(rank).size()
           + "개");
     }
 

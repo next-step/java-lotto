@@ -9,6 +9,7 @@ import java.util.Map;
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class LotteryDrawTest {
   @Test
   void 당첨번호로또생성() {
 
-    LotteryDraw lotteryDraw = new LotteryDraw(new Lotteries(), new LottoMoney(1000));
+    LotteryDraw lotteryDraw = new LotteryDraw(new Lotteries(), new LottoMoney(1000), new LottoResult());
     Lotto lotto = lotteryDraw.inputWinningNumbers("1,2,3,4,5,6");
 
     assertThat(lotto.getLotto().size()).isEqualTo(6);
@@ -36,11 +37,11 @@ class LotteryDrawTest {
     List<Lotto> testLottos = lotteries.getLottos();
     testLottos.add(testLotto);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, new LottoMoney(1000));
+    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, new LottoMoney(1000),new LottoResult());
     Lotto winLotto = lotteryDraw.inputWinningNumbers("4,5,6,11,12,13");
 
-    Map<Rank, List<Lotto>> result = lotteryDraw.matchLottoInfo(winLotto);
+    LottoResult lottoResult = lotteryDraw.matchLottoInfo(winLotto);
 
-    assertThat(result.get(Rank.FIFTH).size()).isEqualTo(1);
+    assertThat(lottoResult.getCategoriesRank().get(Rank.FIFTH).size()).isEqualTo(1);
   }
 }

@@ -8,11 +8,18 @@ import lotto.message.Message;
 
 public class Lotto implements Comparator<LottoNumber> {
 
+  public static final int  LIMIT_INPUT_COUNT = 6;
+
   private final List<LottoNumber> lotto = new ArrayList<>();
 
   public Lotto(List<Integer> numberPull) {
-    checkDuplicateNumbers(numberPull);
+    validationLotto(numberPull);
     creatLotteNumber(numberPull);
+  }
+
+  private void validationLotto(final List<Integer> numberPull) {
+    checkInputCount(numberPull);
+    checkDuplicateNumbers(numberPull);
   }
 
   public Lotto() {
@@ -21,6 +28,12 @@ public class Lotto implements Comparator<LottoNumber> {
   private void checkDuplicateNumbers(final List<Integer> numberPull) {
     if(numberPull.size() != numberPull.stream().distinct().count()){
       throw new IllegalArgumentException(Message.MSG_ERROR_SAME_LOTTO_NUMBER);
+    }
+  }
+
+  private void checkInputCount(final List<Integer> numberPull) {
+    if(numberPull.size() != LIMIT_INPUT_COUNT){
+      throw new IllegalArgumentException(Message.MSG_ERROR_INPUT_LOTTO_SIZE);
     }
   }
 

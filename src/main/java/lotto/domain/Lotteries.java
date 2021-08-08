@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 import lotto.service.Rank;
 import lotto.strategy.GenerateLottoNumber;
@@ -30,18 +29,23 @@ public class Lotteries {
         .forEach(lottos::add);
   }
 
-  public Map<Rank, List<Lotto>> getInputMatchTotalInfo(
-      final Map<Rank, List<Lotto>> categoriesRank, Lotto winLotto) {
+  public LottoResult getInputMatchTotalInfo(
+      final LottoResult lottoResult, Lotto winLotto) {
 
     for (Lotto lotto : lottos) {
-      categoriesRank.get(getMatchLotteries(winLotto, lotto)).add(lotto);
+      getLottosByRank(lottoResult, winLotto, lotto).add(lotto);
     }
 
-    categoriesRank.remove(Rank.MISS);
-    return categoriesRank;
+    lottoResult.getCategoriesRank().remove(Rank.MISS);
+    return lottoResult;
   }
 
-  private Rank getMatchLotteries(Lotto lotty, Lotto winLotto) {
+  private List<Lotto> getLottosByRank(final LottoResult lottoResult, final Lotto winLotto,
+      final Lotto lotto) {
+    return lottoResult.getMatchLottos(getMatchCountForRank(winLotto, lotto));
+  }
+
+  private Rank getMatchCountForRank(Lotto lotty, Lotto winLotto) {
     int count = INT_ZERO;
     for (LottoNumber lottoNumber : lotty.getLotto()) {
       count = checkContainValues(winLotto, count, lottoNumber);

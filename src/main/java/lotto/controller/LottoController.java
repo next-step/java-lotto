@@ -1,14 +1,11 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoResult;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
-import lotto.service.Rank;
 import lotto.view.InputView;
 import lotto.view.LotteriesDrawingView;
 import lotto.view.ResultView;
@@ -29,12 +26,12 @@ public class LottoController {
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lotteries,lottoMoney);
+    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney, new LottoResult());
 
-    Map<Rank, List<Lotto>> matchResult = lotteryDraw.matchLottoInfo(
+    LottoResult lottoResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.inputWinningNumbers(
             InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
 
-    ResultView.drawResult(matchResult, lotteryDraw.gradingScore(matchResult));
+    ResultView.drawResult(lottoResult, lotteryDraw.gradingScore(lottoResult));
   }
 }
