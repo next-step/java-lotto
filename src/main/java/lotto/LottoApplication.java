@@ -39,13 +39,10 @@ public class LottoApplication {
         LottoTickets lottotickets = LottoTickets.of(totalLottoTickets);
 
         List<Integer> winningLottoNumbers = InputView.getWinningNumber();
-
         LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusNumber());
-
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningLottoNumbers, bonusLottoNumber);
 
         LottoResult lottoResult = LottoResult.of(lottotickets, winningLottoTicket);
-
         ResultView.printWinningStatistics(lottoResult);
         ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));
 
