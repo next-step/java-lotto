@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.strategy.ListMixStrategy;
-import lotto.strategy.ListSortStrategy;
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,15 +20,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoTest {
 
+    private List<LottoNumber> winnerNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumberList = new ArrayList<>();
+    private LottoNumbers lottoNumbers;
     private Lotto randomLotto;
     private Lotto sortedLotto;
-    private List<LottoNumber> winnerNumbers = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
-        randomLotto = new Lotto(new ListMixStrategy());
-        sortedLotto = new Lotto(new ListSortStrategy());
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
+        IntStream.rangeClosed(1, 6).forEach(number -> lottoNumberList.add(new LottoNumber(number)));
+        lottoNumbers = new LottoNumbers(lottoNumberList);
+        randomLotto = new Lotto(LottoNumberGenerator.createLottoNumbers());
+        sortedLotto = new Lotto(lottoNumbers);
     }
 
     @Test
