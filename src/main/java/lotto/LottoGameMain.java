@@ -24,14 +24,12 @@ public class LottoGameMain {
 
         List<Integer> winnerNumbers = inputView.askWinnerNumbers();
         LottoTicket winnerTicket = LottoTicket.generateByIntegerList(winnerNumbers);
+        inputView.closeScanner();
 
         LottoGameWinnerCalculator winnerCalculator = new LottoGameWinnerCalculator();
         LottoGameWinnerResult winnerResult = winnerCalculator.calculate(playerTickets, winnerTicket);
 
-        inputView.closeScanner();
-
-
-        System.out.println(moneyForGame);
+        outputView.showWinnerResult(winnerResult);
     }
 
 }

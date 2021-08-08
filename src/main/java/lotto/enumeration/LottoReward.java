@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum LottoReward {
 
-    NO_REWARD(0,0),
+    NO_REWARD(0, 0),
     THREE_NUMBERS_MATCHED_REWARD(3, 5000),
     FOUR_NUMBERS_MATCHED_REWARD(4, 50000),
     FIVE_NUMBERS_MATCHED_REWARD(5, 1500000),
@@ -24,8 +24,12 @@ public enum LottoReward {
             .findFirst()
             .orElse(NO_REWARD);
     }
+
     public int getRewardMoney() {
         return rewardMoney;
     }
 
+    public int getMatchedCount() {
+        return matchedCount;
+    }
 }
