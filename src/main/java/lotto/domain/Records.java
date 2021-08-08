@@ -15,10 +15,9 @@ public class Records {
 
 	public Records() {
 		this.records = new LinkedHashMap<>();
-		this.records.put(Rank.FOURTH, 0);
-		this.records.put(Rank.THIRD, 0);
-		this.records.put(Rank.SECOND, 0);
-		this.records.put(Rank.FIRST, 0);
+		Arrays.stream(Rank.values())
+			.filter(rank -> !rank.equals(Rank.NOTHING))
+			.forEach(rank -> records.put(rank, 0));
 	}
 
 	public void addRecord(Rank rank) {

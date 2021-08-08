@@ -17,6 +17,6 @@ public class LottoCount {
 	}
 
 	public int getLottoCount() {
-		return lottoCount;	
+		return lottoCount;
 	}
 }
