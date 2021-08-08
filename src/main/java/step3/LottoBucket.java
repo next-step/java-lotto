@@ -15,11 +15,11 @@ public class LottoBucket implements Iterable<LottoEntry> {
     }
 
     public void add(LottoEntry lottoEntry) {
-        this.lottoEntries.add(lottoEntry);
+        lottoEntries.add(lottoEntry);
     }
 
     public void merge(LottoBucket lottoBucket) {
-        this.lottoEntries.addAll(lottoBucket.lottoEntries);
+        lottoEntries.addAll(lottoBucket.lottoEntries);
     }
 
     public int size() {
@@ -47,6 +47,6 @@ public class LottoBucket implements Iterable<LottoEntry> {
 
     @Override
     public Iterator<LottoEntry> iterator() {
-        return this.lottoEntries.iterator();
+        return lottoEntries.iterator();
     }
 }

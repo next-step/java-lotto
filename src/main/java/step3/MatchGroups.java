@@ -13,25 +13,29 @@ public class MatchGroups {
                 .forEach(w -> put(w, new LottoBucket()));
     }};
 
-    public void addLottoOnMatchGroup(Match matchGroup, LottoEntry lottoEntry) {
-        this.lottoBucketByMatch.get(matchGroup).add(lottoEntry);
+    private LottoBucket getLottoBucket(Match matchGroup) {
+        return lottoBucketByMatch.get(matchGroup);
+    }
+
+    public void addLottoOnMatchGroup(Match match, LottoEntry lottoEntry) {
+        getLottoBucket(match).add(lottoEntry);
     }
 
     public int countLottoEntriesByMatch(Match match) {
-        return this.lottoBucketByMatch.get(match).size();
+        return getLottoBucket(match).size();
     }
 
     public int countAllLottoEntries() {
-        return this.lottoBucketByMatch.values().stream()
+        return lottoBucketByMatch.values().stream()
                 .map(LottoBucket::size)
                 .reduce(Integer::sum).orElse(0);
     }
 
     public Set<Match> keySet() {
-        return this.lottoBucketByMatch.keySet();
+        return lottoBucketByMatch.keySet();
     }
 
     public LottoBucket getBucket(Match match) {
-        return this.lottoBucketByMatch.get(match);
+        return lottoBucketByMatch.get(match);
     }
 }

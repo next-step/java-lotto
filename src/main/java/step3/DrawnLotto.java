@@ -12,6 +12,6 @@ public class DrawnLotto extends LottoEntry {
     }
 
     public Boolean bonus(LottoEntry lottoEntry) {
-        return lottoEntry.contains(this.bonusNumber);
+        return lottoEntry.contains(bonusNumber);
     }
 }

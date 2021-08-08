@@ -33,23 +33,23 @@ public enum Match {
 
     public static Optional<Match> fromMatch(int match, boolean bonus) {
         return Stream.of(values())
-                .filter(w -> matched(match, bonus, w))
+                .filter(w -> w.matched(match, bonus))
                 .findFirst();
     }
 
-    private static boolean matched(int match, boolean bonus, Match w) {
-        return w.matchCount == match && (w.bonusMatch == bonus);
+    private boolean matched(int matchCount, boolean bonusMatch) {
+        return this.matchCount == matchCount && this.bonusMatch == bonusMatch;
     }
 
     public int prize() {
-        return this.prize;
+        return prize;
     }
 
     public int matchCount() {
-        return this.matchCount;
+        return matchCount;
     }
 
     public boolean bonusMatch() {
-        return this.bonusMatch;
+        return bonusMatch;
     }
 }

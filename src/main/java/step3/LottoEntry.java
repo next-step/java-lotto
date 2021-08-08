@@ -19,7 +19,7 @@ public class LottoEntry {
     }
 
     private void validate() {
-        if (this.lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("주어진 숫자의 갯수가 6보다 작거나 큽니다.");
         }
     }
@@ -31,7 +31,7 @@ public class LottoEntry {
     }
 
     public boolean contains(int number) {
-        return this.lottoNumbers.contains(number);
+        return lottoNumbers.contains(number);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class LottoEntry {
 
     public String toNumbersString() {
         return "[" +
-                this.lottoNumbers.stream()
+                lottoNumbers.stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(", "))
                 + "]";
