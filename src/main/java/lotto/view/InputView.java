@@ -14,8 +14,8 @@ public class InputView {
 
     private final Scanner scanner;
 
-    public InputView() {
-        scanner = new Scanner(System.in);
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public long getInputAmount() {
