@@ -4,18 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Tokens {
-    private final List<Token> tokens;
+public class PositiveNumbers {
+    private final List<PositiveNumber> positiveNumbers;
 
-    public Tokens(String[] tokens) {
-        this.tokens = Arrays.stream(tokens)
-                .map(Token::create)
+    public PositiveNumbers(int[] positiveNumbers) {
+        this.positiveNumbers = Arrays.stream(positiveNumbers)
+                .mapToObj(PositiveNumber::new)
                 .collect(Collectors.toList());
     }
 
     public int sum() {
-        return tokens.stream()
-                .map(Token::parseInt)
-                .reduce(0, Integer::sum);
+        return positiveNumbers.stream()
+            .mapToInt(PositiveNumber::number)
+            .reduce(0, Integer::sum);
     }
 }
