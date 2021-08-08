@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("로또 테스트")
 public class LottoTest {
@@ -63,5 +63,18 @@ public class LottoTest {
 
         // when, then
         assertEquals(lotto.findEqualNumberCount(winningNumbers), 3);
+    }
+
+    @DisplayName("로또 번호 포함 여부 기능이 정상 동작해야 한다.")
+    @Test
+    public void containsTest() {
+        // given
+        Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
+                .subList(0, 6));
+
+        // when, then
+        assertTrue(lotto.contains(LottoNumber.valueOf(1)));
+        assertTrue(lotto.contains(LottoNumber.valueOf(6)));
+        assertFalse(lotto.contains(LottoNumber.valueOf(7)));
     }
 }
