@@ -6,6 +6,7 @@ import lottery.dto.LotteryStatisticDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,12 +23,12 @@ class LotteriesTest {
         List<Lottery> lotteryList = Arrays.asList(getLottery(1, 6));
         Lotteries lotteries = new Lotteries(lotteryList);
         Lottery winningLottery = getLottery(1, 6);
-        double expectedEarningsRate = getEarningsRate(LotteryResult.SIX_MATCHES, 1);
+        BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.SIX_MATCHES, 1);
 
         // when
         LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
-        double earningsRate = lotteryStatisticDto.getEarningsRate();
+        BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
         // then
         assertThat(counts).containsExactly(0, 0, 0, 1);
@@ -41,12 +42,12 @@ class LotteriesTest {
         List<Lottery> lotteryList = Arrays.asList(getLottery(4, 9), getLottery(11, 16));
         Lotteries lotteries = new Lotteries(lotteryList);
         Lottery winningLottery = getLottery(1, 6);
-        double expectedEarningsRate = getEarningsRate(LotteryResult.THREE_MATCHES, 2);
+        BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.THREE_MATCHES, 2);
 
         // when
         LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
-        double earningsRate = lotteryStatisticDto.getEarningsRate();
+        BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
         // then
         assertThat(counts).containsExactly(1, 0, 0, 0);
@@ -69,7 +70,7 @@ class LotteriesTest {
                 .collect(Collectors.toList());
     }
 
-    private double getEarningsRate(LotteryResult lotteryResult, int lotteryCount) {
+    private BigDecimal getEarningsRate(LotteryResult lotteryResult, int lotteryCount) {
         return lotteryResult.toDto(0)
                 .getCashPrize()
                 .divide(Lottery.PRICE.multiply(lotteryCount));

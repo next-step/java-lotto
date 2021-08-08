@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -33,8 +34,9 @@ public class Money implements Comparable<Money> {
         return money * number;
     }
 
-    public double divide(long number) {
-        return (double) this.money / number;
+    public BigDecimal divide(long number) {
+        return new BigDecimal(this.money)
+                .divide(new BigDecimal(number));
     }
 
     private void validateMoney(final String money) {

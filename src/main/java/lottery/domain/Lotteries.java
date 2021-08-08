@@ -4,10 +4,12 @@ import lottery.domain.winningstrategy.WinningLotteryStrategy;
 import lottery.dto.LotteryDto;
 import lottery.dto.LotteryStatisticDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Lotteries {
@@ -43,7 +45,12 @@ public class Lotteries {
         return Collectors.reducing(0, e -> 1, Integer::sum);
     }
 
-    private long getTotalEarnings(final Map<LotteryResult, Long> lotteryResultMap) {
+    private BigDecimal getEarningsRate(Map<LotteryResult, Integer> lotteryResultMap) {
+        return new BigDecimal(getTotalEarnings(lotteryResultMap))
+                .divide(new BigDecimal(getTotalLotteriesPrice()));
+    }
+
+    private long getTotalEarnings(final Map<LotteryResult, Integer> lotteryResultMap) {
         return lotteryResultMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getTotalCashPrize(entry.getValue()))

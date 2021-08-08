@@ -2,6 +2,7 @@ package lottery.dto;
 
 import lottery.domain.LotteryResult;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
 public class LotteryStatisticDto {
 
     private final List<LotteryResultDto> lotteryResultDtos;
-    private final double earningsRate;
+    private final BigDecimal earningsRate;
 
     public LotteryStatisticDto(final Map<LotteryResult, Integer> lotteryResultMap, final BigDecimal earningsRate) {
         this.lotteryResultDtos = toLotteryResultDtoMap(lotteryResultMap);
@@ -42,7 +43,7 @@ public class LotteryStatisticDto {
         return lotteryResultDtos;
     }
 
-    public double getEarningsRate() {
+    public BigDecimal getEarningsRate() {
         return earningsRate;
     }
 }
