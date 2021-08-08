@@ -10,19 +10,20 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottosTest {
 
     private final int TICKET_NUMBER = 3;
-    private List<Integer> winnerNumbers = new ArrayList<>();
+    private List<LottoNumber> winnerNumbers = new ArrayList<>();
     private Lottos sortLottos;
 
     @BeforeEach
     void setUp() {
         sortLottos = new Lottos(TICKET_NUMBER, new ListSortStrategy());
-        winnerNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        IntStream.range(1, 7).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
     }
 
     @Test

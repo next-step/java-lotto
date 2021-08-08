@@ -3,9 +3,13 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    public static final long SIZE = 6;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != SIZE){
+            throw new IllegalArgumentException("LottoNumbers의 사이즈가 잘못 입력되었습니다. 입력 사이즈 : " + lottoNumbers.size());
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -15,19 +19,19 @@ public class LottoNumbers {
 
     public int sameAs(LottoNumbers winnerNumbers) {
         int numbers = 0;
-        for (Integer winnerNumber:winnerNumbers.lottoNumbers) {
+        for (LottoNumber winnerNumber : winnerNumbers.getLottoNumbers()) {
             numbers += contains(winnerNumber);
         }
         return numbers;
     }
 
-    private int contains(int winnerNumber){
-        if(this.lottoNumbers.contains(winnerNumber))
+    private int contains(LottoNumber winnerNumber) {
+        if (this.lottoNumbers.contains(winnerNumber))
             return 1;
         return 0;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

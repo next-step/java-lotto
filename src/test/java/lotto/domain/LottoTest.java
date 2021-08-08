@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.strategy.ListMixStrategy;
 import lotto.strategy.ListSortStrategy;
-import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,29 +23,29 @@ class LottoTest {
 
     private Lotto randomLotto;
     private Lotto sortedLotto;
-    private List<Integer> winnerNumbers = new ArrayList<>();
+    private List<LottoNumber> winnerNumbers = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
         randomLotto = new Lotto(new ListMixStrategy());
         sortedLotto = new Lotto(new ListSortStrategy());
-        winnerNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        IntStream.range(1, 7).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
     }
 
     @Test
     @DisplayName("생성한 로또의 숫자의 개수가 6임을 확인한다")
     void size() {
-        assertThat(randomLotto.getNumbers().size()).isEqualTo(LottoNumberGenerator.SIZE);
-        assertThat(sortedLotto.getNumbers().size()).isEqualTo(LottoNumberGenerator.SIZE);
+        assertThat(randomLotto.getNumbers().size()).isEqualTo(LottoNumbers.SIZE);
+        assertThat(sortedLotto.getNumbers().size()).isEqualTo(LottoNumbers.SIZE);
     }
 
     @Test
     @DisplayName("랜덤 로또를 생성했을 때 각 숫자들은 최소숫자 1 이상, 최대숫자 45 이하임을 확인한다.")
     void lottoWithMixStrategy() {
         LottoNumbers lottoNumbers = randomLotto.getNumbers();
-        for (int lottoNumber : lottoNumbers.getLottoNumbers()) {
-            assertThat(lottoNumber).isGreaterThanOrEqualTo(LottoNumberGenerator.MIN_NUMBER);
-            assertThat(lottoNumber).isLessThanOrEqualTo(LottoNumberGenerator.MAX_NUMBER);
+        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+            assertThat(lottoNumber.getLottoNumber()).isGreaterThanOrEqualTo(LottoNumber.MIN_NUMBER);
+            assertThat(lottoNumber.getLottoNumber()).isLessThanOrEqualTo(LottoNumber.MAX_NUMBER);
         }
     }
 
@@ -54,7 +54,7 @@ class LottoTest {
     void lottoWithSortStrategy() {
         LottoNumbers lottoNumbers = sortedLotto.getNumbers();
         for (int i = 0; i < lottoNumbers.size(); i++) {
-            int number = i + 1;
+            LottoNumber number = new LottoNumber(i + 1);
             assertEquals(lottoNumbers.getLottoNumbers().get(i), number);
         }
     }
@@ -67,15 +67,15 @@ class LottoTest {
 
         assertEquals(sortedLotto.getAward(), Award.UNIDENTIFIED);
 
-        List<Integer> winnerNumbers = parseStringNumbersToList(winnerNumberString);
+        List<LottoNumber> winnerNumbers = parseStringNumbersToList(winnerNumberString);
         LottoNumbers winnerLottoNumbers = new LottoNumbers(winnerNumbers);
 
         sortedLotto.drawLotto(winnerLottoNumbers);
         assertEquals(sortedLotto.getAward(), Award.valueOf(type));
     }
 
-    private List<Integer> parseStringNumbersToList(String winnerNumberString) {
-        return Arrays.stream(winnerNumberString.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+    private List<LottoNumber> parseStringNumbersToList(String winnerNumberString) {
+        return Arrays.stream(winnerNumberString.split(",")).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList());
     }
 
     @ParameterizedTest

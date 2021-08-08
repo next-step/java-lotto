@@ -16,12 +16,12 @@ class LottoGameTest {
 
     public static final int TICKET_NUMBER = 5;
     private LottoGame lottoGame = new LottoGame();
-    private List<Integer> winnerNumbers = new ArrayList<>();
+    private List<LottoNumber> winnerNumbers = new ArrayList<>();
     private LottoNumbers winnerLottoNumbers;
 
     @BeforeEach
     void setUp() {
-        winnerNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        IntStream.range(1, 7).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
         winnerLottoNumbers = new LottoNumbers(winnerNumbers);
     }
 
