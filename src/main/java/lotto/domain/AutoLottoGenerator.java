@@ -11,8 +11,9 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private static final List<Integer> targetNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+    private static final List<LottoNumber> targetNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .boxed()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
     @Override
@@ -29,7 +30,6 @@ public class AutoLottoGenerator implements LottoGenerator {
         List<LottoNumber> lottoNumbers = targetNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .sorted()
-                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         return new LottoTicket(lottoNumbers);
