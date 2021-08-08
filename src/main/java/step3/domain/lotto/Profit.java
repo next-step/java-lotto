@@ -7,7 +7,7 @@ public class Profit {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final Double profit;
+    private final double profit;
 
     public Profit() {
         this(0);
