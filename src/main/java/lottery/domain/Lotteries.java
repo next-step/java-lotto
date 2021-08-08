@@ -22,7 +22,7 @@ public class Lotteries {
     }
 
     public LotteryStatisticDto getLotteryStatisticDto(final WinningLotteryStrategy winningLotteryStrategy) {
-        Map<LotteryResult, Long> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
+        Map<LotteryResult, Integer> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
         return new LotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
     }
 
@@ -32,15 +32,15 @@ public class Lotteries {
                 .collect(Collectors.toList());
     }
 
-    private Map<LotteryResult, Long> getLotteryResultMap(final WinningLotteryStrategy winningLotteryStrategy) {
+    private Map<LotteryResult, Integer> getLotteryResultMap(final WinningLotteryStrategy winningLotteryStrategy) {
         return lotteries.stream()
                 .map(lottery -> lottery.getLotteryResult(winningLotteryStrategy))
                 .filter(LotteryResult::notBlank)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), countLotteryResult()));
     }
 
-    private double getEarningsRate(Map<LotteryResult, Long> lotteryResultMap) {
-        return (double) getTotalEarnings(lotteryResultMap) / getTotalLotteriesPrice();
+    private Collector<LotteryResult, ?, Integer> countLotteryResult() {
+        return Collectors.reducing(0, e -> 1, Integer::sum);
     }
 
     private long getTotalEarnings(final Map<LotteryResult, Long> lotteryResultMap) {

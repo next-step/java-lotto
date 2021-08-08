@@ -14,13 +14,13 @@ public class LotteryStatisticDto {
     private final List<LotteryResultDto> lotteryResultDtos;
     private final double earningsRate;
 
-    public LotteryStatisticDto(final Map<LotteryResult, Long> lotteryResultMap, final double earningsRate) {
+    public LotteryStatisticDto(final Map<LotteryResult, Integer> lotteryResultMap, final BigDecimal earningsRate) {
         this.lotteryResultDtos = toLotteryResultDtoMap(lotteryResultMap);
         this.earningsRate = earningsRate;
     }
 
-    private List<LotteryResultDto> toLotteryResultDtoMap(final Map<LotteryResult, Long> lotteryResultMap) {
-        Map<LotteryResult, Long> defaultLotteryResultMap = getDefaultLotteryResultMap();
+    private List<LotteryResultDto> toLotteryResultDtoMap(final Map<LotteryResult, Integer> lotteryResultMap) {
+        Map<LotteryResult, Integer> defaultLotteryResultMap = getDefaultLotteryResultMap();
         defaultLotteryResultMap.putAll(lotteryResultMap);
         return defaultLotteryResultMap.entrySet()
                 .stream()
@@ -29,13 +29,13 @@ public class LotteryStatisticDto {
                 .collect(Collectors.toList());
     }
 
-    private Map<LotteryResult, Long> getDefaultLotteryResultMap() {
+    private Map<LotteryResult, Integer> getDefaultLotteryResultMap() {
         return Stream.of(
                 LotteryResult.THREE_MATCHES,
                 LotteryResult.FOUR_MATCHES,
                 LotteryResult.FIVE_MATCHES,
                 LotteryResult.SIX_MATCHES)
-                .collect(Collectors.toMap(Function.identity(), v -> 0L));
+                .collect(Collectors.toMap(Function.identity(), v -> 0));
     }
 
     public List<LotteryResultDto> getLotteryResultDtos() {
