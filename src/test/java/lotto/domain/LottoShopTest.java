@@ -13,10 +13,10 @@ public class LottoShopTest {
     void buyLottoCountTest() {
         // given
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        LottoShop lottoShop = new LottoShop();
+        LottoShop lottoShop = new LottoShop(lottoGenerator);
 
         // when
-        LottoTickets lottoTickets = lottoShop.buy(10_000L, lottoGenerator);
+        LottoTickets lottoTickets = lottoShop.buy(10_000L);
         int actual = lottoTickets.size();
 
         // then

@@ -11,9 +11,10 @@ public class LottoApplication {
 
         long purchaseAmount = InputView.getInputAmount();
 
-        LottoShop lottoShop = new LottoShop();
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount, lottoGenerator);
+        LottoShop lottoShop = new LottoShop(lottoGenerator);
+
+        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount);
 
         ResultView.showBuyLottoTickets(lottoTickets);
 
