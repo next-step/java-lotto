@@ -1,4 +1,3 @@
-import step2.domain.LottoMachine;
 import step2.view.InputView;
 
 public class LottoApp {
