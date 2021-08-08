@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.utils.RandomLottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,10 +20,8 @@ public class LottoApplication {
 
         List<LottoTicket> totalLottoTickets = new ArrayList<>();
 
-        InputView.manualLottoNumberQuestion();
-
-        for(int i = 0 ; i < manualLottoCount; i++){
-            totalLottoTickets.add(LottoTicket.of(InputView.getManualLottoNumber()));
+        for (int i = 0; i < manualLottoCount; i++) {
+            totalLottoTickets.add(lottoMachine.generateLottoTicket(InputView.getManualLottoNumber()));
         }
 
         int lottoTotalCount = lottoMachine.getPurchaseLottoCount();
@@ -31,7 +30,7 @@ public class LottoApplication {
 
 
         for (int i = 0; i < autoLottoCount; i++) {
-            LottoTicket generateLottoTicket = lottoMachine.generateLottoNumber();
+            LottoTicket generateLottoTicket = lottoMachine.generateLottoTicket(RandomLottoTicketGenerator.execute());
             ResultView.printLottoNumber(generateLottoTicket);
             totalLottoTickets.add(generateLottoTicket);
         }

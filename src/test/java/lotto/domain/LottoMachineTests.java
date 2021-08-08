@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoMachineTests {
     @DisplayName("구입 금액을 넣었을때 올바른 개수가 return 되는 지 test")
@@ -17,13 +20,13 @@ public class LottoMachineTests {
         assertThat(lottoMachine.getPurchaseLottoCount()).isEqualTo(expected);
     }
 
-    @DisplayName("로또 기계에서 로또번호들을 생성 시 로또번호가 6개 인지 테스트 ")
+    @DisplayName("로또 기계에서 로또 티켓들을 잘 생성되는지 테스트")
     @Test
     void generateLottoNumbersTest() {
         LottoMachine lottoMachine = new LottoMachine(14000);
 
-        LottoTicket lottoTicket = lottoMachine.generateLottoNumber();
+        LottoTicket lottoTicket = lottoMachine.generateLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoTicket.size()).isEqualTo(6);
+        assertThat(lottoTicket).isEqualTo(lottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }
