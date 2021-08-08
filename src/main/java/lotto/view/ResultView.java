@@ -1,13 +1,19 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
-import lotto.domain.Award;
-import lotto.domain.Lottos;
+import lotto.domain.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printPurchaseLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        System.out.println(lottos.toString());
+        lottos.getLottos().stream().forEach(lotto -> printLottoNumbers(lotto.getNumbers()));
+    }
+
+    private static void printLottoNumbers(LottoNumbers numbers) {
+        List<String> numbersStringList = numbers.getLottoNumbers().stream().map(LottoNumber::getLottoNumber).map(String::valueOf).collect(Collectors.toList());
+        System.out.println("[" + String.join(", ", numbersStringList) + "]");
     }
 
     public static void printWinners(LottoGame lottoGame) {
