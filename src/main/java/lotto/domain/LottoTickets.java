@@ -5,22 +5,30 @@ import lotto.dto.WinStats;
 import java.util.*;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
-    private Money money;
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public LottoTickets(Money money, List<LottoTicket> lottoTickets) {
-        if (money.countLotto() < lottoTickets.size()) {
+        validateMoney(money, lottoTickets.size());
+        this.lottoTickets.addAll(lottoTickets);
+    }
+
+    public LottoTickets(Money money, List<LottoTicket> lottoTickets, List<LottoTicket> manualNumbers) {
+        validateMoney(money, manualNumbers.size());
+        this.lottoTickets.addAll(manualNumbers);
+        new LottoTickets(new Money(money, manualNumbers.size()), lottoTickets);
+    }
+
+    private void validateMoney(Money money, int size) {
+        if (money.countLotto() < size) {
             throw new IllegalArgumentException("로또 구입 금액이 부족합니다.");
         }
-        this.lottoTickets = lottoTickets;
-        this.money = money;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
 
-    public WinStats getWinStats(WinLotto winLotto) {
+    public WinStats getWinStats(WinLotto winLotto, Money money) {
         Map<WinAmount, Integer> matchMap = new HashMap<>();
         long amount = 0;
 
@@ -32,10 +40,10 @@ public class LottoTickets {
             }
         }
 
-        return new WinStats(matchMap, calculateYield(amount));
+        return new WinStats(matchMap, calculateYield(amount, money));
     }
 
-    private float calculateYield(long amount) {
+    private float calculateYield(long amount, Money money) {
         if (amount == 0) {
             return 0;
         }
@@ -47,12 +55,11 @@ public class LottoTickets {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTickets that = (LottoTickets) o;
-        return Objects.equals(lottoTickets, that.lottoTickets) &&
-                Objects.equals(money, that.money);
+        return Objects.equals(lottoTickets, that.lottoTickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoTickets, money);
+        return Objects.hash(lottoTickets);
     }
 }

@@ -11,6 +11,10 @@ public class Money {
         this.value = value;
     }
 
+    public Money(Money money, int spendMoney) {
+        this.value = money.getValue() - spendMoney;
+    }
+
     int getValue() {
         return value;
     }
