@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Result {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static final String LOTTO_AMOUNT_MESSAGE = "%s개를 구매했습니다";
     private static final String LOTTO_NUMBER_LIST = "[%s]";
     private static final String WINNING_RESULT_MESSAGE = "%s - %d";
