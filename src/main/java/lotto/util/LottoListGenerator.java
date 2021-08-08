@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.strategy.ListSortOrMixStrategy;
@@ -7,10 +8,9 @@ import lotto.strategy.ListSortOrMixStrategy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerator {
+public class LottoListGenerator {
     private static final List<LottoNumber> lottoNumbersPool = new ArrayList<>();
 
     static {
@@ -18,9 +18,16 @@ public class LottoNumberGenerator {
                 .forEach(number -> lottoNumbersPool.add(new LottoNumber(number)));
     }
 
-    public static LottoNumbers getLottoNumbers(ListSortOrMixStrategy listSortOrMixStrategy){
-        listSortOrMixStrategy.sortOrMix(lottoNumbersPool);
+    public static List<Lotto> creatLottos(int ticketNumber) {
+        List<Lotto> lottoList = new ArrayList<>();
+        IntStream.range(0, ticketNumber)
+                .forEach(idx -> lottoList.add(new Lotto(createLottoNumbers())));
+        return lottoList;
+    }
+
+    public static LottoNumbers createLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Collections.shuffle(lottoNumbersPool);
         lottoNumbers.addAll(lottoNumbersPool.subList(0, 6));
         return new LottoNumbers(lottoNumbers);
     }

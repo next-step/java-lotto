@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberGenerator;
+import lotto.util.LottoListGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class LottoTest {
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
         IntStream.rangeClosed(1, 6).forEach(number -> lottoNumberList.add(new LottoNumber(number)));
         lottoNumbers = new LottoNumbers(lottoNumberList);
-        randomLotto = new Lotto(LottoNumberGenerator.createLottoNumbers());
+        randomLotto = new Lotto(LottoListGenerator.createLottoNumbers());
         sortedLotto = new Lotto(lottoNumbers);
     }
 
