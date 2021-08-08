@@ -33,4 +33,14 @@ public class LottoNumbers {
     public static LottoNumbers of(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
     }
+
+    public int hit(LottoNumbers other) {
+        return (int) lottoNumbers.stream()
+                        .filter(other::contains)
+                        .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

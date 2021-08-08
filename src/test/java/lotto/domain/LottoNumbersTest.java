@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumbersTest {
 
@@ -57,6 +56,15 @@ class LottoNumbersTest {
         return numbers.stream()
                 .map(String::valueOf)
                 .toArray(String[]::new);
+    }
+
+    @DisplayName("두 로또 숫자들을 비교해서 일치하는 숫자의 수를 알 수 있다.")
+    @Test
+    public void hitTest() {
+        LottoNumbers first = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+        LottoNumbers second = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,7,8,9)));
+        assertThat(first.hit(second))
+                .isEqualTo(3);
     }
 
 }
