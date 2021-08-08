@@ -20,7 +20,7 @@ public class LottoNumberTest {
         List<Integer> numbers = lottoNumber.getLottoNumber();
         for (int number : numbers) {
             assertThat(number).isGreaterThanOrEqualTo(LOTTO_START_NUMBER)
-                .isLessThanOrEqualTo(LOTTO_END_NUMBER);
+                    .isLessThanOrEqualTo(LOTTO_END_NUMBER);
         }
     }
 
@@ -34,7 +34,6 @@ public class LottoNumberTest {
 
         assertThat(numbers.get(0)).isNotEqualTo(shuffleNumber.get(0));
     }
-
 
 
 }

@@ -25,12 +25,11 @@ public class WinningNumberTest {
     @Test
     void 당첨번호_몇개인지_체크() {
         List<Integer> lottoNumber = Arrays.stream(TEST_NUMBER.split(","))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
         assertThat(winningNumber.checkOverlapNumber(lottoNumber))
                 .isEqualTo(6);
     }
-
 
 
 }

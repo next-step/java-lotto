@@ -3,8 +3,6 @@ package lotto;
 import lotto.model.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -17,7 +15,6 @@ public class LottoNumbersTest {
         lottoNumbers.generateNumbers();
         assertThat(lottoNumbers.selectedNumber().size()).isEqualTo(LOTTO_NUMBER_LENGTH);
     }
-
 
 
 }

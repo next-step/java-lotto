@@ -10,11 +10,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,7 +54,6 @@ public class LottoGameTest {
     }
 
 
-
     @ParameterizedTest
     @CsvSource(value = {"6:true", "5:true", "4:true", "3:false"}, delimiter = ':')
     void 당첨번호갯수별_로또_당첨_현황(int winningCount, boolean result) {
@@ -73,7 +70,7 @@ public class LottoGameTest {
         lottoGame.getLottoAmount(amount);
         Map<Winning, Integer> winningMap = this.삼등_1개_4등_2개();
         assertThat(lottoGame.getMargin(winningMap))
-            .isEqualTo(profitRate);
+                .isEqualTo(profitRate);
     }
 
 

@@ -26,13 +26,13 @@ public class Result {
     public static void printLottoNumber(List<Integer> lottoNumber) {
         lottoNumber = lottoNumber.stream().sorted().collect(Collectors.toList());
         System.out.println(String.format(LOTTO_NUMBER_LIST,
-                                lottoNumber.stream()
-                                .map(String::valueOf)
-                                .collect(Collectors.joining(","))));
+                lottoNumber.stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(","))));
     }
 
     public static void printLottoNumbers(List<LottoNumbers> numbers) {
-        for (LottoNumbers number: numbers) {
+        for (LottoNumbers number : numbers) {
             printLottoNumber(number.selectedNumber());
         }
     }
