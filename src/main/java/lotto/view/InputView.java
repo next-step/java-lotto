@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -25,21 +25,17 @@ public class InputView {
     }
 
     public static List<Integer> getWinningNumber() {
+        scanner.nextLine();
         System.out.println(GET_WINNING_NUMBER_QUESTION);
         String LottoNumbers = scanner.nextLine();
         String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
-        return makeWinningNubmer(trimWinningNumberString);
+        return makeWinningNumber(trimWinningNumberString);
     }
 
-    private static List<Integer> makeWinningNubmer(String trimWinningNumberString) {
+    private static List<Integer> makeWinningNumber(String trimWinningNumberString) {
         return Arrays.stream(trimWinningNumberString.split(SPLIT_CUSTOM_REGEX))
                 .map(number -> Integer.parseInt(number))
                 .collect(Collectors.toList());
-    }
-
-    private String replaceBlank(String LottoNumbers) {
-        String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
-        return trimWinningNumberString;
     }
 
     public static int getBonusNumber() {

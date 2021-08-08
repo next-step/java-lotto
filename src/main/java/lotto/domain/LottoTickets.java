@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;

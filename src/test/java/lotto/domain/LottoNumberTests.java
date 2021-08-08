@@ -4,8 +4,6 @@ import lotto.exception.LottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -14,7 +12,8 @@ public class LottoNumberTests {
     @DisplayName("로또 번호 생성 테스트")
     @Test
     void createLottoNumberTest() {
-        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(lottoNumber == LottoNumber.of(1)).isTrue();
         assertThat(LottoNumber.of(45)).isEqualTo(LottoNumber.of(45));
     }
 

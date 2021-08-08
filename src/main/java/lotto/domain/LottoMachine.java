@@ -37,6 +37,6 @@ public class LottoMachine {
 
         Collections.sort(pickedLottoNumbers);
 
-        return LottoTicket.of(new TreeSet<>(pickedLottoNumbers));
+        return LottoTicket.of(new TreeSet<LottoNumber>(pickedLottoNumbers));
     }
 }

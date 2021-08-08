@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -9,8 +9,6 @@ public enum LottoRank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     OUT_OF_RANK(0, 0);
-
-    private static final int FIVE = 5;
 
     private int countOfMatch;
     private int price;
