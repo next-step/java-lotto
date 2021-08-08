@@ -53,4 +53,10 @@ public class CalculatorTest {
 		assertThatThrownBy(() -> calculator.calculate("-1,2,3"))
 						.isInstanceOf(RuntimeException.class);
 	}
+
+	@Test
+	public void splitAndSum_other_charter() throws Exception {
+		assertThatThrownBy(() -> calculator.calculate("1,2,3a"))
+						.isInstanceOf(RuntimeException.class);
+	}
 }

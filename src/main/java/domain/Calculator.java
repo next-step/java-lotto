@@ -9,18 +9,26 @@ public class Calculator {
 		if ("".equals(input) || input == null) {
 			return INIT_SUM;
 		}
-		if (!input.matches(NUMBER_REGEXP)) {
-			throw new RuntimeException("숫자이외의 문자가 들어가있습니다.");
-		}
+
 		String[] numbers = input.split(",|:");
+		checkoutOtherCharacterStatus(numbers);
+		checkNumbersMinusStatus(numbers);
 
 		return getResult(numbers);
 	}
 
-	private void checkNumbersStatus(final String[] numbers) {
+	private void checkNumbersMinusStatus(final String[] numbers) {
 		for(String number : numbers) {
 			if (Integer.parseInt(number) < 0) {
-				throw new RuntimeException("음수가 들어가있습니다.");
+				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
+			}
+		}
+	}
+
+	private void checkoutOtherCharacterStatus(final String[] numbers) {
+		for(String number : numbers) {
+			if (!number.matches(NUMBER_REGEXP)) {
+				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
 			}
 		}
 	}
