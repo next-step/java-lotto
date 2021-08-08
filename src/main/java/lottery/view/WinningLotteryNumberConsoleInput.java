@@ -8,14 +8,11 @@ import java.util.stream.Collectors;
 public class WinningLotteryNumberConsoleInput {
 
     private static final String WINNING_LOTTERY_QUESTION = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String DELIMITER = ", ";
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static List<Integer> askWinningLotteryNumbers() {
+    public static String askWinningLotteryNumbers() {
         System.out.println(WINNING_LOTTERY_QUESTION);
-        return Arrays.stream(scanner.nextLine().split(DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return scanner.nextLine();
     }
 }

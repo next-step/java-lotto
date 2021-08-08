@@ -18,12 +18,12 @@ class LotteryFactoryTest {
     @DisplayName("getLottery 테스트")
     public void getLottery() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        String numbers = "1, 2, 3, 4, 5, 6";
         Lottery winningLottery = new Lottery(getLotteryNumbers(1, 6));
         int expectedMatchesCount = 6;
 
         // when
-        Lottery lottery = LotteryFactory.getLottery(numbers);
+        Lottery lottery = new Lottery(numbers);
 
         // then
         assertThat(lottery).isNotNull();

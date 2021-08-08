@@ -11,12 +11,20 @@ public class Lottery {
     public static final String NON_NULL = "입력값은 null 일 수 없습니다";
     public static final String INVALID_LOTTERY_NUMBERS_SIZE = "로또 숫자는 6개여야 합니다 -> ";
     public static final String DUPLICATED_LOTTERY_NUMBERS = "로또에서 중복된 숫자는 존재 할 수 없습니다";
+    private static final String DELIMITER = ", ";
     public static final Money PRICE = new Money(1000);
     public static final int NUMBERS_SIZE = 6;
 
     private final Set<LotteryNumber> lotteryNumbers;
 
     public Lottery(final List<LotteryNumber> lotteryNumbers) {
+        validateLotteryNumbers(lotteryNumbers);
+        this.lotteryNumbers = new LinkedHashSet<>(lotteryNumbers);
+    }
+
+    public Lottery(final String numbers) {
+        requireNonNull(numbers);
+        List<LotteryNumber> lotteryNumbers = toLotteryNumbers(numbers);
         validateLotteryNumbers(lotteryNumbers);
         this.lotteryNumbers = new LinkedHashSet<>(lotteryNumbers);
     }
@@ -38,10 +46,22 @@ public class Lottery {
                 .collect(Collectors.toList()));
     }
 
+    private List<LotteryNumber> toLotteryNumbers(final String numbers) {
+        return Arrays.stream(numbers.split(DELIMITER))
+                .map(LotteryNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private void validateLotteryNumbers(final List<LotteryNumber> lotteryNumbers) {
         requireNonNull(lotteryNumbers);
         requireValidLotteryNumbersSize(lotteryNumbers.size());
         requireNotDuplicated(lotteryNumbers);
+    }
+
+    private void requireNonNull(final String lotteryNumbers) {
+        if (Objects.isNull(lotteryNumbers)) {
+            throw new IllegalArgumentException(NON_NULL);
+        }
     }
 
     private void requireNonNull(final List<LotteryNumber> lotteryNumbers) {

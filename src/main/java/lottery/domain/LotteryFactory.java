@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +9,6 @@ import java.util.stream.IntStream;
 public class LotteryFactory {
 
     private static final List<LotteryNumber> lotteryNumbers = createAllLotteryNumbers();
-
-    public static Lottery getLottery(final List<Integer> numbers) {
-        return new Lottery(numbers.stream()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList()));
-    }
 
     public static Lotteries getLotteries(final Money money) {
         return new Lotteries(getLotteriesByMoney(money));

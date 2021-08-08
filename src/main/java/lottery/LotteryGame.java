@@ -14,7 +14,7 @@ public class LotteryGame {
         Money money = new Money(PurchasingPriceConsoleInput.askPurchasingPrice());
         Lotteries lotteries = LotteryFactory.getLotteries(money);
         LotteriesConsoleOutput.printLotteries(lotteries.getLotteriesDto());
-        Lottery winningLottery = LotteryFactory.getLottery(WinningLotteryNumberConsoleInput.askWinningLotteryNumbers());
+        Lottery winningLottery = new Lottery(WinningLotteryNumberConsoleInput.askWinningLotteryNumbers());
         LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
         LotteryStatisticConsoleOutput.printLotteryStatistic(lotteryStatisticDto);
     }
