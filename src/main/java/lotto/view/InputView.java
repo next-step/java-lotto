@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -35,17 +34,12 @@ public class InputView {
 
         return Arrays.stream(inputArr)
                 .map(String::trim)
-                .map(wrapAsThrowException(Integer::parseInt))
-                .collect(Collectors.toList());
-    }
-
-    private <T, R> Function<T, R> wrapAsThrowException(Function<T, R> f) {
-        return (T r) -> {
-            try {
-                return f.apply(r);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
-            }
-        };
+                .map(number -> {
+                    try {
+                        return Integer.parseInt(number);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
+                    }
+                }).collect(Collectors.toList());
     }
 }
