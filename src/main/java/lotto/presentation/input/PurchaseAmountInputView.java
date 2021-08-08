@@ -1,4 +1,4 @@
-package lotto.presentation;
+package lotto.presentation.input;
 
 import java.util.Scanner;
 
