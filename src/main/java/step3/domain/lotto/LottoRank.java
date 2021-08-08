@@ -23,7 +23,7 @@ public enum LottoRank {
         LottoRank lottoNumber = Arrays.stream(LottoRank.values())
             .filter(lottoRank -> lottoRank.number == number)
             .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("맞은 개수를 찾을 수 없습니다."));
+            .orElse(LottoRank.ZERO_MATCH);
 
         if (lottoNumber.getNumber() == 5 && matchBonus) {
             return FIVE_BONUS_MATCH;
