@@ -13,7 +13,7 @@ public class LottoController {
 
     private LottoGame lottoGame;
 
-    public void gameSetting() {
+    public void playGame() {
 
         int purchaseAmount = Input.getPurchaseAmount();
         lottoGame = new LottoGame();
@@ -22,7 +22,7 @@ public class LottoController {
         Result.printLottoAmount(lottoAmount);
 
         if (lottoAmount == DEFAULT_LOTTO_AMOUNT) {
-            return ;
+            return;
         }
 
         List<List<Integer>> lottoNumbers = lottoGame.generateNumbers();

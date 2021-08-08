@@ -12,7 +12,7 @@ public enum Winning {
     private final int count;
     private final long reward;
 
-    Winning(int count, long reward){
+    Winning(int count, long reward) {
         this.count = count;
         this.reward = reward;
     }

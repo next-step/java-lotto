@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.type.Winning;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class LottoGame {
             return DEFAULT_LOTTO_AMOUNT;
         }
         this.purchaseAmount = purchaseAmount;
-        this.gameCount = purchaseAmount/LOTTO_PRICE;
+        this.gameCount = purchaseAmount / LOTTO_PRICE;
         return this.gameCount;
     }
 
@@ -44,7 +45,7 @@ public class LottoGame {
     private void setCount(Map<Winning, Integer> winningCount, int overlapCount) {
         int count = 1;
         if (overlapCount < LOTTO_WINNING_MIN_COUNT) {
-            return ;
+            return;
         }
         Winning winning = Winning.findByWinning(overlapCount);
         if (winningCount.containsKey(winning)) {
@@ -59,7 +60,7 @@ public class LottoGame {
         for (Winning winning : winningCount.keySet()) {
             result += winning.getReward() * winningCount.get(winning).intValue();
         }
-        return result/(double)this.purchaseAmount;
+        return result / (double) this.purchaseAmount;
     }
 
 }
