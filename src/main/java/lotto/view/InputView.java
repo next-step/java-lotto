@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -15,9 +13,12 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static LottoNumbers requestWinnerNumbers() {
+    public static List<Integer> requestWinnerNumbers() {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return new LottoNumbers(Arrays.stream(scanner.nextLine().split(",")).map(String::trim).map(Integer::parseInt).map(LottoNumber::new).collect(Collectors.toList()));
+        return Arrays.stream(scanner.nextLine().split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
