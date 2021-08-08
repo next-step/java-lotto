@@ -17,6 +17,7 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
         int manualLottoCount = InputView.getManualLottoTicketCount();
+        lottoMachine.validManualCount(manualLottoCount);
 
         List<LottoTicket> totalLottoTickets = new ArrayList<>();
 

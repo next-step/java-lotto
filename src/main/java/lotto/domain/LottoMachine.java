@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidManualLottoCountException;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -19,8 +21,12 @@ public class LottoMachine {
     }
 
     public LottoTicket generateLottoTicket(List<Integer> randomLottoTicket) {
-
         return LottoTicket.of(randomLottoTicket);
     }
 
+    public void validManualCount(int manualLottoCount) {
+        if (PRICE_OF_LOTTO * manualLottoCount > purchaseAmount) {
+            throw new InvalidManualLottoCountException();
+        }
+    }
 }

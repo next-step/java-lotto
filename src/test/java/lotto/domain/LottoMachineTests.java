@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidManualLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,5 +29,17 @@ public class LottoMachineTests {
         LottoTicket lottoTicket = lottoMachine.generateLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket).isEqualTo(lottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
+    @DisplayName("로또 기계에 넣은 금액 보다 수동 로또 구매 갯수가 많을 경우 Exception 테스트")
+    @Test
+    void manualLottoCountExceptionTest() {
+        LottoMachine lottoMachine = new LottoMachine(14000);
+
+        assertThatExceptionOfType(InvalidManualLottoCountException.class)
+                .isThrownBy(() -> {
+                    lottoMachine.validManualCount(15);
+                }).withMessageMatching("수동 로또 구입 금액이 총 금액보다 많습니다.");
+
     }
 }
