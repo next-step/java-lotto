@@ -5,6 +5,9 @@ public class Calculator {
 	private static final Integer INIT_SUM = 0;
 
 	public Integer calculate(final String input) {
+		if (input.isEmpty()) {
+			return INIT_SUM;
+		}
 		String[] numbers = input.split(",|:");
 		return getResult(numbers);
 	}

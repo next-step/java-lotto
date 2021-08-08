@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,5 +14,13 @@ public class CalculatorTest {
 		Calculator calculator = new Calculator();
 		Integer result = calculator.calculate(inputParam);
 		assertThat(resultParam).isEqualTo(result);
+	}
+
+	@Test
+	void check_null() {
+		String input = "";
+		Calculator calculator = new Calculator();
+		Integer result = calculator.calculate(input);
+		assertThat(result).isEqualTo(0);
 	}
 }
