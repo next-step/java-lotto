@@ -37,7 +37,7 @@ class LottoTicketsTest {
         List<Integer> customNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         LottoNumbers winNumbers = () -> customNumbers;
 
-        WinStats result = new LottoTickets(new Money(3000), lottoNumbers).getWinStats(winNumbers);
+        WinStats result = new LottoTickets(new Money(3000), lottoNumbers).getWinStats(winNumbers, 5);
         System.out.println(result.toString());
         assertThat(result.getYield()).isEqualTo(0.002f);
     }
