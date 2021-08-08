@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("당첨 번호 컬렉션 테스트")
 public class WinningNumbersTest {
@@ -38,5 +40,17 @@ public class WinningNumbersTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new WinningNumbers(numbers))
                 .withMessage("당첨 번호가 중복 되었습니다.");
+    }
+
+    @DisplayName("당첨 번호 포함 여부 기능이 정상 동작해야 한다.")
+    @Test
+    public void containsTest() {
+        // given
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        // when, then
+        assertTrue(winningNumbers.contains(LottoNumber.valueOf(1)));
+        assertTrue(winningNumbers.contains(LottoNumber.valueOf(6)));
+        assertFalse(winningNumbers.contains(LottoNumber.valueOf(7)));
     }
 }
