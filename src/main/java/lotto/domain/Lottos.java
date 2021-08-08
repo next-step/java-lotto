@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public Lottos(int ticketNumber, ListSortOrMixStrategy listSortOrMixStrategy) {
-        IntStream.range(0, ticketNumber).forEach(idx -> lottos.add(new Lotto(listSortOrMixStrategy)));
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public int size() {

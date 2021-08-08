@@ -1,14 +1,11 @@
 package lotto.domain;
 
-import lotto.strategy.ListSortOrMixStrategy;
-import lotto.util.LottoNumberGenerator;
-
 public class Lotto {
     private LottoNumbers lottoNumbers;
     private Award award = Award.UNIDENTIFIED;
 
-    public Lotto(ListSortOrMixStrategy listSortOrMixStrategy) {
-        lottoNumbers = LottoNumberGenerator.getLottoNumbers(listSortOrMixStrategy);
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public void drawLotto(LottoNumbers winnerNumbers) {
