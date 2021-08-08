@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.utils.RandomUtils;
+import lotto.utils.AutoLottoNumbersGeneratorUtils;
 
 public class Lottos {
 
@@ -19,7 +19,7 @@ public class Lottos {
 		List<Lotto> lottos = new ArrayList<Lotto>(lottoSize);
 
 		for (int i = 0; i < lottoSize; i++) {
-			lottos.add(new Lotto(RandomUtils.generateRandomNumbers(LOTTO_NUMBERS_LENGTH)));
+			lottos.add(new Lotto(AutoLottoNumbersGeneratorUtils.generateRandomNumbers(LOTTO_NUMBERS_LENGTH)));
 		}
 
 		return new Lottos(lottos);
