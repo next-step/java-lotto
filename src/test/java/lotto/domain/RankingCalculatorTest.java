@@ -17,9 +17,9 @@ public class RankingCalculatorTest {
         List<Integer> lastWeekWinning = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<List<Integer>> lottos = initializeLottos();
         //when
-        int count = calculator.calculate(lastWeekWinning, lottos, 3);
+        int result = calculator.calculate(lastWeekWinning, lottos, 3);
         //then
-        assertThat(count).isEqualTo(3);
+        assertThat(result).isEqualTo(3);
     }
 
     @Test
@@ -29,9 +29,9 @@ public class RankingCalculatorTest {
         List<Integer> lastWeekWinning = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<List<Integer>> lottos = initializeLottos();
         //when
-        int count = calculator.calculate(lastWeekWinning, lottos, 1);
+        int result = calculator.calculate(lastWeekWinning, lottos, 1);
         //then
-        assertThat(count).isEqualTo(0);
+        assertThat(result).isEqualTo(0);
     }
 
     private List<List<Integer>> initializeLottos() {
