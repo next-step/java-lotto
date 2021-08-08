@@ -3,13 +3,13 @@ package lottos.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
-    private static final int amountPerPiece = 1000;
+    private static final int AMOUNT_PER_PIECE = 1000;
     private static final LottoGenerator generator = new LottoRandomGenerator();
+
+    private final List<Lotto> lottos;
 
     public Lottos(final int purchaseAmount) {
         this(issue(purchaseAmount));
@@ -27,20 +27,14 @@ public class Lottos {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            List<Integer> numbers = generator.generate();
+            List<Integer> numbers = generator.generate().subList(0, 6);
             lottos.add(new Lotto(numbers));
         }
         return lottos;
     }
 
     private static int calculatePurchaseCount(final int purchaseAmount) {
-        return purchaseAmount / amountPerPiece;
-    }
-
-    public List<LottoResult> match(final Lotto winningLotto) {
-        return lottos.stream()
-                .map(winningLotto::match)
-                .collect(Collectors.toList());
+        return purchaseAmount / AMOUNT_PER_PIECE;
     }
 
     public List<Lotto> elements() {

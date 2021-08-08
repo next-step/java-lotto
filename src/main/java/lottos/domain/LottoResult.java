@@ -1,29 +1,14 @@
 package lottos.domain;
 
-import java.util.Objects;
-
 public class LottoResult {
 
-    private Prize prize;
+    private final LottoPrize lottoPrize;
 
-    public LottoResult(Prize prize) {
-        this.prize = prize;
+    public LottoResult(LottoPrize lottoPrize) {
+        this.lottoPrize = lottoPrize;
     }
 
-    public Prize getPrize() {
-        return prize;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoResult that = (LottoResult) o;
-        return prize == that.prize;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(prize);
+    public LottoPrize getPrize() {
+        return lottoPrize;
     }
 }

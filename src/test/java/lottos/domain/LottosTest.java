@@ -38,20 +38,20 @@ class LottosTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:6", "4,5,6,7,8,9:3"}, delimiter = ':')
-    void 로또_게임_결과_검증(final String numbersText, final int count) {
+    @CsvSource(value = {"1,2,3,4,5,10:SECOND", "2,3,4,5,6,9:THIRD"}, delimiter = ':')
+    void 로또_게임_결과_검증(final String numbersText, final String rank) {
 
         // given
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(numbersText)));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 
         // when
-        List<LottoResult> lottoResults = lottos.match(winningLotto);
+        List<LottoResult> lottoResults = winningLotto.match(lottos);
         LottoResult lottoResult = lottoResults.stream()
                 .findFirst()
                 .orElseThrow(RuntimeException::new);
 
         //then
-        assertEquals(lottoResult.getPrize(), Prize.findByNumberOfMatchers(count));
+        assertEquals(lottoResult.getPrize(), LottoPrize.valueOf(rank));
     }
 }

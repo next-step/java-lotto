@@ -1,7 +1,7 @@
 package lottos.controller;
 
-import lottos.domain.Lotto;
 import lottos.domain.Lottos;
+import lottos.domain.WinningLotto;
 
 
 public class LottoConsoleController {
@@ -10,7 +10,7 @@ public class LottoConsoleController {
         return new Lottos(purchaseAmount);
     }
 
-    public Lotto lastWeeksWinningLotto(final String lastWeeksNumbersText) {
-        return new Lotto(lastWeeksNumbersText);
+    public WinningLotto lastWeeksWinningLotto(final String lastWeeksNumbersText, final String bonusNumberText) {
+        return new WinningLotto(lastWeeksNumbersText, bonusNumberText);
     }
 }

@@ -2,10 +2,10 @@ package lottos;
 
 
 import lottos.controller.LottoConsoleController;
-import lottos.domain.Lotto;
+import lottos.domain.LottoGameStatistics;
 import lottos.domain.LottoResult;
 import lottos.domain.Lottos;
-import lottos.domain.Statistics;
+import lottos.domain.WinningLotto;
 import lottos.view.LottoConsoleInputView;
 import lottos.view.LottoConsoleOutputView;
 
@@ -28,9 +28,11 @@ public class ApplicationRunner {
         lottoConsoleOutputView.printLottos(purchaseLottos);
 
         String lastWeeksNumbersText = lottoConsoleInputView.enterLastWeeksNumbers();
-        Lotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto(lastWeeksNumbersText);
-        List<LottoResult> lottoResults = purchaseLottos.match(lastWeekWiningLotto);
-        lottoConsoleOutputView.printStatistics(new Statistics(purchaseAmount, lottoResults));
+        String bonusNumberText = lottoConsoleInputView.enterBonusBall();
+
+        WinningLotto lastWeekWiningLotto = lottoConsoleController.lastWeeksWinningLotto(lastWeeksNumbersText, bonusNumberText);
+        List<LottoResult> lottoResults = lastWeekWiningLotto.match(purchaseLottos);
+        lottoConsoleOutputView.printStatistics(new LottoGameStatistics(purchaseAmount, lottoResults));
 
         scanner.close();
     }
