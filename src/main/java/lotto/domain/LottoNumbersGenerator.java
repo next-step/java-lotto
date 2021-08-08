@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbersGenerator {
 
@@ -27,5 +29,11 @@ public class LottoNumbersGenerator {
     private LottoNumber pickRandomLottoNumber() {
         Collections.shuffle(sourceLottoNumbers);
         return sourceLottoNumbers.get(FIRST_INDEX);
+    }
+
+    public List<LottoNumbers> generate(int quantity) {
+        return Stream.generate(this::generate)
+                .limit(quantity)
+                .collect(Collectors.toList());
     }
 }

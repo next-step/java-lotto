@@ -23,6 +23,14 @@ public class LottoNumber {
         return new LottoNumber(number);
     }
 
+    public static int getLowerBound() {
+        return LOTTO_NUMBER_LOWER_BOUND;
+    }
+
+    public static int getUpperBound() {
+        return LOTTO_NUMBER_UPPER_BOUND;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
