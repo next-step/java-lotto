@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoNumbersTest {
 
-    private LottoNumbers winnerNumbers;
     private LottoNumbers lottoNumbers;
     private final List<LottoNumber> numbers = new ArrayList<>();
 
@@ -33,32 +32,32 @@ class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 생성 시 리스트의 사이즈가 6이 아니면 IllegalArgumentException이 발생한다")
     void sizeException() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 5).forEach(number -> numbers.add(new LottoNumber(number)));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers))
-                .withMessage("LottoNumbers의 사이즈가 잘못 입력되었습니다. 입력 사이즈 : " + numbers.size());
+        List<LottoNumber> smallSizeNumberList = new ArrayList<>();
+        IntStream.rangeClosed(1, 5).forEach(number -> smallSizeNumberList.add(new LottoNumber(number)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(smallSizeNumberList))
+                .withMessage("LottoNumbers의 사이즈가 잘못 입력되었습니다. 입력 사이즈 : " + smallSizeNumberList.size());
     }
 
     @Test
     @DisplayName("중복된 숫자로 LottoNumbers생성 시 IllegalArgumentException이 발생한다.")
     void duplicateNumbers(){
-        List<LottoNumber> numbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 6).forEach(number -> numbers.add(new LottoNumber(1)));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(numbers));
+        List<LottoNumber> duplicateNumbers = new ArrayList<>();
+        IntStream.rangeClosed(1, 6).forEach(number -> duplicateNumbers.add(new LottoNumber(1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(duplicateNumbers));
 
     }
 
     @Test
-    @DisplayName("LottoNumbers.sameAs 함수를 호출하면 당첨 숫자의 개수를 리턴한다.")
+    @DisplayName("LottoNumbers.countContains 함수를 호출하면 당첨 숫자의 개수를 리턴한다.")
     void sameAs() {
         List<LottoNumber> numbers = new ArrayList<>();
         IntStream.range(4, 10).forEach(number -> numbers.add(new LottoNumber(number)));
-        winnerNumbers = new LottoNumbers(numbers);
-        assertThat(lottoNumbers.countContains(winnerNumbers)).isEqualTo(3);
+        assertThat(lottoNumbers.countContains(new LottoNumbers(numbers))).isEqualTo(3);
+
     }
 
     @Test
-    @DisplayName("LottoNumbers의 getLottoNumbers 함수를 호출하면 List<Integer>를 리턴한다.")
+    @DisplayName("LottoNumbers의 getLottoNumbers 함수를 호출하면 List<LottoNumber>를 리턴한다.")
     void getLottoNumbers() {
         assertEquals(lottoNumbers.getLottoNumbers(), numbers);
     }
