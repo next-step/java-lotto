@@ -19,7 +19,7 @@ class LottoNumbersGeneratorTest {
         LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(sourceLottoNumbers);
         LottoNumbers generatedLottoNumbers = lottoNumbersGenerator.generate();
         LottoNumbers expectedLottoNumbers = LottoNumbers.of(sourceLottoNumbers);
-        assertThat(generatedLottoNumbers.hit(expectedLottoNumbers))
+        assertThat(generatedLottoNumbers.countMatches(expectedLottoNumbers))
                 .isEqualTo(6);
     }
 

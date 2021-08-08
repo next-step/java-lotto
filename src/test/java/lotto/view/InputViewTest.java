@@ -38,7 +38,7 @@ class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         InputView inputView = InputView.of(inputStream);
         LottoNumbers winningLottoNumbers = inputView.getWinningLottoNumbers();
-        assertThat(winningLottoNumbers.hit(expected))
+        assertThat(winningLottoNumbers.countMatches(expected))
                 .isEqualTo(6);
     }
 
