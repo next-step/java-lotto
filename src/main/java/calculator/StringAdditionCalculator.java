@@ -1,15 +1,17 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class StringAdditionCalculator {
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
-    private Tokens splitWithCustomDelimiter(String expression) {
+    private PositiveNumbers splitWithCustomDelimiter(String expression) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(expression);
 
         List<String> customDelimiterList = new ArrayList<>();
@@ -19,7 +21,10 @@ public class StringAdditionCalculator {
         if (customDelimiterList.size() > 0) {
             delimiters = String.join("|", customDelimiterList);
         }
-        return new Tokens(expression.split(delimiters));
+        return new PositiveNumbers(
+            Stream.of(expression.split(delimiters))
+                .mapToInt(Integer::parseInt)
+                .toArray());
     }
 
     private String extractExpression(String expression, Matcher matcher, final List<String> customDelimiterList) {
