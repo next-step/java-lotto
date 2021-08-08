@@ -1,4 +1,4 @@
-import controller.LottoController;
+import lotto.controller.LottoController;
 import lotto.domain.Records;
 import lotto.view.InputView;
 import lotto.view.ResultView;
