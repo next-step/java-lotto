@@ -16,9 +16,13 @@ public class LottoMoney {
   private final int money;
 
   public LottoMoney(int money) {
+    validationMoney(money);
+    this.money = money;
+  }
+
+  private void validationMoney(final int money) {
     checkMinimumValue(money);
     checkEnoughValue(money);
-    this.money = money;
   }
 
   private void checkMinimumValue(final int money) {
