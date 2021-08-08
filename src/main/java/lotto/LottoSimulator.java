@@ -22,26 +22,38 @@ public class LottoSimulator {
 
     private void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        outputView.printPurchaseCount(purchaseAmount.getPurchaseQuantity());
-        LottoTicket lottoTicket = LottoTicket.of(getLottoNumbers(purchaseAmount));
-        outputView.printLottoTicket(lottoTicket);
+        LottoTicket lottoTicket = getLottoTicket(purchaseAmount);
+        LottoNumbers winningLottoNumbers = getWinningLottoNumbers();
     }
 
     private PurchaseAmount getPurchaseAmount() {
         outputView.printPurchaseAmountInputMessage();
-        return inputView.getPurchaseAmount();
+        PurchaseAmount purchaseAmount = inputView.getPurchaseAmount();
+        outputView.printPurchaseCount(purchaseAmount.getPurchaseQuantity());
+        return purchaseAmount;
     }
 
-    private List<LottoNumbers> getLottoNumbers(PurchaseAmount purchaseAmount) {
-        return lottoNumbersGenerator.generate(purchaseAmount.getPurchaseQuantity());
+    private LottoTicket getLottoTicket(PurchaseAmount purchaseAmount) {
+        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersGenerator.generate(purchaseAmount.getPurchaseQuantity()));
+        outputView.printLottoTicket(lottoTicket);
+        return lottoTicket;
+    }
+
+    private LottoNumbers getWinningLottoNumbers() {
+        outputView.printWinningLottoNumbersInputMessage();
+        return inputView.getWinningLottoNumbers();
     }
 
     public static void main(String[] args) {
-        InputView inputView = InputView.of(System.in);
-        OutputView outputView = OutputView.of(System.out);
-        LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
-        LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
-        lottoSimulator.run();
+        try {
+            InputView inputView = InputView.of(System.in);
+            OutputView outputView = OutputView.of(System.out);
+            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
+            LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
+            lottoSimulator.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static List<LottoNumber> createLottoNumbers() {
