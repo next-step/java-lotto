@@ -14,11 +14,13 @@ public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String MESSAGE_BOUNDARY = "---------";
     private static final String ANSWER_COUNT_MESSAGE = "%d개 일치";
+    private static final String BONUS_BALL_MATCH_MESSAGE = "보너스 볼 일치";
     private static final String WINNING_MONEY_AMOUNT_MESSAGE = "(%d원)";
     private static final String EQUAL_WINNING_RANK_COUNT_MESSAGE = "%d개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
     private static final String ONE_BLANK_SPACE = " ";
     private static final String DASH = "-";
+    private static final String COMMA = ",";
 
     private final PrintStream printStream;
 
@@ -65,6 +67,12 @@ public class ResultView {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(ANSWER_COUNT_MESSAGE);
         stringBuffer.append(ONE_BLANK_SPACE);
+        if (winningRank.isSecondPlace()) {
+            stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(ONE_BLANK_SPACE));
+            stringBuffer.append(COMMA);
+            stringBuffer.append(ONE_BLANK_SPACE);
+            stringBuffer.append(BONUS_BALL_MATCH_MESSAGE);
+        }
         stringBuffer.append(WINNING_MONEY_AMOUNT_MESSAGE);
         stringBuffer.append(DASH);
         stringBuffer.append(ONE_BLANK_SPACE);

@@ -26,14 +26,6 @@ public enum WinningRank {
         this.winningMoneyAmount = winningMoneyAmount;
     }
 
-    public int getAnswerCount() {
-        return answerCount;
-    }
-
-    public int getWinningMoneyAmount() {
-        return winningMoneyAmount;
-    }
-
     public static List<WinningRank> findWinningRanks(Lottos lottos, LotteryNumbers lotteryNumbers) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
@@ -56,5 +48,17 @@ public enum WinningRank {
 
     private static boolean isThirdPlace(WinningRank winningRank) {
         return THIRD_PLACE == winningRank;
+    }
+
+    public int getAnswerCount() {
+        return answerCount;
+    }
+
+    public int getWinningMoneyAmount() {
+        return winningMoneyAmount;
+    }
+
+    public boolean isSecondPlace() {
+        return this == SECOND_PLACE;
     }
 }
