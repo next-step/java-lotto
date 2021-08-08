@@ -12,22 +12,24 @@ public class InputView {
     private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_INPUT_VALUE_INCORRECT = "입력값이 올바르지 않습니다.";
     private static final String NUMBER_SEPARATOR = ",";
-    private static final Scanner SCANNER = new Scanner(System.in);
 
-    private InputView() {
+    private final Scanner scanner;
+
+    public InputView() {
+        scanner = new Scanner(System.in);
     }
 
-    public static long getInputAmount() {
+    public long getInputAmount() {
         System.out.println(MESSAGE_INPUT_AMOUNT);
-        long amount = SCANNER.nextLong();
-        SCANNER.nextLine();
+        long amount = scanner.nextLong();
+        scanner.nextLine();
         return amount;
     }
 
-    public static List<Integer> getWinningNumber() {
+    public List<Integer> getWinningNumber() {
         System.out.println();
         System.out.println(MESSAGE_INPUT_WINNING_NUMBER);
-        String input = SCANNER.nextLine();
+        String input = scanner.nextLine();
 
         String[] inputArr = input.split(NUMBER_SEPARATOR);
 
@@ -37,7 +39,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private static <T, R> Function<T, R> wrapAsThrowException(Function<T, R> f) {
+    private <T, R> Function<T, R> wrapAsThrowException(Function<T, R> f) {
         return (T r) -> {
             try {
                 return f.apply(r);

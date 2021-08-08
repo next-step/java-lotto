@@ -9,7 +9,9 @@ import java.util.List;
 public class LottoApplication {
     public static void main(String[] args) {
 
-        long purchaseAmount = InputView.getInputAmount();
+        InputView inputView = new InputView();
+
+        long purchaseAmount = inputView.getInputAmount();
 
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
         LottoShop lottoShop = new LottoShop(lottoGenerator);
@@ -18,7 +20,7 @@ public class LottoApplication {
 
         ResultView.showBuyLottoTickets(lottoTickets);
 
-        List<Integer> winningNumbers = InputView.getWinningNumber();
+        List<Integer> winningNumbers = inputView.getWinningNumber();
 
         LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
 
