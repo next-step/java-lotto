@@ -1,17 +1,23 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
-    private List<List<Integer>> lottoNumbers = new ArrayList<>();
+    private static final int LOTTO_NUMBER_MIN_LENGTH = 0;
+    private static final int LOTTO_NUMBER_MAX_LENGTH = 6;
 
-    public List<List<Integer>> getLottoNumbers(int gameCount) {
+    private List<Integer> lottoNumber = new ArrayList<>();
+
+    public LottoNumbers() {
         LottoNumber lottoNumber = new LottoNumber();
-        for (int count = 0; count < gameCount; count++) {
-            lottoNumbers.add(lottoNumber.shuffle());
-        }
-        return lottoNumbers;
+        lottoNumber.shuffle();
+        this.lottoNumber = lottoNumber.getLottoNumber()
+                .subList(LOTTO_NUMBER_MIN_LENGTH, LOTTO_NUMBER_MAX_LENGTH);
+
+    }
+
+    public List<Integer> selectedNumber() {
+        return this.lottoNumber;
     }
 }

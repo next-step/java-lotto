@@ -8,9 +8,6 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private static final int LOTTO_NUMBER_MIN_LENGTH = 0;
-    private static final int LOTTO_NUMBER_MAX_LENGTH = 6;
-
     private List<Integer> lottoNumber = new ArrayList<>();
 
     public LottoNumber() {
@@ -19,11 +16,12 @@ public class LottoNumber {
         }
     }
 
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
+    }
 
-    public List<Integer> shuffle() {
-        Collections.shuffle(lottoNumber);
-        return new ArrayList<>(lottoNumber
-                .subList(LOTTO_NUMBER_MIN_LENGTH, LOTTO_NUMBER_MAX_LENGTH));
+    public void shuffle() {
+        Collections.shuffle(this.lottoNumber);
     }
 
 }

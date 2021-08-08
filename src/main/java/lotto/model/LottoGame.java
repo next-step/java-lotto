@@ -15,9 +15,9 @@ public class LottoGame {
     private int gameCount = 0;
     private WinningNumber winningNumber;
 
-    public List<List<Integer>> generateNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        return lottoNumbers.getLottoNumbers(this.gameCount);
+    public List<LottoNumbers> generateNumbers() {
+        LottoTicket lottoTicket = new LottoTicket();
+        return lottoTicket.getTicket(this.gameCount);
     }
 
     public int getLottoAmount(int purchaseAmount) {

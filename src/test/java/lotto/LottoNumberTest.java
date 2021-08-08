@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberTest {
 
-    LottoNumber lottoNumber = new LottoNumber();
-
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
+
+    LottoNumber lottoNumber = new LottoNumber();
 
     @Test
     void 로또_숫자_1부터_45까지() {
