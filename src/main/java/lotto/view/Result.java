@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.model.LottoNumbers;
-import lotto.model.LottoTicket;
 import lotto.type.Winning;
 
 import java.util.List;
@@ -11,10 +10,9 @@ import java.util.stream.Collectors;
 
 public class Result {
 
-    private static final Scanner scanner = new Scanner(System.in);
     private static final String LOTTO_AMOUNT_MESSAGE = "%s개를 구매했습니다";
     private static final String LOTTO_NUMBER_LIST = "[%s]";
-    private static final String WINNING_RESULT_MESSAGE = "%s - %d";
+    private static final String WINNING_RESULT_MESSAGE = "%d개 일치 (%d원) - %d";
     private static final String MARGIN_MESSAGE = "총 수익율은 %.2f입니다. (%s)";
     private static final String BENEFIT_MESSAGE = "개이득";
     private static final String LOSS_MESSAGE = "손해";
@@ -50,7 +48,7 @@ public class Result {
         if (winningCount.containsKey(winning)) {
             count = winningCount.get(winning);
         }
-        System.out.println(String.format(WINNING_RESULT_MESSAGE, winning.toString(), count));
+        System.out.println(String.format(WINNING_RESULT_MESSAGE, winning.getCount(), winning.getReward(), count));
     }
 
     public static void printMargin(double margin) {

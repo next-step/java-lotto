@@ -17,12 +17,6 @@ public enum Winning {
         this.reward = reward;
     }
 
-    @Override
-    public String toString() {
-        String info = "%d개 일치 (%d원)";
-        return String.format(info, this.count, this.reward);
-    }
-
     public static Winning findByWinning(int count) {
         return Arrays.stream(Winning.values())
                 .filter(winning -> winning.count == count)
@@ -33,4 +27,10 @@ public enum Winning {
     public long getReward() {
         return this.reward;
     }
+
+    public int getCount() {
+        return this.count;
+    }
+
+
 }

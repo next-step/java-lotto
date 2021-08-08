@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Input {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int getPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
