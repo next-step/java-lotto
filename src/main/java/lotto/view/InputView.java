@@ -43,7 +43,6 @@ public class InputView {
     }
 
     public static List<Integer> getWinningNumber() {
-        scanner.nextLine();
         System.out.println(GET_WINNING_NUMBER_QUESTION);
         String LottoNumbers = scanner.nextLine();
         String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);

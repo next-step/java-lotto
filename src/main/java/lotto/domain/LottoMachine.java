@@ -8,8 +8,8 @@ public class LottoMachine {
 
     static final int PRICE_OF_LOTTO = 1000;
 
-    private int purchaseLottoCount;
-    private int purchaseAmount;
+    private final int purchaseAmount;
+    private final int purchaseLottoCount;
 
     public LottoMachine(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
@@ -24,7 +24,7 @@ public class LottoMachine {
         return LottoTicket.of(randomLottoTicket);
     }
 
-    public void validManualCount(int manualLottoCount) {
+    public void checkValidManualCount(int manualLottoCount) {
         if (PRICE_OF_LOTTO * manualLottoCount > purchaseAmount) {
             throw new InvalidManualLottoCountException();
         }

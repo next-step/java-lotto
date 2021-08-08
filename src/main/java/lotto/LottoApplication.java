@@ -17,10 +17,10 @@ public class LottoApplication {
         LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
 
         int manualLottoCount = InputView.getManualLottoTicketCount();
-        lottoMachine.validManualCount(manualLottoCount);
+        lottoMachine.checkValidManualCount(manualLottoCount);
 
         List<LottoTicket> totalLottoTickets = new ArrayList<>();
-
+        InputView.manualLottoNumberQuestion();
         for (int i = 0; i < manualLottoCount; i++) {
             totalLottoTickets.add(lottoMachine.generateLottoTicket(InputView.getManualLottoNumber()));
         }

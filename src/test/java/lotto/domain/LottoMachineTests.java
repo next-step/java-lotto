@@ -38,7 +38,7 @@ public class LottoMachineTests {
 
         assertThatExceptionOfType(InvalidManualLottoCountException.class)
                 .isThrownBy(() -> {
-                    lottoMachine.validManualCount(15);
+                    lottoMachine.checkValidManualCount(15);
                 }).withMessageMatching("수동 로또 구입 금액이 총 금액보다 많습니다.");
 
     }
