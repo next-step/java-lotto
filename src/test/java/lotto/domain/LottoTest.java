@@ -60,7 +60,7 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,7,8:THIRD", "1,2,3,7,8,9:FOURTH", "1,2,7,8,9,10:BANG2", "1,7,8,9,10,11:BANG1", "7,8,9,10,11,12:BANG0"},
+    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,7,8:THIRD", "1,2,3,7,8,9:FOURTH", "1,2,7,8,9,10:BANG", "1,7,8,9,10,11:BANG", "7,8,9,10,11,12:BANG"},
             delimiter = ':')
     @DisplayName("1~6까지의 로또에 대하여 winnerNumbers를 지정하여 1등 ~ 6등까지의 당첨을 확인한다.")
     void drawLottoFirstAward(String winnerNumberString, String type) {

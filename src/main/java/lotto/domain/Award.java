@@ -7,9 +7,7 @@ public enum Award {
     SECOND(5, 1500000),
     THIRD(4, 50000),
     FOURTH(3, 5000),
-    BANG2(2, 0),
-    BANG1(1, 0),
-    BANG0(0, 0),
+    BANG(0, 0),
     UNIDENTIFIED(-1, 0);
     private final int matchNumbers;
     private final int amount;
@@ -20,6 +18,9 @@ public enum Award {
     }
 
     public static Award findBy(int matchNumbers) {
+        if(matchNumbers <= 2){
+            return Award.BANG;
+        }
         return Arrays.stream(values()).filter(award -> award.matchNumbers == matchNumbers).findFirst()
                 .orElseThrow(() -> new RuntimeException());
     }
