@@ -8,7 +8,7 @@ public class LottoPurchase {
 	public static final int START_INCLUSIVE = 0;
 
 	public static Lottos buyLottos(Money money) {
-		return new Lottos(IntStream.range(START_INCLUSIVE, money.getLottoCount())
+		return new Lottos(IntStream.range(START_INCLUSIVE, money.makeLottoCountByMoney())
 			.mapToObj(i -> LottoMachine.createLottoNumbers())
 			.collect(Collectors.toList()));
 	}

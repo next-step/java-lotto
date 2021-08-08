@@ -25,7 +25,7 @@ class MoneyTest {
 	public void inputMoneyAndCount(int money, int lottoCount) {
 		Money result = new Money(money);
 
-		assertThat(result.getLottoCount()).isEqualTo(lottoCount);
+		assertThat(result.makeLottoCountByMoney()).isEqualTo(lottoCount);
 	}
 
 	@Test

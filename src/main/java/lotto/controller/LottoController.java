@@ -12,14 +12,14 @@ import lotto.view.LottoOutputView;
 public class LottoController {
 
 	public static void main(String[] args) {
-		Money money = LottoInputView.buyLottos();
+		Money money = new Money(LottoInputView.buyLottos());
 
 		Lottos lottos = LottoPurchase.buyLottos(money);
 
 		LottoOutputView.printLottoCount(money);
 		LottoOutputView.printLottoList(lottos);
 
-		Lotto winnerLotto = LottoInputView.inputLastWinningLotto();
+		Lotto winnerLotto = new Lotto(LottoInputView.inputLastWinningLotto());
 
 		WinPrizes winPrizes = PrizeStatus.findWinPrize(lottos, winnerLotto);
 		LottoOutputView.displayLottoPrize(winPrizes);

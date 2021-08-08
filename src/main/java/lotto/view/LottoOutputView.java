@@ -20,7 +20,7 @@ public class LottoOutputView {
 	public static final int ZERO_POINT = 0;
 
 	public static void printLottoCount(Money money) {
-		System.out.println(money.getLottoCount() + BUY_RESULT_MESSAGE);
+		System.out.println(money.makeLottoCountByMoney() + BUY_RESULT_MESSAGE);
 	}
 
 	public static void printLottoList(Lottos lottos) {
