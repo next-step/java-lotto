@@ -1,4 +1,7 @@
-package step3;
+package step3.enums;
+
+import step3.DrawnLotto;
+import step3.LottoEntry;
 
 import java.util.Optional;
 import java.util.stream.Stream;

@@ -1,12 +1,11 @@
-package step3;
+package step3.util;
 
-import java.util.ArrayList;
+import step3.LottoEntry;
+import step3.util.LottoNumberGenerator;
+
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoRandomNumberGenerator implements LottoNumberGenerator {
     private final static Random random = new Random();

@@ -1,8 +1,8 @@
 package step3;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.IntStream;
+import step3.util.LottoNumberGenerator;
+
+import java.util.Collections;
 
 public class LottoStore {
     private final LottoPrice lottoPrice;
@@ -12,15 +12,11 @@ public class LottoStore {
     }
 
     public LottoBucket buyLottoEntries(int budget, LottoNumberGenerator lottoNumberGenerator) {
-        LottoBucket lottoBucket = new LottoBucket();
+        int numberOfLottoEntries = lottoPrice.getMaxQuantity(budget);
 
-        IntStream.range(0, lottoPrice.getMaxQuantity(budget))
-                .forEach(x -> {
-                    List<Integer> randomNumbers = lottoNumberGenerator.generateNumbersForLotto();
-
-                    lottoBucket.add(new LottoEntry(randomNumbers));
-                });
-
-        return lottoBucket;
+        return Collections.nCopies(numberOfLottoEntries, 0)
+                .parallelStream()
+                .map(x -> new LottoEntry(lottoNumberGenerator.generateNumbersForLotto()))
+                .collect(LottoBucket::new, LottoBucket::add, LottoBucket::merge);
     }
 }

@@ -1,5 +1,7 @@
 package step3;
 
+import step3.enums.Match;
+
 public class LottoWinStatistics {
 
     private final LottoPrice lottoPrice;

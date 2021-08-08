@@ -1,5 +1,9 @@
 package step3;
 
+import step3.util.LottoRandomNumberGenerator;
+import step3.view.LottoInputView;
+import step3.view.LottoResultView;
+
 import java.util.List;
 import java.util.Scanner;
 

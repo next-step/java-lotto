@@ -18,6 +18,10 @@ public class LottoBucket implements Iterable<LottoEntry> {
         this.lottoEntries.add(lottoEntry);
     }
 
+    public void merge(LottoBucket lottoBucket) {
+        this.lottoEntries.addAll(lottoBucket.lottoEntries);
+    }
+
     public int size() {
         return lottoEntries.size();
     }

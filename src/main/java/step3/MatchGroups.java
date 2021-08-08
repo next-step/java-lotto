@@ -1,5 +1,7 @@
 package step3;
 
+import step3.enums.Match;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
