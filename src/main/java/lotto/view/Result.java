@@ -5,7 +5,6 @@ import lotto.type.Winning;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Result {
@@ -17,6 +16,7 @@ public class Result {
     private static final String BENEFIT_MESSAGE = "개이득";
     private static final String LOSS_MESSAGE = "손해";
     private static final String NON_VALID_NUMBER_MESSAGE = "유효하지 않은 번호입니다.";
+    private static final int MINIMUM_MARGIN = 1;
 
 
     public static void printLottoAmount(int amount) {
@@ -53,7 +53,7 @@ public class Result {
 
     public static void printMargin(double margin) {
         String benefit = BENEFIT_MESSAGE;
-        if (margin < 1) {
+        if (margin < MINIMUM_MARGIN) {
             benefit = LOSS_MESSAGE;
         }
         System.out.println(String.format(MARGIN_MESSAGE, margin, benefit));
