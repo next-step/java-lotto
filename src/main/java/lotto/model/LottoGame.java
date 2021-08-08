@@ -2,7 +2,9 @@ package lotto.model;
 
 import lotto.type.Winning;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
@@ -15,8 +17,8 @@ public class LottoGame {
     private WinningNumber winningNumber;
 
     public LottoTicket getLottoTicket() {
-        LottoTicket lottoTicket = new LottoTicket();
-        return lottoTicket.generateNumbers(this.gameCount);
+        return new LottoTicket(new ArrayList<>())
+                .generateNumbers(this.gameCount);
     }
 
     public int getLottoAmount(int purchaseAmount) {

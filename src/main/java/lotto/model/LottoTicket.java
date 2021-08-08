@@ -1,14 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
 
-    List<LottoNumbers> lottoNumberList = new ArrayList<>();
-
-    public LottoTicket() {
-    }
+    private List<LottoNumbers> lottoNumberList;
 
     public LottoTicket(List<LottoNumbers> lottoNumbers) {
         this.lottoNumberList = lottoNumbers;
