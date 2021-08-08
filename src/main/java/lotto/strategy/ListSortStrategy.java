@@ -5,6 +5,7 @@ import lotto.domain.LottoNumber;
 import java.util.Comparator;
 import java.util.List;
 
+@Deprecated
 public class ListSortStrategy implements ListSortOrMixStrategy{
     @Override
     public void sortOrMix(List<LottoNumber> list) {
