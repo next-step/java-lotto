@@ -16,7 +16,7 @@ public class LottoMain {
         int ticketNumber = amount / 1000;
 
         LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(ticketNumber, new ListMixStrategy());
+        lottoGame.purchase(ticketNumber);
 
         lottoGame.drawLotto(getWinnerLottoNumbers());
 

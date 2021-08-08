@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import lotto.strategy.ListSortOrMixStrategy;
+import lotto.util.LottoListGenerator;
 import lotto.view.ResultView;
 
 public class LottoGame {
     private Lottos lottos;
 
-    public void purchase(int ticketNumber, ListSortOrMixStrategy listSortOrMixStrategy) {
-        lottos = new Lottos(ticketNumber, listSortOrMixStrategy);
+    public void purchase(int ticketNumber) {
+        lottos = new Lottos(LottoListGenerator.creatLottos(ticketNumber));
         ResultView.printPurchaseLottos(lottos);
     }
 

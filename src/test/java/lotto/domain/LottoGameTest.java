@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import lotto.strategy.ListSortStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class LottoGameTest {
 
@@ -26,37 +25,37 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("정렬된 전략으로 로또 티켓을 구입 시 각 로또가 1,2,3,4,5,6 을 포함한다.")
+    @DisplayName("lottoGame의 purchase()함수 호출 시 생성된 Lottos의 수가 ticket의 수와 같은 지 확인한다.")
     void purchase() {
-        lottoGame.purchase(TICKET_NUMBER, new ListSortStrategy());
+        lottoGame.purchase(TICKET_NUMBER);
         assertEquals(lottoGame.getLottos().getLottos().size(), TICKET_NUMBER);
-        IntStream.range(0, TICKET_NUMBER).forEach(index ->
-        assertTrue(lottoGame.getLottos().getLottos().get(index).getNumbers().getLottoNumbers().containsAll(winnerNumbers)));
     }
 
     @Test
     @DisplayName("로또게임의 drawLotto 함수 호출 시 각 로또들의 당첨상태(Award)가 변경된다.")
     void drawLotto() {
-        lottoGame.purchase(TICKET_NUMBER, new ListSortStrategy());
-        for (Lotto lotto: lottoGame.getLottos().getLottos()) {
+        lottoGame.purchase(TICKET_NUMBER);
+        for (Lotto lotto : lottoGame.getLottos().getLottos()) {
             assertEquals(lotto.getAward(), Award.UNIDENTIFIED);
         }
 
         lottoGame.drawLotto(winnerLottoNumbers);
-        for (Lotto lotto: lottoGame.getLottos().getLottos()) {
-            assertEquals(lotto.getAward(), Award.FIRST);
+        for (Lotto lotto : lottoGame.getLottos().getLottos()) {
+            assertNotEquals(lotto.getAward(), Award.UNIDENTIFIED);
         }
 
     }
 
     @Test
-    @DisplayName("정렬된 전략으로 로또티켓을 구입, 당첨로또를 확인, 1등 로또 티켓의 갯수는 티켓 갯수와 같다. 다른 티켓의 수는 0개이다.")
+    @DisplayName("countWinners 함수를 호출했을 때 각각의 합이 ticket의 숫자와 같은 지 확인한다.")
     void countWinners() {
-        lottoGame.purchase(TICKET_NUMBER, new ListSortStrategy());
+        lottoGame.purchase(TICKET_NUMBER);
         lottoGame.drawLotto(winnerLottoNumbers);
-        assertEquals(lottoGame.countWinners(Award.FIRST), TICKET_NUMBER);
-        assertEquals(lottoGame.countWinners(Award.SECOND), 0);
-        assertEquals(lottoGame.countWinners(Award.THIRD), 0);
-        assertEquals(lottoGame.countWinners(Award.FOURTH), 0);
+        long countAll = lottoGame.countWinners(Award.FIRST) +
+                lottoGame.countWinners(Award.SECOND) +
+                lottoGame.countWinners(Award.THIRD) +
+                lottoGame.countWinners(Award.FOURTH) +
+                lottoGame.countWinners(Award.BANG);
+        assertEquals(countAll, TICKET_NUMBER);
     }
 }
