@@ -36,16 +36,11 @@ public class LottoPlaceChecker {
     }
 
     private int getCorrectNum(Lotto lotto) {
-        return (int) lotto.getLottoNums()
-            .stream()
-            .filter(lastWeekLotto.getLottoNums()::contains)
-            .count();
+        return lotto.countCorrectNums(lastWeekLotto);
     }
 
     private boolean isBonusNumCorrect(Lotto lotto) {
-        return lotto.getLottoNums()
-            .stream()
-            .anyMatch(i -> i == lastWeekLotto.getBonusNum());
+        return lotto.isLottoNumContainsBonusNum(lastWeekLotto);
     }
 
     public BigDecimal calculateWinnerRate(List<LottoPlace> lottoPlaces, int totalCost) {
