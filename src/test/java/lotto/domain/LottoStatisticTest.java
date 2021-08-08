@@ -10,9 +10,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("로또 통합 테스트")
-public class LottoTest {
+@DisplayName("로또 매칭 결과 테스트")
+public class LottoStatisticTest {
 
     private List<Integer> winningNumbers;
 
@@ -22,75 +23,38 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 6개 일치 확인")
-    void lottoSixMatchTest() {
+    @DisplayName("로또 당첨 확인")
+    void lottoMatchTwoTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+        List<LottoNumber> sixMatchLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new).collect(Collectors.toList());
 
+        List<LottoNumber> fiveMatchLottoNumbers2 = Stream.of(1, 2, 3, 4, 5, 45)
+                .map(LottoNumber::new).collect(Collectors.toList());
+
+        List<LottoNumber> FourMatchLottoNumbers3 = Stream.of(1, 2, 3, 4, 44, 45)
+                .map(LottoNumber::new).collect(Collectors.toList());
+
+
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
+        lottoTickets.add(new LottoTicket(sixMatchLottoNumbers));
+        lottoTickets.add(new LottoTicket(fiveMatchLottoNumbers2));
+        lottoTickets.add(new LottoTicket(FourMatchLottoNumbers3));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        int actual = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
+        int countMatchSix = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
+        int countMatchFive = lottoStatistic.getRankCount(LottoRank.SECOND_PLACE);
+        int countMatchFour = lottoStatistic.getRankCount(LottoRank.THIRD_PACE);
+        int countMatchThree = lottoStatistic.getRankCount(LottoRank.FOURTH_PLACE);
 
         // then
-        assertThat(actual).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("로또 5개 일치 확인")
-    void lottoFiveMatchTest() {
-        // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
-
-        // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        int actual = lottoStatistic.getRankCount(LottoRank.SECOND_PLACE);
-
-        // then
-        assertThat(actual).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("로또 4개 일치 확인")
-    void lottoFourMatchTest() {
-        // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
-
-        // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        int actual = lottoStatistic.getRankCount(LottoRank.THIRD_PACE);
-
-        // then
-        assertThat(actual).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("로또 3개 일치 확인")
-    void lottoThreeMatchTest() {
-        // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 43, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
-
-        // when
-        LottoStatistic lottoStatistic = lottoTickets.matching(winningNumbers);
-        int actual = lottoStatistic.getRankCount(LottoRank.FOURTH_PLACE);
-
-        // then
-        assertThat(actual).isEqualTo(1);
+        assertAll(
+                () -> assertThat(countMatchSix).isEqualTo(1),
+                () -> assertThat(countMatchFive).isEqualTo(1),
+                () -> assertThat(countMatchFour).isEqualTo(1),
+                () -> assertThat(countMatchThree).isEqualTo(0)
+        );
     }
 
     @Test

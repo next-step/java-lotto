@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class LottoShop {
 
-    private static final int LOTTO_PRIZE_PRICE = 1000;
+    private static final int LOTTO_PRIZE_AMOUNT = 1000;
 
     private final LottoGenerator lottoGenerator;
 
@@ -13,13 +13,25 @@ public final class LottoShop {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public LottoTickets buy(final long price) {
-        long purchaseCount = getPurchaseCount(price);
+    public LottoTickets buy(final long amount) {
+        validationCheck(amount);
+
+        long purchaseCount = getPurchaseCount(amount);
         return buyLottoBatch(purchaseCount);
     }
 
+    private void validationCheck(final long amount) {
+        if (amount < LOTTO_PRIZE_AMOUNT) {
+            throw new IllegalArgumentException("less then the minimum amount");
+        }
+
+        if (amount % LOTTO_PRIZE_AMOUNT != 0 ) {
+            throw new IllegalArgumentException("amount left over");
+        }
+    }
+
     private long getPurchaseCount(final long price) {
-        return Math.floorDiv(price, LOTTO_PRIZE_PRICE);
+        return Math.floorDiv(price, LOTTO_PRIZE_AMOUNT);
     }
 
     private LottoTickets buyLottoBatch(final long purchaseCount) {
