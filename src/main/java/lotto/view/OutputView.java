@@ -26,9 +26,12 @@ public class OutputView {
         System.out.println(String.format("%d개를 구매 했습니다.", playerTicketsCount));
 
         for (LottoTicket ticket : playerTickets) {
-            List<LottoNumber> value = ticket.value();
-            List<Integer> collect = value.stream().map(e -> e.value()).collect(Collectors.toList());
-            System.out.println(collect);
+            List<LottoNumber> lottoNumbers = ticket.value();
+            List<Integer> lottoIntegerNumbers = lottoNumbers.stream()
+                .map(LottoNumber::value)
+                .collect(Collectors.toList());
+
+            System.out.println(lottoIntegerNumbers);
         }
     }
 
@@ -44,7 +47,11 @@ public class OutputView {
             .println(getWinnerHitString(LottoReward.FIVE_NUMBERS_MATCHED_REWARD, winnerResult));
         System.out
             .println(getWinnerHitString(LottoReward.SIX_NUMBERS_MATCHED_REWARD, winnerResult));
-        System.out.println(String.format("총 수익률은 %s 입니다.", winnerResult.getProfitRate()));
+        System.out.println(getProfitRateString(winnerResult));
+    }
+
+    private String getProfitRateString(LottoGameWinnerResult winnerResult) {
+        return String.format("총 수익률은 %s 입니다.", winnerResult.getProfitRate());
     }
 
     private String getWinnerHitString(LottoReward reward, LottoGameWinnerResult winnerResult) {

@@ -10,8 +10,8 @@ public enum LottoReward {
     FIVE_NUMBERS_MATCHED_REWARD(5, 1500000),
     SIX_NUMBERS_MATCHED_REWARD(6, 2000000000);
 
-    int matchedCount;
-    int rewardMoney;
+    final int matchedCount;
+    final int rewardMoney;
 
     LottoReward(int matchedCount, int rewardMoney) {
         this.matchedCount = matchedCount;

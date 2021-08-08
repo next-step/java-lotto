@@ -52,7 +52,7 @@ public class LottoTicket {
 
     public static LottoTicket generateByIntegerList(List<Integer> integerNumbers) {
         List<LottoNumber> lottoNumbers = integerNumbers.stream()
-            .map(e -> new LottoNumber(e))
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }

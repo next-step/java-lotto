@@ -14,22 +14,22 @@ public class LottoGameMain {
 
     public static void main(String[] args) {
         InputView inputView = InputView.getInstance();
-        int moneyForGame = inputView.askMoneyAmount();
+        OutputView outputView = OutputView.getInstance();
 
+        int moneyForGame = inputView.askMoneyAmount();
         LottoTicketVendor vendor = new LottoTicketVendor(new AutoNumberGeneratingWay());
         List<LottoTicket> playerTickets = vendor.buyLottoTickets(moneyForGame);
-
-        OutputView outputView = OutputView.getInstance();
         outputView.showPlayerTicketNumbers(playerTickets);
 
         List<Integer> winnerNumbers = inputView.askWinnerNumbers();
         LottoTicket winnerTicket = LottoTicket.generateByIntegerList(winnerNumbers);
-        inputView.closeScanner();
-
         LottoGameWinnerCalculator winnerCalculator = new LottoGameWinnerCalculator();
-        LottoGameWinnerResult winnerResult = winnerCalculator.calculate(playerTickets, winnerTicket);
+        LottoGameWinnerResult winnerResult = winnerCalculator
+            .calculate(playerTickets, winnerTicket);
 
         outputView.showWinnerResult(winnerResult);
+
+        inputView.closeScanner();
     }
 
 }
