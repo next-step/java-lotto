@@ -24,4 +24,8 @@ public class LottoTicket {
             matchCount++;
         }
     }
+
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
+    }
 }
