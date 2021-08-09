@@ -1,6 +1,10 @@
 package lotto.step2.view;
 
-import java.util.ArrayList;
+import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoTicket;
+import lotto.step2.domain.WinningRank;
+
+import java.util.Map;
 
 public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
@@ -13,10 +17,9 @@ public class ResultView {
         System.out.printf("%d개를 구매했습니다.%n", price / 1000);
     }
 
-    public static void printLottoTicket(ArrayList lottoTickets) {
-        int lottoTicketCount = lottoTickets.size();
-        for (int i=0; i<lottoTicketCount; i++) {
-            System.out.println(lottoTickets.get(i));
+    public static void printLottoTicket(Lotto lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLotto()) {
+            System.out.println(lottoTicket);
         }
         System.out.println();
     }
@@ -24,5 +27,11 @@ public class ResultView {
     public static void printWinningStatisticsMessage() {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println("---------");
+    }
+
+    public static void printWinningRank(Map<WinningRank, Integer> lottoResult) {
+        for (WinningRank winningRank : WinningRank.values()) {
+            System.out.printf("%d개 일치 (%d원) - %d%n", winningRank.getMatchCount(), winningRank.getWinnings(), lottoResult.getOrDefault(winningRank,0));
+        }
     }
 }

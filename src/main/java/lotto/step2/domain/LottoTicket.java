@@ -4,14 +4,14 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private static List<Integer> lottoNumber;
-    private static int matchCount;
+    private List<Integer> lottoNumber;
+    private int matchCount;
 
     public LottoTicket() {
         this.lottoNumber = LottoMachine.mixLottoNumbers();
     }
 
-    public static int matchWinningNumber(WinningNumber winningNumber) {
+    public int matchWinningNumber(WinningNumber winningNumber) {
         for (int num : lottoNumber) {
             isContainNumber(winningNumber, num);
         }
@@ -19,7 +19,7 @@ public class LottoTicket {
         return matchCount;
     }
 
-    public static void isContainNumber(WinningNumber winningNumber, int num) {
+    private void isContainNumber(WinningNumber winningNumber, int num) {
         if (winningNumber.getWinningNumbers().contains(num)) {
             matchCount++;
         }
@@ -27,5 +27,10 @@ public class LottoTicket {
 
     public List<Integer> getLottoNumber() {
         return lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumber.toString();
     }
 }
