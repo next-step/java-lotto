@@ -27,10 +27,32 @@ public final class LottoTickets {
         List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchingCount = lottoTicket.matchLottoTicket(winningNumbers);
-            LottoRank lottoRank = LottoRank.of(matchingCount);
+            LottoRank lottoRank = LottoRank.of(matchingCount, false);
             lottoStatistic.add(lottoRank);
         }
         return new LottoStatistic(lottoStatistic);
+    }
+
+    public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers, final int bonusNumber) {
+        List<LottoRank> lottoStatistic = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank lottoRank = findLottoRank(lottoTicket, winningNumbers, bonusNumber);
+            lottoStatistic.add(lottoRank);
+        }
+        return new LottoStatistic(lottoStatistic);
+    }
+
+    private LottoRank findLottoRank(final LottoTicket lottoTicket, final List<Integer> winningNumbers, final int bonusNumber) {
+        int matchLottoNumberCount = lottoTicket.matchLottoTicket(winningNumbers);
+        if (matchLottoNumberCount == 5) {
+            List<Integer> winningNumbersWithBonusNumber = new ArrayList<>(winningNumbers);
+            winningNumbersWithBonusNumber.add(bonusNumber);
+            int matchBonusCount = lottoTicket.matchLottoTicket(winningNumbersWithBonusNumber);
+            if (matchBonusCount == 6) {
+                return LottoRank.of(matchBonusCount, true);
+            }
+        }
+        return LottoRank.of(matchLottoNumberCount, false);
     }
 
     public List<LottoTicket> getLottoTickets() {

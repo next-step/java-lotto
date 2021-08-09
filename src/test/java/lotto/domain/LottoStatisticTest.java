@@ -21,6 +21,22 @@ public class LottoStatisticTest {
     }
 
     @Test
+    @DisplayName("로또 2등 당첨")
+    void lottoBonusMatchTest() {
+        // given
+        int bonusNumber = 7;
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 7}));
+
+        // when
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers, bonusNumber);
+        int rankCount = lottoStatistic.getRankCount(LottoRank.SECOND_BONUS_PLACE);
+
+        // then
+        assertThat(rankCount).isEqualTo(1);
+    }
+
+    @Test
     @DisplayName("로또 여러개 당첨 확인")
     void lottoMatchTwoTest() {
         // given
