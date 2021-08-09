@@ -17,6 +17,7 @@ public class LottoApp {
 
         LottoMachine lottoMachine = new LottoMachine();
         ArrayList<ArrayList> issuedLottolist = lottoMachine.run(numOfLotto);
+        resultView.printIssuedLottoList(issuedLottolist);
 
         String lastWinningLottoNum = inputView.requestWinningLottoNumber();
 

@@ -34,4 +34,9 @@ public class ResultView {
         }
 
     }
+
+    public void printIssuedLottoList(ArrayList<ArrayList> issuedLottolist) {
+        issuedLottolist.stream()
+                .forEach(issuedLotto -> System.out.println(issuedLotto));
+    }
 }
