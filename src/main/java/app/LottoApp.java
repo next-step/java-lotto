@@ -41,3 +41,4 @@ public class LottoApp {
         ResultView.showResult(result, buyMoney);
     }
 }
+
