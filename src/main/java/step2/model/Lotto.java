@@ -6,11 +6,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int WINNING_RULE_1 = 3;
-    private static final int WINNING_RULE_2 = 4;
-    private static final int WINNING_RULE_3 = 5;
-    private static final int WINNING_RULE_4 = 6;
-
     public List<Integer> getNumbers(LottoStrategy lottoStrategy) {
         return lottoStrategy.getNumbers();
     }

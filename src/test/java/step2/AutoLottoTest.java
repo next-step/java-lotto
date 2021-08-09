@@ -1,6 +1,5 @@
 package step2;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import step2.model.AutoLottoStrategy;
 import step2.model.Lotto;
@@ -20,10 +19,10 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getAmount(""));
+                () ->  user.getLottoCnt(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getAmount(null));
+                () ->  user.getLottoCnt(null));
     }
 
     @Test
@@ -33,7 +32,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getAmount("test"));
+                () ->  user.getLottoCnt("test"));
     }
 
     @Test
@@ -43,7 +42,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getAmount("999"));
+                () ->  user.getLottoCnt("999"));
     }
 
     @Test
@@ -52,7 +51,7 @@ public class AutoLottoTest {
         InputView user = new InputView();
 
         //when
-        int lottoCnt = user.getAmount("1000");
+        int lottoCnt = user.getLottoCnt("1000");
 
         //then
         assertThat(lottoCnt).isEqualTo(1);
