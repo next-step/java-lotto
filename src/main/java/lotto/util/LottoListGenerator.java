@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoListGenerator {
@@ -21,10 +22,8 @@ public class LottoListGenerator {
         return lottoList;
     }
 
-    public static Set<LottoNumber> createLottoNumbers() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
+    private static Set<LottoNumber> createLottoNumbers() {
         Collections.shuffle(lottoNumbersPool);
-        lottoNumbers.addAll(lottoNumbersPool.subList(0, 6));
-        return lottoNumbers;
+        return lottoNumbersPool.stream().limit(6).collect(Collectors.toSet());
     }
 }
