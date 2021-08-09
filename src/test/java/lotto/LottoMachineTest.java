@@ -1,10 +1,15 @@
 package lotto;
 
+import lotto.domain.Lotties;
 import lotto.domain.LottoMachine;
+import lotto.domain.Money;
+import lotto.exception.InvalidLottoPurchaseAmountException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.InputMismatchException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -12,23 +17,24 @@ class LottoMachineTest {
     private static final int LOTTO_MONEY = 14_000;
     private static final int WRONG_LOTTO_MONEY = 14_100;
 
-    LottoMachine lottoMachine;
+    private LottoMachine lottoMachine;
 
     @BeforeEach
     void setUp() {
-        lottoMachine = new LottoMachine(LOTTO_MONEY);
+        lottoMachine = new LottoMachine();
     }
 
     @Test
     @DisplayName("입력받은 금액 만큼 로또를 생성한다.")
     void createLotto() {
-        Assertions.assertThat(lottoMachine.lottiesCount()).isEqualTo(LOTTO_MONEY / 1000);
+        Lotties randomLotties = lottoMachine.createRandomLotties(new Money(LOTTO_MONEY));
+        Assertions.assertThat(randomLotties.getLottiesSize()).isEqualTo(LOTTO_MONEY / 1000);
     }
 
     @Test
     @DisplayName("입력받은 금액이 잘못되었다면 예외가 발생한다.")
     void invalidAmount() {
-        assertThatThrownBy(() -> new LottoMachine(WRONG_LOTTO_MONEY))
-                .isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> lottoMachine.createRandomLotties(new Money(WRONG_LOTTO_MONEY)))
+                .isInstanceOf(InvalidLottoPurchaseAmountException.class);
     }
 }
