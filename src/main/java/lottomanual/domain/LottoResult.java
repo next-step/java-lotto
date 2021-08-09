@@ -20,7 +20,7 @@ public class LottoResult {
 	}
 
 	public void match(String winningNumbers, int bonusNumber) {
-		match(new Lotto(winningNumbers), LottoNumber.valueOf(bonusNumber));
+		match(Lotto.of(winningNumbers), LottoNumber.valueOf(bonusNumber));
 	}
 
 	public void match(Lotto winningNumbers, LottoNumber bonusNumber) {

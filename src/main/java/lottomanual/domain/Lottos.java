@@ -17,7 +17,7 @@ public class Lottos {
 
 	public Lottos(int money, String[] manualNumbers) {
 		for (String lottoNumber : manualNumbers) {
-			lottos.add(new Lotto(lottoNumber));
+			lottos.add(Lotto.of(lottoNumber));
 		}
 		Money automaticAmount = new Money(money).excludeLottoCount(manualNumbers.length);
 		buy(automaticAmount);
@@ -25,7 +25,7 @@ public class Lottos {
 
 	public Lottos(String[] lottoNumbers) {
 		for (String lottoNumber : lottoNumbers) {
-			lottos.add(new Lotto(lottoNumber));
+			lottos.add(Lotto.of(lottoNumber));
 		}
 	}
 
@@ -34,7 +34,7 @@ public class Lottos {
 	}
 
 	public void buy(Set<LottoNumber> lottoNumbers) {
-		lottos.add(new Lotto(lottoNumbers));
+		lottos.add(Lotto.of(lottoNumbers));
 	}
 
 	public void buy(int money) {
@@ -44,7 +44,7 @@ public class Lottos {
 	public void buy(Money money) {
 		int lottoCount = money.getLottoCount();
 		for (int i = 0; i < lottoCount; i++) {
-			lottos.add(new Lotto(LottoNumberShuffle.generate()));
+			lottos.add(Lotto.of(LottoNumberShuffle.generate()));
 		}
 	}
 

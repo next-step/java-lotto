@@ -1,7 +1,9 @@
 package lottomanual.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
@@ -9,31 +11,23 @@ public class Lotto {
 
 	private final Set<LottoNumber> numbers;
 
-	public Lotto(String numbersText) {
-		this(toSet(toList(numbersText)));
-	}
-
-	public Lotto(List<Integer> numbers) {
-		this(toSet(numbers));
-	}
-
-	private static List<Integer> toList(String text) {
-		String[] numberTexts = text.split(",");
-		validateSize(numberTexts.length);
-		return Arrays.stream(numberTexts).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
-	}
-
-	private static Set<LottoNumber> toSet(List<Integer> numbers) {
-		Set<LottoNumber> lottoNumbers = new TreeSet<>();
-		for (Integer number : numbers) {
-			lottoNumbers.add(LottoNumber.valueOf(number));
-		}
-		return lottoNumbers;
-	}
-
-	public Lotto(Set<LottoNumber> numbers) {
+	private Lotto(Set<LottoNumber> numbers) {
 		validateSize(numbers.size());
 		this.numbers = numbers;
+	}
+
+	public static Lotto of(Set<LottoNumber> numbers) {
+		return new Lotto(numbers);
+	}
+
+	public static Lotto of(List<LottoNumber> numbers) {
+		return of(new TreeSet<>(numbers));
+	}
+
+	public static Lotto of(String numbersText) {
+		return Arrays.stream(numbersText.split(","))
+		             .map(LottoNumber::valueOf)
+		             .collect(collectingAndThen(toList(), Lotto::of));
 	}
 
 	private static void validateSize(int size) {

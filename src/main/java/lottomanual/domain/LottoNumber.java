@@ -1,11 +1,17 @@
 package lottomanual.domain;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+import java.util.Comparator;
+
+public class LottoNumber implements Comparable<LottoNumber>, Comparator<LottoNumber> {
 
 	private final int number;
 
 	private LottoNumber(int number) {
 		this.number = number;
+	}
+
+	public static LottoNumber valueOf(String numberText) {
+		return valueOf(Integer.parseInt(numberText.trim()));
 	}
 
 	public static LottoNumber valueOf(int number) {
@@ -29,6 +35,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 			return 1;
 		}
 		return number == o.getNumber() ? 0 : -1;
+	}
+
+	@Override
+	public int compare(LottoNumber o1, LottoNumber o2) {
+		if (o1.getNumber() > o2.getNumber()) {
+			return 1;
+		}
+		return o1.getNumber() == o2.getNumber() ? 0 : -1;
 	}
 
 	@Override

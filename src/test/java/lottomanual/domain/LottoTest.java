@@ -31,7 +31,7 @@ class LottoTest {
 						LottoNumber.valueOf(5),
 						LottoNumber.valueOf(6))
 		);
-		Lotto lotto = new Lotto(defaultNumbers);
+		Lotto lotto = Lotto.of(defaultNumbers);
 
 
 		//when
@@ -58,7 +58,7 @@ class LottoTest {
 		//when
 
 		//then
-		assertThatThrownBy(() -> new Lotto(defaultNumbers)).isInstanceOf(LottoNumbersSizeException.class);
+		assertThatThrownBy(() -> Lotto.of(defaultNumbers)).isInstanceOf(LottoNumbersSizeException.class);
 	}
 
 
@@ -68,8 +68,8 @@ class LottoTest {
 	@DisplayName("지난주 당첨 번호와 비교")
 	void match_numbers(Set<LottoNumber> lottoNumbers, int matchedCount) throws Exception {
 		//given
-		Lotto lotto = new Lotto(lottoNumbers);
-		Lotto lastWeekNumbers = new Lotto(Arrays.asList(1,2,3,4,5,6));
+		Lotto lotto = Lotto.of(lottoNumbers);
+		Lotto lastWeekNumbers = Lotto.of("1,2,3,4,5,6");
 
 		//when
 		int matchesNumber = lotto.matchingQuantityFrom(lastWeekNumbers);
@@ -94,7 +94,7 @@ class LottoTest {
 	@DisplayName("보너스 번호 포함여부")
 	void match_bonus(Set<LottoNumber> lottoNumbers, int bonusNumber, boolean expected) throws Exception {
 		//given
-		Lotto lotto = new Lotto(lottoNumbers);
+		Lotto lotto = Lotto.of(lottoNumbers);
 
 		//when
 		boolean actual = lotto.contains(LottoNumber.valueOf(bonusNumber));

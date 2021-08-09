@@ -13,10 +13,9 @@ class LottoNumberShuffleTest {
 	@DisplayName("로또 번호 6개 생성")
 	void lotto_numbers_generate() throws Exception {
 		//given
-		LottoNumberShuffle generator = new LottoNumberShuffle();
 
 		//when
-		Set<LottoNumber> numbers = generator.generate();
+		Set<LottoNumber> numbers = LottoNumberShuffle.generate();
 
 		//then
 		assertThat(numbers).hasSize(6);
@@ -27,10 +26,9 @@ class LottoNumberShuffleTest {
 	@DisplayName("로또 번호 6개 중복 확인")
 	void lotto_numbers_overlap() throws Exception {
 		//given
-		LottoNumberShuffle generator = new LottoNumberShuffle();
 
 		//when
-		Set<LottoNumber> numbers = generator.generate();
+		Set<LottoNumber> numbers = LottoNumberShuffle.generate();
 
 		//then
 		assertThat(numbers).hasSize(6);

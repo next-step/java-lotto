@@ -60,8 +60,8 @@ class LottosTest {
 		List<Lotto> lottos1 = lottos.toList();
 
 		//then
-		assertThat(lottos1).containsExactly(new Lotto("1, 2, 3, 4, 5, 6"),
-											new Lotto("7, 8, 9, 10, 11, 12"));
+		assertThat(lottos1).containsExactly(Lotto.of("1, 2, 3, 4, 5, 6"),
+											Lotto.of("7, 8, 9, 10, 11, 12"));
 
 	}
 
@@ -76,7 +76,7 @@ class LottosTest {
 
 		//then
 		assertThat(lottos.toList()).hasSize(2);
-		assertThat(lottos.toList().get(0)).isEqualTo(new Lotto("1, 2, 3, 4, 5, 6"));
+		assertThat(lottos.toList().get(0)).isEqualTo(Lotto.of("1, 2, 3, 4, 5, 6"));
 	}
 
 }
