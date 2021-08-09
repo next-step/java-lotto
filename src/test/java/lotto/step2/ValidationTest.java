@@ -13,6 +13,13 @@ import static org.assertj.core.api.Assertions.*;
 public class ValidationTest {
 
     @Test
+    @DisplayName("로또 번호가 1~45 범위 밖일 때 예외 테스트 ")
+    void isValidLottoNumber() {
+        assertThatThrownBy(() -> Validation.isCorrectLottoNumber(46)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Validation.isCorrectLottoNumber(0)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("로또 당첨 번호의 개수가 6개인지 검증")
     void isCorrectLottoCount() {
         List<Integer> list1 = Arrays.asList(3, 4, 8, 9, 10);
