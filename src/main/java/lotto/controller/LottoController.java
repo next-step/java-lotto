@@ -20,9 +20,8 @@ public class LottoController {
 		LottoOutputView.printLottoCount(money);
 		LottoOutputView.printLottoList(lottos);
 
-		Lotto lastWinnerLotto = new Lotto(LottoInputView.inputLastWinningLotto());
-
-		WinnerLotto winnerLotto = new WinnerLotto(lastWinnerLotto, LottoInputView.inputBonusNumber());
+		WinnerLotto winnerLotto = new WinnerLotto(new Lotto(LottoInputView.inputLastWinningLotto()),
+			LottoInputView.inputBonusNumber());
 
 		WinPrizes winPrizes = PrizeStatus.findWinPrize(lottos, winnerLotto);
 		LottoOutputView.displayLottoPrize(winPrizes);
