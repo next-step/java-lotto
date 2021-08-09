@@ -1,13 +1,9 @@
 package step2.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ResultView {
     static int[] charge = {0,0,0,5000,50000,1500000,2000000000};
-    public void printIssuedLottoNumber(String[] lotto) {
-        System.out.println(Arrays.toString(lotto));
-    }
 
     public void printMatchedLottoRecord(int[] matchedLottoRecordArray, int numOfLotto) {
         int totalRevenue = 0;

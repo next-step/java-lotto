@@ -1,11 +1,8 @@
 package step2.domain;
 
-import step2.util.LastWinningLottoNumberChecker;
-
 import java.util.ArrayList;
 
 public class LottoMachine {
-    static int numOfLotto;
     static Lotto lotto = new Lotto();
     static ArrayList<ArrayList> issuedLottolist = new ArrayList<>();
 
