@@ -71,7 +71,7 @@ public class Lotto {
 
     public MatchingCount containNumber(final LottoNumber lottoNumber, MatchingCount matchingCount) {
         if (this.lottoNumbers.contains(lottoNumber)) {
-            return matchingCount.addMatchingCount();
+            return matchingCount.increment();
         }
         return matchingCount;
     }

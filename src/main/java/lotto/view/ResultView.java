@@ -31,20 +31,20 @@ public final class ResultView {
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         for (int i = INIT; i < lottoNumbers.size() + MINUS_ONE; i++) {
-            System.out.print(lottoNumbers.get(i).getNumber() + SEPARATOR);
+            System.out.print(lottoNumbers.get(i).getValue() + SEPARATOR);
         }
 
-        System.out.print(lottoNumbers.get(lottoNumbers.size() + MINUS_ONE).getNumber());
+        System.out.print(lottoNumbers.get(lottoNumbers.size() + MINUS_ONE).getValue());
     }
 
     public void printStatistics(final Map<Rank, MatchingCount> winnings) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + winnings.getOrDefault(Rank.FOURTH, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + winnings.getOrDefault(Rank.THIRD, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("5개 일치 (1500000원)- " + winnings.getOrDefault(Rank.SECOND, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + winnings.getOrDefault(Rank.FIRST, new MatchingCount()).getMatchingCount() + "개");
+        System.out.println("3개 일치 (5000원)- " + winnings.getOrDefault(Rank.FOURTH, new MatchingCount()).getValue() + "개");
+        System.out.println("4개 일치 (50000원)- " + winnings.getOrDefault(Rank.THIRD, new MatchingCount()).getValue() + "개");
+        System.out.println("5개 일치 (1500000원)- " + winnings.getOrDefault(Rank.SECOND, new MatchingCount()).getValue() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + winnings.getOrDefault(Rank.FIRST, new MatchingCount()).getValue() + "개");
     }
 
     public void printEarningsRate(final double earningsRate) {

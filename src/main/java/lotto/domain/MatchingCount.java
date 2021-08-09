@@ -17,11 +17,11 @@ public final class MatchingCount {
         this.matchingCount = matchingCount;
     }
 
-    public int getMatchingCount() {
+    public int getValue() {
         return this.matchingCount;
     }
 
-    public MatchingCount addMatchingCount() {
+    public MatchingCount increment() {
         return new MatchingCount(this.matchingCount + ADD);
     }
 

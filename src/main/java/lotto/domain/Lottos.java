@@ -33,7 +33,7 @@ public final class Lottos {
         for (Lotto lotto : lottos) {
             MatchingCount matchingCount = lotto.getMatchingCount(winningLotto);
             Rank rank = Rank.returnRank(matchingCount);
-            winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getMatchingCount()).addMatchingCount());
+            winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getValue()).increment());
         }
         return winnings;
     }

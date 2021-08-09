@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("NonAsciiCharacters")
 class AutoPurchaseStrategyTest {
 
     private static final int LIMIT_SIZE = 6;
@@ -12,7 +13,6 @@ class AutoPurchaseStrategyTest {
     private static final int MAX_NUMBER = 45;
 
     @DisplayName("6개의 숫자 반환")
-    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void generateLottoNumber_6개_숫자() {
         PurchaseStrategy purchaseStrategy = new AutoPurchaseStrategy();
@@ -20,7 +20,6 @@ class AutoPurchaseStrategyTest {
     }
 
     @DisplayName("1부터 45까지의 숫자 반환")
-    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void generateLottoNumber_1부터_45까지_숫자() {
         PurchaseStrategy purchaseStrategy = new AutoPurchaseStrategy();

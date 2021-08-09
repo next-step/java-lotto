@@ -41,7 +41,7 @@ public enum Rank {
     }
 
     private static void validateMatchingCount(final MatchingCount matchingCount) {
-        if (matchingCount.getMatchingCount() < MIN_HITS_COUNT || matchingCount.getMatchingCount() > MAX_HITS_COUNT) {
+        if (matchingCount.getValue() < MIN_HITS_COUNT || matchingCount.getValue() > MAX_HITS_COUNT) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
     }

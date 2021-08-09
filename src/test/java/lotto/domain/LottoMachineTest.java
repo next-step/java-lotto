@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@SuppressWarnings("NonAsciiCharacters")
 class LottoMachineTest {
 
     private LottoMachine lottoMachine;
@@ -24,7 +25,6 @@ class LottoMachineTest {
     }
 
     @DisplayName("지불금액이 천원 이하일때 예외 throw")
-    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void buyLotto_1000원_이하() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
@@ -33,7 +33,6 @@ class LottoMachineTest {
     }
 
     @DisplayName("등수정보를 가져온다.")
-    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void makeStatisticsWinnings_등수정보() {
         Lottos lottos = new Lottos(
@@ -59,7 +58,6 @@ class LottoMachineTest {
     }
 
     @DisplayName("수익률을 가져온다.")
-    @SuppressWarnings("NonAsciiCharacters")
     @Test
     void calculateEarningsRate_수익률() {
         Lottos lottos = new Lottos(
@@ -74,7 +72,6 @@ class LottoMachineTest {
         Map<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
 
         assertThat(lottoMachine.calculateEarningsRate(winnings, 4)).isEqualTo(13.75);
-
     }
 
 }
