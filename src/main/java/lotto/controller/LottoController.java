@@ -12,7 +12,7 @@ import lotto.view.LottoOutputView;
 public class LottoController {
 
 	public static void main(String[] args) {
-		Money money = new Money(LottoInputView.buyLottos());
+		Money money = new Money(LottoInputView.inputLottoPurchaseMoney());
 
 		Lottos lottos = LottoPurchase.buyLottos(money);
 

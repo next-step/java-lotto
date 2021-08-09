@@ -14,7 +14,7 @@ public class LottoInputView {
 	private LottoInputView() {
 	}
 
-	public static int buyLottos() {
+	public static int inputLottoPurchaseMoney() {
 		System.out.println(BUY_MONEY_MESSAGE);
 		if (!scanner.hasNextInt()) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
