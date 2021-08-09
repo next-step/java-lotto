@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,8 +17,8 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또번호 유효성 검사 Exception 발생")
     void lottoValidationExceptionTest() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 43, 44)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        // given
+        int[] lottoNumbers = {1, 2, 3, 43, 44};
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -31,8 +29,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 6개")
     void lottoSixMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -46,8 +43,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 5개")
     void lottoFiveMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 2, 3, 4, 5, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -61,8 +57,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 4개")
     void lottoFourMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 2, 3, 4, 44, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -76,8 +71,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 3개")
     void lottoThreeMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 43, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 2, 3, 43, 44, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -91,8 +85,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 2개")
     void lottoTwoMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 42, 43, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 2, 42, 43, 44, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -106,8 +99,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 1개")
     void lottoOneMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 41, 42, 43, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {1, 41, 42, 43, 44, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -121,8 +113,7 @@ class LottoTicketTest {
     @DisplayName("로또 추첨 번호와 매칭 확인 - 0개")
     void lottoZeroMatchTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(40, 41, 42, 43, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
+        int[] lottoNumbers = {40, 41, 42, 43, 44, 45};
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when

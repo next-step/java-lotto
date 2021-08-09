@@ -65,8 +65,10 @@ public class LottoStatisticTest {
     @DisplayName("수익률 확인")
     void profitRateTest() {
         // given
+        int[] lottoNumbers = {1, 2, 3, 11, 12, 13};
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 11, 12, 13}));
+        lottoTickets.add(lottoTicket);
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
