@@ -94,4 +94,16 @@ public class AutoLottoTest {
                 () ->  user.getWinningNo(null));
     }
 
+    @Test
+    public void 당첨번호_6개숫자가아() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo("1,2,3,4,5"));
+    }
+
+
+
 }

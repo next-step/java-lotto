@@ -24,5 +24,8 @@ public class InputView {
     public void getWinningNo(String winningNo) {
         //빈값 검사
         LottoException.isBlank(winningNo);
+
+        //6개인지 검사
+        LottoException.checkCnt(winningNo);
     }
 }
