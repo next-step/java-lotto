@@ -25,7 +25,7 @@ public class WinningNumbers {
 
     public int checkOverlapNumber(List<Integer> lottoNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(number -> winningNumber.containsNumber(number))
+                .filter(winningNumber::containsNumber)
                 .count();
     }
 
