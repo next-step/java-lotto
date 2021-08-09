@@ -21,7 +21,7 @@ public class PrizeStatus {
 		for (Lotto lotto : lottos.getLottos()) {
 			Prize winPrize = Prize.getWinnersStatus(
 				(int)lotto.getLottoNumbers().stream().filter(winnerLotto.getLottoNumbers()::contains).count());
-			winPrizes.put(winPrize, winPrizes.get(winPrize) + ADDITION_PRIZE_COUNT);
+			winPrizes.computeIfPresent(winPrize, (oldPrize, oldPrizeCount) -> oldPrizeCount + ADDITION_PRIZE_COUNT);
 		}
 		return new WinPrizes(winPrizes);
 	}
