@@ -4,7 +4,6 @@ import lotto.step2.domain.*;
 import lotto.step2.view.InputView;
 import lotto.step2.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,5 +19,7 @@ public class LottoController {
         ResultView.printWinningStatisticsMessage();
         Map<WinningRank, Integer> winningRank = LottoResult.checkLottoTicket(winningNumber, lottoTickets);
         ResultView.printWinningRank(winningRank);
+        double statistics = LottoResult.calculateStatistics(lottoPrice);
+        ResultView.printStatistics(statistics);
     }
 }

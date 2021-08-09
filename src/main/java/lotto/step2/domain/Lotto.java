@@ -9,7 +9,7 @@ public class Lotto {
         this.lotto = new ArrayList<LottoTicket>();
     }
 
-    public ArrayList buyLotto(int price) {
+    public Lotto buyLotto(int price) {
         if (price < 1000) {
             throw new IllegalArgumentException("돈이 부족합니다. 로또 1장의 가격은 1000원입니다.");
         }
@@ -18,7 +18,7 @@ public class Lotto {
             lotto.add(new LottoTicket());
 
         }
-        return lotto;
+        return this;
     }
 
     public ArrayList<LottoTicket> getLotto() {

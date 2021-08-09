@@ -34,4 +34,8 @@ public class ResultView {
             System.out.printf("%d개 일치 (%d원) - %d%n", winningRank.getMatchCount(), winningRank.getWinnings(), lottoResult.getOrDefault(winningRank,0));
         }
     }
+
+    public static void printStatistics(double statistics) {
+        System.out.printf("총 수익률은 %.2f 입니다", statistics);
+    }
 }
