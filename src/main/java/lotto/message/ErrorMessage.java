@@ -8,4 +8,5 @@ public class ErrorMessage {
 	public static final String DUPLICATE_NUMBER_MESSAGE = "중복된 로또번호가 존재합니다.";
 	public static final String NUMBER_POSITIVE_MESSAGE = "금액은 0원 이하가 될수 없습니다.";
 	public static final String NUMBER_RANGE_MESSAGE = "로또번호는 1부터 45번까지 입니다.";
+	public static final String LOTTO_MACHINE_CREATE_MESSAGE = "로또기계 생성은 불가능 합니다.";
 }
