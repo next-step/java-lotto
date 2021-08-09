@@ -1,8 +1,10 @@
 package step2;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import step2.view.InputView;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AutoLottoTest {
@@ -27,5 +29,27 @@ public class AutoLottoTest {
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () ->  user.setAmount("test"));
+    }
+
+    @Test
+    public void 구매금액_1000미만() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.setAmount("999"));
+    }
+
+    @Test
+    public void 구매금액_정상() {
+        //given
+        InputView user = new InputView();
+
+        //when
+        int lottoCnt = user.setAmount("1000");
+
+        //then
+        assertThat(lottoCnt).isEqualTo(1);
     }
 }
