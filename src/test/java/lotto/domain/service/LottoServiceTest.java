@@ -3,8 +3,8 @@ package lotto.domain.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
-import lotto.domain.model.LottoMoney;
-import lotto.domain.model.LottoRank;
+import lotto.domain.model.money.LottoMoney;
+import lotto.domain.model.result.LottoRank;
 import lotto.dto.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

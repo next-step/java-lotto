@@ -1,7 +1,7 @@
 package lotto.exception;
 
-import static lotto.domain.model.LottoNumber.MAX_INCLUSIVE;
-import static lotto.domain.model.LottoNumber.MIN_INCLUSIVE;
+import static lotto.domain.model.ticket.LottoNumber.MAX_INCLUSIVE;
+import static lotto.domain.model.ticket.LottoNumber.MIN_INCLUSIVE;
 
 public class LottoNumberOutOfRangeException extends IllegalArgumentException {
 

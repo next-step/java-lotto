@@ -1,8 +1,9 @@
-package lotto.domain.model;
+package lotto.domain.model.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.model.ticket.LottoNumber;
 import lotto.exception.LottoNumberOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

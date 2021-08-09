@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.ticket;
 
 import java.util.Map;
 import java.util.Optional;

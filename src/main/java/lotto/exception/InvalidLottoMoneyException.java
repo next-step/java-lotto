@@ -1,6 +1,6 @@
 package lotto.exception;
 
-import static lotto.domain.model.LottoMoney.LOTTO_PRICE;
+import static lotto.domain.model.money.LottoMoney.LOTTO_PRICE;
 
 public class InvalidLottoMoneyException extends RuntimeException {
 
