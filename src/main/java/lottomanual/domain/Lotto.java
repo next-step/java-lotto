@@ -19,6 +19,7 @@ public class Lotto {
 
 	private static List<Integer> toList(String text) {
 		String[] numberTexts = text.split(",");
+		validateSize(numberTexts.length);
 		return Arrays.stream(numberTexts).map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
 	}
 
@@ -31,14 +32,14 @@ public class Lotto {
 	}
 
 	public Lotto(Set<LottoNumber> numbers) {
-		if (validateSize(numbers.size())) {
-			throw new LottoNumbersSizeException();
-		}
+		validateSize(numbers.size());
 		this.numbers = numbers;
 	}
 
-	private boolean validateSize(int size) {
-		return size != NUMBERS_SIZE_LIMIT;
+	private static void validateSize(int size) {
+		if (size != NUMBERS_SIZE_LIMIT) {
+			throw new LottoNumbersSizeException();
+		}
 	}
 
 	public Set<LottoNumber> numbers() {
