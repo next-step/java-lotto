@@ -5,8 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import static lotto.model.Lotto.NUMBER_COUNT;
 import static lotto.model.WinningRank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -14,9 +17,28 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @DisplayName("당첨 순위 테스트")
 public class WinningRankTest {
 
+    @DisplayName("당첨 순위 목록을 찾는 기능이 정상 동작해야 한다.")
+    @Test
+    public void findWinningRanksTest() {
+        // given
+        List<Lotto> lottos = new ArrayList<>();
+        for (int index = 0; index < 6; index++) {
+            List<LottoNumber> lottoNumbers = LottoNumber.getAllLottoNumbers().subList(index, index + NUMBER_COUNT);
+            lottos.add(new Lotto(() -> lottoNumbers));
+        }
+
+        LottoNumber bonusNumber = LottoNumber.valueOf(1);
+        Lotto winningNumbers = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        DrawNumbers drawNumbers = new DrawNumbers(winningNumbers, bonusNumber);
+
+        // when, then
+        assertThat(WinningRank.findWinningRanks(new Lottos(lottos), drawNumbers))
+                .containsExactly(SECOND_PLACE, FIRST_PLACE, THIRD_PLACE, FOURTH_PLACE, FIFTH_PLACE, MISS);
+    }
+
     @DisplayName("당첨 번호 6개, 5개(그리고 보너스 번호 1개), 5개, 4개, 3개가 일치하면 각각 1등, 2등, 3등, 4등, 5등이다.")
     @Test
-    public void winningRankResultTest() {
+    public void findWinningRankTest() {
         // given
         Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
                 .subList(0, 6));
@@ -49,7 +71,7 @@ public class WinningRankTest {
     @DisplayName("일치하는 당첨 번호가 3개 미만이면 MISS다.")
     @ParameterizedTest
     @CsvSource(value = {"5,6,7,8,9,10", "6,7,8,9,10,11", "7,8,9,10,11,12"}, delimiter = ',')
-    public void winningRankMissTest(int first, int second, int third, int fourth, int fifth, int sixth) {
+    public void findMissWinningRankTest(int first, int second, int third, int fourth, int fifth, int sixth) {
         // given
         Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
                 .subList(0, 6));
