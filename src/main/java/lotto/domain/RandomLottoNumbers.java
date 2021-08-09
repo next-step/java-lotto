@@ -14,6 +14,8 @@ public class RandomLottoNumbers {
     }
 
     public LottoTicket generateNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
+
         List<Integer> randomLottoNumbers = new ArrayList<>();
         for (int i = 0; i < SIZE; i++) {
             randomLottoNumbers.add(LOTTO_NUMBERS.get(i));

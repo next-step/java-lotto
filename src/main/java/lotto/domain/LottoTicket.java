@@ -6,18 +6,17 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     private static final int SIZE = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != SIZE) {
-            throw new IllegalArgumentException("로또 한장에 " + SIZE + "개의 숫자를 입력해야합니다.");
-        }
-
         Collections.sort(lottoNumbers);
-
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+
+        if (this.lottoNumbers.size() != SIZE) {
+            throw new IllegalArgumentException("로또 한장에 중복되지 않는 " + SIZE + "개의 숫자를 입력해야합니다.");
+        }
     }
 
     WinAmount getWinAmount(WinLotto winLotto) {
@@ -28,7 +27,9 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
+        lottoNumberList.sort(Comparator.comparingInt(LottoNumber::getValue));
+        return lottoNumberList;
     }
 
     @Override

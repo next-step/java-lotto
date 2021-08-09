@@ -21,8 +21,9 @@ public class LottoApplication {
 
         // 랜덤 로또 티켓 생성
         List<LottoTicket> randomLottoTickets = new ArrayList<>();
+        RandomLottoNumbers randomLottoNumbers = new RandomLottoNumbers();
         for(int i=0; i< money.countLotto() - manualCount; i++){
-            randomLottoTickets.add(new RandomLottoNumbers().generateNumbers());
+            randomLottoTickets.add(randomLottoNumbers.generateNumbers());
         }
         LottoTickets lottoTickets = new LottoTickets(money, randomLottoTickets, manualLottoTickets);
 
