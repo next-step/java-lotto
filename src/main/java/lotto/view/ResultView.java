@@ -1,32 +1,38 @@
 package lotto.view;
 
+import lotto.domain.Lotties;
 import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.SameNumbersCount;
+import lotto.domain.RANK;
+import lotto.domain.WinningStatistics;
+
+import java.util.Map;
 
 public class ResultView {
     private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
-    private static final String WINNING_STATISTICS = "당첨 통계";
-    private static final String LINE = "-------\n";
+    private static final String WINNING_STATISTICS = "\n당첨 통계";
+    private static final String WINNING_PRICE = "%d개 일치 (%d원)- ";
+    private static final String WINNING_COUNT = "%d개";
+    private static final String LINE = "-------";
 
-    public void printLotties(LottoMachine lottoMachine) {
-        System.out.printf(PURCHASE_MESSAGE, lottoMachine.getLottoCount());
-
-        for (int i = 0; i < lottoMachine.lottiesCount(); i++) {
-            Lotto lotto = lottoMachine.getLotties().getLotties().get(i);
+    public void printLotties(Lotties lotties) {
+        System.out.printf(PURCHASE_MESSAGE, lotties.getLottiesSize());
+        for (Lotto lotto : lotties.getLotties()) {
             System.out.println(lotto.getLottoNumber().toString());
         }
+        System.out.println();
     }
 
-    public void printSameNumbers() {
+    public void printSameNumbers(WinningStatistics winningStatistics) {
         System.out.println(WINNING_STATISTICS);
-        System.out.print(LINE);
+        System.out.println(LINE);
 
-        for (SameNumbersCount s : SameNumbersCount.values()) {
-            System.out.printf("%d개 일치 (%d원)- ", s.getSameNumbersCount(), s.getPrizeMoney());
-            System.out.printf("%d개", s.getCount());
+        Map<RANK, Integer> statistics = winningStatistics.getWinningStatistics();
+
+        for (RANK rank : RANK.values()) {
+            System.out.printf(WINNING_PRICE, rank.getSameNumbersCount(), rank.getPrizeMoney());
+            System.out.printf(WINNING_COUNT, statistics.get(rank));
             System.out.println();
-
         }
+
     }
 }
