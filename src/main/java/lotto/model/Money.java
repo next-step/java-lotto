@@ -18,10 +18,6 @@ public class Money {
 		return money;
 	}
 
-	public int countLotto() {
-		return money / MONEY_UNIT;
-	}
-
 	private static void checkThousandUnit(int money) {
 		if (money % MONEY_UNIT != ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.NUMBER_THOUSAND_UNIT_MESSAGE);
