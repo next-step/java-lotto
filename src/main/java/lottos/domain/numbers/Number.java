@@ -13,7 +13,7 @@ public class Number {
     private final Integer number;
 
     private Number(final Integer number) {
-        checkRangeNumber(number);
+        checkNumberRange(number);
         this.number = number;
     }
 
@@ -21,7 +21,7 @@ public class Number {
         return new Number(number);
     }
 
-    private void checkRangeNumber(final Integer number) {
+    private void checkNumberRange(final Integer number) {
         boolean isInvalid = number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER;
 
         if (isInvalid) {

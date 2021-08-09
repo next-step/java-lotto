@@ -1,6 +1,9 @@
 package lottos.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum LottoPrize {
 
@@ -20,16 +23,25 @@ public enum LottoPrize {
     }
 
     public static LottoPrize valueOf(final int countOfMatches, final boolean matchBonus) {
-        if (countOfMatches != 5) {
-            return Arrays.stream(LottoPrize.values())
-                    .filter(prize -> prize.countOfMatches == countOfMatches)
-                    .findAny()
-                    .orElse(LottoPrize.MISS);
-        }
-        if (matchBonus) {
+        if (isSecond(countOfMatches, matchBonus)) {
             return LottoPrize.SECOND;
         }
-        return LottoPrize.THIRD;
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> !prize.isBonus())
+                .filter(prize -> prize.countOfMatches == countOfMatches)
+                .findAny()
+                .orElse(LottoPrize.MISS);
+    }
+
+    private static boolean isSecond(int countOfMatches, boolean matchBonus) {
+        return SECOND.countOfMatches == countOfMatches && matchBonus;
+    }
+
+    public static List<LottoPrize> winningValues() {
+        return Arrays.stream(LottoPrize.values())
+                .filter(LottoPrize::isWinning)
+                .sorted(Comparator.comparing(LottoPrize::getPrizeAmount))
+                .collect(Collectors.toList());
     }
 
     public int getCountOfMatches() {
@@ -41,7 +53,7 @@ public enum LottoPrize {
     }
 
     public boolean isWinning() {
-        return this.prizeAmount > 0;
+        return this.prizeAmount > MISS.prizeAmount;
     }
 
     public boolean isBonus() {

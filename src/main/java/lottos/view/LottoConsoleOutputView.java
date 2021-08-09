@@ -5,8 +5,11 @@ import lottos.domain.LottoGameStatistics;
 import lottos.domain.LottoPrize;
 import lottos.domain.Lottos;
 import lottos.domain.numbers.Number;
+import lottos.domain.numbers.Numbers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -15,12 +18,13 @@ public class LottoConsoleOutputView {
     public void printLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.elements()) {
 
-            final List<Integer> numbers = lotto.getNumbers().elements()
+            Numbers numbers = lotto.getNumbers();
+            final List<Integer> values = numbers.elements()
                     .stream()
                     .map(Number::value)
                     .collect(Collectors.toList());
 
-            System.out.println(numbers);
+            System.out.println(values);
         }
         System.out.println();
     }
@@ -43,15 +47,8 @@ public class LottoConsoleOutputView {
     }
 
     private void printCountOfMatches(final LottoGameStatistics lottoGameStatistics) {
-        Map<LottoPrize, List<LottoPrize>> prizeMap = lottoGameStatistics.groupingByPrize();
-
-        List<LottoPrize> winningLottoPrizes = Arrays.stream(LottoPrize.values())
-                .filter(LottoPrize::isWinning)
-                .sorted(Comparator.comparing(LottoPrize::getPrizeAmount))
-                .collect(Collectors.toList());
-
-        for (LottoPrize winningLottoPrize : winningLottoPrizes) {
-            printCountOfMatches(prizeMap, winningLottoPrize);
+        for (LottoPrize winningLottoPrize : LottoPrize.winningValues()) {
+            printCountOfMatches(lottoGameStatistics.groupingByPrize(), winningLottoPrize);
         }
     }
 

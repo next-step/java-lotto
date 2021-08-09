@@ -1,8 +1,9 @@
 package lottos.domain;
 
-import java.util.List;
+import lottos.domain.numbers.Numbers;
 
 public interface LottoGenerator {
 
-    List<Integer> generate();
+    Numbers generate(final int size);
+
 }

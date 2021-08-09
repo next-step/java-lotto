@@ -14,9 +14,10 @@ import java.util.Scanner;
 
 public class ApplicationRunner {
 
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
 
         LottoConsoleInputView lottoConsoleInputView = new LottoConsoleInputView(scanner);
         LottoConsoleOutputView lottoConsoleOutputView = new LottoConsoleOutputView();

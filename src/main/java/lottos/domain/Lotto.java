@@ -21,6 +21,10 @@ public class Lotto {
         this.numbers = Numbers.from(numbers);
     }
 
+    public Lotto(final Numbers numbers) {
+        this.numbers = numbers;
+    }
+
     private static List<Integer> parseTextToNumbers(final String numbersText) {
         if (numbersText == null || numbersText.isEmpty()) {
             throw new LottoSizeIncorrectException();

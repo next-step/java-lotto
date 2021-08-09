@@ -12,15 +12,18 @@ class NumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("로또 숫자 범위가 아닐경우 에러")
-    void lotto_range_check_exception(final Integer number) {
-        Assertions.assertThrows(LottoNumberRangeIncorrectException.class, () -> Number.valueOf(number));
+    void lotto_range_check_exception(final Integer value) {
+        Assertions.assertThrows(LottoNumberRangeIncorrectException.class, () -> Number.valueOf(value));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     @DisplayName("로또 숫자 범위일경우 정상 생성")
-    void lotto_range_check(final Integer number) {
-        Assertions.assertDoesNotThrow(() -> Number.valueOf(number));
+    void lotto_range_check(final Integer value) {
+        Assertions.assertDoesNotThrow(() -> {
+            Number number = Number.valueOf(value);
+            Assertions.assertEquals(number.value(), value);
+        });
     }
 
     @Test

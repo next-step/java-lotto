@@ -3,12 +3,11 @@ package lottos.domain;
 import lottos.domain.exceptions.LottoNumberRangeIncorrectException;
 import lottos.domain.exceptions.LottoSizeIncorrectException;
 import lottos.domain.numbers.Number;
+import lottos.domain.numbers.Numbers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,11 +30,10 @@ class LottoTest {
 
     @Test
     void 로또_랜덤_생성() {
-        List<Integer> randoms = generator.generate();
 
-        final List<Integer> numbers = randoms.subList(0, 6);
-
+        Numbers numbers = generator.generate(6);
         Lotto lotto = new Lotto(numbers);
+
         assertEquals(lotto.getNumbers().elements().size(), 6);
         for (Number number : lotto.getNumbers().elements()) {
             assertTrue(number.value() >= 1 && number.value() <= 45);
