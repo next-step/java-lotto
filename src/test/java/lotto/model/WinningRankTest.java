@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static lotto.model.WinningRank.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @DisplayName("당첨 순위 테스트")
@@ -29,19 +31,19 @@ public class WinningRankTest {
 
         // when, then
         assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(firstWinningNumbers, notMatchedBonusNumber)),
-                WinningRank.FIRST_PLACE);
+                FIRST_PLACE);
 
         assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(thirdWinningNumbers, matchedBonusNumber)),
-                WinningRank.SECOND_PLACE);
+                SECOND_PLACE);
 
         assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(thirdWinningNumbers, notMatchedBonusNumber)),
-                WinningRank.THIRD_PLACE);
+                THIRD_PLACE);
 
         assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(fourthWinningNumbers, notMatchedBonusNumber)),
-                WinningRank.FOURTH_PLACE);
+                FOURTH_PLACE);
 
         assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(fifthWinningNumbers, notMatchedBonusNumber)),
-                WinningRank.FIFTH_PLACE);
+                FIFTH_PLACE);
     }
 
     @DisplayName("일치하는 당첨 번호가 3개 미만이면 MISS다.")
@@ -56,7 +58,16 @@ public class WinningRankTest {
         LottoNumber bonusBall = LottoNumber.valueOf(45);
 
         // when, then
-        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(winningNumbers, bonusBall)),
-                WinningRank.MISS);
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(winningNumbers, bonusBall)), MISS);
+    }
+
+    @DisplayName("당점 번호 개수로 당첨 순위를 찾는 기능이 정상 동작해야 한다.")
+    @Test
+    public void findByMatchedWinningNumberCountTest() {
+        // given, when, then
+        assertThat(WinningRank.findBy(6)).containsExactly(FIRST_PLACE);
+        assertThat(WinningRank.findBy(5)).containsExactly(SECOND_PLACE, THIRD_PLACE);
+        assertThat(WinningRank.findBy(4)).containsExactly(FOURTH_PLACE);
+        assertThat(WinningRank.findBy(3)).containsExactly(FIFTH_PLACE);
     }
 }
