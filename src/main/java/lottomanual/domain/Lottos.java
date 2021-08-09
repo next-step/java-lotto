@@ -15,6 +15,14 @@ public class Lottos {
 		buy(new Money(money));
 	}
 
+	public Lottos(int money, String[] manualNumbers) {
+		for (String lottoNumber : manualNumbers) {
+			lottos.add(new Lotto(lottoNumber));
+		}
+		Money automaticAmount = new Money(money).excludeLottoCount(manualNumbers.length);
+		buy(automaticAmount);
+	}
+
 	public Lottos(String[] lottoNumbers) {
 		for (String lottoNumber : lottoNumbers) {
 			lottos.add(new Lotto(lottoNumber));

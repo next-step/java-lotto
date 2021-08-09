@@ -23,6 +23,10 @@ public class Money {
 		return money / AMOUNT_UNIT;
 	}
 
+	public Money excludeLottoCount(int count) {
+		return new Money(money - (count * AMOUNT_UNIT));
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -39,5 +43,6 @@ public class Money {
 	public int hashCode() {
 		return Objects.hash(money);
 	}
+
 
 }

@@ -1,6 +1,5 @@
 package lottomanual;
 
-import lottomanual.domain.LottoNumberShuffle;
 import lottomanual.domain.Lottos;
 import lottomanual.ui.InputView;
 import lottomanual.ui.ResultView;

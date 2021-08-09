@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
@@ -51,15 +53,30 @@ class LottosTest {
 	@DisplayName("수동 번호 구매")
 	void lotto_buy_manual() throws Exception {
 		//given
-		String[] lottoNumbers = {"1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"};
+		String[] lottoNumbers = {"1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"};
 
 		//when
 		Lottos lottos = new Lottos(lottoNumbers);
+		List<Lotto> lottos1 = lottos.toList();
+
+		//then
+		assertThat(lottos1).containsExactly(new Lotto("1, 2, 3, 4, 5, 6"),
+											new Lotto("7, 8, 9, 10, 11, 12"));
+
+	}
+
+	@Test
+	@DisplayName("로또 자동, 수동 복합 구매")
+	void lotto_buy_composite() throws Exception {
+		//given
+		Lottos lottos = new Lottos(2000, new String[]{"1, 2, 3, 4, 5, 6"});
+
+		//when
 		int size = lottos.size();
 
 		//then
-		assertThat(size).isEqualTo(2);
-
+		assertThat(lottos.toList()).hasSize(2);
+		assertThat(lottos.toList().get(0)).isEqualTo(new Lotto("1, 2, 3, 4, 5, 6"));
 	}
 
 }
