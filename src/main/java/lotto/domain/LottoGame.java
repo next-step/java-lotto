@@ -1,16 +1,15 @@
 package lotto.domain;
 
 import lotto.util.LottoListGenerator;
-import lotto.view.ResultView;
 
 import java.util.Set;
 
 public class LottoGame {
     private Lottos lottos;
 
-    public void purchase(int ticketNumber) {
+    public Lottos purchase(int ticketNumber) {
         lottos = new Lottos(LottoListGenerator.creatLottos(ticketNumber));
-        ResultView.printPurchaseLottos(lottos);
+        return lottos;
     }
 
     public void drawLotto(Set<LottoNumber> winnerNumbers) {

@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,8 +15,9 @@ public class LottoMain {
         int ticketNumber = amount / 1000;
 
         LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(ticketNumber);
+        Lottos lottos = lottoGame.purchase(ticketNumber);
 
+        ResultView.printPurchaseLottos(lottos);
         lottoGame.drawLotto(getWinnerLottoNumbers());
 
         ResultView.printWinners(lottoGame);
