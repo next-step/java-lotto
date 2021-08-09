@@ -19,6 +19,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     private void validatePurchasableAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException(String.format("구입금액은 최소 %d(원) 이상이어야 합니다.", LOTTO_PRICE));
