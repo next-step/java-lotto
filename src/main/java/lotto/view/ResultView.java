@@ -30,10 +30,17 @@ public class ResultView {
     }
 
     System.out.println(
-        Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + Message.MSG_WINNING_PROFIT_INFO);
+        Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + getProfitResultMessage(gradingScore));
     }
 
-    private static String formattingValue(double profitRate){
+  private static String getProfitResultMessage(double gradingScore) {
+    if(gradingScore > 1){
+      return Message.MSG_WINNING_PROFIT_INFO.replace("${}","이득");
+    }
+    return Message.MSG_WINNING_PROFIT_INFO.replace("${}","손해");
+  }
+
+  private static String formattingValue(double profitRate){
 
       DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
       format.setRoundingMode(RoundingMode.DOWN);

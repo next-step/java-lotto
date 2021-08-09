@@ -9,7 +9,7 @@ public class Message {
   public static final String MSG_ERROR_MISS_MATCH_OPERATION = "일치하는 연산자가 없습니다.";
   public static final String MSG_WINNING_STATISTICS_WORD = "당첨 통계";
   public static final String MSG_WINNING_PROFIT = "총 수익률은 ";
-  public static final String MSG_WINNING_PROFIT_INFO = "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+  public static final String MSG_WINNING_PROFIT_INFO = "입니다.(기준이 1이기 때문에 결과적으로 ${}라는 의미임)";
   public static final String MSG_ERROR_LIMIT_LOTTO_NUMBER = "입력값은 1 ~ 45까지 가능합니다.";
   public static final String MSG_ERROR_SAME_LOTTO_NUMBER = "중복된 숫자를 입력할 수 없습니다.";
   public static final String MSG_ERROR_INPUT_LOTTO_SIZE = "6개의 번호를 입력해 주세요.";
