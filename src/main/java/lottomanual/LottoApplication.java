@@ -9,9 +9,11 @@ public class LottoApplication {
 	public static void main(String[] args) {
 
 		int money = InputView.inputMoney();
-		Lottos lottos = new Lottos(money);
+		String[] manualNumbers = InputView.inputManualNumbers();
 
-		ResultView.printLottos(lottos);
+		Lottos lottos = new Lottos(money, manualNumbers);
+
+		ResultView.printLottos(lottos, manualNumbers.length);
 
 		String winningNumbers = InputView.inputLastWinningNumbers();
 		int bonusNumber = InputView.inputBonusNumber();

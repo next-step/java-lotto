@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class ResultView {
 
-	private static final String TICKET_RESULT = "개를 구매했습니다.";
+	private static final String TICKET_RESULT = "%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
 	private static final String MATCH_RESULT = "\n당첨 통계";
 	private static final String DIVISION_LINE = "--------";
 	private static final String MATCH_FOR_EACH_MESSAGE = "%d개 일치 (%d원) - %d개%n";
 	private static final String MATCH_FOR_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개%n";
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n";
 
-	public static void printLottos(Lottos lottos) {
-		System.out.printf("%d%s%n", lottos.size(), TICKET_RESULT);
+	public static void printLottos(Lottos lottos, int manualCount) {
+		System.out.printf(TICKET_RESULT, manualCount, lottos.size() - manualCount);
 		for (Lotto lotto : lottos.toList()) {
 			System.out.println(lotto);
 		}
