@@ -6,18 +6,15 @@ import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-	private static final LottoNumbers lottoNumbers = new LottoNumbers();
+	private static LottoNumbers lottoNumbers;
 	private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
-	static {
+	private LottoNumbers() {
 		IntStream.range(1, 46)
 			.boxed()
 			.forEach(v -> {
 				lottoNumberMap.put(v, new LottoNumber(v));
 			});
-	}
-
-	private LottoNumbers() {
 	}
 
 	public static LottoNumbers generate() {
