@@ -32,7 +32,9 @@ public class Lotto implements Comparator<LottoNumber> {
   }
 
   private long getDistinctNumberPullSize(final List<Integer> numberPull) {
-    return numberPull.stream().distinct().count();
+    return numberPull.stream()
+        .distinct()
+        .count();
   }
 
   private void checkInputCount(final List<Integer> numberPull) {
@@ -70,5 +72,9 @@ public class Lotto implements Comparator<LottoNumber> {
   @Override
   public int hashCode() {
     return Objects.hash(getLotto());
+  }
+
+  public boolean match(final LottoNumber lottoNumber) {
+    return lotto.contains(lottoNumber);
   }
 }

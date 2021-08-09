@@ -62,7 +62,8 @@ public class Lotteries {
   }
 
   private int checkContainValues(final Lotto lotto, int count, final LottoNumber lottoNumber) {
-    if (lotto.getLotto().contains(lottoNumber)) {
+    //if (lotto.getLotto().contains(lottoNumber)) {
+    if (lotto.match(lottoNumber)) {
       count++;
     }
     return count;
