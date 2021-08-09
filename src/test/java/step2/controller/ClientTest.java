@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.LottoTestHelper;
 import step2.lotto.*;
 import step2.lotto.client.Client;
+import step2.lotto.exception.NotEnoughMoneyException;
 import step2.lotto.result.ResultStatistic;
 
 import java.util.List;
@@ -37,16 +38,19 @@ class ClientTest {
     @ParameterizedTest
     @DisplayName("가진 금액보다 많은 금액의 로또를 사려고 하면 익셉션이 발생한다")
     @ValueSource(ints = {1000, 2000, 5000, 10000})
-    void IllegalStateExceptionTest(long money) {
+    void NotEnoughMoneyExceptionTest(long money) {
         Client client = new Client(money);
         long buyableLottoCount = client.buyableLottoCount();
-        assertThrows(IllegalStateException.class, () -> client.buyLotto(LottoTestHelper.generateLottos(buyableLottoCount + 1)));
+        assertThrows(NotEnoughMoneyException.class, () -> {
+            long overLimitCount = buyableLottoCount + 1;
+            client.buyLotto(LottoTestHelper.generateLottos(overLimitCount));
+        });
     }
 
     @ParameterizedTest
     @DisplayName("로또 결과 확인 테스트")
     @CsvSource("1000,'1,2,3,4,5,6',6,2000000000")
-    void checkResultOfLotto(int money, String input, int expectedMatchesOfNumber, int expectedPrize) {
+    void calculateResultStatisticTest(int money, String input, long expectedMatchesOfNumber, int expectedPrize) {
         Client client = new Client(money);
 
         List<Integer> numbers = LottoTestHelper.toIntegerList(input);
@@ -59,7 +63,8 @@ class ClientTest {
         ResultStatistic resultStatistic = client.calculateResultStatistic(winningNumber);
 
         assertEquals(boughtLottoCount, resultStatistic.countOfMatches(expectedMatchesOfNumber));
-        System.out.println(resultStatistic.getResult());
+        long actualPrize = LottoPrize.getLottoPrize(expectedMatchesOfNumber).getPrizeMoney();
+        assertEquals(expectedPrize, actualPrize);
     }
 
 }

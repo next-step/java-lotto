@@ -18,22 +18,6 @@ public class Lotto {
         return number;
     }
 
-    public static LottoPrize getLottoPrize(long countOfMatches) {
-        if (countOfMatches == 6)
-            return LottoPrize.FIRST;
-
-        if (countOfMatches == 5)
-            return LottoPrize.SECOND;
-
-        if (countOfMatches == 4)
-            return LottoPrize.THIRD;
-
-        if (countOfMatches == 3)
-            return LottoPrize.FOURTH;
-
-        return LottoPrize.ETC;
-    }
-
     @Override
     public String toString() {
         return number.toString();

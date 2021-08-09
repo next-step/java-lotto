@@ -9,7 +9,16 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private static final List<Integer> TOTAL_NUMBERS =
-            IntStream.range(0, 46).boxed().collect(Collectors.toList());
+            IntStream.range(1, 46).boxed().collect(Collectors.toList());
+
+    public static Lottos generateLottos(long count) {
+        List<Lotto> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Lotto lotto = generateLotto();
+            result.add(lotto);
+        }
+        return new Lottos(result);
+    }
 
     public static Lotto generateLotto() {
         return new Lotto(shuffleNumbers());
@@ -23,6 +32,7 @@ public class LottoMachine {
             numbers.add(number);
         }
 
+        Collections.sort(numbers);
         return new LottoNumber(numbers);
     }
 }

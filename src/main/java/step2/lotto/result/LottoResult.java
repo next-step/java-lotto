@@ -13,7 +13,7 @@ public class LottoResult {
         LottoNumber lottoNumber = lotto.getNumber();
         long countOfMatches = winningNumber.countOfMatches(lottoNumber);
         this.countOfMatches = countOfMatches;
-        this.lottoPrize = Lotto.getLottoPrize(countOfMatches);
+        this.lottoPrize = LottoPrize.getLottoPrize(countOfMatches);
     }
 
     public long getCountOfMatches() {

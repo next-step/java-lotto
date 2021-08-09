@@ -28,7 +28,7 @@ public class Main {
         LottoNumber winningNumber = getWinningNumber(inputView);
 
         ResultStatistic resultStatistic = client.calculateResultStatistic(winningNumber);
-        resultView.print(resultStatistic.getResult());
+        resultView.printResultStatistic(resultStatistic);
     }
 
     private static LottoNumber getWinningNumber(InputView inputView) {

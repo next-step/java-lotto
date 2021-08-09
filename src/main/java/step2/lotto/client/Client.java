@@ -1,6 +1,9 @@
 package step2.lotto.client;
 
-import step2.lotto.*;
+import step2.lotto.Lotto;
+import step2.lotto.LottoNumber;
+import step2.lotto.Lottos;
+import step2.lotto.exception.NotEnoughMoneyException;
 import step2.lotto.result.LottoResult;
 import step2.lotto.result.LottoResults;
 import step2.lotto.result.ResultStatistic;
@@ -31,7 +34,7 @@ public class Client {
     private void validateBuyableLotto(Lottos lottos) {
         int lottosPrice = lottos.price();
         if (money - lottosPrice < 0)
-            throw new IllegalStateException("로또 살 돈이 부족합니다");
+            throw new NotEnoughMoneyException("로또 살 돈이 부족합니다");
     }
 
     public long remainMoney() {

@@ -1,9 +1,14 @@
 package step2.lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.LottoTestHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,5 +29,4 @@ class LottosTest {
         Lottos lottos = LottoTestHelper.generateLottos(lottoCount);
         assertEquals(expectedCount, lottos.count());
     }
-
 }
