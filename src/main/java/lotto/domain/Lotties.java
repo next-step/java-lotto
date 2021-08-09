@@ -23,4 +23,11 @@ public class Lotties {
         }
     }
 
+    public List<RANK> getLottiesRank() {
+        List<RANK> rankList = new ArrayList<>();
+        for (Lotto lotto : lotties) {
+            rankList.add(lotto.getRank());
+        }
+        return rankList;
+    }
 }
