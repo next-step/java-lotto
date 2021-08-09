@@ -6,9 +6,11 @@ import step2.model.AutoLottoStrategy;
 import step2.model.Lotto;
 import step2.view.InputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AutoLottoTest {
@@ -123,5 +125,31 @@ public class AutoLottoTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () ->  user.getWinningNo("1,2,3,5,5,6"));
     }
+
+    @Test
+    public void 당첨번호_빈값() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo("1,2,3,5,5, "));
+
+    }
+
+    @Test
+    public void 당첨번호() {
+        //given
+        InputView user = new InputView();
+        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
+
+        //when
+        List<Integer> winningNo = user.getWinningNo("1,2,3,4,5,6");
+
+        //then
+        assertEquals(winningNo, expected);
+    }
+
+    
 
 }
