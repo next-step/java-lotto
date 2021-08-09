@@ -17,4 +17,15 @@ public class NumberSplitterTest {
         //then
         assertThat(numbers.length).isEqualTo(expected);
     }
+
+    @DisplayName("커스텀 구분자 테스트")
+    @ParameterizedTest
+    @CsvSource({"'//;\n1;2;3;4', 4", "'//;\n1;2:3', 3", "'//;\n0;1:2,3', 4"})
+    public void customSeparatorSplit(String input, int expected) {
+        //when
+        int[] numbers = NumberSplitter.split(input);
+
+        //then
+        assertThat(numbers.length).isEqualTo(expected);
+    }
 }
