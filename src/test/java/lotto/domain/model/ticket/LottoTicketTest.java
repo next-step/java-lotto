@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,7 +23,7 @@ public class LottoTicketTest {
         lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
     }
 
-    @ParameterizedTest(name = "{index} {0} iss invalid number of numbers")
+    @ParameterizedTest(name = "{index} {0} are invalid as lotto numbers")
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6, 7", "1, 2, 3, 4, 5"})
     void of_InvalidCountOfNumbers(String input) {
         assertThatThrownBy(() -> LottoTicket.of(input))
@@ -37,7 +37,7 @@ public class LottoTicketTest {
                 .isInstanceOf(InvalidLottoTicketException.class);
     }
 
-    @ParameterizedTest(name = "{index} 번호 {0} 이/가 로또에 포함되어 있다 = {1}.")
+    @ParameterizedTest(name = "{index} 번호 {0}이 로또에 포함되어 있다 = {1}.")
     @CsvSource({"6,true", "8,false"})
     void contains_number(int number, boolean expected) {
         LottoNumber lottoNumber = LottoNumber.of(number);

@@ -1,10 +1,11 @@
-package lotto.domain.model;
+package lotto.domain.model.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.model.result.LottoRank;
 import lotto.dto.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

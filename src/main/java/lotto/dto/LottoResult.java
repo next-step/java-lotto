@@ -3,7 +3,7 @@ package lotto.dto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import lotto.domain.model.LottoRank;
+import lotto.domain.model.result.LottoRank;
 
 public class LottoResult {
 

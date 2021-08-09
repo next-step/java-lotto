@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.ticket;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -11,10 +11,10 @@ public class WinningTicketTest {
     @Test
     @DisplayName("보너스 볼이 당첨 번호 중에 있다.")
     void of_InvalidLottoTicketContainsLottoNumber() {
-        LottoTicket lottoTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        LottoTicket winningTicket = LottoTicket.of("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = LottoNumber.of(6);
         assertThatThrownBy(() ->
-                WinningTicket.of(lottoTicket, bonusNumber))
+                WinningTicket.of(winningTicket, bonusNumber))
                 .isInstanceOf(InvalidWinningTicketException.class);
     }
 }

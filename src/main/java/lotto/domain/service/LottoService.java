@@ -1,15 +1,15 @@
 package lotto.domain.service;
 
-import static lotto.domain.model.LottoNumber.*;
+import static lotto.domain.model.ticket.LottoNumber.*;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.model.LottoMoney;
-import lotto.domain.model.LottoNumber;
-import lotto.domain.model.LottoTicket;
-import lotto.domain.model.LottoTickets;
+import lotto.domain.model.money.LottoMoney;
+import lotto.domain.model.ticket.LottoNumber;
+import lotto.domain.model.ticket.LottoTicket;
+import lotto.domain.model.ticket.LottoTickets;
 import lotto.dto.LottoResult;
 
 public class LottoService {
@@ -40,5 +40,11 @@ public class LottoService {
         int totalPrizeMoney = lottoResult.totalPrizeMoney();
         int amountPaid = lottoMoney.getAmount();
         return (double) totalPrizeMoney / amountPaid;
+    }
+
+    public static LottoTickets mapToTickets(List<String> ticketStrings) {
+        return ticketStrings.stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::of));
     }
 }

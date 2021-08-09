@@ -1,9 +1,11 @@
-package lotto.domain.model;
+package lotto.domain.model.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.stream.Stream;
+import lotto.domain.model.result.LottoRank;
+import lotto.domain.model.result.MatchStats;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,10 +14,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoRankTest {
 
-    @ParameterizedTest(name = "{index} LottoRank.of({0}, {1}) == {2}")
+    @Test
+    void of_throwsIllegalArgumentException() {
+        MatchStats matchStats = MatchStats.of(7, true);
+        assertThatThrownBy(() ->
+                LottoRank.of(matchStats)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "{index} factory method returns correct rank for count={0}, bonus={1}")
     @MethodSource
     void of_returnsCorrectLottoRank(int countOfMatch, boolean matchBonus, LottoRank expected) {
-        LottoRank lottoRank = LottoRank.of(countOfMatch, matchBonus);
+        MatchStats matchStats = MatchStats.of(countOfMatch, matchBonus);
+        LottoRank lottoRank = LottoRank.of(matchStats);
         assertThat(lottoRank).isEqualTo(expected);
     }
 
@@ -31,12 +42,5 @@ public class LottoRankTest {
                 Arguments.of(2, true, LottoRank.MISS),
                 Arguments.of(2, false, LottoRank.MISS)
         );
-    }
-
-    @Test
-    void of_throwsIllegalArgumentException() {
-        assertThatThrownBy(() ->
-                LottoRank.of(7, true)
-        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

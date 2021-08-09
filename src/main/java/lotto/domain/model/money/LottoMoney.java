@@ -1,4 +1,4 @@
-package lotto.domain.model;
+package lotto.domain.model.money;
 
 import lotto.exception.InvalidLottoMoneyException;
 
