@@ -9,8 +9,8 @@ public enum Ranking {
     FIVE_MATCHES(5, 1500000),
     SIX_MATCHES(6, 2000000000);
 
-    private int matchCount;
-    private int compensation;
+    private final int matchCount;
+    private final int compensation;
 
     public static int getCompensationBy(int matchCount){
         return Stream.of(values())
