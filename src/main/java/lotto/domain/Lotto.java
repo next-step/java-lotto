@@ -21,6 +21,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean containBonusBall(Ball ball) {
+        return balls.contains(ball);
+    }
+
     private void validNumberCountSize(Set<Ball> balls) {
         if (balls.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호 갯수는 " + NUMBER_SIZE + "개가 되어야합니다. (중복된 숫자도 오면 안됩니다.)");

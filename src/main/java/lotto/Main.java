@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Ball;
 import lotto.domain.Game;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
@@ -19,7 +20,8 @@ public class Main {
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
 
-        game.createRewards(InputView.inputPreviousLottoNumber());
+        game.createRewards(InputView.inputPreviousLottoNumber(), InputView.inputBonousNumber());
+
         ResultView.resultLottoReward(game);
         ResultView.getYield(game);
     }

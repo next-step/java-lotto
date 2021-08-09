@@ -12,10 +12,13 @@ public class Game {
         this.lottos = lottos;
     }
 
-    public void createRewards(Lotto previousLotto) {
+    public void createRewards(Lotto previousLotto, Ball bonusBall) {
         rewards = lottos.stream()
-                .map(lotto -> lotto.getSameNumberCount(previousLotto))
-                .map(Reward::getRewardFromSameNumberCount)
+                .map(lotto -> {
+                    int sameNumberCount = lotto.getSameNumberCount(previousLotto);
+                    boolean containBonusBall = lotto.containBonusBall(bonusBall);
+                    return Reward.valueOf(sameNumberCount, containBonusBall);
+                })
                 .collect(Collectors.toList());
     }
 

@@ -14,12 +14,14 @@ public enum Reward {
     private final int sameNumberCount;
     private final int money;
 
-    Reward(int rightNumberCount, int money) {
-        this.sameNumberCount = rightNumberCount;
+    Reward(int sameNumberCount, int money) {
+        this.sameNumberCount = sameNumberCount;
         this.money = money;
     }
 
-    public static Reward getRewardFromSameNumberCount(int sameNumberCount) {
+    public static Reward valueOf(int sameNumberCount, boolean containBonusBall) {
+        if (containBonusBall && sameNumberCount == 5)
+            return SECOND;
         return Arrays.stream(Reward.values())
                 .filter(reward -> reward.sameNumberCount == sameNumberCount)
                 .findFirst()
