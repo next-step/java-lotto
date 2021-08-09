@@ -11,6 +11,10 @@ public class LottoNumberShuffle {
 
 	private static final List<Integer> defaultNumbers = new ArrayList<>();
 
+	private LottoNumberShuffle() {
+		throw new IllegalStateException();
+	}
+
 	static {
 		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
 			defaultNumbers.add(i);
