@@ -6,5 +6,6 @@ public class InputView {
 
     public void setAmount(String amount) {
         LottoException.isBlank(amount);
+        LottoException.isDigit(amount);
     }
 }

@@ -18,4 +18,14 @@ public class AutoLottoTest {
         exception = assertThrows(IllegalArgumentException.class,
                 () ->  user.setAmount(null));
     }
+
+    @Test
+    public void 구매금액_숫자가아님() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.setAmount("test"));
+    }
 }
