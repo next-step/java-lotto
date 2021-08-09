@@ -7,8 +7,6 @@ import lotto.utils.AutoLottoNumbersGeneratorUtils;
 
 public class Lottos {
 
-	private static final int LOTTO_NUMBERS_LENGTH = 6;
-
 	private final List<Lotto> lottos;
 
 	private Lottos(List<Lotto> lottos) {
@@ -19,7 +17,7 @@ public class Lottos {
 		List<Lotto> lottos = new ArrayList<Lotto>(lottoSize);
 
 		for (int i = 0; i < lottoSize; i++) {
-			lottos.add(Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers(LOTTO_NUMBERS_LENGTH)));
+			lottos.add(Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers()));
 		}
 
 		return new Lottos(lottos);

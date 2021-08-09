@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class AutoLottoNumbersGeneratorUtils {
 
+	private static final int LOTTO_NUMBERS_LENGTH = 6;
 	private static final List<Integer> numbers = IntStream.range(1, 46)
 														.boxed()
 														.collect(Collectors.toList());
@@ -15,11 +16,11 @@ public class AutoLottoNumbersGeneratorUtils {
 
 	}
 
-	public static List<Integer> generateRandomNumbers(int size) {
+	public static List<Integer> generateRandomNumbers() {
 		Collections.shuffle(numbers);
 
 		return numbers.stream()
-			.limit(size)
+			.limit(LOTTO_NUMBERS_LENGTH)
 			.sorted()
 			.collect(Collectors.toList());
 	}
