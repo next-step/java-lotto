@@ -1,19 +1,40 @@
-package lotto.domain.number;
+package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import lotto.exception.LottoNumberValidationException;
 
 public class LottoNumber implements Comparable<LottoNumber>{
 
+	private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 	private final int lottoNumber;
 
-	LottoNumber(int lottoNumber) {
+	static {
+		IntStream.range(1, 46)
+			.boxed()
+			.forEach(v -> {
+				lottoNumberMap.put(v, new LottoNumber(v));
+			});
+	}
+
+	private LottoNumber(int lottoNumber) {
+		validate(lottoNumber);
+		
+		this.lottoNumber = lottoNumber;
+	}
+
+	private void validate(int lottoNumber) {
 		if (lottoNumber > 45 ||
 			lottoNumber <= 0) {
 			throw new LottoNumberValidationException("로또 번호가 잘못 되었습니다.");
 		}
-		this.lottoNumber = lottoNumber;
+	}
+
+	public static LottoNumber valueOf(int lottoNumber) {
+		return lottoNumberMap.get(lottoNumber);
 	}
 
 	@Override
