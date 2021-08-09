@@ -17,6 +17,8 @@ public class LottoOutputView {
 	private static final String BUY_RESULT_MESSAGE = "개를 구매했습니다.";
 	private static final String RESULT_START_MESSAGE = "당첨 통계";
 	private static final String DASH_LINE = "---------";
+	private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
+	private static final String EMPTY_MESSAGE = " ";
 	public static final int ZERO_POINT = 0;
 
 	public static void printLottoCount(Money money) {
@@ -49,9 +51,17 @@ public class LottoOutputView {
 		if (prize.getWinningMoney() > ZERO_POINT) {
 			System.out.println(prize.getCountOfMatch() +
 				"개 일치" +
+				printBonusMatch(prize.getMatchBonus()) +
 				"(" + prize.getWinningMoney() + ")" +
 				"-" + winPrizes.findWinPrizeGrade(prize) + "개");
 		}
+	}
+
+	private static String printBonusMatch(boolean matchBonus) {
+		if (matchBonus) {
+			return BONUS_MATCH_MESSAGE;
+		}
+		return EMPTY_MESSAGE;
 	}
 
 }
