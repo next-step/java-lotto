@@ -9,8 +9,8 @@ public class PositiveNumbers {
 
     public PositiveNumbers(int[] positiveNumbers) {
         this.positiveNumbers = Arrays.stream(positiveNumbers)
-                .mapToObj(PositiveNumber::new)
-                .collect(Collectors.toList());
+            .mapToObj(PositiveNumber::new)
+            .collect(Collectors.toList());
     }
 
     public int sum() {
