@@ -6,6 +6,7 @@ public class WinningNumber {
     private List<Integer> winningNumbers;
 
     public WinningNumber(List<Integer> winningNumbers) {
+
         this.winningNumbers = winningNumbers;
     }
 

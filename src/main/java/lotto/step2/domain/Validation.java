@@ -8,6 +8,8 @@ import java.util.Set;
 public class Validation {
     private static final String DELIMITER = ",";
     private static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
 
     public static List<Integer> isCorrectLottoNumbers(String str) {
         List<Integer> winningNumbers = new ArrayList<>();
@@ -15,6 +17,7 @@ public class Validation {
         for (String element : numbers) {
             String trim = element.trim();
             int number = Integer.valueOf(trim);
+            isCorrectLottoNumber(number);
             winningNumbers.add(number);
         }
         isCorrectLottoCount(winningNumbers);
@@ -25,6 +28,12 @@ public class Validation {
     public static void isCorrectLottoCount(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 당첨 번호는 " + LOTTO_COUNT + "개 이어야 합니다.");
+        }
+    }
+
+    public static void isCorrectLottoNumber(int number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
+            throw new IllegalArgumentException("로또 당첨 번호는 " + LOTTO_MIN_NUMBER + "~" + LOTTO_MAX_NUMBER + " 숫자만 가능 합니다.");
         }
     }
 
