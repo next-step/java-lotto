@@ -26,10 +26,6 @@ public class Lotto {
         }
     }
 
-    public int size() {
-        return lottoNumbers.size();
-    }
-
     private void checkDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
