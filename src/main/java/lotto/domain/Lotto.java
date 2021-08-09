@@ -26,9 +26,13 @@ public class Lotto implements Comparator<LottoNumber> {
   }
 
   private void checkDuplicateNumbers(final List<Integer> numberPull) {
-    if(numberPull.size() != numberPull.stream().distinct().count()){
+    if(numberPull.size() != getDistinctNumberPullSize(numberPull)){
       throw new IllegalArgumentException(Message.MSG_ERROR_SAME_LOTTO_NUMBER);
     }
+  }
+
+  private long getDistinctNumberPullSize(final List<Integer> numberPull) {
+    return numberPull.stream().distinct().count();
   }
 
   private void checkInputCount(final List<Integer> numberPull) {
