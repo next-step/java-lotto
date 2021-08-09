@@ -15,9 +15,9 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final Integer[] lottoNumbers) {
+    public LottoTicket(final int[] lottoNumbers) {
         List<LottoNumber> collectLottoNumbers = Arrays.stream(lottoNumbers)
-                .map(LottoNumber::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
         validateLottoTicketSize(collectLottoNumbers);

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 생성 테스트")
 public class LottoGeneratorTest {
 
-    private Integer[] lottoNumbers;
-
-    @BeforeEach
-    void setUp() {
-        lottoNumbers = new Integer[]{1, 2, 3, 4, 5, 6};
-    }
+    private int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
 
     @Test
     @DisplayName("로또 번호 생성")

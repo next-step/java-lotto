@@ -25,9 +25,9 @@ public class LottoStatisticTest {
     void lottoMatchTwoTest() {
         // given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 45}));
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 44, 45}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 45}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 44, 45}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
@@ -50,8 +50,8 @@ public class LottoStatisticTest {
     void lottoMatchOverlapTest() {
         // given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
@@ -66,7 +66,7 @@ public class LottoStatisticTest {
     void profitRateTest() {
         // given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 11, 12, 13}));
+        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 11, 12, 13}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
