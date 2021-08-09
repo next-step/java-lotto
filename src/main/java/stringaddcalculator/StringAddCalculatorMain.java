@@ -1,9 +1,15 @@
 package stringaddcalculator;
 
 public class StringAddCalculatorMain {
-    // 입력
 
-    // 계산
+    public static void main(String[] args) {
+        // 입력
+        String inputValue = View.inputView();
 
-    // 출력
+        // 계산
+        int result = StringAddCalculator.splitAndSum(inputValue);
+
+        // 출력
+        View.outputView(result);
+    }
 }
