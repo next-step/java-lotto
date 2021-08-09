@@ -1,53 +1,65 @@
 package lotto.domain;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoBall {
-	public static final int LOTTO_BALL_NUMBER_MIN = 1;
-	public static final int LOTTO_BALL_NUMBER_MAX = 45;
+    public static final int LOTTO_BALL_NUMBER_MIN = 1;
+    public static final int LOTTO_BALL_NUMBER_MAX = 45;
+    private static final Map<Integer, LottoBall> LOTTO_BALL_MAP =
+        IntStream.rangeClosed(LOTTO_BALL_NUMBER_MIN, LOTTO_BALL_NUMBER_MAX)
+            .mapToObj(LottoBall::new)
+            .collect(Collectors.toMap(LottoBall::number, Function.identity()));
 
-	private final int number;
+    private final int number;
 
-	protected LottoBall(int number) {
-		validate(number);
-		this.number = number;
-	}
+    private LottoBall(int number) {
+        validate(number);
+        this.number = number;
+    }
 
-	private void validate(int number) {
-		if (number < LOTTO_BALL_NUMBER_MIN) {
-			throw new RuntimeException("입력된 로또숫자가 " + LOTTO_BALL_NUMBER_MIN + "미만입니다.");
-		}
+    public static LottoBall select(int number) {
+        validate(number);
+        return LOTTO_BALL_MAP.get(number);
+    }
 
-		if (number > LOTTO_BALL_NUMBER_MAX) {
-			throw new RuntimeException("입력된 로또숫자가 " + LOTTO_BALL_NUMBER_MAX + "초과합니다.");
-		}
-	}
+    private static void validate(int number) {
+        if (number < LOTTO_BALL_NUMBER_MIN) {
+            throw new RuntimeException("입력된 로또숫자가 " + LOTTO_BALL_NUMBER_MIN + "미만입니다.");
+        }
 
-	// "이펙티브 자바 : 아이템1 생성자 대신 정적 팩터리 메서드를 고려하라" 참고
-	public static LottoBall from(int number) {
-		return new LottoBall(number);
-	}
+        if (number > LOTTO_BALL_NUMBER_MAX) {
+            throw new RuntimeException("입력된 로또숫자가 " + LOTTO_BALL_NUMBER_MAX + "초과합니다.");
+        }
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object == null || getClass() != object.getClass()) {
-			return false;
-		}
+    public int number() {
+        return number;
+    }
 
-		LottoBall lottoBall = (LottoBall)object;
-		return number == lottoBall.number;
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(number);
-	}
+        LottoBall lottoBall = (LottoBall)object;
+        return number == lottoBall.number;
+    }
 
-	@Override
-	public String toString() {
-		return String.valueOf(number);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
