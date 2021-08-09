@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class Lotto {
     private final List<Integer> lottoNumber;
     private final NumberGenerator numberGenerator;
-    private SameNumbersCount sameNumbers;
+    private RANK lottoRank;
 
     public Lotto(NumberGenerator numberGenerator) {
         this.numberGenerator  = numberGenerator;
@@ -26,24 +26,16 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumber);
     }
 
-    public void getLottoRank(List<Integer> winningNumber) {
+    public void matchLottoRank(WinningNumbers winningNumber) {
         long sameCount = lottoNumber.stream()
-                .filter(integer -> winningNumber.stream().anyMatch(Predicate.isEqual(integer)))
+                .filter(integer -> winningNumber.getWinningNumbers()
+                        .stream()
+                        .anyMatch(Predicate.isEqual(integer)))
                 .count();
-        this.sameNumbers = sameNumbers.getSameNumbersCount(sameCount);
+        lottoRank = RANK.getRank(sameCount);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumber, lotto.lottoNumber) && Objects.equals(numberGenerator, lotto.numberGenerator);
+    public RANK getRank() {
+        return lottoRank;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber, numberGenerator);
-    }
-
 }
