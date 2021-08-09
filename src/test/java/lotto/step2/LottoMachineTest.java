@@ -1,6 +1,6 @@
 package lotto.step2;
 
-import org.assertj.core.api.Assertions;
+import lotto.step2.domain.LottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +12,9 @@ public class LottoMachineTest {
 
     @Test
     @DisplayName("로또 기계 작동 테스트")
-    void mixNumbers(){
+    void mixNumbers() {
         ArrayList<Integer> mixLottoNumbers = LottoMachine.mixLottoNumbers();
         assertThat(mixLottoNumbers.size()).isEqualTo(6);
     }
+
 }

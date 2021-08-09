@@ -31,7 +31,7 @@ public class ResultView {
 
     public static void printWinningRank(Map<WinningRank, Integer> lottoResult) {
         for (WinningRank winningRank : WinningRank.values()) {
-            System.out.printf("%d개 일치 (%d원) - %d%n", winningRank.getMatchCount(), winningRank.getWinnings(), lottoResult.getOrDefault(winningRank,0));
+            System.out.printf("%d개 일치 (%d원) - %d%n", winningRank.getMatchCount(), winningRank.getWinnings(), lottoResult.getOrDefault(winningRank, 0));
         }
     }
 

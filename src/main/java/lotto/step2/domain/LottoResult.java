@@ -9,7 +9,7 @@ public class LottoResult {
     private static final Map<WinningRank, Integer> lottoResult = new HashMap<>();
 
 
-    public static Map<WinningRank,Integer> checkLottoTicket(WinningNumber winningNumber, Lotto lotto) {
+    public static Map<WinningRank, Integer> checkLottoTicket(WinningNumber winningNumber, Lotto lotto) {
         for (LottoTicket lottoTicket : lotto.getLotto()) {
             int matchCount = lottoTicket.matchWinningNumber(winningNumber);
             checkWinningRank(matchCount);
@@ -40,9 +40,9 @@ public class LottoResult {
         int sum = 0;
         while (iterator.hasNext()) {
             WinningRank winningRank = iterator.next();
-            sum += winningRank.getWinnings()*lottoResult.get(winningRank);
+            sum += winningRank.getWinnings() * lottoResult.get(winningRank);
         }
-        return sum / (double)price;
+        return sum / (double) price;
     }
 
 }
