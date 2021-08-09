@@ -30,7 +30,7 @@ public class LottoStatisticTest {
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers, bonusNumber);
-        int rankCount = lottoStatistic.getRankCount(LottoRank.SECOND_BONUS_PLACE);
+        int rankCount = lottoStatistic.getRankCount(LottoRank.SECOND);
 
         // then
         assertThat(rankCount).isEqualTo(1);
@@ -47,10 +47,10 @@ public class LottoStatisticTest {
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
-        int countMatchSix = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
-        int countMatchFive = lottoStatistic.getRankCount(LottoRank.SECOND_PLACE);
-        int countMatchFour = lottoStatistic.getRankCount(LottoRank.THIRD_PACE);
-        int countMatchThree = lottoStatistic.getRankCount(LottoRank.FOURTH_PLACE);
+        int countMatchSix = lottoStatistic.getRankCount(LottoRank.FIRST);
+        int countMatchFive = lottoStatistic.getRankCount(LottoRank.THIRD);
+        int countMatchFour = lottoStatistic.getRankCount(LottoRank.FOURTH);
+        int countMatchThree = lottoStatistic.getRankCount(LottoRank.FIFTH);
 
         // then
         assertAll(
@@ -71,7 +71,7 @@ public class LottoStatisticTest {
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
-        int actual = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
+        int actual = lottoStatistic.getRankCount(LottoRank.FIRST);
 
         // then
         assertThat(actual).isEqualTo(2);
