@@ -9,7 +9,7 @@ public class Validation {
     private static final String DELIMITER = ",";
     private static final int LOTTO_COUNT = 6;
 
-    public static void isCorrectWinningNumbers(String str) {
+    public static List<Integer> isCorrectWinningNumbers(String str) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] numbers = str.split(DELIMITER);
         for (String element : numbers) {
@@ -18,7 +18,8 @@ public class Validation {
             winningNumbers.add(number);
         }
         isCorrectLottoCount(winningNumbers);
-
+        isValidLotto(winningNumbers);
+        return winningNumbers;
     }
 
     public static void isCorrectLottoCount(List<Integer> winningNumbers) {
