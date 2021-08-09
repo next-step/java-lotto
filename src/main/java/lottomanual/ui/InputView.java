@@ -1,5 +1,6 @@
 package lottomanual.ui;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
@@ -47,7 +48,12 @@ public class InputView {
 	}
 
 	private static int inputIntValue() {
-		return Integer.parseInt(scanner.nextLine());
+		try {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("숫자만 입력 가능합니다. 다시 입력해주세요.");
+			return inputIntValue();
+		}
 	}
 
 	public static String inputLastWinningNumbers() {
