@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Lotto {
     static final int MIN_OF_LOTTO_NUMBER = 1;
-    static final int MAX_OF_LOTTO_NUMBER = 46;
+    static final int MAX_OF_LOTTO_NUMBER = 45;
     static final int NUM_OF_LOTTO_NUMBER = 6;
     static ArrayList<Integer> lottoNumberList = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public ArrayList<Integer> makeLottoNumberList() {
-        for (int i = MIN_OF_LOTTO_NUMBER; i < MAX_OF_LOTTO_NUMBER; i++) {
+        for (int i = MIN_OF_LOTTO_NUMBER; i <= MAX_OF_LOTTO_NUMBER; i++) {
             lottoNumberList.add(i);
         }
         return lottoNumberList;
