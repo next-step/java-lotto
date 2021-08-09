@@ -14,10 +14,10 @@ public class LottoBalls {
     private final Set<LottoBall> lottoBalls;
 
     private LottoBalls(int... numbers) {
-        validate(numbers);
         this.lottoBalls = Arrays.stream(numbers)
             .mapToObj(LottoBall::select)
             .collect(Collectors.toSet());
+        validate();
     }
 
     public static LottoBalls of(int... numbers) {
@@ -40,8 +40,8 @@ public class LottoBalls {
             .toArray());
     }
 
-    private void validate(int... numbers) {
-        if (numbers.length != LOTTO_BALLS_MAX_NUM) {
+    private void validate() {
+        if (lottoBalls.size() != LOTTO_BALLS_MAX_NUM) {
             throw new RuntimeException("로또공의 개수를 만족하지 않습니다.");
         }
     }
