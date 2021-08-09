@@ -40,7 +40,7 @@ class LottosTest {
 		Lottos lottos = new Lottos();
 
 		//when
-		lottos.buy(LottoNumberShuffle.generate());
+		lottos.buy(amount);
 		int size = lottos.size();
 
 		//then
