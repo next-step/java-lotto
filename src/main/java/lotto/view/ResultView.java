@@ -1,9 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Award;
-import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.dto.LottoWinnersDto;
 
 import java.util.List;
 import java.util.Set;
@@ -20,29 +19,27 @@ public class ResultView {
         System.out.println("[" + String.join(", ", numbersStringList) + "]");
     }
 
-    public static void printWinners(LottoGame lottoGame) {
+    public static void printWinners(List<LottoWinnersDto> lottoWinnersDtos) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        printWinnersByAward(Award.FOURTH, lottoGame);
-        printWinnersByAward(Award.THIRD, lottoGame);
-        printWinnersByAward(Award.SECOND, lottoGame);
-        printWinnersByAward(Award.FIRST, lottoGame);
+        lottoWinnersDtos.stream()
+                .forEach(lottoWinnersDto -> printWinnersByAward(lottoWinnersDto.getMatchNumbers(), lottoWinnersDto.getAmount(), lottoWinnersDto.getCountWinners()));
 
     }
 
-    private static void printWinnersByAward(Award award, LottoGame lottoGame) {
-        System.out.println(award.getMatchNumbers() + "개 일치 (" + award.getAmount() + "원)- " + lottoGame.countWinners(award));
+    private static void printWinnersByAward(int matchNumbers, int amount, long countWinners) {
+        System.out.println(matchNumbers + "개 일치 (" + amount + "원)- " + countWinners);
     }
 
-    public static void printYield(LottoGame lottoGame, int amount) {
-        double yield = getYield(lottoGame, amount);
+    public static void printYield(List<LottoWinnersDto> lottoWinnersDtos, int lottoPurchaseAmount) {
+        double earnings = lottoWinnersDtos.stream()
+                .mapToDouble(lottoWinnerDto -> getYield(lottoWinnerDto.getAmount(), lottoWinnerDto.getCountWinners()))
+                .sum();
+        double yield = earnings / lottoPurchaseAmount;
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
-    private static double getYield(LottoGame lottoGame, int amount) {
-        return (double) (Award.FOURTH.getAmount() * lottoGame.countWinners(Award.FOURTH) +
-                Award.THIRD.getAmount() * lottoGame.countWinners(Award.THIRD) +
-                Award.SECOND.getAmount() * lottoGame.countWinners(Award.SECOND) +
-                Award.FIRST.getAmount() * lottoGame.countWinners(Award.FIRST)) / (double) amount;
+    private static double getYield(int amount, long countWinners) {
+        return amount * countWinners;
     }
 }
