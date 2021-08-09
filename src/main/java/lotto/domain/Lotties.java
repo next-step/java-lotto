@@ -17,9 +17,9 @@ public class Lotties {
         return Collections.unmodifiableList(lotties);
     }
 
-    public void sameNumberCount(List<Integer> winningNumber) {
-        for (int i = 0; i < lotties.size(); i++) {
-            lotties.get(i).getLottoRank(winningNumber);
+    public void matchLottiesRank(WinningNumbers winningNumber) {
+        for (Lotto lotto : lotties) {
+            lotto.matchLottoRank(winningNumber);
         }
     }
 
