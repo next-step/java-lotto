@@ -1,17 +1,15 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+    List<Integer> numbers;
 
-    private List<Integer> myLottoNumberList;
-    private LottoNumber lottoNumbers;
+    public Lotto(LottoNumbers numbers) {
+        this.numbers = numbers.generateRandomNumbers();
+    }
 
-    public Lotto(int countOfLotto) {
-        myLottoNumberList = new ArrayList<>();
-        lottoNumbers = new LottoNumber();
-        for (int i = 0; i < countOfLotto; i++) {
-        }
+    public List<Integer> getLottoNumbers() {
+        return this.numbers;
     }
 }

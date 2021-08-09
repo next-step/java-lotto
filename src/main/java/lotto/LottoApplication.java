@@ -1,13 +1,17 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.WinningLottos;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = InputView.inputPurchaseAmount();
         int countOfLotto = purchaseAmount / 1000;
-        Lotto lotto = new Lotto(countOfLotto);
-        System.out.println(countOfLotto + "개를 구매했습니다.");
+        Lottos lottos = new Lottos(countOfLotto, new LottoNumbers());
+        OutputView.printPurchase(lottos);
+        WinningLottos winningLottos = new WinningLottos(InputView.inputWinningNumbers());
     }
 }
