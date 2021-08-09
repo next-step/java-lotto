@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class Money {
-    private int amount;
+    private final int amount;
 
     public Money(int amount) {
         this.amount = amount;
