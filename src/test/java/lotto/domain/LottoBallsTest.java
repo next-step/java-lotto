@@ -69,8 +69,7 @@ class LottoBallsTest {
 
     @Test
     void 임의의_6개의_로또공들의_번호에서_중복된_것이_존재한다면_예외를_던진다() {
-        assertThatThrownBy(() -> LottoBalls.of(1, 1, 2, 3, 4, 5, 6))
+        assertThatThrownBy(() -> LottoBalls.of(1, 1, 2, 3, 4, 5))
             .isInstanceOf(RuntimeException.class);
     }
-
 }
