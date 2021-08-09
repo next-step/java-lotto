@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Reward {
 
@@ -10,6 +12,8 @@ public enum Reward {
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
+
+    public static List<Reward> rewards;
 
     private final int sameNumberCount;
     private final int money;

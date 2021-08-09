@@ -6,14 +6,13 @@ import java.util.stream.Collectors;
 
 public class Game {
     private final List<Lotto> lottos;
-    private List<Reward> rewards;
 
     public Game(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
     public void createRewards(Lotto previousLotto, Ball bonusBall) {
-        rewards = lottos.stream()
+        Reward.rewards = lottos.stream()
                 .map(lotto -> {
                     int sameNumberCount = lotto.getSameNumberCount(previousLotto);
                     boolean containBonusBall = lotto.containBonusBall(bonusBall);
@@ -23,15 +22,15 @@ public class Game {
     }
 
     public int countReward(Reward reward) {
-        return (int) rewards.stream()
+        return (int) Reward.rewards.stream()
                 .filter(it -> it == reward)
                 .count();
     }
 
     public String getYield() {
-        return String.format("%.2f", rewards.stream()
+        return String.format("%.2f", Reward.rewards.stream()
                 .mapToLong(Reward::getMoney)
-                .sum() / (LottoMachine.LOTTO_PRICE * rewards.size() * 1.0) - 0.005);
+                .sum() / (LottoMachine.LOTTO_PRICE * Reward.rewards.size() * 1.0) - 0.005);
     }
 
     public List<Lotto> getLottos() {
