@@ -26,7 +26,7 @@ class LottosTest {
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
         IntStream.rangeClosed(1, 6).forEach(number -> lottoNumberList.add(new LottoNumber(number)));
 
-        lotto = new Lotto(new LottoNumbers(lottoNumberList));
+        lotto = new Lotto(lottoNumberList);
 
         IntStream.range(0, TICKET_NUMBER).forEach(index -> lottoList.add(lotto));
 
@@ -46,7 +46,7 @@ class LottosTest {
             assertEquals(lotto.getAward(),Award.UNIDENTIFIED);
         }
 
-        lottos.drawLottos(new LottoNumbers(winnerNumbers));
+        lottos.drawLottos(winnerNumbers);
 
         for (Lotto lotto : lottos.getLottos()) {
             assertEquals(lotto.getAward(),Award.FIRST);
@@ -57,7 +57,7 @@ class LottosTest {
     @CsvSource(value = {"FIRST:3","SECOND:0"},delimiter = ':')
     @DisplayName("Award 파라미터와 함께 getWinners 함수를 호출하면 당첨 로또의 수를 리턴한다")
     void countWinners(String type, int match) {
-        lottos.drawLottos(new LottoNumbers(winnerNumbers));
+        lottos.drawLottos(winnerNumbers);
         assertEquals(lottos.countWinners(Award.valueOf(type)), match);
     }
 }

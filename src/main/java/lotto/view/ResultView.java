@@ -11,8 +11,8 @@ public class ResultView {
         lottos.getLottos().stream().forEach(lotto -> printLottoNumbers(lotto.getNumbers()));
     }
 
-    private static void printLottoNumbers(LottoNumbers numbers) {
-        List<String> numbersStringList = numbers.getLottoNumbers().stream().map(LottoNumber::getLottoNumber).map(String::valueOf).collect(Collectors.toList());
+    private static void printLottoNumbers(List<LottoNumber> numbers) {
+        List<String> numbersStringList = numbers.stream().map(LottoNumber::getLottoNumber).map(String::valueOf).collect(Collectors.toList());
         System.out.println("[" + String.join(", ", numbersStringList) + "]");
     }
 

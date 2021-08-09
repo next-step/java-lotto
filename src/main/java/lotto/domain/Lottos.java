@@ -1,10 +1,6 @@
 package lotto.domain;
 
-import lotto.strategy.ListSortOrMixStrategy;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -17,7 +13,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void drawLottos(LottoNumbers winnerNumbers) {
+    public void drawLottos(List<LottoNumber> winnerNumbers) {
         for (Lotto lotto : lottos) {
             lotto.drawLotto(winnerNumbers);
         }

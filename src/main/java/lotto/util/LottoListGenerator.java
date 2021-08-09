@@ -2,8 +2,6 @@ package lotto.util;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.strategy.ListSortOrMixStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,10 +23,10 @@ public class LottoListGenerator {
         return lottoList;
     }
 
-    public static LottoNumbers createLottoNumbers() {
+    public static List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         Collections.shuffle(lottoNumbersPool);
         lottoNumbers.addAll(lottoNumbersPool.subList(0, 6));
-        return new LottoNumbers(lottoNumbers);
+        return lottoNumbers;
     }
 }

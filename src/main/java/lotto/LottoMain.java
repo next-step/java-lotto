@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,11 +22,10 @@ public class LottoMain {
         ResultView.printYield(lottoGame, amount);
     }
 
-    private static LottoNumbers getWinnerLottoNumbers() {
+    private static List<LottoNumber> getWinnerLottoNumbers() {
         List<Integer> winnerNumbers = InputView.requestWinnerNumbers();
-        List<LottoNumber> winnerLottoNumberList = winnerNumbers.stream()
+        return winnerNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new LottoNumbers(winnerLottoNumberList);
     }
 }

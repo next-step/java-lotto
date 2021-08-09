@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.util.LottoListGenerator;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoGame {
     private Lottos lottos;
 
@@ -11,7 +13,7 @@ public class LottoGame {
         ResultView.printPurchaseLottos(lottos);
     }
 
-    public void drawLotto(LottoNumbers winnerNumbers) {
+    public void drawLotto(List<LottoNumber> winnerNumbers) {
         lottos.drawLottos(winnerNumbers);
     }
 
