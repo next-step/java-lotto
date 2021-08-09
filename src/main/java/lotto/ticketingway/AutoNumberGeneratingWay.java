@@ -22,7 +22,7 @@ public class AutoNumberGeneratingWay implements LottoTicketingWay {
 
         for (int i = 0; i < lottoTicketCount; i++) {
             List<LottoNumber> sixLottoNumbers = allPossibleNumbers.drawRandomSixNumbers();
-            tickets.add(new LottoTicket(sixLottoNumbers));
+            tickets.add(LottoTicket.generateByLottoNumbers(sixLottoNumbers));
         }
 
         return tickets;

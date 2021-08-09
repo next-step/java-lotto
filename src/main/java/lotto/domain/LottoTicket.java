@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +9,13 @@ import lotto.exception.WrongLottoTicketException;
 
 public class LottoTicket {
 
+    public static final int PRICE = 1000;
     private static final int TICKET_NUMBER_SIZE = 6;
     private static final int UNIQUE_NUMBER_FREQUENCY = 1;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoTicket(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -50,8 +52,12 @@ public class LottoTicket {
     }
 
 
-    public static LottoTicket generateByIntegerList(List<Integer> integerNumbers) {
-        List<LottoNumber> lottoNumbers = integerNumbers.stream()
+    public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket generateByIntegerArray(Integer... integerArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);

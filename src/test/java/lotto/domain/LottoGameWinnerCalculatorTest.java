@@ -53,11 +53,7 @@ class LottoGameWinnerCalculatorTest {
 
 
     private LottoTicket makeWinnerTicket() {
-
-        return new LottoTicket(Arrays.asList(
-            new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-
+        return LottoTicket.generateByIntegerArray(1, 2, 3, 4, 5, 6);
     }
 
     private static Stream<Arguments> generatePlayerTicketsAndReward() {
@@ -78,52 +74,41 @@ class LottoGameWinnerCalculatorTest {
         return Stream.of(
             Arguments.of(makeThreeNumberMatched(), 5.0),
             Arguments.of(makeFourNumberMatched(), 50.0),
-            Arguments.of(makeFiveNumberMatched(), 1500.0),
-            Arguments.of(makeSixNumberMatched(), 2000000.0),
+            Arguments.of(makeFiveNumberMatched(), 1_500.0),
+            Arguments.of(makeSixNumberMatched(), 2_000_000.0),
             Arguments.of(makeNoMatched(), 0)
         );
 
     }
 
     private static List<LottoTicket> makeThreeNumberMatched() {
+
         return new ArrayList<>(Arrays.asList(
-            new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(12), new LottoNumber(13), new LottoNumber(14)))
+            LottoTicket.generateByIntegerArray(1, 2, 3, 12, 13, 14)
         ));
     }
 
     private static List<LottoTicket> makeFourNumberMatched() {
         return new ArrayList<>(Arrays.asList(
-            new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(13), new LottoNumber(14)))
+            LottoTicket.generateByIntegerArray(1, 2, 3, 4, 13, 14)
         ));
     }
 
     private static List<LottoTicket> makeFiveNumberMatched() {
         return new ArrayList<>(Arrays.asList(
-            new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(14)))
+            LottoTicket.generateByIntegerArray(1, 2, 3, 4, 5, 14)
         ));
     }
 
     private static List<LottoTicket> makeSixNumberMatched() {
         return new ArrayList<>(Arrays.asList(
-            new LottoTicket(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))
+            LottoTicket.generateByIntegerArray(1, 2, 3, 4, 5, 6)
         ));
     }
 
     private static List<LottoTicket> makeNoMatched() {
         return new ArrayList<>(Arrays.asList(
-            new LottoTicket(Arrays.asList(
-                new LottoNumber(11), new LottoNumber(12), new LottoNumber(13),
-                new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)))
+            LottoTicket.generateByIntegerArray(11, 12, 13, 14, 15, 16)
         ));
     }
-
-
 }

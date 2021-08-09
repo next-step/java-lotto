@@ -19,7 +19,7 @@ class LottoTicketTest {
     @DisplayName("로또티켓이 6숫자를 가지고, 중복되는 숫자가 없으면 예외를 던지지 않는다.")
     void validate_lotto_ticket_ok(List<LottoNumber> lottoNumbers) {
 
-        assertThatCode(() -> new LottoTicket(lottoNumbers))
+        assertThatCode(() -> LottoTicket.generateByLottoNumbers(lottoNumbers))
             .doesNotThrowAnyException();
 
     }
@@ -30,7 +30,7 @@ class LottoTicketTest {
     @DisplayName("로또티켓이 6개의 숫자를 가지지 않을때 예외를 던진다.")
     void validate_lotto_ticket_size_ng(List<LottoNumber> lottoNumbers) {
 
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> LottoTicket.generateByLottoNumbers(lottoNumbers))
             .isInstanceOf(WrongLottoTicketException.class);
 
     }
@@ -46,7 +46,7 @@ class LottoTicketTest {
 
         System.out.println(number1.equals(number2) );
 
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> LottoTicket.generateByLottoNumbers(lottoNumbers))
             .isInstanceOf(WrongLottoTicketException.class);
 
     }

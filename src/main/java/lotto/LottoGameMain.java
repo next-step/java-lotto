@@ -21,8 +21,8 @@ public class LottoGameMain {
         List<LottoTicket> playerTickets = vendor.buyLottoTickets(moneyForGame);
         outputView.showPlayerTicketNumbers(playerTickets);
 
-        List<Integer> winnerNumbers = inputView.askWinnerNumbers();
-        LottoTicket winnerTicket = LottoTicket.generateByIntegerList(winnerNumbers);
+        Integer[] winnerNumbers = inputView.askWinnerNumbers();
+        LottoTicket winnerTicket = LottoTicket.generateByIntegerArray(winnerNumbers);
         LottoGameWinnerCalculator winnerCalculator = new LottoGameWinnerCalculator();
         LottoGameWinnerResult winnerResult = winnerCalculator
             .calculate(playerTickets, winnerTicket);

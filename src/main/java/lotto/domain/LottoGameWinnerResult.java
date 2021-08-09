@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import lotto.enumeration.LottoPrices;
 import lotto.enumeration.LottoReward;
 
 public class LottoGameWinnerResult {
@@ -19,7 +18,7 @@ public class LottoGameWinnerResult {
 
     private void updateProfitRate(int playerTicketsCount) {
 
-        int investedMoney = (LottoPrices.TICKET_PRICE.getPrice() * playerTicketsCount);
+        int investedMoney = (LottoTicket.PRICE * playerTicketsCount);
 
         profitRate = rewardMoneySum / investedMoney;
     }

@@ -48,9 +48,9 @@ class LottoGameWinnerResultTest {
             Arguments.of(LottoReward.FOUR_NUMBERS_MATCHED_REWARD,
                 LottoReward.FOUR_NUMBERS_MATCHED_REWARD.getRewardMoney(), 50.0),
             Arguments.of(LottoReward.FIVE_NUMBERS_MATCHED_REWARD,
-                LottoReward.FIVE_NUMBERS_MATCHED_REWARD.getRewardMoney(), 1500.0),
+                LottoReward.FIVE_NUMBERS_MATCHED_REWARD.getRewardMoney(), 1_500.0),
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                LottoReward.SIX_NUMBERS_MATCHED_REWARD.getRewardMoney(), 2000000.0),
+                LottoReward.SIX_NUMBERS_MATCHED_REWARD.getRewardMoney(), 2_000_000.0),
             Arguments.of(LottoReward.NO_REWARD,
                 LottoReward.NO_REWARD.getRewardMoney(), 0)
         );
@@ -61,15 +61,15 @@ class LottoGameWinnerResultTest {
 
         return Stream.of(
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                1, 2000000.0),
+                1, 2_000_000.0),
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                2, 1000000.0),
+                2, 1_000_000.0),
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                50, 40000.0),
+                50, 40_000.0),
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                1000, 2000.0),
+                1_000, 2_000.0),
             Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                20000, 100.0)
+                20_000, 100.0)
         );
     }
 

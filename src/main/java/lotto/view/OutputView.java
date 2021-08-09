@@ -39,14 +39,11 @@ public class OutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------");
-        System.out
-            .println(getWinnerHitString(LottoReward.THREE_NUMBERS_MATCHED_REWARD, winnerResult));
-        System.out
-            .println(getWinnerHitString(LottoReward.FOUR_NUMBERS_MATCHED_REWARD, winnerResult));
-        System.out
-            .println(getWinnerHitString(LottoReward.FIVE_NUMBERS_MATCHED_REWARD, winnerResult));
-        System.out
-            .println(getWinnerHitString(LottoReward.SIX_NUMBERS_MATCHED_REWARD, winnerResult));
+
+        LottoReward.stream()
+            .filter(e -> !e.equals(LottoReward.NO_REWARD))
+            .forEach(e -> System.out.println(getWinnerHitString(e, winnerResult)));
+
         System.out.println(getProfitRateString(winnerResult));
     }
 
