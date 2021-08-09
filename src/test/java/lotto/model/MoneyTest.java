@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.utils.LottoCountCalculator;
+
 class MoneyTest {
 
 	@ParameterizedTest
@@ -25,7 +27,7 @@ class MoneyTest {
 	public void inputMoneyAndCount(int money, int lottoCount) {
 		Money result = new Money(money);
 
-		assertThat(result.countLotto()).isEqualTo(lottoCount);
+		assertThat(LottoCountCalculator.calculateLottoCount(result.getPurchaseMoney())).isEqualTo(lottoCount);
 	}
 
 	@Test
