@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ class LottoGameTest {
 
     public static final int TICKET_NUMBER = 5;
     private LottoGame lottoGame = new LottoGame();
-    private List<LottoNumber> winnerNumbers = new ArrayList<>();
+    private Set<LottoNumber> winnerNumbers = new HashSet<>();
 
     @BeforeEach
     void setUp() {

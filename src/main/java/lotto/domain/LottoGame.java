@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.util.LottoListGenerator;
 import lotto.view.ResultView;
 
-import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
     private Lottos lottos;
@@ -13,7 +13,7 @@ public class LottoGame {
         ResultView.printPurchaseLottos(lottos);
     }
 
-    public void drawLotto(List<LottoNumber> winnerNumbers) {
+    public void drawLotto(Set<LottoNumber> winnerNumbers) {
         lottos.drawLottos(winnerNumbers);
     }
 

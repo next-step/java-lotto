@@ -1,8 +1,12 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.Award;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -11,7 +15,7 @@ public class ResultView {
         lottos.getLottos().stream().forEach(lotto -> printLottoNumbers(lotto.getNumbers()));
     }
 
-    private static void printLottoNumbers(List<LottoNumber> numbers) {
+    private static void printLottoNumbers(Set<LottoNumber> numbers) {
         List<String> numbersStringList = numbers.stream().map(LottoNumber::getLottoNumber).map(String::valueOf).collect(Collectors.toList());
         System.out.println("[" + String.join(", ", numbersStringList) + "]");
     }

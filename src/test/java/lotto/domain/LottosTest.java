@@ -7,7 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LottosTest {
 
     private final int TICKET_NUMBER = 3;
-    private List<LottoNumber> winnerNumbers = new ArrayList<>();
-    private List<LottoNumber> lottoNumberList = new ArrayList<>();
+    private Set<LottoNumber> winnerNumbers = new HashSet<>();
+    private Set<LottoNumber> lottoNumberList = new HashSet<>();
     private Lotto lotto;
     private List<Lotto> lottoList = new ArrayList<>();
     private Lottos lottos;

@@ -5,7 +5,7 @@ import lotto.domain.LottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoMain {
@@ -22,10 +22,10 @@ public class LottoMain {
         ResultView.printYield(lottoGame, amount);
     }
 
-    private static List<LottoNumber> getWinnerLottoNumbers() {
-        List<Integer> winnerNumbers = InputView.requestWinnerNumbers();
+    private static Set<LottoNumber> getWinnerLottoNumbers() {
+        Set<Integer> winnerNumbers = InputView.requestWinnerNumbers();
         return winnerNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

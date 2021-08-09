@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -13,7 +14,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void drawLottos(List<LottoNumber> winnerNumbers) {
+    public void drawLottos(Set<LottoNumber> winnerNumbers) {
         for (Lotto lotto : lottos) {
             lotto.drawLotto(winnerNumbers);
         }

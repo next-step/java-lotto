@@ -3,9 +3,7 @@ package lotto.util;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoListGenerator {
@@ -23,8 +21,8 @@ public class LottoListGenerator {
         return lottoList;
     }
 
-    public static List<LottoNumber> createLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public static Set<LottoNumber> createLottoNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         Collections.shuffle(lottoNumbersPool);
         lottoNumbers.addAll(lottoNumbersPool.subList(0, 6));
         return lottoNumbers;

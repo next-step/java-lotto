@@ -1,32 +1,31 @@
 package lotto.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Lotto {
 
     public static final long SIZE = 6;
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
     private Award award = Award.UNIDENTIFIED;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validate(List<LottoNumber> lottoNumbers) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
         checkDuplicate(lottoNumbers);
     }
 
-    private void checkSize(List<LottoNumber> lottoNumbers) {
+    private void checkSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException("LottoNumbers의 사이즈가 잘못 입력되었습니다. 입력 사이즈 : " + lottoNumbers.size());
         }
     }
 
-    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
+    private void checkDuplicate(Set<LottoNumber> lottoNumbers) {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
             containsThenThrowsException(lottoNumberSet, lottoNumber);
@@ -40,11 +39,11 @@ public class Lotto {
         }
     }
 
-    public void drawLotto(List<LottoNumber> winnerNumbers) {
+    public void drawLotto(Set<LottoNumber> winnerNumbers) {
         award = Award.findBy(countContains(winnerNumbers));
     }
 
-    public int countContains(List<LottoNumber> winnerNumbers) {
+    public int countContains(Set<LottoNumber> winnerNumbers) {
         int numbers = 0;
         for (LottoNumber winnerNumber : winnerNumbers) {
             numbers += contains(winnerNumber);
@@ -66,7 +65,7 @@ public class Lotto {
         return award;
     }
 
-    public List<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return this.lottoNumbers;
     }
 }
