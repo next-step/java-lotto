@@ -20,7 +20,7 @@ public class InputView {
         System.out.println(INPUT_LAST_WINNING_NUMBER);
         sc.nextLine();
         String lastWinningNumbers = sc.nextLine();
-        List<Integer> winningNumbers = Validation.isCorrectWinningNumbers(lastWinningNumbers);
+        List<Integer> winningNumbers = Validation.isCorrectLottoNumbers(lastWinningNumbers);
         return winningNumbers;
     }
 }
