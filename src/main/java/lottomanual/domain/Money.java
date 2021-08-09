@@ -24,6 +24,9 @@ public class Money {
 	}
 
 	public Money excludeLottoCount(int count) {
+		if (count > getLottoCount()) {
+			throw new LottoManualCountException();
+		}
 		return new Money(money - (count * AMOUNT_UNIT));
 	}
 
