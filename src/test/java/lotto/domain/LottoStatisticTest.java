@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -26,20 +24,10 @@ public class LottoStatisticTest {
     @DisplayName("로또 여러개 당첨 확인")
     void lottoMatchTwoTest() {
         // given
-        List<LottoNumber> sixMatchLottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        List<LottoNumber> fiveMatchLottoNumbers2 = Stream.of(1, 2, 3, 4, 5, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        List<LottoNumber> FourMatchLottoNumbers3 = Stream.of(1, 2, 3, 4, 44, 45)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(sixMatchLottoNumbers));
-        lottoTickets.add(new LottoTicket(fiveMatchLottoNumbers2));
-        lottoTickets.add(new LottoTicket(FourMatchLottoNumbers3));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 45}));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 44, 45}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
@@ -61,15 +49,9 @@ public class LottoStatisticTest {
     @DisplayName("로또 중복 당첨 확인")
     void lottoMatchOverlapTest() {
         // given
-        List<LottoNumber> lottoNumbers1 = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
-        List<LottoNumber> lottoNumbers2 = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers1));
-        lottoTickets.add(new LottoTicket(lottoNumbers2));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
@@ -83,18 +65,14 @@ public class LottoStatisticTest {
     @DisplayName("수익률 확인")
     void profitRateTest() {
         // given
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 11, 12, 13)
-                .map(LottoNumber::new).collect(Collectors.toList());
-
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(lottoNumbers));
+        lottoTickets.add(new LottoTicket(new Integer[]{1, 2, 3, 11, 12, 13}));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
         Double profitRate = lottoStatistic.getProfitRate(10000);
-        String actual = String.format("%.2f", profitRate);
 
         // then
-        assertThat(actual).isEqualTo("0.50");
+        assertThat(profitRate).isEqualTo(0.5);
     }
 }

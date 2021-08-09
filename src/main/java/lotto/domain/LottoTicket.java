@@ -1,17 +1,27 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class LottoTicket {
 
     private static final int LOTTO_TICKET_SIZE = 6;
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
         validateLottoTicketSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoTicket(final Integer[] lottoNumbers) {
+        List<LottoNumber> collectLottoNumbers = Arrays.stream(lottoNumbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        validateLottoTicketSize(collectLottoNumbers);
+        this.lottoNumbers = collectLottoNumbers;
     }
 
     private void validateLottoTicketSize(List<LottoNumber> lottoNumbers) {
