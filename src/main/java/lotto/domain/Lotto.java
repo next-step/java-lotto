@@ -10,7 +10,7 @@ public class Lotto {
     private static final int LIMIT_SIZE = 6;
     private static final String SEPARATOR = ",";
 
-    public final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto(final List<Integer> numbers) {
         validateNumbers(numbers);
@@ -75,5 +75,6 @@ public class Lotto {
         }
         return matchingCount;
     }
+
 
 }

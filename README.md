@@ -45,7 +45,5 @@
 
 ## TODO
 * [X] 전단계 피드백 반영
-* [X] BonusBall 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
-* [ ] Lotto - BonusBall 포함 여부를 판단
-* [ ] Rank - BonusBall 포함 여부에 따른 랭킹 반환
-* [ ] Lottos, LottoMachine, LottoController - BonusBall 추가에 따른 소스변경
+* [X] WinningLotto 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
+* [ ] Lottos, LottoMachine, LottoController - WinningLotto 추가에 따른 소스변경
