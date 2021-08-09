@@ -2,7 +2,11 @@ package step2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import step2.model.AutoLottoStrategy;
+import step2.model.Lotto;
 import step2.view.InputView;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,7 +46,7 @@ public class AutoLottoTest {
     }
 
     @Test
-    public void 구매금액_정상() {
+    public void 구매갯수() {
         //given
         InputView user = new InputView();
 
@@ -52,4 +56,17 @@ public class AutoLottoTest {
         //then
         assertThat(lottoCnt).isEqualTo(1);
     }
+
+    @Test
+    public void 로또발급_6개랜덤숫자() {
+        //given
+        Lotto lotto = new Lotto();
+
+        //when
+        List<Integer> numbers = lotto.getLotto(new AutoLottoStrategy());
+
+        //then
+        assertThat(numbers.size()).isEqualTo(6);
+    }
+
 }
