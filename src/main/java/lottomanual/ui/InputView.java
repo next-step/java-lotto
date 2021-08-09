@@ -19,12 +19,22 @@ public class InputView {
 	public static String[] inputManualNumbers() {
 		int manualCount = inputManualCount();
 
-		System.out.println(MANUAL_LOTTO_NUMBERS);
+		return inputManualNumbers(manualCount);
+	}
+
+	private static String[] inputManualNumbers(int manualCount) {
 		String[] manualNumbers = new String[manualCount];
+		if (manualCount > 0) {
+			System.out.println(MANUAL_LOTTO_NUMBERS);
+			inputManualNumber(manualCount, manualNumbers);
+		}
+		return manualNumbers;
+	}
+
+	private static void inputManualNumber(int manualCount, String[] manualNumbers) {
 		for (int i = 0; i < manualCount; i++) {
 			manualNumbers[i] = scanner.nextLine();
 		}
-		return manualNumbers;
 	}
 
 	private static int inputManualCount() {
