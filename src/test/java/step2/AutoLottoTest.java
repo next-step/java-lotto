@@ -6,8 +6,10 @@ import step2.model.AutoLottoStrategy;
 import step2.model.Lotto;
 import step2.view.InputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -150,6 +152,25 @@ public class AutoLottoTest {
         assertEquals(winningNo, expected);
     }
 
-    
+    @Test
+    public void 당첨확인() {
+        //given
+        List<Integer> winningNoList = Arrays.asList(1,2,3,4,5,6);
+        List<List<Integer>> lottoList = new ArrayList<>();
+        lottoList.add(Arrays.asList(11,22,33,4,5,6)); //3개당첨
+        lottoList.add(Arrays.asList(11,22,3,4,5,6)); //4개당첨
+        lottoList.add(Arrays.asList(11,2,3,4,5,6)); //5개당첨
+        lottoList.add(Arrays.asList(1,2,3,4,5,6)); //6개당첨
+
+        //when
+        Lotto lotto = new Lotto();
+        Map<Integer, Integer> result = lotto.checkWinning(lottoList, winningNoList);
+
+        //then
+        assertThat(result.get(3)).isEqualTo(1);
+        assertThat(result.get(4)).isEqualTo(1);
+        assertThat(result.get(5)).isEqualTo(1);
+        assertThat(result.get(6)).isEqualTo(1);
+    }
 
 }
