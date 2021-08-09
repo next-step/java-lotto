@@ -43,18 +43,10 @@ public class Lotto {
         award = Award.findBy(countContains(winnerNumbers));
     }
 
-    public int countContains(Set<LottoNumber> winnerNumbers) {
-        int numbers = 0;
-        for (LottoNumber winnerNumber : winnerNumbers) {
-            numbers += contains(winnerNumber);
-        }
-        return numbers;
-    }
-
-    private int contains(LottoNumber winnerNumber) {
-        if (this.lottoNumbers.contains(winnerNumber))
-            return 1;
-        return 0;
+    public long countContains(Set<LottoNumber> winnerNumbers) {
+        return winnerNumbers.stream()
+                .filter(winnerNumber -> this.lottoNumbers.contains(winnerNumber))
+                .count();
     }
 
     public boolean isWinner(Award award) {

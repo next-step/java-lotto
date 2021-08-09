@@ -18,7 +18,7 @@ public enum Award {
         this.amount = amount;
     }
 
-    public static Award findBy(int matchNumbers) {
+    public static Award findBy(long matchNumbers) {
         return Arrays.stream(values())
                 .filter(award -> award.matchNumbers == matchNumbers)
                 .findFirst()
