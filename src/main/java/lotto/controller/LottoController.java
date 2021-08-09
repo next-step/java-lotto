@@ -13,16 +13,16 @@ import lotto.view.ResultView;
 public class LottoController {
 
 	private final int money;
-	private final LottoCount lottoCount;
 	private Lottos lottos;
 	private Lotto winLotto;
 
 	public LottoController(int money) {
 		this.money = money;
-		this.lottoCount = new LottoCount(this.money);
 	}
 
 	public void buyLotto() {
+		final LottoCount lottoCount = new LottoCount(this.money);
+
 		ResultView.outputLottoCount(lottoCount.getLottoCount());
 		this.lottos = Lottos.generateAutoLottos(lottoCount.getLottoCount());
 
@@ -31,15 +31,7 @@ public class LottoController {
 	}
 
 	public void winLotto(String winLottoNumbers) {
-		String[] stringLottoNumbers = winLottoNumbers.split(",");
-
-		List<Integer> lottoNumbers = Arrays.stream(stringLottoNumbers)
-			.map(String::trim)
-			.mapToInt(Integer::parseInt)
-			.boxed()
-			.collect(Collectors.toList());
-
-		this.winLotto = new Lotto(lottoNumbers);
+		this.winLotto = Lotto.of(winLottoNumbers);
 	}
 
 	public Records getRecords() {

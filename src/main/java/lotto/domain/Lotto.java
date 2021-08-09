@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -15,14 +16,32 @@ public class Lotto {
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto(List<Integer> lottoNumbers) {
+	private Lotto(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
 			throw new LottoValidationException("로또 번호는 " + LOTTO_NUMBERS_LENGTH + "개의 숫자여야 합니다.");
 		}
 
-		this.lottoNumbers = lottoNumbers.stream()
-			.map(LottoNumber::new)
-			.collect(Collectors.toCollection(TreeSet::new));
+		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static Lotto of(String lottoNumbers) {
+		String[] stringLottoNumbers = lottoNumbers.split(",");
+
+		Set<LottoNumber> lottoNumberList = Arrays.stream(stringLottoNumbers)
+											.map(String::trim)
+											.mapToInt(Integer::parseInt)
+											.mapToObj(LottoNumber::new)
+											.collect(Collectors.toCollection(TreeSet<LottoNumber>::new));
+
+		return new Lotto(lottoNumberList);
+	}
+
+	public static Lotto of(List<Integer> lottoNumbers) {
+		Set<LottoNumber> lottoNumberList = lottoNumbers.stream()
+													.map(LottoNumber::new)
+													.collect(Collectors.toCollection(TreeSet<LottoNumber>::new));
+
+		return new Lotto(lottoNumberList);
 	}
 
 	public Rank figureOutRank(Lotto winningLotto) {

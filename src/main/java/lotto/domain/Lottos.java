@@ -19,7 +19,7 @@ public class Lottos {
 		List<Lotto> lottos = new ArrayList<Lotto>(lottoSize);
 
 		for (int i = 0; i < lottoSize; i++) {
-			lottos.add(new Lotto(AutoLottoNumbersGeneratorUtils.generateRandomNumbers(LOTTO_NUMBERS_LENGTH)));
+			lottos.add(Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers(LOTTO_NUMBERS_LENGTH)));
 		}
 
 		return new Lottos(lottos);

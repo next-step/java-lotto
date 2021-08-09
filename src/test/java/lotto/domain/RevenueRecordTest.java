@@ -20,13 +20,13 @@ class RevenueRecordTest {
 	void winLottoRevenue() {
 		List<Lotto> lottos = new ArrayList<>(5);
 
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto winLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		RevenueRecord revenueRecord = new RevenueRecord(lottos);
 
@@ -41,13 +41,13 @@ class RevenueRecordTest {
 	void sumRevenue() {
 		List<Lotto> lottos = new ArrayList<>(5);
 
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto winLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		RevenueRecord revenueRecord = new RevenueRecord(lottos);
 
