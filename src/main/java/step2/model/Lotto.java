@@ -1,5 +1,7 @@
 package step2.model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,10 +27,10 @@ public class Lotto {
 
     public Map<Integer, Integer> checkWinning(List<List<Integer>> lottoList, List<Integer> winningNoList) {
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(WINNING_RULE_1, 0);
-        result.put(WINNING_RULE_2, 0);
-        result.put(WINNING_RULE_3, 0);
-        result.put(WINNING_RULE_4, 0);
+        result.put(WinningRule.RULE_1.getNoCnt(), 0);
+        result.put(WinningRule.RULE_2.getNoCnt(), 0);
+        result.put(WinningRule.RULE_3.getNoCnt(), 0);
+        result.put(WinningRule.RULE_4.getNoCnt(), 0);
 
         for (List<Integer> lotto : lottoList) {
             List<Integer> allNoList = combineAll(winningNoList, lotto);
@@ -62,5 +64,19 @@ public class Lotto {
                 .filter(i -> Collections.frequency(allNoList, i) > 1)
                 .collect(Collectors.toSet());
         return duplicatedNum;
+    }
+
+    public String getWinningRate(int amount, Map<Integer, Integer> winningResult) {
+        int totalWinPrice = 0;
+        for (WinningRule rule : WinningRule.values()) {
+            int winningCnt = winningResult.get(rule.getNoCnt());
+            totalWinPrice += rule.getWinningPrice() * winningCnt;
+        }
+
+        //둘째자리까지 버림
+        double result = (double) totalWinPrice / (double) amount;
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        return decimalFormat.format(result);
     }
 }

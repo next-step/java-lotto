@@ -6,10 +6,7 @@ import step2.model.AutoLottoStrategy;
 import step2.model.Lotto;
 import step2.view.InputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -171,6 +168,24 @@ public class AutoLottoTest {
         assertThat(result.get(4)).isEqualTo(1);
         assertThat(result.get(5)).isEqualTo(1);
         assertThat(result.get(6)).isEqualTo(1);
+    }
+
+    @Test
+    public void 수익률() {
+        //given
+        int amount = 14000;
+        Map<Integer, Integer> winningResult = new HashMap<>();
+        winningResult.put(3, 1);
+        winningResult.put(4, 0);
+        winningResult.put(5, 0);
+        winningResult.put(6, 0);
+
+        //when
+        Lotto lotto = new Lotto();
+        String rate = lotto.getWinningRate(amount, winningResult);
+
+        //then
+        assertThat(rate).isEqualTo("0.35");
     }
 
 }
