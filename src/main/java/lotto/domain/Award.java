@@ -19,11 +19,10 @@ public enum Award {
     }
 
     public static Award findBy(int matchNumbers) {
-        if(matchNumbers <= 2){
-            return Award.BANG;
-        }
-        return Arrays.stream(values()).filter(award -> award.matchNumbers == matchNumbers).findFirst()
-                .orElseThrow(() -> new RuntimeException());
+        return Arrays.stream(values())
+                .filter(award -> award.matchNumbers == matchNumbers)
+                .findFirst()
+                .orElse(Award.BANG);
     }
 
     public int getMatchNumbers() {
