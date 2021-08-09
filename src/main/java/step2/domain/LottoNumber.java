@@ -7,11 +7,11 @@ public class LottoNumber {
     private static final int MAX_OF_LOTTO_NUMBER = 45;
 
     public LottoNumber(int number) {
-        checkRange();
+        checkRange(number);
         this.number = number;
     }
 
-    private void checkRange() {
+    private void checkRange(int number) {
         if (number > MAX_OF_LOTTO_NUMBER || number < MIN_OF_LOTTO_NUMBER) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }

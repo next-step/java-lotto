@@ -2,6 +2,7 @@ package step2;
 
 import step2.domain.LottoMachine;
 import step2.util.Calculator;
+import step2.util.LastWinningLottoNumberChecker;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -13,11 +14,15 @@ public class LottoApp {
         ResultView resultView = new ResultView();
 
         int numOfLotto = inputView.requestInput();
+
+        LottoMachine lottoMachine = new LottoMachine();
+        ArrayList<ArrayList> issuedLottolist = lottoMachine.run(numOfLotto);
+
         String lastWinningLottoNum = inputView.requestWinningLottoNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(numOfLotto, lastWinningLottoNum);
-        ArrayList<ArrayList> issuedLottolist = lottoMachine.run();
-        ArrayList<Integer> lastWinningLottoNumberArray = lottoMachine.getLastWinningLottoNumberArray();
+        LastWinningLottoNumberChecker lastWinningLottoNumberChecker;
+        lastWinningLottoNumberChecker = new LastWinningLottoNumberChecker(lastWinningLottoNum);
+        ArrayList<Integer> lastWinningLottoNumberArray = lastWinningLottoNumberChecker.getLottoWinningNumberArray();
 
         Calculator calculator = new Calculator(issuedLottolist, lastWinningLottoNumberArray);
         calculator.run();

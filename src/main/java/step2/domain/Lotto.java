@@ -8,7 +8,7 @@ public class Lotto {
     static final int MAX_OF_LOTTO_NUMBER = 45;
     static final int NUM_OF_LOTTO_NUMBER = 6;
     static ArrayList<Integer> lottoNumberList = new ArrayList<>();
-    static LottoNumber lottoNumber
+    static LottoNumber lottoNumber;
 
 
     public Lotto() {

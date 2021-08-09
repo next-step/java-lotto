@@ -15,7 +15,7 @@ class CalculatorTest {
     @Test
     void test() {
 
-        LottoMachine lottoMachine = new LottoMachine(6, "1, 2, 3, 4, 5, 6");
+        LottoMachine lottoMachine = new LottoMachine(6);
 
         ArrayList<ArrayList> issuedLottolist = new ArrayList<>();
         issuedLottolist.add(new ArrayList(Arrays.asList(1,2,3,4,5,6)));
