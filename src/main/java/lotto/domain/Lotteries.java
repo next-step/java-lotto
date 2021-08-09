@@ -14,6 +14,8 @@ public class Lotteries {
 
   private List<Lotto> lottos = new ArrayList<>();
 
+  private LottoResult lottoResult;
+
   public Lotteries(int count) {
     lottos = createLotteries(count);
   }
@@ -31,18 +33,19 @@ public class Lotteries {
         .collect(Collectors.toList()));
   }
 
-  public LottoResult getInputMatchTotalInfo(
-      final LottoResult lottoResult, Lotto winLotto) {
+  public LottoResult getInputMatchTotalInfo(Lotto winLotto) {
+
+    lottoResult = new LottoResult();
 
     for (Lotto lotto : lottos) {
-      getLottosByRank(lottoResult, winLotto, lotto).add(lotto);
+      getLottosByRank(winLotto, lotto).add(lotto);
     }
 
     lottoResult.getCategoriesRank().remove(Rank.MISS);
     return lottoResult;
   }
 
-  private List<Lotto> getLottosByRank(final LottoResult lottoResult, final Lotto winLotto,
+  private List<Lotto> getLottosByRank(final Lotto winLotto,
       final Lotto lotto) {
     return lottoResult.getMatchLottos(getMatchCountForRank(winLotto, lotto));
   }

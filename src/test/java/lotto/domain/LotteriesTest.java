@@ -71,13 +71,13 @@ class LotteriesTest {
 
   @DisplayName("로또값을 비교해서 Rank 각 등급에 맞는 match값을 기준으로 자료구조에 적재되는지 테스트.")
   @Test
-  void 자료구조적재테스트(){
+  void 자료구조적재테스트() {
 
     Lotteries lotteries = new Lotteries();
 
     lotteries.getLottos().add(createTestLottoOneToSix());
 
-    LottoResult lottoResult = lotteries.getInputMatchTotalInfo(new LottoResult(),
+    LottoResult lottoResult = lotteries.getInputMatchTotalInfo(
         new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)));
 
     assertThat(lottoResult.getCategoriesRank().get(Rank.FIRST).size()).isEqualTo(1);

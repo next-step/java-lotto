@@ -15,17 +15,13 @@ public class LotteryDraw {
 
   private static final String SPLIT_MARK = ",";
 
-  private Lotteries lotteries;
+  private final Lotteries lotteries;
 
-  private LottoMoney lottoMoney;
+  private final LottoMoney lottoMoney;
 
-  private LottoResult lottoResult;
-
-  public LotteryDraw(final Lotteries lotteries, final LottoMoney lottoMoney,
-      final LottoResult lottoResult) {
+  public LotteryDraw(final Lotteries lotteries, final LottoMoney lottoMoney) {
     this.lottoMoney = lottoMoney;
     this.lotteries = lotteries;
-    this.lottoResult = lottoResult;
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
@@ -43,7 +39,7 @@ public class LotteryDraw {
   }
 
   public LottoResult matchLottoInfo(Lotto winLotto) {
-    return lotteries.getInputMatchTotalInfo(lottoResult, winLotto);
+    return lotteries.getInputMatchTotalInfo(winLotto);
   }
 
   public double gradingScore(LottoResult lottoResult) {

@@ -26,7 +26,7 @@ public class LottoController {
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney, new LottoResult());
+    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney);
 
     LottoResult lottoResult = lotteryDraw.matchLottoInfo(
         lotteryDraw.inputWinningNumbers(
