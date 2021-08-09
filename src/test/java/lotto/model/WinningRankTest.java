@@ -19,10 +19,10 @@ public class WinningRankTest {
         Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
                 .subList(0, 6));
 
-        WinningNumbers firstWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumbers thirdWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
-        WinningNumbers fourthWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
-        WinningNumbers fifthWinningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Lotto firstWinningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto thirdWinningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto fourthWinningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
+        Lotto fifthWinningNumbers = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
 
         LottoNumber matchedBonusNumber = LottoNumber.valueOf(6);
         LottoNumber notMatchedBonusNumber = LottoNumber.valueOf(10);
@@ -52,9 +52,7 @@ public class WinningRankTest {
         Lotto lotto = new Lotto(() -> LottoNumber.getAllLottoNumbers()
                 .subList(0, 6));
 
-        WinningNumbers winningNumbers =
-                new WinningNumbers(Arrays.asList(first, second, third, fourth, fifth, sixth));
-
+        Lotto winningNumbers = new Lotto(Arrays.asList(first, second, third, fourth, fifth, sixth));
         LottoNumber bonusBall = LottoNumber.valueOf(45);
 
         // when, then

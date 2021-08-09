@@ -1,8 +1,13 @@
 package lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
+    static final int NUMBER_COUNT = 6;
     private static final String LEFT_SQUARE_BRACKET = "[";
     private static final String COMMA = ",";
     private static final String ONE_BLANK_SPACE = " ";
@@ -10,16 +15,43 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategy) {
-        this.numbers = lottoNumberGeneratingStrategy.generateNumbers();
+    public Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategy) {
+        List<LottoNumber> numbers = lottoNumberGeneratingStrategy.generateNumbers();
+
+        validateCount(numbers);
+        validateUnique(numbers);
+        this.numbers = numbers;
+    }
+
+    Lotto(List<Integer> givenNumbers) {
+        List<LottoNumber> numbers = givenNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(toList());
+
+        validateCount(numbers);
+        validateUnique(numbers);
+        this.numbers = numbers;
+    }
+
+    private void validateCount(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개 이어야 합니다.", NUMBER_COUNT));
+        }
+    }
+
+    private void validateUnique(List<LottoNumber> numbers) {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
+        if (numbers.size() > uniqueNumbers.size()) {
+            throw new IllegalArgumentException("로또 번호가 중복 되었습니다.");
+        }
     }
 
     List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    int findEqualNumberCount(WinningNumbers winningNumbers) {
-        return (int) winningNumbers.getNumbers()
+    int findMatchedNumberCount(Lotto lotto) {
+        return (int) lotto.getNumbers()
                 .stream()
                 .filter(numbers::contains)
                 .count();

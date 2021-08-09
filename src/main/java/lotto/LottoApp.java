@@ -29,7 +29,7 @@ public class LottoApp {
         resultView.printLottos(lottos);
 
         inputView.printWinningNumbersInputMessage();
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningNumbers());
+        Lotto winningNumbers = new Lotto(inputView::inputWinningNumbers);
         inputView.printBonusNumberInputMessage();
         List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, new LotteryNumbers(winningNumbers,
                 LottoNumber.valueOf(inputView.inputBonusNumber())));

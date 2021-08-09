@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
+
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +39,11 @@ public class InputView {
         printStream.println(WINNING_NUMBERS_INPUT_MESSAGE);
     }
 
-    public List<Integer> inputWinningNumbers() {
+    public List<LottoNumber> inputWinningNumbers() {
         String[] winningNumbers = scanner.nextLine().split(WINNING_NUMBERS_DELIMITER);
         return Arrays.stream(winningNumbers)
                 .map(Integer::parseInt)
+                .map(LottoNumber::valueOf)
                 .collect(toList());
     }
 

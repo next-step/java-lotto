@@ -34,8 +34,8 @@ public enum WinningRank {
     }
 
     static WinningRank findWinningRank(Lotto lotto, LotteryNumbers lotteryNumbers) {
-        WinningNumbers winningNumbers = lotteryNumbers.getWinningNumbers();
-        int matchedWinningNumberCount = lotto.findEqualNumberCount(winningNumbers);
+        Lotto winningNumbers = lotteryNumbers.getWinningNumbers();
+        int matchedWinningNumberCount = lotto.findMatchedNumberCount(winningNumbers);
         List<WinningRank> winningRanks = findBy(matchedWinningNumberCount);
 
         if (winningRanks.size() == SINGLE_WINNING_RANK_COUNT) {

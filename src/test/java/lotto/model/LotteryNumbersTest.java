@@ -14,7 +14,7 @@ public class LotteryNumbersTest {
     @Test
     public void duplicatedWinningNumbersAndBonusNumberExceptionTest() {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(6);
 
         // when, then
