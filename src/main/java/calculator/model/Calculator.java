@@ -1,17 +1,19 @@
 package calculator.model;
 
+import java.util.List;
+
 import calculator.utils.RegexComposer;
+import calculator.utils.Validation;
 
 public class Calculator {
-
-	private final Characters characters;
-
-	public Calculator(String calculatorValue) {
-		characters = new Characters(RegexComposer.createCharacters(calculatorValue));
+	
+	public Characters createCharacters(String calculatorValue) {
+		Validation.validStringEmptyCheck(calculatorValue);
+		List<Character> characters = RegexComposer.createCharacters(calculatorValue);
+		return new Characters(characters);
 	}
 
-	public int calculate() {
+	public int calculate(Characters characters) {
 		return characters.getCharacters().stream().mapToInt(Character::getCharacter).sum();
 	}
-
 }
