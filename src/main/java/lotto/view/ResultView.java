@@ -77,8 +77,8 @@ public class ResultView {
         stringBuffer.append(DASH);
         stringBuffer.append(ONE_BLANK_SPACE);
         stringBuffer.append(EQUAL_WINNING_RANK_COUNT_MESSAGE);
-        return String.format(stringBuffer.toString(), winningRank.getAnswerCount(), winningRank.getWinningMoneyAmount()
-                , equalWinningRankCount);
+        return String.format(stringBuffer.toString(), winningRank.getMatchedWinningNumberCount()
+                , winningRank.getWinningMoneyAmount(), equalWinningRankCount);
     }
 
     public void printNewLine() {

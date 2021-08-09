@@ -2,27 +2,26 @@ package lotto.model;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public enum WinningRank {
-    FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(5, 30_000_000),
-    THIRD_PLACE(5, 1_500_000),
-    FOURTH_PLACE(4, 50_000),
-    FIFTH_PLACE(3, 5_000);
+    FIRST_PLACE(6, false, 2_000_000_000),
+    SECOND_PLACE(5, true, 30_000_000),
+    THIRD_PLACE(5, false, 1_500_000),
+    FOURTH_PLACE(4, false, 50_000),
+    FIFTH_PLACE(3, false, 5_000),
+    MISS(0, false, 0);
 
-    private static final Map<Integer, WinningRank> ANSWER_COUNT_WINNING_RANK_MAP = new HashMap<>();
+    private static final int SINGLE_WINNING_RANK_COUNT = 1;
+    private static final int FIRST_POSITION = 0;
 
-    static {
-        ANSWER_COUNT_WINNING_RANK_MAP.put(FIRST_PLACE.answerCount, FIRST_PLACE);
-        ANSWER_COUNT_WINNING_RANK_MAP.put(THIRD_PLACE.answerCount, THIRD_PLACE);
-        ANSWER_COUNT_WINNING_RANK_MAP.put(FOURTH_PLACE.answerCount, FOURTH_PLACE);
-        ANSWER_COUNT_WINNING_RANK_MAP.put(FIFTH_PLACE.answerCount, FIFTH_PLACE);
-    }
-
-    private final int answerCount;
+    private final int matchedWinningNumberCount;
+    private final boolean isBonusNumberMatchNecessary;
     private final int winningMoneyAmount;
 
-    WinningRank(int answerCount, int winningMoneyAmount) {
-        this.answerCount = answerCount;
+    WinningRank(int matchedWinningNumberCount, boolean isBonusNumberMatchNecessary, int winningMoneyAmount) {
+        this.matchedWinningNumberCount = matchedWinningNumberCount;
+        this.isBonusNumberMatchNecessary = isBonusNumberMatchNecessary;
         this.winningMoneyAmount = winningMoneyAmount;
     }
 
@@ -36,22 +35,30 @@ public enum WinningRank {
 
     static WinningRank findWinningRank(Lotto lotto, LotteryNumbers lotteryNumbers) {
         WinningNumbers winningNumbers = lotteryNumbers.getWinningNumbers();
-        int answerCount = lotto.findEqualNumberCount(winningNumbers);
-        WinningRank winningRank = ANSWER_COUNT_WINNING_RANK_MAP.get(answerCount);
-        LottoNumber bonusNumber = lotteryNumbers.getBonusNumber();
+        int matchedWinningNumberCount = lotto.findEqualNumberCount(winningNumbers);
+        List<WinningRank> winningRanks = findBy(matchedWinningNumberCount);
 
-        if (isThirdPlace(winningRank) && lotto.contains(bonusNumber)) {
-            return SECOND_PLACE;
+        if (winningRanks.size() == SINGLE_WINNING_RANK_COUNT) {
+            return winningRanks.get(FIRST_POSITION);
         }
-        return winningRank;
+
+        LottoNumber bonusNumber = lotteryNumbers.getBonusNumber();
+        boolean containsBonusNumber = lotto.contains(bonusNumber);
+
+        return winningRanks.stream()
+                .filter(winningRank -> winningRank.isBonusNumberMatchNecessary == containsBonusNumber)
+                .findAny()
+                .orElse(MISS);
     }
 
-    private static boolean isThirdPlace(WinningRank winningRank) {
-        return THIRD_PLACE == winningRank;
+    private static List<WinningRank> findBy(int matchedWinningNumberCount) {
+        return Arrays.stream(WinningRank.values())
+                .filter(winningRank -> winningRank.matchedWinningNumberCount == matchedWinningNumberCount)
+                .collect(toList());
     }
 
-    public int getAnswerCount() {
-        return answerCount;
+    public int getMatchedWinningNumberCount() {
+        return matchedWinningNumberCount;
     }
 
     public int getWinningMoneyAmount() {
