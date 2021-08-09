@@ -7,12 +7,15 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 import lotto.enums.Rank;
 import lotto.exception.LottoValidationException;
 
 public class Lotto {
 
 	private static final int LOTTO_NUMBERS_LENGTH = 6;
+	private static final LottoNumbers LOTTO_NUMBERS = LottoNumbers.generate();
 
 	private final Set<LottoNumber> lottoNumbers;
 
@@ -30,7 +33,7 @@ public class Lotto {
 		Set<LottoNumber> lottoNumberList = Arrays.stream(stringLottoNumbers)
 											.map(String::trim)
 											.mapToInt(Integer::parseInt)
-											.mapToObj(LottoNumber::new)
+											.mapToObj(LOTTO_NUMBERS::valueOf)
 											.collect(Collectors.toCollection(TreeSet<LottoNumber>::new));
 
 		return new Lotto(lottoNumberList);
@@ -38,7 +41,7 @@ public class Lotto {
 
 	public static Lotto of(List<Integer> lottoNumbers) {
 		Set<LottoNumber> lottoNumberList = lottoNumbers.stream()
-													.map(LottoNumber::new)
+													.map(LOTTO_NUMBERS::valueOf)
 													.collect(Collectors.toCollection(TreeSet<LottoNumber>::new));
 
 		return new Lotto(lottoNumberList);

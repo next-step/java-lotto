@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.number;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
 	private final int lottoNumber;
 
-	public LottoNumber(int lottoNumber) {
+	LottoNumber(int lottoNumber) {
 		this.lottoNumber = lottoNumber;
 	}
 
