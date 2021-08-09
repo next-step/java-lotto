@@ -9,6 +9,7 @@ public enum Award {
     FOURTH(3, 5000),
     BANG(0, 0),
     UNIDENTIFIED(-1, 0);
+
     private final int matchNumbers;
     private final int amount;
 
