@@ -8,16 +8,22 @@ public class Money {
 
 	private final int money;
 
-	public Money(int money) {
+	private Money(int money) {
 		if (money < AMOUNT_UNIT) {
 			throw new MoneySizeException();
 		}
 		this.money = money;
 	}
 
-	public Money(String money) {
-		this(Integer.parseInt(money));
+	public static Money of(int money) {
+		return new Money(money);
 	}
+
+	public static Money of(String money) {
+		return new Money(Integer.parseInt(money.trim()));
+	}
+
+
 
 	public int getLottoCount() {
 		return money / AMOUNT_UNIT;

@@ -19,10 +19,10 @@ class MoneyTest {
 		String moneyText = "1000";
 
 		//when
-		Money money = new Money(moneyText);
+		Money money = Money.of(moneyText);
 
 		//then
-		assertThat(money).isEqualTo(new Money(moneyText));
+		assertThat(money).isEqualTo(Money.of(moneyText));
 
 	}
 
@@ -35,7 +35,7 @@ class MoneyTest {
 		//given
 
 		//when
-		ThrowableAssert.ThrowingCallable callable = () -> new Money(amount);
+		ThrowableAssert.ThrowingCallable callable = () -> Money.of(amount);
 
 		//then
 		assertThatThrownBy(callable).isInstanceOf(MoneySizeException.class)
@@ -52,7 +52,7 @@ class MoneyTest {
 	})
 	void lotto_count_by_money(int amount, int count) throws Exception {
 		//given
-		Money money = new Money(amount);
+		Money money = Money.of(amount);
 
 		//when
 		int lottoCount = money.getLottoCount();

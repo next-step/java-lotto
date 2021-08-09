@@ -12,14 +12,14 @@ public class Lottos {
 	public Lottos() {}
 
 	public Lottos(int money) {
-		buy(new Money(money));
+		buy(Money.of(money));
 	}
 
 	public Lottos(int money, String[] manualNumbers) {
 		for (String lottoNumber : manualNumbers) {
 			lottos.add(Lotto.of(lottoNumber));
 		}
-		Money automaticAmount = new Money(money).excludeLottoCount(manualNumbers.length);
+		Money automaticAmount = Money.of(money).excludeLottoCount(manualNumbers.length);
 		buy(automaticAmount);
 	}
 
@@ -38,7 +38,7 @@ public class Lottos {
 	}
 
 	public void buy(int money) {
-		buy(new Money(money));
+		buy(Money.of(money));
 	}
 
 	public void buy(Money money) {
