@@ -22,8 +22,10 @@ public class ResultView {
             "------------------------------------");
 
     for (Rank rank : matchResult.getCategoriesRank().keySet()) {
-      System.out.println(rank.getCountOfMatch() + "개 일치 ("
-          + Rank.matchRank(rank.getCountOfMatch()).getWinningMoney()
+
+      System.out.println(rank.getCountOfMatch() + "개 일치"
+          + createResultMessageByRank(rank)
+          + rank.getWinningMoney()
           + "원) - "
           + matchResult.getCategoriesRank().get(rank).size()
           + "개");
@@ -32,6 +34,15 @@ public class ResultView {
     System.out.println(
         Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + getProfitResultMessage(gradingScore));
     }
+
+  private static String createResultMessageByRank(final Rank rank) {
+    String messageForm = " (";
+
+    if(rank.equals(Rank.SECOND)){
+      messageForm = ", 보너스 볼 일치 (";
+    }
+    return messageForm;
+  }
 
   private static String getProfitResultMessage(double gradingScore) {
     if(gradingScore > 1){

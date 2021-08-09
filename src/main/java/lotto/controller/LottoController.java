@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotteries;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
+import lotto.domain.WinLottoInfo;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
@@ -28,9 +29,11 @@ public class LottoController {
 
     LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney);
 
-    LottoResult lottoResult = lotteryDraw.matchLottoInfo(
-        lotteryDraw.inputWinningNumbers(
-            InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
+    WinLottoInfo winLottoInfo = lotteryDraw.createWinLottoInfo(
+        InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
+        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER));
+
+    LottoResult lottoResult = lotteryDraw.matchLottoInfo(winLottoInfo);
 
     ResultView.drawResult(lottoResult, lotteryDraw.gradingScore(lottoResult));
   }

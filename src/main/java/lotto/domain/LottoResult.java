@@ -14,6 +14,7 @@ public class LottoResult {
     categoriesRank.put(Rank.FIFTH, new ArrayList<>());
     categoriesRank.put(Rank.FOURTH, new ArrayList<>());
     categoriesRank.put(Rank.THIRD, new ArrayList<>());
+    categoriesRank.put(Rank.SECOND, new ArrayList<>());
     categoriesRank.put(Rank.FIRST, new ArrayList<>());
     categoriesRank.put(Rank.MISS, new ArrayList<>());
   }

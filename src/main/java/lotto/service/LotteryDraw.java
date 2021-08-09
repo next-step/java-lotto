@@ -10,6 +10,7 @@ import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
+import lotto.domain.WinLottoInfo;
 
 public class LotteryDraw {
 
@@ -38,8 +39,8 @@ public class LotteryDraw {
         .collect(Collectors.toList());
   }
 
-  public LottoResult matchLottoInfo(Lotto winLotto) {
-    return lotteries.getInputMatchTotalInfo(winLotto);
+  public LottoResult matchLottoInfo(final WinLottoInfo winLottoInfo) {
+    return lotteries.getInputMatchTotalInfo(winLottoInfo);
   }
 
   public double gradingScore(LottoResult lottoResult) {
@@ -51,6 +52,10 @@ public class LotteryDraw {
 
   private int getCalculation(final int matchCount, final int winningMoney) {
     return chooseOperation(MULTIPLE).calculation(matchCount, winningMoney);
+  }
+
+  public WinLottoInfo createWinLottoInfo(String winningLottery, int bonusNumber) {
+    return new WinLottoInfo(inputWinningNumbers(winningLottery), bonusNumber);
   }
 
 }

@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class LotteTest {
+class LottoTest {
 
   @DisplayName("6개의 번호로 로또 생성 테스트.")
   @Test

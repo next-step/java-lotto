@@ -45,28 +45,33 @@ class LotteriesTest {
 
   @DisplayName("Rank 각 등급에 맞는 match값을 리턴하는지 테스트.")
   @Test
-  void Rank생성자별비교()
+  void 로또등급생성자별비교()
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
     Lotteries lotteries = new Lotteries();
     Method getMatchLotteries = lotteries.getClass()
-        .getDeclaredMethod("getMatchCountForRank", Lotto.class, Lotto.class);
+        .getDeclaredMethod("getMatchCountForRank", WinLottoInfo.class, Lotto.class);
     getMatchLotteries.setAccessible(true);
 
-    assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
+    WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 31)), 7);
+
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
         new Lotto(createTestWinLotto(21, 22, 23, 11, 12, 13)))).isEqualTo(Rank.MISS);
 
-    assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
         new Lotto(createTestWinLotto(1, 2, 3, 11, 12, 13)))).isEqualTo(Rank.FIFTH);
 
-    assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
         new Lotto(createTestWinLotto(1, 2, 3, 4, 12, 13)))).isEqualTo(Rank.FOURTH);
 
-    assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
         new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 13)))).isEqualTo(Rank.THIRD);
 
-    assertThat(getMatchLotteries.invoke(lotteries, createTestLottoOneToSix(),
-        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
+
+    assertThat(getMatchLotteries.invoke(lotteries, winLottoInfo,
+        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 31)))).isEqualTo(Rank.FIRST);
   }
 
   @DisplayName("로또값을 비교해서 Rank 각 등급에 맞는 match값을 기준으로 자료구조에 적재되는지 테스트.")
@@ -74,11 +79,11 @@ class LotteriesTest {
   void 자료구조적재테스트() {
 
     Lotteries lotteries = new Lotteries();
-
     lotteries.getLottos().add(createTestLottoOneToSix());
 
-    LottoResult lottoResult = lotteries.getInputMatchTotalInfo(
-        new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)));
+    WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)), 7);
+
+    LottoResult lottoResult = lotteries.getInputMatchTotalInfo(winLottoInfo);
 
     assertThat(lottoResult.getCategoriesRank().get(Rank.FIRST).size()).isEqualTo(1);
   }

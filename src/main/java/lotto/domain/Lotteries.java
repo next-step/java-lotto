@@ -33,36 +33,42 @@ public class Lotteries {
         .collect(Collectors.toList()));
   }
 
-  public LottoResult getInputMatchTotalInfo(Lotto winLotto) {
-
+  public LottoResult getInputMatchTotalInfo(final WinLottoInfo winLottoInfo) {
     lottoResult = new LottoResult();
 
     for (Lotto lotto : lottos) {
-      getLottosByRank(winLotto, lotto).add(lotto);
+      getLottosByRank(winLottoInfo, lotto).add(lotto);
     }
 
     lottoResult.getCategoriesRank().remove(Rank.MISS);
     return lottoResult;
   }
 
-  private List<Lotto> getLottosByRank(final Lotto winLotto,
+  private List<Lotto> getLottosByRank(final WinLottoInfo winLottoInfo,
       final Lotto lotto) {
-    return lottoResult.getMatchLottos(getMatchCountForRank(winLotto, lotto));
+    return lottoResult.getMatchLottos(getMatchCountForRank(winLottoInfo, lotto));
   }
 
-  private Rank getMatchCountForRank(Lotto lotty, Lotto winLotto) {
-    int count = INT_ZERO;
-    for (LottoNumber lottoNumber : lotty.getLotto()) {
-      count = checkContainValues(winLotto, count, lottoNumber);
+  private Rank getMatchCountForRank(WinLottoInfo winLottoInfo, Lotto lotto) {
+    return Rank.matchRank(getCountByRank(winLottoInfo, lotto, INT_ZERO),
+        isMatchBonus(winLottoInfo, lotto));
+  }
+
+  private int getCountByRank(final WinLottoInfo winLottoInfo, final Lotto lotto, int count) {
+    for (LottoNumber lottoNumber : winLottoInfo.getLottoNumbers()) {
+      count = checkContainValues(lotto, count, lottoNumber);
     }
-    return Rank.matchRank(count);
+    return count;
   }
 
-  private int checkContainValues(final Lotto winLotto, int count, final LottoNumber lottoNumber) {
-    if (winLotto.getLotto().contains(lottoNumber)) {
+  private int checkContainValues(final Lotto lotto, int count, final LottoNumber lottoNumber) {
+    if (lotto.getLotto().contains(lottoNumber)) {
       count++;
     }
     return count;
   }
 
+  private boolean isMatchBonus(final WinLottoInfo winLottoInfo, final Lotto lotto) {
+    return lotto.getLotto().contains(winLottoInfo.getBonusLottoNumber());
+  }
 }
