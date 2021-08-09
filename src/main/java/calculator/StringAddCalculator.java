@@ -7,15 +7,26 @@ import java.util.stream.Stream;
 
 public class StringAddCalculator {
 
-    private static String delimiters = ",|:";
-    private static String negative = "-";
+    private static final String delimiters = ",|:";
+    private static final String negative = "-";
+    private static final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
     public int splitAndSum(String data) {
-        if (isBlank(data)) return 0;
+        if (isBlank(data)) {
+            return 0;
+        }
 
-        validate(data);
-        String filteredData = findNumber(data);
-        String[] tokens = filteredData.split(delimiters);
+        validateNegative(data);
+
+        Matcher matcher = findMatcher(data);
+        String combinedDelimiters = delimiters;
+
+        if (matcher.find()) {
+            data = findNumber(matcher);
+            combinedDelimiters = findDelimiters(matcher);
+        }
+
+        String[] tokens = data.split(combinedDelimiters);
 
         return sum(tokens);
     }
@@ -33,23 +44,22 @@ public class StringAddCalculator {
         return false;
     }
 
-    private void validate(String data) {
+    private void validateNegative(String data) {
         if (data.contains(negative)) {
             throw new RuntimeException("음수 데이터가 있습니다.");
         }
     }
 
-    private String findNumber(String data) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(data);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            combineDelimiter(customDelimiter);
-            data = m.group(2);
-        }
-        return data;
+    private Matcher findMatcher(String data) {
+        return customPattern.matcher(data);
     }
 
-    private void combineDelimiter(String customDelimiter) {
-        delimiters = String.join("|", delimiters, customDelimiter);
+    private String findNumber(Matcher matcher) {
+        return matcher.group(2);
     }
+
+    private String findDelimiters(Matcher matcher) {
+        return String.join("|", delimiters, matcher.group(1));
+    }
+
 }
