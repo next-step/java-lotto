@@ -12,6 +12,8 @@ public class Game {
     }
 
     public void createRewards(Lotto previousLotto, Ball bonusBall) {
+        validBonusBall(previousLotto, bonusBall);
+
         Reward.rewards = lottos.stream()
                 .map(lotto -> {
                     int sameNumberCount = lotto.getSameNumberCount(previousLotto);
@@ -19,6 +21,12 @@ public class Game {
                     return Reward.valueOf(sameNumberCount, containBonusBall);
                 })
                 .collect(Collectors.toList());
+    }
+
+    private void validBonusBall(Lotto previousLotto, Ball bonusBall) {
+        if (previousLotto.containBonusBall(bonusBall)) {
+            throw new IllegalArgumentException("보너스 공은 지난 주 당첨 번호와 중복될 수 없습니다.");
+        }
     }
 
     public int countReward(Reward reward) {

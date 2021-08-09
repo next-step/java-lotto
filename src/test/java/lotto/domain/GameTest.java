@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GameTest {
 
     Game game;
-    Ball bonusBall = new Ball(44);
+    Ball bonusBall = new Ball(40);
     LinkedHashSet<Ball> previousBallSet = Sets.newLinkedHashSet(
             new Ball(10),
             new Ball(11),
@@ -99,4 +100,16 @@ public class GameTest {
         assertThat(game.getLottos()).hasSize(14);
         assertThat(game.getYield()).isEqualTo("0.35");
     }
+
+
+    @Test
+    @DisplayName("지난 주 당첨 번호에 보너스 공이 포함되어 있으면 에러가 발생한다.")
+    void validBonusBall() {
+        bonusBall = new Ball(14);
+
+        assertThatThrownBy(this::setUp
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
