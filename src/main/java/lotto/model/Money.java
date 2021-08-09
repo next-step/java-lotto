@@ -9,6 +9,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public int divide(Money divisor) {
+        return amount / divisor.amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
