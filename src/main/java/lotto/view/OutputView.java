@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class OutputView {
-    private static final String MSG_PURCHASE = "개를 구매했습니다.";
+    private static final String MSG_PURCHASE = "수동으로 %d장, 자동으로 %d 장을 구매했습니다.\n";
     private static final String MSG_WIN_STATS = "당첨 통계\n" + "---------";
     private static final String MSG_WIN_COUNT = "%d개 일치 (%d원)- %d개\n";
     private static final String MSG_WIN_COUNT_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
@@ -16,8 +16,8 @@ public class OutputView {
     private static final String MSG_YIELD_LOSE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String MSG_YIELD_WIN = "(오늘 로또 사러 갑니다)";
 
-    public void printPurchase(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + MSG_PURCHASE);
+    public void printPurchase(LottoTickets lottoTickets, int manualCount) {
+        System.out.printf(MSG_PURCHASE, manualCount, lottoTickets.getLottoTickets().size() - manualCount);
 
         lottoTickets.getLottoTickets()
                 .forEach(i -> System.out.println(i.getLottoNumbers().toString()));

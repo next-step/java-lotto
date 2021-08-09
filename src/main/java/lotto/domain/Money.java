@@ -11,15 +11,11 @@ public class Money {
         this.value = value;
     }
 
-    public Money(Money money, int spendMoney) {
-        this.value = money.getValue() - spendMoney;
-    }
-
     int getValue() {
         return value;
     }
 
-    int countLotto() {
+    public int countLotto() {
         return value / MIN_PRICE;
     }
 
