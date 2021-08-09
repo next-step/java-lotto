@@ -13,11 +13,11 @@ public class Lotto implements Comparator<LottoNumber> {
   private final List<LottoNumber> lotto = new ArrayList<>();
 
   public Lotto(List<Integer> numberPull) {
-    validationLotto(numberPull);
+    validation(numberPull);
     creatLotteNumber(numberPull);
   }
 
-  private void validationLotto(final List<Integer> numberPull) {
+  private void validation(final List<Integer> numberPull) {
     checkInputCount(numberPull);
     checkDuplicateNumbers(numberPull);
   }
