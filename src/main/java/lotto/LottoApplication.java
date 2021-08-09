@@ -1,22 +1,30 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        int money = inputView.askPurchaseAmount();
 
-        LottoMachine lottoMachine = new LottoMachine(money);
+        LottoMachine lottoMachine = new LottoMachine();
+
+        Money money = new Money(inputView.askPurchaseAmount());
+
+        Lotties lotties = lottoMachine.createRandomLotties(money);
 
         ResultView resultView = new ResultView();
-        resultView.printLotties(lottoMachine);
+        resultView.printLotties(lotties);
 
-        String winningNumber = inputView.getWinningNumber();
-        lottoMachine.confirmLotto(winningNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(inputView.getWinningNumber());
 
-        resultView.printSameNumbers();
+        lotties.matchLottiesRank(winningNumbers);
+
+        WinningStatistics winningStatistics = new WinningStatistics();
+        winningStatistics.setRankCount(lotties.getLottiesRank());
+
+
+        resultView.printSameNumbers(winningStatistics);
     }
 }
