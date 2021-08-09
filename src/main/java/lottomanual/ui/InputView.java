@@ -11,6 +11,10 @@ public class InputView {
 	private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 	private static final Scanner scanner = new Scanner(System.in);
 
+	private InputView() {
+		throw new IllegalStateException();
+	}
+
 	public static int inputMoney() {
 		System.out.println(HOW_MUCH);
 		return inputIntValue();

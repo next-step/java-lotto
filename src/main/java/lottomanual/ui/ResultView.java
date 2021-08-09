@@ -16,6 +16,10 @@ public class ResultView {
 	private static final String MATCH_FOR_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개%n";
 	private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n";
 
+	private ResultView() {
+		throw new IllegalStateException();
+	}
+
 	public static void printLottos(Lottos lottos, int manualCount) {
 		System.out.printf(TICKET_RESULT, manualCount, lottos.size() - manualCount);
 		for (Lotto lotto : lottos.toList()) {
