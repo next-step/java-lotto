@@ -5,7 +5,7 @@ import step2.model.LottoException;
 public class InputView {
     private static final int LOTTO_PRICE = 1000;
 
-    public int setAmount(String amount) {
+    public int getAmount(String amount) {
         //빈값 검사
         LottoException.isBlank(amount);
 
@@ -19,5 +19,10 @@ public class InputView {
         int lottoCnt = purchaseAmount/LOTTO_PRICE;
 
         return lottoCnt;
+    }
+
+    public void getWinningNo(String winningNo) {
+        //빈값 검사
+        LottoException.isBlank(winningNo);
     }
 }

@@ -11,7 +11,7 @@ public class AutoLottoStrategy implements LottoStrategy{
     private static final int NUMBER_CNT = 6;
 
     @Override
-    public List<Integer> getLotto() {
+    public List<Integer> getNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = MIN; i <= MAX; i++) {
             numbers.add(i);

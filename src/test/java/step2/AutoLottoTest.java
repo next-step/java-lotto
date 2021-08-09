@@ -19,10 +19,10 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.setAmount(""));
+                () ->  user.getAmount(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.setAmount(null));
+                () ->  user.getAmount(null));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.setAmount("test"));
+                () ->  user.getAmount("test"));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.setAmount("999"));
+                () ->  user.getAmount("999"));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class AutoLottoTest {
         InputView user = new InputView();
 
         //when
-        int lottoCnt = user.setAmount("1000");
+        int lottoCnt = user.getAmount("1000");
 
         //then
         assertThat(lottoCnt).isEqualTo(1);
@@ -63,10 +63,35 @@ public class AutoLottoTest {
         Lotto lotto = new Lotto();
 
         //when
-        List<Integer> numbers = lotto.getLotto(new AutoLottoStrategy());
+        List<Integer> numbers = lotto.getNumbers(new AutoLottoStrategy());
 
         //then
         assertThat(numbers.size()).isEqualTo(6);
+    }
+
+    @Test
+    public void 구매갯수만큼_로또발급() {
+        //given
+        Lotto lotto = new Lotto();
+
+        //when
+        List<List<Integer>> lottoList = lotto.getLotto(3);
+
+        //then
+        assertThat(lottoList.size()).isEqualTo(3);
+    }
+    
+    @Test
+    public void 당첨번호_null_빈문자() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo(""));
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo(null));
     }
 
 }
