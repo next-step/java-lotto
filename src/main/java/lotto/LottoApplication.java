@@ -22,7 +22,8 @@ public class LottoApplication {
         ResultView.showBuyLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = inputView.getWinningNumber();
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
+        int bonusNumber = inputView.getBonusNumber();
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers, bonusNumber);
 
         ResultView.showLottoResult(lottoStatistic, purchaseAmount);
     }

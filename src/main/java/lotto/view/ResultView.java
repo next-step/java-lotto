@@ -13,6 +13,7 @@ public class ResultView {
     private static final String RESULT_MESSAGE_LINE = "--------";
     private static final String RESULT_MESSAGE_POST_BUY = "개를 구매했습니다.";
     private static final String RESULT_DETAIL_TEMPLATE = "%d 개일치 (%d원) - %d개";
+    private static final String RESULT_BONUS_DETAIL_TEMPLATE = "%d 개일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String RESULT_PROFIT_TEMPLATE = "총 수익률은 %s입니다.";
 
     private ResultView() {
@@ -40,15 +41,16 @@ public class ResultView {
     }
 
     private static void showLottoStatistic(LottoStatistic lottoStatistic) {
-        showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.THIRD_PACE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND_PLACE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.THIRD_PACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND_PLACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND_BONUS_PLACE, RESULT_BONUS_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE, RESULT_DETAIL_TEMPLATE);
     }
 
-    private static void showLottoMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank) {
+    private static void showLottoMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank, String template) {
         System.out.printf(
-                RESULT_DETAIL_TEMPLATE,
+                template,
                 lottoRank.getMatchCount(),
                 lottoRank.getAmount(),
                 lottoStatistic.getRankCount(lottoRank)

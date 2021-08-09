@@ -49,7 +49,7 @@ public final class LottoTickets {
             winningNumbersWithBonusNumber.add(bonusNumber);
             int matchBonusCount = lottoTicket.matchLottoTicket(winningNumbersWithBonusNumber);
             if (matchBonusCount == 6) {
-                return LottoRank.of(matchBonusCount, true);
+                return LottoRank.SECOND_BONUS_PLACE;
             }
         }
         return LottoRank.of(matchLottoNumberCount, false);
