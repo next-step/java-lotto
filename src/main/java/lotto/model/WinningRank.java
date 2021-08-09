@@ -51,7 +51,7 @@ public enum WinningRank {
                 .orElse(MISS);
     }
 
-    private static List<WinningRank> findBy(int matchedWinningNumberCount) {
+    static List<WinningRank> findBy(int matchedWinningNumberCount) {
         return Arrays.stream(WinningRank.values())
                 .filter(winningRank -> winningRank.matchedWinningNumberCount == matchedWinningNumberCount)
                 .collect(toList());
