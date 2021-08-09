@@ -95,7 +95,7 @@ public class AutoLottoTest {
     }
 
     @Test
-    public void 당첨번호_6개숫자가아() {
+    public void 당첨번호_6개미만() {
         //given
         InputView user = new InputView();
 
@@ -104,6 +104,24 @@ public class AutoLottoTest {
                 () ->  user.getWinningNo("1,2,3,4,5"));
     }
 
+    @Test
+    public void 당첨번호_문자열() {
+        //given
+        InputView user = new InputView();
 
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo("test;td,1,2,dl,kk"));
+    }
+
+    @Test
+    public void 당첨번호_중복() {
+        //given
+        InputView user = new InputView();
+
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () ->  user.getWinningNo("1,2,3,5,5,6"));
+    }
 
 }
