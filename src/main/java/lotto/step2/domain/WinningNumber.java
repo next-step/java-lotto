@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class WinningNumber {

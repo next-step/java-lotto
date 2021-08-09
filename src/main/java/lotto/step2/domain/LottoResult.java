@@ -1,23 +1,21 @@
 package lotto.step2.domain;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoResult {
 
-    private WinningNumber winningNumber;
-    private Lotto lotto;
-    public void checkLottoTicket(WinningNumber winningNumber, Lotto lotto){
+    private final Map<WinningRank, Integer> lottoResult = new HashMap<>();
 
-    }
-    public void checkLottoNumber(ArrayList<Integer> lottoTicket) {
-        for (int number : lottoTicket){
 
-        }
-
-    }
-    public void contains(int number){
-        if (winningNumber.getWinningNumbers().contains(number)){
+    public static void checkLottoTicket(WinningNumber winningNumber, Lotto lotto) {
+        for (LottoTicket lottoTicket : lotto.getLotto()) {
+            int matchCount = lottoTicket.matchWinningNumber(winningNumber);
 
         }
     }
+    public static void checkWinningRank(int matchCount) {
+
+    }
+
 }
