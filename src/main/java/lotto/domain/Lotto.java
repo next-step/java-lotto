@@ -52,6 +52,10 @@ public class Lotto implements Comparator<LottoNumber> {
     lotto.sort(this);
   }
 
+  public boolean match(final LottoNumber lottoNumber) {
+    return lotto.contains(lottoNumber);
+  }
+
   @Override
   public int compare(LottoNumber num1, LottoNumber num2) {
     return Integer.compare(num1.getNumber(), num2.getNumber());
@@ -72,9 +76,5 @@ public class Lotto implements Comparator<LottoNumber> {
   @Override
   public int hashCode() {
     return Objects.hash(getLotto());
-  }
-
-  public boolean match(final LottoNumber lottoNumber) {
-    return lotto.contains(lottoNumber);
   }
 }

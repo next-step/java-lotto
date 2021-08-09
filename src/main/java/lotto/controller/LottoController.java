@@ -27,13 +27,13 @@ public class LottoController {
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney);
+    LotteryDraw lotteryDraw = new LotteryDraw(lottoMoney);
 
     WinLottoInfo winLottoInfo = lotteryDraw.createWinLottoInfo(
         InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
         InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER));
 
-    LottoResult lottoResult = lotteryDraw.matchLottoInfo(winLottoInfo);
+    LottoResult lottoResult = winLottoInfo.matchLottoInfo(lotteries);
 
     ResultView.drawResult(lottoResult, lotteryDraw.gradingScore(lottoResult));
   }

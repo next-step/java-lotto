@@ -16,13 +16,10 @@ public class LotteryDraw {
 
   private static final String SPLIT_MARK = ",";
 
-  private final Lotteries lotteries;
-
   private final LottoMoney lottoMoney;
 
-  public LotteryDraw(final Lotteries lotteries, final LottoMoney lottoMoney) {
+  public LotteryDraw(final LottoMoney lottoMoney) {
     this.lottoMoney = lottoMoney;
-    this.lotteries = lotteries;
   }
 
   public Lotto inputWinningNumbers(String winningLottery) {
@@ -37,10 +34,6 @@ public class LotteryDraw {
     return Arrays.stream(winningLottery.trim().split(SPLIT_MARK))
         .map(Integer::parseInt)
         .collect(Collectors.toList());
-  }
-
-  public LottoResult matchLottoInfo(final WinLottoInfo winLottoInfo) {
-    return lotteries.getInputMatchTotalInfo(winLottoInfo);
   }
 
   public double gradingScore(LottoResult lottoResult) {
