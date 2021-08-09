@@ -33,16 +33,16 @@ public final class LottoTicket {
     public int matchingTicket(final List<Integer> winningNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount = getMatchCount(winningNumbers, lottoNumber, matchCount);
+            matchCount += getMatchCount(winningNumbers, lottoNumber);
         }
         return matchCount;
     }
 
-    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber, final int matchCount) {
+    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber) {
         if (winningNumbers.contains(lottoNumber.getNumber())) {
-            return matchCount + 1;
+            return 1;
         }
-        return matchCount;
+        return 0;
     }
 
     @Override
