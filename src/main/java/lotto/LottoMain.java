@@ -3,7 +3,6 @@ package lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.strategy.ListMixStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
