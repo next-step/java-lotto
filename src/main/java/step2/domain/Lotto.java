@@ -8,6 +8,7 @@ public class Lotto {
     static final int MAX_OF_LOTTO_NUMBER = 45;
     static final int NUM_OF_LOTTO_NUMBER = 6;
     static ArrayList<Integer> lottoNumberList = new ArrayList<>();
+    static LottoNumber lottoNumber
 
 
     public Lotto() {
@@ -30,7 +31,8 @@ public class Lotto {
 
     public ArrayList<Integer> makeLottoNumberList() {
         for (int i = MIN_OF_LOTTO_NUMBER; i <= MAX_OF_LOTTO_NUMBER; i++) {
-            lottoNumberList.add(i);
+            lottoNumber = new LottoNumber(i);
+            lottoNumberList.add(lottoNumber.getNumber());
         }
         return lottoNumberList;
     }
