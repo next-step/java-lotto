@@ -9,13 +9,9 @@ public class AllPossibleLottoNumbers {
 
     private final static AllPossibleLottoNumbers instance = new AllPossibleLottoNumbers();
 
-    private final List<LottoNumber> possibleLottoNumbers;
+    private final static List<LottoNumber> possibleLottoNumbers = generateAllPossibleNumbers() ;
 
-    private AllPossibleLottoNumbers() {
-        this.possibleLottoNumbers = generateAllPossibleNumbers();
-    }
-
-    private List<LottoNumber> generateAllPossibleNumbers() {
+    private static List<LottoNumber> generateAllPossibleNumbers() {
         List<LottoNumber> numbers = new ArrayList<>();
 
         IntStream
