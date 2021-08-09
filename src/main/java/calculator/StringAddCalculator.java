@@ -7,9 +7,11 @@ import java.util.stream.Stream;
 
 public class StringAddCalculator {
 
-    private static final String delimiters = ",|:";
-    private static final String negative = "-";
-    private static final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
+    private static final String DELIMITERS = ",|:";
+    private static final String NEGATIVE = "-";
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int NUMBER_PART = 2;
+    private static final int DELIMITER_PART = 1;
 
     public int splitAndSum(String data) {
         if (isBlank(data)) {
@@ -19,7 +21,7 @@ public class StringAddCalculator {
         validateNegative(data);
 
         Matcher matcher = findMatcher(data);
-        String combinedDelimiters = delimiters;
+        String combinedDelimiters = DELIMITERS;
 
         if (matcher.find()) {
             data = findNumber(matcher);
@@ -45,21 +47,21 @@ public class StringAddCalculator {
     }
 
     private void validateNegative(String data) {
-        if (data.contains(negative)) {
+        if (data.contains(NEGATIVE)) {
             throw new RuntimeException("음수 데이터가 있습니다.");
         }
     }
 
     private Matcher findMatcher(String data) {
-        return customPattern.matcher(data);
+        return CUSTOM_PATTERN.matcher(data);
     }
 
     private String findNumber(Matcher matcher) {
-        return matcher.group(2);
+        return matcher.group(NUMBER_PART);
     }
 
     private String findDelimiters(Matcher matcher) {
-        return String.join("|", delimiters, matcher.group(1));
+        return String.join("|", DELIMITERS, matcher.group(DELIMITER_PART));
     }
 
 }
