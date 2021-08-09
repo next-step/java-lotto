@@ -26,7 +26,7 @@ public final class LottoTickets {
     public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers) {
         List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchingCount = lottoTicket.matchingTicket(winningNumbers);
+            int matchingCount = lottoTicket.matchLottoTicket(winningNumbers);
             LottoRank lottoRank = LottoRank.of(matchingCount);
             lottoStatistic.add(lottoRank);
         }

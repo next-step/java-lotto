@@ -30,7 +30,7 @@ public final class LottoTicket {
         }
     }
 
-    public int matchingTicket(final List<Integer> winningNumbers) {
+    public int matchLottoTicket(final List<Integer> winningNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
             matchCount += getMatchCount(winningNumbers, lottoNumber);
