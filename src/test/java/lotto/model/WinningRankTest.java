@@ -28,19 +28,19 @@ public class WinningRankTest {
         LottoNumber notMatchedBonusNumber = LottoNumber.valueOf(10);
 
         // when, then
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(firstWinningNumbers, notMatchedBonusNumber)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(firstWinningNumbers, notMatchedBonusNumber)),
                 WinningRank.FIRST_PLACE);
 
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(thirdWinningNumbers, matchedBonusNumber)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(thirdWinningNumbers, matchedBonusNumber)),
                 WinningRank.SECOND_PLACE);
 
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(thirdWinningNumbers, notMatchedBonusNumber)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(thirdWinningNumbers, notMatchedBonusNumber)),
                 WinningRank.THIRD_PLACE);
 
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(fourthWinningNumbers, notMatchedBonusNumber)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(fourthWinningNumbers, notMatchedBonusNumber)),
                 WinningRank.FOURTH_PLACE);
 
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(fifthWinningNumbers, notMatchedBonusNumber)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(fifthWinningNumbers, notMatchedBonusNumber)),
                 WinningRank.FIFTH_PLACE);
     }
 
@@ -56,7 +56,7 @@ public class WinningRankTest {
         LottoNumber bonusBall = LottoNumber.valueOf(45);
 
         // when, then
-        assertSame(WinningRank.findWinningRank(lotto, new LotteryNumbers(winningNumbers, bonusBall)),
+        assertSame(WinningRank.findWinningRank(lotto, new DrawNumbers(winningNumbers, bonusBall)),
                 WinningRank.MISS);
     }
 }

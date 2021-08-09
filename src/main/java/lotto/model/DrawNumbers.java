@@ -1,10 +1,10 @@
 package lotto.model;
 
-public class LotteryNumbers {
+public class DrawNumbers {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LotteryNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public DrawNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
         validateUnique(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;

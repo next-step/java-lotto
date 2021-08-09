@@ -25,16 +25,16 @@ public enum WinningRank {
         this.winningMoneyAmount = winningMoneyAmount;
     }
 
-    public static List<WinningRank> findWinningRanks(Lottos lottos, LotteryNumbers lotteryNumbers) {
+    public static List<WinningRank> findWinningRanks(Lottos lottos, DrawNumbers drawNumbers) {
         List<WinningRank> winningRanks = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            winningRanks.add(findWinningRank(lotto, lotteryNumbers));
+            winningRanks.add(findWinningRank(lotto, drawNumbers));
         }
         return winningRanks;
     }
 
-    static WinningRank findWinningRank(Lotto lotto, LotteryNumbers lotteryNumbers) {
-        Lotto winningNumbers = lotteryNumbers.getWinningNumbers();
+    static WinningRank findWinningRank(Lotto lotto, DrawNumbers drawNumbers) {
+        Lotto winningNumbers = drawNumbers.getWinningNumbers();
         int matchedWinningNumberCount = lotto.findMatchedNumberCount(winningNumbers);
         List<WinningRank> winningRanks = findBy(matchedWinningNumberCount);
 
@@ -42,7 +42,7 @@ public enum WinningRank {
             return winningRanks.get(FIRST_POSITION);
         }
 
-        LottoNumber bonusNumber = lotteryNumbers.getBonusNumber();
+        LottoNumber bonusNumber = drawNumbers.getBonusNumber();
         boolean containsBonusNumber = lotto.contains(bonusNumber);
 
         return winningRanks.stream()

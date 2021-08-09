@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("추첨 번호 테스트")
-public class LotteryNumbersTest {
+public class DrawNumbersTest {
 
     @DisplayName("당첨 번호와 보너스 번호가 중복되면 Exception이 발생한다.")
     @Test
@@ -19,7 +19,7 @@ public class LotteryNumbersTest {
 
         // when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LotteryNumbers(winningNumbers, bonusNumber))
+                .isThrownBy(() -> new DrawNumbers(winningNumbers, bonusNumber))
                 .withMessage("당첨 번호와 보너스 번호가 중복 되었습니다.");
     }
 }
