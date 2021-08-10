@@ -6,7 +6,6 @@ import static lotto.service.Operation.chooseOperation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;

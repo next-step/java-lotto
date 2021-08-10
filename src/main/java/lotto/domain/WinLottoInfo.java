@@ -8,9 +8,9 @@ public class WinLottoInfo {
 
   private static final int INT_ZERO = 0;
 
-  private Lotto winLotto;
+  private final Lotto winLotto;
 
-  private LottoNumber bonusNumber;
+  private final LottoNumber bonusNumber;
 
   private LottoResult lottoResult;
 
@@ -38,26 +38,7 @@ public class WinLottoInfo {
     return winLotto.getLotto();
   }
 
-  public LottoResult matchLottoInfo(Lotteries lotteries) {
-    return getInputMatchTotalInfo(lotteries);
-  }
-
-  public LottoResult getInputMatchTotalInfo(final Lotteries lotteries) {
-    lottoResult = new LottoResult();
-
-    for (Lotto lotto : lotteries.getLottos()) {
-      getLottosByRank(lotto).add(lotto);
-    }
-
-    lottoResult.getCategoriesRank().remove(Rank.MISS);
-    return lottoResult;
-  }
-
-  private List<Lotto> getLottosByRank(final Lotto lotto) {
-    return lottoResult.getMatchLottos(getMatchCountForRank(lotto));
-  }
-
-  private Rank getMatchCountForRank(Lotto lotto) {
+  public Rank getMatchCountForRank(Lotto lotto) {
     return Rank.matchRank(getCountByRank(lotto, INT_ZERO),
         isMatchBonus(lotto));
   }

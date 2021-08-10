@@ -55,7 +55,8 @@ class WinLottoInfoTest {
 
     WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)), 7);
 
-    LottoResult lottoResult = winLottoInfo.getInputMatchTotalInfo(lotteries);
+    LottoResult lottoResult = new LottoResult(winLottoInfo);
+    lottoResult.matchLottoInfo(lotteries);
 
     assertThat(lottoResult.getCategoriesRank().get(Rank.FIRST).size()).isEqualTo(1);
   }
@@ -77,7 +78,6 @@ class WinLottoInfoTest {
             new LottoNumber(21)))
         .isEqualTo(1);
   }
-
 
   @DisplayName("Rank 각 등급에 맞는 match값을 리턴하는지 테스트.")
   @Test
@@ -106,27 +106,6 @@ class WinLottoInfoTest {
 
     assertThat(getMatchCountForRank.invoke(winLottoInfo,
         new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 31)))).isEqualTo(Rank.FIRST);
-  }
-
-
-  @DisplayName("당첨번호와 로또 비교하여 해당 등수에 로또객체를 적재하는 테스트.")
-  @Test
-  void 당첨번호와로또비교후등수별정리() {
-
-    List<Integer> values = new ArrayList<>();
-    range(1, 7).forEach(values::add);
-    Lotto testLotto = new Lotto(values);
-
-    Lotteries lotteries = new Lotteries();
-    List<Lotto> testLottos = lotteries.getLottos();
-    testLottos.add(testLotto);
-
-    LotteryDraw lotteryDraw = new LotteryDraw(new LottoMoney(1000));
-
-    WinLottoInfo winLottoInfo = lotteryDraw.createWinLottoInfo("4,5,6,11,12,13", 21);
-    LottoResult lottoResult = winLottoInfo.matchLottoInfo(lotteries);
-
-    assertThat(lottoResult.getCategoriesRank().get(Rank.FIFTH).size()).isEqualTo(1);
   }
 
   private List<Integer> createTestWinLotto(final int number1, final int number2, final int number3,
