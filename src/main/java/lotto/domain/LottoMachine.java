@@ -9,7 +9,7 @@ public class LottoMachine {
         List<Lotto> lotties = new ArrayList<>();
 
         for(int i = 0; i < money.getLottoCount(); i++) {
-            lotties.add(new Lotto(randomNumGenerator.generateNumber()));
+            lotties.add(new Lotto(new LottoNumber(randomNumGenerator.generateNumber())));
         }
         return new Lotties(lotties);
     }

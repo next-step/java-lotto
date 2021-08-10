@@ -21,10 +21,14 @@ public class RandomNumGenerator implements NumberGenerator {
                 randomNumbers.add(random);
             }
         }
+        sortNumbers();
         return randomNumbers;
     }
 
     private boolean validDuplicate(int i) {
         return randomNumbers.contains(i);
+    }
+    private void sortNumbers() {
+        Collections.sort(randomNumbers);
     }
 }
