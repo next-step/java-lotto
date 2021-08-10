@@ -33,11 +33,16 @@ public class Lottery {
         return winningLotteryStrategy.getLotteryResult(this);
     }
 
-    public int getMatchesCount(final Lottery lottery) {
-        return (int) lottery.lotteryNumbers
+    public int getMatchesScore(final Lottery lottery) {
+        return LotteryResult.getTotalMatchScore(
+                (int) lottery.lotteryNumbers
                 .stream()
                 .filter(this.lotteryNumbers::contains)
-                .count();
+                .count());
+    }
+
+    public int getBonusMatchesScore(final LotteryNumber bonusNumber) {
+        return LotteryResult.getBonusScore(lotteryNumbers.contains(bonusNumber));
     }
 
     public LotteryDto toDto() {

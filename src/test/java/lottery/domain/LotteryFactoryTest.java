@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,14 +19,14 @@ class LotteryFactoryTest {
         // given
         String numbers = "1, 2, 3, 4, 5, 6";
         Lottery winningLottery = new Lottery(getLotteryNumbers(1, 6));
-        int expectedMatchesCount = 6;
+        int expectedMatchesCount = LotteryResult.getTotalMatchScore(6);
 
         // when
         Lottery lottery = new Lottery(numbers);
 
         // then
         assertThat(lottery).isNotNull();
-        assertThat(lottery.getMatchesCount(winningLottery)).isEqualTo(expectedMatchesCount);
+        assertThat(lottery.getMatchesScore(winningLottery)).isEqualTo(expectedMatchesCount);
     }
 
     @ParameterizedTest(name = "getLotteries 테스트 | {arguments}")

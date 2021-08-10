@@ -99,15 +99,30 @@ public class LotteryTest {
     }
 
     @Test
-    @DisplayName("getMatchesCount 테스트")
-    public void getMatchesCount() {
+    @DisplayName("getMatchesScore 테스트")
+    public void getMatchesScore() {
         // given
         Lottery lottery = new Lottery(getLotteryNumbers(1, 6));
         Lottery winningLottery = new Lottery(getLotteryNumbers(2, 7));
-        int expectedMatchesCount = 5;
+        int expectedMatchesCount = LotteryResult.getTotalMatchScore(5);
 
         // when
-        int matchesCount = lottery.getMatchesCount(winningLottery);
+        int matchesCount = lottery.getMatchesScore(winningLottery);
+
+        // then
+        assertThat(matchesCount).isEqualTo(expectedMatchesCount);
+    }
+
+    @Test
+    @DisplayName("getBonusMatchesScore 테스트")
+    public void getBonusMatchesScore() {
+        // given
+        Lottery lottery = new Lottery(getLotteryNumbers(1, 6));
+        LotteryNumber bonusNumber = new LotteryNumber(5);
+        int expectedMatchesCount = LotteryResult.getBonusScore(true);
+
+        // when
+        int matchesCount = lottery.getBonusMatchesScore(bonusNumber);
 
         // then
         assertThat(matchesCount).isEqualTo(expectedMatchesCount);
