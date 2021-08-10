@@ -4,11 +4,12 @@ import java.util.*;
 
 public class RandomLottoNumbers {
     private static List<Integer> LOTTO_NUMBERS = new ArrayList<>();
-    private static final int BOUND = 45;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
     private static final int SIZE = 6;
 
-    public RandomLottoNumbers() {
-        for (int i = 1; i <= BOUND; i++) {
+    static {
+        for (int i = MIN; i <= MAX; i++) {
             LOTTO_NUMBERS.add(i);
         }
     }
