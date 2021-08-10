@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -17,7 +17,7 @@ class WinningsStatisticsTest {
     @DisplayName("객체생성")
     @Test
     void create() {
-        WinningsStatistics winningsStatistics = new WinningsStatistics(Lotto.valueOf("5,10,15,20,25,30"), new LottoNumber(35));
+        WinningsStatistics winningsStatistics = new WinningsStatistics(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(35));
         assertThat(winningsStatistics).isInstanceOf(WinningsStatistics.class);
     }
 
@@ -25,7 +25,7 @@ class WinningsStatisticsTest {
     @Test
     void validate_보너스번호가_당첨번호에_포함() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinningsStatistics(Lotto.valueOf("5,10,15,20,25,30"), new LottoNumber(10));
+            new WinningsStatistics(new Lotto(Arrays.asList(5,10,15,20,25,30)), new LottoNumber(10));
         }).withMessageMatching("당첨번호와 보너스번호가 중복되었습니다.");
     }
 
@@ -34,25 +34,26 @@ class WinningsStatisticsTest {
     void makeStatisticsWinnings_등수정보() {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        Lotto.valueOf("5,10,15,20,25,30"),
-                        Lotto.valueOf("5,10,15,20,25,35"),
-                        Lotto.valueOf("5,10,15,20,25,1"),
-                        Lotto.valueOf("5,10,15,20,1,2"),
-                        Lotto.valueOf("5,10,15,1,2,3"),
-                        Lotto.valueOf("5,10,1,2,3,4"),
-                        Lotto.valueOf("1,2,3,4,6,7")
+                        new Lotto(Arrays.asList(5,10,15,20,25,30)),
+                        new Lotto(Arrays.asList(5,10,15,20,25,35)),
+                        new Lotto(Arrays.asList(5,10,15,20,25,1)),
+                        new Lotto(Arrays.asList(5,10,15,20,1,2)),
+                        new Lotto(Arrays.asList(5,10,15,1,2,3)),
+                        new Lotto(Arrays.asList(5,10,1,2,3,4)),
+                        new Lotto(Arrays.asList(1,2,3,4,5,6))
                 )
         );
-        Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
+        Lotto winningLotto = new Lotto(Arrays.asList(5,10,15,20,25,30));
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
+        List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
         assertAll(
-                () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.FIRST)).isEqualTo(new MatchingCount(1)),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.SECOND)).isEqualTo(new MatchingCount(1)),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.THIRD)).isEqualTo(new MatchingCount(1)),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.FOURTH)).isEqualTo(new MatchingCount(1)),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.MISS)).isEqualTo(new MatchingCount(2))
+                () -> AssertionsForClassTypes.assertThat(winnings.get(0).getHitsCount()).isEqualTo(2),
+                () -> AssertionsForClassTypes.assertThat(winnings.get(1).getHitsCount()).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(winnings.get(2).getHitsCount()).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(winnings.get(3).getHitsCount()).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(winnings.get(4).getHitsCount()).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(winnings.get(5).getHitsCount()).isEqualTo(1)
         );
     }
 
@@ -61,15 +62,15 @@ class WinningsStatisticsTest {
     void calculateEarningsRate_수익률() {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        Lotto.valueOf("5,10,15,20,1,2"),
-                        Lotto.valueOf("5,10,15,1,2,3"),
-                        Lotto.valueOf("5,10,1,2,3,4"),
-                        Lotto.valueOf("1,2,3,4,6,7")
+                        new Lotto(Arrays.asList(5,10,15,20,1,2)),
+                        new Lotto(Arrays.asList(5,10,15,1,2,3)),
+                        new Lotto(Arrays.asList(5,10,1,2,3,4)),
+                        new Lotto(Arrays.asList(1,2,3,4,6,7))
                 )
         );
-        Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
+        Lotto winningLotto =  new Lotto(Arrays.asList(5,10,15,20,25,30));
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
+        List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
         assertThat(winningsStatistics.calculateEarningsRate(winnings, 4)).isEqualTo(13.75);
     }

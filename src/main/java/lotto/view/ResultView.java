@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.List;
-import java.util.Map;
 
 public final class ResultView {
 
@@ -38,17 +37,19 @@ public final class ResultView {
     }
 
     public void printStatistics(final List<Result> results) {
+        results.remove(new Result(Rank.MISS, INIT));
+
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for(Result result : results) {
-            System.out.printf("%d개 일치%s(%d원) - %d개%n", result.getMatchingCount(), printBonusBall(result), result.getWinningMoney(), result.getHitCount());
+        for (Result result : results) {
+            System.out.printf("%d개 일치%s(%d원) - %d개%n", result.getMatchingCount(), printBonusBall(result), result.getWinningMoney(), result.getHitsCount());
         }
     }
 
     private String printBonusBall(final Result result) {
-        if(result.getRank() == Rank.SECOND) {
+        if (result.getRank() == Rank.SECOND) {
             return ", 보너스 볼 일치";
         }
         return "";

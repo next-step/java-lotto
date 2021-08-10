@@ -32,10 +32,10 @@ public enum Rank {
             return matchingRank;
         }
 
-        if(SECOND.matchingCount.equals(matchingCount) && matchBonus) {
+        if (SECOND.matchingCount.equals(matchingCount) && matchBonus) {
             return SECOND;
         }
-        if(THIRD.matchingCount.equals(matchingCount) && !matchBonus) {
+        if (THIRD.matchingCount.equals(matchingCount) && !matchBonus) {
             return THIRD;
         }
 

@@ -25,15 +25,13 @@ public final class WinningsStatistics {
     public List<Result> makeStatisticsWinnings(final Lottos lottos) {
         List<Result> results = new ArrayList<>();
 
-        for(Rank rank : Rank.values()) {
+        for (Rank rank : Rank.values()) {
             results.add(new Result(rank, INIT));
         }
 
-        ////
         for (Lotto lotto : lottos.getLottos()) {
             makeStatisticsWinningsByRank(results, lotto);
         }
-        ////
 
         return results;
     }
@@ -45,8 +43,8 @@ public final class WinningsStatistics {
 
         Rank rank = Rank.returnRank(matchingCount, matchBonus);
 
-        for(Result result : results) {
-            result.addHitCount(rank);
+        for (Result result : results) {
+            result.addHitsCount(rank);
         }
     }
 
@@ -54,7 +52,7 @@ public final class WinningsStatistics {
         int totalPrize = INIT;
 
         for (Result result : results) {
-            totalPrize += result.totalWinningMoney();
+            totalPrize += result.calculateTotalWinningMoney();
         }
 
         return Math.round((float) totalPrize / (totalCount * 10)) / 100.0;

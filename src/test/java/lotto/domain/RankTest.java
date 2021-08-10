@@ -34,7 +34,7 @@ class RankTest {
     @ParameterizedTest
     @CsvSource(value = {"MISS:0", "FIFTH:5000", "FOURTH:50000", "THIRD:1500000", "SECOND:30000000", "FIRST:2000000000"}, delimiter = ':')
     void getWinningMoney_등수에_맞는_금액(String rankName, int totalMoney) {
-        assertThat(Rank.valueOf(rankName).totalWinningMoney(new MatchingCount(1))).isEqualTo(totalMoney);
+        assertThat(Rank.valueOf(rankName).totalWinningMoney(1)).isEqualTo(totalMoney);
     }
 
 }

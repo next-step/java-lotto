@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class AutoPurchaseStrategy implements PurchaseStrategy {
+public final class AutoNumberGenerationImpl implements NumberGenerationStrategy {
 
     private static final int LIMIT_SIZE = 6;
     private static final int MIN_NUMBER = 1;

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
+import lotto.domain.purchaseStrategy.AutoNumberGenerationImpl;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +16,7 @@ public final class LottoController {
             ResultView resultView = new ResultView();
             LottoMachine lottoMachine = new LottoMachine();
 
-            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoPurchaseStrategy());
+            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationImpl());
             int totalCount = lottos.count();
 
             resultView.printLottoCount(totalCount);
