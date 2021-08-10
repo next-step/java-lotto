@@ -14,6 +14,10 @@ public class LottoValidator {
         if (nums.size() != LOTTO_NUM_SIZE) {
             throw new RuntimeException("로또 번호의 갯수는 6개여야 합니다");
         }
+
+        if (nums.stream().distinct().count() != LOTTO_NUM_SIZE) {
+            throw new RuntimeException("로또 번호의 갯수는 중복되지 않고 6개여야 합니다");
+        }
     }
 
     public static void validateBonusNum(int bonusNum) {

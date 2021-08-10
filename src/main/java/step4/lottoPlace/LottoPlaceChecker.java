@@ -28,14 +28,14 @@ public class LottoPlaceChecker {
     public List<LottoPlace> getLottoPlace(Lottos lottos) {
         List<LottoPlace> results = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            int correctNum = getCorrectNum(lotto);
+            int correctNum = countCorrectNum(lotto);
             boolean isBonusNumCorrect = isBonusNumCorrect(lotto);
             results.add(LottoPlace.findPlaceByCorrectNum(correctNum, isBonusNumCorrect));
         }
         return results;
     }
 
-    private int getCorrectNum(Lotto lotto) {
+    private int countCorrectNum(Lotto lotto) {
         return lotto.countCorrectNums(lastWeekLotto);
     }
 

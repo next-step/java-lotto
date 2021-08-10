@@ -2,6 +2,7 @@ package step4.domain;
 
 import step4.lottoPlace.LastWeekLotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +15,14 @@ public class Lotto {
 
     private final List<Integer> lottoNums;
 
-    public Lotto(List<Integer> lottoNums) {
+    private Lotto(List<Integer> lottoNums) {
         this.lottoNums = lottoNums;
     }
 
-    public synchronized static Lotto createLotto() {
-        Collections.shuffle(lottoRange);
-        return new Lotto(lottoRange.stream()
+    public static Lotto createLotto() {
+        List<Integer> lottoNums = new ArrayList<>(lottoRange);
+        Collections.shuffle(lottoNums);
+        return new Lotto(lottoNums.stream()
             .limit(6)
             .collect(Collectors.toList()));
     }

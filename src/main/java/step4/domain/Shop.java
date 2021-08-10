@@ -19,6 +19,9 @@ public class Shop {
     }
 
     public static Lottos buyLotto(int money, List<List<Integer>> manualLottoNums) {
+        for (List<Integer> manualLottoNum : manualLottoNums) {
+            LottoValidator.validateLottoNum(manualLottoNum);
+        }
         LottoValidator.validateMoney(money);
 
         int count = getLottoCount(money) - manualLottoNums.size();
