@@ -10,6 +10,7 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_WINNING_MIN_COUNT = 3;
     private static final int DEFAULT_LOTTO_AMOUNT = 0;
+    private static final int MATCHED_BONUS_COUNT = 5;
 
     private int purchaseAmount = 0;
     private int gameCount = 0;
@@ -42,7 +43,7 @@ public class LottoGame {
     }
 
     private boolean matchedBonus(LottoNumbers lottoNumbers, int count) {
-        if (count == 5) {
+        if (count == MATCHED_BONUS_COUNT) {
             return winningNumbers.checkBonusNumber(lottoNumbers.selectedNumber());
         }
         return false;

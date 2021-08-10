@@ -6,30 +6,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_MIN_LENGTH = 0;
-    private static final int LOTTO_NUMBER_MAX_LENGTH = 6;
 
-    private List<Integer> lottoNumber;
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
+    private List<LottoNumber> lottoNumber;
 
     public LottoNumbers() {
         this.lottoNumber = new ArrayList<>();
     }
 
     public LottoNumbers(String numbers) {
-        this.lottoNumber = Arrays.stream(numbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        String[] numbersArr = numbers.split(",");
+        for (String number : numbersArr) {
+            lottoNumber.add(LottoNumberPicker.pickNumber(Integer.parseInt(number)));
+        }
     }
 
     public LottoNumbers generateNumbers() {
-        LottoNumber lottoNumber = new LottoNumber();
-        lottoNumber.shuffle();
-        this.lottoNumber = lottoNumber.getLottoNumber()
-                .subList(LOTTO_NUMBER_MIN_LENGTH, LOTTO_NUMBER_MAX_LENGTH);
+        while (this.lottoNumber.size() < LOTTO_NUMBER_SIZE) {
+            setNumber(LottoNumberPicker.pickNumber());
+        }
         return this;
     }
 
-    public List<Integer> selectedNumber() {
+    private void setNumber(LottoNumber lottoNumber) {
+        if (!this.lottoNumber.contains(lottoNumber)) {
+            this.lottoNumber.add(lottoNumber);
+        }
+    }
+
+    public List<LottoNumber> selectedNumber() {
         return this.lottoNumber;
     }
 }

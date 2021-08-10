@@ -2,26 +2,21 @@ package lotto.model;
 
 import lotto.util.LottoNumberUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+public class LottoNumber implements Comparable<LottoNumber> {
 
-public class LottoNumber {
+    private int lottoNumber;
 
-    private List<Integer> lottoNumber = new ArrayList<>();
-
-    public LottoNumber() {
-        for (int number = LottoNumberUtil.getLottoStartNumber(); number <= LottoNumberUtil.getLottoEndNumber(); number++) {
-            lottoNumber.add(number);
-        }
+    public LottoNumber(int number) {
+        LottoNumberUtil.validNumber(number);
+        lottoNumber = number;
     }
 
-    public List<Integer> getLottoNumber() {
+    public int getLottoNumber() {
         return lottoNumber;
     }
 
-    public void shuffle() {
-        Collections.shuffle(this.lottoNumber);
+    @Override
+    public int compareTo(LottoNumber number1) {
+        return Integer.compare(this.getLottoNumber(), number1.getLottoNumber());
     }
-
 }

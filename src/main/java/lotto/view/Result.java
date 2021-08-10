@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 import lotto.type.Winning;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,11 +26,11 @@ public class Result {
         System.out.println(String.format(LOTTO_AMOUNT_MESSAGE, amount));
     }
 
-    public static void printLottoNumber(List<Integer> lottoNumber) {
-        lottoNumber = lottoNumber.stream().sorted().collect(Collectors.toList());
+    public static void printLottoNumber(List<LottoNumber> lottoNumber) {
+        Collections.sort(lottoNumber);
         System.out.println(String.format(LOTTO_NUMBER_LIST,
                 lottoNumber.stream()
-                        .map(String::valueOf)
+                        .map(number -> String.valueOf(number.getLottoNumber()))
                         .collect(Collectors.joining(","))));
     }
 

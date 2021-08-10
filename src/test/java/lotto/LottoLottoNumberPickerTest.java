@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class LottoNumbersTest {
+public class LottoLottoNumberPickerTest {
     private static final int LOTTO_NUMBER_LENGTH = 6;
 
     @Test

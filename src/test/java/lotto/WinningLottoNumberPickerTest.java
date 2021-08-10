@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class WinningNumbersTest {
+public class WinningLottoNumberPickerTest {
 
     private static final String TEST_NUMBER = "2,4,6,8,10,12";
     private static final int BONUS_NUMBER = 1;
