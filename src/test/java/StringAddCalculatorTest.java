@@ -1,4 +1,5 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,10 +65,15 @@ public class StringAddCalculatorTest {
     @DisplayName("커스텀 구분자를 지정하여 사용했을 떄도 합을 반환 테스트.")
     @Test
     void custom_delimiter_return_sum_test() {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator("//;\n1;2;3");
+        assertThat(stringAddCalculator.getSum()).isEqualTo(6);
     }
 
     @DisplayName("문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw test.")
     @Test
     void not_number_string_throw_RuntimeException_test() {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator("-1,2,3");
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(stringAddCalculator::getSum);
     }
 }
