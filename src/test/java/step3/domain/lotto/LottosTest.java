@@ -23,7 +23,28 @@ class LottosTest {
     }
 
     @Test
-    void 보너스를_폼함한_2등의_금액은_150000원이다() {
+    void 로또_맞은_개수가_6개_이면서_보너스를_포함하지_않는다면_당첨_금액은_2_000_000_000원이다() {
+        // Given
+        Map<LottoRank, Integer> expectedResult = new HashMap<>();
+        expectedResult.put(LottoRank.find(6, false), 1);
+
+        LottoMatch expectedLottoMatch = new LottoMatch(expectedResult);
+
+        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 6);
+
+        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
+        Lottos lottos = lottoMachine.sell(new Cache(1000));
+
+        // When
+        LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
+
+        // Then
+        assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
+        assertThat(expectedLottoMatch.sumMoney()).isEqualTo(new Cache(2_000_000_000));
+    }
+
+    @Test
+    void 로또_맞든_개수가_6개_이면서_보너스를_포함한다면_당첨_금액은_30_000_000원이다() {
         // Given
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
         expectedResult.put(LottoRank.find(6, true), 1);
@@ -68,7 +89,6 @@ class LottosTest {
     @DisplayName("3등에 당첨되면 수익률은 5가 된다")
     @Test
     void profilt() {
-        Profit expectedLottoProfit = new Profit(5);
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
@@ -80,6 +100,6 @@ class LottosTest {
         Profit profit = lottoMatch.calcProfit(lottos.size());
 
         // Then
-        assertThat(profit).isEqualTo(expectedLottoProfit);
+        assertThat(profit).isEqualTo(new Profit(5));
     }
 }

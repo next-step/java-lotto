@@ -12,7 +12,18 @@ public class Lotto {
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoSize(lottoNumbers);
+        validateDuplicatingLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateDuplicatingLottoNumbers(List<LottoNumber> lottoNumbers) {
+        boolean duplication = lottoNumbers.stream()
+            .distinct()
+            .count() != lottoNumbers.size();
+
+        if (duplication) {
+            throw new IllegalArgumentException("이미 존재하는 로또 번호입니다.");
+        }
     }
 
     public static Lotto create(List<LottoNumber> lottoNumber) {
