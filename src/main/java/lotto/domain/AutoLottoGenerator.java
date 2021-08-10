@@ -29,7 +29,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         return targetNumbers;
     }
 
-    private LottoTicket pickLottoNumbers(List<LottoNumber> targetNumbers) {
+    private LottoTicket pickLottoNumbers(final List<LottoNumber> targetNumbers) {
         List<LottoNumber> lottoNumbers = targetNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .sorted()

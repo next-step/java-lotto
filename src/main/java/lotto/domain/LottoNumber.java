@@ -23,7 +23,7 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber o) {
+    public int compareTo(final LottoNumber o) {
         return number - o.getNumber();
     }
 

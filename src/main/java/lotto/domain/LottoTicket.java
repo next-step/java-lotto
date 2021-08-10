@@ -25,7 +25,7 @@ public final class LottoTicket {
         this.lottoNumbers = collectLottoNumbers;
     }
 
-    private void validateLottoTicketSize(List<LottoNumber> lottoNumbers) {
+    private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("different number size");
         }

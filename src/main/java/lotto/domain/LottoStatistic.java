@@ -16,7 +16,7 @@ public final class LottoStatistic {
                 .count();
     }
 
-    public double getProfitRate(double amount) {
+    public double getProfitRate(final double amount) {
         double totalSum = statistic.stream()
                 .mapToDouble(LottoRank::getAmount)
                 .reduce(0, Double::sum);

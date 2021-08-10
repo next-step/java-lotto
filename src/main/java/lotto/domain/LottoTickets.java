@@ -45,7 +45,9 @@ public final class LottoTickets {
         return new LottoStatistic(lottoStatistic);
     }
 
-    private LottoRank findLottoRank(final LottoTicket lottoTicket, final List<Integer> winningNumbers, final int bonusNumber) {
+    private LottoRank findLottoRank(final LottoTicket lottoTicket,
+                                    final List<Integer> winningNumbers,
+                                    final int bonusNumber) {
         int matchLottoNumberCount = lottoTicket.matchLottoTicket(winningNumbers);
         if (matchLottoNumberCount != BONUS_TARGET_MATCH_COUNT) {
             return LottoRank.of(matchLottoNumberCount, false);
@@ -64,7 +66,8 @@ public final class LottoTickets {
         return winningNumbersWithBonusNumber;
     }
 
-    private boolean isSecondPlaceLottoTicket(final LottoTicket lottoTicket, final List<Integer> winningNumbersAndBonusNumber) {
+    private boolean isSecondPlaceLottoTicket(final LottoTicket lottoTicket,
+                                             final List<Integer> winningNumbersAndBonusNumber) {
         int matchBonusCount = lottoTicket.matchLottoTicket(winningNumbersAndBonusNumber);
         return matchBonusCount == SECOND_PLACE_MATCH_COUNT;
     }

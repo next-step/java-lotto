@@ -19,7 +19,7 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void showBuyLottoTickets(LottoTickets lottoTickets) {
+    public static void showBuyLottoTickets(final LottoTickets lottoTickets) {
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         showBuyCountInfo(lottoTicketList.size());
         for (LottoTicket lottoTicket : lottoTicketList) {
@@ -27,11 +27,11 @@ public class ResultView {
         }
     }
 
-    private static void showBuyCountInfo(int count) {
+    private static void showBuyCountInfo(final int count) {
         System.out.println(count + RESULT_MESSAGE_POST_BUY);
     }
 
-    public static void showLottoResult(LottoStatistic lottoStatistic, long amount) {
+    public static void showLottoResult(final LottoStatistic lottoStatistic, final long amount) {
         System.out.println();
         System.out.println(RESULT_MESSAGE_PRE);
         System.out.println(RESULT_MESSAGE_LINE);
@@ -40,7 +40,7 @@ public class ResultView {
         showLottoProfitRate(lottoStatistic, amount);
     }
 
-    private static void showLottoStatistic(LottoStatistic lottoStatistic) {
+    private static void showLottoStatistic(final LottoStatistic lottoStatistic) {
         showLottoMatchInfo(lottoStatistic, LottoRank.FIFTH_PLACE, RESULT_DETAIL_TEMPLATE);
         showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE, RESULT_DETAIL_TEMPLATE);
         showLottoMatchInfo(lottoStatistic, LottoRank.THIRD_PLACE, RESULT_DETAIL_TEMPLATE);
@@ -48,7 +48,9 @@ public class ResultView {
         showLottoMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE, RESULT_DETAIL_TEMPLATE);
     }
 
-    private static void showLottoMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank, String template) {
+    private static void showLottoMatchInfo(final LottoStatistic lottoStatistic,
+                                           final LottoRank lottoRank,
+                                           final String template) {
         System.out.printf(
                 template,
                 lottoRank.getMatchCount(),
@@ -58,8 +60,8 @@ public class ResultView {
         System.out.println();
     }
 
-    private static void showLottoProfitRate(LottoStatistic lottoStatistic, long amount) {
+    private static void showLottoProfitRate(final LottoStatistic lottoStatistic, final long amount) {
         Double profitRate = lottoStatistic.getProfitRate(amount);
-        System.out.printf(RESULT_PROFIT_TEMPLATE + "%n", String.format("%.2f", profitRate));
+        System.out.printf(RESULT_PROFIT_TEMPLATE + System.lineSeparator(), String.format("%.2f", profitRate));
     }
 }

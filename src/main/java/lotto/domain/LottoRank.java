@@ -15,17 +15,17 @@ public enum LottoRank {
     private final long amount;
     private final boolean isBonus;
 
-    LottoRank(int matchCount, long amount) {
+    LottoRank(final int matchCount, final long amount) {
         this(matchCount, amount, false);
     }
 
-    LottoRank(int matchCount, long amount, boolean isBonus) {
+    LottoRank(final int matchCount, final long amount, final boolean isBonus) {
         this.matchCount = matchCount;
         this.amount = amount;
         this.isBonus = isBonus;
     }
 
-    public static LottoRank of(int matchCount, boolean isBonus) {
+    public static LottoRank of(final int matchCount, final boolean isBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.isBonus == isBonus)
                 .filter(rank -> rank.matchCount == matchCount)
