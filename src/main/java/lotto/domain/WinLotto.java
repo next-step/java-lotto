@@ -12,7 +12,7 @@ public class WinLotto {
             throw new IllegalArgumentException("보너스 볼이 당첨번호와 중복됩니다.");
         }
         this.winNumbers = new LottoTicket(winNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public LottoTicket getWinNumbers() {

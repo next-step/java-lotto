@@ -10,7 +10,7 @@ public class LottoTicket {
 
     public LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
         if (this.lottoNumbers.size() != SIZE) {
