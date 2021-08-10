@@ -19,9 +19,7 @@ public class StringTokenizer {
     }
 
     private boolean isEmpty(String input) {
-        if ("".equals(input) || Objects.isNull(input))
-            return true;
-        return false;
+        return "".equals(input) || Objects.isNull(input);
     }
 
     private String[] splitByCustomDelimiter(String input) {
