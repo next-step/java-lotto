@@ -66,11 +66,25 @@ public class LottoTest {
         }).withMessageMatching("중복된 숫자가 있습니다.");
     }
 
-    @DisplayName("숫자가 있는지 확인")
+    @DisplayName("매칭되는 숫자 갯수 확인")
     @Test
-    void matchingNumber_숫자가_있는지_확인() {
+    void matchingNumber_매칭되는_숫자_갯수_확인() {
         Lotto lotto = new Lotto(Arrays.asList(1, 4, 6, 9, 10, 15));
         assertThat(lotto.getMatchingCount(Lotto.valueOf("1,4,6,9,15,20"))).isEqualTo(new MatchingCount(5));
+    }
+
+    @DisplayName("해당 숫자가 있으면 true")
+    @Test
+    void matchingNumber_해당_숫자가_있으면_true() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 4, 6, 9, 10, 15));
+        assertThat(lotto.addMatchingCount(new LottoNumber(1))).isTrue();
+    }
+
+    @DisplayName("해당 숫자가 없으면 false")
+    @Test
+    void matchingNumber_해당_숫자가_없으면_false() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 4, 6, 9, 10, 15));
+        assertThat(lotto.addMatchingCount(new LottoNumber(2))).isFalse();
     }
 
 }

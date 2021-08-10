@@ -63,17 +63,21 @@ public class Lotto {
         MatchingCount matchingCount = new MatchingCount();
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchingCount = lotto.containNumber(lottoNumber, matchingCount);
+            matchingCount = lotto.addMatchingCount(lottoNumber, matchingCount);
         }
 
         return matchingCount;
     }
 
-    private MatchingCount containNumber(final LottoNumber lottoNumber, MatchingCount matchingCount) {
-        if (this.lottoNumbers.contains(lottoNumber)) {
+    private MatchingCount addMatchingCount(final LottoNumber lottoNumber, final MatchingCount matchingCount) {
+        if (addMatchingCount(lottoNumber)) {
             return matchingCount.increment();
         }
         return matchingCount;
+    }
+
+    public boolean addMatchingCount(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
 }
