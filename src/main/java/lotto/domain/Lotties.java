@@ -13,14 +13,14 @@ public class Lotties {
         return lotties.size();
     }
 
-    public List<Lotto> getLotties() {
-        return Collections.unmodifiableList(lotties);
-    }
-
     public void matchLottiesRank(WinningNumbers winningNumber) {
         for (Lotto lotto : lotties) {
             lotto.matchLottoRank(winningNumber);
         }
+    }
+
+    public List<Lotto> getLotties() {
+        return Collections.unmodifiableList(lotties);
     }
 
     public List<Rank> getLottiesRank() {
