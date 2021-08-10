@@ -43,16 +43,16 @@ class LottoGameWinnerResultTest {
     private static Stream<Arguments> provideRewardInfo() {
 
         return Stream.of(
-            Arguments.of(LottoReward.THREE_NUMBERS_MATCHED_REWARD,
-                LottoReward.THREE_NUMBERS_MATCHED_REWARD.getRewardMoney(), 5.0),
-            Arguments.of(LottoReward.FOUR_NUMBERS_MATCHED_REWARD,
-                LottoReward.FOUR_NUMBERS_MATCHED_REWARD.getRewardMoney(), 50.0),
-            Arguments.of(LottoReward.FIVE_NUMBERS_MATCHED_REWARD,
-                LottoReward.FIVE_NUMBERS_MATCHED_REWARD.getRewardMoney(), 1_500.0),
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
-                LottoReward.SIX_NUMBERS_MATCHED_REWARD.getRewardMoney(), 2_000_000.0),
-            Arguments.of(LottoReward.NO_REWARD,
-                LottoReward.NO_REWARD.getRewardMoney(), 0)
+            Arguments.of(LottoReward.THREE_NUMBERS_MATCHED,
+                LottoReward.THREE_NUMBERS_MATCHED.getRewardMoney(), 5.0),
+            Arguments.of(LottoReward.FOUR_NUMBERS_MATCHED,
+                LottoReward.FOUR_NUMBERS_MATCHED.getRewardMoney(), 50.0),
+            Arguments.of(LottoReward.FIVE_NUMBERS_MATCHED,
+                LottoReward.FIVE_NUMBERS_MATCHED.getRewardMoney(), 1_500.0),
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
+                LottoReward.SIX_NUMBERS_MATCHED.getRewardMoney(), 2_000_000.0),
+            Arguments.of(LottoReward.NO_MATCHED,
+                LottoReward.NO_MATCHED.getRewardMoney(), 0)
         );
     }
 
@@ -60,15 +60,15 @@ class LottoGameWinnerResultTest {
     private static Stream<Arguments> provideDifferentProfitRate() {
 
         return Stream.of(
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
                 1, 2_000_000.0),
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
                 2, 1_000_000.0),
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
                 50, 40_000.0),
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
                 1_000, 2_000.0),
-            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED_REWARD,
+            Arguments.of(LottoReward.SIX_NUMBERS_MATCHED,
                 20_000, 100.0)
         );
     }

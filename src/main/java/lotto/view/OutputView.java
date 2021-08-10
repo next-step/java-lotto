@@ -41,7 +41,7 @@ public class OutputView {
         System.out.println("--------");
 
         LottoReward.stream()
-            .filter(e -> !e.equals(LottoReward.NO_REWARD))
+            .filter(e -> !e.equals(LottoReward.NO_MATCHED))
             .forEach(e -> System.out.println(getWinnerHitString(e, winnerResult)));
 
         System.out.println(getProfitRateString(winnerResult));
@@ -52,9 +52,20 @@ public class OutputView {
     }
 
     private String getWinnerHitString(LottoReward reward, LottoGameWinnerResult winnerResult) {
-        return String.format("%d개 일치 (%d)원 - %d 개",
+        String hitStringFormat = decideHitStringFormat(reward);
+
+        return String.format(hitStringFormat,
             reward.getMatchedCount(),
             reward.getRewardMoney(),
             winnerResult.getHitCountByReward(reward));
+    }
+
+    private String decideHitStringFormat(LottoReward reward) {
+        String defaultResultFormat = "%d개 일치 (%d)원 - %d 개";
+
+        if (LottoReward.FIVE_NUMBERS_AND_BONUS_NUMBER_MATCHED.equals(reward)) {
+            return "%d개 일치, 보너스 볼 일치(%d)원 - %d 개";
+        }
+        return defaultResultFormat;
     }
 }

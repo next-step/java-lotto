@@ -29,13 +29,18 @@ public class InputView {
         return inputView;
     }
 
-    public Integer[] askWinnerNumbers() {
+    public int[] askWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         return Arrays.stream(scanner.next().split(COMMA_DELIMITER))
             .map(String::trim)
-            .map(Integer::parseInt)
-            .toArray(Integer[]::new);
+            .mapToInt(Integer::parseInt)
+            .toArray();
+    }
+
+    public int askBonusBallNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
     public void closeScanner() {

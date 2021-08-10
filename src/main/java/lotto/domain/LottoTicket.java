@@ -47,19 +47,19 @@ public class LottoTicket {
         }
     }
 
-    public List<LottoNumber> value() {
-        return lottoNumbers;
-    }
-
 
     public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicket generateByIntegerArray(Integer... integerArray) {
+    public static LottoTicket generateByIntegerArray(int... integerArray) {
         List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
-            .map(LottoNumber::new)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
+    }
+
+    public List<LottoNumber> value() {
+        return lottoNumbers;
     }
 }
