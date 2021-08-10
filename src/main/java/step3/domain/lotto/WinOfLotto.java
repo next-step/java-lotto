@@ -8,12 +8,17 @@ public class WinOfLotto {
     private final LottoNumber bonusNumber;
 
     public WinOfLotto(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
-        validateWinOfLottos(winOfLottos);
-        this.bonusNumber = bonusNumber;
+        addBonusNumber(winOfLottos, bonusNumber);
         this.winOfResultWithBonus = winOfLottos;
+        this.bonusNumber = bonusNumber;
     }
 
-    private void validateWinOfLottos(List<LottoNumber> winOfLottos) {
+    private void addBonusNumber(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
+        winOfLottos.add(bonusNumber);
+        validateWinOfLottos(winOfLottos, bonusNumber);
+    }
+
+    private void validateWinOfLottos(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
         boolean duplication = winOfLottos.stream()
             .distinct()
             .count() != winOfLottos.size();

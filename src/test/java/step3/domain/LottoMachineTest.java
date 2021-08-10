@@ -1,10 +1,9 @@
 package step3.domain;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoMachine;
+import step3.domain.lotto.Lottos;
 import step3.domain.money.Cache;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -19,7 +18,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(() -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // When
-        List<Lotto> lottos = lottoMachine.sell(givenCache);
+        Lottos lottos = lottoMachine.sell(givenCache);
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);

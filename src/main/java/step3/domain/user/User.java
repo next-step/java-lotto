@@ -1,16 +1,15 @@
 package step3.domain.user;
 
-import step3.domain.lotto.Lotto;
+import step3.domain.lotto.Lottos;
 import step3.domain.money.Cache;
 import step3.domain.money.Money;
-import java.util.List;
 
 public class User {
 
     private final String name;
     private final Wallet wallet;
 
-    private List<Lotto> lottos;
+    private Lottos lottos;
 
     public User(String name, Wallet wallet) {
         this.name = name;
@@ -33,11 +32,11 @@ public class User {
         return wallet;
     }
 
-    public void buyLotto(List<Lotto> boughtLottos) {
+    public void buyLotto(Lottos boughtLottos) {
         this.lottos = boughtLottos;
     }
 
-    public List<Lotto> getLottos() {
+    public Lottos getLottos() {
         return lottos;
     }
 }

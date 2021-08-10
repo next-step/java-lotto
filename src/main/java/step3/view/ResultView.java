@@ -1,21 +1,20 @@
 package step3.view;
 
-import step3.domain.lotto.Lotto;
-import step3.domain.lotto.Profit;
 import step3.domain.lotto.LottoMatch;
-import java.util.List;
+import step3.domain.lotto.Lottos;
+import step3.domain.lotto.Profit;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printCount(List<Lotto> lottos) {
+    public static void printCount(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        lottos.forEach(lotto -> System.out.println(lotto.numbers().toString()));
+    public static void printLottos(Lottos lottos) {
+        lottos.getLottos().forEach(lotto -> System.out.println(lotto.numbers().toString()));
     }
 
     public static void printLottoStatistics(LottoMatch lottoMatch, Profit profit) {

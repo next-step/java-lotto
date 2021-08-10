@@ -1,12 +1,12 @@
 package step3;
 
-import step3.domain.lotto.Lotto;
 import step3.domain.lotto.LottoMachine;
+import step3.domain.lotto.LottoMatch;
 import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoStatistics;
+import step3.domain.lotto.Lottos;
 import step3.domain.lotto.Profit;
 import step3.domain.lotto.RandomStrategy;
-import step3.domain.lotto.LottoMatch;
 import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
 import step3.domain.money.Money;
@@ -24,7 +24,7 @@ public class LottoGame {
         LottoMachine lottoMachine = new LottoMachine(new RandomStrategy());
 
         Money allMoney = user.withDraw();
-        List<Lotto> boughtLottos = lottoMachine.sell(allMoney);
+        Lottos boughtLottos = lottoMachine.sell(allMoney);
         user.buyLotto(boughtLottos);
 
         ResultView.printCount(user.getLottos());
@@ -34,9 +34,10 @@ public class LottoGame {
         LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
         winOfLottoNumbers.add(lottoBonusNumber);
 
-        WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers,lottoBonusNumber);
+        WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
 
-        LottoMatch lottoMatch = LottoStatistics.calcLottoOfStatistics(winOfLotto, user.getLottos());
+        Lottos lottos = user.getLottos();
+        LottoMatch lottoMatch = lottos.match(winOfLotto);
         Profit profit = LottoStatistics.calculateLottoProfit(lottoMatch, user.getLottos().size());
 
         ResultView.printLottoStatistics(lottoMatch, profit);
