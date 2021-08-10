@@ -23,7 +23,7 @@ public class Lotties {
         return Collections.unmodifiableList(lotties);
     }
 
-    public List<Rank> getLottiesRank() {
+    public List<Rank> getLottiesRank() {//리턴타입이 LottoStatistics가 되도록 변경해보자
         List<Rank> rankList = new ArrayList<>();
         for (Lotto lotto : lotties) {
             rankList.add(lotto.getRank());

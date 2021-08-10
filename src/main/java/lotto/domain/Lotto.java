@@ -5,17 +5,11 @@ import java.util.function.Predicate;
 
 public class Lotto {
     private final List<Integer> lottoNumber;
-    private final NumberGenerator numberGenerator;
     private Rank lottoRank;
 
-    public Lotto(NumberGenerator numberGenerator) {
-        this.numberGenerator  = numberGenerator;
-        this.lottoNumber = createRandomNumbers();
+    public Lotto(List<Integer> lottoNumber) {
+        this.lottoNumber = new ArrayList<>(lottoNumber);
         sortLottoNumbers();
-    }
-
-    private List<Integer> createRandomNumbers() {
-        return numberGenerator.generateNumber();
     }
 
     private void sortLottoNumbers() {
