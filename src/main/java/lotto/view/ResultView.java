@@ -41,11 +41,11 @@ public class ResultView {
     }
 
     private static void showLottoStatistic(LottoStatistic lottoStatistic) {
-        showLottoMatchInfo(lottoStatistic, LottoRank.FIFTH, RESULT_DETAIL_TEMPLATE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH, RESULT_DETAIL_TEMPLATE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.THIRD, RESULT_DETAIL_TEMPLATE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND, RESULT_BONUS_DETAIL_TEMPLATE);
-        showLottoMatchInfo(lottoStatistic, LottoRank.FIRST, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FIFTH_PLACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FOURTH_PLACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.THIRD_PLACE, RESULT_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.SECOND_PLACE, RESULT_BONUS_DETAIL_TEMPLATE);
+        showLottoMatchInfo(lottoStatistic, LottoRank.FIRST_PLACE, RESULT_DETAIL_TEMPLATE);
     }
 
     private static void showLottoMatchInfo(LottoStatistic lottoStatistic, LottoRank lottoRank, String template) {

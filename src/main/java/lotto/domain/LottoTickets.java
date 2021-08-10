@@ -53,7 +53,7 @@ public final class LottoTickets {
 
         List<Integer> winningNumbersAndBonusNumber = cloneWinningNumbersAndBonusNumber(winningNumbers, bonusNumber);
         if (isSecondPlaceLottoTicket(lottoTicket, winningNumbersAndBonusNumber)) {
-            return LottoRank.SECOND;
+            return LottoRank.SECOND_PLACE;
         }
         return LottoRank.of(matchLottoNumberCount, false);
     }
