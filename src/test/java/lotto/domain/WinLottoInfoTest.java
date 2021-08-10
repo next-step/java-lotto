@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.service.LotteryDraw;
 import lotto.service.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,7 @@ class WinLottoInfoTest {
     int bonus = 7;
     WinLottoInfo winLottoInfo = new WinLottoInfo(lotto,bonus);
 
-    assertThat(winLottoInfo.getBonusLottoNumber()).isEqualTo(new LottoNumber(bonus));
-    assertThat(winLottoInfo.getWinLotto()).isEqualTo(new Lotto(values));
-    assertThat(winLottoInfo.getLottoNumbers().size()).isEqualTo(6);
+    assertThat(winLottoInfo).isEqualTo(new WinLottoInfo(lotto,bonus));
   }
 
   @DisplayName("당첨로또번호와 보너스번호간에 번호 중복시 검증 테스트.")
@@ -68,13 +65,12 @@ class WinLottoInfoTest {
     WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 31)), 7);
 
     Method checkContainValues = winLottoInfo.getClass()
-        .getDeclaredMethod("checkContainValues", Lotto.class, int.class, LottoNumber.class);
+        .getDeclaredMethod("checkContainValues", Lotto.class, LottoNumber.class);
     checkContainValues.setAccessible(true);
 
     assertThat(
         checkContainValues.invoke(winLottoInfo,
             new Lotto(createTestWinLotto(21, 22, 23, 11, 12, 13)),
-            0,
             new LottoNumber(21)))
         .isEqualTo(1);
   }

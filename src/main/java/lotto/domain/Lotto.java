@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.message.Message;
 
 public class Lotto implements Comparator<LottoNumber> {
@@ -52,8 +53,10 @@ public class Lotto implements Comparator<LottoNumber> {
     lotto.sort(this);
   }
 
-  public boolean match(final LottoNumber lottoNumber) {
-    return lotto.contains(lottoNumber);
+  public int match(final LottoNumber lottoNumber) {
+    return (int)lotto.stream()
+        .filter(lottoNumber1 -> lottoNumber1.equals(lottoNumber))
+        .count();
   }
 
   @Override

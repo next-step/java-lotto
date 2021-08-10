@@ -4,17 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 class RankTest {
-
-  @DisplayName("Rank countOfMatch 값을 제대로 반환하는지 테스트.")
-  @ParameterizedTest
-  @CsvSource(value = {"3,3","4,4","5,5","6,6"})
-  void getCountOfMatch(int countOfMatch, int result) {
-    assertThat(Rank.matchRank(countOfMatch).getCountOfMatch()).isEqualTo(result);
-  }
 
   @DisplayName("Rank에 정의된 countOfMatch 확인 테스트.")
   @Test

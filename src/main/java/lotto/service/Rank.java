@@ -28,13 +28,6 @@ public enum Rank {
     return winningMoney;
   }
 
-  public static Rank matchRank(int countOfMatch) {
-    return Stream.of(values())
-        .filter(rank -> (rank.countOfMatch == countOfMatch))
-        .findFirst()
-        .orElse(MISS);
-  }
-
   public static Rank matchRank(int countOfMatch, boolean matchBonus) {
     return Stream.of(values())
         .filter(rank -> (rank.countOfMatch == countOfMatch))

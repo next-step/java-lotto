@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Objects;
 import lotto.message.Message;
 import lotto.service.Rank;
 
@@ -11,8 +11,6 @@ public class WinLottoInfo {
   private final Lotto winLotto;
 
   private final LottoNumber bonusNumber;
-
-  private LottoResult lottoResult;
 
   public WinLottoInfo(final Lotto lotto, final int bonus) {
     validation(lotto, bonus);
@@ -26,18 +24,6 @@ public class WinLottoInfo {
     }
   }
 
-  public Lotto getWinLotto() {
-    return winLotto;
-  }
-
-  public LottoNumber getBonusLottoNumber() {
-    return bonusNumber;
-  }
-
-  public List<LottoNumber> getLottoNumbers(){
-    return winLotto.getLotto();
-  }
-
   public Rank getMatchCountForRank(Lotto lotto) {
     return Rank.matchRank(getCountByRank(lotto, INT_ZERO),
         isMatchBonus(lotto));
@@ -45,20 +31,34 @@ public class WinLottoInfo {
 
   private int getCountByRank(final Lotto lotto, int count) {
     for (LottoNumber lottoNumber : winLotto.getLotto()) {
-      count = checkContainValues(lotto, count, lottoNumber);
+      count += checkContainValues(lotto, lottoNumber);
     }
-
     return count;
   }
 
-  private int checkContainValues(final Lotto lotto, int count, final LottoNumber lottoNumber) {
-    if (lotto.match(lottoNumber)) {
-      count++;
-    }
-    return count;
+  private int checkContainValues(final Lotto lotto, final LottoNumber lottoNumber) {
+    return lotto.match(lottoNumber);
   }
 
   private boolean isMatchBonus(final Lotto lotto) {
     return lotto.getLotto().contains(bonusNumber);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    final WinLottoInfo that = (WinLottoInfo) o;
+    return Objects.equals(winLotto, that.winLotto) && Objects.equals(bonusNumber,
+        that.bonusNumber);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(winLotto, bonusNumber);
   }
 }

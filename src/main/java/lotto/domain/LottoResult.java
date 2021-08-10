@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static java.util.Collections.unmodifiableMap;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,7 +12,7 @@ public class LottoResult {
 
   private final Map<Rank, List<Lotto>> categoriesRank = new LinkedHashMap<>();
 
-  private WinLottoInfo winLottoInfo;
+  private final WinLottoInfo winLottoInfo;
 
   public LottoResult(final WinLottoInfo winLottoInfo) {
     categoriesRank.put(Rank.FIFTH, new ArrayList<>());
@@ -20,6 +22,7 @@ public class LottoResult {
     categoriesRank.put(Rank.FIRST, new ArrayList<>());
     categoriesRank.put(Rank.MISS, new ArrayList<>());
 
+    unmodifiableMap(categoriesRank);
     this.winLottoInfo = winLottoInfo;
   }
 
