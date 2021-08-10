@@ -21,9 +21,7 @@ public class LottoApplication {
 
         lotties.matchLottiesRank(winningNumbers);
 
-        WinningStatistics winningStatistics = new WinningStatistics();
-        winningStatistics.setRankCount(lotties.getLottiesRank());
-
+        WinningStatistics winningStatistics = lotties.getLottiesRank();
 
         resultView.printSameNumbers(winningStatistics);
     }
