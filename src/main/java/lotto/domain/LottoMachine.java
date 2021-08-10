@@ -26,7 +26,8 @@ public final class LottoMachine {
 
     private List<Lotto> createLotto(final int amount, final PurchaseStrategy purchaseStrategy) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = INIT_COUNT; i < amount / LOTTO_PRICE; i++) {
+        int lottoCount = amount / LOTTO_PRICE;
+        for (int i = INIT_COUNT; i < lottoCount; i++) {
             lottos.add(new Lotto(purchaseStrategy.generateLottoNumber()));
         }
         return lottos;

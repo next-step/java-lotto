@@ -5,7 +5,7 @@ import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.EnumMap;
+import java.util.List;
 import java.util.Scanner;
 
 public final class LottoController {
@@ -22,14 +22,14 @@ public final class LottoController {
             resultView.printLottoCount(totalCount);
             resultView.printLottos(lottos);
 
-            Lotto winningLotto = Lotto.valueOf(inputView.inputWinningNumbers());
+            Lotto winningLotto = new Lotto(inputView.inputWinningNumbers());
             LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
 
             WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, bonusNumber);
-            EnumMap<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinningsByRank(lottos);
-            double earningsRate = winningsStatistics.calculateEarningsRate(winnings, totalCount);
+            List<Result> results = winningsStatistics.makeStatisticsWinnings(lottos);
+            double earningsRate = winningsStatistics.calculateEarningsRate(results, totalCount);
 
-            resultView.printStatistics(winnings);
+            resultView.printStatistics(results);
             resultView.printEarningsRate(earningsRate);
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@SuppressWarnings("NonAsciiCharacters")
 class WinningsStatisticsTest {
 
     @DisplayName("객체생성")
@@ -34,6 +35,7 @@ class WinningsStatisticsTest {
         Lottos lottos = new Lottos(
                 Arrays.asList(
                         Lotto.valueOf("5,10,15,20,25,30"),
+                        Lotto.valueOf("5,10,15,20,25,35"),
                         Lotto.valueOf("5,10,15,20,25,1"),
                         Lotto.valueOf("5,10,15,20,1,2"),
                         Lotto.valueOf("5,10,15,1,2,3"),
@@ -43,7 +45,7 @@ class WinningsStatisticsTest {
         );
         Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinningsByRank(lottos);
+        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
         assertAll(
                 () -> AssertionsForClassTypes.assertThat(winnings.get(Rank.FIRST)).isEqualTo(new MatchingCount(1)),
@@ -67,7 +69,7 @@ class WinningsStatisticsTest {
         );
         Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinningsByRank(lottos);
+        Map<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
         assertThat(winningsStatistics.calculateEarningsRate(winnings, 4)).isEqualTo(13.75);
     }

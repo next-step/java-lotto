@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
-public class WinningsStatistics {
+public final class WinningsStatistics {
 
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "당첨번호와 보너스번호가 중복되었습니다.";
     private static final int INIT = 0;
@@ -18,36 +17,44 @@ public class WinningsStatistics {
     }
 
     private void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        if (winningLotto.getLottoNumbers().contains(bonusNumber)) {
+        if (winningLotto.hasLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
         }
     }
 
-    public EnumMap<Rank, MatchingCount> makeStatisticsWinningsByRank(final Lottos lottos) {
-        EnumMap<Rank, MatchingCount> winnings = new EnumMap<>(Rank.class);
+    public List<Result> makeStatisticsWinnings(final Lottos lottos) {
+        List<Result> results = new ArrayList<>();
 
-        for (Lotto lotto : lottos.getLottos()) {
-            makeStatisticsWinningsByRank(winnings, lotto);
+        for(Rank rank : Rank.values()) {
+            results.add(new Result(rank, INIT));
         }
 
-        return winnings;
+        ////
+        for (Lotto lotto : lottos.getLottos()) {
+            makeStatisticsWinningsByRank(results, lotto);
+        }
+        ////
+
+        return results;
     }
 
-    private void makeStatisticsWinningsByRank(EnumMap<Rank, MatchingCount> winnings, final Lotto lotto) {
+    private void makeStatisticsWinningsByRank(final List<Result> results, final Lotto lotto) {
         MatchingCount matchingCount = lotto.getMatchingCount(winningLotto);
 
-        boolean matchBonus = lotto.addMatchingCount(bonusNumber);
+        boolean matchBonus = lotto.hasLottoNumber(bonusNumber);
 
         Rank rank = Rank.returnRank(matchingCount, matchBonus);
 
-        winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getValue()).increment());
+        for(Result result : results) {
+            result.addHitCount(rank);
+        }
     }
 
-    public double calculateEarningsRate(final Map<Rank, MatchingCount> winnings, final int totalCount) {
+    public double calculateEarningsRate(final List<Result> results, final int totalCount) {
         int totalPrize = INIT;
 
-        for (Rank rank : winnings.keySet()) {
-            totalPrize += rank.totalWinningMoney(winnings.get(rank));
+        for (Result result : results) {
+            totalPrize += result.totalWinningMoney();
         }
 
         return Math.round((float) totalPrize / (totalCount * 10)) / 100.0;

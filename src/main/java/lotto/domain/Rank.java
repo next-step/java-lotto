@@ -1,16 +1,13 @@
 package lotto.domain;
 
 public enum Rank {
-    FIRST(new MatchingCount(6), 2_000_000_000),
-    SECOND(new MatchingCount(5), 30_000_000),
-    THIRD(new MatchingCount(5), 1_500_000),
-    FOURTH(new MatchingCount(4), 50_000),
-    FIFTH(new MatchingCount(3), 5_000),
-    MISS(new MatchingCount(0), 0);
 
-    private static final int MIN_HITS_COUNT = 0;
-    private static final int MAX_HITS_COUNT = 6;
-    private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "맞춘 횟수는 0에서 6 사이여야 합니다.";
+    MISS(new MatchingCount(0), 0),
+    FIFTH(new MatchingCount(3), 5_000),
+    FOURTH(new MatchingCount(4), 50_000),
+    THIRD(new MatchingCount(5), 1_500_000),
+    SECOND(new MatchingCount(5), 30_000_000),
+    FIRST(new MatchingCount(6), 2_000_000_000);
 
     private final MatchingCount matchingCount;
     private final int winningMoney;
@@ -20,12 +17,21 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank returnRank(final MatchingCount matchingCount, boolean matchBonus) {
-        validateMatchingCount(matchingCount);
+    public static Rank returnRank(final MatchingCount matchingCount, final boolean matchBonus) {
+        Rank matchingRank = MISS;
 
-        if(FIFTH.matchingCount.getValue() > matchingCount.getValue()) {
-            return MISS;
+        for (Rank rank : values()) {
+            matchingRank = findMatchingRank(matchingCount, matchBonus, rank, matchingRank);
         }
+
+        return matchingRank;
+    }
+
+    private static Rank findMatchingRank(final MatchingCount matchingCount, final boolean matchBonus, final Rank rank, final Rank matchingRank) {
+        if (matchingRank != MISS || !rank.equalsMatchingCount(matchingCount)) {
+            return matchingRank;
+        }
+
         if(SECOND.matchingCount.equals(matchingCount) && matchBonus) {
             return SECOND;
         }
@@ -33,40 +39,23 @@ public enum Rank {
             return THIRD;
         }
 
-        Rank matchingRank = MISS;
-        for (Rank rank : values()) {
-            matchingRank = findMatchingRank(matchingCount, rank, matchingRank);
-        }
-
-        return matchingRank;
+        return rank;
     }
 
-    private static Rank findMatchingRank(final MatchingCount matchingCount, final Rank rank, final Rank matchingRank) {
-        if (matchingRank != MISS) {
-            return matchingRank;
-        }
-        if (matchingCount.equals(rank.getMatchingCount())) {
-            return rank;
-        }
-        return MISS;
+    public boolean equalsMatchingCount(final MatchingCount matchingCount) {
+        return this.matchingCount.equals(matchingCount);
     }
 
-    private static void validateMatchingCount(final MatchingCount matchingCount) {
-        if (matchingCount.getValue() < MIN_HITS_COUNT || matchingCount.getValue() > MAX_HITS_COUNT) {
-            throw new IllegalArgumentException(OUT_OF_BOUNDS_ERROR_MESSAGE);
-        }
+    public int totalWinningMoney(final int hitCount) {
+        return this.winningMoney * hitCount;
     }
 
-    private int getWinningMoney() {
-        return this.winningMoney;
-    }
-
-    private MatchingCount getMatchingCount() {
+    public MatchingCount getMatchingCount() {
         return this.matchingCount;
     }
 
-    public int totalWinningMoney(MatchingCount matchingCount) {
-        return this.getWinningMoney() * matchingCount.getValue();
+    public int getWinningMoney() {
+        return this.winningMoney;
     }
 
 }
