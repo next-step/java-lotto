@@ -20,7 +20,7 @@ class LottosTest {
 	@DisplayName("금액별 로또 수량")
 	void lotto_by_amount_create(int amount, int lottoCount) throws Exception {
 		//given
-		Lottos lottos = new Lottos(amount);
+		Lottos lottos = Lottos.of(amount);
 
 		//when
 		int size = lottos.size();
@@ -39,10 +39,9 @@ class LottosTest {
 	@DisplayName("금액별 로또 수량 구입")
 	void lotto_by_amount_buy(int amount, int lottoCount) throws Exception {
 		//given
-		Lottos lottos = new Lottos();
+		Lottos lottos = Lottos.of(amount);
 
 		//when
-		lottos.buy(amount);
 		int size = lottos.size();
 
 		//then
@@ -56,7 +55,7 @@ class LottosTest {
 		String[] lottoNumbers = {"1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12"};
 
 		//when
-		Lottos lottos = new Lottos(lottoNumbers);
+		Lottos lottos = Lottos.of(lottoNumbers);
 		List<Lotto> lottos1 = lottos.toList();
 
 		//then
@@ -69,7 +68,7 @@ class LottosTest {
 	@DisplayName("로또 자동, 수동 복합 구매")
 	void lotto_buy_composite() throws Exception {
 		//given
-		Lottos lottos = new Lottos(2000, new String[]{"1, 2, 3, 4, 5, 6"});
+		Lottos lottos = Lottos.of(2000, new String[]{"1, 2, 3, 4, 5, 6"});
 
 		//when
 		int size = lottos.size();

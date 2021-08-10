@@ -11,7 +11,7 @@ public class LottoApplication {
 		int money = InputView.inputMoney();
 		String[] manualNumbers = InputView.inputManualNumbers();
 
-		Lottos lottos = new Lottos(money, manualNumbers);
+		Lottos lottos = Lottos.of(money, manualNumbers);
 
 		ResultView.printLottos(lottos, manualNumbers.length);
 

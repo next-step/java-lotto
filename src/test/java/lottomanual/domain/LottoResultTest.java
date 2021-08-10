@@ -19,8 +19,7 @@ class LottoResultTest {
 	@DisplayName("당첨 번호와 보너스 번호 중복 예외")
 	void duplicate_bonus_number() throws Exception {
 		//given
-		Lottos lottos = new Lottos();
-		lottos.buy(toSet(Arrays.asList(1,2,3,4,5,6)));
+		Lottos lottos = Lottos.of(new String[]{"1,2,3,4,5,6"});
 
 		LottoResult lottoResult = new LottoResult(lottos);
 
@@ -38,10 +37,9 @@ class LottoResultTest {
 	@ParameterizedTest(name = "당첨 등수별 수량 {index} [{arguments}]")
 	@MethodSource
 	@DisplayName("당첨 등수별 수량")
-	void match(Set<LottoNumber> lottoNumbers, int quantity, boolean matchBonus, int matchingCount) throws Exception {
+	void match(String lottoNumbers, int quantity, boolean matchBonus, int matchingCount) throws Exception {
 		//given
-		Lottos lottos = new Lottos();
-		lottos.buy(lottoNumbers);
+		Lottos lottos = Lottos.of(lottoNumbers);
 		LottoResult lottoResult = new LottoResult(lottos);
 		lottoResult.match(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.valueOf(7));
 
@@ -56,25 +54,23 @@ class LottoResultTest {
 
 	private static Stream<Arguments> match() {
 		return Stream.of(
-				Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3, false, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,11,12,13)), 3, true, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4, false, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,11,12)), 4, true, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,11)), 5, false, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,7)), 5, true, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, false, 1),
-				Arguments.of(toSet(Arrays.asList(1,2,3,4,5,6)), 6, true, 1)
+				Arguments.of("1,2,3,11,12,13", 3, false, 1),
+				Arguments.of("1,2,3,11,12,13", 3, true, 1),
+				Arguments.of("1,2,3,4,11,12", 4, false, 1),
+				Arguments.of("1,2,3,4,11,12", 4, true, 1),
+				Arguments.of("1,2,3,4,5,11", 5, false, 1),
+				Arguments.of("1,2,3,4,5,7", 5, true, 1),
+				Arguments.of("1,2,3,4,5,6", 6, false, 1),
+				Arguments.of("1,2,3,4,5,6", 6, true, 1)
 		);
 	}
 
 	@ParameterizedTest(name = "당첨률 {index} [{arguments}]")
 	@MethodSource
 	@DisplayName("당첨률")
-	void rate(Set<LottoNumber> buyFirstLottoNumbers, Set<LottoNumber> buySecondLottoNumbers, double expectedRate) throws Exception {
+	void rate(String buyFirstLottoNumbers, String buySecondLottoNumbers, double expectedRate) throws Exception {
 		//given
-		Lottos lottos = new Lottos();
-		lottos.buy(buyFirstLottoNumbers);
-		lottos.buy(buySecondLottoNumbers);
+		Lottos lottos = Lottos.of(new String[]{buyFirstLottoNumbers, buySecondLottoNumbers});
 		LottoResult lottoResult = new LottoResult(lottos);
 		lottoResult.match(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.valueOf(7));
 
@@ -88,14 +84,10 @@ class LottoResultTest {
 
 	private static Stream<Arguments> rate() {
 		return Stream.of(
-				Arguments.of(toSet(Arrays.asList(11, 12, 13, 14, 15, 16)), toSet(Arrays.asList(11, 12, 13, 14, 15, 16)), 0.00),
-				Arguments.of(toSet(Arrays.asList(1, 2, 3, 4, 5, 6)), toSet(Arrays.asList(11, 12, 13, 14, 15, 16)), 0.50),
-				Arguments.of(toSet(Arrays.asList(1, 2, 3, 4, 5, 6)), toSet(Arrays.asList(1, 2, 3, 4, 5, 6)), 1.00)
+				Arguments.of("11, 12, 13, 14, 15, 16", "11, 12, 13, 14, 15, 16", 0.00),
+				Arguments.of("1, 2, 3, 4, 5, 6", "11, 12, 13, 14, 15, 16", 0.50),
+				Arguments.of("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6", 1.00)
 		);
-	}
-
-	private static Set<LottoNumber> toSet(List<Integer> list) {
-		return list.stream().map(LottoNumber::valueOf).collect(Collectors.toCollection(TreeSet::new));
 	}
 
 }
