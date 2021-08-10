@@ -1,20 +1,16 @@
 package lotto.model;
 
-import java.util.Random;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
-    private static final Random random = new Random();
-
     @Override
     public LottoNumbers generate() {
-        Stream<Integer> randomIntegerStream = Stream.generate(RandomLottoNumbersGenerator::generateRandomLottoNumber).limit(Lotto.LOTTO_NUMBER_SIZE);
+        List<Integer> numbers = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1).boxed().collect(Collectors.toList());
+        Collections.shuffle(numbers);
 
-        return new LottoNumbers(randomIntegerStream.collect(Collectors.toList()));
-    }
-
-    private static Integer generateRandomLottoNumber() {
-        return random.nextInt(LottoNumber.MAX_NUMBER) + 1;
+        return new LottoNumbers(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE));
     }
 }

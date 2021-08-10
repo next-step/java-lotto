@@ -16,4 +16,15 @@ public class Lotto {
     public LottoNumbers getNumbers() {
         return numbers;
     }
+
+    public int countCorrect(Lotto other) {
+        int equalCount = 0;
+        for (LottoNumber number : other.getNumbers()) {
+            if (numbers.contain(number)) {
+                equalCount++;
+            }
+        }
+
+        return equalCount;
+    }
 }
