@@ -1,28 +1,38 @@
 package lotto;
 
-import lotto.model.Lottos;
-import lotto.model.WinningNumbers;
-import lotto.model.WinningRank;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
 
 public class LottoApp {
+    private final InputView inputView;
+    private final ResultView resultView;
+
+    private LottoApp() {
+        this.inputView = new InputView();
+        this.resultView = new ResultView();
+    }
+
     public static void main(String[] args) {
-        InputView inputView = new InputView();
+        LottoApp lottoApp = new LottoApp();
+        lottoApp.run();
+    }
+
+    private void run() {
         inputView.printPurchasePriceInputMessage();
         int purchaseAmount = inputView.inputPurchasePrice();
         inputView.executeNextLine();
         Lottos lottos = new Lottos(purchaseAmount);
-
-        ResultView resultView = new ResultView();
         resultView.printLottoCount(lottos.getSize());
         resultView.printLottos(lottos);
 
         inputView.printWinningNumbersInputMessage();
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.inputWinningNumbers());
-        List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, winningNumbers);
+        Lotto winningNumbers = new Lotto(inputView::inputWinningNumbers);
+        inputView.printBonusNumberInputMessage();
+        List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, new DrawNumbers(winningNumbers,
+                LottoNumber.valueOf(inputView.inputBonusNumber())));
 
         resultView.printNewLine();
         resultView.printWinningStatistics(purchaseAmount, winningRanks);

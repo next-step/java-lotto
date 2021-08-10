@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.model.Lotto.NUMBER_COUNT;
 
 public class RandomLottoNumberGenerating implements LottoNumberGeneratingStrategy {
-    private static final int NUMBER_COUNT = 6;
 
     @Override
     public List<LottoNumber> generateNumbers() {

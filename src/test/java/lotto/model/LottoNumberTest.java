@@ -55,8 +55,8 @@ public class LottoNumberTest {
     public void getAllLottoNumbers_로또_번호는_1이상_45이하() {
         // given, when
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
-        LottoNumber firstLottoNumber = new LottoNumber(1);
-        LottoNumber lastLottoNumber = new LottoNumber(45);
+        LottoNumber firstLottoNumber = LottoNumber.valueOf(1);
+        LottoNumber lastLottoNumber = LottoNumber.valueOf(45);
 
         // then
         for (LottoNumber number : allLottoNumbers) {
@@ -80,21 +80,22 @@ public class LottoNumberTest {
     @CsvSource(value = {"1:1:0", "1:2:-1", "3:1:1", "2:3:-1"}, delimiter = ':')
     public void compareToLottoNumberTest(int number, int otherNumber, int result) {
         // given
-        LottoNumber lottoNumber = new LottoNumber(number);
-        LottoNumber otherLottoNumber = new LottoNumber(otherNumber);
+        LottoNumber lottoNumber = LottoNumber.valueOf(number);
+        LottoNumber otherLottoNumber = LottoNumber.valueOf(otherNumber);
 
         // when, then
         assertEquals(lottoNumber.compareTo(otherLottoNumber), result);
     }
 
-    @DisplayName("로또 번호 생성시, 1이상 45 이하의 번호가 아니면 Exception이 발생한다.")
+    @DisplayName("로또 번호 조회시, 1이상 45 이하의 번호면 정상적으로 조회되어야 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    public void createOutOfBoundsLottoNumberExceptionTest(int number) {
+    @ValueSource(ints = {1, 45})
+    public void getLottoNumberTest(int number) {
+        // given
+        LottoNumber lottoNumber = LottoNumber.valueOf(number);
+
         // when, then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(number))
-                .withMessage("로또 번호는 1이상 45이하의 숫자이어야 합니다.");
+        assertEquals(lottoNumber.getNumber(), number);
     }
 
     @DisplayName("로또 번호 조회시, 1이상 45 이하의 번호가 아니면 Exception이 발생한다.")

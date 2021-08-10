@@ -11,7 +11,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int number;
 
-    LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    static LottoNumber valueOf(int number) {
+    public static LottoNumber valueOf(int number) {
         validateRange(number);
         int numberIndex = number - GAP_BETWEEN_NUMBER_AND_INDEX_OF_ALL_LOTTO_NUMBERS;
         return ALL_LOTTO_NUMBERS.get(numberIndex);
@@ -40,6 +40,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static List<LottoNumber> getAllLottoNumbers() {
         return new ArrayList<>(ALL_LOTTO_NUMBERS);
+    }
+
+    int getNumber() {
+        return number;
     }
 
     @Override
