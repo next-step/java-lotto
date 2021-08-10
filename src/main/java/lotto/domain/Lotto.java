@@ -9,7 +9,12 @@ public class Lotto {
         this.numbers = numbers.generateRandomNumbers();
     }
 
+    public int getMatchCount(LottoNumbers numbers) {
+        return (int) numbers.getWinningNumbers().stream().filter(n -> this.numbers.contains(n)).count();
+    }
+
     public List<Integer> getLottoNumbers() {
         return this.numbers;
     }
+
 }
