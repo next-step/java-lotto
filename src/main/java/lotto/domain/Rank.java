@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public enum RANK {
+public enum Rank {
     ZERO(0, 0),
     ONE(1, 0),
     TWO(2, 0),
@@ -15,12 +15,12 @@ public enum RANK {
     private final int sameNumbersCount;
     private final int prizeMoney;
 
-    RANK(int sameNumbersCount, int prizeMoney) {
+    Rank(int sameNumbersCount, int prizeMoney) {
         this.sameNumbersCount = sameNumbersCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static RANK getRank(long sameCount) {
+    public static Rank getRank(long sameCount) {
         return Arrays.stream(values())
                 .filter(RANK -> RANK.sameNumbersCount == sameCount)
                 .findFirst()

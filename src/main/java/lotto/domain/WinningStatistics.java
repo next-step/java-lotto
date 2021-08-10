@@ -6,32 +6,32 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
-    private final Map<RANK, Integer> winningStatistics;
+    private final Map<Rank, Integer> winningStatistics;
 
     public WinningStatistics() {
         winningStatistics = new HashMap<>();
 
-        winningStatistics.put(RANK.ZERO, 0);
-        winningStatistics.put(RANK.ONE, 0);
-        winningStatistics.put(RANK.TWO, 0);
-        winningStatistics.put(RANK.THREE, 0);
-        winningStatistics.put(RANK.FOUR, 0);
-        winningStatistics.put(RANK.FIVE, 0);
-        winningStatistics.put(RANK.SIX, 0);
+        winningStatistics.put(Rank.ZERO, 0);
+        winningStatistics.put(Rank.ONE, 0);
+        winningStatistics.put(Rank.TWO, 0);
+        winningStatistics.put(Rank.THREE, 0);
+        winningStatistics.put(Rank.FOUR, 0);
+        winningStatistics.put(Rank.FIVE, 0);
+        winningStatistics.put(Rank.SIX, 0);
     }
 
-    public void setRankCount(List<RANK> rankList) {
-        for (RANK rank : rankList) {
+    public void setRankCount(List<Rank> rankList) {
+        for (Rank rank : rankList) {
             addCount(rank);
         }
     }
 
-    private void addCount(RANK rank) {
+    private void addCount(Rank rank) {
         int count = winningStatistics.get(rank);
         winningStatistics.put(rank, count + 1);
     }
 
-    public Map<RANK, Integer> getWinningStatistics() {
+    public Map<Rank, Integer> getWinningStatistics() {
         return Collections.unmodifiableMap(winningStatistics);
     }
 }

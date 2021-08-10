@@ -23,8 +23,8 @@ public class Lotties {
         }
     }
 
-    public List<RANK> getLottiesRank() {
-        List<RANK> rankList = new ArrayList<>();
+    public List<Rank> getLottiesRank() {
+        List<Rank> rankList = new ArrayList<>();
         for (Lotto lotto : lotties) {
             rankList.add(lotto.getRank());
         }

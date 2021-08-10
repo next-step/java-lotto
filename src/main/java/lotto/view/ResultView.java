@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotties;
 import lotto.domain.Lotto;
-import lotto.domain.RANK;
+import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
 import java.util.Map;
@@ -26,9 +26,9 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
 
-        Map<RANK, Integer> statistics = winningStatistics.getWinningStatistics();
+        Map<Rank, Integer> statistics = winningStatistics.getWinningStatistics();
 
-        for (RANK rank : RANK.values()) {
+        for (Rank rank : Rank.values()) {
             System.out.printf(WINNING_PRICE, rank.getSameNumbersCount(), rank.getPrizeMoney());
             System.out.printf(WINNING_COUNT, statistics.get(rank));
             System.out.println();

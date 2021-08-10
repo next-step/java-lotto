@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class Lotto {
     private final List<Integer> lottoNumber;
     private final NumberGenerator numberGenerator;
-    private RANK lottoRank;
+    private Rank lottoRank;
 
     public Lotto(NumberGenerator numberGenerator) {
         this.numberGenerator  = numberGenerator;
@@ -32,10 +32,10 @@ public class Lotto {
                         .stream()
                         .anyMatch(Predicate.isEqual(integer)))
                 .count();
-        lottoRank = RANK.getRank(sameCount);
+        lottoRank = Rank.getRank(sameCount);
     }
 
-    public RANK getRank() {
+    public Rank getRank() {
         return lottoRank;
     }
 }
