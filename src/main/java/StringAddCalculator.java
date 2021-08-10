@@ -7,7 +7,10 @@ public class StringAddCalculator {
     private List<String> numberList;
 
     public StringAddCalculator(String str) {
-        numberList = Arrays.asList(str.split(",|:"));
+        numberList = new ArrayList<>();
+        if (isVerifiableString(str)) {
+            numberList = Arrays.asList(str.split(",|:"));
+        }
     }
 
     public List<String> getNumberList() {
@@ -15,10 +18,20 @@ public class StringAddCalculator {
     }
 
     public int getSum() {
+        if (numberList == null) {
+            return 0;
+        }
         int sum = 0;
         for (String number : numberList) {
             sum += Integer.parseInt(number);
         }
         return sum;
+    }
+
+    private boolean isVerifiableString(String str) {
+        if (str == null || str.equals("")) {
+            return false;
+        }
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringAddCalculatorTest {
 
@@ -32,11 +33,16 @@ public class StringAddCalculatorTest {
     @DisplayName("null인 경우 0 반환 테스트")
     @Test
     void null_string_return_zero_test() {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(null);
+        assertThat(stringAddCalculator.getSum()).isEqualTo(0);
     }
 
     @DisplayName("하나의 수만 문자열로 입력될 경우 해당 문자열 반환 테스트")
-    @Test
-    void single_number_string_return_own_test() {
+    @ValueSource(strings = {"1", "3", "5"})
+    @ParameterizedTest
+    void single_number_string_return_own_test(String number) {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(number);
+        assertThat(stringAddCalculator.getSum()).isEqualTo(Integer.parseInt(number));
     }
 
     @DisplayName("두개의 숫자, 구분자 ,입력할 경우 합을 반환 테스트")
