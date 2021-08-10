@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.InputMismatchException;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMachineTest {
@@ -28,7 +26,7 @@ class LottoMachineTest {
     @DisplayName("입력받은 금액 만큼 로또를 생성한다.")
     void createLotto() {
         Lotties randomLotties = lottoMachine.createRandomLotties(new Money(LOTTO_MONEY));
-        Assertions.assertThat(randomLotties.getLottiesSize()).isEqualTo(LOTTO_MONEY / 1000);
+        Assertions.assertThat(randomLotties.size()).isEqualTo(LOTTO_MONEY / 1000);
     }
 
     @Test

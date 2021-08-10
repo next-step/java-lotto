@@ -15,7 +15,7 @@ public class ResultView {
     private static final String LINE = "-------";
 
     public void printLotties(Lotties lotties) {
-        System.out.printf(PURCHASE_MESSAGE, lotties.getLottiesSize());
+        System.out.printf(PURCHASE_MESSAGE, lotties.size());
         for (Lotto lotto : lotties.getLotties()) {
             System.out.println(lotto.getLottoNumber().toString());
         }

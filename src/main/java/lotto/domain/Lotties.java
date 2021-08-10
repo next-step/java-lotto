@@ -9,7 +9,7 @@ public class Lotties {
         this.lotties = new ArrayList<>(lotties);
     }
 
-    public int getLottiesSize() {
+    public int size() {
         return lotties.size();
     }
 
