@@ -5,37 +5,37 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ResultOfLottos {
+public class ResultOfLotto {
 
     private static final Integer WIN_COUNT_ZERO = 0;
 
-    private final Map<LottoRank, Integer> resultOfLottos;
+    private final Map<LottoRank, Integer> resultOfLotto;
 
-    public ResultOfLottos() {
+    public ResultOfLotto() {
         this(new EnumMap<>(LottoRank.class));
     }
 
-    public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
-        this.resultOfLottos = resultOfLottos;
+    public ResultOfLotto(Map<LottoRank, Integer> resultOfLotto) {
+        this.resultOfLotto = resultOfLotto;
     }
 
     public Integer sumMoney() {
-        return resultOfLottos.keySet()
+        return resultOfLotto.keySet()
             .stream()
-            .map(lottoNumber -> lottoNumber.getWinMoney() * resultOfLottos.get(lottoNumber))
+            .map(lottoNumber -> lottoNumber.getWinMoney() * resultOfLotto.get(lottoNumber))
             .reduce(Integer::sum).orElse(WIN_COUNT_ZERO);
     }
 
     public void put(LottoRank lottoRank) {
-        resultOfLottos.put(lottoRank, resultOfLottos.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
+        resultOfLotto.put(lottoRank, resultOfLotto.getOrDefault(lottoRank, WIN_COUNT_ZERO) + 1);
     }
 
     public Integer winCount(LottoRank lottoRank) {
-        if (!resultOfLottos.containsKey(lottoRank)) {
+        if (!resultOfLotto.containsKey(lottoRank)) {
             return WIN_COUNT_ZERO;
         }
 
-        return resultOfLottos.get(lottoRank);
+        return resultOfLotto.get(lottoRank);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class ResultOfLottos {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ResultOfLottos that = (ResultOfLottos) o;
-        return Objects.equals(resultOfLottos, that.resultOfLottos);
+        ResultOfLotto that = (ResultOfLotto) o;
+        return Objects.equals(resultOfLotto, that.resultOfLotto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultOfLottos);
+        return Objects.hash(resultOfLotto);
     }
 }
