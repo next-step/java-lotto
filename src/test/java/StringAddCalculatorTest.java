@@ -16,7 +16,7 @@ public class StringAddCalculatorTest {
     }
 
     @DisplayName("분리한 각 숫자의 합을 반환")
-    @CsvSource(value = {"1:2,3?6", "1,2?3"}, delimiter = '?')
+    @CsvSource(value = {"1,2,3?6", "1,2?3"}, delimiter = '?')
     @ParameterizedTest
     void divided_number_sum_test(String str, int expect) {
         StringAddCalculator stringAddCalculator = new StringAddCalculator(str);
@@ -45,14 +45,20 @@ public class StringAddCalculatorTest {
         assertThat(stringAddCalculator.getSum()).isEqualTo(Integer.parseInt(number));
     }
 
-    @DisplayName("두개의 숫자, 구분자 ,입력할 경우 합을 반환 테스트")
-    @Test
-    void multiple_number_string_return_sum_test() {
+    @DisplayName("두개의 숫자와 구분자 (,)입력할 경우 합을 반환 테스트")
+    @CsvSource(value = {"1,2,3?6", "3,5,7?15"}, delimiter = '?')
+    @ParameterizedTest
+    void multiple_number_string_return_sum_test(String str, int expect) {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(str);
+        assertThat(stringAddCalculator.getSum()).isEqualTo(expect);
     }
 
     @DisplayName("서로 다른 구분자를 사용했을 때도 합을 반환 테스트")
-    @Test
-    void multiple_delimiter_return_sum_test() {
+    @CsvSource(value = {"1,2:3?6", "3:5,7?15"}, delimiter = '?')
+    @ParameterizedTest
+    void multiple_delimiter_return_sum_test(String str, int expect) {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator(str);
+        assertThat(stringAddCalculator.getSum()).isEqualTo(expect);
     }
 
     @DisplayName("커스텀 구분자를 지정하여 사용했을 떄도 합을 반환 테스트.")
