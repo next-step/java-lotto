@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumberPicker;
+import lotto.model.LottoNumbers;
 import lotto.util.LottoNumberUtil;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +29,14 @@ public class LottoNumberUtilTest {
         assertThatThrownBy(() -> {
             LottoNumberUtil.validNumber(0);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @Test
+    void 숫자가_이미뽑힌건지_체크() {
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        assertThatThrownBy(() -> {
+            LottoNumberUtil.containsNumber(
+                    lottoNumbers.selectedNumber(), LottoNumberPicker.pickNumber(1));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

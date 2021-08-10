@@ -1,6 +1,7 @@
 package lotto;
 
 
+import lotto.model.LottoNumberPicker;
 import lotto.model.WinningNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,22 +16,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningNumberTest {
 
     private static final String TEST_NUMBER = "2,4,6,8,10,12";
+    private static final String SPLIT_TOKEN = ",";
     WinningNumber winningNumber;
 
     @BeforeEach
     void settingWinningNumber() {
-        winningNumber = new WinningNumber(Arrays.stream(TEST_NUMBER.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+        winningNumber = new WinningNumber(TEST_NUMBER);
     }
 
     @Test
     void 당첨번호_포함인지_체크() {
-        List<Integer> lottoNumber = Arrays.stream(TEST_NUMBER.split(","))
+        List<Integer> lottoNumber = Arrays.stream(TEST_NUMBER.split(SPLIT_TOKEN))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         for (int number : lottoNumber) {
-            assertThat(winningNumber.containsNumber(number))
+            assertThat(winningNumber.containsNumber(LottoNumberPicker.pickNumber(number)))
                     .isTrue();
         }
     }

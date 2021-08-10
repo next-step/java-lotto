@@ -25,7 +25,7 @@ public class LottoNumberUtil {
     }
 
     public static boolean containsNumber(List<LottoNumber> numbers, LottoNumber number) {
-        if (!numbers.contains(number)) {
+        if (numbers == null || numbers.size() < 1 || !numbers.contains(number)) {
             return false;
         }
         throw new IllegalArgumentException();
