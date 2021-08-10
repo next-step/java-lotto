@@ -8,14 +8,9 @@ public class WinOfLotto {
     private final LottoNumber bonusNumber;
 
     public WinOfLotto(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
-        addBonusNumber(winOfLottos, bonusNumber);
+        validateWinOfLottos(winOfLottos);
         this.winOfResultWithBonus = winOfLottos;
         this.bonusNumber = bonusNumber;
-    }
-
-    private void addBonusNumber(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
-        winOfLottos.add(bonusNumber);
-        validateWinOfLottos(winOfLottos);
     }
 
     private void validateWinOfLottos(List<LottoNumber> winOfLottos) {

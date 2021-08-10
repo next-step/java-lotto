@@ -26,7 +26,7 @@ public enum LottoRank {
             .orElse(LottoRank.ZERO_MATCH);
 
         // 2등인 경우
-        if (SIX_MATCH.equals(lottoNumber) && matchBonus) {
+        if (FIVE_MATCH.equals(lottoNumber) && matchBonus) {
             return FIVE_BONUS_MATCH;
         }
 
