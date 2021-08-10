@@ -53,7 +53,8 @@ public class GameTest {
         lottoList.add(new Lotto(winnerBallSet));
 
         game = new Game(lottoList);
-        game.createRewards(new Lotto(previousBallSet), bonusBall);
+        PreviousLotto previousLotto = PreviousLotto.of(new Lotto(previousBallSet), bonusBall);
+        game.match(previousLotto);
     }
 
     @Test

@@ -12,8 +12,6 @@ public enum Reward {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    public static List<Reward> rewards;
-
     private final int sameNumberCount;
     private final int money;
 
