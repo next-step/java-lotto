@@ -35,7 +35,10 @@ public class WinningsStatistics {
 
     private void makeStatisticsWinningsByRank(EnumMap<Rank, MatchingCount> winnings, final Lotto lotto) {
         MatchingCount matchingCount = lotto.getMatchingCount(winningLotto);
-        Rank rank = Rank.returnRank(matchingCount);
+
+        boolean matchBonus = lotto.addMatchingCount(bonusNumber);
+
+        Rank rank = Rank.returnRank(matchingCount, matchBonus);
 
         winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getValue()).increment());
     }

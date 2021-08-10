@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public enum Rank {
-    FIRST(new MatchingCount(6), 2_000_000_000),
-    SECOND(new MatchingCount(5), 30_000_000),
-    THIRD(new MatchingCount(5), 1_500_000),
-    FOURTH(new MatchingCount(4), 50_000),
-    FIFTH(new MatchingCount(3), 5_000),
-    MISS(new MatchingCount(0), 0);
+public enum RankTemp {
+    FIRST(new MatchingCount(6), 2_000_000_000, false),
+    SECOND(new MatchingCount(5), 30_000_000, true),
+    THIRD(new MatchingCount(5), 1_500_000, false),
+    FOURTH(new MatchingCount(4), 50_000, false),
+    FIFTH(new MatchingCount(3), 5_000, false),
+    MISS(new MatchingCount(0), 0, false);
 
     private static final int MIN_HITS_COUNT = 0;
     private static final int MAX_HITS_COUNT = 6;
@@ -14,13 +14,17 @@ public enum Rank {
 
     private final MatchingCount matchingCount;
     private final int winningMoney;
+    private final boolean bonusStatus;
 
-    Rank(final MatchingCount matchingCount, final int winningMoney) {
+    RankTemp(final MatchingCount matchingCount, final int winningMoney, final boolean bonusStatus) {
         this.matchingCount = matchingCount;
         this.winningMoney = winningMoney;
+        this.bonusStatus = bonusStatus;
     }
 
-    public static Rank returnRank(final MatchingCount matchingCount, boolean matchBonus) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public static RankTemp returnRank(final MatchingCount matchingCount, boolean matchBonus) {
         validateMatchingCount(matchingCount);
 
         if(FIFTH.matchingCount.getValue() > matchingCount.getValue()) {
@@ -33,15 +37,17 @@ public enum Rank {
             return THIRD;
         }
 
-        Rank matchingRank = MISS;
-        for (Rank rank : values()) {
+        RankTemp matchingRank = MISS;
+        for (RankTemp rank : values()) {
             matchingRank = findMatchingRank(matchingCount, rank, matchingRank);
         }
 
         return matchingRank;
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static Rank findMatchingRank(final MatchingCount matchingCount, final Rank rank, final Rank matchingRank) {
+    private static RankTemp findMatchingRank(final MatchingCount matchingCount, final RankTemp rank, final RankTemp matchingRank) {
         if (matchingRank != MISS) {
             return matchingRank;
         }
@@ -67,6 +73,10 @@ public enum Rank {
 
     public int totalWinningMoney(MatchingCount matchingCount) {
         return this.getWinningMoney() * matchingCount.getValue();
+    }
+
+    public boolean getBonusStatus() {
+        return this.bonusStatus;
     }
 
 }
