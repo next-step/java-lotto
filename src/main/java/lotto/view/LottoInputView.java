@@ -17,10 +17,7 @@ public class LottoInputView {
 
 	public static int inputLottoPurchaseMoney() {
 		System.out.println(BUY_MONEY_MESSAGE);
-		if (!scanner.hasNextInt()) {
-			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
-		}
-		return Integer.parseInt(scanner.nextLine());
+		return inputScannerTypeInteger();
 	}
 
 	public static String inputLastWinningLotto() {
@@ -30,6 +27,10 @@ public class LottoInputView {
 
 	public static int inputBonusNumber() {
 		System.out.println(BONUS_BALL_MESSAGE);
+		return inputScannerTypeInteger();
+	}
+
+	private static int inputScannerTypeInteger() {
 		if (!scanner.hasNextInt()) {
 			throw new InputMachTypeException(ErrorMessage.NUMBER_TYPE_ERROR_MESSAGE);
 		}
