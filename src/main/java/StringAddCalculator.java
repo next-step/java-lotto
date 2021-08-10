@@ -13,4 +13,12 @@ public class StringAddCalculator {
     public List<String> getNumberList() {
         return this.numberList;
     }
+
+    public int getSum() {
+        int sum = 0;
+        for (String number : numberList) {
+            sum += Integer.parseInt(number);
+        }
+        return sum;
+    }
 }
