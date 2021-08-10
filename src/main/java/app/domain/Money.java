@@ -22,7 +22,7 @@ public class Money {
         return money;
     }
 
-    public int getCount(int price) {
+    public int countLotto(int price) {
         return this.money / price;
     }
 }

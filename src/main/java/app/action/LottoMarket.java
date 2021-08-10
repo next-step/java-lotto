@@ -5,7 +5,6 @@ import app.domain.Winning;
 import app.domain.lotto.Lotteries;
 import app.domain.lotto.Lotto;
 import app.domain.lotto.WinnerLotto;
-import app.strategy.LottoMatcher;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,7 +17,6 @@ public class LottoMarket {
 
     private LottoMachine machine;
     private Lotteries myLottoList;
-    private LottoMatcher matcher = new LottoMatcher();
 
     public LottoMarket(LottoMachine machine, Lotteries list) {
         this.machine = machine;
@@ -26,7 +24,7 @@ public class LottoMarket {
     }
 
     public int buy(Money money) {
-        int count = money.getCount(PRICE);
+        int count = money.countLotto(PRICE);
         for (int i = 0; i < count; i++) {
             myLottoList.buyLotto(machine);
         }
@@ -37,7 +35,7 @@ public class LottoMarket {
         List<Winning> result = new ArrayList<>();
 
         for (Lotto myLotto : myLottoList.getAll()) {
-            Winning winning = matcher.getWinning(myLotto, winner);
+            Winning winning = myLotto.getWinning(winner.getLotto().getNumbers(), winner.getBonus());
             if (!winning.isNotThing()) {
                 result.add(winning);
             }

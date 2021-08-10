@@ -1,5 +1,7 @@
 package app.domain.lotto;
 
+import app.domain.Winning;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,17 +48,25 @@ public class Lotto {
     }
 
     private void arrangeNumbers() {
-        this.numbers = numbers.stream().sorted(LottoNum::compareTo).collect(Collectors.toList());
+        this.numbers = numbers.stream()
+                .sorted(LottoNum::compareTo)
+                .collect(Collectors.toList());
     }
 
-    public int matchLotto(List<LottoNum> winnerNumberList) {
+    public int matchLotto(List<LottoNum> lottoNumbers) {
         int count = 0;
         for (LottoNum number : this.numbers) {
-            if (winnerNumberList.contains(number)) {
+            if (lottoNumbers.contains(number)) {
                 count++;
             }
         }
         return count;
+    }
+
+    public Winning getWinning(List<LottoNum> winner, LottoNum bonus){
+        int matchCount = matchLotto(winner);
+        boolean matchBonus = numbers.contains(bonus);
+        return Winning.find(matchCount, matchBonus);
     }
 
     public boolean contains(LottoNum bonus) {
