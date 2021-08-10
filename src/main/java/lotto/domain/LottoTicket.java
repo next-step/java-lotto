@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public final class LottoTicket {
 
     private static final int LOTTO_TICKET_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
