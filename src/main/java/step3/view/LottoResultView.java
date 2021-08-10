@@ -2,7 +2,7 @@ package step3.view;
 
 import step3.LottoBucket;
 import step3.LottoWinStatistics;
-import step3.enums.Match;
+import step3.enums.DrawResult;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +22,7 @@ public class LottoResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<String> outputList =  Arrays.stream(Match.values())
+        List<String> outputList =  Arrays.stream(DrawResult.values())
                 .filter(win -> win.matchCount() > 0)
                 .map(win -> {
                     int count = lottoWinStatistics.countLottoEntriesByMatch(win);
@@ -41,7 +41,7 @@ public class LottoResultView {
         return outputList;
     }
 
-    private static String getBonusBallString(Match win) {
+    private static String getBonusBallString(DrawResult win) {
         return win.bonusMatch() ? ", 보너스 볼" : "";
     }
 

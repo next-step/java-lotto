@@ -24,7 +24,7 @@ public class LottoEntry {
         }
     }
 
-    public int countMatch(LottoEntry lottoNumbers) {
+    public int countMatches(LottoEntry lottoNumbers) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();

@@ -1,12 +1,12 @@
 package step3;
 
-import step3.enums.Match;
+import step3.enums.DrawResult;
 
 public class LottoWinStatistics {
 
     private final LottoPrice lottoPrice;
     private final DrawnLotto winnersLottoEntry;
-    private final MatchGroups matchGroups = new MatchGroups();
+    private final DrawResultGroups drawResultGroups = new DrawResultGroups();
 
     public LottoWinStatistics(LottoPrice price, DrawnLotto winnersLottoEntry) {
         this.lottoPrice = price;
@@ -14,9 +14,9 @@ public class LottoWinStatistics {
     }
 
     public void addLottoSample(LottoEntry sampleLottoEntry) {
-        Match match = Match.getMatchResult(winnersLottoEntry, sampleLottoEntry);
+        DrawResult drawResult = winnersLottoEntry.getDrawResult(sampleLottoEntry);
 
-        matchGroups.addLottoOnMatchGroup(match, sampleLottoEntry);
+        drawResultGroups.addLottoOnMatchGroup(drawResult, sampleLottoEntry);
     }
 
     public void addLottoSamples(LottoBucket lottoBucket) {
@@ -24,22 +24,22 @@ public class LottoWinStatistics {
     }
 
     public double getProfitRate() {
-        int totalCost = lottoPrice.getQuote(matchGroups.countAllLottoEntries());
+        int totalCost = lottoPrice.getQuote(drawResultGroups.countAllLottoEntries());
 
         if (totalCost == 0) {
             return 0.0;
         }
 
-        double earning = matchGroups.keySet().stream()
+        double earning = drawResultGroups.keySet().stream()
                 .parallel()
-                .map(w -> w.prize() * matchGroups.getBucket(w).size())
+                .map(w -> w.prize() * drawResultGroups.getBucket(w).size())
                 .reduce(Integer::sum)
                 .orElse(0);
 
         return earning / totalCost;
     }
 
-    public int countLottoEntriesByMatch(Match match) {
-        return matchGroups.countLottoEntriesByMatch(match);
+    public int countLottoEntriesByMatch(DrawResult drawResult) {
+        return drawResultGroups.countLottoEntriesByMatch(drawResult);
     }
 }

@@ -2,7 +2,7 @@ package step3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.enums.Match;
+import step3.enums.DrawResult;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,8 +49,8 @@ public class MatchStatisticsTest {
 
         lottoWinStatistics.addLottoSamples(lottoBucket);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByMatch(Match.THREE_MATCH)).isEqualTo(1);
+        assertThat(lottoWinStatistics.countLottoEntriesByMatch(DrawResult.THREE_MATCH)).isEqualTo(1);
 
-        assertThat(lottoWinStatistics.countLottoEntriesByMatch(Match.FOUR_MATCH)).isEqualTo(0);
+        assertThat(lottoWinStatistics.countLottoEntriesByMatch(DrawResult.FOUR_MATCH)).isEqualTo(0);
     }
 }
