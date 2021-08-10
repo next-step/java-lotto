@@ -3,6 +3,8 @@ package step3.domain.lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import step3.domain.money.Cache;
 import java.util.HashMap;
 import java.util.List;
@@ -22,15 +24,16 @@ class LottosTest {
         givenWinOfLotto = new WinOfLotto(winOfLottoNumbers, givenBonusNumber);
     }
 
-    @Test
-    void 로또_맞은_개수가_6개_이면서_보너스를_포함하지_않는다면_당첨_금액은_2_000_000_000원이다() {
+    @CsvSource(value = {"6,6,false,2000000000", "6,10,true,30000000"})
+    @ParameterizedTest(name = "로또당첨 개수가 {0}개이면서 보너스가 {1}이면 당첨 금액은 {2}원이다")
+    void lottoMatch(int matchCount, int bonusNumber, boolean bonusMatch, int money) {
         // Given
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
-        expectedResult.put(LottoRank.find(6, false), 1);
+        expectedResult.put(LottoRank.find(matchCount, bonusMatch), 1);
 
         LottoMatch expectedLottoMatch = new LottoMatch(expectedResult);
 
-        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, bonusNumber);
 
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         Lottos lottos = lottoMachine.sell(new Cache(1000));
@@ -40,28 +43,7 @@ class LottosTest {
 
         // Then
         assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
-        assertThat(expectedLottoMatch.sumMoney()).isEqualTo(new Cache(2_000_000_000));
-    }
-
-    @Test
-    void 로또_맞은_개수가_6개_이면서_보너스를_포함한다면_당첨_금액은_30_000_000원이다() {
-        // Given
-        Map<LottoRank, Integer> expectedResult = new HashMap<>();
-        expectedResult.put(LottoRank.find(6, true), 1);
-
-        LottoMatch expectedLottoMatch = new LottoMatch(expectedResult);
-
-        List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 10);
-
-        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
-        Lottos lottos = lottoMachine.sell(new Cache(1000));
-
-        // When
-        LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
-
-        // Then
-        assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
-        assertThat(expectedLottoMatch.sumMoney()).isEqualTo(new Cache(30_000_000));
+        assertThat(expectedLottoMatch.sumMoney()).isEqualTo(new Cache(money));
     }
 
     @Test
