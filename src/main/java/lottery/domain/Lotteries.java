@@ -25,7 +25,7 @@ public class Lotteries {
 
     public LotteryStatisticDto getLotteryStatisticDto(final WinningLotteryStrategy winningLotteryStrategy) {
         Map<LotteryResult, Integer> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
-        return new LotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
+        return winningLotteryStrategy.getLotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
     }
 
     public List<LotteryDto> getLotteriesDto() {
