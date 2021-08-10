@@ -3,7 +3,10 @@ package lotto.view;
 import java.util.Scanner;
 
 public class LottoAutoInputView {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/step2
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
 
@@ -19,10 +22,18 @@ public class LottoAutoInputView {
         return scanner.nextLine();
     }
 
+<<<<<<< HEAD
     public String inputBonusNumber() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
+=======
+    public int inputBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+>>>>>>> origin/step2
     }
 }

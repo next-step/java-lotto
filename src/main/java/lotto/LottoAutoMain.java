@@ -7,4 +7,8 @@ public class LottoAutoMain {
         LottoAutoController controller = new LottoAutoController();
         controller.start();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/step2

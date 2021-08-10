@@ -89,4 +89,8 @@ class StringAdditionCalculatorTest {
     void customAndColons(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/step2
