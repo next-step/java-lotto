@@ -42,6 +42,10 @@ public class LottoMatch {
         return lottoMatch.get(lottoRank);
     }
 
+    public Profit calcProfit(int lottoCount) {
+        return Profit.calcLottoProfit(sumMoney(), lottoCount);
+    }
+
     @Override
     public String toString() {
         return "ResultOfLottos{" +

@@ -3,7 +3,6 @@ package step3;
 import step3.domain.lotto.LottoMachine;
 import step3.domain.lotto.LottoMatch;
 import step3.domain.lotto.LottoNumber;
-import step3.domain.lotto.LottoStatistics;
 import step3.domain.lotto.Lottos;
 import step3.domain.lotto.Profit;
 import step3.domain.lotto.RandomStrategy;
@@ -38,7 +37,8 @@ public class LottoGame {
 
         Lottos lottos = user.getLottos();
         LottoMatch lottoMatch = lottos.match(winOfLotto);
-        Profit profit = LottoStatistics.calculateLottoProfit(lottoMatch, user.getLottos().size());
+
+        Profit profit = lottoMatch.calcProfit(user.getLottos().size());
 
         ResultView.printLottoStatistics(lottoMatch, profit);
     }

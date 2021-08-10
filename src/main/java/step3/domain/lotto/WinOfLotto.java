@@ -15,10 +15,10 @@ public class WinOfLotto {
 
     private void addBonusNumber(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
         winOfLottos.add(bonusNumber);
-        validateWinOfLottos(winOfLottos, bonusNumber);
+        validateWinOfLottos(winOfLottos);
     }
 
-    private void validateWinOfLottos(List<LottoNumber> winOfLottos, LottoNumber bonusNumber) {
+    private void validateWinOfLottos(List<LottoNumber> winOfLottos) {
         boolean duplication = winOfLottos.stream()
             .distinct()
             .count() != winOfLottos.size();

@@ -1,16 +1,8 @@
-package step3.domain;
+package step3.domain.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.lotto.LottoMachine;
-import step3.domain.lotto.LottoMatch;
-import step3.domain.lotto.LottoNumber;
-import step3.domain.lotto.LottoRank;
-import step3.domain.lotto.LottoStatistics;
-import step3.domain.lotto.Lottos;
-import step3.domain.lotto.Profit;
-import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +11,7 @@ import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static step3.domain.LottoNumbersFactory.buildLottoNumbers;
 
-class LottoStatisticsTest {
+class LottosTest {
 
     private WinOfLotto givenWinOfLotto;
 
@@ -72,6 +64,7 @@ class LottoStatisticsTest {
         assertThat(expectedLottoMatch).isEqualTo(lottoMatch);
     }
 
+
     @DisplayName("3등에 당첨되면 수익률은 5가 된다")
     @Test
     void profilt() {
@@ -84,11 +77,9 @@ class LottoStatisticsTest {
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
 
         // When
-        Profit profit = LottoStatistics.calculateLottoProfit(lottoMatch, lottos.size());
+        Profit profit = lottoMatch.calcProfit(lottos.size());
 
         // Then
         assertThat(profit).isEqualTo(expectedLottoProfit);
     }
-
-
 }
