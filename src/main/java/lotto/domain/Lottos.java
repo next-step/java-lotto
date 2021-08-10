@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
 
 public final class Lottos {
@@ -26,16 +25,6 @@ public final class Lottos {
 
     public List<Lotto> getLottos() {
         return this.lottos;
-    }
-
-    public EnumMap<Rank, MatchingCount> getWinnings(Lotto winningLotto) {
-        EnumMap<Rank, MatchingCount> winnings = new EnumMap<>(Rank.class);
-        for (Lotto lotto : lottos) {
-            MatchingCount matchingCount = lotto.getMatchingCount(winningLotto);
-            Rank rank = Rank.returnRank(matchingCount);
-            winnings.put(rank, new MatchingCount(winnings.getOrDefault(rank, new MatchingCount()).getValue()).increment());
-        }
-        return winnings;
     }
 
 }

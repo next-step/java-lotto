@@ -59,22 +59,21 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public MatchingCount getMatchingCount(Lotto winningLotto) {
+    public MatchingCount getMatchingCount(Lotto lotto) {
         MatchingCount matchingCount = new MatchingCount();
 
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchingCount = winningLotto.containNumber(lottoNumber, matchingCount);
+            matchingCount = lotto.containNumber(lottoNumber, matchingCount);
         }
 
         return matchingCount;
     }
 
-    public MatchingCount containNumber(final LottoNumber lottoNumber, MatchingCount matchingCount) {
+    private MatchingCount containNumber(final LottoNumber lottoNumber, MatchingCount matchingCount) {
         if (this.lottoNumbers.contains(lottoNumber)) {
             return matchingCount.increment();
         }
         return matchingCount;
     }
-
 
 }

@@ -46,7 +46,7 @@ public enum Rank {
         }
     }
 
-    public int getWinningMoney() {
+    private int getWinningMoney() {
         return this.winningMoney;
     }
 
@@ -54,4 +54,7 @@ public enum Rank {
         return this.matchingCount;
     }
 
+    public int totalWinningMoney(MatchingCount matchingCount) {
+        return this.getWinningMoney() * matchingCount.getValue();
+    }
 }

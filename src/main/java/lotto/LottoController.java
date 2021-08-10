@@ -23,9 +23,9 @@ public final class LottoController {
             resultView.printLottos(lottos);
 
             Lotto winningLotto = Lotto.valueOf(inputView.inputWinningNumbers());
-
-            EnumMap<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
-            double earningsRate = lottoMachine.calculateEarningsRate(winnings, totalCount);
+            WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(5));
+            EnumMap<Rank, MatchingCount> winnings = winningsStatistics.makeStatisticsWinningsByRank(lottos);
+            double earningsRate = winningsStatistics.calculateEarningsRate(winnings, totalCount);
 
             resultView.printStatistics(winnings);
             resultView.printEarningsRate(earningsRate);

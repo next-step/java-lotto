@@ -32,46 +32,4 @@ class LottoMachineTest {
         }).withMessageMatching("최소 1000원 이상 지불하셔야 합니다.");
     }
 
-    @DisplayName("등수정보를 가져온다.")
-    @Test
-    void makeStatisticsWinnings_등수정보() {
-        Lottos lottos = new Lottos(
-                Arrays.asList(
-                        Lotto.valueOf("5,10,15,20,25,30"),
-                        Lotto.valueOf("5,10,15,20,25,1"),
-                        Lotto.valueOf("5,10,15,20,1,2"),
-                        Lotto.valueOf("5,10,15,1,2,3"),
-                        Lotto.valueOf("5,10,1,2,3,4"),
-                        Lotto.valueOf("1,2,3,4,6,7")
-                )
-        );
-        Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
-        Map<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
-
-        assertAll(
-                () -> assertThat(winnings.get(Rank.FIRST)).isEqualTo(new MatchingCount(1)),
-                () -> assertThat(winnings.get(Rank.SECOND)).isEqualTo(new MatchingCount(1)),
-                () -> assertThat(winnings.get(Rank.THIRD)).isEqualTo(new MatchingCount(1)),
-                () -> assertThat(winnings.get(Rank.FOURTH)).isEqualTo(new MatchingCount(1)),
-                () -> assertThat(winnings.get(Rank.MISS)).isEqualTo(new MatchingCount(2))
-        );
-    }
-
-    @DisplayName("수익률을 가져온다.")
-    @Test
-    void calculateEarningsRate_수익률() {
-        Lottos lottos = new Lottos(
-                Arrays.asList(
-                        Lotto.valueOf("5,10,15,20,1,2"),
-                        Lotto.valueOf("5,10,15,1,2,3"),
-                        Lotto.valueOf("5,10,1,2,3,4"),
-                        Lotto.valueOf("1,2,3,4,6,7")
-                )
-        );
-        Lotto winningLotto = Lotto.valueOf("5,10,15,20,25,30");
-        Map<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
-
-        assertThat(lottoMachine.calculateEarningsRate(winnings, 4)).isEqualTo(13.75);
-    }
-
 }

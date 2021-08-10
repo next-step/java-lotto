@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -19,9 +18,9 @@ class RankTest {
 
     @DisplayName("등수에 맞는 금액을 가져온다.")
     @ParameterizedTest
-    @CsvSource(value = {"MISS:0", "FOURTH:5000", "THIRD:50000", "SECOND:1500000", "FIRST:2000000000"}, delimiter = ':')
-    void getWinningMoney_등수에_맞는_금액(String rankName, int winningMoney) {
-        assertThat(Rank.valueOf(rankName).getWinningMoney()).isEqualTo(winningMoney);
+    @CsvSource(value = {"MISS:1:0", "FOURTH:2:10000", "THIRD:5:250000", "SECOND:2:3000000", "FIRST:1:2000000000"}, delimiter = ':')
+    void getWinningMoney_등수에_맞는_금액(String rankName, int count, int totalMoney) {
+        assertThat(Rank.valueOf(rankName).totalWinningMoney(new MatchingCount(count))).isEqualTo(totalMoney);
     }
 
 }

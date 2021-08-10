@@ -15,13 +15,11 @@ public final class AutoPurchaseStrategy implements PurchaseStrategy {
 
     public List<Integer> generateLottoNumber() {
         Collections.shuffle(lottoNumber);
-
         List<Integer> pickedNumber = new ArrayList<>();
+
         for (int i = 0; i < LIMIT_SIZE; i++) {
             pickedNumber.add(lottoNumber.get(i));
         }
-
-        Collections.sort(pickedNumber);
 
         return pickedNumber;
     }

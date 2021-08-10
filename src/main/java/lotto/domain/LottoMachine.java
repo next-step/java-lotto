@@ -32,16 +32,4 @@ public final class LottoMachine {
         return lottos;
     }
 
-    public EnumMap<Rank, MatchingCount> makeStatisticsWinnings(final Lottos lottos, final Lotto winningLotto) {
-        return lottos.getWinnings(winningLotto);
-    }
-
-    public double calculateEarningsRate(final Map<Rank, MatchingCount> winnings, final int totalCount) {
-        int totalPrize = 0;
-        for (Rank rank : winnings.keySet()) {
-            totalPrize += rank.getWinningMoney() * winnings.get(rank).getValue();
-        }
-        return Math.round((float) totalPrize / (totalCount * 10)) / 100.0;
-    }
-
 }
