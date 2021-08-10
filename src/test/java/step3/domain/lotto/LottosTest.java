@@ -44,7 +44,7 @@ class LottosTest {
     }
 
     @Test
-    void 로또_맞든_개수가_6개_이면서_보너스를_포함한다면_당첨_금액은_30_000_000원이다() {
+    void 로또_맞은_개수가_6개_이면서_보너스를_포함한다면_당첨_금액은_30_000_000원이다() {
         // Given
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
         expectedResult.put(LottoRank.find(6, true), 1);
