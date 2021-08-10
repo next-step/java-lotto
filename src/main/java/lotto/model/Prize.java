@@ -36,7 +36,7 @@ public enum Prize {
 	}
 
 	public static Prize getWinnersStatus(int countOfMatch, boolean matchBonus) {
-		if (SECOND.getCountOfMatch() == countOfMatch && matchBonus) {
+		if (SECOND.countOfMatch == countOfMatch && matchBonus) {
 			return SECOND;
 		}
 		return Arrays.stream(Prize.values())
