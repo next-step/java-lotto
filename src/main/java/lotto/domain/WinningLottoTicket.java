@@ -9,17 +9,18 @@ public class WinningLottoTicket {
     private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusLottoNumber;
 
-    private WinningLottoTicket(List<Integer> winningLottoNumberList, LottoNumber bonusLottoNumber) {
-        this.winningLottoTicket = LottoTicket.of(winningLottoNumberList);
+    private WinningLottoTicket(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        validate(winningLottoTicket, bonusLottoNumber);
+        this.winningLottoTicket = winningLottoTicket;
         this.bonusLottoNumber = bonusLottoNumber;
-        validate();
+
     }
 
-    public static WinningLottoTicket of(List<Integer> winningLottoNumberList, LottoNumber bonusLottoNumber) {
-        return new WinningLottoTicket(winningLottoNumberList, bonusLottoNumber);
+    public static WinningLottoTicket of(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        return new WinningLottoTicket(winningLottoTicket, bonusLottoNumber);
     }
 
-    private void validate() {
+    private void validate(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
         if (winningLottoTicket.contains(bonusLottoNumber)) {
             throw new InvalidBonusNumberException();
         }

@@ -18,19 +18,15 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean bonusMatch) {
-        if (bonusMatch && countOfMatch == SECOND.getCountOfMatch()) {
+        if (bonusMatch && countOfMatch == SECOND.countOfMatch) {
             return SECOND;
         }
-        if (!bonusMatch && countOfMatch == THIRD.getCountOfMatch()) {
+        if (!bonusMatch && countOfMatch == THIRD.countOfMatch) {
             return THIRD;
         }
         return Arrays.stream(LottoRank.values())

@@ -46,7 +46,7 @@ public class LottoResultTests {
 
         LottoTickets lottoTickets = getLottoTickets();
 
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningLottoNumberList, LottoNumber.of(bonusNumber));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(winningLottoNumberList), LottoNumber.of(bonusNumber));
 
         return LottoResult.of(lottoTickets, winningLottoTicket);
     }

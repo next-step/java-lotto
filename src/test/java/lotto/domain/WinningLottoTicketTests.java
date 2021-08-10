@@ -16,15 +16,15 @@ public class WinningLottoTicketTests {
     @DisplayName("생성 테스트")
     @Test
     void validInputCreateTest() {
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 
-        assertThat(winningLottoTicket).isEqualTo(WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(7)));
+        assertThat(winningLottoTicket).isEqualTo(WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)));
     }
 
     @DisplayName("contains 테스트")
     @Test
     void containsTest() {
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 
         assertThat(winningLottoTicket.contains(LottoNumber.of(6))).isEqualTo(true);
     }
@@ -34,7 +34,7 @@ public class WinningLottoTicketTests {
     void getMatchRankFirstTest() {
         LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
 
         assertThat(winningLottoTicket.match(lottoTicket)).isEqualTo(LottoRank.FIRST);
     }
@@ -44,7 +44,7 @@ public class WinningLottoTicketTests {
     void getMatchRankSecondTest() {
         LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoNumber.of(6));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(6));
 
         assertThat(winningLottoTicket.match(lottoTicket)).isEqualTo(LottoRank.SECOND);
     }
@@ -52,12 +52,9 @@ public class WinningLottoTicketTests {
     @DisplayName("보너스 번호를 입력할때 로또에 있는 번호면 exception 테스트")
     @Test
     void InvalidBonusNumberExceptionTest() {
-
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         assertThatExceptionOfType(InvalidBonusNumberException.class)
                 .isThrownBy(() -> {
-                    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), LottoNumber.of(7));
+                    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(7));
                 }).withMessageMatching("보너스 번호가 로또 번호에 존재 합니다.");
     }
 
