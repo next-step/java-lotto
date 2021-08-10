@@ -11,10 +11,8 @@ public class LottoStore {
         this.lottoPrice = lottoPrice;
     }
 
-    public LottoBucket buyLottoEntries(int budget, LottoNumberGenerator lottoNumberGenerator) {
-        int numberOfLottoEntries = lottoPrice.getMaxQuantity(budget);
-
-        return Collections.nCopies(numberOfLottoEntries, 0)
+    public LottoBucket buyLottoEntries(int numberOf, LottoNumberGenerator lottoNumberGenerator) {
+        return Collections.nCopies(numberOf, 0)
                 .parallelStream()
                 .map(x -> new LottoEntry(lottoNumberGenerator.generateNumbersForLotto()))
                 .collect(LottoBucket::new, LottoBucket::add, LottoBucket::merge);

@@ -32,10 +32,10 @@ public class LottoResultView {
                 })
                 .collect(Collectors.toList());
 
-        listReverse(outputList).forEach(System.out::println);
+        reverseList(outputList).forEach(System.out::println);
     }
 
-    private static List<String> listReverse(List<String> outputList) {
+    private static List<String> reverseList(List<String> outputList) {
         Collections.reverse(outputList);
 
         return outputList;
