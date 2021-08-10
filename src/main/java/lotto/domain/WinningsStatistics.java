@@ -7,6 +7,7 @@ public final class WinningsStatistics {
 
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "당첨번호와 보너스번호가 중복되었습니다.";
     private static final int INIT = 0;
+    private static final int LOTTO_PRICE = 1000;
 
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
@@ -56,7 +57,7 @@ public final class WinningsStatistics {
             totalPrize += result.calculateTotalWinningMoney();
         }
 
-        return (double) totalPrize / (totalCount * 1000);
+        return (double) totalPrize / (totalCount * LOTTO_PRICE);
     }
 
 }
