@@ -6,7 +6,7 @@ import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoStatistics;
 import step3.domain.lotto.Profit;
 import step3.domain.lotto.RandomStrategy;
-import step3.domain.lotto.ResultOfLottos;
+import step3.domain.lotto.LottoMatch;
 import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
 import step3.domain.money.Money;
@@ -32,12 +32,13 @@ public class LottoGame {
 
         List<LottoNumber> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
         LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
+        winOfLottoNumbers.add(lottoBonusNumber);
 
-        WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
+        WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers,lottoBonusNumber);
 
-        ResultOfLottos resultOfLottos = LottoStatistics.calcLottoOfStatistics(winOfLotto, user.getLottos());
-        Profit profit = LottoStatistics.calculateLottoProfit(resultOfLottos, user.getLottos().size());
+        LottoMatch lottoMatch = LottoStatistics.calcLottoOfStatistics(winOfLotto, user.getLottos());
+        Profit profit = LottoStatistics.calculateLottoProfit(lottoMatch, user.getLottos().size());
 
-        ResultView.printLottoStatistics(resultOfLottos, profit);
+        ResultView.printLottoStatistics(lottoMatch, profit);
     }
 }

@@ -2,7 +2,7 @@ package step3.view;
 
 import step3.domain.lotto.Lotto;
 import step3.domain.lotto.Profit;
-import step3.domain.lotto.ResultOfLottos;
+import step3.domain.lotto.LottoMatch;
 import java.util.List;
 
 public class ResultView {
@@ -18,11 +18,11 @@ public class ResultView {
         lottos.forEach(lotto -> System.out.println(lotto.numbers().toString()));
     }
 
-    public static void printLottoStatistics(ResultOfLottos resultOfLottos, Profit profit) {
+    public static void printLottoStatistics(LottoMatch lottoMatch, Profit profit) {
         System.out.println("당첨 통계");
         System.out.println("-----------");
 
-        printLottoStatistics(resultOfLottos);
+        printLottoStatistics(lottoMatch);
         printLottoProfit(profit);
     }
 
@@ -30,8 +30,8 @@ public class ResultView {
         System.out.println("총 수익률은 " + profit + "% 입니다.");
     }
 
-    private static void printLottoStatistics(ResultOfLottos resultOfLottos) {
-        resultOfLottos.getResultOfLottos().forEach((lottoMatch, integer) ->
+    private static void printLottoStatistics(LottoMatch resultOfLottos) {
+        resultOfLottos.getLottoMatch().forEach((lottoMatch, integer) ->
             System.out.println(lottoMatch.getNumber() + "개 일치 ("
                 + lottoMatch.getWinMoney() + " 원) - "
                 + resultOfLottos.winCount(lottoMatch) + "개"));

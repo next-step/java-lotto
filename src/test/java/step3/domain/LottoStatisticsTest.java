@@ -9,7 +9,7 @@ import step3.domain.lotto.LottoNumber;
 import step3.domain.lotto.LottoRank;
 import step3.domain.lotto.LottoStatistics;
 import step3.domain.lotto.Profit;
-import step3.domain.lotto.ResultOfLottos;
+import step3.domain.lotto.LottoMatch;
 import step3.domain.lotto.WinOfLotto;
 import step3.domain.money.Cache;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ class LottoStatisticsTest {
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
         expectedResult.put(LottoRank.find(5, true), 1);
 
-        ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedResult);
+        LottoMatch expectedLottoMatch = new LottoMatch(expectedResult);
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 8, 10);
 
@@ -44,11 +44,11 @@ class LottoStatisticsTest {
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
-        ResultOfLottos actualResultOfLottos = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
+        LottoMatch actualLottoMatch = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
 
         // Then
-        assertThat(expectedResultOfLottos).isEqualTo(actualResultOfLottos);
-        assertThat(expectedResultOfLottos.sumMoney()).isEqualTo(new Cache(30_000_000));
+        assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
+        assertThat(expectedLottoMatch.sumMoney()).isEqualTo(new Cache(30_000_000));
     }
 
     @Test
@@ -58,7 +58,7 @@ class LottoStatisticsTest {
         LottoRank three_match = LottoRank.find(3, false);
         expectedLottoStrategy.put(three_match, 1);
 
-        ResultOfLottos expectedResultOfLottos = new ResultOfLottos(expectedLottoStrategy);
+        LottoMatch expectedLottoMatch = new LottoMatch(expectedLottoStrategy);
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
@@ -66,10 +66,10 @@ class LottoStatisticsTest {
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
         // When
-        ResultOfLottos resultOfLottos = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
+        LottoMatch lottoMatch = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
 
         // Then
-        assertThat(expectedResultOfLottos).isEqualTo(resultOfLottos);
+        assertThat(expectedLottoMatch).isEqualTo(lottoMatch);
     }
 
     @DisplayName("3등에 당첨되면 수익률은 5가 된다")
@@ -81,10 +81,10 @@ class LottoStatisticsTest {
         LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
         List<Lotto> lottos = lottoMachine.sell(new Cache(1000));
 
-        ResultOfLottos resultOfLottos = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
+        LottoMatch lottoMatch = LottoStatistics.calcLottoOfStatistics(givenWinOfLotto, lottos);
 
         // When
-        Profit profit = LottoStatistics.calculateLottoProfit(resultOfLottos, lottos.size());
+        Profit profit = LottoStatistics.calculateLottoProfit(lottoMatch, lottos.size());
 
         // Then
         assertThat(profit).isEqualTo(expectedLottoProfit);

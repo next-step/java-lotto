@@ -4,20 +4,20 @@ import java.util.List;
 
 public class LottoStatistics {
 
-    public static ResultOfLottos calcLottoOfStatistics(WinOfLotto winOfLottoNumber, List<Lotto> lottos) {
-        ResultOfLottos resultOfLottos = new ResultOfLottos();
+    public LottoMatch calcLottoOfStatistics(WinOfLotto winOfLottoNumber, List<Lotto> lottos) {
+        LottoMatch lottoMatch = new LottoMatch();
 
         for (Lotto lotto : lottos) {
             int count = winOfLottoNumber.correctCount(lotto.numbers());
             boolean hasBonusNumber = winOfLottoNumber.hasBonusNumber(lotto);
-            resultOfLottos.put(LottoRank.find(count, hasBonusNumber));
+            lottoMatch.put(LottoRank.find(count, hasBonusNumber));
         }
 
-        return resultOfLottos;
+        return lottoMatch;
     }
 
-    public static Profit calculateLottoProfit(ResultOfLottos resultOfLottos, int lottoCount) {
-        return Profit.calcLottoProfit(resultOfLottos.sumMoney(), lottoCount);
+    public static Profit calculateLottoProfit(LottoMatch lottoMatch, int lottoCount) {
+        return Profit.calcLottoProfit(lottoMatch.sumMoney(), lottoCount);
     }
 
 

@@ -5,47 +5,47 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ResultOfLottos {
+public class LottoMatch {
 
     private static final Integer WIN_COUNT_ZERO = 0;
 
-    private final Map<LottoRank, Integer> resultOfLottos;
+    private final Map<LottoRank, Integer> lottoMatch;
 
-    public ResultOfLottos() {
+    public LottoMatch() {
         this(new EnumMap<>(LottoRank.class));
     }
 
-    public ResultOfLottos(Map<LottoRank, Integer> resultOfLottos) {
-        this.resultOfLottos = resultOfLottos;
+    public LottoMatch(Map<LottoRank, Integer> lottoMatch) {
+        this.lottoMatch = lottoMatch;
     }
 
     public Cache sumMoney() {
-        return new Cache(resultOfLottos.keySet()
+        return new Cache(lottoMatch.keySet()
             .stream()
-            .map(lottoNumber -> lottoNumber.getWinMoney() * resultOfLottos.get(lottoNumber))
+            .map(lottoNumber -> lottoNumber.getWinMoney() * lottoMatch.get(lottoNumber))
             .reduce(Integer::sum).orElse(WIN_COUNT_ZERO));
     }
 
-    public Map<LottoRank, Integer> getResultOfLottos() {
-        return resultOfLottos;
+    public Map<LottoRank, Integer> getLottoMatch() {
+        return lottoMatch;
     }
 
     public void put(LottoRank lottoNumber) {
-        resultOfLottos.put(lottoNumber, resultOfLottos.getOrDefault(lottoNumber, WIN_COUNT_ZERO) + 1);
+        lottoMatch.put(lottoNumber, lottoMatch.getOrDefault(lottoNumber, WIN_COUNT_ZERO) + 1);
     }
 
     public Integer winCount(LottoRank lottoRank) {
-        if (!resultOfLottos.containsKey(lottoRank)) {
+        if (!lottoMatch.containsKey(lottoRank)) {
             return WIN_COUNT_ZERO;
         }
 
-        return resultOfLottos.get(lottoRank);
+        return lottoMatch.get(lottoRank);
     }
 
     @Override
     public String toString() {
         return "ResultOfLottos{" +
-            "resultOfLottos=" + resultOfLottos +
+            "resultOfLottos=" + lottoMatch +
             '}';
     }
 
@@ -57,12 +57,12 @@ public class ResultOfLottos {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ResultOfLottos that = (ResultOfLottos) o;
-        return Objects.equals(resultOfLottos, that.resultOfLottos);
+        LottoMatch that = (LottoMatch) o;
+        return Objects.equals(lottoMatch, that.lottoMatch);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resultOfLottos);
+        return Objects.hash(lottoMatch);
     }
 }
