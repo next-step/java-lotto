@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class Lottery {
 
-    public static final String NON_NULL = "입력값은 null 일 수 없습니다";
-    public static final String INVALID_LOTTERY_NUMBERS_SIZE = "로또 숫자는 6개여야 합니다 -> ";
-    public static final String DUPLICATED_LOTTERY_NUMBERS = "로또에서 중복된 숫자는 존재 할 수 없습니다";
+    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
+    private static final String INVALID_LOTTERY_NUMBERS_SIZE = "로또 숫자는 6개여야 합니다 -> ";
+    private static final String DUPLICATED_LOTTERY_NUMBERS = "로또에서 중복된 숫자는 존재 할 수 없습니다";
     private static final String DELIMITER = ", ";
     public static final Money PRICE = new Money(1000);
     public static final int NUMBERS_SIZE = 6;

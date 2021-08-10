@@ -16,7 +16,7 @@ class LotteryNumberTest {
     public void nullInput() {
         // given
         String number = null;
-        String message = LotteryNumber.NON_NULL;
+        String message = "입력값은 null 일 수 없습니다";
 
         // when
         ThrowingCallable throwingCallable = () -> new LotteryNumber(number);
@@ -32,7 +32,7 @@ class LotteryNumberTest {
     public void notNumber() {
         // given
         String number = "$";
-        String message = LotteryNumber.NOT_NUMBER + number;
+        String message = "숫자가 아닙니다 -> " + number;
 
         // when
         ThrowingCallable throwingCallable = () -> new LotteryNumber(number);
@@ -47,7 +47,7 @@ class LotteryNumberTest {
     @CsvSource(value = {"-3|-3", "0|0", "46|46"}, delimiter = '|')
     public void invalidLotteryNumber(int number, int invalidNumber) {
         // given
-        String message = LotteryNumber.INVALID_NUMBER + invalidNumber;
+        String message = "유효하지 않은 로또 숫자 입니다 -> " + invalidNumber;
 
         // when
         ThrowingCallable throwingCallable = () -> new LotteryNumber(number);

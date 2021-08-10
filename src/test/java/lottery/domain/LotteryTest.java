@@ -20,7 +20,7 @@ public class LotteryTest {
     public void nullInput() {
         // given
         List<LotteryNumber> lotteryNumbers = null;
-        String message = Lottery.NON_NULL;
+        String message = "입력값은 null 일 수 없습니다";
 
         // when
         ThrowingCallable throwingCallable = () -> new Lottery(lotteryNumbers);
@@ -37,7 +37,7 @@ public class LotteryTest {
         // given
         int lotteryNumberSize = 7;
         List<LotteryNumber> lotteryNumbers = getLotteryNumbers(1, lotteryNumberSize);
-        String message = Lottery.INVALID_LOTTERY_NUMBERS_SIZE + lotteryNumberSize;
+        String message = "로또 숫자는 6개여야 합니다 -> " + lotteryNumberSize;
 
         // when
         ThrowingCallable throwingCallable = () -> new Lottery(lotteryNumbers);
@@ -54,7 +54,7 @@ public class LotteryTest {
         // given
         int lotteryNumberSize = 5;
         List<LotteryNumber> lotteryNumbers = getLotteryNumbers(1, lotteryNumberSize);
-        String message = Lottery.INVALID_LOTTERY_NUMBERS_SIZE + lotteryNumberSize;
+        String message = "로또 숫자는 6개여야 합니다 -> " + lotteryNumberSize;
 
         // when
         ThrowingCallable throwingCallable = () -> new Lottery(lotteryNumbers);
@@ -72,7 +72,7 @@ public class LotteryTest {
         List<LotteryNumber> lotteryNumbers = Stream.of(1, 2, 3, 4, 5, 5)
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
-        String message = Lottery.DUPLICATED_LOTTERY_NUMBERS;
+        String message = "로또에서 중복된 숫자는 존재 할 수 없습니다";
 
         // when
         ThrowingCallable throwingCallable = () -> new Lottery(lotteryNumbers);

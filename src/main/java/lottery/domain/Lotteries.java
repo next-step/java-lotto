@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Lotteries {
 
-    public static final String NON_NULL = "입력값은 null 일 수 없습니다";
+    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
 
     private final List<Lottery> lotteries;
 

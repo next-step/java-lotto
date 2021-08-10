@@ -3,6 +3,8 @@ package lottery.domain;
 import lottery.domain.winningstrategy.MatchWinningLotteryStrategy;
 import lottery.dto.LotteryResultDto;
 import lottery.dto.LotteryStatisticDto;
+import org.assertj.core.api.ThrowableAssert;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +15,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LotteriesTest {
+
+    @Test
+    @DisplayName("입력 값이 null 인 경우")
+    public void nullInput() {
+        // given
+        List<Lottery> lotteries = null;
+        String message = "입력값은 null 일 수 없습니다";
+
+        // when
+        ThrowingCallable throwingCallable = () -> new Lotteries(lotteries);
+
+        // then
+        assertThatThrownBy(throwingCallable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
 
     @Test
     @DisplayName("getLotteryStatisticDto 테스트우 - 6개 일치하는 경우")
