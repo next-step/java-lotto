@@ -5,8 +5,6 @@ import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
-import java.util.Map;
-
 public class ResultView {
     private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String WINNING_STATISTICS = "\n당첨 통계";
@@ -26,12 +24,12 @@ public class ResultView {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
 
-        Map<Rank, Integer> statistics = winningStatistics.getWinningStatistics();
-
         for (Rank rank : Rank.values()) {
-            System.out.printf(WINNING_PRICE, rank.getSameNumbersCount(), rank.getPrizeMoney());
-            System.out.printf(WINNING_COUNT, statistics.get(rank));
-            System.out.println();
+            if (rank.getSameNumbersCount() > 2) {
+                System.out.printf(WINNING_PRICE, rank.getSameNumbersCount(), rank.getPrizeMoney());
+                System.out.printf(WINNING_COUNT, winningStatistics.getRankCount(rank));
+                System.out.println();
+            }
         }
 
     }
