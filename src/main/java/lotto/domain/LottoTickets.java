@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class LottoTickets {
 
-    private static final int BONUS_TARGET_NUMBER_MATCH_COUNT = 5;
+    private static final int BONUS_TARGET_MATCH_COUNT = 5;
     private static final int SECOND_PLACE_MATCH_COUNT = 6;
 
     private final List<LottoTicket> lottoTickets;
@@ -47,7 +47,7 @@ public final class LottoTickets {
 
     private LottoRank findLottoRank(final LottoTicket lottoTicket, final List<Integer> winningNumbers, final int bonusNumber) {
         int matchLottoNumberCount = lottoTicket.matchLottoTicket(winningNumbers);
-        if (matchLottoNumberCount != BONUS_TARGET_NUMBER_MATCH_COUNT) {
+        if (matchLottoNumberCount != BONUS_TARGET_MATCH_COUNT) {
             return LottoRank.of(matchLottoNumberCount, false);
         }
 
