@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class WinningsStatistics {
 
@@ -55,7 +56,7 @@ public final class WinningsStatistics {
             totalPrize += result.calculateTotalWinningMoney();
         }
 
-        return Math.round((float) totalPrize / (totalCount * 10)) / 100.0;
+        return (double) totalPrize / (totalCount * 1000);
     }
 
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public final class Lotto {
 
@@ -32,10 +31,9 @@ public final class Lotto {
 
     private void addLottoNumber(final List<Integer> numbers) {
         Collections.sort(numbers);
-        // https://lee1535.tistory.com/106 플라이웨이트 패턴
 
         for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumberFactory.getLottoNumber(number));
         }
     }
 

@@ -56,7 +56,7 @@ public final class ResultView {
     }
 
     public void printEarningsRate(final double earningsRate) {
-        System.out.printf("총 수익률은 %f 입니다.", earningsRate);
+        System.out.printf("총 수익률은 %s입니다.", String.format("%.2f", earningsRate));
 
         if (earningsRate < CRITERIA) {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

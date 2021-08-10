@@ -17,7 +17,7 @@ class WinningsStatisticsTest {
     @DisplayName("객체생성")
     @Test
     void create() {
-        WinningsStatistics winningsStatistics = new WinningsStatistics(new Lotto(Arrays.asList(1,2,3,4,5,6)), new LottoNumber(35));
+        WinningsStatistics winningsStatistics = new WinningsStatistics(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(35));
         assertThat(winningsStatistics).isInstanceOf(WinningsStatistics.class);
     }
 
@@ -25,7 +25,7 @@ class WinningsStatisticsTest {
     @Test
     void validate_보너스번호가_당첨번호에_포함() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinningsStatistics(new Lotto(Arrays.asList(5,10,15,20,25,30)), new LottoNumber(10));
+            new WinningsStatistics(new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30)), new LottoNumber(10));
         }).withMessageMatching("당첨번호와 보너스번호가 중복되었습니다.");
     }
 
@@ -34,16 +34,16 @@ class WinningsStatisticsTest {
     void makeStatisticsWinnings_등수정보() {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(5,10,15,20,25,30)),
-                        new Lotto(Arrays.asList(5,10,15,20,25,35)),
-                        new Lotto(Arrays.asList(5,10,15,20,25,1)),
-                        new Lotto(Arrays.asList(5,10,15,20,1,2)),
-                        new Lotto(Arrays.asList(5,10,15,1,2,3)),
-                        new Lotto(Arrays.asList(5,10,1,2,3,4)),
-                        new Lotto(Arrays.asList(1,2,3,4,5,6))
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 35)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 1)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
+                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
+                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
                 )
         );
-        Lotto winningLotto = new Lotto(Arrays.asList(5,10,15,20,25,30));
+        Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
         List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
@@ -62,13 +62,13 @@ class WinningsStatisticsTest {
     void calculateEarningsRate_수익률() {
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(5,10,15,20,1,2)),
-                        new Lotto(Arrays.asList(5,10,15,1,2,3)),
-                        new Lotto(Arrays.asList(5,10,1,2,3,4)),
-                        new Lotto(Arrays.asList(1,2,3,4,6,7))
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
+                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
+                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7))
                 )
         );
-        Lotto winningLotto =  new Lotto(Arrays.asList(5,10,15,20,25,30));
+        Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
         WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
         List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
 
