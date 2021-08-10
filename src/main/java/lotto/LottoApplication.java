@@ -13,7 +13,7 @@ public class LottoApplication {
         Money money = new Money(InputView.inputPurchaseAmount());
 
         //구입 갯수만큼 로또 번호 생성
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumbers lottoNumbers = new LottoNumbers(); //1~45개 로또 번호 생성
         Lottos lottos = new Lottos(money, lottoNumbers);
 
         //구입 결과 출력

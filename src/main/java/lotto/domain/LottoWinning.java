@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public enum LottoWinning {
-
     FAIL(0, 0),
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
@@ -25,16 +24,12 @@ public enum LottoWinning {
         return FAIL;
     }
 
-    private int getMatchCount() {
+    public int getMatchCount() {
         return this.matchCount;
     }
 
     public int getReward() {
         return this.reward;
-    }
-
-    public String getWinningStatusStr() {
-        return this.matchCount + "개 일치 (" + this.reward + "원)- ";
     }
 
 }

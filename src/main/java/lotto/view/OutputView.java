@@ -8,9 +8,11 @@ import java.util.Map;
 
 public class OutputView {
     private static final String COUNT_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
-    private static final String RESULT_TITME_MESSAGE = "\n당첨 통계\n---------";
-    private static final String LOTTO_LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final String LOTTO_WIN_MESSAGE = "(다시 로또 사러 고고)";
+    private static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
+    private static final String WINNING_STATUS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String FINAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
+    private static final String LOTTO_YIELD_LOSE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String LOTTO_YIELD_WIN_MESSAGE = "(다시 로또 사러 고고)";
 
     public static void printPurchase(Lottos lottos) {
         printCountOfLotto(lottos);
@@ -22,8 +24,8 @@ public class OutputView {
     }
 
     public static void printLottosResult(Lottos lottos) {
-        System.out.println(RESULT_TITME_MESSAGE);
-        Map<LottoWinning, Integer> winningStats = lottos.getLottosWinningStatus();
+        System.out.println(WINNING_RESULT_MESSAGE);
+        Map<LottoWinning, Integer> winningStats = lottos.getWinningStatus();
 
         for (LottoWinning status : LottoWinning.values()) {
             printWinningStatus(winningStats, status);
@@ -39,16 +41,15 @@ public class OutputView {
 
     private static void printWinningStatus(Map<LottoWinning, Integer> winningStats, LottoWinning status) {
         if (status != LottoWinning.FAIL) {
-            System.out.print(status.getWinningStatusStr());
-            System.out.println(winningStats.getOrDefault(status, 0) + "개");
+            System.out.printf(WINNING_STATUS_MESSAGE, status.getMatchCount(), status.getReward(), winningStats.getOrDefault(status, 0));
         }
     }
 
     private static void printLottosYield(Lottos lottos) {
         double yield = lottos.getMoney().getYield();
-        String resultMessage = yield >= 1 ? LOTTO_WIN_MESSAGE : LOTTO_LOSE_MESSAGE;
-
-        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다." + resultMessage);
+        String resultMessage = yield >= 1 ? LOTTO_YIELD_WIN_MESSAGE : LOTTO_YIELD_LOSE_MESSAGE;
+        System.out.printf(FINAL_YIELD_MESSAGE, yield);
+        System.out.println(resultMessage);
 
     }
 }

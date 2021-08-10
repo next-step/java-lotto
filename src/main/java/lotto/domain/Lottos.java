@@ -6,19 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+    private static final int LOTTO_PRICE = 1000;
     private List<Lotto> lottos;
     private Money money;
-    private Map<LottoWinning, Integer> lottosWinningStatus;
+    private Map<LottoWinning, Integer> winningStatus;
 
     public Lottos(Money money, LottoNumbers numbers) {
         this.lottos = new ArrayList<>();
         this.money = money;
-        this.lottosWinningStatus = new HashMap<>();
+        this.winningStatus = new HashMap<>();
 
-        int countOfLotto = money.getPurchaseMoney() / 1000;
+        int countOfLotto = getNumberOfPurchase();
         for (int i = 0; i < countOfLotto; i++) {
             lottos.add(new Lotto(numbers));
         }
+    }
+
+    private int getNumberOfPurchase() {
+        return this.money.getPurchaseMoney() / LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
@@ -28,19 +33,19 @@ public class Lottos {
     public void checkLottosWinning(LottoNumbers lottoNumbers) {
         for (Lotto lotto : lottos) {
             LottoWinning winStats = LottoWinning.getWinningStatus(lotto.getMatchCount(lottoNumbers));
-            setLottosWinningStatus(winStats);
+            setWinningStatus(winStats);
         }
     }
 
-    private void setLottosWinningStatus(LottoWinning winStats) {
+    private void setWinningStatus(LottoWinning winStats) {
         if (winStats != LottoWinning.FAIL) {
-            lottosWinningStatus.put(winStats, lottosWinningStatus.getOrDefault(winStats, 0) + 1);
+            winningStatus.put(winStats, winningStatus.getOrDefault(winStats, 0) + 1);
             money.plusReward(winStats.getReward());
         }
     }
 
-    public Map<LottoWinning, Integer> getLottosWinningStatus() {
-        return this.lottosWinningStatus;
+    public Map<LottoWinning, Integer> getWinningStatus() {
+        return this.winningStatus;
     }
 
     public Money getMoney() {

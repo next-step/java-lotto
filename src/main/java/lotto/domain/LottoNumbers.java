@@ -36,8 +36,8 @@ public class LottoNumbers {
 
     public void setWinningNumbers(String strNumbers) {
         List<Integer> winningNumbers = Arrays.stream(strNumbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                                             .map(Integer::parseInt)
+                                             .collect(Collectors.toList());
         validateWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
@@ -47,17 +47,17 @@ public class LottoNumbers {
     }
 
     private void validateWinningNumbers(List<Integer> winningNumbers) {
-        validSize(winningNumbers);
-        validNumbers(winningNumbers);
+        validateSize(winningNumbers);
+        validateNumbers(winningNumbers);
     }
 
-    private void validSize(List<Integer> winningNumbers) {
+    private void validateSize(List<Integer> winningNumbers) {
         if (winningNumbers.size() != 6) {
             throw new InvalidInputException(INVALID_SIZE_OF_WINNING_NUMBERS);
         }
     }
 
-    private void validNumbers(List<Integer> winningNumbers) {
+    private void validateNumbers(List<Integer> winningNumbers) {
         int notValidateNumberCount = (int) winningNumbers.stream().filter(n -> !this.allNumbers.contains(n)).count();
         if (notValidateNumberCount > 0) {
             throw new InvalidInputException(INVALID_WINNING_NUMBERS);
