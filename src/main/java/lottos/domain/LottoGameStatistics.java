@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Statistics {
+public class LottoGameStatistics {
 
-    private int purchaseAmount;
-    private List<LottoResult> lottoResults;
+    private final int purchaseAmount;
+    private final List<LottoResult> lottoResults;
 
-    public Statistics(int purchaseAmount, List<LottoResult> lottoResults) {
+    public LottoGameStatistics(final int purchaseAmount, final List<LottoResult> lottoResults) {
         this.purchaseAmount = purchaseAmount;
         this.lottoResults = lottoResults;
     }
 
-    public Map<Prize, List<Prize>> groupingByPrize() {
+    public Map<LottoPrize, List<LottoPrize>> groupingByPrize() {
         return lottoResults.stream()
                 .map(LottoResult::getPrize)
                 .collect(Collectors.groupingBy(winningPrize -> winningPrize));
@@ -28,7 +28,7 @@ public class Statistics {
     private int calculatePrizeAmountTotal() {
         return lottoResults.stream()
                 .map(LottoResult::getPrize)
-                .map(Prize::getPrizeAmount)
+                .map(LottoPrize::getPrizeAmount)
                 .reduce(0, Integer::sum);
     }
 }

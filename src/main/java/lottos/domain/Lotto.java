@@ -1,42 +1,41 @@
 package lottos.domain;
 
 import lottos.domain.exceptions.LottoSizeIncorrectException;
+import lottos.domain.numbers.Numbers;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int COUNT_OF_LOTTO = 6;
-    private List<Integer> numbers;
+    private static final String NUMBERS_TEXT_SPLIT_REGEX = ",";
 
-    public Lotto(LottoGenerator generator) {
-        this.numbers = generator.generate();
+    private final Numbers numbers;
+
+    public Lotto(final String numbersText) {
+        this(parseTextToNumbers(numbersText));
     }
 
-    public Lotto(List<Integer> numbers) {
-        if (numbers.size() != COUNT_OF_LOTTO) {
-            throw new LottoSizeIncorrectException();
-        }
+    public Lotto(final List<Integer> numbers) {
+        this.numbers = Numbers.from(numbers);
+    }
+
+    public Lotto(final Numbers numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> elements() {
-        return Collections.unmodifiableList(numbers);
-    }
-
-    public LottoResult match(Lotto lotto) {
-        int countOfMatchers = (int) (lotto.elements()
-                .stream()
-                .filter(numbers::contains)
-                .count());
-        return new LottoResult(Prize.findByNumberOfMatchers(countOfMatchers));
-    }
-
-    public List<LottoResult> match(List<Lotto> lottos) {
-        return lottos.stream()
-                .map(this::match)
+    private static List<Integer> parseTextToNumbers(final String numbersText) {
+        if (numbersText == null || numbersText.isEmpty()) {
+            throw new LottoSizeIncorrectException();
+        }
+        return Arrays.stream(numbersText.split(NUMBERS_TEXT_SPLIT_REGEX))
+                .map(String::trim)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public Numbers getNumbers() {
+        return numbers;
     }
 }
