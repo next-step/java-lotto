@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InvalidInputException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -16,7 +13,7 @@ public class LottoNumbers {
     private static final String INVALID_WINNING_NUMBERS = "유효하지 않은 번호를 입력하셨습니다.";
 
     private List<Integer> allNumbers = new ArrayList<>();
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private Set<Integer> winningNumbers = new HashSet<>();
 
     public LottoNumbers() {
         for (int i = 1; i <= BOUND; i++) {
@@ -35,29 +32,29 @@ public class LottoNumbers {
     }
 
     public void setWinningNumbers(String strNumbers) {
-        List<Integer> winningNumbers = Arrays.stream(strNumbers.split(","))
-                                             .map(Integer::parseInt)
-                                             .collect(Collectors.toList());
+        Set<Integer> winningNumbers = Arrays.stream(strNumbers.split(","))
+                                            .map(Integer::parseInt)
+                                            .collect(Collectors.toSet());
         validateWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Set<Integer> getWinningNumbers() {
         return this.winningNumbers;
     }
 
-    private void validateWinningNumbers(List<Integer> winningNumbers) {
+    private void validateWinningNumbers(Set<Integer> winningNumbers) {
         validateSize(winningNumbers);
         validateNumbers(winningNumbers);
     }
 
-    private void validateSize(List<Integer> winningNumbers) {
+    private void validateSize(Set<Integer> winningNumbers) {
         if (winningNumbers.size() != 6) {
             throw new InvalidInputException(INVALID_SIZE_OF_WINNING_NUMBERS);
         }
     }
 
-    private void validateNumbers(List<Integer> winningNumbers) {
+    private void validateNumbers(Set<Integer> winningNumbers) {
         int notValidateNumberCount = (int) winningNumbers.stream().filter(n -> !this.allNumbers.contains(n)).count();
         if (notValidateNumberCount > 0) {
             throw new InvalidInputException(INVALID_WINNING_NUMBERS);
