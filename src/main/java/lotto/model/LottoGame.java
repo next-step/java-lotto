@@ -50,19 +50,22 @@ public class LottoGame {
     }
 
     private void setCount(Map<Winning, Integer> winningCount, LottoNumbers lottoNumbers) {
-        int count = 1;
         int overlapCount = winningNumbers.checkOverlapNumber(lottoNumbers.selectedNumber());
         if (overlapCount < LOTTO_WINNING_MIN_COUNT) {
             return;
         }
         Winning winning = Winning.findByWinning(overlapCount, matchedBonus(lottoNumbers, overlapCount));
+        countUp(winningCount, winning);
+    }
+
+    private void countUp(Map<Winning, Integer> winningCount, Winning winning) {
+        int count = 1;
         if (winningCount.containsKey(winning)) {
             count = winningCount.get(winning);
             count += 1;
         }
         winningCount.put(winning, count);
     }
-
 
     public double getMargin(Map<Winning, Integer> winningCount) {
         double result = 0;

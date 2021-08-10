@@ -52,7 +52,7 @@ public class Result {
             count = winningCount.get(winning);
         }
         String matchedBonusMessage = "";
-        if (winning.getBonus()) {
+        if (winning.isBonus()) {
             matchedBonusMessage = BONUS_NUMBER_MESSABE;
         }
         System.out.println(String.format(WINNING_RESULT_MESSAGE, winning.getCount(), matchedBonusMessage, winning.getReward(), count));

@@ -8,8 +8,8 @@ import java.util.List;
 
 public class WinningNumbers {
 
-    private WinningNumber winningNumber;
-    private LottoNumber bonusNumber;
+    private final WinningNumber winningNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningNumbers(String numbers, int bonusNumber) {
         winningNumber = new WinningNumber(numbers);

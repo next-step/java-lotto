@@ -36,7 +36,7 @@ public enum Winning {
         return this.count;
     }
 
-    public boolean getBonus() {
+    public boolean isBonus() {
         return this.bonus;
     }
 }

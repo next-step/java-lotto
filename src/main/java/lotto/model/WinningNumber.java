@@ -8,7 +8,7 @@ import java.util.List;
 public class WinningNumber {
     private static final String SPLIT_TOKEN = ",";
 
-    private List<LottoNumber> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
     public WinningNumber(String numbers) {
         this.winningNumbers = this.splitNumbers(numbers);
