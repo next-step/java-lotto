@@ -28,7 +28,7 @@
 
 ## TODO
 * [X] Lotto 도메인 클래스를 만든다. 들어온 숫자배열에 대해 검증을 해야한다. (배열 size 는 6, 중복된 값이 있는지)
-* [X] AutoPurchaseStrategy 도메인 클래스를 만든다. 1~45 사이 6개의 정수형 변수를 요소로 가진 List 을 반환한다.
+* [X] NumberGenerationStrategy 도메인 클래스를 만든다. 1~45 사이 6개의 정수형 변수를 요소로 가진 List 을 반환한다.
 * [X] LottoMachine 클래스를 만든다. 구입전략과 구입금액을 입력받고 횟수에 따른 List<Lotto>를 생성 (구입금액에 대한 유효성 검사)
 * [X] Rank Enum 클래스를 만든다. 당첨번호와 받은 Lotto 숫자를 대조하여 당첨여부를 확인한다.
 * [X] LottoNumber 도메인 클래스를 만든다. 1~45 사이의 숫자인지 검증한다.
@@ -46,4 +46,5 @@
 ## TODO
 * [X] 전단계 피드백 반영
 * [X] WinningsStatistics 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
-* [X] Lottos, LottoMachine, LottoController - WinningsStatistics 추가에 따른 소스변경
+* [X] Result 도메인 클래스를 만든다.
+* [X] Lottos, LottoMachine, LottoController - WinningsStatistics, Result 추가에 따른 소스변경
