@@ -7,12 +7,9 @@ import java.util.*;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(Money money, List<LottoTicket> lottoTickets, List<LottoTicket> manualNumbers) {
+    public LottoTickets(List<LottoTicket> lottoTickets, List<LottoTicket> manualNumbers) {
         this.lottoTickets.addAll(manualNumbers);
         this.lottoTickets.addAll(lottoTickets);
-        if (money.countLotto() < this.lottoTickets.size()) {
-            throw new IllegalArgumentException("로또 구입 금액이 부족합니다.");
-        }
     }
 
     public List<LottoTicket> getLottoTickets() {

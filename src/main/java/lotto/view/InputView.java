@@ -4,6 +4,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,11 +16,10 @@ public class InputView {
     private static final String MSG_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String REGEX = ",";
 
-    public Money inputMoney() {
+    public int inputMoney() {
         System.out.println(MSG_MONEY);
         Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
-        return new Money(input);
+        return scanner.nextInt();
     }
 
     public List<Integer> inputWinNumbers() {
@@ -39,11 +39,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<LottoTicket> inputManualLottoTickets(int count) {
+    public List<List<Integer>> inputManualLottoTickets(int count) {
         System.out.println(MSG_MANUAL_NUMBERS);
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        List<List<Integer>> manualLottoTickets = new ArrayList<>();
         for(int i= 0 ; i< count; i++){
-            manualLottoTickets.add(new LottoTicket(inputLottoNumbers()));
+            manualLottoTickets.add(inputLottoNumbers());
         }
         return manualLottoTickets;
     }

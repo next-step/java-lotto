@@ -9,7 +9,6 @@ public class LottoTicket {
     private Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
@@ -29,7 +28,7 @@ public class LottoTicket {
     public List<LottoNumber> getLottoNumbers() {
         List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNumbers);
         lottoNumberList.sort(Comparator.comparingInt(LottoNumber::getValue));
-        return lottoNumberList;
+        return Collections.unmodifiableList(lottoNumberList);
     }
 
     @Override

@@ -8,6 +8,9 @@ public class WinLotto {
     private LottoNumber bonusNumber;
 
     public WinLotto(List<Integer> winNumbers, int bonusNumber) {
+        if(winNumbers.contains(bonusNumber)){
+            throw new IllegalArgumentException("보너스 볼이 당첨번호와 중복됩니다.");
+        }
         this.winNumbers = new LottoTicket(winNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
