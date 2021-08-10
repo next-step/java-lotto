@@ -38,7 +38,7 @@ public class LottoStatisticTest {
 
     @Test
     @DisplayName("로또 보너스볼 일치 X")
-    void matchLottoBonusNotTest() {
+    void matchNotLottoBonusTest() {
         // given
         int bonusNumber = 7;
         LottoTickets lottoTickets = new LottoTickets();

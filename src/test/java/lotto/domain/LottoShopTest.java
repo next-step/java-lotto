@@ -28,7 +28,7 @@ public class LottoShopTest {
 
     @Test
     @DisplayName("로또를 살수 없는 금액이 입력될 경우 Exception")
-    void buyValidationAmountMinimumExceptionTest() {
+    void buyValidateAmountMinimumExceptionTest() {
         assertThatThrownBy(() -> lottoShop.buy(800L))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("less then the minimum amount");
