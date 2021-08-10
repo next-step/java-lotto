@@ -1,3 +1,7 @@
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -6,11 +10,14 @@ public class StringAddCalculatorTest {
     @DisplayName("쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열 분리 테스트")
     @Test
     void string_split_test() {
+        StringAddCalculator stringAddCalculator = new StringAddCalculator("1:2,3");
+        assertThat(stringAddCalculator.getNumberList()).containsExactly("1","2","3");
     }
 
     @DisplayName("분리한 각 숫자의 합을 반환")
     @Test
     void divided_number_sum_test() {
+
     }
 
     @DisplayName("빈 문자열인 경우 0 반환 테스트")
