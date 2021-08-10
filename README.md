@@ -45,5 +45,5 @@
 
 ## TODO
 * [X] 전단계 피드백 반영
-* [ ] WinningsStatistics 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
-* [ ] Lottos, LottoMachine, LottoController - WinningsStatistics 추가에 따른 소스변경
+* [X] WinningsStatistics 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
+* [X] Lottos, LottoMachine, LottoController - WinningsStatistics 추가에 따른 소스변경

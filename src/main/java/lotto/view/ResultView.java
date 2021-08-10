@@ -41,10 +41,11 @@ public final class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + winnings.getOrDefault(Rank.FOURTH, new MatchingCount()).getValue() + "개");
-        System.out.println("4개 일치 (50000원)- " + winnings.getOrDefault(Rank.THIRD, new MatchingCount()).getValue() + "개");
-        System.out.println("5개 일치 (1500000원)- " + winnings.getOrDefault(Rank.SECOND, new MatchingCount()).getValue() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + winnings.getOrDefault(Rank.FIRST, new MatchingCount()).getValue() + "개");
+        System.out.println("3개 일치 (5000원) - " + winnings.getOrDefault(Rank.FIFTH, new MatchingCount()).getValue() + "개");
+        System.out.println("4개 일치 (50000원) - " + winnings.getOrDefault(Rank.FOURTH, new MatchingCount()).getValue() + "개");
+        System.out.println("5개 일치 (1500000원) - " + winnings.getOrDefault(Rank.THIRD, new MatchingCount()).getValue() + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + winnings.getOrDefault(Rank.SECOND, new MatchingCount()).getValue() + "개");
+        System.out.println("6개 일치 (2000000000원) - " + winnings.getOrDefault(Rank.FIRST, new MatchingCount()).getValue() + "개");
     }
 
     public void printEarningsRate(final double earningsRate) {
