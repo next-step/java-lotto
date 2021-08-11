@@ -17,7 +17,7 @@ class LottoTest {
     void buyLotto() {
         int price = 5000;
         LottoShop lottoShop = new LottoShop(price);
-        assertThat(lottoShop.sellLotto()).isEqualTo(5);
+        assertThat(lottoShop.sellLotto().getLotto().size()).isEqualTo(5);
     }
 }
 

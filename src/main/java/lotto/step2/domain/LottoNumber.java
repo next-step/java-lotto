@@ -13,10 +13,6 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
-    }
-
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);
