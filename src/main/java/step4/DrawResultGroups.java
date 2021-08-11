@@ -1,6 +1,6 @@
-package step3;
+package step4;
 
-import step3.enums.DrawResult;
+import step4.enums.DrawResult;
 
 import java.util.Arrays;
 import java.util.EnumMap;

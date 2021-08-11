@@ -1,6 +1,6 @@
-package step3;
+package step4;
 
-import step3.util.LottoNumberGenerator;
+import step4.util.LottoNumberGenerator;
 
 import java.util.Collections;
 

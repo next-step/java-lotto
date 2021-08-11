@@ -1,7 +1,6 @@
-package step3.util;
+package step4.util;
 
-import step3.LottoEntry;
-import step3.util.LottoNumberGenerator;
+import step4.LottoEntry;
 
 import java.util.List;
 import java.util.Random;

@@ -1,8 +1,8 @@
-package step3;
+package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.enums.DrawResult;
+import step4.enums.DrawResult;
 
 import java.util.List;
 import java.util.stream.Collectors;

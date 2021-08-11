@@ -1,8 +1,8 @@
-package step3.view;
+package step4.view;
 
-import step3.LottoBucket;
-import step3.LottoWinStatistics;
-import step3.enums.DrawResult;
+import step4.LottoBucket;
+import step4.LottoWinStatistics;
+import step4.enums.DrawResult;
 
 import java.util.Arrays;
 import java.util.Collections;

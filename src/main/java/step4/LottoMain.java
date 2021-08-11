@@ -1,12 +1,11 @@
-package step3;
+package step4;
 
-import step3.util.LottoManualNumberGenerator;
-import step3.util.LottoRandomNumberGenerator;
-import step3.view.LottoInputView;
-import step3.view.LottoResultView;
+import step4.util.LottoManualNumberGenerator;
+import step4.util.LottoRandomNumberGenerator;
+import step4.view.LottoInputView;
+import step4.view.LottoResultView;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoMain {
     private static final int LOTTO_UNIT_PRICE = 1000;
