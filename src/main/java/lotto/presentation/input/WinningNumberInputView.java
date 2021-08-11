@@ -9,6 +9,6 @@ public class WinningNumberInputView {
     public String input(){
         System.out.println(WINNING_NUMBER_INPUT_COMMENT);
         Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

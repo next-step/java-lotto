@@ -13,8 +13,26 @@ public class LottoResults {
         this.elements.add(lottoResult);
     }
 
-    public void addAll(LottoResult... lottoResults){
+    public void addAll(LottoResult... lottoResults) {
         this.elements.addAll(Arrays.asList(lottoResults));
+    }
+
+    public int getExpectedHits(int expect) {
+        return elements.stream().filter(lottoResult -> lottoResult.expectEquals(expect))
+                .map(LottoResult::getHits)
+                .findAny()
+                .orElseThrow(() -> new RuntimeException("예상 갯수에 맞는 맞춘 로또 수를 가져올 수 없습니다."));
+    }
+
+    public double getEarningLate(int purchaseAmount) {
+        return (double) calculateTotalCompensation() / purchaseAmount;
+    }
+
+    private int calculateTotalCompensation() {
+        return elements.stream()
+                .map(LottoResult::calculateCompensation)
+                .reduce(0, Integer::sum)
+        ;
     }
 
     @Override

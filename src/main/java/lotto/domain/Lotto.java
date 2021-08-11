@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> elements;
@@ -30,6 +31,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "[" + String.join(", ", (CharSequence) elements) + "]";
+        return "[" + String.join(", ", toStrings()) + "]" ;
+    }
+
+    private List<String> toStrings() {
+        return elements.stream().map(String::valueOf).collect(Collectors.toList());
     }
 }

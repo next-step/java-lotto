@@ -11,6 +11,18 @@ public class LottoResult {
         this.hits = hits;
     }
 
+    public boolean expectEquals(int expect) {
+        return this.expect == expect;
+    }
+
+    public int getHits(){
+        return hits;
+    }
+
+    public int calculateCompensation(){
+        return Ranking.getCompensationBy(expect) * hits;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

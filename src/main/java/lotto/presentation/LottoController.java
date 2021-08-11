@@ -1,12 +1,15 @@
 package lotto.presentation;
 
+import lotto.common.LottoResults;
 import lotto.domain.*;
 import lotto.presentation.input.PurchaseAmountInputView;
 import lotto.presentation.input.WinningNumberInputView;
 import lotto.presentation.output.ChanceOutputView;
+import lotto.presentation.output.EarningRateOutputView;
 import lotto.presentation.output.LottosOutputView;
 import lotto.presentation.output.WinningStatisticsOutputView;
 import lotto.service.LottoService;
+import lotto.service.RankingService;
 
 import java.util.List;
 
@@ -14,13 +17,24 @@ public class LottoController {
 
     public void execute(){
         int purchaseAmount = inputPurchaseAmount();
-        outputPurchaseAmount(purchaseAmount);
-        Lottos lottos = executeLottoGame(purchaseAmount);
+        int chance = resolveChance(purchaseAmount);
+        outputChance(chance);
+        Lottos lottos = executeLottoGame(chance);
         outputLottos(lottos);
-        List<Integer> lastWeekWinning = getLastWeekWinningNumbers();
-        RankingCalculator calculator = new RankingCalculator();
-//        calculator.calculate(lastWeekWinning, lottos, );
+        LottoResults lottoResults = calculateAndGetLottoResults(lottos);
+        outputLottoResults(lottoResults);
+        EarningRateOutputView outputView = new EarningRateOutputView();
+        outputView.output(lottoResults.getEarningLate(purchaseAmount));
+    }
+
+    private LottoResults calculateAndGetLottoResults(Lottos lottos) {
+        RankingService rankingService = new RankingService();
+        return rankingService.calculateMatchHits(getLastWeekWinningNumbers(), lottos, new RankingCalculator());
+    }
+
+    private void outputLottoResults(LottoResults lottoResults) {
         WinningStatisticsOutputView outputView = new WinningStatisticsOutputView();
+        outputView.output(lottoResults);
     }
 
     private int inputPurchaseAmount() {
@@ -28,14 +42,14 @@ public class LottoController {
         return inputView.input();
     }
 
-    private void outputPurchaseAmount(int purchaseAmount) {
+    private void outputChance(int chance) {
         ChanceOutputView outputView = new ChanceOutputView();
-        outputView.output(purchaseAmount);
+        outputView.output(chance);
     }
 
-    private Lottos executeLottoGame(int purchaseAmount) {
+    private Lottos executeLottoGame(int chance) {
         LottoService service = new LottoService();
-        return service.execute(resolveChance(purchaseAmount), new LottoGenerator());
+        return service.execute(chance, new LottoGenerator());
     }
 
     private int resolveChance(int purchaseAmount) {
@@ -55,8 +69,7 @@ public class LottoController {
 
     private String inputLastWeekWinningNumbers() {
         WinningNumberInputView inputView = new WinningNumberInputView();
-        String lastWeekWinningNumbers = inputView.input();
-        return lastWeekWinningNumbers;
+        return inputView.input();
     }
 
 }

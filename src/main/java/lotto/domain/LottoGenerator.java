@@ -6,8 +6,11 @@ public class LottoGenerator {
 
     private static final ArrayList<Integer> LOTTO_ELEMENTS = new ArrayList<>();
 
+    private static final int MIN_LOTTO_ELEMENT = 1;
+    private static final int MAX_LOTTO_ELEMENT = 65;
+
     static {
-        for (int i = 1; i <= 65; i++) {
+        for (int i = MIN_LOTTO_ELEMENT; i <= MAX_LOTTO_ELEMENT; i++) {
             LOTTO_ELEMENTS.add(i);
         }
     }
