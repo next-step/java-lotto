@@ -19,7 +19,7 @@ public class LottoStatisticTest {
     @BeforeEach
     void setUp() {
         winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        winningLottoTicket = new WinningLottoTicket(winningNumbers, new LottoNumber(7));
+        winningLottoTicket = new WinningLottoTicket(winningNumbers, 7);
     }
 
     @Test

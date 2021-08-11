@@ -8,6 +8,10 @@ public class WinningLottoTicket {
     private final List<LottoNumber> winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
+    public WinningLottoTicket(List<Integer> winningLottoNumbers, int bonusNumber) {
+        this(winningLottoNumbers, new LottoNumber(bonusNumber));
+    }
+
     public WinningLottoTicket(List<Integer> winningLottoNumbers, LottoNumber bonusNumber) {
         this.winningLottoNumbers = winningLottoNumbers.stream()
                 .map(LottoNumber::new).collect(Collectors.toList());
@@ -21,7 +25,7 @@ public class WinningLottoTicket {
         return 0;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public boolean bonusBallMatch(LottoTicket lottoTicket) {
+        return lottoTicket.contains(bonusNumber);
     }
 }

@@ -39,8 +39,7 @@ public final class LottoTickets {
         if (matchCount != BONUS_TARGET_MATCH_COUNT) {
             return LottoRank.of(matchCount, false);
         }
-
-        if (lottoTicket.contains(winningLottoTicket.getBonusNumber())) {
+        if(winningLottoTicket.bonusBallMatch(lottoTicket)) {
             return LottoRank.SECOND_PLACE;
         }
         return LottoRank.of(matchCount, false);

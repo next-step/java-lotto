@@ -18,15 +18,13 @@ public class LottoApplication {
         long purchaseAmount = inputView.getInputAmount();
 
         LottoTickets lottoTickets = lottoShop.buy(purchaseAmount);
-
         ResultView.showBuyLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = inputView.getWinningNumber();
         int bonusNumber = inputView.getBonusNumber();
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
 
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, new LottoNumber(bonusNumber));
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
-
         ResultView.showLottoResult(lottoStatistic, purchaseAmount);
     }
 }
