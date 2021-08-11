@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.common.LottoResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ public class RankingCalculatorTest {
         //given
         RankingCalculator calculator = new RankingCalculator();
         List<Integer> lastWeekWinning = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<List<Integer>> lottos = initializeLottos();
+        Lottos lottos = initializeLottos();
         //when
-        int result = calculator.calculate(lastWeekWinning, lottos, 3);
+        LottoResult lottoResult= calculator.calculate(lastWeekWinning, lottos, 3);
         //then
-        assertThat(result).isEqualTo(3);
+        assertThat(lottoResult).isEqualTo(new LottoResult(3, 3));
     }
 
     @Test
@@ -27,34 +28,21 @@ public class RankingCalculatorTest {
         //given
         RankingCalculator calculator = new RankingCalculator();
         List<Integer> lastWeekWinning = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<List<Integer>> lottos = initializeLottos();
+        Lottos lottos = initializeLottos();
         //when
-        int result = calculator.calculate(lastWeekWinning, lottos, 1);
+        LottoResult lottoResult = calculator.calculate(lastWeekWinning, lottos, 1);
         //then
-        assertThat(result).isEqualTo(0);
+        assertThat(lottoResult).isEqualTo(new LottoResult(1, 0));
     }
 
-    private List<List<Integer>> initializeLottos() {
-        List<List<Integer>> lottos = new ArrayList<>();
-        lottos.add(new ArrayList<>(
-                Arrays.asList(1, 2, 3, 8, 11, 29)
-        ));
+    private Lottos initializeLottos() {
+        Lottos lottos = new Lottos();
+        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 8, 11, 29)));
+        lottos.add(new Lotto(Arrays.asList(2, 3, 6, 9, 10, 22)));
+        lottos.add(new Lotto(Arrays.asList(2, 3, 5, 9, 17, 22)));
+        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        lottos.add(new Lotto(Arrays.asList(1, 2, 9, 10, 23, 44)));
 
-        lottos.add(new ArrayList<>(
-                Arrays.asList(2, 3, 6, 9, 10, 22)
-        ));
-
-        lottos.add(new ArrayList<>(
-                Arrays.asList(2, 3, 5, 9, 17, 22)
-        ));
-
-        lottos.add(new ArrayList<>(
-                Arrays.asList(1, 2, 3, 4, 5, 8)
-        ));
-
-        lottos.add(new ArrayList<>(
-                Arrays.asList(1, 2, 9, 10, 23, 44)
-        ));
         return lottos;
     }
 }

@@ -1,20 +1,22 @@
 package lotto.domain;
 
+import lotto.common.LottoResult;
+
 import java.util.List;
 
 public class RankingCalculator {
-    public int calculate(List<Integer> lastWeekWinning, List<List<Integer>> lottos, int expect) {
-        int result = 0;
-        for (List<Integer> lotto : lottos) {
+    public LottoResult calculate(List<Integer> lastWeekWinning, Lottos lottos, int expect) {
+        int hits = 0;
+        for (Lotto lotto : lottos.getElements()) {
             int matchCount = checkLottoMatchCount(lastWeekWinning, lotto);
-            result = increaseResultIfMatchCountSameWithExpect(expect, matchCount, result);
+            hits = increaseResultIfMatchCountSameWithExpect(expect, matchCount, hits);
         }
-        return result;
+        return new LottoResult(expect, hits);
     }
 
-    private int checkLottoMatchCount(List<Integer> lastWeekWinning, List<Integer> lotto) {
+    private int checkLottoMatchCount(List<Integer> lastWeekWinning, Lotto lotto) {
         int matchCount = 0;
-        for (int element : lotto) {
+        for (int element : lotto.getElements()) {
             matchCount = increaseIfLastWeekWinningContainsElement(lastWeekWinning, element, matchCount);
         }
         return matchCount;

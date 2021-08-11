@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private final List<Integer> elements;
+
+    public Lotto(List<Integer> elements) {
+        this.elements = elements;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -17,9 +23,13 @@ public class Lotto {
         return Objects.hash(elements);
     }
 
-    private final List<Integer> elements;
+    public List<Integer> getElements() {
+        return elements;
+    }
 
-    public Lotto(List<Integer> elements) {
-        this.elements = elements;
+
+    @Override
+    public String toString() {
+        return "[" + String.join(", ", (CharSequence) elements) + "]";
     }
 }

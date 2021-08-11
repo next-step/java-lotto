@@ -1,0 +1,25 @@
+package lotto.service;
+
+import lotto.common.LottoResult;
+import lotto.common.LottoResults;
+import lotto.domain.Lottos;
+import lotto.domain.RankingCalculator;
+
+import java.util.List;
+
+public class RankingService {
+
+    private static final int MIN_EXPECT = 3;
+    private static final int MAX_EXPECT = 6;
+    public LottoResults calculateMatchHits(List<Integer> lastWeekWinning, Lottos lottos, RankingCalculator calculator) {
+
+        LottoResults lottoResults = new LottoResults();
+
+        for (int i = MIN_EXPECT; i <= MAX_EXPECT; i++) {
+            LottoResult lottoResult = calculator.calculate(lastWeekWinning, lottos, i);
+            lottoResults.add(lottoResult);
+        }
+
+        return lottoResults;
+    }
+}

@@ -1,5 +1,7 @@
 package lotto.common;
 
+import java.util.Objects;
+
 public class MatchHits {
     private int threeMatchHits;
 
@@ -37,4 +39,16 @@ public class MatchHits {
         return sixMatchHits;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchHits matchHits = (MatchHits) o;
+        return threeMatchHits == matchHits.threeMatchHits && fourMatchHits == matchHits.fourMatchHits && fiveMatchHits == matchHits.fiveMatchHits && sixMatchHits == matchHits.sixMatchHits;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(threeMatchHits, fourMatchHits, fiveMatchHits, sixMatchHits);
+    }
 }
