@@ -12,7 +12,12 @@ public class Lotto {
         }
     }
 
-    public Lotto getLotto() {
-        return this;
+    @Override
+    public String toString() {
+        return lotto.toString();
+    }
+
+    public List<LottoTicket> getLotto() {
+        return lotto;
     }
 }

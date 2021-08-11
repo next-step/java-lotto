@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import java.util.List;
+
 public class LottoShop {
     private Lotto lotto;
 
@@ -10,7 +12,7 @@ public class LottoShop {
         int lottoCount = price / 1000;
         this.lotto = new Lotto(lottoCount);
     }
-    public Lotto sellLotto(Lotto lotto) {
+    public List<LottoTicket> sellLotto() {
         return lotto.getLotto();
     }
 }

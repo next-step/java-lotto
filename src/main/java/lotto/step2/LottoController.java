@@ -10,6 +10,8 @@ import java.util.Map;
 public class LottoController {
     public static void main(String[] args) {
         int lottoPrice = InputView.inputLottoPrice();
+        LottoShop lottoShop = new LottoShop(lottoPrice);
+        List<LottoTicket> lottoTickets = lottoShop.sellLotto();
         ResultView.printLottoCount(lottoPrice);
 
     }

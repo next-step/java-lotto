@@ -1,5 +1,6 @@
 package lotto.step2.view;
 
+import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.Validation;
 
 import java.util.List;
@@ -16,11 +17,11 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static List<Integer> inputLastWinningNumber() {
+    public static List<LottoNumber> inputLastWinningNumber() {
         System.out.println(INPUT_LAST_WINNING_NUMBER);
         sc.nextLine();
         String lastWinningNumbers = sc.nextLine();
-        List<Integer> winningNumbers = Validation.isCorrectLottoNumbers(lastWinningNumbers);
+        List<LottoNumber> winningNumbers = Validation.isCorrectLottoNumbers(lastWinningNumbers);
         return winningNumbers;
     }
 }

@@ -24,13 +24,13 @@ class LottoTicketTest {
     @Test
     @DisplayName("구입한 로또의 숫자의 개수가 6개인지 검증 ")
     void isValidLottoTicketTest() {
-        assertThat(lottoTicket.getLottoNumber().size()).isEqualTo(6);
+        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("구입한 로또의 숫자가 중복 되었는지 검증 ")
     void isValidLottoTicketTest2() {
-        assertDoesNotThrow(()-> Validation.isValidLotto(lottoTicket.getLottoNumber()));
+        assertDoesNotThrow(()-> Validation.isValidLotto(lottoTicket.getLottoNumbers()));
     }
 
 }

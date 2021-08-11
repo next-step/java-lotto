@@ -3,14 +3,14 @@ package lotto.step2.domain;
 import java.util.List;
 
 public class WinningNumber {
-    private List<Integer> winningNumbers;
+    private List<LottoNumber> winningNumbers;
 
-    public WinningNumber(List<Integer> winningNumbers) {
+    public WinningNumber(List<LottoNumber> winningNumbers) {
 
         this.winningNumbers = winningNumbers;
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<LottoNumber> getWinningNumbers() {
         return winningNumbers;
     }
 }
