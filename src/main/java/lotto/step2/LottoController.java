@@ -19,6 +19,5 @@ public class LottoController {
         Map<WinningRank, Integer> winningRank = lottoResult.checkLottoTicket(winningNumber, lottoTickets);
         ResultView.printWinningRank(winningRank);
         ResultView.printStatistics(lottoResult.calculateStatistics(lottoPrice));
-
     }
 }

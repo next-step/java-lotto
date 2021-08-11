@@ -21,20 +21,24 @@ public class LottoResult {
     }
 
     private void checkWinningRank(int matchCount) {
-        if (matchCount == 3) {
+        if (matchCount == WinningRank.FOURTH_PLACE.getMatchCount()) {
             lottoResult.put(WinningRank.FOURTH_PLACE, lottoResult.getOrDefault(WinningRank.FOURTH_PLACE, 0) + 1);
+            return;
         }
 
-        if (matchCount == 4) {
+        if (matchCount == WinningRank.THIRD_PLACE.getMatchCount()) {
             lottoResult.put(WinningRank.THIRD_PLACE, lottoResult.getOrDefault(WinningRank.THIRD_PLACE, 0) + 1);
+            return;
         }
 
-        if (matchCount == 5) {
+        if (matchCount == WinningRank.SECOND_PLACE.getMatchCount()) {
             lottoResult.put(WinningRank.SECOND_PLACE, lottoResult.getOrDefault(WinningRank.SECOND_PLACE, 0) + 1);
+            return;
         }
 
-        if (matchCount == 6) {
+        if (matchCount == WinningRank.FIRST_PLACE.getMatchCount()) {
             lottoResult.put(WinningRank.FIRST_PLACE, lottoResult.getOrDefault(WinningRank.FIRST_PLACE, 0) + 1);
+            return;
         }
     }
 
