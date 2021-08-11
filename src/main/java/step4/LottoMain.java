@@ -19,10 +19,8 @@ public class LottoMain {
 
         List<List<Integer>> manualNumbersList = LottoInputView.getManualLottoNumbersWithPrompt(numberOfManual, "수동으로 구매할 번호를 입력해 주세요.");
 
-        LottoStore lottoStore = new LottoStore(lottoPrice);
-
-        LottoBucket manualLottoBucket = lottoStore.buyLottoEntries(numberOfManual, new LottoManualNumberGenerator(manualNumbersList));
-        LottoBucket autoLottoBucket = lottoStore.buyLottoEntries(lottoPrice.getMaxQuantity(budget), new LottoRandomNumberGenerator());
+        LottoBucket manualLottoBucket = LottoStore.buyLottoEntries(numberOfManual, new LottoManualNumberGenerator(manualNumbersList));
+        LottoBucket autoLottoBucket = LottoStore.buyLottoEntries(lottoPrice.getMaxQuantity(budget), new LottoRandomNumberGenerator());
 
         LottoResultView.printLottoQuantity(manualLottoBucket, autoLottoBucket);
         LottoResultView.printAllLottoEntries(manualLottoBucket, autoLottoBucket);
@@ -34,6 +32,7 @@ public class LottoMain {
         DrawnLotto drawnLotto = new DrawnLotto(numbers, bonusNumber);
 
         LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(lottoPrice, drawnLotto);
+
         lottoWinStatistics.addLottoSamples(manualLottoBucket);
         lottoWinStatistics.addLottoSamples(autoLottoBucket);
 

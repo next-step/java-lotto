@@ -5,13 +5,7 @@ import step4.util.LottoNumberGenerator;
 import java.util.Collections;
 
 public class LottoStore {
-    private final LottoPrice lottoPrice;
-
-    public LottoStore(LottoPrice lottoPrice) {
-        this.lottoPrice = lottoPrice;
-    }
-
-    public LottoBucket buyLottoEntries(int numberOf, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoBucket buyLottoEntries(int numberOf, LottoNumberGenerator lottoNumberGenerator) {
         return Collections.nCopies(numberOf, 0)
                 .parallelStream()
                 .map(x -> new LottoEntry(lottoNumberGenerator.generateNumbersForLotto()))
