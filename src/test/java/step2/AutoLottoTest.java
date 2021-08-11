@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.model.AutoLottoStrategy;
 import step2.model.Lotto;
+import step2.model.PurchaseAmount;
 import step2.view.InputView;
 
 import java.util.*;
@@ -15,7 +16,7 @@ public class AutoLottoTest {
     @Test
     public void 구매금액_null_빈문자() {
         //given
-        InputView user = new InputView();
+        PurchaseAmount user = new PurchaseAmount();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -28,7 +29,7 @@ public class AutoLottoTest {
     @Test
     public void 구매금액_숫자가아님() {
         //given
-        InputView user = new InputView();
+        PurchaseAmount user = new PurchaseAmount();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -38,7 +39,7 @@ public class AutoLottoTest {
     @Test
     public void 구매금액_1000미만() {
         //given
-        InputView user = new InputView();
+        PurchaseAmount user = new PurchaseAmount();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -48,7 +49,7 @@ public class AutoLottoTest {
     @Test
     public void 구매갯수() {
         //given
-        InputView user = new InputView();
+        PurchaseAmount user = new PurchaseAmount();
 
         //when
         int lottoCnt = user.getLottoCount("1000");
