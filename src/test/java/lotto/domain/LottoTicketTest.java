@@ -41,7 +41,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(6);
@@ -55,7 +55,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(5);
@@ -69,7 +69,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(4);
@@ -83,7 +83,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(3);
@@ -97,7 +97,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(2);
@@ -111,7 +111,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(1);
@@ -125,7 +125,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
+        int actual = lottoTicket.matchCount(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(0);

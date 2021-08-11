@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
 
-    private final List<LottoNumber> winningLottoNumbers;
+    private final LottoTicket winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLottoTicket(List<Integer> winningLottoNumbers, int bonusNumber) {
@@ -13,19 +13,21 @@ public class WinningLottoTicket {
     }
 
     public WinningLottoTicket(List<Integer> winningLottoNumbers, LottoNumber bonusNumber) {
-        this.winningLottoNumbers = winningLottoNumbers.stream()
+        List<LottoNumber> lottoNumbers = winningLottoNumbers.stream()
                 .map(LottoNumber::new).collect(Collectors.toList());
+
+        this.winningLottoNumbers = new LottoTicket(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public int matchCount(LottoNumber lottoNumber) {
+    public int contains(LottoNumber lottoNumber) {
         if (winningLottoNumbers.contains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    public boolean bonusBallMatch(LottoTicket lottoTicket) {
-        return lottoTicket.contains(bonusNumber);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

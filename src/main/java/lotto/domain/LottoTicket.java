@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public final class LottoTicket {
 
     private static final int LOTTO_TICKET_SIZE = 6;
+    private static final int BONUS_TARGET_MATCH_COUNT = 5;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -31,15 +32,28 @@ public final class LottoTicket {
         }
     }
 
-    public int matchLottoTicket(final WinningLottoTicket winningLottoTicket) {
+    public LottoRank matchLottoTicket(final WinningLottoTicket winningLottoTicket) {
+        int matchCount = matchCount(winningLottoTicket);
+
+        if (matchCount != BONUS_TARGET_MATCH_COUNT) {
+            return LottoRank.of(matchCount, false);
+        }
+
+        if (contains(winningLottoTicket.getBonusNumber())) {
+            return LottoRank.SECOND_PLACE;
+        }
+        return LottoRank.of(matchCount, false);
+    }
+
+    public int matchCount(final WinningLottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount += winningLottoTicket.matchCount(lottoNumber);
+            matchCount += winningLottoTicket.contains(lottoNumber);
         }
         return matchCount;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
