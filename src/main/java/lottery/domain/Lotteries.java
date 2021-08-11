@@ -5,6 +5,7 @@ import lottery.dto.LotteryDto;
 import lottery.dto.LotteryStatisticDto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -47,7 +48,7 @@ public class Lotteries {
 
     private BigDecimal getEarningsRate(Map<LotteryResult, Integer> lotteryResultMap) {
         return new BigDecimal(getTotalEarnings(lotteryResultMap))
-                .divide(new BigDecimal(getTotalLotteriesPrice()));
+                .divide(new BigDecimal(getTotalLotteriesPrice()), 4, RoundingMode.HALF_UP);
     }
 
     private long getTotalEarnings(final Map<LotteryResult, Integer> lotteryResultMap) {
