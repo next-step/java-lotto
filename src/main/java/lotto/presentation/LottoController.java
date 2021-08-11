@@ -23,8 +23,7 @@ public class LottoController {
         outputLottos(lottos);
         LottoResults lottoResults = calculateAndGetLottoResults(lottos);
         outputLottoResults(lottoResults);
-        EarningRateOutputView outputView = new EarningRateOutputView();
-        outputView.output(lottoResults.getEarningLate(purchaseAmount));
+        outputEarningRate(purchaseAmount, lottoResults);
     }
 
     private LottoResults calculateAndGetLottoResults(Lottos lottos) {
@@ -72,4 +71,8 @@ public class LottoController {
         return inputView.input();
     }
 
+    private void outputEarningRate(int purchaseAmount, LottoResults lottoResults) {
+        EarningRateOutputView outputView = new EarningRateOutputView();
+        outputView.output(lottoResults.getEarningLate(purchaseAmount));
+    }
 }
