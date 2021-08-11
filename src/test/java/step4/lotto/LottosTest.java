@@ -5,19 +5,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step3.domain.lotto.LottoMachine;
-import step3.domain.lotto.LottoMatch;
-import step3.domain.lotto.LottoNumber;
-import step3.domain.lotto.Lottos;
-import step3.domain.lotto.Profit;
-import step3.domain.lotto.WinOfLotto;
-import step3.domain.money.Cache;
+import step4.domain.lotto.LottoMachine;
+import step4.domain.lotto.LottoMatch;
+import step4.domain.lotto.LottoNumber;
+import step4.domain.lotto.Lottos;
+import step4.domain.lotto.Profit;
+import step4.domain.lotto.WinOfLotto;
+import step4.domain.money.Cache;
+import step4.domain.lotto.LottoRank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static step3.domain.LottoNumbersFactory.buildLottoNumbers;
+import static step4.LottoNumbersFactory.buildLottoNumbers;
 
 class LottosTest {
 

@@ -1,6 +1,6 @@
 package step4;
 
-import step3.domain.lotto.LottoNumber;
+import step4.domain.lotto.LottoNumber;
 import java.util.ArrayList;
 import java.util.List;
 

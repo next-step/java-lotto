@@ -1,9 +1,9 @@
 package step4;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.lotto.LottoMachine;
-import step3.domain.lotto.Lottos;
-import step3.domain.money.Cache;
+import step4.domain.lotto.LottoMachine;
+import step4.domain.lotto.Lottos;
+import step4.domain.money.Cache;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

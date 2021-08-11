@@ -1,7 +1,7 @@
 package step4;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.lotto.LottoRank;
+import step4.domain.lotto.LottoRank;
 import java.util.EnumMap;
 import java.util.Map;
 

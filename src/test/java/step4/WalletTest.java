@@ -2,9 +2,9 @@ package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.money.Cache;
-import step3.domain.money.Money;
-import step3.domain.user.Wallet;
+import step4.domain.money.Cache;
+import step4.domain.money.Money;
+import step4.domain.user.Wallet;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
