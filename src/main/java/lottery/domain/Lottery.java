@@ -40,8 +40,8 @@ public class Lottery {
                 .count();
     }
 
-    public double getBonusMatchesScore(final LotteryNumber bonusNumber) {
-        return LotteryResult.getBonusScore(lotteryNumbers.contains(bonusNumber));
+    public boolean getBonusMatchesScore(final LotteryNumber bonusNumber) {
+        return lotteryNumbers.contains(bonusNumber);
     }
 
     public LotteryDto toDto() {

@@ -119,13 +119,13 @@ public class LotteryTest {
         // given
         Lottery lottery = new Lottery(getLotteryNumbers(1, 6));
         LotteryNumber bonusNumber = new LotteryNumber(5);
-        double expectedMatchesCount = LotteryResult.getBonusScore(true);
+        boolean expectedMatch = true;
 
         // when
-        double matchesCount = lottery.getBonusMatchesScore(bonusNumber);
+        boolean matchesCount = lottery.getBonusMatchesScore(bonusNumber);
 
         // then
-        assertThat(matchesCount).isEqualTo(expectedMatchesCount);
+        assertThat(matchesCount).isEqualTo(expectedMatch);
     }
 
     private List<LotteryNumber> getLotteryNumbers(int start, int end) {
