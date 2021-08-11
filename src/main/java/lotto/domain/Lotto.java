@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class Lotto {
     }
 
     public List<Integer> getElements() {
-        return elements;
+        return Collections.unmodifiableList(elements);
     }
 
 
