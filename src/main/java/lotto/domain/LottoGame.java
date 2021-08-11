@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.util.LottoListGenerator;
 
-import java.util.Set;
-
 public class LottoGame {
     private Lottos lottos;
 
@@ -12,8 +10,8 @@ public class LottoGame {
         return lottos;
     }
 
-    public void drawLotto(Set<LottoNumber> winnerNumbers) {
-        lottos.drawLottos(winnerNumbers);
+    public void drawLotto(Lotto winnerLotto) {
+        lottos.drawLottos(winnerLotto);
     }
 
     public long countWinners(Award award) {

@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Award;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.dto.LottoWinnersDto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -22,11 +19,18 @@ public class LottoMain {
         Lottos lottos = lottoGame.purchase(ticketNumber);
 
         ResultView.printPurchaseLottos(lottos);
-        lottoGame.drawLotto(getWinnerLottoNumbers());
+        lottoGame.drawLotto(getWinnerLotto());
 
         List<LottoWinnersDto> lottoWinnersDtos = createLottoWinnerDtos(lottoGame);
         ResultView.printWinners(lottoWinnersDtos);
         ResultView.printYield(lottoWinnersDtos, lottoPurchaseAmount);
+    }
+
+    private static Lotto getWinnerLotto() {
+        Set<Integer> winnerNumbers = InputView.requestWinnerNumbers();
+        return new Lotto(winnerNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
     }
 
     private static List<LottoWinnersDto> createLottoWinnerDtos(LottoGame lottoGame) {
@@ -38,12 +42,5 @@ public class LottoMain {
 
     private static boolean isBang(Award award) {
         return !award.equals(Award.BANG) && !award.equals(Award.UNIDENTIFIED);
-    }
-
-    private static Set<LottoNumber> getWinnerLottoNumbers() {
-        Set<Integer> winnerNumbers = InputView.requestWinnerNumbers();
-        return winnerNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
     }
 }

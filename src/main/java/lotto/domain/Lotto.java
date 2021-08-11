@@ -40,12 +40,12 @@ public class Lotto {
         }
     }
 
-    public void drawLotto(Set<LottoNumber> winnerNumbers) {
-        award = Award.findBy(countContains(winnerNumbers));
+    public void drawLotto(Lotto winnerLotto) {
+        award = Award.findBy(countContains(winnerLotto));
     }
 
-    public long countContains(Set<LottoNumber> winnerNumbers) {
-        return winnerNumbers.stream()
+    public long countContains(Lotto winnerLotto) {
+        return winnerLotto.getNumbers().stream()
                 .filter(winnerNumber -> this.lottoNumbers.contains(winnerNumber))
                 .count();
     }

@@ -16,10 +16,12 @@ class LottoGameTest {
     public static final int TICKET_NUMBER = 5;
     private LottoGame lottoGame = new LottoGame();
     private Set<LottoNumber> winnerNumbers = new HashSet<>();
+    private Lotto winnerLotto;
 
     @BeforeEach
     void setUp() {
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
+        winnerLotto = new Lotto(winnerNumbers);
     }
 
     @Test
@@ -37,7 +39,7 @@ class LottoGameTest {
             assertEquals(lotto.getAward(), Award.UNIDENTIFIED);
         }
 
-        lottoGame.drawLotto(winnerNumbers);
+        lottoGame.drawLotto(winnerLotto);
         for (Lotto lotto : lottoGame.getLottos().getLottos()) {
             assertNotEquals(lotto.getAward(), Award.UNIDENTIFIED);
         }
@@ -48,7 +50,7 @@ class LottoGameTest {
     @DisplayName("countWinners 함수를 호출했을 때 각각의 합이 ticket의 숫자와 같은 지 확인한다.")
     void countWinners() {
         lottoGame.purchase(TICKET_NUMBER);
-        lottoGame.drawLotto(winnerNumbers);
+        lottoGame.drawLotto(winnerLotto);
         long countAll = lottoGame.countWinners(Award.FIRST) +
                 lottoGame.countWinners(Award.SECOND) +
                 lottoGame.countWinners(Award.THIRD) +

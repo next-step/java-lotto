@@ -20,12 +20,14 @@ class LottoTest {
 
     private Set<LottoNumber> winnerNumbers = new HashSet<>();
     private Set<LottoNumber> lottoNumberList = new HashSet<>();
+    private Lotto winnerLotto;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
         IntStream.rangeClosed(1, 6).forEach(number -> lottoNumberList.add(new LottoNumber(number)));
+        winnerLotto = new Lotto(winnerNumbers);
         lotto = new Lotto(lottoNumberList);
     }
 
@@ -51,8 +53,9 @@ class LottoTest {
         assertEquals(lotto.getAward(), Award.UNIDENTIFIED);
 
         Set<LottoNumber> winnerNumbers = parseStringNumbersToList(winnerNumberString);
+        Lotto winnerLotto = new Lotto(winnerNumbers);
 
-        lotto.drawLotto(winnerNumbers);
+        lotto.drawLotto(winnerLotto);
         assertEquals(lotto.getAward(), Award.valueOf(type));
     }
 
@@ -71,7 +74,7 @@ class LottoTest {
     @CsvSource(value = {"FIRST:true","SECOND:false"}, delimiter = ':')
     @DisplayName("1등으로 당첨 로또의 isWinner 함수의 parameter로 First, Second를 넣었을 때 각각 ture, false를 리턴한다.")
     void isWinnerFirstAward(String type, boolean result){
-        lotto.drawLotto(winnerNumbers);
+        lotto.drawLotto(winnerLotto);
         assertEquals(lotto.isWinner(Award.valueOf(type)), result);
     }
 
