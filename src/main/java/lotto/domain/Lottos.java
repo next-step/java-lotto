@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
+
     private List<Lotto> lottos;
     private Money money;
     private Map<LottoWinning, Integer> winningStatus;

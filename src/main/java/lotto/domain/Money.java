@@ -4,6 +4,7 @@ import calculator.InvalidInputException;
 
 public class Money {
     private static final String INVALID_LOTTO_PURCHASE_MONEY = "1000원이상 입력해야 로또 구매 가능합니다.";
+
     private int purchaseMoney;
     private int reward;
 
