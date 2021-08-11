@@ -14,10 +14,10 @@ public class LottoTickets {
 
     public Map<Integer, Integer> getLottoStatistics(LottoBalls winnerNumbers) {
         Map<Integer, Integer> winStatistics = new HashMap<>();
-        for (LottoBalls lottoTicket : lottoTickets) {
-            int key = lottoTicket.countMatchNumber(winnerNumbers);
-            winStatistics.put(key, winStatistics.getOrDefault(key, 0) + 1);
-        }
+        lottoTickets.forEach(lottoBalls -> {
+            int rank = lottoBalls.countMatchNumber(winnerNumbers);
+            winStatistics.put(rank, winStatistics.getOrDefault(rank, 0) + 1);
+        });
         return winStatistics;
     }
 
