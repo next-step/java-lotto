@@ -20,10 +20,9 @@ public class LottoGenerator {
     }
 
     private List<Integer> shuffle(){
-        List<Integer> lottoElements = new ArrayList<>(LOTTO_NUMBERS);
-        Collections.shuffle(lottoElements);
-        List<Integer> drawnElements = lottoElements.subList(0, 6);
-        Collections.sort(drawnElements);
-        return drawnElements;
+        Collections.shuffle(LOTTO_NUMBERS);
+        List<Integer> drawnLottoNumbers = new ArrayList<>(LOTTO_NUMBERS.subList(0, 6));
+        Collections.sort(drawnLottoNumbers);
+        return drawnLottoNumbers;
     }
 }
