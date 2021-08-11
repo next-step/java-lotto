@@ -1,9 +1,7 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
-import step2.model.AutoLottoStrategy;
-import step2.model.Lotto;
-import step2.model.PurchaseAmount;
+import step2.model.*;
 import step2.view.InputView;
 
 import java.util.*;
@@ -85,7 +83,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호_null_빈문자() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -98,7 +96,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호_6개미만() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -108,7 +106,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호_문자열() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -118,7 +116,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호_중복() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -128,7 +126,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호_빈값() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -139,7 +137,7 @@ public class AutoLottoTest {
     @Test
     public void 당첨번호() {
         //given
-        InputView user = new InputView();
+        WinningNumber user = new WinningNumber();
         List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
 
         //when
@@ -160,7 +158,7 @@ public class AutoLottoTest {
         lottoList.add(Arrays.asList(1,2,3,4,5,6)); //6개당첨
 
         //when
-        Lotto lotto = new Lotto();
+        WinningResult lotto = new WinningResult();
         Map<Integer, Integer> result = lotto.getWinningResult(lottoList, winningNoList);
 
         //then
@@ -181,7 +179,7 @@ public class AutoLottoTest {
         winningResult.put(6, 0);
 
         //when
-        Lotto lotto = new Lotto();
+        WinningResult lotto = new WinningResult();
         String rate = lotto.getWinningRate(amount, winningResult);
 
         //then

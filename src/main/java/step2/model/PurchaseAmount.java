@@ -15,6 +15,7 @@ public class PurchaseAmount {
     public int getLottoCount(String amount) {
         isBlank(amount);
 
+        amount = amount.trim();
         isDigit(amount);
 
         isOverMinAmount(amount);
