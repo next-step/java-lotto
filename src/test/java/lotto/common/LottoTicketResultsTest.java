@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultsTest {
+class LottoTicketResultsTest {
     @Test
     public void 구매금액과_로또결과가_주어지면_수익률을_구할_수_있다(){
         //given

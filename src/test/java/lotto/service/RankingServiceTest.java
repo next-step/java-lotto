@@ -2,8 +2,9 @@ package lotto.service;
 
 import lotto.common.LottoResult;
 import lotto.common.LottoResults;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTickets;
 import lotto.domain.RankingCalculator;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,9 @@ public class RankingServiceTest {
         RankingService service = new RankingService();
         //when
         LottoResults lottoResults = service.calculateMatchHits(
-                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), initializeLottos(), new RankingCalculator());
+                new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                        new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+                        new LottoNumber(6))), initializeLottos(), new RankingCalculator());
         //then
         assertThat(lottoResults).isEqualTo(getExpected());
     }
@@ -31,14 +34,23 @@ public class RankingServiceTest {
         return expected;
     }
 
-    private Lottos initializeLottos() {
-        Lottos lottos = new Lottos();
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 8, 11, 29)));
-        lottos.add(new Lotto(Arrays.asList(2, 3, 6, 9, 10, 22)));
-        lottos.add(new Lotto(Arrays.asList(2, 3, 5, 9, 17, 22)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 9, 10, 23, 44)));
-
-        return lottos;
+    private LottoTickets initializeLottos() {
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(8), new LottoNumber(11),
+                new LottoNumber(29))));
+        lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(6), new LottoNumber(9), new LottoNumber(10),
+                new LottoNumber(22))));
+        lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(5), new LottoNumber(9), new LottoNumber(17),
+                new LottoNumber(22))));
+        lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+                new LottoNumber(8))));
+        lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(9), new LottoNumber(10), new LottoNumber(23),
+                new LottoNumber(44))));
+        return lottoTickets;
     }
 }

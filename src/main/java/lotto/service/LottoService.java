@@ -1,16 +1,16 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoGenerator;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTickets;
 
 public class LottoService {
-    public Lottos execute(int chance, LottoGenerator lottoGenerator) {
-        Lottos lottos = new Lottos();
+    public LottoTickets execute(int chance, LottoGenerator lottoGenerator) {
+        LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < chance; i++) {
-            Lotto lotto = lottoGenerator.generate();
-            lottos.add(lotto);
+            LottoTicket lottoTicket = lottoGenerator.generate();
+            lottoTickets.add(lottoTicket);
         }
-        return lottos;
+        return lottoTickets;
     }
 }

@@ -5,25 +5,25 @@ import lotto.common.LottoResult;
 import java.util.List;
 
 public class RankingCalculator {
-    public LottoResult calculate(List<Integer> lastWeekWinning, Lottos lottos, int expect) {
+    public LottoResult calculate(List<LottoNumber> lastWeekWinning, LottoTickets lottoTickets, int expect) {
         int hits = 0;
-        for (Lotto lotto : lottos.getElements()) {
-            int matchCount = checkLottoMatchCount(lastWeekWinning, lotto);
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            int matchCount = checkLottoMatchCount(lastWeekWinning, lottoTicket);
             hits = increaseResultIfMatchCountSameWithExpect(expect, matchCount, hits);
         }
         return new LottoResult(expect, hits);
     }
 
-    private int checkLottoMatchCount(List<Integer> lastWeekWinning, Lotto lotto) {
+    private int checkLottoMatchCount(List<LottoNumber> lastWeekWinning, LottoTicket lottoTicket) {
         int matchCount = 0;
-        for (int element : lotto.getElements()) {
-            matchCount = increaseIfLastWeekWinningContainsElement(lastWeekWinning, element, matchCount);
+        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
+            matchCount = increaseIfLastWeekWinningContainsElement(lastWeekWinning, lottoNumber, matchCount);
         }
         return matchCount;
     }
 
-    private int increaseIfLastWeekWinningContainsElement(List<Integer> lastWeekWinningElements,
-                                                         int element, int matchCount) {
+    private int increaseIfLastWeekWinningContainsElement(List<LottoNumber> lastWeekWinningElements,
+                                                         LottoNumber element, int matchCount) {
         if (lastWeekWinningElements.contains(element)) {
             return matchCount + 1;
         }

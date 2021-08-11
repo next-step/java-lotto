@@ -20,16 +20,16 @@ public class LottoController {
         int purchaseAmount = inputPurchaseAmount();
         int chance = resolveChance(purchaseAmount);
         outputChance(chance);
-        Lottos lottos = executeLottoGame(chance);
-        outputLottos(lottos);
-        LottoResults lottoResults = calculateAndGetLottoResults(lottos);
+        LottoTickets lottoTickets = executeLottoGame(chance);
+        outputLottos(lottoTickets);
+        LottoResults lottoResults = calculateAndGetLottoResults(lottoTickets);
         outputLottoResults(lottoResults);
         outputEarningRate(purchaseAmount, lottoResults);
     }
 
-    private LottoResults calculateAndGetLottoResults(Lottos lottos) {
+    private LottoResults calculateAndGetLottoResults(LottoTickets lottoTickets) {
         RankingService rankingService = new RankingService();
-        return rankingService.calculateMatchHits(getLastWeekWinningNumbers(), lottos, new RankingCalculator());
+        return rankingService.calculateMatchHits(getLastWeekWinningNumbers(), lottoTickets, new RankingCalculator());
     }
 
     private void outputLottoResults(LottoResults lottoResults) {
@@ -47,7 +47,7 @@ public class LottoController {
         outputView.output(chance);
     }
 
-    private Lottos executeLottoGame(int chance) {
+    private LottoTickets executeLottoGame(int chance) {
         LottoService service = new LottoService();
         return service.execute(chance, new LottoGenerator());
     }
@@ -57,12 +57,12 @@ public class LottoController {
         return resolver.resolveFromPurchaseAmount(purchaseAmount);
     }
 
-    private void outputLottos(Lottos lottos) {
+    private void outputLottos(LottoTickets lottoTickets) {
         LottosOutputView outputView = new LottosOutputView();
-        outputView.output(lottos);
+        outputView.output(lottoTickets);
     }
 
-    private List<Integer> getLastWeekWinningNumbers() {
+    private List<LottoNumber> getLastWeekWinningNumbers() {
         WinningNumberParser parser = new WinningNumberParser();
         return parser.parseToWinningNumbers(inputLastWeekWinningNumbers());
     }
