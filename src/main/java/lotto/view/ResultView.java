@@ -21,15 +21,13 @@ public class ResultView {
             "\n" +
             "------------------------------------");
 
-    for (Rank rank : matchResult.getCategoriesRank().keySet()) {
-
-      System.out.println(rank.getCountOfMatch() + "개 일치"
-          + createResultMessageByRank(rank)
-          + rank.getWinningMoney()
-          + "원) - "
-          + matchResult.getCategoriesRank().get(rank).size()
-          + "개");
-    }
+    matchResult.getCategoriesRanks().keySet().stream().filter(rank -> !rank.equals(Rank.MISS))
+        .map(rank -> rank.getCountOfMatch() + "개 일치"
+            + createResultMessageByRank(rank)
+            + rank.getWinningMoney()
+            + "원) - "
+            + matchResult.getCategoriesRanks().get(rank)
+            + "개").forEach(System.out::println);
 
     System.out.println(
         Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + getProfitResultMessage(gradingScore));

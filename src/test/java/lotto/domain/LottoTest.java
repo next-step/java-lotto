@@ -16,14 +16,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
   @DisplayName("6개의 번호로 로또 생성 테스트.")
   @Test
   void 로또번호생성() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    List<Integer> values = new ArrayList<>();
-    range(1, 7).forEach(values::add);
+    List<Integer> values = getSampleLottoNumbers(7);
 
     Lotto lotto = new Lotto();
 
@@ -38,8 +38,7 @@ class LottoTest {
   @DisplayName("로또번호 목록에서 6개를 담아서 정렬되는지 테스트")
   @Test
   void 로또번호정렬() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    List<Integer> values = new ArrayList<>();
-    range(1, 7).forEach(values::add);
+    List<Integer> values = getSampleLottoNumbers(7);
 
     Lotto lotto = new Lotto();
 
@@ -65,8 +64,7 @@ class LottoTest {
   @DisplayName("중복없는 숫자 6개를 가져와 로또 하나 생성 테스트.")
   @Test
   void 로또한장생성() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-    List<Integer> values = new ArrayList<>();
-    range(1, 7).forEach(values::add);
+    List<Integer> values = getSampleLottoNumbers(7);
 
     Lotto lotto = new Lotto();
 
@@ -101,11 +99,26 @@ class LottoTest {
   @Test
   void 로또번호입력개수검증() {
 
-    List<Integer> values = new ArrayList<>();
-    range(1, 1).forEach(values::add);
+    List<Integer> values = getSampleLottoNumbers(1);
 
     assertThatThrownBy(() ->new Lotto(values))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessage(Message.MSG_ERROR_INPUT_LOTTO_SIZE);
+  }
+
+  @DisplayName("로또안에 숫자와 비교하는 값이 포함되있으면 1을 리턴하는 테스트.")
+  @ParameterizedTest
+  @ValueSource(ints = {1,2,3,4,5,6})
+  void 로또숫자안에비교숫자가있으면값반환(int inputValue) {
+
+    Lotto lotto = new Lotto(getSampleLottoNumbers(7));
+
+    assertThat(lotto.matchCount(new LottoNumber(inputValue))).isEqualTo(1);
+  }
+
+  private List<Integer> getSampleLottoNumbers(final int i) {
+    List<Integer> values = new ArrayList<>();
+    range(1, i).forEach(values::add);
+    return values;
   }
 }

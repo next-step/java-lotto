@@ -36,7 +36,7 @@ public class LotteryDraw {
   }
 
   public double gradingScore(LottoResult lottoResult) {
-    return lottoMoney.getReward(lottoResult.getCategoriesRank().keySet()
+    return lottoMoney.getReward(lottoResult.getCategoriesRanks().keySet()
         .stream()
         .mapToInt(rank -> getCalculation(lottoResult.getRankCount(rank),
             rank.getWinningMoney())).sum());

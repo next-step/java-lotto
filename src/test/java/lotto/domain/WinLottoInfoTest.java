@@ -52,10 +52,9 @@ class WinLottoInfoTest {
 
     WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(createTestWinLotto(1, 2, 3, 4, 5, 6)), 7);
 
-    LottoResult lottoResult = new LottoResult(winLottoInfo);
-    lottoResult.matchLottoInfo(lotteries);
+    LottoResult result = LottoResult.getResult(winLottoInfo, lotteries);
 
-    assertThat(lottoResult.getCategoriesRank().get(Rank.FIRST).size()).isEqualTo(1);
+    assertThat(result.getCategoriesRanks().get(Rank.FIRST)).isEqualTo(1);
   }
 
   @DisplayName("당첨 로또와 구매로또의 번호 비교 테스트.")

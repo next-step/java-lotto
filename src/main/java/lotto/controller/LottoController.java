@@ -33,8 +33,8 @@ public class LottoController {
         InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
         InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER));
 
-    LottoResult lottoResult = new LottoResult(winLottoInfo);
+    LottoResult result = LottoResult.getResult(winLottoInfo, lotteries);
 
-    ResultView.drawResult(lottoResult.matchLottoInfo(lotteries), lotteryDraw.gradingScore(lottoResult));
+    ResultView.drawResult(result, lotteryDraw.gradingScore(result));
   }
 }

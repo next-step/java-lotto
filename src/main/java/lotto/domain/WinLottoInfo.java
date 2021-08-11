@@ -19,29 +19,27 @@ public class WinLottoInfo {
   }
 
   private void validation(final Lotto lotto, final int bonus) {
-    if(lotto.getLotto().contains(new LottoNumber(bonus))){
+    if(lotto.matchCount(new LottoNumber(bonus)) == 1){
       throw new IllegalArgumentException(Message.MSG_ERROR_DUPLICATE_BONUS);
     }
   }
 
   public Rank getMatchCountForRank(Lotto lotto) {
-    return Rank.matchRank(getCountByRank(lotto, INT_ZERO),
+    return Rank.matchRank(getCountByRank(lotto),
         isMatchBonus(lotto));
   }
 
-  private int getCountByRank(final Lotto lotto, int count) {
-    for (LottoNumber lottoNumber : winLotto.getLotto()) {
-      count += checkContainValues(lotto, lottoNumber);
-    }
-    return count;
+  private int getCountByRank(final Lotto lotto) {
+    return winLotto.getLotto().stream()
+        .mapToInt(lottoNumber -> checkContainValues(lotto, lottoNumber)).sum();
   }
 
   private int checkContainValues(final Lotto lotto, final LottoNumber lottoNumber) {
-    return lotto.match(lottoNumber);
+    return lotto.matchCount(lottoNumber);
   }
 
   private boolean isMatchBonus(final Lotto lotto) {
-    return lotto.getLotto().contains(bonusNumber);
+    return lotto.matchCount(bonusNumber) == 1;
   }
 
   @Override

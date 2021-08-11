@@ -32,11 +32,11 @@ class RankTest {
   @DisplayName("2등판별값과 match값을 주입하면 각 등급이 정상적으로 반환되는지 테스트.")
   @Test
   void 판별값포함등급반환테스트() {
-    assertThat(Rank.matchRank(0,false)).isEqualTo(Rank.MISS);
-    assertThat(Rank.matchRank(3,false)).isEqualTo(Rank.FIFTH);
-    assertThat(Rank.matchRank(4,false)).isEqualTo(Rank.FOURTH);
-    assertThat(Rank.matchRank(5,false)).isEqualTo(Rank.THIRD);
-    assertThat(Rank.matchRank(5,true)).isEqualTo(Rank.SECOND);
     assertThat(Rank.matchRank(6,false)).isEqualTo(Rank.FIRST);
+    assertThat(Rank.matchRank(5,true)).isEqualTo(Rank.SECOND);
+    assertThat(Rank.matchRank(5,false)).isEqualTo(Rank.THIRD);
+    assertThat(Rank.matchRank(4,false)).isEqualTo(Rank.FOURTH);
+    assertThat(Rank.matchRank(3,false)).isEqualTo(Rank.FIFTH);
+    assertThat(Rank.matchRank(0,false)).isEqualTo(Rank.MISS);
   }
 }

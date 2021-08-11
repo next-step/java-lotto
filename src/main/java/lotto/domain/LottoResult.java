@@ -1,54 +1,54 @@
 package lotto.domain;
 
+import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.service.Rank;
 
 public class LottoResult {
 
-  private final Map<Rank, List<Lotto>> categoriesRank = new LinkedHashMap<>();
+  private Map<Rank, Integer> categoriesRanks;
 
-  private final WinLottoInfo winLottoInfo;
-
-  public LottoResult(final WinLottoInfo winLottoInfo) {
-    categoriesRank.put(Rank.FIFTH, new ArrayList<>());
-    categoriesRank.put(Rank.FOURTH, new ArrayList<>());
-    categoriesRank.put(Rank.THIRD, new ArrayList<>());
-    categoriesRank.put(Rank.SECOND, new ArrayList<>());
-    categoriesRank.put(Rank.FIRST, new ArrayList<>());
-    categoriesRank.put(Rank.MISS, new ArrayList<>());
-
-    unmodifiableMap(categoriesRank);
-    this.winLottoInfo = winLottoInfo;
+  public LottoResult(final Map<Rank, Integer> result) {
+    categoriesRanks = unmodifiableMap(result);
   }
 
-  public Map<Rank, List<Lotto>> getCategoriesRank() {
-    return categoriesRank;
+  public static LottoResult getResult(final WinLottoInfo winLottoInfo, final Lotteries lotteries) {
+
+    Map<Rank, Integer> result = creatRankInfo().stream()
+        .collect(Collectors.toMap(rank -> rank, number -> 0, (a, b) -> b, LinkedHashMap::new));
+
+    getCountByRank(winLottoInfo, lotteries, result);
+
+    return new LottoResult(result);
+  }
+
+  private static void getCountByRank(final WinLottoInfo winLottoInfo, final Lotteries lotteries,
+      final Map<Rank, Integer> result) {
+    for (Lotto lotto : lotteries.getLottos()){
+      result.computeIfPresent(winLottoInfo.getMatchCountForRank(lotto),(rank, integer) -> integer +1);
+    }
+  }
+
+  private static List<Rank> creatRankInfo() {
+    List<Rank> ranks = new ArrayList<>();
+    Collections.addAll(ranks, Rank.values());
+    ranks.sort(Comparator.comparing(Rank::getWinningMoney));
+    return unmodifiableList(ranks);
+  }
+
+  public Map<Rank, Integer> getCategoriesRanks() {
+    return categoriesRanks;
   }
 
   public int getRankCount(Rank rank){
-    return categoriesRank.get(rank).size();
-  }
-
-  public List<Lotto> getMatchLottos(final Rank matchCountForRank) {
-    return categoriesRank.get(matchCountForRank);
-  }
-
-  public LottoResult matchLottoInfo(Lotteries lotteries) {
-
-    for (Lotto lotto : lotteries.getLottos()) {
-      getLottosByRank(lotto).add(lotto);
-    }
-
-    getCategoriesRank().remove(Rank.MISS);
-    return this;
-  }
-
-  private List<Lotto> getLottosByRank(final Lotto lotto) {
-    return getMatchLottos(winLottoInfo.getMatchCountForRank(lotto));
+    return categoriesRanks.get(rank);
   }
 }
