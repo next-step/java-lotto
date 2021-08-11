@@ -13,9 +13,6 @@ class LottoTest {
     @DisplayName("로또 구입 금액에 맞는 로또 개수")
     void buyLotto() {
         int price = 5000;
-        Lotto lotto = new Lotto();
-        Lotto lottoList = lotto.buyLotto(price);
-        Assertions.assertThat(lottoList.getLotto().size()).isEqualTo(5);
     }
 }
 

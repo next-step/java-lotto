@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Lotto {
     private List<LottoTicket> lotto;
-
-    public Lotto() {
-        this.lotto = new ArrayList<LottoTicket>();
+    public Lotto(int lottoCount) {
+        this.lotto = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            lotto.add(new LottoTicket(LottoMachine.mixLottoNumbers()));
+        }
     }
 
-    public List<LottoTicket> getLotto() {
-        return lotto;
+    public Lotto getLotto() {
+        return this;
     }
 }

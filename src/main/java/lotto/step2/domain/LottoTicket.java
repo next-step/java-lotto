@@ -1,14 +1,18 @@
 package lotto.step2.domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
 
     private List<Integer> lottoNumber;
+    private List<LottoNumber> lottoNumbers;
     private int matchCount;
 
-    public LottoTicket() {
-        this.lottoNumber = LottoMachine.mixLottoNumbers();
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers= lottoNumbers;
     }
 
     public int matchWinningNumber(WinningNumber winningNumber) {

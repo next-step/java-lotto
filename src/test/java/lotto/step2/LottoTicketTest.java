@@ -1,9 +1,6 @@
 package lotto.step2;
 
-import lotto.step2.domain.LottoTicket;
-import lotto.step2.domain.Validation;
-import lotto.step2.domain.WinningNumber;
-import lotto.step2.domain.WinningRank;
+import lotto.step2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +18,7 @@ class LottoTicketTest {
 
     @BeforeEach
     void init() {
-        lottoTicket = new LottoTicket();
+        lottoTicket = new LottoTicket(LottoMachine.mixLottoNumbers());
     }
 
     @Test
