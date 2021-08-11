@@ -6,6 +6,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningResult {
+    private Map<Integer, Integer> result;
+
+    public WinningResult() {
+        this.result = new HashMap<>();
+        for (WinningRule rule : WinningRule.values()) {
+            result.put(rule.getNumberCount(), 0);
+        }
+    }
+
     private List<Integer> combineAll(List<Integer> winningNumberList, List<Integer> lotto) {
         List<Integer> allNumbers = new ArrayList<>();
         allNumbers.addAll(lotto);
@@ -23,12 +32,6 @@ public class WinningResult {
     }
 
     public Map<Integer, Integer> getWinningResult(List<List<Integer>> lottoList, List<Integer> winningNumberList) {
-        Map<Integer, Integer> result = new HashMap<>();
-        result.put(WinningRule.RULE_1.getNumberCount(), 0);
-        result.put(WinningRule.RULE_2.getNumberCount(), 0);
-        result.put(WinningRule.RULE_3.getNumberCount(), 0);
-        result.put(WinningRule.RULE_4.getNumberCount(), 0);
-
         for (List<Integer> lotto : lottoList) {
             List<Integer> allNumbers = combineAll(winningNumberList, lotto);
             Set<Integer> duplicatedNumbers = getDuplicatedNum(allNumbers);
