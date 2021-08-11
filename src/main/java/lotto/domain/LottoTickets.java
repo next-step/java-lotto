@@ -9,20 +9,12 @@ public final class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
-        lottoTickets = new ArrayList<>();
-    }
-
     public LottoTickets(final List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
     public int size() {
         return lottoTickets.size();
-    }
-
-    public void add(final LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
     }
 
     public LottoStatistic matchLottoTickets(final WinningLottoTicket winningLottoTicket) {
@@ -39,7 +31,8 @@ public final class LottoTickets {
         if (matchCount != BONUS_TARGET_MATCH_COUNT) {
             return LottoRank.of(matchCount, false);
         }
-        if (winningLottoTicket.bonusBallMatch(lottoTicket)) {
+
+        if(winningLottoTicket.bonusBallMatch(lottoTicket)) {
             return LottoRank.SECOND_PLACE;
         }
         return LottoRank.of(matchCount, false);

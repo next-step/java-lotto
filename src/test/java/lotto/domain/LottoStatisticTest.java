@@ -26,8 +26,7 @@ public class LottoStatisticTest {
     @DisplayName("로또 보너스볼 일치 O")
     void matchLottoBonusTest() {
         // given
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 7}));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new int[]{1, 2, 3, 4, 5, 7})));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
@@ -41,8 +40,7 @@ public class LottoStatisticTest {
     @DisplayName("로또 보너스볼 일치 X")
     void matchNotLottoBonusTest() {
         // given
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 8}));
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new int[]{1, 2, 3, 4, 5, 8})));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
@@ -56,10 +54,12 @@ public class LottoStatisticTest {
     @DisplayName("로또 여러개 당첨 확인")
     void matchLottoTwoTest() {
         // given
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 45}));
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 44, 45}));
+        List<LottoTicket> lottoTicketsList = Arrays.asList(
+                new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}),
+                new LottoTicket(new int[]{1, 2, 3, 4, 5, 45}),
+                new LottoTicket(new int[]{1, 2, 3, 4, 44, 45})
+        );
+        LottoTickets lottoTickets = new LottoTickets(lottoTicketsList);
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
@@ -81,9 +81,11 @@ public class LottoStatisticTest {
     @DisplayName("로또 중복 당첨 확인")
     void matchLottoOverlapTest() {
         // given
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
-        lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
+        List<LottoTicket> lottoTicketsList = Arrays.asList(
+                new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}),
+                new LottoTicket(new int[]{1, 2, 3, 4, 5, 6})
+        );
+        LottoTickets lottoTickets = new LottoTickets(lottoTicketsList);
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
@@ -97,10 +99,7 @@ public class LottoStatisticTest {
     @DisplayName("수익률 확인")
     void profitRateTest() {
         // given
-        int[] lottoNumbers = {1, 2, 3, 11, 12, 13};
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.add(lottoTicket);
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new int[]{1, 2, 3, 11, 12, 13})));
 
         // when
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
