@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.common;
 
+import lotto.common.WinningNumberParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
