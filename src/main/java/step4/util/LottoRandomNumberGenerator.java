@@ -1,6 +1,7 @@
 package step4.util;
 
 import step4.LottoEntry;
+import step4.LottoNumber;
 
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,7 @@ public class LottoRandomNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public List<Integer> generateNumbersForLotto() {
-        return random.ints(LottoEntry.LOWER_BOUND, LottoEntry.UPPER_BOUND)
+        return random.ints(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
                 .distinct()
                 .limit(LottoEntry.LOTTO_NUMBER_SIZE)
                 .boxed()

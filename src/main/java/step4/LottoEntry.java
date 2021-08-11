@@ -7,14 +7,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoEntry {
-    public static final int LOWER_BOUND = 1;
-    public static final int UPPER_BOUND = 46;
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    protected final Set<Integer> lottoNumbers;
+    protected final Set<LottoNumber> lottoNumbers;
 
     public LottoEntry(List<Integer> numbers) {
-        this.lottoNumbers = new LinkedHashSet<>(numbers);
+        this.lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
         validate();
     }
 
@@ -24,13 +25,13 @@ public class LottoEntry {
         }
     }
 
-    public int countMatches(LottoEntry lottoNumbers) {
+    public int countMatches(LottoEntry lottoEntry) {
         return (int) this.lottoNumbers.stream()
-                .filter(lottoNumbers::contains)
+                .filter(lottoEntry::contains)
                 .count();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
