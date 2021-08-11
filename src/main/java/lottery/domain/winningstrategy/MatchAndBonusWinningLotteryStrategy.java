@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class MatchAndBonusWinningLotteryStrategy implements WinningLotteryStrategy {
 
+    private static final int BONUS_CHECK_SCORE = 5;
     private final Lottery winningLottery;
     private final LotteryNumber bonusNumber;
 
@@ -36,9 +37,11 @@ public class MatchAndBonusWinningLotteryStrategy implements WinningLotteryStrate
                 earningsRate);
     }
 
-    private int getScore(final Lottery lottery) {
-        return winningLottery.getMatchesScore(lottery)
-                + lottery.getBonusMatchesScore(bonusNumber);
+    private double getScore(final Lottery lottery) {
+        int matchesScore = winningLottery.getMatchesCount(lottery);
+        return matchesScore == BONUS_CHECK_SCORE
+                ? matchesScore + lottery.getBonusMatchesScore(bonusNumber)
+                : matchesScore;
     }
 
 }

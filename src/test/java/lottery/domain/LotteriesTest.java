@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import lottery.domain.winningstrategy.MatchAndBonusWinningLotteryStrategy;
 import lottery.domain.winningstrategy.MatchWinningLotteryStrategy;
 import lottery.dto.LotteryResultDto;
 import lottery.dto.LotteryStatisticDto;
@@ -35,8 +36,8 @@ class LotteriesTest {
     }
 
     @Test
-    @DisplayName("getLotteryStatisticDto 테스트우 - 6개 일치하는 경우")
-    public void getLotteryStatisticAllMatches() {
+    @DisplayName("[기본 매칭] 6개 일치하는 경우")
+    public void matchWinningLotteryStrategyAllMatches() {
         // given
         List<Lottery> lotteryList = Arrays.asList(getLottery(1, 6));
         Lotteries lotteries = new Lotteries(lotteryList);
@@ -54,8 +55,8 @@ class LotteriesTest {
     }
 
     @Test
-    @DisplayName("getLotteryStatisticDto 테스트 - 3개 일치하는 경우")
-    public void getLotteryStatisticThreeMatches() {
+    @DisplayName("[기본 매칭] 3개 일치하는 경우")
+    public void matchWinningLotteryStrategyThreeMatches() {
         // given
         List<Lottery> lotteryList = Arrays.asList(getLottery(4, 9), getLottery(11, 16));
         Lotteries lotteries = new Lotteries(lotteryList);
@@ -69,6 +70,46 @@ class LotteriesTest {
 
         // then
         assertThat(counts).containsExactly(1, 0, 0, 0);
+        assertThat(earningsRate).isEqualTo(expectedEarningsRate);
+    }
+
+    @Test
+    @DisplayName("[기본 + 보너스 매칭] 4개 일치하는 경우")
+    public void matchAndBonusWinningLotteryStrategyFourMatches() {
+        // given
+        List<Lottery> lotteryList = Arrays.asList(getLottery(3, 8), getLottery(11, 16));
+        Lotteries lotteries = new Lotteries(lotteryList);
+        Lottery winningLottery = getLottery(1, 6);
+        LotteryNumber bonusNumber = new LotteryNumber(2);
+        BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.FOUR_MATCHES, 2);
+
+        // when
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
+        List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
+        BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
+
+        // then
+        assertThat(counts).containsExactly(0, 1, 0, 0, 0);
+        assertThat(earningsRate).isEqualTo(expectedEarningsRate);
+    }
+
+    @Test
+    @DisplayName("[기본 + 보너스 매칭] 5개 + 보너스 일치하는 경우")
+    public void matchAndBonusWinningLotteryStrategyFiveAndBonusMatches() {
+        // given
+        List<Lottery> lotteryList = Arrays.asList(getLottery(2, 7), getLottery(11, 16));
+        Lotteries lotteries = new Lotteries(lotteryList);
+        Lottery winningLottery = getLottery(1, 6);
+        LotteryNumber bonusNumber = new LotteryNumber(7);
+        BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.FIVE_AND_BONUS_MATCHES, 2);
+
+        // when
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
+        List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
+        BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
+
+        // then
+        assertThat(counts).containsExactly(0, 0, 0, 1, 0);
         assertThat(earningsRate).isEqualTo(expectedEarningsRate);
     }
 
