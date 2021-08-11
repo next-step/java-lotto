@@ -14,7 +14,7 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "빈 문자열 검증 테스트 {index} {0}")
     @ValueSource(strings = {"", " ", "     "})
     public void splitAndSum_빈문자(String inputString) {
         int result = StringAddCalculator.splitAndSum(inputString);
