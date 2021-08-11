@@ -7,7 +7,9 @@
           - [x] 2등을 위해 추가 번호를 하나 더 추첨한다. 
             - [x] 1~45 숫자가 아니면 IllegalArgument 발생
             - [x] 6개의 숫자가 아니면 IllegalArgument 발생
-    - [x] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #LottoNumberGenerator#create()
+        - [ ] 로또 수동을 사고 남은 돈이 있다면 남은 돈은 랜덤으로 로또를 강매해야한다  
+    - [x] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #LottoNumberGenerator#createRadnom()
+    - [ ] 사용자가 수동으로 추첨 번호를 입력 할 수 있도록 해야한다 #LottoNumberGenerator#createInput()
     - [x] 사용자는 돈을 뺄 수 있다. #User#withDrow()
         - [x] 지갑은 돈을 뺄 수 있다. #Wallet#withDrow()
             - [x] 돈이 없는데 인출을 하면 IllegalArgument 발생
@@ -15,7 +17,7 @@
         - [x] 사용자는 지갑에 돈을 저장 할 수 있다. #Wallet#save()
 - [x] 로또 당첨 통계를 보여준다. #LottoStatistics#lottoOfStatistics()
     - [x] 당첨 통계에 2등도 추가해야 한다.
-- [x 로또 수익률을 보여준다. #LottoStatistics#profic()
+- [x] 로또 수익률을 보여준다. #LottoStatistics#profic()
 - [x] 로또 당첨 번호를 입력 할 수 있다. #LottoMachine#winOfLotto()
 
 ### 프로그래밍 요구사항
