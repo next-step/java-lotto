@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoBall {
     public static final int LOTTO_BALL_NUMBER_MIN = 1;
     public static final int LOTTO_BALL_NUMBER_MAX = 45;
-    private static final Map<Integer, LottoBall> LOTTO_BALL_MAP =
+    private static final Map<Integer, LottoBall> LOTTO_BALLS =
         IntStream.rangeClosed(LOTTO_BALL_NUMBER_MIN, LOTTO_BALL_NUMBER_MAX)
             .mapToObj(LottoBall::new)
             .collect(Collectors.toMap(LottoBall::number, Function.identity()));
@@ -23,7 +23,7 @@ public class LottoBall {
 
     public static LottoBall select(int number) {
         validate(number);
-        return LOTTO_BALL_MAP.get(number);
+        return LOTTO_BALLS.get(number);
     }
 
     private static void validate(int number) {
@@ -58,8 +58,4 @@ public class LottoBall {
         return Objects.hash(number);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(number);
-    }
 }
