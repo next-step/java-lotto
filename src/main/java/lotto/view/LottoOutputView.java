@@ -17,7 +17,8 @@ public class LottoOutputView {
 	private static final String BUY_RESULT_MESSAGE = "개를 구매했습니다.";
 	private static final String RESULT_START_MESSAGE = "당첨 통계";
 	private static final String DASH_LINE = "---------";
-	public static final int ZERO_POINT = 0;
+	private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
+	private static final String EMPTY_MESSAGE = " ";
 
 	public static void printLottoCount(Money money) {
 		System.out.println(LottoCountCalculator.calculateLottoCount(money.getPurchaseMoney()) + BUY_RESULT_MESSAGE);
@@ -41,17 +42,25 @@ public class LottoOutputView {
 		System.out.println(RESULT_START_MESSAGE);
 		System.out.println(DASH_LINE);
 		int totalWinningMoney = winPrizes.getTotalWinningMoney();
-		winPrizes.winLottos().forEach(prize -> printResultStatus(winPrizes, prize));
+		winPrizes.winLottos()
+			.stream()
+			.filter(prize -> prize != Prize.MISS)
+			.forEach(prize -> {
+				String message = BONUS_MATCH_MESSAGE;
+				if (prize != Prize.SECOND) {
+					message = EMPTY_MESSAGE;
+				}
+				prizePrizeStats(winPrizes, prize, message);
+			});
 		System.out.println("총 수익률은 " + PrizeRate.calculatePrizeEarningRate(totalWinningMoney, purchaseMoney) + "입니다.");
 	}
 
-	private static void printResultStatus(WinPrizes winPrizes, Prize prize) {
-		if (prize.getWinningMoney() > ZERO_POINT) {
-			System.out.println(prize.getCountOfMatch() +
-				"개 일치" +
-				"(" + prize.getWinningMoney() + ")" +
-				"-" + winPrizes.findWinPrizeGrade(prize) + "개");
-		}
+	private static void prizePrizeStats(WinPrizes winPrizes, Prize prize, String message) {
+		System.out.println(prize.getCountOfMatch() +
+			"개 일치" +
+			message +
+			"(" + prize.getWinningMoney() + ")" +
+			"-" + winPrizes.findWinPrizeGrade(prize) + "개");
 	}
 
 }

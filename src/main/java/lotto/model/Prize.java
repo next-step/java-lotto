@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public enum Prize {
 	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
 	THIRD(5, 1_500_000),
 	FOURTH(4, 50_000),
 	FIFTH(3, 5_000),
@@ -34,7 +35,10 @@ public enum Prize {
 			.collect(Collectors.toList());
 	}
 
-	public static Prize getWinnersStatus(int countOfMatch) {
+	public static Prize getWinnersStatus(int countOfMatch, boolean matchBonus) {
+		if (SECOND.countOfMatch == countOfMatch && matchBonus) {
+			return SECOND;
+		}
 		return Arrays.stream(Prize.values())
 			.filter(r -> r.countOfMatch == countOfMatch)
 			.findFirst()
