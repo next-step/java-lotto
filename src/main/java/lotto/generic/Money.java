@@ -41,18 +41,14 @@ public class Money {
         return new Money(this.amount.multiply(BigDecimal.valueOf(percent)));
     }
 
-    public Money divide(double divisor) {
-        return new Money(amount.divide(BigDecimal.valueOf(divisor)));
-    }
-
-    public BigDecimal divide(Money amount) {
-        return this.amount.divide(amount.amount);
-    }
-
-    public double toRatio(Money amount) {
-        return this.divide(amount)
-                .setScale(2, BigDecimal.ROUND_FLOOR)
+    public double divide(Money amount) {
+        return this.amount.divide(amount.amount, 2, BigDecimal.ROUND_FLOOR)
                 .doubleValue();
+    }
+
+    public int divideAndDiscardRemainder(Money amount) {
+        return this.amount.divide(amount.amount, BigDecimal.ROUND_FLOOR)
+                .intValue();
     }
 
     public BigDecimal getAmount() {
@@ -72,7 +68,7 @@ public class Money {
             return false;
         }
 
-        Money other = (Money)object;
+        Money other = (Money) object;
         return Objects.equals(amount.doubleValue(), other.amount.doubleValue());
     }
 
