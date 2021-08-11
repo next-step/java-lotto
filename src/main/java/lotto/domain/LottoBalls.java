@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoBalls {
     private final static int LOTTO_BALLS_MAX_NUM = 6;
@@ -52,13 +51,13 @@ public class LottoBalls {
     }
 
     public int countMatchNumber(LottoBalls winnerNumbers) {
-        return (int)winnerNumbers.getLottoBallsStream()
-            .filter(winnerNumber -> this.contains(winnerNumber.number()))
+        return (int) lottoBalls.stream()
+            .filter(lottoBall -> winnerNumbers.contains(lottoBall.number()))
             .count();
     }
 
-    public Stream<LottoBall> getLottoBallsStream() {
-        return lottoBalls.stream();
+    public Set<LottoBall> getLottoBalls() {
+        return lottoBalls;
     }
 }
 
