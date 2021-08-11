@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoWinning {
     FAIL(0, 0),
     FOURTH(3, 5_000),
@@ -16,10 +18,12 @@ public enum LottoWinning {
     }
 
     public static LottoWinning getWinningStatus(int matchCount) {
-        for (LottoWinning status : LottoWinning.values()) {
-            if (matchCount == status.getMatchCount()) {
-                return status;
-            }
+        LottoWinning winning = Arrays.stream(LottoWinning.values())
+                                    .filter(s -> s.getMatchCount() == matchCount)
+                                    .findAny()
+                                    .orElse(null);
+        if (winning != null) {
+            return winning;
         }
         return FAIL;
     }
