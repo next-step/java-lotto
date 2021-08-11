@@ -1,15 +1,10 @@
 package lotto.step2;
 
 import lotto.step2.domain.LottoNumber;
-import lotto.step2.domain.WinningNumber;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningNumberTest {
 

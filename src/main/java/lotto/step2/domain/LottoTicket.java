@@ -11,7 +11,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchWinningNumber(WinningNumber winningNumber) {
+    public int matchWinningNumber(LottoTicket winningNumber) {
         int matchCount = 0;
         for (LottoNumber num : lottoNumbers) {
             matchCount += isContainNumber(winningNumber, num);
@@ -20,11 +20,15 @@ public class LottoTicket {
         return matchCount;
     }
 
-    private int isContainNumber(WinningNumber winningNumber, LottoNumber num) {
-        if (winningNumber.getWinningNumbers().contains(num)) {
+    private int isContainNumber(LottoTicket winningNumber, LottoNumber num) {
+        if (winningNumber.getLottoNumbers().contains(num)) {
             return 1;
         }
         return 0;
+    }
+
+    public static LottoTicket generateWinningNumber(List<LottoNumber> winningNumbers) {
+        return new LottoTicket(winningNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {

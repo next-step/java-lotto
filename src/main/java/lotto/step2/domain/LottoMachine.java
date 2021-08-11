@@ -19,7 +19,7 @@ public class LottoMachine {
 
     public static List<LottoNumber> mixLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return new ArrayList<LottoNumber>(lottoNumbers.subList(LOTTO_FIRST_COUNT, LOTTO_LAST_COUNT));
+        return new ArrayList<>(lottoNumbers.subList(LOTTO_FIRST_COUNT, LOTTO_LAST_COUNT));
     }
 
 }
