@@ -21,7 +21,12 @@ public class StringAddCalculator {
             delimitersRegex += ("|" + matcher.group(1));
             String[] splitedNumsString = matcher.group(2).split(delimitersRegex);
             for (String numString : splitedNumsString) {
-                result += Integer.parseInt(numString);
+                int num = Integer.parseInt(numString);
+                // 음수값 입력 시 예외 발생 구현
+                if (num < 0) {
+                    throw new RuntimeException("숫자는 0 이상이어야 합니다.");
+                }
+                result += num;
             }
             return result;
 
@@ -30,7 +35,11 @@ public class StringAddCalculator {
         // 기본 구분자를 이용한 분리 및 합계 반환 구현
         String[] splitedNumsString = inputString.split(delimitersRegex);
         for (String numString : splitedNumsString) {
-            result += Integer.parseInt(numString);
+            int num = Integer.parseInt(numString);
+            if (num < 0) {
+                throw new RuntimeException("숫자는 0 이상이어야 합니다.");
+            }
+            result += num;
         }
 
         return result;
