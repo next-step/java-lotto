@@ -25,11 +25,11 @@ public enum LottoWinning {
     }
 
     public int getMatchCount() {
-        return this.matchCount;
+        return matchCount;
     }
 
     public int getReward() {
-        return this.reward;
+        return reward;
     }
 
 }

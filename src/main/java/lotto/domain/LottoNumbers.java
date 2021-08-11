@@ -40,7 +40,7 @@ public class LottoNumbers {
     }
 
     public Set<Integer> getWinningNumbers() {
-        return this.winningNumbers;
+        return winningNumbers;
     }
 
     private void validateWinningNumbers(Set<Integer> winningNumbers) {

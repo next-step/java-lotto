@@ -23,11 +23,11 @@ public class Lottos {
     }
 
     private int getNumberOfPurchase() {
-        return this.money.getPurchaseMoney() / LOTTO_PRICE;
+        return money.getPurchaseMoney() / LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return lottos;
     }
 
     public void checkLottosWinning(LottoNumbers lottoNumbers) {
@@ -45,11 +45,11 @@ public class Lottos {
     }
 
     public Map<LottoWinning, Integer> getWinningStatus() {
-        return this.winningStatus;
+        return winningStatus;
     }
 
     public Money getMoney() {
-        return this.money;
+        return money;
     }
 
 }

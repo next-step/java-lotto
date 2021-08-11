@@ -20,7 +20,7 @@ public class Money {
     }
 
     public int getPurchaseMoney() {
-        return this.purchaseMoney;
+        return purchaseMoney;
     }
 
     public void plusReward(int reward) {
