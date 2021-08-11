@@ -6,17 +6,14 @@ import java.util.List;
 import java.util.Random;
 
 public class AutoLottoStrategy implements LottoStrategy{
-    private static final int MIN = 1;
-    private static final int MAX = 45;
-    private static final int NUMBER_CNT = 6;
-
-    @Override
-    public List<Integer> getNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    public AutoLottoStrategy() {
         for (int i = MIN; i <= MAX; i++) {
             numbers.add(i);
         }
+    }
 
+    @Override
+    public List<Integer> getNumbers() {
         long seed = System.nanoTime();
         Collections.shuffle(numbers, new Random(seed));
 
