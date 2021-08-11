@@ -11,6 +11,7 @@ public class RankingService {
 
     private static final int MIN_EXPECT = 3;
     private static final int MAX_EXPECT = 6;
+
     public LottoResults calculateMatchHits(List<Integer> lastWeekWinning, Lottos lottos, RankingCalculator calculator) {
 
         LottoResults lottoResults = new LottoResults();
