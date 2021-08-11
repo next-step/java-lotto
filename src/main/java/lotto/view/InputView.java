@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.exception.IntputError;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -12,11 +14,14 @@ public class InputView {
     public static int buyLotto() {
         System.out.println("구매 금앱을 입력해 주세요.");
         int count = Integer.parseInt(scanner.nextLine()) / LOTTO_PRICE;
+        if (count < 0) {
+            throw new IntputError("로또를 구매할 수 없는 금액입니다.");
+        }
         System.out.println(count + "개를 구매했습니다.");
         return count;
     }
 
-    public static String inputWinningNumber(){
+    public static String inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }
