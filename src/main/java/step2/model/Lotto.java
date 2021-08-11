@@ -28,10 +28,8 @@ public class Lotto {
         result.put(WinningRule.RULE_4.getNumberCount(), 0);
 
         for (List<Integer> lotto : lottoList) {
-            //중복 숫자 반환
             Set<Integer> duplicatedNumbers = getDuplicatedNum(combineAll(winningNumberList, lotto));
 
-            //map으로 결과 저장
             saveWinningResult(result, duplicatedNumbers);
         }
 
@@ -69,7 +67,6 @@ public class Lotto {
             totalWinPrice += rule.getWinningPrice() * winningCnt;
         }
 
-        //둘째자리까지 버림
         double result = (double) totalWinPrice / (double) amount;
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         decimalFormat.setRoundingMode(RoundingMode.DOWN);

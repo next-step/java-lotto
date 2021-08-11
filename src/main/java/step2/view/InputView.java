@@ -41,13 +41,10 @@ public class InputView {
     }
 
     public int getLottoCount(String amount) {
-        //빈값 검사
         isBlank(amount);
 
-        //숫자인지 검사
         isDigit(amount);
 
-        //구매 최소금액 검사
         isOverMinAmount(amount);
 
         int purchaseAmount = getPurchaseAmount(amount);
@@ -61,21 +58,17 @@ public class InputView {
     }
 
     public List<Integer> getWinningNumbers(String winningNumbers) {
-        //빈값 검사
         isBlank(winningNumbers);
 
-        //6개인지 검사
         isValidNumberCount(winningNumbers);
 
         String[] numbers = winningNumbers.split(",");
         for (String number : numbers) {
-            //숫자인지 검사
             isDigit(number);
         }
 
         List<Integer> winningNumberList = new ArrayList<>();
         for (String number : numbers) {
-            //같은 숫자 포함 여부 검사
             isDuplicate(winningNumberList, Integer.parseInt(number));
         }
 
