@@ -33,8 +33,9 @@ public class LottoController {
 
     private void gameStart(LottoTicket lottoTicket) {
         String inputNumbers = Input.getPastLottoNumber();
+        Integer bonusNumber = Input.getBonusLottoNumber();
         try {
-            lottoGame.settingWinningNumber(inputNumbers);
+            lottoGame.settingWinningNumber(inputNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             Result.notValidNumber();
             return;

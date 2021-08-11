@@ -3,14 +3,15 @@ package lotto;
 import lotto.model.LottoTicket;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LottoTicketTest {
     private static final int GAME_COUNT = 10;
-    private static final int LOTTO_NUMBER_LENGTH = 6;
 
-    LottoTicket lottoTicket = new LottoTicket();
+    LottoTicket lottoTicket = new LottoTicket(new ArrayList<>());
 
     @Test
     void 게임수_만큼_로또번호_자동생성() {

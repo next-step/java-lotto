@@ -1,39 +1,32 @@
 package lotto;
 
 import lotto.model.LottoNumber;
+import lotto.model.LottoNumberPicker;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 public class LottoNumberTest {
 
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
-
-    LottoNumber lottoNumber = new LottoNumber();
+    private static final int TEST_LOTTO_NUBMER = 1;
 
     @Test
-    void 로또_숫자_1부터_45까지() {
-        List<Integer> numbers = lottoNumber.getLottoNumber();
-        for (int number : numbers) {
-            assertThat(number).isGreaterThanOrEqualTo(LOTTO_START_NUMBER)
-                    .isLessThanOrEqualTo(LOTTO_END_NUMBER);
-        }
+    void 로또_숫자_값_체크() {
+        LottoNumber lottoNumber = new LottoNumber(TEST_LOTTO_NUBMER);
+        assertThat(lottoNumber.getLottoNumber()).isEqualTo(TEST_LOTTO_NUBMER);
     }
 
     @Test
-    void 로또_숫자_6개_섞였나() {
-        List<Integer> numbers = lottoNumber.getLottoNumber();
-
-        LottoNumber lottoNumber2 = new LottoNumber();
-        lottoNumber2.shuffle();
-        List<Integer> shuffleNumber = lottoNumber2.getLottoNumber();
-
-        assertThat(numbers.get(0)).isNotEqualTo(shuffleNumber.get(0));
+    void 로또_숫자_값_체크2() {
+        LottoNumber lottoNumber = LottoNumberPicker.pickNumber(TEST_LOTTO_NUBMER);
+        assertThat(lottoNumber.getLottoNumber()).isEqualTo(TEST_LOTTO_NUBMER);
     }
 
-
+    @Test
+    void 로또_숫자_예외() {
+        assertThatThrownBy(() -> new LottoNumber(46))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.type.Winning;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,14 +10,15 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_WINNING_MIN_COUNT = 3;
     private static final int DEFAULT_LOTTO_AMOUNT = 0;
+    private static final int MATCHED_BONUS_COUNT = 5;
 
     private int purchaseAmount = 0;
     private int gameCount = 0;
-    private WinningNumber winningNumber;
+    private WinningNumbers winningNumbers;
 
     public LottoTicket getLottoTicket() {
-        LottoTicket lottoTicket = new LottoTicket();
-        return lottoTicket.generateNumbers(this.gameCount);
+        return new LottoTicket(new ArrayList<>())
+                .generateNumbers(this.gameCount);
     }
 
     public int getLottoAmount(int purchaseAmount) {
@@ -28,26 +30,36 @@ public class LottoGame {
         return this.gameCount;
     }
 
-    public void settingWinningNumber(String numberText) {
-        winningNumber = new WinningNumber(numberText);
+    public void settingWinningNumber(String numberText, int bonusNumber) {
+        winningNumbers = new WinningNumbers(numberText, bonusNumber);
     }
 
     public Map<Winning, Integer> setWinningCount(LottoTicket lottoTicket) {
         Map<Winning, Integer> winningCount = new HashMap<>();
         for (LottoNumbers lottoNumbers : lottoTicket.getTicketInfo()) {
-            int count = winningNumber.checkOverlapNumber(lottoNumbers.selectedNumber());
-            setCount(winningCount, count);
+            setCount(winningCount, lottoNumbers);
         }
         return winningCount;
     }
 
+    private boolean matchedBonus(LottoNumbers lottoNumbers, int count) {
+        if (count == MATCHED_BONUS_COUNT) {
+            return winningNumbers.checkBonusNumber(lottoNumbers.selectedNumber());
+        }
+        return false;
+    }
 
-    private void setCount(Map<Winning, Integer> winningCount, int overlapCount) {
-        int count = 1;
+    private void setCount(Map<Winning, Integer> winningCount, LottoNumbers lottoNumbers) {
+        int overlapCount = winningNumbers.checkOverlapNumber(lottoNumbers.selectedNumber());
         if (overlapCount < LOTTO_WINNING_MIN_COUNT) {
             return;
         }
-        Winning winning = Winning.findByWinning(overlapCount);
+        Winning winning = Winning.findByWinning(overlapCount, matchedBonus(lottoNumbers, overlapCount));
+        countUp(winningCount, winning);
+    }
+
+    private void countUp(Map<Winning, Integer> winningCount, Winning winning) {
+        int count = 1;
         if (winningCount.containsKey(winning)) {
             count = winningCount.get(winning);
             count += 1;
