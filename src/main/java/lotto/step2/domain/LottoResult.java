@@ -5,18 +5,22 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class LottoResult {
-
     private Map<WinningRank, Integer> lottoResult;
+    private LottoTicket winningNumber;
 
-    public LottoResult() {
+    public LottoResult(LottoTicket winningNumber) {
         this.lottoResult = new HashMap<>();
+        this.winningNumber = winningNumber;
     }
 
-    public Map<WinningRank, Integer> checkLottoTicket(LottoTicket winningNumber, Lotto lotto) {
-        for (LottoTicket lottoTicket : lotto.getLotto()) {
+    public Map<WinningRank, Integer> checkLottoTicket(LottoTicket lottoTicket) {
             int matchCount = lottoTicket.matchWinningNumber(winningNumber);
             checkWinningRank(matchCount);
-        }
+
+        return lottoResult;
+    }
+
+    public Map<WinningRank, Integer> getLottoResult() {
         return lottoResult;
     }
 

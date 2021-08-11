@@ -9,7 +9,7 @@ public class Lotto {
     public Lotto(int lottoCount) {
         this.lotto = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lotto.add(new LottoTicket(LottoMachine.mixLottoNumbers()));
+            buyLotto(LottoMachine.mixLottoNumbers());
         }
     }
 
@@ -18,11 +18,18 @@ public class Lotto {
         return lotto.toString();
     }
 
-    public Lotto buyLotto() {
-        return this;
+
+    public void buyLotto(List<LottoNumber> lottoNumbers) {
+        lotto.add(new LottoTicket(lottoNumbers));
     }
 
     public List<LottoTicket> getLotto() {
         return lotto;
+    }
+
+    public void matchLotto(LottoResult lottoResult) {
+        for (LottoTicket lottoTicket : this.lotto) {
+            lottoResult.checkLottoTicket(lottoTicket);
+        }
     }
 }

@@ -11,6 +11,6 @@ public class LottoShop {
         this.lotto = new Lotto(lottoCount);
     }
     public Lotto sellLotto() {
-        return lotto.buyLotto();
+        return this.lotto;
     }
 }
