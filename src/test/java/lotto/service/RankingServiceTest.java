@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.common.LottoResult;
 import lotto.common.LottoResults;
-import lotto.common.MatchHits;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.RankingCalculator;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
