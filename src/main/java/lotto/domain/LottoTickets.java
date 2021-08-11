@@ -6,7 +6,6 @@ import java.util.List;
 public final class LottoTickets {
 
     private static final int BONUS_TARGET_MATCH_COUNT = 5;
-    private static final int SECOND_PLACE_MATCH_COUNT = 6;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -26,50 +25,25 @@ public final class LottoTickets {
         lottoTickets.add(lottoTicket);
     }
 
-    public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers) {
+    public LottoStatistic matchLottoTickets(final WinningLottoTicket winningLottoTicket) {
         List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchingCount = lottoTicket.matchLottoTicket(winningNumbers);
-            LottoRank lottoRank = LottoRank.of(matchingCount, false);
+            LottoRank lottoRank = findLottoRank(lottoTicket, winningLottoTicket);
             lottoStatistic.add(lottoRank);
         }
         return new LottoStatistic(lottoStatistic);
     }
 
-    public LottoStatistic matchLottoTickets(final List<Integer> winningNumbers, final int bonusNumber) {
-        List<LottoRank> lottoStatistic = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = findLottoRank(lottoTicket, winningNumbers, bonusNumber);
-            lottoStatistic.add(lottoRank);
-        }
-        return new LottoStatistic(lottoStatistic);
-    }
-
-    private LottoRank findLottoRank(final LottoTicket lottoTicket,
-                                    final List<Integer> winningNumbers,
-                                    final int bonusNumber) {
-        int matchLottoNumberCount = lottoTicket.matchLottoTicket(winningNumbers);
-        if (matchLottoNumberCount != BONUS_TARGET_MATCH_COUNT) {
-            return LottoRank.of(matchLottoNumberCount, false);
+    private LottoRank findLottoRank(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
+        int matchCount = lottoTicket.matchLottoTicket(winningLottoTicket);
+        if (matchCount != BONUS_TARGET_MATCH_COUNT) {
+            return LottoRank.of(matchCount, false);
         }
 
-        List<Integer> winningNumbersAndBonusNumber = cloneWinningNumbersAndBonusNumber(winningNumbers, bonusNumber);
-        if (isSecondPlaceLottoTicket(lottoTicket, winningNumbersAndBonusNumber)) {
+        if (lottoTicket.contains(winningLottoTicket.getBonusNumber())) {
             return LottoRank.SECOND_PLACE;
         }
-        return LottoRank.of(matchLottoNumberCount, false);
-    }
-
-    private List<Integer> cloneWinningNumbersAndBonusNumber(final List<Integer> winningNumbers, final int bonusNumber) {
-        List<Integer> winningNumbersWithBonusNumber = new ArrayList<>(winningNumbers);
-        winningNumbersWithBonusNumber.add(bonusNumber);
-        return winningNumbersWithBonusNumber;
-    }
-
-    private boolean isSecondPlaceLottoTicket(final LottoTicket lottoTicket,
-                                             final List<Integer> winningNumbersAndBonusNumber) {
-        int matchBonusCount = lottoTicket.matchLottoTicket(winningNumbersAndBonusNumber);
-        return matchBonusCount == SECOND_PLACE_MATCH_COUNT;
+        return LottoRank.of(matchCount, false);
     }
 
     public List<LottoTicket> getLottoTickets() {

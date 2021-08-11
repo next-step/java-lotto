@@ -14,22 +14,23 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class LottoStatisticTest {
 
     private List<Integer> winningNumbers;
+    private WinningLottoTicket winningLottoTicket;
 
     @BeforeEach
     void setUp() {
         winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        winningLottoTicket = new WinningLottoTicket(winningNumbers, new LottoNumber(7));
     }
 
     @Test
     @DisplayName("로또 보너스볼 일치 O")
     void matchLottoBonusTest() {
         // given
-        int bonusNumber = 7;
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 7}));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers, bonusNumber);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
         int rankCount = lottoStatistic.getRankCount(LottoRank.SECOND_PLACE);
 
         // then
@@ -40,12 +41,11 @@ public class LottoStatisticTest {
     @DisplayName("로또 보너스볼 일치 X")
     void matchNotLottoBonusTest() {
         // given
-        int bonusNumber = 7;
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 8}));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers, bonusNumber);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
         int rankCount = lottoStatistic.getRankCount(LottoRank.THIRD_PLACE);
 
         // then
@@ -62,7 +62,7 @@ public class LottoStatisticTest {
         lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 44, 45}));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
         int countMatchSix = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
         int countMatchFive = lottoStatistic.getRankCount(LottoRank.THIRD_PLACE);
         int countMatchFour = lottoStatistic.getRankCount(LottoRank.FOURTH_PLACE);
@@ -86,7 +86,7 @@ public class LottoStatisticTest {
         lottoTickets.add(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
         int actual = lottoStatistic.getRankCount(LottoRank.FIRST_PLACE);
 
         // then
@@ -103,7 +103,7 @@ public class LottoStatisticTest {
         lottoTickets.add(lottoTicket);
 
         // when
-        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningNumbers);
+        LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
         Double profitRate = lottoStatistic.getProfitRate(10000);
 
         // then

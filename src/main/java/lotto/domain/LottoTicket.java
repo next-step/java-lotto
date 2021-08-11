@@ -31,19 +31,16 @@ public final class LottoTicket {
         }
     }
 
-    public int matchLottoTicket(final List<Integer> winningNumbers) {
+    public int matchLottoTicket(final WinningLottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount += getMatchCount(winningNumbers, lottoNumber);
+            matchCount += winningLottoTicket.matchCount(lottoNumber);
         }
         return matchCount;
     }
 
-    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber) {
-        if (winningNumbers.contains(lottoNumber.getNumber())) {
-            return 1;
-        }
-        return 0;
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
@@ -63,4 +60,5 @@ public final class LottoTicket {
     public String toString() {
         return lottoNumbers.toString();
     }
+
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("로또 단일 상품 테스트")
 class LottoTicketTest {
 
-    private final List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private List<Integer> winningNumbers;
+    private WinningLottoTicket winningLottoTicket;
+
+    @BeforeEach
+    void setUp() {
+        winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        winningLottoTicket = new WinningLottoTicket(winningNumbers, new LottoNumber(7));
+    }
 
     @Test
     @DisplayName("로또번호 유효성 검사 Exception 발생")
@@ -33,7 +41,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(6);
@@ -47,7 +55,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(5);
@@ -61,7 +69,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(4);
@@ -75,7 +83,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(3);
@@ -89,7 +97,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(2);
@@ -103,7 +111,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(1);
@@ -117,7 +125,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int actual = lottoTicket.matchLottoTicket(winningNumbers);
+        int actual = lottoTicket.matchLottoTicket(winningLottoTicket);
 
         //then
         assertThat(actual).isEqualTo(0);
