@@ -5,46 +5,49 @@ import lotto.dto.WinStats;
 import java.util.*;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
-    private Money money;
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(Money money, LottoNumbers lottoNumbers) {
-        int size = money.countLotto();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumbers));
-        }
-        this.lottoTickets = lottoTickets;
-        this.money = money;
-    }
-
-    public int size() {
-        return lottoTickets.size();
+    public LottoTickets(List<LottoTicket> lottoTickets, List<LottoTicket> manualNumbers) {
+        this.lottoTickets.addAll(manualNumbers);
+        this.lottoTickets.addAll(lottoTickets);
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
 
-    public WinStats getWinStats(LottoNumbers winNumbers, int bonusNumber) {
+    public WinStats getWinStats(WinLotto winLotto, Money money) {
         Map<WinAmount, Integer> matchMap = new HashMap<>();
         long amount = 0;
 
         for (LottoTicket i : lottoTickets) {
-            WinAmount winAmount = i.getWinAmount(winNumbers, bonusNumber);
+            WinAmount winAmount = i.getWinAmount(winLotto);
             if (winAmount != WinAmount.FAIL) {
                 matchMap.put(winAmount, matchMap.getOrDefault(winAmount, 0) + 1);
                 amount += winAmount.getReward();
             }
         }
 
-        return new WinStats(matchMap, calculateYield(amount));
+        return new WinStats(matchMap, calculateYield(amount, money));
     }
 
-    private float calculateYield(long amount) {
+    private float calculateYield(long amount, Money money) {
         if (amount == 0) {
             return 0;
         }
         return (float) amount / money.getValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
     }
 }

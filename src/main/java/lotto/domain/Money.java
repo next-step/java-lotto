@@ -15,7 +15,7 @@ public class Money {
         return value;
     }
 
-    int countLotto() {
+    public int countLotto() {
         return value / MIN_PRICE;
     }
 
