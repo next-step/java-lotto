@@ -11,11 +11,6 @@ import static java.util.stream.Collectors.toList;
 public class LottoGame {
     public static final Money LOTTO_PRICE = Money.wons(1000L);
 
-    private static final List<Integer> lottoNumbers = IntStream
-            .rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-            .boxed()
-            .collect(toList());
-
     public static LottoTickets buy(Money money) {
         int ticketCounts = calculateTicketCount(money);
         List<LottoNumbers> lottoTickets = makeLottoTickets(ticketCounts);
