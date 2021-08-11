@@ -33,15 +33,14 @@ public class Lottery {
         return winningLotteryStrategy.getLotteryResult(this);
     }
 
-    public int getMatchesScore(final Lottery lottery) {
-        return LotteryResult.getTotalMatchScore(
-                (int) lottery.lotteryNumbers
+    public int getMatchesCount(final Lottery lottery) {
+        return (int) lottery.lotteryNumbers
                 .stream()
                 .filter(this.lotteryNumbers::contains)
-                .count());
+                .count();
     }
 
-    public int getBonusMatchesScore(final LotteryNumber bonusNumber) {
+    public double getBonusMatchesScore(final LotteryNumber bonusNumber) {
         return LotteryResult.getBonusScore(lotteryNumbers.contains(bonusNumber));
     }
 

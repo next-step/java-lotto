@@ -27,7 +27,7 @@ class LotteryResultTest {
     @DisplayName("getLotteryResult 테스트")
     public void getLotteryResult() {
         // given
-        int score = LotteryResult.getTotalMatchScore(3);
+        int score = 3;
         LotteryResult expected = LotteryResult.THREE_MATCHES;
 
         // when

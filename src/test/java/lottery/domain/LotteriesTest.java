@@ -3,7 +3,6 @@ package lottery.domain;
 import lottery.domain.winningstrategy.MatchWinningLotteryStrategy;
 import lottery.dto.LotteryResultDto;
 import lottery.dto.LotteryStatisticDto;
-import org.assertj.core.api.ThrowableAssert;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

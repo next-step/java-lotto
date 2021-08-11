@@ -19,14 +19,14 @@ class LotteryFactoryTest {
         // given
         String numbers = "1, 2, 3, 4, 5, 6";
         Lottery winningLottery = new Lottery(getLotteryNumbers(1, 6));
-        int expectedMatchesCount = LotteryResult.getTotalMatchScore(6);
+        int expectedMatchesCount = 6;
 
         // when
         Lottery lottery = new Lottery(numbers);
 
         // then
         assertThat(lottery).isNotNull();
-        assertThat(lottery.getMatchesScore(winningLottery)).isEqualTo(expectedMatchesCount);
+        assertThat(lottery.getMatchesCount(winningLottery)).isEqualTo(expectedMatchesCount);
     }
 
     @ParameterizedTest(name = "getLotteries 테스트 | {arguments}")

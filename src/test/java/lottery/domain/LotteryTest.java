@@ -104,10 +104,10 @@ public class LotteryTest {
         // given
         Lottery lottery = new Lottery(getLotteryNumbers(1, 6));
         Lottery winningLottery = new Lottery(getLotteryNumbers(2, 7));
-        int expectedMatchesCount = LotteryResult.getTotalMatchScore(5);
+        int expectedMatchesCount = 5;
 
         // when
-        int matchesCount = lottery.getMatchesScore(winningLottery);
+        int matchesCount = lottery.getMatchesCount(winningLottery);
 
         // then
         assertThat(matchesCount).isEqualTo(expectedMatchesCount);
@@ -119,10 +119,10 @@ public class LotteryTest {
         // given
         Lottery lottery = new Lottery(getLotteryNumbers(1, 6));
         LotteryNumber bonusNumber = new LotteryNumber(5);
-        int expectedMatchesCount = LotteryResult.getBonusScore(true);
+        double expectedMatchesCount = LotteryResult.getBonusScore(true);
 
         // when
-        int matchesCount = lottery.getBonusMatchesScore(bonusNumber);
+        double matchesCount = lottery.getBonusMatchesScore(bonusNumber);
 
         // then
         assertThat(matchesCount).isEqualTo(expectedMatchesCount);
