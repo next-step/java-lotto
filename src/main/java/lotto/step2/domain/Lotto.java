@@ -1,9 +1,10 @@
 package lotto.step2.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lotto {
-    private ArrayList<LottoTicket> lotto;
+    private List<LottoTicket> lotto;
 
     public Lotto() {
         this.lotto = new ArrayList<LottoTicket>();
@@ -21,7 +22,7 @@ public class Lotto {
         return this;
     }
 
-    public ArrayList<LottoTicket> getLotto() {
+    public List<LottoTicket> getLotto() {
         return lotto;
     }
 }

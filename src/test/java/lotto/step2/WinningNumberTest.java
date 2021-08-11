@@ -15,8 +15,8 @@ class WinningNumberTest {
     @Test
     @DisplayName("입력한 당첨 번호가 리스트가 생성 되는지 검증")
     void WinningNumberTest() {
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1,3,4,5,6,10));
-        assertThat(winningNumber.getWinningNumbers()).containsExactly(1,3,4,5,6,10);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 3, 4, 5, 6, 10));
+        assertThat(winningNumber.getWinningNumbers()).containsExactly(1, 3, 4, 5, 6, 10);
     }
 
 }
