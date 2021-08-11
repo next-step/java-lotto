@@ -15,10 +15,14 @@ public class Lotto {
         this.balls = balls;
     }
 
-    public boolean hasSameNumberCount(Lotto previousLotto, int sameNumberCount) {
-        return balls.stream()
+    public int getSameNumberCount(Lotto previousLotto) {
+        return (int) balls.stream()
                 .filter(previousLotto.balls::contains)
-                .count() == sameNumberCount;
+                .count();
+    }
+
+    public boolean containBonusBall(Ball ball) {
+        return balls.contains(ball);
     }
 
     private void validNumberCountSize(Set<Ball> balls) {

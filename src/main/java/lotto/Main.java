@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Game;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.PreviousLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,7 +20,9 @@ public class Main {
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
 
-        game.setPreviousLotto(InputView.inputPreviousLottoNumber());
+        PreviousLotto previousLotto = PreviousLotto.of(InputView.inputPreviousLottoNumber(), InputView.inputBonusNumber());
+        game.match(previousLotto);
+
         ResultView.resultLottoReward(game);
         ResultView.getYield(game);
     }

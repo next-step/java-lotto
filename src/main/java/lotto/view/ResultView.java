@@ -4,6 +4,10 @@ import lotto.domain.Game;
 import lotto.domain.Lotto;
 import lotto.domain.Reward;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
 
     public static void resultLottoCount(Game game) {
@@ -18,10 +22,13 @@ public class ResultView {
     }
 
     public static void resultLottoReward(Game game) {
-        for (Reward reward : Reward.values()) {
+        List<Reward> rewardForPrint = Arrays.stream(Reward.values())
+                .filter(reward -> reward != Reward.NONE)
+                .collect(Collectors.toList());
+        for (Reward reward : rewardForPrint) {
             System.out.println(
-                    reward.getRightNumberCount() + "개 일치 (" + reward.getMoney() + "원)- " +
-                            game.countSameNumber(reward.getRightNumberCount()) + "개");
+                    reward.getSameNumberCount() + "개 일치 (" + reward.getMoney() + "원)- " +
+                            game.countReward(reward) + "개");
         }
     }
 
