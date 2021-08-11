@@ -6,16 +6,16 @@ public enum WinningRule {
     RULE_3(5, 15_000_000),
     RULE_4(6, 2_000_000_000);
 
-    private int noCnt;
+    private int numberCount;
     private int winningPrice;
 
-    WinningRule(int noCnt, int winningPrice) {
-        this.noCnt = noCnt;
+    WinningRule(int numberCount, int winningPrice) {
+        this.numberCount = numberCount;
         this.winningPrice = winningPrice;
     }
 
-    public int getNoCnt() {
-        return noCnt;
+    public int getNumberCount() {
+        return numberCount;
     }
 
     public int getWinningPrice() {

@@ -10,61 +10,62 @@ public class Lotto {
         return lottoStrategy.getNumbers();
     }
 
-    public List<List<Integer>> getLotto(int cnt) {
+    public List<List<Integer>> getLotto(int lottoCount) {
         List<List<Integer>> lottoList = new ArrayList<>();
 
-        while (cnt-- > 0) {
+        while (lottoCount-- > 0) {
             lottoList.add(getNumbers(new AutoLottoStrategy()));
         }
 
         return lottoList;
     }
 
-    public Map<Integer, Integer> checkWinning(List<List<Integer>> lottoList, List<Integer> winningNoList) {
+    public Map<Integer, Integer> getWinningResult(List<List<Integer>> lottoList, List<Integer> winningNumberList) {
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(WinningRule.RULE_1.getNoCnt(), 0);
-        result.put(WinningRule.RULE_2.getNoCnt(), 0);
-        result.put(WinningRule.RULE_3.getNoCnt(), 0);
-        result.put(WinningRule.RULE_4.getNoCnt(), 0);
+        result.put(WinningRule.RULE_1.getNumberCount(), 0);
+        result.put(WinningRule.RULE_2.getNumberCount(), 0);
+        result.put(WinningRule.RULE_3.getNumberCount(), 0);
+        result.put(WinningRule.RULE_4.getNumberCount(), 0);
 
         for (List<Integer> lotto : lottoList) {
-            List<Integer> allNoList = combineAll(winningNoList, lotto);
-
             //중복 숫자 반환
-            Set<Integer> duplicatedNum = getDuplicatedNum(allNoList);
+            Set<Integer> duplicatedNumbers = getDuplicatedNum(combineAll(winningNumberList, lotto));
 
             //map으로 결과 저장
-            saveWinningResult(result, duplicatedNum);
+            saveWinningResult(result, duplicatedNumbers);
         }
 
         return result;
     }
 
-    private void saveWinningResult(Map<Integer, Integer> result, Set<Integer> duplicatedNum) {
-        int winningNoCnt = duplicatedNum.size();
-        if (result.containsKey(winningNoCnt)) {
-            result.put(winningNoCnt, result.get(winningNoCnt)+1);
+    private void saveWinningResult(Map<Integer, Integer> result, Set<Integer> duplicatedNumbers) {
+        int winNumberCount = duplicatedNumbers.size();
+        if (result.containsKey(winNumberCount)) {
+            result.put(winNumberCount, result.get(winNumberCount)+1);
         }
     }
 
-    private List<Integer> combineAll(List<Integer> winningNoList, List<Integer> lotto) {
-        List<Integer> allNoList = new ArrayList<>();
-        allNoList.addAll(lotto);
-        allNoList.addAll(winningNoList);
-        return allNoList;
+    private List<Integer> combineAll(List<Integer> winningNumberList, List<Integer> lotto) {
+        List<Integer> allNumbers = new ArrayList<>();
+        allNumbers.addAll(lotto);
+        allNumbers.addAll(winningNumberList);
+        
+        return allNumbers;
     }
 
-    private Set<Integer> getDuplicatedNum(List<Integer> allNoList) {
-        Set<Integer> duplicatedNum = allNoList.stream()
-                .filter(i -> Collections.frequency(allNoList, i) > 1)
+    private Set<Integer> getDuplicatedNum(List<Integer> allNumbers) {
+        Set<Integer> duplicatedNumbers = allNumbers.stream()
+                .filter(i -> Collections.frequency(allNumbers, i) > 1)
                 .collect(Collectors.toSet());
-        return duplicatedNum;
+        
+        return duplicatedNumbers;
     }
 
     public String getWinningRate(int amount, Map<Integer, Integer> winningResult) {
         int totalWinPrice = 0;
+        
         for (WinningRule rule : WinningRule.values()) {
-            int winningCnt = winningResult.get(rule.getNoCnt());
+            int winningCnt = winningResult.get(rule.getNumberCount());
             totalWinPrice += rule.getWinningPrice() * winningCnt;
         }
 

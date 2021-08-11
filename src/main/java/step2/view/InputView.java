@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputView {
     private static final int LOTTO_PRICE = 1000;
     private static final int MIN_AMOUNT = 1000;
-    private static final int MIN_CNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private void isDigit(String input) {
         if (!input.matches("[0-9]*")) {
@@ -21,15 +21,15 @@ public class InputView {
         }
     }
 
-    private void isOverMin(String amount) {
+    private void isOverMinAmount(String amount) {
         if (Integer.parseInt(amount) < MIN_AMOUNT) {
             throw new IllegalArgumentException("로또를 사기에 부족한 금액입니다. 1000원이상 입력해주세요.");
         }
     }
 
-    private void checkCnt(String winningNo) {
-        String[] numbers = winningNo.split(",");
-        if (numbers.length < MIN_CNT) {
+    private void isValidNumberCount(String winningNumbers) {
+        String[] numbers = winningNumbers.split(",");
+        if (numbers.length < LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호는 6개 입력해주셔야합니다.");
         }
     }
@@ -40,7 +40,7 @@ public class InputView {
         return scanner.next();
     }
 
-    public int getLottoCnt(String amount) {
+    public int getLottoCount(String amount) {
         //빈값 검사
         isBlank(amount);
 
@@ -48,47 +48,45 @@ public class InputView {
         isDigit(amount);
 
         //구매 최소금액 검사
-        isOverMin(amount);
+        isOverMinAmount(amount);
 
         int purchaseAmount = getPurchaseAmount(amount);
-        int lottoCnt = purchaseAmount/LOTTO_PRICE;
+        int lottoCount = purchaseAmount/LOTTO_PRICE;
 
-        return lottoCnt;
+        return lottoCount;
     }
 
     public int getPurchaseAmount(String amount) {
         return Integer.parseInt(amount);
     }
 
-    public List<Integer> getWinningNo(String winningNo) {
+    public List<Integer> getWinningNumbers(String winningNumbers) {
         //빈값 검사
-        isBlank(winningNo);
+        isBlank(winningNumbers);
 
         //6개인지 검사
-        checkCnt(winningNo);
+        isValidNumberCount(winningNumbers);
 
-        String[] numbers = winningNo.split(",");
+        String[] numbers = winningNumbers.split(",");
         for (String number : numbers) {
             //숫자인지 검사
             isDigit(number);
         }
 
-        List<Integer> winNoList = new ArrayList<>();
+        List<Integer> winningNumberList = new ArrayList<>();
         for (String number : numbers) {
-            int winNo = Integer.parseInt(number);
             //같은 숫자 포함 여부 검사
-            containSameNo(winNoList, winNo);
+            isDuplicate(winningNumberList, Integer.parseInt(number));
         }
 
-        return winNoList;
-
+        return winningNumberList;
     }
 
-    private void containSameNo(List<Integer> winNoList, int winNo) {
-        if (winNoList.contains(winNo)) {
+    private void isDuplicate(List<Integer> winningNumberList, int winningNumber) {
+        if (winningNumberList.contains(winningNumber)) {
             throw new IllegalArgumentException("당첨번호가 중복되었습니다. 다시 입력해주세요");
         }
 
-        winNoList.add(winNo);
+        winningNumberList.add(winningNumber);
     }
 }

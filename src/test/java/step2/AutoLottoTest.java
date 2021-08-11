@@ -19,10 +19,10 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCnt(""));
+                () ->  user.getLottoCount(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCnt(null));
+                () ->  user.getLottoCount(null));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCnt("test"));
+                () ->  user.getLottoCount("test"));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCnt("999"));
+                () ->  user.getLottoCount("999"));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class AutoLottoTest {
         InputView user = new InputView();
 
         //when
-        int lottoCnt = user.getLottoCnt("1000");
+        int lottoCnt = user.getLottoCount("1000");
 
         //then
         assertThat(lottoCnt).isEqualTo(1);
@@ -88,10 +88,10 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo(""));
+                () ->  user.getWinningNumbers(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo(null));
+                () ->  user.getWinningNumbers(null));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo("1,2,3,4,5"));
+                () ->  user.getWinningNumbers("1,2,3,4,5"));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo("test;td,1,2,dl,kk"));
+                () ->  user.getWinningNumbers("test;td,1,2,dl,kk"));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo("1,2,3,5,5,6"));
+                () ->  user.getWinningNumbers("1,2,3,5,5,6"));
     }
 
     @Test
@@ -131,7 +131,7 @@ public class AutoLottoTest {
 
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNo("1,2,3,5,5, "));
+                () ->  user.getWinningNumbers("1,2,3,5,5, "));
 
     }
 
@@ -142,7 +142,7 @@ public class AutoLottoTest {
         List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
 
         //when
-        List<Integer> winningNo = user.getWinningNo("1,2,3,4,5,6");
+        List<Integer> winningNo = user.getWinningNumbers("1,2,3,4,5,6");
 
         //then
         assertEquals(winningNo, expected);
@@ -160,7 +160,7 @@ public class AutoLottoTest {
 
         //when
         Lotto lotto = new Lotto();
-        Map<Integer, Integer> result = lotto.checkWinning(lottoList, winningNoList);
+        Map<Integer, Integer> result = lotto.getWinningResult(lottoList, winningNoList);
 
         //then
         assertThat(result.get(3)).isEqualTo(1);

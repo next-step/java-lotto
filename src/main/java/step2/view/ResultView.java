@@ -18,10 +18,11 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
+        
         for (WinningRule rule : WinningRule.values()) {
-            int cnt = rule.getNoCnt();
+            int count = rule.getNumberCount();
             int price = rule.getWinningPrice();
-            System.out.println(cnt + "개 일치 (" + price + "원)-" +result.get(cnt) +"개");
+            System.out.println(count + "개 일치 (" + price + "원)-" +result.get(count) +"개");
         }
         System.out.println("총 수익률은 "+ winningRate +"입니다.");
     }
