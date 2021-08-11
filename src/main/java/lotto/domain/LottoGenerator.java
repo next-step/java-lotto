@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoGenerator {
 
-    private static final List<Integer> LOTTO_ELEMENTS = new ArrayList<>();
+    private static final ArrayList<Integer> LOTTO_ELEMENTS = new ArrayList<>();
 
     static {
         for (int i = 1; i <= 65; i++) {
@@ -17,8 +17,9 @@ public class LottoGenerator {
     }
 
     private List<Integer> shuffle(){
-        Collections.shuffle(LOTTO_ELEMENTS);
-        List<Integer> drawnElements = LOTTO_ELEMENTS.subList(0, 6);
+        List<Integer> lottoElements = (List<Integer>) LOTTO_ELEMENTS.clone();
+        Collections.shuffle(lottoElements);
+        List<Integer> drawnElements = lottoElements.subList(0, 6);
         Collections.sort(drawnElements);
         return drawnElements;
     }
