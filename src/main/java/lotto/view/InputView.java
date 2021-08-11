@@ -33,15 +33,14 @@ public class InputView {
 
         String[] inputArr = input.split(NUMBER_SEPARATOR);
 
-        return Arrays.stream(inputArr)
-                .map(String::trim)
-                .map(number -> {
-                    try {
-                        return Integer.parseInt(number);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
-                    }
-                }).collect(Collectors.toList());
+        try {
+            return Arrays.stream(inputArr)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
+        }
     }
 
     public int getBonusNumber() {
