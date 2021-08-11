@@ -20,7 +20,7 @@ public class Result {
     }
 
     public double calculateRatio() {
-        return sumWinningAmount().toRatio(calculatePurchaseAmount());
+        return sumWinningAmount().divide(calculatePurchaseAmount());
     }
 
     private Money sumWinningAmount() {
@@ -29,5 +29,9 @@ public class Result {
 
     private Money calculatePurchaseAmount() {
         return LottoGame.LOTTO_PRICE.times(lottoResults.size());
+    }
+
+    public boolean isProfit() {
+        return calculateRatio() > 1;
     }
 }

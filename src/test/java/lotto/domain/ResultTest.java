@@ -4,7 +4,6 @@ import lotto.generic.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.RoundingMode;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,9 +39,7 @@ public class ResultTest {
         winningAmountSum = winningAmountSum.plus(lottoStatus.getWinningAmount());
 
         Money purchaseAmount = LottoGame.LOTTO_PRICE.times(ticketCount);
-        double expected = winningAmountSum.divide(purchaseAmount)
-                .setScale(2, RoundingMode.FLOOR)
-                .doubleValue();
+        double expected = winningAmountSum.divide(purchaseAmount);
 
         assertThat(result.calculateRatio()).isEqualTo(expected);
     }
