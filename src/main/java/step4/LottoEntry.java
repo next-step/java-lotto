@@ -51,7 +51,7 @@ public class LottoEntry {
     public String toNumbersString() {
         return "[" +
                 lottoNumbers.stream()
-                        .map(Object::toString)
+                        .map(LottoNumber::toOutputString)
                         .collect(Collectors.joining(", "))
                 + "]";
     }

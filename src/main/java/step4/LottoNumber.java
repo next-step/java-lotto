@@ -16,6 +16,10 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public String toOutputString() {
+        return String.valueOf(value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
