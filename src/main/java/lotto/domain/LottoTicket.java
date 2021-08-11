@@ -16,13 +16,13 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final int[] lottoNumbers) {
-        List<LottoNumber> collectLottoNumbers = Arrays.stream(lottoNumbers)
+    public LottoTicket(final int[] lottoNumberArr) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArr)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        validateLottoTicketSize(collectLottoNumbers);
-        this.lottoNumbers = collectLottoNumbers;
+        validateLottoTicketSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
