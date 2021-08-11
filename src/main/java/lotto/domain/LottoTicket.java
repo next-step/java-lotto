@@ -39,8 +39,8 @@ public final class LottoTicket {
         return matchCount;
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -60,5 +60,4 @@ public final class LottoTicket {
     public String toString() {
         return lottoNumbers.toString();
     }
-
 }

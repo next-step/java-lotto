@@ -26,8 +26,8 @@ public final class LottoShop {
         }
     }
 
-    private long getPurchaseCount(final long price) {
-        return Math.floorDiv(price, LOTTO_PRIZE_AMOUNT);
+    private long getPurchaseCount(final long amount) {
+        return Math.floorDiv(amount, LOTTO_PRIZE_AMOUNT);
     }
 
     private LottoTickets buyLottoLottoTickets(final long purchaseCount) {
