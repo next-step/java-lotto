@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoTicket {
+public final class WinningLottoTicket {
 
     private final LottoTicket winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoTicket(List<Integer> winningLottoNumbers, int bonusNumber) {
+    public WinningLottoTicket(final List<Integer> winningLottoNumbers, final int bonusNumber) {
         this(winningLottoNumbers, new LottoNumber(bonusNumber));
     }
 
-    public WinningLottoTicket(List<Integer> winningLottoNumbers, LottoNumber bonusNumber) {
+    public WinningLottoTicket(final List<Integer> winningLottoNumbers, final LottoNumber bonusNumber) {
         List<LottoNumber> lottoNumbers = winningLottoNumbers.stream()
                 .map(LottoNumber::new).collect(Collectors.toList());
 
@@ -20,7 +20,7 @@ public class WinningLottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public int contains(LottoNumber lottoNumber) {
+    public int contains(final LottoNumber lottoNumber) {
         if (winningLottoNumbers.contains(lottoNumber)) {
             return 1;
         }

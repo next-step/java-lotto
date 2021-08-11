@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
-    private int number;
+    private final int number;
 
     public LottoNumber(final int number) {
         this.number = number;
