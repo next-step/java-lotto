@@ -21,25 +21,36 @@ public class ResultView {
         System.out.println(lottoCount + OUTPUT_LOTTO_COUNT);
     }
 
-    public void outputLottoLotteries(List<LottoBalls> lottoBallsList) {
-        int lottoCount = lottoBallsList.size();
+    public void outputLottoLotteries(List<LottoBalls> lottoTickets) {
+        int lottoCount = lottoTickets.size();
         outputLottoCount(lottoCount);
-        for (LottoBalls lottoBalls : lottoBallsList) {
-            outputLottoBalls(lottoBalls);
+        for (LottoBalls lottoBalls : lottoTickets) {
+            outputLottoTickets(lottoBalls);
         }
     }
 
-    private void outputLottoBalls(LottoBalls lottoBalls) {
-        System.out.println("[" + lottoBalls.getLottoBallsStream().map(LottoBall::toString)
+    public void outputLottoTickets(LottoBalls lottoBalls) {
+        System.out.println("[" + lottoBalls.getLottoBalls()
+            .stream()
+            .map(LottoBall::number)
+            .map(String::valueOf)
             .collect(Collectors.joining(", ")) + "]");
     }
 
     public void outputStatistics(Map<Integer, Integer> winStatistics, float rateOfReturn) {
-        System.out.println(OUTPUT_STATISTICS_TITLE);
-        System.out.printf(OUTPUT_THREE_MATCH_CASE, winStatistics.getOrDefault(3, 0));
-        System.out.printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.getOrDefault(4, 0));
-        System.out.printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.getOrDefault(5, 0));
-        System.out.printf(OUTPUT_SIX_MATCH_CASE, winStatistics.getOrDefault(6, 0));
-        System.out.printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+        println(OUTPUT_STATISTICS_TITLE);
+        printf(OUTPUT_THREE_MATCH_CASE, winStatistics.getOrDefault(3, 0));
+        printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.getOrDefault(4, 0));
+        printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.getOrDefault(5, 0));
+        printf(OUTPUT_SIX_MATCH_CASE, winStatistics.getOrDefault(6, 0));
+        printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+    }
+
+    private static void println(String input) {
+        System.out.println(input);
+    }
+
+    private static void printf(String format, Object... args) {
+        System.out.printf(format, args);
     }
 }
