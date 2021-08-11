@@ -17,20 +17,24 @@ public class LottoConsoleOutputView {
 
     public void printLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.elements()) {
-
-            Numbers numbers = lotto.getNumbers();
-            final List<Integer> values = numbers.elements()
-                    .stream()
-                    .map(Number::value)
-                    .collect(Collectors.toList());
-
-            System.out.println(values);
+            printLotto(lotto);
         }
         System.out.println();
     }
 
+    private void printLotto(final Lotto lotto) {
+        Numbers numbers = lotto.getNumbers();
+        final List<Integer> values = numbers.elements()
+                .stream()
+                .map(Number::value)
+                .collect(Collectors.toList());
+
+        System.out.println(values);
+    }
+
     public void printPurchaseCount(final Lottos lottos) {
-        int purchaseCount = lottos.elements().size();
+        List<Lotto> elements = lottos.elements();
+        int purchaseCount = elements.size();
         System.out.printf("%d개를 구매했습니다.%n", purchaseCount);
     }
 
@@ -58,7 +62,7 @@ public class LottoConsoleOutputView {
         final List<LottoPrize> lottoMatchers = prizeMap.getOrDefault(winningLottoPrize, new ArrayList<>());
 
         if (winningLottoPrize.isBonus()) {
-            System.out.printf("%d개 일치 보너스 볼 일치(%d원) - %d개%n", countOfMatches, prize, lottoMatchers.size());
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", countOfMatches, prize, lottoMatchers.size());
             return;
         }
         System.out.printf("%d개 일치 (%d원) - %d개%n", countOfMatches, prize, lottoMatchers.size());
@@ -66,6 +70,6 @@ public class LottoConsoleOutputView {
 
     private void printYield(final LottoGameStatistics lottoGameStatistics) {
         Double yield = lottoGameStatistics.calculateYield();
-        System.out.printf("수익률은 %.2f입니다.", yield);
+        System.out.printf("수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield);
     }
 }

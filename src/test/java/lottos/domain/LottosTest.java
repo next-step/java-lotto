@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,8 +38,11 @@ class LottosTest {
     @CsvSource(value = {"1,2,3,4,5,10:SECOND", "2,3,4,5,6,9:THIRD"}, delimiter = ':')
     void 로또_게임_결과_검증(final String numbersText, final String rank) {
 
+        List<Integer> numbers = Arrays.stream(numbersText.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
         // given
-        Lotto lotto = new Lotto(numbersText);
+        Lotto lotto = new Lotto(numbers);
         Lottos lottos = new Lottos(Collections.singletonList(lotto), lottoGenerator);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 

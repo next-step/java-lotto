@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 public class LottoConsoleController {
 
     private static final String NUMBERS_TEXT_SPLIT_REGEX = ",";
+    private final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
 
     public Lottos buy(final int purchaseAmount) {
-        return new Lottos(purchaseAmount, new LottoRandomGenerator());
+        return new Lottos(purchaseAmount, lottoRandomGenerator);
     }
 
     public WinningLotto lastWeeksWinningLotto(final String lastWeeksNumbersText, final String bonusNumberText) {
