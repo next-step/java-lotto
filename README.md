@@ -49,12 +49,9 @@
    구글에서 “junit4 expected exception”으로 검색해 해결책을 찾는다.
 
 ### 기능 목록
-1. 초기 설계
-   - 예상 구조도
-   ![lotto구조도v1](images/lotto구조도v1.png)  
-   - 기능 목록
-      - StringAddCalculator : inputView 호출, resultView 호출
-      - View : input 및 result 출력
-      - StringAddCalculator : 입력값을 Nums 로 변경, 나누어진 숫자들을 더하여 결과값 반환
-      - Nums(일급 컬렉션) : Null 혹은 공백 문자열 검증, 구분자 검증
-      - Num : 숫자 검증(숫자가 맞는지, 음의 수는 아닌지 등)
+- 기능 목록
+    - StringAddCalculator : 추가 구분자 확인, 입력값을 구분자를 기준으로 분할, 나누어진 숫자들을 더하여 결과값 반환
+    - Nums(일급 컬렉션) : Null 혹은 공백 문자열 검증, 숫자들을 더한값을 반환
+    - Delimiters(일급 컬렉션) : 추가 구분자 추가, 구분자를 정규식으로 변경
+
+    
