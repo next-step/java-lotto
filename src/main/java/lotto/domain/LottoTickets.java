@@ -1,24 +1,17 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoTickets {
     private final List<LottoBalls> lottoTickets;
 
-    public LottoTickets(List<LottoBalls> lottoTickets) {
+    private LottoTickets(List<LottoBalls> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public Map<Integer, Integer> getLottoStatistics(LottoBalls winnerNumbers) {
-        Map<Integer, Integer> winStatistics = new HashMap<>();
-        lottoTickets.forEach(lottoBalls -> {
-            int rank = lottoBalls.countMatchNumber(winnerNumbers);
-            winStatistics.put(rank, winStatistics.getOrDefault(rank, 0) + 1);
-        });
-        return winStatistics;
+    public static LottoTickets from(List<LottoBalls> lottoTickets) {
+        return new LottoTickets(lottoTickets);
     }
 
     public long calculatePrizeMoney(int matchCount, int lottoCount) {
@@ -32,11 +25,16 @@ public class LottoTickets {
             .amount();
     }
 
-    public float getRateOfReturn(int lottoCount, Map<Integer, Integer> winStatistics) {
-        long prizeMoneySum = winStatistics.entrySet().stream()
+    public float getRateOfReturn(int lottoCount, WinStatistics winStatistics) {
+        long prizeMoneySum = winStatistics.result()
+            .entrySet()
+            .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
         return (float)(Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
+    }
 
+    public List<LottoBalls> toLottoBallsList() {
+        return this.lottoTickets;
     }
 }
