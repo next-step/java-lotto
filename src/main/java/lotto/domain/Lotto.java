@@ -44,11 +44,14 @@ public class Lotto {
 		return new Lotto(lottoNumberList);
 	}
 
-	public Rank figureOutRank(Lotto winningLotto) {
+	public Rank figureOutRank(WinLotto winningLotto) {
 		long matchNumberCount = lottoNumbers.stream()
-										.filter(winningLotto.lottoNumbers::contains)
+										.filter(winningLotto::containsLottoNumber)
 										.count();
-		return Rank.of(matchNumberCount);
+
+		boolean matchBonusNumber = lottoNumbers.contains(winningLotto.getBonusNumber());
+
+		return Rank.of(matchNumberCount, matchBonusNumber);
 	}
 
 	@Override

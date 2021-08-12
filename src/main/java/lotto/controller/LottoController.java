@@ -4,13 +4,14 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Records;
+import lotto.domain.WinLotto;
 import lotto.view.ResultView;
 
 public class LottoController {
 
 	private final int money;
 	private Lottos lottos;
-	private Lotto winLotto;
+	private WinLotto winLotto;
 
 	public LottoController(int money) {
 		this.money = money;
@@ -26,8 +27,8 @@ public class LottoController {
 			.forEach(ResultView::outputLottoNumbers);
 	}
 
-	public void winLotto(String winLottoNumbers) {
-		this.winLotto = Lotto.of(winLottoNumbers);
+	public void winLotto(String winLottoNumbers, int bonusNumber) {
+		this.winLotto = WinLotto.of(winLottoNumbers, bonusNumber);
 	}
 
 	public Records getRecords() {

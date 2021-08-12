@@ -12,13 +12,13 @@ public class RevenueRecord {
 		this.records = new Records();
 	}
 
-	public Records aggregate(Lotto winLotto) {
+	public Records aggregate(WinLotto winLotto) {
 		lottos.forEach(lotto -> addRecord(lotto, winLotto));
 
 		return records;
 	}
 
-	private void addRecord(Lotto lotto, Lotto winLotto) {
+	private void addRecord(Lotto lotto, WinLotto winLotto) {
 		records.addRecord(lotto.figureOutRank(winLotto));
 	}
 }

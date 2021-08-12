@@ -27,7 +27,13 @@ public class ResultView {
 	}
 
 	public static void outputLottoNumbers(Rank rank, Integer count) {
-		System.out.println(rank.getMatchNumberCount() + "개 일치 (" + rank.getReward() + ") - " + count + "개");
+		String bonusText = "";
+
+		if (rank.equals(Rank.SECOND)) {
+			bonusText = ", 보너스 볼 일치";
+		}
+
+		System.out.println(rank.getMatchNumberCount() + "개 일치" + bonusText + " (" + rank.getReward() + ") - " + count + "개");
 	}
 
 	public static void outputYield(int money, long sumRevenue) {
