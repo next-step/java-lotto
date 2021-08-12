@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class LottoMachine {
-    private ArrayList<Integer> lotto = new ArrayList<>();
     private ArrayList<ArrayList<Integer>> lottoList = new ArrayList<>();
     static final private ArrayList<Integer> lottoNumberCandidateList = new ArrayList<>();
 
@@ -20,6 +19,7 @@ public class LottoMachine {
     }
 
     public ArrayList<Integer> getRandomNumberLotto() {
+        ArrayList<Integer> lotto = new ArrayList<>();
         Collections.shuffle(lottoNumberCandidateList);
         for (int i = 0; i < 6; i++) {
             lotto.add(new Lotto(lottoNumberCandidateList.get(i)).getNumber());

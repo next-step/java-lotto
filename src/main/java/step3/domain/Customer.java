@@ -9,7 +9,4 @@ public class Customer {
         return lottoMachine.issue(numOfLotto);
     }
 
-    public Integer calculateMatchedLottoNumbers() {
-
-    }
 }
