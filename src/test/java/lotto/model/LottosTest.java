@@ -16,11 +16,8 @@ public class LottosTest {
     @DisplayName("로또는 지불한 구입금액만큼 생성되어야 한다.")
     @Test
     public void generateLottoAsMuchAsPurchaseAmountTest() {
-        // given
-        int purchaseAmount = 14000;
-
-        // when
-        Lottos lottos = new Lottos(purchaseAmount, new ArrayList<>());
+        // given, when
+        Lottos lottos = new Lottos(14000, new ArrayList<>());
 
         // then
         assertEquals(14, lottos.getSize());
@@ -29,12 +26,9 @@ public class LottosTest {
     @DisplayName("로또 1개 가격보다 구입금액이 적으면 예외가 발생한다.")
     @Test
     public void purchaseAmountLessThanOneLottoPriceExceptionTest() {
-        // given
-        int purchaseAmount = 500;
-
-        // when, then
+        // given, when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lottos(purchaseAmount, new ArrayList<>()))
+                .isThrownBy(() -> new Lottos(500, new ArrayList<>()))
                 .withMessage("구입금액은 최소 1000(원) 이상이어야 합니다.");
     }
 
