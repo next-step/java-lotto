@@ -14,11 +14,19 @@ public class MatchResult {
         this.winningLotteryCountMap = Collections.unmodifiableMap(Objects.requireNonNull(winningLotteryCountMap));
     }
 
-    public static MatchResult of(Map<MatchCount, Integer> matchesTotalMap) {
-        return new MatchResult(matchesTotalMap);
+    public static MatchResult of(Map<MatchCount, Integer> winningLotteryCountMap) {
+        return new MatchResult(winningLotteryCountMap);
     }
 
     public int countWinningLotteries(MatchCount matchCount) {
         return winningLotteryCountMap.getOrDefault(matchCount, TOTAL_ZERO);
+    }
+
+    public Money calculateTotalWinningAmount() {
+        long totalWinningAmount = winningLotteryCountMap.entrySet()
+                .stream()
+                .mapToLong(winningLotteryCount -> winningLotteryCount.getKey().getWinningAmount() * winningLotteryCount.getValue())
+                .sum();
+        return Money.of(totalWinningAmount);
     }
 }

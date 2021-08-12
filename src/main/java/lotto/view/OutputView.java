@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTicket;
-import lotto.domain.MatchCount;
-import lotto.domain.MatchResult;
+import lotto.domain.*;
 
 import java.io.PrintStream;
 import java.util.Objects;
@@ -15,6 +12,7 @@ public class OutputView {
     private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "%d개를 구매했습니다. %n";
     private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개 %n";
     private static final String MATCHES_RESULT_MASSAGE = "당첨 통계\n------------------";
+    private static final String LOTTERY_YIELD_MASSAGE_FORMAT = "총 수익률은 %.2f 입니다. %n";
 
     private final PrintStream printStream;
 
@@ -58,5 +56,9 @@ public class OutputView {
 
     private void printMatchCount(MatchCount matchCount, int count) {
         printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, matchCount.getCount(), matchCount.getWinningAmount(), count);
+    }
+
+    public void printLotteryYield(Money purchaseAmount, Money winningAmount) {
+        printStream.printf(LOTTERY_YIELD_MASSAGE_FORMAT, winningAmount.divide(purchaseAmount));
     }
 }

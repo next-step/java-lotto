@@ -25,8 +25,12 @@ public class Money {
         return this.amount % other.amount == 0;
     }
 
-    public long divide(Money other) {
-        return this.amount / other.amount;
+    public double divide(Money other) {
+        return (double) this.amount / other.amount;
+    }
+
+    public Money multiply(long number) {
+        return Money.of(amount * number);
     }
 
     public long getAmount() {
@@ -36,5 +40,18 @@ public class Money {
     @Override
     public String toString() {
         return String.format("Money{amount=%s}", amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Money)) return false;
+        Money money = (Money) o;
+        return amount == money.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (amount ^ (amount >>> 32));
     }
 }

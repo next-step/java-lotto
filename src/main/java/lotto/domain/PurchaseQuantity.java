@@ -13,7 +13,7 @@ public class PurchaseQuantity {
 
     public static PurchaseQuantity of(Money money) {
         validateDivisibleByPricePerPiece(money);
-        return new PurchaseQuantity(money.divide(PRICE_PER_PIECE));
+        return new PurchaseQuantity((long) money.divide(PRICE_PER_PIECE));
     }
 
     private static void validateDivisibleByPricePerPiece(Money money) {
@@ -24,5 +24,9 @@ public class PurchaseQuantity {
 
     public long getQuantity() {
         return quantity;
+    }
+
+    public Money getPurchaseAmount() {
+        return PRICE_PER_PIECE.multiply(quantity);
     }
 }
