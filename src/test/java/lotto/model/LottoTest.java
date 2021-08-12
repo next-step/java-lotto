@@ -73,10 +73,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(new RandomLottoNumberGenerating());
 
         // when
-        List<LottoNumber> sortedLottoNumbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : lotto.getNumbers()) {
-            sortedLottoNumbers.add(lottoNumber);
-        }
+        List<LottoNumber> sortedLottoNumbers = new ArrayList<>(lotto.getNumbers());
         Collections.sort(sortedLottoNumbers);
 
         // then
