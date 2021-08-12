@@ -6,4 +6,6 @@ public class PlayLotto {
     private List<Lotto> lotto;
     private int count;
 
+
+
 }
