@@ -8,17 +8,17 @@ public class MatchResult {
 
     private static final int TOTAL_ZERO = 0;
 
-    private final Map<Integer, Integer> matchesTotalMap;
+    private final Map<MatchCount, Integer> winningLotteryCountMap;
 
-    private MatchResult(Map<Integer, Integer> matchesTotalMap) {
-        this.matchesTotalMap = Collections.unmodifiableMap(Objects.requireNonNull(matchesTotalMap));
+    private MatchResult(Map<MatchCount, Integer> winningLotteryCountMap) {
+        this.winningLotteryCountMap = Collections.unmodifiableMap(Objects.requireNonNull(winningLotteryCountMap));
     }
 
-    public static MatchResult of(Map<Integer, Integer> matchesTotalMap) {
+    public static MatchResult of(Map<MatchCount, Integer> matchesTotalMap) {
         return new MatchResult(matchesTotalMap);
     }
 
-    public int getTotalMatches(int matches) {
-        return matchesTotalMap.getOrDefault(matches, TOTAL_ZERO);
+    public int countWinningLotteries(MatchCount matchCount) {
+        return winningLotteryCountMap.getOrDefault(matchCount, TOTAL_ZERO);
     }
 }

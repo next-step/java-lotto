@@ -38,10 +38,11 @@ public class LottoNumbers {
         return LOTTO_NUMBERS_SIZE;
     }
 
-    public int countMatches(LottoNumbers other) {
-        return (int) lottoNumbers.stream()
+    public MatchCount match(LottoNumbers other) {
+        long count = lottoNumbers.stream()
                         .filter(other::contains)
                         .count();
+        return MatchCount.of((int) count);
     }
 
     private boolean contains(LottoNumber lottoNumber) {

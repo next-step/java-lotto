@@ -20,10 +20,10 @@ class LottoTicketTest {
         LottoNumbers winningLottoNumbers = createLottoNumbers(1,2,3,4,5,6);
 
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
-        assertThat(matchResult.getTotalMatches(3)).isEqualTo(threeMatches);
-        assertThat(matchResult.getTotalMatches(4)).isEqualTo(fourMatches);
-        assertThat(matchResult.getTotalMatches(5)).isEqualTo(fiveMatches);
-        assertThat(matchResult.getTotalMatches(6)).isEqualTo(sixMatches);
+        assertThat(matchResult.countWinningLotteries(MatchCount.THREE)).isEqualTo(threeMatches);
+        assertThat(matchResult.countWinningLotteries(MatchCount.FOUR)).isEqualTo(fourMatches);
+        assertThat(matchResult.countWinningLotteries(MatchCount.FIVE)).isEqualTo(fiveMatches);
+        assertThat(matchResult.countWinningLotteries(MatchCount.SIX)).isEqualTo(sixMatches);
     }
 
     private LottoTicket createLottoTicket(int threeMatches, int fourMatches, int fiveMatches, int sixMatches) {

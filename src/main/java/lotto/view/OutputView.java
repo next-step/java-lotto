@@ -2,13 +2,13 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
+import lotto.domain.MatchCount;
 import lotto.domain.MatchResult;
 
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class OutputView {
 
@@ -18,8 +18,6 @@ public class OutputView {
     private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개 %n";
     private static final String MATCHES_RESULT_MASSAGE = "당첨 통계";
     private static final int DEFAULT_AMOUNT = 0;
-    private static final int MATCHES_MINIMUM = 0;
-    private static final int MATCHES_MAXIMUM = 6;
     private static final Map<Integer, Integer> WINNING_AMOUNT;
     static {
         WINNING_AMOUNT = new HashMap<>();
@@ -61,8 +59,9 @@ public class OutputView {
 
     public void printMatchResult(MatchResult matchResult) {
         printStream.println(MATCHES_RESULT_MASSAGE);
-        IntStream.rangeClosed(MATCHES_MINIMUM, MATCHES_MAXIMUM)
-                .forEach(matches -> printMatchCount(matches, matchResult.getTotalMatches(matches)));
+        for (MatchCount matchCount : MatchCount.values()) {
+            printMatchCount(matchCount.getCount(), matchResult.countWinningLotteries(matchCount));
+        }
     }
 
     private void printMatchCount(int matches, int count) {

@@ -25,11 +25,11 @@ public class LottoTicket {
     }
 
     public MatchResult match(LottoNumbers winningLottoNumbers) {
-        Map<Integer, Integer> matchesTotalMap = new HashMap<>();
-        for (LottoNumbers lottoNumber : lottoNumbersList) {
-            int matches = lottoNumber.countMatches(winningLottoNumbers);
-            int count = matchesTotalMap.getOrDefault(matches, INITIAL_MATCH_COUNT);
-            matchesTotalMap.put(matches, ++count);
+        Map<MatchCount, Integer> matchesTotalMap = new HashMap<>();
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+            MatchCount matchCount = lottoNumbers.match(winningLottoNumbers);
+            int count = matchesTotalMap.getOrDefault(matchCount, INITIAL_MATCH_COUNT);
+            matchesTotalMap.put(matchCount, ++count);
         }
         return MatchResult.of(matchesTotalMap);
     }

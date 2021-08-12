@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.MatchCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,8 +39,8 @@ class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         InputView inputView = InputView.of(inputStream);
         LottoNumbers winningLottoNumbers = inputView.getWinningLottoNumbers();
-        assertThat(winningLottoNumbers.countMatches(expected))
-                .isEqualTo(6);
+        assertThat(winningLottoNumbers.match(expected))
+                .isEqualTo(MatchCount.SIX);
     }
 
     private List<LottoNumber> createLottoNumbers(int... numbers) {

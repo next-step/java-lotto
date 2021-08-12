@@ -63,8 +63,8 @@ class LottoNumbersTest {
     public void hitTest() {
         LottoNumbers first = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         LottoNumbers second = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,7,8,9)));
-        assertThat(first.countMatches(second))
-                .isEqualTo(3);
+        assertThat(first.match(second))
+                .isEqualTo(MatchCount.THREE);
     }
 
 }

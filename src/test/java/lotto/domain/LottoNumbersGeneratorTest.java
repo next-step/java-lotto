@@ -19,8 +19,8 @@ class LottoNumbersGeneratorTest {
         LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(sourceLottoNumbers);
         LottoNumbers generatedLottoNumbers = lottoNumbersGenerator.generate();
         LottoNumbers expectedLottoNumbers = LottoNumbers.of(sourceLottoNumbers);
-        assertThat(generatedLottoNumbers.countMatches(expectedLottoNumbers))
-                .isEqualTo(6);
+        assertThat(generatedLottoNumbers.match(expectedLottoNumbers))
+                .isEqualTo(MatchCount.SIX);
     }
 
     private List<LottoNumber> createMockLottoNumbers(int... numbers) {
