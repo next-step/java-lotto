@@ -14,13 +14,13 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public long calculatePrizeMoney(int matchCount, int lottoCount) {
-        Rank rank = Arrays.stream(Rank.values())
-            .filter(e -> matchCount == e.getMatchCount())
+    private long calculatePrizeMoney(Rank rank, int lottoCount) {
+        Rank rankResult = Arrays.stream(Rank.values())
+            .filter(e -> e == rank)
             .findFirst()
-            .orElse(Rank.NO_RANK);
+            .orElse(Rank.MISS);
 
-        return rank.getMoney()
+        return rankResult.money()
             .multiply(lottoCount)
             .amount();
     }
@@ -31,7 +31,7 @@ public class LottoTickets {
             .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
-        return (float)(Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
+        return (float) (Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
     }
 
     public List<LottoBalls> toLottoBallsList() {
