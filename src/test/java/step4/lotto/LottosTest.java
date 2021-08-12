@@ -31,9 +31,9 @@ class LottosTest {
         givenWinOfLotto = new WinOfLotto(winOfLottoNumbers, givenBonusNumber);
     }
 
-    @CsvSource(value = {"6,6,false,2000000000", "5,10,true,30000000", "5,22,false,1500000"})
+    @CsvSource(value = {"6,false,6,2000000000", "5,true,10,30000000", "5,false,22,1500000"})
     @ParameterizedTest(name = "로또당첨 개수가 {0}개이면서 보너스가 {2}이면 당첨 금액은 {3}원이다")
-    void lottoMatch(int matchCount, int bonusNumber, boolean bonusMatch, int money) {
+    void lottoMatch(int matchCount, boolean bonusMatch, int bonusNumber, int money) {
         // Given
         Map<LottoRank, Integer> expectedResult = new HashMap<>();
         expectedResult.put(LottoRank.find(matchCount, bonusMatch), 1);
