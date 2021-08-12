@@ -10,7 +10,7 @@ class LottoNumberTest {
 
 	@Test
 	@DisplayName("로또번호를 저장하면 로또번호를 반환한다.")
-	public void createLottoNumber(){
+	public void createLottoNumber() {
 		LottoNumber lottoNumber1 = new LottoNumber(1);
 		int resultLottoNumber1 = lottoNumber1.getLottoNumber();
 
@@ -20,7 +20,7 @@ class LottoNumberTest {
 
 	@Test
 	@DisplayName("로또번호는 1부터 46의 사이의 숫자만 존재한다.")
-	public void checkLottoNumberRange(){
+	public void checkLottoNumberRange() {
 		assertThrows(IllegalArgumentException.class, () ->
 			new LottoNumber(-1)
 		);

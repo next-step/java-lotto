@@ -23,7 +23,7 @@ class PrizeStatusTest {
 		List<Lotto> lottoGame = new ArrayList<>();
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 10, 12, 21)));
 		lottoGame.add(new Lotto(getLottoNumbers(1, 3, 5, 7, 12, 34)));
-		WinnerLotto winnerLotto = new WinnerLotto(new Lotto("1,2,3,4,5,6"),7);
+		WinnerLotto winnerLotto = new WinnerLotto(new Lotto("1,2,3,4,5,6"), 7);
 		WinPrizes winPrizes = PrizeStatus.findWinPrize(new Lottos(lottoGame), winnerLotto);
 
 		assertThat(winPrizes.getWinPrizeSize()).isEqualTo(5);
@@ -41,7 +41,7 @@ class PrizeStatusTest {
 		lotto.add(getLottoGame(7, 9, 15, 21, 28, 39));
 		lotto.add(getLottoGame(2, 3, 5, 32, 38, 45));
 
-		WinnerLotto winnerLotto = new WinnerLotto(new Lotto("1,2,3,4,5,6"),7);
+		WinnerLotto winnerLotto = new WinnerLotto(new Lotto("1,2,3,4,5,6"), 7);
 		WinPrizes result = PrizeStatus.findWinPrize(new Lottos(lotto), winnerLotto);
 
 		assertThat(result.findWinPrizeGrade(Prize.THIRD)).isEqualTo(1);
