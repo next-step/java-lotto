@@ -21,21 +21,21 @@ public class LottoSimulator {
     }
 
     private void run() {
-        PurchaseAmount purchaseAmount = getPurchaseAmount();
-        LottoTicket lottoTicket = getLottoTicket(purchaseAmount);
+        PurchaseQuantity purchaseQuantity = getPurchaseAmount();
+        LottoTicket lottoTicket = getLottoTicket(purchaseQuantity);
         LottoNumbers winningLottoNumbers = getWinningLottoNumbers();
         outputView.printMatchResult(lottoTicket.match(winningLottoNumbers));
     }
 
-    private PurchaseAmount getPurchaseAmount() {
+    private PurchaseQuantity getPurchaseAmount() {
         outputView.printPurchaseAmountInputMessage();
-        PurchaseAmount purchaseAmount = inputView.getPurchaseAmount();
-        outputView.printPurchaseCount(purchaseAmount.getPurchaseQuantity());
-        return purchaseAmount;
+        PurchaseQuantity purchaseQuantity = inputView.getPurchaseAmount();
+        outputView.printPurchaseCount(purchaseQuantity.getQuantity());
+        return purchaseQuantity;
     }
 
-    private LottoTicket getLottoTicket(PurchaseAmount purchaseAmount) {
-        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersGenerator.generate(purchaseAmount.getPurchaseQuantity()));
+    private LottoTicket getLottoTicket(PurchaseQuantity purchaseQuantity) {
+        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersGenerator.generate(purchaseQuantity.getQuantity()));
         outputView.printLottoTicket(lottoTicket);
         return lottoTicket;
     }

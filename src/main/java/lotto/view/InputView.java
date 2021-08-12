@@ -2,7 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.Money;
+import lotto.domain.PurchaseQuantity;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -25,9 +26,10 @@ public class InputView {
         return new InputView(new Scanner(inputStream));
     }
 
-    public PurchaseAmount getPurchaseAmount() {
+    public PurchaseQuantity getPurchaseAmount() {
         String input = scanner.nextLine();
-        return PurchaseAmount.of(Integer.parseInt(input));
+        Money money = Money.of(Integer.parseInt(input));
+        return PurchaseQuantity.of(money);
     }
 
     public LottoNumbers getWinningLottoNumbers() {

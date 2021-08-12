@@ -31,7 +31,7 @@ public class LottoNumbersGenerator {
         return sourceLottoNumbers.get(FIRST_INDEX);
     }
 
-    public List<LottoNumbers> generate(int quantity) {
+    public List<LottoNumbers> generate(long quantity) {
         return Stream.generate(this::generate)
                 .limit(quantity)
                 .collect(Collectors.toList());

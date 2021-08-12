@@ -43,7 +43,7 @@ public class OutputView {
         printStream.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
     }
 
-    public void printPurchaseCount(int quantity) {
+    public void printPurchaseCount(long quantity) {
         printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, quantity);
     }
 
