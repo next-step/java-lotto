@@ -33,7 +33,7 @@ public enum WinningRank {
         return winningRanks;
     }
 
-    static WinningRank findWinningRank(Lotto lotto, DrawNumbers drawNumbers) {
+    private static WinningRank findWinningRank(Lotto lotto, DrawNumbers drawNumbers) {
         Lotto winningNumbers = drawNumbers.getWinningNumbers();
         int matchedWinningNumberCount = lotto.findMatchedNumberCount(winningNumbers);
         List<WinningRank> winningRanks = findBy(matchedWinningNumberCount);
@@ -51,7 +51,7 @@ public enum WinningRank {
                 .orElse(MISS);
     }
 
-    static List<WinningRank> findBy(int matchedWinningNumberCount) {
+    private static List<WinningRank> findBy(int matchedWinningNumberCount) {
         return Arrays.stream(WinningRank.values())
                 .filter(winningRank -> winningRank.matchedWinningNumberCount == matchedWinningNumberCount)
                 .collect(toList());
