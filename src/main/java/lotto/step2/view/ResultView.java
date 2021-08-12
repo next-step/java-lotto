@@ -36,6 +36,6 @@ public class ResultView {
     }
 
     public static void printStatistics(double statistics) {
-        System.out.printf("총 수익률은 %.2f 입니다", statistics);
+        System.out.printf("총 수익률은 %.2f 입니다%n", statistics);
     }
 }

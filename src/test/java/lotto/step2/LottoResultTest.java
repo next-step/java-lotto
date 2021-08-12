@@ -25,7 +25,6 @@ class LottoResultTest {
         winningNumber.add(new LottoNumber(5));
         winningNumber.add(new LottoNumber(6));
         lottoResult = new LottoResult(LottoTicket.generateWinningNumber(winningNumber));
-
     }
 
     @Test
@@ -40,7 +39,7 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(16));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
-        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FOURTH_PLACE,0)).isEqualTo(0);
+        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FOURTH_PLACE, 0)).isEqualTo(0);
     }
 
     @Test
@@ -55,7 +54,7 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(16));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
-        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FOURTH_PLACE,0)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FOURTH_PLACE, 0)).isEqualTo(1);
     }
 
     @Test
@@ -70,7 +69,7 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(16));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
-        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.THIRD_PLACE,0)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.THIRD_PLACE, 0)).isEqualTo(1);
     }
 
     @Test
@@ -85,7 +84,7 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(16));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
-        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.SECOND_PLACE,0)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.SECOND_PLACE, 0)).isEqualTo(1);
     }
 
     @Test
@@ -100,6 +99,11 @@ class LottoResultTest {
         lottoNumbers.add(new LottoNumber(6));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
-        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FIRST_PLACE,0)).isEqualTo(1);
+        assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FIRST_PLACE, 0)).isEqualTo(1);
+    }
+
+    @Test
+    void test() {
+        lottoResult.calculateStatistics(2000);
     }
 }

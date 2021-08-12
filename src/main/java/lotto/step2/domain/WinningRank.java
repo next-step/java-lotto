@@ -24,4 +24,6 @@ public enum WinningRank {
     public int getWinnings() {
         return winnings;
     }
+
+
 }

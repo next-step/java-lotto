@@ -1,7 +1,6 @@
 package lotto.step2.domain;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class LottoResult {
@@ -13,11 +12,9 @@ public class LottoResult {
         this.winningNumber = winningNumber;
     }
 
-    public Map<WinningRank, Integer> checkLottoTicket(LottoTicket lottoTicket) {
-            int matchCount = lottoTicket.matchWinningNumber(winningNumber);
-            checkWinningRank(matchCount);
-
-        return lottoResult;
+    public void checkLottoTicket(LottoTicket lottoTicket) {
+        int matchCount = lottoTicket.matchWinningNumber(winningNumber);
+        checkWinningRank(matchCount);
     }
 
     public Map<WinningRank, Integer> getLottoResult() {
@@ -47,13 +44,18 @@ public class LottoResult {
     }
 
     public double calculateStatistics(int price) {
-        Iterator<WinningRank> iterator = lottoResult.keySet().iterator();
         int sum = 0;
-        while (iterator.hasNext()) {
-            WinningRank winningRank = iterator.next();
-            sum += winningRank.getWinnings() * lottoResult.get(winningRank);
+        for (WinningRank rank : WinningRank.values()) {
+            sum += addLottoWinnings(rank);
         }
         return sum / (double) price;
+    }
+
+    public int addLottoWinnings(WinningRank winningRank) {
+         if (winningRank.toString().equals("FIRST_PLACE")){
+             return winningRank.getWinnings()*lottoResult.getOrDefault(winningRank,0);
+         }
+         return winningRank.getWinnings()*lottoResult.getOrDefault(winningRank,0);
     }
 
 }

@@ -2,10 +2,15 @@ package lotto.step2;
 
 
 import lotto.step2.domain.Lotto;
+import lotto.step2.domain.LottoMachine;
+import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.LottoShop;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -19,5 +24,6 @@ class LottoTest {
         LottoShop lottoShop = new LottoShop(price);
         assertThat(lottoShop.sellLotto().getLotto().size()).isEqualTo(5);
     }
+
 }
 
