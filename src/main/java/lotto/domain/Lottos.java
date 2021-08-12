@@ -6,51 +6,41 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
-    private static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos;
-    private Money money;
-    private Map<LottoWinning, Integer> winningStatus;
+    private LottoRandomNumbers lottoNumbers;
+    private Map<LottoResult, Integer> winningStatus;
 
-    public Lottos(Money money, LottoNumbers numbers) {
-        this.lottos = new ArrayList<>();
-        this.money = money;
-        this.winningStatus = new HashMap<>();
-
-        int countOfLotto = getNumberOfPurchase();
-        for (int i = 0; i < countOfLotto; i++) {
-            lottos.add(new Lotto(numbers));
+    public Lottos(int purchaseQuantity) {
+        lottos = new ArrayList<>();
+        winningStatus = new HashMap<>();
+        lottoNumbers = new LottoRandomNumbers();
+        for (int i = 0; i < purchaseQuantity; i++) {
+            lottos.add(new Lotto(lottoNumbers));
         }
-    }
-
-    private int getNumberOfPurchase() {
-        return money.getPurchaseMoney() / LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public void checkLottosWinning(LottoNumbers lottoNumbers) {
+    public void checkLottosWinning(Lotto winningLotto) {
         for (Lotto lotto : lottos) {
-            LottoWinning winStats = LottoWinning.getWinningStatus(lotto.getMatchCount(lottoNumbers));
+            LottoResult winStats = LottoResult.getWinningStatus(lotto.getMatchCount(winningLotto));
             setWinningStatus(winStats);
         }
     }
 
-    private void setWinningStatus(LottoWinning winStats) {
-        if (winStats != LottoWinning.FAIL) {
+    private void setWinningStatus(LottoResult winStats) {
+        if (winStats != LottoResult.FAIL) {
             winningStatus.put(winStats, winningStatus.getOrDefault(winStats, 0) + 1);
-            money.plusReward(winStats.getReward());
+            LottoShop.getMoney().plusReward(winStats.getReward());
         }
     }
 
-    public Map<LottoWinning, Integer> getWinningStatus() {
+    public Map<LottoResult, Integer> getWinningStatus() {
         return winningStatus;
     }
 
-    public Money getMoney() {
-        return money;
-    }
 
 }

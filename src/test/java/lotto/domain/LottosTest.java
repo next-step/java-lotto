@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     private Money money;
-    private LottoNumbers lottoNumbers = new LottoNumbers();
+    private LottoRandomNumbers lottoNumbers = new LottoRandomNumbers();
 
     @Test
     @DisplayName("로또 자동 5개 구매 성공 테스트")

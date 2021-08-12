@@ -1,7 +1,8 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoWinning;
+import lotto.domain.LottoShop;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 import java.util.Map;
@@ -25,9 +26,9 @@ public class OutputView {
 
     public static void printLottosResult(Lottos lottos) {
         System.out.println(WINNING_RESULT_MESSAGE);
-        Map<LottoWinning, Integer> winningStats = lottos.getWinningStatus();
+        Map<LottoResult, Integer> winningStats = lottos.getWinningStatus();
 
-        for (LottoWinning status : LottoWinning.values()) {
+        for (LottoResult status : LottoResult.values()) {
             printWinningStatus(winningStats, status);
         }
         printLottosYield(lottos);
@@ -39,14 +40,14 @@ public class OutputView {
         }
     }
 
-    private static void printWinningStatus(Map<LottoWinning, Integer> winningStats, LottoWinning status) {
-        if (status != LottoWinning.FAIL) {
+    private static void printWinningStatus(Map<LottoResult, Integer> winningStats, LottoResult status) {
+        if (status != LottoResult.FAIL) {
             System.out.printf(WINNING_STATUS_MESSAGE, status.getMatchCount(), status.getReward(), winningStats.getOrDefault(status, 0));
         }
     }
 
     private static void printLottosYield(Lottos lottos) {
-        double yield = lottos.getMoney().getYield();
+        double yield = LottoShop.getMoney().getYield();
         String resultMessage = yield >= 1 ? LOTTO_YIELD_WIN_MESSAGE : LOTTO_YIELD_LOSE_MESSAGE;
         System.out.printf(FINAL_YIELD_MESSAGE, yield);
         System.out.println(resultMessage);
