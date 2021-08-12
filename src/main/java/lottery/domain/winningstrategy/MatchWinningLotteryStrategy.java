@@ -18,7 +18,7 @@ public class MatchWinningLotteryStrategy implements WinningLotteryStrategy {
 
     @Override
     public LotteryResult getLotteryResult(final Lottery lottery) {
-        return LotteryResult.getLotteryResult(winningLottery.getMatchesCount(lottery));
+        return LotteryResult.getLotteryResult(winningLottery.getMatchesCount(lottery), false);
     }
 
     @Override

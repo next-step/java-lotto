@@ -3,10 +3,8 @@ package lottery.domain;
 import lottery.dto.LotteryResultDto;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum LotteryResult {
     BLANK("꽝", 0, false, new Money(0)),
@@ -16,8 +14,9 @@ public enum LotteryResult {
     FIVE_AND_BONUS_MATCHES("5개 일치, 보너스 볼 일치", 5, true, new Money(30000000)),
     SIX_MATCHES("6개 일치", 6, false, new Money(2000000000));
 
-    private static final Map<String, LotteryResult> LOTTERY_RESULTS = Arrays.stream(LotteryResult.values())
-            .collect(Collectors.toMap(LotteryResult::getKey, Function.identity()));
+    private static final List<LotteryResult> LOTTERY_RESULTS = Arrays.stream(values())
+            .sorted(LotteryResult::compare)
+            .collect(Collectors.toList());
 
     private final String explanation;
     private final int match;
@@ -31,12 +30,28 @@ public enum LotteryResult {
         this.cashPrize = cashPrize;
     }
 
-    public static LotteryResult getLotteryResult(final int match) {
-        return getLotteryResult(match, false);
+    public static LotteryResult getLotteryResult(final int match, final boolean bonus) {
+        return LOTTERY_RESULTS.stream()
+                .filter(lotteryResult -> lotteryResult.isEqualTo(match, bonus))
+                .findFirst()
+                .orElse(BLANK);
     }
 
-    public static LotteryResult getLotteryResult(final int match, final boolean bonus) {
-        return LOTTERY_RESULTS.getOrDefault(getKey(match, bonus), BLANK);
+    private static int compare(final LotteryResult o1, final LotteryResult o2) {
+        return o1.match == o2.match
+                ? compareBonus(o1, o2)
+                : o1.match - o2.match;
+    }
+
+    private static int compareBonus(final LotteryResult o1, final LotteryResult o2) {
+        return o1.bonus
+                ? -1
+                : (o2.bonus ? 1 : 0);
+    }
+
+    private boolean isEqualTo(final int match, final boolean bonus) {
+        return this.match == match
+                && this.bonus == (bonus && this.bonus);
     }
 
     public static boolean notBlank(final LotteryResult lotteryResult) {
@@ -49,20 +64,6 @@ public enum LotteryResult {
 
     public LotteryResultDto toDto(final long count) {
         return new LotteryResultDto(explanation, cashPrize, (int) count);
-    }
-
-    private String getKey() {
-        return getKey(match, bonus);
-    }
-
-    private static String getKey(final int match, final boolean bonus) {
-        return Stream.of(match, validateBonusAndGet(match, bonus))
-                .map(String::valueOf)
-                .collect(Collectors.joining("_"));
-    }
-
-    private static boolean validateBonusAndGet(final int match, final boolean bonus) {
-        return match == FIVE_AND_BONUS_MATCHES.match && bonus;
     }
 
 }

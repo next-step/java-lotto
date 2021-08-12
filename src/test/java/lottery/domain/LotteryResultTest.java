@@ -17,7 +17,7 @@ class LotteryResultTest {
         LotteryResult expected = LotteryResult.BLANK;
 
         // when
-        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
+        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score, false);
 
         // then
         assertThat(lotteryResult).isEqualTo(expected);
@@ -31,7 +31,7 @@ class LotteryResultTest {
         LotteryResult expected = LotteryResult.THREE_MATCHES;
 
         // when
-        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
+        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score, false);
 
         // then
         assertThat(lotteryResult).isEqualTo(expected);
