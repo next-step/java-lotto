@@ -64,13 +64,8 @@ public class StringAddCalculator {
 
     public static int delimiterSum(String input) {
 
-        int result = 0;
-
         String[] numbers = input.split(",|:");
-
-        result = addString(numbers);
-
-        return result;
+        return addString(numbers);
     }
 
     public static int customDelimiterSum(String input) {
