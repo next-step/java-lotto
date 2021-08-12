@@ -20,9 +20,9 @@ public enum Rank {
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank rank = Arrays.stream(Rank.values())
-                .filter(e -> countOfMatch == e.matchCount())
-                .findFirst()
-                .orElse(Rank.MISS);
+            .filter(e -> countOfMatch == e.matchCount())
+            .findFirst()
+            .orElse(Rank.MISS);
 
         if (countOfMatch == 5 && !matchBonus) {
             return Rank.THIRD;
