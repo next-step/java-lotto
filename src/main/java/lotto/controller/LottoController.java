@@ -1,14 +1,15 @@
 package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
+import lotto.domain.LottoBall;
 import lotto.domain.LottoBalls;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoController {
     public static void main(String[] args) {
@@ -36,9 +37,9 @@ public class LottoController {
 
     public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
         LottoBalls lottoBalls =
-            LottoBalls.of(Stream.of(inputView.inputInputLastWeekWinnerNumbers().split(","))
+            LottoBalls.of(Stream.of(inputView.inputLastWeekWinnerNumbers().split(","))
                 .mapToInt(s -> Integer.parseInt(s.trim()))
                 .toArray());
-        return WinStatistics.from(lottoBalls, lottoTickets);
+        return WinStatistics.from(lottoBalls, LottoBall.select(inputView.inputBonusNumber()), lottoTickets);
     }
 }
