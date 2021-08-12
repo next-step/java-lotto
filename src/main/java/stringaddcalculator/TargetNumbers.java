@@ -12,16 +12,17 @@ public class TargetNumbers {
         this.targetNumbers = targetNumbers;
     }
 
-    public static TargetNumbers from(String[] splitTargetNumbersString) {
+    public static TargetNumbers from(String[] splitTargetNumbersArr) {
         List<Integer> targetNumberList = new ArrayList<>();
-        for (String targetNumberString : splitTargetNumbersString) {
-            int targetNumber = Integer.parseInt(targetNumberString);checkLessThanZero(targetNumber);
+        for (String targetNumberString : splitTargetNumbersArr) {
+            int targetNumber = Integer.parseInt(targetNumberString);
+            validateLessThanZero(targetNumber);
             targetNumberList.add(targetNumber);
         }
         return new TargetNumbers(targetNumberList);
     }
 
-    private static void checkLessThanZero(int targetNumber) {
+    private static void validateLessThanZero(int targetNumber) {
         if (targetNumber < 0) {
             throw new RuntimeException("숫자는 0 이상이어야 합니다.");
         }
