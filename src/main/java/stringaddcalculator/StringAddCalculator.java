@@ -12,12 +12,12 @@ public class StringAddCalculator {
             return 0;
         }
 
-        Nums nums = Nums.of(checkCustomDelimiterAndGetSplitNumString(inputString));
+        TargetNumbers targetNumbers = TargetNumbers.from(checkCustomDelimiterAndGetSplitNumberString(inputString));
 
-        return nums.sum();
+        return targetNumbers.sum();
     }
 
-    private static String[] checkCustomDelimiterAndGetSplitNumString(String inputString) {
+    private static String[] checkCustomDelimiterAndGetSplitNumberString(String inputString) {
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
         if(matcher.find()){
             delimiters.addDelimiter(matcher.group(1));
