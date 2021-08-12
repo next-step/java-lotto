@@ -23,7 +23,6 @@ public class PurchaseAmountTest {
     @DisplayName("구매금액(cash)의 유효성 검사 - 1000원 이하일때, 1000원의 배수가 아닐 때")
     @ParameterizedTest
     @ValueSource(ints = {0,1500,2500,999})
-    @NullAndEmptySource
     void createLottoList_blueCase(int cash) {
         assertThatThrownBy(() -> new PurchaseAmount(cash))
                 .isInstanceOf(IllegalArgumentException.class);
