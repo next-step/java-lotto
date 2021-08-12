@@ -55,7 +55,7 @@ public class OutputView {
         String hitStringFormat = decideHitStringFormat(reward);
 
         return String.format(hitStringFormat,
-            reward.getMatchedCount(),
+            reward.getMatchedNumberCount(),
             reward.getRewardMoney(),
             winnerResult.getHitCountByReward(reward));
     }
@@ -63,7 +63,7 @@ public class OutputView {
     private String decideHitStringFormat(LottoReward reward) {
         String defaultResultFormat = "%d개 일치 (%d)원 - %d 개";
 
-        if (LottoReward.FIVE_NUMBERS_AND_BONUS_NUMBER_MATCHED.equals(reward)) {
+        if (reward.hasMatchedBonusNumber()) {
             return "%d개 일치, 보너스 볼 일치(%d)원 - %d 개";
         }
         return defaultResultFormat;

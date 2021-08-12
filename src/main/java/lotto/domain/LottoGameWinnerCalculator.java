@@ -31,19 +31,19 @@ public class LottoGameWinnerCalculator {
 
     private LottoReward decideLottoReward(LottoTicket winnerTicket, LottoTicket playerTicket) {
 
-        int matchedCount = checkHowManyMatchedNumbers(winnerTicket, playerTicket);
-        boolean matchBonusNumber = checkBonusNumberMatch(winnerTicket, playerTicket);
+        int matchedNumberCount = checkHowManyMatchedNumbers(winnerTicket, playerTicket);
+        boolean hasMatchedBonusNumber = checkBonusNumberMatch(winnerTicket, playerTicket);
 
-        return LottoReward.of(matchedCount, matchBonusNumber);
+        return LottoReward.of(matchedNumberCount, hasMatchedBonusNumber);
     }
 
     private boolean checkBonusNumberMatch(LottoTicket winnerTicket,
         LottoTicket playerTicket) {
 
-        List<LottoNumber> notMatchedNumbers = new ArrayList<>(playerTicket.value());
-        notMatchedNumbers.removeAll(winnerTicket.value());
+        List<LottoNumber> playerLottoNumbers = new ArrayList<>(playerTicket.value());
+        playerLottoNumbers.removeAll(winnerTicket.value());
 
-        return notMatchedNumbers.contains(bonusBallNumber);
+        return playerLottoNumbers.contains(bonusBallNumber);
 
     }
 
