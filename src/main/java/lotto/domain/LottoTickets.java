@@ -18,7 +18,7 @@ public final class LottoTickets {
     public LottoStatistic matchLottoTickets(final WinningLottoTicket winningLottoTicket) {
         List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoStatistic.add(lottoTicket.matchLottoTicket(winningLottoTicket));
+            lottoStatistic.add(lottoTicket.matchLottoRank(winningLottoTicket));
         }
         return new LottoStatistic(lottoStatistic);
     }

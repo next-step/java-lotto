@@ -11,6 +11,8 @@ public enum LottoRank {
     FIFTH_PLACE(3, 5_000),
     NO_PLACE(0, 0);
 
+    private static final LottoRank[] LOTTO_RANKS = LottoRank.values();
+
     private final int matchCount;
     private final long amount;
     private final boolean isBonus;
@@ -26,11 +28,16 @@ public enum LottoRank {
     }
 
     public static LottoRank of(final int matchCount, final boolean isBonus) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.isBonus == isBonus)
+        LottoRank lottoRank = Arrays.stream(LOTTO_RANKS)
+                .filter(rank -> !rank.isBonus)
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(NO_PLACE);
+
+        if(lottoRank.equals(THIRD_PLACE) && isBonus) {
+            return SECOND_PLACE;
+        }
+        return lottoRank;
     }
 
     public int getMatchCount() {
