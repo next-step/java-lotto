@@ -21,13 +21,14 @@ class LottoTicketTest {
 
     static Stream<Arguments> provideLottoTickets() {
         return Stream.of(
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, 6),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, 5),
-                Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, 4),
-                Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, 3),
-                Arguments.of(new int[]{1, 2, 42, 43, 44, 45}, 2),
-                Arguments.of(new int[]{1, 41, 42, 43, 44, 45}, 1),
-                Arguments.of(new int[]{40, 41, 42, 43, 44, 45}, 0)
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, LottoRank.FIRST_PLACE, 6),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoRank.THIRD_PLACE, 5),
+                Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, LottoRank.FOURTH_PLACE, 4),
+                Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, LottoRank.FIFTH_PLACE, 3),
+                Arguments.of(new int[]{1, 2, 42, 43, 44, 45}, LottoRank.NO_PLACE, 2),
+                Arguments.of(new int[]{1, 41, 42, 43, 44, 45}, LottoRank.NO_PLACE, 1),
+                Arguments.of(new int[]{40, 41, 42, 43, 44, 45}, LottoRank.NO_PLACE, 0)
+
         );
     }
 
@@ -37,10 +38,24 @@ class LottoTicketTest {
         winningLottoTicket = new WinningLottoTicket(winningNumbers, 7);
     }
 
-    @ParameterizedTest(name = "{index} : {1}개 일치")
+    @ParameterizedTest(name = "{index} : {1}")
+    @MethodSource("provideLottoTickets")
+    @DisplayName("로또 당첨 등수 구하기")
+    void lottoTest(int[] lottoNumbers, LottoRank expected) {
+        // given
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        // when
+        LottoRank lottoRank = lottoTicket.matchLottoRank(winningLottoTicket);
+
+        // then
+        assertThat(lottoRank).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "{index} : {2}개 일치")
     @MethodSource("provideLottoTickets")
     @DisplayName("로또 추첨 번호와 일치하는 개수 확인")
-    void lottoMatchTest(int[] lottoNumbers, int expected) {
+    void lottoMatchTest(int[] lottoNumbers, LottoRank lottoRank, int expected) {
         // given
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
