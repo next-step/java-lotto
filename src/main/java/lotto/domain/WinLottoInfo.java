@@ -6,7 +6,7 @@ import lotto.service.Rank;
 
 public class WinLottoInfo {
 
-  private static final int INT_ZERO = 0;
+  public static final int MATCH_COUNT_NUMBER = 1;
 
   private final Lotto winLotto;
 
@@ -19,7 +19,7 @@ public class WinLottoInfo {
   }
 
   private void validation(final Lotto lotto, final int bonus) {
-    if(lotto.matchCount(new LottoNumber(bonus)) == 1){
+    if(lotto.matchCount(new LottoNumber(bonus)) == MATCH_COUNT_NUMBER){
       throw new IllegalArgumentException(Message.MSG_ERROR_DUPLICATE_BONUS);
     }
   }
@@ -30,12 +30,7 @@ public class WinLottoInfo {
   }
 
   private int getCountByRank(final Lotto lotto) {
-    return winLotto.getLotto().stream()
-        .mapToInt(lottoNumber -> checkContainValues(lotto, lottoNumber)).sum();
-  }
-
-  private int checkContainValues(final Lotto lotto, final LottoNumber lottoNumber) {
-    return lotto.matchCount(lottoNumber);
+    return winLotto.matchLotto(lotto);
   }
 
   private boolean isMatchBonus(final Lotto lotto) {

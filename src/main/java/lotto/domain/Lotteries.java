@@ -3,31 +3,31 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
-import lotto.strategy.GenerateLottoNumber;
+import java.util.Map;
+import lotto.service.Rank;
 
 public class Lotteries {
 
-  private static final int INT_ZERO = 0;
+  public static final int COUNT = 1;
 
   private List<Lotto> lottos = new ArrayList<>();
-
-  public Lotteries(int count) {
-    lottos = createLotteries(count);
-  }
 
   public Lotteries() {
   }
 
-  public List<Lotto> getLottos() {
-    return lottos;
+  public Lotteries(final List<Lotto> lottos) {
+    this.lottos = Collections.unmodifiableList(lottos);
   }
 
-  private List<Lotto> createLotteries(int count) {
-    return Collections.unmodifiableList(LongStream.range(INT_ZERO, count)
-        .mapToObj(limit -> new Lotto(GenerateLottoNumber.createNumberPull()))
-        .collect(Collectors.toList()));
+  public static Map<Rank, Integer> MatchLottosForRank(final Lotteries lotteries, final WinLottoInfo winLottoInfo, final Map<Rank, Integer> result) {
+    lotteries.lottos.forEach(
+        lotto -> result.computeIfPresent(winLottoInfo.getMatchCountForRank(lotto),
+            (rank, integer) -> integer + COUNT));
+    return result;
+  }
+
+  public static void toStringLottoInfo(final Lotteries lotteries) {
+    lotteries.lottos.stream().map(Lotto::toString).forEach(System.out::println);
   }
 
 }

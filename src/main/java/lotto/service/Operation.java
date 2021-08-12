@@ -36,10 +36,6 @@ public enum Operation {
     return intBinaryOperator.applyAsInt(num1, num2);
   }
 
-  public String getOperation() {
-    return operationMark;
-  }
-
   public static Operation chooseOperation(Operation operation){
     return Arrays.stream(Operation.values())
         .filter(v -> v.equals(operation))

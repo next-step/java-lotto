@@ -21,7 +21,7 @@ class LottoNumberTest {
 
   @DisplayName("로또넘버 객채 생성 및 비교 테스트.")
   @Test
-  void equalsTest() {
+  void 객체가같은지비교() {
     LottoNumber lottoNumber = new LottoNumber(1);
     assertThat(lottoNumber.equals(new LottoNumber(1))).isTrue();
   }

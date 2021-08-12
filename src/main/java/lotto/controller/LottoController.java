@@ -3,7 +3,6 @@ package lotto.controller;
 import lotto.domain.Lotteries;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
-import lotto.domain.WinLottoInfo;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
@@ -18,23 +17,17 @@ public class LottoController {
     LottoMoney lottoMoney = new LottoMoney(
         InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
 
-    LottoGameApplication gameApplication = new LottoGameApplication(
-        lottoMoney);
+    Lotteries lotteries = LottoGameApplication.createLottos(
+        LottoGameApplication.getBuyCount(lottoMoney));
 
-    Lotteries lotteries = gameApplication.createLotteries();
-
-    ResultView.drawCountOfBuyLotteries(gameApplication.getNumberOfLotto());
+    ResultView.drawCountOfBuyLotteries(LottoGameApplication.getBuyCount(lottoMoney));
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lottoMoney);
-
-    WinLottoInfo winLottoInfo = lotteryDraw.createWinLottoInfo(
+    LottoResult result = LottoResult.getResult(LotteryDraw.createWinLottoInfo(
         InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
-        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER));
+        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER)), lotteries);
 
-    LottoResult result = LottoResult.getResult(winLottoInfo, lotteries);
-
-    ResultView.drawResult(result, lotteryDraw.gradingScore(result));
+    ResultView.drawResult(result, LotteryDraw.gradingScore(result, lottoMoney));
   }
 }

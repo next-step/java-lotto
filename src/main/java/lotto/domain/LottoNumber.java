@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import java.util.Comparator;
 import java.util.Objects;
 import lotto.message.Message;
 
-public class LottoNumber implements Comparator<LottoNumber> {
+public class LottoNumber {
 
   public static final int LIMIT_MAX_NUMBER = 45;
 
@@ -23,29 +22,25 @@ public class LottoNumber implements Comparator<LottoNumber> {
     }
   }
 
-  public int getNumber() {
-    return this.number;
-  }
-
   @Override
-  public int compare(LottoNumber num1, LottoNumber num2) {
-    return Integer.compare(num1.getNumber(), num2.getNumber());
-  }
-
-  @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LottoNumber that = (LottoNumber) o;
-    return getNumber() == that.getNumber();
+    final LottoNumber that = (LottoNumber) o;
+    return number == that.number;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getNumber());
+    return Objects.hash(number);
+  }
+
+  @Override
+  public String toString() {
+    return "" + number;
   }
 }

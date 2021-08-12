@@ -20,14 +20,20 @@ public class ResultView {
             Message.MSG_WINNING_STATISTICS_WORD +
             "\n" +
             "------------------------------------");
+    System.out.println(matchResult.toString());
+/*
 
-    matchResult.getCategoriesRanks().keySet().stream().filter(rank -> !rank.equals(Rank.MISS))
+    matchResult.getCategoriesRanks()
+        .keySet()
+        .stream()
+        .filter(rank -> !rank.equals(Rank.MISS))
         .map(rank -> rank.getCountOfMatch() + "개 일치"
             + createResultMessageByRank(rank)
             + rank.getWinningMoney()
             + "원) - "
             + matchResult.getCategoriesRanks().get(rank)
             + "개").forEach(System.out::println);
+*/
 
     System.out.println(
         Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + getProfitResultMessage(gradingScore));

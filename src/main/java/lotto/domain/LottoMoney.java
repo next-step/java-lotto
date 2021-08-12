@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static lotto.service.Operation.*;
+import static lotto.service.Operation.DIVISION_REMAINDER;
+import static lotto.service.Operation.chooseOperation;
 
 import lotto.message.Message;
 import lotto.service.Operation;
@@ -41,8 +42,9 @@ public class LottoMoney {
     return chooseOperation(mark).calculation(money,eachLottoCost);
   }
 
-  public double getReward(final double totalWinningRewards) {
-    return totalWinningRewards / (double) money;
+  public static double getReward(final double totalWinningRewards,
+      final LottoMoney lottoMoney) {
+    return totalWinningRewards / (double) lottoMoney.money;
   }
 
   public int countLottoToMoney(final Operation mark, final int eachLottoCost) {

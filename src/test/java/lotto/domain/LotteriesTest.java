@@ -2,20 +2,28 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import lotto.service.Rank;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 class LotteriesTest {
 
-  @DisplayName("입력 갯수만큼 로또 생성 테스트.")
-  @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4})
-  void 입력한만큼로또생성(int count) {
+  @DisplayName("로또정보들을 기준으로 당첨정보와 매칭하여 결과값을 반환하는 테스트.")
+  @Test
+  void 랭크에맞게매칭값반환() {
+    List<Lotto> lottos = new ArrayList<>();
+    lottos.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
 
-    Lotteries lotteries = new Lotteries(count);
+    Lotteries lotteries = new Lotteries(lottos);
+    WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 31)), 7);
 
-    assertThat(lotteries.getLottos().size()).isEqualTo(count);
+    Map<Rank, Integer> rankIntegerMap = Lotteries.MatchLottosForRank(lotteries, winLottoInfo,
+        LottoResult.createRankByMap());
+
+    assertThat(rankIntegerMap.get(Rank.THIRD)).isEqualTo(1);
   }
-
 }
