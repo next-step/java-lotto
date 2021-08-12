@@ -9,13 +9,13 @@ public class PositiveNumbers {
 
     public PositiveNumbers(int[] positiveNumbers) {
         this.positiveNumbers = Arrays.stream(positiveNumbers)
-            .mapToObj(PositiveNumber::new)
-            .collect(Collectors.toList());
+                .mapToObj(PositiveNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int sum() {
         return positiveNumbers.stream()
-            .mapToInt(PositiveNumber::number)
-            .reduce(0, Integer::sum);
+                .mapToInt(PositiveNumber::number)
+                .reduce(0, Integer::sum);
     }
 }
