@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,6 +82,20 @@ public class LottoTest {
         // then
         assertThat(lotto.getNumbers())
                 .containsExactlyElementsOf(sortedLottoNumbers);
+    }
+
+    @DisplayName("수동 로또를 생성하는 기능이 정상 동작해야 한다.")
+    @Test
+    public void createManualLottoTest() {
+        // given, when
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(number -> new LottoNumber(number))
+                .collect(toList());
+
+        // then
+        assertThat(lotto.getNumbers())
+                .containsExactlyElementsOf(lottoNumbers);
     }
 
     @DisplayName("같은 당첨 로또 번호의 개수를 찾는 기능이 정상 동작해야 한다.")
