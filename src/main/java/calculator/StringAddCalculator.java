@@ -75,7 +75,7 @@ public class StringAddCalculator {
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] tokens = m.group(2).split(customDelimiter);
-            result += addString(tokens);
+            result = addString(tokens);
         }
         return result;
     }
