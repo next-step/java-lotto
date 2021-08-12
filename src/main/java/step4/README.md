@@ -4,11 +4,11 @@
 - [x] 사용자는 로또를 구입 할 수 있다 #User#buyLotto()
     - [x] 로또 기계에서 투입 금액만큼의 로또를 살 수 있다. #LottoMachine#createLottos()
         - [x] 로또를 만든다. #Lotto#createLotto()
-          - [x] 2등을 위해 추가 번호를 하나 더 추첨한다. 
-            - [x] 1~45 숫자가 아니면 IllegalArgument 발생
-            - [x] 6개의 숫자가 아니면 IllegalArgument 발생
-        - [x] 로또 수동을 사고 남은 돈이 있다면 남은 돈은 랜덤으로 로또를 강매해야한다  
-            - [x] 만약 수동으로 로또를 다 사서 남은 돈이 없다면 강매 불가 
+            - [x] 2등을 위해 추가 번호를 하나 더 추첨한다.
+                - [x] 1~45 숫자가 아니면 IllegalArgument 발생
+                - [x] 6개의 숫자가 아니면 IllegalArgument 발생
+        - [x] 로또 수동을 사고 남은 돈이 있다면 남은 돈은 랜덤으로 로또를 강매해야한다
+            - [x] 만약 수동으로 로또를 다 사서 남은 돈이 없다면 강매 불가
     - [x] 1부터 45까지의 서로 다른 임의의 수 6개를 생성한다. #LottoNumberGenerator#createRadnom()
     - [x] 사용자가 수동으로 추첨 번호를 입력 할 수 있도록 해야한다 #LottoNumberGenerator#createInput()
     - [x] 사용자는 돈을 뺄 수 있다. #User#withDrow()
