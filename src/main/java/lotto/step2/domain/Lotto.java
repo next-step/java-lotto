@@ -3,11 +3,15 @@ package lotto.step2.domain;
 import java.util.*;
 
 public class Lotto {
+    private static final int LOTTO_PRICE = 1000;
     private List<LottoTicket> lotto;
 
-    public Lotto(int lottoCount) {
+    public Lotto(int money) {
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException("돈이 부족합니다. 로또 1장의 가격은 "+LOTTO_PRICE+"원입니다.");
+        }
         this.lotto = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < money; i++) {
             buyLotto(LottoMachine.mixLottoNumbers());
         }
     }
