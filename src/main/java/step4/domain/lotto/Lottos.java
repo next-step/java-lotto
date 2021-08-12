@@ -12,7 +12,7 @@ public class Lottos {
     }
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public LottoMatch match(WinOfLotto winOfLotto) {
@@ -27,11 +27,11 @@ public class Lottos {
         return lottoMatch;
     }
 
-    public void add(Lotto lotto) {
+    public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public int size() {
+    public int getLottoCount() {
         return lottos.size();
     }
 
@@ -39,7 +39,8 @@ public class Lottos {
         return lottos;
     }
 
-    public void addAll(Lottos otherLottos) {
+    public void merge(Lottos otherLottos) {
         lottos.addAll(otherLottos.lottos);
     }
+
 }

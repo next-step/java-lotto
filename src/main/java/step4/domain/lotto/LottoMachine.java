@@ -16,7 +16,7 @@ public class LottoMachine {
         Lottos lottos = new Lottos();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.create(lottoStrategy.createNumbers()));
+            lottos.addLotto(Lotto.create(lottoStrategy.createNumbers()));
         }
 
         return lottos;

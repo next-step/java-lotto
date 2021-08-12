@@ -83,7 +83,7 @@ class LottosTest {
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
 
         // When
-        Profit profit = lottoMatch.calcProfit(lottos.size());
+        Profit profit = lottoMatch.calcProfit(lottos.getLottoCount());
 
         // Then
         assertThat(profit).isEqualTo(new Profit(5));

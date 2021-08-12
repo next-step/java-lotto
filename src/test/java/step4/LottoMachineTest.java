@@ -20,7 +20,7 @@ class LottoMachineTest {
         Lottos lottos = LottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // Then
-        assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
+        assertThat(lottos.getLottoCount()).isEqualTo(expectedNumberOfLotto);
     }
 
     @Test
@@ -33,7 +33,7 @@ class LottoMachineTest {
         Lottos lottos = LottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // Then
-        assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
+        assertThat(lottos.getLottoCount()).isEqualTo(expectedNumberOfLotto);
     }
 
 
@@ -49,8 +49,8 @@ class LottoMachineTest {
         Lottos randomLottos = LottoMachine.sell(givenRandomCache);
 
         // Then
-        assertThat(manualLottos.size()).isEqualTo(3);
-        assertThat(randomLottos.size()).isEqualTo(7);
+        assertThat(manualLottos.getLottoCount()).isEqualTo(3);
+        assertThat(randomLottos.getLottoCount()).isEqualTo(7);
     }
 
 }

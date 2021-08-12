@@ -10,7 +10,7 @@ public class ResultView {
     }
 
     public static void printCount(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+        System.out.println(lottos.getLottoCount() + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {

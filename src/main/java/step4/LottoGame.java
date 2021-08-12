@@ -36,14 +36,14 @@ public class LottoGame {
         WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
 
         LottoMatch lottoMatch = user.getLottos().match(winOfLotto);
-        Profit profit = lottoMatch.calcProfit(user.getLottos().size());
+        Profit profit = lottoMatch.calcProfit(user.getLottos().getLottoCount());
 
         ResultView.printLottoStatistics(lottoMatch, profit);
     }
 
     private static void randomLotto(Lottos lottos, User user) {
         Money money = user.withDraw();
-        lottos.addAll(LottoMachine.sell(money));
+        lottos.merge(LottoMachine.sell(money));
     }
 
     private static void manualLotto(Lottos lottos, User user) {
@@ -55,7 +55,7 @@ public class LottoGame {
             List<LottoNumber> lottoNumbers = InputView.inputManualOfLottoNumber();
 
             Money manualLottoMoney = user.withDraw(new Cache(LottoMachine.LOTTO_PRICE));
-            lottos.addAll(LottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
+            lottos.merge(LottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
         }
     }
 }
