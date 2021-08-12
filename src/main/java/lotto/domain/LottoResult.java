@@ -17,7 +17,7 @@ public enum LottoResult {
         this.reward = reward;
     }
 
-    public static LottoResult getWinningStatus(int matchCount) {
+    public static LottoResult getLottoResult(int matchCount) {
         LottoResult winning = Arrays.stream(LottoResult.values())
                                     .filter(s -> s.getMatchCount() == matchCount)
                                     .findAny()

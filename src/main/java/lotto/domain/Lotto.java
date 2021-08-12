@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.InvalidInputException;
+import lotto.strategy.GenerateLottoNumber;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -11,16 +12,16 @@ public class Lotto {
 
     private Set<LottoNumber> numbers;
 
-    public Lotto(LottoRandomNumbers allNumbers) {
+    public Lotto() {
         numbers = new TreeSet<>();
         while (numbers.size() < SIZE) {
-            numbers.add(new LottoNumber(allNumbers.generateRandomNumbers()));
+            numbers.add(new LottoNumber(GenerateLottoNumber.generateRandomNumbers()));
         }
     }
 
     public Lotto(String strNumbers) {
         numbers = new TreeSet<>();
-        for (String strNumber : strNumbers.split(",")) {
+        for (String strNumber : strNumbers.replaceAll(" ", "").split(",")) {
             numbers.add(new LottoNumber(Integer.parseInt(strNumber)));
         }
         validateLottoSize();
@@ -34,8 +35,8 @@ public class Lotto {
 
     public int getMatchCount(Lotto winningLotto) {
         return (int) winningLotto.getLottoNumbers().stream()
-                .filter(numbers::contains)
-                .count();
+                                 .filter(numbers::contains)
+                                 .count();
     }
 
     public Set<LottoNumber> getLottoNumbers() {

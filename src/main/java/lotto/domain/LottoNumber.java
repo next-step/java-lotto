@@ -3,10 +3,9 @@ package lotto.domain;
 import lotto.exception.InvalidInputException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 1;
     private static final String INVALID_WINNING_NUMBERS = "유효하지 않은 번호를 입력하셨습니다.";
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private int number;
 
@@ -21,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    private int getNumber() {
+    public int getNumber() {
         return this.number;
     }
 

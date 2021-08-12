@@ -24,6 +24,12 @@ public class OutputView {
         System.out.println(lottos.getLottos().size() + COUNT_PURCHASE_AMOUNT_MESSAGE);
     }
 
+    private static void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getLottoNumbers());
+        }
+    }
+
     public static void printLottosResult(Lottos lottos) {
         System.out.println(WINNING_RESULT_MESSAGE);
         Map<LottoResult, Integer> winningStats = lottos.getWinningStatus();
@@ -31,13 +37,7 @@ public class OutputView {
         for (LottoResult status : LottoResult.values()) {
             printWinningStatus(winningStats, status);
         }
-        printLottosYield(lottos);
-    }
-
-    private static void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getLottoNumbers());
-        }
+        printLottosYield();
     }
 
     private static void printWinningStatus(Map<LottoResult, Integer> winningStats, LottoResult status) {
@@ -46,7 +46,7 @@ public class OutputView {
         }
     }
 
-    private static void printLottosYield(Lottos lottos) {
+    private static void printLottosYield() {
         double yield = LottoShop.getMoney().getYield();
         String resultMessage = yield >= 1 ? LOTTO_YIELD_WIN_MESSAGE : LOTTO_YIELD_LOSE_MESSAGE;
         System.out.printf(FINAL_YIELD_MESSAGE, yield);
