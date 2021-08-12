@@ -27,7 +27,8 @@ public class Delimiters {
 
     public String regex() {
         StringBuilder sb = new StringBuilder();
-        delimiters.forEach((D) -> sb.append(D).append("|"));
+        delimiters.forEach((D) -> sb.append(D)
+                                    .append("|"));
         return sb.substring(0, sb.length() - 1);
     }
 

@@ -8,8 +8,8 @@ public class TargetNumbers {
 
     private final List<Integer> targetNumbers;
 
-    private TargetNumbers(List<Integer> nums) {
-        this.targetNumbers = nums;
+    private TargetNumbers(List<Integer> targetNumbers) {
+        this.targetNumbers = targetNumbers;
     }
 
     public static TargetNumbers from(String[] splitTargetNumbersString) {
@@ -28,7 +28,9 @@ public class TargetNumbers {
     }
 
     public int sum() {
-        return targetNumbers.stream().mapToInt(targetNumber -> targetNumber).sum();
+        return targetNumbers.stream()
+                        .mapToInt(targetNumber -> targetNumber)
+                        .sum();
     }
 
     public List<Integer> value() {

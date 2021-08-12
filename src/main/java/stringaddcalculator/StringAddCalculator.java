@@ -18,7 +18,8 @@ public class StringAddCalculator {
     }
 
     private static String[] checkCustomDelimiterAndGetSplitNumberString(String inputString) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputString);
+        Matcher matcher = Pattern.compile("//(.)\n(.*)")
+                                .matcher(inputString);
         if(matcher.find()){
             delimiters.addDelimiter(matcher.group(1));
             return matcher.group(2).split(delimiters.regex());
