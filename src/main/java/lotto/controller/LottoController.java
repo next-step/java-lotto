@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
+import lotto.model.LottoCount;
 import lotto.model.LottoPurchase;
 import lotto.model.Lottos;
 import lotto.model.Money;
@@ -15,9 +16,11 @@ public class LottoController {
 	public static void main(String[] args) {
 		Money money = new Money(LottoInputView.inputLottoPurchaseMoney());
 
-		Lottos lottos = LottoPurchase.buyLottos(money);
+		LottoCount lottoCount = new LottoCount(LottoInputView.inputManualLottoCount(),money);
 
-		LottoOutputView.printLottoCount(money);
+		LottoOutputView.printLottoCount(lottoCount);
+
+		Lottos lottos = LottoPurchase.buyLottos(money);
 		LottoOutputView.printLottoList(lottos);
 
 		WinnerLotto winnerLotto = new WinnerLotto(new Lotto(LottoInputView.inputLastWinningLotto()),
