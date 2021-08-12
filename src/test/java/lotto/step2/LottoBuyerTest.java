@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LottoResultTest {
+class LottoBuyerTest {
 
-    LottoResult lottoResult;
+    LottoBuyer lottoResult;
     List<LottoNumber> winningNumber;
 
     @BeforeEach
@@ -24,7 +24,7 @@ class LottoResultTest {
         winningNumber.add(new LottoNumber(4));
         winningNumber.add(new LottoNumber(5));
         winningNumber.add(new LottoNumber(6));
-        lottoResult = new LottoResult(LottoTicket.generateWinningNumber(winningNumber));
+        lottoResult = new LottoBuyer(LottoTicket.generateWinningNumber(winningNumber));
     }
 
     @Test
@@ -91,19 +91,15 @@ class LottoResultTest {
     @DisplayName("로또 당첨 번호와 6개 번호 일치")
     void matchSixNumber() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
         lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(new LottoNumber(4));
+        lottoNumbers.add(new LottoNumber(3));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(1));
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         lottoResult.checkLottoTicket(lottoTicket);
         assertThat(lottoResult.getLottoResult().getOrDefault(WinningRank.FIRST_PLACE, 0)).isEqualTo(1);
     }
 
-    @Test
-    void test() {
-        lottoResult.calculateStatistics(2000);
-    }
 }

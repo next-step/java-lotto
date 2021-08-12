@@ -9,6 +9,10 @@ public class LottoShop {
         }
         int lottoCount = price / 1000;
         this.lotto = new Lotto(lottoCount);
+        sellLotto2(lottoCount);
+    }
+    public void sellLotto2(int lottoCount) {
+
     }
     public Lotto sellLotto() {
         return this.lotto;

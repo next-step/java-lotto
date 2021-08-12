@@ -3,11 +3,11 @@ package lotto.step2.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoResult {
+public class LottoBuyer {
     private Map<WinningRank, Integer> lottoResult;
     private LottoTicket winningNumber;
 
-    public LottoResult(LottoTicket winningNumber) {
+    public LottoBuyer(LottoTicket winningNumber) {
         this.lottoResult = new HashMap<>();
         this.winningNumber = winningNumber;
     }
@@ -53,7 +53,7 @@ public class LottoResult {
 
     public int addLottoWinnings(WinningRank winningRank) {
          if (winningRank.toString().equals("FIRST_PLACE")){
-             return winningRank.getWinnings()*lottoResult.getOrDefault(winningRank,0);
+             return winningRank.getWinnings();
          }
          return winningRank.getWinnings()*lottoResult.getOrDefault(winningRank,0);
     }
