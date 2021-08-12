@@ -3,17 +3,16 @@ package lotto.model;
 import lotto.message.ErrorMessage;
 import lotto.utils.LottoCountCalculator;
 
-public class LottoCount {
+public class LottoPayment {
 
 	private final int manualCount;
-	private final int autoCount;
+	private final Money money;
 
-	public LottoCount(int manualCount, Money money) {
-		int totalCount = LottoCountCalculator.calculateLottoCount(money.getPurchaseMoney());
+	public LottoPayment(int manualCount, Money money) {
 		checkPositiveCount(manualCount);
-		checkOverMoney(totalCount, manualCount);
+		checkOverMoney(LottoCountCalculator.calculateLottoCount(money.getPurchaseMoney()), manualCount);
 		this.manualCount = manualCount;
-		autoCount = totalCount - manualCount;
+		this.money = money;
 	}
 
 	public int getManualLottoCount() {
@@ -21,7 +20,7 @@ public class LottoCount {
 	}
 
 	public int getAutoLottoCount() {
-		return autoCount;
+		return LottoCountCalculator.calculateLottoCount(money.getPurchaseMoney()) - manualCount;
 	}
 
 	private void checkPositiveCount(int manualCount) {

@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
-import lotto.model.LottoCount;
+import lotto.model.LottoPayment;
 
 public class LottoInputView {
 
@@ -29,14 +29,13 @@ public class LottoInputView {
 		return inputScannerTypeInteger();
 	}
 
-	public static StringBuilder inputManualLottos(LottoCount lottoCount) {
-		StringBuilder manualLottos = new StringBuilder();
-		if (lottoCount.getManualLottoCount() > 0) {
+	public static String[] inputManualLottos(LottoPayment lottoPayment) {
+		String[] manualLottos = new String[lottoPayment.getManualLottoCount()];
+		if (lottoPayment.getManualLottoCount() > 0) {
 			System.out.println(MANUAL_LOTTOS_MESSAGE);
-			IntStream.range(0, lottoCount.getManualLottoCount())
+			return IntStream.range(0, lottoPayment.getManualLottoCount())
 				.mapToObj(i -> scanner.nextLine())
-				.forEach(manualLottos::append);
-			return manualLottos;
+				.toArray(String[]::new);
 		}
 		return manualLottos;
 	}
