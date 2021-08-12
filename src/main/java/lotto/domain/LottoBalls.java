@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,8 +11,8 @@ public class LottoBalls {
 
     private LottoBalls(int... numbers) {
         this.lottoBalls = Arrays.stream(numbers)
-            .mapToObj(LottoBall::select)
-            .collect(Collectors.toSet());
+                .mapToObj(LottoBall::select)
+                .collect(Collectors.toSet());
         validate();
     }
 
@@ -25,18 +22,16 @@ public class LottoBalls {
 
     public static LottoBalls createRandomNumber() {
         List<Integer> randomNumbers = IntStream
-            .rangeClosed(LottoBall.LOTTO_BALL_NUMBER_MIN, LottoBall.LOTTO_BALL_NUMBER_MAX)
-            .boxed()
-            .collect(Collectors.toList());
+                .rangeClosed(LottoBall.LOTTO_BALL_NUMBER_MIN, LottoBall.LOTTO_BALL_NUMBER_MAX)
+                .boxed()
+                .collect(Collectors.toList());
 
         Collections.shuffle(randomNumbers);
-        randomNumbers = randomNumbers.subList(0, LOTTO_BALLS_MAX_NUM).stream()
-            .sorted()
-            .collect(Collectors.toList());
+        randomNumbers = new ArrayList<>(randomNumbers.subList(0, LOTTO_BALLS_MAX_NUM));
 
         return LottoBalls.of(randomNumbers.stream()
-            .mapToInt(Integer::intValue)
-            .toArray());
+                .mapToInt(Integer::intValue)
+                .toArray());
     }
 
     private void validate() {
@@ -45,15 +40,15 @@ public class LottoBalls {
         }
     }
 
-    private boolean contains(int number) {
+    public boolean contains(int number) {
         return lottoBalls.stream()
-            .anyMatch(lottoBall -> lottoBall.equals((LottoBall.select(number))));
+                .anyMatch(lottoBall -> lottoBall.equals((LottoBall.select(number))));
     }
 
     public int countMatchNumber(LottoBalls winnerNumbers) {
         return (int) lottoBalls.stream()
-            .filter(lottoBall -> winnerNumbers.contains(lottoBall.number()))
-            .count();
+                .filter(lottoBall -> winnerNumbers.contains(lottoBall.number()))
+                .count();
     }
 
     public Set<LottoBall> toLottoBallSet() {
