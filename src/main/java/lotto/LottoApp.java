@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoApp {
-    private static final int INPUTABLE_MIN_MANUAL_LOTTO_COUNT = 1;
+    private static final int MIN_COUNT_OF_REQUIRED_TO_BE_MANUAL_LOTTO_INPUT = 1;
 
     private final InputView inputView;
     private final ResultView resultView;
@@ -20,38 +20,71 @@ public class LottoApp {
 
     public static void main(String[] args) {
         LottoApp lottoApp = new LottoApp();
-        lottoApp.run();
+        int purchaseAmount = lottoApp.inputPurchaseAmount();
+        int manualLottoCount = lottoApp.inputManualLottoCount();
+        if (manualLottoCount >= MIN_COUNT_OF_REQUIRED_TO_BE_MANUAL_LOTTO_INPUT) {
+            lottoApp.printManualLottosInputMessage();
+        }
+
+        Lottos lottos = lottoApp.createLottos(purchaseAmount, manualLottoCount);
+        lottoApp.printLottosAndCount(lottos, manualLottoCount);
+
+        Lotto winningNumbers = new Lotto(lottoApp.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.valueOf(lottoApp.inputBonusNumber());
+
+        List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, new DrawNumbers(winningNumbers, bonusNumber));
+        lottoApp.printWinningStatistics(purchaseAmount, winningRanks);
     }
 
-    private void run() {
+    private int inputPurchaseAmount() {
         inputView.printPurchasePriceInputMessage();
         int purchaseAmount = inputView.inputPurchasePrice();
+
         inputView.executeNextLine();
         inputView.printNewLine();
+        return purchaseAmount;
+    }
 
+    private int inputManualLottoCount() {
         inputView.printManualLottoCountInputMessage();
         int manualLottoCount = inputView.inputManualLottoCount();
+
         inputView.printNewLine();
+        return manualLottoCount;
+    }
 
-        if (manualLottoCount >= INPUTABLE_MIN_MANUAL_LOTTO_COUNT) {
-            inputView.printManualLottosInputMessage();
-        }
+    private void printManualLottosInputMessage() {
+        inputView.printManualLottosInputMessage();
+    }
 
+    private Lottos createLottos(int purchaseAmount, int manualLottoCount) {
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
-            manualLottos.add(new Lotto(inputView.inputManualLotto()));
+            manualLottos.add(new Lotto(inputManualLottoNumbers()));
         }
+        return new Lottos(purchaseAmount, manualLottos);
+    }
 
-        Lottos lottos = new Lottos(purchaseAmount, manualLottos);
+    private List<Integer> inputManualLottoNumbers() {
+        return inputView.inputManualLotto();
+    }
+
+    private void printLottosAndCount(Lottos lottos, int manualLottoCount) {
         resultView.printLottoCount(lottos.getSize(), manualLottoCount);
         resultView.printLottos(lottos);
+    }
 
+    private List<Integer> inputWinningNumbers() {
         inputView.printWinningNumbersInputMessage();
-        Lotto winningNumbers = new Lotto(inputView.inputWinningNumbers());
-        inputView.printBonusNumberInputMessage();
-        List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, new DrawNumbers(winningNumbers,
-                LottoNumber.valueOf(inputView.inputBonusNumber())));
+        return inputView.inputWinningNumbers();
+    }
 
+    private Integer inputBonusNumber() {
+        inputView.printBonusNumberInputMessage();
+        return inputView.inputBonusNumber();
+    }
+
+    private void printWinningStatistics(int purchaseAmount, List<WinningRank> winningRanks) {
         resultView.printNewLine();
         resultView.printWinningStatistics(purchaseAmount, winningRanks);
     }
