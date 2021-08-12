@@ -9,7 +9,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public int findRank(Lotto win, Rank rank) {
+        return (int) lottos.stream()
+                .filter(lotto->Rank.findRank(lotto.countSameNumber(win)) == rank)
+                .count();
+    }
+
     public List<Lotto> getValue() {
         return lottos;
     }
+
 }
