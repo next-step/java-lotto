@@ -49,13 +49,6 @@ public class LottoGameWinnerCalculator {
 
     }
 
-    private List<LottoNumber> getMissedLottoNumbers(LottoTicket winnerTicket,
-        LottoTicket playerTicket) {
-        List<LottoNumber> playerLottoNumbers = new ArrayList<>(playerTicket.value());
-        playerLottoNumbers.removeAll(winnerTicket.value());
-        return playerLottoNumbers;
-    }
-
     private void updateWinnerResult(LottoGameWinnerResult result, LottoReward reward,
         int playerTicketsCount) {
         result.updateResultInfo(reward, playerTicketsCount);
