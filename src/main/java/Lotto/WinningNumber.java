@@ -29,7 +29,7 @@ public class WinningNumber {
         Arrays.stream(numbers)
                 .map(number -> (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("rrr"));
+                .orElseThrow(() -> new IllegalArgumentException());
 
         return numbers;
     }

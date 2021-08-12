@@ -1,10 +1,10 @@
 package Lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final LotterNumbers lottoNumbers;
-    public static int LOTTO_COUNT = 6;
 
     public Lotto(LotterNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -21,17 +21,11 @@ public class Lotto {
 
     public int compareNumbers(List<Integer> userNumbers) {
 
-        int cnt = 0;
+        return lottoNumbers.getLottoNumbers()
+                .stream()
+                .filter(number -> userNumbers.contains(number))
+                .collect(Collectors.toList()).size();
 
-        for (int i = 0; i < Lotto.LOTTO_COUNT; i++) {
-            for (int j = 0; j < Lotto.LOTTO_COUNT; j++) {
-                if (lottoNumbers.getLottoNumbers().get(i) == userNumbers.get(j)) {
-                    cnt++;
-                }
-            }
-        }
-
-        return cnt;
     }
 
 }

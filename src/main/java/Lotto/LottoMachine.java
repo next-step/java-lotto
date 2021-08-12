@@ -1,7 +1,8 @@
 package Lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
@@ -14,13 +15,9 @@ public class LottoMachine {
 
     public List<Lotto> createLotto(Money money) {
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.getUnit(); i++) {
-
-            lottos.add(new Lotto(new LotterNumbers(numberGenerator.generate())));
-        }
-
-        return lottos;
+        return IntStream.range(0, money.getUnit())
+                .mapToObj(lotto -> Lotto.of(LotterNumbers.of(numberGenerator.generate())))
+                .collect(Collectors.toList());
 
     }
 
