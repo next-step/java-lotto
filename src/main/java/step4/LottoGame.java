@@ -20,26 +20,46 @@ public class LottoGame {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
         User user = new User("pobi", new Wallet(new Cache(inputMoney)));
-        LottoMachine lottoMachine = new LottoMachine(new RandomStrategy());
+        LottoMachine lottoMachine = new LottoMachine();
 
-        Money allMoney = user.withDraw();
-        Lottos boughtLottos = lottoMachine.sell(allMoney);
-        user.buyLotto(boughtLottos);
+        Lottos lottos = new Lottos();
+
+        manualLotto(lottos, user, lottoMachine);
+        randomLotto(lottos, user, lottoMachine);
+
+        user.buyLotto(lottos);
 
         ResultView.printCount(user.getLottos());
         ResultView.printLottos(user.getLottos());
 
         List<LottoNumber> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
         LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
+
         winOfLottoNumbers.add(lottoBonusNumber);
 
         WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
 
-        Lottos lottos = user.getLottos();
-        LottoMatch lottoMatch = lottos.match(winOfLotto);
-
+        LottoMatch lottoMatch = user.getLottos().match(winOfLotto);
         Profit profit = lottoMatch.calcProfit(user.getLottos().size());
 
         ResultView.printLottoStatistics(lottoMatch, profit);
+    }
+
+    private static void randomLotto(Lottos lottos, User user, LottoMachine lottoMachine) {
+        Money remainMoney = user.withDraw();
+        lottos.addAll(lottoMachine.sell(remainMoney, new RandomStrategy()));
+    }
+
+    private static void manualLotto(Lottos lottos, User user, LottoMachine lottoMachine) {
+        int lottoManualCount = InputView.inputManualCount();
+
+        InputView.manualOfLottoView();
+
+        for (int i = 0; i < lottoManualCount; i++) {
+            List<LottoNumber> lottoNumbers = InputView.inputManualOfLottoNumber();
+
+            Money manualLottoMoney = user.withDraw(new Cache(LottoMachine.LOTTO_PRICE));
+            lottos.addAll(lottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
+        }
     }
 }

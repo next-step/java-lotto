@@ -39,4 +39,7 @@ public class Lottos {
         return lottos;
     }
 
+    public void addAll(Lottos otherLottos) {
+        lottos.addAll(otherLottos.lottos);
+    }
 }

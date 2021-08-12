@@ -8,11 +8,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import step4.domain.lotto.LottoMachine;
 import step4.domain.lotto.LottoMatch;
 import step4.domain.lotto.LottoNumber;
+import step4.domain.lotto.LottoRank;
 import step4.domain.lotto.Lottos;
 import step4.domain.lotto.Profit;
 import step4.domain.lotto.WinOfLotto;
 import step4.domain.money.Cache;
-import step4.domain.lotto.LottoRank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +42,8 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, bonusNumber);
 
-        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
-        Lottos lottos = lottoMachine.sell(new Cache(1000));
+        LottoMachine lottoMachine = new LottoMachine();
+        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         // When
         LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
@@ -64,8 +64,8 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
-        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
-        Lottos lottos = lottoMachine.sell(new Cache(1000));
+        LottoMachine lottoMachine = new LottoMachine();
+        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         // When
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
@@ -80,8 +80,8 @@ class LottosTest {
     void profilt() {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
-        LottoMachine lottoMachine = new LottoMachine(() -> givenLottoNumbers);
-        Lottos lottos = lottoMachine.sell(new Cache(1000));
+        LottoMachine lottoMachine = new LottoMachine();
+        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
 
