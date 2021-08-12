@@ -29,6 +29,10 @@ public class Money {
         return this.amount / other.amount;
     }
 
+    public long getAmount() {
+        return amount;
+    }
+
     @Override
     public String toString() {
         return String.format("Money{amount=%s}", amount);

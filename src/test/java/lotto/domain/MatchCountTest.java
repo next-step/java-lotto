@@ -11,7 +11,7 @@ class MatchCountTest {
     @ValueSource(ints = {-1, 7})
     public void MatchCountOfTest(int invalidCount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> MatchCount.of(invalidCount))
+                .isThrownBy(() -> MatchCount.valueOf(invalidCount))
                 .withMessageContaining(String.valueOf(invalidCount));
     }
 

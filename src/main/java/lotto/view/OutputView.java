@@ -6,8 +6,6 @@ import lotto.domain.MatchCount;
 import lotto.domain.MatchResult;
 
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class OutputView {
@@ -17,15 +15,6 @@ public class OutputView {
     private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "%d개를 구매했습니다. %n";
     private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개 %n";
     private static final String MATCHES_RESULT_MASSAGE = "당첨 통계";
-    private static final int DEFAULT_AMOUNT = 0;
-    private static final Map<Integer, Integer> WINNING_AMOUNT;
-    static {
-        WINNING_AMOUNT = new HashMap<>();
-        WINNING_AMOUNT.put(3, 5000);
-        WINNING_AMOUNT.put(4, 15000);
-        WINNING_AMOUNT.put(5, 5000000);
-        WINNING_AMOUNT.put(6, 2000000000);
-    }
 
     private final PrintStream printStream;
 
@@ -60,11 +49,11 @@ public class OutputView {
     public void printMatchResult(MatchResult matchResult) {
         printStream.println(MATCHES_RESULT_MASSAGE);
         for (MatchCount matchCount : MatchCount.values()) {
-            printMatchCount(matchCount.getCount(), matchResult.countWinningLotteries(matchCount));
+            printMatchCount(matchCount, matchResult.countWinningLotteries(matchCount));
         }
     }
 
-    private void printMatchCount(int matches, int count) {
-        printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, matches, WINNING_AMOUNT.getOrDefault(matches, DEFAULT_AMOUNT), count);
+    private void printMatchCount(MatchCount matchCount, int count) {
+        printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, matchCount.getCount(), matchCount.getWinningAmount(), count);
     }
 }

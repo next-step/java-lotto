@@ -3,23 +3,25 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum MatchCount {
-    ZERO(0),
-    ONE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6);
+    ZERO(0, 0),
+    ONE(1, 0),
+    TWO(2, 0),
+    THREE(3, 5000),
+    FOUR(4, 15000),
+    FIVE(5, 5000000),
+    SIX(6, 2000000000);
 
     private static final String INVALID_COUNT_VALUE_EXCEPTION_MESSAGE_FORMAT = "유효하지 않은 값입니다. count: %s";
 
     private final int count;
+    private final Money winningAmount;
 
-    MatchCount(int count) {
+    MatchCount(int count, long amount) {
         this.count = count;
+        this.winningAmount = Money.of(amount);
     }
 
-    public static MatchCount of(int count) {
+    public static MatchCount valueOf(int count) {
         return Arrays.stream(values())
                 .filter(matchCount -> matchCount.isCountOf(count))
                 .findFirst()
@@ -32,5 +34,9 @@ public enum MatchCount {
 
     public int getCount() {
         return count;
+    }
+
+    public long getWinningAmount() {
+        return winningAmount.getAmount();
     }
 }
