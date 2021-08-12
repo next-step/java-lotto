@@ -14,7 +14,7 @@ public class OutputView {
     private static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "%d개를 구매했습니다. %n";
     private static final String MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개 %n";
-    private static final String MATCHES_RESULT_MASSAGE = "당첨 통계";
+    private static final String MATCHES_RESULT_MASSAGE = "당첨 통계\n------------------";
 
     private final PrintStream printStream;
 
@@ -31,6 +31,7 @@ public class OutputView {
     }
 
     public void printPurchaseCount(long quantity) {
+        printStream.println();
         printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, quantity);
     }
 
@@ -43,10 +44,12 @@ public class OutputView {
     }
 
     public void printWinningLottoNumbersInputMessage() {
+        printStream.println();
         printStream.println(INPUT_WINNING_LOTTO_NUMBERS_MESSAGE);
     }
 
     public void printMatchResult(MatchResult matchResult) {
+        printStream.println();
         printStream.println(MATCHES_RESULT_MASSAGE);
         for (MatchCount matchCount : MatchCount.values()) {
             printMatchCount(matchCount, matchResult.countWinningLotteries(matchCount));
