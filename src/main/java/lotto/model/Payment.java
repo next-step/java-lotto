@@ -5,6 +5,7 @@ import lotto.utils.LottoCountCalculator;
 
 public class Payment {
 
+	public static final int ZERO_POINT = 0;
 	private final int manualCount;
 	private final Money money;
 
@@ -24,7 +25,7 @@ public class Payment {
 	}
 
 	private void checkPositiveCount(int manualCount) {
-		if (manualCount < 0) {
+		if (manualCount < ZERO_POINT) {
 			throw new IllegalArgumentException(ErrorMessage.COUNT_POSITIVE_MESSAGE);
 		}
 	}
