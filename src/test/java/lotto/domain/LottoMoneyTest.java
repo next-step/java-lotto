@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.message.Message;
+import lotto.service.Operation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,7 +45,15 @@ class LottoMoneyTest {
   @CsvSource(value = {"14000,5000", "10000,0"})
   void 당첨금수익률(int money, int winMoney) {
     LottoMoney lottoMoney = new LottoMoney(money);
-    double reward = lottoMoney.getReward(winMoney);
+    double reward = LottoMoney.getReward(winMoney, lottoMoney);
     assertThat(reward).isEqualTo((double) winMoney / (double) money);
+  }
+
+  @DisplayName("천원단위 금액입력시 구매가능한 로또장수 반환 테스트.")
+  @ParameterizedTest
+  @CsvSource(value = {"1000,1", "2000,2"})
+  void 금액기준로또구매장수반환(int money, int count) {
+    LottoMoney lottoMoney = new LottoMoney(money);
+    assertThat(lottoMoney.countLottoToMoney(Operation.DIVISION_SHARE, 1000)).isEqualTo(count);
   }
 }

@@ -17,21 +17,17 @@ public class LottoController {
     LottoMoney lottoMoney = new LottoMoney(
         InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
 
-    LottoGameApplication gameApplication = new LottoGameApplication(
-        lottoMoney);
+    Lotteries lotteries = LottoGameApplication.createLottos(
+        LottoGameApplication.getBuyCount(lottoMoney));
 
-    Lotteries lotteries = gameApplication.createLotteries();
-
-    ResultView.drawCountOfBuyLotteries(gameApplication.getNumberOfLotto());
+    ResultView.drawCountOfBuyLotteries(LottoGameApplication.getBuyCount(lottoMoney));
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 
-    LotteryDraw lotteryDraw = new LotteryDraw(lotteries, lottoMoney, new LottoResult());
+    LottoResult result = LottoResult.getResult(LotteryDraw.createWinLottoInfo(
+        InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
+        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER)), lotteries);
 
-    LottoResult lottoResult = lotteryDraw.matchLottoInfo(
-        lotteryDraw.inputWinningNumbers(
-            InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO)));
-
-    ResultView.drawResult(lottoResult, lotteryDraw.gradingScore(lottoResult));
+    ResultView.drawResult(result, LotteryDraw.gradingScore(result, lottoMoney));
   }
 }

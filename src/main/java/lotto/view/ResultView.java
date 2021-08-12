@@ -20,20 +20,42 @@ public class ResultView {
             Message.MSG_WINNING_STATISTICS_WORD +
             "\n" +
             "------------------------------------");
+    System.out.println(matchResult.toString());
+/*
 
-    for (Rank rank : matchResult.getCategoriesRank().keySet()) {
-      System.out.println(rank.getCountOfMatch() + "개 일치 ("
-          + Rank.matchRank(rank.getCountOfMatch()).getWinningMoney()
-          + "원) - "
-          + matchResult.getCategoriesRank().get(rank).size()
-          + "개");
-    }
+    matchResult.getCategoriesRanks()
+        .keySet()
+        .stream()
+        .filter(rank -> !rank.equals(Rank.MISS))
+        .map(rank -> rank.getCountOfMatch() + "개 일치"
+            + createResultMessageByRank(rank)
+            + rank.getWinningMoney()
+            + "원) - "
+            + matchResult.getCategoriesRanks().get(rank)
+            + "개").forEach(System.out::println);
+*/
 
     System.out.println(
-        Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + Message.MSG_WINNING_PROFIT_INFO);
+        Message.MSG_WINNING_PROFIT + formattingValue(gradingScore) + getProfitResultMessage(gradingScore));
     }
 
-    private static String formattingValue(double profitRate){
+  private static String createResultMessageByRank(final Rank rank) {
+    String messageForm = " (";
+
+    if(rank.equals(Rank.SECOND)){
+      messageForm = ", 보너스 볼 일치 (";
+    }
+    return messageForm;
+  }
+
+  private static String getProfitResultMessage(double gradingScore) {
+    if(gradingScore > 1){
+      return Message.MSG_WINNING_PROFIT_INFO.replace("${}","이득");
+    }
+    return Message.MSG_WINNING_PROFIT_INFO.replace("${}","손해");
+  }
+
+  private static String formattingValue(double profitRate){
 
       DecimalFormat format = new DecimalFormat(PROFIT_RATE_FORMAT);
       format.setRoundingMode(RoundingMode.DOWN);
