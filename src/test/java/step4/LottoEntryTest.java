@@ -1,4 +1,4 @@
-package step3;
+package step4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,12 +32,12 @@ public class LottoEntryTest {
         LottoEntry lottoEntry1 = new LottoEntry(numbers1);
         LottoEntry lottoEntry2 = new LottoEntry(numbers2);
 
-        assertThat(lottoEntry1.countMatch(lottoEntry2)).isEqualTo(0);
+        assertThat(lottoEntry1.countMatches(lottoEntry2)).isEqualTo(0);
 
         List<Integer> numbers3 = Stream.of(5, 6, 7, 8, 9, 10).collect(Collectors.toList());
 
         LottoEntry lottoEntry3 = new LottoEntry(numbers3);
 
-        assertThat(lottoEntry1.countMatch(lottoEntry3)).isEqualTo(2);
+        assertThat(lottoEntry1.countMatches(lottoEntry3)).isEqualTo(2);
     }
 }

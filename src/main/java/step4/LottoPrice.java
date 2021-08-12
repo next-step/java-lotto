@@ -1,4 +1,4 @@
-package step3;
+package step4;
 
 public class LottoPrice {
     private final int unitPrice;
@@ -12,10 +12,10 @@ public class LottoPrice {
     }
 
     public int getMaxQuantity(int budget) {
-        if (this.unitPrice == 0) {
+        if (unitPrice == 0) {
             throw new ArithmeticException();
         }
 
-        return budget / this.unitPrice;
+        return budget / unitPrice;
     }
 }

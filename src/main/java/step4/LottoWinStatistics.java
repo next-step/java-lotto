@@ -1,10 +1,12 @@
-package step3;
+package step4;
+
+import step4.enums.DrawResult;
 
 public class LottoWinStatistics {
 
     private final LottoPrice lottoPrice;
     private final DrawnLotto winnersLottoEntry;
-    private final LottoWinGroups lottoWinGroups = new LottoWinGroups();
+    private final DrawResultGroups drawResultGroups = new DrawResultGroups();
 
     public LottoWinStatistics(LottoPrice price, DrawnLotto winnersLottoEntry) {
         this.lottoPrice = price;
@@ -12,8 +14,9 @@ public class LottoWinStatistics {
     }
 
     public void addLottoSample(LottoEntry sampleLottoEntry) {
-        LottoWin lottoWin = LottoWin.getMatchResult(winnersLottoEntry, sampleLottoEntry);
-        lottoWinGroups.addLottoOnLottoWinGroup(lottoWin, sampleLottoEntry);
+        DrawResult drawResult = winnersLottoEntry.getDrawResult(sampleLottoEntry);
+
+        drawResultGroups.addLottoOnMatchGroup(drawResult, sampleLottoEntry);
     }
 
     public void addLottoSamples(LottoBucket lottoBucket) {
@@ -21,21 +24,22 @@ public class LottoWinStatistics {
     }
 
     public double getProfitRate() {
-        int totalCost = this.lottoPrice.getQuote(this.lottoWinGroups.countAllLottoEntries());
+        int totalCost = lottoPrice.getQuote(drawResultGroups.countAllLottoEntries());
 
         if (totalCost == 0) {
             return 0.0;
         }
 
-        double earning = this.lottoWinGroups.keySet().stream()
-                .map(w -> w.prize() * this.lottoWinGroups.get(w).size())
+        double earning = drawResultGroups.keySet().stream()
+                .parallel()
+                .map(w -> w.prize() * drawResultGroups.getBucket(w).size())
                 .reduce(Integer::sum)
                 .orElse(0);
 
         return earning / totalCost;
     }
 
-    public int countLottoEntriesByLottoWin(LottoWin lottoWin) {
-        return this.lottoWinGroups.countLottoEntriesByLottoWin(lottoWin);
+    public int countLottoEntriesByMatch(DrawResult drawResult) {
+        return drawResultGroups.countLottoEntriesByMatch(drawResult);
     }
 }
