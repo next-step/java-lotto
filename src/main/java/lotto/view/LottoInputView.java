@@ -1,14 +1,17 @@
 package lotto.view;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import lotto.exception.InputMachTypeException;
 import lotto.message.ErrorMessage;
+import lotto.model.LottoCount;
 
 public class LottoInputView {
 
 	private static final String BUY_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
 	public static final String MANUAL_LOTTO_COUNT_MESSAGE = "수등으로 구매할 로또 수를 입력해 주세요.";
+	private static final String MANUAL_LOTTOS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 	private static final String LAST_WEEK_WIN_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 	private static final Scanner scanner = new Scanner(System.in);
@@ -24,6 +27,18 @@ public class LottoInputView {
 	public static int inputManualLottoCount() {
 		System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
 		return inputScannerTypeInteger();
+	}
+
+	public static StringBuilder inputManualLottos(LottoCount lottoCount) {
+		StringBuilder manualLottos = new StringBuilder();
+		if (lottoCount.getManualLottoCount() > 0) {
+			System.out.println(MANUAL_LOTTOS_MESSAGE);
+			IntStream.range(0, lottoCount.getManualLottoCount())
+				.mapToObj(i -> scanner.nextLine())
+				.forEach(manualLottos::append);
+			return manualLottos;
+		}
+		return manualLottos;
 	}
 
 	public static String inputLastWinningLotto() {
@@ -42,4 +57,5 @@ public class LottoInputView {
 		}
 		return Integer.parseInt(scanner.nextLine());
 	}
+
 }

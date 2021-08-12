@@ -20,7 +20,7 @@ public class LottoController {
 
 		LottoOutputView.printLottoCount(lottoCount);
 
-		Lottos lottos = LottoPurchase.buyLottos(money);
+		Lottos lottos = LottoPurchase.buyLottos(money,LottoInputView.inputManualLottos(lottoCount));
 		LottoOutputView.printLottoList(lottos);
 
 		WinnerLotto winnerLotto = new WinnerLotto(new Lotto(LottoInputView.inputLastWinningLotto()),

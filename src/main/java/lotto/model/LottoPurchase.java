@@ -16,4 +16,8 @@ public class LottoPurchase {
 				.collect(Collectors.toList()));
 	}
 
+	public static Lottos buyLottos(Money money, StringBuilder inputManualLottos) {
+
+		return null;
+	}
 }
