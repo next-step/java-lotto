@@ -1,43 +1,31 @@
 package stringaddcalculator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import static org.assertj.core.api.Assertions.*;
 
 public class DelimitersTest {
 
     @Test
     void create(){
         // given, when
-        Delimiters delimiters = new Delimiters();
+        Delimiters delimiters = Delimiters.create();
 
         //then
-        Assertions.assertThat(delimiters.getDelimiters()).isEqualTo(Arrays.asList(",", ":"));
-    }
-
-    @Test
-    void addDelimiter(){
-        // given
-        Delimiters delimiters = new Delimiters();
-
-        // when
-        delimiters.addDelimiter(";");
-
-        // then
-        Assertions.assertThat(delimiters.getDelimiters()).isEqualTo(Arrays.asList(",", ":", ";"));
+        assertThat(delimiters.regex()).isEqualTo(",|:");
     }
 
     @Test
     void regex(){
         // given
-        Delimiters delimiters = new Delimiters();
+        String customDelimiter = ";";
 
         // when
-        delimiters.addDelimiter(";");
-        String regex = delimiters.regex();
+        Delimiters delimiters = Delimiters.create(customDelimiter);
+        String delimitersRegex = delimiters.regex();
 
         // then
-        Assertions.assertThat(regex).isEqualTo(",|:|;");
+        assertThat(delimitersRegex).isEqualTo(",|:|;");
     }
+
 }
