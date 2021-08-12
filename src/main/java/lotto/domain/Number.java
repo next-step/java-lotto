@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class Number {
+
     private int data;
 
     public Number(int randomNumber) {
@@ -10,4 +11,5 @@ public class Number {
     public boolean isBiggerThan(Number other){
         return this.data > other.data;
     }
+
 }

@@ -8,6 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class NumberTest {
 
+    private static final boolean IS_BIGGER_THAN = true;
+    private static final boolean IS_SMALLER_THAN = false;
+
     @DisplayName("데이터 대소 비교 - 해피케이스")
     @ParameterizedTest
     @CsvSource(value = {"2:1", "3:2", "4:3"}, delimiter = ':')
@@ -15,7 +18,7 @@ class NumberTest {
         Number number = new Number(data);
         Number other = new Number(expected);
 
-        assertThat(number.isBiggerThan(other)).isEqualTo(true);
+        assertThat(number.isBiggerThan(other)).isEqualTo(IS_BIGGER_THAN);
     }
 
     @DisplayName("데이터 대소 비교 - 블루케이스")
@@ -25,6 +28,6 @@ class NumberTest {
         Number number = new Number(data);
         Number other = new Number(expected);
 
-        assertThat(number.isBiggerThan(other)).isEqualTo(false);
+        assertThat(number.isBiggerThan(other)).isEqualTo(IS_SMALLER_THAN);
     }
 }
