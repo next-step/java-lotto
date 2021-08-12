@@ -11,15 +11,7 @@ public class Lottos {
     public Lottos(int purchaseAmount, List<Lotto> manualLottos) {
         validatePurchasableAmount(purchaseAmount);
         validatePurchasableManualLottoCount(purchaseAmount, manualLottos.size());
-
-        int lottoCountTotal = purchaseAmount / LOTTO_PRICE;
-        int autoLottoCount = lottoCountTotal - manualLottos.size();
-
-        List<Lotto> lottos = new ArrayList<>(manualLottos);
-        for (int i = 0; i < autoLottoCount; i++) {
-            lottos.add(new Lotto(new RandomLottoNumberGenerating()));
-        }
-        this.lottos = lottos;
+        this.lottos = generateLottos(purchaseAmount, manualLottos);
     }
 
     Lottos(List<Lotto> lottos) {
@@ -36,6 +28,17 @@ public class Lottos {
         if (manualLottoCount > purchaseAmount / LOTTO_PRICE) {
             throw new IllegalArgumentException("수동 로또 개수가 구입 가능 개수를 초과했습니다.");
         }
+    }
+
+    private List<Lotto> generateLottos(int purchaseAmount, List<Lotto> manualLottos) {
+        int lottoCountTotal = purchaseAmount / LOTTO_PRICE;
+        int autoLottoCount = lottoCountTotal - manualLottos.size();
+
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottos.add(new Lotto(new RandomLottoNumberGenerating()));
+        }
+        return lottos;
     }
 
     public int getSize() {
