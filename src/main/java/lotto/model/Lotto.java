@@ -17,20 +17,21 @@ public class Lotto {
 
     public Lotto(LottoNumberGeneratingStrategy lottoNumberGeneratingStrategy) {
         List<LottoNumber> numbers = lottoNumberGeneratingStrategy.generateNumbers();
-
-        validateCount(numbers);
-        validateUnique(numbers);
+        validate(numbers);
         this.numbers = numbers;
     }
 
-    Lotto(List<Integer> givenNumbers) {
+    public Lotto(List<Integer> givenNumbers) {
         List<LottoNumber> numbers = givenNumbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(toList());
+        validate(numbers);
+        this.numbers = numbers;
+    }
 
+    private void validate(List<LottoNumber> numbers) {
         validateCount(numbers);
         validateUnique(numbers);
-        this.numbers = numbers;
     }
 
     private void validateCount(List<LottoNumber> numbers) {

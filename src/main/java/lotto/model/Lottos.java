@@ -5,14 +5,12 @@ import java.util.List;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1_000;
-    private static final int MIN_MANUAL_LOTTO_COUNT = 0;
 
     private final List<Lotto> lottos;
 
-    public Lottos(int purchaseAmount, int manualLottoCount) {
+    public Lottos(int purchaseAmount, List<Lotto> manualLottos) {
         validatePurchasableAmount(purchaseAmount);
-        validateMinManualLottoCount(manualLottoCount);
-        validatePurchasableManualLottoCount(purchaseAmount, manualLottoCount);
+        validatePurchasableManualLottoCount(purchaseAmount, manualLottos.size());
 
         int lottoCount = purchaseAmount / LOTTO_PRICE;
         List<Lotto> lottos = new ArrayList<>();
@@ -29,13 +27,6 @@ public class Lottos {
     private void validatePurchasableAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException(String.format("구입금액은 최소 %d(원) 이상이어야 합니다.", LOTTO_PRICE));
-        }
-    }
-
-    private void validateMinManualLottoCount(int manualLottoCount) {
-        if (manualLottoCount < MIN_MANUAL_LOTTO_COUNT) {
-            throw new IllegalArgumentException(String.format("수동 로또 개수는 최소 %d개 이상이어야 합니다.",
-                    MIN_MANUAL_LOTTO_COUNT));
         }
     }
 
