@@ -10,9 +10,9 @@ public class LottoPurchase {
 
 	public static final int START_INCLUSIVE = 0;
 
-	public static Lottos buyLottos(LottoPayment lottoPayment, String[] manualLottos) {
+	public static Lottos buyLottos(Payment payment, String[] manualLottos) {
 		return new Lottos(Stream.concat(purchaseManualLottos(manualLottos).stream(),
-			purchaseAutoLottos(lottoPayment.getAutoLottoCount()).stream()).collect(Collectors.toList()));
+			purchaseAutoLottos(payment.getAutoLottoCount()).stream()).collect(Collectors.toList()));
 	}
 
 	private static List<Lotto> purchaseAutoLottos(int autoLottoCount) {
