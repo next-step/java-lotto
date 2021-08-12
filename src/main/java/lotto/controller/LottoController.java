@@ -16,11 +16,11 @@ public class LottoController {
 	public static void main(String[] args) {
 		Money money = new Money(LottoInputView.inputLottoPurchaseMoney());
 
-		LottoPayment lottoPayment = new LottoPayment(LottoInputView.inputManualLottoCount(),money);
+		LottoPayment lottoPayment = new LottoPayment(LottoInputView.inputManualLottoCount(), money);
+
+		Lottos lottos = LottoPurchase.buyLottos(lottoPayment, LottoInputView.inputManualLottos(lottoPayment));
 
 		LottoOutputView.printLottoCount(lottoPayment);
-
-		Lottos lottos = LottoPurchase.buyLottos(lottoPayment,LottoInputView.inputManualLottos(lottoPayment));
 		LottoOutputView.printLottoList(lottos);
 
 		WinnerLotto winnerLotto = new WinnerLotto(new Lotto(LottoInputView.inputLastWinningLotto()),
