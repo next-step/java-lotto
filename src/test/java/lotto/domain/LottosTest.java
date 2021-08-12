@@ -41,6 +41,13 @@ class LottosTest {
                 .findRankCount(win, Rank.FIRST)).isEqualTo(0);
         assertThat(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 23, 4, 5, 6, 7))))
                 .findRankCount(win, Rank.FIRST)).isEqualTo(1);
+
+        Lotto a = new Lotto(Arrays.asList(10, 15, 27, 31, 37, 39));
+        Lotto b = new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37));
+        Lotto c = new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37));
+        assertThat(new Lottos(Arrays.asList(a, b, c))
+                .findRankCount(new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37)), Rank.FIRST))
+                .isEqualTo(2);
     }
 
     @DisplayName("로또 총 수입 구하기")
@@ -57,4 +64,5 @@ class LottosTest {
         assertThat(lottos.calculateProfit(win, money))
                 .isEqualTo((double) (Rank.SECOND.getRewards() + Rank.THIRD.getRewards()) / (double) money);
     }
+
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.exception.IntputError;
+import lotto.exception.InputError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public class InputView {
         System.out.println("구매 금액을 입력해 주세요.");
         int count = Integer.parseInt(scanner.nextLine()) / LOTTO_PRICE;
         if (count < 0) {
-            throw new IntputError("로또를 구매할 수 없는 금액입니다.");
+            throw new InputError("로또를 구매할 수 없는 금액입니다.");
         }
         System.out.println(count + "개를 구매했습니다.");
         return count;

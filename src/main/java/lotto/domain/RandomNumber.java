@@ -23,10 +23,9 @@ public class RandomNumber {
 
     public static List<Integer> makeLottoNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> resultNumbers = numbers.subList(0, COUNT);
+        List<Integer> resultNumbers = new ArrayList<>(numbers.subList(0, COUNT));
         Collections.sort(resultNumbers);
         return resultNumbers;
     }
-
 
 }

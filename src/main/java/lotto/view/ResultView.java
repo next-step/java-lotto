@@ -23,7 +23,7 @@ public class ResultView {
     }
 
     public static void printProfit(double calculateProfit) {
-        System.out.printf("총 수익률은 %f입니다. ", calculateProfit * 100);
+        System.out.print("총 수익률은 " + Math.round(calculateProfit * 100) / 100.0 + " 입니다. ");
         if (calculateProfit < 1) System.out.println("기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

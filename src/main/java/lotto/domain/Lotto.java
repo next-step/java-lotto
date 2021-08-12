@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,12 +16,12 @@ public class Lotto {
     }
 
     public int countSameNumber(final Lotto lotto) {
-        List<Integer> tempNumbers = new ArrayList<>(numbers);
-        tempNumbers.retainAll(lotto.value());
-        return tempNumbers.size();
+        return (int) lotto.value().stream()
+                .filter(number -> this.contains(number))
+                .count();
     }
 
-    public Rank findLottoRank(Lotto win) {
+    public Rank findLottoRank(final Lotto win) {
         return Rank.findRank(win.countSameNumber(this));
     }
 
