@@ -15,13 +15,16 @@ public class TargetNumbers {
     public static TargetNumbers from(String[] splitTargetNumbersString) {
         List<Integer> targetNumberList = new ArrayList<>();
         for (String targetNumberString : splitTargetNumbersString) {
-            int targetNumber = Integer.parseInt(targetNumberString);
-            if (targetNumber < 0) {
-                throw new RuntimeException("숫자는 0 이상이어야 합니다.");
-            }
+            int targetNumber = Integer.parseInt(targetNumberString);checkLessThanZero(targetNumber);
             targetNumberList.add(targetNumber);
         }
         return new TargetNumbers(targetNumberList);
+    }
+
+    private static void checkLessThanZero(int targetNumber) {
+        if (targetNumber < 0) {
+            throw new RuntimeException("숫자는 0 이상이어야 합니다.");
+        }
     }
 
     public int sum() {
