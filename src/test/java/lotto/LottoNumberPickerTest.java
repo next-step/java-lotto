@@ -1,6 +1,8 @@
 package lotto;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumberPicker;
+import lotto.model.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,9 +18,11 @@ public class LottoNumberPickerTest {
 
     @Test
     void 로또_숫자_1부터_45까지() {
-        assertThat(LottoNumberPicker.pickNumber().getLottoNumber())
-                .isGreaterThanOrEqualTo(LOTTO_START_NUMBER)
-                .isLessThanOrEqualTo(LOTTO_END_NUMBER);
+        for (LottoNumber lottoNumber : LottoNumberPicker.pickNumber()) {
+            assertThat(lottoNumber.getLottoNumber())
+                    .isGreaterThanOrEqualTo(LOTTO_START_NUMBER)
+                    .isLessThanOrEqualTo(LOTTO_END_NUMBER);
+        }
     }
 
     @Test

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberPicker {
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private static List<LottoNumber> numbers = new ArrayList<>();
 
@@ -17,9 +18,9 @@ public class LottoNumberPicker {
         }
     }
 
-    public static LottoNumber pickNumber() {
+    public static List<LottoNumber> pickNumber() {
         Collections.shuffle(numbers);
-        return numbers.get(0);
+        return numbers.subList(0, LOTTO_NUMBER_SIZE);
     }
 
     public static LottoNumber pickNumber(int number) {

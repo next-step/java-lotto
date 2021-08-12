@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private static final String SPLIT_TOKEN = ",";
 
     private List<LottoNumber> lottoNumbers;
@@ -27,17 +27,10 @@ public class LottoNumbers {
     }
 
     public LottoNumbers generateNumbers() {
-        while (this.lottoNumbers.size() < LOTTO_NUMBER_SIZE) {
-            setNumber(LottoNumberPicker.pickNumber());
-        }
+        this.lottoNumbers = new ArrayList<>(LottoNumberPicker.pickNumber());
         return this;
     }
 
-    private void setNumber(LottoNumber lottoNumber) {
-        if (!this.lottoNumbers.contains(lottoNumber)) {
-            this.lottoNumbers.add(lottoNumber);
-        }
-    }
 
     public List<LottoNumber> selectedNumber() {
         return this.lottoNumbers;
