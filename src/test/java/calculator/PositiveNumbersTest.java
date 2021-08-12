@@ -14,6 +14,6 @@ class PositiveNumbersTest {
 
     @Test
     void 양수만을_입력으로_받으면_합을_반환한다() {
-        assertThat(new PositiveNumbers(new int[] {1, 3, 5}).sum()).isEqualTo(9);
+        assertThat(new PositiveNumbers(new int[]{1, 3, 5}).sum()).isEqualTo(9);
     }
 }
