@@ -5,9 +5,11 @@ import lotto.model.Lottos;
 import lotto.model.WinningRank;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.model.WinningRank.MISS;
 
 public class ResultView {
     private static final String LOTTO_COUNT_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
@@ -44,13 +46,14 @@ public class ResultView {
         printStream.println(MESSAGE_BOUNDARY);
 
         int earning = 0;
-        WinningRank[] allWinningRanks = WinningRank.values();
+        List<WinningRank> winningRanks = Arrays.stream(WinningRank.values())
+                .filter(winningRank -> winningRank != MISS)
+                .collect(toList());
 
-        for (int i = allWinningRanks.length - 1; i >= 0; i--) {
-            WinningRank winningRank = allWinningRanks[i];
+        for (int i = winningRanks.size() - 1; i >= 0; i--) {
+            WinningRank winningRank = winningRanks.get(i);
             int equalWinningRankCount = getEqualWinningRankCount(myWinningRanks, winningRank);
             earning += winningRank.getWinningMoneyAmount() * equalWinningRankCount;
-
             printStream.println(getWinningStatisticsMessage(winningRank, equalWinningRankCount));
         }
         printStream.println(String.format(EARNING_RATE_MESSAGE, (float) earning / purchaseAmount));
