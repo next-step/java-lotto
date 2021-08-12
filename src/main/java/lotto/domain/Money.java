@@ -3,6 +3,7 @@ package lotto.domain;
 public class Money {
 
     private static final String INVALID_MONEY_AMOUNT_EXCEPTION_MESSAGE_FORMAT = "유효하지 않은 금액입니다. amount: %s";
+    private static final int MINIMUM_MONEY_AMOUNT = 0;
 
     private final long amount;
 
@@ -12,7 +13,7 @@ public class Money {
     }
 
     private void validateNonNegative(long amount) {
-        if (amount < 0) {
+        if (amount < MINIMUM_MONEY_AMOUNT) {
             throw new IllegalArgumentException(String.format(INVALID_MONEY_AMOUNT_EXCEPTION_MESSAGE_FORMAT, amount));
         }
     }
