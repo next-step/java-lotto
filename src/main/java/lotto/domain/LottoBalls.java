@@ -56,7 +56,7 @@ public class LottoBalls {
             .count();
     }
 
-    public Set<LottoBall> getLottoBalls() {
+    public Set<LottoBall> toLottoBallSet() {
         return lottoBalls;
     }
 }
