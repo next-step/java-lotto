@@ -35,8 +35,6 @@ public class LottoGame {
         List<LottoNumber> winOfLottoNumbers = InputView.inputWinOfLottoNumber();
         LottoNumber lottoBonusNumber = InputView.inputBonusOfLottoNumber();
 
-        winOfLottoNumbers.add(lottoBonusNumber);
-
         WinOfLotto winOfLotto = new WinOfLotto(winOfLottoNumbers, lottoBonusNumber);
 
         LottoMatch lottoMatch = user.getLottos().match(winOfLotto);
