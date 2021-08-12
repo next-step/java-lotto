@@ -3,7 +3,6 @@ package step4;
 import org.junit.jupiter.api.Test;
 import step4.domain.lotto.LottoMachine;
 import step4.domain.lotto.Lottos;
-import step4.domain.lotto.RandomStrategy;
 import step4.domain.money.Cache;
 import step4.domain.money.Money;
 
@@ -17,10 +16,8 @@ class LottoMachineTest {
         Cache givenCache = new Cache(10000);
         int expectedNumberOfLotto = 10;
 
-        LottoMachine lottoMachine = new LottoMachine();
-
         // When
-        Lottos lottos = lottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lottos lottos = LottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
@@ -32,10 +29,8 @@ class LottoMachineTest {
         Cache givenCache = new Cache(10000);
         int expectedNumberOfLotto = 10;
 
-        LottoMachine lottoMachine = new LottoMachine();
-
         // When
-        Lottos lottos = lottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lottos lottos = LottoMachine.sell(givenCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // Then
         assertThat(lottos.size()).isEqualTo(expectedNumberOfLotto);
@@ -49,12 +44,9 @@ class LottoMachineTest {
         Money givenManualCache = new Cache(3000);
         Money givenRandomCache = givenCache.minus(givenManualCache);
 
-        LottoMachine lottoManualMachine = new LottoMachine();
-        LottoMachine lottoRandomMachine = new LottoMachine();
-
         // When
-        Lottos manualLottos = lottoManualMachine.sell(givenManualCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lottos randomLottos = lottoRandomMachine.sell(givenRandomCache, new RandomStrategy());
+        Lottos manualLottos = LottoMachine.sell(givenManualCache, () -> LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lottos randomLottos = LottoMachine.sell(givenRandomCache);
 
         // Then
         assertThat(manualLottos.size()).isEqualTo(3);

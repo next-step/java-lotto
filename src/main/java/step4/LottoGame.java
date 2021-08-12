@@ -5,7 +5,6 @@ import step4.domain.lotto.LottoMatch;
 import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.Lottos;
 import step4.domain.lotto.Profit;
-import step4.domain.lotto.RandomStrategy;
 import step4.domain.lotto.WinOfLotto;
 import step4.domain.money.Cache;
 import step4.domain.money.Money;
@@ -20,12 +19,11 @@ public class LottoGame {
     public static void main(String[] args) {
         int inputMoney = InputView.inputMoney();
         User user = new User("pobi", new Wallet(new Cache(inputMoney)));
-        LottoMachine lottoMachine = new LottoMachine();
 
         Lottos lottos = new Lottos();
 
-        manualLotto(lottos, user, lottoMachine);
-        randomLotto(lottos, user, lottoMachine);
+        manualLotto(lottos, user);
+        randomLotto(lottos, user);
 
         user.buyLotto(lottos);
 
@@ -43,12 +41,12 @@ public class LottoGame {
         ResultView.printLottoStatistics(lottoMatch, profit);
     }
 
-    private static void randomLotto(Lottos lottos, User user, LottoMachine lottoMachine) {
-        Money remainMoney = user.withDraw();
-        lottos.addAll(lottoMachine.sell(remainMoney, new RandomStrategy()));
+    private static void randomLotto(Lottos lottos, User user) {
+        Money money = user.withDraw();
+        lottos.addAll(LottoMachine.sell(money));
     }
 
-    private static void manualLotto(Lottos lottos, User user, LottoMachine lottoMachine) {
+    private static void manualLotto(Lottos lottos, User user) {
         int lottoManualCount = InputView.inputManualCount();
 
         InputView.manualOfLottoView();
@@ -57,7 +55,7 @@ public class LottoGame {
             List<LottoNumber> lottoNumbers = InputView.inputManualOfLottoNumber();
 
             Money manualLottoMoney = user.withDraw(new Cache(LottoMachine.LOTTO_PRICE));
-            lottos.addAll(lottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
+            lottos.addAll(LottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
         }
     }
 }

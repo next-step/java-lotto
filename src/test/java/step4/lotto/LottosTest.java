@@ -42,8 +42,7 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, bonusNumber);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         // When
         LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
@@ -64,8 +63,7 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         // When
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
@@ -80,8 +78,7 @@ class LottosTest {
     void profilt() {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
-        LottoMachine lottoMachine = new LottoMachine();
-        Lottos lottos = lottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
 
         LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
 

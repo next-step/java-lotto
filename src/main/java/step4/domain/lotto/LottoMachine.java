@@ -6,7 +6,11 @@ public class LottoMachine {
 
     public static final Integer LOTTO_PRICE = 1000;
 
-    public Lottos sell(Money money, LottoStrategy lottoStrategy) {
+    public static Lottos sell(Money money) {
+        return sell(money, new RandomStrategy());
+    }
+
+    public static Lottos sell(Money money, LottoStrategy lottoStrategy) {
         final int lottoCount = money.amount() / LOTTO_PRICE;
 
         Lottos lottos = new Lottos();
