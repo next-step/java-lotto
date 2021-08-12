@@ -32,7 +32,7 @@ public enum LotteryResult {
 
     public static LotteryResult getLotteryResult(final int match, final boolean bonus) {
         return LOTTERY_RESULTS.stream()
-                .filter(lotteryResult -> lotteryResult.isEqualTo(match, bonus))
+                .filter(lotteryResult -> lotteryResult.isValid(match, bonus))
                 .findFirst()
                 .orElse(BLANK);
     }
@@ -49,7 +49,7 @@ public enum LotteryResult {
                 : (o2.bonus ? 1 : 0);
     }
 
-    private boolean isEqualTo(final int match, final boolean bonus) {
+    private boolean isValid(final int match, final boolean bonus) {
         return this.match == match
                 && this.bonus == (bonus && this.bonus);
     }
