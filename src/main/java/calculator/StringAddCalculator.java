@@ -5,6 +5,12 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    public static final int ZERO = 0;
+    public static final int ONE = 1;
+    public static final int PATTERN_GROUP_ONE = 1;
+    public static final int PATTERN_GROUP_TWO = 2;
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+
     public static void main(String[] args) {
         String addString = "1,2,3";
         int result = splitAndSum(addString);
@@ -14,7 +20,7 @@ public class StringAddCalculator {
     public static int splitAndSum(String input) {
 
         if (checkNullOrEmptyString(input)) {
-            return 0;
+            return ZERO;
         }
 
         if (checkOneDigitString(input)) {
@@ -26,27 +32,19 @@ public class StringAddCalculator {
 
     public static boolean checkNullOrEmptyString(String input) {
 
-        if (input == null || input.length() == 0) {
-            return true;
-        }
-
-        return false;
+        return input == null || input.length() == ZERO;
     }
 
     public static boolean checkOneDigitString(String input) {
 
-        if (input.length() == 1) {
-            return true;
-        }
-
-        return false;
+        return input.length() == ONE;
     }
 
     public static int checkMinusDigit(String digitString) {
 
         int result = Integer.parseInt(digitString);
 
-        if (result < 0) {
+        if (result < ZERO) {
             throw new RuntimeException("음수입니다.");
         }
 
@@ -55,7 +53,7 @@ public class StringAddCalculator {
 
     public static int checkDelimeter(String input) {
 
-        if (input.charAt(0) == '/') {
+        if (input.charAt(ZERO) == '/') {
             return customDelimiterSum(input);
         }
 
@@ -71,10 +69,10 @@ public class StringAddCalculator {
     public static int customDelimiterSum(String input) {
 
         int result = 0;
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher m = PATTERN.matcher(input);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] tokens = m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(PATTERN_GROUP_ONE);
+            String[] tokens = m.group(PATTERN_GROUP_TWO).split(customDelimiter);
             result = addString(tokens);
         }
         return result;
