@@ -21,6 +21,7 @@ public class LottoApp {
         ArrayList<Integer> winningLottoNumberList = winningLottoNumbers.checkValidInput(inputView.requestWinningLottoNumber());
         int bonusBallNumber = inputView.requestBonusBall();
         BonusBall.copareWithWinningLottoNumbers(bonusBallNumber, winningLottoNumberList);
+        ArrayList<Integer> matchedResultList = customer.compareWinningLottoNumbersAndIssuedLottoList(winningLottoNumberList, issuedLottoList);
 
 
 
