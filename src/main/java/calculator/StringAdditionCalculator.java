@@ -41,9 +41,9 @@ public class StringAdditionCalculator {
             delimiters = String.join("|", customDelimiterList);
         }
         return new PositiveNumbers(
-                Stream.of(expression.split(delimiters))
-                        .mapToInt(Integer::parseInt)
-                        .toArray());
+            Stream.of(expression.split(delimiters))
+                .mapToInt(Integer::parseInt)
+                .toArray());
     }
 
     public int splitAndSum(String expression) {
