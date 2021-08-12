@@ -12,9 +12,11 @@ public class Lottos {
         validatePurchasableAmount(purchaseAmount);
         validatePurchasableManualLottoCount(purchaseAmount, manualLottos.size());
 
-        int lottoCount = purchaseAmount / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        int lottoCountTotal = purchaseAmount / LOTTO_PRICE;
+        int autoLottoCount = lottoCountTotal - manualLottos.size();
+
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto(new RandomLottoNumberGenerating()));
         }
         this.lottos = lottos;
