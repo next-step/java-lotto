@@ -22,7 +22,7 @@ public class PrizeStatus {
 		for (Lotto lotto : lottos.getLottos()) {
 			Prize winPrize = Prize.getWinnersStatus(
 				lotto.findNumberContainsCount(winnerLotto.getWinnerLotto().getLottoNumbers()),
-				lotto.getLottoNumbers().contains(winnerLotto.getBonusNumber()));
+				lotto.isNumberContain(winnerLotto.getBonusNumber()));
 			winPrizes.computeIfPresent(winPrize, (oldPrize, oldPrizeCount) -> oldPrizeCount + ADDITION_PRIZE_COUNT);
 		}
 		return new WinPrizes(winPrizes);
