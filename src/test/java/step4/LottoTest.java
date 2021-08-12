@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @RepeatedTest(50)
@@ -48,6 +49,16 @@ public class LottoTest {
 
         //then
         assertThat(lottoSize).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호 검증 실패")
+    @MethodSource("lottoNumFailSource")
+    public void failLottoInput(List<Integer> lottoNums) {
+        //given, when, then
+        assertThatThrownBy(() -> {
+            Lotto.createLotto(lottoNums);
+        }).isInstanceOf(RuntimeException.class);
     }
 
     @ParameterizedTest
@@ -101,6 +112,14 @@ public class LottoTest {
             Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(1, 2, 3, 4, 5, 6), 6, true),
             Arguments.arguments(Arrays.asList(8, 9, 10, 11, 12, 13), Arrays.asList(3, 4, 5, 6, 7, 8), 15, false),
             Arguments.arguments(Arrays.asList(15, 16, 17, 18, 19, 20), Arrays.asList(15, 16, 1, 2, 3, 4), 20, true)
+        );
+    }
+
+    static Stream<Arguments> lottoNumFailSource() {
+        return Stream.of(
+            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+            Arguments.arguments(Arrays.asList(8, 9, 10, 11, 12, -13)),
+            Arguments.arguments(Arrays.asList(15, 16, 17, 18, 19))
         );
     }
 }

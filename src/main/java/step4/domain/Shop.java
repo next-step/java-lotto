@@ -1,7 +1,5 @@
 package step4.domain;
 
-import step4.validator.LottoValidator;
-
 import java.util.List;
 
 public class Shop {
@@ -11,7 +9,7 @@ public class Shop {
     }
 
     public static Lottos buyLotto(int money) {
-        LottoValidator.validateMoney(money);
+        validateMoney(money);
 
         int count = getLottoCount(money);
 
@@ -19,15 +17,32 @@ public class Shop {
     }
 
     public static Lottos buyLotto(int money, List<List<Integer>> manualLottoNums) {
-        for (List<Integer> manualLottoNum : manualLottoNums) {
-            LottoValidator.validateLottoNum(manualLottoNum);
-        }
-        LottoValidator.validateMoney(money);
+        validateMoney(money);
 
         int count = getLottoCount(money) - manualLottoNums.size();
-        LottoValidator.validateManualCount(count);
+        validateManualCount(count);
 
         return Lottos.createLottos(count, manualLottoNums, LOTTO_PRICE * count);
+    }
+
+    private static void validateMoney(int money) {
+        if (isNotAvailableMoney(money)) {
+            throw new RuntimeException("잘못된 금액을 입력하셨습니다.");
+        }
+    }
+
+    private static boolean isNotAvailableMoney(int money) {
+        return money < 0;
+    }
+
+    public static void validateManualCount(int count) {
+        if (isLottoCountNotAvailable(count)) {
+            throw new RuntimeException("구매한 금액보다 더 많은 수동 로또를 입력하였습니다.");
+        }
+    }
+
+    private static boolean isLottoCountNotAvailable(int count) {
+        return count < 0;
     }
 
     private static int getLottoCount(int money) {

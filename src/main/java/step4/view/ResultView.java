@@ -18,12 +18,14 @@ public class ResultView {
     }
 
     private static void showLottoCount(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
+        System.out.println(lottos.getLottos()
+            .size() + "개를 구매했습니다.");
     }
 
     private static void showLottoNums(Lottos lottos) {
         for (int i = 0; i < lottos.size(); i++) {
-            System.out.println(lottos.getLottos().get(i));
+            System.out.println(lottos.getLottos()
+                .get(i));
         }
         System.out.println();
     }
@@ -53,22 +55,34 @@ public class ResultView {
     }
 
     private static void showForth(List<LottoPlace> lottoPlaces) {
-        long forth = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.FORTH).count();
-        System.out.println(LottoPlace.FORTH.getCorrectNum() + "개 일치 (" + LottoPlace.FORTH.getPrice() + "원) - " + forth + "개");
+        long forth = lottoPlaces.stream()
+            .filter(lottoPlace -> lottoPlace == LottoPlace.FORTH)
+            .count();
+        showPlace(LottoPlace.FORTH.getCorrectNum(), LottoPlace.FORTH.getPrice(), forth);
     }
 
     private static void showThird(List<LottoPlace> lottoPlaces) {
-        long third = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.THIRD).count();
-        System.out.println(LottoPlace.THIRD.getCorrectNum() + "개 일치 (" + LottoPlace.THIRD.getPrice() + "원) - " + third + "개");
+        long third = lottoPlaces.stream()
+            .filter(lottoPlace -> lottoPlace == LottoPlace.THIRD)
+            .count();
+        showPlace(LottoPlace.FORTH.getCorrectNum(), LottoPlace.FORTH.getPrice(), third);
     }
 
     private static void showSecond(List<LottoPlace> lottoPlaces) {
-        long second = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.SECOND).count();
-        System.out.println(LottoPlace.SECOND.getCorrectNum() + "개 일치 (" + LottoPlace.SECOND.getPrice() + "원) - " + second + "개");
+        long second = lottoPlaces.stream()
+            .filter(lottoPlace -> lottoPlace == LottoPlace.SECOND)
+            .count();
+        showPlace(LottoPlace.FORTH.getCorrectNum(), LottoPlace.FORTH.getPrice(), second);
     }
 
     private static void showFirst(List<LottoPlace> lottoPlaces) {
-        long first = lottoPlaces.stream().filter(lottoPlace -> lottoPlace == LottoPlace.FIRST).count();
-        System.out.println(LottoPlace.FIRST.getCorrectNum()+ "개 일치 (" + LottoPlace.FIRST.getPrice() + "원) - " + first + "개");
+        long first = lottoPlaces.stream()
+            .filter(lottoPlace -> lottoPlace == LottoPlace.FIRST)
+            .count();
+        showPlace(LottoPlace.FORTH.getCorrectNum(), LottoPlace.FORTH.getPrice(), first);
+    }
+
+    private static void showPlace(int correctNum, int price, long count) {
+        System.out.println(correctNum + "개 일치 (" + price + "원) - " + count + "개");
     }
 }

@@ -15,6 +15,8 @@ public class Lotto {
 
     private final List<Integer> lottoNums;
 
+    private static final int LOTTO_NUM_SIZE = 6;
+
     private Lotto(List<Integer> lottoNums) {
         this.lottoNums = lottoNums;
     }
@@ -28,11 +30,8 @@ public class Lotto {
     }
 
     public static Lotto createLotto(List<Integer> manualLottoNum) {
+        validateLottoNum(manualLottoNum);
         return new Lotto(manualLottoNum);
-    }
-
-    public List<Integer> getLottoNums() {
-        return lottoNums;
     }
 
     public int countCorrectNums(LastWeekLotto lastWeekLotto) {
@@ -44,6 +43,29 @@ public class Lotto {
     public boolean isLottoNumContainsBonusNum(LastWeekLotto lastWeekLotto) {
         return lottoNums.stream()
             .anyMatch(lastWeekLotto::isBonusNumCorrect);
+    }
+
+    private static void validateLottoNum(List<Integer> nums) {
+        if (nums.stream()
+            .anyMatch(Lotto::notInRange)) {
+            throw new RuntimeException("로또 번호는 1 ~ 45 사이의 번호여야 합니다");
+        }
+
+        if (nums.size() != LOTTO_NUM_SIZE) {
+            throw new RuntimeException("로또 번호의 갯수는 6개여야 합니다");
+        }
+
+        if (nums.stream().distinct().count() != LOTTO_NUM_SIZE) {
+            throw new RuntimeException("로또 번호의 갯수는 중복되지 않고 6개여야 합니다");
+        }
+    }
+
+    private static boolean notInRange(int num) {
+        return num > 45 || num <= 0;
+    }
+
+    public List<Integer> getLottoNums() {
+        return lottoNums;
     }
 
     @Override
