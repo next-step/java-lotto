@@ -38,9 +38,9 @@ class LottosTest {
     @Test
     void findRank() {
         assertThat(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
-                .findRank(win, Rank.FIRST)).isEqualTo(0);
+                .findRankCount(win, Rank.FIRST)).isEqualTo(0);
         assertThat(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 23, 4, 5, 6, 7))))
-                .findRank(win, Rank.FIRST)).isEqualTo(1);
+                .findRankCount(win, Rank.FIRST)).isEqualTo(1);
     }
 
     @DisplayName("로또 총 수입 구하기")
