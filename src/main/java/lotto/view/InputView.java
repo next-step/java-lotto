@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 
 public class InputView {
     private static final int MIN_MANUAL_LOTTO_COUNT = 0;
-    private static final String PURCHASE_PRICE_INPUT_MESSAGE = "구매금액을 입력해 주세요.";
+    private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_NUMBERS_DELIMITER = ", ";
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -24,11 +24,11 @@ public class InputView {
         printStream = System.out;
     }
 
-    public void printPurchasePriceInputMessage() {
-        printStream.println(PURCHASE_PRICE_INPUT_MESSAGE);
+    public void printPurchaseAmountInputMessage() {
+        printStream.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
     }
 
-    public int inputPurchasePrice() {
+    public int inputPurchaseAmount() {
         return scanner.nextInt();
     }
 

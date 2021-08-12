@@ -20,29 +20,29 @@ public class LottoApp {
 
     public static void main(String[] args) {
         LottoApp lottoApp = new LottoApp();
-        int purchasePrice = lottoApp.printPurchasePriceInputMessageAndInput();
+        int purchaseAmount = lottoApp.printPurchaseAmountInputMessageAndInput();
         int manualLottoCount = lottoApp.printManualLottoCountInputMessageAndInput();
         if (manualLottoCount >= MIN_COUNT_OF_REQUIRED_TO_BE_MANUAL_LOTTO_INPUT) {
             lottoApp.printManualLottosInputMessage();
         }
 
-        Lottos lottos = lottoApp.createLottos(purchasePrice, manualLottoCount);
+        Lottos lottos = lottoApp.createLottos(purchaseAmount, manualLottoCount);
         lottoApp.printLottosAndCount(lottos, manualLottoCount);
 
         Lotto winningNumbers = new Lotto(lottoApp.printWinningNumbersInputMessageAndInput());
         LottoNumber bonusNumber = LottoNumber.valueOf(lottoApp.printBonusNumberInputMessageAndInput());
 
         List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, new DrawNumbers(winningNumbers, bonusNumber));
-        lottoApp.printWinningStatistics(purchasePrice, winningRanks);
+        lottoApp.printWinningStatistics(purchaseAmount, winningRanks);
     }
 
-    private int printPurchasePriceInputMessageAndInput() {
-        inputView.printPurchasePriceInputMessage();
-        int purchasePrice = inputView.inputPurchasePrice();
+    private int printPurchaseAmountInputMessageAndInput() {
+        inputView.printPurchaseAmountInputMessage();
+        int purchaseAmount = inputView.inputPurchaseAmount();
 
         inputView.executeNextLine();
         inputView.printNewLine();
-        return purchasePrice;
+        return purchaseAmount;
     }
 
     private int printManualLottoCountInputMessageAndInput() {
