@@ -1,11 +1,12 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoBall;
 import lotto.domain.LottoBalls;
+import lotto.domain.Rank;
+import lotto.domain.WinStatistics;
 
 public class ResultView {
     private static final String OUTPUT_LOTTO_COUNT = "개를 구매했습니다.";
@@ -30,19 +31,19 @@ public class ResultView {
     }
 
     public void outputLottoTickets(LottoBalls lottoBalls) {
-        System.out.println("[" + lottoBalls.getLottoBalls()
+        System.out.println("[" + lottoBalls.toLottoBallSet()
             .stream()
             .map(LottoBall::number)
             .map(String::valueOf)
             .collect(Collectors.joining(", ")) + "]");
     }
 
-    public void outputStatistics(Map<Integer, Integer> winStatistics, float rateOfReturn) {
+    public void outputStatistics(WinStatistics winStatistics, float rateOfReturn) {
         println(OUTPUT_STATISTICS_TITLE);
-        printf(OUTPUT_THREE_MATCH_CASE, winStatistics.getOrDefault(3, 0));
-        printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.getOrDefault(4, 0));
-        printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.getOrDefault(5, 0));
-        printf(OUTPUT_SIX_MATCH_CASE, winStatistics.getOrDefault(6, 0));
+        printf(OUTPUT_THREE_MATCH_CASE, winStatistics.countByRank(Rank.FOURTH_RANK));
+        printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.countByRank(Rank.THIRD_RANK));
+        printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.countByRank(Rank.SECOND_RANK));
+        printf(OUTPUT_SIX_MATCH_CASE, winStatistics.countByRank(Rank.FIRST_RANK));
         printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
     }
 
