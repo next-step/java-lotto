@@ -39,7 +39,6 @@ public class WinningNumber {
         int[] numbers = Arrays.asList(this.numbers)
                 .stream().mapToInt(Integer::parseInt).toArray();
 
-
         return Arrays.stream(numbers).boxed().toArray(Integer[]::new);
 
     }

@@ -12,6 +12,9 @@ public class WinningResult {
         this.winningPrice = winningPrice;
     }
 
+    public static WinningResult of(List<WinningPrice> winningPrice) {
+        return new WinningResult(winningPrice);
+    }
 
     public StringBuffer getWinningResult() {
         StringBuffer stringBuffer = new StringBuffer();

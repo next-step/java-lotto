@@ -3,13 +3,11 @@ package Lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
+import static Lotto.Money.MONEY_DIVIDE_REMAINDER_ZERO;
+
 public class RandomNumberGenerator implements NumberGenerator {
-
-
-    private final Random random = new Random();
 
     public static int LOTTO_MIN_NUMBER = 1;
     public static int LOTTO_MAX_NUMBER = 45;
@@ -29,7 +27,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
         Collections.shuffle(numbers);
 
-        numbers = numbers.subList(0, 6);
+        numbers = numbers.subList(MONEY_DIVIDE_REMAINDER_ZERO, 6);
 
         Collections.sort(numbers);
 

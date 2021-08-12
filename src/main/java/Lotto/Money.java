@@ -7,9 +7,10 @@ public class Money {
     private int money;
 
     public static final int MONEY_UNIT = 1000;
+    public static final int MONEY_DIVIDE_REMAINDER_ZERO = 0;
 
     public Money(int money) {
-        if (money % MONEY_UNIT != 0) {
+        if (money % MONEY_UNIT != MONEY_DIVIDE_REMAINDER_ZERO) {
             throw new IllegalArgumentException();
         }
         this.money = money;

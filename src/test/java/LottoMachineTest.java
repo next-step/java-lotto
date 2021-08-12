@@ -34,12 +34,11 @@ public class LottoMachineTest {
 
         String[] userNumbers = {"1", "2", "8", "4", "9", "6"};
 
-        WinningNumber winningNumber = WinningNumber.of(userNumbers);
 
         List<WinningPrice> winningPrice = new ArrayList<>();
 
         for (int i = 0; i < lottos.size(); i++) {
-            winningPrice.add(WinningPrice.getWinnings(lottos.get(i).compareNumbers(List.of(winningNumber.convertInteger()))));
+            winningPrice.add(WinningPrice.getWinnings(lottos.get(i).compareNumbers(List.of(WinningNumber.of(userNumbers).convertInteger()))));
         }
 
 

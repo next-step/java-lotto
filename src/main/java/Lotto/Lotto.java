@@ -25,7 +25,6 @@ public class Lotto {
                 .stream()
                 .filter(number -> userNumbers.contains(number))
                 .collect(Collectors.toList()).size();
-
     }
 
 }
