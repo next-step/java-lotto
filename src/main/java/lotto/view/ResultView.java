@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 public class ResultView {
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String LOTTO_COUNT_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String MESSAGE_BOUNDARY = "---------";
     private static final String ANSWER_COUNT_MESSAGE = "%d개 일치";
@@ -28,8 +28,8 @@ public class ResultView {
         this.printStream = System.out;
     }
 
-    public void printLottoCount(int lottoCount) {
-        printStream.println(String.format(LOTTO_COUNT_MESSAGE, lottoCount));
+    public void printLottoCount(int lottoCountTotal, int manualLottoCount) {
+        printStream.println(String.format(LOTTO_COUNT_MESSAGE, manualLottoCount, lottoCountTotal - manualLottoCount));
     }
 
     public void printLottos(Lottos lottos) {
