@@ -15,14 +15,14 @@ public class LottoTicket {
     public int matchWinningNumber(LottoTicket winningNumber) {
         int matchCount = 0;
         for (LottoNumber num : lottoNumbers) {
-            matchCount += isContainNumber(winningNumber, num);
+            matchCount += winningNumber.contains(num);
         }
 
         return matchCount;
     }
 
-    private int isContainNumber(LottoTicket winningNumber, LottoNumber num) {
-        if (winningNumber.getLottoNumbers().contains(num)) {
+    private int contains(LottoNumber num) {
+        if (lottoNumbers.contains(num)) {
             return 1;
         }
         return 0;
