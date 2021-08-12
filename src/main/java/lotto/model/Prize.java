@@ -40,7 +40,7 @@ public enum Prize {
 			return SECOND;
 		}
 		return Arrays.stream(Prize.values())
-			.filter(r -> r.countOfMatch == countOfMatch)
+			.filter(r -> (r.countOfMatch == countOfMatch) && (r != SECOND))
 			.findFirst()
 			.orElse(MISS);
 	}
