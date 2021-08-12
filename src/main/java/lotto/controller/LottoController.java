@@ -2,11 +2,11 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import lotto.domain.LottoBalls;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,9 +18,9 @@ public class LottoController {
 
         int lottoCount = inputView.inputLottoBuyAmount() / 1000;
         List<LottoBalls> lottoBallsList = lottoController.createLottoBalls(resultView, lottoCount);
-        LottoTickets lottoTickets = new LottoTickets(lottoBallsList);
+        LottoTickets lottoTickets = LottoTickets.from(lottoBallsList);
 
-        Map<Integer, Integer> winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
+        WinStatistics winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
         resultView.outputStatistics(winStatistics, lottoTickets.getRateOfReturn(lottoCount, winStatistics));
         inputView.scannerClose();
     }
@@ -34,12 +34,11 @@ public class LottoController {
         return lottoBallsList;
     }
 
-    public Map<Integer, Integer> proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
+    public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
         LottoBalls lottoBalls =
             LottoBalls.of(Stream.of(inputView.inputInputLastWeekWinnerNumbers().split(","))
                 .mapToInt(s -> Integer.parseInt(s.trim()))
                 .toArray());
-        return lottoTickets.getLottoStatistics(lottoBalls);
+        return WinStatistics.from(lottoBalls, lottoTickets);
     }
-
 }
