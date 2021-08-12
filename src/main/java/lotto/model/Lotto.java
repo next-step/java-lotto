@@ -30,10 +30,13 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
-	private List<LottoNumber> toList(String winnerNumbers) {
-		return Arrays.stream(winnerNumbers.split(LAST_WIN_NUMBER_REGEX))
+	private List<LottoNumber> toList(String lotto) {
+		List<LottoNumber> lottoNumbers = Arrays.stream(lotto.split(LAST_WIN_NUMBER_REGEX))
 			.map(s -> new LottoNumber(toInt(s)))
 			.collect(Collectors.toList());
+		checkLottoSize(lottoNumbers);
+		checkDuplicateNumber(lottoNumbers);
+		return lottoNumbers;
 	}
 
 	private int toInt(String winnerNumbers) {
