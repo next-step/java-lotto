@@ -9,4 +9,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 요구 사항 분석
-- [O] 기존 리뷰 리팩토링
+- [x] 기존 리뷰 리팩토링
+- [ ] 보너스 볼 입력
+- [ ] Lotto 클래스에서 2등 확인
+- [ ] 기존 통계에 2등 추가
