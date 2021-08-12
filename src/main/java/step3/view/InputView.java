@@ -23,4 +23,9 @@ public class InputView {
         String lastWinningLottoNum = sc.nextLine();
         return lastWinningLottoNum;
     }
+
+    public Integer requestBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return sc.nextInt();
+    }
 }
