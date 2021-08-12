@@ -31,6 +31,14 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
+	public boolean isNumberContain(LottoNumber lottoNumber){
+		return lottoNumbers.contains(lottoNumber);
+	}
+
+	public int findNumberContainsCount(List<LottoNumber> winnerNumbers){
+		return (int)winnerNumbers.stream().filter(lottoNumbers::contains).count();
+	}
+
 	private List<LottoNumber> toList(String lotto) {
 		List<LottoNumber> lottoNumbers = Arrays.stream(lotto.split(LAST_WIN_NUMBER_REGEX))
 			.map(s -> new LottoNumber(toInt(s)))

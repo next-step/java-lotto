@@ -21,8 +21,8 @@ public class WinnerLotto {
 		return bonusNumber;
 	}
 
-	private void checkNUmberDuplication(Lotto winnerLotto, int inputBonusBall) {
-		if (winnerLotto.getLottoNumbers().contains(new LottoNumber(inputBonusBall))) {
+	private void checkNUmberDuplication(Lotto winnerLotto, int bonusNumber) {
+		if (winnerLotto.isNumberContain(new LottoNumber(bonusNumber))) {
 			throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBER_MESSAGE);
 		}
 	}

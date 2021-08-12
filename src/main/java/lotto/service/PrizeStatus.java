@@ -21,10 +21,8 @@ public class PrizeStatus {
 			.collect(Collectors.toMap(prize -> prize, prize -> INITIAL_PRIZE_COUNT, (a, b) -> b, LinkedHashMap::new));
 		for (Lotto lotto : lottos.getLottos()) {
 			Prize winPrize = Prize.getWinnersStatus(
-				(int)lotto.getLottoNumbers()
-					.stream()
-					.filter(winnerLotto.getWinnerLotto().getLottoNumbers()::contains)
-					.count(), lotto.getLottoNumbers().contains(winnerLotto.getBonusNumber()));
+				lotto.findNumberContainsCount(winnerLotto.getWinnerLotto().getLottoNumbers()),
+				lotto.getLottoNumbers().contains(winnerLotto.getBonusNumber()));
 			winPrizes.computeIfPresent(winPrize, (oldPrize, oldPrizeCount) -> oldPrizeCount + ADDITION_PRIZE_COUNT);
 		}
 		return new WinPrizes(winPrizes);
