@@ -4,7 +4,7 @@ import lotto.util.LottoNumberUtil;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int number) {
         LottoNumberUtil.validNumber(number);
@@ -17,6 +17,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber number1) {
-        return Integer.compare(this.getLottoNumber(), number1.getLottoNumber());
+        return this.getLottoNumber() - number1.getLottoNumber();
     }
 }
