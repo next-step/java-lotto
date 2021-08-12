@@ -2,10 +2,13 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lotto.enumeration.LottoReward;
 
 public class LottoGameWinnerCalculator {
+
+    private final static int ONLY_ONE = 1;
 
     private final LottoTicket winnerTicket;
     private final LottoNumber bonusBallNumber;
@@ -40,11 +43,21 @@ public class LottoGameWinnerCalculator {
     private boolean checkBonusNumberMatch(LottoTicket winnerTicket,
         LottoTicket playerTicket) {
 
+        List<LottoNumber> missedLottoNumbers = getMissedLottoNumbers(winnerTicket, playerTicket);
+
+        if (missedLottoNumbers.size() == ONLY_ONE) {
+            return missedLottoNumbers.contains(bonusBallNumber);
+        }
+
+        return false;
+
+    }
+
+    private List<LottoNumber> getMissedLottoNumbers(LottoTicket winnerTicket,
+        LottoTicket playerTicket) {
         List<LottoNumber> playerLottoNumbers = new ArrayList<>(playerTicket.value());
         playerLottoNumbers.removeAll(winnerTicket.value());
-
-        return playerLottoNumbers.contains(bonusBallNumber);
-
+        return playerLottoNumbers;
     }
 
     private void updateWinnerResult(LottoGameWinnerResult result, LottoReward reward,
