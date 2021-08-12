@@ -12,19 +12,9 @@ public class Lotto {
         }
     }
 
-    public Lotto() {
-        this.lotto = new ArrayList<>();
-    }
-
     @Override
     public String toString() {
         return lotto.toString();
-    }
-
-    public void generateLotto(int lottoCount) {
-        for (int i=0; i<lottoCount; i++){
-            buyLotto(LottoMachine.mixLottoNumbers());
-        }
     }
 
     public void buyLotto(List<LottoNumber> lottoNumbers) {
@@ -35,7 +25,7 @@ public class Lotto {
         return lotto;
     }
 
-    public void matchLotto(LottoBuyer lottoResult) {
+    public void matchLotto(LottoResult lottoResult) {
         for (LottoTicket lottoTicket : this.lotto) {
             lottoResult.checkLottoTicket(lottoTicket);
         }

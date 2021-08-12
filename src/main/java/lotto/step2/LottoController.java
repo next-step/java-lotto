@@ -14,7 +14,7 @@ public class LottoController {
         ResultView.printLottoTicket(lottoTickets);
         LottoTicket winningNumber = LottoTicket.generateWinningNumber(InputView.inputLastWinningNumber());
         ResultView.printWinningStatisticsMessage();
-        LottoBuyer lottoResult = new LottoBuyer(winningNumber);
+        LottoResult lottoResult = new LottoResult(winningNumber);
         lottoTickets.matchLotto(lottoResult);
         ResultView.printWinningRank(lottoResult.getLottoResult());
         ResultView.printStatistics(lottoResult.calculateStatistics(lottoPrice));
