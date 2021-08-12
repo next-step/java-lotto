@@ -27,7 +27,6 @@ public class LottoApplication {
         int autoLottoCount = lottoTotalCount - manualLottoCount;
         ResultView.countOfLotto(manualLottoCount, autoLottoCount);
 
-
         lottoTicketGenerator = new AutoLottoTicketGenerator();
         for (int i = 0; i < autoLottoCount; i++) {
             LottoTicket generatedLottoTicket = lottoTicketGenerator.execute();

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.InvalidBonusNumberException;
 
-import java.util.List;
 import java.util.Objects;
 
 public class WinningLottoTicket {
