@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.enumeration.LottoReward;
@@ -24,11 +23,10 @@ public class LottoGameWinnerCalculator {
 
         for (LottoTicket playerTicket : playerTickets) {
             LottoReward reward = decideLottoReward(winnerTicket, playerTicket);
-            updateWinnerResult(result, reward, playerTicketsCount);
+            result.updateResultInfo(reward, playerTicketsCount);
         }
 
         return result;
-
     }
 
     private LottoReward decideLottoReward(LottoTicket winnerTicket, LottoTicket playerTicket) {
@@ -46,12 +44,6 @@ public class LottoGameWinnerCalculator {
         }
 
         return false;
-
-    }
-
-    private void updateWinnerResult(LottoGameWinnerResult result, LottoReward reward,
-        int playerTicketsCount) {
-        result.updateResultInfo(reward, playerTicketsCount);
     }
 
     private int checkHowManyMatchedNumbers(LottoTicket winnerTicket,
