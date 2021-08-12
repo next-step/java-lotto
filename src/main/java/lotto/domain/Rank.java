@@ -3,20 +3,22 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST("2000000000원", 6),
-    SECOND("1500000원", 5),
-    THIRD("50000원", 4),
-    FOURTH("5000원", 3);
+    FIRST(2000000000, 6),
+    SECOND(1500000, 5),
+    THIRD(50000, 4),
+    FOURTH(5000, 3),
+    NOTHING(0, 0);
 
-    private String rewards;
+    private int rewards;
     private int match;
 
-    Rank(String rewards, int match) {
+    Rank(int rewards, int match) {
         this.rewards = rewards;
         this.match = match;
     }
 
     static Rank findRank(int match) {
+        if (match < 3) return NOTHING;
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getMatch() == match)
                 .findFirst()
@@ -25,5 +27,9 @@ public enum Rank {
 
     public int getMatch() {
         return match;
+    }
+
+    public int getRewards() {
+        return rewards;
     }
 }

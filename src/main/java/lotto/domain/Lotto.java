@@ -22,6 +22,10 @@ public class Lotto {
         return tempNumbers.size();
     }
 
+    public Rank findLottoRank(Lotto win) {
+        return Rank.findRank(win.countSameNumber(this));
+    }
+
     public List<Integer> value() {
         return numbers;
     }

@@ -31,4 +31,12 @@ class LottoTest {
         assertThat(win.countSameNumber(new Lotto(Arrays.asList(45, 44, 43, 42, 41, 40)))).isEqualTo(0);
     }
 
+    @DisplayName("로또 랭크 구하기")
+    @Test
+    void lottoRank() {
+        Lotto win = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8)).findLottoRank(win)).isEqualTo(Rank.THIRD);
+        assertThat(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 35)).findLottoRank(win)).isEqualTo(Rank.NOTHING);
+    }
+
 }
