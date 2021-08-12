@@ -10,13 +10,12 @@ public class CollectionUtil {
 
     public static List<Number> createRandomNumbers() {
         List<Number> randomNumbers = new ArrayList<>();
-        for(int i=0;i <6;i++){
+        for (int i = 0; i < 6; i++) {
             Number randomNumber = new Number(RandomUtil.getRandomNumber());
             randomNumbers.add(randomNumber);
         }
         Collections.shuffle(randomNumbers);
         return randomNumbers;
     }
-
 
 }
