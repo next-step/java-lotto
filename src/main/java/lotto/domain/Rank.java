@@ -2,60 +2,38 @@ package lotto.domain;
 
 public enum Rank {
 
-    MISS(new MatchingCount(0), 0),
-    FIFTH(new MatchingCount(3), 5_000),
-    FOURTH(new MatchingCount(4), 50_000),
-    THIRD(new MatchingCount(5), 1_500_000),
-    SECOND(new MatchingCount(5), 30_000_000),
-    FIRST(new MatchingCount(6), 2_000_000_000);
+    MISS(0, (matchingCount, isBonus) -> matchingCount.isLowerValue(3)),
+    FIFTH(5_000, (matchingCount, isBonus) -> matchingCount.isSameValue(3)),
+    FOURTH(50_000, (matchingCount, isBonus) -> matchingCount.isSameValue(4)),
+    THIRD(1_500_000, (matchingCount, isBonus) -> matchingCount.isSameValue(5) && !isBonus),
+    SECOND(30_000_000, (matchingCount, isBonus) -> matchingCount.isSameValue(5) && isBonus),
+    FIRST(2_000_000_000, (matchingCount, isBonus) -> matchingCount.isSameValue(6));
 
-    private final MatchingCount matchingCount;
     private final int winningMoney;
+    private final WinningStrategy winningStrategy;
 
-    Rank(final MatchingCount matchingCount, final int winningMoney) {
-        this.matchingCount = matchingCount;
+    Rank(final int winningMoney, final WinningStrategy winningStrategy) {
         this.winningMoney = winningMoney;
+        this.winningStrategy = winningStrategy;
     }
 
-    public static Rank returnRank(final MatchingCount matchingCount, final boolean matchBonus) {
-        Rank matchingRank = MISS;
-
+    public static Rank findRank(final MatchingCount matchingCount, final boolean isBonus) {
+        Rank rankingFound = Rank.MISS;
         for (Rank rank : values()) {
-            matchingRank = findMatchingRank(matchingCount, matchBonus, rank, matchingRank);
+            rankingFound = rank.getConditionalRank(rankingFound, matchingCount, isBonus);
         }
-
-        return matchingRank;
+        return rankingFound;
     }
 
-    private static Rank findMatchingRank(final MatchingCount matchingCount, final boolean matchBonus, final Rank rank, final Rank matchingRank) {
-        if (matchingRank != MISS || !rank.equalsMatchingCount(matchingCount)) {
-            return matchingRank;
+    private Rank getConditionalRank(final Rank rank, final MatchingCount matchingCount, final boolean isBonus) {
+        if (winningStrategy.winnable(matchingCount, isBonus)) {
+            return this;
         }
-
-        if (SECOND.matchingCount.equals(matchingCount) && matchBonus) {
-            return SECOND;
-        }
-        if (THIRD.matchingCount.equals(matchingCount) && !matchBonus) {
-            return THIRD;
-        }
-
         return rank;
-    }
-
-    public boolean equalsMatchingCount(final MatchingCount matchingCount) {
-        return this.matchingCount.equals(matchingCount);
     }
 
     public int totalWinningMoney(final int hitCount) {
         return this.winningMoney * hitCount;
-    }
-
-    public MatchingCount getMatchingCount() {
-        return this.matchingCount;
-    }
-
-    public int getWinningMoney() {
-        return this.winningMoney;
     }
 
 }

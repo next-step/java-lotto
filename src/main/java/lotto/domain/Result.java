@@ -1,54 +1,39 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.EnumMap;
 
-public class Result {
+public final class Result {
 
-    private final Rank rank;
-    private int hitsCount;
+    private static final int INIT = 0;
+    private static final int ADD = 1;
+    private static final int LOTTO_PRICE = 1000;
 
-    public Result(final Rank rank, final int hitsCount) {
-        this.rank = rank;
-        this.hitsCount = hitsCount;
-    }
+    private final EnumMap<Rank, Integer> rankEnumMap = new EnumMap<>(Rank.class);
 
-    public int calculateTotalWinningMoney() {
-        return rank.totalWinningMoney(hitsCount);
-    }
-
-    public void addHitsCount(final Rank rank) {
-        if (this.rank == rank) {
-            hitsCount++;
+    public Result() {
+        for (Rank rank : Rank.values()) {
+            rankEnumMap.put(rank, INIT);
         }
     }
 
-    public int getHitsCount() {
-        return this.hitsCount;
+    public void addHitsCount(final Rank rank) {
+        rankEnumMap.put(rank, rankEnumMap.getOrDefault(rank, INIT) + ADD);
     }
 
-    public Rank getRank() {
-        return this.rank;
+    public int getRankHitsCount(final Rank rank) {
+        return rankEnumMap.get(rank);
     }
 
-    public int getMatchingCount() {
-        return this.rank.getMatchingCount().getValue();
-    }
+    public double calculateTotalWinningMoney() {
+        int totalPrize = INIT;
+        int lottoCount = INIT;
 
-    public int getWinningMoney() {
-        return this.rank.getWinningMoney();
-    }
+        for (Rank rank : rankEnumMap.keySet()) {
+            totalPrize += rank.totalWinningMoney(rankEnumMap.get(rank));
+            lottoCount += rankEnumMap.get(rank);
+        }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Result result = (Result) o;
-        return rank == result.rank;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(rank, hitsCount);
+        return (double) totalPrize / (lottoCount * LOTTO_PRICE);
     }
 
 }

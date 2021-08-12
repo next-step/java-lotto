@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.util.HashMap;
 
-public class LottoNumberFactory {
+public final class LottoNumberFactory {
 
     private static final HashMap<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
 
-    public static LottoNumber getLottoNumber(int number) {
+    public static LottoNumber getLottoNumber(final int number) {
         LottoNumber lottoNumber = LOTTO_NUMBER_MAP.get(number);
 
         if (lottoNumber == null) {

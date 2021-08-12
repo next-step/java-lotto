@@ -1,11 +1,15 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.domain.exception.NumberCountException;
+import lotto.domain.exception.NumberDuplicateException;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public final class Lotto {
 
-    private static final String IS_NULL_OR_NOT_SIX_ERROR_MESSAGE = "6개의 숫자를 등록해야 합니다.";
-    private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 있습니다.";
     private static final int LIMIT_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -17,21 +21,19 @@ public final class Lotto {
 
     private void validateNumbers(final List<Integer> numbers) {
         if (numbers == null || numbers.isEmpty() || numbers.size() != LIMIT_SIZE) {
-            throw new IllegalArgumentException(IS_NULL_OR_NOT_SIX_ERROR_MESSAGE);
+            throw new NumberCountException();
         }
-        if (checkDuplicateNumbers(numbers)) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
+        if (validateDuplicate(numbers)) {
+            throw new NumberDuplicateException();
         }
     }
 
-    private boolean checkDuplicateNumbers(final List<Integer> numbers) {
+    private boolean validateDuplicate(final List<Integer> numbers) {
         Set<Integer> numbersSet = new HashSet<>(numbers);
         return numbersSet.size() != LIMIT_SIZE;
     }
 
     private void addLottoNumber(final List<Integer> numbers) {
-        Collections.sort(numbers);
-
         for (int number : numbers) {
             lottoNumbers.add(LottoNumberFactory.getLottoNumber(number));
         }

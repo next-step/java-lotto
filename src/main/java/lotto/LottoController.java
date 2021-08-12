@@ -1,11 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.purchaseStrategy.AutoNumberGenerationImpl;
+import lotto.domain.generationStrategy.AutoNumberGenerationStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
 import java.util.Scanner;
 
 public final class LottoController {
@@ -16,7 +15,7 @@ public final class LottoController {
             ResultView resultView = new ResultView();
             LottoMachine lottoMachine = new LottoMachine();
 
-            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationImpl());
+            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationStrategy());
             int totalCount = lottos.count();
 
             resultView.printLottoCount(totalCount);
@@ -26,11 +25,10 @@ public final class LottoController {
             LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
 
             WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, bonusNumber);
-            List<Result> results = winningsStatistics.makeStatisticsWinnings(lottos);
-            double earningsRate = winningsStatistics.calculateEarningsRate(results, totalCount);
+            Result result = winningsStatistics.makeStatisticsWinnings(lottos);
 
-            resultView.printStatistics(results);
-            resultView.printEarningsRate(earningsRate);
+            resultView.printStatistics(result);
+            resultView.printEarningsRate(result);
         } catch (Exception e) {
             e.printStackTrace();
         }

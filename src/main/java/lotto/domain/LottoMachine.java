@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.purchaseStrategy.NumberGenerationStrategy;
+import lotto.domain.exception.AmountLowException;
+import lotto.domain.generationStrategy.NumberGenerationStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class LottoMachine {
 
-    private static final String BELOW_MIN_AMOUNT_ERROR_MESSAGE = "최소 1000원 이상 지불하셔야 합니다.";
     private static final int LOTTO_PRICE = 1000;
     private static final int INIT_COUNT = 0;
 
@@ -18,7 +18,7 @@ public final class LottoMachine {
 
     private void validateAmount(final int amount) {
         if (amount < LOTTO_PRICE) {
-            throw new IllegalArgumentException(BELOW_MIN_AMOUNT_ERROR_MESSAGE);
+            throw new AmountLowException();
         }
     }
 

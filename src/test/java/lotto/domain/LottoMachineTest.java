@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.purchaseStrategy.AutoNumberGenerationImpl;
-import lotto.domain.purchaseStrategy.NumberGenerationStrategy;
+import lotto.domain.generationStrategy.AutoNumberGenerationStrategy;
+import lotto.domain.generationStrategy.NumberGenerationStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class LottoMachineTest {
 
     private LottoMachine lottoMachine;
-    private NumberGenerationStrategy numberGenerationStrategy = new AutoNumberGenerationImpl();
+    private NumberGenerationStrategy numberGenerationStrategy = new AutoNumberGenerationStrategy();
 
     @BeforeEach
     void setUp() {

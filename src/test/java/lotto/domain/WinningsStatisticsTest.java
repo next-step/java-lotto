@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SuppressWarnings("NonAsciiCharacters")
 class WinningsStatisticsTest {
@@ -29,50 +27,15 @@ class WinningsStatisticsTest {
         }).withMessageMatching("당첨번호와 보너스번호가 중복되었습니다.");
     }
 
-    @DisplayName("등수정보를 가져온다.")
+    @DisplayName("Result 생성")
     @Test
-    void makeStatisticsWinnings_등수정보() {
+    void makeStatisticsWinnings_Result_생성() {
         Lottos lottos = new Lottos(
-                Arrays.asList(
-                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30)),
-                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 35)),
-                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 1)),
-                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
-                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
-                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
-                )
+                Collections.singletonList(new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30)))
         );
         Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
-        WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
-
-        assertAll(
-                () -> AssertionsForClassTypes.assertThat(winnings.get(0).getHitsCount()).isEqualTo(2),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(1).getHitsCount()).isEqualTo(1),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(2).getHitsCount()).isEqualTo(1),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(3).getHitsCount()).isEqualTo(1),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(4).getHitsCount()).isEqualTo(1),
-                () -> AssertionsForClassTypes.assertThat(winnings.get(5).getHitsCount()).isEqualTo(1)
-        );
+        LottoNumber bonusNumber = new LottoNumber(35);
+        WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, bonusNumber);
+        assertThat(winningsStatistics.makeStatisticsWinnings(lottos)).isInstanceOf(Result.class);
     }
-
-    @DisplayName("수익률을 가져온다.")
-    @Test
-    void calculateEarningsRate_수익률() {
-        Lottos lottos = new Lottos(
-                Arrays.asList(
-                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
-                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
-                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
-                        new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7))
-                )
-        );
-        Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
-        WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
-        List<Result> winnings = winningsStatistics.makeStatisticsWinnings(lottos);
-
-        assertThat(winningsStatistics.calculateEarningsRate(winnings, 4)).isEqualTo(13.75);
-    }
-
 }

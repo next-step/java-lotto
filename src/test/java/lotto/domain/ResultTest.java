@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SuppressWarnings("NonAsciiCharacters")
 class ResultTest {
@@ -13,25 +15,54 @@ class ResultTest {
     @DisplayName("객체 생성")
     @Test
     void create() {
-        assertThat(new Result(Rank.MISS, 0)).isInstanceOf(Result.class);
+        assertThat(new Result()).isInstanceOf(Result.class);
     }
 
-    @DisplayName("등수별 합산금액 반환")
-    @ParameterizedTest
-    @CsvSource(value = {"MISS:6:0", "FIFTH:5:25000", "FOURTH:4:200000", "THIRD:3:4500000", "SECOND:2:60000000", "FIRST:1:2000000000"}, delimiter = ':')
-    void totalWinningMoney_등수별_합산금액(String rankName, int hitsCount, int totalWinningMoney) {
-        assertThat(new Result(Rank.valueOf(rankName), hitsCount).calculateTotalWinningMoney()).isEqualTo(totalWinningMoney);
-    }
-
-    @DisplayName("값증가 확인")
+    @DisplayName("수익률을 가져온다.")
     @Test
-    void addHitsCount_값증가() {
-        Result result = new Result(Rank.FIFTH, 5);
-        assertThat(result.calculateTotalWinningMoney()).isEqualTo(25000);
-        result.addHitsCount(Rank.FIFTH);
-        assertThat(result.calculateTotalWinningMoney()).isEqualTo(30000);
-        result.addHitsCount(Rank.MISS);
-        assertThat(result.calculateTotalWinningMoney()).isEqualTo(30000);
+    void calculateEarningsRate_수익률() {
+        Lottos lottos = new Lottos(
+                Arrays.asList(
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
+                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
+                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 6, 7))
+                )
+        );
+        Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
+        WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
+        Result result = winningsStatistics.makeStatisticsWinnings(lottos);
+
+        assertThat(result.calculateTotalWinningMoney()).isEqualTo(13.75);
+    }
+
+
+    @DisplayName("등수정보를 가져온다.")
+    @Test
+    void makeStatisticsWinnings_등수정보() {
+        Lottos lottos = new Lottos(
+                Arrays.asList(
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 35)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 25, 1)),
+                        new Lotto(Arrays.asList(5, 10, 15, 20, 1, 2)),
+                        new Lotto(Arrays.asList(5, 10, 15, 1, 2, 3)),
+                        new Lotto(Arrays.asList(5, 10, 1, 2, 3, 4)),
+                        new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+                )
+        );
+        Lotto winningLotto = new Lotto(Arrays.asList(5, 10, 15, 20, 25, 30));
+        WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, new LottoNumber(35));
+        Result result = winningsStatistics.makeStatisticsWinnings(lottos);
+
+        assertAll(
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.MISS)).isEqualTo(2),
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.FIFTH)).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.FOURTH)).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.THIRD)).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.SECOND)).isEqualTo(1),
+                () -> AssertionsForClassTypes.assertThat(result.getRankHitsCount(Rank.FIRST)).isEqualTo(1)
+        );
     }
 
 }
