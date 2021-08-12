@@ -7,6 +7,6 @@ public class RandomStrategy implements LottoStrategy {
 
     @Override
     public List<LottoNumber> createNumbers() {
-        return LottoNumberGenerator.create();
+        return LottoNumberGenerator.createRandomNumber();
     }
 }

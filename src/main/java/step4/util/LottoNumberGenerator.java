@@ -13,7 +13,7 @@ public class LottoNumberGenerator {
 
     private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
 
-    public static List<LottoNumber> create() {
+    public static List<LottoNumber> createRandomNumber() {
         if (LOTTO_NUMBERS.isEmpty()) {
             createLottoNumbers();
         }
@@ -22,7 +22,6 @@ public class LottoNumberGenerator {
         List<LottoNumber> numbers = new ArrayList<>(LOTTO_NUMBERS.subList(0, 6));
         numbers.sort(Comparator.comparing(LottoNumber::getNumber));
         return numbers;
-
     }
 
     private static void createLottoNumbers() {
