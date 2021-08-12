@@ -24,8 +24,8 @@ class LottoBallsTest {
 
     private static Stream<Arguments> 로또공들의_생성자에_숫자배열을_6개가_아닌_다른_개수로_입력받으면_예외를_던진다() {
         return Stream.of(
-            Arguments.of(new int[] {1, 2, 3, 4, 5}),
-            Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7})
+            Arguments.of(1, 2, 3, 4, 5),
+            Arguments.of(1, 2, 3, 4, 5, 6, 7)
         );
     }
 
@@ -38,8 +38,8 @@ class LottoBallsTest {
 
     private static Stream<Arguments> 로또공들의_생성자에_숫자배열에_0과_45사이를_벗어나는_숫자를_입력받으면_예외를_던진다() {
         return Stream.of(
-            Arguments.of(new int[] {0, 2, 3, 4, 5, 6}),
-            Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 46})
+            Arguments.of(0, 2, 3, 4, 5, 6),
+            Arguments.of(1, 2, 3, 4, 5, 6, 46)
             );
     }
 
