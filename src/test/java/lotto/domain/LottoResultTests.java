@@ -39,7 +39,7 @@ public class LottoResultTests {
     void validLottoCalculateProfitTest() {
         LottoResult lottoResult = getLottoResult(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
-        assertThat(lottoResult.calculateProfitRate(14000)).isEqualTo(ProfitRate.of(142857.14285714287));
+        assertThat(lottoResult.calculateProfitRate(LottoPrice.of(14000))).isEqualTo(ProfitRate.of(142857.14285714287));
     }
 
     private LottoResult getLottoResult(List<Integer> winningLottoNumberList, int bonusNumber) {

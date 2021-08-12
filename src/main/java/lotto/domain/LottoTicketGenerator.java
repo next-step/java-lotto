@@ -1,6 +1,4 @@
-package lotto.utils;
-
-import lotto.domain.LottoTicket;
+package lotto.domain;
 
 public interface LottoTicketGenerator {
     public LottoTicket execute();

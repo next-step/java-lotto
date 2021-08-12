@@ -1,9 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.utils.AutoLottoTicketGenerator;
-import lotto.utils.LottoTicketGenerator;
-import lotto.utils.ManualLottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,22 +9,21 @@ import java.util.List;
 
 public class LottoApplication {
     public static void main(String args[]) {
-        int purchaseAmount = InputView.getPurchaseAmount();
-
-        LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
+        LottoPrice lottoPrice = LottoPrice.of(InputView.getPurchaseAmount());
 
         int manualLottoCount = InputView.getManualLottoTicketCount();
-        lottoMachine.checkValidManualCount(manualLottoCount);
+        lottoPrice.checkOverPrice(manualLottoCount);
 
         List<LottoTicket> totalLottoTickets = new ArrayList<>();
         InputView.manualLottoNumberQuestion();
 
-        LottoTicketGenerator lottoTicketGenerator = new ManualLottoTicketGenerator();
+        LottoTicketGenerator lottoTicketGenerator;
         for (int i = 0; i < manualLottoCount; i++) {
+            lottoTicketGenerator = new ManualLottoTicketGenerator(InputView.getManualLottoNumber());
             totalLottoTickets.add(lottoTicketGenerator.execute());
         }
 
-        int lottoTotalCount = lottoMachine.getPurchaseLottoCount();
+        int lottoTotalCount = lottoPrice.getMaxQuantity();
         int autoLottoCount = lottoTotalCount - manualLottoCount;
         ResultView.countOfLotto(manualLottoCount, autoLottoCount);
 
@@ -35,11 +31,12 @@ public class LottoApplication {
         lottoTicketGenerator = new AutoLottoTicketGenerator();
         for (int i = 0; i < autoLottoCount; i++) {
             LottoTicket generatedLottoTicket = lottoTicketGenerator.execute();
-            ResultView.printLottoNumber(generatedLottoTicket);
             totalLottoTickets.add(generatedLottoTicket);
         }
 
         LottoTickets lottotickets = LottoTickets.of(totalLottoTickets);
+
+        ResultView.printLottoTickets(lottotickets);
 
         List<Integer> winningLottoNumbers = InputView.getWinningNumber();
         LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusNumber());
@@ -47,7 +44,7 @@ public class LottoApplication {
 
         LottoResult lottoResult = LottoResult.of(lottotickets, winningLottoTicket);
         ResultView.printWinningStatistics(lottoResult);
-        ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));
+        ResultView.printProfitRate(lottoResult.calculateProfitRate(lottoPrice));
 
     }
 }
