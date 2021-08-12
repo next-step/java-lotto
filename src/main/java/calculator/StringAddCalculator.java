@@ -1,3 +1,5 @@
+package calculator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -6,33 +8,33 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    private final List<String> delimiterList;
-    private List<String> numberList;
+    private final List<String> delimiters;
+    private final List<Integer> numbers = new ArrayList<>();
 
     public StringAddCalculator(String str) {
-        numberList = new ArrayList<>();
-        delimiterList = new ArrayList<>(Arrays.asList(",", ":"));
-
+        delimiters = new ArrayList<>(Arrays.asList(",", ":"));
         if (stringValidater(str)) {
             str = setCustomDelimiter(str);
-            numberList = Arrays.asList(str.split(getStringifyDelimiter()));
+            setNumbers(str.split(getStringifyDelimiter()));
         }
     }
 
-    public List<String> getNumberList() {
-        return this.numberList;
+    private void setNumbers(String[] splitNumbers) {
+        for (String number : splitNumbers) {
+            numberValidator(number);
+            numbers.add(Integer.parseInt(number));
+        }
+    }
+
+    public List<Integer> getNumbers() {
+        return this.numbers;
     }
 
     public int getSum() {
         int sum = 0;
 
-        if (numberList == null) {
-            return 0;
-        }
-
-        for (String number : numberList) {
-            numberValidator(number);
-            sum += Integer.parseInt(number);
+        for (Integer number : numbers) {
+            sum += number;
         }
 
         return sum;
@@ -52,7 +54,7 @@ public class StringAddCalculator {
     }
 
     private String getStringifyDelimiter() {
-        return String.join("|", delimiterList);
+        return String.join("|", delimiters);
     }
 
     private String setCustomDelimiter(String str) {
@@ -60,7 +62,7 @@ public class StringAddCalculator {
 
         if (m.find()) {
             String customDelimiter = m.group(1);
-            delimiterList.add(customDelimiter);
+            delimiters.add(customDelimiter);
             return m.group(2);
         }
 
