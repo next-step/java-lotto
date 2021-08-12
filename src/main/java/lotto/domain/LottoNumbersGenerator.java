@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class LottoNumbersGenerator {
 
-    private static final int FIRST_INDEX = 0;
+    private static final int FIRST_LOTTO_NUMBER = 0;
 
     private final List<LottoNumber> sourceLottoNumbers;
 
@@ -28,7 +28,7 @@ public class LottoNumbersGenerator {
 
     private LottoNumber pickRandomLottoNumber() {
         Collections.shuffle(sourceLottoNumbers);
-        return sourceLottoNumbers.get(FIRST_INDEX);
+        return sourceLottoNumbers.get(FIRST_LOTTO_NUMBER);
     }
 
     public List<LottoNumbers> generate(long quantity) {
