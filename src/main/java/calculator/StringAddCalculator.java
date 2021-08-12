@@ -10,12 +10,13 @@ public class StringAddCalculator {
 
     private final List<String> delimiters;
     private final List<Integer> numbers = new ArrayList<>();
+    private Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
-    public StringAddCalculator(String str) {
+    public StringAddCalculator(final String inputString) {
         delimiters = new ArrayList<>(Arrays.asList(",", ":"));
-        if (stringValidater(str)) {
-            str = setCustomDelimiter(str);
-            setNumbers(str.split(getStringifyDelimiter()));
+        if (stringValidater(inputString)) {
+            String target = setCustomDelimiter(inputString);
+            setNumbers(target.split(getStringifyDelimiter()));
         }
     }
 
@@ -58,12 +59,12 @@ public class StringAddCalculator {
     }
 
     private String setCustomDelimiter(String str) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(str);
+        Matcher delimiterMatcher = customPattern.matcher(str);
 
-        if (m.find()) {
-            String customDelimiter = m.group(1);
+        if (delimiterMatcher.find()) {
+            String customDelimiter = delimiterMatcher.group(1);
             delimiters.add(customDelimiter);
-            return m.group(2);
+            return delimiterMatcher.group(2);
         }
 
         return str;
