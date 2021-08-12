@@ -4,26 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinStatistics {
-    private final Map<Integer, Integer> winStatistics;
+    private final Map<Rank, Integer> winStatistics;
 
-    private WinStatistics(LottoBalls winnerNumbers, LottoTickets lottoTickets) {
+    private WinStatistics(LottoBalls winnerNumbers, LottoBall bonusBall, LottoTickets lottoTickets) {
         winStatistics = new HashMap<>();
 
-        for (LottoBalls e : lottoTickets.toLottoBallsList()) {
-            int rank = e.countMatchNumber(winnerNumbers);
+        for (LottoBalls lottoBalls : lottoTickets.toLottoBallsList()) {
+            Rank rank = Rank.valueOf(lottoBalls.countMatchNumber(winnerNumbers), lottoBalls.contains(bonusBall.number()));
             winStatistics.put(rank, winStatistics.getOrDefault(rank, 0) + 1);
         }
     }
 
-    public static WinStatistics from(LottoBalls winnerBalls, LottoTickets lottoTickets) {
-        return new WinStatistics(winnerBalls, lottoTickets);
+    public static WinStatistics from(LottoBalls winnerBalls, LottoBall bonusBall, LottoTickets lottoTickets) {
+        return new WinStatistics(winnerBalls, bonusBall, lottoTickets);
     }
 
     public int countByRank(Rank rank) {
-        return winStatistics.get(rank.getMatchCount());
+        return winStatistics.getOrDefault(rank, 0);
     }
 
-    public Map<Integer, Integer> result() {
+    public Map<Rank, Integer> result() {
         return winStatistics;
     }
 }
