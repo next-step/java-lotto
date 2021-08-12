@@ -48,4 +48,17 @@ public class LottosTest {
                 .isThrownBy(() -> new Lottos(purchaseAmount, manualLottoCount))
                 .withMessage("수동 로또 개수는 최소 0개 이상이어야 합니다.");
     }
+
+    @DisplayName("수동 로또 개수가 구입 가능 개수를 초과하면 예외가 발생한다.")
+    @Test
+    public void manualLottoPriceMoreThanPurchaseAmountExceptionTest() {
+        // given
+        int purchaseAmount = 10000;
+        int manualLottoCount = 11;
+
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lottos(purchaseAmount, manualLottoCount))
+                .withMessage("수동 로또 개수가 구입 가능 개수를 초과했습니다.");
+    }
 }
