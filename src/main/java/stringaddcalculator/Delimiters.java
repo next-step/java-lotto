@@ -1,9 +1,8 @@
 package stringaddcalculator;
 
 public class Delimiters {
-
-    private final String DEFAULT_DELIMITERS_REGEX = ",|:";
-    private final String OR = "|";
+    private static final String DEFAULT_DELIMITERS_REGEX = ",|:";
+    private static final String OR = "|";
     private final String CUSTOM_DELIMITER;
 
     private Delimiters(){
