@@ -32,9 +32,7 @@ public final class LottoTicket {
     }
 
     public LottoRank matchLottoRank(final WinningLottoTicket winningLottoTicket) {
-        int matchCount = matchCount(winningLottoTicket);
-        boolean contains = contains(winningLottoTicket.getBonusNumber());
-        return LottoRank.of(matchCount, contains);
+        return LottoRank.of(matchCount(winningLottoTicket), winningLottoTicket.containsBonusNumber(this));
     }
 
     public int matchCount(final WinningLottoTicket winningLottoTicket) {

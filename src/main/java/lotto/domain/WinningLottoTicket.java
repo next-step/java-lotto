@@ -27,7 +27,7 @@ public final class WinningLottoTicket {
         return 0;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public boolean containsBonusNumber(final LottoTicket lottoTicket) {
+        return lottoTicket.contains(bonusNumber);
     }
 }

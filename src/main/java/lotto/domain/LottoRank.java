@@ -34,7 +34,7 @@ public enum LottoRank {
                 .findFirst()
                 .orElse(NO_PLACE);
 
-        if(lottoRank.equals(THIRD_PLACE) && isBonus) {
+        if (lottoRank.equals(THIRD_PLACE) && isBonus) {
             return SECOND_PLACE;
         }
         return lottoRank;
