@@ -24,25 +24,25 @@ class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.delimiterSum("1,2");
+        int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        int result = StringAddCalculator.delimiterSum("1,2:3");
+        int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
     public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.customDelimiterSum("//;\n1;2;3");
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
     public void splitAndSum_negative() throws Exception {
-        assertThatThrownBy(() -> StringAddCalculator.delimiterSum("-1,2,3"))
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
     }
 

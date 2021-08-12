@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static void main(String[] args) {
-
+        String addString = "1,2,3";
+        int result = splitAndSum(addString);
+        System.out.println(addString + "==>" + result);
     }
 
     public static int splitAndSum(String input) {
@@ -19,7 +21,7 @@ public class StringAddCalculator {
             return checkMinusDigit(input);
         }
 
-        return 0;
+        return checkDelimeter(input);
     }
 
     public static boolean checkNullOrEmptyString(String input) {
@@ -49,6 +51,15 @@ public class StringAddCalculator {
         }
 
         return result;
+    }
+
+    public static int checkDelimeter(String input) {
+
+        if (input.charAt(0) == '/') {
+            return customDelimiterSum(input);
+        }
+
+        return delimiterSum(input);
     }
 
     public static int delimiterSum(String input) {
