@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
     public static void main(String[] args) {
@@ -48,7 +51,7 @@ public class StringAddCalculator {
         return result;
     }
 
-    public static int delemeterSum(String input) {
+    public static int delimiterSum(String input) {
 
         int result = 0;
 
@@ -56,6 +59,18 @@ public class StringAddCalculator {
 
         result = addString(numbers);
 
+        return result;
+    }
+
+    public static int customDelimiterSum(String input) {
+
+        int result = 0;
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens = m.group(2).split(customDelimiter);
+            result += addString(tokens);
+        }
         return result;
     }
 
