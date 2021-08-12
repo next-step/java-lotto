@@ -10,7 +10,7 @@ public class LottoSeller {
     }
 
     public Lottos sell(Money money) {
-        int quotient = money.divide(LOTTO_PRICE);
+        int quotient = (int) money.divide(LOTTO_PRICE);
 
         Lottos lottos = new Lottos();
         for (int i = 0; i < quotient; i++) {

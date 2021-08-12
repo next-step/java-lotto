@@ -9,8 +9,20 @@ public class Money {
         this.amount = amount;
     }
 
-    public int divide(Money divisor) {
-        return amount / divisor.amount;
+    public double divide(Money divisor) {
+        return (double) amount / divisor.amount;
+    }
+
+    public Money add(Money other) {
+        return new Money(amount + other.amount);
+    }
+
+    public Money multiply(int times) {
+        return new Money(amount * times);
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     @Override

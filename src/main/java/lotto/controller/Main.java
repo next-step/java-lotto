@@ -1,11 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumbers;
-import lotto.model.LottoSeller;
-import lotto.model.Lottos;
-import lotto.model.Money;
-import lotto.model.RandomLottoNumbersGenerator;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,5 +12,14 @@ public class Main {
         OutputView.printLottos(lottos);
 
         Lotto winningLotto = new Lotto(new LottoNumbers(InputView.readNumbers()));
+        LottoChecker lottoChecker = new LottoChecker(winningLotto);
+
+        LottoResults lottoResults = new LottoResults();
+        for (Lotto lotto : lottos) {
+            lottoResults.add(lottoChecker.check(lotto));
+        }
+
+        LottoStatistics statistics = new LottoStatistics(lottoResults, money);
+        OutputView.printStatistics(statistics);
     }
 }

@@ -10,11 +10,11 @@ public enum LottoResult {
     FOURTH(3, 5_000),
     LOSE(Arrays.asList(2, 1, 0), 0);
 
-    private final List<Integer> correctCount;
+    private final List<Integer> correctCounts;
     private final Money winningPrice;
 
-    LottoResult(List<Integer> correctCount, int winningPrice) {
-        this.correctCount = correctCount;
+    LottoResult(List<Integer> correctCounts, int winningPrice) {
+        this.correctCounts = correctCounts;
         this.winningPrice = new Money(winningPrice);
     }
 
@@ -22,9 +22,17 @@ public enum LottoResult {
         this(Arrays.asList(winningCount), winningPrice);
     }
 
+    public Money getWinningPrice() {
+        return winningPrice;
+    }
+
+    public Integer getFirstCorrectCount() {
+        return correctCounts.get(0);
+    }
+
     public static LottoResult from(int winningCount) {
         for (LottoResult lottoResult : LottoResult.values()) {
-            if (lottoResult.correctCount.contains(winningCount)) {
+            if (lottoResult.correctCounts.contains(winningCount)) {
                 return lottoResult;
             }
         }
