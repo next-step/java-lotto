@@ -1,10 +1,7 @@
 package View;
 
 
-import Lotto.Lotto;
-import Lotto.WinningNumber;
-import Lotto.WinningPrice;
-import Lotto.WinningResult;
+import Lotto.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,10 +16,10 @@ public class ResultView {
 
         lottos.forEach(s -> System.out.println(s.getLottoNumbers()));
 
-        WinningNumber winningNumber = WinningNumber.of(InputView.insertLastWeekWinningNumber().split(","));
+        LotterNumbers winningNumber = LotterNumbers.of(WinningNumber.of(InputView.insertLastWeekWinningNumber()).getWinningNumbers());
 
         List<WinningPrice> winningPrice = IntStream.range(MONEY_DIVIDE_REMAINDER_ZERO, lottos.size())
-                .mapToObj(i -> WinningPrice.getWinnings(lottos.get(i).compareNumbers(List.of(winningNumber.convertInteger()))))
+                .mapToObj(i -> WinningPrice.getWinnings(lottos.get(i).compareNumbers(winningNumber.getLottoNumbers()), lottos.get(i).getLottoNumbers().contains(7)))
                 .collect(Collectors.toList());
 
         System.out.println(WinningResult.of(winningPrice).getWinningResult().toString());

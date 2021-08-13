@@ -14,7 +14,5 @@ public class Main {
         List<Lotto> lottos = lottoMachine.createLotto(new Money(InputView.insertBuyPrice()));
 
         ResultView.printLottoResult(lottos);
-
-
     }
 }

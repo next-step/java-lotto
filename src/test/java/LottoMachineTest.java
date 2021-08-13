@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Lotto.WinningPrice.THREE_WINNINGS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
@@ -32,18 +33,21 @@ public class LottoMachineTest {
         lottos.forEach(s -> System.out.println(s.getLottoNumbers()));
 
 
-        String[] userNumbers = {"1", "2", "8", "4", "9", "6"};
+        String lastWeekWinningNumber = "1, 2, 3, 4, 9, 6";
 
 
         List<WinningPrice> winningPrice = new ArrayList<>();
 
         for (int i = 0; i < lottos.size(); i++) {
-            winningPrice.add(WinningPrice.getWinnings(lottos.get(i).compareNumbers(List.of(WinningNumber.of(userNumbers).convertInteger()))));
+            winningPrice.add(WinningPrice.getWinnings(lottos.get(i).compareNumbers(WinningNumber.of(lastWeekWinningNumber).getWinningNumbers()), lottos.get(i).getLottoNumbers().contains(7)));
         }
 
 
-        WinningResult winningResult = new WinningResult(winningPrice);
+        WinningResult winningResult = WinningResult.of(winningPrice);
+
         System.out.println(winningResult.getWinningResult().toString());
+
+
         System.out.println("총 수익률은 " + winningResult.yieldAccount(5000) + "입니다.");
 
     }

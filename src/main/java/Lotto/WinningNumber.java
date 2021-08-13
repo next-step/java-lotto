@@ -1,45 +1,47 @@
 package Lotto;
 
 import java.util.Arrays;
-
-import static Lotto.LotterNumbers.LOTTO_COUNT;
-import static Lotto.RandomNumberGenerator.LOTTO_MAX_NUMBER;
-import static Lotto.RandomNumberGenerator.LOTTO_MIN_NUMBER;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumber {
-    private String[] numbers;
 
+    private List<Integer> winningNumbers;
+    public static final String WINNINGNUMBERS_TEXT_SPLIT_REGEX = ",";
+    public static final String WINNINGNUMBERS_TEXT_WHITE_SPACE = " ";
 
-    public WinningNumber(String[] numbers) {
-        if (numbers.length > LOTTO_COUNT) {
-            throw new IllegalArgumentException();
-        }
-        this.numbers = checkLottoNumber(numbers);
+    public WinningNumber(String winningNumbers) {
+        this.winningNumbers = convertInteger(convertLottoNumber(winningNumbers));
     }
 
-    public static WinningNumber of(String[] numbers) {
-        return new WinningNumber(numbers);
+    public static WinningNumber of(String winningNumbers) {
+        return new WinningNumber(winningNumbers);
+    }
+
+
+    private List<Integer> convertInteger(String[] winningNumbers) {
+
+        if (winningNumbers == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return Arrays.stream(winningNumbers)
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+    }
+
+    private String[] convertLottoNumber(String winningNumbers) {
+        return winningNumbers.replace(WINNINGNUMBERS_TEXT_WHITE_SPACE, "").split(WINNINGNUMBERS_TEXT_SPLIT_REGEX);
+    }
+
+    public List<Integer> getWinningNumbers() {
+        return Collections.unmodifiableList(this.winningNumbers);
     }
 
     public int getSize() {
-        return numbers.length;
-    }
-
-    public String[] checkLottoNumber(String[] numbers) {
-        Arrays.stream(numbers)
-                .map(number -> (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException());
-
-        return numbers;
-    }
-
-    public Integer[] convertInteger() {
-
-        int[] numbers = Arrays.asList(this.numbers)
-                .stream().mapToInt(Integer::parseInt).toArray();
-
-        return Arrays.stream(numbers).boxed().toArray(Integer[]::new);
-
+        return this.winningNumbers.size();
     }
 }

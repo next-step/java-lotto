@@ -5,11 +5,12 @@ import java.util.Arrays;
 
 public enum WinningPrice {
 
-
-    THREE_WINNINGS(3, 5000),
-    FOUR_WINNINGS(4, 50000),
-    FIVE_WINNINGS(5, 1500000),
-    SIX_WINNINGS(6, 2000000000);
+    NOT_WINNINGS(0, 0),
+    THREE_WINNINGS(3, 5_000),
+    FOUR_WINNINGS(4, 50_000),
+    FIVE_WINNINGS(5, 1_500_000),
+    FIVE_WINNINGS_BOBUS(5, 30_000_000),
+    SIX_WINNINGS(6, 2_000_000_000);
 
     public final int match;
     public final int price;
@@ -19,13 +20,10 @@ public enum WinningPrice {
         this.price = price;
     }
 
-
-    public static WinningPrice getWinnings(int numberOfMatch) {
+    public static WinningPrice getWinnings(int numberOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(winningPrice -> winningPrice.match == numberOfMatch)
+                .filter(winningPrice -> (matchBonus && numberOfMatch == 4) ? winningPrice.price == 30000000 : winningPrice.match == numberOfMatch)
                 .findFirst()
-                .orElse(null);
+                .orElse(NOT_WINNINGS);
     }
-
-
 }

@@ -11,7 +11,7 @@ public class Money {
 
     public Money(int money) {
         if (money % MONEY_UNIT != MONEY_DIVIDE_REMAINDER_ZERO) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("금액은 천원단위로 입력해주세요.");
         }
         this.money = money;
 

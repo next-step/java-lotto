@@ -26,4 +26,12 @@ public class LottoNumberTest {
         LotterNumbers lottoNumbers = LotterNumbers.of(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.getLottoNumberCount()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("로또 넘버는 1~45사이가 되어야된다")
+
+    public void lottoNumberVerify() {
+        assertThatThrownBy(() ->
+                LotterNumbers.of(List.of(0, 46, 3, 4, 5, 6))).isInstanceOf(IllegalArgumentException.class);
+    }
 }
