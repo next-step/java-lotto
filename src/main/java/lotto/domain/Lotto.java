@@ -19,11 +19,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> lottoNumbers) {
-        Set<LottoNumber> lottoNumberList = lottoNumbers.stream()
-                                                       .map(number -> LottoNumber.valueOf(number))
-                                                       .collect(Collectors.toCollection(TreeSet::new));
-        return new Lotto(lottoNumberList);
+    public static Lotto of(Set<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
     public static Lotto of(String strNumbers) {
