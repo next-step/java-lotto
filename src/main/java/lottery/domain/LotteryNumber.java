@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 public class LotteryNumber {
 
-    public static final String NON_NULL = "입력값은 null 일 수 없습니다";
-    public static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
-    public static final String INVALID_NUMBER = "유효하지 않은 로또 숫자 입니다 -> ";
-    private static Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
+    private static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
+    private static final String INVALID_NUMBER = "유효하지 않은 로또 숫자 입니다 -> ";
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
     public static final int MIN = 1;
     public static final int MAX = 45;
 

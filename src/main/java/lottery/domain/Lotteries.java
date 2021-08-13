@@ -5,6 +5,7 @@ import lottery.dto.LotteryDto;
 import lottery.dto.LotteryStatisticDto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Lotteries {
 
-    public static final String NON_NULL = "입력값은 null 일 수 없습니다";
+    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
 
     private final List<Lottery> lotteries;
 
@@ -25,7 +26,7 @@ public class Lotteries {
 
     public LotteryStatisticDto getLotteryStatisticDto(final WinningLotteryStrategy winningLotteryStrategy) {
         Map<LotteryResult, Integer> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
-        return new LotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
+        return winningLotteryStrategy.getLotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
     }
 
     public List<LotteryDto> getLotteriesDto() {
@@ -47,7 +48,7 @@ public class Lotteries {
 
     private BigDecimal getEarningsRate(Map<LotteryResult, Integer> lotteryResultMap) {
         return new BigDecimal(getTotalEarnings(lotteryResultMap))
-                .divide(new BigDecimal(getTotalLotteriesPrice()));
+                .divide(new BigDecimal(getTotalLotteriesPrice()), 4, RoundingMode.HALF_UP);
     }
 
     private long getTotalEarnings(final Map<LotteryResult, Integer> lotteryResultMap) {

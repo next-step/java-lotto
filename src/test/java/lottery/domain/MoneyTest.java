@@ -14,7 +14,7 @@ class MoneyTest {
     public void nullInput() {
         // given
         String money = null;
-        String message = Money.NON_NULL;
+        String message = "입력값은 null 일 수 없습니다";
 
         // when
         ThrowingCallable throwingCallable = () -> new Money(money);
@@ -30,7 +30,7 @@ class MoneyTest {
     public void notNumber() {
         // given
         String money = "$";
-        String message = Money.NOT_NUMBER + money;
+        String message = "숫자가 아닙니다 -> " + money;
 
         // when
         ThrowingCallable throwingCallable = () -> new Money(money);
@@ -46,7 +46,7 @@ class MoneyTest {
     public void negativeNumberStringInput() {
         // given
         String money = "-1";
-        String message = Money.LESS_THAN_ZERO + money;
+        String message = "입력값은 0 보다 커야 합니다 -> " + money;
 
         // when
         ThrowingCallable throwingCallable = () -> new Money(money);
@@ -62,7 +62,7 @@ class MoneyTest {
     public void negativeNumberIntegerInput() {
         // given
         int money = -2;
-        String message = Money.LESS_THAN_ZERO + money;
+        String message = "입력값은 0 보다 커야 합니다 -> " + money;
 
         // when
         ThrowingCallable throwingCallable = () -> new Money(money);
@@ -93,7 +93,7 @@ class MoneyTest {
         // given
         int moneyNumber = 550;
         Money money = new Money(moneyNumber);
-        String message = Money.NOT_ENOUGH_MONEY + moneyNumber;
+        String message = "로또를 구매하기에 돈이 부족합니다 -> " + moneyNumber;
 
         // when
         // when

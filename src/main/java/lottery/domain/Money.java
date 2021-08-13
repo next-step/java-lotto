@@ -1,17 +1,18 @@
 package lottery.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Money implements Comparable<Money> {
 
-    public static final String NON_NULL = "입력값은 null 일 수 없습니다";
-    public static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
-    public static final String LESS_THAN_ZERO = "입력값은 0 보다 커야 합니다 -> ";
-    public static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 (로또 가격: " + Lottery.PRICE + ") -> ";
+    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
+    private static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
+    private static final String LESS_THAN_ZERO = "입력값은 0 보다 커야 합니다 -> ";
+    private static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 -> ";
     private static final int ZERO = 0;
-    private static Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     private final int money;
 
@@ -36,7 +37,7 @@ public class Money implements Comparable<Money> {
 
     public BigDecimal divide(long number) {
         return new BigDecimal(this.money)
-                .divide(new BigDecimal(number));
+                .divide(new BigDecimal(number), 4, RoundingMode.HALF_UP);
     }
 
     private void validateMoney(final String money) {

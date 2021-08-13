@@ -17,7 +17,7 @@ class LotteryResultTest {
         LotteryResult expected = LotteryResult.BLANK;
 
         // when
-        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
+        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score, false);
 
         // then
         assertThat(lotteryResult).isEqualTo(expected);
@@ -31,7 +31,7 @@ class LotteryResultTest {
         LotteryResult expected = LotteryResult.THREE_MATCHES;
 
         // when
-        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score);
+        LotteryResult lotteryResult = LotteryResult.getLotteryResult(score, false);
 
         // then
         assertThat(lotteryResult).isEqualTo(expected);
@@ -55,7 +55,7 @@ class LotteryResultTest {
     @DisplayName("getTotalCashPrize 테스트")
     public void getTotalCashPrize() {
         // given
-        long count = 10;
+        int count = 10;
         long expected = LotteryResult.FIVE_MATCHES.toDto(0)
                 .getCashPrize()
                 .multiply(count);
@@ -71,7 +71,7 @@ class LotteryResultTest {
     @DisplayName("toDto 테스트")
     public void toDto() {
         // given
-        long count = 10;
+        int count = 10;
         LotteryResultDto expected = LotteryResult.FIVE_MATCHES.toDto(count);
 
         // when
