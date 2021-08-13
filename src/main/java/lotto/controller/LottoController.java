@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotteries;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchaseCount;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.service.LottoGameApplication;
@@ -17,10 +18,13 @@ public class LottoController {
     LottoMoney lottoMoney = new LottoMoney(
         InputView.inputValueWithMessage(Message.MSG_INPUT_MONEY));
 
-    Lotteries lotteries = LottoGameApplication.createLottos(
-        LottoGameApplication.getBuyCount(lottoMoney));
+    PurchaseCount purchaseCount = new PurchaseCount(lottoMoney,
+        InputView.inputValueWithMessage(Message.MSG_INPUT_MANUAL_COUNT));
 
-    ResultView.drawCountOfBuyLotteries(LottoGameApplication.getBuyCount(lottoMoney));
+    Lotteries lotteries = LottoGameApplication.createLottos(purchaseCount,
+        InputView.inputStringValuesWithMessage(Message.MSG_INPUT_MANUAL_LOTTO, purchaseCount));
+
+    ResultView.drawCountOfBuyLotteries(purchaseCount);
 
     LotteriesDrawingView.drawLotteriesView(lotteries);
 

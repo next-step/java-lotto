@@ -7,7 +7,7 @@ import lotto.service.Rank;
 
 public class Lotteries {
 
-  public static final int COUNT = 1;
+  private static final int COUNT = 1;
 
   private final List<Lotto> lottos;
 
