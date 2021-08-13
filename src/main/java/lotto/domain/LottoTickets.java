@@ -21,7 +21,7 @@ public class LottoTickets {
         Result result = new Result();
         lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.check(winningNumbers))
-                .forEach(lottoStatus -> result.report(lottoStatus));
+                .forEach(result::report);
         return result;
     }
 

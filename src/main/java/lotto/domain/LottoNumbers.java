@@ -28,10 +28,9 @@ public class LottoNumbers {
     }
 
     public LottoStatus check(final LottoNumbers winningNumbers) {
-        int hitCount = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            hitCount += checkWinning(winningNumbers.lottoNumbers, lottoNumber);
-        }
+        int hitCount = lottoNumbers.stream()
+                .mapToInt(lottoNumber -> checkWinning(winningNumbers.lottoNumbers, lottoNumber))
+                .sum();
         return LottoStatus.find(hitCount);
     }
 
