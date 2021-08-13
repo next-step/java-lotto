@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.strategy.RandomLottoNumber;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,7 @@ public class Lottos {
         lottos = new ArrayList<>();
         winningStatus = new HashMap<>();
         for (int i = 0; i < purchaseQuantity; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.of(RandomLottoNumber.generateRandomNumbers()));
         }
     }
 

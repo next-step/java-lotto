@@ -1,40 +1,48 @@
 package lotto.domain;
 
 import lotto.exception.InvalidInputException;
-import lotto.strategy.GenerateLottoNumber;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int SIZE = 6;
     private static final String INVALID_SIZE_OF_WINNING_NUMBERS = "번호의 갯수가 올바르지 않습니다.";
+    public static final int SIZE = 6;
 
     private Set<LottoNumber> numbers;
 
-    public Lotto() {
-        numbers = new TreeSet<>();
-        while (numbers.size() < SIZE) {
-            numbers.add(new LottoNumber(GenerateLottoNumber.generateRandomNumbers()));
-        }
+    private Lotto(Set<LottoNumber> numbers) {
+        validateLottoSize(numbers);
+        this.numbers = numbers;
     }
 
-    public Lotto(String strNumbers) {
-        numbers = new TreeSet<>();
-        for (String strNumber : strNumbers.replaceAll(" ", "").split(",")) {
-            numbers.add(new LottoNumber(Integer.parseInt(strNumber)));
-        }
-        validateLottoSize();
+    public static Lotto of(List<Integer> lottoNumbers) {
+        Set<LottoNumber> lottoNumberList = lottoNumbers.stream()
+                                                       .map(number -> LottoNumber.valueOf(number))
+                                                       .collect(Collectors.toCollection(TreeSet::new));
+        return new Lotto(lottoNumberList);
     }
 
-    private void validateLottoSize() {
+    public static Lotto of(String strNumbers) {
+        String[] strLottoNumbers = strNumbers.split(",");
+        Set<LottoNumber> lottoNumberSet = Arrays.stream(strLottoNumbers)
+                                                .map(number -> LottoNumber.valueOf(number))
+                                                .collect(Collectors.toCollection(TreeSet::new));
+        return new Lotto(lottoNumberSet);
+    }
+
+    private void validateLottoSize(Set<LottoNumber> numbers) {
         if (numbers.size() != SIZE) {
             throw new InvalidInputException(INVALID_SIZE_OF_WINNING_NUMBERS);
         }
     }
 
     public int getMatchCount(Lotto winningLotto) {
-        return (int) winningLotto.getLottoNumbers().stream()
+        return (int) winningLotto.getLottoNumbers()
+                                 .stream()
                                  .filter(numbers::contains)
                                  .count();
     }

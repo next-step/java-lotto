@@ -18,7 +18,7 @@ public class InputView {
     }
 
     public static String inputWinningNumbers() {
-        String winningNumbers = getUserInputValue(INPUT_WINNING_NUMBERS_MESSAGE).replace(" ", "");
+        String winningNumbers = getUserInputValue(INPUT_WINNING_NUMBERS_MESSAGE);
         for (String number : winningNumbers.split(",")) {
             validateInputString(number);
         }

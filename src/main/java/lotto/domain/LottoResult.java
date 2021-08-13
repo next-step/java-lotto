@@ -18,14 +18,10 @@ public enum LottoResult {
     }
 
     public static LottoResult getLottoResult(int matchCount) {
-        LottoResult winning = Arrays.stream(LottoResult.values())
-                                    .filter(s -> s.getMatchCount() == matchCount)
-                                    .findAny()
-                                    .orElse(null);
-        if (winning != null) {
-            return winning;
-        }
-        return FAIL;
+        return Arrays.stream(LottoResult.values())
+                     .filter(s -> s.getMatchCount() == matchCount)
+                     .findAny()
+                     .orElse(FAIL);
     }
 
     public int getMatchCount() {
