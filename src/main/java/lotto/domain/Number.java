@@ -35,4 +35,10 @@ public class Number implements Comparable<Number>{
     public int compareTo(Number o) {
         return this.data - o.data;
     }
+
+
+    @Override
+    public String toString() {
+        return ""+ data;
+    }
 }
