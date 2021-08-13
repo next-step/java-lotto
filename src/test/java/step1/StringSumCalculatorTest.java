@@ -28,6 +28,13 @@ class StringSumCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("숫자 하나 입력 테스트를 해본다.")
+    void one_number_test() {
+        int result = stringSumCalculator.sum("1");
+        assertThat(result).isEqualTo(1);
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"1,2=3", "1:2,3=6"}, delimiter = '=')
     @DisplayName("쉼표와 콜론으로 split한 숫자를 합해서 반환하는지 확인한다.")
