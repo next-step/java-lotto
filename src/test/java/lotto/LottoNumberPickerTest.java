@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumberPicker;
-import lotto.model.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

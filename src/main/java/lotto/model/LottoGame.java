@@ -13,12 +13,14 @@ public class LottoGame {
     private static final int MATCHED_BONUS_COUNT = 5;
 
     private int purchaseAmount = 0;
-    private int gameCount = 0;
+    private int autoGameCount = 0;
+    private int manualGameCount = 0;
+    private int totalGameCount = 0;
+
     private WinningNumbers winningNumbers;
 
-    public LottoTicket getLottoTicket() {
-        return new LottoTicket(new ArrayList<>())
-                .generateNumbers(this.gameCount);
+    public LottoTicket getLottoTicket(ManualLottoNumbers manualLottoNumbers) {
+        return new LottoTicket(manualLottoNumbers, this.autoGameCount);
     }
 
     public int getLottoAmount(int purchaseAmount) {
@@ -26,8 +28,13 @@ public class LottoGame {
             return DEFAULT_LOTTO_AMOUNT;
         }
         this.purchaseAmount = purchaseAmount;
-        this.gameCount = purchaseAmount / LOTTO_PRICE;
-        return this.gameCount;
+        this.totalGameCount = purchaseAmount / LOTTO_PRICE;
+        this.autoGameCount = totalGameCount - manualGameCount;
+        if (totalGameCount - manualGameCount < 0) {
+            return DEFAULT_LOTTO_AMOUNT;
+        }
+
+        return this.totalGameCount;
     }
 
     public void settingWinningNumber(String numberText, int bonusNumber) {
@@ -36,7 +43,7 @@ public class LottoGame {
 
     public Map<Winning, Integer> setWinningCount(LottoTicket lottoTicket) {
         Map<Winning, Integer> winningCount = new HashMap<>();
-        for (LottoNumbers lottoNumbers : lottoTicket.getTicketInfo()) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicketInfo()) {
             setCount(winningCount, lottoNumbers);
         }
         return winningCount;
