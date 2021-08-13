@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import lotto.domain.TicketCount;
 import lotto.exception.WrongUserInputException;
 
 public class InputView {
@@ -52,9 +53,9 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public int[][] askManualTicketNumbers(int manualTicketCnt) {
+    public int[][] askManualTicketNumbers(TicketCount manualTicketCnt) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        int[][] input = new int[manualTicketCnt][];
+        int[][] input = new int[manualTicketCnt.value()][];
 
         for (int i = 0; i < input.length; i++) {
             String[] stringNumberArray = scanner.next().split(COMMA_DELIMITER);

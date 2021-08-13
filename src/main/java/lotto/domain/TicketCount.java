@@ -17,4 +17,8 @@ public class TicketCount {
                 String.format("잘못된 티켓장수가 입력되었습니다. [입력장수:%d]", ticketCount));
         }
     }
+
+    public int value() {
+        return ticketCount;
+    }
 }
