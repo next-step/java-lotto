@@ -1,16 +1,18 @@
 package stringaddcalculator;
 
 public class Delimiters {
+
     private static final String DEFAULT_DELIMITERS_REGEX = ",|:";
     private static final String OR = "|";
-    private final String CUSTOM_DELIMITER;
+
+    private final String customDelimiter;
 
     private Delimiters(){
-        CUSTOM_DELIMITER = null;
+        customDelimiter = null;
     }
 
     private Delimiters(String customDelimiter) {
-        CUSTOM_DELIMITER = customDelimiter;
+        this.customDelimiter = customDelimiter;
     }
 
     public static Delimiters create() {
@@ -22,10 +24,10 @@ public class Delimiters {
     }
 
     public String regex() {
-        if (CUSTOM_DELIMITER == null) {
+        if (customDelimiter == null) {
             return DEFAULT_DELIMITERS_REGEX;
         }
-        return DEFAULT_DELIMITERS_REGEX + OR + CUSTOM_DELIMITER;
+        return DEFAULT_DELIMITERS_REGEX + OR + customDelimiter;
     }
 
 }
