@@ -17,7 +17,7 @@ public final class LottoShop {
         validateMinimumAmount(amount);
 
         long purchaseCount = getPurchaseCount(amount);
-        return buyLottoLottoTickets(purchaseCount);
+        return buyLottoTickets(purchaseCount);
     }
 
     private void validateMinimumAmount(final long amount) {
@@ -30,7 +30,7 @@ public final class LottoShop {
         return Math.floorDiv(amount, LOTTO_PRIZE_AMOUNT);
     }
 
-    private LottoTickets buyLottoLottoTickets(final long purchaseCount) {
+    private LottoTickets buyLottoTickets(final long purchaseCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             lottoTickets.add(lottoGenerator.generate());
