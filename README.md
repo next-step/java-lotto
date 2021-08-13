@@ -42,7 +42,7 @@
     - [X] 당첨번호 입력
     - [X] 당첨 통계 출력
 
-## 1단계 - 문자열 덧셈 계산기 Todo-List 🎯
+## 문자열 덧셈 계산기 Todo-List 🎯
 - [X] 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 구분하는 기능(splitWithCommaOrColon) 구현
 - [X] 커스텀 구분자로 문자열을 구분하는 기능(splitWithCustomDelimiter)의 구현
 - [X] 유효성 체크 기능의 구현
