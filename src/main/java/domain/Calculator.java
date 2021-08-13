@@ -18,7 +18,7 @@ public class Calculator {
 	}
 
 	private void checkNumbersMinusStatus(final String[] numbers) {
-		for(String number : numbers) {
+		for (String number : numbers) {
 			if (Integer.parseInt(number) < 0) {
 				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
 			}
@@ -26,7 +26,7 @@ public class Calculator {
 	}
 
 	private void checkoutOtherCharacterStatus(final String[] numbers) {
-		for(String number : numbers) {
+		for (String number : numbers) {
 			if (!number.matches(NUMBER_REGEXP)) {
 				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
 			}
