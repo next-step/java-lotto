@@ -18,6 +18,8 @@ public class LottoGameMain {
         OutputView outputView = OutputView.getInstance();
 
         int moneyForGame = inputView.askMoneyAmount();
+        int manualTicketCnt = inputView.askHowManyManualTicketing();
+
         LottoTicketVendor vendor = new LottoTicketVendor(new AutoNumberGeneratingWay());
         List<LottoTicket> playerTickets = vendor.buyLottoTickets(moneyForGame);
         outputView.showPlayerTicketNumbers(playerTickets);
