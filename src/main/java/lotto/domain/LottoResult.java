@@ -1,47 +1,48 @@
 package lotto.domain;
 
-import lotto.LottoRank;
-
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
+    private final Map<LottoRank, Long> lottoResult;
 
-    private final int INCREASE_COUNT = 1;
-    private final int DEFAULT_COUNT = 0;
-
-    private final Map<LottoRank, Integer> lottoResult;
-
-    private LottoResult(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
-        lottoResult = new HashMap<>();
-
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            int matchCount = lottoTicket.getMatchCount(winningLottoTicket);
-            setRankEnumByMatchCount(matchCount, lottoTicket.contains(bonusLottoNumber));
-        }
+    private LottoResult(Map<LottoRank, Long> lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
-    public static LottoResult of(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
-        return new LottoResult(lottoTickets, winningLottoTicket, bonusLottoNumber);
+    public static LottoResult of(Map<LottoRank, Long> lottoResult) {
+        return new LottoResult(lottoResult);
     }
 
-    private void setRankEnumByMatchCount(int matchCount, boolean bonusMatch) {
-        LottoRank key = LottoRank.valueOf(matchCount, bonusMatch);
-        lottoResult.put(key, lottoResult.getOrDefault(key, DEFAULT_COUNT) + INCREASE_COUNT);
+    public static LottoResult of(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+         return new LottoResult(lottoTickets.getMatchRankCount(winningLottoTicket).getLottoResult());
     }
 
-    public Map<LottoRank, Integer> getLottoResult() {
+    public Map<LottoRank, Long> getLottoResult() {
 
         return Collections.unmodifiableMap(lottoResult);
     }
 
-    public ProfitRate calculateProfitRate(double purchaseAmount) {
+    public ProfitRate calculateProfitRate(LottoPrice lottoPrice) {
 
         double totalAmount = lottoResult.keySet().stream()
-                .mapToDouble(key -> lottoResult.getOrDefault(key, 0) * key.getPrice())
+                .mapToDouble(key -> lottoResult.getOrDefault(key, 0L) * key.getPrice())
                 .sum();
 
-        return ProfitRate.of(totalAmount / purchaseAmount);
+        return ProfitRate.of(lottoPrice.getRatio(totalAmount));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(lottoResult, that.lottoResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoResult);
     }
 }

@@ -3,8 +3,8 @@ package lotto.domain;
 import lotto.exception.LottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -12,10 +12,12 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class LottoNumberTests {
 
     @DisplayName("로또 번호 생성 테스트")
-    @Test
-    void createLottoNumberTest() {
-        assertThat(LottoNumber.of(1)).isEqualTo(LottoNumber.of(1));
-        assertThat(LottoNumber.of(45)).isEqualTo(LottoNumber.of(45));
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    void createLottoNumberTest(int number) {
+        LottoNumber lottoNumber = LottoNumber.of(number);
+        assertThat(lottoNumber == LottoNumber.of(number)).isTrue();
+        assertThat(LottoNumber.of(number)).isEqualTo(LottoNumber.of(number));
     }
 
     @DisplayName("로또 번호 생성시 로또 번호 생성 범위 넘었을 때 exception 테스트")

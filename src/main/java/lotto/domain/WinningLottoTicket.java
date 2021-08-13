@@ -1,37 +1,28 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import lotto.exception.InvalidBonusNumberException;
+
 import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
-    private static final String BLANK = "";
-    private static final String SPACE = " ";
-    private static final String SPLIT_CUSTOM_REGEX = ",|, | ,";
+    private final LottoTicket winningLottoTicket;
+    private final LottoNumber bonusLottoNumber;
 
-    private final Set<LottoNumber> winningLottoTicket;
+    private WinningLottoTicket(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        validate(winningLottoTicket, bonusLottoNumber);
+        this.winningLottoTicket = winningLottoTicket;
+        this.bonusLottoNumber = bonusLottoNumber;
 
-    private WinningLottoTicket(String winningLottoTicketString) {
-        String trimWinningNumberString = replaceBlank(winningLottoTicketString);
-
-        this.winningLottoTicket = makeWinningLottoTicketByString(trimWinningNumberString);
     }
 
-    public static WinningLottoTicket of(String winningLottoTicketString) {
-        return new WinningLottoTicket(winningLottoTicketString);
+    public static WinningLottoTicket of(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        return new WinningLottoTicket(winningLottoTicket, bonusLottoNumber);
     }
 
-    private Set<LottoNumber> makeWinningLottoTicketByString(String trimWinningNumberString) {
-        return Arrays.stream(trimWinningNumberString.split(SPLIT_CUSTOM_REGEX))
-                .map(number -> LottoNumber.of(Integer.parseInt(number)))
-                .collect(Collectors.toCollection(TreeSet::new));
-    }
-
-    private String replaceBlank(String LottoNumbers) {
-        String trimWinningNumberString = LottoNumbers.replace(SPACE, BLANK);
-        return trimWinningNumberString;
+    private void validate(LottoTicket winningLottoTicket, LottoNumber bonusLottoNumber) {
+        if (winningLottoTicket.contains(bonusLottoNumber)) {
+            throw new InvalidBonusNumberException();
+        }
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -49,5 +40,12 @@ public class WinningLottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(winningLottoTicket);
+    }
+
+    public LottoRank match(LottoTicket compareLottoTicket) {
+        int countOfMatch = winningLottoTicket.getCountOfMatch(compareLottoTicket);
+        boolean bonusMatch = compareLottoTicket.contains(bonusLottoNumber);
+
+        return LottoRank.valueOf(countOfMatch, bonusMatch);
     }
 }

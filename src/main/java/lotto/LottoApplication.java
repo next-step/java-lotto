@@ -4,36 +4,46 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String args[]) {
-        int purchaseAmount = InputView.getPurchaseAmount();
+        LottoPrice lottoPrice = LottoPrice.of(InputView.getPurchaseAmount());
 
-        LottoMachine lottoMachine = new LottoMachine(purchaseAmount);
+        int manualLottoCount = InputView.getManualLottoTicketCount();
+        lottoPrice.checkOverPrice(manualLottoCount);
 
-        int lottoCount = lottoMachine.getPurchaseLottoCount();
-        ResultView.countOfLotto(lottoCount);
+        List<LottoTicket> totalLottoTickets = new ArrayList<>();
+        InputView.manualLottoNumberQuestion();
 
-        Set<LottoTicket> totalLottoTickets = new HashSet<>();
-
-        for (int i = 0; i < lottoMachine.getPurchaseLottoCount(); i++) {
-            LottoTicket generateLottoTicket = lottoMachine.generateLottoNumber();
-            ResultView.printLottoNumber(generateLottoTicket);
-            totalLottoTickets.add(generateLottoTicket);
+        LottoTicketGenerator lottoTicketGenerator;
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoTicketGenerator = new ManualLottoTicketGenerator(InputView.getManualLottoNumber());
+            totalLottoTickets.add(lottoTicketGenerator.execute());
         }
 
-        LottoTickets collectionOflLottoNumbers = LottoTickets.of(totalLottoTickets);
+        int lottoTotalCount = lottoPrice.getMaxQuantity();
+        int autoLottoCount = lottoTotalCount - manualLottoCount;
+        ResultView.countOfLotto(manualLottoCount, autoLottoCount);
 
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(InputView.getWinningNumber());
+        lottoTicketGenerator = new AutoLottoTicketGenerator();
+        for (int i = 0; i < autoLottoCount; i++) {
+            LottoTicket generatedLottoTicket = lottoTicketGenerator.execute();
+            totalLottoTickets.add(generatedLottoTicket);
+        }
 
+        LottoTickets lottotickets = LottoTickets.of(totalLottoTickets);
+
+        ResultView.printLottoTickets(lottotickets);
+
+        List<Integer> winningLottoNumbers = InputView.getWinningNumber();
         LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusNumber());
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(LottoTicket.of(winningLottoNumbers), bonusLottoNumber);
 
-        LottoResult lottoResult = LottoResult.of(collectionOflLottoNumbers, winningLottoTicket, bonusLottoNumber);
-
+        LottoResult lottoResult = LottoResult.of(lottotickets, winningLottoTicket);
         ResultView.printWinningStatistics(lottoResult);
-        ResultView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));
+        ResultView.printProfitRate(lottoResult.calculateProfitRate(lottoPrice));
 
     }
 }

@@ -2,9 +2,8 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberCountException;
 
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -13,13 +12,20 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoTicket;
 
     private LottoTicket(Set<LottoNumber> lottoTicket) {
+        validate(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
 
+    public static LottoTicket of(List<Integer> lottoNumbers) {
+        return new LottoTicket(lottoNumbers.stream()
+                .map(lottoNumber -> LottoNumber.of(lottoNumber))
+                .collect(Collectors.toCollection(TreeSet::new)));
+    }
+
     public static LottoTicket of(Set<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }
+
 
     private static void validate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != TOTAL_LOTTO_NUMBERS_COUNT) {
@@ -35,14 +41,14 @@ public class LottoTicket {
         return lottoTicket.size();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoTicket.contains(lottoNumber);
+    public int getCountOfMatch(LottoTicket compareLottoTicket) {
+        return (int) lottoTicket.stream()
+                .filter(lottoNumber -> compareLottoTicket.contains(lottoNumber))
+                .count();
     }
 
-    public int getMatchCount(WinningLottoTicket winningLottoTicket) {
-        return (int) lottoTicket.stream()
-                .filter(number -> winningLottoTicket.contains(number))
-                .count();
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoTicket.contains(lottoNumber);
     }
 
 

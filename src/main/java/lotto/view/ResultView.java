@@ -1,40 +1,39 @@
 package lotto.view;
 
-import lotto.LottoRank;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.ProfitRate;
+import lotto.domain.*;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static String COUNT_OF_LOTTO_QUESTION = "개를 구입했습니다.";
-    private static int DEFAULT_COUNT = 0;
+    private static long DEFAULT_COUNT = 0;
 
     private ResultView() {
 
     }
 
-    public static void countOfLotto(int lottoCount) {
-        System.out.println(lottoCount + COUNT_OF_LOTTO_QUESTION);
+    public static void countOfLotto(int manualCount, int autoCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구입했습니다.");
     }
 
-    public static void printLottoNumber(LottoTicket lottoTicket) {
-        Set<LottoNumber> lottoNumberSet = lottoTicket.getLottoTicket();
+    public static void printLottoTickets(LottoTickets lottotickets) {
+        List<LottoTicket> lottoTickets = lottotickets.getLottoTickets();
 
-        String result = "[" + lottoNumberSet.stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
-                .collect(Collectors.joining(", ")) + "]";
+        for (LottoTicket lottoTicket : lottoTickets) {
+            String result = "[" + lottoTicket.getLottoTicket().stream()
+                    .map(lottoNumber -> Integer.toString(lottoNumber.getLottoNumber()))
+                    .collect(Collectors.joining(", ")) + "]";
 
-        System.out.println(result);
+            System.out.println(result);
+
+        }
     }
+
 
     public static void printWinningStatistics(LottoResult lottoResult) {
 
-        Map<LottoRank, Integer> result = lottoResult.getLottoResult();
+        Map<LottoRank, Long> result = lottoResult.getLottoResult();
 
         System.out.println("당첨 통계");
 

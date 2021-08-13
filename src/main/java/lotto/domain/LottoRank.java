@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -10,8 +10,6 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     OUT_OF_RANK(0, 0);
 
-    private static final int FIVE = 5;
-
     private int countOfMatch;
     private int price;
 
@@ -20,23 +18,19 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean bonusMatch) {
-        if (bonusMatch && countOfMatch == FIVE) {
+        if (bonusMatch && countOfMatch == SECOND.countOfMatch) {
             return SECOND;
         }
-        if (!bonusMatch && countOfMatch == FIVE) {
+        if (!bonusMatch && countOfMatch == THIRD.countOfMatch) {
             return THIRD;
         }
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRankEnum -> lottoRankEnum.getCountOfMatch() == countOfMatch)
+                .filter(lottoRankEnum -> lottoRankEnum.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(OUT_OF_RANK);
 
