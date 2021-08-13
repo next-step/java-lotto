@@ -20,7 +20,7 @@ class LottoNumbersGeneratorTest {
         LottoNumbers generatedLottoNumbers = lottoNumbersGenerator.generate();
         LottoNumbers expectedLottoNumbers = LottoNumbers.of(sourceLottoNumbers);
         assertThat(generatedLottoNumbers.match(expectedLottoNumbers))
-                .isEqualTo(MatchCount.SIX);
+                .isEqualTo(Rank.FIRST);
     }
 
     private List<LottoNumber> createMockLottoNumbers(int... numbers) {

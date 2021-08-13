@@ -40,11 +40,11 @@ public class LottoNumbers {
         return LOTTO_NUMBERS_SIZE;
     }
 
-    public MatchCount match(LottoNumbers other) {
+    public Rank match(LottoNumbers other) {
         long count = lottoNumbers.stream()
                         .filter(other::contains)
                         .count();
-        return MatchCount.valueOf((int) count);
+        return Rank.valueOf((int) count);
     }
 
     private boolean contains(LottoNumber lottoNumber) {

@@ -64,7 +64,7 @@ class LottoNumbersTest {
         LottoNumbers first = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         LottoNumbers second = LottoNumbers.of(createLottoNumbers(Arrays.asList(1,2,3,7,8,9)));
         assertThat(first.match(second))
-                .isEqualTo(MatchCount.THREE);
+                .isEqualTo(Rank.FIFTH);
     }
 
 }
