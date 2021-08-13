@@ -1,45 +1,38 @@
 package lotto.step2.domain;
 
-import java.util.HashMap;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int MULTIPLE_FIRST_PLACE_WINNING = 2;
-
     private Map<WinningRank, Integer> lottoResult;
 
     public LottoResult(Map<WinningRank, Integer> lottoResult) {
         this.lottoResult = lottoResult;
-    }
 
-    public LottoResult() {
-        this.lottoResult = new HashMap<>();
     }
 
     public Map<WinningRank, Integer> getLottoResult() {
         return lottoResult;
     }
 
-    public double calculateStatistics(int money) {
+    public String calculateStatistics(int money) {
         long sum = 0;
         for (WinningRank rank : WinningRank.values()) {
-            sum += rank.getWinnings()* lottoResult.getOrDefault(rank,0);
+            sum += addWinningMoney(rank);
         }
-        return sum / (double) money;
+        double winning = sum / (double) money;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(winning);
     }
 
-    public int addLottoWinnings(WinningRank winningRank) {
-        if (winningRank.toString().equals("FIRST_PLACE")) {
-            return winFirstRank(winningRank);
+    public int addWinningMoney(WinningRank rank) {
+        if (lottoResult.get(rank) == null) {
+            return 0;
         }
-        return winningRank.getWinnings() * lottoResult.getOrDefault(winningRank, 0);
-    }
-
-    public int winFirstRank(WinningRank winningRank) {
-        if (lottoResult.getOrDefault(winningRank, 0) >= MULTIPLE_FIRST_PLACE_WINNING) {
-            return winningRank.getWinnings();
+        if (rank.equals(WinningRank.FIRST_PLACE)) {
+            return rank.getWinnings();
         }
-        return winningRank.getWinnings() * lottoResult.getOrDefault(winningRank, 0);
+        int winningCount = lottoResult.getOrDefault(rank, 0);
+        return rank.getWinnings() * winningCount;
     }
-
 }
