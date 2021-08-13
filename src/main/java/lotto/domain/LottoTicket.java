@@ -20,6 +20,17 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket generateByIntegerArray(int... integerArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
+    }
+
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {
         checkNumberSize(lottoNumbers);
         checkDuplicateNumber(lottoNumbers);
@@ -45,18 +56,6 @@ public class LottoTicket {
         if (lottoNumbers.size() != TICKET_NUMBER_SIZE) {
             throw new WrongLottoTicketException("로또티켓은 6개의 숫자를 가져야만 합니다.");
         }
-    }
-
-
-    public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
-    }
-
-    public static LottoTicket generateByIntegerArray(int... integerArray) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
     }
 
     public int checkHowManyMatchedNumbers(LottoTicket anotherTicket) {
