@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class LottoStatistics {
-    private Map<LottoResult, Integer> resultCountMap = new HashMap<>();
-    private Money spend;
+    private final Map<LottoResult, Integer> resultCountMap = new HashMap<>();
+    private final Money spend;
 
     public LottoStatistics(LottoResults results, Money spend) {
         this.spend = spend;
