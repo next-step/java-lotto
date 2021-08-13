@@ -1,16 +1,19 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTickets {
-    private final List<LottoBalls> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    private LottoTickets(List<LottoBalls> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    private LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets from(List<LottoBalls> lottoTickets) {
+    public static LottoTickets from(List<LottoTicket> lottoTickets) {
         return new LottoTickets(lottoTickets);
     }
 
@@ -31,10 +34,16 @@ public class LottoTickets {
             .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
-        return (float) (Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
+        return (float)(Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
     }
 
-    public List<LottoBalls> toLottoBallsList() {
-        return this.lottoTickets;
+    public Map<Rank, Integer> calculateStatistics(WinnerNumbers winnerNumbers) {
+        Map<Rank, Integer> winStatisticsDTO = new HashMap<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Rank rank = winnerNumbers.decideRank(lottoTicket);
+            winStatisticsDTO.put(rank, winStatisticsDTO.getOrDefault(rank, 0) + 1);
+        }
+        return winStatisticsDTO;
     }
+
 }
