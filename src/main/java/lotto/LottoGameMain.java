@@ -2,12 +2,12 @@ package lotto;
 
 
 import java.util.List;
+import lotto.domain.LottoGameVendor;
 import lotto.domain.LottoGameWinnerCalculator;
 import lotto.domain.LottoGameWinnerResult;
+import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketVendor;
 import lotto.domain.WinnerLottoInfo;
-import lotto.ticketingway.AutoNumberGeneratingWay;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,10 +18,11 @@ public class LottoGameMain {
         OutputView outputView = OutputView.getInstance();
 
         int moneyForGame = inputView.askMoneyAmount();
-        int manualTicketCnt = inputView.askHowManyManualTicketing();
+        int manualTicketCount = inputView.askHowManyManualTicketing();
+        int[][] manualTicketNumbers = inputView.askManualTicketNumbers(manualTicketCount);
 
-        LottoTicketVendor vendor = new LottoTicketVendor(new AutoNumberGeneratingWay());
-        List<LottoTicket> playerTickets = vendor.buyLottoTickets(moneyForGame);
+        LottoPurchaseOrder order = new LottoPurchaseOrder(moneyForGame, manualTicketNumbers);
+        List<LottoTicket> playerTickets = LottoGameVendor.buyLottos(order);
         outputView.showPlayerTicketNumbers(playerTickets);
 
         int[] winnerNumbers = inputView.askWinnerNumbers();

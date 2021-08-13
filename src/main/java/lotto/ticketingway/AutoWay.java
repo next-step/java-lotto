@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.AllPossibleLottoNumbers;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
 import lotto.exception.NotEnoughTicketCountException;
 
-public class AutoNumberGeneratingWay implements LottoTicketingWay {
+public class AutoWay implements LottoTicketingWay {
 
     private static final int MIN_TICKET_COUNT = 1;
 
     @Override
-    public List<LottoTicket> issueLottoTickets(int lottoTicketCount) {
+    public List<LottoTicket> issueLottoTickets(int lottoTicketCount, LottoPurchaseOrder order) {
 
         checkMinimumTicketCount(lottoTicketCount);
 
