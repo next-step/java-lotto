@@ -41,9 +41,4 @@ public enum LottoStatus {
     public Money getWinningAmount() {
         return winningAmount;
     }
-
-    @Override
-    public String toString() {
-        return hitCount + "개 일치 (" + winningAmount + ")";
-    }
 }

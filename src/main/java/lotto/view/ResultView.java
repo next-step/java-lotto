@@ -20,7 +20,7 @@ public class ResultView {
         List<LottoStatus> lottoStatuses = Stream.of(LottoStatus.values()).filter(lottoStatus -> !Objects.equals(lottoStatus, LottoStatus.NOTHING))
                 .collect(Collectors.toList());
         for (LottoStatus lottoStatus : lottoStatuses) {
-            System.out.print(lottoStatus);
+            System.out.print(lottoStatus.getHitCount() + "개 일치 (" + lottoStatus.getWinningAmount() + ")");
             System.out.println("-" + result.findCount(lottoStatus) + "개");
         }
         printRatio(result);
