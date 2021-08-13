@@ -15,11 +15,11 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumberRange(int number) {
-        if(number < MIN_NUMBER) {
-            throw new IllegalArgumentException("cannot be less than "+ MIN_NUMBER);
+        if (number < MIN_NUMBER) {
+            throw new IllegalArgumentException("cannot be less than " + MIN_NUMBER);
         }
-        if(number > MAX_NUMBER) {
-            throw new IllegalArgumentException("cannot be greater than "+ MAX_NUMBER);
+        if (number > MAX_NUMBER) {
+            throw new IllegalArgumentException("cannot be greater than " + MAX_NUMBER);
         }
     }
 
