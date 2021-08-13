@@ -6,7 +6,7 @@ import lotto.domain.LottoGameWinnerCalculator;
 import lotto.domain.LottoGameWinnerResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketVendor;
-import lotto.domain.WinnerNumberInfo;
+import lotto.domain.WinnerLottoInfo;
 import lotto.ticketingway.AutoNumberGeneratingWay;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,11 +24,10 @@ public class LottoGameMain {
 
         int[] winnerNumbers = inputView.askWinnerNumbers();
         int bonusBallNumber = inputView.askBonusBallNumber();
-        WinnerNumberInfo winnerNumberInfo = new WinnerNumberInfo(winnerNumbers, bonusBallNumber);
+        WinnerLottoInfo winnerLottoInfo = new WinnerLottoInfo(winnerNumbers, bonusBallNumber);
 
-        LottoGameWinnerCalculator winnerCalculator = new LottoGameWinnerCalculator(winnerNumberInfo);
-        LottoGameWinnerResult winnerResult = winnerCalculator
-            .calculate(playerTickets);
+        LottoGameWinnerResult winnerResult = LottoGameWinnerCalculator
+            .calculate(winnerLottoInfo, playerTickets);
 
         outputView.showWinnerResult(winnerResult);
 

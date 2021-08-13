@@ -59,6 +59,19 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbers);
     }
 
+    public int checkHowManyMatchedNumbers(LottoTicket anotherTicket) {
+        List<LottoNumber> matchedNumbers = lottoNumbers.stream()
+            .filter(anotherTicket.value()::contains)
+            .collect(Collectors.toList());
+
+        return matchedNumbers.size();
+    }
+
+    public boolean checkBonusNumberMatch(LottoNumber bonusBallNumber) {
+
+        return lottoNumbers.contains(bonusBallNumber);
+    }
+
     public List<LottoNumber> value() {
         return lottoNumbers;
     }

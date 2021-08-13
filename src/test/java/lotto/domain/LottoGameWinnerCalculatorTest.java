@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.enumeration.LottoReward;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,23 +14,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoGameWinnerCalculatorTest {
 
-    private static LottoGameWinnerCalculator winnerCalculator;
-
-    @BeforeAll
-    static void generateWinnerCalculator() {
-        int[] winnerNumbers = {1, 2, 3, 4, 5, 6};
-        int bonusBallNumber = 7;
-
-        WinnerNumberInfo winnerNumberInfo = new WinnerNumberInfo(winnerNumbers, bonusBallNumber);
-        winnerCalculator = new LottoGameWinnerCalculator(winnerNumberInfo);
-    }
-
 
     @ParameterizedTest
     @MethodSource("generatePlayerTicketsAndReward")
     @DisplayName("당첨번호티켓과 일치하는 번호개수에 따라 당첨금이 달라진다.")
     void check_reward_money(List<LottoTicket> playerTickets, LottoReward reward) {
-        LottoGameWinnerResult result = winnerCalculator.calculate(playerTickets);
+        LottoGameWinnerResult result = LottoGameWinnerCalculator
+            .calculate(makeWinnerInfo(), playerTickets);
         assertThat(result.getRewardMoneySum()).isEqualTo(reward.getRewardMoney());
     }
 
@@ -39,7 +28,8 @@ class LottoGameWinnerCalculatorTest {
     @MethodSource("generatePlayerTicketsAndProfitRate")
     @DisplayName("당첨번호티켓과 일치하는 번호개수에 따라 수익률이 달라진다.")
     void check_profit_ratio(List<LottoTicket> playerTickets, double profitRate) {
-        LottoGameWinnerResult result = winnerCalculator.calculate(playerTickets);
+        LottoGameWinnerResult result = LottoGameWinnerCalculator
+            .calculate(makeWinnerInfo(), playerTickets);
         assertThat(result.getProfitRate()).isEqualTo(profitRate);
     }
 
@@ -48,7 +38,8 @@ class LottoGameWinnerCalculatorTest {
     @MethodSource("generatePlayerTicketsAndReward")
     @DisplayName("당첨 결과에 있어서 각 일치개수도  몇번일어났는지 기록한다.")
     void check_reward_hit_count(List<LottoTicket> playerTickets, LottoReward reward) {
-        LottoGameWinnerResult result = winnerCalculator.calculate(playerTickets);
+        LottoGameWinnerResult result = LottoGameWinnerCalculator
+            .calculate(makeWinnerInfo(), playerTickets);
         assertThat(result.getHitCountByReward(reward)).isEqualTo(1);
     }
 
@@ -114,5 +105,12 @@ class LottoGameWinnerCalculatorTest {
         return new ArrayList<>(Arrays.asList(
             LottoTicket.generateByIntegerArray(11, 12, 13, 14, 15, 16)
         ));
+    }
+
+    private WinnerLottoInfo makeWinnerInfo() {
+        int[] winnerNumbers = {1, 2, 3, 4, 5, 6};
+        int bonusBallNumber = 7;
+
+        return new WinnerLottoInfo(winnerNumbers, bonusBallNumber);
     }
 }
