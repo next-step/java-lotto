@@ -33,10 +33,6 @@ public class Money {
         return new Money(this.amount.add(amount.amount));
     }
 
-    public Money minus(Money amount) {
-        return new Money(this.amount.subtract(amount.amount));
-    }
-
     public Money times(double percent) {
         return new Money(this.amount.multiply(BigDecimal.valueOf(percent)));
     }
@@ -49,14 +45,6 @@ public class Money {
     public int divideAndDiscardRemainder(Money amount) {
         return this.amount.divide(amount.amount, BigDecimal.ROUND_FLOOR)
                 .intValue();
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public Long longValue() {
-        return amount.longValue();
     }
 
     public boolean equals(Object object) {
