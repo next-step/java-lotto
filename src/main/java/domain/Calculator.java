@@ -11,25 +11,33 @@ public class Calculator {
 		}
 
 		String[] numbers = input.split(",|:");
-		checkoutOtherCharacterStatus(numbers);
-		checkNumbersMinusStatus(numbers);
+		otherCharacterStatus(numbers);
+		numbersMinusStatus(numbers);
 
 		return getResult(numbers);
 	}
 
-	private void checkNumbersMinusStatus(final String[] numbers) {
+	private void numbersMinusStatus(final String[] numbers) {
 		for (String number : numbers) {
-			if (Integer.parseInt(number) < 0) {
-				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
-			}
+			checkNumberMinusStatus(number);
 		}
 	}
 
-	private void checkoutOtherCharacterStatus(final String[] numbers) {
+	private void checkNumberMinusStatus(final String number) {
+		if (Integer.parseInt(number) < 0) {
+			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
+		}
+	}
+
+	private void otherCharacterStatus(final String[] numbers) {
 		for (String number : numbers) {
-			if (!number.matches(NUMBER_REGEXP)) {
-				throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
-			}
+			checkOtherCharacterStatus(number);
+		}
+	}
+
+	private void checkOtherCharacterStatus(final String number) {
+		if (!number.matches(NUMBER_REGEXP)) {
+			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
 		}
 	}
 
