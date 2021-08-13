@@ -11,6 +11,14 @@ public class InputView {
         return enterNumber();
     }
 
+    public static String enterLottoNumber() {
+        return enterString();
+    }
+
+    public static String enterString() {
+        return SCANNER.next();
+    }
+
     private static int enterNumber() {
         return SCANNER.nextInt();
     }
