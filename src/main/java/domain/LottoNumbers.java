@@ -7,13 +7,8 @@ public class LottoNumbers {
 
     List<Integer> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers() {
-        lottoNumbers.add(1);
-        lottoNumbers.add(2);
-        lottoNumbers.add(3);
-        lottoNumbers.add(4);
-        lottoNumbers.add(5);
-        lottoNumbers.add(6);
+    public LottoNumbers(PickNumberStrategy pickNumberStrategy) {
+        lottoNumbers = pickNumberStrategy.makeLottoNumber();
     }
 
 
