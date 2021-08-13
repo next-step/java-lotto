@@ -3,9 +3,13 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public static int receivePurchaseMoney() {
+    public InputView(final Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public int receivePurchaseMoney() {
         String input;
         System.out.println("구입금액을 입력해 주세요.");
         do {
@@ -14,12 +18,14 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static String receiveWinningNumbers() {
+    public String receiveWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        scanner.close();
+        return input;
     }
 
-    private static boolean isNumber(String input) {
+    private boolean isNumber(String input) {
         if (input == null || !input.chars().allMatch(Character::isDigit)) {
             System.out.println("숫자만 입력 가능합니다.");
             return false;
