@@ -3,7 +3,8 @@ package lottery.domain;
 import lottery.dto.LotteryResultDto;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LotteryResult {
@@ -14,9 +15,12 @@ public enum LotteryResult {
     FIVE_AND_BONUS_MATCHES("5개 일치, 보너스 볼 일치", 5, true, new Money(30000000)),
     SIX_MATCHES("6개 일치", 6, false, new Money(2000000000));
 
-    private static final List<LotteryResult> LOTTERY_RESULTS = Arrays.stream(values())
-            .sorted(LotteryResult::compare)
-            .collect(Collectors.toList());
+    private static final Map<Integer, LotteryResult> NON_BONUS = Arrays.stream(values())
+            .filter(lotteryResult -> !lotteryResult.bonus)
+            .collect(Collectors.toMap(LotteryResult::getMatch, Function.identity()));
+    private static final Map<Integer, LotteryResult> BONUS = Arrays.stream(values())
+            .filter(lotteryResult -> lotteryResult.bonus)
+            .collect(Collectors.toMap(LotteryResult::getMatch, Function.identity()));
 
     private final String explanation;
     private final int match;
@@ -31,39 +35,24 @@ public enum LotteryResult {
     }
 
     public static LotteryResult getLotteryResult(final int match, final boolean bonus) {
-        return LOTTERY_RESULTS.stream()
-                .filter(lotteryResult -> lotteryResult.isValid(match, bonus))
-                .findFirst()
-                .orElse(BLANK);
-    }
-
-    private static int compare(final LotteryResult o1, final LotteryResult o2) {
-        return o1.match == o2.match
-                ? compareBonus(o1, o2)
-                : o1.match - o2.match;
-    }
-
-    private static int compareBonus(final LotteryResult o1, final LotteryResult o2) {
-        return o1.bonus
-                ? -1
-                : (o2.bonus ? 1 : 0);
-    }
-
-    private boolean isValid(final int match, final boolean bonus) {
-        return this.match == match
-                && this.bonus == (bonus && this.bonus);
+        return bonus
+                ? BONUS.getOrDefault(match, NON_BONUS.getOrDefault(match, BLANK))
+                : NON_BONUS.getOrDefault(match, BLANK);
     }
 
     public static boolean notBlank(final LotteryResult lotteryResult) {
         return !lotteryResult.equals(BLANK);
     }
 
-    public long getTotalCashPrize(final long count) {
+    public long getTotalCashPrize(final int count) {
         return cashPrize.multiply(count);
     }
 
-    public LotteryResultDto toDto(final long count) {
-        return new LotteryResultDto(explanation, cashPrize, (int) count);
+    public LotteryResultDto toDto(final int count) {
+        return new LotteryResultDto(explanation, cashPrize, count);
     }
 
+    private int getMatch() {
+        return match;
+    }
 }
