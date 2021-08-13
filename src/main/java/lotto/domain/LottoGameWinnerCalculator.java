@@ -6,35 +6,49 @@ import lotto.enumeration.LottoReward;
 
 public class LottoGameWinnerCalculator {
 
-    public LottoGameWinnerResult calculate(List<LottoTicket> playerTickets,
-        LottoTicket winnerTicket) {
+    private final static int BONUS_NUMBER_CHECK_POINT = 5;
+
+    private final LottoTicket winnerTicket;
+    private final LottoNumber bonusBallNumber;
+
+    public LottoGameWinnerCalculator(WinnerNumberInfo winnerNumberInfo) {
+        this.winnerTicket = winnerNumberInfo.getWinnerTicket();
+        this.bonusBallNumber = winnerNumberInfo.getBonusBallNumber();
+    }
+
+    public LottoGameWinnerResult calculate(List<LottoTicket> playerTickets) {
 
         LottoGameWinnerResult result = new LottoGameWinnerResult();
         int playerTicketsCount = playerTickets.size();
 
         for (LottoTicket playerTicket : playerTickets) {
-            int matchedCount = checkHowManyMatchedNumbers(winnerTicket, playerTicket);
-
-            LottoReward reward = decideLottoReward(matchedCount);
-            updateWinnerResult(result, reward, playerTicketsCount);
+            LottoReward reward = decideLottoReward(winnerTicket, playerTicket);
+            result.updateResultInfo(reward, playerTicketsCount);
         }
 
         return result;
-
     }
 
-    private void updateWinnerResult(LottoGameWinnerResult result, LottoReward reward, int playerTicketsCount) {
-        result.updateResultInfo(reward, playerTicketsCount);
+    private LottoReward decideLottoReward(LottoTicket winnerTicket, LottoTicket playerTicket) {
+
+        int matchedNumberCount = checkHowManyMatchedNumbers(winnerTicket, playerTicket);
+        boolean hasMatchedBonusNumber = checkBonusNumberMatch(playerTicket, matchedNumberCount);
+
+        return LottoReward.of(matchedNumberCount, hasMatchedBonusNumber);
     }
 
-    private LottoReward decideLottoReward(int matchedCount) {
-        return LottoReward.of(matchedCount);
+    private boolean checkBonusNumberMatch(LottoTicket playerTicket, int matchedNumberCount) {
+
+        if (matchedNumberCount == BONUS_NUMBER_CHECK_POINT) {
+            return playerTicket.value().contains(bonusBallNumber);
+        }
+
+        return false;
     }
 
-
-    private int checkHowManyMatchedNumbers(LottoTicket lastWeekWinnerTicket,
+    private int checkHowManyMatchedNumbers(LottoTicket winnerTicket,
         LottoTicket playerTicket) {
-        List<LottoNumber> matchedNumbers = lastWeekWinnerTicket.value().stream()
+        List<LottoNumber> matchedNumbers = winnerTicket.value().stream()
             .filter(playerTicket.value()::contains)
             .collect(Collectors.toList());
 
