@@ -2,20 +2,19 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public final class ResultView {
 
     private static final int INIT = 0;
     private static final int CRITERIA = 1;
-    private static final int MINUS_ONE = -1;
     private static final String SEPARATOR = ", ";
     private static final String RIGHT_SQUARE_BRACKET = "[";
     private static final String LEFT_SQUARE_BRACKET = "]";
 
     public void printLottoCount(final int count) {
-        System.out.println(count + "개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.%n", count);
     }
 
     public void printLottos(final Lottos lottos) {
@@ -28,27 +27,49 @@ public final class ResultView {
     }
 
     public void printLotto(final Lotto lotto) {
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
+        ;
 
-        for (int i = INIT; i < lottoNumbers.size() + MINUS_ONE; i++) {
-            System.out.print(lottoNumbers.get(i).getNumber() + SEPARATOR);
+        int lottoNumberCount = lottoNumbers.size() - 1;
+
+        for (int i = INIT; i < lottoNumberCount; i++) {
+            System.out.print(lottoNumbers.get(i).getValue() + SEPARATOR);
         }
 
-        System.out.print(lottoNumbers.get(lottoNumbers.size() + MINUS_ONE).getNumber());
+        System.out.print(lottoNumbers.get(lottoNumberCount).getValue());
     }
 
-    public void printStatistics(final Map<Rank, MatchingCount> winnings) {
+    public void printStatistics(final Result result) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + winnings.getOrDefault(Rank.FOURTH, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + winnings.getOrDefault(Rank.THIRD, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("5개 일치 (1500000원)- " + winnings.getOrDefault(Rank.SECOND, new MatchingCount()).getMatchingCount() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + winnings.getOrDefault(Rank.FIRST, new MatchingCount()).getMatchingCount() + "개");
+
+        for (Rank rank : Rank.values()) {
+            printRankInfo(result, rank);
+        }
     }
 
-    public void printEarningsRate(final double earningsRate) {
-        System.out.print("총 수익률은 " + earningsRate + "입니다.");
+    private void printRankInfo(final Result result, Rank rank) {
+        if (rank == Rank.FIFTH) {
+            System.out.printf("3개 일치 (5000원) - %d개%n", result.getRankHitsCount(rank));
+        }
+        if (rank == Rank.FOURTH) {
+            System.out.printf("4개 일치 (50000원) - %d개%n", result.getRankHitsCount(rank));
+        }
+        if (rank == Rank.THIRD) {
+            System.out.printf("5개 일치 (1500000원) - %d개%n", result.getRankHitsCount(rank));
+        }
+        if (rank == Rank.SECOND) {
+            System.out.printf("5개 일치, 보너스 볼 일치(30000000원) - %d개%n", result.getRankHitsCount(rank));
+        }
+        if (rank == Rank.FIRST) {
+            System.out.printf("6개 일치 (2000000000원) - %d개%n", result.getRankHitsCount(rank));
+        }
+    }
+
+    public void printEarningsRate(final Result result) {
+        double earningsRate = result.calculateTotalWinningMoney();
+        System.out.printf("총 수익률은 %s입니다.", String.format("%.2f", earningsRate));
 
         if (earningsRate < CRITERIA) {
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");

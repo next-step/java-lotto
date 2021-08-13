@@ -1,11 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.purchaseStrategy.AutoPurchaseStrategy;
+import lotto.domain.generationStrategy.AutoNumberGenerationStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.EnumMap;
 import java.util.Scanner;
 
 public final class LottoController {
@@ -16,19 +15,20 @@ public final class LottoController {
             ResultView resultView = new ResultView();
             LottoMachine lottoMachine = new LottoMachine();
 
-            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoPurchaseStrategy());
+            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationStrategy());
             int totalCount = lottos.count();
 
             resultView.printLottoCount(totalCount);
             resultView.printLottos(lottos);
 
-            Lotto winningLotto = Lotto.valueOf(inputView.inputWinningNumbers());
+            Lotto winningLotto = new Lotto(inputView.inputWinningNumbers());
+            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
 
-            EnumMap<Rank, MatchingCount> winnings = lottoMachine.makeStatisticsWinnings(lottos, winningLotto);
-            double earningsRate = lottoMachine.calculateEarningsRate(winnings, totalCount);
+            WinningsStatistics winningsStatistics = new WinningsStatistics(winningLotto, bonusNumber);
+            Result result = winningsStatistics.makeStatisticsWinnings(lottos);
 
-            resultView.printStatistics(winnings);
-            resultView.printEarningsRate(earningsRate);
+            resultView.printStatistics(result);
+            resultView.printEarningsRate(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
