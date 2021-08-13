@@ -1,45 +1,67 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.LottoBall;
-import lotto.domain.LottoBalls;
+import lotto.domain.LottoTicket;
+import lotto.domain.Rank;
+import lotto.domain.WinStatistics;
 
 public class ResultView {
     private static final String OUTPUT_LOTTO_COUNT = "개를 구매했습니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계\n---------\n";
-    private static final String OUTPUT_THREE_MATCH_CASE = "3개 일치 (5000원)- %d개\n";
-    private static final String OUTPUT_FOUR_MATCH_CASE = "4개 일치 (50000원)- %d개\n";
-    private static final String OUTPUT_FIVE_MATCH_CASE = "5개 일치 (1500000원)- %d개\n";
-    private static final String OUTPUT_SIX_MATCH_CASE = "6개 일치 (2000000000)- %d개\n";
+    private static final String OUTPUT_NORMAL_MATCH_CASE = "%d개 일치 (%d원) - %d개";
+    private static final String OUTPUT_BONUS_MATCH_CASE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String OUTPUT_TOTAL_RATE_OF_RETURN
         = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
+
+    private static void println(String input) {
+        System.out.println(input);
+    }
+
+    private static void printf(String format, Object... args) {
+        System.out.printf(format, args);
+    }
 
     public void outputLottoCount(int lottoCount) {
         System.out.println(lottoCount + OUTPUT_LOTTO_COUNT);
     }
 
-    public void outputLottoLotteries(List<LottoBalls> lottoBallsList) {
-        int lottoCount = lottoBallsList.size();
+    public void outputLottoLotteries(List<LottoTicket> lottoTickets) {
+        int lottoCount = lottoTickets.size();
         outputLottoCount(lottoCount);
-        for (LottoBalls lottoBalls : lottoBallsList) {
-            outputLottoBalls(lottoBalls);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            outputLottoTickets(lottoTicket);
         }
     }
 
-    private void outputLottoBalls(LottoBalls lottoBalls) {
-        System.out.println("[" + lottoBalls.getLottoBallsStream().map(LottoBall::toString)
+    public void outputLottoTickets(LottoTicket lottoTicket) {
+        System.out.println("[" + lottoTicket.toLottoBallSet()
+            .stream()
+            .map(LottoBall::number)
+            .sorted()
+            .map(String::valueOf)
             .collect(Collectors.joining(", ")) + "]");
     }
 
-    public void outputStatistics(Map<Integer, Integer> winStatistics, float rateOfReturn) {
-        System.out.println(OUTPUT_STATISTICS_TITLE);
-        System.out.printf(OUTPUT_THREE_MATCH_CASE, winStatistics.getOrDefault(3, 0));
-        System.out.printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.getOrDefault(4, 0));
-        System.out.printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.getOrDefault(5, 0));
-        System.out.printf(OUTPUT_SIX_MATCH_CASE, winStatistics.getOrDefault(6, 0));
-        System.out.printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+    void outputPrizeStatistics(Rank rank, WinStatistics winStatistics) {
+        String prizeStatisticsFormat = OUTPUT_NORMAL_MATCH_CASE;
+        if (rank == Rank.SECOND) {
+            prizeStatisticsFormat = OUTPUT_BONUS_MATCH_CASE;
+        }
+        String resultFormat = String.format(prizeStatisticsFormat,
+            rank.matchCount(),
+            rank.money().amount(),
+            winStatistics.result().getOrDefault(rank, 0)
+        );
+        println(resultFormat);
+    }
+
+    public void outputStatistics(WinStatistics winStatistics, float rateOfReturn) {
+        println(OUTPUT_STATISTICS_TITLE);
+        Rank.getRankList()
+            .forEach(rank -> outputPrizeStatistics(rank, winStatistics));
+        printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
     }
 }

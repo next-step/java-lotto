@@ -1,42 +1,49 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoTickets {
-    private final List<LottoBalls> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoBalls> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    private LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public Map<Integer, Integer> getLottoStatistics(LottoBalls winnerNumbers) {
-        Map<Integer, Integer> winStatistics = new HashMap<>();
-        for (LottoBalls lottoTicket : lottoTickets) {
-            int key = lottoTicket.countMatchNumber(winnerNumbers);
-            winStatistics.put(key, winStatistics.getOrDefault(key, 0) + 1);
-        }
-        return winStatistics;
+    public static LottoTickets from(List<LottoTicket> lottoTickets) {
+        return new LottoTickets(lottoTickets);
     }
 
-    public long calculatePrizeMoney(int matchCount, int lottoCount) {
-        Rank rank = Arrays.stream(Rank.values())
-            .filter(e -> matchCount == e.getMatchCount())
+    private long calculatePrizeMoney(Rank rank, int lottoCount) {
+        Rank rankResult = Arrays.stream(Rank.values())
+            .filter(e -> e == rank)
             .findFirst()
-            .orElse(Rank.NO_RANK);
+            .orElse(Rank.MISS);
 
-        return rank.getMoney()
+        return rankResult.money()
             .multiply(lottoCount)
             .amount();
     }
 
-    public float getRateOfReturn(int lottoCount, Map<Integer, Integer> winStatistics) {
-        long prizeMoneySum = winStatistics.entrySet().stream()
+    public float getRateOfReturn(int lottoCount, WinStatistics winStatistics) {
+        long prizeMoneySum = winStatistics.result()
+            .entrySet()
+            .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
         return (float)(Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
-
     }
+
+    public Map<Rank, Integer> calculateStatistics(WinnerNumbers winnerNumbers) {
+        Map<Rank, Integer> winStatisticsDTO = new HashMap<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Rank rank = winnerNumbers.decideRank(lottoTicket);
+            winStatisticsDTO.put(rank, winStatisticsDTO.getOrDefault(rank, 0) + 1);
+        }
+        return winStatisticsDTO;
+    }
+
 }
