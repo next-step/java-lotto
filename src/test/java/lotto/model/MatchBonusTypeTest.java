@@ -5,12 +5,12 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class BonusMatchTypeTest {
+class MatchBonusTypeTest {
 
 	@Test
 	@DisplayName("보너스 숫자가 일치 해야지만 참이다.")
 	public void checkMatchTypeOfTrue() {
-		BonusMatchType result = BonusMatchType.TRUE;
+		MatchBonusType result = MatchBonusType.TRUE;
 		boolean bonusMatch1 = result.isBonusMatch(false);
 
 		assertThat(bonusMatch1).isFalse();
@@ -23,7 +23,7 @@ class BonusMatchTypeTest {
 	@Test
 	@DisplayName("보너스 숫자가 불일치 해야지만 참이다.")
 	public void checkMatchTypeOfFalse() {
-		BonusMatchType result = BonusMatchType.FALSE;
+		MatchBonusType result = MatchBonusType.FALSE;
 		boolean bonusMatch1 = result.isBonusMatch(false);
 
 		assertThat(bonusMatch1).isTrue();
@@ -36,7 +36,7 @@ class BonusMatchTypeTest {
 	@Test
 	@DisplayName("보너스 숫자가 일치여부 상관없이 참이다.")
 	public void checkMatchType() {
-		BonusMatchType result = BonusMatchType.NONE;
+		MatchBonusType result = MatchBonusType.NONE;
 		boolean bonusMatch1 = result.isBonusMatch(false);
 
 		assertThat(bonusMatch1).isTrue();
