@@ -49,7 +49,7 @@ public class LottoBall {
             return false;
         }
 
-        LottoBall lottoBall = (LottoBall) object;
+        LottoBall lottoBall = (LottoBall)object;
         return number == lottoBall.number;
     }
 
