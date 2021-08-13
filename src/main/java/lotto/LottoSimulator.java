@@ -14,6 +14,24 @@ public class LottoSimulator {
     private final OutputView outputView;
     private final LottoNumbersGenerator lottoNumbersGenerator;
 
+    public static void main(String[] args) {
+        try {
+            InputView inputView = InputView.of(System.in);
+            OutputView outputView = OutputView.of(System.out);
+            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
+            LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
+            lottoSimulator.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<LottoNumber> createLottoNumbers() {
+        return IntStream.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound())
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+    }
+
     public LottoSimulator(InputView inputView, OutputView outputView, LottoNumbersGenerator lottoNumbersGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
@@ -45,23 +63,5 @@ public class LottoSimulator {
     private LottoNumbers getWinningLottoNumbers() {
         outputView.printWinningLottoNumbersInputMessage();
         return inputView.getWinningLottoNumbers();
-    }
-
-    public static void main(String[] args) {
-        try {
-            InputView inputView = InputView.of(System.in);
-            OutputView outputView = OutputView.of(System.out);
-            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
-            LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
-            lottoSimulator.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound())
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
     }
 }
