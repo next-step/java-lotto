@@ -26,7 +26,7 @@ public class WinningResult {
         stringBuffer.append("\n당첨 통계\n" + "---------\n");
         Arrays.stream(WinningPrice.values()).filter(winning -> winning != WinningPrice.NOT_WINNINGS)
                 .forEach(winning ->
-                        stringBuffer.append(winning.match + "개 일치" + "("
+                        stringBuffer.append(winning.match + ((winning == WinningPrice.FIVE_WINNINGS_BOBUS) ? "개 일치, 보너스 볼 일치" + "(" : "개 일치" + "(")
                                 + winning.price + "원)"
                                 + "-" + Collections.frequency(this.winningPrice, winning)
                                 + "개\n"));

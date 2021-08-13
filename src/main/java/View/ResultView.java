@@ -14,12 +14,15 @@ public class ResultView {
 
     public static void printLottoResult(List<Lotto> lottos) {
 
+
         lottos.forEach(s -> System.out.println(s.getLottoNumbers()));
+
+        int bonusBall = InputView.insertBonusNumber();
 
         LotterNumbers winningNumber = LotterNumbers.of(WinningNumber.of(InputView.insertLastWeekWinningNumber()).getWinningNumbers());
 
         List<WinningPrice> winningPrice = IntStream.range(MONEY_DIVIDE_REMAINDER_ZERO, lottos.size())
-                .mapToObj(i -> WinningPrice.getWinnings(lottos.get(i).compareNumbers(winningNumber.getLottoNumbers()), lottos.get(i).getLottoNumbers().contains(7)))
+                .mapToObj(i -> WinningPrice.getWinnings(lottos.get(i).compareNumbers(winningNumber.getLottoNumbers()), lottos.get(i).getLottoNumbers().contains(bonusBall)))
                 .collect(Collectors.toList());
 
         System.out.println(WinningResult.of(winningPrice).getWinningResult().toString());
