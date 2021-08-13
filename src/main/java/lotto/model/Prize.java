@@ -6,19 +6,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Prize {
-	FIRST(6, 2_000_000_000),
-	SECOND(5, 30_000_000),
-	THIRD(5, 1_500_000),
-	FOURTH(4, 50_000),
-	FIFTH(3, 5_000),
-	MISS(0, 0);
+	FIRST(6, 2_000_000_000, MatchType.NONE),
+	SECOND(5, 30_000_000, MatchType.TRUE),
+	THIRD(5, 1_500_000, MatchType.FALSE),
+	FOURTH(4, 50_000, MatchType.NONE),
+	FIFTH(3, 5_000, MatchType.NONE),
+	MISS(0, 0, MatchType.NONE);
 
 	private final int countOfMatch;
 	private final int winningMoney;
+	private final MatchType matchType;
 
-	Prize(int countOfMatch, int winningMoney) {
+	Prize(int countOfMatch, int winningMoney, MatchType matchType) {
 		this.countOfMatch = countOfMatch;
 		this.winningMoney = winningMoney;
+		this.matchType = matchType;
 	}
 
 	public int getCountOfMatch() {
@@ -36,11 +38,8 @@ public enum Prize {
 	}
 
 	public static Prize getWinnersStatus(int countOfMatch, boolean matchBonus) {
-		if (SECOND.countOfMatch == countOfMatch && matchBonus) {
-			return SECOND;
-		}
 		return Arrays.stream(Prize.values())
-			.filter(r -> (r.countOfMatch == countOfMatch) && (r != SECOND))
+			.filter(prize -> (prize.countOfMatch == countOfMatch) && prize.matchType.isBonusMatch(matchBonus))
 			.findFirst()
 			.orElse(MISS);
 	}
