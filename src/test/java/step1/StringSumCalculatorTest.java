@@ -34,4 +34,12 @@ class StringSumCalculatorTest {
         int result = stringSumCalculator.sum(input);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"//;\\n1;2;3=6", "//;\\n1;3=4"}, delimiter = '=')
+    @DisplayName("쉼표와 콜론으로 split한 숫자를 합해서 반환하는지 확인한다.")
+    void custom_separator_test(String input, int expected) {
+        int result = stringSumCalculator.sum(input);
+        assertThat(result).isEqualTo(expected);
+    }
 }
