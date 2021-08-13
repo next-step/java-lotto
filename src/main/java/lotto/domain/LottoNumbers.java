@@ -24,7 +24,9 @@ public class LottoNumbers {
     }
 
     private void validateDistinct(List<LottoNumber> lottoNumbers) {
-        long distinctCount = lottoNumbers.stream().distinct().count();
+        long distinctCount = lottoNumbers.stream()
+                                .distinct()
+                                .count();
         if (distinctCount != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(String.format(DISTINCT_LOTTO_NUMBER_EXCEPTION_MESSAGE_FORMAT, lottoNumbers));
         }
