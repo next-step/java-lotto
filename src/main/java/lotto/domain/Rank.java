@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, Money.from(2_000_000_000)),
@@ -16,6 +18,12 @@ public enum Rank {
     Rank(int matchCount, Money money) {
         this.matchCount = matchCount;
         this.money = money;
+    }
+
+    public static List<Rank> getRankList() {
+        return Arrays.stream(Rank.values())
+            .filter(e -> e != Rank.MISS)
+            .collect(Collectors.toList());
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
