@@ -15,11 +15,11 @@ public final class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public LottoTicket generate() {
-        List<LottoNumber> targetNumbers = shuffleLottoNumbers();
-        return pickLottoNumbers(targetNumbers);
+        List<LottoNumber> targetLottoNumbers = generateTargetLottoNumbers();
+        return pickLottoNumbers(targetLottoNumbers);
     }
 
-    private List<LottoNumber> shuffleLottoNumbers() {
+    private List<LottoNumber> generateTargetLottoNumbers() {
         List<LottoNumber> targetNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(targetNumbers);
         return targetNumbers;

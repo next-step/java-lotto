@@ -16,8 +16,8 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final int[] lottoNumberArr) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArr)
+    public LottoTicket(final int[] lottoNumberVarargs) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberVarargs)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
