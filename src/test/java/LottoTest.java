@@ -1,3 +1,4 @@
+import domain.AutoNumberStrategy;
 import domain.Lotto;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ public class LottoTest {
 
     @Test
     public void 로또생성시_6개숫자_테스트() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(new AutoNumberStrategy());
         assertThat(lotto.getNumbers()).isEqualTo(null);
     }
 }

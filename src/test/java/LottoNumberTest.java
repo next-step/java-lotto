@@ -21,22 +21,4 @@ public class LottoNumberTest {
         LottoNumbers lottoNumbers = new LottoNumbers(new AutoNumberStrategy());
         assertThat(new HashSet<>(lottoNumbers.getValues()).size()).isEqualTo(lottoNumbers.getValues().size());
     }
-
-    @Test
-    public void 노출_테스트() {
-        LottoNumbers lottoNumbers = new LottoNumbers(new AutoNumberStrategy());
-        for (int num : lottoNumbers.getValues()) {
-            System.err.println(num);
-        }
-        System.err.println();
-        LottoNumbers lottoNumber2 = new LottoNumbers(new AutoNumberStrategy());
-        for (int num : lottoNumber2.getValues()) {
-            System.err.println(num);
-        }
-        System.err.println();
-        LottoNumbers lottoNumber3 = new LottoNumbers(new AutoNumberStrategy());
-        for (int num : lottoNumber3.getValues()) {
-            System.err.println(num);
-        }
-    }
 }
