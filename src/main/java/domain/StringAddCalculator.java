@@ -26,18 +26,18 @@ public class StringAddCalculator {
     }
 
     public static String[] parseData(String data) {
-        if (Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(data).find()) {
-            return parseDataWithCustomDelimiter(data);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(data);
+        if (matcher.find()) {
+            return parseDataWithCustomDelimiter(data, matcher);
         }
         String[] numbers = data.split(DEFAULT_DELIMITER_REGEX);
         return numbers;
     }
 
 
-    public static String[] parseDataWithCustomDelimiter(String data) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(data);
+    public static String[] parseDataWithCustomDelimiter(String data, Matcher matcher) {
         matcher.find();
-        
+
         String customDelimiter = matcher.group(DELIMITER_INDEX);
         String[] numbers = matcher.group(NUMBERS_INDEX).split(customDelimiter);
 

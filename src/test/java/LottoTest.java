@@ -9,6 +9,6 @@ public class LottoTest {
     @Test
     public void 로또생성시_6개숫자_테스트() {
         Lotto lotto = new Lotto(new AutoNumberStrategy());
-        assertThat(lotto.getNumbers()).isEqualTo(null);
+        assertThat(lotto.getNumbers().getValues().size()).isEqualTo(6);
     }
 }

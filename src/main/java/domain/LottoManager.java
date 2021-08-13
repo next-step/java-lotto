@@ -9,15 +9,23 @@ public class LottoManager {
 
     private Lottos lottos;
 
-    public LottoManager() {
-    }
+    private int purchaseLottoCount;
+
+    private Lotto winningLotto;
+
+    private WinningStatistics winningStatistics;
 
     public LottoManager(int purchaseAmount) {
-        getPurchaseLottoCount(purchaseAmount);
-        makeLottos(getPurchaseLottoCount(purchaseAmount));
+        this.winningStatistics = new WinningStatistics();
+        makePurchaseLottoCount(purchaseAmount);
+        makeLottos(this.purchaseLottoCount);
     }
 
-    public void makeLottos(int purchaseLottoCount) {
+    private void makePurchaseLottoCount(int purchaseAmount) {
+        this.purchaseLottoCount = purchaseAmount / LOTTO_PRICE;
+    }
+
+    private void makeLottos(int purchaseLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < purchaseLottoCount; i++) {
             lottoList.add(new Lotto(new AutoNumberStrategy()));
@@ -29,13 +37,20 @@ public class LottoManager {
         return this.lottos;
     }
 
-
-    public static int getPurchaseLottoCount(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PRICE;
+    public int getPurchaseLottoCount() {
+        return purchaseLottoCount;
     }
 
     public Lotto makeWinningLotto() {
-        Lotto lotto = new Lotto(new ManualNumberStrategy());
-        return lotto;
+        winningLotto = new Lotto(new ManualNumberStrategy());
+        return winningLotto;
+    }
+
+    public WinningStatistics findWinningLottoResult() {
+        return lottos.findWinningLottoResult(winningLotto, winningStatistics);
+    }
+
+    public double getLottoYield() {
+        return winningStatistics.calcLottoYield(purchaseLottoCount * LOTTO_PRICE);
     }
 }
