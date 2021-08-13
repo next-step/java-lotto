@@ -19,7 +19,7 @@ public class StringSumCalculator {
         String[] inputNumbers = splitInputText(inputText);
 
         for (String inputNumber : inputNumbers) {
-            result += Integer.parseInt(inputNumber);
+            result += validationMinusNumber(Integer.parseInt(inputNumber));
         }
         return result;
     }
@@ -35,4 +35,10 @@ public class StringSumCalculator {
         return inputText.split(",|:");
     }
 
+    private int validationMinusNumber(int number) {
+        if(number < 0) {
+            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        }
+        return number;
+    }
 }
