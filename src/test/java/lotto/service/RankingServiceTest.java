@@ -1,7 +1,7 @@
 package lotto.service;
 
-import lotto.common.LottoResult;
-import lotto.common.LottoResults;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.common.LottoResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

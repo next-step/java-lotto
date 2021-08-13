@@ -1,6 +1,6 @@
 package lotto.presentation;
 
-import lotto.common.LottoResults;
+import lotto.domain.LottoResults;
 import lotto.common.WinningNumberParser;
 import lotto.domain.*;
 import lotto.presentation.input.PurchaseAmountInputView;

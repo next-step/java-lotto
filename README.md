@@ -9,6 +9,14 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## TODO
+* Input
+  * 보너스 볼을 입력할 수 있다.
+* Domain
+  * 5개 일치 + 보너스 볼 일치 갯수를 가져올 수 있다.
+  * 5개 일치 + 보너스 볼 일치 갯수에 대한 금액을 계산할 수 있다.
+* Output
+  * 5개 일치 + 보너스 볼 일치를 출력할 수 있다.
+  
 
 ## DONE
 

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.common.LottoResult;
-
 import java.util.List;
 
 public class RankingCalculator {
