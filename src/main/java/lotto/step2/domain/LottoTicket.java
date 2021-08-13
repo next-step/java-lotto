@@ -4,9 +4,13 @@ import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
+    private static final int LOTTO_COUNT = 6;
     private Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또 숫자의 개수는 " + LOTTO_COUNT + "개이어야 합니다.");
+        }
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -46,4 +46,16 @@ class LottoTicketTest {
         assertThat(ticket.matchWinningNumber(winningNumber)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("구입한 로또 번호와 당첨 번호 일치하는 개수 테스트 2")
+    void containsNum2() {
+        LottoTicket ticket = new LottoTicket(new HashSet<>(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(16)
+        )));
+        LottoTicket winningNumber = new LottoTicket(new HashSet<>(Arrays.asList(
+                new LottoNumber(12), new LottoNumber(1), new LottoNumber(3), new LottoNumber(2), new LottoNumber(4), new LottoNumber(5)
+        )));
+        assertThat(ticket.matchWinningNumber(winningNumber)).isEqualTo(5);
+    }
+
 }

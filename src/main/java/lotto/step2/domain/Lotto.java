@@ -39,7 +39,7 @@ public class Lotto {
         for (LottoTicket lottoTicket : this.lottoTickets) {
             int matchCount = lottoTicket.matchWinningNumber(winningNumber);
             WinningRank findRank = WinningRank.findWinningRank(matchCount);
-            winningRankInfo.put(findRank,winningRankInfo.getOrDefault(findRank,0)+1);
+            winningRankInfo.put(findRank, winningRankInfo.getOrDefault(findRank, 0) + 1);
         }
         return new LottoResult(winningRankInfo);
     }

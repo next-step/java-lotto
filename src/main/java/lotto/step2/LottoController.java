@@ -18,6 +18,5 @@ public class LottoController {
         LottoResult lottoResult = lottoTickets.matchLottoTicket(winningNumber);
         ResultView.printWinningRank(lottoResult.getLottoResult());
         ResultView.printStatistics(lottoResult.calculateStatistics(money));
-
     }
 }

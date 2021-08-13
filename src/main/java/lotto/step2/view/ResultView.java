@@ -31,14 +31,14 @@ public class ResultView {
 
     public static void printWinningRank(Map<WinningRank, Integer> lottoResult) {
         for (WinningRank winningRank : WinningRank.values()) {
-            if (winningRank.equals(WinningRank.NONE_PLACE)){
+            if (winningRank.equals(WinningRank.NONE_PLACE)) {
                 continue;
             }
             System.out.printf("%d개 일치 (%d원) - %d%n", winningRank.getMatchCount(), winningRank.getWinnings(), lottoResult.getOrDefault(winningRank, 0));
         }
     }
 
-    public static void printStatistics(double statistics) {
-        System.out.printf("총 수익률은 %.2f 입니다%n", statistics);
+    public static void printStatistics(String statistics) {
+        System.out.printf("총 수익률은 %s 입니다%n", statistics);
     }
 }
