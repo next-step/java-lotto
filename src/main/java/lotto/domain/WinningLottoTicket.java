@@ -18,6 +18,14 @@ public final class WinningLottoTicket {
 
         this.winningLottoNumbers = new LottoTicket(lottoNumbers);
         this.bonusNumber = bonusNumber;
+
+        validateBonusNumber();
+    }
+
+    private void validateBonusNumber() {
+        if (winningLottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("bonus number must not in winning numbers");
+        }
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
