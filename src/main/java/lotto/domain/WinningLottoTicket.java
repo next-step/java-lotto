@@ -20,11 +20,8 @@ public final class WinningLottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public int contains(final LottoNumber lottoNumber) {
-        if (winningLottoNumbers.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+    public boolean contains(final LottoNumber lottoNumber) {
+        return winningLottoNumbers.contains(lottoNumber);
     }
 
     public boolean containsBonusNumber(final LottoTicket lottoTicket) {

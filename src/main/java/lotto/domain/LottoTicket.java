@@ -38,7 +38,7 @@ public final class LottoTicket {
     public int matchCount(final WinningLottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount += winningLottoTicket.contains(lottoNumber);
+            matchCount += winningLottoTicket.contains(lottoNumber) ? 1 : 0;
         }
         return matchCount;
     }
