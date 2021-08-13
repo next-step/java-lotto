@@ -23,7 +23,7 @@ public class LottoResult {
     public double calculateStatistics(int money) {
         long sum = 0;
         for (WinningRank rank : WinningRank.values()) {
-            sum += addLottoWinnings(rank);
+            sum += rank.getWinnings()* lottoResult.getOrDefault(rank,0);
         }
         return sum / (double) money;
     }

@@ -34,13 +34,7 @@ public class Lotto {
         return lottoTickets;
     }
 
-    public void matchLottoTicket(LottoResult lottoResult) {
-        for (LottoTicket lottoTicket : this.lottoTickets) {
-            lottoResult.checkLottoTicket(lottoTicket);
-        }
-    }
-
-    public LottoResult matchLottoTicket2(LottoTicket winningNumber) {
+    public LottoResult matchLottoTicket(LottoTicket winningNumber) {
         Map<WinningRank, Integer> winningRankInfo = new HashMap<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
             int matchCount = lottoTicket.matchWinningNumber(winningNumber);

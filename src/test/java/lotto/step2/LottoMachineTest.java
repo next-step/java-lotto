@@ -2,6 +2,7 @@ package lotto.step2;
 
 import lotto.step2.domain.LottoMachine;
 import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,5 +18,4 @@ public class LottoMachineTest {
         List<LottoNumber> mixLottoNumbers = LottoMachine.mixLottoNumbers();
         assertThat(mixLottoNumbers.size()).isEqualTo(6);
     }
-
 }

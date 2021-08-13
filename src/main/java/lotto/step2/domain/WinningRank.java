@@ -26,7 +26,7 @@ public enum WinningRank {
         return winnings;
     }
 
-    static WinningRank findWinningRank(int count) {
+    public static WinningRank findWinningRank(int count) {
         if (count == FOURTH_PLACE.matchCount) return FOURTH_PLACE;
         if (count == THIRD_PLACE.matchCount) return THIRD_PLACE;
         if (count == SECOND_PLACE.matchCount) return SECOND_PLACE;
