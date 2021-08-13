@@ -19,6 +19,6 @@ public class RandomLottoNumber {
         Collections.shuffle(allNumbers);
         return allNumbers.stream().limit(Lotto.SIZE)
                          .map(LottoNumber::valueOf)
-                         .collect(Collectors.toSet());
+                         .collect(Collectors.toCollection(TreeSet::new));
     }
 }
