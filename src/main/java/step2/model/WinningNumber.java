@@ -3,8 +3,7 @@ package step2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import static step2.model.LottoValidator.isBlank;
-import static step2.model.LottoValidator.isDigit;
+import static step2.model.LottoValidator.*;
 
 public class WinningNumber {
     private static final int LOTTO_NUMBER_COUNT = 6;

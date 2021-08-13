@@ -2,7 +2,6 @@ package step2;
 
 import org.junit.jupiter.api.Test;
 import step2.model.*;
-import step2.view.InputView;
 
 import java.util.*;
 
@@ -59,25 +58,19 @@ public class AutoLottoTest {
     @Test
     public void 로또발급_6개랜덤숫자() {
         //given
-        Lotto lotto = new Lotto();
-
-        //when
-        List<Integer> numbers = lotto.getNumbers(new AutoLottoStrategy());
+        Lotto lotto = new Lotto(new AutoLottoStrategy());
 
         //then
-        assertThat(numbers.size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
     public void 구매갯수만큼_로또발급() {
         //given
-        Lotto lotto = new Lotto();
-
-        //when
-        List<List<Integer>> lottoList = lotto.getLotto(3);
+        LottoGroup lottoGroup = new LottoGroup(3);
 
         //then
-        assertThat(lottoList.size()).isEqualTo(3);
+        assertThat(lottoGroup.getLottoResult().size()).isEqualTo(3);
     }
     
     @Test

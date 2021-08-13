@@ -1,9 +1,6 @@
 package step2.controller;
 
-import step2.model.Lotto;
-import step2.model.PurchaseAmount;
-import step2.model.WinningNumber;
-import step2.model.WinningResult;
+import step2.model.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -20,11 +17,11 @@ public class Main {
         int lottoCount = user.getLottoCount(input);
         System.out.println(lottoCount + "개를 구매했습니다.");
 
-        Lotto lotto = new Lotto();
-        List<List<Integer>> lottoList = lotto.getLotto(lottoCount);
+        LottoGroup lottoGroup = new LottoGroup(lottoCount);
+        List<List<Integer>> lottoResult = lottoGroup.getLottoResult();
 
         ResultView view = new ResultView();
-        view.showLotto(lottoList);
+        view.showLotto(lottoResult);
 
         input = inputView.ask("지난 주 당첨 번호를 입력해 주세요.");
 
@@ -32,7 +29,7 @@ public class Main {
         List<Integer> winningNumbers = winningNumber.getWinningNumbers(input);
 
         WinningResult winningResult = new WinningResult();
-        Map<Integer, Integer> result = winningResult.getWinningResult(lottoList, winningNumbers);
+        Map<Integer, Integer> result = winningResult.getWinningResult(lottoResult, winningNumbers);
         String winningRate = winningResult.getWinningRate(amount, result);
         view.showResult(result, winningRate);
 
