@@ -12,6 +12,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public static Money zero() {
+        return new Money(MINIMUM_MONEY_AMOUNT);
+    }
+
     private void validateNonNegative(long amount) {
         if (amount < MINIMUM_MONEY_AMOUNT) {
             throw new IllegalArgumentException(String.format(INVALID_MONEY_AMOUNT_EXCEPTION_MESSAGE_FORMAT, amount));
@@ -34,13 +38,13 @@ public class Money {
         return Money.of(amount * number);
     }
 
-    public long getAmount() {
-        return amount;
+    public Money add(Money other) {
+        return Money.of(this.amount + other.amount);
     }
 
     @Override
     public String toString() {
-        return String.format("Money{amount=%s}", amount);
+        return String.valueOf(amount);
     }
 
     @Override

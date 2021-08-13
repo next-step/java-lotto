@@ -36,7 +36,11 @@ public enum MatchCount {
         return count;
     }
 
-    public long getWinningAmount() {
-        return winningAmount.getAmount();
+    public Money getWinningAmount() {
+        return winningAmount;
+    }
+
+    public Money calculateTotalWinningAmount(int count) {
+        return winningAmount.multiply(count);
     }
 }

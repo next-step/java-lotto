@@ -23,10 +23,11 @@ public class MatchResult {
     }
 
     public Money calculateTotalWinningAmount() {
-        long totalWinningAmount = winningLotteryCountMap.entrySet()
-                .stream()
-                .mapToLong(winningLotteryCount -> winningLotteryCount.getKey().getWinningAmount() * winningLotteryCount.getValue())
-                .sum();
-        return Money.of(totalWinningAmount);
+        Money total = Money.zero();
+        for (MatchCount matchCount : winningLotteryCountMap.keySet()) {
+            int count = winningLotteryCountMap.get(matchCount);
+            total = total.add(matchCount.calculateTotalWinningAmount(count));
+        }
+        return total;
     }
 }
