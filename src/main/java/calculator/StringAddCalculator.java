@@ -10,7 +10,7 @@ public class StringAddCalculator {
 
     private final List<String> delimiters;
     private final List<Integer> numbers = new ArrayList<>();
-    private Pattern customPattern = Pattern.compile("//(.)\n(.*)");
+    private final Pattern customPattern = Pattern.compile("//(.)\n(.*)");
 
     public StringAddCalculator(final String inputString) {
         delimiters = new ArrayList<>(Arrays.asList(",", ":"));
