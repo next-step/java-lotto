@@ -27,18 +27,10 @@ public enum WinningRank {
     }
 
     static WinningRank findWinningRank(int count) {
-        for (WinningRank rank : WinningRank.values()) {
-            findWinningMatchCount(rank, count);
-        }
-       return WinningRank.NONE_PLACE;
+        if (count == FOURTH_PLACE.matchCount) return FOURTH_PLACE;
+        if (count == THIRD_PLACE.matchCount) return THIRD_PLACE;
+        if (count == SECOND_PLACE.matchCount) return SECOND_PLACE;
+        if (count == FIRST_PLACE.matchCount) return FIRST_PLACE;
+        return NONE_PLACE;
     }
-
-    static WinningRank findWinningMatchCount(WinningRank rank, int count) {
-        if (rank.matchCount == count) {
-            return rank;
-        }
-        return WinningRank.NONE_PLACE;
-    }
-
-
 }

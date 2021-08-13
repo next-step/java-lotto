@@ -1,18 +1,10 @@
 package lotto.step2.domain;
 
 public class LottoShop {
-    private Lotto lotto;
+    private Money money;
 
     public LottoShop(int money) {
-        if (money < 1000) {
-            throw new IllegalArgumentException("돈이 부족합니다. 로또 1장의 가격은 1000원입니다.");
-        }
-        int lottoCount = money / 1000;
-        this.lotto = new Lotto(lottoCount);
-
+        this.money = new Money(money);
     }
 
-    public Lotto sellLotto() {
-        return this.lotto;
-    }
 }

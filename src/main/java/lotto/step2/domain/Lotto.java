@@ -8,12 +8,17 @@ public class Lotto {
 
     public Lotto(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException("돈이 부족합니다. 로또 1장의 가격은 "+LOTTO_PRICE+"원입니다.");
+            throw new IllegalArgumentException("돈이 부족합니다. 로또 1장의 가격은 " + LOTTO_PRICE + "원입니다.");
         }
         this.lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money; i++) {
-            buyLotto(LottoMachine.mixLottoNumbers());
+        int lottoCount = money / LOTTO_PRICE;
+        for (int i = 0; i < lottoCount; i++) {
+            generate(LottoMachine.mixLottoNumbers());
         }
+    }
+
+    public Lotto(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
     }
 
     @Override
@@ -21,7 +26,7 @@ public class Lotto {
         return lottoTickets.toString();
     }
 
-    public void buyLotto(List<LottoNumber> lottoNumbers) {
+    public void generate(List<LottoNumber> lottoNumbers) {
         lottoTickets.add(new LottoTicket(new HashSet<>(lottoNumbers)));
     }
 
@@ -36,13 +41,12 @@ public class Lotto {
     }
 
     public LottoResult matchLottoTicket2(LottoTicket winningNumber) {
-        Map<Integer , Integer> map = new HashMap<>();
+        Map<WinningRank, Integer> winningRankInfo = new HashMap<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
             int matchCount = lottoTicket.matchWinningNumber(winningNumber);
             WinningRank findRank = WinningRank.findWinningRank(matchCount);
+            winningRankInfo.put(findRank,winningRankInfo.getOrDefault(findRank,0)+1);
         }
-        return new LottoResult();
+        return new LottoResult(winningRankInfo);
     }
-
-
 }
