@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringSumCalculatorTest {
 
@@ -35,11 +36,18 @@ class StringSumCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3=6", "//;\\n1;3=4"}, delimiter = '=')
+    @Test
     @DisplayName("쉼표와 콜론으로 split한 숫자를 합해서 반환하는지 확인한다.")
-    void custom_separator_test(String input, int expected) {
-        int result = stringSumCalculator.sum(input);
-        assertThat(result).isEqualTo(expected);
+    void custom_separator_test() {
+        int result = stringSumCalculator.sum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1,2=3", "1:2,-3=6"}, delimiter = '=')
+    @DisplayName("음수를 입력할 경우 RuntimeException 발생")
+    void minus_number_test(String input, int expected) {
+        assertThatThrownBy(() -> stringSumCalculator.sum(input))
+                .isInstanceOf(RuntimeException.class);
     }
 }
