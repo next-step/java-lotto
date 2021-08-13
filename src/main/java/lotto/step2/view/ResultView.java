@@ -18,7 +18,7 @@ public class ResultView {
     }
 
     public static void printLottoTicket(Lotto lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getLotto()) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket);
         }
         System.out.println();

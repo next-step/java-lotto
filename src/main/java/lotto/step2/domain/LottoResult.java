@@ -15,6 +15,16 @@ public class LottoResult {
         this.winningNumber = winningNumber;
     }
 
+    public LottoResult() {
+        this.lottoResult = new HashMap<>();
+    }
+
+//    public void matchLotto2(LottoTicket winningNumber) {
+//        for (LottoTicket lottoTicket : this.lotto) {
+//            lottoResult.checkLottoTicket(lottoTicket);
+//        }
+//    }
+
     public void checkLottoTicket(LottoTicket lottoTicket) {
         int matchCount = lottoTicket.matchWinningNumber(winningNumber);
         checkWinningRank(matchCount);

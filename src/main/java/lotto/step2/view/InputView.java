@@ -5,6 +5,7 @@ import lotto.step2.domain.Validation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
     private static final String INPUT_LOTTO_PRICE_MESSAGE = "구입금액을 입력해주세요";
@@ -17,11 +18,11 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static List<LottoNumber> inputLastWinningNumber() {
+    public static Set<LottoNumber> inputLastWinningNumber() {
         System.out.println(INPUT_LAST_WINNING_NUMBER);
         sc.nextLine();
         String lastWinningNumbers = sc.nextLine();
-        List<LottoNumber> winningNumbers = Validation.isCorrectLottoNumbers(lastWinningNumbers);
+        Set<LottoNumber> winningNumbers = Validation.isCorrectLottoNumbers(lastWinningNumbers);
         return winningNumbers;
     }
 }

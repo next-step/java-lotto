@@ -1,14 +1,12 @@
 package lotto.step2.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoTicket {
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        Validation.isCorrectLottoCount(lottoNumbers);
-        Validation.isValidLotto(lottoNumbers);
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -28,7 +26,7 @@ public class LottoTicket {
         return 0;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

@@ -12,11 +12,15 @@ public class LottoController {
         ResultView.printLottoCount(lottoPrice);
         Lotto lottoTickets = lottoShop.sellLotto();
         ResultView.printLottoTicket(lottoTickets);
-        LottoTicket winningNumber = LottoTicket.generateWinningNumber(InputView.inputLastWinningNumber());
+        LottoTicket winningNumber = new LottoTicket(InputView.inputLastWinningNumber());
         ResultView.printWinningStatisticsMessage();
+
+
         LottoResult lottoResult = new LottoResult(winningNumber);
-        lottoTickets.matchLotto(lottoResult);
+        lottoTickets.matchLottoTicket(lottoResult);
         ResultView.printWinningRank(lottoResult.getLottoResult());
         ResultView.printStatistics(lottoResult.calculateStatistics(lottoPrice));
+
+        LottoResult lottoResult1 = lottoTickets.matchLottoTicket2(winningNumber);
     }
 }
