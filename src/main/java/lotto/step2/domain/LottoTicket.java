@@ -28,10 +28,6 @@ public class LottoTicket {
         return 0;
     }
 
-    public static LottoTicket generateWinningNumber(List<LottoNumber> winningNumbers) {
-        return new LottoTicket(winningNumbers);
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
