@@ -19,14 +19,14 @@ public class LottoNumbers {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(String.format(INVALID_LIST_SIZE_EXCEPTION_MESSAGE_FORMAT, lottoNumbers.toString()));
+            throw new IllegalArgumentException(String.format(INVALID_LIST_SIZE_EXCEPTION_MESSAGE_FORMAT, lottoNumbers));
         }
     }
 
     private void validateDistinct(List<LottoNumber> lottoNumbers) {
         long distinctCount = lottoNumbers.stream().distinct().count();
         if (distinctCount != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(String.format(DISTINCT_LOTTO_NUMBER_EXCEPTION_MESSAGE_FORMAT, lottoNumbers.toString()));
+            throw new IllegalArgumentException(String.format(DISTINCT_LOTTO_NUMBER_EXCEPTION_MESSAGE_FORMAT, lottoNumbers));
         }
     }
 
