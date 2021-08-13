@@ -76,8 +76,11 @@ public class Lotto {
 
   @Override
   public String toString() {
-    return this.lotto.stream().map(LottoNumber::toString)
-        .collect(Collectors.toList()).toString();
+    return this.lotto
+        .stream()
+        .map(LottoNumber::toString)
+        .collect(Collectors.toList())
+        .toString();
   }
 
 }
