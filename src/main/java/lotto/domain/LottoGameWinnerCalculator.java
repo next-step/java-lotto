@@ -6,8 +6,6 @@ import lotto.enumeration.LottoReward;
 
 public class LottoGameWinnerCalculator {
 
-    private final static int BONUS_NUMBER_CHECK_POINT = 5;
-
     private final LottoTicket winnerTicket;
     private final LottoNumber bonusBallNumber;
 
@@ -32,18 +30,14 @@ public class LottoGameWinnerCalculator {
     private LottoReward decideLottoReward(LottoTicket winnerTicket, LottoTicket playerTicket) {
 
         int matchedNumberCount = checkHowManyMatchedNumbers(winnerTicket, playerTicket);
-        boolean hasMatchedBonusNumber = checkBonusNumberMatch(playerTicket, matchedNumberCount);
+        boolean hasMatchedBonusNumber = checkBonusNumberMatch(playerTicket);
 
         return LottoReward.of(matchedNumberCount, hasMatchedBonusNumber);
     }
 
-    private boolean checkBonusNumberMatch(LottoTicket playerTicket, int matchedNumberCount) {
+    private boolean checkBonusNumberMatch(LottoTicket playerTicket) {
 
-        if (matchedNumberCount == BONUS_NUMBER_CHECK_POINT) {
-            return playerTicket.value().contains(bonusBallNumber);
-        }
-
-        return false;
+        return playerTicket.value().contains(bonusBallNumber);
     }
 
     private int checkHowManyMatchedNumbers(LottoTicket winnerTicket,
