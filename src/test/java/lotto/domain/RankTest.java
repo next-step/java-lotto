@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
     private static Stream<Arguments> 매칭되는_로또번호의_개수와_로또복권의_갯수와_보너스일치여부가_주어지면_당첨금을_알_수_있다() {
@@ -26,7 +26,7 @@ class RankTest {
         );
     }
 
-    private static Stream<Arguments> Rank_Enum클래스의_정적메소드_valueOf의_여러케이스가_주어지면_조건에_맞는_Rank변수를_반환한다() {
+    private static Stream<Arguments> Rank_Enum클래스의_정적메소드_valueOf의_입력값의_여러케이스가_주어지면_조건에_맞는_Rank변수를_반환한다() {
         return Stream.of(
             Arguments.of(6, false, Rank.FIRST),
             Arguments.of(5, true, Rank.SECOND),
@@ -41,7 +41,8 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource
-    void 매칭되는_로또번호의_개수와_로또복권의_갯수와_보너스일치여부가_주어지면_당첨금을_알_수_있다(int matchCount, int lottoCount, boolean matchBonus, long expected) {
+    void 매칭되는_로또번호의_개수와_로또복권의_갯수와_보너스일치여부가_주어지면_당첨금을_알_수_있다(int matchCount, int lottoCount, boolean matchBonus,
+        long expected) {
         Rank rank = Arrays.stream(Rank.values())
             .filter(e -> e == Rank.valueOf(matchCount, matchBonus))
             .findFirst()
@@ -58,4 +59,5 @@ class RankTest {
         (int countOfMatch, boolean matchBonus, Rank expected) {
         assertThat(Rank.valueOf(countOfMatch, matchBonus)).isEqualTo(expected);
     }
+
 }
