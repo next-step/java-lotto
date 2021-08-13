@@ -9,4 +9,6 @@ public class ErrorMessage {
 	public static final String NUMBER_POSITIVE_MESSAGE = "금액은 0원 이하가 될수 없습니다.";
 	public static final String NUMBER_RANGE_MESSAGE = "로또번호는 1부터 45번까지 입니다.";
 	public static final String LOTTO_MACHINE_CREATE_MESSAGE = "로또기계 생성은 불가능 합니다.";
+	public static final String COUNT_POSITIVE_MESSAGE = "로또 수가 0 이하가 될수 없습니다.";
+	public static final String COUNT_OVER_MESSAGE = "수동 로또 수가 전체 금액을 초과하였습니다.";
 }

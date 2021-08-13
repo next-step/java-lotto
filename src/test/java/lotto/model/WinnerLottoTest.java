@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +13,9 @@ class WinnerLottoTest {
 
 	@Test
 	@DisplayName("당첨로또는 추가 번호를 가지고 있다.")
-	public void createBonusNumber(){
+	public void createBonusNumber() {
 		Lotto lotto = new Lotto(getLotto());
-		WinnerLotto winnerLotto = new WinnerLotto(lotto,7);
+		WinnerLotto winnerLotto = new WinnerLotto(lotto, 7);
 		LottoNumber lottoBonusNumber = winnerLotto.getBonusNumber();
 
 		assertThat(lottoBonusNumber).isEqualTo(new LottoNumber(7));
@@ -22,10 +23,10 @@ class WinnerLottoTest {
 
 	@Test
 	@DisplayName("당첨로또는 추가 번호와 중복되면 예외가 발생된다..")
-	public void checkDuplicationNumber(){
+	public void checkDuplicationNumber() {
 		Lotto lotto = new Lotto(getLotto());
 		assertThrows(IllegalArgumentException.class, () ->
-			new WinnerLotto(lotto,1)
+			new WinnerLotto(lotto, 1)
 		);
 	}
 

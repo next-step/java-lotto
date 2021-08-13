@@ -20,10 +20,6 @@ class LottosTest {
 		Lottos result = new Lottos(lottos);
 
 		assertThat(result.getLottos().size()).isEqualTo(1);
-		List<LottoNumber> lottoNumbers = result.getLottos().get(0).getLottoNumbers();
-		for (LottoNumber lottoNumber : lottoNumbers) {
-			System.out.println(lottoNumber);
-		}
 		assertThat(result.getLottos().get(0).getLottoNumbers()).containsExactly(new LottoNumber(value1),
 			new LottoNumber(value2), new LottoNumber(value3), new LottoNumber(value4), new LottoNumber(value5),
 			new LottoNumber(value6));

@@ -1,19 +1,27 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import lotto.utils.LottoCountCalculator;
+import java.util.stream.Stream;
 
 public class LottoPurchase {
 
 	public static final int START_INCLUSIVE = 0;
 
-	public static Lottos buyLottos(Money money) {
-		return new Lottos(
-			IntStream.range(START_INCLUSIVE, LottoCountCalculator.calculateLottoCount(money.getPurchaseMoney()))
-				.mapToObj(i -> LottoMachine.createLottoNumbers())
-				.collect(Collectors.toList()));
+	public static Lottos buyLottos(Payment payment, String[] manualLottos) {
+		return new Lottos(Stream.concat(purchaseManualLottos(manualLottos).stream(),
+			purchaseAutoLottos(payment.getAutoLottoCount()).stream()).collect(Collectors.toList()));
 	}
 
+	private static List<Lotto> purchaseAutoLottos(int autoLottoCount) {
+		return IntStream.range(START_INCLUSIVE, autoLottoCount)
+			.mapToObj(i -> LottoMachine.createLottoNumbers())
+			.collect(Collectors.toList());
+	}
+
+	private static List<Lotto> purchaseManualLottos(String[] manualLottos) {
+		return Arrays.stream(manualLottos).map(Lotto::new).collect(Collectors.toList());
+	}
 }

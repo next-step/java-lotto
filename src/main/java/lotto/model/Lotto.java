@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lotto.message.ErrorMessage;
@@ -30,10 +31,21 @@ public class Lotto {
 		return lottoNumbers;
 	}
 
-	private List<LottoNumber> toList(String winnerNumbers) {
-		return Arrays.stream(winnerNumbers.split(LAST_WIN_NUMBER_REGEX))
+	public boolean isNumberContain(LottoNumber lottoNumber){
+		return lottoNumbers.contains(lottoNumber);
+	}
+
+	public int findNumberContainsCount(List<LottoNumber> winnerNumbers){
+		return (int)winnerNumbers.stream().filter(lottoNumbers::contains).count();
+	}
+
+	private List<LottoNumber> toList(String lotto) {
+		List<LottoNumber> lottoNumbers = Arrays.stream(lotto.split(LAST_WIN_NUMBER_REGEX))
 			.map(s -> new LottoNumber(toInt(s)))
 			.collect(Collectors.toList());
+		checkLottoSize(lottoNumbers);
+		checkDuplicateNumber(lottoNumbers);
+		return lottoNumbers;
 	}
 
 	private int toInt(String winnerNumbers) {
@@ -63,5 +75,20 @@ public class Lotto {
 		if (lottoNumbers.isEmpty()) {
 			throw new IllegalArgumentException(ErrorMessage.EMPTY_ERROR_MESSAGE);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(getLottoNumbers(), lotto.getLottoNumbers());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getLottoNumbers());
 	}
 }
