@@ -36,25 +36,26 @@ public enum WinningRank {
     private static WinningRank findWinningRank(Lotto lotto, DrawNumbers drawNumbers) {
         Lotto winningNumbers = drawNumbers.getWinningNumbers();
         int matchedWinningNumberCount = lotto.findMatchedNumberCount(winningNumbers);
-        List<WinningRank> winningRanks = findBy(matchedWinningNumberCount);
+
+        LottoNumber bonusNumber = drawNumbers.getBonusNumber();
+        boolean containsBonusNumber = lotto.contains(bonusNumber);
+
+        return findBy(matchedWinningNumberCount, containsBonusNumber);
+    }
+
+    private static WinningRank findBy(int matchedWinningNumberCount, boolean containsBonusNumber) {
+        List<WinningRank> winningRanks = Arrays.stream(WinningRank.values())
+                .filter(winningRank -> winningRank.matchedWinningNumberCount == matchedWinningNumberCount)
+                .collect(toList());
 
         if (winningRanks.size() == SINGLE_WINNING_RANK_COUNT) {
             return winningRanks.get(FIRST_POSITION);
         }
 
-        LottoNumber bonusNumber = drawNumbers.getBonusNumber();
-        boolean containsBonusNumber = lotto.contains(bonusNumber);
-
         return winningRanks.stream()
                 .filter(winningRank -> winningRank.isBonusNumberMatchNecessary == containsBonusNumber)
                 .findAny()
                 .orElse(MISS);
-    }
-
-    private static List<WinningRank> findBy(int matchedWinningNumberCount) {
-        return Arrays.stream(WinningRank.values())
-                .filter(winningRank -> winningRank.matchedWinningNumberCount == matchedWinningNumberCount)
-                .collect(toList());
     }
 
     public int getMatchedWinningNumberCount() {
