@@ -23,10 +23,14 @@ public class AutoNumberMaker implements NumberMaker {
         }
     }
 
+    /**
+     * 주의사항 : TOTAL_NUMBERS.subList(0, 6) 를 직접 반환하게되면 같은 참조값에 값만 갱신된다.
+     *         그래서, 여러값들을 반환해도 다 같은 값을 가리키게 되기 때문에 주의가 필요하다.
+     */
     @Override
     public List<Integer> makeNumbers() {
         flushingTotalNumbers();
-        return TOTAL_NUMBERS.subList(0,6);
+        return new ArrayList<>(TOTAL_NUMBERS.subList(0, 6));
     }
 
     protected void flushingTotalNumbers(){
