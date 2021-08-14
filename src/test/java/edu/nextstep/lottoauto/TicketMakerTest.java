@@ -9,20 +9,21 @@ package edu.nextstep.lottoauto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketMakerTest {
 
     @Test
     void create() {
-        // given
-        int payment = 14_000;
-
-        // when
-        TicketMaker ticketMaker = TicketMaker.create();
+        // given, when
+        List<Integer> checkList = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            checkList.add(i);
+        }
 
         // then
-        Assertions.assertThat(ticketMaker.getPricePerOneTicket()).isEqualTo(1000);
+        Assertions.assertThat(TicketMaker.getTotalNumbers()).isEqualTo(checkList);
     }
 
     @Test
@@ -32,7 +33,7 @@ public class TicketMakerTest {
 
         // when
         TicketMaker ticketMaker = TicketMaker.create();
-        List<LottoTicket> lottoTickets = ticketMaker.makeTickets(payment);
+        List<List<Integer>> lottoTickets = ticketMaker.makeTickets(payment);
 
         // then
         Assertions.assertThat(lottoTickets.size()).isEqualTo(14);
