@@ -17,7 +17,7 @@ public class WinningStatisticsOutputView {
         for (Ranking ranking : Ranking.values()) {
             int expect = ranking.getExpect();
             int compensation = ranking.getCompensation();
-            System.out.printf(WINNING_STATISTICS_COMMENT, expect, compensation, lottoResults.getExpectedHits(expect));
+            System.out.printf(WINNING_STATISTICS_COMMENT, expect, compensation, lottoResults.getRankingHits(ranking));
         }
     }
 }

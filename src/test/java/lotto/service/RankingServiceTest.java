@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankingServiceTest {
 
     @Test
-    public void RankingService에서_몇개를_몇번맞췄는지_확인할_수_있다(){
+    public void RankingService에서_몇개를_몇번맞췄는지_확인할_수_있다() {
         //given
         RankingService service = new RankingService();
         //when
-        LottoResults lottoResults = service.calculateMatchHits(new WinningNumbers(
+        LottoResults lottoResults = service.calculateResults(new WinningNumbers(
                 new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
                         new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
                         new LottoNumber(6))), new LottoNumber(8)), initializeLottos(), new RankingCalculator());
@@ -25,7 +25,7 @@ public class RankingServiceTest {
 
     private LottoResults getExpected() {
         LottoResults expected = new LottoResults();
-        expected.addAll(new LottoResult(3, 3), new LottoResult(4, 0), new LottoResult(5, 1), new LottoResult(6, 0));
+        expected.addAll(new LottoResult(Ranking.FIFTH, 3), new LottoResult(Ranking.FOURTH, 0), new LottoResult(Ranking.THIRD, 0), new LottoResult(Ranking.SECOND, 1), new LottoResult(Ranking.FIRST, 0));
         return expected;
     }
 

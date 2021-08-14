@@ -19,23 +19,9 @@ public class RankingCalculatorTest {
                 new LottoNumber(6)));
         LottoTickets lottoTickets = initializeLottos();
         //when
-        LottoResult lottoResult= calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(8)), lottoTickets, 3);
+        LottoResult lottoResult= calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(8)), lottoTickets, Ranking.FIFTH);
         //then
-        assertThat(lottoResult).isEqualTo(new LottoResult(3, 3));
-    }
-
-    @Test
-    public void 지난주_당첨번호와_구매한_로또목록이_존재할_때_일치하는_갯수가_없다면_결과는_0이다() {
-        //given
-        RankingCalculator calculator = new RankingCalculator();
-        List<LottoNumber> lastWeekWinning = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
-                new LottoNumber(6)));
-        LottoTickets lottoTickets = initializeLottos();
-        //when
-        LottoResult lottoResult = calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(9)), lottoTickets, 1);
-        //then
-        assertThat(lottoResult).isEqualTo(new LottoResult(1, 0));
+        assertThat(lottoResult).isEqualTo(new LottoResult(Ranking.FIFTH, 3));
     }
 
     private LottoTickets initializeLottos() {

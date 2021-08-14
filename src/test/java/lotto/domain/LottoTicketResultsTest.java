@@ -12,10 +12,10 @@ class LottoTicketResultsTest {
         //given
         LottoResults lottoResults = new LottoResults();
         lottoResults.addAll(
-                new LottoResult(3, 3),  // 15000
-                new LottoResult(4, 1),  // 50000
-                new LottoResult(5, 0),  // 1500000
-                new LottoResult(6, 0)
+                new LottoResult(Ranking.FIFTH, 3),  // 15000
+                new LottoResult(Ranking.FOURTH, 1),  // 50000
+                new LottoResult(Ranking.THIRD, 0),  // 1500000
+                new LottoResult(Ranking.SECOND, 0)
         );
         //when
         double earningLate = lottoResults.getEarningLate(100000);

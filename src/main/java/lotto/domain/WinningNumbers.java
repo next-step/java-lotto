@@ -9,6 +9,7 @@ public class WinningNumbers{
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        validateWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -38,5 +39,9 @@ public class WinningNumbers{
 
     public boolean contains(LottoNumber element) {
         return winningNumbers.contains(element);
+    }
+
+    public boolean containsBonusNumber(LottoNumber lottoNumber) {
+        return bonusNumber.equals(lottoNumber);
     }
 }

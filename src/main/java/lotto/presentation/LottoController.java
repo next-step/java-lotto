@@ -28,7 +28,7 @@ public class LottoController {
 
     private LottoResults calculateAndGetLottoResults(LottoTickets lottoTickets) {
         RankingService rankingService = new RankingService();
-        return rankingService.calculateMatchHits(getLastWeekWinningNumbers(), lottoTickets, new RankingCalculator());
+        return rankingService.calculateResults(getLastWeekWinningNumbers(), lottoTickets, new RankingCalculator());
     }
 
     private void outputLottoResults(LottoResults lottoResults) {

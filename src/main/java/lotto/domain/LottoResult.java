@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoResult {
-    private final int expect;
-    private final int hits;
 
-    public LottoResult(int expect, int hits) {
-        this.expect = expect;
+    private final Ranking ranking;
+    private final int hits;
+    public LottoResult(Ranking ranking, int hits) {
+        this.ranking = ranking;
         this.hits = hits;
     }
 
-    public boolean expectEquals(int expect) {
-        return this.expect == expect;
+    public boolean rankingEquals(Ranking ranking) {
+        return this.ranking == ranking;
     }
 
     public int getHits(){
@@ -20,19 +20,19 @@ public class LottoResult {
     }
 
     public int calculateCompensation(){
-        return Ranking.getCompensationBy(expect) * hits;
+        return ranking.getCompensation() * hits;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoResult lottoResult = (LottoResult) o;
-        return expect == lottoResult.expect && hits == lottoResult.hits;
+        LottoResult that = (LottoResult) o;
+        return hits == that.hits && ranking == that.ranking;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(expect, hits);
+        return Objects.hash(ranking, hits);
     }
 }

@@ -17,8 +17,8 @@ public class LottoResults {
         this.elements.addAll(Arrays.asList(lottoResults));
     }
 
-    public int getExpectedHits(int expect) {
-        return elements.stream().filter(lottoResult -> lottoResult.expectEquals(expect))
+    public int getRankingHits(Ranking ranking) {
+        return elements.stream().filter(lottoResult -> lottoResult.rankingEquals(ranking))
                 .map(LottoResult::getHits)
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("예상 갯수에 맞는 맞춘 로또 수를 가져올 수 없습니다."));

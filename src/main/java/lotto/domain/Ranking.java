@@ -1,28 +1,39 @@
 package lotto.domain;
 
-import java.util.stream.Stream;
-
 public enum Ranking {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
+    FIFTH(3, 5_000) ,
     FOURTH(4, 50000),
-    FIFTH(3, 5000);
+    THIRD(5, 1_500_000) {
+        @Override
+        public boolean isEqualTo(int matchCount, boolean hasBonusNumber) {
+            return matchCount == getExpect() && !hasBonusNumber;
+        }
+    },
+    SECOND(5, 30_000_000) {
+        @Override
+        public boolean isEqualTo(int matchCount, boolean hasBonusNumber) {
+            return matchCount == getExpect() && hasBonusNumber;
+        }
+    },
+    FIRST(6, 2_000_000_000);
 
     private static final int MIN_EXPECT = 1;
 
     private static final int MAX_EXPECT = 6;
-
-    private static final int UNPAID = 0;
 
     private final int expect;
 
     private final int compensation;
 
     Ranking(int expect, int compensation) {
+        validateExpect(expect);
         this.expect = expect;
         this.compensation = compensation;
+    }
+
+    public boolean isEqualTo(int matchCount, boolean hasBonusNumber) {
+        return matchCount == getExpect();
     }
 
     public int getExpect() {
@@ -31,19 +42,6 @@ public enum Ranking {
 
     public int getCompensation() {
         return compensation;
-    }
-
-    public static int getCompensationBy(int expect) {
-        validateExpect(expect);
-        return getCompensationIfExpectMatchOverThree(expect);
-    }
-
-    private static Integer getCompensationIfExpectMatchOverThree(int expect) {
-        return Stream.of(values())
-                .filter(ranking -> ranking.expect == expect)
-                .map(ranking -> ranking.compensation)
-                .findAny()
-                .orElse(UNPAID);
     }
 
     private static void validateExpect(int expect) {
