@@ -3,23 +3,21 @@ package step2.model;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, false, 2_000_000_000, "6개 일치 (2000000000원)"),
-    SECOND(5,true,  30_000_000, "5개 일치, 보너스 볼 일치(30000000원)"),
-    THIRD(5, false, 15_000_000, "5개 일치 (1500000원)"),
-    FOURTH(4,false,  50000, "4개 일치 (50000원)"),
-    FIFTH(3, false, 5000, "3개 일치 (5000원)"),
-    MISS(0, false, 0, "불일");
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5,true,  30_000_000),
+    THIRD(5, false, 15_000_000),
+    FOURTH(4,false,  50000),
+    FIFTH(3, false, 5000),
+    MISS(0, false, 0);
 
     private int countOfMatch;
     private boolean isBonus;
     private int winningPrice;
-    private String message;
 
-    Rank(int countOfMatch, boolean isBonus, int winningPrice, String message) {
+    Rank(int countOfMatch, boolean isBonus, int winningPrice) {
         this.countOfMatch = countOfMatch;
         this.isBonus = isBonus;
         this.winningPrice = winningPrice;
-        this.message = message;
     }
 
     public int getCountOfMatch() {
@@ -28,10 +26,6 @@ public enum Rank {
 
     public int getWinningPrice() {
         return winningPrice;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public boolean getBonus() {

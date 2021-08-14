@@ -26,8 +26,17 @@ public class ResultView {
     }
 
     private void getMessage(Map<Rank, Integer> result, Rank rank) {
-        if (!rank.equals(rank.MISS)) {
-            System.out.println(rank.getMessage() + "-" + result.get(rank) + "개");
+        int countOfMatch = rank.getCountOfMatch();
+        int winningPrice = rank.getWinningPrice();
+
+        if (rank.equals(rank.SECOND)) {
+            System.out.println(countOfMatch + "개 일치, 보너스 볼 일 (" + winningPrice + ")-" + result.get(rank) + "개");
+            return;
         }
+
+        if (!rank.equals(rank.MISS)) {
+            System.out.println(countOfMatch + "개 일치 (" + winningPrice + ")-" + result.get(rank) + "개");
+        }
+
     }
 }
