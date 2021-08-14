@@ -69,7 +69,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또번호 유효성 검사 Exception 발생")
     void lottoValidationExceptionTest() {
-        int[] lottoNumbers = {1, 2, 3, 43, 44};
+        String[] lottoNumbers = {"1", "2", "3", "43", "44"};
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)

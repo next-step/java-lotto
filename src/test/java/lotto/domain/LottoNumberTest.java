@@ -37,9 +37,19 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("로또숫자가 최대값 보다 높을 떄 예외처리")
-    void lottoNumberGreaterTHenMaximumException() {
+    void lottoNumberGreaterThenMaximumException() {
         assertThatThrownBy(() -> new LottoNumber(LottoNumber.MAX_NUMBER + 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("cannot be greater than " + LottoNumber.MAX_NUMBER);
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자를 입력했을 경우 예외처리")
+    void lottoNumberNotIntegerException() {
+        String given = "A";
+
+        assertThatThrownBy(() -> new LottoNumber(given))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("invalid string input: " + given);
     }
 }

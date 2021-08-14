@@ -25,6 +25,15 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoTicket(final String... lottoNumberArgs) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArgs)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        validateLottoTicketSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("different number size");

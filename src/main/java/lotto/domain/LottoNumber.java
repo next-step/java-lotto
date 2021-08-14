@@ -18,11 +18,24 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(final int number) {
-        validateNumberRange(number);
         this.number = number;
+        validateNumberRange();
     }
 
-    private void validateNumberRange(int number) {
+    public LottoNumber(final String stringNumber) {
+        this.number = parseInt(stringNumber);
+        validateNumberRange();
+    }
+
+    private int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("invalid string input: " + number);
+        }
+    }
+
+    private void validateNumberRange() {
         if (number < MIN_NUMBER) {
             throw new IllegalArgumentException("cannot be less than " + MIN_NUMBER);
         }
