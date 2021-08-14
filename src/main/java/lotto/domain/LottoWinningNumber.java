@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoWinner {
+public class LottoWinningNumber {
 
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private final List<Integer> winningNumbers = new ArrayList<>();
 
     public void selectWinningNumbers(final String winningNumbersString) {
         String[] numbers = winningNumbersString.split(",");
@@ -15,7 +15,8 @@ public class LottoWinner {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<Integer> getWinningNumber() {
         return winningNumbers;
     }
+
 }

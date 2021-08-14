@@ -23,4 +23,15 @@ public class LottoGame {
     public int getTicketNum() {
         return tickets.size();
     }
+
+    public void checkResult(final List<Integer> winningNumber) {
+        for (LottoTicket lottoTicket : tickets) {
+            lottoTicket.checkResult(winningNumber);
+        }
+    }
+
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
 }
