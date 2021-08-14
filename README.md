@@ -108,3 +108,8 @@
 - TicketManager
     - 필드 : `List<Ticket> tickets`, `Map<Prize, Integer> winningResult`
     - 기능 : tickets 생성, 당첨 여부 입력
+- TicketMaker (interface)
+    - 기능 : ticket 생성(추상 메서드)
+- RandomTicketMaker
+    - 필드 : `List<Integer> totalNumbers`
+    - 기능 : 번호가 무작위인 ticket 생성
