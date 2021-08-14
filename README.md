@@ -108,8 +108,8 @@
 - TicketManager
     - 필드 : `List<Ticket> tickets`, `Map<Prize, Integer> winningResult`
     - 기능 : tickets 생성, 당첨 여부 입력
-- TicketMaker (interface)
-    - 기능 : ticket 생성(추상 메서드)
-- AutoTicketMaker
+- NumberMaker (interface)
+    - 기능 : ticket 에 들어갈 숫자 생성(추상 메서드)
+- AutoNumberMaker
     - 필드 : `List<Integer> totalNumbers`
-    - 기능 : 번호가 무작위인 ticket 생성
+    - 기능 : 번호가 무작위인 ticket 에 들어갈 숫자 생성
