@@ -17,6 +17,10 @@ public enum Rank {
         this.winningBonus = winningBonus;
     }
 
+    public int getWinningBonus() {
+        return winningBonus;
+    }
+
     public static Rank of(int count) {
         if (count < THIRD.match) {
             return MISS;

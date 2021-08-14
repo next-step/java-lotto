@@ -22,7 +22,7 @@ class WinningIdentifierTest {
         winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         winningIdentifier = new WinningIdentifier(winningTicket);
         lottoTickets = Arrays.asList(
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),   // 6
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)),   // 5
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 9)),   // 4
                 new LottoTicket(Arrays.asList(1, 2, 3, 4, 7, 8)),   // 4
                 new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9)),   // 3
@@ -69,12 +69,34 @@ class WinningIdentifierTest {
     void 여러개_로또당첨_결과_한번에_확인() {
         WinningReport report = winningIdentifier.checkTicketsWinning(lottoTickets);
         assertAll(
-                () -> assertThat(report.getStatistics().get(Rank.SIXTH)).isEqualTo(1),
-                () -> assertThat(report.getStatistics().get(Rank.FIFTH)).isEqualTo(0),
+                () -> assertThat(report.getStatistics().get(Rank.SIXTH)).isEqualTo(0),
+                () -> assertThat(report.getStatistics().get(Rank.FIFTH)).isEqualTo(1),
                 () -> assertThat(report.getStatistics().get(Rank.FOURTH)).isEqualTo(2),
                 () -> assertThat(report.getStatistics().get(Rank.THIRD)).isEqualTo(1),
                 () -> assertThat(report.getStatistics().get(Rank.MISS)).isEqualTo(1)
         );
     }
+
+    @Test
+    void 로또당첨_1이하_수익률계산() {
+        lottoTickets = Arrays.asList(
+                new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 10, 11, 12))
+        );
+
+        WinningReport winningReport = winningIdentifier.checkTicketsWinning(lottoTickets);
+        assertThat(winningReport.getProfitRate()).isEqualTo(0.83);
+    }
+
+    @Test
+    void 로또당첨_1이상_수익률계산() {
+        WinningReport winningReport = winningIdentifier.checkTicketsWinning(lottoTickets);
+        assertThat(winningReport.getProfitRate()).isEqualTo(321);
+    }
+
 
 }

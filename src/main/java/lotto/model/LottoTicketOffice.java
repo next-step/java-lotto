@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoTicketOffice {
 
-    private static final int PRICE = 1000;
+    public static final int PRICE = 1000;
     private static final int MAX = 45;
     private static final int MIN = 1;
     private final List<Integer> lottoNumber;
