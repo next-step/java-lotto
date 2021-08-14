@@ -4,17 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoGenerator implements LottoGenerator {
+public final class ManualLottoGenerator implements LottoGenerator {
 
     private static final String SEPARATOR = ",";
 
     private final String[] lottoNumbers;
 
-    public ManualLottoGenerator(String lottoNumbers) {
+    public ManualLottoGenerator(final String lottoNumbers) {
         this.lottoNumbers = lottoNumbers.split(SEPARATOR);
     }
 
-    public ManualLottoGenerator(String... lottoNumbers) {
+    public ManualLottoGenerator(final String... lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

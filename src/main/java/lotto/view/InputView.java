@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -37,8 +36,13 @@ public class InputView {
     }
 
     public String[] getManualLottoNumbers(long manualLottoCount) {
+        String[] lottoNumbers = new String[(int) manualLottoCount];
+
+        if (manualLottoCount < 1) {
+            return lottoNumbers;
+        }
+
         System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_NUMBER);
-        String[] lottoNumbers = new String[(int)manualLottoCount];
         for (int i = 0; i < manualLottoCount; i++) {
             String input = scanner.nextLine();
             lottoNumbers[i] = input;

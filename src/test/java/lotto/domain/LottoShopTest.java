@@ -43,10 +43,9 @@ public class LottoShopTest {
         // when
         LottoTickets lottoTickets = lottoShop.buy(2000, "1,2,3,4,5,6");
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        boolean actual = lottoTicketList.contains(new LottoTicket("1", "2", "3", "4", "5", "6"));
 
         // then
-        assertThat(actual).isTrue();
+        assertThat(lottoTicketList).contains(new LottoTicket("1", "2", "3", "4", "5", "6"));
     }
 
     @Test

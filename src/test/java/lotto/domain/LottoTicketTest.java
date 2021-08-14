@@ -28,7 +28,6 @@ class LottoTicketTest {
                 Arguments.of(new int[]{1, 2, 42, 43, 44, 45}, LottoRank.NO_PLACE, 2),
                 Arguments.of(new int[]{1, 41, 42, 43, 44, 45}, LottoRank.NO_PLACE, 1),
                 Arguments.of(new int[]{40, 41, 42, 43, 44, 45}, LottoRank.NO_PLACE, 0)
-
         );
     }
 

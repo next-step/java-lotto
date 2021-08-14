@@ -23,11 +23,11 @@ public final class LottoTickets {
         return new LottoStatistic(lottoStatistic);
     }
 
-    public void add(LottoTicket lottoTicket) {
+    public void add(final LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
     }
 
-    public void addAll(List<LottoTicket> lottoTickets) {
+    public void addAll(final List<LottoTicket> lottoTickets) {
         this.lottoTickets.addAll(lottoTickets);
     }
 
@@ -38,6 +38,4 @@ public final class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
-
-
 }
