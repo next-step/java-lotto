@@ -23,7 +23,7 @@ public class LottoResult {
   }
 
   public static LottoResult getResult(final WinLottoInfo winLottoInfo, final Lotteries lotteries) {
-    return new LottoResult(Collections.unmodifiableMap(getCountByRank(winLottoInfo, lotteries, createRankByMap())));
+    return new LottoResult(Collections.unmodifiableMap(getCountByRank(winLottoInfo, lotteries)));
   }
 
   public static Map<Rank, Integer> createRankByMap() {
@@ -32,10 +32,9 @@ public class LottoResult {
   }
 
   private static Map<Rank, Integer> getCountByRank(final WinLottoInfo winLottoInfo,
-      final Lotteries lotteries,
-      final Map<Rank, Integer> result) {
+      final Lotteries lotteries) {
 
-    return Lotteries.matchLottosForRank(lotteries, winLottoInfo, result);
+    return Lotteries.matchLottosForRank(lotteries, winLottoInfo);
   }
 
   private static List<Rank> creatRankInfo() {

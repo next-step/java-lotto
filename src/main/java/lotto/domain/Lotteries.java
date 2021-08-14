@@ -16,8 +16,10 @@ public class Lotteries {
     this.lottos = Collections.unmodifiableList(lottos);
   }
 
-  public static Map<Rank, Integer> matchLottosForRank(final Lotteries lotteries,
-      final WinLottoInfo winLottoInfo, final Map<Rank, Integer> result) {
+  public static Map<Rank, Integer> matchLottosForRank(final Lotteries lotteries, final WinLottoInfo winLottoInfo) {
+
+    Map<Rank, Integer> result = LottoResult.createRankByMap();
+
     lotteries.lottos.forEach(
         lotto -> result.computeIfPresent(winLottoInfo.getMatchCountForRank(lotto),
             (rank, integer) -> integer + COUNT));
