@@ -11,8 +11,11 @@ public class LottoTicket {
     private static final String SIZE_ERROR_MSG = "6개의 번호가 필요합니다.";
     private static final String DUPLICATE_ERROR_MSG = "번호는 중복되면 안됩니다.";
 
+    private final List<Integer> numbers;
+
     public LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
+        this.numbers = numbers;
     }
 
     private void validateNumbers(List<Integer> numbers) {
@@ -42,4 +45,13 @@ public class LottoTicket {
     }
 
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public long compareTicket(LottoTicket winningTicket) {
+        return numbers.stream()
+                .filter(winningTicket::contains)
+                .count();
+    }
 }
