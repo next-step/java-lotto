@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package edu.nextstep.stringaddcalculator;
 
 import org.junit.jupiter.api.Test;
 

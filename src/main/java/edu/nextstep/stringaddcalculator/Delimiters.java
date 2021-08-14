@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package edu.nextstep.stringaddcalculator;
 
 public class Delimiters {
 

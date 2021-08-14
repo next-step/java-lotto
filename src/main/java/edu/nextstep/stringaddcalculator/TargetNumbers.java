@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package edu.nextstep.stringaddcalculator;
 
 import java.util.ArrayList;
 import java.util.List;
