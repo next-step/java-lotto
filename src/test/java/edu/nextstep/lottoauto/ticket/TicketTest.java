@@ -28,7 +28,7 @@ class TicketTest {
         // given
         NumberMaker numberMaker = getCustomTicketMaker();
         Ticket ticket = Ticket.create(numberMaker);
-        WinningNumbers winningNumbers = WinningNumbers.from(new int[]{1, 2, 3, 4, 5, 6});
+        WinningNumbers winningNumbers = WinningNumbers.from("1, 2, 3, 4, 5, 6");
 
         // when
         ticket.checkAndUpdateWinningPrize(winningNumbers);
