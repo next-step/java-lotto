@@ -1,7 +1,5 @@
 package step2.model;
 
-import static step2.model.LottoValidator.*;
-
 public class PurchaseAmount {
     private int purchaseAmount;
     private int lottoCount;
@@ -30,6 +28,18 @@ public class PurchaseAmount {
         return lottoCount;
     }
 
+    private void isBlank(String amount) {
+        if (amount == null || amount.isEmpty()) {
+            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
+        }
+    }
+
+    private void isDigit(String amount) {
+        if (!amount.matches("[0-9]*")) {
+            throw new IllegalArgumentException("숫자를 입력해주세요");
+        }
+    }
+
     private void isOverMinAmount(String amount) {
         if (Integer.parseInt(amount) < MIN_AMOUNT) {
             throw new IllegalArgumentException("로또를 사기에 부족한 금액입니다. 1000원이상 입력해주세요.");
@@ -38,10 +48,8 @@ public class PurchaseAmount {
 
     private void isValid(String amount) {
         isBlank(amount);
-
         amount = amount.trim();
         isDigit(amount);
-
         isOverMinAmount(amount);
     }
 }
