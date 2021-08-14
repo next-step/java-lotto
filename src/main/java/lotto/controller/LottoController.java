@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotteries;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseCount;
@@ -22,7 +23,7 @@ public class LottoController {
     PurchaseCount purchaseCount = new PurchaseCount(lottoMoney,
         manualNumber);
 
-    Lotteries lotteries = Lotteries.createLottos(purchaseCount,
+    Lotteries lotteries = LottoMachine.createLottos(purchaseCount,
         InputView.inputStringValuesWithMessage(Message.MSG_INPUT_MANUAL_LOTTO, manualNumber));
 
     ResultView.drawCountOfBuyLotteries(purchaseCount);
