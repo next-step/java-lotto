@@ -1,17 +1,18 @@
 package lotto.domain;
 
+import lotto.common.NumberGenerator;
+
 import java.util.*;
 
 public class LottoMachine {
-    private final RandomNumGenerator randomNumGenerator = new RandomNumGenerator();
-
-    public Lotties createRandomLotties(Money money) {
-        List<Lotto> lotties = new ArrayList<>();
+    public Lottos generateLottos(Money money, NumberGenerator numberGenerator) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for(int i = 0; i < money.getLottoCount(); i++) {
-            lotties.add(new Lotto(new LottoNumber(randomNumGenerator.generateNumber())));
+            lottos.add(new Lotto(numberGenerator));
         }
-        return new Lotties(lotties);
+
+        return new Lottos(lottos);
     }
 
 }
