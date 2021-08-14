@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class StringAdditionCalculator {
-    private static final String DEFAULT_DELIMITER_PATTERN = ",|:";
+    private static final String DEFAULT_DELIMITER_PATTERN = "[,:]";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
     private static final Pattern pattern = Pattern.compile("\\d+");
 
@@ -56,5 +56,5 @@ public class StringAdditionCalculator {
         }
 
         return splitWithCustomDelimiter(expression).sum();
-   }
+    }
 }
