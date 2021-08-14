@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Lottos {
+
     private List<Lotto> lottos;
     private Map<LottoResult, Integer> winningStatus;
 
@@ -23,10 +24,11 @@ public class Lottos {
         return lottos;
     }
 
-    public void checkLottosWinning(Lotto winningLotto) {
+    public void checkLottosWinning(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             int matchCount = lotto.getMatchCount(winningLotto);
-            LottoResult lottoResult = LottoResult.getLottoResult(matchCount);
+            boolean matchBonus = lotto.getMatchBonus(winningLotto);
+            LottoResult lottoResult = LottoResult.getLottoResult(matchCount, matchBonus);
             setWinningStatus(lottoResult);
         }
     }
