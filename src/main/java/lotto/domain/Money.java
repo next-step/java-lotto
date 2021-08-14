@@ -4,7 +4,7 @@ import lotto.exception.WrongMoneyExcpetion;
 
 public class Money {
 
-    final int amount;
+    private final int amount;
 
     public Money(int amount) {
         validate(amount);

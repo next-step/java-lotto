@@ -4,7 +4,12 @@ import lotto.exception.WrongTicketCountException;
 
 public class TicketCount {
 
+    private static final int DEFAULT_COUNT = 0;
     private final int ticketCount;
+
+    public TicketCount() {
+        this(DEFAULT_COUNT);
+    }
 
     public TicketCount(int ticketCount) {
         validate(ticketCount);
@@ -20,5 +25,9 @@ public class TicketCount {
 
     public int value() {
         return ticketCount;
+    }
+
+    public TicketCount minus(TicketCount anotherCount) {
+        return new TicketCount(ticketCount - anotherCount.value());
     }
 }
