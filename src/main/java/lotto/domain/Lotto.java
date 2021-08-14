@@ -26,20 +26,20 @@ public class Lotto {
         return lottoWinningPolicy.getWinningNumber();
     }
 
-    public void checkResult(){
+    public void checkResult() {
         lottoGame.checkResult(lottoWinningPolicy.getWinningNumber());
     }
 
-    public void setResult(){
+    public void setResult() {
         lottoWinningPolicy.setResult(lottoGame);
     }
 
-    public Map<LottoRank, Integer> getResult(){
+    public Map<LottoRank, Integer> getResult() {
         return lottoWinningPolicy.getResult();
     }
 
-    public double getProfitRate(){
-        return (double)lottoWinningPolicy.getPrice()/price;
+    public double getProfitRate() {
+        return (double) lottoWinningPolicy.getPrice() / price;
     }
 
     public LottoGame getLottoGame() {

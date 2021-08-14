@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoTicket {
 
     private final List<Integer> lottoNumbers;
-    private LottoRank lottoRank ;
+    private LottoRank lottoRank;
     private int collectNumber = 0;
 
     public LottoTicket() {
@@ -37,10 +37,6 @@ public class LottoTicket {
 
     public LottoRank getLottoRank() {
         return lottoRank;
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     public String getNumberString() {
