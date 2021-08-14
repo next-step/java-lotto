@@ -9,6 +9,7 @@ public class LottoTicket {
     private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
 
     private final List<Integer> lottoNumbers;
+    private int numberOfWinningNumber = 0;
 
     static{
         initTotalNumbers();
@@ -42,5 +43,12 @@ public class LottoTicket {
 
     public int size() {
         return lottoNumbers.size();
+    }
+
+    public int countIfContains(Integer winningNumber) {
+        if (lottoNumbers.contains(winningNumber)) {
+            return ++numberOfWinningNumber;
+        }
+        return numberOfWinningNumber;
     }
 }
