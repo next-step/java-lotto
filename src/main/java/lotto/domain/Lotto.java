@@ -75,4 +75,8 @@ public class Lotto {
 						.map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
 						.collect(Collectors.joining(", "));
 	}
+
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
+	}
 }
