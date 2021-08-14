@@ -1,22 +1,21 @@
 package step3.view;
 
+import step3.util.Rank;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ResultView {
-    static int[] charge = {0,0,0,5000,50000,1500000,2000000000};
+    private static final Double chargeOfLotto = 1000.0;
+    public void printMatchedLottoRecord(HashMap<Rank, Integer> matchedLottoRecordArray) {
 
-    public void printMatchedLottoRecord(int[] matchedLottoRecordArray, int numOfLotto) {
-        int totalRevenue = 0;
         System.out.println("당첨 통계");
         System.out.println("-------");
-        for (int i = 1; i <= 6; i++) {
-            System.out.printf("%s 개 일치 (%s) %s개\n",i,charge[i],matchedLottoRecordArray[i]);
-            totalRevenue += charge[i] * matchedLottoRecordArray[i];
-        }
-
-        double yield =  totalRevenue / (double)(numOfLotto * 1000);
-        printResultMessage(yield);
-
+        System.out.printf("3개 일치 (%s)- %s개\n",Rank.FIFTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIFTH));
+        System.out.printf("4개 일치 (%s)- %s개\n",Rank.FOURTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FOURTH));
+        System.out.printf("5개 일치 (%s)- %s개\n",Rank.THIRD.getWinningMoney(),matchedLottoRecordArray.get(Rank.THIRD));
+        System.out.printf("5개 일치 (%s)- %s개\n",Rank.SECOND.getWinningMoney(),matchedLottoRecordArray.get(Rank.SECOND));
+        System.out.printf("6개 일치 (%s)- %s개\n",Rank.FIRST.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIRST));
     }
 
     private void printResultMessage(double yield) {
@@ -34,5 +33,11 @@ public class ResultView {
     public void printIssuedLottoList(ArrayList<ArrayList<Integer>> issuedLottolist) {
         issuedLottolist.stream()
                 .forEach(issuedLotto -> System.out.println(issuedLotto));
+    }
+
+    public void printResultPrice(int resultPrice, int numOfLotto) {
+        Double totalSpendMoney = numOfLotto * chargeOfLotto;
+        Double yeild = resultPrice / totalSpendMoney;
+        printResultMessage(yeild);
     }
 }

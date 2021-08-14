@@ -9,6 +9,8 @@ import step3.view.ResultView;
 import java.util.ArrayList;
 
 public class LottoApp {
+    private static final int chargeOfLotto = 1000;
+
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
@@ -21,8 +23,10 @@ public class LottoApp {
         ArrayList<Integer> winningLottoNumberList = winningLottoNumbers.checkValidInput(inputView.requestWinningLottoNumber());
         int bonusBallNumber = inputView.requestBonusBall();
         BonusBall.copareWithWinningLottoNumbers(bonusBallNumber, winningLottoNumberList);
-        ArrayList<Integer> matchedResultList = customer.compareWinningLottoNumbersAndIssuedLottoList(winningLottoNumberList, issuedLottoList);
+        customer.compareWinningLottoNumbersAndIssuedLottoList(winningLottoNumberList, issuedLottoList, bonusBallNumber);
 
+        resultView.printMatchedLottoRecord(customer.getResultRankMap());
+        resultView.printResultPrice(customer.getResultPrize(), numOfLotto);
 
 
     }

@@ -1,6 +1,5 @@
 package step3.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMachineTest {
     @DisplayName("로또 발행 테스트: 발행한 로또는 6개의 번호를 가지고 있는가?")

@@ -35,8 +35,7 @@ class CustomerTest {
         list2.add(5);
         list2.add(6);
         Customer customer = new Customer();
-        int matchedNumber = customer.getMatchedNumber(list1, list2);
-        assertThat(matchedNumber).isEqualTo(2);
+        customer.getMatchedNumber(list1, list2,4);
 
     }
 }
