@@ -9,6 +9,7 @@ public class InputView {
 
     private static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구입 금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBERS_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INVALID_BLANK_STRING_MESSAGE = "공백은 입력이 불가합니다.";
 
     public static int inputPurchaseAmount() {
@@ -23,6 +24,12 @@ public class InputView {
             validateInputString(number);
         }
         return winningNumbers;
+    }
+
+    public static String inputBonusNumbers() {
+        String inputValue = getUserInputValue(INPUT_BONUS_NUMBERS_MESSAGE);
+        validateInputString(inputValue);
+        return inputValue;
     }
 
     private static String getUserInputValue(String message) {
