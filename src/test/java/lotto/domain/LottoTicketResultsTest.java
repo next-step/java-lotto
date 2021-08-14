@@ -15,11 +15,12 @@ class LottoTicketResultsTest {
                 new LottoResult(Ranking.FIFTH, 3),  // 15000
                 new LottoResult(Ranking.FOURTH, 1),  // 50000
                 new LottoResult(Ranking.THIRD, 0),  // 1500000
+                new LottoResult(Ranking.SECOND, 1),  // 30,000,000
                 new LottoResult(Ranking.SECOND, 0)
         );
         //when
         double earningLate = lottoResults.getEarningLate(100000);
         //then
-        assertThat(earningLate).isEqualTo(0.65);
+        assertThat(earningLate).isEqualTo(300.65);
     }
 }

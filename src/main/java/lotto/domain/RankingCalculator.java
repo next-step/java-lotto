@@ -44,7 +44,7 @@ public class RankingCalculator {
         return hits;
     }
 
-    private class MatchResult {
+    private static class MatchResult {
         private final int matchCount;
         private final boolean hasBonusNumber;
 
