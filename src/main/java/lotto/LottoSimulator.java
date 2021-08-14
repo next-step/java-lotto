@@ -41,7 +41,7 @@ public class LottoSimulator {
     private void run() {
         PurchaseQuantity purchaseQuantity = getPurchaseQuantity();
         LottoTicket lottoTicket = getLottoTicket(purchaseQuantity);
-        LottoNumbers winningLottoNumbers = getWinningLottoNumbers();
+        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
         outputView.printMatchResult(matchResult);
         outputView.printLotteryYield(purchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
@@ -60,8 +60,11 @@ public class LottoSimulator {
         return lottoTicket;
     }
 
-    private LottoNumbers getWinningLottoNumbers() {
+    private WinningLottoNumbers getWinningLottoNumbers() {
         outputView.printWinningLottoNumbersInputMessage();
-        return inputView.getWinningLottoNumbers();
+        LottoNumbers winningLottoNumbers =  inputView.getWinningLottoNumbers();
+        outputView.printBonusBallInputMessage();
+        LottoNumber bonusBall = inputView.getBonusBall();
+        return WinningLottoNumbers.of(winningLottoNumbers, bonusBall);
     }
 }

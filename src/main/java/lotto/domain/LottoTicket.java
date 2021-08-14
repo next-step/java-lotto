@@ -24,10 +24,10 @@ public class LottoTicket {
         lottoNumbersList.forEach(action);
     }
 
-    public MatchResult match(LottoNumbers winningLottoNumbers) {
+    public MatchResult match(WinningLottoNumbers winningLottoNumbers) {
         Map<Rank, Integer> matchesTotalMap = new HashMap<>();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            Rank rank = lottoNumbers.match(winningLottoNumbers);
+            Rank rank = winningLottoNumbers.match(lottoNumbers);
             int count = matchesTotalMap.getOrDefault(rank, INITIAL_MATCH_COUNT);
             matchesTotalMap.put(rank, ++count);
         }

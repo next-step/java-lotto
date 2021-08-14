@@ -17,7 +17,7 @@ class LottoTicketTest {
     @CsvSource(value = {"4,3,2,1", "0,0,0,0"})
     public void matchLottoNumbersTest(int threeMatches, int fourMatches, int fiveMatches, int sixMatches) {
         LottoTicket lottoTicket = createLottoTicket(threeMatches, fourMatches, fiveMatches, sixMatches);
-        LottoNumbers winningLottoNumbers = createLottoNumbers(1,2,3,4,5,6);
+        WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.of(createLottoNumbers(1,2,3,4,5,6), LottoNumber.of(7));
 
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
         assertThat(matchResult.countWinningLotteries(Rank.FIFTH)).isEqualTo(threeMatches);
