@@ -9,7 +9,7 @@ import lotto.domain.Rank;
 import lotto.domain.WinStatistics;
 
 public class ResultView {
-    private static final String OUTPUT_LOTTO_COUNT = "개를 구매했습니다.";
+    private static final String OUTPUT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계\n---------\n";
     private static final String OUTPUT_NORMAL_MATCH_CASE = "%d개 일치 (%d원) - %d개";
     private static final String OUTPUT_BONUS_MATCH_CASE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
@@ -24,16 +24,14 @@ public class ResultView {
         System.out.printf(format, args);
     }
 
-    public void outputLottoCount(int lottoCount) {
-        System.out.println(lottoCount + OUTPUT_LOTTO_COUNT);
+    public void outputLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf("\n" + OUTPUT_LOTTO_COUNT + "%n", manualLottoCount, autoLottoCount);
     }
 
-    public void outputLottoLotteries(List<LottoTicket> lottoTickets) {
-        int lottoCount = lottoTickets.size();
-        outputLottoCount(lottoCount);
-        for (LottoTicket lottoTicket : lottoTickets) {
-            outputLottoTickets(lottoTicket);
-        }
+    public void outputLottoLotteries(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+        outputLottoCount(manualLottoTickets.size(), autoLottoTickets.size());
+        manualLottoTickets.forEach(this::outputLottoTickets);
+        autoLottoTickets.forEach(this::outputLottoTickets);
     }
 
     public void outputLottoTickets(LottoTicket lottoTicket) {
@@ -45,7 +43,7 @@ public class ResultView {
             .collect(Collectors.joining(", ")) + "]");
     }
 
-    void outputPrizeStatistics(Rank rank, WinStatistics winStatistics) {
+    private void outputPrizeStatistics(Rank rank, WinStatistics winStatistics) {
         String prizeStatisticsFormat = OUTPUT_NORMAL_MATCH_CASE;
         if (rank == Rank.SECOND) {
             prizeStatisticsFormat = OUTPUT_BONUS_MATCH_CASE;
@@ -59,7 +57,7 @@ public class ResultView {
     }
 
     public void outputStatistics(WinStatistics winStatistics, float rateOfReturn) {
-        println(OUTPUT_STATISTICS_TITLE);
+        println("\n" + OUTPUT_STATISTICS_TITLE);
         Rank.getRankList()
             .forEach(rank -> outputPrizeStatistics(rank, winStatistics));
         printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
