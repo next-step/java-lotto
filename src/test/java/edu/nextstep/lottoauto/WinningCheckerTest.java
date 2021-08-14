@@ -37,14 +37,15 @@ public class WinningCheckerTest {
         lottoTickets.add(makeLottoTicket(new int[]{3, 4, 5, 6, 7, 8}));
         lottoTickets.add(makeLottoTicket(new int[]{4, 5, 6, 7, 8, 9}));
 
+
         // when
         WinningChecker winningChecker = WinningChecker.createOf(new int[]{1, 2, 3, 4, 5, 6});
-        Map<Map<Integer, Integer>, Integer> winningCheckResult = winningChecker.winningCheck(lottoTickets);
-        Map<Map<Integer, Integer>, Integer> checkResult = new HashMap<>();
-        checkResult.put(new HashMap<>(3, 5000), 1);
-        checkResult.put(new HashMap<>(4, 50000), 1);
-        checkResult.put(new HashMap<>(5, 1500000), 1);
-        checkResult.put(new HashMap<>(6, 2000000000), 1);
+        Map<WinningPrize, Integer> winningCheckResult = winningChecker.winningCheck(lottoTickets);
+        Map<WinningPrize, Integer> checkResult = new HashMap<>();
+        checkResult.put(WinningPrize.THREE, 1);
+        checkResult.put(WinningPrize.FOUR, 1);
+        checkResult.put(WinningPrize.FIVE, 1);
+        checkResult.put(WinningPrize.SIX, 1);
 
         // then
         Assertions.assertThat(winningCheckResult).isEqualTo(checkResult);
