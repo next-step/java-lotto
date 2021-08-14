@@ -25,7 +25,7 @@ class RevenueRecordTest {
 		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		Lotto winLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinLotto winLotto = WinLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 
 		RevenueRecord revenueRecord = new RevenueRecord(lottos);
 
@@ -46,7 +46,7 @@ class RevenueRecordTest {
 		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-		Lotto winLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+		WinLotto winLotto = WinLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 
 		RevenueRecord revenueRecord = new RevenueRecord(lottos);
 

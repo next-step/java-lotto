@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
 	NOTHING(0L, 0L),
-	FOURTH(3L, 5_000L),
-	THIRD(4L, 50_000L),
-	SECOND(5L, 1_500_000L),
+	FIFTH(3L, 5_000L),
+	FOURTH(4L, 50_000L),
+	THIRD(5L, 1_500_000L),
+	SECOND(5L, 30_000_000),
 	FIRST(6L, 2_000_000_000L);
 
 	private final long matchNumberCount;
@@ -17,11 +18,17 @@ public enum Rank {
 		this.reward = reward;
 	}
 
-	public static Rank of(long matchNumberCount) {
-		return Arrays.stream(Rank.values())
-					.filter(e -> e.matchNumberCount == matchNumberCount)
-					.findFirst()
-					.orElse(NOTHING);
+	public static Rank of(long matchNumberCount, boolean matchBonusNumber) {
+		Rank rank = Arrays.stream(Rank.values())
+						.filter(e -> e.matchNumberCount == matchNumberCount)
+						.findFirst()
+						.orElse(NOTHING);
+
+		if (matchNumberCount == 5L && matchBonusNumber) {
+			rank = Rank.SECOND;
+		}
+
+		return rank;
 	}
 
 	public long getReward() {

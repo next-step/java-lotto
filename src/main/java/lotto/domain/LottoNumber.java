@@ -9,11 +9,14 @@ import lotto.exception.LottoNumberValidationException;
 
 public class LottoNumber implements Comparable<LottoNumber>{
 
+	private static final int LOTTO_FIRST_NUMBER = 1;
+	private static final int LOTTO_LAST_NUMBER = 45;
+
 	private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 	private final int lottoNumber;
 
 	static {
-		IntStream.range(1, 46)
+		IntStream.rangeClosed(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER)
 			.boxed()
 			.forEach(v -> {
 				lottoNumberMap.put(v, new LottoNumber(v));
@@ -26,14 +29,16 @@ public class LottoNumber implements Comparable<LottoNumber>{
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void validate(int lottoNumber) {
-		if (lottoNumber > 45 ||
-			lottoNumber <= 0) {
+	private static void validate(int lottoNumber) {
+		if (lottoNumber > LOTTO_LAST_NUMBER ||
+			lottoNumber < LOTTO_FIRST_NUMBER) {
 			throw new LottoNumberValidationException("로또 번호가 잘못 되었습니다.");
 		}
 	}
 
 	public static LottoNumber valueOf(int lottoNumber) {
+		validate(lottoNumber);
+
 		return lottoNumberMap.get(lottoNumber);
 	}
 

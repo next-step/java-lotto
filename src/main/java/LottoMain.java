@@ -13,7 +13,7 @@ public class LottoMain {
 
 		ResultView.outputNewLine();
 
-		lottoController.winLotto(InputView.inputWinLottoNumbers());
+		lottoController.winLotto(InputView.inputWinLottoNumbers(), InputView.inputBonusNumber());
 
 		ResultView.outputNewLine();
 
