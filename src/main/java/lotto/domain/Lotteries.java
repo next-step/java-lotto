@@ -23,7 +23,7 @@ public class Lotteries {
     this.lottos = Collections.unmodifiableList(lottos);
   }
 
-  public static Map<Rank, Integer> MatchLottosForRank(final Lotteries lotteries,
+  public static Map<Rank, Integer> matchLottosForRank(final Lotteries lotteries,
       final WinLottoInfo winLottoInfo, final Map<Rank, Integer> result) {
     lotteries.lottos.forEach(
         lotto -> result.computeIfPresent(winLottoInfo.getMatchCountForRank(lotto),
@@ -31,11 +31,11 @@ public class Lotteries {
     return result;
   }
 
-  public static void toStringLottoInfo(final Lotteries lotteries) {
-    lotteries.lottos
+  public static List<String> toStringLottoInfo(final Lotteries lotteries) {
+    return lotteries.lottos
         .stream()
         .map(Lotto::toString)
-        .forEach(System.out::println);
+        .collect(Collectors.toList());
   }
 
   public static Lotteries createLottos(final PurchaseCount purchaseCount,
