@@ -28,6 +28,6 @@ class LottoTicketsTest {
     void 당첨_통계값이_14중_4등_당첨된_결과가_주어질_때_수익률이_0_35로_일치해야한다() {
         WinnerNumbers winnerNumbers = WinnerNumbers.from(LottoTicket.of(7, 8, 9, 41, 42, 43), LottoBall.select(44));
         winStatistics = WinStatistics.from(winnerNumbers, lottoTickets);
-        assertThat(lottoTickets.getRateOfReturn(14, winStatistics)).isEqualTo(0.35f);
+        assertThat(winStatistics.getRateOfReturn(14)).isEqualTo(0.35f);
     }
 }
