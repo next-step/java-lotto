@@ -2,7 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.PurchaseCount;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -19,11 +20,13 @@ public class InputView {
   }
 
   public static List<String> inputStringValuesWithMessage(String message,
-      final PurchaseCount purchaseCount) {
+      final int manualCount) {
 
     System.out.println(message);
 
     Scanner scanner = new Scanner(System.in);
-    return purchaseCount.createManualNumbers(scanner);
+    return IntStream.range(0, manualCount)
+        .mapToObj(number -> scanner.nextLine())
+        .collect(Collectors.toList());
   }
 }
