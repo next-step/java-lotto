@@ -24,12 +24,14 @@ public class Main {
         view.showLotto(lottoResult);
 
         input = inputView.ask("지난 주 당첨 번호를 입력해 주세요.");
+        String bonusNumber = inputView.ask("보너스 볼을 입력해 주세요.");
 
-        WinningNumber winningNumber = new WinningNumber();
-        List<Integer> winningNumbers = winningNumber.getWinningNumbers(input);
+        Bonus bonus = new Bonus(bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(input);
+        Winning winning = new Winning(winningNumber, bonus);
 
         WinningResult winningResult = new WinningResult();
-        Map<Integer, Integer> result = winningResult.getWinningResult(lottoResult, winningNumbers);
+        Map<Rank, Integer> result = winningResult.getResult(lottoGroup, winning);
         String winningRate = winningResult.getWinningRate(amount, result);
         view.showResult(result, winningRate);
 

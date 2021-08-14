@@ -75,101 +75,96 @@ public class AutoLottoTest {
     
     @Test
     public void 당첨번호_null_빈문자() {
-        //given
-        WinningNumber user = new WinningNumber();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers(""));
+                () -> new WinningNumber(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers(null));
+                () ->  new WinningNumber(null));
     }
 
     @Test
     public void 당첨번호_6개미만() {
-        //given
-        WinningNumber user = new WinningNumber();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers("1,2,3,4,5"));
+                () -> new WinningNumber("1,2,3,4,5"));
     }
 
     @Test
     public void 당첨번호_문자열() {
-        //given
-        WinningNumber user = new WinningNumber();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers("test;td,1,2,dl,kk"));
+                () -> new WinningNumber("test;td,1,2,dl,kk"));
     }
 
     @Test
     public void 당첨번호_중복() {
-        //given
-        WinningNumber user = new WinningNumber();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers("1,2,3,5,5,6"));
+                () ->  new WinningNumber("1,2,3,4,6,6"));
     }
 
     @Test
     public void 당첨번호_빈값() {
-        //given
-        WinningNumber user = new WinningNumber();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getWinningNumbers("1,2,3,5,5, "));
+                () -> new WinningNumber("1,2,3,4,5, "));
+    }
 
+    @Test
+    public void 당첨번호_범위_밖() {
+        //then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new WinningNumber("1,2,3,4,5,100"));
     }
 
     @Test
     public void 당첨번호() {
         //given
-        WinningNumber user = new WinningNumber();
+        WinningNumber user = new WinningNumber("1,2,3,4,5,6");
         List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
 
-        //when
-        List<Integer> winningNo = user.getWinningNumbers("1,2,3,4,5,6");
-
         //then
-        assertEquals(winningNo, expected);
+        assertEquals(user.getWinningNumbers(), expected);
     }
 
     @Test
-    public void 당첨확인() {
+    public void 당첨확인_보너스_포함() {
         //given
-        List<Integer> winningNoList = Arrays.asList(1,2,3,4,5,6);
-        List<List<Integer>> lottoList = new ArrayList<>();
-        lottoList.add(Arrays.asList(11,22,33,4,5,6)); //3개당첨
-        lottoList.add(Arrays.asList(11,22,3,4,5,6)); //4개당첨
-        lottoList.add(Arrays.asList(11,2,3,4,5,6)); //5개당첨
-        lottoList.add(Arrays.asList(1,2,3,4,5,6)); //6개당첨
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(11,22,33,4,5,6))); //5등
+        lottoList.add(new Lotto(Arrays.asList(11,22,3,4,5,6))); //4등
+        lottoList.add(new Lotto(Arrays.asList(11,2,3,4,5,6))); //3등
+        lottoList.add(new Lotto(Arrays.asList(7,2,3,4,5,6))); //2등
+        lottoList.add(new Lotto(Arrays.asList(1,2,3,4,5,6))); //1등
+        lottoList.add(new Lotto(Arrays.asList(8,9,10,11,12,13))); //MISS
+
+        LottoGroup lottoGroup = new LottoGroup(lottoList);
+
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        Bonus bonus = new Bonus("7");
+        Winning winning = new Winning(winningNumber, bonus);
 
         //when
         WinningResult lotto = new WinningResult();
-        Map<Integer, Integer> result = lotto.getWinningResult(lottoList, winningNoList);
+        Map<Rank, Integer> result = lotto.getResult(lottoGroup, winning);
 
         //then
-        assertThat(result.get(3)).isEqualTo(1);
-        assertThat(result.get(4)).isEqualTo(1);
-        assertThat(result.get(5)).isEqualTo(1);
-        assertThat(result.get(6)).isEqualTo(1);
+        for (Rank rank : Rank.values()) {
+            assertThat(result.get(rank)).isEqualTo(1);
+        }
     }
 
     @Test
     public void 수익률() {
         //given
         int amount = 14000;
-        Map<Integer, Integer> winningResult = new HashMap<>();
-        winningResult.put(3, 1);
-        winningResult.put(4, 0);
-        winningResult.put(5, 0);
-        winningResult.put(6, 0);
+        Map<Rank, Integer> winningResult = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            winningResult.put(rank, 0);
+
+        }
+        winningResult.put(Rank.FIFTH, 1);
 
         //when
         WinningResult lotto = new WinningResult();
@@ -177,6 +172,24 @@ public class AutoLottoTest {
 
         //then
         assertThat(rate).isEqualTo("0.35");
+    }
+
+    @Test
+    public void 보너스볼_당첨() {
+        //given
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        Bonus bonus = new Bonus("7");
+        Winning winning = new Winning(winningNumber, bonus);
+
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,7));
+        LottoGroup lottoGroup = new LottoGroup(Arrays.asList(lotto));
+
+        //when
+        WinningResult result = new WinningResult();
+        Map<Rank, Integer> winningResult = result.getResult(lottoGroup, winning);
+
+        //then
+        assertThat(winningResult.get(Rank.SECOND)).isEqualTo(1);
     }
 
 }

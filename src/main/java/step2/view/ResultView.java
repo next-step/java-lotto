@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.model.WinningRule;
+import step2.model.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -14,16 +14,20 @@ public class ResultView {
         System.out.println();
     }
 
-    public void showResult(Map<Integer, Integer> result, String winningRate) {
+    public void showResult(Map<Rank, Integer> result, String winningRate) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         
-        for (WinningRule rule : WinningRule.values()) {
-            int count = rule.getNumberCount();
-            int price = rule.getWinningPrice();
-            System.out.println(count + "개 일치 (" + price + "원)-" +result.get(count) +"개");
+        for (Rank rank : Rank.values()) {
+            getMessage(result, rank);
         }
         System.out.println("총 수익률은 "+ winningRate +"입니다.");
+    }
+
+    private void getMessage(Map<Rank, Integer> result, Rank rank) {
+        if (!rank.equals(rank.MISS)) {
+            System.out.println(rank.getMessage() + "-" + result.get(rank) + "개");
+        }
     }
 }

@@ -14,6 +14,14 @@ public class LottoGroup {
         }
     }
 
+    public LottoGroup(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
+    public List<Lotto> getLottoList() {
+        return lottoList;
+    }
+
     public List<List<Integer>> getLottoResult() {
         List<List<Integer>> result = new ArrayList<>();
 

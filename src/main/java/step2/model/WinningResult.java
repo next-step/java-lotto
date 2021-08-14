@@ -6,19 +6,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WinningResult {
-    private Map<Integer, Integer> result;
+    private Map<Rank, Integer> result;
 
     public WinningResult() {
         this.result = new HashMap<>();
-        for (WinningRule rule : WinningRule.values()) {
-            result.put(rule.getNumberCount(), 0);
+        for (Rank rule : Rank.values()) {
+            result.put(rule, 0);
         }
     }
 
-    private List<Integer> combineAll(List<Integer> winningNumberList, List<Integer> lotto) {
+    private List<Integer> combineAll(List<Integer> winningNumbers, List<Integer> lottoNumbers) {
         List<Integer> allNumbers = new ArrayList<>();
-        allNumbers.addAll(lotto);
-        allNumbers.addAll(winningNumberList);
+        allNumbers.addAll(winningNumbers);
+        allNumbers.addAll(lottoNumbers);
 
         return allNumbers;
     }
@@ -31,31 +31,35 @@ public class WinningResult {
         return duplicatedNumbers;
     }
 
-    public Map<Integer, Integer> getWinningResult(List<List<Integer>> lottoList, List<Integer> winningNumberList) {
-        for (List<Integer> lotto : lottoList) {
-            List<Integer> allNumbers = combineAll(winningNumberList, lotto);
-            Set<Integer> duplicatedNumbers = getDuplicatedNum(allNumbers);
+    private boolean isMatchBonus(List<Integer> matchNumbers, int bonus) {
+        return matchNumbers.contains(bonus);
+    }
 
-            saveWinningResult(result, duplicatedNumbers);
+    public Map<Rank, Integer> getResult(LottoGroup lottoGroup, Winning winning) {
+        for (Lotto lotto : lottoGroup.getLottoList()) {
+            List<Integer> allNumbers = combineAll(winning.getWinningNumber(), lotto.getLottoNumbers());
+            Set<Integer> matchNumbers = getDuplicatedNum(allNumbers);
+            boolean matchBonus = isMatchBonus(lotto.getLottoNumbers(), winning.getBonus());
+
+            saveWinningResult(result, matchNumbers, matchBonus);
         }
 
         return result;
     }
 
-    private void saveWinningResult(Map<Integer, Integer> result, Set<Integer> duplicatedNumbers) {
-        int winNumberCount = duplicatedNumbers.size();
-        if (result.containsKey(winNumberCount)) {
-            result.put(winNumberCount, result.get(winNumberCount)+1);
-        }
+    private void saveWinningResult(Map<Rank, Integer> result, Set<Integer> matchNumbers, boolean matchBonus) {
+        int countOfMatch = matchNumbers.size();
+        Rank rank = Rank.getRank(countOfMatch, matchBonus);
+        result.put(rank, result.get(rank)+1);
     }
 
 
-    public String getWinningRate(int amount, Map<Integer, Integer> winningResult) {
+    public String getWinningRate(int amount, Map<Rank, Integer> winningResult) {
         int totalWinPrice = 0;
 
-        for (WinningRule rule : WinningRule.values()) {
-            int winningCnt = winningResult.get(rule.getNumberCount());
-            totalWinPrice += rule.getWinningPrice() * winningCnt;
+        for (Rank rule : Rank.values()) {
+            int winningCount = winningResult.get(rule);
+            totalWinPrice += rule.getWinningPrice() * winningCount;
         }
 
         double result = (double) totalWinPrice / (double) amount;
