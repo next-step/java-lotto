@@ -1,24 +1,28 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningStatistics {
-    private final Map<Rank, Integer> winningStatistics;
+    private final Map<Rank, Long> winningStatistics;
 
-    public WinningStatistics(Map<Rank, Integer> rankMap) {
-        this.winningStatistics = new HashMap<>(rankMap);
-    }
+    public WinningStatistics(Lottos lottos, WinningLotto winningLotto) {
+        List<LottoMatch> lottoMatches = lottos.compareLottos(winningLotto);
 
-    public int getRankCount(Rank rank) {
-        if (validRankIsNull(rank)) {
-            return winningStatistics.get(rank);
+        Map<Rank, Long> rankMap = new HashMap<>();
+
+        for (LottoMatch lottoMatch : lottoMatches) {
+            rankMap.put(Rank.fromLottoMatch(lottoMatch), rankMap.getOrDefault(Rank.fromLottoMatch(lottoMatch), 0L) + 1);
         }
-        return 0;
+        winningStatistics = rankMap;
     }
 
-    private boolean validRankIsNull(Rank rank) {
-        return rank != null;
+    public Map<Rank, Long> getWinningStatistics() {
+        return winningStatistics;
     }
 
+    public Long getRankCount(Rank rank) {
+        return winningStatistics.getOrDefault(rank, 0L);
+    }
 }
