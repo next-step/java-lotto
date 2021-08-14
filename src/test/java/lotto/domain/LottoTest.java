@@ -14,4 +14,12 @@ class LottoTest {
         Lotto lotto = new Lotto(14000);
         assertThat(lotto.getGameNum()).isEqualTo(14);
     }
+
+    @DisplayName("당첨 번호를 선택하는 테스트")
+    @Test
+    void set_winning_numbers() {
+        Lotto lotto = new Lotto(1000);
+        lotto.setWinningNumbers("1, 2, 3, 4, 5, 6");
+        System.out.println(lotto.getLottoWinner());
+    }
 }
