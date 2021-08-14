@@ -1,37 +1,31 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public enum Rank {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    FIRST(new LottoMatch(6, false), 2_000_000_000),
+    SECOND(new LottoMatch(5, true), 1_500_000),
+    SECOND_BONUS(new LottoMatch(5, false), 1_500_000),
+    THIRD(new LottoMatch(4, false), 50_000),
+    FOURTH(new LottoMatch(3, false), 5000),
+    NO_RANK(new LottoMatch(0, false), 0);
 
-    private final int sameNumbersCount;
+    private final LottoMatch lottoMatch;
     private final int prizeMoney;
 
-    Rank(int sameNumbersCount, int prizeMoney) {
-        this.sameNumbersCount = sameNumbersCount;
+    Rank(LottoMatch lottoMatch, int prizeMoney) {
+        this.lottoMatch = lottoMatch;
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank getRank(long sameCount) {
+    public static Rank fromLottoMatch(LottoMatch lottoMatch) {
         return Arrays.stream(values())
-                .filter(RANK -> RANK.sameNumbersCount == sameCount)
+                .filter(rank -> rank.lottoMatch.equals(lottoMatch))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElse(Rank.NO_RANK);
     }
 
-    public int getSameNumbersCount() {
-        return sameNumbersCount;
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public LottoMatch getLottoMatch() {
+        return lottoMatch;
     }
 }

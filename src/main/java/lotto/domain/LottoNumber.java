@@ -1,25 +1,27 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.Random;
 
-public class LottoNumber {
-    private final List<Integer> lottoNumber;
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MAX_NUMBER = 45;
+    public static final Random RANDOM = new Random();
 
-    public LottoNumber(List<Integer> lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    private final int number;
+
+    public LottoNumber() {
+        number = RANDOM.nextInt(MAX_NUMBER);
     }
 
-    public List<Integer> getLottoNumber() {
-        return lottoNumber;
+    public LottoNumber(String manual) {
+        number = Integer.parseInt(manual);
     }
 
-    public Rank getRank(WinningNumbers winningNumber) {
-        long count = lottoNumber.stream()
-                .filter(integer -> winningNumber.getWinningNumbers()
-                        .stream()
-                        .anyMatch(Predicate.isEqual(integer)))
-                .count();
-        return Rank.getRank(count);
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        return number - lottoNumber.number;
     }
 }
