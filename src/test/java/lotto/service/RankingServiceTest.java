@@ -1,11 +1,6 @@
 package lotto.service;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoResults;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTickets;
-import lotto.domain.RankingCalculator;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,10 +15,10 @@ public class RankingServiceTest {
         //given
         RankingService service = new RankingService();
         //when
-        LottoResults lottoResults = service.calculateMatchHits(
+        LottoResults lottoResults = service.calculateMatchHits(new WinningNumbers(
                 new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
                         new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
-                        new LottoNumber(6))), initializeLottos(), new RankingCalculator());
+                        new LottoNumber(6))), new LottoNumber(8)), initializeLottos(), new RankingCalculator());
         //then
         assertThat(lottoResults).isEqualTo(getExpected());
     }

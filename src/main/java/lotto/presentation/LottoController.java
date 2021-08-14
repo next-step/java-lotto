@@ -3,6 +3,7 @@ package lotto.presentation;
 import lotto.domain.LottoResults;
 import lotto.common.WinningNumberParser;
 import lotto.domain.*;
+import lotto.presentation.input.BonusNumberInputView;
 import lotto.presentation.input.PurchaseAmountInputView;
 import lotto.presentation.input.WinningNumberInputView;
 import lotto.presentation.output.ChanceOutputView;
@@ -11,8 +12,6 @@ import lotto.presentation.output.LottosOutputView;
 import lotto.presentation.output.WinningStatisticsOutputView;
 import lotto.service.LottoService;
 import lotto.service.RankingService;
-
-import java.util.List;
 
 public class LottoController {
 
@@ -62,13 +61,18 @@ public class LottoController {
         outputView.output(lottoTickets);
     }
 
-    private List<LottoNumber> getLastWeekWinningNumbers() {
+    private WinningNumbers getLastWeekWinningNumbers() {
         WinningNumberParser parser = new WinningNumberParser();
-        return parser.parseToWinningNumbers(inputLastWeekWinningNumbers());
+        return new WinningNumbers(parser.parseToWinningNumbers(inputWinningNumbers()), inputBonusNumber());
     }
 
-    private String inputLastWeekWinningNumbers() {
+    private String inputWinningNumbers() {
         WinningNumberInputView inputView = new WinningNumberInputView();
+        return inputView.input();
+    }
+
+    private LottoNumber inputBonusNumber() {
+        BonusNumberInputView inputView = new BonusNumberInputView();
         return inputView.input();
     }
 

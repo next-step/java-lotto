@@ -4,10 +4,11 @@ import java.util.stream.Stream;
 
 public enum Ranking {
 
-    THREE_MATCHES(3, 5000),
-    FOUR_MATCHES(4, 50000),
-    FIVE_MATCHES(5, 1500000),
-    SIX_MATCHES(6, 2000000000);
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000);
 
     private static final int MIN_EXPECT = 1;
 
@@ -32,7 +33,7 @@ public enum Ranking {
         return compensation;
     }
 
-    public static int getCompensationBy(int expect){
+    public static int getCompensationBy(int expect) {
         validateExpect(expect);
         return getCompensationIfExpectMatchOverThree(expect);
     }
@@ -46,7 +47,7 @@ public enum Ranking {
     }
 
     private static void validateExpect(int expect) {
-        if (isOutOfRange(expect)){
+        if (isOutOfRange(expect)) {
             throw new IllegalArgumentException("예상 입력값이 잘못되었습니다.");
         }
     }

@@ -19,7 +19,7 @@ public class RankingCalculatorTest {
                 new LottoNumber(6)));
         LottoTickets lottoTickets = initializeLottos();
         //when
-        LottoResult lottoResult= calculator.calculate(lastWeekWinning, lottoTickets, 3);
+        LottoResult lottoResult= calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(8)), lottoTickets, 3);
         //then
         assertThat(lottoResult).isEqualTo(new LottoResult(3, 3));
     }
@@ -33,7 +33,7 @@ public class RankingCalculatorTest {
                 new LottoNumber(6)));
         LottoTickets lottoTickets = initializeLottos();
         //when
-        LottoResult lottoResult = calculator.calculate(lastWeekWinning, lottoTickets, 1);
+        LottoResult lottoResult = calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(9)), lottoTickets, 1);
         //then
         assertThat(lottoResult).isEqualTo(new LottoResult(1, 0));
     }
