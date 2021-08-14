@@ -1,9 +1,10 @@
 package step4.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Lottos {
+public class Lottos implements Iterable<Lotto> {
 
     private final List<Lotto> lottos;
 
@@ -43,4 +44,8 @@ public class Lottos {
         lottos.addAll(otherLottos.lottos);
     }
 
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lottos.iterator();
+    }
 }

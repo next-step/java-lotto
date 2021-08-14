@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class LottoMatch {
 
-    private static final Integer WIN_COUNT_ZERO = 0;
+    private static final int WIN_COUNT_ZERO = 0;
 
     private final Map<LottoRank, Integer> lottoMatch;
 
