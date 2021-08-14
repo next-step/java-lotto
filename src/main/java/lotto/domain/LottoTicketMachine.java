@@ -21,12 +21,12 @@ public class LottoTicketMachine {
         return way.issueLottoTickets(count, order);
     }
 
-    public List<LottoTicket> issueTicketsByAutoWay(TicketCount count, LottoPurchaseOrder order) {
-        return issueTickets(count, order, new AutoWay());
+    public AutoLottoTickets issueTicketsByAutoWay(TicketCount count, LottoPurchaseOrder order) {
+        return new AutoLottoTickets(issueTickets(count, order, new AutoWay()));
     }
 
-    public List<LottoTicket> issueTicketsByManualWay(TicketCount count, LottoPurchaseOrder order) {
-        return issueTickets(count, order, new ManualWay());
+    public ManualLottoTickets issueTicketsByManualWay(TicketCount count, LottoPurchaseOrder order) {
+        return new ManualLottoTickets(issueTickets(count, order, new ManualWay()));
     }
 
 }

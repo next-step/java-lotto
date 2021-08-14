@@ -6,33 +6,25 @@ import java.util.stream.Stream;
 
 public class LottoTicketBundle {
 
-    private final List<LottoTicket> autoTickets;
-    private final List<LottoTicket> manualTickets;
+    private final AutoLottoTickets autoLottoTickets;
+    private final ManualLottoTickets manualLottoTickets;
 
-    public LottoTicketBundle(List<LottoTicket> autoTickets,
-        List<LottoTicket> manualTickets) {
-        this.autoTickets = autoTickets;
-        this.manualTickets = manualTickets;
+    public LottoTicketBundle(AutoLottoTickets autoLottoTickets,
+        ManualLottoTickets manualLottoTickets) {
+        this.autoLottoTickets = autoLottoTickets;
+        this.manualLottoTickets = manualLottoTickets;
     }
 
-    public List<LottoTicket> getAutoTickets() {
-        return autoTickets;
+    public int getAutoTicketCount(){
+        return autoLottoTickets.getCount();
     }
 
-    public List<LottoTicket> getManualTickets() {
-        return manualTickets;
-    }
-
-    public int getAutoTicketCount() {
-        return autoTickets.size();
-    }
-
-    public int getManualTicketCount() {
-        return manualTickets.size();
+    public int getManualTicketCount(){
+        return manualLottoTickets.getCount();
     }
 
     public List<LottoTicket> getAllLottoTickets() {
-        return mergeTickets(autoTickets, manualTickets);
+        return mergeTickets(autoLottoTickets.value(), manualLottoTickets.value());
     }
 
     private List<LottoTicket> mergeTickets(List<LottoTicket>... tickets) {
@@ -40,5 +32,4 @@ public class LottoTicketBundle {
             .flatMap(e -> e.stream())
             .collect(Collectors.toList());
     }
-
 }
