@@ -8,7 +8,7 @@ public class LottoPurchaseOrder {
     private final int autoTicketCount;
     private final int[][] manualLottoNumbers;
 
-    public LottoPurchaseOrder(int money, int[][] manualLottoNumbers) {
+    public LottoPurchaseOrder(Money money, int[][] manualLottoNumbers) {
         checkMoneyAmount(money);
         this.money = money;
         this.autoTicketCount = getAutoTicketCount(money, getManualLottoTicketCount());

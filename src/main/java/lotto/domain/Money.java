@@ -16,4 +16,8 @@ public class Money {
             throw new WrongMoneyExcpetion(String.format("잘못된 금액입니다. [입력금액:%d]",amount));
         }
     }
+
+    public int value() {
+        return amount;
+    }
 }

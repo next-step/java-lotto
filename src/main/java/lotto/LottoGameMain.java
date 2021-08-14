@@ -7,6 +7,7 @@ import lotto.domain.LottoGameWinnerCalculator;
 import lotto.domain.LottoGameWinnerResult;
 import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.TicketCount;
 import lotto.domain.WinnerLottoInfo;
 import lotto.view.InputView;
@@ -18,7 +19,7 @@ public class LottoGameMain {
         InputView inputView = InputView.getInstance();
         OutputView outputView = OutputView.getInstance();
 
-        int moneyForGame = inputView.askMoneyAmount();
+        Money moneyForGame = new Money(inputView.askMoneyAmount());
         TicketCount manualCount = new TicketCount(inputView.askHowManyManualTicketing());
         int[][] manualTicketNumbers = inputView.askManualTicketNumbers(manualCount);
 
