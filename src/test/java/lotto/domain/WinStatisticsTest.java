@@ -28,11 +28,11 @@ class WinStatisticsTest {
     void 로또공들의_데이터가_주어질때_각_경우별로_1개씩_당첨되었을때_당첨_통계값이_일치해야한다() {
         WinnerNumbers winnerNumbers = WinnerNumbers.from(LottoTicket.of(1, 2, 3, 4, 5, 6), LottoBall.select(10));
         winStatistics = WinStatistics.from(winnerNumbers, lottoTickets);
-        assertThat(winStatistics.countByRank(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winStatistics.countByRank(Rank.FOURTH)).isEqualTo(1);
-        assertThat(winStatistics.countByRank(Rank.THIRD)).isEqualTo(1);
-        assertThat(winStatistics.countByRank(Rank.SECOND)).isEqualTo(1);
-        assertThat(winStatistics.countByRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(winStatistics.result().get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(winStatistics.result().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(winStatistics.result().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(winStatistics.result().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(winStatistics.result().get(Rank.FIRST)).isEqualTo(1);
     }
 
 }
