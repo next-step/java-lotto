@@ -10,7 +10,6 @@ public class InputView {
 
     public static int inputLottoPrice() {
         System.out.println(INPUT_MONEY_MESSAGE);
-
         return sc.nextInt();
     }
 
