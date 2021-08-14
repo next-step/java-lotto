@@ -54,7 +54,7 @@ class WinningLottoTicketTest {
     @DisplayName("주어진 로또티켓에 보너스 번호가 있는지 확인")
     void bonusTest(int bonusNumber, boolean expected) {
         // given
-        LottoTicket lottoTicket = new LottoTicket(new int[]{1, 2, 3, 4, 5, 7});
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 7);
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers, bonusNumber);
 
         // when
