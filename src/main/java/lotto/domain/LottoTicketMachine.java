@@ -16,7 +16,7 @@ public class LottoTicketMachine {
         return instance;
     }
 
-    public List<LottoTicket> issueTickets(TicketCount count, LottoPurchaseOrder order,
+    private List<LottoTicket> issueTickets(TicketCount count, LottoPurchaseOrder order,
         LottoTicketingWay way) {
         return way.issueLottoTickets(count, order);
     }
