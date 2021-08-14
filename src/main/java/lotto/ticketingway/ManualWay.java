@@ -9,7 +9,7 @@ import lotto.domain.TicketCount;
 public class ManualWay implements LottoTicketingWay {
 
     @Override
-    public List<LottoTicket> issueLottoTickets(TicketCount lottoTicketCount,
+    public List<LottoTicket> issueLottoTickets(TicketCount ticketCount,
         LottoPurchaseOrder order) {
 
         List<LottoTicket> tickets = new ArrayList<>();

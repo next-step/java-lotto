@@ -21,8 +21,8 @@ public class LottoTicketMachine {
         return way.issueLottoTickets(count, order);
     }
 
-    public AutoLottoTickets issueTicketsByAutoWay(TicketCount count, LottoPurchaseOrder order) {
-        return new AutoLottoTickets(issueTickets(count, order, new AutoWay()));
+    public AutoLottoTickets issueTicketsByAutoWay(TicketCount count) {
+        return new AutoLottoTickets(issueTickets(count, null, new AutoWay()));
     }
 
     public ManualLottoTickets issueTicketsByManualWay(TicketCount count, LottoPurchaseOrder order) {

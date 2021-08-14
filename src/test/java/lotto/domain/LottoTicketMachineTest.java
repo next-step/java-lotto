@@ -10,11 +10,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTicketMachineTest {
 
+    LottoTicketMachine machine = LottoTicketMachine.getInstance();
+
     @ParameterizedTest
     @MethodSource("provideOrderInfo")
     @DisplayName("입력한 개수만큼 수동로또티켓을 발행할수 있다.")
     void manual_ticket_creation(TicketCount count, LottoPurchaseOrder order, int expectedCount) {
-        LottoTicketMachine machine = LottoTicketMachine.getInstance();
         ManualLottoTickets manualTickets = machine.issueTicketsByManualWay(count, order);
         assertThat(manualTickets.getCount()).isEqualTo(expectedCount);
     }
@@ -23,8 +24,7 @@ class LottoTicketMachineTest {
     @MethodSource("provideOrderInfo")
     @DisplayName("입력한 개수만큼 자동로또티켓을 발행할수 있다.")
     void auto_ticket_creation(TicketCount count, LottoPurchaseOrder order, int expectedCount) {
-        LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        AutoLottoTickets autoTickets = machine.issueTicketsByAutoWay(count, order);
+        AutoLottoTickets autoTickets = machine.issueTicketsByAutoWay(count);
         assertThat(autoTickets.getCount()).isEqualTo(expectedCount);
     }
 
@@ -34,7 +34,6 @@ class LottoTicketMachineTest {
             Arguments.of(new TicketCount(2), getTwoManualOrder(), 2)
         );
     }
-
 
     private static LottoPurchaseOrder getOneManualOrder() {
         return new LottoPurchaseOrder(new Money(3000),

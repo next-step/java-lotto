@@ -10,13 +10,13 @@ public class LottoGameVendor {
 
     public static LottoTicketBundle buyLottos(LottoPurchaseOrder order) {
 
-        TicketCount available = getAvailableTicketCount(order);
-        TicketCount manual = order.getManualLottoTicketCount();
-        TicketCount auto = getAutoTicketCount(available, manual);
+        TicketCount availableCnt = getAvailableTicketCount(order);
+        TicketCount manualCnt = order.getManualLottoTicketCount();
+        TicketCount autoCnt = getAutoTicketCount(availableCnt, manualCnt);
 
         LottoTicketMachine ticketMachine = LottoTicketMachine.getInstance();
-        AutoLottoTickets autoTickets = ticketMachine.issueTicketsByAutoWay(auto, order);
-        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(manual, order);
+        AutoLottoTickets autoTickets = ticketMachine.issueTicketsByAutoWay(autoCnt);
+        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(manualCnt, order);
 
         return new LottoTicketBundle(autoTickets, manualTickets);
 
