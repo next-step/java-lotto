@@ -20,14 +20,8 @@ public class WinningNumber {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        List<Integer> results = new ArrayList<>();
-
-        for (LottoNumber number : winningNumbers) {
-            results.add(number.getLottoNumber());
-        }
-
-        return results;
+    public List<LottoNumber> getWinningNumbers() {
+        return winningNumbers;
     }
 
     private void isBlank(String winningNumbers) {

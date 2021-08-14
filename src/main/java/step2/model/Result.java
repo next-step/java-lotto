@@ -5,10 +5,10 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WinningResult {
+public class Result {
     private Map<Rank, Integer> result;
 
-    public WinningResult() {
+    public Result() {
         this.result = new HashMap<>();
         for (Rank rule : Rank.values()) {
             result.put(rule, 0);
@@ -24,11 +24,9 @@ public class WinningResult {
     }
 
     private Set<Integer> getDuplicatedNum(List<Integer> allNumbers) {
-        Set<Integer> duplicatedNumbers = allNumbers.stream()
+        return allNumbers.stream()
                 .filter(i -> Collections.frequency(allNumbers, i) > 1)
                 .collect(Collectors.toSet());
-
-        return duplicatedNumbers;
     }
 
     private boolean isMatchBonus(List<Integer> matchNumbers, int bonus) {

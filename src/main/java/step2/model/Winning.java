@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Winning {
@@ -12,10 +13,16 @@ public class Winning {
     }
 
     public List<Integer> getWinningNumber() {
-        return winningNumber.getWinningNumbers();
+        List<Integer> results = new ArrayList<>();
+
+        for (LottoNumber number : winningNumber.getWinningNumbers()) {
+            results.add(number.getLottoNumber());
+        }
+
+        return results;
     }
 
     public int getBonus() {
-        return bonus.getBonusNumber();
+        return bonus.getBonusNumber().getLottoNumber();
     }
 }

@@ -6,7 +6,6 @@ import step2.model.*;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AutoLottoTest {
@@ -108,16 +107,6 @@ public class AutoLottoTest {
     }
 
     @Test
-    public void 당첨번호() {
-        //given
-        WinningNumber user = new WinningNumber("1,2,3,4,5,6");
-        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
-
-        //then
-        assertEquals(user.getWinningNumbers(), expected);
-    }
-
-    @Test
     public void 당첨확인_보너스_포함() {
         //given
         List<Lotto> lottoList = new ArrayList<>();
@@ -131,12 +120,12 @@ public class AutoLottoTest {
         LottoGroup lottoGroup = new LottoGroup(lottoList);
 
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
-        Bonus bonus = new Bonus("7");
+        Bonus bonus = new Bonus(winningNumber, "7");
         Winning winning = new Winning(winningNumber, bonus);
 
         //when
-        WinningResult lotto = new WinningResult();
-        Map<Rank, Integer> result = lotto.getResult(lottoGroup, winning);
+        Result winningResult = new Result();
+        Map<Rank, Integer> result = winningResult.getResult(lottoGroup, winning);
 
         //then
         for (Rank rank : Rank.values()) {
@@ -156,29 +145,23 @@ public class AutoLottoTest {
         winningResult.put(Rank.FIFTH, 1);
 
         //when
-        WinningResult lotto = new WinningResult();
-        String rate = lotto.getWinningRate(amount, winningResult);
+        Result result = new Result();
+        String rate = result.getWinningRate(amount, winningResult);
 
         //then
         assertThat(rate).isEqualTo("0.35");
     }
 
     @Test
-    public void 보너스볼_당첨() {
+    public void 보너스볼_중복() {
         //given
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
-        Bonus bonus = new Bonus("7");
-        Winning winning = new Winning(winningNumber, bonus);
-
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,7));
-        LottoGroup lottoGroup = new LottoGroup(Arrays.asList(lotto));
-
-        //when
-        WinningResult result = new WinningResult();
-        Map<Rank, Integer> winningResult = result.getResult(lottoGroup, winning);
 
         //then
-        assertThat(winningResult.get(Rank.SECOND)).isEqualTo(1);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> new Bonus(winningNumber, "6"));
     }
+
+
 
 }
