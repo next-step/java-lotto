@@ -21,7 +21,7 @@ public final class AutoLottoGenerator implements LottoGenerator {
 
     private LottoTicket pickLottoNumbers(final List<LottoNumber> targetNumbers) {
         List<LottoNumber> lottoNumbers = targetNumbers.stream()
-                .limit(LottoTicket.LOTTO_TICKET_SIZE)
+                .limit(LottoTicket.SIZE)
                 .sorted()
                 .collect(Collectors.toList());
 

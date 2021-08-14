@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public final class LottoTicket {
 
-    public static final int LOTTO_TICKET_SIZE = 6;
+    public static final int PRIZE_AMOUNT = 1_000;
+    public static final int SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -35,7 +36,7 @@ public final class LottoTicket {
     }
 
     private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
+        if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException("different number size");
         }
     }

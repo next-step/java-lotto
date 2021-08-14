@@ -14,8 +14,7 @@ public class LottoShopTest {
 
     @BeforeEach
     void setUp() {
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        lottoShop = new LottoShop(lottoGenerator);
+        lottoShop = new LottoShop();
     }
 
     @Test
