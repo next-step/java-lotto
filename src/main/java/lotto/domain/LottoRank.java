@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum LottoRank {
     RANK_1ST(6, 2000000000),
@@ -23,9 +23,10 @@ public enum LottoRank {
         this.price = price;
     }
 
-    private static final Map<Integer, LottoRank> LOTTO_RANK_MAP = Collections.unmodifiableMap(
-        Stream.of(values())
-            .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
+    private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
+        Collections.unmodifiableMap(
+            Arrays.stream(values())
+                .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
 
     public LottoRank findRank(int collectNumber) {
         return LOTTO_RANK_MAP.get(collectNumber);
