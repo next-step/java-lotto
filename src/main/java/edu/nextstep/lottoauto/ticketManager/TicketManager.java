@@ -9,14 +9,23 @@ package edu.nextstep.lottoauto.ticketManager;
 import edu.nextstep.lottoauto.strategy.NumberMaker;
 import edu.nextstep.lottoauto.ticket.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketManager {
-    private List<Ticket> tickets;
+    private static final int PRICE_PER_ONE_TICKET = 1_000;
+
+    private final List<Ticket> tickets = new ArrayList<>();
+
     private WinningNumbers winningNumbers;
     private WinningPrizeResult winningPrizeResult;
 
     public void createTickets(int payment, NumberMaker numberMaker) {
+        int numberOfTickets = payment / PRICE_PER_ONE_TICKET;
+        while (numberOfTickets > 0) {
+            tickets.add(Ticket.create(numberMaker));
+            numberOfTickets--;
+        }
     }
 
 
