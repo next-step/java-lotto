@@ -12,6 +12,6 @@ class LottoTest {
     @Test
     void buy_ticket_from_input_price_test() {
         Lotto lotto = new Lotto(14000);
-        assertThat(lotto.getTicketNum()).isEqualTo(14);
+        assertThat(lotto.getGameNum()).isEqualTo(14);
     }
 }

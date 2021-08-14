@@ -5,21 +5,13 @@ import java.util.List;
 
 public class Lotto {
 
-    private final int ONE_GAME_PRICE = 1000;
-    private final List<List<Integer>> tickets = new ArrayList<>();
+    private final LottoGame lottoGame;
 
     public Lotto(final int price) {
-        for (int i = 0; i < buyTicketNumber(price); i++) {
-            tickets.add(new ArrayList<>());
-        }
+        lottoGame = new LottoGame(price);
     }
 
-    private int buyTicketNumber(final int price) {
-        return (price / ONE_GAME_PRICE);
+    public int getGameNum(){
+        return lottoGame.getTicketNum();
     }
-
-    public int getTicketNum() {
-        return tickets.size();
-    }
-
 }
