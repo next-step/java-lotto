@@ -20,7 +20,9 @@ public class LottoTicket {
 
     public static LottoTicket create() {
         Collections.shuffle(TOTAL_NUMBERS);
-        return new LottoTicket(TOTAL_NUMBERS.subList(0, 6));
+        List<Integer> lottoNumbers = TOTAL_NUMBERS.subList(0, 6);
+        Collections.sort(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
     }
 
     private static void initTotalNumbers() {
