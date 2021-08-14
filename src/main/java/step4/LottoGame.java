@@ -1,5 +1,6 @@
 package step4;
 
+import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoMachine;
 import step4.domain.lotto.LottoMatch;
 import step4.domain.lotto.LottoNumber;
@@ -7,11 +8,11 @@ import step4.domain.lotto.Lottos;
 import step4.domain.lotto.Profit;
 import step4.domain.lotto.WinOfLotto;
 import step4.domain.money.Cache;
-import step4.domain.money.Money;
 import step4.domain.user.User;
 import step4.domain.user.Wallet;
 import step4.view.InputView;
 import step4.view.ResultView;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -20,10 +21,10 @@ public class LottoGame {
         int inputMoney = InputView.inputMoney();
         User user = new User("pobi", new Wallet(new Cache(inputMoney)));
 
-        Lottos lottos = new Lottos();
+        int lottoManualCount = InputView.inputManualCount();
+        InputView.manualOfLottoView();
 
-        manualLotto(lottos, user);
-        randomLotto(lottos, user);
+        Lottos lottos = new Lottos(manualLotto(user, lottoManualCount), LottoMachine.randomLottoBulk(user.withDraw()));
 
         user.buyLotto(lottos);
 
@@ -41,21 +42,13 @@ public class LottoGame {
         ResultView.printLottoStatistics(lottoMatch, profit);
     }
 
-    private static void randomLotto(Lottos lottos, User user) {
-        Money money = user.withDraw();
-        lottos.merge(LottoMachine.sell(money));
-    }
-
-    private static void manualLotto(Lottos lottos, User user) {
-        int lottoManualCount = InputView.inputManualCount();
-
-        InputView.manualOfLottoView();
+    private static List<Lotto> manualLotto(User user, int lottoManualCount) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoManualCount; i++) {
             List<LottoNumber> lottoNumbers = InputView.inputManualOfLottoNumber();
-
-            Money manualLottoMoney = user.withDraw(new Cache(LottoMachine.LOTTO_PRICE));
-            lottos.merge(LottoMachine.sell(manualLottoMoney, () -> lottoNumbers));
+            lottos.add(LottoMachine.manualLotto(user.withDraw(new Cache(LottoMachine.LOTTO_PRICE)), lottoNumbers));
         }
+        return lottos;
     }
 }

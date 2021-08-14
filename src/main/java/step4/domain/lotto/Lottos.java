@@ -16,20 +16,19 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = new ArrayList<>(lottos);
     }
 
+    public Lottos(List<Lotto> one, List<Lotto> two) {
+        one.addAll(two);
+        this.lottos = new ArrayList<>(one);
+    }
+
     public LottoMatch match(WinOfLotto winOfLotto) {
         LottoMatch lottoMatch = new LottoMatch();
 
         for (Lotto lotto : lottos) {
-            int count = winOfLotto.correctCount(lotto.numbers());
-            boolean hasBonusNumber = winOfLotto.hasBonusNumber(lotto);
-            lottoMatch.put(LottoRank.find(count, hasBonusNumber));
+            lottoMatch.put(winOfLotto.match(lotto));
         }
 
         return lottoMatch;
-    }
-
-    public void addLotto(Lotto lotto) {
-        lottos.add(lotto);
     }
 
     public int getLottoCount() {
@@ -40,8 +39,9 @@ public class Lottos implements Iterable<Lotto> {
         return lottos;
     }
 
-    public void merge(Lottos otherLottos) {
+    public Lottos merge(Lottos otherLottos) {
         lottos.addAll(otherLottos.lottos);
+        return new Lottos(lottos);
     }
 
     @Override

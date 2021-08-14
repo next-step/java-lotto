@@ -5,11 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoMachine;
 import step4.domain.lotto.LottoMatch;
 import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoRank;
-import step4.domain.lotto.Lottos;
 import step4.domain.lotto.Profit;
 import step4.domain.lotto.WinOfLotto;
 import step4.domain.money.Cache;
@@ -42,10 +42,12 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, bonusNumber);
 
-        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
+        LottoRank lottoRank = givenWinOfLotto.match(lotto);
 
         // When
-        LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
+        LottoMatch actualLottoMatch = new LottoMatch();
+        actualLottoMatch.put(lottoRank);
 
         // Then
         assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
@@ -63,13 +65,15 @@ class LottosTest {
 
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
-        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
+        LottoRank lottoRank = givenWinOfLotto.match(lotto);
 
         // When
-        LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
+        LottoMatch actualLottoMatch = new LottoMatch();
+        actualLottoMatch.put(lottoRank);
 
         // Then
-        assertThat(expectedLottoMatch).isEqualTo(lottoMatch);
+        assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
     }
 
 
@@ -78,12 +82,14 @@ class LottosTest {
     void profilt() {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
-        Lottos lottos = LottoMachine.sell(new Cache(1000), () -> givenLottoNumbers);
+        Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
+        LottoRank lottoRank = givenWinOfLotto.match(lotto);
 
-        LottoMatch lottoMatch = lottos.match(givenWinOfLotto);
+        LottoMatch lottoMatch = new LottoMatch();
+        lottoMatch.put(lottoRank);
 
         // When
-        Profit profit = lottoMatch.calcProfit(lottos.getLottoCount());
+        Profit profit = lottoMatch.calcProfit(1);
 
         // Then
         assertThat(profit).isEqualTo(new Profit(5));
