@@ -7,6 +7,7 @@ import lotto.domain.LottoGameWinnerCalculator;
 import lotto.domain.LottoGameWinnerResult;
 import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketBundle;
 import lotto.domain.Money;
 import lotto.domain.TicketCount;
 import lotto.domain.WinnerLottoInfo;
@@ -24,15 +25,17 @@ public class LottoGameMain {
         int[][] manualTicketNumbers = inputView.askManualTicketNumbers(manualCount);
 
         LottoPurchaseOrder order = new LottoPurchaseOrder(gameMoney, manualTicketNumbers);
-        List<LottoTicket> playerTickets = LottoGameVendor.buyLottos(order);
-        outputView.showPlayerTicketNumbers(playerTickets);
+        LottoTicketBundle ticketBundle = LottoGameVendor.buyLottos(order);
+        outputView.showPlayerTicketNumbers(ticketBundle);
 
         int[] winnerNumbers = inputView.askWinnerNumbers();
         int bonusBallNumber = inputView.askBonusBallNumber();
+
+        List<LottoTicket> allPlayerTickets = ticketBundle.getAllLottoTickets();
         WinnerLottoInfo winnerLottoInfo = new WinnerLottoInfo(winnerNumbers, bonusBallNumber);
 
         LottoGameWinnerResult winnerResult = LottoGameWinnerCalculator
-            .calculate(winnerLottoInfo, playerTickets);
+            .calculate(winnerLottoInfo, allPlayerTickets);
 
         outputView.showWinnerResult(winnerResult);
 

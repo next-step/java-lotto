@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoGameWinnerResult;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketBundle;
 import lotto.enumeration.LottoReward;
 
 public class OutputView {
@@ -20,12 +21,15 @@ public class OutputView {
     }
 
 
-    public void showPlayerTicketNumbers(List<LottoTicket> playerTickets) {
-        int playerTicketsCount = playerTickets.size();
+    public void showPlayerTicketNumbers(LottoTicketBundle ticketBundle) {
+        showHowManyAutoAndManual(ticketBundle);
+        showAllLottoTicketNumbers(ticketBundle);
+    }
 
-        System.out.println(String.format("%d개를 구매 했습니다.", playerTicketsCount));
 
-        for (LottoTicket ticket : playerTickets) {
+    private void showAllLottoTicketNumbers(LottoTicketBundle ticketBundle) {
+        List<LottoTicket> allLottoTickets = ticketBundle.getAllLottoTickets();
+        for (LottoTicket ticket : allLottoTickets) {
             List<LottoNumber> lottoNumbers = ticket.value();
             List<Integer> lottoIntegerNumbers = lottoNumbers.stream()
                 .map(LottoNumber::value)
@@ -33,6 +37,14 @@ public class OutputView {
 
             System.out.println(lottoIntegerNumbers);
         }
+    }
+
+    private void showHowManyAutoAndManual(LottoTicketBundle ticketBundle) {
+        String format = String.format("%수동으로 %d장, 자동으로 %d장을 구매 했습니다.",
+            ticketBundle.getManualTicketSize(),
+            ticketBundle.getAutoTicketSize());
+
+        System.out.println(format);
     }
 
     public void showWinnerResult(LottoGameWinnerResult winnerResult) {

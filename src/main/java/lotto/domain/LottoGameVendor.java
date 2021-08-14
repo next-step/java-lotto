@@ -5,11 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.exception.NotEnoughMoneyException;
 import lotto.exception.WrongTicketCountException;
-import lotto.ticketingway.LottoTicketingWay;
 
 public class LottoGameVendor {
 
-    public static List<LottoTicket> buyLottos(LottoPurchaseOrder order) {
+    public static LottoTicketBundle buyLottos(LottoPurchaseOrder order) {
 
         TicketCount available = getAvailableTicketCount(order);
         TicketCount manual = order.getManualLottoTicketCount();
@@ -19,7 +18,7 @@ public class LottoGameVendor {
         List<LottoTicket> autoTickets = ticketMachine.issueTicketsByAutoWay(auto, order);
         List<LottoTicket> manualTickets = ticketMachine.issueTicketsByManualWay(manual, order);
 
-        List<LottoTicket> playerTickets = mergeTickets(autoTickets, manualTickets);
+        return new LottoTicketBundle(autoTickets, manualTickets);
 
     }
 
