@@ -5,17 +5,17 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final List<Integer> lottoNumbers;
+    private final LottoNumber lottoNumber = new LottoNumber();
     private LottoRank lottoRank;
     private int collectNumber = 0;
 
     public LottoTicket() {
-        lottoNumbers = LottoNumberSelector.selectNumbers();
         lottoRank = LottoRank.RANK_7TH;
     }
 
     public void checkResult(final List<Integer> winningNumbers) {
-        for (Integer lottoNumber : lottoNumbers) {
+        List<Integer> numbers = lottoNumber.getLottoNumbers();
+        for (Integer lottoNumber : numbers) {
             isCollectNumber(winningNumbers, lottoNumber);
         }
         setRank();
@@ -40,10 +40,6 @@ public class LottoTicket {
     }
 
     public String getNumberString() {
-        List<String> numbers = new ArrayList<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            numbers.add(lottoNumber.toString());
-        }
-        return "[" + String.join(", ", numbers) + "]";
+        return lottoNumber.getNumberString();
     }
 }

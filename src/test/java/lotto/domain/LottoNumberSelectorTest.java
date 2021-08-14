@@ -17,7 +17,7 @@ class LottoNumberSelectorTest {
         assertThat(LottoNumberSelector.selectNumbers().size()).isEqualTo(6);
     }
 
-    @DisplayName("값이 1부터 45 사이인지 테스트")
+    @DisplayName("1부터 45 사이 값만 나와야 함.")
     @RepeatedTest(100)
     void name() {
         List<Integer> selectedNumbers = LottoNumberSelector.selectNumbers();
