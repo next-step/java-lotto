@@ -19,21 +19,27 @@ public class LottoController {
         LottoController lottoController = new LottoController();
 
         int lottoCount = inputView.inputLottoBuyAmount() / 1000;
-        List<LottoTicket> lottoTicketList = lottoController.createLottoBalls(resultView, lottoCount);
+        List<LottoTicket> lottoTicketList = lottoController.createLottoBalls(inputView, resultView, lottoCount);
         LottoTickets lottoTickets = LottoTickets.from(lottoTicketList);
 
         WinStatistics winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
-        resultView.outputStatistics(winStatistics, lottoTickets.getRateOfReturn(lottoCount, winStatistics));
+        resultView.outputStatistics(winStatistics, winStatistics.getRateOfReturn(lottoCount));
         inputView.scannerClose();
     }
 
-    public List<LottoTicket> createLottoBalls(ResultView resultView, int lottoCount) {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTicketList.add(LottoTicket.createRandomNumber());
+    public List<LottoTicket> createLottoBalls(InputView inputView, ResultView resultView, int lottoCount) {
+        int manualLottoTicketCount = inputView.inputManualLottoTicketCount();
+        int autoLottoTicketCount = lottoCount - manualLottoTicketCount;
+
+        List<LottoTicket> manualLottoTicketList = inputView.inputManualLottoTickets(manualLottoTicketCount);
+        List<LottoTicket> autoLottoTicketList = new ArrayList<>();
+        for (int i = 0; i < autoLottoTicketCount; i++) {
+            autoLottoTicketList.add(LottoTicket.createRandomNumber());
         }
-        resultView.outputLottoLotteries(lottoTicketList);
-        return lottoTicketList;
+
+        resultView.outputLottoLotteries(manualLottoTicketList, autoLottoTicketList);
+        manualLottoTicketList.addAll(autoLottoTicketList);
+        return manualLottoTicketList;
     }
 
     public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
