@@ -7,42 +7,36 @@
 package edu.nextstep.lottoauto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TicketMaker {
 
-    private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
     private static final int PRICE_PER_ONE_TICKET = 1000;
 
     private int makingCount;
-
-    private TicketMaker(){
-    }
-
-    static{
-        setTotalNumbers();
-    }
 
     public static TicketMaker create() {
         return new TicketMaker();
     }
 
-    public List<List<Integer>> makeTickets(int payment) {
+    public List<LottoTicket> makeTickets(int payment) {
         validateMinPayment(payment);
         validatePaymentUnit(payment);
 
-        this.makingCount = payment / PRICE_PER_ONE_TICKET;
+        initMakingCount(payment);
 
-        List<List<Integer>> lottoTickets = new ArrayList<>();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
         while (makingCount > 0) {
-            Collections.shuffle(TOTAL_NUMBERS);
-            lottoTickets.add(TOTAL_NUMBERS.subList(0, 6));
+            lottoTickets.add(LottoTicket.create());
             makingCount--;
         }
 
         return lottoTickets;
+    }
+
+    private void initMakingCount(int payment) {
+        this.makingCount = payment / PRICE_PER_ONE_TICKET;
     }
 
     private void validatePaymentUnit(int payment) {
@@ -56,16 +50,4 @@ public class TicketMaker {
             throw new IllegalArgumentException("최소 1,000원 부터 입력 가능합니다.(1장에 1,000원)");
         }
     }
-
-    private static void setTotalNumbers() {
-        for (int i = 1; i <= 45; i++) {
-            TOTAL_NUMBERS.add(i);
-        }
-    }
-
-    protected static List<Integer> getTotalNumbers() {
-        return TOTAL_NUMBERS;
-    }
-
-
 }
