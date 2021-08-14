@@ -4,14 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public final class AutoLottoGenerator implements LottoGenerator {
-
-    private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-            .boxed()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
 
     @Override
     public LottoTicket generate() {
@@ -20,7 +14,7 @@ public final class AutoLottoGenerator implements LottoGenerator {
     }
 
     private List<LottoNumber> generateTargetLottoNumbers() {
-        List<LottoNumber> targetNumbers = new ArrayList<>(lottoNumbers);
+        List<LottoNumber> targetNumbers = new ArrayList<>(LottoNumber.lottoNumbers);
         Collections.shuffle(targetNumbers);
         return targetNumbers;
     }
