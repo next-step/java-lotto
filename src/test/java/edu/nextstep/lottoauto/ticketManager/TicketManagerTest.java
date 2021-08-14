@@ -40,9 +40,8 @@ class TicketManagerTest {
         WinningPrizeResult winningPrizeResult = ticketManager.makeWinningPrizeResult();
 
         // then
-        assertThat(winningPrizeResult.getWinningPrizeResult().get(Prize.SIX)).isEqualTo(1);
-        assertThatThrownBy(() -> winningPrizeResult.getWinningPrizeResult().get(Prize.THREE))
-                .isInstanceOf(NullPointerException.class);
+        assertThat(winningPrizeResult.getWinningPrizeResult().get(Prize.SIX)).isEqualTo(14);
+        assertThat(winningPrizeResult.getWinningPrizeResult().get(Prize.THREE)).isNull();
     }
 
     private NumberMaker getCustomTicketMaker() {

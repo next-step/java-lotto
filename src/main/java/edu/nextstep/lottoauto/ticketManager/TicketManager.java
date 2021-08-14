@@ -28,16 +28,24 @@ public class TicketManager {
         }
     }
 
+    public void setWinningNumbersFrom(String winningNumbersString) {
+        this.winningNumbers = WinningNumbers.from(winningNumbersString);
+    }
+
+    public WinningPrizeResult makeWinningPrizeResult() {
+        this.winningPrizeResult = new WinningPrizeResult();
+        for (Ticket ticket : tickets) {
+            ticket.checkAndUpdateWinningPrize(winningNumbers);
+            if (ticket.getPrize() != null) {
+                winningPrizeResult.add(ticket);
+            }
+        }
+        return winningPrizeResult;
+    }
 
     public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public WinningPrizeResult makeWinningPrizeResult() {
-        return null;
-    }
 
-    public void setWinningNumbersFrom(String winningNumbersString) {
-        this.winningNumbers = WinningNumbers.from(winningNumbersString);
-    }
 }
