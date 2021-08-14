@@ -13,11 +13,16 @@ public class LottoNumber {
         this.lottoNumber = Integer.parseInt(number.trim());
     }
 
+    public LottoNumber(int lottoNumber) {
+        isInRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
     private void isValid(String number) {
         isBlank(number);
         number = number.trim();
         isDigit(number);
-        isInRange(number);
+        isInRange(Integer.parseInt(number));
     }
 
     public int getLottoNumber() {
@@ -36,9 +41,8 @@ public class LottoNumber {
         }
     }
 
-    private void isInRange(String input) {
-        int number = Integer.parseInt(input);
-        if (number < MIN || number > MAX) {
+    private void isInRange(int input) {
+        if (input < MIN || input > MAX) {
             throw new IllegalArgumentException("1~45 사이 숫자를 입력해주세요");
         }
     }
