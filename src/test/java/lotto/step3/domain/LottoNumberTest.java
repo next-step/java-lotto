@@ -1,4 +1,4 @@
-package lotto.step3;
+package lotto.step3.domain;
 
 import lotto.step3.domain.LottoNumber;
 import org.assertj.core.api.Assertions;
