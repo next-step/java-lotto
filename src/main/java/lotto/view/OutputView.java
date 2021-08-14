@@ -50,13 +50,13 @@ public class OutputView {
     public void printMatchResult(MatchResult matchResult) {
         printStream.println();
         printStream.println(MATCHES_RESULT_MASSAGE);
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : Rank.winningValues()) {
             printMatchCount(rank, matchResult.countWinningLotteries(rank));
         }
     }
 
     private void printMatchCount(Rank rank, int count) {
-        printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, rank.getCountOfMatch(), rank.getWinningMoney(), count);
+        printStream.printf(MATCH_RESULT_MESSAGE_FORMAT, rank.getCountOfMatchForWinning(), rank.getWinningMoney(), count);
     }
 
     public void printLotteryYield(Money purchaseAmount, Money winningAmount) {

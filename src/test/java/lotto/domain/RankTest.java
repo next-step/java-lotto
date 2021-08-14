@@ -11,7 +11,7 @@ class RankTest {
     @ValueSource(ints = {-1, 7})
     public void MatchCountOfTest(int invalidCount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Rank.valueOf(invalidCount))
+                .isThrownBy(() -> Rank.valueOf(invalidCount, false))
                 .withMessageContaining(String.valueOf(invalidCount));
     }
 

@@ -15,6 +15,8 @@ public class WinningLottoNumbers {
     }
 
     public Rank match(LottoNumbers lottoNumbers) {
-        return winningLottoNumbers.match(lottoNumbers);
+        int countOfMatch = winningLottoNumbers.countOfMatch(lottoNumbers);
+        boolean hitBonusBall = lottoNumbers.contains(bonusBall);
+        return Rank.valueOf(countOfMatch, hitBonusBall);
     }
 }
