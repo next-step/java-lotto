@@ -26,7 +26,7 @@ class ManualLottoGeneratorTest {
     @Test
     @DisplayName("수동 로또 생성시 사이즈가 맞지 않을경우 예외처리")
     void constructLottoTicketExceptionTest() {
-        assertThatThrownBy(() -> new ManualLottoGenerator("1", "2", "3", "4", "5"))
+        assertThatThrownBy(() -> new ManualLottoGenerator("1", "2", "3", "4", "5").generate())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("different number size");
     }

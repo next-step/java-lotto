@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String MESSAGE_INPUT_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String MESSAGE_INPUT_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MESSAGE_INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String MESSAGE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_INPUT_VALUE_INCORRECT = "입력값이 올바르지 않습니다.";
@@ -24,6 +27,23 @@ public class InputView {
         long amount = scanner.nextLong();
         scanner.nextLine();
         return amount;
+    }
+
+    public long getManualLottoCount() {
+        System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_COUNT);
+        long manualLottoCount = scanner.nextLong();
+        scanner.nextLine();
+        return manualLottoCount;
+    }
+
+    public String[] getManualLottoNumbers(long manualLottoCount) {
+        System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_NUMBER);
+        String[] lottoNumbers = new String[(int)manualLottoCount];
+        for (int i = 0; i < manualLottoCount; i++) {
+            String input = scanner.nextLine();
+            lottoNumbers[i] = input;
+        }
+        return lottoNumbers;
     }
 
     public List<Integer> getWinningNumber() {

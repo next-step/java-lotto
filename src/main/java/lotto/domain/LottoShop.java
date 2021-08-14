@@ -1,17 +1,26 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class LottoShop {
 
     private static final LottoGenerator AUTO_LOTTO_GENERATOR = new AutoLottoGenerator();
 
+    private final LottoTickets lottoTickets;
+
+    public LottoShop() {
+        this.lottoTickets = new LottoTickets();
+    }
+
+    public LottoShop(LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
     public LottoTickets buy(final long amount) {
         validateMinimumAmount(amount);
 
-        long purchaseCount = getPurchaseCount(amount);
-        return buyLottoTickets(purchaseCount);
+        long purchaseCount = getPurchaseAutoLottoTicketCount(amount);
+        buyAutoLottoTickets(purchaseCount);
+
+        return lottoTickets;
     }
 
     private void validateMinimumAmount(final long amount) {
@@ -20,15 +29,18 @@ public final class LottoShop {
         }
     }
 
-    private long getPurchaseCount(final long amount) {
-        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
+    private long getPurchaseAutoLottoTicketCount(final long amount) {
+        long purchaseAutoLottoTicketAmount = amount - getPurchaseManualLotto();
+        return Math.floorDiv(purchaseAutoLottoTicketAmount, LottoTicket.PRIZE_AMOUNT);
     }
 
-    private LottoTickets buyLottoTickets(final long purchaseCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    private int getPurchaseManualLotto() {
+        return lottoTickets.size() * LottoTicket.PRIZE_AMOUNT;
+    }
+
+    private void buyAutoLottoTickets(final long purchaseCount) {
         for (int i = 0; i < purchaseCount; i++) {
             lottoTickets.add(AUTO_LOTTO_GENERATOR.generate());
         }
-        return new LottoTickets(lottoTickets);
     }
 }

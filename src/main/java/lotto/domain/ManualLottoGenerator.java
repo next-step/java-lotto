@@ -6,18 +6,25 @@ import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
-    private final LottoTicket lottoTicket;
+    private static final String SEPARATOR = ",";
+
+    private final String[] lottoNumbers;
+
+    public ManualLottoGenerator(String lottoNumbers) {
+        this.lottoNumbers = lottoNumbers.split(SEPARATOR);
+    }
 
     public ManualLottoGenerator(String... lottoNumbers) {
-        List<LottoNumber> lottoTicket = Arrays.stream(lottoNumbers)
-                .map(LottoNumber::new)
-                .sorted()
-                .collect(Collectors.toList());
-        this.lottoTicket = new LottoTicket(lottoTicket);
+        this.lottoNumbers = lottoNumbers;
     }
 
     @Override
     public LottoTicket generate() {
-        return lottoTicket;
+        List<LottoNumber> lottoNumbers = Arrays.stream(this.lottoNumbers)
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toList());
+
+        return new LottoTicket(lottoNumbers);
     }
 }

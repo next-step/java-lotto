@@ -32,4 +32,17 @@ public class LottoShopTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("less then the minimum amount");
     }
+
+    @Test
+    @DisplayName("로또 수동 구매")
+    void buyManualLottoTicketTest() {
+
+        String[] strings = {"1,2,3,4,5,6"};
+
+        LottoTickets lottoTickets = new LottoTickets(strings);
+        LottoShop lottoShop = new LottoShop(lottoTickets);
+
+        lottoShop.buy(10000);
+    }
+
 }
