@@ -1,3 +1,9 @@
+/*
+ * TicketMaker.java
+ *
+ * v0.1 ,  2021.08.14
+ */
+
 package edu.nextstep.lottoauto;
 
 import java.util.ArrayList;
