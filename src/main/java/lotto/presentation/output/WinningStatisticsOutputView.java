@@ -7,6 +7,7 @@ public class WinningStatisticsOutputView {
     private static final String WINNING_STATISTICS_OUTPUT_COMMENT = "당첨 통계\n---------";
 
     private static final String WINNING_STATISTICS_COMMENT = "%d개 일치 (%d원) - %d개%n";
+    private static final String WINNING_STATISTICS_RANKING_2ND_COMMENT = "%d개 일치, 보너스 볼 일치(%d원) - %d개%n";
 
     public void output(LottoResults lottoResults) {
         System.out.println(WINNING_STATISTICS_OUTPUT_COMMENT);
@@ -17,7 +18,15 @@ public class WinningStatisticsOutputView {
         for (Ranking ranking : Ranking.values()) {
             int expect = ranking.getExpect();
             int compensation = ranking.getCompensation();
-            System.out.printf(WINNING_STATISTICS_COMMENT, expect, compensation, lottoResults.getRankingHits(ranking));
+            int hits = lottoResults.getRankingHits(ranking);
+            System.out.printf(getWinningStaticsComment(ranking), expect, compensation, hits);
         }
+    }
+
+    private String getWinningStaticsComment(Ranking ranking) {
+        if (ranking == Ranking.SECOND) {
+            return WINNING_STATISTICS_RANKING_2ND_COMMENT;
+        }
+        return WINNING_STATISTICS_COMMENT;
     }
 }
