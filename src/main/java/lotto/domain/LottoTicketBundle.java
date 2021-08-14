@@ -23,11 +23,11 @@ public class LottoTicketBundle {
         return manualTickets;
     }
 
-    public int getAutoTicketSize() {
+    public int getAutoTicketCount() {
         return autoTickets.size();
     }
 
-    public int getManualTicketSize() {
+    public int getManualTicketCount() {
         return manualTickets.size();
     }
 
