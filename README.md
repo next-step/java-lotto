@@ -98,6 +98,13 @@
 - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
 
 ### 기능 목록
-- 복권 발급기 : 금액을 넣으면 발급 복권 개수 산정, 해당하는 개수만큼 복권 발급
-- 당첨 확인기 : 당첨 번호로 생성, 복권들을 입력 받아 당첨 결과 반환
-    
+- Ticket 
+    - 필드 : `List<Integer> numbers`, `enum prize`
+    - 기능 : Ticket 생성, 당첨 여부 파악
+    - ※ shuffle Test 어려워 끄집어내야 함.
+- WinningNumbers
+    - 필드 : `List<Integer> numbers`
+    - 기능 : 생성
+- TicketManager
+    - 필드 : `List<Ticket> tickets`, `Map<Prize, Integer> winningResult`
+    - 기능 : tickets 생성, 당첨 여부 입력
