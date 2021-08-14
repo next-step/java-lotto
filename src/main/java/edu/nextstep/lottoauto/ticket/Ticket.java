@@ -7,7 +7,7 @@
 package edu.nextstep.lottoauto.ticket;
 
 import edu.nextstep.lottoauto.ticketManager.WinningNumbers;
-import edu.nextstep.lottoauto.strategy.TicketMaker;
+import edu.nextstep.lottoauto.strategy.NumberMaker;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class Ticket {
         this.prize = null;
     }
 
-    public static Ticket create(TicketMaker ticketMaker) {
-        return ticketMaker.makeTicket();
+    public static Ticket create(NumberMaker numberMaker) {
+        return new Ticket(numberMaker.makeNumbers());
     }
 
     public void checkAndUpdateWinningPrize(WinningNumbers winningNumbers) {

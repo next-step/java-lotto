@@ -1,31 +1,32 @@
 package edu.nextstep.lottoauto.strategy;
 
-import edu.nextstep.lottoauto.ticket.Ticket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AutoTicketMakerTest {
+import java.util.List;
+
+class AutoNumberMakerTest {
 
     @BeforeEach
     void initTotalNumbers(){
-        AutoTicketMaker.sortTotalNumbers();
+        AutoNumberMaker.sortTotalNumbers();
     }
 
     @Test
-    void makeTicket() {
+    void makeNumbers() {
         // given
-        AutoTicketMaker autoTicketMaker = new AutoTicketMaker(){
+        AutoNumberMaker autoNumberMaker = new AutoNumberMaker(){
             @Override
             protected void flushingTotalNumbers() {
             }
         };
 
         // when
-        Ticket ticket = autoTicketMaker.makeTicket();
+        List<Integer> numbers = autoNumberMaker.makeNumbers();
 
         // then
-        Assertions.assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        Assertions.assertThat(numbers).containsExactly(1, 2, 3, 4, 5, 6);
 
     }
 

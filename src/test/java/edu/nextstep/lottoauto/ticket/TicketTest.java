@@ -1,7 +1,7 @@
 package edu.nextstep.lottoauto.ticket;
 
 import edu.nextstep.lottoauto.ticketManager.WinningNumbers;
-import edu.nextstep.lottoauto.strategy.TicketMaker;
+import edu.nextstep.lottoauto.strategy.NumberMaker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +13,10 @@ class TicketTest {
     @Test
     void create() {
         // given
-        TicketMaker ticketMaker = getCustomTicketMaker();
+        NumberMaker numberMaker = getCustomTicketMaker();
 
         // when
-        Ticket ticket = Ticket.create(ticketMaker);
+        Ticket ticket = Ticket.create(numberMaker);
 
         // then
         Assertions.assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
@@ -26,8 +26,8 @@ class TicketTest {
     @Test
     void checkAndUpdateWinningPrize() {
         // given
-        TicketMaker ticketMaker = getCustomTicketMaker();
-        Ticket ticket = Ticket.create(ticketMaker);
+        NumberMaker numberMaker = getCustomTicketMaker();
+        Ticket ticket = Ticket.create(numberMaker);
         WinningNumbers winningNumbers = WinningNumbers.from(new int[]{1, 2, 3, 4, 5, 6});
 
         // when
@@ -38,13 +38,13 @@ class TicketTest {
 
     }
 
-    private TicketMaker getCustomTicketMaker() {
+    private NumberMaker getCustomTicketMaker() {
         return () -> {
-            List<Integer> ticketTmp = new ArrayList<>();
+            List<Integer> numbers = new ArrayList<>();
             for (int i = 1; i <= 6; i++) {
-                ticketTmp.add(i);
+                numbers.add(i);
             }
-            return new Ticket(ticketTmp);
+            return numbers;
         };
     }
 }

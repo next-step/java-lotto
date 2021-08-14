@@ -6,7 +6,7 @@
 
 package edu.nextstep.lottoauto.ticketManager;
 
-import edu.nextstep.lottoauto.strategy.TicketMaker;
+import edu.nextstep.lottoauto.strategy.NumberMaker;
 import edu.nextstep.lottoauto.ticket.Ticket;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class TicketManager {
     private WinningNumbers winningNumbers;
     private WinningPrizeResult winningPrizeResult;
 
-    public void createTickets(int payment, TicketMaker ticketMaker) {
+    public void createTickets(int payment, NumberMaker numberMaker) {
     }
 
 

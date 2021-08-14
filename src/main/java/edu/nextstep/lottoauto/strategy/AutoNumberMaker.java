@@ -6,13 +6,11 @@
 
 package edu.nextstep.lottoauto.strategy;
 
-import edu.nextstep.lottoauto.ticket.Ticket;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoTicketMaker implements TicketMaker {
+public class AutoNumberMaker implements NumberMaker {
     private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
 
     static{
@@ -26,8 +24,9 @@ public class AutoTicketMaker implements TicketMaker {
     }
 
     @Override
-    public Ticket makeTicket() {
-        return null;
+    public List<Integer> makeNumbers() {
+        flushingTotalNumbers();
+        return TOTAL_NUMBERS.subList(0,6);
     }
 
     protected void flushingTotalNumbers(){

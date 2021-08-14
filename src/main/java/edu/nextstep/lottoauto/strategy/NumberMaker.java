@@ -6,9 +6,10 @@
 
 package edu.nextstep.lottoauto.strategy;
 
-import edu.nextstep.lottoauto.ticket.Ticket;
+import java.util.List;
 
-public interface TicketMaker {
+public interface NumberMaker {
 
-    public Ticket makeTicket();
+    public List<Integer> makeNumbers();
+
 }
