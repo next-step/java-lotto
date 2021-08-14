@@ -19,11 +19,11 @@ public class LottoGameMain {
         InputView inputView = InputView.getInstance();
         OutputView outputView = OutputView.getInstance();
 
-        Money moneyForGame = new Money(inputView.askMoneyAmount());
+        Money gameMoney = new Money(inputView.askMoneyAmount());
         TicketCount manualCount = new TicketCount(inputView.askHowManyManualTicketing());
         int[][] manualTicketNumbers = inputView.askManualTicketNumbers(manualCount);
 
-        LottoPurchaseOrder order = new LottoPurchaseOrder(moneyForGame, manualTicketNumbers);
+        LottoPurchaseOrder order = new LottoPurchaseOrder(gameMoney, manualTicketNumbers);
         List<LottoTicket> playerTickets = LottoGameVendor.buyLottos(order);
         outputView.showPlayerTicketNumbers(playerTickets);
 

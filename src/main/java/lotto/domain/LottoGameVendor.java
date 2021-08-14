@@ -5,31 +5,30 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.exception.NotEnoughMoneyException;
 import lotto.exception.WrongTicketCountException;
-import lotto.ticketingway.AutoWay;
 import lotto.ticketingway.LottoTicketingWay;
-import lotto.ticketingway.ManualWay;
 
 public class LottoGameVendor {
 
     public static List<LottoTicket> buyLottos(LottoPurchaseOrder order) {
-        Money gameMoney = order.getGameMoney();
-        checkMoneyAmount(gameMoney);
 
-        TicketCount available = getAvailableTicketCount(gameMoney);
+        TicketCount available = getAvailableTicketCount(order);
         TicketCount manual = order.getManualLottoTicketCount();
         TicketCount auto = getAutoTicketCount(available, manual);
 
-        List<LottoTicket> autoTickets = issueTickets(auto, order, new AutoWay());
-        List<LottoTicket> manualTickets = issueTickets(manual, order, new ManualWay());
+        LottoTicketMachine ticketMachine = LottoTicketMachine.getInstance();
+        List<LottoTicket> autoTickets = ticketMachine.issueTicketsByAutoWay(auto, order);
+        List<LottoTicket> manualTickets = ticketMachine.issueTicketsByManualWay(manual, order);
 
-        return mergeTickets(autoTickets, manualTickets);
+        List<LottoTicket> playerTickets = mergeTickets(autoTickets, manualTickets);
 
     }
 
 
-    private static TicketCount getAvailableTicketCount(Money money) {
+    private static TicketCount getAvailableTicketCount(LottoPurchaseOrder order) {
+        Money gameMoney = order.getGameMoney();
+        checkMoneyAmount(gameMoney);
 
-        int availableTicketCount = money.value() / LottoTicket.PRICE;
+        int availableTicketCount = gameMoney.value() / LottoTicket.PRICE;
 
         return new TicketCount(availableTicketCount);
 
@@ -42,13 +41,6 @@ public class LottoGameVendor {
                 String.format("로또를 구입할만한 금액이 입력되지 않았습니다. 입력금액: %s", gameMoney));
         }
     }
-
-    private static List<LottoTicket> issueTickets(TicketCount ticketCount, LottoPurchaseOrder order,
-        LottoTicketingWay way) {
-        return way.issueLottoTickets(ticketCount, order);
-    }
-
-
 
     private static TicketCount getAutoTicketCount(TicketCount availableCount,
         TicketCount manualCount) {
