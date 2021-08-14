@@ -1,5 +1,11 @@
 package lotto.view;
 
-public class InputView {
+import java.util.Scanner;
 
+public class InputView {
+    Scanner scanner = new Scanner(System.in);
+
+    public String getNumber(){
+        return scanner.nextLine();
+    }
 }
