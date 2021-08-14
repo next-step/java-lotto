@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import lotto.exception.WrongTicketCountException;
 
 public class TicketCount {
@@ -29,5 +30,22 @@ public class TicketCount {
 
     public TicketCount minus(TicketCount anotherCount) {
         return new TicketCount(ticketCount - anotherCount.value());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TicketCount that = (TicketCount) o;
+        return ticketCount == that.ticketCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticketCount);
     }
 }

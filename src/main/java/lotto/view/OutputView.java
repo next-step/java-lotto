@@ -15,7 +15,6 @@ public class OutputView {
     private OutputView() {
     }
 
-
     public static OutputView getInstance() {
         return outputView;
     }
@@ -40,7 +39,7 @@ public class OutputView {
     }
 
     private void showHowManyAutoAndManual(LottoTicketBundle ticketBundle) {
-        String format = String.format("%수동으로 %d장, 자동으로 %d장을 구매 했습니다.",
+        String format = String.format("수동으로 %d장, 자동으로 %d장을 구매 했습니다.",
             ticketBundle.getManualTicketSize(),
             ticketBundle.getAutoTicketSize());
 
