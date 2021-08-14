@@ -6,22 +6,19 @@ import lotto.domain.AllPossibleLottoNumbers;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
-import lotto.exception.NotEnoughTicketCountException;
+import lotto.domain.TicketCount;
 
 public class AutoWay implements LottoTicketingWay {
 
-    private static final int MIN_TICKET_COUNT = 1;
-
     @Override
-    public List<LottoTicket> issueLottoTickets(int lottoTicketCount, LottoPurchaseOrder order) {
-
-        checkMinimumTicketCount(lottoTicketCount);
+    public List<LottoTicket> issueLottoTickets(TicketCount lottoTicketCount,
+        LottoPurchaseOrder order) {
 
         List<LottoTicket> tickets = new ArrayList<>();
 
         AllPossibleLottoNumbers allPossibleNumbers = AllPossibleLottoNumbers.getInstance();
 
-        for (int i = 0; i < lottoTicketCount; i++) {
+        for (int i = 0; i < lottoTicketCount.value(); i++) {
             List<LottoNumber> sixLottoNumbers = allPossibleNumbers.drawRandomSixNumbers();
             tickets.add(LottoTicket.generateByLottoNumbers(sixLottoNumbers));
         }
@@ -29,10 +26,4 @@ public class AutoWay implements LottoTicketingWay {
         return tickets;
     }
 
-    private void checkMinimumTicketCount(int lottoTicketCount) {
-        if (lottoTicketCount < MIN_TICKET_COUNT) {
-            throw new NotEnoughTicketCountException(String
-                .format("발행할 티켓은 최소 %d장이상입니다. [입력한 티켓수:%d]", MIN_TICKET_COUNT, lottoTicketCount));
-        }
-    }
 }

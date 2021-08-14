@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
+import lotto.domain.TicketCount;
 
 public class ManualWay implements LottoTicketingWay {
 
     @Override
-    public List<LottoTicket> issueLottoTickets(int lottoTicketCount, LottoPurchaseOrder order) {
+    public List<LottoTicket> issueLottoTickets(TicketCount lottoTicketCount,
+        LottoPurchaseOrder order) {
 
         List<LottoTicket> tickets = new ArrayList<>();
 

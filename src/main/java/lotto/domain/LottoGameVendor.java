@@ -15,15 +15,12 @@ public class LottoGameVendor {
         Money gameMoney = order.getGameMoney();
         checkMoneyAmount(gameMoney);
 
-        TicketCount availableCount = getAvailableTicketCount(gameMoney);
-        TicketCount manualCount = order.getManualLottoTicketCount();
-        TicketCount autoCount = getAutoTicketCount(availableCount, manualCount);
+        TicketCount available = getAvailableTicketCount(gameMoney);
+        TicketCount manual = order.getManualLottoTicketCount();
+        TicketCount auto = getAutoTicketCount(available, manual);
 
-        int manualTicketCount = order.getManualLottoTicketCount();
-        int autoTicketCount = availableTicketCount - manualTicketCount;
-
-        List<LottoTicket> autoTickets = issueTickets(autoTicketCount, order, new AutoWay());
-        List<LottoTicket> manualTickets = issueTickets(manualTicketCount, order, new ManualWay());
+        List<LottoTicket> autoTickets = issueTickets(auto, order, new AutoWay());
+        List<LottoTicket> manualTickets = issueTickets(manual, order, new ManualWay());
 
         return mergeTickets(autoTickets, manualTickets);
 
@@ -46,7 +43,7 @@ public class LottoGameVendor {
         }
     }
 
-    private static List<LottoTicket> issueTickets(int ticketCount, LottoPurchaseOrder order,
+    private static List<LottoTicket> issueTickets(TicketCount ticketCount, LottoPurchaseOrder order,
         LottoTicketingWay way) {
         return way.issueLottoTickets(ticketCount, order);
     }
