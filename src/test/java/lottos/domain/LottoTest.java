@@ -1,5 +1,6 @@
 package lottos.domain;
 
+import lottos.domain.exceptions.LottoDuplicationNumberException;
 import lottos.domain.exceptions.LottoNumberRangeIncorrectException;
 import lottos.domain.exceptions.LottoSizeIncorrectException;
 import lottos.domain.numbers.Number;
@@ -57,6 +58,12 @@ class LottoTest {
         for (Number number : lotto.getNumbers().elements()) {
             assertTrue(number.value() >= min && number.value() <= max);
         }
+    }
+
+    @Test
+    void 중복_숫자_검증() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
+        assertThrows(LottoDuplicationNumberException.class, () -> new Lotto(numbers));
     }
 
     private List<Integer> getNumbers(String input) {

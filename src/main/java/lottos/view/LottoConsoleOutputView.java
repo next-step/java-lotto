@@ -32,10 +32,8 @@ public class LottoConsoleOutputView {
         System.out.println(values);
     }
 
-    public void printPurchaseCount(final Lottos lottos) {
-        List<Lotto> elements = lottos.elements();
-        int purchaseCount = elements.size();
-        System.out.printf("%d개를 구매했습니다.%n", purchaseCount);
+    public void printPurchaseCount(final int manualPurchaseCount, final int automaticPurchaseCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualPurchaseCount, automaticPurchaseCount);
     }
 
     private void printIntroStatistics() {
@@ -56,7 +54,7 @@ public class LottoConsoleOutputView {
         }
     }
 
-    private void printCountOfMatches(Map<LottoPrize, List<LottoPrize>> prizeMap, LottoPrize winningLottoPrize) {
+    private void printCountOfMatches(final Map<LottoPrize, List<LottoPrize>> prizeMap, final LottoPrize winningLottoPrize) {
         final int prize = winningLottoPrize.getPrizeAmount();
         final int countOfMatches = winningLottoPrize.getCountOfMatches();
         final List<LottoPrize> lottoMatchers = prizeMap.getOrDefault(winningLottoPrize, new ArrayList<>());

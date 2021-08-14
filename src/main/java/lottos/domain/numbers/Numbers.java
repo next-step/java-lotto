@@ -4,6 +4,7 @@ import lottos.domain.exceptions.LottoSizeIncorrectException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Numbers {
@@ -19,7 +20,7 @@ public class Numbers {
                 .collect(Collectors.toList());
     }
 
-    public static Numbers from(List<Integer> numbers) {
+    public static Numbers valueOf(List<Integer> numbers) {
         return new Numbers(numbers);
     }
 
@@ -37,5 +38,18 @@ public class Numbers {
         return (int) (matchNumbers.numbers.stream()
                 .filter(this.numbers::contains)
                 .count());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Numbers numbers1 = (Numbers) o;
+        return Objects.equals(numbers, numbers1.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

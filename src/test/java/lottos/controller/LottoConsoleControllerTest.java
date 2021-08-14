@@ -17,7 +17,7 @@ class LottoConsoleControllerTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6,7:6", "1,2,3,4,5:3", ":5"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3,4,5,6,7:8", "1,2,3,4,5:7", ":5"}, delimiter = ':')
     void 로또_개수가_올바르지_않을경우(final String numbersText, final String bonusText) {
         assertThrows(LottoSizeIncorrectException.class, () -> consoleController.lastWeeksWinningLotto(numbersText, bonusText));
     }
