@@ -75,6 +75,14 @@ public class LottoNumberTest {
         assertEquals(allLottoNumbers.size(), 45);
     }
 
+    @DisplayName("로또 번호는 지정한 숫자로 정상 생성되어야 한다.")
+    @Test
+    public void createLottoNumberTest() {
+        // given, when, then
+        assertEquals(new LottoNumber(1).getNumber(), 1);
+        assertEquals(LottoNumber.valueOf(1).getNumber(), 1);
+    }
+
     @DisplayName("LottoNumber.class의 compareTo() 메소드는 로또 번호를 비교한다.")
     @ParameterizedTest
     @CsvSource(value = {"1:1:0", "1:2:-1", "3:1:1", "2:3:-1"}, delimiter = ':')
