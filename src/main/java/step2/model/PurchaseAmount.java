@@ -1,8 +1,8 @@
 package step2.model;
 
 public class PurchaseAmount {
-    private int purchaseAmount;
-    private int lottoCount;
+    private final int purchaseAmount;
+    private final int lottoCount;
     private static final int LOTTO_PRICE = 1000;
     private static final int MIN_AMOUNT = 1000;
 

@@ -1,7 +1,7 @@
 package step2.model;
 
 public class Bonus {
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public Bonus(String bonusNumber) {
         this.bonusNumber = new LottoNumber(bonusNumber);

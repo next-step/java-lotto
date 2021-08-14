@@ -3,8 +3,8 @@ package step2.model;
 import java.util.List;
 
 public class Winning {
-    private WinningNumber winningNumber;
-    private Bonus bonus;
+    private final WinningNumber winningNumber;
+    private final Bonus bonus;
 
     public Winning(WinningNumber winningNumber, Bonus bonus) {
         this.winningNumber = winningNumber;

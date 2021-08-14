@@ -3,7 +3,7 @@ package step2.model;
 import java.util.Objects;
 
 public class LottoNumber {
-    private int lottoNumber;
+    private final int lottoNumber;
 
     private static final int MIN = 1;
     private static final int MAX = 45;

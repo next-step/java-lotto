@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private List<Lotto> lottoList;
+    private final List<Lotto> lottoList;
 
     public LottoGroup(int lottoCount) {
         lottoList = new ArrayList<>();

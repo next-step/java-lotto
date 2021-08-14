@@ -10,9 +10,9 @@ public enum Rank {
     FIFTH(3, false, 5000),
     MISS(0, false, 0);
 
-    private int countOfMatch;
-    private boolean isBonus;
-    private int winningPrice;
+    private final int countOfMatch;
+    private final boolean isBonus;
+    private final int winningPrice;
 
     Rank(int countOfMatch, boolean isBonus, int winningPrice) {
         this.countOfMatch = countOfMatch;
