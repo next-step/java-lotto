@@ -23,13 +23,8 @@ public class TicketMaker {
     }
 
     public List<List<Integer>> makeTickets(int payment) {
-        if (payment < 1000) {
-            throw new IllegalArgumentException("최소 1,000원 이상 입력 가능합니다.(1장에 1,000원)");
-        }
-
-        if (payment % 1000 != 0) {
-            throw new IllegalArgumentException("금액은 1,000 원 단위로 입력 가능합니다.");
-        }
+        validateMinPayment(payment);
+        validatePaymentUnit(payment);
 
         this.makingCount = payment / PRICE_PER_ONE_TICKET;
 
@@ -44,14 +39,22 @@ public class TicketMaker {
         return lottoTickets;
     }
 
+    private void validatePaymentUnit(int payment) {
+        if (payment % 1000 != 0) {
+            throw new IllegalArgumentException("금액은 1,000 원 단위로 입력 가능합니다.");
+        }
+    }
+
+    private void validateMinPayment(int payment) {
+        if (payment < 1000) {
+            throw new IllegalArgumentException("최소 1,000원 부터 입력 가능합니다.(1장에 1,000원)");
+        }
+    }
+
     private static void setTotalNumbers() {
         for (int i = 1; i <= 45; i++) {
             TOTAL_NUMBERS.add(i);
         }
-    }
-
-    protected static int getPricePerOneTicket() {
-        return PRICE_PER_ONE_TICKET;
     }
 
     protected static List<Integer> getTotalNumbers() {
