@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class WinningIdentifier {
 
-    private LottoTicket winningTicket;
+    private final LottoTicket winningTicket;
 
     public WinningIdentifier(LottoTicket winningTicket) {
         this.winningTicket = winningTicket;

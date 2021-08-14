@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class WinningReport {
 
-    private Map<Rank, Integer> statistics;
+    private final Map<Rank, Integer> statistics;
 
     public WinningReport(List<Rank> ranks) {
         this.statistics = transformToMap(ranks);
@@ -15,12 +15,12 @@ public class WinningReport {
     private Map<Rank, Integer> transformToMap(List<Rank> ranks) {
         Map<Rank, Integer> result = new HashMap<>();
 
-        for(Rank rank : Rank.values()){
-            result.put(rank,0);
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
         }
 
-        for(Rank rank : ranks){
-            result.put(rank, result.get(rank)+1);
+        for (Rank rank : ranks) {
+            result.put(rank, result.get(rank) + 1);
         }
         return result;
     }
