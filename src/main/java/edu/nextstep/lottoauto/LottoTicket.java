@@ -14,13 +14,22 @@ public class LottoTicket {
         initTotalNumbers();
     }
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    protected LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket create() {
         Collections.shuffle(TOTAL_NUMBERS);
         List<Integer> lottoNumbers = TOTAL_NUMBERS.subList(0, 6);
+        Collections.sort(lottoNumbers);
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket create(int[] lottoNumbersArr) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (int lottoNumber : lottoNumbersArr) {
+            lottoNumbers.add(lottoNumber);
+        }
         Collections.sort(lottoNumbers);
         return new LottoTicket(lottoNumbers);
     }

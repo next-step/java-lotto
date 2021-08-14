@@ -31,11 +31,11 @@ public class WinningCheckerTest {
     @Test
     void winningCheck() {
         // given
-        List<List<Integer>> lottoTickets = new ArrayList<>();
-        lottoTickets.add(makeLottoTicket(new int[]{1, 2, 3, 4, 5, 6}));
-        lottoTickets.add(makeLottoTicket(new int[]{2, 3, 4, 5, 6, 7}));
-        lottoTickets.add(makeLottoTicket(new int[]{3, 4, 5, 6, 7, 8}));
-        lottoTickets.add(makeLottoTicket(new int[]{4, 5, 6, 7, 8, 9}));
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(LottoTicket.create(new int[]{1, 2, 3, 4, 5, 6}));
+        lottoTickets.add(LottoTicket.create(new int[]{2, 3, 4, 5, 6, 7}));
+        lottoTickets.add(LottoTicket.create(new int[]{3, 4, 5, 6, 7, 8}));
+        lottoTickets.add(LottoTicket.create(new int[]{4, 5, 6, 7, 8, 9}));
 
 
         // when
@@ -49,13 +49,5 @@ public class WinningCheckerTest {
 
         // then
         Assertions.assertThat(winningCheckResult).isEqualTo(checkResult);
-    }
-
-    List<Integer> makeLottoTicket(int[] lottoNumbers) {
-        List<Integer> lottoTicket = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            lottoTicket.add(lottoNumbers[i]);
-        }
-        return lottoTicket;
     }
 }
