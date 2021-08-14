@@ -12,44 +12,33 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AutoLottoTest {
     @Test
     public void 구매금액_null_빈문자() {
-        //given
-        PurchaseAmount user = new PurchaseAmount();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCount(""));
+                () ->  new PurchaseAmount(""));
 
         exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCount(null));
+                () ->  new PurchaseAmount(null));
     }
 
     @Test
     public void 구매금액_숫자가아님() {
-        //given
-        PurchaseAmount user = new PurchaseAmount();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCount("test"));
+                () ->  new PurchaseAmount("test"));
     }
 
     @Test
     public void 구매금액_1000미만() {
-        //given
-        PurchaseAmount user = new PurchaseAmount();
-
         //then
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () ->  user.getLottoCount("999"));
+                () ->  new PurchaseAmount("999"));
     }
 
     @Test
     public void 구매갯수() {
-        //given
-        PurchaseAmount user = new PurchaseAmount();
-
         //when
-        int lottoCnt = user.getLottoCount("1000");
+        PurchaseAmount purchaseAmount = new PurchaseAmount("1000");
+        int lottoCnt = purchaseAmount.getLottoCount();
 
         //then
         assertThat(lottoCnt).isEqualTo(1);
@@ -158,7 +147,7 @@ public class AutoLottoTest {
     @Test
     public void 수익률() {
         //given
-        int amount = 14000;
+        PurchaseAmount amount = new PurchaseAmount("14000");
         Map<Rank, Integer> winningResult = new HashMap<>();
         for (Rank rank : Rank.values()) {
             winningResult.put(rank, 0);

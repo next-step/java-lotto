@@ -54,7 +54,7 @@ public class WinningResult {
     }
 
 
-    public String getWinningRate(int amount, Map<Rank, Integer> winningResult) {
+    public String getWinningRate(PurchaseAmount purchaseAmount, Map<Rank, Integer> winningResult) {
         int totalWinPrice = 0;
 
         for (Rank rule : Rank.values()) {
@@ -62,7 +62,7 @@ public class WinningResult {
             totalWinPrice += rule.getWinningPrice() * winningCount;
         }
 
-        double result = (double) totalWinPrice / (double) amount;
+        double result = (double) totalWinPrice / (double) purchaseAmount.getPurchaseAmount();
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
         return decimalFormat.format(result);

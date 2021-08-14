@@ -12,9 +12,8 @@ public class Main {
         InputView inputView = new InputView();
         String input = inputView.ask("구입금액을 입력해 주세요.");
 
-        PurchaseAmount user = new PurchaseAmount();
-        int amount = user.getPurchaseAmount(input);
-        int lottoCount = user.getLottoCount(input);
+        PurchaseAmount amount = new PurchaseAmount(input);
+        int lottoCount = amount.getLottoCount();
         System.out.println(lottoCount + "개를 구매했습니다.");
 
         LottoGroup lottoGroup = new LottoGroup(lottoCount);
