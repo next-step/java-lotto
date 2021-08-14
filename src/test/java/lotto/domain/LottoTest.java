@@ -20,6 +20,6 @@ class LottoTest {
     void set_winning_numbers() {
         Lotto lotto = new Lotto(1000);
         lotto.setWinningNumbers("1, 2, 3, 4, 5, 6");
-        System.out.println(lotto.getLottoWinner());
+        assertThat(lotto.getWinningNumber()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }
