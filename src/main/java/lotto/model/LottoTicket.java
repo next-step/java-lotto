@@ -49,9 +49,9 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public long compareTicket(LottoTicket winningTicket) {
-        return numbers.stream()
-                .filter(winningTicket::contains)
-                .count();
+    public int compareTicket(LottoTicket ticket) {
+        return Math.toIntExact(numbers.stream()
+                .filter(ticket::contains)
+                .count());
     }
 }

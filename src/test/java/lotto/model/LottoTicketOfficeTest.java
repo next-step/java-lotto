@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottoTicketOfficeTest {
 
     private LottoTicketOffice lottoTicketOffice;
