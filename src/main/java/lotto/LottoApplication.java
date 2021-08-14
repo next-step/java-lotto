@@ -17,10 +17,10 @@ public class LottoApplication {
         long manualLottoCount = inputView.getManualLottoCount();
         String[] manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
 
-        LottoTickets manualLottoTickets = new LottoTickets(manualLottoNumbers);
-        LottoShop lottoShop = new LottoShop(manualLottoTickets);
+        AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
+        LottoShop lottoShop = new LottoShop(lottoGenerator);
 
-        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount);
+        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount, manualLottoNumbers);
         ResultView.showBuyLottoTickets(lottoTickets, (int)manualLottoCount);
 
         List<Integer> winningNumbers = inputView.getWinningNumber();

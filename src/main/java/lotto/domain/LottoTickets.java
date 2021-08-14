@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class LottoTickets {
 
@@ -17,21 +15,6 @@ public final class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTickets(final String... lottoTicketString) {
-        this.lottoTickets = Arrays.stream(lottoTicketString)
-                .map(ManualLottoGenerator::new)
-                .map(ManualLottoGenerator::generate)
-                .collect(Collectors.toList());
-    }
-
-    public void add(LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
-    }
-
-    public int size() {
-        return lottoTickets.size();
-    }
-
     public LottoStatistic matchLottoTickets(final WinningLottoTicket winningLottoTicket) {
         List<LottoRank> lottoStatistic = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
@@ -40,7 +23,21 @@ public final class LottoTickets {
         return new LottoStatistic(lottoStatistic);
     }
 
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+    }
+
+    public void addAll(List<LottoTicket> lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets);
+    }
+
+    public int size() {
+        return lottoTickets.size();
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+
 }
