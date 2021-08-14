@@ -46,14 +46,14 @@ public class LottoTicket {
         }
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoBall anyLottoBall) {
         return lottoBalls.stream()
-            .anyMatch(lottoBall -> lottoBall.equals((LottoBall.select(number))));
+            .anyMatch(lottoBall -> lottoBall.equals((LottoBall.select(anyLottoBall.number()))));
     }
 
     public int countMatchNumber(LottoTicket winnerNumbers) {
         return (int)lottoBalls.stream()
-            .filter(lottoBall -> winnerNumbers.contains(lottoBall.number()))
+            .filter(winnerNumbers::contains)
             .count();
     }
 

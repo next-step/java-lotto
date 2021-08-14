@@ -14,7 +14,7 @@ public class WinnerNumbers {
     }
 
     public Rank decideRank(LottoTicket lottoTicket) {
-        return Rank.valueOf(lottoTicket.countMatchNumber(winnerNumbers), lottoTicket.contains(bonusBall.number()));
+        return Rank.valueOf(lottoTicket.countMatchNumber(winnerNumbers), lottoTicket.contains(bonusBall));
     }
 }
 
