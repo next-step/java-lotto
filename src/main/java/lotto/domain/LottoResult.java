@@ -35,7 +35,7 @@ public class LottoResult {
       final Lotteries lotteries,
       final Map<Rank, Integer> result) {
 
-    return Lotteries.MatchLottosForRank(lotteries, winLottoInfo, result);
+    return Lotteries.matchLottosForRank(lotteries, winLottoInfo, result);
   }
 
   private static List<Rank> creatRankInfo() {

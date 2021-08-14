@@ -21,7 +21,7 @@ class LotteriesTest {
     Lotteries lotteries = new Lotteries(lottos);
     WinLottoInfo winLottoInfo = new WinLottoInfo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 31)), 7);
 
-    Map<Rank, Integer> rankIntegerMap = Lotteries.MatchLottosForRank(lotteries, winLottoInfo,
+    Map<Rank, Integer> rankIntegerMap = Lotteries.matchLottosForRank(lotteries, winLottoInfo,
         LottoResult.createRankByMap());
 
     assertThat(rankIntegerMap.get(Rank.THIRD)).isEqualTo(1);
