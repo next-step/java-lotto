@@ -3,20 +3,20 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class InputView {
 
     private static final String MESSAGE_INPUT_AMOUNT = "구입금액을 입력해 주세요.";
+    private static final String MESSAGE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_INPUT_VALUE_INCORRECT = "입력값이 올바르지 않습니다.";
     private static final String NUMBER_SEPARATOR = ",";
 
     private final Scanner scanner;
 
-    public InputView() {
-        scanner = new Scanner(System.in);
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
     }
 
     public long getInputAmount() {
@@ -33,19 +33,20 @@ public class InputView {
 
         String[] inputArr = input.split(NUMBER_SEPARATOR);
 
-        return Arrays.stream(inputArr)
-                .map(String::trim)
-                .map(wrapAsThrowException(Integer::parseInt))
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(inputArr)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
+        }
     }
 
-    private <T, R> Function<T, R> wrapAsThrowException(Function<T, R> f) {
-        return (T r) -> {
-            try {
-                return f.apply(r);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
-            }
-        };
+    public int getBonusNumber() {
+        System.out.println(MESSAGE_INPUT_BONUS_NUMBER);
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
     }
 }

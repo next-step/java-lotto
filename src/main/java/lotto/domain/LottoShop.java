@@ -14,27 +14,23 @@ public final class LottoShop {
     }
 
     public LottoTickets buy(final long amount) {
-        validationCheck(amount);
+        validateMinimumAmount(amount);
 
         long purchaseCount = getPurchaseCount(amount);
-        return buyLottoBatch(purchaseCount);
+        return buyLottoTickets(purchaseCount);
     }
 
-    private void validationCheck(final long amount) {
+    private void validateMinimumAmount(final long amount) {
         if (amount < LOTTO_PRIZE_AMOUNT) {
             throw new IllegalArgumentException("less then the minimum amount");
         }
-
-        if (amount % LOTTO_PRIZE_AMOUNT != 0 ) {
-            throw new IllegalArgumentException("amount left over");
-        }
     }
 
-    private long getPurchaseCount(final long price) {
-        return Math.floorDiv(price, LOTTO_PRIZE_AMOUNT);
+    private long getPurchaseCount(final long amount) {
+        return Math.floorDiv(amount, LOTTO_PRIZE_AMOUNT);
     }
 
-    private LottoTickets buyLottoBatch(final long purchaseCount) {
+    private LottoTickets buyLottoTickets(final long purchaseCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             lottoTickets.add(lottoGenerator.generate());

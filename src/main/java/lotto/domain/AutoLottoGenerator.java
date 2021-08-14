@@ -1,34 +1,33 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public final class AutoLottoGenerator implements LottoGenerator {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-
-    private static final List<LottoNumber> targetNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+    private static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
     @Override
     public LottoTicket generate() {
-        shuffleLottoNumber();
-        return pickLottoNumbers();
+        List<LottoNumber> targetLottoNumbers = generateTargetLottoNumbers();
+        return pickLottoNumbers(targetLottoNumbers);
     }
 
-    private void shuffleLottoNumber() {
+    private List<LottoNumber> generateTargetLottoNumbers() {
+        List<LottoNumber> targetNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(targetNumbers);
+        return targetNumbers;
     }
 
-    private LottoTicket pickLottoNumbers() {
+    private LottoTicket pickLottoNumbers(final List<LottoNumber> targetNumbers) {
         List<LottoNumber> lottoNumbers = targetNumbers.stream()
-                .limit(LOTTO_NUMBER_COUNT)
+                .limit(LottoTicket.LOTTO_TICKET_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
 

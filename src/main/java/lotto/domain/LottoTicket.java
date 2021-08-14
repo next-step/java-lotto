@@ -1,38 +1,50 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class LottoTicket {
 
-    private static final int LOTTO_TICKET_SIZE = 6;
+    public static final int LOTTO_TICKET_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final List<LottoNumber> lottoNumbers) {
-        validationCheck(lottoNumbers);
+        validateLottoTicketSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validationCheck(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final int[] lottoNumberVarargs) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberVarargs)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        validateLottoTicketSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("different number size");
         }
     }
 
-    public int matchingTicket(final List<Integer> winningNumbers) {
+    public LottoRank matchLottoRank(final WinningLottoTicket winningLottoTicket) {
+        return LottoRank.of(matchCount(winningLottoTicket), winningLottoTicket.containsBonusNumber(this));
+    }
+
+    public int matchCount(final WinningLottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount = getMatchCount(winningNumbers, lottoNumber, matchCount);
+            matchCount += winningLottoTicket.contains(lottoNumber) ? 1 : 0;
         }
         return matchCount;
     }
 
-    private int getMatchCount(final List<Integer> winningNumbers, final LottoNumber lottoNumber, final int matchCount) {
-        if (winningNumbers.contains(lottoNumber.getNumber())) {
-            return matchCount + 1;
-        }
-        return matchCount;
+    public boolean contains(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
