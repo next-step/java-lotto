@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -17,12 +16,9 @@ public class LottoTickets {
     }
 
     public WinStatistics calculateStatistics(WinnerNumbers winnerNumbers) {
-        Map<Rank, Integer> winStatisticsDTO = new HashMap<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = winnerNumbers.decideRank(lottoTicket);
-            winStatisticsDTO.put(rank, winStatisticsDTO.getOrDefault(rank, 0) + 1);
-        }
-        return WinStatistics.from(winStatisticsDTO);
+        return WinStatistics.from(lottoTickets.stream()
+            .collect(Collectors.groupingBy(winnerNumbers::decideRank, Collectors.summingInt(s -> 1)))
+        );
     }
 
 }
