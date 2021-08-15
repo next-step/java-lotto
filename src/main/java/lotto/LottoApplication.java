@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,7 +23,15 @@ public class LottoApplication {
         outputView.printTickets(lottoGame.getLottoGame());
         outputView.printLastWinningNumber();
 
-        lottoGame.setWinningNumber(inputView.getNumber());
+        String inputNumberString = inputView.getNumber();
+        List<String> splitNumbers = Arrays.asList(inputNumberString.split(","));
+
+        List<Integer> numbers = new ArrayList<>();
+        for (String splitNumber : splitNumbers) {
+            numbers.add(Integer.parseInt(splitNumber.trim()));
+        }
+
+        lottoGame.setWinningNumber(numbers);
         lottoGame.checkResult();
         lottoGame.setResult();
 

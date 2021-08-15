@@ -19,8 +19,8 @@ public class LottoWinningPolicy {
 
     private final LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers();
 
-    public void setWinningNumber(final String winningNumbersString) {
-        lottoWinningNumbers.selectWinningNumbers(winningNumbersString);
+    public void setWinningNumber(final List<Integer> numbers) {
+        lottoWinningNumbers.selectWinningNumbers(numbers);
     }
 
     public List<Integer> getWinningNumber() {

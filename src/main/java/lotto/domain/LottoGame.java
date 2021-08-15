@@ -18,8 +18,8 @@ public class LottoGame {
         return lotto.getTicketNum();
     }
 
-    public void setWinningNumber(final String winningNumbersString) {
-        lottoWinningPolicy.setWinningNumber(winningNumbersString);
+    public void setWinningNumber(final List<Integer> numbers) {
+        lottoWinningPolicy.setWinningNumber(numbers);
     }
 
     public List<Integer> getWinningNumber() {

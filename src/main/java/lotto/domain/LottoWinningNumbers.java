@@ -8,12 +8,8 @@ public class LottoWinningNumbers {
 
     private final List<Integer> winningNumbers = new ArrayList<>();
 
-    public void selectWinningNumbers(final String winningNumbersString) {
-        String[] numbers = winningNumbersString.split(",");
-
-        for (String number : numbers) {
-            winningNumbers.add(Integer.parseInt(number.trim()));
-        }
+    public void selectWinningNumbers(final List<Integer> numbers) {
+        winningNumbers.addAll(numbers);
     }
 
     public List<Integer> getWinningNumber() {
