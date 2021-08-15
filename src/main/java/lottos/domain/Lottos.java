@@ -22,8 +22,8 @@ public class Lottos {
         this.lottos = issue(purchaseAmount);
     }
 
-    public Lottos(final int purchaseAmount, final int manualLottoCount, final LottoRandomGenerator lottoRandomGenerator) {
-        this(purchaseAmount - (manualLottoCount * AMOUNT_PER_PIECE), lottoRandomGenerator);
+    public Lottos(final int purchaseAmount, final int manualLottoCount, final LottoGenerator generator) {
+        this(purchaseAmount - (manualLottoCount * AMOUNT_PER_PIECE), generator);
     }
 
     public Lottos(final List<Lotto> lottos, final LottoGenerator generator) {

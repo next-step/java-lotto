@@ -2,10 +2,7 @@ package lottos;
 
 
 import lottos.controller.LottoConsoleController;
-import lottos.domain.LottoGameStatistics;
-import lottos.domain.LottoResult;
-import lottos.domain.Lottos;
-import lottos.domain.WinningLotto;
+import lottos.domain.*;
 import lottos.view.LottoConsoleInputView;
 import lottos.view.LottoConsoleOutputView;
 
@@ -20,7 +17,7 @@ public class ApplicationRunner {
 
         LottoConsoleInputView lottoConsoleInputView = new LottoConsoleInputView(scanner);
         LottoConsoleOutputView lottoConsoleOutputView = new LottoConsoleOutputView();
-        LottoConsoleController lottoConsoleController = new LottoConsoleController();
+        LottoConsoleController lottoConsoleController = new LottoConsoleController(new LottoRandomGenerator());
 
         int purchaseAmount = lottoConsoleInputView.enterPurchaseAmount();
         int manualLottoCount = lottoConsoleInputView.enterManualLottoCount();

@@ -1,7 +1,7 @@
 package lottos.controller;
 
 import lottos.domain.Lotto;
-import lottos.domain.LottoRandomGenerator;
+import lottos.domain.LottoGenerator;
 import lottos.domain.Lottos;
 import lottos.domain.WinningLotto;
 import lottos.domain.exceptions.LottoSizeIncorrectException;
@@ -15,10 +15,15 @@ import java.util.stream.Collectors;
 public class LottoConsoleController {
 
     private static final String NUMBERS_TEXT_SPLIT_REGEX = ",";
-    private final LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
+
+    private final LottoGenerator generator;
+
+    public LottoConsoleController(LottoGenerator generator) {
+        this.generator = generator;
+    }
 
     public Lottos buy(final int purchaseAmount, final int manualLottoCount) {
-        return new Lottos(purchaseAmount, manualLottoCount, lottoRandomGenerator);
+        return new Lottos(purchaseAmount, manualLottoCount, generator);
     }
 
     public Lottos buy(final List<String> numberTexts) {
@@ -26,7 +31,7 @@ public class LottoConsoleController {
         for (String numberText : numberTexts) {
             lottos.add(new Lotto(parseTextToNumbers(numberText)));
         }
-        return new Lottos(lottos, lottoRandomGenerator);
+        return new Lottos(lottos, generator);
     }
 
     public WinningLotto lastWeeksWinningLotto(final String lastWeeksNumbersText, final String bonusNumberText) {
