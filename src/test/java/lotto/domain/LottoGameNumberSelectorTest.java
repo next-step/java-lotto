@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-class LottoNumberSelectorTest {
+class LottoGameNumberSelectorTest {
 
     @DisplayName("랜덤한 6개의 수가 추출 되어여 함.")
     @Test

@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.domain.LottoGame;
+import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 
@@ -16,8 +16,8 @@ public class OutputView {
         System.out.println(gameNum + "개를 구매했습니다.");
     }
 
-    public void printTickets(LottoGame lottoGame) {
-        List<LottoTicket> lottoTickets = lottoGame.getTickets();
+    public void printTickets(Lotto lotto) {
+        List<LottoTicket> lottoTickets = lotto.getTickets();
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket.getLottoNumbers());
         }

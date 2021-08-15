@@ -1,36 +1,48 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
-    private static final int ONE_GAME_PRICE = 1000;
-    private final List<LottoTicket> tickets = new ArrayList<>();
+    private final Lotto lotto;
+    private final LottoWinningPolicy lottoWinningPolicy = new LottoWinningPolicy();
+    private final int price;
 
     public LottoGame(final int price) {
-        int ticketNumber = buyTicketNumber(price);
-        for (int i = 0; i < ticketNumber; i++) {
-            tickets.add(new LottoTicket());
-        }
+        lotto = new Lotto(price);
+        this.price = price;
     }
 
-    private int buyTicketNumber(final int price) {
-        return (price / ONE_GAME_PRICE);
+    public int getGameNum() {
+        return lotto.getTicketNum();
     }
 
-    public int getTicketNum() {
-        return tickets.size();
+    public void setWinningNumber(final String winningNumbersString) {
+        lottoWinningPolicy.setWinningNumber(winningNumbersString);
     }
 
-    public void checkResult(final List<Integer> winningNumber) {
-        for (LottoTicket lottoTicket : tickets) {
-            lottoTicket.checkResult(winningNumber);
-        }
+    public List<Integer> getWinningNumber() {
+        return lottoWinningPolicy.getWinningNumber();
     }
 
-    public List<LottoTicket> getTickets() {
-        return tickets;
+    public void checkResult() {
+        lotto.checkResult(lottoWinningPolicy.getWinningNumber());
     }
 
+    public void setResult() {
+        lottoWinningPolicy.setResult(lotto);
+    }
+
+    public Map<LottoRank, Integer> getResult() {
+        return lottoWinningPolicy.getResult();
+    }
+
+    public double getProfitRate() {
+        return (double) lottoWinningPolicy.calculateWinningPrice() / price;
+    }
+
+    public Lotto getLottoGame() {
+        return lotto;
+    }
 }

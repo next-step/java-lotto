@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,18 +14,18 @@ public class LottoApplication {
         outputView.printOpening();
         int price = Integer.parseInt(inputView.getNumber());
 
-        Lotto lotto = new Lotto(price);
+        LottoGame lottoGame = new LottoGame(price);
 
-        outputView.printGameNum(lotto.getGameNum());
-        outputView.printTickets(lotto.getLottoGame());
+        outputView.printGameNum(lottoGame.getGameNum());
+        outputView.printTickets(lottoGame.getLottoGame());
         outputView.printLastWinningNumber();
 
-        lotto.setWinningNumber(inputView.getNumber());
-        lotto.checkResult();
-        lotto.setResult();
+        lottoGame.setWinningNumber(inputView.getNumber());
+        lottoGame.checkResult();
+        lottoGame.setResult();
 
-        outputView.printResult(lotto.getResult());
-        outputView.printProfitValue(lotto.getProfitRate());
+        outputView.printResult(lottoGame.getResult());
+        outputView.printProfitValue(lottoGame.getProfitRate());
 
     }
 

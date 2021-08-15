@@ -27,8 +27,8 @@ public class LottoWinningPolicy {
         return lottoWinningNumbers.getWinningNumber();
     }
 
-    public void setResult(LottoGame lottoGame) {
-        List<LottoTicket> lottoTickets = lottoGame.getTickets();
+    public void setResult(Lotto lotto) {
+        List<LottoTicket> lottoTickets = lotto.getTickets();
 
         lottoTickets.forEach(lottoTicket -> result.put(lottoTicket.getLottoRank(),
             result.get(lottoTicket.getLottoRank()) + 1));
