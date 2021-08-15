@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.dto.LottoPurchaseResponse;
 import lotto.domain.dto.LottoWinnersDto;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,11 +24,16 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         lottoWinnersDtos.stream()
-                .forEach(lottoWinnersDto -> printWinnersByAward(lottoWinnersDto.getMatchNumbers(), lottoWinnersDto.getAmount(), lottoWinnersDto.getCountWinners()));
+                .sorted(Comparator.comparingInt(LottoWinnersDto::getAmount))
+                .forEach(lottoWinnersDto -> printWinnersByAward(lottoWinnersDto.getMatchNumbers(), lottoWinnersDto.isBonus(), lottoWinnersDto.getAmount(), lottoWinnersDto.getCountWinners()));
 
     }
 
-    private static void printWinnersByAward(int matchNumbers, int amount, long countWinners) {
+    private static void printWinnersByAward(int matchNumbers, boolean bonus, int amount, long countWinners) {
+        if(matchNumbers == 5 && bonus == true){
+            System.out.println(matchNumbers + "개 일치, 보너스 볼 일치(" + amount + "원)- " + countWinners);
+            return ;
+        }
         System.out.println(matchNumbers + "개 일치 (" + amount + "원)- " + countWinners);
     }
 

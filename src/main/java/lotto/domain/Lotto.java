@@ -6,6 +6,8 @@ import java.util.Set;
 public class Lotto {
 
     public static final long SIZE = 6;
+    public static final int SECOND_CANDIDATE_MATCH_NUMBERS = 5;
+    public static final boolean DEFAULT_FALSE_BONUS_NUMBER = false;
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -23,8 +25,12 @@ public class Lotto {
         }
     }
 
-    public Award drawLotto(Lotto winnerLotto) {
-        return Award.findBy(countContains(winnerLotto));
+    public Award drawLotto(WinnerLotto winnerLotto) {
+        long matchNumbers = countContains(winnerLotto.getLotto());
+        if(matchNumbers == SECOND_CANDIDATE_MATCH_NUMBERS) {
+            return Award.findBy(matchNumbers, matchBonus(winnerLotto.getBonusNumber()));
+        }
+        return Award.findBy(matchNumbers, DEFAULT_FALSE_BONUS_NUMBER);
     }
 
     public long countContains(Lotto winnerLotto) {
@@ -35,5 +41,9 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    private boolean matchBonus(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 }

@@ -13,7 +13,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoDrawResponse drawLottos(Lotto winnerLotto) {
+    public LottoDrawResponse drawLottos(WinnerLotto winnerLotto) {
         LottoDrawResponse lottoResult = new LottoDrawResponse();
         for (Lotto lotto : lottos) {
             lottoResult.addOne(lotto.drawLotto(winnerLotto));

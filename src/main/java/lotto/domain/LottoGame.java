@@ -12,7 +12,7 @@ public class LottoGame {
         return new LottoPurchaseResponse(lottos);
     }
 
-    public LottoDrawResponse drawLotto(Lotto winnerLotto) {
+    public LottoDrawResponse drawLotto(WinnerLotto winnerLotto) {
         return lottos.drawLottos(winnerLotto);
     }
 }

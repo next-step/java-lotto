@@ -28,11 +28,14 @@ public class LottoMain {
         ResultView.printYield(lottoWinnersDtos, lottoPurchaseAmount);
     }
 
-    private static Lotto getWinnerLotto() {
+    private static WinnerLotto getWinnerLotto() {
         Set<Integer> winnerNumbers = InputView.requestWinnerNumbers();
-        return new Lotto(winnerNumbers.stream()
+        Lotto lotto = new Lotto(winnerNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
+        Integer bonusNumber = InputView.requestBonusNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        return new WinnerLotto(lotto, bonusLottoNumber);
     }
 
     private static List<LottoWinnersDto> createLottoWinnerDtos(Map<Award, Integer> lottoResult) {
