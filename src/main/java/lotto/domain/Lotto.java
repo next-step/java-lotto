@@ -9,13 +9,13 @@ public class Lotto {
     private final List<LottoTicket> tickets = new ArrayList<>();
 
     public Lotto(final int price, LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        int ticketNumber = buyTicketNumber(price);
+        int ticketNumber = calTicketSize(price);
         for (int i = 0; i < ticketNumber; i++) {
             tickets.add(new LottoTicket(lottoNumberSelectPolicy));
         }
     }
 
-    private int buyTicketNumber(final int price) {
+    private int calTicketSize(final int price) {
         return (price / ONE_GAME_PRICE);
     }
 
@@ -23,9 +23,9 @@ public class Lotto {
         return tickets.size();
     }
 
-    public void checkResult(final List<Integer> winningNumber) {
+    public void checkResult(final LottoNumbers lottoNumbers) {
         for (LottoTicket lottoTicket : tickets) {
-            lottoTicket.checkResult(winningNumber);
+            lottoTicket.checkResult(lottoNumbers);
         }
     }
 

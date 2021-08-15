@@ -4,9 +4,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class LottoWinningPolicy {
+public class LottoResult {
 
-    private LottoNumbers lottoNumbers;
     private final Map<LottoRank, Integer> result = new EnumMap<LottoRank, Integer>(
         LottoRank.class) {
         {
@@ -18,18 +17,8 @@ public class LottoWinningPolicy {
         }
     };
 
-
-    public void setWinningNumber(final List<Integer> numbers) {
-        lottoNumbers = new LottoNumbers(numbers);
-    }
-
-    public List<Integer> getWinningNumber() {
-        return lottoNumbers.getLottoNumbers();
-    }
-
     public void setResult(Lotto lotto) {
         List<LottoTicket> lottoTickets = lotto.getTickets();
-
         lottoTickets.forEach(lottoTicket -> result.put(lottoTicket.getLottoRank(),
             result.get(lottoTicket.getLottoRank()) + 1));
     }

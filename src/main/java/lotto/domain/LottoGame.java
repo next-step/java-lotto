@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
 
     private final Lotto lotto;
-    private final LottoWinningPolicy lottoWinningPolicy = new LottoWinningPolicy();
+    private final LottoResult lottoWinningPolicy = new LottoResult();
     private final int price;
 
     public LottoGame(final int price, LottoNumberSelectPolicy lottoNumberSelectPolicy) {
@@ -18,16 +17,8 @@ public class LottoGame {
         return lotto.getTicketNum();
     }
 
-    public void setWinningNumber(final List<Integer> numbers) {
-        lottoWinningPolicy.setWinningNumber(numbers);
-    }
-
-    public List<Integer> getWinningNumber() {
-        return lottoWinningPolicy.getWinningNumber();
-    }
-
-    public void checkResult() {
-        lotto.checkResult(lottoWinningPolicy.getWinningNumber());
+    public void checkResult(LottoNumbers lottoNumbers) {
+        lotto.checkResult(lottoNumbers);
     }
 
     public void setResult() {

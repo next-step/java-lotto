@@ -13,7 +13,7 @@ public class LottoTicket {
         lottoRank = LottoRank.FAIL;
     }
 
-    public void checkResult(final List<Integer> winningNumbers) {
+    public void checkResult(final LottoNumbers winningNumbers) {
         List<Integer> numbers = lottoNumbers.getLottoNumbers();
         for (Integer lottoNumber : numbers) {
             isCollectNumber(winningNumbers, lottoNumber);
@@ -25,7 +25,7 @@ public class LottoTicket {
         this.lottoRank = lottoRank.findRank(collectNumber);
     }
 
-    private void isCollectNumber(final List<Integer> winningNumbers, final int number) {
+    private void isCollectNumber(final LottoNumbers winningNumbers, final int number) {
         if (winningNumbers.contains(number)) {
             increaseCollectNumber();
         }

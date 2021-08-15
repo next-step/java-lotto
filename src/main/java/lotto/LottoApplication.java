@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumberRandomSelector;
+import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,8 +33,8 @@ public class LottoApplication {
             numbers.add(Integer.parseInt(splitNumber.trim()));
         }
 
-        lottoGame.setWinningNumber(numbers);
-        lottoGame.checkResult();
+        LottoNumbers winningNumbers = new LottoNumbers(numbers);
+        lottoGame.checkResult(winningNumbers);
         lottoGame.setResult();
 
         outputView.printResult(lottoGame.getResult());
