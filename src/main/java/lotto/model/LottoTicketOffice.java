@@ -27,7 +27,6 @@ public class LottoTicketOffice {
 
     private LottoTicket publishLottoTicket() {
         Collections.shuffle(lottoNumber);
-        Collections.sort(lottoNumber);
-        return new LottoTicket(lottoNumber.stream().limit(6).collect(Collectors.toList()));
+        return new LottoTicket(lottoNumber.stream().limit(6).sorted().collect(Collectors.toList()));
     }
 }
