@@ -6,8 +6,11 @@ import java.util.Objects;
 public class WinningNumbers{
 
     private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final List<LottoNumber> winningNumbers;
+
     private final LottoNumber bonusNumber;
+
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         validateWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
