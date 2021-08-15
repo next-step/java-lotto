@@ -3,19 +3,20 @@ package step3.view;
 import step3.util.Rank;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private static final Double chargeOfLotto = 1000.0;
-    public void printMatchedLottoRecord(HashMap<Rank, Integer> matchedLottoRecordArray) {
+    public void printMatchedLottoRecord(Map<Rank, Integer> matchedLottoRecordArray) {
 
         System.out.println("당첨 통계");
         System.out.println("-------");
-        System.out.printf("3개 일치 (%s)- %s개\n",Rank.FIFTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIFTH));
-        System.out.printf("4개 일치 (%s)- %s개\n",Rank.FOURTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FOURTH));
-        System.out.printf("5개 일치 (%s)- %s개\n",Rank.THIRD.getWinningMoney(),matchedLottoRecordArray.get(Rank.THIRD));
-        System.out.printf("5개 일치 (%s)- %s개\n",Rank.SECOND.getWinningMoney(),matchedLottoRecordArray.get(Rank.SECOND));
-        System.out.printf("6개 일치 (%s)- %s개\n",Rank.FIRST.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIRST));
+        System.out.printf("%s개 일치 (%s)- %s개\n",Rank.FIFTH.getCountOfMatch(),Rank.FIFTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIFTH));
+        System.out.printf("%s개 일치 (%s)- %s개\n",Rank.FOURTH.getCountOfMatch(),Rank.FOURTH.getWinningMoney(),matchedLottoRecordArray.get(Rank.FOURTH));
+        System.out.printf("%s개 일치 (%s)- %s개\n",Rank.THIRD.getCountOfMatch(),Rank.THIRD.getWinningMoney(),matchedLottoRecordArray.get(Rank.THIRD));
+        System.out.printf("%s개 일치 (%s)- %s개\n",Rank.SECOND.getCountOfMatch(),Rank.SECOND.getWinningMoney(),matchedLottoRecordArray.get(Rank.SECOND));
+        System.out.printf("%s개 일치 (%s)- %s개\n",Rank.FIRST.getCountOfMatch(),Rank.FIRST.getWinningMoney(),matchedLottoRecordArray.get(Rank.FIRST));
     }
 
     private void printResultMessage(double yield) {
@@ -30,7 +31,7 @@ public class ResultView {
 
     }
 
-    public void printIssuedLottoList(ArrayList<ArrayList<Integer>> issuedLottolist) {
+    public void printIssuedLottoList(List<List<Integer>> issuedLottolist) {
         issuedLottolist.stream()
                 .forEach(issuedLotto -> System.out.println(issuedLotto));
     }

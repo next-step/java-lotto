@@ -2,24 +2,25 @@ package step3.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class LottoMachine {
-    private ArrayList<ArrayList<Integer>> lottoList = new ArrayList<>();
-    static final private ArrayList<Integer> lottoNumberCandidateList = new ArrayList<>();
+    private List<List<Integer>> lottoList = new ArrayList<>();
+    static final private List<Integer> lottoNumberCandidateList = new ArrayList<>();
 
     public LottoMachine() {
         getLottoNumberCandidateArray();
     }
 
-    public ArrayList<ArrayList<Integer>> issue(int numOfLotto) {
+    public List<List<Integer>> issue(int numOfLotto) {
         for (int i = 0; i < numOfLotto; i++) {
             lottoList.add(getRandomNumberLotto());
         }
         return lottoList;
     }
 
-    public ArrayList<Integer> getRandomNumberLotto() {
-        ArrayList<Integer> lotto = new ArrayList<>();
+    public List<Integer> getRandomNumberLotto() {
+        List<Integer> lotto = new ArrayList<>();
         Collections.shuffle(lottoNumberCandidateList);
         for (int i = 0; i < 6; i++) {
             lotto.add(new Lotto(lottoNumberCandidateList.get(i)).getNumber());

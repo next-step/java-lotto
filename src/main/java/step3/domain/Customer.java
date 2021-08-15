@@ -4,11 +4,13 @@ import step3.util.Rank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Customer {
-    private static final LottoMachine lottoMachine = new LottoMachine();
     private static int resultPrize = 0;
 
+    private static final LottoMachine lottoMachine = new LottoMachine();
     private HashMap<Rank, Integer> resultRankMap = new HashMap<>();
 
     public Customer() {
@@ -21,11 +23,11 @@ public class Customer {
         }
     }
 
-    public ArrayList<ArrayList<Integer>> buyLotto(int numOfLotto) {
+    public List<List<Integer>> buyLotto(int numOfLotto) {
         return lottoMachine.issue(numOfLotto);
     }
 
-    public void compareWinningLottoNumbersAndIssuedLottoList(ArrayList<Integer> winningLottoNumberList, ArrayList<ArrayList<Integer>> issuedLottoList, int bonusNumber) {
+    public void compareWinningLottoNumbersAndIssuedLottoList(List<Integer> winningLottoNumberList, List<List<Integer>> issuedLottoList, int bonusNumber) {
         int numOfLotto = issuedLottoList.size();
         for (int i = 0; i < numOfLotto; i++) {
             System.out.println(issuedLottoList.get(i));
@@ -37,11 +39,13 @@ public class Customer {
         return resultPrize;
     }
 
-    public HashMap<Rank, Integer> getResultRankMap() {
+    public Map<Rank, Integer> getResultRankMap() {
         return resultRankMap;
     }
 
-    public void getMatchedNumber(ArrayList<Integer> issuedLotto, ArrayList<Integer> winningLottoNumberList, int bonusNumber) {
+
+
+    public void getMatchedNumber(List<Integer> issuedLotto, List<Integer> winningLottoNumberList, int bonusNumber) {
         boolean isMatched = false;
         isMatched = compareWithBonusBall(issuedLotto, bonusNumber);
 
@@ -53,7 +57,7 @@ public class Customer {
         resultPrize += rank.getWinningMoney();
     }
 
-    private boolean compareWithBonusBall(ArrayList<Integer> issuedLotto, int bonusNumber) {
+    private boolean compareWithBonusBall(List<Integer> issuedLotto, int bonusNumber) {
         return issuedLotto.contains(bonusNumber);
     }
 

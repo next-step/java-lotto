@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ class CustomerTest {
     void BuyLotto() {
         Customer customer = new Customer();
         int numOfLotto = 4;
-        ArrayList<ArrayList<Integer>> issuedLottoList = customer.buyLotto(numOfLotto);
+        List<List<Integer>> issuedLottoList = customer.buyLotto(numOfLotto);
         System.out.println(issuedLottoList);
         assertThat(issuedLottoList.size()).isEqualTo(numOfLotto);
         assertThat(issuedLottoList.get(0).size()).isEqualTo(6);

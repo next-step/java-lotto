@@ -3,8 +3,9 @@ package step3.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,7 +14,7 @@ class LottoMachineTest {
     @Test
     void LottoNumberTest1() {
         LottoMachine lottoMachine = new LottoMachine();
-        ArrayList<Integer> lotto = lottoMachine.getRandomNumberLotto();
+        List<Integer> lotto = lottoMachine.getRandomNumberLotto();
         assertThat(lotto.size()).isEqualTo(6);
     }
 
@@ -21,8 +22,8 @@ class LottoMachineTest {
     @Test
     void LottoNumberTest2() {
         LottoMachine lottoMachine = new LottoMachine();
-        ArrayList<Integer> lotto = lottoMachine.getRandomNumberLotto();
-        HashSet<Integer> lottoSet = new HashSet<>(lotto);
+        List<Integer> lotto = lottoMachine.getRandomNumberLotto();
+        Set<Integer> lottoSet = new HashSet<>(lotto);
         System.out.println(lotto);
         assertThat(lottoSet.size()).isEqualTo(6);
     }
@@ -33,7 +34,7 @@ class LottoMachineTest {
         int numOfLotto = 6;
         LottoMachine lottoMachine = new LottoMachine();
 
-        ArrayList<ArrayList<Integer>> issuedLottoList = lottoMachine.issue(numOfLotto);
+        List<List<Integer>> issuedLottoList = lottoMachine.issue(numOfLotto);
         System.out.println(issuedLottoList);
         assertThat(issuedLottoList.size()).isEqualTo(numOfLotto);
     }
