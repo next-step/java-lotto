@@ -16,43 +16,16 @@ public class LottoTicketMachine {
         return instance;
     }
 
-    private List<LottoTicket> issueTickets(OrderInput input, LottoTicketingWay way) {
+    private List<LottoTicket> issueTickets(IssueInput input, LottoTicketingWay way) {
         return way.issueLottoTickets(input);
     }
 
-    public AutoLottoTickets issueTicketsByAutoWay(OrderInput input) {
+    public AutoLottoTickets issueTicketsByAutoWay(IssueInput input) {
         return new AutoLottoTickets(issueTickets(input, new AutoWay()));
     }
 
-    public ManualLottoTickets issueTicketsByManualWay(OrderInput input) {
+    public ManualLottoTickets issueTicketsByManualWay(IssueInput input) {
         return new ManualLottoTickets(issueTickets(input, new ManualWay()));
-    }
-
-    public static class OrderInput {
-
-        private final TicketCount autoTicketCount;
-        private final int[][] manualLottoNumbers;
-
-        public OrderInput(TicketCount autoTicketCount, int[][] manualLottoNumbers) {
-            this.autoTicketCount = autoTicketCount;
-            this.manualLottoNumbers = manualLottoNumbers;
-        }
-
-        public OrderInput(TicketCount autoTicketCount) {
-            this(autoTicketCount, null);
-        }
-
-        public OrderInput(int[][] manualLottoNumbers) {
-            this(null, manualLottoNumbers);
-        }
-
-        public TicketCount getAutoTicketCount() {
-            return autoTicketCount;
-        }
-
-        public int[][] getManualLottoNumbers() {
-            return manualLottoNumbers;
-        }
     }
 
 }

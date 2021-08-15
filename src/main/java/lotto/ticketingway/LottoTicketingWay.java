@@ -2,9 +2,9 @@ package lotto.ticketingway;
 
 import java.util.List;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketMachine.OrderInput;
+import lotto.domain.IssueInput;
 
 public interface LottoTicketingWay {
 
-    List<LottoTicket> issueLottoTickets(OrderInput input);
+    List<LottoTicket> issueLottoTickets(IssueInput input);
 }

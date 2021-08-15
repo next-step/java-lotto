@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
-import lotto.domain.LottoTicketMachine.OrderInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -34,22 +33,22 @@ class LottoTicketBundleTest {
 
     private static AutoLottoTickets oneAutoTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByAutoWay(new OrderInput(new TicketCount(1)));
+        return machine.issueTicketsByAutoWay(new IssueInput(new TicketCount(1)));
     }
 
     private static AutoLottoTickets twoAutoTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByAutoWay(new OrderInput(new TicketCount(2)));
+        return machine.issueTicketsByAutoWay(new IssueInput(new TicketCount(2)));
     }
 
     private static ManualLottoTickets oneManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(new OrderInput(getOneManualNumbers()));
+        return machine.issueTicketsByManualWay(new IssueInput(getOneManualNumbers()));
     }
 
     private static ManualLottoTickets twoManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(new OrderInput(getTwoManualNumbers()));
+        return machine.issueTicketsByManualWay(new IssueInput(getTwoManualNumbers()));
     }
 
     private static int[][] getOneManualNumbers() {
