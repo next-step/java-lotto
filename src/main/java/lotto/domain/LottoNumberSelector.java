@@ -17,11 +17,8 @@ public class LottoNumberSelector {
     }
 
     public static List<Integer> selectNumbers() {
-        List<Integer> selectedNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
-        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
-            selectedNumbers.add(numbers.get(i));
-        }
+        List<Integer> selectedNumbers = numbers.subList(0,6);
         Collections.sort(selectedNumbers);
         return selectedNumbers;
     }
