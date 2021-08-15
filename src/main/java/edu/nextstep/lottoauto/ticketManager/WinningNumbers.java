@@ -27,7 +27,6 @@ public class WinningNumbers {
         String[] numbersStringArr = numbersOfString.split(",");
 
         List<Integer> winningNumbers = new ArrayList<>();
-
         for(String numberString : numbersStringArr){
             winningNumbers.add(Integer.parseInt(numberString.trim()));
         }

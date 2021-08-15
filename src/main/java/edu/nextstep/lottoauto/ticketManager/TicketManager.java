@@ -15,12 +15,11 @@ import java.util.List;
 public class TicketManager {
     private static final int PRICE_PER_ONE_TICKET = 1_000;
 
-    private final List<Ticket> tickets = new ArrayList<>();
-
+    private List<Ticket> tickets;
     private WinningNumbers winningNumbers;
-    private WinningPrizeResult winningPrizeResult;
 
     public void createTickets(int payment, NumberMaker numberMaker) {
+        this.tickets = new ArrayList<>();
         int numberOfTickets = payment / PRICE_PER_ONE_TICKET;
         while (numberOfTickets > 0) {
             tickets.add(Ticket.create(numberMaker));
@@ -33,19 +32,33 @@ public class TicketManager {
     }
 
     public WinningPrizeResult makeWinningPrizeResult() {
-        this.winningPrizeResult = new WinningPrizeResult();
-        for (Ticket ticket : tickets) {
-            ticket.checkAndUpdateWinningPrize(winningNumbers);
-            if (ticket.getPrize() != null) {
-                winningPrizeResult.add(ticket);
-            }
-        }
-        return winningPrizeResult;
+        List<Ticket> winningTickets = getWinningTickets();
+        int totalPrize = getTotalPrize(winningTickets);
+        double rateOfReturn = ((double)totalPrize / ((tickets.size()) * PRICE_PER_ONE_TICKET));
+        return WinningPrizeResult.of(winningTickets, rateOfReturn);
+    }
+
+    private List<Ticket> getWinningTickets() {
+        List<Ticket> winningTickets = new ArrayList<>();
+
+        tickets.forEach(
+                (ticket) -> ticket.checkAndUpdateWinningPrize(winningNumbers)
+        );
+
+        tickets.stream().
+                filter((ticket) -> ticket.getPrize() != null).
+                forEach(winningTickets::add);
+
+        return winningTickets;
+    }
+
+    private int getTotalPrize(List<Ticket> winningTickets) {
+        return winningTickets.stream()
+                .mapToInt((ticket) -> ticket.getPrize().getPrize())
+                .sum();
     }
 
     public List<Ticket> getTickets() {
         return tickets;
     }
-
-
 }
