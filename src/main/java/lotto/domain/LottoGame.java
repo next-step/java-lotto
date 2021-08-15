@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final int ONE_GAME_PRICE = 1000;
+    private static final int ONE_GAME_PRICE = 1000;
     private final List<LottoTicket> tickets = new ArrayList<>();
 
 
