@@ -3,9 +3,7 @@ package lotto.strategy;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RandomLottoNumber {
@@ -17,14 +15,10 @@ public class RandomLottoNumber {
         }
     }
 
-    public static List<Integer> generateRandomNumbers() {
+    public static Set<LottoNumber> generateRandomNumbers() {
         Collections.shuffle(allNumbers);
-
-        return allNumbers.stream()
-                         .limit(Lotto.SIZE)
-                         .sorted()
-                         .collect(Collectors.toList());
+        return allNumbers.stream().limit(Lotto.SIZE)
+                         .map(LottoNumber::valueOf)
+                         .collect(Collectors.toCollection(TreeSet::new));
     }
-
-
 }

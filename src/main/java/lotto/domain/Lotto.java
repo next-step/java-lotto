@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.InvalidInputException;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -19,11 +18,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(List<Integer> lottoNumbers) {
-        Set<LottoNumber> lottoNumberList = lottoNumbers.stream()
-                                                       .map(number -> LottoNumber.valueOf(number))
-                                                       .collect(Collectors.toCollection(TreeSet::new));
-        return new Lotto(lottoNumberList);
+    public static Lotto of(Set<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
     public static Lotto of(String strNumbers) {
@@ -40,16 +36,19 @@ public class Lotto {
         }
     }
 
-    public int getMatchCount(Lotto winningLotto) {
-        return (int) winningLotto.getLottoNumbers()
+    public int getMatchCount(WinningLotto winningLotto) {
+        return (int) winningLotto.getWinningLotto().getLottoNumbers()
                                  .stream()
                                  .filter(numbers::contains)
                                  .count();
     }
 
+    public boolean getMatchBonus(WinningLotto winningLotto) {
+        return numbers.stream().anyMatch(number -> number.equals(winningLotto.getBonusNumber()));
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return numbers;
     }
-
 
 }

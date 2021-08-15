@@ -14,7 +14,7 @@ public class LottoApplication {
         OutputView.printPurchase(lottos);
 
         //당첨 로또 생성
-        Lotto winningLotto = Lotto.of(InputView.inputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumbers());
 
         //당첨 번호 비교 및 결과 출력
         lottos.checkLottosWinning(winningLotto);
