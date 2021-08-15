@@ -13,23 +13,22 @@ import java.util.stream.Stream;
 
 public class WinningLotto {
 
-    private static final int COUNT_OF_LOTTO = 6;
     private static final int COUNT_OF_BONUS_NUMBER = 1;
 
     private final Numbers numbers;
     private final Number bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final Integer bonusNumber) {
-        this.numbers = Numbers.from(numbers);
-        this.bonusNumber = Number.valueOf(bonusNumber);
         checkDuplicateNumbers(numbers, bonusNumber);
+        this.numbers = Numbers.valueOf(numbers);
+        this.bonusNumber = Number.valueOf(bonusNumber);
     }
 
     private void checkDuplicateNumbers(final List<Integer> numbers, final Integer bonusNumber) {
         Set<Integer> distinctNumbers = Stream.of(numbers, Collections.singletonList(bonusNumber))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-        if (distinctNumbers.size() != COUNT_OF_LOTTO + COUNT_OF_BONUS_NUMBER) {
+        if (distinctNumbers.size() != numbers.size() + COUNT_OF_BONUS_NUMBER) {
             throw new LottoDuplicationNumberException();
         }
     }
@@ -39,7 +38,7 @@ public class WinningLotto {
         boolean isBonus = purchaseLotto.getNumbers()
                 .elements()
                 .stream()
-                .anyMatch(number -> number.equals(this.bonusNumber));
+                .anyMatch(this.bonusNumber::equals);
         return new LottoResult(LottoPrize.valueOf(countOfMatchers, isBonus));
     }
 

@@ -17,7 +17,7 @@ public enum LottoPrize {
     private final int prizeAmount;
     private final int countOfMatches;
 
-    LottoPrize(int prizeAmount, int countOfMatches) {
+    LottoPrize(final int prizeAmount, final int countOfMatches) {
         this.prizeAmount = prizeAmount;
         this.countOfMatches = countOfMatches;
     }
@@ -33,7 +33,7 @@ public enum LottoPrize {
                 .orElse(LottoPrize.MISS);
     }
 
-    private static boolean isSecond(int countOfMatches, boolean matchBonus) {
+    private static boolean isSecond(final int countOfMatches, final boolean matchBonus) {
         return SECOND.countOfMatches == countOfMatches && matchBonus;
     }
 

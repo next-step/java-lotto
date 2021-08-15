@@ -25,7 +25,7 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .sorted()
                 .collect(Collectors.toList());
 
-        return Numbers.from(numbers);
+        return Numbers.valueOf(numbers);
     }
 }
 

@@ -22,9 +22,7 @@ public class Number {
     }
 
     private void checkNumberRange(final Integer number) {
-        boolean isInvalid = number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER;
-
-        if (isInvalid) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new LottoNumberRangeIncorrectException();
         }
     }

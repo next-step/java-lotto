@@ -1,41 +1,47 @@
 package lottos.domain;
 
-import lottos.domain.exceptions.LottoSizeIncorrectException;
+import lottos.domain.exceptions.LottoDuplicationNumberException;
 import lottos.domain.numbers.Numbers;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
-    private static final String NUMBERS_TEXT_SPLIT_REGEX = ",";
-
     private final Numbers numbers;
 
-    public Lotto(final String numbersText) {
-        this(parseTextToNumbers(numbersText));
+    public Lotto(final List<Integer> numbers) {
+        checkDuplicateNumbers(numbers);
+        this.numbers = Numbers.valueOf(numbers);
     }
 
-    public Lotto(final List<Integer> numbers) {
-        this.numbers = Numbers.from(numbers);
+    private void checkDuplicateNumbers(final List<Integer> numbers) {
+        Set<Integer> distinctNumbers = new HashSet<>(numbers);
+        if (distinctNumbers.size() != numbers.size()) {
+            throw new LottoDuplicationNumberException();
+        }
     }
 
     public Lotto(final Numbers numbers) {
         this.numbers = numbers;
     }
 
-    private static List<Integer> parseTextToNumbers(final String numbersText) {
-        if (numbersText == null || numbersText.isEmpty()) {
-            throw new LottoSizeIncorrectException();
-        }
-        return Arrays.stream(numbersText.split(NUMBERS_TEXT_SPLIT_REGEX))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
     public Numbers getNumbers() {
         return numbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

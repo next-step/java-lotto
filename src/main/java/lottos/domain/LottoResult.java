@@ -4,7 +4,7 @@ public class LottoResult {
 
     private final LottoPrize lottoPrize;
 
-    public LottoResult(LottoPrize lottoPrize) {
+    public LottoResult(final LottoPrize lottoPrize) {
         this.lottoPrize = lottoPrize;
     }
 
