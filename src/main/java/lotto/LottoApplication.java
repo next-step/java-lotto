@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumberRandomSelector;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,9 +21,9 @@ public class LottoApplication {
         int price = Integer.parseInt(inputView.getNumber());
 
         LottoGame lottoGame = new LottoGame(price, new LottoNumberRandomSelector());
-
-        outputView.printGameNum(lottoGame.getGameNum());
-        outputView.printTickets(lottoGame.getLottoGame());
+        LottoResult lottoResult = new LottoResult();
+        outputView.printGameNum(lottoGame.getLottoTicketSize());
+        outputView.printTickets(lottoGame.getLotto());
         outputView.printLastWinningNumber();
 
         String inputNumberString = inputView.getNumber();
@@ -35,10 +36,10 @@ public class LottoApplication {
 
         LottoNumbers winningNumbers = new LottoNumbers(numbers);
         lottoGame.checkResult(winningNumbers);
-        lottoGame.setResult();
+        lottoResult.setResult(lottoGame.getLotto());
 
-        outputView.printResult(lottoGame.getResult());
-        outputView.printProfitValue(lottoGame.getProfitRate());
+        outputView.printResult(lottoResult.getResult());
+        outputView.printProfitValue(lottoResult.getProfitRate(price));
 
     }
 

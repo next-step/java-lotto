@@ -1,39 +1,29 @@
 package lotto.domain;
 
-import java.util.Map;
-
 public class LottoGame {
 
     private final Lotto lotto;
-    private final LottoResult lottoWinningPolicy = new LottoResult();
     private final int price;
 
-    public LottoGame(final int price, LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        lotto = new Lotto(price, lottoNumberSelectPolicy);
+    public LottoGame(final int price, final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
         this.price = price;
+        lotto = buyLotto(lottoNumberSelectPolicy);
     }
 
-    public int getGameNum() {
-        return lotto.getTicketNum();
+    public int getLottoTicketSize() {
+        return lotto.getTicketSize();
     }
 
-    public void checkResult(LottoNumbers lottoNumbers) {
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    private Lotto buyLotto(final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
+        return new Lotto(price, lottoNumberSelectPolicy);
+    }
+
+    public void checkResult(final LottoNumbers lottoNumbers) {
         lotto.checkResult(lottoNumbers);
     }
 
-    public void setResult() {
-        lottoWinningPolicy.setResult(lotto);
-    }
-
-    public Map<LottoRank, Integer> getResult() {
-        return lottoWinningPolicy.getResult();
-    }
-
-    public double getProfitRate() {
-        return (double) lottoWinningPolicy.calculateWinningPrice() / price;
-    }
-
-    public Lotto getLottoGame() {
-        return lotto;
-    }
 }

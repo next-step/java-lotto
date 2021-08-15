@@ -12,6 +12,6 @@ class LottoGameTest {
     @Test
     void buy_ticket_from_input_price_test() {
         LottoGame lottoGame = new LottoGame(14000, new LottoNumberRandomSelector());
-        assertThat(lottoGame.getGameNum()).isEqualTo(14);
+        assertThat(lottoGame.getLottoTicketSize()).isEqualTo(14);
     }
 }

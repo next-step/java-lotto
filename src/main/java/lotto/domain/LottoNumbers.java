@@ -16,11 +16,11 @@ public class LottoNumbers {
         lottoNumbers.addAll(numbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Boolean contains(int number) {
+        return lottoNumbers.contains(number);
     }
 
-    public Boolean contains(int number){
-        return lottoNumbers.contains(number);
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

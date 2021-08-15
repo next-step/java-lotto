@@ -17,7 +17,7 @@ public class LottoResult {
         }
     };
 
-    public void setResult(Lotto lotto) {
+    public void setResult(final Lotto lotto) {
         List<LottoTicket> lottoTickets = lotto.getTickets();
         lottoTickets.forEach(lottoTicket -> result.put(lottoTicket.getLottoRank(),
             result.get(lottoTicket.getLottoRank()) + 1));
@@ -34,4 +34,9 @@ public class LottoResult {
         }
         return sum;
     }
+
+    public double getProfitRate(int price){
+        return (double) calculateWinningPrice() / price;
+    }
+
 }
