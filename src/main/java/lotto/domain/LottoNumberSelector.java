@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ public class LottoNumberSelector {
 
     public static List<Integer> selectNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> selectedNumbers = numbers.subList(0,6);
+        List<Integer> selectedNumbers = numbers.subList(0,LOTTO_NUMBER_SIZE);
         Collections.sort(selectedNumbers);
         return selectedNumbers;
     }
