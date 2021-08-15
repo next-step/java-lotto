@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
@@ -21,10 +24,19 @@ public class LottoController {
 		final LottoCount lottoCount = new LottoCount(this.money);
 
 		ResultView.outputLottoCount(lottoCount.getLottoCount());
-		this.lottos = Lottos.generateAutoLottos(lottoCount.getLottoCount());
+
+		buyAutoLotto(lottoCount);
 
 		lottos.getLottos()
 			.forEach(ResultView::outputLottoNumbers);
+	}
+
+	private void buyAutoLotto(LottoCount lottoCount) {
+		this.lottos = Lottos.generateLottos(lottoCount);
+
+		for (int i = 0; i < lottoCount.getLottoCount(); i++) {
+			this.lottos.addAutoLotto();
+		}
 	}
 
 	public void winLotto(String winLottoNumbers, int bonusNumber) {

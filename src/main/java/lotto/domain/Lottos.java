@@ -7,28 +7,16 @@ import lotto.utils.AutoLottoNumbersGeneratorUtils;
 
 public class Lottos {
 
+	private final LottoCount lottoCount;
 	private final List<Lotto> lottos;
 
-	private Lottos() {
-		this.lottos = new ArrayList<>();
+	private Lottos(LottoCount lottoCount) {
+		this.lottos = new ArrayList<>(lottoCount.getLottoCount());
+		this.lottoCount = lottoCount;
 	}
 
-	private Lottos(List<Lotto> lottos) {
-		this.lottos = lottos;
-	}
-
-	public static Lottos generateAutoLottos(int lottoSize) {
-		List<Lotto> lottos = new ArrayList<Lotto>(lottoSize);
-
-		for (int i = 0; i < lottoSize; i++) {
-			lottos.add(Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers()));
-		}
-
-		return new Lottos(lottos);
-	}
-
-	public static Lottos generateLottos() {
-		return new Lottos();
+	public static Lottos generateLottos(LottoCount lottoCount) {
+		return new Lottos(lottoCount);
 	}
 
 	public RevenueRecord toRevenueRecord() {
