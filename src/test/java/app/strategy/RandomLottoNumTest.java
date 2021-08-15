@@ -9,10 +9,12 @@ class RandomLottoNumTest {
 
     @DisplayName("랜덤숫자 6개 생성 확인")
     @Test
-    void makeLottoTest(){
+    void makeLottoTest() {
         RandomLottoNum randomLotto = new RandomLottoNum();
 
         assertThat(randomLotto.makeLotto().getNumbers().size()).isEqualTo(6);
     }
-
 }
+
+
+
