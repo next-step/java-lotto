@@ -33,17 +33,14 @@ public class LottoMarket {
 
     public Map<Winning, Integer> checkNumToWinner(WinnerLotto winner) {
         List<Winning> result = new ArrayList<>();
-
         for (Lotto myLotto : myLottoList.getAll()) {
             Winning winning = myLotto.getWinning(winner.getLotto().getNumbers(), winner.getBonus());
             if (!winning.isNotThing()) {
                 result.add(winning);
             }
-
         }
         return listToMap(result);
     }
-
 
     private Map<Winning, Integer> listToMap(List<Winning> result) {
         Map<Winning, Integer> resultMap = new LinkedHashMap<>();
@@ -57,5 +54,4 @@ public class LottoMarket {
         }
         return resultMap;
     }
-
 }
