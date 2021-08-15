@@ -12,6 +12,7 @@ public class LottoDrawResponse {
         lottoResult.put(Award.SECOND, 0);
         lottoResult.put(Award.THIRD, 0);
         lottoResult.put(Award.FOURTH, 0);
+        lottoResult.put(Award.FIFTH, 0);
         lottoResult.put(Award.BANG, 0);
     }
 
