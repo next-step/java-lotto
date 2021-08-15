@@ -8,7 +8,6 @@ public class LottoGame {
     private static final int ONE_GAME_PRICE = 1000;
     private final List<LottoTicket> tickets = new ArrayList<>();
 
-
     public LottoGame(final int price) {
         int ticketNumber = buyTicketNumber(price);
         for (int i = 0; i < ticketNumber; i++) {

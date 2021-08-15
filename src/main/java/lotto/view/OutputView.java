@@ -30,10 +30,10 @@ public class OutputView {
 
     public void printResult(Map<LottoRank, Integer> result) {
         System.out.println("당첨 통계\n" + "---------");
-        System.out.println("3개 일치 (5000원)- " + result.get(LottoRank.RANK_4TH) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.get(LottoRank.RANK_3RD) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.get(LottoRank.RANK_2ND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.get(LottoRank.RANK_1ST) + "개");
+        System.out.println("3개 일치 (5000원)- " + result.get(LottoRank.FOURTH) + "개");
+        System.out.println("4개 일치 (50000원)- " + result.get(LottoRank.THIRD) + "개");
+        System.out.println("5개 일치 (1500000원)- " + result.get(LottoRank.SECOND) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + result.get(LottoRank.FIRST) + "개");
     }
 
     public void printProfitValue(Double profitValue) {

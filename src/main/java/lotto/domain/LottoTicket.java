@@ -9,7 +9,7 @@ public class LottoTicket {
     private int collectNumber = 0;
 
     public LottoTicket() {
-        lottoRank = LottoRank.RANK_7TH;
+        lottoRank = LottoRank.SEVENTH;
     }
 
     public void checkResult(final List<Integer> winningNumbers) {

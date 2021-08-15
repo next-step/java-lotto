@@ -7,13 +7,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
-    RANK_1ST(6, 2000000000),
-    RANK_2ND(5, 1500000),
-    RANK_3RD(4, 50000),
-    RANK_4TH(3, 5000),
-    RANK_5TH(2, 0),
-    RANK_6TH(1, 0),
-    RANK_7TH(0, 0);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
+    FIFTH(2, 0),
+    SIXTH(1, 0),
+    SEVENTH(0, 0);
 
     private final int collectNumber;
     private final int price;
