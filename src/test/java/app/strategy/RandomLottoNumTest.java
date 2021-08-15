@@ -11,7 +11,6 @@ class RandomLottoNumTest {
     @Test
     void makeLottoTest() {
         RandomLottoNum randomLotto = new RandomLottoNum();
-
         assertThat(randomLotto.makeLotto().getNumbers().size()).isEqualTo(6);
     }
 }
