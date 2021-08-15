@@ -54,10 +54,7 @@ public class Customer {
     }
 
     private boolean compareWithBonusBall(ArrayList<Integer> issuedLotto, int bonusNumber) {
-        if (issuedLotto.contains(bonusNumber)) {
-            return true;
-        }
-        return false;
+        return issuedLotto.contains(bonusNumber);
     }
 
 
