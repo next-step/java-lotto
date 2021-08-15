@@ -48,7 +48,7 @@ public class LottoTicket {
 
     public boolean contains(LottoBall anyLottoBall) {
         return lottoBalls.stream()
-            .anyMatch(lottoBall -> lottoBall.equals((LottoBall.select(anyLottoBall.number()))));
+            .anyMatch(lottoBall -> lottoBall.equals(anyLottoBall));
     }
 
     public int countMatchNumber(LottoTicket winnerNumbers) {
