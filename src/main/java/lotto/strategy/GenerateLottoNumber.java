@@ -17,20 +17,22 @@ public class GenerateLottoNumber {
   private static final List<Integer> numbers = new ArrayList<>();
 
   static {
-    for(int number = START; number < END; number++){
+    for (int number = START; number < END; number++) {
       numbers.add(number);
     }
   }
+
   public GenerateLottoNumber() {
   }
 
   public static List<Integer> createNumberPull() {
     Collections.shuffle(numbers);
-    return splitNumbers(numbers);
+    return splitNumbers();
   }
 
-  private static List<Integer> splitNumbers(final List<Integer> numberPull) {
-    return numberPull.subList(FROM_INDEX, TO_INDEX);
+  private static List<Integer> splitNumbers() {
+    return GenerateLottoNumber.numbers
+        .subList(FROM_INDEX, TO_INDEX);
   }
 
 }

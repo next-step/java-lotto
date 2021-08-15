@@ -12,9 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.dto.LotteriesDto;
 import lotto.service.Rank;
 
 public class LottoResult {
+
+  private static final int COUNT = 1;
 
   private final Map<Rank, Integer> categoriesRanks;
 
@@ -22,7 +25,7 @@ public class LottoResult {
     categoriesRanks = unmodifiableMap(result);
   }
 
-  public static LottoResult getResult(final WinLottoInfo winLottoInfo, final Lotteries lotteries) {
+  public static LottoResult getResult(final WinLottoInfo winLottoInfo, final LotteriesDto lotteries) {
     return new LottoResult(Collections.unmodifiableMap(getCountByRank(winLottoInfo, lotteries)));
   }
 
@@ -32,9 +35,9 @@ public class LottoResult {
   }
 
   private static Map<Rank, Integer> getCountByRank(final WinLottoInfo winLottoInfo,
-      final Lotteries lotteries) {
+      final LotteriesDto lotteries) {
 
-    return Lotteries.matchLottosForRank(lotteries, winLottoInfo);
+    return matchLottosForRank(lotteries, winLottoInfo);
   }
 
   private static List<Rank> creatRankInfo() {
@@ -65,6 +68,16 @@ public class LottoResult {
       messageForm = ", 보너스 볼 일치 (";
     }
     return messageForm;
+  }
+
+  private static Map<Rank, Integer> matchLottosForRank(final LotteriesDto lotteries, final WinLottoInfo winLottoInfo) {
+
+    Map<Rank, Integer> result = LottoResult.createRankByMap();
+
+    lotteries.values().forEach(
+        lotto -> result.computeIfPresent(winLottoInfo.getMatchCountForRank(lotto),
+            (rank, integer) -> integer + COUNT));
+    return result;
   }
 
   @Override

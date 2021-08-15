@@ -33,7 +33,7 @@ public class LottoController {
 
     LottoResult result = LottoResult.getResult(LotteryDraw.createWinLottoInfo(
         InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),
-        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER)), lotteries);
+        InputView.inputValueWithMessage(Message.MSG_INPUT_BONUS_NUMBER)), LotteriesDto.of(lotteries));
 
     ResultView.drawResult(result, LotteryDraw.gradingScore(result, lottoMoney));
   }
