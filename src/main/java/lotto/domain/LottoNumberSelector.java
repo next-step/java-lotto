@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class LottoNumberSelector {
 
-    private static final Integer LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private static final List<Integer> numbers = Stream.iterate(1, i -> i + 1)
         .limit(45)
         .collect(Collectors.toList());
