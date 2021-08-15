@@ -5,6 +5,8 @@ import edu.nextstep.lottoauto.strategy.NumberMaker;
 import edu.nextstep.lottoauto.ticket.Prize;
 import edu.nextstep.lottoauto.ticket.Ticket;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,30 @@ class TicketManagerTest {
         // then
         assertThat(ticketManager.getTickets().size()).isEqualTo(payment / 1_000);
         assertThat(ticketManager.getTickets().get(0)).isInstanceOf(Ticket.class);
+    }
+
+    @ParameterizedTest(name = "createTickets_validateMinPayment_fail {index} : {0}")
+    @ValueSource(ints = {-1, 999}) // given
+    void createTickets_validateMinPayment_fail(int payment) {
+        // when
+        TicketManager ticketManager = new TicketManager();
+
+        // then
+        assertThatThrownBy(() -> ticketManager.createTickets(payment, getCustomTicketMaker()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("최소 금액은");
+    }
+
+    @ParameterizedTest(name = "createTickets_validateBeDivisibleByPrice_fail {index} : {0}")
+    @ValueSource(ints = {1001, 1999}) // given
+    void createTickets_validateBeDivisibleByPrice_fail(int payment) {
+        // when
+        TicketManager ticketManager = new TicketManager();
+
+        // then
+        assertThatThrownBy(() -> ticketManager.createTickets(payment, getCustomTicketMaker()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("단위 입력");
     }
 
     @Test

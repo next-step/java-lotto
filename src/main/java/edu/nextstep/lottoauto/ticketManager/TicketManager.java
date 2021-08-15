@@ -19,6 +19,9 @@ public class TicketManager {
     private WinningNumbers winningNumbers;
 
     public void createTickets(int payment, NumberMaker numberMaker) {
+        validateMinPayment(payment);
+        validateBeDivisibleByPrice(payment);
+
         this.tickets = new ArrayList<>();
         int numberOfTickets = payment / PRICE_PER_ONE_TICKET;
         while (numberOfTickets > 0) {
@@ -60,5 +63,17 @@ public class TicketManager {
 
     public List<Ticket> getTickets() {
         return tickets;
+    }
+    
+    private void validateMinPayment(int payment) {
+        if(payment < PRICE_PER_ONE_TICKET){
+            throw new IllegalArgumentException("최소 금액은 1,000원 입니다. 입력값 : " + payment);
+        }
+    }
+
+    private void validateBeDivisibleByPrice(int payment) {
+        if ((payment % PRICE_PER_ONE_TICKET) != 0) {
+            throw new IllegalArgumentException("1,000원 단위 입력이 필요합니다. 입력값 : " + payment);
+        }
     }
 }
