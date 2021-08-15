@@ -3,19 +3,27 @@ package step2.model;
 import java.util.*;
 
 public class Lotto {
-    public List<Integer> getNumbers(LottoStrategy lottoStrategy) {
-        return lottoStrategy.getNumbers();
+    private final List<LottoNumber> lottoNumbers;
+
+    public Lotto(LottoStrategy lottoStrategy) {
+        this.lottoNumbers = lottoStrategy.getNumbers();
     }
 
-    public List<List<Integer>> getLotto(int lottoCount) {
-        List<List<Integer>> lottoList = new ArrayList<>();
+    public Lotto(List<Integer> numbers) {
+        lottoNumbers = new ArrayList<>();
 
-        AutoLottoStrategy autoLottoStrategy = new AutoLottoStrategy();
-
-        while (lottoCount-- > 0) {
-            lottoList.add(getNumbers(autoLottoStrategy));
+        for (int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
         }
-
-        return lottoList;
     }
+
+    public List<Integer> getLottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numbers.add(lottoNumber.getLottoNumber());
+        }
+        return numbers;
+    }
+
 }

@@ -7,7 +7,7 @@ public interface LottoStrategy {
     int MIN = 1;
     int MAX = 45;
     int NUMBER_COUNT = 6;
-    List<Integer> numberList = new ArrayList<>();
+    List<LottoNumber> numberList = new ArrayList<>();
 
-    List<Integer> getNumbers();
+    List<LottoNumber> getNumbers();
 }
