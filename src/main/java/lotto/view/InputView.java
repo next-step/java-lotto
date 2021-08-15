@@ -21,4 +21,9 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }
+
+    public static Integer requestBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
 }
