@@ -25,7 +25,8 @@ public class InputView {
 
     private static LottoTicket convertToTicket() {
         try {
-            String[] input = scanner.nextLine().split(",");
+            String[] input = scanner.next().split(",");
+
             List<Integer> numbers = Arrays.stream(input)
                     .map(str -> str.trim())
                     .map(Integer::parseInt)
