@@ -1,20 +1,17 @@
 package lottery.domain;
 
+import lottery.utils.NumberUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class Money implements Comparable<Money> {
 
-    private static final String NON_NULL = "입력값은 null 일 수 없습니다";
-    private static final String NOT_NUMBER = "숫자가 아닙니다 -> ";
-    private static final String LESS_THAN_ZERO = "입력값은 0 보다 커야 합니다 -> ";
     private static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 -> ";
-    private static final int ZERO = 0;
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final String QUANTITY_INFO = " / quantity: ";
 
-    private final int money;
+    private int money;
 
     public Money(final String money) {
         validateMoney(money);
@@ -22,7 +19,7 @@ public class Money implements Comparable<Money> {
     }
 
     public Money(final int money) {
-        requirePositiveNumber(money);
+        NumberUtils.requirePositiveNumber(money);
         this.money = money;
     }
 
@@ -46,10 +43,16 @@ public class Money implements Comparable<Money> {
         requirePositiveNumber(Integer.parseInt(money));
     }
 
-    private void requirePositiveNumber(final int money) {
-        if (money < ZERO) {
-            throw new IllegalArgumentException(LESS_THAN_ZERO + money);
+    private void requireOverBuyableQuantity(final LotteryQuantity quantity) {
+        if (getBuyableLotteryQuantity().isLessThan(quantity)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY + money + QUANTITY_INFO + quantity);
         }
+    }
+
+    private void validateMoney(final String money) {
+        NumberUtils.requireNonNull(money);
+        NumberUtils.requireNumber(money);
+        NumberUtils.requirePositiveNumber(Integer.parseInt(money));
     }
 
     private void requireOverLotteryPrice() {
@@ -58,16 +61,17 @@ public class Money implements Comparable<Money> {
         }
     }
 
-    private void requireNumber(String number) {
-        if (!NUMBER_PATTERN.matcher(number).matches()) {
-            throw new IllegalArgumentException(NOT_NUMBER + number);
-        }
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Money money1 = (Money) o;
+        return money == money1.money;
     }
 
-    private void requireNonNull(final String money) {
-        if (Objects.isNull(money)) {
-            throw new IllegalArgumentException(NON_NULL);
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 
     @Override
