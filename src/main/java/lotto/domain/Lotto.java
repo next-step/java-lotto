@@ -9,28 +9,28 @@ public class Lotto {
     private final List<LottoTicket> tickets = new ArrayList<>();
 
     public Lotto(final int price, final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        int ticketNumber = calTicketSize(price);
+        int ticketNumber = calculateTicketSize(price);
         for (int i = 0; i < ticketNumber; i++) {
             tickets.add(new LottoTicket(lottoNumberSelectPolicy));
         }
-    }
-
-    private int calTicketSize(final int price) {
-        return (price / ONE_GAME_PRICE);
     }
 
     public int getTicketSize() {
         return tickets.size();
     }
 
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
+    private int calculateTicketSize(final int price) {
+        return (price / ONE_GAME_PRICE);
+    }
+
     public void checkResult(final LottoNumbers lottoNumbers) {
         for (LottoTicket lottoTicket : tickets) {
             lottoTicket.checkResult(lottoNumbers);
         }
-    }
-
-    public List<LottoTicket> getTickets() {
-        return tickets;
     }
 
 }

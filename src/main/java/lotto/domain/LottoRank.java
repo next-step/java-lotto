@@ -18,26 +18,26 @@ public enum LottoRank {
     private final int collectNumber;
     private final int price;
 
-    LottoRank(final int collectNumber, final int price) {
-        this.collectNumber = collectNumber;
-        this.price = price;
-    }
-
     private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
         Collections.unmodifiableMap(
             Arrays.stream(values())
                 .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
 
-    public LottoRank findRank(int collectNumber) {
-        return Optional.ofNullable(LOTTO_RANK_MAP.get(collectNumber))
-            .orElse(LottoRank.FAIL);
+    LottoRank(final int collectNumber, final int price) {
+        this.collectNumber = collectNumber;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public int getCollectNumber() {
         return collectNumber;
     }
 
-    public int getPrice() {
-        return price;
+    public LottoRank findRank(int collectNumber) {
+        return Optional.ofNullable(LOTTO_RANK_MAP.get(collectNumber))
+            .orElse(LottoRank.FAIL);
     }
 }

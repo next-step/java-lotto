@@ -27,16 +27,16 @@ public class LottoResult {
         return result;
     }
 
+    public double getProfitRate(int price){
+        return (double) calculateWinningPrice() / price;
+    }
+
     public int calculateWinningPrice() {
         int sum = 0;
         for (LottoRank lottoRank : LottoRank.values()) {
             sum += result.get(lottoRank) * lottoRank.getPrice();
         }
         return sum;
-    }
-
-    public double getProfitRate(int price){
-        return (double) calculateWinningPrice() / price;
     }
 
 }
