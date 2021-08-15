@@ -1,11 +1,8 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
-import lotto.domain.LottoTicket;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -39,21 +36,16 @@ public class InputView {
         return inputIntValue();
     }
 
-    public List<LottoTicket> inputManualLottoTickets(int lottoTicketCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    public List<String> inputManualLottoTickets(int lottoTicketCount) {
         if (lottoTicketCount > 0) {
             System.out.println("\n" + INPUT_MANUAL_LOTTOTICKETS);
         }
 
+        List<String> lottoTicketsList = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            int[] lottoTicketIntArray = getLottoTicketIntArray();
-            lottoTickets.add(LottoTicket.of(lottoTicketIntArray));
+            lottoTicketsList.add(inputStringValue());
         }
-        return lottoTickets;
-    }
-
-    private int[] getLottoTicketIntArray() {
-        return Arrays.stream(inputStringValue().split(",")).mapToInt(s -> Integer.parseInt(s.trim())).toArray();
+        return lottoTicketsList;
     }
 
     public String inputLastWeekWinnerNumbers() {
