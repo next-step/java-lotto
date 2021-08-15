@@ -1,13 +1,14 @@
 package lotto.view;
 
-import lotto.domain.Lotteries;
+import lotto.domain.Lotto;
+import lotto.dto.LotteriesDto;
 
 public class LotteriesDrawingView {
 
-  public static void drawLotteriesView(final Lotteries lotteries) {
+  public static void drawLotteriesView(final LotteriesDto lotteries) {
 
-    for (String message : Lotteries.toStringLottoInfo(lotteries)) {
-      System.out.println(message);
+    for (Lotto lotto : lotteries.values()) {
+      System.out.println(lotto.toString());
     }
     System.out.print("\n");
   }

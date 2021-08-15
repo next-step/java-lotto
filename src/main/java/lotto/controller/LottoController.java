@@ -5,6 +5,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseCount;
+import lotto.dto.LotteriesDto;
 import lotto.message.Message;
 import lotto.service.LotteryDraw;
 import lotto.view.InputView;
@@ -28,7 +29,7 @@ public class LottoController {
 
     ResultView.drawCountOfBuyLotteries(purchaseCount);
 
-    LotteriesDrawingView.drawLotteriesView(lotteries);
+    LotteriesDrawingView.drawLotteriesView(LotteriesDto.of(lotteries));
 
     LottoResult result = LottoResult.getResult(LotteryDraw.createWinLottoInfo(
         InputView.inputStringValueWithMessage(Message.MSG_INPUT_WINNER_LOTTO),

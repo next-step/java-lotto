@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lotto.service.Rank;
 
 public class Lotteries {
@@ -26,10 +26,7 @@ public class Lotteries {
     return result;
   }
 
-  public static List<String> toStringLottoInfo(final Lotteries lotteries) {
-    return lotteries.lottos
-        .stream()
-        .map(Lotto::toString)
-        .collect(Collectors.toList());
+  public List<Lotto> toList() {
+    return new ArrayList<>(lottos);
   }
 }
