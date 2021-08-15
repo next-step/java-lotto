@@ -48,16 +48,16 @@ public class RankingCalculator {
         private final int matchCount;
         private final boolean hasBonusNumber;
 
-        public MatchResult(int matchCount, boolean hasBonusNumber) {
+        private MatchResult(int matchCount, boolean hasBonusNumber) {
             this.matchCount = matchCount;
             this.hasBonusNumber = hasBonusNumber;
         }
 
-        public int getMatchCount() {
+        private int getMatchCount() {
             return matchCount;
         }
 
-        public boolean hasBonusNumber() {
+        private boolean hasBonusNumber() {
             return hasBonusNumber;
         }
     }
