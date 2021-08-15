@@ -18,10 +18,10 @@ public class LottoTicket {
         for (Integer lottoNumber : numbers) {
             isCollectNumber(winningNumbers, lottoNumber);
         }
-        setRank();
+        findResultRank();
     }
 
-    private void setRank() {
+    private void findResultRank() {
         this.lottoRank = lottoRank.findRank(collectNumber);
     }
 

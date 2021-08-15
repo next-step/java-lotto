@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,8 @@ public enum LottoRank {
                 .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
 
     public LottoRank findRank(int collectNumber) {
-        return LOTTO_RANK_MAP.get(collectNumber > 2 ? collectNumber : 0);
+        return Optional.ofNullable(LOTTO_RANK_MAP.get(collectNumber))
+            .orElse(LottoRank.FAIL);
     }
 
     public int getCollectNumber() {
