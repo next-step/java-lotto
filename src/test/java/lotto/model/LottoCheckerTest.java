@@ -24,21 +24,21 @@ class LottoCheckerTest {
     @ParameterizedTest
     @DisplayName("check 결과 리턴")
     @MethodSource("provideCheck")
-    public void check(List<Integer> numbers, LottoResult lottoResult) {
+    public void check(List<Integer> numbers, LottoPlace lottoPlace) {
         LottoChecker checker = new LottoChecker(new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
-        assertThat(checker.check(new Lotto(new LottoNumbers(numbers)))).isEqualTo(lottoResult);
+        assertThat(checker.check(new Lotto(new LottoNumbers(numbers)))).isEqualTo(lottoPlace);
     }
 
     public static Stream<Arguments> provideCheck() {
         return Stream.of(
-            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 6), LottoResult.FIRST),
-            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 9), LottoResult.SECOND),
-            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 8, 9), LottoResult.THIRD),
-            Arguments.arguments(Arrays.asList(1, 2, 3, 7, 8, 9), LottoResult.FOURTH),
-            Arguments.arguments(Arrays.asList(1, 2, 10, 7, 8, 9), LottoResult.LOSE),
-            Arguments.arguments(Arrays.asList(1, 11, 10, 7, 8, 9), LottoResult.LOSE),
-            Arguments.arguments(Arrays.asList(12, 11, 10, 7, 8, 9), LottoResult.LOSE)
+            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 6), LottoPlace.FIRST),
+            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 5, 9), LottoPlace.SECOND),
+            Arguments.arguments(Arrays.asList(1, 2, 3, 4, 8, 9), LottoPlace.THIRD),
+            Arguments.arguments(Arrays.asList(1, 2, 3, 7, 8, 9), LottoPlace.FOURTH),
+            Arguments.arguments(Arrays.asList(1, 2, 10, 7, 8, 9), LottoPlace.LOSE),
+            Arguments.arguments(Arrays.asList(1, 11, 10, 7, 8, 9), LottoPlace.LOSE),
+            Arguments.arguments(Arrays.asList(12, 11, 10, 7, 8, 9), LottoPlace.LOSE)
         );
     }
 }

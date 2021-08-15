@@ -5,18 +5,18 @@ import java.util.Map;
 import java.util.Optional;
 
 public class LottoStatistics {
-    private final Map<LottoResult, Integer> resultCountMap = new HashMap<>();
+    private final Map<LottoPlace, Integer> resultCountMap = new HashMap<>();
     private final Money spend;
 
     public LottoStatistics(LottoResults results, Money spend) {
         this.spend = spend;
 
-        for (LottoResult result : results) {
+        for (LottoPlace result : results) {
             resultCountMap.compute(result, (key, oldValue) -> Optional.ofNullable(oldValue).orElse(0) + 1);
         }
     }
 
-    public Integer count(LottoResult result) {
+    public Integer count(LottoPlace result) {
         return resultCountMap.getOrDefault(result, 0);
     }
 

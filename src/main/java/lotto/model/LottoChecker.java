@@ -7,9 +7,9 @@ public class LottoChecker {
         this.winningLotto = winningLotto;
     }
 
-    public LottoResult check(Lotto lotto) {
+    public LottoPlace check(Lotto lotto) {
         int correctCount = winningLotto.countCorrect(lotto);
 
-        return LottoResult.from(correctCount);
+        return LottoPlace.fromCorrectCount(correctCount);
     }
 }
