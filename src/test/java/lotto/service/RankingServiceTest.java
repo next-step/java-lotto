@@ -16,9 +16,9 @@ public class RankingServiceTest {
         RankingService service = new RankingService();
         //when
         LottoResults lottoResults = service.calculateResults(new WinningNumbers(
-                new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
+                new LottoTicket(new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
                         new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
-                        new LottoNumber(6))), new LottoNumber(8)), initializeLottos(), new RankingCalculator());
+                        new LottoNumber(6)))), new LottoNumber(8)), initializeLottos(), new RankingCalculator());
         //then
         assertThat(lottoResults).isEqualTo(getExpected());
     }

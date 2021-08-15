@@ -63,7 +63,8 @@ public class LottoController {
 
     private WinningNumbers getLastWeekWinningNumbers() {
         WinningNumberParser parser = new WinningNumberParser();
-        return new WinningNumbers(parser.parseToWinningNumbers(inputWinningNumbers()), inputBonusNumber());
+        return new WinningNumbers(
+                new LottoTicket(parser.parseToWinningNumbers(inputWinningNumbers())), inputBonusNumber());
     }
 
     private String inputWinningNumbers() {

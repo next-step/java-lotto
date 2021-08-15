@@ -19,7 +19,8 @@ public class RankingCalculatorTest {
                 new LottoNumber(6)));
         LottoTickets lottoTickets = initializeLottos();
         //when
-        LottoResult lottoResult= calculator.calculate(new WinningNumbers(lastWeekWinning, new LottoNumber(8)), lottoTickets, Ranking.FIFTH);
+        LottoResult lottoResult= calculator.calculate(new WinningNumbers(new LottoTicket(lastWeekWinning),
+                new LottoNumber(8)), lottoTickets, Ranking.FIFTH);
         //then
         assertThat(lottoResult).isEqualTo(new LottoResult(Ranking.FIFTH, 3));
     }

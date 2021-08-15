@@ -5,15 +5,12 @@ import java.util.Objects;
 
 public class WinningNumbers{
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
-
-    private final List<LottoNumber> winningNumbers;
+    private final LottoTicket winningTicket;
 
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateWinningNumbers(winningNumbers);
-        this.winningNumbers = winningNumbers;
+    public WinningNumbers(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
 
@@ -22,26 +19,16 @@ public class WinningNumbers{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningNumbers that = (WinningNumbers) o;
-        return Objects.equals(winningNumbers, that.winningNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(winningTicket, that.winningTicket) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningNumbers, bonusNumber);
-    }
-
-    private void validateWinningNumbers(List<LottoNumber> winningNumbers) {
-        if (winningNumbers == null || isLottoNumberSize(winningNumbers)) {
-            throw new IllegalArgumentException("잘못된 지난 주 당첨 번호입니다.");
-        }
-    }
-
-    private boolean isLottoNumberSize(List<LottoNumber> winningNumbers) {
-        return winningNumbers.size() != LOTTO_NUMBER_SIZE;
+        return Objects.hash(winningTicket, bonusNumber);
     }
 
     public boolean contains(LottoNumber element) {
-        return winningNumbers.contains(element);
+        return winningTicket.contains(element);
     }
 
     public boolean containsBonusNumber(LottoNumber lottoNumber) {

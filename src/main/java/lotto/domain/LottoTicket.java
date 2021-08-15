@@ -6,14 +6,21 @@ import java.util.Objects;
 
 public class LottoTicket {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -27,5 +34,16 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    private void validate(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || isLottoNumberSize(lottoNumbers)) {
+            throw new IllegalArgumentException("잘못된 지난 주 당첨 번호입니다.");
+        }
+    }
+
+
+    private boolean isLottoNumberSize(List<LottoNumber> winningNumbers) {
+        return winningNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 }
