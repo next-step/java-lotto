@@ -13,6 +13,9 @@ public class LottoNumberSelector {
         .limit(45)
         .collect(Collectors.toList());
 
+    private LottoNumberSelector() {
+    }
+
     public static List<Integer> selectNumbers() {
         List<Integer> selectedNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
