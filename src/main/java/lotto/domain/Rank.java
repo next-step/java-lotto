@@ -48,10 +48,6 @@ public enum Rank {
         return winningMoney;
     }
 
-    public Money calculateTotalWinningAmount(int count) {
-        return winningMoney.multiply(count);
-    }
-
     public boolean isSecond() {
         return this.equals(SECOND);
     }

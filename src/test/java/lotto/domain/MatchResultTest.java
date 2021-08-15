@@ -20,10 +20,10 @@ class MatchResultTest {
     }
 
     private Money expectWinningAmount(int three, int four, int five, int six) {
-        return Rank.FIFTH.calculateTotalWinningAmount(three)
-                .add(Rank.FOURTH.calculateTotalWinningAmount(four))
-                .add(Rank.THIRD.calculateTotalWinningAmount(five))
-                .add(Rank.FIRST.calculateTotalWinningAmount(six));
+        return Rank.FIFTH.getWinningMoney().multiply(three)
+                .add(Rank.FOURTH.getWinningMoney().multiply(four))
+                .add(Rank.THIRD.getWinningMoney().multiply(five))
+                .add(Rank.FIRST.getWinningMoney().multiply(six));
     }
 
     private Map<Rank, Integer> getMatchCountIntegerMap(int three, int four, int five, int six) {

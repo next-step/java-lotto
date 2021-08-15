@@ -26,7 +26,8 @@ public class MatchResult {
         Money total = Money.zero();
         for (Rank rank : winningLotteryCountMap.keySet()) {
             int count = winningLotteryCountMap.get(rank);
-            total = total.add(rank.calculateTotalWinningAmount(count));
+            Money winningMoney = rank.getWinningMoney();
+            total = total.add(winningMoney.multiply(count));
         }
         return total;
     }
