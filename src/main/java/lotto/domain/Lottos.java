@@ -13,18 +13,15 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void drawLottos(Lotto winnerLotto) {
+    public LottoDrawResponse drawLottos(Lotto winnerLotto) {
+        LottoDrawResponse lottoResult = new LottoDrawResponse();
         for (Lotto lotto : lottos) {
-            lotto.drawLotto(winnerLotto);
+            lottoResult.addOne(lotto.drawLotto(winnerLotto));
         }
-    }
-
-    public long countWinners(Award award) {
-        return lottos.stream().filter(lotto -> lotto.isWinner(award)).count();
+        return lottoResult;
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
-
 }

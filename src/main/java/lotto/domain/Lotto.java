@@ -1,14 +1,12 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
 
     public static final long SIZE = 6;
     private Set<LottoNumber> lottoNumbers;
-    private Award award = Award.UNIDENTIFIED;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
@@ -17,7 +15,6 @@ public class Lotto {
 
     private void validate(Set<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
-        checkDuplicate(lottoNumbers);
     }
 
     private void checkSize(Set<LottoNumber> lottoNumbers) {
@@ -26,36 +23,14 @@ public class Lotto {
         }
     }
 
-    private void checkDuplicate(Set<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            containsThenThrowsException(lottoNumberSet, lottoNumber);
-            lottoNumberSet.add(lottoNumber);
-        }
-    }
-
-    private void containsThenThrowsException(Set<LottoNumber> lottoNumberSet, LottoNumber lottoNumber) {
-        if (lottoNumberSet.contains(lottoNumber)) {
-            throw new IllegalArgumentException("LottoNumbers에 중복된 숫자가 있습니다. 중복된 숫자 : " + lottoNumber);
-        }
-    }
-
-    public void drawLotto(Lotto winnerLotto) {
-        award = Award.findBy(countContains(winnerLotto));
+    public Award drawLotto(Lotto winnerLotto) {
+        return Award.findBy(countContains(winnerLotto));
     }
 
     public long countContains(Lotto winnerLotto) {
         return winnerLotto.getNumbers().stream()
                 .filter(winnerNumber -> this.lottoNumbers.contains(winnerNumber))
                 .count();
-    }
-
-    public boolean isWinner(Award award) {
-        return this.award == award;
-    }
-
-    public Award getAward() {
-        return award;
     }
 
     public Set<LottoNumber> getNumbers() {

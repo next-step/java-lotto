@@ -1,12 +1,14 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.dto.LottoPurchaseResponse;
 import lotto.domain.dto.LottoWinnersDto;
+import lotto.util.LottoListGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,12 +18,12 @@ public class LottoMain {
         int ticketNumber = lottoPurchaseAmount / 1000;
 
         LottoGame lottoGame = new LottoGame();
-        Lottos lottos = lottoGame.purchase(ticketNumber);
+        LottoPurchaseResponse lottoPurchaseResponse = lottoGame.purchase(LottoListGenerator.creatLottos(ticketNumber));
+        ResultView.printPurchaseLottos(lottoPurchaseResponse);
 
-        ResultView.printPurchaseLottos(lottos);
-        lottoGame.drawLotto(getWinnerLotto());
+        LottoDrawResponse lottoDrawResponse = lottoGame.drawLotto(getWinnerLotto());
+        List<LottoWinnersDto> lottoWinnersDtos = createLottoWinnerDtos(lottoDrawResponse.getLottoResult());
 
-        List<LottoWinnersDto> lottoWinnersDtos = createLottoWinnerDtos(lottoGame);
         ResultView.printWinners(lottoWinnersDtos);
         ResultView.printYield(lottoWinnersDtos, lottoPurchaseAmount);
     }
@@ -33,14 +35,14 @@ public class LottoMain {
                 .collect(Collectors.toSet()));
     }
 
-    private static List<LottoWinnersDto> createLottoWinnerDtos(LottoGame lottoGame) {
-        return Arrays.stream(Award.values())
-                .filter(award -> isBang(award))
-                .map(award -> new LottoWinnersDto(award, lottoGame.countWinners(award)))
+    private static List<LottoWinnersDto> createLottoWinnerDtos(Map<Award, Integer> lottoResult) {
+        return lottoResult.entrySet().stream()
+                .filter(e -> isNotBang(e.getKey()))
+                .map(e -> new LottoWinnersDto(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
     }
 
-    private static boolean isBang(Award award) {
+    private static boolean isNotBang(Award award) {
         return !award.equals(Award.BANG) && !award.equals(Award.UNIDENTIFIED);
     }
 }
