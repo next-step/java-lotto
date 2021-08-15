@@ -34,10 +34,9 @@ public class LottoWinningPolicy {
 
     public int getPrice() {
         int sum = 0;
-        sum += result.get(LottoRank.FOURTH) * LottoRank.FOURTH.getPrice();
-        sum += result.get(LottoRank.THIRD) * LottoRank.THIRD.getPrice();
-        sum += result.get(LottoRank.SECOND) * LottoRank.SECOND.getPrice();
-        sum += result.get(LottoRank.FIRST) * LottoRank.FIRST.getPrice();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            sum += result.get(lottoRank) * lottoRank.getPrice();
+        }
         return sum;
     }
 }
