@@ -26,7 +26,7 @@ public class ResultView {
     }
 
     private static void printLottoProfit(Profit profit) {
-        System.out.println("총 수익률은 " + profit + "% 입니다.");
+        System.out.println("총 수익률은 " + profit.getProfit() + "% 입니다.");
     }
 
     private static void printLottoStatistics(LottoMatch resultOfLottos) {

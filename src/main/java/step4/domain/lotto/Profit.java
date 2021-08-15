@@ -21,9 +21,8 @@ public class Profit {
         return new Profit((double) totalWinOfMoney.amount() / (count * LOTTO_PRICE));
     }
 
-    @Override
-    public String toString() {
-        return profit + "";
+    public double getProfit() {
+        return profit;
     }
 
     @Override
