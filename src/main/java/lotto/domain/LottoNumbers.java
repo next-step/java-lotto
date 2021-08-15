@@ -6,10 +6,10 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers() {
-        this.lottoNumbers = LottoNumberSelector.selectNumbers();
+        lottoNumbers.addAll(LottoNumberSelector.selectNumbers());
     }
 
     public String getNumberString() {
