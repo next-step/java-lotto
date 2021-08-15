@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.enums.Rank;
 
 public class ResultView {
@@ -13,8 +14,8 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public static void outputLottoCount(int lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+	public static void outputLottoCount(LottoCount lottoCount) {
+		System.out.println("수동으로 " + lottoCount.getManualLottoCount() + "장, 자동으로 " + lottoCount.getAutoLottoCount() + "개를 구매했습니다.");
 	}
 
 	public static void outputLottoNumbers(Lotto lotto) {

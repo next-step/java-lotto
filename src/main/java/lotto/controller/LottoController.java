@@ -8,6 +8,7 @@ import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Records;
 import lotto.domain.WinLotto;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
@@ -20,22 +21,30 @@ public class LottoController {
 		this.money = money;
 	}
 
-	public void buyLotto() {
-		final LottoCount lottoCount = new LottoCount(this.money);
+	public void buyLotto(int manualLottoCount) {
+		final LottoCount lottoCount = new LottoCount(this.money, manualLottoCount);
 
-		ResultView.outputLottoCount(lottoCount.getLottoCount());
+		ResultView.outputLottoCount(lottoCount);
 
+		this.lottos = Lottos.generateLottos(lottoCount);
+
+		buyManualLotto(lottoCount);
 		buyAutoLotto(lottoCount);
+	}
 
-		lottos.getLottos()
-			.forEach(ResultView::outputLottoNumbers);
+	private void buyManualLotto(LottoCount lottoCount) {
+		InputView.printManualInputLottoNumbers();
+
+		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+			String lottoNumbers = InputView.inputManualLottoNumbers();
+
+			this.lottos.addManualLotto(Lotto.of(lottoNumbers));;
+		}
 	}
 
 	private void buyAutoLotto(LottoCount lottoCount) {
-		this.lottos = Lottos.generateLottos(lottoCount);
-
-		for (int i = 0; i < lottoCount.getLottoCount(); i++) {
-			this.lottos.addAutoLotto();
+		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
+			ResultView.outputLottoNumbers(this.lottos.addAutoLotto());
 		}
 	}
 
