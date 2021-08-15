@@ -39,7 +39,7 @@ public class Lotto {
     }
 
     public double getProfitRate() {
-        return (double) lottoWinningPolicy.getPrice() / price;
+        return (double) lottoWinningPolicy.calculateWinningPrice() / price;
     }
 
     public LottoGame getLottoGame() {

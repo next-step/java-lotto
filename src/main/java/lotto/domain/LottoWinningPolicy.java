@@ -32,7 +32,7 @@ public class LottoWinningPolicy {
         return result;
     }
 
-    public int getPrice() {
+    public int calculateWinningPrice() {
         int sum = 0;
         for (LottoRank lottoRank : LottoRank.values()) {
             sum += result.get(lottoRank) * lottoRank.getPrice();
