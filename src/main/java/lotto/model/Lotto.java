@@ -20,11 +20,16 @@ public class Lotto {
     public int countCorrect(Lotto other) {
         int equalCount = 0;
         for (LottoNumber number : other.getNumbers()) {
-            if (numbers.contain(number)) {
-                equalCount++;
-            }
+            equalCount = incrementIfContains(equalCount, number);
         }
 
+        return equalCount;
+    }
+
+    private int incrementIfContains(int equalCount, LottoNumber number) {
+        if (numbers.contain(number)) {
+            return equalCount + 1;
+        }
         return equalCount;
     }
 }

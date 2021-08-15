@@ -17,6 +17,7 @@ public class OutputView {
     private static String getLottNumbersString(Lotto lotto) {
         return lotto.getNumbers().stream()
             .map(LottoNumber::getNumber)
+            .sorted()
             .map(Object::toString)
             .reduce((accu, curr) -> accu + ", " + curr)
             .get();
