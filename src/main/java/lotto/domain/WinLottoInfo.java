@@ -6,7 +6,7 @@ import lotto.service.Rank;
 
 public class WinLottoInfo {
 
-  public static final int MATCH_COUNT_NUMBER = 1;
+  private static final int MATCH_COUNT_NUMBER = 1;
 
   private final Lotto winLotto;
 
