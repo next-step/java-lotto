@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -23,38 +24,52 @@ public class InputView {
 
     public long getInputAmount() {
         System.out.println(MESSAGE_INPUT_AMOUNT);
-        long amount = scanner.nextLong();
-        scanner.nextLine();
-        return amount;
+        return inputStringToLong();
     }
 
     public long getManualLottoCount() {
+        System.out.println();
         System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_COUNT);
-        long manualLottoCount = scanner.nextLong();
-        scanner.nextLine();
-        return manualLottoCount;
+        return inputStringToLong();
     }
 
-    public String[] getManualLottoNumbers(long manualLottoCount) {
-        String[] lottoNumbers = new String[(int) manualLottoCount];
+    public long getBonusNumber() {
+        System.out.println(MESSAGE_INPUT_BONUS_NUMBER);
+        return inputStringToLong();
+    }
 
+    private long inputStringToLong() {
+        try {
+            long number = Long.parseLong(scanner.nextLine());
+            validatePositiveNumber(number);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
+        }
+    }
+
+    private void validatePositiveNumber(long input) {
+        if (input < 0) {
+            throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
+        }
+    }
+
+    public String[] getManualLottoNumbers(int manualLottoCount) {
         if (manualLottoCount < 1) {
-            return lottoNumbers;
+            return new String[0];
         }
 
+        System.out.println();
         System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_NUMBER);
-        for (int i = 0; i < manualLottoCount; i++) {
-            String input = scanner.nextLine();
-            lottoNumbers[i] = input;
-        }
-        return lottoNumbers;
+        return IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> scanner.nextLine())
+                .toArray(String[]::new);
     }
 
     public List<Integer> getWinningNumber() {
         System.out.println();
         System.out.println(MESSAGE_INPUT_WINNING_NUMBER);
         String input = scanner.nextLine();
-
         String[] inputArr = input.split(NUMBER_SEPARATOR);
 
         try {
@@ -65,12 +80,5 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
         }
-    }
-
-    public int getBonusNumber() {
-        System.out.println(MESSAGE_INPUT_BONUS_NUMBER);
-        int bonusNumber = scanner.nextInt();
-        scanner.nextLine();
-        return bonusNumber;
     }
 }

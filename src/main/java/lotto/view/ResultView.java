@@ -28,7 +28,8 @@ public class ResultView {
     }
 
     private static void showBuyCountInfo(final int manualCount, final int autoCount) {
-        System.out.printf(RESULT_MESSAGE_POST_BUY, autoCount, manualCount-autoCount);
+        System.out.println();
+        System.out.printf(RESULT_MESSAGE_POST_BUY, autoCount, manualCount - autoCount);
         System.out.println();
     }
 

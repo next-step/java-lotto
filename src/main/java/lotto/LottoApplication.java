@@ -14,17 +14,17 @@ public class LottoApplication {
         InputView inputView = new InputView(scanner);
 
         long purchaseAmount = inputView.getInputAmount();
-        long manualLottoCount = inputView.getManualLottoCount();
+        int manualLottoCount = (int) inputView.getManualLottoCount();
         String[] manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
 
         AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
         LottoShop lottoShop = new LottoShop(lottoGenerator);
-
         LottoTickets lottoTickets = lottoShop.buy(purchaseAmount, manualLottoNumbers);
-        ResultView.showBuyLottoTickets(lottoTickets, (int)manualLottoCount);
+
+        ResultView.showBuyLottoTickets(lottoTickets, manualLottoCount);
 
         List<Integer> winningNumbers = inputView.getWinningNumber();
-        int bonusNumber = inputView.getBonusNumber();
+        int bonusNumber = (int) inputView.getBonusNumber();
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
 
         LottoStatistic lottoStatistic = lottoTickets.matchLottoTickets(winningLottoTicket);
