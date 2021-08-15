@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBERS_SIZE = 6;
@@ -27,18 +29,22 @@ public class LottoNumbers {
         }
     }
 
-    public LottoStatus check(final LottoNumbers winningNumbers) {
-        int hitCount = lottoNumbers.stream()
-                .mapToInt(lottoNumber -> checkWinning(winningNumbers.lottoNumbers, lottoNumber))
+    public int checkHitCount(final LottoNumbers winningNumbers) {
+        return winningNumbers.lottoNumbers
+                .stream()
+                .mapToInt(this::checkHit)
                 .sum();
-        return LottoStatus.find(hitCount);
     }
 
-    private int checkWinning(final List<LottoNumber> winningNumbers, final LottoNumber lottoNumber) {
-        if (winningNumbers.contains(lottoNumber)) {
+    private int checkHit(final LottoNumber winningNumber) {
+        if (hasLottoNumber(winningNumber)) {
             return 1;
         }
         return 0;
+    }
+
+    public boolean hasLottoNumber(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -56,8 +62,6 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList()));
+        return String.valueOf(lottoNumbers);
     }
 }

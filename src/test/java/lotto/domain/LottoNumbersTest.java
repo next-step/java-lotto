@@ -6,11 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.Fixtures.makeLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
@@ -26,19 +25,11 @@ public class LottoNumbersTest {
     @DisplayName("로또 번호 당첨번호 체크")
     @ParameterizedTest(name = "{index}. {displayName}, arguments: {arguments}")
     @MethodSource("lottoNumbersParameterProvider")
-    void check_ReturnLottoStatus_IfInputIsWinningNumbers(List<LottoNumber> inputLottoNumbers, LottoStatus expected) {
+    void check_ReturnLottoStatus_IfInputIsWinningNumbers(List<LottoNumber> inputLottoNumbers, int expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         LottoNumbers winningNumbers = new LottoNumbers(makeLottoNumbers(1, 7, 15, 28, 36, 45));
-        LottoStatus lottoStatus = lottoNumbers.check(winningNumbers);
-        assertThat(lottoStatus).isEqualTo(expected);
-    }
-
-
-
-    private static List<LottoNumber> makeLottoNumbers(Integer... integers) {
-        return Arrays.stream(integers)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        int hitCount = lottoNumbers.checkHitCount(winningNumbers);
+        assertThat(hitCount).isEqualTo(expected);
     }
 
     static Stream<Arguments> wrongLottoNumbersParameterProvider() {
@@ -51,14 +42,12 @@ public class LottoNumbersTest {
 
     static Stream<Arguments> lottoNumbersParameterProvider() {
         return Stream.of(
-                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 36, 45), LottoStatus.FIRST),
-                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 36, 43), LottoStatus.SECOND),
-                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 30, 43), LottoStatus.THIRD),
-                Arguments.of(makeLottoNumbers(1, 7, 15, 24, 30, 43), LottoStatus.FOURTH),
-                Arguments.of(makeLottoNumbers(1, 7, 12, 24, 30, 43), LottoStatus.NOTHING),
-                Arguments.of(makeLottoNumbers(1, 3, 12, 24, 30, 43), LottoStatus.NOTHING)
+                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 36, 45), 6),
+                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 36, 43), 5),
+                Arguments.of(makeLottoNumbers(1, 7, 15, 28, 30, 43), 4),
+                Arguments.of(makeLottoNumbers(1, 7, 15, 24, 30, 43), 3),
+                Arguments.of(makeLottoNumbers(1, 7, 12, 24, 30, 43), 2),
+                Arguments.of(makeLottoNumbers(1, 3, 12, 24, 30, 43), 1)
         );
     }
-
-
 }
