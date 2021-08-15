@@ -1,9 +1,6 @@
 package step3;
 
-import step3.domain.BonusBall;
-import step3.domain.Customer;
-import step3.domain.LottoInfo;
-import step3.domain.WinningLottoNumbers;
+import step3.domain.*;
 import step3.view.InputView;
 import step3.view.ResultView;
 
@@ -14,16 +11,14 @@ public class LottoApp {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
         Customer customer = new Customer();
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers();
 
         LottoInfo lottoInfo = new LottoInfo(inputView.requestInput());
-
-        List<List<Integer>> issuedLottoList = customer.buyLotto(lottoInfo.getCount());
-        resultView.printIssuedLottoList(issuedLottoList);
-        List<Integer> winningLottoNumberList = winningLottoNumbers.checkValidInput(inputView.requestWinningLottoNumber());
-        int bonusBallNumber = inputView.requestBonusBall();
-        BonusBall.copareWithWinningLottoNumbers(bonusBallNumber, winningLottoNumberList);
-        customer.compareWinningLottoNumbersAndIssuedLottoList(winningLottoNumberList, issuedLottoList, bonusBallNumber);
+        LottoTicket lottoTicket = new LottoTicket(customer.buyLotto(lottoInfo.getCount()));
+        resultView.printNumOfLotto(lottoInfo.getCount());
+        resultView.printIssuedLottoList(lottoTicket.getBundle());
+        WinningLotto winningLotto = new WinningLotto(inputView.requestWinningLottoNumber());
+        BonusBall bonusBall = new BonusBall(inputView.requestBonusBall(), winningLotto.getNumbers());
+        customer.compareWinningLottoNumbersAndIssuedLottoList(winningLotto.getNumbers(), lottoTicket.getBundle(), bonusBall.getNumber());
 
         resultView.printMatchedLottoRecord(customer.getResultRankMap());
         resultView.printResultPrice(customer.getResultPrize(), lottoInfo.getCount());

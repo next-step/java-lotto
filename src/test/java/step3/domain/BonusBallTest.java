@@ -19,7 +19,7 @@ class BonusBallTest {
         winningLottoNumberList.add(4);
         winningLottoNumberList.add(5);
         winningLottoNumberList.add(6);
-        assertThatThrownBy(() -> BonusBall.copareWithWinningLottoNumbers(4,winningLottoNumberList))
+        assertThatThrownBy(() -> new BonusBall(4,winningLottoNumberList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,6 +33,6 @@ class BonusBallTest {
         winningLottoNumberList.add(4);
         winningLottoNumberList.add(5);
         winningLottoNumberList.add(6);
-        BonusBall.copareWithWinningLottoNumbers(7, winningLottoNumberList);
+        new BonusBall(7, winningLottoNumberList);
     }
 }
