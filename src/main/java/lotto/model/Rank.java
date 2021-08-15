@@ -17,6 +17,10 @@ public enum Rank {
         this.winningBonus = winningBonus;
     }
 
+    public int getMatch() {
+        return match;
+    }
+
     public int getWinningBonus() {
         return winningBonus;
     }

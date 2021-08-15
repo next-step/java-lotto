@@ -54,4 +54,15 @@ public class LottoTicket {
                 .filter(ticket::contains)
                 .count());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        for (int num : numbers) {
+            result.append(num).append(", ");
+        }
+        result.setLength(result.length() - 2);
+        result.append("]");
+        return result.toString();
+    }
 }
