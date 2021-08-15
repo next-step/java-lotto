@@ -11,14 +11,14 @@ public class LottoWinningPolicy {
     private final Map<LottoRank, Integer> result = Arrays.stream(LottoRank.values())
         .collect(Collectors.toMap(Function.identity(), lottoRank -> 0));
 
-    private final LottoWinningNumber lottoWinningNumber = new LottoWinningNumber();
+    private final LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers();
 
     public void setWinningNumber(final String winningNumbersString) {
-        lottoWinningNumber.selectWinningNumbers(winningNumbersString);
+        lottoWinningNumbers.selectWinningNumbers(winningNumbersString);
     }
 
     public List<Integer> getWinningNumber() {
-        return lottoWinningNumber.getWinningNumber();
+        return lottoWinningNumbers.getWinningNumber();
     }
 
     public void setResult(LottoGame lottoGame) {

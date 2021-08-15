@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumbers {
 
     private final List<Integer> lottoNumbers;
 
-    public LottoNumber() {
+    public LottoNumbers() {
         this.lottoNumbers = LottoNumberSelector.selectNumbers();
     }
 

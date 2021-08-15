@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
 
-    private final LottoNumber lottoNumber = new LottoNumber();
+    private final LottoNumbers lottoNumbers = new LottoNumbers();
     private LottoRank lottoRank;
     private int collectNumber = 0;
 
@@ -14,7 +13,7 @@ public class LottoTicket {
     }
 
     public void checkResult(final List<Integer> winningNumbers) {
-        List<Integer> numbers = lottoNumber.getLottoNumbers();
+        List<Integer> numbers = lottoNumbers.getLottoNumbers();
         for (Integer lottoNumber : numbers) {
             isCollectNumber(winningNumbers, lottoNumber);
         }
@@ -40,6 +39,6 @@ public class LottoTicket {
     }
 
     public String getNumberString() {
-        return lottoNumber.getNumberString();
+        return lottoNumbers.getNumberString();
     }
 }
