@@ -1,5 +1,6 @@
 package step4;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step4.domain.lotto.Lotto;
 import step4.domain.lotto.LottoNumber;
@@ -11,8 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTest {
 
+    @DisplayName("로또 생성 기능")
     @Test
-    void 로또_생성_기능() {
+    void create() {
         // Given && When
         List<LottoNumber> givenLottoNumber = LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 6);
 
@@ -23,8 +25,9 @@ class LottoTest {
         assertThat(lotto.numbers()).isEqualTo(givenLottoNumber);
     }
 
+    @DisplayName("같은 로또 번호가 있다면 IllegalArgumentException 발생")
     @Test
-    void 같은_로또_번호가_있다면_IllegalArgumentException_발생() {
+    void occurIllegalArgumentExceptionWhenCreateDuplication() {
         // Given && When
         List<LottoNumber> givenLottoNumber = LottoNumbersFactory.buildLottoNumbers(1, 1, 1, 1, 1, 1);
 
@@ -32,8 +35,9 @@ class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> Lotto.create(givenLottoNumber));
     }
 
+    @DisplayName("로또 숫자가 6개가 아니면 IllegalArgumentException 발생")
     @Test
-    void 로또_숫자가_6개가_아니면_IllegalArgumentException_발생() {
+    void occurIllegalArgumentExceptionWhenCreateWrongSize() {
         // Given && When
         List<LottoNumber> givenLottoNumber = LottoNumbersFactory.buildLottoNumbers(1, 2, 3, 4, 5, 7, 6);
 

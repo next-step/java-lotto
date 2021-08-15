@@ -10,8 +10,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class WalletTest {
 
+    @DisplayName("10000원이 있는 지갑에서 5000원을 인출하면 5000원이 나온다")
     @Test
-    void _10000원이_있는_지갑에서_5000원을_인출하면_5000원이_나온다() {
+    void withDraw() {
         // given
         Wallet expectedWallet = new Wallet(new Cache(5000));
         Cache withDrawCache = new Cache(5000);
@@ -24,7 +25,7 @@ class WalletTest {
         assertThat(actualMoney).isEqualTo(expectedRemainMoney);
     }
 
-    @DisplayName("10000원이_있는_지갑에서_7000원을_인출하면_지갑에_3000원이_있다")
+    @DisplayName("10000원이 있는 지갑에서 7000원을 인출하면 지갑에 3000원이 있다")
     @Test
     void withDarw() {
         // given
