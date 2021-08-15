@@ -33,7 +33,7 @@ public enum Ranking {
     }
 
     public boolean isEqualTo(int matchCount, boolean hasBonusNumber) {
-        return matchCount == getExpect();
+        return matchCount == this.expect;
     }
 
     public int getExpect() {
