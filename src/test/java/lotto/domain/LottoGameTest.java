@@ -2,7 +2,9 @@ package lotto.domain;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.ARRAY;
 
+import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class LottoGameTest {
     @Test
     void set_winning_numbers() {
         LottoGame lottoGame = new LottoGame(1000);
-        lottoGame.setWinningNumber("1, 2, 3, 4, 5, 6");
+        lottoGame.setWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoGame.getWinningNumber()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }

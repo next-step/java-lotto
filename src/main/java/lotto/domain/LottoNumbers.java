@@ -12,6 +12,10 @@ public class LottoNumbers {
         lottoNumbers.addAll(LottoNumberSelector.selectNumbers());
     }
 
+    public LottoNumbers(final List<Integer> numbers) {
+        lottoNumbers.addAll(numbers);
+    }
+
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

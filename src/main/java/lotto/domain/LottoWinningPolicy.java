@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class LottoWinningPolicy {
 
+    private LottoNumbers lottoNumbers;
     private final Map<LottoRank, Integer> result = new EnumMap<LottoRank, Integer>(
         LottoRank.class) {
         {
@@ -17,14 +18,13 @@ public class LottoWinningPolicy {
         }
     };
 
-    private final LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers();
 
     public void setWinningNumber(final List<Integer> numbers) {
-        lottoWinningNumbers.selectWinningNumbers(numbers);
+        lottoNumbers = new LottoNumbers(numbers);
     }
 
     public List<Integer> getWinningNumber() {
-        return lottoWinningNumbers.getWinningNumber();
+        return lottoNumbers.getLottoNumbers();
     }
 
     public void setResult(Lotto lotto) {
