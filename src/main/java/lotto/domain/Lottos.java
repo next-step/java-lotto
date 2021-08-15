@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.exception.OutOfLottoCountException;
 import lotto.utils.AutoLottoNumbersGeneratorUtils;
 
 public class Lottos {
@@ -28,10 +29,24 @@ public class Lottos {
 	}
 
 	public void addManualLotto(Lotto lotto) {
+		validate();
+
 		lottos.add(lotto);
 	}
 
-	public void addAutoLotto() {
-		lottos.add(Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers()));
+	public Lotto addAutoLotto() {
+		validate();
+
+		Lotto lotto = Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers());
+
+		lottos.add(lotto);
+
+		return lotto;
+	}
+
+	private void validate() {
+		if (lottos.size() >= lottoCount.getLottoCount()) {
+			throw new OutOfLottoCountException("로또는 최대 " + lottoCount.getLottoCount() + "장 구매 가능합니다.");
+		}
 	}
 }
