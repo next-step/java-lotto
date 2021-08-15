@@ -16,9 +16,9 @@ public class Lottos implements Iterable<Lotto> {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public Lottos(List<Lotto> one, List<Lotto> two) {
-        one.addAll(two);
-        this.lottos = new ArrayList<>(one);
+    public Lottos(List<Lotto> manualLotto, List<Lotto> randomLotto) {
+        manualLotto.addAll(randomLotto);
+        this.lottos = new ArrayList<>(manualLotto);
     }
 
     public LottoMatch match(WinOfLotto winOfLotto) {
