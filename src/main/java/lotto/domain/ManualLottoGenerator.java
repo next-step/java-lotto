@@ -20,11 +20,11 @@ public final class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public LottoTicket generate() {
-        List<LottoNumber> lottoNumbers = Arrays.stream(this.lottoNumbers)
+        List<LottoNumber> lottoNumberList = Arrays.stream(lottoNumbers)
                 .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
 
-        return new LottoTicket(lottoNumbers);
+        return new LottoTicket(lottoNumberList);
     }
 }
