@@ -30,7 +30,9 @@ public class AutoNumberMaker implements NumberMaker {
     @Override
     public List<Integer> makeNumbers() {
         flushingTotalNumbers();
-        return new ArrayList<>(TOTAL_NUMBERS.subList(0, 6));
+        List<Integer> numbers = new ArrayList<>(TOTAL_NUMBERS.subList(0, 6));
+        Collections.sort(numbers);
+        return numbers;
     }
 
     protected void flushingTotalNumbers(){
