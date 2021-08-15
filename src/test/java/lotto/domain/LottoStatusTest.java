@@ -11,23 +11,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStatusTest {
 
-    @DisplayName("로또 맞춘 개수에 따라 LottoStatus 값 리턴")
+    @DisplayName("로또 맞춘 개수와 보너스번호에 따라 LottoStatus 값 리턴")
     @ParameterizedTest(name = "{index}. {displayName}, arguments: {arguments}")
     @MethodSource("parameterProvider")
-    void find_ReturnLottoStatus_AccordingToHitCount(int hitCount, LottoStatus expected) {
-        LottoStatus lottoStatus = LottoStatus.find(hitCount);
+    void find_ReturnLottoStatus_AccordingToHitCountAndBonusNumberStatus(int hitCount, BonusNumberStatus bonusNumberStatus, LottoStatus expected) {
+        LottoStatus lottoStatus = LottoStatus.find(hitCount, bonusNumberStatus);
         assertThat(lottoStatus).isEqualTo(expected);
     }
 
     static Stream<Arguments> parameterProvider() {
         return Stream.of(
-                Arguments.of(6, LottoStatus.FIRST),
-                Arguments.of(5, LottoStatus.SECOND),
-                Arguments.of(4, LottoStatus.THIRD),
-                Arguments.of(3, LottoStatus.FOURTH),
-                Arguments.of(2, LottoStatus.NOTHING),
-                Arguments.of(1, LottoStatus.NOTHING),
-                Arguments.of(0, LottoStatus.NOTHING)
+                Arguments.of(6, BonusNumberStatus.NOT_APPLY, LottoStatus.FIRST),
+                Arguments.of(6, BonusNumberStatus.MATCH, LottoStatus.FIRST),
+                Arguments.of(6, BonusNumberStatus.MISS, LottoStatus.FIRST),
+                Arguments.of(5, BonusNumberStatus.MATCH, LottoStatus.SECOND),
+                Arguments.of(5, BonusNumberStatus.MISS, LottoStatus.THIRD),
+                Arguments.of(4, BonusNumberStatus.NOT_APPLY, LottoStatus.FOURTH),
+                Arguments.of(3, BonusNumberStatus.NOT_APPLY, LottoStatus.FIFTH),
+                Arguments.of(3, BonusNumberStatus.MATCH, LottoStatus.FIFTH),
+                Arguments.of(2, BonusNumberStatus.NOT_APPLY, LottoStatus.NOTHING),
+                Arguments.of(1, BonusNumberStatus.NOT_APPLY, LottoStatus.NOTHING)
         );
     }
 }
