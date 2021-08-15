@@ -5,17 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoNumberTest {
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 45})
-    @DisplayName("로또 넘버를 생성하고 getLottoNumber()를 호출 시 생성할때 주입한 숫자와 동일한지 비교한다.")
-    void constructor(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
-        assertEquals(lottoNumber.getLottoNumber(), number);
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
