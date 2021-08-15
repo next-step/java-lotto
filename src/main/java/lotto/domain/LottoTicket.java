@@ -38,7 +38,7 @@ public class LottoTicket {
         return lottoRank;
     }
 
-    public String getNumberString() {
-        return lottoNumbers.getNumberString();
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbers();
     }
 }

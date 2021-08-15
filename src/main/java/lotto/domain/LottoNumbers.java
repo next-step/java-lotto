@@ -12,14 +12,6 @@ public class LottoNumbers {
         lottoNumbers.addAll(LottoNumberSelector.selectNumbers());
     }
 
-    public String getNumberString() {
-        List<String> numbers = new ArrayList<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            numbers.add(lottoNumber.toString());
-        }
-        return "[" + String.join(", ", numbers) + "]";
-    }
-
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
