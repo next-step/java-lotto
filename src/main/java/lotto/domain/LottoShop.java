@@ -14,18 +14,14 @@ public final class LottoShop {
         this.buyLottoTickets = new LottoTickets();
     }
 
-    public LottoTickets buy(final long amount) {
+    public LottoTickets buy(final long amount, String... manualLottoTicketsArgs) {
         validateMinimumAmount(amount);
 
-        buyAutoLottoTickets(getBuyAutoLottoTicketCount(amount, 0));
-        return buyLottoTickets;
-    }
+        int availableTicketCount = getAvailableTicketCount(amount);
+        int buyManualTicketCount = buyManualLottoTickets(manualLottoTicketsArgs);
+        int remainAvailableTicketCount = getRemainAvailableTicketCount(availableTicketCount, buyManualTicketCount);
 
-    public LottoTickets buy(final long amount, String... autoLottoTicketArray) {
-        validateMinimumAmount(amount);
-
-        buyManualLottoTickets(autoLottoTicketArray);
-        buyAutoLottoTickets(getBuyAutoLottoTicketCount(amount, autoLottoTicketArray.length));
+        buyAutoLottoTickets(remainAvailableTicketCount);
         return buyLottoTickets;
     }
 
@@ -35,30 +31,31 @@ public final class LottoShop {
         }
     }
 
-    private void buyManualLottoTickets(String[] autoLottoTickets) {
+    private int getAvailableTicketCount(long amount) {
+        return (int) Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
+    }
+
+    private int buyManualLottoTickets(String[] autoLottoTickets) {
         List<LottoTicket> manualLottoTickets = Arrays.stream(autoLottoTickets)
                 .map(ManualLottoGenerator::new)
                 .map(ManualLottoGenerator::generate)
                 .collect(Collectors.toList());
 
         buyLottoTickets.addAll(manualLottoTickets);
+        return manualLottoTickets.size();
+    }
+
+    private int getRemainAvailableTicketCount(long availableTicketCount, int buyManualTicketCount) {
+        long count = availableTicketCount - buyManualTicketCount;
+        if (count < 0) {
+            throw new IllegalArgumentException("not enough amount");
+        }
+        return (int) count;
     }
 
     private void buyAutoLottoTickets(final long count) {
         for (int i = 0; i < count; i++) {
             buyLottoTickets.add(lottoGenerator.generate());
         }
-    }
-
-    private long getBuyAutoLottoTicketCount(long amount, int manualLottoCount) {
-        long count = getPurchaseCount(amount) - manualLottoCount;
-        if (count < 0) {
-            throw new IllegalArgumentException("not enough amount");
-        }
-        return count;
-    }
-
-    private long getPurchaseCount(long amount) {
-        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
     }
 }
