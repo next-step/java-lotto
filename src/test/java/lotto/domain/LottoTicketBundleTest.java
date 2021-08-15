@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import lotto.domain.LottoTicketMachine.OrderInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -33,32 +34,30 @@ class LottoTicketBundleTest {
 
     private static AutoLottoTickets oneAutoTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByAutoWay(new TicketCount(1));
+        return machine.issueTicketsByAutoWay(new OrderInput(new TicketCount(1)));
     }
 
     private static AutoLottoTickets twoAutoTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByAutoWay(new TicketCount(2));
+        return machine.issueTicketsByAutoWay(new OrderInput(new TicketCount(2)));
     }
 
     private static ManualLottoTickets oneManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(getOneManualOrder());
+        return machine.issueTicketsByManualWay(new OrderInput(getOneManualNumbers()));
     }
 
     private static ManualLottoTickets twoManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(getTwoManualOrder());
+        return machine.issueTicketsByManualWay(new OrderInput(getTwoManualNumbers()));
     }
 
-    private static LottoPurchaseOrder getOneManualOrder() {
-        return new LottoPurchaseOrder(new Money(3000),
-            new int[][]{{1, 2, 3, 4, 5, 6}});
+    private static int[][] getOneManualNumbers() {
+        return new int[][]{{1, 2, 3, 4, 5, 6}};
     }
 
-    private static LottoPurchaseOrder getTwoManualOrder() {
-        return new LottoPurchaseOrder(new Money(3000),
-            new int[][]{{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 6}});
+    private static int[][] getTwoManualNumbers() {
+        return new int[][]{{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 6}};
     }
 
 

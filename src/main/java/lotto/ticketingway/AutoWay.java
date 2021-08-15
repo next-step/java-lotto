@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.AllPossibleLottoNumbers;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketMachine.OrderInput;
 import lotto.domain.TicketCount;
 
 public class AutoWay implements LottoTicketingWay {
 
     @Override
-    public List<LottoTicket> issueLottoTickets(TicketCount ticketCount,
-        LottoPurchaseOrder order) {
+    public List<LottoTicket> issueLottoTickets(OrderInput input) {
+        TicketCount ticketCount = input.getAutoTicketCount();
 
         List<LottoTicket> tickets = new ArrayList<>();
 

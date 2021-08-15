@@ -7,7 +7,7 @@ import lotto.ticketingway.ManualWay;
 
 public class LottoTicketMachine {
 
-    private static LottoTicketMachine instance = new LottoTicketMachine();
+    private final static LottoTicketMachine instance = new LottoTicketMachine();
 
     private LottoTicketMachine() {
     }
@@ -16,17 +16,43 @@ public class LottoTicketMachine {
         return instance;
     }
 
-    private List<LottoTicket> issueTickets(TicketCount count, LottoPurchaseOrder order,
-        LottoTicketingWay way) {
-        return way.issueLottoTickets(count, order);
+    private List<LottoTicket> issueTickets(OrderInput input, LottoTicketingWay way) {
+        return way.issueLottoTickets(input);
     }
 
-    public AutoLottoTickets issueTicketsByAutoWay(TicketCount count) {
-        return new AutoLottoTickets(issueTickets(count, null, new AutoWay()));
+    public AutoLottoTickets issueTicketsByAutoWay(OrderInput input) {
+        return new AutoLottoTickets(issueTickets(input, new AutoWay()));
     }
 
-    public ManualLottoTickets issueTicketsByManualWay(LottoPurchaseOrder order) {
-        return new ManualLottoTickets(issueTickets(null, order, new ManualWay()));
+    public ManualLottoTickets issueTicketsByManualWay(OrderInput input) {
+        return new ManualLottoTickets(issueTickets(input, new ManualWay()));
+    }
+
+    public static class OrderInput {
+
+        private final TicketCount autoTicketCount;
+        private final int[][] manualLottoNumbers;
+
+        public OrderInput(TicketCount autoTicketCount, int[][] manualLottoNumbers) {
+            this.autoTicketCount = autoTicketCount;
+            this.manualLottoNumbers = manualLottoNumbers;
+        }
+
+        public OrderInput(TicketCount autoTicketCount) {
+            this(autoTicketCount, null);
+        }
+
+        public OrderInput(int[][] manualLottoNumbers) {
+            this(null, manualLottoNumbers);
+        }
+
+        public TicketCount getAutoTicketCount() {
+            return autoTicketCount;
+        }
+
+        public int[][] getManualLottoNumbers() {
+            return manualLottoNumbers;
+        }
     }
 
 }

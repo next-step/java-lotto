@@ -2,19 +2,16 @@ package lotto.ticketingway;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoPurchaseOrder;
 import lotto.domain.LottoTicket;
-import lotto.domain.TicketCount;
+import lotto.domain.LottoTicketMachine.OrderInput;
 
 public class ManualWay implements LottoTicketingWay {
 
     @Override
-    public List<LottoTicket> issueLottoTickets(TicketCount ticketCount,
-        LottoPurchaseOrder order) {
+    public List<LottoTicket> issueLottoTickets(OrderInput input) {
+        int[][] manualLottoNumbers = input.getManualLottoNumbers();
 
         List<LottoTicket> tickets = new ArrayList<>();
-
-        int[][] manualLottoNumbers = order.getManualLottoNumbers();
 
         for (int[] inputNumbers : manualLottoNumbers) {
             tickets.add(LottoTicket.generateByIntegerArray(inputNumbers));

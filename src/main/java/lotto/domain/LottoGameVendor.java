@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.LottoTicketMachine.OrderInput;
 import lotto.exception.NotEnoughMoneyException;
 import lotto.exception.WrongTicketCountException;
 
@@ -15,8 +16,9 @@ public class LottoGameVendor {
         TicketCount autoCnt = getAutoTicketCount(availableCnt, manualCnt);
 
         LottoTicketMachine ticketMachine = LottoTicketMachine.getInstance();
-        AutoLottoTickets autoTickets = ticketMachine.issueTicketsByAutoWay(autoCnt);
-        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(order);
+        OrderInput input = new OrderInput(autoCnt, order.getManualLottoNumbers());
+        AutoLottoTickets autoTickets = ticketMachine.issueTicketsByAutoWay(input);
+        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(input);
 
         return new LottoTicketBundle(autoTickets, manualTickets);
 
