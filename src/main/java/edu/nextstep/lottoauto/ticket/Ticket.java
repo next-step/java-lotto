@@ -15,15 +15,9 @@ public class Ticket {
     private final List<Integer> numbers;
     private Prize prize;
 
-
     private Ticket(List<Integer> numbers) {
         this.numbers = numbers;
         this.prize = null;
-    }
-
-    private Ticket(List<Integer> numbers, Prize prize) {
-        this.numbers = numbers;
-        this.prize = prize;
     }
 
     public static Ticket create(NumberMaker numberMaker) {
@@ -31,21 +25,20 @@ public class Ticket {
     }
 
     public void checkAndUpdateWinningPrize(WinningNumbers winningNumbers) {
-        int count = 0;
-
-        for (Integer winningNumber : winningNumbers.getWinningNumbers()) {
-            if (numbers.contains(winningNumber)) {
-                count++;
-            }
-        }
-
+        int count = countSameNumbers(winningNumbers);
         if (count >= 3) {
-            for (Prize p : Prize.values()) {
-                if (p.getValue() == count) {
-                    this.prize = p;
-                }
-            }
+            setPrize(count);
         }
+    }
+
+    private int countSameNumbers(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.getWinningNumbers().stream()
+                .filter(numbers::contains)
+                .count();
+    }
+
+    private void setPrize(int count) {
+        this.prize = Prize.from(count);
     }
 
     public List<Integer> getNumbers() {
@@ -55,6 +48,4 @@ public class Ticket {
     public Prize getPrize() {
         return prize;
     }
-
-
 }
