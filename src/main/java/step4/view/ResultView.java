@@ -31,9 +31,7 @@ public class ResultView {
 
     private static void printLottoStatistics(LottoMatch resultOfLottos) {
         resultOfLottos.getLottoMatch().forEach((lottoMatch, integer) ->
-            System.out.println(lottoMatch.getNumber() + "개 일치 ("
-                + lottoMatch.getWinMoney() + " 원) - "
-                + resultOfLottos.winCount(lottoMatch) + "개"));
+            System.out.printf("%d개 일치 (%d 원) - %d개 \n", lottoMatch.getNumber(), lottoMatch.getWinMoney(), resultOfLottos.winCount(lottoMatch)));
     }
 
 }
