@@ -1,15 +1,21 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class LottoWinningPolicy {
 
-    private final Map<LottoRank, Integer> result = Arrays.stream(LottoRank.values())
-        .collect(Collectors.toMap(Function.identity(), lottoRank -> 0));
+    private final Map<LottoRank, Integer> result = new EnumMap<LottoRank, Integer>(
+        LottoRank.class) {
+        {
+            put(LottoRank.FIRST, 0);
+            put(LottoRank.SECOND, 0);
+            put(LottoRank.THIRD, 0);
+            put(LottoRank.FOURTH, 0);
+            put(LottoRank.FAIL, 0);
+        }
+    };
 
     private final LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers();
 

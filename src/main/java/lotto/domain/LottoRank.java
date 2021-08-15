@@ -11,9 +11,7 @@ public enum LottoRank {
     SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
-    SEVENTH(0, 0);
+    FAIL(0, 0);
 
     private final int collectNumber;
     private final int price;
@@ -29,7 +27,7 @@ public enum LottoRank {
                 .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
 
     public LottoRank findRank(int collectNumber) {
-        return LOTTO_RANK_MAP.get(collectNumber);
+        return LOTTO_RANK_MAP.get(collectNumber > 2 ? collectNumber : 0);
     }
 
     public int getCollectNumber() {
