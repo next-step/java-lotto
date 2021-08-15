@@ -23,12 +23,18 @@ public class Money implements Comparable<Money> {
         this.money = money;
     }
 
-    public int getBuyableLotteryCount() {
+    public LotteryQuantity getBuyableLotteryQuantity() {
         requireOverLotteryPrice();
-        return money / Lottery.PRICE.money;
+        return new LotteryQuantity( money / Lottery.PRICE.money);
     }
 
-    public long multiply(long number) {
+    public void buyLotteries(LotteryQuantity quantity) {
+        requireOverBuyableQuantity(quantity);
+        quantity.intStream()
+                .forEach(i -> buyLottery());
+    }
+
+    public int multiply(int number) {
         return money * number;
     }
 
@@ -37,10 +43,9 @@ public class Money implements Comparable<Money> {
                 .divide(new BigDecimal(number), 4, RoundingMode.HALF_UP);
     }
 
-    private void validateMoney(final String money) {
-        requireNonNull(money);
-        requireNumber(money);
-        requirePositiveNumber(Integer.parseInt(money));
+    public void buyLottery() {
+        requireOverLotteryPrice();
+        money -= Lottery.PRICE.money;
     }
 
     private void requireOverBuyableQuantity(final LotteryQuantity quantity) {

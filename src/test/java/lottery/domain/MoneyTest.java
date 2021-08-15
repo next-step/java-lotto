@@ -81,10 +81,10 @@ class MoneyTest {
         int expectedCount = 5;
 
         // when
-        int maxLotteryCount = money.getBuyableLotteryCount();
+        LotteryQuantity buyableLotteryCount = money.getBuyableLotteryQuantity();
 
         // then
-        assertThat(maxLotteryCount).isEqualTo(expectedCount);
+        assertThat(buyableLotteryCount.intStream().count()).isEqualTo(expectedCount);
     }
 
     @Test
@@ -97,7 +97,7 @@ class MoneyTest {
 
         // when
         // when
-        ThrowingCallable throwingCallable = () -> money.getBuyableLotteryCount();
+        ThrowingCallable throwingCallable = () -> money.getBuyableLotteryQuantity();
 
         // then
         assertThatThrownBy(throwingCallable)
@@ -105,6 +105,36 @@ class MoneyTest {
                 .hasMessage(message);
     }
 
+    @Test
+    @DisplayName("buyLotteries 테스트 - 돈이 수량보다 부족한 경우")
+    public void buyLotteriesNotEnoughMoney() {
+        // given
+        Money money = new Money(3000);
+        LotteryQuantity lotteryQuantity = new LotteryQuantity(5);
+        String message = "로또를 구매하기에 돈이 부족합니다 -> " + money + " / quantity: " + lotteryQuantity;
 
+        // when
+        ThrowingCallable throwingCallable = () -> money.buyLotteries(lotteryQuantity);
+
+        // then
+        assertThatThrownBy(throwingCallable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
+    }
+
+    @Test
+    @DisplayName("buyLotteries 테스트 - 구매 가능 경우")
+    public void buyLotteries() {
+        // given
+        Money money = new Money(5000);
+        LotteryQuantity lotteryQuantity = new LotteryQuantity(2);
+        Money restMoney = new Money(3000);
+
+        // when
+        money.buyLotteries(lotteryQuantity);
+
+        // then
+        assertThat(money).isEqualTo(restMoney);
+    }
 
 }
