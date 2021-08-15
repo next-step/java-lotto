@@ -10,6 +10,7 @@ import step4.domain.lotto.LottoMachine;
 import step4.domain.lotto.LottoMatch;
 import step4.domain.lotto.LottoNumber;
 import step4.domain.lotto.LottoRank;
+import step4.domain.lotto.Lottos;
 import step4.domain.lotto.Profit;
 import step4.domain.lotto.WinOfLotto;
 import step4.domain.money.Cache;
@@ -43,11 +44,10 @@ class LottosTest {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, bonusNumber);
 
         Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
-        LottoRank lottoRank = givenWinOfLotto.match(lotto);
+        Lottos lottos = new Lottos(lotto);
 
         // When
-        LottoMatch actualLottoMatch = new LottoMatch();
-        actualLottoMatch.put(lottoRank);
+        LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
 
         // Then
         assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
@@ -66,11 +66,10 @@ class LottosTest {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 9, 11);
 
         Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
-        LottoRank lottoRank = givenWinOfLotto.match(lotto);
+        Lottos lottos = new Lottos(lotto);
 
         // When
-        LottoMatch actualLottoMatch = new LottoMatch();
-        actualLottoMatch.put(lottoRank);
+        LottoMatch actualLottoMatch = lottos.match(givenWinOfLotto);
 
         // Then
         assertThat(expectedLottoMatch).isEqualTo(actualLottoMatch);
@@ -83,13 +82,11 @@ class LottosTest {
         List<LottoNumber> givenLottoNumbers = buildLottoNumbers(1, 2, 3, 44, 45, 22);
 
         Lotto lotto = LottoMachine.manualLotto(new Cache(1000), givenLottoNumbers);
-        LottoRank lottoRank = givenWinOfLotto.match(lotto);
-
-        LottoMatch lottoMatch = new LottoMatch();
-        lottoMatch.put(lottoRank);
+        Lottos lottos = new Lottos(lotto);
+        LottoMatch match = lottos.match(givenWinOfLotto);
 
         // When
-        Profit profit = lottoMatch.calcProfit(1);
+        Profit profit = match.calcProfit(1);
 
         // Then
         assertThat(profit).isEqualTo(new Profit(5));

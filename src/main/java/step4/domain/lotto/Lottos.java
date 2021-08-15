@@ -1,15 +1,17 @@
 package step4.domain.lotto;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
-public class Lottos implements Iterable<Lotto> {
+public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        this(new ArrayList<>());
+    public Lottos(Lotto lotto) {
+        this.lottos = new ArrayList<>();
+        this.lottos.add(lotto);
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -22,13 +24,17 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     public LottoMatch match(WinOfLotto winOfLotto) {
-        LottoMatch lottoMatch = new LottoMatch();
+        Map<LottoRank, Integer> lottoMap = new EnumMap<>(LottoRank.class);
 
         for (Lotto lotto : lottos) {
-            lottoMatch.put(winOfLotto.match(lotto));
+            int correctCount = winOfLotto.correctCount(lotto.numbers());
+            boolean hasBonusNumber = winOfLotto.hasBonusNumber(lotto);
+            LottoRank lottoNumber = LottoRank.find(correctCount, hasBonusNumber);
+
+            lottoMap.put(lottoNumber, lottoMap.getOrDefault(lottoNumber, 0) + 1);
         }
 
-        return lottoMatch;
+        return new LottoMatch(lottoMap);
     }
 
     public int getLottoCount() {
@@ -44,8 +50,4 @@ public class Lottos implements Iterable<Lotto> {
         return new Lottos(lottos);
     }
 
-    @Override
-    public Iterator<Lotto> iterator() {
-        return lottos.iterator();
-    }
 }

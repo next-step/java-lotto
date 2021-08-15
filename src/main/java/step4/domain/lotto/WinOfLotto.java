@@ -36,7 +36,4 @@ public class WinOfLotto {
         return lotto.numbers().stream().anyMatch(bonusNumber::equals);
     }
 
-    public LottoRank match(Lotto lotto) {
-        return LottoRank.find(correctCount(lotto.numbers()), hasBonusNumber(lotto));
-    }
 }

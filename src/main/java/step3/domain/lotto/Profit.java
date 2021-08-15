@@ -9,10 +9,6 @@ public class Profit {
 
     private final double profit;
 
-    public Profit() {
-        this(0);
-    }
-
     public Profit(double profit) {
         this.profit = profit;
     }

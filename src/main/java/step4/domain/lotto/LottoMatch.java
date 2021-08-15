@@ -7,16 +7,12 @@ import java.util.Objects;
 
 public class LottoMatch {
 
-    private static final int WIN_COUNT_ZERO = 0;
+    public static final int WIN_COUNT_ZERO = 0;
 
     private final Map<LottoRank, Integer> lottoMatch;
 
-    public LottoMatch() {
-        this(new EnumMap<>(LottoRank.class));
-    }
-
     public LottoMatch(Map<LottoRank, Integer> lottoMatch) {
-        this.lottoMatch = lottoMatch;
+        this.lottoMatch = new EnumMap<>(lottoMatch);
     }
 
     public Cache sumMoney() {
@@ -28,10 +24,6 @@ public class LottoMatch {
 
     public Map<LottoRank, Integer> getLottoMatch() {
         return lottoMatch;
-    }
-
-    public void put(LottoRank lottoNumber) {
-        lottoMatch.put(lottoNumber, lottoMatch.getOrDefault(lottoNumber, WIN_COUNT_ZERO) + 1);
     }
 
     public Integer winCount(LottoRank lottoRank) {
