@@ -16,7 +16,7 @@ public class LottoGameVendor {
 
         LottoTicketMachine ticketMachine = LottoTicketMachine.getInstance();
         AutoLottoTickets autoTickets = ticketMachine.issueTicketsByAutoWay(autoCnt);
-        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(manualCnt, order);
+        ManualLottoTickets manualTickets = ticketMachine.issueTicketsByManualWay(order);
 
         return new LottoTicketBundle(autoTickets, manualTickets);
 

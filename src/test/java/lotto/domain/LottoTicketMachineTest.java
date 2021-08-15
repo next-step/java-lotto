@@ -13,26 +13,40 @@ class LottoTicketMachineTest {
     LottoTicketMachine machine = LottoTicketMachine.getInstance();
 
     @ParameterizedTest
-    @MethodSource("provideOrderInfo")
+    @MethodSource("provideManualOrder")
     @DisplayName("입력한 개수만큼 수동로또티켓을 발행할수 있다.")
-    void manual_ticket_creation(TicketCount count, LottoPurchaseOrder order, int expectedCount) {
-        ManualLottoTickets manualTickets = machine.issueTicketsByManualWay(count, order);
+    void manual_ticket_creation(LottoPurchaseOrder order, int expectedCount) {
+        ManualLottoTickets manualTickets = machine.issueTicketsByManualWay(order);
         assertThat(manualTickets.getCount()).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest
-    @MethodSource("provideOrderInfo")
+    @MethodSource("provideAutoOrder")
     @DisplayName("입력한 개수만큼 자동로또티켓을 발행할수 있다.")
-    void auto_ticket_creation(TicketCount count, LottoPurchaseOrder order, int expectedCount) {
+    void auto_ticket_creation(TicketCount count, int expectedCount) {
         AutoLottoTickets autoTickets = machine.issueTicketsByAutoWay(count);
         assertThat(autoTickets.getCount()).isEqualTo(expectedCount);
     }
 
-    private static Stream<Arguments> provideOrderInfo() {
+    private static Stream<Arguments> provideAutoOrder() {
         return Stream.of(
-            Arguments.of(new TicketCount(1), getOneManualOrder(), 1),
-            Arguments.of(new TicketCount(2), getTwoManualOrder(), 2)
+            Arguments.of(new TicketCount(0), 0),
+            Arguments.of(new TicketCount(1), 1),
+            Arguments.of(new TicketCount(2), 2)
         );
+    }
+
+    private static Stream<Arguments> provideManualOrder() {
+        return Stream.of(
+            Arguments.of(getZeroManualOrder(), 0),
+            Arguments.of(getOneManualOrder(), 1),
+            Arguments.of(getTwoManualOrder(), 2)
+        );
+    }
+
+    private static LottoPurchaseOrder getZeroManualOrder() {
+        return new LottoPurchaseOrder(new Money(3000),
+            new int[][]{});
     }
 
     private static LottoPurchaseOrder getOneManualOrder() {

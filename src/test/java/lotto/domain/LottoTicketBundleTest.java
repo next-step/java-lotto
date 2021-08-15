@@ -43,12 +43,12 @@ class LottoTicketBundleTest {
 
     private static ManualLottoTickets oneManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(new TicketCount(1), getOneManualOrder());
+        return machine.issueTicketsByManualWay(getOneManualOrder());
     }
 
     private static ManualLottoTickets twoManualTicket() {
         LottoTicketMachine machine = LottoTicketMachine.getInstance();
-        return machine.issueTicketsByManualWay(new TicketCount(2), getTwoManualOrder());
+        return machine.issueTicketsByManualWay(getTwoManualOrder());
     }
 
     private static LottoPurchaseOrder getOneManualOrder() {
