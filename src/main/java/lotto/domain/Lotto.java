@@ -37,18 +37,21 @@ public class Lotto {
     }
 
     public int getMatchCount(WinningLotto winningLotto) {
-        return (int) winningLotto.getWinningLotto().getLottoNumbers()
-                                 .stream()
-                                 .filter(numbers::contains)
-                                 .count();
+        return (int) winningLotto.numbers.stream()
+                                         .filter(this::contains)
+                                         .count();
     }
 
     public boolean getMatchBonus(WinningLotto winningLotto) {
         return numbers.stream().anyMatch(number -> number.equals(winningLotto.getBonusNumber()));
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
-        return numbers;
+        return new TreeSet<>(numbers);
     }
 
 }

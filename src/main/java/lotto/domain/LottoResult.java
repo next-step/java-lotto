@@ -23,7 +23,6 @@ public enum LottoResult {
                                    .filter(s -> s.getMatchCount() == matchCount)
                                    .findFirst()
                                    .orElse(FAIL);
-
         if (matchCount == 5 && matchBonus) {
             result = SECOND;
         }

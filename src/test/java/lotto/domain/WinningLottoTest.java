@@ -11,7 +11,7 @@ public class WinningLottoTest {
     @DisplayName("보너스 번호 생성 성공 테스트")
     void 보너스번호_생성_성공_테스트() {
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
-        assertThat(winningLotto.getWinningLotto().getLottoNumbers().size()).isEqualTo(Lotto.SIZE);
+        assertThat(winningLotto.numbers.size()).isEqualTo(Lotto.SIZE);
         assertThat(winningLotto.getBonusNumber()).isEqualTo(LottoNumber.valueOf("7"));
     }
 
