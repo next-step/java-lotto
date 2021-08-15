@@ -20,10 +20,6 @@ public class LottoNumber {
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -35,5 +31,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }
