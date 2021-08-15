@@ -26,7 +26,7 @@ public class LottoNumberGenerator {
 
     private static void createLottoNumbers() {
         for (int i = 1; i < 46; i++) {
-            LOTTO_NUMBERS.add(new LottoNumber(i));
+            LOTTO_NUMBERS.add(LottoNumber.of(i));
         }
     }
 }

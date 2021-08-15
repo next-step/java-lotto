@@ -28,7 +28,7 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         List<LottoNumber> winOfLottoNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumber givenBonusNumber = new LottoNumber(10);
+        LottoNumber givenBonusNumber = LottoNumber.of(10);
         givenWinOfLotto = new WinOfLotto(winOfLottoNumbers, givenBonusNumber);
     }
 

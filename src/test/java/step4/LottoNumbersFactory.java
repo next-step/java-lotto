@@ -9,7 +9,7 @@ public class LottoNumbersFactory {
     public static List<LottoNumber> buildLottoNumbers(Integer... numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
         return lottoNumbers;
     }

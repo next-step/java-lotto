@@ -26,7 +26,7 @@ public class InputView {
         System.out.println(winOfLottoNum);
         return Stream.of(winOfLottoNum.split(","))
             .map(Integer::parseInt)
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class InputView {
         System.out.println(NUMBER_OF_BONUS);
         int winOfLottoNum = scanner.nextInt();
         System.out.println(winOfLottoNum);
-        return new LottoNumber(winOfLottoNum);
+        return LottoNumber.of(winOfLottoNum);
     }
 
     public static int inputManualCount() {
@@ -53,7 +53,7 @@ public class InputView {
         System.out.println(lottoNumbers);
         return Stream.of(lottoNumbers.split(","))
             .map(Integer::parseInt)
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
     }
 }
