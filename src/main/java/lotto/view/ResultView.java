@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.BonusNumberStatus;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStatus;
 import lotto.domain.Result;
@@ -20,10 +21,17 @@ public class ResultView {
         List<LottoStatus> lottoStatuses = Stream.of(LottoStatus.values()).filter(lottoStatus -> !Objects.equals(lottoStatus, LottoStatus.NOTHING))
                 .collect(Collectors.toList());
         for (LottoStatus lottoStatus : lottoStatuses) {
-            System.out.print(lottoStatus.getHitCount() + "개 일치 (" + lottoStatus.getWinningAmount() + ")");
+            System.out.print(lottoStatus.getHitCount() + "개 일치" + printBonusNumber(lottoStatus) + "(" + lottoStatus.getWinningAmount() + ")");
             System.out.println("-" + result.findCount(lottoStatus) + "개");
         }
         printRatio(result);
+    }
+
+    private static String printBonusNumber(LottoStatus lottoStatus) {
+        if (lottoStatus.isMatched(BonusNumberStatus.MATCH)) {
+            return ", 보너스볼 일치";
+        }
+        return " ";
     }
 
     private static void printRatio(Result result) {

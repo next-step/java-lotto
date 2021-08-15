@@ -1,7 +1,4 @@
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
-import lotto.domain.Result;
+import lotto.domain.*;
 import lotto.generic.Money;
 import lotto.util.LottoNumbersFactory;
 import lotto.view.InputView;
@@ -19,7 +16,8 @@ public class Main {
         ResultView.print(lottoTickets.getLottoTickets());
 
         LottoNumbers winningNumbers = LottoNumbersFactory.makeLottoNumbers(inputView.receiveWinningNumbers());
-        Result result = lottoTickets.check(winningNumbers);
+        int bonusNumber = inputView.receiveBonusNumber();
+        Result result = lottoTickets.check(new WinningNumbers(winningNumbers, new LottoNumber(bonusNumber)));
 
         ResultView.print(result);
         scanner.close();
