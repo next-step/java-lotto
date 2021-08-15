@@ -8,8 +8,8 @@ public class LottoNumbers {
 
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers() {
-        lottoNumbers.addAll(LottoNumberSelector.selectNumbers());
+    public LottoNumbers(LottoNumberSelectPolicy lottoNumberSelectPolicy) {
+        lottoNumbers.addAll(lottoNumberSelectPolicy.selectNumbers());
     }
 
     public LottoNumbers(final List<Integer> numbers) {

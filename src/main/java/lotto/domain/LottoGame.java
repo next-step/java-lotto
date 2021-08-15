@@ -9,8 +9,8 @@ public class LottoGame {
     private final LottoWinningPolicy lottoWinningPolicy = new LottoWinningPolicy();
     private final int price;
 
-    public LottoGame(final int price) {
-        lotto = new Lotto(price);
+    public LottoGame(final int price, LottoNumberSelectPolicy lottoNumberSelectPolicy) {
+        lotto = new Lotto(price, lottoNumberSelectPolicy);
         this.price = price;
     }
 

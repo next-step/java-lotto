@@ -4,11 +4,12 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final LottoNumbers lottoNumbers = new LottoNumbers();
+    private final LottoNumbers lottoNumbers;
     private LottoRank lottoRank;
     private int collectNumber = 0;
 
-    public LottoTicket() {
+    public LottoTicket(LottoNumberSelectPolicy lottoNumberSelectPolicy) {
+        lottoNumbers = new LottoNumbers(lottoNumberSelectPolicy);
         lottoRank = LottoRank.FAIL;
     }
 

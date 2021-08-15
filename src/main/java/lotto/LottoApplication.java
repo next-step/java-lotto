@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumberRandomSelector;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,7 +18,7 @@ public class LottoApplication {
         outputView.printOpening();
         int price = Integer.parseInt(inputView.getNumber());
 
-        LottoGame lottoGame = new LottoGame(price);
+        LottoGame lottoGame = new LottoGame(price, new LottoNumberRandomSelector());
 
         outputView.printGameNum(lottoGame.getGameNum());
         outputView.printTickets(lottoGame.getLottoGame());

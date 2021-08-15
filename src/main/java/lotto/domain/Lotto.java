@@ -8,10 +8,10 @@ public class Lotto {
     private static final int ONE_GAME_PRICE = 1000;
     private final List<LottoTicket> tickets = new ArrayList<>();
 
-    public Lotto(final int price) {
+    public Lotto(final int price, LottoNumberSelectPolicy lottoNumberSelectPolicy) {
         int ticketNumber = buyTicketNumber(price);
         for (int i = 0; i < ticketNumber; i++) {
-            tickets.add(new LottoTicket());
+            tickets.add(new LottoTicket(lottoNumberSelectPolicy));
         }
     }
 

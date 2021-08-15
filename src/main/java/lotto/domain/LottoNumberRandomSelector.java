@@ -5,17 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoNumberSelector {
+public class LottoNumberRandomSelector implements LottoNumberSelectPolicy {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final List<Integer> numbers = Stream.iterate(1, i -> i + 1)
+    private final int LOTTO_NUMBER_SIZE = 6;
+    private final List<Integer> numbers = Stream.iterate(1, i -> i + 1)
         .limit(45)
         .collect(Collectors.toList());
 
-    private LottoNumberSelector() {
-    }
-
-    public static List<Integer> selectNumbers() {
+    @Override
+    public List<Integer> selectNumbers() {
         Collections.shuffle(numbers);
         List<Integer> selectedNumbers = numbers.subList(0, LOTTO_NUMBER_SIZE);
         Collections.sort(selectedNumbers);
