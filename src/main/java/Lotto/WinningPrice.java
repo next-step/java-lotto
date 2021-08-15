@@ -15,15 +15,30 @@ public enum WinningPrice {
     public final int match;
     public final int price;
 
+
     WinningPrice(int match, int price) {
         this.match = match;
         this.price = price;
     }
 
     public static WinningPrice getWinnings(int numberOfMatch, boolean matchBonus) {
+
+        if (numberOfMatch == 5) {
+            return findBonusWinnings(matchBonus);
+        }
+
         return Arrays.stream(values())
-                .filter(winningPrice -> (matchBonus && numberOfMatch == 4) ? winningPrice.price == 30000000 : winningPrice.match == numberOfMatch)
+                .filter(winningPrice -> winningPrice.match == numberOfMatch)
                 .findFirst()
                 .orElse(NOT_WINNINGS);
+    }
+
+    public static WinningPrice findBonusWinnings(boolean matchBonus) {
+        if (matchBonus){
+            return WinningPrice.FIVE_WINNINGS_BOBUS;
+
+        }
+
+        return WinningPrice.FIVE_WINNINGS;
     }
 }

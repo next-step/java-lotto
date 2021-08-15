@@ -27,5 +27,15 @@ public class InputView {
 
         return scanner.nextInt();
     }
+   public static int insertPassiveCount() {
+
+        System.out.println("수동으로 구매 할 번호를 입력하세요");
+
+        return scanner.nextInt();
+    }
+    public static String insertPassiveNumber() {
+
+        return scanner.next();
+    }
 
 }

@@ -12,8 +12,12 @@ import static Lotto.Money.MONEY_DIVIDE_REMAINDER_ZERO;
 public class ResultView {
 
 
-    public static void printLottoResult(List<Lotto> lottos) {
+    public static void printLottoResult(List<Lotto> dynamicLottos, List<Lotto> passiveLotto) {
 
+
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다..\n", passiveLotto.size(), dynamicLottos.size());
+
+        List<Lotto> lottos = LottoMachine.combineLotto(dynamicLottos, passiveLotto);
 
         lottos.forEach(s -> System.out.println(s.getLottoNumbers()));
 
