@@ -14,6 +14,7 @@ public class LottoNumbers {
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDistinct(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 

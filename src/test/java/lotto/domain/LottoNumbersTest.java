@@ -67,4 +67,11 @@ class LottoNumbersTest {
                 .isEqualTo(3);
     }
 
+    @DisplayName("로또 숫자는 정렬된 상태로 출력된다.")
+    @Test
+    public void toStringTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.of(createLottoNumbers(Arrays.asList(6,5,4,3,2,1)));
+        assertThat(lottoNumbers.toString()).contains("1, 2, 3, 4, 5, 6");
+    }
+
 }
