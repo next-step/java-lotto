@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GenerateLottoNumber {
+public class GenerateLottoNumber implements GenerateValues{
 
   private static final int START = 1;
 
@@ -25,14 +25,9 @@ public class GenerateLottoNumber {
   public GenerateLottoNumber() {
   }
 
-  public static List<Integer> createNumberPull() {
+  @Override
+  public List<Integer> createNumberPull() {
     Collections.shuffle(numbers);
-    return splitNumbers();
+    return numbers.subList(FROM_INDEX, TO_INDEX);
   }
-
-  private static List<Integer> splitNumbers() {
-    return GenerateLottoNumber.numbers
-        .subList(FROM_INDEX, TO_INDEX);
-  }
-
 }

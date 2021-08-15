@@ -24,7 +24,7 @@ public class LottoController {
     PurchaseCount purchaseCount = new PurchaseCount(lottoMoney,
         manualNumber);
 
-    Lotteries lotteries = LottoMachine.createLottos(purchaseCount,
+    Lotteries lotteries = LottoMachine.createLottos(PurchaseCount.getTotalCount(purchaseCount),
         InputView.inputStringValuesWithMessage(Message.MSG_INPUT_MANUAL_LOTTO, manualNumber));
 
     ResultView.drawCountOfBuyLotteries(purchaseCount);

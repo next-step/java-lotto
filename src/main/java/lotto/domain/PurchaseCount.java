@@ -30,6 +30,10 @@ public class PurchaseCount {
     return totalCount - manualCount;
   }
 
+  public static int getTotalCount(PurchaseCount purchaseCount){
+    return purchaseCount.totalCount;
+  }
+
   @Override
   public String toString() {
     return "수동으로 " + manualCount + "장, 자동으로 " + getAutoCount() + Message.MSG_BUY_LOTTO_COUNT;
