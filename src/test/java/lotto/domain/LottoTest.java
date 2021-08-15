@@ -19,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LottoTest {
 
     private Set<LottoNumber> lottoNumberList = new HashSet<>();
-    public static final Lotto winnerLotto = new Lotto(createWinnerLottoNumbers());
+    public static final WinnerLotto winnerLotto = new WinnerLotto(createWinnerLottoNumbers(), new LottoNumber(7));
     private Lotto lotto;
 
-    private static Set<LottoNumber> createWinnerLottoNumbers() {
+    private static Lotto createWinnerLottoNumbers() {
         Set<LottoNumber> winnerNumbers = new HashSet<>();
         IntStream.rangeClosed(1, 6).forEach(number -> winnerNumbers.add(new LottoNumber(number)));
-        return winnerNumbers;
+        return new Lotto(winnerNumbers);
     }
 
     @BeforeEach
@@ -41,14 +41,14 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,7,8:THIRD", "1,2,3,7,8,9:FOURTH", "1,2,7,8,9,10:BANG", "1,7,8,9,10,11:BANG", "7,8,9,10,11,12:BANG"},
+    @CsvSource(value = {"1,2,3,4,5,6:7:FIRST", "1,2,3,4,5,7:6:SECOND", "1,2,3,4,5,8:9:THIRD", "1,2,3,4,8,9:10:FOURTH", "1,2,3,8,9,10:11:FIFTH", "1,7,8,9,10,11:12:BANG", "7,8,9,10,11,12:13:BANG"},
             delimiter = ':')
     @DisplayName("1~6까지의 로또에 대하여 winnerNumbers를 지정하여 1등 ~ 6등까지의 당첨을 확인한다.")
-    void drawLottoFirstAward(String winnerNumberString, String type) {
+    void drawLottoFirstAward(String winnerNumberString, int bonus, String type) {
 
         Set<LottoNumber> winnerNumbers = parseStringNumbersToList(winnerNumberString);
-        Lotto winnerLotto = new Lotto(winnerNumbers);
-
+        Lotto winlotto = new Lotto(winnerNumbers);
+        WinnerLotto winnerLotto = new WinnerLotto(winlotto, new LottoNumber(bonus));
         Award award = lotto.drawLotto(winnerLotto);
         assertEquals(award, Award.valueOf(type));
     }
