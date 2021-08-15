@@ -1,13 +1,15 @@
 package lottos.domain;
 
+import lottos.converter.IntListConverter;
 import lottos.domain.numbers.Numbers;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,9 +29,8 @@ class LottosTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,10:SECOND", "2,3,4,5,6,9:THIRD"}, delimiter = ':')
-    void 로또_게임_결과_검증(final String numbersText, final String rank) {
+    void 로또_게임_결과_검증(@ConvertWith(IntListConverter.class) final List<Integer> numbers, final String rank) {
 
-        List<Integer> numbers = getNumbers(numbersText);
         // given
         Lotto lotto = new Lotto(numbers);
         Lottos lottos = new Lottos(Collections.singletonList(lotto), lottoGenerator);
@@ -46,12 +47,12 @@ class LottosTest {
     }
 
     @ParameterizedTest
+    @MethodSource(value = {})
     @CsvSource(value = {"1,2,3,4,5,6:6,7,8,9,10,11:2"}, delimiter = ':')
-    void 로또_합치기(final String numbersText1, final String numbersText2, final int actual) {
+    void 로또_합치기(@ConvertWith(IntListConverter.class) final List<Integer> numbers1,
+                @ConvertWith(IntListConverter.class) final List<Integer> numbers2, final int actual) {
 
         // given
-        List<Integer> numbers1 = getNumbers(numbersText1);
-        List<Integer> numbers2 = getNumbers(numbersText2);
         Lotto lotto1 = new Lotto(numbers1);
         Lotto lotto2 = new Lotto(numbers2);
         Lottos lottos1 = new Lottos(Collections.singletonList(lotto1), lottoGenerator);
@@ -66,9 +67,5 @@ class LottosTest {
         assertTrue(lottos.elements().contains(lotto2));
     }
 
-    private List<Integer> getNumbers(String numbersText) {
-        return Arrays.stream(numbersText.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
+
 }
