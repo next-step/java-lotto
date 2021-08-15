@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -31,15 +32,31 @@ public class LottoController {
         int manualLottoTicketCount = inputView.inputManualLottoTicketCount();
         int autoLottoTicketCount = lottoCount - manualLottoTicketCount;
 
-        List<LottoTicket> manualLottoTicketList = inputView.inputManualLottoTickets(manualLottoTicketCount);
-        List<LottoTicket> autoLottoTicketList = new ArrayList<>();
-        for (int i = 0; i < autoLottoTicketCount; i++) {
-            autoLottoTicketList.add(LottoTicket.createRandomNumber());
-        }
+        List<LottoTicket> manualLottoTickets = getManualLottoTickets(inputView, manualLottoTicketCount);
+        List<LottoTicket> autoLottoTickets = getAutoLottoTickets(autoLottoTicketCount);
 
-        resultView.outputLottoLotteries(manualLottoTicketList, autoLottoTicketList);
-        manualLottoTicketList.addAll(autoLottoTicketList);
-        return manualLottoTicketList;
+        resultView.outputLottoLotteries(manualLottoTickets, autoLottoTickets);
+        manualLottoTickets.addAll(autoLottoTickets);
+        return manualLottoTickets;
+    }
+
+    private List<LottoTicket> getManualLottoTickets(InputView inputView, int manualLottoTicketCount) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        List<String> manualLottoTicketsList = inputView.inputManualLottoTickets(manualLottoTicketCount);
+        for (int i = 0; i < manualLottoTicketCount; i++) {
+            String[] lottoTicketStringArray = manualLottoTicketsList.get(i).split(",");
+            int[] lottoTicketIntArray = Arrays.stream(lottoTicketStringArray).mapToInt(s -> Integer.parseInt(s.trim())).toArray();
+            manualLottoTickets.add(LottoTicket.of(lottoTicketIntArray));
+        }
+        return manualLottoTickets;
+    }
+
+    private List<LottoTicket> getAutoLottoTickets(int autoLottoTicketCount) {
+        List<LottoTicket> autoLottoTickets = new ArrayList<>();
+        for (int i = 0; i < autoLottoTicketCount; i++) {
+            autoLottoTickets.add(LottoTicket.createRandomNumber());
+        }
+        return autoLottoTickets;
     }
 
     public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
