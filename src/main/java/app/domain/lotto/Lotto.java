@@ -63,12 +63,6 @@ public class Lotto {
         return count;
     }
 
-    public Winning getWinning(List<LottoNum> winner, LottoNum bonus){
-        int matchCount = matchLotto(winner);
-        boolean matchBonus = numbers.contains(bonus);
-        return Winning.find(matchCount, matchBonus);
-    }
-
     public boolean contains(LottoNum bonus) {
         return numbers.contains(bonus);
     }

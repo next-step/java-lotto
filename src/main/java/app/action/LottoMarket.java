@@ -34,7 +34,7 @@ public class LottoMarket {
     public Map<Winning, Integer> checkNumToWinner(WinnerLotto winner) {
         List<Winning> result = new ArrayList<>();
         for (Lotto myLotto : myLottoList.getAll()) {
-            Winning winning = myLotto.getWinning(winner.getLotto().getNumbers(), winner.getBonus());
+            Winning winning = winner.match(myLotto);
             if (!winning.isNotThing()) {
                 result.add(winning);
             }
