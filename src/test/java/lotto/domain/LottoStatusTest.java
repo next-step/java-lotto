@@ -15,7 +15,7 @@ public class LottoStatusTest {
     @ParameterizedTest(name = "{index}. {displayName}, arguments: {arguments}")
     @MethodSource("parameterProvider")
     void find_ReturnLottoStatus_AccordingToHitCountAndBonusNumberStatus(int hitCount, BonusNumberStatus bonusNumberStatus, LottoStatus expected) {
-        LottoStatus lottoStatus = LottoStatus.find(hitCount, bonusNumberStatus);
+        LottoStatus lottoStatus = LottoStatus.find(new HitCount(hitCount), bonusNumberStatus);
         assertThat(lottoStatus).isEqualTo(expected);
     }
 
