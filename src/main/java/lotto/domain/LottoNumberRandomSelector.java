@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class LottoNumberRandomSelector implements LottoNumberSelectPolicy {
 
-    private final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Integer> numbers = Stream.iterate(1, i -> i + 1)
         .limit(45)
         .collect(Collectors.toList());

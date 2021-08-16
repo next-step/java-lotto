@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -8,7 +10,8 @@ import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 
 public class OutputView {
-    public void printBasicInfo(LottoGame lottoGame){
+
+    public void printBasicInfo(LottoGame lottoGame) {
         printGameSize(lottoGame.size());
         printTickets(lottoGame.getLotto());
     }
@@ -27,13 +30,18 @@ public class OutputView {
 
     public void printResult(Map<LottoRank, Integer> result) {
         System.out.println("당첨 통계\n" + "---------");
-        System.out.println("3개 일치 (5000원)- " + result.get(LottoRank.FOURTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.get(LottoRank.THIRD) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.get(LottoRank.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.get(LottoRank.FIRST) + "개");
+        Arrays.stream(LottoRank.values())
+            .sorted(Comparator.comparing(LottoRank::getCollectNumber))
+            .filter(value -> value.getCollectNumber() > 0)
+            .forEach(value -> {
+                System.out.printf("%d개 일치 (%d원)- %d개%n",
+                    value.getCollectNumber(),
+                    value.getPrice(),
+                    result.get(value));
+            });
     }
 
     public void printProfitRatio(Double profitRatio) {
-        System.out.println("총 수익률은" + profitRatio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", profitRatio);
     }
 }

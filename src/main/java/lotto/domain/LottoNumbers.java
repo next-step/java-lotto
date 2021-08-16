@@ -20,7 +20,7 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public Boolean contains(int number) {
+    public boolean contains(int number) {
         return lottoNumbers.contains(number);
     }
 }
