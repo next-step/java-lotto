@@ -42,4 +42,8 @@ public class InputView {
                 .map(numberString -> LottoNumber.of(Integer.parseInt(numberString.trim())))
                 .collect(Collectors.toList());
     }
+
+    public LottoNumber getBonusBall() {
+        return LottoNumber.of(scanner.nextInt());
+    }
 }

@@ -14,19 +14,22 @@ public class LottoNumbers {
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDistinct(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(String.format(INVALID_LIST_SIZE_EXCEPTION_MESSAGE_FORMAT, lottoNumbers.toString()));
+            throw new IllegalArgumentException(String.format(INVALID_LIST_SIZE_EXCEPTION_MESSAGE_FORMAT, lottoNumbers));
         }
     }
 
     private void validateDistinct(List<LottoNumber> lottoNumbers) {
-        long distinctCount = lottoNumbers.stream().distinct().count();
+        long distinctCount = lottoNumbers.stream()
+                                .distinct()
+                                .count();
         if (distinctCount != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(String.format(DISTINCT_LOTTO_NUMBER_EXCEPTION_MESSAGE_FORMAT, lottoNumbers.toString()));
+            throw new IllegalArgumentException(String.format(DISTINCT_LOTTO_NUMBER_EXCEPTION_MESSAGE_FORMAT, lottoNumbers));
         }
     }
 
@@ -38,14 +41,13 @@ public class LottoNumbers {
         return LOTTO_NUMBERS_SIZE;
     }
 
-    public MatchCount match(LottoNumbers other) {
-        long count = lottoNumbers.stream()
+    public int countOfMatch(LottoNumbers other) {
+        return (int) lottoNumbers.stream()
                         .filter(other::contains)
                         .count();
-        return MatchCount.valueOf((int) count);
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

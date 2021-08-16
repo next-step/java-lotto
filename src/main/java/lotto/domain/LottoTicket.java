@@ -24,12 +24,12 @@ public class LottoTicket {
         lottoNumbersList.forEach(action);
     }
 
-    public MatchResult match(LottoNumbers winningLottoNumbers) {
-        Map<MatchCount, Integer> matchesTotalMap = new HashMap<>();
+    public MatchResult match(WinningLottoNumbers winningLottoNumbers) {
+        Map<Rank, Integer> matchesTotalMap = new HashMap<>();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            MatchCount matchCount = lottoNumbers.match(winningLottoNumbers);
-            int count = matchesTotalMap.getOrDefault(matchCount, INITIAL_MATCH_COUNT);
-            matchesTotalMap.put(matchCount, ++count);
+            Rank rank = winningLottoNumbers.match(lottoNumbers);
+            int count = matchesTotalMap.getOrDefault(rank, INITIAL_MATCH_COUNT);
+            matchesTotalMap.put(rank, ++count);
         }
         return MatchResult.of(matchesTotalMap);
     }

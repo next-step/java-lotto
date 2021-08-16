@@ -14,6 +14,24 @@ public class LottoSimulator {
     private final OutputView outputView;
     private final LottoNumbersGenerator lottoNumbersGenerator;
 
+    public static void main(String[] args) {
+        try {
+            InputView inputView = InputView.of(System.in);
+            OutputView outputView = OutputView.of(System.out);
+            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
+            LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
+            lottoSimulator.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<LottoNumber> createLottoNumbers() {
+        return IntStream.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound())
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
+    }
+
     public LottoSimulator(InputView inputView, OutputView outputView, LottoNumbersGenerator lottoNumbersGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
@@ -23,7 +41,7 @@ public class LottoSimulator {
     private void run() {
         PurchaseQuantity purchaseQuantity = getPurchaseQuantity();
         LottoTicket lottoTicket = getLottoTicket(purchaseQuantity);
-        LottoNumbers winningLottoNumbers = getWinningLottoNumbers();
+        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
         outputView.printMatchResult(matchResult);
         outputView.printLotteryYield(purchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
@@ -42,26 +60,11 @@ public class LottoSimulator {
         return lottoTicket;
     }
 
-    private LottoNumbers getWinningLottoNumbers() {
+    private WinningLottoNumbers getWinningLottoNumbers() {
         outputView.printWinningLottoNumbersInputMessage();
-        return inputView.getWinningLottoNumbers();
-    }
-
-    public static void main(String[] args) {
-        try {
-            InputView inputView = InputView.of(System.in);
-            OutputView outputView = OutputView.of(System.out);
-            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
-            LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
-            lottoSimulator.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound())
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
+        LottoNumbers winningLottoNumbers =  inputView.getWinningLottoNumbers();
+        outputView.printBonusBallInputMessage();
+        LottoNumber bonusBall = inputView.getBonusBall();
+        return WinningLottoNumbers.of(winningLottoNumbers, bonusBall);
     }
 }

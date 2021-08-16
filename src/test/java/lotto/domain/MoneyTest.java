@@ -33,4 +33,14 @@ class MoneyTest {
                 .isEqualTo(1000);
     }
 
+    @DisplayName("돈을 0으로 나눌 수 없다.")
+    @Test
+    public void divideMoneyByZeroTest() {
+        Money money = Money.of(1000);
+        Money zero = Money.zero();
+        assertThat(money.isDivisibleBy(zero)).isFalse();
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> money.divide(zero));
+    }
+
 }
