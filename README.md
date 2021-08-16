@@ -105,8 +105,9 @@
       - 일치하는 번호 개수에 따른 상금을 나타내는 enumeration
    
 2. business logic
-   1. TicketManager : 창구 역할
-      - 금액을 복권 개수로 변경 
+   1. TicketManager : 창구 역할, 형변환
+      - 금액을 복권 개수로 변경
+      - 당첨 번호 `String` -> `List<Integer>` 형태로 변형
       - TicketMachine 에게 복권 생성, 당첨 결과 등을 요청
    2. TicketMachine : 복권 기계
       - TicketMaker 를 이용하여 복권 생성 및 TicketRepository 를 이용한 저장
