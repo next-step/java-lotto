@@ -1,5 +1,17 @@
 package lotto;
 
+import java.util.Arrays;
+
 public class Lotto {
-    public static final int amount = 1000;
+    private int[] randomNumbers;
+
+    public Lotto() {
+        randomNumbers = new int[] {1,2,3,4,5,6};
+    }
+
+
+    @Override
+    public String toString() {
+        return Arrays.toString(randomNumbers);
+    }
 }
