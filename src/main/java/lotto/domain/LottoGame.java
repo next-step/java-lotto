@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.dto.LottoPurchaseResponse;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
     private Lottos lottos;
@@ -12,7 +13,7 @@ public class LottoGame {
         return new LottoPurchaseResponse(lottos);
     }
 
-    public LottoDrawResponse drawLotto(WinnerLotto winnerLotto) {
+    public Map<Award, Long> drawLotto(WinnerLotto winnerLotto) {
         return lottos.drawLottos(winnerLotto);
     }
 }

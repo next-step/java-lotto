@@ -37,16 +37,15 @@ class LottosTest {
     @Test
     @DisplayName("1등로또로 생성한 Lottos의 drawLotto 함수 호출 시 모두 1등임을 확인한다.")
     void drawLottos() {
-        LottoDrawResponse lottoDrawResponse = lottos.drawLottos(winnerLotto);
-        assertEquals(lottoDrawResponse.getLottoResult().get(Award.FIRST), TICKET_NUMBER);
+        Map<Award, Long> lottoResult = lottos.drawLottos(winnerLotto);
+        assertEquals(lottoResult.get(Award.FIRST), TICKET_NUMBER);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"FIRST:3","SECOND:0"},delimiter = ':')
+    @CsvSource(value = {"FIRST:3"},delimiter = ':')
     @DisplayName("Award 파라미터와 함께 getWinners 함수를 호출하면 당첨 로또의 수를 리턴한다")
     void countWinners(String type, int match) {
-        LottoDrawResponse lottoDrawResponse = lottos.drawLottos(winnerLotto);
-        Map<Award, Integer> lottoResult = lottoDrawResponse.getLottoResult();
+        Map<Award, Long> lottoResult = lottos.drawLottos(winnerLotto);
         assertEquals(lottoResult.get(Award.valueOf(type)), match);
     }
 }

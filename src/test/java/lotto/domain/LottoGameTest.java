@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static lotto.domain.WinnerLottoTest.winnerLotto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,11 +37,11 @@ class LottoGameTest {
     @DisplayName("로또게임의 drawLotto 함수 호출 결과 수의 총합은 티켓넘버와 같음을 확인한다.")
     void drawLotto() {
         lottoGame.purchase(lottos);
-        LottoDrawResponse lottoResult = lottoGame.drawLotto(winnerLotto);
-        int sum = lottoResult.getLottoResult()
+        Map<Award, Long> lottoResult = lottoGame.drawLotto(winnerLotto);
+        int sum = lottoResult
                 .values()
                 .stream()
-                .mapToInt(Integer::intValue)
+                .mapToInt(Long::intValue)
                 .sum();
         assertEquals(sum, TICKET_NUMBER);
     }
