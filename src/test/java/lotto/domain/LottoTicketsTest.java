@@ -25,9 +25,9 @@ class LottoTicketsTest {
     }
 
     @Test
-    void 당첨_통계값이_14중_4등_당첨된_결과가_주어질_때_수익률이_0_35로_일치해야한다() {
+    void 주어진_로토티켓_여러장과_당첨결과가_주어질_때_수익률이_계산된값인_2_5로_일치해야한다() {
         WinnerNumbers winnerNumbers = WinnerNumbers.from(LottoTicket.of(7, 8, 9, 41, 42, 43), LottoBall.select(44));
-        winStatistics = WinStatistics.from(winnerNumbers, lottoTickets);
-        assertThat(winStatistics.getRateOfReturn(14)).isEqualTo(0.35f);
+        winStatistics = lottoTickets.calculateStatistics(winnerNumbers);
+        assertThat(winStatistics.getRateOfReturn()).isEqualTo(2.5f);
     }
 }
