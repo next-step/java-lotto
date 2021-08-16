@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-public class StringAddCalculatorTest {
 
+public class StringAddCalculatorTest {
 
   @Test
   public void splitAndSum_null_또는_빈문자() {
@@ -13,5 +13,9 @@ public class StringAddCalculatorTest {
     assertThat(result).isEqualTo(0);
   }
 
-
+  @Test
+  public void splitAndSum_숫자하나() {
+    int result = StringAddCalculator.splitAndSum("1");
+    assertThat(result).isEqualTo(1);
+  }
 }
