@@ -34,7 +34,7 @@ public enum Winner {
                 .findFirst().orElse(NONE);
     }
 
-    public static Map<Winner, Integer> getWinnerMap() {
+    public static Map<Winner, Integer> makeWinnerMap() {
         Map<Winner, Integer> map = new HashMap<>();
         Arrays.stream(Winner.values())
                 .filter(winner -> winner != Winner.NONE)
