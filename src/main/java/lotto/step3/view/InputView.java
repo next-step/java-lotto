@@ -20,8 +20,11 @@ public class InputView {
     public static Set<LottoNumber> inputLastWinningNumbers() {
         System.out.println(INPUT_LAST_WINNING_NUMBERS);
         sc.nextLine();
-        Set<LottoNumber> lotto = LottoCreator.convertToLotto(sc.nextLine());
-        return lotto;
+        return LottoCreator.convertToLotto(sc.nextLine());
+    }
+
+    public static LottoNumber inputBonusBall() {
+        return new LottoNumber(sc.nextInt());
     }
 
 }

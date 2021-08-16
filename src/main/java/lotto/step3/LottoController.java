@@ -3,6 +3,7 @@ package lotto.step3;
 import lotto.step3.domain.Lotteries;
 import lotto.step3.domain.LottoNumber;
 import lotto.step3.domain.LottoShop;
+import lotto.step3.domain.Winning;
 import lotto.step3.view.InputView;
 import lotto.step3.view.ResultView;
 
@@ -14,6 +15,8 @@ public class LottoController {
         LottoShop lottoShop = new LottoShop();
         Lotteries lotteries = lottoShop.receiveMoney(money);
         ResultView.printLottoInfo(money, lotteries);
-        Set<LottoNumber> winning = InputView.inputLastWinningNumbers();
+        Set<LottoNumber> winningNumbers = InputView.inputLastWinningNumbers();
+        LottoNumber bonusBall = InputView.inputBonusBall();
+        Winning winning = new Winning(winningNumbers, bonusBall);
     }
 }
