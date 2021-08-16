@@ -18,12 +18,12 @@ public class WinningNumbers {
     }
 
     public LottoStatus checkWinning(final LottoNumbers lottoNumbers) {
-        int hitCount = lottoNumbers.checkHitCount(winningNumbers);
-        BonusNumberStatus bonusNumberStatus = checkContainsBonusNumber(lottoNumbers);
+        HitCount hitCount = lottoNumbers.checkHitCount(winningNumbers);
+        BonusNumberStatus bonusNumberStatus = checkContainsBonusBall(lottoNumbers);
         return LottoStatus.find(hitCount, bonusNumberStatus);
     }
 
-    private BonusNumberStatus checkContainsBonusNumber(final LottoNumbers lottoNumbers) {
+    private BonusNumberStatus checkContainsBonusBall(final LottoNumbers lottoNumbers) {
         if (lottoNumbers.hasLottoNumber(bonusNumber)) {
             return BonusNumberStatus.MATCH;
         }
