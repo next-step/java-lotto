@@ -1,5 +1,7 @@
 package edu.nextstep.lottoauto.manager;
 
+import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
+import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
 import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +37,8 @@ public class TicketManagerTest {
 
         // when
         Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(PaymentIllegalArgumentException.class)
+                .hasMessageContaining("최소 입력 가능 금액 미달.");
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 단위 떨어지지 않음")
@@ -46,7 +49,8 @@ public class TicketManagerTest {
 
         // when, then
         Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(PaymentIllegalArgumentException.class)
+                .hasMessageContaining("개 당 금액");
     }
 
 
@@ -58,7 +62,8 @@ public class TicketManagerTest {
 
         // then
         assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NumbersIllegalArgumentException.class)
+                .hasMessageContaining("입력 숫자 개수 미달 or 초과.");
     }
 
     @ParameterizedTest(name = "숫자 허용 범위 실패 {index}_{0}")
@@ -69,6 +74,7 @@ public class TicketManagerTest {
 
         // then
         assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NumbersIllegalArgumentException.class)
+                .hasMessageContaining("지정 가능 숫자 범위 초과.");
     }
 }

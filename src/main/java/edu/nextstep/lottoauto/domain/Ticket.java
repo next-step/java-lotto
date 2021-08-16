@@ -1,5 +1,7 @@
 package edu.nextstep.lottoauto.domain;
 
+import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -20,13 +22,13 @@ public class Ticket {
 
     private void validateOutOfRange(List<Integer> numbers) {
         if (numbers.get(0) < MIN_NUMBER || numbers.get(numbers.size()-1) > MAX_NUMBER) {
-            throw new IllegalArgumentException();
+            throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);
         }
     }
 
     private void validateNumOfNumbers(List<Integer> numbers) {
         if (numbers.size() != NUMBER_OF_NUMBERS) {
-            throw new IllegalArgumentException();
+            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + NUMBER_OF_NUMBERS);
         }
     }
 

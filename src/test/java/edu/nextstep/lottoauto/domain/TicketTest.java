@@ -1,5 +1,6 @@
 package edu.nextstep.lottoauto.domain;
 
+import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,7 +34,8 @@ public class TicketTest {
 
         // when, then
         assertThatThrownBy(() -> Ticket.of(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NumbersIllegalArgumentException.class)
+                .hasMessageContaining("입력 숫자 개수 미달 or 초과.");
     }
 
     @ParameterizedTest(name = "Ticket 생성 실패 : 숫자 허용 범위 초과")
@@ -44,7 +46,8 @@ public class TicketTest {
 
         // when, then
         assertThatThrownBy(() -> Ticket.of(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(NumbersIllegalArgumentException.class)
+                .hasMessageContaining("지정 가능 숫자 범위 초과.");
     }
 
     @ParameterizedTest(name = "동일한 숫자 개수 출력 [{index}] {0}부터 {1}까지 동일숫자개수 {2}")

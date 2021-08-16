@@ -1,6 +1,8 @@
 package edu.nextstep.lottoauto.manager;
 
 import edu.nextstep.lottoauto.domain.Ticket;
+import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
+import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
 import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.machine.TicketMachine;
 import edu.nextstep.lottoauto.ticketmaker.TicketMaker;
@@ -56,25 +58,24 @@ public class TicketManager {
 
     private void validateUnderAUnitPrice(int payment) {
         if (payment < A_UNIT_PRICE) {
-            throw new IllegalArgumentException();
+            throw new PaymentIllegalArgumentException("최소 입력 가능 금액 미달. 최소 입력 금액 : " + A_UNIT_PRICE + " 원");
         }
     }
 
     private void validateDivideUnitPrice(int payment) {
         if ((payment % A_UNIT_PRICE) != 0) {
-            throw new IllegalArgumentException();
+            throw new PaymentIllegalArgumentException("개 당 금액 " + A_UNIT_PRICE + " 원으로 해당 단위로 입력 필요.");
         }
     }
 
     public void validateNumberOfNumbers(List<Integer> winningNumbers) {
         if (winningNumbers.size() != NUMBER_OF_NUMBERS) {
-            throw new IllegalArgumentException();
+            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + NUMBER_OF_NUMBERS);
         }
     }
 
     private void validateOutOfRange(List<Integer> winningNumbers) {
         if (winningNumbers.get(0) < MIN_NUMBER || winningNumbers.get(winningNumbers.size() - 1) > MAX_NUMBER) {
-            throw new IllegalArgumentException();
-        }
+            throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);        }
     }
 }
