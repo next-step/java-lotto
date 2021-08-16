@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,8 +20,8 @@ class LottosTest {
 	void addLottoSuccess(int size, boolean expected) {
 		Lottos lottos = Lottos.generateLottos(new LottoCount(5000, 2));
 
-		lottos.addManualLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lottos.addAutoLotto();
+		lottos.addLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lottos.addLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
 		assertThat((lottos.getLottos().size() == size)).isEqualTo(expected);
 	}
@@ -36,7 +35,7 @@ class LottosTest {
 		assertThatExceptionOfType(OutOfLottoCountException.class)
 			.isThrownBy(() -> {
 				for (int i = 0; i <= count; i++) {
-					lottos.addAutoLotto();
+					lottos.addLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
 				}
 			}).withMessage("로또는 최대 " + count + "장 구매 가능합니다.");
 	}

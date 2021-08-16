@@ -28,19 +28,9 @@ public class Lottos {
 		return lottos;
 	}
 
-	public void addManualLotto(Lotto lotto) {
+	public Lotto addLotto(Lotto lotto) {
 		validate();
-
 		lottos.add(lotto);
-	}
-
-	public Lotto addAutoLotto() {
-		validate();
-
-		Lotto lotto = Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers());
-
-		lottos.add(lotto);
-
 		return lotto;
 	}
 

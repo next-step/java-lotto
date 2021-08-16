@@ -8,6 +8,7 @@ import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Records;
 import lotto.domain.WinLotto;
+import lotto.utils.AutoLottoNumbersGeneratorUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -38,13 +39,14 @@ public class LottoController {
 		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
 			String lottoNumbers = InputView.inputManualLottoNumbers();
 
-			this.lottos.addManualLotto(Lotto.of(lottoNumbers));;
+			this.lottos.addLotto(Lotto.of(lottoNumbers));;
 		}
 	}
 
 	private void buyAutoLotto(LottoCount lottoCount) {
 		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
-			ResultView.outputLottoNumbers(this.lottos.addAutoLotto());
+			Lotto lotto = Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers());
+			ResultView.outputLottoNumbers(this.lottos.addLotto(lotto));
 		}
 	}
 
