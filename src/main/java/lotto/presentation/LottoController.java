@@ -16,8 +16,8 @@ import lotto.service.RankingService;
 public class LottoController {
 
     public void execute(){
-        int purchaseAmount = inputPurchaseAmount();
-        int chance = resolveChance(purchaseAmount);
+        Money purchaseAmount = inputPurchaseAmount();
+        Chance chance = resolveChance(purchaseAmount);
         outputChance(chance);
         LottoTickets lottoTickets = executeLottoGame(chance);
         outputLottos(lottoTickets);
@@ -36,22 +36,22 @@ public class LottoController {
         outputView.output(lottoResults);
     }
 
-    private int inputPurchaseAmount() {
+    private Money inputPurchaseAmount() {
         PurchaseAmountInputView inputView = new PurchaseAmountInputView();
-        return inputView.input();
+        return new Money(inputView.input());
     }
 
-    private void outputChance(int chance) {
+    private void outputChance(Chance chance) {
         ChanceOutputView outputView = new ChanceOutputView();
         outputView.output(chance);
     }
 
-    private LottoTickets executeLottoGame(int chance) {
+    private LottoTickets executeLottoGame(Chance chance) {
         LottoService service = new LottoService();
         return service.execute(chance, new LottoGenerator());
     }
 
-    private int resolveChance(int purchaseAmount) {
+    private Chance resolveChance(Money purchaseAmount) {
         ChanceResolver resolver = new ChanceResolver();
         return resolver.resolveFromPurchaseAmount(purchaseAmount);
     }
@@ -77,7 +77,7 @@ public class LottoController {
         return inputView.input();
     }
 
-    private void outputEarningRate(int purchaseAmount, LottoResults lottoResults) {
+    private void outputEarningRate(Money purchaseAmount, LottoResults lottoResults) {
         EarningRateOutputView outputView = new EarningRateOutputView();
         outputView.output(lottoResults.getEarningLate(purchaseAmount));
     }
