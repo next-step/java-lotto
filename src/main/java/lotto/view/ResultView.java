@@ -30,9 +30,9 @@ public class ResultView {
     }
 
     private static void printWinnersByAward(int matchNumbers, boolean bonus, int amount, long countWinners) {
-        if(matchNumbers == 5 && bonus == true){
+        if (matchNumbers == 5 && bonus) {
             System.out.println(matchNumbers + "개 일치, 보너스 볼 일치(" + amount + "원)- " + countWinners);
-            return ;
+            return;
         }
         System.out.println(matchNumbers + "개 일치 (" + amount + "원)- " + countWinners);
     }
