@@ -40,7 +40,7 @@ public class ResultView {
     }
 
     public void printProfitRate(int buyCash, double raffleCash) {
-        out.printf(PRINT_PROFIT_RATE_FORM, String.format("%.2f", raffleCash / buyCash * 1000));
+        out.printf(PRINT_PROFIT_RATE_FORM, String.format("%.2f", raffleCash / buyCash));
     }
 
 }

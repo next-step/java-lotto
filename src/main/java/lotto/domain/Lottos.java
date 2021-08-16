@@ -30,18 +30,33 @@ public class Lottos {
         List<Integer> matchCounts = this.lottos.stream()
                 .map(lotto -> lotto.match(winnerNumbers))
                 .collect(Collectors.toList());
-
-        Map<Winner, Integer> winnerRanks = Winner.makeWinnerMap();
-        matchCounts.forEach(matchCount -> {
-            Winner winnerInfo = Winner.find(matchCount);
-            Integer currentCount = winnerRanks.get(winnerInfo);
-            winnerRanks.put(winnerInfo, currentCount + WINNING_COUNT);
-        });
-        return winnerRanks;
+//        Map<Winner, Integer> winnerRanks = Winner.makeWinnerMap();
+//
+//        matchCounts.forEach(matchCount -> {
+//            Winner winnerInfo = Winner.find(matchCount);
+//            Integer currentCount = winnerRanks.get(winnerInfo);
+//            winnerRanks.put(winnerInfo, currentCount + WINNING_COUNT);
+//        });
+//        return winnerRanks;
+        return caculateWinningInfo(matchCounts);
     }
 
     public List<Lotto> findAll() {
         return this.lottos;
+    }
+
+    private Map<Winner, Integer> caculateWinningInfo(List<Integer> matchCounts) {
+        Map<Winner, Integer> winnerRanks = Winner.makeWinnerMap();
+
+        for (int matchCount : matchCounts) {
+            Winner winnerInfo = Winner.find(matchCount);
+            if (winnerInfo == Winner.NONE) {
+                continue;
+            }
+            Integer currentCount = winnerRanks.get(winnerInfo);
+            winnerRanks.put(winnerInfo, currentCount + WINNING_COUNT);
+        }
+        return winnerRanks;
     }
 
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 public class LottoController {
     private final InputView inputView = InputView.getInstance();
     private final ResultView resultView = ResultView.getInstance();
+    private static final int PURCHASE_AMOUNT_UNIT = 1000;
 
     public void run() {
         Lottos lottos = buyLotto();
@@ -20,7 +21,7 @@ public class LottoController {
         double raffleCash = caculateWinningCash(winningInfo);
 
         resultView.printWinners(winningInfo);
-        resultView.printProfitRate(lottos.findAll().size(), raffleCash);
+        resultView.printProfitRate(lottos.findAll().size() * PURCHASE_AMOUNT_UNIT, raffleCash);
     }
 
     private Lottos buyLotto() {
