@@ -55,11 +55,6 @@ public class LottoMachineTest {
             );
         }
 
-        for (int i =0; i<winningPrice.size(); i++){
-            System.out.println(winningPrice.get(i).price);
-        }
-
-
         WinningResult winningResult = WinningResult.of(winningPrice);
 
         System.out.println(winningResult.getWinningResult().toString());
