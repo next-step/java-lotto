@@ -25,17 +25,17 @@ public class Lottos {
     }
 
     public Map<Winner, Integer> findWinners(List<Number> winnerNumbers) {
-        List<Integer> counts = this.lottos.stream()
+        List<Integer> matchCounts = this.lottos.stream()
                 .map(lotto -> lotto.match(winnerNumbers))
                 .collect(Collectors.toList());
 
-        Map<Winner, Integer> map = Winner.getWinnerMap();
-        counts.forEach(matchCount -> {
-            Winner winner = Winner.find(matchCount);
-            Integer count = map.get(winner);
-            map.put(winner, count + 1);
+        Map<Winner, Integer> winnerRanks = Winner.makeWinnerMap();
+        matchCounts.forEach(matchCount -> {
+            Winner winnerInfo = Winner.find(matchCount);
+            Integer count = winnerRanks.get(winnerInfo);
+            winnerRanks.put(winnerInfo, count + 1);
         });
-        return map;
+        return winnerRanks;
     }
 
     public List<Lotto> findAll() {

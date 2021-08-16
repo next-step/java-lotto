@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -37,10 +36,10 @@ class LottoTest {
         assertThat(lotto.isSorted()).isEqualTo(SORTED_STATE);
     }
 
-    @DisplayName("당첨 번호와 일치 여부 확인")
+    @DisplayName("당첨 번호와 일치하는 갯수 확인")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "2,3,4,5,6,7:5", "4,5,6,7,8,9:3"}, delimiter = ':')
-    void isWin(String numbers, int expectedMatchCount) {
+    void matchWinnerNumber(String numbers, int expectedMatchCount) {
         List<Number> numberList = getNumbers(numbers);
         Lotto lotto = new Lotto(numberList);
         assertThat(lotto.match(getWinnerNumbers())).isEqualTo(expectedMatchCount);
