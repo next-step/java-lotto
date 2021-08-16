@@ -23,8 +23,9 @@ public class LottoController {
         Chance autoChance = resolveAutoChance(purchaseAmount, manualChance);
         outputChance(manualChance, autoChance);
         LottoTickets autoLottoTickets = executeAuto(autoChance);
-        outputLottos(autoLottoTickets);
-        LottoResults lottoResults = calculateAndGetLottoResults(autoLottoTickets);
+        LottoTickets totalLottoTickets = manualLottoTickets.mergeWith(autoLottoTickets);
+        outputLottos(totalLottoTickets);
+        LottoResults lottoResults = calculateAndGetLottoResults(totalLottoTickets);
         outputLottoResults(lottoResults);
         outputEarningRate(purchaseAmount, lottoResults);
     }

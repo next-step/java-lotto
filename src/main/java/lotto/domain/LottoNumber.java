@@ -3,14 +3,14 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
-    public int getValue() {
-        return value;
-    }
-
     private final int value;
 
     public LottoNumber(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

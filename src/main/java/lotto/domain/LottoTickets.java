@@ -39,4 +39,10 @@ public class LottoTickets {
     public int hashCode() {
         return Objects.hash(lottoTickets);
     }
+
+    public LottoTickets mergeWith(LottoTickets other) {
+        List<LottoTicket> mergedLottoTickets = new ArrayList<>(this.lottoTickets);
+        mergedLottoTickets.addAll(other.lottoTickets);
+        return new LottoTickets(mergedLottoTickets);
+    }
 }

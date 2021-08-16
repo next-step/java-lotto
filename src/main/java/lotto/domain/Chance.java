@@ -16,17 +16,8 @@ public class Chance {
         return value;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Chance chance = (Chance) o;
-        return value == chance.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
+    public Chance subtract(Chance chance) {
+        return new Chance(this.value - chance.value);
     }
 
     public boolean isLeft() {
@@ -44,7 +35,16 @@ public class Chance {
         }
     }
 
-    public Chance subtract(Chance chance) {
-        return new Chance(this.value - chance.value);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chance chance = (Chance) o;
+        return value == chance.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
