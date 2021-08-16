@@ -14,14 +14,15 @@ public final class LottoShop {
         this.buyLottoTickets = new LottoTickets();
     }
 
-    public LottoTickets buy(final int amount, final String... manualLottoTicketsArgs) {
+    public LottoTickets buy(final int amount, final String... manualLottoTickets) {
         validateMinimumAmount(amount);
 
-        int availableTicketCount = getAvailableTicketCount(amount);
-        int buyManualTicketCount = buyManualLottoTickets(manualLottoTicketsArgs);
-        int remainAvailableTicketCount = getRemainAvailableTicketCount(availableTicketCount, buyManualTicketCount);
+        buyManualLottoTickets(manualLottoTickets);
 
+        int availableTicketCount = getAvailableTicketCount(amount);
+        int remainAvailableTicketCount = getRemainAvailableTicketCount(availableTicketCount, manualLottoTickets.length);
         buyAutoLottoTickets(remainAvailableTicketCount);
+
         return buyLottoTickets;
     }
 
@@ -31,18 +32,17 @@ public final class LottoShop {
         }
     }
 
-    private int getAvailableTicketCount(final int amount) {
-        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
-    }
-
-    private int buyManualLottoTickets(final String[] autoLottoTickets) {
+    private void buyManualLottoTickets(final String[] autoLottoTickets) {
         List<LottoTicket> manualLottoTickets = Arrays.stream(autoLottoTickets)
                 .map(ManualLottoGenerator::new)
                 .map(ManualLottoGenerator::generate)
                 .collect(Collectors.toList());
 
         buyLottoTickets.addAll(manualLottoTickets);
-        return manualLottoTickets.size();
+    }
+
+    private int getAvailableTicketCount(final int amount) {
+        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
     }
 
     private int getRemainAvailableTicketCount(final int availableTicketCount, final int buyManualTicketCount) {
