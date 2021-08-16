@@ -1,21 +1,23 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottoList;
+    private List<Lotto> lottoGroup;
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public Lottos(List<Lotto> lottoGroup) {
+        this.lottoGroup = new ArrayList<>(lottoGroup);
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getValue() {
+        return Collections.unmodifiableList(lottoGroup);
     }
 
     public WinningStatistics findWinningLottoResult(Lotto winningLotto, WinningStatistics winningStatistics) {
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottoGroup) {
             int matchCount = countMatchNumber(lotto.getNumbers().getValues(), winningLotto.getNumbers().getValues());
             winningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount));
         }

@@ -2,10 +2,11 @@ package domain;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 public class WinningStatistics {
 
-    LinkedHashMap<LottoPrizeType, Integer> winningStatistic;
+    private LinkedHashMap<LottoPrizeType, Integer> winningStatistic;
 
     public WinningStatistics() {
         winningStatistic = new LinkedHashMap<>();
@@ -19,10 +20,11 @@ public class WinningStatistics {
     }
 
 
-    public int addCount(LottoPrizeType lottoPrizeType) {
-        if (lottoPrizeType == null) {
+    public int addCount(Optional<LottoPrizeType> lottoPrizeTypeOptional) {
+        if (!lottoPrizeTypeOptional.isPresent()) {
             return 0;
         }
+        LottoPrizeType lottoPrizeType = lottoPrizeTypeOptional.get();
         int increaseCount = winningStatistic.get(lottoPrizeType) + 1;
         winningStatistic.put(lottoPrizeType, increaseCount);
         return increaseCount;

@@ -5,25 +5,21 @@ import java.util.List;
 
 public class LottoManager {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private Lottos lottos;
-
-    private int purchaseLottoCount;
 
     private Lotto winningLotto;
 
     private WinningStatistics winningStatistics;
 
-    public LottoManager(int purchaseAmount) {
-        this.winningStatistics = new WinningStatistics();
-        makePurchaseLottoCount(purchaseAmount);
-        makeLottos(this.purchaseLottoCount);
+    public LottoManager() {
+        this(0);
     }
 
-    private void makePurchaseLottoCount(int purchaseAmount) {
-        this.purchaseLottoCount = purchaseAmount / LOTTO_PRICE;
+    public LottoManager(int purchaseAmount) {
+        this.winningStatistics = new WinningStatistics();
+        makeLottos(getPurchaseLottoCount(purchaseAmount));
     }
+
 
     private void makeLottos(int purchaseLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -37,12 +33,12 @@ public class LottoManager {
         return this.lottos;
     }
 
-    public int getPurchaseLottoCount() {
-        return purchaseLottoCount;
+    public int getPurchaseLottoCount(int purchaseAmount) {
+        return Lotto.calcPurchaseLottoCount(purchaseAmount);
     }
 
-    public Lotto makeWinningLotto() {
-        winningLotto = new Lotto(new ManualNumberStrategy());
+    public Lotto makeWinningLotto(PickNumberStrategy pickNumberStrategy) {
+        winningLotto = new Lotto(pickNumberStrategy);
         return winningLotto;
     }
 
@@ -50,7 +46,7 @@ public class LottoManager {
         return lottos.findWinningLottoResult(winningLotto, winningStatistics);
     }
 
-    public double getLottoYield() {
-        return winningStatistics.calcLottoYield(purchaseLottoCount * LOTTO_PRICE);
+    public double getLottoYield(int purchaseAmount) {
+        return winningStatistics.calcLottoYield(Lotto.calcPurchaseLottoCount(purchaseAmount) * LottoPrice.LOTTO_PRICE);
     }
 }

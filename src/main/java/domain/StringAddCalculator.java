@@ -15,6 +15,9 @@ public class StringAddCalculator {
 
     private static final int NUMBERS_INDEX = 2;
 
+    private static final Pattern PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+
+
     public static int splitAndSum(String data) {
         if (data == null || data.isEmpty()) {
             return 0;
@@ -26,7 +29,7 @@ public class StringAddCalculator {
     }
 
     public static String[] parseData(String data) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(data);
+        Matcher matcher = PATTERN.matcher(data);
         if (matcher.find()) {
             return parseDataWithCustomDelimiter(data, matcher);
         }
