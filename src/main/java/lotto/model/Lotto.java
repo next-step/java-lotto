@@ -1,21 +1,5 @@
 package lotto.model;
 
-<<<<<<< HEAD
-import java.util.List;
-
-public class Lotto {
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-    private List<Integer> lottoNumbers;
-
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public int countWinningNumbers(Lotto winningNumbers) {
-        int count = 0;
-        for (int i = 0; i < NUMBER_OF_LOTTO_NUMBERS; i++) {
-            if (lottoNumbers.contains(winningNumbers.getNumbers().get(i))) {
-=======
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,21 +53,12 @@ public class Lotto {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
             if (winningLotto.contains(lottoNumber)) {
->>>>>>> origin/step2
                 count++;
             }
         }
         return count;
     }
 
-<<<<<<< HEAD
-    public boolean contains(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
-    public List<Integer> getNumbers() {
-        return lottoNumbers;
-=======
     public boolean contains(LottoNumber number) {
         for (LottoNumber lottoNumber : lottoNumbers) {
             if (lottoNumber.equals(number)) {
@@ -95,6 +70,5 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(lottoNumbers);
->>>>>>> origin/step2
     }
 }

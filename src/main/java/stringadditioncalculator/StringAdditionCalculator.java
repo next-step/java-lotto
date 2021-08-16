@@ -5,10 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAdditionCalculator {
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/step2
     public String input() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();

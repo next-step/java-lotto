@@ -5,17 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoManualInputView {
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/step2
     public int inputPrice() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입금액을 입력해 주세요.");
-<<<<<<< HEAD
-        return scanner.nextInt();
-=======
 
         int price = scanner.nextInt();
         checkPrice(price);
@@ -26,7 +19,6 @@ public class LottoManualInputView {
         if (price < 0) {
             throw new IllegalArgumentException("로또 구매 금액은 0 이상이어야 합니다.");
         }
->>>>>>> origin/step2
     }
 
     public int inputManualLottoQuantity() {
@@ -34,9 +26,6 @@ public class LottoManualInputView {
 
         System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-<<<<<<< HEAD
-        return scanner.nextInt();
-=======
 
         int quantity = scanner.nextInt();
         checkQuantity(quantity);
@@ -47,7 +36,6 @@ public class LottoManualInputView {
         if (quantity < 0) {
             throw new IllegalArgumentException("수동 로또 수는 0 이상이어야 합니다.");
         }
->>>>>>> origin/step2
     }
 
     public List<String> inputManualLottoNumbers(int manualQuantity) {
@@ -71,18 +59,10 @@ public class LottoManualInputView {
         return scanner.nextLine();
     }
 
-<<<<<<< HEAD
-    public String inputBonusNumber() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
-=======
     public int inputBonusNumber() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
->>>>>>> origin/step2
     }
 }
