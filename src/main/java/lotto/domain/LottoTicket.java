@@ -54,7 +54,10 @@ public final class LottoTicket {
     }
 
     private int countLottoNumberInWinningLottoTicket(WinningLottoTicket winningLottoTicket, LottoNumber lottoNumber) {
-        return winningLottoTicket.contains(lottoNumber) ? 1 : 0;
+        if (winningLottoTicket.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
