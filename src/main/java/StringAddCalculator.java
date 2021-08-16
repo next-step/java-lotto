@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import model.Calculator;
+
 public class StringAddCalculator {
 
   final static String BASIC_SPLITER_COMMA = ",";
@@ -20,14 +24,16 @@ public class StringAddCalculator {
 
   private static String[] splitExpr(String expr) {
 
-    String[] result = {expr};
+    String[] splitResult = {expr};
 
-    if (expr.contains(BASIC_SPLITER_COMMA)) {
-      result = expr.split(BASIC_SPLITER_COMMA);
-    } else if (expr.contains(BASIC_SPLITER_COLON)) {
-      result = expr.split(BASIC_SPLITER_COMMA);
+    List<Calculator> calculators = new ArrayList();
+    calculators.add(new Calculator(BASIC_SPLITER_COLON));
+    calculators.add(new Calculator(BASIC_SPLITER_COMMA));
+
+    for (Calculator calculator : calculators) {
+      splitResult = calculator.split(expr);
     }
 
-    return result;
+    return splitResult;
   }
 }
