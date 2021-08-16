@@ -13,14 +13,13 @@ class ManualLottoGeneratorTest {
     @DisplayName("수동 로또 생성 테스트")
     void constructLottoTicketTest() {
         // given
-        String[] lottoNumbers = {"1", "2", "3", "4", "5", "6"};
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(lottoNumbers);
+        LottoGenerator lottoGenerator = new ManualLottoGenerator("1", "2", "3", "4", "5", "6");
 
         // when
         LottoTicket lottoTicket = lottoGenerator.generate();
 
         // then
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
+        assertThat(lottoTicket).isEqualTo(new LottoTicket("1", "2", "3", "4", "5", "6"));
     }
 
     @Test
