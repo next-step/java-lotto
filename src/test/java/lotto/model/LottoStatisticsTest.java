@@ -25,7 +25,7 @@ class LottoStatisticsTest {
     @Test
     @DisplayName("입력받은 LottoResults 와 Money 로 수익률을 반환한다")
     public void profitRate() {
-        LottoResults lottoResults = new LottoResults(Arrays.asList(LottoPlace.FOURTH));
+        LottoResults lottoResults = new LottoResults(Arrays.asList(LottoPlace.FIFTH));
         LottoStatistics statistics = new LottoStatistics(lottoResults, new Money(20000));
 
         assertThat(statistics.calculateProfitRate()).isCloseTo(0.25, Offset.offset(0.01));

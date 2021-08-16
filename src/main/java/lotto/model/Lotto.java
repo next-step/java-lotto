@@ -32,4 +32,8 @@ public class Lotto {
         }
         return equalCount;
     }
+
+    public boolean contain(LottoNumber bonusNumber) {
+        return numbers.contain(bonusNumber);
+    }
 }
