@@ -1,14 +1,16 @@
 package lotto;
 
-import lotto.domain.Award;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
+import lotto.domain.WinnerLotto;
+import lotto.domain.dto.LottoDrawResult;
+import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
+import lotto.util.LottoListGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,31 +21,25 @@ public class LottoMain {
         int ticketNumber = lottoPurchaseAmount / 1000;
 
         LottoGame lottoGame = new LottoGame();
-        Lottos lottos = lottoGame.purchase(ticketNumber);
+        LottoPurchaseResult lottoPurchaseResponse = lottoGame.purchase(LottoListGenerator.creatLottos(ticketNumber));
+        ResultView.printPurchaseLottos(lottoPurchaseResponse);
 
-        ResultView.printPurchaseLottos(lottos);
-        lottoGame.drawLotto(getWinnerLottoNumbers());
+        LottoDrawResult lottoResult = lottoGame.drawLotto(getWinnerLotto());
+        List<LottoWinnersDto> lottoWinnersDtos = lottoResult.createLottoWinnerDtos();
+        double yield = lottoResult.calculateYield(lottoPurchaseAmount);
 
-        List<LottoWinnersDto> lottoWinnersDtos = createLottoWinnerDtos(lottoGame);
         ResultView.printWinners(lottoWinnersDtos);
-        ResultView.printYield(lottoWinnersDtos, lottoPurchaseAmount);
+        ResultView.printYield(yield);
     }
 
-    private static List<LottoWinnersDto> createLottoWinnerDtos(LottoGame lottoGame) {
-        return Arrays.stream(Award.values())
-                .filter(award -> isBang(award))
-                .map(award -> new LottoWinnersDto(award, lottoGame.countWinners(award)))
-                .collect(Collectors.toList());
-    }
-
-    private static boolean isBang(Award award) {
-        return !award.equals(Award.BANG) && !award.equals(Award.UNIDENTIFIED);
-    }
-
-    private static Set<LottoNumber> getWinnerLottoNumbers() {
+    private static WinnerLotto getWinnerLotto() {
         Set<Integer> winnerNumbers = InputView.requestWinnerNumbers();
-        return winnerNumbers.stream()
+        Lotto lotto = new Lotto(winnerNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
+        Integer bonusNumber = InputView.requestBonusNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        return new WinnerLotto(lotto, bonusLottoNumber);
     }
+
 }

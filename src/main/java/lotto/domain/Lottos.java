@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -14,18 +16,15 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void drawLottos(Set<LottoNumber> winnerNumbers) {
-        for (Lotto lotto : lottos) {
-            lotto.drawLotto(winnerNumbers);
-        }
-    }
-
-    public long countWinners(Award award) {
-        return lottos.stream().filter(lotto -> lotto.isWinner(award)).count();
+    public Map<Award, Long> drawLottos(WinnerLotto winnerLotto) {
+        Map<Award, Long> lottoResult = lottos.stream()
+                .collect(Collectors
+                        .groupingBy(lotto -> winnerLotto.drawLotto(lotto.getNumbers()),
+                                Collectors.counting()));
+        return Collections.unmodifiableMap(lottoResult);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
-
 }

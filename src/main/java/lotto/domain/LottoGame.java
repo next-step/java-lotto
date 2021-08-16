@@ -1,26 +1,19 @@
 package lotto.domain;
 
-import lotto.util.LottoListGenerator;
+import lotto.domain.dto.LottoDrawResult;
+import lotto.domain.dto.LottoPurchaseResult;
 
-import java.util.Set;
+import java.util.List;
 
 public class LottoGame {
     private Lottos lottos;
 
-    public Lottos purchase(int ticketNumber) {
-        lottos = new Lottos(LottoListGenerator.creatLottos(ticketNumber));
-        return lottos;
+    public LottoPurchaseResult purchase(List<Lotto> lottoList) {
+        this.lottos = new Lottos(lottoList);
+        return new LottoPurchaseResult(lottos);
     }
 
-    public void drawLotto(Set<LottoNumber> winnerNumbers) {
-        lottos.drawLottos(winnerNumbers);
-    }
-
-    public long countWinners(Award award) {
-        return lottos.countWinners(award);
-    }
-
-    public Lottos getLottos() {
-        return lottos;
+    public LottoDrawResult drawLotto(WinnerLotto winnerLotto) {
+        return new LottoDrawResult(lottos.drawLottos(winnerLotto));
     }
 }
