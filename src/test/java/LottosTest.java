@@ -1,7 +1,4 @@
-import domain.Lotto;
-import domain.LottoPrizeType;
-import domain.Lottos;
-import domain.WinningStatistics;
+import domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,9 +30,8 @@ public class LottosTest {
     @Test
     public void 당첨로또와동일한경우_1등당첨_테스트() {
         Lottos lottos = new Lottos(Arrays.asList(lotto));
-        WinningStatistics winningStatistics = new WinningStatistics();
-
-        assertThat(lottos.findWinningLottoResult(lotto, winningStatistics).getWinningStatistic().get(LottoPrizeType.FIRST_PRIZE)).isEqualTo(1);
+        lottos.makeWinningLottoResult(lotto, new BonusBall(1));
+        assertThat(WinningStatistics.getWinningStatistic().get(LottoPrizeType.FIRST_PRIZE)).isEqualTo(1);
     }
 
 }

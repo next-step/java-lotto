@@ -6,21 +6,26 @@ import java.util.Optional;
 
 public class WinningStatistics {
 
-    private LinkedHashMap<LottoPrizeType, Integer> winningStatistic;
-
     public WinningStatistics() {
+        winningStatistic = setWinningStatistics();
+    }
+
+    public static LinkedHashMap<LottoPrizeType, Integer> winningStatistic = setWinningStatistics();
+
+    public static LinkedHashMap<LottoPrizeType, Integer> setWinningStatistics() {
         winningStatistic = new LinkedHashMap<>();
         for (LottoPrizeType lottoPrizeType : LottoPrizeType.values()) {
             winningStatistic.put(lottoPrizeType, 0);
         }
+        return winningStatistic;
     }
 
-    public HashMap<LottoPrizeType, Integer> getWinningStatistic() {
+    public static HashMap<LottoPrizeType, Integer> getWinningStatistic() {
         return winningStatistic;
     }
 
 
-    public int addCount(Optional<LottoPrizeType> lottoPrizeTypeOptional) {
+    public static int addCount(Optional<LottoPrizeType> lottoPrizeTypeOptional) {
         if (!lottoPrizeTypeOptional.isPresent()) {
             return 0;
         }
@@ -30,11 +35,11 @@ public class WinningStatistics {
         return increaseCount;
     }
 
-    public double calcLottoYield(int purchaseAmount) {
+    public static double calcLottoYield(int purchaseAmount) {
         return getWinningAmount() / purchaseAmount;
     }
 
-    private double getWinningAmount() {
+    private static double getWinningAmount() {
         double winningAmount = 0;
         for (LottoPrizeType lottoPrizeType : winningStatistic.keySet()) {
             winningAmount += lottoPrizeType.getWinningAmount() * winningStatistic.get(lottoPrizeType);

@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Lottos {
 
@@ -16,12 +17,23 @@ public class Lottos {
         return Collections.unmodifiableList(lottoGroup);
     }
 
-    public WinningStatistics findWinningLottoResult(Lotto winningLotto, WinningStatistics winningStatistics) {
+    public void makeWinningLottoResult(Lotto winningLotto, BonusBall bonusBall) {
         for (Lotto lotto : lottoGroup) {
-            int matchCount = countMatchNumber(lotto.getNumbers().getValues(), winningLotto.getNumbers().getValues());
-            winningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount));
+            compareWinningLotto(winningLotto, lotto, bonusBall);
         }
-        return winningStatistics;
+    }
+
+    private void compareWinningLotto(Lotto winningLotto, Lotto lotto, BonusBall bonusBall) {
+        int matchCount = countMatchNumber(lotto.getNumbers().getValues(), winningLotto.getNumbers().getValues());
+        addPrizeLottoCount(lotto, matchCount, bonusBall);
+    }
+
+    private void addPrizeLottoCount(Lotto lotto, int matchCount, BonusBall bonusBall) {
+        if (matchCount == LottoPrizeType.SECOND_PRIZE.getMatchCount()
+                && lotto.getNumbers().getValues().contains(bonusBall.getValue())) {
+            WinningStatistics.addCount(Optional.of(LottoPrizeType.SECOND_PRIZE));
+        }
+        WinningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount));
     }
 
     private int countMatchNumber(List<Integer> currentLottoNumber, List<Integer> winningLottoNumber) {

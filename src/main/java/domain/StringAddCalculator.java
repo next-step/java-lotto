@@ -29,7 +29,8 @@ public class StringAddCalculator {
     }
 
     public static String[] parseData(String data) {
-        Matcher matcher = PATTERN.matcher(data);
+        Matcher matcher = PATTERN.compile("//(.)\n(.*)").matcher(data);
+
         if (matcher.find()) {
             return parseDataWithCustomDelimiter(data, matcher);
         }
@@ -39,7 +40,6 @@ public class StringAddCalculator {
 
 
     public static String[] parseDataWithCustomDelimiter(String data, Matcher matcher) {
-        matcher.find();
 
         String customDelimiter = matcher.group(DELIMITER_INDEX);
         String[] numbers = matcher.group(NUMBERS_INDEX).split(customDelimiter);

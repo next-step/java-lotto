@@ -19,10 +19,10 @@ public class ResultView {
         }
     }
 
-    public static void winningResult(WinningStatistics winningStatistics) {
+    public static void winningResult() {
         System.out.println("당첨통계");
         System.out.println("---------");
-        HashMap<LottoPrizeType, Integer> winningStatistic = winningStatistics.getWinningStatistic();
+        HashMap<LottoPrizeType, Integer> winningStatistic = WinningStatistics.getWinningStatistic();
         for (LottoPrizeType lottoPrizeType : winningStatistic.keySet()) {
             System.out.println(lottoPrizeType.getMatchCount() +
                     "개 일치 " + "(" + lottoPrizeType.getWinningAmount() + "원) - "

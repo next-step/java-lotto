@@ -9,6 +9,8 @@ public class LottoManager {
 
     private Lotto winningLotto;
 
+    private BonusBall bonusBall;
+
     private WinningStatistics winningStatistics;
 
     public LottoManager() {
@@ -42,8 +44,14 @@ public class LottoManager {
         return winningLotto;
     }
 
-    public WinningStatistics findWinningLottoResult() {
-        return lottos.findWinningLottoResult(winningLotto, winningStatistics);
+    public BonusBall makeBonusBall(int bonusBall) {
+        this.bonusBall = new BonusBall(bonusBall);
+        return this.bonusBall;
+    }
+
+
+    public void findWinningLottoResult() {
+        lottos.makeWinningLottoResult(winningLotto, bonusBall);
     }
 
     public double getLottoYield(int purchaseAmount) {

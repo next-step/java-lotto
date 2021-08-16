@@ -15,7 +15,12 @@ public class LottoController {
 
         System.err.println("지난 주 당첨 번호를 입력해 주세요.");
         lottoManager.makeWinningLotto(new ManualNumberStrategy());
-        ResultView.winningResult(lottoManager.findWinningLottoResult());
+        System.err.println("보너스 볼을 입력해 주세요.");
+        int bonusBall = InputView.enterNumber();
+        lottoManager.makeBonusBall(bonusBall);
+
+        lottoManager.findWinningLottoResult();
+        ResultView.winningResult();
         ResultView.yieldResult(lottoManager.getLottoYield(purchaseAmount));
     }
 }

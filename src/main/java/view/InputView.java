@@ -19,7 +19,7 @@ public class InputView {
         return SCANNER.next();
     }
 
-    private static int enterNumber() {
+    public static int enterNumber() {
         return SCANNER.nextInt();
     }
 }
