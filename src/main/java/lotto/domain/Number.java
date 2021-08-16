@@ -1,21 +1,38 @@
 package lotto.domain;
 
-import java.util.Objects;
+import lotto.util.RandomUtil;
 
-public class Number implements Comparable<Number>{
+import java.util.*;
+
+public class Number implements Comparable<Number> {
 
     private int data;
 
-    public Number(int randomNumber) {
-        this.data = randomNumber;
+    public Number(int number) {
+        this.data = number;
     }
 
-    public boolean isBiggerThan(Number other){
+    public boolean isBiggerThan(Number other) {
         return this.data > other.data;
     }
 
     public int data() {
         return this.data;
+    }
+
+    public static List<Number> createRandomNumbers(int size) {
+        Set<Number> numberSet = new HashSet<>();
+        while (numberSet.size() == size) {
+            Number randomNumber = createRandomNumber();
+            numberSet.add(randomNumber);
+        }
+        List<Number> randomNumbers = new ArrayList<>(numberSet);
+        Collections.shuffle(randomNumbers);
+        return randomNumbers;
+    }
+
+    private static Number createRandomNumber() {
+        return new Number(RandomUtil.getRandomNumber());
     }
 
     @Override
@@ -39,6 +56,6 @@ public class Number implements Comparable<Number>{
 
     @Override
     public String toString() {
-        return ""+ data;
+        return "" + data;
     }
 }

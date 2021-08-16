@@ -2,9 +2,9 @@ package lotto.domain;
 
 public class PurchaseAmount {
 
-    private int cash;
     private static final int PURCHASE_AMOUNT_UNIT = 1000;
     private static final int ZERO_CASH = 0;
+    private int cash;
 
     public PurchaseAmount(int cash) {
         validateCash(cash);

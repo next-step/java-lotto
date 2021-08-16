@@ -21,7 +21,7 @@ class WinnerTest {
 
     @DisplayName("당첨 정보에 해당하는 카운트를 세기 위한 맵 생성")
     @ParameterizedTest
-    @CsvSource(value = {"FOURTH:true", "THIRD:true", "SECOND:true", "FIRST:true", "NONE:false"}, delimiter = ':')
+    @CsvSource(value = {"FOURTH:true", "THIRD:true", "SECOND:true", "FIRST:true", "NONE:true"}, delimiter = ':')
     void makeWinnerMap(String winnerName, boolean expected) {
         Map<Winner, Integer> winnerMap = Winner.makeWinnerMap();
         Winner inputWinner = Winner.valueOf(winnerName);

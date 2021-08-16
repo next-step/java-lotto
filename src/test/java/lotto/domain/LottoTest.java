@@ -14,8 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
-    private static final boolean CREATE_STATE = true;
-    private static final boolean SORTED_STATE = true;
+    private static final int DEFAULT_LOTTO_SIZE = 6;
     private static final String DELIMITER = ",";
 
     @DisplayName("로또 생성 후 로또가 생성되었는지 확인")
@@ -24,16 +23,7 @@ class LottoTest {
     void createLotto(String numbers) {
         List<Number> numbersList = getNumbers(numbers);
         Lotto lotto = new Lotto(numbersList);
-        assertThat(lotto.isCreate()).isEqualTo(CREATE_STATE);
-    }
-
-    @DisplayName("로또 번호가 정렬되어있는지 확인")
-    @ParameterizedTest
-    @ValueSource(strings = {"6,5,4,3,2,1", "7,6,5,4,3,2"})
-    void isSortedLotto(String numbers) {
-        List<Number> numbersList = getNumbers(numbers);
-        Lotto lotto = new Lotto(numbersList);
-        assertThat(lotto.isSorted()).isEqualTo(SORTED_STATE);
+        assertThat(lotto.numbers().size()).isEqualTo(DEFAULT_LOTTO_SIZE);
     }
 
     @DisplayName("당첨 번호와 일치하는 갯수 확인")
