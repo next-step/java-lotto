@@ -11,19 +11,8 @@ public class WinStatistics {
         this.winStatistics = winStatistics;
     }
 
-    private WinStatistics(WinnerNumbers winnerNumbers, LottoTickets lottoTickets) {
-        winStatistics = Collections.unmodifiableMap(
-            lottoTickets.calculateStatistics(winnerNumbers)
-                .result()
-        );
-    }
-
     public static WinStatistics from(Map<Rank, Integer> winStatistics) {
         return new WinStatistics(winStatistics);
-    }
-
-    public static WinStatistics from(WinnerNumbers winnerNumbers, LottoTickets lottoTickets) {
-        return new WinStatistics(winnerNumbers, lottoTickets);
     }
 
     private long calculatePrizeMoney(Rank rank, int lottoCount) {
@@ -37,13 +26,13 @@ public class WinStatistics {
             .amount();
     }
 
-    public float getRateOfReturn(int lottoCount) {
+    public float getRateOfReturn() {
         long prizeMoneySum = winStatistics
             .entrySet()
             .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
-        return (float)(Math.floor(prizeMoneySum / (lottoCount * 10.0f)) / 100.0f);
+        return (float)(Math.floor(prizeMoneySum / (winStatistics.size() * 10.0f)) / 100.0f);
     }
 
     public Map<Rank, Integer> result() {
