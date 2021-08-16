@@ -14,11 +14,11 @@ public class Lottos {
     }
 
     public LottoDrawResponse drawLottos(WinnerLotto winnerLotto) {
-        LottoDrawResponse lottoResult = new LottoDrawResponse();
+        LottoDrawResponse lottoDrawResponse = new LottoDrawResponse();
         for (Lotto lotto : lottos) {
-            lottoResult.addOne(lotto.drawLotto(winnerLotto));
+            lottoDrawResponse.addOne(winnerLotto.drawLotto(lotto.getNumbers()));
         }
-        return lottoResult;
+        return lottoDrawResponse;
     }
 
     public List<Lotto> getLottos() {
