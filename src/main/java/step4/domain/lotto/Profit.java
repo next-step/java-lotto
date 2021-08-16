@@ -1,6 +1,6 @@
-package step3.domain.lotto;
+package step4.domain.lotto;
 
-import step3.domain.money.Cache;
+import step4.domain.money.Cache;
 import java.util.Objects;
 
 public class Profit {
@@ -8,6 +8,10 @@ public class Profit {
     private static final int LOTTO_PRICE = 1000;
 
     private final double profit;
+
+    public Profit() {
+        this(0);
+    }
 
     public Profit(double profit) {
         this.profit = profit;
@@ -17,9 +21,8 @@ public class Profit {
         return new Profit((double) totalWinOfMoney.amount() / (count * LOTTO_PRICE));
     }
 
-    @Override
-    public String toString() {
-        return profit + "";
+    public double getProfit() {
+        return profit;
     }
 
     @Override
