@@ -20,5 +20,4 @@ public class LottoTickets {
             .collect(Collectors.groupingBy(winnerNumbers::decideRank, Collectors.summingInt(s -> 1)))
         );
     }
-
 }
