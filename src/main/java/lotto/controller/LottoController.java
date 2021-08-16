@@ -1,10 +1,15 @@
 package lotto.controller;
 
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Records;
 import lotto.domain.WinLotto;
+import lotto.utils.AutoLottoNumbersGeneratorUtils;
+import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
@@ -17,14 +22,32 @@ public class LottoController {
 		this.money = money;
 	}
 
-	public void buyLotto() {
-		final LottoCount lottoCount = new LottoCount(this.money);
+	public void buyLotto(int manualLottoCount) {
+		final LottoCount lottoCount = new LottoCount(this.money, manualLottoCount);
 
-		ResultView.outputLottoCount(lottoCount.getLottoCount());
-		this.lottos = Lottos.generateAutoLottos(lottoCount.getLottoCount());
+		ResultView.outputLottoCount(lottoCount);
 
-		lottos.getLottos()
-			.forEach(ResultView::outputLottoNumbers);
+		this.lottos = Lottos.generateLottos(lottoCount);
+
+		buyManualLotto(lottoCount);
+		buyAutoLotto(lottoCount);
+	}
+
+	private void buyManualLotto(LottoCount lottoCount) {
+		InputView.printManualInputLottoNumbers();
+
+		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+			String lottoNumbers = InputView.inputManualLottoNumbers();
+
+			this.lottos.addLotto(Lotto.of(lottoNumbers));;
+		}
+	}
+
+	private void buyAutoLotto(LottoCount lottoCount) {
+		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
+			Lotto lotto = Lotto.of(AutoLottoNumbersGeneratorUtils.generateRandomNumbers());
+			ResultView.outputLottoNumbers(this.lottos.addLotto(lotto));
+		}
 	}
 
 	public void winLotto(String winLottoNumbers, int bonusNumber) {

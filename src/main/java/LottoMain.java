@@ -9,7 +9,7 @@ public class LottoMain {
 
 		LottoController lottoController = new LottoController(InputView.inputMoney());
 
-		lottoController.buyLotto();
+		lottoController.buyLotto(InputView.inputManualCount());
 
 		ResultView.outputNewLine();
 
