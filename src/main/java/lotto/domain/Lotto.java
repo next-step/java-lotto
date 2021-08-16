@@ -9,12 +9,8 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    private void validate(Set<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private void checkSize(Set<LottoNumber> lottoNumbers) {
