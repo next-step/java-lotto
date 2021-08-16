@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoTest {
-
+    private static final int SIZE = 6;
     private Set<LottoNumber> lottoNumberList = new HashSet<>();
     private Lotto lotto;
 
@@ -25,7 +25,7 @@ class LottoTest {
     @Test
     @DisplayName("생성한 로또의 숫자의 개수가 6임을 확인한다")
     void size() {
-        assertThat(lotto.getNumbers().size()).isEqualTo(Lotto.SIZE);
+        assertThat(lotto.getNumbers().size()).isEqualTo(SIZE);
     }
 
     @Test
