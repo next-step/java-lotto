@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.*;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoTest.winnerLotto;
+import static lotto.domain.WinnerLottoTest.winnerLotto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottosTest {
