@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TicketManagerTest {
 
+    private static final int A_UNIT_PRICE = 1_000;
+
     @Test
     @DisplayName("금액 입력 시 실행 횟수 반환")
     void calculateNumberOfTicketsFrom() {
@@ -21,28 +23,28 @@ public class TicketManagerTest {
         int numberOfTickets = ticketManager.calculateNumberOfTicketsFrom(payment);
 
         // then
-        Assertions.assertThat(numberOfTickets).isEqualTo(payment);
+        Assertions.assertThat(numberOfTickets).isEqualTo(payment/A_UNIT_PRICE);
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 미만")
     @ValueSource(ints = {1, 999})
-    void validate_calculateNumberOfTicketsFrom_단위(int payment) {
+    void validate_createAndSaveTickets_단위(int payment) {
         // given
         TicketManager ticketManager = new TicketManager();
 
         // when
-        Assertions.assertThatThrownBy(() -> ticketManager.calculateNumberOfTicketsFrom(payment))
+        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 단위 떨어지지 않음")
     @ValueSource(ints = {1001, 1999})
-    void validate_calculateNumberOfTicketsFrom_1000미만(int payment) {
+    void validate_createAndSaveTickets_1000미만(int payment) {
         /// given
         TicketManager ticketManager = new TicketManager();
 
         // when, then
-        Assertions.assertThatThrownBy(() -> ticketManager.calculateNumberOfTicketsFrom(payment))
+        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -54,7 +56,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // then
-        assertThatThrownBy(() -> ticketManager.createNumbersFromString(winningNumbersString))
+        assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -65,7 +67,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // then
-        assertThatThrownBy(() -> ticketManager.createNumbersFromString(winningNumbersString))
+        assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

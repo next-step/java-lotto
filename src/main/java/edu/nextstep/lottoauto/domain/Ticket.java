@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Ticket {
 
-    private static final int MIN_NUMBERS = 1;
-    private static final int MAX_NUMBERS = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private static final int NUMBER_OF_NUMBERS = 6;
 
     private final List<Integer> numbers;
@@ -19,7 +19,7 @@ public class Ticket {
     }
 
     private void validateOutOfRange(List<Integer> numbers) {
-        if (numbers.get(0) < MIN_NUMBERS || numbers.get(numbers.size()-1) > MAX_NUMBERS) {
+        if (numbers.get(0) < MIN_NUMBER || numbers.get(numbers.size()-1) > MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
     }
