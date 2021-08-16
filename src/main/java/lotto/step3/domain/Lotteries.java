@@ -8,11 +8,9 @@ public class Lotteries {
 
     public Lotteries(int lottoCount) {
         lotteries = new ArrayList<>();
-
-        for (int i=0; i<lottoCount; i++){
+        while (lottoCount-- > 0) {
             lotteries.add(new Lottery(LottoCreator.createLotto()));
         }
-
     }
 
     public Lotteries(List<Lottery> lotteries) {

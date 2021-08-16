@@ -7,6 +7,7 @@ public class LottoCreator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_START_COUNT = 1;
     private static final int LOTTO_END_COUNT = 6;
+    private static final String DELIMITER = ",";
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     static {
@@ -21,6 +22,16 @@ public class LottoCreator {
 
         for (int i = LOTTO_START_COUNT; i <= LOTTO_END_COUNT; i++) {
             lotto.add(lottoNumbers.get(i));
+        }
+        return lotto;
+    }
+
+    public static Set<LottoNumber> convertToLotto(String input) {
+        String[] numbers = input.split(DELIMITER);
+        Set<LottoNumber> lotto = new HashSet<>();
+        for (String number : numbers) {
+            String trim = number.trim();
+            lotto.add(new LottoNumber(Integer.valueOf(trim)));
         }
         return lotto;
     }
