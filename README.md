@@ -97,19 +97,6 @@
 - Collections.sort() 메소드를 활용해 정렬 가능하다.
 - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
 
+### 설계
+
 ### 기능 목록
-- Ticket 
-    - 필드 : `List<Integer> numbers`, `enum prize`
-    - 기능 : Ticket 생성, 당첨 여부 파악
-    - ※ shuffle Test 어려워 끄집어내야 함.
-- WinningNumbers
-    - 필드 : `List<Integer> numbers`
-    - 기능 : 생성
-- TicketManager
-    - 필드 : `List<Ticket> tickets`, `Map<Prize, Integer> winningResult`
-    - 기능 : tickets 생성, 당첨 여부 입력
-- NumberMaker (interface)
-    - 기능 : ticket 에 들어갈 숫자 생성(추상 메서드)
-- AutoNumberMaker
-    - 필드 : `List<Integer> totalNumbers`
-    - 기능 : 번호가 무작위인 ticket 에 들어갈 숫자 생성
