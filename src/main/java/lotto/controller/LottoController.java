@@ -1,9 +1,11 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import lotto.controller.generator.AutoLottoTicketGenerator;
+import lotto.controller.generator.LottoTicketGenerator;
+import lotto.controller.generator.ManualLottoTicketGenerator;
 import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -19,21 +21,25 @@ public class LottoController {
         LottoController lottoController = new LottoController();
 
         int lottoCount = inputView.inputLottoBuyAmount() / 1000;
-        List<LottoTicket> lottoTicketList = lottoController.createLottoBalls(resultView, lottoCount);
-        LottoTickets lottoTickets = LottoTickets.from(lottoTicketList);
-
+        LottoTickets lottoTickets = LottoTickets.from(getLottoTickets(inputView, resultView, lottoCount));
         WinStatistics winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
-        resultView.outputStatistics(winStatistics, lottoTickets.getRateOfReturn(lottoCount, winStatistics));
+
+        resultView.outputStatistics(winStatistics, winStatistics.getRateOfReturn());
         inputView.scannerClose();
     }
 
-    public List<LottoTicket> createLottoBalls(ResultView resultView, int lottoCount) {
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTicketList.add(LottoTicket.createRandomNumber());
-        }
-        resultView.outputLottoLotteries(lottoTicketList);
-        return lottoTicketList;
+    private static List<LottoTicket> getLottoTickets(InputView inputView, ResultView resultView, int lottoCount) {
+        int manualLottoCount = inputView.inputManualLottoTicketCount();
+
+        List<LottoTicket> manualLottoTickets = LottoTicketGenerator.createLottoTickets(new ManualLottoTicketGenerator(),
+            manualLottoCount);
+        List<LottoTicket> autoLottoTickets = LottoTicketGenerator.createLottoTickets(new AutoLottoTicketGenerator(),
+            lottoCount - manualLottoCount);
+        manualLottoTickets.addAll(autoLottoTickets);
+
+        resultView.outputLottoLotteries(manualLottoTickets, autoLottoTickets);
+
+        return manualLottoTickets;
     }
 
     public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
@@ -42,6 +48,6 @@ public class LottoController {
                 .mapToInt(s -> Integer.parseInt(s.trim()))
                 .toArray());
         WinnerNumbers winnerNumbers = WinnerNumbers.from(lottoTicket, LottoBall.select(inputView.inputBonusNumber()));
-        return WinStatistics.from(winnerNumbers, lottoTickets);
+        return lottoTickets.calculateStatistics(winnerNumbers);
     }
 }
