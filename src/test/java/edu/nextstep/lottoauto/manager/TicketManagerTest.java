@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 public class TicketManagerTest {
 
     @Test
@@ -41,6 +43,29 @@ public class TicketManagerTest {
 
         // when, then
         Assertions.assertThatThrownBy(() -> ticketManager.calculateNumberOfTicketsFrom(payment))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
+    @ParameterizedTest(name = "숫자 개수 실패 {index}_{0}")
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"}) // given
+    void validate_number_of_numbers(String winningNumbersString) {
+        // given
+        TicketManager ticketManager = new TicketManager();
+
+        // then
+        assertThatThrownBy(() -> ticketManager.createNumbersFromString(winningNumbersString))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "숫자 허용 범위 실패 {index}_{0}")
+    @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "41, 42, 43, 44, 45, 46"}) // given
+    void validate_fail_out_of_range(String winningNumbersString) {
+        // given
+        TicketManager ticketManager = new TicketManager();
+
+        // then
+        assertThatThrownBy(() -> ticketManager.createNumbersFromString(winningNumbersString))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

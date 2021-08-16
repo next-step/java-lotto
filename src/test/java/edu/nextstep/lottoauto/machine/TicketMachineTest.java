@@ -6,14 +6,10 @@ import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TicketMachineTest {
 
@@ -36,45 +32,15 @@ public class TicketMachineTest {
     @DisplayName("당첨 결과 확인")
     void checkWinningResult() {
         // given
-        String winningNumbersString = "1, 2, 3, 4, 5, 6";
         TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(
-                1, () -> Ticket.of(createNumbersFromTo(1,6))
-        );
+        ticketMachine.createAndSaveTickets(1, () -> Ticket.of(createNumbersFromTo(1,6)));
 
         // when
-        WinningResultForm winningResult = ticketMachine.confirmWinningResult(winningNumbersString);
+        WinningResultForm winningResult = ticketMachine.confirmWinningResult(createNumbersFromTo(4,9));
 
         // then
-        assertThat(winningResult.countNumberOf(Prize.FIRST)).isEqualTo(1);
-    }
-
-    @ParameterizedTest(name = "숫자 개수 실패 {index}_{0}")
-    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"}) // given
-    void checkWinningResult_fail_number_of_numbers(String numbersOfString) {
-        // given
-        TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(
-                1, () -> Ticket.of(createNumbersFromTo(1,6))
-        );
-
-        // when, then
-        assertThatThrownBy(() -> ticketMachine.confirmWinningResult(numbersOfString))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @ParameterizedTest(name = "숫자 허용 범위 실패 {index}_{0}")
-    @ValueSource(strings = {"-1, 1, 3, 4, 5, 45", "0, 1, 3, 4, 5, 45", "1, 3, 4, 5, 45, 46"}) // given
-    void checkWinningResult_fail_out_of_range(String numbersOfString) {
-        // given
-        TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(
-                1, () -> Ticket.of(createNumbersFromTo(1,6))
-        );
-
-        // when, then
-        assertThatThrownBy(() -> ticketMachine.confirmWinningResult(numbersOfString))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(winningResult.getWinningResult().get(Prize.FOURTH)).isEqualTo(1);
+        assertThat(winningResult.getRateOfReturn()).isEqualTo(5);
     }
 
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {
