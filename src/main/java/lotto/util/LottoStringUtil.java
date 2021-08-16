@@ -10,8 +10,7 @@ public class LottoStringUtil {
     }
 
     public static List<String> splitString(String numberString) {
-        List<String> splitNumbers = Arrays.asList(numberString.split(","));
-        return splitNumbers;
+        return Arrays.asList(numberString.split(","));
     }
 
     public static List<Integer> parseToIntegerList(List<String> stringList) {

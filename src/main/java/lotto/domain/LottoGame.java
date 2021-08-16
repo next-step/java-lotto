@@ -4,22 +4,23 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final Lotto lotto;
+    private static final int ONE_GAME_PRICE = 1000;
+    private final LottoTickets lottoTicket;
 
     public LottoGame(final int price, final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        this.lotto = new Lotto(price, lottoNumberSelectPolicy);
+        this.lottoTicket = new LottoTickets(price / ONE_GAME_PRICE, lottoNumberSelectPolicy);
     }
 
     public int size() {
-        return lotto.size();
+        return lottoTicket.size();
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    public LottoTickets getLottoTicket() {
+        return lottoTicket;
     }
 
     public List<LottoRank> checkResult(final LottoNumbers winningNumbers) {
-        return lotto.getLottoRanks(winningNumbers);
+        return lottoTicket.getLottoRanks(winningNumbers);
     }
 
 }

@@ -4,26 +4,26 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
+import lotto.domain.LottoTickets;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
 
 public class OutputView {
 
     public void printBasicInfo(LottoGame lottoGame) {
         printGameSize(lottoGame.size());
-        printTickets(lottoGame.getLotto());
+        printTickets(lottoGame.getLottoTicket());
     }
 
     public void printGameSize(int gameSize) {
         System.out.println(gameSize + "개를 구매했습니다.");
     }
 
-    public void printTickets(Lotto lotto) {
-        List<LottoTicket> lottoTickets = lotto.getTickets();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.getLottoNumbers());
+    public void printTickets(LottoTickets lottoTicket) {
+        List<LottoNumbers> lottoTickets = lottoTicket.getTickets();
+        for (LottoNumbers lottoNumbers : lottoTickets) {
+            System.out.println(lottoNumbers.getLottoNumbers());
         }
         System.out.println();
     }

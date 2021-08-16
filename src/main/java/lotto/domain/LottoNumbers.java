@@ -20,7 +20,11 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int getSameCount(LottoNumbers winningNumbers) {
+    public LottoRank checkRank(LottoNumbers winningNumbers) {
+        return LottoRank.findRank(getSameCount(winningNumbers));
+    }
+
+    private int getSameCount(LottoNumbers winningNumbers) {
         int collectNumber = 0;
         List<Integer> integerWinningNumbers = winningNumbers.getLottoNumbers();
         for (Integer number : integerWinningNumbers) {
@@ -29,8 +33,8 @@ public class LottoNumbers {
         return collectNumber;
     }
 
-    private int checkContains(int number){
-        if(lottoNumbers.contains(number)){
+    private int checkContains(int number) {
+        if (lottoNumbers.contains(number)) {
             return 1;
         }
         return 0;
