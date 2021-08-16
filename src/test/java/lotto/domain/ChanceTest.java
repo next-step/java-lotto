@@ -37,4 +37,15 @@ public class ChanceTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("더이상 찬스를 사용할 수 없습니다.");
     }
+
+    @Test
+    public void Chance에서_빼기를_할_수_있다(){
+        //given
+        Chance chance1 = new Chance(10);
+        Chance chance2 = new Chance(3);
+        //when
+        Chance chance3 = chance1.subtract(chance2);
+        //then
+        assertThat(chance3).isEqualTo(new Chance(7));
+    }
 }

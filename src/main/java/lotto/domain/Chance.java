@@ -43,4 +43,8 @@ public class Chance {
             throw new IllegalStateException("더이상 찬스를 사용할 수 없습니다.");
         }
     }
+
+    public Chance subtract(Chance chance) {
+        return new Chance(this.value - chance.value);
+    }
 }
