@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.StringUtil;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -23,16 +25,8 @@ public final class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public LottoNumber(final String stringNumber) {
-        this.number = parseInt(stringNumber);
+        this.number = StringUtil.parseInt(stringNumber);
         validateNumberRange();
-    }
-
-    private int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("invalid string input: " + number);
-        }
     }
 
     private void validateNumberRange() {
