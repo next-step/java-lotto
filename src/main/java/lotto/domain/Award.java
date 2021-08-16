@@ -8,8 +8,7 @@ public enum Award {
     THIRD(5, false, 1500000),
     FOURTH(4, false, 50000),
     FIFTH(3, false, 5000),
-    BANG(0, false, 0),
-    UNIDENTIFIED(-1, false, 0);
+    BANG(0, false, 0);
 
     private final int matchNumbers;
     private final boolean bonus;
