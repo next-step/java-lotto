@@ -1,5 +1,6 @@
 package edu.nextstep.lottoauto.manager;
 
+import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when
-        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment))
+        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,7 +45,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when, then
-        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment))
+        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

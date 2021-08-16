@@ -1,12 +1,11 @@
 package edu.nextstep.lottoauto.manager;
 
+import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.machine.TicketMachine;
-import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
 import edu.nextstep.lottoauto.ticketmaker.TicketMaker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TicketManager {
@@ -18,13 +17,16 @@ public class TicketManager {
 
     private final TicketMachine ticketMachine = new TicketMachine();
 
-    public void createAndSaveTickets(int payment) {
+    public void createAndSaveTickets(int payment, TicketMaker ticketMaker) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
         int numberOfTickets = calculateNumberOfTicketsFrom(payment);
-        TicketMaker ticketMaker = new AutoTicketMaker();
         ticketMachine.createAndSaveTickets(numberOfTickets, ticketMaker);
+    }
+
+    public List<Ticket> findTickets() {
+        return ticketMachine.findTickets();
     }
 
     public WinningResultForm confirmWinningResult(String winningNumbersString) {
@@ -40,14 +42,14 @@ public class TicketManager {
         return payment / A_UNIT_PRICE;
     }
 
-    public List<Integer> createNumbersFromString(String numbersString) {
+    private List<Integer> createNumbersFromString(String numbersString) {
         List<Integer> numbers = new ArrayList<>();
 
         String[] numbersStringArr = numbersString.split(",");
-        Arrays.stream(numbersStringArr)
-                .forEach((numberString) -> numbers.add(Integer.parseInt(numberString.trim())));
 
-        System.out.println(numbers);
+        for(String numberString : numbersStringArr) {
+            numbers.add(Integer.parseInt(numberString.trim()));
+        }
 
         return numbers;
     }
@@ -59,7 +61,7 @@ public class TicketManager {
     }
 
     private void validateDivideUnitPrice(int payment) {
-        if ((payment / A_UNIT_PRICE) != 0) {
+        if ((payment % A_UNIT_PRICE) != 0) {
             throw new IllegalArgumentException();
         }
     }
