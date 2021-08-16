@@ -17,14 +17,16 @@ public class Calculator {
 
     String[] splittedExpr = split(expr);
 
-    for (String s : splittedExpr) {
-      result = operator.calculate(result, Integer.parseInt(s));
+    for (String number : splittedExpr) {
+      checkNumberRange(number);
+      result = operator.calculate(result, Integer.parseInt(number));
     }
 
     return result;
   }
 
-  public String[] split(String expr) {
+  private String[] split(String expr) {
+
     Matcher m = CUSTOM_SPLITTER_PATTERN.matcher(expr);
     if (m.find()) {
       String customDelimiter = m.group(1);
@@ -32,5 +34,11 @@ public class Calculator {
     }
 
     return expr.split("" + BASIC_SPLITTER_COMMA + OR_OPERATOR_SYMBOL + BASIC_SPLITTER_COLON);
+  }
+
+  private void checkNumberRange(String number) {
+    if (!number.matches(NUMBER_REGEXP)) {
+      throw new RuntimeException("숫자 이외의 값 또는 음수가 있습니다.");
+    }
   }
 }

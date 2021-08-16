@@ -1,9 +1,9 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
-import step1.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -40,5 +40,9 @@ public class StringAddCalculatorTest {
     assertThat(result).isEqualTo(6);
   }
 
-
+  @Test
+  public void splitAndSum_negative() {
+    assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+        .isInstanceOf(RuntimeException.class);
+  }
 }
