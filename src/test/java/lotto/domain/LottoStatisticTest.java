@@ -29,11 +29,11 @@ public class LottoStatisticTest {
     static Stream<Arguments> provideLottoTickets() {
         return Stream.of(
                 Arguments.of(
-                        Collections.singletonList(new LottoTicket(new int[]{1, 2, 3, 4, 5, 7})),
+                        Collections.singletonList(new LottoTicket(1, 2, 3, 4, 5, 7)),
                         LottoRank.SECOND_PLACE, 1
                 ),
                 Arguments.of(
-                        Collections.singletonList(new LottoTicket(new int[]{1, 2, 3, 4, 5, 8})),
+                        Collections.singletonList(new LottoTicket(1, 2, 3, 4, 5, 8)),
                         LottoRank.THIRD_PLACE, 1
                 )
         );
@@ -59,9 +59,9 @@ public class LottoStatisticTest {
     void matchLottoTwoTest() {
         // given
         List<LottoTicket> lottoTicketsList = Arrays.asList(
-                new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}),
-                new LottoTicket(new int[]{1, 2, 3, 4, 5, 45}),
-                new LottoTicket(new int[]{1, 2, 3, 4, 44, 45})
+                new LottoTicket(1, 2, 3, 4, 5, 6),
+                new LottoTicket(1, 2, 3, 4, 5, 45),
+                new LottoTicket(1, 2, 3, 4, 44, 45)
         );
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsList);
 
@@ -85,7 +85,7 @@ public class LottoStatisticTest {
     @DisplayName("로또 중복 당첨 확인")
     void matchLottoOverlapTest() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(new int[]{1, 2, 3, 4, 5, 6});
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
         List<LottoTicket> lottoTicketsList = Arrays.asList(lottoTicket, lottoTicket);
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsList);
 
@@ -101,7 +101,7 @@ public class LottoStatisticTest {
     @DisplayName("수익률 확인")
     void profitRateTest() {
         // given
-        List<LottoTicket> lottoTicketsList = Collections.singletonList(new LottoTicket(new int[]{1, 2, 3, 11, 12, 13}));
+        List<LottoTicket> lottoTicketsList = Collections.singletonList(new LottoTicket(1, 2, 3, 11, 12, 13));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketsList);
 
         // when

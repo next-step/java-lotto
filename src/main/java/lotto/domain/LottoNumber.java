@@ -1,20 +1,35 @@
 package lotto.domain;
 
+import lotto.util.StringUtil;
+
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
+    public static final List<LottoNumber> lottoNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
     private final int number;
 
     public LottoNumber(final int number) {
-        validateNumberRange(number);
         this.number = number;
+        validateNumberRange();
     }
 
-    private void validateNumberRange(int number) {
+    public LottoNumber(final String stringNumber) {
+        this.number = StringUtil.parseInt(stringNumber);
+        validateNumberRange();
+    }
+
+    private void validateNumberRange() {
         if (number < MIN_NUMBER) {
             throw new IllegalArgumentException("cannot be less than " + MIN_NUMBER);
         }

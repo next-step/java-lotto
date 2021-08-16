@@ -1,40 +1,61 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LottoShop {
 
-    private static final int LOTTO_PRIZE_AMOUNT = 1000;
-
+    private final LottoTickets buyLottoTickets;
     private final LottoGenerator lottoGenerator;
 
-    public LottoShop(final LottoGenerator lottoGenerator) {
+    public LottoShop(LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
+        this.buyLottoTickets = new LottoTickets();
     }
 
-    public LottoTickets buy(final long amount) {
+    public LottoTickets buy(final int amount, final String... manualLottoTickets) {
         validateMinimumAmount(amount);
 
-        long purchaseCount = getPurchaseCount(amount);
-        return buyLottoTickets(purchaseCount);
+        buyManualLottoTickets(manualLottoTickets);
+
+        int availableTicketCount = getAvailableTicketCount(amount);
+        int remainAvailableTicketCount = getRemainAvailableTicketCount(availableTicketCount, manualLottoTickets.length);
+        buyAutoLottoTickets(remainAvailableTicketCount);
+
+        return buyLottoTickets;
     }
 
-    private void validateMinimumAmount(final long amount) {
-        if (amount < LOTTO_PRIZE_AMOUNT) {
+    private void validateMinimumAmount(final int amount) {
+        if (amount < LottoTicket.PRIZE_AMOUNT) {
             throw new IllegalArgumentException("less then the minimum amount");
         }
     }
 
-    private long getPurchaseCount(final long amount) {
-        return Math.floorDiv(amount, LOTTO_PRIZE_AMOUNT);
+    private void buyManualLottoTickets(final String[] autoLottoTickets) {
+        List<LottoTicket> manualLottoTickets = Arrays.stream(autoLottoTickets)
+                .map(ManualLottoGenerator::new)
+                .map(ManualLottoGenerator::generate)
+                .collect(Collectors.toList());
+
+        buyLottoTickets.addAll(manualLottoTickets);
     }
 
-    private LottoTickets buyLottoTickets(final long purchaseCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < purchaseCount; i++) {
-            lottoTickets.add(lottoGenerator.generate());
+    private int getAvailableTicketCount(final int amount) {
+        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
+    }
+
+    private int getRemainAvailableTicketCount(final int availableTicketCount, final int buyManualTicketCount) {
+        int count = availableTicketCount - buyManualTicketCount;
+        if (count < 0) {
+            throw new IllegalArgumentException("not enough amount");
         }
-        return new LottoTickets(lottoTickets);
+        return count;
+    }
+
+    private void buyAutoLottoTickets(final int count) {
+        for (int i = 0; i < count; i++) {
+            buyLottoTickets.add(lottoGenerator.generate());
+        }
     }
 }

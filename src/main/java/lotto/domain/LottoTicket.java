@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public final class LottoTicket {
 
-    public static final int LOTTO_TICKET_SIZE = 6;
+    public static final int PRIZE_AMOUNT = 1_000;
+    public static final int SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -16,8 +17,8 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final int[] lottoNumberVarargs) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberVarargs)
+    public LottoTicket(final int... lottoNumberArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArray)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
@@ -25,8 +26,17 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoTicket(final String... lottoNumberArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArray)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        validateLottoTicketSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private void validateLottoTicketSize(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
+        if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException("different number size");
         }
     }
@@ -38,9 +48,16 @@ public final class LottoTicket {
     public int matchCount(final WinningLottoTicket winningLottoTicket) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            matchCount += winningLottoTicket.contains(lottoNumber) ? 1 : 0;
+            matchCount += countLottoNumberInWinningLottoTicket(winningLottoTicket, lottoNumber);
         }
         return matchCount;
+    }
+
+    private int countLottoNumberInWinningLottoTicket(final WinningLottoTicket winningLottoTicket, final LottoNumber lottoNumber) {
+        if (winningLottoTicket.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     public boolean contains(final LottoNumber lottoNumber) {

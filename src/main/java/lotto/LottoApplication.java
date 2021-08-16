@@ -10,15 +10,18 @@ import java.util.Scanner;
 public class LottoApplication {
     public static void main(String[] args) {
 
-        LottoGenerator lottoGenerator = new AutoLottoGenerator();
-        LottoShop lottoShop = new LottoShop(lottoGenerator);
-
         Scanner scanner = new Scanner(System.in);
         InputView inputView = new InputView(scanner);
-        long purchaseAmount = inputView.getInputAmount();
 
-        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount);
-        ResultView.showBuyLottoTickets(lottoTickets);
+        int purchaseAmount = inputView.getInputAmount();
+        int manualLottoCount = inputView.getManualLottoCount();
+        String[] manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
+
+        AutoLottoGenerator lottoGenerator = new AutoLottoGenerator();
+        LottoShop lottoShop = new LottoShop(lottoGenerator);
+        LottoTickets lottoTickets = lottoShop.buy(purchaseAmount, manualLottoNumbers);
+
+        ResultView.showBuyLottoTickets(lottoTickets, manualLottoCount);
 
         List<Integer> winningNumbers = inputView.getWinningNumber();
         int bonusNumber = inputView.getBonusNumber();
