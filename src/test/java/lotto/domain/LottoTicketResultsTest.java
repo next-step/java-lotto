@@ -1,5 +1,7 @@
-package lotto.common;
+package lotto.domain;
 
+import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,14 +12,15 @@ class LottoTicketResultsTest {
         //given
         LottoResults lottoResults = new LottoResults();
         lottoResults.addAll(
-                new LottoResult(3, 3),  // 15000
-                new LottoResult(4, 1),  // 50000
-                new LottoResult(5, 1),  // 1500000
-                new LottoResult(6, 0)
+                new LottoResult(Ranking.FIFTH, 3),  // 15000
+                new LottoResult(Ranking.FOURTH, 1),  // 50000
+                new LottoResult(Ranking.THIRD, 0),  // 1500000
+                new LottoResult(Ranking.SECOND, 1),  // 30,000,000
+                new LottoResult(Ranking.FIRST, 0)
         );
         //when
         double earningLate = lottoResults.getEarningLate(100000);
         //then
-        assertThat(earningLate).isEqualTo(15.65);
+        assertThat(earningLate).isEqualTo(300.65);
     }
 }
