@@ -16,7 +16,7 @@ public class Lotto {
         }
     }
 
-    public int getTicketSize() {
+    public int size() {
         return tickets.size();
     }
 

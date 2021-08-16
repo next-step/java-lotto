@@ -1,7 +1,8 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import static lotto.util.LottoStringUtil.parseToIntegerList;
+import static lotto.util.LottoStringUtil.splitString;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,16 +21,5 @@ public class InputView {
         return parseToIntegerList(splitString(numberString));
     }
 
-    private List<String> splitString(String numberString) {
-        List<String> splitNumbers = Arrays.asList(numberString.split(","));
-        return splitNumbers;
-    }
 
-    private List<Integer> parseToIntegerList(List<String> stringList) {
-        List<Integer> numbers = new ArrayList<>();
-        for (String number : stringList) {
-            numbers.add(Integer.parseInt(number.trim()));
-        }
-        return numbers;
-    }
 }
