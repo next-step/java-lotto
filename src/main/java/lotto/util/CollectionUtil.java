@@ -12,8 +12,12 @@ public class CollectionUtil {
     private static final int NUMBER_COUNT_MAXIMUM_BOUNDARY = 6;
     public static List<Number> createRandomNumbers() {
         List<Number> randomNumbers = new ArrayList<>();
-        for (int i = NUMBER_COUNT_MINIMUM_BOUNDARY; i < NUMBER_COUNT_MAXIMUM_BOUNDARY; i++) {
+        for (int tryCount = NUMBER_COUNT_MINIMUM_BOUNDARY; tryCount < NUMBER_COUNT_MAXIMUM_BOUNDARY; tryCount++) {
             Number randomNumber = new Number(RandomUtil.getRandomNumber());
+            if(randomNumbers.contains(randomNumber)) {
+                tryCount--;
+                continue;
+            }
             randomNumbers.add(randomNumber);
         }
         Collections.shuffle(randomNumbers);
