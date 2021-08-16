@@ -47,6 +47,20 @@ public class TicketTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest(name = "동일한 숫자 개수 출력 [{index}] {0}부터 {1}까지 동일숫자개수 {2}")
+    @CsvSource({"1, 6, 6", "2, 7, 5", "3, 8, 4", "4, 9, 3"})
+    void countMatchingNumbers(int numFrom, int numTo, int result) {
+        // given
+        Ticket ticket = Ticket.of(createNumbersFromTo(1, 6));
+        List<Integer> winningNumbers = createNumbersFromTo(numFrom, numTo);
+
+        // when
+        int countOfMatching = ticket.countMatchingNumbers(winningNumbers);
+
+        // then
+        assertThat(countOfMatching).isEqualTo(result);
+    }
+
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {
         List<Integer> numbers = new ArrayList<>();
         for (int i = numFrom; i <= numTo; i++) {

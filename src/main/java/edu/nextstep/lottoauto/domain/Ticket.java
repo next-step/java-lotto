@@ -34,6 +34,12 @@ public class Ticket {
         return new Ticket(numbers);
     }
 
+    public int countMatchingNumbers(List<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
