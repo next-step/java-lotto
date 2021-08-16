@@ -18,17 +18,9 @@ public class LottoController {
 
         int price = inputView.inputPrice();
         LottoGame lottoGame = new LottoGame(price, new LottoNumberRandomSelector());
+        outputView.printBasicInfo(lottoGame);
 
-        outputView.printGameSize(lottoGame.size());
-        outputView.printTickets(lottoGame.getLotto());
-
-        List<String> splitNumbers = Arrays.asList(inputView.inputLastWinningNumber().split(","));
-
-        List<Integer> numbers = new ArrayList<>();
-        for (String splitNumber : splitNumbers) {
-            numbers.add(Integer.parseInt(splitNumber.trim()));
-        }
-
+        List<Integer> numbers = inputView.inputLastWinningNumber();
         LottoNumbers winningNumbers = new LottoNumbers(numbers);
         lottoGame.checkResult(winningNumbers);
 

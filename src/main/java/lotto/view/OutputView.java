@@ -3,10 +3,15 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 
 public class OutputView {
+    public void printBasicInfo(LottoGame lottoGame){
+        printGameSize(lottoGame.size());
+        printTickets(lottoGame.getLotto());
+    }
 
     public void printGameSize(int gameSize) {
         System.out.println(gameSize + "개를 구매했습니다.");
