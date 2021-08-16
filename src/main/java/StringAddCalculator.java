@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import model.Calculator;
+import model.Calculators;
 
 public class StringAddCalculator {
 
@@ -26,11 +26,11 @@ public class StringAddCalculator {
 
     String[] splitResult = {expr};
 
-    List<Calculator> calculators = new ArrayList();
-    calculators.add(new Calculator(BASIC_SPLITER_COLON));
-    calculators.add(new Calculator(BASIC_SPLITER_COMMA));
+    Calculators calculators = new Calculators(
+        Arrays.asList(new Calculator(BASIC_SPLITER_COLON), new Calculator(BASIC_SPLITER_COMMA)));
 
-    for (Calculator calculator : calculators) {
+    for (int i = 0; i < calculators.getCalculatorSize(); i++) {
+      Calculator calculator = calculators.getCalculator(i);
       splitResult = calculator.split(expr);
     }
 
