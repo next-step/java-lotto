@@ -17,8 +17,8 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final int... lottoNumberArgs) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArgs)
+    public LottoTicket(final int... lottoNumberArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArray)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
@@ -26,8 +26,8 @@ public final class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(final String... lottoNumberArgs) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArgs)
+    public LottoTicket(final String... lottoNumberArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(lottoNumberArray)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
@@ -53,7 +53,7 @@ public final class LottoTicket {
         return matchCount;
     }
 
-    private int countLottoNumberInWinningLottoTicket(WinningLottoTicket winningLottoTicket, LottoNumber lottoNumber) {
+    private int countLottoNumberInWinningLottoTicket(final WinningLottoTicket winningLottoTicket, final LottoNumber lottoNumber) {
         if (winningLottoTicket.contains(lottoNumber)) {
             return 1;
         }
