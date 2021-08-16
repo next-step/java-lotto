@@ -20,10 +20,8 @@ public class LottoController {
 
         List<Integer> numbers = inputView.inputLastWinningNumber();
         LottoNumbers winningNumbers = new LottoNumbers(numbers);
-        lottoGame.checkResult(winningNumbers);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.setResult(lottoGame.getLotto());
+        LottoResult lottoResult = new LottoResult(lottoGame.checkResult(winningNumbers));
 
         outputView.printResult(lottoResult.getResult());
         outputView.printProfitRatio(lottoResult.getProfitRate(price));

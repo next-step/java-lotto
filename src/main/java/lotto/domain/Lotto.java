@@ -28,10 +28,12 @@ public class Lotto {
         return (price / ONE_GAME_PRICE);
     }
 
-    public void checkResult(final LottoNumbers lottoNumbers) {
+    public List<LottoRank> getLottoRanks(final LottoNumbers winningNumbers) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
         for (LottoTicket lottoTicket : tickets) {
-            lottoTicket.checkResult(lottoNumbers);
+            lottoRanks.add(lottoTicket.calculateRank(winningNumbers));
         }
+        return lottoRanks;
     }
 
 }

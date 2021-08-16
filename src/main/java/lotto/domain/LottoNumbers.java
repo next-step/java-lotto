@@ -20,7 +20,19 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.contains(number);
+    public int getSameCount(LottoNumbers winningNumbers) {
+        int collectNumber = 0;
+        List<Integer> integerWinningNumbers = winningNumbers.getLottoNumbers();
+        for (Integer number : integerWinningNumbers) {
+            collectNumber += checkContains(number);
+        }
+        return collectNumber;
+    }
+
+    private int checkContains(int number){
+        if(lottoNumbers.contains(number)){
+            return 1;
+        }
+        return 0;
     }
 }
