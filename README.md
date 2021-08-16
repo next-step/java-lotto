@@ -97,6 +97,26 @@
 - Collections.sort() 메소드를 활용해 정렬 가능하다.
 - ArrayList의 contains() 메소드를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
 
-### 설계
-
 ### 기능 목록
+1. domain
+   1. Ticket : 로또 복권
+      - 로또 번호 리스트를 가진 일급 컬렉션
+   2. Prize(enum) : 상금
+      - 일치하는 번호 개수에 따른 상금을 나타내는 enumeration
+   
+2. business logic
+   1. TicketManager : 창구 역할
+      - 금액을 복권 개수로 변경 
+      - TicketMachine 에게 복권 생성, 당첨 결과 등을 요청
+   2. TicketMachine : 복권 기계
+      - TicketMaker 를 이용하여 복권 생성 및 TicketRepository 를 이용한 저장
+      - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
+   3. TicketRepository
+      - 복권 저장
+      - 복권 조회
+   4. AutoTicketMaker implements TicketMaker
+      - 자동 복권 생성
+   
+3. form
+   1. WinningResultForm
+      - 당첨 결과가 정리된 양식
