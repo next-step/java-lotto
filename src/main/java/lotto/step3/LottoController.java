@@ -18,5 +18,6 @@ public class LottoController {
         Set<LottoNumber> winningNumbers = InputView.inputLastWinningNumbers();
         LottoNumber bonusBall = InputView.inputBonusBall();
         Winning winning = new Winning(winningNumbers, bonusBall);
+        lotteries.compareLottoWith(winning);
     }
 }

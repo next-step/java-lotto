@@ -1,16 +1,17 @@
 package lotto.step3.domain;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LotteryTest {
-
     @Test
     @DisplayName("로또 번호가 6개가 아닐 때 예외 발생")
     void isValidLottery() {
@@ -22,7 +23,7 @@ class LotteryTest {
         lottery.add(new LottoNumber(31));
         lottery.add(new LottoNumber(41));
         lottery.add(new LottoNumber(42));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Lottery(lottery));
+        assertThrows(IllegalArgumentException.class, () -> new Lottery(lottery));
     }
 
     @Test
@@ -35,7 +36,7 @@ class LotteryTest {
         lottery.add(new LottoNumber(21));
         lottery.add(new LottoNumber(31));
         lottery.add(new LottoNumber(41));
-        Assertions.assertDoesNotThrow(() -> new Lottery(lottery));
+        assertDoesNotThrow(() -> new Lottery(lottery));
     }
 
     @Test
@@ -48,7 +49,40 @@ class LotteryTest {
         lottery.add(new LottoNumber(4));
         lottery.add(new LottoNumber(5));
         lottery.add(new LottoNumber(5));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Lottery(lottery));
+        assertThrows(IllegalArgumentException.class, () -> new Lottery(lottery));
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 6개 일치 ")
+    void matchWinningNumber() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
+        Winning winning = new Winning(new HashSet<>(
+                Arrays.asList(new LottoNumber(1), new LottoNumber(2),new LottoNumber(3) , new LottoNumber(4),new LottoNumber(5),new LottoNumber(6))) ,new LottoNumber(7)
+        );
+        assertThat(lottery.matchWinningNumber(winning)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 5개 일치 ")
+    void matchWinningNumber2() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
+        Winning winning = new Winning(new HashSet<>(
+                Arrays.asList(new LottoNumber(11), new LottoNumber(2),new LottoNumber(3) , new LottoNumber(4),new LottoNumber(5),new LottoNumber(6))) ,new LottoNumber(7)
+        );
+        assertThat(lottery.matchWinningNumber(winning)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 4개 일치 ")
+    void matchWinningNumber3() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
+        Winning winning = new Winning(new HashSet<>(
+                Arrays.asList(new LottoNumber(11), new LottoNumber(12),new LottoNumber(3) , new LottoNumber(4),new LottoNumber(5),new LottoNumber(6))) ,new LottoNumber(7)
+        );
+        assertThat(lottery.matchWinningNumber(winning)).isEqualTo(4);
     }
 
 }
