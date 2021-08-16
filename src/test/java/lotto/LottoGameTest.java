@@ -1,8 +1,9 @@
 package lotto;
 
+import lotto.model.AutoLottoNumbers;
 import lotto.model.LottoGame;
-import lotto.model.LottoNumbers;
 import lotto.model.LottoTicket;
+import lotto.model.ManualLottoNumbers;
 import lotto.type.Winning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,21 +24,19 @@ public class LottoGameTest {
 
     LottoGame lottoGame = new LottoGame();
     LottoTicket lottoTicket;
+    ManualLottoNumbers manualLottoNumbers;
 
 
     @BeforeEach
     void settingGame() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoGame.settingWinningNumber(TEST_WINNING_NUMBER, 1);
-        LottoNumbers firstPrizeNumber = new LottoNumbers(TEST_WINNING_NUMBER);
-        lottoNumbers.add(firstPrizeNumber);
-        LottoNumbers secondPrizeNumber = new LottoNumbers("1,4,6,8,10,12");
-        lottoNumbers.add(secondPrizeNumber);
-        LottoNumbers thirdPrizeNumber = new LottoNumbers("3,4,6,8,10,12");
-        lottoNumbers.add(thirdPrizeNumber);
-        LottoNumbers unWinningNumber = new LottoNumbers("3,5,7,9,11,13");
-        lottoNumbers.add(unWinningNumber);
-        lottoTicket = new LottoTicket(lottoNumbers);
+        List<String> manualNumbers = new ArrayList<>();
+        manualNumbers.add(TEST_WINNING_NUMBER);
+        manualNumbers.add("1,4,6,8,10,12");
+        manualNumbers.add("3,4,6,8,10,12");
+        manualNumbers.add("3,5,7,9,11,13");
+        manualLottoNumbers = new ManualLottoNumbers(manualNumbers);
+        lottoTicket = new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(0));
     }
 
     @Test
@@ -49,8 +48,8 @@ public class LottoGameTest {
     @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
     void 로또_산만큼_로또_자동_생성(int amount, int gameCount) {
         lottoGame.getLottoAmount(amount);
-        LottoTicket lottoTicket = lottoGame.getLottoTicket();
-        assertThat(lottoTicket.getTicketInfo().size()).isEqualTo(gameCount);
+        LottoTicket lottoTicket = lottoGame.getLottoTicket(null, gameCount);
+        assertThat(lottoTicket.getLottoTicketInfo().size()).isEqualTo(gameCount);
     }
 
 

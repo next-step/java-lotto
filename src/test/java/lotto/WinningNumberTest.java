@@ -30,7 +30,8 @@ public class WinningNumberTest {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         for (int number : lottoNumber) {
-            assertThat(winningNumber.containsNumber(LottoNumberPicker.pickNumber(number)))
+            assertThat(winningNumber.containsNumber(
+                    LottoNumberPicker.pickNumber(number)))
                     .isTrue();
         }
     }

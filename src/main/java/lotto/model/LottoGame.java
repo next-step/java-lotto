@@ -2,7 +2,6 @@ package lotto.model;
 
 import lotto.type.Winning;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,21 +12,25 @@ public class LottoGame {
     private static final int MATCHED_BONUS_COUNT = 5;
 
     private int purchaseAmount = 0;
-    private int gameCount = 0;
+
     private WinningNumbers winningNumbers;
 
-    public LottoTicket getLottoTicket() {
-        return new LottoTicket(new ArrayList<>())
-                .generateNumbers(this.gameCount);
+    public LottoTicket getLottoTicket(ManualLottoNumbers manualLottoNumbers, int autoGameCount) {
+        return new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(autoGameCount));
     }
 
     public int getLottoAmount(int purchaseAmount) {
         if (purchaseAmount <= DEFAULT_LOTTO_AMOUNT) {
             return DEFAULT_LOTTO_AMOUNT;
         }
+        int manualGameCount = 0;
         this.purchaseAmount = purchaseAmount;
-        this.gameCount = purchaseAmount / LOTTO_PRICE;
-        return this.gameCount;
+        int totalGameCount = purchaseAmount / LOTTO_PRICE;
+        if (totalGameCount - manualGameCount < 0) {
+            return DEFAULT_LOTTO_AMOUNT;
+        }
+
+        return totalGameCount;
     }
 
     public void settingWinningNumber(String numberText, int bonusNumber) {
@@ -36,7 +39,7 @@ public class LottoGame {
 
     public Map<Winning, Integer> setWinningCount(LottoTicket lottoTicket) {
         Map<Winning, Integer> winningCount = new HashMap<>();
-        for (LottoNumbers lottoNumbers : lottoTicket.getTicketInfo()) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTicketInfo()) {
             setCount(winningCount, lottoNumbers);
         }
         return winningCount;

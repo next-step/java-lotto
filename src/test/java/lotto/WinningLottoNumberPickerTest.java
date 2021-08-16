@@ -1,19 +1,11 @@
 package lotto;
 
 
-import lotto.model.LottoNumber;
 import lotto.model.LottoNumberPicker;
 import lotto.model.LottoNumbers;
-import lotto.model.WinningNumber;
 import lotto.model.WinningNumbers;
-import lotto.util.LottoNumberUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +14,6 @@ public class WinningLottoNumberPickerTest {
 
     private static final String TEST_NUMBER = "2,4,6,8,10,12";
     private static final int BONUS_NUMBER = 1;
-    private static final String SPLIT_TOKEN = ",";
 
     WinningNumbers winningNumbers;
     LottoNumbers lottoNumbers;

@@ -1,25 +1,25 @@
 package lotto.model;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
 
-    private List<LottoNumbers> lottoNumberList;
+    private AutoLottoNumbers autoLottoNumbers;
+    private ManualLottoNumbers manualLottoNumbers;
 
-    public LottoTicket(List<LottoNumbers> lottoNumbers) {
-        this.lottoNumberList = lottoNumbers;
+    public LottoTicket(ManualLottoNumbers manualLottoNumbers, AutoLottoNumbers autoLottoNumbers) {
+        this.manualLottoNumbers = manualLottoNumbers;
+        this.autoLottoNumbers = autoLottoNumbers;
     }
 
-    public LottoTicket generateNumbers(int gameCount) {
-        for (int count = 0; count < gameCount; count++) {
-            LottoNumbers lottoNumbers = new LottoNumbers();
-            lottoNumberList.add(lottoNumbers.generateNumbers());
+    public List<LottoNumbers> getLottoTicketInfo() {
+        List<LottoNumbers> totalLottoNumbers = new ArrayList<>();
+        if (manualLottoNumbers != null && !manualLottoNumbers.emptyNumbers()) {
+            totalLottoNumbers.addAll(manualLottoNumbers.getManualLottoNumbers());
         }
-        return this;
+        totalLottoNumbers.addAll(autoLottoNumbers.getAutoLottoNumbers());
+        return totalLottoNumbers;
     }
-
-    public List<LottoNumbers> getTicketInfo() {
-        return this.lottoNumberList;
-    }
-
 }
