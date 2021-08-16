@@ -30,6 +30,6 @@ public class WinnerLotto {
 
     public Winning match(Lotto lotto) {
         int matchNum = this.lotto.matchLotto(lotto.getNumbers());
-        return Winning.find(matchNum,lotto.contains(bonus));
+        return Winning.find(matchNum, lotto.contains(bonus));
     }
 }

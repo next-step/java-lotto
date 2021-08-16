@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinnerLottoTest {
 
@@ -16,6 +15,7 @@ class WinnerLottoTest {
     void matchLotto(){
         Lotto lotto = Lotto.from(Arrays.asList(1,2,3,4,5,6));
         WinnerLotto winner = WinnerLotto.of(Lotto.from(Arrays.asList(1,2,3,4,5,6)),LottoNum.of(7));
+
         assertThat(winner.match(lotto)).isEqualTo(Winning.FIRST);
     }
     @DisplayName("2등번호 체크하기")
@@ -23,6 +23,7 @@ class WinnerLottoTest {
     void matchSecond(){
         Lotto lotto = Lotto.from(Arrays.asList(1,2,3,4,5,7));
         WinnerLotto winner = WinnerLotto.of(Lotto.from(Arrays.asList(1,2,3,4,5,6)),LottoNum.of(7));
+
         assertThat(winner.match(lotto)).isEqualTo(Winning.SECOND);
     }
 

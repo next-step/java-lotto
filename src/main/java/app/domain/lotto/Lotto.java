@@ -1,7 +1,5 @@
 package app.domain.lotto;
 
-import app.domain.Winning;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
