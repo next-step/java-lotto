@@ -29,11 +29,12 @@ public class LottoNumbers {
         }
     }
 
-    public int checkHitCount(final LottoNumbers winningNumbers) {
-        return winningNumbers.lottoNumbers
+    public HitCount checkHitCount(final LottoNumbers winningNumbers) {
+        int hitCount = winningNumbers.lottoNumbers
                 .stream()
                 .mapToInt(this::checkHit)
                 .sum();
+        return new HitCount(hitCount);
     }
 
     private int checkHit(final LottoNumber winningNumber) {

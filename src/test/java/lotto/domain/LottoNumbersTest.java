@@ -28,8 +28,8 @@ public class LottoNumbersTest {
     void check_ReturnLottoStatus_IfInputIsWinningNumbers(List<LottoNumber> inputLottoNumbers, int expected) {
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
         LottoNumbers winningNumbers = new LottoNumbers(makeLottoNumbers(1, 7, 15, 28, 36, 45));
-        int hitCount = lottoNumbers.checkHitCount(winningNumbers);
-        assertThat(hitCount).isEqualTo(expected);
+        HitCount hitCount = lottoNumbers.checkHitCount(winningNumbers);
+        assertThat(hitCount).isEqualTo(new HitCount(expected));
     }
 
     static Stream<Arguments> wrongLottoNumbersParameterProvider() {
