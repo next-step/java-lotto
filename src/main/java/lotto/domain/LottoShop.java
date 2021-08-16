@@ -14,7 +14,7 @@ public final class LottoShop {
         this.buyLottoTickets = new LottoTickets();
     }
 
-    public LottoTickets buy(final long amount, final String... manualLottoTicketsArgs) {
+    public LottoTickets buy(final int amount, final String... manualLottoTicketsArgs) {
         validateMinimumAmount(amount);
 
         int availableTicketCount = getAvailableTicketCount(amount);
@@ -25,14 +25,14 @@ public final class LottoShop {
         return buyLottoTickets;
     }
 
-    private void validateMinimumAmount(final long amount) {
+    private void validateMinimumAmount(final int amount) {
         if (amount < LottoTicket.PRIZE_AMOUNT) {
             throw new IllegalArgumentException("less then the minimum amount");
         }
     }
 
-    private int getAvailableTicketCount(final long amount) {
-        return (int) Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
+    private int getAvailableTicketCount(final int amount) {
+        return Math.floorDiv(amount, LottoTicket.PRIZE_AMOUNT);
     }
 
     private int buyManualLottoTickets(final String[] autoLottoTickets) {
@@ -45,15 +45,15 @@ public final class LottoShop {
         return manualLottoTickets.size();
     }
 
-    private int getRemainAvailableTicketCount(final long availableTicketCount, final int buyManualTicketCount) {
-        long count = availableTicketCount - buyManualTicketCount;
+    private int getRemainAvailableTicketCount(final int availableTicketCount, final int buyManualTicketCount) {
+        int count = availableTicketCount - buyManualTicketCount;
         if (count < 0) {
             throw new IllegalArgumentException("not enough amount");
         }
-        return (int) count;
+        return count;
     }
 
-    private void buyAutoLottoTickets(final long count) {
+    private void buyAutoLottoTickets(final int count) {
         for (int i = 0; i < count; i++) {
             buyLottoTickets.add(lottoGenerator.generate());
         }

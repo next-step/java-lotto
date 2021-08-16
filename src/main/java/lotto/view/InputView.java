@@ -22,25 +22,25 @@ public class InputView {
         this.scanner = scanner;
     }
 
-    public long getInputAmount() {
+    public int getInputAmount() {
         System.out.println(MESSAGE_INPUT_AMOUNT);
-        return inputStringToLong();
+        return inputStringToInt();
     }
 
-    public long getManualLottoCount() {
+    public int getManualLottoCount() {
         System.out.println();
         System.out.println(MESSAGE_INPUT_MANUAL_LOTTO_COUNT);
-        return inputStringToLong();
+        return inputStringToInt();
     }
 
-    public long getBonusNumber() {
+    public int getBonusNumber() {
         System.out.println(MESSAGE_INPUT_BONUS_NUMBER);
-        return inputStringToLong();
+        return inputStringToInt();
     }
 
-    private long inputStringToLong() {
+    private int inputStringToInt() {
         try {
-            long number = Long.parseLong(scanner.nextLine());
+            int number = Integer.parseInt(scanner.nextLine());
             validatePositiveNumber(number);
             return number;
         } catch (NumberFormatException e) {
@@ -48,7 +48,7 @@ public class InputView {
         }
     }
 
-    private void validatePositiveNumber(long input) {
+    private void validatePositiveNumber(int input) {
         if (input < 0) {
             throw new IllegalArgumentException(MESSAGE_INPUT_VALUE_INCORRECT);
         }

@@ -25,7 +25,7 @@ public class LottoShopTest {
     @DisplayName("구매한 로또 개수 확인")
     void buyLottoCountTest() {
         // given
-        LottoTickets lottoTickets = lottoShop.buy(10_000L);
+        LottoTickets lottoTickets = lottoShop.buy(10_000);
 
         // when
         int actual = lottoTickets.size();
@@ -51,7 +51,7 @@ public class LottoShopTest {
     @Test
     @DisplayName("로또를 살수 없는 금액이 입력될 경우 Exception")
     void buyValidateAmountMinimumExceptionTest() {
-        assertThatThrownBy(() -> lottoShop.buy(800L))
+        assertThatThrownBy(() -> lottoShop.buy(800))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("less then the minimum amount");
     }
@@ -65,7 +65,7 @@ public class LottoShopTest {
 
         //when
         //then
-        assertThatThrownBy(() -> lottoShop.buy(1000L, manualLottoTickets))
+        assertThatThrownBy(() -> lottoShop.buy(1000, manualLottoTickets))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("not enough amount");
     }
