@@ -1,0 +1,27 @@
+package lotto.step3.domain;
+
+import java.util.*;
+
+public class LottoCreator {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_START_COUNT = 1;
+    private static final int LOTTO_END_COUNT = 6;
+    private static List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    static {
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+    }
+
+    public static Set<LottoNumber> createLotto() {
+        Collections.shuffle(lottoNumbers);
+        Set<LottoNumber> lotto = new HashSet<>();
+
+        for (int i = LOTTO_START_COUNT; i <= LOTTO_END_COUNT; i++) {
+            lotto.add(lottoNumbers.get(i));
+        }
+        return lotto;
+    }
+}
