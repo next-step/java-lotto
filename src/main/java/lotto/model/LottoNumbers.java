@@ -27,7 +27,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers generateNumbers() {
-        this.lottoNumbers = new ArrayList<>(LottoNumberPicker.pickNumber());
+        this.lottoNumbers = LottoNumberPicker.pickNumber();
         return this;
     }
 

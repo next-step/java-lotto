@@ -9,13 +9,9 @@ public class LottoTicket {
     private AutoLottoNumbers autoLottoNumbers;
     private ManualLottoNumbers manualLottoNumbers;
 
-    public LottoTicket(ManualLottoNumbers manualLottoNumbers, int autoCount) {
+    public LottoTicket(ManualLottoNumbers manualLottoNumbers, AutoLottoNumbers autoLottoNumbers) {
         this.manualLottoNumbers = manualLottoNumbers;
-        generateAutoLottoNumbers(autoCount);
-    }
-
-    private void generateAutoLottoNumbers(int autoCount) {
-        autoLottoNumbers = new AutoLottoNumbers(autoCount);
+        this.autoLottoNumbers = autoLottoNumbers;
     }
 
     public List<LottoNumbers> getLottoTicketInfo() {

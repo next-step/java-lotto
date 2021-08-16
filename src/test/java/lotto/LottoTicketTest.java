@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.AutoLottoNumbers;
 import lotto.model.LottoTicket;
 import lotto.model.ManualLottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ public class LottoTicketTest {
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("1,2,3,4,5,6");
         manualLottoNumbers.setManualLottoNumbers(manualNumbers);
-        lottoTicket = new LottoTicket(manualLottoNumbers, AUTO_GAME_COUNT);
+        lottoTicket = new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(AUTO_GAME_COUNT));
 
     }
 

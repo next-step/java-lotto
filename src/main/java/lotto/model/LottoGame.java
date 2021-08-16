@@ -13,28 +13,25 @@ public class LottoGame {
     private static final int MATCHED_BONUS_COUNT = 5;
 
     private int purchaseAmount = 0;
-    private int autoGameCount = 0;
-    private int manualGameCount = 0;
-    private int totalGameCount = 0;
 
     private WinningNumbers winningNumbers;
 
-    public LottoTicket getLottoTicket(ManualLottoNumbers manualLottoNumbers) {
-        return new LottoTicket(manualLottoNumbers, this.autoGameCount);
+    public LottoTicket getLottoTicket(ManualLottoNumbers manualLottoNumbers, int autoGameCount) {
+        return new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(autoGameCount));
     }
 
     public int getLottoAmount(int purchaseAmount) {
         if (purchaseAmount <= DEFAULT_LOTTO_AMOUNT) {
             return DEFAULT_LOTTO_AMOUNT;
         }
+        int manualGameCount = 0;
         this.purchaseAmount = purchaseAmount;
-        this.totalGameCount = purchaseAmount / LOTTO_PRICE;
-        this.autoGameCount = totalGameCount - manualGameCount;
+        int totalGameCount = purchaseAmount / LOTTO_PRICE;
         if (totalGameCount - manualGameCount < 0) {
             return DEFAULT_LOTTO_AMOUNT;
         }
 
-        return this.totalGameCount;
+        return totalGameCount;
     }
 
     public void settingWinningNumber(String numberText, int bonusNumber) {

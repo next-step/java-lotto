@@ -28,8 +28,8 @@ public class LottoController {
         if (lottoAmount == DEFAULT_LOTTO_AMOUNT) {
             return;
         }
-
-        LottoTicket lottoTicket = lottoGame.getLottoTicket(manualLottoNumbers);
+        int autoCount = lottoAmount - manualLottoNumbers.getManualLottoNumbers().size();
+        LottoTicket lottoTicket = lottoGame.getLottoTicket(manualLottoNumbers, autoCount);
         Result.printLottoNumbers(lottoTicket.getLottoTicketInfo());
 
         gameStart(lottoTicket);

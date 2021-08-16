@@ -20,7 +20,7 @@ public class LottoNumberPicker {
 
     public static List<LottoNumber> pickNumber() {
         Collections.shuffle(numbers);
-        return numbers.subList(0, LOTTO_NUMBER_SIZE);
+        return new ArrayList<>(numbers.subList(0, LOTTO_NUMBER_SIZE));
     }
 
     public static LottoNumber pickNumber(int number) {
