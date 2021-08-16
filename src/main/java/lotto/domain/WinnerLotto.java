@@ -9,8 +9,15 @@ public class WinnerLotto {
     private LottoNumber bonusNumber;
 
     public WinnerLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validate(Lotto lotto, LottoNumber bonusNumber) {
+        if(lotto.getNumbers().contains(bonusNumber)){
+            throw new IllegalArgumentException("로또번호와 보너스 번호가 중복입니다. bonusNumber : " + bonusNumber.getLottoNumber());
+        }
     }
 
     public Award drawLotto(Set<LottoNumber> lottoNumbers) {
