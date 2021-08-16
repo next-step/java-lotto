@@ -15,9 +15,8 @@ public class LottoController {
     public void run(){
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LottoResult lottoResult = new LottoResult();
 
-        int price = Integer.parseInt(inputView.inputPrice());
+        int price = inputView.inputPrice();
         LottoGame lottoGame = new LottoGame(price, new LottoNumberRandomSelector());
 
         outputView.printGameSize(lottoGame.getLottoTicketSize());
@@ -32,6 +31,8 @@ public class LottoController {
 
         LottoNumbers winningNumbers = new LottoNumbers(numbers);
         lottoGame.checkResult(winningNumbers);
+
+        LottoResult lottoResult = new LottoResult();
         lottoResult.setResult(lottoGame.getLotto());
 
         outputView.printResult(lottoResult.getResult());
