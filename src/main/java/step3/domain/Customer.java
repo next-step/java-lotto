@@ -2,7 +2,6 @@ package step3.domain;
 
 import step3.util.Rank;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +42,9 @@ public class Customer {
         return resultRankMap;
     }
 
-
-
     public void getMatchedNumber(List<Integer> issuedLotto, List<Integer> winningLottoNumberList, int bonusNumber) {
         boolean isMatched = false;
-        isMatched = compareWithBonusBall(issuedLotto, bonusNumber);
+        isMatched = issuedLotto.contains(bonusNumber);
 
         issuedLotto.retainAll(winningLottoNumberList);
         int matchedNumber = issuedLotto.size();
@@ -56,10 +53,4 @@ public class Customer {
         resultRankMap.put(rank,resultRankMap.get(rank)+1);
         resultPrize += rank.getWinningMoney();
     }
-
-    private boolean compareWithBonusBall(List<Integer> issuedLotto, int bonusNumber) {
-        return issuedLotto.contains(bonusNumber);
-    }
-
-
 }

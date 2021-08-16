@@ -1,7 +1,9 @@
 package step3.util;
 
+import java.util.Arrays;
+
 public enum Rank {
-    FIRST(6, 2_000_000_000),
+    FIRST(6,2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
@@ -14,6 +16,7 @@ public enum Rank {
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+
     }
 
     public int getCountOfMatch() {
@@ -25,21 +28,12 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch == Rank.FIRST.getCountOfMatch()) {
-            return FIRST;
-        }
-        if (countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus) {
+        if (countOfMatch == SECOND.getCountOfMatch() && matchBonus) {
             return SECOND;
         }
-        if (countOfMatch == Rank.THIRD.getCountOfMatch() && !matchBonus) {
-            return THIRD;
-        }
-        if (countOfMatch == Rank.FOURTH.getCountOfMatch()) {
-            return FOURTH;
-        }
-        if (countOfMatch == Rank.FIFTH.getCountOfMatch()) {
-            return FIFTH;
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .findFirst()
+                .orElse(MISS);
     }
 }
