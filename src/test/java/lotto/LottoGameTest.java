@@ -1,7 +1,7 @@
 package lotto;
 
+import lotto.model.AutoLottoNumbers;
 import lotto.model.LottoGame;
-import lotto.model.LottoNumbers;
 import lotto.model.LottoTicket;
 import lotto.model.ManualLottoNumbers;
 import lotto.type.Winning;
@@ -24,20 +24,19 @@ public class LottoGameTest {
 
     LottoGame lottoGame = new LottoGame();
     LottoTicket lottoTicket;
-    ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers();
+    ManualLottoNumbers manualLottoNumbers;
 
 
     @BeforeEach
     void settingGame() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoGame.settingWinningNumber(TEST_WINNING_NUMBER, 1);
         List<String> manualNumbers = new ArrayList<>();
         manualNumbers.add(TEST_WINNING_NUMBER);
         manualNumbers.add("1,4,6,8,10,12");
         manualNumbers.add("3,4,6,8,10,12");
         manualNumbers.add("3,5,7,9,11,13");
-        manualLottoNumbers.setManualLottoNumbers(manualNumbers);
-        lottoTicket = new LottoTicket(manualLottoNumbers, 0);
+        manualLottoNumbers = new ManualLottoNumbers(manualNumbers);
+        lottoTicket = new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(0));
     }
 
     @Test
@@ -49,7 +48,7 @@ public class LottoGameTest {
     @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
     void 로또_산만큼_로또_자동_생성(int amount, int gameCount) {
         lottoGame.getLottoAmount(amount);
-        LottoTicket lottoTicket = lottoGame.getLottoTicket(null);
+        LottoTicket lottoTicket = lottoGame.getLottoTicket(null, gameCount);
         assertThat(lottoTicket.getLottoTicketInfo().size()).isEqualTo(gameCount);
     }
 

@@ -6,14 +6,16 @@ import java.util.List;
 
 public class ManualLottoNumbers {
 
-    private List<LottoNumbers> manualLottoNumbers;
+    private final List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
 
-    public ManualLottoNumbers setManualLottoNumbers(List<String> manualNumbers) {
-        manualLottoNumbers = new ArrayList<>();
-        for (String numbers : manualNumbers) {
-            manualLottoNumbers.add(new LottoNumbers(numbers));
+    public ManualLottoNumbers(List<String> lottoNumbers) {
+        for (String numbers : lottoNumbers) {
+            this.manualLottoNumbers.add(new LottoNumbers(numbers));
         }
-        return this;
+    }
+
+    public boolean emptyNumbers() {
+        return this.manualLottoNumbers.size() == 0;
     }
 
     public List<LottoNumbers> getManualLottoNumbers() {

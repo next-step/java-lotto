@@ -20,12 +20,12 @@ public class LottoTicketTest {
     ManualLottoNumbers manualLottoNumbers;
     @BeforeEach
     void setting() {
-        manualLottoNumbers = new ManualLottoNumbers();
+
         List<String> manualNumbers = new ArrayList<>();
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("1,2,3,4,5,6");
-        manualLottoNumbers.setManualLottoNumbers(manualNumbers);
+        manualLottoNumbers = new ManualLottoNumbers(manualNumbers);
         lottoTicket = new LottoTicket(manualLottoNumbers, new AutoLottoNumbers(AUTO_GAME_COUNT));
 
     }

@@ -16,8 +16,7 @@ public class ManualLottoNumbersTest {
 
     @Test
     void 수동_생성_숫자_체크() {
-        ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers();
-        manualLottoNumbers.setManualLottoNumbers(Arrays.asList(MANUAL_LOTTO_NUMBER));
+        ManualLottoNumbers manualLottoNumbers = new ManualLottoNumbers(Arrays.asList(MANUAL_LOTTO_NUMBER));
         for (String number : MANUAL_LOTTO_NUMBER.split(",")) {
             assertThatThrownBy(() -> {
                 LottoNumberUtil.containsNumber(

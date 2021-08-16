@@ -16,7 +16,7 @@ public class LottoTicket {
 
     public List<LottoNumbers> getLottoTicketInfo() {
         List<LottoNumbers> totalLottoNumbers = new ArrayList<>();
-        if (manualLottoNumbers != null && manualLottoNumbers.getManualLottoNumbers().size() > 0) {
+        if (manualLottoNumbers != null && !manualLottoNumbers.emptyNumbers()) {
             totalLottoNumbers.addAll(manualLottoNumbers.getManualLottoNumbers());
         }
         totalLottoNumbers.addAll(autoLottoNumbers.getAutoLottoNumbers());

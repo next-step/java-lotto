@@ -38,8 +38,8 @@ public class LottoController {
     private ManualLottoNumbers manualGameSetting() {
         int manualLottoNumber = Input.getManualGameCount();
         List<String> manualNumbers = Input.getManualNumbers(manualLottoNumber);
-        ManualLottoNumbers lottoNumbers = new ManualLottoNumbers();
-        return lottoNumbers.setManualLottoNumbers(manualNumbers);
+        ManualLottoNumbers lottoNumbers = new ManualLottoNumbers(manualNumbers);
+        return lottoNumbers;
     }
 
     private void gameStart(LottoTicket lottoTicket) {
