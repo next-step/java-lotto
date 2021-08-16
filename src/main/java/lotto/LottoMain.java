@@ -1,15 +1,17 @@
 package lotto;
 
-import lotto.domain.*;
-import lotto.domain.dto.LottoPurchaseResponse;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinnerLotto;
+import lotto.domain.dto.LottoDrawResult;
+import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
 import lotto.util.LottoListGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,14 +21,15 @@ public class LottoMain {
         int ticketNumber = lottoPurchaseAmount / 1000;
 
         LottoGame lottoGame = new LottoGame();
-        LottoPurchaseResponse lottoPurchaseResponse = lottoGame.purchase(LottoListGenerator.creatLottos(ticketNumber));
+        LottoPurchaseResult lottoPurchaseResponse = lottoGame.purchase(LottoListGenerator.creatLottos(ticketNumber));
         ResultView.printPurchaseLottos(lottoPurchaseResponse);
 
-        Map<Award, Long> lottoResult = lottoGame.drawLotto(getWinnerLotto());
-        List<LottoWinnersDto> lottoWinnersDtos = createLottoWinnerDtos(lottoResult);
+        LottoDrawResult lottoResult = lottoGame.drawLotto(getWinnerLotto());
+        List<LottoWinnersDto> lottoWinnersDtos = lottoResult.createLottoWinnerDtos();
+        double yield = lottoResult.calculateYield(lottoPurchaseAmount);
 
         ResultView.printWinners(lottoWinnersDtos);
-        ResultView.printYield(lottoWinnersDtos, lottoPurchaseAmount);
+        ResultView.printYield(yield);
     }
 
     private static WinnerLotto getWinnerLotto() {
@@ -39,23 +42,4 @@ public class LottoMain {
         return new WinnerLotto(lotto, bonusLottoNumber);
     }
 
-    private static List<LottoWinnersDto> createLottoWinnerDtos(Map<Award, Long> lottoResult) {
-        Map<Award, Long> result = formatResult(lottoResult);
-        return result.entrySet().stream()
-                .filter(e -> isNotBang(e.getKey()))
-                .map(e -> new LottoWinnersDto(e.getKey(), e.getValue()))
-                .collect(Collectors.toList());
-    }
-
-    private static Map<Award, Long> formatResult(Map<Award, Long> lottoResult) {
-        Map<Award, Long> result = new HashMap(lottoResult);
-        for (Award award : Award.values()) {
-            result.putIfAbsent(award, 0L);
-        }
-        return result;
-    }
-
-    private static boolean isNotBang(Award award) {
-        return !award.equals(Award.BANG);
-    }
 }

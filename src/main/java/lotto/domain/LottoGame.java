@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoPurchaseResponse;
+import lotto.domain.dto.LottoDrawResult;
+import lotto.domain.dto.LottoPurchaseResult;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoGame {
     private Lottos lottos;
 
-    public LottoPurchaseResponse purchase(List<Lotto> lottoList) {
+    public LottoPurchaseResult purchase(List<Lotto> lottoList) {
         this.lottos = new Lottos(lottoList);
-        return new LottoPurchaseResponse(lottos);
+        return new LottoPurchaseResult(lottos);
     }
 
-    public Map<Award, Long> drawLotto(WinnerLotto winnerLotto) {
-        return lottos.drawLottos(winnerLotto);
+    public LottoDrawResult drawLotto(WinnerLotto winnerLotto) {
+        return new LottoDrawResult(lottos.drawLottos(winnerLotto));
     }
 }

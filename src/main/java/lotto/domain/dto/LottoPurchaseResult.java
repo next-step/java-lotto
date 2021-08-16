@@ -5,10 +5,10 @@ import lotto.domain.Lottos;
 
 import java.util.List;
 
-public class LottoPurchaseResponse {
+public class LottoPurchaseResult {
     private List<Lotto> lottoList;
 
-    public LottoPurchaseResponse(Lottos lottos) {
+    public LottoPurchaseResult(Lottos lottos) {
         lottoList = lottos.getLottos();
     }
 
