@@ -33,8 +33,8 @@ public class LottoResult {
 
     public int calculateWinningPrice() {
         int sum = 0;
-        for (LottoRank lottoRank : LottoRank.values()) {
-            sum += result.get(lottoRank) * lottoRank.getPrice();
+        for(Map.Entry<LottoRank, Integer> entry : result.entrySet()){
+            sum += entry.getValue() * entry.getKey().getPrice();
         }
         return sum;
     }
