@@ -25,6 +25,7 @@ public class AutoTicketMaker implements TicketMaker {
         shuffleNumbers();
         List<Integer> ticketNumbers =
                 new ArrayList<>(NUMBERS.subList(INDEX_FROM_TICKET_NUMBERS, INDEX_TO_TICKET_NUMBERS));
+        Collections.sort(ticketNumbers);
         return Ticket.of(ticketNumbers);
     }
 
