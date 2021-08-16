@@ -7,19 +7,15 @@ public class LottoGame {
 
     public LottoGame(final int price, final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
         this.price = price;
-        lotto = buyLotto(lottoNumberSelectPolicy);
+        this.lotto = new Lotto(price, lottoNumberSelectPolicy);
     }
 
-    public int getLottoTicketSize() {
+    public int size() {
         return lotto.getTicketSize();
     }
 
     public Lotto getLotto() {
         return lotto;
-    }
-
-    private Lotto buyLotto(final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        return new Lotto(price, lottoNumberSelectPolicy);
     }
 
     public void checkResult(final LottoNumbers lottoNumbers) {
