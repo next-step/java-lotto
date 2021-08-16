@@ -19,4 +19,8 @@ public class LottoResult {
     public Rank getRank() {
         return rank;
     }
+
+    public long getPrizeMoney() {
+        return rank.getPrizeMoney();
+    }
 }

@@ -14,31 +14,25 @@ import java.util.stream.Collectors;
 
 public class Client {
 
-    private long money = 0;
+    private Money money;
     private Lottos lottos;
 
     public Client(long money) {
-        this.money = money;
+        this.money = new Money(money);
     }
 
     public void buyLotto(Lottos lottos) {
-        validateBuyableLotto(lottos);
+        int lottoPrice = lottos.price();
         this.lottos = lottos;
-        this.money -= lottos.price();
+        this.money.minus(lottoPrice);
     }
 
     public long buyableLottoCount() {
-        return money / Lotto.PRICE;
-    }
-
-    private void validateBuyableLotto(Lottos lottos) {
-        int lottosPrice = lottos.price();
-        if (money - lottosPrice < 0)
-            throw new NotEnoughMoneyException("로또 살 돈이 부족합니다");
+        return money.getValue() / Lotto.PRICE;
     }
 
     public long remainMoney() {
-        return this.money;
+        return this.money.getValue();
     }
 
     public ResultStatistic calculateResultStatistic(TotalLottoNumber totalLottoNumber) {

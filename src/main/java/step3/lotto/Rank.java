@@ -1,13 +1,15 @@
 package step3.lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
 
-    FIRST(6,2_000_000_000),
-    SECOND(5,30_000_000),
-    THIRD(5,1_500_000),
-    FOURTH(4,50_000),
-    FIFTH(3,5_000),
-    MISS(0,0);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private final long countOfMatch;
     private final long prizeMoney;
@@ -18,27 +20,25 @@ public enum Rank {
     }
 
     public static Rank valueOf(long countOfMatch, boolean matchBonus) {
-        if (countOfMatch == FIRST.getCountOfMatch()) {
-            return Rank.FIRST;
-        }
+        return Arrays.stream(values())
+                .filter(rank -> findByCountOfMatch(rank, countOfMatch))
+                .map(rank -> convertIfThird(rank, matchBonus))
+                .findFirst()
+                .orElse(MISS);
+    }
 
-        if (countOfMatch == SECOND.getCountOfMatch() && matchBonus) {
-            return Rank.SECOND;
-        }
+    private static boolean findByCountOfMatch(Rank rank, long countOfMatch) {
+        return rank.getCountOfMatch() == countOfMatch;
+    }
 
-        if (countOfMatch == THIRD.getCountOfMatch()) {
-            return Rank.THIRD;
-        }
+    private static Rank convertIfThird(Rank rank, boolean matchBonus) {
+        if (isThird(rank, matchBonus))
+            return THIRD;
+        return rank;
+    }
 
-        if (countOfMatch == FOURTH.getCountOfMatch()) {
-            return Rank.FOURTH;
-        }
-
-        if (countOfMatch == FIFTH.getCountOfMatch()) {
-            return Rank.FIFTH;
-        }
-
-        return Rank.MISS;
+    private static boolean isThird(Rank rank, boolean matchBonus) {
+        return rank == SECOND && !matchBonus;
     }
 
     public long getCountOfMatch() {

@@ -17,7 +17,7 @@ public class LottoResults {
 
     public long sumOfPrizeMoney() {
         return lottoResults.stream()
-                .mapToLong(lottoResult -> lottoResult.getRank().getPrizeMoney())
+                .mapToLong(LottoResult::getPrizeMoney)
                 .sum();
     }
 }
