@@ -9,6 +9,7 @@ public class Lotto {
     private List<Number> numbers = new ArrayList<>();
     private static final int FIRST = 0;
     private static final int MAX_SIZE = 6;
+    private static final int SECOND_ORDER = 1;
 
     public Lotto(List<Number> shuffleNumbers) {
         numbers.addAll(shuffleNumbers);
@@ -28,8 +29,8 @@ public class Lotto {
 
     public boolean isSorted() {
         Number number = numbers.get(FIRST);
-        for (int i = 1; i < numbers.size(); i++) {
-            Number nextNumber = numbers.get(i);
+        for (int currentOrder = SECOND_ORDER; currentOrder < numbers.size(); currentOrder++) {
+            Number nextNumber = numbers.get(currentOrder);
             if (number.isBiggerThan(nextNumber)) {
                 return false;
             }

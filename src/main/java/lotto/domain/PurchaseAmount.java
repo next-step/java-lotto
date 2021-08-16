@@ -3,6 +3,8 @@ package lotto.domain;
 public class PurchaseAmount {
 
     private int cash;
+    private static final int PURCHASE_AMOUNT_UNIT = 1000;
+    private static final int ZERO_CASH = 0;
 
     public PurchaseAmount(int cash) {
         validateCash(cash);
@@ -10,7 +12,7 @@ public class PurchaseAmount {
     }
 
     public int purchases() {
-        return cash / 1000;
+        return cash / PURCHASE_AMOUNT_UNIT;
     }
 
     public int cash() {
@@ -19,11 +21,11 @@ public class PurchaseAmount {
 
     private void validateCash(int cash) {
 
-        if (cash < 1000) {
+        if (cash < PURCHASE_AMOUNT_UNIT) {
             throw new IllegalArgumentException("최소 구매 금액이 1000원 입니다.(1장당 1000원)");
         }
 
-        if ((cash % 1000) > 0) {
+        if ((cash % PURCHASE_AMOUNT_UNIT) > ZERO_CASH) {
             throw new IllegalArgumentException("구매금액은 1000원 단위 입니다.");
         }
 

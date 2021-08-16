@@ -11,6 +11,9 @@ import static java.lang.System.out;
 public class ResultView {
 
     private static final ResultView RESULT_VIEW = null;
+    private static final String WINNING_STATS = "\n당첨 통계----------\n";
+    private static final String PRINT_WINNER_FORM = "%s개 일치 (%s원)- %s개%n";
+    private static final String PRINT_PROFIT_RATE_FORM = "총 수익률은 %s%n";
 
     public static synchronized ResultView getInstance() {
         if (RESULT_VIEW == null) {
@@ -28,15 +31,16 @@ public class ResultView {
     }
 
     public void printWinners(Map<Winner, Integer> winnersInfo) {
-        out.println("\n당첨 통계");
-        out.println("----------");
+        out.println(WINNING_STATS);
+
         winnersInfo.keySet().stream()
-                .map(winner -> winner.getMatchCount() + "개 일치 (" + winner.getCash() + "원)- " + winnersInfo.get(winner) + "개")
-                .forEach(out::println);
+                .forEach(winner -> {
+                    out.printf(PRINT_WINNER_FORM, winner.getMatchCount(), winner.getCash(), winnersInfo.get(winner));
+                });
     }
 
-    public void printTotalRevenue(int buyCash, double raffleCash) {
-        out.println("총 수익률은 " + String.format("%.2f", raffleCash / (buyCash * 1000)));
+    public void printProfitRate(int buyCash, double raffleCash) {
+        out.printf(PRINT_PROFIT_RATE_FORM, String.format("%.2f", raffleCash / buyCash * 1000));
     }
 
 }

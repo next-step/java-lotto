@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
+    private static final int FIRST_PURCHASE_COUNT = 0;
+    private static final int WINNING_COUNT = 1;
 
     public void create(PurchaseAmount purchaseAmount) {
         int maxPurchases = purchaseAmount.purchases();
 
-        for (int i = 0; i < maxPurchases; i++) {
+        for (int currentPurchase = FIRST_PURCHASE_COUNT; currentPurchase < maxPurchases; currentPurchase++) {
             Lotto lotto = new Lotto(CollectionUtil.createRandomNumbers());
             lottos.add(lotto);
         }
@@ -32,8 +34,8 @@ public class Lottos {
         Map<Winner, Integer> winnerRanks = Winner.makeWinnerMap();
         matchCounts.forEach(matchCount -> {
             Winner winnerInfo = Winner.find(matchCount);
-            Integer count = winnerRanks.get(winnerInfo);
-            winnerRanks.put(winnerInfo, count + 1);
+            Integer currentCount = winnerRanks.get(winnerInfo);
+            winnerRanks.put(winnerInfo, currentCount + WINNING_COUNT);
         });
         return winnerRanks;
     }

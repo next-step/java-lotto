@@ -16,9 +16,11 @@ public class LottoController {
 
     public void run() {
         Lottos lottos = buyLotto();
-        double raffleCash = raffle(lottos);
+        Map<Winner, Integer> winningInfo = raffle(lottos);
+        double raffleCash = caculateWinningCash(winningInfo);
 
-        resultView.printTotalRevenue(lottos.findAll().size(), raffleCash);
+        resultView.printWinners(winningInfo);
+        resultView.printProfitRate(lottos.findAll().size(), raffleCash);
     }
 
     private Lottos buyLotto() {
@@ -31,11 +33,14 @@ public class LottoController {
         return lottos;
     }
 
-    private double raffle(Lottos lottos) {
-        List<Number> winnerNumbers = inputView.inputWinnerNumbers();
-        Map<Winner, Integer> map = lottos.findWinners(winnerNumbers);
+    private double caculateWinningCash(Map<Winner, Integer> map) {
         return map.keySet().stream()
                 .mapToDouble(winner -> winner.getCash() * map.get(winner))
                 .sum();
+    }
+
+    private Map<Winner, Integer> raffle(Lottos lottos) {
+        List<Number> winnerNumbers = inputView.inputWinnerNumbers();
+        return lottos.findWinners(winnerNumbers);
     }
 }
