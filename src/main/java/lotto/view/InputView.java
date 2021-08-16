@@ -20,17 +20,17 @@ public class InputView {
     public static List<Integer> readNumbers() {
         List<Integer> numbers = Collections.emptyList();
         while (numbers.size() != Lotto.LOTTO_NUMBER_SIZE) {
-            String raw = getRawString();
+            String raw = getRawString("지난 주 당첨 번호를 입력해 주세요. (1 ~ 45 사이의 distinct 한 6개 숫자로 입력)");
             numbers = translateNumbers(raw);
         }
 
         return numbers;
     }
 
-    private static String getRawString () {
+    private static String getRawString (String message) {
         String raw = null;
         while (raw == null || raw.isEmpty()) {
-            System.out.println("지난 주 당첨 번호를 입력해 주세요. (1 ~ 45 사이의 distinct 한 6개 숫자로 입력)");
+            System.out.println(message);
             raw = scanner.nextLine();
         }
         return raw;
@@ -42,5 +42,11 @@ public class InputView {
                 .map(Integer::parseInt)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    public static int readBonusNumber() {
+        String raw = getRawString("보너스 볼을 입력해 주세요.");
+
+        return Integer.parseInt(raw);
     }
 }

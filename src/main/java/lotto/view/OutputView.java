@@ -28,8 +28,12 @@ public class OutputView {
         System.out.println("---------");
         for (LottoPlace result : LottoPlace.values()) {
             if (result == LottoPlace.LOSE) continue;
-            System.out.println(result.getFirstCorrectCount() + "개 일치(" + result.getWinningPrice().getAmount() + "원) - " + statistics.count(result) + "개");
+            System.out.println(buildResultString(statistics, result));
         }
         System.out.println("총 수익률은 " + statistics.calculateProfitRate() + "입니다.");
+    }
+
+    private static String buildResultString(LottoStatistics statistics, LottoPlace result) {
+        return result.getFirstCorrectCount() + "개 일치" + (result.getBonusState().isHit() ? ", 보너스 볼 일치 " : "") + "(" + result.getWinningPrice().getAmount() + "원) - " + statistics.count(result) + "개";
     }
 }
