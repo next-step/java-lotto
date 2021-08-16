@@ -16,8 +16,8 @@ public class Main {
         ResultView.print(lottoTickets.getLottoTickets());
 
         LottoNumbers winningNumbers = LottoNumbersFactory.makeLottoNumbers(inputView.receiveWinningNumbers());
-        int bonusNumber = inputView.receiveBonusNumber();
-        Result result = lottoTickets.check(new WinningNumbers(winningNumbers, new LottoNumber(bonusNumber)));
+        LottoNumber bonusNumber = new LottoNumber(inputView.receiveBonusNumber());
+        Result result = lottoTickets.check(new WinningNumbers(winningNumbers, bonusNumber));
 
         ResultView.print(result);
         scanner.close();
