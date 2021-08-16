@@ -1,32 +1,20 @@
 package lotto.domain;
 
+import lotto.exception.InputError;
+
 import java.util.List;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<LottoNumbers> lottos;
 
-    public Lottos(final List<Lotto> lottos) {
+    public Lottos(final List<LottoNumbers> lottos) {
+        if (lottos == null || lottos.size() == 0) {
+            throw new InputError("구매한 로또가 없습니다.");
+        }
         this.lottos = lottos;
     }
 
-    public int findRankCount(final Lotto win, final Rank rank) {
-        return (int) lottos.stream()
-                .filter(lotto -> Rank.findRank(lotto.countSameNumber(win)) == rank)
-                .count();
-    }
-
-    public int totalEarnings(final Lotto win) {
-        return lottos.stream()
-                .map(lotto -> lotto.findLottoRank(win).getRewards())
-                .reduce(0, Integer::sum);
-    }
-
-    public double calculateProfit(final Lotto win, int money) {
-        return (double) totalEarnings(win) / (double) money;
-    }
-
-    public List<Lotto> getValue() {
+    public List<LottoNumbers> value() {
         return lottos;
     }
-
 }

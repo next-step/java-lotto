@@ -1,68 +1,21 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import lotto.exception.InputError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottosTest {
 
-    private Lotto win;
-    private Lottos lottos;
-
-    @BeforeEach
-    void setup() {
-        win = new Lotto(Arrays.asList(1, 4, 5, 6, 7, 23));
-        lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), // 3
-                new Lotto(Arrays.asList(4, 5, 6, 7, 9, 23)), // 2
-                new Lotto(Arrays.asList(8, 9, 10, 11, 12, 14, 15))));
-    }
-
-    @DisplayName("로또 2개 구입")
+    @DisplayName("null 또는 size 가 0 일 때, 로또리스트 생성 에러")
     @Test
-    void create() {
-        Lotto one = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto two = new Lotto(Arrays.asList(7, 8, 9, 10, 12, 13));
-
-        assertThat(new Lottos(Arrays.asList(one, two)).getValue())
-                .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        new Lotto(Arrays.asList(7, 8, 9, 10, 12, 13)));
+    void createError(){
+        assertThatThrownBy(() -> new Lottos(null))
+                .isInstanceOf(InputError.class);
+        assertThatThrownBy(() -> new Lottos(new ArrayList<>()))
+                .isInstanceOf(InputError.class);
     }
-
-
-    @DisplayName("로또 랭크 구하기")
-    @Test
-    void findRank() {
-        assertThat(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
-                .findRankCount(win, Rank.FIRST)).isEqualTo(0);
-        assertThat(new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 23, 4, 5, 6, 7))))
-                .findRankCount(win, Rank.FIRST)).isEqualTo(1);
-
-        Lotto a = new Lotto(Arrays.asList(10, 15, 27, 31, 37, 39));
-        Lotto b = new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37));
-        Lotto c = new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37));
-        assertThat(new Lottos(Arrays.asList(a, b, c))
-                .findRankCount(new Lotto(Arrays.asList(20, 23, 25, 27, 36, 37)), Rank.FIRST))
-                .isEqualTo(2);
-    }
-
-    @DisplayName("로또 총 수입 구하기")
-    @Test
-    void totalEarnings() {
-        assertThat(lottos.totalEarnings(win))
-                .isEqualTo(Rank.SECOND.getRewards() + Rank.THIRD.getRewards());
-    }
-
-    @DisplayName("총 수익률 구하기")
-    @Test
-    void calculate() {
-        int money = 2000 * lottos.getValue().size();
-        assertThat(lottos.calculateProfit(win, money))
-                .isEqualTo((double) (Rank.SECOND.getRewards() + Rank.THIRD.getRewards()) / (double) money);
-    }
-
 }

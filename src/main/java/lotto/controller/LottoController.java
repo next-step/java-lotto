@@ -1,38 +1,23 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.RandomNumber;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoController {
 
-    private static final int LOTTO_PRICE = 1000;
+    public void runAutoLotto() {
+        int money = InputView.buyLotto();
+        LottoCreator lottoCreator = new LottoCreator(money);
+        Lottos lottos = new Lottos(lottoCreator.createLottos(new RandomNumbers()));
+        ResultView.printBuyLotto(lottos.value());
 
-    public void playLotto() {
-        int lottoCount = InputView.buyLotto();
+        LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputWinningNumber());
+        LottoMatcher lottoMatcher = new LottoMatcher(winningLottoNumbers, lottos);
+        LottoResults lottoResults = new LottoResults(lottoMatcher.classifyByRank());
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto(RandomNumber.makeLottoNumbers());
-            lottos.add(lotto);
-            ResultView.printLotto(lotto);
-        }
-
-        Lottos player = new Lottos(lottos);
-        Lotto win = new Lotto(InputView.inputWinningNumber());
-
-        ResultView.printWinTitle();
-        for (Rank rank : Rank.values()) {
-            if (rank.equals(Rank.NOTHING)) continue;
-            ResultView.printRankCount(rank, player.findRankCount(win, rank));
-        }
-
-        ResultView.printProfit(player.calculateProfit(win, lottoCount * LOTTO_PRICE));
+        ResultView.printResultTitle();
+        ResultView.printRankCount(lottoResults.value());
+        ResultView.printProfit(lottoResults.calculateTotalRewardsRatio(money));
     }
 }

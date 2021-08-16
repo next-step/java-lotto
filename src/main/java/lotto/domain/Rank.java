@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -26,6 +28,12 @@ public enum Rank {
                 .orElseThrow(() -> new IllegalArgumentException("맞는 랭크가 없습니다."));
     }
 
+    public static List<Rank> valuesExcludeNoRewards(){
+        return Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.NOTHING))
+                .collect(Collectors.toList());
+    }
+
     public int getMatch() {
         return match;
     }
@@ -33,4 +41,5 @@ public enum Rank {
     public int getRewards() {
         return rewards;
     }
+
 }
