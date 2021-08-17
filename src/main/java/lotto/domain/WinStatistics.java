@@ -32,7 +32,7 @@ public class WinStatistics {
             .stream()
             .mapToLong(e -> calculatePrizeMoney(e.getKey(), e.getValue()))
             .sum();
-        return (float)(Math.floor(prizeMoneySum / (winStatistics.size() * 10.0f)) / 100.0f);
+        return (float) (Math.floor(prizeMoneySum / (winStatistics.size() * 10.0f)) / 100.0f);
     }
 
     public Map<Rank, Integer> result() {
