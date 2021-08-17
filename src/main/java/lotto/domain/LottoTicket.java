@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +9,10 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
     private final static int LOTTO_BALLS_MAX_NUM = 6;
+    private static final List<Integer> LOTTO_BALLS =
+        IntStream.rangeClosed(LottoBall.LOTTO_BALL_NUMBER_MIN, LottoBall.LOTTO_BALL_NUMBER_MAX)
+            .boxed()
+            .collect(Collectors.toList());
 
     private final Set<LottoBall> lottoBalls;
 
@@ -27,15 +30,9 @@ public class LottoTicket {
     }
 
     public static LottoTicket createRandomNumber() {
-        List<Integer> randomNumbers = IntStream
-            .rangeClosed(LottoBall.LOTTO_BALL_NUMBER_MIN, LottoBall.LOTTO_BALL_NUMBER_MAX)
-            .boxed()
-            .collect(Collectors.toList());
+        Collections.shuffle(LOTTO_BALLS);
 
-        Collections.shuffle(randomNumbers);
-        randomNumbers = new ArrayList<>(randomNumbers.subList(0, LOTTO_BALLS_MAX_NUM));
-
-        return LottoTicket.of(randomNumbers.stream()
+        return LottoTicket.of(LOTTO_BALLS.subList(0, LOTTO_BALLS_MAX_NUM).stream()
             .mapToInt(Integer::intValue)
             .toArray());
     }
@@ -52,7 +49,7 @@ public class LottoTicket {
     }
 
     public int countMatchNumber(LottoTicket winnerNumbers) {
-        return (int)lottoBalls.stream()
+        return (int) lottoBalls.stream()
             .filter(winnerNumbers::contains)
             .count();
     }
