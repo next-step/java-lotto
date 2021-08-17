@@ -69,6 +69,9 @@ public class LottoController {
     private Chance resolveAutoChance(Money purchaseAmount, Chance manualChance) {
         ChanceResolver resolver = new ChanceResolver();
         Chance totalChance = resolver.resolveFromPurchaseAmount(purchaseAmount);
+        if (!totalChance.isBiggerOrEqualThan(manualChance)) {
+            throw new IllegalStateException("수동 입력 횟수가 전체 실행 횟수보다 클 수 없습니다.");
+        }
         return totalChance.subtract(manualChance);
     }
 

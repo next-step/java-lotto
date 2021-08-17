@@ -51,6 +51,18 @@ public class ChanceTest {
     }
 
     @Test
+    public void Chance에서_빼기를_할_때_다른_Chance가_더_크면_뺄_수_없고_익셉션이_발생한다(){
+        //given
+        Chance chance1 = new Chance(3);
+        Chance chance2 = new Chance(10);
+        //when
+        //then
+        assertThatThrownBy(() -> chance1.subtract(chance2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("더 큰 수의 찬스를 뺄 수 없습니다.");
+    }
+
+    @Test
     public void Chance가_다른_Chance보다_큰지_확인할_수_있다(){
         //given
         Chance chance1 = new Chance(10);

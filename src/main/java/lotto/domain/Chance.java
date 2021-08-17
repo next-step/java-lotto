@@ -18,7 +18,7 @@ public class Chance {
 
     public Chance subtract(Chance chance) {
         if (!this.isBiggerOrEqualThan(chance)) {
-            throw new IllegalArgumentException("더 큰 수의 기회를 뺄 수 없습니다.");
+            throw new IllegalArgumentException("더 큰 수의 찬스를 뺄 수 없습니다.");
         }
         return new Chance(this.value - chance.value);
     }
