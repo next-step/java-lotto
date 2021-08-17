@@ -8,13 +8,19 @@ public class InputView {
 
     public static int inputPayment() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        try {
+            String inputValue = scanner.nextLine();
+            return Integer.parseInt(inputValue);
+        } catch (NumberFormatException e) {
+            System.out.println("금액은 숫자만 입력 가능 합니다.");
+            System.exit(0);
+            return 0;
+        }
     }
 
     public static String inputWinningNumbers() {
-        Scanner scanner2 = new Scanner(System.in); // 전역 변수 지정한 Scanner 로 실행 시 입력 없이 지나가버림..
         System.out.println(System.lineSeparator() + "당첨 번호를 입력해 주세요.");
-        return scanner2.nextLine();
+        return scanner.nextLine();
     }
 
 }
