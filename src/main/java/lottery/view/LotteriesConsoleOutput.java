@@ -38,7 +38,7 @@ public class LotteriesConsoleOutput {
     }
 
     private static String getPrefix(final LotteryQuantityDto lotteryQuantityDto, final List<LotteryDto> lotteryDtos) {
-        return MANUAL + lotteryQuantityDto.getQuantity() + AND + lotteryDtos.size() + PURCHASE_COUNT;
+        return MANUAL + lotteryQuantityDto.getQuantity() + AND + (lotteryDtos.size() - lotteryQuantityDto.getQuantity()) + PURCHASE_COUNT;
     }
 
     private static String getLotteryNumbersAsString(final LotteryDto lotteryDto) {

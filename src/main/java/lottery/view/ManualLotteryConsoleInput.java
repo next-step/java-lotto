@@ -1,6 +1,5 @@
 package lottery.view;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,13 +12,13 @@ public class ManualLotteryConsoleInput {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String askManualLotteryQuantity() {
+    public static String askLotteryQuantity() {
         System.out.println(MANUAL_LOTTERY_QUANTITY_QUESTION);
         return scanner.nextLine();
     }
 
-    public static List<String> askManualLotteryNumbers(IntStream quantityStream) {
-        return quantityStream
+    public static List<String> askLotteries(int quantity) {
+        return IntStream.range(0, quantity)
                 .peek(ManualLotteryConsoleInput::askQuestionIfFirst)
                 .mapToObj(i -> scanner.nextLine())
                 .collect(Collectors.toList());
