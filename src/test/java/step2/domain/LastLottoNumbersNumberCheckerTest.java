@@ -8,7 +8,7 @@ import step2.util.LastWinningLottoNumberChecker;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class LastWinningLottoNumberCheckerTest {
+class LastLottoNumbersNumberCheckerTest {
     @DisplayName("사용자에게 입력 받은 당첨 번호의 갯수가 6개인지 확인")
     @Test
     void validCountOfLottoNum() {

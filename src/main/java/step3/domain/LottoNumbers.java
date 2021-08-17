@@ -3,18 +3,18 @@ package step3.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinningLotto {
+public class LottoNumbers {
     private static final int numOfWinningLottoNumber = 6;
     private static final String winningLottoNumberErrorMessage = "당첨 번호는 6개로 구성되어야 하며, ', ' 을 이용하여 구분하고 있습니다.";
 
-    private List<Integer> numbers;
+    private List<Integer> list;
 
-    public WinningLotto(String stringNumbers) {
-        this.numbers = checkValidInput(stringNumbers);
+    public LottoNumbers(String stringNumbers) {
+        this.list = checkValidInput(stringNumbers);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getList() {
+        return list;
     }
 
     public List<Integer> checkValidInput(String s) {
