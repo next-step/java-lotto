@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class Lottos {
 
@@ -29,11 +28,7 @@ public class Lottos {
     }
 
     private void addPrizeLottoCount(Lotto lotto, int matchCount, BonusBall bonusBall) {
-        if (matchCount == LottoPrizeType.SECOND_PRIZE.getMatchCount()
-                && lotto.getNumbers().getValues().contains(bonusBall.getValue())) {
-            WinningStatistics.addCount(Optional.of(LottoPrizeType.SECOND_PRIZE));
-        }
-        WinningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount));
+        WinningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount, lotto.getNumbers().getValues().contains(bonusBall.getValue())));
     }
 
     private int countMatchNumber(List<Integer> currentLottoNumber, List<Integer> winningLottoNumber) {
