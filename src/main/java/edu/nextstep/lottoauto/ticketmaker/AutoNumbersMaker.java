@@ -21,10 +21,7 @@ public class AutoNumbersMaker implements NumbersMaker {
     @Override
     public List<Integer> create() {
         shuffleNumbers();
-        List<Integer> ticketNumbers =
-                new ArrayList<>(NUMBERS.subList(INDEX_FROM_TICKET_NUMBERS, INDEX_TO_TICKET_NUMBERS));
-        Collections.sort(ticketNumbers);
-        return ticketNumbers;
+        return new ArrayList<>(NUMBERS.subList(INDEX_FROM_TICKET_NUMBERS, INDEX_TO_TICKET_NUMBERS));
     }
 
     protected void shuffleNumbers() {
