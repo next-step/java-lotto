@@ -11,7 +11,7 @@ public class WinningLotto {
     private LottoNumber bonusLottoNumber;
 
     public WinningLotto(String lottoNumbers, String bonusNumber) {
-        numbers = Lotto.of(lottoNumbers).getLottoNumbers();
+        numbers = Lotto.of(lottoNumbers).numbers;
         bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
         validateBonusNumber();
     }

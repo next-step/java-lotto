@@ -14,7 +14,7 @@ public class LottoTest {
     @DisplayName("로또 자동 1개(번호 6개)생성 성공 테스트")
     void 로또_자동_생성_테스트() {
         Lotto lotto = Lotto.of(RandomLottoNumber.generateRandomNumbers());
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lotto.numbers.size()).isEqualTo(6);
     }
 
     @ParameterizedTest
@@ -22,7 +22,7 @@ public class LottoTest {
     @ValueSource(strings = {"1,2,3,4,5,6", "40, 41, 42, 43, 44, 45"})
     void 로또_입력번호_생성_테스트(String inputStringNumbers) {
         Lotto lotto = Lotto.of(inputStringNumbers);
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lotto.numbers.size()).isEqualTo(6);
     }
 
     @ParameterizedTest
