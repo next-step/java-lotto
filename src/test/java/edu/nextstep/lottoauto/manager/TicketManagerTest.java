@@ -1,7 +1,7 @@
 package edu.nextstep.lottoauto.manager;
 
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
-import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
+import edu.nextstep.lottoauto.ticketmaker.AutoNumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +34,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when
-        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
+        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoNumbersMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("최소 입력 가능 금액 미달.");
     }
@@ -46,7 +46,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when, then
-        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
+        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoNumbersMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("개 당 금액");
     }

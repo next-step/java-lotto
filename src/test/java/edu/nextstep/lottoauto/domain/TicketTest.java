@@ -1,8 +1,6 @@
 package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,11 +11,11 @@ import static org.assertj.core.api.Assertions.*;
 
 public class TicketTest {
 
-    @Test
-    @DisplayName("Ticket 생성 성공")
-    void of_success() {
+    @ParameterizedTest(name = "Ticket 생성 성공")
+    @CsvSource({"1, 6", "40, 45"})
+    void of_success(int numFrom, int numTo) {
         // given
-        List<Integer> numbers = createNumbersFromTo(1,6);
+        List<Integer> numbers = createNumbersFromTo(numFrom,numTo);
 
         // when
         Ticket ticket = Ticket.of(numbers);

@@ -1,12 +1,10 @@
 package edu.nextstep.lottoauto.ticketmaker;
 
-import edu.nextstep.lottoauto.domain.Ticket;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoTicketMaker implements TicketMaker {
+public class AutoNumbersMaker implements NumbersMaker {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
@@ -21,12 +19,12 @@ public class AutoTicketMaker implements TicketMaker {
     }
 
     @Override
-    public Ticket create() {
+    public List<Integer> create() {
         shuffleNumbers();
         List<Integer> ticketNumbers =
                 new ArrayList<>(NUMBERS.subList(INDEX_FROM_TICKET_NUMBERS, INDEX_TO_TICKET_NUMBERS));
         Collections.sort(ticketNumbers);
-        return Ticket.of(ticketNumbers);
+        return ticketNumbers;
     }
 
     protected void shuffleNumbers() {

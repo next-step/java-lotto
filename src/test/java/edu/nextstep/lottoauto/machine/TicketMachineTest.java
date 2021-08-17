@@ -3,7 +3,7 @@ package edu.nextstep.lottoauto.machine;
 import edu.nextstep.lottoauto.domain.Prize;
 import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.form.WinningResultForm;
-import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
+import edu.nextstep.lottoauto.ticketmaker.AutoNumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ public class TicketMachineTest {
         TicketMachine ticketMachine = new TicketMachine();
 
         // when
-        ticketMachine.createAndSaveTickets(numberOfTicket, new AutoTicketMaker());
+        ticketMachine.createAndSaveTickets(numberOfTicket, new AutoNumbersMaker());
 
         // then
         assertThat(ticketMachine.findTickets().size()).isEqualTo(numberOfTicket);
@@ -33,7 +33,7 @@ public class TicketMachineTest {
     void checkWinningResult() {
         // given
         TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(1, () -> Ticket.of(createNumbersFromTo(1,6)));
+        ticketMachine.createAndSaveTickets(1, () -> createNumbersFromTo(1,6));
 
         // when
         WinningResultForm winningResult = ticketMachine.confirmWinningResult(Ticket.of(createNumbersFromTo(4,9)));

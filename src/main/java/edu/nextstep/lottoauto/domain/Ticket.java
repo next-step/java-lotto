@@ -1,6 +1,7 @@
 package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
+import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,6 +29,10 @@ public class Ticket {
 
     public static Ticket of(String numbersString) {
         return new Ticket(createNumbersFromString(numbersString));
+    }
+
+    public static Ticket of(NumbersMaker numbersMaker) {
+        return new Ticket(numbersMaker.create());
     }
 
     private static List<Integer> createNumbersFromString(String numbersString) {

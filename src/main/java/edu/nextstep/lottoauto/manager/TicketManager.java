@@ -4,7 +4,7 @@ import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
 import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.machine.TicketMachine;
-import edu.nextstep.lottoauto.ticketmaker.TicketMaker;
+import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ public class TicketManager {
 
     private final TicketMachine ticketMachine = new TicketMachine();
 
-    public void createAndSaveTickets(int payment, TicketMaker ticketMaker) {
+    public void createAndSaveTickets(int payment, NumbersMaker numbersMaker) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
         int numberOfTickets = calculateNumberOfTicketsFrom(payment);
-        ticketMachine.createAndSaveTickets(numberOfTickets, ticketMaker);
+        ticketMachine.createAndSaveTickets(numberOfTickets, numbersMaker);
     }
 
     public List<Ticket> findTickets() {
