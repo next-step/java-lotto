@@ -17,7 +17,7 @@ public class LottoResult {
         makeResult(lottoRanks);
     }
 
-    public void makeResult(final List<LottoRank> lottoRanks) {
+    private void makeResult(final List<LottoRank> lottoRanks) {
         lottoRanks.forEach(lottoRank -> result.put(lottoRank, result.get(lottoRank) + 1));
     }
 

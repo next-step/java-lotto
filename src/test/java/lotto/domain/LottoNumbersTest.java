@@ -20,7 +20,7 @@ class LottoNumbersTest {
     void check_first_rank() {
         LottoNumbers lottoNumbers = new LottoNumbers(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(
-            lottoNumbers.checkRank(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(
-            LottoRank.FIRST);
+            lottoNumbers.checkRank(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))))
+            .isEqualTo(LottoRank.FIRST);
     }
 }
