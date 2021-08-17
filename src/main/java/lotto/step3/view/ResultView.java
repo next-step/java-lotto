@@ -34,6 +34,6 @@ public class ResultView {
     }
 
     public static void printEarningRate(double earningRate) {
-        System.out.printf("총 수익률은 "+earningRate+"입니다.");
+        System.out.printf("총 수익률은 " + earningRate + "입니다.");
     }
 }
