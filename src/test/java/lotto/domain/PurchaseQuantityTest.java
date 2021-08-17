@@ -44,4 +44,11 @@ class PurchaseQuantityTest {
                 .isEqualTo(PurchaseQuantity.of(automaticQuantity));
     }
 
+    @DisplayName("구매 수량이 0보다 작은 경우 예외가 발생한다.")
+    @Test
+    public void negativeInputTest() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> PurchaseQuantity.of(-1))
+                .withMessageContaining(String.valueOf(-1));
+    }
 }

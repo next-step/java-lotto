@@ -4,13 +4,21 @@ public class PurchaseQuantity {
 
     private static final Money PRICE_PER_PIECE = Money.of(1000);
     private static final String INVALID_MONEY_EXCEPTION_MESSAGE_FORMAT = "유효하지 않은 금액입니다. Money: %s";
+    private static final String NEGATIVE_QUANTITY_EXCEPTION_MESSAGE_FORMAT = "구매 수량이 0보다 작습니다. quantity: %s";
+    private static final int MINIMUM_QUANTITY = 0;
 
     private final long quantity;
 
     private PurchaseQuantity(long quantity) {
+        validateMinimumQuantity(quantity);
         this.quantity = quantity;
     }
 
+    private void validateMinimumQuantity(long quantity) {
+        if (quantity < MINIMUM_QUANTITY) {
+            throw new IllegalArgumentException(String.format(NEGATIVE_QUANTITY_EXCEPTION_MESSAGE_FORMAT, quantity));
+        }
+    }
     public static PurchaseQuantity of(long quantity) {
         return new PurchaseQuantity(quantity);
     }
