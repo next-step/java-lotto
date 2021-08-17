@@ -6,13 +6,13 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private List<Integer> lotto;
+    private List<Integer> lotto = new ArrayList<>();
 
     public LottoNumber() {
-        lotto = new ArrayList<>();
+
     }
 
-    public void setAutoNumber(RandomNumber lottoNumberStragey) {
+    public LottoNumber(RandomNumber lottoNumberStragey) {
         lotto = lottoNumberStragey.getLottoNumber();
     }
 

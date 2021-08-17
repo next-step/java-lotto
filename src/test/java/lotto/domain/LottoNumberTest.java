@@ -15,8 +15,7 @@ class LottoNumberTest {
     @DisplayName("로또 자동 넘버 테스트")
     @Test
     public void lottoRandomNumberTest() {
-        LottoNumber lottoNumber = new LottoNumber();
-        lottoNumber.setAutoNumber(
+        LottoNumber lottoNumber = new LottoNumber(
                 new LottoNumberStragey(){
                     @Override
                     public List<Integer> getLottoNumber() {
