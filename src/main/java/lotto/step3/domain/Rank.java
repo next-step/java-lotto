@@ -37,7 +37,7 @@ public enum Rank {
         if (countOfMatch == THIRD.countOfMatch) {
             return Rank.THIRD;
         }
-        if (countOfMatch == FIFTH.countOfMatch) {
+        if (countOfMatch == FIRST.countOfMatch) {
             return Rank.FIRST;
         }
         return Rank.NONE;
