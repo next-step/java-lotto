@@ -1,15 +1,13 @@
 package edu.nextstep.lottoauto.manager;
 
-import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
 import edu.nextstep.lottoauto.ticketmaker.AutoTicketMaker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class TicketManagerTest {
 
@@ -26,7 +24,7 @@ public class TicketManagerTest {
         int numberOfTickets = ticketManager.calculateNumberOfTicketsFrom(payment);
 
         // then
-        Assertions.assertThat(numberOfTickets).isEqualTo(payment/A_UNIT_PRICE);
+        assertThat(numberOfTickets).isEqualTo(payment/A_UNIT_PRICE);
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 미만")
@@ -36,7 +34,7 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when
-        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
+        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("최소 입력 가능 금액 미달.");
     }
@@ -48,33 +46,8 @@ public class TicketManagerTest {
         TicketManager ticketManager = new TicketManager();
 
         // when, then
-        Assertions.assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
+        assertThatThrownBy(() -> ticketManager.createAndSaveTickets(payment, new AutoTicketMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("개 당 금액");
-    }
-
-
-    @ParameterizedTest(name = "숫자 개수 실패 {index}_{0}")
-    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"}) // given
-    void validate_number_of_numbers(String winningNumbersString) {
-        // given
-        TicketManager ticketManager = new TicketManager();
-
-        // then
-        assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
-                .isInstanceOf(NumbersIllegalArgumentException.class)
-                .hasMessageContaining("입력 숫자 개수 미달 or 초과.");
-    }
-
-    @ParameterizedTest(name = "숫자 허용 범위 실패 {index}_{0}")
-    @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "41, 42, 43, 44, 45, 46"}) // given
-    void validate_fail_out_of_range(String winningNumbersString) {
-        // given
-        TicketManager ticketManager = new TicketManager();
-
-        // then
-        assertThatThrownBy(() -> ticketManager.confirmWinningResult(winningNumbersString))
-                .isInstanceOf(NumbersIllegalArgumentException.class)
-                .hasMessageContaining("지정 가능 숫자 범위 초과.");
     }
 }

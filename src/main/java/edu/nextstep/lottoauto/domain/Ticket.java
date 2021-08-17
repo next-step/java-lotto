@@ -11,13 +11,13 @@ public class Ticket {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final int NUMBER_OF_NUMBERS = 6;
+    private static final int LENGTH_OF_NUMBERS = 6;
 
     private final List<Integer> numbers;
 
     private Ticket(List<Integer> numbers) {
         Collections.sort(numbers);
-        validateNumOfNumbers(numbers);
+        validateLengthOfNumbers(numbers);
         validateOutOfRange(numbers);
         this.numbers = numbers;
     }
@@ -53,13 +53,9 @@ public class Ticket {
         }
     }
 
-    private void validateNumOfNumbers(List<Integer> numbers) {
-        if (numbers.size() != NUMBER_OF_NUMBERS) {
-            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + NUMBER_OF_NUMBERS);
+    private void validateLengthOfNumbers(List<Integer> numbers) {
+        if (numbers.size() != LENGTH_OF_NUMBERS) {
+            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + LENGTH_OF_NUMBERS);
         }
     }
-
-
-
-
 }

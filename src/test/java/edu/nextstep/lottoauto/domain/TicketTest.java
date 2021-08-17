@@ -28,7 +28,7 @@ public class TicketTest {
 
     @ParameterizedTest(name = "Ticket 생성 실패 : 개수 미만 or 초과")
     @CsvSource({"1, 5", "1, 7"})
-    void of_fail_number_of_numbers(int numFrom, int numTo) {
+    void of_fail_length_of_numbers(int numFrom, int numTo) {
         // given
         List<Integer> numbers = createNumbersFromTo(numFrom,numTo);
 
