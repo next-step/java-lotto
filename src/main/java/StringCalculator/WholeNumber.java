@@ -1,11 +1,11 @@
 package StringCalculator;
 
-public class Number {
+public class WholeNumber {
 
     private final int number;
     private static final int MINIMUM_NUMBER = 0;
 
-    public Number(int number) {
+    public WholeNumber(int number) {
         isValid(number);
         this.number = number;
     }
