@@ -1,5 +1,7 @@
 package lotto;
 
+import util.Number;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +16,11 @@ public class LottoMain {
         LottoPurchasingMachine lottoPurchasingMachine = new LottoPurchasingMachine();
         List<Lotto> lottoList = lottoPurchasingMachine.buyLotto(purchaseAmount);
         view.showLottoList(lottoList);
+
+        String[] prevWinningLottoNumbers = view.getPrevWinningLottoNumbers(br);
+        Integer[] result = lottoPurchasingMachine.checkLottoList(lottoList, Number.stringArrayToInteger(prevWinningLottoNumbers));
+        double yield = lottoPurchasingMachine.getYield(result, purchaseAmount);
+        view.showNumericalStatement(result, yield);
 
     }
 }

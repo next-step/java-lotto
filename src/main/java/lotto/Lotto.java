@@ -19,9 +19,32 @@ public class Lotto {
         Arrays.sort(lottoNumbers);
     }
 
+    public Lotto(Integer[] lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private boolean sameNumber(int prevWinningLottoNumbers) {
+        return Arrays.asList(lottoNumbers).contains(prevWinningLottoNumbers);
+    }
+
+    public int getMatchedNumberCount(Integer[] prevWinningLottoNumbers) {
+        int result = 0;
+        for (int number : prevWinningLottoNumbers) {
+            result = getResult(result, number);
+        }
+        return result;
+    }
+
+    private int getResult(int result, int number) {
+        if (sameNumber(number)) {
+            result++;
+        }
+        return result;
+    }
 
     @Override
     public String toString() {
         return Arrays.toString(lottoNumbers);
     }
+
 }

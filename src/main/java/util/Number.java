@@ -9,4 +9,12 @@ public class Number {
         }
         return result;
     }
+
+    public static Integer[] stringArrayToInteger(String[] stringArray) {
+        Integer[] result = new Integer[stringArray.length];
+        for (int i = 0; i < stringArray.length; i++) {
+            result[i] = Integer.parseInt(stringArray[i]);
+        }
+        return result;
+    }
 }
