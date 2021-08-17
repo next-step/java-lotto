@@ -18,14 +18,18 @@ public class ResultView {
         System.out.println(LINE_BREAK);
 
         for (Rank rank : Rank.values()) {
-            if (rank.equals(Rank.NONE)){
-                continue;
-            }
-            if(rank.equals(Rank.SECOND)) {
-                System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n",rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank,0));
-                continue;
-            }
-            System.out.printf("%d개 일치 (%d원) - %d개%n",rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank,0));
+            printRank(rank, lottoStatistics);
         }
+    }
+
+    private static void printRank(Rank rank, LottoStatistics lottoStatistics) {
+        if (rank.equals(Rank.NONE)) {
+            return;
+        }
+        if (rank.equals(Rank.SECOND)) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank, 0));
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank, 0));
     }
 }
