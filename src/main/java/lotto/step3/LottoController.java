@@ -17,5 +17,7 @@ public class LottoController {
         Winning winning = new Winning(winningNumbers, bonusBall);
         LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
         ResultView.printLottoStatistics(lottoStatistics);
+        double earningRate = lottoStatistics.calculateLottoStatistics(money);
+        ResultView.printEarningRate(earningRate);
     }
 }

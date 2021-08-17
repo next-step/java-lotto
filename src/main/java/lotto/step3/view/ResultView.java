@@ -32,4 +32,8 @@ public class ResultView {
         }
         System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank, 0));
     }
+
+    public static void printEarningRate(double earningRate) {
+        System.out.printf("총 수익률은 "+earningRate+"입니다.");
+    }
 }
