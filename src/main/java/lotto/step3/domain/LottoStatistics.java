@@ -8,4 +8,8 @@ public class LottoStatistics {
     public LottoStatistics(Map<Rank, Integer> lottoStatistics) {
         this.lottoStatistics = lottoStatistics;
     }
+
+    public Map<Rank, Integer> getLottoStatistics() {
+        return lottoStatistics;
+    }
 }
