@@ -29,7 +29,6 @@ public class Customer {
     public void compareWinningLottoNumbersAndIssuedLottoList(List<Integer> winningLottoNumberList, List<List<Integer>> issuedLottoList, int bonusNumber) {
         int numOfLotto = issuedLottoList.size();
         for (int i = 0; i < numOfLotto; i++) {
-            System.out.println(issuedLottoList.get(i));
             getMatchedNumber(issuedLottoList.get(i), winningLottoNumberList, bonusNumber);
         }
     }
