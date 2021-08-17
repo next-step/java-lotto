@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinnerLotto;
-import lotto.domain.dto.LottoDrawResult;
+import lotto.domain.LottoDrawResult;
 import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
 import lotto.util.LottoListGenerator;

@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.domain;
 
-import lotto.domain.Award;
+import lotto.domain.dto.LottoWinnersDto;
 
 import java.util.HashMap;
 import java.util.List;

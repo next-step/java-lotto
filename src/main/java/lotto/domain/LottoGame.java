@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoDrawResult;
 import lotto.domain.dto.LottoPurchaseResult;
 
 import java.util.List;
