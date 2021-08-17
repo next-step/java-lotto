@@ -24,7 +24,7 @@ class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         InputView inputView = InputView.of(inputStream);
         assertThatIllegalArgumentException()
-                .isThrownBy(inputView::getPurchaseAmount)
+                .isThrownBy(inputView::getTotalPurchaseQuantity)
                 .withMessageContaining(input);
     }
 

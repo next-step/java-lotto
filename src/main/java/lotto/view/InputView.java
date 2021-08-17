@@ -26,7 +26,7 @@ public class InputView {
         return new InputView(new Scanner(inputStream));
     }
 
-    public PurchaseQuantity getPurchaseAmount() {
+    public PurchaseQuantity getTotalPurchaseQuantity() {
         String input = scanner.nextLine();
         Money money = Money.of(Integer.parseInt(input));
         return PurchaseQuantity.of(money);
@@ -44,6 +44,10 @@ public class InputView {
     }
 
     public LottoNumber getBonusBall() {
-        return LottoNumber.of(scanner.nextInt());
+        return LottoNumber.of(Integer.parseInt(scanner.nextLine()));
+    }
+
+    public PurchaseQuantity getManualPurchaseQuantity() {
+        return PurchaseQuantity.of(Long.parseLong(scanner.nextLine()));
     }
 }

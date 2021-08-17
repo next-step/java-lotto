@@ -29,19 +29,26 @@ public class LottoSimulator {
     }
 
     private void run() {
-        PurchaseQuantity purchaseQuantity = getPurchaseQuantity();
-        LottoTicket lottoTicket = getLottoTicket(purchaseQuantity);
+        PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
+        PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
+        // TODO: 수동으로 구매할 번호 입력
+        // TODO: 수동/자동 구매한 로또 수 출력
+        outputView.printPurchaseCount(totalPurchaseQuantity.getQuantity());
+        LottoTicket lottoTicket = getLottoTicket(totalPurchaseQuantity);
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
         outputView.printMatchResult(matchResult);
-        outputView.printLotteryYield(purchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
+        outputView.printLotteryYield(totalPurchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
     }
 
-    private PurchaseQuantity getPurchaseQuantity() {
+    private PurchaseQuantity getManualPurchaseQuantity() {
+        outputView.printManualPurchaseQuantityInputMessage();
+        return inputView.getManualPurchaseQuantity();
+    }
+
+    private PurchaseQuantity getTotalPurchaseQuantity() {
         outputView.printPurchaseAmountInputMessage();
-        PurchaseQuantity purchaseQuantity = inputView.getPurchaseAmount();
-        outputView.printPurchaseCount(purchaseQuantity.getQuantity());
-        return purchaseQuantity;
+        return inputView.getTotalPurchaseQuantity();
     }
 
     private LottoTicket getLottoTicket(PurchaseQuantity purchaseQuantity) {
