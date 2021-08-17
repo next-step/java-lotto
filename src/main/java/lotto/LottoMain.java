@@ -37,7 +37,7 @@ public class LottoMain {
         Lotto lotto = new Lotto(winnerNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet()));
-        Integer bonusNumber = InputView.requestBonusNumber();
+        int bonusNumber = InputView.requestBonusNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         return new WinnerLotto(lotto, bonusLottoNumber);
     }

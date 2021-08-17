@@ -22,7 +22,7 @@ public class InputView {
                 .collect(Collectors.toSet());
     }
 
-    public static Integer requestBonusNumber() {
+    public static int requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
