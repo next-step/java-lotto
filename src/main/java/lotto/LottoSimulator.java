@@ -46,7 +46,7 @@ public class LottoSimulator {
 
     private LottoTicket getLottoTicket(PurchaseQuantity purchaseQuantity) {
         LottoTicket lottoTicket = LottoTicket.of(lottoNumbersGenerator.generate(purchaseQuantity.getQuantity()));
-        outputView.printLottoTicket(lottoTicket);
+        outputView.printLottoTicket(lottoTicket.getLottoNumbersList());
         return lottoTicket;
     }
 

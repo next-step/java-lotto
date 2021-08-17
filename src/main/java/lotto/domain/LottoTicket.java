@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class LottoTicket {
 
@@ -20,8 +19,8 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbersList);
     }
 
-    public void foreach(Consumer<LottoNumbers> action) {
-        lottoNumbersList.forEach(action);
+    public List<LottoNumbers> getLottoNumbersList() {
+        return lottoNumbersList;
     }
 
     public MatchResult match(WinningLottoNumbers winningLottoNumbers) {

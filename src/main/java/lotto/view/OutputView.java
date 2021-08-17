@@ -1,8 +1,12 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoNumbers;
+import lotto.domain.MatchResult;
+import lotto.domain.Money;
+import lotto.domain.Rank;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Objects;
 
 public class OutputView {
@@ -35,8 +39,8 @@ public class OutputView {
         printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, quantity);
     }
 
-    public void printLottoTicket(LottoTicket lottoTicket) {
-        lottoTicket.foreach(this::printLottoNumbers);
+    public void printLottoTicket(List<LottoNumbers> lottoNumbers) {
+        lottoNumbers.forEach(this::printLottoNumbers);
     }
 
     private void printLottoNumbers(LottoNumbers lottoNumbers) {
