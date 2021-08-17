@@ -1,5 +1,7 @@
 package edu.nextstep.lottoauto.domain;
 
+import java.util.Arrays;
+
 public enum Prize {
     FIRST(6, 200_000_000),
     SECOND(5, 15_000_000),
@@ -17,12 +19,10 @@ public enum Prize {
     }
 
     public static Prize of(int numOfMatch) {
-        for (Prize prize : Prize.values()) {
-            if (prize.getCountOfMatch() == numOfMatch) {
-                return prize;
-            }
-        }
-        return NULL;
+        return Arrays.stream(Prize.values())
+                .filter((prize) -> (prize.getCountOfMatch() == numOfMatch))
+                .findFirst()
+                .orElse(NULL);
     }
 
     public int getCountOfMatch() {
