@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import calculator.InvalidInputException;
+import lotto.strategy.RandomLottoNumber;
 import lotto.view.InputView;
 
 import java.util.ArrayList;
@@ -15,7 +16,15 @@ public class LottoShop {
 
     public LottoShop(int purchaseAmount, int manualLottoQuantity) {
         money = new Money(purchaseAmount);
-        lottos = new Lottos(getPurchaseQuantity(), generateManualLotto(manualLottoQuantity));
+        lottos = new Lottos(generateManualLotto(manualLottoQuantity), generateAutomaticLotto(getPurchaseQuantity()-manualLottoQuantity));
+    }
+
+    private List<Lotto> generateAutomaticLotto(int automaticQuantity) {
+        List<Lotto> automaticLottoList = new ArrayList<>();
+        for (int i = 0; i < automaticQuantity; i++) {
+            automaticLottoList.add(Lotto.of(RandomLottoNumber.generateRandomNumbers()));
+        }
+        return automaticLottoList;
     }
 
     private List<Lotto> generateManualLotto(int manualLottoQuantity) {

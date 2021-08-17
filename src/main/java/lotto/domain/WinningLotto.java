@@ -22,6 +22,21 @@ public class WinningLotto {
         }
     }
 
+    public int getMatchCount(Lotto lotto) {
+        return (int) lotto.numbers.stream()
+                                  .filter(this::contains)
+                                  .count();
+    }
+
+    public boolean getMatchBonus(Lotto lotto) {
+        return lotto.numbers.stream()
+                            .anyMatch(number -> number.equals(bonusLottoNumber));
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public LottoNumber getBonusNumber() {
         return bonusLottoNumber;
     }

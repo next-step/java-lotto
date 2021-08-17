@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.RandomLottoNumber;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,19 +11,13 @@ public class Lottos {
     private Map<LottoResult, Integer> winningStatus;
     private int manualLottoQuantity;
 
-    public Lottos(int purchaseQuantity, List<Lotto> manualLottoList) {
+    public Lottos(List<Lotto> manualLottoList, List<Lotto> automaticLottoList) {
         lottos = new ArrayList<>();
         winningStatus = new HashMap<>();
         manualLottoQuantity = manualLottoList.size();
 
         lottos.addAll(manualLottoList);
-        setAutomaticLotto(purchaseQuantity - manualLottoQuantity);
-    }
-
-    private void setAutomaticLotto(int automaticQuantity) {
-        for (int i = 0; i < automaticQuantity; i++) {
-            lottos.add(Lotto.of(RandomLottoNumber.generateRandomNumbers()));
-        }
+        lottos.addAll(automaticLottoList);
     }
 
     public List<Lotto> getLottos() {
@@ -38,8 +30,8 @@ public class Lottos {
 
     public void checkLottosWinning(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount(winningLotto);
-            boolean matchBonus = lotto.getMatchBonus(winningLotto);
+            int matchCount = winningLotto.getMatchCount(lotto);
+            boolean matchBonus = winningLotto.getMatchBonus(lotto);
             LottoResult lottoResult = LottoResult.getLottoResult(matchCount, matchBonus);
             setWinningStatus(lottoResult);
         }
@@ -48,8 +40,7 @@ public class Lottos {
     private void setWinningStatus(LottoResult lottoResult) {
         if (lottoResult != LottoResult.FAIL) {
             winningStatus.put(lottoResult, winningStatus.getOrDefault(lottoResult, 0) + 1);
-            LottoShop.getMoney()
-                     .plusReward(lottoResult.getReward());
+            LottoShop.getMoney().plusReward(lottoResult.getReward());
         }
     }
 
