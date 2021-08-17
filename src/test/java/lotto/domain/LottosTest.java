@@ -10,8 +10,9 @@ public class LottosTest {
     @ParameterizedTest
     @DisplayName("로또 자동 구매 성공 테스트")
     @ValueSource(ints = {1, 2, 3, 4, 5})
-    void 로또_5개_구매_성공_테스트(int purchaseQuantity) {
-        Lottos lottos = new Lottos(purchaseQuantity);
-        assertThat(lottos.getLottos().size()).isEqualTo(purchaseQuantity);
+    void 로또_자동_구매_성공_테스트(int purchaseQuantity) {
+        Lottos lottos = new Lottos(purchaseQuantity, 0);
+        assertThat(lottos.getLottos()
+                         .size()).isEqualTo(purchaseQuantity);
     }
 }
