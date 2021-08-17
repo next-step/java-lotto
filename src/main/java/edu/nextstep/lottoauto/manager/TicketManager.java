@@ -7,8 +7,9 @@ import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.machine.TicketMachine;
 import edu.nextstep.lottoauto.ticketmaker.TicketMaker;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TicketManager {
 
@@ -45,15 +46,10 @@ public class TicketManager {
     }
 
     private List<Integer> createNumbersFromString(String numbersString) {
-        List<Integer> numbers = new ArrayList<>();
-
-        String[] numbersStringArr = numbersString.split(",");
-
-        for(String numberString : numbersStringArr) {
-            numbers.add(Integer.parseInt(numberString.trim()));
-        }
-
-        return numbers;
+        return Arrays.stream(numbersString.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private void validateUnderAUnitPrice(int payment) {
