@@ -9,7 +9,6 @@ import java.util.Objects;
 public class Money implements Comparable<Money> {
 
     private static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 -> ";
-    private static final String QUANTITY_INFO = " / quantity: ";
 
     private int money;
 
@@ -28,12 +27,6 @@ public class Money implements Comparable<Money> {
         return new LotteryQuantity( money / Lottery.PRICE.money);
     }
 
-    public void buyLotteries(LotteryQuantity quantity) {
-        requireOverBuyableQuantity(quantity);
-        quantity.intStream()
-                .forEach(i -> buyLottery());
-    }
-
     public int multiply(int number) {
         return money * number;
     }
@@ -43,15 +36,9 @@ public class Money implements Comparable<Money> {
                 .divide(new BigDecimal(number), 4, RoundingMode.HALF_UP);
     }
 
-    public void buyLottery() {
+    public void extractLotteryPrice() {
         requireOverLotteryPrice();
         money -= Lottery.PRICE.money;
-    }
-
-    private void requireOverBuyableQuantity(final LotteryQuantity quantity) {
-        if (getBuyableLotteryQuantity().isLessThan(quantity)) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY + money + QUANTITY_INFO + quantity);
-        }
     }
 
     private void validateMoney(final String money) {
