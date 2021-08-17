@@ -17,8 +17,8 @@ public class Money {
     }
 
     private void validate(int value) {
-        if(value < MIN_VALUE) {
-            throw new IllegalArgumentException("금액으로 음수는 입력할 수 없습니다");
+        if (value < MIN_VALUE) {
+            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }
     }
 
