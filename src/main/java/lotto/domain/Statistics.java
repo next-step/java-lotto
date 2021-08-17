@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Statistics {
 
-    Map<String, Integer> rank;
-    long totalEarnMoney;
-    double earnMoneyPercentage;
+    private Map<String, Integer> rank;
+    private long totalEarnMoney;
+    private double earnMoneyPercentage;
 
     public Statistics() {
         rank = new HashMap<>();
