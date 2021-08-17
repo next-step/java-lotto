@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ChanceTest {
 
@@ -47,5 +48,18 @@ public class ChanceTest {
         Chance chance3 = chance1.subtract(chance2);
         //then
         assertThat(chance3).isEqualTo(new Chance(7));
+    }
+
+    @Test
+    public void Chance가_다른_Chance보다_큰지_확인할_수_있다(){
+        //given
+        Chance chance1 = new Chance(10);
+        Chance chance2 = new Chance(3);
+        //when
+        //then
+        assertAll(
+                () -> assertTrue(chance1.isBiggerOrEqualThan(chance2)),
+                () -> assertFalse(chance2.isBiggerOrEqualThan(chance1))
+        );
     }
 }
