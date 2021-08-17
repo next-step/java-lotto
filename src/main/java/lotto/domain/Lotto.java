@@ -11,7 +11,7 @@ public class Lotto {
     private static final String INVALID_SIZE_OF_WINNING_NUMBERS = "번호의 갯수가 올바르지 않습니다.";
     public static final int SIZE = 6;
 
-    private Set<LottoNumber> numbers;
+    public Set<LottoNumber> numbers;
 
     private Lotto(Set<LottoNumber> numbers) {
         validateLottoSize(numbers);
@@ -36,19 +36,8 @@ public class Lotto {
         }
     }
 
-    public int getMatchCount(WinningLotto winningLotto) {
-        return (int) winningLotto.getWinningLotto().getLottoNumbers()
-                                 .stream()
-                                 .filter(numbers::contains)
-                                 .count();
-    }
-
-    public boolean getMatchBonus(WinningLotto winningLotto) {
-        return numbers.stream().anyMatch(number -> number.equals(winningLotto.getBonusNumber()));
-    }
-
     public Set<LottoNumber> getLottoNumbers() {
-        return numbers;
+        return new TreeSet<>(numbers);
     }
 
 }

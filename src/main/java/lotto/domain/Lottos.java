@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.RandomLottoNumber;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,22 +10,22 @@ public class Lottos {
     private List<Lotto> lottos;
     private Map<LottoResult, Integer> winningStatus;
 
-    public Lottos(int purchaseQuantity) {
+    public Lottos(List<Lotto> manualLottoList, List<Lotto> automaticLottoList) {
         lottos = new ArrayList<>();
         winningStatus = new HashMap<>();
-        for (int i = 0; i < purchaseQuantity; i++) {
-            lottos.add(Lotto.of(RandomLottoNumber.generateRandomNumbers()));
-        }
+
+        lottos.addAll(manualLottoList);
+        lottos.addAll(automaticLottoList);
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public void checkLottosWinning(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount(winningLotto);
-            boolean matchBonus = lotto.getMatchBonus(winningLotto);
+            int matchCount = winningLotto.getMatchCount(lotto);
+            boolean matchBonus = winningLotto.getMatchBonus(lotto);
             LottoResult lottoResult = LottoResult.getLottoResult(matchCount, matchBonus);
             setWinningStatus(lottoResult);
         }

@@ -1,13 +1,18 @@
 package lotto.domain;
 
+import lotto.strategy.LottoStrategy;
+
 public class LottoShop {
     private static final int LOTTO_PRICE = 1000;
+
     private static Money money;
     private static Lottos lottos;
+    private LottoStrategy lottoStrategy;
 
-    public LottoShop(int purchaseAmount) {
+    public LottoShop(int purchaseAmount, int manualLottoQuantity) {
         money = new Money(purchaseAmount);
-        lottos = new Lottos(getPurchaseQuantity());
+        lottoStrategy = new LottoStrategy(manualLottoQuantity, getPurchaseQuantity() - manualLottoQuantity);
+        lottos = new Lottos(lottoStrategy.generateManualLotto(), lottoStrategy.generateAutomaticLotto());
     }
 
     public static int getPurchaseQuantity() {
