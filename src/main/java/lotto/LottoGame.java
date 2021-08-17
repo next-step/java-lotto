@@ -7,7 +7,7 @@ public class LottoGame {
     public static void main(String[] args) {
 
         try {
-            new GameController().play();
+            new GameController().init();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }

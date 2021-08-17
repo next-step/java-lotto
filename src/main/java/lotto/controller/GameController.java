@@ -18,7 +18,7 @@ public class GameController {
         winningNumber = new LottoNumber();
     }
 
-    public void play() {
+    public void init() {
 
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
