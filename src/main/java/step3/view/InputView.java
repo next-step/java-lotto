@@ -27,8 +27,10 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public int requestManualPurchage() {
+    public int requestManualPurchase() {
         System.out.println(INPUT_MANUAL_PURCHASE);
-        return sc.nextInt();
+        int manualPurchase = sc.nextInt();
+        sc.nextLine();
+        return manualPurchase;
     }
 }

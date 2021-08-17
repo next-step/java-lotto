@@ -13,10 +13,10 @@ public class LottoApp {
         Customer customer = new Customer();
 
         LottoInfo lottoInfo = new LottoInfo(inputView.requestCharge());
-        ManualLotto manualLotto = new ManualLotto(inputView.requestManualPurchage(), lottoInfo.getCount());
+        ManualLotto manualLotto = new ManualLotto(inputView.requestManualPurchase(), lottoInfo.getCount());
 
-        LottoTicket lottoTicket = new LottoTicket(customer.buyLotto(lottoInfo.getCount()));
-        resultView.printNumOfLotto(lottoInfo.getCount());
+        LottoTicket lottoTicket = new LottoTicket(customer.buyLotto(lottoInfo.getCount()-manualLotto.getNumOfManualPurchaseLotto()));
+        resultView.printNumOfLotto(lottoInfo.getCount(),manualLotto.getNumOfManualPurchaseLotto());
         resultView.printIssuedLottoList(lottoTicket.getBundle());
         WinningLotto winningLotto = new WinningLotto(inputView.requestWinningLottoNumber());
         BonusBall bonusBall = new BonusBall(inputView.requestBonusBall(), winningLotto.getNumbers());

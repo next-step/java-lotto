@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class ResultView {
     private static final Double chargeOfLotto = 1000.0;
-    static final String INPUT_INFO_MESSAGE = "개를 구매했습니다.";
 
     public void printMatchedLottoRecord(Map<Rank, Integer> matchedLottoRecordArray) {
         System.out.println("당첨 통계");
@@ -32,8 +31,8 @@ public class ResultView {
 
     }
 
-    public void printNumOfLotto(int numOfLotto) {
-        System.out.println(numOfLotto+INPUT_INFO_MESSAGE);
+    public void printNumOfLotto(int numOfLotto, int numOfManualPurchaseLotto) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.\n", numOfManualPurchaseLotto, numOfLotto);
     }
 
     public void printIssuedLottoList(List<List<Integer>> issuedLottolist) {
