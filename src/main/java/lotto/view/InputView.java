@@ -10,7 +10,9 @@ public class InputView {
     public int buyLottoView() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
-        return checkMoney(scanner.nextLine());
+        int buyMoney = checkMoney(scanner.nextLine());
+        System.out.println(buyMoney/MINIMUM_LOTTO_MONEY + "개를 구입했습니다.");
+        return buyMoney;
     }
 
     public int checkMoney(String inputMoney) {
