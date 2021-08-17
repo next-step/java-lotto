@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.strategy.RandomLottoNumber;
-import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,23 +13,13 @@ public class Lottos {
     private Map<LottoResult, Integer> winningStatus;
     private int manualLottoQuantity;
 
-    public Lottos(int purchaseQuantity, int manualLottoQuantity) {
+    public Lottos(int purchaseQuantity, List<Lotto> manualLottoList) {
         lottos = new ArrayList<>();
         winningStatus = new HashMap<>();
-        this.manualLottoQuantity = manualLottoQuantity;
+        manualLottoQuantity = manualLottoList.size();
 
-        setManualLotto(manualLottoQuantity);
+        lottos.addAll(manualLottoList);
         setAutomaticLotto(purchaseQuantity - manualLottoQuantity);
-    }
-
-    private void setManualLotto(int manualQuantity) {
-        if (manualQuantity == 0) {
-            return;
-        }
-        String[] manualNumbersArray = InputView.inputManualNumbers(manualQuantity);
-        for (String numbers : manualNumbersArray) {
-            lottos.add(Lotto.of(numbers));
-        }
     }
 
     private void setAutomaticLotto(int automaticQuantity) {
