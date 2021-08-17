@@ -8,7 +8,7 @@ import lotto.domain.Lottos;
 import java.util.Map;
 
 public class OutputView {
-    private static final String COUNT_PURCHASE_AMOUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String COUNT_PURCHASE_AMOUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
     private static final String WINNING_STATUS_MESSAGE = "%d개 일치%s(%d원)- %d개\n";
     private static final String WINNING_STATUS_MATCH_BONUSBALL_MESSAGE = ", 보너스 볼 일치";
@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     private static void printCountOfLotto(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + COUNT_PURCHASE_AMOUNT_MESSAGE);
+        System.out.printf(COUNT_PURCHASE_AMOUNT_MESSAGE, lottos.getManualLottoQuantity(), (lottos.getLottos().size()-lottos.getManualLottoQuantity()));
     }
 
     private static void printLottos(Lottos lottos) {
