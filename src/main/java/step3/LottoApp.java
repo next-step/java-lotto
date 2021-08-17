@@ -12,7 +12,9 @@ public class LottoApp {
         ResultView resultView = new ResultView();
         Customer customer = new Customer();
 
-        LottoInfo lottoInfo = new LottoInfo(inputView.requestInput());
+        LottoInfo lottoInfo = new LottoInfo(inputView.requestCharge());
+        ManualLotto manualLotto = new ManualLotto(inputView.requestManualPurchage(), lottoInfo.getCount());
+
         LottoTicket lottoTicket = new LottoTicket(customer.buyLotto(lottoInfo.getCount()));
         resultView.printNumOfLotto(lottoInfo.getCount());
         resultView.printIssuedLottoList(lottoTicket.getBundle());
