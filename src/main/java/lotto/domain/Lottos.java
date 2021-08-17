@@ -9,12 +9,10 @@ public class Lottos {
 
     private List<Lotto> lottos;
     private Map<LottoResult, Integer> winningStatus;
-    private int manualLottoQuantity;
 
     public Lottos(List<Lotto> manualLottoList, List<Lotto> automaticLottoList) {
         lottos = new ArrayList<>();
         winningStatus = new HashMap<>();
-        manualLottoQuantity = manualLottoList.size();
 
         lottos.addAll(manualLottoList);
         lottos.addAll(automaticLottoList);
