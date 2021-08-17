@@ -3,15 +3,15 @@ package step3.domain;
 import java.util.List;
 
 public class BonusBall {
-    private int number;
+    private Lotto number;
 
     public BonusBall(int number,List<Integer> winningLottoNumberList) {
         compareWithWinningLottoNumbers(number, winningLottoNumberList);
-        this.number = number;
+        this.number = new Lotto(number);
     }
 
     public int getNumber() {
-        return number;
+        return number.getNumber();
     }
 
     public void compareWithWinningLottoNumbers(int bonusBallNumber, List<Integer> winningLottoNumberList) {
