@@ -35,4 +35,13 @@ class PurchaseQuantityTest {
                 .isEqualTo(expectedQuantity);
     }
 
+    @ParameterizedTest(name = "구매 수량 간 뺄셈이 가능하다.")
+    @CsvSource(value = {"3,1,2", "1,1,0", "0,0,0"})
+    public void subtractTest(int totalQuantity, int manualQuantity, int automaticQuantity) {
+        PurchaseQuantity totalPurchaseQuantity = PurchaseQuantity.of(totalQuantity);
+        PurchaseQuantity manualPurchaseQuantity = PurchaseQuantity.of(manualQuantity);
+        assertThat(totalPurchaseQuantity.subtract(manualPurchaseQuantity))
+                .isEqualTo(PurchaseQuantity.of(automaticQuantity));
+    }
+
 }

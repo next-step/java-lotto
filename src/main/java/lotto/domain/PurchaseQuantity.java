@@ -11,6 +11,10 @@ public class PurchaseQuantity {
         this.quantity = quantity;
     }
 
+    public static PurchaseQuantity of(long quantity) {
+        return new PurchaseQuantity(quantity);
+    }
+
     public static PurchaseQuantity of(Money money) {
         validateDivisibleByPricePerPiece(money);
         return new PurchaseQuantity((long) money.divide(PRICE_PER_PIECE));
@@ -28,5 +32,22 @@ public class PurchaseQuantity {
 
     public Money getPurchaseAmount() {
         return PRICE_PER_PIECE.multiply(quantity);
+    }
+
+    public PurchaseQuantity subtract(PurchaseQuantity other) {
+        return new PurchaseQuantity(this.quantity - other.quantity);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PurchaseQuantity)) return false;
+        PurchaseQuantity that = (PurchaseQuantity) o;
+        return quantity == that.quantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (quantity ^ (quantity >>> 32));
     }
 }
