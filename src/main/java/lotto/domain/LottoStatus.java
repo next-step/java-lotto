@@ -2,41 +2,60 @@ package lotto.domain;
 
 import lotto.generic.Money;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum LottoStatus {
-    NOTHING(0, 0L),
-    FOURTH(3, 5000L),
-    THIRD(4, 50000L),
-    SECOND(5, 1500000L),
-    FIRST(6, 2000000000L);
+    NOTHING(0, BonusNumberStatus.NOT_APPLY,0L),
+    FIFTH(3, BonusNumberStatus.NOT_APPLY,5_000L),
+    FOURTH(4, BonusNumberStatus.NOT_APPLY,50_000L),
+    THIRD(5, BonusNumberStatus.MISS,1_500_000L),
+    SECOND(5, BonusNumberStatus.MATCH,30_000_000L),
+    FIRST(6, BonusNumberStatus.NOT_APPLY,2_000_000_000L);
 
-    private static final Map<Integer, LottoStatus> lottoStatusMap =
-            Collections.unmodifiableMap(Stream.of(values())
-                    .collect(Collectors.toMap(LottoStatus::getHitCount, Function.identity())));
+    private final HitCount hitCount;
 
-    private final int hitCount;
+    private final BonusNumberStatus bonusNumberStatus;
 
     private final Money winningAmount;
 
-    LottoStatus(final int hitCount, final long winningAmount) {
-        this.hitCount = hitCount;
+    LottoStatus(final int hitCount, final BonusNumberStatus bonusNumberStatus, final long winningAmount) {
+        this.hitCount = new HitCount(hitCount);
+        this.bonusNumberStatus = bonusNumberStatus;
         this.winningAmount = Money.wons(winningAmount);
     }
 
-    public static LottoStatus find(final int hitCount) {
-        return Optional.ofNullable(lottoStatusMap.get(hitCount))
+    public static LottoStatus find(final HitCount hitCount, final BonusNumberStatus bonusNumberStatus) {
+        List<LottoStatus> lottoStatuses = find(hitCount);
+        if (lottoStatuses.size() == 1) {
+            return lottoStatuses.get(0);
+        }
+        return lottoStatuses.stream()
+                .filter(lottoStatus -> lottoStatus.isMatched(bonusNumberStatus))
+                .findFirst()
                 .orElse(LottoStatus.NOTHING);
     }
 
-    public int getHitCount() {
-        return hitCount;
+    private static List<LottoStatus> find(final HitCount hitCount) {
+        return Arrays.stream(values())
+                .filter(lottoStatus -> lottoStatus.isMatched(hitCount))
+                .collect(Collectors.toList());
     }
+
+    private boolean isMatched(final HitCount hitCount) {
+        return Objects.equals(this.hitCount, hitCount);
+    }
+
+    public boolean isMatched(final BonusNumberStatus bonusNumberStatus) {
+        return Objects.equals(this.bonusNumberStatus, bonusNumberStatus);
+    }
+
+    public int getHitCount() {
+        return hitCount.getValue();
+    }
+
 
     public Money getWinningAmount() {
         return winningAmount;

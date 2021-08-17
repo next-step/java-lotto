@@ -17,10 +17,10 @@ public class LottoTickets {
         }
     }
 
-    public Result check(final LottoNumbers winningNumbers) {
+    public Result check(final WinningNumbers winningNumbers) {
         Result result = new Result();
         lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.check(winningNumbers))
+                .map(winningNumbers::checkWinning)
                 .forEach(result::report);
         return result;
     }

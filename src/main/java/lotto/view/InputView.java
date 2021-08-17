@@ -10,19 +10,25 @@ public class InputView {
     }
 
     public int receivePurchaseMoney() {
-        String input;
-        System.out.println("구입금액을 입력해 주세요.");
-        do {
-            input = scanner.nextLine();
-        } while (!isNumber(input));
-        return Integer.parseInt(input);
+        return receiveNumber("구입금액을 입력해 주세요.");
     }
 
     public String receiveWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = scanner.nextLine();
-        scanner.close();
-        return input;
+        return scanner.nextLine();
+    }
+
+    public int receiveBonusNumber() {
+        return receiveNumber("보너스 볼을 입력해 주세요.");
+    }
+
+    private int receiveNumber(String message) {
+        String input;
+        System.out.println(message);
+        do {
+            input = scanner.nextLine();
+        } while (!isNumber(input));
+        return Integer.parseInt(input);
     }
 
     private boolean isNumber(String input) {
