@@ -24,10 +24,6 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public int getManualLottoQuantity() {
-        return this.manualLottoQuantity;
-    }
-
     public void checkLottosWinning(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             int matchCount = winningLotto.getMatchCount(lotto);

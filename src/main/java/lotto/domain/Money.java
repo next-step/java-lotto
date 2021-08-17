@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import calculator.InvalidInputException;
+
+import lotto.exception.InvalidInputException;
 
 public class Money {
     private static final String INVALID_LOTTO_PURCHASE_MONEY = "1000원이상 입력해야 로또 구매 가능합니다.";
 
-    private int purchaseMoney;
+    private static int purchaseMoney;
     private int reward;
 
     public Money(int purchaseMoney) {
@@ -20,7 +21,7 @@ public class Money {
         }
     }
 
-    public int getPurchaseMoney() {
+    public static int getPurchaseMoney() {
         return purchaseMoney;
     }
 

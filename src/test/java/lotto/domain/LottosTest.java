@@ -16,17 +16,20 @@ public class LottosTest {
     @DisplayName("로또 자동 구매 성공 테스트")
     @ValueSource(ints = {1, 2, 3, 4, 5})
     void 로또_자동_구매_성공_테스트(int purchaseQuantity) {
-        Lottos lottos = new Lottos(purchaseQuantity, new ArrayList<>());
-        assertThat(lottos.getLottos()
-                         .size()).isEqualTo(purchaseQuantity);
+        List<Lotto> automaticLottoList = new ArrayList<>();
+        for (int i = 0; i < purchaseQuantity; i++) {
+            automaticLottoList.add(Lotto.of("1,2,3,4,5,6"));
+        }
+        Lottos lottos = new Lottos(new ArrayList<>(), automaticLottoList);
+        assertThat(lottos.getLottos().size()).isEqualTo(purchaseQuantity);
     }
 
     @Test
     @DisplayName("로또 자동+수동 구매 성공 테스트")
     void 로또_자동_수동_구매_성공_테스트() {
         List<Lotto> manualLottoList = new ArrayList<>(Arrays.asList(Lotto.of("1,2,3,4,5,6")));
-        Lottos lottos = new Lottos(5, manualLottoList);
-        assertThat(lottos.getLottos().size()).isEqualTo(5);
-        assertThat(lottos.getManualLottoQuantity()).isEqualTo(1);
+        List<Lotto> automaticLottoList = new ArrayList<>(Arrays.asList(Lotto.of("1,2,3,4,5,6"), Lotto.of("7,8,9,10,11,12")));
+        Lottos lottos = new Lottos(manualLottoList, automaticLottoList);
+        assertThat(lottos.getLottos().size()).isEqualTo(3);
     }
 }

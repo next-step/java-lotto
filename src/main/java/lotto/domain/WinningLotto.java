@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import calculator.InvalidInputException;
+import lotto.exception.InvalidInputException;
 
 import java.util.Set;
 
