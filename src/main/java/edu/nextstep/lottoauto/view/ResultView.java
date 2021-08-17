@@ -4,6 +4,7 @@ import edu.nextstep.lottoauto.domain.Prize;
 import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.form.WinningResultForm;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -22,15 +23,14 @@ public class ResultView {
         Map<Prize, Integer> winningResult = winningResultForm.getWinningResult();
         double rateOfReturn = winningResultForm.getRateOfReturn();
 
-        for(Prize prize : Prize.values()) {
-            if (prize.equals(Prize.NULL)) {
-                break;
-            }
-            System.out.println(prize.getCountOfMatch() + "개 일치 " +
-                    "(" + prize.getWinningPrize() + "원)- " +
-                    winningResult.getOrDefault(prize,0) + "개"
-            );
-        }
+        Arrays.stream(Prize.values())
+                .filter((prize) -> !prize.equals(Prize.NULL))
+                .forEach((prize) -> {
+                    System.out.println(prize.getCountOfMatch() + "개 일치 " +
+                            "(" + prize.getWinningPrize() + "원)- " +
+                            winningResult.getOrDefault(prize,0) + "개"
+                    );
+                });
         System.out.printf("총 수익률은 %.2f 입니다.", + rateOfReturn);
     }
 }
