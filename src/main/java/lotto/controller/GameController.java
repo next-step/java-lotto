@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberStragey;
+import lotto.domain.Statistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,10 +13,12 @@ public class GameController {
 
     List<LottoNumber> buyLotto;
     LottoNumber winningNumber;
+    Statistics statistics;
 
     public GameController() {
         buyLotto = new ArrayList<>();
         winningNumber = new LottoNumber();
+        statistics = new Statistics();
     }
 
     public void init() {
@@ -30,7 +33,17 @@ public class GameController {
 
         resultView.lottoNumberView(buyLotto);
         winningNumber.setWinningNumber(inputView.winningLottoView());
+        checkLottoStatitics(buyLottoMoney);
+        resultView.winningResult(statistics);
+    }
 
+    private void checkLottoStatitics(int buyMoney) {
+
+        for (LottoNumber lotto : buyLotto) {
+            lotto.compreWinningNumber(winningNumber.getLotto(), statistics);
+        }
+
+        statistics.setEarnMoneyPercentage(buyMoney);
     }
 
 }

@@ -20,7 +20,7 @@ class WinningLottoTest {
         winningLotto.compareLottoNumber(lottoNumber, 1);
         winningLotto.compareLottoNumber(lottoNumber, 2);
         winningLotto.compareLottoNumber(lottoNumber, 3);
-        winningLotto.lottoPaperStatus();
+        winningLotto.updateLottoStatus();
     }
 
     @DisplayName("로또 번호 당첨 개수 확인 테스트")

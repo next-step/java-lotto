@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoNumber {
 
     private List<Integer> lotto = new ArrayList<>();
+    private WinningLotto winning = new WinningLotto();
 
     public LottoNumber() {
 
@@ -43,6 +44,16 @@ public class LottoNumber {
         }
 
         return winningNumber;
+    }
+
+    public void compreWinningNumber(List<Integer> winningNumbers, Statistics statistics) {
+
+        for (Integer number : winningNumbers) {
+            winning.compareLottoNumber(lotto, number);
+        }
+
+        winning.updateLottoStatus();
+        statistics.calculateRank(winning.getLottoStatus(), winning.getEarnMoney());
     }
 
 }
