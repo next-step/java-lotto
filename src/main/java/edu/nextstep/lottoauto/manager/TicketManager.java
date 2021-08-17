@@ -1,22 +1,16 @@
 package edu.nextstep.lottoauto.manager;
 
 import edu.nextstep.lottoauto.domain.Ticket;
-import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
 import edu.nextstep.lottoauto.form.WinningResultForm;
 import edu.nextstep.lottoauto.machine.TicketMachine;
 import edu.nextstep.lottoauto.ticketmaker.TicketMaker;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TicketManager {
 
     private static final int A_UNIT_PRICE = 1_000;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final int NUMBER_OF_NUMBERS = 6;
 
     private final TicketMachine ticketMachine = new TicketMachine();
 
@@ -33,23 +27,12 @@ public class TicketManager {
     }
 
     public WinningResultForm confirmWinningResult(String winningNumbersString) {
-        List<Integer> winningNumbers = createNumbersFromString(winningNumbersString);
-
-        validateNumberOfNumbers(winningNumbers);
-        validateOutOfRange(winningNumbers);
-
-        return ticketMachine.confirmWinningResult(winningNumbers);
+        Ticket winningTicket = Ticket.of(winningNumbersString);
+        return ticketMachine.confirmWinningResult(winningTicket);
     }
 
     public int calculateNumberOfTicketsFrom(int payment) {
         return payment / A_UNIT_PRICE;
-    }
-
-    private List<Integer> createNumbersFromString(String numbersString) {
-        return Arrays.stream(numbersString.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
     private void validateUnderAUnitPrice(int payment) {
@@ -62,16 +45,5 @@ public class TicketManager {
         if ((payment % A_UNIT_PRICE) != 0) {
             throw new PaymentIllegalArgumentException("개 당 금액 " + A_UNIT_PRICE + " 원으로 해당 단위로 입력 필요.");
         }
-    }
-
-    public void validateNumberOfNumbers(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != NUMBER_OF_NUMBERS) {
-            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + NUMBER_OF_NUMBERS);
-        }
-    }
-
-    private void validateOutOfRange(List<Integer> winningNumbers) {
-        if (winningNumbers.get(0) < MIN_NUMBER || winningNumbers.get(winningNumbers.size() - 1) > MAX_NUMBER) {
-            throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);        }
     }
 }

@@ -56,9 +56,10 @@ public class TicketTest {
         // given
         Ticket ticket = Ticket.of(createNumbersFromTo(1, 6));
         List<Integer> winningNumbers = createNumbersFromTo(numFrom, numTo);
+        Ticket winningTicket = Ticket.of(winningNumbers);
 
         // when
-        int countOfMatching = ticket.countMatchingNumbers(winningNumbers);
+        int countOfMatching = ticket.countMatchingNumbers(winningTicket);
 
         // then
         assertThat(countOfMatching).isEqualTo(result);

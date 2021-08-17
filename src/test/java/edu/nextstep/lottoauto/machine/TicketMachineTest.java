@@ -36,10 +36,10 @@ public class TicketMachineTest {
         ticketMachine.createAndSaveTickets(1, () -> Ticket.of(createNumbersFromTo(1,6)));
 
         // when
-        WinningResultForm winningResult = ticketMachine.confirmWinningResult(createNumbersFromTo(4,9));
+        WinningResultForm winningResult = ticketMachine.confirmWinningResult(Ticket.of(createNumbersFromTo(4,9)));
 
         // then
-        assertThat(winningResult.getWinningResult().get(Prize.FOURTH)).isEqualTo(1);
+        assertThat(winningResult.getWinningResult().getOrDefault(Prize.FOURTH,0)).isEqualTo(1);
         assertThat(winningResult.getRateOfReturn()).isEqualTo(5);
     }
 

@@ -25,21 +25,21 @@ public class TicketMachine {
         return ticketRepository.findAll();
     }
 
-    public WinningResultForm confirmWinningResult(List<Integer> winningNumbers) {
+    public WinningResultForm confirmWinningResult(Ticket winningTicket) {
         List<Ticket> tickets = ticketRepository.findAll();
 
-        Map<Prize, Integer> winningResult = makeWinningResult(winningNumbers, tickets);
+        Map<Prize, Integer> winningResult = makeWinningResult(winningTicket, tickets);
 
         double rateOfReturn = ((double)calculateTotalPrize(winningResult) / calculatePayment(tickets));
 
         return new WinningResultForm(winningResult, rateOfReturn);
     }
 
-    private Map<Prize, Integer> makeWinningResult(List<Integer> winningNumbers, List<Ticket> tickets) {
+    private Map<Prize, Integer> makeWinningResult(Ticket winningTicket, List<Ticket> tickets) {
         Map<Prize, Integer> winningResult = new LinkedHashMap<>();
 
         for (Ticket ticket : tickets) {
-            int countOfMatching = ticket.countMatchingNumbers(winningNumbers);
+            int countOfMatching = ticket.countMatchingNumbers(winningTicket);
             Prize prize = Prize.of(countOfMatching);
             winningResult.put(prize, (winningResult.getOrDefault(prize,0)+1));
         }
