@@ -5,6 +5,8 @@ import View.ResultView;
 
 import java.util.List;
 
+//import View.ResultView;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,6 +15,8 @@ public class Main {
 
         List<Lotto> lottos = lottoMachine.createLotto(new Money(InputView.insertBuyPrice()));
 
-        ResultView.printLottoResult(lottos);
+        List<Lotto> passvieLottos = lottoMachine.createPassiveLotto(InputView.insertPassiveCount());
+
+        ResultView.printLottoResult(lottos, passvieLottos);
     }
 }

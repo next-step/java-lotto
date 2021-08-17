@@ -20,6 +20,16 @@ public class LottoMachineTest {
 
         assertThat(lottos.size()).isEqualTo(50);
     }
+ @Test
+    @DisplayName("입력된 금액만큼 로또번호 반환")
+    void insertMoneyCreatePasiiveLotto() {
+
+        LottoMachine lottoMachine = new LottoMachine(new RandomNumberGenerator());
+
+        List<Lotto> lottos = lottoMachine.createPassiveLotto(3);
+
+        assertThat(lottos.size()).isEqualTo(3);
+    }
 
     @Test
     @DisplayName("로또최종 테스트 ")
@@ -32,15 +42,18 @@ public class LottoMachineTest {
         lottos.forEach(s -> System.out.println(s.getLottoNumbers()));
 
 
-        String lastWeekWinningNumber = "1, 2, 3, 4, 9, 6";
+        String lastWeekWinningNumber = "1, 2, 3, 4, 5, 6";
 
 
         List<WinningPrice> winningPrice = new ArrayList<>();
 
         for (int i = 0; i < lottos.size(); i++) {
-            winningPrice.add(WinningPrice.getWinnings(lottos.get(i).compareNumbers(WinningNumber.of(lastWeekWinningNumber).getWinningNumbers()), lottos.get(i).getLottoNumbers().contains(7)));
+            winningPrice.add(
+                    WinningPrice.getWinnings(
+                            lottos.get(i).compareNumbers(WinningNumber.of(lastWeekWinningNumber).getWinningNumbers()),
+                            lottos.get(i).getLottoNumbers().contains(7))
+            );
         }
-
 
         WinningResult winningResult = WinningResult.of(winningPrice);
 

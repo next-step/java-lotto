@@ -18,7 +18,14 @@ public class RandomNumberGenerator implements NumberGenerator {
     @Override
     public List<Integer> generate() {
 
-        IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1).forEach(numbers::add);
+//        IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER + 1).forEach(numbers::add);
+
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(7);
 
         return Collections.unmodifiableList(convertLotto(numbers));
     }

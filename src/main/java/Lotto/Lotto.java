@@ -19,11 +19,11 @@ public class Lotto {
         return lottoNumbers.getLottoNumbers();
     }
 
-    public int compareNumbers(List<Integer> userNumbers) {
+    public int compareNumbers(List<Integer> lastWeekWinningNumber) {
 
         return lottoNumbers.getLottoNumbers()
                 .stream()
-                .filter(number -> userNumbers.contains(number))
+                .filter(number -> lastWeekWinningNumber.contains(number))
                 .collect(Collectors.toList()).size();
     }
 
