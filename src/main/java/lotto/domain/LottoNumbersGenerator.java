@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoNumbersGenerator {
@@ -14,8 +15,14 @@ public class LottoNumbersGenerator {
         this.sourceLottoNumbers = Objects.requireNonNull(sourceLottoNumbers);
     }
 
-    public static LottoNumbersGenerator of(List<LottoNumber> sourceLottoNumbers) {
-        return new LottoNumbersGenerator(sourceLottoNumbers);
+    public static LottoNumbersGenerator rangeClosed(int lowerBound, int upperBound) {
+        return new LottoNumbersGenerator(createLottoNumbers(lowerBound, upperBound));
+    }
+
+    private static List<LottoNumber> createLottoNumbers(int lowerBound, int upperBound) {
+        return IntStream.rangeClosed(lowerBound, upperBound)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     public LottoNumbers generate() {

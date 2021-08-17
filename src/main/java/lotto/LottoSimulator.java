@@ -4,10 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class LottoSimulator {
 
     private final InputView inputView;
@@ -18,18 +14,12 @@ public class LottoSimulator {
         try {
             InputView inputView = InputView.of(System.in);
             OutputView outputView = OutputView.of(System.out);
-            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.of(createLottoNumbers());
+            LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound());
             LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoNumbersGenerator);
             lottoSimulator.run();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound())
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList());
     }
 
     public LottoSimulator(InputView inputView, OutputView outputView, LottoNumbersGenerator lottoNumbersGenerator) {
