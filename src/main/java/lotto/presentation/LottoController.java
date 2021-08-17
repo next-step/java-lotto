@@ -31,9 +31,12 @@ public class LottoController {
     }
 
     private LottoTickets inputManualLottoTickets(Chance manualChance) {
-        ManualLottoTicketInputView inputView = new ManualLottoTicketInputView();
-        LottoTicketsParser parser = new LottoTicketsParser();
-        return parser.parse(inputView.input(manualChance));
+        if(manualChance.isLeft()) {
+            ManualLottoTicketInputView inputView = new ManualLottoTicketInputView();
+            LottoTicketsParser parser = new LottoTicketsParser();
+            return parser.parse(inputView.input(manualChance));
+        }
+        return LottoTickets.empty();
     }
 
     private Chance inputManualChance() {

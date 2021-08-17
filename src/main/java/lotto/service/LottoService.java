@@ -7,7 +7,7 @@ import lotto.domain.LottoTickets;
 
 public class LottoService {
     public LottoTickets execute(Chance chance, LottoGenerator lottoGenerator) {
-        LottoTickets lottoTickets = new LottoTickets();
+        LottoTickets lottoTickets = LottoTickets.empty();
         while (chance.isLeft()) {
             LottoTicket lottoTicket = lottoGenerator.generate();
             lottoTickets.add(lottoTicket);

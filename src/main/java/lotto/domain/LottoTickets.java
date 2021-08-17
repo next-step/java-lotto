@@ -7,8 +7,12 @@ import java.util.Objects;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
+    private LottoTickets() {
         lottoTickets = new ArrayList<>();
+    }
+
+    public static LottoTickets empty() {
+        return new LottoTickets();
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
