@@ -10,7 +10,7 @@ public class Customer {
     private static int resultPrize = 0;
 
     private static final LottoMachine lottoMachine = new LottoMachine();
-    private HashMap<Rank, Integer> resultRankMap = new HashMap<>();
+    private Map<Rank, Integer> resultRankMap = new HashMap<>();
 
     public Customer() {
         preareRankMap();
