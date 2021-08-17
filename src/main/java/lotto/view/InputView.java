@@ -1,14 +1,15 @@
 package lotto.view;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_LOTTO_BUY_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTOTICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String INPUT_MANUAL_LOTTOTICKETS = "수동으로 구매할 번호를 입력해 주세요.";
+    //    private static final String INPUT_MANUAL_LOTTOTICKETS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_LAST_WEEK_WINNER_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
@@ -36,16 +37,12 @@ public class InputView {
         return inputIntValue();
     }
 
-    public List<String> inputManualLottoTickets(int lottoTicketCount) {
-        if (lottoTicketCount > 0) {
-            System.out.println("\n" + INPUT_MANUAL_LOTTOTICKETS);
-        }
-
-        List<String> lottoTicketsList = new ArrayList<>();
-        for (int i = 0; i < lottoTicketCount; i++) {
-            lottoTicketsList.add(inputStringValue());
-        }
-        return lottoTicketsList;
+    public List<Integer> inputManualLottoTickets() {
+        String[] lottoTicketStringArray = inputStringValue().split(",");
+        int[] lottoTicketIntArray = Arrays.stream(lottoTicketStringArray)
+            .mapToInt(s -> Integer.parseInt(s.trim()))
+            .toArray();
+        return Arrays.stream(lottoTicketIntArray).boxed().collect(Collectors.toList());
     }
 
     public String inputLastWeekWinnerNumbers() {
