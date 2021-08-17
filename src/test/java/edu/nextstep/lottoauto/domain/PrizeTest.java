@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class PrizeTest {
 
     @ParameterizedTest(name = "Prize enum 정적 팩토리 생성자 Test [{index}] {0}, {1}")
-    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, NULL"})
+    @CsvSource({"6, FIRST", "5, SECOND", "4, THIRD", "3, FOURTH", "0, LOSE"})
     void of(int countOfMatching, Prize checkPrize) {
         // when
         Prize prize = Prize.of(countOfMatching);

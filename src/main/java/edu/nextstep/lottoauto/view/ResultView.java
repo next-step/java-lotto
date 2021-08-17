@@ -24,7 +24,7 @@ public class ResultView {
         double rateOfReturn = winningResultForm.getRateOfReturn();
 
         Arrays.stream(Prize.values())
-                .filter((prize) -> !prize.equals(Prize.NULL))
+                .filter((prize) -> !prize.equals(Prize.LOSE))
                 .forEach((prize) -> {
                     System.out.println(prize.getCountOfMatch() + "개 일치 " +
                             "(" + prize.getWinningPrize() + "원)- " +

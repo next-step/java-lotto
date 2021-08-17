@@ -7,7 +7,7 @@ public enum Prize {
     SECOND(5, 15_000_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
-    NULL(0, 0);
+    LOSE(0, 0);
 
 
     private final int countOfMatch;
@@ -22,7 +22,7 @@ public enum Prize {
         return Arrays.stream(Prize.values())
                 .filter((prize) -> (prize.getCountOfMatch() == numOfMatch))
                 .findFirst()
-                .orElse(NULL);
+                .orElse(LOSE);
     }
 
     public int getCountOfMatch() {
