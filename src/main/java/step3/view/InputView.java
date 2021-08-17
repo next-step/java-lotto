@@ -33,4 +33,8 @@ public class InputView {
         sc.nextLine();
         return manualPurchase;
     }
+
+    public void requestManualLottoNumber() {
+
+    }
 }
