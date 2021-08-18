@@ -6,48 +6,45 @@ import java.util.Map;
 
 public class WinningReport {
 
-    private final Map<Rank, Integer> statistics;
+    private final List<Rank> statistics;
     private double profitRate;
 
     public WinningReport(List<Rank> ranks) {
-        this.statistics = transformToMap(ranks);
+        this.statistics = ranks;
         this.profitRate = calculateRate();
     }
 
-    private double calculateRate() {
-        long ticketCount = statistics.values().stream().mapToLong(Long::valueOf).sum();
-        long ticketWinningCount = statistics.keySet().stream()
-                .filter(k -> statistics.get(k) != 0)
-                .mapToLong(k -> statistics.get(k) * (k.getWinningBonus() / LottoTicketOffice.PRICE))
-                .sum();
+    public double getProfitRate() {
+        return profitRate;
+    }
 
-        double expectedProfitRate = toDouble(ticketWinningCount) / toDouble(ticketCount);
+    public int getRankCount(Rank rank) {
+        return Math.toIntExact(
+                statistics.stream()
+                        .filter(it -> it == rank)
+                        .count()
+        );
+    }
+
+    private double calculateRate() {
+        double expectedProfitRate = toDouble(countTotalWinningBonus()) / toDouble(countTicket());
 
         return Math.floor(expectedProfitRate * 100) / 100;
+    }
+
+    private long countTotalWinningBonus() {
+        return statistics.stream()
+                .filter(rank -> rank != Rank.MISS)
+                .mapToLong(rank -> rank.getWinningBonus() / LottoTicketOffice.PRICE)
+                .sum();
+    }
+
+    private long countTicket() {
+        return (long) statistics.size();
     }
 
     private double toDouble(long value) {
         return Long.valueOf(value).doubleValue();
     }
 
-    private Map<Rank, Integer> transformToMap(List<Rank> ranks) {
-        Map<Rank, Integer> result = new HashMap<>();
-
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-
-        for (Rank rank : ranks) {
-            result.put(rank, result.get(rank) + 1);
-        }
-        return result;
-    }
-
-    public Map<Rank, Integer> getStatistics() {
-        return statistics;
-    }
-
-    public double getProfitRate() {
-        return profitRate;
-    }
 }

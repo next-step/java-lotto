@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println(REPORT_START_MSG);
         System.out.println(REPORT_DIVIDING_LINE);
 
-        printStatistics(report.getStatistics());
+        printStatistics(report);
         printProfitRate(report.getProfitRate());
     }
 
@@ -34,11 +34,11 @@ public class OutputView {
         System.out.println(String.format(REPORT_PROFIT_RATE_MSG, profitRate));
     }
 
-    private static void printStatistics(Map<Rank, Integer> statistics) {
+    private static void printStatistics(WinningReport report) {
         Rank[] ranks = {Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.SIXTH};
 
         for (Rank rank : ranks) {
-            System.out.println(String.format(REPORT_STATISTICS_MSG, rank.getMatch(), rank.getWinningBonus(), statistics.get(rank)));
+            System.out.println(String.format(REPORT_STATISTICS_MSG, rank.getMatch(), rank.getWinningBonus(), report.getRankCount(rank)));
         }
     }
 

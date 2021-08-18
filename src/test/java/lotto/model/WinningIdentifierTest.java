@@ -69,11 +69,11 @@ class WinningIdentifierTest {
     void 여러개_로또당첨_결과_한번에_확인() {
         WinningReport report = winningIdentifier.checkTicketsWinning(lottoTickets);
         assertAll(
-                () -> assertThat(report.getStatistics().get(Rank.SIXTH)).isEqualTo(0),
-                () -> assertThat(report.getStatistics().get(Rank.FIFTH)).isEqualTo(1),
-                () -> assertThat(report.getStatistics().get(Rank.FOURTH)).isEqualTo(2),
-                () -> assertThat(report.getStatistics().get(Rank.THIRD)).isEqualTo(1),
-                () -> assertThat(report.getStatistics().get(Rank.MISS)).isEqualTo(1)
+                () -> assertThat(report.getRankCount(Rank.SIXTH)).isEqualTo(0),
+                () -> assertThat(report.getRankCount(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(report.getRankCount(Rank.FOURTH)).isEqualTo(2),
+                () -> assertThat(report.getRankCount(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(report.getRankCount(Rank.MISS)).isEqualTo(1)
         );
     }
 
