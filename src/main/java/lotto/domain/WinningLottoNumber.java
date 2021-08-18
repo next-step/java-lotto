@@ -9,6 +9,10 @@ public class WinningLottoNumber {
     public static final int MAX_NUMBER_BOUND = 45;
     private Set<Integer> winningNumber = new TreeSet<>();
 
+    public Set<Integer> getWinningNumber() {
+        return winningNumber;
+    }
+
     public void setWinningNumber(String winningNumbers) {
         String[] numbers = winningNumbers.split(",");
 

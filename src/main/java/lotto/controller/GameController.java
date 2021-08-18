@@ -26,14 +26,14 @@ public class GameController {
         RandomNumber numberStragey = new LottoNumberStragey();
         int buyLottoMoney = inputView.buyLottoView();
 
-        for(int count = 0; count < buyLottoMoney / InputView.MINIMUM_LOTTO_MONEY; count++) {
+        for (int count = 0; count < buyLottoMoney / InputView.MINIMUM_LOTTO_MONEY; count++) {
             buyLotto.add(new LottoPaper(numberStragey));
         }
 
         resultView.lottoNumberView(buyLotto);
         winningNumber.setWinningNumber(inputView.winningLottoView());
-
-        resultView.winningResult(statistics);
+        statistics.calculateWinningResult(buyLotto, winningNumber);
+        resultView.winningResult(statistics, buyLottoMoney);
     }
 
 

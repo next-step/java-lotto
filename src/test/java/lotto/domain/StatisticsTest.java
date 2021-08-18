@@ -1,27 +1,46 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StatisticsTest {
 
+    List<LottoPaper> lottoPaper;
+    WinningLottoNumber winningLottoNumber;
+    Statistics statistics;
+
+    @BeforeEach
+    public void init() {
+        statistics = new Statistics();
+        lottoPaper = new ArrayList<>();
+        winningLottoNumber = new WinningLottoNumber();
+        lottoPaper.add(new LottoPaper(
+                new LottoNumberStragey(){
+                    @Override
+                    public Set<Integer> getLottoNumber() {
+                        return new HashSet<>(Arrays.asList(1,2,3,4,5,6));
+                    }
+                }
+        ));
+        winningLottoNumber.setWinningNumber("1,2,3,4,5,6");
+        statistics.calculateWinningResult(lottoPaper,winningLottoNumber);
+    }
+
     @DisplayName("당첨 개수 확인 테스트")
     @Test
     public void statisticMatchTest() {
-        Statistics statistics = new Statistics();
-        statistics.calculateRank(WinnigResult.FIRST, WinnigResult.FIRST_EARN_MONEY);
         assertThat(statistics.winningCount(WinnigResult.FIRST)).isEqualTo(1);
     }
 
-    @DisplayName("당첨 금액 확인 테스트")
+    @DisplayName("당첨 금액 테스트")
     @Test
-    public void statisticEarnMoneyTest() {
-        Statistics statistics = new Statistics();
-        statistics.calculateRank(WinnigResult.FOURTH, WinnigResult.FOURTH_EARN_MONEY);
-        statistics.setEarnMoneyPercentage(5000);
-        assertThat(statistics.getEarnMoneyPercentage()).isEqualTo(1);
+    public void earnMoneyTest() {
+        assertThat(statistics.getEarnMoney()).isEqualTo(WinnigResult.FIRST_EARN_MONEY);
     }
 
 }

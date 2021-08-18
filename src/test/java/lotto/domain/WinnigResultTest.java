@@ -4,11 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnigResultTest {
@@ -18,23 +13,20 @@ class WinnigResultTest {
     @BeforeEach
     public void init() {
         winnigResult = new WinnigResult();
-        Set<Integer> lottoNumber = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
-        winnigResult.compareLottoNumber(lottoNumber, 1);
-        winnigResult.compareLottoNumber(lottoNumber, 2);
-        winnigResult.compareLottoNumber(lottoNumber, 3);
-        winnigResult.updateLottoStatus();
     }
 
-    @DisplayName("로또 번호 당첨 개수 확인 테스트")
+    @DisplayName("로또 당첨 번호 개수 테스트")
     @Test
     public void lottoMatchTest() {
-        assertThat(winnigResult.getLottoStatus()).isEqualTo(WinnigResult.FOURTH);
+        assertThat(winnigResult.getLottoStatus(WinnigResult.FIRST_MATCH)).
+                isEqualTo(WinnigResult.FIRST);
     }
 
-    @DisplayName("로또 당첨 금액 테스트")
+    @DisplayName("로또 당첨 번호 개수 테스트")
     @Test
     public void lottoEarnMoneyTest() {
-        assertThat(winnigResult.getEarnMoney()).isEqualTo(WinnigResult.FOURTH_EARN_MONEY);
+        assertThat(winnigResult.getEarnMoney(WinnigResult.FIRST, 1)).
+                isEqualTo(WinnigResult.FIRST_EARN_MONEY);
     }
 
 }

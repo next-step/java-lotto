@@ -7,7 +7,6 @@ public class LottoPaper {
     public static final int MATCH_COUNT = 1;
     public static final int NON_MATCH_COUNT = 0;
     private Set<Integer> lottoNumber;
-    private WinnigResult winning = new WinnigResult();
 
     public LottoPaper(RandomNumber lottoNumberStragey) {
         lottoNumber = lottoNumberStragey.getLottoNumber();
@@ -27,16 +26,6 @@ public class LottoPaper {
 
     private int containCheck(int winningNumber) {
         return lottoNumber.contains(winningNumber) ? MATCH_COUNT : NON_MATCH_COUNT;
-    }
-
-    public void compreWinningNumber(Set<Integer> winningNumbers, Statistics statistics) {
-
-        for (Integer number : winningNumbers) {
-            winning.compareLottoNumber(lottoNumber, number);
-        }
-
-        winning.updateLottoStatus();
-        statistics.calculateRank(winning.getLottoStatus(), winning.getEarnMoney());
     }
 
 }

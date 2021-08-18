@@ -19,13 +19,14 @@ public class ResultView {
         }
     }
 
-    public void winningResult(Statistics statistics) {
+    public void winningResult(Statistics statistics, int buyMoney) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         for (String status : WinnigResult.winStatus) {
             resultMsg(status, statistics.winningCount(status));
         }
-        System.out.println("총 수익률은 " + String.format("%.2f", statistics.getEarnMoneyPercentage()) + " 입니다.");
+        double earnRate = (double) statistics.getEarnMoney() / buyMoney;
+        System.out.println("총 수익률은 " + String.format("%.2f", earnRate) + " 입니다.");
     }
 
     private void resultMsg(String status, int count) {
