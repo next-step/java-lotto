@@ -23,13 +23,13 @@ public class Winning {
         for (LottoNumber number : lottery.getLottery()) {
             countOfMatch += containLottoNumber(number);
         }
-        boolean isContainBonusBall = lottery.getLottery().contains(bonusNumber);
+        boolean isContainBonusBall = lottery.contains(bonusNumber);
 
         return Rank.getRankBy(countOfMatch, isContainBonusBall);
     }
 
     private int containLottoNumber(LottoNumber lottoNumber) {
-        if (winnerNumber.getLottery().contains(lottoNumber)) {
+        if (winnerNumber.contains(lottoNumber)) {
             return COUNT;
         }
         return NO_COUNT;

@@ -13,6 +13,12 @@ public class LottoStatistics {
         this.countOfWinning = countOfWinning;
     }
 
+    public void countRank() {
+        for (Rank rank : lottoStatistics) {
+            
+        }
+    }
+
     public LottoStatistics(List<Rank> lottoStatistics) {
         this.lottoStatistics = lottoStatistics;
     }

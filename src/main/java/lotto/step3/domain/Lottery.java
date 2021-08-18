@@ -13,6 +13,10 @@ public class Lottery {
         this.lottery = lottery;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottery.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottery() {
         return lottery;
     }

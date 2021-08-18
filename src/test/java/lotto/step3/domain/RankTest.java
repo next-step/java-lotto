@@ -16,8 +16,7 @@ public class RankTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(15), new LottoNumber(14), new LottoNumber(13), new LottoNumber(2), new LottoNumber(1), new LottoNumber(3));
         Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(10));
-        int countOfMatch = lottery.matchWinningNumber(winning);
-        Rank rank = Rank.getRankBy(countOfMatch, lottery.containBonus(winning));
+        Rank rank = winning.match(lottery);
         Assertions.assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
@@ -28,8 +27,7 @@ public class RankTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(15), new LottoNumber(14), new LottoNumber(13), new LottoNumber(2), new LottoNumber(11), new LottoNumber(3));
         Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(10));
-        int countOfMatch = lottery.matchWinningNumber(winning);
-        Rank rank = Rank.getRankBy(countOfMatch, lottery.containBonus(winning));
+        Rank rank = winning.match(lottery);
         Assertions.assertThat(rank).isEqualTo(Rank.FOURTH);
     }
 
@@ -40,8 +38,7 @@ public class RankTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(15), new LottoNumber(14), new LottoNumber(13), new LottoNumber(12), new LottoNumber(11), new LottoNumber(3));
         Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(9));
-        int countOfMatch = lottery.matchWinningNumber(winning);
-        Rank rank = Rank.getRankBy(countOfMatch, lottery.containBonus(winning));
+        Rank rank = winning.match(lottery);
         Assertions.assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
@@ -52,8 +49,7 @@ public class RankTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(15), new LottoNumber(14), new LottoNumber(13), new LottoNumber(12), new LottoNumber(11), new LottoNumber(3));
         Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(10));
-        int countOfMatch = lottery.matchWinningNumber(winning);
-        Rank rank = Rank.getRankBy(countOfMatch, lottery.containBonus(winning));
+        Rank rank = winning.match(lottery);
         Assertions.assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
@@ -64,8 +60,7 @@ public class RankTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(15), new LottoNumber(14), new LottoNumber(13), new LottoNumber(12), new LottoNumber(11), new LottoNumber(10));
         Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(20));
-        int countOfMatch = lottery.matchWinningNumber(winning);
-        Rank rank = Rank.getRankBy(countOfMatch, lottery.containBonus(winning));
+        Rank rank = winning.match(lottery);
         Assertions.assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
