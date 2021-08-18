@@ -103,21 +103,18 @@
       - 로또 번호 리스트를 가진 일급 컬렉션
    2. Prize(enum) : 상금
       - 일치하는 번호 개수에 따른 상금을 나타내는 enumeration
-   
-2. business logic
-   1. TicketManager : 창구 역할, 형변환
-      - 금액을 복권 개수로 변경
-      - 당첨 번호 `String` -> `List<Integer>` 형태로 변형
-      - TicketMachine 에게 복권 생성, 당첨 결과 등을 요청
-   2. TicketMachine : 복권 기계
-      - TicketMaker 를 이용하여 복권 생성 및 TicketRepository 를 이용한 저장
+   3. TicketMachine : 복권 기계
+      - 복권 생성 및 TicketRepository 를 이용한 저장
       - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
-   3. TicketRepository
+   4. TicketRepository
       - 복권 저장
       - 복권 조회
-   4. AutoTicketMaker implements TicketMaker
-      - 자동 복권 생성
+   5. AutoNumbersMaker implements TicketMaker
+      - 자동 번호 리스트 생성
+   6. CustomNumbersMaker implements TicketMaker
+      - 입력한 번호 리스트 생성
    
-3. form
+   
+2. form
    1. WinningResultForm
       - 당첨 결과가 정리된 양식
