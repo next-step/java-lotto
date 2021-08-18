@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoPaper;
 import lotto.domain.Statistics;
 import lotto.domain.WinnigResult;
 
@@ -13,9 +13,9 @@ public class ResultView {
     public static final String THIRD_MSG = "4개 일치 (" + WinnigResult.THIRD_EARN_MONEY + "원) -";
     public static final String FOURTH_MSG = "3개 일치 (" + WinnigResult.FOURTH_EARN_MONEY + "원) -";
 
-    public void lottoNumberView(List<LottoNumber> lottos) {
-        for (LottoNumber lottoNumber : lottos) {
-            System.out.println(lottoNumber.getLotto());
+    public void lottoNumberView(List<LottoPaper> lottos) {
+        for (LottoPaper lottoPaper : lottos) {
+            System.out.println(lottoPaper.getLottoNumber());
         }
     }
 

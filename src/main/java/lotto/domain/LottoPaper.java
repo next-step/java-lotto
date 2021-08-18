@@ -2,23 +2,23 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoNumber {
+public class LottoPaper {
 
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
-    private Set<Integer> lotto = new HashSet<>();
+    private Set<Integer> lottoNumber = new HashSet<>();
     private WinnigResult winning = new WinnigResult();
 
-    public LottoNumber() {
+    public LottoPaper() {
 
     }
 
-    public LottoNumber(RandomNumber lottoNumberStragey) {
-        lotto = lottoNumberStragey.getLottoNumber();
+    public LottoPaper(RandomNumber lottoNumberStragey) {
+        lottoNumber = lottoNumberStragey.getLottoNumber();
     }
 
-    public Set<Integer> getLotto() {
-        return lotto;
+    public Set<Integer> getLottoNumber() {
+        return lottoNumber;
     }
 
     public void setWinningNumber(String winningNumbers) {
@@ -28,12 +28,12 @@ public class LottoNumber {
             throw new IllegalArgumentException("숫자는 총 6개여야 합니다.");
         }
 
-        for(int count = 0; count < numbers.length; count++) {
-            int winningNumber = checkWinningNumber(numbers[count]);
-            lotto.add(winningNumber);
+        for (String number : numbers) {
+            int winningNumber = checkWinningNumber(number);
+            lottoNumber.add(winningNumber);
         }
 
-        Collections.sort(new ArrayList<Integer>(lotto));
+        Collections.sort(new ArrayList<>(lottoNumber));
     }
 
     private int checkWinningNumber(String numberStr) {
@@ -49,7 +49,7 @@ public class LottoNumber {
     public void compreWinningNumber(Set<Integer> winningNumbers, Statistics statistics) {
 
         for (Integer number : winningNumbers) {
-            winning.compareLottoNumber(lotto, number);
+            winning.compareLottoNumber(lottoNumber, number);
         }
 
         winning.updateLottoStatus();

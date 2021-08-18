@@ -13,8 +13,9 @@ public class LottoNumberShufle {
         Collections.shuffle(LOTTO_ENTRY);
         List<Integer> lottoNumber = new ArrayList<>(LOTTO_ENTRY.subList(0, 6));
         Collections.sort(lottoNumber);
+        Set<Integer> number = new HashSet<>(lottoNumber);
 
-        return new HashSet<>(lottoNumber);
+        return number;
     }
 
 }
