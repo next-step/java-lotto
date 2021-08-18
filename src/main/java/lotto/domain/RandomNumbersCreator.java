@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomNumbers implements LottoNumbersCreator {
+public class RandomNumbersCreator implements LottoNumbersCreator {
 
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;

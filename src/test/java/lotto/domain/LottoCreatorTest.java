@@ -15,7 +15,7 @@ class LottoCreatorTest {
     @Test
     void buyLotto() {
         assertThat(new LottoCreator(14000)
-                .createLottos(new RandomNumbers()).size())
+                .createLottos(new RandomNumbersCreator()).size())
                 .isEqualTo(14);
     }
 
