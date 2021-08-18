@@ -27,7 +27,7 @@ public class TicketManager {
     }
 
     public WinningResultForm confirmWinningResult(String winningNumbersString) {
-        Ticket winningTicket = Ticket.of(winningNumbersString);
+        Ticket winningTicket = ticketMachine.createCustomTicket(winningNumbersString);
         return ticketMachine.confirmWinningResult(winningTicket);
     }
 

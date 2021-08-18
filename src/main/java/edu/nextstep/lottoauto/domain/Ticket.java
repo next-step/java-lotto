@@ -23,23 +23,8 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    public static Ticket of(List<Integer> numbers) {
-        return new Ticket(numbers);
-    }
-
-    public static Ticket of(String numbersString) {
-        return new Ticket(createNumbersFromString(numbersString));
-    }
-
-    public static Ticket of(NumbersMaker numbersMaker) {
+    public static Ticket madeBy(NumbersMaker numbersMaker) {
         return new Ticket(numbersMaker.create());
-    }
-
-    private static List<Integer> createNumbersFromString(String numbersString) {
-        return Arrays.stream(numbersString.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
     }
 
     public int countMatchingNumbers(Ticket winningTicket) {

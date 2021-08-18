@@ -15,7 +15,7 @@ public class TicketRepositoryTest {
     @DisplayName("Ticket 저장 및 조회 Test")
     void saveAndFindAll() {
         // given
-        Ticket ticket = Ticket.of(createNumbersFromTo(1, 6));
+        Ticket ticket = Ticket.madeBy(() -> createNumbersFromTo(1, 6));
 
         // when
         TicketRepository ticketRepository = new TicketRepository();

@@ -3,6 +3,7 @@ package edu.nextstep.lottoauto.machine;
 import edu.nextstep.lottoauto.domain.Prize;
 import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.form.WinningResultForm;
+import edu.nextstep.lottoauto.ticketmaker.CustomNumbersMaker;
 import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
 import edu.nextstep.lottoauto.repository.TicketRepository;
 
@@ -16,9 +17,13 @@ public class TicketMachine {
 
     public void createAndSaveTickets(int numberOfTickets, NumbersMaker numbersMaker) {
         for (int i = 0; i < numberOfTickets; i++) {
-            Ticket ticket = Ticket.of(numbersMaker);
+            Ticket ticket = Ticket.madeBy(numbersMaker);
             ticketRepository.save(ticket);
         }
+    }
+
+    public Ticket createCustomTicket(String numbersString){
+        return Ticket.madeBy(new CustomNumbersMaker(numbersString));
     }
 
     public List<Ticket> findTickets() {

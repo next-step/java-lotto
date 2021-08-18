@@ -36,7 +36,8 @@ public class TicketMachineTest {
         ticketMachine.createAndSaveTickets(1, () -> createNumbersFromTo(1,6));
 
         // when
-        WinningResultForm winningResult = ticketMachine.confirmWinningResult(Ticket.of(createNumbersFromTo(4,9)));
+        WinningResultForm winningResult =
+                ticketMachine.confirmWinningResult(Ticket.madeBy(() -> createNumbersFromTo(4,9)));
 
         // then
         assertThat(winningResult.getWinningResult().getOrDefault(Prize.FOURTH,0)).isEqualTo(1);

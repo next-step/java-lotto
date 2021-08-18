@@ -18,7 +18,7 @@ public class TicketTest {
         List<Integer> numbers = createNumbersFromTo(numFrom,numTo);
 
         // when
-        Ticket ticket = Ticket.of(numbers);
+        Ticket ticket = Ticket.madeBy(() -> numbers);
 
         // then
         assertThat(ticket.getNumbers()).isEqualTo(numbers);
@@ -31,7 +31,7 @@ public class TicketTest {
         List<Integer> numbers = createNumbersFromTo(numFrom,numTo);
 
         // when, then
-        assertThatThrownBy(() -> Ticket.of(numbers))
+        assertThatThrownBy(() -> Ticket.madeBy(() -> numbers))
                 .isInstanceOf(NumbersIllegalArgumentException.class)
                 .hasMessageContaining("입력 숫자 개수 미달 or 초과.");
     }
@@ -43,7 +43,7 @@ public class TicketTest {
         List<Integer> numbers = createNumbersFromTo(numFrom,numTo);
 
         // when, then
-        assertThatThrownBy(() -> Ticket.of(numbers))
+        assertThatThrownBy(() -> Ticket.madeBy(() -> numbers))
                 .isInstanceOf(NumbersIllegalArgumentException.class)
                 .hasMessageContaining("지정 가능 숫자 범위 초과.");
     }
@@ -52,9 +52,9 @@ public class TicketTest {
     @CsvSource({"1, 6, 6", "2, 7, 5", "3, 8, 4", "4, 9, 3"})
     void countMatchingNumbers(int numFrom, int numTo, int result) {
         // given
-        Ticket ticket = Ticket.of(createNumbersFromTo(1, 6));
+        Ticket ticket = Ticket.madeBy(() -> createNumbersFromTo(1, 6));
         List<Integer> winningNumbers = createNumbersFromTo(numFrom, numTo);
-        Ticket winningTicket = Ticket.of(winningNumbers);
+        Ticket winningTicket = Ticket.madeBy(() -> winningNumbers);
 
         // when
         int countOfMatching = ticket.countMatchingNumbers(winningTicket);
