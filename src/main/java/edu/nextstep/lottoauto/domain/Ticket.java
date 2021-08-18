@@ -3,10 +3,8 @@ package edu.nextstep.lottoauto.domain;
 import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
 import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Ticket {
 
