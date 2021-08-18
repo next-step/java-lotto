@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,5 +29,12 @@ class LottoNumberTest {
     public void lottoNumberEqualsAndHashcodeTest(int number) {
         assertThat(LottoNumber.of(number))
                 .isEqualTo(LottoNumber.of(number));
+    }
+
+    @DisplayName("로또 번호 캐시 테스트")
+    @Test
+    public void lottoNumberCacheTest() {
+        assertThat(LottoNumber.of(1) == LottoNumber.of(1))
+                .isTrue();
     }
 }

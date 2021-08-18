@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
     private static final String OUT_OF_RANGE_EXCEPTION_MESSAGE_FORMAT = "로또 숫자는 1에서 45 사이의 값이어야 합니다. number: %d";
+
+    private static final Map<Integer, LottoNumber> cache = new ConcurrentHashMap<>();
 
     private final int number;
 
@@ -20,7 +25,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        return new LottoNumber(number);
+        if (!cache.containsKey(number)) {
+            cache.putIfAbsent(number, new LottoNumber(number));
+        }
+        return cache.get(number);
     }
 
     public static int getLowerBound() {
