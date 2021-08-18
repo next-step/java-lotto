@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.*;
 import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
-import lotto.util.LottoListGenerator;
+import lotto.util.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,8 +16,12 @@ public class LottoMain {
         int lottoPurchaseAmount = InputView.requestPurchaseAmount();
         int ticketNumber = lottoPurchaseAmount / 1000;
 
+        int manualTicketNumber = InputView.requestManualTicket();
+        List<Set<Integer>> manualLottoNumbers = InputView.requestManualNumbers(manualTicketNumber);
+
         LottoGame lottoGame = new LottoGame();
-        LottoPurchaseResult lottoPurchaseResponse = lottoGame.purchase(LottoListGenerator.creatLottos(ticketNumber));
+        List<Lotto> lotto = LottoGenerator.createLottos(manualLottoNumbers, ticketNumber);
+        LottoPurchaseResult lottoPurchaseResponse = lottoGame.purchase(lotto);
         ResultView.printPurchaseLottos(lottoPurchaseResponse);
 
         LottoDrawResult lottoResult = lottoGame.drawLotto(getWinnerLotto());

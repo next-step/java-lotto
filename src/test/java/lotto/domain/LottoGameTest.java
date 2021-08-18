@@ -1,12 +1,16 @@
 package lotto.domain;
 
 import lotto.domain.dto.LottoPurchaseResult;
-import lotto.util.LottoListGenerator;
+import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.IntStream;
 
 import static lotto.domain.WinnerLottoTest.winnerLotto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,11 +21,15 @@ class LottoGameTest {
     public static final int TICKET_NUMBER = 5;
     private LottoGame lottoGame;
     private List<Lotto> lottos;
+    private List<Set<Integer>> manualLottoList = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
+        Set<Integer> manualLotto = new HashSet<>();
+        IntStream.rangeClosed(1,6).forEach(number -> manualLotto.add(number));
+        manualLottoList.add(manualLotto);
         lottoGame = new LottoGame();
-        lottos = LottoListGenerator.creatLottos(TICKET_NUMBER);
+        lottos = LottoGenerator.createLottos(manualLottoList, TICKET_NUMBER);
     }
 
     @Test
