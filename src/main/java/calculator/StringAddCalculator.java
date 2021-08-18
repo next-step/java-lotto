@@ -12,10 +12,12 @@ public class StringAddCalculator {
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int NUMBER_PART = 2;
     private static final int DELIMITER_PART = 1;
+    private static final int DEFAULT_RESULT = 0;
+    private static final String NEGATIVE_EXCEPTION_MESSAGE = "음수 데이터가 있습니다.";
 
     public int splitAndSum(String data) {
         if (isBlank(data)) {
-            return 0;
+            return DEFAULT_RESULT;
         }
 
         validateNegative(data);
@@ -40,15 +42,12 @@ public class StringAddCalculator {
     }
 
     private boolean isBlank(String data) {
-        if (Objects.isNull(data) || data.isEmpty()) {
-            return true;
-        }
-        return false;
+        return Objects.isNull(data) || data.isEmpty();
     }
 
     private void validateNegative(String data) {
         if (data.contains(NEGATIVE)) {
-            throw new RuntimeException("음수 데이터가 있습니다.");
+            throw new RuntimeException(NEGATIVE_EXCEPTION_MESSAGE);
         }
     }
 

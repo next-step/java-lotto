@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,12 +15,9 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {""})
-    @NullSource
+    @NullAndEmptySource
     void splitAndSum_null_또는_빈문자(String data) {
         int result = stringAddCalculator.splitAndSum(data);
-        assertThat(result).isEqualTo(0);
-
-        result = stringAddCalculator.splitAndSum(data);
         assertThat(result).isEqualTo(0);
     }
 
