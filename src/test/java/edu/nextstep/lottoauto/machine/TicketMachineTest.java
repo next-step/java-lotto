@@ -29,6 +29,21 @@ public class TicketMachineTest {
     }
 
     @Test
+    @DisplayName("Custom Ticket 생성")
+    void createCustomTicket() {
+        // given
+        String numbersOfString = "1, 2, 3, 4, 5, 6";
+        TicketMachine ticketMachine = new TicketMachine();
+
+        // when
+        Ticket ticket = ticketMachine.createCustomTicket(numbersOfString);
+
+        // then
+        assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+
+    @Test
     @DisplayName("당첨 결과 확인")
     void checkWinningResult() {
         // given
