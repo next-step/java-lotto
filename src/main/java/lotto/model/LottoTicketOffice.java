@@ -17,7 +17,9 @@ public class LottoTicketOffice {
     private final List<Integer> lottoNumber;
 
     public LottoTicketOffice() {
-        lottoNumber = IntStream.range(MIN, MAX + 1).boxed().collect(toList());
+        lottoNumber = IntStream.rangeClosed(MIN, MAX)
+                .boxed()
+                .collect(toList());
     }
 
     public List<LottoTicket> buyLotto(int amount) {
