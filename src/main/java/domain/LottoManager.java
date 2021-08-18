@@ -7,21 +7,13 @@ public class LottoManager {
 
     private Lottos lottos;
 
-    private Lotto winningLotto;
-
-    private BonusBall bonusBall;
-
-    private WinningStatistics winningStatistics;
-
     public LottoManager() {
         this(0);
     }
 
     public LottoManager(int purchaseAmount) {
-        this.winningStatistics = new WinningStatistics();
         makeLottos(getPurchaseLottoCount(purchaseAmount));
     }
-
 
     private void makeLottos(int purchaseLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -39,22 +31,23 @@ public class LottoManager {
         return Lotto.calcPurchaseLottoCount(purchaseAmount);
     }
 
-    public Lotto makeWinningLotto(PickNumberStrategy pickNumberStrategy) {
-        winningLotto = new Lotto(pickNumberStrategy);
-        return winningLotto;
+    public Lotto makeLotto(PickNumberStrategy pickNumberStrategy) {
+        return new Lotto(pickNumberStrategy);
     }
 
     public BonusBall makeBonusBall(int bonusBall) {
-        this.bonusBall = new BonusBall(bonusBall);
-        return this.bonusBall;
+        return new BonusBall(bonusBall);
     }
 
-
-    public void findWinningLottoResult() {
-        lottos.makeWinningLottoResult(winningLotto, bonusBall);
+    public void findWinningLottoResult(WinningLotto winningLotto) {
+        lottos.makeWinningLottoResult(winningLotto);
     }
 
     public double getLottoYield(int purchaseAmount) {
-        return winningStatistics.calcLottoYield(Lotto.calcPurchaseLottoCount(purchaseAmount) * LottoPrice.LOTTO_PRICE);
+        return lottos.calcLottoYield(Lotto.calcPurchaseLottoCount(purchaseAmount) * LottoPrice.LOTTO_PRICE);
+    }
+
+    public WinningStatistics getWinningResult() {
+        return lottos.getWinningStatistics();
     }
 }

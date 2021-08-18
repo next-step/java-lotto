@@ -19,11 +19,17 @@ public class ResultView {
         }
     }
 
-    public static void winningResult() {
+    public static void winningResult(WinningStatistics winningStatistics) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        HashMap<LottoPrizeType, Integer> winningStatistic = WinningStatistics.getWinningStatistic();
+        HashMap<LottoPrizeType, Integer> winningStatistic = winningStatistics.getWinningStatistic();
         for (LottoPrizeType lottoPrizeType : winningStatistic.keySet()) {
+            view(lottoPrizeType, winningStatistic);
+        }
+    }
+
+    private static void view(LottoPrizeType lottoPrizeType, HashMap<LottoPrizeType, Integer> winningStatistic) {
+        if (lottoPrizeType.isExposure()) {
             System.out.println(lottoPrizeType.getMatchCount() +
                     "개 일치 " + "(" + lottoPrizeType.getWinningAmount() + "원) - "
                     + winningStatistic.get(lottoPrizeType) + "개");

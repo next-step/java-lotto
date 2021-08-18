@@ -1,12 +1,13 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
 
-    private static final int MIN_LOTTO_NUM = 1;
-    private static final int MAX_LOTTO_NUM = 45;
+    public static final int MIN_LOTTO_NUM = 1;
+    public static final int MAX_LOTTO_NUM = 45;
 
     private static final int LOTTO_NUM_COUNT = 6;
 
@@ -23,12 +24,12 @@ public class LottoNumbers {
             throw new IllegalArgumentException("1과 45사이의 값만 들어올 수 있습니다.");
         }
         if (lottoNumbers.size() != LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("로또의 사이즈는 6개만 가능합니다.");
+            throw new IllegalArgumentException("로또의 사이즈는 " + LOTTO_NUM_COUNT + "개만 가능합니다.");
         }
     }
 
     public List<Integer> getValues() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
