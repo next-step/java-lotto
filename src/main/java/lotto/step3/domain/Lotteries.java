@@ -1,7 +1,9 @@
 package lotto.step3.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lotteries {
     private List<Lottery> lotteries;
@@ -22,10 +24,10 @@ public class Lotteries {
     }
 
     public LottoStatistics compareLottoWith(Winning winning) {
-        List<Rank> lottoStatistics = new ArrayList<>();
+        Map<Rank, Integer> lottoStatistics = new HashMap<>();
         for (Lottery lottery : lotteries) {
             Rank rank = winning.match(lottery);
-            lottoStatistics.add(rank);
+            lottoStatistics.put(rank,lottoStatistics.getOrDefault(rank,0)+1);
         }
         return new LottoStatistics(lottoStatistics);
     }

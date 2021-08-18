@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +25,32 @@ class LottoStatisticsTest {
     }
 
     @Test
-    @DisplayName("로또 2장 : 5등 1개 , 4등 1개")
+    @DisplayName("로또 5장 : 3등 2개 , 2등 1개 , 1등 2개")
     void calculateLottoStatistics() {
+        Lottery lottery1 = new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(32), new LottoNumber(24), new LottoNumber(25), new LottoNumber(26))) // 3등
+        );
+        Lottery lottery2 = new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24), new LottoNumber(25), new LottoNumber(40))) // 3등
+        );
+        Lottery lottery3 = new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24), new LottoNumber(25), new LottoNumber(30))) // 2등
+        );
+        Lottery lottery4 = new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(25), new LottoNumber(26), new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24))) // 1등
+        );
+        Lottery lottery5 = new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24), new LottoNumber(25), new LottoNumber(26))) // 1등
+        );
+        Lotteries lotteries = new Lotteries(Arrays.asList(lottery1, lottery2 , lottery3 , lottery4  , lottery5));
+        LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
+        double earningRate = lottoStatistics.calculateLottoStatistics(5000);
+        assertThat(earningRate).isEqualTo(206_600.0);
+    }
+
+    @Test
+    @DisplayName("로또 2장 : 5등 1개 , 4등 1개")
+    void calculateLottoStatistics1() {
         Lottery lottery1 = new Lottery(new HashSet<>(
                 Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(32), new LottoNumber(24), new LottoNumber(5), new LottoNumber(6)))
         );
@@ -55,7 +78,7 @@ class LottoStatisticsTest {
         Lotteries lotteries = new Lotteries(Arrays.asList(lottery1, lottery2, lottery3));
         LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
         double earningRate = lottoStatistics.calculateLottoStatistics(3000);
-        assertThat(earningRate).isEqualTo(666666.66);
+        assertThat(earningRate).isEqualTo(222222.22);
     }
 
     @Test
@@ -98,6 +121,22 @@ class LottoStatisticsTest {
         LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
         double earningRate = lottoStatistics.calculateLottoStatistics(5000);
         assertThat(earningRate).isEqualTo(300.00);
+    }
+
+    @Test
+    @DisplayName("로또 2장 : 1등 2개")
+    void calculateLottoStatistics5() {
+        Lottery lottery1 = new Lottery(new HashSet<>(Arrays.asList(
+                new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24), new LottoNumber(25), new LottoNumber(26)))
+        );
+        Lottery lottery2 = new Lottery(new HashSet<>(Arrays.asList(
+                new LottoNumber(26), new LottoNumber(25), new LottoNumber(24), new LottoNumber(23), new LottoNumber(22), new LottoNumber(21)))
+        );
+
+        Lotteries lotteries = new Lotteries(Arrays.asList(lottery1, lottery2));
+        LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
+        double earningRate = lottoStatistics.calculateLottoStatistics(2000);
+        assertThat(earningRate).isEqualTo(500000.0);
     }
 
 
