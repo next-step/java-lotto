@@ -4,8 +4,6 @@ import java.util.Set;
 
 public class Lottery {
     public static final int LOTTO_COUNT = 6;
-    private static final int COUNT = 1;
-    private static final int NO_COUNT = 0;
     private final Set<LottoNumber> lottery;
 
     public Lottery(Set<LottoNumber> lottery) {
@@ -15,27 +13,8 @@ public class Lottery {
         this.lottery = lottery;
     }
 
-    public int matchWinningNumber(Winning winning) {
-        int countOfMatch = 0;
-        for (LottoNumber number : winning.getWinnerNumber().getLottery()) {
-            countOfMatch += containWinning(number);
-        }
-        return countOfMatch;
-    }
-
-    private int containWinning(LottoNumber number) {
-        if (lottery.contains(number)) {
-            return COUNT;
-        }
-        return NO_COUNT;
-    }
-
     public Set<LottoNumber> getLottery() {
         return lottery;
-    }
-
-    public boolean containBonus(Winning winning) {
-        return lottery.contains(winning.getBonusNumber());
     }
 
     @Override
