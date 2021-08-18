@@ -2,10 +2,14 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class Money {
+
+    private static final int MIN_VALUE = 0;
+
     private final int value;
 
-    public LottoNumber(int value) {
+    public Money(int value) {
+        validate(value);
         this.value = value;
     }
 
@@ -13,11 +17,17 @@ public class LottoNumber implements Comparable<LottoNumber>{
         return value;
     }
 
+    private void validate(int value) {
+        if (value < MIN_VALUE) {
+            throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        Money that = (Money) o;
         return value == that.value;
     }
 
@@ -27,8 +37,4 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
 
-    @Override
-    public int compareTo(LottoNumber lottoNumber) {
-        return Integer.compare(this.value, lottoNumber.value);
-    }
 }

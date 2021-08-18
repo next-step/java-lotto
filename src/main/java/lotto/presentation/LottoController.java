@@ -1,11 +1,10 @@
 package lotto.presentation;
 
+import lotto.common.LottoTicketsParser;
 import lotto.domain.LottoResults;
-import lotto.common.WinningNumberParser;
+import lotto.common.LottoTicketParser;
 import lotto.domain.*;
-import lotto.presentation.input.BonusNumberInputView;
-import lotto.presentation.input.PurchaseAmountInputView;
-import lotto.presentation.input.WinningNumberInputView;
+import lotto.presentation.input.*;
 import lotto.presentation.output.ChanceOutputView;
 import lotto.presentation.output.EarningRateOutputView;
 import lotto.presentation.output.LottosOutputView;
@@ -13,17 +12,36 @@ import lotto.presentation.output.WinningStatisticsOutputView;
 import lotto.service.LottoService;
 import lotto.service.RankingService;
 
+import java.util.List;
+
 public class LottoController {
 
     public void execute(){
-        int purchaseAmount = inputPurchaseAmount();
-        int chance = resolveChance(purchaseAmount);
-        outputChance(chance);
-        LottoTickets lottoTickets = executeLottoGame(chance);
-        outputLottos(lottoTickets);
-        LottoResults lottoResults = calculateAndGetLottoResults(lottoTickets);
+        Money purchaseAmount = inputPurchaseAmount();
+        Chance manualChance = inputManualChance();
+        LottoTickets manualLottoTickets = inputManualLottoTickets(manualChance);
+        Chance autoChance = resolveAutoChance(purchaseAmount, manualChance);
+        outputChance(manualChance, autoChance);
+        LottoTickets autoLottoTickets = executeAuto(autoChance);
+        LottoTickets totalLottoTickets = manualLottoTickets.mergeWith(autoLottoTickets);
+        outputLottos(totalLottoTickets);
+        LottoResults lottoResults = calculateAndGetLottoResults(totalLottoTickets);
         outputLottoResults(lottoResults);
         outputEarningRate(purchaseAmount, lottoResults);
+    }
+
+    private LottoTickets inputManualLottoTickets(Chance manualChance) {
+        if(manualChance.isLeft()) {
+            ManualLottoTicketInputView inputView = new ManualLottoTicketInputView();
+            LottoTicketsParser parser = new LottoTicketsParser();
+            return parser.parse(inputView.input(manualChance));
+        }
+        return LottoTickets.empty();
+    }
+
+    private Chance inputManualChance() {
+        ManualChanceInputView inputView = new ManualChanceInputView();
+        return inputView.input();
     }
 
     private LottoResults calculateAndGetLottoResults(LottoTickets lottoTickets) {
@@ -36,24 +54,28 @@ public class LottoController {
         outputView.output(lottoResults);
     }
 
-    private int inputPurchaseAmount() {
+    private Money inputPurchaseAmount() {
         PurchaseAmountInputView inputView = new PurchaseAmountInputView();
-        return inputView.input();
+        return new Money(inputView.input());
     }
 
-    private void outputChance(int chance) {
+    private void outputChance(Chance manualChance, Chance autoChance) {
         ChanceOutputView outputView = new ChanceOutputView();
-        outputView.output(chance);
+        outputView.output(manualChance, autoChance);
     }
 
-    private LottoTickets executeLottoGame(int chance) {
+    private LottoTickets executeAuto(Chance chance) {
         LottoService service = new LottoService();
         return service.execute(chance, new LottoGenerator());
     }
 
-    private int resolveChance(int purchaseAmount) {
+    private Chance resolveAutoChance(Money purchaseAmount, Chance manualChance) {
         ChanceResolver resolver = new ChanceResolver();
-        return resolver.resolveFromPurchaseAmount(purchaseAmount);
+        Chance totalChance = resolver.resolveFromPurchaseAmount(purchaseAmount);
+        if (!totalChance.isBiggerOrEqualThan(manualChance)) {
+            throw new IllegalStateException("수동 입력 횟수가 전체 실행 횟수보다 클 수 없습니다.");
+        }
+        return totalChance.subtract(manualChance);
     }
 
     private void outputLottos(LottoTickets lottoTickets) {
@@ -62,9 +84,9 @@ public class LottoController {
     }
 
     private WinningNumbers getLastWeekWinningNumbers() {
-        WinningNumberParser parser = new WinningNumberParser();
+        LottoTicketParser parser = new LottoTicketParser();
         return new WinningNumbers(
-                new LottoTicket(parser.parseToWinningNumbers(inputWinningNumbers())), inputBonusNumber());
+                parser.parse(inputWinningNumbers()), inputBonusNumber());
     }
 
     private String inputWinningNumbers() {
@@ -77,7 +99,7 @@ public class LottoController {
         return inputView.input();
     }
 
-    private void outputEarningRate(int purchaseAmount, LottoResults lottoResults) {
+    private void outputEarningRate(Money purchaseAmount, LottoResults lottoResults) {
         EarningRateOutputView outputView = new EarningRateOutputView();
         outputView.output(lottoResults.getEarningLate(purchaseAmount));
     }

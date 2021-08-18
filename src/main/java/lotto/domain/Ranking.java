@@ -3,7 +3,7 @@ package lotto.domain;
 public enum Ranking {
 
     FIFTH(3, 5_000) ,
-    FOURTH(4, 50000),
+    FOURTH(4, 50_000),
     THIRD(5, 1_500_000) {
         @Override
         public boolean isEqualTo(int matchCount, boolean hasBonusNumber) {

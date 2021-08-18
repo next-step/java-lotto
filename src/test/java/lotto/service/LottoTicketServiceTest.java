@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Chance;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class LottoTicketServiceTest {
         //given
         LottoService service = new LottoService();
         //when
-        LottoTickets lottoTickets = service.execute(4, new LottoGenerator());
+        LottoTickets lottoTickets = service.execute(new Chance(4), new LottoGenerator());
         //then
         assertThat(lottoTickets.size()).isEqualTo(4);
     }

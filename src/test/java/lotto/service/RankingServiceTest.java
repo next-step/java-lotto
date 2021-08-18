@@ -30,7 +30,7 @@ public class RankingServiceTest {
     }
 
     private LottoTickets initializeLottos() {
-        LottoTickets lottoTickets = new LottoTickets();
+        LottoTickets lottoTickets = LottoTickets.empty();
         lottoTickets.add(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2),
                 new LottoNumber(3), new LottoNumber(8), new LottoNumber(11),
                 new LottoNumber(29))));

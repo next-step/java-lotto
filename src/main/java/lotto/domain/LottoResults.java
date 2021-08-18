@@ -7,32 +7,33 @@ import java.util.Objects;
 
 public class LottoResults {
 
-    private final List<LottoResult> elements = new ArrayList<>();
+    private final List<LottoResult> lottoResults = new ArrayList<>();
 
     public void add(LottoResult lottoResult) {
-        this.elements.add(lottoResult);
+        this.lottoResults.add(lottoResult);
     }
 
     public void addAll(LottoResult... lottoResults) {
-        this.elements.addAll(Arrays.asList(lottoResults));
+        this.lottoResults.addAll(Arrays.asList(lottoResults));
     }
 
     public int getRankingHits(Ranking ranking) {
-        return elements.stream().filter(lottoResult -> lottoResult.rankingEquals(ranking))
+        return lottoResults.stream().filter(lottoResult -> lottoResult.rankingEquals(ranking))
                 .map(LottoResult::getHits)
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("예상 갯수에 맞는 맞춘 로또 수를 가져올 수 없습니다."));
     }
 
-    public double getEarningLate(int purchaseAmount) {
-        return (double) calculateTotalCompensation() / purchaseAmount;
+    public EarningRate getEarningLate(Money purchaseAmount) {
+        return new EarningRate((double) calculateTotalCompensation().getValue() / purchaseAmount.getValue());
     }
 
-    private int calculateTotalCompensation() {
-        return elements.stream()
-                .map(LottoResult::calculateCompensation)
-                .reduce(0, Integer::sum)
-        ;
+    private Money calculateTotalCompensation() {
+        return new Money(
+                lottoResults.stream()
+                        .map(LottoResult::calculateCompensation)
+                        .reduce(0, Integer::sum)
+        );
     }
 
     @Override
@@ -40,11 +41,11 @@ public class LottoResults {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResults that = (LottoResults) o;
-        return Objects.equals(elements, that.elements);
+        return Objects.equals(lottoResults, that.lottoResults);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(elements);
+        return Objects.hash(lottoResults);
     }
 }

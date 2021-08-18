@@ -11,8 +11,8 @@ public class ChanceResolverTest {
         //given
         ChanceResolver resolver = new ChanceResolver();
         //when
-        int chance = resolver.resolveFromPurchaseAmount(15000);
+        Chance chance = resolver.resolveFromPurchaseAmount(new Money(15000));
         //then
-        assertThat(chance).isEqualTo(15);
+        assertThat(chance).isEqualTo(new Chance(15));
     }
 }

@@ -19,8 +19,8 @@ class LottoTicketResultsTest {
                 new LottoResult(Ranking.FIRST, 0)
         );
         //when
-        double earningLate = lottoResults.getEarningLate(100000);
+        EarningRate earningLate = lottoResults.getEarningLate(new Money(100000));
         //then
-        assertThat(earningLate).isEqualTo(300.65);
+        assertThat(earningLate).isEqualTo(new EarningRate(300.65));
     }
 }
