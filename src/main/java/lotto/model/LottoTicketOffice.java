@@ -11,13 +11,11 @@ import static java.util.stream.Collectors.toList;
 public class LottoTicketOffice {
 
     public static final int PRICE = 1000;
-    public static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int MAX = 45;
-    private static final int MIN = 1;
+
     private final List<Integer> lottoNumber;
 
     public LottoTicketOffice() {
-        lottoNumber = IntStream.rangeClosed(MIN, MAX)
+        lottoNumber = IntStream.rangeClosed(LottoNumber.RANGE_MIN, LottoNumber.RANGE_MAX)
                 .boxed()
                 .collect(toList());
     }
@@ -33,7 +31,7 @@ public class LottoTicketOffice {
     private LottoTicket publishLottoTicket() {
         Collections.shuffle(lottoNumber);
         return lottoNumber.stream()
-                .limit(LOTTO_NUMBER_COUNT)
+                .limit(LottoTicket.SIZE)
                 .sorted()
                 .collect(collectingAndThen(toList(), LottoTicket::new));
     }

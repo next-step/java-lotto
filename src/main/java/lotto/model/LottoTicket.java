@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private static final int SIZE = 6;
-    private static final String SIZE_ERROR_MSG = "6개의 번호가 필요합니다.";
+    public static final int SIZE = 6;
+    private static final String SIZE_ERROR_MSG = "%d개의 번호가 필요합니다.";
     private static final String DUPLICATE_ERROR_MSG = "번호는 중복되면 안됩니다.";
 
     private final Set<LottoNumber> numbers;
@@ -15,7 +15,7 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    public LottoTicket(List<Integer> numbers){
+    public LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
@@ -41,7 +41,7 @@ public class LottoTicket {
 
     private void checkSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
-            throw new IllegalArgumentException(SIZE_ERROR_MSG);
+            throw new IllegalArgumentException(String.format(SIZE_ERROR_MSG, SIZE));
         }
     }
 
