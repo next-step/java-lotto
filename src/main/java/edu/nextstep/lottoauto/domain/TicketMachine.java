@@ -9,13 +9,7 @@ public class TicketMachine {
 
     public static final int TICKET_PRICE = 1_000;
 
-    public TicketMachine(){}
-
-    public TicketMachine(int payment, NumbersMaker numbersMaker) {
-        createAndSaveTickets(payment, numbersMaker);
-    }
-
-    public void createAndSaveTickets(int payment, NumbersMaker numbersMaker) {
+    public static void createAndSaveTickets(int payment, NumbersMaker numbersMaker) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
@@ -26,11 +20,11 @@ public class TicketMachine {
         TicketRepository.saveAll(tickets);
     }
 
-    public int calculateNumberOfTicketsFrom(int payment) {
+    public static int calculateNumberOfTicketsFrom(int payment) {
         return payment / TICKET_PRICE;
     }
 
-    private List<Ticket> createTickets(int numberOfTickets, NumbersMaker numbersMaker) {
+    private static List<Ticket> createTickets(int numberOfTickets, NumbersMaker numbersMaker) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
             Ticket ticket = Ticket.madeBy(numbersMaker);
@@ -39,13 +33,13 @@ public class TicketMachine {
         return tickets;
     }
 
-    private void validateUnderAUnitPrice(int payment) {
+    private static void validateUnderAUnitPrice(int payment) {
         if (payment < TICKET_PRICE) {
             throw new PaymentIllegalArgumentException("최소 입력 가능 금액 미달. 최소 입력 금액 : " + TICKET_PRICE + " 원");
         }
     }
 
-    private void validateDivideUnitPrice(int payment) {
+    private static void validateDivideUnitPrice(int payment) {
         if ((payment % TICKET_PRICE) != 0) {
             throw new PaymentIllegalArgumentException("개 당 금액 " + TICKET_PRICE + " 원으로 해당 단위로 입력 필요.");
         }

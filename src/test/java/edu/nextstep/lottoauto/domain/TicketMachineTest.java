@@ -24,10 +24,9 @@ public class TicketMachineTest {
     void createAndSaveTickets() {
         // given
         int payment = 10000;
-        TicketMachine ticketMachine = new TicketMachine();
 
         // when
-        ticketMachine.createAndSaveTickets(payment, new AutoNumbersMaker());
+        TicketMachine.createAndSaveTickets(payment, new AutoNumbersMaker());
 
         // then
         assertThat(TicketRepository.findAll().size()).isEqualTo(payment/TICKET_PRICE);
@@ -39,10 +38,9 @@ public class TicketMachineTest {
     void calculateNumberOfTicketsFrom() {
         // given
         int payment = 14_000;
-        TicketMachine ticketMachine= new TicketMachine();
 
         // when
-        int numberOfTickets = ticketMachine.calculateNumberOfTicketsFrom(payment);
+        int numberOfTickets = TicketMachine.calculateNumberOfTicketsFrom(payment);
 
         // then
         assertThat(numberOfTickets).isEqualTo(payment/TICKET_PRICE);
@@ -51,11 +49,8 @@ public class TicketMachineTest {
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 미만")
     @ValueSource(ints = {1, 999})
     void validate_createAndSaveTickets_단위(int payment) {
-        // given
-        TicketMachine ticketMachine = new TicketMachine();
-
         // when
-        assertThatThrownBy(() -> ticketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
+        assertThatThrownBy(() -> TicketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("최소 입력 가능 금액 미달.");
     }
@@ -63,11 +58,8 @@ public class TicketMachineTest {
     @ParameterizedTest(name = "금액 검증 실패 : 1000원 단위 떨어지지 않음")
     @ValueSource(ints = {1001, 1999})
     void validate_createAndSaveTickets_1000미만(int payment) {
-        /// given
-        TicketMachine ticketMachine = new TicketMachine();
-
         // when, then
-        assertThatThrownBy(() -> ticketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
+        assertThatThrownBy(() -> TicketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("개 당 금액");
     }

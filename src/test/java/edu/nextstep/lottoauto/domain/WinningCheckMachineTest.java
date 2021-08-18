@@ -21,13 +21,11 @@ class WinningCheckMachineTest {
     @DisplayName("당첨 결과 확인")
     void checkWinningResult() {
         // given
-        TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(1000, () -> createNumbersFromTo(1,6));
+        TicketMachine.createAndSaveTickets(1000, () -> createNumbersFromTo(1,6));
 
         // when
-        WinningCheckMachine winningCheckMachine = new WinningCheckMachine();
         WinningResultForm winningResult =
-                winningCheckMachine.confirmWinningResult("4,5,6,7,8,9");
+                WinningCheckMachine.confirmWinningResult("4,5,6,7,8,9");
 
         // then
         assertThat(winningResult.getWinningResult().getOrDefault(Prize.FOURTH,0)).isEqualTo(1);

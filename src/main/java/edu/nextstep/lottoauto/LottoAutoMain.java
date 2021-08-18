@@ -14,16 +14,14 @@ public class LottoAutoMain {
     public static void main(String[] args) {
         try {
             int payment = InputView.inputPayment();
-
             NumbersMaker numbersMaker = new AutoNumbersMaker();
-            new TicketMachine(payment, numbersMaker);
+            TicketMachine.createAndSaveTickets(payment, numbersMaker);
 
             ResultView.printTickets(TicketRepository.findAll());
 
             String winningNumbersOfString = InputView.inputWinningNumbers();
 
-            WinningCheckMachine winningCheckMachine = new WinningCheckMachine();
-            WinningResultForm winningResult = winningCheckMachine.confirmWinningResult(winningNumbersOfString);
+            WinningResultForm winningResult = WinningCheckMachine.confirmWinningResult(winningNumbersOfString);
 
             ResultView.printWinningResult(winningResult);
         } catch (CustomException e) {
