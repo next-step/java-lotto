@@ -18,11 +18,11 @@ public class LottoCreator {
         }
     }
 
-    public List<Lotto> createLottos(LottoNumbersCreator numberCreator) {
+    public Lottos createLottos(LottoNumbersCreator lottoNumbersCreator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(numberCreator.createLottoNumbers());
+            lottos.add(new Lotto(lottoNumbersCreator.createNumbers()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 }

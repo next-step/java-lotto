@@ -1,11 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import lotto.domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private static final String ENTER = "\n";
@@ -24,12 +24,12 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void printRankCount(List<LottoResult> results) {
-        for (LottoResult lottoResult : results) {
-            Rank resultRank = lottoResult.getResultRank();
-            System.out.print(String.format("%d개 일치 (%d원)- %d개 \n", resultRank.getMatch(), resultRank.getRewards(), lottoResult.getResultRankCount()));
-        }
-
+    public static void printRankCount(Map<Rank, Integer> lottoResult) {
+        lottoResult.entrySet().stream()
+                .forEach(result -> System.out.println(String.format("%d개 일치 (%d원)- %d개",
+                        result.getKey().getMatch(),
+                        result.getKey().getRewards(),
+                        result.getValue())));
     }
 
     public static void printProfit(BigDecimal totalRewards) {

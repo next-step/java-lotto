@@ -21,6 +21,6 @@ class RankTest {
     @Test
     void findRank_error() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Rank.findRank(1));
+                .isThrownBy(() -> Rank.findRank(8));
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InputError;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -11,8 +12,10 @@ public class Lottos {
         if (lottos == null || lottos.size() == 0) {
             throw new InputError("구매한 로또가 없습니다.");
         }
-        this.lottos = lottos;
+        this.lottos = Collections.unmodifiableList(lottos);
     }
+
+
 
     public List<Lotto> value() {
         return lottos;

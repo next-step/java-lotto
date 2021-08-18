@@ -15,7 +15,7 @@ class LottoCreatorTest {
     @Test
     void buyLotto() {
         assertThat(new LottoCreator(14000)
-                .createLottos(new RandomNumbersCreator()).size())
+                .createLottos(new RandomNumbersCreator()).value().size())
                 .isEqualTo(14);
     }
 
@@ -30,7 +30,7 @@ class LottoCreatorTest {
     @Test
     void create() {
         assertThat(new LottoCreator(1000)
-                .createLottos(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                .createLottos(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).value())
                 .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

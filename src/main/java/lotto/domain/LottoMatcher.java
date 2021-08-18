@@ -1,39 +1,31 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoMatcher {
-
-    private final Lotto winningLotto;
-    private List<Rank> rankResult;
-
-    public LottoMatcher(final Lotto winningLotto, final Lottos lottos) {
-        this.winningLotto = winningLotto;
-        this.rankResult = matchWithWinningLottoNumbers(lottos);
+    private LottoMatcher() {
     }
 
-    private List<Rank> matchWithWinningLottoNumbers(final Lottos lottos) {
-        List<Rank> result = new ArrayList<>();
+    public static Map<Rank, Integer> matchWithWinningLottoNumbers(final Lottos lottos, final Lotto winningLotto) {
+        Map<Rank, Integer> rankMap = Rank.valuesExcludeNoRewards().stream()
+                .collect(Collectors.toMap(rank -> rank, rank -> 0, (a, b) -> a, LinkedHashMap::new));
         for (Lotto lotto : lottos.value()) {
             int matchCount = lotto.countSameNumber(winningLotto);
-            result.add(Rank.findRank(matchCount));
+            rankMap.computeIfPresent(Rank.findRank(matchCount), (rank, count) -> count + 1);
         }
-        return result;
+
+        return rankMap;
     }
 
-    public List<LottoResult> classifyByRank() {
-        List<LottoResult> lottoResults = new ArrayList<>();
-        for (Rank rank : Rank.valuesExcludeNoRewards()) {
-            int count = countByRank(rank);
-            lottoResults.add(new LottoResult(count, rank));
-        }
-        return lottoResults;
+    public static BigDecimal calculateTotalRewardsRatio(int purchasedMoney, Map<Rank, Integer> lottoResultRankMap) {
+        BigDecimal totalRewards = lottoResultRankMap.entrySet().stream()
+                .map(rank -> BigDecimal.valueOf(rank.getKey().getRewards() * rank.getValue()))
+                .reduce(BigDecimal.valueOf(0), BigDecimal::add);
+        return totalRewards.divide(BigDecimal.valueOf(purchasedMoney * 100.0), 2, RoundingMode.HALF_EVEN);
     }
 
-    private int countByRank(Rank rank) {
-        return (int) rankResult.stream()
-                .filter(rank::equals)
-                .count();
-    }
 }

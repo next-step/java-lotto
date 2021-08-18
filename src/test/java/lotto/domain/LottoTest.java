@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+class LottoTest {
 
     @DisplayName("LottoNumber는 숫자가 같으면 같은 객체")
     @Test
