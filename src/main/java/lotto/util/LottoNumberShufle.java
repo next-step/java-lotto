@@ -11,11 +11,7 @@ public class LottoNumberShufle {
 
     public static Set<Integer> getAutoNumber() {
         Collections.shuffle(LOTTO_ENTRY);
-        List<Integer> lottoNumber = new ArrayList<>(LOTTO_ENTRY.subList(0, 6));
-        Collections.sort(lottoNumber);
-        Set<Integer> number = new HashSet<>(lottoNumber);
-
-        return number;
+        return new TreeSet<>(new ArrayList<>(LOTTO_ENTRY.subList(0, 6)));
     }
 
 }
