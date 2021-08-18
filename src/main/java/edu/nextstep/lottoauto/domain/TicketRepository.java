@@ -1,6 +1,4 @@
-package edu.nextstep.lottoauto.repository;
-
-import edu.nextstep.lottoauto.domain.Ticket;
+package edu.nextstep.lottoauto.domain;
 
 import java.util.ArrayList;
 import java.util.List;

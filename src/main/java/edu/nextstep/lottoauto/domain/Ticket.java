@@ -1,7 +1,7 @@
 package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.exception.NumbersIllegalArgumentException;
-import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
+import edu.nextstep.lottoauto.domain.ticketmaker.NumbersMaker;
 
 import java.util.Collections;
 import java.util.List;

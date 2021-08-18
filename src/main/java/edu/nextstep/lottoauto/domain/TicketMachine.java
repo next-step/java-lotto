@@ -1,11 +1,8 @@
-package edu.nextstep.lottoauto.machine;
+package edu.nextstep.lottoauto.domain;
 
-import edu.nextstep.lottoauto.domain.Prize;
-import edu.nextstep.lottoauto.domain.Ticket;
-import edu.nextstep.lottoauto.form.WinningResultForm;
-import edu.nextstep.lottoauto.ticketmaker.CustomNumbersMaker;
-import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
-import edu.nextstep.lottoauto.repository.TicketRepository;
+import edu.nextstep.lottoauto.domain.ticketmaker.CustomNumbersMaker;
+import edu.nextstep.lottoauto.view.form.WinningResultForm;
+import edu.nextstep.lottoauto.domain.ticketmaker.NumbersMaker;
 
 import java.util.*;
 
@@ -20,10 +17,6 @@ public class TicketMachine {
             Ticket ticket = Ticket.madeBy(numbersMaker);
             ticketRepository.save(ticket);
         }
-    }
-
-    public Ticket createCustomTicket(String numbersString){
-        return Ticket.madeBy(new CustomNumbersMaker(numbersString));
     }
 
     public List<Ticket> findTickets() {
@@ -62,5 +55,9 @@ public class TicketMachine {
 
     private int calculatePayment(List<Ticket> tickets) {
         return tickets.size() * A_UNIT_PRICE;
+    }
+
+    public Ticket createCustomTicket(String winningNumbersString) {
+        return Ticket.madeBy(new CustomNumbersMaker(winningNumbersString));
     }
 }

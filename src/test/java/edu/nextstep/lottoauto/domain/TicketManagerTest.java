@@ -1,7 +1,7 @@
-package edu.nextstep.lottoauto.manager;
+package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
-import edu.nextstep.lottoauto.ticketmaker.AutoNumbersMaker;
+import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

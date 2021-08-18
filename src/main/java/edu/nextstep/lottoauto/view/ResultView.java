@@ -2,7 +2,7 @@ package edu.nextstep.lottoauto.view;
 
 import edu.nextstep.lottoauto.domain.Prize;
 import edu.nextstep.lottoauto.domain.Ticket;
-import edu.nextstep.lottoauto.form.WinningResultForm;
+import edu.nextstep.lottoauto.view.form.WinningResultForm;
 
 import java.util.Arrays;
 import java.util.List;

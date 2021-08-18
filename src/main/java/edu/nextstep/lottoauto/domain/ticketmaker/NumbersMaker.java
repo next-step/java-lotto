@@ -1,4 +1,4 @@
-package edu.nextstep.lottoauto.ticketmaker;
+package edu.nextstep.lottoauto.domain.ticketmaker;
 
 import java.util.List;
 

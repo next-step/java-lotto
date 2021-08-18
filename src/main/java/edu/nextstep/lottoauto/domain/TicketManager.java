@@ -1,10 +1,8 @@
-package edu.nextstep.lottoauto.manager;
+package edu.nextstep.lottoauto.domain;
 
-import edu.nextstep.lottoauto.domain.Ticket;
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
-import edu.nextstep.lottoauto.form.WinningResultForm;
-import edu.nextstep.lottoauto.machine.TicketMachine;
-import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
+import edu.nextstep.lottoauto.view.form.WinningResultForm;
+import edu.nextstep.lottoauto.domain.ticketmaker.NumbersMaker;
 
 import java.util.List;
 

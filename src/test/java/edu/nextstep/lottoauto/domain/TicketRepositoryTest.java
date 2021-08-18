@@ -1,6 +1,5 @@
-package edu.nextstep.lottoauto.repository;
+package edu.nextstep.lottoauto.domain;
 
-import edu.nextstep.lottoauto.domain.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

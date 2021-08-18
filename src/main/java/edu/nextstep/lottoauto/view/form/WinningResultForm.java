@@ -1,4 +1,4 @@
-package edu.nextstep.lottoauto.form;
+package edu.nextstep.lottoauto.view.form;
 
 import edu.nextstep.lottoauto.domain.Prize;
 

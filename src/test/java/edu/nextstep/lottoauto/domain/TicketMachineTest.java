@@ -1,9 +1,7 @@
-package edu.nextstep.lottoauto.machine;
+package edu.nextstep.lottoauto.domain;
 
-import edu.nextstep.lottoauto.domain.Prize;
-import edu.nextstep.lottoauto.domain.Ticket;
-import edu.nextstep.lottoauto.form.WinningResultForm;
-import edu.nextstep.lottoauto.ticketmaker.AutoNumbersMaker;
+import edu.nextstep.lottoauto.view.form.WinningResultForm;
+import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

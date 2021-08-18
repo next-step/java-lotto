@@ -1,10 +1,10 @@
 package edu.nextstep.lottoauto;
 
 import edu.nextstep.lottoauto.exception.CustomException;
-import edu.nextstep.lottoauto.form.WinningResultForm;
-import edu.nextstep.lottoauto.manager.TicketManager;
-import edu.nextstep.lottoauto.ticketmaker.AutoNumbersMaker;
-import edu.nextstep.lottoauto.ticketmaker.NumbersMaker;
+import edu.nextstep.lottoauto.view.form.WinningResultForm;
+import edu.nextstep.lottoauto.domain.TicketManager;
+import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
+import edu.nextstep.lottoauto.domain.ticketmaker.NumbersMaker;
 import edu.nextstep.lottoauto.view.InputView;
 import edu.nextstep.lottoauto.view.ResultView;
 
