@@ -10,8 +10,8 @@ public class LottoController {
 
     public void runAutoLotto() {
         int lottoPurchasePrice = InputView.inputPurchasePrice();
-        LottoCreator lottoCreator = new LottoCreator(lottoPurchasePrice);
-        Lottos lottos = lottoCreator.createLottos(new RandomNumbersCreator());
+        LottosCreator lottosCreator = new LottosCreator(lottoPurchasePrice);
+        Lottos lottos = lottosCreator.createLottos(new RandomNumbersCreator());
         ResultView.printBuyLotto(lottos.value());
 
         Lotto winningLotto = new Lotto(InputView.inputWinningNumber());
