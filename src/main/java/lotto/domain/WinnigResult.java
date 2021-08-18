@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class WinnigResult {
 
@@ -45,7 +46,7 @@ public class WinnigResult {
         return lottoStatus;
     }
 
-    public void compareLottoNumber(List<Integer> lottoNumber, Integer winNumber) {
+    public void compareLottoNumber(Set<Integer> lottoNumber, Integer winNumber) {
         if (lottoNumber.contains(winNumber)) {
             matchCount++;
         }

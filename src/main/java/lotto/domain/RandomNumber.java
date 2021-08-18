@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public interface RandomNumber {
-    List<Integer> getLottoNumber();
+    Set<Integer> getLottoNumber();
 }

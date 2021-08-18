@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -17,8 +19,8 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(
                 new LottoNumberStragey(){
                     @Override
-                    public List<Integer> getLottoNumber() {
-                        return Arrays.asList(1,2,3,4,5,6);
+                    public Set<Integer> getLottoNumber() {
+                        return new HashSet<>(Arrays.asList(1,2,3,4,5,6));
                     }
                 }
         );

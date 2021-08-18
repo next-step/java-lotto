@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumber {
 
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
-    private List<Integer> lotto = new ArrayList<>();
+    private Set<Integer> lotto = new HashSet<>();
     private WinnigResult winning = new WinnigResult();
 
     public LottoNumber() {
@@ -19,7 +17,7 @@ public class LottoNumber {
         lotto = lottoNumberStragey.getLottoNumber();
     }
 
-    public List<Integer> getLotto() {
+    public Set<Integer> getLotto() {
         return lotto;
     }
 
@@ -35,7 +33,7 @@ public class LottoNumber {
             lotto.add(winningNumber);
         }
 
-        Collections.sort(lotto);
+        Collections.sort(new ArrayList<Integer>(lotto));
     }
 
     private int checkWinningNumber(String numberStr) {
@@ -48,7 +46,7 @@ public class LottoNumber {
         return winningNumber;
     }
 
-    public void compreWinningNumber(List<Integer> winningNumbers, Statistics statistics) {
+    public void compreWinningNumber(Set<Integer> winningNumbers, Statistics statistics) {
 
         for (Integer number : winningNumbers) {
             winning.compareLottoNumber(lotto, number);

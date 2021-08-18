@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +18,7 @@ class WinnigResultTest {
     @BeforeEach
     public void init() {
         winnigResult = new WinnigResult();
-        List<Integer> lottoNumber = Arrays.asList(1,2,3,4,5,6);
+        Set<Integer> lottoNumber = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
         winnigResult.compareLottoNumber(lottoNumber, 1);
         winnigResult.compareLottoNumber(lottoNumber, 2);
         winnigResult.compareLottoNumber(lottoNumber, 3);
