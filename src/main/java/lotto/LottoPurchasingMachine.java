@@ -1,18 +1,19 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoPurchasingMachine {
-    public static final int AMOUNT = 1000;
+    public static final int AMOUNT = 1_000;
     public static final int FIRST_PLACE_INDEX = 0;
     public static final int SECOND_PLACE_INDEX = 1;
     public static final int THIRD_PLACE_INDEX = 2;
     public static final int FOURTH_PLACE_INDEX = 3;
-    public static final int FIRST_PRIZE_MONEY = 2000000000;
-    public static final int SECOND_PRIZE_MONEY = 1500000;
-    public static final int THIRD_PRIZE_MONEY = 50000;
-    public static final int FOURTH_PRIZE_MONEY = 5000;
+    public static final int FIRST_PRIZE_MONEY = 2_000_000_000;
+    public static final int SECOND_PRIZE_MONEY = 1_500_000;
+    public static final int THIRD_PRIZE_MONEY = 50_000;
+    public static final int FOURTH_PRIZE_MONEY = 5_000;
 
     public List<Lotto> buyLotto(int buyNumber) {
         int count = buyNumber / AMOUNT;
@@ -24,45 +25,45 @@ public class LottoPurchasingMachine {
         return lottoList;
     }
 
-    public Integer[] checkLottoList(List<Lotto> lottoList, Integer[] prevLottoWinningNumbers) {
+    public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers) {
         Integer[] result = new Integer[] {0,0,0,0};
         for (Lotto lotto : lottoList) {
-            int matchedNumberCount = lotto.getMatchedNumberCount(prevLottoWinningNumbers);
-            getWinningResultCheck(matchedNumberCount, result);
+            int matchedNumberCount = lotto.findMatchedNumberCount(prevLottoWinningNumbers);
+            checkWinningResult(matchedNumberCount, Arrays.asList(result));
         }
-        return result;
+        return Arrays.asList(result);
     }
 
-    private void getWinningResultCheck(int matchedNumberCount, Integer[] result) {
+    private void checkWinningResult(int matchedNumberCount, List<Integer> result) {
         switch (matchedNumberCount) {
             case 3:
-                result[FOURTH_PLACE_INDEX]++;
+                result.set(FOURTH_PLACE_INDEX, result.get(FOURTH_PLACE_INDEX) + 1);
                 break;
             case 4:
-                result[THIRD_PLACE_INDEX]++;
+                result.set(THIRD_PLACE_INDEX, result.get(THIRD_PLACE_INDEX) + 1);
                 break;
             case 5:
-                result[SECOND_PLACE_INDEX]++;
+                result.set(SECOND_PLACE_INDEX, result.get(SECOND_PLACE_INDEX) + 1);
                 break;
             case 6:
-                result[FIRST_PLACE_INDEX]++;
+                result.set(FIRST_PLACE_INDEX, result.get(FIRST_PLACE_INDEX) + 1);
                 break;
             default:
                 break;
         }
     }
 
-    public double getYield(Integer[] result, int purchaseAmount) {
-        double prizeMoney = (double) getTotalPrizeMoney(result);
+    public double findYield(List<Integer> result, int purchaseAmount) {
+        double prizeMoney = (double) findTotalPrizeMoney(result);
         return Math.floor((prizeMoney / purchaseAmount) * 100) / 100.0;
     }
 
-    private long getTotalPrizeMoney(Integer[] result) {
+    private long findTotalPrizeMoney(List<Integer> result) {
         int prizeMoney = 0;
-        prizeMoney += result[LottoPurchasingMachine.FIRST_PLACE_INDEX] * FIRST_PRIZE_MONEY;
-        prizeMoney += result[LottoPurchasingMachine.SECOND_PLACE_INDEX] * SECOND_PRIZE_MONEY;
-        prizeMoney += result[LottoPurchasingMachine.THIRD_PLACE_INDEX] * THIRD_PRIZE_MONEY;
-        prizeMoney += result[LottoPurchasingMachine.FOURTH_PLACE_INDEX] * FOURTH_PRIZE_MONEY;
+        prizeMoney += result.get(LottoPurchasingMachine.FIRST_PLACE_INDEX) * FIRST_PRIZE_MONEY;
+        prizeMoney += result.get(LottoPurchasingMachine.SECOND_PLACE_INDEX) * SECOND_PRIZE_MONEY;
+        prizeMoney += result.get(LottoPurchasingMachine.THIRD_PLACE_INDEX) * THIRD_PRIZE_MONEY;
+        prizeMoney += result.get(LottoPurchasingMachine.FOURTH_PLACE_INDEX) * FOURTH_PRIZE_MONEY;
         return prizeMoney;
     }
 }

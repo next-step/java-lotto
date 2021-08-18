@@ -17,9 +17,9 @@ public class LottoMain {
         List<Lotto> lottoList = lottoPurchasingMachine.buyLotto(purchaseAmount);
         view.showLottoList(lottoList);
 
-        String[] prevWinningLottoNumbers = view.getPrevWinningLottoNumbers(br);
-        Integer[] result = lottoPurchasingMachine.checkLottoList(lottoList, Number.stringArrayToInteger(prevWinningLottoNumbers));
-        double yield = lottoPurchasingMachine.getYield(result, purchaseAmount);
+        List<String> prevWinningLottoNumbers = view.getPrevWinningLottoNumbers(br);
+        List<Integer> result = lottoPurchasingMachine.checkLottoList(lottoList, Number.stringArrayToIntegerList(prevWinningLottoNumbers));
+        double yield = lottoPurchasingMachine.findYield(result, purchaseAmount);
         view.showNumericalStatement(result, yield);
 
     }

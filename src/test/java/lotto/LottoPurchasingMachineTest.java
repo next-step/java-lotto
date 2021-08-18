@@ -1,5 +1,6 @@
 package lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoPurchasingMachineTest {
 
     @Test
+    @DisplayName("로또 구매 후 구입갯수 확인")
     void buyLotto() {
         LottoPurchasingMachine lottoPurchasingMachine = new LottoPurchasingMachine();
         List<Lotto> ticket = lottoPurchasingMachine.buyLotto(13500);
@@ -20,26 +22,27 @@ class LottoPurchasingMachineTest {
     }
 
     @Test
+    @DisplayName("당첨된 로또가 몇개 인지 확인")
     void checkLottoList() {
         LottoPurchasingMachine lottoPurchasingMachine = new LottoPurchasingMachine();
-        Lotto firstPlace = new Lotto(new Integer[] {1,2,3,4,5,6});
-        Lotto secondPlace = new Lotto(new Integer[] {1,2,3,4,5,11});
-        Lotto thirdPlace = new Lotto(new Integer[] {1,2,3,4,11,12});
-        Lotto fourthPlace = new Lotto(new Integer[] {1,2,3,11,12,13});
-        Lotto fourthPlace2 = new Lotto(new Integer[] {1,2,3,13,17,26});
-        Integer[] result = lottoPurchasingMachine.checkLottoList(Arrays.asList(fourthPlace, thirdPlace, secondPlace, firstPlace, fourthPlace2), new Integer[] {1,2,3,4,5,6});
+        Lotto firstPlace = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto secondPlace = new Lotto(Arrays.asList(1,2,3,4,5,11));
+        Lotto thirdPlace = new Lotto(Arrays.asList(1,2,3,4,11,12));
+        Lotto fourthPlace = new Lotto(Arrays.asList(1,2,3,11,12,13));
+        Lotto fourthPlace2 = new Lotto(Arrays.asList(1,2,3,13,17,26));
+        List<Integer> result = lottoPurchasingMachine.checkLottoList(Arrays.asList(fourthPlace, thirdPlace, secondPlace, firstPlace, fourthPlace2), Arrays.asList(1,2,3,4,5,6));
 
-        assertThat(result[LottoPurchasingMachine.FIRST_PLACE_INDEX]).isEqualTo(1);
-        assertThat(result[LottoPurchasingMachine.SECOND_PLACE_INDEX]).isEqualTo(1);
-        assertThat(result[LottoPurchasingMachine.THIRD_PLACE_INDEX]).isEqualTo(1);
-        assertThat(result[LottoPurchasingMachine.FOURTH_PLACE_INDEX]).isEqualTo(2);
+        assertThat(result.get(LottoPurchasingMachine.FIRST_PLACE_INDEX)).isEqualTo(1);
+        assertThat(result.get(LottoPurchasingMachine.SECOND_PLACE_INDEX)).isEqualTo(1);
+        assertThat(result.get(LottoPurchasingMachine.THIRD_PLACE_INDEX)).isEqualTo(1);
+        assertThat(result.get(LottoPurchasingMachine.FOURTH_PLACE_INDEX)).isEqualTo(2);
     }
 
     @Test
-    void getYield() {
+    @DisplayName("로또 수익률 확인")
+    void findYield() {
         LottoPurchasingMachine lottoPurchasingMachine = new LottoPurchasingMachine();
-        double yield = lottoPurchasingMachine.getYield(new Integer[] {0, 0, 0, 1}, 14000);
-        System.out.println(yield);
+        double yield = lottoPurchasingMachine.findYield(Arrays.asList(0, 0, 0, 1), 14000);
 
         assertThat(yield).isEqualTo(0.35);
     }
