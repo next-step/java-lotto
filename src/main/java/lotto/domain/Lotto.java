@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final int DEFAULT_LOTTO_SIZE = 6;
     private List<Number> numbers = new ArrayList<>();
 
     public Lotto(List<Number> shuffleNumbers) {
@@ -13,8 +14,8 @@ public class Lotto {
         numbers.addAll(shuffleNumbers);
     }
 
-    public List<Number> numbers() {
-        return this.numbers;
+    public boolean isCreate() {
+        return numbers.size() == DEFAULT_LOTTO_SIZE;
     }
 
     public int match(List<Number> winnerNumbers) {

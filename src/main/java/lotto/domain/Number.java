@@ -22,7 +22,7 @@ public class Number implements Comparable<Number> {
 
     public static List<Number> createRandomNumbers(int size) {
         Set<Number> numberSet = new HashSet<>();
-        while (numberSet.size() == size) {
+        while (numberSet.size() != size) {
             Number randomNumber = createRandomNumber();
             numberSet.add(randomNumber);
         }

@@ -5,8 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class PurchaseAmountTest {
 
@@ -18,11 +17,11 @@ class PurchaseAmountTest {
         assertThat(purchaseAmount.purchases()).isEqualTo(expected);
     }
 
-    @DisplayName("구매금액(cash)의 유효성 검사 - 1000원 이하일때, 1000원의 배수가 아닐 때")
+    @DisplayName("구매금액(cash)이 1000원 단위가 아닐때 - 구매가능한 수량만큼 구매")
     @ParameterizedTest
-    @ValueSource(ints = {0, 1500, 2500, 999})
-    void createLottoList_blueCase(int cash) {
-        assertThatThrownBy(() -> new PurchaseAmount(cash))
-                .isInstanceOf(IllegalArgumentException.class);
+    @CsvSource(value = {"0:0", "1500:1", "2500:2", "999:0"}, delimiter = ':')
+    void purchaseAmount_blueCase(int cash, int expected) {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(cash);
+        assertThat(purchaseAmount.purchases()).isEqualTo(expected);
     }
 }

@@ -1,7 +1,9 @@
 package lotto;
 
+import lotto.domain.Lottos;
 import lotto.domain.Number;
-import lotto.domain.*;
+import lotto.domain.PurchaseAmount;
+import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,15 +19,37 @@ public class LottoController {
         resultView = ResultView.getInstance();
     }
 
-    public void run() {
-        int cash = inputView.inputPurchaseAmount();
-        Lottos lottos = LottoGenerator.createAutoLottos(new PurchaseAmount(cash));
-        resultView.printLottos(lottos.findAll());
+    public Lottos createAutoLotto(int cash) {
+        Lottos lottos = new Lottos();
+        try {
+            lottos.create(new PurchaseAmount(cash));
+        } catch (IllegalArgumentException e) {
+            int possiblePurchaseCount = PurchaseAmount.possiblePurchaseCount(cash);
+            resultView.printReInputMessage(possiblePurchaseCount);
+            lottos.create(new PurchaseAmount(possiblePurchaseCount));
+        }
+        return lottos;
+    }
 
-        List<Number> winnerNumbers = inputView.inputWinnerNumbers();
-        Map<Winner, Integer> winningInfo = lottos.findWinners(winnerNumbers);
-        resultView.printWinners(winningInfo);
-        resultView.printProfitRate(lottos.findAll().size(), winningInfo);
+    public int inputPurchaseAmount() {
+        return inputView.inputPurchaseAmount();
+    }
+
+    public void printLottos(Lottos lottos) {
+        resultView.printLottos(lottos.findAll());
+    }
+
+    public List<Number> inputWinnerNumbers() {
+        return inputView.inputWinnerNumbers();
+    }
+
+    public void printRanks(Map<Rank, Integer> rankInfo) {
+        resultView.printWinners(rankInfo);
+    }
+
+    public void printProfitRate(Lottos lottos, Map<Rank, Integer> rankInfo) {
+        int lottoSize = lottos.findAll().size();
+        resultView.printProfitRate(lottoSize, rankInfo);
     }
 
 }

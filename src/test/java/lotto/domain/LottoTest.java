@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
-    private static final int DEFAULT_LOTTO_SIZE = 6;
     private static final String DELIMITER = ",";
 
     @DisplayName("로또 생성 후 로또가 생성되었는지 확인")
@@ -23,7 +22,7 @@ class LottoTest {
     void createLotto(String numbers) {
         List<Number> numbersList = getNumbers(numbers);
         Lotto lotto = new Lotto(numbersList);
-        assertThat(lotto.numbers().size()).isEqualTo(DEFAULT_LOTTO_SIZE);
+        assertThat(lotto.isCreate()).isTrue();
     }
 
     @DisplayName("당첨 번호와 일치하는 갯수 확인")
@@ -43,13 +42,10 @@ class LottoTest {
     }
 
     private List<Number> getWinnerNumbers() {
-        return Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(6));
+        int[] winnerNumbers = {1, 2, 3, 4, 5, 6};
+        return Arrays.stream(winnerNumbers)
+                .mapToObj(Number::new)
+                .collect(Collectors.toList());
     }
 
 

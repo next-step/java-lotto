@@ -8,23 +8,23 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class WinnerTest {
+class RankTest {
 
     @DisplayName("당첨 번호와 일치하는 갯수에 해당하는 당첨정보 리턴")
     @ParameterizedTest
     @CsvSource(value = {"3:FOURTH", "4:THIRD", "5:SECOND", "6:FIRST", "0:NONE"}, delimiter = ':')
     void find(int matchCount, String expected) {
-        Winner matchedWinner = Winner.find(matchCount);
+        Rank matchedRank = Rank.find(matchCount);
 
-        assertThat(matchedWinner).isEqualTo(Winner.valueOf(expected));
+        assertThat(matchedRank).isEqualTo(Rank.valueOf(expected));
     }
 
     @DisplayName("당첨 정보에 해당하는 카운트를 세기 위한 맵 생성")
     @ParameterizedTest
     @CsvSource(value = {"FOURTH:true", "THIRD:true", "SECOND:true", "FIRST:true", "NONE:true"}, delimiter = ':')
     void makeWinnerMap(String winnerName, boolean expected) {
-        Map<Winner, Integer> winnerMap = Winner.makeWinnerMap();
-        Winner inputWinner = Winner.valueOf(winnerName);
-        assertThat(winnerMap.containsKey(inputWinner)).isEqualTo(expected);
+        Map<Rank, Integer> winnerMap = Rank.makeWinnerMap();
+        Rank inputRank = Rank.valueOf(winnerName);
+        assertThat(winnerMap.containsKey(inputRank)).isEqualTo(expected);
     }
 }

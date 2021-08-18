@@ -24,13 +24,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Winner, Integer> findWinners(List<Number> winnerNumbers) {
+    public Map<Rank, Integer> findWinners(List<Number> winnerNumbers) {
         List<Integer> matchCounts = this.lottos.stream()
                 .map(lotto -> lotto.match(winnerNumbers))
                 .filter(matchCount -> matchCount != 0)
                 .collect(Collectors.toList());
 
-        return Winner.findWinningInfo(matchCounts);
+        return Rank.findWinningInfo(matchCounts);
     }
 
     public List<Lotto> findAll() {

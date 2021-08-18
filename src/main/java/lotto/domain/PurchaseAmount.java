@@ -19,6 +19,10 @@ public class PurchaseAmount {
         return this.cash;
     }
 
+    public static int possiblePurchaseCount(int cash) {
+        return cash / PURCHASE_AMOUNT_UNIT;
+    }
+
     private void validateCash(int cash) {
 
         if (cash < PURCHASE_AMOUNT_UNIT) {

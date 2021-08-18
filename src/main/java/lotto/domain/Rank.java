@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public enum Winner {
+public enum Rank {
 
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
@@ -18,7 +18,7 @@ public enum Winner {
     private final int matchCount;
     private final int cash;
 
-    Winner(int matchCount, int cash) {
+    Rank(int matchCount, int cash) {
         this.matchCount = matchCount;
         this.cash = cash;
     }
@@ -31,26 +31,26 @@ public enum Winner {
         return cash;
     }
 
-    public static Winner find(int matchCount) {
-        return Arrays.stream(Winner.values())
+    public static Rank find(int matchCount) {
+        return Arrays.stream(Rank.values())
                 .filter(winner -> winner.matchCount == matchCount)
                 .findFirst().orElse(NONE);
     }
 
-    public static Map<Winner, Integer> makeWinnerMap() {
-        Map<Winner, Integer> map = new HashMap<>();
-        Arrays.stream(Winner.values())
+    public static Map<Rank, Integer> makeWinnerMap() {
+        Map<Rank, Integer> map = new HashMap<>();
+        Arrays.stream(Rank.values())
                 .forEach(winner -> map.put(winner, DEFAULT_MATCH_COUNT));
         return map;
     }
 
-    public static Map<Winner, Integer> findWinningInfo(List<Integer> matchCounts) {
-        Map<Winner, Integer> winnerMap = makeWinnerMap();
+    public static Map<Rank, Integer> findWinningInfo(List<Integer> matchCounts) {
+        Map<Rank, Integer> winnerMap = makeWinnerMap();
 
         for (Integer matchCount : matchCounts) {
-            Winner winnerInfo = Winner.find(matchCount);
-            Integer currentCount = winnerMap.get(winnerInfo);
-            winnerMap.put(winnerInfo, currentCount + ADDED_WINNING_COUNT);
+            Rank rankInfo = Rank.find(matchCount);
+            Integer currentCount = winnerMap.get(rankInfo);
+            winnerMap.put(rankInfo, currentCount + ADDED_WINNING_COUNT);
         }
         return winnerMap;
     }
