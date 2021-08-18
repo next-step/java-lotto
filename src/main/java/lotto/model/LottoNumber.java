@@ -15,6 +15,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber(){
+        return number;
+    }
+
     private void validateRange(int number) {
         if(number < RANGE_MIN || number > RANGE_MAX){
             throw new IllegalArgumentException(RANGE_ERROR_MSG);

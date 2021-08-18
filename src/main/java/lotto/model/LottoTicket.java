@@ -33,6 +33,12 @@ public class LottoTicket {
         );
     }
 
+    public List<Integer> getNumbers(){
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .sorted()
+                .collect(Collectors.toList());
+    }
 
     private void validateNumbers(List<Integer> numbers) {
         checkSize(numbers);
