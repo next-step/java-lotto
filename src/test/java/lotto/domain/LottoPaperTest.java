@@ -26,4 +26,20 @@ class LottoPaperTest {
         assertThat(lottoPaper.getLottoNumber()).contains(1,2,3,4,5,6);
     }
 
+    @DisplayName("로또 번호 일치 테스트")
+    @Test
+    public void lottoMatchCountTest() {
+        LottoPaper lottoPaper = new LottoPaper(
+                new LottoNumberStragey(){
+                    @Override
+                    public Set<Integer> getLottoNumber() {
+                        return new HashSet<>(Arrays.asList(1,2,3,4,5,6));
+                    }
+                }
+        );
+
+        assertThat(lottoPaper.checkMatchNumberCount(new HashSet<>(Arrays.asList(1,2,3,4,5,6))))
+                .isEqualTo(6);
+    }
+
 }
