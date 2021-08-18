@@ -1,8 +1,5 @@
-package edu.nextstep.lottoauto.domain;
+package edu.nextstep.lottoauto.domain.ticketmaker;
 
-
-import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
-import edu.nextstep.lottoauto.domain.ticketmaker.NumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
