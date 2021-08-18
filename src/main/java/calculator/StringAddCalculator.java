@@ -9,6 +9,7 @@ public class StringAddCalculator {
     public static final int ONE = 1;
     public static final int PATTERN_GROUP_ONE = 1;
     public static final int PATTERN_GROUP_TWO = 2;
+    public static final int SLASH_POS = 0;
     private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static void main(String[] args) {
@@ -53,7 +54,7 @@ public class StringAddCalculator {
 
     public static int checkDelimeter(String input) {
 
-        if (input.charAt(ZERO) == '/') {
+        if (input.charAt(SLASH_POS) == '/') {
             return customDelimiterSum(input);
         }
 
