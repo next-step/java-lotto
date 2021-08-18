@@ -40,7 +40,7 @@ public class Lottery {
                 .count();
     }
 
-    public boolean getBonusMatchesScore(final LotteryNumber bonusNumber) {
+    public boolean containsBonus(final LotteryNumber bonusNumber) {
         return lotteryNumbers.contains(bonusNumber);
     }
 

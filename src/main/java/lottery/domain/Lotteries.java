@@ -6,14 +6,12 @@ import lottery.dto.LotteryStatisticDto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotteries {
 
@@ -26,20 +24,12 @@ public class Lotteries {
         this.lotteries = lotteries;
     }
 
-    public Lotteries(final List<Lottery> manualLotteries, final List<Lottery> lotteries) {
-        validateLotteries(manualLotteries);
-        validateLotteries(lotteries);
-        this.lotteries = Stream.of(manualLotteries, lotteries)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-    }
-
-    public LotteryStatisticDto getLotteryStatisticDto(final WinningLotteryStrategy winningLotteryStrategy) {
+    public LotteryStatisticDto getLotteryStatistic(final WinningLotteryStrategy winningLotteryStrategy) {
         Map<LotteryResult, Integer> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
         return winningLotteryStrategy.getLotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
     }
 
-    public List<LotteryDto> getLotteriesDto() {
+    public List<LotteryDto> toDto() {
         return lotteries.stream()
                 .map(Lottery::toDto)
                 .collect(Collectors.toList());

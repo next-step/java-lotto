@@ -45,7 +45,7 @@ class LotteriesTest {
         BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.SIX_MATCHES, 1);
 
         // when
-        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatistic(new MatchWinningLotteryStrategy(winningLottery));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
         BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
@@ -64,7 +64,7 @@ class LotteriesTest {
         BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.THREE_MATCHES, 2);
 
         // when
-        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchWinningLotteryStrategy(winningLottery));
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatistic(new MatchWinningLotteryStrategy(winningLottery));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
         BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
@@ -84,7 +84,7 @@ class LotteriesTest {
         BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.FOUR_MATCHES, 2);
 
         // when
-        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatistic(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
         BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
@@ -104,7 +104,7 @@ class LotteriesTest {
         BigDecimal expectedEarningsRate = getEarningsRate(LotteryResult.FIVE_AND_BONUS_MATCHES, 2);
 
         // when
-        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatisticDto(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
+        LotteryStatisticDto lotteryStatisticDto = lotteries.getLotteryStatistic(new MatchAndBonusWinningLotteryStrategy(winningLottery, bonusNumber));
         List<Integer> counts = getLotteryResultCounts(lotteryStatisticDto);
         BigDecimal earningsRate = lotteryStatisticDto.getEarningsRate();
 
