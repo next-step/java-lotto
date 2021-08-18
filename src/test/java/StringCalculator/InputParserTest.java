@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputParserTest {
 
@@ -14,12 +16,14 @@ public class InputParserTest {
     @ParameterizedTest
     @CsvSource(value = {"!0", "''!0", "1,2!1,2", "1,2,3!1,2,3", "1,2:3!1,2,3"}, delimiter = '!')
     void testInputParsingWithColonOrComma(String input, String parsed) {
-        assertThat(InputParser.parseStringToStringList(input)).isEqualTo(Arrays.asList(parsed.split(",")));
+        List<Integer> actual = InputParser.parseStringListToIntegerList(input);
+        List<Integer> expected = Arrays.stream(parsed.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        assertThat(actual).isEqualTo(expected);
     }
 
     @DisplayName("커스텀 구분자 기준 인풋 파싱 테스트")
     @Test
     void testInputParsingWithCustomizedDelimiter() {
-        assertThat(InputParser.parseStringToStringList("//;\n1;2;3")).isEqualTo(Arrays.asList("1,2,3".split(",")));
+        assertThat(InputParser.parseStringListToIntegerList("//;\n1;2;3")).isEqualTo(Arrays.asList(1,2,3));
     }
 }

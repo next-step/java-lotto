@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    public static List<String> parseStringToStringList(String input) {
+    private static List<String> parseStringToStringList(String input) {
         if (input == null || "".equals(input)) {
             return Collections.singletonList("0");
         }
