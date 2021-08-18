@@ -1,4 +1,4 @@
-package step2;
+package step2.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +16,7 @@ public class Lotto {
   public Lotto() {
     lottoNumbers = new ArrayList();
     random = new Random();
+    draw();
   }
 
   public void draw() {

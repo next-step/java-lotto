@@ -1,5 +1,8 @@
 package step2;
 
+import step2.model.Lotto;
+import step2.model.Lottos;
+
 public class ResultView {
 
   final static String LEFT_BRACKET = "[";
@@ -7,8 +10,16 @@ public class ResultView {
   final static String COMMA = ",";
   final static String BLANK_SPACE = " ";
 
-  public void printPurchasedLotto(Lotto lotto) {
+  public void printPurchasedLotto(Lottos lottos) {
 
+    System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
+
+    for (int i = 0; i < lottos.getLottosSize(); i++) {
+      printLotto(lottos.getLotto(i));
+    }
+  }
+
+  private void printLotto(Lotto lotto) {
     StringBuilder stringBuilder = new StringBuilder();
 
     stringBuilder.append(LEFT_BRACKET);
