@@ -1,22 +1,23 @@
 package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
-import edu.nextstep.lottoauto.view.form.WinningResultForm;
 import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class TicketMachineTest {
 
     private static final int TICKET_PRICE = 1_000;
 
+    @BeforeEach
+    void removeAll(){
+        TicketRepository.removeAll();
+    }
 
     @Test
     @DisplayName("Tickets 생성")
@@ -29,39 +30,8 @@ public class TicketMachineTest {
         ticketMachine.createAndSaveTickets(payment, new AutoNumbersMaker());
 
         // then
-        assertThat(ticketMachine.findTickets().size()).isEqualTo(payment/TICKET_PRICE);
-        assertThat(ticketMachine.findTickets().get(0)).isInstanceOf(Ticket.class);
-    }
-
-    @Test
-    @DisplayName("Custom Ticket 생성")
-    void createCustomTicket() {
-        // given
-        String numbersOfString = "1, 2, 3, 4, 5, 6";
-        TicketMachine ticketMachine = new TicketMachine();
-
-        // when
-        Ticket ticket = ticketMachine.createCustomTicket(numbersOfString);
-
-        // then
-        assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-    }
-
-
-    @Test
-    @DisplayName("당첨 결과 확인")
-    void checkWinningResult() {
-        // given
-        TicketMachine ticketMachine = new TicketMachine();
-        ticketMachine.createAndSaveTickets(1000, () -> createNumbersFromTo(1,6));
-
-        // when
-        WinningResultForm winningResult =
-                ticketMachine.confirmWinningResult(Ticket.madeBy(() -> createNumbersFromTo(4,9)));
-
-        // then
-        assertThat(winningResult.getWinningResult().getOrDefault(Prize.FOURTH,0)).isEqualTo(1);
-        assertThat(winningResult.getRateOfReturn()).isEqualTo(5);
+        assertThat(TicketRepository.findAll().size()).isEqualTo(payment/TICKET_PRICE);
+        assertThat(TicketRepository.findAll().get(0)).isInstanceOf(Ticket.class);
     }
 
     @Test
@@ -100,13 +70,5 @@ public class TicketMachineTest {
         assertThatThrownBy(() -> ticketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("개 당 금액");
-    }
-
-    private List<Integer> createNumbersFromTo(int numFrom, int numTo) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = numFrom; i <= numTo; i++) {
-            numbers.add(i);
-        }
-        return numbers;
     }
 }

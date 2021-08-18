@@ -17,11 +17,10 @@ public class TicketRepositoryTest {
         Ticket ticket = Ticket.madeBy(() -> createNumbersFromTo(1, 6));
 
         // when
-        TicketRepository ticketRepository = new TicketRepository();
-        ticketRepository.save(ticket);
+        TicketRepository.save(ticket);
 
         // then
-        assertThat(ticketRepository.findAll().get(0)).isEqualTo(ticket);
+        assertThat(TicketRepository.findAll().get(0)).isEqualTo(ticket);
     }
 
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {

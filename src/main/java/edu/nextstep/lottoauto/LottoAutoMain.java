@@ -1,6 +1,8 @@
 package edu.nextstep.lottoauto;
 
 import edu.nextstep.lottoauto.domain.TicketMachine;
+import edu.nextstep.lottoauto.domain.TicketRepository;
+import edu.nextstep.lottoauto.domain.WinningCheckMachine;
 import edu.nextstep.lottoauto.exception.CustomException;
 import edu.nextstep.lottoauto.view.form.WinningResultForm;
 import edu.nextstep.lottoauto.domain.ticketmaker.AutoNumbersMaker;
@@ -13,15 +15,15 @@ public class LottoAutoMain {
         try {
             int payment = InputView.inputPayment();
 
-            TicketMachine ticketMachine = new TicketMachine();
             NumbersMaker numbersMaker = new AutoNumbersMaker();
-            ticketMachine.createAndSaveTickets(payment, numbersMaker);
+            new TicketMachine(payment, numbersMaker);
 
-            ResultView.printTickets(ticketMachine.findTickets());
+            ResultView.printTickets(TicketRepository.findAll());
 
             String winningNumbersOfString = InputView.inputWinningNumbers();
 
-            WinningResultForm winningResult = ticketMachine.confirmWinningResult(winningNumbersOfString);
+            WinningCheckMachine winningCheckMachine = new WinningCheckMachine();
+            WinningResultForm winningResult = winningCheckMachine.confirmWinningResult(winningNumbersOfString);
 
             ResultView.printWinningResult(winningResult);
         } catch (CustomException e) {
