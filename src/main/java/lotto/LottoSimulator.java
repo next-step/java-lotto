@@ -31,12 +31,17 @@ public class LottoSimulator {
     }
 
     private void run() {
-        PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
-        PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
-        LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, totalPurchaseQuantity.subtract(manualPurchaseQuantity));
-        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
-        MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
-        printMatchResult(totalPurchaseQuantity, matchResult);
+        try {
+            PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
+            PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
+            LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, totalPurchaseQuantity.subtract(manualPurchaseQuantity));
+            WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
+            MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
+            printMatchResult(totalPurchaseQuantity, matchResult);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            run();
+        }
     }
 
     private PurchaseQuantity getTotalPurchaseQuantity() {
