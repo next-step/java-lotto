@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.dto.LottoWinnersDto;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,6 @@ public class LottoDrawResult {
     }
 
     public Map<Award, Long> getLottoDrawResult() {
-        return lottoDrawResult;
+        return Collections.unmodifiableMap(lottoDrawResult);
     }
 }

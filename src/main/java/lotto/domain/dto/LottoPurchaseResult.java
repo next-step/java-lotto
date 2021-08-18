@@ -3,6 +3,7 @@ package lotto.domain.dto;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoPurchaseResult {
@@ -13,6 +14,6 @@ public class LottoPurchaseResult {
     }
 
     public List<Lotto> getLottoList() {
-        return lottoList;
+        return Collections.unmodifiableList(lottoList);
     }
 }
