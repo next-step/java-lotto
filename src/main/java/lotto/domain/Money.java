@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Money {
 
     private static final int MIN_VALUE = 0;
+
     private final int value;
 
     public Money(int value) {
