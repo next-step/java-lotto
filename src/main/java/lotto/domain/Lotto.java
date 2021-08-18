@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InputError;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Lotto {
         if (numbers.size() != LOTTO_LENGTH) {
             throw new InputError("로또는 6개의 숫자여야 합니다.");
         }
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
     public int countSameNumber(final Lotto otherLotto) {
