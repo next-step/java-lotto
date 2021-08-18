@@ -23,4 +23,13 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public long countContains(Set<LottoNumber> lottoNumbers) {
+        return this.lottoNumbers.stream()
+                .filter(winnerNumber -> lottoNumbers.contains(winnerNumber))
+                .count();
+    }
 }

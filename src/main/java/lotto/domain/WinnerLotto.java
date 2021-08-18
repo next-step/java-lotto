@@ -15,26 +15,16 @@ public class WinnerLotto {
     }
 
     private void validate(Lotto lotto, LottoNumber bonusNumber) {
-        if(lotto.getNumbers().contains(bonusNumber)){
+        if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException("로또번호와 보너스 번호가 중복입니다. bonusNumber : " + bonusNumber.getLottoNumber());
         }
     }
 
     public Award drawLotto(Set<LottoNumber> lottoNumbers) {
-        long matchNumbers = countContains(lottoNumbers);
+        long matchNumbers = lotto.countContains(lottoNumbers);
         if (matchNumbers == SECOND_CANDIDATE_MATCH_NUMBERS) {
-            return Award.findBy(matchNumbers, matchBonus(lottoNumbers));
+            return Award.findBy(matchNumbers, lottoNumbers.contains(bonusNumber));
         }
         return Award.findBy(matchNumbers, DEFAULT_FALSE_BONUS_NUMBER);
-    }
-
-    private long countContains(Set<LottoNumber> lottoNumbers) {
-        return lotto.getNumbers().stream()
-                .filter(winnerNumber -> lottoNumbers.contains(winnerNumber))
-                .count();
-    }
-
-    private boolean matchBonus(Set<LottoNumber> lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
     }
 }
