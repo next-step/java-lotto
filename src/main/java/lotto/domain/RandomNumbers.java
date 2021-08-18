@@ -11,13 +11,9 @@ public class RandomNumbers implements LottoNumbersCreator {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;
     private static final int COUNT = 6;
-    private static List<Integer> numbers;
-
-    static {
-        numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
+    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
     @Override
     public LottoNumbers createLottoNumbers() {

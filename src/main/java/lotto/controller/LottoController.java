@@ -7,8 +7,8 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void runAutoLotto() {
-        int money = InputView.buyLotto();
-        LottoCreator lottoCreator = new LottoCreator(money);
+        int lottoPurchasePrice = InputView.inputPurchasePrice();
+        LottoCreator lottoCreator = new LottoCreator(lottoPurchasePrice);
         Lottos lottos = new Lottos(lottoCreator.createLottos(new RandomNumbers()));
         ResultView.printBuyLotto(lottos.value());
 
@@ -18,6 +18,6 @@ public class LottoController {
 
         ResultView.printResultTitle();
         ResultView.printRankCount(lottoResults.value());
-        ResultView.printProfit(lottoResults.calculateTotalRewardsRatio(money));
+        ResultView.printProfit(lottoResults.calculateTotalRewardsRatio(lottoPurchasePrice));
     }
 }

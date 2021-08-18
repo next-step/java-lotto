@@ -13,8 +13,8 @@ public class InputView {
 
     private InputView() {
     }
-
-    public static int buyLotto() {
+    
+    public static int inputPurchasePrice() {
         System.out.println("구매 금액을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
