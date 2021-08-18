@@ -4,6 +4,8 @@ import java.util.Set;
 
 public class Lottery {
     public static final int LOTTO_COUNT = 6;
+    private static final int COUNT = 1;
+    private static final int NO_COUNT = 0;
     private final Set<LottoNumber> lottery;
 
     public Lottery(Set<LottoNumber> lottery) {
@@ -23,9 +25,9 @@ public class Lottery {
 
     private int containWinning(LottoNumber number) {
         if (lottery.contains(number)) {
-            return 1;
+            return COUNT;
         }
-        return 0;
+        return NO_COUNT;
     }
 
     public Set<LottoNumber> getLottery() {
