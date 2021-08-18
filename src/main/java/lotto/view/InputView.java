@@ -25,13 +25,7 @@ public class InputView {
 
     private static LottoTicket convertToTicket() {
         try {
-            String[] input = scanner.next().split(",");
-
-            List<Integer> numbers = Arrays.stream(input)
-                    .map(str -> str.trim())
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-            return new LottoTicket(numbers);
+            return LottoTicket.of(scanner.next());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readWinningNumber();
