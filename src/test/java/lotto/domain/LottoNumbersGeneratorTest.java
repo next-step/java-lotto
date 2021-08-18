@@ -18,7 +18,7 @@ class LottoNumbersGeneratorTest {
     @Test
     public void lottoNumbersGenerateWithNumberRange() {
         LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(1,6);
-        List<LottoNumbers> generated = lottoNumbersGenerator.generate(1);
+        List<LottoNumbers> generated = lottoNumbersGenerator.generate(PurchaseQuantity.of(1));
         LottoNumbers expected = LottoNumbers.of(createMockLottoNumbers(1,2,3,4,5,6));
         assertThat(generated.get(0).countOfMatch(expected)).isEqualTo(6);
     }
@@ -41,7 +41,7 @@ class LottoNumbersGeneratorTest {
     @Test
     public void generateSeveralLottoNumbersTest() {
         LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound());
-        List<LottoNumbers> lottoNumbers = lottoNumbersGenerator.generate(10);
+        List<LottoNumbers> lottoNumbers = lottoNumbersGenerator.generate(PurchaseQuantity.of(10));
         assertThat(lottoNumbers)
                 .isNotNull()
                 .hasSize(10);

@@ -37,9 +37,9 @@ public class LottoNumbersGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumbers> generate(long quantity) {
+    public List<LottoNumbers> generate(PurchaseQuantity purchaseQuantity) {
         return Stream.generate(this::generate)
-                .limit(quantity)
+                .limit(purchaseQuantity.getQuantity())
                 .collect(Collectors.toList());
     }
 

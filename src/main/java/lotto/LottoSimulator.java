@@ -33,25 +33,10 @@ public class LottoSimulator {
     private void run() {
         PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
         PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
-        List<LottoNumbers> manualLottoNumbers = getManualLottoNumbers(manualPurchaseQuantity);
-
-        // TODO: 수동/자동 구매한 로또 수 출력
-        outputView.printPurchaseCount(totalPurchaseQuantity.getQuantity());
-        LottoTicket lottoTicket = getLottoTicket(totalPurchaseQuantity);
+        LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, totalPurchaseQuantity.subtract(manualPurchaseQuantity));
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
-        outputView.printMatchResult(matchResult);
-        outputView.printLotteryYield(totalPurchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
-    }
-
-    private List<LottoNumbers> getManualLottoNumbers(PurchaseQuantity manualPurchaseQuantity) {
-        outputView.printManualLottoNumbersInputMessage();
-        return inputView.getManualLottoNumbers(manualPurchaseQuantity.getQuantity());
-    }
-
-    private PurchaseQuantity getManualPurchaseQuantity() {
-        outputView.printManualPurchaseQuantityInputMessage();
-        return inputView.getManualPurchaseQuantity();
+        printMatchResult(totalPurchaseQuantity, matchResult);
     }
 
     private PurchaseQuantity getTotalPurchaseQuantity() {
@@ -59,10 +44,23 @@ public class LottoSimulator {
         return inputView.getTotalPurchaseQuantity();
     }
 
-    private LottoTicket getLottoTicket(PurchaseQuantity purchaseQuantity) {
-        LottoTicket lottoTicket = LottoTicket.of(lottoNumbersGenerator.generate(purchaseQuantity.getQuantity()));
+    private PurchaseQuantity getManualPurchaseQuantity() {
+        outputView.printManualPurchaseQuantityInputMessage();
+        return inputView.getManualPurchaseQuantity();
+    }
+
+    private LottoTicket createLottoTicket(PurchaseQuantity manualPurchaseQuantity, PurchaseQuantity automaticPurchaseQuantity) {
+        List<LottoNumbers> lottoNumbers = getManualLottoNumbers(manualPurchaseQuantity);
+        lottoNumbers.addAll(lottoNumbersGenerator.generate(automaticPurchaseQuantity));
+        LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
+        outputView.printPurchaseQuantity(manualPurchaseQuantity, automaticPurchaseQuantity);
         outputView.printLottoTicket(lottoTicket.getLottoNumbersList());
         return lottoTicket;
+    }
+
+    private List<LottoNumbers> getManualLottoNumbers(PurchaseQuantity manualPurchaseQuantity) {
+        outputView.printManualLottoNumbersInputMessage();
+        return inputView.getManualLottoNumbers(manualPurchaseQuantity.getQuantity());
     }
 
     private WinningLottoNumbers getWinningLottoNumbers() {
@@ -71,5 +69,10 @@ public class LottoSimulator {
         outputView.printBonusBallInputMessage();
         LottoNumber bonusBall = inputView.getBonusBall();
         return WinningLottoNumbers.of(winningLottoNumbers, bonusBall);
+    }
+
+    private void printMatchResult(PurchaseQuantity totalPurchaseQuantity, MatchResult matchResult) {
+        outputView.printMatchResult(matchResult);
+        outputView.printLotteryYield(totalPurchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
     }
 }
