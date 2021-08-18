@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoTicket;
-import lotto.domain.IssueInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,17 +15,17 @@ class ManualWayTest {
     @ParameterizedTest
     @MethodSource("provideManualOrder")
     @DisplayName("원하는 수만큼의 수동로또티켓을 사용자가 주문시 입력한 번호들만큼 발행할수있다.")
-    void name(IssueInput input, int expectedCount) {
-        ManualWay way = new ManualWay();
-        List<LottoTicket> tickets = way.issueLottoTickets(input);
+    void name(int[][] manualNumbers, int expectedCount) {
+        ManualWay way = new ManualWay(manualNumbers);
+        List<LottoTicket> tickets = way.issueLottoTickets();
         assertThat(tickets.size()).isEqualTo(expectedCount);
     }
 
     private static Stream<Arguments> provideManualOrder() {
         return Stream.of(
-            Arguments.of(new IssueInput(getZeroManualNumber()), 0),
-            Arguments.of(new IssueInput(getOneManualNumbers()), 1),
-            Arguments.of(new IssueInput(getTwoManualNumbers()), 2)
+            Arguments.of(getZeroManualNumber(), 0),
+            Arguments.of(getOneManualNumbers(), 1),
+            Arguments.of(getTwoManualNumbers(), 2)
         );
     }
 

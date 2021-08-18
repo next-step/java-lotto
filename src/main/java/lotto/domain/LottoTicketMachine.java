@@ -16,16 +16,18 @@ public class LottoTicketMachine {
         return instance;
     }
 
-    private List<LottoTicket> issueTickets(IssueInput input, LottoTicketingWay way) {
-        return way.issueLottoTickets(input);
+    private List<LottoTicket> issueTickets(LottoTicketingWay way) {
+        return way.issueLottoTickets();
     }
 
-    public AutoLottoTickets issueTicketsByAutoWay(IssueInput input) {
-        return new AutoLottoTickets(issueTickets(input, new AutoWay()));
+    public AutoLottoTickets issueTicketsByAutoWay(TicketCount autoCount) {
+        List<LottoTicket> tickets = issueTickets(new AutoWay(autoCount));
+        return new AutoLottoTickets(tickets);
     }
 
-    public ManualLottoTickets issueTicketsByManualWay(IssueInput input) {
-        return new ManualLottoTickets(issueTickets(input, new ManualWay()));
+    public ManualLottoTickets issueTicketsByManualWay(int[][] manualLottoNumbers) {
+        List<LottoTicket> tickets = issueTickets(new ManualWay(manualLottoNumbers));
+        return new ManualLottoTickets(tickets);
     }
 
 }

@@ -5,15 +5,18 @@ import java.util.List;
 import lotto.domain.AllPossibleLottoNumbers;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.IssueInput;
 import lotto.domain.TicketCount;
 
 public class AutoWay implements LottoTicketingWay {
 
-    @Override
-    public List<LottoTicket> issueLottoTickets(IssueInput input) {
-        TicketCount ticketCount = input.getAutoTicketCount();
+    private final TicketCount ticketCount;
 
+    public AutoWay(TicketCount ticketCount) {
+        this.ticketCount = ticketCount;
+    }
+
+    @Override
+    public List<LottoTicket> issueLottoTickets() {
         List<LottoTicket> tickets = new ArrayList<>();
 
         AllPossibleLottoNumbers allPossibleNumbers = AllPossibleLottoNumbers.getInstance();
