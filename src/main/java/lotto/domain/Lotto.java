@@ -5,20 +5,20 @@ import lotto.exception.InputError;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumbers {
+public class Lotto {
 
     private static final int LOTTO_LENGTH = 6;
     private final List<Integer> numbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_LENGTH) {
             throw new InputError("로또는 6개의 숫자여야 합니다.");
         }
         this.numbers = numbers;
     }
 
-    public int countSameNumber(final LottoNumbers otherLottoNumbers) {
-        return (int) otherLottoNumbers.value().stream()
+    public int countSameNumber(final Lotto otherLotto) {
+        return (int) otherLotto.value().stream()
                 .filter(numbers::contains)
                 .count();
     }
@@ -31,7 +31,7 @@ public class LottoNumbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(numbers, that.numbers);
     }
 

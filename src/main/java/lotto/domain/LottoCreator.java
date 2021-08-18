@@ -11,15 +11,15 @@ public class LottoCreator {
 
     private final int lottoCount;
 
-    public LottoCreator(final int money) {
-        this.lottoCount = money / LOTTO_PRICE;
+    public LottoCreator(final int lottoPurchasePrice) {
+        this.lottoCount = lottoPurchasePrice / LOTTO_PRICE;
         if (lottoCount <= 0) {
             throw new InputError("로또를 구매할 수 없는 금액입니다.");
         }
     }
 
-    public List<LottoNumbers> createLottos(LottoNumbersCreator numberCreator) {
-        List<LottoNumbers> lottos = new ArrayList<>();
+    public List<Lotto> createLottos(LottoNumbersCreator numberCreator) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(numberCreator.createLottoNumbers());
         }

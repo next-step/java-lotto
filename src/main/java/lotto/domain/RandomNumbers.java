@@ -16,10 +16,10 @@ public class RandomNumbers implements LottoNumbersCreator {
             .collect(Collectors.toList());
 
     @Override
-    public LottoNumbers createLottoNumbers() {
+    public Lotto createLottoNumbers() {
         Collections.shuffle(numbers);
         List<Integer> result = new ArrayList<>(numbers.subList(0, COUNT));
         Collections.sort(result);
-        return new LottoNumbers(result);
+        return new Lotto(result);
     }
 }

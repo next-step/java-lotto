@@ -5,18 +5,18 @@ import java.util.List;
 
 public class LottoMatcher {
 
-    private final LottoNumbers winningLottoNumbers;
+    private final Lotto winningLotto;
     private List<Rank> rankResult;
 
-    public LottoMatcher(final LottoNumbers winningLottoNumbers, final Lottos lottos) {
-        this.winningLottoNumbers = winningLottoNumbers;
+    public LottoMatcher(final Lotto winningLotto, final Lottos lottos) {
+        this.winningLotto = winningLotto;
         this.rankResult = matchWithWinningLottoNumbers(lottos);
     }
 
     private List<Rank> matchWithWinningLottoNumbers(final Lottos lottos) {
         List<Rank> result = new ArrayList<>();
-        for (LottoNumbers lotto : lottos.value()) {
-            int matchCount = lotto.countSameNumber(winningLottoNumbers);
+        for (Lotto lotto : lottos.value()) {
+            int matchCount = lotto.countSameNumber(winningLotto);
             result.add(Rank.findRank(matchCount));
         }
         return result;

@@ -30,7 +30,7 @@ class LottoCreatorTest {
     @Test
     void create() {
         assertThat(new LottoCreator(1000)
-                .createLottos(() -> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))))
-                .contains(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                .createLottos(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))))
+                .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

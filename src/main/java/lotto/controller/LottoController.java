@@ -12,8 +12,8 @@ public class LottoController {
         Lottos lottos = new Lottos(lottoCreator.createLottos(new RandomNumbers()));
         ResultView.printBuyLotto(lottos.value());
 
-        LottoNumbers winningLottoNumbers = new LottoNumbers(InputView.inputWinningNumber());
-        LottoMatcher lottoMatcher = new LottoMatcher(winningLottoNumbers, lottos);
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumber());
+        LottoMatcher lottoMatcher = new LottoMatcher(winningLotto, lottos);
         LottoResults lottoResults = new LottoResults(lottoMatcher.classifyByRank());
 
         ResultView.printResultTitle();
