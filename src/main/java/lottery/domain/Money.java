@@ -8,9 +8,7 @@ import java.util.Objects;
 
 public class Money implements Comparable<Money> {
 
-    private static final String NOT_ENOUGH_MONEY = "로또를 구매하기에 돈이 부족합니다 -> ";
-
-    private int money;
+    private final int money;
 
     public Money(final String money) {
         validateMoney(money);
@@ -22,13 +20,12 @@ public class Money implements Comparable<Money> {
         this.money = money;
     }
 
-    public LotteryQuantity getBuyableLotteryQuantity() {
-        requireOverLotteryPrice();
-        return new LotteryQuantity( money / Lottery.PRICE.money);
-    }
-
     public int multiply(int number) {
         return money * number;
+    }
+
+    public int divideFloor(Money money) {
+        return this.money / money.money;
     }
 
     public BigDecimal divide(long number) {
@@ -36,21 +33,10 @@ public class Money implements Comparable<Money> {
                 .divide(new BigDecimal(number), 4, RoundingMode.HALF_UP);
     }
 
-    public void extractLotteryPrice() {
-        requireOverLotteryPrice();
-        money -= Lottery.PRICE.money;
-    }
-
     private void validateMoney(final String money) {
         NumberUtils.requireNonNull(money);
         NumberUtils.requireNumber(money);
         NumberUtils.requirePositiveNumber(Integer.parseInt(money));
-    }
-
-    private void requireOverLotteryPrice() {
-        if (money < Lottery.PRICE.money) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY + money);
-        }
     }
 
     @Override

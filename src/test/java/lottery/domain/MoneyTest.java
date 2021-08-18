@@ -73,36 +73,4 @@ class MoneyTest {
                 .hasMessage(message);
     }
 
-    @Test
-    @DisplayName("getBuyableLotteryCount 테스트")
-    public void getBuyableLotteryCount() {
-        // given
-        Money money = new Money(5500);
-        int expectedCount = 5;
-
-        // when
-        LotteryQuantity buyableLotteryCount = money.getBuyableLotteryQuantity();
-
-        // then
-        assertThat(buyableLotteryCount.intStream().count()).isEqualTo(expectedCount);
-    }
-
-    @Test
-    @DisplayName("getBuyableLotteryCount 테스트 - 로또를 구매할 수 없는 경우")
-    public void notEnoughMoney() {
-        // given
-        int moneyNumber = 550;
-        Money money = new Money(moneyNumber);
-        String message = "로또를 구매하기에 돈이 부족합니다 -> " + moneyNumber;
-
-        // when
-        // when
-        ThrowingCallable throwingCallable = () -> money.getBuyableLotteryQuantity();
-
-        // then
-        assertThatThrownBy(throwingCallable)
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(message);
-    }
-
 }

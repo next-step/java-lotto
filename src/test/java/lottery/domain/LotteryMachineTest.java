@@ -1,7 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.createstrategy.ManualCreatingLotteryStrategy;
-import lottery.domain.createstrategy.RandomCreatingLotteryStrategy;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,47 +14,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LotteryMachineTest {
 
-    @ParameterizedTest(name = "getLotteries 테스트 - money 입력 | {arguments}")
-    @CsvSource(value = {"2500|2", "9900|9", "1000|1"}, delimiter = '|')
-    public void getLotteriesByMoney(int moneyNumber, int expectedSize) {
-        // given
-        LotteryMachine lotteryMachine = new LotteryMachine(new Money(moneyNumber));
-
-        // when
-        List<Lottery> lotteries = lotteryMachine.createLotteries(new RandomCreatingLotteryStrategy());
-
-        // then
-        assertThat(lotteries).isNotNull();
-        assertThat(lotteries.size()).isEqualTo(expectedSize);
-    }
-
     @Test
-    @DisplayName("getLotteries 테스트 - String 리스트 입력")
-    public void getLotteriesByStrings() {
+    @DisplayName("로또를 구매할 수 없는 돈이 입력된 경우")
+    public void notEnoughMoney() {
         // given
-        List<String> numbers = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
-        LotteryMachine lotteryMachine = new LotteryMachine(new Money(3000));
-        int expectedSize = 2;
+        Money money = new Money(500);
+        String message = "로또를 구매하기에 돈이 부족합니다 -> " + money;
 
         // when
-        List<Lottery> lotteries = lotteryMachine.createLotteries(new ManualCreatingLotteryStrategy(numbers));
-
-        // then
-        assertThat(lotteries).isNotNull();
-        assertThat(lotteries.size()).isEqualTo(expectedSize);
-    }
-
-    @Test
-    @DisplayName("validateQuantityAndGet 테스트 - 넣은 돈보다 요구하는 수량이 많은 경우")
-    public void validateQuantityAndGetNotEnoughMoney() {
-        // given
-        Money money = new Money(3000);
-        LotteryMachine lotteryMachine = new LotteryMachine(money);
-        LotteryQuantity lotteryQuantity = new LotteryQuantity(5);
-        String message = "요구하는 수량에 비해 돈이 부족합니다 -> " + money + " / quantity: " + lotteryQuantity;
-
-        // when
-        ThrowingCallable throwingCallable = () -> lotteryMachine.validateQuantityAndGet(lotteryQuantity);
+        ThrowingCallable throwingCallable = () -> new LotteryMachine(money);
 
         // then
         assertThatThrownBy(throwingCallable)
@@ -65,17 +31,51 @@ class LotteryMachineTest {
     }
 
     @Test
-    @DisplayName("validateQuantityAndGet 테스트 - 정상적인 경우")
-    public void validateQuantityAndGet() {
+    @DisplayName("넣은 돈보다 요구하는 수량이 많은 경우")
+    public void notEnoughQuantity() {
         // given
-        LotteryMachine lotteryMachine = new LotteryMachine(new Money(7000));
+        Money money = new Money(3000);
         LotteryQuantity lotteryQuantity = new LotteryQuantity(5);
-        int expected = 5;
+        String message = "요구한 수량이 너무 많습니다 -> 가능한 수량: " + money.divideFloor(Lottery.PRICE) + " / 요구한 수량: " + lotteryQuantity;
 
         // when
-        int quantity = lotteryMachine.validateQuantityAndGet(lotteryQuantity);
+        ThrowingCallable throwingCallable = () -> new LotteryMachine(money, lotteryQuantity);
 
         // then
-        assertThat(quantity).isEqualTo(expected);
+        assertThatThrownBy(throwingCallable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(message);
     }
+
+    @ParameterizedTest(name = "createLotteries 테스트 - money 입력 | {arguments}")
+    @CsvSource(value = {"2500|2", "9900|9", "1000|1"}, delimiter = '|')
+    public void createLotteriesByMoney(int moneyNumber, int expectedSize) {
+        // given
+        LotteryMachine lotteryMachine = new LotteryMachine(new Money(moneyNumber));
+
+        // when
+        Lotteries lotteries = lotteryMachine.createLotteries();
+
+        // then
+        assertThat(lotteries).isNotNull();
+        assertThat(lotteries.toDto().size()).isEqualTo(expectedSize);
+    }
+
+    @Test
+    @DisplayName("createLotteries 테스트 - String 리스트 입력")
+    public void createLotteriesByStrings() {
+        // given
+        List<String> numbers = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
+        LotteryQuantity lotteryQuantity = new LotteryQuantity(2);
+        LotteryMachine lotteryMachine = new LotteryMachine(new Money(3000), lotteryQuantity);
+        int expectedSize = 3;
+
+        // when
+        Lotteries lotteries = lotteryMachine.createLotteries(numbers);
+
+        // then
+        assertThat(lotteries).isNotNull();
+        assertThat(lotteries.toDto().size()).isEqualTo(expectedSize);
+    }
+
 }

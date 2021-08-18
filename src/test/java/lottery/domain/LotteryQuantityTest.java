@@ -103,4 +103,19 @@ class LotteryQuantityTest {
         // then
         assertThat(lessThan).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("extract 테스트")
+    public void extract() {
+        // given
+        LotteryQuantity lotteryQuantity1 = new LotteryQuantity(7);
+        LotteryQuantity lotteryQuantity2 = new LotteryQuantity(2);
+        LotteryQuantity expected = new LotteryQuantity(5);
+
+        // when
+        LotteryQuantity extracted = lotteryQuantity1.extract(lotteryQuantity2);
+
+        // then
+        assertThat(extracted).isEqualTo(expected);
+    }
 }

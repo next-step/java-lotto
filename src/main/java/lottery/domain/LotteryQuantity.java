@@ -21,6 +21,14 @@ public class LotteryQuantity {
         this.quantity = number;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public LotteryQuantity extract(final LotteryQuantity lotteryQuantity) {
+        return new LotteryQuantity(this.quantity - lotteryQuantity.quantity);
+    }
+
     public LotteryQuantityDto toDto() {
         return new LotteryQuantityDto(quantity);
     }
@@ -56,4 +64,5 @@ public class LotteryQuantity {
     public String toString() {
         return String.valueOf(quantity);
     }
+
 }
