@@ -37,7 +37,7 @@ class InputViewTest {
 
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         InputView inputView = InputView.of(inputStream);
-        LottoNumbers winningLottoNumbers = inputView.getWinningLottoNumbers();
+        LottoNumbers winningLottoNumbers = inputView.getLottoNumbers();
         assertThat(winningLottoNumbers.countOfMatch(expected))
                 .isEqualTo(6);
     }
@@ -52,6 +52,35 @@ class InputViewTest {
         return Arrays.stream(numbers)
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining(","));
+    }
+
+    @DisplayName("수동 로또 번호 입력 테스트")
+    @Test
+    public void getManualLottoNumbersTest() {
+        int quantity = 3;
+        int[][] mockNumbers = new int[][] {{1,2,3,4,5,6},{7,8,9,10,11,12},{13,14,15,16,17,18}};
+        List<String> mockLottoNumbersInput = createMockLottoNumbersInput(mockNumbers);
+        List<LottoNumbers> expectedLottoNumbers = createExpectedLottoNumbers(mockNumbers);
+        String mockInput = String.join(System.getProperty("line.separator"), mockLottoNumbersInput);
+        InputStream inputStream = new ByteArrayInputStream(mockInput.getBytes());
+        InputView inputView = InputView.of(inputStream);
+        assertThat(inputView.getManualLottoNumbers(quantity))
+                .anyMatch(lottoNumbers -> lottoNumbers.countOfMatch(expectedLottoNumbers.get(0)) == 6)
+                .anyMatch(lottoNumbers -> lottoNumbers.countOfMatch(expectedLottoNumbers.get(1)) == 6)
+                .anyMatch(lottoNumbers -> lottoNumbers.countOfMatch(expectedLottoNumbers.get(2)) == 6)
+                .hasSize(quantity);
+    }
+
+    private List<String> createMockLottoNumbersInput(int[][] mockNumbers) {
+        return Arrays.stream(mockNumbers)
+                .map(this::createInput)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> createExpectedLottoNumbers(int[][] mockNumbers) {
+        return Arrays.stream(mockNumbers)
+                .map(numbers -> LottoNumbers.of(createLottoNumbers(numbers)))
+                .collect(Collectors.toList());
     }
 
 }

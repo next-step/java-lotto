@@ -6,15 +6,13 @@ import lotto.domain.Money;
 import lotto.domain.PurchaseQuantity;
 
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
-    private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
+    private static final String LOTTO_NUMBERS_INPUT_DELIMITER = ",";
 
     private final Scanner scanner;
 
@@ -32,13 +30,19 @@ public class InputView {
         return PurchaseQuantity.of(money);
     }
 
-    public LottoNumbers getWinningLottoNumbers() {
-        String input = scanner.nextLine();
-        return LottoNumbers.of(parseWinningLottoNumbers(input));
+    public List<LottoNumbers> getManualLottoNumbers(long quantity) {
+        return Stream.generate(this::getLottoNumbers)
+                .limit(quantity)
+                .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> parseWinningLottoNumbers(String input) {
-        return Arrays.stream(input.split(WINNING_LOTTO_NUMBERS_DELIMITER))
+    public LottoNumbers getLottoNumbers() {
+        String input = scanner.nextLine();
+        return LottoNumbers.of(parseLottoNumbers(input));
+    }
+
+    private List<LottoNumber> parseLottoNumbers(String input) {
+        return Arrays.stream(input.split(LOTTO_NUMBERS_INPUT_DELIMITER))
                 .map(numberString -> LottoNumber.of(Integer.parseInt(numberString.trim())))
                 .collect(Collectors.toList());
     }

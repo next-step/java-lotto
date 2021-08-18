@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoSimulator {
 
     private final InputView inputView;
@@ -31,7 +33,8 @@ public class LottoSimulator {
     private void run() {
         PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
         PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
-        // TODO: 수동으로 구매할 번호 입력
+        List<LottoNumbers> manualLottoNumbers = getManualLottoNumbers(manualPurchaseQuantity);
+
         // TODO: 수동/자동 구매한 로또 수 출력
         outputView.printPurchaseCount(totalPurchaseQuantity.getQuantity());
         LottoTicket lottoTicket = getLottoTicket(totalPurchaseQuantity);
@@ -39,6 +42,11 @@ public class LottoSimulator {
         MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
         outputView.printMatchResult(matchResult);
         outputView.printLotteryYield(totalPurchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
+    }
+
+    private List<LottoNumbers> getManualLottoNumbers(PurchaseQuantity manualPurchaseQuantity) {
+        outputView.printManualLottoNumbersInputMessage();
+        return inputView.getManualLottoNumbers(manualPurchaseQuantity.getQuantity());
     }
 
     private PurchaseQuantity getManualPurchaseQuantity() {
@@ -59,7 +67,7 @@ public class LottoSimulator {
 
     private WinningLottoNumbers getWinningLottoNumbers() {
         outputView.printWinningLottoNumbersInputMessage();
-        LottoNumbers winningLottoNumbers =  inputView.getWinningLottoNumbers();
+        LottoNumbers winningLottoNumbers =  inputView.getLottoNumbers();
         outputView.printBonusBallInputMessage();
         LottoNumber bonusBall = inputView.getBonusBall();
         return WinningLottoNumbers.of(winningLottoNumbers, bonusBall);

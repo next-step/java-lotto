@@ -23,6 +23,7 @@ public class OutputView {
     private static final String LOSS_MESSAGE = "손해라는 의미";
     private static final String PROFIT_MESSAGE = "이득이라는 의미";
     private static final String INPUT_MANUAL_PURCHASE_QUANTITY_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private final PrintStream printStream;
 
@@ -90,5 +91,9 @@ public class OutputView {
 
     public void printManualPurchaseQuantityInputMessage() {
         printStream.println(INPUT_MANUAL_PURCHASE_QUANTITY_MESSAGE);
+    }
+
+    public void printManualLottoNumbersInputMessage() {
+        printStream.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
     }
 }
