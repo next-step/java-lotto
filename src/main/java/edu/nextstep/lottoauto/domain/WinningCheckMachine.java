@@ -3,6 +3,7 @@ package edu.nextstep.lottoauto.domain;
 import edu.nextstep.lottoauto.domain.ticketmaker.CustomNumbersMaker;
 import edu.nextstep.lottoauto.view.form.WinningResultForm;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class WinningCheckMachine {
 
         Map<Prize, Integer> winningResult = makeWinningResult(winningTicket, tickets);
 
-        double rateOfReturn = ((double)calculateTotalPrize(winningResult) / calculatePayment(tickets));
+        double rateOfReturn = ((double) calculateTotalPrize(winningResult) / calculatePayment(tickets));
 
         return new WinningResultForm(winningResult, rateOfReturn);
     }
@@ -34,12 +35,10 @@ public class WinningCheckMachine {
         return winningResult;
     }
 
-    private static long calculateTotalPrize(Map<Prize, Integer> winningResult) {
-        long totalPrize = 0;
-        for(Prize prize : Prize.values()) {
-            totalPrize += ((long)prize.getWinningPrize() * winningResult.getOrDefault(prize,0));
-        }
-        return totalPrize;
+    private static int calculateTotalPrize(Map<Prize, Integer> winningResult) {
+        return Arrays.stream(Prize.values())
+                .mapToInt((prize) -> (prize.getWinningPrize() * winningResult.getOrDefault(prize,0)))
+                .sum();
     }
 
     private static int calculatePayment(List<Ticket> tickets) {
