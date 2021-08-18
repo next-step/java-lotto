@@ -13,24 +13,23 @@ class LottoCreatorTest {
     @Test
     @DisplayName("생성된 로또가 올바른 로또 인지 검증.")
     void createLotto() {
-        Set<LottoNumber> lotto = LottoCreator.createLotto();
-        assertThat(lotto.size()).isEqualTo(6);
+        Lottery lotto = LottoCreator.createLotto();
+        assertThat(lotto.getLottery().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("입력한 지난 주 당첨 번호가 올바른 로또 인지 검증 - 6개의 로또 번호")
     void convertToLotto() {
         String input = "1, 2, 3, 4, 5, 6";
-        Set<LottoNumber> lotto = LottoCreator.convertToLotto(input);
-        assertThat(lotto.size()).isEqualTo(6);
+        Lottery lotto = LottoCreator.convertToLotto(input);
+        assertThat(lotto.getLottery().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("입력한 지난 주 당첨 번호가 올바른 로또 인지 검증 - 중복된 숫자는 올 수 없다")
     void convertToLotto2() {
         String input = "3, 2, 3, 4, 5, 6";
-        Set<LottoNumber> lotto = LottoCreator.convertToLotto(input);
-        assertThatThrownBy(() -> new Lottery(lotto)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoCreator.convertToLotto(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

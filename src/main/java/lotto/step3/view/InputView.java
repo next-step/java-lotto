@@ -1,5 +1,6 @@
 package lotto.step3.view;
 
+import lotto.step3.domain.Lottery;
 import lotto.step3.domain.LottoCreator;
 import lotto.step3.domain.LottoNumber;
 
@@ -17,7 +18,7 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static Set<LottoNumber> inputLastWinningNumbers() {
+    public static Lottery inputLastWinningNumbers() {
         System.out.println(INPUT_LAST_WINNING_NUMBERS);
         sc.nextLine();
         return LottoCreator.convertToLotto(sc.nextLine());

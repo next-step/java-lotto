@@ -16,23 +16,23 @@ public class LottoCreator {
         }
     }
 
-    public static Set<LottoNumber> createLotto() {
+    public static Lottery createLotto() {
         Collections.shuffle(LOTTO_CREATOR);
         Set<LottoNumber> lotto = new HashSet<>();
 
         for (int i = LOTTO_START_COUNT; i <= LOTTO_END_COUNT; i++) {
             lotto.add(LOTTO_CREATOR.get(i));
         }
-        return lotto;
+        return new Lottery(lotto);
     }
 
-    public static Set<LottoNumber> convertToLotto(String input) {
+    public static Lottery convertToLotto(String input) {
         String[] numbers = input.split(DELIMITER);
         Set<LottoNumber> lotto = new HashSet<>();
         for (String number : numbers) {
             String trim = number.trim();
             lotto.add(new LottoNumber(Integer.valueOf(trim)));
         }
-        return lotto;
+        return new Lottery(lotto);
     }
 }

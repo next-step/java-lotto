@@ -21,7 +21,7 @@ class LottoStatisticsTest {
     void init() {
         List<LottoNumber> winningNumber
                 = Arrays.asList(new LottoNumber(21), new LottoNumber(22), new LottoNumber(23), new LottoNumber(24), new LottoNumber(25), new LottoNumber(26));
-        winning = new Winning(new HashSet<>(winningNumber), new LottoNumber(30));
+        winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(30));
     }
 
     @Test

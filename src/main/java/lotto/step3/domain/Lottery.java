@@ -21,7 +21,7 @@ public class Lottery {
 
     public int matchWinningNumber(Winning winning) {
         int countOfMatch = 0;
-        for (LottoNumber number : winning.getWinnerNumber()) {
+        for (LottoNumber number : winning.getWinnerNumber().getLottery()) {
             countOfMatch += containWinning(number);
         }
         return countOfMatch;
@@ -32,6 +32,10 @@ public class Lottery {
             return 1;
         }
         return 0;
+    }
+
+    public Set<LottoNumber> getLottery() {
+        return lottery;
     }
 
     public boolean containBonus(Winning winning) {

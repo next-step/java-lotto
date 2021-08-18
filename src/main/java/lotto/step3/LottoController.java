@@ -12,7 +12,7 @@ public class LottoController {
         LottoShop lottoShop = new LottoShop();
         Lotteries lotteries = lottoShop.receiveMoney(money);
         ResultView.printLottoInfo(money, lotteries);
-        Set<LottoNumber> winningNumbers = InputView.inputLastWinningNumbers();
+        Lottery winningNumbers = InputView.inputLastWinningNumbers();
         LottoNumber bonusBall = InputView.inputBonusBall();
         Winning winning = new Winning(winningNumbers, bonusBall);
         LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);

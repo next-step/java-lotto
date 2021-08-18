@@ -11,7 +11,7 @@ public class Lotteries {
     public Lotteries(int lottoCount) {
         lotteries = new ArrayList<>();
         while (lottoCount-- > 0) {
-            lotteries.add(new Lottery(LottoCreator.createLotto()));
+            lotteries.add(LottoCreator.createLotto());
         }
     }
 

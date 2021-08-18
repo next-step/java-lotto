@@ -57,8 +57,8 @@ class LotteryTest {
     void matchWinningNumber() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
-        Winning winning = new Winning(new HashSet<>(
-                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7)
+        Winning winning = new Winning(new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), new LottoNumber(7)
         );
         assertThat(lottery.matchWinningNumber(winning)).isEqualTo(6);
     }
@@ -68,8 +68,8 @@ class LotteryTest {
     void matchWinningNumber2() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
-        Winning winning = new Winning(new HashSet<>(
-                Arrays.asList(new LottoNumber(11), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7)
+        Winning winning = new Winning(new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(11), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), new LottoNumber(7)
         );
         assertThat(lottery.matchWinningNumber(winning)).isEqualTo(5);
     }
@@ -79,8 +79,8 @@ class LotteryTest {
     void matchWinningNumber3() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
-        Winning winning = new Winning(new HashSet<>(
-                Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7)
+        Winning winning = new Winning(new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), new LottoNumber(7)
         );
         assertThat(lottery.matchWinningNumber(winning)).isEqualTo(4);
     }
@@ -90,8 +90,8 @@ class LotteryTest {
     void matchWinningNumber4() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lottery lottery = new Lottery(new HashSet<>(lottoNumbers));
-        Winning winning = new Winning(new HashSet<>(
-                Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(3), new LottoNumber(14), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7)
+        Winning winning = new Winning(new Lottery(new HashSet<>(
+                Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(3), new LottoNumber(14), new LottoNumber(5), new LottoNumber(6)))), new LottoNumber(7)
         );
         assertThat(lottery.matchWinningNumber(winning)).isEqualTo(3);
     }
@@ -103,7 +103,7 @@ class LotteryTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumber));
 
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(10), new LottoNumber(12), new LottoNumber(13), new LottoNumber(23), new LottoNumber(24), new LottoNumber(16));
-        Winning winning = new Winning(new HashSet<>(winningNumber), new LottoNumber(15));
+        Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(15));
         assertThat(lottery.containBonus(winning)).isTrue();
 
     }
@@ -115,7 +115,7 @@ class LotteryTest {
         Lottery lottery = new Lottery(new HashSet<>(lottoNumber));
 
         List<LottoNumber> winningNumber = Arrays.asList(new LottoNumber(10), new LottoNumber(15), new LottoNumber(20), new LottoNumber(25), new LottoNumber(31), new LottoNumber(32));
-        Winning winning = new Winning(new HashSet<>(winningNumber), new LottoNumber(6));
+        Winning winning = new Winning(new Lottery(new HashSet<>(winningNumber)), new LottoNumber(6));
         assertThat(lottery.containBonus(winning)).isFalse();
 
     }
