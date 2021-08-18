@@ -1,10 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinnerLotto;
-import lotto.domain.LottoDrawResult;
+import lotto.domain.*;
 import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
 import lotto.util.LottoListGenerator;
@@ -26,7 +22,7 @@ public class LottoMain {
 
         LottoDrawResult lottoResult = lottoGame.drawLotto(getWinnerLotto());
         List<LottoWinnersDto> lottoWinnersDtos = lottoResult.createLottoWinnerDtos();
-        double yield = lottoResult.calculateYield(lottoPurchaseAmount);
+        Yield yield = lottoResult.calculateYield(lottoPurchaseAmount);
 
         ResultView.printWinners(lottoWinnersDtos);
         ResultView.printYield(yield);

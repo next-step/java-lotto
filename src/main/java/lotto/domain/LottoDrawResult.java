@@ -34,11 +34,11 @@ public class LottoDrawResult {
         return !award.equals(Award.BANG);
     }
 
-    public double calculateYield(int lottoPurchaseAmount) {
+    public Yield calculateYield(int lottoPurchaseAmount) {
         double earnings = createLottoWinnerDtos().stream()
                 .mapToDouble(lottoWinnerDto -> getYield(lottoWinnerDto.getAmount(), lottoWinnerDto.getCountWinners()))
                 .sum();
-        return earnings / lottoPurchaseAmount;
+        return new Yield(earnings / lottoPurchaseAmount);
     }
 
     private double getYield(int amount, long countWinners) {
