@@ -29,7 +29,7 @@ public class StringAddCalculator {
     }
 
     public static String[] parseData(String data) {
-        Matcher matcher = PATTERN.compile("//(.)\n(.*)").matcher(data);
+        Matcher matcher = PATTERN.matcher(data);
 
         if (matcher.find()) {
             return parseDataWithCustomDelimiter(data, matcher);
