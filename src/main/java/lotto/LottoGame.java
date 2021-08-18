@@ -12,7 +12,6 @@ public class LottoGame {
             e.printStackTrace();
         }
 
-
     }
 
 }

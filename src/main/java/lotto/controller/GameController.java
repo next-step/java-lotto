@@ -11,9 +11,9 @@ import java.util.List;
 
 public class GameController {
 
-    List<LottoNumber> buyLotto;
-    LottoNumber winningNumber;
-    Statistics statistics;
+    private List<LottoNumber> buyLotto;
+    private LottoNumber winningNumber;
+    private Statistics statistics;
 
     public GameController() {
         buyLotto = new ArrayList<>();

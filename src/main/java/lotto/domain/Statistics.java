@@ -11,12 +11,12 @@ public class Statistics {
 
     public Statistics() {
         rank = new HashMap<>();
-        rank.put(WinningLotto.FIRST, 0);
-        rank.put(WinningLotto.SECOND, 0);
-        rank.put(WinningLotto.THIRD, 0);
-        rank.put(WinningLotto.FOURTH, 0);
-        rank.put(WinningLotto.FIFTH, 0);
-        rank.put(WinningLotto.MISS, 0);
+        rank.put(WinnigResult.FIRST, 0);
+        rank.put(WinnigResult.SECOND, 0);
+        rank.put(WinnigResult.THIRD, 0);
+        rank.put(WinnigResult.FOURTH, 0);
+        rank.put(WinnigResult.FIFTH, 0);
+        rank.put(WinnigResult.MISS, 0);
         totalEarnMoney = 0;
     }
 

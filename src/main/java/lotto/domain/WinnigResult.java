@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 
-public class WinningLotto {
+public class WinnigResult {
 
     public static final String FIRST = "FIRST";
     public static final String SECOND = "SECOND";
@@ -23,15 +23,15 @@ public class WinningLotto {
     public static final int FIRST_MATCH = 6;
 
     public static final List<String> winStatus = Arrays.asList(
-            WinningLotto.FOURTH, WinningLotto.THIRD
-            ,WinningLotto.SECOND, WinningLotto.FIRST
+            WinnigResult.FOURTH, WinnigResult.THIRD
+            , WinnigResult.SECOND, WinnigResult.FIRST
     );
 
     private long earnMoney;
     private String lottoStatus;
     private int matchCount;
 
-    public WinningLotto() {
+    public WinnigResult() {
         earnMoney = 0;
         matchCount = 0;
         lottoStatus = MISS;

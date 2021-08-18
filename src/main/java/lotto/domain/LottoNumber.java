@@ -6,8 +6,10 @@ import java.util.List;
 
 public class LottoNumber {
 
+    public static final int MIN_NUMBER_BOUND = 1;
+    public static final int MAX_NUMBER_BOUND = 45;
     private List<Integer> lotto = new ArrayList<>();
-    private WinningLotto winning = new WinningLotto();
+    private WinnigResult winning = new WinnigResult();
 
     public LottoNumber() {
 
@@ -39,7 +41,7 @@ public class LottoNumber {
     private int checkWinningNumber(String numberStr) {
         int winningNumber = Integer.parseInt(numberStr);
 
-        if (winningNumber < 1 || winningNumber > 45) {
+        if (winningNumber < MIN_NUMBER_BOUND || winningNumber > MAX_NUMBER_BOUND) {
             throw new IllegalArgumentException("숫자는 1이상 45이하여야 합니다.");
         }
 
