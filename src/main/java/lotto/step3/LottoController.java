@@ -4,8 +4,6 @@ import lotto.step3.domain.*;
 import lotto.step3.view.InputView;
 import lotto.step3.view.ResultView;
 
-import java.util.Set;
-
 public class LottoController {
     public static void main(String[] args) {
         int money = InputView.inputLottoPrice();

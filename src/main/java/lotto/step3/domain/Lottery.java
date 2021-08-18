@@ -13,12 +13,6 @@ public class Lottery {
         this.lottery = lottery;
     }
 
-    @Override
-    public String toString() {
-        return lottery.toString();
-
-    }
-
     public int matchWinningNumber(Winning winning) {
         int countOfMatch = 0;
         for (LottoNumber number : winning.getWinnerNumber().getLottery()) {
@@ -40,5 +34,10 @@ public class Lottery {
 
     public boolean containBonus(Winning winning) {
         return lottery.contains(winning.getBonusNumber());
+    }
+
+    @Override
+    public String toString() {
+        return lottery.toString();
     }
 }

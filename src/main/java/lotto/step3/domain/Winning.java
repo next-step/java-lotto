@@ -1,7 +1,5 @@
 package lotto.step3.domain;
 
-import java.util.Set;
-
 public class Winning {
     private Lottery winnerNumber;
     private LottoNumber bonusNumber;
