@@ -21,7 +21,7 @@ public class MatchAndBonusWinningLotteryStrategy implements WinningLotteryStrate
 
     @Override
     public LotteryResult getLotteryResult(final Lottery lottery) {
-        return LotteryResult.getLotteryResult(winningLottery.getMatchesCount(lottery), lottery.getBonusMatchesScore(bonusNumber));
+        return LotteryResult.getLotteryResult(winningLottery.getMatchesCount(lottery), lottery.containsBonus(bonusNumber));
     }
 
     @Override

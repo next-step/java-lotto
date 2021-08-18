@@ -24,12 +24,12 @@ public class Lotteries {
         this.lotteries = lotteries;
     }
 
-    public LotteryStatisticDto getLotteryStatisticDto(final WinningLotteryStrategy winningLotteryStrategy) {
+    public LotteryStatisticDto getLotteryStatistic(final WinningLotteryStrategy winningLotteryStrategy) {
         Map<LotteryResult, Integer> lotteryResultMap = getLotteryResultMap(winningLotteryStrategy);
         return winningLotteryStrategy.getLotteryStatisticDto(lotteryResultMap, getEarningsRate(lotteryResultMap));
     }
 
-    public List<LotteryDto> getLotteriesDto() {
+    public List<LotteryDto> toDto() {
         return lotteries.stream()
                 .map(Lottery::toDto)
                 .collect(Collectors.toList());

@@ -122,7 +122,7 @@ public class LotteryTest {
         boolean expectedMatch = true;
 
         // when
-        boolean matchesCount = lottery.getBonusMatchesScore(bonusNumber);
+        boolean matchesCount = lottery.containsBonus(bonusNumber);
 
         // then
         assertThat(matchesCount).isEqualTo(expectedMatch);
