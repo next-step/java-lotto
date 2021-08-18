@@ -4,14 +4,8 @@ import java.util.*;
 
 public class LottoPaper {
 
-    public static final int MIN_NUMBER_BOUND = 1;
-    public static final int MAX_NUMBER_BOUND = 45;
-    private Set<Integer> lottoNumber = new HashSet<>();
+    private Set<Integer> lottoNumber;
     private WinnigResult winning = new WinnigResult();
-
-    public LottoPaper() {
-
-    }
 
     public LottoPaper(RandomNumber lottoNumberStragey) {
         lottoNumber = lottoNumberStragey.getLottoNumber();
@@ -19,31 +13,6 @@ public class LottoPaper {
 
     public Set<Integer> getLottoNumber() {
         return lottoNumber;
-    }
-
-    public void setWinningNumber(String winningNumbers) {
-        String[] numbers = winningNumbers.split(",");
-
-        if (numbers.length != 6) {
-            throw new IllegalArgumentException("숫자는 총 6개여야 합니다.");
-        }
-
-        for (String number : numbers) {
-            int winningNumber = checkWinningNumber(number);
-            lottoNumber.add(winningNumber);
-        }
-
-        Collections.sort(new ArrayList<>(lottoNumber));
-    }
-
-    private int checkWinningNumber(String numberStr) {
-        int winningNumber = Integer.parseInt(numberStr);
-
-        if (winningNumber < MIN_NUMBER_BOUND || winningNumber > MAX_NUMBER_BOUND) {
-            throw new IllegalArgumentException("숫자는 1이상 45이하여야 합니다.");
-        }
-
-        return winningNumber;
     }
 
     public void compreWinningNumber(Set<Integer> winningNumbers, Statistics statistics) {
