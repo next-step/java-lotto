@@ -12,14 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoTicketTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {0, 46})
-    void 범위밖의_번호로_로또_구성시_오류(int outOfRangeNumber) {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoTicket(Arrays.asList(outOfRangeNumber, 1, 2, 3, 4, 45))
-        ).withMessageContaining("번호는 1~45사이의 자연수입니다.");
-    }
-
     @Test
     void 숫자가_중복되면_오류_발생() {
         assertThatIllegalArgumentException().isThrownBy(
