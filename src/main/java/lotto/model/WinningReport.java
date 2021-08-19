@@ -27,15 +27,14 @@ public class WinningReport {
     }
 
     private double calculateRate() {
-        double expectedProfitRate = toDouble(countTotalWinningBonus()) / toDouble(countTicket());
+        double expectedProfitRate = toDouble(countTotalWinningBonus()) / (toDouble(countTicket()) * LottoTicketOffice.PRICE);
 
         return Math.floor(expectedProfitRate * 100) / 100;
     }
 
     private long countTotalWinningBonus() {
         return statistics.stream()
-                .filter(rank -> rank != Rank.MISS)
-                .mapToLong(rank -> rank.getWinningBonus() / LottoTicketOffice.PRICE)
+                .mapToLong(Rank::getWinningBonus)
                 .sum();
     }
 
