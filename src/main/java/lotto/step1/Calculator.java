@@ -1,7 +1,6 @@
 package lotto.step1;
 
 public class Calculator {
-
     private String text;
     private Validation validation;
     private Delimiter delimiter;

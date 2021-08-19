@@ -1,13 +1,14 @@
 package lotto.step4;
 
-import lotto.step3.domain.*;
-import lotto.step3.view.InputView;
-import lotto.step3.view.ResultView;
+import lotto.step4.domain.*;
+import lotto.step4.view.InputView;
+import lotto.step4.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
         int money = InputView.inputLottoPrice();
-        LottoShop lottoShop = new LottoShop();
+        int manualLottoCount = InputView.inputManualLottoCount();
+        LottoShop lottoShop = new LottoShop(manualLottoCount);
         Lotteries lotteries = lottoShop.receiveMoney(money);
         ResultView.printLottoInfo(money, lotteries);
         Lottery winningNumbers = InputView.inputLastWinningNumbers();

@@ -1,6 +1,6 @@
 package lotto.step4.view;
 
-import lotto.step3.domain.*;
+import lotto.step4.domain.*;
 
 public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
