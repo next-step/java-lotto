@@ -17,17 +17,17 @@ public class OutputView {
 
     public static void printLottoTickets(List<LottoTicket> tickets) {
         System.out.println(tickets.size() + BUY_TICKET_MSG);
-        for(LottoTicket ticket : tickets){
+        for (LottoTicket ticket : tickets) {
             System.out.println(transformNumberToFormat(ticket.getNumbers()));
         }
     }
 
-    private static String transformNumberToFormat(List<Integer> lottoNumbers){
+    private static String transformNumberToFormat(List<Integer> lottoNumbers) {
         StringBuilder result = new StringBuilder("[");
-        for(int number : lottoNumbers){
+        for (int number : lottoNumbers) {
             result.append(number).append(", ");
         }
-        result.setLength(result.length()-2);
+        result.setLength(result.length() - 2);
         result.append("]");
         return result.toString();
     }
