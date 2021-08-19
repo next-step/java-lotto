@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class WinningCheckMachine {
 
-    private static final int TICKET_PRICE = TicketMachine.TICKET_PRICE;
-
     public static WinningResultForm confirmWinningResult(String winningNumbersString) {
         Ticket winningTicket = Ticket.madeBy(new CustomNumbersMaker(winningNumbersString));
         List<Ticket> tickets = TicketRepository.findAll();
@@ -42,6 +40,6 @@ public class WinningCheckMachine {
     }
 
     private static int calculatePayment(List<Ticket> tickets) {
-        return tickets.size() * TICKET_PRICE;
+        return tickets.size() * TicketMachine.TICKET_PRICE;
     }
 }
