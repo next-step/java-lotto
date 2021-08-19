@@ -27,18 +27,6 @@ public class StringAddCalculator {
   }
 
   private static int getSumResult(String[] tokens) {
-    return Arrays.stream(tokens).mapToInt(StringAddCalculator::parseNonNegativeNumber).sum();
-  }
-
-  private static int parseNonNegativeNumber(String token) {
-    int num = Integer.parseInt(token);
-    checkNonNegative(num);
-    return num;
-  }
-
-  private static void checkNonNegative(int num) {
-    if (num < 0) {
-      throw new RuntimeException("음수 값은 사용될 수 없습니다.");
-    }
+    return Arrays.stream(tokens).mapToInt(NaturalNumber::parseNaturalNumber).sum();
   }
 }
