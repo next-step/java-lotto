@@ -1,7 +1,6 @@
 package edu.nextstep.lottoauto.domain;
 
 import edu.nextstep.lottoauto.view.form.WinningResultForm;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,20 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningCheckMachineTest {
 
-    @BeforeEach
-    void removeAll(){
-        TicketRepository.removeAll();
-    }
-
     @Test
     @DisplayName("당첨 결과 확인")
     void checkWinningResult() {
         // given
-        TicketMachine.createAndSaveTickets(1000, () -> createNumbersFromTo(1,6));
+        List<Ticket> tickets = TicketMachine.createTickets(1000, () -> createNumbersFromTo(1,6));
 
         // when
         WinningResultForm winningResult =
-                WinningCheckMachine.confirmWinningResult("4,5,6,7,8,9");
+                WinningCheckMachine.confirmWinningResult(tickets,"4,5,6,7,8,9");
 
         // then
         assertThat(winningResult.getWinningResult().getOrDefault(Prize.FOURTH,0)).isEqualTo(1);

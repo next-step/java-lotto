@@ -9,28 +9,26 @@ public class TicketMachine {
 
     public static final int TICKET_PRICE = 1_000;
 
-    public static void createAndSaveTickets(int payment, NumbersMaker numbersMaker) {
+    public static List<Ticket> createTickets(int payment, NumbersMaker numbersMaker) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
         int numberOfTickets = calculateNumberOfTicketsFrom(payment);
 
-        List<Ticket> tickets = createTickets(numberOfTickets, numbersMaker);
-
-        TicketRepository.saveAll(tickets);
+        return createTicketsInMachine(numberOfTickets, numbersMaker);
     }
 
-    private static int calculateNumberOfTicketsFrom(int payment) {
-        return payment / TICKET_PRICE;
-    }
-
-    private static List<Ticket> createTickets(int numberOfTickets, NumbersMaker numbersMaker) {
+    private static List<Ticket> createTicketsInMachine(int numberOfTickets, NumbersMaker numbersMaker) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
             Ticket ticket = Ticket.madeBy(numbersMaker);
             tickets.add(ticket);
         }
         return tickets;
+    }
+
+    private static int calculateNumberOfTicketsFrom(int payment) {
+        return payment / TICKET_PRICE;
     }
 
     private static void validateUnderAUnitPrice(int payment) {

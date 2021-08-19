@@ -5,21 +5,17 @@ import java.util.List;
 
 public class TicketRepository {
 
-    private static final List<Ticket> tickets = new ArrayList<>();
+    private final List<Ticket> tickets = new ArrayList<>();
 
-    public static void save(Ticket ticket) {
+    public void save(Ticket ticket) {
         tickets.add(ticket);
     }
 
-    public static void saveAll(List<Ticket> createdTickets) {
+    public void saveAll(List<Ticket> createdTickets) {
         tickets.addAll(createdTickets);
     }
 
-    public static List<Ticket> findAll() {
-        return tickets;
-    }
-
-    public static void removeAll() {
-        tickets.clear();
+    public List<Ticket> findAll() {
+        return new ArrayList<>(tickets);
     }
 }

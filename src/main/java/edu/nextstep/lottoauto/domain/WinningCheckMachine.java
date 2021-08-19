@@ -10,9 +10,8 @@ import java.util.Map;
 
 public class WinningCheckMachine {
 
-    public static WinningResultForm confirmWinningResult(String winningNumbersString) {
+    public static WinningResultForm confirmWinningResult(List<Ticket> tickets, String winningNumbersString) {
         Ticket winningTicket = Ticket.madeBy(new CustomNumbersMaker(winningNumbersString));
-        List<Ticket> tickets = TicketRepository.findAll();
 
         Map<Prize, Integer> winningResult = makeWinningResult(winningTicket, tickets);
 

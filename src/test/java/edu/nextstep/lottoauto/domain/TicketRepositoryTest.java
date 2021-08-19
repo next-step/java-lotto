@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.*;
 
 public class TicketRepositoryTest {
 
+    private final TicketRepository ticketRepository = new TicketRepository();
+
     @Test
     @DisplayName("Ticket 저장 및 조회 Test")
     void saveAndFindAll() {
@@ -17,10 +19,10 @@ public class TicketRepositoryTest {
         Ticket ticket = Ticket.madeBy(() -> createNumbersFromTo(1, 6));
 
         // when
-        TicketRepository.save(ticket);
+        ticketRepository.save(ticket);
 
         // then
-        assertThat(TicketRepository.findAll().get(0)).isEqualTo(ticket);
+        assertThat(ticketRepository.findAll().get(0)).isEqualTo(ticket);
     }
 
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {
