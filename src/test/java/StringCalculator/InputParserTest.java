@@ -4,11 +4,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputParserTest {
 
@@ -24,6 +25,6 @@ public class InputParserTest {
     @DisplayName("커스텀 구분자 기준 인풋 파싱 테스트")
     @Test
     void testInputParsingWithCustomizedDelimiter() {
-        assertThat(InputParser.parseStringListToIntegerList("//;\n1;2;3")).isEqualTo(Arrays.asList(1,2,3));
+        assertThat(InputParser.parseStringListToIntegerList("//;\n1;2;3")).isEqualTo(Arrays.asList(1, 2, 3));
     }
 }

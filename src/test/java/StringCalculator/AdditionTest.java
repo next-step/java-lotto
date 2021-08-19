@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AdditionTest {
 
     @DisplayName("1,2,3을 더하면 6을 리턴한다.")
     @Test
     void adding_1_2_3_returns_6() {
         Addition ac = new Addition();
-        WholeNumber actual = ac.addAll(new WholeNumbers(Arrays.asList(1,2,3)));
+        WholeNumber actual = ac.addAll(new WholeNumbers(Arrays.asList(1, 2, 3)));
         WholeNumber expected = new WholeNumber(6);
         assertThat(actual).isEqualTo(expected);
     }
