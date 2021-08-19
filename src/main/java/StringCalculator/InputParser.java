@@ -14,7 +14,9 @@ public class InputParser {
     public static final int DELIMITER_GROUP_IDEX = 1;
     public static final int NUMBERS_GROUP_INDEX = 2;
 
-
+    private InputParser() {
+        throw new AssertionError("InputParser 클래스는 객체를 생성할 수 없습니다.");
+    }
 
     private static List<String> parseStringToStringList(String input) {
         if (input == null|| INPUT_EMPTY.equals(input)) {
