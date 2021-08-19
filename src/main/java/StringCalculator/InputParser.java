@@ -1,6 +1,5 @@
 package StringCalculator;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -10,12 +9,18 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
+    private static final String INPUT_EMPTY = "";
+    private static final String DEFAULT_OUTPUT = "0";
+    public static final String CUSTOMIZED_DELIMITER_REGEX = "//(.)\n(.*)";
+    public static final String NORMAL_DELIMITER_REGEX = "[,:]";
+
+
     private static List<String> parseStringToStringList(String input) {
-        if (input == null || "".equals(input)) {
-            return Collections.singletonList("0");
+        if (input == null|| INPUT_EMPTY.equals(input)) {
+            return Collections.singletonList(DEFAULT_OUTPUT);
         }
 
-        Pattern pattern = Pattern.compile("//(.)\n(.*)");
+        Pattern pattern = Pattern.compile(CUSTOMIZED_DELIMITER_REGEX);
         Matcher m = pattern.matcher(input);
         if(m.find()) {
             String customDelimiter = m.group(1);
@@ -23,7 +28,7 @@ public class InputParser {
             return Arrays.asList(tokens);
         }
 
-        return Arrays.asList(input.split("[,:]"));
+        return Arrays.asList(input.split(NORMAL_DELIMITER_REGEX));
     }
 
     public static List<Integer> parseStringListToIntegerList(String input) {
