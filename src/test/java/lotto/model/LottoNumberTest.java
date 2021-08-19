@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void 범위밖의_번호로_로또_구성시_오류(int outOfRangeNumber) {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new LottoNumber(outOfRangeNumber)
+                () -> LottoNumber.of(outOfRangeNumber)
         ).withMessageContaining("번호는 1~45사이의 자연수입니다.");
     }
 

@@ -6,23 +6,36 @@ public class LottoNumber {
 
     public static final int RANGE_MAX = 45;
     public static final int RANGE_MIN = 1;
+
+    private static final LottoNumber[] LOTTO_NUMBERS;
     private static final String RANGE_ERROR_MSG = "번호는 1~45사이의 자연수입니다.";
+
+    static {
+        LOTTO_NUMBERS = new LottoNumber[RANGE_MAX + 1];
+        for (int num = RANGE_MIN; num <= RANGE_MAX; num++) {
+            LOTTO_NUMBERS[num] = new LottoNumber(num);
+        }
+    }
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public int getNumber(){
-        return number;
+    public static LottoNumber of(int number) {
+        validateRange(number);
+        return LOTTO_NUMBERS[number];
     }
 
-    private void validateRange(int number) {
-        if(number < RANGE_MIN || number > RANGE_MAX){
+    private static void validateRange(int number) {
+        if (number < RANGE_MIN || number > RANGE_MAX) {
             throw new IllegalArgumentException(RANGE_ERROR_MSG);
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

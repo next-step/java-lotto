@@ -18,7 +18,7 @@ public class LottoTicket {
     public LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
@@ -63,7 +63,7 @@ public class LottoTicket {
     }
 
     public boolean contains(int number) {
-        return this.contains(new LottoNumber(number));
+        return this.contains(LottoNumber.of(number));
     }
 
     public int compareTicket(LottoTicket ticket) {
