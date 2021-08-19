@@ -13,7 +13,7 @@ public class Money {
     }
 
     private void validInput(int money) {
-        if (money % 1000 != 0) {
+        if (money % 1000 != 0 || money == 0) {
             throw new InvalidLottoPurchaseAmountException();
         }
     }
