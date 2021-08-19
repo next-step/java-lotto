@@ -33,21 +33,7 @@ public class TicketMachineTest {
         assertThat(TicketRepository.findAll().get(0)).isInstanceOf(Ticket.class);
     }
 
-    @Test
-    @DisplayName("금액 입력 시 실행 횟수 반환")
-    void calculateNumberOfTicketsFrom() {
-        // given
-        int payment = 14_000;
-
-        // when
-        int numberOfTickets = TicketMachine.calculateNumberOfTicketsFrom(payment);
-
-        // then
-        assertThat(numberOfTickets).isEqualTo(payment/TICKET_PRICE);
-    }
-
     @ParameterizedTest(name = "금액 검증 실패 : " + TICKET_PRICE + "원 미만")
-
     @ValueSource(ints = {1, TICKET_PRICE-1})
     void validate_createAndSaveTickets_단위(int payment) {
         // when

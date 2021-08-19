@@ -20,7 +20,7 @@ public class TicketMachine {
         TicketRepository.saveAll(tickets);
     }
 
-    public static int calculateNumberOfTicketsFrom(int payment) {
+    private static int calculateNumberOfTicketsFrom(int payment) {
         return payment / TICKET_PRICE;
     }
 
