@@ -21,10 +21,10 @@ public class InputParser {
         }
 
         Pattern pattern = Pattern.compile(CUSTOMIZED_DELIMITER_REGEX);
-        Matcher m = pattern.matcher(input);
-        if(m.find()) {
-            String customDelimiter = m.group(1);
-            String[] tokens= m.group(2).split(customDelimiter);
+        Matcher matcher = pattern.matcher(input);
+        if(matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            String[] tokens= matcher.group(2).split(customDelimiter);
             return Arrays.asList(tokens);
         }
 
