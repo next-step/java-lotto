@@ -8,6 +8,7 @@ public class LottoTicket {
     public static final int SIZE = 6;
     private static final String SIZE_ERROR_MSG = "%d개의 번호가 필요합니다.";
     private static final String DUPLICATE_ERROR_MSG = "번호는 중복되면 안됩니다.";
+    public static final String DELIMITER = ",";
 
     private final Set<LottoNumber> numbers;
 
@@ -27,7 +28,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket of(String numbers) {
-        return new LottoTicket(Arrays.stream(numbers.split(","))
+        return new LottoTicket(Arrays.stream(numbers.split(DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList())
         );
@@ -52,7 +53,7 @@ public class LottoTicket {
     }
 
     private void checkDuplication(List<Integer> numbers) {
-        if (new TreeSet<>(numbers).size() != SIZE) {
+        if (new HashSet<>(numbers).size() != SIZE) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MSG);
         }
     }
