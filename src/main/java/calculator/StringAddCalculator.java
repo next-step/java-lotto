@@ -29,11 +29,15 @@ public class StringAddCalculator {
     int result = 0;
     for (String token : tokens) {
       int num = Integer.parseInt(token);
-      if (num < 0) {
-        throw new RuntimeException("음수 값은 사용될 수 없습니다.");
-      }
+      checkNonNegative(num);
       result += num;
     }
     return result;
+  }
+
+  private static void checkNonNegative(int num) {
+    if (num < 0) {
+      throw new RuntimeException("음수 값은 사용될 수 없습니다.");
+    }
   }
 }
