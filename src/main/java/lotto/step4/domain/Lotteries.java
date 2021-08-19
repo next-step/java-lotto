@@ -1,6 +1,5 @@
 package lotto.step4.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class Lotteries {
     public Lotteries(int autoCount, List<Lottery> lotteries) {
         this.lotteries = lotteries;
         while (autoCount-- > 0) {
-            lotteries.add(LottoCreator.createLotto());
+            this.lotteries.add(LottoCreator.createLotto());
         }
     }
 
