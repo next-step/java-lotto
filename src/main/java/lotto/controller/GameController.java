@@ -9,31 +9,33 @@ import java.util.List;
 
 public class GameController {
 
-    private List<LottoPaper> buyLotto;
-    private WinningLottoNumber winningNumber;
-    private Statistics statistics;
+    private InputView inputView = new InputView();
+    private ResultView resultView = new ResultView();
 
-    public GameController() {
-        buyLotto = new ArrayList<>();
-        winningNumber = new WinningLottoNumber();
-        statistics = new Statistics();
-    }
+    public void start() {
 
-    public void init() {
-
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
         RandomNumber numberStragey = new LottoNumberStragey();
+        List<LottoPaper> buyLotto = new ArrayList<>();
         int buyLottoMoney = inputView.buyLottoView();
 
         for (int count = 0; count < buyLottoMoney / InputView.MINIMUM_LOTTO_MONEY; count++) {
             buyLotto.add(new LottoPaper(numberStragey));
         }
-
         resultView.lottoNumberView(buyLotto);
-        winningNumber.setWinningNumber(inputView.winningLottoView());
-        statistics.calculateWinningResult(buyLotto, winningNumber);
-        resultView.winningResult(statistics, buyLottoMoney);
+
+        resultView.winningResult(createLottoStatstics(buyLotto, createWinningNumber()), buyLottoMoney);
+    }
+
+    private WinningLottoNumber createWinningNumber() {
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber();
+        winningLottoNumber.setWinningNumber(inputView.winningLottoView());
+        return winningLottoNumber;
+    }
+
+    private Statistics createLottoStatstics(List<LottoPaper> buyLotto, WinningLottoNumber winningLottoNumber) {
+        Statistics statistics = new Statistics();
+        statistics.calculateWinningResult(buyLotto, winningLottoNumber);
+        return statistics;
     }
 
 
