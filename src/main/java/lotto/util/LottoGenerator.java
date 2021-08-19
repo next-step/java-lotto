@@ -15,6 +15,9 @@ public class LottoGenerator {
                 .forEach(number -> lottoNumbersPool.add(new LottoNumber(number)));
     }
 
+    private LottoGenerator() {
+    }
+
     private static List<Lotto> createRandomLottos(int ticketNumber) {
         List<Lotto> lottoList = new ArrayList<>();
         IntStream.range(0, ticketNumber)
