@@ -1,15 +1,16 @@
 package lotto.model;
 
 public class LottoChecker {
-    private final Lotto winningLotto;
+    private final WinningNumbers winningNumbers;
 
-    public LottoChecker(Lotto winningLotto) {
-        this.winningLotto = winningLotto;
+    public LottoChecker(WinningNumbers winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
     public LottoPlace check(Lotto lotto) {
-        int correctCount = winningLotto.countCorrect(lotto);
+        int correctCount = winningNumbers.countCorrect(lotto);
+        boolean correctBonus = winningNumbers.correctBonus(lotto);
 
-        return LottoPlace.fromCorrectCount(correctCount);
+        return LottoPlace.decidePlace(correctCount, correctBonus);
     }
 }

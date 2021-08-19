@@ -12,7 +12,8 @@ public class Main {
         OutputView.printLottos(lottos);
 
         Lotto winningLotto = new Lotto(new LottoNumbers(InputView.readNumbers()));
-        LottoChecker lottoChecker = new LottoChecker(winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
+        LottoChecker lottoChecker = new LottoChecker(new WinningNumbers(winningLotto, bonusNumber));
 
         LottoResults lottoResults = new LottoResults();
         for (Lotto lotto : lottos) {
