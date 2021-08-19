@@ -16,8 +16,6 @@ public class LottoTicket {
     }
 
     public void addBundle(List<List<Integer>> lottoBundle) {
-        for (List<Integer> lotto: lottoBundle) {
-            bundle.add(lotto);
-        }
+        bundle.addAll(lottoBundle);
     }
 }
