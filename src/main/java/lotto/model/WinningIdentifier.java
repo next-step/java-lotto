@@ -3,6 +3,9 @@ package lotto.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class WinningIdentifier {
 
     private final LottoTicket winningTicket;
@@ -16,9 +19,8 @@ public class WinningIdentifier {
     }
 
     public WinningReport checkTicketsWinning(List<LottoTicket> lottoTickets) {
-        List<Rank> ranks = lottoTickets.stream()
+        return lottoTickets.stream()
                 .map(ticket -> Rank.of(ticket.compareTicket(winningTicket)))
-                .collect(Collectors.toList());
-        return new WinningReport(ranks);
+                .collect(collectingAndThen(toList(), WinningReport::new));
     }
 }

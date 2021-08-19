@@ -3,10 +3,10 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
-    THIRD(3, 5000),
-    FOURTH(4, 50000),
-    FIFTH(5, 1500000),
-    SIXTH(6, 2000000000),
+    THIRD(3, 5_000),
+    FOURTH(4, 50_000),
+    FIFTH(5, 1_500_000),
+    SIXTH(6, 2_000_000_000),
     MISS(0, 0);
 
     private final int match;
