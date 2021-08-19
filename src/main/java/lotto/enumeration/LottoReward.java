@@ -23,19 +23,19 @@ public enum LottoReward {
 
     public static LottoReward of(int matchedNumberCount, boolean hasMatchedBonusNumber) {
 
-        if (THREE_NUMBERS_MATCHED.matchedNumberCount > matchedNumberCount) {
-            return NO_MATCHED;
+        if (SIX_NUMBERS_MATCHED.matchedNumberCount < matchedNumberCount) {
+            throw new WrongMatchedCountException(
+                String.format("숫자 일치개수가 잘못 입력되었습니다. [입력된 숫자일치 개수: %d]", matchedNumberCount));
         }
 
-        if (FIVE_NUMBERS_MATCHED.isSameMatchedCount(matchedNumberCount) && hasMatchedBonusNumber) {
+        if (FIVE_NUMBERS_AND_BONUS_NUMBER_MATCHED.isSameMatchedCount(matchedNumberCount) && hasMatchedBonusNumber) {
             return FIVE_NUMBERS_AND_BONUS_NUMBER_MATCHED;
         }
 
         return Arrays.stream(LottoReward.values())
             .filter(reward -> reward.isSameMatchedCount(matchedNumberCount))
             .findFirst()
-            .orElseThrow(() -> new WrongMatchedCountException(
-                String.format("숫자 일치개수가 잘못 입력되었습니다. [입력된 숫자일치 개수: %d]", matchedNumberCount)));
+            .orElse(NO_MATCHED);
     }
 
 
