@@ -3,6 +3,7 @@ package StringCalculator;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputParser {
 
@@ -32,10 +33,6 @@ public class InputParser {
     }
 
     public static List<Integer> parseStringListToIntegerList(String input) {
-
-        List<String> parsedToStr = parseStringToStringList(input);
-        List<Integer> parsedToInt = new ArrayList<>();
-        parsedToStr.forEach(item -> parsedToInt.add(Integer.valueOf(item)));
-        return parsedToInt;
+        return parseStringToStringList(input).stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 }
