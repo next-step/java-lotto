@@ -10,6 +10,7 @@ public class LottoController {
         int manualLottoCount = InputView.inputManualLottoCount();
         LottoShop lottoShop = new LottoShop(manualLottoCount);
         Lotteries lotteries = lottoShop.receiveMoney(money);
+        InputView.inputManualLottoNumbers(manualLottoCount);
         ResultView.printLottoInfo(money, lotteries);
         Lottery winningNumbers = InputView.inputLastWinningNumbers();
         LottoNumber bonusBall = InputView.inputBonusBall();

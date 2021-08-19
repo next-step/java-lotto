@@ -1,13 +1,14 @@
 package lotto.step4.domain;
 
 public class LottoShop {
-    private final int manualCount;
+    private final LottoCount lottoCount;
 
-    public LottoShop(int manualCount) {
-        this.manualCount = manualCount;
+    public LottoShop(int lottoCount) {
+        this.lottoCount = new LottoCount(lottoCount);
     }
 
     public Lotteries receiveMoney(int money) {
-        return new Lotteries(money / Money.LOTTO_PRICE);
+        int autoCount = lottoCount.createAutoCount(money);
+        return new Lotteries(autoCount);
     }
 }
