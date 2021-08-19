@@ -27,4 +27,5 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(5);
         assertThat(lottoCount.createAutoCount(8000)).isEqualTo(3);
     }
+
 }

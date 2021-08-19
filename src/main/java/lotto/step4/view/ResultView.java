@@ -6,11 +6,16 @@ public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String LINE_BREAK = "---------";
 
-    public static void printLottoInfo(int money, Lotteries lotteries) {
-        System.out.println(money / Money.LOTTO_PRICE + "개를 구매했습니다.");
+    public static void printLottoInfo(int manualCount, int autoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualCount, autoCount);
+
+    }
+
+    public static void printLottoNumbers(Lotteries lotteries) {
         for (Lottery lottery : lotteries.getLotteries()) {
             System.out.println(lottery);
         }
+        System.out.println();
     }
 
     public static void printLottoStatistics(LottoStatistics lottoStatistics) {

@@ -1,10 +1,9 @@
 package lotto.step4.view;
 
-import lotto.step4.domain.Lottery;
-import lotto.step4.domain.LottoCreator;
-import lotto.step4.domain.LottoNumber;
-import lotto.step4.domain.Money;
+import lotto.step4.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -27,11 +26,17 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public static void inputManualLottoNumbers(int lottoCount) {
+    public static List<Lottery> inputManualLottoNumbers(int lottoCount) {
+        List<Lottery> lotteries = new ArrayList<>();
         if (lottoCount == 0){
-            return;
+            return lotteries;
         }
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
+        sc.nextLine();
+        while (lottoCount-- > 0) {
+            lotteries.add(LottoCreator.convertToLotto(sc.nextLine()));
+        }
+        return lotteries;
     }
 
     public static Lottery inputLastWinningNumbers() {
