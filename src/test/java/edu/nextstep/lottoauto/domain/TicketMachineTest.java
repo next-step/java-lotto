@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class TicketMachineTest {
 
-    private static final int TICKET_PRICE = 1_000;
+    private static final int TICKET_PRICE = TicketMachine.TICKET_PRICE;
 
     @BeforeEach
     void removeAll(){
@@ -46,8 +46,9 @@ public class TicketMachineTest {
         assertThat(numberOfTickets).isEqualTo(payment/TICKET_PRICE);
     }
 
-    @ParameterizedTest(name = "금액 검증 실패 : 1000원 미만")
-    @ValueSource(ints = {1, 999})
+    @ParameterizedTest(name = "금액 검증 실패 : " + TICKET_PRICE + "원 미만")
+
+    @ValueSource(ints = {1, TICKET_PRICE-1})
     void validate_createAndSaveTickets_단위(int payment) {
         // when
         assertThatThrownBy(() -> TicketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
@@ -55,8 +56,8 @@ public class TicketMachineTest {
                 .hasMessageContaining("최소 입력 가능 금액 미달.");
     }
 
-    @ParameterizedTest(name = "금액 검증 실패 : 1000원 단위 떨어지지 않음")
-    @ValueSource(ints = {1001, 1999})
+    @ParameterizedTest(name = "금액 검증 실패 : " + TICKET_PRICE + "원 단위 떨어지지 않음")
+    @ValueSource(ints = {TICKET_PRICE+1, 2*TICKET_PRICE-1})
     void validate_createAndSaveTickets_1000미만(int payment) {
         // when, then
         assertThatThrownBy(() -> TicketMachine.createAndSaveTickets(payment, new AutoNumbersMaker()))
