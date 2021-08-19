@@ -21,10 +21,10 @@ public class LottoApp {
         lottoTicket.addBundle(customer.buyLotto(lottoInfo.getCount()-manualLotto.getNumOfManualPurchaseLotto()));
 
         resultView.printNumOfLotto(lottoInfo.getCount(),manualLotto.getNumOfManualPurchaseLotto());
-        resultView.printIssuedLottoList(lottoTicket.getBundle());
+        resultView.printIssuedLottoList(lottoTicket.getBundle().get());
         LottoNumbers lottoNumbers = new LottoNumbers(inputView.requestWinningLottoNumber());
         BonusBall bonusBall = new BonusBall(inputView.requestBonusBall(), lottoNumbers.getList());
-        customer.compareWinningLottoNumbersAndIssuedLottoList(lottoNumbers.getList(), lottoTicket.getBundle(), bonusBall.getNumber());
+        customer.compareWinningLottoNumbersAndIssuedLottoList(lottoNumbers.getList(), lottoTicket.getBundle().get(), bonusBall.getNumber());
 
         resultView.printMatchedLottoRecord(customer.getResultRankMap());
         resultView.printResultPrice(customer.getResultPrize(), lottoInfo.getCount());
