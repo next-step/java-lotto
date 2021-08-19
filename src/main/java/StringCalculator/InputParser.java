@@ -13,6 +13,9 @@ public class InputParser {
     private static final String DEFAULT_OUTPUT = "0";
     public static final String CUSTOMIZED_DELIMITER_REGEX = "//(.)\n(.*)";
     public static final String NORMAL_DELIMITER_REGEX = "[,:]";
+    public static final int DELIMITER_GROUP_IDEX = 1;
+    public static final int NUMBERS_GROUP_INDEX = 2;
+
 
 
     private static List<String> parseStringToStringList(String input) {
@@ -23,8 +26,8 @@ public class InputParser {
         Pattern pattern = Pattern.compile(CUSTOMIZED_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(input);
         if(matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            String[] tokens= matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(DELIMITER_GROUP_IDEX);
+            String[] tokens= matcher.group(NUMBERS_GROUP_INDEX).split(customDelimiter);
             return Arrays.asList(tokens);
         }
 
