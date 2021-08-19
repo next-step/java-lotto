@@ -9,11 +9,11 @@ public enum BonusState {
         return this == HIT;
     }
 
-    public boolean isMiss() {
+    private boolean isMiss() {
         return this == MISS;
     }
 
-    public boolean isNoMatter() {
+    private boolean isNoMatter() {
         return this == NO_MATTER;
     }
 
