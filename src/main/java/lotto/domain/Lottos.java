@@ -13,8 +13,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<LottoMatch> compareLottos(WinningLotto winningLotto) {
-        List<LottoMatch> matchesCount = new ArrayList<>();
+    public List<Rank> compareLottos(WinningLotto winningLotto) {
+        List<Rank> matchesCount = new ArrayList<>();
         for (Lotto lotto : lottos) {
             matchesCount.add(winningLotto.compareLotto(lotto));
         }
