@@ -1,9 +1,6 @@
 package StringCalculator;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +34,7 @@ public class InputParser {
     public static List<Integer> parseStringListToIntegerList(String input) {
 
         List<String> parsedToStr = parseStringToStringList(input);
-        List<Integer> parsedToInt = new LinkedList<>();
+        List<Integer> parsedToInt = new ArrayList<>();
         parsedToStr.forEach(item -> parsedToInt.add(Integer.valueOf(item)));
         return parsedToInt;
     }
