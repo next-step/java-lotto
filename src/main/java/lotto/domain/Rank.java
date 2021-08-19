@@ -3,29 +3,44 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(new LottoMatch(6, false), 2_000_000_000),
-    SECOND(new LottoMatch(5, true), 1_500_000),
-    SECOND_BONUS(new LottoMatch(5, false), 1_500_000),
-    THIRD(new LottoMatch(4, false), 50_000),
-    FOURTH(new LottoMatch(3, false), 5000),
-    NO_RANK(new LottoMatch(0, false), 0);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 1_500_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5000),
+    NO_RANK(0, false, 0);
 
-    private final LottoMatch lottoMatch;
+    private final int matchCount;
+    private final boolean matchBonus;
     private final int prizeMoney;
 
-    Rank(LottoMatch lottoMatch, int prizeMoney) {
-        this.lottoMatch = lottoMatch;
+    Rank(int matchCount, boolean matchBonus, int prizeMoney) {
+        this.matchCount = matchCount;
+        this.matchBonus = matchBonus;
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank fromLottoMatch(LottoMatch lottoMatch) {
+    public static Rank rank(int matchCount, boolean matchBonus) {
+        if (matchCount < FIFTH.matchCount) {
+            return NO_RANK;
+        }
+        if (SECOND.matchCount == matchCount) {
+            return rankSecond(matchBonus);
+        }
         return Arrays.stream(values())
-                .filter(rank -> rank.lottoMatch.equals(lottoMatch))
+                .filter(rank -> rank.matchCount(matchCount))
                 .findFirst()
-                .orElse(Rank.NO_RANK);
+                .orElse(NO_RANK);
     }
 
-    public LottoMatch getLottoMatch() {
-        return lottoMatch;
+    public boolean matchCount(int count) {
+        return this.matchCount == count;
+    }
+
+    public static Rank rankSecond(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 }
