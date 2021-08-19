@@ -1,27 +1,26 @@
 package lotto.domain;
 
+import lotto.exception.BonusNumberException;
+
 public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        validBonusNumber(winningNumbers, bonusNumber);
-        this.winningLotto = new Lotto(winningNumbers);
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        validBonusNumber(winningLotto, bonusNumber);
+        this.winningLotto = winningLotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validBonusNumber(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new RuntimeException();
+    private void validBonusNumber(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new BonusNumberException();
         }
     }
 
-    public LottoMatch compareLotto(Lotto lotto) {
+    public Rank compareLotto(Lotto lotto) {
         int matchCount = winningLotto.compareLotto(lotto);
-        boolean bonusMatch = false;
-        if (matchCount == Rank.SECOND.getLottoMatch().getMatchCount()) {
-            bonusMatch = lotto.contains(bonusNumber);
-        }
-        return new LottoMatch(matchCount, bonusMatch);
+        boolean matchBonus = lotto.contains(bonusNumber);
+        return Rank.rank(matchCount, matchBonus);
     }
 }
