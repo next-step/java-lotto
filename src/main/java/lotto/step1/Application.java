@@ -8,6 +8,5 @@ public class Application {
         String text = sc.nextLine();
         Calculator calculator = new Calculator(text);
         calculator.calculate();
-
     }
 }
