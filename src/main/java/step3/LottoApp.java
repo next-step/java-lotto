@@ -11,16 +11,16 @@ public class LottoApp {
         Customer customer = new Customer();
 
         LottoInfo lottoInfo = new LottoInfo(inputView.requestCharge());
-        ManualLotto manualLotto = new ManualLotto(inputView.requestManualPurchase(), lottoInfo.getCount());
+        ManualLottoCount manualLottoCount = new ManualLottoCount(inputView.requestManualPurchase(), lottoInfo.getCount());
 
         LottoTicket lottoTicket = new LottoTicket();
-        for (int i = 0; i < manualLotto.getNumOfManualPurchaseLotto(); i++) {
+        for (int i = 0; i < manualLottoCount.getNumOfManualPurchaseLotto(); i++) {
             LottoNumbers manualLottoNumber = new LottoNumbers(inputView.requestManualLottoNumber());
             lottoTicket.addLotto(manualLottoNumber.getList());
         }
-        lottoTicket.addBundle(customer.buyLotto(lottoInfo.getCount()-manualLotto.getNumOfManualPurchaseLotto()));
+        lottoTicket.addBundle(customer.buyLotto(lottoInfo.getCount()- manualLottoCount.getNumOfManualPurchaseLotto()));
 
-        resultView.printNumOfLotto(lottoInfo.getCount(),manualLotto.getNumOfManualPurchaseLotto());
+        resultView.printNumOfLotto(lottoInfo.getCount(), manualLottoCount.getNumOfManualPurchaseLotto());
         resultView.printIssuedLottoList(lottoTicket.getBundle().get());
         LottoNumbers lottoNumbers = new LottoNumbers(inputView.requestWinningLottoNumber());
         BonusBall bonusBall = new BonusBall(inputView.requestBonusBall(), lottoNumbers.getList());
