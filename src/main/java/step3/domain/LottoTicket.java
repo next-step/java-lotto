@@ -12,7 +12,6 @@ public class LottoTicket {
     }
 
     public void addLotto(List<Integer> lottoNumbers) {
-        System.out.println(lottoNumbers);
         bundle.add(lottoNumbers);
     }
 
