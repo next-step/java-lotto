@@ -7,9 +7,16 @@ public class WinningNumbers {
 
     private final Set<Integer> numbers;
 
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 46;
+
     public WinningNumbers(Set<Integer> numbers) {
         if (numbers.size() != NUMBER_OF_WINNING_NUMBERS) {
             throw new IllegalArgumentException("잘못된 갯수의 숫자가 입력되었습니다. " + numbers);
+        }
+
+        if (numbers.stream().anyMatch((number) -> number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)) {
+            throw new IllegalArgumentException("잘못된 숫자가 입력되었습니다. " + numbers);
         }
 
         this.numbers = numbers;
