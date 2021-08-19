@@ -1,10 +1,14 @@
 package lotto;
 
 import lotto.common.AutoNumberGenerator;
-import lotto.common.ManualNumberGenerator;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static lotto.util.StringUtil.split;
 
@@ -21,12 +25,14 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
         resultView.printLotties(lottos);
 
-        //FIXME : 입력값이 잘못된게 들어오면..?
-        //앞에서 예외처리? generator에서? lottoNumbers에서? lottonumber? 별도의 예외 유틸 클래스 만들기?
-        LottoNumbers winningNumbers = new LottoNumbers(new ManualNumberGenerator(split(inputView.getWinningNumber())));
-        
-        LottoNumber bonusNumber = new LottoNumber(inputView.askBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        String[] split = split(inputView.getWinningNumber());
+        List<Integer> winningNumbers = Stream.of(split).map(Integer::valueOf).collect(Collectors.toList());
+
+        Lotto winningLottoNumbers = Lotto.getInstanceByInteger(winningNumbers);
+
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(inputView.askBonusNumber()));
+
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
         WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
 

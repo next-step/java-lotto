@@ -20,13 +20,12 @@ public class ResultView {
     private static final String MATCH_COUNT_5_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- %d개\n";
     private static final String MATCH_COUNT_6 = "6개 일치 (2000000000원)- %d개\n";
 
-    //FIXME : getter() 지울수 없을까
     public void printLotties(Lottos lottos) {
         System.out.printf(PURCHASE_MESSAGE, lottos.size());
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getLottoNumbers().toString());
+            lotto.getLottoNumbers().forEach(lottoNumber -> System.out.print(lottoNumber.getNumber() + ", "));
+            System.out.println();
         }
-        System.out.println();
     }
 
     public void printSameNumbers(WinningStatistics winningStatistics) {
@@ -38,7 +37,7 @@ public class ResultView {
         System.out.printf(MATCH_COUNT_3, winningStatistics.getRankCount(Rank.FOURTH));
         System.out.printf(MATCH_COUNT_4, winningStatistics.getRankCount(Rank.THIRD));
         System.out.printf(MATCH_COUNT_5, winningStatistics.getRankCount(Rank.SECOND));
-        System.out.printf(MATCH_COUNT_5_BONUS, winningStatistics.getRankCount(Rank.SECOND_BONUS));
+        System.out.printf(MATCH_COUNT_5_BONUS, winningStatistics.getRankCount(Rank.SECOND));
         System.out.printf(MATCH_COUNT_6, winningStatistics.getRankCount(Rank.FIRST));
         System.out.println();
     }
