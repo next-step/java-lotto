@@ -1,17 +1,17 @@
 package lotto.view;
 
 import lotto.domain.LottoPaper;
+import lotto.domain.Rank;
 import lotto.domain.Statistics;
-import lotto.domain.WinnigResult;
 
 import java.util.List;
 
 public class ResultView {
 
-    public static final String FIRST_MSG = "6개 일치 (" + WinnigResult.FIRST_EARN_MONEY + "원) -";
-    public static final String SECOND_MSG = "5개 일치 (" + WinnigResult.SECOND_EARN_MONEY + "원) -";
-    public static final String THIRD_MSG = "4개 일치 (" + WinnigResult.THIRD_EARN_MONEY + "원) -";
-    public static final String FOURTH_MSG = "3개 일치 (" + WinnigResult.FOURTH_EARN_MONEY + "원) -";
+    public static final String FIRST_MSG = "6개 일치 (" + Rank.FIRST.getWinningMoney() + "원) -";
+    public static final String SECOND_MSG = "5개 일치 (" +Rank.SECOND.getWinningMoney() + "원) -";
+    public static final String THIRD_MSG = "4개 일치 (" + Rank.THIRD.getWinningMoney() + "원) -";
+    public static final String FOURTH_MSG = "3개 일치 (" + Rank.FOURTH.getWinningMoney() + "원) -";
 
     public void lottoNumberView(List<LottoPaper> lottos) {
         for (LottoPaper lottoPaper : lottos) {
@@ -19,28 +19,28 @@ public class ResultView {
         }
     }
 
-    public void winningResult(Statistics statistics, int buyMoney) {
+    public void winningResult(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("--------");
-        for (String status : WinnigResult.winStatus) {
-            resultMsg(status, statistics.winningCount(status));
+
+        for (Rank rank : Rank.values()) {
+            resultMsg(rank, statistics.winningCount(rank));
         }
-        double earnRate = (double) statistics.getEarnMoney() / buyMoney;
-        System.out.println("총 수익률은 " + String.format("%.2f", earnRate) + " 입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", statistics.earnMoneyRate()) + " 입니다.");
     }
 
-    private void resultMsg(String status, int count) {
+    private void resultMsg(Rank rank, int count) {
 
-        if (status.equals(WinnigResult.FIRST)) {
+        if (rank.equals(Rank.FIRST)) {
             System.out.println(FIRST_MSG + count + "개");
         }
-        if (status.equals(WinnigResult.SECOND)) {
+        if (rank.equals(Rank.SECOND)) {
             System.out.println(SECOND_MSG + count + "개");
         }
-        if (status.equals(WinnigResult.THIRD)) {
+        if (rank.equals(Rank.THIRD)) {
             System.out.println(THIRD_MSG + count + "개");
         }
-        if (status.equals(WinnigResult.FOURTH)) {
+        if (rank.equals(Rank.FOURTH)) {
             System.out.println(FOURTH_MSG + count + "개");
         }
 

@@ -23,7 +23,7 @@ public class GameController {
         }
         resultView.lottoNumberView(buyLotto);
 
-        resultView.winningResult(createLottoStatstics(buyLotto, createWinningNumber()), buyLottoMoney);
+        resultView.winningResult(createLottoStatstics(buyLotto, createWinningNumber()));
     }
 
     private WinningLottoNumber createWinningNumber() {
