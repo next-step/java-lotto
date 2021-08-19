@@ -9,8 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void purchaseResult(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+    public static void purchaseResult(int autoLottoCount, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "장을 구매했습니다.");
     }
 
     public static void lottoNumberResult(List<Lotto> lottoList) {

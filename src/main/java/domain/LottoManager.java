@@ -12,13 +12,22 @@ public class LottoManager {
     }
 
     public LottoManager(int purchaseAmount) {
-        makeLottos(getPurchaseLottoCount(purchaseAmount));
+        makeLottos(getPurchaseLottoCount(purchaseAmount), 0);
     }
 
-    private void makeLottos(int purchaseLottoCount) {
+    public LottoManager(int purchaseAmount, int manualLottoCount) {
+        makeLottos(getPurchaseLottoCount(purchaseAmount - LottoPrice.LOTTO_PRICE * manualLottoCount), manualLottoCount);
+
+    }
+
+    private void makeLottos(int autoLottoCount, int manualLottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < purchaseLottoCount; i++) {
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoList.add(new Lotto(new AutoNumberStrategy()));
+        }
+        System.out.println("수동으로 구매할 번호를 입력해주세요");
+        for (int i = 0; i < manualLottoCount; i++) {
+            lottoList.add(new Lotto(new ManualNumberStrategy()));
         }
         this.lottos = new Lottos(lottoList);
     }

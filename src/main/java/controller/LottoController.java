@@ -8,8 +8,14 @@ public class LottoController {
 
     public static void startLotto() {
         int purchaseAmount = InputView.enterPurchaseAmount();
-        LottoManager lottoManager = new LottoManager(purchaseAmount);
-        ResultView.purchaseResult(lottoManager.getPurchaseLottoCount(purchaseAmount));
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoCount = InputView.enterNumber();
+
+        LottoManager lottoManager = new LottoManager(purchaseAmount, manualLottoCount);
+        System.out.println("수동으로 구매할 번호를 입력해 주세요");
+
+        ResultView.purchaseResult(lottoManager.getPurchaseLottoCount(purchaseAmount), manualLottoCount);
         ResultView.lottoNumberResult(lottoManager.getLottos().getValue());
 
         System.err.println("지난 주 당첨 번호를 입력해 주세요.");
