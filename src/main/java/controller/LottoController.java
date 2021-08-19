@@ -13,7 +13,6 @@ public class LottoController {
         int manualLottoCount = InputView.enterNumber();
 
         LottoManager lottoManager = new LottoManager(purchaseAmount, manualLottoCount);
-        System.out.println("수동으로 구매할 번호를 입력해 주세요");
 
         ResultView.purchaseResult(lottoManager.getPurchaseLottoCount(purchaseAmount), manualLottoCount);
         ResultView.lottoNumberResult(lottoManager.getLottos().getValue());
@@ -24,8 +23,7 @@ public class LottoController {
         BonusBall bonusBall = lottoManager.makeBonusBall(InputView.enterNumber());
         WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
-        lottoManager.findWinningLottoResult(winningLotto);
-        ResultView.winningResult(lottoManager.getWinningResult());
+        ResultView.winningResult(lottoManager.makeWinningLottoResult(winningLotto));
         ResultView.yieldResult(lottoManager.getLottoYield(purchaseAmount));
     }
 }

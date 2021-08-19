@@ -29,7 +29,7 @@ public class ResultView {
     }
 
     private static void view(LottoPrizeType lottoPrizeType, HashMap<LottoPrizeType, Integer> winningStatistic) {
-        if (lottoPrizeType.isExposure()) {
+        if (!lottoPrizeType.equals(LottoPrizeType.MISS)) {
             System.out.println(lottoPrizeType.getMatchCount() +
                     "개 일치 " + "(" + lottoPrizeType.getWinningAmount() + "원) - "
                     + winningStatistic.get(lottoPrizeType) + "개");

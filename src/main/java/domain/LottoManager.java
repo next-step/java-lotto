@@ -17,7 +17,6 @@ public class LottoManager {
 
     public LottoManager(int purchaseAmount, int manualLottoCount) {
         makeLottos(getPurchaseLottoCount(purchaseAmount - LottoPrice.LOTTO_PRICE * manualLottoCount), manualLottoCount);
-
     }
 
     private void makeLottos(int autoLottoCount, int manualLottoCount) {
@@ -48,15 +47,12 @@ public class LottoManager {
         return new BonusBall(bonusBall);
     }
 
-    public void findWinningLottoResult(WinningLotto winningLotto) {
+    public WinningStatistics makeWinningLottoResult(WinningLotto winningLotto) {
         lottos.makeWinningLottoResult(winningLotto);
+        return lottos.getWinningStatistics();
     }
 
     public double getLottoYield(int purchaseAmount) {
         return lottos.calcLottoYield(Lotto.calcPurchaseLottoCount(purchaseAmount) * LottoPrice.LOTTO_PRICE);
-    }
-
-    public WinningStatistics getWinningResult() {
-        return lottos.getWinningStatistics();
     }
 }
