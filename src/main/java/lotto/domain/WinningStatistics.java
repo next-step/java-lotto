@@ -8,12 +8,12 @@ public class WinningStatistics {
     private final Map<Rank, Long> winningStatistics;
 
     public WinningStatistics(Lottos lottos, WinningLotto winningLotto) {
-        List<LottoMatch> lottoMatches = lottos.compareLottos(winningLotto);
+        List<Rank> lottoMatches = lottos.compareLottos(winningLotto);
 
         Map<Rank, Long> rankMap = new HashMap<>();
 
-        for (LottoMatch lottoMatch : lottoMatches) {
-            rankMap.put(Rank.fromLottoMatch(lottoMatch), rankMap.getOrDefault(Rank.fromLottoMatch(lottoMatch), 0L) + 1);
+        for (Rank rank : lottoMatches) {
+            rankMap.put(rank, rankMap.getOrDefault(rank, 0L) + 1);
         }
         winningStatistics = rankMap;
     }
