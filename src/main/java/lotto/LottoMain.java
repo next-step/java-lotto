@@ -1,13 +1,13 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
 import lotto.util.LottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,13 +18,13 @@ public class LottoMain {
 
         int manualTicketNumber = InputView.requestManualTicket();
         List<Set<Integer>> manualLottoNumbers = InputView.requestManualNumbers(manualTicketNumber);
+        List<Lotto> lottoList = LottoGenerator.createLottos(manualLottoNumbers, ticketNumber);
 
-        LottoGame lottoGame = new LottoGame();
-        List<Lotto> lotto = LottoGenerator.createLottos(manualLottoNumbers, ticketNumber);
-        LottoPurchaseResult lottoPurchaseResponse = lottoGame.purchase(lotto);
-        ResultView.printPurchaseLottos(lottoPurchaseResponse);
+        Lottos lottos = new Lottos(lottoList);
+        ResultView.printLottos(lottos);
 
-        LottoDrawResult lottoResult = lottoGame.drawLotto(getWinnerLotto());
+        Map<Award, Long> lottoDrawResult = lottos.drawLottos(getWinnerLotto());
+        LottoResult lottoResult = new LottoResult(lottoDrawResult);
         List<LottoWinnersDto> lottoWinnersDtos = lottoResult.createLottoWinnerDtos();
         Yield yield = lottoResult.calculateYield(lottoPurchaseAmount);
 

@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LottoDrawResult {
-    private Map<Award, Long> lottoDrawResult;
+public class LottoResult {
+    private Map<Award, Long> lottoResult;
 
-    public LottoDrawResult(Map<Award, Long> lottoDrawResult) {
-        this.lottoDrawResult = lottoDrawResult;
+    public LottoResult(Map<Award, Long> lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
     public List<LottoWinnersDto> createLottoWinnerDtos() {
@@ -24,7 +24,7 @@ public class LottoDrawResult {
     }
 
     private Map<Award, Long> formatResult() {
-        Map<Award, Long> result = new HashMap(this.lottoDrawResult);
+        Map<Award, Long> result = new HashMap(this.lottoResult);
         for (Award award : Award.values()) {
             result.putIfAbsent(award, 0L);
         }
@@ -46,7 +46,7 @@ public class LottoDrawResult {
         return amount * countWinners;
     }
 
-    public Map<Award, Long> getLottoDrawResult() {
-        return Collections.unmodifiableMap(lottoDrawResult);
+    public Map<Award, Long> getLottoResult() {
+        return Collections.unmodifiableMap(lottoResult);
     }
 }

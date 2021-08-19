@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Yield;
-import lotto.domain.dto.LottoPurchaseResult;
 import lotto.domain.dto.LottoWinnersDto;
 
 import java.util.Comparator;
@@ -11,9 +11,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void printPurchaseLottos(LottoPurchaseResult lottoPurchaseResult) {
-        System.out.println(lottoPurchaseResult.getLottoList().size() + "개를 구매했습니다.");
-        lottoPurchaseResult.getLottoList().stream().forEach(lotto -> printLottoNumbers(lotto.getNumbers()));
+    public static void printLottos(Lottos lottos) {
+        System.out.println(lottos.getLottos().size() + "개를 구매했습니다.");
+        lottos.getLottos().stream().forEach(lotto -> printLottoNumbers(lotto.getNumbers()));
     }
 
     private static void printLottoNumbers(Set<LottoNumber> numbers) {
