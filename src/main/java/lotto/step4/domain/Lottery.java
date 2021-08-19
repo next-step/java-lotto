@@ -1,10 +1,13 @@
 package lotto.step4.domain;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lottery {
     public static final int LOTTO_COUNT = 6;
+    private static final int COUNT = 1;
+    private static final int NO_COUNT = 0;
     private final Set<LottoNumber> lottery;
 
     public Lottery(List<LottoNumber> lottoNumbers) {
@@ -18,12 +21,23 @@ public class Lottery {
         this.lottery = lottery;
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottery.contains(lottoNumber);
+    public int count() {
+        int countOfMatch = 0;
+        for (LottoNumber number : lottery) {
+            countOfMatch += containLottoNumber(number);
+        }
+        return countOfMatch;
     }
 
-    public Set<LottoNumber> getLottery() {
-        return lottery;
+    private int containLottoNumber(LottoNumber lottoNumber) {
+        if (lottery.contains(lottoNumber)) {
+            return COUNT;
+        }
+        return NO_COUNT;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottery.contains(lottoNumber);
     }
 
     @Override

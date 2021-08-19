@@ -1,8 +1,6 @@
 package lotto.step4.domain;
 
 public class Winning {
-    private static final int COUNT = 1;
-    private static final int NO_COUNT = 0;
     private Lottery winnerNumber;
     private LottoNumber bonusNumber;
 
@@ -15,19 +13,11 @@ public class Winning {
     }
 
     public Rank match(Lottery lottery) {
-        int countOfMatch = 0;
-        for (LottoNumber number : lottery.getLottery()) {
-            countOfMatch += containLottoNumber(number);
-        }
+        int countOfMatch = winnerNumber.count();
         boolean isContainBonusBall = lottery.contains(bonusNumber);
 
         return Rank.getRankBy(countOfMatch, isContainBonusBall);
     }
 
-    private int containLottoNumber(LottoNumber lottoNumber) {
-        if (winnerNumber.contains(lottoNumber)) {
-            return COUNT;
-        }
-        return NO_COUNT;
-    }
+
 }

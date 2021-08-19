@@ -16,6 +16,14 @@ public class LottoController {
         Lotteries lotteries = new Lotteries(autoCount, manualLotteries);
         ResultView.printLottoInfo(manualLottoCount,autoCount);
         ResultView.printLottoNumbers(lotteries);
+        Lottery lottery = InputView.inputLastWinningNumbers();
+        LottoNumber bonusBall = InputView.inputBonusBall();
+        Winning winning = new Winning(lottery, bonusBall);
+        LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
+        ResultView.printLottoStatistics(lottoStatistics);
+        double earningRate = lottoStatistics.calculateLottoStatistics(money);
+        ResultView.printEarningRate(earningRate);
+
 
     }
 }

@@ -41,7 +41,6 @@ public class InputView {
 
     public static Lottery inputLastWinningNumbers() {
         System.out.println(INPUT_LAST_WINNING_NUMBERS);
-        sc.nextLine();
         return LottoCreator.convertToLotto(sc.nextLine());
     }
 
