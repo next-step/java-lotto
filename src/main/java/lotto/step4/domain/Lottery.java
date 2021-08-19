@@ -1,10 +1,15 @@
 package lotto.step4.domain;
-
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Lottery {
     public static final int LOTTO_COUNT = 6;
     private final Set<LottoNumber> lottery;
+
+    public Lottery(List<LottoNumber> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
+    }
 
     public Lottery(Set<LottoNumber> lottery) {
         if (lottery.size() != LOTTO_COUNT) {
