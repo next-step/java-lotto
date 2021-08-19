@@ -11,7 +11,7 @@ public class StringAddCalculator {
   private static final int CUSTOM_SPLIT_DELIMITER_INDEX = 1;
 
   public static int splitAndSum(String input) {
-    if (input == null || input.equals("")) {
+    if (StringUtils.isBlank(input)) {
       return 0;
     }
     return getSumResult(split(input));
