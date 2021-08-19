@@ -1,41 +1,41 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.common.NumberGenerator;
+
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Integer> lottoNumber;
-    private final NumberGenerator numberGenerator;
-    private RANK lottoRank;
+    public final List<LottoNumber> lottoNumbers;
 
     public Lotto(NumberGenerator numberGenerator) {
-        this.numberGenerator  = numberGenerator;
-        this.lottoNumber = createRandomNumbers();
-        sortLottoNumbers();
+        this.lottoNumbers = numberGenerator.generateNumber();
     }
 
-    private List<Integer> createRandomNumbers() {
-        return numberGenerator.generateNumber();
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void sortLottoNumbers() {
-        Collections.sort(lottoNumber);
+    public static Lotto getInstanceByInteger(final List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
-    public List<Integer> getLottoNumber() {
-        return Collections.unmodifiableList(lottoNumber);
-    }
-
-    public void matchLottoRank(WinningNumbers winningNumber) {
-        long sameCount = lottoNumber.stream()
-                .filter(integer -> winningNumber.getWinningNumbers()
-                        .stream()
-                        .anyMatch(Predicate.isEqual(integer)))
+    public int compareLotto(Lotto otherLotto) {
+        long count = lottoNumbers.stream()
+                .filter(lottoNumber -> otherLotto.lottoNumbers.stream()
+                        .anyMatch(Predicate.isEqual(lottoNumber)))
                 .count();
-        lottoRank = RANK.getRank(sameCount);
+        return Math.toIntExact(count);
     }
 
-    public RANK getRank() {
-        return lottoRank;
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

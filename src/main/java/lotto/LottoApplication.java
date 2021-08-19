@@ -1,8 +1,16 @@
 package lotto;
 
+import lotto.common.AutoNumberGenerator;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static lotto.util.StringUtil.split;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -12,18 +20,21 @@ public class LottoApplication {
 
         Money money = new Money(inputView.askPurchaseAmount());
 
-        Lotties lotties = lottoMachine.createRandomLotties(money);
+        Lottos lottos = lottoMachine.generateLottos(money, new AutoNumberGenerator());
 
         ResultView resultView = new ResultView();
-        resultView.printLotties(lotties);
+        resultView.printLotties(lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.getWinningNumber());
+        String[] split = split(inputView.getWinningNumber());
+        List<Integer> winningNumbers = Stream.of(split).map(Integer::valueOf).collect(Collectors.toList());
 
-        lotties.matchLottiesRank(winningNumbers);
+        Lotto winningLottoNumbers = Lotto.getInstanceByInteger(winningNumbers);
 
-        WinningStatistics winningStatistics = new WinningStatistics();
-        winningStatistics.setRankCount(lotties.getLottiesRank());
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(inputView.askBonusNumber()));
 
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+
+        WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
 
         resultView.printSameNumbers(winningStatistics);
     }
