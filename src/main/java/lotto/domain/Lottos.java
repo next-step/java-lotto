@@ -19,7 +19,7 @@ public class Lottos {
     public Map<Award, Long> drawLottos(WinnerLotto winnerLotto) {
         Map<Award, Long> lottoResult = lottos.stream()
                 .collect(Collectors
-                        .groupingBy(lotto -> winnerLotto.drawLotto(lotto.getNumbers()),
+                        .groupingBy(lotto -> winnerLotto.drawLotto(lotto),
                                 Collectors.counting()));
         return Collections.unmodifiableMap(lottoResult);
     }

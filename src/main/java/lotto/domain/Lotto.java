@@ -27,9 +27,9 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public long countContains(Set<LottoNumber> lottoNumbers) {
+    public long countContains(Lotto lotto) {
         return this.lottoNumbers.stream()
-                .filter(winnerNumber -> lottoNumbers.contains(winnerNumber))
+                .filter(winnerNumber -> lotto.contains(winnerNumber))
                 .count();
     }
 }

@@ -32,10 +32,10 @@ class LottoListGeneratorTest {
     void creatLottos() {
         int ticketNumber = 3;
         List<Lotto> lottos = LottoGenerator.createLottos(manualLottoList, ticketNumber);
-        Set<LottoNumber> lottoNumberSet = manualLotto.stream()
+        Lotto lotto = new Lotto(manualLotto.stream()
                 .map(number -> new LottoNumber(number))
-                .collect(Collectors.toSet());
-        assertEquals(lottos.get(0).countContains(lottoNumberSet), 6);
+                .collect(Collectors.toSet()));
+        assertEquals(lottos.get(0).countContains(lotto), 6);
         assertEquals(lottos.size(), ticketNumber);
     }
 
