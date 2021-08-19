@@ -5,7 +5,9 @@ import lotto.domain.LottoNumber;
 import java.util.*;
 
 public class AutoNumberGenerator implements NumberGenerator {
+    private static final Random RANDOM = new Random();
     private static final int LOTTO_NUMBERS_COUNT = 6;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private List<LottoNumber> randomNumbers;
 
@@ -13,8 +15,8 @@ public class AutoNumberGenerator implements NumberGenerator {
     public List<LottoNumber> generateNumber() {
         randomNumbers = new ArrayList<>();
         while (randomNumbers.size() < LOTTO_NUMBERS_COUNT) {
-            LottoNumber lottoNumber = new LottoNumber();
-            if (validDuplicate(lottoNumber)) {
+            LottoNumber lottoNumber = new LottoNumber(generateLottoNumber());
+            if (!validDuplicate(lottoNumber)) {
                 randomNumbers.add(lottoNumber);
             }
         }
@@ -22,13 +24,12 @@ public class AutoNumberGenerator implements NumberGenerator {
         return randomNumbers;
     }
 
+    private int generateLottoNumber() {
+        return RANDOM.nextInt(MAX_LOTTO_NUMBER) + 1;
+    }
+
     private boolean validDuplicate(LottoNumber lottoNumber) {
-        for (LottoNumber number : randomNumbers) {
-            if (lottoNumber.getNumber() == number.getNumber()) {
-                return false;
-            }
-        }
-        return true;
+        return randomNumbers.contains(lottoNumber);
     }
 
     private void sortNumbers() {
