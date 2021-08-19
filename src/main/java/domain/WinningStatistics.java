@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 
 public class WinningStatistics {
 
-    LinkedHashMap<LottoPrizeType, Integer> winningStatistic;
+    private LinkedHashMap<LottoPrizeType, Integer> winningStatistic;
 
     public WinningStatistics() {
         winningStatistic = new LinkedHashMap<>();
@@ -20,9 +20,6 @@ public class WinningStatistics {
 
 
     public int addCount(LottoPrizeType lottoPrizeType) {
-        if (lottoPrizeType == null) {
-            return 0;
-        }
         int increaseCount = winningStatistic.get(lottoPrizeType) + 1;
         winningStatistic.put(lottoPrizeType, increaseCount);
         return increaseCount;

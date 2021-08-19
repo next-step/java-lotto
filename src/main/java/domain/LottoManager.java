@@ -5,24 +5,14 @@ import java.util.List;
 
 public class LottoManager {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private Lottos lottos;
 
-    private int purchaseLottoCount;
-
-    private Lotto winningLotto;
-
-    private WinningStatistics winningStatistics;
-
-    public LottoManager(int purchaseAmount) {
-        this.winningStatistics = new WinningStatistics();
-        makePurchaseLottoCount(purchaseAmount);
-        makeLottos(this.purchaseLottoCount);
+    public LottoManager() {
+        this(0);
     }
 
-    private void makePurchaseLottoCount(int purchaseAmount) {
-        this.purchaseLottoCount = purchaseAmount / LOTTO_PRICE;
+    public LottoManager(int purchaseAmount) {
+        makeLottos(getPurchaseLottoCount(purchaseAmount));
     }
 
     private void makeLottos(int purchaseLottoCount) {
@@ -37,20 +27,27 @@ public class LottoManager {
         return this.lottos;
     }
 
-    public int getPurchaseLottoCount() {
-        return purchaseLottoCount;
+    public int getPurchaseLottoCount(int purchaseAmount) {
+        return Lotto.calcPurchaseLottoCount(purchaseAmount);
     }
 
-    public Lotto makeWinningLotto() {
-        winningLotto = new Lotto(new ManualNumberStrategy());
-        return winningLotto;
+    public Lotto makeLotto(PickNumberStrategy pickNumberStrategy) {
+        return new Lotto(pickNumberStrategy);
     }
 
-    public WinningStatistics findWinningLottoResult() {
-        return lottos.findWinningLottoResult(winningLotto, winningStatistics);
+    public BonusBall makeBonusBall(int bonusBall) {
+        return new BonusBall(bonusBall);
     }
 
-    public double getLottoYield() {
-        return winningStatistics.calcLottoYield(purchaseLottoCount * LOTTO_PRICE);
+    public void findWinningLottoResult(WinningLotto winningLotto) {
+        lottos.makeWinningLottoResult(winningLotto);
+    }
+
+    public double getLottoYield(int purchaseAmount) {
+        return lottos.calcLottoYield(Lotto.calcPurchaseLottoCount(purchaseAmount) * LottoPrice.LOTTO_PRICE);
+    }
+
+    public WinningStatistics getWinningResult() {
+        return lottos.getWinningStatistics();
     }
 }

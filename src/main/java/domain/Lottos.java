@@ -1,25 +1,39 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Lottos {
 
-    private List<Lotto> lottoList;
+    private List<Lotto> lottoGroup;
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    private WinningStatistics winningStatistics;
+
+    public Lottos(List<Lotto> lottoGroup) {
+        this.lottoGroup = new ArrayList<>(lottoGroup);
+        this.winningStatistics = new WinningStatistics();
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getValue() {
+        return Collections.unmodifiableList(lottoGroup);
     }
 
-    public WinningStatistics findWinningLottoResult(Lotto winningLotto, WinningStatistics winningStatistics) {
-        for (Lotto lotto : lottoList) {
-            int matchCount = countMatchNumber(lotto.getNumbers().getValues(), winningLotto.getNumbers().getValues());
-            winningStatistics.addCount(LottoPrizeType.findLottoPrizeByMatchCount(matchCount));
+    public void makeWinningLottoResult(WinningLotto winningLotto) {
+        for (Lotto lotto : lottoGroup) {
+            compareWinningLotto(winningLotto, lotto);
         }
-        return winningStatistics;
+    }
+
+    private void compareWinningLotto(WinningLotto winningLotto, Lotto lotto) {
+        int matchCount = countMatchNumber(lotto.getNumbers().getValues(), winningLotto.getNumbers().getValues());
+        addPrizeLottoCount(winningLotto, lotto, matchCount);
+    }
+
+    private void addPrizeLottoCount(WinningLotto winningLotto, Lotto lotto, int matchCount) {
+        Optional<LottoPrizeType> lottoPrizeType = LottoPrizeType.findLottoPrizeByMatchCount(matchCount, lotto.getNumbers().getValues().contains(winningLotto.getBonusNumber()));
+        winningStatistics.addCount(lottoPrizeType.orElse(LottoPrizeType.MISS));
     }
 
     private int countMatchNumber(List<Integer> currentLottoNumber, List<Integer> winningLottoNumber) {
@@ -35,5 +49,13 @@ public class Lottos {
             return ++matchCount;
         }
         return matchCount;
+    }
+
+    public double calcLottoYield(int purchaseAmount) {
+        return winningStatistics.calcLottoYield(purchaseAmount);
+    }
+
+    public WinningStatistics getWinningStatistics() {
+        return winningStatistics;
     }
 }
