@@ -1,13 +1,12 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.domain.Number;
+import lotto.domain.Numbers;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -39,8 +38,8 @@ public class LottoController {
         resultView.printLottos(lottos.findAll());
     }
 
-    public List<Number> inputWinnerNumbers() {
-        return inputView.inputWinnerNumbers();
+    public Numbers inputWinnerNumbers() {
+        return new Numbers(inputView.inputWinnerNumbers());
     }
 
     public void printRanks(Map<Rank, Integer> rankInfo) {

@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.util.RandomUtil;
-
-import java.util.*;
+import java.util.Objects;
 
 public class Number implements Comparable<Number> {
 
@@ -18,21 +16,6 @@ public class Number implements Comparable<Number> {
 
     public int data() {
         return this.data;
-    }
-
-    public static List<Number> createRandomNumbers(int size) {
-        Set<Number> numberSet = new HashSet<>();
-        while (numberSet.size() != size) {
-            Number randomNumber = createRandomNumber();
-            numberSet.add(randomNumber);
-        }
-        List<Number> randomNumbers = new ArrayList<>(numberSet);
-        Collections.shuffle(randomNumbers);
-        return randomNumbers;
-    }
-
-    private static Number createRandomNumber() {
-        return new Number(RandomUtil.getRandomNumber());
     }
 
     @Override

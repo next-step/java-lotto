@@ -1,15 +1,25 @@
 package lotto.util;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RandomUtil {
 
-    private static final Random RANDOM = new Random();
-    private static final int MAX_BOUNDARY = 44;
-    private static final int OFFSET = 1;
+    private static final int MAX_BOUNDARY = 46;
+    private static final int MIN_BOUNDARY = 1;
+    private static final int FIRST_ORDER = 0;
+    private static final List<Integer> data = new ArrayList<>();
 
-    public static int getRandomNumber() {
-        return RANDOM.nextInt(MAX_BOUNDARY) + OFFSET;
+    static {
+        for (int i = MIN_BOUNDARY; i < MAX_BOUNDARY; i++) {
+            data.add(i);
+        }
+    }
+
+    public static List<Integer> getRandomInteger(int size) {
+        Collections.shuffle(data);
+        return data.subList(FIRST_ORDER, size);
     }
 
 }
