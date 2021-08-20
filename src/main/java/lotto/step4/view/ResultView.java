@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(Lotteries lotteries) {
-        for (Lottery lottery : lotteries.getLotteries()) {
+        for (Lottery lottery : lotteries.values()) {
             System.out.println(lottery);
         }
         System.out.println();
@@ -32,10 +32,10 @@ public class ResultView {
             return;
         }
         if (rank.equals(Rank.SECOND)) {
-            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank, 0));
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.count(rank));
             return;
         }
-        System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.getLottoStatistics().getOrDefault(rank, 0));
+        System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), lottoStatistics.count(rank));
     }
 
     public static void printEarningRate(double earningRate) {

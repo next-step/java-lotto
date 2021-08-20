@@ -18,6 +18,6 @@ public class LotteriesTest {
         Lottery lottery = new Lottery(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
         Lottery lottery2 = new Lottery(Arrays.asList(new LottoNumber(11), new LottoNumber(21), new LottoNumber(13), new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)));
         Lotteries lotteries = new Lotteries(10, new ArrayList<>(Arrays.asList(lottery, lottery2)));
-        Assertions.assertThat(lotteries.getLotteries().size()).isEqualTo(12);
+        Assertions.assertThat(lotteries.values().size()).isEqualTo(12);
     }
 }
