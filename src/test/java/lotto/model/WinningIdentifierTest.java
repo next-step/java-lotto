@@ -44,7 +44,7 @@ class WinningIdentifierTest {
     @Test
     void 로또_3개_일치_확인() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 7, 8, 9));
-        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.THIRD);
+        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -56,23 +56,23 @@ class WinningIdentifierTest {
     @Test
     void 로또_5개_일치_확인() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 9));
-        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.FIFTH);
+        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.SECOND);
     }
 
     @Test
     void 로또_6개_일치_확인() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.SIXTH);
+        assertThat(winningIdentifier.checkWinning(lottoTicket)).isEqualTo(Rank.FIRST);
     }
 
     @Test
     void 여러개_로또당첨_결과_한번에_확인() {
         WinningReport report = winningIdentifier.checkTicketsWinning(lottoTickets);
         assertAll(
-                () -> assertThat(report.getRankCount(Rank.SIXTH)).isEqualTo(0),
-                () -> assertThat(report.getRankCount(Rank.FIFTH)).isEqualTo(1),
+                () -> assertThat(report.getRankCount(Rank.FIRST)).isEqualTo(0),
+                () -> assertThat(report.getRankCount(Rank.SECOND)).isEqualTo(1),
                 () -> assertThat(report.getRankCount(Rank.FOURTH)).isEqualTo(2),
-                () -> assertThat(report.getRankCount(Rank.THIRD)).isEqualTo(1),
+                () -> assertThat(report.getRankCount(Rank.FIFTH)).isEqualTo(1),
                 () -> assertThat(report.getRankCount(Rank.MISS)).isEqualTo(1)
         );
     }

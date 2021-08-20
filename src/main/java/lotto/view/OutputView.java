@@ -5,7 +5,6 @@ import lotto.model.Rank;
 import lotto.model.WinningReport;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
 
@@ -45,7 +44,7 @@ public class OutputView {
     }
 
     private static void printStatistics(WinningReport report) {
-        Rank[] ranks = {Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.SIXTH};
+        Rank[] ranks = {Rank.FIFTH, Rank.FOURTH, Rank.SECOND, Rank.FIRST};
 
         for (Rank rank : ranks) {
             System.out.println(String.format(REPORT_STATISTICS_MSG, rank.getMatch(), rank.getWinningBonus(), report.getRankCount(rank)));
