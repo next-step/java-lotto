@@ -16,7 +16,7 @@ public class ResultView {
     public static void printBuyLotto(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.stream().forEach(lottoNumbers ->
-                System.out.println(lottoNumbers.value()));
+                System.out.println(lottoNumbers.values()));
     }
 
     public static void printResultTitle() {

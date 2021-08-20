@@ -20,12 +20,12 @@ public class Lotto {
     }
 
     public int countSameNumber(final Lotto otherLotto) {
-        return (int) otherLotto.value().stream()
+        return (int) otherLotto.values().stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public List<Integer> value() {
+    public List<Integer> values() {
         return lottoNumbers;
     }
 
