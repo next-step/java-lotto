@@ -2,14 +2,21 @@ package lotto;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoGuidView {
 
-    public int getPurchaseAmount(BufferedReader br) throws IOException {
+    private final BufferedReader bufferedReader;
+
+    public LottoGuidView(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
+
+    public int getPurchaseAmount() throws IOException {
         System.out.println("구입금액을 입력해 주세요.");
-        int amountPaid = Integer.parseInt(br.readLine());
+        int amountPaid = Integer.parseInt(this.bufferedReader.readLine());
 
         System.out.println((amountPaid / LottoPurchasingMachine.AMOUNT) + "개를 구매했습니다.");
 
@@ -22,10 +29,17 @@ public class LottoGuidView {
         }
     }
 
-    public List<String> getPrevWinningLottoNumbers(BufferedReader br) throws IOException {
+    public List<String> getPrevWinningLottoNumbers() throws IOException {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.asList(br.readLine().split(","));
+        List<String> lottoNumbers = new ArrayList<String>();
+        lottoNumbers.addAll(Arrays.asList(this.bufferedReader.readLine().split(",")));
+        return lottoNumbers;
+    }
+
+    public String enteredBonusBallNumber() throws IOException {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return this.bufferedReader.readLine();
     }
 
     public void showNumericalStatement(List<Integer> result , double yield) {
