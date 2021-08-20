@@ -6,7 +6,8 @@ import java.util.Set;
 
 public class LottoUtil {
     private static final int NUMBER_OF_LOTTO = 6;
-    private static final Random random = new Random();
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final Random RANDOM = new Random();
 
     public static Set<Integer> extractRandomLottoNumbers() {
         Set<Integer> numbers = new HashSet<>();
@@ -25,6 +26,6 @@ public class LottoUtil {
     }
 
     private static int selectNumber() {
-        return random.nextInt(45) + 1;
+        return RANDOM.nextInt(MAXIMUM_LOTTO_NUMBER) + 1;
     }
 }
