@@ -8,7 +8,7 @@ public class CalculatorNumber {
 	private final int number;
 
 	public CalculatorNumber(int number) {
-		if(number < 0) {
+		if (number < 0) {
 			throw new IllegalArgumentException(DO_NOT_USE_NEGATIVE_NUMBER);
 		}
 		this.number = number;
@@ -17,13 +17,17 @@ public class CalculatorNumber {
 	public CalculatorNumber(String number) {
 		try {
 			this.number = Integer.parseInt(number);
-		} catch (Exception e){
+		} catch (Exception e) {
 			throw new IllegalArgumentException(DO_NOT_USE_ILLEGAL_PARAM);
 		}
 	}
 
 	public CalculatorNumber add(CalculatorNumber other) {
 		return new CalculatorNumber(this.number + other.number);
+	}
+
+	public int ToInteger() {
+		return this.number;
 	}
 
 	@Override
