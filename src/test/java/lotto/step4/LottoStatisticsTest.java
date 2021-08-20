@@ -61,4 +61,23 @@ class LottoStatisticsTest {
         assertThat(lottoStatistics.count(Rank.FIFTH)).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("3등 1개 4등 3개의 상금")
+    void LottoWinningSumTest() {
+        Lottery lottery = new Lottery(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(15), new LottoNumber(16))); // 4등
+        Lottery lottery1 = new Lottery(Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));// 4등
+        Lottery lottery2 = new Lottery(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(25), new LottoNumber(26))); // 4등
+        Lottery lottery3 = new Lottery(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(16)));// 3등
+        Lotteries lotteries = new Lotteries(Arrays.asList(lottery1, lottery2, lottery3, lottery));
+        LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
+        assertThat(lottoStatistics.reward()).isEqualTo(1650000);
+    }
+
+    @Test
+    @DisplayName("2등 2개 1등 1개의 상금")
+    void LottoWinningSumTest2() {
+        LottoStatistics lottoStatistics = new LottoStatistics(Arrays.asList(Rank.SECOND, Rank.SECOND, Rank.FIRST));
+        assertThat(lottoStatistics.reward()).isEqualTo(2_060_000_000);
+    }
+
 }
