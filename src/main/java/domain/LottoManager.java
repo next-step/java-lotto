@@ -26,7 +26,7 @@ public class LottoManager {
         }
         System.out.println("수동으로 구매할 번호를 입력해주세요");
         for (int i = 0; i < manualLottoCount; i++) {
-            lottoList.add(new Lotto(new ManualNumberStrategy()));
+            lottoList.add(makeLotto(new ManualNumberStrategy()));
         }
         this.lottos = new Lottos(lottoList);
     }
@@ -40,7 +40,15 @@ public class LottoManager {
     }
 
     public Lotto makeLotto(PickNumberStrategy pickNumberStrategy) {
-        return new Lotto(pickNumberStrategy);
+
+        while (true) {
+            try {
+                Lotto lotto = new Lotto(pickNumberStrategy);
+                return lotto;
+            } catch (IllegalArgumentException e) {
+                System.out.println("잘못된 로또 값을 입력하였습니다. 6개의 숫자를 입력해주세요.");
+            }
+        }
     }
 
     public BonusBall makeBonusBall(int bonusBall) {

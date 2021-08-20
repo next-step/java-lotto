@@ -1,15 +1,11 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
 
-    private static final Scanner SCANNER = new Scanner(System.in);
-
-    public static int enterPurchaseAmount() {
-        System.out.println("구입금액을 입력해주세요");
-        return enterNumber();
-    }
+    private static Scanner SCANNER = new Scanner(System.in);
 
     public static String enterLottoNumber() {
         return enterString();
@@ -19,7 +15,16 @@ public class InputView {
         return SCANNER.next();
     }
 
-    public static int enterNumber() {
-        return SCANNER.nextInt();
+    public static int enterNumber() throws InputMismatchException {
+        int number;
+        while (true) {
+            try {
+                number = SCANNER.nextInt();
+                return number;
+            } catch (InputMismatchException e) {
+                System.out.println("숫자가 아닌 값을 입력하였습니다");
+                SCANNER = new Scanner(System.in);
+            }
+        }
     }
 }
