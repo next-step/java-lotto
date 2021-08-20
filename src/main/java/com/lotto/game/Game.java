@@ -3,14 +3,13 @@ package com.lotto.game;
 import com.lotto.model.LottoResult;
 import com.lotto.model.Lottos;
 import com.lotto.model.WinningNumbers;
-import com.lotto.type.RewardType;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Game {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     //구입하다.
     public static Lottos purchase(int money) {
@@ -21,7 +20,7 @@ public class Game {
     public static WinningNumbers makeWinningNumbers(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>();
 
-        numbers.stream().forEach((number) -> {
+        numbers.forEach((number) -> {
             if (numberSet.contains(number)) {
                 throw new IllegalArgumentException("중복된 숫자가 존재합니다. 숫자들 목록 " + numbers);
             }
