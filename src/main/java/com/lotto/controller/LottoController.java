@@ -17,6 +17,11 @@ public class LottoController {
         LottoDrawer.drawMoneyInputMessage();
         int money = InputParser.convert(scanner.nextLine());
 
+        if (money < Game.LOTTO_PRICE) {
+            LottoDrawer.drawWhenUnderMiminumMoney();
+            return;
+        }
+
         Lottos lottos = Game.purchase(money);
         LottoDrawer.drawBuyResult(lottos);
 
