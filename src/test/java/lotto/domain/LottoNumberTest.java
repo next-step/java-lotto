@@ -28,5 +28,4 @@ class LottoNumberTest {
         assertThat(lottoNumbers.get(1).value()).isEqualTo(10);
     }
 
-
 }
