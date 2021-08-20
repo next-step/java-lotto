@@ -4,14 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class CalculatorExpression {
-	public static final String ZERO = "0";
 	private final String expression;
 
 	public CalculatorExpression(String expression) {
-		if (expression == null || expression.isEmpty()) {
-			this.expression = ZERO;
-			return;
-		}
 		this.expression = expression;
 	}
 

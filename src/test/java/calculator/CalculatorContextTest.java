@@ -31,4 +31,22 @@ public class CalculatorContextTest {
 
 		assertThat(delimiter).isEqualTo(new CalculatorDelimiter(DEFAULT_DELIMITER));
 	}
+
+	@Test
+	@DisplayName("널일경우")
+	void nullTest() {
+		CalculatorContext context = new CalculatorContext(null);
+		CalculatorExpression expression = context.expression();
+
+		assertThat(expression).isEqualTo(new CalculatorExpression(ZERO));
+	}
+
+	@Test
+	@DisplayName("빈문자열일경우")
+	void zeroTest() {
+		CalculatorContext context = new CalculatorContext("");
+		CalculatorExpression expression = context.expression();
+
+		assertThat(expression).isEqualTo(new CalculatorExpression(ZERO));
+	}
 }
