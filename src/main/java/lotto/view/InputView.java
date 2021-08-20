@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import lotto.domain.TicketCount;
 import lotto.exception.WrongUserInputException;
 
 public class InputView {
@@ -32,10 +33,9 @@ public class InputView {
     public int[] askWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return Arrays.stream(scanner.next().split(COMMA_DELIMITER))
-            .map(String::trim)
-            .mapToInt(Integer::parseInt)
-            .toArray();
+        String[] stringNumberArray = scanner.next().split(COMMA_DELIMITER);
+
+        return convertStringArrayToIntArray(stringNumberArray);
     }
 
     public int askBonusBallNumber() {
@@ -47,5 +47,36 @@ public class InputView {
         scanner.close();
     }
 
+
+    public int askHowManyManualTicketing() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public int[][] askManualTicketNumbers(TicketCount manualTicketCnt) {
+
+        int[][] input = new int[manualTicketCnt.value()][];
+
+        if (input.length == 0) {
+            return input;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        for (int i = 0; i < input.length; i++) {
+            String[] stringNumberArray = scanner.next().split(COMMA_DELIMITER);
+            input[i] = convertStringArrayToIntArray(stringNumberArray);
+        }
+
+        return input;
+    }
+
+    private int[] convertStringArrayToIntArray(String[] stringArray) {
+
+        return Arrays.stream(stringArray)
+            .map(String::trim)
+            .mapToInt(Integer::parseInt)
+            .toArray();
+    }
 
 }

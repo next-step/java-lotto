@@ -15,7 +15,7 @@ class WinnerNumberInfoTest {
         int[] winnerNumbers = {1, 2, 3, 4, 5, 6};
         int bonusNumber = 7;
 
-        assertThatCode(() -> new WinnerNumberInfo(winnerNumbers, bonusNumber))
+        assertThatCode(() -> new WinnerLottoInfo(winnerNumbers, bonusNumber))
             .doesNotThrowAnyException();
     }
 
@@ -26,7 +26,7 @@ class WinnerNumberInfoTest {
         int[] winnerNumbers = {1, 2, 3, 4, 5, 6};
         int bonusNumber = 6;
 
-        assertThatThrownBy(() -> new WinnerNumberInfo(winnerNumbers, bonusNumber))
+        assertThatThrownBy(() -> new WinnerLottoInfo(winnerNumbers, bonusNumber))
             .isInstanceOf(WrongLottoNumberException.class);
     }
 

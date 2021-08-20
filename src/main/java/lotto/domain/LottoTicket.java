@@ -20,6 +20,17 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket generateByIntegerArray(int... integerArray) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new LottoTicket(lottoNumbers);
+    }
+
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {
         checkNumberSize(lottoNumbers);
         checkDuplicateNumber(lottoNumbers);
@@ -47,16 +58,17 @@ public class LottoTicket {
         }
     }
 
+    public int checkHowManyMatchedNumbers(LottoTicket anotherTicket) {
+        List<LottoNumber> matchedNumbers = lottoNumbers.stream()
+            .filter(anotherTicket.value()::contains)
+            .collect(Collectors.toList());
 
-    public static LottoTicket generateByLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
+        return matchedNumbers.size();
     }
 
-    public static LottoTicket generateByIntegerArray(int... integerArray) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(integerArray)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
+    public boolean checkBonusNumberMatch(LottoNumber bonusBallNumber) {
+
+        return lottoNumbers.contains(bonusBallNumber);
     }
 
     public List<LottoNumber> value() {

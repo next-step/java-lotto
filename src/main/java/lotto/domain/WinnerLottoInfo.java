@@ -2,12 +2,12 @@ package lotto.domain;
 
 import lotto.exception.WrongLottoNumberException;
 
-public class WinnerNumberInfo {
+public class WinnerLottoInfo {
 
     private final LottoTicket winnerTicket;
     private final LottoNumber bonusBallNumber;
 
-    public WinnerNumberInfo(int[] winnerNumbers, int bonusBallNumber) {
+    public WinnerLottoInfo(int[] winnerNumbers, int bonusBallNumber) {
         this.winnerTicket = LottoTicket.generateByIntegerArray(winnerNumbers);
         this.bonusBallNumber = generateBonusBallNumber(bonusBallNumber);
     }

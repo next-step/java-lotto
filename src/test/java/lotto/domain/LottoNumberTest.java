@@ -19,7 +19,7 @@ class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,0,46})
+    @ValueSource(ints = {-1, 0, 46})
     @DisplayName("유효한 범위 밖의 숫자로 로또번호 생성을 시도할경우, 예외를 던진다.")
     void validate_lotto_number_ng(int testIntValue) {
         assertThatThrownBy(() -> new LottoNumber(testIntValue))
