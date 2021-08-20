@@ -13,7 +13,7 @@ public class Winning {
     }
 
     public Rank match(Lottery lottery) {
-        int countOfMatch = winnerNumber.count();
+        int countOfMatch = lottery.match(winnerNumber);
         boolean isContainBonusBall = lottery.contains(bonusNumber);
 
         return Rank.getRankBy(countOfMatch, isContainBonusBall);

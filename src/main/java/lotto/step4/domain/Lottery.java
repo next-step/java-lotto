@@ -21,10 +21,10 @@ public class Lottery {
         this.lottery = lottery;
     }
 
-    public int count() {
+    public int match(Lottery winnerNumber) {
         int countOfMatch = 0;
-        for (LottoNumber number : lottery) {
-            countOfMatch += containLottoNumber(number);
+        for (LottoNumber winningNumber : winnerNumber.lottery) {
+            countOfMatch += containLottoNumber(winningNumber);
         }
         return countOfMatch;
     }
@@ -44,4 +44,6 @@ public class Lottery {
     public String toString() {
         return lottery.toString();
     }
+
+
 }
