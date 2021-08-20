@@ -7,6 +7,6 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         String text = sc.nextLine();
         Calculator calculator = new Calculator(text);
-        System.out.println(calculator.calculate());
+        calculator.calculate();
     }
 }

@@ -1,6 +1,7 @@
 package lotto.step1;
 
 public class Calculator {
+
     private String text;
     private Validation validation;
     private Delimiter delimiter;
@@ -30,7 +31,6 @@ public class Calculator {
             throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
         }
     }
-    
     public int printNumber() {
         return Integer.valueOf(text);
     }
