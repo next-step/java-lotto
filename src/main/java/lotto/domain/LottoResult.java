@@ -1,17 +1,18 @@
-package lotto.domain.dto;
+package lotto.domain;
 
-import lotto.domain.Award;
+import lotto.domain.dto.LottoWinnersDto;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LottoDrawResult {
-    private Map<Award, Long> lottoDrawResult;
+public class LottoResult {
+    private Map<Award, Long> lottoResult;
 
-    public LottoDrawResult(Map<Award, Long> lottoDrawResult) {
-        this.lottoDrawResult = lottoDrawResult;
+    public LottoResult(Map<Award, Long> lottoResult) {
+        this.lottoResult = lottoResult;
     }
 
     public List<LottoWinnersDto> createLottoWinnerDtos() {
@@ -23,7 +24,7 @@ public class LottoDrawResult {
     }
 
     private Map<Award, Long> formatResult() {
-        Map<Award, Long> result = new HashMap(this.lottoDrawResult);
+        Map<Award, Long> result = new HashMap(this.lottoResult);
         for (Award award : Award.values()) {
             result.putIfAbsent(award, 0L);
         }
@@ -34,18 +35,18 @@ public class LottoDrawResult {
         return !award.equals(Award.BANG);
     }
 
-    public double calculateYield(int lottoPurchaseAmount) {
+    public Yield calculateYield(int lottoPurchaseAmount) {
         double earnings = createLottoWinnerDtos().stream()
                 .mapToDouble(lottoWinnerDto -> getYield(lottoWinnerDto.getAmount(), lottoWinnerDto.getCountWinners()))
                 .sum();
-        return earnings / lottoPurchaseAmount;
+        return new Yield(earnings / lottoPurchaseAmount);
     }
 
     private double getYield(int amount, long countWinners) {
         return amount * countWinners;
     }
 
-    public Map<Award, Long> getLottoDrawResult() {
-        return lottoDrawResult;
+    public Map<Award, Long> getLottoResult() {
+        return Collections.unmodifiableMap(lottoResult);
     }
 }

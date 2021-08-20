@@ -53,7 +53,7 @@ class WinnerLottoTest {
         Set<LottoNumber> winnerNumbers = parseStringNumbersToList(winnerNumberString);
         Lotto winlotto = new Lotto(winnerNumbers);
         WinnerLotto winnerLotto = new WinnerLotto(winlotto, new LottoNumber(bonus));
-        Award award = winnerLotto.drawLotto(lotto.getNumbers());
+        Award award = winnerLotto.drawLotto(lotto);
         assertEquals(award, Award.valueOf(type));
     }
 
