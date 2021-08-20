@@ -12,14 +12,12 @@ public class LottoController {
         int lottoPurchasePrice = InputView.inputPurchasePrice();
         LottosCreator lottosCreator = new LottosCreator(lottoPurchasePrice);
         Lottos lottos = lottosCreator.createLottos(new RandomNumbersCreator());
-        ResultView.printBuyLotto(lottos.value());
+        ResultView.printBuyLotto(lottos.values());
 
-        Lotto winningLotto = new Lotto(InputView.inputWinningNumber());
-        int bonusBallNumber = InputView.inputBonusBallNumber();
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningNumber()), InputView.inputBonusBallNumber());
 
-        Map<Rank, Integer> lottoRankResultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto, bonusBallNumber);
+        Map<Rank, Integer> lottoRankResultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto);
 
-        ResultView.printResultTitle();
         ResultView.printRankCount(lottoRankResultMap);
         ResultView.printProfit(LottoMatcher.calculateTotalRewardsRatio(lottoPurchasePrice, lottoRankResultMap));
     }

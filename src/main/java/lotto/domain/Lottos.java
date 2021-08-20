@@ -17,7 +17,7 @@ public class Lottos {
 
 
 
-    public List<Lotto> value() {
+    public List<Lotto> values() {
         return lottos;
     }
 }

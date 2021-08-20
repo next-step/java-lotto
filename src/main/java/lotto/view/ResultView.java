@@ -25,6 +25,7 @@ public class ResultView {
     }
 
     public static void printRankCount(Map<Rank, Integer> lottoResult) {
+        ResultView.printResultTitle();
         lottoResult.entrySet().stream()
                 .forEach(result -> System.out.println(String.format("%d개 일치%s(%d원)- %d개",
                         result.getKey().getMatch(),

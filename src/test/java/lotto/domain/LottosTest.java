@@ -27,7 +27,7 @@ class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(7, 8, 9, 20, 23, 35))));
-        assertThat(lottos.value()).contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lottos.value()).contains(new Lotto(Arrays.asList(7, 8, 9, 20, 23, 35)));
+        assertThat(lottos.values()).contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos.values()).contains(new Lotto(Arrays.asList(7, 8, 9, 20, 23, 35)));
     }
 }

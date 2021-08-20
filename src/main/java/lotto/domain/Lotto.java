@@ -25,8 +25,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(int bonusBallNumber) {
-        return this.lottoNumbers.contains(bonusBallNumber);
+    public boolean contains(int lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public List<Integer> values() {
