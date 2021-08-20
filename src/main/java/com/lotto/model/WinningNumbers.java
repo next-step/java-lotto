@@ -8,7 +8,7 @@ public class WinningNumbers {
     private final Set<Integer> numbers;
 
     private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 46;
+    private static final int MAXIMUM_NUMBER = 45;
 
     public WinningNumbers(Set<Integer> numbers) {
         if (numbers.size() != NUMBER_OF_WINNING_NUMBERS) {
