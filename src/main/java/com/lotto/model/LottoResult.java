@@ -23,6 +23,15 @@ public class LottoResult {
         });
     }
 
+    public float calculateBenefit(int money) {
+        int allRewardValue = correctCountMap.entrySet()
+                .stream()
+                .mapToInt((entry) -> RewardType.getRewardValue(entry.getKey()) * entry.getValue())
+                .sum();
+
+        return allRewardValue / (money * 1.f);
+    }
+
     public Stream<Map.Entry<Integer, Integer>> streamCorrectCountMap() {
         return correctCountMap.entrySet().stream();
     }

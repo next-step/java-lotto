@@ -36,10 +36,6 @@ public class Game {
     }
 
     public static float calculateBenefit(int money, LottoResult result) {
-        int allRewardValue = result.streamCorrectCountMap()
-                .mapToInt((entry) -> RewardType.getRewardValue(entry.getKey()) * entry.getValue())
-                .sum();
-
-        return allRewardValue / (money * 1.f);
+        return result.calculateBenefit(money);
     }
 }
