@@ -43,10 +43,13 @@ public class Customer {
 
     public void getMatchedNumber(List<Integer> issuedLotto, List<Integer> winningLottoNumberList, int bonusNumber) {
         boolean isMatched = false;
-        isMatched = issuedLotto.contains(bonusNumber);
 
-        issuedLotto.retainAll(winningLottoNumberList);
-        int matchedNumber = issuedLotto.size();
+        winningLottoNumberList.retainAll(issuedLotto);
+        int matchedNumber = winningLottoNumberList.size();
+
+        if (matchedNumber == Rank.SECOND.getCountOfMatch()) {
+            isMatched = issuedLotto.contains(bonusNumber);
+        }
 
         Rank rank = Rank.valueOf(matchedNumber, isMatched);
         resultRankMap.put(rank,resultRankMap.get(rank)+1);
