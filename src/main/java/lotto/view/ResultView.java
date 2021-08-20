@@ -26,10 +26,18 @@ public class ResultView {
 
     public static void printRankCount(Map<Rank, Integer> lottoResult) {
         lottoResult.entrySet().stream()
-                .forEach(result -> System.out.println(String.format("%d개 일치 (%d원)- %d개",
+                .forEach(result -> System.out.println(String.format("%d개 일치%s(%d원)- %d개",
                         result.getKey().getMatch(),
+                        printSecondRankResult(result.getKey()),
                         result.getKey().getRewards(),
                         result.getValue())));
+    }
+
+    public static String printSecondRankResult(Rank rank) {
+        if (Rank.SECOND.equals(rank)) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 
     public static void printProfit(BigDecimal totalRewards) {

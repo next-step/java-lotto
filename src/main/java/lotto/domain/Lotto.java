@@ -25,6 +25,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean contains(int bonusBallNumber) {
+        return this.lottoNumbers.contains(bonusBallNumber);
+    }
+
     public List<Integer> values() {
         return lottoNumbers;
     }
@@ -41,4 +45,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
 }

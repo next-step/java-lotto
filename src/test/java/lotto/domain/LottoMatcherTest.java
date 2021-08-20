@@ -14,21 +14,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMatcherTest {
     Lotto winningLotto;
     Lottos lottos;
+    int bonusNumber;
 
     @BeforeEach
     void setUp() {
+        bonusNumber = 7;
         winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)),
-                new Lotto(Arrays.asList(13, 14, 16, 17, 15, 18))));
+                new Lotto(Arrays.asList(13, 14, 16, 17, 15, 18)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))));
     }
 
     @DisplayName("로또들의 랭크별 결과")
     @Test
     void matchWithWinningLottoNumbers() {
-        Map<Rank, Integer> resultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto);
+        Map<Rank, Integer> resultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto, bonusNumber);
         assertThat(resultMap.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(resultMap.get(Rank.SECOND)).isEqualTo(0);
+        assertThat(resultMap.get(Rank.SECOND)).isEqualTo(1);
         assertThat(resultMap.get(Rank.THIRD)).isEqualTo(0);
         assertThat(resultMap.get(Rank.FOURTH)).isEqualTo(0);
     }
@@ -36,7 +39,7 @@ class LottoMatcherTest {
     @DisplayName("로또들의 전체 값")
     @Test
     void calculateTotalRewardsRatio() {
-        Map<Rank, Integer> resultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto);
+        Map<Rank, Integer> resultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto, bonusNumber);
         assertThat(LottoMatcher.calculateTotalRewardsRatio(3000, resultMap))
                 .isEqualTo(BigDecimal.valueOf(Rank.FIRST.getRewards())
                         .multiply(BigDecimal.valueOf(1))
