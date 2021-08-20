@@ -16,10 +16,6 @@ public class WinningIdentifier {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningIdentifier(LottoTicket winningTicket) {
-        this(winningTicket, null);
-    }
-
     public Rank checkWinning(LottoTicket lottoTicket) {
         return Rank.of(lottoTicket.compareTicket(winningTicket), lottoTicket.contains(bonusNumber));
     }
