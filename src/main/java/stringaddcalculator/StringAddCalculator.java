@@ -29,20 +29,24 @@ public class StringAddCalculator {
     private static int sum(String[] splitExpression) {
         return Arrays.stream(splitExpression)
                 .mapToInt(StringAddCalculator::toInt)
-                .reduce(0, (total, number) -> total + number)
+                .sum()
                 ;
     }
 
     private static int toInt(String str) {
+        int number = transformToNumber(str);
+
+        if (number < 0) {
+            throw new IllegalArgumentException("0 또는 자연수만 입력하세요.");
+        }
+        return number;
+    }
+
+    private static int transformToNumber(String str) {
         try {
-            int result = Integer.parseInt(str);
-            if (result < 0) {
-                throw new IllegalArgumentException("0 또는 자연수만 입력하세요.");
-            }
-            return result;
+            return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("0 또는 자연수만 입력하세요.");
         }
     }
-
 }
