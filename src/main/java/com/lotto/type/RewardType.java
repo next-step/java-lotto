@@ -3,8 +3,10 @@ package com.lotto.type;
 public enum RewardType {
     THREE(3, 5000), FOUR(4, 50000), FIVE(5, 150000), SIX(6, 2000000000);
 
+    private static final int ZERO = 0;
     private int numberOfCorrect;
     private int price;
+
 
     RewardType(int numberOfCorrect, int price) {
         this.numberOfCorrect = numberOfCorrect;
@@ -22,6 +24,6 @@ public enum RewardType {
             }
         }
 
-        return 0;
+        return ZERO;
     }
 }
