@@ -21,7 +21,7 @@ public class LottoController {
         Winning winning = new Winning(lottery, bonusBall);
         LottoStatistics lottoStatistics = lotteries.compareLottoWith(winning);
         ResultView.printLottoStatistics(lottoStatistics);
-        double earningRate = lottoStatistics.calculateLottoStatistics(money);
+        double earningRate = lottoStatistics.calculateLottoStatistics();
         ResultView.printEarningRate(earningRate);
 
 

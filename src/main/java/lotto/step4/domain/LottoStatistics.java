@@ -17,8 +17,13 @@ public class LottoStatistics {
         return statics.stream().mapToLong(it -> it.getWinningMoney()).sum();
     }
 
-    public double calculateLottoStatistics(int money) {
-        double earningRate = reward() / (double) money;
+    public double calculateLottoStatistics() {
+        double earningRate = (double) (reward()) / ((double) (countWinningLotteries()) * Money.LOTTO_PRICE);
         return Math.floor(earningRate * 100) / 100.0;
     }
+
+    public int countWinningLotteries(){
+        return statics.size();
+    }
+
 }
