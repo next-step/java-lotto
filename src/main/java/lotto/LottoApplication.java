@@ -5,7 +5,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,7 +22,7 @@ public class LottoApplication {
         Lottos lottos = lottoMachine.generateLottos(money, new AutoNumberGenerator());
 
         ResultView resultView = new ResultView();
-        resultView.printLotties(lottos);
+        resultView.printLottos(lottos);
 
         String[] split = split(inputView.getWinningNumber());
         List<Integer> winningNumbers = Stream.of(split).map(Integer::valueOf).collect(Collectors.toList());

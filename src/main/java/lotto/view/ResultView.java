@@ -10,8 +10,6 @@ import java.util.Map;
 public class ResultView {
     private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String WINNING_STATISTICS = "\n당첨 통계";
-    private static final String WINNING_PRICE = "%d개 일치 (%d원)- ";
-    private static final String WINNING_COUNT = "%d개";
     private static final String LINE = "-------";
 
     private static final String MATCH_COUNT_3 = "3개 일치 (5000원)- %d개\n";
@@ -20,7 +18,7 @@ public class ResultView {
     private static final String MATCH_COUNT_5_BONUS = "5개 일치, 보너스 볼 일치(30000000원)- %d개\n";
     private static final String MATCH_COUNT_6 = "6개 일치 (2000000000원)- %d개\n";
 
-    public void printLotties(Lottos lottos) {
+    public void printLottos(Lottos lottos) {
         System.out.printf(PURCHASE_MESSAGE, lottos.size());
         for (Lotto lotto : lottos.getLottos()) {
             lotto.getLottoNumbers().forEach(lottoNumber -> System.out.print(lottoNumber.getNumber() + ", "));
