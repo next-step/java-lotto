@@ -30,7 +30,7 @@ public class LottoController {
         WinningNumbers winningNumbers = Game.makeWinningNumbers(numbers);
 
         LottoResult result = Game.check(winningNumbers, lottos);
-        float benefit = Game.calculateBenefit(money, result);
+        float benefit = result.calculateBenefit(money);
         LottoDrawer.drawResult(result, benefit);
     }
 }

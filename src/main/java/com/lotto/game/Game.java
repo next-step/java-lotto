@@ -34,8 +34,4 @@ public class Game {
     public static LottoResult check(WinningNumbers winningNumbers, Lottos lottos) {
         return new LottoResult(winningNumbers, lottos);
     }
-
-    public static float calculateBenefit(int money, LottoResult result) {
-        return result.calculateBenefit(money);
-    }
 }
