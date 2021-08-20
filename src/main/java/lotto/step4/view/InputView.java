@@ -46,7 +46,7 @@ public class InputView {
 
     public static LottoNumber inputBonusBall() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return new LottoNumber(sc.nextInt());
+        return  LottoNumber.of(sc.nextInt());
     }
 
 }

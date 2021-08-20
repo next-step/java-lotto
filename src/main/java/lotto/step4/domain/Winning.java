@@ -1,8 +1,8 @@
 package lotto.step4.domain;
 
 public class Winning {
-    private Lottery winnerNumber;
-    private LottoNumber bonusNumber;
+    private final Lottery winnerNumber;
+    private final LottoNumber bonusNumber;
 
     public Winning(Lottery winnerNumber, LottoNumber bonusNumber) {
         if (winnerNumber.contains(bonusNumber)) {

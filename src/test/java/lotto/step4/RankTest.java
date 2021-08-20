@@ -18,19 +18,19 @@ public class RankTest {
     @BeforeEach
     void init() {
         Lottery lottery = LottoCreator.convertToLotto("1,2,3,4,5,6");
-        winning = new Winning(lottery, new LottoNumber(7));
+        winning = new Winning(lottery, LottoNumber.of(7));
     } // 당첨 번호 1,2,3,4,5,6 / 보너스 볼 7
 
     @Test
     @DisplayName("6개가 일치하면 1등")
     void isRankFirst() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         assertThat(match).isEqualTo(Rank.FIRST);
@@ -40,12 +40,12 @@ public class RankTest {
     @DisplayName("보너스 볼 1개와 당첨 번호 5개가 일치하면 2등")
     void isRankSecond() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(7));
+                 LottoNumber.of(1),
+                 LottoNumber.of(2),
+                 LottoNumber.of(3),
+                 LottoNumber.of(4),
+                 LottoNumber.of(5),
+                 LottoNumber.of(7));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         assertThat(match).isEqualTo(Rank.SECOND);
@@ -55,12 +55,12 @@ public class RankTest {
     @DisplayName("당첨 번호 5개가 일치하면 3등")
     void isRankThird() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(17));
+                 LottoNumber.of(1),
+                 LottoNumber.of(2),
+                 LottoNumber.of(3),
+                 LottoNumber.of(4),
+                 LottoNumber.of(5),
+                 LottoNumber.of(17));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         Assertions.assertThat(match).isEqualTo(Rank.THIRD);
@@ -70,26 +70,27 @@ public class RankTest {
     @DisplayName("당첨 번호 4개가 일치하면 4등")
     void isRankFourth() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(15),
-                new LottoNumber(17));
+                 LottoNumber.of(1),
+                 LottoNumber.of(2),
+                 LottoNumber.of(3),
+                 LottoNumber.of(4),
+                 LottoNumber.of(15),
+                 LottoNumber.of(17));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         Assertions.assertThat(match).isEqualTo(Rank.FOURTH);
     }
+
     @Test
     @DisplayName("당첨 번호 3개가 일치하면 5등")
     void isRankFifth() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(17));
+                 LottoNumber.of(1),
+                 LottoNumber.of(2),
+                 LottoNumber.of(3),
+                 LottoNumber.of(14),
+                 LottoNumber.of(15),
+                 LottoNumber.of(17));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         Assertions.assertThat(match).isEqualTo(Rank.FIFTH);
@@ -99,12 +100,12 @@ public class RankTest {
     @DisplayName("당첨 번호 2개가 일치하면 꽝")
     void isRankNone() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(21),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(17));
+                 LottoNumber.of(21),
+                 LottoNumber.of(2),
+                 LottoNumber.of(3),
+                 LottoNumber.of(14),
+                 LottoNumber.of(15),
+                 LottoNumber.of(17));
         Lottery lottery = new Lottery(lottoNumbers);
         Rank match = winning.match(lottery);
         Assertions.assertThat(match).isEqualTo(Rank.NONE);

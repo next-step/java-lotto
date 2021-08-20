@@ -12,7 +12,7 @@ public class LottoCreator {
 
     static {
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            LOTTO_CREATOR.add(new LottoNumber(i));
+            LOTTO_CREATOR.add(LottoNumber.of(i));
         }
     }
 
@@ -31,7 +31,7 @@ public class LottoCreator {
         Set<LottoNumber> lotto = new HashSet<>();
         for (String number : numbers) {
             String trim = number.trim();
-            lotto.add(new LottoNumber(Integer.valueOf(trim)));
+            lotto.add(LottoNumber.of(trim));
         }
         return new Lottery(lotto);
     }
