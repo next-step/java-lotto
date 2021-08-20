@@ -27,5 +27,4 @@ class WinnerLottoTest {
 
         assertThat(winner.match(lotto)).isEqualTo(Winning.SECOND);
     }
-
 }
