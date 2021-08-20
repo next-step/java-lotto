@@ -18,7 +18,7 @@ public class LottoCountTest {
     @DisplayName("구입 금액보다 많은 로또 수를 입력 했을 때 예외가 발생한다.")
     void createAutoCount() {
         LottoCount lottoCount = new LottoCount(5);
-        assertThatThrownBy(()->lottoCount.createAutoCount(3000)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lottoCount.createAutoCount(3000)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -92,6 +92,7 @@ class LottoStatisticsTest {
         LottoStatistics lottoStatistics = lotteries1.compareLottoWith(winning);
         assertThat(lottoStatistics.calculateLottoStatistics()).isEqualTo(0.83);
     }
+
     @Test
     @DisplayName("수익률 계산")
     void calculateRate2() {
@@ -100,7 +101,7 @@ class LottoStatisticsTest {
                 new Lottery(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(21), LottoNumber.of(12))),
                 new Lottery(Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12))),
                 new Lottery(Arrays.asList(LottoNumber.of(27), LottoNumber.of(28), LottoNumber.of(19), LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12)))
-                );
+        );
 
         Lotteries lotteries1 = new Lotteries(lotteries);
         LottoStatistics lottoStatistics = lotteries1.compareLottoWith(winning);

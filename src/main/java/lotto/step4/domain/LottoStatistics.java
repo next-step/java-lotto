@@ -9,6 +9,7 @@ public class LottoStatistics {
     public LottoStatistics(List<Rank> statics) {
         this.statics = statics;
     }
+
     public long count(Rank rank) {
         return statics.stream().filter(it -> it == rank).count();
     }
@@ -22,7 +23,7 @@ public class LottoStatistics {
         return Math.floor(earningRate * 100) / 100.0;
     }
 
-    public int countWinningLotteries(){
+    public int countWinningLotteries() {
         return statics.size();
     }
 

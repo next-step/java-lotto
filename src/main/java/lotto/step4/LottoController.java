@@ -14,7 +14,7 @@ public class LottoController {
         int autoCount = lottoShop.receiveMoney(money);
         List<Lottery> manualLotteries = InputView.inputManualLottoNumbers(manualLottoCount);
         Lotteries lotteries = new Lotteries(autoCount, manualLotteries);
-        ResultView.printLottoInfo(manualLottoCount,autoCount);
+        ResultView.printLottoInfo(manualLottoCount, autoCount);
         ResultView.printLottoNumbers(lotteries);
         Lottery lottery = InputView.inputLastWinningNumbers();
         LottoNumber bonusBall = InputView.inputBonusBall();
