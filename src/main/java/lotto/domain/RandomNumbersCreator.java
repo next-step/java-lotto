@@ -8,17 +8,16 @@ import java.util.stream.IntStream;
 
 public class RandomNumbersCreator implements LottoNumbersCreator {
 
-    private static final int MAX_NUMBER = 45;
-    private static final int MIN_NUMBER = 1;
     private static final int COUNT = 6;
-    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+    private static final List<LottoNumber> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
     @Override
-    public List<Integer> createNumbers() {
+    public List<LottoNumber> createNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> result = new ArrayList<>(numbers.subList(0, COUNT));
+        List<LottoNumber> result = new ArrayList<>(numbers.subList(0, COUNT));
         Collections.sort(result);
         return result;
     }

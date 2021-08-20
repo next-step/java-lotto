@@ -14,16 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoMatcherTest {
     WinningLotto winningLotto;
     Lottos lottos;
-    int bonusNumber;
+    LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
-        bonusNumber = 7;
-        winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
-        lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)),
-                new Lotto(Arrays.asList(13, 14, 16, 17, 15, 18)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))));
+        bonusNumber = new LottoNumber(7);
+        winningLotto = new WinningLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), bonusNumber);
+        lottos = new Lottos(Arrays.asList(
+                Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Lotto.of(Arrays.asList(7, 8, 9, 10, 11, 12)),
+                Lotto.of(Arrays.asList(13, 14, 16, 17, 15, 18)),
+                Lotto.of((Arrays.asList(1, 2, 3, 4, 5, 7)))));
     }
 
     @DisplayName("로또들의 랭크별 결과")

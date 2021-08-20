@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,11 +27,4 @@ class LottosCreatorTest {
                 .isInstanceOf(InputError.class);
     }
 
-    @DisplayName("로또 생성 방법 테스트")
-    @Test
-    void create() {
-        assertThat(new LottosCreator(1000)
-                .createLottos(() -> Arrays.asList(1, 2, 3, 4, 5, 6)).values())
-                .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-    }
 }

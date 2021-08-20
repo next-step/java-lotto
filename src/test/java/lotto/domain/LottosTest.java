@@ -25,9 +25,9 @@ class LottosTest {
     @Test
     void create() {
         Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(7, 8, 9, 20, 23, 35))));
-        assertThat(lottos.values()).contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lottos.values()).contains(new Lotto(Arrays.asList(7, 8, 9, 20, 23, 35)));
+                Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Lotto.of(Arrays.asList(7, 8, 9, 20, 23, 35))));
+        assertThat(lottos.values()).contains(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos.values()).contains(Lotto.of(Arrays.asList(7, 8, 9, 20, 23, 35)));
     }
 }
