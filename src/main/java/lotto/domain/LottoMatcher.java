@@ -15,7 +15,7 @@ public class LottoMatcher {
                 .collect(Collectors.toMap(rank -> rank, rank -> 0, (a, b) -> a, LinkedHashMap::new));
         for (Lotto lotto : lottos.value()) {
             int matchCount = lotto.countSameNumber(winningLotto);
-            rankMap.computeIfPresent(Rank.findRank(matchCount), (rank, count) -> count + 1);
+            rankMap.computeIfPresent(Rank.findRank(matchCount, false), (rank, count) -> count + 1);
         }
 
         return rankMap;
