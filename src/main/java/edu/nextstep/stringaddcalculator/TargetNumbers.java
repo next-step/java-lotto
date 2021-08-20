@@ -1,4 +1,4 @@
-package stringaddcalculator;
+package edu.nextstep.stringaddcalculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,13 @@ public class TargetNumbers {
     }
 
     public static TargetNumbers from(String[] splitTargetNumbersArr) {
-        List<Integer> targetNumberList = new ArrayList<>();
+        List<Integer> targetNumbers = new ArrayList<>();
         for (String targetNumberString : splitTargetNumbersArr) {
             int targetNumber = Integer.parseInt(targetNumberString);
             validateLessThanZero(targetNumber);
-            targetNumberList.add(targetNumber);
+            targetNumbers.add(targetNumber);
         }
-        return new TargetNumbers(targetNumberList);
+        return new TargetNumbers(targetNumbers);
     }
 
     private static void validateLessThanZero(int targetNumber) {
