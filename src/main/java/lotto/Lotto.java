@@ -13,16 +13,16 @@ public class Lotto {
     private static final int END_INDEX = 6;
     private static final List<Integer> availableNumbers = Number.rangeNumber(MIN_NUMBER, MAX_NUMBER);
 
-    private List<Integer> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
         Collections.shuffle(availableNumbers);
-        lottoNumbers = new ArrayList<>(availableNumbers.subList(START_INDEX, END_INDEX));
-        Collections.sort(lottoNumbers);
+        lottoNumbers = new LottoNumbers(new ArrayList<>(availableNumbers.subList(START_INDEX, END_INDEX)));
+        lottoNumbers.sort();
     }
 
     public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
     public int findMatchedNumberCount(List<Integer> prevWinningLottoNumbers) {
