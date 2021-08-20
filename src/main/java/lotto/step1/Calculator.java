@@ -34,7 +34,7 @@ public class Calculator {
     public int printNumber() {
         return Integer.valueOf(text);
     }
-    
+
     public int addNumbers(String numbers[]) {
         int sum = 0;
         for (String number : numbers) {
