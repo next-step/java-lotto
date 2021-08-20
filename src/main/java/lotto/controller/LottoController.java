@@ -15,6 +15,8 @@ public class LottoController {
         ResultView.printBuyLotto(lottos.value());
 
         Lotto winningLotto = new Lotto(InputView.inputWinningNumber());
+        int bonusBallNumber = InputView.inputBonusBallNumber();
+
         Map<Rank, Integer> lottoRankResultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto);
 
         ResultView.printResultTitle();
