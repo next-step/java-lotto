@@ -21,6 +21,7 @@ public class PurchaseQuantity {
             throw new IllegalArgumentException(String.format(NEGATIVE_QUANTITY_EXCEPTION_MESSAGE_FORMAT, quantity));
         }
     }
+
     public static PurchaseQuantity of(long quantity) {
         return new PurchaseQuantity(quantity);
     }
@@ -51,5 +52,10 @@ public class PurchaseQuantity {
     @Override
     public int hashCode() {
         return (int) (quantity ^ (quantity >>> 32));
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(quantity);
     }
 }

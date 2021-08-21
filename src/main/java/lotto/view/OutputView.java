@@ -9,7 +9,7 @@ public class OutputView {
 
     private static final String INPUT_PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다. %n";
+    private static final String PURCHASE_QUANTITY_MESSAGE_FORMAT = "수동으로 %s장, 자동으로 %s개를 구매했습니다. %n";
     private static final String DEFAULT_MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치 (%s원)- %d개 %n";
     private static final String SECOND_RANK_MATCH_RESULT_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치(%s원)- %d개 %n";
     private static final String MATCHES_RESULT_MASSAGE = "당첨 통계\n------------------";
@@ -38,7 +38,7 @@ public class OutputView {
 
     public void printPurchaseQuantity(PurchaseQuantity manualPurchaseQuantity, PurchaseQuantity automaticPurchaseQuantity) {
         printStream.println();
-        printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, manualPurchaseQuantity.getQuantity(), automaticPurchaseQuantity.getQuantity());
+        printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, manualPurchaseQuantity, automaticPurchaseQuantity);
     }
 
     public void printLottoTicket(LottoTicket lottoTicket) {
