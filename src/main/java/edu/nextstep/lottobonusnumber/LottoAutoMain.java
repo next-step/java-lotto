@@ -1,9 +1,6 @@
 package edu.nextstep.lottobonusnumber;
 
-import edu.nextstep.lottobonusnumber.domain.Ticket;
-import edu.nextstep.lottobonusnumber.domain.TicketMachine;
-import edu.nextstep.lottobonusnumber.domain.TicketRepository;
-import edu.nextstep.lottobonusnumber.domain.WinningCheckMachine;
+import edu.nextstep.lottobonusnumber.domain.*;
 import edu.nextstep.lottobonusnumber.domain.ticketmaker.AutoNumbersMaker;
 import edu.nextstep.lottobonusnumber.domain.ticketmaker.NumbersMaker;
 import edu.nextstep.lottobonusnumber.exception.CustomException;
@@ -27,8 +24,12 @@ public class LottoAutoMain {
 
             String winningNumbersOfString = InputView.inputWinningNumbers();
 
+            int bonusNumber = InputView.inputBonusNumber();
+
+            WinningTicket winningTicket = WinningTicket.of(winningNumbersOfString, bonusNumber);
+
             WinningResultForm winningResult =
-                    WinningCheckMachine.confirmWinningResult(tickets, winningNumbersOfString);
+                    WinningCheckMachine.confirmWinningResult(tickets, winningTicket);
 
             ResultView.printWinningResult(winningResult);
         } catch (CustomException e) {
