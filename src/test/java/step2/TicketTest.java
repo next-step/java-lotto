@@ -32,7 +32,7 @@ public class TicketTest {
 
     @ParameterizedTest
     @MethodSource("lottoNumbersProvider")
-    @DisplayName("입력 숫자가 6개가 아닌경우 Exception이 발생한다.")
+    @DisplayName("입력 숫자가 6개가 아닌경우 Exception 발생한다.")
     void input_count_not_six_exception_test(List<Integer> lottoNumbers) {
         Ticket ticket = new Ticket();
 
@@ -47,5 +47,16 @@ public class TicketTest {
                 arguments(Arrays.asList(1,2,3,4,5,6,7)),
                 arguments(Arrays.asList(1,2,3,4,5))
         );
+    }
+
+    @Test
+    @DisplayName("입력된 숫자가 범위를 초과한 경우 Exception 발생한다.")
+    void input_count_not_six_exception_test() {
+        Ticket ticket = new Ticket();
+
+        assertThatThrownBy(() ->
+                ticket.saveLottoNumbers(Arrays.asList(0, 2, 3, 4, 5, 47))
+        ).isInstanceOf(IllegalArgumentException.class);
+
     }
 }
