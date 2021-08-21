@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,22 @@ public class WinningResults {
     private Ticket winningNumbers;
     private Map<Award, Integer> resultMap = new HashMap<>();
 
-    public void saveWinningLottoNumber(Ticket winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public void saveWinningLottoNumber(String winningNumbers) {
+        this.winningNumbers = initWinningNumber(winningNumbers);
+    }
+
+    private static Ticket initWinningNumber(String winningNumbers) {
+        Ticket winningNumberLastWeek = new Ticket();
+        List<Integer> ticket = new ArrayList<>();
+
+        String[] winningNumbersArray = winningNumbers.split(",");
+
+        for (String winningNumber : winningNumbersArray) {
+            ticket.add(Integer.parseInt(winningNumber.trim()));
+        }
+
+        winningNumberLastWeek.saveLottoNumbers(ticket);
+        return winningNumberLastWeek;
     }
 
     public Ticket getWinningLottoNumber() {
@@ -35,8 +50,7 @@ public class WinningResults {
         return Award.valueOf(purchasedTicket.getLottoNumbers()
                 .stream()
                 .filter(n -> checkWinningNumber(n))
-                .collect(Collectors.toList())
-                .size());
+                .count());
     }
 
     private boolean checkWinningNumber(int number) {
