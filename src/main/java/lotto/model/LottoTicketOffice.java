@@ -33,6 +33,6 @@ public class LottoTicketOffice {
         return lottoNumber.stream()
                 .limit(LottoTicket.SIZE)
                 .sorted()
-                .collect(collectingAndThen(toList(), LottoTicket::new));
+                .collect(collectingAndThen(toList(), LottoTicket::of));
     }
 }

@@ -12,11 +12,11 @@ public class LottoTicket {
 
     private final Set<LottoNumber> numbers;
 
-    public LottoTicket(Set<LottoNumber> numbers) {
+    private LottoTicket(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public LottoTicket(List<Integer> numbers) {
+    private LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
