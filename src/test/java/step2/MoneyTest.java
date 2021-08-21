@@ -3,7 +3,10 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
@@ -18,4 +21,15 @@ public class MoneyTest {
 
         assertThat(totalLottoTicketCount).isEqualTo(purchaseAmount/1000);
     }
+
+    @Test
+    @DisplayName("구입금액이 0 이하인 경우 exception 발생")
+    void money_zero_exception_test() {
+        int purchaseAmount = 0;
+
+        assertThatThrownBy(() ->
+                new Money(purchaseAmount)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
