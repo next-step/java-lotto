@@ -10,9 +10,7 @@ import java.util.Map;
 
 public class WinningCheckMachine {
 
-    public static WinningResultForm confirmWinningResult(List<Ticket> tickets, String winningNumbersString) {
-        Ticket winningTicket = Ticket.madeBy(new CustomNumbersMaker(winningNumbersString));
-
+    public static WinningResultForm confirmWinningResult(List<Ticket> tickets, WinningTicket winningTicket) {
         Map<Prize, Integer> winningResult = makeWinningResult(winningTicket, tickets);
 
         double rateOfReturn = ((double) calculateTotalPrize(winningResult) / calculatePayment(tickets));
@@ -20,12 +18,13 @@ public class WinningCheckMachine {
         return new WinningResultForm(winningResult, rateOfReturn);
     }
 
-    private static Map<Prize, Integer> makeWinningResult(Ticket winningTicket, List<Ticket> tickets) {
+    private static Map<Prize, Integer> makeWinningResult(WinningTicket winningTicket, List<Ticket> tickets) {
         Map<Prize, Integer> winningResult = new LinkedHashMap<>();
 
         for (Ticket ticket : tickets) {
-            int countOfMatching = ticket.countMatchingNumbers(winningTicket);
-            Prize prize = Prize.of(countOfMatching);
+            int countOfMatching = ticket.countMatchingNumbers(winningTicket.getWinningTicket());
+            boolean hasBonusNumber = ticket.contains(winningTicket.getBonusNumber());
+            Prize prize = Prize.of(countOfMatching, hasBonusNumber);
             winningResult.put(prize, (winningResult.getOrDefault(prize,0)+1));
         }
 
