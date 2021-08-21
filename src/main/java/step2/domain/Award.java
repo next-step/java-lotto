@@ -26,11 +26,11 @@ public enum Award {
         return winningMoney;
     }
 
-    public static Award valueOf(int countOfMatch) {
+    public static Award valueOf(long countOfMatch) {
         return Arrays.stream(Award.values())
                 .filter(each -> each.getCountOfMatch() == countOfMatch)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 countOfMatch가 없습니다."))
+                .orElse(MISS)
                 ;
     }
 }
