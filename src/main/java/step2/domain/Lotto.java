@@ -2,13 +2,13 @@ package step2.domain;
 
 public class Lotto {
     private final LottoTickets lottoTickets;
-    private final LottoNumbersGenerator lottoNumbersGenerator;
+    private final AutoLottoNumbersGenerator lottoNumbersGenerator;
     private final Money money;
 
     public Lotto(int money) {
         this.money = new Money(money);
         this.lottoTickets = new LottoTickets();
-        this.lottoNumbersGenerator = new LottoNumbersGenerator();
+        this.lottoNumbersGenerator = new AutoLottoNumbersGenerator();
         makeLottoTickets();
     }
 
@@ -16,11 +16,11 @@ public class Lotto {
         return money.getTotalLottoTicketCount();
     }
 
-    public void makeLottoTickets() {
+    private void makeLottoTickets() {
         int makeCount = getTotalLottoTicketCount();
 
         for (int i = 0; i < makeCount; i++) {
-            lottoTickets.addLottoTicket(lottoNumbersGenerator.generateLottoTicket());
+            lottoTickets.addLottoTicket(lottoNumbersGenerator);
         }
     }
 

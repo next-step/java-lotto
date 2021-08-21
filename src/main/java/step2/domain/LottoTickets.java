@@ -7,8 +7,8 @@ public class LottoTickets {
 
     private List<Ticket> lottoTickets = new ArrayList<>();
 
-    public void addLottoTicket(Ticket lottoTicket) {
-        lottoTickets.add(lottoTicket);
+    public void addLottoTicket(LottoNumbersGenerator lottoNumbersGenerator) {
+        lottoTickets.add(lottoNumbersGenerator.generateLottoTicket());
     }
 
     public List<Ticket> getLottoTickets() {

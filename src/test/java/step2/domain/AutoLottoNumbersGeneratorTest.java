@@ -9,12 +9,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersGeneratorTest {
+public class AutoLottoNumbersGeneratorTest {
 
     @Test
     @DisplayName("로또 티켓을 생성한다.")
     void generate_lottoNumbers_test() {
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
+        LottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator();
 
         Ticket lottoTicket = lottoNumbersGenerator.generateLottoTicket();
 
@@ -25,7 +25,7 @@ public class LottoNumbersGeneratorTest {
     @Test
     @DisplayName("로또번호가 정렬됐는지 확인한다.")
     void lotto_number_sorting_test() {
-        LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
+        LottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator();
 
         List<Integer> lottoNumbers = lottoNumbersGenerator.generateLottoTicket().getLottoNumbers();
 
