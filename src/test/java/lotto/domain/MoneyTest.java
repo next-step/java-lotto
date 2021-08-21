@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoPurchaseAmountException;
+import lotto.exception.LottoPurchaseAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class MoneyTest {
     @DisplayName("Money 생성 예외 테스트")
     @ValueSource(ints = {-100, 0, 100})
     void createMoney(int money) {
-        assertThrows(InvalidLottoPurchaseAmountException.class, () -> new Money(money));
+        assertThrows(LottoPurchaseAmountException.class, () -> new Money(money));
     }
 
     @Test
