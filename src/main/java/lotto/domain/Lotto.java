@@ -9,8 +9,14 @@ import java.util.stream.Collectors;
 public class Lotto {
     public final List<LottoNumber> lottoNumbers;
 
-    public Lotto(NumberGenerator numberGenerator) {
-        this.lottoNumbers = numberGenerator.generateNumber();
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validLottoNumberSize(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+        duplicateValidation(lottoNumbers);
+    }
+
+    public static Lotto from(NumberGenerator numberGenerator) {
+        return new Lotto(numberGenerator.generateNumber());
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
