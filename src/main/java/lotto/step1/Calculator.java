@@ -17,11 +17,13 @@ public class Calculator {
     public int calculate() {
         if (validation.checkEmptyAndNull()) {
             return PRINT_NUMBER;
+
         }
 
         if (validation.checkOnlyNumber()) {
             return printNumber();
         }
+
 
         return addNumbers(delimiter.getNumbers());
     }
@@ -34,6 +36,7 @@ public class Calculator {
     public int printNumber() {
         return Integer.valueOf(text);
     }
+
   
     public int addNumbers(String numbers[]) {
         int sum = 0;
