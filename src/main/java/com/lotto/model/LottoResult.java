@@ -2,37 +2,39 @@ package com.lotto.model;
 
 import com.lotto.type.RewardType;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class LottoResult {
-    Map<Integer, Integer> correctCountMap = new HashMap<>();
+    Map<RewardType, Integer> correctCountMap = new HashMap<>();
 
     public LottoResult(WinningNumbers winningNumbers, Lottos lottos) {
-        Arrays.stream(RewardType.values()).forEach((rewardType -> correctCountMap.put(rewardType.getNumberOfCorrect(), 0)));
+        RewardType.streamExceptMiss().forEach((rewardType -> correctCountMap.put(rewardType, 0)));
 
         lottos.lottoStream().forEach((lotto) -> {
-            int correctCount = winningNumbers.checkCorrectCount(lotto);
+            int correctCount = lotto.countCorrectNumbers(winningNumbers.getNumbers());
+            boolean isContainBonusNumber = lotto.havingBonusNumber(winningNumbers.getBonusNumber());
 
-            if (correctCount < 3) {
+            RewardType rewardType = RewardType.getRewardType(correctCount, isContainBonusNumber);
+
+            if (RewardType.MISS.equals(rewardType)) {
                 return;
             }
-            correctCountMap.put(correctCount, correctCountMap.get(correctCount) + 1);
+
+            correctCountMap.put(rewardType, correctCountMap.get(rewardType) + 1);
         });
     }
 
     public float calculateBenefit(int money) {
         int allRewardValue = correctCountMap.entrySet()
                 .stream()
-                .mapToInt((entry) -> RewardType.getRewardValue(entry.getKey()) * entry.getValue())
+                .mapToInt((entry) -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
 
         return allRewardValue / (money * 1.f);
     }
 
-    public Stream<Map.Entry<Integer, Integer>> streamCorrectCountMap() {
-        return correctCountMap.entrySet().stream();
+    public int getCorrectCount(RewardType rewardType) {
+        return correctCountMap.getOrDefault(rewardType, 0);
     }
 }

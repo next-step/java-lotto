@@ -43,4 +43,8 @@ public enum RewardType {
 
         return RewardType.MISS;
     }
+
+    public static Stream<RewardType> streamExceptMiss() {
+        return Arrays.stream(RewardType.values()).filter(rewardType -> RewardType.MISS != rewardType);
+    }
 }
