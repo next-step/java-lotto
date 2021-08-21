@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class WinningResults {
 
     private Ticket winningNumbers;
-    private Map<Integer, Integer> resultMap = new HashMap<>();
+    private Map<Award, Integer> resultMap = new HashMap<>();
 
     public void saveWinningLottoNumber(Ticket winningNumbers) {
         this.winningNumbers = winningNumbers;
@@ -18,7 +18,7 @@ public class WinningResults {
         return this.winningNumbers;
     }
 
-    public Map<Integer, Integer> getWinningResult() {
+    public Map<Award, Integer> getWinningResult() {
         return resultMap;
     }
 
@@ -26,17 +26,17 @@ public class WinningResults {
         List<Ticket> purchasedTickets = lottoTickets.getLottoTickets();
 
         for (Ticket purchasedTicket : purchasedTickets) {
-                int countCorrectNumber = matchingWinningNumber(purchasedTicket);
-                resultMap.put(countCorrectNumber, resultMap.getOrDefault(countCorrectNumber, 0) + 1);
+                Award awardResult = matchingWinningNumber(purchasedTicket);
+                resultMap.put(awardResult, resultMap.getOrDefault(awardResult, 0) + 1);
         }
     }
 
-    private int matchingWinningNumber(Ticket purchasedTicket) {
-        return purchasedTicket.getLottoNumbers()
+    private Award matchingWinningNumber(Ticket purchasedTicket) {
+        return Award.valueOf(purchasedTicket.getLottoNumbers()
                 .stream()
                 .filter(n -> checkWinningNumber(n))
                 .collect(Collectors.toList())
-                .size();
+                .size());
     }
 
     private boolean checkWinningNumber(int number) {

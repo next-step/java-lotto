@@ -53,7 +53,7 @@ public class WinningResultsTest {
 
         winningResults.checkWinning(lottoTickets);
 
-        Map<Integer, Integer> winningResult = winningResults.getWinningResult();
+        Map<Award, Integer> winningResult = winningResults.getWinningResult();
         System.out.println(winningResults.getWinningLottoNumber().getLottoNumbers());
         System.out.println(winningResult);
     }
