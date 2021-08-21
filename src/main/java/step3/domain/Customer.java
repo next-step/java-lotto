@@ -47,9 +47,8 @@ public class Customer {
         winningLottoNumberList.retainAll(issuedLotto);
         int matchedNumber = winningLottoNumberList.size();
 
-        if (matchedNumber == Rank.SECOND.getCountOfMatch()) {
-            isMatched = issuedLotto.contains(bonusNumber);
-        }
+        isMatched = issuedLotto.contains(bonusNumber);
+
 
         Rank rank = Rank.valueOf(matchedNumber, isMatched);
         resultRankMap.put(rank,resultRankMap.get(rank)+1);
