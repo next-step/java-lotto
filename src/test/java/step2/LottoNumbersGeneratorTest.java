@@ -14,8 +14,9 @@ public class LottoNumbersGeneratorTest {
     void generate_lottoNumbers_test() {
         LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator();
 
-        List<Integer> lottoTicket = lottoNumbersGenerator.generateLottoTicket();
+        LottoTicket lottoTicket = lottoNumbersGenerator.generateLottoTicket();
 
-        assertThat(lottoTicket.size()).isEqualTo(6);
+        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+
     }
 }
