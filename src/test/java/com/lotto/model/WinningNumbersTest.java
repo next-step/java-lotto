@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningNumbersTest {
@@ -63,25 +62,6 @@ public class WinningNumbersTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new WinningNumbers(numbers, bonusNumber);
         });
-    }
-
-    @DisplayName("Lotto 갯수와 당첨 번호 확인 테스트")
-    @Test
-    public void checkCorrectCountTest() {
-        //given
-        Set<Integer> lottoNumbers = new HashSet<>();
-        lottoNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(lottoNumbers);
-
-        Set<Integer> winningNumberSet = new HashSet<>();
-        winningNumberSet.addAll(Arrays.asList(1, 2, 3, 4, 5, 7));
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberSet);
-
-        //when
-        int correctCount = winningNumbers.checkCorrectCount(lotto);
-
-        //then
-        assertThat(correctCount).isEqualTo(5);
     }
 
 
