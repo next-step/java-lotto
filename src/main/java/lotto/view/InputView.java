@@ -26,12 +26,12 @@ public class InputView {
         }
     }
 
-    public String getWinningNumber() {
+    public static String getWinningNumber() {
         System.out.println(ASK_WINNING_NUMBER);
         return SCANNER.nextLine();
     }
 
-    public String askBonusNumber() {
+    public static String askBonusNumber() {
         System.out.println(ASK_BONUS_BALL_NUMBER);
         return SCANNER.nextLine();
     }
