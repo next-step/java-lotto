@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoPurchaseAmountException;
+import lotto.exception.LottoPurchaseAmountException;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
@@ -13,8 +13,8 @@ public class Money {
     }
 
     private void validInput(int money) {
-        if (money % 1000 != 0 || money == 0) {
-            throw new InvalidLottoPurchaseAmountException();
+        if (money < 1000) {
+            throw new LottoPurchaseAmountException();
         }
     }
 
