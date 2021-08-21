@@ -6,12 +6,15 @@ import java.util.regex.Pattern;
 
 public class StringParser implements Parser<String> {
 
+  private static final int CUSTOM_DELIMITER_INDEX = 1;
+  private static final int NUMBERS_INDEX = 2;
+
   public int[] parse(String text) {
     Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
 
     if (matcher.find()) {
-      final String customDelimiter = matcher.group(1);
-      final String[] numbers = matcher.group(2).split(customDelimiter);
+      final String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
+      final String[] numbers = matcher.group(NUMBERS_INDEX).split(customDelimiter);
 
       return convertToIntArray(numbers);
     }
