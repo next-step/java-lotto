@@ -3,6 +3,7 @@ package step1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,14 @@ public class StringParserTest {
   @DisplayName("문자열 \"//;\n1;2;3\" 을 파싱하면 배열 [1, 2, 3] 을 반환한다")
   @Test
   void parse() {
-    int[] actual = parser.parse("//;\n1;2;3");
+    List<NationalNumber> actual = parser.parse("//;\n1;2;3");
 
     assertThat(actual).hasSize(3);
-    assertThat(actual).containsExactly(1, 2, 3);
+    assertThat(actual).containsExactly(
+        new NationalNumber("1"),
+        new NationalNumber("2"),
+        new NationalNumber("3")
+    );
   }
 
   @DisplayName("숫자 이외의 값 또는 음수를 파싱하면 예외가 발생한다")
