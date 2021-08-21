@@ -34,7 +34,7 @@ public class LottoTicket {
         );
     }
 
-    public List<Integer> getNumbers(){
+    public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .sorted()

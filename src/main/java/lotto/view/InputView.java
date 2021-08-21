@@ -25,7 +25,7 @@ public class InputView {
     public static WinningIdentifier readWinningNumberAndBonusNumber() {
         LottoTicket winningTicket = readWinningNumber();
         LottoNumber bonusNumber = readBonusNumber(winningTicket);
-        return new WinningIdentifier(winningTicket,bonusNumber);
+        return new WinningIdentifier(winningTicket, bonusNumber);
     }
 
     private static LottoTicket readWinningNumber() {
