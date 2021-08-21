@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -107,6 +108,15 @@ class WinningIdentifierTest {
 
         // 2등, 3등, 4등*2, 5등 4,650_000원 / 6000원
         assertThat(winningReport.getProfitRate()).isEqualTo(5267.5);
+    }
+
+    @Test
+    void 보너스볼이_당첨번호에_포함되면_예외발생() {
+        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = LottoNumber.of(6);
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new WinningIdentifier(lottoTicket, lottoNumber)
+        ).withMessageContaining("이미 당첨 번호에 해당하는 번호입니다.");
     }
 
 
