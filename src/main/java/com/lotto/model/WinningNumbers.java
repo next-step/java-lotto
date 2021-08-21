@@ -44,4 +44,12 @@ public class WinningNumbers {
     private boolean isInvalidRange(int number) {
         return number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER;
     }
+
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
 }

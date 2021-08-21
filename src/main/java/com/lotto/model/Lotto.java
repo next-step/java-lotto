@@ -2,7 +2,6 @@ package com.lotto.model;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
     private final Set<Integer> numbers;
@@ -11,13 +10,19 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Stream<Integer> stream() {
-        return numbers.stream();
-    }
-
     @Override
     public String toString() {
         String numberList = numbers.stream().map(String::valueOf).collect(Collectors.joining(","));
         return "[" + numberList + "]";
+    }
+
+    public int countCorrectNumbers(Set<Integer> winningNumbers) {
+        return (int) winningNumbers.stream()
+                .filter((number) -> numbers.contains(number))
+                .count();
+    }
+
+    public boolean havingBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }
