@@ -19,10 +19,6 @@ public enum Rank {
 
     public abstract boolean apply(int countOfMatch, boolean matchBonus);
 
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.apply(countOfMatch, matchBonus))
