@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.common.NumberGenerator;
+import lotto.exception.LottoNumberDuplicateException;
+import lotto.exception.LottoNumberLengthException;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,12 +20,20 @@ public class Lotto {
     public static Lotto from(NumberGenerator numberGenerator) {
         return new Lotto(numberGenerator.generateNumber());
     }
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    
+    private void duplicateValidation(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() < 6) {
+            throw new LottoNumberDuplicateException();
+        }
     }
 
-    public static Lotto getInstanceByInteger(final List<Integer> numbers) {
+    private void validLottoNumberSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() > 6) {
+            throw new LottoNumberLengthException();
+        }
+    }
+
+    public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
