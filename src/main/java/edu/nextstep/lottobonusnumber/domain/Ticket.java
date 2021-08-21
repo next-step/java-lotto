@@ -5,6 +5,7 @@ import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Ticket {
 
@@ -49,5 +50,18 @@ public class Ticket {
         if (numbers.size() != LENGTH_OF_NUMBERS) {
             throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + LENGTH_OF_NUMBERS);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(getNumbers(), ticket.getNumbers());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumbers());
     }
 }
