@@ -26,8 +26,8 @@ public class WinningResults {
         List<Ticket> purchasedTickets = lottoTickets.getLottoTickets();
 
         for (Ticket purchasedTicket : purchasedTickets) {
-                Award awardResult = matchingWinningNumber(purchasedTicket);
-                resultMap.put(awardResult, resultMap.getOrDefault(awardResult, 0) + 1);
+            Award awardResult = matchingWinningNumber(purchasedTicket);
+            resultMap.put(awardResult, resultMap.getOrDefault(awardResult, 0) + 1);
         }
     }
 
@@ -40,6 +40,6 @@ public class WinningResults {
     }
 
     private boolean checkWinningNumber(int number) {
-       return winningNumbers.getLottoNumbers().contains(number);
+        return winningNumbers.getLottoNumbers().contains(number);
     }
 }
