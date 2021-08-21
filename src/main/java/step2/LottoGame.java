@@ -1,6 +1,7 @@
 package step2;
 
-import step2.model.LottoWins;
+import step2.model.LottoStore;
+import step2.model.LottoWin;
 import step2.model.Lottos;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -11,17 +12,15 @@ public class LottoGame {
     InputView inputView = new InputView();
     int userAmount = inputView.inputUserAmount();
 
-    Lottos lottos = new Lottos();
-    lottos.purchase(userAmount);
+    LottoStore lottoStore = new LottoStore();
+    Lottos lottos = lottoStore.purchase(userAmount);
 
     ResultView resultView = new ResultView();
     resultView.printPurchasedLotto(lottos);
 
     String[] lottowinningNumbers = inputView.inputLottoWinningNumber();
+    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers);
 
-    LottoWins lottoWins = new LottoWins(lottowinningNumbers);
-    lottoWins.drawLotto(lottos);
-
-    resultView.printWinner(lottoWins, lottos, userAmount);
+    resultView.printWinner(lottoWin, userAmount);
   }
 }

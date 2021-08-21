@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-  private final static char BASIC_SPLITTER_COMMA = ',';
-  private final static char BASIC_SPLITTER_COLON = ':';
-  private final static char OR_OPERATOR_SYMBOL = '|';
+  private static final char BASIC_SPLITTER_COMMA = ',';
+  private static final char BASIC_SPLITTER_COLON = ':';
+  private static final char OR_OPERATOR_SYMBOL = '|';
   private static final String NUMBER_REGEXP = "^[0-9]+$";
   private static final String CUSTOM_SPLITTER = "//(.)\n(.*)";
   private static final Pattern CUSTOM_SPLITTER_PATTERN = Pattern.compile(CUSTOM_SPLITTER);

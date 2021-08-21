@@ -5,22 +5,10 @@ import java.util.List;
 
 public class Lottos {
 
-  private final static int LOTTO_PRICE = 1000;
-
   private final List<Lotto> lottos;
 
   public Lottos() {
     this.lottos = new ArrayList();
-  }
-
-  public Lottos(List<Lotto> lottos) {
-    this.lottos = lottos;
-  }
-
-  public void purchase(int userAmount) {
-    for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      this.lottos.add(new Lotto());
-    }
   }
 
   public Lotto getLotto(int index) {
@@ -31,9 +19,11 @@ public class Lottos {
     return lottos.size();
   }
 
-  public void calculateWinner(LottoWin lottoWin) {
-    for (Lotto lotto : lottos) {
-      lotto.calculateWin(lottoWin);
-    }
+  public void issueLottos(List<Integer> lottoNumbers) {
+    lottos.add(new Lotto(lottoNumbers));
+  }
+
+  public void addLotto(Lotto lotto) {
+    this.lottos.add(lotto);
   }
 }
