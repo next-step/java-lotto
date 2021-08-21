@@ -13,6 +13,10 @@ public class LottoNumber {
     this.number = number;
   }
 
+  public int getNumber() {
+    return number;
+  }
+
   private void checkNumber(int number) {
     if (number < MIN || number > MAX) {
       throw new IllegalArgumentException(
