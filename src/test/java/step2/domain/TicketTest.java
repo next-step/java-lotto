@@ -1,11 +1,11 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import step2.domain.Ticket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class TicketTest {
         Ticket lottoTicket = new Ticket();
 
         // 로또 번호 생성
-        List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         lottoTicket.saveLottoNumbers(lottoNumbers);
         List<Integer> getLottoNumbers = lottoTicket.getLottoNumbers();
@@ -44,8 +44,8 @@ public class TicketTest {
 
     static Stream<Arguments> lottoNumbersProvider() {
         return Stream.of(
-                arguments(Arrays.asList(1,2,3,4,5,6,7)),
-                arguments(Arrays.asList(1,2,3,4,5))
+                arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+                arguments(Arrays.asList(1, 2, 3, 4, 5))
         );
     }
 

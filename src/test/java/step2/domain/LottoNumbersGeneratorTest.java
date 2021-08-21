@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ public class LottoNumbersGeneratorTest {
         List<Integer> sortedLottoTicket = new ArrayList<>(lottoTicket);
         Collections.sort(sortedLottoTicket);
 
-        if(lottoTicket.equals(sortedLottoTicket)) {
+        if (lottoTicket.equals(sortedLottoTicket)) {
             return true;
         }
 

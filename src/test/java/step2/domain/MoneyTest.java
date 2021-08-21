@@ -1,9 +1,7 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,7 +17,7 @@ public class MoneyTest {
 
         int totalLottoTicketCount = money.getTotalLottoTicketCount();
 
-        assertThat(totalLottoTicketCount).isEqualTo(purchaseAmount/1000);
+        assertThat(totalLottoTicketCount).isEqualTo(purchaseAmount / 1000);
     }
 
     @Test

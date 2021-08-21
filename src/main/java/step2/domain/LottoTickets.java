@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,4 +14,5 @@ public class LottoTickets {
     public List<Ticket> getLottoTickets() {
         return lottoTickets;
     }
+
 }

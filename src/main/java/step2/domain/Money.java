@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 public class Money {
     private static final int TICKET_PRICE = 1000;
@@ -10,7 +10,7 @@ public class Money {
     }
 
     private void validateMoney(int money) {
-        if(money <= 0) {
+        if (money <= 0) {
             throw new IllegalArgumentException("해당 금액으로는 티켓을 구매할 수 없습니다.");
         }
     }
