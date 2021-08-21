@@ -46,10 +46,9 @@ public class LottoGuidView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + LottoPurchasingMachine.FOURTH_PRIZE_MONEY + "원)- " + result.get(LottoPurchasingMachine.FOURTH_PLACE_INDEX) + "개");
-        System.out.println("4개 일치 (" + LottoPurchasingMachine.THIRD_PRIZE_MONEY + "원)- " + result.get(LottoPurchasingMachine.THIRD_PLACE_INDEX) + "개");
-        System.out.println("5개 일치 (" + LottoPurchasingMachine.SECOND_PRIZE_MONEY + "원)- " + result.get(LottoPurchasingMachine.SECOND_PLACE_INDEX) + "개");
-        System.out.println("6개 일치 (" + LottoPurchasingMachine.FIRST_PRIZE_MONEY + "원)- " + result.get(LottoPurchasingMachine.FIRST_PLACE_INDEX) + "개");
+        for (LottoConstant constant : LottoConstant.values()) {
+            System.out.println(constant.getMatchedCount() + "개 일치 (" + constant.getPrizeMoney() + "원)- " + result.get(constant.getPlaceIndex()) + "개");
+        }
         System.out.println("총 수익률은 " + yield + "입니다.");
     }
 }

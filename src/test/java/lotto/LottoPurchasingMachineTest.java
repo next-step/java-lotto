@@ -32,10 +32,10 @@ class LottoPurchasingMachineTest {
         Lotto fourthPlace2 = new Lotto(Arrays.asList(1,2,3,13,17,26));
         List<Integer> result = lottoPurchasingMachine.checkLottoList(Arrays.asList(fourthPlace, thirdPlace, secondPlace, firstPlace, fourthPlace2), Arrays.asList(1,2,3,4,5,6));
 
-        assertThat(result.get(LottoPurchasingMachine.FIRST_PLACE_INDEX)).isEqualTo(1);
-        assertThat(result.get(LottoPurchasingMachine.SECOND_PLACE_INDEX)).isEqualTo(1);
-        assertThat(result.get(LottoPurchasingMachine.THIRD_PLACE_INDEX)).isEqualTo(1);
-        assertThat(result.get(LottoPurchasingMachine.FOURTH_PLACE_INDEX)).isEqualTo(2);
+        assertThat(result.get(LottoConstant.FIRST.getPlaceIndex())).isEqualTo(1);
+        assertThat(result.get(LottoConstant.SECOND.getPlaceIndex())).isEqualTo(1);
+        assertThat(result.get(LottoConstant.THIRD.getPlaceIndex())).isEqualTo(1);
+        assertThat(result.get(LottoConstant.FOURTH.getPlaceIndex())).isEqualTo(2);
     }
 
     @Test
