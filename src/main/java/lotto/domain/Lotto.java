@@ -20,7 +20,7 @@ public class Lotto {
     public static Lotto from(NumberGenerator numberGenerator) {
         return new Lotto(numberGenerator.generateNumber());
     }
-    
+
     private void duplicateValidation(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < 6) {
             throw new LottoNumberDuplicateException();
