@@ -25,7 +25,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchLogic.test(count, isMatch))
                 .findFirst()
-                .get();
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int getMatch() {

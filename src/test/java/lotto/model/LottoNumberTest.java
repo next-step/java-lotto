@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+@SuppressWarnings("NonAsciiCharacters")
 public class LottoNumberTest {
 
     @ParameterizedTest
