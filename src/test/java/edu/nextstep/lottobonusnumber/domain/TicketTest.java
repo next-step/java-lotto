@@ -2,6 +2,8 @@ package edu.nextstep.lottobonusnumber.domain;
 
 import edu.nextstep.lottobonusnumber.domain.Ticket;
 import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -63,6 +65,20 @@ public class TicketTest {
 
         // then
         assertThat(countOfMatching).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 포함 확인")
+    void contains() {
+        // given
+        Ticket ticket = Ticket.madeBy(() -> createNumbersFromTo(1, 6));
+        int bonusNumber = 6;
+
+        // when
+        boolean hasBonusNumber = ticket.contains(bonusNumber);
+
+        // then
+        assertThat(hasBonusNumber).isTrue();
     }
 
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {
