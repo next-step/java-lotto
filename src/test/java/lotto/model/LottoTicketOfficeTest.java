@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoTicketOfficeTest {
@@ -31,6 +34,27 @@ public class LottoTicketOfficeTest {
         int amount = 14000;
         List<LottoTicket> lottoTickets = lottoTicketOffice.buyLotto(amount);
         assertThat(lottoTickets.size()).isEqualTo(14);
+    }
+
+    @Test
+    void 로또_수동_구입() {
+        List<String> numbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7");
+
+        List<LottoTicket> lottoTickets = lottoTicketOffice.buyLotto(3000, numbers);
+
+        LottoTicket lottoTicket = LottoTicket.of("1,2,3,4,5,6");
+        LottoTicket lottoTicket2 = LottoTicket.of("2,3,4,5,6,7");
+
+        assertThat(lottoTickets.size()).isEqualTo(3);
+        assertThat(lottoTickets).contains(lottoTicket, lottoTicket2);
+
+    }
+
+    @Test
+    void 로또_수동_발급시_잘못된_번호_예외발생() {
+        assertThatThrownBy(
+                () -> lottoTicketOffice.buyLotto(2000, Arrays.asList("1,2,3,4,5"))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
