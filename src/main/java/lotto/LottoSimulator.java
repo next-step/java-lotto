@@ -32,21 +32,22 @@ public class LottoSimulator {
 
     private void run() {
         try {
-            PurchaseQuantity totalPurchaseQuantity = getTotalPurchaseQuantity();
+            Money purchaseMoney = getPurchaseMoney();
+            PurchaseQuantity totalPurchaseQuantity = PurchaseQuantity.of(purchaseMoney);
             PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
             LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, totalPurchaseQuantity.subtract(manualPurchaseQuantity));
             WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
             MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
-            printMatchResult(totalPurchaseQuantity, matchResult);
+            printMatchResult(purchaseMoney, matchResult);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             run();
         }
     }
 
-    private PurchaseQuantity getTotalPurchaseQuantity() {
+    private Money getPurchaseMoney() {
         outputView.printPurchaseAmountInputMessage();
-        return inputView.getTotalPurchaseQuantity();
+        return inputView.getPurchaseMoney();
     }
 
     private PurchaseQuantity getManualPurchaseQuantity() {
@@ -76,8 +77,8 @@ public class LottoSimulator {
         return WinningLottoNumbers.of(winningLottoNumbers, bonusBall);
     }
 
-    private void printMatchResult(PurchaseQuantity totalPurchaseQuantity, MatchResult matchResult) {
+    private void printMatchResult(Money purchaseMoney, MatchResult matchResult) {
         outputView.printMatchResult(matchResult);
-        outputView.printLotteryYield(totalPurchaseQuantity.getPurchaseAmount(), matchResult.calculateTotalWinningAmount());
+        outputView.printLotteryYield(purchaseMoney, matchResult.calculateTotalWinningAmount());
     }
 }

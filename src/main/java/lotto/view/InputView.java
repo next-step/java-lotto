@@ -6,7 +6,10 @@ import lotto.domain.Money;
 import lotto.domain.PurchaseQuantity;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,10 +27,9 @@ public class InputView {
         return new InputView(new Scanner(inputStream));
     }
 
-    public PurchaseQuantity getTotalPurchaseQuantity() {
+    public Money getPurchaseMoney() {
         String input = scanner.nextLine();
-        Money money = Money.of(Integer.parseInt(input));
-        return PurchaseQuantity.of(money);
+        return Money.of(Integer.parseInt(input));
     }
 
     public List<LottoNumbers> getManualLottoNumbers(long quantity) {
