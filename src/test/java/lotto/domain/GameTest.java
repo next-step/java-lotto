@@ -69,12 +69,4 @@ public class GameTest {
         assertThat(game.getYield()).isEqualTo("0.35");
     }
 
-    @Test
-    @DisplayName("지난 주 당첨 번호에 보너스 공이 포함되어 있으면 에러가 발생한다.")
-    void validBonusBall() {
-        bonusBall = Ball.of(14);
-
-        assertThatThrownBy(this::setUp
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
 }
