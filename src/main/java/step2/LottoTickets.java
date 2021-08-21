@@ -5,13 +5,13 @@ import java.util.List;
 
 public class LottoTickets {
 
-    private List<LottoTicket> lottoTickets = new ArrayList<>();
+    private List<Ticket> lottoTickets = new ArrayList<>();
 
-    public void addLottoTicket(LottoTicket lottoTicket) {
+    public void addLottoTicket(Ticket lottoTicket) {
         lottoTickets.add(lottoTicket);
     }
 
-    public List<LottoTicket> getLottoTickets() {
+    public List<Ticket> getLottoTickets() {
         return lottoTickets;
     }
 }

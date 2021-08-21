@@ -15,8 +15,8 @@ public class LottoNumbersGenerator {
         }
     }
 
-    public LottoTicket generateLottoTicket() {
-        LottoTicket lottoTicket = new LottoTicket();
+    public Ticket generateLottoTicket() {
+        Ticket lottoTicket = new Ticket();
         Collections.shuffle(numberCards);
 
         ArrayList<Integer> sortedLottoNumber = new ArrayList<>(numberCards.subList(0, 6));

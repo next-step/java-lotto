@@ -2,7 +2,7 @@ package step2;
 
 import java.util.List;
 
-public class LottoTicket {
+public class Ticket {
 
     private List<Integer> lottoNumbers;
 

@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTicketTest {
+public class TicketTest {
 
     @Test
     @DisplayName("로또 번호를 저장한다.")
     void lottoTicket_save() {
-        LottoTicket lottoTicket = new LottoTicket();
+        Ticket lottoTicket = new Ticket();
 
         // 로또 번호 생성
         List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5,6);

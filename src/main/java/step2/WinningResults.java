@@ -1,17 +1,18 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WinningResults {
 
-    private LottoTicket winningNumbers;
+    private Ticket winningNumbers;
+    private Map<Integer, Integer> resultMap = new HashMap<>();
 
-    public void saveWinningLottoNumber(LottoTicket winningNumbers) {
+    public void saveWinningLottoNumber(Ticket winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public LottoTicket getWinningLottoNumber() {
+    public Ticket getWinningLottoNumber() {
         return this.winningNumbers;
     }
 }

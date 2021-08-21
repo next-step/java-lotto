@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +15,13 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets();
 
         // 로또 번호 생성
-        LottoTicket lottoNumbers1 = new LottoTicket();
+        Ticket lottoNumbers1 = new Ticket();
         lottoNumbers1.saveLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        LottoTicket lottoNumbers2 = new LottoTicket();
+        Ticket lottoNumbers2 = new Ticket();
         lottoNumbers1.saveLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
 
-        LottoTicket lottoNumbers3 = new LottoTicket();
+        Ticket lottoNumbers3 = new Ticket();
         lottoNumbers1.saveLottoNumbers(Arrays.asList(21, 22, 23, 24, 25, 26));
 
         lottoTickets.addLottoTicket(lottoNumbers1);
