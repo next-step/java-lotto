@@ -14,8 +14,10 @@ public class LottoBuyer {
     public void buy() {
         // 로또 구입
         int purchaseAmount = InputView.readPurchaseAmount();
-        List<LottoTicket> lottoTickets = new LottoTicketOffice().buyLotto(purchaseAmount);
-        OutputView.printLottoTickets(lottoTickets);
+        int purchaseManualCount = InputView.readPurchaseManualLottoCount();
+        List<String> manualLottos = InputView.readPurchaseManualLottoNumber(purchaseManualCount);
+        List<LottoTicket> lottoTickets = new LottoTicketOffice().buyLotto(purchaseAmount, manualLottos);
+        OutputView.printLottoTickets(lottoTickets, purchaseManualCount);
 
         // 당첨 번호 입력
         WinningIdentifier winningIdentifier = InputView.readWinningNumberAndBonusNumber();

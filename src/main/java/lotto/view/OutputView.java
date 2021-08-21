@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OutputView {
 
-    private static final String BUY_TICKET_MSG = "개를 구매했습니다.";
+    private static final String BUY_TICKET_MSG = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String REPORT_START_MSG = "당첨 통계";
     private static final String REPORT_DIVIDING_LINE = "---------";
     private static final String REPORT_PROFIT_RATE_MSG = "총 수익률은 %.2f입니다.";
@@ -19,11 +19,17 @@ public class OutputView {
     private static final String BONUS_NUMBER_MATCH_MSG = ", 보너스 볼 일치";
     private static final String BLANK = " ";
 
-    public static void printLottoTickets(List<LottoTicket> tickets) {
-        System.out.println(tickets.size() + BUY_TICKET_MSG);
+    public static void printLottoTickets(List<LottoTicket> tickets, int manualCount) {
+        printEmpty();
+        printTicketCount(manualCount, tickets.size() - manualCount);
         for (LottoTicket ticket : tickets) {
             System.out.println(transformNumberToFormat(ticket.getNumbers()));
         }
+        printEmpty();
+    }
+
+    private static void printTicketCount(int manualCount, int autoCount) {
+        System.out.println(String.format(BUY_TICKET_MSG, manualCount, autoCount));
     }
 
     private static String transformNumberToFormat(List<Integer> lottoNumbers) {
@@ -36,7 +42,12 @@ public class OutputView {
         return result.toString();
     }
 
+    private static void printEmpty(){
+        System.out.println();
+    }
+
     public static void printReport(WinningReport report) {
+        printEmpty();
         System.out.println(REPORT_START_MSG);
         System.out.println(REPORT_DIVIDING_LINE);
 

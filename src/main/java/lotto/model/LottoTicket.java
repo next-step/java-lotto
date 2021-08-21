@@ -29,6 +29,7 @@ public class LottoTicket {
 
     public static LottoTicket of(String numbers) {
         return new LottoTicket(Arrays.stream(numbers.split(DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList())
         );
