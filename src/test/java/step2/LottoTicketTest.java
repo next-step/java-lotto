@@ -18,7 +18,7 @@ public class LottoTicketTest {
         // 로또 번호 생성
         List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5,6);
 
-        lottoTicket.save(lottoNumbers);
+        lottoTicket.saveLottoNumbers(lottoNumbers);
         List<Integer> getLottoNumbers = lottoTicket.getLottoNumbers();
 
         assertThat(getLottoNumbers).isEqualTo(lottoNumbers);
