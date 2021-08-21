@@ -27,11 +27,6 @@ public class WinningResults {
 
         for (Ticket purchasedTicket : purchasedTickets) {
                 int countCorrectNumber = matchingWinningNumber(purchasedTicket);
-
-                if(countCorrectNumber < 3) {
-                    return;
-                }
-
                 resultMap.put(countCorrectNumber, resultMap.getOrDefault(countCorrectNumber, 0) + 1);
         }
     }
