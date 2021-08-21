@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private final List<Lotto> lottoList;
+    private List<Lotto> lottoList;
 
-    public LottoGroup(int lottoCount) {
+    public LottoGroup(LottoStrategy lottoStrategy, int lottoCount) {
         lottoList = new ArrayList<>();
 
         while (lottoCount-- > 0) {
-            lottoList.add(new Lotto(new AutoLottoStrategy()));
+            lottoList.add(new Lotto(lottoStrategy.getNumbers()));
         }
     }
 
@@ -22,6 +22,18 @@ public class LottoGroup {
         return lottoList;
     }
 
+    private void isBlank(String input) {
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
+        }
+    }
+
+    private void isDigit(String input) {
+        if (!input.matches("[0-9]*")) {
+            throw new IllegalArgumentException("숫자를 입력해주세요");
+        }
+    }
+
     public List<List<Integer>> getLottoResult() {
         List<List<Integer>> result = new ArrayList<>();
 
@@ -30,5 +42,9 @@ public class LottoGroup {
         }
 
         return result;
+    }
+
+    public int size() {
+        return lottoList.size();
     }
 }
