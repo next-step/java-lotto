@@ -21,6 +21,10 @@ public class Lottos {
         return matchesCount;
     }
 
+    public void mergeLottos(Lottos autoLottos) {
+        autoLottos.lottos.forEach(lotto -> this.lottos.add(lotto));
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
