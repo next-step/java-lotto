@@ -19,10 +19,10 @@ public class LottoTicketsTest {
         lottoNumbers1.saveLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Ticket lottoNumbers2 = new Ticket();
-        lottoNumbers1.saveLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
+        lottoNumbers2.saveLottoNumbers(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         Ticket lottoNumbers3 = new Ticket();
-        lottoNumbers1.saveLottoNumbers(Arrays.asList(21, 22, 23, 24, 25, 26));
+        lottoNumbers3.saveLottoNumbers(Arrays.asList(21, 22, 23, 24, 25, 26));
 
         lottoTickets.addLottoTicket(lottoNumbers1);
         lottoTickets.addLottoTicket(lottoNumbers2);
