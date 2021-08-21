@@ -33,14 +33,6 @@ public class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"-1,2,3"})
-    @DisplayName("숫자 외에, 음수를 전달하면 에러가 발생한다.")
-    void splitInvalidParameter(String input) {
-        assertThatThrownBy(() -> stringAddCalculator.splitAndReturnNumberList(input))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     @DisplayName("숫자 하나만 입력시 그대로 반환한다.")
     void splitSingleStringAndAdd() {

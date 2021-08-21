@@ -9,8 +9,12 @@ public class Game {
 
     public List<Reward> rewards;
 
-    public Game(List<Lotto> lottos) {
+    private Game(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Game of(List<Lotto> lottos) {
+        return new Game(lottos);
     }
 
     public void match(PreviousLotto previousLotto) {

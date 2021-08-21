@@ -9,9 +9,17 @@ public class Ball implements Comparable<Ball> {
 
     private final int number;
 
-    public Ball(int number) {
+    private Ball(int number) {
         validNumberRange(number);
         this.number = number;
+    }
+
+    public static Ball of(String text) {
+        return new Ball(Integer.parseInt(text));
+    }
+
+    public static Ball of(int no) {
+        return new Ball(no);
     }
 
     private void validNumberRange(int number) {

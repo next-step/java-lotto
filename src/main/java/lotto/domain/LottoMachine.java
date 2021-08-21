@@ -11,7 +11,7 @@ public class LottoMachine {
     private static List<Ball> initList() {
         List<Ball> balls = new ArrayList<>(Ball.MAX_NUMBER);
         for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
-            balls.add(new Ball(i));
+            balls.add(Ball.of(i));
         }
         return balls;
     }
@@ -21,7 +21,7 @@ public class LottoMachine {
         List<Lotto> lottoList = new ArrayList<>(count);
 
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto(get6RandomBall()));
+            lottoList.add(Lotto.of(get6RandomBall()));
         }
         return lottoList;
     }

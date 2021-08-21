@@ -14,8 +14,8 @@ public class Main {
     public static void main(String[] args) {
         int buyMoney = InputView.inputBuyMoney();
 
-        List<Lotto> lottos = LottoMachine.buyRandomLotto(buyMoney);
-        Game game = new Game(lottos);
+        List<Lotto> autoLottos = LottoMachine.buyRandomLotto(buyMoney);
+        Game game = Game.of(autoLottos);
 
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);

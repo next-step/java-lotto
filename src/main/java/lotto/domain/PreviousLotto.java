@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class PreviousLotto {
 
-    private Lotto previousLotto;
-    private Ball bonusBall;
+    private final Lotto previousLotto;
+    private final Ball bonusBall;
 
     private PreviousLotto(Lotto previousLotto, Ball bonusBall) {
         validBonusBall(previousLotto, bonusBall);
