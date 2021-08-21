@@ -105,16 +105,60 @@
       - 일치하는 번호 개수에 따른 상금을 나타내는 enumeration
    3. TicketMachine : 복권 기계
       - 복권 생성 및 TicketRepository 를 이용한 저장
-      - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
    4. TicketRepository
       - 복권 저장
       - 복권 조회
-   5. AutoNumbersMaker implements TicketMaker
+   5. WinningCheckMachine : 당첨 확인 기계
+      - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
+   6. AutoNumbersMaker implements TicketMaker
       - 자동 번호 리스트 생성
-   6. CustomNumbersMaker implements TicketMaker
+   7. CustomNumbersMaker implements TicketMaker
       - 입력한 번호 리스트 생성
-   
    
 2. form
    1. WinningResultForm
       - 당첨 결과가 정리된 양식
+
+--------
+
+## 3단계 - 로또(2등)
+### 기능 요구사항
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 
+```
+[... 생략 ...]
+
+지난 주 당첨 번호를 입력해 주세요.
+1, 2, 3, 4, 5, 6
+보너스 볼을 입력해 주세요.
+7
+
+당첨 통계
+---------
+3개 일치 (5000원)- 1개
+4개 일치 (50000원)- 0개
+5개 일치 (1500000원)- 0개
+5개 일치, 보너스 볼 일치(30000000원) - 0개
+6개 일치 (2000000000원)- 0개
+총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+```
+
+### 기능 목록 (2단계에서 추가/변경되는 항목만 작성)
+1. domain
+   1. Ticket : 로또 복권
+      - 추가 생성된 WinningTicket 과의 당첨 확인 메서드 추가
+   2. Prize(enum) : 상금
+      - 보너스 번호 추가에 따른 등수 추가
+      - 보너스 번호 식별 가능한 정적 팩토리
+   3. TicketMachine - _변경 없음_
+   4. TicketRepository - _변경 없음_
+   5. WinningCheckMachine : 당첨 확인 기계
+      - 당첨 결과 산출 시 매개변수를 WinningTicket 형태로 받아야 함
+   6. AutoNumbersMaker implements TicketMaker - _변경 없음_
+   7. CustomNumbersMaker implements TicketMaker - _변경 없음_
+   8. (추가) WinningTicket
+      - 6 개의 당첨 번호와 1개의 보너스 번호를 가진다.
+      - 보너스 번호에 대한 검증 필요
+   
+2. form
+   1. WinningResultForm - _변경 없음_
