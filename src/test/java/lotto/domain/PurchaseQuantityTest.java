@@ -16,7 +16,7 @@ class PurchaseQuantityTest {
     @ValueSource(ints = {-1000, 14500})
     public void purchaseFailTest(int amount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseQuantity.of(Money.of(amount)))
+                .isThrownBy(() -> PurchaseQuantity.withAutomatic(Money.of(amount), PurchaseQuantity.of(1)))
                 .withMessageContaining(String.valueOf(amount));
     }
 
@@ -24,25 +24,8 @@ class PurchaseQuantityTest {
     @NullSource
     public void nullSourceExceptionTest(Money money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseQuantity.of(money))
+                .isThrownBy(() -> PurchaseQuantity.withAutomatic(money, PurchaseQuantity.of(1)))
                 .withMessageContaining("null");
-    }
-
-    @ParameterizedTest(name = "구매한 로또 수량을 반환한다.")
-    @CsvSource(value = {"0,0", "14000,14"})
-    public void quantityTest(int moneyAmount, int expectedQuantity) {
-        PurchaseQuantity purchaseQuantity = PurchaseQuantity.of(Money.of(moneyAmount));
-        assertThat(purchaseQuantity.getQuantity())
-                .isEqualTo(expectedQuantity);
-    }
-
-    @ParameterizedTest(name = "구매 수량 간 뺄셈이 가능하다.")
-    @CsvSource(value = {"3,1,2", "1,1,0", "0,0,0"})
-    public void subtractTest(int totalQuantity, int manualQuantity, int automaticQuantity) {
-        PurchaseQuantity totalPurchaseQuantity = PurchaseQuantity.of(totalQuantity);
-        PurchaseQuantity manualPurchaseQuantity = PurchaseQuantity.of(manualQuantity);
-        assertThat(totalPurchaseQuantity.subtract(manualPurchaseQuantity))
-                .isEqualTo(PurchaseQuantity.of(automaticQuantity));
     }
 
     @DisplayName("구매 수량이 0보다 작은 경우 예외가 발생한다.")
@@ -51,5 +34,12 @@ class PurchaseQuantityTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PurchaseQuantity.of(-1))
                 .withMessageContaining(String.valueOf(-1));
+    }
+
+    @ParameterizedTest(name = "구매 금액과 수동 구매 수량으로 자동 구매 수량을 알 수 있다.")
+    @CsvSource(value = {"3000,1,2", "3000,0,3", "3000,3,0"})
+    public void automaticPurchaseQuantityTest(int amount, int manual, int automatic) {
+        PurchaseQuantity automaticPurchaseQuantity = PurchaseQuantity.withAutomatic(Money.of(amount), PurchaseQuantity.of(manual));
+        assertThat(automaticPurchaseQuantity).isEqualTo(PurchaseQuantity.of(automatic));
     }
 }

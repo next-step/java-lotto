@@ -33,9 +33,9 @@ public class LottoSimulator {
     private void run() {
         try {
             Money purchaseMoney = getPurchaseMoney();
-            PurchaseQuantity totalPurchaseQuantity = PurchaseQuantity.of(purchaseMoney);
             PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
-            LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, totalPurchaseQuantity.subtract(manualPurchaseQuantity));
+            PurchaseQuantity automaticPurchaseQuantity = PurchaseQuantity.withAutomatic(purchaseMoney, manualPurchaseQuantity);
+            LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, automaticPurchaseQuantity);
             WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
             MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
             printMatchResult(purchaseMoney, matchResult);
