@@ -5,13 +5,13 @@ import java.util.List;
 
 public class WinningResults {
 
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private LottoTicket winningNumbers;
 
-    public void saveWinningLottoNumber(List<Integer> winningNumbers) {
+    public void saveWinningLottoNumber(LottoTicket winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public List<Integer> getWinningLottoNumber() {
+    public LottoTicket getWinningLottoNumber() {
         return this.winningNumbers;
     }
 }

@@ -14,11 +14,12 @@ public class WinningResultsTest {
     @DisplayName("당첨 번호를 저장한다.")
     void winning_numbers_save_test() {
         WinningResults winningResults = new WinningResults();
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5);
+        LottoTicket winningNumbers = new LottoTicket();
+        winningNumbers.saveLottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
 
         winningResults.saveWinningLottoNumber(winningNumbers);
 
-        List<Integer> getWinningNumbers = winningResults.getWinningLottoNumber();
+        LottoTicket getWinningNumbers = winningResults.getWinningLottoNumber();
 
         assertThat(getWinningNumbers).isEqualTo(winningNumbers);
     }
