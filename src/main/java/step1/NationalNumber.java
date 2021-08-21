@@ -8,6 +8,7 @@ public class NationalNumber {
 
   public NationalNumber(String number) {
     validate(number);
+    this.number = Integer.parseInt(number);
   }
 
   private void validate(String number) {
