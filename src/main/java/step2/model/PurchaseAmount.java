@@ -1,31 +1,24 @@
 package step2.model;
 
+import java.util.Objects;
+
 public class PurchaseAmount {
-    private final int purchaseAmount;
-    private final int lottoCount;
-    private static final int LOTTO_PRICE = 1000;
+    private int purchaseAmount;
+
     private static final int MIN_AMOUNT = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     public PurchaseAmount(String amount) {
         isValid(amount);
-        this.lottoCount = calcLottoCount(amount);
-        this.purchaseAmount = calcPurchaseAmount();
+        this.purchaseAmount = Integer.parseInt(amount);
     }
 
-    private int calcPurchaseAmount() {
-        return lottoCount * LOTTO_PRICE;
-    }
-
-    private int calcLottoCount(String amount) {
-        return Integer.parseInt(amount) / LOTTO_PRICE;
+    private int calcPurchaseAmount(LottoCount lottoCount) {
+        return lottoCount.getPurchaseAmount();
     }
 
     public int getPurchaseAmount() {
         return purchaseAmount;
-    }
-
-    public int getLottoCount() {
-        return lottoCount;
     }
 
     private void isBlank(String amount) {
@@ -51,5 +44,9 @@ public class PurchaseAmount {
         amount = amount.trim();
         isDigit(amount);
         isOverMinAmount(amount);
+    }
+
+    public int getLottoCount() {
+        return purchaseAmount / LOTTO_PRICE;
     }
 }
