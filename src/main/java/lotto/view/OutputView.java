@@ -4,8 +4,10 @@ import lotto.model.LottoTicket;
 import lotto.model.Rank;
 import lotto.model.WinningReport;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
 
@@ -13,7 +15,9 @@ public class OutputView {
     private static final String REPORT_START_MSG = "당첨 통계";
     private static final String REPORT_DIVIDING_LINE = "---------";
     private static final String REPORT_PROFIT_RATE_MSG = "총 수익률은 %.2f입니다.";
-    private static final String REPORT_STATISTICS_MSG = "%d개 일치 (%d원) - %d개";
+    private static final String REPORT_STATISTICS_MSG = "%d개 일치%s(%d원) - %d개";
+    private static final String BONUS_NUMBER_MATCH_MSG = ", 보너스 볼 일치";
+    private static final String BLANK = " ";
 
     public static void printLottoTickets(List<LottoTicket> tickets) {
         System.out.println(tickets.size() + BUY_TICKET_MSG);
@@ -45,12 +49,18 @@ public class OutputView {
     }
 
     private static void printStatistics(WinningReport report) {
-        Rank[] ranks = {Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.SIXTH};
-
-        for (Rank rank : ranks) {
-            System.out.println(String.format(REPORT_STATISTICS_MSG, rank.getMatch(), rank.getWinningBonus(), report.getRankCount(rank)));
-        }
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .filter(rank -> rank != Rank.MISS)
+                .forEach(rank -> {
+                    System.out.println(makeMessageByRank(rank, report.getRankCount(rank)));
+                });
     }
 
-
+    private static String makeMessageByRank(Rank rank, int winningCount) {
+        if (rank == Rank.SECOND) {
+            return String.format(REPORT_STATISTICS_MSG, rank.getMatch(), BONUS_NUMBER_MATCH_MSG, rank.getWinningBonus(), winningCount);
+        }
+        return String.format(REPORT_STATISTICS_MSG, rank.getMatch(), BLANK, rank.getWinningBonus(), winningCount);
+    }
 }

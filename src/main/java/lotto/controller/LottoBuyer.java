@@ -18,10 +18,10 @@ public class LottoBuyer {
         OutputView.printLottoTickets(lottoTickets);
 
         // 당첨 번호 입력
-        LottoTicket winningTicket = InputView.readWinningNumber();
+        WinningIdentifier winningIdentifier = InputView.readWinningNumberAndBonusNumber();
 
         // 통계 출력
-        WinningReport winningReport = new WinningIdentifier(winningTicket).checkTicketsWinning(lottoTickets);
+        WinningReport winningReport = winningIdentifier.checkTicketsWinning(lottoTickets);
         OutputView.printReport(winningReport);
     }
 
