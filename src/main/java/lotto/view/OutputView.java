@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Objects;
 
 public class OutputView {
@@ -42,12 +41,8 @@ public class OutputView {
         printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, manualPurchaseQuantity.getQuantity(), automaticPurchaseQuantity.getQuantity());
     }
 
-    public void printLottoTicket(List<LottoNumbers> lottoNumbers) {
-        lottoNumbers.forEach(this::printLottoNumbers);
-    }
-
-    private void printLottoNumbers(LottoNumbers lottoNumbers) {
-        printStream.println(lottoNumbers.toString());
+    public void printLottoTicket(LottoTicket lottoTicket) {
+        printStream.println(lottoTicket);
     }
 
     public void printWinningLottoNumbersInputMessage() {

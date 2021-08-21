@@ -60,7 +60,7 @@ public class LottoSimulator {
         lottoNumbers.addAll(lottoNumbersGenerator.generate(automaticPurchaseQuantity));
         LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
         outputView.printPurchaseQuantity(manualPurchaseQuantity, automaticPurchaseQuantity);
-        outputView.printLottoTicket(lottoTicket.getLottoNumbersList());
+        outputView.printLottoTicket(lottoTicket);
         return lottoTicket;
     }
 
