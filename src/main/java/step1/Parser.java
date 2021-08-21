@@ -1,7 +1,9 @@
 package step1;
 
+import java.util.List;
+
 public interface Parser<T> {
 
-  int[] parse(T t);
+  List<NationalNumber> parse(T t);
 
 }

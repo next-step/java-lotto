@@ -1,6 +1,9 @@
 package step1;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +12,7 @@ public class StringParser implements Parser<String> {
   private static final int CUSTOM_DELIMITER_INDEX = 1;
   private static final int NUMBERS_INDEX = 2;
 
-  public int[] parse(String text) {
+  public List<NationalNumber> parse(String text) {
     Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(text);
 
     if (matcher.find()) {
@@ -22,22 +25,10 @@ public class StringParser implements Parser<String> {
     return convertToIntArray(text.split("[,:]"));
   }
 
-  private int[] convertToIntArray(String[] numbers) {
+  private List<NationalNumber> convertToIntArray(String[] numbers) {
     return Arrays.stream(numbers)
-        .mapToInt(number -> {
-          validate(number);
-          return Integer.parseInt(number);
-        })
-        .toArray();
+        .map(NationalNumber::new)
+        .collect(toList());
   }
 
-  private void validate(String number) {
-    if (isNumberAndIsNotNegative(number)) {
-      throw new IllegalArgumentException("숫자 이외의 값 또는 음수를 입력할 수 없다");
-    }
-  }
-
-  private boolean isNumberAndIsNotNegative(String number) {
-    return number.chars().allMatch(Character::isDefined) && Integer.parseInt(number) < 0;
-  }
 }

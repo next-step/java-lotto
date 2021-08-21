@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.List;
+
 public class StringCalculator {
 
   private Parser<String> parser = new StringParser();
@@ -9,16 +11,16 @@ public class StringCalculator {
       return 0;
     }
 
-    final int[] numbers = parser.parse(text);
+    final List<NationalNumber> numbers = parser.parse(text);
 
     return sum(numbers);
   }
 
-  private int sum(int[] numbers) {
+  private int sum(List<NationalNumber> numbers) {
     int sum = 0;
 
-    for (int number : numbers) {
-      sum += number;
+    for (NationalNumber number : numbers) {
+      sum += number.getNumber();
     }
 
     return sum;

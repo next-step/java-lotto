@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.Objects;
+
 public class NationalNumber {
 
   private int number;
@@ -16,5 +18,26 @@ public class NationalNumber {
 
   private boolean isNotNumberOrIsNegativeNumber(String number) {
     return !number.chars().allMatch(Character::isDigit) || Integer.parseInt(number) < 0;
+  }
+
+  public int getNumber() {
+    return number;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    NationalNumber that = (NationalNumber) o;
+    return number == that.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 }
