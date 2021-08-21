@@ -17,7 +17,7 @@ public class Game {
     }
 
     //당첨번호 입력받다.
-    public static WinningNumbers makeWinningNumbers(List<Integer> numbers) {
+    public static WinningNumbers makeWinningNumbers(List<Integer> numbers, int bonusNumber) {
         Set<Integer> numberSet = new HashSet<>();
 
         numbers.forEach((number) -> {
@@ -28,7 +28,7 @@ public class Game {
             numberSet.add(number);
         });
 
-        return new WinningNumbers(numberSet);
+        return new WinningNumbers(numberSet, bonusNumber);
     }
 
     public static LottoResult check(WinningNumbers winningNumbers, Lottos lottos) {
