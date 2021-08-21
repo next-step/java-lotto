@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,13 +19,11 @@ class StringSumCalculatorTest {
         stringSumCalculator = new StringSumCalculator();
     }
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("문자열을 입력받을 때, 빈 문자열인 경우 0을 리턴한다.")
-    void input_test() {
-        int result = stringSumCalculator.sum(null);
-        assertThat(result).isEqualTo(0);
-
-        result = stringSumCalculator.sum("");
+    void input_test(String inputText) {
+        int result = stringSumCalculator.sum(inputText);
         assertThat(result).isEqualTo(0);
     }
 
