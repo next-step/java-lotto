@@ -40,6 +40,9 @@ public class StringAddCalculator {
     }
 
     public static void add(String paramSums[]){
+        if(checkNegative(paramSums)){
+            throw new RuntimeException();
+        }
         result = Arrays.stream(paramSums)
                 .mapToInt(Integer::parseInt)
                 .sum();
@@ -54,5 +57,9 @@ public class StringAddCalculator {
         }
     }
 
+    public static boolean checkNegative(String paramSums[]) {
+        return Arrays.stream(paramSums)
+                .anyMatch(s -> Integer.parseInt(s) < 0 );
+    }
 
 }
