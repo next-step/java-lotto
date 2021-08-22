@@ -4,25 +4,24 @@ import java.util.Arrays;
 import java.util.function.BiPredicate;
 
 public enum Rank2 {
-    FIRST(2_000_000_000, (countOfMatch, matchBonus) -> countOfMatch == 6),
-    SECOND(30_000_000, (countOfMatch, matchBonus) -> countOfMatch == 5 && matchBonus),
-    THIRD(1_500_000, (countOfMatch, matchBonus) -> countOfMatch == 5 && !matchBonus),
-    FOURTH(50_000, (countOfMatch, matchBonus) -> countOfMatch == 4),
-    FIFTH(5_000, (countOfMatch, matchBonus) -> countOfMatch == 3),
-    MISS(0, (countOfMatch, matchBonus) -> countOfMatch == 0);
+    FIRST(2_000_000_000) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 6;}},
+    SECOND(30_000_000) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 5 && matchBonus;}},
+    THIRD(1_500_000) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 5 && !matchBonus;}},
+    FOURTH(50_000) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 4;}},
+    FIFTH(5_000) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 3;}},
+    MISS(0) { public boolean apply(int countOfMatch, boolean matchBonus) {return countOfMatch == 0;}};
 
-    private final int winningMoney;
-    private final BiPredicate<Integer, Boolean> condition;
+    private int winningMoney;
 
-    Rank2(final int winningMoney,
-         final BiPredicate<Integer, Boolean> condition) {
+    private Rank2(int winningMoney) {
         this.winningMoney = winningMoney;
-        this.condition = condition;
     }
+
+    public abstract boolean apply(int countOfMatch, boolean matchBonus);
 
     public static Rank2 valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.condition.test(countOfMatch, matchBonus))
+                .filter(rank -> rank.apply(countOfMatch, matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
