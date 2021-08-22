@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoCard;
+import lotto.domain.Lottos;
+
 public class LottoAutoTest {
 	private Lotto lotto;
 
