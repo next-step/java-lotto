@@ -14,6 +14,17 @@ public class RandomNumbersCreator implements LottoNumbersCreator {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
+    private static RandomNumbersCreator randomNumbersCreator = null;
+
+    private RandomNumbersCreator(){}
+
+    public static RandomNumbersCreator getInstance() {
+        if (randomNumbersCreator == null) {
+            randomNumbersCreator = new RandomNumbersCreator();
+        }
+        return randomNumbersCreator;
+    }
+
     @Override
     public List<LottoNumber> createNumbers() {
         Collections.shuffle(numbers);
