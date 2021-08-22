@@ -36,7 +36,6 @@ public class LottoStoreTest {
   @ParameterizedTest
   @ValueSource(ints = {2000, 3000, 14000})
   public void Lotto_N개_구매_테스트(int userAmount) {
-
     LottoStore lottoStore = new LottoStore();
     Lottos lottos = lottoStore.purchase(userAmount, lottoNumber);
 
