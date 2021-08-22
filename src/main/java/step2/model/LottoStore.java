@@ -57,11 +57,6 @@ public class LottoStore {
 
   public LottoWin draw(Lottos lottos, String[] lottowinningNumbers) {
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
-
-    for (int i = 0; i < lottos.getLottosSize(); i++) {
-      lottoWin.addWinningLotto(lottos.getLotto(i));
-    }
-
-    return lottoWin;
+    return lottoWin.draw(lottos);
   }
 }
