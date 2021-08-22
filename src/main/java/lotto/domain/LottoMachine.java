@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
-
     private static final List<Ball> BALLS_POOL = IntStream.rangeClosed(Ball.MIN_NUMBER, Ball.MAX_NUMBER)
             .mapToObj(Ball::from)
             .collect(Collectors.toList());

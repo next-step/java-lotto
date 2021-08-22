@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Game {
-    private final List<Lotto> lottos;
 
-    public List<Reward> rewards;
+    private final List<Lotto> lottos;
+    private List<Reward> rewards;
 
     private Game(List<Lotto> lottos) {
         this.lottos = lottos;
