@@ -23,7 +23,7 @@ public class Lotto {
     private void setLottoNumber(String lotto) {
         for (String number : lotto.split(",")) {
             LottoNumber lottoNumber = new LottoNumber(number);
-            isDuplicate(this.lotto, lottoNumber);
+            isDuplicate(lottoNumber);
             this.lotto.add(lottoNumber);
         }
     }
@@ -41,13 +41,13 @@ public class Lotto {
     private void isValidNumberCount(String lotto) {
         String[] lottoNumbers = lotto.split(",");
         if (lottoNumbers.length < LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("당첨 번호는 6개 입력해주셔야합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개 입력해주셔야합니다.");
         }
     }
 
-    private void isDuplicate(List<LottoNumber> lotto, LottoNumber lottoNumber) {
+    public void isDuplicate(LottoNumber lottoNumber) {
         if (lotto.contains(lottoNumber)) {
-            throw new IllegalArgumentException("당첨번호가 중복되었습니다. 다시 입력해주세요");
+            throw new IllegalArgumentException("번호가 중복되었습니다. 다시 입력해주세요");
         }
     }
 
@@ -64,4 +64,5 @@ public class Lotto {
         }
         return numbers;
     }
+
 }
