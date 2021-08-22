@@ -51,4 +51,26 @@ class LottoTest {
       new Lotto(duplicatedNumbers);
     });
   }
+
+  @Test
+  @DisplayName("로또와 당첨로또 일치하는 개수 구하기 테스트")
+  void getMatchingNumberCntTest() {
+    //given
+    Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto0 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+    Lotto lotto1 = new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11));
+    Lotto lotto2 = new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10));
+
+    //when
+    int result0 = lotto0.getMatchingNumberCnt(winningLotto);
+    int result1 = lotto1.getMatchingNumberCnt(winningLotto);
+    int result2 = lotto2.getMatchingNumberCnt(winningLotto);
+    int winningResult = winningLotto.getMatchingNumberCnt(winningLotto);
+
+    //then
+    assertThat(result0).isEqualTo(0);
+    assertThat(result1).isEqualTo(1);
+    assertThat(result2).isEqualTo(2);
+    assertThat(winningResult).isEqualTo(6);
+  }
 }

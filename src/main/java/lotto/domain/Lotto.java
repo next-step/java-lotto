@@ -13,6 +13,10 @@ public class Lotto {
     this.lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
   }
 
+  public int getMatchingNumberCnt(Lotto winningLotto) {
+    return (int) lottoNumbers.stream().filter(winningLotto.lottoNumbers::contains).count();
+  }
+
   public List<Integer> getLottoNumbers() {
     return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
   }
