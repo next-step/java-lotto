@@ -1,8 +1,10 @@
 package com.lotto.game;
 
+import com.lotto.model.Lotto;
 import com.lotto.model.LottoResult;
 import com.lotto.model.Lottos;
 import com.lotto.model.WinningNumbers;
+import com.lotto.util.LottoUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,13 +13,28 @@ import java.util.Set;
 public class Game {
     public static final int LOTTO_PRICE = 1000;
 
+    public static Lotto purchaseManual(List<Integer> numbers) {
+        Set<Integer> numberSet = convert(numbers);
+        return new Lotto(numberSet);
+    }
+
     //구입하다.
-    public static Lottos purchase(int money) {
-        return new Lottos(money / LOTTO_PRICE);
+    public static Lotto purchaseAuto() {
+        return new Lotto(LottoUtil.extractRandomLottoNumbers());
     }
 
     //당첨번호 입력받다.
     public static WinningNumbers makeWinningNumbers(List<Integer> numbers, int bonusNumber) {
+        Set<Integer> numberSet = convert(numbers);
+
+        return new WinningNumbers(numberSet, bonusNumber);
+    }
+
+    public static LottoResult check(WinningNumbers winningNumbers, Lottos lottos) {
+        return new LottoResult(winningNumbers, lottos);
+    }
+
+    private static Set<Integer> convert(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>();
 
         numbers.forEach((number) -> {
@@ -28,10 +45,6 @@ public class Game {
             numberSet.add(number);
         });
 
-        return new WinningNumbers(numberSet, bonusNumber);
-    }
-
-    public static LottoResult check(WinningNumbers winningNumbers, Lottos lottos) {
-        return new LottoResult(winningNumbers, lottos);
+        return numberSet;
     }
 }
