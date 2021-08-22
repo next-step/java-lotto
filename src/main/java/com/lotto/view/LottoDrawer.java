@@ -13,8 +13,9 @@ public class LottoDrawer {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void drawBuyResult(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void drawBuyResult(int manualCount, Lottos lottos) {
+        int autoCount = lottos.size() - manualCount;
+        System.out.println("수동으로" + manualCount + ", 자동으로 " + autoCount + "개를 구매했습니다.");
 
         String lottosText = lottos.lottoStream()
                 .map(lotto -> String.valueOf(lotto))
@@ -30,6 +31,18 @@ public class LottoDrawer {
 
     public static void drawBonusNumber() {
         System.out.println("보너스 번호를 입력해주세요.");
+    }
+
+    public static void drawManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void drawWrongManualLottoCount() {
+        System.out.println("수동으로 해당 갯수만큼 구매할 수 없습니다.");
+    }
+
+    public static void drawManualLottoNumberInput() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public static void drawResult(LottoResult result, float benefit) {
