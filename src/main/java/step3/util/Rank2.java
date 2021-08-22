@@ -11,16 +11,18 @@ public enum Rank2 {
     FIFTH(5_000, (countOfMatch, matchBonus) -> countOfMatch == 3),
     MISS(0, (countOfMatch, matchBonus) -> countOfMatch == 0);
 
-    private int winningMoney;
-    private BiPredicate<Integer, Boolean> condition;
+    private final int winningMoney;
+    private final BiPredicate<Integer, Boolean> condition;
 
-    private Rank2(int winningMoney, boolean matchBonus) {
+    Rank2(final int winningMoney,
+         final BiPredicate<Integer, Boolean> condition) {
         this.winningMoney = winningMoney;
+        this.condition = condition;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    public static Rank2 valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.condition.apply(countOfMatch, matchBonus))
+                .filter(rank -> rank.condition.test(countOfMatch, matchBonus))
                 .findFirst()
                 .orElse(MISS);
     }
