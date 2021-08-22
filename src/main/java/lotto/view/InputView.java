@@ -26,9 +26,15 @@ public class InputView {
         }
     }
 
-    public static String getWinningNumber() {
+    public static List<Integer> getWinningNumber() {
         System.out.println(ASK_WINNING_NUMBER);
-        return SCANNER.nextLine();
+        try {
+            return Arrays.stream(split(SCANNER.nextLine()))
+                    .map(Integer::valueOf)
+                    .collect(Collectors.toList());
+        } catch (RuntimeException e) {
+            return getWinningNumber();
+        }
     }
 
     public static String askBonusNumber() {
