@@ -19,7 +19,11 @@ public class RandomNumbers {
         this.randomNumbers = generate();
     }
 
-    public List<LottoNumber> generate() {
+    public List<LottoNumber> getValue() {
+        return this.randomNumbers;
+    }
+
+    private List<LottoNumber> generate() {
         List<Integer> candidates = getCandidatesRangedFromMinToMax();
         shuffle(candidates);
         return pickRandomNumbers(candidates);
@@ -35,9 +39,5 @@ public class RandomNumbers {
 
     private List<Integer> getCandidatesRangedFromMinToMax() {
         return IntStream.rangeClosed(min, max).boxed().collect(Collectors.toList());
-    }
-
-    public List<LottoNumber> getValue() {
-        return this.randomNumbers;
     }
 }
