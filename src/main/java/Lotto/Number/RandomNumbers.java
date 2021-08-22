@@ -7,37 +7,24 @@ import java.util.stream.IntStream;
 
 public class RandomNumbers {
 
-    private final List<LottoNumber> randomNumbers;
-    private final int length;
-    private final int min;
-    private final int max;
-
-    public RandomNumbers(int length, int min, int max) {
-        this.length = length;
-        this.min = min;
-        this.max = max;
-        this.randomNumbers = generate();
+    private RandomNumbers() {
     }
 
-    public List<LottoNumber> getValue() {
-        return this.randomNumbers;
-    }
-
-    private List<LottoNumber> generate() {
-        List<Integer> candidates = getCandidatesRangedFromMinToMax();
+    public static List<LottoNumber> generate() {
+        List<LottoNumber> candidates = getCandidatesRangedFromMinToMax();
         shuffle(candidates);
         return pickRandomNumbers(candidates);
     }
 
-    private List<LottoNumber> pickRandomNumbers(List<Integer> candidates) {
-        return candidates.subList(0, length).stream().map(LottoNumber::new).collect(Collectors.toList());
+    private static List<LottoNumber> getCandidatesRangedFromMinToMax() {
+        return IntStream.rangeClosed(Limit.MIN.getValue(), Limit.MAX.getValue()).mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
-    private void shuffle(List<Integer> candidates) {
+    private static void shuffle(List<LottoNumber> candidates) {
         Collections.shuffle(candidates);
     }
 
-    private List<Integer> getCandidatesRangedFromMinToMax() {
-        return IntStream.rangeClosed(min, max).boxed().collect(Collectors.toList());
+    private static List<LottoNumber> pickRandomNumbers(List<LottoNumber> candidates) {
+        return candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
     }
 }
