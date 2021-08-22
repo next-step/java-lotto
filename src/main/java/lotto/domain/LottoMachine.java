@@ -1,20 +1,16 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private static final List<Ball> BALLS = initList();
-
-    private static List<Ball> initList() {
-        List<Ball> balls = new ArrayList<>(Ball.MAX_NUMBER);
-        for (int i = Ball.MIN_NUMBER; i <= Ball.MAX_NUMBER; i++) {
-            balls.add(Ball.from(i));
-        }
-        return balls;
-    }
+    private static final List<Ball> BALLS_POOL = IntStream.rangeClosed(Ball.MIN_NUMBER, Ball.MAX_NUMBER)
+            .mapToObj(Ball::from)
+            .collect(Collectors.toList());
 
     public static List<Lotto> buyRandomLotto(int totalMoney) {
         int count = totalMoney / LOTTO_PRICE;
@@ -27,7 +23,7 @@ public class LottoMachine {
     }
 
     private static Set<Ball> get6RandomBall() {
-        Collections.shuffle(BALLS);
-        return new HashSet<>(BALLS.subList(0, 6));
+        Collections.shuffle(BALLS_POOL);
+        return new HashSet<>(BALLS_POOL.subList(0, 6));
     }
 }
