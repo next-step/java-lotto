@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.BonusNumberStatus;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStatus;
-import lotto.domain.Result;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +9,10 @@ import java.util.stream.Stream;
 
 public class ResultView {
 
-    public static void print(List<LottoNumbers> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
-        lottoTickets.forEach(System.out::println);
+    public static void print(LottoTickets lottoTickets) {
+        System.out.println("수동으로 " + lottoTickets.getManualTicketCount() + "장, 자동으로 " + lottoTickets.getAutoTicketCount() + "개를 구매했습니다.");
+        lottoTickets.getLottoTickets()
+                .forEach(System.out::println);
     }
 
     public static void print(Result result) {
