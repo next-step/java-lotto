@@ -12,7 +12,7 @@ public enum LottoPrize {
 
   private static final List<LottoPrize> LOTTO_PRIZE_LIST = Arrays.asList(LottoPrize.values());
   private final int matchedCnt;
-  private final int prizeMoney;
+  private final long prizeMoney;
 
   LottoPrize(int matchedCnt, int prizeMoney) {
     this.matchedCnt = matchedCnt;
@@ -26,7 +26,7 @@ public enum LottoPrize {
         .orElse(NOTHING);
   }
 
-  public int getPrizeMoney() {
+  public long getPrizeMoney() {
     return prizeMoney;
   }
 

@@ -10,7 +10,7 @@ public class LottoGenerator {
 
   private static final List<Integer> CANDIDATE_NUMBERS = initCandidateNumbers();
 
-  public static List<Lotto> generate(int cnt) {
+  public static List<Lotto> generate(long cnt) {
     checkCnt(cnt);
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {
@@ -29,7 +29,7 @@ public class LottoGenerator {
         .boxed().collect(Collectors.toList());
   }
 
-  private static void checkCnt(int cnt) {
+  private static void checkCnt(long cnt) {
     if (cnt <= 0) {
       throw new IllegalArgumentException("생성하려는 로또의 수를 1개 이상 입력해주세요.");
     }

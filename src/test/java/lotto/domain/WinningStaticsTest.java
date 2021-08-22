@@ -61,7 +61,8 @@ class WinningStaticsTest {
     WinningStatics winningStatics = new WinningStatics(lottos, winningLotto);
 
     //then
-    double expected = (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE);
+    double expected =
+        (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE.getValue());
     assertThat(winningStatics.getRateOfReturn()).isEqualTo(expected);
   }
 }

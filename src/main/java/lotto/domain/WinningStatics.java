@@ -21,8 +21,8 @@ public class WinningStatics {
       }
     }
 
-    int inputMoney = lottos.size() * LottoGame.LOTTO_PRICE;
-    int totalPrizeMoney = 0;
+    long inputMoney = lottos.size() * LottoGame.LOTTO_PRICE.getValue();
+    long totalPrizeMoney = 0;
     for (LottoPrize key : statics.keySet()) {
       totalPrizeMoney += key.getPrizeMoney() * statics.get(key);
     }
