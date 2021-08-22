@@ -17,7 +17,7 @@ public class LottoApplication {
 
         LottoCount lottoCount = LottoCount.from(money);
 
-        LottoCount manualLottoCount = getManualLottoCount(lottoCount);
+        LottoCount manualLottoCount = getManualLottoCount(money);
 
         Lottos manualLottos = buyManualLottos(manualLottoCount);
 
@@ -49,12 +49,12 @@ public class LottoApplication {
         }
     }
 
-    public static LottoCount getManualLottoCount(LottoCount lottoCount) {
+    public static LottoCount getManualLottoCount(Money money) {
         try {
-            return LottoCount.of(askManualLottoCount(), lottoCount);
+            return LottoCount.of(askManualLottoCount(), money);
         } catch (LottoNumberCountException e) {
             System.out.println("수동으로 구매할 로또 개수 잘못 입력함. \n");
-            return getManualLottoCount(lottoCount);
+            return getManualLottoCount(money);
         }
     }
 
