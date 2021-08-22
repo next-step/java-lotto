@@ -4,7 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoSimulator {
 
@@ -33,9 +36,7 @@ public class LottoSimulator {
     private void run() {
         try {
             Money purchaseMoney = getPurchaseMoney();
-            PurchaseQuantity manualPurchaseQuantity = getManualPurchaseQuantity();
-            PurchaseQuantity automaticPurchaseQuantity = PurchaseQuantity.withAutomatic(purchaseMoney, manualPurchaseQuantity);
-            LottoTicket lottoTicket = createLottoTicket(manualPurchaseQuantity, automaticPurchaseQuantity);
+            LottoTicket lottoTicket = createLottoTicket(purchaseMoney, getManualPurchaseQuantity());
             WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbers();
             MatchResult matchResult = lottoTicket.match(winningLottoNumbers);
             printMatchResult(purchaseMoney, matchResult);
@@ -55,13 +56,19 @@ public class LottoSimulator {
         return inputView.getManualPurchaseQuantity();
     }
 
-    private LottoTicket createLottoTicket(PurchaseQuantity manualPurchaseQuantity, PurchaseQuantity automaticPurchaseQuantity) {
-        List<LottoNumbers> lottoNumbers = getManualLottoNumbers(manualPurchaseQuantity);
-        lottoNumbers.addAll(lottoNumbersGenerator.generate(automaticPurchaseQuantity));
-        LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
-        outputView.printPurchaseQuantity(manualPurchaseQuantity, automaticPurchaseQuantity);
+    private LottoTicket createLottoTicket(Money purchaseMoney, PurchaseQuantity manualPurchaseQuantity) {
+        List<LottoNumbers> manualLottoNumbers = getManualLottoNumbers(manualPurchaseQuantity);
+        List<LottoNumbers> automaticLottoNumbers = lottoNumbersGenerator.generate(purchaseMoney, manualPurchaseQuantity);
+        LottoTicket lottoTicket = LottoTicket.of(concat(manualLottoNumbers, automaticLottoNumbers));
+        outputView.printPurchaseQuantity(manualLottoNumbers.size(), automaticLottoNumbers.size());
         outputView.printLottoTicket(lottoTicket);
         return lottoTicket;
+    }
+
+    private List<LottoNumbers> concat(List<LottoNumbers> manualLottoNumbers, List<LottoNumbers> automaticLottoNumbers) {
+        return Stream.of(manualLottoNumbers, automaticLottoNumbers)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     private List<LottoNumbers> getManualLottoNumbers(PurchaseQuantity manualPurchaseQuantity) {

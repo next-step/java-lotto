@@ -16,7 +16,7 @@ class PurchaseQuantityTest {
     @ValueSource(ints = {-1000, 14500})
     public void purchaseFailTest(int amount) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseQuantity.withAutomatic(Money.of(amount), PurchaseQuantity.of(1)))
+                .isThrownBy(() -> PurchaseQuantity.of(Money.of(amount)))
                 .withMessageContaining(String.valueOf(amount));
     }
 
@@ -24,7 +24,7 @@ class PurchaseQuantityTest {
     @NullSource
     public void nullSourceExceptionTest(Money money) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseQuantity.withAutomatic(money, PurchaseQuantity.of(1)))
+                .isThrownBy(() -> PurchaseQuantity.of(money))
                 .withMessageContaining("null");
     }
 
@@ -36,10 +36,22 @@ class PurchaseQuantityTest {
                 .withMessageContaining(String.valueOf(-1));
     }
 
-    @ParameterizedTest(name = "구매 금액과 수동 구매 수량으로 자동 구매 수량을 알 수 있다.")
-    @CsvSource(value = {"3000,1,2", "3000,0,3", "3000,3,0"})
-    public void automaticPurchaseQuantityTest(int amount, int manual, int automatic) {
-        PurchaseQuantity automaticPurchaseQuantity = PurchaseQuantity.withAutomatic(Money.of(amount), PurchaseQuantity.of(manual));
-        assertThat(automaticPurchaseQuantity).isEqualTo(PurchaseQuantity.of(automatic));
+    @ParameterizedTest(name = "구매 수량 뺄셈 테스트")
+    @CsvSource(value = {"3,2,1", "3,0,3", "3,3,0"})
+    public void subtractTest(int minuend, int subtrahend, int expected) {
+        PurchaseQuantity minuendQuantity = PurchaseQuantity.of(minuend);
+        PurchaseQuantity subtrahendQuantity = PurchaseQuantity.of(subtrahend);
+        assertThat(minuendQuantity.subtract(subtrahendQuantity))
+                .isEqualTo(PurchaseQuantity.of(expected));
+    }
+
+    @DisplayName("감수가 피감수보다 큰 경우 예외가 발생한다.")
+    @Test
+    public void subtractExceptionTest() {
+        PurchaseQuantity minuendQuantity = PurchaseQuantity.of(1);
+        PurchaseQuantity subtrahendQuantity = PurchaseQuantity.of(2);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> minuendQuantity.subtract(subtrahendQuantity))
+                .withMessageContainingAll("1", "2");
     }
 }

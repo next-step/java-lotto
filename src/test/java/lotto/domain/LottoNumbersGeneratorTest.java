@@ -18,7 +18,7 @@ class LottoNumbersGeneratorTest {
     @Test
     public void lottoNumbersGenerateWithNumberRange() {
         LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(1,6);
-        List<LottoNumbers> generated = lottoNumbersGenerator.generate(PurchaseQuantity.of(1));
+        List<LottoNumbers> generated = lottoNumbersGenerator.generate(Money.of(1000), PurchaseQuantity.of(0));
         LottoNumbers expected = LottoNumbers.of(createMockLottoNumbers(1,2,3,4,5,6));
         assertThat(generated.get(0).countOfMatch(expected)).isEqualTo(6);
     }
@@ -37,14 +37,12 @@ class LottoNumbersGeneratorTest {
                 .withMessageContainingAll(String.valueOf(lowerBound), String.valueOf(upperBound));
     }
 
-    @DisplayName("입력 받은 수 만큼 로또 숫자를 발행한다.")
-    @Test
-    public void generateSeveralLottoNumbersTest() {
-        LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(LottoNumber.getLowerBound(), LottoNumber.getUpperBound());
-        List<LottoNumbers> lottoNumbers = lottoNumbersGenerator.generate(PurchaseQuantity.of(10));
-        assertThat(lottoNumbers)
-                .isNotNull()
-                .hasSize(10);
+    @ParameterizedTest(name = "구매 금액과 수동 구매 수량이 주어지면 자동 구매 수량만큼 로또 번호를 발행한다.")
+    @CsvSource(value = {"3000,0,3", "3000,3,0", "3000,1,2"})
+    public void automaticGenerateTest(int purchaseMoneyAmount, int manualPurchaseQuantity, int expectedGeneratedLottoNumbersCount) {
+        LottoNumbersGenerator lottoNumbersGenerator = LottoNumbersGenerator.rangeClosed(1, 45);
+        List<LottoNumbers> lottoNumbers = lottoNumbersGenerator.generate(Money.of(purchaseMoneyAmount), PurchaseQuantity.of(manualPurchaseQuantity));
+        assertThat(lottoNumbers).hasSize(expectedGeneratedLottoNumbersCount);
     }
 
 }

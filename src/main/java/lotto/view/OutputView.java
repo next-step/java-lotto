@@ -36,9 +36,9 @@ public class OutputView {
         printStream.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
     }
 
-    public void printPurchaseQuantity(PurchaseQuantity manualPurchaseQuantity, PurchaseQuantity automaticPurchaseQuantity) {
+    public void printPurchaseQuantity(long manualQuantity, long automaticQuantity) {
         printStream.println();
-        printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, manualPurchaseQuantity, automaticPurchaseQuantity);
+        printStream.printf(PURCHASE_QUANTITY_MESSAGE_FORMAT, manualQuantity, automaticQuantity);
     }
 
     public void printLottoTicket(LottoTicket lottoTicket) {
