@@ -7,7 +7,8 @@ public enum LottoPrize {
   FIRST(6, 2000000000),
   SECOND(5, 1500000),
   THIRD(4, 50000),
-  FOURTH(3, 5000);
+  FOURTH(3, 5000),
+  NOTHING(0, 0);
 
   private static final List<LottoPrize> LOTTO_PRIZE_LIST = Arrays.asList(LottoPrize.values());
   private final int matchedCnt;
@@ -22,7 +23,7 @@ public enum LottoPrize {
     return LOTTO_PRIZE_LIST.stream()
         .filter(lottoPrize -> lottoPrize.matchedCnt == matchedCnt)
         .findAny()
-        .orElseThrow(() -> new IllegalArgumentException("일치하는 상금이 없습니다."));
+        .orElse(NOTHING);
   }
 
   public int getPrizeMoney() {

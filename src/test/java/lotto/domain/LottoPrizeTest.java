@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,8 +20,10 @@ class LottoPrizeTest {
   @ParameterizedTest(name = "잘못된 상금 조회 테스트 횟수 : {0}")
   @CsvSource({"0", "1", "2", "7"})
   void invalidOfTest(int matchedCnt) {
-    assertThatIllegalArgumentException().isThrownBy(() -> {
-      LottoPrize.of(matchedCnt);
-    });
+    //when
+    LottoPrize prize = LottoPrize.of(matchedCnt);
+
+    //then
+    assertThat(prize).isEqualTo(LottoPrize.NOTHING);
   }
 }
