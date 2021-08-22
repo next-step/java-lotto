@@ -6,10 +6,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class AvailableNumbers {
+    private static final int MIN_VALUE = 0;
+
     private final List<Integer> availableNumbers;
 
     public AvailableNumbers(int minNumber, int maxNumber) {
-        if (minNumber < 0) {
+        if (minNumber < MIN_VALUE) {
             throw new IllegalArgumentException("You cannot enter a negative number for the minimum value.");
         }
         this.availableNumbers = Number.rangeNumber(minNumber, maxNumber);

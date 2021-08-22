@@ -18,8 +18,8 @@ public class LottoMain {
         view.showLottoList(lottoList);
 
         List<String> prevWinningLottoNumbers = view.getPrevWinningLottoNumbers();
-        prevWinningLottoNumbers.add(view.enteredBonusBallNumber());
-        List<Integer> result = lottoPurchasingMachine.checkLottoList(lottoList, Number.stringArrayToIntegerList(prevWinningLottoNumbers));
+        int bonusBallNumber = Integer.parseInt(view.enteredBonusBallNumber());
+        List<Integer> result = lottoPurchasingMachine.checkLottoList(lottoList, Number.stringArrayToIntegerList(prevWinningLottoNumbers), bonusBallNumber);
         double yield = lottoPurchasingMachine.findYield(result, purchaseAmount);
         view.showNumericalStatement(result, yield);
 

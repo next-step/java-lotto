@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumbers {
+    private static final int MIN_LENGTH = 6;
+
     private List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != MIN_LENGTH) {
             throw new IllegalArgumentException("you must input size 6");
         }
         this.lottoNumbers = lottoNumbers;

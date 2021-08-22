@@ -17,21 +17,18 @@ public class LottoPurchasingMachine {
         return lottoList;
     }
 
-    public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers) {
-        Integer[] result = new Integer[] {0,0,0,0};
+    public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers, int bonusNumber) {
+        Integer[] result = new Integer[] {0,0,0,0,0,0};
         for (Lotto lotto : lottoList) {
             int matchedNumberCount = lotto.findMatchedNumberCount(prevLottoWinningNumbers);
-            checkWinningResult(matchedNumberCount, Arrays.asList(result));
+            checkWinningResult(matchedNumberCount, Arrays.asList(result), lotto.checkBonusBallNumber(bonusNumber));
         }
         return Arrays.asList(result);
     }
 
-    private void checkWinningResult(int matchedNumberCount, List<Integer> result) {
-        for (LottoConstant constant : LottoConstant.values()) {
-            if (matchedNumberCount == constant.getMatchedCount()) {
-                result.set(constant.getPlaceIndex(), result.get(constant.getPlaceIndex()) + 1);
-            }
-        }
+    private void checkWinningResult(int matchedNumberCount, List<Integer> result, boolean checkBonusNumber) {
+        Rank rank = Rank.valueOf(matchedNumberCount, checkBonusNumber);
+        result.set(rank.getPlaceIndex(), result.get(rank.getPlaceIndex()) + 1);
     }
 
     public double findYield(List<Integer> result, int purchaseAmount) {
@@ -41,7 +38,7 @@ public class LottoPurchasingMachine {
 
     private long findTotalPrizeMoney(List<Integer> result) {
         int prizeMoney = 0;
-        for (LottoConstant constant : LottoConstant.values()) {
+        for (Rank constant : Rank.values()) {
             prizeMoney += result.get(constant.getPlaceIndex()) * constant.getPrizeMoney();
         }
         return prizeMoney;

@@ -46,4 +46,7 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
+    public boolean checkBonusBallNumber(int bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
 }
