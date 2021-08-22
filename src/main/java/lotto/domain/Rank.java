@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
-    NO_RANK(0, Money.from(0)),
-    FOURTH_RANK(3, Money.from(5000)),
-    THIRD_RANK(4, Money.from(50000)),
-    SECOND_RANK(5, Money.from(1500000)),
-    FIRST_RANK(6, Money.from(2000000000));
+    FIRST(6, Money.from(2_000_000_000)),
+    SECOND(5, Money.from(30_000_000)),
+    THIRD(5, Money.from(1_500_000)),
+    FOURTH(4, Money.from(50_000)),
+    FIFTH(3, Money.from(5_000)),
+    MISS(0, Money.from(0));
 
     private final int matchCount;
     private final Money money;
@@ -15,11 +20,31 @@ public enum Rank {
         this.money = money;
     }
 
-    public int getMatchCount() {
+    public static List<Rank> getRankList() {
+        return Arrays.stream(Rank.values())
+            .filter(e -> e != Rank.MISS)
+            .collect(Collectors.toList());
+    }
+
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        Rank rank = Arrays.stream(Rank.values())
+            .filter(e -> countOfMatch == e.matchCount())
+            .findFirst()
+            .orElse(Rank.MISS);
+
+        if (countOfMatch == 5 && !matchBonus) {
+            return Rank.THIRD;
+        }
+
+        return rank;
+    }
+
+    public int matchCount() {
         return matchCount;
     }
 
-    public Money getMoney() {
+    public Money money() {
         return money;
     }
+
 }

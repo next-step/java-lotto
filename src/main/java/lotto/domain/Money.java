@@ -37,7 +37,7 @@ public class Money {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Money money = (Money)object;
+        Money money = (Money) object;
         return amount == money.amount;
     }
 

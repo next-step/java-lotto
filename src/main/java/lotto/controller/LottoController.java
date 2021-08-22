@@ -1,14 +1,13 @@
 package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-
-import lotto.domain.LottoBalls;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
+import lotto.domain.generator.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoController {
     public static void main(String[] args) {
@@ -17,29 +16,35 @@ public class LottoController {
         LottoController lottoController = new LottoController();
 
         int lottoCount = inputView.inputLottoBuyAmount() / 1000;
-        List<LottoBalls> lottoBallsList = lottoController.createLottoBalls(resultView, lottoCount);
-        LottoTickets lottoTickets = new LottoTickets(lottoBallsList);
+        LottoTickets lottoTickets = LottoTickets.from(lottoController.getLottoTickets(inputView, resultView, lottoCount));
+        WinStatistics winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
 
-        Map<Integer, Integer> winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
-        resultView.outputStatistics(winStatistics, lottoTickets.getRateOfReturn(lottoCount, winStatistics));
+        resultView.outputStatistics(winStatistics, winStatistics.getRateOfReturn());
         inputView.scannerClose();
     }
 
-    public List<LottoBalls> createLottoBalls(ResultView resultView, int lottoCount) {
-        List<LottoBalls> lottoBallsList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottoBallsList.add(LottoBalls.createRandomNumber());
+    private List<LottoTicket> getLottoTickets(InputView inputView, ResultView resultView, int lottoCount) {
+        int manualLottoCount = inputView.inputManualLottoTicketCount();
+
+        LottoMachine lottoMachine = new LottoMachine();
+        resultView.outputManualLottoTickets(manualLottoCount);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            int[] lottoTicketNumbers = inputView.inputManualLottoTickets().stream().mapToInt(Integer::intValue).toArray();
+            lottoTickets.add(lottoMachine.manualCreate(lottoTicketNumbers));
         }
-        resultView.outputLottoLotteries(lottoBallsList);
-        return lottoBallsList;
+        lottoTickets.addAll(lottoMachine.autoCreate(lottoCount - manualLottoCount));
+        resultView.outputLottoLotteries(lottoTickets, manualLottoCount);
+
+        return lottoTickets;
     }
 
-    public Map<Integer, Integer> proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
-        LottoBalls lottoBalls =
-            LottoBalls.of(Stream.of(inputView.inputInputLastWeekWinnerNumbers().split(","))
+    public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {
+        LottoTicket lottoTicket =
+            LottoTicket.of(Stream.of(inputView.inputLastWeekWinnerNumbers().split(","))
                 .mapToInt(s -> Integer.parseInt(s.trim()))
                 .toArray());
-        return lottoTickets.getLottoStatistics(lottoBalls);
+        WinnerNumbers winnerNumbers = WinnerNumbers.from(lottoTicket, LottoBall.select(inputView.inputBonusNumber()));
+        return lottoTickets.calculateStatistics(winnerNumbers);
     }
-
 }

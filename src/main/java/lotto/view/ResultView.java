@@ -1,45 +1,71 @@
 package lotto.view;
 
+import lotto.domain.LottoBall;
+import lotto.domain.LottoTicket;
+import lotto.domain.Rank;
+import lotto.domain.WinStatistics;
+
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.domain.LottoBall;
-import lotto.domain.LottoBalls;
-
 public class ResultView {
-    private static final String OUTPUT_LOTTO_COUNT = "개를 구매했습니다.";
+    private static final String OUTPUT_MANUAL_LOTTOTICKETS = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String OUTPUT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계\n---------\n";
-    private static final String OUTPUT_THREE_MATCH_CASE = "3개 일치 (5000원)- %d개\n";
-    private static final String OUTPUT_FOUR_MATCH_CASE = "4개 일치 (50000원)- %d개\n";
-    private static final String OUTPUT_FIVE_MATCH_CASE = "5개 일치 (1500000원)- %d개\n";
-    private static final String OUTPUT_SIX_MATCH_CASE = "6개 일치 (2000000000)- %d개\n";
+    private static final String OUTPUT_NORMAL_MATCH_CASE = "%d개 일치 (%d원) - %d개";
+    private static final String OUTPUT_BONUS_MATCH_CASE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final String OUTPUT_TOTAL_RATE_OF_RETURN
         = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n";
 
-    public void outputLottoCount(int lottoCount) {
-        System.out.println(lottoCount + OUTPUT_LOTTO_COUNT);
+    private static void println(String input) {
+        System.out.println(input);
     }
 
-    public void outputLottoLotteries(List<LottoBalls> lottoBallsList) {
-        int lottoCount = lottoBallsList.size();
-        outputLottoCount(lottoCount);
-        for (LottoBalls lottoBalls : lottoBallsList) {
-            outputLottoBalls(lottoBalls);
-        }
+    private static void printf(String format, Object... args) {
+        System.out.printf(format, args);
     }
 
-    private void outputLottoBalls(LottoBalls lottoBalls) {
-        System.out.println("[" + lottoBalls.getLottoBallsStream().map(LottoBall::toString)
+    public void outputLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf("\n" + OUTPUT_LOTTO_COUNT + "%n", manualLottoCount, autoLottoCount);
+    }
+
+    public void outputLottoLotteries(List<LottoTicket> lottoTickets, int manualLottoCount) {
+        outputLottoCount(manualLottoCount, lottoTickets.size() - manualLottoCount);
+        lottoTickets.forEach(this::outputLottoTickets);
+    }
+
+    public void outputLottoTickets(LottoTicket lottoTicket) {
+        System.out.println("[" + lottoTicket.toLottoBallSet()
+            .stream()
+            .map(LottoBall::number)
+            .sorted()
+            .map(String::valueOf)
             .collect(Collectors.joining(", ")) + "]");
     }
 
-    public void outputStatistics(Map<Integer, Integer> winStatistics, float rateOfReturn) {
-        System.out.println(OUTPUT_STATISTICS_TITLE);
-        System.out.printf(OUTPUT_THREE_MATCH_CASE, winStatistics.getOrDefault(3, 0));
-        System.out.printf(OUTPUT_FOUR_MATCH_CASE, winStatistics.getOrDefault(4, 0));
-        System.out.printf(OUTPUT_FIVE_MATCH_CASE, winStatistics.getOrDefault(5, 0));
-        System.out.printf(OUTPUT_SIX_MATCH_CASE, winStatistics.getOrDefault(6, 0));
-        System.out.printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+    private void outputPrizeStatistics(Rank rank, WinStatistics winStatistics) {
+        String prizeStatisticsFormat = OUTPUT_NORMAL_MATCH_CASE;
+        if (rank == Rank.SECOND) {
+            prizeStatisticsFormat = OUTPUT_BONUS_MATCH_CASE;
+        }
+        String resultFormat = String.format(prizeStatisticsFormat,
+            rank.matchCount(),
+            rank.money().amount(),
+            winStatistics.result().getOrDefault(rank, 0)
+        );
+        println(resultFormat);
+    }
+
+    public void outputStatistics(WinStatistics winStatistics, float rateOfReturn) {
+        println("\n" + OUTPUT_STATISTICS_TITLE);
+        Rank.getRankList()
+            .forEach(rank -> outputPrizeStatistics(rank, winStatistics));
+        printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+    }
+
+    public void outputManualLottoTickets(int lottoTicketCount) {
+        if (lottoTicketCount > 0) {
+            System.out.println("\n" + OUTPUT_MANUAL_LOTTOTICKETS);
+        }
     }
 }
