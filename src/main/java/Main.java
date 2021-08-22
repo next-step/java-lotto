@@ -12,8 +12,11 @@ public class Main {
         InputView inputView = new InputView(scanner);
 
         int purchaseAmount = inputView.receivePurchaseMoney();
-        LottoTickets lottoTickets = LottoGame.buy(Money.wons(purchaseAmount));
-        ResultView.print(lottoTickets.getLottoTickets());
+        int manualLottoCount = inputView.receiveManualLottoCount();
+        String[] manualLottoNumbers = inputView.receiveManualLottoNumbers(manualLottoCount);
+
+        LottoTickets lottoTickets = LottoGame.buy(Money.wons(purchaseAmount), manualLottoNumbers);
+        ResultView.print(lottoTickets);
 
         LottoNumbers winningNumbers = LottoNumbersFactory.makeLottoNumbers(inputView.receiveWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(inputView.receiveBonusNumber());
