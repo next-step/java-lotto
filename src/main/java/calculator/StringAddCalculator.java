@@ -5,11 +5,15 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     public static int splitAndSum(String text) {
-        if (text == null || text.isEmpty()) {
+        if (!isValidText(text)) {
             return 0;
         }
 
         return add(parseOperands(text));
+    }
+
+    static boolean isValidText(String text) {
+        return !(text == null || text.isEmpty());
     }
 
     static String[] parseOperands(String text) {
