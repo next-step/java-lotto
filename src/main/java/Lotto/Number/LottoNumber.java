@@ -2,21 +2,21 @@ package Lotto.Number;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
-    private final int number;
+    private final int lottoNumber;
 
-    public Number(int lottoNumber) {
+    public LottoNumber(int lottoNumber) {
         isValid(lottoNumber);
-        this.number = lottoNumber;
+        this.lottoNumber = lottoNumber;
     }
 
     public int getValue() {
-        return this.number;
+        return this.lottoNumber;
     }
 
-    private void isValid(int number) {
-        if (Limit.MAX.isUnder(number) || Limit.MIN.isAbove(number)) {
+    private void isValid(int lottoNumber) {
+        if (Limit.MAX.isUnder(lottoNumber) || Limit.MIN.isAbove(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자는 1 이상, 45 이하의 정수입니다.");
         }
     }
@@ -26,12 +26,12 @@ public class Number {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number that = (Number) o;
-        return number == that.number;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(lottoNumber);
     }
 }

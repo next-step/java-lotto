@@ -7,16 +7,16 @@ import java.util.stream.IntStream;
 
 public class RandomNumbers {
 
-    private final List<Number> randomNumbers;
+    private final List<LottoNumber> randomNumbers;
 
     public RandomNumbers(int length, int min, int max) {
         this.randomNumbers = generate(length, min, max);
     }
 
-    public List<Number> generate(int length, int min, int max) {
+    public List<LottoNumber> generate(int length, int min, int max) {
         List<Integer> candidates = getCandidatesRangedFromMinToMax(min, max);
         shuffle(candidates);
-        return candidates.subList(0, length).stream().map(Number::new).collect(Collectors.toList());
+        return candidates.subList(0, length).stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     private void shuffle(List<Integer> candidates) {
@@ -27,7 +27,7 @@ public class RandomNumbers {
         return IntStream.rangeClosed(min, max).boxed().collect(Collectors.toList());
     }
 
-    public List<Number> getValue() {
+    public List<LottoNumber> getValue() {
         return this.randomNumbers;
     }
 }

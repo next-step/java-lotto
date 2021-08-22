@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("로또 숫자는")
-public class NumberTest {
+public class LottoNumberTest {
     public static final int MIN = 1;
     public static final int MAX = 45;
 
@@ -16,13 +16,13 @@ public class NumberTest {
     @ParameterizedTest(name = "숫자 {0} 일 때")
     @ValueSource(ints = {MIN - 1, MAX + 1})
     void lottoNumberUnder1orAbove45ThrowsError(int number) {
-        assertThatThrownBy(() -> new Number(number)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
+        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
     }
 
     @DisplayName("1이상 45이하일 경우 정상 생성")
     @ParameterizedTest(name = "숫자 {0} 일 때")
     @ValueSource(ints = {MIN, MAX})
     void lottoNumberIsFrom1to45(int number) {
-        assertDoesNotThrow(() -> new Number(number));
+        assertDoesNotThrow(() -> new LottoNumber(number));
     }
 }

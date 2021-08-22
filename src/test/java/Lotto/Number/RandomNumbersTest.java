@@ -25,8 +25,8 @@ public class RandomNumbersTest {
     @Test
     void generateGivenMaxAsMaxCandidateOfRandomNumbers() {
         RandomNumbers randomNumbers = new RandomNumbers(Limit.MAX.getValue(), Limit.MIN.getValue(), Limit.MAX.getValue());
-        Number actual = randomNumbers.getValue().stream().max(Comparator.comparing(Number::getValue)).get();
-        Number expected = new Number(Limit.MAX.getValue());
+        LottoNumber actual = randomNumbers.getValue().stream().max(Comparator.comparing(LottoNumber::getValue)).get();
+        LottoNumber expected = new LottoNumber(Limit.MAX.getValue());
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -34,8 +34,8 @@ public class RandomNumbersTest {
     @Test
     void generateGivenMinAsMinCandidateOfRandomNumbers() {
         RandomNumbers randomNumbers = new RandomNumbers(Limit.MAX.getValue(), Limit.MIN.getValue(), Limit.MAX.getValue());
-        Number actual = randomNumbers.getValue().stream().min(Comparator.comparing(Number::getValue)).get();
-        Number expected = new Number(Limit.MIN.getValue());
+        LottoNumber actual = randomNumbers.getValue().stream().min(Comparator.comparing(LottoNumber::getValue)).get();
+        LottoNumber expected = new LottoNumber(Limit.MIN.getValue());
         assertThat(actual).isEqualTo(expected);
     }
 }
