@@ -16,8 +16,16 @@ public class MoneyTest {
     @Test
     void plus() {
         Money money = Money.wons(1000L);
-        Money plus = money.plus(Money.wons(2000L));
-        assertThat(plus).isEqualTo(Money.wons(3000L));
+        Money result = money.plus(Money.wons(2000L));
+        assertThat(result).isEqualTo(Money.wons(3000L));
+    }
+
+    @DisplayName("빼기")
+    @Test
+    void minus() {
+        Money money = Money.wons(3000L);
+        Money result = money.minus(Money.wons(2000L));
+        assertThat(result).isEqualTo(Money.wons(1000L));
     }
 
     @DisplayName("나누기")
