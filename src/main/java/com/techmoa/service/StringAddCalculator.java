@@ -1,23 +1,44 @@
 package com.techmoa.service;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
+    public static String targetStr = "";
     public static int result = 0;
+    public static final String REGEXSPLIT =",";
+
     public static int splitAndSum(String inputStr) {
-        if(checkNullStr(inputStr)) {
-            checkOneChar(inputStr);
+        targetStr = inputStr;
+        if(checkNullStr()) {
+            checkOneChar();
+            checkComa();
         }
 
         return result;
     }
-    public static boolean checkNullStr(String inputStr) {
-        if(inputStr == null || inputStr.isEmpty()) {
+
+    private static void checkComa() {
+        if (checkRegexSplit()) {
+            String paramSums[] = targetStr.split(REGEXSPLIT);
+            result = Arrays.stream(paramSums)
+                        .mapToInt(Integer::parseInt)
+                        .sum();
+        }
+    }
+
+    private static boolean checkRegexSplit() {
+        return targetStr.contains(REGEXSPLIT);
+    }
+
+    public static boolean checkNullStr() {
+        if(targetStr == null || targetStr.isEmpty()) {
             result = 0;
             return false;
         }
         return true;
     }
-    public static void checkOneChar(String inputStr) {
-        if(inputStr.length() == 1)
-            result =  Integer.parseInt(inputStr);
+    public static void checkOneChar() {
+        if(targetStr.length() == 1)
+            result =  Integer.parseInt(targetStr);
     }
 }
