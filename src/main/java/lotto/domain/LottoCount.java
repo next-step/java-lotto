@@ -14,11 +14,11 @@ public class LottoCount {
         return new LottoCount(money.getLottoCount());
     }
 
-    public static LottoCount of(int manualLottoCount, LottoCount lottoCount) {
-        if (lottoCount.count < manualLottoCount) {
+    public static LottoCount of(int lottoCount, Money money) {
+        if (money.getLottoCount() < lottoCount) {
             throw new LottoNumberCountException();
         }
-        return new LottoCount(manualLottoCount);
+        return new LottoCount(lottoCount);
     }
 
     private void validateCount(int count) {
