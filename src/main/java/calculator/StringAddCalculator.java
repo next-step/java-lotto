@@ -26,9 +26,19 @@ public class StringAddCalculator {
         int sum = 0;
 
         for (int i = 0; i < operands.length; i++) {
-            sum += Integer.parseInt(operands[i]);
+            sum += checkValidOperand(operands[i]);
         }
 
         return sum;
+    }
+
+    static int checkValidOperand(String operand) {
+        int num = Integer.parseInt(operand);
+
+        if (num < 0) {
+            throw new IllegalArgumentException("음수는 유효하지 않습니다.");
+        }
+
+        return num;
     }
 }
