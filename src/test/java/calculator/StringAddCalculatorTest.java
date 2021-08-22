@@ -37,8 +37,8 @@ class StringAddCalculatorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'//;\\n1;2;3', 6",
-            "'//|\\n1|4|8', 13"
+            "'//;\n1;2;3', 6",
+            "'//|\n1|4|8', 13"
     })
     void 커스텀_구분자_테스트(String input, int expected) {
         int actual = stringAddCalculator.calculate(input);
