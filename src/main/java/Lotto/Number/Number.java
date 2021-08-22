@@ -11,6 +11,10 @@ public class Number {
         this.number = lottoNumber;
     }
 
+    public int getValue() {
+        return this.number;
+    }
+
     private void isValid(int number) {
         if (Limit.MAX.isUnder(number) || Limit.MIN.isAbove(number)) {
             throw new IllegalArgumentException("로또 숫자는 1 이상, 45 이하의 정수입니다.");

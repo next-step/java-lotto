@@ -9,6 +9,10 @@ public enum Limit {
         this.limit = number;
     }
 
+    public int getValue() {
+        return limit;
+    }
+
     public boolean isUnder(int lottoNumber) {
         return limit < lottoNumber;
     }
