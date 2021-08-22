@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -33,6 +34,27 @@ public class LottoTicketOffice {
         return lottoNumber.stream()
                 .limit(LottoTicket.SIZE)
                 .sorted()
-                .collect(collectingAndThen(toList(), LottoTicket::new));
+                .collect(collectingAndThen(toList(), LottoTicket::of));
+    }
+
+    public List<LottoTicket> buyLotto(int amount, List<String> numbers) {
+        return combineTickets(amount, numbers);
+    }
+
+    private List<LottoTicket> combineTickets(int amount, List<String> numbers) {
+        List<LottoTicket> totalTicket = new ArrayList<>();
+        totalTicket.addAll(publishManualTickets(numbers));
+        totalTicket.addAll(publishAutoTickets(amount - numbers.size() * PRICE));
+        return totalTicket;
+    }
+
+    private List<LottoTicket> publishAutoTickets(int amount) {
+        return buyLotto(amount);
+    }
+
+    private List<LottoTicket> publishManualTickets(List<String> numbers) {
+        return numbers.stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
     }
 }

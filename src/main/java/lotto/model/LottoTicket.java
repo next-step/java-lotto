@@ -12,11 +12,11 @@ public class LottoTicket {
 
     private final Set<LottoNumber> numbers;
 
-    public LottoTicket(Set<LottoNumber> numbers) {
+    private LottoTicket(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public LottoTicket(List<Integer> numbers) {
+    private LottoTicket(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::of)
@@ -29,12 +29,13 @@ public class LottoTicket {
 
     public static LottoTicket of(String numbers) {
         return new LottoTicket(Arrays.stream(numbers.split(DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList())
         );
     }
 
-    public List<Integer> getNumbers(){
+    public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
                 .sorted()
@@ -73,4 +74,16 @@ public class LottoTicket {
                 .count());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
 }
