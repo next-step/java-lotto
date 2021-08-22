@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -34,6 +35,14 @@ public class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(expect);
 	}
 
+	@DisplayName(value = "숫자 이외의 값 또는 음수를 전달하는 경우 예외를 던짐")
+	@ValueSource(strings = {"1,-2,3", "1,2,a", "a,b,c"})
+	@ParameterizedTest
+	void inputNonNumericOrNegative(String input) {
+		assertThatThrownBy(() -> stringAddCalculator.splitAndSum(input))
+			.isInstanceOf(RuntimeException.class);
+	}
+
 	@DisplayName(value = "커스텀 구분자 테스트")
 	@Test
 	void inputUsingCustomSeparator() {
@@ -43,11 +52,11 @@ public class StringAddCalculatorTest {
 		assertThat(result).isEqualTo(expect);
 	}
 
-	@DisplayName(value = "숫자 이외의 값 또는 음수를 전달하는 경우 예외를 던짐")
-	@ValueSource(strings = {"1,-2,3", "1,2,a", "a,b,c"})
+	@DisplayName(value = "문자열 덧셈 계산기 테스트")
+	@CsvSource(value = {"1,2,3=6", "2:3:4=9"}, delimiter = '=')
 	@ParameterizedTest
-	void inputNonNumericOrNegative(String input) {
-		assertThatThrownBy(() -> stringAddCalculator.splitAndSum(input))
-			.isInstanceOf(RuntimeException.class);
+	void setStringAddCalculatorTest(String input, int expect) {
+		int result = stringAddCalculator.splitAndSum(input);
+		assertThat(result).isEqualTo(expect);
 	}
 }
