@@ -11,7 +11,6 @@ public class LottoWin {
   private int thirdWinnerCount;
   private int fourthWinnerCount;
 
-  private Lottos lottoWinners;
   private List<String> lottowinningNumbers;
 
   public LottoWin(String[] lottowinningNumbers) {
@@ -20,7 +19,6 @@ public class LottoWin {
     thirdWinnerCount = 0;
     fourthWinnerCount = 0;
 
-    this.lottoWinners = new Lottos();
     this.lottowinningNumbers = new ArrayList(Arrays.asList(lottowinningNumbers));
   }
 
@@ -66,13 +64,13 @@ public class LottoWin {
 
   public LottoWin draw(Lottos lottos) {
     for (int i = 0; i < lottos.getLottosSize(); i++) {
-      addWinningLotto(lottos.getLotto(i));
+      calculateRank(lottos.getLotto(i));
     }
 
     return this;
   }
 
-  public void addWinningLotto(Lotto lotto) {
+  public void calculateRank(Lotto lotto) {
 
     int matchNumberCount = 0;
 
@@ -81,7 +79,6 @@ public class LottoWin {
     }
 
     if (matchNumberCount > 0) {
-      lottoWinners.addLotto(lotto);
       calculateWin(matchNumberCount);
     }
   }

@@ -2,6 +2,7 @@ package step2;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,13 +28,14 @@ public class LottosTest {
   public void Lotto_1개_구매() {
     final int userAmount = 1000;
 
-    Lottos lottos = new Lottos();
-
+    List<Lotto> lottoList = new ArrayList<>();
     Lotto lotto = new Lotto(lottoNumber);
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      lottos.addLotto(lotto);
+      lottoList.add(lotto);
     }
+
+    Lottos lottos = new Lottos(lottoList);
 
     for (int i = 0; i < lottos.getLottosSize(); i += LOTTO_PRICE) {
       assertThat(lottos.getLotto(i).getLottoNumbers()).isEqualTo(lottoNumber);
@@ -44,12 +46,14 @@ public class LottosTest {
   @ValueSource(ints = {2000, 3000, 14000})
   public void Lotto_N개_구매(int userAmount) {
 
-    Lottos lottos = new Lottos();
+    List<Lotto> lottoList = new ArrayList<>();
     Lotto lotto = new Lotto(lottoNumber);
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      lottos.addLotto(lotto);
+      lottoList.add(lotto);
     }
+
+    Lottos lottos = new Lottos(lottoList);
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       assertThat(lottos.getLotto(i).getLottoNumbers()).isEqualTo(lottoNumber);

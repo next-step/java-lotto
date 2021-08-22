@@ -1,14 +1,13 @@
 package step2.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
   private final List<Lotto> lottos;
 
-  public Lottos() {
-    this.lottos = new ArrayList();
+  public Lottos(List lottos) {
+    this.lottos = lottos;
   }
 
   public Lotto getLotto(int index) {
@@ -17,13 +16,5 @@ public class Lottos {
 
   public int getLottosSize() {
     return lottos.size();
-  }
-
-  public void issueLottos(List<Integer> lottoNumbers) {
-    lottos.add(new Lotto(lottoNumbers));
-  }
-
-  public void addLotto(Lotto lotto) {
-    this.lottos.add(lotto);
   }
 }
