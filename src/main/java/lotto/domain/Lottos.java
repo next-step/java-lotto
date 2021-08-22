@@ -22,8 +22,10 @@ public class Lottos {
         return matchesCount;
     }
 
-    public void mergeLottos(Lottos autoLottos) {
-        autoLottos.lottos.forEach(lotto -> this.lottos.add(lotto));
+    public Lottos mergeLottos(Lottos autoLottos) {
+        return new Lottos(autoLottos.lottos.stream()
+                .filter(this.lottos::add)
+                .collect(Collectors.toList()));
     }
 
     public List<Lotto> getLottos() {
