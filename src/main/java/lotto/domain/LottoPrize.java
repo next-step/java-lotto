@@ -29,4 +29,8 @@ public enum LottoPrize {
   public int getPrizeMoney() {
     return prizeMoney;
   }
+
+  public int getMatchedCnt() {
+    return matchedCnt;
+  }
 }
