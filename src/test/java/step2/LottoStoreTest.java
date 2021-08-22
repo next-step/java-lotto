@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.model.LottoStore;
 import step2.model.LottoWin;
 import step2.model.Lottos;
+import step2.model.WinnerMoney;
 
 public class LottoStoreTest {
   List lottoNumber;
@@ -55,9 +56,10 @@ public class LottoStoreTest {
 
     LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers.split(","));
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
   }
 }

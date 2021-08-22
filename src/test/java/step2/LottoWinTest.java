@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import step2.model.Lotto;
 import step2.model.LottoWin;
 import step2.model.Lottos;
+import step2.model.WinnerMoney;
 
 public class LottoWinTest {
 
@@ -28,49 +29,68 @@ public class LottoWinTest {
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
     lottoWin.draw(lottos);
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
   }
 
   @Test
   public void Lotto_2등_추첨_테스트() {
     Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumber)));
     String[] lottowinningNumbers = {"1", "2", "3", "4", "5", "16"};
-    LottoWin lottoWin = new LottoWin(lottowinningNumbers);
+    LottoWin lottoWin = new LottoWin(lottowinningNumbers, 6);
     lottoWin.draw(lottos);
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
   }
+
 
   @Test
   public void Lotto_3등_추첨_테스트() {
     Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumber)));
-    String[] lottowinningNumbers = {"1", "2", "3", "4", "15", "16"};
+    String[] lottowinningNumbers = {"1", "2", "3", "4", "5", "16"};
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
     lottoWin.draw(lottos);
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
   }
 
   @Test
   public void Lotto_4등_추첨_테스트() {
     Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumber)));
+    String[] lottowinningNumbers = {"1", "2", "3", "4", "15", "16"};
+    LottoWin lottoWin = new LottoWin(lottowinningNumbers);
+    lottoWin.draw(lottos);
+
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+  }
+
+  @Test
+  public void Lotto_5등_추첨_테스트() {
+    Lottos lottos = new Lottos(Arrays.asList(new Lotto(lottoNumber)));
     String[] lottowinningNumbers = {"1", "2", "3", "14", "15", "16"};
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
     lottoWin.draw(lottos);
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(1);
   }
 
   @Test
@@ -80,10 +100,11 @@ public class LottoWinTest {
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
     lottoWin.draw(lottos);
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(0);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
   }
 
 
@@ -92,14 +113,14 @@ public class LottoWinTest {
     String[] lottowinningNumbers = {"1", "2", "3", "4", "5", "6"};
     LottoWin lottoWin = new LottoWin(lottowinningNumbers);
 
-    lottoWin.countUpFirstWinner();
-    lottoWin.countUpSecondWinner();
-    lottoWin.countUpThirdWinner();
-    lottoWin.countUpFourthWinner();
+    for(WinnerMoney winnerMoney : WinnerMoney.values()) {
+      lottoWin.addWinnerCount(winnerMoney, winnerMoney.hasMatchBonusNumber());
+    }
 
-    assertThat(lottoWin.getFirstWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getSecondWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getThirdWinnerCount()).isEqualTo(1);
-    assertThat(lottoWin.getFourthWinnerCount()).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(1);
   }
 }

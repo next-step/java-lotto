@@ -2,24 +2,32 @@ package step2.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoWin {
 
-  private int firstWinnerCount;
-  private int secondWinnerCount;
-  private int thirdWinnerCount;
-  private int fourthWinnerCount;
+  private Map<Integer, Integer> winnerCountMap;
 
-  private List<String> lottowinningNumbers;
+  private List<String> lottoWinningNumbers;
+  private int lottoWinningBonusNumber;
 
-  public LottoWin(String[] lottowinningNumbers) {
-    firstWinnerCount = 0;
-    secondWinnerCount = 0;
-    thirdWinnerCount = 0;
-    fourthWinnerCount = 0;
+  public LottoWin(String[] lottoWinningNumbers) {
+    winnerCountMap = new HashMap() {{
+      put(WinnerMoney.FIRST_WINNER_MONEY.winRank, 0);
+      put(WinnerMoney.SECOND_WINNER_MONEY.winRank, 0);
+      put(WinnerMoney.THIRD_WINNER_MONEY.winRank, 0);
+      put(WinnerMoney.FOURTH_WINNER_MONEY.winRank, 0);
+      put(WinnerMoney.FIFTH_WINNER_MONEY.winRank, 0);
+    }};
 
-    this.lottowinningNumbers = new ArrayList(Arrays.asList(lottowinningNumbers));
+    this.lottoWinningNumbers = new ArrayList(Arrays.asList(lottoWinningNumbers));
+  }
+
+  public LottoWin(String[] lottoWinningNumbers, int lottowinningBonusNumber) {
+    this(lottoWinningNumbers);
+    this.lottoWinningBonusNumber = lottowinningBonusNumber;
   }
 
   private int isMatchNumber(Lotto lotto, String lottoNumStr) {
@@ -30,36 +38,18 @@ public class LottoWin {
     return matchNumberCount;
   }
 
-  public void countUpFirstWinner() {
-    firstWinnerCount++;
+  public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
+    if (hasWinningBonusNumber) {
+      winnerCountMap.replace(WinnerMoney.SECOND_WINNER_MONEY.getWinRank(),
+          winnerCountMap.get(winnerMoney.getWinRank()) + 1);
+    } else {
+      winnerCountMap
+          .replace(winnerMoney.getWinRank(), winnerCountMap.get(winnerMoney.getWinRank()) + 1);
+    }
   }
 
-  public void countUpSecondWinner() {
-    secondWinnerCount++;
-  }
-
-  public void countUpThirdWinner() {
-    thirdWinnerCount++;
-  }
-
-  public void countUpFourthWinner() {
-    fourthWinnerCount++;
-  }
-
-  public int getFirstWinnerCount() {
-    return firstWinnerCount;
-  }
-
-  public int getSecondWinnerCount() {
-    return secondWinnerCount;
-  }
-
-  public int getThirdWinnerCount() {
-    return thirdWinnerCount;
-  }
-
-  public int getFourthWinnerCount() {
-    return fourthWinnerCount;
+  public int getWinnerCount(int winnerRank) {
+    return winnerCountMap.get(winnerRank);
   }
 
   public LottoWin draw(Lottos lottos) {
@@ -70,34 +60,39 @@ public class LottoWin {
     return this;
   }
 
-  public void calculateRank(Lotto lotto) {
-
+  private void calculateRank(Lotto lotto) {
     int matchNumberCount = 0;
+    boolean hasWinningBonusNumber = false;
 
-    for (String lottoNumStr : lottowinningNumbers) {
+    for (String lottoNumStr : lottoWinningNumbers) {
       matchNumberCount += isMatchNumber(lotto, lottoNumStr);
     }
 
-    if (matchNumberCount > 0) {
-      calculateWin(matchNumberCount);
+    if (isMatchNumber(lotto, String.valueOf(lottoWinningBonusNumber)) == 1) {
+      hasWinningBonusNumber = true;
+    }
+
+    calculateWin(matchNumberCount, hasWinningBonusNumber);
+  }
+
+  private void calculateWin(int matchNumberCount, boolean hasWinningBonusNumber) {
+    if (matchNumberCount <= 0) {
+      return;
+    }
+
+    for (WinnerMoney winnerMoney : WinnerMoney.values()) {
+      matchWinnerCount(matchNumberCount, winnerMoney, hasWinningBonusNumber);
     }
   }
 
-  public void calculateWin(int matchNumberCount) {
-    if (matchNumberCount == WinnerMoney.FIRST_WINNER_MONEY.getMatchNumberCount()) {
-      countUpFirstWinner();
+  private boolean matchWinnerCount(int matchNumberCount, WinnerMoney winnerMoney,
+      boolean hasWinningBonusNumber) {
+    if (matchNumberCount == winnerMoney.getMatchNumberCount()
+        && hasWinningBonusNumber == winnerMoney.hasMatchBonusNumber()) {
+      addWinnerCount(winnerMoney, hasWinningBonusNumber);
+      return true;
     }
 
-    if (matchNumberCount == WinnerMoney.SECOND_WINNER_MONEY.getMatchNumberCount()) {
-      countUpSecondWinner();
-    }
-
-    if (matchNumberCount == WinnerMoney.THIRD_WINNER_MONEY.getMatchNumberCount()) {
-      countUpThirdWinner();
-    }
-
-    if (matchNumberCount == WinnerMoney.FOURTH_WINNER_MONEY.getMatchNumberCount()) {
-      countUpFourthWinner();
-    }
+    return false;
   }
 }
