@@ -9,9 +9,13 @@ public class Lotto {
     public Lotto(PickNumberStrategy pickNumberStrategy) {
         this.lottoNumbers = new LottoNumbers(pickNumberStrategy);
     }
-
+    
     public LottoNumbers getNumbers() {
         return lottoNumbers;
+    }
+
+    public boolean hasDuplicatedLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.getValues().contains(lottoNumber);
     }
 
     public static int calcPurchaseLottoCount(int purchaseAmount) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AutoNumberStrategy implements PickNumberStrategy {
 
-    List<Integer> lottoNumbers = new ArrayList<>();
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
@@ -15,14 +15,14 @@ public class AutoNumberStrategy implements PickNumberStrategy {
 
     public AutoNumberStrategy() {
         for (int i = MIN_LOTTO_NUM; i <= MAX_LOTTO_NUM; i++) {
-            lottoNumbers.add(i);
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
     @Override
-    public List<Integer> makeLottoNumber() {
+    public List<LottoNumber> makeLottoNumber() {
         Collections.shuffle(lottoNumbers);
-        List<Integer> autoPickNumber = lottoNumbers.subList(0, LOTTO_NUM_COUNT);
+        List<LottoNumber> autoPickNumber = lottoNumbers.subList(0, LOTTO_NUM_COUNT);
         Collections.sort(autoPickNumber);
         return autoPickNumber;
     }

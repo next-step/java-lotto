@@ -1,31 +1,21 @@
 package domain;
 
-import view.InputView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManualNumberStrategy implements PickNumberStrategy {
 
-    List<Integer> lottoNumbers;
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    public ManualNumberStrategy(int[] lottoNumber) {
+        for (int number : lottoNumber) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+    }
 
     @Override
-    public List<Integer> makeLottoNumber() {
-        lottoNumbers = new ArrayList<>();
-        while (true) {
-            try {
-                String winningNumber = InputView.enterLottoNumber();
-                convertStringArrayToIntArray(winningNumber.split(","));
-                return lottoNumbers;
-            } catch (NumberFormatException e) {
-                System.out.println("잘못된 로또 값을 입력하였습니다. 숫자만 입력 가능합니다.");
-            }
-        }
+    public List<LottoNumber> makeLottoNumber() {
+        return lottoNumbers;
     }
 
-    private void convertStringArrayToIntArray(String[] winningNumbers) {
-        for (String number : winningNumbers) {
-            lottoNumbers.add(Integer.parseInt(number));
-        }
-    }
 }

@@ -36,15 +36,15 @@ public class Lottos {
         winningStatistics.addCount(lottoPrizeType.orElse(LottoPrizeType.MISS));
     }
 
-    private int countMatchNumber(List<Integer> currentLottoNumber, List<Integer> winningLottoNumber) {
+    private int countMatchNumber(List<LottoNumber> currentLottoNumber, List<LottoNumber> winningLottoNumber) {
         int matchCount = 0;
-        for (int number : winningLottoNumber) {
+        for (LottoNumber number : winningLottoNumber) {
             matchCount = calcMatchCount(currentLottoNumber, number, matchCount);
         }
         return matchCount;
     }
 
-    private int calcMatchCount(List<Integer> currentLottoNumber, int number, int matchCount) {
+    private int calcMatchCount(List<LottoNumber> currentLottoNumber, LottoNumber number, int matchCount) {
         if (currentLottoNumber.contains(number)) {
             return ++matchCount;
         }
