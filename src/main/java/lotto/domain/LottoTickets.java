@@ -5,10 +5,12 @@ import java.util.Objects;
 
 public class LottoTickets {
     private final List<LottoNumbers> lottoTickets;
+    private final TicketCount autoTicketCount;
 
-    public LottoTickets(final List<LottoNumbers> lottoTickets) {
+    public LottoTickets(final List<LottoNumbers> lottoTickets, int autoTicketCount) {
         checkNullOrEmpty(lottoTickets);
         this.lottoTickets = lottoTickets;
+        this.autoTicketCount = new TicketCount(autoTicketCount);
     }
 
     private void checkNullOrEmpty(final List<LottoNumbers> lottoTickets) {
@@ -27,5 +29,13 @@ public class LottoTickets {
 
     public List<LottoNumbers> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int getAutoTicketCount() {
+        return autoTicketCount.getValue();
+    }
+
+    public int getManualTicketCount() {
+        return lottoTickets.size() - getAutoTicketCount();
     }
 }
