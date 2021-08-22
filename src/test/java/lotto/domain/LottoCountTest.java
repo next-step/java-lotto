@@ -17,11 +17,11 @@ class LottoCountTest {
         return Stream.of(
                     Arguments.arguments(
                         5, // manualLottoCount
-                        new LottoCount(3)
+                        new Money(3000)
                     ),
                     Arguments.arguments(
                             10,
-                            new LottoCount(1)
+                            new Money(1000)
                     )
                 );
     }
@@ -37,8 +37,8 @@ class LottoCountTest {
     @ParameterizedTest
     @DisplayName("구매할 수동 로또수가 구입 금액보다 클때 예외 테스트")
     @MethodSource("countSource")
-    void manualCount_bigger_than_money(int manualCount, LottoCount totalCount) {
-        assertThatThrownBy(() -> LottoCount.of(manualCount, totalCount))
+    void manualCount_bigger_than_money(int manualCount, Money money) {
+        assertThatThrownBy(() -> LottoCount.of(manualCount, money))
                 .isInstanceOf(LottoNumberCountException.class);
     }
 
