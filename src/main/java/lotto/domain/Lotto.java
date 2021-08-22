@@ -41,8 +41,7 @@ public class Lotto {
 
     public int compareLotto(Lotto otherLotto) {
         long count = lottoNumbers.stream()
-                .filter(lottoNumber -> otherLotto.lottoNumbers.stream()
-                        .anyMatch(Predicate.isEqual(lottoNumber)))
+                .filter(otherLotto.lottoNumbers::contains)
                 .count();
         return Math.toIntExact(count);
     }
