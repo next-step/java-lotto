@@ -47,4 +47,11 @@ public class LottoGroup {
     public int size() {
         return lottoList.size();
     }
+
+    public List<Lotto> combineGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+        List<Lotto> allLottoList = new ArrayList<>();
+        allLottoList.addAll(autoLottoGroup.getLottoList());
+        allLottoList.addAll(manualLottoGroup.getLottoList());
+        return allLottoList;
+    }
 }
