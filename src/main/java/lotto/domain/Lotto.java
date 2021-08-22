@@ -5,16 +5,16 @@ import lotto.exception.LottoNumberDuplicateException;
 import lotto.exception.LottoNumberLengthException;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public final List<LottoNumber> lottoNumbers;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
         duplicateValidation(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto from(NumberGenerator numberGenerator) {
@@ -22,13 +22,13 @@ public class Lotto {
     }
 
     private void duplicateValidation(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() < 6) {
+        if (lottoNumbers.stream().distinct().count() < LOTTO_NUMBER_COUNT || lottoNumbers.size() > LOTTO_NUMBER_COUNT) {
             throw new LottoNumberDuplicateException();
         }
     }
 
     private void validLottoNumberSize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() > 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new LottoNumberLengthException();
         }
     }
