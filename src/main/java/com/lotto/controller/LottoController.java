@@ -27,7 +27,10 @@ public class LottoController {
 
         LottoDrawer.drawWinningNumbers();
         List<Integer> numbers = InputParser.parseNumbers(scanner.nextLine());
-        WinningNumbers winningNumbers = Game.makeWinningNumbers(numbers);
+
+        LottoDrawer.drawBonusNumber();
+        int bonusNumber = InputParser.convert(scanner.nextLine());
+        WinningNumbers winningNumbers = Game.makeWinningNumbers(numbers, bonusNumber);
 
         LottoResult result = Game.check(winningNumbers, lottos);
         float benefit = result.calculateBenefit(money);

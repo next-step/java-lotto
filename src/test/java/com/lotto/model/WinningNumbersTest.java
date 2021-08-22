@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningNumbersTest {
@@ -20,7 +19,7 @@ public class WinningNumbersTest {
 
         //then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinningNumbers(numbers);
+            new WinningNumbers(numbers, 45);
         });
     }
 
@@ -33,27 +32,36 @@ public class WinningNumbersTest {
 
         //then
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinningNumbers(numbers);
+            new WinningNumbers(numbers, 45);
         });
     }
 
-    @DisplayName("Lotto 갯수와 당첨 번호 확인 테스트")
+    @DisplayName("보너스 번호를 잘못된 값을 입력 받았을 때 테스트")
     @Test
-    public void checkCorrectCountTest() {
+    public void wrongBonusNumberInputTest() {
         //given
-        Set<Integer> lottoNumbers = new HashSet<>();
-        lottoNumbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = new Lotto(lottoNumbers);
-
-        Set<Integer> winningNumberSet = new HashSet<>();
-        winningNumberSet.addAll(Arrays.asList(1, 2, 3, 4, 5, 7));
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberSet);
-
-        //when
-        int correctCount = winningNumbers.checkCorrectCount(lotto);
+        Set<Integer> numbers = new HashSet<>();
+        numbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 47;
 
         //then
-        assertThat(correctCount).isEqualTo(5);
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new WinningNumbers(numbers, bonusNumber);
+        });
+    }
+
+    @DisplayName("보너스 번호를 중복된 값을 입력 받았을 때 테스트")
+    @Test
+    public void duplicatedBonusNumberInputTest() {
+        //given
+        Set<Integer> numbers = new HashSet<>();
+        numbers.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+
+        //then
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new WinningNumbers(numbers, bonusNumber);
+        });
     }
 
 
