@@ -9,20 +9,15 @@ public class LottoNumber {
     private static final int MAX = 45;
 
     public LottoNumber(String number) {
-        isValid(number);
+        isBlank(number);
+        isDigit(number);
+        isInRange(Integer.parseInt(number));
         this.lottoNumber = Integer.parseInt(number.trim());
     }
 
     public LottoNumber(int lottoNumber) {
         isInRange(lottoNumber);
         this.lottoNumber = lottoNumber;
-    }
-
-    private void isValid(String number) {
-        isBlank(number);
-        number = number.trim();
-        isDigit(number);
-        isInRange(Integer.parseInt(number));
     }
 
     public int getLottoNumber() {
@@ -36,7 +31,7 @@ public class LottoNumber {
     }
 
     private void isDigit(String input) {
-        if (!input.matches("[0-9]*")) {
+        if (!input.trim().matches("[0-9]*")) {
             throw new IllegalArgumentException("숫자를 입력해주세요");
         }
     }

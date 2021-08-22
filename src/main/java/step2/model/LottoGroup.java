@@ -22,18 +22,6 @@ public class LottoGroup {
         return lottoList;
     }
 
-    private void isBlank(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
-        }
-    }
-
-    private void isDigit(String input) {
-        if (!input.matches("[0-9]*")) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
-        }
-    }
-
     public List<List<Integer>> getLottoResult() {
         List<List<Integer>> result = new ArrayList<>();
 

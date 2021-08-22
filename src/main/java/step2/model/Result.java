@@ -35,22 +35,18 @@ public class Result {
 
     public Map<Rank, Integer> getResult(LottoGroup lottoGroup, Winning winning) {
         for (Lotto lotto : lottoGroup.getLottoList()) {
+
             List<Integer> allNumbers = combineAll(winning.getWinningNumber(), lotto.getLottoNumbers());
+
             Set<Integer> matchNumbers = getDuplicatedNum(allNumbers);
             boolean matchBonus = isMatchBonus(lotto.getLottoNumbers(), winning.getBonus());
 
-            saveWinningResult(result, matchNumbers, matchBonus);
+            Rank rank = Rank.getRank(matchNumbers.size(), matchBonus);
+            result.put(rank, result.get(rank)+1);
         }
 
         return result;
     }
-
-    private void saveWinningResult(Map<Rank, Integer> result, Set<Integer> matchNumbers, boolean matchBonus) {
-        int countOfMatch = matchNumbers.size();
-        Rank rank = Rank.getRank(countOfMatch, matchBonus);
-        result.put(rank, result.get(rank)+1);
-    }
-
 
     public String getWinningRate(PurchaseAmount purchaseAmount, Map<Rank, Integer> winningResult) {
         int totalWinPrice = 0;

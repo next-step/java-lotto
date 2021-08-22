@@ -6,7 +6,6 @@ public class LottoCount {
     private final int autoLottoCount;
 
     private static final int MIN_LOTTO_COUNT = 0;
-    private static final int LOTTO_PRICE = 1000;
 
     public LottoCount(PurchaseAmount purchaseAmount, String manualLottoCount) {
         isBlank(manualLottoCount);
@@ -48,10 +47,6 @@ public class LottoCount {
 
     private int calcLottoCount(PurchaseAmount purchaseAmount) {
         return purchaseAmount.getLottoCount();
-    }
-
-    public int getPurchaseAmount() {
-       return totalLottoCount * LOTTO_PRICE;
     }
 
     public int calcAutoLottoCount(String manualLottoCount) {

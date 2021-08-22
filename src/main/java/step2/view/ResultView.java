@@ -1,6 +1,5 @@
 package step2.view;
 
-import step2.model.LottoCount;
 import step2.model.Rank;
 
 import java.util.List;
@@ -39,7 +38,4 @@ public class ResultView {
 
     }
 
-    public void printLottoCount(LottoCount lottoCount) {
-        System.out.println("수동으로 " + lottoCount.getManualLottoCount() + "장, 자동으로 " + lottoCount.getAutoLottoCount() + "개를 구매했습니다.");
-    }
 }

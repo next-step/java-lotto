@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Main {
     private static List<Lotto> manualLottoList;
+
     public static void main(String[] args) {
         InputView inputView = new InputView();
 
@@ -27,8 +28,9 @@ public class Main {
         LottoGroup manualLottoGroup = new LottoGroup(manualLottoList);
         LottoGroup autoLottoGroup = new LottoGroup(new AutoLottoStrategy(), lottoCount.getAutoLottoCount());
 
+        System.out.println("수동으로 " + lottoCount.getManualLottoCount() + "장, 자동으로 " + lottoCount.getAutoLottoCount() + "개를 구매했습니다.");
+
         ResultView view = new ResultView();
-        view.printLottoCount(lottoCount);
         view.showLotto(manualLottoGroup.getLottoResult());
         view.showLotto(autoLottoGroup.getLottoResult());
 

@@ -1,6 +1,5 @@
 package step2.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Winning {
@@ -17,6 +16,6 @@ public class Winning {
     }
 
     public int getBonus() {
-        return bonus.getBonusNumber().getLottoNumber();
+        return bonus.getBonusNumber();
     }
 }

@@ -28,10 +28,6 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getlotto() {
-        return lotto;
-    }
-
     private void isBlank(String lotto) {
         if (lotto == null || lotto.isEmpty()) {
             throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
@@ -49,11 +45,6 @@ public class Lotto {
         if (lotto.contains(lottoNumber)) {
             throw new IllegalArgumentException("번호가 중복되었습니다. 다시 입력해주세요");
         }
-    }
-
-
-    public int size() {
-        return lotto.size();
     }
 
     public List<Integer> getLottoNumbers() {

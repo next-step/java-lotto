@@ -8,8 +8,8 @@ public class Bonus {
         winningNumbers.isDuplicate(this.bonusNumber);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public Integer getBonusNumber() {
+        return bonusNumber.getLottoNumber();
     }
 
 }

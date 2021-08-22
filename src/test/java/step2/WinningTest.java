@@ -39,7 +39,7 @@ public class WinningTest {
     @Test
     public void 수익률() {
         //given
-        PurchaseAmount amount = new PurchaseAmount("14000");
+        PurchaseAmount amount = new PurchaseAmount("14500");
         Map<Rank, Integer> winningResult = new HashMap<>();
         for (Rank rank : Rank.values()) {
             winningResult.put(rank, 0);
