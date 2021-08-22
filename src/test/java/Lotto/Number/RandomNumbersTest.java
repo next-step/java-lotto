@@ -12,8 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("랜덤 넘버 리스트는")
 public class RandomNumbersTest {
 
-    public static final int DEFAULT_LOTTO_NUMBER = 0;
-
     @DisplayName("랜덤 숫자를 주어진 갯수만큼 만든다.")
     @ParameterizedTest(name = "갯수: {0}")
     @ValueSource(ints = {5, 6, 7})
@@ -26,7 +24,7 @@ public class RandomNumbersTest {
     @Test
     void generateGivenMaxAsMaxCandidateOfRandomNumbers() {
         RandomNumbers randomNumbers = new RandomNumbers(Limit.MAX.getValue(), Limit.MIN.getValue(), Limit.MAX.getValue());
-        LottoNumber actual = randomNumbers.getValue().stream().max(getComparing()).orElse(getDefault());
+        LottoNumber actual = randomNumbers.getValue().stream().max(getComparing()).orElse(null);
         LottoNumber expected = new LottoNumber(Limit.MAX.getValue());
         assertThat(actual).isEqualTo(expected);
     }
@@ -35,16 +33,12 @@ public class RandomNumbersTest {
     @Test
     void generateGivenMinAsMinCandidateOfRandomNumbers() {
         RandomNumbers randomNumbers = new RandomNumbers(Limit.MAX.getValue(), Limit.MIN.getValue(), Limit.MAX.getValue());
-        LottoNumber actual = randomNumbers.getValue().stream().min(getComparing()).orElse(getDefault());
+        LottoNumber actual = randomNumbers.getValue().stream().min(getComparing()).orElse(null);
         LottoNumber expected = new LottoNumber(Limit.MIN.getValue());
         assertThat(actual).isEqualTo(expected);
     }
 
     private Comparator<LottoNumber> getComparing() {
         return Comparator.comparing(LottoNumber::getValue);
-    }
-
-    private LottoNumber getDefault() {
-        return new LottoNumber(DEFAULT_LOTTO_NUMBER);
     }
 }
