@@ -3,15 +3,10 @@ package lotto;
 import lotto.common.AutoNumberGenerator;
 import lotto.domain.*;
 import lotto.exception.*;
-import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static lotto.util.StringUtil.split;
 import static lotto.view.InputView.*;
 
 public class LottoApplication {
@@ -24,27 +19,23 @@ public class LottoApplication {
 
         LottoCount manualLottoCount = getManualLottoCount(lottoCount);
 
-        int autoLottoCount = lottoCount.getAutoLottoCount(manualLottoCount);
-
         Lottos manualLottos = buyManualLottos(manualLottoCount);
 
+        int autoLottoCount = lottoCount.getAutoLottoCount(manualLottoCount);
         Lottos autoLottos = lottoMachine.generateLottos(autoLottoCount, new AutoNumberGenerator());
 
-        manualLottos.mergeLottos(autoLottos);
+        Lottos totalLottos = manualLottos.mergeLottos(autoLottos);
 
         ResultView resultView = new ResultView();
-        resultView.printLottos(manualLottos, autoLottoCount);
+        resultView.printLottos(totalLottos, autoLottoCount);
 
-        String[] split = split(getWinningNumber());
-        List<Integer> winningNumbers = Stream.of(split).map(Integer::valueOf).collect(Collectors.toList());
-
-        Lotto winningLottoNumbers = Lotto.from(winningNumbers);
+        Lotto winningLottoNumbers = getManualLotto(getWinningNumber());
 
         LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(askBonusNumber()));
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
-        WinningStatistics winningStatistics = new WinningStatistics(manualLottos, winningLotto);
+        WinningStatistics winningStatistics = new WinningStatistics(totalLottos, winningLotto);
 
         resultView.printSameNumbers(winningStatistics);
     }
@@ -70,21 +61,19 @@ public class LottoApplication {
     public static Lottos buyManualLottos(LottoCount manualLottoCount) {
          List<Lotto> lottos = new ArrayList<>();
          for (int i = 0; i < manualLottoCount.getCount(); i++) {
-                lottos.add(getManualLotto());
+             List<Integer> askManualLottoNumber = getAskManualLottoNumber();
+             lottos.add(getManualLotto(askManualLottoNumber));
             }
             return new Lottos(lottos);
     }
 
-    public static Lotto getManualLotto() {
+    public static Lotto getManualLotto(List<Integer> lottoNumber) {
         try {
-            return Lotto.from(getAskManualLottoNumber());
-        } catch (LottoNumberLengthException e) {
+            return Lotto.from(lottoNumber);
+        } catch (LottoNumberLengthException | LottoNumberDuplicateException e) {
             System.err.println(e);
-            return getManualLotto();
-        } catch (LottoNumberDuplicateException e) {
-            System.err.println(e);
-            return getManualLotto();
-        }
+            return getManualLotto(lottoNumber);
+        } 
     }
 
 
