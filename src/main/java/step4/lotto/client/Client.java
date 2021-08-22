@@ -69,16 +69,8 @@ public class Client {
         return new LottoResults(lottoResults);
     }
 
-    public void setManualLottoNumbers(List<LottoNumber> numbers) {
-        this.manualLottoNumbers.addAll(numbers);
-    }
-
     public List<LottoNumber> getManualLottoNumbers() {
         return manualLottoNumbers;
-    }
-
-    public void addMoney(long money) {
-        this.money.plus(money);
     }
 
     public void validateBuyableLotto(long money, List<LottoNumber> manualLottoNumbers) {
