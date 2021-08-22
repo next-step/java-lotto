@@ -10,7 +10,7 @@ public class StringAddCalculator {
     }
 
     static String[] parseOperands(String text) {
-        return text.split(",");
+        return text.split(",|:");
     }
 
     static int add(String[] operands) {
