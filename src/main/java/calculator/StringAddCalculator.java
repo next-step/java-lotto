@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 	private final static String DEFAULT_DELIMITER = ",|:";
 	private final static String CUSTOM_DELIMITER = "//(.)\\n(.*)";
+	private final static int ZERO = 0;
 
 	private boolean isNullOrEmpty(String input) {
 		return input == null || input.trim().isEmpty();
@@ -34,7 +35,7 @@ public class StringAddCalculator {
 
 	public int splitAndSum(String input) {
 		if (isNullOrEmpty(input)) {
-			return 0;
+			return ZERO;
 		}
 		String[] values = splitInputValue(input);
 
