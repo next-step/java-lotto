@@ -17,13 +17,13 @@ public class Lotto {
         this.balls = balls;
     }
 
-    public static Lotto of(Set<Ball> balls) {
+    public static Lotto from(Set<Ball> balls) {
         return new Lotto(balls);
     }
 
-    public static Lotto of(int... numbers) {
+    public static Lotto from(int... numbers) {
         Set<Ball> balls = Arrays.stream(numbers)
-                .mapToObj(Ball::of)
+                .mapToObj(Ball::from)
                 .collect(Collectors.toSet());
         return new Lotto(balls);
     }

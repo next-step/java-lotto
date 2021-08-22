@@ -14,11 +14,7 @@ public class Ball implements Comparable<Ball> {
         this.number = number;
     }
 
-    public static Ball of(String text) {
-        return new Ball(Integer.parseInt(text));
-    }
-
-    public static Ball of(int no) {
+    public static Ball from(int no) {
         return new Ball(no);
     }
 

@@ -15,19 +15,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class GameTest {
 
     Game game;
-    Ball bonusBall = Ball.of(40);
+    Ball bonusBall = Ball.from(40);
 
     @BeforeEach
     void setUp() {
         List<Lotto> lottoList = new ArrayList<>(14);
 
         for (int i = 0; i < 13; i++) {
-            lottoList.add(Lotto.of(1, 2, 3, 4, 5, 6));
+            lottoList.add(Lotto.from(1, 2, 3, 4, 5, 6));
         }
-        lottoList.add(Lotto.of(10, 11, 12, 13, 14, 15));
+        lottoList.add(Lotto.from(10, 11, 12, 13, 14, 15));
 
-        game = Game.of(lottoList);
-        PreviousLotto previousLotto = PreviousLotto.of(Lotto.of(10, 11, 12, 13, 14, 45), bonusBall);
+        game = Game.from(lottoList);
+        PreviousLotto previousLotto = PreviousLotto.of(Lotto.from(10, 11, 12, 13, 14, 45), bonusBall);
         game.match(previousLotto);
     }
 
@@ -41,7 +41,7 @@ public class GameTest {
     @DisplayName("랜덤 로또 game 생성")
     void createRandom() {
         List<Lotto> lottoList = LottoMachine.buyRandomLotto(5000);
-        Game game = Game.of(lottoList);
+        Game game = Game.from(lottoList);
         assertThat(game.getLottos()).hasSize(5);
     }
 
@@ -56,7 +56,7 @@ public class GameTest {
     @CsvSource(value = {"3:0", "4:0", "5:1", "6:0"}, delimiter = ':')
     @DisplayName("보너스볼 2등 체크하기")
     void checkBonusBall(int sameNumberCount, int expected) {
-        bonusBall = Ball.of(15);
+        bonusBall = Ball.from(15);
         setUp();
         assertThat(game.countReward(Reward.valueOf(sameNumberCount, true))).isEqualTo(expected);
     }
@@ -64,7 +64,7 @@ public class GameTest {
     @Test
     @DisplayName("수익률 계산하기")
     void getYield() {
-        game.match(PreviousLotto.of(Lotto.of(10, 11, 12, 43, 44, 45), Ball.of(15)));
+        game.match(PreviousLotto.of(Lotto.from(10, 11, 12, 43, 44, 45), Ball.from(15)));
         assertThat(game.getLottos()).hasSize(14);
         assertThat(game.getYield()).isEqualTo("0.35");
     }

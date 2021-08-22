@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Game {
     private final List<Lotto> lottos;
@@ -13,7 +15,14 @@ public class Game {
         this.lottos = lottos;
     }
 
-    public static Game of(List<Lotto> lottos) {
+    public static Game from(List<Lotto> autoLottos) {
+        return new Game(autoLottos);
+    }
+
+    public static Game of(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        List<Lotto> lottos = Stream.of(autoLottos, manualLottos)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
         return new Game(lottos);
     }
 
