@@ -5,24 +5,21 @@ import java.util.List;
 public class WinningResult {
 
   private final WinningStatistics statistics;
-  private final double rateOfReturn;
+  private final RateOfReturn rateOfReturn;
 
   public WinningResult(List<Lotto> lottos, Lotto winningLotto) {
     this.statistics = new WinningStatistics(lottos, winningLotto);
-    this.rateOfReturn = calcRateOfReturn(lottos, statistics);
+
+    long inputMoney = lottos.size() * LottoGame.LOTTO_PRICE.getValue();
+    long totalPrizeMoney = this.statistics.calcTotalPrizeMoney();
+    this.rateOfReturn = new RateOfReturn(totalPrizeMoney, inputMoney);
   }
 
   public WinningStatistics statistics() {
-    return statistics;
+    return this.statistics;
   }
 
   public double rateOfReturn() {
-    return rateOfReturn;
-  }
-
-  private double calcRateOfReturn(List<Lotto> lottos, WinningStatistics statistics) {
-    long inputMoney = lottos.size() * LottoGame.LOTTO_PRICE.getValue();
-    long totalPrizeMoney = statistics.calcTotalPrizeMoney();
-    return ((double) totalPrizeMoney / inputMoney);
+    return this.rateOfReturn.getRate();
   }
 }

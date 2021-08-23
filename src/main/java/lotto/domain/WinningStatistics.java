@@ -23,14 +23,14 @@ public class WinningStatistics {
   }
 
   public int getCntByLottoPrize(LottoPrize lottoPrize) {
-    return statistics.getOrDefault(lottoPrize, 0);
+    return this.statistics.getOrDefault(lottoPrize, 0);
   }
 
   private void putInStatistics(LottoPrize lottoPrize) {
-    if (statistics.containsKey(lottoPrize)) {
-      statistics.put(lottoPrize, statistics.get(lottoPrize) + 1);
+    if (this.statistics.containsKey(lottoPrize)) {
+      this.statistics.put(lottoPrize, this.statistics.get(lottoPrize) + 1);
       return;
     }
-    statistics.put(lottoPrize, 1);
+    this.statistics.put(lottoPrize, 1);
   }
 }
