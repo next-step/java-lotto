@@ -10,7 +10,6 @@ public final class InputView {
 
     private static final String SEPARATOR = ",";
     private static final int INIT = 0;
-    private static final int CRITERIA = 1;
 
     private final Scanner scanner;
 
@@ -28,11 +27,11 @@ public final class InputView {
         return scanner.nextInt();
     }
 
-    public List<String> inputNumberOfLottoToPurchaseManually(int manuallyCount) {
+    public List<String> inputNumberOfLottoToPurchaseManually(int manualLottoCount) {
         List<String> manuallyLottos = new ArrayList<>();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for(int i = INIT; i < manuallyCount; i++) {
+        for (int i = INIT; i < manualLottoCount; i++) {
             manuallyLottos.add(scanner.next());
         }
 

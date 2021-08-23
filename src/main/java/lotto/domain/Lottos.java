@@ -23,15 +23,8 @@ public final class Lottos {
         return lottos.size();
     }
 
-
-
-
     public List<Lotto> getLottos() {
         return this.lottos;
     }
-
-
-
-
 
 }

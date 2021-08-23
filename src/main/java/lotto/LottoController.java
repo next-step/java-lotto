@@ -18,17 +18,12 @@ public final class LottoController {
 
             Money money = new Money(inputView.inputAmount());
 
-            int manuallyCount = inputView.inputLottoCountToPurchaseManually();
-            money = money.spendMoneyToBuyLotto(manuallyCount);
-            List<String> manuallyLottos = inputView.inputNumberOfLottoToPurchaseManually(manuallyCount);
+            int manualLottoCount = inputView.inputLottoCountToPurchaseManually();
+            List<String> manuallyLottos = inputView.inputNumberOfLottoToPurchaseManually(manualLottoCount);
 
-            // Lottos lottos = lottoMachine.buyManuallyLottos(manuallyLottos);
+            Lottos lottos = lottoMachine.buyLotto(money, manuallyLottos, new AutoNumberGenerationStrategy());
 
-            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationStrategy());
-
-            int totalCount = lottos.count();
-
-            resultView.printLottoCount(totalCount);
+            resultView.printLottoCount(lottos.count(), manualLottoCount);
             resultView.printLottos(lottos);
 
             Lotto winningLotto = new Lotto(inputView.inputWinningNumbers());
