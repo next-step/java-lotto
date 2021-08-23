@@ -38,7 +38,7 @@ class WinningResultTest {
 
     //then
     double expected =
-        (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE.getValue());
+        (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * Lotto.PRICE.getValue());
     assertThat(winningResult.rateOfReturn()).isEqualTo(expected);
   }
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+  public static final Money PRICE = new Money(1000);
   public static final int NUMBER_SIZE = 6;
   private final List<LottoNumber> lottoNumbers;
 

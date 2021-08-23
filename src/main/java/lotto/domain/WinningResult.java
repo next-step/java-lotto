@@ -10,7 +10,7 @@ public class WinningResult {
   public WinningResult(List<Lotto> lottos, Lotto winningLotto) {
     this.statistics = new WinningStatistics(lottos, winningLotto);
 
-    long inputMoney = lottos.size() * LottoGame.LOTTO_PRICE.getValue();
+    long inputMoney = lottos.size() * Lotto.PRICE.getValue();
     long totalPrizeMoney = this.statistics.calcTotalPrizeMoney();
     this.rateOfReturn = new RateOfReturn(totalPrizeMoney, inputMoney);
   }
