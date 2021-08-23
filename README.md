@@ -48,3 +48,15 @@
 * [X] WinningsStatistics 도메인 클래스를 만든다. LottoNumber 를 인스턴스변수로 가진다.
 * [X] Result 도메인 클래스를 만든다.
 * [X] Lottos, LottoMachine, LottoController - WinningsStatistics, Result 추가에 따른 소스변경
+
+# 4단계 - 로또(수동)
+## 기능 요구사항
+* 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+* 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+## TODO
+* [ ] Money 도메인 객체 생성
+* [ ] Lotto 객체에 String 값을 매개변수로 갖는 생성자를 추가한다.
+* [ ] 
+* [ ] 
+* [ ] 
