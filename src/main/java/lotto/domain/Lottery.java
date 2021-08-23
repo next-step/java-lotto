@@ -7,12 +7,13 @@ import lotto.domain.type.WinningType;
 
 public class Lottery {
 	private final List<Integer> winningNumbers;
+	private LotteryResults lotteryResults;
 
 	public Lottery(List<Integer> winningNumbers) {
 		this.winningNumbers = winningNumbers;
 	}
 
-	public LotteryResults draw(Lottos lottos) {
+	public void draw(Lottos lottos) {
 		List<LotteryResult> results = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {
 			List<Integer> numbers = lotto.getNumbers();
@@ -23,6 +24,10 @@ public class Lottery {
 			results.add(new LotteryResult(lotto, winningType));
 		}
 
-		return new LotteryResults(results);
+		lotteryResults = new LotteryResults(results);
+	}
+
+	public LotteryResults getLotteryResults() {
+		return lotteryResults;
 	}
 }
