@@ -5,7 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
 
@@ -17,11 +18,21 @@ class PurchaseAmountTest {
         assertThat(purchaseAmount.purchases()).isEqualTo(expected);
     }
 
+    @DisplayName("구매금액(cash)이 1000원 이하일 때 - 구매가능한 수량만큼 구매")
+    @ParameterizedTest
+    @ValueSource(ints = {0,999})
+    void purchaseAmount_blueCase_minimumCondition(int cash) {
+        assertThatThrownBy(() -> new PurchaseAmount(cash))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("최소 구매 금액이 1000원 입니다.(1장당 1000원)");
+    }
+
     @DisplayName("구매금액(cash)이 1000원 단위가 아닐때 - 구매가능한 수량만큼 구매")
     @ParameterizedTest
-    @CsvSource(value = {"0:0", "1500:1", "2500:2", "999:0"}, delimiter = ':')
-    void purchaseAmount_blueCase(int cash, int expected) {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(cash);
-        assertThat(purchaseAmount.purchases()).isEqualTo(expected);
+    @ValueSource(ints = {1500, 2500, 9999})
+    void purchaseAmount_blueCase_doesNotThousandUnit(int cash) {
+        assertThatThrownBy(() -> new PurchaseAmount(cash))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매금액은 1000원 단위 입니다.");
     }
 }

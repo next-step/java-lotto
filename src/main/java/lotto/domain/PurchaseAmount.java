@@ -7,7 +7,13 @@ public class PurchaseAmount {
     private int cash;
 
     public PurchaseAmount(int cash) {
-        validateCash(cash);
+        if (cash < PURCHASE_AMOUNT_UNIT) {
+            throw new IllegalArgumentException("최소 구매 금액이 1000원 입니다.(1장당 1000원)");
+        }
+
+        if ((cash % PURCHASE_AMOUNT_UNIT) > ZERO_CASH) {
+            throw new IllegalArgumentException("구매금액은 1000원 단위 입니다.");
+        }
         this.cash = cash;
     }
 
@@ -21,18 +27,6 @@ public class PurchaseAmount {
 
     public static int possiblePurchaseCount(int cash) {
         return cash / PURCHASE_AMOUNT_UNIT;
-    }
-
-    private void validateCash(int cash) {
-
-        if (cash < PURCHASE_AMOUNT_UNIT) {
-            throw new IllegalArgumentException("최소 구매 금액이 1000원 입니다.(1장당 1000원)");
-        }
-
-        if ((cash % PURCHASE_AMOUNT_UNIT) > ZERO_CASH) {
-            throw new IllegalArgumentException("구매금액은 1000원 단위 입니다.");
-        }
-
     }
 
 }
