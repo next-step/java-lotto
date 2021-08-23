@@ -1,0 +1,56 @@
+package lotto.domain;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class WinningStatisticsTest {
+
+  @Test
+  @DisplayName("당첨 통계값 생성 및 결과값 확인 테스트")
+  void createTest() {
+    //given
+    Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+
+    Lotto lotto1 = new Lotto(new int[]{1, 2, 3, 4, 5, 6});        // 6개 일치 => LottoPrize.FIRST
+    Lotto lotto2 = new Lotto(new int[]{1, 3, 6, 10, 11, 12});     // 3개 일치 => LottoPrize.FOURTH
+    Lotto lotto3 = new Lotto(new int[]{1, 2, 3, 42, 44, 45});     // 3개 일치 => LottoPrize.FOURTH
+    Lotto lotto4 = new Lotto(new int[]{1, 20, 30, 40, 41, 42});   // 1개 일치 => LottoPrize.NOTHING
+
+    List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
+
+    //when
+    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
+
+    //then
+    assertThat(statistics.getCntByLottoPrize(LottoPrize.FIRST)).isEqualTo(1);
+    assertThat(statistics.getCntByLottoPrize(LottoPrize.SECOND)).isEqualTo(0);
+    assertThat(statistics.getCntByLottoPrize(LottoPrize.THIRD)).isEqualTo(0);
+    assertThat(statistics.getCntByLottoPrize(LottoPrize.FOURTH)).isEqualTo(2);
+    assertThat(statistics.getCntByLottoPrize(LottoPrize.NOTHING)).isEqualTo(1);
+  }
+
+  @Test
+  @DisplayName("총 당첨금 구하기 테스트")
+  void calcTotalPrizeMoneyTest() {
+    //given
+    Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+
+    Lotto lotto1 = new Lotto(new int[]{1, 2, 3, 4, 5, 6});        // 6개 일치 => LottoPrize.FIRST
+    Lotto lotto2 = new Lotto(new int[]{1, 3, 6, 10, 11, 12});     // 3개 일치 => LottoPrize.FOURTH
+    Lotto lotto3 = new Lotto(new int[]{1, 2, 3, 42, 44, 45});     // 3개 일치 => LottoPrize.FOURTH
+    Lotto lotto4 = new Lotto(new int[]{1, 20, 30, 40, 41, 42});   // 1개 일치 => LottoPrize.NOTHING
+
+    List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
+
+    //when
+    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
+
+    //then
+    assertThat(statistics.calcTotalPrizeMoney())
+        .isEqualTo((LottoPrize.FIRST.getPrizeMoney()) + (LottoPrize.FOURTH.getPrizeMoney() * 2));
+  }
+}

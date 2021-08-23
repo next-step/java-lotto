@@ -10,30 +10,6 @@ import org.junit.jupiter.api.Test;
 class WinningResultTest {
 
   @Test
-  @DisplayName("통계값 일치 확인 테스트")
-  void getResultByMatchedCntTest() {
-    //given
-    Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-
-    Lotto lotto1 = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-    Lotto lotto2 = new Lotto(new int[]{10, 2, 3, 4, 5, 6});
-    Lotto lotto3 = new Lotto(new int[]{10, 20, 3, 40, 5, 6});
-    Lotto lotto4 = new Lotto(new int[]{10, 20, 30, 4, 5, 6});
-    Lotto lotto5 = new Lotto(new int[]{10, 20, 30, 40, 41, 42});
-    List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
-
-    //when
-    WinningResult statistics = new WinningResult(lottos, winningLotto);
-
-    //then
-    assertThat(statistics.getResultByMatchedCnt(6)).isEqualTo(1);
-    assertThat(statistics.getResultByMatchedCnt(5)).isEqualTo(1);
-    assertThat(statistics.getResultByMatchedCnt(4)).isEqualTo(0);
-    assertThat(statistics.getResultByMatchedCnt(3)).isEqualTo(2);
-    assertThat(statistics.getResultByMatchedCnt(0)).isEqualTo(1);
-  }
-
-  @Test
   @DisplayName("수익률 확인 테스트")
   void getRateOfReturn() {
     //given
@@ -63,6 +39,6 @@ class WinningResultTest {
     //then
     double expected =
         (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE.getValue());
-    assertThat(winningResult.getRateOfReturn()).isEqualTo(expected);
+    assertThat(winningResult.rateOfReturn()).isEqualTo(expected);
   }
 }
