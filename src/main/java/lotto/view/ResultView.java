@@ -12,7 +12,7 @@ public class ResultView {
 
     private static final ResultView RESULT_VIEW = null;
     private static final String WINNING_STATS = "\n당첨 통계\n----------";
-    private static final String PRINT_WINNER_FORM = "%s개 일치 (%s원)- %s개%n";
+    private static final String PRINT_WINNER_FORM = "%s (%s원)- %s개%n";
     private static final String PRINT_PROFIT_RATE_FORM = "총 수익률은 %s입니다.%n";
     private static final String EXCEPTION_MESSAGE = "구매 금액이 올바른 값이 아닙니다.(현재 금액에서 구매가능한 %s개만 구매합니다.)%n)";
     private static final int PURCHASE_AMOUNT_UNIT = 1000;
@@ -36,8 +36,9 @@ public class ResultView {
         out.println(WINNING_STATS);
         winnersInfo.remove(Rank.NONE);
         winnersInfo.keySet().stream()
+                .sorted()
                 .forEach(winner -> {
-                    out.printf(PRINT_WINNER_FORM, winner.getMatchCount(), winner.getCash(), winnersInfo.get(winner));
+                    out.printf(PRINT_WINNER_FORM, winner.getDescription(), winner.getCash(), winnersInfo.get(winner));
                 });
     }
 

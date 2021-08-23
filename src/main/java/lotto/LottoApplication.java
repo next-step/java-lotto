@@ -15,7 +15,9 @@ public class LottoApplication {
         lottoController.printLottos(lottos);
 
         Numbers winnerNumbers = lottoController.inputWinnerNumbers();
-        Map<Rank, Integer> rankInfo = lottos.findWinners(winnerNumbers);
+        Numbers bonusNumbers = lottoController.inputBonusNumbers();
+
+        Map<Rank, Integer> rankInfo = lottos.findRanks(winnerNumbers, bonusNumbers);
         lottoController.printRanks(rankInfo);
         lottoController.printProfitRate(lottos, rankInfo);
     }

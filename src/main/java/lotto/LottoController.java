@@ -51,4 +51,8 @@ public class LottoController {
         resultView.printProfitRate(lottoSize, rankInfo);
     }
 
+    public Numbers inputBonusNumbers() {
+        return new Numbers(inputView.inputBonusNumber());
+    }
+
 }
