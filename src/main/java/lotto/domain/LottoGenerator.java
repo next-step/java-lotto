@@ -8,25 +8,25 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-  private static final List<Integer> CANDIDATE_NUMBERS = initCandidateNumbers();
+  private static final List<LottoNumber> CANDIDATE_LOTTO_NUMBERS = initCandidateLottoNumbers();
 
   public static List<Lotto> generate(long cnt) {
     checkCnt(cnt);
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {
-      lottos.add(new Lotto(selectedNumbers()));
+      lottos.add(new Lotto(selectedLottoNumbers()));
     }
     return lottos;
   }
 
-  private static List<Integer> selectedNumbers() {
-    Collections.shuffle(CANDIDATE_NUMBERS);
-    return CANDIDATE_NUMBERS.subList(0, Lotto.NUMBER_SIZE);
+  private static List<LottoNumber> selectedLottoNumbers() {
+    Collections.shuffle(CANDIDATE_LOTTO_NUMBERS);
+    return new ArrayList<LottoNumber>(CANDIDATE_LOTTO_NUMBERS.subList(0, Lotto.NUMBER_SIZE));
   }
 
-  private static List<Integer> initCandidateNumbers() {
+  private static List<LottoNumber> initCandidateLottoNumbers() {
     return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
-        .boxed().collect(Collectors.toList());
+        .mapToObj(LottoNumber::new).collect(Collectors.toList());
   }
 
   private static void checkCnt(long cnt) {
