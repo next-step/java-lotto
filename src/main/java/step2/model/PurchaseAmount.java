@@ -12,7 +12,7 @@ public class PurchaseAmount {
         isBlank(amount);
         isDigit(amount);
         isOverMinAmount(amount);
-        this.purchaseAmount = Integer.parseInt(amount);
+        this.purchaseAmount = changeToInt(amount);
         this.purchaseAmount = calcPurchaseAmount(getLottoCount());
     }
 
@@ -21,7 +21,7 @@ public class PurchaseAmount {
     }
 
     private void isOverMinAmount(String amount) {
-        if (Integer.parseInt(amount.trim()) < MIN_AMOUNT) {
+        if (changeToInt(amount) < MIN_AMOUNT) {
             throw new IllegalArgumentException("로또를 사기에 부족한 금액입니다. 1000원이상 입력해주세요.");
         }
     }

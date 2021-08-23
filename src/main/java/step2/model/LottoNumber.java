@@ -17,10 +17,6 @@ public class LottoNumber {
         this.lottoNumber = changeToInt(number);
     }
 
-    private int changeToInt(String number) {
-        return Integer.parseInt(number.trim());
-    }
-
     public LottoNumber(int lottoNumber) {
         isInRange(lottoNumber);
         this.lottoNumber = lottoNumber;

@@ -14,7 +14,7 @@ public class LottoCount {
         isDigit(manualLottoCount);
         isValidCount(purchaseAmount, manualLottoCount);
         this.totalLottoCount = calcLottoCount(purchaseAmount);
-        this.manualLottoCount = Integer.parseInt(manualLottoCount);
+        this.manualLottoCount = changeToInt(manualLottoCount);
         this.autoLottoCount = calcAutoLottoCount(manualLottoCount);
     }
 
@@ -30,7 +30,7 @@ public class LottoCount {
 
     private void isValidCount(PurchaseAmount purchaseAmount, String lottoCount) {
         int maxLottoCount = calcLottoCount(purchaseAmount);
-        int manualLottoCount = Integer.parseInt(lottoCount);
+        int manualLottoCount = changeToInt(lottoCount);
         if ( manualLottoCount < MIN_LOTTO_COUNT || manualLottoCount > maxLottoCount) {
             throw new IllegalArgumentException("구매할 로또수를 다시 확인해주세요. 최소 " + MIN_LOTTO_COUNT
                     + " ~ 최대 " + maxLottoCount + "개 까지 구매 가능합니다.");
@@ -42,7 +42,7 @@ public class LottoCount {
     }
 
     public int calcAutoLottoCount(String manualLottoCount) {
-        return totalLottoCount - Integer.parseInt(manualLottoCount);
+        return totalLottoCount - changeToInt(manualLottoCount);
     }
 
     public boolean isEqualsManualCount(int size) {

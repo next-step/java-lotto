@@ -12,4 +12,8 @@ public class LottoValidator {
             throw new IllegalArgumentException("숫자를 입력해주세요");
         }
     }
+
+    public static int changeToInt(String input) {
+        return Integer.parseInt(input.trim());
+    }
 }
