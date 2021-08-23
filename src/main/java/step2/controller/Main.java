@@ -34,13 +34,13 @@ public class Main {
         view.showLotto(manualLottoGroup.getLottoResult());
         view.showLotto(autoLottoGroup.getLottoResult());
 
-        String winningNo = inputView.ask("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto winningNumber = new Lotto(winningNo);
+        String winningNumber = inputView.ask("지난 주 당첨 번호를 입력해 주세요.");
+        Lotto winningLotto = new Lotto(winningNumber);
 
         String bonusNumber = inputView.ask("보너스 볼을 입력해 주세요.");
-        Bonus bonus = new Bonus(winningNumber, bonusNumber);
+        Bonus bonus = new Bonus(winningLotto, bonusNumber);
 
-        Winning winning = new Winning(winningNumber, bonus);
+        Winning winning = new Winning(winningLotto, bonus);
 
         List<Lotto> allLottoList = manualLottoGroup.combineGroup(manualLottoGroup, autoLottoGroup);
         LottoGroup totalGroup = new LottoGroup(allLottoList);
