@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
-import lotto.domain.WinningStatics;
+import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
@@ -23,13 +23,13 @@ public class ResultView {
     System.out.println("[" + lottoNumbers + "]");
   }
 
-  public static void printWinningStatics(WinningStatics winningStatics) {
+  public static void printWinningStatics(WinningStatistics winningStatics) {
     System.out.println("\n당첨 통계\n---------");
     printStaticsByPrize(winningStatics);
     printRateOfReturn(winningStatics.getRateOfReturn());
   }
 
-  private static void printStaticsByPrize(WinningStatics winningStatics) {
+  private static void printStaticsByPrize(WinningStatistics winningStatics) {
     List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
         .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
         .sorted((o1, o2) -> Integer.compare(o2.getMatchedCnt(), o1.getMatchedCnt()))

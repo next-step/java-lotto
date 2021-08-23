@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningStaticsTest {
+class WinningStatisticsTest {
 
   @Test
   @DisplayName("통계값 일치 확인 테스트")
@@ -23,14 +23,14 @@ class WinningStaticsTest {
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
 
     //when
-    WinningStatics statics = new WinningStatics(lottos, winningLotto);
+    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
 
     //then
-    assertThat(statics.getResultByMatchedCnt(6)).isEqualTo(1);
-    assertThat(statics.getResultByMatchedCnt(5)).isEqualTo(1);
-    assertThat(statics.getResultByMatchedCnt(4)).isEqualTo(0);
-    assertThat(statics.getResultByMatchedCnt(3)).isEqualTo(2);
-    assertThat(statics.getResultByMatchedCnt(0)).isEqualTo(1);
+    assertThat(statistics.getResultByMatchedCnt(6)).isEqualTo(1);
+    assertThat(statistics.getResultByMatchedCnt(5)).isEqualTo(1);
+    assertThat(statistics.getResultByMatchedCnt(4)).isEqualTo(0);
+    assertThat(statistics.getResultByMatchedCnt(3)).isEqualTo(2);
+    assertThat(statistics.getResultByMatchedCnt(0)).isEqualTo(1);
   }
 
   @Test
@@ -58,11 +58,11 @@ class WinningStaticsTest {
         lotto8, lotto9, lotto10, lotto11, lotto12, lotto13, lotto14);
 
     //when
-    WinningStatics winningStatics = new WinningStatics(lottos, winningLotto);
+    WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
 
     //then
     double expected =
         (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE.getValue());
-    assertThat(winningStatics.getRateOfReturn()).isEqualTo(expected);
+    assertThat(winningStatistics.getRateOfReturn()).isEqualTo(expected);
   }
 }
