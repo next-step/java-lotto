@@ -17,7 +17,7 @@ class MoneyTest {
     Money money = new Money(value);
 
     //then
-    assertThat(money.getValue()).isEqualTo(value);
+    assertThat(money.value()).isEqualTo(value);
   }
 
   @ParameterizedTest(name = "잘못된 생성 테스트 : {0}원")

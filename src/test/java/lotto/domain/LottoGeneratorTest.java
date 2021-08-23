@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ class LottoGeneratorTest {
   @ValueSource(ints = {1, 2, 20})
   void generateByRandomTest(int cnt) {
     //when
-    List<Lotto> lottos = LottoGenerator.generateByRandomNumber(cnt);
+    List<Lotto> lottos = LottoGenerator.generatedLottosByRandomNumber(cnt);
 
     //then
     assertThat(lottos.size()).isEqualTo(cnt);
@@ -28,7 +27,7 @@ class LottoGeneratorTest {
   void invalidGenerateByRandomTest(int cnt) {
     //then
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      LottoGenerator.generateByRandomNumber(cnt);
+      LottoGenerator.generatedLottosByRandomNumber(cnt);
     });
   }
 
@@ -40,9 +39,9 @@ class LottoGeneratorTest {
     Arrays.asList(numbers);
 
     //when
-    Lotto lotto = LottoGenerator.generateByGivenNumber(numbers);
+    Lotto lotto = LottoGenerator.generatedLottoByGivenNumber(numbers);
 
     //then
-    assertThat(lotto.getLottoNumbers()).isEqualTo(new Lotto(numbers).getLottoNumbers());
+    assertThat(lotto.numbers()).isEqualTo(new Lotto(numbers).numbers());
   }
 }

@@ -10,17 +10,17 @@ public class InputView {
 
   private static final Scanner scanner = new Scanner(System.in);
 
-  public static Money getInputMoney() {
+  public static Money inputMoney() {
     System.out.println("구입금액을 입력해 주세요.");
     return new Money(Integer.parseInt(scanner.nextLine()));
   }
 
-  public static Lotto getWinningLotto() {
+  public static Lotto winningLotto() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String input = scanner.nextLine();
     int[] numbers = Arrays.stream(input.split(","))
         .map(String::trim).mapToInt(Integer::parseInt)
         .toArray();
-    return LottoGenerator.generateByGivenNumber(numbers);
+    return LottoGenerator.generatedLottoByGivenNumber(numbers);
   }
 }

@@ -15,7 +15,7 @@ class LottoGameTest {
     LottoGame lottoGame = new LottoGame(money);
 
     //then
-    assertThat(lottoGame.getLottos().size()).isEqualTo(money / 1000);
+    assertThat(lottoGame.lottos().size()).isEqualTo(money / 1000);
   }
 
   @ParameterizedTest(name = "잘못된 생성 테스트 : {0}원 입력")

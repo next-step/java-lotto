@@ -12,20 +12,21 @@ public class LottoGame {
 
   public LottoGame(Money money) {
     checkMoney(money);
-    lottos = LottoGenerator.generateByRandomNumber((money.getValue() / Lotto.PRICE.getValue()));
+    this.lottos = LottoGenerator.generatedLottosByRandomNumber(
+        (money.value() / Lotto.PRICE.value()));
   }
 
-  public List<Lotto> getLottos() {
-    return lottos;
+  public List<Lotto> lottos() {
+    return this.lottos;
   }
 
-  public WinningResult getWinningResult(Lotto winningLotto) {
-    return new WinningResult(lottos, winningLotto);
+  public WinningResult winningResult(Lotto winningLotto) {
+    return new WinningResult(this.lottos, winningLotto);
   }
 
   private void checkMoney(Money money) {
     if (money.compareTo(Lotto.PRICE) < 0) {
-      throw new IllegalArgumentException("최소 구매 금액은 " + Lotto.PRICE.getValue() + "원 입니다.");
+      throw new IllegalArgumentException("최소 구매 금액은 " + Lotto.PRICE.value() + "원 입니다.");
     }
   }
 }

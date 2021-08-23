@@ -22,8 +22,7 @@ public enum LottoPrize {
   public static LottoPrize of(int matchedCnt) {
     return LOTTO_PRIZE_LIST.stream()
         .filter(lottoPrize -> lottoPrize.matchedCnt == matchedCnt)
-        .findAny()
-        .orElse(NOTHING);
+        .findAny().orElse(NOTHING);
   }
 
   public static LottoPrize[] valuesExceptNothing() {
@@ -32,11 +31,11 @@ public enum LottoPrize {
         .toArray(LottoPrize[]::new);
   }
 
-  public long getPrizeMoney() {
+  public long prizeMoney() {
     return prizeMoney;
   }
 
-  public int getMatchedCnt() {
+  public int matchedCnt() {
     return matchedCnt;
   }
 }

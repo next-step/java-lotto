@@ -19,7 +19,7 @@ class RateOfReturnTest {
     RateOfReturn rateOfReturn = new RateOfReturn(returnMoney, inputMoney);
 
     //then
-    assertThat(rateOfReturn.getRate()).isEqualTo((double)returnMoney / inputMoney);
+    assertThat(rateOfReturn.rate()).isEqualTo((double) returnMoney / inputMoney);
   }
 
   @Test

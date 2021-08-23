@@ -13,14 +13,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     this.number = number;
   }
 
-  public int getNumber() {
+  public int number() {
     return number;
   }
 
   private void checkNumber(int number) {
     if (number < MIN || number > MAX) {
-      throw new IllegalArgumentException(
-          "생성 가능한 로또 번호는 " + MIN + "부터 " + MAX + "까지입니다.");
+      throw new IllegalArgumentException("생성 가능한 로또 번호는 " + MIN + "부터 " + MAX + "까지입니다.");
     }
   }
 

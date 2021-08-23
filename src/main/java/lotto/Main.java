@@ -8,10 +8,10 @@ import lotto.view.ResultView;
 public class Main {
 
   public static void main(String[] args) {
-    LottoGame lottoGame = new LottoGame(InputView.getInputMoney());
-    ResultView.printPurchasedLottos(lottoGame.getLottos());
+    LottoGame lottoGame = new LottoGame(InputView.inputMoney());
+    ResultView.printPurchasedLottos(lottoGame.lottos());
 
-    WinningResult winningResult = lottoGame.getWinningResult(InputView.getWinningLotto());
+    WinningResult winningResult = lottoGame.winningResult(InputView.winningLotto());
     ResultView.printWinningResult(winningResult);
   }
 }

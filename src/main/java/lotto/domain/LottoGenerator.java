@@ -10,7 +10,7 @@ public class LottoGenerator {
 
   private static final List<LottoNumber> CANDIDATE_LOTTO_NUMBERS = initCandidateLottoNumbers();
 
-  public static Lotto generateByGivenNumber(int[] numbers) {
+  public static Lotto generatedLottoByGivenNumber(int[] numbers) {
     Collections.sort(CANDIDATE_LOTTO_NUMBERS);
     List<LottoNumber> lottoNumbers = new ArrayList<>();
     for (int number : numbers) {
@@ -19,7 +19,7 @@ public class LottoGenerator {
     return new Lotto(lottoNumbers);
   }
 
-  public static List<Lotto> generateByRandomNumber(long cnt) {
+  public static List<Lotto> generatedLottosByRandomNumber(long cnt) {
     checkCnt(cnt);
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {

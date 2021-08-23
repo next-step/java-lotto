@@ -16,7 +16,7 @@ class LottoPrizeTest {
     LottoPrize prize = LottoPrize.of(matchedCnt);
 
     //then
-    assertThat(prize.getPrizeMoney()).isEqualTo(prizeMoney);
+    assertThat(prize.prizeMoney()).isEqualTo(prizeMoney);
   }
 
   @ParameterizedTest(name = "잘못된 상금 조회 테스트 횟수 : {0}")

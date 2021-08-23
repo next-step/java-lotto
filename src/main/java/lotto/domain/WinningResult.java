@@ -10,8 +10,8 @@ public class WinningResult {
   public WinningResult(List<Lotto> lottos, Lotto winningLotto) {
     this.statistics = new WinningStatistics(lottos, winningLotto);
 
-    long inputMoney = lottos.size() * Lotto.PRICE.getValue();
-    long totalPrizeMoney = this.statistics.calcTotalPrizeMoney();
+    long inputMoney = lottos.size() * Lotto.PRICE.value();
+    long totalPrizeMoney = this.statistics.totalPrizeMoney();
     this.rateOfReturn = new RateOfReturn(totalPrizeMoney, inputMoney);
   }
 
@@ -20,6 +20,6 @@ public class WinningResult {
   }
 
   public double rateOfReturn() {
-    return this.rateOfReturn.getRate();
+    return this.rateOfReturn.rate();
   }
 }

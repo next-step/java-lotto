@@ -11,7 +11,7 @@ public class Money implements Comparable<Money> {
     this.value = value;
   }
 
-  public long getValue() {
+  public long value() {
     return value;
   }
 

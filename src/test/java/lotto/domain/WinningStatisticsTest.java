@@ -26,11 +26,11 @@ class WinningStatisticsTest {
     WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
 
     //then
-    assertThat(statistics.getCntByLottoPrize(LottoPrize.FIRST)).isEqualTo(1);
-    assertThat(statistics.getCntByLottoPrize(LottoPrize.SECOND)).isEqualTo(0);
-    assertThat(statistics.getCntByLottoPrize(LottoPrize.THIRD)).isEqualTo(0);
-    assertThat(statistics.getCntByLottoPrize(LottoPrize.FOURTH)).isEqualTo(2);
-    assertThat(statistics.getCntByLottoPrize(LottoPrize.NOTHING)).isEqualTo(1);
+    assertThat(statistics.cntByLottoPrize(LottoPrize.FIRST)).isEqualTo(1);
+    assertThat(statistics.cntByLottoPrize(LottoPrize.SECOND)).isEqualTo(0);
+    assertThat(statistics.cntByLottoPrize(LottoPrize.THIRD)).isEqualTo(0);
+    assertThat(statistics.cntByLottoPrize(LottoPrize.FOURTH)).isEqualTo(2);
+    assertThat(statistics.cntByLottoPrize(LottoPrize.NOTHING)).isEqualTo(1);
   }
 
   @Test
@@ -50,7 +50,7 @@ class WinningStatisticsTest {
     WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
 
     //then
-    assertThat(statistics.calcTotalPrizeMoney())
-        .isEqualTo((LottoPrize.FIRST.getPrizeMoney()) + (LottoPrize.FOURTH.getPrizeMoney() * 2));
+    assertThat(statistics.totalPrizeMoney())
+        .isEqualTo((LottoPrize.FIRST.prizeMoney()) + (LottoPrize.FOURTH.prizeMoney() * 2));
   }
 }

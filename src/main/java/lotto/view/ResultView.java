@@ -26,20 +26,20 @@ public class ResultView {
   }
 
   private static void printLotto(Lotto lotto) {
-    String lottoNumbers = lotto.getLottoNumbers().stream().sorted()
+    String lottoNumbers = lotto.numbers().stream().sorted()
         .map(String::valueOf).reduce((s1, s2) -> s1 + ", " + s2).get();
     System.out.println("[" + lottoNumbers + "]");
   }
 
   private static void printStatisticsByPrize(WinningStatistics winningStatistics) {
     List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.valuesExceptNothing())
-        .sorted(Comparator.comparingInt(LottoPrize::getMatchedCnt))
+        .sorted(Comparator.comparingInt(LottoPrize::matchedCnt))
         .collect(Collectors.toList());
 
-    lottoPrizes.forEach(prize -> {
-      int cnt = winningStatistics.getCntByLottoPrize(prize);
+    lottoPrizes.forEach(lottoPrize -> {
+      int cnt = winningStatistics.cntByLottoPrize(lottoPrize);
       System.out.println(
-          prize.getMatchedCnt() + "개 일치 " + "(" + prize.getPrizeMoney() + "원)- " + cnt + "개"
+          lottoPrize.matchedCnt() + "개 일치 " + "(" + lottoPrize.prizeMoney() + "원)- " + cnt + "개"
       );
     });
   }

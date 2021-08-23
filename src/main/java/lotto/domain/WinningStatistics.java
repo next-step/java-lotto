@@ -11,18 +11,17 @@ public class WinningStatistics {
 
   public WinningStatistics(List<Lotto> lottos, Lotto winningLotto) {
     for (Lotto lotto : lottos) {
-      LottoPrize lottoPrize = LottoPrize.of(lotto.getMatchingNumberCnt(winningLotto));
+      LottoPrize lottoPrize = LottoPrize.of(lotto.matchedNumberCnt(winningLotto));
       putInStatistics(lottoPrize);
     }
   }
 
-  public long calcTotalPrizeMoney() {
+  public long totalPrizeMoney() {
     return Arrays.stream(LottoPrize.values())
-        .mapToLong(prize -> prize.getPrizeMoney() * getCntByLottoPrize(prize))
-        .sum();
+        .mapToLong(prize -> prize.prizeMoney() * cntByLottoPrize(prize)).sum();
   }
 
-  public int getCntByLottoPrize(LottoPrize lottoPrize) {
+  public int cntByLottoPrize(LottoPrize lottoPrize) {
     return this.statistics.getOrDefault(lottoPrize, 0);
   }
 

@@ -22,7 +22,7 @@ class LottoTest {
     Lotto lotto = new Lotto(numbers);
 
     //then
-    assertThat(lotto.getLottoNumbers()).isEqualTo(numberList);
+    assertThat(lotto.numbers()).isEqualTo(numberList);
   }
 
   @Test
@@ -59,10 +59,10 @@ class LottoTest {
     Lotto lotto2 = new Lotto(new int[]{5, 6, 7, 8, 9, 10});
 
     //when
-    int result0 = lotto0.getMatchingNumberCnt(winningLotto);
-    int result1 = lotto1.getMatchingNumberCnt(winningLotto);
-    int result2 = lotto2.getMatchingNumberCnt(winningLotto);
-    int winningResult = winningLotto.getMatchingNumberCnt(winningLotto);
+    int result0 = lotto0.matchedNumberCnt(winningLotto);
+    int result1 = lotto1.matchedNumberCnt(winningLotto);
+    int result2 = lotto2.matchedNumberCnt(winningLotto);
+    int winningResult = winningLotto.matchedNumberCnt(winningLotto);
 
     //then
     assertThat(result0).isEqualTo(0);

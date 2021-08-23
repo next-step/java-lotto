@@ -19,12 +19,12 @@ public class Lotto {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public int getMatchingNumberCnt(Lotto winningLotto) {
+  public int matchedNumberCnt(Lotto winningLotto) {
     return (int) lottoNumbers.stream().filter(winningLotto.lottoNumbers::contains).count();
   }
 
-  public List<Integer> getLottoNumbers() {
-    return lottoNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
+  public List<Integer> numbers() {
+    return lottoNumbers.stream().map(LottoNumber::number).collect(Collectors.toList());
   }
 
   private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
