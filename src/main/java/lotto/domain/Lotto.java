@@ -13,8 +13,11 @@ public class Lotto {
         return numbers.size() == DEFAULT_LOTTO_SIZE;
     }
 
-    public int match(Numbers winnerNumbers) {
-        return this.numbers.match(winnerNumbers);
+    public Rank match(Numbers winnerNumbers, Numbers bonusNumbers) {
+        int matchCount = this.numbers.match(winnerNumbers);
+        boolean bonusMatch = this.numbers.match(winnerNumbers, bonusNumbers);
+
+        return Rank.find(matchCount, bonusMatch);
     }
 
     @Override

@@ -22,6 +22,11 @@ public class Numbers {
                 .count();
     }
 
+    public boolean match(Numbers other, Numbers bonus) {
+        return numbers.stream()
+                .anyMatch(number -> !other.numbers.contains(number) && bonus.numbers.contains(number));
+    }
+
     public static Numbers createRandomNumbers() {
         List<Number> numberList = RandomUtil.getRandomInteger(MAX_SIZE)
                 .stream()
