@@ -33,14 +33,7 @@ public class ResultView {
 		Arrays.stream(WinningType.values())
 			.filter(winningType -> winningType != WinningType.MISMATCH)
 			.sorted(Comparator.comparing(WinningType::getNumberOfMatch))
-			.forEach(winningType -> {
-				int numberOfMatch = winningType.getNumberOfMatch();
-				int winnings = winningType.getWinnings();
-				int numberOfDraw = drawResultMap.get(winningType);
-
-				String outputWinningTypes = String.format(NUMBER_OF_MATCH, numberOfMatch, winnings, numberOfDraw);
-				System.out.println(outputWinningTypes);
-			});
+			.forEach(winningType -> printWinningStatistics(winningType, drawResultMap));
 
 		float totalYield = results.getTotalYield();
 		String outputTotalYield = String.format(TOTAL_YIELD, totalYield);
@@ -48,5 +41,14 @@ public class ResultView {
 			outputTotalYield += FYI_TOTAL_YIELD;
 		}
 		System.out.println(outputTotalYield);
+	}
+
+	private static void printWinningStatistics(WinningType winningType, Map<WinningType, Integer> drawResultMap) {
+		int numberOfMatch = winningType.getNumberOfMatch();
+		int winnings = winningType.getWinnings();
+		int numberOfDraw = drawResultMap.get(winningType);
+
+		String outputWinningTypes = String.format(NUMBER_OF_MATCH, numberOfMatch, winnings, numberOfDraw);
+		System.out.println(outputWinningTypes);
 	}
 }
