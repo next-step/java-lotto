@@ -21,10 +21,10 @@ class LotteryResultsTest {
 	void init() {
 		List<LotteryResult> lotteryResultList = new ArrayList<>();
 		for (int i = 0; i < NUMBER_OF_MISMATCH; i++) {
-			LotteryResult lotteryResult = new LotteryResult(null, WinningType.MISMATCH);
+			LotteryResult lotteryResult = new LotteryResult(WinningType.MISMATCH);
 			lotteryResultList.add(lotteryResult);
 		}
-		lotteryResultList.add(new LotteryResult(null, WinningType.FOURTH));
+		lotteryResultList.add(new LotteryResult(WinningType.FOURTH));
 
 		lotteryResults = new LotteryResults(lotteryResultList);
 	}

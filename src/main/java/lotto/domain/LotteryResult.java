@@ -3,11 +3,9 @@ package lotto.domain;
 import lotto.domain.type.WinningType;
 
 public class LotteryResult {
-	private Lotto lotto;
-	private WinningType winningType;
+	private final WinningType winningType;
 
-	public LotteryResult(Lotto lotto, WinningType winningType) {
-		this.lotto = lotto;
+	public LotteryResult(WinningType winningType) {
 		this.winningType = winningType;
 	}
 

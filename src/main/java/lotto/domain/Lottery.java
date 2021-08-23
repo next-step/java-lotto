@@ -21,7 +21,7 @@ public class Lottery {
 			int matchNumber = numbers.size();
 
 			WinningType winningType = WinningType.getWinningType(matchNumber);
-			results.add(new LotteryResult(lotto, winningType));
+			results.add(new LotteryResult(winningType));
 		}
 
 		lotteryResults = new LotteryResults(results);
