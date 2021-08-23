@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.exception.MoneyLowException;
 import lotto.domain.exception.LackOfMoneyException;
+import lotto.domain.exception.MoneyLowException;
 
 import java.util.Objects;
 

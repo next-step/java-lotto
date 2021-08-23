@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ class MoneyTest {
     void create_0원_이하일_경우_에러() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Money(-1000);
-        }).withMessageMatching("금액이 음수입니다.");
+        }).withMessageMatching("최소 1000원 이상이어야 합니다.");
     }
 
     @DisplayName("잔액 이상으로 구입할 경우 에러 발생")
