@@ -13,8 +13,12 @@ public class LottoNumber {
     public LottoNumber(String number) {
         isBlank(number);
         isDigit(number);
-        isInRange(Integer.parseInt(number));
-        this.lottoNumber = Integer.parseInt(number.trim());
+        isInRange(changeToInt(number));
+        this.lottoNumber = changeToInt(number);
+    }
+
+    private int changeToInt(String number) {
+        return Integer.parseInt(number.trim());
     }
 
     public LottoNumber(int lottoNumber) {

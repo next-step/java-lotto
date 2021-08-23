@@ -6,16 +6,22 @@ import java.util.List;
 public class LottoGroup {
     private List<Lotto> lottoList;
 
-    public LottoGroup(LottoStrategy lottoStrategy, int lottoCount) {
-        lottoList = new ArrayList<>();
+    public LottoGroup(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+    }
+
+    public static LottoGroup getAutoLotto(LottoStrategy lottoStrategy, int lottoCount) {
+        List<Lotto> lottoList = new ArrayList<>();
 
         while (lottoCount-- > 0) {
             lottoList.add(new Lotto(lottoStrategy.getNumbers()));
         }
+
+        return new LottoGroup(lottoList);
     }
 
-    public LottoGroup(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+    public static LottoGroup getManualLotto(List<Lotto> manualLottoList) {
+        return new LottoGroup(manualLottoList);
     }
 
     public List<Lotto> getLottoList() {
@@ -36,10 +42,10 @@ public class LottoGroup {
         return lottoList.size();
     }
 
-    public List<Lotto> combineGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+    public static LottoGroup combineGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
         List<Lotto> allLottoList = new ArrayList<>();
         allLottoList.addAll(autoLottoGroup.getLottoList());
         allLottoList.addAll(manualLottoGroup.getLottoList());
-        return allLottoList;
+        return new LottoGroup(allLottoList);
     }
 }

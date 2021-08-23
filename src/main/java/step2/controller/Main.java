@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static step2.model.LottoGroup.*;
+
 public class Main {
     private static List<Lotto> manualLottoList;
 
@@ -25,8 +27,8 @@ public class Main {
             askManualLottoNumbers(inputView, lottoCount);
         }
 
-        LottoGroup manualLottoGroup = new LottoGroup(manualLottoList);
-        LottoGroup autoLottoGroup = new LottoGroup(new AutoLottoStrategy(), lottoCount.getAutoLottoCount());
+        LottoGroup manualLottoGroup = getManualLotto(manualLottoList);
+        LottoGroup autoLottoGroup = getAutoLotto(new AutoLottoStrategy(), lottoCount.getAutoLottoCount());
 
         System.out.println("수동으로 " + lottoCount.getManualLottoCount() + "장, 자동으로 " + lottoCount.getAutoLottoCount() + "개를 구매했습니다.");
 
@@ -42,8 +44,7 @@ public class Main {
 
         Winning winning = new Winning(winningLotto, bonus);
 
-        List<Lotto> allLottoList = manualLottoGroup.combineGroup(manualLottoGroup, autoLottoGroup);
-        LottoGroup totalGroup = new LottoGroup(allLottoList);
+        LottoGroup totalGroup = combineGroup(manualLottoGroup, autoLottoGroup);
 
         Result winningResult = new Result();
         Map<Rank, Integer> result = winningResult.getResult(totalGroup, winning);
