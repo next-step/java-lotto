@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
     private static final int FIRST_PURCHASE_COUNT = 0;
+    private static final int ADD_COUNT = 1;
     private List<Lotto> lottos = new ArrayList<>();
 
     public void create(PurchaseAmount purchaseAmount) {
@@ -23,13 +23,14 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> findWinners(Numbers winnerNumbers) {
-        List<Integer> matchCounts = this.lottos.stream()
-                .map(lotto -> lotto.match(winnerNumbers))
-                .filter(matchCount -> matchCount != 0)
-                .collect(Collectors.toList());
-
-        return Rank.findWinningInfo(matchCounts);
+    public Map<Rank, Integer> findRanks(Numbers winnerNumbers, Numbers bonusNumbers) {
+        Map<Rank, Integer> rankInfos = Rank.makeWinnerRank();
+        for (Lotto lotto : lottos) {
+            Rank rankInfo = lotto.match(winnerNumbers, bonusNumbers);
+            Integer currentCount = rankInfos.get(rankInfo);
+            rankInfos.put(rankInfo, currentCount + ADD_COUNT);
+        }
+        return rankInfos;
     }
 
     public List<Lotto> findAll() {
