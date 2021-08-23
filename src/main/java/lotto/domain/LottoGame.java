@@ -20,8 +20,8 @@ public class LottoGame {
     return lottos;
   }
 
-  public WinningStatistics getWinningStatics(Lotto winningLotto) {
-    return new WinningStatistics(lottos, winningLotto);
+  public WinningResult getWinningStatics(Lotto winningLotto) {
+    return new WinningResult(lottos, winningLotto);
   }
 
   private void checkMoney(Money money) {

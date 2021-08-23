@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningStatisticsTest {
+class WinningResultTest {
 
   @Test
   @DisplayName("통계값 일치 확인 테스트")
@@ -23,7 +23,7 @@ class WinningStatisticsTest {
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
 
     //when
-    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
+    WinningResult statistics = new WinningResult(lottos, winningLotto);
 
     //then
     assertThat(statistics.getResultByMatchedCnt(6)).isEqualTo(1);
@@ -58,11 +58,11 @@ class WinningStatisticsTest {
         lotto8, lotto9, lotto10, lotto11, lotto12, lotto13, lotto14);
 
     //when
-    WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
+    WinningResult winningResult = new WinningResult(lottos, winningLotto);
 
     //then
     double expected =
         (double) LottoPrize.FOURTH.getPrizeMoney() / (14 * LottoGame.LOTTO_PRICE.getValue());
-    assertThat(winningStatistics.getRateOfReturn()).isEqualTo(expected);
+    assertThat(winningResult.getRateOfReturn()).isEqualTo(expected);
   }
 }

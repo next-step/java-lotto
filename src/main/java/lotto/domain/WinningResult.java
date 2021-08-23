@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class WinningStatistics {
+public class WinningResult {
 
   private final Map<LottoPrize, Integer> statistics = new TreeMap<>();
   private final double rateOfReturn;
 
-  public WinningStatistics(List<Lotto> lottos, Lotto winningLotto) {
+  public WinningResult(List<Lotto> lottos, Lotto winningLotto) {
     for (Lotto lotto : lottos) {
       int matchedCnt = lotto.getMatchingNumberCnt(winningLotto);
       LottoPrize lottoPrize = LottoPrize.of(matchedCnt);

@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Money;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +16,7 @@ public class Main {
     ResultView.printPurchasedLottos(lottoGame.getLottos());
 
     Lotto winningLotto = InputView.getWinningLotto();
-    WinningStatistics winningStatics = lottoGame.getWinningStatics(winningLotto);
+    WinningResult winningStatics = lottoGame.getWinningStatics(winningLotto);
 
     ResultView.printWinningStatics(winningStatics);
   }
