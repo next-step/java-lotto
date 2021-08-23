@@ -11,14 +11,14 @@ public class Money {
 
     private final int money;
 
-    public Money(int money) {
+    public Money(final int money) {
         if (money < 0) {
             throw new MoneyLowException();
         }
         this.money = money;
     }
 
-    public Money spendMoneyToBuyLotto(int numberToBuy) {
+    public Money spendMoneyToBuyLotto(final int numberToBuy) {
         if (money < LOTTO_PRICE) {
             throw new LackOfMoneyException();
         }

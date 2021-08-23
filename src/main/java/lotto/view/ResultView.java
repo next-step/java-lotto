@@ -49,7 +49,7 @@ public final class ResultView {
         }
     }
 
-    private void printRankInfo(final Result result, Rank rank) {
+    private void printRankInfo(final Result result, final Rank rank) {
         if (rank != Rank.SECOND) {
             System.out.printf("%d개 일치 (%d원) - %d개%n", rank.getCountOfMatch(), rank.getWinningMoney(), result.getRankHitsCount(rank));
         }

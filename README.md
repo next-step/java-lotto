@@ -57,4 +57,4 @@
 ## TODO
 * [X] Money 도메인 객체 생성
 * [X] Lotto 객체에 String 값을 매개변수로 갖는 생성자를 추가한다.
-* [ ] LottoMachine, Controller, UI 클래스를 요구사항에 맞게 변경한다.
+* [X] LottoMachine, Controller, UI 클래스를 요구사항에 맞게 변경한다.

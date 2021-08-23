@@ -19,7 +19,7 @@ public final class Lotto {
         addLottoNumber(numbers);
     }
 
-    public Lotto(String numbers) {
+    public Lotto(final String numbers) {
         String[] dividedNumbers = splitNumbers(numbers);
         addLottoNumber(Arrays
                 .stream(dividedNumbers)
@@ -48,7 +48,7 @@ public final class Lotto {
         }
     }
 
-    private String[] splitNumbers(String numbers) {
+    private String[] splitNumbers(final String numbers) {
         return numbers.replace(WHITE_SPACE, BLANK).split(SEPARATOR);
     }
 

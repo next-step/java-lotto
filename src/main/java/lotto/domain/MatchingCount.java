@@ -28,11 +28,11 @@ public final class MatchingCount {
         }
     }
 
-    public boolean isSameValue(int count) {
+    public boolean isSameValue(final int count) {
         return this.matchingCount == count;
     }
 
-    public boolean isLowerValue(int count) {
+    public boolean isLowerValue(final int count) {
         return this.matchingCount < count;
     }
 
