@@ -9,10 +9,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGame {
-    private LottoTickets tickets;
+    private final LottoTickets tickets;
+    private final Payments payments;
 
-    public LottoGame(int payments) {
-        int totalNumberOfTickets = calculateTotalNumberOfTickets(payments);
+    public LottoGame(int totalPayments) {
+        this.payments = new Payments(totalPayments);
+        int totalNumberOfTickets = calculateTotalNumberOfTickets(payments.getValue());
         List<LottoTicket> tickets = createLottoTickets(totalNumberOfTickets);
         this.tickets = new LottoTickets(tickets);
     }
