@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -25,5 +27,17 @@ class LottoPrizeTest {
 
     //then
     assertThat(prize).isEqualTo(LottoPrize.NOTHING);
+  }
+
+  @Test
+  @DisplayName("NOTHING을 제외한 LottoPrize 조회 테스트")
+  void valuesExceptNothing() {
+    //when
+    LottoPrize[] valuesExceptNothing = LottoPrize.valuesExceptNothing();
+
+    //then
+    assertThat(valuesExceptNothing.length).isEqualTo(LottoPrize.values().length - 1);
+    assertThat(valuesExceptNothing).doesNotContain(LottoPrize.NOTHING);
+
   }
 }

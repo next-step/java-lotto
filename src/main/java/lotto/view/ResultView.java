@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -18,29 +19,28 @@ public class ResultView {
     System.out.println();
   }
 
+  public static void printWinningResult(WinningResult winningResult) {
+    System.out.println("\n당첨 통계\n---------");
+    printStatisticsByPrize(winningResult.statistics());
+    printRateOfReturn(winningResult.rateOfReturn());
+  }
+
   private static void printLotto(Lotto lotto) {
     String lottoNumbers = lotto.getLottoNumbers().stream().sorted()
         .map(String::valueOf).reduce((s1, s2) -> s1 + ", " + s2).get();
     System.out.println("[" + lottoNumbers + "]");
   }
 
-  public static void printWinningStatics(WinningResult winningResult) {
-    System.out.println("\n당첨 통계\n---------");
-    printStaticsByPrize(winningResult.statistics());
-    printRateOfReturn(winningResult.rateOfReturn());
-  }
-
-  private static void printStaticsByPrize(WinningStatistics winningStatics) {
-    List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.values())
-        .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
-        .sorted((o1, o2) -> Integer.compare(o2.getMatchedCnt(), o1.getMatchedCnt()))
+  private static void printStatisticsByPrize(WinningStatistics winningStatistics) {
+    List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.valuesExceptNothing())
+        .sorted(Comparator.comparingInt(LottoPrize::getMatchedCnt))
         .collect(Collectors.toList());
 
-    lottoPrizes.forEach(lottoPrize -> {
-      String result = lottoPrize.getMatchedCnt() + "개 일치 "
-          + "(" + lottoPrize.getPrizeMoney() + "원)-"
-          + winningStatics.getCntByLottoPrize(lottoPrize) + "개";
-      System.out.println(result);
+    lottoPrizes.forEach(prize -> {
+      int cnt = winningStatistics.getCntByLottoPrize(prize);
+      System.out.println(
+          prize.getMatchedCnt() + "개 일치 " + "(" + prize.getPrizeMoney() + "원)- " + cnt + "개"
+      );
     });
   }
 

@@ -20,13 +20,13 @@ public class LottoGame {
     return lottos;
   }
 
-  public WinningResult getWinningStatics(Lotto winningLotto) {
+  public WinningResult getWinningResult(Lotto winningLotto) {
     return new WinningResult(lottos, winningLotto);
   }
 
   private void checkMoney(Money money) {
     if (money.compareTo(LOTTO_PRICE) < 0) {
-      throw new IllegalArgumentException("최소 구매 금액은 " + LOTTO_PRICE + "원 입니다.");
+      throw new IllegalArgumentException("최소 구매 금액은 " + LOTTO_PRICE.getValue() + "원 입니다.");
     }
   }
 }

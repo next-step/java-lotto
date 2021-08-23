@@ -26,6 +26,12 @@ public enum LottoPrize {
         .orElse(NOTHING);
   }
 
+  public static LottoPrize[] valuesExceptNothing() {
+    return LOTTO_PRIZE_LIST.stream()
+        .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
+        .toArray(LottoPrize[]::new);
+  }
+
   public long getPrizeMoney() {
     return prizeMoney;
   }
