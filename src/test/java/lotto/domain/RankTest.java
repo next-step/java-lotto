@@ -12,7 +12,7 @@ class RankTest {
 
     @DisplayName("당첨 번호와 일치하는 갯수에 해당하는 당첨정보 리턴")
     @ParameterizedTest
-    @CsvSource(value = {"3:FOURTH", "4:THIRD", "5:SECOND", "6:FIRST", "0:NONE"}, delimiter = ':')
+    @CsvSource(value = {"3:FIFTH", "4:FOURTH", "5:THIRD", "6:FIRST", "0:NONE"}, delimiter = ':')
     void find(int matchCount, String expected) {
         Rank matchedRank = Rank.find(matchCount);
 
@@ -23,7 +23,7 @@ class RankTest {
     @ParameterizedTest
     @CsvSource(value = {"FOURTH:true", "THIRD:true", "SECOND:true", "FIRST:true", "NONE:true"}, delimiter = ':')
     void makeWinnerMap(String winnerName, boolean expected) {
-        Map<Rank, Integer> winnerMap = Rank.makeWinnerMap();
+        Map<Rank, Integer> winnerMap = Rank.makeWinnerRank();
         Rank inputRank = Rank.valueOf(winnerName);
         assertThat(winnerMap.containsKey(inputRank)).isEqualTo(expected);
     }
