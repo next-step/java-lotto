@@ -11,7 +11,7 @@ public enum Reward {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    public static final int SECOND_SAME_NUMBER_COUNT = 5;
+    private static final int SECOND_SAME_NUMBER_COUNT = 5;
     private final int sameNumberCount;
     private final int money;
 

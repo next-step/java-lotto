@@ -1,23 +1,40 @@
 package lotto.domain;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Ball implements Comparable<Ball> {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
+    private static final Map<Integer, Ball> BALLS_POOL =
+            IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                    .mapToObj(Ball::new)
+                    .collect(Collectors.toMap(Ball::toInt, Function.identity()));
 
     private final int number;
 
-    public Ball(int number) {
+    private Ball(int number) {
         validNumberRange(number);
         this.number = number;
     }
 
-    private void validNumberRange(int number) {
+    public static Ball from(int number) {
+        validNumberRange(number);
+        return BALLS_POOL.get(number);
+    }
+
+    private static void validNumberRange(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("공 숫자는 " + MIN_NUMBER + "~" + MAX_NUMBER + " 만 올 수 있습니다.");
         }
+    }
+
+    private int toInt() {
+        return number;
     }
 
     @Override

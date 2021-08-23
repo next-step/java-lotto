@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,9 +12,20 @@ public class Lotto {
 
     private final Set<Ball> balls;
 
-    public Lotto(Set<Ball> balls) {
+    private Lotto(Set<Ball> balls) {
         validNumberCountSize(balls);
         this.balls = balls;
+    }
+
+    public static Lotto from(Set<Ball> balls) {
+        return new Lotto(balls);
+    }
+
+    public static Lotto from(int... numbers) {
+        Set<Ball> balls = Arrays.stream(numbers)
+                .mapToObj(Ball::from)
+                .collect(Collectors.toSet());
+        return new Lotto(balls);
     }
 
     public int getSameNumberCount(Lotto previousLotto) {
@@ -36,5 +49,18 @@ public class Lotto {
         return balls.stream()
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new)).toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(balls, lotto.balls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(balls);
     }
 }

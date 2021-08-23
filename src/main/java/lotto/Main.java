@@ -7,15 +7,20 @@ import lotto.domain.PreviousLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         int buyMoney = InputView.inputBuyMoney();
+        int manualLottoCount = InputView.inputManualLottoCount();
 
-        List<Lotto> lottos = LottoMachine.buyRandomLotto(buyMoney);
-        Game game = new Game(lottos);
+        List<Lotto> manualLottos = InputView.inputManualLottoNumbers(manualLottoCount);
+
+        List<Lotto> autoLottos = LottoMachine.buyRandomLotto(buyMoney - manualLottoCount * LottoMachine.LOTTO_PRICE);
+
+        Game game = Game.of(autoLottos, manualLottos);
 
         ResultView.resultLottoCount(game);
         ResultView.resultLottoNumbers(game);
