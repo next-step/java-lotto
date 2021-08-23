@@ -19,7 +19,8 @@ public class LottoGame {
     resultView.printPurchasedLotto(lottos);
 
     String[] lottowinningNumbers = inputView.inputLottoWinningNumber();
-    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers);
+    int lottowinningBonusNumbers = inputView.inputLottoWinningBonusNumber();
+    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers, lottowinningBonusNumbers);
 
     resultView.printWinner(lottoWin, userAmount);
   }

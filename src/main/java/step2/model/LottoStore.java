@@ -11,27 +11,24 @@ public class LottoStore {
   private static final int LOTTO_LARGEST_NUMBER = 45;
   private static final int LOTTO_PRICE = 1000;
 
-  public LottoStore() {
-  }
-
   public Lottos purchase(int userAmount) {
-    Lottos lottos = new Lottos();
+    List<Lotto> lottos = new ArrayList<>();
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      lottos.issueLottos(getLottoRandomNumbers());
+      lottos.add(new Lotto(getLottoRandomNumbers()));
     }
 
-    return lottos;
+    return new Lottos(lottos);
   }
 
   public Lottos purchase(int userAmount, List<Integer> lottoNumbers) {
-    Lottos lottos = new Lottos();
+    List<Lotto> lottos = new ArrayList<>();
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      lottos.issueLottos(lottoNumbers);
+      lottos.add(new Lotto(lottoNumbers));
     }
 
-    return lottos;
+    return new Lottos(lottos);
   }
 
   private List<Integer> getLottoRandomNumbers() {
@@ -55,13 +52,8 @@ public class LottoStore {
     return randomNum;
   }
 
-  public LottoWin draw(Lottos lottos, String[] lottowinningNumbers) {
-    LottoWin lottoWin = new LottoWin(lottowinningNumbers);
-
-    for (int i = 0; i < lottos.getLottosSize(); i++) {
-      lottoWin.addWinningLotto(lottos.getLotto(i));
-    }
-
-    return lottoWin;
+  public LottoWin draw(Lottos lottos, String[] lottowinningNumbers, int lottowinningBonusNumbers) {
+    LottoWin lottoWin = new LottoWin(lottowinningNumbers, lottowinningBonusNumbers);
+    return lottoWin.draw(lottos);
   }
 }

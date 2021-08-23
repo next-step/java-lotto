@@ -42,25 +42,30 @@ public class ResultView {
     System.out.println("당첨 통계");
     System.out.println("---------");
 
-    System.out.println(WinnerMoney.FOURTH_WINNER_MONEY.getMatchNumberCount() + "개 일치 ("
-        + WinnerMoney.FOURTH_WINNER_MONEY.getPrizeMoney() + "원)- " + lottoWin.getFourthWinnerCount()
-        + "개");
-    System.out.println(WinnerMoney.THIRD_WINNER_MONEY.getMatchNumberCount() + "개 일치 ("
-        + WinnerMoney.THIRD_WINNER_MONEY.getPrizeMoney() + "원)- " + lottoWin.getThirdWinnerCount()
-        + "개");
-    System.out.println(WinnerMoney.SECOND_WINNER_MONEY.getMatchNumberCount() + "개 일치 ("
-        + WinnerMoney.SECOND_WINNER_MONEY.getPrizeMoney() + "원)- " + lottoWin.getSecondWinnerCount()
-        + "개");
-    System.out.println(WinnerMoney.FIRST_WINNER_MONEY.getMatchNumberCount() + "개 일치 ("
-        + WinnerMoney.FIRST_WINNER_MONEY.getPrizeMoney() + "원)- " + lottoWin.getFirstWinnerCount()
-        + "개");
+    double earningMoney = 0;
+    for (WinnerMoney winnerMoney : WinnerMoney.values()) {
+      printResult(winnerMoney, lottoWin);
+      earningMoney += lottoWin.getWinnerCount(winnerMoney) * winnerMoney.getPrizeMoney();
+    }
 
-    double earningMoney =
-        (lottoWin.getFirstWinnerCount() * WinnerMoney.FIRST_WINNER_MONEY.getPrizeMoney()) + (
-            lottoWin.getSecondWinnerCount() * WinnerMoney.SECOND_WINNER_MONEY.getPrizeMoney()) + (
-            lottoWin.getThirdWinnerCount() * WinnerMoney.THIRD_WINNER_MONEY.getPrizeMoney()) + (
-            lottoWin.getFourthWinnerCount() * WinnerMoney.FOURTH_WINNER_MONEY.getPrizeMoney());
     double earningsRate = earningMoney / userAmount;
     System.out.println("총 수익률은 " + String.format("%.2f", earningsRate) + "입니다.");
+  }
+
+  private void printResult(WinnerMoney winnerMoney, LottoWin lottoWin) {
+    if (winnerMoney.hasMatchBonusNumber()) {
+      printBonusString(winnerMoney, lottoWin, "개 일치, 보너스 볼 일치 (");
+      return;
+    }
+
+    System.out.println(winnerMoney.getMatchNumberCount() + "개 일치 ("
+        + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney)
+        + "개");
+  }
+
+  private void printBonusString(WinnerMoney winnerMoney, LottoWin lottoWin, String s) {
+    System.out.println(winnerMoney.getMatchNumberCount() + s
+        + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney)
+        + "개");
   }
 }
