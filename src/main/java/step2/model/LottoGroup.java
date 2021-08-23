@@ -10,7 +10,7 @@ public class LottoGroup {
         this.lottoList = lottoList;
     }
 
-    public static LottoGroup getAutoLotto(LottoStrategy lottoStrategy, int lottoCount) {
+    public static LottoGroup purchaseAutoLotto(LottoStrategy lottoStrategy, int lottoCount) {
         List<Lotto> lottoList = new ArrayList<>();
 
         while (lottoCount-- > 0) {
@@ -20,7 +20,7 @@ public class LottoGroup {
         return new LottoGroup(lottoList);
     }
 
-    public static LottoGroup getManualLotto(List<Lotto> manualLottoList) {
+    public static LottoGroup purchaseManualLotto(List<Lotto> manualLottoList) {
         return new LottoGroup(manualLottoList);
     }
 
