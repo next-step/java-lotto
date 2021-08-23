@@ -10,6 +10,8 @@ public final class Lotto {
 
     private static final int LIMIT_SIZE = 6;
     private static final String SEPARATOR = ",";
+    private static final String WHITE_SPACE = " ";
+    private static final String BLANK = "";
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
@@ -18,8 +20,11 @@ public final class Lotto {
     }
 
     public Lotto(String numbers) {
-        String[] dividedNumbers = numbers.replaceAll(" ", "").split(SEPARATOR);
-        addLottoNumber(Arrays.stream(dividedNumbers).map(Integer::parseInt).collect(Collectors.toList()));
+        String[] dividedNumbers = splitNumbers(numbers);
+        addLottoNumber(Arrays
+                .stream(dividedNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     private void validateNumbers(final List<Integer> numbers) {
@@ -41,6 +46,10 @@ public final class Lotto {
         for (int number : numbers) {
             lottoNumbers.add(LottoNumberFactory.getLottoNumber(number));
         }
+    }
+
+    private String[] splitNumbers(String numbers) {
+        return numbers.replace(WHITE_SPACE, BLANK).split(SEPARATOR);
     }
 
     public MatchingCount getMatchingCount(final Lotto lotto) {
