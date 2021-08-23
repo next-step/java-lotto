@@ -15,6 +15,10 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
+    public List<LottoNumber> getValue() {
+        return this.lottoNumbers.getValue();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

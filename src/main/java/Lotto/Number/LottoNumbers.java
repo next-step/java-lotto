@@ -13,6 +13,10 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<LottoNumber> getValue() {
+        return this.lottoNumbers;
+    }
+
     private void isValid(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBERS_LENGTH) {
             throw new IllegalArgumentException("로또 숫자는 6개입니다.");
