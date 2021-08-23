@@ -12,8 +12,8 @@ public class RandomUtil {
     private static final List<Integer> data = new ArrayList<>();
 
     static {
-        for (int i = MIN_BOUNDARY; i < MAX_BOUNDARY; i++) {
-            data.add(i);
+        for (int number = MIN_BOUNDARY; number < MAX_BOUNDARY; number++) {
+            data.add(number);
         }
     }
 
