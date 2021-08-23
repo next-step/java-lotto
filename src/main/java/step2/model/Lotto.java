@@ -3,6 +3,8 @@ package step2.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step2.model.LottoValidator.isBlank;
+
 public class Lotto {
     private final List<LottoNumber> lotto;
 
@@ -25,12 +27,6 @@ public class Lotto {
             LottoNumber lottoNumber = new LottoNumber(number);
             isDuplicate(lottoNumber);
             this.lotto.add(lottoNumber);
-        }
-    }
-
-    private void isBlank(String lotto) {
-        if (lotto == null || lotto.isEmpty()) {
-            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
         }
     }
 

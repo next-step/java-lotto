@@ -1,5 +1,7 @@
 package step2.model;
 
+import static step2.model.LottoValidator.*;
+
 public class LottoCount {
     private final int totalLottoCount;
     private final int manualLottoCount;
@@ -24,17 +26,7 @@ public class LottoCount {
         return autoLottoCount;
     }
 
-    private void isBlank(String amount) {
-        if (amount == null || amount.isEmpty()) {
-            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
-        }
-    }
 
-    private void isDigit(String amount) {
-        if (!amount.matches("[0-9]*")) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
-        }
-    }
 
     private void isValidCount(PurchaseAmount purchaseAmount, String lottoCount) {
         int maxLottoCount = calcLottoCount(purchaseAmount);
