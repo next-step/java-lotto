@@ -1,4 +1,4 @@
-package com.techmoa.view;
+package com.techmoa.calculator.view;
 
 import java.util.Scanner;
 

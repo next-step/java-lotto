@@ -1,4 +1,4 @@
-package com.techmoa.service;
+package com.techmoa.calculator.service;
 
 import org.junit.jupiter.api.Test;
 

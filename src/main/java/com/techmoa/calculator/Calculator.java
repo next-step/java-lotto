@@ -1,6 +1,6 @@
-package com.techmoa;
+package com.techmoa.calculator;
 
-import com.techmoa.view.InputView;
+import com.techmoa.calculator.view.InputView;
 
 public class Calculator {
     public static void main(String[] args) {
