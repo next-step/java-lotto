@@ -10,7 +10,16 @@ public class LottoGenerator {
 
   private static final List<LottoNumber> CANDIDATE_LOTTO_NUMBERS = initCandidateLottoNumbers();
 
-  public static List<Lotto> generate(long cnt) {
+  public static Lotto generateByGivenNumber(int[] numbers) {
+    Collections.sort(CANDIDATE_LOTTO_NUMBERS);
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    for (int number : numbers) {
+      lottoNumbers.add(CANDIDATE_LOTTO_NUMBERS.get(number - 1));
+    }
+    return new Lotto(lottoNumbers);
+  }
+
+  public static List<Lotto> generateByRandomNumber(long cnt) {
     checkCnt(cnt);
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {

@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.Money;
 
 public class InputView {
@@ -17,8 +18,9 @@ public class InputView {
   public static Lotto getWinningLotto() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String input = scanner.nextLine();
-    int[] numbers = Arrays.stream(input.split(",")).map(String::trim)
-        .mapToInt(Integer::parseInt).toArray();
-    return new Lotto(numbers);
+    int[] numbers = Arrays.stream(input.split(","))
+        .map(String::trim).mapToInt(Integer::parseInt)
+        .toArray();
+    return LottoGenerator.generateByGivenNumber(numbers);
   }
 }

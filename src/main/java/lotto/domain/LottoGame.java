@@ -13,7 +13,7 @@ public class LottoGame {
 
   public LottoGame(Money money) {
     checkMoney(money);
-    lottos = LottoGenerator.generate((money.getValue() / LOTTO_PRICE.getValue()));
+    lottos = LottoGenerator.generateByRandomNumber((money.getValue() / LOTTO_PRICE.getValue()));
   }
 
   public List<Lotto> getLottos() {
