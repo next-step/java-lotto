@@ -45,8 +45,7 @@ public class ResultView {
     double earningMoney = 0;
     for (WinnerMoney winnerMoney : WinnerMoney.values()) {
       printResult(winnerMoney, lottoWin);
-      earningMoney +=
-          lottoWin.getWinnerCount(winnerMoney.getWinRank()) * winnerMoney.getPrizeMoney();
+      earningMoney += lottoWin.getWinnerCount(winnerMoney) * winnerMoney.getPrizeMoney();
     }
 
     double earningsRate = earningMoney / userAmount;
@@ -54,17 +53,19 @@ public class ResultView {
   }
 
   private void printResult(WinnerMoney winnerMoney, LottoWin lottoWin) {
-    String printStr;
     if (winnerMoney.hasMatchBonusNumber()) {
-      printStr = winnerMoney.getMatchNumberCount() + "개 일치, 보너스 볼 일치 ("
-          + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney.getWinRank())
-          + "개";
-    } else {
-      printStr = winnerMoney.getMatchNumberCount() + "개 일치 ("
-          + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney.getWinRank())
-          + "개";
+      printBonusString(winnerMoney, lottoWin, "개 일치, 보너스 볼 일치 (");
+      return;
     }
 
-    System.out.println(printStr);
+    System.out.println(winnerMoney.getMatchNumberCount() + "개 일치 ("
+        + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney)
+        + "개");
+  }
+
+  private void printBonusString(WinnerMoney winnerMoney, LottoWin lottoWin, String s) {
+    System.out.println(winnerMoney.getMatchNumberCount() + s
+        + winnerMoney.getPrizeMoney() + "원)- " + lottoWin.getWinnerCount(winnerMoney)
+        + "개");
   }
 }

@@ -52,11 +52,6 @@ public class LottoStore {
     return randomNum;
   }
 
-  public LottoWin draw(Lottos lottos, String[] lottowinningNumbers) {
-    LottoWin lottoWin = new LottoWin(lottowinningNumbers);
-    return lottoWin.draw(lottos);
-  }
-
   public LottoWin draw(Lottos lottos, String[] lottowinningNumbers, int lottowinningBonusNumbers) {
     LottoWin lottoWin = new LottoWin(lottowinningNumbers, lottowinningBonusNumbers);
     return lottoWin.draw(lottos);

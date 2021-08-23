@@ -8,20 +8,13 @@ import java.util.Map;
 
 public class LottoWin {
 
-  private Map<Integer, Integer> winnerCountMap;
+  private Map<WinnerMoney, Integer> winnerCountMap;
 
   private List<String> lottoWinningNumbers;
   private int lottoWinningBonusNumber;
 
-  public LottoWin(String[] lottoWinningNumbers) {
-    winnerCountMap = new HashMap() {{
-      put(WinnerMoney.FIRST_WINNER_MONEY.winRank, 0);
-      put(WinnerMoney.SECOND_WINNER_MONEY.winRank, 0);
-      put(WinnerMoney.THIRD_WINNER_MONEY.winRank, 0);
-      put(WinnerMoney.FOURTH_WINNER_MONEY.winRank, 0);
-      put(WinnerMoney.FIFTH_WINNER_MONEY.winRank, 0);
-    }};
-
+  private LottoWin(String[] lottoWinningNumbers) {
+    winnerCountMap = new HashMap();
     this.lottoWinningNumbers = new ArrayList(Arrays.asList(lottoWinningNumbers));
   }
 
@@ -30,29 +23,26 @@ public class LottoWin {
     this.lottoWinningBonusNumber = lottowinningBonusNumber;
   }
 
-  private int isMatchNumber(Lotto lotto, String lottoNumStr) {
-    int matchNumberCount = 0;
-    if (lotto.getLottoNumbers().contains(Integer.parseInt(lottoNumStr))) {
-      matchNumberCount = 1;
-    }
-    return matchNumberCount;
+  private boolean isMatchNumber(Lotto lotto, String lottoNumStr) {
+    return lotto.getLottoNumbers().contains(Integer.parseInt(lottoNumStr));
   }
 
   public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
     if (hasWinningBonusNumber) {
-      winnerCountMap.replace(WinnerMoney.SECOND_WINNER_MONEY.getWinRank(),
-          winnerCountMap.get(winnerMoney.getWinRank()) + 1);
+      winnerCountMap.replace(WinnerMoney.SECOND_WINNER_MONEY,
+          winnerCountMap.get(winnerMoney) + 1);
     } else {
       winnerCountMap
-          .replace(winnerMoney.getWinRank(), winnerCountMap.get(winnerMoney.getWinRank()) + 1);
+          .replace(winnerMoney, winnerCountMap.get(winnerMoney) + 1);
     }
   }
 
-  public int getWinnerCount(int winnerRank) {
-    return winnerCountMap.get(winnerRank);
+  public int getWinnerCount(WinnerMoney winnerMoney) {
+    return winnerCountMap.get(winnerMoney);
   }
 
   public LottoWin draw(Lottos lottos) {
+    initWinnerCount();
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       calculateRank(lottos.getLotto(i));
     }
@@ -60,19 +50,32 @@ public class LottoWin {
     return this;
   }
 
+  private void initWinnerCount() {
+    for (WinnerMoney winnerMoney : WinnerMoney.values()) {
+      winnerCountMap.put(winnerMoney, 0);
+    }
+  }
+
   private void calculateRank(Lotto lotto) {
     int matchNumberCount = 0;
     boolean hasWinningBonusNumber = false;
 
     for (String lottoNumStr : lottoWinningNumbers) {
-      matchNumberCount += isMatchNumber(lotto, lottoNumStr);
+      matchNumberCount = addMatchNumberCount(lotto, matchNumberCount, lottoNumStr);
     }
 
-    if (isMatchNumber(lotto, String.valueOf(lottoWinningBonusNumber)) == 1) {
+    if (isMatchNumber(lotto, String.valueOf(lottoWinningBonusNumber))) {
       hasWinningBonusNumber = true;
     }
 
     calculateWin(matchNumberCount, hasWinningBonusNumber);
+  }
+
+  private int addMatchNumberCount(Lotto lotto, int matchNumberCount, String lottoNumStr) {
+    if (isMatchNumber(lotto, lottoNumStr)) {
+      matchNumberCount++;
+    }
+    return matchNumberCount;
   }
 
   private void calculateWin(int matchNumberCount, boolean hasWinningBonusNumber) {
@@ -87,12 +90,17 @@ public class LottoWin {
 
   private boolean matchWinnerCount(int matchNumberCount, WinnerMoney winnerMoney,
       boolean hasWinningBonusNumber) {
-    if (matchNumberCount == winnerMoney.getMatchNumberCount()
-        && hasWinningBonusNumber == winnerMoney.hasMatchBonusNumber()) {
+    if (isWinnerCondition(matchNumberCount, winnerMoney, hasWinningBonusNumber)) {
       addWinnerCount(winnerMoney, hasWinningBonusNumber);
       return true;
     }
 
     return false;
+  }
+
+  private boolean isWinnerCondition(int matchNumberCount, WinnerMoney winnerMoney,
+      boolean hasWinningBonusNumber) {
+    return matchNumberCount == winnerMoney.getMatchNumberCount()
+        && hasWinningBonusNumber == winnerMoney.hasMatchBonusNumber();
   }
 }

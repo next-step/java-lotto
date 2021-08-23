@@ -49,16 +49,17 @@ public class LottoStoreTest {
   @ValueSource(strings = {"1,2,3,4,5,6"})
   public void Lotto_추첨_후_당첨자_확인(String lottowinningNumbers) {
     int userAmount = 1000;
+    int lottoBonusNumber = 7;
 
     LottoStore lottoStore = new LottoStore();
     Lottos lottos = lottoStore.purchase(userAmount, lottoNumber);
 
-    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers.split(","));
+    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers.split(","), lottoBonusNumber);
 
-    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY.getWinRank())).isEqualTo(1);
-    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY.getWinRank())).isEqualTo(0);
-    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY.getWinRank())).isEqualTo(0);
-    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
-    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY.getWinRank())).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY)).isEqualTo(1);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY)).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY)).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY)).isEqualTo(0);
+    assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY)).isEqualTo(0);
   }
 }
