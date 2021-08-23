@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exception.AmountLowException;
+import lotto.domain.exception.MoneyLowException;
 import lotto.domain.generationStrategy.NumberGenerationStrategy;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public final class LottoMachine {
 
     private void validateAmount(final int amount) {
         if (amount < LOTTO_PRICE) {
-            throw new AmountLowException();
+            throw new MoneyLowException();
         }
     }
 
@@ -29,6 +29,12 @@ public final class LottoMachine {
             lottos.add(new Lotto(numberGenerationStrategy.generateLottoNumber()));
         }
         return lottos;
+    }
+
+    public Lottos buyManuallyLottos(List<String> manuallyLottos) {
+        // money = money.spendMoneyToBuyLotto(manuallyLottos.size());
+
+        return null;
     }
 
 }
