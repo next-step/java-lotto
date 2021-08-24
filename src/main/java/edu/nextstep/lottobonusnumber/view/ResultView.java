@@ -2,7 +2,6 @@ package edu.nextstep.lottobonusnumber.view;
 
 import edu.nextstep.lottobonusnumber.domain.Prize;
 import edu.nextstep.lottobonusnumber.domain.Ticket;
-import edu.nextstep.lottobonusnumber.view.form.WinningResultForm;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,12 +19,9 @@ public class ResultView {
         }
     }
 
-    public static void printWinningResult(WinningResultForm winningResultForm) {
+    public static void printWinningResult(Map<Prize, Integer> winningResult, double rateOfReturn) {
         System.out.println(System.lineSeparator() + "당첨 통계");
         System.out.println("---------");
-
-        Map<Prize, Integer> winningResult = winningResultForm.getWinningResult();
-        double rateOfReturn = winningResultForm.getRateOfReturn();
 
         Arrays.stream(Prize.values())
                 .filter((prize) -> !prize.equals(Prize.LOSE))

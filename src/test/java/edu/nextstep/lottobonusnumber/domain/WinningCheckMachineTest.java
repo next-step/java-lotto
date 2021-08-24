@@ -4,7 +4,6 @@ import edu.nextstep.lottobonusnumber.domain.Prize;
 import edu.nextstep.lottobonusnumber.domain.Ticket;
 import edu.nextstep.lottobonusnumber.domain.TicketMachine;
 import edu.nextstep.lottobonusnumber.domain.WinningCheckMachine;
-import edu.nextstep.lottobonusnumber.view.form.WinningResultForm;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,13 +28,13 @@ class WinningCheckMachineTest {
         WinningTicket winningTicket = WinningTicket.of(winningNumbersString, bonusNumber);
 
         // when
-        WinningResultForm winningResult =
-                WinningCheckMachine.confirmWinningResult(tickets,winningTicket);
+        Map<Prize, Integer> winningResult = WinningCheckMachine.makeWinningResult(winningTicket, tickets);
+        double rateOfReturn = WinningCheckMachine.calculateRateOfReturn(tickets, winningResult);
         double checkRateOfReturn = (double) winningPrize.getWinningPrize() / payment;
 
         // then
-        assertThat(winningResult.getWinningResult().getOrDefault(winningPrize,0)).isEqualTo(1);
-        assertThat(winningResult.getRateOfReturn()).isEqualTo(checkRateOfReturn);
+        assertThat(winningResult.getOrDefault(winningPrize,0)).isEqualTo(1);
+        assertThat(rateOfReturn).isEqualTo(checkRateOfReturn);
     }
 
     private List<Integer> createNumbersFromTo(int numFrom, int numTo) {

@@ -1,7 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.view.form.WinningResultForm;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,15 +7,7 @@ import java.util.Map;
 
 public class WinningCheckMachine {
 
-    public static WinningResultForm confirmWinningResult(List<Ticket> tickets, WinningTicket winningTicket) {
-        Map<Prize, Integer> winningResult = makeWinningResult(winningTicket, tickets);
-
-        double rateOfReturn = ((double) calculateTotalPrize(winningResult) / calculatePayment(tickets));
-
-        return new WinningResultForm(winningResult, rateOfReturn);
-    }
-
-    private static Map<Prize, Integer> makeWinningResult(WinningTicket winningTicket, List<Ticket> tickets) {
+    public static Map<Prize, Integer> makeWinningResult(WinningTicket winningTicket, List<Ticket> tickets) {
         Map<Prize, Integer> winningResult = new LinkedHashMap<>();
 
         for (Ticket ticket : tickets) {
@@ -28,6 +18,10 @@ public class WinningCheckMachine {
         }
 
         return winningResult;
+    }
+
+    public static double calculateRateOfReturn(List<Ticket> tickets, Map<Prize, Integer> winningResult) {
+        return ((double) calculateTotalPrize(winningResult) / calculatePayment(tickets));
     }
 
     private static int calculateTotalPrize(Map<Prize, Integer> winningResult) {
