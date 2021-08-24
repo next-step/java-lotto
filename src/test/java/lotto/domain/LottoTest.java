@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.LottoConfig;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -109,5 +111,29 @@ class LottoTest {
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, 6",
+            "2, 5",
+            "5, 2",
+            "6, 1",
+            "30, 0"
+    })
+    void 당첨번호_테스트(int start, int expected) {
+        Lotto winningLottery = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(IntStream.rangeClosed(start, start + 5).boxed().collect(Collectors.toList()));
+        int actual = lotto.sameLottoNumberCount(winningLottery);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void 예외_null_테스트() {
+        assertThatThrownBy(() -> {
+            lotto = new Lotto(null);
+        })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(LottoConfig.LOTTO_NULL_MESSAGE);
     }
 }
