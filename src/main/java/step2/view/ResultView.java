@@ -10,8 +10,6 @@ public class ResultView {
         for (List<Integer> lotto : lottoList) {
             System.out.println(lotto);
         }
-
-        System.out.println();
     }
 
     public void showResult(Map<Rank, Integer> result, String winningRate) {
@@ -39,4 +37,5 @@ public class ResultView {
         }
 
     }
+
 }

@@ -2,6 +2,8 @@ package step2.model;
 
 import java.util.Objects;
 
+import static step2.model.LottoValidator.*;
+
 public class LottoNumber {
     private final int lottoNumber;
 
@@ -9,8 +11,10 @@ public class LottoNumber {
     private static final int MAX = 45;
 
     public LottoNumber(String number) {
-        isValid(number);
-        this.lottoNumber = Integer.parseInt(number.trim());
+        isBlank(number);
+        isDigit(number);
+        isInRange(changeToInt(number));
+        this.lottoNumber = changeToInt(number);
     }
 
     public LottoNumber(int lottoNumber) {
@@ -18,27 +22,8 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    private void isValid(String number) {
-        isBlank(number);
-        number = number.trim();
-        isDigit(number);
-        isInRange(Integer.parseInt(number));
-    }
-
     public int getLottoNumber() {
         return lottoNumber;
-    }
-
-    private void isBlank(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("빈값입니다.다시 입력해주세요.");
-        }
-    }
-
-    private void isDigit(String input) {
-        if (!input.matches("[0-9]*")) {
-            throw new IllegalArgumentException("숫자를 입력해주세요");
-        }
     }
 
     private void isInRange(int input) {

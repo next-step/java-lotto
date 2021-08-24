@@ -4,18 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private final List<Lotto> lottoList;
-
-    public LottoGroup(int lottoCount) {
-        lottoList = new ArrayList<>();
-
-        while (lottoCount-- > 0) {
-            lottoList.add(new Lotto(new AutoLottoStrategy()));
-        }
-    }
+    private List<Lotto> lottoList;
 
     public LottoGroup(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public static LottoGroup purchaseAutoLotto(LottoStrategy lottoStrategy, int lottoCount) {
+        List<Lotto> lottoList = new ArrayList<>();
+
+        while (lottoCount-- > 0) {
+            lottoList.add(new Lotto(lottoStrategy.getNumbers()));
+        }
+
+        return new LottoGroup(lottoList);
+    }
+
+    public static LottoGroup purchaseManualLotto(List<Lotto> manualLottoList) {
+        return new LottoGroup(manualLottoList);
     }
 
     public List<Lotto> getLottoList() {
@@ -30,5 +36,16 @@ public class LottoGroup {
         }
 
         return result;
+    }
+
+    public int size() {
+        return lottoList.size();
+    }
+
+    public static LottoGroup combineGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+        List<Lotto> allLottoList = new ArrayList<>();
+        allLottoList.addAll(autoLottoGroup.getLottoList());
+        allLottoList.addAll(manualLottoGroup.getLottoList());
+        return new LottoGroup(allLottoList);
     }
 }
