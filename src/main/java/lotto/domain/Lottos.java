@@ -5,15 +5,16 @@ import java.util.List;
 
 public class Lottos {
 	private final static int PRICE_OF_LOTTO = 1000;
-	private List<Lotto> lottos;
+	private final List<Lotto> lottos;
 
 	public Lottos(int amount) {
 		List<Lotto> lottos = new ArrayList<>();
 		int numberOfLottos = amount / PRICE_OF_LOTTO;
 		for (int i = 0; i < numberOfLottos; i++) {
-			lottos.add(new Lotto());
+			LottoCard lottoCard = LottoCard.getInstance();
+			Lotto lotto = lottoCard.issue();
+			lottos.add(lotto);
 		}
-
 		this.lottos = lottos;
 	}
 

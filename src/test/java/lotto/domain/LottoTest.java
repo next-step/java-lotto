@@ -14,7 +14,8 @@ public class LottoTest {
 
 	@BeforeEach
 	void init() {
-		lotto = new Lotto();
+		LottoCard lottoCard = LottoCard.getInstance();
+		lotto = lottoCard.issue();
 	}
 
 	@DisplayName(value = "로또 번호가 1부터 45까지 각각 다른 6개의 번호로 구성되는지 테스트")
