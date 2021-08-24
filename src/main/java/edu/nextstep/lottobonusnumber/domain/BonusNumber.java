@@ -16,10 +16,6 @@ public class BonusNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public static BonusNumber of(int bonusNumber, Ticket winningTicket) {
-        return new BonusNumber(bonusNumber, winningTicket);
-    }
-
     private void validateOutOfRange(int bonusNumber) {
         if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
             throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);
@@ -30,6 +26,10 @@ public class BonusNumber {
         if (winningTicket.contains(bonusNumber)) {
             throw new NumbersIllegalArgumentException("당첨 번호에 이미 포함되어 있습니다.");
         }
+    }
+
+    public static BonusNumber of(int bonusNumber, Ticket winningTicket) {
+        return new BonusNumber(bonusNumber, winningTicket);
     }
 
     public boolean isEqualTo(int number) {

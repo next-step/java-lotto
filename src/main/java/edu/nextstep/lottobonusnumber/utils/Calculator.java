@@ -15,13 +15,13 @@ public class Calculator {
         return (double) totalWinningPrize / totalPayment;
     }
 
-    private static int calculatePayment(Payment payment) {
-        return payment.countOfTickets() * Payment.TICKET_PRICE;
-    }
-
     private static long calculateWinningPrize(Map<Prize, Integer> winningResult) {
         return Arrays.stream(Prize.values())
                 .mapToLong(prize -> prize.calculatePrize(winningResult.get(prize)))
                 .sum();
+    }
+
+    private static int calculatePayment(Payment payment) {
+        return payment.countOfTickets() * Payment.TICKET_PRICE;
     }
 }
