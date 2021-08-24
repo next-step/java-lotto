@@ -22,24 +22,6 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    public static Ticket madeBy(NumbersMaker numbersMaker) {
-        return new Ticket(numbersMaker.create());
-    }
-
-    public int countMatchingNumbers(Ticket winningTicket) {
-        return (int) numbers.stream()
-                .filter(winningTicket.numbers::contains)
-                .count();
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public boolean contains(int bonusNumber) {
-        return numbers.contains(bonusNumber);
-    }
-
     private void validateOutOfRange(List<Integer> numbers) {
         if (numbers.get(0) < MIN_NUMBER || numbers.get(numbers.size()-1) > MAX_NUMBER) {
             throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);
@@ -50,6 +32,20 @@ public class Ticket {
         if (numbers.size() != LENGTH_OF_NUMBERS) {
             throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + LENGTH_OF_NUMBERS);
         }
+    }
+
+    public static Ticket madeBy(NumbersMaker numbersMaker) {
+        return new Ticket(numbersMaker.create());
+    }
+
+    public int countMatchingNumbers(Ticket winningTicket) {
+        return (int) numbers.stream()
+                .filter(winningTicket.numbers::contains)
+                .count();
+    }
+
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
@@ -64,4 +60,9 @@ public class Ticket {
     public int hashCode() {
         return Objects.hash(getNumbers());
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
 }
