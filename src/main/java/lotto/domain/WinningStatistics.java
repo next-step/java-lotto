@@ -18,10 +18,6 @@ public class WinningStatistics {
         winningStatistics = rankMap;
     }
 
-    public Map<Rank, Long> getWinningStatistics() {
-        return winningStatistics;
-    }
-
     public Long getRankCount(Rank rank) {
         return winningStatistics.getOrDefault(rank, 0L);
     }

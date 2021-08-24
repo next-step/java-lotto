@@ -1,8 +1,9 @@
 package lotto.exception;
 
-public class LottoNumberSizeException extends RuntimeException {
+public class NumberRangeExceededException extends RuntimeException {
     private static final String NUMBER_OUT_OF_RANGE = "숫자 범위 초과";
-    public LottoNumberSizeException() {
+
+    public NumberRangeExceededException() {
         super(NUMBER_OUT_OF_RANGE);
     }
 }

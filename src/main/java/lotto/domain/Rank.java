@@ -33,11 +33,11 @@ public enum Rank {
                 .orElse(NO_RANK);
     }
 
-    public boolean matchCount(int count) {
+    private boolean matchCount(int count) {
         return this.matchCount == count;
     }
 
-    public static Rank rankSecond(boolean matchBonus) {
+    private static Rank rankSecond(boolean matchBonus) {
         if (matchBonus) {
             return SECOND;
         }

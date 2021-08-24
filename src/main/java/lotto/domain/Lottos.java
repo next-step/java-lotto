@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -21,7 +22,13 @@ public class Lottos {
         return matchesCount;
     }
 
+    public Lottos mergeLottos(Lottos autoLottos) {
+        return new Lottos(autoLottos.lottos.stream()
+                .filter(this.lottos::add)
+                .collect(Collectors.toList()));
+    }
+
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }

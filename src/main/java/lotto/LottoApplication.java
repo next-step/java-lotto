@@ -2,40 +2,79 @@ package lotto;
 
 import lotto.common.AutoNumberGenerator;
 import lotto.domain.*;
-import lotto.view.InputView;
+import lotto.exception.*;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static lotto.util.StringUtil.split;
+import static lotto.view.InputView.*;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-
         LottoMachine lottoMachine = new LottoMachine();
 
-        Money money = new Money(inputView.askPurchaseAmount());
+        Money money = getMoney();
 
-        Lottos lottos = lottoMachine.generateLottos(money, new AutoNumberGenerator());
+        LottoCount lottoCount = LottoCount.from(money);
+
+        LottoCount manualLottoCount = getManualLottoCount(money);
+
+        Lottos manualLottos = buyManualLottos(manualLottoCount);
+
+        int autoLottoCount = lottoCount.getAutoLottoCount(manualLottoCount);
+        Lottos autoLottos = lottoMachine.generateLottos(autoLottoCount, new AutoNumberGenerator());
+
+        Lottos totalLottos = manualLottos.mergeLottos(autoLottos);
 
         ResultView resultView = new ResultView();
-        resultView.printLotties(lottos);
+        resultView.printLottos(totalLottos, autoLottoCount);
 
-        String[] split = split(inputView.getWinningNumber());
-        List<Integer> winningNumbers = Stream.of(split).map(Integer::valueOf).collect(Collectors.toList());
+        Lotto winningLottoNumbers = getManualLotto(getWinningNumber());
 
-        Lotto winningLottoNumbers = Lotto.getInstanceByInteger(winningNumbers);
-
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(inputView.askBonusNumber()));
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(askBonusNumber()));
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
-        WinningStatistics winningStatistics = new WinningStatistics(lottos, winningLotto);
+        WinningStatistics winningStatistics = new WinningStatistics(totalLottos, winningLotto);
 
         resultView.printSameNumbers(winningStatistics);
     }
+
+    public static Money getMoney() {
+        try {
+            return new Money(askPurchasePrice());
+        } catch (LottoPurchaseAmountException e) {
+            System.out.println("로또 구입 금액이 잘못 되었습니다.\n");
+            return getMoney();
+        }
+    }
+
+    public static LottoCount getManualLottoCount(Money money) {
+        try {
+            return LottoCount.of(askManualLottoCount(), money);
+        } catch (LottoNumberCountException e) {
+            System.out.println("수동으로 구매할 로또 개수 잘못 입력함. \n");
+            return getManualLottoCount(money);
+        }
+    }
+
+    public static Lottos buyManualLottos(LottoCount manualLottoCount) {
+         List<Lotto> lottos = new ArrayList<>();
+         for (int i = 0; i < manualLottoCount.getCount(); i++) {
+             List<Integer> askManualLottoNumber = getAskManualLottoNumber();
+             lottos.add(getManualLotto(askManualLottoNumber));
+            }
+            return new Lottos(lottos);
+    }
+
+    public static Lotto getManualLotto(List<Integer> lottoNumber) {
+        try {
+            return Lotto.from(lottoNumber);
+        } catch (LottoNumberLengthException | LottoNumberDuplicateException e) {
+            System.err.println(e);
+            return getManualLotto(lottoNumber);
+        } 
+    }
+
+
 }

@@ -1,23 +1,39 @@
 package lotto.domain;
 
 import lotto.common.NumberGenerator;
+import lotto.exception.LottoNumberDuplicateException;
+import lotto.exception.LottoNumberLengthException;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public final List<LottoNumber> lottoNumbers;
-
-    public Lotto(NumberGenerator numberGenerator) {
-        this.lottoNumbers = numberGenerator.generateNumber();
-    }
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validLottoNumberSize(lottoNumbers);
+        duplicateValidation(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto getInstanceByInteger(final List<Integer> numbers) {
+    public static Lotto from(NumberGenerator numberGenerator) {
+        return new Lotto(numberGenerator.generateNumber());
+    }
+
+    private void duplicateValidation(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() < LOTTO_NUMBER_COUNT || lottoNumbers.size() > LOTTO_NUMBER_COUNT) {
+            throw new LottoNumberDuplicateException();
+        }
+    }
+
+    private void validLottoNumberSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new LottoNumberLengthException();
+        }
+    }
+
+    public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
@@ -25,8 +41,7 @@ public class Lotto {
 
     public int compareLotto(Lotto otherLotto) {
         long count = lottoNumbers.stream()
-                .filter(lottoNumber -> otherLotto.lottoNumbers.stream()
-                        .anyMatch(Predicate.isEqual(lottoNumber)))
+                .filter(otherLotto.lottoNumbers::contains)
                 .count();
         return Math.toIntExact(count);
     }

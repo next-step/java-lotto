@@ -15,22 +15,54 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottoTest {
-    List<LottoNumber> lottoNumbers;
-    List<LottoNumber> otherLottoNumbers;
-
-    @BeforeEach
-    void setUp() {
-        lottoNumbers = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3)));
-        otherLottoNumbers = new ArrayList<>(Arrays.asList(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4)));
-    }
 
     static Stream<Arguments> comparingSource() {
         return Stream.of(
-                arguments(new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3))),
-                new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3))), 3),
+                arguments(
+                        new ArrayList<>(Arrays.asList(
+                                new LottoNumber(1)
+                                , new LottoNumber(2)
+                                , new LottoNumber(3)
+                                , new LottoNumber(4)
+                                , new LottoNumber(5)
+                                , new LottoNumber(6)
+                            )
+                        ),
 
-                arguments(new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3))),
-                        new ArrayList<>(Arrays.asList(new LottoNumber(2), new LottoNumber(3), new LottoNumber(4))), 2)
+                        new ArrayList<>(Arrays.asList(
+                                new LottoNumber(1)
+                                , new LottoNumber(2)
+                                , new LottoNumber(3)
+                                , new LottoNumber(4)
+                                , new LottoNumber(5)
+                                , new LottoNumber(6)
+                            )
+                        )
+                        , 6),
+
+                arguments(
+                        new ArrayList<>(
+                                Arrays.asList(
+                                        new LottoNumber(1)
+                                        , new LottoNumber(2)
+                                        , new LottoNumber(3)
+                                        , new LottoNumber(4)
+                                        , new LottoNumber(5)
+                                        , new LottoNumber(6)
+                                )
+                        ),
+
+                        new ArrayList<>(
+                                Arrays.asList(
+                                        new LottoNumber(4)
+                                        , new LottoNumber(5)
+                                        , new LottoNumber(6)
+                                        , new LottoNumber(7)
+                                        , new LottoNumber(8)
+                                        , new LottoNumber(9)
+                                )
+                        )
+                        , 3)
         );
     }
 

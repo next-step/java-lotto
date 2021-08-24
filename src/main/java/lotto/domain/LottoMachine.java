@@ -5,11 +5,11 @@ import lotto.common.NumberGenerator;
 import java.util.*;
 
 public class LottoMachine {
-    public Lottos generateLottos(Money money, NumberGenerator numberGenerator) {
+    public Lottos generateLottos(int autoCount, NumberGenerator numberGenerator) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for(int i = 0; i < money.getLottoCount(); i++) {
-            lottos.add(new Lotto(numberGenerator));
+        for(int i = 0; i < autoCount; i++) {
+            lottos.add(Lotto.from(numberGenerator));
         }
 
         return new Lottos(lottos);

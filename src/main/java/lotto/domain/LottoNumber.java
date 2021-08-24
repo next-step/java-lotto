@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoNumberSizeException;
+import lotto.exception.NumberRangeExceededException;
 
 import java.util.Objects;
 
@@ -16,12 +16,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validNumber(int number) {
         if (number > MAX_NUMBER || number < MIN_NUMBER) {
-            throw new LottoNumberSizeException();
+            throw new NumberRangeExceededException();
         }
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override
@@ -40,5 +36,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }

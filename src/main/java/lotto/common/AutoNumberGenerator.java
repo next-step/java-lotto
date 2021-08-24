@@ -16,7 +16,7 @@ public class AutoNumberGenerator implements NumberGenerator {
         randomNumbers = new ArrayList<>();
         while (randomNumbers.size() < LOTTO_NUMBERS_COUNT) {
             LottoNumber lottoNumber = new LottoNumber(generateLottoNumber());
-            if (!validDuplicate(lottoNumber)) {
+            if (!duplicateNumber(lottoNumber)) {
                 randomNumbers.add(lottoNumber);
             }
         }
@@ -28,7 +28,7 @@ public class AutoNumberGenerator implements NumberGenerator {
         return RANDOM.nextInt(MAX_LOTTO_NUMBER) + 1;
     }
 
-    private boolean validDuplicate(LottoNumber lottoNumber) {
+    private boolean duplicateNumber(LottoNumber lottoNumber) {
         return randomNumbers.contains(lottoNumber);
     }
 
