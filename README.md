@@ -159,3 +159,7 @@
       - 랜덤 번호 생성기(전략 패턴)
    7. CustomNumbersMaker implements TicketMaker
       - 주어진 번호 생성기(전략 패턴)
+   
+2. utils
+   1. Calculator
+      - rateOfReturn 계산
