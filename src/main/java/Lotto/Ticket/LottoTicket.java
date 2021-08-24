@@ -2,6 +2,7 @@ package Lotto.Ticket;
 
 import Lotto.Number.LottoNumber;
 import Lotto.Number.LottoNumbers;
+import Lotto.Number.WinningNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,5 +31,10 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    public Prize getPrize(WinningNumbers winningNumbers) {
+        int winningNumberCounts = lottoNumbers.countWinningNumbers(winningNumbers);
+        return Prize.calculatePrizeMoney(winningNumberCounts);
     }
 }
