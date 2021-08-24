@@ -1,6 +1,6 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottoauto.exception.PaymentIllegalArgumentException;
+import edu.nextstep.lottobonusnumber.exception.PaymentIllegalArgumentException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
