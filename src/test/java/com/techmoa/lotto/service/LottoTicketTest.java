@@ -10,11 +10,14 @@ public class LottoTicketTest {
 
     @Test
     public void 복권발행_생성() {
+        /*
         LottoTicket lottoTicket = new LottoTicket();
         lottoTicket.makeLottoNumber();
         int[] lottoNumber = lottoTicket.getLottoNumber();
         //Arrays.asList(lottoNumber).stream().allMatch();
         assertEquals(lottoNumber,lottoTicket.getLottoNumber());
+
+         */
 
     }
 
