@@ -143,22 +143,19 @@
 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
 ```
 
-### 기능 목록 (2단계에서 추가/변경되는 항목만 작성)
+### 기능 목록
 1. domain
-   1. Ticket : 로또 복권
-      - 보너스 번호 포함 여부 확인 메서드 추가
+   1. Ticket 
+      - 로또 번호 리스트를 가진 일급 컬렉션
    2. Prize(enum) : 상금
       - 보너스 번호 추가에 따른 등수 추가
       - 보너스 번호 식별 가능한 정적 팩토리
-   3. TicketMachine - _변경 없음_
-   4. TicketRepository - _변경 없음_
-   5. WinningCheckMachine : 당첨 확인 기계
-      - 당첨 결과 산출 시 매개변수를 WinningTicket 형태로 받아야 함
-   6. AutoNumbersMaker implements TicketMaker - _변경 없음_
-   7. CustomNumbersMaker implements TicketMaker - _변경 없음_
-   8. (추가) WinningTicket
-      - 6 개의 당첨 번호와 1개의 보너스 번호를 가진다.
-      - 보너스 번호에 대한 검증 필요
-   
-2. form
-   1. WinningResultForm - _변경 없음_
+   3. Tickets : 6개 Ticket에 대한 일급 컬렉션
+      - 지불 금액에 대한 tickets 생성
+      - 당첨 결과 계산
+   4. BonusNumber : 보너스 볼 패킹 클래스
+   5. Payment : payment 패킹 클래스
+   6. AutoNumbersMaker implements TicketMaker
+      - 랜덤 번호 생성기(전략 패턴)
+   7. CustomNumbersMaker implements TicketMaker
+      - 주어진 번호 생성기(전략 패턴)
