@@ -48,6 +48,9 @@
 - [X] 로또 게임 클래스
   - [X] 구입 금액
 
+- [X] Helper 클래스 추가
+  - [X] 테스트 데이터 생성용
+
 ## 로또 게임 룰 (참고용)
 - [로또 번호는 1부터 45개까지 숫자 중 6개의 숫자 선택](https://www.google.com/search?q=%EB%A1%9C%EB%98%90+%EB%B2%88%ED%98%B8+%EB%B2%94%EC%9C%84&rlz=1C5CHFA_enKR946KR946&oq=%EB%A1%9C%EB%98%90+%EB%B2%88%ED%98%B8+%EB%B2%94%EC%9C%84&aqs=chrome..69i57.2376j0j4&sourceid=chrome&ie=UTF-8)
 
