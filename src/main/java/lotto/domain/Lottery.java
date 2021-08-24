@@ -14,9 +14,9 @@ public class Lottery {
 		this.winningNumbers = winningNumbers;
 	}
 
-	public void draw(Lottos lottos) {
+	public void draw(List<Lotto> lottos) {
 		List<LotteryResult> results = new ArrayList<>();
-		for (Lotto lotto : lottos.getLottos()) {
+		for (Lotto lotto : lottos) {
 			List<Integer> numbers = lotto.getNumbers().stream()
 				.map(Number::getValue)
 				.collect(Collectors.toList());

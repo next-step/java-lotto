@@ -13,8 +13,7 @@ public class MoneyTest {
 	@CsvSource(value = {"14900,14", "10000,10", "5000,5", "0,0"})
 	@ParameterizedTest
 	void buyLottos(int amount, int expect) {
-		Lottos lottos = new Lottos(amount);
-		List<Lotto> lottoList = lottos.getLottos();
+		List<Lotto> lottoList = new Wallet(amount).getLottos();
 		int numberOfLotto = lottoList.size();
 		assertThat(numberOfLotto).isEqualTo(expect);
 	}

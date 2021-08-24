@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LotteryResults;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 import lotto.domain.Number;
 import lotto.domain.type.WinningType;
 
@@ -19,13 +18,11 @@ public class ResultView {
 	private static final String TOTAL_YIELD = "총 수익률은 %.2f입니다.";
 	private static final String FYI_TOTAL_YIELD = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-	public static void outputPurchaseLotto(Lottos lottos) {
-		List<Lotto> lottoList = lottos.getLottos();
-
-		int numberOfLottos = lottoList.size();
+	public static void outputPurchaseLotto(List<Lotto> lottos) {
+		int numberOfLottos = lottos.size();
 		System.out.println(numberOfLottos + NUMBER_OF_PURCHASE_LOTTO);
 
-		lottoList.forEach(lotto ->
+		lottos.forEach(lotto ->
 			System.out.println(printPurchaseLottoNumbers(lotto)));
 	}
 

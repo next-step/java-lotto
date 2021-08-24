@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
+public class Wallet {
 	private final static int PRICE_OF_LOTTO = 1000;
 	private final List<Lotto> lottos;
 
-	public Lottos(int amount) {
+	public Wallet(int amount) {
 		List<Lotto> lottos = new ArrayList<>();
 		int numberOfLottos = amount / PRICE_OF_LOTTO;
 		for (int i = 0; i < numberOfLottos; i++) {
