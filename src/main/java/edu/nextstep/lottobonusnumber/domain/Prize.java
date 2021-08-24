@@ -10,6 +10,8 @@ public enum Prize {
     FIFTH(3, 5_000),
     LOSE(0, 0);
 
+    private static final int THIRD_PRIZE_COUNT_OF_MATCH = 5;
+
     private final int countOfMatch;
     private final int winningPrize;
 
@@ -19,7 +21,7 @@ public enum Prize {
     }
 
     public static Prize of(int numOfMatch, boolean hasBonusNumber) {
-        if(numOfMatch == 5 && !hasBonusNumber) {
+        if(numOfMatch == THIRD_PRIZE_COUNT_OF_MATCH && !hasBonusNumber) {
             return Prize.THIRD;
         }
 
