@@ -1,6 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.domain.ticketmaker.CustomNumbersMaker;
 import edu.nextstep.lottobonusnumber.view.form.WinningResultForm;
 
 import java.util.Arrays;
