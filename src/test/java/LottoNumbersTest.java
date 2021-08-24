@@ -1,4 +1,5 @@
 import domain.AutoNumberStrategy;
+import domain.LottoNumber;
 import domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +30,14 @@ public class LottoNumbersTest {
     @Test
     public void 여섯개이상숫자_에러_테스트() {
         assertThatThrownBy(() -> new LottoNumbers(() -> {
-            List<Integer> lottoNumbers = new ArrayList<>();
-            lottoNumbers.add(1);
-            lottoNumbers.add(2);
-            lottoNumbers.add(3);
-            lottoNumbers.add(4);
-            lottoNumbers.add(5);
-            lottoNumbers.add(6);
-            lottoNumbers.add(7);
+            List<LottoNumber> lottoNumbers = new ArrayList<>();
+            lottoNumbers.add(new LottoNumber(1));
+            lottoNumbers.add(new LottoNumber(2));
+            lottoNumbers.add(new LottoNumber(3));
+            lottoNumbers.add(new LottoNumber(4));
+            lottoNumbers.add(new LottoNumber(5));
+            lottoNumbers.add(new LottoNumber(6));
+            lottoNumbers.add(new LottoNumber(7));
             return lottoNumbers;
         })).isInstanceOf(IllegalArgumentException.class);
     }
@@ -45,13 +46,13 @@ public class LottoNumbersTest {
     @Test
     public void 로또범위벗어난숫자_에러_테스트() {
         assertThatThrownBy(() -> new LottoNumbers(() -> {
-            List<Integer> lottoNumbers = new ArrayList<>();
-            lottoNumbers.add(47);
-            lottoNumbers.add(-1);
-            lottoNumbers.add(1);
-            lottoNumbers.add(2);
-            lottoNumbers.add(3);
-            lottoNumbers.add(4);
+            List<LottoNumber> lottoNumbers = new ArrayList<>();
+            lottoNumbers.add(new LottoNumber(47));
+            lottoNumbers.add(new LottoNumber(-1));
+            lottoNumbers.add(new LottoNumber(1));
+            lottoNumbers.add(new LottoNumber(2));
+            lottoNumbers.add(new LottoNumber(3));
+            lottoNumbers.add(new LottoNumber(4));
             return lottoNumbers;
         })).isInstanceOf(IllegalArgumentException.class);
     }

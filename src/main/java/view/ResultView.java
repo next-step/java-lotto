@@ -9,8 +9,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void purchaseResult(int purchaseCount) {
-        System.out.println(purchaseCount + "개를 구매했습니다.");
+    public static void purchaseResult(int autoLottoCount, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "장을 구매했습니다.");
     }
 
     public static void lottoNumberResult(List<Lotto> lottoList) {
@@ -29,7 +29,7 @@ public class ResultView {
     }
 
     private static void view(LottoPrizeType lottoPrizeType, HashMap<LottoPrizeType, Integer> winningStatistic) {
-        if (lottoPrizeType.isExposure()) {
+        if (!lottoPrizeType.equals(LottoPrizeType.MISS)) {
             System.out.println(lottoPrizeType.getMatchCount() +
                     "개 일치 " + "(" + lottoPrizeType.getWinningAmount() + "원) - "
                     + winningStatistic.get(lottoPrizeType) + "개");

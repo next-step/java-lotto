@@ -6,13 +6,9 @@ import java.util.Objects;
 
 public class LottoNumbers {
 
-    public static final int MIN_LOTTO_NUM = 1;
-    public static final int MAX_LOTTO_NUM = 45;
+    public static final int LOTTO_NUM_COUNT = 6;
 
-    private static final int LOTTO_NUM_COUNT = 6;
-
-
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(PickNumberStrategy pickNumberStrategy) {
         lottoNumbers = pickNumberStrategy.makeLottoNumber();
@@ -20,15 +16,12 @@ public class LottoNumbers {
     }
 
     private void validate() {
-        if (!lottoNumbers.stream().allMatch(number -> (number <= MAX_LOTTO_NUM && number >= MIN_LOTTO_NUM))) {
-            throw new IllegalArgumentException("1과 45사이의 값만 들어올 수 있습니다.");
-        }
         if (lottoNumbers.size() != LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("로또의 사이즈는 " + LOTTO_NUM_COUNT + "개만 가능합니다.");
         }
     }
 
-    public List<Integer> getValues() {
+    public List<LottoNumber> getValues() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 

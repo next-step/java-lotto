@@ -12,4 +12,5 @@ public class LottoTest {
         Lotto lotto = new Lotto(new AutoNumberStrategy());
         assertThat(lotto.getNumbers().getValues().size()).isEqualTo(6);
     }
+    
 }

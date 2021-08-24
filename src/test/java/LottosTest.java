@@ -18,17 +18,17 @@ public class LottosTest {
     @Test
     @BeforeEach
     public void 로또만들기() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(1);
-        lottoNumbers.add(2);
-        lottoNumbers.add(3);
-        lottoNumbers.add(4);
-        lottoNumbers.add(5);
-        lottoNumbers.add(6);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(new LottoNumber(1));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(3));
+        lottoNumbers.add(new LottoNumber(4));
+        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(new LottoNumber(6));
         lotto = new Lotto(() -> lottoNumbers);
-        BonusBall bonusBall = new BonusBall(7);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
 
-        winningLotto = new WinningLotto(lotto, bonusBall);
+        winningLotto = new WinningLotto(lotto, bonusLottoNumber);
     }
 
     @Test

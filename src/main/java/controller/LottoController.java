@@ -1,25 +1,32 @@
 package controller;
 
-import domain.*;
+import domain.Lotto;
+import domain.LottoManager;
+import domain.LottoPrice;
+import domain.WinningLotto;
 import view.InputView;
 import view.ResultView;
 
 public class LottoController {
 
     public static void startLotto() {
-        int purchaseAmount = InputView.enterPurchaseAmount();
-        LottoManager lottoManager = new LottoManager(purchaseAmount);
-        ResultView.purchaseResult(lottoManager.getPurchaseLottoCount(purchaseAmount));
+        System.out.println("구입금액을 입력해주세요");
+        int purchaseAmount = InputView.enterNumber();
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualLottoCount = InputView.enterNumber();
+
+        System.out.println("수동으로 구매할 번호를 입력해주세요");
+        int manualLottos[][] = InputView.enterManualLotto(manualLottoCount);
+
+        LottoManager lottoManager = new LottoManager(Lotto.calcPurchaseLottoCount(purchaseAmount - manualLottoCount * LottoPrice.LOTTO_PRICE), manualLottos);
+
+        ResultView.purchaseResult(Lotto.calcPurchaseLottoCount(purchaseAmount), manualLottoCount);
         ResultView.lottoNumberResult(lottoManager.getLottos().getValue());
 
-        System.err.println("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto lotto = lottoManager.makeLotto(new ManualNumberStrategy());
-        System.err.println("보너스 볼을 입력해 주세요.");
-        BonusBall bonusBall = lottoManager.makeBonusBall(InputView.enterNumber());
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+        WinningLotto winningLotto = InputView.enterWinningLotto();
 
-        lottoManager.findWinningLottoResult(winningLotto);
-        ResultView.winningResult(lottoManager.getWinningResult());
+        ResultView.winningResult(lottoManager.makeWinningLottoResult(winningLotto));
         ResultView.yieldResult(lottoManager.getLottoYield(purchaseAmount));
     }
 }
