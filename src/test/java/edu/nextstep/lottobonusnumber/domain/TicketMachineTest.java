@@ -23,11 +23,11 @@ public class TicketMachineTest {
         int payment = 10000;
 
         // when
-        List<Ticket> tickets = TicketMachine.createTickets(payment, new AutoNumbersMaker());
+        Tickets tickets = TicketMachine.createTickets(payment, new AutoNumbersMaker());
 
         // then
-        assertThat(tickets.size()).isEqualTo(payment/TICKET_PRICE);
-        assertThat(tickets.get(0)).isInstanceOf(Ticket.class);
+        assertThat(tickets.stream().count()).isEqualTo(payment/TICKET_PRICE);
+        assertThat(tickets.stream().findAny()).isInstanceOf(Ticket.class);
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : " + TICKET_PRICE + "원 미만")

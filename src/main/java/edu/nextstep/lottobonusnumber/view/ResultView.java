@@ -1,10 +1,9 @@
 package edu.nextstep.lottobonusnumber.view;
 
 import edu.nextstep.lottobonusnumber.domain.Prize;
-import edu.nextstep.lottobonusnumber.domain.Ticket;
+import edu.nextstep.lottobonusnumber.domain.Tickets;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -12,10 +11,10 @@ public class ResultView {
     private static final String SECOND_WORD = "개 일치, 보너스 볼 일치(";
     private static final String EXCEPT_SECOND_WORD = "개 일치 (";
 
-    public static void printTickets(List<Ticket> tickets) {
+    public static void printTickets(Tickets tickets) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(tickets.size())
+        stringBuilder.append(tickets.stream().count())
                 .append(" 개를 구매하셨습니다.")
                 .append(System.lineSeparator());
 

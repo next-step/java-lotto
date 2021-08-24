@@ -10,7 +10,7 @@ public class TicketMachine {
 
     public static final int TICKET_PRICE = 1_000;
 
-    public static List<Ticket> createTickets(int payment, NumbersMaker numbersMaker) {
+    public static Tickets createTickets(int payment, NumbersMaker numbersMaker) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
@@ -35,12 +35,12 @@ public class TicketMachine {
         return payment / TICKET_PRICE;
     }
 
-    private static List<Ticket> createTicketsInMachine(int numberOfTickets, NumbersMaker numbersMaker) {
+    private static Tickets createTicketsInMachine(int numberOfTickets, NumbersMaker numbersMaker) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
             Ticket ticket = Ticket.madeBy(numbersMaker);
             tickets.add(ticket);
         }
-        return tickets;
+        return Tickets.of(tickets);
     }
 }

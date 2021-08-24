@@ -7,19 +7,15 @@ import edu.nextstep.lottobonusnumber.exception.CustomException;
 import edu.nextstep.lottobonusnumber.view.InputView;
 import edu.nextstep.lottobonusnumber.view.ResultView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoAutoMain {
     public static void main(String[] args) {
-        TicketRepository ticketRepository = new TicketRepository();
-
         try {
             int payment = InputView.inputPayment();
             NumbersMaker numbersMaker = new AutoNumbersMaker();
-            ticketRepository.saveAll(TicketMachine.createTickets(payment, numbersMaker));
+            Tickets tickets = TicketMachine.createTickets(payment, numbersMaker);
 
-            List<Ticket> tickets = ticketRepository.findAll();
             ResultView.printTickets(tickets);
 
             String winningNumbersOfString = InputView.inputWinningNumbers();

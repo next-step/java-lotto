@@ -16,7 +16,7 @@ class WinningCheckMachineTest {
     void checkWinningResult(int numFrom, int numTo, Prize winningPrize) {
         // given
         int payment = TicketMachine.TICKET_PRICE;
-        List<Ticket> tickets = TicketMachine.createTickets(payment, () -> createNumbersFromTo(numFrom,numTo));
+        Tickets tickets = TicketMachine.createTickets(payment, () -> createNumbersFromTo(numFrom,numTo));
         String winningNumbersString = "2, 3, 4, 5, 6, 7";
         int bonusNumber = 1;
         WinningTicket winningTicket = WinningTicket.of(winningNumbersString, bonusNumber);
