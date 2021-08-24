@@ -1,9 +1,11 @@
 package UI;
 
+import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
-import Lotto.Ticket.LottoTickets;
 
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -11,12 +13,13 @@ public class ResultView {
         System.out.println(totalNumber + "개를 구매했습니다.");
     }
 
-    public static void showLottoNumbersOfEachTickets(LottoTickets lottoTickets) {
-        lottoTickets.getValue().forEach(showLottoNumbers());
+    public static void showLottoNumbersOfEachTickets(List<LottoTicket> lottoTickets) {
+        lottoTickets.forEach(showLottoNumbers());
     }
 
+    // TODO: 생각해보기 (List<Integer>를 로또 티켓에서 바로 반환하는 것은 안될까?
     private static Consumer<LottoTicket> showLottoNumbers() {
-        return lottoTicket -> System.out.println(lottoTicket.getValue());
+        return lottoTicket -> System.out.println(lottoTicket.getValue().stream().mapToInt(LottoNumber::getValue).boxed().collect(Collectors.toList()));
     }
 
     public static void showGameResult() {

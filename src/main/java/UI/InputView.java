@@ -1,5 +1,7 @@
 package UI;
 
+import Lotto.Number.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,9 +15,9 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> getWinningNumbersOfLastWeek() {
+    public static List<LottoNumber> getWinningNumbersOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).collect(Collectors.toList());
+        return Arrays.stream(scanner.nextLine().trim().split(",")).map(Integer::valueOf).map(LottoNumber::new).collect(Collectors.toList());
     }
 }
