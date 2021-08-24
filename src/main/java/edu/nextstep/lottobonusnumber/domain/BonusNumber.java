@@ -7,13 +7,13 @@ public class BonusNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    private final int bonumsNumber;
+    private final int bonusNumber;
 
     public BonusNumber(int bonusNumber, Ticket winningTicket) {
         validateOutOfRange(bonusNumber);
         validateWinningTicketContains(bonusNumber, winningTicket);
 
-        this.bonumsNumber = bonusNumber;
+        this.bonusNumber = bonusNumber;
     }
 
     public static BonusNumber of(int bonusNumber, Ticket winningTicket) {
@@ -30,5 +30,9 @@ public class BonusNumber {
         if (winningTicket.contains(bonusNumber)) {
             throw new NumbersIllegalArgumentException("당첨 번호에 이미 포함되어 있습니다.");
         }
+    }
+
+    public boolean isEqualTo(int number) {
+        return (number == bonusNumber);
     }
 }

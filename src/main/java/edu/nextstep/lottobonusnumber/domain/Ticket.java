@@ -39,17 +39,22 @@ public class Ticket {
         return new Ticket(numbers);
     }
 
-    public Stream<Integer> stream() {
-        return numbers.stream();
-    }
-
     public int countMatchingNumbers(Ticket winningTicket) {
         return (int) winningTicket.stream()
                 .filter(numbers::contains)
                 .count();
     }
 
+    public Stream<Integer> stream() {
+        return numbers.stream();
+    }
+
     public boolean contains(int bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public boolean contains(BonusNumber bonusNumber) {
+        return numbers.stream()
+                .anyMatch(bonusNumber::isEqualTo);
     }
 }
