@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import lotto.domain.LotteryResults;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.domain.type.WinningType;
 
 public class ResultView {
@@ -23,7 +25,15 @@ public class ResultView {
 		int numberOfLottos = lottoList.size();
 		System.out.println(numberOfLottos + NUMBER_OF_PURCHASE_LOTTO);
 
-		lottoList.forEach(lotto -> System.out.println(lotto.getNumbers()));
+		lottoList.forEach(lotto ->
+			System.out.println(printPurchaseLottoNumbers(lotto)));
+	}
+
+	private static List<Integer> printPurchaseLottoNumbers(Lotto lotto) {
+		return lotto.getNumbers()
+			.stream()
+			.map(Number::getValue)
+			.collect(Collectors.toList());
 	}
 
 	public static void outputWinningStatistics(LotteryResults results) {

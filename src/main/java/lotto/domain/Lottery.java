@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.domain.type.WinningType;
 
@@ -16,7 +17,9 @@ public class Lottery {
 	public void draw(Lottos lottos) {
 		List<LotteryResult> results = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {
-			List<Integer> numbers = lotto.getNumbers();
+			List<Integer> numbers = lotto.getNumbers().stream()
+				.map(Number::getValue)
+				.collect(Collectors.toList());
 			numbers.retainAll(winningNumbers);
 			int matchNumber = numbers.size();
 

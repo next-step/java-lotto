@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoCard {
 	private static final int LOTTO_START_NUMBER = 1;
@@ -25,9 +26,11 @@ public class LottoCard {
 
 	public Lotto issue() {
 		Collections.shuffle(NUMBERS);
-		List<Integer> lottoNumbers = new ArrayList<>(NUMBERS.subList(0, 6));
-		Collections.sort(lottoNumbers);
-
+		List<Integer> numbers = new ArrayList<>(NUMBERS.subList(0, 6));
+		List<Number> lottoNumbers = numbers.stream()
+			.sorted()
+			.map(Number::new)
+			.collect(Collectors.toList());
 		return new Lotto(lottoNumbers);
 	}
 }

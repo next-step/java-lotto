@@ -3,13 +3,13 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
-	private final List<Integer> numbers;
+	private final List<Number> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lotto(List<Number> numbers) {
 		this.numbers = numbers;
 	}
 
-	public List<Integer> getNumbers() {
+	public List<Number> getNumbers() {
 		return numbers;
 	}
 }

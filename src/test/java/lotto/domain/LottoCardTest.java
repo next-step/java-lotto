@@ -31,6 +31,7 @@ class LottoCardTest {
 
 		List<Integer> numbers = lotto.getNumbers()
 			.stream()
+			.map(Number::getValue)
 			.distinct()
 			.collect(Collectors.toList());
 		int numberOfDistinctNumbers = numbers.size();
