@@ -6,6 +6,7 @@ import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Ticket {
 
@@ -48,6 +49,10 @@ public class Ticket {
         return numbers.contains(bonusNumber);
     }
 
+    public Stream<Integer> stream() {
+        return numbers.stream();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,8 +66,8 @@ public class Ticket {
         return Objects.hash(numbers);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
-
 }

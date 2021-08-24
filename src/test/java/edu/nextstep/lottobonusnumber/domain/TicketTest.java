@@ -25,7 +25,7 @@ public class TicketTest {
         Ticket ticket = Ticket.madeBy(() -> numbers);
 
         // then
-        assertThat(ticket.getNumbers()).isEqualTo(numbers);
+        assertThat(ticket.stream().collect(Collectors.toList())).isEqualTo(numbers);
     }
 
     @ParameterizedTest(name = "Ticket 생성 실패 : 개수 미만 or 초과")

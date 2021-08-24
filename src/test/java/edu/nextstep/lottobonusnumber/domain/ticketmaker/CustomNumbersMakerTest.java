@@ -20,7 +20,8 @@ class CustomNumbersMakerTest {
         Ticket ticket = Ticket.madeBy(new CustomNumbersMaker(numbersOfString));
 
         // then
-        assertThat(ticket.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(ticket.stream().collect(Collectors.toList()))
+                .containsExactly(1, 2, 3, 4, 5, 6);
     }
 
 }
