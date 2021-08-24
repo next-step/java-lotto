@@ -1,6 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.exception.CustomException;
 import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ public class BonusNumberTest {
         // when, then
         assertThatThrownBy(() -> BonusNumber.of(number, Ticket.madeBy(() -> Arrays.asList(1,2,3,4,5,6))))
                 .isInstanceOf(NumbersIllegalArgumentException.class)
-                .hasMessageContaining("허용 범위 초과");
+                .hasMessageContaining("지정 가능 숫자 범위 초과.");
     }
 
     @Test
@@ -27,7 +26,7 @@ public class BonusNumberTest {
     void create_fail_already_in_winning_Numbers() {
         // given
         Ticket winningTicket = Ticket.madeBy(() -> Arrays.asList(1,2,3,4,5,6));
-        int bonusNumber = 7;
+        int bonusNumber = 6;
 
         // when, then
         assertThatThrownBy(() -> BonusNumber.of(bonusNumber, winningTicket))

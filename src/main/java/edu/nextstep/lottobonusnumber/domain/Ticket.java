@@ -1,5 +1,7 @@
 package edu.nextstep.lottobonusnumber.domain;
 
+import edu.nextstep.lottobonusnumber.domain.numbersmaker.NumbersMaker;
+
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -7,14 +9,12 @@ public class Ticket {
 
     private final List<Integer> numbers;
 
-    public static final int TICKET_PRICE = 1_000;
-
     public Ticket(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
     public static Ticket madeBy(NumbersMaker numbersMaker) {
-        return null;
+        return new Ticket(numbersMaker.create());
     }
 
     public Stream<Integer> stream() {
@@ -23,5 +23,9 @@ public class Ticket {
 
     public int countMatchingNumbers(Ticket winningTicket) {
         return 0;
+    }
+
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }

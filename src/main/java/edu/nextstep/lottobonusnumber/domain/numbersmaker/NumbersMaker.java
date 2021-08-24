@@ -1,4 +1,4 @@
-package edu.nextstep.lottobonusnumber.domain;
+package edu.nextstep.lottobonusnumber.domain.numbersmaker;
 
 import java.util.List;
 
