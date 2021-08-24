@@ -2,10 +2,7 @@ package edu.nextstep.lottobonusnumber.domain;
 
 import edu.nextstep.lottobonusnumber.domain.numbersmaker.NumbersMaker;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Tickets {
@@ -32,7 +29,7 @@ public class Tickets {
     }
 
     public Map<Prize, Integer> checkWinningResult(Ticket winningTicket, BonusNumber bonusNumber) {
-        Map<Prize, Integer> winningResult = new LinkedHashMap<>();
+        Map<Prize, Integer> winningResult = createAndInitWinningResult();
 
         tickets.stream()
                 .map(ticket -> {
@@ -42,5 +39,18 @@ public class Tickets {
                 }).forEach(prize -> winningResult.put(prize, winningResult.getOrDefault(prize, 0)+1));
 
         return winningResult;
+    }
+
+    private Map<Prize, Integer> createAndInitWinningResult() {
+        Map<Prize, Integer> winningResult = new LinkedHashMap<>();
+
+        Arrays.stream(Prize.values())
+                .forEach(prize -> winningResult.put(prize, winningResult.getOrDefault(prize, 0)));
+
+        return winningResult;
+    }
+
+    public int count(){
+        return tickets.size();
     }
 }
