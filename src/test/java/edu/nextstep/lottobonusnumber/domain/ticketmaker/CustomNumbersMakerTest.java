@@ -1,9 +1,10 @@
 package edu.nextstep.lottobonusnumber.domain.ticketmaker;
 
 import edu.nextstep.lottobonusnumber.domain.Ticket;
-import edu.nextstep.lottobonusnumber.domain.ticketmaker.CustomNumbersMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

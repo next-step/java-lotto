@@ -1,7 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.domain.Ticket;
-import edu.nextstep.lottobonusnumber.domain.TicketRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

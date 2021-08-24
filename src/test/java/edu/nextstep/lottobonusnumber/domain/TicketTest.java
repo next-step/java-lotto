@@ -1,6 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.domain.Ticket;
 import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

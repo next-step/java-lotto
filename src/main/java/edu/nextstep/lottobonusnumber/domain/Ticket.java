@@ -53,12 +53,12 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Objects.equals(getNumbers(), ticket.getNumbers());
+        return Objects.equals(numbers, ticket.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumbers());
+        return Objects.hash(numbers);
     }
 
     public List<Integer> getNumbers() {

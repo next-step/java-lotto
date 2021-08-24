@@ -1,7 +1,5 @@
 package edu.nextstep.lottobonusnumber.domain;
 
-import edu.nextstep.lottobonusnumber.domain.Ticket;
-import edu.nextstep.lottobonusnumber.domain.TicketMachine;
 import edu.nextstep.lottobonusnumber.domain.ticketmaker.AutoNumbersMaker;
 import edu.nextstep.lottobonusnumber.exception.PaymentIllegalArgumentException;
 import org.junit.jupiter.api.DisplayName;

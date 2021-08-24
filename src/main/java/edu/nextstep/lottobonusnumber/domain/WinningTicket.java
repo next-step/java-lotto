@@ -41,8 +41,4 @@ public class WinningTicket {
     public int getBonusNumber() {
         return bonusNumber;
     }
-
-
-
-
 }
