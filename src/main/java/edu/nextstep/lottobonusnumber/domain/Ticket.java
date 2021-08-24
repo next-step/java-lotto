@@ -57,4 +57,9 @@ public class Ticket {
         return numbers.stream()
                 .anyMatch(bonusNumber::isEqualTo);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

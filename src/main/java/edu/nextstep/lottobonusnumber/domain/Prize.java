@@ -12,7 +12,7 @@ public enum Prize {
 
     private final int countOfMatch;
     private final boolean hasBonusNumber;
-    private final int winningPrize;
+    private final long winningPrize;
 
     Prize(int countOfMatch, boolean hasBonusNumber, int winningPrize) {
         this.countOfMatch = countOfMatch;
@@ -30,5 +30,15 @@ public enum Prize {
                 .filter(prize -> prize.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(LOSE);
+    }
+
+    public long calculatePrize(int countOfWinningResult) {
+        return winningPrize * countOfWinningResult;
+    }
+
+    @Override
+    public String toString() {
+        return countOfMatch + "개 일치 (" +
+                winningPrize + " 원)- ";
     }
 }
