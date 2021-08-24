@@ -5,27 +5,44 @@ import lotto.exception.InputError;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_LENGTH = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<Integer> lottoNumbers) {
+    public Lotto(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new InputError("로또는 6개의 숫자여야 합니다.");
         }
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
+    public static Lotto of(final List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
     public int countSameNumber(final Lotto otherLotto) {
-        return (int) otherLotto.value().stream()
+        return (int) otherLotto.values().stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
 
-    public List<Integer> value() {
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<Integer> convertIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::value)
+                .collect(Collectors.toList());
+    }
+
+    public List<LottoNumber> values() {
         return lottoNumbers;
     }
 
@@ -41,4 +58,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
 }

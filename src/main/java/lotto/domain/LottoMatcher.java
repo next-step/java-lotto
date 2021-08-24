@@ -10,12 +10,13 @@ public class LottoMatcher {
     private LottoMatcher() {
     }
 
-    public static Map<Rank, Integer> matchWithWinningLottoNumbers(final Lottos lottos, final Lotto winningLotto) {
+    public static Map<Rank, Integer> matchWithWinningLottoNumbers(final Lottos lottos, final WinningLotto winningLotto) {
         Map<Rank, Integer> rankMap = Rank.valuesExcludeNoRewards().stream()
                 .collect(Collectors.toMap(rank -> rank, rank -> 0, (a, b) -> a, LinkedHashMap::new));
-        for (Lotto lotto : lottos.value()) {
-            int matchCount = lotto.countSameNumber(winningLotto);
-            rankMap.computeIfPresent(Rank.findRank(matchCount), (rank, count) -> count + 1);
+        for (Lotto lotto : lottos.values()) {
+            int matchCount = lotto.countSameNumber(winningLotto.getWinningLotto());
+            boolean matchBonus = lotto.contains(winningLotto.getBonusBallNumber());
+            rankMap.computeIfPresent(Rank.findRank(matchCount, matchBonus), (rank, count) -> count + 1);
         }
 
         return rankMap;
