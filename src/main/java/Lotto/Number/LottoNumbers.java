@@ -35,4 +35,8 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    public int countWinningNumbers(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.getValue().stream().filter(this.lottoNumbers::contains).count();
+    }
 }
