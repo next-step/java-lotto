@@ -17,6 +17,12 @@ public class LottoTest {
         assertThat(new Lotto(Arrays.asList(1, 4, 6, 9, 10, 15))).isInstanceOf(Lotto.class);
     }
 
+    @DisplayName("문자열 입력시 객체생성")
+    @Test
+    void Lotto_문자열_입력시_객체생성() {
+        assertThat(new Lotto("1, 4, 6, 9, 10, 15")).isInstanceOf(Lotto.class);
+    }
+
     @DisplayName("숫자가 6개가 아니면 예외 throw")
     @Test
     void Lotto_숫자가_6개가_아님() {

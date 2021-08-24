@@ -5,6 +5,7 @@ import lotto.domain.generationStrategy.AutoNumberGenerationStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public final class LottoController {
@@ -15,10 +16,14 @@ public final class LottoController {
             ResultView resultView = new ResultView();
             LottoMachine lottoMachine = new LottoMachine();
 
-            Lottos lottos = lottoMachine.buyLotto(inputView.inputAmount(), new AutoNumberGenerationStrategy());
-            int totalCount = lottos.count();
+            Money money = new Money(inputView.inputAmount());
 
-            resultView.printLottoCount(totalCount);
+            int manualLottoCount = inputView.inputLottoCountToPurchaseManually();
+            List<String> manuallyLottos = inputView.inputNumberOfLottoToPurchaseManually(manualLottoCount);
+
+            Lottos lottos = lottoMachine.buyLotto(money, manuallyLottos, new AutoNumberGenerationStrategy());
+
+            resultView.printLottoCount(lottos.count(), manualLottoCount);
             resultView.printLottos(lottos);
 
             Lotto winningLotto = new Lotto(inputView.inputWinningNumbers());
