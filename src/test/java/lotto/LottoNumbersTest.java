@@ -30,7 +30,6 @@ class LottoNumbersTest {
     @DisplayName("정렬 및 equals ")
     void sort() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(6,5,4,3,2,1));
-        lottoNumbers.sort();
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
 }

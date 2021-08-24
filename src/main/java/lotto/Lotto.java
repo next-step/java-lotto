@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -14,8 +13,7 @@ public class Lotto {
 
     public Lotto() {
         availableNumbers.shuffle();
-        lottoNumbers = new LottoNumbers(new ArrayList<>(availableNumbers.subList(MIN_LENGTH, MAX_LENGTH)));
-        lottoNumbers.sort();
+        lottoNumbers = new LottoNumbers(availableNumbers.subList(MIN_LENGTH, MAX_LENGTH));
     }
 
     public Lotto(List<Integer> lottoNumbers) {

@@ -1,24 +1,25 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int MIN_LENGTH = 6;
 
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != MIN_LENGTH) {
-            throw new IllegalArgumentException("you must input size 6");
+            throw new IllegalArgumentException("Length must be 6.");
         }
-        this.lottoNumbers = lottoNumbers;
-    }
 
-    public void sort() {
-        Collections.sort(this.lottoNumbers);
+        lottoNumbers = lottoNumbers.stream().filter(integer -> integer > 0 && integer < 46).collect(Collectors.toList());
+
+        if (lottoNumbers.size() != MIN_LENGTH) {
+            throw new IllegalArgumentException("Numbers can only be entered from 1 to 45.");
+        }
+
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
     public boolean contains(int number) {
