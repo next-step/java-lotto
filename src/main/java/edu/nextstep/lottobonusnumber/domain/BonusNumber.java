@@ -4,35 +4,29 @@ import edu.nextstep.lottobonusnumber.exception.NumbersIllegalArgumentException;
 
 public class BonusNumber {
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private final LottoNumber bonusNumber;
 
-    private final int bonusNumber;
-
-    public BonusNumber(int bonusNumber, Ticket winningTicket) {
-        validateOutOfRange(bonusNumber);
+    private BonusNumber(LottoNumber bonusNumber, Ticket winningTicket) {
         validateWinningTicketContains(bonusNumber, winningTicket);
 
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateOutOfRange(int bonusNumber) {
-        if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
-            throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);
-        }
-    }
-
-    private void validateWinningTicketContains(int bonusNumber, Ticket winningTicket) {
-        if (winningTicket.contains(bonusNumber)) {
+    private void validateWinningTicketContains(LottoNumber lottoNumber, Ticket winningTicket) {
+        if (winningTicket.contains(lottoNumber)) {
             throw new NumbersIllegalArgumentException("당첨 번호에 이미 포함되어 있습니다.");
         }
     }
 
-    public static BonusNumber of(int bonusNumber, Ticket winningTicket) {
+    public static BonusNumber of(LottoNumber bonusNumber, Ticket winningTicket) {
         return new BonusNumber(bonusNumber, winningTicket);
     }
 
-    public boolean isEqualTo(int number) {
-        return (number == bonusNumber);
+    public static BonusNumber of(int bonusNumber, Ticket winningTicket) {
+        return BonusNumber.of(LottoNumber.of(bonusNumber), winningTicket);
+    }
+
+    public boolean isEqualTo(LottoNumber number) {
+        return (number.equals(bonusNumber));
     }
 }

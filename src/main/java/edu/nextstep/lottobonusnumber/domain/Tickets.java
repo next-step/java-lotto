@@ -31,12 +31,12 @@ public class Tickets {
     public Map<Prize, Integer> checkWinningResult(Ticket winningTicket, BonusNumber bonusNumber) {
         Map<Prize, Integer> winningResult = createAndInitWinningResult();
 
-        tickets.stream()
-                .map(ticket -> {
-                    int countOfMatch = ticket.countMatchingNumbers(winningTicket);
-                    boolean hasBonusNumber = ticket.contains(bonusNumber);
-                    return Prize.of(countOfMatch, hasBonusNumber);
-                }).forEach(prize -> winningResult.put(prize, winningResult.getOrDefault(prize, 0)+1));
+        for (Ticket ticket : tickets) {
+            int countOfMatch = ticket.countMatchingNumbers(winningTicket);
+            boolean hasBonusNumber = ticket.contains(bonusNumber);
+            Prize prize = Prize.of(countOfMatch, hasBonusNumber);
+            winningResult.put(prize, winningResult.getOrDefault(prize, 0)+1);
+        }
 
         return winningResult;
     }

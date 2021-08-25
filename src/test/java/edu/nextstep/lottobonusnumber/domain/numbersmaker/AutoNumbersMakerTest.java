@@ -1,6 +1,7 @@
 package edu.nextstep.lottobonusnumber.domain.numbersmaker;
 
-import edu.nextstep.lottoauto.domain.Ticket;
+import edu.nextstep.lottobonusnumber.domain.Ticket;
+import edu.nextstep.lottobonusnumber.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +19,10 @@ public class AutoNumbersMakerTest {
         NumbersMaker numbersMaker = new AutoNumbersMaker();
 
         // when
-        List<Integer> numbers = numbersMaker.create();
+        List<LottoNumber> numbers = numbersMaker.create();
 
         // then
         assertThat(numbers.size()).isEqualTo(Ticket.LENGTH_OF_NUMBERS);
-        assertThat(numbers.get(0)).isInstanceOf(Integer.class);
+        assertThat(numbers.get(0)).isInstanceOf(LottoNumber.class);
     }
 }
