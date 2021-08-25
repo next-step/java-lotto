@@ -1,4 +1,4 @@
-package UI;
+package Lotto.UI;
 
 import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
