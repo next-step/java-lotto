@@ -14,12 +14,10 @@ public enum Prize {
     private static final int THIRD_PRIZE_COUNT_OF_MATCH = 5;
 
     private final int countOfMatch;
-    private final boolean hasBonusNumber;
     private final long winningPrize;
 
     Prize(int countOfMatch, boolean hasBonusNumber, int winningPrize) {
         this.countOfMatch = countOfMatch;
-        this.hasBonusNumber = hasBonusNumber;
         this.winningPrize = winningPrize;
     }
 

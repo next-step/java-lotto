@@ -28,23 +28,12 @@ public class Ticket {
         return new Ticket(numbers);
     }
 
-    public int countMatchingNumbers(Ticket winningTicket) {
-        return (int) winningTicket.stream()
-                .filter(numbers::contains)
-                .count();
-    }
-
     public Stream<LottoNumber> stream() {
         return numbers.stream();
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
-    }
-
-    public boolean contains(BonusNumber bonusNumber) {
-        return numbers.stream()
-                .anyMatch(bonusNumber::isEqualTo);
     }
 
     @Override

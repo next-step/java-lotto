@@ -30,11 +30,12 @@ public class TicketsTest {
         Payment payment = new Payment(1_000);
         Tickets tickets = Tickets.of(payment, new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
 
-        Ticket winningTicket = Ticket.madeBy(new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
-        BonusNumber bonusNumber = BonusNumber.of(7, winningTicket);
+        Ticket firstPrizeTicket = Ticket.madeBy(new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
+        LottoNumber bonusNumber = LottoNumber.of(7);
+        WinningTicket winningTicket = new WinningTicket(firstPrizeTicket, bonusNumber);
 
         // when
-        Map<Prize, Integer> winningResult = tickets.checkWinningResult(winningTicket, bonusNumber);
+        Map<Prize, Integer> winningResult = tickets.checkWinningResult(winningTicket);
 
         // then
         Assertions.assertThat(winningResult.getOrDefault(Prize.FIRST, 0)).isEqualTo(1);
