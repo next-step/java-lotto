@@ -17,9 +17,7 @@ public class Lottery {
 	public void draw(List<Lotto> lottos) {
 		List<LotteryResult> results = new ArrayList<>();
 		for (Lotto lotto : lottos) {
-			List<Integer> numbers = lotto.getNumbers().stream()
-				.map(Number::getValue)
-				.collect(Collectors.toList());
+			List<Integer> numbers = convertNumberValue(lotto.getNumbers());
 			numbers.retainAll(winningNumbers);
 			int matchNumber = numbers.size();
 
@@ -28,6 +26,12 @@ public class Lottery {
 		}
 
 		lotteryResults = new LotteryResults(results);
+	}
+
+	private List<Integer> convertNumberValue(List<Number> numbers) {
+		return numbers.stream()
+			.map(Number::getValue)
+			.collect(Collectors.toList());
 	}
 
 	public LotteryResults getLotteryResults() {
