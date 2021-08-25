@@ -3,6 +3,8 @@ package step2.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import step2.model.Lotto.LottoNo;
+import step2.model.Lotto.LottoNos;
 import step2.model.view.Input;
 
 public class InputView {
@@ -11,12 +13,12 @@ public class InputView {
 
   private Scanner scanner = new Scanner(System.in);
 
-  List<Integer> getUserLottoNumbers(String[] userLottoNumbers) {
-    List<Integer> userLottoNumberList = new ArrayList();
+  LottoNos getUserLottoNumbers(String[] userLottoNumbers) {
+    List<LottoNo> userLottoNumberList = new ArrayList();
     for (String userLottoNumber : userLottoNumbers) {
-      userLottoNumberList.add(Integer.parseInt(userLottoNumber));
+      userLottoNumberList.add(new LottoNo(Integer.parseInt(userLottoNumber)));
     }
-    return userLottoNumberList;
+    return new LottoNos(userLottoNumberList);
   }
 
   public Input getUserInput() {
@@ -37,16 +39,16 @@ public class InputView {
     return scanner.nextInt();
   }
 
-  public List inputUserManualLottoNumbers(int userManualLottoCount) {
+  public List<LottoNos> inputUserManualLottoNumbers(int userManualLottoCount) {
     System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
-    List lottoNumbers = new ArrayList();
+    List<LottoNos> lottoNosList = new ArrayList();
     for (int i = 0; i < userManualLottoCount; i++) {
       String[] userLottoNumbers = scanner.next().split(COMMA);
-      lottoNumbers.add(getUserLottoNumbers(userLottoNumbers));
+      lottoNosList.add(getUserLottoNumbers(userLottoNumbers));
     }
 
-    return lottoNumbers;
+    return lottoNosList;
   }
 
   public void setUserWinningInput(Input userInput) {

@@ -1,16 +1,14 @@
 package step2.model.Lotto;
 
-import java.util.List;
-
 public class Lotto {
 
-  private List<Integer> lottoNumbers;
+  private LottoNos lottoNos;
 
-  public Lotto(List<Integer> lottoNumbers) {
-    this.lottoNumbers = lottoNumbers;
+  public Lotto(LottoNos lottoNos) {
+    this.lottoNos = lottoNos;
   }
 
-  public List<Integer> getLottoNumbers() {
-    return lottoNumbers;
+  public LottoNos getLottoNos() {
+    return lottoNos;
   }
 }

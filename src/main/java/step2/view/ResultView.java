@@ -1,10 +1,10 @@
 package step2.view;
 
+import step2.model.Lotto.Lotto;
+import step2.model.Lotto.Lottos;
+import step2.model.LottoStore.LottoWin;
 import step2.model.LottoStore.WinnerMoney;
 import step2.model.view.Input;
-import step2.model.Lotto.Lotto;
-import step2.model.LottoStore.LottoWin;
-import step2.model.Lotto.Lottos;
 
 public class ResultView {
 
@@ -16,7 +16,7 @@ public class ResultView {
   public void printPurchasedLotto(Lottos lottos, Input userInput) {
 
     System.out.println(
-        "수동으로 " + userInput.getUserAmount() + "장, 자동으로 " + (lottos.getLottosSize() - userInput
+        "수동으로 " + userInput.getUserManualLottoCount() + "장, 자동으로 " + (lottos.getLottosSize() - userInput
             .getUserManualLottoCount()) + "개를 구매했습니다.");
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
@@ -30,10 +30,12 @@ public class ResultView {
     StringBuilder stringBuilder = new StringBuilder();
 
     stringBuilder.append(LEFT_BRACKET);
-    for (Integer integer : lotto.getLottoNumbers()) {
-      stringBuilder.append(integer);
+
+    for (int i = 0; i < lotto.getLottoNos().getLottoNosSize(); i++) {
+      stringBuilder.append(lotto.getLottoNos().getLottoNos(i).getLottoNum());
       stringBuilder.append(COMMA + BLANK_SPACE);
     }
+
     stringBuilder.delete(stringBuilder.lastIndexOf(COMMA), stringBuilder.length());
     stringBuilder.append(RIGHT_BRACKET);
 

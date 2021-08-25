@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import step2.model.Lotto.Lotto;
+import step2.model.Lotto.LottoNo;
 import step2.model.Lotto.Lottos;
 
 public class LottoWin {
@@ -26,16 +27,7 @@ public class LottoWin {
   }
 
   private boolean isMatchNumber(Lotto lotto, String lottoNumStr) {
-    return lotto.getLottoNumbers().contains(Integer.parseInt(lottoNumStr));
-  }
-
-  public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
-    WinnerMoney winnerMoneyKey = winnerMoney;
-    if (hasWinningBonusNumber) {
-      winnerMoneyKey = WinnerMoney.SECOND_WINNER_MONEY;
-    }
-
-    winnerCountMap.replace(winnerMoneyKey, winnerCountMap.get(winnerMoney) + 1);
+    return lotto.getLottoNos().hasLottoNo(new LottoNo(Integer.parseInt(lottoNumStr)));
   }
 
   public int getWinnerCount(WinnerMoney winnerMoney) {
@@ -103,5 +95,14 @@ public class LottoWin {
       boolean hasWinningBonusNumber) {
     return matchNumberCount == winnerMoney.getMatchNumberCount()
         && hasWinningBonusNumber == winnerMoney.hasMatchBonusNumber();
+  }
+
+  public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
+    WinnerMoney winnerMoneyKey = winnerMoney;
+    if (hasWinningBonusNumber) {
+      winnerMoneyKey = WinnerMoney.SECOND_WINNER_MONEY;
+    }
+
+    winnerCountMap.replace(winnerMoneyKey, winnerCountMap.get(winnerMoney) + 1);
   }
 }

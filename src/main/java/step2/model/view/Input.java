@@ -1,22 +1,24 @@
 package step2.model.view;
 
 import java.util.List;
+import step2.model.Lotto.LottoNos;
+import step2.model.Lotto.Lottos;
 
 public class Input {
 
   int userAmount;
   int userManualLottoCount;
-  List userManualLottoNumbers;
+  List<LottoNos> userManualLottoNumbers;
   String[] lottowinningNumbers;
   int lottowinningBonusNumbers;
 
-  public Input(int userAmount, List userManualLottoNumbers) {
-    this.userAmount = userAmount;
-    this.userManualLottoCount = userManualLottoNumbers.size();
-    this.userManualLottoNumbers = userManualLottoNumbers;
-  }
+//  public Input(int userAmount, List userManualLottoNumbers) {
+//    this.userAmount = userAmount;
+//    this.userManualLottoCount = userManualLottoNumbers.size();
+//    this.userManualLottoNumbers = userManualLottoNumbers;
+//  }
 
-  public Input(int userAmount, int userManualLottoCount, List userManualLottoNumbers) {
+  public Input(int userAmount, int userManualLottoCount, List<LottoNos> userManualLottoNumbers) {
     this.userAmount = userAmount;
     this.userManualLottoCount = userManualLottoCount;
     this.userManualLottoNumbers = userManualLottoNumbers;
@@ -30,7 +32,7 @@ public class Input {
     return userManualLottoCount;
   }
 
-  public List getUserManualLottoNumbers() {
+  public List<LottoNos> getUserManualLottoNumbers() {
     return userManualLottoNumbers;
   }
 
