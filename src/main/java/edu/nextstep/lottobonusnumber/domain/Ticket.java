@@ -12,7 +12,7 @@ public class Ticket {
 
     private final List<LottoNumber> numbers;
 
-    public Ticket(List<LottoNumber> numbers) {
+    private Ticket(List<LottoNumber> numbers) {
         validateLengthOfNumbers(numbers);
         this.numbers = numbers;
     }

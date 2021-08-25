@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Tickets {
     private final List<Ticket> tickets;
 
-    public Tickets(List<Ticket> tickets) {
+    private Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
 
