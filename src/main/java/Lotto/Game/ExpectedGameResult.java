@@ -22,14 +22,14 @@ public class ExpectedGameResult {
         this.ticketsPuchasedThisWeek = new LottoTickets(lottoTickets);
         this.winningNumbersOfLastWeek = new WinningNumbers(winningNumbers.getValue());
 
-        this.firstPlaceCount = getTicketCountForEachPrize(Prize.FIRST);
-        this.secondPlaceCount = getTicketCountForEachPrize(Prize.SECOND);
-        this.thirdPlaceCount = getTicketCountForEachPrize(Prize.THIRD);
-        this.fourthPlaceCount = getTicketCountForEachPrize(Prize.FOURTH);
-        this.loserCount = getTicketCountForEachPrize(Prize.LOSER);
+        this.firstPlaceCount = getTicketCountsWinning(Prize.FIRST);
+        this.secondPlaceCount = getTicketCountsWinning(Prize.SECOND);
+        this.thirdPlaceCount = getTicketCountsWinning(Prize.THIRD);
+        this.fourthPlaceCount = getTicketCountsWinning(Prize.FOURTH);
+        this.loserCount = getTicketCountsWinning(Prize.LOSER);
     }
 
-    private int getTicketCountForEachPrize(Prize prize) {
+    private int getTicketCountsWinning(Prize prize) {
         return (int) ticketsPuchasedThisWeek.getValue().stream()
                 .filter(ticket -> ticket.getPrize(winningNumbersOfLastWeek).equals(prize)).count();
     }
