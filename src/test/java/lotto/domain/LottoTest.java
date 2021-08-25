@@ -4,6 +4,7 @@ import lotto.exception.InputError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,4 +34,10 @@ class LottoTest {
                 .isEqualTo(3);
     }
 
+    @DisplayName("6개의 번호 중 동일 번호가 있으면 InputError 발생")
+    @Test
+    void createError_sameNumber() {
+        assertThatThrownBy(() -> Lotto.of(Arrays.asList(1, 1, 1, 1, 1, 2)))
+                .isInstanceOf(InputError.class);
+    }
 }

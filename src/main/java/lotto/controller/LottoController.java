@@ -4,14 +4,20 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoController {
 
     public void runAutoLotto() {
-        int lottoPurchasePrice = InputView.inputPurchasePrice();
-        LottosCreator lottosCreator = new LottosCreator(lottoPurchasePrice);
-        Lottos lottos = lottosCreator.createLottos(RandomNumbersCreator.getInstance());
+        Money lottoPurchasePrice = InputView.inputPurchasePrice();
+        int manualLottoCount = InputView.inputManualLottoCount();
+        List<String> manualLottos = InputView.inputManualLottos(manualLottoCount);
+
+        LottosCreator lottosCreator = new LottosCreator(lottoPurchasePrice, manualLottoCount);
+        Lottos lottos = lottosCreator.createLottos(manualLottos, RandomNumbersCreator.getInstance());
+
         ResultView.printBuyLotto(lottos.values());
 
         WinningLotto winningLotto = new WinningLotto(

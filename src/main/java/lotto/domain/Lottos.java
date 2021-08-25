@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InputError;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

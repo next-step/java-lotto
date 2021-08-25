@@ -18,15 +18,14 @@ public class LottoMatcher {
             boolean matchBonus = lotto.contains(winningLotto.getBonusBallNumber());
             rankMap.computeIfPresent(Rank.findRank(matchCount, matchBonus), (rank, count) -> count + 1);
         }
-
         return rankMap;
     }
 
-    public static BigDecimal calculateTotalRewardsRatio(int purchasedMoney, Map<Rank, Integer> lottoResultRankMap) {
+    public static BigDecimal calculateTotalRewardsRatio(Money purchasedMoney, Map<Rank, Integer> lottoResultRankMap) {
         BigDecimal totalRewards = lottoResultRankMap.entrySet().stream()
                 .map(rank -> BigDecimal.valueOf(rank.getKey().getRewards() * rank.getValue()))
                 .reduce(BigDecimal.valueOf(0), BigDecimal::add);
-        return totalRewards.divide(BigDecimal.valueOf(purchasedMoney * 100.0), 2, RoundingMode.HALF_EVEN);
+        return totalRewards.divide(BigDecimal.valueOf(purchasedMoney.value() * 100.0), 2, RoundingMode.HALF_EVEN);
     }
 
 }

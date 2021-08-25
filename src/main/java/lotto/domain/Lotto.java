@@ -15,7 +15,7 @@ public class Lotto {
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_LENGTH) {
-            throw new InputError("로또는 6개의 숫자여야 합니다.");
+            throw new InputError("로또는 서로 다른 6개의 숫자여야 합니다.");
         }
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
@@ -23,6 +23,7 @@ public class Lotto {
     public static Lotto of(final List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
                 .map(LottoNumber::new)
+                .distinct()
                 .collect(Collectors.toList()));
     }
 
