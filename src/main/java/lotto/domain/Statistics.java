@@ -30,7 +30,7 @@ public class Statistics {
     }
 
     public long getEarnMoney() {
-        int earnMoney = 0;
+        long earnMoney = 0;
 
         for (Rank rank : Rank.values()) {
             earnMoney += lottoResult.getOrDefault(rank, GAME_COUNT_ZERO) * rank.getWinningMoney();
