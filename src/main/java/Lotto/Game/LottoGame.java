@@ -19,11 +19,6 @@ public class LottoGame {
         this.tickets = new LottoTickets(tickets);
     }
 
-    protected LottoGame(List<LottoTicket> tickets) {
-        this.payments = new Payments(tickets.size() * 1000);
-        this.tickets = new LottoTickets(tickets);
-    }
-
     private List<LottoTicket> createLottoTickets(int totalNumberOfTickets) {
         return IntStream.range(0, totalNumberOfTickets).mapToObj(i -> new LottoTicket(RandomNumbers.generate())).collect(Collectors.toList());
     }
