@@ -32,15 +32,4 @@ class AvailableNumbersTest {
         assertThat(Arrays.equals(availableNumbers.subList(0,6).toArray(), Arrays.asList(6,5,4,3,2,1).toArray())).isFalse();
     }
 
-    @Test
-    @DisplayName("로또 번호를 반환")
-    void getAvailableNumbers() {
-        int minNumber = 1;
-        int maxNumber = 45;
-
-        AvailableNumbers availableNumbers = new AvailableNumbers(minNumber, maxNumber);
-//        availableNumbers.getRandomNumbers();
-
-
-    }
 }

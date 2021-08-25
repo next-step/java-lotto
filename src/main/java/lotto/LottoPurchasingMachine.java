@@ -1,5 +1,7 @@
 package lotto;
 
+import util.Number;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,20 +9,30 @@ import java.util.List;
 public class LottoPurchasingMachine {
     public static final int AMOUNT = 1_000;
 
-    public List<Lotto> buyLotto(int buyNumber) {
+    public List<Lotto> buyAutomaticLotto(int buyNumber) {
         int count = buyNumber / AMOUNT;
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto();
-            lottoList.add(lotto);
+            lottoList.add(new Lotto());
+        }
+        return lottoList;
+    }
+
+    public List<Lotto> buyManualLotto(String[] manualNumbers) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (String manualNumber : manualNumbers) {
+            lottoList.add(new Lotto(Number.stringArrayToIntegerList(Arrays.asList(manualNumber.split(",")))));
         }
         return lottoList;
     }
 
     public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers, int bonusNumber) {
         Integer[] result = new Integer[] {0,0,0,0,0,0};
+
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(prevLottoWinningNumbers), bonusNumber);
+
         for (Lotto lotto : lottoList) {
-            int matchedNumberCount = lotto.findMatchedNumberCount(prevLottoWinningNumbers);
+            int matchedNumberCount = lotto.findMatchedNumberCount(winningLottoNumbers);
             checkWinningResult(matchedNumberCount, Arrays.asList(result), lotto.checkBonusBallNumber(bonusNumber));
         }
         return Arrays.asList(result);
