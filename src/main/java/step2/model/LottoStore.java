@@ -11,24 +11,37 @@ public class LottoStore {
   private static final int LOTTO_LARGEST_NUMBER = 45;
   private static final int LOTTO_PRICE = 1000;
 
-  public Lottos purchase(int userAmount) {
+  public Lottos purchase(Input userInput) {
+
+    List<Lotto> lottos = new ArrayList<>();
+
+    int userAutoLottoAmount =
+        userInput.getUserAmount() - (userInput.getUserManualLottoNumbers().size() * LOTTO_PRICE);
+
+    lottos.addAll(purchaseAutoLottos(userAutoLottoAmount));
+    lottos.addAll(purchaseManualLottos(userInput.getUserManualLottoNumbers()));
+
+    return new Lottos(lottos);
+  }
+
+  public List<Lotto> purchaseAutoLottos(int userAmount) {
     List<Lotto> lottos = new ArrayList<>();
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
       lottos.add(new Lotto(getLottoRandomNumbers()));
     }
 
-    return new Lottos(lottos);
+    return lottos;
   }
 
-  public Lottos purchase(int userAmount, List<Integer> lottoNumbers) {
+  public List<Lotto> purchaseManualLottos(List<List<Integer>> lottoNumbers) {
     List<Lotto> lottos = new ArrayList<>();
 
-    for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
-      lottos.add(new Lotto(lottoNumbers));
+    for (List<Integer> lottoNumber : lottoNumbers) {
+      lottos.add(new Lotto(lottoNumber));
     }
 
-    return new Lottos(lottos);
+    return lottos;
   }
 
   private List<Integer> getLottoRandomNumbers() {
@@ -52,8 +65,9 @@ public class LottoStore {
     return randomNum;
   }
 
-  public LottoWin draw(Lottos lottos, String[] lottowinningNumbers, int lottowinningBonusNumbers) {
-    LottoWin lottoWin = new LottoWin(lottowinningNumbers, lottowinningBonusNumbers);
+  public LottoWin draw(Lottos lottos, Input userInput) {
+    LottoWin lottoWin = new LottoWin(userInput.getLottowinningNumbers(),
+        userInput.getLottowinningBonusNumbers());
     return lottoWin.draw(lottos);
   }
 }
