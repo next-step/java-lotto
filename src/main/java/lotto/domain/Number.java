@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class Number {
+	private static final int MIN_NUMBER = 1;
+	private static final int MAX_NUMBER = 45;
 	private final int value;
 
 	public Number(int value) {
@@ -13,7 +15,7 @@ public class Number {
 	}
 
 	private void isBetweenOneAndFortyFive(int value) {
-		if (value < 1 || value > 45) {
+		if (value < MIN_NUMBER || value > MAX_NUMBER) {
 			throw new RuntimeException();
 		}
 	}
