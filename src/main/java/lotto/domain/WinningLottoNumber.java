@@ -7,6 +7,7 @@ public class WinningLottoNumber {
 
     public static final int MIN_NUMBER_BOUND = 1;
     public static final int MAX_NUMBER_BOUND = 45;
+    public static final int LOTTO_NUMBER_SIZE = 6;
     private Set<Integer> winningNumber = new TreeSet<>();
 
     public Set<Integer> getWinningNumber() {
@@ -16,7 +17,7 @@ public class WinningLottoNumber {
     public void setWinningNumber(String winningNumbers) {
         String[] numbers = winningNumbers.split(",");
 
-        if (numbers.length != 6) {
+        if (numbers.length != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("숫자는 총 6개여야 합니다.");
         }
 
@@ -24,7 +25,7 @@ public class WinningLottoNumber {
             winningNumber.add(checkWinningNumber(number));
         }
 
-        if (winningNumber.size() != 6) {
+        if (winningNumber.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
     }
