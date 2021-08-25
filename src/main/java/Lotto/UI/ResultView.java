@@ -1,6 +1,7 @@
 package Lotto.UI;
 
 import Lotto.Game.ExpectedGameResult;
+import Lotto.Game.LottoGame;
 import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
 import Lotto.Ticket.Prize;
@@ -12,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void showTotalNumberOfPurchasedLottoTickets(int totalNumber) {
-        System.out.println(totalNumber + "개를 구매했습니다.");
+    public static void shoowTicketsCounts(LottoGame lottoGame) {
+        System.out.println(lottoGame.getLottoTickets().size() + "개를 구매했습니다.");
     }
 
-    public static void showLottoNumbersOfEachTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(showLottoNumbers());
+    public static void showEachTicketsLottoNumbers(LottoGame lottoGame) {
+        lottoGame.getLottoTickets().forEach(showLottoNumbers());
         goToNewLine();
     }
 
