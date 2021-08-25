@@ -10,6 +10,7 @@ import Lotto.Ticket.Prize;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -60,7 +61,13 @@ public class ResultView {
     }
 
     private static void showTicketsCountsForEachPrize(ExpectedGameResult gameResult) {
-        Arrays.stream(Prize.values()).forEach(prize -> showTicketCountsForGivenPrize(gameResult, prize));
+        Arrays.stream(Prize.values())
+                .filter(pickPrizesExceptLoser())
+                .forEach(prize -> showTicketCountsForGivenPrize(gameResult, prize));
+    }
+
+    private static Predicate<Prize> pickPrizesExceptLoser() {
+        return prize -> !prize.equals(Prize.LOSER);
     }
 
     private static void showTicketCountsForGivenPrize(ExpectedGameResult gameResult, Prize prize) {
