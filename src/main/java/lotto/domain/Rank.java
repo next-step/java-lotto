@@ -26,10 +26,10 @@ public enum Rank {
 
     static Rank findRank(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> countOfMatch < 3 || rank.match == countOfMatch)
+                .filter(rank -> rank.match == countOfMatch)
                 .filter(rank -> rank.match != 5 || matchBonus && rank.matchBonus)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("맞는 랭크가 없습니다."));
+                .orElse(NOTHING);
     }
 
     public static List<Rank> valuesExcludeNoRewards() {

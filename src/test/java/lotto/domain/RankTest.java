@@ -13,7 +13,7 @@ class RankTest {
     void findRank() {
         assertThat(Rank.findRank(2, true)).isEqualTo(Rank.NOTHING);
         assertThat(Rank.findRank(3, false)).isEqualTo(Rank.FIFTH);
-        assertThat(Rank.findRank(4, false)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.findRank(4, true)).isEqualTo(Rank.FOURTH);
         assertThat(Rank.findRank(5, true)).isEqualTo(Rank.SECOND);
         assertThat(Rank.findRank(6, false)).isEqualTo(Rank.FIRST);
     }
