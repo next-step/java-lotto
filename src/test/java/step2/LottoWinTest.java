@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step2.model.Lotto;
-import step2.model.LottoWin;
-import step2.model.Lottos;
-import step2.model.WinnerMoney;
+import step2.model.Lotto.Lotto;
+import step2.model.LottoStore.LottoWin;
+import step2.model.Lotto.Lottos;
+import step2.model.LottoStore.WinnerMoney;
 
 public class LottoWinTest {
 

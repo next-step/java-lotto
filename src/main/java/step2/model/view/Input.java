@@ -1,4 +1,4 @@
-package step2.model;
+package step2.model.view;
 
 import java.util.List;
 

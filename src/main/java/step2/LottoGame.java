@@ -1,9 +1,9 @@
 package step2;
 
-import step2.model.Input;
-import step2.model.LottoStore;
-import step2.model.LottoWin;
-import step2.model.Lottos;
+import step2.model.view.Input;
+import step2.model.LottoStore.LottoStore;
+import step2.model.LottoStore.LottoWin;
+import step2.model.Lotto.Lottos;
 import step2.view.InputView;
 import step2.view.ResultView;
 

@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.Lotto;
+import step2.model.Lotto.Lotto;
 
 public class LottoTest {
 

@@ -1,10 +1,10 @@
 package step2.view;
 
-import step2.model.Input;
-import step2.model.Lotto;
-import step2.model.LottoWin;
-import step2.model.Lottos;
-import step2.model.WinnerMoney;
+import step2.model.LottoStore.WinnerMoney;
+import step2.model.view.Input;
+import step2.model.Lotto.Lotto;
+import step2.model.LottoStore.LottoWin;
+import step2.model.Lotto.Lottos;
 
 public class ResultView {
 

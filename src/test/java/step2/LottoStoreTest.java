@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.Input;
-import step2.model.LottoStore;
-import step2.model.LottoWin;
-import step2.model.Lottos;
-import step2.model.WinnerMoney;
+import step2.model.LottoStore.WinnerMoney;
+import step2.model.view.Input;
+import step2.model.LottoStore.LottoStore;
+import step2.model.LottoStore.LottoWin;
+import step2.model.Lotto.Lottos;
 
 public class LottoStoreTest {
 

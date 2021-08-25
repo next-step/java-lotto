@@ -1,10 +1,12 @@
-package step2.model;
+package step2.model.LottoStore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import step2.model.Lotto.Lotto;
+import step2.model.Lotto.Lottos;
 
 public class LottoWin {
 

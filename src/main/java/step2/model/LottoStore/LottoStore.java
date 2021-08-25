@@ -1,9 +1,12 @@
-package step2.model;
+package step2.model.LottoStore;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import step2.model.Lotto.Lotto;
+import step2.model.Lotto.Lottos;
+import step2.model.view.Input;
 
 public class LottoStore {
 
