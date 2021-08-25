@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class MoneyTest {
 
         Money money = new Money(purchaseAmount);
 
-        int totalLottoTicketCount = money.getTotalLottoTicketCount();
+        int totalLottoTicketCount = money.countOfLottoPurchases();
 
         assertThat(totalLottoTicketCount).isEqualTo(purchaseAmount / 1000);
     }

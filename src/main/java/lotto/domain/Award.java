@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -13,22 +13,22 @@ public enum Award {
     private int countOfMatch;
     private int winningMoney;
 
-    private Award(int countOfMatch, int winningMoney) {
+    Award(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
+    public int countOfMatch() {
         return countOfMatch;
     }
 
-    public int getWinningMoney() {
+    public int winningMoney() {
         return winningMoney;
     }
 
-    public static Award valueOf(long countOfMatch) {
+    public static Award valueOf(int countOfMatch) {
         return Arrays.stream(Award.values())
-                .filter(each -> each.getCountOfMatch() == countOfMatch)
+                .filter(each -> each.countOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(MISS)
                 ;

@@ -1,5 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,32 +12,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AutoLottoNumbersGeneratorTest {
 
+    private LottoGenerator lottoGenerator;
+
+    @BeforeEach
+    void setUp() {
+        lottoGenerator = new AutoLottoGenerator();
+    }
+
     @Test
     @DisplayName("로또 티켓을 생성한다.")
     void generate_lottoNumbers_test() {
-        LottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator();
-
-        Ticket lottoTicket = lottoNumbersGenerator.generateLottoTicket();
-
-        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+        List<LottoNumber> lottoNumbers = lottoGenerator.generateLotto();
+        assertThat(lottoNumbers.size()).isEqualTo(6);
 
     }
 
     @Test
     @DisplayName("로또번호가 정렬됐는지 확인한다.")
     void lotto_number_sorting_test() {
-        LottoNumbersGenerator lottoNumbersGenerator = new AutoLottoNumbersGenerator();
-
-        List<Integer> lottoNumbers = lottoNumbersGenerator.generateLottoTicket().getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoGenerator.generateLotto();
 
         assertThat(checkSort(lottoNumbers)).isEqualTo(true);
     }
 
-    private boolean checkSort(List<Integer> lottoTicket) {
-        List<Integer> sortedLottoTicket = new ArrayList<>(lottoTicket);
+    private boolean checkSort(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> sortedLottoTicket = new ArrayList<>(lottoNumbers);
         Collections.sort(sortedLottoTicket);
 
-        if (lottoTicket.equals(sortedLottoTicket)) {
+        if (lottoNumbers.equals(sortedLottoTicket)) {
             return true;
         }
 
