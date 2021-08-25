@@ -1,28 +1,48 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
     private static final int MIN_LENGTH = 6;
+    private static final int MIN_VALUE = 0;
+    private static final int MAX_LENGTH = 45;
 
-    private List<Integer> lottoNumbers;
+    private Set<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != MIN_LENGTH) {
-            throw new IllegalArgumentException("you must input size 6");
-        }
-        this.lottoNumbers = lottoNumbers;
+        lottoNumbers = validation(lottoNumbers);
+
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
-    public void sort() {
-        Collections.sort(this.lottoNumbers);
+    private List<Integer> validation(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != MIN_LENGTH) {
+            throw new IllegalArgumentException("Length must be 6.");
+        }
+
+        if (new TreeSet<>(lottoNumbers).size() < MIN_LENGTH) {
+            throw new IllegalArgumentException("You cannot enter the same value.");
+        }
+
+        lottoNumbers = lottoNumbers.stream().filter(integer -> integer > MIN_VALUE && integer <= MAX_LENGTH).collect(Collectors.toList());
+
+        if (lottoNumbers.size() != MIN_LENGTH) {
+            throw new IllegalArgumentException("Numbers can only be entered from 1 to 45.");
+        }
+        return lottoNumbers;
     }
 
     public boolean contains(int number) {
         return this.lottoNumbers.contains(number);
+    }
+
+    public int match(LottoNumbers lottoNumbers) {
+        Stream<Integer> integerStream = this.lottoNumbers.stream().filter(integer -> {
+            return lottoNumbers.contains(integer);
+        });
+        return Arrays.asList(integerStream.toArray()).size();
     }
 
     @Override
