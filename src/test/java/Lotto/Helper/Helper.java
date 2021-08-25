@@ -44,6 +44,6 @@ public class Helper {
     }
 
     static public int totalPrizeMoney() {
-        return Arrays.stream(Prize.values()).mapToInt(Prize::getValue).sum();
+        return Arrays.stream(Prize.values()).mapToInt(Prize::getPrizeMoney).sum();
     }
 }

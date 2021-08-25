@@ -30,7 +30,7 @@ public class ExpectedGameResult {
     }
 
     public int getTotalPrizeMoney() {
-        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getValue() * getTicketCountsWinning(prize)).sum();
+        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getPrizeMoney() * getTicketCountsWinning(prize)).sum();
     }
 
     public double getProfitRate(Payments payments) {
