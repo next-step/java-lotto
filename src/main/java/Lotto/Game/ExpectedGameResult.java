@@ -20,17 +20,12 @@ public class ExpectedGameResult {
 
     }
 
-    private int getTicketCountsWinning(Prize prize) {
-        return (int) tickets.getValue().stream()
-                .filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
-    }
-
     public int countTicketsWinning(Prize prize) {
-        return getTicketCountsWinning(prize);
+        return (int) tickets.getValue().stream().filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
     }
 
     public int getTotalPrizeMoney() {
-        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getPrizeMoney() * getTicketCountsWinning(prize)).sum();
+        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getPrizeMoney() * countTicketsWinning(prize)).sum();
     }
 
     public double getProfitRate(Payments payments) {
