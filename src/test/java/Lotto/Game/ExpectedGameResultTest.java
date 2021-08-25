@@ -39,7 +39,7 @@ public class ExpectedGameResultTest {
     @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
     @Test
     void getExpectedPrizeMoneyOfTheGame() {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(), Helper.winningNumbers());
         assertThat(expectedGameResult.getTotalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 
@@ -47,7 +47,7 @@ public class ExpectedGameResultTest {
     @ParameterizedTest(name = "{1}인 티켓: {0}장.")
     @MethodSource("provideTicketCountPerPrize")
     void createPlayResult(int ticketCounts, Prize prize) {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(), Helper.winningNumbers());
         assertThat(expectedGameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
     }
 
@@ -55,8 +55,7 @@ public class ExpectedGameResultTest {
     @ParameterizedTest(name = "로또 넘버{0}: 수익률은 {1}.")
     @MethodSource("provideTicketNumbersWithProfitRate")
     void getExpectedProfitRateOfLottoGame(int[][] lottoNumbers, double profitRate) {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(lottoNumbers), Helper.winningNumbers());
-        Payments payments = new Payments(Payments.LOTTO_TICKET_PRICE * lottoNumbers.length);
-        assertThat(expectedGameResult.getProfitRate(payments)).isEqualTo(profitRate);
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(lottoNumbers), Helper.winningNumbers());
+        assertThat(expectedGameResult.getProfitRate()).isEqualTo(profitRate);
     }
 }

@@ -30,4 +30,8 @@ public class LottoGame {
     public List<LottoTicket> getLottoTickets() {
         return this.tickets.getValue();
     }
+
+    public Payments getPayment() {
+        return this.payments;
+    }
 }

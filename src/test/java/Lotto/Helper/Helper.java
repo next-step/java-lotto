@@ -1,5 +1,7 @@
 package Lotto.Helper;
 
+import Lotto.Game.LottoGame;
+import Lotto.Game.Payments;
 import Lotto.Number.LottoNumber;
 import Lotto.Number.LottoNumbers;
 import Lotto.Number.WinningNumbers;
@@ -14,6 +16,29 @@ public class Helper {
 
     final static private int[] winningNumbers = {1, 2, 3, 4, 5, 6};
     final static private int[][] lottoNumbersPerTicket = {{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 7}, {1, 2, 3, 4, 8, 7}, {1, 2, 3, 9, 8, 7}, {12, 11, 10, 9, 8, 7}};
+    final static private int payment = getPayments(lottoNumbersPerTicket);
+
+    static public LottoGame lottoGame() {
+        return new LottoGame(payment) {
+            @Override
+            public List<LottoTicket> getLottoTickets() {
+                return lottoTickets();
+            }
+        };
+    }
+
+    static public LottoGame lottoGame(int[][] lottoNumbersPerTicket) {
+        return new LottoGame(getPayments(lottoNumbersPerTicket)) {
+            @Override
+            public List<LottoTicket> getLottoTickets() {
+                return lottoTickets(lottoNumbersPerTicket);
+            }
+        };
+    }
+
+    private static int getPayments(int[][] lottoNumbersPerTicket) {
+        return lottoNumbersPerTicket.length * Payments.LOTTO_TICKET_PRICE;
+    }
 
     static public List<LottoTicket> lottoTickets() {
         return Arrays.stream(lottoNumbersPerTicket).map(Helper::lottoTicket).collect(Collectors.toList());

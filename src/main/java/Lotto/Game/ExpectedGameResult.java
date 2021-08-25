@@ -1,35 +1,32 @@
 package Lotto.Game;
 
 import Lotto.Number.WinningNumbers;
-import Lotto.Ticket.LottoTicket;
-import Lotto.Ticket.LottoTickets;
 import Lotto.Ticket.Prize;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class ExpectedGameResult {
     public static final int DECIMAL_POINTS_MAKER = 100;
 
-    private final LottoTickets tickets;
+    private final LottoGame lottoGame;
     private final WinningNumbers winningNumbers;
 
-    public ExpectedGameResult(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
-        this.tickets = new LottoTickets(lottoTickets);
+    public ExpectedGameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
+        this.lottoGame = lottoGame;
         this.winningNumbers = new WinningNumbers(winningNumbers.getValue());
 
     }
 
     public int countTicketsWinning(Prize prize) {
-        return (int) tickets.getValue().stream().filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
+        return (int) lottoGame.getLottoTickets().stream().filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
     }
 
     public int getTotalPrizeMoney() {
         return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getPrizeMoney() * countTicketsWinning(prize)).sum();
     }
 
-    public double getProfitRate(Payments payments) {
-        return getProfitRateWithDecimalPoints(payments);
+    public double getProfitRate() {
+        return getProfitRateWithDecimalPoints(lottoGame.getPayment());
     }
 
     private double getProfitRateWithDecimalPoints(Payments payments) {
