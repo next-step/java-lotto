@@ -2,6 +2,7 @@ package Lotto.UI;
 
 import Lotto.Game.LottoGame;
 import Lotto.GameResult.ExpectedGameResult;
+import Lotto.GameResult.Gain;
 import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
 import Lotto.Ticket.Prize;
@@ -30,24 +31,24 @@ public class ResultView {
         return lottoTicket.getValue().stream().mapToInt(LottoNumber::getValue).boxed().collect(Collectors.toList());
     }
 
-    public static void showNumberOfTicketsExpectedToWinPrize(ExpectedGameResult gameResult) {
+    public static void showNumberOfTicketsWinningPrize(ExpectedGameResult gameResult) {
         printTitle();
-        goToNewLine();
         drawLineOfDashes();
         showTicketsCountsForEachPrize(gameResult);
-
-        // TODO 수익률 도출
-
-        /*3개 일치 (5000원)- 1개
-            4개 일치 (50000원)- 0개
-            5개 일치 (1500000원)- 0개
-            6개 일치 (2000000000원)- 0개
-            총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)*/
     }
 
-    public static void showExpectedProfitRate(ExpectedGameResult gameResult) {
-        // double profitRate = gameResult.getProfitRate();
-        System.out.println("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임");
+    public static void showProfitRateAndGain(ExpectedGameResult gameResult) {
+        double profitRate = gameResult.getProfitRate();
+        showProfitRate(profitRate);
+        showGain(profitRate);
+    }
+
+    private static void showGain(double profitRate) {
+        System.out.println("(기준이 " + Gain.BREAK_EVEN_POINT_PROFIT_RATE + "이기 때문에 결과적으로 " + Gain.decideStatusByProfitRate(profitRate).getValue() + "라는 의미임)");
+    }
+
+    private static void showProfitRate(double profitRate) {
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 
     private static void printTitle() {
