@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Payments {
 
-    public static final int LOTTO_TICKET_RICE = 1000;
+    public static final int LOTTO_TICKET_PRICE = 1000;
     public static final int REMAINDER = 0;
     public static final int ZERO = 0;
     private final int payments;
@@ -26,7 +26,7 @@ public class Payments {
     }
 
     private void isMultipleOf1000(int payments) {
-        if (payments % LOTTO_TICKET_RICE != REMAINDER) {
+        if (payments % LOTTO_TICKET_PRICE != REMAINDER) {
             throw new IllegalArgumentException("구매 금액은 1000의 배수이어야 합니다.");
         }
     }
