@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 	@DisplayName(value = "로또 번호의 유효 범위가 1부터 45까지인지 테스트")
@@ -28,13 +26,5 @@ public class LottoTest {
 			.collect(Collectors.toList());
 
 		assertThat(expect).containsAll(lottoNumbers);
-	}
-
-	@DisplayName(value = "로또 번호의 유효 범위를 벗어나면 예외를 던짐")
-	@ValueSource(ints = {-1, 0, 46})
-	@ParameterizedTest
-	void notBetweenOneAndFortyFive(int value) {
-		assertThatThrownBy(() -> new Number(value))
-			.isInstanceOf(RuntimeException.class);
 	}
 }
