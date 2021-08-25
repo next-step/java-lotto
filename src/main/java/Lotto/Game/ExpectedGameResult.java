@@ -58,4 +58,9 @@ public class ExpectedGameResult {
 
         throw new IllegalArgumentException("존재 하지 않는 상금 타입입니다."); // TODO: enum 이라 필요 없을것 같은데 필요할까?
     }
+
+    public int getPrizeMoney() {
+        return firstPlaceCount * Prize.FIRST.getValue() + secondPlaceCount * Prize.SECOND.getValue()
+                + thirdPlaceCount * Prize.THIRD.getValue() + fourthPlaceCount * Prize.FOURTH.getValue();
+    }
 }

@@ -3,6 +3,7 @@ package Lotto.Game;
 import Lotto.Helper.Helper;
 import Lotto.Ticket.Prize;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,5 +31,12 @@ public class ExpectedGameResultTest {
     void createPlayResult(int ticketCounts, Prize prize) {
         ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
         assertThat(expectedGameResult.countTicketsWinningPrize(prize)).isEqualTo(ticketCounts);
+    }
+
+    @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
+    @Test
+    void getExpectedPrizeMoneyOfTheGame() {
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
+        assertThat(expectedGameResult.getPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 }
