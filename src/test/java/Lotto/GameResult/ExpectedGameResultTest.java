@@ -1,4 +1,4 @@
-package Lotto.Game;
+package Lotto.GameResult;
 
 import Lotto.Helper.Helper;
 import Lotto.Ticket.Prize;

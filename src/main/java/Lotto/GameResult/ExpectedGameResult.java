@@ -1,5 +1,7 @@
-package Lotto.Game;
+package Lotto.GameResult;
 
+import Lotto.Game.LottoGame;
+import Lotto.Game.Payments;
 import Lotto.Number.WinningNumbers;
 import Lotto.Ticket.Prize;
 

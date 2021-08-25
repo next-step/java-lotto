@@ -1,7 +1,7 @@
 package Lotto.UI;
 
-import Lotto.Game.ExpectedGameResult;
 import Lotto.Game.LottoGame;
+import Lotto.GameResult.ExpectedGameResult;
 import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
 import Lotto.Ticket.Prize;
