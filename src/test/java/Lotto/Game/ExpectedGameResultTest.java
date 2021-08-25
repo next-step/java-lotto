@@ -40,7 +40,7 @@ public class ExpectedGameResultTest {
     @Test
     void getExpectedPrizeMoneyOfTheGame() {
         ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
-        assertThat(expectedGameResult.getPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
+        assertThat(expectedGameResult.getTotalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 
     @DisplayName("등수가")
@@ -48,7 +48,7 @@ public class ExpectedGameResultTest {
     @MethodSource("provideTicketCountPerPrize")
     void createPlayResult(int ticketCounts, Prize prize) {
         ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
-        assertThat(expectedGameResult.countTicketsWinningPrize(prize)).isEqualTo(ticketCounts);
+        assertThat(expectedGameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
     }
 
     @DisplayName("로또 넘버별 수익률")

@@ -5,64 +5,32 @@ import Lotto.Ticket.LottoTicket;
 import Lotto.Ticket.LottoTickets;
 import Lotto.Ticket.Prize;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ExpectedGameResult {
     public static final int DECIMAL_POINTS_MAKER = 100;
-    private final int firstPlaceCount;
-    private final int secondPlaceCount;
-    private final int thirdPlaceCount;
-    private final int fourthPlaceCount;
-    private final int loserCount;
 
-    private final LottoTickets ticketsPuchasedThisWeek;
-    private final WinningNumbers winningNumbersOfLastWeek;
+    private final LottoTickets tickets;
+    private final WinningNumbers winningNumbers;
 
     public ExpectedGameResult(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
-        this.ticketsPuchasedThisWeek = new LottoTickets(lottoTickets);
-        this.winningNumbersOfLastWeek = new WinningNumbers(winningNumbers.getValue());
+        this.tickets = new LottoTickets(lottoTickets);
+        this.winningNumbers = new WinningNumbers(winningNumbers.getValue());
 
-        this.firstPlaceCount = getTicketCountsWinning(Prize.FIRST);
-        this.secondPlaceCount = getTicketCountsWinning(Prize.SECOND);
-        this.thirdPlaceCount = getTicketCountsWinning(Prize.THIRD);
-        this.fourthPlaceCount = getTicketCountsWinning(Prize.FOURTH);
-        this.loserCount = getTicketCountsWinning(Prize.LOSER);
     }
 
     private int getTicketCountsWinning(Prize prize) {
-        return (int) ticketsPuchasedThisWeek.getValue().stream()
-                .filter(ticket -> ticket.getPrize(winningNumbersOfLastWeek).equals(prize)).count();
+        return (int) tickets.getValue().stream()
+                .filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
     }
 
-    public int countTicketsWinningPrize(Prize prize) {
-        if (Prize.FIRST.equals(prize)) {
-            return firstPlaceCount;
-        }
-
-        if (Prize.SECOND.equals(prize)) {
-            return secondPlaceCount;
-        }
-
-        if (Prize.THIRD.equals(prize)) {
-            return thirdPlaceCount;
-        }
-
-
-        if (Prize.FOURTH.equals(prize)) {
-            return fourthPlaceCount;
-        }
-
-
-        if (Prize.LOSER.equals(prize)) {
-            return loserCount;
-        }
-
-        throw new IllegalArgumentException("존재 하지 않는 상금 타입입니다."); // TODO: enum 이라 필요 없을것 같은데 필요할까?
+    public int countTicketsWinning(Prize prize) {
+        return getTicketCountsWinning(prize);
     }
 
-    public int getPrizeMoney() {
-        return firstPlaceCount * Prize.FIRST.getValue() + secondPlaceCount * Prize.SECOND.getValue()
-                + thirdPlaceCount * Prize.THIRD.getValue() + fourthPlaceCount * Prize.FOURTH.getValue();
+    public int getTotalPrizeMoney() {
+        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getValue() * getTicketCountsWinning(prize)).sum();
     }
 
     public double getProfitRate(Payments payments) {
@@ -74,6 +42,6 @@ public class ExpectedGameResult {
     }
 
     private double dividePrizeMoneyByPayments(Payments payments) {
-        return this.getPrizeMoney() / (double) payments.getValue();
+        return this.getTotalPrizeMoney() / (double) payments.getValue();
     }
 }
