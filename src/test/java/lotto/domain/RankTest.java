@@ -18,11 +18,4 @@ class RankTest {
         assertThat(Rank.findRank(6, false)).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("등수에 없는 갯수는 exception 발생")
-    @Test
-    void findRank_error() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Rank.findRank(8, false));
-    }
-
 }
