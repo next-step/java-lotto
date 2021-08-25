@@ -1,6 +1,9 @@
 package step2.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import step2.model.Input;
 
 public class InputView {
 
@@ -9,17 +12,58 @@ public class InputView {
   private Scanner scanner = new Scanner(System.in);
 
   public int inputUserAmount() {
-    System.out.println("구입금액을 입력해 주세요.");
+    System.out.println("\n구입금액을 입력해 주세요.");
+    return scanner.nextInt();
+  }
+
+  public int inputUserManualLottoCount() {
+    System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
     return scanner.nextInt();
   }
 
   public String[] inputLottoWinningNumber() {
-    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     return scanner.next().split(COMMA);
   }
 
   public int inputLottoWinningBonusNumber() {
-    System.out.println("보너스 볼을 입력해 주세요.");
+    System.out.println("\n보너스 볼을 입력해 주세요.");
     return scanner.nextInt();
+  }
+
+  public List inputUserManualLottoNumbers(int userManualLottoCount) {
+    System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+
+    List lottoNumbers = new ArrayList();
+    for (int i = 0; i < userManualLottoCount; i++) {
+      String[] userLottoNumbers = scanner.next().split(COMMA);
+      lottoNumbers.add(getUserLottoNumbers(userLottoNumbers));
+    }
+
+    return lottoNumbers;
+  }
+
+  List<Integer> getUserLottoNumbers(String[] userLottoNumbers) {
+    List<Integer> userLottoNumberList = new ArrayList();
+    for (String userLottoNumber : userLottoNumbers) {
+      userLottoNumberList.add(Integer.parseInt(userLottoNumber));
+    }
+    return userLottoNumberList;
+  }
+
+  public Input getUserInput() {
+    int userAmount = inputUserAmount();
+    int userManualLottoCount = inputUserManualLottoCount();
+    List userManualLottoNumbers = inputUserManualLottoNumbers(userManualLottoCount);
+
+    return new Input(userAmount, userManualLottoCount, userManualLottoNumbers);
+  }
+
+  public void setUserWinningInput(Input userInput) {
+    String[] lottowinningNumbers = inputLottoWinningNumber();
+    int lottowinningBonusNumbers = inputLottoWinningBonusNumber();
+
+    userInput.setLottowinningNumbers(lottowinningNumbers);
+    userInput.setLottowinningBonusNumbers(lottowinningBonusNumbers);
   }
 }

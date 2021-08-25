@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.model.Input;
 import step2.model.Lotto;
 import step2.model.LottoWin;
 import step2.model.Lottos;
@@ -12,9 +13,11 @@ public class ResultView {
   private static final String COMMA = ",";
   private static final String BLANK_SPACE = " ";
 
-  public void printPurchasedLotto(Lottos lottos) {
+  public void printPurchasedLotto(Lottos lottos, Input userInput) {
 
-    System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
+    System.out.println(
+        "수동으로 " + userInput.getUserAmount() + "장, 자동으로 " + (lottos.getLottosSize() - userInput
+            .getUserManualLottoCount()) + "개를 구매했습니다.");
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       printLotto(lottos.getLotto(i));
@@ -37,7 +40,8 @@ public class ResultView {
     System.out.println(stringBuilder);
   }
 
-  public void printWinner(LottoWin lottoWin, int userAmount) {
+  public void printWinner(LottoWin lottoWin, Input userInput) {
+
     System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
@@ -48,7 +52,7 @@ public class ResultView {
       earningMoney += lottoWin.getWinnerCount(winnerMoney) * winnerMoney.getPrizeMoney();
     }
 
-    double earningsRate = earningMoney / userAmount;
+    double earningsRate = earningMoney / userInput.getUserAmount();
     System.out.println("총 수익률은 " + String.format("%.2f", earningsRate) + "입니다.");
   }
 

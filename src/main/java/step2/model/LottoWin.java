@@ -28,13 +28,12 @@ public class LottoWin {
   }
 
   public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
+    WinnerMoney winnerMoneyKey = winnerMoney;
     if (hasWinningBonusNumber) {
-      winnerCountMap.replace(WinnerMoney.SECOND_WINNER_MONEY,
-          winnerCountMap.get(winnerMoney) + 1);
-    } else {
-      winnerCountMap
-          .replace(winnerMoney, winnerCountMap.get(winnerMoney) + 1);
+      winnerMoneyKey = WinnerMoney.SECOND_WINNER_MONEY;
     }
+
+    winnerCountMap.replace(winnerMoneyKey, winnerCountMap.get(winnerMoney) + 1);
   }
 
   public int getWinnerCount(WinnerMoney winnerMoney) {
