@@ -8,6 +8,7 @@ import Lotto.Ticket.Prize;
 import java.util.List;
 
 public class ExpectedGameResult {
+    public static final int DECIMAL_POINTS_MAKER = 100;
     private final int firstPlaceCount;
     private final int secondPlaceCount;
     private final int thirdPlaceCount;
@@ -62,5 +63,17 @@ public class ExpectedGameResult {
     public int getPrizeMoney() {
         return firstPlaceCount * Prize.FIRST.getValue() + secondPlaceCount * Prize.SECOND.getValue()
                 + thirdPlaceCount * Prize.THIRD.getValue() + fourthPlaceCount * Prize.FOURTH.getValue();
+    }
+
+    public double getProfitRate(Payments payments) {
+        return getProfitRateWithDecimalPoints(payments);
+    }
+
+    private double getProfitRateWithDecimalPoints(Payments payments) {
+        return Math.round(dividePrizeMoneyByPayments(payments) * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
+    }
+
+    private double dividePrizeMoneyByPayments(Payments payments) {
+        return this.getPrizeMoney() / (double) payments.getValue();
     }
 }

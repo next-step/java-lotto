@@ -19,6 +19,10 @@ public class Helper {
         return Arrays.stream(lottoNumbersPerTicket).map(Helper::lottoTicket).collect(Collectors.toList());
     }
 
+    static public List<LottoTicket> lottoTickets(int[][] lottoNumbersPerTicket) {
+        return Arrays.stream(lottoNumbersPerTicket).map(Helper::lottoTicket).collect(Collectors.toList());
+    }
+
     static public LottoTicket lottoTicket(int... lottoNumbers) {
         return new LottoTicket(lottoNumbers(lottoNumbers));
     }

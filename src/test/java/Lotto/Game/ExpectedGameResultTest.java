@@ -15,6 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 게임 결과")
 public class ExpectedGameResultTest {
 
+    private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
+        int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        int[][] numbers2 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        int[][] numbers3 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        return Stream.of(
+                Arguments.of(numbers1, 0.83),
+                Arguments.of(numbers2, 1),
+                Arguments.of(numbers3, 1.25)
+        );
+    }
+
     private static Stream<Arguments> provideTicketCountPerPrize() {
         return Stream.of(
                 Arguments.of(1, Prize.FIRST),
@@ -25,6 +36,13 @@ public class ExpectedGameResultTest {
         );
     }
 
+    @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
+    @Test
+    void getExpectedPrizeMoneyOfTheGame() {
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
+        assertThat(expectedGameResult.getPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
+    }
+
     @DisplayName("등수가")
     @ParameterizedTest(name = "{1}인 티켓: {0}장.")
     @MethodSource("provideTicketCountPerPrize")
@@ -33,10 +51,12 @@ public class ExpectedGameResultTest {
         assertThat(expectedGameResult.countTicketsWinningPrize(prize)).isEqualTo(ticketCounts);
     }
 
-    @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
-    @Test
-    void getExpectedPrizeMoneyOfTheGame() {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(), Helper.winningNumbers());
-        assertThat(expectedGameResult.getPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
+    @DisplayName("로또 넘버별 수익률")
+    @ParameterizedTest(name = "로또 넘버{0}: 수익률은 {1}.")
+    @MethodSource("provideTicketNumbersWithProfitRate")
+    void getExpectedProfitRateOfLottoGame(int[][] lottoNumbers, double profitRate) {
+        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoTickets(lottoNumbers), Helper.winningNumbers());
+        Payments payments = new Payments(Payments.LOTTO_TICKET_PRICE * lottoNumbers.length);
+        assertThat(expectedGameResult.getProfitRate(payments)).isEqualTo(profitRate);
     }
 }
