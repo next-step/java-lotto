@@ -29,6 +29,7 @@ public class ResultView {
 
 	private static List<Integer> printPurchaseLottoNumbers(Lotto lotto) {
 		return lotto.getNumbers()
+			.getNumbers()
 			.stream()
 			.map(Number::getValue)
 			.sorted()
@@ -60,7 +61,7 @@ public class ResultView {
 		String outputWinningTypes = String.format(DEFAULT_WINNING_RESULT, numberOfMatch, winnings, numberOfDraw);
 
 		if (winningType == WinningType.SECOND) {
-			outputWinningTypes = String.format(BONUS_WINNING_RESULT, numberOfMatch, winnings,numberOfDraw);
+			outputWinningTypes = String.format(BONUS_WINNING_RESULT, numberOfMatch, winnings, numberOfDraw);
 		}
 
 		System.out.println(outputWinningTypes);

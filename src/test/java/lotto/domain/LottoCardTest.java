@@ -33,6 +33,7 @@ class LottoCardTest {
 		Lotto lotto = lottoCard.issue();
 
 		List<Integer> numbers = lotto.getNumbers()
+			.getNumbers()
 			.stream()
 			.map(Number::getValue)
 			.distinct()

@@ -21,6 +21,7 @@ public class LottoTest {
 		LottoCard lottoCard = LottoCard.getInstance();
 		Lotto lotto = lottoCard.issue();
 		List<Integer> lottoNumbers = lotto.getNumbers()
+			.getNumbers()
 			.stream()
 			.map(Number::getValue)
 			.collect(Collectors.toList());

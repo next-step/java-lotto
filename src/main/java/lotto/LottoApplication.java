@@ -6,6 +6,7 @@ import lotto.domain.Lottery;
 import lotto.domain.LotteryResults;
 import lotto.domain.Lottos;
 import lotto.domain.Number;
+import lotto.domain.Numbers;
 import lotto.domain.Wallet;
 import lotto.utils.StringUtils;
 import lotto.view.InputView;
@@ -26,7 +27,8 @@ public class LottoApplication {
 
 	private static void drawLotto(Lottos lottos) {
 		String strWinningNumbers = InputView.inputWinningNumbers();
-		List<Number> winningNumbers = StringUtils.convertToNumberList(strWinningNumbers);
+		List<Number> numbers = StringUtils.convertToNumberList(strWinningNumbers);
+		Numbers winningNumbers = new Numbers(numbers);
 		Number bonusNumber = new Number(InputView.inputBonusNumber());
 		Lottery lottery = new Lottery(winningNumbers, bonusNumber);
 		LotteryResults results = lottery.draw(lottos);

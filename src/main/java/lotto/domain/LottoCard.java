@@ -25,7 +25,8 @@ public class LottoCard {
 
 	public Lotto issue() {
 		Collections.shuffle(NUMBERS);
-		List<Number> numbers = new ArrayList<>(NUMBERS.subList(0, 6));
+		List<Number> lottoNumbers = new ArrayList<>(NUMBERS.subList(0, 6));
+		Numbers numbers = new Numbers(lottoNumbers);
 		return new Lotto(numbers);
 	}
 }
