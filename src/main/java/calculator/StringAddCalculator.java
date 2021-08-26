@@ -31,7 +31,8 @@ public class StringAddCalculator {
 
     private int sumValues(String[] input) {
         return Arrays.stream(input)
-            .mapToInt(Integer::parseInt)
+            .map(Number::new)
+            .mapToInt(Number::number)
             .sum();
     }
 

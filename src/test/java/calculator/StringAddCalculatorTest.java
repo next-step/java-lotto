@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -96,6 +97,19 @@ class StringAddCalculatorTest {
 
         // then
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("음수가 전달될 경우 RuntimeException이 발생해야 한다.")
+    void splitAndSumByNegativeNum() {
+
+        // given
+        String input = "-1,5";
+
+        // when & then
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> stringAddCalculator.splitAndSum(input))
+            .withMessageMatching("음수는 계산할 수 없다.");
     }
 
 }
