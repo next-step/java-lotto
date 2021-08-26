@@ -10,7 +10,7 @@ import lotto.domain.type.WinningType;
 
 public class LotteryResults {
 	private final static int PRICE_OF_LOTTO = 1000;
-	private List<LotteryResult> results;
+	private final List<LotteryResult> results;
 
 	public LotteryResults(List<LotteryResult> results) {
 		this.results = results;
@@ -22,7 +22,7 @@ public class LotteryResults {
 			.sum();
 		int purchaseAmount = results.size() * PRICE_OF_LOTTO;
 
-		return totalWinnings / (float) purchaseAmount;
+		return totalWinnings / (float)purchaseAmount;
 	}
 
 	public Map<WinningType, Integer> getDrawResult() {

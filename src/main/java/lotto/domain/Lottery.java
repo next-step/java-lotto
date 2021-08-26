@@ -14,9 +14,9 @@ public class Lottery {
 		this.winningNumbers = winningNumbers;
 	}
 
-	public void draw(List<Lotto> lottos) {
+	public void draw(Lottos lottos) {
 		List<LotteryResult> results = new ArrayList<>();
-		for (Lotto lotto : lottos) {
+		for (Lotto lotto : lottos.getLottos()) {
 			List<Integer> numbers = convertNumberValue(lotto.getNumbers());
 			numbers.retainAll(winningNumbers);
 			int matchNumber = numbers.size();
