@@ -9,7 +9,7 @@ public class StringAddCalculator {
         if (isNullOrBlank(input)) {
             return 0;
         }
-        return 100;
+        return Integer.parseInt(input);
     }
 
     private boolean isNullOrBlank(String input) {

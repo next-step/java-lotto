@@ -43,4 +43,19 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "3"})
+    @DisplayName("숫자 하나가 들어왔을 때 해당 숫자를 반환해야 한다.")
+    void splitAndSumBySingleNum(String input) {
+
+        // given
+        int num = Integer.parseInt(input);
+
+        // when
+        int result = stringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(result).isEqualTo(num);
+    }
+
 }
