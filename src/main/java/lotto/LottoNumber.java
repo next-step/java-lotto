@@ -9,7 +9,7 @@ public class LottoNumber {
 	private final int number;
 
 	public LottoNumber(int number) {
-		if(number < MIN || number > MAX) {
+		if (number < MIN || number > MAX) {
 			throw new IllegalArgumentException(INVALID_NUMBER_SCOPE);
 		}
 		this.number = number;
