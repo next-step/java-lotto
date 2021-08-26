@@ -13,7 +13,10 @@ class LottoCardTest {
 	@DisplayName(value = "로또 카드의 1 ~ 45 번호가 생성되는지 테스트")
 	@Test
 	void lottoCardNumbers() {
-		List<Integer> numbers = LottoCard.NUMBERS;
+		List<Integer> numbers = LottoCard.NUMBERS
+			.stream()
+			.map(Number::getValue)
+			.collect(Collectors.toList());
 
 		List<Integer> expect = new ArrayList<>();
 		for (int i = 1; i <= 45; i++) {
@@ -37,7 +40,10 @@ class LottoCardTest {
 		int numberOfDistinctNumbers = numbers.size();
 		assertThat(numberOfDistinctNumbers).isEqualTo(6);
 
-		List<Integer> lottoCardNumbers = LottoCard.NUMBERS;
+		List<Integer> lottoCardNumbers = LottoCard.NUMBERS
+			.stream()
+			.map(Number::getValue)
+			.collect(Collectors.toList());
 		assertThat(lottoCardNumbers).containsAll(numbers);
 	}
 }

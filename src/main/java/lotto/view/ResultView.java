@@ -30,6 +30,7 @@ public class ResultView {
 		return lotto.getNumbers()
 			.stream()
 			.map(Number::getValue)
+			.sorted()
 			.collect(Collectors.toList());
 	}
 
