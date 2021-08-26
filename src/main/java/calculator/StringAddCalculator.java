@@ -11,7 +11,7 @@ public class StringAddCalculator {
         if (isNullOrBlank(input)) {
             return 0;
         }
-        return sumValues(input.split(","));
+        return sumValues(input.split(",|;"));
     }
 
     private boolean isNullOrBlank(String input) {

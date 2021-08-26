@@ -62,7 +62,19 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2:3", "3,4:7"}, delimiter = ':')
     @DisplayName("숫자 두개를 쉼표(,)로 구분지은 경우 두 숫자의 합을 반환해야 한다.")
-    void splitAndSumByColumn(String input, int expected) {
+    void splitAndSumByComma(String input, int expected) {
+
+        // when
+        int result = stringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2;3:6", "4;5,6:15"}, delimiter = ':')
+    @DisplayName("숫자 두개 사이에 콜론(;)을 사용하여 구분할 경우도 두 숫자의 합을 반환해야 한다.")
+    void splitAndSumByColon(String input, int expected) {
 
         // when
         int result = stringAddCalculator.splitAndSum(input);
