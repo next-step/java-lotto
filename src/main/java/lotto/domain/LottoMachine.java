@@ -4,25 +4,36 @@ import java.util.List;
 
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
-    public static final int LOTTO_NUM_COUNT = 6;
+    public static final int NUMS_PER_LOTTO = 6;
     static final int LOTTO_MAX_NUM = 45;
-    private static final GenerateNumStrategy generateNumStrategy = new AutoGenerateStrategy(LOTTO_MAX_NUM);
+    private GenerateNumStrategy generateNumStrategy;
 
     private Money money;
+    private Lottos lottos;
 
-    LottoMachine(int money) {
+    LottoMachine(int money, GenerateNumStrategy generateNumStrategy) {
         this.money = new Money(money);
+        this.generateNumStrategy = generateNumStrategy;
+        this.lottos = generateLottos();
     }
 
-    LottoMachine() {
-        this.money = new Money(0);
+    LottoMachine(GenerateNumStrategy generateNumStrategy) {
+        this(0, generateNumStrategy);
+    }
+
+    LottoMachine(int money) {
+        this(money, new AutoGenerateStrategy());
     }
 
     int buyableLottos() {
         return money.buyableLottos(LOTTO_PRICE);
     }
 
-    List<Integer> generateNums(GenerateNumStrategy generateNumStrategy) {
-        return generateNumStrategy.generate();
+    Lottos generateLottos() {
+        return generateNumStrategy.generate(buyableLottos(), NUMS_PER_LOTTO);
+    }
+
+    List<Integer> countLottoPrize(List<Integer> winningNums) {
+        return lottos.checkLottoPrize(winningNums);
     }
 }
