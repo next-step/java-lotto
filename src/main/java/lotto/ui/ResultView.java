@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void shoowTicketsCounts(LottoGame lottoGame) {
+    public static void showTicketsCounts(LottoGame lottoGame) {
         System.out.println(lottoGame.getLottoTickets().size() + "개를 구매했습니다.");
     }
 

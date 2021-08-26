@@ -11,7 +11,7 @@ public class LottoGameMain {
     public static void main(String[] args) {
         final int price = InputView.askUserToPayForLottoTickets();
         LottoGame lottoGame = new LottoGame(price);
-        ResultView.shoowTicketsCounts(lottoGame);
+        ResultView.showTicketsCounts(lottoGame);
         ResultView.showEachTicketsLottoNumbers(lottoGame);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.getWinningNumbersOfLastWeek());
