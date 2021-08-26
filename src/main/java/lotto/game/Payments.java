@@ -15,8 +15,8 @@ public class Payments {
     }
 
     private void isValid(int payments) {
-        isMultipleOf1000(payments);
         isPositive(payments);
+        isMultipleOf1000(payments);
     }
 
     private void isPositive(int payments) {
