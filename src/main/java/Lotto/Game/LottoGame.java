@@ -20,7 +20,9 @@ public class LottoGame {
     }
 
     private List<LottoTicket> createLottoTickets(int totalNumberOfTickets) {
-        return IntStream.range(0, totalNumberOfTickets).mapToObj(i -> new LottoTicket(RandomNumbers.generate())).collect(Collectors.toList());
+        return IntStream.range(0, totalNumberOfTickets)
+                .mapToObj(i -> new LottoTicket(RandomNumbers.generate()))
+                .collect(Collectors.toList());
     }
 
     private int calculateTicketsCount(int payments) {

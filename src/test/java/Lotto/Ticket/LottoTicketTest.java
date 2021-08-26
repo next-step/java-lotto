@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("로또 티켓은 ")
 public class LottoTicketTest {
@@ -18,7 +17,7 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓은 6개의 숫자로 초기화된다.")
     @Test
     void createLottoTicket() {
-        assertDoesNotThrow(() -> Helper.lottoTicket(1, 2, 3, 4, 5, 6));
+        assertThat(Helper.lottoTicket(1, 2, 3, 4, 5, 6).getValue().size()).isEqualTo(6);
     }
 
     private static Stream<Arguments> provideLottoTicketWithItsPrize() {

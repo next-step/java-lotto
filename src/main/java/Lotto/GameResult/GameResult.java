@@ -7,24 +7,28 @@ import Lotto.Ticket.Prize;
 
 import java.util.Arrays;
 
-public class ExpectedGameResult {
+public class GameResult {
     public static final int DECIMAL_POINTS_MAKER = 100;
 
     private final LottoGame lottoGame;
     private final WinningNumbers winningNumbers;
 
-    public ExpectedGameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
+    public GameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
         this.lottoGame = lottoGame;
         this.winningNumbers = new WinningNumbers(winningNumbers.getValue());
 
     }
 
     public int countTicketsWinning(Prize prize) {
-        return (int) lottoGame.getLottoTickets().stream().filter(ticket -> ticket.getPrize(winningNumbers).equals(prize)).count();
+        return (int) lottoGame.getLottoTickets().stream()
+                .filter(ticket -> ticket.getPrize(winningNumbers).equals(prize))
+                .count();
     }
 
     public int getTotalPrizeMoney() {
-        return Arrays.stream(Prize.values()).mapToInt(prize -> prize.getPrizeMoney() * countTicketsWinning(prize)).sum();
+        return Arrays.stream(Prize.values())
+                .mapToInt(prize -> prize.getPrizeMoney() * countTicketsWinning(prize))
+                .sum();
     }
 
     public double getProfitRate() {

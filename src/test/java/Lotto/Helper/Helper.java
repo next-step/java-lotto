@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 public class Helper {
 
-    final static private int[] winningNumbers = {1, 2, 3, 4, 5, 6};
-    final static private int[][] lottoNumbersPerTicket = {{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 7}, {1, 2, 3, 4, 8, 7}, {1, 2, 3, 9, 8, 7}, {12, 11, 10, 9, 8, 7}};
-    final static private int payment = getPayments(lottoNumbersPerTicket);
+    private static final int[] winningNumbers = {1, 2, 3, 4, 5, 6};
+    private static final int[][] lottoNumbersPerTicket = {{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 7}, {1, 2, 3, 4, 8, 7}, {1, 2, 3, 9, 8, 7}, {12, 11, 10, 9, 8, 7}};
+    private static final int payment = getPayments(lottoNumbersPerTicket);
 
     static public LottoGame lottoGame() {
         return new LottoGame(payment) {

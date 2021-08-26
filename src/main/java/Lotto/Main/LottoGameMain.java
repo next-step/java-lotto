@@ -1,7 +1,7 @@
 package Lotto.Main;
 
 import Lotto.Game.LottoGame;
-import Lotto.GameResult.ExpectedGameResult;
+import Lotto.GameResult.GameResult;
 import Lotto.Number.WinningNumbers;
 import Lotto.UI.InputView;
 import Lotto.UI.ResultView;
@@ -15,7 +15,7 @@ public class LottoGameMain {
         ResultView.showEachTicketsLottoNumbers(lottoGame);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.getWinningNumbersOfLastWeek());
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(lottoGame, winningNumbers);
+        GameResult expectedGameResult = new GameResult(lottoGame, winningNumbers);
         ResultView.showNumberOfTicketsWinningPrize(expectedGameResult);
         ResultView.showProfitRateAndGain(expectedGameResult);
     }

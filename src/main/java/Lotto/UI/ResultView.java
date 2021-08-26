@@ -1,8 +1,8 @@
 package Lotto.UI;
 
 import Lotto.Game.LottoGame;
-import Lotto.GameResult.ExpectedGameResult;
 import Lotto.GameResult.Gain;
+import Lotto.GameResult.GameResult;
 import Lotto.Number.LottoNumber;
 import Lotto.Ticket.LottoTicket;
 import Lotto.Ticket.Prize;
@@ -32,13 +32,13 @@ public class ResultView {
         return lottoTicket.getValue().stream().mapToInt(LottoNumber::getValue).boxed().collect(Collectors.toList());
     }
 
-    public static void showNumberOfTicketsWinningPrize(ExpectedGameResult gameResult) {
+    public static void showNumberOfTicketsWinningPrize(GameResult gameResult) {
         printTitle();
         drawLineOfDashes();
         showTicketsCountsForEachPrize(gameResult);
     }
 
-    public static void showProfitRateAndGain(ExpectedGameResult gameResult) {
+    public static void showProfitRateAndGain(GameResult gameResult) {
         double profitRate = gameResult.getProfitRate();
         showProfitRate(profitRate);
         showGain(profitRate);
@@ -60,7 +60,7 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    private static void showTicketsCountsForEachPrize(ExpectedGameResult gameResult) {
+    private static void showTicketsCountsForEachPrize(GameResult gameResult) {
         Arrays.stream(Prize.values())
                 .filter(pickPrizesExceptLoser())
                 .forEach(prize -> showTicketCountsForGivenPrize(gameResult, prize));
@@ -70,7 +70,7 @@ public class ResultView {
         return prize -> !prize.equals(Prize.LOSER);
     }
 
-    private static void showTicketCountsForGivenPrize(ExpectedGameResult gameResult, Prize prize) {
+    private static void showTicketCountsForGivenPrize(GameResult gameResult, Prize prize) {
         showMatchingNumbers(prize);
         showPrizeMoney(prize);
         showNumberOfTickets(gameResult, prize);
@@ -85,7 +85,7 @@ public class ResultView {
         System.out.print("(" + prize.getPrizeMoney() + "원)");
     }
 
-    private static void showNumberOfTickets(ExpectedGameResult gameResult, Prize prize) {
+    private static void showNumberOfTickets(GameResult gameResult, Prize prize) {
         System.out.print("- " + gameResult.countTicketsWinning(prize) + "개");
     }
 

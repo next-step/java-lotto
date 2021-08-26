@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 게임 결과")
-public class ExpectedGameResultTest {
+public class GameResultTest {
 
     private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
         int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
@@ -39,23 +39,23 @@ public class ExpectedGameResultTest {
     @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
     @Test
     void getExpectedPrizeMoneyOfTheGame() {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(), Helper.winningNumbers());
-        assertThat(expectedGameResult.getTotalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
+        GameResult gameResult = new GameResult(Helper.lottoGame(), Helper.winningNumbers());
+        assertThat(gameResult.getTotalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 
     @DisplayName("등수가")
     @ParameterizedTest(name = "{1}인 티켓: {0}장.")
     @MethodSource("provideTicketCountPerPrize")
     void createPlayResult(int ticketCounts, Prize prize) {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(), Helper.winningNumbers());
-        assertThat(expectedGameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
+        GameResult gameResult = new GameResult(Helper.lottoGame(), Helper.winningNumbers());
+        assertThat(gameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
     }
 
     @DisplayName("로또 넘버별 수익률")
     @ParameterizedTest(name = "로또 넘버{0}: 수익률은 {1}.")
     @MethodSource("provideTicketNumbersWithProfitRate")
     void getExpectedProfitRateOfLottoGame(int[][] lottoNumbers, double profitRate) {
-        ExpectedGameResult expectedGameResult = new ExpectedGameResult(Helper.lottoGame(lottoNumbers), Helper.winningNumbers());
-        assertThat(expectedGameResult.getProfitRate()).isEqualTo(profitRate);
+        GameResult gameResult = new GameResult(Helper.lottoGame(lottoNumbers), Helper.winningNumbers());
+        assertThat(gameResult.getProfitRate()).isEqualTo(profitRate);
     }
 }

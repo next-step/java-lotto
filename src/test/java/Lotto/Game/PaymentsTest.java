@@ -15,8 +15,8 @@ public class PaymentsTest {
     @DisplayName("1000의 배수로 초기화 된다.")
     @Test
     void mustBeMultipleOf1000() {
-        Payments payments = new Payments(LottoTicket.PRICE);
-        assertThat(payments).isInstanceOf(Payments.class);
+        Payments payments = new Payments(5000);
+        assertThat(payments.getValue() % LottoTicket.PRICE).isEqualTo(0);
     }
 
 
