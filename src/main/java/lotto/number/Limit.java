@@ -1,8 +1,8 @@
 package lotto.number;
 
 public enum Limit {
-    MAX(Constants.MAX),
-    MIN(Constants.MIN);
+    MAX(45),
+    MIN(1);
     private final int limit;
 
     Limit(int number) {
@@ -19,10 +19,5 @@ public enum Limit {
 
     public boolean isAbove(int lottoNumber) {
         return limit > lottoNumber;
-    }
-
-    private static class Constants {
-        public static final int MAX = 45;
-        public static final int MIN = 1;
     }
 }
