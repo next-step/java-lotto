@@ -4,7 +4,6 @@ import java.util.*;
 
 public class AutoGenerateStrategy implements GenerateNumStrategy {
     public final static int NUMS_PER_LOTTO = 6;
-//    private final static int LOTTO_MAX_NUM = 45;
     private final List<Integer> selectableNums;
 
     AutoGenerateStrategy() {
@@ -16,17 +15,6 @@ public class AutoGenerateStrategy implements GenerateNumStrategy {
 
         selectableNums = numList;
     }
-
-//    public List<Integer> generate(int lottoTotalNum) {
-//        List<Integer> generated = new ArrayList<>(NUMS_PER_LOTTO);
-//        Collections.shuffle(selectableNums);
-//
-//        for (int i = 0; i < NUMS_PER_LOTTO; i++) {
-//            generated.add(selectableNums.get(i));
-//        }
-//
-//        return generated;
-//    }
 
     public Lottos generate(int totalLottosNum, int numsPerLotto) {
         Integer[][] lottoArray = new Integer[totalLottosNum][numsPerLotto];

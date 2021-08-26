@@ -33,7 +33,7 @@ public class LottoMachine {
         return generateNumStrategy.generate(buyableLottos(), NUMS_PER_LOTTO);
     }
 
-    List<Integer> countLottoPrize(List<Integer> winningNums) {
+    WinningResult countLottoPrize(List<Integer> winningNums) {
         return lottos.checkLottoPrize(winningNums);
     }
 }

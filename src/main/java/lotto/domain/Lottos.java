@@ -13,7 +13,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Integer> checkLottoPrize(List<Integer> winningNums) {
+    public WinningResult checkLottoPrize(List<Integer> winningNums) {
         Integer[] prizeNums = new Integer[GRADE_NUM];
         Arrays.fill(prizeNums, 0);
 
@@ -21,7 +21,7 @@ public class Lottos {
             checkPrize(prizeNums, lotto, winningNums);
         }
 
-        return new ArrayList<Integer>(Arrays.asList(prizeNums));
+        return new WinningResult(Arrays.asList(prizeNums));
     }
 
     private void checkPrize(Integer[] prizeNums, Lotto lotto, List<Integer> winningNums) {
