@@ -72,8 +72,8 @@ class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2;3:6", "4;5,6:15"}, delimiter = ':')
-    @DisplayName("숫자 두개 사이에 콜론(;)을 사용하여 구분할 경우도 두 숫자의 합을 반환해야 한다.")
+    @CsvSource(value = {"1,2:3=6", "4:5,6=15"}, delimiter = '=')
+    @DisplayName("숫자 두개 사이에 콜론(:)을 사용하여 구분할 경우도 두 숫자의 합을 반환해야 한다.")
     void splitAndSumByColon(String input, int expected) {
 
         // when
