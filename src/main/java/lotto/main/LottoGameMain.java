@@ -16,7 +16,6 @@ public class LottoGameMain {
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.getWinningNumbersOfLastWeek());
         GameResult expectedGameResult = new GameResult(lottoGame, winningNumbers);
-        ResultView.showNumberOfTicketsWinningPrize(expectedGameResult);
-        ResultView.showProfitRateAndGain(expectedGameResult);
+        ResultView.showWinningRateReport(expectedGameResult);
     }
 }
