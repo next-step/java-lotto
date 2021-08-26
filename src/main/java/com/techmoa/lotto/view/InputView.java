@@ -6,21 +6,23 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
     private static int purchaseAmount = 0;
     private static LottoAnswer lottoAnswer = null;
 
-    public void enterPurchaseAmount() {
+    public static void enterPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요");
-        if(scanner.hasNextLine())
+        Scanner scanner = new Scanner(System.in);
+        if(scanner.hasNextInt())
             purchaseAmount = scanner.nextInt();
-
     }
 
-    public void enterLastWinnerNumber() {
+    public static void enterLastWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요");
-        if(scanner.hasNextLine())
-            lottoAnswer = new LottoAnswer(scanner.nextLine());
+        Scanner scanner = new Scanner(System.in);
+        if(scanner.hasNextLine()) {
+            String winString = scanner.nextLine();
+            lottoAnswer = new LottoAnswer(winString);
+        }
     }
 
     public int getPurchaseAmount() {
