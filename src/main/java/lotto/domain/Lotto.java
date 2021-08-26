@@ -1,16 +1,21 @@
 package lotto.domain;
 
+import lotto.util.RandomUtil;
+
+import java.util.List;
+
 public class Lotto {
 
     private static final int DEFAULT_LOTTO_SIZE = 6;
     private final Numbers numbers;
 
     public Lotto() {
-        numbers = Numbers.createRandomNumbers();
+        List<Integer> randomDatas = RandomUtil.getRandomInteger(DEFAULT_LOTTO_SIZE);
+        numbers = Numbers.createNumbers(randomDatas);
     }
 
-    public boolean isCreate() {
-        return numbers.size() == DEFAULT_LOTTO_SIZE;
+    public Numbers find() {
+        return this.numbers;
     }
 
     public Rank match(Numbers winnerNumbers, Numbers bonusNumbers) {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.RandomUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,14 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NumbersTest {
 
     private static final String DELIMITER = ",";
-    private static final int DEFAULT_NUMBER_SIZE = 6;
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6", "2,3,4,5,6,7", "4,5,6,7,8,9"})
-    void size(String data) {
-        Numbers numbers = new Numbers(getNumbers(data));
-        assertThat(numbers.size()).isEqualTo(6);
-    }
 
     @DisplayName("당첨 번호와 일치하는 갯수 확인")
     @ParameterizedTest
@@ -34,10 +27,12 @@ class NumbersTest {
         assertThat(numbers.match(other)).isEqualTo(expectedMatchCount);
     }
 
-    @DisplayName("6개의 랜덤Number 생성 확인")
-    @Test
-    void createRandomNumbers() {
-        assertThat(Numbers.createRandomNumbers().size()).isEqualTo(DEFAULT_NUMBER_SIZE);
+    @DisplayName("size만큼의 랜덤Number 생성 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {6, 7, 9})
+    void createRandomNumbers(int size) {
+        Numbers numbers = Numbers.createNumbers(RandomUtil.getRandomInteger(size));
+        assertThat(numbers.size()).isEqualTo(size);
     }
 
     private List<Number> getNumbers(String numbers) {

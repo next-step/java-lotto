@@ -24,11 +24,10 @@ public class Lottos {
     }
 
     public Map<Rank, Integer> findRanks(Numbers winnerNumbers, Numbers bonusNumbers) {
-        Map<Rank, Integer> rankInfos = Rank.makeWinnerRank();
+        Map<Rank, Integer> rankInfos = Rank.makeEmptyRankMap();
         for (Lotto lotto : lottos) {
             Rank rankInfo = lotto.match(winnerNumbers, bonusNumbers);
-            Integer currentCount = rankInfos.get(rankInfo);
-            rankInfos.put(rankInfo, currentCount + ADD_COUNT);
+            rankInfos.compute(rankInfo, (rank, count) -> count + 1);
         }
         return rankInfos;
     }

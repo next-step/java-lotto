@@ -10,12 +10,12 @@ public class Number implements Comparable<Number> {
         this.data = number;
     }
 
-    public boolean isBiggerThan(Number other) {
-        return this.data > other.data;
-    }
-
     public int data() {
         return this.data;
+    }
+
+    public boolean isBiggerThan(Number other) {
+        return this.data > other.data;
     }
 
     @Override

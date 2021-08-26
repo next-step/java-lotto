@@ -1,13 +1,12 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Map;
+import java.util.List;
 
 public class LottoController {
     private final InputView inputView;
@@ -30,29 +29,12 @@ public class LottoController {
         return lottos;
     }
 
-    public int inputPurchaseAmount() {
-        return inputView.inputPurchaseAmount();
+    public List<Lotto> findLottos(Lottos lottos) {
+        return lottos.findAll();
     }
 
-    public void printLottos(Lottos lottos) {
-        resultView.printLottos(lottos.findAll());
-    }
-
-    public Numbers inputWinnerNumbers() {
-        return new Numbers(inputView.inputWinnerNumbers());
-    }
-
-    public void printRanks(Map<Rank, Integer> rankInfo) {
-        resultView.printWinners(rankInfo);
-    }
-
-    public void printProfitRate(Lottos lottos, Map<Rank, Integer> rankInfo) {
-        int lottoSize = lottos.findAll().size();
-        resultView.printProfitRate(lottoSize, rankInfo);
-    }
-
-    public Numbers inputBonusNumbers() {
-        return new Numbers(inputView.inputBonusNumber());
+    public int findLottoSize(Lottos lottos) {
+        return lottos.findAll().size();
     }
 
 }

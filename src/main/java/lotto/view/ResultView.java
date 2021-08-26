@@ -17,6 +17,13 @@ public class ResultView {
     private static final String EXCEPTION_MESSAGE = "구매 금액이 올바른 값이 아닙니다.(현재 금액에서 구매가능한 %s개만 구매합니다.)%n)";
     private static final int PURCHASE_AMOUNT_UNIT = 1000;
 
+    private static final String RANK_FIRST_DESCRIPTION = "6개 일치";
+    private static final String RANK_SECOND_DESCRIPTION = "5개 일치, 보너스 볼 일치";
+    private static final String RANK_THIRD_DESCRIPTION = "5개 일치";
+    private static final String RANK_FOURTH_DESCRIPTION = "4개 일치";
+    private static final String RANK_FIFTH_DESCRIPTION = "3개 일치";
+    private static final String RANK_NONE_DESCRIPTION = "0개 일치";
+
     public static synchronized ResultView getInstance() {
         if (RESULT_VIEW == null) {
             return new ResultView();
@@ -38,7 +45,7 @@ public class ResultView {
         winnersInfo.keySet().stream()
                 .sorted()
                 .forEach(winner -> {
-                    out.printf(PRINT_WINNER_FORM, winner.getDescription(), winner.getCash(), winnersInfo.get(winner));
+                    out.printf(PRINT_WINNER_FORM, getDescription(winner), winner.getCash(), winnersInfo.get(winner));
                 });
     }
 
@@ -52,6 +59,26 @@ public class ResultView {
 
     public void printReInputMessage(int purchaseAmount) {
         out.printf(EXCEPTION_MESSAGE, purchaseAmount);
+    }
+
+    private String getDescription(Rank rank) {
+        if(rank == Rank.FIRST) {
+            return RANK_FIRST_DESCRIPTION;
+        }
+        if(rank == Rank.SECOND) {
+            return RANK_SECOND_DESCRIPTION;
+        }
+        if(rank == Rank.THIRD) {
+            return RANK_THIRD_DESCRIPTION;
+        }
+        if(rank == Rank.FOURTH) {
+            return RANK_FOURTH_DESCRIPTION;
+        }
+        if(rank == Rank.FIFTH) {
+            return RANK_FIFTH_DESCRIPTION;
+        }
+
+        return RANK_NONE_DESCRIPTION;
     }
 
 }

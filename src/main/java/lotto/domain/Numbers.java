@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.RandomUtil;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class Numbers {
 
-    private static final int MAX_SIZE = 6;
     private List<Number> numbers = new ArrayList<>();
 
     public int size() {
@@ -22,23 +19,34 @@ public class Numbers {
                 .count();
     }
 
-    public boolean match(Numbers other, Numbers bonus) {
-        return numbers.stream()
-                .anyMatch(number -> !other.numbers.contains(number) && bonus.numbers.contains(number));
+    public boolean contains(Number number) {
+        return this.numbers.contains(number);
     }
 
-    public static Numbers createRandomNumbers() {
-        List<Number> numberList = RandomUtil.getRandomInteger(MAX_SIZE)
-                .stream()
+    public boolean match(Numbers other, Numbers bonus) {
+        for (Number number : numbers) {
+            if (!other.contains(number) && bonus.contains(number)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static Numbers createNumbers(List<Integer> datas) {
+        List<Number> numberList = datas.stream()
                 .map(Number::new)
                 .collect(Collectors.toList());
-
         return new Numbers(numberList);
     }
 
     public Numbers(List<Number> numberList) {
-        Collections.sort(numberList);
         numbers.addAll(numberList);
+        sort();
+    }
+
+    private void sort() {
+        Collections.sort(numbers);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class InputView {
     private static final String RESULT_PURCHASE_AMOUNT = "%s개를 구매했습니다.%n";
     private static final String INPUT_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final int CASH_UNIT = 1000;
 
     public static synchronized InputView getInstance() {
         if (INPUT_VIEW == null) {
@@ -35,7 +36,7 @@ public class InputView {
         String input = scanner.next();
         int purchaseAmount = Integer.parseInt(input);
 
-        out.printf(RESULT_PURCHASE_AMOUNT, purchaseAmount / 1000);
+        out.printf(RESULT_PURCHASE_AMOUNT, purchaseAmount / CASH_UNIT);
         return purchaseAmount;
     }
 
