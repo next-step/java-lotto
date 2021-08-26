@@ -36,4 +36,10 @@ public class LottoMachine {
     WinningResult countLottoPrize(List<Integer> winningNums) {
         return lottos.checkLottoPrize(winningNums);
     }
+
+    public int totalPrizeMoney(List<Integer> winningNums) {
+        WinningResult winningResult = countLottoPrize(winningNums);
+
+        return winningResult.totalPrizeMoney();
+    }
 }

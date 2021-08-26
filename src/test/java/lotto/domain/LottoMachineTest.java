@@ -101,9 +101,19 @@ public class LottoMachineTest {
         );
     }
 
-//    @ParameterizedTest
-//    @MethodSource("provideLottosAndWinningNums")
-//    void totalPrizeMoney_총_상금_계산() {
-//
-//    }
+    @ParameterizedTest
+    @MethodSource("provideLottosAndWinningNums")
+    void totalPrizeMoney_총_상금_계산(List<Lotto> lottoList, List<Integer> winningNums) {
+        Lottos lottos = new Lottos(lottoList);
+
+        LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
+            @Override
+            public Lottos generate(int totalLottoNum, int numsPerLotto) {
+                return lottos;
+            }
+        });
+//        WinningResult winningResult = lottoMachine.countLottoPrize(winningNums);
+
+        assertThat(lottoMachine.totalPrizeMoney(winningNums)).isEqualTo(65000);
+    }
 }
