@@ -22,5 +22,5 @@
 
 - 문자열 계산기에 숫자 이외의 값 혹은 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
 
-    - [ ] 숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw한다.
-    - [ ] 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
+    - [x] 숫자 이외의 값을 전달하는 경우 RuntimeException 예외를 throw한다.
+    - [x] 음수를 전달하는 경우 RuntimeException 예외를 throw한다.

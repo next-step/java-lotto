@@ -108,8 +108,17 @@ class StringAddCalculatorTest {
 
         // when & then
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> stringAddCalculator.splitAndSum(input))
-            .withMessageMatching("음수는 계산할 수 없다.");
+            .isThrownBy(() -> stringAddCalculator.splitAndSum(input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a,2", "b,2", "*,1"})
+    @DisplayName("숫자가 아닌 문자가 전달될 경우 RuntimeException이 발생해야 한다.")
+    void splitAndSumByNotNum(String input) {
+
+        // when & then
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> stringAddCalculator.splitAndSum(input));
     }
 
 }
