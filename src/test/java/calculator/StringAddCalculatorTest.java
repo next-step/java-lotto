@@ -83,4 +83,19 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자를 사용하여 구분할 경우도 두 숫자의 합을 반환해야 한다.")
+    void splitAndSumByCustomSeparator() {
+
+        // given
+        String input = "//;\n1;2;3";
+        int expected = 6;
+
+        // when
+        int result = stringAddCalculator.splitAndSum(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
