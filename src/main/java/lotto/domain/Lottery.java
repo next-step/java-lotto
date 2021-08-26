@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import lotto.domain.type.WinningType;
 
 public class Lottery {
-	private final List<Integer> winningNumbers;
-	private final int bonusNumber;
+	private final List<Number> winningNumbers;
+	private final Number bonusNumber;
 
-	public Lottery(List<Integer> winningNumbers, int bonusNumber) {
+	public Lottery(List<Number> winningNumbers, Number bonusNumber) {
 		this.winningNumbers = winningNumbers;
 		this.bonusNumber = bonusNumber;
 	}
@@ -25,10 +25,15 @@ public class Lottery {
 	}
 
 	private WinningType getDrawResult(List<Number> lottoNumbers) {
+		int bonusNumberValue = bonusNumber.getValue();
+		List<Integer> winningNumberValues = winningNumbers.stream()
+			.map(Number::getValue)
+			.collect(Collectors.toList());
+
 		List<Integer> numbers = convertNumberValue(lottoNumbers);
-		numbers.retainAll(winningNumbers);
+		boolean matchBonus = numbers.contains(bonusNumberValue);
+		numbers.retainAll(winningNumberValues);
 		int matchNumber = numbers.size();
-		boolean matchBonus = numbers.contains(bonusNumber);
 		return WinningType.getWinningType(matchNumber, matchBonus);
 	}
 

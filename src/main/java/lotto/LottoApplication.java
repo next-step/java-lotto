@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.domain.Lottery;
 import lotto.domain.LotteryResults;
 import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.domain.Wallet;
 import lotto.utils.StringUtils;
 import lotto.view.InputView;
@@ -25,8 +26,8 @@ public class LottoApplication {
 
 	private static void drawLotto(Lottos lottos) {
 		String strWinningNumbers = InputView.inputWinningNumbers();
-		List<Integer> winningNumbers = StringUtils.convertToNumberList(strWinningNumbers);
-		int bonusNumber = InputView.inputBonusNumber();
+		List<Number> winningNumbers = StringUtils.convertToNumberList(strWinningNumbers);
+		Number bonusNumber = new Number(InputView.inputBonusNumber());
 		Lottery lottery = new Lottery(winningNumbers, bonusNumber);
 		LotteryResults results = lottery.draw(lottos);
 		ResultView.outputWinningStatistics(results);

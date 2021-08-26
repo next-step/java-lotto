@@ -24,7 +24,7 @@ public enum WinningType {
 			.findFirst()
 			.orElse(MISMATCH);
 
-		if (winningType.numberOfMatch == SECOND.numberOfMatch && !matchBonus) {
+		if (winningType == SECOND && !matchBonus) {
 			return THIRD;
 		}
 
