@@ -105,16 +105,61 @@
       - 일치하는 번호 개수에 따른 상금을 나타내는 enumeration
    3. TicketMachine : 복권 기계
       - 복권 생성 및 TicketRepository 를 이용한 저장
-      - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
    4. TicketRepository
       - 복권 저장
       - 복권 조회
-   5. AutoNumbersMaker implements TicketMaker
+   5. WinningCheckMachine : 당첨 확인 기계
+      - 당첨 결과를 산출하여 WinningResultForm 형태로 반환
+   6. AutoNumbersMaker implements TicketMaker
       - 자동 번호 리스트 생성
-   6. CustomNumbersMaker implements TicketMaker
+   7. CustomNumbersMaker implements TicketMaker
       - 입력한 번호 리스트 생성
-   
    
 2. form
    1. WinningResultForm
       - 당첨 결과가 정리된 양식
+
+--------
+
+## 3단계 - 로또(2등)
+### 기능 요구사항
+- 2등을 위해 추가 번호를 하나 더 추첨한다.
+- 당첨 통계에 2등도 추가해야 
+```
+[... 생략 ...]
+
+지난 주 당첨 번호를 입력해 주세요.
+1, 2, 3, 4, 5, 6
+보너스 볼을 입력해 주세요.
+7
+
+당첨 통계
+---------
+3개 일치 (5000원)- 1개
+4개 일치 (50000원)- 0개
+5개 일치 (1500000원)- 0개
+5개 일치, 보너스 볼 일치(30000000원) - 0개
+6개 일치 (2000000000원)- 0개
+총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
+```
+
+### 기능 목록
+1. domain
+   1. Ticket 
+      - 로또 번호 리스트를 가진 일급 컬렉션
+   2. Prize(enum) : 상금
+      - 보너스 번호 추가에 따른 등수 추가
+      - 보너스 번호 식별 가능한 정적 팩토리
+   3. Tickets : 6개 Ticket에 대한 일급 컬렉션
+      - 지불 금액에 대한 tickets 생성
+      - 당첨 결과 계산
+   4. BonusNumber : 보너스 볼 패킹 클래스
+   5. Payment : payment 패킹 클래스
+   6. AutoNumbersMaker implements TicketMaker
+      - 랜덤 번호 생성기(전략 패턴)
+   7. CustomNumbersMaker implements TicketMaker
+      - 주어진 번호 생성기(전략 패턴)
+   
+2. utils
+   1. Calculator
+      - rateOfReturn 계산
