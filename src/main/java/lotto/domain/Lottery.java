@@ -8,33 +8,33 @@ import lotto.domain.type.WinningType;
 
 public class Lottery {
 	private final List<Integer> winningNumbers;
-	private LotteryResults lotteryResults;
+	private final int bonusNumber;
 
-	public Lottery(List<Integer> winningNumbers) {
+	public Lottery(List<Integer> winningNumbers, int bonusNumber) {
 		this.winningNumbers = winningNumbers;
+		this.bonusNumber = bonusNumber;
 	}
 
-	public void draw(Lottos lottos) {
+	public LotteryResults draw(Lottos lottos) {
 		List<LotteryResult> results = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {
-			List<Integer> numbers = convertNumberValue(lotto.getNumbers());
-			numbers.retainAll(winningNumbers);
-			int matchNumber = numbers.size();
-
-			WinningType winningType = WinningType.getWinningType(matchNumber);
+			WinningType winningType = getDrawResult(lotto.getNumbers());
 			results.add(new LotteryResult(winningType));
 		}
+		return new LotteryResults(results);
+	}
 
-		lotteryResults = new LotteryResults(results);
+	private WinningType getDrawResult(List<Number> lottoNumbers) {
+		List<Integer> numbers = convertNumberValue(lottoNumbers);
+		numbers.retainAll(winningNumbers);
+		int matchNumber = numbers.size();
+		boolean matchBonus = numbers.contains(bonusNumber);
+		return WinningType.getWinningType(matchNumber, matchBonus);
 	}
 
 	private List<Integer> convertNumberValue(List<Number> numbers) {
 		return numbers.stream()
 			.map(Number::getValue)
 			.collect(Collectors.toList());
-	}
-
-	public LotteryResults getLotteryResults() {
-		return lotteryResults;
 	}
 }

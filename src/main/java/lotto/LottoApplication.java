@@ -26,9 +26,9 @@ public class LottoApplication {
 	private static void drawLotto(Lottos lottos) {
 		String strWinningNumbers = InputView.inputWinningNumbers();
 		List<Integer> winningNumbers = StringUtils.convertToNumberList(strWinningNumbers);
-		Lottery lottery = new Lottery(winningNumbers);
-		lottery.draw(lottos);
-		LotteryResults results = lottery.getLotteryResults();
+		int bonusNumber = InputView.inputBonusNumber();
+		Lottery lottery = new Lottery(winningNumbers, bonusNumber);
+		LotteryResults results = lottery.draw(lottos);
 		ResultView.outputWinningStatistics(results);
 	}
 }

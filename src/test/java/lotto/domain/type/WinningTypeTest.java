@@ -8,10 +8,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningTypeTest {
 	@DisplayName(value = "일치 개수에 따른 당첨 타입 조회 테스트")
-	@CsvSource(value = {"6,FIRST", "5,SECOND", "4,THIRD", "3,FOURTH", "0,MISMATCH"})
+	@CsvSource(value = {"6,true,FIRST", "5,true,SECOND", "5,false,THIRD", "4,true,FOURTH", "3,true,FIFTH",
+		"0,true,MISMATCH"})
 	@ParameterizedTest
-	void winningTypeByMatch(int matchCount, String expect) {
-		WinningType winningType = WinningType.getWinningType(matchCount);
+	void winningTypeByMatch(int matchCount, boolean matchBonus, String expect) {
+		WinningType winningType = WinningType.getWinningType(matchCount, matchBonus);
 		assertThat(winningType.name()).isEqualTo(expect);
 	}
 }
