@@ -1,11 +1,11 @@
 package lotto.number;
 
-public enum Limit {
+public enum LottoNumberLimit {
     MAX(45),
     MIN(1);
     private final int limit;
 
-    Limit(int number) {
+    LottoNumberLimit(int number) {
         this.limit = number;
     }
 

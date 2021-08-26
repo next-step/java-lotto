@@ -17,7 +17,7 @@ public class RandomNumbers {
     }
 
     private static List<LottoNumber> getCandidatesRangedFromMinToMax() {
-        return IntStream.rangeClosed(Limit.MIN.getValue(), Limit.MAX.getValue()).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        return IntStream.rangeClosed(LottoNumberLimit.MIN.getValue(), LottoNumberLimit.MAX.getValue()).mapToObj(LottoNumber::new).collect(Collectors.toList());
     }
 
     private static void shuffle(List<LottoNumber> candidates) {

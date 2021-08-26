@@ -19,7 +19,7 @@ public class RandomNumbersTest {
     @Test
     void maximumIs45() {
         LottoNumber maxInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber maxLottoNumber = new LottoNumber(Limit.MAX.getValue());
+        LottoNumber maxLottoNumber = new LottoNumber(LottoNumberLimit.MAX.getValue());
         assertThat(maxInRandomNumbers.getValue() <= maxLottoNumber.getValue()).isTrue();
     }
 
@@ -27,7 +27,7 @@ public class RandomNumbersTest {
     @Test
     void minimumIs45() {
         LottoNumber minInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber minLottoNumber = new LottoNumber(Limit.MIN.getValue());
+        LottoNumber minLottoNumber = new LottoNumber(LottoNumberLimit.MIN.getValue());
         assertThat(minInRandomNumbers.getValue() >= minLottoNumber.getValue()).isTrue();
     }
 }

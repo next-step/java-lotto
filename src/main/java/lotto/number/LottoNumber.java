@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void isValid(int lottoNumber) {
-        if (Limit.MAX.isUnder(lottoNumber) || Limit.MIN.isAbove(lottoNumber)) {
+        if (LottoNumberLimit.MAX.isUnder(lottoNumber) || LottoNumberLimit.MIN.isAbove(lottoNumber)) {
             throw new IllegalArgumentException("로또 숫자는 1 이상, 45 이하의 정수입니다.");
         }
     }
