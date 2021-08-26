@@ -6,23 +6,28 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static final String DEFAULT_PATTERN = ",|:";
+    private static final String CUSTOM_PATTERN = "//(.)\\n(.*)";
+
+    private static final int DEFAULT_RESULT = 0;
+
     public StringAddCalculator() {
     }
 
     public int splitAndSum(String input) {
         if (isNullOrBlank(input)) {
-            return 0;
+            return DEFAULT_RESULT;
         }
         return sumValues(splitInput(input));
     }
 
     private String[] splitInput(String input) {
-        Matcher m = Pattern.compile("//(.)\\n(.*)").matcher(input);
+        Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        return input.split(",|:");
+        return input.split(DEFAULT_PATTERN);
     }
 
     private boolean isNullOrBlank(String input) {
