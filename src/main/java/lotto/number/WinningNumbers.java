@@ -6,4 +6,8 @@ public class WinningNumbers extends LottoNumbers {
     public WinningNumbers(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
+
+    public WinningNumbers(LottoNumbers lottoNumbers) {
+        super(lottoNumbers);
+    }
 }

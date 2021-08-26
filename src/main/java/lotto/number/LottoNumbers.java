@@ -2,15 +2,24 @@ package lotto.number;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     public static final int NUMBERS_LENGTH = 6;
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers.lottoNumbers;
+    }
+
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         isValid(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoNumbers getInstanceByInt(List<Integer> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public List<LottoNumber> getValue() {
