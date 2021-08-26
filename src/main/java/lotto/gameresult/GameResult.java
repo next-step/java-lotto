@@ -15,7 +15,7 @@ public class GameResult {
 
     public GameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
         this.lottoGame = lottoGame;
-        this.winningNumbers = new WinningNumbers(winningNumbers.getValue());
+        this.winningNumbers = winningNumbers;
 
     }
 

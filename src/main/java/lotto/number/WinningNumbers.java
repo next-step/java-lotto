@@ -1,13 +1,22 @@
 package lotto.number;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class WinningNumbers extends LottoNumbers {
+public class WinningNumbers {
+
+    private final List<LottoNumber> winningNumbers;
+
     public WinningNumbers(List<LottoNumber> lottoNumbers) {
-        super(lottoNumbers);
+        this.winningNumbers = lottoNumbers;
     }
 
-    public WinningNumbers(LottoNumbers lottoNumbers) {
-        super(lottoNumbers);
+    public static WinningNumbers getInstanceByInt(List<Integer> lottoNumbers) {
+        return new WinningNumbers(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
+
+    List<LottoNumber> getValue() {
+        return winningNumbers;
+    }
+
 }

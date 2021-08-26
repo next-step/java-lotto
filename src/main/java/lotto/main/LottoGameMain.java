@@ -2,7 +2,6 @@ package lotto.main;
 
 import lotto.game.LottoGame;
 import lotto.gameresult.GameResult;
-import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -16,10 +15,9 @@ public class LottoGameMain {
         LottoGame lottoGame = new LottoGame(price);
         ResultView.showTicketsCounts(lottoGame);
         ResultView.showEachTicketsLottoNumbers(lottoGame);
-        List<Integer> numbers = InputView.getWinningNumbersOfLastWeek();
+        List<Integer> winningNumbersOfLastWeek = InputView.getWinningNumbersOfLastWeek();
 
-        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.getInstanceByInt(numbers));
-        GameResult expectedGameResult = new GameResult(lottoGame, winningNumbers);
+        GameResult expectedGameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek));
         ResultView.showWinningRateReport(expectedGameResult);
     }
 }
