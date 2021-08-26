@@ -1,6 +1,5 @@
 package lotto.game;
 
-import lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,18 +11,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("로또 구입 금액은")
 public class PaymentsTest {
 
-    @DisplayName("1000의 배수로 초기화 된다.")
+    @DisplayName("양의 정수를 넣을 경우 정상적으로 초기화된다. ")
     @Test
     void mustBeMultipleOf1000() {
-        Payments payments = new Payments(5000);
-        assertThat(payments.getValue() % LottoTicket.PRICE).isEqualTo(0);
-    }
-
-
-    @DisplayName("1000의 배수가 아닐 경우: IllegalArgumentException 예외 던짐.")
-    @Test
-    void throwIllegalArgumentException() {
-        assertThatThrownBy(() -> new Payments(999)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("구매 금액은 1000의 배수이어야 합니다.");
+        assertThat(new Payments(5000)).isEqualTo(new Payments(5000));
     }
 
     @DisplayName("양의 정수이다.")

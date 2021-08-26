@@ -1,7 +1,6 @@
 package lotto.helper;
 
 import lotto.game.LottoGame;
-import lotto.game.Payments;
 import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
@@ -37,7 +36,7 @@ public class Helper {
     }
 
     private static int getPayments(int[][] lottoNumbersPerTicket) {
-        return lottoNumbersPerTicket.length * Payments.LOTTO_TICKET_PRICE;
+        return lottoNumbersPerTicket.length * LottoTicket.PRICE;
     }
 
     static public List<LottoTicket> lottoTickets() {
