@@ -1,7 +1,6 @@
-package step2.model.Lotto;
+package step2.model.lotto;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class LottoNos {
@@ -9,10 +8,8 @@ public class LottoNos {
   private List<LottoNo> lottoNoList;
 
   public LottoNos(List<LottoNo> lottoNoList) {
-
-    Comparator<LottoNo> comparator = Comparator.comparingInt(LottoNo::getLottoNum);
     Collections.shuffle(lottoNoList);
-    Collections.sort(lottoNoList, comparator);
+    Collections.sort(lottoNoList);
 
     this.lottoNoList = lottoNoList;
   }

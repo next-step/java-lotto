@@ -3,8 +3,8 @@ package step2.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import step2.model.Lotto.LottoNo;
-import step2.model.Lotto.LottoNos;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
 import step2.model.view.Input;
 
 public class InputView {

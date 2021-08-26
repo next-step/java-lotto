@@ -1,9 +1,9 @@
 package step2.view;
 
-import step2.model.Lotto.Lotto;
-import step2.model.Lotto.Lottos;
-import step2.model.LottoStore.LottoWin;
-import step2.model.LottoStore.WinnerMoney;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoWin;
+import step2.model.lottostore.WinnerMoney;
 import step2.model.view.Input;
 
 public class ResultView {
@@ -16,8 +16,8 @@ public class ResultView {
   public void printPurchasedLotto(Lottos lottos, Input userInput) {
 
     System.out.println(
-        "수동으로 " + userInput.getUserManualLottoCount() + "장, 자동으로 " + (lottos.getLottosSize() - userInput
-            .getUserManualLottoCount()) + "개를 구매했습니다.");
+        "수동으로 " + userInput.getUserManualLottoCount() + "장, 자동으로 " + (lottos.getLottosSize()
+            - userInput.getUserManualLottoCount()) + "개를 구매했습니다.");
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       printLotto(lottos.getLotto(i));

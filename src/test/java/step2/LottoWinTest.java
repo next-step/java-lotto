@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import step2.model.Lotto.Lotto;
-import step2.model.Lotto.LottoNo;
-import step2.model.Lotto.LottoNos;
-import step2.model.Lotto.Lottos;
-import step2.model.LottoStore.LottoWin;
-import step2.model.LottoStore.WinnerMoney;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoWin;
+import step2.model.lottostore.WinnerMoney;
 
 public class LottoWinTest {
 
@@ -27,7 +27,6 @@ public class LottoWinTest {
       lottoNoList.add(new LottoNo(lottoNos[i]));
     }
   }
-
 
   @Test
   public void Lotto_1등_추첨_테스트() {

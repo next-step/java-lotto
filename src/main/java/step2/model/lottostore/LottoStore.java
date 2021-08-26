@@ -1,12 +1,12 @@
-package step2.model.LottoStore;
+package step2.model.lottostore;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import step2.model.Lotto.Lotto;
-import step2.model.Lotto.LottoNo;
-import step2.model.Lotto.LottoNos;
-import step2.model.Lotto.Lottos;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
+import step2.model.lotto.Lottos;
 import step2.model.view.Input;
 
 public class LottoStore {
@@ -15,20 +15,19 @@ public class LottoStore {
   private static final int LOTTO_LARGEST_NUMBER = 45;
   private static final int LOTTO_PRICE = 1000;
 
-  public Lottos purchase(Input userInput) {
+  public Lottos purchase(int userAmount, List<LottoNos> userManualLottoNumbers) {
 
     List<Lotto> lottos = new ArrayList<>();
 
-    int userAutoLottoAmount =
-        userInput.getUserAmount() - (userInput.getUserManualLottoNumbers().size() * LOTTO_PRICE);
+    int userAutoLottoAmount = userAmount - (userManualLottoNumbers.size() * LOTTO_PRICE);
 
     lottos.addAll(purchaseAutoLottos(userAutoLottoAmount));
-    lottos.addAll(purchaseManualLottos(userInput.getUserManualLottoNumbers()));
+    lottos.addAll(purchaseManualLottos(userManualLottoNumbers));
 
     return new Lottos(lottos);
   }
 
-  public List<Lotto> purchaseAutoLottos(int userAmount) {
+  private List<Lotto> purchaseAutoLottos(int userAmount) {
     List<Lotto> lottos = new ArrayList<>();
 
     for (int i = 0; i < userAmount; i += LOTTO_PRICE) {
@@ -38,7 +37,7 @@ public class LottoStore {
     return lottos;
   }
 
-  public List<Lotto> purchaseManualLottos(List<LottoNos> lottoNumbers) {
+  private List<Lotto> purchaseManualLottos(List<LottoNos> lottoNumbers) {
     List<Lotto> lottos = new ArrayList<>();
 
     for (LottoNos lottoNos : lottoNumbers) {

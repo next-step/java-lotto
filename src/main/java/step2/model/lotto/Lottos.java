@@ -1,4 +1,4 @@
-package step2.model.Lotto;
+package step2.model.lotto;
 
 import java.util.List;
 

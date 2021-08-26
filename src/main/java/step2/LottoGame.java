@@ -1,9 +1,9 @@
 package step2;
 
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoStore;
+import step2.model.lottostore.LottoWin;
 import step2.model.view.Input;
-import step2.model.LottoStore.LottoStore;
-import step2.model.LottoStore.LottoWin;
-import step2.model.Lotto.Lottos;
 import step2.view.InputView;
 import step2.view.ResultView;
 
@@ -14,7 +14,8 @@ public class LottoGame {
     Input userInput = inputView.getUserInput();
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(userInput);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     ResultView resultView = new ResultView();
     resultView.printPurchasedLotto(lottos, userInput);

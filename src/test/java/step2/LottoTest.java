@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.Lotto.Lotto;
-import step2.model.Lotto.LottoNo;
-import step2.model.Lotto.LottoNos;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
 
 public class LottoTest {
 

@@ -1,4 +1,4 @@
-package step2.model.LottoStore;
+package step2.model.lottostore;
 
 public enum WinnerMoney {
   FIRST_WINNER_MONEY(1, 6, false, 2000000000),

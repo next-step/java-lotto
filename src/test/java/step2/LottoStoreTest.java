@@ -8,12 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.Lotto.LottoNo;
-import step2.model.Lotto.LottoNos;
-import step2.model.Lotto.Lottos;
-import step2.model.LottoStore.LottoStore;
-import step2.model.LottoStore.LottoWin;
-import step2.model.LottoStore.WinnerMoney;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoStore;
+import step2.model.lottostore.LottoWin;
+import step2.model.lottostore.WinnerMoney;
 import step2.model.view.Input;
 
 public class LottoStoreTest {
@@ -38,10 +38,11 @@ public class LottoStoreTest {
     List<LottoNos> lottoNosList = new ArrayList();
     lottoNosList.add(new LottoNos(lottoNoList));
 
-    Input input = new Input(userAmount, userManualLottoCount, lottoNosList);
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(input);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       assertThat(lottos.getLotto(i).getLottoNos())
@@ -61,10 +62,11 @@ public class LottoStoreTest {
       lottoNosList.add(getLottoNoList(i));
     }
 
-    Input input = new Input(userAmount, userManualLottoCount, lottoNosList);
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(input);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       assertThat(lottos.getLotto(i).getLottoNos())
@@ -92,15 +94,16 @@ public class LottoStoreTest {
 
     List<LottoNos> lottoNosList = new ArrayList();
     lottoNosList.add(new LottoNos(lottoNoList));
-    Input input = new Input(userAmount, userManualLottoCount, lottoNosList);
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(input);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
-    input.setLottowinningBonusNumbers(lottoBonusNumber);
-    input.setLottowinningNumbers(lottowinningNumbers.split(","));
+    userInput.setLottowinningBonusNumbers(lottoBonusNumber);
+    userInput.setLottowinningNumbers(lottowinningNumbers.split(","));
 
-    LottoWin lottoWin = lottoStore.draw(lottos, input);
+    LottoWin lottoWin = lottoStore.draw(lottos, userInput);
 
     assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY)).isEqualTo(1);
     assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY)).isEqualTo(0);
@@ -119,10 +122,11 @@ public class LottoStoreTest {
       lottoNosList.add(getLottoNoList(i));
     }
 
-    Input input = new Input(userAmount, userManualLottoCount, lottoNosList);
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(input);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       assertThat(lottos.getLotto(i).getLottoNos()).isEqualTo(lottoNosList.get(i));
