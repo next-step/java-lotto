@@ -23,7 +23,8 @@ public class LottoMatcher {
 
     public static BigDecimal calculateTotalRewardsRatio(Money purchasedMoney, Map<Rank, Integer> lottoResultRankMap) {
         BigDecimal totalRewards = lottoResultRankMap.entrySet().stream()
-                .map(rank -> BigDecimal.valueOf(rank.getKey().getRewards() * rank.getValue()))
+                .map(rank -> BigDecimal.valueOf(rank.getKey().getRewards())
+                        .multiply(BigDecimal.valueOf(rank.getValue())))
                 .reduce(BigDecimal.valueOf(0), BigDecimal::add);
         return totalRewards.divide(BigDecimal.valueOf(purchasedMoney.value() * 100.0), 2, RoundingMode.HALF_EVEN);
     }
