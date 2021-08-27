@@ -10,7 +10,7 @@ public final class Lotteries {
         this.lotteryList = lotteryList;
     }
 
-    public WinningResult count(final List<Integer> winningNumber){
+    public WinningResult countMatchNumber(final List<Integer> winningNumber){
         List<Integer> result = lotteryList.stream()
                                .map(lottery -> lottery.compare(winningNumber))
                                .collect(Collectors.toList());

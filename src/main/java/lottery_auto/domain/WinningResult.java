@@ -1,5 +1,6 @@
 package lottery_auto.domain;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import lottery_auto.strategy.ProfitRateStrategy;
@@ -18,12 +19,16 @@ public final class WinningResult {
         match(result);
     }
 
-    public int compareCnt(WinningMatch winningMatch){
+    public int compareMatch(WinningMatch winningMatch){
         return matchList.getOrDefault(winningMatch, 0);
     }
 
-    public int sum(){
+    public BigDecimal sum(){
         return PROFIT_RATE_STRATEGY.calculate(matchList);
+    }
+
+    public BigDecimal calculateProfit(BigDecimal amount){
+        return sum() / amount;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package lottery_auto.type;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum WinningMatch {
     MATCH_3(3,5_000),
@@ -25,16 +27,13 @@ public enum WinningMatch {
                 .orElse(MATCH_NON_VALUE);
     }
 
-    public static WinningMatch[] getValue(){
+    public static List<WinningMatch> getValue(){
         return Arrays.asList(WinningMatch.values())
                 .stream()
                 .filter(winningMatch -> winningMatch != WinningMatch.MATCH_NON_VALUE)
-                .toArray(WinningMatch[]::new);
+                .collect(Collectors.toList());
     }
 
-    public int getCount() {
-        return count;
-    }
 
     public int getWinnings() {
         return winnings;
