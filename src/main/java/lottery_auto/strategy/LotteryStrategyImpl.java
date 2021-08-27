@@ -17,23 +17,26 @@ public class LotteryStrategyImpl implements LotteryStrategy {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    private static final List<Integer> NUMBERS = new ArrayList<>();
-
     @Override
     public List<Integer> generate() {
-        setRandomNumber();
+        List<Integer> numbers = shuffleNumber(disposeNumber());
 
-        return new ArrayList<>(NUMBERS.subList(LOTTO_IDX_ZERO, LOTTO_IDX)).stream()
+        return new ArrayList<>(numbers.subList(LOTTO_IDX_ZERO, LOTTO_IDX))
+                .stream()
                 .sorted()
                 .collect(Collectors.toList());
 
     }
 
-    private void setRandomNumber() {
-        rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .forEach(NUMBERS::add);
+    private List<Integer> disposeNumber() {
+        List<Integer> numbers = new ArrayList<>();
+        rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).forEach(numbers::add);
+        return numbers;
+    }
 
-        shuffle(NUMBERS);
+    private List<Integer> shuffleNumber(List<Integer> numbers) {
+        shuffle(numbers);
+        return numbers;
     }
 
 
