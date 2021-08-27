@@ -14,16 +14,23 @@ public class GameController {
 
     public void start() {
 
-        RandomNumber numberStragey = new LottoNumberStragey();
-        List<LottoPaper> buyLotto = new ArrayList<>();
-        int buyLottoMoney = inputView.buyLottoView();
+        Money money = purchaseLottoByMoney();
 
-        for (int count = 0; count < buyLottoMoney / InputView.MINIMUM_LOTTO_MONEY; count++) {
-            buyLotto.add(new LottoPaper(numberStragey));
-        }
-        resultView.lottoNumberView(buyLotto);
+        LottoPapers lottoPapers = purchaseLottoPapers(money);
 
-        resultView.winningResult(createLottoStatstics(buyLotto, createWinningNumber()));
+        resultView.lottoNumberView(lottoPapers.getLottoPapers());
+
+        resultView.winningResult(createLottoStatstics(lottoPapers.getLottoPapers(), createWinningNumber()));
+    }
+
+    private LottoPapers purchaseLottoPapers(Money money) {
+        return LottoPapers.create(money);
+    }
+
+    private Money purchaseLottoByMoney() {
+        Money money = Money.create(inputView.buyLottoView());
+        resultView.purchaseLottoView(money.purchaseLottoCount());
+        return money;
     }
 
     private WinningLottoNumber createWinningNumber() {

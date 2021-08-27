@@ -20,6 +20,10 @@ public class ResultView {
         }
     }
 
+    public void purchaseLottoView(int count) {
+        System.out.println(count + "개를 구매했습니다.");
+    }
+
     public void winningResult(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("--------");
