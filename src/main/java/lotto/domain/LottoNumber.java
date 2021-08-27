@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   public static final int MAX = 45;
 
   private final int number;
-  private static final LottoNumber[] lottoNumberCache = new LottoNumber[45];
+  private static final LottoNumber[] lottoNumberCache = new LottoNumber[MAX];
 
   public LottoNumber(int number) {
     checkNumber(number);
@@ -20,8 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     if (lottoNumberCache[number - 1] != null){
       return lottoNumberCache[number - 1];
     }
-    lottoNumberCache[number - 1] = new LottoNumber(number);
-    return lottoNumberCache[number - 1];
+    return lottoNumberCache[number - 1] = new LottoNumber(number);
   }
 
   public int number() {

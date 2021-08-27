@@ -20,7 +20,9 @@ public class InputView {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     String input = scanner.nextLine();
     List<Integer> numbers = Arrays.stream(input.split(","))
-        .map(String::trim).map(Integer::valueOf).collect(Collectors.toList());
+        .map(String::trim)
+        .map(Integer::valueOf)
+        .collect(Collectors.toList());
     return Lotto.issueByManual(numbers);
   }
 }

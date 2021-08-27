@@ -18,8 +18,11 @@ public class Lotto {
   }
 
   public static Lotto issueByManual(List<Integer> numbers) {
-    List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
-    return new Lotto(lottoNumbers);
+    return new Lotto(
+        numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())
+    );
   }
 
   public static Lotto issueByAuto() {
@@ -27,11 +30,15 @@ public class Lotto {
   }
 
   public int matchedNumberCnt(Lotto winningLotto) {
-    return (int) lottoNumbers.stream().filter(winningLotto.lottoNumbers::contains).count();
+    return (int) lottoNumbers.stream()
+        .filter(winningLotto.lottoNumbers::contains)
+        .count();
   }
 
   public List<Integer> numbers() {
-    return lottoNumbers.stream().map(LottoNumber::number).collect(Collectors.toList());
+    return lottoNumbers.stream()
+        .map(LottoNumber::number)
+        .collect(Collectors.toList());
   }
 
   private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {

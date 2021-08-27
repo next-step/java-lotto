@@ -18,7 +18,8 @@ public class WinningStatistics {
 
   public long totalPrizeMoney() {
     return Arrays.stream(LottoPrize.values())
-        .mapToLong(prize -> prize.prizeMoney() * cntByLottoPrize(prize)).sum();
+        .mapToLong(prize -> prize.prizeMoney() * cntByLottoPrize(prize))
+        .sum();
   }
 
   public int cntByLottoPrize(LottoPrize lottoPrize) {

@@ -13,8 +13,8 @@ public class LottoGame {
 
   public LottoGame(Money money) {
     checkMoney(money);
-    long cnt =money.value() / Lotto.PRICE.value();
-    for (long i = 0; i < cnt; i++){
+    long cnt = money.value() / Lotto.PRICE.value();
+    for (long i = 0; i < cnt; i++) {
       this.lottos.add(Lotto.issueByAuto());
     }
   }
