@@ -20,7 +20,7 @@ public class Lotto {
   public static Lotto issueByManual(List<Integer> numbers) {
     return new Lotto(
         numbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList())
     );
   }
