@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -10,6 +9,7 @@ public class Lotto {
 
   public static final Money PRICE = new Money(1000);
   public static final int NUMBER_SIZE = 6;
+
   private final Set<LottoNumber> lottoNumbers;
 
   private Lotto(List<LottoNumber> lottoNumbers) {
@@ -20,6 +20,10 @@ public class Lotto {
   public static Lotto issueByManual(List<Integer> numbers) {
     List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     return new Lotto(lottoNumbers);
+  }
+
+  public static Lotto issueByAuto() {
+    return new Lotto(LottoNumbersGenerator.generateByRandom());
   }
 
   public int matchedNumberCnt(Lotto winningLotto) {

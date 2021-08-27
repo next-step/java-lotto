@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -50,19 +49,19 @@ class LottoTest {
     });
   }
 
-//  @Test
-//  @DisplayName("자동생성 테스트")
-//  void issueByAuto() {
-//    //when
-//    Lotto lotto = Lotto.issueByAuto();
-//    List<Integer> lottoNumbers = lotto.numbers();
-//
-//    //then
-//    assertThat(lottoNumbers).allMatch(i -> i >= LottoNumber.MIN && i <= LottoNumber.MAX);
-//    assertThat(lottoNumbers.size()).isEqualTo(Lotto.NUMBER_SIZE);
-//    assertThat(lottoNumbers.size()).isEqualTo(lottoNumbers.stream().distinct().count());
-//    assertThat(lottoNumbers).isSorted();
-//  }
+  @Test
+  @DisplayName("자동생성 테스트")
+  void issueByAuto() {
+    //when
+    Lotto lotto = Lotto.issueByAuto();
+    List<Integer> lottoNumbers = lotto.numbers();
+
+    //then
+    assertThat(lottoNumbers).allMatch(i -> i >= LottoNumber.MIN && i <= LottoNumber.MAX);
+    assertThat(lottoNumbers.size()).isEqualTo(Lotto.NUMBER_SIZE);
+    assertThat(lottoNumbers.stream().distinct().count() == lottoNumbers.size()).isTrue();
+    assertThat(lottoNumbers).isSorted();
+  }
 
   @Test
   @DisplayName("로또와 당첨로또 일치하는 개수 구하기 테스트")

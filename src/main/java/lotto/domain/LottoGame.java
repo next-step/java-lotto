@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
 
-  private final List<Lotto> lottos;
+  private final List<Lotto> lottos = new ArrayList<>();
 
   public LottoGame(long money) {
     this(new Money(money));
@@ -12,8 +13,10 @@ public class LottoGame {
 
   public LottoGame(Money money) {
     checkMoney(money);
-    this.lottos = LottoGenerator.generatedLottosByRandomNumber(
-        (money.value() / Lotto.PRICE.value()));
+    long cnt =money.value() / Lotto.PRICE.value();
+    for (long i = 0; i < cnt; i++){
+      this.lottos.add(Lotto.issueByAuto());
+    }
   }
 
   public List<Lotto> lottos() {
