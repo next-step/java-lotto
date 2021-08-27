@@ -37,9 +37,13 @@ public class LottoMachine {
         return lottos.checkLottoPrize(winningNums);
     }
 
-    public int totalPrizeMoney(List<Integer> winningNums) {
+    public int getTotalPrizeMoney(List<Integer> winningNums) {
         WinningResult winningResult = countLottoPrize(winningNums);
 
-        return winningResult.totalPrizeMoney();
+        return winningResult.getTotalPrizeMoney();
+    }
+
+    public double getYield(List<Integer> winningNums) {
+        return money.getYield(getTotalPrizeMoney(winningNums));
     }
 }

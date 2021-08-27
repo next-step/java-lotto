@@ -18,4 +18,8 @@ public class Money {
     public int buyableLottos(int price) {
         return money / price;
     }
+
+    public double getYield(int totalPrizeMoney) {
+        return totalPrizeMoney / money;
+    }
 }

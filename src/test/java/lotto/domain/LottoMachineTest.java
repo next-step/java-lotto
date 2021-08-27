@@ -57,24 +57,6 @@ public class LottoMachineTest {
         assertThat(lottoMachine.generateLottos()).isEqualTo(lottos);
     }
 
-    @ParameterizedTest
-    @MethodSource("provideLottosAndWinningNums")
-    void countLottoGrades_로또_당첨_개수_출력(List<Lotto> lottoList, List<Integer> winningNums) {
-        Lottos lottos = new Lottos(lottoList);
-
-        LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
-            @Override
-            public Lottos generate(int totalLottoNum, int numsPerLotto) {
-                return lottos;
-            }
-        });
-
-//        List<Integer> prizeNum = lottoMachine.countLottoPrize(winningNums);
-        WinningResult winningResult = lottoMachine.countLottoPrize(winningNums);
-
-        assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 3)));
-    }
-
     private static Stream<Arguments> provideLottosAndWinningNums() {
         List<Lotto> lottoList = new ArrayList<>(
                 Arrays.asList(
@@ -103,7 +85,7 @@ public class LottoMachineTest {
 
     @ParameterizedTest
     @MethodSource("provideLottosAndWinningNums")
-    void totalPrizeMoney_총_상금_계산(List<Lotto> lottoList, List<Integer> winningNums) {
+    void countLottoGrades_로또_당첨_개수_출력(List<Lotto> lottoList, List<Integer> winningNums) {
         Lottos lottos = new Lottos(lottoList);
 
         LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
@@ -112,8 +94,39 @@ public class LottoMachineTest {
                 return lottos;
             }
         });
-//        WinningResult winningResult = lottoMachine.countLottoPrize(winningNums);
 
-        assertThat(lottoMachine.totalPrizeMoney(winningNums)).isEqualTo(65000);
+        WinningResult winningResult = lottoMachine.countLottoPrize(winningNums);
+
+        assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 3)));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottosAndWinningNums")
+    void getTotalPrizeMoney_총_상금_계산(List<Lotto> lottoList, List<Integer> winningNums) {
+        Lottos lottos = new Lottos(lottoList);
+
+        LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
+            @Override
+            public Lottos generate(int totalLottoNum, int numsPerLotto) {
+                return lottos;
+            }
+        });
+
+        assertThat(lottoMachine.getTotalPrizeMoney(winningNums)).isEqualTo(65000);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottosAndWinningNums")
+    void getYield_수익률_계산(List<Lotto> lottoList, List<Integer> winningNums) {
+        Lottos lottos = new Lottos(lottoList);
+
+        LottoMachine lottoMachine = new LottoMachine(14500, new GenerateNumStrategy() {
+            @Override
+            public Lottos generate(int totalLottoNum, int numsPerLotto) {
+                return lottos;
+            }
+        });
+
+        assertThat(lottoMachine.getYield(winningNums)).isEqualTo(65000/14500);
     }
 }

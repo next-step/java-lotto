@@ -10,7 +10,7 @@ public class WinningResult {
         this.winningResult = winningResult;
     }
 
-    public int totalPrizeMoney() {
+    public int getTotalPrizeMoney() {
         int total = 0;
 
         total += Prize.PRIZE_1ST.totalMoney(winningResult.get(Prize.PRIZE_1ST.index()));
