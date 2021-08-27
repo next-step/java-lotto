@@ -1,6 +1,8 @@
-package StringCalculator;
+package stringcalculator;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ public class InputParser {
     private static final String DEFAULT_OUTPUT = "0";
     public static final String CUSTOMIZED_DELIMITER_REGEX = "//(.)\n(.*)";
     public static final String NORMAL_DELIMITER_REGEX = "[,:]";
-    public static final int DELIMITER_GROUP_IDEX = 1;
+    public static final int DELIMITER_GROUP_INDEX = 1;
     public static final int NUMBERS_GROUP_INDEX = 2;
 
     private InputParser() {
@@ -26,8 +28,8 @@ public class InputParser {
         Pattern pattern = Pattern.compile(CUSTOMIZED_DELIMITER_REGEX);
         Matcher matcher = pattern.matcher(input);
         if(matcher.find()) {
-            String customDelimiter = matcher.group(DELIMITER_GROUP_IDEX);
-            String[] tokens= matcher.group(NUMBERS_GROUP_INDEX).split(customDelimiter);
+            String customDelimiter = matcher.group(DELIMITER_GROUP_INDEX);
+            String[] tokens = matcher.group(NUMBERS_GROUP_INDEX).split(customDelimiter);
             return Arrays.asList(tokens);
         }
 

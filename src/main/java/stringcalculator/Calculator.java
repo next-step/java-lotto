@@ -1,4 +1,4 @@
-package StringCalculator;
+package stringcalculator;
 
 public class Calculator {
     public WholeNumber calculate(String input) {
