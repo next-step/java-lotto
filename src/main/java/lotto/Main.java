@@ -22,10 +22,7 @@ public class Main {
         ResultView.announceTotalLottoNumbers(lottoPaper);
 
         // 지난주 당첨 번호 입력
-        WinningResults winningResults = new WinningResults(InputView.inputWinningNumbersLastWeek());
-
-        // 결과 체크
-        winningResults.checkWinning(lottoPaper);
+        WinningResults winningResults = new WinningResults(lottoPaper, InputView.inputWinningNumbersLastWeek());
 
         // 결과 출력
         ResultView.resultStart();

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoPaperTest {
 
     @Test
-    @DisplayName("구매한 로또 티켓 전부를 저장한다.")
+    @DisplayName("생성된 로또 번호를 LottoPaper에 담는다.")
     void lottoTickets_save_test() {
         List<Lotto> lottos = new ArrayList<>();
         int expected = 6;

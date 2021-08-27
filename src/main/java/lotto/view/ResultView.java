@@ -17,13 +17,7 @@ public class ResultView {
         List<Lotto> lottos = lottoPaper.getLottos();
 
         for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
-        for (Lotto lotto : lottos) {
-            System.out.println(
-                    lotto.getLottoNumbers().stream()
-                    .collect(Collectors.toList())
-            );
+            System.out.println(lotto.getLottoNumbers());
         }
     }
 

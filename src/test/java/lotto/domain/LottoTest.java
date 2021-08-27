@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +19,7 @@ public class LottoTest {
     @DisplayName("로또 번호를 저장한다.")
     void lottoTicket_save() {
         // 로또 번호 생성
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
         LottoGenerator lottoGenerator = () -> new Lotto(lottoNumbers);
 
         Lotto lotto = lottoGenerator.generateLotto();
@@ -41,20 +40,20 @@ public class LottoTest {
     static Stream<Arguments> lottoNumbersProvider() {
         return Stream.of(
                 arguments(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6),
-                        new LottoNumber(7))
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6),
+                        LottoNumber.of(7))
                 ),
                 arguments(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5))
+                        LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5))
                 )
         );
     }

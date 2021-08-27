@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("입력된 숫자가 범위를 초과한 경우 Exception 발생한다.")
     void input_count_not_six_exception_test(int number) {
         assertThatThrownBy(() ->
-                new LottoNumber(number)
+                LottoNumber.of(number)
         ).isInstanceOf(IllegalArgumentException.class);
 
     }

@@ -24,7 +24,7 @@ public class MoneyTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1999})
-    @DisplayName("구입금액이 0 이하인 경우 exception 발생")
+    @DisplayName("구입금액이 0 이하 또는 x000단위가 아닌 경우 exception 발생")
     void money_zero_exception_test(int purchaseAmount) {
         assertThatThrownBy(() ->
                 new Money(purchaseAmount)
