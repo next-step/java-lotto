@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.exception.NegativeMoneyException;
 
 public class Money implements Comparable<Money> {
 
   private final long value;
 
   public Money(long value) {
-    checkValue(value);
+    validateValue(value);
     this.value = value;
   }
 
@@ -15,9 +16,9 @@ public class Money implements Comparable<Money> {
     return value;
   }
 
-  private void checkValue(long value) {
+  private void validateValue(long value) {
     if (value < 0) {
-      throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
+      throw new NegativeMoneyException();
     }
   }
 

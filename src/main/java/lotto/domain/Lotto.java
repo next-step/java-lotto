@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.exception.DuplicatedLottoNumberException;
+import lotto.exception.InvalidLottoSizeException;
 
 public class Lotto {
 
@@ -13,7 +15,7 @@ public class Lotto {
   private final Set<LottoNumber> lottoNumbers;
 
   private Lotto(List<LottoNumber> lottoNumbers) {
-    checkLottoNumbers(lottoNumbers);
+    validateLottoNumbers(lottoNumbers);
     this.lottoNumbers = new TreeSet<>(lottoNumbers);
   }
 
@@ -41,12 +43,12 @@ public class Lotto {
         .collect(Collectors.toList());
   }
 
-  private void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+  private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != NUMBER_SIZE) {
-      throw new IllegalArgumentException("Lotto를 생성할때는 " + NUMBER_SIZE + "개의 숫자가 필요합니다.");
+      throw new InvalidLottoSizeException();
     }
     if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-      throw new IllegalArgumentException("중복된 숫자는 허용하지 않습니다.");
+      throw new DuplicatedLottoNumberException();
     }
   }
 }

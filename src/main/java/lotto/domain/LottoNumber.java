@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.exception.InvalidLottoNumberRangeException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -11,13 +12,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
   private static final LottoNumber[] lottoNumberCache = new LottoNumber[MAX];
 
   public LottoNumber(int number) {
-    checkNumber(number);
+    validateNumber(number);
     this.number = number;
   }
 
   public static LottoNumber valueOf(int number) {
-    checkNumber(number);
-    if (lottoNumberCache[number - 1] != null){
+    validateNumber(number);
+    if (lottoNumberCache[number - 1] != null) {
       return lottoNumberCache[number - 1];
     }
     return lottoNumberCache[number - 1] = new LottoNumber(number);
@@ -27,9 +28,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     return number;
   }
 
-  private static void checkNumber(int number) {
+  private static void validateNumber(int number) {
     if (number < MIN || number > MAX) {
-      throw new IllegalArgumentException("생성 가능한 로또 번호는 " + MIN + "부터 " + MAX + "까지입니다.");
+      throw new InvalidLottoNumberRangeException();
     }
   }
 

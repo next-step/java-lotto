@@ -15,10 +15,10 @@ class WinningStatisticsTest {
     //given
     Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-    Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => LottoPrize.FIRST
-    Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => LottoPrize.FOURTH
-    Lotto lotto3 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 42, 44, 45));     // 3개 일치 => LottoPrize.FOURTH
-    Lotto lotto4 = Lotto.issueByManual(Arrays.asList(1, 20, 30, 40, 41, 42));   // 1개 일치 => LottoPrize.NOTHING
+    Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => FIRST
+    Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => FOURTH
+    Lotto lotto3 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 42, 44, 45));     // 3개 일치 => FOURTH
+    Lotto lotto4 = Lotto.issueByManual(Arrays.asList(1, 20, 30, 40, 41, 42));   // 1개 일치 => NOTHING
 
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
 
@@ -39,10 +39,10 @@ class WinningStatisticsTest {
     //given
     Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-    Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => LottoPrize.FIRST
-    Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => LottoPrize.FOURTH
-    Lotto lotto3 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 42, 44, 45));     // 3개 일치 => LottoPrize.FOURTH
-    Lotto lotto4 = Lotto.issueByManual(Arrays.asList(1, 20, 30, 40, 41, 42));   // 1개 일치 => LottoPrize.NOTHING
+    Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => FIRST
+    Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => FOURTH
+    Lotto lotto3 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 42, 44, 45));     // 3개 일치 => FOURTH
+    Lotto lotto4 = Lotto.issueByManual(Arrays.asList(1, 20, 30, 40, 41, 42));   // 1개 일치 => NOTHING
 
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
 

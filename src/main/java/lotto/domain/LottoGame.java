@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.exception.InvalidLottoPurchasePriceException;
 
 public class LottoGame {
 
@@ -12,7 +13,7 @@ public class LottoGame {
   }
 
   public LottoGame(Money money) {
-    checkMoney(money);
+    validateMoney(money);
     long cnt = money.value() / Lotto.PRICE.value();
     for (long i = 0; i < cnt; i++) {
       this.lottos.add(Lotto.issueByAuto());
@@ -27,9 +28,9 @@ public class LottoGame {
     return new WinningResult(this.lottos, winningLotto);
   }
 
-  private void checkMoney(Money money) {
+  private void validateMoney(Money money) {
     if (money.compareTo(Lotto.PRICE) < 0) {
-      throw new IllegalArgumentException("최소 구매 금액은 " + Lotto.PRICE.value() + "원 입니다.");
+      throw new InvalidLottoPurchasePriceException();
     }
   }
 }

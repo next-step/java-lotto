@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.DividedByZeroException;
+
 public class RateOfReturn {
 
   private final double rate;
@@ -9,7 +11,7 @@ public class RateOfReturn {
   }
 
   public RateOfReturn(Money returnMoney, Money inputMoney) {
-    checkInputMoney(inputMoney);
+    validateInputMoney(inputMoney);
     rate = (double) returnMoney.value() / inputMoney.value();
   }
 
@@ -17,9 +19,9 @@ public class RateOfReturn {
     return rate;
   }
 
-  private void checkInputMoney(Money inputMoney) {
+  private void validateInputMoney(Money inputMoney) {
     if (inputMoney.equals(new Money(0))) {
-      throw new IllegalArgumentException("수익률을 계산핼때, 초기투자금액으로 0원을 사용할수 없습니다.");
+      throw new DividedByZeroException();
     }
   }
 }
