@@ -19,13 +19,13 @@ public class LottoReport {
 			.count();
 	}
 
-	public int profit() {
+	public double profit() {
 		int totalProfit = ranks
 			.stream()
 			.map(rank -> rank.reward())
 			.collect(Collectors.summingInt(Integer::intValue));
 		int totalPaid = this.ranks.size() * this.lottoPrice;
-		return totalProfit / totalPaid;
+		return (double)totalProfit / (double)totalPaid;
 	}
 
 	public long firstPlace() {

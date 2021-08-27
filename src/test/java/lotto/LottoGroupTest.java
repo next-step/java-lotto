@@ -3,6 +3,7 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +13,11 @@ public class LottoGroupTest {
 	@Test
 	@DisplayName("당첨 통계를 구한다.")
 	void test1() {
-		Lotto lotto1st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43));
-		Lotto lotto2st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 1));
-		Lotto lotto3st = new Lotto(Arrays.asList(8, 21, 23, 41, 1, 2));
-		Lotto lotto4st = new Lotto(Arrays.asList(8, 21, 23, 1, 2, 3));
-		Lotto failedLotto = new Lotto(Arrays.asList(8, 21, 1, 2, 3, 4));
+		List<Integer> lotto1st = Arrays.asList(8, 21, 23, 41, 42, 43);
+		List<Integer> lotto2st = Arrays.asList(8, 21, 23, 41, 42, 1);
+		List<Integer> lotto3st = Arrays.asList(8, 21, 23, 41, 1, 2);
+		List<Integer> lotto4st = Arrays.asList(8, 21, 23, 1, 2, 3);
+		List<Integer> failedLotto = Arrays.asList(8, 21, 1, 2, 3, 4);
 
 		LottoGroup lottoGroup = new LottoGroup(Arrays.asList(lotto1st, lotto2st, lotto3st, lotto4st, failedLotto));
 

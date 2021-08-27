@@ -10,13 +10,18 @@ public class Lotto {
 	private final LottoRank rank;
 
 	public Lotto(List<Integer> numbers) {
-		LottoNumbers lottoNumbers = new LottoNumbers(numbers
-			.stream()
-			.map(number -> new LottoNumber(number))
-			.collect(Collectors.toList()));
+		this(numbers, DEFAULT_PRICE);
+	}
 
-		this.lottoNumbers = lottoNumbers;
-		this.price = DEFAULT_PRICE;
+	public Lotto(List<Integer> numbers, int defaultPrice) {
+		this.lottoNumbers = new LottoNumbers(numbers);
+		this.price = defaultPrice;
+		this.rank = LottoRank.NOTHING;
+	}
+
+	public Lotto(List<Integer> numbers, int lottoPrice, int lottoNumberCount) {
+		this.lottoNumbers = new LottoNumbers(numbers, lottoNumberCount);
+		this.price = lottoPrice;
 		this.rank = LottoRank.NOTHING;
 	}
 
