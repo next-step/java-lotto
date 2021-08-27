@@ -13,7 +13,7 @@ public class Statistics {
     public void calculateWinningResult(List<LottoPaper> buyLotto, WinningLottoNumber winningLottoNumber) {
         for (LottoPaper lotto : buyLotto) {
             int matchCount = lotto.checkMatchNumberCount(winningLottoNumber.getWinningNumber());
-            calculateRank(Rank.valueOf(matchCount));
+            calculateRank(Rank.valueOf(matchCount);
         }
     }
 

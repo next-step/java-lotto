@@ -28,4 +28,8 @@ public class LottoPaper {
         return lottoNumber.contains(winningNumber) ? MATCH_COUNT : NON_MATCH_COUNT;
     }
 
+    public boolean checkBonusNumber(int bonusNumber) {
+        return lottoNumber.contains(bonusNumber);
+    }
+
 }
