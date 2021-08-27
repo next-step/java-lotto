@@ -4,59 +4,74 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
   @Test
-  @DisplayName("생성 테스트")
-  void createTest() {
+  @DisplayName("수동생성 테스트")
+  void issueByManualTest() {
     //given
-    int[] numbers = {1, 2, 3, 4, 5, 6};
-    List<Integer> numberList = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+    List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     //when
-    Lotto lotto = new Lotto(numbers);
+    Lotto lotto = Lotto.issueByManual(numberList);
 
     //then
     assertThat(lotto.numbers()).isEqualTo(numberList);
+    assertThat(lotto.numbers()).isSorted();
   }
 
   @Test
-  @DisplayName("잘못된 생성 테스트")
-  void invalidCreateTest() {
+  @DisplayName("잘못된 수동생성 테스트")
+  void invalidIssueLottoByManualTest() {
     //given
-    int[] emptyNumbers = {};
-    int[] smallNumbers = {1, 2, 3, 4, 5};
-    int[] largeNumbers = {1, 2, 3, 4, 5, 6, 7};
-    int[] duplicatedNumbers = {1, 1, 2, 3, 4, 5};
+    List<Integer> emptyNumbers = Collections.emptyList();
+    List<Integer> smallNumbers = Arrays.asList(1, 2, 3, 4, 5);
+    List<Integer> largeNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+    List<Integer> duplicatedNumbers = Arrays.asList(1, 1, 2, 3, 4, 5);
 
     //then
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      new Lotto(emptyNumbers);
+      Lotto.issueByManual(emptyNumbers);
     });
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      new Lotto(smallNumbers);
+      Lotto.issueByManual(smallNumbers);
     });
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      new Lotto(largeNumbers);
+      Lotto.issueByManual(largeNumbers);
     });
     assertThatIllegalArgumentException().isThrownBy(() -> {
-      new Lotto(duplicatedNumbers);
+      Lotto.issueByManual(duplicatedNumbers);
     });
   }
+
+//  @Test
+//  @DisplayName("자동생성 테스트")
+//  void issueByAuto() {
+//    //when
+//    Lotto lotto = Lotto.issueByAuto();
+//    List<Integer> lottoNumbers = lotto.numbers();
+//
+//    //then
+//    assertThat(lottoNumbers).allMatch(i -> i >= LottoNumber.MIN && i <= LottoNumber.MAX);
+//    assertThat(lottoNumbers.size()).isEqualTo(Lotto.NUMBER_SIZE);
+//    assertThat(lottoNumbers.size()).isEqualTo(lottoNumbers.stream().distinct().count());
+//    assertThat(lottoNumbers).isSorted();
+//  }
 
   @Test
   @DisplayName("로또와 당첨로또 일치하는 개수 구하기 테스트")
   void getMatchingNumberCntTest() {
     //given
-    Lotto winningLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-    Lotto lotto0 = new Lotto(new int[]{7, 8, 9, 10, 11, 12});
-    Lotto lotto1 = new Lotto(new int[]{6, 7, 8, 9, 10, 11});
-    Lotto lotto2 = new Lotto(new int[]{5, 6, 7, 8, 9, 10});
+    Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+    Lotto lotto0 = Lotto.issueByManual(Arrays.asList(7, 8, 9, 10, 11, 12));
+    Lotto lotto1 = Lotto.issueByManual(Arrays.asList(6, 7, 8, 9, 10, 11));
+    Lotto lotto2 = Lotto.issueByManual(Arrays.asList(5, 6, 7, 8, 9, 10));
 
     //when
     int result0 = lotto0.matchedNumberCnt(winningLotto);

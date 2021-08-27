@@ -2,21 +2,24 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
   public static final Money PRICE = new Money(1000);
   public static final int NUMBER_SIZE = 6;
-  private final List<LottoNumber> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
-  public Lotto(int[] numbers) {
-    this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+  private Lotto(List<LottoNumber> lottoNumbers) {
+    checkLottoNumbers(lottoNumbers);
+    this.lottoNumbers = new TreeSet<>(lottoNumbers);
   }
 
-  public Lotto(List<LottoNumber> lottoNumbers) {
-    checkLottoNumbers(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+  public static Lotto issueByManual(List<Integer> numbers) {
+    List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+    return new Lotto(lottoNumbers);
   }
 
   public int matchedNumberCnt(Lotto winningLotto) {

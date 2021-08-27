@@ -10,20 +10,11 @@ public class LottoGenerator {
 
   private static final List<LottoNumber> CANDIDATE_LOTTO_NUMBERS = initCandidateLottoNumbers();
 
-  public static Lotto generatedLottoByGivenNumber(int[] numbers) {
-    Collections.sort(CANDIDATE_LOTTO_NUMBERS);
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
-    for (int number : numbers) {
-      lottoNumbers.add(CANDIDATE_LOTTO_NUMBERS.get(number - 1));
-    }
-    return new Lotto(lottoNumbers);
-  }
-
   public static List<Lotto> generatedLottosByRandomNumber(long cnt) {
     checkCnt(cnt);
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < cnt; i++) {
-      lottos.add(new Lotto(selectedLottoNumbers()));
+      lottos.add(Lotto.issueByManual(selectedLottoNumbers().stream().map(LottoNumber::number).collect(Collectors.toList())));
     }
     return lottos;
   }

@@ -30,18 +30,4 @@ class LottoGeneratorTest {
       LottoGenerator.generatedLottosByRandomNumber(cnt);
     });
   }
-
-  @Test
-  @DisplayName("로또 주어진 번호로 생성 테스트")
-  void generateByGivenNumberTest() {
-    //given
-    int[] numbers = {1, 2, 3, 4, 5, 6};
-    Arrays.asList(numbers);
-
-    //when
-    Lotto lotto = LottoGenerator.generatedLottoByGivenNumber(numbers);
-
-    //then
-    assertThat(lotto.numbers()).isEqualTo(new Lotto(numbers).numbers());
-  }
 }
