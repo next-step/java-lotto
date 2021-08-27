@@ -1,9 +1,10 @@
 package step2.view;
 
-import step2.model.Lotto;
-import step2.model.LottoWin;
-import step2.model.Lottos;
-import step2.model.WinnerMoney;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoWin;
+import step2.model.lottostore.WinnerMoney;
+import step2.model.view.Input;
 
 public class ResultView {
 
@@ -12,9 +13,11 @@ public class ResultView {
   private static final String COMMA = ",";
   private static final String BLANK_SPACE = " ";
 
-  public void printPurchasedLotto(Lottos lottos) {
+  public void printPurchasedLotto(Lottos lottos, Input userInput) {
 
-    System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
+    System.out.println(
+        "수동으로 " + userInput.getUserManualLottoCount() + "장, 자동으로 " + (lottos.getLottosSize()
+            - userInput.getUserManualLottoCount()) + "개를 구매했습니다.");
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
       printLotto(lottos.getLotto(i));
@@ -27,17 +30,20 @@ public class ResultView {
     StringBuilder stringBuilder = new StringBuilder();
 
     stringBuilder.append(LEFT_BRACKET);
-    for (Integer integer : lotto.getLottoNumbers()) {
-      stringBuilder.append(integer);
+
+    for (int i = 0; i < lotto.getLottoNos().getLottoNosSize(); i++) {
+      stringBuilder.append(lotto.getLottoNos().getLottoNos(i).getLottoNum());
       stringBuilder.append(COMMA + BLANK_SPACE);
     }
+
     stringBuilder.delete(stringBuilder.lastIndexOf(COMMA), stringBuilder.length());
     stringBuilder.append(RIGHT_BRACKET);
 
     System.out.println(stringBuilder);
   }
 
-  public void printWinner(LottoWin lottoWin, int userAmount) {
+  public void printWinner(LottoWin lottoWin, Input userInput) {
+
     System.out.println();
     System.out.println("당첨 통계");
     System.out.println("---------");
@@ -48,7 +54,7 @@ public class ResultView {
       earningMoney += lottoWin.getWinnerCount(winnerMoney) * winnerMoney.getPrizeMoney();
     }
 
-    double earningsRate = earningMoney / userAmount;
+    double earningsRate = earningMoney / userInput.getUserAmount();
     System.out.println("총 수익률은 " + String.format("%.2f", earningsRate) + "입니다.");
   }
 

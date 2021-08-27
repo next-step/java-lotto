@@ -2,46 +2,86 @@ package step2;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.model.LottoStore;
-import step2.model.LottoWin;
-import step2.model.Lottos;
-import step2.model.WinnerMoney;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.LottoNos;
+import step2.model.lotto.Lottos;
+import step2.model.lottostore.LottoStore;
+import step2.model.lottostore.LottoWin;
+import step2.model.lottostore.WinnerMoney;
+import step2.model.view.Input;
 
 public class LottoStoreTest {
-  List lottoNumber;
+
+  List<LottoNo> lottoNoList;
 
   @BeforeEach
   void setUp() {
-    lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+    lottoNoList = new ArrayList<>();
+    int[] lottoNos = {1, 2, 3, 4, 5, 6};
+
+    for (int i = 0; i < lottoNos.length; i++) {
+      lottoNoList.add(new LottoNo(lottoNos[i]));
+    }
   }
 
   @Test
   public void Lotto_1개_구매_테스트() {
-    final int userAmount = 1000;
+    int userAmount = 1000;
+    int userManualLottoCount = 0;
+
+    List<LottoNos> lottoNosList = new ArrayList();
+    lottoNosList.add(new LottoNos(lottoNoList));
+
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(userAmount, lottoNumber);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
-      assertThat(lottos.getLotto(i).getLottoNumbers()).isEqualTo(lottoNumber);
+      assertThat(lottos.getLotto(i).getLottoNos())
+          .isEqualToComparingFieldByField(lottoNosList.get(i));
     }
   }
 
+
   @ParameterizedTest
-  @ValueSource(ints = {2000, 3000, 14000})
-  public void Lotto_N개_구매_테스트(int userAmount) {
+  @ValueSource(ints = {2, 3, 14})
+  public void Lotto_N개_구매_테스트(int userManualLottoCount) {
+
+    int userAmount = userManualLottoCount * 1000;
+
+    List<LottoNos> lottoNosList = new ArrayList();
+    for (int i = 0; i < userManualLottoCount; i++) {
+      lottoNosList.add(getLottoNoList(i));
+    }
+
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
+
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(userAmount, lottoNumber);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
     for (int i = 0; i < lottos.getLottosSize(); i++) {
-      assertThat(lottos.getLotto(i).getLottoNumbers()).isEqualTo(lottoNumber);
+      assertThat(lottos.getLotto(i).getLottoNos())
+          .isEqualToComparingFieldByField(lottoNosList.get(i));
     }
+  }
+
+  LottoNos getLottoNoList(int i) {
+
+    List<LottoNo> lottoNoList = new ArrayList<>();
+    for (int j = 0; j < 6; j++) {
+      lottoNoList.add(new LottoNo(i + j));
+    }
+
+    return new LottoNos(lottoNoList);
   }
 
 
@@ -50,16 +90,46 @@ public class LottoStoreTest {
   public void Lotto_추첨_후_당첨자_확인(String lottowinningNumbers) {
     int userAmount = 1000;
     int lottoBonusNumber = 7;
+    int userManualLottoCount = 0;
+
+    List<LottoNos> lottoNosList = new ArrayList();
+    lottoNosList.add(new LottoNos(lottoNoList));
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
 
     LottoStore lottoStore = new LottoStore();
-    Lottos lottos = lottoStore.purchase(userAmount, lottoNumber);
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
 
-    LottoWin lottoWin = lottoStore.draw(lottos, lottowinningNumbers.split(","), lottoBonusNumber);
+    userInput.setLottowinningBonusNumbers(lottoBonusNumber);
+    userInput.setLottowinningNumbers(lottowinningNumbers.split(","));
+
+    LottoWin lottoWin = lottoStore.draw(lottos, userInput);
 
     assertThat(lottoWin.getWinnerCount(WinnerMoney.FIRST_WINNER_MONEY)).isEqualTo(1);
     assertThat(lottoWin.getWinnerCount(WinnerMoney.SECOND_WINNER_MONEY)).isEqualTo(0);
     assertThat(lottoWin.getWinnerCount(WinnerMoney.THIRD_WINNER_MONEY)).isEqualTo(0);
     assertThat(lottoWin.getWinnerCount(WinnerMoney.FOURTH_WINNER_MONEY)).isEqualTo(0);
     assertThat(lottoWin.getWinnerCount(WinnerMoney.FIFTH_WINNER_MONEY)).isEqualTo(0);
+  }
+
+  @Test
+  void Lotto_3장_수동_구입() {
+    int userManualLottoCount = 3;
+    int userAmount = userManualLottoCount * 1000;
+
+    List<LottoNos> lottoNosList = new ArrayList();
+    for (int i = 0; i < userManualLottoCount; i++) {
+      lottoNosList.add(getLottoNoList(i));
+    }
+
+    Input userInput = new Input(userAmount, userManualLottoCount, lottoNosList);
+
+    LottoStore lottoStore = new LottoStore();
+    Lottos lottos = lottoStore
+        .purchase(userInput.getUserAmount(), userInput.getUserManualLottoNumbers());
+
+    for (int i = 0; i < lottos.getLottosSize(); i++) {
+      assertThat(lottos.getLotto(i).getLottoNos()).isEqualTo(lottoNosList.get(i));
+    }
   }
 }

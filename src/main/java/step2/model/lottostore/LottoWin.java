@@ -1,10 +1,13 @@
-package step2.model;
+package step2.model.lottostore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import step2.model.lotto.Lotto;
+import step2.model.lotto.LottoNo;
+import step2.model.lotto.Lottos;
 
 public class LottoWin {
 
@@ -24,17 +27,7 @@ public class LottoWin {
   }
 
   private boolean isMatchNumber(Lotto lotto, String lottoNumStr) {
-    return lotto.getLottoNumbers().contains(Integer.parseInt(lottoNumStr));
-  }
-
-  public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
-    if (hasWinningBonusNumber) {
-      winnerCountMap.replace(WinnerMoney.SECOND_WINNER_MONEY,
-          winnerCountMap.get(winnerMoney) + 1);
-    } else {
-      winnerCountMap
-          .replace(winnerMoney, winnerCountMap.get(winnerMoney) + 1);
-    }
+    return lotto.getLottoNos().hasLottoNo(new LottoNo(Integer.parseInt(lottoNumStr)));
   }
 
   public int getWinnerCount(WinnerMoney winnerMoney) {
@@ -102,5 +95,14 @@ public class LottoWin {
       boolean hasWinningBonusNumber) {
     return matchNumberCount == winnerMoney.getMatchNumberCount()
         && hasWinningBonusNumber == winnerMoney.hasMatchBonusNumber();
+  }
+
+  public void addWinnerCount(WinnerMoney winnerMoney, boolean hasWinningBonusNumber) {
+    WinnerMoney winnerMoneyKey = winnerMoney;
+    if (hasWinningBonusNumber) {
+      winnerMoneyKey = WinnerMoney.SECOND_WINNER_MONEY;
+    }
+
+    winnerCountMap.replace(winnerMoneyKey, winnerCountMap.get(winnerMoney) + 1);
   }
 }
