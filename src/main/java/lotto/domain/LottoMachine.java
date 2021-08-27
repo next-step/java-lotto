@@ -10,7 +10,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < money.countOfLottoPurchases(); i++) {
-            lottos.add(new Lotto(new AutoLottoGenerator()));
+            lottos.add(new AutoLottoGenerator().generateLotto());
         }
 
         return new LottoPaper(lottos);

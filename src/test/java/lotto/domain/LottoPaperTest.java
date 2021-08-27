@@ -16,7 +16,7 @@ public class LottoPaperTest {
         List<Lotto> lottos = new ArrayList<>();
         int expected = 6;
         for (int i = 0; i < expected; i++) {
-            lottos.add(new Lotto(new AutoLottoGenerator()));
+            lottos.add(new AutoLottoGenerator().generateLotto());
         }
 
         LottoPaper lottoPaper = new LottoPaper(lottos);

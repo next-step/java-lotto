@@ -8,8 +8,8 @@ public class Lotto {
 
     private final List<LottoNumber> lottoLottoNumbers;
 
-    public Lotto(LottoGenerator lottoGenerator) {
-        this.lottoLottoNumbers = new ArrayList<>(lottoGenerator.generateLotto());
+    public Lotto(List<LottoNumber> lottoLottoNumbers) {
+        this.lottoLottoNumbers = new ArrayList<>(lottoLottoNumbers);
         validateLottoNumbers(lottoLottoNumbers);
     }
 

@@ -17,11 +17,11 @@ public class AutoLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<LottoNumber> generateLotto() {
+    public Lotto generateLotto() {
         Collections.shuffle(LOTTO_NUMBER_CARDS);
         List<LottoNumber> lottoNumbers = LOTTO_NUMBER_CARDS.subList(0, 6);
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
 }

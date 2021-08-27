@@ -14,8 +14,9 @@ public class LottoNumbersGeneratorTest {
     @DisplayName("로또 넘버 생성이 되는지 테스트한다.")
     void LottoNumbersGeneratorTest() {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoGenerator lottoGenerator = () -> lottoNumbers;
 
-        assertThat(lottoGenerator.generateLotto()).isEqualTo(lottoNumbers);
+        LottoGenerator lottoGenerator = () -> new Lotto(lottoNumbers);
+
+        assertThat(lottoGenerator.generateLotto().getLottoNumbers()).isEqualTo(lottoNumbers);
     }
 }

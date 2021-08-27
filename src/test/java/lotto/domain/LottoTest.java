@@ -21,9 +21,9 @@ public class LottoTest {
     void lottoTicket_save() {
         // 로또 번호 생성
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        LottoGenerator lottoGenerator = () -> lottoNumbers;
+        LottoGenerator lottoGenerator = () -> new Lotto(lottoNumbers);
 
-        Lotto lotto = new Lotto(lottoGenerator);
+        Lotto lotto = lottoGenerator.generateLotto();
 
         assertThat(lotto.getLottoNumbers()).isEqualTo(lottoNumbers);
     }
@@ -33,7 +33,7 @@ public class LottoTest {
     @DisplayName("입력 숫자가 6개가 아닌경우 Exception 발생한다.")
     void input_count_not_six_exception_test(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() ->
-                new Lotto(() -> lottoNumbers)
+                new Lotto(lottoNumbers)
         ).isInstanceOf(IllegalArgumentException.class);
 
     }
