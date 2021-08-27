@@ -29,8 +29,7 @@ class StatisticsTest {
                 )
         );
 
-        winningLottoNumber = new WinningLottoNumber();
-        winningLottoNumber.setWinningNumber("1,2,3,4,5,6");
+        winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6");
     }
 
     @DisplayName("당첨 금액 테스트")

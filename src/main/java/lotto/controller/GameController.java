@@ -27,8 +27,8 @@ public class GameController {
     }
 
     private WinningLottoNumber createWinningNumber() {
-        WinningLottoNumber winningLottoNumber = new WinningLottoNumber();
-        winningLottoNumber.setWinningNumber(inputView.winningLottoView());
+        WinningLottoNumber winningLottoNumber = new WinningLottoNumber(inputView.winningLottoView());
+        winningLottoNumber.setBonusNumber(inputView.bonusNumberView());
         return winningLottoNumber;
     }
 

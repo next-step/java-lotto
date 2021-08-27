@@ -35,4 +35,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public String bonusNumberView() {
+        System.out.println("보너스 보를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
 }

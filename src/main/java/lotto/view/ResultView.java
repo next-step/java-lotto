@@ -9,9 +9,10 @@ import java.util.List;
 public class ResultView {
 
     public static final String FIRST_MSG = "6개 일치 (" + Rank.FIRST.getWinningMoney() + "원) -";
-    public static final String SECOND_MSG = "5개 일치 (" +Rank.SECOND.getWinningMoney() + "원) -";
-    public static final String THIRD_MSG = "4개 일치 (" + Rank.THIRD.getWinningMoney() + "원) -";
-    public static final String FOURTH_MSG = "3개 일치 (" + Rank.FOURTH.getWinningMoney() + "원) -";
+    public static final String SECOND_MSG = "5개 일치, 보너스 볼 일치 (" +Rank.SECOND.getWinningMoney() + "원) -";
+    public static final String THIRD_MSG = "5개 일치 (" + Rank.THIRD.getWinningMoney() + "원) -";
+    public static final String FOURTH_MSG = "4개 일치 (" + Rank.FOURTH.getWinningMoney() + "원) -";
+    public static final String FIFTH_MSG = "3개 일치 (" + Rank.FIFTH.getWinningMoney() + "원) -";
 
     public void lottoNumberView(List<LottoPaper> lottos) {
         for (LottoPaper lottoPaper : lottos) {
@@ -30,7 +31,6 @@ public class ResultView {
     }
 
     private void resultMsg(Rank rank, int count) {
-
         if (rank.equals(Rank.FIRST)) {
             System.out.println(FIRST_MSG + count + "개");
         }
@@ -43,8 +43,9 @@ public class ResultView {
         if (rank.equals(Rank.FOURTH)) {
             System.out.println(FOURTH_MSG + count + "개");
         }
-
-
+        if (rank.equals(Rank.FIFTH)) {
+            System.out.println(FIFTH_MSG + count + "개");
+        }
     }
 
 }
