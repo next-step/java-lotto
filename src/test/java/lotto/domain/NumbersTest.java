@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -44,6 +45,28 @@ public class NumbersTest {
 
         // then
         assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("다른 Numbers와 동일한 number의 갯수를 반환할 수 있다.")
+    void calculateMatchedNumberCountTest() {
+
+        // given
+        Numbers numbers = new Numbers(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        Numbers compareNumbers =new Numbers(Arrays.asList(4, 5, 6, 7, 8, 9)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        // when
+        int result = numbers.calculateMatchedNumberCount(compareNumbers);
+
+        // then
+        assertThat(result).isEqualTo(3);
     }
 
 }

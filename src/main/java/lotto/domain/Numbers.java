@@ -15,6 +15,12 @@ public class Numbers {
         return numbers.contains(number);
     }
 
+    public int calculateMatchedNumberCount(Numbers inputs) {
+        return (int) numbers.stream()
+            .filter(inputs::contains)
+            .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
