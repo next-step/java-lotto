@@ -31,7 +31,7 @@ class LotteriesTest {
     @Test
     @DisplayName("로또 카운트 테스트")
     void count() {
-        assertThat(lotteries.count(winningNumber))
+        assertThat(lotteries.countMatchNumber(winningNumber))
                 .isInstanceOf(WinningResult.class);
     }
 

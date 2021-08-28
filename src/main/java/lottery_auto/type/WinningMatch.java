@@ -27,7 +27,7 @@ public enum WinningMatch {
                 .orElse(MATCH_NON_VALUE);
     }
 
-    public static List<WinningMatch> getValue(){
+    public static List<WinningMatch> getMeaningValue(){
         return Arrays.asList(WinningMatch.values())
                 .stream()
                 .filter(winningMatch -> winningMatch != WinningMatch.MATCH_NON_VALUE)
@@ -38,6 +38,8 @@ public enum WinningMatch {
     public int getWinnings() {
         return winnings;
     }
+
+    public int getCount() { return count; }
 
     @Override
     public String toString() {
