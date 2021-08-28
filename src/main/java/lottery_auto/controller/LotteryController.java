@@ -23,8 +23,7 @@ public class LotteryController {
         ResultView.print(winningNumbers);
 
         WinningResult winningResult = lotteries.countMatchNumber(winningNumbers);
-        ResultView.print(winningResult);
+        ResultView.print(winningResult, amount);
 
-        ResultView.print(winningResult.calculateProfit(amount));
     }
 }
