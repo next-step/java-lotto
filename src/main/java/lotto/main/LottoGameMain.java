@@ -11,11 +11,13 @@ import java.util.List;
 public class LottoGameMain {
 
     public static void main(String[] args) {
-        final int price = InputView.askUserToPayForLottoTickets();
+        InputView inputView = new InputView();
+
+        final int price = inputView.askUsersToPay();
         LottoGame lottoGame = new LottoGame(price);
         ResultView.showTicketsCounts(lottoGame);
         ResultView.showEachTicketsLottoNumbers(lottoGame);
-        List<Integer> winningNumbersOfLastWeek = InputView.getWinningNumbersOfLastWeek();
+        List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
 
         GameResult expectedGameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek));
         ResultView.showWinningRateReport(expectedGameResult);
