@@ -41,7 +41,7 @@ class LottoMatcherTest {
     @Test
     void calculateTotalRewardsRatio() {
         Map<Rank, Integer> resultMap = LottoMatcher.matchWithWinningLottoNumbers(lottos, winningLotto);
-        assertThat(LottoMatcher.calculateTotalRewardsRatio(3000, resultMap))
+        assertThat(LottoMatcher.calculateTotalRewardsRatio(new Money(3000), resultMap))
                 .isEqualTo(BigDecimal.valueOf(Rank.FIRST.getRewards() + Rank.SECOND.getRewards())
                         .multiply(BigDecimal.valueOf(1))
                         .divide(BigDecimal.valueOf(3000 * 100.0), 2, RoundingMode.HALF_EVEN));

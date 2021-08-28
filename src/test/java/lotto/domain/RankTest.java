@@ -13,16 +13,9 @@ class RankTest {
     void findRank() {
         assertThat(Rank.findRank(2, true)).isEqualTo(Rank.NOTHING);
         assertThat(Rank.findRank(3, false)).isEqualTo(Rank.FIFTH);
-        assertThat(Rank.findRank(4, false)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.findRank(4, true)).isEqualTo(Rank.FOURTH);
         assertThat(Rank.findRank(5, true)).isEqualTo(Rank.SECOND);
         assertThat(Rank.findRank(6, false)).isEqualTo(Rank.FIRST);
-    }
-
-    @DisplayName("등수에 없는 갯수는 exception 발생")
-    @Test
-    void findRank_error() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Rank.findRank(8, false));
     }
 
 }
