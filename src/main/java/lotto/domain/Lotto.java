@@ -5,19 +5,25 @@ import java.util.*;
 public class Lotto {
     private static final int TOTAL_NUMBER_COUNT = 6;
 
-    private final Set<LottoNumber> lottoLottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoLottoNumbers) {
-        this.lottoLottoNumbers = new TreeSet<>(lottoLottoNumbers);
-        validateLottoNumbers(lottoLottoNumbers);
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+        validateLottoNumbers(lottoNumbers);
     }
 
-    public Award match(Lotto other) {
+    public Award match(WinningLotto winningLotto) {
+
         return Award.valueOf(Math.toIntExact(
-                lottoLottoNumbers.stream()
-                .filter(lottoNumber -> other.lottoLottoNumbers.contains(lottoNumber))
-                .count())
+                lottoNumbers.stream()
+                .filter(lottoNumber -> winningLotto.contains(lottoNumber))
+                .count()),
+                winningLotto.checkBonusNumber(lottoNumbers)
         );
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validateLottoNumbers(Set<LottoNumber> lottoLottoNumbers) {
@@ -31,6 +37,6 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableSet(lottoLottoNumbers);
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }

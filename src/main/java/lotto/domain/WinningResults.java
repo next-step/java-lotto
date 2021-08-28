@@ -6,12 +6,12 @@ import java.util.List;
 
 public class WinningResults {
 
-    private final Lotto winningNumbers;
+    private final WinningLotto winningLotto;
     private final WinningReport winningReport;
 
-    public WinningResults(LottoPaper lottoPaper, String winningNumberString) {
-        this.winningNumbers = initWinningNumber(winningNumberString);
-        this.winningReport = lottoPaper.checkWinning(winningNumbers);
+    public WinningResults(LottoPaper lottoPaper, String winningNumberString, int bonusNumber) {
+        this.winningLotto = new WinningLotto(initWinningNumber(winningNumberString), LottoNumber.of(bonusNumber));
+        this.winningReport = lottoPaper.checkWinning(winningLotto);
     }
 
     private Lotto initWinningNumber(String winningNumberString) {

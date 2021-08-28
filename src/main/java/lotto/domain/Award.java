@@ -26,7 +26,16 @@ public enum Award {
         return winningMoney;
     }
 
-    public static Award valueOf(int countOfMatch) {
+    public static Award valueOf(int countOfMatch, boolean matchBonus) {
+
+        if(SECOND.countOfMatch == countOfMatch && matchBonus) {
+            return SECOND;
+        }
+
+        if (THIRD.countOfMatch == countOfMatch) {
+            return THIRD;
+        }
+
         return Arrays.stream(Award.values())
                 .filter(each -> each.countOfMatch() == countOfMatch)
                 .findFirst()

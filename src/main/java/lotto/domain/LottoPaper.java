@@ -16,12 +16,12 @@ public class LottoPaper {
         return Collections.unmodifiableList(lottos);
     }
 
-    public WinningReport checkWinning(Lotto winningNumbers) {
+    public WinningReport checkWinning(WinningLotto winningLotto) {
         Map<Award, Integer> resultMap = new HashMap<>();
         int totalWinningAmount = 0;
 
         for (Lotto lotto : lottos) {
-            Award award = lotto.match(winningNumbers);
+            Award award = lotto.match(winningLotto);
             totalWinningAmount += award.winningMoney();
             resultMap.put(award, resultMap.getOrDefault(award, 0) + 1);
         }
