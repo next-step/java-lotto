@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
@@ -72,6 +73,30 @@ class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Lotto(input))
             .withMessageMatching("로또 번호는 오름차순으로 입력되어있어야 한다.");
+    }
+
+    @Test
+    @DisplayName("당첨 번호와 비교해서 일치하는 번호를 가져올 수 있다.")
+    void lottoCalculateWinCountTest() {
+
+        // given
+        List<Number> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        List<Number> winNumbers = Arrays.asList(4, 5, 6, 7, 8, 9)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
+        Lotto winLotto = new Lotto(winNumbers);
+
+        // when
+        int result = lotto.calculateWinCount(winLotto);
+
+        // then
+        assertThat(result).isEqualTo(3);
     }
 
 }

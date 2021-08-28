@@ -56,4 +56,11 @@ public class Lotto {
         return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
     }
 
+    public Numbers numbers() {
+        return numbers;
+    }
+
+    public int calculateWinCount(Lotto winLotto) {
+        return numbers.calculateMatchedNumberCount(winLotto.numbers());
+    }
 }
