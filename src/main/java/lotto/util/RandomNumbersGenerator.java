@@ -24,8 +24,9 @@ public class RandomNumbersGenerator {
 
     public static List<Number> generateNumbers() {
         Collections.shuffle(numbers);
+        List<Number> numbers = RandomNumbersGenerator.numbers.subList(GENERATE_MIN_NUMBER, LOTTO_NUMBERS_SIZE);
         Collections.sort(numbers);
-        return numbers.subList(GENERATE_MIN_NUMBER, LOTTO_NUMBERS_SIZE);
+        return numbers;
     }
 
 }
