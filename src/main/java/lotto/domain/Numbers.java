@@ -11,6 +11,10 @@ public class Numbers {
         this.numbers = numbers;
     }
 
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
