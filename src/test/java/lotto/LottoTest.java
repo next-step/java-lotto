@@ -23,7 +23,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 하나에 번호가 중복되어 저장됟면 Exception이 발생되어야 한다.")
+    @DisplayName("로또 하나에 번호가 중복되어 저장되면 Exception이 발생되어야 한다.")
     void lottoSaveDuplicatedNumberTest() {
 
         // given
@@ -32,7 +32,7 @@ class LottoTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Lotto(input))
-            .withMessageMatching("로또의 번호는 중복되어 저장될 수 없습니다.");
+            .withMessageMatching("로또의 번호는 중복되어 저장될 수 없다.");
     }
 
     @Test

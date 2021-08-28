@@ -22,7 +22,7 @@ public class Lotto {
 
     private static void checkDuplicatedNumber(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("로또의 번호는 중복되어 저장될 수 없습니다.");
+            throw new IllegalArgumentException("로또의 번호는 중복되어 저장될 수 없다.");
         }
     }
 
