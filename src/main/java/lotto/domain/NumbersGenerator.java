@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NumbersGenerator {
 
@@ -9,11 +10,10 @@ public class NumbersGenerator {
     }
 
     public static List<Number> generateNumbers(String[] inputs) {
-        List<Number> numbers = new ArrayList<>();
-        for(int i=0; i<inputs.length; i++){
-            numbers.add(new Number(Integer.parseInt(inputs[i])));
-        }
-        return numbers;
+        return Arrays.stream(inputs)
+            .map(Integer::parseInt)
+            .map(Number::new)
+            .collect(Collectors.toList());
     }
 
 }
