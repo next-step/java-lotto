@@ -37,6 +37,8 @@ public class LottoNumbers {
     }
 
     public int countWinningNumbers(WinningNumbers winningNumbers) {
-        return (int) winningNumbers.getValue().stream().filter(this.lottoNumbers::contains).count();
+        return (int) winningNumbers.getValue().stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 }
