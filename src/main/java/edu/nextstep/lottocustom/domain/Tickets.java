@@ -1,5 +1,6 @@
 package edu.nextstep.lottocustom.domain;
 
+import edu.nextstep.lottocustom.domain.numbersmaker.CustomNumbersMaker;
 import edu.nextstep.lottocustom.domain.numbersmaker.NumbersMaker;
 
 import java.util.*;
@@ -15,13 +16,43 @@ public class Tickets {
     public static Tickets of(Payment payment, NumbersMaker numbersMaker) {
         int countOfTickets = payment.countOfTickets();
 
+        List<Ticket> tickets = makeAutoTickets(countOfTickets, numbersMaker);
+
+        return new Tickets(tickets);
+    }
+
+    public static Tickets of(Payment payment,
+                             int numberOfCustomTickets,
+                             List<String> customTicketsString,
+                             NumbersMaker numbersMaker) {
+
+        List<Ticket> tickets = makeCustomTickets(customTicketsString);
+
+        int countOfAutoTickets = payment.countOfTickets() - numberOfCustomTickets;
+        tickets.addAll(makeAutoTickets(countOfAutoTickets, numbersMaker));
+
+        return new Tickets(tickets);
+    }
+
+    private static List<Ticket> makeCustomTickets(List<String> customTicketsString) {
         List<Ticket> tickets = new ArrayList<>();
+
+        for (String numbersString : customTicketsString) {
+            Ticket ticket = Ticket.madeBy(new CustomNumbersMaker(numbersString));
+            tickets.add(ticket);
+        }
+        return tickets;
+    }
+
+
+    private static List<Ticket> makeAutoTickets(int countOfTickets, NumbersMaker numbersMaker) {
+        List<Ticket> tickets = new ArrayList<>();
+
         for (int i = 0; i < countOfTickets; i++) {
             Ticket ticket = Ticket.madeBy(numbersMaker);
             tickets.add(ticket);
         }
-
-        return new Tickets(tickets);
+        return tickets;
     }
 
     public Stream<Ticket> stream() {
