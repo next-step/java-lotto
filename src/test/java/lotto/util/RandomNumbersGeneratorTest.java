@@ -35,4 +35,22 @@ class RandomNumbersGeneratorTest {
         }
     }
 
+    @Test
+    @RepeatedTest(10)
+    @DisplayName("랜덤으로 생성한 로또 번호가 1~45 사이어야 한다.")
+    void generateNumbersRangeTest() {
+
+        // given
+        Number min = new Number(1);
+        Number max = new Number(45);
+
+        // when
+        List<Number> result = RandomNumbersGenerator.generateNumbers();
+
+        // then
+        for (Number number : result) {
+            assertThat(number).isGreaterThanOrEqualTo(min).isLessThanOrEqualTo(max);
+        }
+    }
+
 }
