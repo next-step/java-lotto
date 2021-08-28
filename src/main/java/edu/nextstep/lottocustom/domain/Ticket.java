@@ -4,6 +4,7 @@ import edu.nextstep.lottocustom.domain.numbersmaker.NumbersMaker;
 import edu.nextstep.lottocustom.exception.NumbersIllegalArgumentException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Ticket {
@@ -34,6 +35,19 @@ public class Ticket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(numbers, ticket.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override
