@@ -35,4 +35,17 @@ class LottoTest {
             .withMessageMatching("로또의 번호는 중복되어 저장될 수 없습니다.");
     }
 
+    @Test
+    @DisplayName("로또 번호에 1이상 45이하의 수가 들어오지 않으면 Exception이 발생되어야 한다.")
+    void lottoSaveNumberRangeTest() {
+
+        // given
+        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 76);
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Lotto(input))
+            .withMessageMatching("로또 번호는 1이상 45이하의 수만 들어올 수 있다.");
+    }
+
 }
