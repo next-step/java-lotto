@@ -12,9 +12,9 @@ public class Lotto {
     private static final String LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE = "로또의 번호는 중복되어 저장될 수 없다.";
     private static final String LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE = "로또 번호는 1이상 45이하의 수만 들어올 수 있다.";
 
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<Number> numbers) {
         checkLottoNumbersSize(numbers);
         checkDuplicatedNumber(numbers);
         checkNumberRange(numbers);
@@ -22,20 +22,20 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private static void checkLottoNumbersSize(List<Integer> numbers) {
+    private static void checkLottoNumbersSize(List<Number> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static void checkDuplicatedNumber(List<Integer> numbers) {
+    private static void checkDuplicatedNumber(List<Number> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private static void checkNumberRange(List<Integer> numbers) {
-        if (numbers.stream().filter(Lotto::isNumberRange).count() != LOTTO_NUMBERS_SIZE) {
+    private static void checkNumberRange(List<Number> numbers) {
+        if (numbers.stream().map(Number::value).filter(Lotto::isNumberRange).count() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE);
         }
     }

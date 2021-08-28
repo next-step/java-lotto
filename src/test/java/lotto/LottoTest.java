@@ -1,5 +1,6 @@
 package lotto;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
@@ -14,7 +15,10 @@ class LottoTest {
     void lottoSavaNumberSizeTest() {
 
         // given
-        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5);
+        List<Number> input = Arrays.asList(1, 2, 3, 4, 5)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -27,7 +31,10 @@ class LottoTest {
     void lottoSaveDuplicatedNumberTest() {
 
         // given
-        List<Integer> input = Arrays.asList(2, 2, 3, 4, 5, 6);
+        List<Number> input = Arrays.asList(2, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -40,7 +47,10 @@ class LottoTest {
     void lottoSaveNumberRangeTest() {
 
         // given
-        List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 76);
+        List<Number> input = Arrays.asList(1, 2, 3, 4, 5, 76)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
