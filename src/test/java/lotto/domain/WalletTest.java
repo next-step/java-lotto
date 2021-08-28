@@ -32,10 +32,11 @@ class WalletTest {
         Wallet wallet = new Wallet(money);
 
         // when
-        List<Lotto> result = wallet.purchaseLotto();
+        Wallet result = wallet.purchaseLotto();
 
         // then
-        assertThat(result.size()).isEqualTo(10);
+        assertThat(result.money()).isEqualTo(0);
+        assertThat(result.lottosCount()).isEqualTo(10);
     }
 
 }

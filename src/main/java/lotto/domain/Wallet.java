@@ -17,17 +17,27 @@ public class Wallet {
         lottos = new ArrayList<>();
     }
 
+    public Wallet(int money, List<Lotto> lottos) {
+        this(money);
+        this.lottos.addAll(lottos);
+    }
+
     public int money() {
         return money;
     }
 
-    public List<Lotto> purchaseLotto() {
+    public int lottosCount() {
+        return lottos.size();
+    }
+
+    public Wallet purchaseLotto() {
         int lottoCount = calculatePurchaseLottoCount();
+        int leftMoney = money - lottoCount * LOTTO_PRICE;
         List<Lotto> purchaseLottos = new ArrayList<>(lottos);
         for (int i=0; i<lottoCount; i++){
             purchaseLottos.add(new Lotto(generateNumbers()));
         }
-        return purchaseLottos;
+        return new Wallet(leftMoney, purchaseLottos);
     }
 
     private int calculatePurchaseLottoCount() {
