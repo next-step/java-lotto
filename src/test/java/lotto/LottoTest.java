@@ -22,4 +22,17 @@ class LottoTest {
             .withMessageMatching("로또 번호의 개수는 6개가 들어와야 한다.");
     }
 
+    @Test
+    @DisplayName("로또 하나에 번호가 중복되어 저장됟면 Exception이 발생되어야 한다.")
+    void lottoSaveDuplicatedNumberTest() {
+
+        // given
+        List<Integer> input = Arrays.asList(2, 2, 3, 4, 5, 6);
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Lotto(input))
+            .withMessageMatching("로또의 번호는 중복되어 저장될 수 없습니다.");
+    }
+
 }
