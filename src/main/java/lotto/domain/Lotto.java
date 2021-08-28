@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int SAVED_MIN_NUMBER = 1;
-    private static final int SAVED_MAX_NUMBER = 45;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int SAVED_MIN_NUMBER = 1;
+    public static final int SAVED_MAX_NUMBER = 45;
 
     private static final String LOTTO_NUMBERS_INVALID_SIZE_ERROR_MESSAGE = "로또 번호의 개수는 6개가 들어와야 한다.";
     private static final String LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE = "로또의 번호는 중복되어 저장될 수 없다.";
