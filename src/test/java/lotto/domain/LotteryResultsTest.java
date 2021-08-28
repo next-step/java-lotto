@@ -14,7 +14,7 @@ import lotto.domain.type.WinningType;
 
 class LotteryResultsTest {
 	private static final int NUMBER_OF_MISMATCH = 13;
-	private static final int NUMBER_OF_FOURTH = 1;
+	private static final int NUMBER_OF_FIFTH = 1;
 	private LotteryResults lotteryResults;
 
 	@BeforeEach
@@ -24,7 +24,7 @@ class LotteryResultsTest {
 			LotteryResult lotteryResult = new LotteryResult(WinningType.MISMATCH);
 			lotteryResultList.add(lotteryResult);
 		}
-		lotteryResultList.add(new LotteryResult(WinningType.FOURTH));
+		lotteryResultList.add(new LotteryResult(WinningType.FIFTH));
 
 		lotteryResults = new LotteryResults(lotteryResultList);
 	}
@@ -46,9 +46,9 @@ class LotteryResultsTest {
 		Map<WinningType, Integer> drawResultMap = lotteryResults.getDrawResult();
 
 		int resultMismatch = drawResultMap.get(WinningType.MISMATCH);
-		int resultFourth = drawResultMap.get(WinningType.FOURTH);
+		int resultFifth = drawResultMap.get(WinningType.FIFTH);
 
 		assertThat(resultMismatch).isEqualTo(NUMBER_OF_MISMATCH);
-		assertThat(resultFourth).isEqualTo(NUMBER_OF_FOURTH);
+		assertThat(resultFifth).isEqualTo(NUMBER_OF_FIFTH);
 	}
 }
