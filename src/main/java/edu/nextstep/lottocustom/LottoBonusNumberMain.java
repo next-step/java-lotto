@@ -7,6 +7,7 @@ import edu.nextstep.lottocustom.utils.Calculator;
 import edu.nextstep.lottocustom.view.InputView;
 import edu.nextstep.lottocustom.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoBonusNumberMain {
@@ -14,9 +15,10 @@ public class LottoBonusNumberMain {
     public static void main(String[] args) {
         Payment payment = new Payment(InputView.inputPayment());
 
+        int numberOfCustomTickets = InputView.inputNumberOfCustomTickets();
+        List<String> customNumbersString = InputView.inputCustomNumbers(numberOfCustomTickets);
 
-
-        Tickets tickets = Tickets.of(payment, new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, numberOfCustomTickets, customNumbersString, new AutoNumbersMaker());
 
         ResultView.printTickets(tickets);
 
