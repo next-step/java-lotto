@@ -2,7 +2,6 @@ package edu.nextstep.lottocustom.domain;
 
 import edu.nextstep.lottocustom.domain.numbersmaker.AutoNumbersMaker;
 import edu.nextstep.lottocustom.domain.numbersmaker.CustomNumbersMaker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class TicketsTest {
 
@@ -23,8 +25,31 @@ public class TicketsTest {
         Tickets tickets = Tickets.of(payment, new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
 
         // then
-        Assertions.assertThat(tickets.stream().count())
+        assertThat(tickets.stream().count())
                 .isEqualTo(payment.countOfTickets());
+    }
+
+    @Test
+    @DisplayName("Tickets 생성(custom ticket 포함)")
+    void create_with_custom() {
+        // given
+        edu.nextstep.lottocustom.domain.Payment payment = new edu.nextstep.lottocustom.domain.Payment(10_000);
+        int numberOfCustomTicket = 3;
+        String customNumbers1 = "1, 2, 3, 4, 5, 6";
+        String customNumbers2 = "2, 3, 4, 5, 6, 7";
+        String customNumbers3 = "1, 2, 3, 4, 5, 6";
+        List<String> customTicketsString = new ArrayList<>(Arrays.asList(customNumbers1, customNumbers2, customNumbers3));
+
+        // when
+        Tickets tickets = Tickets.of(payment, numberOfCustomTicket, customTicketsString, new AutoNumbersMaker());
+
+        // then
+        assertThat(tickets.stream().count())
+                .isEqualTo(payment.countOfTickets());
+        assertThat(tickets.stream().collect(Collectors.toList()))
+                .contains(Ticket.madeBy(new CustomNumbersMaker(customNumbers1)),
+                        Ticket.madeBy(new CustomNumbersMaker(customNumbers2)),
+                        Ticket.madeBy(new CustomNumbersMaker(customNumbers3)));
     }
 
     @Test
@@ -42,6 +67,6 @@ public class TicketsTest {
         Map<Prize, Integer> winningResult = tickets.checkWinningResult(winningTicket);
 
         // then
-        Assertions.assertThat(winningResult.getOrDefault(Prize.FIRST, 0)).isEqualTo(1);
+        assertThat(winningResult.getOrDefault(Prize.FIRST, 0)).isEqualTo(1);
     }
 }
