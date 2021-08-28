@@ -37,22 +37,14 @@ public class ResultView {
         System.out.println("--------");
         List<Integer> prizeList = winningResult.getWinningResult();
 
-        System.out.println(
-                Prize.PRIZE_4TH.matchingCount() + "개 일치 (" +
-                Prize.PRIZE_4TH.money() + "원)- " +
-                prizeList.get(Prize.PRIZE_4TH.index()) + "개");
-        System.out.println(
-                Prize.PRIZE_3RD.matchingCount() + "개 일치 (" +
-                Prize.PRIZE_3RD.money() + "원)- " +
-                prizeList.get(Prize.PRIZE_3RD.index()) + "개");
-        System.out.println(
-                Prize.PRIZE_2ND.matchingCount() + "개 일치 (" +
-                Prize.PRIZE_2ND.money() + "원)- " +
-                prizeList.get(Prize.PRIZE_2ND.index()) + "개");
-        System.out.println(
-                Prize.PRIZE_1ST.matchingCount() + "개 일치 (" +
-                Prize.PRIZE_1ST.money() + "원)- " +
-                prizeList.get(Prize.PRIZE_1ST.index()) + "개");
+        Prize[] prizes = Prize.values();
+
+        for (int i = prizes.length - 1; i >= 0; i--) {
+            System.out.println(
+                    prizes[i].matchingCount() + "개 일치 (" +
+                    prizes[i].money() + "원)- " +
+                    prizeList.get(prizes[i].index()) + "개");
+        }
     }
 
     public static void printLottoYield(LottoMachine lottoMachine, List<Integer> winningNums) {

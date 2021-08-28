@@ -10,13 +10,13 @@ public class WinningResult {
         this.winningResult = winningResult;
     }
 
-    public int getTotalPrizeMoney() {
+    public int getTotalWinningMoney() {
         int total = 0;
 
-        total += Prize.PRIZE_1ST.earnedMoney(winningResult.get(Prize.PRIZE_1ST.index()));
-        total += Prize.PRIZE_2ND.earnedMoney(winningResult.get(Prize.PRIZE_2ND.index()));
-        total += Prize.PRIZE_3RD.earnedMoney(winningResult.get(Prize.PRIZE_3RD.index()));
-        total += Prize.PRIZE_4TH.earnedMoney(winningResult.get(Prize.PRIZE_4TH.index()));
+        Prize[] prizes = Prize.values();
+        for (Prize prize : prizes) {
+            total += prize.winningMoney(winningResult.get(prize.index()));
+        }
 
         return total;
     }

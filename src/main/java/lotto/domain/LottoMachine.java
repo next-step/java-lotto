@@ -44,7 +44,7 @@ public class LottoMachine {
     public int getTotalPrizeMoney(List<Integer> winningNums) {
         WinningResult winningResult = countLottoPrize(winningNums);
 
-        return winningResult.getTotalPrizeMoney();
+        return winningResult.getTotalWinningMoney();
     }
 
     public double getYield(List<Integer> winningNums) {
