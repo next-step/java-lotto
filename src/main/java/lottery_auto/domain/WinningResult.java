@@ -3,15 +3,13 @@ package lottery_auto.domain;
 import java.math.BigDecimal;
 import java.util.*;
 
-import lottery_auto.strategy.ProfitRateStrategy;
-import lottery_auto.strategy.ProfitRateStrategyImpl;
 import lottery_auto.type.WinningMatch;
 
 import java.util.stream.Collectors;
 
 public final class WinningResult {
 
-    private static final ProfitRateStrategy PROFIT_RATE_STRATEGY = new ProfitRateStrategyImpl();
+    private static final int MIN_NUMBER = 0;
 
     private final EnumMap<WinningMatch, Integer> matchList = new EnumMap<>(WinningMatch.class);
 
@@ -23,12 +21,14 @@ public final class WinningResult {
         return matchList.getOrDefault(winningMatch, 0);
     }
 
-    public BigDecimal sum(){
-        return PROFIT_RATE_STRATEGY.calculate(matchList);
+    public BigDecimal sumMatchResult() {
+        return matchList.entrySet().stream()
+                .map(winningMatch -> sum(winningMatch.getKey(), winningMatch.getValue()))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public BigDecimal calculateProfit(BigDecimal amount){
-        return sum() / amount;
+    public Double calculateProfit(BigDecimal amount){
+        return sumMatchResult().divide(amount, 2, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
     @Override
@@ -49,5 +49,16 @@ public final class WinningResult {
     private void init(){
         Arrays.stream(WinningMatch.values())
                 .forEach(winningMatch -> matchList.put(winningMatch, 0));
+    }
+
+    private boolean validate(WinningMatch match){
+        return match.getCount() > MIN_NUMBER && !match.equals(WinningMatch.MATCH_NON_VALUE);
+    }
+
+    private BigDecimal sum(WinningMatch match, int count){
+        if(validate(match)){
+            return new BigDecimal(match.getWinnings() * count);
+        }
+        return BigDecimal.ZERO;
     }
 }

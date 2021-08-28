@@ -2,6 +2,7 @@ package lottery_auto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import lottery_auto.domain.WinningResult;
 import lottery_auto.type.WinningMatch;
@@ -16,7 +17,7 @@ class WinningResultTest {
 
     @BeforeEach
     void setUp() {
-        winningResult = new WinningResult(Arrays.asList(3,4,5,6));
+        winningResult = new WinningResult(Arrays.asList(3,0,0,0));
     }
 
     @Test
@@ -26,15 +27,16 @@ class WinningResultTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"MATCH_3,1", "MATCH_4,1", "MATCH_5,1", "MATCH_6,1", "MATCH_NON_VALUE,0"})
+    @CsvSource(value = {"MATCH_3,1", "MATCH_4,0", "MATCH_5,0", "MATCH_6,0", "MATCH_NON_VALUE,3"})
     @DisplayName("3-6개 사이로 일치하는 로또 숫자를 카운트 테스트")
-    void compareCnt(WinningMatch winningMatch, int count) {
-        assertThat(winningResult.compareCnt(winningMatch)).isEqualTo(count);
+    void compareMatch(WinningMatch winningMatch, int count) {
+        assertThat(winningResult.compareMatch(winningMatch)).isEqualTo(count);
     }
 
-    @Test
-    @DisplayName("당첨금계산 테스트")
-    void sum() {
-        assertThat(winningResult.sum()).isEqualTo(2_001_555_000);
+    @ParameterizedTest
+    @CsvSource(value = {"6000,0.83","5000,1.00", "4000,1.25"})
+    @DisplayName("수익률 계산 테스트")
+    void sum(BigDecimal amount, Double profit) {
+        assertThat(winningResult.calculateProfit(amount)).isEqualTo(profit);
     }
 }
