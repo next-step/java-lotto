@@ -1,7 +1,6 @@
 package lotto.gameresult;
 
 import lotto.game.LottoGame;
-import lotto.game.Payments;
 import lotto.number.WinningNumbers;
 import lotto.ticket.Prize;
 
@@ -16,7 +15,6 @@ public class GameResult {
     public GameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
         this.lottoGame = lottoGame;
         this.winningNumbers = winningNumbers;
-
     }
 
     public int countTicketsWinning(Prize prize) {
@@ -32,14 +30,7 @@ public class GameResult {
     }
 
     public double getProfitRate() {
-        return getProfitRateWithDecimalPoints(lottoGame.getPayment());
+        return Math.round(this.getTotalPrizeMoney() / (double) lottoGame.getPayment().getValue() * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
     }
 
-    private double getProfitRateWithDecimalPoints(Payments payments) {
-        return Math.round(dividePrizeMoneyByPayments(payments) * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
-    }
-
-    private double dividePrizeMoneyByPayments(Payments payments) {
-        return this.getTotalPrizeMoney() / (double) payments.getValue();
-    }
 }
