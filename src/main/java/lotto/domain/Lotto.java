@@ -63,4 +63,5 @@ public class Lotto {
     public int calculateWinCount(Lotto winLotto) {
         return numbers.calculateMatchedNumberCount(winLotto.numbers());
     }
+
 }
