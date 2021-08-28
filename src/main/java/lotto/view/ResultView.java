@@ -40,15 +40,28 @@ public class ResultView {
         Prize[] prizes = Prize.values();
 
         for (int i = prizes.length - 1; i >= 0; i--) {
-            System.out.println(
-                    prizes[i].matchingCount() + "개 일치 (" +
-                    prizes[i].money() + "원)- " +
-                    prizeList.get(prizes[i].index()) + "개");
+            printEachPrize(prizeList, prizes[i]);
         }
     }
 
-    public static void printLottoYield(LottoMachine lottoMachine, List<Integer> winningNums) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNums)) + "입니다.");
+    static void printEachPrize(List<Integer> prizeList, Prize prize) {
+        if (prize.equals(Prize.SECOND)) {
+            System.out.println(
+                    prize.matchingCount() + "개 일치, 보너스 볼 일치(" +
+                    prize.money() + "원)- " +
+                    prizeList.get(prize.index()) + "개");
+
+            return;
+        }
+
+        System.out.println(
+                prize.matchingCount() + "개 일치 (" +
+                prize.money() + "원)- " +
+                prizeList.get(prize.index()) + "개");
+    }
+
+    public static void printLottoYield(LottoMachine lottoMachine, List<Integer> winningNums, int bonusNum) {
+        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNums, bonusNum)) + "입니다.");
     }
 
     public static void printBuyableLottoNum(LottoMachine lottoMachine) {

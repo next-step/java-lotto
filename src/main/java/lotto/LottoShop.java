@@ -15,7 +15,8 @@ public class LottoShop {
         ResultView.printGeneratedLottos(lottoMachine);
 
         List<Integer> winningNums = InputView.inputWinningNums();
-        ResultView.printLottoPrize(lottoMachine.getWinningResult(winningNums));
-        ResultView.printLottoYield(lottoMachine, winningNums);
+        int bonusNum = InputView.inputBonusNum();
+        ResultView.printLottoPrize(lottoMachine.getWinningResult(winningNums, bonusNum));
+        ResultView.printLottoYield(lottoMachine, winningNums, bonusNum);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.Money;
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ public class InputView {
     private final static String GUIDE_INPUT_MONEY = "구입금액을 입력해 주세요.";
     private final static String NOTI_INVALID_MONEY = "구입금액으로 유효하지 않습니다.";
     private static final String GUIDE_INPUT_WIN_NUMS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INST_INPUT_BONUS_NUM = "보너스 볼을 입력해 주세요";
 
     public static int inputMoney() {
         Scanner scanner = new Scanner(System.in);
@@ -83,5 +85,25 @@ public class InputView {
 
     static boolean isInteger(String num) {
         return !StringUtils.isBlank(num) || NumberUtils.isNumber(num);
+    }
+
+    public static int inputBonusNum() {
+        int bonusNum;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.println(INST_INPUT_BONUS_NUM);
+            bonusNum = scanner.nextInt();
+        } while (!isValidBonusNum(bonusNum));
+
+        return bonusNum;
+    }
+
+    static boolean isValidBonusNum(int bonusNum) {
+        if (bonusNum < 1 || bonusNum > LottoMachine.LOTTO_MAX_NUM) {
+            return false;
+        }
+
+        return true;
     }
 }

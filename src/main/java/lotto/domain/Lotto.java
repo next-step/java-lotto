@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Lotto {
     private static final String EXCEP_INVALID_NUM = "로또 번호로 유효하지 않습니다.";
@@ -39,6 +40,10 @@ public class Lotto {
         }
 
         return count;
+    }
+
+    public boolean isMatchingBonus(int bonusNum) {
+        return lotto.stream().anyMatch(i -> i == bonusNum);
     }
 
     @Override

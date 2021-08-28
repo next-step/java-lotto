@@ -15,28 +15,27 @@ public class Lottos {
         return lottos;
     }
 
-    public WinningResult checkLottoPrize(List<Integer> winningNums) {
+    public WinningResult checkLottoPrize(List<Integer> winningNums, int bonusNum) {
+        int matchingCount;
+        boolean matchingBonus;
         Integer[] prizeNums = new Integer[Prize.values().length];
         Arrays.fill(prizeNums, 0);
 
         for (Lotto lotto : lottos) {
-            checkPrize(prizeNums, lotto, winningNums);
+            matchingCount = lotto.countMatchingNums(winningNums);
+            matchingBonus = lotto.isMatchingBonus(bonusNum);
+
+            checkPrize(prizeNums, matchingCount, matchingBonus);
         }
 
         return new WinningResult(Arrays.asList(prizeNums));
     }
 
-    private void checkPrize(Integer[] prizeNums, Lotto lotto, List<Integer> winningNums) {
-        int matchingCount = lotto.countMatchingNums(winningNums);
-
-        if (Prize.FIRST.matchingCount() == matchingCount) {
-            prizeNums[Prize.FIRST.index()]++;
-        } else if (Prize.SECOND.matchingCount() == matchingCount) {
-            prizeNums[Prize.SECOND.index()]++;
-        } else if (Prize.THIRD.matchingCount() == matchingCount) {
-            prizeNums[Prize.THIRD.index()]++;
-        } else if (Prize.FOURTH.matchingCount() == matchingCount) {
-            prizeNums[Prize.FOURTH.index()]++;
+    private void checkPrize(Integer[] prizeNums, int matchingCount, boolean matchingBonus) {
+        try {
+            prizeNums[Prize.valueOf(matchingCount, matchingBonus).index()]++;
+        } catch (IllegalArgumentException e) {
+            return;
         }
     }
 
