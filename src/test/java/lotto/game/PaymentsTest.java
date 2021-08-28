@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 구입 금액은")
-public class PaymentsTest {
+class PaymentsTest {
 
     @DisplayName("양의 정수를 넣을 경우 정상적으로 초기화된다. ")
     @Test

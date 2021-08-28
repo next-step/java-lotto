@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("티켓의 당첨금은")
-public class PrizeTest {
+class PrizeTest {
 
     @DisplayName("티켓의 숫자가 당첨 숫자와")
     @ParameterizedTest(name = "{0}개 일치할 때: {1}원")
@@ -21,6 +21,6 @@ public class PrizeTest {
     @ParameterizedTest(name = "당첨번호 갯수 {0}개")
     @ValueSource(ints = {1, 2})
     void prizeThrowsException(int winningNumbersCount) {
-        assertThat(Prize.calculatePrizeMoney(winningNumbersCount).getPrizeMoney()).isEqualTo(0);
+        assertThat(Prize.calculatePrizeMoney(winningNumbersCount).getPrizeMoney()).isZero();
     }
 }

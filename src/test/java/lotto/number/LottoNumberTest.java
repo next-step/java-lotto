@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("로또 숫자는")
-public class LottoNumberTest {
+class LottoNumberTest {
     public static final int MIN = 1;
     public static final int MAX = 45;
 

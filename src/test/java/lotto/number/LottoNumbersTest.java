@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("로또 숫자 리스트는")
-public class LottoNumbersTest {
+class LottoNumbersTest {
 
     @DisplayName("길이가 6이 아닐 경우 에러 발생")
     @Test

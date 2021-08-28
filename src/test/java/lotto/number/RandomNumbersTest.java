@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("랜덤 넘버 리스트는")
-public class RandomNumbersTest {
+class RandomNumbersTest {
 
     @DisplayName("6개의 랜덤 넘버를 가진다.")
     @Test

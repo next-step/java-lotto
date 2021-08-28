@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 게임 결과")
-public class GameResultTest {
+class GameResultTest {
 
     private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
         int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};

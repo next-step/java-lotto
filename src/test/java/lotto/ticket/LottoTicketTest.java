@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 티켓은 ")
-public class LottoTicketTest {
+class LottoTicketTest {
 
     @DisplayName("로또 티켓은 6개의 숫자로 초기화된다.")
     @Test
@@ -30,7 +30,7 @@ public class LottoTicketTest {
         );
     }
 
-    @DisplayName("당첨금을 말한다.")
+    @DisplayName("당첨 번호에 따라, 티켓의 당첨금을 계산한다.")
     @ParameterizedTest
     @MethodSource("provideLottoTicketWithItsPrize")
     void lottoTicketKnowsItsPrize(LottoTicket lottoTicket, Prize prize) {

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("손익 테스트")
-public class GainTest {
+class GainTest {
 
     private static Stream<Arguments> provideGainDecidedByProfitRate() {
         return Stream.of(
