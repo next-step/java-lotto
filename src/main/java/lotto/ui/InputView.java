@@ -9,11 +9,15 @@ public class InputView {
     private static final String SPACE_REGEX = "\\s+";
     private static final String COMMA_REGEX = ",";
     private static final String EMPTY = "";
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public InputView() {
+        this.scanner = new Scanner(System.in);
+    }
 
     public int askUsersToPay() {
         System.out.println("구입금액을 입력해주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public List<Integer> askUserToEnterWinningNumbersOfLastWeek() {
