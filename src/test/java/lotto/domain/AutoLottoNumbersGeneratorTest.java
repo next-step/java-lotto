@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,11 +33,11 @@ public class AutoLottoNumbersGeneratorTest {
         assertThat(checkSort(lotto.getLottoNumbers())).isEqualTo(true);
     }
 
-    private boolean checkSort(List<LottoNumber> lottoNumbers) {
+    private boolean checkSort(Set<LottoNumber> lottoNumbers) {
         List<LottoNumber> sortedLottoTicket = new ArrayList<>(lottoNumbers);
         Collections.sort(sortedLottoTicket);
 
-        if (lottoNumbers.equals(sortedLottoTicket)) {
+        if (lottoNumbers.equals(new TreeSet<>(sortedLottoTicket))) {
             return true;
         }
 
