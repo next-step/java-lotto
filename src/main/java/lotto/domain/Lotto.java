@@ -15,7 +15,7 @@ public class Lotto {
     private static final String LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE = "로또 번호는 1이상 45이하의 수만 들어올 수 있다.";
     private static final String LOTTO_NUMBERS_INVALID_ASC_ERROR_MESSAGE = "로또 번호는 오름차순으로 입력되어있어야 한다.";
 
-    private final List<Number> numbers;
+    private final Numbers numbers;
 
     public Lotto(List<Number> numbers) {
         checkLottoNumbersSize(numbers);
@@ -23,7 +23,7 @@ public class Lotto {
         checkNumberRange(numbers);
         checkNumberAcs(numbers);
 
-        this.numbers = numbers;
+        this.numbers = new Numbers(numbers);
     }
 
     private static void checkLottoNumbersSize(List<Number> numbers) {
