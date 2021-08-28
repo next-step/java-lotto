@@ -1,5 +1,6 @@
 package com.techmoa.lotto.service;
 
+import com.techmoa.lotto.model.LottoWinResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

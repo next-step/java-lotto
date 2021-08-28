@@ -1,11 +1,11 @@
 package com.techmoa.lotto.service;
 
+import com.techmoa.lotto.model.LottoWinResult;
 import com.techmoa.lotto.model.LottoWinScope;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -18,7 +18,7 @@ public class LottoService {
 
     public void createLotto(int purchaseAmount){
         this.purchaseAmount = purchaseAmount;
-        checkLottoAmount(purchaseAmount);
+        buyLotto(purchaseAmount);
 
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         LottoTicket lottoTicket = null;
@@ -29,7 +29,7 @@ public class LottoService {
         lottoTickets = new LottoTickets(lottoTicketList);
     }
 
-    public void checkLottoAmount(int purchaseAmount) {
+    public void buyLotto(int purchaseAmount) {
         this.countLottoTicket = purchaseAmount / 1000 ;
     }
 

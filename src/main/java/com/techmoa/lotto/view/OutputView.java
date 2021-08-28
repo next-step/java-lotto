@@ -3,7 +3,7 @@ package com.techmoa.lotto.view;
 import com.techmoa.lotto.model.LottoWinScope;
 import com.techmoa.lotto.service.LottoTicket;
 import com.techmoa.lotto.service.LottoTickets;
-import com.techmoa.lotto.service.LottoWinResult;
+import com.techmoa.lotto.model.LottoWinResult;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +15,14 @@ public class OutputView {
 
         for(LottoTicket lottoTicket : lottoTicketsList){
             List<Integer> integers = lottoTicket.getLottoNumber();
-            System.out.print("[");
+            StringBuffer stringBuffer = new StringBuffer();
+            stringBuffer.append("[");
             for(Integer number : integers) {
-                System.out.print(number + ",");
+                stringBuffer.append(number + ",");
             }
-            System.out.println("]");
+            stringBuffer.append("]");
+            stringBuffer.deleteCharAt(stringBuffer.length()-2);
+            System.out.println(stringBuffer.toString());
         }
     }
 

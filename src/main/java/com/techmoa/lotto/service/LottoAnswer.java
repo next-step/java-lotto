@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 public class LottoAnswer {
 
     private static List<Integer> lottoAnswerNumber = null;
+    public static final String ENTER_SPLILT_REGEX = ", ";
 
     public LottoAnswer(String enterAnswerString) {
         parseEnterAnswerString(enterAnswerString);
     }
 
     public void parseEnterAnswerString(String enterAnswerString){
-        String[] parseString= enterAnswerString.split(", ");
+        String[] parseString= enterAnswerString.split(ENTER_SPLILT_REGEX);
         this.lottoAnswerNumber=  Arrays.stream(parseString)
                                         .map(Integer::parseInt)
                                         .collect(Collectors.toList());

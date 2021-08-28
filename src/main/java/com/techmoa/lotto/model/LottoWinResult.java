@@ -1,4 +1,4 @@
-package com.techmoa.lotto.service;
+package com.techmoa.lotto.model;
 
 import java.util.HashMap;
 

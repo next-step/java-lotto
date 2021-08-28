@@ -2,7 +2,7 @@ package com.techmoa.lotto;
 
 import com.techmoa.lotto.service.LottoService;
 import com.techmoa.lotto.service.LottoTickets;
-import com.techmoa.lotto.service.LottoWinResult;
+import com.techmoa.lotto.model.LottoWinResult;
 import com.techmoa.lotto.view.InputView;
 import com.techmoa.lotto.view.OutputView;
 
