@@ -1,6 +1,8 @@
 package edu.nextstep.lottocustom.domain;
 
 import edu.nextstep.lottocustom.exception.PaymentIllegalArgumentException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,5 +26,19 @@ public class PaymentTest {
         assertThatThrownBy(() -> new Payment(payment))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
                 .hasMessageContaining("개 당 금액");
+    }
+
+    @Test
+    @DisplayName("수동 복권 개수 생성 가능량 초과에 대한 검증")
+    void validateOverPossibleTickets() {
+        // given
+        int inputPayment = 10_000;
+        int numberOfCustomTickets = 11;
+        Payment payment = new Payment(inputPayment);
+
+        // when, then
+        assertThatThrownBy(() -> payment.validateOverPossibleTickets(numberOfCustomTickets))
+                .isInstanceOf(PaymentIllegalArgumentException.class)
+                .hasMessageContaining("금액이 모자랍니다.");
     }
 }
