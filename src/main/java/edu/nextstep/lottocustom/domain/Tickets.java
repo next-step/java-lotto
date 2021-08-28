@@ -4,21 +4,12 @@ import edu.nextstep.lottocustom.domain.numbersmaker.CustomNumbersMaker;
 import edu.nextstep.lottocustom.domain.numbersmaker.NumbersMaker;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Tickets {
     private final List<Ticket> tickets;
 
     private Tickets(List<Ticket> tickets) {
         this.tickets = tickets;
-    }
-
-    public static Tickets of(Payment payment, NumbersMaker numbersMaker) {
-        int countOfTickets = payment.countOfTickets();
-
-        List<Ticket> tickets = makeAutoTickets(countOfTickets, numbersMaker);
-
-        return new Tickets(tickets);
     }
 
     public static Tickets of(Payment payment,
@@ -28,8 +19,8 @@ public class Tickets {
 
         List<Ticket> tickets = makeCustomTickets(customTicketsString);
 
-        int countOfAutoTickets = payment.countOfTickets() - numberOfCustomTickets;
-        tickets.addAll(makeAutoTickets(countOfAutoTickets, numbersMaker));
+        int numberOfAutoTickets = payment.countOfTickets() - numberOfCustomTickets;
+        tickets.addAll(makeAutoTickets(numberOfAutoTickets, numbersMaker));
 
         return new Tickets(tickets);
     }
@@ -44,7 +35,6 @@ public class Tickets {
         return tickets;
     }
 
-
     private static List<Ticket> makeAutoTickets(int countOfTickets, NumbersMaker numbersMaker) {
         List<Ticket> tickets = new ArrayList<>();
 
@@ -53,10 +43,6 @@ public class Tickets {
             tickets.add(ticket);
         }
         return tickets;
-    }
-
-    public Stream<Ticket> stream() {
-        return tickets.stream();
     }
 
     public Map<Prize, Integer> checkWinningResult(WinningTicket winningTicket) {
@@ -79,7 +65,22 @@ public class Tickets {
         return winningResult;
     }
 
-    public int count(){
-        return tickets.size();
+    public void addTo(StringBuilder stringBuilder) {
+        for (Ticket ticket : tickets) {
+            stringBuilder.append(System.lineSeparator())
+                    .append(ticket);
+        }
+    }
+
+    public void addSizeTo(StringBuilder stringBuilder) {
+        stringBuilder.append(tickets.size());
+    }
+
+    protected boolean isSameSize(int countOfTickets) {
+        return tickets.size() == countOfTickets;
+    }
+
+    protected List<Ticket> getTickets() {
+        return Collections.unmodifiableList(tickets);
     }
 }

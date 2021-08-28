@@ -9,44 +9,41 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class TicketsTest {
 
     @Test
-    @DisplayName("Tickets 생성")
-    void create() {
+    @DisplayName("Tickets 크기 비교")
+    void isSameSize() {
         // given
         Payment payment = new Payment(10_000);
 
         // when
-        Tickets tickets = Tickets.of(payment, new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
+        Tickets tickets = Tickets.of(payment, 0, new ArrayList<>(), new AutoNumbersMaker());
 
         // then
-        assertThat(tickets.stream().count())
-                .isEqualTo(payment.countOfTickets());
+        assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
     }
 
     @Test
     @DisplayName("Tickets 생성(custom ticket 포함)")
     void create_with_custom() {
         // given
-        edu.nextstep.lottocustom.domain.Payment payment = new edu.nextstep.lottocustom.domain.Payment(10_000);
-        int numberOfCustomTicket = 3;
+        Payment payment = new Payment(10_000);
+        int numberOfCustomTickets = 3;
         String customNumbers1 = "1, 2, 3, 4, 5, 6";
         String customNumbers2 = "2, 3, 4, 5, 6, 7";
         String customNumbers3 = "1, 2, 3, 4, 5, 6";
         List<String> customTicketsString = new ArrayList<>(Arrays.asList(customNumbers1, customNumbers2, customNumbers3));
 
         // when
-        Tickets tickets = Tickets.of(payment, numberOfCustomTicket, customTicketsString, new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, numberOfCustomTickets, customTicketsString, new AutoNumbersMaker());
 
         // then
-        assertThat(tickets.stream().count())
-                .isEqualTo(payment.countOfTickets());
-        assertThat(tickets.stream().collect(Collectors.toList()))
+        assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
+        assertThat(tickets.getTickets())
                 .contains(Ticket.madeBy(new CustomNumbersMaker(customNumbers1)),
                         Ticket.madeBy(new CustomNumbersMaker(customNumbers2)),
                         Ticket.madeBy(new CustomNumbersMaker(customNumbers3)));
@@ -57,7 +54,7 @@ public class TicketsTest {
     void checkWinningResult() {
         // given
         Payment payment = new Payment(1_000);
-        Tickets tickets = Tickets.of(payment, new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
+        Tickets tickets = Tickets.of(payment, 0, new ArrayList<>(), new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
 
         Ticket firstPrizeTicket = Ticket.madeBy(new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
         LottoNumber bonusNumber = LottoNumber.of(7);

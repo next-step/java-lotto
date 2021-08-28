@@ -9,14 +9,11 @@ import java.util.Map;
 public class ResultView {
     public static void printTickets(Tickets tickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(tickets.count())
-                .append("개를 구매했습니다.");
+        tickets.addSizeTo(stringBuilder);
 
-        tickets.stream()
-                .forEach((ticket) -> {
-                    stringBuilder.append(System.lineSeparator())
-                            .append(ticket);
-                });
+        stringBuilder.append("개를 구매했습니다.");
+
+        tickets.addTo(stringBuilder);
 
         String result = stringBuilder.toString();
         System.out.println(result);

@@ -39,7 +39,7 @@ public class InputView {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
-            System.out.println(inputName + "은(는) 숫자만 입력 가능합니다.");
+            System.out.println(inputName + " 은(는) 숫자만 입력 가능합니다.");
             System.exit(0);
             return 0;
         } finally {

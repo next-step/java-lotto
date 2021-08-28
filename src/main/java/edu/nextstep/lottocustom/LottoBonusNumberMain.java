@@ -22,8 +22,6 @@ public class LottoBonusNumberMain {
 
         ResultView.printTickets(tickets);
 
-
-
         Ticket firstPrizeTicket =
                 Ticket.madeBy(new CustomNumbersMaker(InputView.inputWinningNumbers()));
 
