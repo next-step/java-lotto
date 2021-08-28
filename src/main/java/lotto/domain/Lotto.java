@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Lotto {
 
+    public static final int LOTTO_PRICE = 1_000;
+
     public static final int LOTTO_NUMBERS_SIZE = 6;
     public static final int SAVED_MIN_NUMBER = 1;
     public static final int SAVED_MAX_NUMBER = 45;
