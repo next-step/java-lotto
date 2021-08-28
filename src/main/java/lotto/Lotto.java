@@ -35,9 +35,13 @@ public class Lotto {
     }
 
     private static void checkNumberRange(List<Integer> numbers) {
-        if (numbers.stream().filter(num -> num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER).count() != LOTTO_NUMBERS_SIZE) {
+        if (numbers.stream().filter(Lotto::isNumberRange).count() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE);
         }
+    }
+
+    private static boolean isNumberRange(int num) {
+        return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
     }
 
 }
