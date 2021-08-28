@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class Numbers {
 
-    private final List<Number> Numbers;
+    private final List<Number> numbers;
 
     public Numbers(List<Number> numbers) {
-        Numbers = numbers;
+        this.numbers = numbers;
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Numbers {
             return false;
         }
         Numbers numbers = (Numbers) o;
-        return Objects.equals(Numbers, numbers.Numbers);
+        return Objects.equals(this.numbers, numbers.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Numbers);
+        return Objects.hash(numbers);
     }
 
 }
