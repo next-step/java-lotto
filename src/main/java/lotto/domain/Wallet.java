@@ -10,16 +10,16 @@ public class Wallet {
 
     private final int money;
 
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
 
     public Wallet(int money) {
         this.money = money;
-        lottos = new ArrayList<>();
+        lottos = new Lottos();
     }
 
     public Wallet(int money, List<Lotto> lottos) {
         this(money);
-        this.lottos.addAll(lottos);
+        this.lottos.addLottos(lottos);
     }
 
     public int money() {
@@ -32,7 +32,7 @@ public class Wallet {
 
     public Wallet purchaseLotto() {
         int lottoCount = calculatePurchaseLottoCount();
-        List<Lotto> purchaseLottos = new ArrayList<>(lottos);
+        List<Lotto> purchaseLottos = new ArrayList<>();
         addNewLotto(lottoCount, purchaseLottos);
         return new Wallet(calculateRemainMoney(lottoCount), purchaseLottos);
     }
