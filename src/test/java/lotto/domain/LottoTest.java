@@ -58,4 +58,20 @@ class LottoTest {
             .withMessageMatching("로또 번호는 1이상 45이하의 수만 들어올 수 있다.");
     }
 
+    @Test
+    @DisplayName("로또의 번호가 오름차순으로 입력되지 않으면 Exception이 발생되어야 한다.")
+    void lottoSaveNumberAscTest() {
+
+        // given
+        List<Number> input = Arrays.asList(1, 2, 3, 4, 6, 5)
+            .stream()
+            .map(Number::new)
+            .collect(toList());
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Lotto(input))
+            .withMessageMatching("로또 번호는 오름차순으로 입력되어있어야 한다.");
+    }
+
 }

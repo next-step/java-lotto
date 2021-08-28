@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -11,6 +13,7 @@ public class Lotto {
     private static final String LOTTO_NUMBERS_INVALID_SIZE_ERROR_MESSAGE = "로또 번호의 개수는 6개가 들어와야 한다.";
     private static final String LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE = "로또의 번호는 중복되어 저장될 수 없다.";
     private static final String LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE = "로또 번호는 1이상 45이하의 수만 들어올 수 있다.";
+    private static final String LOTTO_NUMBERS_INVALID_ASC_ERROR_MESSAGE = "로또 번호는 오름차순으로 입력되어있어야 한다.";
 
     private final List<Number> numbers;
 
@@ -18,6 +21,7 @@ public class Lotto {
         checkLottoNumbersSize(numbers);
         checkDuplicatedNumber(numbers);
         checkNumberRange(numbers);
+        checkNumberAcs(numbers);
 
         this.numbers = numbers;
     }
@@ -37,6 +41,14 @@ public class Lotto {
     private static void checkNumberRange(List<Number> numbers) {
         if (numbers.stream().map(Number::value).filter(Lotto::isNumberRange).count() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE);
+        }
+    }
+
+    private static void checkNumberAcs(List<Number> numbers) {
+        List<Number> compare = new ArrayList<>(numbers);
+        Collections.sort(compare);
+        if (!numbers.equals(compare)) {
+            throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_ASC_ERROR_MESSAGE);
         }
     }
 
