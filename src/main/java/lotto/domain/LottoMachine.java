@@ -6,12 +6,12 @@ public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     public static final int NUMS_PER_LOTTO = 6;
     static final int LOTTO_MAX_NUM = 45;
-    private GenerateNumStrategy generateNumStrategy;
+    private final GenerateNumStrategy generateNumStrategy;
 
     private Money money;
     private Lottos lottos;
 
-    LottoMachine(int money, GenerateNumStrategy generateNumStrategy) {
+    public LottoMachine(int money, GenerateNumStrategy generateNumStrategy) {
         this.money = new Money(money);
         this.generateNumStrategy = generateNumStrategy;
         this.lottos = generateLottos();
@@ -25,7 +25,11 @@ public class LottoMachine {
         this(money, new AutoGenerateStrategy());
     }
 
-    int buyableLottos() {
+    public Lottos getLottos() {
+        return lottos;
+    }
+
+    public int buyableLottos() {
         return money.buyableLottos(LOTTO_PRICE);
     }
 
@@ -45,5 +49,9 @@ public class LottoMachine {
 
     public double getYield(List<Integer> winningNums) {
         return money.getYield(getTotalPrizeMoney(winningNums));
+    }
+
+    public WinningResult getWinningResult(List<Integer> winningNums) {
+        return countLottoPrize(winningNums);
     }
 }

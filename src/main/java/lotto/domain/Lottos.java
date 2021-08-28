@@ -13,6 +13,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public List<Lotto> getLottoList() {
+        return lottos;
+    }
+
     public WinningResult checkLottoPrize(List<Integer> winningNums) {
         Integer[] prizeNums = new Integer[GRADE_NUM];
         Arrays.fill(prizeNums, 0);
@@ -50,4 +54,5 @@ public class Lottos {
     public int hashCode() {
         return Objects.hash(lottos);
     }
+
 }

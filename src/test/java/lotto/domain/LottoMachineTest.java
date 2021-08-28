@@ -127,6 +127,6 @@ public class LottoMachineTest {
             }
         });
 
-        assertThat(lottoMachine.getYield(winningNums)).isEqualTo(65000/14500);
+        assertThat(lottoMachine.getYield(winningNums)).isEqualTo(65000.0/14500.0);
     }
 }

@@ -27,6 +27,10 @@ public class Lotto {
         }
     }
 
+    public List<Integer> getLottoNums() {
+        return lotto;
+    }
+
     int countMatchingNums(List<Integer> winningNums) {
         int count = 0;
 

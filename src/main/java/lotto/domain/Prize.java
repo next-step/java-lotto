@@ -24,7 +24,11 @@ public enum Prize {
         return matchingCount;
     }
 
-    int totalMoney(int count) {
+    public int money() {
+        return money;
+    }
+
+    int earnedMoney(int count) {
         return money * count;
     }
 }

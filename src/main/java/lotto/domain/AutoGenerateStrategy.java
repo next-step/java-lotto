@@ -6,7 +6,7 @@ public class AutoGenerateStrategy implements GenerateNumStrategy {
     public final static int NUMS_PER_LOTTO = 6;
     private final List<Integer> selectableNums;
 
-    AutoGenerateStrategy() {
+    public AutoGenerateStrategy() {
         List<Integer> numList = new ArrayList<>(LottoMachine.LOTTO_MAX_NUM);
 
         for (int i = 1; i <= LottoMachine.LOTTO_MAX_NUM; i++) {

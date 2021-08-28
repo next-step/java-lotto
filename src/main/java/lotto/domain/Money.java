@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Money {
     private static final String EXCEP_INVALID_MONEY = "Money 값으로 적합하지 않습니다.";
-    private static final int MIN_MONEY = 0;
+    public static final int MIN_MONEY = 0;
     private final int money;
 
     Money(int money) {
@@ -15,11 +15,12 @@ public class Money {
             throw new IllegalArgumentException(EXCEP_INVALID_MONEY + " : " + money);
         }
     }
+
     public int buyableLottos(int price) {
         return money / price;
     }
 
     public double getYield(int totalPrizeMoney) {
-        return totalPrizeMoney / money;
+        return (double)totalPrizeMoney / (double)money;
     }
 }
