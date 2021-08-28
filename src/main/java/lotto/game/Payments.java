@@ -13,10 +13,6 @@ public class Payments {
     }
 
     private void isValid(int payments) {
-        isPositive(payments);
-    }
-
-    private void isPositive(int payments) {
         if (payments <= ZERO) {
             throw new IllegalArgumentException("구매 금액은 양수입니다.");
         }
