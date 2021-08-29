@@ -12,7 +12,7 @@ public enum Gain {
         this.status = status;
     }
 
-    public static Gain decideStatusByProfitRate(double profitRate) {
+    public static Gain status(double profitRate) {
         if (profitRate < BREAK_EVEN_POINT_PROFIT_RATE) {
             return LOSS;
         }
