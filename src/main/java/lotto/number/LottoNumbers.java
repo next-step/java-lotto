@@ -1,7 +1,9 @@
 package lotto.number;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -11,6 +13,10 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> numbers) {
         isValid(numbers);
         this.numbers = numbers;
+    }
+
+    public LottoNumbers(int... numbers) {
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
     }
 
     public List<LottoNumber> value() {
@@ -36,9 +42,15 @@ public class LottoNumbers {
         return Objects.hash(numbers);
     }
 
-    public int matchOfWinningNumbers(WinningNumbers winningNumbers) {
+    public int matchOf(WinningNumbers winningNumbers) {
         return (int) winningNumbers.value().stream()
                 .filter(this.numbers::contains)
+                .count();
+    }
+
+    public int matchOf(BonusNumber bonusNumber) {
+        return (int) this.numbers.stream()
+                .filter(number -> bonusNumber.value().equals(number))
                 .count();
     }
 }
