@@ -20,17 +20,16 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public boolean checkBonusBallNumber(int bonusNumber) {
+    public boolean existNumber(LottoNumber bonusNumber) {
         return this.lottoNumbers.contains(bonusNumber);
     }
 
-    public int findMatchedNumberCount(WinningLottoNumbers winningLottoNumbers) {
-        return winningLottoNumbers.match(this.lottoNumbers);
+    public int match(Lotto lotto) {
+        return this.lottoNumbers.match(lotto);
     }
 
     @Override
     public String toString() {
         return lottoNumbers.toString();
     }
-
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class LottoPurchasingMachine {
     public static final int AMOUNT = 1_000;
+    public static final int ADD_LOTTO_COUNT = 1;
 
     public List<Lotto> buyAutomaticLotto(int buyNumber) {
         int count = buyNumber / AMOUNT;
@@ -27,20 +28,14 @@ public class LottoPurchasingMachine {
     }
 
     public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers, int bonusNumber) {
-        Integer[] result = new Integer[] {0,0,0,0,0,0};
-
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(prevLottoWinningNumbers), bonusNumber);
+        List<Integer> result = Arrays.asList(new Integer[] {0,0,0,0,0,0});
+        WinningLotto winningLotto = new WinningLotto(new Lotto(prevLottoWinningNumbers), bonusNumber);
 
         for (Lotto lotto : lottoList) {
-            int matchedNumberCount = lotto.findMatchedNumberCount(winningLottoNumbers);
-            checkWinningResult(matchedNumberCount, Arrays.asList(result), lotto.checkBonusBallNumber(bonusNumber));
+            Rank rank = winningLotto.matchedRank(lotto);
+            result.set(rank.getPlaceIndex(), result.get(rank.getPlaceIndex()) + ADD_LOTTO_COUNT);
         }
-        return Arrays.asList(result);
-    }
-
-    private void checkWinningResult(int matchedNumberCount, List<Integer> result, boolean checkBonusNumber) {
-        Rank rank = Rank.valueOf(matchedNumberCount, checkBonusNumber);
-        result.set(rank.getPlaceIndex(), result.get(rank.getPlaceIndex()) + 1);
+        return result;
     }
 
     public double findYield(List<Integer> result, int purchaseAmount) {
