@@ -6,18 +6,23 @@ import java.util.stream.Collectors;
 
 public class LottoAnswer {
 
-    private static List<Integer> lottoAnswerNumber = null;
+    public static List<Integer> lottoAnswerNumber = null;
     public static final String ENTER_SPLILT_REGEX = ", ";
+    public static String enterAnswerString ;
 
     public LottoAnswer(String enterAnswerString) {
-        parseEnterAnswerString(enterAnswerString);
+        this.enterAnswerString = enterAnswerString;
     }
 
-    public void parseEnterAnswerString(String enterAnswerString){
+    public LottoAnswer(List<Integer> lottoAnswerNumber) {
+        this.lottoAnswerNumber = lottoAnswerNumber;
+    }
+
+    public static LottoAnswer getParseEnterString(String enterAnswerString){
         String[] parseString= enterAnswerString.split(ENTER_SPLILT_REGEX);
-        this.lottoAnswerNumber=  Arrays.stream(parseString)
-                                        .map(Integer::parseInt)
-                                        .collect(Collectors.toList());
+        return new LottoAnswer(Arrays.stream(parseString)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public List<Integer> getLottoAnswerNumber() {

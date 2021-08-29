@@ -25,7 +25,7 @@ class LottoServiceTest {
         LottoService lottoService = new LottoService();
         String inputString = "1, 3, 4, 5, 6, 7";
 
-        LottoAnswer lottoAnswer = new LottoAnswer(inputString);
+        LottoAnswer lottoAnswer = LottoAnswer.from(inputString);
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         lottoTicketList.add(new LottoTicket().makeLottoNumber());
         lottoTicketList.add(new LottoTicket().makeLottoNumber());

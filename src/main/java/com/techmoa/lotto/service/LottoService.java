@@ -30,7 +30,7 @@ public class LottoService {
     }
 
     public void buyLotto(int purchaseAmount) {
-        this.countLottoTicket = purchaseAmount / 1000 ;
+        this.countLottoTicket = purchaseAmount / PURCHASE_LOTTO_PRICE ;
     }
 
     public LottoTickets getLottoTickets() {
@@ -53,13 +53,17 @@ public class LottoService {
     public HashMap<Integer,Integer> saveResults(List<List<Integer>> lottoResults) {
         HashMap<Integer,Integer> winResult = new HashMap<>();
         for(int i= 1; i<= 6; i++ ) {
-            int winCount = i;
-            int winCountResult = Long.valueOf(lottoResults.stream()
-                    .filter(s -> s.size() == winCount)
-                    .count()).intValue();
-            winResult.put(winCount,winCountResult);
+            int winCountResult = checkWinCountResult(lottoResults, i);
+            winResult.put(i,winCountResult);
         }
         return winResult;
+    }
+
+    public int checkWinCountResult(List<List<Integer>> lottoResults , int position) {
+        int winCount = position;
+        return Long.valueOf(lottoResults.stream()
+                .filter(s -> s.size() == winCount)
+                .count()).intValue();
     }
 
     public Float calculatorProfitRatio(HashMap<Integer,Integer> winResult) {

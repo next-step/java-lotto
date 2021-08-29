@@ -1,5 +1,6 @@
 package com.techmoa.lotto;
 
+import com.techmoa.lotto.service.LottoAnswer;
 import com.techmoa.lotto.service.LottoService;
 import com.techmoa.lotto.service.LottoTickets;
 import com.techmoa.lotto.model.LottoWinResult;
@@ -26,9 +27,10 @@ public class LottoStarter {
 
         // 지난 로또 입력 받기
         inputView.enterLastWinnerNumber();
+        LottoAnswer lottoAnswer = LottoAnswer.getParseEnterString(inputView.getWinEnterString());
 
         // 로또 통계 출력
-        LottoWinResult lottoWinResult = lottoService.checkWinnings(inputView.getLottoAnswer() , lottoTickets);
+        LottoWinResult lottoWinResult = lottoService.checkWinnings(lottoAnswer , lottoTickets);
         outputView.printAnswerResult(lottoWinResult);
     }
 }

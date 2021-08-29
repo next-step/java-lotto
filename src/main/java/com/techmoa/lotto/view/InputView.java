@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputView {
 
     private static int purchaseAmount = 0;
-    private static LottoAnswer lottoAnswer = null;
+    private static String winEnterString ;
 
     public static void enterPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요");
@@ -20,8 +20,7 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해주세요");
         Scanner scanner = new Scanner(System.in);
         if(scanner.hasNextLine()) {
-            String winString = scanner.nextLine();
-            lottoAnswer = new LottoAnswer(winString);
+            winEnterString = scanner.nextLine();
         }
     }
 
@@ -29,7 +28,7 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public static LottoAnswer getLottoAnswer() {
-        return lottoAnswer;
+    public static String getWinEnterString() {
+        return winEnterString;
     }
 }
