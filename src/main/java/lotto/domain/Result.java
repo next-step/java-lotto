@@ -28,7 +28,7 @@ public class Result {
     }
 
     private Money calculatePurchaseAmount() {
-        return LottoGame.LOTTO_PRICE.times(lottoResults.size());
+        return TicketCount.LOTTO_PRICE.times(lottoResults.size());
     }
 
     public boolean isProfit() {
