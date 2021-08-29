@@ -1,18 +1,13 @@
 package lotto.domain;
 
 import lotto.generic.Money;
-import lotto.util.LottoNumbersFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static lotto.domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -21,19 +16,14 @@ public class LottoGameTest {
     @DisplayName("로또 티켓 구매")
     @ParameterizedTest(name = "{index}. {displayName}, arguments: {arguments}")
     @MethodSource("parameterProvider")
-    void buy(int purchaseAmount, String[] manualLottoNumbers) {
+    void buy(int purchaseAmount, String[] inputManualTickets) {
         Money amount = Money.wons(purchaseAmount);
-        int ticketCount = amount.divideAndDiscardRemainder(LOTTO_PRICE);
-        LottoTickets lottoTickets = LottoGame.buy(amount, manualLottoNumbers);
-        List<LottoNumbers> manualLottoTickets = Arrays.stream(manualLottoNumbers)
-                .map(LottoNumbersFactory::makeLottoNumbers)
-                .collect(toList());
+        int expectedTicketCount = amount.divideAndDiscardRemainder(TicketCount.LOTTO_PRICE);
+        LottoTickets lottoTickets = LottoGame.buy(amount, inputManualTickets);
 
         assertAll(
-                () -> assertThat(lottoTickets.getLottoTickets()).hasSize(ticketCount),
-                () -> assertThat(lottoTickets.getAutoTicketCount()).isEqualTo(ticketCount - manualLottoNumbers.length),
-                () -> assertThat(lottoTickets.getManualTicketCount()).isEqualTo(manualLottoNumbers.length),
-                () -> assertThat(lottoTickets.getLottoTickets()).containsAll(manualLottoTickets)
+                () -> assertThat(lottoTickets.getLottoTickets()).hasSize(expectedTicketCount),
+                () -> assertThat(lottoTickets.getAutoTicketCount()).isEqualTo(expectedTicketCount - inputManualTickets.length)
         );
     }
 
