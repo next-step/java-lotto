@@ -18,7 +18,7 @@ public class GameResult {
 
     public int countTicketsWinning(Prize prize) {
         return (int) lottoGame.getLottoTickets().stream()
-                .filter(ticket -> ticket.getPrize(winningNumbers).equals(prize))
+                .filter(ticket -> ticket.prize(winningNumbers).equals(prize))
                 .count();
     }
 

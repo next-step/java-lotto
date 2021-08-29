@@ -16,7 +16,7 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<LottoNumber> value() {
+    public List<LottoNumber> lottoNumbers() {
         return this.lottoNumbers.value();
     }
 
@@ -33,7 +33,7 @@ public class LottoTicket {
         return Objects.hash(lottoNumbers);
     }
 
-    public Prize getPrize(WinningNumbers winningNumbers) {
+    public Prize prize(WinningNumbers winningNumbers) {
         int winningNumberCounts = lottoNumbers.matchOfWinningNumbers(winningNumbers);
         return Prize.prize(winningNumberCounts);
     }
