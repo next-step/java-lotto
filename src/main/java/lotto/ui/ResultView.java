@@ -24,7 +24,7 @@ public class ResultView {
     }
 
     private List<Integer> convertLottoNumberToInteger(LottoTicket lottoTicket) {
-        return lottoTicket.getValue().stream()
+        return lottoTicket.value().stream()
                 .mapToInt(LottoNumber::value).boxed()
                 .collect(Collectors.toList());
     }
@@ -38,7 +38,7 @@ public class ResultView {
 
         double profitRate = gameResult.getProfitRate();
         System.out.printf("총 수익률은 %s 입니다%n", profitRate);
-        System.out.printf("(기준이 %s이기 때문에 결과적으로 %s라는 의미임)%n", Gain.BREAK_EVEN_POINT_PROFIT_RATE, Gain.decideStatusByProfitRate(profitRate).getValue());
+        System.out.printf("(기준이 %s이기 때문에 결과적으로 %s라는 의미임)%n", Gain.BREAK_EVEN_POINT_PROFIT_RATE, Gain.decideStatusByProfitRate(profitRate).value());
     }
 
     private Predicate<Prize> pickPrizesExceptLoser() {

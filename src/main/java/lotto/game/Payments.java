@@ -31,7 +31,7 @@ public class Payments {
         return Objects.hash(payments);
     }
 
-    public int getValue() {
+    public int value() {
         return this.payments;
     }
 }

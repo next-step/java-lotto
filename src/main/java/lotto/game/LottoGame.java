@@ -16,7 +16,7 @@ public class LottoGame {
 
     public LottoGame(int totalPayments) {
         this.payments = new Payments(totalPayments);
-        int ticketCount = ticketCount(payments.getValue());
+        int ticketCount = ticketCount(payments.value());
         this.tickets = new LottoTickets(initTickets(ticketCount));
     }
 
@@ -31,7 +31,7 @@ public class LottoGame {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return this.tickets.getValue();
+        return this.tickets.value();
     }
 
     public Payments payments() {

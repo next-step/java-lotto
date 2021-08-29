@@ -16,7 +16,7 @@ public class LottoTicket {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<LottoNumber> getValue() {
+    public List<LottoNumber> value() {
         return this.lottoNumbers.value();
     }
 

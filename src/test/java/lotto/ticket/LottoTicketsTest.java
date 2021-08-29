@@ -11,6 +11,6 @@ class LottoTicketsTest {
     @Test
     void createLottoTickets() {
         LottoTickets lottoTickets = new LottoTickets(Helper.lottoTickets());
-        assertThat(lottoTickets.getValue().size()).isEqualTo(Helper.lottoTickets().size());
+        assertThat(lottoTickets.value().size()).isEqualTo(Helper.lottoTickets().size());
     }
 }

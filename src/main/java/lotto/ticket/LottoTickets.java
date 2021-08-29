@@ -11,7 +11,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> getValue() {
+    public List<LottoTicket> value() {
         return lottoTickets;
     }
 

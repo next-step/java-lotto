@@ -12,7 +12,7 @@ public class WholeNumbers {
         this.numbers = nums;
     }
 
-    public List<WholeNumber> getValue(){
+    public List<WholeNumber> value() {
         return numbers;
     }
 }

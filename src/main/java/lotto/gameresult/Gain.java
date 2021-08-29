@@ -25,7 +25,7 @@ public enum Gain {
     }
 
 
-    public String getValue() {
+    public String value() {
         return status;
     }
 }

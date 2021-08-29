@@ -30,7 +30,7 @@ public class GameResult {
     }
 
     public double getProfitRate() {
-        return Math.round(this.getTotalPrizeMoney() / (double) lottoGame.payments().getValue() * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
+        return Math.round(this.getTotalPrizeMoney() / (double) lottoGame.payments().value() * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
     }
 
 }
