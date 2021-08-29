@@ -39,4 +39,8 @@ public class Lottos {
         return result;
     }
 
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
 }

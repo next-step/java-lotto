@@ -3,9 +3,6 @@ package lotto.domain;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Wallet {
 
     private final Money money;
@@ -17,9 +14,9 @@ public class Wallet {
         lottos = new Lottos();
     }
 
-    public Wallet(Money money, List<Lotto> lottos) {
+    public Wallet(Money money, Lottos lottos) {
         this.money = money;
-        this.lottos = new Lottos(lottos);
+        this.lottos = lottos;
     }
 
     public Money money() {
@@ -32,7 +29,7 @@ public class Wallet {
 
     public Wallet purchaseLotto() {
         int lottoCount = calculatePurchaseLottoCount();
-        List<Lotto> purchaseLottos = new ArrayList<>();
+        Lottos purchaseLottos = new Lottos();
         addNewLotto(lottoCount, purchaseLottos);
         return new Wallet(calculateRemainMoney(lottoCount), purchaseLottos);
     }
@@ -45,7 +42,7 @@ public class Wallet {
         return money.calculatePurchaseCount(LOTTO_PRICE);
     }
 
-    private void addNewLotto(int lottoCount, List<Lotto> purchaseLottos) {
+    private void addNewLotto(int lottoCount, Lottos purchaseLottos) {
         for (int i=0; i< lottoCount; i++){
             purchaseLottos.add(new Lotto(generateNumbers()));
         }
