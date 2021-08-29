@@ -15,12 +15,11 @@ public class LottoGameMain {
         ResultView resultView = new ResultView();
 
         final int price = inputView.askUsersToPay();
-        List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
-
         LottoGame lottoGame = new LottoGame(price);
         resultView.showTicketsCounts(lottoGame);
         resultView.showEachTicketsLottoNumbers(lottoGame);
 
+        List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
         GameResult expectedGameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek));
         resultView.showWinningRateReport(expectedGameResult);
     }
