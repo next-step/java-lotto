@@ -6,15 +6,15 @@ import java.util.Objects;
 public class LottoNumbers {
 
     public static final int NUMBERS_LENGTH = 6;
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        isValid(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public LottoNumbers(List<LottoNumber> numbers) {
+        isValid(numbers);
+        this.numbers = numbers;
     }
 
-    public List<LottoNumber> getValue() {
-        return this.lottoNumbers;
+    public List<LottoNumber> value() {
+        return this.numbers;
     }
 
     private void isValid(List<LottoNumber> lottoNumbers) {
@@ -28,17 +28,17 @@ public class LottoNumbers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers lottoNumbers1 = (LottoNumbers) o;
-        return Objects.equals(lottoNumbers, lottoNumbers1.lottoNumbers);
+        return Objects.equals(numbers, lottoNumbers1.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(numbers);
     }
 
-    public int countWinningNumbers(WinningNumbers winningNumbers) {
-        return (int) winningNumbers.getValue().stream()
-                .filter(this.lottoNumbers::contains)
+    public int matchOfWinningNumbers(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.value().stream()
+                .filter(this.numbers::contains)
                 .count();
     }
 }

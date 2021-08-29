@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int lottoNumber;
+    private final int number;
 
-    public LottoNumber(int lottoNumber) {
-        isValid(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(int number) {
+        isValid(number);
+        this.number = number;
     }
 
-    public int getValue() {
-        return this.lottoNumber;
+    public int value() {
+        return this.number;
     }
 
     private void isValid(int lottoNumber) {
@@ -27,17 +27,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(number);
     }
 
 
     @Override
     public int compareTo(LottoNumber o) {
-        return o.getValue() - getValue();
+        return o.value() - value();
     }
 }

@@ -17,7 +17,7 @@ public class RandomNumbers {
     }
 
     private static List<LottoNumber> getCandidatesRangedFromMinToMax() {
-        return IntStream.rangeClosed(LottoNumberLimit.MIN.getValue(), LottoNumberLimit.MAX.getValue())
+        return IntStream.rangeClosed(LottoNumberLimit.MIN.value(), LottoNumberLimit.MAX.value())
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }

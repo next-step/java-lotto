@@ -5,18 +5,18 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private final List<LottoNumber> winningNumbers;
+    private final List<LottoNumber> numbers;
 
-    public WinningNumbers(List<LottoNumber> lottoNumbers) {
-        this.winningNumbers = lottoNumbers;
+    public WinningNumbers(List<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
-    public static WinningNumbers getInstanceByInt(List<Integer> lottoNumbers) {
-        return new WinningNumbers(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+    public static WinningNumbers getInstanceByInt(List<Integer> numbers) {
+        return new WinningNumbers(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 
-    List<LottoNumber> getValue() {
-        return winningNumbers;
+    List<LottoNumber> value() {
+        return numbers;
     }
 
 }

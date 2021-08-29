@@ -25,7 +25,7 @@ public class ResultView {
 
     private static List<Integer> ConvertLottoNumberToInteger(LottoTicket lottoTicket) {
         return lottoTicket.getValue().stream()
-                .mapToInt(LottoNumber::getValue).boxed()
+                .mapToInt(LottoNumber::value).boxed()
                 .collect(Collectors.toList());
     }
 

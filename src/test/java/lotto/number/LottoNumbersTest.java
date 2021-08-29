@@ -30,7 +30,7 @@ class LottoNumbersTest {
     @CsvSource(value = {"0:6", "1:5", "2:4", "3:3", "4:0"}, delimiter = ':')
     void tellsHowManyWinningNumbersAreIncluded(int ticketIndex, int winningNumberCounts) {
         LottoNumbers given = Helper.lottoNumbers(ticketIndex);
-        int result = given.countWinningNumbers(Helper.winningNumbers());
+        int result = given.matchOfWinningNumbers(Helper.winningNumbers());
         assertThat(result).isEqualTo(winningNumberCounts);
     }
 }

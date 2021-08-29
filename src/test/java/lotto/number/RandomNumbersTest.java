@@ -19,15 +19,15 @@ class RandomNumbersTest {
     @Test
     void maximumIs45() {
         LottoNumber maxInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber maxLottoNumber = new LottoNumber(LottoNumberLimit.MAX.getValue());
-        assertThat(maxInRandomNumbers.getValue() <= maxLottoNumber.getValue()).isTrue();
+        LottoNumber maxLottoNumber = new LottoNumber(LottoNumberLimit.MAX.value());
+        assertThat(maxInRandomNumbers.value() <= maxLottoNumber.value()).isTrue();
     }
 
     @DisplayName("1보다 작은 수는 가질 수 없다.")
     @Test
     void minimumIs45() {
         LottoNumber minInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber minLottoNumber = new LottoNumber(LottoNumberLimit.MIN.getValue());
-        assertThat(minInRandomNumbers.getValue() >= minLottoNumber.getValue()).isTrue();
+        LottoNumber minLottoNumber = new LottoNumber(LottoNumberLimit.MIN.value());
+        assertThat(minInRandomNumbers.value() >= minLottoNumber.value()).isTrue();
     }
 }

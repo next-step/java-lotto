@@ -17,7 +17,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getValue() {
-        return this.lottoNumbers.getValue();
+        return this.lottoNumbers.value();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class LottoTicket {
     }
 
     public Prize getPrize(WinningNumbers winningNumbers) {
-        int winningNumberCounts = lottoNumbers.countWinningNumbers(winningNumbers);
+        int winningNumberCounts = lottoNumbers.matchOfWinningNumbers(winningNumbers);
         return Prize.calculatePrizeMoney(winningNumberCounts);
     }
 }

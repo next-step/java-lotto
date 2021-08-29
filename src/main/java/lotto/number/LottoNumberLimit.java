@@ -9,7 +9,7 @@ public enum LottoNumberLimit {
         this.limit = number;
     }
 
-    public int getValue() {
+    public int value() {
         return limit;
     }
 
