@@ -7,7 +7,7 @@
 - [ ] ResultView
   - [ ] 당첨통계 내 2등 추가
 - [X] 보너스 볼 추가
-- [ ] Prize 내 2등 추가
+- [X] Prize 내 2등 추가
 
 ## step 2 To-Do
 
