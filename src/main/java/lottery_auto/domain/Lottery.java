@@ -5,21 +5,21 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Lottery {
-    private List<Integer> quickpicks;
+    private List<Integer> quickPicks;
 
-    public Lottery(final List<Integer> quickpicks) {
-        this.quickpicks = quickpicks;
+    public Lottery(final List<Integer> quickPicks) {
+        this.quickPicks = quickPicks;
     }
 
     public int compare(final List<Integer> number) {
-        return Math.toIntExact(quickpicks.stream()
+        return Math.toIntExact(quickPicks.stream()
                 .filter(quickpick -> number.contains(quickpick))
                 .count());
     }
 
     @Override
     public String toString() {
-        return quickpicks.stream()
+        return quickPicks.stream()
                 .map(Objects::toString)
                 .collect(Collectors.toList())
                 .toString();
