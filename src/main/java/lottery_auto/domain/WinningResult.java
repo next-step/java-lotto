@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import lottery_auto.type.WinningMatch;
-
 import java.util.stream.Collectors;
 
 public final class WinningResult {
@@ -18,7 +17,14 @@ public final class WinningResult {
     }
 
     public int compareMatch(WinningMatch winningMatch){
-        return matchList.getOrDefault(winningMatch, 0);
+        return matchList.get(winningMatch);
+    }
+
+    public List<Integer> getWinningCount(){
+        List<WinningMatch> winningMatches = WinningMatch.bringExceptNonValue();
+        return winningMatches.stream()
+                .map(winningMatch -> compareMatch(winningMatch))
+                .collect(Collectors.toList());
     }
 
     public BigDecimal sumMatchResult() {
@@ -31,13 +37,6 @@ public final class WinningResult {
         return sumMatchResult().divide(amount, 2, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
-    @Override
-    public String toString() {
-        return matchList.entrySet().stream()
-                .map(Objects::toString)
-                .collect(Collectors.toList())
-                .toString();
-    }
 
     private void match(final List<Integer> match){
         init();
