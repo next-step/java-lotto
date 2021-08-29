@@ -20,7 +20,8 @@ class GainTest {
         );
     }
 
-    @ParameterizedTest(name = "수익률 {0}: 결과는 {1}")
+    @DisplayName("수익률이")
+    @ParameterizedTest(name = "{0}: 결과는 {1}")
     @MethodSource("provideGainDecidedByProfitRate")
     void name(double profitRate, Gain gain) {
         assertThat(Gain.status(profitRate)).isEqualTo(gain);
