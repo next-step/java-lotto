@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Rank {
 
@@ -18,11 +20,19 @@ public enum Rank {
         this.winCount = winCount;
     }
 
-    public static Rank calculateLottoRank(int winCount){
+    public static Rank calculateLottoRank(int winCount) {
         return Arrays.stream(values())
             .filter(rank -> rank.winCount == winCount)
             .findFirst()
             .orElse(Rank.LAST);
+    }
+
+    public static Map<Rank, Integer> createRankMap() {
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        for (Rank rank : values()) {
+            rankMap.put(rank, 0);
+        }
+        return rankMap;
     }
 
 }
