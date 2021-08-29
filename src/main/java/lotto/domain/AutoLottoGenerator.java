@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class AutoLottoGenerator implements LottoGenerator {
 
@@ -19,9 +17,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     @Override
     public Lotto generateLotto() {
         Collections.shuffle(LOTTO_NUMBER_CARDS);
-        List<LottoNumber> lottoNumbers = LOTTO_NUMBER_CARDS.subList(0, 6);
-        Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
+        return new Lotto(new TreeSet<>(new ArrayList<>(LOTTO_NUMBER_CARDS.subList(0, 6))));
     }
 
 }

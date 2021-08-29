@@ -1,16 +1,17 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class WinningResults {
 
-    private final Lotto winningNumbers;
+    private final WinningLotto winningLotto;
     private final WinningReport winningReport;
 
-    public WinningResults(LottoPaper lottoPaper, String winningNumberString) {
-        this.winningNumbers = initWinningNumber(winningNumberString);
-        this.winningReport = lottoPaper.checkWinning(winningNumbers);
+    public WinningResults(LottoPaper lottoPaper, String winningNumberString, int bonusNumber) {
+        this.winningLotto = new WinningLotto(initWinningNumber(winningNumberString), LottoNumber.of(bonusNumber));
+        this.winningReport = lottoPaper.checkWinning(winningLotto);
     }
 
     private Lotto initWinningNumber(String winningNumberString) {
@@ -23,7 +24,7 @@ public class WinningResults {
             winningNumbers.add(LottoNumber.of(Integer.parseInt(winningNumber.trim())));
         }
 
-        return new Lotto(winningNumbers);
+        return new Lotto(new HashSet<>(winningNumbers));
     }
 
     public WinningReport winningReport() {
