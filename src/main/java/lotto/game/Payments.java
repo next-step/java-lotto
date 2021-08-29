@@ -1,5 +1,7 @@
 package lotto.game;
 
+import lotto.ticket.LottoTicket;
+
 import java.util.Objects;
 
 public class Payments {
@@ -33,5 +35,9 @@ public class Payments {
 
     public int value() {
         return this.amount;
+    }
+
+    public int ticketCount() {
+        return amount / LottoTicket.PRICE;
     }
 }

@@ -16,18 +16,13 @@ public class LottoGame {
 
     public LottoGame(int totalPayments) {
         this.payments = new Payments(totalPayments);
-        int ticketCount = ticketCount(payments.value());
-        this.tickets = new LottoTickets(initTickets(ticketCount));
+        this.tickets = new LottoTickets(initTickets());
     }
 
-    private List<LottoTicket> initTickets(int ticketCount) {
-        return IntStream.range(0, ticketCount)
+    private List<LottoTicket> initTickets() {
+        return IntStream.range(0, payments.ticketCount())
                 .mapToObj(i -> new LottoTicket(new RandomNumbers(LottoNumberLimit.MIN.value(), LottoNumberLimit.MAX.value(), LottoNumbers.NUMBERS_LENGTH).value()))
                 .collect(Collectors.toList());
-    }
-
-    private int ticketCount(int payments) {
-        return payments / LottoTicket.PRICE;
     }
 
     public List<LottoTicket> getLottoTickets() {
