@@ -18,8 +18,8 @@ public class Wallet {
     }
 
     public Wallet(int money, List<Lotto> lottos) {
-        this(money);
-        this.lottos.addLottos(lottos);
+        this.money = money;
+        this.lottos = new Lottos(lottos);
     }
 
     public int money() {

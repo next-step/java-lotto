@@ -23,7 +23,7 @@ public class Lottos {
     public Lottos addLottos(List<Lotto> lottos) {
         List<Lotto> result = new ArrayList<>();
         Collections.copy(result, this.lottos);
-        Collections.copy(result, lottos);
+        result.addAll(lottos);
         return new Lottos(result);
     }
 
