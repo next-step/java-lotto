@@ -1,5 +1,7 @@
 package lotto.game;
 
+import lotto.number.LottoNumberLimit;
+import lotto.number.LottoNumbers;
 import lotto.number.RandomNumbers;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
@@ -21,7 +23,7 @@ public class LottoGame {
 
     private List<LottoTicket> createLottoTickets(int totalNumberOfTickets) {
         return IntStream.range(0, totalNumberOfTickets)
-                .mapToObj(i -> new LottoTicket(RandomNumbers.generate()))
+                .mapToObj(i -> new LottoTicket(new RandomNumbers(LottoNumberLimit.MIN.value(), LottoNumberLimit.MAX.value(), LottoNumbers.NUMBERS_LENGTH).value()))
                 .collect(Collectors.toList());
     }
 

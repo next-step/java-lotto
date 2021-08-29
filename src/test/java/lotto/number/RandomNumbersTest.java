@@ -2,32 +2,36 @@ package lotto.number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("랜덤 넘버 리스트는")
 class RandomNumbersTest {
 
-    @DisplayName("6개의 랜덤 넘버를 가진다.")
-    @Test
-    void generate6RandomNumbers() {
-        int actual = RandomNumbers.generate().size();
-        assertThat(actual).isEqualTo(6);
+    @DisplayName("생성시 지정된 길이만큼의 랜덤넘버를 가진다.")
+    @ParameterizedTest(name = "길이 {0}")
+    @ValueSource(ints = {4, 5, 6})
+    void length(int length) {
+        int actual = new RandomNumbers(1, 10, length).value().size();
+        assertThat(actual).isEqualTo(length);
     }
 
-    @DisplayName("45보다 큰 수는 가질 수 없다.")
+    @DisplayName("랜덤 넘버의 최댓값은 생성자에 지정된 최댓값이다.")
     @Test
-    void maximumIs45() {
-        LottoNumber maxInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber maxLottoNumber = new LottoNumber(LottoNumberLimit.MAX.value());
-        assertThat(maxInRandomNumbers.value() <= maxLottoNumber.value()).isTrue();
+    void maximum() {
+        LottoNumber maxInRandomNumbers = new RandomNumbers(1, 10, 10).value().get(9);
+        LottoNumber maxLottoNumber = new LottoNumber(10);
+        assertThat(maxInRandomNumbers).isEqualTo(maxLottoNumber);
     }
 
-    @DisplayName("1보다 작은 수는 가질 수 없다.")
+
+    @DisplayName("랜덤 넘버의 최솟값은 생성자에 지정된 최솟값이다")
     @Test
-    void minimumIs45() {
-        LottoNumber minInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber minLottoNumber = new LottoNumber(LottoNumberLimit.MIN.value());
-        assertThat(minInRandomNumbers.value() >= minLottoNumber.value()).isTrue();
+    void minimum() {
+        LottoNumber minInRandomNumbers = new RandomNumbers(1, 10, 10).value().get(0);
+        LottoNumber minLottoNumber = new LottoNumber(1);
+        assertThat(minInRandomNumbers).isEqualTo(minLottoNumber);
     }
 }
