@@ -2,6 +2,7 @@ package lotto.main;
 
 import lotto.game.LottoGame;
 import lotto.gameresult.GameResult;
+import lotto.number.BonusNumber;
 import lotto.number.WinningNumbers;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -20,7 +21,8 @@ public class LottoGameMain {
         resultView.showEachTicketsLottoNumbers(lottoGame);
 
         List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
-        GameResult expectedGameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek));
+        BonusNumber bonusNumber = new BonusNumber(0); // TODO : bonusNumber 추가
+        GameResult expectedGameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek), bonusNumber);
         resultView.showWinningRateReport(expectedGameResult);
     }
 }

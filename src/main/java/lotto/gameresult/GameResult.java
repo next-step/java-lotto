@@ -1,6 +1,7 @@
 package lotto.gameresult;
 
 import lotto.game.LottoGame;
+import lotto.number.BonusNumber;
 import lotto.number.WinningNumbers;
 import lotto.ticket.Prize;
 
@@ -10,15 +11,17 @@ public class GameResult {
 
     private final LottoGame lottoGame;
     private final WinningNumbers winningNumbers;
+    private final BonusNumber bonusNumber;
 
-    public GameResult(LottoGame lottoGame, WinningNumbers winningNumbers) {
+    public GameResult(LottoGame lottoGame, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         this.lottoGame = lottoGame;
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public int countTicketsWinning(Prize prize) {
         return (int) lottoGame.getLottoTickets().stream()
-                .filter(ticket -> ticket.prize(winningNumbers).equals(prize))
+                .filter(ticket -> ticket.prize(winningNumbers, bonusNumber).equals(prize))
                 .count();
     }
 

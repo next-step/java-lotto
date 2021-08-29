@@ -1,11 +1,17 @@
 package lotto.ticket;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
     private final List<LottoTicket> tickets;
+
+    public LottoTickets(int[][] numbers) {
+        this(Arrays.stream(numbers).map(LottoTicket::new).collect(Collectors.toList()));
+    }
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
