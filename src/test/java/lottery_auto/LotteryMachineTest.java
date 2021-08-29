@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -37,4 +38,12 @@ public class LotteryMachineTest {
         int ticket = 3;
         assertThat(lotteryMachine.issue(ticket)).isNotNull();
     }
+
+    @Test
+    @DisplayName("사이즈가 6인 로또숫자 리스트 생성 테스트")
+    void generate() {
+        List<Integer> numberList = lotteryMachine.generateNumber();
+        assertThat(numberList.size()).isEqualTo(6);
+    }
+
 }
