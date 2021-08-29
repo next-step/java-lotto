@@ -1,8 +1,12 @@
 package lotto.domain;
 
+import lotto.generic.Money;
+
 import java.util.Objects;
 
 public class TicketCount {
+    public static final Money LOTTO_PRICE = Money.wons(1000L);
+
     private final int ticketCount;
 
     public TicketCount(final int ticketCount) {
@@ -14,6 +18,14 @@ public class TicketCount {
         if (ticketCount < 0) {
             throw new IllegalArgumentException("티켓 수량은 최소 0이상입니다.");
         }
+    }
+
+    public static TicketCount calculateTicketCount(Money amount) {
+        return new TicketCount(amount.divideAndDiscardRemainder(LOTTO_PRICE));
+    }
+
+    public TicketCount minus(TicketCount ticketCount) {
+        return new TicketCount(this.ticketCount - ticketCount.getValue());
     }
 
     public int getValue() {
