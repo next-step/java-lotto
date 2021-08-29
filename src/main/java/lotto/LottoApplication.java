@@ -20,7 +20,9 @@ public class LottoApplication {
 
 	private static Lottos purchaseLotto() {
 		int money = InputView.inputMoney();
-		Lottos lottos = new Wallet().purchaseLottos(money);
+		Wallet wallet = new Wallet(money);
+		int numberOfLotto = wallet.numberOfThingsToBuy();
+		Lottos lottos = wallet.buyLotto(numberOfLotto);
 		ResultView.outputPurchaseLotto(lottos);
 		return lottos;
 	}
