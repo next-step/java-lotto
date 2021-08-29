@@ -8,21 +8,21 @@ import java.util.List;
 
 public class Wallet {
 
-    private final int money;
+    private final Money money;
 
     private final Lottos lottos;
 
-    public Wallet(int money) {
+    public Wallet(Money money) {
         this.money = money;
         lottos = new Lottos();
     }
 
-    public Wallet(int money, List<Lotto> lottos) {
+    public Wallet(Money money, List<Lotto> lottos) {
         this.money = money;
         this.lottos = new Lottos(lottos);
     }
 
-    public int money() {
+    public Money money() {
         return money;
     }
 
@@ -37,12 +37,12 @@ public class Wallet {
         return new Wallet(calculateRemainMoney(lottoCount), purchaseLottos);
     }
 
-    private int calculateRemainMoney(int lottoCount) {
-        return money - lottoCount * LOTTO_PRICE;
+    private Money calculateRemainMoney(int lottoCount) {
+        return money.useMoney(lottoCount * LOTTO_PRICE);
     }
 
     private int calculatePurchaseLottoCount() {
-        return money / LOTTO_PRICE;
+        return money.calculatePurchaseCount(LOTTO_PRICE);
     }
 
     private void addNewLotto(int lottoCount, List<Lotto> purchaseLottos) {

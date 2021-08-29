@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +12,7 @@ class WalletTest {
     void saveMoneyTest() {
 
         // given
-        int money = 10_000;
+        Money money = new Money(1_000);
 
         // when
         Wallet wallet = new Wallet(money);
@@ -28,14 +26,15 @@ class WalletTest {
     void purchaseLottoTest() {
 
         // given
-        int money = 10_000;
+        Money money = new Money(10_000);
         Wallet wallet = new Wallet(money);
+        Money expected = new Money(0);
 
         // when
         Wallet result = wallet.purchaseLotto();
 
         // then
-        assertThat(result.money()).isEqualTo(0);
+        assertThat(result.money()).isEqualTo(expected);
         assertThat(result.lottosCount()).isEqualTo(10);
     }
 
