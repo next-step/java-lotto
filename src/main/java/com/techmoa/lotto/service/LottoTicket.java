@@ -3,14 +3,11 @@ package com.techmoa.lotto.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class LottoTicket {
 
     public static final int MAX_NUMBER = 45;
-
     private List<Integer> lottoNumber = null;
-    private Random lottoRandom = new Random();
 
     public LottoTicket makeLottoNumber() {
         List<Integer> numberCards = new ArrayList<>();

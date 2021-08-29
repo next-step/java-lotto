@@ -7,26 +7,28 @@ import java.util.stream.Collectors;
 public class LottoAnswer {
 
     public static List<Integer> lottoAnswerNumber = null;
-    public static final String ENTER_SPLILT_REGEX = ", ";
-    public static String enterAnswerString ;
+    public static final String ENTER_SPLIT_REGEX = ", ";
 
-    public LottoAnswer(String enterAnswerString) {
-        this.enterAnswerString = enterAnswerString;
-    }
+    public int purchaseAmount = 0;
 
-    public LottoAnswer(List<Integer> lottoAnswerNumber) {
+    public LottoAnswer(List<Integer> lottoAnswerNumber, int purchaseAmount) {
         this.lottoAnswerNumber = lottoAnswerNumber;
+        this.purchaseAmount = purchaseAmount;
     }
 
-    public static LottoAnswer getParseEnterString(String enterAnswerString){
-        String[] parseString= enterAnswerString.split(ENTER_SPLILT_REGEX);
+    public static LottoAnswer of(String enterAnswerString , int purchaseAmount){
+        String[] parseString= enterAnswerString.split(ENTER_SPLIT_REGEX);
         return new LottoAnswer(Arrays.stream(parseString)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), purchaseAmount);
     }
 
     public List<Integer> getLottoAnswerNumber() {
         return lottoAnswerNumber;
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 
 

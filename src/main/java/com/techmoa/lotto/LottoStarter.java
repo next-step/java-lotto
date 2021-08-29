@@ -19,7 +19,7 @@ public class LottoStarter {
         int purchaseAmount = inputView.getPurchaseAmount();
 
         // 로또 번호 생성
-        lottoService.createLotto(purchaseAmount);
+        lottoService.startLotto(purchaseAmount);
         LottoTickets lottoTickets = lottoService.getLottoTickets();
 
         // 로또 번호 출력
@@ -27,10 +27,11 @@ public class LottoStarter {
 
         // 지난 로또 입력 받기
         inputView.enterLastWinnerNumber();
-        LottoAnswer lottoAnswer = LottoAnswer.getParseEnterString(inputView.getWinEnterString());
+        LottoAnswer lottoAnswer = LottoAnswer.of(inputView.getWinEnterString(),purchaseAmount );
 
         // 로또 통계 출력
-        LottoWinResult lottoWinResult = lottoService.checkWinnings(lottoAnswer , lottoTickets);
+        LottoWinResult lottoWinResult = lottoTickets.checkWinnings(lottoAnswer);
+        //LottoWinResult lottoWinResult = lottoService.checkWinnings(lottoAnswer , lottoTickets);
         outputView.printAnswerResult(lottoWinResult);
     }
 }

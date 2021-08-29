@@ -1,7 +1,5 @@
 package com.techmoa.lotto.view;
 
-import com.techmoa.lotto.service.LottoAnswer;
-
 import java.util.Scanner;
 
 public class InputView {

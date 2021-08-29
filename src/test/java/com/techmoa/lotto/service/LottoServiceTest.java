@@ -14,7 +14,7 @@ class LottoServiceTest {
     public void 당청번호_생성() {
         int purcharAmount = 5000;
         LottoService lottoService = new LottoService();
-        lottoService.createLotto(purcharAmount);
+        lottoService.startLotto(purcharAmount);
 
         assertEquals(5, lottoService.getLottoTickets().getLottoTickets().size());
     }
@@ -25,7 +25,7 @@ class LottoServiceTest {
         LottoService lottoService = new LottoService();
         String inputString = "1, 3, 4, 5, 6, 7";
 
-        LottoAnswer lottoAnswer = LottoAnswer.from(inputString);
+        LottoAnswer lottoAnswer = LottoAnswer.of(inputString, 4000);
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         lottoTicketList.add(new LottoTicket().makeLottoNumber());
         lottoTicketList.add(new LottoTicket().makeLottoNumber());
@@ -36,7 +36,7 @@ class LottoServiceTest {
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
 
-        LottoWinResult lottoWinResult = lottoService.checkWinnings(lottoAnswer , lottoTickets);
+        LottoWinResult lottoWinResult = lottoTickets.checkWinnings(lottoAnswer);
         assertEquals(6, lottoWinResult.getResultMap().size());
     }
 }
