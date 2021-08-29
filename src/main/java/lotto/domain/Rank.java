@@ -20,6 +20,10 @@ public enum Rank {
         this.winCount = winCount;
     }
 
+    public int winMoney() {
+        return this.winMoney;
+    }
+
     public static Rank calculateLottoRank(int winCount) {
         return Arrays.stream(values())
             .filter(rank -> rank.winCount == winCount)

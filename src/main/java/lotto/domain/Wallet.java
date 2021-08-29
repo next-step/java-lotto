@@ -23,6 +23,10 @@ public class Wallet {
         return money;
     }
 
+    public Lottos lottos() {
+        return lottos;
+    }
+
     public int lottosCount() {
         return lottos.size();
     }
