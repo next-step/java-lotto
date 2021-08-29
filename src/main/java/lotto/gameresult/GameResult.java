@@ -7,7 +7,6 @@ import lotto.ticket.Prize;
 import java.util.Arrays;
 
 public class GameResult {
-    public static final int DECIMAL_POINTS_MAKER = 100;
 
     private final LottoGame lottoGame;
     private final WinningNumbers winningNumbers;
@@ -29,8 +28,8 @@ public class GameResult {
                 .sum();
     }
 
-    public double getProfitRate() {
-        return Math.round(this.getTotalPrizeMoney() / (double) lottoGame.payments().value() * DECIMAL_POINTS_MAKER) / (double) DECIMAL_POINTS_MAKER;
+    public double profitRate() {
+        return new ProfitRate(this.getTotalPrizeMoney(), lottoGame.payments()).value();
     }
 
 }

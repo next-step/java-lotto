@@ -56,6 +56,6 @@ class GameResultTest {
     @MethodSource("provideTicketNumbersWithProfitRate")
     void getExpectedProfitRateOfLottoGame(int[][] lottoNumbers, double profitRate) {
         GameResult gameResult = new GameResult(Helper.lottoGame(lottoNumbers), Helper.winningNumbers());
-        assertThat(gameResult.getProfitRate()).isEqualTo(profitRate);
+        assertThat(gameResult.profitRate()).isEqualTo(profitRate);
     }
 }
