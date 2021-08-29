@@ -46,7 +46,7 @@ public class ResultView {
     }
 
     private void showTicketCountsForGivenPrize(GameResult gameResult, Prize prize) {
-        System.out.printf("%s개 일치 (%s원)- %s개%n", prize.getWinningNumbersCounts(), prize.getPrizeMoney(), gameResult.countTicketsWinning(prize));
+        System.out.printf("%s개 일치 (%s원)- %s개%n", prize.winningNumbersCount(), prize.prizeMoney(), gameResult.countTicketsWinning(prize));
     }
 
 }

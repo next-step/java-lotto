@@ -35,6 +35,6 @@ public class LottoTicket {
 
     public Prize getPrize(WinningNumbers winningNumbers) {
         int winningNumberCounts = lottoNumbers.matchOfWinningNumbers(winningNumbers);
-        return Prize.calculatePrizeMoney(winningNumberCounts);
+        return Prize.prize(winningNumberCounts);
     }
 }

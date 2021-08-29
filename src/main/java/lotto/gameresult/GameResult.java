@@ -25,7 +25,7 @@ public class GameResult {
 
     public int getTotalPrizeMoney() {
         return Arrays.stream(Prize.values())
-                .mapToInt(prize -> prize.getPrizeMoney() * countTicketsWinning(prize))
+                .mapToInt(prize -> prize.prizeMoney() * countTicketsWinning(prize))
                 .sum();
     }
 

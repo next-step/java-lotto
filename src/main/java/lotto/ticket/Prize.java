@@ -2,6 +2,7 @@ package lotto.ticket;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public enum Prize {
     FIRST(2000000000, 6),
@@ -18,16 +19,21 @@ public enum Prize {
         this.winningNumbersCounts = winningNumbersCounts;
     }
 
-    public static Prize calculatePrizeMoney(int winningNumberCount) {
-        Optional<Prize> result = Arrays.stream(Prize.values()).filter(prize -> prize.getWinningNumbersCounts() == winningNumberCount).findFirst();
+    public static Prize prize(int winningNumberCount) {
+        Optional<Prize> result = Arrays.stream(Prize.values())
+                .filter(has(winningNumberCount)).findFirst();
         return result.orElse(LOSER);
     }
 
-    public int getPrizeMoney() {
+    private static Predicate<Prize> has(int winningNumberCount) {
+        return prize -> prize.winningNumbersCount() == winningNumberCount;
+    }
+
+    public int prizeMoney() {
         return prizeMoney;
     }
 
-    public int getWinningNumbersCounts() {
+    public int winningNumbersCount() {
         return winningNumbersCounts;
     }
 }
