@@ -1,5 +1,16 @@
 # 로또
+
+## Step3 To-Do
+
+- [ ] InputView
+  - [ ] 보너스 번호 입력 받기
+- [ ] ResultView
+  - [ ] 당첨통계 내 2등 추가
+- [ ] 보너스 볼 추가
+- [ ] Prize 내 2등 추가
+
 ## step 2 To-Do
+
 - [X] InputView
   - [X] 구입 금액 입력 받기
   - [X] 지난주 담청 번호 입력 받기
