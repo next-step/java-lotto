@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class LottoTicket {
 
-    public final static int PRICE = 1000;
+    public static final int PRICE = 1000;
     private final LottoNumbers lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
