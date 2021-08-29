@@ -3,7 +3,6 @@ package lotto.gameresult;
 import lotto.helper.Helper;
 import lotto.ticket.Prize;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -34,13 +33,6 @@ class GameResultTest {
                 Arguments.of(1, Prize.FOURTH),
                 Arguments.of(1, Prize.LOSER)
         );
-    }
-
-    @DisplayName("1~4등 1장씩 가질 경우 상금은 2001555000원")
-    @Test
-    void getExpectedPrizeMoneyOfTheGame() {
-        GameResult gameResult = new GameResult(Helper.lottoGame(), Helper.winningNumbers());
-        assertThat(gameResult.totalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 
     @DisplayName("등수가")

@@ -2,11 +2,9 @@ package lotto.gameresult;
 
 import lotto.game.LottoGame;
 import lotto.number.WinningNumbers;
-import lotto.ticket.LottoTicket;
 import lotto.ticket.Prize;
 
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class GameResult {
 
@@ -20,15 +18,11 @@ public class GameResult {
 
     public int countTicketsWinning(Prize prize) {
         return (int) lottoGame.getLottoTickets().stream()
-                .filter(ticketWinning(prize))
+                .filter(ticket -> ticket.prize(winningNumbers).equals(prize))
                 .count();
     }
 
-    private Predicate<LottoTicket> ticketWinning(Prize prize) {
-        return ticket -> ticket.prize(winningNumbers).equals(prize);
-    }
-
-    int totalPrizeMoney() {
+    private int totalPrizeMoney() {
         return Arrays.stream(Prize.values())
                 .mapToInt(prize -> prize.prizeMoney() * countTicketsWinning(prize))
                 .sum();

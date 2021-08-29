@@ -5,7 +5,6 @@ import lotto.number.LottoNumber;
 import lotto.number.LottoNumbers;
 import lotto.number.WinningNumbers;
 import lotto.ticket.LottoTicket;
-import lotto.ticket.Prize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -67,7 +66,4 @@ public class Helper {
         return new WinningNumbers(lottoNumbers(winningNumbers));
     }
 
-    public static int totalPrizeMoney() {
-        return Arrays.stream(Prize.values()).mapToInt(Prize::prizeMoney).sum();
-    }
 }
