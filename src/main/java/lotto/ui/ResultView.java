@@ -46,6 +46,10 @@ public class ResultView {
     }
 
     private void showTicketCountsForGivenPrize(GameResult gameResult, Prize prize) {
+        if (prize.equals(Prize.SECOND)) {
+            System.out.printf("%s개 일치, 보너스 볼 일치(%s원)- %s개%n", prize.winningNumbersCount(), prize.prizeMoney(), gameResult.countTicketsWinning(prize));
+            return;
+        }
         System.out.printf("%s개 일치 (%s원)- %s개%n", prize.winningNumbersCount(), prize.prizeMoney(), gameResult.countTicketsWinning(prize));
     }
 

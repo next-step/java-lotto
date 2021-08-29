@@ -2,10 +2,10 @@
 
 ## Step3 To-Do
 
-- [ ] InputView
-  - [ ] 보너스 번호 입력 받기
-- [ ] ResultView
-  - [ ] 당첨통계 내 2등 추가
+- [X] InputView
+  - [X] 보너스 번호 입력 받기
+- [X] ResultView
+  - [X] 당첨통계 내 2등 추가
 - [X] 보너스 볼 추가
 - [X] Prize 내 2등 추가
 
