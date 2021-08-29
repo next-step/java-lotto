@@ -8,14 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteriesTest {
 
     private Lotteries lotteries;
-    private List<Integer> winningNumber;
 
     @BeforeEach
     void setUp() {
@@ -25,12 +23,12 @@ class LotteriesTest {
                         new Lottery(Arrays.asList(7,8,9,10,11,12))
                 ));
 
-        winningNumber = Arrays.asList(1,2,3,4,5,6);
     }
 
     @Test
     @DisplayName("로또 카운트 테스트")
     void count() {
+        String winningNumber = "1, 2, 3, 4, 5, 6";
         assertThat(lotteries.countMatchNumber(winningNumber))
                 .isInstanceOf(WinningResult.class);
     }
