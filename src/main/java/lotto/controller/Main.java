@@ -4,14 +4,19 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
         Money money = new Money(InputView.readMoney());
-        LottoSeller seller = new LottoSeller(new RandomLottoNumbersGenerator());
-        Lottos lottos = seller.sell(money);
-        OutputView.printLottos(lottos);
+        ManualNumbers manualNumbers = new ManualNumbers(InputView.readManualNumbers());
 
-        Lotto winningLotto = new Lotto(new LottoNumbers(InputView.readNumbers()));
+        LottoSeller seller = new LottoSeller(new RandomLottoNumbersGenerator());
+        Lottos lottos = seller.sell(money, manualNumbers);
+        OutputView.printLottos(lottos, manualNumbers.size());
+
+        Lotto winningLotto = new Lotto(new LottoNumbers(InputView.readLottoNumbers()));
         LottoNumber bonusNumber = new LottoNumber(InputView.readBonusNumber());
         LottoChecker lottoChecker = new LottoChecker(new WinningNumbers(winningLotto, bonusNumber));
 

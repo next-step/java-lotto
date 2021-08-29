@@ -7,8 +7,8 @@ import lotto.model.LottoStatistics;
 import lotto.model.Lottos;
 
 public class OutputView {
-    public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottos(Lottos lottos, int manualLottosSize) {
+        System.out.println("수동으로 " + manualLottosSize + "장, 자동으로 " + (lottos.size() - manualLottosSize) + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println("[" + getLottNumbersString(lotto) + "]");
         }
@@ -30,7 +30,7 @@ public class OutputView {
             if (result == LottoPlace.LOSE) continue;
             System.out.println(buildResultString(statistics, result));
         }
-        System.out.println("총 수익률은 " + statistics.calculateProfitRate() + "입니다.");
+        System.out.printf("총 수익률은 %.2f 입니다.%n", statistics.calculateProfitRate());
     }
 
     private static String buildResultString(LottoStatistics statistics, LottoPlace result) {
