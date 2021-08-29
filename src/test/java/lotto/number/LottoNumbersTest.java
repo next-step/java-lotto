@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -16,7 +18,8 @@ class LottoNumbersTest {
     @DisplayName("길이가 6이 아닐 경우 에러 발생")
     @Test
     void lottoNumbersAboveOrUnder6ThrowsError() {
-        assertThatThrownBy(() -> new LottoNumbers(Helper.lottoNumbers(1, 2, 3, 4, 5))).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 6개입니다.");
+        List<LottoNumber> numbers = Helper.lottoNumbers(1, 2, 3, 4, 5);
+        assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 6개입니다.");
     }
 
     @DisplayName("길이가 6일 경우 정상")
