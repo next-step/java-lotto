@@ -4,11 +4,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
+
+    public LottoNumbers(final String[] lottoNumbers) {
+        this(toLottoNumbers(lottoNumbers));
+    }
+
+    private static List<LottoNumber> toLottoNumbers(final String[] lottoNumbers) {
+        return Stream.of(lottoNumbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
