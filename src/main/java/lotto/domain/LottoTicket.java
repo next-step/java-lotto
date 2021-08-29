@@ -9,10 +9,6 @@ import java.util.stream.IntStream;
 
 public class LottoTicket {
     private final static int LOTTO_BALLS_MAX_NUM = 6;
-    private static final List<Integer> LOTTO_BALLS =
-        IntStream.rangeClosed(LottoBall.LOTTO_BALL_NUMBER_MIN, LottoBall.LOTTO_BALL_NUMBER_MAX)
-            .boxed()
-            .collect(Collectors.toList());
 
     private final Set<LottoBall> lottoBalls;
 
@@ -27,14 +23,6 @@ public class LottoTicket {
 
     public static LottoTicket of(int... numbers) {
         return new LottoTicket(numbers);
-    }
-
-    public static LottoTicket createRandomNumber() {
-        Collections.shuffle(LOTTO_BALLS);
-
-        return LottoTicket.of(LOTTO_BALLS.subList(0, LOTTO_BALLS_MAX_NUM).stream()
-            .mapToInt(Integer::intValue)
-            .toArray());
     }
 
     private void validate() {
