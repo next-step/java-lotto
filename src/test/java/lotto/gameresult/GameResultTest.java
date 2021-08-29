@@ -40,7 +40,7 @@ class GameResultTest {
     @Test
     void getExpectedPrizeMoneyOfTheGame() {
         GameResult gameResult = new GameResult(Helper.lottoGame(), Helper.winningNumbers());
-        assertThat(gameResult.getTotalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
+        assertThat(gameResult.totalPrizeMoney()).isEqualTo(Helper.totalPrizeMoney());
     }
 
     @DisplayName("등수가")
