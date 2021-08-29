@@ -38,7 +38,7 @@ public class ResultView {
     public static void print(WinningResult winningResult, BigDecimal amount) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
 
-        List<WinningMatch> winningMatches = WinningMatch.getMeaningValue();
+        List<WinningMatch> winningMatches = WinningMatch.bringExceptNonValue();
         winningMatches.forEach(winningMatch -> {
             int cnt = winningResult.compareMatch(winningMatch);
             System.out.println(String.format(LOTTERY_MATCH_MESSAGE,winningMatch.getCount(),winningMatch.getWinnings(),cnt));
