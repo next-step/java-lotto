@@ -2,35 +2,31 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lotto.domain.type.WinningType;
 
 public class Lottery {
-	private final List<Integer> winningNumbers;
-	private LotteryResults lotteryResults;
+	private final Numbers winningNumbers;
+	private final Number bonusNumber;
 
-	public Lottery(List<Integer> winningNumbers) {
+	public Lottery(Numbers winningNumbers, Number bonusNumber) {
 		this.winningNumbers = winningNumbers;
+		this.bonusNumber = bonusNumber;
 	}
 
-	public void draw(List<Lotto> lottos) {
+	public LotteryResults draw(Lottos lottos) {
 		List<LotteryResult> results = new ArrayList<>();
-		for (Lotto lotto : lottos) {
-			List<Integer> numbers = lotto.getNumbers().stream()
-				.map(Number::getValue)
-				.collect(Collectors.toList());
-			numbers.retainAll(winningNumbers);
-			int matchNumber = numbers.size();
-
-			WinningType winningType = WinningType.getWinningType(matchNumber);
+		for (Lotto lotto : lottos.getLottos()) {
+			WinningType winningType = getDrawResult(lotto.getNumbers());
 			results.add(new LotteryResult(winningType));
 		}
-
-		lotteryResults = new LotteryResults(results);
+		return new LotteryResults(results);
 	}
 
-	public LotteryResults getLotteryResults() {
-		return lotteryResults;
+	private WinningType getDrawResult(Numbers lottoNumbers) {
+		int matchNumber = lottoNumbers.matchSize(winningNumbers);
+		int bonusNumberValue = bonusNumber.getValue();
+		boolean matchBonus = lottoNumbers.containsNumber(bonusNumberValue);
+		return WinningType.getWinningType(matchNumber, matchBonus);
 	}
 }

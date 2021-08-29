@@ -4,7 +4,9 @@ import java.util.List;
 
 import lotto.domain.Lottery;
 import lotto.domain.LotteryResults;
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Number;
+import lotto.domain.Numbers;
 import lotto.domain.Wallet;
 import lotto.utils.StringUtils;
 import lotto.view.InputView;
@@ -12,23 +14,26 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
 	public static void main(String[] args) {
-		Wallet wallet = purchaseLotto();
-		drawLotto(wallet.getLottos());
+		Lottos lottos = purchaseLotto();
+		drawLotto(lottos);
 	}
 
-	private static Wallet purchaseLotto() {
-		int amount = InputView.inputAmount();
-		Wallet wallet = new Wallet(amount);
-		ResultView.outputPurchaseLotto(wallet.getLottos());
-		return wallet;
+	private static Lottos purchaseLotto() {
+		int money = InputView.inputMoney();
+		Wallet wallet = new Wallet(money);
+		int numberOfLotto = wallet.numberOfThingsToBuy();
+		Lottos lottos = wallet.buyLotto(numberOfLotto);
+		ResultView.outputPurchaseLotto(lottos);
+		return lottos;
 	}
 
-	private static void drawLotto(List<Lotto> lottos) {
+	private static void drawLotto(Lottos lottos) {
 		String strWinningNumbers = InputView.inputWinningNumbers();
-		List<Integer> winningNumbers = StringUtils.convertToNumberList(strWinningNumbers);
-		Lottery lottery = new Lottery(winningNumbers);
-		lottery.draw(lottos);
-		LotteryResults results = lottery.getLotteryResults();
+		List<Number> numbers = StringUtils.convertToNumberList(strWinningNumbers);
+		Numbers winningNumbers = new Numbers(numbers);
+		Number bonusNumber = new Number(InputView.inputBonusNumber());
+		Lottery lottery = new Lottery(winningNumbers, bonusNumber);
+		LotteryResults results = lottery.draw(lottos);
 		ResultView.outputWinningStatistics(results);
 	}
 }
