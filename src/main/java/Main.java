@@ -1,6 +1,6 @@
 import lotto.domain.*;
 import lotto.generic.Money;
-import lotto.util.LottoNumbersFactory;
+import lotto.util.StringUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,10 +12,13 @@ public class Main {
         InputView inputView = new InputView(scanner);
 
         int purchaseAmount = inputView.receivePurchaseMoney();
-        LottoTickets lottoTickets = LottoGame.buy(Money.wons(purchaseAmount));
-        ResultView.print(lottoTickets.getLottoTickets());
+        int manualLottoCount = inputView.receiveManualLottoCount();
+        String[] manualLottoNumbers = inputView.receiveManualLottoNumbers(manualLottoCount);
 
-        LottoNumbers winningNumbers = LottoNumbersFactory.makeLottoNumbers(inputView.receiveWinningNumbers());
+        LottoTickets lottoTickets = LottoGame.buy(Money.wons(purchaseAmount), manualLottoNumbers);
+        ResultView.print(lottoTickets);
+
+        LottoNumbers winningNumbers = new LottoNumbers(StringUtil.split(inputView.receiveWinningNumbers()));
         LottoNumber bonusNumber = new LottoNumber(inputView.receiveBonusNumber());
         Result result = lottoTickets.check(new WinningNumbers(winningNumbers, bonusNumber));
 

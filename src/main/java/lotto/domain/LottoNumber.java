@@ -9,6 +9,21 @@ public class LottoNumber {
 
     private final int lottoNumber;
 
+    public LottoNumber(final String lottoNumber) {
+        this(toInteger(lottoNumber.trim()));
+    }
+
+    private static int toInteger(final String lottoNumber) {
+        checkIsInteger(lottoNumber);
+        return Integer.parseInt(lottoNumber);
+    }
+
+    private static void checkIsInteger(String input) {
+        if (input == null || !input.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("입력된 값에 숫자가 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
     public LottoNumber(final int lottoNumber) {
         validateRange(lottoNumber);
         this.lottoNumber = lottoNumber;

@@ -38,7 +38,7 @@ public class ResultTest {
         result.report(lottoStatus);
         winningAmountSum = winningAmountSum.plus(lottoStatus.getWinningAmount());
 
-        Money purchaseAmount = LottoGame.LOTTO_PRICE.times(ticketCount);
+        Money purchaseAmount = TicketCount.LOTTO_PRICE.times(ticketCount);
         double expected = winningAmountSum.divide(purchaseAmount);
 
         assertThat(result.calculateRatio()).isEqualTo(expected);

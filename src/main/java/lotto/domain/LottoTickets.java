@@ -1,14 +1,42 @@
 package lotto.domain;
 
+import lotto.util.LottoNumbersFactory;
+import lotto.util.StringUtil;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoTickets {
     private final List<LottoNumbers> lottoTickets;
 
-    public LottoTickets(final List<LottoNumbers> lottoTickets) {
+    private final TicketCount autoTicketCount;
+
+    public static LottoTickets init(final String[] inputManualLottoTickets, final TicketCount autoTicketCount) {
+        List<LottoNumbers> lottoTickets = toLottoTickets(inputManualLottoTickets);
+        lottoTickets.addAll(makeAutoLottoTickets(autoTicketCount));
+        return new LottoTickets(lottoTickets, autoTicketCount);
+    }
+
+    private static List<LottoNumbers> toLottoTickets(final String[] inputManualLottoTickets) {
+        return Arrays.stream(inputManualLottoTickets)
+                .map(manualLottoNumbers -> new LottoNumbers(StringUtil.split(manualLottoNumbers)))
+                .collect(toList());
+    }
+
+    private static List<LottoNumbers> makeAutoLottoTickets(final TicketCount ticketCount) {
+        return IntStream.range(0, ticketCount.getValue())
+                .mapToObj(index -> LottoNumbersFactory.makeAutoLottoNumbers())
+                .collect(toList());
+    }
+
+    private LottoTickets(final List<LottoNumbers> lottoTickets, final TicketCount autoTicketCount) {
         checkNullOrEmpty(lottoTickets);
         this.lottoTickets = lottoTickets;
+        this.autoTicketCount = autoTicketCount;
     }
 
     private void checkNullOrEmpty(final List<LottoNumbers> lottoTickets) {
@@ -27,5 +55,13 @@ public class LottoTickets {
 
     public List<LottoNumbers> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public int getAutoTicketCount() {
+        return autoTicketCount.getValue();
+    }
+
+    public int getManualTicketCount() {
+        return lottoTickets.size() - getAutoTicketCount();
     }
 }
