@@ -3,7 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -32,12 +34,9 @@ class LottoCardTest {
 		LottoCard lottoCard = LottoCard.getInstance();
 		Lotto lotto = lottoCard.issue();
 
-		List<Integer> numbers = lotto.getNumbers()
-			.getNumbers()
-			.stream()
-			.map(Number::getValue)
-			.distinct()
-			.collect(Collectors.toList());
+		Set<Integer> numbers = new HashSet<>(lotto.getNumbers()
+			.getNumberValues());
+
 		int numberOfDistinctNumbers = numbers.size();
 		assertThat(numberOfDistinctNumbers).isEqualTo(6);
 

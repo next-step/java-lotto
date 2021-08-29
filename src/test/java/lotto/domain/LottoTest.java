@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,10 +20,7 @@ public class LottoTest {
 		LottoCard lottoCard = LottoCard.getInstance();
 		Lotto lotto = lottoCard.issue();
 		List<Integer> lottoNumbers = lotto.getNumbers()
-			.getNumbers()
-			.stream()
-			.map(Number::getValue)
-			.collect(Collectors.toList());
+			.getNumberValues();
 
 		assertThat(expect).containsAll(lottoNumbers);
 	}

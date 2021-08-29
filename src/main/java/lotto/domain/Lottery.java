@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lotto.domain.type.WinningType;
 
@@ -25,22 +24,9 @@ public class Lottery {
 	}
 
 	private WinningType getDrawResult(Numbers lottoNumbers) {
+		int matchNumber = lottoNumbers.matchSize(winningNumbers);
 		int bonusNumberValue = bonusNumber.getValue();
-		List<Integer> winningNumberValues = winningNumbers.getNumbers()
-			.stream()
-			.map(Number::getValue)
-			.collect(Collectors.toList());
-
-		List<Integer> numbers = convertNumberValue(lottoNumbers.getNumbers());
-		boolean matchBonus = numbers.contains(bonusNumberValue);
-		numbers.retainAll(winningNumberValues);
-		int matchNumber = numbers.size();
+		boolean matchBonus = lottoNumbers.containsNumber(bonusNumberValue);
 		return WinningType.getWinningType(matchNumber, matchBonus);
-	}
-
-	private List<Integer> convertNumberValue(List<Number> numbers) {
-		return numbers.stream()
-			.map(Number::getValue)
-			.collect(Collectors.toList());
 	}
 }
