@@ -38,6 +38,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return o.value() - value();
+        return value() - o.value();
     }
 }
