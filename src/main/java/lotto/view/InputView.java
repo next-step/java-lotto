@@ -17,6 +17,7 @@ public class InputView {
 
     public static int readMoney() {
         System.out.println("구입금액을 입력해 주세요.");
+
         return Integer.parseInt(scanner.nextLine());
     }
 
@@ -47,10 +48,10 @@ public class InputView {
 
     private static List<Integer> translateNumbers(String raw) {
         return Arrays.stream(raw.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .distinct()
-                .collect(Collectors.toList());
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .distinct()
+            .collect(Collectors.toList());
     }
 
     public static int readBonusNumber() {

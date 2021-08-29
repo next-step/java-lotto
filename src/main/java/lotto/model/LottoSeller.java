@@ -1,7 +1,7 @@
 package lotto.model;
 
 public class LottoSeller {
-    private LottoNumbersGenerator generator;
+    private final LottoNumbersGenerator generator;
 
     private static final Money LOTTO_PRICE = new Money(1000);
 
