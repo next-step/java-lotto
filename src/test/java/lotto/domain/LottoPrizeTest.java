@@ -11,8 +11,10 @@ class LottoPrizeTest {
 
   @ParameterizedTest(name = "상금 조회 테스트 - 일치개수: {0}, 보너스일치여부: {1}, 상금: {2}")
   @CsvSource({
-      "3,false,5000", "3,true,5000", "4,false,50000", "4,true,50000",
-      "5,false,1500000", "5,true,30000000", "6,false,2000000000"
+      "3,false,5000", "3,true,5000",
+      "4,false,50000", "4,true,50000",
+      "5,false,1500000", "5,true,30000000",
+      "6,false,2000000000"
   })
   void ofTest(int matchCnt, boolean matchBonus, int prizeMoney) {
     //when
@@ -43,6 +45,5 @@ class LottoPrizeTest {
     //then
     assertThat(valuesExceptNothing.length).isEqualTo(LottoPrize.values().length - 1);
     assertThat(valuesExceptNothing).doesNotContain(LottoPrize.NOTHING);
-
   }
 }

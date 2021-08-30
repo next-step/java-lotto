@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +14,7 @@ class LottoNumbersTest {
   @DisplayName("생성 테스트")
   void createTest() {
     //given
-    List<LottoNumber> numbers = Stream.of(1, 2, 3, 4, 5, 6)
-        .map(LottoNumber::valueOf)
-        .collect(Collectors.toList());
+    int[] numbers = { 1, 2, 3, 4, 5, 6};
 
     //when
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
@@ -31,12 +27,8 @@ class LottoNumbersTest {
   @DisplayName("잘못된 생성 테스트(6개 아닐때)")
   void invalidCreateTest() {
     //given
-    List<LottoNumber> numbersLessThan6 = Stream.of(1, 2, 3, 4, 5)
-        .map(LottoNumber::valueOf)
-        .collect(Collectors.toList());
-    List<LottoNumber> numbersMoreThan6 = Stream.of(1, 2, 3, 4, 5, 6, 7)
-        .map(LottoNumber::valueOf)
-        .collect(Collectors.toList());
+    int[] numbersLessThan6 = {1, 2, 3, 4, 5};
+    int[] numbersMoreThan6 = {1, 2, 3, 4, 5, 6, 7};
 
     //then
     assertThatIllegalArgumentException().isThrownBy(() -> {
@@ -51,16 +43,8 @@ class LottoNumbersTest {
   @DisplayName("일치하는 개수 반환 테스트")
   void matchedNumberCntTest() {
     //given
-    LottoNumbers lottoNumbers1 = new LottoNumbers(
-        Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList())
-    );
-    LottoNumbers lottoNumbers2 = new LottoNumbers(
-        Stream.of(10, 20, 30, 40, 5, 6)
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList())
-    );
+    LottoNumbers lottoNumbers1 = new LottoNumbers(new int[]{1, 2, 3, 4, 5, 6});
+    LottoNumbers lottoNumbers2 = new LottoNumbers(new int[]{10, 20, 30, 40, 5, 6});
 
     //when
     int matchedNumberCnt = lottoNumbers1.matchedNumberCnt(lottoNumbers2);
@@ -73,11 +57,7 @@ class LottoNumbersTest {
   @DisplayName("정렬된 숫자들 반환 테스트")
   void sortedNumbers() {
     //given
-    LottoNumbers lottoNumbers = new LottoNumbers(
-        Stream.of(3, 2, 4, 1, 6, 5)
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList())
-    );
+    LottoNumbers lottoNumbers = new LottoNumbers(new int[]{3, 2, 4, 1, 6, 5});
 
     //when
     List<Integer> sortedNumbers = lottoNumbers.sortedNumbers();
@@ -90,20 +70,12 @@ class LottoNumbersTest {
   @DisplayName("특정로또 번호 포함여부 테스트")
   void containsTest() {
     //given
-    LottoNumbers lottoNumbers = new LottoNumbers(
-        Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList())
-    );
-    LottoNumber containedNumber1 = new LottoNumber(1);
-    LottoNumber containedNumber2 = LottoNumber.valueOf(1);
-    LottoNumber unContainedNumber1 = new LottoNumber(7);
-    LottoNumber unContainedNumber2 = LottoNumber.valueOf(7);
+    LottoNumbers lottoNumbers = new LottoNumbers(new int[] {1, 2, 3, 4, 5, 6});
 
     //then
-    assertThat(lottoNumbers.contains(containedNumber1)).isTrue();
-    assertThat(lottoNumbers.contains(containedNumber2)).isTrue();
-    assertThat(lottoNumbers.contains(unContainedNumber1)).isFalse();
-    assertThat(lottoNumbers.contains(unContainedNumber2)).isFalse();
+    assertThat(lottoNumbers.contains(new LottoNumber(1))).isTrue();
+    assertThat(lottoNumbers.contains(LottoNumber.valueOf(1))).isTrue();
+    assertThat(lottoNumbers.contains(new LottoNumber(7))).isFalse();
+    assertThat(lottoNumbers.contains(LottoNumber.valueOf(7))).isFalse();
   }
 }
