@@ -11,7 +11,7 @@ public class WinningStatistics {
 
   public WinningStatistics(List<Lotto> lottos, Lotto winningLotto) {
     for (Lotto lotto : lottos) {
-      LottoPrize lottoPrize = LottoPrize.of(lotto.matchedNumberCnt(winningLotto));
+      LottoPrize lottoPrize = LottoPrize.of(lotto.matchedNumberCnt(winningLotto), false);  // TODO: refactor
       putInStatistics(lottoPrize);
     }
   }
