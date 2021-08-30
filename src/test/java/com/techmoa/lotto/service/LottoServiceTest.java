@@ -1,6 +1,7 @@
 package com.techmoa.lotto.service;
 
 import com.techmoa.lotto.model.LottoWinResult;
+import com.techmoa.lotto.model.LottoWinScope;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ class LottoServiceTest {
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
 
-        LottoWinResult lottoWinResult = lottoTickets.checkWinnings(lottoAnswer);
+        LottoWinResult lottoWinResult = LottoWinScope.checkWinnings(lottoAnswer, lottoTickets);
         assertEquals(6, lottoWinResult.getResultMap().size());
     }
 }

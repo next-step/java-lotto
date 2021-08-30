@@ -10,14 +10,14 @@ import java.util.List;
 public class LottoService {
 
     private static int purchaseAmount = 0;
-    private static int purchaseLottoTicket = 0;
+    private static final int purchaseLottoTicket = 0;
     private static int countLottoTicket = 0;
     private static final int PURCHASE_LOTTO_PRICE = 1000;
 
     private static LottoTickets lottoTickets = null;
 
     public void startLotto(int purchaseAmount){
-        this.purchaseAmount = purchaseAmount;
+        LottoService.purchaseAmount = purchaseAmount;
         buyLotto(purchaseAmount);
 
         List<LottoTicket> lottoTicketList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class LottoService {
     }
 
     public void buyLotto(int purchaseAmount) {
-        this.countLottoTicket = purchaseAmount / PURCHASE_LOTTO_PRICE ;
+        countLottoTicket = purchaseAmount / PURCHASE_LOTTO_PRICE ;
     }
 
     public LottoTickets getLottoTickets() {

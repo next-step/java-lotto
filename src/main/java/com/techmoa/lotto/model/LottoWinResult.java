@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class LottoWinResult {
 
-    private HashMap<Integer,Integer> resultMap ;
-    private Float profitRate ;
+    private final HashMap<Integer,Integer> resultMap ;
+    private final Float profitRate ;
 
     public LottoWinResult(HashMap<Integer,Integer> resultMap , Float profitRate) {
         this.resultMap = resultMap;

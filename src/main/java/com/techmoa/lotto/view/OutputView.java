@@ -15,10 +15,10 @@ public class OutputView {
         List<LottoTicket> lottoTicketsList = lottoTickets.getLottoTickets();
 
         for(LottoTicket lottoTicket : lottoTicketsList){
-            List<Integer> integers = lottoTicket.getLottoNumber();
+            List<Integer> lottoNumber = lottoTicket.getLottoNumber();
             StringBuilder stringBuffer = new StringBuilder();
             stringBuffer.append("[");
-            for(Integer number : integers) {
+            for(Integer number : lottoNumber) {
                 stringBuffer.append(number).append(",");
             }
             stringBuffer.append("]");
@@ -33,7 +33,7 @@ public class OutputView {
         LottoWinScope[] lottoWinScope = LottoWinScope.values();
         HashMap<Integer,Integer> winCount = lottoWinResult.getResultMap();
         IntStream.range(0, lottoWinScope.length).forEach(i -> {
-            System.out.print(lottoWinScope[i].getSameCountString());
+            System.out.print(lottoWinScope[i].showLottoResult());
             System.out.println(" " + winCount.get(lottoWinScope[i].getSameCount()));
         });
 
