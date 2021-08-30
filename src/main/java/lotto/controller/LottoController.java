@@ -7,6 +7,7 @@ import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoController {
@@ -16,27 +17,22 @@ public class LottoController {
         LottoController lottoController = new LottoController();
 
         int lottoCount = inputView.inputLottoBuyAmount() / 1000;
-        LottoTickets lottoTickets = LottoTickets.from(lottoController.getLottoTickets(inputView, resultView, lottoCount));
+        LottoTickets lottoTickets = lottoController.getLottoTickets(inputView, resultView, lottoCount);
         WinStatistics winStatistics = lottoController.proceedStatistics(inputView, lottoTickets);
 
         resultView.outputStatistics(winStatistics, winStatistics.getRateOfReturn());
         inputView.scannerClose();
     }
 
-    private List<LottoTicket> getLottoTickets(InputView inputView, ResultView resultView, int lottoCount) {
+    private LottoTickets getLottoTickets(InputView inputView, ResultView resultView, int lottoCount) {
         int manualLottoCount = inputView.inputManualLottoTicketCount();
+        resultView.outputManualLottoTickets(manualLottoCount);
 
         LottoMachine lottoMachine = new LottoMachine();
-        resultView.outputManualLottoTickets(manualLottoCount);
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            int[] lottoTicketNumbers = inputView.inputManualLottoTickets().stream().mapToInt(Integer::intValue).toArray();
-            lottoTickets.add(lottoMachine.manualCreate(lottoTicketNumbers));
-        }
-        lottoTickets.addAll(lottoMachine.autoCreate(lottoCount - manualLottoCount));
-        resultView.outputLottoLotteries(lottoTickets, manualLottoCount);
+        List<LottoTicket> tickets = new ArrayList<>();
+        IntStream.range(0, manualLottoCount).forEach(i -> tickets.add(lottoMachine.manualCreate(inputView.inputManualLottoTickets())));
 
-        return lottoTickets;
+        return lottoMachine.oneTimeCreate(LottoTickets.from(tickets), lottoCount - manualLottoCount);
     }
 
     public WinStatistics proceedStatistics(InputView inputView, LottoTickets lottoTickets) {

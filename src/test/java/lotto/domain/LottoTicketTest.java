@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoMachine;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -57,8 +58,8 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또공들의_우승자_번호를_랜덤으로_만들면_로또공들의_객체가_생성된다() {
-        assertThat(LottoTicket.createRandomNumber()).isInstanceOf(LottoTicket.class);
+    void 로또공들의_우승자_번호를_자동으로_만들면_로또공들의_객체가_생성된다() {
+        assertThat(new LottoMachine().autoCreate(1)).isInstanceOf(LottoTickets.class);
     }
 
     @ParameterizedTest
