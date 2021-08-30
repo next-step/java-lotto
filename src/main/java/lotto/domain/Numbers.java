@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +37,11 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(numbers.toArray());
     }
 
 }

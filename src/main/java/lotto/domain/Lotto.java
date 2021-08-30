@@ -66,4 +66,8 @@ public class Lotto {
         return numbers.calculateMatchedNumberCount(winLotto.numbers());
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

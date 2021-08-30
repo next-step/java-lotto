@@ -31,6 +31,10 @@ public class LottoResult {
         return buyLottoCount * Lotto.LOTTO_PRICE;
     }
 
+    public int getRankCount(Rank rank) {
+        return resultMap.get(rank);
+    }
+
     public int first() {
         return resultMap.get(Rank.FIRST);
     }
