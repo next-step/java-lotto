@@ -6,13 +6,13 @@ public class Payment {
 
     public static final int TICKET_PRICE = 1_000;
 
-    private final int payment;
+    private final int possibleTickets;
 
     public Payment(int payment) {
         validateUnderAUnitPrice(payment);
         validateDivideUnitPrice(payment);
 
-        this.payment = payment;
+        this.possibleTickets = payment/TICKET_PRICE;
     }
 
     private static void validateUnderAUnitPrice(int payment) {
@@ -27,13 +27,13 @@ public class Payment {
         }
     }
 
-    public int countOfTickets() {
-        return payment / TICKET_PRICE;
-    }
-
     public void validateOverPossibleTickets(int numberOfCustomTickets) {
-        if (numberOfCustomTickets > countOfTickets()) {
+        if (numberOfCustomTickets > possibleTickets) {
             throw new PaymentIllegalArgumentException("금액이 모자랍니다. 개 당 금액 : " + TICKET_PRICE + "원");
         }
+    }
+
+    public int countOfTickets() {
+        return possibleTickets;
     }
 }
