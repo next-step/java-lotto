@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,12 +17,24 @@ public class Lotto {
         for (Integer num : lottoNums) {
             checkValidNum(num);
         }
+
+        checkDuplicateNum(lottoNums);
     }
 
     void checkValidNum(int num) {
         if (num <= 0 || num > LottoMachine.LOTTO_MAX_NUM) {
-            throw new IllegalArgumentException(EXCEP_INVALID_NUM + " : " + num);
+            throwExceptionInvalidLotto();
         }
+    }
+
+    void checkDuplicateNum(List<Integer> lottoNums) {
+        if (lottoNums.size() != lottoNums.stream().distinct().count()) {
+            throwExceptionInvalidLotto();
+        }
+    }
+
+    void throwExceptionInvalidLotto() {
+        throw new IllegalArgumentException(EXCEP_INVALID_NUM);
     }
 
     public List<Integer> getLottoNums() {
