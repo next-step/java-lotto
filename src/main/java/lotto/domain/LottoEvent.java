@@ -4,13 +4,13 @@ import java.util.List;
 
 public class LottoEvent {
     private PurchaseAmount purchaseAmount;
-    private PurchaseLottoList purchaseLottoList;
+    private PurchaseLottos purchaseLottos;
     private Lotto winningNumber;
     private LottoResults lottoResults;
 
     public void setPurchaseAmount(int purchaseAmount) {
         this.purchaseAmount = new PurchaseAmount(purchaseAmount);
-        purchaseLottoList = new PurchaseLottoList(this.purchaseAmount.getLottoCount());
+        purchaseLottos = new PurchaseLottos(this.purchaseAmount.getLottoCount());
     }
 
     public void setWinningNumber(List<Integer> winningNumber) {
@@ -19,11 +19,11 @@ public class LottoEvent {
     }
 
     private void setLottoResults() {
-        lottoResults = new LottoResults(purchaseLottoList, winningNumber);
+        lottoResults = new LottoResults(purchaseLottos, winningNumber);
     }
 
     public List<Lotto> getPurchaseLottoList() {
-        return purchaseLottoList.getPurchaseLottoList();
+        return purchaseLottos.getPurchaseLottoList();
     }
 
     public LottoResults getLottoResults() {

@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PurchaseLottoList {
+public class PurchaseLottos {
     private List<Lotto> purchaseLottoList;
 
-    public PurchaseLottoList(int lottoCount) {
+    public PurchaseLottos(int lottoCount) {
         purchaseLottoList = IntStream.rangeClosed(1, lottoCount)
                 .mapToObj(i -> new Lotto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
