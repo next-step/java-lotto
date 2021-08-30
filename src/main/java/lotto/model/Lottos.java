@@ -15,6 +15,12 @@ public class Lottos implements Iterable<Lotto> {
         lottos.add(lotto);
     }
 
+    public void add(ManualNumbers manualNumbers) {
+        for (LottoNumbers lottoNumbers : manualNumbers) {
+            lottos.add(new Lotto(lottoNumbers));
+        }
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return lottos.iterator();

@@ -1,7 +1,7 @@
 package lotto.model;
 
 public class Lotto {
-    private LottoNumbers numbers;
+    private final LottoNumbers numbers;
 
     public static final int LOTTO_NUMBER_SIZE = 6;
 
