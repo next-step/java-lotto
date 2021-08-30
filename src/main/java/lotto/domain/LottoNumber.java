@@ -18,10 +18,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   public static LottoNumber valueOf(int number) {
     validateNumber(number);
-    if (lottoNumberCache[number - 1] != null) {
-      return lottoNumberCache[number - 1];
+    if (lottoNumberCache[number - 1] == null){
+      lottoNumberCache[number - 1] = new LottoNumber(number);
     }
-    return lottoNumberCache[number - 1] = new LottoNumber(number);
+    return lottoNumberCache[number - 1];
   }
 
   public int number() {
