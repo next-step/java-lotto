@@ -13,13 +13,12 @@ public class Tickets {
     }
 
     public static Tickets of(Payment payment,
-                             int numberOfCustomTickets,
                              List<String> customTicketsString,
                              NumbersMaker numbersMaker) {
 
         List<Ticket> tickets = makeCustomTickets(customTicketsString);
 
-        int numberOfAutoTickets = payment.countOfTickets() - numberOfCustomTickets;
+        int numberOfAutoTickets = payment.countOfTickets() - customTicketsString.size();
         tickets.addAll(makeAutoTickets(numberOfAutoTickets, numbersMaker));
 
         return new Tickets(tickets);

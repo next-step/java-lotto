@@ -21,7 +21,7 @@ public class LottoBonusNumberMain {
             payment.validateOverPossibleTickets(numberOfCustomTickets);
             List<String> customNumbersString = InputView.inputCustomNumbers(numberOfCustomTickets);
 
-            Tickets tickets = Tickets.of(payment, numberOfCustomTickets, customNumbersString, new AutoNumbersMaker());
+            Tickets tickets = Tickets.of(payment, customNumbersString, new AutoNumbersMaker());
 
             ResultView.printTickets(tickets);
 

@@ -21,7 +21,7 @@ public class TicketsTest {
         Payment payment = new Payment(10_000);
 
         // when
-        Tickets tickets = Tickets.of(payment, 0, new ArrayList<>(), new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, new ArrayList<>(), new AutoNumbersMaker());
 
         // then
         assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
@@ -32,14 +32,13 @@ public class TicketsTest {
     void create_with_custom() {
         // given
         Payment payment = new Payment(10_000);
-        int numberOfCustomTickets = 3;
         String customNumbers1 = "1, 2, 3, 4, 5, 6";
         String customNumbers2 = "2, 3, 4, 5, 6, 7";
         String customNumbers3 = "1, 2, 3, 4, 5, 6";
         List<String> customTicketsString = new ArrayList<>(Arrays.asList(customNumbers1, customNumbers2, customNumbers3));
 
         // when
-        Tickets tickets = Tickets.of(payment, numberOfCustomTickets, customTicketsString, new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, customTicketsString, new AutoNumbersMaker());
 
         // then
         assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
@@ -54,7 +53,7 @@ public class TicketsTest {
     void checkWinningResult() {
         // given
         Payment payment = new Payment(1_000);
-        Tickets tickets = Tickets.of(payment, 0, new ArrayList<>(), new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
+        Tickets tickets = Tickets.of(payment, new ArrayList<>(), new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
 
         Ticket firstPrizeTicket = Ticket.madeBy(new CustomNumbersMaker("1, 2, 3, 4, 5, 6"));
         LottoNumber bonusNumber = LottoNumber.of(7);
