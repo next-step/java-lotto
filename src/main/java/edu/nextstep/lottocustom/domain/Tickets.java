@@ -64,22 +64,11 @@ public class Tickets {
         return winningResult;
     }
 
-    public void addTo(StringBuilder stringBuilder) {
-        for (Ticket ticket : tickets) {
-            stringBuilder.append(System.lineSeparator())
-                    .append(ticket);
-        }
-    }
-
-    public void addSizeTo(StringBuilder stringBuilder) {
-        stringBuilder.append(tickets.size());
-    }
-
     protected boolean isSameSize(int countOfTickets) {
         return tickets.size() == countOfTickets;
     }
 
-    protected List<Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return Collections.unmodifiableList(tickets);
     }
 }

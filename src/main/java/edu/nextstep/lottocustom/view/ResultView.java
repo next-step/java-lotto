@@ -1,6 +1,7 @@
 package edu.nextstep.lottocustom.view;
 
 import edu.nextstep.lottocustom.domain.Prize;
+import edu.nextstep.lottocustom.domain.Ticket;
 import edu.nextstep.lottocustom.domain.Tickets;
 
 import java.util.Arrays;
@@ -9,11 +10,15 @@ import java.util.Map;
 public class ResultView {
     public static void printTickets(Tickets tickets) {
         StringBuilder stringBuilder = new StringBuilder();
-        tickets.addSizeTo(stringBuilder);
+
+        for (Ticket ticket : tickets.getTickets()) {
+            stringBuilder.append(System.lineSeparator())
+                    .append(ticket);
+        }
 
         stringBuilder.append("개를 구매했습니다.");
 
-        tickets.addTo(stringBuilder);
+        stringBuilder.append(tickets.getTickets().size());
 
         String result = stringBuilder.toString();
         System.out.println(result);
