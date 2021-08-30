@@ -22,7 +22,7 @@ public class LottoMachine {
     }
 
     LottoMachine(int money) {
-        this(money, new AutoGenerateStrategy());
+        this(money, new AutoGenerateNumsStrategy());
     }
 
     public Lottos getLottos() {

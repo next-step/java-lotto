@@ -60,7 +60,7 @@ public class LottoMachineTest {
         int totalLottosNum = 5;
         Random random = new Random();
 
-        Integer[][] nums = new Integer[totalLottosNum][AutoGenerateStrategy.NUMS_PER_LOTTO];
+        Integer[][] nums = new Integer[totalLottosNum][LottoMachine.NUMS_PER_LOTTO];
         for (int i = 0; i < totalLottosNum; i++) {
             for (int j = 0; j < LottoMachine.NUMS_PER_LOTTO; j++) {
                 nums[i][j] = random.nextInt(LottoMachine.LOTTO_MAX_NUM) + 1;

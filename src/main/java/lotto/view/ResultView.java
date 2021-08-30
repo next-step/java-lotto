@@ -41,8 +41,8 @@ public class ResultView {
 
         for (int i = prizes.length - 1; i >= 0; i--) {
             System.out.println(
-                    prizes[i].matchingCount() + "개 일치 (" +
-                    prizes[i].money() + "원)- " +
+                    prizes[i].getMatchingCount() + "개 일치 (" +
+                    prizes[i].getMoney() + "원)- " +
                     prizeList.get(prizes[i].ordinal()) + "개");
         }
     }
