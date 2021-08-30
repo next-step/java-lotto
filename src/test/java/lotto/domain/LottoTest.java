@@ -20,14 +20,14 @@ class LottoTest {
     void 로또번호_입력테스트() {
         List<Integer> input = Arrays.asList(1, 6, 3, 4, 5, 2);
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Integer> actual = new Lotto(input).getLotto();
+        List<Integer> actual = new Lotto(input).getValue();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void 로도번호_랜덤테스트_검증() {
         Lotto lotto = new Lotto();
-        List<Integer> actualLotto = lotto.getLotto();
+        List<Integer> actualLotto = lotto.getValue();
 
         int actualSize = new HashSet<>(actualLotto).size();
         assertThat(actualSize).isEqualTo(LottoConfig.LOTTO_SIZE);

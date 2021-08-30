@@ -29,7 +29,7 @@ public class LottoOutputView {
                 .append("\n");
 
         lottoList.stream()
-                .forEach(lotto -> stringBuilder.append(lotto.getLotto()).append("\n"));
+                .forEach(lotto -> stringBuilder.append(lotto.getValue()).append("\n"));
 
 
         System.out.println(stringBuilder);

@@ -34,7 +34,7 @@ public class Lotto {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
-    public List<Integer> getLotto() {
+    public List<Integer> getValue() {
         return lotto;
     }
 
