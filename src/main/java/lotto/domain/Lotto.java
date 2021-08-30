@@ -25,8 +25,17 @@ public class Lotto {
     return new Lotto(LottoNumbersGenerator.generateByRandom());
   }
 
-  public int matchedNumberCnt(Lotto winningLotto) {
-    return this.lottoNumbers.matchedNumberCnt(winningLotto.lottoNumbers);
+  public int matchNumberCnt(LottoNumbers winningLottoNumbers) {
+    return this.lottoNumbers.matchedNumberCnt(winningLottoNumbers);
+  }
+
+  // TODO: remove
+//  public int matchedNumberCnt(Lotto winningLotto) {
+//    return this.lottoNumbers.matchedNumberCnt(winningLotto.lottoNumbers);
+//  }
+
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
 
   public List<Integer> sortedNumbers() {

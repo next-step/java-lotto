@@ -7,8 +7,8 @@ public class WinningResult {
   private final WinningStatistics statistics;
   private final RateOfReturn rateOfReturn;
 
-  public WinningResult(List<Lotto> lottos, Lotto winningLotto) {
-    this.statistics = new WinningStatistics(lottos, winningLotto);
+  public WinningResult(List<Lotto> lottos, WinningInfo winningInfo) {
+    this.statistics = new WinningStatistics(lottos, winningInfo);
 
     long inputMoney = lottos.size() * Lotto.PRICE.value();
     long totalPrizeMoney = this.statistics.totalPrizeMoney();

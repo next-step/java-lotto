@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,13 @@ class WinningResultTest {
   @DisplayName("수익률 확인 테스트")
   void getRateOfReturn() {
     //given
-    Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoNumbers winningLottoNumbers = new LottoNumbers(
+        Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList())
+    );
+    LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
+    WinningInfo winningInfo = new WinningInfo(winningLottoNumbers, bonusLottoNumber);
 
     Lotto lotto1 = Lotto.issueByManual(Arrays.asList(8, 21, 23, 41, 42, 43));
     Lotto lotto2 = Lotto.issueByManual(Arrays.asList(3, 5, 11, 16, 32, 38));
@@ -34,7 +42,7 @@ class WinningResultTest {
         lotto8, lotto9, lotto10, lotto11, lotto12, lotto13, lotto14);
 
     //when
-    WinningResult winningResult = new WinningResult(lottos, winningLotto);
+    WinningResult winningResult = new WinningResult(lottos, winningInfo);
 
     //then
     double expected = (double) LottoPrize.FIFTH.prizeMoney() / (14 * Lotto.PRICE.value());

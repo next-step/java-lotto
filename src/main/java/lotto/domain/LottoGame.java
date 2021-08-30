@@ -24,8 +24,8 @@ public class LottoGame {
     return this.lottos;
   }
 
-  public WinningResult winningResult(Lotto winningLotto) {
-    return new WinningResult(this.lottos, winningLotto);
+  public WinningResult winningResult(WinningInfo winningInfo) {
+    return new WinningResult(this.lottos, winningInfo);
   }
 
   private void validateMoney(Money money) {

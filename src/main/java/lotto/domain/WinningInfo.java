@@ -1,11 +1,18 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.exception.DuplicatedBonusLottoNumberException;
 
 public class WinningInfo {
 
   private final LottoNumbers winningLottoNumbers;
   private final LottoNumber bonusLottoNumber;
+
+  // TODO : 개선 필요
+//  public WinningInfo(List<Integer> numbers, int bonusNumber) {
+//    this(new LottoNumbers(numbers.stream().map(LottoNumber::valueOf).collect(Collectors.toList())), LottoNumber.valueOf(bonusNumber));
+//  }
 
   public WinningInfo(LottoNumbers winningLottoNumbers, LottoNumber bonusLottoNumber) {
     this.winningLottoNumbers = winningLottoNumbers;

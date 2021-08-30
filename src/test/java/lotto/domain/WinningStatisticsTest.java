@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,13 @@ class WinningStatisticsTest {
   @DisplayName("당첨 통계값 생성 및 결과값 확인 테스트")
   void createTest() {
     //given
-    Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoNumbers winningLottoNumbers = new LottoNumbers(
+        Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList())
+    );
+    LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
+    WinningInfo winningInfo = new WinningInfo(winningLottoNumbers, bonusLottoNumber);
 
     Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => FIRST
     Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => FIFTH
@@ -23,7 +31,7 @@ class WinningStatisticsTest {
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
 
     //when
-    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
+    WinningStatistics statistics = new WinningStatistics(lottos, winningInfo);
 
     //then
     assertThat(statistics.cntByLottoPrize(LottoPrize.FIRST)).isEqualTo(1);
@@ -37,7 +45,13 @@ class WinningStatisticsTest {
   @DisplayName("총 당첨금 구하기 테스트")
   void calcTotalPrizeMoneyTest() {
     //given
-    Lotto winningLotto = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoNumbers winningLottoNumbers = new LottoNumbers(
+        Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList())
+    );
+    LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
+    WinningInfo winningInfo = new WinningInfo(winningLottoNumbers, bonusLottoNumber);
 
     Lotto lotto1 = Lotto.issueByManual(Arrays.asList(1, 2, 3, 4, 5, 6));        // 6개 일치 => FIRST
     Lotto lotto2 = Lotto.issueByManual(Arrays.asList(1, 3, 6, 10, 11, 12));     // 3개 일치 => FIFTH
@@ -47,7 +61,7 @@ class WinningStatisticsTest {
     List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4);
 
     //when
-    WinningStatistics statistics = new WinningStatistics(lottos, winningLotto);
+    WinningStatistics statistics = new WinningStatistics(lottos, winningInfo);
 
     //then
     assertThat(statistics.totalPrizeMoney())
