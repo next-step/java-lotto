@@ -27,7 +27,7 @@ public enum WinningMatch {
                 .orElse(MATCH_NON_VALUE);
     }
 
-    public static List<WinningMatch> bringExceptNonValue(){
+    public static List<WinningMatch> getWinningMatchesExistsNonMatchValue(){
         return Arrays.asList(WinningMatch.values())
                 .stream()
                 .filter(winningMatch -> winningMatch != WinningMatch.MATCH_NON_VALUE)

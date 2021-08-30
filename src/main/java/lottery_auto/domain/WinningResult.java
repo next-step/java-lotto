@@ -10,25 +10,25 @@ public final class WinningResult {
 
     private static final int MIN_NUMBER = 0;
 
-    private final EnumMap<WinningMatch, Integer> matchList = new EnumMap<>(WinningMatch.class);
+    private final EnumMap<WinningMatch, Integer> matchMap = new EnumMap<>(WinningMatch.class);
 
     public WinningResult(final List<Integer> result) {
         match(result);
     }
 
     public int compareMatch(WinningMatch winningMatch){
-        return matchList.get(winningMatch);
+        return matchMap.get(winningMatch);
     }
 
     public List<Integer> getWinningCount(){
-        List<WinningMatch> winningMatches = WinningMatch.bringExceptNonValue();
+        List<WinningMatch> winningMatches = WinningMatch.getWinningMatchesExistsNonMatchValue();
         return winningMatches.stream()
                 .map(winningMatch -> compareMatch(winningMatch))
                 .collect(Collectors.toList());
     }
 
     public BigDecimal sumMatchResult() {
-        return matchList.entrySet().stream()
+        return matchMap.entrySet().stream()
                 .map(winningMatch -> sum(winningMatch.getKey(), winningMatch.getValue()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -42,12 +42,12 @@ public final class WinningResult {
         init();
         match.stream()
                 .map(WinningMatch::equal)
-                .forEach(winningMatch -> matchList.put(winningMatch, matchList.get(winningMatch) + 1));
+                .forEach(winningMatch -> matchMap.put(winningMatch, matchMap.get(winningMatch) + 1));
     }
 
     private void init(){
         Arrays.stream(WinningMatch.values())
-                .forEach(winningMatch -> matchList.put(winningMatch, 0));
+                .forEach(winningMatch -> matchMap.put(winningMatch, 0));
     }
 
     private boolean validate(WinningMatch match){

@@ -24,9 +24,9 @@ public class ResultView {
     public static void print(List<Integer> winningCount) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
 
-        List<WinningMatch> winningMatches = WinningMatch.bringExceptNonValue();
+        List<WinningMatch> winningMatches = WinningMatch.getWinningMatchesExistsNonMatchValue();
         for(int count = 0; count < winningMatches.size(); count++){
-            System.out.println(formCountMessage(winningMatches.get(count),winningCount.get(count)));
+            System.out.println(formCountMessage(winningMatches.get(count), winningCount.get(count)));
         }
     }
 
@@ -35,11 +35,11 @@ public class ResultView {
     }
 
     private static String formCountMessage(WinningMatch winningMatch, int cnt){
-        return String.format(LOTTERY_MATCH_MESSAGE,winningMatch.getCount(),winningMatch.getWinnings(),cnt);
+        return String.format(LOTTERY_MATCH_MESSAGE,winningMatch.getCount(), winningMatch.getWinnings(), cnt);
     }
 
     private static String formProfitRateMessage(Double rate){
-        System.out.print(String.format(PROFIT_RATE_MESSAGE,rate));
+        System.out.print(String.format(PROFIT_RATE_MESSAGE, rate));
         ProfitRateMessage profitRateMessage = ProfitRateMessage.equal(rate.compareTo(COMPARISON_CRITERIA));
 
         return profitRateMessage.getMessage();
