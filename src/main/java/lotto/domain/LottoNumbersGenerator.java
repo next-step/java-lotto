@@ -12,7 +12,7 @@ public class LottoNumbersGenerator {
 
   public static List<LottoNumber> generateByRandom() {
     Collections.shuffle(CANDIDATE_LOTTO_NUMBERS);
-    return new ArrayList<>(CANDIDATE_LOTTO_NUMBERS.subList(0, Lotto.NUMBER_SIZE));
+    return new ArrayList<>(CANDIDATE_LOTTO_NUMBERS.subList(0, LottoNumbers.SIZE));
   }
 
   private static List<LottoNumber> initCandidateLottoNumbers() {

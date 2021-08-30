@@ -15,7 +15,7 @@ class LottoNumbersGeneratorTest {
     List<LottoNumber> lottoNumbers = LottoNumbersGenerator.generateByRandom();
 
     //then
-    assertThat(lottoNumbers.size()).isEqualTo(Lotto.NUMBER_SIZE);
+    assertThat(lottoNumbers.size()).isEqualTo(LottoNumbers.SIZE);
     assertThat(lottoNumbers.stream().distinct().count() == lottoNumbers.size()).isTrue();
   }
 }
