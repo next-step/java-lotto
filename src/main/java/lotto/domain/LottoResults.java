@@ -3,20 +3,15 @@ package lotto.domain;
 import lotto.LottoConfig;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class LottoResults {
-    private LottoResult lottoResult;
     private double lottoYield;
+    private LottoResult lottoResult;
 
-    public LottoResults(PurchaseLottos purchaseLottos, Lotto winningNumber) {
-        purchaseLottos.getPurchaseLottoList()
-                .stream()
-                .mapToInt(lotto -> lotto.sameLottoNumberCount(winningNumber))
-                .boxed()
-                .forEach(sameNumberCount ->
-                        Arrays.stream(lottoResult.values())
-                                .forEach(result -> result.addCount(sameNumberCount)));
-        setLottoYield(purchaseLottos);
+    public LottoResults(List<Integer> sameNumberCounts) {
+        lottoResult = new LottoResult(sameNumberCounts);
+        setLottoYield(sameNumberCounts.size());
     }
 
     public LottoResult getLottoResult() {
@@ -27,11 +22,12 @@ public class LottoResults {
         return lottoYield;
     }
 
-    private void setLottoYield(PurchaseLottos purchaseLottos) {
-        double totalWinnings = Arrays.stream(lottoResult.values())
-                .mapToInt(result -> result.getWinnings() * result.getCount())
+    private void setLottoYield(int lottoCount) {
+        double totalWinnings = Arrays.stream(LottoRank.values())
+                .mapToInt(result -> result.getWinnings() * lottoResult.getValue(result.getSameNumberCount()))
                 .sum();
-        double totalPurchasePrice = purchaseLottos.getPurchaseLottoList().size() * LottoConfig.LOTTO_PRICE;
+        double totalPurchasePrice = lottoCount * LottoConfig.LOTTO_PRICE;
         lottoYield = Math.round(totalWinnings / totalPurchasePrice * 100) / 100.0;
     }
+
 }

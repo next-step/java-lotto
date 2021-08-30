@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoEvent {
     private PurchaseAmount purchaseAmount;
@@ -15,11 +16,16 @@ public class LottoEvent {
 
     public void setWinningNumber(List<Integer> winningNumber) {
         this.winningNumber = new Lotto(winningNumber);
-        setLottoResults();
     }
 
-    private void setLottoResults() {
-        lottoResults = new LottoResults(purchaseLottos, winningNumber);
+    public void setLottoResults() {
+        List<Integer> sameNumberCounts = purchaseLottos.getPurchaseLottoList()
+                .stream()
+                .mapToInt(lotto -> lotto.sameLottoNumberCount(winningNumber))
+                .boxed()
+                .collect(Collectors.toList());
+
+        lottoResults = new LottoResults(sameNumberCounts);
     }
 
     public List<Lotto> getPurchaseLottoList() {

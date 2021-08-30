@@ -37,6 +37,7 @@ public class LottoController {
     }
 
     private void printResults(){
+        lottoEvent.setLottoResults();
         lottoOutputView.printResults(lottoEvent.getLottoResults());
     }
 }

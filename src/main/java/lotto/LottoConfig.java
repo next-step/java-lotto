@@ -10,4 +10,6 @@ public class LottoConfig {
 
     public static final int LOTTO_PRICE = 1000;
     public static final String PURCHASE_AMOUNT_MINUS_ERROR_MESSAGE = "구입금액은 음수일 수 없습니다.";
+
+    public static final String LOTTO_RESULT_ERROR_MESSAGE = "잘못된 등수값을 입력받았습니다.";
 }

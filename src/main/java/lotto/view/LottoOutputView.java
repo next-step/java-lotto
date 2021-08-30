@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoResults;
 
@@ -43,13 +44,14 @@ public class LottoOutputView {
     public void printResults(LottoResults lottoResults) {
         StringBuilder stringBuilder = new StringBuilder();
 
+
         LottoResult lottoResult = lottoResults.getLottoResult();
         double lottoYield = lottoResults.getLottoYield();
 
         stringBuilder.append(LOTTO_RESULT_START_MESSAGE);
 
-        for (LottoResult result : lottoResult.values()) {
-            stringBuilder.append(resultToString(result))
+        for (LottoRank result : LottoRank.values()) {
+            stringBuilder.append(resultToString(result, lottoResult))
                     .append("\n");
         }
 
@@ -61,10 +63,10 @@ public class LottoOutputView {
         System.out.println(stringBuilder);
     }
 
-    private String resultToString(LottoResult lottoResult) {
-        int sameNumberCount = lottoResult.getSameNumberCount();
-        int winnings = lottoResult.getWinnings();
-        int resultCount = lottoResult.getCount();
+    private String resultToString(LottoRank lottoRank, LottoResult lottoResult) {
+        int sameNumberCount = lottoRank.getSameNumberCount();
+        int winnings = lottoRank.getWinnings();
+        int resultCount = lottoResult.getValue(sameNumberCount);
         return sameNumberCount + LOTTO_RESULT_MID_MESSAGE_1 + winnings + LOTTO_RESULT_MID_MESSAGE_2 + resultCount + LOTTO_RESULT_MID_MESSAGE_3;
     }
 }
