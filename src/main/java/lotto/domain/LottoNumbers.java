@@ -12,7 +12,7 @@ public class LottoNumbers {
 
   public static final int SIZE = 6;
 
-  Set<LottoNumber> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
   public LottoNumbers(int[] numbers) {
     this(

@@ -7,18 +7,19 @@ public class Lotto {
 
   public static final Money PRICE = new Money(1000);
 
-  LottoNumbers lottoNumbers;
+  private final LottoNumbers lottoNumbers;
 
-  private Lotto(List<LottoNumber> lottoNumbers) {
-    this.lottoNumbers = new LottoNumbers(lottoNumbers);
+  private Lotto(LottoNumbers lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
   public static Lotto issueByManual(List<Integer> numbers) {
-    return new Lotto(
+    LottoNumbers lottoNumbers = new LottoNumbers(
         numbers.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList())
     );
+    return new Lotto(lottoNumbers);
   }
 
   public static Lotto issueByAuto() {
@@ -28,11 +29,6 @@ public class Lotto {
   public int matchNumberCnt(LottoNumbers winningLottoNumbers) {
     return this.lottoNumbers.matchedNumberCnt(winningLottoNumbers);
   }
-
-  // TODO: remove
-//  public int matchedNumberCnt(Lotto winningLotto) {
-//    return this.lottoNumbers.matchedNumberCnt(winningLotto.lottoNumbers);
-//  }
 
   public boolean contains(LottoNumber lottoNumber) {
     return lottoNumbers.contains(lottoNumber);
