@@ -29,12 +29,12 @@ public class LottoMachine {
         return lottos;
     }
 
-    public int buyableLottos() {
+    public int calculateBuyableLottos() {
         return money.buyableLottos(LOTTO_PRICE);
     }
 
     Lottos generateLottos() {
-        return generateNumStrategy.generate(buyableLottos(), NUMS_PER_LOTTO);
+        return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
     }
 
     WinningResult countLottoPrize(List<Integer> winningNums) {

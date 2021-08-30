@@ -52,7 +52,7 @@ public class ResultView {
     }
 
     public static void printBuyableLottoNum(LottoMachine lottoMachine) {
-        int buyableLottoNum = lottoMachine.buyableLottos();
+        int buyableLottoNum = lottoMachine.calculateBuyableLottos();
         System.out.println(buyableLottoNum + "개를 구매했습니다.");
     }
 }

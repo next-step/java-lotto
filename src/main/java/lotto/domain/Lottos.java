@@ -16,27 +16,24 @@ public class Lottos {
     }
 
     public WinningResult checkLottoPrize(List<Integer> winningNums) {
+        int matchingCount;
         Integer[] prizeNums = new Integer[Prize.values().length];
         Arrays.fill(prizeNums, 0);
 
         for (Lotto lotto : lottos) {
-            checkPrize(prizeNums, lotto, winningNums);
+            matchingCount = lotto.countMatchingNums(winningNums);
+
+            checkPrize(prizeNums, matchingCount);
         }
 
         return new WinningResult(Arrays.asList(prizeNums));
     }
 
-    private void checkPrize(Integer[] prizeNums, Lotto lotto, List<Integer> winningNums) {
-        int matchingCount = lotto.countMatchingNums(winningNums);
-
-        if (Prize.FIRST.matchingCount() == matchingCount) {
-            prizeNums[Prize.FIRST.ordinal()]++;
-        } else if (Prize.SECOND.matchingCount() == matchingCount) {
-            prizeNums[Prize.SECOND.ordinal()]++;
-        } else if (Prize.THIRD.matchingCount() == matchingCount) {
-            prizeNums[Prize.THIRD.ordinal()]++;
-        } else if (Prize.FOURTH.matchingCount() == matchingCount) {
-            prizeNums[Prize.FOURTH.ordinal()]++;
+    private void checkPrize(Integer[] prizeNums, int matchingCount) {
+        try {
+            prizeNums[Prize.valueOf(matchingCount).ordinal()]++;
+        } catch (IllegalArgumentException e) {
+            return;
         }
     }
 
