@@ -43,7 +43,7 @@ public class ResultView {
             System.out.println(
                     prizes[i].matchingCount() + "개 일치 (" +
                     prizes[i].money() + "원)- " +
-                    prizeList.get(prizes[i].index()) + "개");
+                    prizeList.get(prizes[i].ordinal()) + "개");
         }
     }
 

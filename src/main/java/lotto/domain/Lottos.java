@@ -30,13 +30,13 @@ public class Lottos {
         int matchingCount = lotto.countMatchingNums(winningNums);
 
         if (Prize.FIRST.matchingCount() == matchingCount) {
-            prizeNums[Prize.FIRST.index()]++;
+            prizeNums[Prize.FIRST.ordinal()]++;
         } else if (Prize.SECOND.matchingCount() == matchingCount) {
-            prizeNums[Prize.SECOND.index()]++;
+            prizeNums[Prize.SECOND.ordinal()]++;
         } else if (Prize.THIRD.matchingCount() == matchingCount) {
-            prizeNums[Prize.THIRD.index()]++;
+            prizeNums[Prize.THIRD.ordinal()]++;
         } else if (Prize.FOURTH.matchingCount() == matchingCount) {
-            prizeNums[Prize.FOURTH.index()]++;
+            prizeNums[Prize.FOURTH.ordinal()]++;
         }
     }
 

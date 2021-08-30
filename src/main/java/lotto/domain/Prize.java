@@ -1,23 +1,17 @@
 package lotto.domain;
 
 public enum Prize {
-    FIRST(0, 6, 2000000000),
-    SECOND(1, 5, 1500000),
-    THIRD(2, 4, 50000),
-    FOURTH(3, 3, 5000);
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000);
 
-    private final int index;
     private final int matchingCount;
     private final int money;
 
-    Prize(int index, int matchingCount, int prizeMoney) {
-        this.index = index;
+    Prize( int matchingCount, int prizeMoney) {
         this.matchingCount = matchingCount;
         this.money = prizeMoney;
-    }
-
-    public int index() {
-        return index;
     }
 
     public int matchingCount() {
