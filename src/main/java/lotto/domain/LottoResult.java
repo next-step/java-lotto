@@ -35,24 +35,4 @@ public class LottoResult {
         return resultMap.get(rank);
     }
 
-    public int first() {
-        return resultMap.get(Rank.FIRST);
-    }
-
-    public int second() {
-        return resultMap.get(Rank.SECOND);
-    }
-
-    public int third() {
-        return resultMap.get(Rank.THIRD);
-    }
-
-    public int fourth() {
-        return resultMap.get(Rank.FOURTH);
-    }
-
-    public int last() {
-        return resultMap.get(Rank.LAST);
-    }
-
 }

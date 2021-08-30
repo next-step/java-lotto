@@ -44,7 +44,7 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.calculateLottoResult(buyLottos, winLotto);
 
         // then
-        assertThat(lottoResult.fourth()).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.FOURTH)).isEqualTo(1);
     }
 
     @Test
