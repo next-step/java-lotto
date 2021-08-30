@@ -27,8 +27,8 @@ public enum LottoResult {
         return winnings;
     }
 
-    public void addCount(int sameNumberCount){
-        if(this.sameNumberCount == sameNumberCount){
+    public void addCount(int sameNumberCount) {
+        if(this.sameNumberCount == sameNumberCount) {
             count++;
         }
     }
