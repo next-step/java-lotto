@@ -8,6 +8,7 @@ public class LottoNumber {
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
+    public static final String OUT_OF_RANGE_EXCEPTION_MESSAGE = "지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER;
 
     private final int lottoNumber;
 
@@ -19,7 +20,7 @@ public class LottoNumber {
 
     private void validateOutOfRange(int bonusNumber) {
         if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
-            throw new NumbersIllegalArgumentException("지정 가능 숫자 범위 초과. 범위 : " + MIN_NUMBER + " ~ " + MAX_NUMBER);
+            throw new NumbersIllegalArgumentException(OUT_OF_RANGE_EXCEPTION_MESSAGE);
         }
     }
 

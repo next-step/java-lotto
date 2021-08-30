@@ -29,6 +29,6 @@ public class TicketTest {
         // when, then
         assertThatThrownBy(() -> Ticket.madeBy(new CustomNumbersMaker(numbers)))
                 .isInstanceOf(NumbersIllegalArgumentException.class)
-                .hasMessageContaining("입력 숫자 개수 미달 or 초과.");
+                .hasMessageContaining(Ticket.LENGTH_OF_NUMBERS_EXCEPTION_MESSAGE);
     }
 }

@@ -30,7 +30,7 @@ class LottoNumberTest {
         // when, then
         assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(NumbersIllegalArgumentException.class)
-                .hasMessageContaining("지정 가능 숫자 범위 초과.");
+                .hasMessageContaining(LottoNumber.OUT_OF_RANGE_EXCEPTION_MESSAGE);
     }
 
 }

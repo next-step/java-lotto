@@ -16,7 +16,7 @@ public class PaymentTest {
         // when
         assertThatThrownBy(() -> new Payment(payment))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
-                .hasMessageContaining("최소 입력 가능 금액 미달.");
+                .hasMessageContaining(Payment.UNDER_UNIT_PRICE_EXCEPTION_MESSAGE);
     }
 
     @ParameterizedTest(name = "금액 검증 실패 : " + Payment.TICKET_PRICE + "원 단위 떨어지지 않음")
@@ -25,7 +25,7 @@ public class PaymentTest {
         // when, then
         assertThatThrownBy(() -> new Payment(payment))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
-                .hasMessageContaining("개 당 금액");
+                .hasMessageContaining(Payment.DIVIDE_UNIT_PRICE_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class PaymentTest {
         // when, then
         assertThatThrownBy(() -> payment.validateOverPossibleTickets(numberOfCustomTickets))
                 .isInstanceOf(PaymentIllegalArgumentException.class)
-                .hasMessageContaining("금액이 모자랍니다.");
+                .hasMessageContaining(Payment.OVER_POSSIBLE_TICKETS_EXCEPTION_MESSAGE);
     }
 }

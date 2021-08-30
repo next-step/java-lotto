@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class Ticket {
 
     public static final int LENGTH_OF_NUMBERS = 6;
+    public static final String LENGTH_OF_NUMBERS_EXCEPTION_MESSAGE = "입력 숫자 개수 미달 or 초과. 지정 개수 : " + LENGTH_OF_NUMBERS;
 
     private final List<LottoNumber> numbers;
 
@@ -20,7 +21,7 @@ public class Ticket {
 
     private void validateLengthOfNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != LENGTH_OF_NUMBERS) {
-            throw new NumbersIllegalArgumentException("입력 숫자 개수 미달 or 초과. 지정 개수 : " + LENGTH_OF_NUMBERS);
+            throw new NumbersIllegalArgumentException(LENGTH_OF_NUMBERS_EXCEPTION_MESSAGE);
         }
     }
 
