@@ -29,6 +29,18 @@ public class LottoNumbers {
         }
     }
 
+    public int matchOf(WinningNumbers winningNumbers) {
+        return (int) winningNumbers.value().stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
+    public int matchOf(BonusNumber bonusNumber) {
+        return (int) this.numbers.stream()
+                .filter(number -> bonusNumber.value().equals(number))
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,17 +52,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public int matchOf(WinningNumbers winningNumbers) {
-        return (int) winningNumbers.value().stream()
-                .filter(this.numbers::contains)
-                .count();
-    }
-
-    public int matchOf(BonusNumber bonusNumber) {
-        return (int) this.numbers.stream()
-                .filter(number -> bonusNumber.value().equals(number))
-                .count();
     }
 }

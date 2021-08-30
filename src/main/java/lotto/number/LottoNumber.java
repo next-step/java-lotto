@@ -45,7 +45,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hash(number);
     }
 
-
     @Override
     public int compareTo(LottoNumber o) {
         return value() - o.value();

@@ -27,6 +27,12 @@ public class LottoTicket {
         return this.lottoNumbers.value();
     }
 
+    public Prize prize(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        int winningNumberCounts = lottoNumbers.matchOf(winningNumbers);
+        int bonusNumberCounts = lottoNumbers.matchOf(bonusNumber);
+        return Prize.prize(winningNumberCounts, bonusNumberCounts);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,11 +44,5 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public Prize prize(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int winningNumberCounts = lottoNumbers.matchOf(winningNumbers);
-        int bonusNumberCounts = lottoNumbers.matchOf(bonusNumber);
-        return Prize.prize(winningNumberCounts, bonusNumberCounts);
     }
 }

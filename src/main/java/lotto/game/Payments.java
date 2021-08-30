@@ -20,6 +20,14 @@ public class Payments {
         }
     }
 
+    public int value() {
+        return this.amount;
+    }
+
+    public int ticketCount() {
+        return amount / LottoTicket.PRICE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,13 +39,5 @@ public class Payments {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public int value() {
-        return this.amount;
-    }
-
-    public int ticketCount() {
-        return amount / LottoTicket.PRICE;
     }
 }

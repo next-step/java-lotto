@@ -13,15 +13,15 @@ public class RandomNumbers {
         candidates = candidatesInRange();
     }
 
-    public List<LottoNumber> value() {
-        shuffleNumbers();
-        return numbers();
-    }
-
     private List<LottoNumber> candidatesInRange() {
         return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<LottoNumber> value() {
+        shuffleNumbers();
+        return numbers();
     }
 
     private void shuffleNumbers() {

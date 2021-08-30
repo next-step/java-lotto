@@ -25,14 +25,14 @@ public class GameResult {
                 .count();
     }
 
+    public double profitRate() {
+        return new ProfitRate(totalPrizeMoney(), lottoGame.payments()).value();
+    }
+
     private int totalPrizeMoney() {
         return Arrays.stream(Prize.values())
                 .mapToInt(prize -> prize.prizeMoney() * countTicketsWinning(prize))
                 .sum();
-    }
-
-    public double profitRate() {
-        return new ProfitRate(totalPrizeMoney(), lottoGame.payments()).value();
     }
 
 }
