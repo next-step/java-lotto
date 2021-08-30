@@ -11,7 +11,7 @@ public class LottoOutputView {
     private static final String REQUEST_BUY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String ALERT_BUY_MESSAGE = "개를 구매했습니다.";
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String LOTTO_RESULT_START_MESSAGE = "당첨 통계\n" + "---------\n";
+    private static final String LOTTO_RESULT_START_MESSAGE = "당첨 통계" + System.lineSeparator() + "---------" + System.lineSeparator();
     private static final String LOTTO_RESULT_MID_MESSAGE_1 = "개 일치 (";
     private static final String LOTTO_RESULT_MID_MESSAGE_2 = "원)- ";
     private static final String LOTTO_RESULT_MID_MESSAGE_3 = "개";
@@ -27,10 +27,10 @@ public class LottoOutputView {
 
         stringBuilder.append(lottoList.size())
                 .append(ALERT_BUY_MESSAGE)
-                .append("\n");
+                .append(System.lineSeparator());
 
         lottoList.stream()
-                .forEach(lotto -> stringBuilder.append(lotto.getValue()).append("\n"));
+                .forEach(lotto -> stringBuilder.append(lotto.getValue()).append(System.lineSeparator()));
 
 
         System.out.println(stringBuilder);
@@ -52,13 +52,13 @@ public class LottoOutputView {
 
         for (LottoRank result : LottoRank.values()) {
             stringBuilder.append(resultToString(result, lottoResult))
-                    .append("\n");
+                    .append(System.lineSeparator());
         }
 
         stringBuilder.append(LOTTO_RESULT_END_MESSAGE_1)
                 .append(lottoYield)
                 .append(LOTTO_RESULT_END_MESSAGE_2)
-                .append("\n");
+                .append(System.lineSeparator());
 
         System.out.println(stringBuilder);
     }
