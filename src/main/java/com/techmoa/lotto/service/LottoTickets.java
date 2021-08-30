@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoTickets {
 
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
@@ -40,17 +40,16 @@ public class LottoTickets {
     }
 
     public int checkWinCountResult(List<List<Integer>> lottoResults , int position) {
-        int winCount = position;
         return Long.valueOf(lottoResults.stream()
-                .filter(s -> s.size() == winCount)
+                .filter(s -> s.size() == position)
                 .count()).intValue();
     }
 
     public Float calculatorProfitRatio(HashMap<Integer,Integer> winResult , int purchaseAmount) {
         LottoWinScope[] lottoWinScope = LottoWinScope.values();
         int winMoney = 0;
-        for(int i= 0; i< lottoWinScope.length; i++){
-            winMoney += winResult.get(lottoWinScope[i].getSameCount()) * lottoWinScope[i].getWinMoney();
+        for (LottoWinScope winScope : lottoWinScope) {
+            winMoney += winResult.get(winScope.getSameCount()) * winScope.getWinMoney();
         }
         return ((float)winMoney / (float)purchaseAmount) ;
     }

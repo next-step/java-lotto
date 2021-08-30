@@ -7,6 +7,7 @@ import com.techmoa.lotto.model.LottoWinResult;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class OutputView {
 
@@ -15,14 +16,14 @@ public class OutputView {
 
         for(LottoTicket lottoTicket : lottoTicketsList){
             List<Integer> integers = lottoTicket.getLottoNumber();
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuffer = new StringBuilder();
             stringBuffer.append("[");
             for(Integer number : integers) {
-                stringBuffer.append(number + ",");
+                stringBuffer.append(number).append(",");
             }
             stringBuffer.append("]");
             stringBuffer.deleteCharAt(stringBuffer.length()-2);
-            System.out.println(stringBuffer.toString());
+            System.out.println(stringBuffer);
         }
     }
 
@@ -31,10 +32,10 @@ public class OutputView {
         System.out.println("--------");
         LottoWinScope[] lottoWinScope = LottoWinScope.values();
         HashMap<Integer,Integer> winCount = lottoWinResult.getResultMap();
-        for(int i = 0; i< lottoWinScope.length; i++) {
-            System.out.print(lottoWinScope[i].getSameCountString() );
-            System.out.println(" " +winCount.get(lottoWinScope[i].getSameCount()));
-        }
+        IntStream.range(0, lottoWinScope.length).forEach(i -> {
+            System.out.print(lottoWinScope[i].getSameCountString());
+            System.out.println(" " + winCount.get(lottoWinScope[i].getSameCount()));
+        });
 
         System.out.println("총 수익률은 " +lottoWinResult.getProfitRate()+ "입니다.");
 

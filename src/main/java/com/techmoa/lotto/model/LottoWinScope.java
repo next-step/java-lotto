@@ -9,9 +9,9 @@ public enum LottoWinScope {
 
     ;
 
-    private int sameCount;
-    private String sameCountString;
-    private int winMoney;
+    private final int sameCount;
+    private final String sameCountString;
+    private final int winMoney;
 
     LottoWinScope(int sameCount, String sameCountString, int winMoney) {
         this.sameCount = sameCount;
