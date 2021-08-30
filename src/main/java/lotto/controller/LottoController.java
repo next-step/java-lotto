@@ -7,9 +7,9 @@ import lotto.view.LottoOutputView;
 import java.util.List;
 
 public class LottoController {
-    LottoInputView lottoInputView;
-    LottoOutputView lottoOutputView;
-    LottoEvent lottoEvent;
+    private LottoInputView lottoInputView;
+    private LottoOutputView lottoOutputView;
+    private LottoEvent lottoEvent;
 
     public LottoController() {
         lottoInputView = new LottoInputView();
