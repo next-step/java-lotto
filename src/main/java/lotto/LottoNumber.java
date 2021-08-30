@@ -10,7 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public LottoNumber(int number) {
         if (number <= MIN_VALUE || number > MAX_VALUE) {
-            throw new IllegalArgumentException("Length must be 6.");
+            throw new IllegalArgumentException("Only 1 through 45 can be entered.");
         }
         this.number = number;
     }
