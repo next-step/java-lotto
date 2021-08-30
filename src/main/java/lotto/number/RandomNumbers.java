@@ -8,14 +8,8 @@ import java.util.stream.IntStream;
 public class RandomNumbers {
 
     private final List<LottoNumber> candidates;
-    private final int min;
-    private final int max;
-    private final int length;
 
-    public RandomNumbers(int min, int max, int length) {
-        this.min = min;
-        this.max = max;
-        this.length = length;
+    public RandomNumbers() {
         candidates = candidatesInRange();
     }
 
@@ -25,7 +19,7 @@ public class RandomNumbers {
     }
 
     private List<LottoNumber> candidatesInRange() {
-        return IntStream.rangeClosed(this.min, this.max)
+        return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
@@ -35,7 +29,7 @@ public class RandomNumbers {
     }
 
     private List<LottoNumber> numbers() {
-        List<LottoNumber> picked = candidates.subList(0, this.length);
+        List<LottoNumber> picked = candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
         Collections.sort(picked);
         return picked;
     }

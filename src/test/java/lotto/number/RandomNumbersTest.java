@@ -2,36 +2,31 @@ package lotto.number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("랜덤 넘버 리스트는")
+@DisplayName("랜덤 넘버 리스트:")
 class RandomNumbersTest {
 
-    @DisplayName("생성시 지정된 길이만큼의 랜덤넘버를 가진다.")
-    @ParameterizedTest(name = "길이 {0}")
-    @ValueSource(ints = {4, 5, 6})
-    void length(int length) {
-        int actual = new RandomNumbers(1, 10, length).value().size();
-        assertThat(actual).isEqualTo(length);
+    public static final int RANDOM_NUMBERS_FIRST_INDEX = 0;
+    public static final int RANDOM_NUMBERS_LAST_INDEX = 5;
+
+    @DisplayName("랜덤넘버 6개")
+    @Test
+    void length() {
+        assertThat(new RandomNumbers().value().size()).isEqualTo(LottoNumbers.NUMBERS_LENGTH);
     }
 
-    @DisplayName("랜덤 넘버의 최댓값은 생성자에 지정된 최댓값이다.")
+    @DisplayName("최댓값은 45")
     @Test
     void maximum() {
-        LottoNumber maxInRandomNumbers = new RandomNumbers(1, 10, 10).value().get(9);
-        LottoNumber maxLottoNumber = new LottoNumber(10);
-        assertThat(maxInRandomNumbers).isEqualTo(maxLottoNumber);
+        assertThat(new RandomNumbers().value().get(RANDOM_NUMBERS_LAST_INDEX).value() <= new LottoNumber(LottoNumber.MAX).value()).isTrue();
     }
 
 
-    @DisplayName("랜덤 넘버의 최솟값은 생성자에 지정된 최솟값이다")
+    @DisplayName("최솟값은 1")
     @Test
     void minimum() {
-        LottoNumber minInRandomNumbers = new RandomNumbers(1, 10, 10).value().get(0);
-        LottoNumber minLottoNumber = new LottoNumber(1);
-        assertThat(minInRandomNumbers).isEqualTo(minLottoNumber);
+        assertThat(new RandomNumbers().value().get(RANDOM_NUMBERS_FIRST_INDEX).value() >= new LottoNumber(LottoNumber.MIN).value()).isTrue();
     }
 }
