@@ -29,6 +29,10 @@ public class LottoNumbers {
         .count();
   }
 
+  public boolean contains(LottoNumber lottoNumber) {
+    return this.lottoNumbers.contains(lottoNumber);
+  }
+
   private void validateSize() {
     if (this.lottoNumbers.size() != SIZE) {
       throw new InvalidLottoSizeException();

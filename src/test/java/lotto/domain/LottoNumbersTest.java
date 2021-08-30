@@ -85,4 +85,25 @@ class LottoNumbersTest {
     //then
     assertThat(sortedNumbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
   }
+
+  @Test
+  @DisplayName("특정로또 번호 포함여부 테스트")
+  void containsTest() {
+    //given
+    LottoNumbers lottoNumbers = new LottoNumbers(
+        Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::valueOf)
+            .collect(Collectors.toList())
+    );
+    LottoNumber containedNumber1 = new LottoNumber(1);
+    LottoNumber containedNumber2 = LottoNumber.valueOf(1);
+    LottoNumber unContainedNumber1 = new LottoNumber(7);
+    LottoNumber unContainedNumber2 = LottoNumber.valueOf(7);
+
+    //then
+    assertThat(lottoNumbers.contains(containedNumber1)).isTrue();
+    assertThat(lottoNumbers.contains(containedNumber2)).isTrue();
+    assertThat(lottoNumbers.contains(unContainedNumber1)).isFalse();
+    assertThat(lottoNumbers.contains(unContainedNumber2)).isFalse();
+  }
 }
