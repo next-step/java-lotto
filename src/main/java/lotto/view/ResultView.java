@@ -1,14 +1,15 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.WinStatistics;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ResultView {
+    private static final String OUTPUT_MANUAL_LOTTOTICKETS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String OUTPUT_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String OUTPUT_STATISTICS_TITLE = "당첨 통계\n---------\n";
     private static final String OUTPUT_NORMAL_MATCH_CASE = "%d개 일치 (%d원) - %d개";
@@ -28,10 +29,9 @@ public class ResultView {
         System.out.printf("\n" + OUTPUT_LOTTO_COUNT + "%n", manualLottoCount, autoLottoCount);
     }
 
-    public void outputLottoLotteries(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
-        outputLottoCount(manualLottoTickets.size(), autoLottoTickets.size());
-        manualLottoTickets.forEach(this::outputLottoTickets);
-        autoLottoTickets.forEach(this::outputLottoTickets);
+    public void outputLottoLotteries(List<LottoTicket> lottoTickets, int manualLottoCount) {
+        outputLottoCount(manualLottoCount, lottoTickets.size() - manualLottoCount);
+        lottoTickets.forEach(this::outputLottoTickets);
     }
 
     public void outputLottoTickets(LottoTicket lottoTicket) {
@@ -61,5 +61,11 @@ public class ResultView {
         Rank.getRankList()
             .forEach(rank -> outputPrizeStatistics(rank, winStatistics));
         printf(OUTPUT_TOTAL_RATE_OF_RETURN, rateOfReturn);
+    }
+
+    public void outputManualLottoTickets(int lottoTicketCount) {
+        if (lottoTicketCount > 0) {
+            System.out.println("\n" + OUTPUT_MANUAL_LOTTOTICKETS);
+        }
     }
 }

@@ -1,26 +1,28 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.stream.Stream;
-
+import lotto.domain.generator.LottoMachine;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 class LottoTicketTest {
     private static Stream<Arguments> 로또공들의_생성자에_숫자배열을_6개가_아닌_다른_개수로_입력받으면_예외를_던진다() {
         return Stream.of(
-            Arguments.of(new int[] {1, 2, 3, 4, 5}),
-            Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 7})
+            Arguments.of(new int[]{1, 2, 3, 4, 5}),
+            Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 7})
         );
     }
 
     private static Stream<Arguments> 로또공들의_생성자에_숫자배열에_0과_45사이를_벗어나는_숫자를_입력받으면_예외를_던진다() {
         return Stream.of(
-            Arguments.of(new int[] {0, 2, 3, 4, 5, 6}),
-            Arguments.of(new int[] {1, 2, 3, 4, 5, 6, 46})
+            Arguments.of(new int[]{0, 2, 3, 4, 5, 6}),
+            Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 46})
         );
     }
 
@@ -56,8 +58,8 @@ class LottoTicketTest {
     }
 
     @Test
-    void 로또공들의_우승자_번호를_랜덤으로_만들면_로또공들의_객체가_생성된다() {
-        assertThat(LottoTicket.createRandomNumber()).isInstanceOf(LottoTicket.class);
+    void 로또공들의_우승자_번호를_자동으로_만들면_로또공들의_객체가_생성된다() {
+        assertThat(new LottoMachine().autoCreate(1)).isInstanceOf(LottoTickets.class);
     }
 
     @ParameterizedTest

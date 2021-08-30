@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
     private static Stream<Arguments> 매칭되는_로또번호의_개수와_로또복권의_갯수와_보너스일치여부가_주어지면_당첨금을_알_수_있다() {
@@ -42,7 +42,7 @@ class RankTest {
     @ParameterizedTest
     @MethodSource
     void 매칭되는_로또번호의_개수와_로또복권의_갯수와_보너스일치여부가_주어지면_당첨금을_알_수_있다(int matchCount, int lottoCount, boolean matchBonus,
-        long expected) {
+                                                            long expected) {
         Rank rank = Arrays.stream(Rank.values())
             .filter(e -> e == Rank.valueOf(matchCount, matchBonus))
             .findFirst()

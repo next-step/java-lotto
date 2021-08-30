@@ -56,5 +56,5 @@ public class StringAdditionCalculator {
         }
 
         return splitWithCustomDelimiter(expression).sum();
-    }
+   }
 }
