@@ -1,5 +1,7 @@
 package string_calculator;
 
+import java.util.Arrays;
+
 public final class StringCalculator {
     private static final int INIT_NUMBER = 0;
     private static final PatternRegex PATTERN_REGEX = new PatternRegex();
@@ -26,16 +28,14 @@ public final class StringCalculator {
     }
 
     public int calculate(final String expression){
-        int sum = INIT_NUMBER;
-        if(empty(expression)){
-            return sum;
-        }
-        for(String number : split(expression)){
-            int operand = convert(number);
-            validate(operand);
-            sum += operand;
-        }
-        return sum;
+        if(empty(expression)) return INIT_NUMBER;
+
+        return Arrays.stream(split(expression))
+                .map(number -> {
+                    int operand = convert(number);
+                    validate(operand);
+                    return operand;
+                }).reduce(0, Integer::sum);
     }
 
     private String[] split(String expression){

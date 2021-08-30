@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class PatternRegex {
-    public static final String DEFAULT_INPUT_PATTERN = ",|:";
-    public static final Pattern CUSTOM_INPUT_PATTERN = Pattern.compile("//(.)\n(.*)");
-    public static final int PATTERN_FIRST_INDEX = 1;
-    public static final int PATTERN_SECOND_INDEX = 2;
+    private static final String DEFAULT_INPUT_PATTERN = ",|:";
+    private static final Pattern CUSTOM_INPUT_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int PATTERN_FIRST_INDEX = 1;
+    private static final int PATTERN_SECOND_INDEX = 2;
 
     public String[] split(final String str){
         Matcher matcher = CUSTOM_INPUT_PATTERN.matcher(str);
