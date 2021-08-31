@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void announceTotalLottoTicketCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void announceTotalLottoTicketCount(int countOfCustomLotto, int countOfAutoLotto) {
+        System.out.println("수동으로 " + countOfCustomLotto + "장, 자동으로 " + countOfAutoLotto + "개를 구매했습니다.");
     }
 
     public static void announceTotalLottoNumbers(LottoPaper lottoPaper) {

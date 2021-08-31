@@ -1,19 +1,21 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
-    public LottoPaper buyLotto(Money money) {
+    public LottoPaper buyLotto(Money money, List<LottoGenerator> lottoGenerators) {
 
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < money.countOfLottoPurchases(); i++) {
-            lottos.add(new AutoLottoGenerator().generateLotto());
+        for (int i = 0; i < money.countOfLottoPurchases() - lottoGenerators.size() ; i++) {
+            lottoGenerators.add(new AutoLottoGenerator());
         }
 
-        return new LottoPaper(lottos);
+        return new LottoPaper(
+                lottoGenerators.stream()
+                        .map(LottoGenerator::generateLotto)
+                        .collect(Collectors.toList())
+        );
     }
 
 }
