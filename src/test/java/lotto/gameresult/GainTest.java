@@ -12,18 +12,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("손익 테스트")
 class GainTest {
 
+    @DisplayName("수익률이")
+    @ParameterizedTest(name = "{0}: 결과는 {1}")
+    @MethodSource("provideGainDecidedByProfitRate")
+    void name(double profitRate, Gain gain) {
+        assertThat(Gain.status(profitRate)).isEqualTo(gain);
+    }
+
     private static Stream<Arguments> provideGainDecidedByProfitRate() {
         return Stream.of(
                 Arguments.of(0.9, Gain.LOSS),
                 Arguments.of(1.0, Gain.BREAK_EVEN_POINT),
                 Arguments.of(1.1, Gain.GAIN)
         );
-    }
-
-    @DisplayName("수익률이")
-    @ParameterizedTest(name = "{0}: 결과는 {1}")
-    @MethodSource("provideGainDecidedByProfitRate")
-    void name(double profitRate, Gain gain) {
-        assertThat(Gain.status(profitRate)).isEqualTo(gain);
     }
 }

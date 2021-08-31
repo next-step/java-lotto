@@ -19,28 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 게임 결과")
 class GameResultTest {
 
-    private static Stream<Arguments> provideTicketCountPerPrize() {
-        return Stream.of(
-                Arguments.of(Prize.FIRST, 1),
-                Arguments.of(Prize.SECOND, 1),
-                Arguments.of(Prize.THIRD, 1),
-                Arguments.of(Prize.FOURTH, 1),
-                Arguments.of(Prize.FIFTH, 1),
-                Arguments.of(Prize.LOSER, 3)
-        );
-    }
-
-    private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
-        int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
-        int[][] numbers2 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
-        int[][] numbers3 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
-        return Stream.of(
-                Arguments.of(numbers1, 0.8333333333333334),
-                Arguments.of(numbers2, 1),
-                Arguments.of(numbers3, 1.25)
-        );
-    }
-
     @DisplayName("등수가")
     @ParameterizedTest(name = "{0}인 티켓: {1}장.")
     @MethodSource("provideTicketCountPerPrize")
@@ -59,6 +37,17 @@ class GameResultTest {
         assertThat(gameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
     }
 
+    private static Stream<Arguments> provideTicketCountPerPrize() {
+        return Stream.of(
+                Arguments.of(Prize.FIRST, 1),
+                Arguments.of(Prize.SECOND, 1),
+                Arguments.of(Prize.THIRD, 1),
+                Arguments.of(Prize.FOURTH, 1),
+                Arguments.of(Prize.FIFTH, 1),
+                Arguments.of(Prize.LOSER, 3)
+        );
+    }
+
     @DisplayName("로또 넘버별 수익률")
     @ParameterizedTest(name = "로또 넘버{0}: 수익률은 {1}.")
     @MethodSource("provideTicketNumbersWithProfitRate")
@@ -74,5 +63,16 @@ class GameResultTest {
                 return new LottoTickets(numbers).value();
             }
         };
+    }
+
+    private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
+        int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        int[][] numbers2 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        int[][] numbers3 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+        return Stream.of(
+                Arguments.of(numbers1, 0.8333333333333334),
+                Arguments.of(numbers2, 1),
+                Arguments.of(numbers3, 1.25)
+        );
     }
 }
