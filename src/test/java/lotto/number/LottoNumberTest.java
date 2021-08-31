@@ -16,7 +16,9 @@ class LottoNumberTest {
     @ParameterizedTest(name = "숫자 {0} 일 때")
     @ValueSource(ints = {MIN - 1, MAX + 1})
     void lottoNumberUnder1orAbove45ThrowsError(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
+        assertThatThrownBy(() -> new LottoNumber(number))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
     }
 
     @DisplayName("1이상 45이하일 경우 정상 생성")

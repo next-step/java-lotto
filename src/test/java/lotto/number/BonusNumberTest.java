@@ -21,6 +21,8 @@ class BonusNumberTest {
     @ParameterizedTest(name = "숫자 {0} 일 때")
     @ValueSource(ints = {0, 46})
     void bonusNumberUnder1orAbove45ThrowsError(int number) {
-        assertThatThrownBy(() -> new BonusNumber(number)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
+        assertThatThrownBy(() -> new BonusNumber(number))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("로또 숫자는 1 이상, 45 이하의 정수입니다.");
     }
 }

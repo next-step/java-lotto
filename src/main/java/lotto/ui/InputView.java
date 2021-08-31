@@ -23,7 +23,9 @@ public class InputView {
     public List<Integer> askUserToEnterWinningNumbersOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] userInputs = scanner.nextLine().replaceAll(SPACE_REGEX, EMPTY).split(COMMA_REGEX);
-        return Arrays.stream(userInputs).map(Integer::valueOf).collect(Collectors.toList());
+        return Arrays.stream(userInputs)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 
     public int askUserBonusNumber() {

@@ -22,7 +22,9 @@ class PaymentsTest {
     @ParameterizedTest(name = "인풋 {0}에 대해 예외 던짐")
     @ValueSource(ints = {-1000, 0})
     void isPositiveInteger(int amount) {
-        assertThatThrownBy(() -> new Payments(amount)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("구매 금액은 양수입니다.");
+        assertThatThrownBy(() -> new Payments(amount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("구매 금액은 양수입니다.");
     }
 
     @DisplayName("지불액이")

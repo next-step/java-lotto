@@ -16,7 +16,9 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(int... numbers) {
-        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+        this(Arrays.stream(numbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     public List<LottoNumber> value() {

@@ -10,7 +10,9 @@ public class LottoTickets {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(int[][] numbers) {
-        this(Arrays.stream(numbers).map(LottoTicket::new).collect(Collectors.toList()));
+        this(Arrays.stream(numbers)
+                .map(LottoTicket::new)
+                .collect(Collectors.toList()));
     }
 
     public LottoTickets(List<LottoTicket> tickets) {

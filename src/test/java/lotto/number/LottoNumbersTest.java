@@ -28,7 +28,9 @@ class LottoNumbersTest {
     @DisplayName("길이가 6이 아닐 경우 에러 발생")
     @Test
     void lottoNumbersAboveOrUnder6ThrowsError() {
-        assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5)).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 6개입니다.");
+        assertThatThrownBy(() -> new LottoNumbers(1, 2, 3, 4, 5))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("로또 숫자는 6개입니다.");
     }
 
     @DisplayName("길이가 6일 경우 정상")
