@@ -7,6 +7,7 @@ import java.util.Scanner;
 import lotto.application.LottoService;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.Number;
 import lotto.domain.Wallet;
 import lotto.view.InputView;
@@ -20,7 +21,8 @@ public class Main {
         ResultView resultView = new ResultView();
 
         LottoService lottoService = new LottoService();
-        Wallet wallet = lottoService.buyLotto(inputView.inputPurchaseMoney());
+        Money money = new Money(inputView.inputPurchaseMoney());
+        Wallet wallet = lottoService.buyLotto(money);
 
         resultView.printLottoCount(wallet);
         resultView.printLottosNumber(wallet);

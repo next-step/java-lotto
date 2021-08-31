@@ -7,8 +7,8 @@ import lotto.domain.Wallet;
 
 public class LottoService {
 
-    public Wallet buyLotto(int money) {
-        Wallet wallet = new Wallet(new Money(money));
+    public Wallet buyLotto(Money money) {
+        Wallet wallet = new Wallet(money);
         Wallet buyLottoWallet = wallet.purchaseLotto();
         return buyLottoWallet;
     }

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.Lotto.LOTTO_PRICE;
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
 public class Wallet {
