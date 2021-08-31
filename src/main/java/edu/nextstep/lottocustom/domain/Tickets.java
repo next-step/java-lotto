@@ -76,10 +76,6 @@ public class Tickets {
         return numberOfAutoTickets;
     }
 
-    protected boolean isSameSize(int countOfTickets) {
-        return tickets.size() == countOfTickets;
-    }
-
     public List<Ticket> getTickets() {
         return Collections.unmodifiableList(tickets);
     }

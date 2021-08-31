@@ -37,10 +37,10 @@ public class TicketsTest {
         List<String> customTicketsString = new ArrayList<>(Arrays.asList(customNumbers1, customNumbers2, customNumbers3));
 
         // when
-        Tickets tickets = Tickets.of(payment, customTicketsString, new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, customTicketsString, new CustomNumbersMaker("4,5,6,7,8,9"));
 
         // then
-        assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
+        assertThat(tickets).isEqualTo(Tickets.of(payment, customTicketsString, new CustomNumbersMaker("4,5,6,7,8,9")));
         assertThat(tickets.getTickets())
                 .contains(Ticket.madeBy(new CustomNumbersMaker(customNumbers1)),
                         Ticket.madeBy(new CustomNumbersMaker(customNumbers2)),
