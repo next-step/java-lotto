@@ -10,7 +10,7 @@ public class LottoResult {
         this.resultMap = resultMap;
     }
 
-    public static LottoResult calculateLottoResult(Lottos lotto, Lotto winLotto) {
+    public static LottoResult calculateLottoResult(Lottos lotto, WinLotto winLotto) {
         return new LottoResult(lotto.calculateResult(winLotto));
     }
 

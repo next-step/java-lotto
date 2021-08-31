@@ -12,15 +12,17 @@ import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
 
-    private Lotto winLotto;
+    private WinLotto winLotto;
     private Lottos buyLottos;
 
     @BeforeEach
     void beforeEach() {
-        winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
             .map(Number::new)
             .collect(Collectors.toList()));
+        Number bonus = new Number(7);
+        winLotto = new WinLotto(lotto, bonus);
 
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto1 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)

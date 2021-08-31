@@ -10,6 +10,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.Number;
 import lotto.domain.Wallet;
+import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -28,7 +29,8 @@ public class Main {
         resultView.printLottosNumber(wallet);
 
         List<Number> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
-        Lotto winLotto = new Lotto(numbers);
+        Number bonus = new Number(inputView.inputBonusBall());
+        WinLotto winLotto = new WinLotto(new Lotto(numbers), bonus);
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
         resultView.printLottoResult(lottoResult, money);
     }
