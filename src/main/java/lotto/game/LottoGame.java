@@ -5,6 +5,7 @@ import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
 
 import java.util.List;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,8 +20,12 @@ public class LottoGame {
 
     private List<LottoTicket> initTickets() {
         return IntStream.range(0, payments.ticketCount())
-                .mapToObj(i -> new LottoTicket(new RandomNumbers().value()))
+                .mapToObj(ticket())
                 .collect(Collectors.toList());
+    }
+
+    private IntFunction<LottoTicket> ticket() {
+        return i -> new LottoTicket(new RandomNumbers().value());
     }
 
     public List<LottoTicket> getLottoTickets() {
