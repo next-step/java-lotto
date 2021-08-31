@@ -7,7 +7,8 @@ public enum Prize {
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
     private final int matchingCount;
     private final int money;
@@ -30,6 +31,10 @@ public enum Prize {
     }
 
     public static Prize valueOf(int matchingCount, boolean matchingBonus) {
+        if (matchingCount < FIFTH.matchingCount) {
+            return NONE;
+        }
+
         if (matchingCount == SECOND.matchingCount) {
             return matchingBonus ? SECOND : THIRD;
         }

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     public static final int NUMS_PER_LOTTO = 6;
@@ -37,21 +35,21 @@ public class LottoMachine {
         return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
     }
 
-    WinningResult countWinningPrize2(Lotto winningNums, int bonusNum) {
-        return lottos.checkLottosPrize2(winningNums, bonusNum);
+    WinningResult countWinningPrize(WinningNumber winningNumber) {
+        return lottos.checkLottosPrize(winningNumber);
     }
 
-    public int getTotalPrizeMoney2(Lotto winningNums, int bonusNum) {
-        WinningResult winningResult = countWinningPrize2(winningNums, bonusNum);
+    public int getTotalPrizeMoney(WinningNumber winningNumber) {
+        WinningResult winningResult = countWinningPrize(winningNumber);
 
         return winningResult.getTotalWinningMoney();
     }
 
-    public double getYield2(Lotto winningNums, int bonusNum) {
-        return money.getYield(getTotalPrizeMoney2(winningNums, bonusNum));
+    public double getYield(WinningNumber winningNumber) {
+        return money.getYield(getTotalPrizeMoney(winningNumber));
     }
 
-    public WinningResult getWinningResult2(Lotto winningNums, int bonusNum) {
-        return countWinningPrize2(winningNums, bonusNum);
+    public WinningResult getWinningResult(WinningNumber winningNumber) {
+        return countWinningPrize(winningNumber);
     }
 }

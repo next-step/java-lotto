@@ -50,23 +50,17 @@ public class ResultView {
                     prize.matchingCount() + "개 일치, 보너스 볼 일치(" +
                             prize.money() + "원)- " +
                             prizeList.get(prize.ordinal()) + "개");
-
-            return;
+        } else if (!prize.equals(Prize.NONE)) {
+            System.out.println(
+                    prize.matchingCount() + "개 일치 (" +
+                    prize.money() + "원)- " +
+                    prizeList.get(prize.ordinal()) + "개");
         }
-
-        System.out.println(
-                prize.matchingCount() + "개 일치 (" +
-                        prize.money() + "원)- " +
-                        prizeList.get(prize.ordinal()) + "개");
     }
 
-//    public static void printLottoYield(LottoMachine lottoMachine, List<Integer> winningNums, int bonusNum) {
-//        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNums, bonusNum)) + "입니다.");
-//    }
-    public static void printLottoYield2(LottoMachine lottoMachine, Lotto winningNums, int bonusNum) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield2(winningNums, bonusNum)) + "입니다.");
+    public static void printLottoYield(LottoMachine lottoMachine, WinningNumber winningNumber) {
+        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNumber)) + "입니다.");
     }
-
 
     public static void printBuyableLottoNum(LottoMachine lottoMachine) {
         int buyableLottoNum = lottoMachine.calculateBuyableLottos();

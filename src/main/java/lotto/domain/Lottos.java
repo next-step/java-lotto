@@ -15,28 +15,16 @@ public class Lottos {
         return lottos;
     }
 
-    public WinningResult checkLottosPrize2(Lotto winningNums, int bonusNum) {
-        int matchingCount;
-        boolean matchingBonus;
+    public WinningResult checkLottosPrize(WinningNumber winningNumber) {
         Integer[] prizeNums = new Integer[Prize.values().length];
         Arrays.fill(prizeNums, 0);
 
         for (Lotto lotto : lottos) {
-            matchingCount = lotto.countMatchingNums(winningNums);
-            matchingBonus = lotto.isMatchingBonus(LottoNumber.of(bonusNum));
-
-            checkPrize(prizeNums, matchingCount, matchingBonus);
+            Prize prize = winningNumber.checkLottoPrize(lotto);
+            prizeNums[prize.ordinal()]++;
         }
 
         return new WinningResult(Arrays.asList(prizeNums));
-    }
-
-    private void checkPrize(Integer[] prizeNums, int matchingCount, boolean matchingBonus) {
-        try {
-            prizeNums[Prize.valueOf(matchingCount, matchingBonus).ordinal()]++;
-        } catch (IllegalArgumentException e) {
-            return;
-        }
     }
 
     @Override

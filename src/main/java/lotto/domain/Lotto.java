@@ -31,13 +31,13 @@ public class Lotto {
         checkDuplicateNum(lottoNumbers);
     }
 
-    void checkDuplicateNum(List<LottoNumber> lottoNums) {
+    private void checkDuplicateNum(List<LottoNumber> lottoNums) {
         if (lottoNums.size() != lottoNums.stream().distinct().count()) {
             throwExceptionInvalidLotto();
         }
     }
 
-    void throwExceptionInvalidLotto() {
+    private void throwExceptionInvalidLotto() {
         throw new IllegalArgumentException(EXCEP_INVALID_NUM);
     }
 
@@ -57,10 +57,6 @@ public class Lotto {
 
     boolean contains(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
-    }
-
-    public boolean isMatchingBonus(LottoNumber bonusNumber) {
-        return lotto.stream().anyMatch(i -> i.equals(bonusNumber));
     }
 
     @Override

@@ -30,6 +30,7 @@
 ### Refactoring 목록
 - [X] Lotto의 원시 데이터를 LottoNumber 클래스로 wrapping하기
 - [X] winningNums 배열을 Lotto 클래스로 wrapping하기
-- [ ] WinningLotto 클래스로 winningNums와 bonusNumber를 wrapping하기
-  - [ ] matching 값을 세는 로직을 WinningLotto로 이동 시키기
-- [ ] 세부 클래스에서 구현된 세부 기능들도 Test로 구현하기
+- [X] WinningLotto 클래스로 winningNums와 bonusNumber를 wrapping하기
+  - [X] matching 값을 세는 로직을 WinningLotto로 이동 시키기
+- [X] 세부 클래스에서 구현된 세부 기능들도 Test로 구현하기
+- [X] Prize.valueOf를 사용할 때 try-catch문을 사용하지 않도록 변경
