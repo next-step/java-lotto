@@ -19,7 +19,7 @@ public class LottoGame {
         return lottoTicket;
     }
 
-    public List<LottoRank> checkResult(final LottoNumbers winningNumbers) {
+    public List<LottoRank> checkResult(final WinningNumbers winningNumbers) {
         return lottoTicket.getLottoRanks(winningNumbers);
     }
 

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,8 @@ class LottoResultTest {
     void get_profit_rate_test() {
         int price = 1000;
         LottoResult lottoResult = new LottoResult(Collections.singletonList(LottoRank.FIRST));
-        assertThat(lottoResult.getProfitRate(price)).isEqualTo((double) LottoRank.FIRST.getPrice()/price);
+        assertThat(lottoResult.getProfitRate(price)).isEqualTo(
+            (double) LottoRank.FIRST.getPrice() / price);
     }
 
     @DisplayName("우승 상금을 계산한다")

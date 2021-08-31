@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
-    //SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -17,11 +18,6 @@ public enum LottoRank {
 
     private final int collectNumber;
     private final int price;
-
-    private static final Map<Integer, LottoRank> LOTTO_RANK_MAP =
-        Collections.unmodifiableMap(
-            Arrays.stream(values())
-                .collect(Collectors.toMap(LottoRank::getCollectNumber, Function.identity())));
 
     LottoRank(final int collectNumber, final int price) {
         this.collectNumber = collectNumber;
@@ -36,8 +32,26 @@ public enum LottoRank {
         return collectNumber;
     }
 
-    public static LottoRank findRank(int collectNumber) {
-        return LOTTO_RANK_MAP.getOrDefault(collectNumber, LottoRank.FAIL);
+    public static LottoRank findRank(int collectNumber, boolean matchBonus) {
+        if(collectNumber == 5){
+            checkSecondOrThird(matchBonus);
+        }
+
+        return Arrays.stream(values())
+            .filter(LottoRank -> LottoRank.matchCount(collectNumber))
+            .findFirst()
+            .orElse(FAIL);
     }
+
+    private boolean matchCount(int collectNumber){
+        return this.collectNumber == collectNumber;
+    }
+
+    private static LottoRank checkSecondOrThird(boolean matchBonus){
+        if (matchBonus)return SECOND;
+        return THIRD;
+    }
+
+
 
 }

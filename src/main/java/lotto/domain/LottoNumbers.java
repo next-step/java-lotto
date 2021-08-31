@@ -18,26 +18,6 @@ public class LottoNumbers {
         lottoNumbers.addAll(numbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
-    }
-
-    public int getMatchCount(LottoNumbers winningNumbers) {
-        int collectNumber = 0;
-        List<LottoNumber> integerWinningNumbers = winningNumbers.getLottoNumbers();
-        for (LottoNumber number : integerWinningNumbers) {
-            collectNumber += checkContains(number);
-        }
-        return collectNumber;
-    }
-
-    private int checkContains(LottoNumber number) {
-        if (lottoNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
     private void validSizeCheck(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != Constraint.LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또는 6자리가 되어야 합니다.");
@@ -51,6 +31,17 @@ public class LottoNumbers {
         }
     }
 
+    public int getMatchCount(LottoNumbers winningNumbers){
+        int matchCnt = 0;
+        for(LottoNumber lottoNumber : lottoNumbers){
+            if(winningNumbers.isContained(lottoNumber))matchCnt++;
+        }
+        return matchCnt;
+    }
+
+    public boolean isContained(LottoNumber lottoNumber){
+        return lottoNumbers.contains(lottoNumber);
+    }
     @Override
     public String toString() {
         return "["

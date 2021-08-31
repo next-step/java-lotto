@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 public class InputView {
 
@@ -16,7 +17,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<LottoNumber> inputLastWinningNumber() {
+    public LottoNumbers inputLastWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numberString = scanner.nextLine();
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -24,12 +25,12 @@ public class InputView {
         for (Integer number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        return lottoNumbers;
+        return new LottoNumbers(lottoNumbers);
     }
 
-    public int inputBonusNumber() {
+    public LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return new LottoNumber(scanner.nextInt());
     }
 
 }

@@ -24,10 +24,11 @@ public class LottoTicket {
         return Collections.unmodifiableList(tickets);
     }
 
-    public List<LottoRank> getLottoRanks(final LottoNumbers winningNumbers) {
+    public List<LottoRank> getLottoRanks(final WinningNumbers winningNumbers) {
         List<LottoRank> lottoRanks = new ArrayList<>();
-        for (LottoNumbers lottoNumber : tickets) {
-            lottoRanks.add(LottoRank.findRank(lottoNumber.getMatchCount(winningNumbers)));
+        for (LottoNumbers lottoNumbers : tickets) {
+            lottoRanks.add(LottoRank.findRank(winningNumbers.getMatchCount(lottoNumbers),
+                winningNumbers.checkBonusNumber(lottoNumbers)));
         }
         return lottoRanks;
     }
