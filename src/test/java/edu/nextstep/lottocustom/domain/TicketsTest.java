@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -60,9 +59,9 @@ public class TicketsTest {
         WinningTicket winningTicket = new WinningTicket(firstPrizeTicket, bonusNumber);
 
         // when
-        Map<Prize, Integer> winningResult = tickets.checkWinningResult(winningTicket);
+        WinningResult winningResult = tickets.checkWinningResult(winningTicket);
 
         // then
-        assertThat(winningResult.getOrDefault(Prize.FIRST, 0)).isEqualTo(1);
+        assertThat(winningResult.get(Prize.FIRST)).isEqualTo(1);
     }
 }

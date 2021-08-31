@@ -1,7 +1,5 @@
-package edu.nextstep.lottocustom.utils;
+package edu.nextstep.lottocustom.domain;
 
-import edu.nextstep.lottocustom.domain.Payment;
-import edu.nextstep.lottocustom.domain.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,21 +9,20 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTest {
-
+class WinningResultTest {
     @Test
     @DisplayName("수익률 계산")
     void calculateRateOfReturn() {
         // given
-        Map<Prize, Integer> winningResult = createAndInitWinningResult();
-        winningResult.put(Prize.FIRST, 1);
-        Payment payment = new Payment(10_000);
+        Map<Prize, Integer> winningResultMap = createAndInitWinningResult();
+        winningResultMap.put(Prize.FIRST, 1);
+        int totalPayment = 1_000;
 
         // when
-        double rateOfReturn = Calculator.calculateRateOfReturn(winningResult, payment);
+        WinningResult winningResult = new WinningResult(winningResultMap, totalPayment);
 
         // then
-        assertThat(rateOfReturn).isEqualTo((double) 2_000_000_000 / 10_000);
+        assertThat(winningResult.getRateOfReturn()).isEqualTo((double) 2_000_000_000 / 1_000);
     }
 
     private Map<Prize, Integer> createAndInitWinningResult() {

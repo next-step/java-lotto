@@ -4,12 +4,10 @@ import edu.nextstep.lottocustom.domain.*;
 import edu.nextstep.lottocustom.domain.numbersmaker.AutoNumbersMaker;
 import edu.nextstep.lottocustom.domain.numbersmaker.CustomNumbersMaker;
 import edu.nextstep.lottocustom.exception.CustomException;
-import edu.nextstep.lottocustom.utils.Calculator;
 import edu.nextstep.lottocustom.view.InputView;
 import edu.nextstep.lottocustom.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoBonusNumberMain {
 
@@ -33,10 +31,9 @@ public class LottoBonusNumberMain {
 
             WinningTicket winningTicket = new WinningTicket(firstPrizeTicket, bonusNumber);
 
-            Map<Prize, Integer> winningResult = tickets.checkWinningResult(winningTicket);
-            double rateOfReturn = Calculator.calculateRateOfReturn(winningResult, payment);
+            WinningResult winningResult = tickets.checkWinningResult(winningTicket);
 
-            ResultView.printWinningResult(winningResult, rateOfReturn);
+            ResultView.printWinningResult(winningResult);
         } catch (CustomException e) {
             System.out.println(e.getMessage());
             System.exit(0);

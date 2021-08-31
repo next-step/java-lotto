@@ -7,9 +7,11 @@ import java.util.*;
 
 public class Tickets {
     private final List<Ticket> tickets;
+    private final int numberOfAutoTickets;
 
-    private Tickets(List<Ticket> tickets) {
+    private Tickets(List<Ticket> tickets, int numberOfAutoTickets) {
         this.tickets = tickets;
+        this.numberOfAutoTickets = numberOfAutoTickets;
     }
 
     public static Tickets of(Payment payment,
@@ -21,7 +23,7 @@ public class Tickets {
         int numberOfAutoTickets = payment.countOfTickets() - customTicketsString.size();
         tickets.addAll(makeAutoTickets(numberOfAutoTickets, numbersMaker));
 
-        return new Tickets(tickets);
+        return new Tickets(tickets, numberOfAutoTickets);
     }
 
     private static List<Ticket> makeCustomTickets(List<String> customTicketsString) {
@@ -44,7 +46,7 @@ public class Tickets {
         return tickets;
     }
 
-    public Map<Prize, Integer> checkWinningResult(WinningTicket winningTicket) {
+    public WinningResult checkWinningResult(WinningTicket winningTicket) {
         Map<Prize, Integer> winningResult = createAndInitWinningResult();
 
         for (Ticket ticket : tickets) {
@@ -52,7 +54,9 @@ public class Tickets {
             winningResult.put(prize, winningResult.getOrDefault(prize, 0)+1);
         }
 
-        return winningResult;
+        int totalPayment = tickets.size() * Payment.TICKET_PRICE;
+
+        return new WinningResult(winningResult, totalPayment);
     }
 
     private Map<Prize, Integer> createAndInitWinningResult() {
@@ -62,6 +66,14 @@ public class Tickets {
                 .forEach(prize -> winningResult.put(prize, winningResult.getOrDefault(prize, 0)));
 
         return winningResult;
+    }
+
+    public int numberOfCustomTickets(){
+        return tickets.size() - numberOfAutoTickets;
+    }
+
+    public int getNumberOfAutoTickets() {
+        return numberOfAutoTickets;
     }
 
     protected boolean isSameSize(int countOfTickets) {
@@ -84,4 +96,5 @@ public class Tickets {
     public int hashCode() {
         return Objects.hash(tickets);
     }
+
 }
