@@ -11,7 +11,7 @@ public class ResultView {
     }
 
     public void printLottosNumber(Wallet wallet) {
-        System.out.println(wallet.lottos());
+        System.out.println(wallet.lottos().AllLottos());
     }
 
     public void printLottoResult(LottoResult lottoResult) {

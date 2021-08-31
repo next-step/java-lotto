@@ -36,10 +36,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    @Override
-    public String toString() {
+    public String AllLottos() {
         return lottos.stream()
             .map(String::valueOf)
             .collect(Collectors.joining("\n"));
     }
+
 }
