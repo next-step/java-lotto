@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -44,6 +43,10 @@ public class Lotto {
         return (int) winLotto.numbers.stream()
             .filter(numbers::contains)
             .count();
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 
     @Override

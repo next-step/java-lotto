@@ -52,4 +52,28 @@ class WinLottoTest {
         assertThat(winLotto.lotto()).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("당첨 로또가 있으면 로또의 등수를 알 수 있다.")
+    void getRankByWinLottoTest() {
+
+        // given
+        Lotto compare = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+        Number bonus = new Number(6);
+        WinLotto winLotto = new WinLotto(lotto, bonus);
+
+        // when
+        Rank result = winLotto.calculateRank(compare);
+
+        // then
+        assertThat(result).isEqualTo(Rank.SECOND);
+    }
+
 }
