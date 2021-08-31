@@ -32,18 +32,12 @@ public class Wallet {
     }
 
     public Wallet purchaseLotto() {
-        int lottoCount = calculatePurchaseLottoCount();
+        int lottoCount = money.calculatePurchaseCount();
+        Money useMoney = money.useMoney(lottoCount);
+
         Lottos purchaseLottos = new Lottos();
         addNewLotto(lottoCount, purchaseLottos);
-        return new Wallet(calculateRemainMoney(lottoCount), purchaseLottos);
-    }
-
-    private Money calculateRemainMoney(int lottoCount) {
-        return money.useMoney(lottoCount * LOTTO_PRICE);
-    }
-
-    private int calculatePurchaseLottoCount() {
-        return money.calculatePurchaseCount(LOTTO_PRICE);
+        return new Wallet(useMoney, purchaseLottos);
     }
 
     private void addNewLotto(int lottoCount, Lottos purchaseLottos) {

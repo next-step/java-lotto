@@ -17,7 +17,7 @@ class MoneyTest {
         Money expected = new Money(0);
 
         // when
-        Money result = money.useMoney(1_000);
+        Money result = money.useMoney(1);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -32,23 +32,36 @@ class MoneyTest {
         int price = 1000;
 
         // when
-        int result = money.calculatePurchaseCount(price);
+        int result = money.calculatePurchaseCount();
 
         // then
         assertThat(result).isEqualTo(10);
     }
 
     @Test
-    @DisplayName("로또 구매가 불가능한 금액을 받으면 Excpetion을 반환해야 한다.")
+    @DisplayName("로또 구매가 불가능할 때 구매 가능 갯수를 요청받으면 Excpetion을 반환해야 한다.")
     void checkAvailableForPurchaseLottoTest() {
 
         // given
-        int input = 0;
+        Money money = new Money(500);
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> money.useMoney(2))
+            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
+    }
+
+    @Test
+    @DisplayName("돈이 음수로 들어오면 Exception을 반환해야 한다.")
+    void checkNegativeMoneyTest() {
+
+        // given
+        int input = -1;
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(input))
-            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
+            .withMessageMatching("돈은 음수가 들어올 수 없다.");
     }
 
 }
