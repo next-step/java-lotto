@@ -5,6 +5,7 @@ import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
 
 import java.util.List;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,26 +15,24 @@ public class LottoGame {
 
     public LottoGame(int totalPayments) {
         this.payments = new Payments(totalPayments);
-        int ticketsCount = calculateTicketsCount(payments.getValue());
-        List<LottoTicket> tickets = createLottoTickets(ticketsCount);
-        this.tickets = new LottoTickets(tickets);
+        this.tickets = new LottoTickets(initTickets());
     }
 
-    private List<LottoTicket> createLottoTickets(int totalNumberOfTickets) {
-        return IntStream.range(0, totalNumberOfTickets)
-                .mapToObj(i -> new LottoTicket(RandomNumbers.generate()))
+    private List<LottoTicket> initTickets() {
+        return IntStream.range(0, payments.ticketCount())
+                .mapToObj(ticket())
                 .collect(Collectors.toList());
     }
 
-    private int calculateTicketsCount(int payments) {
-        return payments / LottoTicket.PRICE;
+    private IntFunction<LottoTicket> ticket() {
+        return i -> new LottoTicket(new RandomNumbers().value());
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return this.tickets.getValue();
+        return this.tickets.value();
     }
 
-    public Payments getPayment() {
+    public Payments payments() {
         return this.payments;
     }
 }

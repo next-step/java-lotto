@@ -1,25 +1,31 @@
 package lotto.game;
 
+import lotto.ticket.LottoTicket;
+
 import java.util.Objects;
 
 public class Payments {
 
     public static final int ZERO = 0;
-    private final int payments;
+    private final int amount;
 
-    public Payments(int payments) {
-        isValid(payments);
-        this.payments = payments;
+    public Payments(int amount) {
+        isValid(amount);
+        this.amount = amount;
     }
 
-    private void isValid(int payments) {
-        isPositive(payments);
-    }
-
-    private void isPositive(int payments) {
-        if (payments <= ZERO) {
+    private void isValid(int amount) {
+        if (amount <= ZERO) {
             throw new IllegalArgumentException("구매 금액은 양수입니다.");
         }
+    }
+
+    public int value() {
+        return this.amount;
+    }
+
+    public int ticketCount() {
+        return amount / LottoTicket.PRICE;
     }
 
     @Override
@@ -27,15 +33,11 @@ public class Payments {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payments payments1 = (Payments) o;
-        return payments == payments1.payments;
+        return amount == payments1.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payments);
-    }
-
-    public int getValue() {
-        return this.payments;
+        return Objects.hash(amount);
     }
 }

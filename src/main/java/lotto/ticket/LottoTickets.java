@@ -1,18 +1,26 @@
 package lotto.ticket;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> tickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(int[][] numbers) {
+        this(Arrays.stream(numbers)
+                .map(LottoTicket::new)
+                .collect(Collectors.toList()));
     }
 
-    public List<LottoTicket> getValue() {
-        return lottoTickets;
+    public LottoTickets(List<LottoTicket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<LottoTicket> value() {
+        return tickets;
     }
 
     @Override
@@ -20,11 +28,11 @@ public class LottoTickets {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTickets that = (LottoTickets) o;
-        return Objects.equals(lottoTickets, that.lottoTickets);
+        return Objects.equals(tickets, that.tickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoTickets);
+        return Objects.hash(tickets);
     }
 }

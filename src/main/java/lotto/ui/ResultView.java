@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.game.LottoGame;
 import lotto.gameresult.Gain;
 import lotto.gameresult.GameResult;
+import lotto.gameresult.ProfitRate;
 import lotto.number.LottoNumber;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.Prize;
@@ -14,40 +15,43 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void showTicketsCounts(LottoGame lottoGame) {
-        System.out.println(lottoGame.getLottoTickets().size() + "개를 구매했습니다.");
+    public void showTicketsCounts(LottoGame lottoGame) {
+        System.out.printf("%s개를 구매했습니다.%n", lottoGame.getLottoTickets().size());
     }
 
-    public static void showEachTicketsLottoNumbers(LottoGame lottoGame) {
+    public void showEachTicketsLottoNumbers(LottoGame lottoGame) {
         lottoGame.getLottoTickets()
-                .forEach(lottoTicket -> System.out.println(ConvertLottoNumberToInteger(lottoTicket)));
+                .forEach(lottoTicket -> System.out.println(convertLottoNumberToInteger(lottoTicket)));
     }
 
-    private static List<Integer> ConvertLottoNumberToInteger(LottoTicket lottoTicket) {
-        return lottoTicket.getValue().stream()
-                .mapToInt(LottoNumber::getValue).boxed()
+    private List<Integer> convertLottoNumberToInteger(LottoTicket lottoTicket) {
+        return lottoTicket.lottoNumbers().stream()
+                .mapToInt(LottoNumber::value).boxed()
                 .collect(Collectors.toList());
     }
 
-    public static void showWinningRateReport(GameResult gameResult) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+    public void showWinningRateReport(GameResult gameResult) {
+        System.out.println("당첨 통계\n---------");
 
         Arrays.stream(Prize.values())
                 .filter(pickPrizesExceptLoser())
                 .forEach(prize -> showTicketCountsForGivenPrize(gameResult, prize));
 
-        double profitRate = gameResult.getProfitRate();
-        System.out.println("총 수익률은 " + profitRate + "입니다.");
-        System.out.println("(기준이 " + Gain.BREAK_EVEN_POINT_PROFIT_RATE + "이기 때문에 결과적으로 " + Gain.decideStatusByProfitRate(profitRate).getValue() + "라는 의미임)");
+        ProfitRate profitRate = gameResult.profitRate();
+        System.out.printf("총 수익률은 %.2f 입니다%n", profitRate.value());
+        System.out.printf("(기준이 %s이기 때문에 결과적으로 %s라는 의미임)%n", Gain.BREAK_EVEN_POINT_PROFIT_RATE, Gain.status(profitRate).value());
     }
 
-    private static Predicate<Prize> pickPrizesExceptLoser() {
+    private Predicate<Prize> pickPrizesExceptLoser() {
         return prize -> !prize.equals(Prize.LOSER);
     }
 
-    private static void showTicketCountsForGivenPrize(GameResult gameResult, Prize prize) {
-        System.out.println(prize.getWinningNumbersCounts() + "개 일치 (" + prize.getPrizeMoney() + "원)- " + gameResult.countTicketsWinning(prize) + "개");
+    private void showTicketCountsForGivenPrize(GameResult gameResult, Prize prize) {
+        if (prize.equals(Prize.SECOND)) {
+            System.out.printf("%s개 일치, 보너스 볼 일치(%s원)- %s개%n", prize.winningNumbersCount(), prize.prizeMoney(), gameResult.countTicketsWinning(prize));
+            return;
+        }
+        System.out.printf("%s개 일치 (%s원)- %s개%n", prize.winningNumbersCount(), prize.prizeMoney(), gameResult.countTicketsWinning(prize));
     }
 
 }

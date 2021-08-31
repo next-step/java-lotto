@@ -7,24 +7,30 @@ import java.util.stream.IntStream;
 
 public class RandomNumbers {
 
-    private RandomNumbers() {
+    private static final List<LottoNumber> candidates;
+
+    static {
+        candidates = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> generate() {
-        List<LottoNumber> candidates = getCandidatesRangedFromMinToMax();
-        shuffle(candidates);
-        return pickRandomNumbers(candidates);
+    public List<LottoNumber> value() {
+        shuffleNumbers();
+        return numbers();
     }
 
-    private static List<LottoNumber> getCandidatesRangedFromMinToMax() {
-        return IntStream.rangeClosed(LottoNumberLimit.MIN.getValue(), LottoNumberLimit.MAX.getValue()).mapToObj(LottoNumber::new).collect(Collectors.toList());
-    }
-
-    private static void shuffle(List<LottoNumber> candidates) {
+    private void shuffleNumbers() {
         Collections.shuffle(candidates);
     }
 
-    private static List<LottoNumber> pickRandomNumbers(List<LottoNumber> candidates) {
-        return candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
+    private List<LottoNumber> numbers() {
+        List<LottoNumber> picked = candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
+        Collections.sort(picked);
+        return picked;
+    }
+
+    LottoNumber getCandidates(int index) {
+        return candidates.get(index);
     }
 }

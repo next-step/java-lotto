@@ -5,29 +5,34 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("랜덤 넘버 리스트는")
-public class RandomNumbersTest {
+@DisplayName("랜덤 넘버 리스트:")
+class RandomNumbersTest {
 
-    @DisplayName("6개의 랜덤 넘버를 가진다.")
+    public static final int RANDOM_NUMBERS_FIRST_INDEX = 0;
+    public static final int RANDOM_NUMBERS_LAST_INDEX = 5;
+
+    @DisplayName("랜덤넘버 6개")
     @Test
-    void generate6RandomNumbers() {
-        int actual = RandomNumbers.generate().size();
-        assertThat(actual).isEqualTo(6);
+    void length() {
+        assertThat(new RandomNumbers().value().size()).isEqualTo(LottoNumbers.NUMBERS_LENGTH);
     }
 
-    @DisplayName("45보다 큰 수는 가질 수 없다.")
+    @DisplayName("최댓값은 45")
     @Test
-    void maximumIs45() {
-        LottoNumber maxInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber maxLottoNumber = new LottoNumber(LottoNumberLimit.MAX.getValue());
-        assertThat(maxInRandomNumbers.getValue() <= maxLottoNumber.getValue()).isTrue();
+    void maximum() {
+        assertThat(new RandomNumbers().value().get(RANDOM_NUMBERS_LAST_INDEX).value() <= new LottoNumber(LottoNumber.MAX).value()).isTrue();
     }
 
-    @DisplayName("1보다 작은 수는 가질 수 없다.")
+
+    @DisplayName("최솟값은 1")
     @Test
-    void minimumIs45() {
-        LottoNumber minInRandomNumbers = RandomNumbers.generate().get(LottoNumbers.NUMBERS_LENGTH - 1);
-        LottoNumber minLottoNumber = new LottoNumber(LottoNumberLimit.MIN.getValue());
-        assertThat(minInRandomNumbers.getValue() >= minLottoNumber.getValue()).isTrue();
+    void minimum() {
+        assertThat(new RandomNumbers().value().get(RANDOM_NUMBERS_FIRST_INDEX).value() >= new LottoNumber(LottoNumber.MIN).value()).isTrue();
+    }
+
+    @DisplayName("랜덤넘버는 45개의 static값이다.")
+    @Test
+    void static45Values() {
+        assertThat(new RandomNumbers().getCandidates(1)).isSameAs(new RandomNumbers().getCandidates(1));
     }
 }

@@ -1,36 +1,52 @@
 package lotto.number;
 
-import lotto.helper.Helper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @DisplayName("로또 숫자 리스트는")
-public class LottoNumbersTest {
+class LottoNumbersTest {
+
+    private final int[] LOTTO_6_NUMBERS_EXAMPLE = {10, 11, 12, 13, 14, 15};
+    private final int[] LOTTO_5_NUMBERS_EXAMPLE = {10, 11, 12, 13, 14};
+    private final int[] WINNING_NUMBERS = {1, 2, 3, 4, 5, 6};
 
     @DisplayName("길이가 6이 아닐 경우 에러 발생")
     @Test
     void lottoNumbersAboveOrUnder6ThrowsError() {
-        assertThatThrownBy(() -> new LottoNumbers(Helper.lottoNumbers(1, 2, 3, 4, 5))).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("로또 숫자는 6개입니다.");
+        assertThatThrownBy(() -> new LottoNumbers(LOTTO_5_NUMBERS_EXAMPLE))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("로또 숫자는 6개입니다.");
     }
 
     @DisplayName("길이가 6일 경우 정상")
     @Test
     void lottoNumbersLengthMustBe6() {
-        assertDoesNotThrow(() -> new LottoNumbers(Helper.lottoNumbers(1, 2, 3, 4, 5, 6)));
+        assertDoesNotThrow(() -> new LottoNumbers(LOTTO_6_NUMBERS_EXAMPLE));
     }
 
-    @DisplayName("당첨숫자를 몇 개 포함하는지 알려준다.")
-    @ParameterizedTest(name = "{1}개 포함")
-    @CsvSource(value = {"0:6", "1:5", "2:4", "3:3", "4:0"}, delimiter = ':')
-    void tellsHowManyWinningNumbersAreIncluded(int ticketIndex, int winningNumberCounts) {
-        LottoNumbers given = Helper.lottoNumbers(ticketIndex);
-        int result = given.countWinningNumbers(Helper.winningNumbers());
-        assertThat(result).isEqualTo(winningNumberCounts);
+    @DisplayName("당첨번호가 1,2,3,4,5,6일 때 ")
+    @ParameterizedTest(name = "{1}개 당첨")
+    @MethodSource("provideLottoNumbersAndWinningNumbersCounts")
+    void tellsHowManyWinningNumbersAreIncluded(LottoNumbers lottoNumbers, int winningNumberCounts) {
+        assertThat(lottoNumbers.matchOf(new WinningNumbers(WINNING_NUMBERS))).isEqualTo(winningNumberCounts);
+    }
+
+    private static Stream<Arguments> provideLottoNumbersAndWinningNumbersCounts() {
+        return Stream.of(
+                Arguments.of(new LottoNumbers(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(new LottoNumbers(1, 2, 3, 4, 5, 7), 5),
+                Arguments.of(new LottoNumbers(1, 2, 3, 4, 8, 7), 4),
+                Arguments.of(new LottoNumbers(1, 2, 3, 9, 8, 7), 3),
+                Arguments.of(new LottoNumbers(12, 11, 10, 9, 8, 7), 0)
+        );
     }
 }

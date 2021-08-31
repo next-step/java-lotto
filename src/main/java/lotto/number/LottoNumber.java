@@ -4,40 +4,49 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private final int lottoNumber;
+    public static final int MAX = 45;
+    public static final int MIN = 1;
 
-    public LottoNumber(int lottoNumber) {
-        isValid(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    private final int number;
+
+    public LottoNumber(int number) {
+        isValid(number);
+        this.number = number;
     }
 
-    public int getValue() {
-        return this.lottoNumber;
+    public int value() {
+        return this.number;
     }
 
-    private void isValid(int lottoNumber) {
-        if (LottoNumberLimit.MAX.isUnder(lottoNumber) || LottoNumberLimit.MIN.isAbove(lottoNumber)) {
+    private void isValid(int number) {
+        if (isAboveMax(number) || isUnderMin(number)) {
             throw new IllegalArgumentException("로또 숫자는 1 이상, 45 이하의 정수입니다.");
         }
     }
 
+    private boolean isAboveMax(int number) {
+        return number > MAX;
+    }
+
+    private boolean isUnderMin(int number) {
+        return number < MIN;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(number);
     }
-
 
     @Override
     public int compareTo(LottoNumber o) {
-        return o.getValue() - getValue();
+        return number - o.number;
     }
 }

@@ -12,12 +12,12 @@ public enum Gain {
         this.status = status;
     }
 
-    public static Gain decideStatusByProfitRate(double profitRate) {
-        if (profitRate < BREAK_EVEN_POINT_PROFIT_RATE) {
+    public static Gain status(ProfitRate profitRate) {
+        if (profitRate.isLessthan(BREAK_EVEN_POINT_PROFIT_RATE)) {
             return LOSS;
         }
 
-        if (profitRate > BREAK_EVEN_POINT_PROFIT_RATE) {
+        if (profitRate.isGreaterthan(BREAK_EVEN_POINT_PROFIT_RATE)) {
             return GAIN;
         }
 
@@ -25,7 +25,7 @@ public enum Gain {
     }
 
 
-    public String getValue() {
+    public String value() {
         return status;
     }
 }

@@ -18,7 +18,7 @@ public class WholeNumber {
         }
     }
 
-    public int getValue() {
+    public int value() {
         return number;
     }
 
