@@ -29,7 +29,7 @@ class RankTest {
         Rank result = calculateLottoRank(lotto.calculateWinCount(winLotto));
 
         // then
-        assertThat(result).isEqualTo(Rank.FOURTH);
+        assertThat(result).isEqualTo(Rank.FIFTH);
     }
 
 }
