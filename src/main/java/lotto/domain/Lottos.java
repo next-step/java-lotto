@@ -15,14 +15,14 @@ public class Lottos {
         return lottos;
     }
 
-    public WinningResult checkLottosPrize(List<Integer> winningNums, int bonusNum) {
+    public WinningResult checkLottosPrize2(Lotto winningNums, int bonusNum) {
         int matchingCount;
         boolean matchingBonus;
         Integer[] prizeNums = new Integer[Prize.values().length];
         Arrays.fill(prizeNums, 0);
 
         for (Lotto lotto : lottos) {
-            matchingCount = lotto.countMatchingNums(new Lotto(winningNums));
+            matchingCount = lotto.countMatchingNums(winningNums);
             matchingBonus = lotto.isMatchingBonus(LottoNumber.of(bonusNum));
 
             checkPrize(prizeNums, matchingCount, matchingBonus);

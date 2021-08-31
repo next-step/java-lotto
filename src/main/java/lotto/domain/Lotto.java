@@ -8,9 +8,9 @@ public class Lotto {
     private static final String EXCEP_INVALID_NUM = "로또 번호로 유효하지 않습니다.";
     private final List<LottoNumber> lotto;
 
-    Lotto(List<Integer> lottoNums) {
+    public Lotto(List<Integer> lottoNums) {
         List<LottoNumber> lottoNumbers = toLottoNumberList(lottoNums);
-        checkValidLotto2(lottoNumbers);
+        checkValidLotto(lottoNumbers);
         this.lotto = lottoNumbers;
     }
 
@@ -24,14 +24,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private void checkValidLotto2(List<LottoNumber> lottoNumbers) {
+    private void checkValidLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LottoMachine.NUMS_PER_LOTTO) {
             throwExceptionInvalidLotto();
         }
-        checkDuplicateNum2(lottoNumbers);
+        checkDuplicateNum(lottoNumbers);
     }
 
-    void checkDuplicateNum2(List<LottoNumber> lottoNums) {
+    void checkDuplicateNum(List<LottoNumber> lottoNums) {
         if (lottoNums.size() != lottoNums.stream().distinct().count()) {
             throwExceptionInvalidLotto();
         }
@@ -41,7 +41,7 @@ public class Lotto {
         throw new IllegalArgumentException(EXCEP_INVALID_NUM);
     }
 
-    public List<LottoNumber> getLottoNums() {
+    public List<LottoNumber> getLottoNumberList() {
         return lotto;
     }
 
@@ -59,8 +59,8 @@ public class Lotto {
         return lotto.contains(lottoNumber);
     }
 
-    public boolean isMatchingBonus(LottoNumber bonusNum) {
-        return lotto.stream().anyMatch(i -> i.equals(bonusNum));
+    public boolean isMatchingBonus(LottoNumber bonusNumber) {
+        return lotto.stream().anyMatch(i -> i.equals(bonusNumber));
     }
 
     @Override

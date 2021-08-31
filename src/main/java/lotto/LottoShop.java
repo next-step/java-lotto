@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.AutoGenerateNumsStrategy;
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,7 +17,7 @@ public class LottoShop {
 
         List<Integer> winningNums = InputView.inputWinningNums();
         int bonusNum = InputView.inputBonusNum();
-        ResultView.printLottoPrize(lottoMachine.getWinningResult(winningNums, bonusNum));
-        ResultView.printLottoYield(lottoMachine, winningNums, bonusNum);
+        ResultView.printLottoPrize(lottoMachine.getWinningResult2(new Lotto(winningNums), bonusNum));
+        ResultView.printLottoYield2(lottoMachine, new Lotto(winningNums), bonusNum);
     }
 }

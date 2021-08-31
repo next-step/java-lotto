@@ -84,10 +84,10 @@ public class LottoMachineTest {
 
     @Test
     void countLottoGrades_로또_당첨_개수_출력() {
-        WinningResult winningResult = lottoMachine.countWinningPrize(winningNumberList, 44);
+        WinningResult winningResult = lottoMachine.countWinningPrize2(new Lotto(winningNumberList), 44);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 1, 0, 0, 1)));
 
-        winningResult = lottoMachine.countWinningPrize(winningNumberList, 1);
+        winningResult = lottoMachine.countWinningPrize2(new Lotto(winningNumberList), 1);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 0, 1)));
 
 //        WinningResult winningResult = lottoMachine.countWinningPrize(new WinningNumber(winningNumberList, 44));
@@ -99,8 +99,8 @@ public class LottoMachineTest {
 
     @Test
     void getTotalPrizeMoney_총_상금_계산() {
-        assertThat(lottoMachine.getTotalPrizeMoney(winningNumberList, 1)).isEqualTo(1505000);
-        assertThat(lottoMachine.getTotalPrizeMoney(winningNumberList, 44)).isEqualTo(30005000);
+        assertThat(lottoMachine.getTotalPrizeMoney2(new Lotto(winningNumberList), 1)).isEqualTo(1505000);
+        assertThat(lottoMachine.getTotalPrizeMoney2(new Lotto(winningNumberList), 44)).isEqualTo(30005000);
 
 //        assertThat(lottoMachine.getTotalPrizeMoney(new WinningNumber(winningNumberList, 1)).isEqualTo(1505000);
 //        assertThat(lottoMachine.getTotalPrizeMoney(new WinningNumber(winningNumberList, 44)).isEqualTo(30005000);
@@ -108,8 +108,8 @@ public class LottoMachineTest {
 
     @Test
     void getYield_수익률_계산() {
-        assertThat(lottoMachine.getYield(winningNumberList, 1)).isEqualTo(1505000.0/14500.0);
-        assertThat(lottoMachine.getYield(winningNumberList, 44)).isEqualTo(30005000.0/14500.0);
+        assertThat(lottoMachine.getYield2(new Lotto(winningNumberList), 1)).isEqualTo(1505000.0/14500.0);
+        assertThat(lottoMachine.getYield2(new Lotto(winningNumberList), 44)).isEqualTo(30005000.0/14500.0);
 
 //        assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 1)).isEqualTo(1505000.0/14500.0);
 //        assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 44)).isEqualTo(30005000.0/14500.0);

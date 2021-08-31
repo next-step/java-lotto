@@ -29,7 +29,7 @@
 - [X] 보너스 볼 추첨 기능 추가
 ### Refactoring 목록
 - [X] Lotto의 원시 데이터를 LottoNumber 클래스로 wrapping하기
-- [ ] winningNums 배열을 Lotto 클래스로 wrapping하기
+- [X] winningNums 배열을 Lotto 클래스로 wrapping하기
 - [ ] WinningLotto 클래스로 winningNums와 bonusNumber를 wrapping하기
   - [ ] matching 값을 세는 로직을 WinningLotto로 이동 시키기
 - [ ] 세부 클래스에서 구현된 세부 기능들도 Test로 구현하기

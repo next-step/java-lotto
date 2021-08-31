@@ -37,26 +37,21 @@ public class LottoMachine {
         return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
     }
 
-    WinningResult countWinningPrize(List<Integer> winningNums, int bonusNum) {
-        return lottos.checkLottosPrize(winningNums, bonusNum);
+    WinningResult countWinningPrize2(Lotto winningNums, int bonusNum) {
+        return lottos.checkLottosPrize2(winningNums, bonusNum);
     }
 
-//    WinningResult countWinningPrize(WinningNumber winningNumber) {
-//        return null;
-////        return lottos.checkLottosPrize(winningNums, bonusNum);
-//    }
-
-    public int getTotalPrizeMoney(List<Integer> winningNums, int bonusNum) {
-        WinningResult winningResult = countWinningPrize(winningNums, bonusNum);
+    public int getTotalPrizeMoney2(Lotto winningNums, int bonusNum) {
+        WinningResult winningResult = countWinningPrize2(winningNums, bonusNum);
 
         return winningResult.getTotalWinningMoney();
     }
 
-    public double getYield(List<Integer> winningNums, int bonusNum) {
-        return money.getYield(getTotalPrizeMoney(winningNums, bonusNum));
+    public double getYield2(Lotto winningNums, int bonusNum) {
+        return money.getYield(getTotalPrizeMoney2(winningNums, bonusNum));
     }
 
-    public WinningResult getWinningResult(List<Integer> winningNums, int bonusNum) {
-        return countWinningPrize(winningNums, bonusNum);
+    public WinningResult getWinningResult2(Lotto winningNums, int bonusNum) {
+        return countWinningPrize2(winningNums, bonusNum);
     }
 }
