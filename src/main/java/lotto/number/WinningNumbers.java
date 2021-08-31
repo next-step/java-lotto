@@ -18,7 +18,7 @@ public class WinningNumbers {
         this.numbers = numbers;
     }
 
-    public static WinningNumbers getInstanceByInt(List<Integer> numbers) {
+    public static WinningNumbers valueOf(List<Integer> numbers) {
         return new WinningNumbers(
                 numbers.stream()
                         .map(LottoNumber::new)

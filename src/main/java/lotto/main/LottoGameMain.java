@@ -24,7 +24,7 @@ public class LottoGameMain {
         List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
         BonusNumber bonusNumber = new BonusNumber(inputView.askUserBonusNumber());
 
-        GameResult gameResult = new GameResult(lottoGame, WinningNumbers.getInstanceByInt(winningNumbersOfLastWeek), bonusNumber);
+        GameResult gameResult = new GameResult(lottoGame, WinningNumbers.valueOf(winningNumbersOfLastWeek), bonusNumber);
         resultView.showWinningRateReport(gameResult);
     }
 }
