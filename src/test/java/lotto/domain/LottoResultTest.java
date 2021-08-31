@@ -48,18 +48,17 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("현재 로또 당첨의 수익률을 계산할 수 있다.")
-    void calculateLottoResultYeildTest() {
+    @DisplayName("로또 결과를 가지고 총 획득 상금을 반환할 수 있다.")
+    void calculateWinMoneyTest() {
 
         // given
-        Wallet wallet = new Wallet(new Money(0), buyLottos);
-        LottoResult lottoResult = LottoResult.calculateLottoResult(wallet.lottos(), winLotto);
+        LottoResult lottoResult = LottoResult.calculateLottoResult(buyLottos, winLotto);
 
         // when
-        double result = lottoResult.calculateYeild();
+        double result = lottoResult.calculateWinMoney();
 
         // then
-        assertThat(result).isEqualTo(2.5);
+        assertThat(result).isEqualTo(5_000);
     }
 
 }

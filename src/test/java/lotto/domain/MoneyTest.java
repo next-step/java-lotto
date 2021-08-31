@@ -64,4 +64,19 @@ class MoneyTest {
             .withMessageMatching("돈은 음수가 들어올 수 없다.");
     }
 
+    @Test
+    @DisplayName("총 획득 상금이 들어오면 수익률을 계산할 수 있다.")
+    void calcualteYeildTest() {
+
+        // given
+        Money money = new Money(1_000);
+        double winMoney = 5_000;
+
+        // when
+        double result = money.calculateYeild(winMoney);
+
+        // then
+        assertThat(result).isEqualTo(5.0);
+    }
+
 }

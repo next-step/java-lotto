@@ -14,21 +14,12 @@ public class LottoResult {
         return new LottoResult(lotto.calculateResult(winLotto));
     }
 
-    public double calculateYeild() {
-        double buyMoney = calculateBuyMoney();
+    public double calculateWinMoney() {
         double getMoney = 0;
         for (Rank rank : Rank.values()) {
             getMoney += resultMap.get(rank) * rank.winMoney();
         }
-        return getMoney / buyMoney;
-    }
-
-    private int calculateBuyMoney() {
-        int buyLottoCount = 0;
-        for (Rank rank : resultMap.keySet()) {
-            buyLottoCount += resultMap.get(rank);
-        }
-        return buyLottoCount * Lotto.LOTTO_PRICE;
+        return getMoney;
     }
 
     public int getRankCount(Rank rank) {

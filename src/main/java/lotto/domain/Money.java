@@ -39,6 +39,11 @@ public class Money {
         }
     }
 
+    public double calculateYeild(double winMoney) {
+        double buyMoney = money * calculatePurchaseCount();
+        return winMoney / buyMoney;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
