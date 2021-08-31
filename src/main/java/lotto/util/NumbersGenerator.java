@@ -12,6 +12,7 @@ public class NumbersGenerator {
 
     public static List<Number> generateNumbers(String[] inputs) {
         return Arrays.stream(inputs)
+            .map(String::trim)
             .map(Integer::parseInt)
             .map(Number::new)
             .collect(Collectors.toList());

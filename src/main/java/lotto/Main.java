@@ -25,7 +25,7 @@ public class Main {
         resultView.printLottoCount(wallet);
         resultView.printLottosNumber(wallet);
 
-        List<Number> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(", "));
+        List<Number> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
         Lotto winLotto = new Lotto(numbers);
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
         resultView.printLottoResult(lottoResult);
