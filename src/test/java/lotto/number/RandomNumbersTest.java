@@ -29,4 +29,10 @@ class RandomNumbersTest {
     void minimum() {
         assertThat(new RandomNumbers().value().get(RANDOM_NUMBERS_FIRST_INDEX).value() >= new LottoNumber(LottoNumber.MIN).value()).isTrue();
     }
+
+    @DisplayName("랜덤넘버는 45개의 static값이다.")
+    @Test
+    void static45Values() {
+        assertThat(new RandomNumbers().getCandidates(1)).isSameAs(new RandomNumbers().getCandidates(1));
+    }
 }
