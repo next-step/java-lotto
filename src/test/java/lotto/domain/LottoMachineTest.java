@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -17,7 +16,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoMachineTest {
     LottoMachine lottoMachine;
     Lottos lottos;
-    List<Integer> winningNums;
+    WinningNumber winningNumber;
+    List<Integer> winningNumberList;
 
     @BeforeEach
     void initializeLottoSimulation() {
@@ -41,7 +41,8 @@ public class LottoMachineTest {
         );
 
         lottos = new Lottos(lottoList);
-        winningNums = new ArrayList<>(Arrays.asList(5, 11, 9, 43, 41, 2, 38));
+        winningNumberList = new ArrayList<>(Arrays.asList(5, 11, 9, 43, 41, 38));
+        winningNumber = new WinningNumber(winningNumberList, 44);
         lottoMachine = new LottoMachine(14500, new GenerateNumStrategy() {
             @Override
             public Lottos generate(int totalLottoNum, int numsPerLotto) {
@@ -83,23 +84,35 @@ public class LottoMachineTest {
 
     @Test
     void countLottoGrades_로또_당첨_개수_출력() {
-        WinningResult winningResult = lottoMachine.countLottoPrize(winningNums, 44);
+        WinningResult winningResult = lottoMachine.countWinningPrize(winningNumberList, 44);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 1, 0, 0, 1)));
 
-        winningResult = lottoMachine.countLottoPrize(winningNums, 1);
+        winningResult = lottoMachine.countWinningPrize(winningNumberList, 1);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 0, 1)));
+
+//        WinningResult winningResult = lottoMachine.countWinningPrize(new WinningNumber(winningNumberList, 44));
+//        assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 1, 0, 0, 1)));
+//
+//        winningResult = lottoMachine.countWinningPrize(new WinningNumber(winningNumberList, 1));
+//        assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 0, 1)));
     }
 
     @Test
     void getTotalPrizeMoney_총_상금_계산() {
-        assertThat(lottoMachine.getTotalPrizeMoney(winningNums, 1)).isEqualTo(1505000);
-        assertThat(lottoMachine.getTotalPrizeMoney(winningNums, 44)).isEqualTo(30005000);
+        assertThat(lottoMachine.getTotalPrizeMoney(winningNumberList, 1)).isEqualTo(1505000);
+        assertThat(lottoMachine.getTotalPrizeMoney(winningNumberList, 44)).isEqualTo(30005000);
+
+//        assertThat(lottoMachine.getTotalPrizeMoney(new WinningNumber(winningNumberList, 1)).isEqualTo(1505000);
+//        assertThat(lottoMachine.getTotalPrizeMoney(new WinningNumber(winningNumberList, 44)).isEqualTo(30005000);
     }
 
     @Test
     void getYield_수익률_계산() {
-        assertThat(lottoMachine.getYield(winningNums, 1)).isEqualTo(1505000.0/14500.0);
-        assertThat(lottoMachine.getYield(winningNums, 44)).isEqualTo(30005000.0/14500.0);
+        assertThat(lottoMachine.getYield(winningNumberList, 1)).isEqualTo(1505000.0/14500.0);
+        assertThat(lottoMachine.getYield(winningNumberList, 44)).isEqualTo(30005000.0/14500.0);
+
+//        assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 1)).isEqualTo(1505000.0/14500.0);
+//        assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 44)).isEqualTo(30005000.0/14500.0);
     }
 
 }

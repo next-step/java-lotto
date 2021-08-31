@@ -11,7 +11,7 @@ public class ResultView {
     public static void printGeneratedLottos(LottoMachine lottoMachine) {
         Lottos lottos = lottoMachine.getLottos();
         List<Lotto> lottoList = lottos.getLottoList();
-        List<Integer> lottoNums;
+        List<LottoNumber> lottoNums;
 
         for (Lotto lotto : lottoList) {
             lottoNums = lotto.getLottoNums();
@@ -21,8 +21,8 @@ public class ResultView {
         System.out.println();
     }
 
-    private static void printLottoNums(List<Integer> lottoNums) {
-        Iterator<Integer> it = lottoNums.iterator();
+    private static void printLottoNums(List<LottoNumber> lottoNums) {
+        Iterator<LottoNumber> it = lottoNums.iterator();
 
         System.out.print("[" + it.next());
         while (it.hasNext()) {

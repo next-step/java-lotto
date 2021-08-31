@@ -37,12 +37,17 @@ public class LottoMachine {
         return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
     }
 
-    WinningResult countLottoPrize(List<Integer> winningNums, int bonusNum) {
-        return lottos.checkLottoPrize(winningNums, bonusNum);
+    WinningResult countWinningPrize(List<Integer> winningNums, int bonusNum) {
+        return lottos.checkLottosPrize(winningNums, bonusNum);
     }
 
+//    WinningResult countWinningPrize(WinningNumber winningNumber) {
+//        return null;
+////        return lottos.checkLottosPrize(winningNums, bonusNum);
+//    }
+
     public int getTotalPrizeMoney(List<Integer> winningNums, int bonusNum) {
-        WinningResult winningResult = countLottoPrize(winningNums, bonusNum);
+        WinningResult winningResult = countWinningPrize(winningNums, bonusNum);
 
         return winningResult.getTotalWinningMoney();
     }
@@ -52,6 +57,6 @@ public class LottoMachine {
     }
 
     public WinningResult getWinningResult(List<Integer> winningNums, int bonusNum) {
-        return countLottoPrize(winningNums, bonusNum);
+        return countWinningPrize(winningNums, bonusNum);
     }
 }
