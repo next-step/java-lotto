@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,17 +30,20 @@ public class LottoNumbers {
         }
     }
 
-    public int getMatchCount(LottoNumbers winningNumbers){
+    public int getMatchCount(LottoNumbers winningNumbers) {
         int matchCnt = 0;
-        for(LottoNumber lottoNumber : lottoNumbers){
-            if(winningNumbers.isContained(lottoNumber))matchCnt++;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winningNumbers.isContained(lottoNumber)) {
+                matchCnt++;
+            }
         }
         return matchCnt;
     }
 
-    public boolean isContained(LottoNumber lottoNumber){
+    public boolean isContained(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
+
     @Override
     public String toString() {
         return "["

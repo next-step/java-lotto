@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningNumbers {
 
     private final LottoNumbers winningNumbers;
@@ -12,11 +10,11 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers){
+    public int getMatchCount(LottoNumbers lottoNumbers) {
         return winningNumbers.getMatchCount(lottoNumbers);
     }
 
-    public boolean checkBonusNumber(LottoNumbers lottoNumbers){
+    public boolean checkBonusNumber(LottoNumbers lottoNumbers) {
         return lottoNumbers.isContained(bonusNumber);
     }
 }

@@ -28,7 +28,7 @@ public enum LottoRank {
     }
 
     public static LottoRank findRank(int collectNumber, boolean matchBonus) {
-        if(collectNumber == 5){
+        if (collectNumber == 5) {
             return checkSecondOrThird(matchBonus);
         }
 
@@ -38,15 +38,16 @@ public enum LottoRank {
             .orElse(FAIL);
     }
 
-    private boolean matchCount(int collectNumber){
+    private boolean matchCount(int collectNumber) {
         return this.collectNumber == collectNumber;
     }
 
-    private static LottoRank checkSecondOrThird(boolean matchBonus){
-        if (matchBonus)return SECOND;
+    private static LottoRank checkSecondOrThird(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
         return THIRD;
     }
-
 
 
 }
