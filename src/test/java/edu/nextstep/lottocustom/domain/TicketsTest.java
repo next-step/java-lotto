@@ -15,16 +15,16 @@ import static org.assertj.core.api.Assertions.*;
 public class TicketsTest {
 
     @Test
-    @DisplayName("Tickets 크기 비교")
+    @DisplayName("Tickets 생성")
     void isSameSize() {
         // given
         Payment payment = new Payment(10_000);
 
         // when
-        Tickets tickets = Tickets.of(payment, new ArrayList<>(), new AutoNumbersMaker());
+        Tickets tickets = Tickets.of(payment, new ArrayList<>(), new CustomNumbersMaker("1,2,3,4,5,6"));
 
         // then
-        assertThat(tickets.isSameSize(payment.countOfTickets())).isTrue();
+        assertThat(tickets).isEqualTo(Tickets.of(payment, new ArrayList<>(), new CustomNumbersMaker("1,2,3,4,5,6")));
     }
 
     @Test

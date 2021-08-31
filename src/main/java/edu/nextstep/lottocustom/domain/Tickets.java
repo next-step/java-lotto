@@ -71,4 +71,17 @@ public class Tickets {
     public List<Ticket> getTickets() {
         return Collections.unmodifiableList(tickets);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tickets tickets1 = (Tickets) o;
+        return Objects.equals(tickets, tickets1.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tickets);
+    }
 }
