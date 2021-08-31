@@ -66,9 +66,4 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
-
 }
