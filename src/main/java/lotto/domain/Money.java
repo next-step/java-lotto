@@ -10,17 +10,17 @@ public class Money {
         this.money = money;
     }
 
-    void checkValidMoney(int money) {
+    public static void checkValidMoney(int money) {
         if (money < MIN_MONEY) {
             throw new IllegalArgumentException(EXCEP_INVALID_MONEY + " : " + money);
         }
     }
 
-    public int buyableLottos(int price) {
+    public int calculateBuyableLottos(int price) {
         return money / price;
     }
 
     public double getYield(int totalPrizeMoney) {
-        return (double)totalPrizeMoney / (double)money;
+        return (double) totalPrizeMoney / (double) money;
     }
 }

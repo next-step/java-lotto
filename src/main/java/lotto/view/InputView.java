@@ -29,12 +29,12 @@ public class InputView {
     }
 
     static boolean isValidMoney(int money) {
-        if (money < Money.MIN_MONEY) {
-            System.out.println(NOTI_INVALID_MONEY + " : " + money);
+        try {
+            Money.checkValidMoney(money);
+            return true;
+        } catch (IllegalArgumentException e) {
             return false;
         }
-
-        return true;
     }
 
     public static List<Integer> inputWinningNums() {

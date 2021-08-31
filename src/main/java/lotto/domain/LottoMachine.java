@@ -28,7 +28,7 @@ public class LottoMachine {
     }
 
     public int calculateBuyableLottos() {
-        return money.buyableLottos(LOTTO_PRICE);
+        return money.calculateBuyableLottos(LOTTO_PRICE);
     }
 
     Lottos generateLottos() {
