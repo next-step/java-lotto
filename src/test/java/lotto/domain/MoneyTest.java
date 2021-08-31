@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,19 @@ class MoneyTest {
 
         // then
         assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("로또 구매가 불가능한 금액을 받으면 Excpetion을 반환해야 한다.")
+    void checkAvailableForPurchaseLottoTest() {
+
+        // given
+        int input = 0;
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Money(input))
+            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
     }
 
 }
