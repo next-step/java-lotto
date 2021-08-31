@@ -1,29 +1,20 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 public enum Prize {
-    FIRST(0, 6, 2000000000, false),
-    SECOND(1, 5, 30000000, true),
-    THIRD(2, 5, 1500000, false),
-    FOURTH(3, 4, 50000, false),
-    FIFTH(4, 3, 5000, false);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
 
-    private final int index;
     private final int matchingCount;
     private final int money;
-    private final boolean matchingBonus;
 
-    Prize(int index, int matchingCount, int prizeMoney, boolean matchingBonus) {
-        this.index = index;
+    Prize( int matchingCount, int prizeMoney) {
         this.matchingCount = matchingCount;
         this.money = prizeMoney;
-        this.matchingBonus = matchingBonus;
-    }
-
-    public int index() {
-        return index;
     }
 
     public int matchingCount() {
@@ -34,13 +25,17 @@ public enum Prize {
         return money;
     }
 
-    int winningMoney(int count) {
+    int calculateWinningMoney(int count) {
         return money * count;
     }
 
     public static Prize valueOf(int matchingCount, boolean matchingBonus) {
+        if (matchingCount == SECOND.matchingCount) {
+            return matchingBonus ? SECOND : THIRD;
+        }
+
         return Arrays.stream(values())
-                .filter(p -> matchingCount == p.matchingCount && matchingBonus == p.matchingBonus)
+                .filter(p -> matchingCount == p.matchingCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당 값을 가진 Prize는 없습니다." + matchingCount));
     }

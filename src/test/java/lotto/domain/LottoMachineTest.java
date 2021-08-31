@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,50 +15,12 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoMachineTest {
-    @Test
-    void buyableLottos_살_수_있는_로또_개수_환산() {
-        int money = 14500;
-        int lottoCount = 14;
+    LottoMachine lottoMachine;
+    Lottos lottos;
+    List<Integer> winningNums;
 
-        LottoMachine lottoMachine = new LottoMachine(money);
-        assertThat(lottoMachine.buyableLottos()).isEqualTo(lottoCount);
-    }
-
-    @Test
-    void generateNums_생성_Strategy에_따라_번호_생성() {
-        int totalLottosNum = 5;
-        Random random = new Random();
-
-        Integer[][] nums = new Integer[totalLottosNum][AutoGenerateStrategy.NUMS_PER_LOTTO];
-        for (int i = 0; i < totalLottosNum; i++) {
-            for (int j = 0; j < LottoMachine.NUMS_PER_LOTTO; j++) {
-                nums[i][j] = random.nextInt(LottoMachine.LOTTO_MAX_NUM) + 1;
-            }
-        }
-
-        List<Lotto> lottoList = new ArrayList<>(totalLottosNum);
-        for (int i = 0; i < totalLottosNum; i++) {
-            lottoList.add(new Lotto(Arrays.asList(nums[i])));
-        }
-
-        Lottos lottos = new Lottos(lottoList);
-
-        List<Lotto> lottoList1 = new ArrayList<>(totalLottosNum);
-        for (int i = 0; i < totalLottosNum; i++) {
-            lottoList1.add(new Lotto(Arrays.asList(nums[i])));
-        }
-
-        LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
-            @Override
-            public Lottos generate(int totalLottoNum, int numsPerLotto) {
-                return new Lottos(lottoList1);
-            }
-        });
-
-        assertThat(lottoMachine.generateLottos()).isEqualTo(lottos);
-    }
-
-    private static Stream<Arguments> provideLottosAndWinningNums() {
+    @BeforeEach
+    void initializeLottoSimulation() {
         List<Lotto> lottoList = new ArrayList<>(
                 Arrays.asList(
                         new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
@@ -77,18 +40,37 @@ public class LottoMachineTest {
                 )
         );
 
-//        List<Integer> winningNums = new ArrayList<>(Arrays.asList(5, 11, 16, 44, 42, 2, 38));
-        List<Integer> winningNums = new ArrayList<>(Arrays.asList(5, 11, 9, 43, 41, 2, 38));
-        return Stream.of(
-                Arguments.of(lottoList, winningNums)
-        );
+        lottos = new Lottos(lottoList);
+        winningNums = new ArrayList<>(Arrays.asList(5, 11, 9, 43, 41, 2, 38));
+        lottoMachine = new LottoMachine(14500, new GenerateNumStrategy() {
+            @Override
+            public Lottos generate(int totalLottoNum, int numsPerLotto) {
+                return lottos;
+            }
+        });
+    }
+
+    @Test
+    void buyableLottos_살_수_있는_로또_개수_환산() {
+        int money = 14500;
+        int lottoCount = 14;
+
+        LottoMachine lottoMachine = new LottoMachine(money);
+        assertThat(lottoMachine.calculateBuyableLottos()).isEqualTo(lottoCount);
+    }
+
+    public static Stream provideRandomNumLotto() {
+        int totalLottosNum = 5;
+        GenerateNumStrategy generateNumStrategy = new AutoGenerateNumsStrategy();
+
+        Lottos lottos = generateNumStrategy.generate(totalLottosNum, LottoMachine.NUMS_PER_LOTTO);
+
+        return Stream.of(Arguments.of(lottos));
     }
 
     @ParameterizedTest
-    @MethodSource("provideLottosAndWinningNums")
-    void countLottoPrize_로또_당첨_개수_출력(List<Lotto> lottoList, List<Integer> winningNums) {
-        Lottos lottos = new Lottos(lottoList);
-
+    @MethodSource("provideRandomNumLotto")
+    void generateNums_생성_Strategy에_따라_번호_생성(Lottos lottos) {
         LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
             @Override
             public Lottos generate(int totalLottoNum, int numsPerLotto) {
@@ -96,40 +78,26 @@ public class LottoMachineTest {
             }
         });
 
+        assertThat(lottoMachine.generateLottos()).isEqualTo(lottos);
+    }
+
+    @Test
+    void countLottoGrades_로또_당첨_개수_출력() {
         WinningResult winningResult = lottoMachine.countLottoPrize(winningNums, 44);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 1, 0, 0, 1)));
+
         winningResult = lottoMachine.countLottoPrize(winningNums, 1);
         assertThat(winningResult).isEqualTo(new WinningResult(Arrays.asList(0, 0, 1, 0, 1)));
     }
 
-    @ParameterizedTest
-    @MethodSource("provideLottosAndWinningNums")
-    void getTotalPrizeMoney_총_상금_계산(List<Lotto> lottoList, List<Integer> winningNums) {
-        Lottos lottos = new Lottos(lottoList);
-
-        LottoMachine lottoMachine = new LottoMachine(new GenerateNumStrategy() {
-            @Override
-            public Lottos generate(int totalLottoNum, int numsPerLotto) {
-                return lottos;
-            }
-        });
-
+    @Test
+    void getTotalPrizeMoney_총_상금_계산() {
         assertThat(lottoMachine.getTotalPrizeMoney(winningNums, 1)).isEqualTo(1505000);
         assertThat(lottoMachine.getTotalPrizeMoney(winningNums, 44)).isEqualTo(30005000);
     }
 
-    @ParameterizedTest
-    @MethodSource("provideLottosAndWinningNums")
-    void getYield_수익률_계산(List<Lotto> lottoList, List<Integer> winningNums) {
-        Lottos lottos = new Lottos(lottoList);
-
-        LottoMachine lottoMachine = new LottoMachine(14500, new GenerateNumStrategy() {
-            @Override
-            public Lottos generate(int totalLottoNum, int numsPerLotto) {
-                return lottos;
-            }
-        });
-
+    @Test
+    void getYield_수익률_계산() {
         assertThat(lottoMachine.getYield(winningNums, 1)).isEqualTo(1505000.0/14500.0);
         assertThat(lottoMachine.getYield(winningNums, 44)).isEqualTo(30005000.0/14500.0);
     }

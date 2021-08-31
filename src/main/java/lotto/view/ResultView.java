@@ -48,16 +48,16 @@ public class ResultView {
         if (prize.equals(Prize.SECOND)) {
             System.out.println(
                     prize.matchingCount() + "개 일치, 보너스 볼 일치(" +
-                    prize.money() + "원)- " +
-                    prizeList.get(prize.index()) + "개");
+                            prize.money() + "원)- " +
+                            prizeList.get(prize.ordinal()) + "개");
 
             return;
         }
 
         System.out.println(
                 prize.matchingCount() + "개 일치 (" +
-                prize.money() + "원)- " +
-                prizeList.get(prize.index()) + "개");
+                        prize.money() + "원)- " +
+                        prizeList.get(prize.ordinal()) + "개");
     }
 
     public static void printLottoYield(LottoMachine lottoMachine, List<Integer> winningNums, int bonusNum) {
@@ -65,7 +65,7 @@ public class ResultView {
     }
 
     public static void printBuyableLottoNum(LottoMachine lottoMachine) {
-        int buyableLottoNum = lottoMachine.buyableLottos();
+        int buyableLottoNum = lottoMachine.calculateBuyableLottos();
         System.out.println(buyableLottoNum + "개를 구매했습니다.");
     }
 }

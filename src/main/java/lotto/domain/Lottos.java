@@ -33,7 +33,7 @@ public class Lottos {
 
     private void checkPrize(Integer[] prizeNums, int matchingCount, boolean matchingBonus) {
         try {
-            prizeNums[Prize.valueOf(matchingCount, matchingBonus).index()]++;
+            prizeNums[Prize.valueOf(matchingCount, matchingBonus).ordinal()]++;
         } catch (IllegalArgumentException e) {
             return;
         }

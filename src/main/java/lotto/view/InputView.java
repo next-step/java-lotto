@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.Money;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +14,7 @@ public class InputView {
     private final static String NOTI_INVALID_MONEY = "구입금액으로 유효하지 않습니다.";
     private static final String GUIDE_INPUT_WIN_NUMS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INST_INPUT_BONUS_NUM = "보너스 볼을 입력해 주세요";
+    private static final int NUMS_PER_LOTTO = 6;
 
     public static int inputMoney() {
         Scanner scanner = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class InputView {
 
     private static List<Integer> toWinningNums(String input) {
         String[] nums = input.split(",");
-        List<Integer> winningNums = new ArrayList<>(LottoMachine.NUMS_PER_LOTTO);
+        List<Integer> winningNums = new ArrayList<>(nums.length);
 
         for (int i = 0; i < nums.length; i++) {
             winningNums.add(Integer.parseInt(nums[i].trim()));
@@ -71,7 +71,7 @@ public class InputView {
     }
 
     static boolean isValidNums(String[] nums) {
-        if (nums.length != LottoMachine.NUMS_PER_LOTTO) {
+        if (nums.length != NUMS_PER_LOTTO) {
             return false;
         }
 

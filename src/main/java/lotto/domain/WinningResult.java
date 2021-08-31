@@ -15,7 +15,7 @@ public class WinningResult {
 
         Prize[] prizes = Prize.values();
         for (Prize prize : prizes) {
-            total += prize.winningMoney(winningResult.get(prize.index()));
+            total += prize.calculateWinningMoney(winningResult.get(prize.ordinal()));
         }
 
         return total;
