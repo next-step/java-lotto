@@ -9,51 +9,33 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private List<Integer> lotto;
+    private List<LottoNumber> lotto;
 
-    public Lotto() {
-        lotto = IntStream.rangeClosed(LottoConfig.LOTTO_START_NUMBER, LottoConfig.LOTTO_LAST_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(lotto);
-
-        lotto = lotto.stream().limit(LottoConfig.LOTTO_SIZE)
-                .sorted()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-    }
-
-    public Lotto(List<Integer> lotto) {
-        if (lotto == null) {
+    public Lotto(List<Integer> lottoNumbers) {
+        if (lottoNumbers == null) {
             throw new IllegalArgumentException(LottoConfig.LOTTO_NULL_MESSAGE);
         }
-        validateLottoSize(lotto);
-        validateLottoNumber(lotto);
-        this.lotto = lotto.stream()
+        validateLottoNumbers(lottoNumbers);
+        this.lotto = lottoNumbers.stream()
+                .map(number -> new LottoNumber(number))
                 .sorted()
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
     public List<Integer> getValue() {
-        return lotto;
+        return lotto.stream()
+                .mapToInt(LottoNumber::getLottoNumber)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
-    private void validateLottoSize(List<Integer> lotto) {
-        if (new HashSet<>(lotto).size() != LottoConfig.LOTTO_SIZE) {
+    private void validateLottoNumbers(List<Integer> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != LottoConfig.LOTTO_SIZE) {
             throw new IllegalArgumentException(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void validateLottoNumber(List<Integer> lotto) {
-        boolean impossibleLottoNumber = lotto.stream()
-                .anyMatch((number) -> (number < LottoConfig.LOTTO_START_NUMBER || number > LottoConfig.LOTTO_LAST_NUMBER));
-
-        if (impossibleLottoNumber) {
-            throw new IllegalArgumentException(LottoConfig.LOTTO_NUMBER_ERROR_MESSAGE);
-        }
-    }
-
-    private boolean containNumber(int number) {
+    private boolean containNumber(LottoNumber number) {
         return lotto.contains(number);
     }
 

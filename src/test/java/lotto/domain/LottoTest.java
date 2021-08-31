@@ -25,25 +25,6 @@ class LottoTest {
     }
 
     @Test
-    void 로도번호_랜덤테스트_검증() {
-        Lotto lotto = new Lotto();
-        List<Integer> actualLotto = lotto.getValue();
-
-        int actualSize = new HashSet<>(actualLotto).size();
-        assertThat(actualSize).isEqualTo(LottoConfig.LOTTO_SIZE);
-
-        //정렬여부 확인
-        List<Integer> expectOrderedList = actualLotto.stream()
-                .sorted()
-                .collect(Collectors.toList());
-        assertThat(actualLotto).isEqualTo(expectOrderedList);
-
-        boolean actualLottoNumberConfirm = actualLotto.stream()
-                .anyMatch(number -> (number < LottoConfig.LOTTO_START_NUMBER || number > LottoConfig.LOTTO_LAST_NUMBER));
-        assertThat(actualLottoNumberConfirm).isEqualTo(false);
-    }
-
-    @Test
     void 예외_범위_테스트_음수() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, -1);
 
