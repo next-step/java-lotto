@@ -27,10 +27,6 @@ public class Number implements Comparable<Number> {
         return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
     }
 
-    public int value() {
-        return number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
