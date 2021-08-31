@@ -35,7 +35,7 @@ class GameResultTest {
         int[][] numbers2 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
         int[][] numbers3 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
         return Stream.of(
-                Arguments.of(numbers1, 0.83),
+                Arguments.of(numbers1, 0.8333333333333334),
                 Arguments.of(numbers2, 1),
                 Arguments.of(numbers3, 1.25)
         );
