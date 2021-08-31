@@ -13,11 +13,11 @@ public enum Gain {
     }
 
     public static Gain status(ProfitRate profitRate) {
-        if (profitRate.value() < BREAK_EVEN_POINT_PROFIT_RATE) {
+        if (profitRate.isLessthan(BREAK_EVEN_POINT_PROFIT_RATE)) {
             return LOSS;
         }
 
-        if (profitRate.value() > BREAK_EVEN_POINT_PROFIT_RATE) {
+        if (profitRate.isGreaterthan(BREAK_EVEN_POINT_PROFIT_RATE)) {
             return GAIN;
         }
 

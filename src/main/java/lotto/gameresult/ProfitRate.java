@@ -19,4 +19,12 @@ public class ProfitRate {
     public double value() {
         return prizeMoney / payments.value();
     }
+
+    public boolean isLessthan(double number) {
+        return this.value() < number;
+    }
+
+    public boolean isGreaterthan(double number) {
+        return this.value() > number;
+    }
 }
