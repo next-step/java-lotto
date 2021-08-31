@@ -14,14 +14,14 @@ public class Lotto {
     private static final String LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE = "로또의 번호는 중복되어 저장될 수 없다.";
     private static final String LOTTO_NUMBERS_INVALID_ASC_ERROR_MESSAGE = "로또 번호는 오름차순으로 입력되어있어야 한다.";
 
-    private final Numbers numbers;
+    private final List<Number> numbers;
 
     public Lotto(List<Number> numbers) {
         checkLottoNumbersSize(numbers);
         checkDuplicatedNumber(numbers);
         checkNumberAcs(numbers);
 
-        this.numbers = new Numbers(numbers);
+        this.numbers = numbers;
     }
 
     private static void checkLottoNumbersSize(List<Number> numbers) {
@@ -44,16 +44,15 @@ public class Lotto {
         }
     }
 
-    public Numbers numbers() {
-        return numbers;
-    }
-
     public int calculateWinCount(Lotto winLotto) {
-        return numbers.calculateMatchedNumberCount(winLotto.numbers());
+        return (int) winLotto.numbers.stream()
+            .filter(numbers::contains)
+            .count();
     }
 
     @Override
     public String toString() {
         return numbers.toString();
     }
+
 }

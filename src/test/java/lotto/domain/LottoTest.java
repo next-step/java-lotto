@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -78,6 +79,28 @@ class LottoTest {
 
         // when
         int result = lotto.calculateWinCount(winLotto);
+
+        // then
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("다른 Lotto와 동일한 number의 갯수를 반환할 수 있다.")
+    void calculateWinCountTest() {
+
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        Lotto compareLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        // when
+        int result = lotto.calculateWinCount(compareLotto);
 
         // then
         assertThat(result).isEqualTo(3);
