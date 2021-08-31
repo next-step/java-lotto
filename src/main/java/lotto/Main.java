@@ -1,12 +1,10 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoPaper;
-import lotto.domain.Money;
-import lotto.domain.WinningResults;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -17,13 +15,18 @@ public class Main {
         Money money = new Money(InputView.inputPurchasePrice());
 
         int countOfCustomLotto = InputView.inputCountOfCustomLotto(money);
-        List<String> customLottos = InputView.inputCustomLotto(countOfCustomLotto);
+
+        InputView.inputCustomLottoNumbers();
+        List<LottoGenerator> customLottoGenerators = new ArrayList<>();
+        for (int i = 0; i < countOfCustomLotto; i++) {
+            customLottoGenerators.add(new CustomLottoGenerator(InputView.inputCustomLotto()));
+        }
 
         // 총 구매 티켓 수 알림
         ResultView.announceTotalLottoTicketCount(countOfCustomLotto, money.countOfLottoPurchases());
 
         // 구매 티켓 번호 출력
-        LottoPaper lottoPaper = new LottoMachine().buyLotto(money, customLottos);
+        LottoPaper lottoPaper = new LottoMachine().buyLotto(money, customLottoGenerators);
         ResultView.announceTotalLottoNumbers(lottoPaper);
 
         // 지난주 당첨 번호 입력

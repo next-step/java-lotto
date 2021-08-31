@@ -1,11 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.Money;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputView {
 
@@ -25,20 +22,25 @@ public class InputView {
     }
 
     private static void validCountOfCustomLotto(Money money, int inputCount) {
-        if(inputCount > money.countOfLottoPurchases()) {
+        if (inputCount > money.countOfLottoPurchases()) {
             throw new IllegalArgumentException("수동으로 구매한 로또 수가 전체 구매 로또 수보다 큽니다.");
         }
     }
 
-    public static List<String> inputCustomLotto(int customLottoCount) {
+    public static void inputCustomLottoNumbers() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<String> customLottos = new ArrayList<>();
-        for (int i = 0; i < customLottoCount; i++) {
-            String lotto = scanner.nextLine();
-            customLottos.add(lotto);
+    }
+
+    public static List<Integer> inputCustomLotto() {
+
+        String[] customLottoSplit = scanner.nextLine().split(",");
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        for (String lottoNumber : customLottoSplit) {
+            lottoNumbers.add(Integer.parseInt(lottoNumber.trim()));
         }
 
-        return customLottos;
+        return lottoNumbers;
     }
 
     public static String inputWinningNumbersLastWeek() {

@@ -1,27 +1,23 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class CustomLottoGenerator implements LottoGenerator {
 
-    private final Lotto customLotto;
+    private final List<Integer> customLotto;
 
-    public CustomLottoGenerator(String customLottoString) {
-
-        String[] customLottosplit = customLottoString.split(",");
-        Set<LottoNumber> lottoNumbers = new TreeSet<>();
-
-        for (String customLotto : customLottosplit) {
-            lottoNumbers.add(LottoNumber.of(Integer.parseInt(customLotto.trim())));
-        }
-
-        this.customLotto = new Lotto(lottoNumbers);
+    public CustomLottoGenerator(List<Integer> customLotto) {
+        this.customLotto = customLotto;
     }
 
     @Override
     public Lotto generateLotto() {
-        return customLotto;
+        Set<LottoNumber> lottoNumbers = customLotto.stream()
+                .map(lottoNumber -> LottoNumber.of(lottoNumber)).collect(Collectors.toSet());
+        return new Lotto(lottoNumbers);
     }
 }
