@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.util.NumbersGenerator.generateNumbers;
+import static lotto.domain.Number.generateNumbers;
 
 import java.util.List;
 import java.util.Scanner;

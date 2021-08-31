@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Number implements Comparable<Number> {
 
@@ -25,6 +28,14 @@ public class Number implements Comparable<Number> {
 
     private static boolean isNumberRange(int num) {
         return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
+    }
+
+    public static List<Number> generateNumbers(String[] inputs) {
+        return Arrays.stream(inputs)
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .map(Number::new)
+            .collect(Collectors.toList());
     }
 
     @Override
