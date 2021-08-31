@@ -1,4 +1,4 @@
-package edu.nextstep.lottobonusnumber.domain;
+package edu.nextstep.lottocustom.domain;
 
 import java.util.Arrays;
 
