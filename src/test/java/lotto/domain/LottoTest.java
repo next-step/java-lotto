@@ -45,19 +45,25 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또의 번호가 오름차순으로 입력되지 않으면 Exception이 발생되어야 한다.")
+    @DisplayName("로또의 번호가 들어올 때 오름차순으로 로또에 저장된다.")
     void lottoSaveNumberAscTest() {
 
         // given
-        List<Number> input = Arrays.asList(1, 2, 3, 4, 6, 5)
+        List<Number> input = Arrays.asList(6, 5, 4, 3, 2, 1)
             .stream()
             .map(Number::new)
             .collect(toList());
 
-        // when & then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Lotto(input))
-            .withMessageMatching("로또 번호는 오름차순으로 입력되어있어야 한다.");
+        Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(toList()));
+
+        // when
+        Lotto result = new Lotto(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test

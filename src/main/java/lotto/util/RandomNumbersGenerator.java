@@ -29,7 +29,6 @@ public class RandomNumbersGenerator {
         for (int i = GENERATE_MIN_NUMBER; i < LOTTO_NUMBERS_SIZE; i++) {
             numbers.add(LOTTO_CANDIDATE_NUMBERS.get(i));
         }
-        Collections.sort(numbers);
         return numbers;
     }
 
