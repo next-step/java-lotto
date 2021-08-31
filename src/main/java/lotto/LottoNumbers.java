@@ -1,33 +1,42 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
     private static final int MIN_LENGTH = 6;
 
-    private List<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != MIN_LENGTH) {
-            throw new IllegalArgumentException("you must input size 6");
+        lottoNumbers = validation(lottoNumbers);
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+        for (Integer number : lottoNumbers) {
+            lottoNumberList.add(new LottoNumber(number));
         }
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = new TreeSet<>(lottoNumberList);
     }
 
-    public void sort() {
-        Collections.sort(this.lottoNumbers);
+    private List<Integer> validation(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != MIN_LENGTH) {
+            throw new IllegalArgumentException("Length must be 6.");
+        }
+
+        if (new TreeSet<>(lottoNumbers).size() < MIN_LENGTH) {
+            throw new IllegalArgumentException("You cannot enter the same value.");
+        }
+        return lottoNumbers;
     }
 
-    public boolean contains(int number) {
-        return this.lottoNumbers.contains(number);
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
+    public int match(Lotto lotto) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lotto::existNumber)
+                .count();
     }
 
     @Override
@@ -35,11 +44,18 @@ public class LottoNumbers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers that = (LottoNumbers) o;
-        return Arrays.equals(this.lottoNumbers.toArray(), that.lottoNumbers.toArray()) && this.lottoNumbers.containsAll(that.lottoNumbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumbers{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

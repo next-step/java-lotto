@@ -2,6 +2,7 @@ package lotto;
 
 import util.Number;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class AvailableNumbers {
     }
 
     public List<Integer> subList(int startIndex , int endIndex) {
-        return this.availableNumbers.subList(startIndex, endIndex);
+        return new ArrayList<>(this.availableNumbers.subList(startIndex, endIndex));
     }
 
     public void shuffle() {

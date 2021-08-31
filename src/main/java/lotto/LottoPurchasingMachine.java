@@ -1,34 +1,41 @@
 package lotto;
 
+import util.Number;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoPurchasingMachine {
     public static final int AMOUNT = 1_000;
+    public static final int ADD_LOTTO_COUNT = 1;
 
-    public List<Lotto> buyLotto(int buyNumber) {
+    public List<Lotto> buyAutomaticLotto(int buyNumber) {
         int count = buyNumber / AMOUNT;
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto();
-            lottoList.add(lotto);
+            lottoList.add(new Lotto());
+        }
+        return lottoList;
+    }
+
+    public List<Lotto> buyManualLotto(String[] manualNumbers) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (String manualNumber : manualNumbers) {
+            lottoList.add(new Lotto(Number.stringArrayToIntegerList(Arrays.asList(manualNumber.split(",")))));
         }
         return lottoList;
     }
 
     public List<Integer> checkLottoList(List<Lotto> lottoList, List<Integer> prevLottoWinningNumbers, int bonusNumber) {
-        Integer[] result = new Integer[] {0,0,0,0,0,0};
-        for (Lotto lotto : lottoList) {
-            int matchedNumberCount = lotto.findMatchedNumberCount(prevLottoWinningNumbers);
-            checkWinningResult(matchedNumberCount, Arrays.asList(result), lotto.checkBonusBallNumber(bonusNumber));
-        }
-        return Arrays.asList(result);
-    }
+        List<Integer> result = Arrays.asList(new Integer[] {0,0,0,0,0,0});
+        WinningLotto winningLotto = new WinningLotto(new Lotto(prevLottoWinningNumbers), bonusNumber);
 
-    private void checkWinningResult(int matchedNumberCount, List<Integer> result, boolean checkBonusNumber) {
-        Rank rank = Rank.valueOf(matchedNumberCount, checkBonusNumber);
-        result.set(rank.getPlaceIndex(), result.get(rank.getPlaceIndex()) + 1);
+        for (Lotto lotto : lottoList) {
+            Rank rank = winningLotto.matchedRank(lotto);
+            result.set(rank.getPlaceIndex(), result.get(rank.getPlaceIndex()) + ADD_LOTTO_COUNT);
+        }
+        return result;
     }
 
     public double findYield(List<Integer> result, int purchaseAmount) {

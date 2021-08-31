@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -14,39 +13,23 @@ public class Lotto {
 
     public Lotto() {
         availableNumbers.shuffle();
-        lottoNumbers = new LottoNumbers(new ArrayList<>(availableNumbers.subList(MIN_LENGTH, MAX_LENGTH)));
-        lottoNumbers.sort();
+        lottoNumbers = new LottoNumbers(availableNumbers.subList(MIN_LENGTH, MAX_LENGTH));
     }
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public int findMatchedNumberCount(List<Integer> prevWinningLottoNumbers) {
-        int result = 0;
-        for (int number : prevWinningLottoNumbers) {
-            result = checkSame(result, number);
-        }
-        return result;
+    public boolean existNumber(LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
-    private int checkSame(int result, int number) {
-        if (findSameNumber(number)) {
-            result++;
-        }
-        return result;
-    }
-
-    private boolean findSameNumber(int prevWinningLottoNumbers) {
-        return lottoNumbers.contains(prevWinningLottoNumbers);
+    public int match(Lotto lotto) {
+        return this.lottoNumbers.match(lotto);
     }
 
     @Override
     public String toString() {
         return lottoNumbers.toString();
-    }
-
-    public boolean checkBonusBallNumber(int bonusNumber) {
-        return this.lottoNumbers.contains(bonusNumber);
     }
 }
