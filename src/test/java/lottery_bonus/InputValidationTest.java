@@ -30,4 +30,27 @@ class InputValidationTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"'1, 2, 3, 4, 5',5", "'1, 2, 3',3"})
+    @DisplayName("당첨숫자 입력값 테스트")
+    void validateWinningNumber(String numberList, int expectedSize) {
+        List<Integer> winningNumbers = InputValidation.validateWinningNumber(numberList);
+        assertThat(winningNumbers.size()).isEqualTo(expectedSize);
+    }
+
+    @Test
+    @DisplayName("당첨숫자 입력값 예외 체크")
+    void validateWinningNumberException() {
+        String amount = "test";
+        assertThatThrownBy(
+                () ->  InputValidation.validateWinningNumber(amount)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("보너스 볼 유효성 체크")
+    void parseInteger() {
+        String bonusNumber = "1";
+        assertThat(InputValidation.parseInteger(bonusNumber)).isEqualTo(1);
+    }
 }

@@ -1,6 +1,9 @@
 package lottery_bonus.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class InputValidation {
 
@@ -11,10 +14,29 @@ public final class InputValidation {
         return new BigDecimal(amount);
     }
 
+    public static List<Integer> validateWinningNumber(final String winningNumbers){
+        validateInputWinningNumber(winningNumbers);
+
+        return Arrays.stream(winningNumbers.split(", "))
+                .map(winningNumber -> parseInteger(winningNumber))
+                .collect(Collectors.toList());
+
+    }
+
+    public static int parseInteger(final String bonusNumber) {
+        validateInputNumber(bonusNumber);
+        return Integer.parseInt(bonusNumber);
+    }
+
     private static void validateInputNumber(final String amount){
         if(!amount.chars().allMatch(Character::isDigit)){
             throw new IllegalArgumentException(VALIDATION_ERROR_MESSAGE);
         };
     }
 
+    private static void validateInputWinningNumber(final String winningNumber){
+        if(winningNumber.isEmpty() || winningNumber == null){
+            throw new IllegalArgumentException("");
+        }
+    }
 }
