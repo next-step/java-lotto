@@ -1,11 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public enum LottoRank {
 
@@ -34,7 +29,7 @@ public enum LottoRank {
 
     public static LottoRank findRank(int collectNumber, boolean matchBonus) {
         if(collectNumber == 5){
-            checkSecondOrThird(matchBonus);
+            return checkSecondOrThird(matchBonus);
         }
 
         return Arrays.stream(values())

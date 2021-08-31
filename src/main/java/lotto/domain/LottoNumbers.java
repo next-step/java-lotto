@@ -45,7 +45,7 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return "["
-            + lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(","))
+            + lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(", "))
             + "]";
     }
 }

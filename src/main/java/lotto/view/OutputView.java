@@ -31,7 +31,7 @@ public class OutputView {
     public void printResult(Map<LottoRank, Integer> result) {
         System.out.println("당첨 통계\n" + "---------");
         Arrays.stream(LottoRank.values())
-            .sorted(Comparator.comparing(LottoRank::getCollectNumber))
+            .sorted(Comparator.comparing(LottoRank::getPrice))
             .filter(value -> value.getCollectNumber() > 0)
             .forEach(value -> System.out.printf("%d개 일치 (%d원)- %d개%n",
                 value.getCollectNumber(),
