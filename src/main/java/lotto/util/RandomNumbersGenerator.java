@@ -1,8 +1,8 @@
 package lotto.util;
 
 import static lotto.domain.Lotto.LOTTO_NUMBERS_SIZE;
-import static lotto.domain.Lotto.SAVED_MAX_NUMBER;
-import static lotto.domain.Lotto.SAVED_MIN_NUMBER;
+import static lotto.domain.Number.SAVED_MAX_NUMBER;
+import static lotto.domain.Number.SAVED_MIN_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Collections;

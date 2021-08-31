@@ -47,7 +47,7 @@ public class Wallet {
     }
 
     private void addNewLotto(int lottoCount, Lottos purchaseLottos) {
-        for (int i=0; i< lottoCount; i++){
+        for (int i = 0; i < lottoCount; i++) {
             purchaseLottos.add(new Lotto(generateNumbers()));
         }
     }
