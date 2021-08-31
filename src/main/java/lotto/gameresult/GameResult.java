@@ -25,8 +25,8 @@ public class GameResult {
                 .count();
     }
 
-    public double profitRate() {
-        return new ProfitRate(totalPrizeMoney(), lottoGame.payments()).value();
+    public ProfitRate profitRate() {
+        return new ProfitRate(totalPrizeMoney(), lottoGame.payments());
     }
 
     private int totalPrizeMoney() {

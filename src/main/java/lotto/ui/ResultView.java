@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.game.LottoGame;
 import lotto.gameresult.Gain;
 import lotto.gameresult.GameResult;
+import lotto.gameresult.ProfitRate;
 import lotto.number.LottoNumber;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.Prize;
@@ -36,8 +37,8 @@ public class ResultView {
                 .filter(pickPrizesExceptLoser())
                 .forEach(prize -> showTicketCountsForGivenPrize(gameResult, prize));
 
-        double profitRate = gameResult.profitRate();
-        System.out.printf("총 수익률은 %.2f 입니다%n", profitRate);
+        ProfitRate profitRate = gameResult.profitRate();
+        System.out.printf("총 수익률은 %.2f 입니다%n", profitRate.value());
         System.out.printf("(기준이 %s이기 때문에 결과적으로 %s라는 의미임)%n", Gain.BREAK_EVEN_POINT_PROFIT_RATE, Gain.status(profitRate).value());
     }
 
