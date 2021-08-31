@@ -23,11 +23,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> calculateResult(Lotto winLotto) {
+    public Map<Rank, Integer> calculateResult(WinLotto winLotto) {
         Map<Rank, Integer> result = createRankMap();
         lottos.stream()
-            .map(lotto -> lotto.calculateWinCount(winLotto))
-            .map(Rank::calculateLottoRank)
+            .map(winLotto::calculateRank)
             .forEach(rank -> result.put(rank, result.get(rank) + 1));
         return result;
     }
