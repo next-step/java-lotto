@@ -3,10 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 class LottoGameNumberSelectorTest {
@@ -18,21 +16,11 @@ class LottoGameNumberSelectorTest {
         assertThat(lottoNumberRandomSelector.selectNumbers().size()).isEqualTo(6);
     }
 
-    @DisplayName("1부터 45 사이 값만 나와야 함.")
-    @RepeatedTest(100)
-    void name() {
-        LottoNumberRandomSelector lottoNumberRandomSelector = new LottoNumberRandomSelector();
-        List<Integer> selectedNumbers = lottoNumberRandomSelector.selectNumbers();
-        for (Integer number : selectedNumbers) {
-            assertThat(number).isBetween(1, 45);
-        }
-    }
-
     @DisplayName("6개의 수가 중복되어 나올수가 없음.")
     @Test
     void do_not_allow_duplicate_number() {
         LottoNumberRandomSelector lottoNumberRandomSelector = new LottoNumberRandomSelector();
-        Set<Integer> set = new HashSet<>(lottoNumberRandomSelector.selectNumbers());
+        Set<LottoNumber> set = new HashSet<>(lottoNumberRandomSelector.selectNumbers());
         assertThat(set.size()).isEqualTo(6);
     }
 }

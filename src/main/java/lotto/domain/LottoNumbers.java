@@ -2,41 +2,59 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lotto.constraint.Constraint;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(LottoNumberSelectPolicy lottoNumberSelectPolicy) {
-        lottoNumbers.addAll(lottoNumberSelectPolicy.selectNumbers());
-    }
-
-    public LottoNumbers(final List<Integer> numbers) {
+    public LottoNumbers(final List<LottoNumber> numbers) {
+        validSizeCheck(numbers);
+        validDuplicateCheck(numbers);
         lottoNumbers.addAll(numbers);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(new ArrayList<>(lottoNumbers));
     }
 
-    public LottoRank checkRank(LottoNumbers winningNumbers) {
-        return LottoRank.findRank(getSameCount(winningNumbers));
-    }
-
-    private int getSameCount(LottoNumbers winningNumbers) {
+    public int getMatchCount(LottoNumbers winningNumbers) {
         int collectNumber = 0;
-        List<Integer> integerWinningNumbers = winningNumbers.getLottoNumbers();
-        for (Integer number : integerWinningNumbers) {
+        List<LottoNumber> integerWinningNumbers = winningNumbers.getLottoNumbers();
+        for (LottoNumber number : integerWinningNumbers) {
             collectNumber += checkContains(number);
         }
         return collectNumber;
     }
 
-    private int checkContains(int number) {
+    private int checkContains(LottoNumber number) {
         if (lottoNumbers.contains(number)) {
             return 1;
         }
         return 0;
+    }
+
+    private void validSizeCheck(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != Constraint.LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또는 6자리가 되어야 합니다.");
+        }
+    }
+
+    private void validDuplicateCheck(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
+        if (numbers.size() != Constraint.LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("중복된 수가 있습니다.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "["
+            + lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(","))
+            + "]";
     }
 }
