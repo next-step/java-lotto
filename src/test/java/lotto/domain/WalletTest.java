@@ -88,4 +88,32 @@ class WalletTest {
             .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
     }
 
+    @Test
+    @DisplayName("수동 로또를 사고 남음 금액이 자동 로똘르 살 수 있다면 자동 로또를 구매해야 한다.")
+    void purchaseRandomLottoByRemainMoneyTest() {
+
+        // given
+        Money money = new Money(3_000);
+        Money expectMoney = new Money(0);
+
+        Wallet wallet = new Wallet(money);
+        List<String> input = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())));
+        lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())));
+
+        // when
+        Wallet result = wallet.purchaseManualLotto(input);
+
+        // then
+        assertThat(result.lottos().size()).isEqualTo(3);
+        assertThat(result.money()).isEqualTo(expectMoney);
+    }
+
 }

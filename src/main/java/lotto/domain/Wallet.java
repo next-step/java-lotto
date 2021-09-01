@@ -50,15 +50,27 @@ public class Wallet {
     }
 
     public Wallet purchaseManualLotto(List<String> buyLottos) {
-        int lottoCount = buyLottos.size();
-        Money useMoney = money.useMoney(lottoCount);
+        Money moneyByManual = money.useMoney(buyLottos.size());
+        List<Lotto> lottos = addManualLotto(buyLottos);
+        Money moneyByRandom = addRandomLotto(moneyByManual, lottos);
+        return new Wallet(moneyByRandom, new Lottos(lottos));
+    }
 
-        List<Lotto> lottos = buyLottos.stream()
+    private List<Lotto> addManualLotto(List<String> buyLottos) {
+        return buyLottos.stream()
             .map(StringUtil::splitByComma)
             .map(LottoNumber::generateNumbers)
             .map(Lotto::new)
             .collect(Collectors.toList());
-        return new Wallet(useMoney, new Lottos(lottos));
+    }
+
+    private Money addRandomLotto(Money money, List<Lotto> lottos) {
+        int lottoCount = money.calculatePurchaseCount();
+        Money useMoneyRandom = money.useMoney(lottoCount);
+        for (int i=0; i<lottoCount; i++){
+            lottos.add(new Lotto(generateNumbers()));
+        }
+        return useMoneyRandom;
     }
 
 }
