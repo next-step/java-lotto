@@ -60,4 +60,5 @@ public class Wallet {
             .collect(Collectors.toList());
         return new Wallet(useMoney, new Lottos(lottos));
     }
+
 }

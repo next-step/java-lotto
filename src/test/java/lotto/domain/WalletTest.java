@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +58,7 @@ class WalletTest {
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList())));
-        lottos.add(new Lotto(Arrays.asList(7,8,9,10,11,12)
+        lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList())));
@@ -70,6 +71,21 @@ class WalletTest {
         assertThat(result.lottos().size()).isEqualTo(2);
         assertThat(result.lottos()).isEqualTo(expectLottos);
         assertThat(result.money()).isEqualTo(expectMoney);
+    }
+
+    @Test
+    @DisplayName("수동 로또 구매 갯수보다 현재 금액이 적은 경우 Exception이 반환되어야 한다.")
+    void vaildateUnAvailablePurchaseManualLottoTest() {
+
+        // given
+        Money money = new Money(500);
+        Wallet wallet = new Wallet(money);
+        List<String> input = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"));
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> wallet.purchaseManualLotto(input))
+            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
     }
 
 }
