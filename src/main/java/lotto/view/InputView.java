@@ -24,7 +24,7 @@ public class InputView {
     public static List<String> inputPurchaseManualLottos(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> lottos = new ArrayList<>();
-        for (int i=0; i<count; i++){
+        for (int i = 0; i < count; i++) {
             lottos.add(scanner.nextLine());
         }
         return lottos;
