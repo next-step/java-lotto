@@ -21,3 +21,16 @@
 - [X] 각 로또가 지난 주 당첨 번호와 일치 되는 값이 몇 개인지 계산
 - [X] 일치 개수에 따라 당첨금 계산
 - [X] 총 당첨금과 구매 금액에 따라 수익률이 어떻게 되는지 계산
+
+## Step 3 - 로또 2등
+### View
+- [X] 당첨 통계 출력에 2등 출력 추가
+### Domain
+- [X] 보너스 볼 추첨 기능 추가
+### Refactoring 목록
+- [X] Lotto의 원시 데이터를 LottoNumber 클래스로 wrapping하기
+- [X] winningNums 배열을 Lotto 클래스로 wrapping하기
+- [X] WinningLotto 클래스로 winningNums와 bonusNumber를 wrapping하기
+  - [X] matching 값을 세는 로직을 WinningLotto로 이동 시키기
+- [X] 세부 클래스에서 구현된 세부 기능들도 Test로 구현하기
+- [X] Prize.valueOf를 사용할 때 try-catch문을 사용하지 않도록 변경

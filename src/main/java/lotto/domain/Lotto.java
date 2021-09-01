@@ -1,54 +1,62 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
     private static final String EXCEP_INVALID_NUM = "로또 번호로 유효하지 않습니다.";
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
-    Lotto(List<Integer> lottoNums) {
-        checkValidLotto(lottoNums);
-
-        this.lotto = lottoNums;
+    public Lotto(List<Integer> lottoNums) {
+        List<LottoNumber> lottoNumbers = toLottoNumberList(lottoNums);
+        checkValidLotto(lottoNumbers);
+        this.lotto = lottoNumbers;
     }
 
-    void checkValidLotto(List<Integer> lottoNums) {
-        for (Integer num : lottoNums) {
-            checkValidNum(num);
+    public static List<LottoNumber> toLottoNumberList(List<Integer> lottoNums) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNums.size());
+
+        for (int i = 0; i < lottoNums.size(); i++) {
+             lottoNumbers.add(LottoNumber.of(lottoNums.get(i)));
         }
 
-        checkDuplicateNum(lottoNums);
+        return lottoNumbers;
     }
 
-    void checkValidNum(int num) {
-        if (num <= 0 || num > LottoMachine.LOTTO_MAX_NUM) {
+    private void checkValidLotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LottoMachine.NUMS_PER_LOTTO) {
             throwExceptionInvalidLotto();
         }
+        checkDuplicateNum(lottoNumbers);
     }
 
-    void checkDuplicateNum(List<Integer> lottoNums) {
+    private void checkDuplicateNum(List<LottoNumber> lottoNums) {
         if (lottoNums.size() != lottoNums.stream().distinct().count()) {
             throwExceptionInvalidLotto();
         }
     }
 
-    void throwExceptionInvalidLotto() {
+    private void throwExceptionInvalidLotto() {
         throw new IllegalArgumentException(EXCEP_INVALID_NUM);
     }
 
-    public List<Integer> getLottoNums() {
+    public List<LottoNumber> getLottoNumberList() {
         return lotto;
     }
 
-    int countMatchingNums(List<Integer> winningNums) {
+    int countMatchingNums(Lotto winningNums) {
         int count = 0;
 
-        for (Integer num : winningNums) {
-            count += lotto.contains(num) ? 1 : 0;
+        for (LottoNumber number : lotto) {
+            count += winningNums.contains(number) ? 1 : 0;
         }
 
         return count;
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
     }
 
     @Override

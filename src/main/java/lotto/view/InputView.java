@@ -13,6 +13,7 @@ public class InputView {
     private final static String GUIDE_INPUT_MONEY = "구입금액을 입력해 주세요.";
     private final static String NOTI_INVALID_MONEY = "구입금액으로 유효하지 않습니다.";
     private static final String GUIDE_INPUT_WIN_NUMS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INST_INPUT_BONUS_NUM = "보너스 볼을 입력해 주세요";
     private static final int NUMS_PER_LOTTO = 6;
 
     public static int inputMoney() {
@@ -28,12 +29,12 @@ public class InputView {
     }
 
     static boolean isValidMoney(int money) {
-        if (money < Money.MIN_MONEY) {
-            System.out.println(NOTI_INVALID_MONEY + " : " + money);
+        try {
+            Money.checkValidMoney(money);
+            return true;
+        } catch (IllegalArgumentException e) {
             return false;
         }
-
-        return true;
     }
 
     public static List<Integer> inputWinningNums() {
@@ -84,5 +85,25 @@ public class InputView {
 
     static boolean isInteger(String num) {
         return !StringUtils.isBlank(num) || NumberUtils.isNumber(num);
+    }
+
+    public static int inputBonusNum() {
+        int bonusNum;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.println(INST_INPUT_BONUS_NUM);
+            bonusNum = scanner.nextInt();
+        } while (!isValidBonusNum(bonusNum));
+
+        return bonusNum;
+    }
+
+    static boolean isValidBonusNum(int bonusNum) {
+        if (bonusNum < 1 || bonusNum > LottoMachine.LOTTO_MAX_NUM) {
+            return false;
+        }
+
+        return true;
     }
 }

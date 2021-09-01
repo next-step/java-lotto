@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     public static final int NUMS_PER_LOTTO = 6;
-    static final int LOTTO_MAX_NUM = 45;
+    public static final int LOTTO_MAX_NUM = 45;
     private final GenerateNumStrategy generateNumStrategy;
 
     private Money money;
@@ -30,28 +28,28 @@ public class LottoMachine {
     }
 
     public int calculateBuyableLottos() {
-        return money.buyableLottos(LOTTO_PRICE);
+        return money.calculateBuyableLottos(LOTTO_PRICE);
     }
 
     Lottos generateLottos() {
         return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
     }
 
-    WinningResult countLottoPrize(List<Integer> winningNums) {
-        return lottos.checkLottoPrize(winningNums);
+    WinningResult countWinningPrize(WinningNumber winningNumber) {
+        return lottos.checkLottosPrize(winningNumber);
     }
 
-    public int getTotalPrizeMoney(List<Integer> winningNums) {
-        WinningResult winningResult = countLottoPrize(winningNums);
+    public int getTotalPrizeMoney(WinningNumber winningNumber) {
+        WinningResult winningResult = countWinningPrize(winningNumber);
 
         return winningResult.getTotalWinningMoney();
     }
 
-    public double getYield(List<Integer> winningNums) {
-        return money.getYield(getTotalPrizeMoney(winningNums));
+    public double getYield(WinningNumber winningNumber) {
+        return money.getYield(getTotalPrizeMoney(winningNumber));
     }
 
-    public WinningResult getWinningResult(List<Integer> winningNums) {
-        return countLottoPrize(winningNums);
+    public WinningResult getWinningResult(WinningNumber winningNumber) {
+        return countWinningPrize(winningNumber);
     }
 }

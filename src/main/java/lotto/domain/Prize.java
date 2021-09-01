@@ -4,9 +4,11 @@ import java.util.Arrays;
 
 public enum Prize {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
     private final int matchingCount;
     private final int money;
@@ -16,11 +18,11 @@ public enum Prize {
         this.money = prizeMoney;
     }
 
-    public int getMatchingCount() {
+    public int matchingCount() {
         return matchingCount;
     }
 
-    public int getMoney() {
+    public int money() {
         return money;
     }
 
@@ -28,7 +30,15 @@ public enum Prize {
         return money * count;
     }
 
-    public static Prize valueOf(int matchingCount) {
+    public static Prize valueOf(int matchingCount, boolean matchingBonus) {
+        if (matchingCount < FIFTH.matchingCount) {
+            return NONE;
+        }
+
+        if (matchingCount == SECOND.matchingCount) {
+            return matchingBonus ? SECOND : THIRD;
+        }
+
         return Arrays.stream(values())
                 .filter(p -> matchingCount == p.matchingCount)
                 .findFirst()
