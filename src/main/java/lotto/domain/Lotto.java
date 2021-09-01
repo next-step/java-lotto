@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.domain.LottoNumber.generateNumbers;
 import static lotto.util.StringUtil.splitByComma;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
