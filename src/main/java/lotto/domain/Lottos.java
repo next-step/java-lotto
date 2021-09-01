@@ -5,6 +5,7 @@ import static lotto.domain.Rank.createRankMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -39,6 +40,23 @@ public class Lottos {
         return lottos.stream()
             .map(Lotto::printLotto)
             .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 
 }

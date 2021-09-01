@@ -2,6 +2,10 @@ package lotto.domain;
 
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Wallet {
 
     private final Money money;
@@ -45,4 +49,15 @@ public class Wallet {
         }
     }
 
+    public Wallet purchaseManualLotto(List<String> buyLottos) {
+        int lottoCount = buyLottos.size();
+        Money useMoney = money.useMoney(lottoCount);
+
+        List<Lotto> lottos = buyLottos.stream()
+            .map(input -> input.split(","))
+            .map(LottoNumber::generateNumbers)
+            .map(Lotto::new)
+            .collect(Collectors.toList());
+        return new Wallet(useMoney, new Lottos(lottos));
+    }
 }
