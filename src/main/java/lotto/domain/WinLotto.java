@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoNumber.generateNumbers;
 import static lotto.domain.Rank.calculateLottoRankBywinCountAndMatchBonus;
 
 public class WinLotto {
