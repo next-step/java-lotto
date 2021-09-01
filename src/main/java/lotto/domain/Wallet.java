@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.util.StringUtil;
@@ -34,34 +35,20 @@ public class Wallet {
         return lottos.size();
     }
 
-    public Wallet purchaseLotto() {
-        int lottoCount = money.calculatePurchaseCount();
-        Money useMoney = money.useMoney(lottoCount);
+    public Wallet purchaseLotto(List<String> buyLottos) {
+        List<Lotto> lottos = new ArrayList<>();
 
-        Lottos purchaseLottos = new Lottos();
-        addNewLotto(lottoCount, purchaseLottos);
-        return new Wallet(useMoney, purchaseLottos);
-    }
-
-    private void addNewLotto(int lottoCount, Lottos purchaseLottos) {
-        for (int i = 0; i < lottoCount; i++) {
-            purchaseLottos.add(new Lotto(generateNumbers()));
-        }
-    }
-
-    public Wallet purchaseManualLotto(List<String> buyLottos) {
-        Money moneyByManual = money.useMoney(buyLottos.size());
-        List<Lotto> lottos = addManualLotto(buyLottos);
+        Money moneyByManual = addManualLotto(buyLottos, lottos);
         Money moneyByRandom = addRandomLotto(moneyByManual, lottos);
         return new Wallet(moneyByRandom, new Lottos(lottos));
     }
 
-    private List<Lotto> addManualLotto(List<String> buyLottos) {
-        return buyLottos.stream()
-            .map(StringUtil::splitByComma)
-            .map(LottoNumber::generateNumbers)
-            .map(Lotto::new)
-            .collect(Collectors.toList());
+    private Money addManualLotto(List<String> buyLottos, List<Lotto> lottos) {
+        Money moneyByManual = money.useMoney(buyLottos.size());
+        for (String buyLotto : buyLottos) {
+            lottos.add(new Lotto(buyLotto));
+        }
+        return moneyByManual;
     }
 
     private Money addRandomLotto(Money money, List<Lotto> lottos) {

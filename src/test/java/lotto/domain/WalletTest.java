@@ -36,7 +36,7 @@ class WalletTest {
         Money expected = new Money(0);
 
         // when
-        Wallet result = wallet.purchaseLotto();
+        Wallet result = wallet.purchaseLotto(new ArrayList<>());
 
         // then
         assertThat(result.money()).isEqualTo(expected);
@@ -65,7 +65,7 @@ class WalletTest {
         Lottos expectLottos = new Lottos(lottos);
 
         // when
-        Wallet result = wallet.purchaseManualLotto(input);
+        Wallet result = wallet.purchaseLotto(input);
 
         // then
         assertThat(result.lottos().size()).isEqualTo(2);
@@ -84,7 +84,7 @@ class WalletTest {
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> wallet.purchaseManualLotto(input))
+            .isThrownBy(() -> wallet.purchaseLotto(input))
             .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
     }
 
@@ -109,7 +109,7 @@ class WalletTest {
             .collect(Collectors.toList())));
 
         // when
-        Wallet result = wallet.purchaseManualLotto(input);
+        Wallet result = wallet.purchaseLotto(input);
 
         // then
         assertThat(result.lottos().size()).isEqualTo(3);
