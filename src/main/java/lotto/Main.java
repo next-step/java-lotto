@@ -1,6 +1,12 @@
 package lotto;
 
 import static lotto.domain.LottoNumber.generateNumbers;
+import static lotto.view.InputView.inputBonusBall;
+import static lotto.view.InputView.inputPurchaseMoney;
+import static lotto.view.InputView.inputWinLottoNumbers;
+import static lotto.view.ResultView.printLottoCount;
+import static lotto.view.ResultView.printLottoResult;
+import static lotto.view.ResultView.printLottosNumber;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,22 +23,19 @@ import lotto.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        InputView inputView = new InputView(scanner);
-        ResultView resultView = new ResultView();
 
         LottoService lottoService = new LottoService();
-        Money money = new Money(inputView.inputPurchaseMoney());
+        Money money = new Money(inputPurchaseMoney());
         Wallet wallet = lottoService.buyLotto(money);
 
-        resultView.printLottoCount(wallet);
-        resultView.printLottosNumber(wallet);
+        printLottoCount(wallet);
+        printLottosNumber(wallet);
 
-        List<LottoNumber> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
-        LottoNumber bonus = new LottoNumber(inputView.inputBonusBall());
+        List<LottoNumber> numbers = generateNumbers(inputWinLottoNumbers().split(","));
+        LottoNumber bonus = new LottoNumber(inputBonusBall());
         WinLotto winLotto = new WinLotto(new Lotto(numbers), bonus);
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
-        resultView.printLottoResult(lottoResult, money);
+        printLottoResult(lottoResult, money);
     }
 
 }
