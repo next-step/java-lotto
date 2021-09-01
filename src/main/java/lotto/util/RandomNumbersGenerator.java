@@ -15,7 +15,8 @@ public class RandomNumbersGenerator {
 
     private static final int GENERATE_MIN_NUMBER = 0;
 
-    private static final List<Number> LOTTO_CANDIDATE_NUMBERS = IntStream.rangeClosed(SAVED_MIN_NUMBER, SAVED_MAX_NUMBER)
+    private static final List<Number> LOTTO_CANDIDATE_NUMBERS = IntStream
+        .rangeClosed(SAVED_MIN_NUMBER, SAVED_MAX_NUMBER)
         .boxed()
         .map(Number::new)
         .collect(Collectors.toList());

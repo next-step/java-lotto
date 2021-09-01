@@ -93,4 +93,5 @@ class WinLottoTest {
             .isThrownBy(() -> new WinLotto(lotto, bonus))
             .withMessageMatching("로또의 번호와 보너스 번호는 중복될 수 없다.");
     }
+
 }
