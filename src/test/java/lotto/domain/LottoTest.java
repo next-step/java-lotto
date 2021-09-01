@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,11 +27,9 @@ class LottoTest {
     void 예외_범위_테스트_음수() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, -1);
 
-        assertThatThrownBy(() -> {
-            lotto = new Lotto(input);
-        })
+        assertThatThrownBy(() -> lotto = new Lotto(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_NUMBER_ERROR_MESSAGE);
+                .hasMessageContaining(LottoNumber.LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
     @Test
@@ -43,7 +40,7 @@ class LottoTest {
             lotto = new Lotto(input);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_NUMBER_ERROR_MESSAGE);
+                .hasMessageContaining(LottoNumber.LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
     @Test
@@ -54,7 +51,7 @@ class LottoTest {
             lotto = new Lotto(input);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_NUMBER_ERROR_MESSAGE);
+                .hasMessageContaining(LottoNumber.LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
     @Test
@@ -67,7 +64,7 @@ class LottoTest {
             lotto = new Lotto(input);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
+                .hasMessageContaining(Lotto.LOTTO_SIZE_ERROR_MESSAGE);
     }
 
     @Test
@@ -80,7 +77,7 @@ class LottoTest {
             lotto = new Lotto(input);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
+                .hasMessageContaining(Lotto.LOTTO_SIZE_ERROR_MESSAGE);
     }
 
     @Test
@@ -91,7 +88,7 @@ class LottoTest {
             lotto = new Lotto(input);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
+                .hasMessageContaining(Lotto.LOTTO_SIZE_ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -115,6 +112,6 @@ class LottoTest {
             lotto = new Lotto(null);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.LOTTO_NULL_MESSAGE);
+                .hasMessageContaining(Lotto.LOTTO_NULL_MESSAGE);
     }
 }

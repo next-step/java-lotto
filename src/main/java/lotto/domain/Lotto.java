@@ -1,19 +1,22 @@
 package lotto.domain;
 
-import lotto.LottoConfig;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lotto {
+    public static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_PRICE = 1000;
+
+    public static final String LOTTO_SIZE_ERROR_MESSAGE = "로또의 갯수는 " + Lotto.LOTTO_SIZE + "자이어야 합니다.";
+    public static final String LOTTO_NULL_MESSAGE = "로또에 null값을 넣을 수 없습니다.";
+
     private List<LottoNumber> lotto;
 
     public Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers == null) {
-            throw new IllegalArgumentException(LottoConfig.LOTTO_NULL_MESSAGE);
+            throw new IllegalArgumentException(LOTTO_NULL_MESSAGE);
         }
         validateLottoNumbers(lottoNumbers);
         this.lotto = lottoNumbers.stream()
@@ -30,8 +33,8 @@ public class Lotto {
     }
 
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
-        if (new HashSet<>(lottoNumbers).size() != LottoConfig.LOTTO_SIZE) {
-            throw new IllegalArgumentException(LottoConfig.LOTTO_SIZE_ERROR_MESSAGE);
+        if (new HashSet<>(lottoNumbers).size() != Lotto.LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE_ERROR_MESSAGE);
         }
     }
 

@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import lotto.LottoConfig;
-
-import java.util.Comparator;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_LAST_NUMBER = 45;
+    public static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또번호는"+LOTTO_START_NUMBER+"과 " + LOTTO_LAST_NUMBER + "사이 숫자이어야 합니다.";
+
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -18,8 +19,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(int lottoNumber) {
-        if (lottoNumber < LottoConfig.LOTTO_START_NUMBER || lottoNumber > LottoConfig.LOTTO_LAST_NUMBER) {
-            throw new IllegalArgumentException(LottoConfig.LOTTO_NUMBER_ERROR_MESSAGE);
+        if (lottoNumber < LOTTO_START_NUMBER || lottoNumber > LOTTO_LAST_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_ERROR_MESSAGE);
         }
     }
 

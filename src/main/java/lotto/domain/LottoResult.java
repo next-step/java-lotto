@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import lotto.LottoConfig;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class LottoResult {
+    public static final String LOTTO_RESULT_ERROR_MESSAGE = "잘못된 등수값을 입력받았습니다.";
+
     HashMap<Integer, Integer> lottoResult;
 
     public LottoResult(List<Integer> sameNumberCounts) {
@@ -26,6 +26,6 @@ public class LottoResult {
             return lottoResult.get(rank);
         }
 
-        throw new RuntimeException(LottoConfig.LOTTO_RESULT_ERROR_MESSAGE);
+        throw new RuntimeException(LOTTO_RESULT_ERROR_MESSAGE);
     }
 }

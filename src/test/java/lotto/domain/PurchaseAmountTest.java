@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -27,6 +26,6 @@ class PurchaseAmountTest {
             PurchaseAmount purchaseAmount = new PurchaseAmount(-1);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(LottoConfig.PURCHASE_AMOUNT_MINUS_ERROR_MESSAGE);
+                .hasMessageContaining(PurchaseAmount.PURCHASE_AMOUNT_MINUS_ERROR_MESSAGE);
     }
 }

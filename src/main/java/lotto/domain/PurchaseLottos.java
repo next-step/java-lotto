@@ -1,8 +1,5 @@
 package lotto.domain;
 
-
-import lotto.LottoConfig;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +19,13 @@ public class PurchaseLottos {
     }
 
     private List<Integer> getRandomIntegerList() {
-        List<Integer> returnList = IntStream.rangeClosed(LottoConfig.LOTTO_START_NUMBER, LottoConfig.LOTTO_LAST_NUMBER)
+        List<Integer> returnList = IntStream.rangeClosed(LottoNumber.LOTTO_START_NUMBER, LottoNumber.LOTTO_LAST_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
 
         Collections.shuffle(returnList);
 
-        return returnList.stream().limit(LottoConfig.LOTTO_SIZE)
+        return returnList.stream().limit(Lotto.LOTTO_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
     }
