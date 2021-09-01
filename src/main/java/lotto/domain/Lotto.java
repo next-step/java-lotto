@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -47,6 +49,12 @@ public class Lotto {
 
     public boolean contains(Number number) {
         return numbers.contains(number);
+    }
+
+    public String printLotto() {
+        return numbers.stream()
+            .map(Number::value)
+            .collect(Collectors.toList()).toString();
     }
 
     @Override

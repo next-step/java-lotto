@@ -35,9 +35,9 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public String allLottosPrint() {
+    public String printLottos() {
         return lottos.stream()
-            .map(String::valueOf)
+            .map(Lotto::printLotto)
             .collect(Collectors.joining("\n"));
     }
 

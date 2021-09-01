@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     public void printLottosNumber(Wallet wallet) {
-        System.out.println(wallet.lottos().allLottosPrint());
+        System.out.println(wallet.lottos().printLottos());
     }
 
     public void printLottoResult(LottoResult lottoResult, Money money) {

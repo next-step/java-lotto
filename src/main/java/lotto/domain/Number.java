@@ -38,6 +38,10 @@ public class Number implements Comparable<Number> {
             .collect(Collectors.toList());
     }
 
+    public int value() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
