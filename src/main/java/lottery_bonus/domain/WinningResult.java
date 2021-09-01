@@ -43,7 +43,7 @@ public final class WinningResult {
 
     private void init() {
         Arrays.stream(WinningMatch.values())
-              .forEach(winningMatch -> winningMatchMap.put(winningMatch, 0));
+              .forEach(winningMatch -> winningMatchMap.put(winningMatch, MIN_NUMBER));
     }
 
     private boolean validate(final WinningMatch match, final int count) {
