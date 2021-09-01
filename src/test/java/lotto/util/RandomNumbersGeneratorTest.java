@@ -23,20 +23,6 @@ class RandomNumbersGeneratorTest {
 
     @Test
     @RepeatedTest(10)
-    @DisplayName("랜덤으로 생성한 로또 번호가 오름차순이어야 한다.")
-    void generateNumbersAscTest() {
-
-        // when
-        List<Number> result = RandomNumbersGenerator.generateNumbers();
-
-        // then
-        for (int i = 0; i < result.size() - 1; i++) {
-            assertThat(result.get(i)).isLessThan(result.get(i + 1));
-        }
-    }
-
-    @Test
-    @RepeatedTest(10)
     @DisplayName("랜덤으로 생성한 로또 번호가 1~45 사이어야 한다.")
     void generateNumbersRangeTest() {
 

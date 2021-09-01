@@ -12,7 +12,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos() {
-        lottos = new ArrayList<Lotto>();
+        lottos = new ArrayList<>();
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -23,11 +23,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> calculateResult(Lotto winLotto) {
+    public Map<Rank, Integer> calculateResult(WinLotto winLotto) {
         Map<Rank, Integer> result = createRankMap();
         lottos.stream()
-            .map(lotto -> lotto.calculateWinCount(winLotto))
-            .map(Rank::calculateLottoRank)
+            .map(winLotto::calculateRank)
             .forEach(rank -> result.put(rank, result.get(rank) + 1));
         return result;
     }
@@ -36,10 +35,10 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    @Override
-    public String toString() {
+    public String printLottos() {
         return lottos.stream()
-            .map(String::valueOf)
+            .map(Lotto::printLotto)
             .collect(Collectors.joining("\n"));
     }
+
 }

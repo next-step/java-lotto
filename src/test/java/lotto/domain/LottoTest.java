@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,35 +45,25 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 번호에 1이상 45이하의 수가 들어오지 않으면 Exception이 발생되어야 한다.")
-    void lottoSaveNumberRangeTest() {
-
-        // given
-        List<Number> input = Arrays.asList(1, 2, 3, 4, 5, 76)
-            .stream()
-            .map(Number::new)
-            .collect(toList());
-
-        // when & then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Lotto(input))
-            .withMessageMatching("로또 번호는 1이상 45이하의 수만 들어올 수 있다.");
-    }
-
-    @Test
-    @DisplayName("로또의 번호가 오름차순으로 입력되지 않으면 Exception이 발생되어야 한다.")
+    @DisplayName("로또의 번호가 들어올 때 오름차순으로 로또에 저장된다.")
     void lottoSaveNumberAscTest() {
 
         // given
-        List<Number> input = Arrays.asList(1, 2, 3, 4, 6, 5)
+        List<Number> input = Arrays.asList(6, 5, 4, 3, 2, 1)
             .stream()
             .map(Number::new)
             .collect(toList());
 
-        // when & then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Lotto(input))
-            .withMessageMatching("로또 번호는 오름차순으로 입력되어있어야 한다.");
+        Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(toList()));
+
+        // when
+        Lotto result = new Lotto(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -94,6 +85,28 @@ class LottoTest {
 
         // when
         int result = lotto.calculateWinCount(winLotto);
+
+        // then
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("다른 Lotto와 동일한 number의 갯수를 반환할 수 있다.")
+    void calculateWinCountTest() {
+
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        Lotto compareLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+
+        // when
+        int result = lotto.calculateWinCount(compareLotto);
 
         // then
         assertThat(result).isEqualTo(3);

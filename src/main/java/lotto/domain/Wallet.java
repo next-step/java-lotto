@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.Lotto.LOTTO_PRICE;
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
 public class Wallet {
@@ -32,22 +31,16 @@ public class Wallet {
     }
 
     public Wallet purchaseLotto() {
-        int lottoCount = calculatePurchaseLottoCount();
+        int lottoCount = money.calculatePurchaseCount();
+        Money useMoney = money.useMoney(lottoCount);
+
         Lottos purchaseLottos = new Lottos();
         addNewLotto(lottoCount, purchaseLottos);
-        return new Wallet(calculateRemainMoney(lottoCount), purchaseLottos);
-    }
-
-    private Money calculateRemainMoney(int lottoCount) {
-        return money.useMoney(lottoCount * LOTTO_PRICE);
-    }
-
-    private int calculatePurchaseLottoCount() {
-        return money.calculatePurchaseCount(LOTTO_PRICE);
+        return new Wallet(useMoney, purchaseLottos);
     }
 
     private void addNewLotto(int lottoCount, Lottos purchaseLottos) {
-        for (int i=0; i< lottoCount; i++){
+        for (int i = 0; i < lottoCount; i++) {
             purchaseLottos.add(new Lotto(generateNumbers()));
         }
     }

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.Wallet;
 
@@ -11,16 +12,17 @@ public class ResultView {
     }
 
     public void printLottosNumber(Wallet wallet) {
-        System.out.println(wallet.lottos());
+        System.out.println(wallet.lottos().printLottos());
     }
 
-    public void printLottoResult(LottoResult lottoResult) {
+    public void printLottoResult(LottoResult lottoResult, Money money) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
             printRankValueResult(lottoResult, rank);
         }
-        System.out.printf("총 수익률은 %.1f입니다.", lottoResult.calculateYeild());
+        double winMoney = lottoResult.calculateWinMoney();
+        System.out.printf("총 수익률은 %.1f입니다.", money.calculateYeild(winMoney));
     }
 
     private void printRankValueResult(LottoResult lottoResult, Rank rank) {

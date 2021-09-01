@@ -12,15 +12,17 @@ import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
 
-    private Lotto winLotto;
+    private WinLotto winLotto;
     private Lottos buyLottos;
 
     @BeforeEach
     void beforeEach() {
-        winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
             .map(Number::new)
             .collect(Collectors.toList()));
+        Number bonus = new Number(7);
+        winLotto = new WinLotto(lotto, bonus);
 
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto1 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
@@ -44,22 +46,21 @@ class LottoResultTest {
         LottoResult lottoResult = LottoResult.calculateLottoResult(buyLottos, winLotto);
 
         // then
-        assertThat(lottoResult.getRankCount(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("현재 로또 당첨의 수익률을 계산할 수 있다.")
-    void calculateLottoResultYeildTest() {
+    @DisplayName("로또 결과를 가지고 총 획득 상금을 반환할 수 있다.")
+    void calculateWinMoneyTest() {
 
         // given
-        Wallet wallet = new Wallet(new Money(0), buyLottos);
-        LottoResult lottoResult = LottoResult.calculateLottoResult(wallet.lottos(), winLotto);
+        LottoResult lottoResult = LottoResult.calculateLottoResult(buyLottos, winLotto);
 
         // when
-        double result = lottoResult.calculateYeild();
+        double result = lottoResult.calculateWinMoney();
 
         // then
-        assertThat(result).isEqualTo(2.5);
+        assertThat(result).isEqualTo(5_000);
     }
 
 }
