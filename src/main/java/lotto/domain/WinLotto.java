@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.domain.LottoNumber.generateNumbers;
 import static lotto.domain.Rank.calculateLottoRankBywinCountAndMatchBonus;
 
 public class WinLotto {
@@ -21,6 +22,10 @@ public class WinLotto {
         if (lotto.contains(bonus)) {
             throw new IllegalArgumentException(LOTTO_BONUS_DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    public static WinLotto of(String[] numbers, int bonus) {
+        return new WinLotto(new Lotto(generateNumbers(numbers)), new LottoNumber(bonus));
     }
 
     public Lotto lotto() {
