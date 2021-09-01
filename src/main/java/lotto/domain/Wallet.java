@@ -4,6 +4,7 @@ import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.util.StringUtil;
 
 public class Wallet {
 
@@ -53,7 +54,7 @@ public class Wallet {
         Money useMoney = money.useMoney(lottoCount);
 
         List<Lotto> lottos = buyLottos.stream()
-            .map(input -> input.split(","))
+            .map(StringUtil::splitByComma)
             .map(LottoNumber::generateNumbers)
             .map(Lotto::new)
             .collect(Collectors.toList());

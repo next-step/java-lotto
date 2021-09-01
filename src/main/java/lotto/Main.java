@@ -1,6 +1,7 @@
 package lotto;
 
 import static lotto.domain.WinLotto.of;
+import static lotto.util.StringUtil.splitByComma;
 import static lotto.view.InputView.inputBonusBall;
 import static lotto.view.InputView.inputPurchaseMoney;
 import static lotto.view.InputView.inputWinLottoNumbers;
@@ -24,7 +25,7 @@ public class Main {
         printLottoCount(wallet);
         printLottosNumber(wallet);
 
-        WinLotto winLotto = of(inputWinLottoNumbers().split(","), inputBonusBall());
+        WinLotto winLotto = of(splitByComma(inputWinLottoNumbers()), inputBonusBall());
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
         printLottoResult(lottoResult, money);
     }

@@ -32,7 +32,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> generateNumbers(String[] inputs) {
         return Arrays.stream(inputs)
-            .map(String::trim)
             .map(Integer::parseInt)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
