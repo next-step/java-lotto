@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -76,4 +77,20 @@ class WinLottoTest {
         assertThat(result).isEqualTo(Rank.SECOND);
     }
 
+    @Test
+    @DisplayName("당첨 번호와 보너스 볼이 중복되면 Exception이 발생해야 한다.")
+    void lottoNumberAndBonusNumberDuplicateTest() {
+
+        // given
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+        Number bonus = new Number(6);
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new WinLotto(lotto, bonus))
+            .withMessageMatching("로또의 번호와 보너스 번호는 중복될 수 없다.");
+    }
 }
