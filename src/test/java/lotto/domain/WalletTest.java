@@ -131,4 +131,31 @@ class WalletTest {
             .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
     }
 
+    @Test
+    @DisplayName("수동 로또 구매 개수를 받으면 자동 로또 구매 개수를 반환할 수 있다.")
+    void calculateRandomLottoCountTest() {
+
+        Money money = new Money(5_000);
+        Money expectMoney = new Money(0);
+
+        Wallet wallet = new Wallet(money);
+        List<String> input = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())));
+        lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())));
+        Wallet purchaseWallet = wallet.purchaseLotto(input);
+
+        // when
+        int result = purchaseWallet.calculateRandomLottoCount(lottos.size());
+
+        // then
+        assertThat(result).isEqualTo(3);
+    }
+
 }

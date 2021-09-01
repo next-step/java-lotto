@@ -25,7 +25,7 @@ public class Main {
         int manualLottoCount = inputPurchaseManualLottoCount();
         Wallet wallet = lottoService.buyLotto(money, inputPurchaseManualLottos(manualLottoCount));
 
-        printLottoCount(wallet);
+        printLottoCount(wallet, manualLottoCount);
         printLottosNumber(wallet);
 
         WinLotto winLotto = of(splitByComma(inputWinLottoNumbers()), inputBonusBall());

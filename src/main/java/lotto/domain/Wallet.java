@@ -67,4 +67,8 @@ public class Wallet {
         return moneyByRandom;
     }
 
+    public int calculateRandomLottoCount(int manualLottoCount) {
+        return lottos.size() - manualLottoCount;
+    }
+
 }
