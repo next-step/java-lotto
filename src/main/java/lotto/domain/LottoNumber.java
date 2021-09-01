@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Number implements Comparable<Number> {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int SAVED_MIN_NUMBER = 1;
     public static final int SAVED_MAX_NUMBER = 45;
@@ -14,7 +14,7 @@ public class Number implements Comparable<Number> {
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         checkNumberRange(number);
 
         this.number = number;
@@ -30,11 +30,11 @@ public class Number implements Comparable<Number> {
         return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
     }
 
-    public static List<Number> generateNumbers(String[] inputs) {
+    public static List<LottoNumber> generateNumbers(String[] inputs) {
         return Arrays.stream(inputs)
             .map(String::trim)
             .map(Integer::parseInt)
-            .map(Number::new)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
@@ -50,7 +50,7 @@ public class Number implements Comparable<Number> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number1 = (Number) o;
+        LottoNumber number1 = (LottoNumber) o;
         return number == number1.number;
     }
 
@@ -60,7 +60,7 @@ public class Number implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number o) {
+    public int compareTo(LottoNumber o) {
         return number - o.number;
     }
 

@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.domain.Number.generateNumbers;
+import static lotto.domain.LottoNumber.generateNumbers;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ import lotto.application.LottoService;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import lotto.domain.Wallet;
 import lotto.domain.WinLotto;
 import lotto.view.InputView;
@@ -28,8 +28,8 @@ public class Main {
         resultView.printLottoCount(wallet);
         resultView.printLottosNumber(wallet);
 
-        List<Number> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
-        Number bonus = new Number(inputView.inputBonusBall());
+        List<LottoNumber> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
+        LottoNumber bonus = new LottoNumber(inputView.inputBonusBall());
         WinLotto winLotto = new WinLotto(new Lotto(numbers), bonus);
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
         resultView.printLottoResult(lottoResult, money);
