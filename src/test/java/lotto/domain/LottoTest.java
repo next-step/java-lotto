@@ -112,4 +112,22 @@ class LottoTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("문자열로 들어온 input으로 로또를 생성할 수 있다.")
+    void stringFeildConstructorTest() {
+
+        // given
+        String input = "1,2,3,4,5,6";
+        Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+
+        // when
+        Lotto result = new Lotto(input);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
