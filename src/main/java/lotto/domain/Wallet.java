@@ -35,11 +35,11 @@ public class Wallet {
         return lottos.size();
     }
 
-    public Wallet purchaseLotto(List<String> buyLottos) {
+    public Wallet purchaseLotto(List<String> manualLottos) {
         checkAvaliableForPurchaseLotto();
         List<Lotto> lottos = new ArrayList<>();
 
-        Money moneyByManual = addManualLotto(buyLottos, lottos);
+        Money moneyByManual = addManualLotto(manualLottos, lottos);
         Money moneyByRandom = addRandomLotto(moneyByManual, lottos);
         return new Wallet(moneyByRandom, new Lottos(lottos));
     }
@@ -60,11 +60,11 @@ public class Wallet {
 
     private Money addRandomLotto(Money money, List<Lotto> lottos) {
         int lottoCount = money.calculatePurchaseCount();
-        Money useMoneyRandom = money.useMoney(lottoCount);
+        Money moneyByRandom = money.useMoney(lottoCount);
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(generateNumbers()));
         }
-        return useMoneyRandom;
+        return moneyByRandom;
     }
 
 }
