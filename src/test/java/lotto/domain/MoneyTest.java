@@ -48,7 +48,7 @@ class MoneyTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> money.useMoney(2))
-            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
+            .withMessageMatching("로또를 사려면 로또 구매 갯수보다 돈이 많아야 한다.");
     }
 
     @Test
