@@ -1,7 +1,6 @@
 package lotto;
 
 import static lotto.domain.WinLotto.of;
-import static lotto.util.StringUtil.splitByComma;
 import static lotto.view.InputView.inputBonusBall;
 import static lotto.view.InputView.inputPurchaseManualLottoCount;
 import static lotto.view.InputView.inputPurchaseManualLottos;

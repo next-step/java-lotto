@@ -56,11 +56,11 @@ class WalletTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
         lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
         Lottos expectLottos = new Lottos(lottos);
 
@@ -101,11 +101,11 @@ class WalletTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
         lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
 
         // when
@@ -143,11 +143,11 @@ class WalletTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
         lottos.add(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList())));
         Wallet purchaseWallet = wallet.purchaseLotto(input);
 

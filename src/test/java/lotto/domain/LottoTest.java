@@ -19,7 +19,7 @@ class LottoTest {
         // given
         List<LottoNumber> input = Arrays.asList(1, 2, 3, 4, 5)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList());
 
         // when & then
@@ -35,7 +35,7 @@ class LottoTest {
         // given
         List<LottoNumber> input = Arrays.asList(2, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList());
 
         // when & then
@@ -51,12 +51,12 @@ class LottoTest {
         // given
         List<LottoNumber> input = Arrays.asList(6, 5, 4, 3, 2, 1)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList());
 
         Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList()));
 
         // when
@@ -73,13 +73,13 @@ class LottoTest {
         // given
         List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList());
         Lotto lotto = new Lotto(lottoNumbers);
 
         List<LottoNumber> winNumbers = Arrays.asList(4, 5, 6, 7, 8, 9)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(toList());
         Lotto winLotto = new Lotto(winNumbers);
 
@@ -97,12 +97,12 @@ class LottoTest {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         Lotto compareLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         // when
@@ -120,7 +120,7 @@ class LottoTest {
         String input = "1,2,3,4,5,6";
         Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         // when

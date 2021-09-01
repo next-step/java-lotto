@@ -27,8 +27,8 @@ class RandomNumbersGeneratorTest {
     void generateNumbersRangeTest() {
 
         // given
-        LottoNumber min = new LottoNumber(1);
-        LottoNumber max = new LottoNumber(45);
+        LottoNumber min = LottoNumber.of(1);
+        LottoNumber max = LottoNumber.of(45);
 
         // when
         List<LottoNumber> result = RandomNumbersGenerator.generateNumbers();

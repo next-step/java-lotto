@@ -22,12 +22,12 @@ class RankTest {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         Lotto winLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         // when

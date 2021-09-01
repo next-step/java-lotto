@@ -24,20 +24,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public LottoNumber(int number) {
-        checkNumberRange(number);
-
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private static void checkNumberRange(int number) {
-        if (!isNumberRange(number)) {
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_RANGE_ERROR_MESSAGE);
         }
-    }
-
-    private static boolean isNumberRange(int num) {
-        return num >= SAVED_MIN_NUMBER && num <= SAVED_MAX_NUMBER;
+        return lottoNumber;
     }
 
     public static List<LottoNumber> generateNumbers(String[] inputs) {

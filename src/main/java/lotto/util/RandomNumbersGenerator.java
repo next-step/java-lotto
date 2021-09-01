@@ -18,7 +18,7 @@ public class RandomNumbersGenerator {
     private static final List<LottoNumber> LOTTO_CANDIDATE_NUMBERS = IntStream
         .rangeClosed(SAVED_MIN_NUMBER, SAVED_MAX_NUMBER)
         .boxed()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
 
     private RandomNumbersGenerator() {

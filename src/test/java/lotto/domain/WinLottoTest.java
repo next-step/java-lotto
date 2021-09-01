@@ -18,9 +18,9 @@ class WinLottoTest {
         // given
         List<LottoNumber> numbers = Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         // when
         WinLotto winLotto = new WinLotto(new Lotto(numbers), bonusNumber);
@@ -37,13 +37,13 @@ class WinLottoTest {
         // given
         List<LottoNumber> numbers = Arrays.asList(6, 5, 4, 3, 2, 1)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         Lotto expected = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         // when
@@ -60,14 +60,14 @@ class WinLottoTest {
         // given
         Lotto compare = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
 
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
-        LottoNumber bonus = new LottoNumber(6);
+        LottoNumber bonus = LottoNumber.of(6);
         WinLotto winLotto = new WinLotto(lotto, bonus);
 
         // when
@@ -84,9 +84,9 @@ class WinLottoTest {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
-        LottoNumber bonus = new LottoNumber(6);
+        LottoNumber bonus = LottoNumber.of(6);
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
