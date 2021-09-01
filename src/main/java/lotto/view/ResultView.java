@@ -26,7 +26,7 @@ public class ResultView {
   }
 
   private static void printLotto(Lotto lotto) {
-    String lottoNumbers = lotto.numbers().stream()
+    String lottoNumbers = lotto.sortedNumbers().stream()
         .map(String::valueOf).reduce((s1, s2) -> s1 + ", " + s2)
         .get();
     System.out.println("[" + lottoNumbers + "]");
@@ -34,13 +34,13 @@ public class ResultView {
 
   private static void printStatisticsByPrize(WinningStatistics winningStatistics) {
     List<LottoPrize> lottoPrizes = Arrays.stream(LottoPrize.valuesExceptNothing())
-        .sorted(Comparator.comparingInt(LottoPrize::matchedCnt))
+        .sorted(Comparator.comparingInt(LottoPrize::matchCnt))
         .collect(Collectors.toList());
 
     lottoPrizes.forEach(lottoPrize -> {
       int cnt = winningStatistics.cntByLottoPrize(lottoPrize);
       System.out.println(
-          lottoPrize.matchedCnt() + "개 일치 " + "(" + lottoPrize.prizeMoney() + "원)- " + cnt + "개"
+          lottoPrize.matchCnt() + "개 일치 " + "(" + lottoPrize.prizeMoney() + "원)- " + cnt + "개"
       );
     });
   }

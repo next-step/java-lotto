@@ -9,11 +9,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoPrizeTest {
 
-  @ParameterizedTest(name = "상금 조회 테스트 횟수 : {0}, 상금 : {1}")
-  @CsvSource({"3,5000", "4,50000", "5,1500000", "6,2000000000"})
-  void ofTest(int matchedCnt, int prizeMoney) {
+  @ParameterizedTest(name = "상금 조회 테스트 - 일치개수: {0}, 보너스일치여부: {1}, 상금: {2}")
+  @CsvSource({
+      "3,false,5000", "3,true,5000",
+      "4,false,50000", "4,true,50000",
+      "5,false,1500000", "5,true,30000000",
+      "6,false,2000000000"
+  })
+  void ofTest(int matchCnt, boolean matchBonus, int prizeMoney) {
     //when
-    LottoPrize prize = LottoPrize.of(matchedCnt);
+    LottoPrize prize = LottoPrize.of(matchCnt, matchBonus);
 
     //then
     assertThat(prize.prizeMoney()).isEqualTo(prizeMoney);
@@ -23,10 +28,12 @@ class LottoPrizeTest {
   @CsvSource({"0", "1", "2", "7"})
   void invalidOfTest(int matchedCnt) {
     //when
-    LottoPrize prize = LottoPrize.of(matchedCnt);
+    LottoPrize prize1 = LottoPrize.of(matchedCnt, false);
+    LottoPrize prize2 = LottoPrize.of(matchedCnt, true);
 
     //then
-    assertThat(prize).isEqualTo(LottoPrize.NOTHING);
+    assertThat(prize1).isEqualTo(LottoPrize.NOTHING);
+    assertThat(prize2).isEqualTo(LottoPrize.NOTHING);
   }
 
   @Test
@@ -38,6 +45,5 @@ class LottoPrizeTest {
     //then
     assertThat(valuesExceptNothing.length).isEqualTo(LottoPrize.values().length - 1);
     assertThat(valuesExceptNothing).doesNotContain(LottoPrize.NOTHING);
-
   }
 }

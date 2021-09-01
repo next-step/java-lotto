@@ -1,54 +1,40 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
-import lotto.exception.DuplicatedLottoNumberException;
-import lotto.exception.InvalidLottoSizeException;
 
 public class Lotto {
 
   public static final Money PRICE = new Money(1000);
-  public static final int NUMBER_SIZE = 6;
 
-  private final Set<LottoNumber> lottoNumbers;
+  private final LottoNumbers lottoNumbers;
 
-  private Lotto(List<LottoNumber> lottoNumbers) {
-    validateLottoNumbers(lottoNumbers);
-    this.lottoNumbers = new TreeSet<>(lottoNumbers);
+  private Lotto(LottoNumbers lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
   public static Lotto issueByManual(List<Integer> numbers) {
-    return new Lotto(
+    LottoNumbers lottoNumbers = new LottoNumbers(
         numbers.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList())
     );
+    return new Lotto(lottoNumbers);
   }
 
   public static Lotto issueByAuto() {
     return new Lotto(LottoNumbersGenerator.generateByRandom());
   }
 
-  public int matchedNumberCnt(Lotto winningLotto) {
-    return (int) lottoNumbers.stream()
-        .filter(winningLotto.lottoNumbers::contains)
-        .count();
+  public int matchNumberCnt(LottoNumbers winningLottoNumbers) {
+    return this.lottoNumbers.matchedNumberCnt(winningLottoNumbers);
   }
 
-  public List<Integer> numbers() {
-    return lottoNumbers.stream()
-        .map(LottoNumber::number)
-        .collect(Collectors.toList());
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
   }
 
-  private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-    if (lottoNumbers.size() != NUMBER_SIZE) {
-      throw new InvalidLottoSizeException();
-    }
-    if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-      throw new DuplicatedLottoNumberException();
-    }
+  public List<Integer> sortedNumbers() {
+    return this.lottoNumbers.sortedNumbers();
   }
 }

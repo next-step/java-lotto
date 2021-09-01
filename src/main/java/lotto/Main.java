@@ -11,7 +11,7 @@ public class Main {
     LottoGame lottoGame = new LottoGame(InputView.inputMoney());
     ResultView.printPurchasedLottos(lottoGame.lottos());
 
-    WinningResult winningResult = lottoGame.winningResult(InputView.winningLotto());
+    WinningResult winningResult = lottoGame.winningResult(InputView.winningInfo());
     ResultView.printWinningResult(winningResult);
   }
 }

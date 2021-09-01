@@ -9,9 +9,11 @@ public class WinningStatistics {
 
   private final Map<LottoPrize, Integer> statistics = new TreeMap<>();
 
-  public WinningStatistics(List<Lotto> lottos, Lotto winningLotto) {
+  public WinningStatistics(List<Lotto> lottos, WinningInfo winningInfo) {
     for (Lotto lotto : lottos) {
-      LottoPrize lottoPrize = LottoPrize.of(lotto.matchedNumberCnt(winningLotto));
+      int matchNumberCnt = lotto.matchNumberCnt(winningInfo.winningLottoNumbers());
+      boolean matchBonus = lotto.contains(winningInfo.bonusLottoNumber());
+      LottoPrize lottoPrize = LottoPrize.of(matchNumberCnt, matchBonus);
       putInStatistics(lottoPrize);
     }
   }
