@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
