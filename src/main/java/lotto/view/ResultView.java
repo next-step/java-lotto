@@ -2,11 +2,9 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 import lotto.domain.LotteryResults;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.type.WinningType;
 
@@ -22,12 +20,7 @@ public class ResultView {
 		int numberOfLottos = lottos.getNumberOfLottos();
 		System.out.println(numberOfLottos + NUMBER_OF_PURCHASE_LOTTO);
 		lottos.getLottos()
-			.forEach(lotto -> System.out.println(printPurchaseLottoNumbers(lotto)));
-	}
-
-	private static List<Integer> printPurchaseLottoNumbers(Lotto lotto) {
-		return lotto.getNumbers()
-			.getNumberValues();
+			.forEach(System.out::println);
 	}
 
 	public static void outputWinningStatistics(LotteryResults results) {

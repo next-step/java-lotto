@@ -3,7 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,8 +34,16 @@ class LottoCardTest {
 		LottoCard lottoCard = LottoCard.getInstance();
 		Lotto lotto = lottoCard.issue();
 
-		Set<Integer> numbers = new HashSet<>(lotto.getNumbers()
-			.getNumberValues());
+		String[] lottoNumbers = lotto.getNumbers()
+			.toString()
+			.replace("[", "")
+			.replace("]", "")
+			.replace(" ", "")
+			.split(",");
+
+		Set<Integer> numbers = Arrays.stream(lottoNumbers)
+			.map(Integer::parseInt)
+			.collect(Collectors.toSet());
 
 		int numberOfDistinctNumbers = numbers.size();
 		assertThat(numberOfDistinctNumbers).isEqualTo(6);

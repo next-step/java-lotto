@@ -10,4 +10,9 @@ public class Lotto {
 	public Numbers getNumbers() {
 		return numbers;
 	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
+	}
 }
