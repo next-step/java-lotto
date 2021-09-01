@@ -9,16 +9,13 @@ import static lotto.view.ResultView.printLottoResult;
 import static lotto.view.ResultView.printLottosNumber;
 
 import java.util.List;
-import java.util.Scanner;
 import lotto.application.LottoService;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
-import lotto.domain.LottoNumber;
 import lotto.domain.Wallet;
 import lotto.domain.WinLotto;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 public class Main {
 
