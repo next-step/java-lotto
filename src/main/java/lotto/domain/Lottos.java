@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
+    private static final String DELIMITER_ENTER = "\n";
+
+    private static final int UP_VALUE = 1;
+
     private final List<Lotto> lottos;
 
     public Lottos() {
@@ -28,18 +32,14 @@ public class Lottos {
         Map<Rank, Integer> result = createRankMap();
         lottos.stream()
             .map(winLotto::calculateRank)
-            .forEach(rank -> result.put(rank, result.get(rank) + 1));
+            .forEach(rank -> result.put(rank, result.get(rank) + UP_VALUE));
         return result;
-    }
-
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
     }
 
     public String printLottos() {
         return lottos.stream()
             .map(Lotto::printLotto)
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining(DELIMITER_ENTER));
     }
 
     @Override

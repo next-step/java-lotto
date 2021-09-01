@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Money {
 
+    private static final int MINIMUM_INPUT_MONEY = 0;
+
     private static final String MONEY_NEGATIVE_MONEY_ERROR_MESSAGE = "돈은 음수가 들어올 수 없다.";
     private static final String MONEY_UNAVAILABLE_PURCHAGE_LOTTO_ERROR_MESSAGE = "로또를 사려면 로또 구매 갯수보다 돈이 많아야 한다.";
 
@@ -18,7 +20,7 @@ public class Money {
     }
 
     private void checkNegativeMoney(int money) {
-        if (money < 0) {
+        if (money < MINIMUM_INPUT_MONEY) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_MONEY_ERROR_MESSAGE);
         }
     }

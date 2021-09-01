@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Wallet {
 
+    private static final int UNAVALIABLE_PURCHACE_COUNT = 0;
+
     private static final String UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE = "로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.";
 
     private final Money money;
@@ -45,7 +47,7 @@ public class Wallet {
     }
 
     private void checkAvaliableForPurchaseLotto() {
-        if (money.calculatePurchaseCount() == 0) {
+        if (money.calculatePurchaseCount() == UNAVALIABLE_PURCHACE_COUNT) {
             throw new IllegalArgumentException(UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE);
         }
     }
