@@ -4,10 +4,10 @@ import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.util.StringUtil;
 
 public class Wallet {
+
+    private static final String UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE = "로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.";
 
     private final Money money;
 
@@ -36,11 +36,18 @@ public class Wallet {
     }
 
     public Wallet purchaseLotto(List<String> buyLottos) {
+        checkAvaliableForPurchaseLotto();
         List<Lotto> lottos = new ArrayList<>();
 
         Money moneyByManual = addManualLotto(buyLottos, lottos);
         Money moneyByRandom = addRandomLotto(moneyByManual, lottos);
         return new Wallet(moneyByRandom, new Lottos(lottos));
+    }
+
+    private void checkAvaliableForPurchaseLotto() {
+        if (money.calculatePurchaseCount() == 0) {
+            throw new IllegalArgumentException(UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE);
+        }
     }
 
     private Money addManualLotto(List<String> buyLottos, List<Lotto> lottos) {
@@ -54,7 +61,7 @@ public class Wallet {
     private Money addRandomLotto(Money money, List<Lotto> lottos) {
         int lottoCount = money.calculatePurchaseCount();
         Money useMoneyRandom = money.useMoney(lottoCount);
-        for (int i=0; i<lottoCount; i++){
+        for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(generateNumbers()));
         }
         return useMoneyRandom;

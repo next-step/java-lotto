@@ -116,4 +116,19 @@ class WalletTest {
         assertThat(result.money()).isEqualTo(expectMoney);
     }
 
+    @Test
+    @DisplayName("로또를 구매하고자할 때 첫번째로 로또 한개도 살 돈이 없으면 Exception을 반환해야 한다.")
+    void validatePurchaseLottoByNoMoneyTest() {
+
+        // given
+        Money money = new Money(500);
+        Wallet wallet = new Wallet(money);
+        List<String> input = new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "7,8,9,10,11,12"));
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> wallet.purchaseLotto(input))
+            .withMessageMatching("로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.");
+    }
+
 }
