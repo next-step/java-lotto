@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import static lotto.domain.LottoNumber.generateNumbers;
+import static lotto.util.StringUtil.splitByComma;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +26,10 @@ public class Lotto {
 
         numbersSortByAsc(numbers);
         this.numbers = numbers;
+    }
+
+    public Lotto(String stringNumbers) {
+        this(generateNumbers(splitByComma(stringNumbers)));
     }
 
     private static void checkLottoNumbersSize(List<LottoNumber> numbers) {
