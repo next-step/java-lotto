@@ -28,7 +28,7 @@ public class Main {
         printLottoCount(wallet, manualLottoCount);
         printLottosNumber(wallet);
 
-        WinLotto winLotto = of(splitByComma(inputWinLottoNumbers()), inputBonusBall());
+        WinLotto winLotto = of(inputWinLottoNumbers(), inputBonusBall());
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
         printLottoResult(lottoResult, money);
     }

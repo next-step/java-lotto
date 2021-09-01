@@ -24,8 +24,8 @@ public class WinLotto {
         }
     }
 
-    public static WinLotto of(String[] numbers, int bonus) {
-        return new WinLotto(new Lotto(generateNumbers(numbers)), new LottoNumber(bonus));
+    public static WinLotto of(String numbers, int bonus) {
+        return new WinLotto(new Lotto(numbers), new LottoNumber(bonus));
     }
 
     public Lotto lotto() {
