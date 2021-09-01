@@ -5,7 +5,7 @@ import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FOURTH;
 import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
-import static lotto.domain.Rank.valueOf;
+import static lotto.domain.Rank.calculateLottoRankBywinCountAndMatchBonus;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -31,7 +31,7 @@ class RankTest {
             .collect(Collectors.toList()));
 
         // when
-        Rank result = valueOf(lotto.calculateWinCount(winLotto), false);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(lotto.calculateWinCount(winLotto), false);
 
         // then
         assertThat(result).isEqualTo(Rank.FIFTH);
@@ -46,7 +46,7 @@ class RankTest {
         boolean bonus = true;
 
         // when
-        Rank result = valueOf(input, bonus);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(input, bonus);
 
         // then
         assertThat(result).isEqualTo(FIRST);
@@ -61,7 +61,7 @@ class RankTest {
         boolean bonus = true;
 
         // when
-        Rank result = valueOf(input, bonus);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(input, bonus);
 
         // then
         assertThat(result).isEqualTo(SECOND);
@@ -76,7 +76,7 @@ class RankTest {
         boolean bonus = false;
 
         // when
-        Rank result = valueOf(input, bonus);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(input, bonus);
 
         // then
         assertThat(result).isEqualTo(THIRD);
@@ -91,7 +91,7 @@ class RankTest {
         boolean bonus = false;
 
         // when
-        Rank result = valueOf(input, bonus);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(input, bonus);
 
         // then
         assertThat(result).isEqualTo(FOURTH);
@@ -106,7 +106,7 @@ class RankTest {
         boolean bonus = false;
 
         // when
-        Rank result = valueOf(input, bonus);
+        Rank result = calculateLottoRankBywinCountAndMatchBonus(input, bonus);
 
         // then
         assertThat(result).isEqualTo(FIFTH);

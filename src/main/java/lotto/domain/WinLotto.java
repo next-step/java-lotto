@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.Rank.valueOf;
+import static lotto.domain.Rank.calculateLottoRankBywinCountAndMatchBonus;
 
 public class WinLotto {
 
@@ -34,7 +34,7 @@ public class WinLotto {
     public Rank calculateRank(Lotto lotto) {
         int winCount = lotto.calculateWinCount(this.lotto);
         boolean isBonus = lotto.contains(bonus);
-        return valueOf(winCount, isBonus);
+        return calculateLottoRankBywinCountAndMatchBonus(winCount, isBonus);
     }
 
 }

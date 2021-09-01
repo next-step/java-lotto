@@ -39,7 +39,7 @@ public enum Rank {
         return rankMap;
     }
 
-    public static Rank valueOf(int winCount, boolean matchBonus) {
+    public static Rank calculateLottoRankBywinCountAndMatchBonus(int winCount, boolean matchBonus) {
         if (winCount == SECOND.winCount && matchBonus) {
             return SECOND;
         }
