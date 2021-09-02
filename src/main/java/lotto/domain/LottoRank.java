@@ -33,9 +33,9 @@ public enum LottoRank {
         }
 
         return Arrays.stream(values())
-            .filter(LottoRank -> LottoRank.matchCount(collectNumber))
-            .findFirst()
-            .orElse(FAIL);
+                     .filter(LottoRank -> LottoRank.matchCount(collectNumber))
+                     .findFirst()
+                     .orElse(FAIL);
     }
 
     private boolean matchCount(int collectNumber) {

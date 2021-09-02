@@ -12,9 +12,9 @@ public class LottoStringUtil {
 
     public static List<Integer> splitStringToIntegerList(String numberString) {
         return Arrays.stream(numberString.split(","))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+                     .map(String::trim)
+                     .map(Integer::parseInt)
+                     .collect(Collectors.toList());
     }
 
     public static List<Integer> parseToIntegerList(List<String> stringList) {

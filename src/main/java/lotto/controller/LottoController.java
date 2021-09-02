@@ -18,7 +18,7 @@ public class LottoController {
         outputView.printBasicInfo(lottoGame);
 
         WinningNumbers winningNumber = new WinningNumbers(inputView.inputLastWinningNumber(),
-            inputView.inputBonusNumber());
+                                                          inputView.inputBonusNumber());
 
         LottoResult lottoResult = new LottoResult(lottoGame.checkResult(winningNumber));
 

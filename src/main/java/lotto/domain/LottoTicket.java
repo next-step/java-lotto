@@ -10,7 +10,7 @@ public class LottoTicket {
     private final List<LottoNumbers> tickets = new ArrayList<>();
 
     public LottoTicket(final int ticketSize,
-        final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
+                       final LottoNumberSelectPolicy lottoNumberSelectPolicy) {
         for (int i = 0; i < ticketSize; i++) {
             tickets.add(new LottoNumbers(lottoNumberSelectPolicy.selectNumbers()));
         }
