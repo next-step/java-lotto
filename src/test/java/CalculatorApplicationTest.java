@@ -44,7 +44,14 @@ class CalculatorApplicationTest {
     void isNumberTest() {
         final String[] args = {"1,2:3"};
         final String first = Expression.extractFirstString(args[0]);
-        Expression.isNumber(first);
+        assertThat(Expression.isNumber(first)).isTrue();
+    }
+
+    @Test
+    void isNotNumberTest() {
+        final String[] args = {"//;\n1;2;3"};
+        final String first = Expression.extractFirstString(args[0]);
+        assertThat(Expression.isNumber(first)).isFalse();
     }
 
     @Test
@@ -73,7 +80,6 @@ class CalculatorApplicationTest {
         }
         assertThat(stringOfNumber.length).isEqualTo(3);
     }
-
 
     @Test
     void mainTest() {
