@@ -1,9 +1,11 @@
 package lotto.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final String SPACE_REGEX = "\\s+";
@@ -20,8 +22,25 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public int askUserManualLottoTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public List<List<Integer>> askUserLottoNumbersForEachTicket(int ticketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> tickets = new ArrayList<>();
+        IntStream.range(0, ticketCount)
+                .forEach(i -> tickets.add(lottoNumbers()));
+        return tickets;
+    }
+
     public List<Integer> askUserToEnterWinningNumbersOfLastWeek() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return lottoNumbers();
+    }
+
+    private List<Integer> lottoNumbers() {
         String[] userInputs = scanner.nextLine().replaceAll(SPACE_REGEX, EMPTY).split(COMMA_REGEX);
         return Arrays.stream(userInputs)
                 .map(Integer::valueOf)
