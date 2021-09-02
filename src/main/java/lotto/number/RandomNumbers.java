@@ -16,18 +16,21 @@ public class RandomNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> lottoNumbers() {
+    private RandomNumbers() {
+    }
+
+    public static List<LottoNumber> lottoNumbers() {
         return pickLottoNumbers();
     }
 
-    private List<LottoNumber> pickLottoNumbers() {
+    private static List<LottoNumber> pickLottoNumbers() {
         Collections.shuffle(candidates);
         List<LottoNumber> picked = new ArrayList<>(candidates.subList(0, LottoNumbers.NUMBERS_LENGTH));
         Collections.sort(picked);
         return picked;
     }
 
-    List<LottoNumber> candidates() {
+    static List<LottoNumber> candidates() {
         return candidates;
     }
 }

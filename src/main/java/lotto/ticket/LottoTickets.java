@@ -51,13 +51,13 @@ public class LottoTickets {
 
     private List<LottoTicket> manualTickets(List<List<Integer>> manualLottoTickets) {
         return manualLottoTickets.stream()
-                .map(numbers -> LottoTicket.valueOf(numbers, TicketType.MANUAL))
+                .map(numbers -> LottoTicket.ticketWithType(numbers, TicketType.MANUAL))
                 .collect(Collectors.toList());
     }
 
     private List<LottoTicket> autoTickets(int autoTicketCounts) {
         return IntStream.range(0, autoTicketCounts)
-                .mapToObj(i -> new LottoTicket(new RandomNumbers().lottoNumbers(), TicketType.AUTO))
+                .mapToObj(i -> new LottoTicket(RandomNumbers.lottoNumbers(), TicketType.AUTO))
                 .collect(Collectors.toList());
     }
 

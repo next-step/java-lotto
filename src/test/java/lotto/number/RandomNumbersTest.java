@@ -14,25 +14,25 @@ class RandomNumbersTest {
     @DisplayName("랜덤넘버 6개")
     @Test
     void length() {
-        assertThat(new RandomNumbers().lottoNumbers().size()).isEqualTo(LottoNumbers.NUMBERS_LENGTH);
+        assertThat(RandomNumbers.lottoNumbers().size()).isEqualTo(LottoNumbers.NUMBERS_LENGTH);
     }
 
     @DisplayName("최댓값은 45")
     @Test
     void maximum() {
-        assertThat(new RandomNumbers().lottoNumbers().get(RANDOM_NUMBERS_LAST_INDEX).value() <= new LottoNumber(LottoNumber.MAX).value()).isTrue();
+        assertThat(RandomNumbers.lottoNumbers().get(RANDOM_NUMBERS_LAST_INDEX).value() <= new LottoNumber(LottoNumber.MAX).value()).isTrue();
     }
 
 
     @DisplayName("최솟값은 1")
     @Test
     void minimum() {
-        assertThat(new RandomNumbers().lottoNumbers().get(RANDOM_NUMBERS_FIRST_INDEX).value() >= new LottoNumber(LottoNumber.MIN).value()).isTrue();
+        assertThat(RandomNumbers.lottoNumbers().get(RANDOM_NUMBERS_FIRST_INDEX).value() >= new LottoNumber(LottoNumber.MIN).value()).isTrue();
     }
 
     @DisplayName("랜덤넘버는 45개의 static 값이다.")
     @Test
     void static45Values() {
-        assertThat(new RandomNumbers().candidates()).isSameAs(new RandomNumbers().candidates());
+        assertThat(RandomNumbers.candidates()).isSameAs(RandomNumbers.candidates());
     }
 }

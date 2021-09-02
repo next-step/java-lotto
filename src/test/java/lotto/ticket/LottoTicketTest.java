@@ -52,7 +52,7 @@ class LottoTicketTest {
     @Test
     void ticketType() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(LottoTicket.valueOf(lottoNumbers, TicketType.AUTO).isAuto()).isTrue();
-        assertThat(LottoTicket.valueOf(lottoNumbers, TicketType.MANUAL).isManual()).isTrue();
+        assertThat(LottoTicket.ticketWithType(lottoNumbers, TicketType.AUTO).isAuto()).isTrue();
+        assertThat(LottoTicket.ticketWithType(lottoNumbers, TicketType.MANUAL).isManual()).isTrue();
     }
 }

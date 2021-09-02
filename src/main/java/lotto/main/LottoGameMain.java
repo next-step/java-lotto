@@ -15,20 +15,20 @@ public class LottoGameMain {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        final int price = inputView.askUserToPay();
+        final int price = inputView.askToPay();
 
-        final int manualLottoCount = inputView.askUserManualLottoTicketCount();
-        final List<List<Integer>> manualLottoTickets = inputView.askUserLottoNumbersForEachTicket(manualLottoCount);
+        final int manualLottoCount = inputView.askManualTicketCount();
+        final List<List<Integer>> manualLottoTickets = inputView.askLottoNumbers(manualLottoCount);
 
         LottoGame lottoGame = new LottoGame(price, manualLottoTickets);
 
-        resultView.showEachCountOfAutoTicketsAndManualTickets(lottoGame);
-        resultView.showEachTicketsLottoNumbers(lottoGame);
+        resultView.showTicketCount(lottoGame);
+        resultView.showTickets(lottoGame);
 
-        List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
-        BonusNumber bonusNumber = new BonusNumber(inputView.askUserBonusNumber());
+        List<Integer> winningNumbersOfLastWeek = inputView.askWinningNumbers();
+        BonusNumber bonusNumber = new BonusNumber(inputView.askBonusNumber());
 
         GameResult gameResult = new GameResult(lottoGame, WinningNumbers.valueOf(winningNumbersOfLastWeek), bonusNumber);
-        resultView.showWinningRateReport(gameResult);
+        resultView.showWinningRate(gameResult);
     }
 }

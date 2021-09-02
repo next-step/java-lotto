@@ -17,17 +17,17 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int askUserToPay() {
+    public int askToPay() {
         System.out.println("구입금액을 입력해주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public int askUserManualLottoTicketCount() {
+    public int askManualTicketCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<List<Integer>> askUserLottoNumbersForEachTicket(int ticketCount) {
+    public List<List<Integer>> askLottoNumbers(int ticketCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> tickets = new ArrayList<>();
         IntStream.range(0, ticketCount)
@@ -35,7 +35,7 @@ public class InputView {
         return tickets;
     }
 
-    public List<Integer> askUserToEnterWinningNumbersOfLastWeek() {
+    public List<Integer> askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return lottoNumbers();
     }
@@ -47,7 +47,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public int askUserBonusNumber() {
+    public int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
