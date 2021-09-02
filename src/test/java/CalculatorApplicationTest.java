@@ -58,8 +58,6 @@ class CalculatorApplicationTest {
         assertThat(stringOfNumber.length).isEqualTo(3);
     }
 
-    // todo basicRegexFailTest exception
-
     @Test
     void customRegexSuccessTest() {
         final String[] args = {"//;\n1;2;3"};
@@ -76,5 +74,9 @@ class CalculatorApplicationTest {
         assertThat(stringOfNumber.length).isEqualTo(3);
     }
 
-    // todo customRegexFailTest exception
+
+    @Test
+    void mainTest() {
+        CalculatorApplication.main(new String[]{"//;\n1;2;3"});
+    }
 }

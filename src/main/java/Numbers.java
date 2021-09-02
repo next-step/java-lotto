@@ -13,7 +13,7 @@ public class Numbers {
 
     public Number add() {
         Number sum = new Number(0);
-        for (Number number : numbers) {
+        for (Number number : this.numbers) {
             sum = sum.add(number);
         }
         return sum;

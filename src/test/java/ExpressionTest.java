@@ -10,7 +10,7 @@ class ExpressionTest {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\\n(.*)";
 
     @Test
-    void basicCreate() {
+    void basicDelimiterCreateTest() {
         String text = "1,2,3";
         final Expression actual = Expression.createExpression(text);
         final Expression expected = new Expression(BASIC_DELIMITER, text.split(BASIC_DELIMITER));
@@ -18,15 +18,45 @@ class ExpressionTest {
     }
 
     @Test
-    void customCreate() {
+    void customDelimiterCreateTest() throws RuntimeException {
         String text = "//;\n1;2;3";
-        final Expression actual = Expression.createExpression(text);
+//        String text = "//;\\n1;2;3";
+//        String text = "//;\\n1;2;3";
 
         final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
-        matcher.find();
-        final String customDelimiter = matcher.group(1);
-        final Expression expected =  new Expression(customDelimiter, matcher.group(2).split(customDelimiter));
+        if(matcher.find()) {
+            final String customDelimiter = matcher.group(1);
+            final String group = matcher.group(2);
+            final String[] split = group.split(customDelimiter);
+            final Expression actual = new Expression(customDelimiter, split);
 
+            final Expression expected = Expression.createExpression(text);
+            assertThat(actual).isEqualTo(expected);
+            return;
+        }
+        throw new RuntimeException("표현식 매칭에 실패했습니다.");
+    }
+
+    @Test
+    void oneNumberCreateTest() {
+        final String text ="1";
+        final Number actual = Expression.createExpression(text).add();
+        final Number expected = new Number(1);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void emptyStringTest() {
+        final String text ="";
+        final Number actual = Expression.createExpression(text).add();
+        final Number expected = new Number(0);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void nullTest() {
+        final Number actual = Expression.createExpression(null).add();
+        final Number expected = new Number(0);
         assertThat(actual).isEqualTo(expected);
     }
 }

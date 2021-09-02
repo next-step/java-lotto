@@ -15,9 +15,16 @@ public class Expression {
         this.numbers = new Numbers(Arrays.asList(numbers));
     }
 
-    public static Expression createExpression(String text) {
-        final String first = extractFirstString(text);
+    public Number add() {
+        return this.numbers.add();
+    }
 
+    public static Expression createExpression(String text) {
+        if (text == null || text.isEmpty()) {
+            return new Expression(BASIC_DELIMITER, new String[]{"0"});
+        }
+
+        final String first = extractFirstString(text);
         if (isNumber(first)) {
             return new Expression(BASIC_DELIMITER, text.split(BASIC_DELIMITER));
         }
@@ -27,7 +34,7 @@ public class Expression {
             final String customDelimiter = matcher.group(1);
             return new Expression(customDelimiter, matcher.group(2).split(customDelimiter));
         }
-        throw new RuntimeException();
+        throw new RuntimeException("표현식 생성에 실패했습니다.");
     }
 
     static String extractFirstString(String text) {
