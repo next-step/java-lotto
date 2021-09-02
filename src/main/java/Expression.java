@@ -15,7 +15,7 @@ public class Expression {
         this.numbers = new Numbers(Arrays.asList(numbers));
     }
 
-    public static Expression createNumber(String text) {
+    public static Expression createExpression(String text) {
         final String first = extractFirstString(text);
 
         if (isNumber(first)) {

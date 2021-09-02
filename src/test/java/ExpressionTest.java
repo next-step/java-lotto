@@ -12,7 +12,7 @@ class ExpressionTest {
     @Test
     void basicCreate() {
         String text = "1,2,3";
-        final Expression actual = Expression.createNumber(text);
+        final Expression actual = Expression.createExpression(text);
         final Expression expected = new Expression(BASIC_DELIMITER, text.split(BASIC_DELIMITER));
         assertThat(actual).isEqualTo(expected);
     }
@@ -20,7 +20,7 @@ class ExpressionTest {
     @Test
     void customCreate() {
         String text = "//;\n1;2;3";
-        final Expression actual = Expression.createNumber(text);
+        final Expression actual = Expression.createExpression(text);
 
         final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
         matcher.find();
