@@ -2,11 +2,8 @@ package lotto.view;
 
 import static lotto.util.LottoStringUtil.splitStringToIntegerList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 
 public class InputView {
 
