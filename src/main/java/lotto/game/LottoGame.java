@@ -1,10 +1,11 @@
 package lotto.game;
 
-import lotto.helper.TypeConverter;
 import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     private final Payments payments;
@@ -23,7 +24,13 @@ public class LottoGame {
 
     public LottoGame(int totalPayments, int[][] manualLottoTickets) {
         this.payments = new Payments(totalPayments);
-        this.tickets = new LottoTickets(payments.ticketCount(), TypeConverter.valueOf(manualLottoTickets));
+        this.tickets = new LottoTickets(payments.ticketCount(), convert(manualLottoTickets));
+    }
+
+    private List<List<Integer>> convert(int[][] numbers) {
+        return Arrays.stream(numbers)
+                .map(x -> Arrays.stream(x).boxed().collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
     public List<LottoTicket> lottoTickets() {
