@@ -1,5 +1,6 @@
 package lotto.number;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class RandomNumbers {
 
     private List<LottoNumber> pickLottoNumbers() {
         Collections.shuffle(candidates);
-        List<LottoNumber> picked = candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
+        List<LottoNumber> picked = new ArrayList<>(candidates.subList(0, LottoNumbers.NUMBERS_LENGTH));
         Collections.sort(picked);
         return picked;
     }
