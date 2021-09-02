@@ -20,8 +20,6 @@ class ExpressionTest {
     @Test
     void customDelimiterCreateTest() throws RuntimeException {
         String text = "//;\n1;2;3";
-//        String text = "//;\\n1;2;3";
-//        String text = "//;\\n1;2;3";
 
         final Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_REGEX).matcher(text);
         if(matcher.find()) {
