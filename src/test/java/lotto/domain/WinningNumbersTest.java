@@ -16,20 +16,17 @@ class WinningNumbersTest {
                   .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("3개가 동일한 숫자일때 3을 리턴한다.")
+    @DisplayName("당첨결과가 모두 일치하면 일등이다.")
     @Test
     void matchCountTest() {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        assertThat(winningNumbers.checkMatchCount(new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9))))
-            .isEqualTo(3);
+        assertThat(winningNumbers.match(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(LottoRank.FIRST);
     }
 
-    @DisplayName("보너스 값이 일치하면 true를 리턴한다.")
+    @DisplayName("5개의 수와 보너스번호가 일치하면 2등이다.")
     @Test
     void bonusNumberCheckTest() {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        assertThat(
-            winningNumbers.checkBonusNumber(
-                new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9)))).isEqualTo(true);
+        assertThat(winningNumbers.match(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(LottoRank.SECOND);
     }
 }

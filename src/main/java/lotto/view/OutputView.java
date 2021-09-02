@@ -36,7 +36,7 @@ public class OutputView {
               .forEach(value -> System.out.printf("%d개 일치 (%d원)- %d개%n",
                                                   value.getCollectNumber(),
                                                   value.getPrice(),
-                                                  result.get(value)));
+                                                  result.getOrDefault(value,0)));
     }
 
     public void printProfitRatio(Double profitRatio) {
