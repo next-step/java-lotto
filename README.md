@@ -9,6 +9,9 @@
   - [ ] 수동으로 x장, 자동으로 y장 입력해주세요
 - [X] GameResult
   - [X] 수동 입력 추가
+- [X] Helper 클래스 추가
+  - [X] int[][]를 List<List<Intger>>로 변경
+
 ## Step3 To-Do
 
 - [X] InputView
