@@ -17,20 +17,15 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public LottoNumbers inputLastWinningNumber() {
+    public List<Integer> inputLastWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numberString = scanner.nextLine();
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        List<Integer> numbers = splitStringToIntegerList(numberString);
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new LottoNumbers(lottoNumbers);
+        return splitStringToIntegerList(numberString);
     }
 
-    public LottoNumber inputBonusNumber() {
+    public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(scanner.nextInt());
+        return scanner.nextInt();
     }
 
 }

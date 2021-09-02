@@ -8,20 +8,20 @@ import lotto.constraint.Constraint;
 public class LottoNumberRandomSelector implements LottoNumberSelectPolicy {
 
 
-    private final List<LottoNumber> basicNumbers = createBasicNumber();
+    private final List<Integer> basicNumbers = createBasicNumber();
 
     @Override
-    public List<LottoNumber> selectNumbers() {
+    public List<Integer> selectNumbers() {
         Collections.shuffle(basicNumbers);
-        List<LottoNumber> selectedNumbers = basicNumbers.subList(0, Constraint.LOTTO_NUMBER_SIZE);
+        List<Integer> selectedNumbers = basicNumbers.subList(0, Constraint.LOTTO_NUMBER_SIZE);
         Collections.sort(selectedNumbers);
         return selectedNumbers;
     }
 
-    private List<LottoNumber> createBasicNumber() {
-        List<LottoNumber> numbers = new ArrayList<>();
+    private List<Integer> createBasicNumber() {
+        List<Integer> numbers = new ArrayList<>();
         for (int i = Constraint.MIN_NUMBER; i <= Constraint.MAX_NUMBER; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(i);
         }
         return numbers;
     }

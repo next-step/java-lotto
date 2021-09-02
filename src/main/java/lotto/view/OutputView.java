@@ -23,7 +23,7 @@ public class OutputView {
     public void printTickets(LottoTicket lottoTicket) {
         List<LottoNumbers> lottoTickets = lottoTicket.getTickets();
         for (LottoNumbers lottoNumbers : lottoTickets) {
-            System.out.println(lottoNumbers.toString());
+            System.out.println(lottoNumbers.makeLottoNumbersStringList());
         }
         System.out.println();
     }

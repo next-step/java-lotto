@@ -13,9 +13,9 @@ class LottoNumbersTest {
     @DisplayName("LottoNumbers의 사이즈는 6이어야 한다. ")
     @Test
     void lotto_number_generate_test() {
-        List<LottoNumber> numbers = IntStream.rangeClosed(1, 7)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+        List<Integer> numbers = IntStream.rangeClosed(1, 7)
+                                         .boxed()
+                                         .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(
             IllegalArgumentException.class);
@@ -24,10 +24,11 @@ class LottoNumbersTest {
     @DisplayName("LottoNumbers는 중복된 값을 가져서는 안된다.")
     @Test
     void check_first_rank() {
-        List<LottoNumber> numbers = IntStream.rangeClosed(1, 5)
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
-        numbers.add(new LottoNumber(5));
+        List<Integer> numbers = IntStream.rangeClosed(1, 5)
+                                         .boxed()
+                                         .collect(Collectors.toList());
+
+        numbers.add(5);
 
         assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(
             IllegalArgumentException.class);

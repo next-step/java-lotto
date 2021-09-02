@@ -20,7 +20,7 @@ class LottoGameNumberSelectorTest {
     @Test
     void do_not_allow_duplicate_number() {
         LottoNumberRandomSelector lottoNumberRandomSelector = new LottoNumberRandomSelector();
-        Set<LottoNumber> set = new HashSet<>(lottoNumberRandomSelector.selectNumbers());
+        Set<Integer> set = new HashSet<>(lottoNumberRandomSelector.selectNumbers());
         assertThat(set.size()).isEqualTo(6);
     }
 }

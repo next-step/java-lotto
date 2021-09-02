@@ -11,10 +11,12 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(final List<LottoNumber> numbers) {
-        validSizeCheck(numbers);
-        validDuplicateCheck(numbers);
-        lottoNumbers.addAll(numbers);
+    public LottoNumbers(final List<Integer> integerNumbers) {
+        for (Integer number : integerNumbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        validSizeCheck(lottoNumbers);
+        validDuplicateCheck(lottoNumbers);
     }
 
     private void validSizeCheck(List<LottoNumber> lottoNumbers) {
@@ -33,19 +35,19 @@ public class LottoNumbers {
     public int getMatchCount(LottoNumbers winningNumbers) {
         int matchCnt = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winningNumbers.isContained(lottoNumber)) {
+            if (winningNumbers.contains(lottoNumber)) {
                 matchCnt++;
             }
         }
         return matchCnt;
     }
 
-    public boolean isContained(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
+
+    public String makeLottoNumbersStringList() {
         return "["
             + lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(", "))
             + "]";

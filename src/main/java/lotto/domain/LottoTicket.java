@@ -27,8 +27,8 @@ public class LottoTicket {
     public List<LottoRank> getLottoRanks(final WinningNumbers winningNumbers) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (LottoNumbers lottoNumbers : tickets) {
-            lottoRanks.add(LottoRank.findRank(winningNumbers.getMatchCount(lottoNumbers),
-                winningNumbers.checkBonusNumber(lottoNumbers)));
+            lottoRanks.add(LottoRank.findRank(winningNumbers.checkMatchCount(lottoNumbers),
+                                              winningNumbers.checkBonusNumber(lottoNumbers)));
         }
         return lottoRanks;
     }
