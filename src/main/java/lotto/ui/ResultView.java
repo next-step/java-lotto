@@ -15,13 +15,14 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void showTicketsCounts(LottoGame lottoGame) {
-        System.out.printf("%s개를 구매했습니다.%n", lottoGame.lottoTickets().size());
-    }
-
     public void showEachTicketsLottoNumbers(LottoGame lottoGame) {
         lottoGame.lottoTickets()
                 .forEach(lottoTicket -> System.out.println(convertLottoNumberToInteger(lottoTicket)));
+    }
+
+    public void showEachCountOfAutoTicketsAndManualTickets(LottoGame lottoGame) {
+        // 장수 확인
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", lottoGame.manualTicketCount(), lottoGame.autoTicketCount());
     }
 
     private List<Integer> convertLottoNumberToInteger(LottoTicket lottoTicket) {

@@ -33,4 +33,12 @@ public class LottoGame {
     public Payments payments() {
         return this.payments;
     }
+
+    public int manualTicketCount() {
+        return tickets.manualTicketCount();
+    }
+
+    public int autoTicketCount() {
+        return tickets.autoTicketCount();
+    }
 }

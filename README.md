@@ -11,7 +11,11 @@
   - [X] 수동 입력 추가
 - [X] Helper 클래스 추가
   - [X] int[][]를 List<List<Intger>>로 변경
-
+- [ ] LottoTicket
+  - [ ] 타입 설정 (MANUAL, AUTO)
+    - [ ] 생성자에서 타입 설정하지 않을 경우 기본 값은 AUTO
+- [ ] LottoTickets
+  - [ ] 자동, 수동 카운트
 ## Step3 To-Do
 
 - [X] InputView

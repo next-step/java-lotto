@@ -9,6 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,4 +48,11 @@ class LottoTicketTest {
         );
     }
 
+    @DisplayName("자동/수동으로 구매된 티켓인지 알 수 있다.")
+    @Test
+    void ticketType() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(LottoTicket.valueOf(lottoNumbers, TicketType.AUTO).isAuto()).isTrue();
+        assertThat(LottoTicket.valueOf(lottoNumbers, TicketType.MANUAL).isManual()).isTrue();
+    }
 }

@@ -10,15 +10,15 @@ public class LottoNumbers {
     public static final int NUMBERS_LENGTH = 6;
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
-        isValid(numbers);
-        this.numbers = numbers;
-    }
-
     public LottoNumbers(int... numbers) {
         this(Arrays.stream(numbers)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
+    }
+
+    public LottoNumbers(List<LottoNumber> numbers) {
+        isValid(numbers);
+        this.numbers = numbers;
     }
 
     public List<LottoNumber> value() {
