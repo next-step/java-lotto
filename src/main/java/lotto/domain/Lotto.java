@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.domain.LottoNumber.generateNumbers;
+import static lotto.util.StringUtil.splitByComma;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -14,9 +17,9 @@ public class Lotto {
     private static final String LOTTO_NUMBERS_INVALID_SIZE_ERROR_MESSAGE = "로또 번호의 개수는 6개가 들어와야 한다.";
     private static final String LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE = "로또의 번호는 중복되어 저장될 수 없다.";
 
-    private final List<Number> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Number> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         checkLottoNumbersSize(numbers);
         checkDuplicatedNumber(numbers);
 
@@ -24,19 +27,23 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private static void checkLottoNumbersSize(List<Number> numbers) {
+    public Lotto(String stringNumbers) {
+        this(generateNumbers(splitByComma(stringNumbers)));
+    }
+
+    private static void checkLottoNumbersSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static void checkDuplicatedNumber(List<Number> numbers) {
+    private static void checkDuplicatedNumber(List<LottoNumber> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_INVALID_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private void numbersSortByAsc(List<Number> numbers) {
+    private void numbersSortByAsc(List<LottoNumber> numbers) {
         Collections.sort(numbers);
     }
 
@@ -46,13 +53,13 @@ public class Lotto {
             .count();
     }
 
-    public boolean contains(Number number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
     public String printLotto() {
         return numbers.stream()
-            .map(Number::value)
+            .map(LottoNumber::value)
             .collect(Collectors.toList()).toString();
     }
 

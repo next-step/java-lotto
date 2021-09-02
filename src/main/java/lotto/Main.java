@@ -1,38 +1,35 @@
 package lotto;
 
-import static lotto.domain.Number.generateNumbers;
+import static lotto.domain.WinLotto.of;
+import static lotto.view.InputView.inputBonusBall;
+import static lotto.view.InputView.inputPurchaseManualLottoCount;
+import static lotto.view.InputView.inputPurchaseManualLottos;
+import static lotto.view.InputView.inputPurchaseMoney;
+import static lotto.view.InputView.inputWinLottoNumbers;
+import static lotto.view.ResultView.printLottoCount;
+import static lotto.view.ResultView.printLottoResult;
+import static lotto.view.ResultView.printLottosNumber;
 
-import java.util.List;
-import java.util.Scanner;
 import lotto.application.LottoService;
-import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
-import lotto.domain.Number;
 import lotto.domain.Wallet;
 import lotto.domain.WinLotto;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        InputView inputView = new InputView(scanner);
-        ResultView resultView = new ResultView();
-
         LottoService lottoService = new LottoService();
-        Money money = new Money(inputView.inputPurchaseMoney());
-        Wallet wallet = lottoService.buyLotto(money);
+        Money money = new Money(inputPurchaseMoney());
+        int manualLottoCount = inputPurchaseManualLottoCount();
+        Wallet wallet = lottoService.buyLotto(money, inputPurchaseManualLottos(manualLottoCount));
 
-        resultView.printLottoCount(wallet);
-        resultView.printLottosNumber(wallet);
+        printLottoCount(wallet, manualLottoCount);
+        printLottosNumber(wallet);
 
-        List<Number> numbers = generateNumbers(inputView.inputWinLottoNumbers().split(","));
-        Number bonus = new Number(inputView.inputBonusBall());
-        WinLotto winLotto = new WinLotto(new Lotto(numbers), bonus);
+        WinLotto winLotto = of(inputWinLottoNumbers(), inputBonusBall());
         LottoResult lottoResult = lottoService.calculateLottoResult(wallet, winLotto);
-        resultView.printLottoResult(lottoResult, money);
+        printLottoResult(lottoResult, money);
     }
 
 }

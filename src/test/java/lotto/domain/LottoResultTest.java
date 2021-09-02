@@ -19,19 +19,19 @@ class LottoResultTest {
     void beforeEach() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(Number::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
-        Number bonus = new Number(7);
+        LottoNumber bonus = LottoNumber.of(7);
         winLotto = new WinLotto(lotto, bonus);
 
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto1 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)
             .stream()
-            .map(Number::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
         Lotto lotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
-            .map(Number::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
         lottos.add(lotto1);
         lottos.add(lotto2);

@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import static lotto.domain.Number.generateNumbers;
+import static lotto.domain.LottoNumber.generateNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +13,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class NumberTest {
+public class LottoNumberTest {
+
+    @Test
+    @DisplayName("로또 번호 인스턴스 캐싱 생성 테스트")
+    void createLottoNumberTest() {
+
+        // given
+        int input = 1;
+
+        // when
+        LottoNumber result = LottoNumber.of(input);
+
+        // then
+        assertThat(result).isEqualTo(LottoNumber.of(1));
+        assertTrue(result == LottoNumber.of(1));
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {0, -1, 46})
@@ -21,7 +37,7 @@ public class NumberTest {
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Number(input))
+            .isThrownBy(() -> LottoNumber.of(input))
             .withMessageMatching("로또 번호는 1이상 45이하의 수만 들어올 수 있다.");
     }
 
@@ -31,13 +47,13 @@ public class NumberTest {
 
         // given
         String[] input = "1, 2, 3, 4, 5, 6".split(", ");
-        List<Number> expected = Arrays.asList(1, 2, 3, 4, 5, 6)
+        List<LottoNumber> expected = Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(Number::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
 
         // when
-        List<Number> inputs = generateNumbers(input);
+        List<LottoNumber> inputs = generateNumbers(input);
 
         // then
         assertThat(inputs).isEqualTo(expected);
@@ -49,14 +65,14 @@ public class NumberTest {
     void lottoGenerateNumberTest(String input) {
 
         // given
-        List<Number> expected = Arrays.asList(1, 2, 3, 4, 5, 6)
+        List<LottoNumber> expected = Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
-            .map(Number::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
         String[] inputArray = input.split(",");
 
         // when
-        List<Number> inputs = generateNumbers(inputArray);
+        List<LottoNumber> inputs = generateNumbers(inputArray);
 
         // then
         assertThat(inputs).isEqualTo(expected);

@@ -8,26 +8,30 @@ public class WinLotto {
 
     private final Lotto lotto;
 
-    private final Number bonus;
+    private final LottoNumber bonus;
 
-    public WinLotto(Lotto lotto, Number bonus) {
+    public WinLotto(Lotto lotto, LottoNumber bonus) {
         checkDuplicateLottoAndBonus(lotto, bonus);
 
         this.lotto = lotto;
         this.bonus = bonus;
     }
 
-    private static void checkDuplicateLottoAndBonus(Lotto lotto, Number bonus) {
+    private static void checkDuplicateLottoAndBonus(Lotto lotto, LottoNumber bonus) {
         if (lotto.contains(bonus)) {
             throw new IllegalArgumentException(LOTTO_BONUS_DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    public static WinLotto of(String numbers, int bonus) {
+        return new WinLotto(new Lotto(numbers), LottoNumber.of(bonus));
     }
 
     public Lotto lotto() {
         return lotto;
     }
 
-    public Number bonus() {
+    public LottoNumber bonus() {
         return bonus;
     }
 

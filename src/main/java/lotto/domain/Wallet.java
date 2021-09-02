@@ -2,7 +2,14 @@ package lotto.domain;
 
 import static lotto.util.RandomNumbersGenerator.generateNumbers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Wallet {
+
+    private static final int UNAVALIABLE_PURCHACE_COUNT = 0;
+
+    private static final String UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE = "로또 게임을 진행하려면 로또 가격보다 많은 돈을 넣어야 한다.";
 
     private final Money money;
 
@@ -30,19 +37,40 @@ public class Wallet {
         return lottos.size();
     }
 
-    public Wallet purchaseLotto() {
-        int lottoCount = money.calculatePurchaseCount();
-        Money useMoney = money.useMoney(lottoCount);
+    public Wallet purchaseLotto(List<String> manualLottos) {
+        checkAvaliableForPurchaseLotto();
+        List<Lotto> lottos = new ArrayList<>();
 
-        Lottos purchaseLottos = new Lottos();
-        addNewLotto(lottoCount, purchaseLottos);
-        return new Wallet(useMoney, purchaseLottos);
+        Money moneyByManual = addManualLotto(manualLottos, lottos);
+        Money moneyByRandom = addRandomLotto(moneyByManual, lottos);
+        return new Wallet(moneyByRandom, new Lottos(lottos));
     }
 
-    private void addNewLotto(int lottoCount, Lottos purchaseLottos) {
-        for (int i = 0; i < lottoCount; i++) {
-            purchaseLottos.add(new Lotto(generateNumbers()));
+    private void checkAvaliableForPurchaseLotto() {
+        if (money.calculatePurchaseCount() == UNAVALIABLE_PURCHACE_COUNT) {
+            throw new IllegalArgumentException(UNAVALIABLE_PURCHACE_LOTTO_ERROR_MESSAGE);
         }
+    }
+
+    private Money addManualLotto(List<String> buyLottos, List<Lotto> lottos) {
+        Money moneyByManual = money.useMoney(buyLottos.size());
+        for (String buyLotto : buyLottos) {
+            lottos.add(new Lotto(buyLotto));
+        }
+        return moneyByManual;
+    }
+
+    private Money addRandomLotto(Money money, List<Lotto> lottos) {
+        int lottoCount = money.calculatePurchaseCount();
+        Money moneyByRandom = money.useMoney(lottoCount);
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto(generateNumbers()));
+        }
+        return moneyByRandom;
+    }
+
+    public int calculateRandomLottoCount(int manualLottoCount) {
+        return lottos.size() - manualLottoCount;
     }
 
 }

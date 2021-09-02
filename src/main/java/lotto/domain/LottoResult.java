@@ -4,6 +4,8 @@ import java.util.Map;
 
 public class LottoResult {
 
+    private static final int DEFAULT_MONEY = 0;
+
     private final Map<Rank, Integer> resultMap;
 
     public LottoResult(Map<Rank, Integer> resultMap) {
@@ -15,7 +17,7 @@ public class LottoResult {
     }
 
     public double calculateWinMoney() {
-        double getMoney = 0;
+        double getMoney = DEFAULT_MONEY;
         for (Rank rank : Rank.values()) {
             getMoney += resultMap.get(rank) * rank.winMoney();
         }
