@@ -59,7 +59,7 @@ class GameResultTest {
     private LottoGame lottoGame(int[][] numbers) {
         return new LottoGame(LottoTicket.PRICE * numbers.length) {
             @Override
-            public List<LottoTicket> getLottoTickets() {
+            public List<LottoTicket> lottoTickets() {
                 return new LottoTickets(numbers).value();
             }
         };

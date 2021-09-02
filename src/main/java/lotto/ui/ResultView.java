@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public void showTicketsCounts(LottoGame lottoGame) {
-        System.out.printf("%s개를 구매했습니다.%n", lottoGame.getLottoTickets().size());
+        System.out.printf("%s개를 구매했습니다.%n", lottoGame.lottoTickets().size());
     }
 
     public void showEachTicketsLottoNumbers(LottoGame lottoGame) {
-        lottoGame.getLottoTickets()
+        lottoGame.lottoTickets()
                 .forEach(lottoTicket -> System.out.println(convertLottoNumberToInteger(lottoTicket)));
     }
 

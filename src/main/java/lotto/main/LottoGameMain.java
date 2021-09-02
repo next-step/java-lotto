@@ -16,7 +16,11 @@ public class LottoGameMain {
         ResultView resultView = new ResultView();
 
         final int price = inputView.askUserToPay();
-        LottoGame lottoGame = new LottoGame(price);
+
+        final int manualLottoCount = inputView.askUserManualLottoTicketCount();
+        final List<List<Integer>> manualLottoTickets = inputView.askUserLottoNumbersForEachTicket(manualLottoCount);
+
+        LottoGame lottoGame = new LottoGame(price, manualLottoTickets);
 
         resultView.showTicketsCounts(lottoGame);
         resultView.showEachTicketsLottoNumbers(lottoGame);

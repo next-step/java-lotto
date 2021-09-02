@@ -7,7 +7,8 @@
   - [X] 수동으로 구매할 번호를 입력해 주세요. (로또 수만큼)
 - [ ] ResultView
   - [ ] 수동으로 x장, 자동으로 y장 입력해주세요
-
+- [X] GameResult
+  - [X] 수동 입력 추가
 ## Step3 To-Do
 
 - [X] InputView
