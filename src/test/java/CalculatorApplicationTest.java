@@ -35,7 +35,7 @@ class CalculatorApplicationTest {
     @Test
     void getFirstString() {
         String[] args = {"1,2:3"};
-        String first = Number.extractFirstString(args[0]);
+        String first = Expression.extractFirstString(args[0]);
         final String actual = String.valueOf(args[0].charAt(0));
         assertThat(actual).isEqualTo(first);
     }
@@ -43,8 +43,8 @@ class CalculatorApplicationTest {
     @Test
     void isNumberTest() {
         final String[] args = {"1,2:3"};
-        final String first = Number.extractFirstString(args[0]);
-        Number.isNumber(first);
+        final String first = Expression.extractFirstString(args[0]);
+        Expression.isNumber(first);
     }
 
     @Test

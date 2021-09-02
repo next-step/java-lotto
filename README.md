@@ -14,5 +14,5 @@
 ### 기능 요구 사항
 - ~~입력값 String을 기본 구분자(, :)로 나누어 받음~~
 - ~~커스텀 구분자 지정 가능 (// \n)~~
-- 숫자 이외 or 음수 전달 시 RuntimeException throw
+- ~~숫자 이외 or 음수 전달 시 RuntimeException throw~~
 - 기본 연산 
