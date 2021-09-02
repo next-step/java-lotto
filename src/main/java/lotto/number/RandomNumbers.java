@@ -15,22 +15,18 @@ public class RandomNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> value() {
-        shuffleNumbers();
-        return numbers();
+    public List<LottoNumber> lottoNumbers() {
+        return pickLottoNumbers();
     }
 
-    private void shuffleNumbers() {
+    private List<LottoNumber> pickLottoNumbers() {
         Collections.shuffle(candidates);
-    }
-
-    private List<LottoNumber> numbers() {
         List<LottoNumber> picked = candidates.subList(0, LottoNumbers.NUMBERS_LENGTH);
         Collections.sort(picked);
         return picked;
     }
 
-    LottoNumber getCandidates(int index) {
-        return candidates.get(index);
+    List<LottoNumber> candidates() {
+        return candidates;
     }
 }
