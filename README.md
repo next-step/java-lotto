@@ -7,8 +7,8 @@
 - [X] BonusNumber : 해당 없음
 - [X] LottoNumber
 - [X] LottoNumbers
-- [ ] RandomNumbers
-- [ ] WinningNumbers
+- [X] RandomNumbers : 해당 없음
+- [X] WinningNumbers
 
 ### ticket
 
