@@ -3,8 +3,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +15,4 @@ class LottoGameTest {
         assertThat(lottoGame.size()).isEqualTo(14);
     }
 
-    @DisplayName("6개를 맞으면 1등이다.")
-    @Test
-    void check_result() {
-        LottoGame lottoGame = new LottoGame(1000, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoGame.checkResult(
-            new LottoNumbers(() -> Arrays.asList(1, 2, 3, 4, 5, 6))))
-            .isEqualTo(Collections.singletonList(LottoRank.FIRST));
-    }
 }

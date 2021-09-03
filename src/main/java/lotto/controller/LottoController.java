@@ -1,16 +1,15 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumberRandomSelector;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void run(){
+    public void run() {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
@@ -18,10 +17,10 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame(price, new LottoNumberRandomSelector());
         outputView.printBasicInfo(lottoGame);
 
-        List<Integer> numbers = inputView.inputLastWinningNumber();
-        LottoNumbers winningNumbers = new LottoNumbers(numbers);
+        WinningNumbers winningNumber = new WinningNumbers(inputView.inputLastWinningNumber(),
+                                                          inputView.inputBonusNumber());
 
-        LottoResult lottoResult = new LottoResult(lottoGame.checkResult(winningNumbers));
+        LottoResult lottoResult = new LottoResult(lottoGame.checkResult(winningNumber));
 
         outputView.printResult(lottoResult.getResult());
         outputView.printProfitRatio(lottoResult.getProfitRate(price));

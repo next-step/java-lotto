@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +10,11 @@ public class LottoResult {
 
     public LottoResult(List<LottoRank> lottoRanks) {
         result = new EnumMap<>(LottoRank.class);
-        Arrays.stream(LottoRank.values()).forEach(
-            lottoRank -> result.put(lottoRank, 0)
-        );
         makeResult(lottoRanks);
     }
 
     private void makeResult(final List<LottoRank> lottoRanks) {
-        lottoRanks.forEach(lottoRank -> result.put(lottoRank, result.get(lottoRank) + 1));
+        lottoRanks.forEach(lottoRank -> result.put(lottoRank, result.getOrDefault(lottoRank,0) + 1));
     }
 
     public Map<LottoRank, Integer> getResult() {

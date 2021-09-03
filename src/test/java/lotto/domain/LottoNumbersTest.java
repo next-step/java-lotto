@@ -1,26 +1,36 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoNumbersTest {
 
-    @DisplayName("LottoNumbers는 입력한 숫자들과 동일한 리스트를 가지고 있음.")
+    @DisplayName("LottoNumbers의 사이즈는 6이어야 한다. ")
     @Test
     void lotto_number_generate_test() {
-        LottoNumbers lottoNumbers = new LottoNumbers(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoNumbers.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = IntStream.rangeClosed(1, 7)
+                                         .boxed()
+                                         .collect(Collectors.toList());
+
+        assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(
+            IllegalArgumentException.class);
     }
 
-    @DisplayName("6개가 동일한 숫자면 1등이다.")
+    @DisplayName("LottoNumbers는 중복된 값을 가져서는 안된다.")
     @Test
     void check_first_rank() {
-        LottoNumbers lottoNumbers = new LottoNumbers(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(
-            lottoNumbers.checkRank(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))))
-            .isEqualTo(LottoRank.FIRST);
+        List<Integer> numbers = IntStream.rangeClosed(1, 5)
+                                         .boxed()
+                                         .collect(Collectors.toList());
+
+        numbers.add(5);
+
+        assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(
+            IllegalArgumentException.class);
     }
 }

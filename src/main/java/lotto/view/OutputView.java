@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.LottoTickets;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoTicket;
 
 public class OutputView {
 
@@ -20,10 +20,10 @@ public class OutputView {
         System.out.println(gameSize + "개를 구매했습니다.");
     }
 
-    public void printTickets(LottoTickets lottoTicket) {
+    public void printTickets(LottoTicket lottoTicket) {
         List<LottoNumbers> lottoTickets = lottoTicket.getTickets();
         for (LottoNumbers lottoNumbers : lottoTickets) {
-            System.out.println(lottoNumbers.getLottoNumbers());
+            System.out.println(lottoNumbers.makeLottoNumbersStringList());
         }
         System.out.println();
     }
@@ -31,14 +31,12 @@ public class OutputView {
     public void printResult(Map<LottoRank, Integer> result) {
         System.out.println("당첨 통계\n" + "---------");
         Arrays.stream(LottoRank.values())
-            .sorted(Comparator.comparing(LottoRank::getCollectNumber))
-            .filter(value -> value.getCollectNumber() > 0)
-            .forEach(value -> {
-                System.out.printf("%d개 일치 (%d원)- %d개%n",
-                    value.getCollectNumber(),
-                    value.getPrice(),
-                    result.get(value));
-            });
+              .sorted(Comparator.comparing(LottoRank::getPrice))
+              .filter(value -> value.getCollectNumber() > 0)
+              .forEach(value -> System.out.printf("%d개 일치 (%d원)- %d개%n",
+                                                  value.getCollectNumber(),
+                                                  value.getPrice(),
+                                                  result.getOrDefault(value,0)));
     }
 
     public void printProfitRatio(Double profitRatio) {
