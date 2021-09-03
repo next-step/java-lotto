@@ -6,7 +6,7 @@
 
 - [X] BonusNumber : 해당 없음
 - [X] LottoNumber
-- [ ] LottoNumbers
+- [X] LottoNumbers
 - [ ] RandomNumbers
 - [ ] WinningNumbers
 

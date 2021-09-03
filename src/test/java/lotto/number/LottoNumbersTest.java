@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -48,5 +49,12 @@ class LottoNumbersTest {
                 Arguments.of(new LottoNumbers(1, 2, 3, 9, 8, 7), 3),
                 Arguments.of(new LottoNumbers(12, 11, 10, 9, 8, 7), 0)
         );
+    }
+
+    @DisplayName("보너스 숫자를 포함할 경우 1, 포함하지 않을 경우 0 리턴")
+    @ParameterizedTest
+    @CsvSource(value = {"12:1", "13:0"}, delimiter = ':')
+    void getBonusNumberCount(int bonusNumber, int count) {
+        assertThat(new LottoNumbers(1, 2, 3, 10, 11, 12).matchOf(new BonusNumber(bonusNumber))).isEqualTo(count);
     }
 }
