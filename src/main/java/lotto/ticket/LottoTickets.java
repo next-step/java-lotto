@@ -20,7 +20,6 @@ public class LottoTickets {
                 .collect(Collectors.toList()));
     }
 
-    //TODO: 본 생성자 지워야 하는지 확인 -> 서비스의 유연성을 위해 둬도 되지 않을까
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
@@ -36,8 +35,7 @@ public class LottoTickets {
         }
     }
 
-    public LottoTickets(int ticketCount, List<List<Integer>> manualLottoTickets) {
-        List<LottoTicket> manualTickets = manualTickets(manualLottoTickets);
+    public LottoTickets(int ticketCount, List<LottoTicket> manualTickets) {
         List<LottoTicket> autoTickets = autoTickets(ticketCount - manualTickets.size());
         this.tickets = combinedTickets(autoTickets, manualTickets);
     }
@@ -47,12 +45,6 @@ public class LottoTickets {
         combined.addAll(autos);
         combined.addAll(manuals);
         return combined;
-    }
-
-    private List<LottoTicket> manualTickets(List<List<Integer>> manualLottoTickets) {
-        return manualLottoTickets.stream()
-                .map(numbers -> LottoTicket.ticketWithType(numbers, TicketType.MANUAL))
-                .collect(Collectors.toList());
     }
 
     private List<LottoTicket> autoTickets(int autoTicketCounts) {

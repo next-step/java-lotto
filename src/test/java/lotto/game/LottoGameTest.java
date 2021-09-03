@@ -1,10 +1,15 @@
 package lotto.game;
 
+import lotto.ticket.LottoTicket;
 import lotto.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,11 +27,14 @@ class LottoGameTest {
     @DisplayName("수동으로 번호를 적은 티켓들을 구입 티켓 리스트에 포함한다.")
     @Test
     void ticketsIncludesManualTickets() {
-        int[][] manualTicketNumbers = {{8, 21, 23, 41, 42, 43}, {3, 5, 11, 16, 32, 38}, {7, 11, 16, 35, 36, 44}};
-        LottoTickets manualLottoTickets = new LottoTickets(manualTicketNumbers);
+        int[][] numbers = {{8, 21, 23, 41, 42, 43}, {3, 5, 11, 16, 32, 38}, {7, 11, 16, 35, 36, 44}};
+        List<LottoTicket> tickets = Arrays.stream(numbers)
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        LottoTickets manualLottoTickets = new LottoTickets(tickets);
 
         int payments = 14000;
-        LottoGame lottoGame = new LottoGame(payments, manualTicketNumbers);
+        LottoGame lottoGame = new LottoGame(payments, tickets);
 
         assertThat(lottoGame.lottoTickets().containsAll(manualLottoTickets.value())).isTrue();
     }

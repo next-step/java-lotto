@@ -31,6 +31,14 @@ public class LottoTicket {
         this.ticketType = ticketType;
     }
 
+    public static LottoTicket valueOf(List<Integer> lottoNumbers) {
+        return new LottoTicket(
+                lottoNumbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList())
+        );
+    }
+
     public static LottoTicket ticketWithType(List<Integer> lottoNumbers, TicketType ticketType) {
         List<LottoNumber> converted = lottoNumbers.stream()
                 .map(LottoNumber::new)

@@ -1,6 +1,7 @@
 package lotto.ui;
 
-import java.util.ArrayList;
+import lotto.ticket.LottoTicket;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -27,12 +28,12 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<List<Integer>> askLottoNumbers(int ticketCount) {
+    public List<LottoTicket> askLottoNumbers(int ticketCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<List<Integer>> tickets = new ArrayList<>();
-        IntStream.range(0, ticketCount)
-                .forEach(i -> tickets.add(lottoNumbers()));
-        return tickets;
+        return IntStream.range(0, ticketCount)
+                .mapToObj(i -> LottoTicket.valueOf(lottoNumbers()))
+                .collect(Collectors.toList());
+
     }
 
     public List<Integer> askWinningNumbers() {

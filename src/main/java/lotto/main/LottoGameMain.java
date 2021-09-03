@@ -4,6 +4,7 @@ import lotto.game.LottoGame;
 import lotto.gameresult.GameResult;
 import lotto.number.BonusNumber;
 import lotto.number.WinningNumbers;
+import lotto.ticket.LottoTicket;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -17,10 +18,10 @@ public class LottoGameMain {
 
         final int price = inputView.askToPay();
 
-        final int manualLottoCount = inputView.askManualTicketCount();
-        final List<List<Integer>> manualLottoTickets = inputView.askLottoNumbers(manualLottoCount);
+        final int manualTicketCount = inputView.askManualTicketCount();
+        final List<LottoTicket> manualTickets = inputView.askLottoNumbers(manualTicketCount);
 
-        LottoGame lottoGame = new LottoGame(price, manualLottoTickets);
+        LottoGame lottoGame = new LottoGame(price, manualTickets);
 
         resultView.showTicketCount(lottoGame);
         resultView.showTickets(lottoGame);
