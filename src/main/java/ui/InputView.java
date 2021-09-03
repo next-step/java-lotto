@@ -3,6 +3,8 @@ package ui;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.LottoTicket;
+
 public class InputView {
 	public static final String QUESTION_OF_TOTAL_COST = "구입금액을 입력해 주세요.";
 	public static final String QUESTION_OF_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
@@ -29,7 +31,7 @@ public class InputView {
 		return this.scanner.nextLine();
 	}
 
-	public void drawLottoNumbers(List<List<Integer>> lottoNumbers) {
-		lottoNumbers.forEach(list -> System.out.println(list));
+	public void drawLottoNumbers(List<LottoTicket> lottoTickets) {
+		lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.toStringLottoNumbers()));
 	}
 }

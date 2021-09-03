@@ -17,10 +17,10 @@ public class ResultView {
 	public void drawResult(LottoReport lottoResultReport) {
 		System.out.println(STATISTICS);
 		System.out.println(LINE);
-		System.out.println(INTRO_OF_THREE_MATCHED +lottoResultReport.fourthPlace()+ count);
-		System.out.println(INTRO_OF_FOUR_MATCHED +lottoResultReport.thirdPlace()+count);
-		System.out.println(INTRO_OF_FIX_MATCHED +lottoResultReport.secondPlace()+count);
-		System.out.println(INTRO_OF_SIX_MATCHED +lottoResultReport.firstPlace()+count);
+		System.out.println(INTRO_OF_THREE_MATCHED + lottoResultReport.lottoMatchCount(3) + count);
+		System.out.println(INTRO_OF_FOUR_MATCHED + lottoResultReport.lottoMatchCount(4) + count);
+		System.out.println(INTRO_OF_FIX_MATCHED + lottoResultReport.lottoMatchCount(5) + count);
+		System.out.println(INTRO_OF_SIX_MATCHED + lottoResultReport.lottoMatchCount(6) + count);
 		System.out.println(TOTAL + Math.floor(lottoResultReport.profit() * 100) / 100.0 + END);
 	}
 }

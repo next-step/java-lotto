@@ -1,26 +1,15 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
 
-public class Lotto {
-	public static final int DEFAULT_PRICE = 1000;
+public class Lotto implements LottoTicket {
 	private final LottoNumbers lottoNumbers;
 	private final int price;
 	private final LottoRank rank;
 
-	public Lotto(List<Integer> numbers) {
-		this(numbers, DEFAULT_PRICE);
-	}
-
-	public Lotto(List<Integer> numbers, int defaultPrice) {
-		this.lottoNumbers = new LottoNumbers(numbers);
-		this.price = defaultPrice;
-		this.rank = LottoRank.NOTHING;
-	}
-
-	public Lotto(List<Integer> numbers, int lottoPrice, int lottoNumberCount) {
-		this.lottoNumbers = new LottoNumbers(numbers, lottoNumberCount);
+	public Lotto(Supplier<List<Integer>> lottoMaker, int lottoPrice) {
+		this.lottoNumbers = new LottoNumbers(lottoMaker.get());
 		this.price = lottoPrice;
 		this.rank = LottoRank.NOTHING;
 	}
@@ -37,5 +26,14 @@ public class Lotto {
 
 	public LottoRank lottoRank() {
 		return this.rank;
+	}
+
+	public LottoPaper write(LottoPaper lottoReport) {
+		return lottoReport.write(this.rank, this.price);
+	}
+
+	@Override
+	public String toStringLottoNumbers() {
+		return this.lottoNumbers.toString();
 	}
 }

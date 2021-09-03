@@ -1,30 +1,23 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGroup {
 	private final List<Lotto> lottoGroup;
 
-	public LottoGroup(List<List<Integer>> lottoNumbers) {
-		this.lottoGroup = lottoNumbers
-			.stream()
-			.map(list -> new Lotto(list))
-			.collect(Collectors.toList());
+	public LottoGroup(List<Lotto> lottoNumbers) {
+		this.lottoGroup = lottoNumbers;
 	}
 
-	public LottoGroup(List<List<Integer>> lottoNumbers, int lottoPrice, int lottoNumberCount) {
-		this.lottoGroup = lottoNumbers
-			.stream()
-			.map(list -> new Lotto(list, lottoPrice, lottoNumberCount))
-			.collect(Collectors.toList());
-	}
+	public LottoPaper lottoResultReport(Lotto winningNumbers) {
+		LottoPaper lottoReport = new LottoPaper();
 
-	public LottoReport lottoResultReport(List<Integer> winningNumbers) {
-		return new LottoReport(
-			this.lottoGroup
-				.stream()
-				.map(lotto -> lotto.unmaskedLotto(new Lotto(winningNumbers)).lottoRank())
-				.collect(Collectors.toList()), Lotto.DEFAULT_PRICE);
+		for (int i = 0; i < this.lottoGroup.size(); i++) {
+			Lotto unknownLotto = lottoGroup.get(i);
+			Lotto knownLotto = unknownLotto.unmaskedLotto(winningNumbers);
+			lottoReport = knownLotto.write(lottoReport);
+		}
+
+		return lottoReport;
 	}
 }

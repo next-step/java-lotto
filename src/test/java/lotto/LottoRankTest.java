@@ -18,7 +18,7 @@ public class LottoRankTest {
 	@Test
 	@DisplayName("동일한 숫자에 몇개 있는지를 통해서 로또 결과 확인")
 	void compare() {
-		LottoNumbers winningNumber =createNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoNumbers winningNumber = createNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 		LottoNumbers lotto1 = createNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 		assertThat(LottoRank.findLottoRank(lotto1, winningNumber)).isEqualTo(LottoRank.FIRST);

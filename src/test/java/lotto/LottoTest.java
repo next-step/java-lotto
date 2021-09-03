@@ -12,12 +12,13 @@ public class LottoTest {
 	@Test
 	@DisplayName("로또 결과를 통해서 상금 확인")
 	void compare() {
-		Lotto winningNumber = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto lotto1st = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-		Lotto lotto2st = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-		Lotto lotto3st = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
-		Lotto lotto4st = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-		Lotto failedLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+		int lottoPrice = 1000;
+		Lotto winningNumber = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 43), lottoPrice);
+		Lotto lotto1st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 43), lottoPrice);
+		Lotto lotto2st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 1), lottoPrice);
+		Lotto lotto3st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 1, 2), lottoPrice);
+		Lotto lotto4st = new Lotto(() -> Arrays.asList(8, 21, 23, 1, 2, 3), lottoPrice);
+		Lotto failedLotto = new Lotto(() -> Arrays.asList(8, 21, 1, 2, 3, 4), lottoPrice);
 
 		assertThat(lotto1st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FIRST.reward());
 

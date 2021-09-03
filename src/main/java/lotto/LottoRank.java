@@ -3,28 +3,28 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIRST(6, 2000000000) {
+	FIRST(6, 2_000_000_000) {
 		@Override
 		protected boolean isWinning(int matchCount) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	SECOND(5, 1500000) {
+	SECOND(5, 1_500_000) {
 		@Override
 		protected boolean isWinning(int matchCount) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	THIRD(4, 50000) {
+	THIRD(4, 50_000) {
 		@Override
 		protected boolean isWinning(int matchCount) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	FOURTH(3, 5000) {
+	FOURTH(3, 5_000) {
 		@Override
 		protected boolean isWinning(int matchCount) {
 			return this.isSameMatchCount(matchCount);

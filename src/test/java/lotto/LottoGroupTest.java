@@ -3,7 +3,6 @@ package lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,26 +12,30 @@ public class LottoGroupTest {
 	@Test
 	@DisplayName("당첨 통계를 구한다.")
 	void test1() {
-		List<Integer> lotto1st = Arrays.asList(8, 21, 23, 41, 42, 43);
-		List<Integer> lotto2st = Arrays.asList(8, 21, 23, 41, 42, 1);
-		List<Integer> lotto3st = Arrays.asList(8, 21, 23, 41, 1, 2);
-		List<Integer> lotto4st = Arrays.asList(8, 21, 23, 1, 2, 3);
-		List<Integer> failedLotto = Arrays.asList(8, 21, 1, 2, 3, 4);
+		int lottoPrice = 1000;
+		Lotto lotto1st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 43), lottoPrice);
+		Lotto lotto2st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 1), lottoPrice);
+		Lotto lotto3st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 1, 2), lottoPrice);
+		Lotto lotto4st = new Lotto(() -> Arrays.asList(8, 21, 23, 1, 2, 3), lottoPrice);
+		Lotto failedLotto = new Lotto(() -> Arrays.asList(8, 21, 1, 2, 3, 4), lottoPrice);
 
 		LottoGroup lottoGroup = new LottoGroup(Arrays.asList(lotto1st, lotto2st, lotto3st, lotto4st, failedLotto));
 
-		LottoReport report = lottoGroup.lottoResultReport(lotto1st);
+		LottoPaper report = lottoGroup.lottoResultReport(lotto1st);
 
-		assertThat(report.profit()).isEqualTo(
-			(LottoRank.FIRST.reward() + LottoRank.SECOND.reward() + LottoRank.THIRD.reward() + LottoRank.FOURTH.reward()
-				+ LottoRank.NOTHING.reward()) / (Lotto.DEFAULT_PRICE * 5));
+		int totalProfit =
+			LottoRank.FIRST.reward() + LottoRank.SECOND.reward() + LottoRank.THIRD.reward() + LottoRank.FOURTH.reward()
+				+ LottoRank.NOTHING.reward();
+		int paidMoney = lottoPrice * 5;
 
-		assertThat(report.firstPlace()).isEqualTo(1);
+		assertThat(report.profit()).isEqualTo(totalProfit / paidMoney);
 
-		assertThat(report.secondPlace()).isEqualTo(1);
+		assertThat(report.lottoMatchCount(6)).isEqualTo(1);
 
-		assertThat(report.thirdPlace()).isEqualTo(1);
+		assertThat(report.lottoMatchCount(5)).isEqualTo(1);
 
-		assertThat(report.fourthPlace()).isEqualTo(1);
+		assertThat(report.lottoMatchCount(4)).isEqualTo(1);
+
+		assertThat(report.lottoMatchCount(3)).isEqualTo(1);
 	}
 }
