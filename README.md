@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+--- 
+
+## 1단계 문자열 계산기
+### 기능 요구 사항
+- ~~입력값 String을 기본 구분자(, :)로 나누어 받음~~
+- ~~커스텀 구분자 지정 가능 (// \n)~~
+- ~~숫자 이외 or 음수 전달 시 RuntimeException throw~~
+- ~~덧셈 연산~~
+- ~~빈문자 > 0 반환~~
+- ~~숫자 하나 > 숫자 반환~~ 
