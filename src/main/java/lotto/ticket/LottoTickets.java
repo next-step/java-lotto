@@ -35,7 +35,8 @@ public class LottoTickets {
         }
     }
 
-    public LottoTickets(int ticketCount, List<LottoTicket> manualTickets) {
+    public LottoTickets(int ticketCount, List<LottoTicket> manualLottoTickets) {
+        List<LottoTicket> manualTickets = manualTickets(manualLottoTickets);
         List<LottoTicket> autoTickets = autoTickets(ticketCount - manualTickets.size());
         this.tickets = combinedTickets(autoTickets, manualTickets);
     }
@@ -45,6 +46,12 @@ public class LottoTickets {
         combined.addAll(autos);
         combined.addAll(manuals);
         return combined;
+    }
+
+    private List<LottoTicket> manualTickets(List<LottoTicket> manualLottoTickets) {
+        return manualLottoTickets.stream()
+                .map(ticket -> new LottoTicket(ticket.lottoNumbers(), TicketType.MANUAL))
+                .collect(Collectors.toList());
     }
 
     private List<LottoTicket> autoTickets(int autoTicketCounts) {

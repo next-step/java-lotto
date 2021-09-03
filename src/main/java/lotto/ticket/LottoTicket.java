@@ -47,13 +47,6 @@ public class LottoTicket {
         );
     }
 
-    public static LottoTicket ticketWithType(List<Integer> lottoNumbers, TicketType ticketType) {
-        List<LottoNumber> converted = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new LottoTicket(converted, ticketType);
-    }
-
     public List<LottoNumber> lottoNumbers() {
         return this.lottoNumbers.value();
     }

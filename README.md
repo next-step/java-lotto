@@ -1,9 +1,8 @@
 # 로또
 
 ## Step4 리팩토링 todo (테스트 코드 빠진 곳 추가 )
-
+** 빠진 테스트 없을 경우 '해당 없음' 으로 표시함.
 ### Number
-
 - [X] BonusNumber : 해당 없음
 - [X] LottoNumber
 - [X] LottoNumbers
@@ -14,19 +13,19 @@
 
 - [X] LottoTicket : 해당 없음
 - [X] LottoTickets
-- [ ] Prize
-- [ ] TicketType
+- [X] Prize : 해당 없음
+- [X] TicketType : 해당 없음 (별도의 로직이 없어서 테스트 하지 않아도 될듯!)
 
 ### GameResult
 
-- [ ] Gain
-- [ ] GameResult
-- [ ] ProfitRate
+- [x] Gain: 해당 없음
+- [X] GameResult: 해당 없음
+- [X] ProfitRate: 해당 없음
 
 ### Game
 
-- [ ] LottoGame
-- [ ] Payments
+- [X] LottoGame
+- [X] Payments: 해당 없음
 
 ## Step4 to-do
 
