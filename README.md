@@ -12,8 +12,8 @@
 
 ### ticket
 
-- [ ] LottoTicket
-- [ ] LottoTickets
+- [X] LottoTicket : 해당 없음
+- [X] LottoTickets
 - [ ] Prize
 - [ ] TicketType
 

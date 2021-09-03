@@ -26,8 +26,16 @@ public class LottoTicket {
         this(lottoNumbers, TicketType.AUTO);
     }
 
+    public LottoTicket(TicketType ticketType, int... lottoNumbers) {
+        this(new LottoNumbers(lottoNumbers).value(), ticketType);
+    }
+
     public LottoTicket(List<LottoNumber> lottoNumbers, TicketType ticketType) {
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this(new LottoNumbers(lottoNumbers), ticketType);
+    }
+
+    public LottoTicket(LottoNumbers lottoNumbers, TicketType ticketType) {
+        this.lottoNumbers = lottoNumbers;
         this.ticketType = ticketType;
     }
 

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,5 +41,30 @@ class LottoTicketsTest {
         assertThatThrownBy(() -> new LottoTickets(0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("티켓 수는 양수입니다.");
+    }
+
+    @DisplayName("자동 티켓과 수동 티켓의 장수를 반환한다.")
+    @Test
+    void countAutoTicketAndManualTicket() {
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        LottoTicket manual = new LottoTicket(TicketType.AUTO, numbers);
+        LottoTicket auto = new LottoTicket(TicketType.MANUAL, numbers);
+        LottoTickets tickets = new LottoTickets(Arrays.asList(manual, auto));
+        assertThat(tickets.manualTicketCount()).isEqualTo(1);
+        assertThat(tickets.autoTicketCount()).isEqualTo(1);
+    }
+
+
+    private static Stream<Arguments> provideLottoTicketWithItsPrize() {
+        return Stream.of(
+                Arguments.of(new LottoTicket(1, 2, 3, 4, 5, 6)),
+                Arguments.of(new LottoTicket(1, 2, 3, 4, 5, 45), 45, Prize.SECOND),
+                Arguments.of(new LottoTicket(1, 2, 3, 4, 5, 7), 30, Prize.THIRD),
+                Arguments.of(new LottoTicket(1, 2, 3, 4, 8, 7), 30, Prize.FOURTH),
+                Arguments.of(new LottoTicket(1, 2, 3, 9, 8, 7), 30, Prize.FIFTH),
+                Arguments.of(new LottoTicket(1, 2, 10, 9, 8, 7), 30, Prize.LOSER),
+                Arguments.of(new LottoTicket(1, 11, 10, 9, 8, 7), 30, Prize.LOSER),
+                Arguments.of(new LottoTicket(12, 11, 10, 9, 8, 7), 30, Prize.LOSER)
+        );
     }
 }
