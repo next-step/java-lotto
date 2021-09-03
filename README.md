@@ -1,5 +1,33 @@
 # 로또
 
+## Step4 리팩토링 todo (테스트 코드 빠진 곳 추가 )
+
+### Number
+
+- [X] BonusNumber : 해당 없음
+- [X] LottoNumber
+- [ ] LottoNumbers
+- [ ] RandomNumbers
+- [ ] WinningNumbers
+
+### ticket
+
+- [ ] LottoTicket
+- [ ] LottoTickets
+- [ ] Prize
+- [ ] TicketType
+
+### GameResult
+
+- [ ] Gain
+- [ ] GameResult
+- [ ] ProfitRate
+
+### Game
+
+- [ ] LottoGame
+- [ ] Payments
+
 ## Step4 to-do
 
 - [X] InputView
