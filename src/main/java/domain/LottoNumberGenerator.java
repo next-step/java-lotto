@@ -19,7 +19,7 @@ public class LottoNumberGenerator {
 		}
 	}
 
-	public List<Integer> getLottoNumber() {
+	public Lotto getLottoNumber() {
 		List<Integer> lottoNumber = new ArrayList<>();
 		Collections.shuffle(lottoAllNumber);
 		for (int i = INIT_NUMBER ; i <= LOTTO_NUMBER_RANGE ; ++i) {
@@ -27,6 +27,6 @@ public class LottoNumberGenerator {
 		}
 		Collections.sort(lottoNumber);
 		System.out.println(lottoNumber);
-		return lottoNumber;
+		return new Lotto(lottoNumber);
 	}
 }

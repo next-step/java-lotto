@@ -12,7 +12,7 @@ public class LottoGame {
 		Input input = new Input();
 		Result result = new Result();
 		LottoNumberGenerator generator = new LottoNumberGenerator();
-		List<List<Integer>> lottoList = new ArrayList<>();
+		List<Lotto> lottoList = new ArrayList<>();
 		LottoCalculator calculator = new LottoCalculator();
 
 		Integer lottoCount = input.setAccount();

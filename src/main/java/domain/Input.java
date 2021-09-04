@@ -24,10 +24,10 @@ public class Input {
 		return getLottoCount();
 	}
 
-	public List<Integer> lottoWinningNumber() {
+	public Lotto lottoWinningNumber() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
-		return numbers.stream().map(Integer::parseInt).collect(Collectors.toList());
+		return new Lotto(numbers.stream().map(Integer::parseInt).collect(Collectors.toList()));
 	}
 
 	private Integer getLottoCount() {
