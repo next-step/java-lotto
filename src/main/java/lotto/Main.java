@@ -11,16 +11,22 @@ import lotto.view.ResultView;
 public class Main {
 
   public static void main(String[] args) {
-    Money purchaseMoney = InputView.inputMoney();
+    try {
+      Money purchaseMoney = InputView.inputMoney();
 
-    long manualLottoCnt = InputView.inputManualLottoCnt(purchaseMoney);
-    List<Lotto> manualLottoList = InputView.inputManualLottoList(manualLottoCnt);
+      long manualLottoCnt = InputView.inputManualLottoCnt(purchaseMoney);
+      List<Lotto> manualLottoList = InputView.inputManualLottoList(manualLottoCnt);
 
-    LottoGame lottoGame = new LottoGame(purchaseMoney, manualLottoList);
+      LottoGame lottoGame = new LottoGame(purchaseMoney, manualLottoList);
+      ResultView.printPurchasedLottos(lottoGame);
 
-    ResultView.printPurchasedLottos(lottoGame);
+      WinningResult winningResult = lottoGame.winningResult(InputView.winningInfo());
+      ResultView.printWinningResult(winningResult);
 
-    WinningResult winningResult = lottoGame.winningResult(InputView.winningInfo());
-    ResultView.printWinningResult(winningResult);
+    }catch (NumberFormatException e) {
+      System.err.println("숫자값으로 입력해주세요.");
+    }catch (Exception e){
+      System.err.println(e.getMessage());
+    }
   }
 }
