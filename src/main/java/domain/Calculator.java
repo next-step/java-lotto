@@ -10,11 +10,19 @@ public class Calculator {
 			return INIT_SUM;
 		}
 
-		String[] numbers = input.split(",|:");
+		String[] numbers = getNumbers(input);
 		otherCharacterStatus(numbers);
 		numbersMinusStatus(numbers);
 
 		return getResult(numbers);
+	}
+
+	private String[] getNumbers(String input) {
+		if (input.startsWith("//;\\n")) {
+			input = input.substring(6);
+			return input.split(";");
+		}
+		return input.split(",|:");
 	}
 
 	private void numbersMinusStatus(final String[] numbers) {
