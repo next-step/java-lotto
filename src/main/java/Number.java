@@ -1,6 +1,8 @@
 import java.util.Objects;
 
 public class Number {
+    private static final int ZERO = 0;
+
     private final int number;
 
     public Number(String number) {
@@ -9,7 +11,7 @@ public class Number {
 
     public Number(int number) {
         this.number = number;
-        if (this.number < 0) {
+        if (this.number < ZERO) {
             throw new NumberFormatException("음수를 사용할 수 없습니다.");
         }
     }
