@@ -66,4 +66,10 @@ public class LottoTest {
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자는 6개여야 입니다.");
     }
+
+    @Test
+    void name() {
+        new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
 }

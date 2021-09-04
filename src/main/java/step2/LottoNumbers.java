@@ -16,12 +16,6 @@ public class LottoNumbers {
         }
     }
 
-    private void validCreationTime(long startTime) {
-        if (System.currentTimeMillis() - startTime > LIMIT_TIME) {
-            throw new RuntimeException("로또 숫자 생성 시간이 초과되었습니다.");
-        }
-    }
-
     public LottoNumbers() {
         this(new LottoNumberAutoGenerationStrategy());
     }
@@ -34,6 +28,12 @@ public class LottoNumbers {
         }
 
         validLottoNumbers(this.lottoNumbers);
+    }
+
+    private void validCreationTime(long startTime) {
+        if (System.currentTimeMillis() - startTime > LIMIT_TIME) {
+            throw new RuntimeException("로또 숫자 생성 시간이 초과되었습니다.");
+        }
     }
 
     private <T> void validLottoNumbers(Collection<T> lottoNumbers) {

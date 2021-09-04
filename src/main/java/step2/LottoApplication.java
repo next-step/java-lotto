@@ -12,7 +12,7 @@ public class LottoApplication {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입금액을 입력해 주세요.");
-        final int inputPrice = scanner.nextInt();
+        final String inputPrice = scanner.nextLine();
 
         final int numberOfPurchases = getNumberOfPurchases(inputPrice);
         System.out.printf("%d개를 구매했습니다.\n", numberOfPurchases);
@@ -20,16 +20,16 @@ public class LottoApplication {
         System.out.println(issueLottos);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        final String inputLastWeekWinningNumbers = scanner.next();
+        final String inputLastWeekWinningNumbers = scanner.nextLine();
         final List<Integer> winningNumbers = convertStringToListOfNumber(inputLastWeekWinningNumbers);
         final WinningLotto winningLotto = new WinningLotto(winningNumbers);
         final Match match = winningLotto.match(issueLottos);
-        match.calculateProfitRate(inputPrice);
+        match.calculateProfitRate(Integer.valueOf(inputPrice));
         System.out.println(match);
     }
 
-    public static int getNumberOfPurchases(int inputValue) {
-        return inputValue / LOTTO_PRICE;
+    public static int getNumberOfPurchases(String inputValue) {
+        return Integer.valueOf(inputValue) / LOTTO_PRICE;
     }
 
     public static Lottos issueLottos(int numberOfPurchases) {
