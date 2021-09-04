@@ -13,10 +13,11 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public void setAccount() {
+	public Integer setAccount() {
 		System.out.println("구입 금액을 입력해주세요.");
 		this.account = scanner.nextInt();
 		System.out.println(getLottoCount() + "개를 구매했습니다.");
+		return getLottoCount();
 	}
 
 	private Integer getLottoCount() {
