@@ -4,6 +4,8 @@ public class Calculator {
 
 	private static final int INIT_SUM = 0;
 	private static final String NUMBER_REGEXP = "^[0-9]+$";
+	private static final String SEPARATOR = ",|:";
+	private static final Integer ZERO = 0;
 
 	public Integer calculate(final String input) {
 		if ("".equals(input) || input == null) {
@@ -22,7 +24,7 @@ public class Calculator {
 			input = input.substring(6);
 			return input.split(";");
 		}
-		return input.split(",|:");
+		return input.split(SEPARATOR);
 	}
 
 	private void numbersMinusStatus(final String[] numbers) {
@@ -32,7 +34,7 @@ public class Calculator {
 	}
 
 	private void checkNumberMinusStatus(final String number) {
-		if (Integer.parseInt(number) < 0) {
+		if (Integer.parseInt(number) < ZERO) {
 			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
 		}
 	}
