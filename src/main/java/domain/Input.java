@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Input {
 
-	private static Integer UNIT = 1000;
+	private static final Integer UNIT = 1000;
 
 	private Integer account;
 	private Scanner scanner;
