@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Calculator {
 
 	private static final int INIT_SUM = 0;
@@ -20,9 +23,10 @@ public class Calculator {
 	}
 
 	private String[] getNumbers(String input) {
-		if (input.startsWith("//;\\n")) {
-			input = input.substring(6);
-			return input.split(";");
+		Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+		if (matcher.find()) {
+			String customDelimiter = matcher.group(1);
+			return matcher.group(2).split(customDelimiter);
 		}
 		return input.split(SEPARATOR);
 	}
