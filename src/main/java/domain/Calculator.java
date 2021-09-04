@@ -16,8 +16,7 @@ public class Calculator {
 		}
 
 		String[] numbers = getNumbers(input);
-		otherCharacterStatus(numbers);
-		numbersMinusStatus(numbers);
+		checkNumbersStatus(numbers);
 
 		return getResult(numbers);
 	}
@@ -31,8 +30,9 @@ public class Calculator {
 		return input.split(SEPARATOR);
 	}
 
-	private void numbersMinusStatus(final String[] numbers) {
+	private void checkNumbersStatus(final String[] numbers) {
 		for (String number : numbers) {
+			checkOtherCharacterStatus(number);
 			checkNumberMinusStatus(number);
 		}
 	}
@@ -40,12 +40,6 @@ public class Calculator {
 	private void checkNumberMinusStatus(final String number) {
 		if (Integer.parseInt(number) < ZERO) {
 			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
-		}
-	}
-
-	private void otherCharacterStatus(final String[] numbers) {
-		for (String number : numbers) {
-			checkOtherCharacterStatus(number);
 		}
 	}
 
