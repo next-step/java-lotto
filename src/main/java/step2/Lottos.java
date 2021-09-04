@@ -15,4 +15,13 @@ public class Lottos {
     public int count() {
         return lottos.size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            sb.append(lotto).append("\n");
+        }
+        return sb.toString();
+    }
 }

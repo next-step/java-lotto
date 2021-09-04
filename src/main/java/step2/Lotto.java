@@ -2,10 +2,10 @@ package step2;
 
 public class Lotto {
 
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-//        this.lottoNumbers = new LottoNumbers();
+        this.lottoNumbers = new LottoNumbers();
     }
 
     @Override

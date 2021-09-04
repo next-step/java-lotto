@@ -13,6 +13,9 @@ public class LottoApplication {
 
         final int numberOfPurchases = getNumberOfPurchases(inputValue);
         System.out.printf("%d개를 구매했습니다.\n", numberOfPurchases);
+        final Lottos issueLottos = issueLottos(numberOfPurchases);
+        System.out.print(issueLottos);
+
     }
 
     public static int getNumberOfPurchases(int inputValue) {

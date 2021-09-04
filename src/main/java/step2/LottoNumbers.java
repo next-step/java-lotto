@@ -15,6 +15,10 @@ public class LottoNumbers {
         }
     }
 
+    public LottoNumbers() {
+        this(new LottoNumberAutoGenerationStrategy());
+    }
+
     public LottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() > MAXIMUM) {
             throw new RuntimeException("로또 숫자는 최대 6개 입니다.");

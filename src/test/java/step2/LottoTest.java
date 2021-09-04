@@ -10,11 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-//    @Test
-//    void createLottoNumber() {
-//        final Lotto lotto = new Lotto();
-//        System.out.println(lotto);
-//    }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
