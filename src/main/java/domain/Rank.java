@@ -16,18 +16,16 @@ public enum Rank {
 	}
 
 	public static Rank rank(int matchNumber) {
-		if(matchNumber == 6) {
-			return FIRST;
-		}
-		if(matchNumber == 5) {
-			return SECOND;
-		}
-		if(matchNumber == 4) {
-			return THIRD;
-		}
-		if(matchNumber == 3) {
-			return FOUR;
+		Rank[] ranks = values();
+		for(Rank rank : ranks) {
+			if(rank.matchNumber == matchNumber) {
+				return rank;
+			}
 		}
 		return NO;
+	}
+
+	private boolean match(int matchNumber) {
+		return this.matchNumber == matchNumber;
 	}
 }
