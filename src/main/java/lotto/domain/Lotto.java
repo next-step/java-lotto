@@ -27,7 +27,7 @@ public class Lotto {
   }
 
   public int matchNumberCnt(LottoNumbers winningLottoNumbers) {
-    return this.lottoNumbers.matchedNumberCnt(winningLottoNumbers);
+    return lottoNumbers.matchedNumberCnt(winningLottoNumbers);
   }
 
   public boolean contains(LottoNumber lottoNumber) {
@@ -35,6 +35,6 @@ public class Lotto {
   }
 
   public List<Integer> sortedNumbers() {
-    return this.lottoNumbers.sortedNumbers();
+    return lottoNumbers.sortedNumbers();
   }
 }

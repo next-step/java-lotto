@@ -40,11 +40,11 @@ public class LottoNumbers {
   }
 
   public boolean contains(LottoNumber lottoNumber) {
-    return this.lottoNumbers.contains(lottoNumber);
+    return lottoNumbers.contains(lottoNumber);
   }
 
   private void validateSize() {
-    if (this.lottoNumbers.size() != SIZE) {
+    if (lottoNumbers.size() != SIZE) {
       throw new InvalidLottoSizeException();
     }
   }

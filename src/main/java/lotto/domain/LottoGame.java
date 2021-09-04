@@ -16,16 +16,16 @@ public class LottoGame {
     validateMoney(money);
     long cnt = money.value() / Lotto.PRICE.value();
     for (long i = 0; i < cnt; i++) {
-      this.lottos.add(Lotto.issueByAuto());
+      lottos.add(Lotto.issueByAuto());
     }
   }
 
   public List<Lotto> lottos() {
-    return this.lottos;
+    return lottos;
   }
 
   public WinningResult winningResult(WinningInfo winningInfo) {
-    return new WinningResult(this.lottos, winningInfo);
+    return new WinningResult(lottos, winningInfo);
   }
 
   private void validateMoney(Money money) {

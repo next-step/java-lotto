@@ -24,7 +24,7 @@ public class Money implements Comparable<Money> {
 
   @Override
   public int compareTo(Money other) {
-    return Long.compare(this.value, other.value);
+    return Long.compare(value, other.value);
   }
 
   @Override
