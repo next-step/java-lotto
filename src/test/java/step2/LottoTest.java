@@ -40,4 +40,10 @@ public class LottoTest {
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자는 최대 6개 입니다.");
     }
+
+    @Test
+    void createLottoTest() {
+        final Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        System.out.println(lotto);
+    }
 }

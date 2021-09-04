@@ -34,15 +34,18 @@
 - LottoApplication
   - ~~지난 주 당첨 번호 입력~~
     - ~~in: 숫자 목록 / out: split 한 숫자~~ 
-- 당첨 객체 
-  - 생성자: split 한 숫자 목록
-    - LottoNumbers 수동 생성 
+- LottoNumbers
+  - Set 객체 변경
+    - 중복으로 인한 갯수 미달 체크 
+- 당첨 객체 > WinningLotto
+  - ~~생성자: split 한 숫자 목록~~
+    - ~~LottoNumbers 수동 생성~~ 
   - m: 당첨 통계 (in Lottos / out 통계 객체)
     - LottoNumbers.일치하는 숫자
       - 여기 결과값을 어떻게 3,4,5,6으로 나눌까 ?
-  - 통계 객체
-    - ... 
-    - out 수익 금액 
+- 통계 객체
+  - ... 
+  - out 수익 금액 
 - LottoApplication
   - 통계 객체 출력
   - 수익률 계산

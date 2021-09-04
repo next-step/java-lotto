@@ -1,13 +1,11 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
     private static final int MAXIMUM = 6;
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>(MAXIMUM);
+    private Set<LottoNumber> lottoNumbers = new HashSet<>(MAXIMUM);
 
     public LottoNumbers(LottoNumberGenerationStrategy strategy) {
         for (int i = 0; i< MAXIMUM; i++) {
@@ -27,6 +25,24 @@ public class LottoNumbers {
         for (int number : lottoNumbers) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
+    }
+
+    public int countNumberOfMatch(LottoNumbers lottoNumbers) {
+        Map<LottoNumber, Integer> result = new HashMap<>();
+        for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
+            if (lottoNumbers.isMatch(lottoNumber)) {
+                Integer getLottoNumber = result.getOrDefault(lottoNumber, 0);
+                result.put(lottoNumber, getLottoNumber + 1);
+            }
+        }
+        return result.size();
+    }
+
+    private boolean isMatch(LottoNumber lottoNumber) {
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
