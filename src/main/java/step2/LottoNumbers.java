@@ -3,13 +3,19 @@ package step2;
 import java.util.*;
 
 public class LottoNumbers {
-    private static final int MAXIMUM = 6;
+    private static final int FIXED_NUMBER = 6;
+    private static final int LIMIT_TIME = 3000;
 
-    private final Set<LottoNumber> lottoNumbers = new HashSet<>(MAXIMUM);
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>(FIXED_NUMBER);
 
     public LottoNumbers(LottoNumberGenerationStrategy strategy) {
-        for (int i = 0; i< MAXIMUM; i++) {
+        final long startTime = System.currentTimeMillis();
+        while (lottoNumbers.size() < FIXED_NUMBER) {
             lottoNumbers.add(new LottoNumber(strategy.generateNumber()));
+
+            if (System.currentTimeMillis() - startTime > LIMIT_TIME) { // todo indent
+                throw new RuntimeException("로또 숫자 생성 시간이 초과되었습니다.");
+            }
         }
     }
 
@@ -18,12 +24,16 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() > MAXIMUM) {
-            throw new RuntimeException("로또 숫자는 최대 6개 입니다.");
+        if (lottoNumbers.size() > FIXED_NUMBER || lottoNumbers.size() < FIXED_NUMBER) {
+            throw new RuntimeException("로또 숫자는 6개여야 입니다.");
         }
 
         for (int number : lottoNumbers) {
             this.lottoNumbers.add(new LottoNumber(number));
+        }
+
+        if (this.lottoNumbers.size() != FIXED_NUMBER) {
+            throw new RuntimeException("로또 숫자는 6개여야 입니다.");
         }
     }
 

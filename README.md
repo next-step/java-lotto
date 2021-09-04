@@ -28,15 +28,15 @@
       - ~~생성자: 디폴트 -> 자동 숫자 생성~~
         - ~~1~45 숫자 shuffle 로 생성~~
       - ~~생성자: 숫자 배열 -> 수동 생성~~
-      - ~~m: 일치하는 숫자 out: 일치하는 갯수?~~ 
+      - ~~m: 일치하는 숫자 out: 일치하는 갯수~~ 
       - ~~LottoNumber~~
         - ~~생성시 로또 숫자 조건 (exception)~~
 - LottoApplication
   - ~~지난 주 당첨 번호 입력~~
     - ~~in: 숫자 목록 / out: split 한 숫자~~ 
 - LottoNumbers
-  - Set 객체 변경
-    - 중복으로 인한 갯수 미달 체크 
+  - ~~Set 객체로 변경~~
+    - ~~중복으로 인한 갯수 미달 체크~~ 
 - 당첨 객체 > WinningLotto
   - ~~생성자: split 한 숫자 목록~~
     - ~~LottoNumbers 수동 생성~~ 
