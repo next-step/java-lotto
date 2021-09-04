@@ -16,11 +16,11 @@
 
 ### TODO
 - LottoApplication
-  - 구입 금액 입력
-  - 금액(1000원) 기준으로 split
-  - input value
+  - ~~구입 금액 입력~~
+  - ~~금액(1000원) 기준으로 split~~
+  - ~~input value~~
     - in : 금액 / out 갯수
-  - 개수 출력 
+  - ~~개수 출력~~ 
   - m: lotto 발행 (int 갯수 / out Lottos ?)
 - Lotto 객체
   - @toString `[lottoNumbers]`
