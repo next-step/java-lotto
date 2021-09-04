@@ -31,4 +31,14 @@ public enum MatchNumber {
         }
         throw new RuntimeException("MatchNumber에 해당하는 값을 찾을 수 없습니다.");
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(matchNumber)
+                .append("개 일치(")
+                .append(winnings)
+                .append("원)")
+                .toString();
+    }
 }

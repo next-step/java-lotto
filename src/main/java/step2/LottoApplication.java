@@ -24,10 +24,8 @@ public class LottoApplication {
         final List<Integer> winningNumbers = convertStringToListOfNumber(inputLastWeekWinningNumbers);
         final WinningLotto winningLotto = new WinningLotto(winningNumbers);
         final Match match = winningLotto.match(issueLottos);
-        match.finish(inputPrice);
+        match.calculateProfitRate(inputPrice);
         System.out.println(match);
-//        final double profitRate = match.getProfitRate(inputPrice);
-//        System.out.println(profitRate);
     }
 
     public static int getNumberOfPurchases(int inputValue) {

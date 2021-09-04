@@ -29,25 +29,21 @@ public class Match {
         return this.match.get(matchNumber);
     }
 
-    public void finish(int inputPrice) {
+    public void calculateProfitRate(int inputPrice) {
         this.profit.calculateProfitRate(inputPrice);
     }
-
-//    public double getProfitRate(int inputPrice) {
-//        return this.profit.calculateProfitRate(inputPrice);
-//    }
 
     @Override
     public String toString() {
         return new StringBuilder().append("당첨 통계\n")
                 .append("---------\n")
-                .append("3개 일치 (5000원)- ")
+                .append(MatchNumber.THREE).append("- ")
                 .append(this.getMatchCount(MatchNumber.THREE)).append("개\n")
-                .append("4개 일치 (50000원)- ")
+                .append(MatchNumber.FOUR).append("- ")
                 .append(this.getMatchCount(MatchNumber.FOUR)).append("개\n")
-                .append("5개 일치 (1500000원)- ")
+                .append(MatchNumber.FIVE).append("- ")
                 .append(this.getMatchCount(MatchNumber.FIVE)).append("개\n")
-                .append("6개 일치 (2000000000원)- ")
+                .append(MatchNumber.SIX).append("- ")
                 .append(this.getMatchCount(MatchNumber.SIX)).append("개\n")
                 .append(profit)
                 .toString();

@@ -20,10 +20,6 @@ public class Profit {
         this.profitRate = profitRate;
     }
 
-//    public double getProfit() {
-//        return this.profit;
-//    }
-
     public void add(MatchNumber matchNumber) {
         this.profit += matchNumber.winnings;
     }
