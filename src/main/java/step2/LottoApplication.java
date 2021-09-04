@@ -1,6 +1,5 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,17 +12,22 @@ public class LottoApplication {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("구입금액을 입력해 주세요.");
-        final int inputAmount = scanner.nextInt();
+        final int inputPrice = scanner.nextInt();
 
-        final int numberOfPurchases = getNumberOfPurchases(inputAmount);
+        final int numberOfPurchases = getNumberOfPurchases(inputPrice);
         System.out.printf("%d개를 구매했습니다.\n", numberOfPurchases);
         final Lottos issueLottos = issueLottos(numberOfPurchases);
-        System.out.print(issueLottos);
+        System.out.println(issueLottos);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         final String inputLastWeekWinningNumbers = scanner.next();
         final List<Integer> winningNumbers = convertStringToListOfNumber(inputLastWeekWinningNumbers);
-
+        final WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        final Match match = winningLotto.match(issueLottos);
+        match.finish(inputPrice);
+        System.out.println(match);
+//        final double profitRate = match.getProfitRate(inputPrice);
+//        System.out.println(profitRate);
     }
 
     public static int getNumberOfPurchases(int inputValue) {

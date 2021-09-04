@@ -29,7 +29,7 @@ public class WinTest {
         System.out.println(winningLottos);
         System.out.println(match);
 
-        assertThat(match.getSixMatchCount()).isEqualTo(winningLottos.count());
+        assertThat(match.getMatchCount(MatchNumber.SIX)).isEqualTo(winningLottos.count());
     }
 
     @Test
@@ -44,6 +44,24 @@ public class WinTest {
         System.out.println(winningLottos);
         System.out.println(match);
 
-        assertThat(match.getThreeMatchCount()).isEqualTo(winningLottos.count());
+        assertThat(match.getMatchCount(MatchNumber.THREE)).isEqualTo(winningLottos.count());
+    }
+
+    @Test
+    void matchAddSuccessTest() {
+        Match match = new Match();
+        match.add(3);
+
+        final int actual = match.getMatchCount(MatchNumber.THREE);
+        final int expected = 1;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void matchAddFailTest() {
+        Match match = new Match();
+        match.add(1);
+
+        System.out.println(match);
     }
 }
