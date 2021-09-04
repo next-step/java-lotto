@@ -2,37 +2,29 @@ package lotto;
 
 import lotto.controller.LottoMachine;
 import lotto.domain.Lotto;
-import lotto.domain.LottoCalculator;
-import lotto.domain.LottoMatcher;
-import lotto.domain.LottoRank;
-import lotto.view.InputVIew;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.view.InputView;
 import lotto.view.ResultView;
-import java.util.List;
-import java.util.Map;
 
 public class Client {
 	public static void main(String[] args) {
-		InputVIew inputVIew = new InputVIew();
+		InputView inputVIew = new InputView();
 		ResultView resultView = new ResultView();
 
-		try {
-			LottoMachine lottoMachine = new LottoMachine(inputVIew.purchasingPrice());
-			resultView.showBuyingCount(lottoMachine.getBuyingCount());
+		LottoMachine lottoMachine = new LottoMachine(inputVIew.purchasingPrice());
+		resultView.showBuyingCount(lottoMachine.getBuyingCount());
 
-			List<Lotto> lottos = lottoMachine.publish();
-			resultView.showPickNumbers(lottos);
+		LottoTicket lottoTicket = lottoMachine.publish();
+		resultView.showPickNumbers(lottoTicket);
 
-			LottoMatcher lottoMatcher = new LottoMatcher(lottos, inputVIew.lastWeekNumbers());
-			Map<LottoRank, Integer> ranks = lottoMatcher.matchWinning();
-			resultView.showStatistics(ranks);
+		Lotto lastWinningLotto = new Lotto(inputVIew.lastWeekNumbers());
+		LottoResult lottoResult = lottoTicket.matchWinning(lastWinningLotto);
+		resultView.showStatistics(lottoResult);
 
-			LottoCalculator lottoCalculator = new LottoCalculator();
-			double rateOfReturn = lottoCalculator.requestRateOfReturn(ranks, lottoMachine.getBuyingCount());
-			resultView.showRateOfReturns(rateOfReturn);
+		double rateOfReturn = lottoResult.requestRateOfReturn(lottoMachine.getBuyingCount());
+		resultView.showRateOfReturns(rateOfReturn);
 
-			inputVIew.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		inputVIew.close();
 	}
 }

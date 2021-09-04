@@ -1,27 +1,34 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateNumberException;
 import lotto.exception.NumberCountException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 	public static final int PICK_COUNT = 6;
 	public static final int PRICE = 1000;
+	public static final String SEPARATOR = ",";
+
 	private List<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
+		checkDistinctNumber(numbers);
 		checkNumberCount(numbers);
 		this.numbers = numbers;
 	}
 
 	public Lotto(String number) {
-		String[] numbers = number.split(",");
+		String[] numbers = number.split(SEPARATOR);
 		List<LottoNumber> lastWeekNumber = Arrays.stream(numbers)
 				.map(Integer::parseInt)
 				.map(LottoNumber::new)
 				.collect(Collectors.toList());
 
+		checkDistinctNumber(lastWeekNumber);
 		checkNumberCount(lastWeekNumber);
 		this.numbers = lastWeekNumber;
 	}
@@ -32,6 +39,10 @@ public class Lotto {
 			matchCount = compareMatchCount(winningNumber, matchCount);
 		}
 		return matchCount;
+	}
+
+	public String print() {
+		return numbers.toString();
 	}
 
 	private int compareMatchCount(LottoNumber winningNumber, int matchCount) {
@@ -47,8 +58,10 @@ public class Lotto {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return numbers.toString();
+	private void checkDistinctNumber(List<LottoNumber> lastWeekNumber) {
+		Set<LottoNumber> number = new HashSet<>(lastWeekNumber);
+		if(number.size() != lastWeekNumber.size()) {
+			throw new DuplicateNumberException();
+		}
 	}
 }

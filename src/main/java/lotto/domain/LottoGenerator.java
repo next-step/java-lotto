@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
     private static List<LottoNumber> numbers = generateNumber();
@@ -34,6 +35,10 @@ public class LottoGenerator {
         }
         Collections.sort(lottoNumbers);
 
-        return new Lotto(lottoNumbers);
+        return numbers.stream()
+                .limit(Lotto.PICK_COUNT)
+                .sorted()
+                .collect(Collectors.collectingAndThen(Collectors.toList(),Lotto::new));
+
     }
 }

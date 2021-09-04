@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LottoCalculatorTest {
+public class LottoResultTest {
     @DisplayName("나의 로또번호와 지난주 당첨번호를 통해 수익률을 계산할 수 있다.")
     @Test
     void calculate() {
@@ -27,11 +26,12 @@ public class LottoCalculatorTest {
 
         lottos.add(new Lotto(numbers));
 
-        LottoMatcher lottoMatcher = new LottoMatcher(lottos, lastWeekNumbers);
-        Map<LottoRank, Integer> ranks = lottoMatcher.matchWinning();
+        LottoTicket lottoTicket = new LottoTicket(lottos);
+        Lotto lotto = new Lotto(lastWeekNumbers);
 
-        LottoCalculator lottoCalculator = new LottoCalculator();
-        double rateOfReturn = lottoCalculator.requestRateOfReturn(ranks, buyingCount);
+        LottoResult lottoResult = lottoTicket.matchWinning(lotto);
+
+        double rateOfReturn = lottoResult.requestRateOfReturn(buyingCount);
 
         assertEquals(5.0, rateOfReturn);
     }
