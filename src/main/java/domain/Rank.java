@@ -25,6 +25,10 @@ public enum Rank {
 		return NO;
 	}
 
+	public Integer getAmount() {
+		return amount;
+	}
+
 	private boolean match(int matchNumber) {
 		return this.matchNumber == matchNumber;
 	}

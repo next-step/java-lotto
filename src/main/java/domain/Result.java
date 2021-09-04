@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.List;
-
 public class Result {
 
 	private static final Integer THREE = 3;
@@ -15,7 +13,12 @@ public class Result {
 		System.out.println("4개 일치 (50000원)-" + container[FOUR]);
 		System.out.println("5개 일치 (1500000원)-" + container[FIVE]);
 		System.out.println("6개 일치 (2000000000원)-" + container[SIX]);
-		System.out.println("총 수익률은 " + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+
+		int Sum = Rank.rank(THREE).getAmount() * container[THREE]
+						+ Rank.rank(FOUR).getAmount() * container[FOUR]
+						+ Rank.rank(FIVE).getAmount() * container[FIVE];
+
+		System.out.println("총 수익률은 " + Sum + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 	}
 
 	private void firstComment() {
