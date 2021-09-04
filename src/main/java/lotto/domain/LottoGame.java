@@ -10,16 +10,6 @@ public class LottoGame {
 
   private final List<Lotto> lottos = new ArrayList<>();
 
-  public LottoGame(long money) { // TODO :remove
-    this(new Money(money));
-  }
-
-  public LottoGame(Money money) { // TODO :remove
-    validateMoney(money);
-    long cnt = money.value() / Lotto.PRICE.value();
-    issueLottoByAuto(cnt);
-  }
-
   public LottoGame(long money, List<int[]> manualLottoList) {
     this(
         new Money(money),
