@@ -1,6 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Input {
 
@@ -18,6 +22,12 @@ public class Input {
 		this.account = scanner.nextInt();
 		System.out.println(getLottoCount() + "개를 구매했습니다.");
 		return getLottoCount();
+	}
+
+	public List<Integer> lottoWinningNumber() {
+		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
+		return numbers.stream().map(Integer::parseInt).collect(Collectors.toList());
 	}
 
 	private Integer getLottoCount() {
