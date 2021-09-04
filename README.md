@@ -19,17 +19,18 @@
   - ~~구입 금액 입력~~
   - ~~금액(1000원) 기준으로 split~~
   - ~~input value~~
-    - in : 금액 / out 갯수
+    - ~~in : 금액 / out 갯수~~
   - ~~개수 출력~~ 
   - ~~m: lotto 발행 (int 갯수 / out Lottos ?)~~
 - Lotto 객체
   - @toString `[lottoNumbers]`
     - LottoNumbers
-      - 생성자: 디폴트 -> 자동 숫자 생성
-      - 생성자: 숫자 배열 -> 수동 생성
+      - ~~생성자: 디폴트 -> 자동 숫자 생성~~
+        - ~~1~45 숫자 shuffle로 생성~~
+      - ~~생성자: 숫자 배열 -> 수동 생성~~
       - m: 일치하는 숫자 out: 일치하는 갯수? 
       - ~~LottoNumber~~
-        - 생성시 로또 숫자 조건 (exception)
+        - ~~생성시 로또 숫자 조건 (exception)~~
 - LottoApplication
   - 지난 주 당첨 번호 입력
     - in: 숫자 목록 / out: split한 숫자 

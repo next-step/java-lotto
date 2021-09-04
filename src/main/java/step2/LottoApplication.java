@@ -18,4 +18,8 @@ public class LottoApplication {
     public static int getNumberOfPurchases(int inputValue) {
         return inputValue / LOTTO_PRICE;
     }
+
+    public static Lottos issueLottos(int numberOfPurchases) {
+        return new Lottos(numberOfPurchases);
+    }
 }

@@ -12,4 +12,13 @@ public class LottoApplicationTest {
         final int expected = 14;
         assertThat(count).isEqualTo(expected);
     }
+
+    @Test
+    void issueLottos() {
+        final int numberOfPurchases = 14;
+        final Lottos lottos = LottoApplication.issueLottos(numberOfPurchases);
+        final int actual = lottos.count();
+        final int expected = numberOfPurchases;
+        assertThat(actual).isEqualTo(expected);
+    }
 }
