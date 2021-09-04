@@ -18,7 +18,7 @@ public class WinTest {
     }
 
     @Test
-    void test() {
+    void matchSuccessTest1() {
         final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final Lottos winningLottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers),
                 new Lotto(lottoNumbers),
@@ -29,6 +29,21 @@ public class WinTest {
         System.out.println(winningLottos);
         System.out.println(match);
 
-        assertThat(match.sixMatch()).isEqualTo(winningLottos.count());
+        assertThat(match.getSixMatchCount()).isEqualTo(winningLottos.count());
+    }
+
+    @Test
+    void matchSuccessTest2() {
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
+        final Lottos winningLottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers),
+                new Lotto(lottoNumbers),
+                new Lotto(lottoNumbers)));
+
+        final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Match match = standardLotto.match(winningLottos);
+        System.out.println(winningLottos);
+        System.out.println(match);
+
+        assertThat(match.getThreeMatchCount()).isEqualTo(winningLottos.count());
     }
 }

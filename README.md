@@ -28,7 +28,7 @@
       - ~~생성자: 디폴트 -> 자동 숫자 생성~~
         - ~~1~45 숫자 shuffle 로 생성~~
       - ~~생성자: 숫자 배열 -> 수동 생성~~
-      - m: 일치하는 숫자 out: 일치하는 갯수? 
+      - ~~m: 일치하는 숫자 out: 일치하는 갯수?~~ 
       - ~~LottoNumber~~
         - ~~생성시 로또 숫자 조건 (exception)~~
 - LottoApplication
@@ -40,9 +40,7 @@
 - 당첨 객체 > WinningLotto
   - ~~생성자: split 한 숫자 목록~~
     - ~~LottoNumbers 수동 생성~~ 
-  - m: 당첨 통계 (in Lottos / out 통계 객체)
-    - LottoNumbers.일치하는 숫자
-      - 여기 결과값을 어떻게 3,4,5,6으로 나눌까 ?
+  - ~~m: 당첨 통계 (in Lottos / out 통계 객체)~~
 - 통계 객체
   - ... 
   - out 수익 금액 

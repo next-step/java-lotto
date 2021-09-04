@@ -5,7 +5,7 @@ import java.util.*;
 public class LottoNumbers {
     private static final int MAXIMUM = 6;
 
-    private Set<LottoNumber> lottoNumbers = new HashSet<>(MAXIMUM);
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>(MAXIMUM);
 
     public LottoNumbers(LottoNumberGenerationStrategy strategy) {
         for (int i = 0; i< MAXIMUM; i++) {
@@ -28,21 +28,15 @@ public class LottoNumbers {
     }
 
     public int countNumberOfMatch(LottoNumbers lottoNumbers) {
-        Map<LottoNumber, Integer> result = new HashMap<>();
+        int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
-            if (lottoNumbers.isMatch(lottoNumber)) {
-                Integer getLottoNumber = result.getOrDefault(lottoNumber, 0);
-                result.put(lottoNumber, getLottoNumber + 1);
-            }
+            count += getIfContains(lottoNumber);
         }
-        return result.size();
+        return count;
     }
 
-    private boolean isMatch(LottoNumber lottoNumber) {
-        if (this.lottoNumbers.contains(lottoNumber)) {
-            return true;
-        }
-        return false;
+    private int getIfContains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
 
     @Override
