@@ -18,18 +18,18 @@ public enum Rank {
 	public static Rank rank(int matchNumber) {
 		Rank[] ranks = values();
 		for(Rank rank : ranks) {
-			if(rank.matchNumber == matchNumber) {
+			if(match(rank, matchNumber)) {
 				return rank;
 			}
 		}
 		return NO;
 	}
 
-	public Integer getAmount() {
-		return amount;
+	public static boolean match(Rank rank, int matchNumber) {
+		return rank.matchNumber == matchNumber;
 	}
 
-	private boolean match(int matchNumber) {
-		return this.matchNumber == matchNumber;
+	public Integer getAmount() {
+		return amount;
 	}
 }
