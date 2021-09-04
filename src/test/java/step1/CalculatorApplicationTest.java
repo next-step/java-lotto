@@ -1,4 +1,7 @@
+package step1;
+
 import org.junit.jupiter.api.Test;
+import step1.CalculatorApplication;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
