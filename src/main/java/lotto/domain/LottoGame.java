@@ -8,6 +8,7 @@ import lotto.exception.InvalidLottoPurchasePriceException;
 
 public class LottoGame {
 
+  private final long manualLottoCnt;
   private final List<Lotto> lottos = new ArrayList<>();
 
   public LottoGame(long money, List<int[]> manualLottoList) {
@@ -18,6 +19,7 @@ public class LottoGame {
   }
 
   public LottoGame(Money money, List<Lotto> manualLottoList) {
+    manualLottoCnt = manualLottoList.size();
     validateMoney(money);
     long autoLottoCnt = LottoGame.purchaseCnt(money) - manualLottoList.size();
     validateAutoLottoCnt(autoLottoCnt);
@@ -27,6 +29,14 @@ public class LottoGame {
 
   public static long purchaseCnt(Money money) {
     return money.value() / Lotto.PRICE.value();
+  }
+
+  public long manualLottoCnt() {
+    return manualLottoCnt;
+  }
+
+  public long autoLottoCnt() {
+    return lottos.size() - manualLottoCnt;
   }
 
   public List<Lotto> lottos() {

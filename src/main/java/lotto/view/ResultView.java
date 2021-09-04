@@ -5,17 +5,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoPrize;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
-  public static void printPurchasedLottos(List<Lotto> lottos) {
-    System.out.println("\n" + lottos.size() + "개를 구매했습니다.");
-    for (Lotto lotto : lottos) {
-      printLotto(lotto);
-    }
+  public static void printPurchasedLottos(LottoGame lottoGame) {
+    System.out.println(
+        "\n수동으로 " + lottoGame.manualLottoCnt() + "장, "
+            + "자동으로 " + lottoGame.autoLottoCnt() + " 개를 구매했습니다."
+    );
+    lottoGame.lottos().forEach(ResultView::printLotto);
     System.out.println();
   }
 

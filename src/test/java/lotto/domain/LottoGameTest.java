@@ -74,4 +74,23 @@ class LottoGameTest {
     //then
     assertThat(LottoGame.purchaseCnt(purchaseMoney)).isEqualTo(purchaseMoney.value() / 1000);
   }
+
+  @Test
+  @DisplayName("수동, 자동으로 생성된 로또 개수 반환 테스트")
+  void manualLottoCntAndAutoLottoCntTest() {
+    //given
+    int money = 14000;
+    List<int[]> manualLottoList = Arrays.asList(
+        new int[]{8, 21, 23, 41, 42, 43},
+        new int[]{3, 5, 11, 16, 32, 38},
+        new int[]{7, 11, 16, 35, 36, 44}
+    );
+
+    //when
+    LottoGame lottoGame = new LottoGame(money, manualLottoList);
+
+    //then
+    assertThat(lottoGame.manualLottoCnt()).isEqualTo(3);
+    assertThat(lottoGame.autoLottoCnt()).isEqualTo(11);
+  }
 }
