@@ -19,8 +19,7 @@ public class LottoGame {
 		for (int i = INIT_NUMBER ; i < lottoCount ; ++i) {
 			lottoList.add(generator.getLottoNumber());
 		}
-		
-		input.lottoWinningNumber();
-		result.viewResult();
+
+		result.viewResult(lottoList, input.lottoWinningNumber());
 	}
 }
