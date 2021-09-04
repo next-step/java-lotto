@@ -82,4 +82,14 @@ class LottoGameTest {
       new LottoGame(money, manualLottoList);
     });
   }
+
+  @ParameterizedTest(name = "구매가능한 로또개수 테스트 : {0}원 입력")
+  @ValueSource(ints = {1000, 2500, 14000, 20000})
+  void name(int money) {
+    //when
+    Money purchaseMoney = new Money(money);
+
+    //then
+    assertThat(LottoGame.purchaseCnt(purchaseMoney)).isEqualTo(purchaseMoney.value() / 1000);
+  }
 }

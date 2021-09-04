@@ -29,10 +29,14 @@ public class LottoGame {
 
   public LottoGame(Money money, List<Lotto> manualLottoList) {
     validateMoney(money);
-    long autoLottoCnt = calculateAutoLottoCnt(money, manualLottoList.size());
+    long autoLottoCnt = LottoGame.purchaseCnt(money) - manualLottoList.size();
     validateAutoLottoCnt(autoLottoCnt);
     lottos.addAll(manualLottoList);
     issueLottoByAuto(autoLottoCnt);
+  }
+
+  public static long purchaseCnt(Money money) {
+    return money.value() / Lotto.PRICE.value();
   }
 
   public List<Lotto> lottos() {
@@ -41,10 +45,6 @@ public class LottoGame {
 
   public WinningResult winningResult(WinningInfo winningInfo) {
     return new WinningResult(lottos, winningInfo);
-  }
-
-  private long calculateAutoLottoCnt(Money money, long manualLottoCnt) {
-    return money.value() / Lotto.PRICE.value() - manualLottoCnt;
   }
 
   private void issueLottoByAuto(long autoLottoCnt) {
