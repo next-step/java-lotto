@@ -2,6 +2,9 @@ package step2;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoApplicationTest {
@@ -19,6 +22,14 @@ public class LottoApplicationTest {
         final Lottos lottos = LottoApplication.issueLottos(numberOfPurchases);
         final int actual = lottos.count();
         final int expected = numberOfPurchases;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void convertTest() {
+        final String inputString = "1, 2, 3, 4, 5, 6";
+        final List<Integer> actual = LottoApplication.convertStringToListOfNumber(inputString);
+        final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(actual).isEqualTo(expected);
     }
 }

@@ -32,8 +32,8 @@
       - ~~LottoNumber~~
         - ~~생성시 로또 숫자 조건 (exception)~~
 - LottoApplication
-  - 지난 주 당첨 번호 입력
-    - in: 숫자 목록 / out: split 한 숫자 
+  - ~~지난 주 당첨 번호 입력~~
+    - ~~in: 숫자 목록 / out: split 한 숫자~~ 
 - 당첨 객체 
   - 생성자: split 한 숫자 목록
     - LottoNumbers 수동 생성 
