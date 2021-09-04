@@ -13,6 +13,7 @@ public class LottoGame {
 		Result result = new Result();
 		LottoNumberGenerator generator = new LottoNumberGenerator();
 		List<List<Integer>> lottoList = new ArrayList<>();
+		LottoCalculator calculator = new LottoCalculator();
 
 		Integer lottoCount = input.setAccount();
 
@@ -20,6 +21,6 @@ public class LottoGame {
 			lottoList.add(generator.getLottoNumber());
 		}
 
-		result.viewResult(lottoList, input.lottoWinningNumber());
+		result.viewResult(calculator.getResult(lottoList, input.lottoWinningNumber()));
 	}
 }
