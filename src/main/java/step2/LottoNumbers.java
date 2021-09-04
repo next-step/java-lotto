@@ -12,10 +12,13 @@ public class LottoNumbers {
         final long startTime = System.currentTimeMillis();
         while (lottoNumbers.size() < FIXED_NUMBER) {
             lottoNumbers.add(new LottoNumber(strategy.generateNumber()));
+            validCreationTime(startTime);
+        }
+    }
 
-            if (System.currentTimeMillis() - startTime > LIMIT_TIME) { // todo indent
-                throw new RuntimeException("로또 숫자 생성 시간이 초과되었습니다.");
-            }
+    private void validCreationTime(long startTime) {
+        if (System.currentTimeMillis() - startTime > LIMIT_TIME) {
+            throw new RuntimeException("로또 숫자 생성 시간이 초과되었습니다.");
         }
     }
 
@@ -24,15 +27,17 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() > FIXED_NUMBER || lottoNumbers.size() < FIXED_NUMBER) {
-            throw new RuntimeException("로또 숫자는 6개여야 입니다.");
-        }
+        validLottoNumbers(lottoNumbers);
 
         for (int number : lottoNumbers) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
 
-        if (this.lottoNumbers.size() != FIXED_NUMBER) {
+        validLottoNumbers(this.lottoNumbers);
+    }
+
+    private <T> void validLottoNumbers(Collection<T> lottoNumbers) {
+        if (lottoNumbers.size() != FIXED_NUMBER) {
             throw new RuntimeException("로또 숫자는 6개여야 입니다.");
         }
     }
