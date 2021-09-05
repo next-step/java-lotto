@@ -13,15 +13,18 @@ public class ProfitRate {
         this(1.0);
     }
 
-    public ProfitRate calculateProfitRate(long profit, Amount amount) {
-        this.profitRate = profit / (double) amount.price();
-        return this;
+    public ProfitRate calculateProfitRate(Profit profit, Amount amount) {
+        return profit.calculateProfitRate(amount);
     }
 
 
     @Override
     public String toString() {
-        return String.valueOf(Math.floor(this.profitRate * 100) / 100.0);
+        return new StringBuilder()
+                .append("총 수익률은 ")
+                .append(Math.floor(this.profitRate * 100) / 100.0)
+                .append("입니다.")
+                .toString();
     }
 
     @Override

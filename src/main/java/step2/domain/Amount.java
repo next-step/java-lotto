@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Objects;
+
 public class Amount {
     private static final int LOTTO_PRICE = 1000;
 
@@ -19,5 +21,18 @@ public class Amount {
 
     public Amount add() {
         return new Amount(this.amount + 1);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Amount)) return false;
+        Amount amount1 = (Amount) o;
+        return amount == amount1.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }

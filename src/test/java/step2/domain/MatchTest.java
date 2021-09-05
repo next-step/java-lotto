@@ -13,8 +13,10 @@ class MatchTest {
     void addTest() {
         final Match match = new Match();
         match.add(3);
+        System.out.println(match);
 
         final Match expected = MatchTestUtil.createTestMatch(3, 1);
+        System.out.println(expected);
         assertThat(match).isEqualTo(expected);
     }
 
@@ -28,5 +30,14 @@ class MatchTest {
         final Match expected = MatchTestUtil.createTestMatch(4, 2);
         System.out.println(expected);
         assertThat(match).isEqualTo(expected);
+    }
+
+    @Test
+    void name() {
+        long profitValue = 100000;
+        int amount = 2;
+        final double result = profitValue / (double) (amount * 1000);
+        System.out.println(result);
+//        System.out.println(Math.floor(result);
     }
 }
