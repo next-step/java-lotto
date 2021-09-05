@@ -18,7 +18,7 @@ class LottoGameTest {
 
     @DisplayName("지불액이")
     @ParameterizedTest(name = "{0}원일 경우: {1}장의 로또 티켓을 만든다.")
-    @CsvSource(value = {"14000:14", "15000:15"}, delimiter = ':')
+    @CsvSource(value = {"14000,14", "15000,15"})
     void numberOfTicketIsDecidedByPayments(int payments, int totalNumberOfTickets) {
         LottoGame lottoGame = new LottoGame(payments);
         assertThat(lottoGame.lottoTickets().size()).isEqualTo(totalNumberOfTickets);

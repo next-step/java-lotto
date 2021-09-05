@@ -29,7 +29,7 @@ class PaymentsTest {
 
     @DisplayName("지불액이")
     @ParameterizedTest(name = "{0}원일 경우: {1}장의 로또 티켓을 만든다.")
-    @CsvSource(value = {"14000:14", "15000:15"}, delimiter = ':')
+    @CsvSource(value = {"14000,14", "15000,15"})
     void create(int amount, int ticketCount) {
         assertThat(new Payments(amount).ticketCount()).isEqualTo(ticketCount);
     }
