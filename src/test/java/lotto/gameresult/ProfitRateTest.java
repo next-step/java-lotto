@@ -13,7 +13,7 @@ class ProfitRateTest {
 
     @DisplayName("상금")
     @ParameterizedTest(name = "{0}원, 티켓 구매금 {1}원 일 때: {2}")
-    @CsvSource(value = {"2000:1000:2.00", "2000:2000:1.00", "2000:4000:0.50"}, delimiter = ':')
+    @CsvSource(value = {"2000,1000,2.00", "2000,2000,1.00", "2000,4000,0.50"})
     void create(int prizeMoney, int payments, double profitRate) {
         assertThat(new ProfitRate(prizeMoney, new Payments(payments)).value()).isEqualTo(profitRate);
     }

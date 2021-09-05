@@ -45,5 +45,4 @@ class LottoTicketTest {
                 Arguments.of(new LottoTicket(12, 11, 10, 9, 8, 7), 30, Prize.LOSER)
         );
     }
-
 }

@@ -14,6 +14,7 @@ public class LottoTicket {
 
     public static final int PRICE = 1000;
     private final LottoNumbers lottoNumbers;
+    private final TicketType ticketType;
 
     public LottoTicket(int... lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
@@ -22,7 +23,28 @@ public class LottoTicket {
     }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this(lottoNumbers, TicketType.AUTO);
+    }
+
+    public LottoTicket(TicketType ticketType, int... lottoNumbers) {
+        this(new LottoNumbers(lottoNumbers).value(), ticketType);
+    }
+
+    public LottoTicket(List<LottoNumber> lottoNumbers, TicketType ticketType) {
+        this(new LottoNumbers(lottoNumbers), ticketType);
+    }
+
+    public LottoTicket(LottoNumbers lottoNumbers, TicketType ticketType) {
+        this.lottoNumbers = lottoNumbers;
+        this.ticketType = ticketType;
+    }
+
+    public static LottoTicket valueOf(List<Integer> lottoNumbers) {
+        return new LottoTicket(
+                lottoNumbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList())
+        );
     }
 
     public List<LottoNumber> lottoNumbers() {
@@ -33,6 +55,14 @@ public class LottoTicket {
         int winningNumberCounts = lottoNumbers.matchOf(winningNumbers);
         int bonusNumberCounts = lottoNumbers.matchOf(bonusNumber);
         return Prize.prize(winningNumberCounts, bonusNumberCounts);
+    }
+
+    public boolean isAuto() {
+        return ticketType.equals(TicketType.AUTO);
+    }
+
+    public boolean isManual() {
+        return ticketType.equals(TicketType.MANUAL);
     }
 
     @Override

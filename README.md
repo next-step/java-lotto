@@ -1,5 +1,48 @@
 # 로또
 
+## Step4 리팩토링 todo (테스트 코드 빠진 곳 추가 )
+** 빠진 테스트 없을 경우 '해당 없음' 으로 표시함.
+### Number
+- [X] BonusNumber : 해당 없음
+- [X] LottoNumber
+- [X] LottoNumbers
+- [X] RandomNumbers : 해당 없음
+- [X] WinningNumbers
+
+### ticket
+
+- [X] LottoTicket : 해당 없음
+- [X] LottoTickets
+- [X] Prize : 해당 없음
+- [X] TicketType : 해당 없음 (별도의 로직이 없어서 테스트 하지 않아도 될듯!)
+
+### GameResult
+
+- [x] Gain: 해당 없음
+- [X] GameResult: 해당 없음
+- [X] ProfitRate: 해당 없음
+
+### Game
+
+- [X] LottoGame
+- [X] Payments: 해당 없음
+
+## Step4 to-do
+
+- [X] InputView
+  - [X] 수동으로 구매할 로또 수를 입력해주세요.
+  - [X] 수동으로 구매할 번호를 입력해 주세요. (로또 수만큼)
+- [X] ResultView
+  - [X] 수동으로 x장, 자동으로 y장 구입하셨습니다.
+- [X] GameResult
+  - [X] 수동 입력 추가
+- [X] Helper 클래스 추가
+  - [X] int[][]를 List<List<Intger>>로 변경
+- [X] LottoTicket
+  - [X] 타입 설정 (MANUAL, AUTO)
+    - [X] 생성자에서 타입 설정하지 않을 경우 기본 값은 AUTO
+- [X] LottoTickets
+  - [x] 자동, 수동 카운트
 ## Step3 To-Do
 
 - [X] InputView

@@ -1,9 +1,12 @@
 package lotto.ui;
 
+import lotto.ticket.LottoTicket;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final String SPACE_REGEX = "\\s+";
@@ -15,20 +18,37 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int askUserToPay() {
+    public int askToPay() {
         System.out.println("구입금액을 입력해주세요.");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<Integer> askUserToEnterWinningNumbersOfLastWeek() {
+    public int askManualTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public List<LottoTicket> askLottoNumbers(int ticketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return IntStream.range(0, ticketCount)
+                .mapToObj(i -> LottoTicket.valueOf(lottoNumbers()))
+                .collect(Collectors.toList());
+
+    }
+
+    public List<Integer> askWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return lottoNumbers();
+    }
+
+    private List<Integer> lottoNumbers() {
         String[] userInputs = scanner.nextLine().replaceAll(SPACE_REGEX, EMPTY).split(COMMA_REGEX);
         return Arrays.stream(userInputs)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
 
-    public int askUserBonusNumber() {
+    public int askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(scanner.nextLine());
     }

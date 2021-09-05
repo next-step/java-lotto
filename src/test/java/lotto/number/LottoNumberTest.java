@@ -1,9 +1,11 @@
 package lotto.number;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -26,5 +28,11 @@ class LottoNumberTest {
     @ValueSource(ints = {MIN, MAX})
     void lottoNumberIsFrom1to45(int number) {
         assertDoesNotThrow(() -> new LottoNumber(number));
+    }
+
+    @DisplayName("비교하는 수보다 작을 경우 음수 리턴")
+    @Test
+    void returnNegative() {
+        assertThat(new LottoNumber(1).compareTo(new LottoNumber(2)) < 0).isTrue();
     }
 }

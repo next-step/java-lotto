@@ -4,6 +4,7 @@ import lotto.game.LottoGame;
 import lotto.gameresult.GameResult;
 import lotto.number.BonusNumber;
 import lotto.number.WinningNumbers;
+import lotto.ticket.LottoTicket;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -15,16 +16,20 @@ public class LottoGameMain {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        final int price = inputView.askUserToPay();
-        LottoGame lottoGame = new LottoGame(price);
+        final int price = inputView.askToPay();
 
-        resultView.showTicketsCounts(lottoGame);
-        resultView.showEachTicketsLottoNumbers(lottoGame);
+        final int manualTicketCount = inputView.askManualTicketCount();
+        final List<LottoTicket> manualTickets = inputView.askLottoNumbers(manualTicketCount);
 
-        List<Integer> winningNumbersOfLastWeek = inputView.askUserToEnterWinningNumbersOfLastWeek();
-        BonusNumber bonusNumber = new BonusNumber(inputView.askUserBonusNumber());
+        LottoGame lottoGame = new LottoGame(price, manualTickets);
+
+        resultView.showTicketCount(lottoGame.manualTicketCount(), lottoGame.autoTicketCount());
+        resultView.showTickets(lottoGame.lottoTickets());
+
+        List<Integer> winningNumbersOfLastWeek = inputView.askWinningNumbers();
+        BonusNumber bonusNumber = new BonusNumber(inputView.askBonusNumber());
 
         GameResult gameResult = new GameResult(lottoGame, WinningNumbers.valueOf(winningNumbersOfLastWeek), bonusNumber);
-        resultView.showWinningRateReport(gameResult);
+        resultView.showWinningRate(gameResult);
     }
 }
