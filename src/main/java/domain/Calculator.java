@@ -7,6 +7,7 @@ public class Calculator {
 
 	private static final int INIT_SUM = 0;
 	private static final String NUMBER_REGEXP = "^[0-9]+$";
+	private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
 	private static final String SEPARATOR = ",|:";
 	private static final Integer ZERO = 0;
 
@@ -39,13 +40,13 @@ public class Calculator {
 
 	private void checkNumberMinusStatus(final String number) {
 		if (Integer.parseInt(number) < ZERO) {
-			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
+			throw new RuntimeException("0보다 작은 값을 사용할 수 없습니다.");
 		}
 	}
 
 	private void checkOtherCharacterStatus(final String number) {
 		if (!number.matches(NUMBER_REGEXP)) {
-			throw new RuntimeException("음수가 들어가있거나 숫자이외의 문자가 있습니다.");
+			throw new RuntimeException("숫자이외의 문자를 사용할 수 없습니다.");
 		}
 	}
 
