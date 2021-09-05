@@ -15,5 +15,13 @@ public class LottoMain {
 
         String numbers = InputView.getWinningNumbers();
         LottoNumbers winningNumbers = new LottoNumbers(StringParser.parse(numbers));
+
+        LottoResult lottoResult = new LottoResult(amount);
+        for (Lotto lotto : lottoList) {
+            LottoRank rank = lotto.checkWinning(winningNumbers);
+            lottoResult.record(rank);
+        }
+
+        ResultView.printResult(lottoResult);
     }
 }

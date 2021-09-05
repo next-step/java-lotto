@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -12,7 +14,11 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
+    }
+
+    public List<Integer> values() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
