@@ -4,23 +4,24 @@ import lotto.domain.*;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ResultView {
     private final static String INST_RESULT = "당첨 통계";
 
     public static void printGeneratedLottos(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottoList();
-        List<LottoNumber> lottoNums;
+        Set<LottoNumber> lottoNumberSet;
 
         for (Lotto lotto : lottoList) {
-            lottoNums = lotto.getLottoNumberList();
-            printLottoNums(lottoNums);
+            lottoNumberSet = lotto.getLottoNumberList();
+            printLottoNums(lottoNumberSet);
         }
 
         System.out.println();
     }
 
-    private static void printLottoNums(List<LottoNumber> lottoNums) {
+    private static void printLottoNums(Set<LottoNumber> lottoNums) {
         Iterator<LottoNumber> it = lottoNums.iterator();
 
         System.out.print("[" + it.next());

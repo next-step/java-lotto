@@ -17,8 +17,8 @@ public class AutoGenerateNumsStrategy implements GenerateNumStrategy {
 
     public Lottos generate(int totalLottosNum, int numsPerLotto) {
         List<Lotto> lottoList = new ArrayList<>(totalLottosNum);
+
         for (int i = 0; i < totalLottosNum; i++) {
-            Collections.shuffle(selectableNums);
             lottoList.add(generateEachLotto(numsPerLotto));
         }
 
