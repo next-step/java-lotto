@@ -1,7 +1,7 @@
 package step2.controller;
 
 import step2.domain.Lottos;
-import step2.domain.Match;
+import step2.domain.WinningStatistics;
 import step2.domain.WinningLotto;
 import step2.view.InputDto;
 import step2.view.InputView;
@@ -25,9 +25,9 @@ public class LottoApplication {
         final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers);
 //        final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers, bonusNumber);
 
-        final Match match = winningLotto.match(issueLottos);
+        final WinningStatistics winningStatistics = winningLotto.match(issueLottos);
 //        match.calculateProfitRate(inputDto.getPrice());
-        outputView.println(match);
+        outputView.println(winningStatistics);
     }
 
     public static Lottos issueLottos(int amount) {

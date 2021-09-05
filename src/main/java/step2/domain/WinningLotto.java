@@ -14,12 +14,12 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public Match match(Lottos issueLottos) {
-        final Match match = new Match();
+    public WinningStatistics match(Lottos issueLottos) {
+        final WinningStatistics winningStatistics = new WinningStatistics();
         for (Lotto issueLotto : issueLottos.lottos) {
             int matchCount = issueLotto.match(this.lottoNumbers);
-            match.add(matchCount);
+            winningStatistics.add(matchCount);
         }
-        return match;
+        return winningStatistics;
     }
 }

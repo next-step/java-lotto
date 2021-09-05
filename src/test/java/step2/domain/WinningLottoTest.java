@@ -2,7 +2,7 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.utils.MatchTestUtil;
+import step2.utils.WinningStatisticsTestUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,10 +32,10 @@ public class WinningLottoTest {
         System.out.println(wonLottos);
 
         final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Match actual = standardLotto.match(wonLottos);
+        final WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final Match expected = MatchTestUtil.createTestMatch(6, 3);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(6, 3);
         System.out.println(expected);
 
         assertThat(actual).isEqualTo(expected);
@@ -51,10 +51,10 @@ public class WinningLottoTest {
         System.out.println(wonLottos);
 
         final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Match actual = standardLotto.match(wonLottos);
+        WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final Match expected = MatchTestUtil.createTestMatch(3, 3);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(3, 3);
         System.out.println(expected);
 
         assertThat(actual).isEqualTo(expected);

@@ -1,16 +1,16 @@
 package step2.utils;
 
-import step2.domain.Match;
+import step2.domain.WinningStatistics;
 import step2.vo.Rank;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MatchTestUtil {
-    public static Match createTestMatch(int matchCount, int amount) {
+public class WinningStatisticsTestUtil {
+    public static WinningStatistics createTestWinningStatistics(int matchCount, int amount) {
         final long profitValue = createTestProfitValue(matchCount, amount);
 
-        return new Match(createTestMatchValue(matchCount, amount),
+        return new WinningStatistics(createTestMatchValue(matchCount, amount),
                 profitValue,
                 createTestProfitRateValue(profitValue, amount),
                 amount);
