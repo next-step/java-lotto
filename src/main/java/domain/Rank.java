@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum Rank {
 	FIRST(6, 2000000000),
 	SECOND(5,1500000),
@@ -16,13 +18,11 @@ public enum Rank {
 	}
 
 	public static Rank rank(int matchNumber) {
-		Rank[] ranks = values();
-		for(Rank rank : ranks) {
-			if(match(rank, matchNumber)) {
-				return rank;
-			}
-		}
-		return NO;
+
+		return Arrays.stream(values())
+						.filter(rank -> Rank.match(rank,matchNumber))
+						.findFirst()
+						.orElse(NO);
 	}
 
 	public static boolean match(Rank rank, int matchNumber) {
