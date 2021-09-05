@@ -31,7 +31,7 @@ public enum Rank {
                 .get();
     }
 
-    private static boolean isContains(int matchCount) {
+    public static boolean isContains(int matchCount) {
         final List<Rank> rankList = Arrays.asList(Rank.values());
         final List<Integer> matchNumbers = rankList.stream()
                 .map(o -> o.matchNumber)

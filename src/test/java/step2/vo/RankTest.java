@@ -19,7 +19,7 @@ class RankTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 7})
+    @ValueSource(ints = {1, 2, 7})
     void isContainsFailTest(int matchCount) {
         final boolean actual = Rank.isContains(matchCount);
         assertThat(actual).isFalse();
@@ -34,7 +34,7 @@ class RankTest {
 
     @Test
     void createMatchNumberFailTest() {
-        assertThatThrownBy(() -> Rank.createRank(7))
-                .isExactlyInstanceOf(NoSuchElementException.class);
+        final Rank actual = Rank.createRank(7);
+        assertThat(actual).isEqualTo(Rank.NONE);
     }
 }
