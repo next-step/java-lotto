@@ -20,7 +20,9 @@ public class LottoGame {
 		input.viewLottoCount(lottoCount);
 
 		for (int number = INIT_NUMBER ; number < lottoCount ; ++number) {
-			lottoList.add(generator.getLottoNumber());
+			Lotto lotto = generator.getLottoNumber();
+			lottoList.add(lotto);
+			result.viewLotto(lotto);
 		}
 
 		result.viewResult(calculator.getResult(lottoList, input.lottoWinningNumber()));

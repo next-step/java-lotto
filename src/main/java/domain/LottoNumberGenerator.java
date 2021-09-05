@@ -26,7 +26,6 @@ public class LottoNumberGenerator {
 			lottoNumber.add(lottoAllNumber.get(number));
 		}
 		Collections.sort(lottoNumber);
-		System.out.println(lottoNumber);
 		return new Lotto(lottoNumber);
 	}
 }

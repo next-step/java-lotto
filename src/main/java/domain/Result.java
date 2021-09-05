@@ -21,6 +21,10 @@ public class Result {
 		System.out.println("총 수익률은 " + Sum + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 	}
 
+	public void viewLotto(Lotto lotto) {
+		System.out.println(lotto);
+	}
+
 	private void firstComment() {
 		System.out.println("당첨 통계");
 		System.out.println("----------");
