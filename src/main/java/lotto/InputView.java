@@ -6,6 +6,10 @@ public class InputView {
 
     static Scanner scanner = new Scanner(System.in);
 
+    public static void refreshLine() {
+        scanner.nextLine();
+    }
+
     public static int getPurchaseAmount() {
         printPurchaseAmount();
         return inputPurchaseAmount();

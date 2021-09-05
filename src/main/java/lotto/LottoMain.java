@@ -11,6 +11,9 @@ public class LottoMain {
         List<Lotto> lottoList = lottoGenerator.generateLotto(amount);
         ResultView.printLottoList(lottoList);
 
-        WinningNumbers winningNumbers = new WinningNumbers(InputView.getWinningNumbers());
+        InputView.refreshLine();
+
+        String numbers = InputView.getWinningNumbers();
+        LottoNumbers winningNumbers = new LottoNumbers(StringParser.parse(numbers));
     }
 }

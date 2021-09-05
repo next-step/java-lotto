@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.*;
 
+
 public class LottoGenerator {
     public static final int PRICE = 1000;
 
@@ -9,7 +10,7 @@ public class LottoGenerator {
     private final ArrayList<Integer> numberList = new ArrayList<>();
 
     public LottoGenerator() {
-        for (int number = Lotto.MIN_NUMBER; number <= Lotto.MAX_NUMBER; number++) {
+        for (int number = LottoNumbers.MIN_NUMBER; number <= LottoNumbers.MAX_NUMBER; number++) {
             numberList.add(number);
         }
     }
