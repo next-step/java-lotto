@@ -27,7 +27,7 @@ public class LottoNumbers {
     validateSize();
   }
 
-  public List<Integer> sortedNumbers() {
+  public List<Integer> numbers() {
     return lottoNumbers.stream()
         .map(LottoNumber::number)
         .collect(Collectors.toList());

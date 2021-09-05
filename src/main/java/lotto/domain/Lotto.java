@@ -39,8 +39,8 @@ public class Lotto {
     return lottoNumbers.contains(lottoNumber);
   }
 
-  public List<Integer> sortedNumbers() {
-    return lottoNumbers.sortedNumbers();
+  public List<Integer> numbers() {
+    return lottoNumbers.numbers();
   }
 
   @Override

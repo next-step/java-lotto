@@ -28,7 +28,7 @@ public class ResultView {
   }
 
   private static void printLotto(Lotto lotto) {
-    String lottoNumbers = lotto.sortedNumbers().stream()
+    String lottoNumbers = lotto.numbers().stream()
         .map(String::valueOf).reduce((s1, s2) -> s1 + ", " + s2)
         .get();
     System.out.println("[" + lottoNumbers + "]");

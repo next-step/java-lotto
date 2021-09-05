@@ -21,8 +21,8 @@ class LottoTest {
     Lotto lotto = Lotto.issueByManual(numberList);
 
     //then
-    assertThat(lotto.sortedNumbers()).isEqualTo(numberList);
-    assertThat(lotto.sortedNumbers()).isSorted();
+    assertThat(lotto.numbers()).isEqualTo(numberList);
+    assertThat(lotto.numbers()).isSorted();
   }
 
   @Test
@@ -54,7 +54,7 @@ class LottoTest {
   void issueByAuto() {
     //when
     Lotto lotto = Lotto.issueByAuto();
-    List<Integer> lottoNumbers = lotto.sortedNumbers();
+    List<Integer> lottoNumbers = lotto.numbers();
 
     //then
     assertThat(lottoNumbers).allMatch(i -> i >= LottoNumber.MIN && i <= LottoNumber.MAX);

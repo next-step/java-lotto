@@ -13,7 +13,6 @@ public class Main {
   public static void main(String[] args) {
     try {
       Money purchaseMoney = InputView.inputMoney();
-
       long manualLottoCnt = InputView.inputManualLottoCnt(purchaseMoney);
       List<Lotto> manualLottoList = InputView.inputManualLottoList(manualLottoCnt);
 
@@ -22,7 +21,6 @@ public class Main {
 
       WinningResult winningResult = lottoGame.winningResult(InputView.winningInfo());
       ResultView.printWinningResult(winningResult);
-
     }catch (NumberFormatException e) {
       System.err.println("숫자값으로 입력해주세요.");
     }catch (Exception e){
