@@ -16,7 +16,7 @@ public class Money {
         }
     }
 
-    public int calculateBuyableLottos(int price) {2
+    public int calculateBuyableLottos(int price) {
         return money / price;
     }
 

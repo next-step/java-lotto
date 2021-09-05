@@ -12,13 +12,13 @@ public class LottoShop {
     public static void main(String[] args) {
         int money = InputView.inputMoney();
         LottoMachine lottoMachine = new LottoMachine(money, new AutoGenerateNumsStrategy());
-        ResultView.printBuyableLottoNum(lottoMachine);
-        ResultView.printGeneratedLottos(lottoMachine);
+        ResultView.printBuyableLottoNum(lottoMachine.calculateBuyableLottos());
+        ResultView.printGeneratedLottos(lottoMachine.getLottos());
 
         List<Integer> winningNums = InputView.inputWinningNums();
         int bonusNum = InputView.inputBonusNum();
         WinningNumber winningNumber = new WinningNumber(winningNums, bonusNum);
         ResultView.printLottoPrize(lottoMachine.getWinningResult(winningNumber));
-        ResultView.printLottoYield(lottoMachine, winningNumber);
+        ResultView.printLottoYield(lottoMachine.getYield(winningNumber));
     }
 }

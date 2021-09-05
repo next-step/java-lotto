@@ -6,12 +6,12 @@ public class LottoNumber {
     private static final String EXCEP_INVALID_LOTTO_NUM = "유효한 로또 범위를 넘었습니다.";
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
-    private static Map<Integer, LottoNumber> numberMap = new HashMap<>(MAX_LOTTO_NUM);
+    private static List<LottoNumber> numberList = new ArrayList<>(MAX_LOTTO_NUM);
     private final int number;
 
     static {
         for (int i = MIN_LOTTO_NUM; i <= MAX_LOTTO_NUM; i++) {
-             numberMap.put(i, new LottoNumber(i));
+            numberList.add(new LottoNumber(i));
         }
     }
 
@@ -31,7 +31,8 @@ public class LottoNumber {
 
     static public LottoNumber of(int number) {
         checkValidLottoNumber(number);
-        return numberMap.get(number);
+        int index = number - 1;
+        return numberList.get(index);
     }
 
     @Override

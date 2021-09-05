@@ -3,19 +3,21 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    NONE(0, 0, false);
 
     private final int matchingCount;
     private final int money;
+    private final boolean matchingBonus;
 
-    Prize( int matchingCount, int prizeMoney) {
+    Prize( int matchingCount, int prizeMoney, boolean matchingBonus) {
         this.matchingCount = matchingCount;
         this.money = prizeMoney;
+        this.matchingBonus = matchingBonus;
     }
 
     public int matchingCount() {
@@ -31,17 +33,9 @@ public enum Prize {
     }
 
     public static Prize valueOf(int matchingCount, boolean matchingBonus) {
-        if (matchingCount < FIFTH.matchingCount) {
-            return NONE;
-        }
-
-        if (matchingCount == SECOND.matchingCount) {
-            return matchingBonus ? SECOND : THIRD;
-        }
-
         return Arrays.stream(values())
-                .filter(p -> matchingCount == p.matchingCount)
+                .filter(p -> matchingCount == p.matchingCount && matchingBonus == p.matchingBonus)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("해당 값을 가진 Prize는 없습니다." + matchingCount));
+                .orElse(NONE);
     }
 }

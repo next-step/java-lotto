@@ -8,8 +8,7 @@ import java.util.List;
 public class ResultView {
     private final static String INST_RESULT = "당첨 통계";
 
-    public static void printGeneratedLottos(LottoMachine lottoMachine) {
-        Lottos lottos = lottoMachine.getLottos();
+    public static void printGeneratedLottos(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottoList();
         List<LottoNumber> lottoNums;
 
@@ -58,12 +57,11 @@ public class ResultView {
         }
     }
 
-    public static void printLottoYield(LottoMachine lottoMachine, WinningNumber winningNumber) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNumber)) + "입니다.");
+    public static void printLottoYield(double yield) {
+        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
-    public static void printBuyableLottoNum(LottoMachine lottoMachine) {
-        int buyableLottoNum = lottoMachine.calculateBuyableLottos();
+    public static void printBuyableLottoNum(int buyableLottoNum) {
         System.out.println(buyableLottoNum + "개를 구매했습니다.");
     }
 }

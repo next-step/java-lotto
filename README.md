@@ -34,3 +34,9 @@
   - [X] matching 값을 세는 로직을 WinningLotto로 이동 시키기
 - [X] 세부 클래스에서 구현된 세부 기능들도 Test로 구현하기
 - [X] Prize.valueOf를 사용할 때 try-catch문을 사용하지 않도록 변경
+
+## Step 4 - 로또 수동
+### Refactoring 목록
+- [X] View에서 전달인자를 인스턴스 자체를 받는게 아니라 View를 그리기 위해 필요한 필드만 전달 받도록 수정하기
+- [X] Prize valueOf에서 불필요한 if문 제거해보기
+- [X] LottoNumber의 Collection을 List로 변경
