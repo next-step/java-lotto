@@ -1,7 +1,7 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.vo.MatchNumber;
+import step2.vo.MatchNumberVO;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,20 +44,20 @@ public class WinTest {
                 createTestProfitValue(matchCount, amount));
     }
 
-    private Map<MatchNumber, Integer> createTestMatchValue(int matchCount, int amount) {
-        Map<MatchNumber, Integer> match = new HashMap<>();
-        match.put(MatchNumber.THREE, 0);
-        match.put(MatchNumber.FOUR, 0);
-        match.put(MatchNumber.FIVE, 0);
-        match.put(MatchNumber.SIX, 0);
-        final MatchNumber target = MatchNumber.createMatchNumber(matchCount);
+    private Map<MatchNumberVO, Integer> createTestMatchValue(int matchCount, int amount) {
+        Map<MatchNumberVO, Integer> match = new HashMap<>();
+        match.put(MatchNumberVO.THREE, 0);
+        match.put(MatchNumberVO.FOUR, 0);
+        match.put(MatchNumberVO.FIVE, 0);
+        match.put(MatchNumberVO.SIX, 0);
+        final MatchNumberVO target = MatchNumberVO.createMatchNumber(matchCount);
         match.put(target, amount);
         return match;
     }
 
     private long createTestProfitValue(int matchCount, int amount) {
-        final MatchNumber matchNumber = MatchNumber.createMatchNumber(matchCount);
-        return matchNumber.winnings * amount;
+        final MatchNumberVO matchNumberVO = MatchNumberVO.createMatchNumber(matchCount);
+        return matchNumberVO.winnings * amount;
     }
 
     @Test

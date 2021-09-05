@@ -1,8 +1,8 @@
-package step2;
+package step2.domain;
 
 import java.util.List;
 
-public class WinningLotto extends Lotto{
+public class WinningLotto extends Lotto {
     public WinningLotto(List<Integer> lottoNumbers) {
         super(lottoNumbers);
     }

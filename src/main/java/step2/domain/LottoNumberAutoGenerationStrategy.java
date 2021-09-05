@@ -1,6 +1,6 @@
-package step2;
+package step2.domain;
 
-import step2.vo.LottoNumberValue;
+import step2.vo.LottoNumberVO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumberAutoGenerationStrategy implements LottoNumberGenerationStrategy{
     private final List<Integer> LOTTO_NUMBER_VALUES =
-            IntStream.rangeClosed(LottoNumberValue.MIN.value, LottoNumberValue.MAX.value)
+            IntStream.rangeClosed(LottoNumberVO.MIN.value, LottoNumberVO.MAX.value)
             .boxed()
             .sorted()
             .collect(Collectors

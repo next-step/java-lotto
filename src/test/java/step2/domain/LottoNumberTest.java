@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

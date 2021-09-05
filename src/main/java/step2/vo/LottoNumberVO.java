@@ -1,11 +1,11 @@
 package step2.vo;
 
-public enum LottoNumberValue {
+public enum LottoNumberVO {
     MIN(1), MAX(45);
 
     public int value;
 
-    LottoNumberValue(int value) {
+    LottoNumberVO(int value) {
         this.value = value;
     }
 
