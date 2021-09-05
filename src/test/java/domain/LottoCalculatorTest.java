@@ -30,7 +30,8 @@ public class LottoCalculatorTest {
 		Lotto secondLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
 						new Number(7)));
 		List<Lotto> lottos = Arrays.asList(firstLotto, secondLotto);
-		int[] result = calculator.getResult(lottos, winningLotto);
+		Number bonusNumber = new Number(0);
+		int[] result = calculator.getResult(lottos, winningLotto, bonusNumber);
 		assertThat(result[5]).isEqualTo(2);
 	}
 

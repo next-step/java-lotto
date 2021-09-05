@@ -25,6 +25,6 @@ public class LottoGame {
 			result.viewLotto(lotto);
 		}
 
-		result.viewResult(calculator.getResult(lottoList, input.lottoWinningNumber()));
+		result.viewResult(calculator.getResult(lottoList, input.lottoWinningNumber(), input.setBonusNumber()));
 	}
 }

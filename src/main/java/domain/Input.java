@@ -32,4 +32,10 @@ public class Input {
 		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
 		return new Lotto(numbers.stream().map(data -> new Number(Integer.parseInt(data))).collect(Collectors.toList()));
 	}
+
+	public Number setBonusNumber() {
+		System.out.println("보너스 볼을 입력해주세요.");
+		Integer bonusNumber = scanner.nextInt();
+		return new Number(bonusNumber);
+	}
 }

@@ -14,7 +14,7 @@ public class LottoCalculator {
 		container = new int[CONTAINER_INIT_NUMBER];
 	}
 
-	public int[] getResult(List<Lotto> lottoList,Lotto lottoWinningNumber) {
+	public int[] getResult(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
 		validateLottoList(lottoList, lottoWinningNumber);
 		return container;
 	}
