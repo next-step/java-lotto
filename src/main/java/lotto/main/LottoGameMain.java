@@ -23,8 +23,8 @@ public class LottoGameMain {
 
         LottoGame lottoGame = new LottoGame(price, manualTickets);
 
-        resultView.showTicketCount(lottoGame);
-        resultView.showTickets(lottoGame);
+        resultView.showTicketCount(lottoGame.manualTicketCount(), lottoGame.autoTicketCount());
+        resultView.showTickets(lottoGame.lottoTickets());
 
         List<Integer> winningNumbersOfLastWeek = inputView.askWinningNumbers();
         BonusNumber bonusNumber = new BonusNumber(inputView.askBonusNumber());

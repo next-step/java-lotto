@@ -1,6 +1,5 @@
 package lotto.ui;
 
-import lotto.game.LottoGame;
 import lotto.gameresult.Gain;
 import lotto.gameresult.GameResult;
 import lotto.gameresult.ProfitRate;
@@ -15,13 +14,12 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void showTickets(LottoGame lottoGame) {
-        lottoGame.lottoTickets()
-                .forEach(lottoTicket -> System.out.println(convertedType(lottoTicket)));
+    public void showTickets(List<LottoTicket> lottoTickets) {
+        lottoTickets.forEach(lottoTicket -> System.out.println(convertedType(lottoTicket)));
     }
 
-    public void showTicketCount(LottoGame lottoGame) {
-        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", lottoGame.manualTicketCount(), lottoGame.autoTicketCount());
+    public void showTicketCount(int manualsCount, int autosCount) {
+        System.out.printf("수동으로 %s장, 자동으로 %s개를 구매했습니다.%n", manualsCount, autosCount);
     }
 
     private List<Integer> convertedType(LottoTicket lottoTicket) {
