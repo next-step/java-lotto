@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,13 +19,18 @@ class LottoTicketsTest {
     @DisplayName("n장의 로또 티켓으로 초기화: (로또 번호가 주어지는 경우)")
     @ParameterizedTest
     @MethodSource("provideLottoNumbersForEachTicketAndTotalTicketCount")
-    void createLottoTickets(int[][] ticketNumbers, int ticketCount) {
-        assertThat(new LottoTickets(ticketNumbers).value().size()).isEqualTo(ticketCount);
+    void createLottoTickets(List<LottoTicket> tickets, int ticketCount) {
+        assertThat(new LottoTickets(tickets).value().size()).isEqualTo(ticketCount);
     }
 
     private static Stream<Arguments> provideLottoNumbersForEachTicketAndTotalTicketCount() {
+        List<LottoTicket> tickets = List.of(
+                new LottoTicket(1, 2, 3, 4, 5, 6),
+                new LottoTicket(1, 2, 3, 4, 5, 7),
+                new LottoTicket(1, 2, 3, 4, 8, 7)
+        );
         return Stream.of(
-                Arguments.of(new int[][]{{1, 2, 3, 4, 5, 6}, {1, 2, 3, 4, 5, 7}, {1, 2, 3, 4, 8, 7}}, 3)
+                Arguments.of(tickets, 3)
         );
     }
 

@@ -19,22 +19,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 게임 결과")
 class GameResultTest {
 
+    private static final int[] WINNING_NUMBERS = {1, 2, 3, 4, 5, 6};
+
     @DisplayName("등수가")
     @ParameterizedTest(name = "{0}인 티켓: {1}장.")
     @MethodSource("provideTicketCountPerPrize")
     void createPlayResult(Prize prize, int ticketCounts) {
-        int[][] numbers = {
-                {1, 2, 3, 4, 5, 6},
-                {1, 2, 3, 4, 5, 7},
-                {1, 2, 3, 4, 5, 8},
-                {1, 2, 3, 4, 9, 8},
-                {1, 2, 3, 10, 9, 8},
-                {1, 2, 11, 10, 9, 8},
-                {1, 12, 11, 10, 9, 8},
-                {13, 12, 11, 10, 9, 8}};
-        LottoGame lottoGame = lottoGame(numbers);
-        GameResult gameResult = new GameResult(lottoGame, new WinningNumbers(1, 2, 3, 4, 5, 6), new BonusNumber(7));
+        LottoGame lottoGame = lottoGame();
+        GameResult gameResult = new GameResult(lottoGame, new WinningNumbers(WINNING_NUMBERS), new BonusNumber(7));
         assertThat(gameResult.countTicketsWinning(prize)).isEqualTo(ticketCounts);
+    }
+
+    private LottoGame lottoGame() {
+        List<LottoTicket> tickets = List.of(
+                new LottoTicket(1, 2, 3, 4, 5, 8),
+                new LottoTicket(1, 2, 3, 4, 5, 7),
+                new LottoTicket(1, 2, 3, 4, 5, 6),
+                new LottoTicket(1, 2, 3, 4, 9, 8),
+                new LottoTicket(1, 2, 3, 10, 9, 8),
+                new LottoTicket(1, 2, 11, 10, 9, 8),
+                new LottoTicket(1, 12, 11, 10, 9, 8),
+                new LottoTicket(13, 12, 11, 10, 9, 8)
+        );
+        return lottoGame(tickets);
     }
 
     private static Stream<Arguments> provideTicketCountPerPrize() {
@@ -50,29 +57,50 @@ class GameResultTest {
 
     @DisplayName("로또 넘버별 수익률")
     @ParameterizedTest(name = "로또 넘버{0}: 수익률은 {1}.")
-    @MethodSource("provideTicketNumbersWithProfitRate")
-    void getExpectedProfitRateOfLottoGame(int[][] numbers, double profitRate) {
-        GameResult gameResult = new GameResult(lottoGame(numbers), new WinningNumbers(1, 2, 3, 4, 5, 6), new BonusNumber(7));
+    @MethodSource("provideTicketsWithProfitRate")
+    void getExpectedProfitRateOfLottoGame(List<LottoTicket> tickets, double profitRate) {
+        GameResult gameResult = new GameResult(lottoGame(tickets), new WinningNumbers(WINNING_NUMBERS), new BonusNumber(7));
         assertThat(gameResult.profitRate().value()).isEqualTo(profitRate);
     }
 
-    private LottoGame lottoGame(int[][] numbers) {
-        return new LottoGame(LottoTicket.PRICE * numbers.length) {
+    private LottoGame lottoGame(List<LottoTicket> tickets) {
+        return new LottoGame(LottoTicket.PRICE * tickets.size()) {
             @Override
             public List<LottoTicket> lottoTickets() {
-                return new LottoTickets(numbers).value();
+                return new LottoTickets(tickets).value();
             }
         };
     }
 
-    private static Stream<Arguments> provideTicketNumbersWithProfitRate() {
-        int[][] numbers1 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
-        int[][] numbers2 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
-        int[][] numbers3 = {{1, 2, 3, 10, 11, 12}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}, {13, 14, 15, 16, 17, 18}};
+    private static Stream<Arguments> provideTicketsWithProfitRate() {
+        List<LottoTicket> tickets1 = List.of(
+                new LottoTicket(1, 2, 3, 10, 11, 12),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18)
+
+        );
+        List<LottoTicket> tickets2 = List.of(
+                new LottoTicket(1, 2, 3, 10, 11, 12),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18)
+
+        );
+        List<LottoTicket> tickets3 = List.of(
+                new LottoTicket(1, 2, 3, 10, 11, 12),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18),
+                new LottoTicket(13, 14, 15, 16, 17, 18)
+
+        );
         return Stream.of(
-                Arguments.of(numbers1, 0.8333333333333334),
-                Arguments.of(numbers2, 1),
-                Arguments.of(numbers3, 1.25)
+                Arguments.of(tickets1, 0.8333333333333334),
+                Arguments.of(tickets2, 1),
+                Arguments.of(tickets3, 1.25)
         );
     }
 }
