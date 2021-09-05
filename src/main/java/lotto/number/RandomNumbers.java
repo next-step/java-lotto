@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public class RandomNumbers {
 
     private static final List<LottoNumber> candidates;
+    private final int length;
 
     static {
         candidates = IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
@@ -16,21 +17,22 @@ public class RandomNumbers {
                 .collect(Collectors.toList());
     }
 
-    private RandomNumbers() {
+    public RandomNumbers() {
+        this.length = LottoNumbers.NUMBERS_LENGTH;
     }
 
-    public static List<LottoNumber> lottoNumbers() {
+    public RandomNumbers(int length) {
+        this.length = length;
+    }
+
+    public List<LottoNumber> lottoNumbers() {
         return pickLottoNumbers();
     }
 
-    private static List<LottoNumber> pickLottoNumbers() {
+    private List<LottoNumber> pickLottoNumbers() {
         Collections.shuffle(candidates);
-        List<LottoNumber> picked = new ArrayList<>(candidates.subList(0, LottoNumbers.NUMBERS_LENGTH));
+        List<LottoNumber> picked = new ArrayList<>(candidates.subList(0, length));
         Collections.sort(picked);
         return picked;
-    }
-
-    static List<LottoNumber> candidates() {
-        return candidates;
     }
 }

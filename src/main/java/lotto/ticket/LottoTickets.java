@@ -55,8 +55,10 @@ public class LottoTickets {
     }
 
     private List<LottoTicket> autoTickets(int autoTicketCounts) {
+        RandomNumbers randomNumbers = new RandomNumbers();
+
         return IntStream.range(0, autoTicketCounts)
-                .mapToObj(i -> new LottoTicket(RandomNumbers.lottoNumbers(), TicketType.AUTO))
+                .mapToObj(i -> new LottoTicket(randomNumbers.lottoNumbers(), TicketType.AUTO))
                 .collect(Collectors.toList());
     }
 
