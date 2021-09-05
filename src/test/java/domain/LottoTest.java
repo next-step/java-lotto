@@ -32,6 +32,6 @@ public class LottoTest {
 		Lotto lotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
 						new Number(6)));
 		Integer matchNumber = Lotto.numberOfMatches(lotto,winningLotto);
-		assertThat(matchNumber).isEqualTo(5);
+		assertThat(matchNumber).isEqualTo(6);
 	}
 }
