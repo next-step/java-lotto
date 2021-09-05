@@ -1,46 +1,32 @@
 package step2.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.vo.Rank;
-
-import java.util.HashMap;
-import java.util.Map;
+import step2.utils.MatchTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchTest {
 
     @Test
+    @DisplayName("5등(3개 일치), 1개 구매에 대한 통계 테스트")
     void addTest() {
         final Match match = new Match();
         match.add(3);
 
-        final Match expected = createTestMatch(3, 1);
+        final Match expected = MatchTestUtil.createTestMatch(3, 1);
         assertThat(match).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("4등(4개 일치), 2개 구매에 대한 통계 테스트")
+    void addTest2() {
+        final Match match = new Match();
+        match.add(4);
+        match.add(4);
 
-    // todo 중복 많이 나오면 class로
-    private Match createTestMatch(int matchCount, int amount) {
-        return new Match(createTestMatchValue(matchCount, amount),
-                createTestProfitValue(matchCount, amount));
-    }
-
-    // todo 중복 많이 나오면 class로
-    private Map<Rank, Integer> createTestMatchValue(int matchCount, int amount) {
-        Map<Rank, Integer> match = new HashMap<>();
-        match.put(Rank.FIFTH, 0);
-        match.put(Rank.FOURTH, 0);
-        match.put(Rank.THIRD, 0);
-        match.put(Rank.FIRST, 0);
-        final Rank target = Rank.createRank(matchCount);
-        match.put(target, amount);
-        return match;
-    }
-
-    // todo 중복 많이 나오면 class로
-    private long createTestProfitValue(int matchCount, int amount) {
-        final Rank rank = Rank.createRank(matchCount);
-        return rank.winnings * amount;
+        final Match expected = MatchTestUtil.createTestMatch(4, 2);
+        System.out.println(expected);
+        assertThat(match).isEqualTo(expected);
     }
 }

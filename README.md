@@ -17,7 +17,7 @@
 ### TO DO
 - ~~Rank 객체 > 2등 추가~~
 - ~~WinningLotto > 보너스 넘버 추가~~ 
-- Match 수정 전 테스트 추가
+- ~~Match 수정 전 테스트 추가~~
 - Match 수정 (보너스 넘버)
 - ...
 

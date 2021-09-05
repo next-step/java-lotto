@@ -12,8 +12,7 @@ public class InputView {
 
     public InputDto inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        final String inputPrice = scanner.nextLine();
-        final Integer price = Integer.valueOf(inputPrice);
+        final int price = Integer.valueOf(scanner.nextLine());
 
         return new InputDto(price, getNumberOfPurchases(price));
     }
@@ -34,5 +33,10 @@ public class InputView {
                 .map(Integer::valueOf)
                 .collect(Collectors
                         .toList());
+    }
+
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return Integer.valueOf(scanner.nextLine());
     }
 }

@@ -21,10 +21,12 @@ public class LottoApplication {
         outputView.printLottoPurchase(amount, issueLottos);
 
         final List<Integer> lastWinningNumbers = inputView.inputLastWinningNumbers();
+//        final int bonusNumber = inputView.inputBonusNumber();
         final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers);
+//        final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers, bonusNumber);
 
         final Match match = winningLotto.match(issueLottos);
-        match.calculateProfitRate(inputDto.getPrice());
+//        match.calculateProfitRate(inputDto.getPrice());
         outputView.println(match);
     }
 

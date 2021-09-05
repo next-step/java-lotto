@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class Profit {
     private long profit;
-    private double profitRate;
+    private ProfitRate profitRate;
 
     public Profit(long profit) {
         this.profit = profit;
-        this.profitRate = 0.0;
+        this.profitRate = new ProfitRate();
     }
 
     public Profit() {
@@ -19,7 +19,7 @@ public class Profit {
 
     public Profit(long profit, double profitRate) {
         this.profit = profit;
-        this.profitRate = profitRate;
+        this.profitRate = new ProfitRate(profitRate);
     }
 
     public void add(Rank rank) {
@@ -27,14 +27,14 @@ public class Profit {
     }
 
     public void calculateProfitRate(int inputPrice) {
-        this.profitRate = this.profit / (double) inputPrice;
+        this.profitRate = new ProfitRate(this.profit / (double) inputPrice);
     }
 
     @Override
     public String toString() {
         return new StringBuilder()
                 .append("총 수익률은 ")
-                .append(Math.floor(this.profitRate * 100) / 100.0)
+                .append(this.profitRate)
                 .append("입니다.")
                 .toString();
     }
@@ -44,7 +44,7 @@ public class Profit {
         if (this == o) return true;
         if (!(o instanceof Profit)) return false;
         Profit profit1 = (Profit) o;
-        return profit == profit1.profit && Double.compare(profit1.profitRate, profitRate) == 0;
+        return profit == profit1.profit && Objects.equals(profitRate, profit1.profitRate);
     }
 
     @Override
