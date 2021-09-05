@@ -19,8 +19,8 @@ public class LottoCalculator {
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber) {
-		for (int i = INIT_NUMBER ; i < lottoList.size() ; ++i) {
-			container[numberOfMatches(lottoList.get(i), lottoWinningNumber)]++;
+		for (int number = INIT_NUMBER ; number < lottoList.size() ; ++number) {
+			container[numberOfMatches(lottoList.get(number), lottoWinningNumber)]++;
 		}
 	}
 

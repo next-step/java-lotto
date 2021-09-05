@@ -14,16 +14,16 @@ public class LottoNumberGenerator {
 
 	public LottoNumberGenerator() {
 		lottoAllNumber = new ArrayList<>();
-		for (int i = INIT_NUMBER ; i <= LOTTO_ALL_NUMBER_RANGE ; ++i) {
-			lottoAllNumber.add(i);
+		for (int number = INIT_NUMBER ; number <= LOTTO_ALL_NUMBER_RANGE ; ++number) {
+			lottoAllNumber.add(number);
 		}
 	}
 
 	public Lotto getLottoNumber() {
 		List<Integer> lottoNumber = new ArrayList<>();
 		Collections.shuffle(lottoAllNumber);
-		for (int i = INIT_NUMBER ; i <= LOTTO_NUMBER_RANGE ; ++i) {
-			lottoNumber.add(lottoAllNumber.get(i));
+		for (int number = INIT_NUMBER ; number <= LOTTO_NUMBER_RANGE ; ++number) {
+			lottoNumber.add(lottoAllNumber.get(number));
 		}
 		Collections.sort(lottoNumber);
 		System.out.println(lottoNumber);

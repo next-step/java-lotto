@@ -17,7 +17,7 @@ public class LottoGame {
 
 		Integer lottoCount = input.setAccount();
 
-		for (int i = INIT_NUMBER ; i < lottoCount ; ++i) {
+		for (int number = INIT_NUMBER ; number < lottoCount ; ++number) {
 			lottoList.add(generator.getLottoNumber());
 		}
 

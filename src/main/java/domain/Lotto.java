@@ -16,8 +16,8 @@ public class Lotto {
 
 	public static Integer numberOfMatches(Lotto lotto, Lotto lottoWinningNumber) {
 		int sum = INIT_NUMBER;
-		for (int i = INIT_NUMBER ; i < lotto.size() ; ++i) {
-			sum += (lottoWinningNumber.lotto.contains(lotto.lotto.get(i)) ? PLUS_NUMBER : INIT_NUMBER);
+		for (int number = INIT_NUMBER ; number < lotto.size() ; ++number) {
+			sum += (lottoWinningNumber.lotto.contains(lotto.lotto.get(number)) ? PLUS_NUMBER : INIT_NUMBER);
 		}
 		return sum;
 	}
