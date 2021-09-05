@@ -4,20 +4,19 @@ import java.util.Objects;
 
 public class ProfitRate {
     private double profitRate;
-//    private int purchasePrice;
-
-    public ProfitRate() {
-        this.profitRate = 1.0;
-//        this.purchasePrice = 0;
-    }
 
     public ProfitRate(double profitRate) {
         this.profitRate = profitRate;
     }
 
-//    public void calculateProfitRate(int profit) {
-//        this.profitRate = profit / (double) inputPrice;
-//    }
+    public ProfitRate() {
+        this(1.0);
+    }
+
+    public ProfitRate calculateProfitRate(long profit, Amount amount) {
+        this.profitRate = profit / (double) amount.price();
+        return this;
+    }
 
 
     @Override

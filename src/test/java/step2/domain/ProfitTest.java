@@ -23,10 +23,7 @@ class ProfitTest {
     void calculateProfitRateTest() {
         final Profit actual = new Profit(0);
         actual.add(Rank.FIFTH);
-//        for (int i = 0; i < 13; i++) {
-//            actual.add(Rank.NONE);
-//        }
-        actual.calculateProfitRate(14000);
+        actual.calculateProfitRate(new Amount(14));
 
         final double expectedProfitRate = Rank.FIFTH.winnings / (double) 14000;
         final Profit expected = new Profit(Rank.FIFTH.winnings, expectedProfitRate);

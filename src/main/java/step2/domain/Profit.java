@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class Profit {
     private long profit;
-    private ProfitRate profitRate;
+    private ProfitRate profitRate; // todo 분리 ?
 
     public Profit(long profit) {
         this.profit = profit;
-        this.profitRate = new ProfitRate();
+        this.profitRate = new ProfitRate(1.0);
     }
 
     public Profit() {
@@ -26,8 +26,8 @@ public class Profit {
         this.profit += rank.winnings;
     }
 
-    public void calculateProfitRate(int inputPrice) {
-        this.profitRate = new ProfitRate(this.profit / (double) inputPrice);
+    public void calculateProfitRate(Amount amount) {
+        this.profitRate = new ProfitRate().calculateProfitRate(this.profit, amount);
     }
 
     @Override

@@ -6,13 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Match {
-    private static final int PRICE = 1000;
-
-    private final Map<Rank, Integer> match = new HashMap<>();
+public class Match { // todo
+    private final Map<Rank, Integer> match = new HashMap<>(); // todo
 
     private Profit profit;
-    private int cumulativeNumberOfPurchases; // todo
+    private Amount totalPurchaseAmount;
 
     public Match() {
         this.match.put(Rank.FIFTH, 0);
@@ -20,24 +18,23 @@ public class Match {
         this.match.put(Rank.THIRD, 0);
         this.match.put(Rank.FIRST, 0);
         this.profit = new Profit(0);
-        this.cumulativeNumberOfPurchases = 0;
+        this.totalPurchaseAmount = new Amount(0);
     }
 
-    public Match(Map<Rank, Integer> match, long profit, int cumulativeNumberOfPurchases) {
+    public Match(Map<Rank, Integer> match, long profit, int totalPurchaseAmount) {
         this.match.putAll(match);
         this.profit = new Profit(profit);
-        this.cumulativeNumberOfPurchases = cumulativeNumberOfPurchases;
-        this.profit.calculateProfitRate(this.cumulativeNumberOfPurchases * PRICE);
+        this.totalPurchaseAmount = new Amount(totalPurchaseAmount);
+        this.profit.calculateProfitRate(this.totalPurchaseAmount);
     }
 
-    public void add(int matchCount) { // winning lotto에서 쓴다
+    public void add(int matchCount) {
         if (Rank.isContains(matchCount)) {
             final Rank rank = Rank.createRank(matchCount);
-            int numberOfWins = this.match.get(rank);
-            this.match.put(rank, numberOfWins + 1);
+            this.match.computeIfPresent(rank, (Rank key, Integer value) -> ++value);
             this.profit.add(rank);
-            this.cumulativeNumberOfPurchases = this.cumulativeNumberOfPurchases + 1;
-            this.profit.calculateProfitRate(this.cumulativeNumberOfPurchases * PRICE);
+            this.totalPurchaseAmount = this.totalPurchaseAmount.add();
+            this.profit.calculateProfitRate(this.totalPurchaseAmount);
         }
     }
 
