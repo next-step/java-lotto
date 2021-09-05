@@ -27,8 +27,8 @@ class MatchNumberVOTest {
 
     @Test
     void createMatchNumberSuccessTest() {
-        final MatchNumberVO actual = MatchNumberVO.createMatchNumber(3);
-        final MatchNumberVO expected = MatchNumberVO.THREE;
+        final MatchNumberVO actual = MatchNumberVO.createMatchNumber(6);
+        final MatchNumberVO expected = MatchNumberVO.SIX;
         assertThat(actual).isEqualTo(expected);
     }
 

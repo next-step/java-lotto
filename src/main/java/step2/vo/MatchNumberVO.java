@@ -36,9 +36,9 @@ public enum MatchNumberVO {
     public static MatchNumberVO createMatchNumber(int matchCount) {
         final MatchNumberVO findMatchNumberVO = Arrays.stream(MatchNumberVO
                 .values())
-                .findFirst()
                 .filter(m -> {return m
-                        .matchNumber == matchCount;})
+                        .matchNumber == matchCount;
+                }).findFirst()
                 .get();
         return findMatchNumberVO;
     }
