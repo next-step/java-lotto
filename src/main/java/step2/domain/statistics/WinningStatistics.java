@@ -27,13 +27,11 @@ public class WinningStatistics {
     }
 
     public void add(int matchCount) {
-        if (Rank.isContains(matchCount)) {
-            final Rank rank = Rank.createRank(matchCount);
-            this.match.computeIfPresent(rank);
-            this.profit.add(rank);
-            this.totalPurchaseAmount = this.totalPurchaseAmount.add();
-            this.profitRate = this.profitRate.calculateProfitRate(this.profit, this.totalPurchaseAmount);
-        }
+        final Rank rank = Rank.createRank(matchCount);
+        this.match.computeIfPresent(rank);
+        this.profit.add(rank);
+        this.totalPurchaseAmount = this.totalPurchaseAmount.add();
+        this.profitRate = this.profitRate.calculateProfitRate(this.profit, this.totalPurchaseAmount);
     }
 
     @Override

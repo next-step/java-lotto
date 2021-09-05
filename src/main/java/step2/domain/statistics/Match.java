@@ -20,9 +20,11 @@ public class Match {
         this.match.putAll(match);
     }
 
-    public int computeIfPresent(Rank rank) {
-        return this.match.computeIfPresent(rank,
-                (Rank key, Integer numberOfMatches) -> ++numberOfMatches);
+    public void computeIfPresent(Rank rank) {
+        if (this.match.containsKey(rank)) {
+            Integer numberOfMatches = this.match.get(rank);
+            this.match.put(rank, ++numberOfMatches);
+        }
     }
 
 
