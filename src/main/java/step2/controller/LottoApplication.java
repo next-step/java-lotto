@@ -1,8 +1,8 @@
 package step2.controller;
 
-import step2.domain.Lottos;
-import step2.domain.WinningStatistics;
-import step2.domain.WinningLotto;
+import step2.domain.lotto.Lottos;
+import step2.domain.statistics.WinningStatistics;
+import step2.domain.lotto.WinningLotto;
 import step2.view.InputDto;
 import step2.view.InputView;
 import step2.view.OutputView;

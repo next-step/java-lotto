@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.lotto;
 
 import org.junit.jupiter.api.Test;
 

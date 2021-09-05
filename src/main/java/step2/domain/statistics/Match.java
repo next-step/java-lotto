@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.statistics;
 
 import step2.vo.Rank;
 

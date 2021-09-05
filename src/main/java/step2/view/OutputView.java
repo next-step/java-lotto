@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.domain.Lottos;
+import step2.domain.lotto.Lottos;
 
 public class OutputView {
     public void printLottoPurchase(int amount, Lottos issueLottos) {

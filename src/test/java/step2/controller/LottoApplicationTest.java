@@ -1,7 +1,7 @@
 package step2.controller;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.Lottos;
+import step2.domain.lotto.Lottos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,6 @@
 package step2.utils;
 
-import step2.domain.WinningStatistics;
+import step2.domain.statistics.WinningStatistics;
 import step2.vo.Rank;
 
 import java.util.HashMap;

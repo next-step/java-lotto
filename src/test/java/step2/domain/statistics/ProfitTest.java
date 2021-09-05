@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.statistics;
 
 import org.junit.jupiter.api.Test;
 import step2.vo.Rank;
