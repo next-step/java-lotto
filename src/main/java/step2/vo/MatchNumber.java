@@ -1,12 +1,10 @@
 package step2.vo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public enum MatchNumberVO {
+public enum MatchNumber {
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -15,32 +13,26 @@ public enum MatchNumberVO {
     public int matchNumber;
     public long winnings;
 
-    MatchNumberVO(int matchNumber, long winnings) {
+    MatchNumber(int matchNumber, long winnings) {
         this.matchNumber = matchNumber;
         this.winnings = winnings;
     }
 
     public static boolean isContains(int matchCount) {
-        final List<MatchNumberVO> matchNumberVOList = Arrays.asList(MatchNumberVO.values());
-        final List<Integer> matchNumbers = matchNumberVOList.stream()
+        final List<MatchNumber> matchNumberList = Arrays.asList(MatchNumber.values());
+        final List<Integer> matchNumbers = matchNumberList.stream()
                 .map(o -> o.matchNumber)
                 .collect(Collectors
                         .toList());
 
-        if (matchNumbers.contains(matchCount)) {
-            return true;
-        }
-        return false;
+        return matchNumbers.contains(matchCount);
     }
 
-    public static MatchNumberVO createMatchNumber(int matchCount) {
-        final MatchNumberVO findMatchNumberVO = Arrays.stream(MatchNumberVO
-                .values())
-                .filter(m -> {return m
-                        .matchNumber == matchCount;
-                }).findFirst()
+    public static MatchNumber createMatchNumber(int matchCount) {
+        return Arrays.stream(MatchNumber.values())
+                .filter(m -> m.matchNumber == matchCount)
+                .findFirst()
                 .get();
-        return findMatchNumberVO;
     }
 
     @Override

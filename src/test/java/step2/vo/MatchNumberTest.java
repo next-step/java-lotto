@@ -9,32 +9,32 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class MatchNumberVOTest {
+class MatchNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6})
     void isContainsSuccessTest(int matchCount) {
-        final boolean actual = MatchNumberVO.isContains(matchCount);
+        final boolean actual = MatchNumber.isContains(matchCount);
         assertThat(actual).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 7})
     void isContainsFailTest(int matchCount) {
-        final boolean actual = MatchNumberVO.isContains(matchCount);
+        final boolean actual = MatchNumber.isContains(matchCount);
         assertThat(actual).isFalse();
     }
 
     @Test
     void createMatchNumberSuccessTest() {
-        final MatchNumberVO actual = MatchNumberVO.createMatchNumber(6);
-        final MatchNumberVO expected = MatchNumberVO.SIX;
+        final MatchNumber actual = MatchNumber.createMatchNumber(6);
+        final MatchNumber expected = MatchNumber.SIX;
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void createMatchNumberFailTest() {
-        assertThatThrownBy(() -> MatchNumberVO.createMatchNumber(7))
+        assertThatThrownBy(() -> MatchNumber.createMatchNumber(7))
                 .isExactlyInstanceOf(NoSuchElementException.class);
     }
 }

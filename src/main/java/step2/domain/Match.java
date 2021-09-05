@@ -1,35 +1,35 @@
 package step2.domain;
 
-import step2.vo.MatchNumberVO;
+import step2.vo.MatchNumber;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class Match {
-    private final Map<MatchNumberVO, Integer> match = new HashMap<>();
+    private final Map<MatchNumber, Integer> match = new HashMap<>();
 
     private Profit profit;
 
     public Match() {
-        this.match.put(MatchNumberVO.THREE, 0);
-        this.match.put(MatchNumberVO.FOUR, 0);
-        this.match.put(MatchNumberVO.FIVE, 0);
-        this.match.put(MatchNumberVO.SIX, 0);
+        this.match.put(MatchNumber.THREE, 0);
+        this.match.put(MatchNumber.FOUR, 0);
+        this.match.put(MatchNumber.FIVE, 0);
+        this.match.put(MatchNumber.SIX, 0);
         this.profit = new Profit(0);
     }
 
-    public Match(Map<MatchNumberVO, Integer> match, long profit) {
+    public Match(Map<MatchNumber, Integer> match, long profit) {
         this.match.putAll(match);
         this.profit = new Profit(profit);
     }
 
     public void add(int matchCount) {
-        if (MatchNumberVO.isContains(matchCount)) {
-            final MatchNumberVO matchNumberVO = MatchNumberVO.createMatchNumber(matchCount);
-            int numberOfWins = this.match.get(matchNumberVO);
-            this.match.put(matchNumberVO, numberOfWins + 1);
-            this.profit.add(matchNumberVO);
+        if (MatchNumber.isContains(matchCount)) {
+            final MatchNumber matchNumber = MatchNumber.createMatchNumber(matchCount);
+            int numberOfWins = this.match.get(matchNumber);
+            this.match.put(matchNumber, numberOfWins + 1);
+            this.profit.add(matchNumber);
         }
     }
 
@@ -41,14 +41,14 @@ public class Match {
     public String toString() {
         return new StringBuilder().append("당첨 통계\n")
                 .append("---------\n")
-                .append(MatchNumberVO.THREE).append("- ")
-                .append(this.match.get(MatchNumberVO.THREE)).append("개\n")
-                .append(MatchNumberVO.FOUR).append("- ")
-                .append(this.match.get(MatchNumberVO.FOUR)).append("개\n")
-                .append(MatchNumberVO.FIVE).append("- ")
-                .append(this.match.get(MatchNumberVO.FIVE)).append("개\n")
-                .append(MatchNumberVO.SIX).append("- ")
-                .append(this.match.get(MatchNumberVO.SIX)).append("개\n")
+                .append(MatchNumber.THREE).append("- ")
+                .append(this.match.get(MatchNumber.THREE)).append("개\n")
+                .append(MatchNumber.FOUR).append("- ")
+                .append(this.match.get(MatchNumber.FOUR)).append("개\n")
+                .append(MatchNumber.FIVE).append("- ")
+                .append(this.match.get(MatchNumber.FIVE)).append("개\n")
+                .append(MatchNumber.SIX).append("- ")
+                .append(this.match.get(MatchNumber.SIX)).append("개\n")
                 .append(profit)
                 .toString();
     }
