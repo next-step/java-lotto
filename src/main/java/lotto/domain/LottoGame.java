@@ -11,7 +11,7 @@ public class LottoGame {
   private final long manualLottoCnt;
   private final List<Lotto> lottos = new ArrayList<>();
 
-  public LottoGame(long money, List<int[]> manualLottoList) {
+  public LottoGame(long money, List<String> manualLottoList) {
     this(
         new Money(money),
         manualLottoList.stream().map(Lotto::issueByManual).collect(Collectors.toList())

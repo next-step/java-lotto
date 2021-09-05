@@ -23,7 +23,7 @@ public class Lotto {
     return new Lotto(lottoNumbers);
   }
 
-  public static Lotto issueByManual(int[] numbers) {
+  public static Lotto issueByManual(String numbers) {
     return new Lotto(new LottoNumbers(numbers));
   }
 

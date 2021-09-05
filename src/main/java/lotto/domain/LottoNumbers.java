@@ -14,6 +14,15 @@ public class LottoNumbers {
 
   private final Set<LottoNumber> lottoNumbers;
 
+  public LottoNumbers(String numbers) {
+    this(
+        Arrays.stream(numbers.split(","))
+            .map(String::trim)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())
+    );
+  }
+
   public LottoNumbers(int[] numbers) {
     this(
         Arrays.stream(numbers).boxed()

@@ -18,10 +18,10 @@ class LottoGameTest {
   void createTest() {
     //given
     int money = 14000;
-    List<int[]> manualLottoList = Arrays.asList(
-        new int[]{8, 21, 23, 41, 42, 43},
-        new int[]{3, 5, 11, 16, 32, 38},
-        new int[]{7, 11, 16, 35, 36, 44}
+    List<String> manualLottoList = Arrays.asList(
+        "8, 21, 23, 41, 42, 43",
+        "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44"
     );
 
     //when
@@ -40,7 +40,7 @@ class LottoGameTest {
   void invalidCreateTest1() {
     //given
     int money = 900;
-    List<int[]> manualLottoList = Collections.emptyList();
+    List<String> manualLottoList = Collections.emptyList();
 
     //then
     assertThatIllegalArgumentException().isThrownBy(() -> {
@@ -53,10 +53,10 @@ class LottoGameTest {
   void invalidCreateTest2() {
     //given
     int money = 2000;
-    List<int[]> manualLottoList = Arrays.asList(
-        new int[]{8, 21, 23, 41, 42, 43},
-        new int[]{3, 5, 11, 16, 32, 38},
-        new int[]{7, 11, 16, 35, 36, 44}
+    List<String> manualLottoList = Arrays.asList(
+        "8, 21, 23, 41, 42, 43",
+        "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44"
     );
 
     //then
@@ -80,10 +80,10 @@ class LottoGameTest {
   void manualLottoCntAndAutoLottoCntTest() {
     //given
     int money = 14000;
-    List<int[]> manualLottoList = Arrays.asList(
-        new int[]{8, 21, 23, 41, 42, 43},
-        new int[]{3, 5, 11, 16, 32, 38},
-        new int[]{7, 11, 16, 35, 36, 44}
+    List<String> manualLottoList = Arrays.asList(
+        "8, 21, 23, 41, 42, 43",
+        "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44"
     );
 
     //when
