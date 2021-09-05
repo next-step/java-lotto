@@ -24,7 +24,7 @@ public class LottoApplication {
         final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers);
 
         final Match match = winningLotto.match(issueLottos);
-        match.calculateProfitRate(inputDto.getAmount());
+        match.calculateProfitRate(inputDto.getPrice());
         outputView.println(match);
     }
 
