@@ -30,4 +30,11 @@ public class LottoCalculatorTest {
 		int[] result = calculator.getResult(lottos, winningLotto);
 		assertThat(result[5]).isEqualTo(2);
 	}
+
+	@DisplayName("금액에 맞는 로또를 얼마나 살 수 있는 지 확인하는 테스트")
+	@Test
+	void test_account() {
+		Integer account = 12500;
+		assertThat(calculator.getLottoCount(account)).isEqualTo(12);
+	}
 }

@@ -19,7 +19,6 @@ public class LottoCalculator {
 		return container;
 	}
 
-
 	public Integer getLottoCount(Integer account) {
 		return account / UNIT;
 	}
