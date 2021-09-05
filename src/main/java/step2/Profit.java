@@ -1,5 +1,7 @@
 package step2;
 
+import step2.vo.MatchNumber;
+
 import java.util.Objects;
 
 public class Profit {

@@ -1,12 +1,14 @@
 package step2;
 
+import step2.vo.LottoNumberValue;
+
 import java.util.Objects;
 
 public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        if (lottoNumber >= 1 && lottoNumber <= 45) {
+        if (LottoNumberValue.isRange(lottoNumber)) {
             this.lottoNumber = lottoNumber;
             return;
         }

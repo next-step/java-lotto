@@ -1,4 +1,4 @@
-package step2;
+package step2.vo;
 
 public enum MatchNumber {
     THREE(3, 5000),
@@ -6,8 +6,8 @@ public enum MatchNumber {
     FIVE(5, 1500000),
     SIX(6, 2000000000);
 
-    int matchNumber;
-    long winnings;
+    public int matchNumber;
+    public long winnings;
 
     MatchNumber(int matchNumber, long winnings) {
         this.matchNumber = matchNumber;

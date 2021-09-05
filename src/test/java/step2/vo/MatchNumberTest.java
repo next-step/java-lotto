@@ -1,4 +1,4 @@
-package step2;
+package step2.vo;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
