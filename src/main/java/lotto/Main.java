@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Money;
 import lotto.domain.WinningResult;
@@ -14,16 +13,16 @@ public class Main {
     try {
       Money purchaseMoney = InputView.inputMoney();
       long manualLottoCnt = InputView.inputManualLottoCnt(purchaseMoney);
-      List<Lotto> manualLottoList = InputView.inputManualLottoList(manualLottoCnt);
+      List<String> manualLottoList = InputView.inputManualLottoList(manualLottoCnt);
 
       LottoGame lottoGame = new LottoGame(purchaseMoney, manualLottoList);
       ResultView.printPurchasedLottos(lottoGame);
 
       WinningResult winningResult = lottoGame.winningResult(InputView.winningInfo());
       ResultView.printWinningResult(winningResult);
-    }catch (NumberFormatException e) {
+    } catch (NumberFormatException e) {
       System.err.println("숫자값으로 입력해주세요.");
-    }catch (Exception e){
+    } catch (Exception e) {
       System.err.println(e.getMessage());
     }
   }

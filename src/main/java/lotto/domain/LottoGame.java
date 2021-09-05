@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.exception.ExceedPurchaseCountException;
 import lotto.exception.InvalidLottoPurchasePriceException;
 
@@ -12,18 +11,15 @@ public class LottoGame {
   private final List<Lotto> lottos = new ArrayList<>();
 
   public LottoGame(long money, List<String> manualLottoList) {
-    this(
-        new Money(money),
-        manualLottoList.stream().map(Lotto::issueByManual).collect(Collectors.toList())
-    );
+    this(new Money(money), manualLottoList);
   }
 
-  public LottoGame(Money money, List<Lotto> manualLottoList) {
+  public LottoGame(Money money, List<String> manualLottoList) {
     manualLottoCnt = manualLottoList.size();
     validateMoney(money);
     long autoLottoCnt = LottoGame.purchaseCnt(money) - manualLottoList.size();
     validateAutoLottoCnt(autoLottoCnt);
-    lottos.addAll(manualLottoList);
+    issueLottoByManual(manualLottoList);
     issueLottoByAuto(autoLottoCnt);
   }
 
@@ -45,6 +41,12 @@ public class LottoGame {
 
   public WinningResult winningResult(WinningInfo winningInfo) {
     return new WinningResult(lottos, winningInfo);
+  }
+
+  private void issueLottoByManual(List<String> manualLottoList) {
+    for (String manualLotto : manualLottoList) {
+      lottos.add(Lotto.issueByManual(manualLotto));
+    }
   }
 
   private void issueLottoByAuto(long autoLottoCnt) {

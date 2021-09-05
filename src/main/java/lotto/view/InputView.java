@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -37,19 +36,14 @@ public class InputView {
     return manualLottoCnt;
   }
 
-  public static List<Lotto> inputManualLottoList(long manualLottoCnt) {
+  public static List<String> inputManualLottoList(long manualLottoCnt) {
     if (manualLottoCnt <= 0) {
       return Collections.emptyList();
     }
     System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-    List<Lotto> manualLottoList = new ArrayList<>();
+    List<String> manualLottoList = new ArrayList<>();
     for (int i = 0; i < manualLottoCnt; i++) {
-      String input = scanner.nextLine();
-      List<Integer> numbers = Arrays.stream(input.split(","))
-          .map(String::trim)
-          .map(Integer::valueOf)
-          .collect(Collectors.toList());
-      manualLottoList.add(Lotto.issueByManual(numbers));
+      manualLottoList.add(scanner.nextLine());
     }
     return manualLottoList;
   }
