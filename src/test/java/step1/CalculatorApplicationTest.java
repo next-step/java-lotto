@@ -1,4 +1,7 @@
+package step1;
+
 import org.junit.jupiter.api.Test;
+import step1.CalculatorApplication;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,28 +33,6 @@ class CalculatorApplicationTest {
         final String inputString = args[0];
         final String customRegex = "//(.)\\n(.*)";
         assertThat(Pattern.matches(customRegex, inputString)).isTrue();
-    }
-
-    @Test
-    void getFirstString() {
-        String[] args = {"1,2:3"};
-        String first = Expression.extractFirstString(args[0]);
-        final String actual = String.valueOf(args[0].charAt(0));
-        assertThat(actual).isEqualTo(first);
-    }
-
-    @Test
-    void isNumberTest() {
-        final String[] args = {"1,2:3"};
-        final String first = Expression.extractFirstString(args[0]);
-        assertThat(Expression.isNumber(first)).isTrue();
-    }
-
-    @Test
-    void isNotNumberTest() {
-        final String[] args = {"//;\n1;2;3"};
-        final String first = Expression.extractFirstString(args[0]);
-        assertThat(Expression.isNumber(first)).isFalse();
     }
 
     @Test

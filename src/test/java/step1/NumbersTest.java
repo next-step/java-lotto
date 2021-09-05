@@ -1,4 +1,8 @@
+package step1;
+
 import org.junit.jupiter.api.Test;
+import step1.Number;
+import step1.Numbers;
 
 import java.util.Arrays;
 

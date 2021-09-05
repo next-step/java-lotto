@@ -1,3 +1,5 @@
+package step1;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -37,11 +39,11 @@ public class Expression {
         throw new RuntimeException("표현식 생성에 실패했습니다.");
     }
 
-    static String extractFirstString(String text) {
+    private static String extractFirstString(String text) {
         return String.valueOf(text.charAt(0));
     }
 
-    static boolean isNumber(String first) {
+    private static boolean isNumber(String first) {
         return Pattern.matches("\\d", first);
     }
 
