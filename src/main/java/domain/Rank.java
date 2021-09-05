@@ -3,11 +3,13 @@ package domain;
 import java.util.Arrays;
 
 public enum Rank {
-	FIRST(6, 2000000000),
-	SECOND(5,1500000),
-	THIRD(4,50000),
-	FOUR(3,5000),
-	NO(0,0);
+
+	FIRST(6, 2_000_000_000),
+	SECOND(5, 30_000_000),
+	THIRD(5, 1_500_000),
+	FOURTH(4, 50_000),
+	FIFTH(3, 5_000),
+	MISS(0, 0);
 
 	private int matchNumber;
 	private int amount;
@@ -22,7 +24,7 @@ public enum Rank {
 		return Arrays.stream(values())
 						.filter(rank -> Rank.match(rank,matchNumber))
 						.findFirst()
-						.orElse(NO);
+						.orElse(MISS);
 	}
 
 	public static boolean match(Rank rank, int matchNumber) {
