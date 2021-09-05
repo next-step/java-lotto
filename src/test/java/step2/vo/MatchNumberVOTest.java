@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -33,7 +35,6 @@ class MatchNumberVOTest {
     @Test
     void createMatchNumberFailTest() {
         assertThatThrownBy(() -> MatchNumberVO.createMatchNumber(7))
-                .isExactlyInstanceOf(RuntimeException.class)
-                .hasMessage("MatchNumber에 해당하는 값을 찾을 수 없습니다.");
+                .isExactlyInstanceOf(NoSuchElementException.class);
     }
 }

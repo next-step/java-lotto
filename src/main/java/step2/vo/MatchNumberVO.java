@@ -1,5 +1,11 @@
 package step2.vo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 public enum MatchNumberVO {
     THREE(3, 5000),
     FOUR(4, 50000),
@@ -15,21 +21,26 @@ public enum MatchNumberVO {
     }
 
     public static boolean isContains(int matchCount) {
-        for (MatchNumberVO matchNumberVO : MatchNumberVO.values()) {
-            if (matchNumberVO.matchNumber == matchCount) { // todo indent
-                return true;
-            }
+        final List<MatchNumberVO> matchNumberVOList = Arrays.asList(MatchNumberVO.values());
+        final List<Integer> matchNumbers = matchNumberVOList.stream()
+                .map(o -> o.matchNumber)
+                .collect(Collectors
+                        .toList());
+
+        if (matchNumbers.contains(matchCount)) {
+            return true;
         }
         return false;
     }
 
     public static MatchNumberVO createMatchNumber(int matchCount) {
-        for (MatchNumberVO matchNumberVO : MatchNumberVO.values()) {
-            if (matchNumberVO.matchNumber == matchCount) { // todo indent
-                return matchNumberVO;
-            }
-        }
-        throw new RuntimeException("MatchNumber에 해당하는 값을 찾을 수 없습니다.");
+        final MatchNumberVO findMatchNumberVO = Arrays.stream(MatchNumberVO
+                .values())
+                .findFirst()
+                .filter(m -> {return m
+                        .matchNumber == matchCount;})
+                .get();
+        return findMatchNumberVO;
     }
 
     @Override
