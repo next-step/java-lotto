@@ -8,9 +8,9 @@ public class Lotto {
 	private static final Integer INIT_NUMBER = 0;
 	private static final Integer PLUS_NUMBER = 1;
 
-	private List<Integer> lotto;
+	private List<Number> lotto;
 
-	public Lotto(List<Integer> lotto) {
+	public Lotto(List<Number> lotto) {
 		this.lotto = lotto;
 	}
 
@@ -22,7 +22,7 @@ public class Lotto {
 		return sum;
 	}
 
-	public static Integer containStatus(Lotto lottoWinningNumber, Integer lottoNumber) {
+	public static Integer containStatus(Lotto lottoWinningNumber, Number lottoNumber) {
 		if (lottoWinningNumber.lotto.contains(lottoNumber)) {
 			return PLUS_NUMBER;
 		}

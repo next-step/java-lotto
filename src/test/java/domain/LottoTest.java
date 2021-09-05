@@ -14,20 +14,23 @@ public class LottoTest {
 
 	@BeforeEach
 	void setUp() {
-		winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+		winningLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(6)));
 	}
 
 	@DisplayName("로또의 사이지를 잘 반환하는 지 확인하는 테스트")
 	@Test
 	void test_lotto_size() {
-		Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+		Lotto lotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(6)));
 		assertThat(lotto.size()).isEqualTo(6);
 	}
 
 	@DisplayName("로또가 얼마나 맞았는지 반환하는 테스트")
 	@Test
 	void test_lotto_match() {
-		Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,7));
+		Lotto lotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(6)));
 		Integer matchNumber = Lotto.numberOfMatches(lotto,winningLotto);
 		assertThat(matchNumber).isEqualTo(5);
 	}

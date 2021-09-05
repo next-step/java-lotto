@@ -18,14 +18,17 @@ public class LottoCalculatorTest {
 	@BeforeEach
 	void setUp() {
 		calculator = new LottoCalculator();
-		winningLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+		winningLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(6)));
 	}
 
 	@DisplayName("당천된 로또 갯수 컨테이너를 잘 반환하는지 확인하는 테스트")
 	@Test
 	void test_container() {
-		Lotto firstLotto = new Lotto(Arrays.asList(1,2,3,4,5,8));
-		Lotto secondLotto = new Lotto(Arrays.asList(1,2,3,4,5,7));
+		Lotto firstLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(8)));
+		Lotto secondLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
+						new Number(7)));
 		List<Lotto> lottos = Arrays.asList(firstLotto, secondLotto);
 		int[] result = calculator.getResult(lottos, winningLotto);
 		assertThat(result[5]).isEqualTo(2);

@@ -30,6 +30,6 @@ public class Input {
 	public Lotto lottoWinningNumber() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
-		return new Lotto(numbers.stream().map(Integer::parseInt).collect(Collectors.toList()));
+		return new Lotto(numbers.stream().map(data -> new Number(Integer.parseInt(data))).collect(Collectors.toList()));
 	}
 }
