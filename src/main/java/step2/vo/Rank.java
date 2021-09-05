@@ -4,23 +4,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MatchNumber {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+public enum Rank {
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000);
 
     public int matchNumber;
     public long winnings;
 
-    MatchNumber(int matchNumber, long winnings) {
+    Rank(int matchNumber, long winnings) {
         this.matchNumber = matchNumber;
         this.winnings = winnings;
     }
 
     public static boolean isContains(int matchCount) {
-        final List<MatchNumber> matchNumberList = Arrays.asList(MatchNumber.values());
-        final List<Integer> matchNumbers = matchNumberList.stream()
+        final List<Rank> rankList = Arrays.asList(Rank.values());
+        final List<Integer> matchNumbers = rankList.stream()
                 .map(o -> o.matchNumber)
                 .collect(Collectors
                         .toList());
@@ -28,8 +29,8 @@ public enum MatchNumber {
         return matchNumbers.contains(matchCount);
     }
 
-    public static MatchNumber createMatchNumber(int matchCount) {
-        return Arrays.stream(MatchNumber.values())
+    public static Rank createRank(int matchCount) {
+        return Arrays.stream(Rank.values())
                 .filter(m -> m.matchNumber == matchCount)
                 .findFirst()
                 .get();

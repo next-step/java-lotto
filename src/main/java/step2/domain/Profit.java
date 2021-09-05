@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.vo.MatchNumber;
+import step2.vo.Rank;
 
 import java.util.Objects;
 
@@ -22,8 +22,8 @@ public class Profit {
         this.profitRate = profitRate;
     }
 
-    public void add(MatchNumber matchNumber) {
-        this.profit += matchNumber.winnings;
+    public void add(Rank rank) {
+        this.profit += rank.winnings;
     }
 
     public void calculateProfitRate(int inputPrice) {
