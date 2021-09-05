@@ -6,6 +6,7 @@ public class LottoCalculator {
 
 	private static final Integer INIT_NUMBER = 0;
 	private static final Integer CONTAINER_INIT_NUMBER = 7;
+	private static final Integer UNIT = 1000;
 
 	private int[] container;
 
@@ -16,6 +17,11 @@ public class LottoCalculator {
 	public int[] getResult(List<Lotto> lottoList,Lotto lottoWinningNumber) {
 		validateLottoList(lottoList, lottoWinningNumber);
 		return container;
+	}
+
+
+	public Integer getLottoCount(Integer account) {
+		return account / UNIT;
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber) {

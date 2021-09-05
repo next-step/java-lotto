@@ -15,7 +15,9 @@ public class LottoGame {
 		List<Lotto> lottoList = new ArrayList<>();
 		LottoCalculator calculator = new LottoCalculator();
 
-		Integer lottoCount = input.setAccount();
+		Integer account = input.setAccount();
+		Integer lottoCount = calculator.getLottoCount(account);
+		input.viewLottoCount(lottoCount);
 
 		for (int number = INIT_NUMBER ; number < lottoCount ; ++number) {
 			lottoList.add(generator.getLottoNumber());
