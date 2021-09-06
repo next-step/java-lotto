@@ -27,4 +27,13 @@ public class Statistics {
     public int hashCode() {
         return Objects.hash(winningStatistics, match);
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder().append("당첨 통계\n")
+                .append("---------\n")
+                .append(this.match)
+                .toString();
+    }
+
 }

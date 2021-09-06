@@ -54,7 +54,7 @@ public class Match {
                 .append(Rank.SECOND).append("- ")
                 .append(this.match.get(Rank.SECOND)).append("개\n")
                 .append(Rank.FIRST).append("- ")
-                .append(this.match.get(Rank.FIRST)).append("개\n")
+                .append(this.match.get(Rank.FIRST)).append("개")
                 .toString();
     }
 

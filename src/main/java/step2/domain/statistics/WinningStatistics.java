@@ -23,19 +23,9 @@ public class WinningStatistics {
         this.totalPurchaseAmount = this.totalPurchaseAmount.add();
     }
 
-
     public ProfitRate profitRate() {
         return this.profit.calculateProfitRate(this.totalPurchaseAmount);
     }
-
-//    @Override
-//    public String toString() {
-//        return new StringBuilder().append("당첨 통계\n")
-//                .append("---------\n")
-//                .append(this.match)
-////                .append(this.profitRate)
-//                .toString();
-//    }
 
 
     @Override
