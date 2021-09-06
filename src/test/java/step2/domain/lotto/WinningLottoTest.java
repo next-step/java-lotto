@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.statistics.WinningStatistics;
 import step2.utils.WinningStatisticsTestUtil;
+import step2.vo.Rank;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +25,7 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("1등(6개 일치), 3개 구매에 대한 통계 테스트")
+    @DisplayName("1등(6개 일치) 3개, 총 3개 구매에 대한 통계 테스트")
     void matchSuccessTest1() {
         final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final Lottos wonLottos = new Lottos(Arrays.asList(
@@ -37,14 +38,14 @@ public class WinningLottoTest {
         final WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(6, 3);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.FIRST, 3, 3);
         System.out.println(expected);
 
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("5등(3개 일치), 3개 구매에 대한 통계 테스트")
+    @DisplayName("5등(3개 일치) 3개, 총 3개 구매에 대한 통계 테스트")
     void matchSuccessTest2() {
         final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 10, 11, 12);
         final Lottos wonLottos = new Lottos(Arrays.asList(new Lotto(lottoNumbers),
@@ -56,7 +57,7 @@ public class WinningLottoTest {
         WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(3, 3);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.FIFTH, 3, 3);
         System.out.println(expected);
 
         assertThat(actual).isEqualTo(expected);

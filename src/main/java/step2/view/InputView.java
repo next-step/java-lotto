@@ -12,7 +12,7 @@ public class InputView {
 
     public InputDto inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        final int price = Integer.valueOf(scanner.nextLine());
+        final int price = Integer.parseInt(scanner.nextLine());
 
         return new InputDto(price, getNumberOfPurchases(price));
     }
@@ -37,6 +37,6 @@ public class InputView {
 
     public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return Integer.valueOf(scanner.nextLine());
+        return Integer.parseInt(scanner.nextLine());
     }
 }

@@ -2,7 +2,6 @@ package step2.domain.statistics;
 
 import step2.vo.Rank;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class WinningStatistics {
@@ -18,11 +17,11 @@ public class WinningStatistics {
         this.totalPurchaseAmount = new Amount(0);
     }
 
-    public WinningStatistics(Map<Rank, Integer> match, long profit, double profitRate, int totalPurchaseAmount) {
-        this.match = new Match(match);
-        this.profit = new Profit(profit);
-        this.totalPurchaseAmount = new Amount(totalPurchaseAmount);
-        this.profitRate = new ProfitRate(profitRate);
+    public WinningStatistics(Match match, Profit profit, ProfitRate profitRate, Amount totalPurchaseAmount) {
+        this.match = match;
+        this.profit = profit;
+        this.totalPurchaseAmount = totalPurchaseAmount;
+        this.profitRate = profitRate;
     }
 
     public void add(Rank rank) {

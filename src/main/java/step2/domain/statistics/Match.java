@@ -18,15 +18,17 @@ public class Match {
     };
 
     public Match() {
-        this.match.put(Rank.FIFTH, 0);
-        this.match.put(Rank.FOURTH, 0);
-        this.match.put(Rank.THIRD, 0);
-        this.match.put(Rank.SECOND, 0);
-        this.match.put(Rank.FIRST, 0);
+
     }
 
-    public Match(int matchCount) { // todo
+    public Match(Rank rank, int matchCount) {
+        if (this.match.containsKey(rank)) {
+            this.match.put(rank, matchCount);
+        }
+    }
 
+    public Match(Rank rank) {
+        this(rank, 1);
     }
 
     public Match(Map<Rank, Integer> match) {

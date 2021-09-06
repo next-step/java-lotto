@@ -16,7 +16,7 @@ class WinningStatisticsTest {
         winningStatistics.add(Rank.FIFTH);
         System.out.println(winningStatistics);
 
-        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(3, 1);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.FIFTH, 1, 1);
         System.out.println(expected);
         assertThat(winningStatistics).isEqualTo(expected);
     }
@@ -28,18 +28,20 @@ class WinningStatisticsTest {
         winningStatistics.add(Rank.FOURTH);
         winningStatistics.add(Rank.FOURTH);
 
-        final WinningStatistics expected = WinningStatisticsTestUtil.createTestWinningStatistics(4, 2);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.FOURTH, 2, 2);
         System.out.println(expected);
         assertThat(winningStatistics).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("2등(5개일치, 보너스) 2개, 미당첨 1개, 총 2개 구매에 대한 통계") // todo
+    @DisplayName("2등(5개일치, 보너스) 2개, 미당첨 1개, 총 3개 구매에 대한 통계")
     void addTest3() {
-        final WinningStatistics winningStatistics = new WinningStatistics();
-        winningStatistics.add(Rank.SECOND);
-        winningStatistics.add(Rank.NONE);
+        final WinningStatistics actual = new WinningStatistics();
+        actual.add(Rank.SECOND);
+        actual.add(Rank.SECOND);
+        actual.add(Rank.NONE);
 
-        System.out.println(winningStatistics);
+        final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.SECOND, 2, 3);
+        assertThat(actual).isEqualTo(expected);
     }
 }
