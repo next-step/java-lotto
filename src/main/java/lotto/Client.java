@@ -9,22 +9,22 @@ import lotto.view.ResultView;
 
 public class Client {
 	public static void main(String[] args) {
-		InputView inputVIew = new InputView();
+		InputView inputView = new InputView();
 		ResultView resultView = new ResultView();
 
-		LottoMachine lottoMachine = new LottoMachine(inputVIew.purchasingPrice());
+		LottoMachine lottoMachine = new LottoMachine(inputView.purchasingPrice());
 		resultView.showBuyingCount(lottoMachine.getBuyingCount());
 
 		LottoTicket lottoTicket = lottoMachine.publish();
 		resultView.showPickNumbers(lottoTicket);
 
-		Lotto lastWinningLotto = new Lotto(inputVIew.lastWeekNumbers());
+		Lotto lastWinningLotto = new Lotto(inputView.lastWeekNumbers(), inputView.bonusNumber());
 		LottoResult lottoResult = lottoTicket.matchWinning(lastWinningLotto);
 		resultView.showStatistics(lottoResult);
 
 		double rateOfReturn = lottoResult.requestRateOfReturn(lottoMachine.getBuyingCount());
 		resultView.showRateOfReturns(rateOfReturn);
 
-		inputVIew.close();
+		inputView.close();
 	}
 }

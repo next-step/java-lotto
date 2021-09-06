@@ -10,7 +10,8 @@ public class LottoResult {
     }
 
     public double requestRateOfReturn(int buyingCount) {
-        double rateOfReturn = (double) (LottoRank.FOURTH.getPrizeMoney() * ranks.getOrDefault(LottoRank.FOURTH, 0)
+        double rateOfReturn = (double) (LottoRank.FIFTH.getPrizeMoney() * ranks.getOrDefault(LottoRank.FIFTH, 0)
+                + LottoRank.FOURTH.getPrizeMoney() * ranks.getOrDefault(LottoRank.FOURTH, 0)
                 + LottoRank.THIRD.getPrizeMoney() * ranks.getOrDefault(LottoRank.THIRD, 0)
                 + LottoRank.SECOND.getPrizeMoney() * ranks.getOrDefault(LottoRank.SECOND, 0)
                 + LottoRank.FIRST.getPrizeMoney() * ranks.getOrDefault(LottoRank.FIRST, 0))

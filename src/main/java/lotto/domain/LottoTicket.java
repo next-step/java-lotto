@@ -16,7 +16,8 @@ public class LottoTicket {
         Map<LottoRank, Integer> ranks = new HashMap<>();
         for (Lotto lotto : lottos) {
             int matchCount = lotto.askMatchCount(lastWeekNumbers);
-            LottoRank lottoRank = LottoRank.findByMatchCount(matchCount);
+            boolean isMatchingBonusNumber = lotto.isMatchingBonusNumber(lastWeekNumbers.getBonusNumber());
+            LottoRank lottoRank = decideRanking(matchCount, isMatchingBonusNumber);
             ranks.put(lottoRank, ranks.getOrDefault(lottoRank, 0) + 1);
         }
         return new LottoResult(ranks);
@@ -24,5 +25,12 @@ public class LottoTicket {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    private LottoRank decideRanking(int matchCount, boolean isMatchingBonusNumber) {
+        if (matchCount == 5 && !isMatchingBonusNumber) {
+            return LottoRank.THIRD;
+        }
+        return LottoRank.findByMatchCount(matchCount);
     }
 }
