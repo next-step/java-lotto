@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 public class Input {
 
-	private static final Integer UNIT = 1000;
-
 	private Integer account;
 	private Scanner scanner;
 
