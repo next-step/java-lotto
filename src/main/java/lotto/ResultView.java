@@ -7,8 +7,8 @@ public class ResultView {
         System.out.println(count + "개를 구입하였습니다.");
     }
 
-    public static void printLottoList(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
+    public static void printLottoList(Lottos lottos) {
+        for (Lotto lotto : lottos.values()) {
             System.out.println(lotto);
         }
     }

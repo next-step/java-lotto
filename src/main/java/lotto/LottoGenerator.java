@@ -13,15 +13,13 @@ public class LottoGenerator {
         }
     }
 
-    public List<Lotto> generateLotto(int totalCount) {
+    public Lottos generateLotto(int totalCount) {
         ArrayList<Lotto> lottoList = new ArrayList<>();
-
         for (int count = 0; count < totalCount; count++) {
             Collections.shuffle(numberList, random);
             List<Integer> lottoNumbers = new ArrayList<>(numberList.subList(0,6));
             lottoList.add(new Lotto(lottoNumbers));
         }
-
-        return lottoList;
+        return new Lottos(lottoList);
     }
 }
