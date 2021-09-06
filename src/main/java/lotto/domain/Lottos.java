@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
     private final List<Lotto> lottos;
+
+    public Lottos() {
+        this(new ArrayList<>());
+    }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -25,6 +30,17 @@ public class Lottos {
         }
 
         return new WinningResult(Arrays.asList(prizeNums));
+    }
+
+    public Lottos add(Lottos lottosToAdd) {
+        return lottosToAdd.add(lottos);
+    }
+
+    private Lottos add(List<Lotto> lottoListToAdd) {
+        List<Lotto> lottoList = new ArrayList(lottos);
+        lottoList.addAll(lottoListToAdd);
+
+        return new Lottos(lottoList);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
     public static final int NUMS_PER_LOTTO = 6;
@@ -8,11 +11,27 @@ public class LottoMachine {
 
     private Money money;
     private Lottos lottos;
+    private AffordableLottoCount affordableLottoCount;
+
+//    public LottoMachine(int money, GenerateNumStrategy generateNumStrategy) {
+//        this.money = new Money(money);
+//        this.generateNumStrategy = generateNumStrategy;
+//        this.lottos = generateLottos();
+//    }
 
     public LottoMachine(int money, GenerateNumStrategy generateNumStrategy) {
+        this(money, 0, new Lottos(), generateNumStrategy);
+    }
+
+    public LottoMachine(int money, int manualLottoCount, List<Lotto> manualLottoList, GenerateNumStrategy generateNumStrategy) {
+        this(money, manualLottoCount, new Lottos(manualLottoList), generateNumStrategy);
+    }
+
+    public LottoMachine(int money, int manualLottoCount, Lottos manualLotto, GenerateNumStrategy generateNumStrategy) {
         this.money = new Money(money);
         this.generateNumStrategy = generateNumStrategy;
-        this.lottos = generateLottos();
+        AffordableLottoCount affordableLottoCount = new AffordableLottoCount(this.money.calculateBuyableLottos(LOTTO_PRICE), manualLottoCount);
+        this.lottos = generateLottos2(manualLotto, affordableLottoCount);
     }
 
     LottoMachine(GenerateNumStrategy generateNumStrategy) {
@@ -33,6 +52,10 @@ public class LottoMachine {
 
     Lottos generateLottos() {
         return generateNumStrategy.generate(calculateBuyableLottos(), NUMS_PER_LOTTO);
+    }
+
+    Lottos generateLottos2(Lottos manualInputLotto, AffordableLottoCount affordableLottoCount) {
+        return manualInputLotto.add(generateNumStrategy.generate(affordableLottoCount.getCountToAutoGenerate(), NUMS_PER_LOTTO));
     }
 
     WinningResult countWinningPrize(WinningNumber winningNumber) {

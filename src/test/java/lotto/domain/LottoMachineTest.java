@@ -15,13 +15,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoMachineTest {
     LottoMachine lottoMachine;
+    List<Lotto> lottoList;
     Lottos lottos;
     WinningNumber winningNumber;
     List<Integer> winningNumberList;
 
     @BeforeEach
     void initializeLottoSimulation() {
-        List<Lotto> lottoList = new ArrayList<>(
+        lottoList = new ArrayList<>(
                 Arrays.asList(
                         new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
                         new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
@@ -101,5 +102,33 @@ public class LottoMachineTest {
     void getYield_수익률_계산() {
         assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 1))).isEqualTo(1505000.0/14500.0);
         assertThat(lottoMachine.getYield(new WinningNumber(winningNumberList, 44))).isEqualTo(30005000.0/14500.0);
+    }
+
+    @Test
+    void LottoMachine_수동_로또_입력() {
+        int money = 18500;
+        int autoLottoCount = 4;
+
+        LottoMachine lottoMachine = new LottoMachine(money, lottoList.size(), lottoList, new GenerateNumStrategy() {
+            @Override
+            public Lottos generate(int totalLottoNum, int numsPerLotto) {
+                return new Lottos(generateTempLottoList(totalLottoNum));
+            }
+        });
+
+        List<Lotto> tempLottoList = generateTempLottoList(autoLottoCount);
+        tempLottoList.addAll(lottoList);
+        Lottos compared = new Lottos(tempLottoList);
+        assertThat(lottoMachine.getLottos()).isEqualTo(compared);
+    }
+
+    List<Lotto> generateTempLottoList(int totalLottoNum) {
+        Lotto tempLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Lotto> tempLottoList = new ArrayList<>(totalLottoNum);
+        for (int i = 0; i < totalLottoNum; i++) {
+            tempLottoList.add(tempLotto);
+        }
+
+        return tempLottoList;
     }
 }
