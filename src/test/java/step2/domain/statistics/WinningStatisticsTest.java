@@ -64,4 +64,5 @@ class WinningStatisticsTest {
         assertThat(secondActual).isEqualTo(secondExpected);
         assertThat(firstActual).isNotEqualTo(secondActual);
     }
+
 }

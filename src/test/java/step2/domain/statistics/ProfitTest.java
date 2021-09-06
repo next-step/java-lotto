@@ -22,14 +22,14 @@ class ProfitTest {
     }
 
     @Test
-    @DisplayName("기존 수익금액에 구매 갯수로 수익률을 계산한다")
+    @DisplayName("5등 1개, 미당첨 13개, 총 14개. 기존 수익금액에 구매 갯수로 수익률을 계산")
     void calculateProfitRateTest() {
-        final Profit actual = new Profit();
-        actual.add(Rank.FIFTH);
-        actual.calculateProfitRate(new Amount(14));
+        final Profit profit = new Profit();
+        profit.add(Rank.FIFTH);
+        final ProfitRate actual = profit.calculateProfitRate(new Amount(14));
 
         final double expectedProfitRate = Rank.FIFTH.winnings / (double) 14000;
-        final Profit expected = new Profit(Rank.FIFTH.winnings, expectedProfitRate);
+        final ProfitRate expected = new ProfitRate(expectedProfitRate);
 
         System.out.println(actual);
         System.out.println(expected);

@@ -1,5 +1,7 @@
 package step2.domain.lotto;
 
+import step2.domain.statistics.Match;
+import step2.domain.statistics.Statistics;
 import step2.domain.statistics.WinningStatistics;
 import step2.vo.Rank;
 
@@ -15,12 +17,14 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningStatistics match(Lottos issueLottos) {
+    public Statistics match(Lottos issueLottos) {
         final WinningStatistics winningStatistics = new WinningStatistics();
+        final Match match = new Match();
         for (Lotto issueLotto : issueLottos.lottos) {
             Rank matchRank = issueLotto.match(this.lottoNumbers, bonusNumber);
+            match.add(matchRank);
             winningStatistics.add(matchRank);
         }
-        return winningStatistics;
+        return new Statistics(winningStatistics, match);
     }
 }

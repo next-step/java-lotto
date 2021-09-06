@@ -7,15 +7,11 @@ import java.util.Objects;
 public class Profit {
     private long profit;
 
-    public Profit(long profit) {
-        this.profit = profit;
-    }
-
     public Profit() {
         this(0);
     }
 
-    public Profit(long profit, double profitRate) {
+    public Profit(long profit) {
         this.profit = profit;
     }
 

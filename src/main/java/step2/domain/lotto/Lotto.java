@@ -16,7 +16,7 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    protected Lotto(LottoNumbers lottoNumbers) {
+    public Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -5,6 +5,7 @@ import step2.domain.lotto.LottoNumbers;
 import step2.domain.lotto.Lottos;
 import step2.domain.lotto.WinningLotto;
 import step2.domain.statistics.Amount;
+import step2.domain.statistics.Statistics;
 import step2.domain.statistics.WinningStatistics;
 import step2.view.InputDto;
 import step2.view.InputView;
@@ -25,9 +26,9 @@ public class LottoApplication {
         final LottoNumber bonusNumber = inputView.inputBonusNumber();
         final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers, bonusNumber);
 
-        final WinningStatistics winningStatistics = winningLotto.match(issueLottos);
-        outputView.println(winningStatistics);
-        outputView.println(winningStatistics.profitRate());
+        final Statistics statistics = winningLotto.match(issueLottos);
+        outputView.println(statistics);
+        outputView.println(statistics.profitRate());
     }
 
 }
