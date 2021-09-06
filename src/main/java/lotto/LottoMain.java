@@ -7,8 +7,15 @@ public class LottoMain {
         LottoGenerator lottoGenerator = new LottoGenerator();
         int amount = InputView.getPurchaseAmount();
 
-        ResultView.printCount(lottoGenerator.getCount(amount));
-        List<Lotto> lottoList = lottoGenerator.generateLotto(amount);
+        LottoPrice lottoPrice = new LottoPrice();
+        int totalCount = lottoPrice.getAvailableCount(amount);
+        if (totalCount == 0) {
+            InputView.printZeroCountError();
+            return;
+        }
+        ResultView.printCount(totalCount);
+
+        List<Lotto> lottoList = lottoGenerator.generateLotto(totalCount);
         ResultView.printLottoList(lottoList);
 
         InputView.refreshLine();

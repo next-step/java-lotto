@@ -4,8 +4,6 @@ import java.util.*;
 
 
 public class LottoGenerator {
-    public static final int PRICE = 1000;
-
     private final Random random = new Random(System.nanoTime());
     private final ArrayList<Integer> numberList = new ArrayList<>();
 
@@ -15,12 +13,7 @@ public class LottoGenerator {
         }
     }
 
-    public int getCount(int amount) {
-        return amount / PRICE;
-    }
-
-    public List<Lotto> generateLotto(int amount) {
-        int totalCount = getCount(amount);
+    public List<Lotto> generateLotto(int totalCount) {
         ArrayList<Lotto> lottoList = new ArrayList<>();
 
         for (int count = 0; count < totalCount; count++) {

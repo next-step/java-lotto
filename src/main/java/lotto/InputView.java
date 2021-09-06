@@ -35,4 +35,8 @@ public class InputView {
     private static String inputWinningNumbers() {
         return scanner.nextLine();
     }
+
+    public static void printZeroCountError() {
+        System.out.println("구매 가능한 로또가 존재하지 않으므로 프로그램을 종료합니다.");
+    }
 }
