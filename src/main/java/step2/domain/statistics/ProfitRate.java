@@ -20,6 +20,7 @@ public class ProfitRate {
                 .append("총 수익률은 ")
                 .append(Math.floor(this.profitRate * 100) / 100.0)
                 .append("입니다.")
+                .append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)")
                 .toString();
     }
 
