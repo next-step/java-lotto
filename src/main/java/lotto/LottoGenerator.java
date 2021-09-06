@@ -12,7 +12,8 @@ public class LottoGenerator {
 
         for (int count = 0; count < totalCount; count++) {
             Collections.shuffle(numbersPool, random);
-            List<Integer> lottoNumbers = new ArrayList<>(numbersPool.subList(0,6));
+            List<Integer> numbers = new ArrayList<>(numbersPool.subList(0,6));
+            LottoNumbers lottoNumbers = new LottoNumbers(numbers);
             lottoList.add(new Lotto(lottoNumbers));
         }
         return new Lottos(lottoList);

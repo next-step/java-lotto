@@ -1,14 +1,16 @@
 package lotto;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
     private final LottoNumbers numbers;
 
     public Lotto(List<Integer> numbers) {
-        Collections.sort(numbers);
-        this.numbers = new LottoNumbers(numbers);
+        this(new LottoNumbers(numbers));
+    }
+
+    public Lotto(LottoNumbers numbers) {
+        this.numbers = numbers;
     }
 
     public LottoRank checkWinning(LottoNumbers winningNumbers) {

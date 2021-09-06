@@ -16,9 +16,9 @@ class LottosTest {
     @DisplayName("로또 당첨 결과를 올바르게 가져오는지 테스트")
     void result() {
         int amount = 1000;
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(winningNumbers)));
-        LottoResult lottoResult = lottos.result(new LottoNumbers(winningNumbers), amount);
+        LottoResult lottoResult = lottos.result(winningNumbers, amount);
 
         assertThat(lottoResult.winningCount(LottoRank.FIRST)).isEqualTo(1);
     }

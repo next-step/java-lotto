@@ -14,6 +14,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         validateNumbers(numbers);
+        Collections.sort(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
