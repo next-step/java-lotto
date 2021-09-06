@@ -1,21 +1,23 @@
 package domain;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoCalculator {
 
 	private static final Integer INIT_NUMBER = 0;
-	private static final Integer CONTAINER_INIT_NUMBER = 7;
 	private static final Integer UNIT = 1000;
 
-	private int[] container;
+	private List<Rank> container;
 
 	public LottoCalculator() {
-		container = new int[CONTAINER_INIT_NUMBER];
+		container = new ArrayList<>();
 	}
 
-	public int[] getResult(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
-		validateLottoList(lottoList, lottoWinningNumber);
+	public List<Rank> getResult(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
+		validateLottoList(lottoList, lottoWinningNumber, bonusNumber);
 		return container;
 	}
 
@@ -23,13 +25,20 @@ public class LottoCalculator {
 		return account / UNIT;
 	}
 
-	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber) {
+	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
 		for (int number = INIT_NUMBER ; number < lottoList.size() ; ++number) {
-			container[numberOfMatches(lottoList.get(number), lottoWinningNumber)]++;
+			Integer countOfMatches = numberOfMatches(lottoList.get(number), lottoWinningNumber);
+			Boolean bonusStatus = bonusNumberOfMatches(lottoList.get(number), bonusNumber);
+			Rank rank = Rank.rank(countOfMatches, bonusStatus);
+			container.add(rank);
 		}
 	}
 
 	private Integer numberOfMatches(Lotto lotto, Lotto lottoWinningNumber) {
 		return Lotto.numberOfMatches(lotto, lottoWinningNumber);
+	}
+
+	private Boolean bonusNumberOfMatches(Lotto lotto, Number bonusNumber) {
+		return Lotto.bonusNumberOfMatches(lotto, bonusNumber);
 	}
 }
