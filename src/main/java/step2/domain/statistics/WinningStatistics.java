@@ -21,16 +21,15 @@ public class WinningStatistics {
     public WinningStatistics(Map<Rank, Integer> match, long profit, double profitRate, int totalPurchaseAmount) {
         this.match = new Match(match);
         this.profit = new Profit(profit);
-        this.profitRate = new ProfitRate(profitRate);
         this.totalPurchaseAmount = new Amount(totalPurchaseAmount);
-        this.profit.calculateProfitRate(this.totalPurchaseAmount);
+        this.profitRate = new ProfitRate(profitRate);
     }
 
     public void add(Rank rank) {
         this.match.add(rank);
         this.profit.add(rank);
         this.totalPurchaseAmount = this.totalPurchaseAmount.add();
-        this.profitRate = this.profitRate.calculateProfitRate(this.profit, this.totalPurchaseAmount);
+        this.profitRate = this.profit.calculateProfitRate(this.totalPurchaseAmount);
     }
 
 
@@ -42,7 +41,6 @@ public class WinningStatistics {
                 .append(this.profitRate)
                 .toString();
     }
-
 
     @Override
     public boolean equals(Object o) {

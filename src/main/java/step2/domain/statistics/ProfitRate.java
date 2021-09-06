@@ -13,10 +13,6 @@ public class ProfitRate {
         this(1.0);
     }
 
-    public ProfitRate calculateProfitRate(Profit profit, Amount amount) {
-        return profit.calculateProfitRate(amount);
-    }
-
 
     @Override
     public String toString() {

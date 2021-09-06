@@ -24,7 +24,7 @@ public class Profit {
     }
 
     public ProfitRate calculateProfitRate(Amount amount) {
-        return new ProfitRate(this.profit / (double) amount.price());
+        return new ProfitRate(this.profit / amount.price());
     }
 
 
@@ -39,5 +39,12 @@ public class Profit {
     @Override
     public int hashCode() {
         return Objects.hash(profit);
+    }
+
+    @Override
+    public String toString() {
+        return "Profit{" +
+                "profit=" + profit +
+                '}';
     }
 }
