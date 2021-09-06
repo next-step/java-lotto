@@ -2,6 +2,7 @@ package step2.view;
 
 import step2.domain.lotto.LottoNumber;
 import step2.domain.lotto.LottoNumbers;
+import step2.domain.lotto.Price;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,11 +18,7 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         final int price = Integer.parseInt(scanner.nextLine());
 
-        return new InputDto(getNumberOfPurchases(price));
-    }
-
-    public static int getNumberOfPurchases(int price) {
-        return price / LOTTO_PRICE;
+        return new InputDto(new Price(price).amount());
     }
 
     public LottoNumbers inputLastWinningNumbers() {

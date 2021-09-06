@@ -7,12 +7,16 @@ public class Amount {
 
     private int amount;
 
-    public Amount(int amount) {
-        this.amount = amount;
-    }
-
     public Amount() {
         this(0);
+    }
+
+    public Amount(int amount) {
+        if (amount < 0) {
+            final String message = String.format("1개(%d원) 미만은 구매할 수 없습니다.", LOTTO_PRICE);
+            throw new RuntimeException(message);
+        }
+        this.amount = amount;
     }
 
     public double price() {

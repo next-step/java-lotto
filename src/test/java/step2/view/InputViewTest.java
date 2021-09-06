@@ -8,13 +8,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputViewTest {
-    @Test
-    void purchaseAmountTest() {
-        final int inputValue = 14000;
-        final int count = InputView.getNumberOfPurchases(inputValue);
-        final int expected = 14;
-        assertThat(count).isEqualTo(expected);
-    }
 
     @Test
     void convertTest() {
