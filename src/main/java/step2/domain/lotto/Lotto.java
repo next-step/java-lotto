@@ -1,5 +1,7 @@
 package step2.domain.lotto;
 
+import step2.vo.Rank;
+
 import java.util.List;
 
 public class Lotto {
@@ -19,7 +21,11 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
-    protected int match(LottoNumbers winningLottoNumbers) {
-        return winningLottoNumbers.countNumberOfMatch(this.lottoNumbers);
+    protected Rank match(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        final Rank rank = winningLottoNumbers.countNumberOfMatch(this.lottoNumbers);
+        if (rank.equals(Rank.THIRD) && this.lottoNumbers.isContains(bonusNumber)) {
+            return Rank.SECOND;
+        }
+        return rank;
     }
 }

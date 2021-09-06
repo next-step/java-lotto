@@ -9,17 +9,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
 
     @Test
-    @DisplayName("3등(4개 일치) 확인 테스트 ")
-    void countNumberOfMatchTest() {
-        final LottoNumbers winningNumber = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
-        int matchCount = winningNumber.countNumberOfMatch(lottoNumbers);
-        int expected = 4;
-        assertThat(matchCount).isEqualTo(expected);
+    @DisplayName("Bouns Number로 중복 값 넣을 시 생성 실패")
+    void createWinningLottoSuccessTest() {
+        final int bonusNumberValue = 6;
+        final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, bonusNumberValue);
+        assertThatThrownBy(() -> new WinningLotto(lottoNumbers, bonusNumberValue))
+                .isExactlyInstanceOf(RuntimeException.class)
+                .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
     @Test
@@ -32,7 +33,7 @@ public class WinningLottoTest {
                 new Lotto(lottoNumbers)));
         System.out.println(wonLottos);
 
-        final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
         final WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
@@ -51,7 +52,7 @@ public class WinningLottoTest {
                 new Lotto(lottoNumbers)));
         System.out.println(wonLottos);
 
-        final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinningLotto standardLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
         WinningStatistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 

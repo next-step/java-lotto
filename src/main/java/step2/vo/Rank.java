@@ -25,8 +25,12 @@ public enum Rank {
             return Rank.NONE;
         }
 
+        if (Rank.THIRD.matchNumber == matchCount) {
+            return Rank.THIRD;
+        }
+
         return Arrays.stream(Rank.values())
-                .filter(m -> m.matchNumber == matchCount)
+                .filter(r -> r.matchNumber == matchCount)
                 .findFirst()
                 .get();
     }
@@ -43,11 +47,14 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(matchNumber)
-                .append("개 일치(")
-                .append(winnings)
-                .append("원)")
-                .toString();
+        final StringBuilder output = new StringBuilder()
+                .append(matchNumber).append("개 일치");
+
+        if (this.equals(Rank.SECOND)) {
+            output.append(", 보너스 볼 일치");
+        }
+
+        output.append(" (").append(winnings).append("원)");
+        return output.toString();
     }
 }

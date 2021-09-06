@@ -15,4 +15,9 @@ public class LottoApplicationTest {
         final int expected = numberOfPurchases;
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void mainTest() {
+
+    }
 }

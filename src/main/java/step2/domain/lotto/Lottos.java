@@ -6,7 +6,7 @@ import java.util.List;
 public class Lottos {
     List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int count) {
+    public Lottos(int count) { // todo amount ?
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }

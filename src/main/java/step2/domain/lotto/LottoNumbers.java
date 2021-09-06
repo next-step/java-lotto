@@ -1,5 +1,7 @@
 package step2.domain.lotto;
 
+import step2.vo.Rank;
+
 import java.util.*;
 
 public class LottoNumbers {
@@ -42,16 +44,20 @@ public class LottoNumbers {
         }
     }
 
-    public int countNumberOfMatch(LottoNumbers lottoNumbers) {
-        int count = 0;
+    public Rank countNumberOfMatch(LottoNumbers lottoNumbers) {
+        int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
-            count += getIfContains(lottoNumber);
+            matchCount += getIfContains(lottoNumber);
         }
-        return count;
+        return Rank.createRank(matchCount);
     }
 
     private int getIfContains(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    }
+
+    public boolean isContains(LottoNumber lottoNumber) {
+        return this.getIfContains(lottoNumber) == 1 ? true : false;
     }
 
     @Override

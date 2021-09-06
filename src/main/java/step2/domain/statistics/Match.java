@@ -7,26 +7,38 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Match {
-    private Map<Rank, Integer> match = new HashMap<>();
+    private Map<Rank, Integer> match = new HashMap(){
+        {
+            put(Rank.FIFTH, 0);
+            put(Rank.FOURTH, 0);
+            put(Rank.THIRD, 0);
+            put(Rank.SECOND, 0);
+            put(Rank.FIRST, 0);
+        }
+    };
 
     public Match() {
         this.match.put(Rank.FIFTH, 0);
         this.match.put(Rank.FOURTH, 0);
         this.match.put(Rank.THIRD, 0);
+        this.match.put(Rank.SECOND, 0);
         this.match.put(Rank.FIRST, 0);
+    }
+
+    public Match(int matchCount) { // todo
+
     }
 
     public Match(Map<Rank, Integer> match) {
         this.match.putAll(match);
     }
 
-    public void computeIfPresent(Rank rank) {
+    public void add(Rank rank) {
         if (this.match.containsKey(rank)) {
             Integer numberOfMatches = this.match.get(rank);
             this.match.put(rank, ++numberOfMatches);
         }
     }
-
 
     @Override
     public String toString() {
@@ -37,6 +49,8 @@ public class Match {
                 .append(this.match.get(Rank.FOURTH)).append("개\n")
                 .append(Rank.THIRD).append("- ")
                 .append(this.match.get(Rank.THIRD)).append("개\n")
+                .append(Rank.SECOND).append("- ")
+                .append(this.match.get(Rank.SECOND)).append("개\n")
                 .append(Rank.FIRST).append("- ")
                 .append(this.match.get(Rank.FIRST)).append("개\n")
                 .toString();

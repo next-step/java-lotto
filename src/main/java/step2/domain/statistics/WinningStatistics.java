@@ -26,13 +26,13 @@ public class WinningStatistics {
         this.profit.calculateProfitRate(this.totalPurchaseAmount);
     }
 
-    public void add(int matchCount) {
-        final Rank rank = Rank.createRank(matchCount);
-        this.match.computeIfPresent(rank);
+    public void add(Rank rank) {
+        this.match.add(rank);
         this.profit.add(rank);
         this.totalPurchaseAmount = this.totalPurchaseAmount.add();
         this.profitRate = this.profitRate.calculateProfitRate(this.profit, this.totalPurchaseAmount);
     }
+
 
     @Override
     public String toString() {
