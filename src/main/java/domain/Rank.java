@@ -19,15 +19,24 @@ public enum Rank {
 		this.amount = amount;
 	}
 
-	public static Rank rank(int matchNumber) {
+	public static Rank rank(int matchNumber, boolean bonusStatus) {
+
+		if (matchNumber == 5 && bonusStatus) {
+			return SECOND;
+		}
+
+		if (matchNumber == 5) {
+			return THIRD;
+		}
 
 		return Arrays.stream(values())
-						.filter(rank -> Rank.match(rank,matchNumber))
+						.filter(rank -> Rank.match(rank, matchNumber))
 						.findFirst()
 						.orElse(MISS);
 	}
 
 	public static boolean match(Rank rank, int matchNumber) {
+
 		return rank.matchNumber == matchNumber;
 	}
 
