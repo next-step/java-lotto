@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +9,7 @@ public class LottoResult {
 
     public LottoResult(int amount) {
         this.amount = amount;
-        Arrays.stream(LottoRank.values()).forEach(rank -> rankRecord.put(rank, 0));
+        LottoRank.ranks().forEach(rank -> rankRecord.put(rank, 0));
     }
 
     public void record(LottoRank rank) {
@@ -18,11 +17,8 @@ public class LottoResult {
         rankRecord.put(rank, curCount + 1);
     }
 
-    public String toStringRankResult(LottoRank rank) {
-        if (rank == LottoRank.NONE) return "";
-        return rank.getMatchCount() + "개 일치" +
-                " (" + rank.getMatchReward() + "원)" +
-                "- " + rankRecord.get(rank) + "개";
+    public int winningCount(LottoRank rank) {
+        return rankRecord.get(rank);
     }
 
     public Double profitRate() {

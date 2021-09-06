@@ -16,8 +16,12 @@ public class ResultView {
     public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (LottoRank rank : LottoRank.values()) {
-            System.out.println(lottoResult.toStringRankResult(rank));
+        for (LottoRank rank : LottoRank.ranks()) {
+            System.out.println(
+                    rank.getMatchCount() + "개 일치" +
+                    " (" + rank.getMatchReward() + "원)" +
+                    "- " + lottoResult.winningCount(rank) + "개"
+            );
         }
         double profitRate = lottoResult.profitRate();
         System.out.println("총 수익률은 " + profitRate + "입니다.");

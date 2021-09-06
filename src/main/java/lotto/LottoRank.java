@@ -1,5 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum LottoRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
@@ -21,6 +25,10 @@ public enum LottoRank {
 
     public int getMatchReward() {
         return matchReward;
+    }
+
+    public static List<LottoRank> ranks() {
+        return Arrays.stream(LottoRank.values()).filter(rank -> rank != LottoRank.NONE).collect(Collectors.toList());
     }
 
     public static LottoRank valueOf(int matchCount) {
