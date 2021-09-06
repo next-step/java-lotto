@@ -22,6 +22,13 @@ public class Lotto {
 		return sum;
 	}
 
+	public static boolean bonusNumberOfMatches(Lotto lotto, Number bonusNumber) {
+		if (lotto.lotto.contains(bonusNumber)) {
+			return true;
+		}
+		return false;
+	}
+
 	public static Integer containStatus(Lotto lottoWinningNumber, Number lottoNumber) {
 		if (lottoWinningNumber.lotto.contains(lottoNumber)) {
 			return PLUS_NUMBER;
