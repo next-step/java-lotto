@@ -18,8 +18,14 @@ public class LottoNumbers {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public List<Integer> values() {
-        return Collections.unmodifiableList(numbers);
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public int equalNumberCount(LottoNumbers lottoNumbers) {
+        return (int) numbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     @Override

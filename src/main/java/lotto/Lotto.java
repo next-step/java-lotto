@@ -14,9 +14,7 @@ public class Lotto {
     }
 
     public LottoRank checkWinning(LottoNumbers winningNumbers) {
-        int equalNumberCount = (int) numbers.values().stream()
-                .filter(number -> winningNumbers.values().contains(number))
-                .count();
+        int equalNumberCount = numbers.equalNumberCount(winningNumbers);
         return LottoRank.valueOf(equalNumberCount);
     }
 
