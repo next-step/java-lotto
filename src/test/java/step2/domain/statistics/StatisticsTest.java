@@ -3,7 +3,7 @@ package step2.domain.statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.lotto.*;
-import step2.utils.WinningStatisticsTestUtil;
+import step2.utils.ProfitTestUtil;
 import step2.vo.Rank;
 
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class StatisticsTest {
         final Statistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final WinningStatistics expectedStatistics = WinningStatisticsTestUtil.createWinningStatistics(Rank.FIRST, 3, 3);
+        final Profit expectedStatistics = ProfitTestUtil.createProfit(Rank.FIRST, 3, 3);
         final Match expectedMatch = new Match(Rank.FIRST, 3);
         final Statistics expected = new Statistics(expectedStatistics, expectedMatch);
         System.out.println(expected);
@@ -47,7 +47,7 @@ public class StatisticsTest {
         Statistics actual = standardLotto.match(wonLottos);
         System.out.println(actual);
 
-        final WinningStatistics expectedStatistics = WinningStatisticsTestUtil.createWinningStatistics(Rank.FIFTH, 3, 3);
+        final Profit expectedStatistics = ProfitTestUtil.createProfit(Rank.FIFTH, 3, 3);
         final Match expectedMatch = new Match(Rank.FIFTH, 3);
         final Statistics expected = new Statistics(expectedStatistics, expectedMatch);
         System.out.println(expected);

@@ -3,16 +3,16 @@ package step2.domain.statistics;
 import java.util.Objects;
 
 public class Statistics {
-    private final WinningStatistics winningStatistics;
+    private final Profit profit;
     private final Match match;
 
-    public Statistics(WinningStatistics winningStatistics, Match match) {
-        this.winningStatistics = winningStatistics;
+    public Statistics(Profit profit, Match match) {
+        this.profit = profit;
         this.match = match;
     }
 
     public ProfitRate profitRate() {
-        return this.winningStatistics.profitRate();
+        return this.profit.profitRate();
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Statistics {
         if (this == o) return true;
         if (!(o instanceof Statistics)) return false;
         Statistics that = (Statistics) o;
-        return Objects.equals(winningStatistics, that.winningStatistics) && Objects.equals(match, that.match);
+        return Objects.equals(profit, that.profit) && Objects.equals(match, that.match);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(winningStatistics, match);
+        return Objects.hash(profit, match);
     }
 
     @Override
