@@ -1,8 +1,8 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -11,8 +11,8 @@ public class Lottos {
         lottos = new ArrayList<>(lottoList);
     }
 
-    public List<Lotto> values() {
-        return Collections.unmodifiableList(lottos);
+    public List<String> toStringLottos() {
+        return lottos.stream().map(Lotto::toString).collect(Collectors.toList());
     }
 
     public int size() {

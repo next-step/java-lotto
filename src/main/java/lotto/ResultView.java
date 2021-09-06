@@ -1,15 +1,13 @@
 package lotto;
 
-import java.util.List;
-
 public class ResultView {
     public static void printCount(int count) {
         System.out.println(count + "개를 구입하였습니다.");
     }
 
     public static void printLottoList(Lottos lottos) {
-        for (Lotto lotto : lottos.values()) {
-            System.out.println(lotto);
+        for (String lottoString : lottos.toStringLottos()) {
+            System.out.println(lottoString);
         }
     }
 
