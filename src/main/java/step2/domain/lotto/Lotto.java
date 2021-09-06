@@ -26,10 +26,8 @@ public class Lotto {
     }
 
     protected Rank match(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
-        final Rank rank = winningLottoNumbers.countNumberOfMatch(this.lottoNumbers);
-        if (rank.equals(Rank.THIRD) && this.lottoNumbers.isContains(bonusNumber)) {
-            return Rank.SECOND;
-        }
-        return rank;
+        final int matchCount = winningLottoNumbers.matchCount(this.lottoNumbers);
+        final boolean bonusContained = this.lottoNumbers.contained(bonusNumber);
+        return Rank.rank(matchCount, bonusContained);
     }
 }

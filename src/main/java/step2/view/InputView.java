@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final int LOTTO_PRICE = 1000;
 
     private final Scanner scanner = new Scanner(System.in);
 

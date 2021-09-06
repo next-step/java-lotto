@@ -18,10 +18,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int count() {
-        return lottos.size();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

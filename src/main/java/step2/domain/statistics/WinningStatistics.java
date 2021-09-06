@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class WinningStatistics {
     private Match match;
-    private Profit profit;
+    private Profit profit; // todo remove
     private ProfitRate profitRate;
-    private Amount totalPurchaseAmount;
+    private Amount totalPurchaseAmount; // todo remove
 
     public WinningStatistics() {
         this.match = new Match();

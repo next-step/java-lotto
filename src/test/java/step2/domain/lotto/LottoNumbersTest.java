@@ -2,7 +2,6 @@ package step2.domain.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.vo.Rank;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumbersTest {
     @Test
     void createLottoNumbersDuplicateExceptionTest() {
-        assertThatThrownBy(() -> new LottoNumbers((LottoNumberGenerationStrategy) () -> 1))
+        assertThatThrownBy(() -> new LottoNumbers(() -> 1))
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자 생성 시간이 초과되었습니다.");
     }
@@ -51,34 +50,23 @@ public class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("일반 로또 숫자 4개 일치시 4등 확인 테스트")
-    void countNumberOfMatch2Test() {
+    @DisplayName("일반 로또 숫자 4개 일치 확인 테스트")
+    void countNumberOfMatchTest() {
         final LottoNumbers winningNumber = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
-        final Rank actual = winningNumber.countNumberOfMatch(lottoNumbers);
-        final Rank expected = Rank.FOURTH;
+        final int actual = winningNumber.matchCount(lottoNumbers);
+        final int expected = 4;
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("일반 로또 숫자 5개 일치시 3등 확인 테스트")
-    void countNumberOfMatch2SuccessTest() {
+    @DisplayName("일반 로또 숫자 5개 일치 확인 테스트")
+    void countNumberOfMatchSuccessTest() {
         final LottoNumbers issueLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
         final LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10));
-        final Rank actual = issueLottoNumbers.countNumberOfMatch(winningLottoNumbers);
-
-        final Rank expected = Rank.THIRD;
+        final int actual = issueLottoNumbers.matchCount(winningLottoNumbers);
+        final int expected = 5;
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Test
-    @DisplayName("일반 로또 숫자 5개 일치시 2등 실패 테스트")
-    void countNumberOfMatch2FailTest() {
-        final LottoNumbers issueLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
-        final LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10));
-        final Rank actual = issueLottoNumbers.countNumberOfMatch(winningLottoNumbers);
-
-        final Rank expected = Rank.SECOND;
-        assertThat(actual).isNotEqualTo(expected);
-    }
 }

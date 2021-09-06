@@ -9,7 +9,7 @@ public class WinningLotto extends Lotto {
     public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         super(lottoNumbers);
 
-        if (this.lottoNumbers.isContains(bonusNumber)) {
+        if (this.lottoNumbers.contained(bonusNumber)) {
             throw new RuntimeException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
         this.bonusNumber = bonusNumber;

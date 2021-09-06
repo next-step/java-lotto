@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     NONE(0, 0);
 
     public int matchNumber;
@@ -20,12 +20,16 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public static Rank createRank(int matchCount) {
+    public static Rank rank(int matchCount, boolean bonusContained) {
         if (!isContains(matchCount)) {
             return Rank.NONE;
         }
 
-        if (Rank.THIRD.matchNumber == matchCount) {
+        if (Rank.SECOND.matchNumber == matchCount && bonusContained) {
+            return Rank.SECOND;
+        }
+
+        if (Rank.THIRD.matchNumber == matchCount && !bonusContained) {
             return Rank.THIRD;
         }
 
