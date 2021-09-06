@@ -7,6 +7,7 @@ import java.util.Scanner;
 import lotto.domain.LottoGame;
 import lotto.domain.Money;
 import lotto.exception.ExceedPurchaseCountException;
+import lotto.exception.NegativePurchaseCountException;
 
 public class InputView {
 
@@ -25,7 +26,7 @@ public class InputView {
       throw new ExceedPurchaseCountException();
     }
     if (manualLottoCnt < 0) {
-      throw new NegativeArraySizeException();
+      throw new NegativePurchaseCountException();
     }
 
     return manualLottoCnt;
