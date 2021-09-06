@@ -23,6 +23,10 @@ public class Amount {
         return new Amount(this.amount + 1);
     }
 
+    public boolean isLessThan(int amount) {
+        return this.amount > amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,5 +38,13 @@ public class Amount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(amount)
+                .append("개를 구매했습니다.")
+                .toString();
     }
 }

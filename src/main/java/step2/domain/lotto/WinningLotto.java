@@ -3,15 +3,12 @@ package step2.domain.lotto;
 import step2.domain.statistics.WinningStatistics;
 import step2.vo.Rank;
 
-import java.util.List;
-
 public class WinningLotto extends Lotto {
-    private LottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> lottoNumbers, int bonusNumberValue) {
+    public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         super(lottoNumbers);
 
-        final LottoNumber bonusNumber = new LottoNumber(bonusNumberValue);
         if (this.lottoNumbers.isContains(bonusNumber)) {
             throw new RuntimeException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }

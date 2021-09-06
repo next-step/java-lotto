@@ -16,6 +16,10 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
+    protected Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();

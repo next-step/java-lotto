@@ -1,10 +1,11 @@
 package step2.view;
 
 import step2.domain.lotto.Lottos;
+import step2.domain.statistics.Amount;
 
 public class OutputView {
-    public void printLottoPurchase(int amount, Lottos issueLottos) {
-        System.out.printf("%d개를 구매했습니다.\n", amount);
+    public void printLottoPurchase(Amount amount, Lottos issueLottos) {
+        System.out.println(amount);
         System.out.println(issueLottos);
     }
 

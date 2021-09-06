@@ -22,6 +22,10 @@ public class LottoNumbers {
         this(new LottoNumberAutoGenerationStrategy());
     }
 
+    LottoNumbers(LottoNumbers lottoNumbers) {
+        this.lottoNumbers.addAll(lottoNumbers.lottoNumbers);
+    }
+
     public LottoNumbers(List<Integer> lottoNumbers) {
         validLottoNumbers(lottoNumbers);
 
@@ -31,6 +35,7 @@ public class LottoNumbers {
 
         validLottoNumbers(this.lottoNumbers);
     }
+
 
     private void validCreationTime(long startTime) {
         if (System.currentTimeMillis() - startTime > LIMIT_TIME) {
