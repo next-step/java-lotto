@@ -28,22 +28,14 @@ public enum LottoRank {
     }
 
     public static List<LottoRank> ranks() {
-        return Arrays.stream(LottoRank.values()).filter(rank -> rank != LottoRank.NONE).collect(Collectors.toList());
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != LottoRank.NONE)
+                .collect(Collectors.toList());
     }
 
     public static LottoRank valueOf(int matchCount) {
-        if (matchCount < 3) {
-            return NONE;
-        }
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 5) {
-            return THIRD;
-        }
-        return FIRST;
+        return Arrays.stream(values())
+                .filter(rank -> rank.getMatchCount() == matchCount)
+                .findFirst().orElse(NONE);
     }
 }
