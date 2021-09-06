@@ -17,7 +17,7 @@ public class Lotto {
     }
 
     protected Lotto(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     @Override

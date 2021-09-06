@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumbersTest {
     @Test
     void createLottoNumbersDuplicateExceptionTest() {
-        assertThatThrownBy(() -> new LottoNumbers(() -> 1))
+        assertThatThrownBy(() -> new LottoNumbers((LottoNumberGenerationStrategy) () -> 1))
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자 생성 시간이 초과되었습니다.");
     }

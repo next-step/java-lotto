@@ -10,20 +10,16 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>(FIXED_NUMBER);
 
+    public LottoNumbers() {
+        this(new LottoNumberAutoGenerationStrategy());
+    }
+
     public LottoNumbers(LottoNumberGenerationStrategy strategy) {
         final long startTime = System.currentTimeMillis();
         while (lottoNumbers.size() < FIXED_NUMBER) {
             lottoNumbers.add(new LottoNumber(strategy.generateNumber()));
             validCreationTime(startTime);
         }
-    }
-
-    public LottoNumbers() {
-        this(new LottoNumberAutoGenerationStrategy());
-    }
-
-    LottoNumbers(LottoNumbers lottoNumbers) {
-        this.lottoNumbers.addAll(lottoNumbers.lottoNumbers);
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
