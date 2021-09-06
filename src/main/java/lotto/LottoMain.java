@@ -2,7 +2,14 @@ package lotto;
 
 public class LottoMain {
     public static void main(String[] args) {
-        int amount = InputView.getPurchaseAmount();
+        int amount;
+        try {
+            amount = InputView.getPurchaseAmount();
+        } catch (RuntimeException e) {
+            InputView.printInputError();
+            return;
+        }
+
         int totalCount = LottoPrice.getAvailableCount(amount);
         if (totalCount == 0) {
             InputView.printZeroCountError();
@@ -16,8 +23,15 @@ public class LottoMain {
 
         InputView.refreshLine();
 
-        String numbers = InputView.getWinningNumbers();
-        LottoNumbers winningNumbers = new LottoNumbers(StringParser.parse(numbers));
+        LottoNumbers winningNumbers;
+        try {
+            String numbers = InputView.getWinningNumbers();
+            winningNumbers = new LottoNumbers(StringParser.parse(numbers));
+        } catch (RuntimeException e) {
+            InputView.printInputError();
+            return;
+        }
+
         LottoResult lottoResult = lottos.result(winningNumbers, amount);
         ResultView.printResult(lottoResult);
     }

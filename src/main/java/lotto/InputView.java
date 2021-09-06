@@ -39,4 +39,8 @@ public class InputView {
     public static void printZeroCountError() {
         System.out.println("구매 가능한 로또가 존재하지 않으므로 프로그램을 종료합니다.");
     }
+
+    public static void printInputError() {
+        System.out.println("입력값이 올바르지 않습니다.");
+    }
 }
