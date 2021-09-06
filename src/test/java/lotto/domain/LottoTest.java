@@ -27,26 +27,29 @@ public class LottoTest {
     @Test
     void create_string_exception() {
         String lastWeekNumber = "1,2,3";
+        int lastBonusNumber = 45;
         assertThatExceptionOfType(NumberCountException.class).isThrownBy(
-                () -> new Lotto(lastWeekNumber));
+                () -> new Lotto(lastWeekNumber, lastBonusNumber));
     }
 
     @DisplayName("지난주 당첨번호가 1 ~ 45 외의 숫자면 예외가 발생한다.")
     @Test
     void invalidLottoNumberException() {
         String lastWeekNumber = "11,22,33,44,55,66";
+        int lastBonusNumber = 45;
 
         assertThatExceptionOfType(InvalidNumberException.class).isThrownBy(
-                () -> new Lotto(lastWeekNumber));
+                () -> new Lotto(lastWeekNumber, lastBonusNumber));
     }
 
     @DisplayName("지난주 당첨번호에 중복 번호가 존재하면 예외가 발생한다.")
     @Test
     void duplicateLastWeekLottoNumberException() {
         String lastWeekNumber = "1,1,1,1,1,1";
+        int lastBonusNumber = 45;
 
         assertThatExceptionOfType(DuplicateNumberException.class).isThrownBy(
-                () -> new Lotto(lastWeekNumber));
+                () -> new Lotto(lastWeekNumber,lastBonusNumber));
     }
 
     @DisplayName("로또 번호 생성 시 중복 번호가 존재하면 예외가 발생한다.")

@@ -14,6 +14,7 @@ public class LottoResultTest {
     void calculate() {
         List<Lotto> lottos = new ArrayList<>();
         String lastWeekNumbers = "1,2,3,11,22,33";
+        int lastBonusNumber = 45;
         int buyingCount = 1;
 
         List<LottoNumber> numbers = new ArrayList<>();
@@ -27,7 +28,7 @@ public class LottoResultTest {
         lottos.add(new Lotto(numbers));
 
         LottoTicket lottoTicket = new LottoTicket(lottos);
-        Lotto lotto = new Lotto(lastWeekNumbers);
+        Lotto lotto = new Lotto(lastWeekNumbers, lastBonusNumber);
 
         LottoResult lottoResult = lottoTicket.matchWinning(lotto);
 
