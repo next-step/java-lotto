@@ -15,6 +15,6 @@ public class WinningStatisticsTestUtil {
         }
         final Profit profit = new Profit(rank.winnings * rankQuantity);
         final Amount amount = new Amount(totalQuantity);
-        return new WinningStatistics(match, profit, profit.calculateProfitRate(amount), amount);
+        return new WinningStatistics(match, profit, amount);
     }
 }

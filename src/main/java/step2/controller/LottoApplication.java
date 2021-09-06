@@ -27,6 +27,7 @@ public class LottoApplication {
 
         final WinningStatistics winningStatistics = winningLotto.match(issueLottos);
         outputView.println(winningStatistics);
+        outputView.println(winningStatistics.profitRate());
     }
 
 }

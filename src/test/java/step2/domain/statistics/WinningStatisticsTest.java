@@ -44,4 +44,24 @@ class WinningStatisticsTest {
         final WinningStatistics expected = WinningStatisticsTestUtil.createWinningStatistics(Rank.SECOND, 2, 3);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("건당 수익률 계산 테스트")
+    void profitRateTest() {
+        final int LOTTO_PRICE = 1000;
+
+        final WinningStatistics winningStatistics = new WinningStatistics();
+        winningStatistics.add(Rank.NONE);
+        winningStatistics.add(Rank.FIFTH);
+        final ProfitRate firstActual = winningStatistics.profitRate();
+
+        final ProfitRate firstExpected = new ProfitRate((long) 5000 / ((double) 2 * LOTTO_PRICE));
+        assertThat(firstActual).isEqualTo(firstExpected);
+
+        winningStatistics.add(Rank.FIFTH);
+        final ProfitRate secondActual = winningStatistics.profitRate();
+        final ProfitRate secondExpected = new ProfitRate(10000 / ((double) 3 * LOTTO_PRICE));
+        assertThat(secondActual).isEqualTo(secondExpected);
+        assertThat(firstActual).isNotEqualTo(secondActual);
+    }
 }
