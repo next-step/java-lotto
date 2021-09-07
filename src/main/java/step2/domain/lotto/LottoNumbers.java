@@ -52,11 +52,17 @@ public class LottoNumbers {
     }
 
     private int getIfContains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
     }
 
     public boolean contained(LottoNumber lottoNumber) {
-        return this.getIfContains(lottoNumber) == 1 ? true : false;
+        if (this.getIfContains(lottoNumber) == 1) {
+            return true;
+        }
+        return false;
     }
 
     @Override
