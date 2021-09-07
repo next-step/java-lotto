@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable{
     private static final String EXCEP_INVALID_LOTTO_NUM = "유효한 로또 범위를 넘었습니다.";
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
@@ -51,5 +51,11 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        LottoNumber comparedNumber = (LottoNumber) o;
+        return number - comparedNumber.number;
     }
 }

@@ -5,7 +5,7 @@ public class Money {
     public static final int MIN_MONEY = 0;
     private final int money;
 
-    Money(int money) {
+    public Money(int money) {
         checkValidMoney(money);
         this.money = money;
     }

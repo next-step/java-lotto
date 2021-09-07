@@ -32,15 +32,9 @@ public class Lottos {
         return new WinningResult(Arrays.asList(prizeNums));
     }
 
-    public Lottos add(Lottos lottosToAdd) {
-        return lottosToAdd.add(lottos);
-    }
-
-    private Lottos add(List<Lotto> lottoListToAdd) {
-        List<Lotto> lottoList = new ArrayList(lottos);
-        lottoList.addAll(lottoListToAdd);
-
-        return new Lottos(lottoList);
+    public Lottos merge(Lottos lottosToAdd) {
+        lottos.addAll(lottosToAdd.lottos);
+        return new Lottos(lottos);
     }
 
     @Override

@@ -107,7 +107,7 @@ public class LottoMachineTest {
     @Test
     void LottoMachine_수동_로또_입력() {
         int money = 18500;
-        int autoLottoCount = 4;
+        int tempLottoCount = 4;
 
         LottoMachine lottoMachine = new LottoMachine(money, lottoList.size(), lottoList, new GenerateNumStrategy() {
             @Override
@@ -116,9 +116,9 @@ public class LottoMachineTest {
             }
         });
 
-        List<Lotto> tempLottoList = generateTempLottoList(autoLottoCount);
-        tempLottoList.addAll(lottoList);
-        Lottos compared = new Lottos(tempLottoList);
+        List<Lotto> tempLottoList = generateTempLottoList(tempLottoCount);
+        lottoList.addAll(tempLottoList);
+        Lottos compared = new Lottos(lottoList);
         assertThat(lottoMachine.getLottos()).isEqualTo(compared);
     }
 
