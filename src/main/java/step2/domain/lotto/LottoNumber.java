@@ -1,7 +1,5 @@
 package step2.domain.lotto;
 
-import step2.vo.LottoNumberValue;
-
 import java.util.Objects;
 
 public class LottoNumber {

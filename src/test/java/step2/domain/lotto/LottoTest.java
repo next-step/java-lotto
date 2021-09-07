@@ -2,7 +2,7 @@ package step2.domain.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.vo.Rank;
+import step2.domain.statistics.Rank;
 
 import java.util.Arrays;
 

@@ -1,7 +1,5 @@
 package step2.domain.statistics;
 
-import step2.vo.Rank;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

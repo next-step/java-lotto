@@ -1,7 +1,5 @@
 package step2.domain.lotto;
 
-import step2.vo.LottoNumberValue;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

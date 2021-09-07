@@ -1,7 +1,5 @@
 package step2.domain.statistics;
 
-import step2.vo.Rank;
-
 import java.util.Objects;
 
 public class Profit {

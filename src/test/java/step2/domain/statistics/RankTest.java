@@ -1,4 +1,4 @@
-package step2.vo;
+package step2.domain.statistics;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

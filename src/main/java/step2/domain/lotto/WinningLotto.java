@@ -3,7 +3,7 @@ package step2.domain.lotto;
 import step2.domain.statistics.Match;
 import step2.domain.statistics.Profit;
 import step2.domain.statistics.Statistics;
-import step2.vo.Rank;
+import step2.domain.statistics.Rank;
 
 public class WinningLotto extends Lotto {
     private final LottoNumber bonusNumber;

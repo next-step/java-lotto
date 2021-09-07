@@ -1,4 +1,4 @@
-package step2.vo;
+package step2.domain.statistics;
 
 import java.util.Arrays;
 import java.util.List;

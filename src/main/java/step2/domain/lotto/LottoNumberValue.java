@@ -1,4 +1,4 @@
-package step2.vo;
+package step2.domain.lotto;
 
 public enum LottoNumberValue {
     MIN(1), MAX(45);

@@ -1,6 +1,6 @@
 package step2.domain.lotto;
 
-import step2.vo.Rank;
+import step2.domain.statistics.Rank;
 
 import java.util.List;
 

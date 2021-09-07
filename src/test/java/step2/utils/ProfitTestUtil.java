@@ -3,7 +3,7 @@ package step2.utils;
 import step2.domain.statistics.Amount;
 import step2.domain.statistics.Profit;
 import step2.domain.statistics.Revenue;
-import step2.vo.Rank;
+import step2.domain.statistics.Rank;
 
 public class ProfitTestUtil {
 
