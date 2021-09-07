@@ -14,6 +14,15 @@ public class LottoNumbers {
 
   private final Set<LottoNumber> lottoNumbers;
 
+  public LottoNumbers(String numbers) {
+    this(
+        Arrays.stream(numbers.split(","))
+            .map(String::trim)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList())
+    );
+  }
+
   public LottoNumbers(int[] numbers) {
     this(
         Arrays.stream(numbers).boxed()
@@ -27,7 +36,7 @@ public class LottoNumbers {
     validateSize();
   }
 
-  public List<Integer> sortedNumbers() {
+  public List<Integer> numbers() {
     return lottoNumbers.stream()
         .map(LottoNumber::number)
         .collect(Collectors.toList());
@@ -40,11 +49,11 @@ public class LottoNumbers {
   }
 
   public boolean contains(LottoNumber lottoNumber) {
-    return this.lottoNumbers.contains(lottoNumber);
+    return lottoNumbers.contains(lottoNumber);
   }
 
   private void validateSize() {
-    if (this.lottoNumbers.size() != SIZE) {
+    if (lottoNumbers.size() != SIZE) {
       throw new InvalidLottoSizeException();
     }
   }

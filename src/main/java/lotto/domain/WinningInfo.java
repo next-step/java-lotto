@@ -18,15 +18,15 @@ public class WinningInfo {
   }
 
   public LottoNumbers winningLottoNumbers() {
-    return this.winningLottoNumbers;
+    return winningLottoNumbers;
   }
 
   public LottoNumber bonusLottoNumber() {
-    return this.bonusLottoNumber;
+    return bonusLottoNumber;
   }
 
   private void validateBonusLottoNumber() {
-    if (this.winningLottoNumbers.contains(this.bonusLottoNumber)) {
+    if (winningLottoNumbers.contains(bonusLottoNumber)) {
       throw new DuplicatedBonusLottoNumberException();
     }
   }

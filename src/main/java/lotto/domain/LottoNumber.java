@@ -11,6 +11,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
   private final int number;
   private static final LottoNumber[] lottoNumberCache = new LottoNumber[MAX];
 
+  public LottoNumber(String number){
+    this(Integer.parseInt(number));
+  }
+
   public LottoNumber(int number) {
     validateNumber(number);
     this.number = number;
@@ -53,6 +57,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   @Override
   public int compareTo(LottoNumber other) {
-    return Integer.compare(this.number, other.number);
+    return Integer.compare(number, other.number);
   }
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,9 @@ class LottoPrizeTest {
 
   @ParameterizedTest(name = "상금 조회 테스트 - 일치개수: {0}, 보너스일치여부: {1}, 상금: {2}")
   @CsvSource({
+      "0, false, 0", "0, true, 0",
+      "1, false, 0", "1, true, 0",
+      "2, false, 0", "2, true, 0",
       "3,false,5000", "3,true,5000",
       "4,false,50000", "4,true,50000",
       "5,false,1500000", "5,true,30000000",
@@ -25,15 +29,15 @@ class LottoPrizeTest {
   }
 
   @ParameterizedTest(name = "잘못된 상금 조회 테스트 횟수 : {0}")
-  @CsvSource({"0", "1", "2", "7"})
+  @CsvSource({"-10", "-1", "7", "8"})
   void invalidOfTest(int matchedCnt) {
-    //when
-    LottoPrize prize1 = LottoPrize.of(matchedCnt, false);
-    LottoPrize prize2 = LottoPrize.of(matchedCnt, true);
-
     //then
-    assertThat(prize1).isEqualTo(LottoPrize.NOTHING);
-    assertThat(prize2).isEqualTo(LottoPrize.NOTHING);
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      LottoPrize.of(matchedCnt, false);
+    });
+    assertThatIllegalArgumentException().isThrownBy(() -> {
+      LottoPrize.of(matchedCnt, true);
+    });
   }
 
   @Test

@@ -1,38 +1,40 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
+import lotto.exception.InvalidMatchCntException;
 
 public enum LottoPrize {
-  FIRST(6, false, 2_000_000_000),
-  SECOND(5, true, 30_000_000),
-  THIRD(5, false, 1_500_000),
-  FOURTH(4, false, 50_000),
-  FIFTH(3, false, 5_000),
-  NOTHING(0, false, 0);
+  FIRST(6, 2_000_000_000),
+  SECOND(5, 30_000_000),
+  THIRD(5, 1_500_000),
+  FOURTH(4, 50_000),
+  FIFTH(3, 5_000),
+  NOTHING(0, 0);
 
-  private static final List<LottoPrize> LOTTO_PRIZE_LIST = Arrays.asList(LottoPrize.values());
+  private static final LottoPrize[] VALUES_EXCEPT_NOTHING = initValuesExceptNothing();
   private final int matchCnt;
-  private final boolean mustMatchBonus;
   private final long prizeMoney;
 
-  LottoPrize(int matchCnt, boolean mustMatchBonus, int prizeMoney) {
+  LottoPrize(int matchCnt, int prizeMoney) {
     this.matchCnt = matchCnt;
-    this.mustMatchBonus = mustMatchBonus;
     this.prizeMoney = prizeMoney;
   }
 
   public static LottoPrize of(int matchCnt, boolean matchBonus) {
-    return LOTTO_PRIZE_LIST.stream()
+    if (matchCnt >= 0 && matchCnt < FIFTH.matchCnt){
+      return NOTHING;
+    }
+    if (matchCnt == SECOND.matchCnt) {
+      return matchBonus ? SECOND : THIRD;
+    }
+    return Arrays.stream(VALUES_EXCEPT_NOTHING)
         .filter(prize -> prize.matchCnt == matchCnt)
-        .filter(prize -> prize.matchCnt != SECOND.matchCnt || prize.mustMatchBonus == matchBonus)
-        .findAny().orElse(NOTHING);
+        .findFirst()
+        .orElseThrow(InvalidMatchCntException::new);
   }
 
   public static LottoPrize[] valuesExceptNothing() {
-    return LOTTO_PRIZE_LIST.stream()
-        .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
-        .toArray(LottoPrize[]::new);
+    return VALUES_EXCEPT_NOTHING;
   }
 
   public long prizeMoney() {
@@ -41,5 +43,11 @@ public enum LottoPrize {
 
   public int matchCnt() {
     return matchCnt;
+  }
+
+  private static LottoPrize[] initValuesExceptNothing() {
+    return Arrays.stream(values())
+        .filter(lottoPrize -> lottoPrize != LottoPrize.NOTHING)
+        .toArray(LottoPrize[]::new);
   }
 }

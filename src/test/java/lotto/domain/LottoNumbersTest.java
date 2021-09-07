@@ -20,7 +20,7 @@ class LottoNumbersTest {
     LottoNumbers lottoNumbers = new LottoNumbers(numbers);
 
     //then
-    assertThat(lottoNumbers.sortedNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    assertThat(lottoNumbers.numbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
   }
 
   @Test
@@ -55,15 +55,15 @@ class LottoNumbersTest {
 
   @Test
   @DisplayName("정렬된 숫자들 반환 테스트")
-  void sortedNumbers() {
+  void numbers() {
     //given
     LottoNumbers lottoNumbers = new LottoNumbers(new int[]{3, 2, 4, 1, 6, 5});
 
     //when
-    List<Integer> sortedNumbers = lottoNumbers.sortedNumbers();
+    List<Integer> numbers = lottoNumbers.numbers();
 
     //then
-    assertThat(sortedNumbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
   }
 
   @Test
