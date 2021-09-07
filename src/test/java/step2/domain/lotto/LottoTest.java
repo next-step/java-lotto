@@ -17,7 +17,7 @@ class LottoTest {
         final LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
         final LottoNumber bonusNumber = new LottoNumber(bonusNumberValue);
 
-        final Rank actual = targetLotto.match(winningLottoNumbers, bonusNumber);
+        final Rank actual = targetLotto.matchedRank(winningLottoNumbers, bonusNumber);
         assertThat(actual).isEqualTo(Rank.SECOND);
     }
 
@@ -28,7 +28,7 @@ class LottoTest {
         final LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
         final LottoNumber bonusNumber = new LottoNumber(45);
 
-        final Rank actual = targetLotto.match(winningLottoNumbers, bonusNumber);
+        final Rank actual = targetLotto.matchedRank(winningLottoNumbers, bonusNumber);
         assertThat(actual).isEqualTo(Rank.THIRD);
     }
 }

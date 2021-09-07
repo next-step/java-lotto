@@ -21,7 +21,7 @@ public class WinningLotto extends Lotto {
         final Profit profit = new Profit();
         final Match match = new Match();
         for (Lotto issueLotto : issueLottos.lottos) {
-            Rank matchRank = issueLotto.match(this.lottoNumbers, bonusNumber);
+            Rank matchRank = issueLotto.matchedRank(this.lottoNumbers, bonusNumber);
             match.add(matchRank);
             profit.add(matchRank);
         }

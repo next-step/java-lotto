@@ -25,7 +25,7 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
-    protected Rank match(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+    protected Rank matchedRank(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         final int matchCount = winningLottoNumbers.matchCount(this.lottoNumbers);
         final boolean bonusContained = this.lottoNumbers.contained(bonusNumber);
         return Rank.rank(matchCount, bonusContained);
