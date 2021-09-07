@@ -19,15 +19,19 @@ public class LottoGame {
 
 	public static LottoGame of(int price, int minimum, int maximum, int count) {
 		return new LottoGame(price, () -> {
-			ArrayList<Integer> numberScope = new ArrayList<>();
-			for (int i = minimum; i < maximum + 1; i++) {
-				numberScope.add(i);
-			}
-			Collections.shuffle(numberScope);
-			List<Integer> lottoNumbers = numberScope.subList(0, count);
-			Collections.sort(lottoNumbers);
-			return lottoNumbers;
+			return makeLottoNumbers(minimum, maximum, count);
 		});
+	}
+
+	public static List<Integer> makeLottoNumbers(int minimum, int maximum, int count) {
+		ArrayList<Integer> numberScope = new ArrayList<>();
+		for (int i = minimum; i < maximum + 1; i++) {
+			numberScope.add(i);
+		}
+		Collections.shuffle(numberScope);
+		List<Integer> lottoNumbers = numberScope.subList(0, count);
+		Collections.sort(lottoNumbers);
+		return lottoNumbers;
 	}
 
 	public List<LottoTicket> buyLotto(int price) {
@@ -47,7 +51,7 @@ public class LottoGame {
 		return lottoGroup.lottoResultReport(new Lotto(() -> {
 			return Arrays
 				.stream(winningNumbers.split(", "))
-				.map(number -> Integer.parseInt(number))
+				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 		}, 0));
 	}
