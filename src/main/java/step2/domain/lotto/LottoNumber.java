@@ -1,6 +1,4 @@
-package step2.domain;
-
-import step2.vo.LottoNumberVO;
+package step2.domain.lotto;
 
 import java.util.Objects;
 
@@ -8,7 +6,7 @@ public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
-        if (LottoNumberVO.isRange(lottoNumber)) {
+        if (LottoNumberValue.isRange(lottoNumber)) {
             this.lottoNumber = lottoNumber;
             return;
         }

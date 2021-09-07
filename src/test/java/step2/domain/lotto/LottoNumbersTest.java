@@ -1,5 +1,6 @@
-package step2.domain;
+package step2.domain.lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -47,4 +48,25 @@ public class LottoNumbersTest {
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("로또 숫자는 6개여야 입니다.");
     }
+
+    @Test
+    @DisplayName("일반 로또 숫자 4개 일치 확인 테스트")
+    void countNumberOfMatchTest() {
+        final LottoNumbers winningNumber = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
+        final int actual = winningNumber.matchCount(lottoNumbers);
+        final int expected = 4;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("일반 로또 숫자 5개 일치 확인 테스트")
+    void countNumberOfMatchSuccessTest() {
+        final LottoNumbers issueLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
+        final LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 10));
+        final int actual = issueLottoNumbers.matchCount(winningLottoNumbers);
+        final int expected = 5;
+        assertThat(actual).isEqualTo(expected);
+    }
+
 }

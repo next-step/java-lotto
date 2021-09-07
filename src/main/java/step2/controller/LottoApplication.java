@@ -1,13 +1,14 @@
 package step2.controller;
 
-import step2.domain.Lottos;
-import step2.domain.Match;
-import step2.domain.WinningLotto;
+import step2.domain.lotto.LottoNumber;
+import step2.domain.lotto.LottoNumbers;
+import step2.domain.lotto.Lottos;
+import step2.domain.lotto.WinningLotto;
+import step2.domain.statistics.Amount;
+import step2.domain.statistics.Statistics;
 import step2.view.InputDto;
 import step2.view.InputView;
 import step2.view.OutputView;
-
-import java.util.List;
 
 public class LottoApplication {
         private static final InputView inputView = new InputView();
@@ -16,19 +17,16 @@ public class LottoApplication {
     public static void main(String[] args) {
         final InputDto inputDto = inputView.inputPrice();
 
-        final int amount = inputDto.getAmount();
-        final Lottos issueLottos = issueLottos(amount);
+        final Amount amount = inputDto.getAmount();
+        final Lottos issueLottos = new Lottos(amount);
         outputView.printLottoPurchase(amount, issueLottos);
 
-        final List<Integer> lastWinningNumbers = inputView.inputLastWinningNumbers();
-        final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers);
+        final LottoNumbers lastWinningNumbers = inputView.inputLastWinningNumbers();
+        final LottoNumber bonusNumber = inputView.inputBonusNumber();
+        final WinningLotto winningLotto = new WinningLotto(lastWinningNumbers, bonusNumber);
 
-        final Match match = winningLotto.match(issueLottos);
-        match.calculateProfitRate(inputDto.getPrice());
-        outputView.println(match);
+        final Statistics statistics = winningLotto.match(issueLottos);
+        outputView.printResult(statistics);
     }
 
-    public static Lottos issueLottos(int amount) {
-        return new Lottos(amount);
-    }
 }

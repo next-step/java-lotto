@@ -1,19 +1,15 @@
 package step2.view;
 
-public class InputDto {
-    private final int price;
-    private final int amount;
+import step2.domain.statistics.Amount;
 
-    public InputDto(int price, int amount) {
-        this.price = price;
+public class InputDto {
+    private final Amount amount;
+
+    public InputDto(Amount amount) {
         this.amount = amount;
     }
 
-    public int getPrice() {
-        return this.price;
-    }
-
-    public int getAmount() {
+    public Amount getAmount() {
         return this.amount;
     }
 }

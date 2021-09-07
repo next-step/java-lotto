@@ -1,11 +1,11 @@
-package step2.vo;
+package step2.domain.lotto;
 
-public enum LottoNumberVO {
+public enum LottoNumberValue {
     MIN(1), MAX(45);
 
     public int value;
 
-    LottoNumberVO(int value) {
+    LottoNumberValue(int value) {
         this.value = value;
     }
 

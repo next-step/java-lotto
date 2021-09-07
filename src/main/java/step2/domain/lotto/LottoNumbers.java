@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.lotto;
 
 import java.util.*;
 
@@ -8,16 +8,16 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> lottoNumbers = new HashSet<>(FIXED_NUMBER);
 
+    public LottoNumbers() {
+        this(new LottoNumberAutoGenerationStrategy());
+    }
+
     public LottoNumbers(LottoNumberGenerationStrategy strategy) {
         final long startTime = System.currentTimeMillis();
         while (lottoNumbers.size() < FIXED_NUMBER) {
             lottoNumbers.add(new LottoNumber(strategy.generateNumber()));
             validCreationTime(startTime);
         }
-    }
-
-    public LottoNumbers() {
-        this(new LottoNumberAutoGenerationStrategy());
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
@@ -29,6 +29,7 @@ public class LottoNumbers {
 
         validLottoNumbers(this.lottoNumbers);
     }
+
 
     private void validCreationTime(long startTime) {
         if (System.currentTimeMillis() - startTime > LIMIT_TIME) {
@@ -42,16 +43,26 @@ public class LottoNumbers {
         }
     }
 
-    public int countNumberOfMatch(LottoNumbers lottoNumbers) {
-        int count = 0;
+    public int matchCount(LottoNumbers lottoNumbers) {
+        int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers.lottoNumbers) {
-            count += getIfContains(lottoNumber);
+            matchCount += getIfContains(lottoNumber);
         }
-        return count;
+        return matchCount;
     }
 
     private int getIfContains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber) ? 1 : 0;
+        if (this.lottoNumbers.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public boolean contained(LottoNumber lottoNumber) {
+        if (this.getIfContains(lottoNumber) == 1) {
+            return true;
+        }
+        return false;
     }
 
     @Override
