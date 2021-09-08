@@ -6,39 +6,48 @@ import java.util.stream.Collectors;
 public class LottoMain {
     public static void main(String[] args) {
         int amount = inputAmount();
-        if (amount < 0) return;
+        if (amount < 0) {
+            InputView.printInputError();
+            return;
+        }
 
         int totalCount = calculateCount(amount);
-        if (totalCount < 0) return;
+        if (totalCount < 0) {
+            InputView.printZeroCountError();
+            return;
+        }
         ResultView.printCount(totalCount);
 
         Lottos lottos = getLottos(totalCount);
         ResultView.printLottoList(lottos);
-
         InputView.refreshLine();
 
-        Lotto winningLotto = inputWinningNumbers();
-        if (winningLotto == null) return;
+        List<Integer> winningNumbers = inputWinningNumbers();
+        if (winningNumbers == null) {
+            InputView.printInputError();
+            return;
+        }
 
+        Lotto winningLotto = getWinningLotto(winningNumbers);
         ResultView.printResult(lottos.result(winningLotto, amount));
     }
 
-    private static Lotto inputWinningNumbers() {
-        Lotto winningLotto;
-        try {
-            String winningNumbers = InputView.getWinningNumbers();
-            List<LottoNumber> winningLottoNumbers =
-                    StringParser.parseIntList(winningNumbers).stream()
-                            .map(LottoNumber::new)
-                            .collect(Collectors.toList());
-            winningLotto = new Lotto(winningLottoNumbers);
+    private static Lotto getWinningLotto(List<Integer> winningNumbers) {
+        List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new Lotto(winningLottoNumbers);
+    }
 
-            int bonusNumber = InputView.getBonusNumber();
+    private static List<Integer> inputWinningNumbers() {
+        List<Integer> winningNumbers;
+        try {
+            String numbers = InputView.getWinningNumbers();
+            winningNumbers= StringParser.parseIntList(numbers);
         } catch (NumberFormatException e) {
-            InputView.printInputError();
             return null;
         }
-        return winningLotto;
+        return winningNumbers;
     }
 
     private static Lottos getLottos(int totalCount) {
@@ -48,10 +57,7 @@ public class LottoMain {
 
     private static int calculateCount(int amount) {
         int totalCount = LottoPrice.getAvailableCount(amount);
-        if (totalCount == 0) {
-            InputView.printZeroCountError();
-            return -1;
-        }
+        if (totalCount == 0) return -1;
         return totalCount;
     }
 
@@ -60,7 +66,6 @@ public class LottoMain {
         try {
             amount = InputView.getPurchaseAmount();
         } catch (RuntimeException e) {
-            InputView.printInputError();
             return -1;
         }
         return amount;
