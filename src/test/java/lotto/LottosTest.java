@@ -16,8 +16,7 @@ class LottosTest {
     void result() {
         int amount = 1000;
         Lotto winningLotto = LottoGenerator.generateManualLotto(Arrays.asList(1,2,3,4,5,6));
-        LottoNumber bonusNumber = new LottoNumber(7);
-        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(winningLotto, new LottoNumber(7));
 
         Lottos lottos = new Lottos(Collections.singletonList(winningLotto));
         LottoResult lottoResult = lottos.result(winningNumber, amount);

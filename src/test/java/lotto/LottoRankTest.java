@@ -18,9 +18,12 @@ class LottoRankTest {
     @Test
     @DisplayName("해당하는 로또 등수를 가져오는지 테스트")
     void valueOf() {
-        assertThat(LottoRank.valueOf(-1)).isEqualTo(LottoRank.NONE);
-        assertThat(LottoRank.valueOf(0)).isEqualTo(LottoRank.NONE);
-        assertThat(LottoRank.valueOf(6)).isEqualTo(LottoRank.FIRST);
-        assertThat(LottoRank.valueOf(7)).isEqualTo(LottoRank.NONE);
+        assertThat(LottoRank.valueOf(-1, false)).isEqualTo(LottoRank.NONE);
+        assertThat(LottoRank.valueOf(0, false)).isEqualTo(LottoRank.NONE);
+        assertThat(LottoRank.valueOf(7, false)).isEqualTo(LottoRank.NONE);
+        assertThat(LottoRank.valueOf(6, false)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.valueOf(5, true)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.valueOf(5, false)).isEqualTo(LottoRank.THIRD);
+
     }
 }

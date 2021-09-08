@@ -3,11 +3,13 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum LottoRank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
     NONE(0,0);
 
@@ -33,9 +35,16 @@ public enum LottoRank {
                 .collect(Collectors.toList());
     }
 
-    public static LottoRank valueOf(int matchCount) {
+    public static LottoRank valueOf(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
+                .filter(rank -> rank == SECOND && hasBonusNumber)
                 .filter(rank -> rank.getMatchCount() == matchCount)
-                .findFirst().orElse(NONE);
+                .findFirst()
+                .orElse(
+                        Arrays.stream(values())
+                                .filter(rank -> rank.getMatchCount() == matchCount)
+                                .findFirst()
+                                .orElse(NONE)
+                );
     }
 }
