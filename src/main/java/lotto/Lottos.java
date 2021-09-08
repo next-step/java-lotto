@@ -12,7 +12,7 @@ public class Lottos {
     }
 
     public List<String> toStringLottos() {
-        return lottos.stream().map(Lotto::toString).collect(Collectors.toList());
+        return lottos.stream().map(Lotto::toStringLottoNumber).collect(Collectors.toList());
     }
 
     public int size() {

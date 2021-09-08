@@ -26,8 +26,7 @@ public class Lotto {
                 .count();
     }
 
-    @Override
-    public String toString() {
+    public String toStringLottoNumber() {
         return lottoNumbers.toString();
     }
 
