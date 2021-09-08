@@ -12,7 +12,7 @@ public class AffordableLottoCount {
         this.manualLottoCount = manualLottoCount;
     }
 
-    void validate(Money money, int manualLottoCount) {
+    private void validate(Money money, int manualLottoCount) {
         if (money.calculateBuyableLottos(LOTTO_PRICE) < manualLottoCount) {
             throw new IllegalArgumentException(EXCEP_INVALID_AFFORDABLE_LOTTO_COUNT);
         }
