@@ -15,10 +15,10 @@ public class Lottos {
         return lottos.stream().map(Lotto::toStringLottoNumber).collect(Collectors.toList());
     }
 
-    public LottoResult result(Lotto winningLotto, int amount) {
+    public LottoResult result(WinningNumber winningNumber, int amount) {
         LottoResult lottoResult = new LottoResult(amount);
         for (Lotto lotto : lottos) {
-            LottoRank rank = lotto.checkWinning(winningLotto);
+            LottoRank rank = winningNumber.checkWinning(lotto);
             lottoResult.record(rank);
         }
         return lottoResult;

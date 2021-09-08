@@ -21,25 +21,37 @@ public class LottoMain {
         ResultView.printLottoList(lottos);
         InputView.refreshLine();
 
-        List<Integer> winningNumbers = inputWinningNumbers();
+        String numbers = inputWinningNumbers();
+        List<Integer> winningNumbers = parseIntList(numbers);
         if (winningNumbers == null) {
             InputView.printInputError();
             return;
         }
-
         Lotto winningLotto = LottoGenerator.generateManualLotto(winningNumbers);
-        ResultView.printResult(lottos.result(winningLotto, amount));
+
+        int number = inputBonusNumber();
+        if (number <= 0) {
+            InputView.printInputError();
+            return;
+        }
+        LottoNumber bonusNumber = new LottoNumber(number);
+
+        WinningNumber winningNumber = new WinningNumber(winningLotto, bonusNumber);
+        ResultView.printResult(lottos.result(winningNumber, amount));
     }
 
-    private static List<Integer> inputWinningNumbers() {
-        List<Integer> winningNumbers;
+    private static String inputWinningNumbers() {
+        return InputView.getWinningNumbers();
+    }
+
+    private static List<Integer> parseIntList(String numbers) {
+        List<Integer> numberList;
         try {
-            String numbers = InputView.getWinningNumbers();
-            winningNumbers= StringParser.parseIntList(numbers);
+            numberList = StringParser.parseIntList(numbers);
         } catch (NumberFormatException e) {
             return null;
         }
-        return winningNumbers;
+        return numberList;
     }
 
     private static int inputAmount() {
@@ -50,5 +62,15 @@ public class LottoMain {
             return -1;
         }
         return amount;
+    }
+
+    private static int inputBonusNumber() {
+        int bonusNumber;
+        try {
+            bonusNumber = InputView.getBonusNumber();
+        } catch (RuntimeException e) {
+            return -1;
+        }
+        return bonusNumber;
     }
 }
