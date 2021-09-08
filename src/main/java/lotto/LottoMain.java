@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoMain {
     public static void main(String[] args) {
         int amount = inputAmount();
@@ -24,7 +27,10 @@ public class LottoMain {
         LottoNumbers winningNumbers;
         try {
             String numbers = InputView.getWinningNumbers();
-            winningNumbers = new LottoNumbers(StringParser.parse(numbers));
+            List<LottoNumber> lottoNumbers = StringParser.parseIntList(numbers).stream()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList());
+            winningNumbers = new LottoNumbers(lottoNumbers);
 
             int bonusNumber = StringParser.parseInt(InputView.getBonusNumber());
         } catch (NumberFormatException e) {

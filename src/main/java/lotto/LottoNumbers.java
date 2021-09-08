@@ -1,24 +1,21 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
 
-    public static final int MAX_NUMBER = 45;
-    public static final int MIN_NUMBER = 1;
     public static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<LottoNumber> numbers) {
         validateNumbers(numbers);
         Collections.sort(numbers);
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = numbers;
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -33,13 +30,9 @@ public class LottoNumbers {
         return numbers.toString();
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개입니다.");
-        }
-
-        if (numbers.stream().anyMatch((number) -> number > MAX_NUMBER || number < MIN_NUMBER)) {
-            throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이입니다.");
         }
 
         if (numbers.stream().distinct().count() != LOTTO_SIZE) {

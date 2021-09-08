@@ -1,13 +1,8 @@
 package lotto;
 
-import java.util.List;
 
 public class Lotto {
     private final LottoNumbers numbers;
-
-    public Lotto(List<Integer> numbers) {
-        this(new LottoNumbers(numbers));
-    }
 
     public Lotto(LottoNumbers numbers) {
         this.numbers = numbers;
