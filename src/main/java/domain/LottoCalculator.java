@@ -21,8 +21,8 @@ public class LottoCalculator {
 		return container;
 	}
 
-	public Integer getLottoCount(Integer account) {
-		return account / UNIT;
+	public Integer getLottoCount(Account account) {
+		return account.lottoCountByUnit(UNIT);
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {

@@ -10,6 +10,10 @@ public class Account {
 		this.account = account;
 	}
 
+	public Integer lottoCountByUnit(Integer unit) {
+		return this.account / unit;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

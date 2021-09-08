@@ -15,10 +15,10 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public Integer setAccount() {
+	public Account setAccount() {
 		System.out.println("구입 금액을 입력해주세요.");
 		this.account = scanner.nextInt();
-		return account;
+		return new Account(account);
 	}
 
 	public void viewLottoCount(Integer lottoCount) {
