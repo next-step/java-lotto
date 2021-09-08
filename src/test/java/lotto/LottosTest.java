@@ -16,11 +16,9 @@ class LottosTest {
     @DisplayName("로또 당첨 결과를 올바르게 가져오는지 테스트")
     void result() {
         int amount = 1000;
-        LottoNumbers winningLottoNumbers = new LottoNumbers(
-                Stream.of(1,2,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList())
-        );
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(winningLottoNumbers)));
-        LottoResult lottoResult = lottos.result(winningLottoNumbers, amount);
+        Lotto winningLotto = new Lotto(Stream.of(1,2,3,4,5,6).map(LottoNumber::new).collect(Collectors.toList()));
+        Lottos lottos = new Lottos(Collections.singletonList(winningLotto));
+        LottoResult lottoResult = lottos.result(winningLotto, amount);
 
         assertThat(lottoResult.winningCount(LottoRank.FIRST)).isEqualTo(1);
     }

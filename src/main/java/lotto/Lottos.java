@@ -19,10 +19,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult result(LottoNumbers winningNumbers, int amount) {
+    public LottoResult result(Lotto winningLotto, int amount) {
         LottoResult lottoResult = new LottoResult(amount);
         for (Lotto lotto : lottos) {
-            LottoRank rank = lotto.checkWinning(winningNumbers);
+            LottoRank rank = lotto.checkWinning(winningLotto);
             lottoResult.record(rank);
         }
         return lottoResult;

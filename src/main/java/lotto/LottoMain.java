@@ -17,27 +17,28 @@ public class LottoMain {
 
         InputView.refreshLine();
 
-        LottoNumbers winningNumbers = inputWinningNumbers();
-        if (winningNumbers == null) return;
+        Lotto winningLotto = inputWinningNumbers();
+        if (winningLotto == null) return;
 
-        ResultView.printResult(lottos.result(winningNumbers, amount));
+        ResultView.printResult(lottos.result(winningLotto, amount));
     }
 
-    private static LottoNumbers inputWinningNumbers() {
-        LottoNumbers winningNumbers;
+    private static Lotto inputWinningNumbers() {
+        Lotto winningLotto;
         try {
-            String numbers = InputView.getWinningNumbers();
-            List<LottoNumber> lottoNumbers = StringParser.parseIntList(numbers).stream()
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toList());
-            winningNumbers = new LottoNumbers(lottoNumbers);
+            String winningNumbers = InputView.getWinningNumbers();
+            List<LottoNumber> winningLottoNumbers =
+                    StringParser.parseIntList(winningNumbers).stream()
+                            .map(LottoNumber::new)
+                            .collect(Collectors.toList());
+            winningLotto = new Lotto(winningLottoNumbers);
 
             int bonusNumber = StringParser.parseInt(InputView.getBonusNumber());
         } catch (NumberFormatException e) {
             InputView.printInputError();
             return null;
         }
-        return winningNumbers;
+        return winningLotto;
     }
 
     private static Lottos getLottos(int totalCount) {
