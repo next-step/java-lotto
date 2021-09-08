@@ -1,18 +1,17 @@
 package lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
         int amount = inputAmount();
-        if (amount < 0) {
+        if (amount <= 0) {
             InputView.printInputError();
             return;
         }
 
-        int totalCount = calculateCount(amount);
-        if (totalCount < 0) {
+        int totalCount = LottoPrice.getAvailableCount(amount);
+        if (totalCount <= 0) {
             InputView.printZeroCountError();
             return;
         }
@@ -41,12 +40,6 @@ public class LottoMain {
             return null;
         }
         return winningNumbers;
-    }
-
-    private static int calculateCount(int amount) {
-        int totalCount = LottoPrice.getAvailableCount(amount);
-        if (totalCount == 0) return -1;
-        return totalCount;
     }
 
     private static int inputAmount() {
