@@ -18,7 +18,7 @@ public class LottoMain {
         }
         ResultView.printCount(totalCount);
 
-        Lottos lottos = getLottos(totalCount);
+        Lottos lottos = LottoGenerator.generateAutoLottos(totalCount);
         ResultView.printLottoList(lottos);
         InputView.refreshLine();
 
@@ -28,15 +28,8 @@ public class LottoMain {
             return;
         }
 
-        Lotto winningLotto = getWinningLotto(winningNumbers);
+        Lotto winningLotto = LottoGenerator.generateManualLotto(winningNumbers);
         ResultView.printResult(lottos.result(winningLotto, amount));
-    }
-
-    private static Lotto getWinningLotto(List<Integer> winningNumbers) {
-        List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new Lotto(winningLottoNumbers);
     }
 
     private static List<Integer> inputWinningNumbers() {
@@ -48,11 +41,6 @@ public class LottoMain {
             return null;
         }
         return winningNumbers;
-    }
-
-    private static Lottos getLottos(int totalCount) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        return lottoGenerator.generateLotto(totalCount);
     }
 
     private static int calculateCount(int amount) {
