@@ -10,10 +10,13 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("로또 생성 테스트")
     public void generateLotto() {
-        assertThat(new LottoGenerator().generateLotto(0).size()).isEqualTo(0);
+        Lottos lottos = new LottoGenerator().generateLotto(0);
+        assertThat(lottos.toStringLottos().size()).isEqualTo(0);
 
-        assertThat(new LottoGenerator().generateLotto(1).size()).isEqualTo(1);
+        lottos = new LottoGenerator().generateLotto(1);
+        assertThat(lottos.toStringLottos().size()).isEqualTo(1);
 
-        assertThat(new LottoGenerator().generateLotto(-1).size()).isEqualTo(0);
+        lottos = new LottoGenerator().generateLotto(-1);
+        assertThat(lottos.toStringLottos().size()).isEqualTo(0);
     }
 }

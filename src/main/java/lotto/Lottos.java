@@ -15,10 +15,6 @@ public class Lottos {
         return lottos.stream().map(Lotto::toStringLottoNumber).collect(Collectors.toList());
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
     public LottoResult result(Lotto winningLotto, int amount) {
         LottoResult lottoResult = new LottoResult(amount);
         for (Lotto lotto : lottos) {
