@@ -23,7 +23,7 @@ public enum Rank {
 
 	public static Rank rank(int matchNumber, boolean bonusStatus) {
 
-		if (matchNumber == 5 && bonusStatus) {
+		if (matchNumber == Rank.SECOND.matchNumber && bonusStatus) {
 			return SECOND;
 		}
 
