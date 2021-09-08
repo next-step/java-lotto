@@ -25,6 +25,8 @@ public class LottoMain {
         try {
             String numbers = InputView.getWinningNumbers();
             winningNumbers = new LottoNumbers(StringParser.parse(numbers));
+
+            int bonusNumber = StringParser.parseInt(InputView.getBonusNumber());
         } catch (NumberFormatException e) {
             InputView.printInputError();
             return null;

@@ -20,6 +20,11 @@ public class InputView {
         return inputWinningNumbers();
     }
 
+    public static String getBonusNumber() {
+        printBonusNumber();
+        return inputWinningNumbers();
+    }
+
     private static void printPurchaseAmount() {
         System.out.println("구입금액을 입력해주세요.");
     }
@@ -42,5 +47,9 @@ public class InputView {
 
     public static void printInputError() {
         System.out.println("입력값이 올바르지 않습니다.");
+    }
+
+    private static void printBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
     }
 }
