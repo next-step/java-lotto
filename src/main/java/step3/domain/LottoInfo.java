@@ -1,7 +1,7 @@
 package step3.domain;
 
 public class LottoInfo {
-    private static final int chargeOfLotto = 1000;
+    private static final int CARGE_OF_LOTTO = 1000;
     private int charge;
     private int count;
 
@@ -11,7 +11,7 @@ public class LottoInfo {
     }
 
     private void calculateNumOfLotto(int charge) {
-        this.count = charge/chargeOfLotto;
+        this.count = charge/CARGE_OF_LOTTO;
     }
 
     public int getCharge() {
