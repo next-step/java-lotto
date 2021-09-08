@@ -10,8 +10,4 @@ public class StringParser {
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());
     }
-
-    public static int parseInt(String number) {
-        return Integer.parseInt(number);
-    }
 }

@@ -15,11 +15,4 @@ class StringParserTest {
         List<Integer> numbers = StringParser.parseIntList("1,2,3,4,5,6");
         assertThat(numbers).isEqualTo(Arrays.asList(1,2,3,4,5,6));
     }
-
-    @Test
-    @DisplayName("당첨번호 문자열을 숫자로 파싱하는지 테스트")
-    void parseInt() {
-        int number = StringParser.parseInt("1");
-        assertThat(number).isEqualTo(1);
-    }
 }

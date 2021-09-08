@@ -33,7 +33,7 @@ public class LottoMain {
                             .collect(Collectors.toList());
             winningLotto = new Lotto(winningLottoNumbers);
 
-            int bonusNumber = StringParser.parseInt(InputView.getBonusNumber());
+            int bonusNumber = InputView.getBonusNumber();
         } catch (NumberFormatException e) {
             InputView.printInputError();
             return null;
