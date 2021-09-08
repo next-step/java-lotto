@@ -19,14 +19,13 @@ class LotteryResultsTest {
 
 	@BeforeEach
 	void init() {
-		List<LotteryResult> lotteryResultList = new ArrayList<>();
+		List<WinningType> results = new ArrayList<>();
 		for (int i = 0; i < NUMBER_OF_MISMATCH; i++) {
-			LotteryResult lotteryResult = new LotteryResult(WinningType.MISMATCH);
-			lotteryResultList.add(lotteryResult);
+			results.add(WinningType.MISMATCH);
 		}
-		lotteryResultList.add(new LotteryResult(WinningType.FIFTH));
+		results.add(WinningType.FIFTH);
 
-		lotteryResults = new LotteryResults(lotteryResultList);
+		lotteryResults = new LotteryResults(results);
 	}
 
 	@DisplayName(value = "총 수익률 계산 테스트")

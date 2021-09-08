@@ -16,12 +16,23 @@ public class Wallet {
 		return money / PRICE_OF_LOTTO;
 	}
 
-	public Lottos buyLotto(int count) {
+	public Lottos buyLottoByAuto() {
+		int count = numberOfThingsToBuy();
 		List<Lotto> lottos = new ArrayList<>();
 		LottoCard lottoCard = LottoCard.getInstance();
 		for (int i = 0; i < count; i++) {
 			Lotto lotto = lottoCard.issue();
 			lottos.add(lotto);
+		}
+		deduction(count);
+		return new Lottos(lottos);
+	}
+
+	public Lottos buyLottoByManual(List<Numbers> lottoNumbers) {
+		int count = lottoNumbers.size();
+		List<Lotto> lottos = new ArrayList<>();
+		for (Numbers numbers : lottoNumbers) {
+			lottos.add(new Lotto(numbers));
 		}
 		deduction(count);
 		return new Lottos(lottos);

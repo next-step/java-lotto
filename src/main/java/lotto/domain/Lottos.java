@@ -16,4 +16,8 @@ public class Lottos {
 	public int getNumberOfLottos() {
 		return lottos.size();
 	}
+
+	public void addLottos(Lottos otherLottos) {
+		lottos.addAll(otherLottos.getLottos());
+	}
 }

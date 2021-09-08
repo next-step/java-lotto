@@ -15,10 +15,10 @@ public class Lottery {
 	}
 
 	public LotteryResults draw(Lottos lottos) {
-		List<LotteryResult> results = new ArrayList<>();
+		List<WinningType> results = new ArrayList<>();
 		for (Lotto lotto : lottos.getLottos()) {
 			WinningType winningType = getDrawResult(lotto.getNumbers());
-			results.add(new LotteryResult(winningType));
+			results.add(winningType);
 		}
 		return new LotteryResults(results);
 	}
