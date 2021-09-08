@@ -27,7 +27,7 @@ public enum Rank {
 			return SECOND;
 		}
 
-		if (matchNumber == 5) {
+		if (matchNumber == Rank.THIRD.matchNumber) {
 			return THIRD;
 		}
 
