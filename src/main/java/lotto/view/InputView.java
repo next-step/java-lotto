@@ -1,8 +1,13 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import lotto.domain.Number;
+import lotto.domain.Numbers;
 
 public class InputView {
 	private static final String QUESTION_MONEY = "구입 금액을 입력해주세요.";
@@ -10,6 +15,9 @@ public class InputView {
 	private static final String QUESTION_LOTTO_NUMBERS_BY_MANUAL = "수동으로 구매할 번호를 입력해주세요.";
 	private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해주세요.";
 	private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
+	private static final String COMMA = ",";
+	private static final String SPACE = " ";
+	private static final String EMPTY_STRING = "";
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static int inputMoney() {
@@ -22,17 +30,16 @@ public class InputView {
 		return SCANNER.nextInt();
 	}
 
-	public static List<String> inputLottoNumbersByManual(int count) {
+	public static List<Numbers> inputLottoNumbersByManual(int count) {
 		clearBuffer();
-
-		List<String> numbersByManual = new ArrayList<>();
-
 		System.out.println(QUESTION_LOTTO_NUMBERS_BY_MANUAL);
+		List<Numbers> lottoNumbers = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			String numbers = SCANNER.nextLine();
-			numbersByManual.add(numbers);
+			List<Number> numbers = convertStrInputToNumbers();
+			lottoNumbers.add(new Numbers(numbers));
 		}
-		return numbersByManual;
+
+		return lottoNumbers;
 	}
 
 	public static String inputWinningNumbers() {
@@ -44,6 +51,16 @@ public class InputView {
 	public static int inputBonusNumber() {
 		System.out.println(QUESTION_BONUS_NUMBER);
 		return SCANNER.nextInt();
+	}
+
+	private static List<Number> convertStrInputToNumbers() {
+		String[] strNumbers = SCANNER.nextLine()
+			.replace(SPACE, EMPTY_STRING)
+			.split(COMMA);
+		return Arrays.stream(strNumbers)
+			.map(Integer::parseInt)
+			.map(Number::new)
+			.collect(Collectors.toList());
 	}
 
 	private static void clearBuffer() {
