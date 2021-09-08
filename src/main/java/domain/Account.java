@@ -6,6 +6,10 @@ public class Account {
 
 	private Integer account;
 
+	public Account(Integer account) {
+		this.account = account;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
