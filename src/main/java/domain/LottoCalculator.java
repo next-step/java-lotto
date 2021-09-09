@@ -1,14 +1,11 @@
 package domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoCalculator {
 
 	private static final Integer INIT_NUMBER = 0;
-	private static final Integer UNIT = 1000;
 
 	private List<Rank> container;
 
@@ -22,7 +19,7 @@ public class LottoCalculator {
 	}
 
 	public Integer getLottoCount(Account account) {
-		return account.lottoCountByUnit(UNIT);
+		return account.lottoCountByUnit();
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {

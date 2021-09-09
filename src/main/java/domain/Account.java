@@ -4,14 +4,16 @@ import java.util.Objects;
 
 public class Account {
 
+	private static final Integer UNIT = 1000;
+
 	private Integer account;
 
 	public Account(Integer account) {
 		this.account = account;
 	}
 
-	public Integer lottoCountByUnit(Integer unit) {
-		return this.account / unit;
+	public Integer lottoCountByUnit() {
+		return this.account / UNIT;
 	}
 
 	@Override
