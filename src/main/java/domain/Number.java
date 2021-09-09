@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
 
 	private Integer number;
 
@@ -12,6 +12,11 @@ public class Number {
 
 	public Integer getNumber() {
 		return number;
+	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(number);
 	}
 
 	@Override
@@ -25,5 +30,10 @@ public class Number {
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
+	}
+
+	@Override
+	public int compareTo(Number number) {
+		return this.number.compareTo(number.getNumber());
 	}
 }

@@ -1,4 +1,8 @@
-package domain;
+package Util;
+
+import domain.Account;
+import domain.Lotto;
+import domain.Number;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +12,6 @@ import java.util.stream.Collectors;
 
 public class Input {
 
-	private static final Integer UNIT = 1000;
-
 	private Integer account;
 	private Scanner scanner;
 
@@ -17,10 +19,10 @@ public class Input {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public Integer setAccount() {
+	public Account setAccount() {
 		System.out.println("구입 금액을 입력해주세요.");
 		this.account = scanner.nextInt();
-		return account;
+		return new Account(account);
 	}
 
 	public void viewLottoCount(Integer lottoCount) {
@@ -31,5 +33,11 @@ public class Input {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
 		return new Lotto(numbers.stream().map(data -> new Number(Integer.parseInt(data))).collect(Collectors.toList()));
+	}
+
+	public Number setBonusNumber() {
+		System.out.println("보너스 볼을 입력해주세요.");
+		Integer bonusNumber = scanner.nextInt();
+		return new Number(bonusNumber);
 	}
 }

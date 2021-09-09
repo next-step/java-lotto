@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LottoNumberGenerator {
 
@@ -26,7 +23,7 @@ public class LottoNumberGenerator {
 		for (int number = INIT_NUMBER ; number <= LOTTO_NUMBER_RANGE ; ++number) {
 			lottoNumber.add(lottoAllNumber.get(number));
 		}
-		lottoNumber.sort(Comparator.comparing(Number::getNumber));
+		Collections.sort(lottoNumber);
 		return new Lotto(lottoNumber);
 	}
 }

@@ -1,4 +1,9 @@
-package domain;
+package Controller;
+
+import Service.LottoCalculator;
+import Util.Input;
+import Util.Result;
+import domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +20,7 @@ public class LottoGame {
 		List<Lotto> lottoList = new ArrayList<>();
 		LottoCalculator calculator = new LottoCalculator();
 
-		Integer account = input.setAccount();
+		Account account = input.setAccount();
 		Integer lottoCount = calculator.getLottoCount(account);
 		input.viewLottoCount(lottoCount);
 
@@ -25,6 +30,7 @@ public class LottoGame {
 			result.viewLotto(lotto);
 		}
 
-		result.viewResult(calculator.getResult(lottoList, input.lottoWinningNumber()));
+		List<Rank> container = calculator.getResult(lottoList, input.lottoWinningNumber(), input.setBonusNumber());
+		result.viewResult(container);
 	}
 }
