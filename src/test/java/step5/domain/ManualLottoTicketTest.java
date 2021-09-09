@@ -3,9 +3,9 @@ package step5.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.Lotto;
-
-import static org.junit.jupiter.api.Assertions.*;
+import step5.domain.lottoticket.LottoTicket;
+import step5.domain.lottoticket.ManualLottoTicket;
+import step5.domain.lottoticket.WinningLottoTicket;
 
 class ManualLottoTicketTest {
     @DisplayName("로또 번호 개수 확인 : 7개의 로또 번호 (에러)")
