@@ -1,5 +1,8 @@
 package step5.domain;
 
+import step5.domain.lottoticket.LottoTicket;
+import step5.domain.lottoticket.WinningLottoTicket;
+
 import java.util.*;
 
 public class LottoResult {

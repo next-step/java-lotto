@@ -1,4 +1,6 @@
-package step5.domain;
+package step5.domain.lottoticket;
+
+import step5.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;

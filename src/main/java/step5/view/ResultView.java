@@ -1,7 +1,7 @@
 package step5.view;
 
 import step5.domain.LottoNumber;
-import step5.domain.LottoTicket;
+import step5.domain.lottoticket.LottoTicket;
 import step5.domain.LottoTickets;
 import step5.domain.Rank;
 
@@ -38,32 +38,27 @@ public class ResultView {
     }
 
 
-    public static void printResult(Map<Rank, Integer> result) {
+    public static void printResult(Map<Rank, Integer> result, Integer totalPrice) {
         System.out.println(LOTTO_RESULT_INFO_MESSAGE);
         System.out.println(LOTTO_RESULT_INFO_SEPARATOR);
         int totalPrize = 0;
-        int totalLottoNum = 0;
         for (Rank rank: result.keySet()) {
             System.out.printf(WINNING_LOTTO_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(), result.get(rank));
-            if (result.get(rank) >= 1) {
-                totalPrize += rank.getWinningMoney() * result.get(rank);
-                totalLottoNum += result.get(rank);
-            }
+            totalPrize += rank.getWinningMoney() * result.get(rank);
             System.out.println();
         }
-
-        printYield(totalPrize, totalLottoNum);
+        printYield(totalPrize, totalPrice);
     }
 
-    private static void printYield(int totalPrize, int totalLottoNum) {
-        if (totalPrize > totalLottoNum * 1000) {
-            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 이득이라는 의미임)", totalPrize /(double) (totalLottoNum * 1000));
+    private static void printYield(int totalPrize, int totalPrice) {
+        if (totalPrize > totalPrice) {
+            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 이득이라는 의미임)", totalPrize /(double) totalPrice);
             return;
         }
-        if (totalPrize < totalLottoNum * 1000) {
-            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)", totalPrize / (double) (totalLottoNum * 1000));
+        if (totalPrize < totalPrice) {
+            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)", totalPrize / (double) totalPrice);
             return;
         }
-        System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)", totalPrize / (double) (totalLottoNum * 1000));
+        System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)", totalPrize / (double) totalPrice);
     }
 }

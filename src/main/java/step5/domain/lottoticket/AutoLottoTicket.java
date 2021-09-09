@@ -1,7 +1,8 @@
-package step5.domain;
+package step5.domain.lottoticket;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import step5.domain.LottoMachine;
+import step5.domain.LottoNumber;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
