@@ -23,4 +23,16 @@ public class LottoNumbersTest {
 		assertThat(createNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)).matchedCount(
 			createNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
 	}
+
+	@Test
+	@DisplayName("보너스 숫자 비교")
+	void bonus() {
+		LottoNumbers numbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		LottoNumbers numbers2 = new LottoNumbers(Arrays.asList(8, 9, 10, 11, 12, 13), 7);
+		LottoNumbers numbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
+
+		assertThat(numbers1.isMatchBonus(numbers2)).isTrue();
+
+		assertThat(numbers1.isMatchBonus(numbers3)).isFalse();
+	}
 }

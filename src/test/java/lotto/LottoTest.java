@@ -13,12 +13,13 @@ public class LottoTest {
 	@DisplayName("로또 결과를 통해서 상금 확인")
 	void compare() {
 		int lottoPrice = 1000;
-		Lotto winningNumber = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 43), lottoPrice);
-		Lotto lotto1st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 43), lottoPrice);
-		Lotto lotto2st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 42, 1), lottoPrice);
-		Lotto lotto3st = new Lotto(() -> Arrays.asList(8, 21, 23, 41, 1, 2), lottoPrice);
-		Lotto lotto4st = new Lotto(() -> Arrays.asList(8, 21, 23, 1, 2, 3), lottoPrice);
-		Lotto failedLotto = new Lotto(() -> Arrays.asList(8, 21, 1, 2, 3, 4), lottoPrice);
+		Lotto winningNumber = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43), 10, lottoPrice);
+		Lotto lotto1st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43), 9, lottoPrice);
+		Lotto lotto2st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 1), 10, lottoPrice);
+		Lotto lotto3st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 1), 9, lottoPrice);
+		Lotto lotto4st = new Lotto(Arrays.asList(8, 21, 23, 41, 1, 2), 9, lottoPrice);
+		Lotto lotto5st = new Lotto(Arrays.asList(8, 21, 23, 1, 2, 3), 9, lottoPrice);
+		Lotto failedLotto = new Lotto(Arrays.asList(8, 21, 1, 2, 3, 4), 9, lottoPrice);
 
 		assertThat(lotto1st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FIRST.reward());
 
@@ -27,6 +28,8 @@ public class LottoTest {
 		assertThat(lotto3st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.THIRD.reward());
 
 		assertThat(lotto4st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FOURTH.reward());
+
+		assertThat(lotto5st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FIFTH.reward());
 
 		assertThat(failedLotto.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.NOTHING.reward());
 
