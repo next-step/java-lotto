@@ -21,4 +21,8 @@ public class LottoTickets {
     public void buyLottoManually(ManualLottoTicket manualLottoTicket) {
         lottoTickets.add(manualLottoTicket);
     }
+
+    public List<LottoTicket> tickets() {
+        return lottoTickets;
+    }
 }

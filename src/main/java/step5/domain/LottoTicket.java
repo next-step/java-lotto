@@ -6,4 +6,5 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface LottoTicket {
+    public List<LottoNumber> ticket();
 }

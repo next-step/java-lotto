@@ -20,5 +20,7 @@ public class LottoNumber {
         }
     }
 
-
+    public Integer number() {
+        return lottoNumber;
+    }
 }

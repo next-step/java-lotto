@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoTicket implements LottoTicket {
+public class WinningLottoTicket implements LottoTicket {
     private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호는 6개로 구성되어야 합니다.";
     private static final String DELIMITER = ", ";
     private final List<LottoNumber> lottoTicket;
 
-    public ManualLottoTicket(String stringlottoNumber) {
+    public WinningLottoTicket(String stringlottoNumber) {
         List<String> lottoNumbers = Arrays.asList(stringlottoNumber.split(DELIMITER));
         checkValidLottoNumberFormat(stringlottoNumber);
 

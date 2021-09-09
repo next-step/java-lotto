@@ -25,4 +25,8 @@ public class AutoLottoTicket implements LottoTicket {
             throw new IllegalArgumentException(LOTTO_NUMBER_ㄷERROR_MESSAGE);
         }
     }
+
+    public List<LottoNumber> ticket() {
+        return lottoTicket;
+    }
 }
