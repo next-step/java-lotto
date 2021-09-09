@@ -7,13 +7,13 @@ import step3.domain.Lotto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoTicketTest {
+class ManualLottoTicketTest {
     @DisplayName("로또 번호 개수 확인 : 7개의 로또 번호 (에러)")
     @Test
     void sevenLotto() {
         String lottoNumbers = "1, 2, 3, 4, 5, 6, 7";
         Assertions.assertThatThrownBy(() -> {
-            new LottoTicket(lottoNumbers);
+            new ManualLottoTicket(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -22,7 +22,7 @@ class LottoTicketTest {
     void fiveLotto() {
         String lottoNumbers = "1, 2, 3, 4, 5";
         Assertions.assertThatThrownBy(() -> {
-            new LottoTicket(lottoNumbers);
+            new ManualLottoTicket(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,6 +30,6 @@ class LottoTicketTest {
     @Test
     void sixLotto() {
         String lottoNumbers = "1, 2, 3, 4, 5, 6";
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = new ManualLottoTicket(lottoNumbers);
     }
 }
