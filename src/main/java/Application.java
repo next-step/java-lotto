@@ -16,7 +16,7 @@ public class Application {
 	}
 
 	public void startLottoGame() {
-		LottoGame game = LottoGame.of(1000, 1, 45, 6);
+		LottoGame game = LottoGame.of(1000, 1, 45, 7);
 
 		this.inputView.drawQuestionOfMoney();
 		List<LottoTicket> lottoTickets = game.buyLotto(this.inputView.inputAmountOfMoney());
@@ -25,7 +25,10 @@ public class Application {
 		this.inputView.drawQuestionOf1stLotto();
 		String winningNumbers = this.inputView.inputLottoNumbers();
 
-		this.resultView.drawResult(game.lottoResult(lottoTickets, winningNumbers));
+		this.inputView.drawQuestionOfBonusNumber();
+		int bonusNumber = this.inputView.inputBonusNumber();
+
+		this.resultView.drawResult(game.lottoResult(lottoTickets, winningNumbers, bonusNumber));
 	}
 
 	public static void main(String[] args) {
