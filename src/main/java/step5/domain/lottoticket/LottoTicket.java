@@ -5,9 +5,9 @@ import step5.domain.LottoNumber;
 import java.util.List;
 
 public interface LottoTicket {
-    public List<LottoNumber> ticket();
+    List<LottoNumber> ticket();
 
-    public Long matchWinningLotto(WinningLottoTicket winningLottoTicket);
+    Long matchWinningLotto(WinningLottoTicket winningLottoTicket);
 
-    public boolean matchBonusBall(WinningLottoTicket winningLottoTicket);
+    boolean matchBonusBall(WinningLottoTicket winningLottoTicket);
 }

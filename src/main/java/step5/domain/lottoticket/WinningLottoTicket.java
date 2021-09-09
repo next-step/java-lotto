@@ -13,19 +13,19 @@ public class WinningLottoTicket {
     private final List<LottoNumber> lottoTicket;
     private final BonusBall bonusBall;
 
-    public WinningLottoTicket(String stringlottoNumber, Integer bonusBall) {
-        List<String> lottoNumbers = Arrays.asList(stringlottoNumber.split(DELIMITER));
-        checkValidLottoNumberFormat(stringlottoNumber);
+    public WinningLottoTicket(String stringLottoNumber, Integer bonusBall) {
+        List<String> lottoNumbers = Arrays.asList(stringLottoNumber.split(DELIMITER));
+        checkValidLottoNumberFormat(stringLottoNumber);
 
         lottoTicket = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoNumber(lottoNumber))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         this.bonusBall = new BonusBall(bonusBall);
     }
 
-    private void checkValidLottoNumberFormat(String stringlottoNumber) {
-        List<String> lottoNumbers = Arrays.asList(stringlottoNumber.split(DELIMITER));
+    private void checkValidLottoNumberFormat(String stringLottoNumber) {
+        List<String> lottoNumbers = Arrays.asList(stringLottoNumber.split(DELIMITER));
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException(LOTTO_NUMBER_ERROR_MESSAGE);
         }

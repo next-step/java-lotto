@@ -33,10 +33,6 @@ public class Lotto {
         return numberOfAutoLotto;
     }
 
-    public Integer total() {
-        return numberOfTotalLotto;
-    }
-
     public Integer money() {
         return money;
     }
