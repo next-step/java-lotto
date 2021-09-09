@@ -8,6 +8,7 @@ import java.util.List;
 public class Result {
 
 	private static final Integer CONTAINER_SIZE = 7;
+	private static final Integer INIT_NUMBER = 0;
 	private final int[] resultContainer;
 
 	public Result() {
@@ -34,7 +35,7 @@ public class Result {
 	}
 
 	public void viewLotto(Lotto lotto) {
-		System.out.println(lotto);
+		System.out.println(lotto.toString());
 	}
 
 	private void firstComment() {

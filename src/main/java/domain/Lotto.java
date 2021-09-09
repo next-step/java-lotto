@@ -36,8 +36,17 @@ public class Lotto {
 		return INIT_NUMBER;
 	}
 
+	public Number number(Integer index) {
+		return lotto.get(index);
+	}
+
 	public Integer size() {
 		return lotto.size();
+	}
+
+	@Override
+	public String toString() {
+		return "" + lotto;
 	}
 
 	@Override
