@@ -49,8 +49,7 @@ public class ResultView {
             }
             System.out.println();
         }
-        System.out.println(totalPrize);
-        System.out.println(totalLottoNum);
+
         if (totalPrize > totalLottoNum * 1000) {
             System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 이득이라는 의미임)", totalPrize/(double) (totalLottoNum * 1000));
             return;

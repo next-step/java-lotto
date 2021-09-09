@@ -4,18 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningLottoTicket implements LottoTicket {
+public class WinningLottoTicket {
     private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호는 6개로 구성되어야 합니다.";
     private static final String DELIMITER = ", ";
     private final List<LottoNumber> lottoTicket;
+    private final BonusBall bonusBall;
 
-    public WinningLottoTicket(String stringlottoNumber) {
+    public WinningLottoTicket(String stringlottoNumber, Integer bonusBall) {
         List<String> lottoNumbers = Arrays.asList(stringlottoNumber.split(DELIMITER));
         checkValidLottoNumberFormat(stringlottoNumber);
 
         lottoTicket = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoNumber(lottoNumber))
                 .collect(Collectors.toList());
+
+        this.bonusBall = new BonusBall(bonusBall);
     }
 
     private void checkValidLottoNumberFormat(String stringlottoNumber) {
@@ -29,14 +32,7 @@ public class WinningLottoTicket implements LottoTicket {
         return lottoTicket;
     }
 
-    @Override
-    public Integer matchWinningLotto(WinningLottoTicket winningLottoTicket) {
-        lottoTicket.retainAll(winningLottoTicket.ticket());
-        return lottoTicket.size();
-    }
-
-    @Override
-    public boolean matchBonusBall(BonusBall bonusBall) {
-        return lottoTicket.contains(bonusBall.number());
+    public BonusBall bonusBall() {
+        return bonusBall;
     }
 }

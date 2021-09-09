@@ -32,14 +32,16 @@ public class AutoLottoTicket implements LottoTicket {
     }
 
     @Override
-    public Integer matchWinningLotto(WinningLottoTicket winningLottoTicket) {
-        lottoTicket.retainAll(winningLottoTicket.ticket());
-        return lottoTicket.size();
+    public Long matchWinningLotto(WinningLottoTicket winningLottoTicket) {
+        return lottoTicket.stream()
+                .filter(lottoNumber -> winningLottoTicket.ticket().contains(lottoNumber))
+                .count();
+
     }
 
     @Override
-    public boolean matchBonusBall(BonusBall bonusBall) {
-        return lottoTicket.contains(bonusBall.number());
+    public boolean matchBonusBall(WinningLottoTicket winningLottoTicket) {
+        return lottoTicket.contains(winningLottoTicket.bonusBall().number());
     }
 
 }

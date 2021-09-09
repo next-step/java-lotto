@@ -4,26 +4,19 @@ import java.util.*;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-    private Map<Rank, Integer> result = new LinkedHashMap<>();
+    private LottoResult lottoResult = new LottoResult();
 
     public LottoTickets() {
         lottoTickets = new ArrayList<>();
     }
 
-    public void match(WinningLottoTicket winningLottoTicket, BonusBall bonusBall) {
-        Arrays.asList(Rank.values())
-                .forEach(rank -> result.put(rank, 0));
+    public void match(WinningLottoTicket winningLottoTicket) {
+        lottoResult.calculate(lottoTickets, winningLottoTicket);
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            Integer matchNumber = lottoTicket.matchWinningLotto(winningLottoTicket);
-            boolean isMatched = lottoTicket.matchBonusBall(bonusBall);
-            Rank rank = Rank.valueOf(matchNumber, isMatched);
-            result.put(rank, result.get(rank) + 1);
-        }
     }
 
-    public Map<Rank, Integer> result() {
-        return result;
+    public Map<Rank, Integer> lottoResult() {
+        return lottoResult.result();
     }
 
     public void buyLottoAutomatically(int num) {

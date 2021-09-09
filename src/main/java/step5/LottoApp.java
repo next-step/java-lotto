@@ -14,18 +14,21 @@ public class LottoApp {
         int numberOfAutoLottoTicketPurchased = numberOfLottoTicketsPurchased - numberOfManualLottoTicketPurchased;
 
         LottoTickets lottoTickets = new LottoTickets();
+        buyLotto(numberOfManualLottoTicketPurchased, numberOfAutoLottoTicketPurchased, lottoTickets);
+
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputView.requireLastWinningLottoNumber(), InputView.requireBonusBall());
+        lottoTickets.match(winningLottoTicket);
+
+
+        ResultView.printPurchaseLottoInfo(numberOfManualLottoTicketPurchased, numberOfAutoLottoTicketPurchased);
+        ResultView.printLottoNumberInfo(lottoTickets);
+        ResultView.printResult(lottoTickets.lottoResult());
+    }
+
+    private static void buyLotto(Integer numberOfManualLottoTicketPurchased, int numberOfAutoLottoTicketPurchased, LottoTickets lottoTickets) {
         for (int i = 0; i < numberOfManualLottoTicketPurchased; i++) {
             lottoTickets.buyLottoManually(new ManualLottoTicket(InputView.requireManualLottoNumber()));
         }
         lottoTickets.buyLottoAutomatically(numberOfAutoLottoTicketPurchased);
-
-        ResultView.printPurchaseLottoInfo(numberOfManualLottoTicketPurchased, numberOfAutoLottoTicketPurchased);
-        ResultView.printLottoNumberInfo(lottoTickets);
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputView.requireLastWinningLottoNumber());
-        BonusBall bonusBall = new BonusBall(InputView.requireBonusBall());
-
-        lottoTickets.match(winningLottoTicket, bonusBall);
-        Map<Rank, Integer> result = lottoTickets.result();
-        ResultView.printResult(result);
     }
 }
