@@ -8,17 +8,15 @@ import java.util.Map;
 
 public class LottoApp {
     public static void main(String[] args) {
-        Integer purchaseAmount = InputView.requirePurchaseAmount();
-        Integer numberOfManualLottoTicketPurchased = InputView.requireNumberOfManualLotto();
+        int purchaseAmount = InputView.requirePurchaseAmount();
+        int numberOfManualLottoTicketPurchased = InputView.requireNumberOfManualLotto();
         int numberOfLottoTicketsPurchased = purchaseAmount / 1000;
         int numberOfAutoLottoTicketPurchased = numberOfLottoTicketsPurchased - numberOfManualLottoTicketPurchased;
 
         LottoTickets lottoTickets = new LottoTickets();
         buyLotto(numberOfManualLottoTicketPurchased, numberOfAutoLottoTicketPurchased, lottoTickets);
-
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputView.requireLastWinningLottoNumber(), InputView.requireBonusBall());
         lottoTickets.match(winningLottoTicket);
-
 
         ResultView.printPurchaseLottoInfo(numberOfManualLottoTicketPurchased, numberOfAutoLottoTicketPurchased);
         ResultView.printLottoNumberInfo(lottoTickets);
