@@ -1,4 +1,7 @@
-package domain;
+package Util;
+
+import domain.Lotto;
+import domain.Rank;
 
 import java.util.List;
 

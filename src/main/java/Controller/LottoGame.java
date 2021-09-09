@@ -1,4 +1,9 @@
-package domain;
+package Controller;
+
+import Service.LottoCalculator;
+import Util.Input;
+import Util.Result;
+import domain.*;
 
 import java.util.ArrayList;
 import java.util.List;

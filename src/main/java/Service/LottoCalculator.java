@@ -1,4 +1,9 @@
-package domain;
+package Service;
+
+import domain.Account;
+import domain.Lotto;
+import domain.Number;
+import domain.Rank;
 
 import java.util.ArrayList;
 import java.util.List;

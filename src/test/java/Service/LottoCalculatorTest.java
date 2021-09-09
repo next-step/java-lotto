@@ -1,5 +1,10 @@
-package domain;
+package Service;
 
+import Service.LottoCalculator;
+import domain.Account;
+import domain.Lotto;
+import domain.Number;
+import domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

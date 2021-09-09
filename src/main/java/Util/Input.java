@@ -1,4 +1,8 @@
-package domain;
+package Util;
+
+import domain.Account;
+import domain.Lotto;
+import domain.Number;
 
 import java.util.ArrayList;
 import java.util.Arrays;

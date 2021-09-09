@@ -1,5 +1,6 @@
-package domain;
+package Service;
 
+import Service.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

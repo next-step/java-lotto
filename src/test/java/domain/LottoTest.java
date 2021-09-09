@@ -1,5 +1,7 @@
 package domain;
 
+import domain.Lotto;
+import domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
