@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLottoTicket {
+
     private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호는 6개로 구성되어야 합니다.";
     private static final String DELIMITER = ", ";
     private final List<LottoNumber> lottoTicket;
@@ -18,8 +19,8 @@ public class WinningLottoTicket {
         checkValidLottoNumberFormat(stringLottoNumber);
 
         lottoTicket = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
         this.bonusBall = new BonusBall(bonusBall);
     }

@@ -6,11 +6,12 @@ import step5.domain.lottoticket.WinningLottoTicket;
 import java.util.*;
 
 public class LottoResult {
+
     private Map<Rank, Integer> lottoResult = new LinkedHashMap<>();
 
     public LottoResult() {
         Arrays.asList(Rank.values())
-                .forEach(rank -> lottoResult.put(rank, 0));
+            .forEach(rank -> lottoResult.put(rank, 0));
     }
 
     public void calculate(List<LottoTicket> lottoTickets, WinningLottoTicket winningLottoTicket) {

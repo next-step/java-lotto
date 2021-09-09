@@ -1,6 +1,7 @@
 package step5.domain;
 
 public class BonusBall extends LottoNumber {
+
     public BonusBall(String lottoNumber) {
         super(lottoNumber);
     }

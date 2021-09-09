@@ -3,6 +3,7 @@ package step5.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+
     private static final Integer MIN = 1;
     private static final Integer MAX = 45;
     private final Integer lottoNumber;
@@ -28,8 +29,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return Objects.equals(lottoNumber, that.lottoNumber);
     }

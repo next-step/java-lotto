@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManualLottoTicket implements LottoTicket {
+
     private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호는 6개로 구성되어야 합니다.";
     private static final String DELIMITER = ", ";
     private final List<LottoNumber> lottoTicket;
@@ -16,8 +17,8 @@ public class ManualLottoTicket implements LottoTicket {
         checkValidLottoNumberFormat(stringLottoNumber);
 
         lottoTicket = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     private void checkValidLottoNumberFormat(String stringLottoNumber) {
@@ -34,8 +35,8 @@ public class ManualLottoTicket implements LottoTicket {
     @Override
     public Long matchWinningLotto(WinningLottoTicket winningLottoTicket) {
         return lottoTicket.stream()
-                .filter(lottoNumber -> winningLottoTicket.ticket().contains(lottoNumber))
-                .count();
+            .filter(lottoNumber -> winningLottoTicket.ticket().contains(lottoNumber))
+            .count();
     }
 
     @Override

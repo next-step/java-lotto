@@ -27,9 +27,9 @@ public enum Rank {
 
     public static Rank valueOf(Long countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.condition.test(countOfMatch, matchBonus))
-                .findFirst()
-                .orElse(MISS);
+            .filter(rank -> rank.condition.test(countOfMatch, matchBonus))
+            .findFirst()
+            .orElse(MISS);
     }
 
     public int getWinningMoney() {

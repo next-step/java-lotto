@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
+
     private static final Integer NUMBER_OF_LOTTO_NUMBERS = 6;
     private static final Integer MIN_OF_LOTTO_NUMBER = 1;
     private static final Integer MAX_OF_LOTTO_NUMBER = 45;

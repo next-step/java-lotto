@@ -8,6 +8,7 @@ import step5.domain.lottoticket.WinningLottoTicket;
 import java.util.*;
 
 public class LottoTickets {
+
     private List<LottoTicket> lottoTickets;
     private LottoResult lottoResult = new LottoResult();
 
