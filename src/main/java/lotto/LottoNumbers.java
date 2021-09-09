@@ -31,8 +31,7 @@ public class LottoNumbers {
 		return this.bonusNumber == other.bonusNumber;
 	}
 
-	@Override
-	public String toString() {
-		return this.numbers.toString();
+	public List<Integer> lottoNumber() {
+		return this.numbers;
 	}
 }

@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public interface LottoTicket {
-	String toStringLottoNumbers();
+	List<Integer> lottoNumbers();
 }

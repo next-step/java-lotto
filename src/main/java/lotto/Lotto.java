@@ -33,7 +33,7 @@ public class Lotto implements LottoTicket {
 	}
 
 	@Override
-	public String toStringLottoNumbers() {
-		return this.lottoNumbers.toString();
+	public List<Integer> lottoNumbers() {
+		return this.lottoNumbers.lottoNumber();
 	}
 }

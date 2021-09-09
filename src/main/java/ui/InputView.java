@@ -41,6 +41,6 @@ public class InputView {
 	}
 
 	public void drawLottoNumbers(List<LottoTicket> lottoTickets) {
-		lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.toStringLottoNumbers()));
+		lottoTickets.forEach(lottoTicket -> System.out.println(lottoTicket.lottoNumbers()));
 	}
 }
