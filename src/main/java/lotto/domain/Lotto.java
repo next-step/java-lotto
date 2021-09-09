@@ -1,47 +1,37 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
     private static final String EXCEP_INVALID_NUM = "로또 번호로 유효하지 않습니다.";
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lottoNums) {
-        List<LottoNumber> lottoNumbers = toLottoNumberList(lottoNums);
-        checkValidLotto(lottoNumbers);
-        this.lotto = lottoNumbers;
+    public Lotto(List<Integer> lottoNumbers) {
+        this(toLottoNumberSet(lottoNumbers));
     }
 
-    public static List<LottoNumber> toLottoNumberList(List<Integer> lottoNums) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>(lottoNums.size());
+    public Lotto(Set<LottoNumber> lottoNumberSet) {
+        checkValidLotto(lottoNumberSet);
+        this.lotto = lottoNumberSet;
+    }
+
+    public static Set<LottoNumber> toLottoNumberSet(List<Integer> lottoNums) {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNums.size());
 
         for (int i = 0; i < lottoNums.size(); i++) {
-             lottoNumbers.add(LottoNumber.of(lottoNums.get(i)));
+            lottoNumberSet.add(LottoNumber.of(lottoNums.get(i)));
         }
 
-        return lottoNumbers;
+        return lottoNumberSet;
     }
 
-    private void checkValidLotto(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LottoMachine.NUMS_PER_LOTTO) {
-            throwExceptionInvalidLotto();
-        }
-        checkDuplicateNum(lottoNumbers);
-    }
-
-    private void checkDuplicateNum(List<LottoNumber> lottoNums) {
-        if (lottoNums.size() != lottoNums.stream().distinct().count()) {
-            throwExceptionInvalidLotto();
+    private void checkValidLotto(Set<LottoNumber> lottoNumberSet) {
+        if (lottoNumberSet.size() != LottoMachine.NUMS_PER_LOTTO) {
+            throw new IllegalArgumentException(EXCEP_INVALID_NUM);
         }
     }
 
-    private void throwExceptionInvalidLotto() {
-        throw new IllegalArgumentException(EXCEP_INVALID_NUM);
-    }
-
-    public List<LottoNumber> getLottoNumberList() {
+    public Set<LottoNumber> getLottoNumberList() {
         return lotto;
     }
 

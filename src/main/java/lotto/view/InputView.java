@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.Money;
 import org.apache.commons.lang3.StringUtils;
@@ -11,9 +12,10 @@ import java.util.Scanner;
 
 public class InputView {
     private final static String GUIDE_INPUT_MONEY = "구입금액을 입력해 주세요.";
-    private final static String NOTI_INVALID_MONEY = "구입금액으로 유효하지 않습니다.";
     private static final String GUIDE_INPUT_WIN_NUMS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String GUIDE_INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요";
     private static final String INST_INPUT_BONUS_NUM = "보너스 볼을 입력해 주세요";
+    private static final String GUIDE_INPUT_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요";
     private static final int NUMS_PER_LOTTO = 6;
 
     public static int inputMoney() {
@@ -46,18 +48,18 @@ public class InputView {
             input = scanner.nextLine();
         } while (!isValidWinningNums(input));
 
-        return toWinningNums(input);
+        return toIntList(input);
     }
 
-    private static List<Integer> toWinningNums(String input) {
+    private static List<Integer> toIntList(String input) {
         String[] nums = input.split(",");
-        List<Integer> winningNums = new ArrayList<>(nums.length);
+        List<Integer> intList = new ArrayList<>(nums.length);
 
         for (int i = 0; i < nums.length; i++) {
-            winningNums.add(Integer.parseInt(nums[i].trim()));
+            intList.add(Integer.parseInt(nums[i].trim()));
         }
 
-        return winningNums;
+        return intList;
     }
 
     static boolean isValidWinningNums(String input) {
@@ -88,8 +90,8 @@ public class InputView {
     }
 
     public static int inputBonusNum() {
-        int bonusNum;
         Scanner scanner = new Scanner(System.in);
+        int bonusNum;
 
         do {
             System.out.println(INST_INPUT_BONUS_NUM);
@@ -105,5 +107,30 @@ public class InputView {
         }
 
         return true;
+    }
+
+    public static int inputManualLottoCount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(GUIDE_INPUT_MANUAL_COUNT);
+        return scanner.nextInt();
+    }
+
+    public static List<Lotto> inputManualLotto(int manualLottoCount) {
+        if (manualLottoCount == 0) {
+            return new ArrayList<>();
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(GUIDE_INPUT_MANUAL_LOTTO);
+        String input = "";
+        List<Lotto> lottoList = new ArrayList<>(manualLottoCount);
+
+        for (int i = 0; i < manualLottoCount; i++) {
+            input = scanner.nextLine();
+            lottoList.add(new Lotto(toIntList(input)));
+        }
+
+        return lottoList;
     }
 }

@@ -2,27 +2,29 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ResultView {
     private final static String INST_RESULT = "당첨 통계";
+    private final static String FORMAT_BOUGHT_LOTTO = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private final static String FORMAT_YIELD = "총 수익률은 %.2f입니다\n";
 
-    public static void printGeneratedLottos(LottoMachine lottoMachine) {
-        Lottos lottos = lottoMachine.getLottos();
+    public static void printGeneratedLottos(Lottos lottos, AffordableLottoCount affordableLottoCount) {
         List<Lotto> lottoList = lottos.getLottoList();
-        List<LottoNumber> lottoNums;
+        Set<LottoNumber> lottoNumberSet;
 
         for (Lotto lotto : lottoList) {
-            lottoNums = lotto.getLottoNumberList();
-            printLottoNums(lottoNums);
+            lottoNumberSet = lotto.getLottoNumberList();
+            printLottoNums(lottoNumberSet);
         }
 
         System.out.println();
     }
 
-    private static void printLottoNums(List<LottoNumber> lottoNums) {
-        Iterator<LottoNumber> it = lottoNums.iterator();
+    private static void printLottoNums(Set<LottoNumber> lottoNums) {
+        List<LottoNumber> lottoNumberList = new ArrayList<>(lottoNums);
+        Collections.sort(lottoNumberList);
+        Iterator<LottoNumber> it = lottoNumberList.iterator();
 
         System.out.print("[" + it.next());
         while (it.hasNext()) {
@@ -58,12 +60,11 @@ public class ResultView {
         }
     }
 
-    public static void printLottoYield(LottoMachine lottoMachine, WinningNumber winningNumber) {
-        System.out.println("총 수익률은 " + String.format("%.2f", lottoMachine.getYield(winningNumber)) + "입니다.");
+    public static void printLottoYield(double yield) {
+        System.out.printf(FORMAT_YIELD, yield);
     }
 
-    public static void printBuyableLottoNum(LottoMachine lottoMachine) {
-        int buyableLottoNum = lottoMachine.calculateBuyableLottos();
-        System.out.println(buyableLottoNum + "개를 구매했습니다.");
+    public static void printBuyableLottoNum(int manualLottoCount, int AutoLottoCount) {
+        System.out.printf(FORMAT_BOUGHT_LOTTO, manualLottoCount, AutoLottoCount);
     }
 }
