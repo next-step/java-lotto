@@ -21,5 +21,7 @@ public class LottoApp {
         ResultView.printLottoNumberInfo(lottoTickets);
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(InputView.requireLastWinningLottoNumber());
         BonusBall bonusBall = new BonusBall(InputView.requireBonusBall());
+
+        lottoTickets.match(winningLottoTicket, bonusBall);
     }
 }

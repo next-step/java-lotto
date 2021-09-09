@@ -19,4 +19,5 @@ public class ManualLottoCount {
     public int getNumOfManualPurchaseLotto() {
         return numOfManualPurchaseLotto;
     }
+
 }

@@ -1,4 +1,4 @@
-package step3.util;
+package step5.domain;
 
 import java.util.Arrays;
 import java.util.function.BiPredicate;

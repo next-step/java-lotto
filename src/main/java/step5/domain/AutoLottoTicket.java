@@ -1,5 +1,6 @@
 package step5.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,4 +30,16 @@ public class AutoLottoTicket implements LottoTicket {
     public List<LottoNumber> ticket() {
         return lottoTicket;
     }
+
+    @Override
+    public Integer matchWinningLotto(WinningLottoTicket winningLottoTicket) {
+        lottoTicket.retainAll(winningLottoTicket.ticket());
+        return lottoTicket.size();
+    }
+
+    @Override
+    public boolean matchBonusBall(BonusBall bonusBall) {
+        return lottoTicket.contains(bonusBall.number());
+    }
+
 }

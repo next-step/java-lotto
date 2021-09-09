@@ -1,13 +1,29 @@
 package step5.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
+    private Map<Rank, Integer> result = new HashMap<>();
 
     public LottoTickets() {
         lottoTickets = new ArrayList<>();
+    }
+
+    public void match(WinningLottoTicket winningLottoTicket, BonusBall bonusBall) {
+        Arrays.asList(Rank.values())
+                .forEach(rank -> result.put(rank, 0));
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Integer matchNumber = lottoTicket.matchWinningLotto(winningLottoTicket);
+            boolean isMatched = lottoTicket.matchBonusBall(bonusBall);
+            Rank rank = Rank.valueOf(matchNumber, isMatched);
+            result.put(rank, result.get(rank) + 1);
+        }
+    }
+
+    public Map<Rank, Integer> result() {
+        return result;
     }
 
     public void buyLottoAutomatically(int num) {
@@ -15,7 +31,6 @@ public class LottoTickets {
             AutoLottoTicket autoLottoTicket = new AutoLottoTicket();
             lottoTickets.add(autoLottoTicket);
         }
-
     }
 
     public void buyLottoManually(ManualLottoTicket manualLottoTicket) {

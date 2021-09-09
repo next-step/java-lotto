@@ -28,4 +28,15 @@ public class ManualLottoTicket implements LottoTicket {
     public List<LottoNumber> ticket() {
         return lottoTicket;
     }
+
+    @Override
+    public Integer matchWinningLotto(WinningLottoTicket winningLottoTicket) {
+        lottoTicket.retainAll(winningLottoTicket.ticket());
+        return lottoTicket.size();
+    }
+
+    @Override
+    public boolean matchBonusBall(BonusBall bonusBall) {
+        return lottoTicket.contains(bonusBall.number());
+    }
 }

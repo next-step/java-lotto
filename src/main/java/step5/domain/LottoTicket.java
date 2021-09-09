@@ -7,4 +7,9 @@ import java.util.stream.Collectors;
 
 public interface LottoTicket {
     public List<LottoNumber> ticket();
+
+    public Integer matchWinningLotto(WinningLottoTicket winningLottoTicket);
+
+
+    public boolean matchBonusBall(BonusBall bonusBall);
 }
