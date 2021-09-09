@@ -8,8 +8,8 @@ public class Lotto implements LottoTicket {
 	private final int price;
 	private final LottoRank rank;
 
-	public Lotto(Supplier<List<Integer>> lottoMaker, int lottoPrice) {
-		this.lottoNumbers = new LottoNumbers(lottoMaker.get());
+	public Lotto(List<Integer> lottoNumbers, int bonusNumber, int lottoPrice) {
+		this.lottoNumbers = new LottoNumbers(lottoNumbers, bonusNumber);
 		this.price = lottoPrice;
 		this.rank = LottoRank.NOTHING;
 	}

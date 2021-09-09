@@ -4,9 +4,20 @@ import java.util.List;
 
 public class LottoNumbers {
 	private final List<Integer> numbers;
+	private final int bonusNumber;
+
+	public LottoNumbers(List<Integer> numbers, int bonusNumber) {
+		this.numbers = numbers;
+		this.bonusNumber = bonusNumber;
+	}
 
 	public LottoNumbers(List<Integer> numbers) {
 		this.numbers = numbers;
+		this.bonusNumber = -1;
+	}
+
+	private boolean contains(int number) {
+		return numbers.contains(number);
 	}
 
 	public int matchedCount(LottoNumbers other) {
@@ -16,11 +27,12 @@ public class LottoNumbers {
 			.count();
 	}
 
-	public String toString() {
-		return numbers.toString();
+	public boolean isMatchBonus(LottoNumbers other) {
+		return this.bonusNumber == other.bonusNumber;
 	}
 
-	private boolean contains(int number) {
-		return numbers.contains(number);
+	@Override
+	public String toString() {
+		return this.numbers.toString();
 	}
 }

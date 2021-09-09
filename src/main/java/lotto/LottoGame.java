@@ -37,22 +37,24 @@ public class LottoGame {
 	public List<LottoTicket> buyLotto(int price) {
 		ArrayList<LottoTicket> lottos = new ArrayList<>();
 		while (price >= this.lottoPrice) {
-			lottos.add(new Lotto(this.lottoMaker, this.lottoPrice));
+			List<Integer> numbers = this.lottoMaker.get();
+			List<Integer> lottoNumbers = numbers.subList(0, 6);
+			int bonusNumber = numbers.get(6);
+
+			lottos.add(new Lotto(lottoNumbers, bonusNumber, this.lottoPrice));
 			price = price - this.lottoPrice;
 		}
 		return lottos;
 	}
 
-	public LottoReport lottoResult(List<LottoTicket> lottos, String winningNumbers) {
+	public LottoReport lottoResult(List<LottoTicket> lottos, String winningNumbers, int bonusNumber) {
 		LottoGroup lottoGroup = new LottoGroup(lottos
 			.stream()
 			.map(lottoTicket -> (Lotto)lottoTicket)
 			.collect(Collectors.toList()));
-		return lottoGroup.lottoResultReport(new Lotto(() -> {
-			return Arrays
-				.stream(winningNumbers.split(", "))
-				.map(Integer::parseInt)
-				.collect(Collectors.toList());
-		}, 0));
+		return lottoGroup.lottoResultReport(new Lotto(Arrays
+			.stream(winningNumbers.split(", "))
+			.map(Integer::parseInt)
+			.collect(Collectors.toList()), bonusNumber, 0));
 	}
 }
