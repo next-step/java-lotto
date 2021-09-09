@@ -38,8 +38,8 @@ public class LottoGame {
 		ArrayList<LottoTicket> lottos = new ArrayList<>();
 		while (price >= this.lottoPrice) {
 			List<Integer> numbers = this.lottoMaker.get();
-			List<Integer> lottoNumbers = numbers.subList(0, 6);
-			int bonusNumber = numbers.get(6);
+			List<Integer> lottoNumbers = numbers.subList(0, numbers.size() - 1);
+			int bonusNumber = numbers.get(numbers.size() - 1);
 
 			lottos.add(new Lotto(lottoNumbers, bonusNumber, this.lottoPrice));
 			price = price - this.lottoPrice;
