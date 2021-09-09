@@ -32,4 +32,12 @@ class ManualLottoTicketTest {
         String lottoNumbers = "1, 2, 3, 4, 5, 6";
         LottoTicket lottoTicket = new ManualLottoTicket(lottoNumbers);
     }
+
+    @Test
+    void retainAll() {
+        ManualLottoTicket manualLottoTicket = new ManualLottoTicket("1, 2, 3, 4, 5, 6");
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
+        Integer matchNumber = manualLottoTicket.matchWinningLotto(winningLottoTicket);
+        System.out.println(matchNumber);
+    }
 }
