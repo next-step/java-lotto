@@ -2,7 +2,7 @@ package step2.domain.statistics;
 
 import java.util.Objects;
 
-public class Amount {
+public class Amount implements Comparable<Amount> {
     private static final int LOTTO_PRICE = 1000;
 
     private int amount;
@@ -13,10 +13,14 @@ public class Amount {
 
     public Amount(int amount) {
         if (amount < 0) {
-            final String message = String.format("1개(%d원) 미만은 구매할 수 없습니다.", LOTTO_PRICE);
+            final String message = String.format("0개(%d원) 미만은 구매할 수 없습니다.", LOTTO_PRICE);
             throw new RuntimeException(message);
         }
         this.amount = amount;
+    }
+
+    public Amount(Amount amount) {
+        this.amount = amount.amount;
     }
 
     public double price() {
@@ -25,6 +29,10 @@ public class Amount {
 
     public Amount add() {
         return new Amount(this.amount + 1);
+    }
+
+    public Amount minus(Amount amount) {
+        return new Amount(this.amount - amount.amount);
     }
 
     public boolean isLessThan(int amount) {
@@ -46,9 +54,11 @@ public class Amount {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(amount)
-                .append("개를 구매했습니다.")
-                .toString();
+        return String.valueOf(amount);
+    }
+
+    @Override
+    public int compareTo(Amount amount) {
+        return this.amount - amount.amount;
     }
 }

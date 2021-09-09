@@ -1,9 +1,9 @@
 package step2.view;
 
-import step2.domain.lotto.LottoNumber;
-import step2.domain.lotto.LottoNumbers;
-import step2.domain.lotto.Price;
+import step2.domain.lotto.*;
+import step2.domain.statistics.Amount;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,11 +13,21 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public InputDto inputPrice() {
+    public InputDto inputValue() {
         System.out.println("구입금액을 입력해 주세요.");
         final int price = Integer.parseInt(scanner.nextLine());
 
-        return new InputDto(new Price(price).amount());
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        final int amount = Integer.parseInt(scanner.nextLine());
+
+        List<Lotto> lottoList = new ArrayList<>();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < amount; i++) {
+            final String inputManualLottoNumber = scanner.nextLine();
+            lottoList.add(new Lotto(new LottoNumbers(convertStringToListOfNumber(inputManualLottoNumber))));
+        }
+
+        return new InputDto(new Price(price), new Amount(amount), lottoList);
     }
 
     public LottoNumbers inputLastWinningNumbers() {

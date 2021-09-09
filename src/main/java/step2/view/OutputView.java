@@ -1,12 +1,14 @@
 package step2.view;
 
+import step2.domain.lotto.LottoMachine;
 import step2.domain.lotto.Lottos;
-import step2.domain.statistics.Amount;
 import step2.domain.statistics.Statistics;
 
 public class OutputView {
-    public void printLottoPurchase(Amount amount, Lottos issueLottos) {
-        System.out.println(amount);
+
+    public void printLottoPurchase(LottoMachine lottoMachine, Lottos issueLottos) {
+        System.out.println();
+        System.out.println(lottoMachine);
         System.out.println(issueLottos);
     }
 

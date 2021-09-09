@@ -14,4 +14,11 @@ public class PriceTest {
         final Amount expected = new Amount(14);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void manualAmountTest() {
+        final Price price = new Price(14000);
+        final Amount autoAmount = price.autoAmount(new Amount(3));
+        assertThat(autoAmount).isEqualTo(new Amount(11));
+    }
 }
