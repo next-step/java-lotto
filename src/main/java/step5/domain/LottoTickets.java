@@ -14,7 +14,7 @@ public class LottoTickets {
 
     }
 
-    public void buyLottoManually() {
-
+    public void buyLottoManually(ManualLottoTicket manualLottoTicket) {
+        lottoTickets.add(manualLottoTicket);
     }
 }

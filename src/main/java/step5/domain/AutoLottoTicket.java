@@ -7,15 +7,10 @@ import java.util.stream.Collectors;
 public class AutoLottoTicket implements LottoTicket {
     private static final String LOTTO_NUMBER_ㄷERROR_MESSAGE = "로또 번호는 6개로 구성되어야 합니다.";
     private static final String DELIMITER = ", ";
-    private final List<LottoNumber> lottoTicket;
+//    private final List<LottoNumber> lottoTicket;
 
-    public AutoLottoTicket(String stringlottoNumber) {
-        List<String> lottoNumbers = Arrays.asList(stringlottoNumber.split(DELIMITER));
-        checkValidLottoNumberFormat(stringlottoNumber);
+    public AutoLottoTicket() {
 
-        lottoTicket = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoNumber(lottoNumber))
-                .collect(Collectors.toList());
     }
 
     public void checkValidLottoNumberFormat(String stringlottoNumber) {

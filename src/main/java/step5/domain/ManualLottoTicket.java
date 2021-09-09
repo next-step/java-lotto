@@ -24,6 +24,4 @@ public class ManualLottoTicket implements LottoTicket {
             throw new IllegalArgumentException(LOTTO_NUMBER_ㄷERROR_MESSAGE);
         }
     }
-
-
 }
