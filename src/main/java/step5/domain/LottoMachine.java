@@ -21,6 +21,6 @@ public class LottoMachine {
 
     public List<Integer> issue() {
         Collections.shuffle(fullLottoNumber);
-        return fullLottoNumber.subList(0, 6);
+        return fullLottoNumber.subList(0, NUMBER_OF_LOTTO_NUMBERS);
     }
 }

@@ -17,8 +17,6 @@ public class LottoApp {
             lottoTickets.buyLottoManually(new ManualLottoTicket(InputView.requireManualLottoNumber()));
         }
 
-        for (int i = 0; i < numberOfAutoLottoTicketPurchased; i++) {
-            lottoTickets.buyLottoAutomatically();
-        }
+        lottoTickets.buyLottoAutomatically(numberOfAutoLottoTicketPurchased);
     }
 }

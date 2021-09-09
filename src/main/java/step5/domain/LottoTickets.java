@@ -10,7 +10,11 @@ public class LottoTickets {
         lottoTickets = new ArrayList<>();
     }
 
-    public void buyLottoAutomatically() {
+    public void buyLottoAutomatically(int num) {
+        for (int i = 0; i < num; i++) {
+            AutoLottoTicket autoLottoTicket = new AutoLottoTicket();
+            lottoTickets.add(autoLottoTicket);
+        }
 
     }
 
