@@ -14,16 +14,16 @@ public class Lotto {
 		this.lotto = lotto;
 	}
 
-	public static Integer numberOfMatches(Lotto lotto, Lotto lottoWinningNumber) {
+	public Integer numberOfMatches(Lotto lottoWinningNumber) {
 		int sum = INIT_NUMBER;
 		for (int number = INIT_NUMBER ; number < lotto.size() ; ++number) {
-			sum += containStatus(lottoWinningNumber, lotto.lotto.get(number));
+			sum += containStatus(lottoWinningNumber, lotto.get(number));
 		}
 		return sum;
 	}
 
-	public static boolean bonusNumberOfMatches(Lotto lotto, Number bonusNumber) {
-		if (lotto.lotto.contains(bonusNumber)) {
+	public boolean bonusNumberOfMatches(Number bonusNumber) {
+		if (lotto.contains(bonusNumber)) {
 			return true;
 		}
 		return false;

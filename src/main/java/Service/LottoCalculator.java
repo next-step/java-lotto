@@ -37,10 +37,10 @@ public class LottoCalculator {
 	}
 
 	private Integer numberOfMatches(Lotto lotto, Lotto lottoWinningNumber) {
-		return Lotto.numberOfMatches(lotto, lottoWinningNumber);
+		return lotto.numberOfMatches(lottoWinningNumber);
 	}
 
 	private Boolean bonusNumberOfMatches(Lotto lotto, Number bonusNumber) {
-		return Lotto.bonusNumberOfMatches(lotto, bonusNumber);
+		return lotto.bonusNumberOfMatches(bonusNumber);
 	}
 }

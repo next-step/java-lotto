@@ -33,7 +33,7 @@ public class LottoTest {
 	void test_lotto_match() {
 		Lotto lotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
 						new Number(6)));
-		Integer matchNumber = Lotto.numberOfMatches(lotto,winningLotto);
+		Integer matchNumber = lotto.numberOfMatches(winningLotto);
 		assertThat(matchNumber).isEqualTo(6);
 	}
 
@@ -42,7 +42,7 @@ public class LottoTest {
 	void test_lotto_bonus() {
 		Lotto lotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
 						new Number(6)));
-		boolean bonusStatus = Lotto.bonusNumberOfMatches(lotto, new Number(3));
+		boolean bonusStatus = lotto.bonusNumberOfMatches(new Number(3));
 		assertThat(bonusStatus).isEqualTo(true);
 	}
 }
