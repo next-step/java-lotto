@@ -3,8 +3,10 @@ package step5.view;
 import step5.domain.LottoNumber;
 import step5.domain.LottoTicket;
 import step5.domain.LottoTickets;
+import step5.domain.Rank;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -34,4 +36,29 @@ public class ResultView {
     }
 
 
+    public static void printResult(Map<Rank, Integer> result) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        int totalPrize = 0;
+        int totalLottoNum = 0;
+        for (Rank rank: result.keySet()) {
+            System.out.printf("%s개 일치 (%s원)- %s개",rank.getCountOfMatch(), rank.getWinningMoney(), result.get(rank));
+            if (result.get(rank) >= 1) {
+                totalPrize += rank.getWinningMoney() * result.get(rank);
+                totalLottoNum += result.get(rank);
+            }
+            System.out.println();
+        }
+        System.out.println(totalPrize);
+        System.out.println(totalLottoNum);
+        if (totalPrize > totalLottoNum * 1000) {
+            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 이득이라는 의미임)", totalPrize/(double) (totalLottoNum * 1000));
+            return;
+        }
+        if (totalPrize < totalLottoNum * 1000) {
+            System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)", totalPrize / (double) (totalLottoNum * 1000));
+            return;
+        }
+        System.out.printf("총 수익률은 %s 입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)", totalPrize / (double) (totalLottoNum * 1000));
+    }
 }

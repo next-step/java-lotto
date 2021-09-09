@@ -4,6 +4,8 @@ import step5.domain.*;
 import step5.view.InputView;
 import step5.view.ResultView;
 
+import java.util.Map;
+
 public class LottoApp {
     public static void main(String[] args) {
         Integer purchaseAmount = InputView.requirePurchaseAmount();
@@ -23,5 +25,7 @@ public class LottoApp {
         BonusBall bonusBall = new BonusBall(InputView.requireBonusBall());
 
         lottoTickets.match(winningLottoTicket, bonusBall);
+        Map<Rank, Integer> result = lottoTickets.result();
+        ResultView.printResult(result);
     }
 }

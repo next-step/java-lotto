@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-    private Map<Rank, Integer> result = new HashMap<>();
+    private Map<Rank, Integer> result = new LinkedHashMap<>();
 
     public LottoTickets() {
         lottoTickets = new ArrayList<>();
