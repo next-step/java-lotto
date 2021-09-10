@@ -46,6 +46,9 @@ public class Input {
 	public List<Lotto> getManualLotto() {
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		Integer count = scanner.nextInt();
+		if (count <= INIT_NUMBER) {
+			throw new IllegalArgumentException("로또 수의 입력이 0이하로는 올 수 없습니다.");
+		}
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<Lotto> lottos = new ArrayList<>();
 		for (int number = INIT_NUMBER ; number < count ; ++number) {
