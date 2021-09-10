@@ -1,6 +1,5 @@
-package Service;
+package service;
 
-import Service.LottoCalculator;
 import domain.Account;
 import domain.Lotto;
 import domain.Number;

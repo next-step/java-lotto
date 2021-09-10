@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 import domain.Account;
 import domain.Lotto;
