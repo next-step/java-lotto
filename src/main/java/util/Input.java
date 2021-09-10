@@ -27,8 +27,8 @@ public class Input {
 		return new Account(account);
 	}
 
-	public void viewLottoCount(Integer lottoCount) {
-		System.out.println(lottoCount + "개를 구매했습니다.");
+	public void viewLottoCount(Integer autoLottoCount, Integer manualLottoCount) {
+		System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다." );
 	}
 
 	public Lotto lottoWinningNumber() {

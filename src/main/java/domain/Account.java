@@ -12,7 +12,8 @@ public class Account {
 		this.account = account;
 	}
 
-	public Integer lottoCountByUnit() {
+	public Integer lottoCountByUnit(Integer count) {
+		this.account -= UNIT * count;
 		return this.account / UNIT;
 	}
 

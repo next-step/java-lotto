@@ -22,10 +22,18 @@ public class LottoGame {
 
 		Account account = input.setAccount();
 		List<Lotto> manualLottos = input.getManualLotto();
-		Integer lottoCount = calculator.getLottoCount(account);
-		input.viewLottoCount(lottoCount);
 
-		for (int number = INIT_NUMBER ; number < lottoCount ; ++number) {
+		Integer autoLottoCount = calculator.getAutoLottoCount(account, manualLottos);
+		Integer manualLottoCount = calculator.getManualLottoCount(manualLottos);
+
+		input.viewLottoCount(autoLottoCount, manualLottoCount);
+
+		for (int number = INIT_NUMBER ; number < manualLottoCount ; ++number) {
+			lottoList.add(manualLottos.get(number));
+			result.viewLotto(lottoList.get(number));
+		}
+
+		for (int number = INIT_NUMBER ; number < autoLottoCount ; ++number) {
 			Lotto lotto = generator.getLottoNumber();
 			lottoList.add(lotto);
 			result.viewLotto(lotto);

@@ -23,8 +23,12 @@ public class LottoCalculator {
 		return container;
 	}
 
-	public Integer getLottoCount(Account account) {
-		return account.lottoCountByUnit();
+	public Integer getAutoLottoCount(Account account, List<Lotto> manualLottos) {
+		return account.lottoCountByUnit(manualLottos.size());
+	}
+
+	public Integer getManualLottoCount(List<Lotto> manualLottos) {
+		return manualLottos.size();
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
