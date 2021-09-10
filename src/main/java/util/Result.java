@@ -16,14 +16,21 @@ public class Result {
 	public void viewResult(List<Rank> container) {
 		firstComment();
 		calculateStatistics(container);
-		System.out.println("3개 일치 (5000원)-" + (rankMap.get(Rank.FIFTH) == null ? INIT_NUMBER : rankMap.get(Rank.FIFTH)));
-		System.out.println("4개 일치 (50000원)-" + (rankMap.get(Rank.FOURTH) == null ? INIT_NUMBER : rankMap.get(Rank.FOURTH)));
-		System.out.println("5개 일치 (1500000원)-" + (rankMap.get(Rank.THIRD) == null ? INIT_NUMBER : rankMap.get(Rank.THIRD)));
-		System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + (rankMap.get(Rank.SECOND) == null ? INIT_NUMBER : rankMap.get(Rank.SECOND)));
-		System.out.println("6개 일치 (2000000000원)-" + (rankMap.get(Rank.FIRST) == null ? INIT_NUMBER : rankMap.get(Rank.FIRST)));
+		System.out.println("3개 일치 (5000원)-" + getRankCount(Rank.FIFTH));
+		System.out.println("4개 일치 (50000원)-" + getRankCount(Rank.FOURTH));
+		System.out.println("5개 일치 (1500000원)-" + getRankCount(Rank.THIRD));
+		System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + getRankCount(Rank.SECOND));
+		System.out.println("6개 일치 (2000000000원)-" + getRankCount(Rank.FIRST));
 
 		int sum = INIT_NUMBER;
 		System.out.println("총 수익률은 " + sum + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+	}
+
+	private Integer getRankCount(Rank rank) {
+		if (rankMap.get(rank) == null) {
+			return INIT_NUMBER;
+		}
+		return rankMap.get(rank);
 	}
 
 	private void calculateStatistics(List<Rank> container) {
