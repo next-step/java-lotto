@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 public class Input {
 
+	private static final Integer INIT_NUMBER = 0;
+
 	private Integer account;
 	private Scanner scanner;
 
@@ -39,5 +41,21 @@ public class Input {
 		System.out.println("보너스 볼을 입력해주세요.");
 		Integer bonusNumber = scanner.nextInt();
 		return new Number(bonusNumber);
+	}
+
+	public List<Lotto> getManualLotto() {
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+		Integer count = scanner.nextInt();
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		List<Lotto> lottos = new ArrayList<>();
+		for (int number = INIT_NUMBER ; number < count ; ++number) {
+			lottos.add(manualLotto());
+		}
+		return lottos;
+	}
+
+	public Lotto manualLotto() {
+		List<String> numbers = new ArrayList<>(Arrays.asList(scanner.next().split(",")));
+		return new Lotto(numbers.stream().map(data -> new Number(Integer.parseInt(data))).collect(Collectors.toList()));
 	}
 }
