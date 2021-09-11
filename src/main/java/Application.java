@@ -1,5 +1,6 @@
 import java.util.List;
 
+import lotto.Lotto;
 import lotto.LottoGame;
 import lotto.LottoTicket;
 import ui.InputView;
@@ -16,7 +17,7 @@ public class Application {
 	}
 
 	public void startLottoGame() {
-		LottoGame game = LottoGame.of(1000, 1, 45, 7);
+		LottoGame game = new LottoGame();
 
 		this.inputView.drawQuestionOfMoney();
 		List<LottoTicket> lottoTickets = game.buyLotto(this.inputView.inputAmountOfMoney());

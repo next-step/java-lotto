@@ -10,28 +10,31 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
 	@Test
-	@DisplayName("로또 결과를 통해서 상금 확인")
-	void compare() {
-		int lottoPrice = 1000;
-		Lotto winningNumber = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43), 10, lottoPrice);
-		Lotto lotto1st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43), 9, lottoPrice);
-		Lotto lotto2st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 1), 10, lottoPrice);
-		Lotto lotto3st = new Lotto(Arrays.asList(8, 21, 23, 41, 42, 1), 9, lottoPrice);
-		Lotto lotto4st = new Lotto(Arrays.asList(8, 21, 23, 41, 1, 2), 9, lottoPrice);
-		Lotto lotto5st = new Lotto(Arrays.asList(8, 21, 23, 1, 2, 3), 9, lottoPrice);
-		Lotto failedLotto = new Lotto(Arrays.asList(8, 21, 1, 2, 3, 4), 9, lottoPrice);
+	@DisplayName("6개의 숫자를 가짐")
+	void scope() {
+		assertThatThrownBy(() -> {
+			new Lotto(Arrays.asList(1, 2, 3, 4, 5));
+		}).isExactlyInstanceOf(IllegalArgumentException.class);
+	}
 
-		assertThat(lotto1st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FIRST.reward());
+	@Test
+	@DisplayName("같은 숫자 갯수")
+	void match() {
+		Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+		Lotto lotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-		assertThat(lotto2st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.SECOND.reward());
+		assertThat(lotto1.matchNumber(lotto1)).isEqualTo(6);
 
-		assertThat(lotto3st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.THIRD.reward());
+		assertThat(lotto1.matchNumber(lotto2)).isEqualTo(0);
+	}
 
-		assertThat(lotto4st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FOURTH.reward());
+	@Test
+	@DisplayName("숫자를 포함 확인")
+	void contains() {
+		Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-		assertThat(lotto5st.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.FIFTH.reward());
+		assertThat(lotto.contains(new LottoNumber(1))).isTrue();
 
-		assertThat(failedLotto.unmaskedLotto(winningNumber).lottoRank().reward()).isEqualTo(LottoRank.NOTHING.reward());
-
+		assertThat(lotto.contains(new LottoNumber(7))).isFalse();
 	}
 }

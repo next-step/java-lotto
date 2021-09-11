@@ -55,10 +55,10 @@ public enum LottoRank {
 		this.reward = reward;
 	}
 
-	public static LottoRank findLottoRank(LottoNumbers left, LottoNumbers right) {
+	public static LottoRank findLottoRank(int matchedCount, boolean isMachBonus) {
 		return Arrays
 			.stream(LottoRank.values())
-			.filter(rank -> rank.isWinning(left.matchedCount(right), left.isMatchBonus(right)))
+			.filter(rank -> rank.isWinning(matchedCount, isMachBonus))
 			.findFirst()
 			.get();
 	}
