@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoMachine {
+    private static final int ZERO = 0;
+
     private final Price price;
     private final Amount manualAmount;
 
     public LottoMachine(Price price, Amount manualAmount) {
         this.price = price;
-        if (price.amount().compareTo(manualAmount) < 0) {
+        if (price.amount().compareTo(manualAmount) < ZERO) {
             throw new RuntimeException("구매 수량은 구매 가격을 넘을 수 없습니다.");
         }
         this.manualAmount = manualAmount;
