@@ -35,15 +35,6 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static boolean isContains(int matchCount) {
-        final List<Rank> rankList = Arrays.asList(Rank.values());
-        final List<Integer> matchNumbers = rankList.stream()
-                .map(o -> o.matchNumber)
-                .collect(Collectors
-                        .toList());
-
-        return matchNumbers.contains(matchCount);
-    }
 
     @Override
     public String toString() {
