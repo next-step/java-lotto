@@ -21,7 +21,7 @@ public class Price {
         return new Amount(this.price / LOTTO_PRICE);
     }
 
-    public Amount autoAmount(Amount manualAmount) {
+    public Amount spend(Amount manualAmount) {
         return new Amount(this.amount().minus(manualAmount));
     }
 

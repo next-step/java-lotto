@@ -22,7 +22,7 @@ public class LottoMachine {
     }
 
     public Lottos automaticIssue() {
-        return new Lottos(price.autoAmount(manualAmount));
+        return new Lottos(price.spend(manualAmount));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LottoMachine {
 
     @Override
     public String toString() {
-        final Amount autoAmount = price.autoAmount(manualAmount);
+        final Amount autoAmount = price.spend(manualAmount);
         return "수동으로 " + manualAmount +
                 "장, 자동으로 " + autoAmount +
                 "개를 구매했습니다.";

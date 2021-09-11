@@ -18,7 +18,7 @@ public class PriceTest {
     @Test
     void manualAmountTest() {
         final Price price = new Price(14000);
-        final Amount autoAmount = price.autoAmount(new Amount(3));
+        final Amount autoAmount = price.spend(new Amount(3));
         assertThat(autoAmount).isEqualTo(new Amount(11));
     }
 }
