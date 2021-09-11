@@ -46,7 +46,7 @@ public class Lotto {
 
 	@Override
 	public String toString() {
-		return "" + lotto;
+		return String.valueOf(lotto);
 	}
 
 	@Override

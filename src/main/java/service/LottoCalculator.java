@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import domain.Account;
 import domain.Lotto;
@@ -21,10 +21,6 @@ public class LottoCalculator {
 	public List<Rank> getResult(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
 		validateLottoList(lottoList, lottoWinningNumber, bonusNumber);
 		return container;
-	}
-
-	public Integer getLottoCount(Account account) {
-		return account.lottoCountByUnit();
 	}
 
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {

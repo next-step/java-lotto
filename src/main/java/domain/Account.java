@@ -12,8 +12,14 @@ public class Account {
 		this.account = account;
 	}
 
-	public Integer lottoCountByUnit() {
-		return this.account / UNIT;
+	public Integer lottoCountByUnit(Integer count) {
+		Integer totalAccount = account;
+		totalAccount -= UNIT * count;
+		return totalAccount / UNIT;
+	}
+
+	public double lottoYield(Integer sum) {
+		return sum / this.account;
 	}
 
 	@Override

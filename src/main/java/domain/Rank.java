@@ -13,7 +13,6 @@ public enum Rank {
 
 	private int matchNumber;
 	private int amount;
-	private int ranking;
 
 	Rank(int matchNumber, int amount) {
 		this.matchNumber = matchNumber;
