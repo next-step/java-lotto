@@ -28,7 +28,7 @@ public class LottoGame {
 			lottoList.add(input.manualLotto());
 		}
 
-		Integer autoLottoCount = calculator.getAutoLottoCount(totalAccount, lottoList);
+		Integer autoLottoCount = totalAccount.lottoCountByUnit(lottoList.size());
 		input.viewLottoCount(autoLottoCount, manualLottoCount);
 
 		for (int number = INIT_NUMBER ; number < autoLottoCount ; ++number) {
