@@ -13,10 +13,14 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public InputDto inputValue() {
+    public InputPrice inputValue() {
         System.out.println("구입금액을 입력해 주세요.");
         final int price = Integer.parseInt(scanner.nextLine());
 
+        return new InputPrice(new Price(price));
+    }
+
+    public InputManual inputManual() {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         final int amount = Integer.parseInt(scanner.nextLine());
 
@@ -27,7 +31,7 @@ public class InputView {
             lottoList.add(new Lotto(new LottoNumbers(convertStringToListOfNumber(inputManualLottoNumber))));
         }
 
-        return new InputDto(new Price(price), new Amount(amount), lottoList);
+        return new InputManual(new Amount(amount), lottoList);
     }
 
     public LottoNumbers inputLastWinningNumbers() {

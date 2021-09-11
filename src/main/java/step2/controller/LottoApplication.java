@@ -2,7 +2,8 @@ package step2.controller;
 
 import step2.domain.lotto.*;
 import step2.domain.statistics.Statistics;
-import step2.view.InputDto;
+import step2.view.InputManual;
+import step2.view.InputPrice;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -11,11 +12,12 @@ public class LottoApplication {
         private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
-        final InputDto inputDto = inputView.inputValue();
+        final InputPrice inputPrice = inputView.inputValue();
+        final InputManual inputManual = inputView.inputManual();
 
-        final LottoMachine lottoMachine = new LottoMachine(inputDto.getPrice(), inputDto.getManualAmount());
+        final LottoMachine lottoMachine = new LottoMachine(inputPrice.getPrice(), inputManual.getManualAmount());
 
-        final Lottos manualIssue = lottoMachine.manualIssue(inputDto.getManualLottoList());
+        final Lottos manualIssue = lottoMachine.manualIssue(inputManual.getManualLottoList());
         final Lottos automaticIssue = lottoMachine.automaticIssue();
         final Lottos allIssues = manualIssue.add(automaticIssue);
 
