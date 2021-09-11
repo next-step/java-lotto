@@ -22,7 +22,7 @@ public class LottoCalculator {
 		validateLottoList(lottoList, lottoWinningNumber, bonusNumber);
 		return container;
 	}
-	
+
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
 		for (int number = INIT_NUMBER ; number < lottoList.size() ; ++number) {
 			Integer countOfMatches = numberOfMatches(lottoList.get(number), lottoWinningNumber);

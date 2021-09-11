@@ -48,7 +48,8 @@ public class LottoCalculatorTest {
 		Lotto secondLotto = new Lotto(Arrays.asList(new Number(1),new Number(2),new Number(3), new Number(4), new Number(5),
 						new Number(7)));
 		List<Lotto> manualLottos = new ArrayList<>(Arrays.asList(firstLotto, secondLotto));
-		Integer autoCount = calculator.getAutoLottoCount(new Account(12_500), manualLottos);
+		Account totalAccount = new Account(12_500);
+		Integer autoCount = totalAccount.lottoCountByUnit(manualLottos.size());
 		assertThat(autoCount).isEqualTo(10);
 	}
 }
