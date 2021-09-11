@@ -38,11 +38,4 @@ public class LottoCalculatorTest {
 		assertThat(result.get(0)).isEqualTo(Rank.THIRD);
 		assertThat(result.get(1)).isEqualTo(Rank.SECOND);
 	}
-
-	@DisplayName("금액에 맞는 로또를 얼마나 살 수 있는 지 확인하는 테스트")
-	@Test
-	void test_account() {
-		Account account = new Account(12_500);
-		assertThat(calculator.getLottoCount(account)).isEqualTo(12);
-	}
 }

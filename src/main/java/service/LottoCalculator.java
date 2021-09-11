@@ -27,10 +27,6 @@ public class LottoCalculator {
 		return account.lottoCountByUnit(manualLottos.size());
 	}
 
-	public Integer getManualLottoCount(List<Lotto> manualLottos) {
-		return manualLottos.size();
-	}
-
 	private void validateLottoList(List<Lotto> lottoList, Lotto lottoWinningNumber, Number bonusNumber) {
 		for (int number = INIT_NUMBER ; number < lottoList.size() ; ++number) {
 			Integer countOfMatches = numberOfMatches(lottoList.get(number), lottoWinningNumber);
