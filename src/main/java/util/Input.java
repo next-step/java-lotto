@@ -43,18 +43,17 @@ public class Input {
 		return new Number(bonusNumber);
 	}
 
-	public List<Lotto> getManualLotto() {
+	public Integer getManualLotto() {
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		Integer count = scanner.nextInt();
 		if (count <= INIT_NUMBER) {
 			throw new IllegalArgumentException("로또 수의 입력이 0이하로는 올 수 없습니다.");
 		}
+		return count;
+	}
+
+	public void manualLottoView() {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-		List<Lotto> lottos = new ArrayList<>();
-		for (int number = INIT_NUMBER ; number < count ; ++number) {
-			lottos.add(manualLotto());
-		}
-		return lottos;
 	}
 
 	public Lotto manualLotto() {

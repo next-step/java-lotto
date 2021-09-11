@@ -43,8 +43,10 @@ public class Result {
 		rankMap.merge(rank, RANK_COUNT_PLUS_UNIT , Integer::sum);
 	}
 
-	public void viewLotto(Lotto lotto) {
-		System.out.println(lotto.toString());
+	public void viewLottos(List<Lotto> lottos) {
+		for (int number = INIT_NUMBER ; number < lottos.size() ; ++number) {
+			System.out.println(lottos.get(number).toString());
+		}
 	}
 
 	private void firstComment() {

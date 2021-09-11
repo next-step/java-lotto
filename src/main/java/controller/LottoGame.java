@@ -21,24 +21,22 @@ public class LottoGame {
 		LottoCalculator calculator = new LottoCalculator();
 
 		Account account = input.setAccount();
-		List<Lotto> manualLottos = input.getManualLotto();
+		Integer manualLottoCount = input.getManualLotto();
 
-		Integer autoLottoCount = calculator.getAutoLottoCount(account, manualLottos);
-		Integer manualLottoCount = calculator.getManualLottoCount(manualLottos);
-
-		input.viewLottoCount(autoLottoCount, manualLottoCount);
-
+		input.manualLottoView();
 		for (int number = INIT_NUMBER ; number < manualLottoCount ; ++number) {
-			lottoList.add(manualLottos.get(number));
-			result.viewLotto(lottoList.get(number));
+			lottoList.add(input.manualLotto());
 		}
+
+		Integer autoLottoCount = calculator.getAutoLottoCount(account, lottoList);
+		input.viewLottoCount(autoLottoCount, manualLottoCount);
 
 		for (int number = INIT_NUMBER ; number < autoLottoCount ; ++number) {
 			Lotto lotto = generator.getLottoNumber();
 			lottoList.add(lotto);
-			result.viewLotto(lotto);
 		}
 
+		result.viewLottos(lottoList);
 		List<Rank> container = calculator.getResult(lottoList, input.lottoWinningNumber(), input.setBonusNumber());
 		result.viewResult(container);
 	}
