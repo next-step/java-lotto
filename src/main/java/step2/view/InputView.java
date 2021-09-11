@@ -13,7 +13,7 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public InputPrice inputValue() {
+    public InputPrice inputPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         final int price = Integer.parseInt(scanner.nextLine());
 

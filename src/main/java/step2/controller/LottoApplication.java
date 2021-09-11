@@ -12,7 +12,7 @@ public class LottoApplication {
         private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
-        final InputPrice inputPrice = inputView.inputValue();
+        final InputPrice inputPrice = inputView.inputPrice();
         final InputManual inputManual = inputView.inputManual();
 
         final LottoMachine lottoMachine = new LottoMachine(inputPrice.getPrice(), inputManual.getManualAmount());
