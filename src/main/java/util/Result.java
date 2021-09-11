@@ -1,5 +1,6 @@
 package util;
 
+import domain.Account;
 import domain.Lotto;
 import domain.Rank;
 
@@ -12,8 +13,13 @@ public class Result {
 	private static final Integer INIT_NUMBER = 0;
 	private static final Integer RANK_COUNT_PLUS_UNIT = 1;
 	private static final Map<Rank, Integer> rankMap = new HashMap<>();
+	private Integer sum;
 
-	public void viewResult(List<Rank> container) {
+	public Result() {
+		sum = INIT_NUMBER;
+	}
+
+	public void viewResult(List<Rank> container, Account account) {
 		firstComment();
 		calculateStatistics(container);
 		System.out.println("3개 일치 (5000원)-" + getRankCount(Rank.FIFTH));
@@ -22,14 +28,14 @@ public class Result {
 		System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + getRankCount(Rank.SECOND));
 		System.out.println("6개 일치 (2000000000원)-" + getRankCount(Rank.FIRST));
 
-		int sum = INIT_NUMBER;
-		System.out.println("총 수익률은 " + sum + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		System.out.println("총 수익률은 " + account.lottoYield(sum) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 	}
 
 	private Integer getRankCount(Rank rank) {
 		if (rankMap.get(rank) == null) {
 			return INIT_NUMBER;
 		}
+		sum += rankMap.get(rank) * rank.getAmount();
 		return rankMap.get(rank);
 	}
 

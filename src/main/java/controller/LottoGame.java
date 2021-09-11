@@ -20,7 +20,7 @@ public class LottoGame {
 		List<Lotto> lottoList = new ArrayList<>();
 		LottoCalculator calculator = new LottoCalculator();
 
-		Account account = input.setAccount();
+		Account totalAccount = input.setAccount();
 		Integer manualLottoCount = input.getManualLotto();
 
 		input.manualLottoView();
@@ -28,7 +28,7 @@ public class LottoGame {
 			lottoList.add(input.manualLotto());
 		}
 
-		Integer autoLottoCount = calculator.getAutoLottoCount(account, lottoList);
+		Integer autoLottoCount = calculator.getAutoLottoCount(totalAccount, lottoList);
 		input.viewLottoCount(autoLottoCount, manualLottoCount);
 
 		for (int number = INIT_NUMBER ; number < autoLottoCount ; ++number) {
@@ -38,6 +38,6 @@ public class LottoGame {
 
 		result.viewLottos(lottoList);
 		List<Rank> container = calculator.getResult(lottoList, input.lottoWinningNumber(), input.setBonusNumber());
-		result.viewResult(container);
+		result.viewResult(container, totalAccount);
 	}
 }
