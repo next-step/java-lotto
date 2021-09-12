@@ -14,10 +14,7 @@ public class LottoNumber {
 	}
 
 	private boolean validate(int number) {
-		if(number < LottoRule.LOTTO_MINIMUM_NUMBER || LottoRule.LOTTO_MAXIMUM_NUMBER < number) {
-			return false;
-		}
-		return true;
+		return number >= LottoRule.LOTTO_MINIMUM_NUMBER && LottoRule.LOTTO_MAXIMUM_NUMBER >= number;
 	}
 
 	public int toInteger() {

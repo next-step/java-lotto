@@ -32,10 +32,7 @@ public class Lotto implements LottoTicket {
 	}
 
 	private boolean validate(List<Integer> lottoNumbers) {
-		if (lottoNumbers.size() != LottoRule.LOTTO_NUMBER_COUNT) {
-			return false;
-		}
-		return true;
+		return lottoNumbers.size() == LottoRule.LOTTO_NUMBER_COUNT;
 	}
 
 	public LottoPaper write(LottoPaper lottoReport) {
