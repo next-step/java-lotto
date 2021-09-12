@@ -21,10 +21,6 @@ public enum Rank {
     }
 
     public static Rank rank(int matchCount, boolean bonusContained) {
-        if (!isContains(matchCount)) {
-            return Rank.NONE;
-        }
-
         if (Rank.SECOND.matchNumber == matchCount && bonusContained) {
             return Rank.SECOND;
         }
@@ -36,18 +32,9 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(r -> r.matchNumber == matchCount)
                 .findFirst()
-                .get();
+                .orElse(NONE);
     }
 
-    public static boolean isContains(int matchCount) {
-        final List<Rank> rankList = Arrays.asList(Rank.values());
-        final List<Integer> matchNumbers = rankList.stream()
-                .map(o -> o.matchNumber)
-                .collect(Collectors
-                        .toList());
-
-        return matchNumbers.contains(matchCount);
-    }
 
     @Override
     public String toString() {

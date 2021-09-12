@@ -9,20 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {3, 4, 5, 6})
-    void isContainsSuccessTest(int matchCount) {
-        final boolean actual = Rank.isContains(matchCount);
-        assertThat(actual).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 7})
-    void isContainsFailTest(int matchCount) {
-        final boolean actual = Rank.isContains(matchCount);
-        assertThat(actual).isFalse();
-    }
-
     @Test
     void createMatchNumberSuccessTest() {
         final Rank actual = Rank.rank(6, false);
