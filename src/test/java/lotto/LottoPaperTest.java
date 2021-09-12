@@ -11,7 +11,7 @@ public class LottoPaperTest {
 	@DisplayName("수익률 계산")
 	void profit() {
 		LottoPaper lottoPaper = new LottoPaper();
-		LottoPaper result = lottoPaper.write(LottoRank.FIRST, 1000);
+		LottoPaper result = lottoPaper.write(LottoRank.FIRST, new Money(1000));
 		assertThat(result.profit()).isEqualTo(2_000_000_000.00 / 1000.00);
 	}
 
@@ -19,9 +19,9 @@ public class LottoPaperTest {
 	@DisplayName("당첨 갯수 구하기")
 	void result() {
 		LottoPaper lottoPaper = new LottoPaper();
-		LottoPaper result = lottoPaper.write(LottoRank.FIRST, 1000)
-			.write(LottoRank.SECOND, 1000)
-			.write(LottoRank.THIRD, 1000);
+		LottoPaper result = lottoPaper.write(LottoRank.FIRST, new Money(1000))
+			.write(LottoRank.SECOND, new Money(1000))
+			.write(LottoRank.THIRD, new Money(1000));
 
 		assertThat(result.lottoMatchCount(6, false)).isEqualTo(1);
 

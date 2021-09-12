@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto implements LottoTicket {
-	public static final String INVALID_NUMBER_COUNT = "잘못된 로또 숫자입니다.";
+	public static final String INVALID_NUMBER_COUNT = "로또 숫자의 갯수가 6개가 아닙니다.";
 	private final List<LottoNumber> lottoNumbers;
-	private final int price;
+	private final Money price;
 	private final LottoRank rank;
 
-	public Lotto(List<Integer> lottoNumbers, int lottoPrice) {
+	public Lotto(List<Integer> lottoNumbers, Money lottoPrice) {
 		if (!this.validate(lottoNumbers)) {
 			throw new IllegalArgumentException(INVALID_NUMBER_COUNT);
 		}
@@ -22,10 +22,10 @@ public class Lotto implements LottoTicket {
 	}
 
 	public Lotto(List<Integer> numbers) {
-		this(numbers, 0);
+		this(numbers, new Money(0));
 	}
 
-	public Lotto(List<LottoNumber> lottoNumbers, int price, LottoRank lottoRank) {
+	public Lotto(List<LottoNumber> lottoNumbers, Money price, LottoRank lottoRank) {
 		this.lottoNumbers = lottoNumbers;
 		this.price = price;
 		this.rank = lottoRank;

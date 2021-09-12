@@ -13,10 +13,10 @@ public class LottoGameTest {
 		LottoGame lottoGame = new LottoGame();
 		int money = 14000;
 
-		assertThat(lottoGame.buyLotto(money).size()).isEqualTo(money / LottoRule.LOTTO_PRICE);
+		assertThat(lottoGame.buyLotto(new Money(money)).size()).isEqualTo(14);
 
 		assertThatThrownBy(() -> {
-			lottoGame.buyLotto(0);
+			lottoGame.buyLotto(new Money(0));
 		}).isExactlyInstanceOf(IllegalArgumentException.class);
 	}
 }

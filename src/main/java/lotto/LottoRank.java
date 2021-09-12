@@ -3,53 +3,53 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
-	FIRST(6, false, 2_000_000_000) {
+	FIRST(6, false, new Money(2_000_000_000)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	SECOND(5, true, 30_000_000) {
+	SECOND(5, true, new Money(30_000_000)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return this.isSameMatchCount(matchCount) && this.isMatchBonus == isMatchBonus;
 		}
 	},
 
-	THIRD(5, false, 1_500_000) {
+	THIRD(5, false, new Money(1_500_000)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return this.isSameMatchCount(matchCount) && this.isMatchBonus == isMatchBonus;
 		}
 	},
 
-	FOURTH(4, false, 50_000) {
+	FOURTH(4, false, new Money(50_000)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	FIFTH(3, false, 5_000) {
+	FIFTH(3, false, new Money(5_000)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return this.isSameMatchCount(matchCount);
 		}
 	},
 
-	NOTHING(2, false, 0) {
+	NOTHING(2, false, new Money(0)) {
 		@Override
 		protected boolean isWinning(int matchCount, boolean isMatchBonus) {
 			return matchCount <= this.matchCount;
 		}
 	};
 
-	private final int reward;
+	private final Money reward;
 	protected final int matchCount;
 	protected final boolean isMatchBonus;
 
-	LottoRank(int matchCount, boolean matchBonus, int reward) {
+	LottoRank(int matchCount, boolean matchBonus, Money reward) {
 		this.matchCount = matchCount;
 		this.isMatchBonus = matchBonus;
 		this.reward = reward;
@@ -69,7 +69,7 @@ public enum LottoRank {
 		return this.matchCount == matchCount;
 	}
 
-	public int reward() {
+	public Money reward() {
 		return reward;
 	}
 }
