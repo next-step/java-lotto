@@ -9,12 +9,11 @@ public class LottoGroup {
 		this.lottoGroup = lottoNumbers;
 	}
 
-	public LottoPaper lottoResultReport(Lotto winningNumbers) {
+	public LottoPaper lottoResultReport(WinningNumber winningNumbers) {
 		LottoPaper lottoReport = new LottoPaper();
 
-		for (int i = 0; i < this.lottoGroup.size(); i++) {
-			Lotto unknownLotto = lottoGroup.get(i);
-			Lotto knownLotto = unknownLotto.unmaskedLotto(winningNumbers);
+		for (Lotto lotto : this.lottoGroup) {
+			Lotto knownLotto = winningNumbers.unmaskedLotto(lotto);
 			lottoReport = knownLotto.write(lottoReport);
 		}
 

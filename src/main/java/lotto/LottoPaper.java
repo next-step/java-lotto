@@ -26,10 +26,10 @@ public class LottoPaper implements LottoReport {
 	}
 
 	@Override
-	public int lottoMatchCount(int matchedNumberCount) {
+	public int lottoMatchCount(int matchedNumberCount, boolean isMatchBonus) {
 		return (int)this.ranks
 			.stream()
-			.filter(rank -> rank.isWinning(matchedNumberCount))
+			.filter(rank -> rank.isWinning(matchedNumberCount, isMatchBonus))
 			.count();
 	}
 
