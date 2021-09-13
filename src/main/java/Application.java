@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lotto.Lotto;
 import lotto.LottoGame;
 import lotto.LottoTicket;
+import lotto.Money;
+import lotto.WinningNumber;
 import ui.InputView;
 import ui.ResultView;
 
@@ -19,17 +23,19 @@ public class Application {
 	public void startLottoGame() {
 		LottoGame game = new LottoGame();
 
-		this.inputView.drawQuestionOfMoney();
-		List<LottoTicket> lottoTickets = game.buyLotto(this.inputView.inputAmountOfMoney());
+		Money money = new Money(this.inputView.inputAmountOfMoney());
 
-		this.inputView.drawLottoNumbers(lottoTickets);
-		this.inputView.drawQuestionOf1stLotto();
-		String winningNumbers = this.inputView.inputLottoNumbers();
+		List<LottoTicket> manualLottoTickets = game.buyManualLotto(this.inputView.inputManualLottoNumbers(), money);
 
-		this.inputView.drawQuestionOfBonusNumber();
-		int bonusNumber = this.inputView.inputBonusNumber();
+		List<LottoTicket> lottoTickets = game.buyLotto(money);
 
-		this.resultView.drawResult(game.lottoResult(lottoTickets, winningNumbers, bonusNumber));
+		this.inputView.drawLottoNumbers(manualLottoTickets, lottoTickets);
+
+		List<LottoTicket> totalLottos = new ArrayList<>();
+		totalLottos.addAll(manualLottoTickets);
+		totalLottos.addAll(lottoTickets);
+		this.resultView.drawResult(
+			game.lottoResult(totalLottos, this.inputView.inputWinningNumbers(), this.inputView.inputBonusNumber()));
 	}
 
 	public static void main(String[] args) {

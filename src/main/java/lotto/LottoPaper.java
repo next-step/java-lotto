@@ -7,22 +7,22 @@ import java.util.List;
 public class LottoPaper implements LottoReport {
 
 	private final List<LottoRank> ranks;
-	private final int lottoPrice;
+	private final Money lottoPrice;
 
-	public LottoPaper(List<LottoRank> ranks, int lottoPrice) {
+	public LottoPaper(List<LottoRank> ranks, Money lottoPrice) {
 		this.ranks = ranks;
 		this.lottoPrice = lottoPrice;
 	}
 
 	public LottoPaper() {
-		this(Arrays.asList(), 0);
+		this(Arrays.asList(), new Money(0));
 	}
 
-	public LottoPaper write(LottoRank rank, int price) {
+	public LottoPaper write(LottoRank rank, Money price) {
 		List<LottoRank> lottoRanks = new ArrayList<>();
 		lottoRanks.addAll(this.ranks);
 		lottoRanks.add(rank);
-		return new LottoPaper(lottoRanks, lottoPrice + price);
+		return new LottoPaper(lottoRanks, lottoPrice.add(price));
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class LottoPaper implements LottoReport {
 
 	@Override
 	public double profit() {
-		int totalProfit = ranks
+		Money totalProfit = ranks
 			.stream()
 			.map(LottoRank::reward)
-			.mapToInt(Integer::intValue)
-			.sum();
-		return (double)totalProfit / (double)this.lottoPrice;
+			.reduce(Money::add)
+			.get();
+		return totalProfit.divide(this.lottoPrice).money();
 	}
 }
