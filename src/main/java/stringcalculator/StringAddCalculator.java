@@ -10,7 +10,7 @@ public class StringAddCalculator {
         String[] stringNumbers = getValidatedInput(input);
 
         return Arrays.stream(stringNumbers)
-                .map(DataParser::parse)
+                .map(DataParser::parseStrToInt)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
