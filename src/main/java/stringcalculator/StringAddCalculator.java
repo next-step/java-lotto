@@ -20,7 +20,7 @@ public class StringAddCalculator {
             return new String[0];
         }
 
-        return input.split(",");
+        return input.split("[,:]");
     }
 
 }

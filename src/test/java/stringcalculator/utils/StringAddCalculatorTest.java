@@ -1,11 +1,9 @@
 package stringcalculator.utils;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import stringcalculator.StringAddCalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,4 +25,17 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3:6", "125,5,5:135"}, delimiter = ':')
+    void splitAndSum_쉼표구분자(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3/6", "125:5,5/135"}, delimiter = '/')
+    void splitAndSum_쉼표or콜론구분자(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
+    }
 }
