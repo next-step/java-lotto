@@ -21,7 +21,7 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    void splitAndSum_minusValue() {
+    void splitAndSum_negativeValue() {
         Assertions.assertThrows(NumberFormatException.class, () -> {
             StringAddCalculator.splitAndSum("10,-4,2");
         });
@@ -46,5 +46,11 @@ class StringAddCalculatorTest {
     void splitAndSum_쉼표or콜론구분자(String input, int expected) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void splitAndSum_커스텀구분자() {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
     }
 }
