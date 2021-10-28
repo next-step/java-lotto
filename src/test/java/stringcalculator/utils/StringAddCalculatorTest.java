@@ -1,5 +1,7 @@
 package stringcalculator.utils;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -16,6 +18,13 @@ class StringAddCalculatorTest {
     void splitAndSum_emptyOfNull(String input) {
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    void splitAndSum_minusValue() {
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringAddCalculator.splitAndSum("10,-4,2");
+        });
     }
 
     @ParameterizedTest
