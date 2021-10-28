@@ -16,6 +16,11 @@ public class StringAddCalculator {
     }
 
     private static String[] getValidatedInput(String input) {
-        return new String[0];
+        if (input == null || input.isEmpty()) {
+            return new String[0];
+        }
+
+        return input.split(",");
     }
+
 }
