@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public String getWord() {
+    public static String getWord() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("문자열 계산기입니다. 계산하실 숫자를 구분자로 구분하여 입력해주세요.");
