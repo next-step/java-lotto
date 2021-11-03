@@ -1,4 +1,4 @@
-package stringcalculator.utils;
+package utils;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +10,7 @@ class DataParserTest {
     @ValueSource(strings = {"p", "hello"})
     void parseStrToInt_문자열(String input) {
         Assertions.assertThrows(NumberFormatException.class, () -> {
-            DataParser.parseStrToInt(input);
+            DataParser.parseToInt(input);
         });
     }
 
@@ -18,7 +18,7 @@ class DataParserTest {
     @ValueSource(strings = {"-1", "-123"})
     void parseStrToInt_음수(String input) {
         Assertions.assertThrows(NumberFormatException.class, () -> {
-            DataParser.parseStrToInt(input);
+            DataParser.parseToInt(input);
         });
     }
 

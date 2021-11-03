@@ -1,6 +1,6 @@
 package stringcalculator;
 
-import stringcalculator.utils.DataParser;
+import utils.DataParser;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -14,7 +14,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
         return Arrays.stream(split(input))
-                .map(DataParser::parseStrToInt)
+                .map(DataParser::parseToInt)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
