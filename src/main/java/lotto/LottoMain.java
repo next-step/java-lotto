@@ -11,9 +11,11 @@ public class LottoMain {
             String money = InputView.takeMoney();
 
             Lottos lottos = new Lottos(money);
-            int count = lottos.getLottosCnt();
 
-            ResultView.printLottoCount(count);
+            ResultView.printLottoCount(lottos.getLottosCnt());
+            ResultView.printLottos(lottos);
+
+
 
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

@@ -23,6 +23,10 @@ public class Lottos {
         return lottosCnt;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     private int getLottosCnt(String moneyString) {
         int money = DataParser.parseToInt(moneyString);
         return money / LOTTO_PRICE;
@@ -33,6 +37,14 @@ public class Lottos {
                 .range(0, lottosCnt)
                 .mapToObj(i -> new Lotto())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                ", lottosCnt=" + lottosCnt +
+                '}';
     }
 
 }

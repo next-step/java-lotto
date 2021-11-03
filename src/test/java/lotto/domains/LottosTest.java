@@ -14,4 +14,10 @@ class LottosTest {
         assertThat(lottoCnt).isEqualTo(14);
     }
 
+    @Test
+    void 로또갯수만큼_번호확인하기() {
+        Lottos lottos = new Lottos("14000");
+        System.out.println(lottos.getLottos());
+    }
+
 }
