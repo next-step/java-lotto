@@ -60,4 +60,20 @@ public class StringAddCalculatorTest {
         int result = stringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expect);
     }
+
+    @DisplayName("\\ \n 사이에 있는 추가구분자를 사용할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"\\\\;\\n1;3:4,2|10", "\\\\.\\n1.5:6,4|16"}, delimiter = '|')
+    void customDelimiterTest(String input, int expect) {
+        int result = stringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expect);
+    }
+
+    @DisplayName("숫자 외에 다른 값은 실패한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"e,n", "e:한", "한:글"})
+    void addByCommaOrColonTest(String input) {
+        int result = stringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(1);
+    }
 }
