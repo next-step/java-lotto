@@ -7,13 +7,13 @@ import java.util.stream.Stream;
 
 import static calculator.domain.DelimiterType.*;
 
-class Expression {
+public class Expression {
     private static final int DELIMITER_INDEX_FOR_GROUP = 1;
     private static final int EXPRESSION_INDEX_FOR_GROUP = 2;
 
     private Operands operands;
 
-    Expression(String expression) {
+    public Expression(String expression) {
         if (isEmpty(expression)) {
             this.operands = new Operands(new Operand());
             return;
@@ -21,8 +21,8 @@ class Expression {
         initiateOperands(expression);
     }
 
-    Operands getOperands() {
-        return operands;
+    public int sum() {
+        return operands.sum();
     }
 
     private boolean isEmpty(String expression) {

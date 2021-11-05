@@ -18,7 +18,6 @@ class ExpressionTest {
         Expression expression = new Expression(input);
         // then
         assertThat(expression).isNotNull();
-        assertThat(expression.getOperands()).isNotNull();
     }
 
     @DisplayName("비어있거나 공백 표현식 생성")
@@ -29,6 +28,5 @@ class ExpressionTest {
         Expression expression = new Expression(input);
         // then
         assertThat(expression).isNotNull();
-        assertThat(expression.getOperands()).isNotNull();
     }
 }
