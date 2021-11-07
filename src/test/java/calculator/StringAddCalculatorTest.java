@@ -8,17 +8,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 
 class StringAddCalculatorTest {
-
-
     @ParameterizedTest(name = "[{index}] {0}의 결과는 0 이다.")
     @NullAndEmptySource
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     void splitAndSum_nullOrEmpty(String input) {
         int result = StringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 
     @RepeatedTest(10)

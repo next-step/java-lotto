@@ -7,6 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private StringAddCalculator() {
+    }
+
     private static final int ZERO = 0;
     private static final String COMMA_AND_COLON = ",|:";
     private static final Pattern REGEX_CUSTOM_DELIMITER = Pattern.compile("//(.)\n(.*)");
@@ -23,8 +26,8 @@ public class StringAddCalculator {
         Matcher matcher = REGEX_CUSTOM_DELIMITER.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            String[] tokens = matcher.group(2).split(customDelimiter);
-            return sum(tokens);
+            String[] numberArray = matcher.group(2).split(customDelimiter);
+            return sum(numberArray);
         }
 
         return sum(input.split(COMMA_AND_COLON));

@@ -35,5 +35,4 @@ class StringUtilsTest {
     void isNumeric_false(String text) {
         assertThat(StringUtils.isNumeric(text)).isFalse();
     }
-
 }
