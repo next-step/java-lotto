@@ -10,6 +10,10 @@ public class StringAddCalculator {
             return ZERO;
         }
 
-        return Integer.parseInt(input);
+        if (StringUtils.isNumeric(input)) {
+            return Integer.parseInt(input);
+        }
+
+        return -1;
     }
 }
