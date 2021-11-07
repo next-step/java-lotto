@@ -10,9 +10,7 @@ class LottoShopTest {
     @Test
     void winner_찾기() {
         LottoShop lottoShop = new LottoShop("1, 2, 3, 4, 5, 6");
-        Lottos lottos = new Lottos("14000");
-
-        LottoResults lottoResults = lottoShop.winner(lottos);
+        LottoResults lottoResults = lottoShop.winner(new Lottos("14000"));
 
         for (LottoResult lottoResult : lottoResults.getLottoResults()) {
             System.out.println(lottoResult.detailedInfo());

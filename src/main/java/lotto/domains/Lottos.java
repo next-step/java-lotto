@@ -14,20 +14,20 @@ public class Lottos {
     private final int numOfLotto;
 
     public Lottos(String moneyString) {
-        this.numOfLotto = getNumOfLotto(moneyString);
+        this.numOfLotto = numOfLotto(moneyString);
         this.lottos = readyLottos(numOfLotto);
     }
 
-    public int getNumOfLotto() {
+    public int numOfLotto() {
         return numOfLotto;
     }
 
-    private int getNumOfLotto(String moneyString) {
+    private int numOfLotto(String moneyString) {
         int money = DataParser.parseToInt(moneyString);
         return money / LOTTO_PRICE;
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> lottos() {
         return lottos;
     }
 

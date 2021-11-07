@@ -25,6 +25,10 @@ public class LottoResults {
     }
 
     public void addWinner(int matchCnt) {
+        if (matchCnt < 3) {
+            return;
+        }
+
         for (LottoResult lottoResult : lottoResults) {
             if (lottoResult.match(matchCnt)) {
                 lottoResult.addWinner();

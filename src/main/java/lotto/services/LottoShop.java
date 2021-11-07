@@ -17,12 +17,8 @@ public class LottoShop {
     }
 
     public LottoResults winner(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.lottos()) {
             int matchCnt = winningNumber.numOfWinningNumberMatchCnt(lotto);
-
-            if (matchCnt < 3)
-                continue;
-
             lottoResults.addWinner(matchCnt);
         }
 

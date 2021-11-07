@@ -10,15 +10,15 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = getShuffledNumbers();
+        this.lottoNumbers = shuffledNumbers();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> lottoNumbers() {
         return lottoNumbers;
     }
 
-    private List<Integer> getShuffledNumbers() {
-        List<Integer> totalLottoNumbers = getTotalLottoNumbers();
+    private List<Integer> shuffledNumbers() {
+        List<Integer> totalLottoNumbers = totalLottoNumbers();
         Collections.shuffle(totalLottoNumbers);
 
         List<Integer> lottoShuffledNumbers = totalLottoNumbers.subList(0, 6);
@@ -27,7 +27,7 @@ public class Lotto {
         return lottoShuffledNumbers;
     }
 
-    private List<Integer> getTotalLottoNumbers() {
+    private List<Integer> totalLottoNumbers() {
         return IntStream.range(0, 45)
                 .mapToObj(i -> i + 1)
                 .collect(Collectors.toList());

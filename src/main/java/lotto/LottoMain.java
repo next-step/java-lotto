@@ -9,13 +9,13 @@ public class LottoMain {
 
     public static void main(String[] args) {
         try {
-            String money = InputView.takeMoney();
+            String money = InputView.money();
             Lottos lottos = new Lottos(money);
 
-            ResultView.printLottoCount(lottos.getNumOfLotto());
+            ResultView.printLottoCount(lottos.numOfLotto());
             ResultView.printLottos(lottos);
 
-            String lastWeekWinningNumberString = InputView.getLastWeekWinnerNumbers();
+            String lastWeekWinningNumberString = InputView.lastWeekWinnerNumbers();
             LottoShop lottoShop = new LottoShop(lastWeekWinningNumberString);
 
             ResultView.printLottoResult(lottoShop.winner(lottos));

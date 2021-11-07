@@ -9,21 +9,21 @@ public class InputView {
 
     public static final Scanner scanner = new Scanner(System.in);
 
-    public static String takeMoney() {
+    public static String money() {
         askQuestion(QUESTION_PURCHASE_MONEY);
-        return getInput();
+        return input();
     }
 
-    public static String getLastWeekWinnerNumbers() {
+    public static String lastWeekWinnerNumbers() {
         askQuestion(QUESTION_LAST_WEEK_WINNING_NUMBER);
-        return getInput();
+        return input();
     }
 
     private static void askQuestion(String question) {
         System.out.println(question);
     }
 
-    private static String getInput() {
+    private static String input() {
         return scanner.nextLine();
     }
 
