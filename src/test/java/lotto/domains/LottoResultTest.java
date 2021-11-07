@@ -1,0 +1,8 @@
+package lotto.domains;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class LottoResultTest {
+}

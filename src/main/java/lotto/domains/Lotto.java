@@ -7,37 +7,41 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<Integer> lottoNumbers;
 
     public Lotto() {
-        this.numbers = getShuffledLottoNumbers();
+        this.lottoNumbers = getShuffledNumbers();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private List<Integer> getShuffledLottoNumbers() {
-        List<Integer> lottoNumbers = getLottoNumbers();
-        Collections.shuffle(lottoNumbers);
+    private List<Integer> getShuffledNumbers() {
+        List<Integer> totalLottoNumbers = getTotalLottoNumbers();
+        Collections.shuffle(totalLottoNumbers);
 
-        List<Integer> lottoShuffledNumbers = lottoNumbers.subList(0, 6);
+        List<Integer> lottoShuffledNumbers = totalLottoNumbers.subList(0, 6);
         Collections.sort(lottoShuffledNumbers);
 
         return lottoShuffledNumbers;
     }
 
-    private List<Integer> getLottoNumbers() {
+    private List<Integer> getTotalLottoNumbers() {
         return IntStream.range(0, 45)
                 .mapToObj(i -> i + 1)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numbers=" + numbers +
-                '}';
+    public int size() {
+        return lottoNumbers.size();
     }
 
+    public Integer number(int i) {
+        if (i >= lottoNumbers.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return lottoNumbers.get(i);
+    }
 }

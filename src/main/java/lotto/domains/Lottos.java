@@ -11,25 +11,24 @@ public class Lottos {
     private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
-    private final int lottosCnt;
-
+    private final int numOfLotto;
 
     public Lottos(String moneyString) {
-        this.lottosCnt = getLottosCnt(moneyString);
-        this.lottos = readyLottos(lottosCnt);
+        this.numOfLotto = getNumOfLotto(moneyString);
+        this.lottos = readyLottos(numOfLotto);
     }
 
-    public int getLottosCnt() {
-        return lottosCnt;
+    public int getNumOfLotto() {
+        return numOfLotto;
+    }
+
+    private int getNumOfLotto(String moneyString) {
+        int money = DataParser.parseToInt(moneyString);
+        return money / LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    private int getLottosCnt(String moneyString) {
-        int money = DataParser.parseToInt(moneyString);
-        return money / LOTTO_PRICE;
     }
 
     private List<Lotto> readyLottos(int lottosCnt) {
@@ -37,14 +36,6 @@ public class Lottos {
                 .range(0, lottosCnt)
                 .mapToObj(i -> new Lotto())
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "lottos=" + lottos +
-                ", lottosCnt=" + lottosCnt +
-                '}';
     }
 
 }
