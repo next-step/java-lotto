@@ -29,17 +29,24 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)")
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.)")
     void splitAndSum_comman_delimit() {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
+    @DisplayName("숫자 두개를 콜론(:) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    void splitAndSum_colon_delimit() {
+        int result = StringAddCalculator.splitAndSum("1:2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
     @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)")
     void splitAndSum_commandAndcolon_delimit() {
-        int result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(3);
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
