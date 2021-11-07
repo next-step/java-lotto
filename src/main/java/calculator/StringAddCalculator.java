@@ -17,7 +17,7 @@ public class StringAddCalculator {
         }
 
         if (StringUtils.isNumeric(input)) {
-            return Integer.parseInt(input);
+            return parseInt(input);
         }
 
         Matcher matcher = REGEX_CUSTOM_DELIMITER.matcher(input);
@@ -32,7 +32,15 @@ public class StringAddCalculator {
 
     private static int sum(String[] numberArray) {
         return Arrays.stream(numberArray)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(StringAddCalculator::parseInt)
                 .sum();
+    }
+
+    private static int parseInt(String input) {
+        int number = Integer.parseInt(input);
+        if (number < ZERO) {
+            throw new IllegalArgumentException("0보다 값이 작습니다.");
+        }
+        return number;
     }
 }
