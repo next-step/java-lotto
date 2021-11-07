@@ -83,10 +83,10 @@ class StringAddCalculatorTest {
 		int result2 = StringAddCalculator.splitAndSum(input2);
 
 		// then
-		assertAll(() -> {
-			assertThat(result1).isEqualTo(6);
-			assertThat(result2).isEqualTo(66);
-		});
+		assertAll(
+			() -> assertThat(result1).isEqualTo(6),
+			() -> assertThat(result2).isEqualTo(66)
+		);
 	}
 
 	@DisplayName("음수를 입력할 경우 RuntimeException 발생 검증")
