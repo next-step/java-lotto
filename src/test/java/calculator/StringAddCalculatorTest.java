@@ -31,7 +31,8 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)")
     void splitAndSum_comman_delimit() {
-
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
     }
 
     @Test
