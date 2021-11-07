@@ -15,7 +15,7 @@ public class Expression {
 
     public Expression(String expression) {
         if (isEmpty(expression)) {
-            this.operands = new Operands(new Operand());
+            this.operands = Operands.withSingleOperand();
             return;
         }
         initiateOperands(expression);
