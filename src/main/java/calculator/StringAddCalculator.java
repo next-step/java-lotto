@@ -5,8 +5,8 @@ import utils.StringUtils;
 import java.util.Arrays;
 
 public class StringAddCalculator {
-    private static final String COMMA = ",";
     private static final int ZERO = 0;
+    private static final String COMMA_AND_COLON = ",|:";
 
     public static int splitAndSum(String input) {
         if (StringUtils.isEmpty(input)) {
@@ -17,11 +17,7 @@ public class StringAddCalculator {
             return Integer.parseInt(input);
         }
 
-        if (input.contains(COMMA)) {
-            return sum(input.split(COMMA));
-        }
-
-        return 6;
+        return sum(input.split(COMMA_AND_COLON));
     }
 
     private static int sum(String[] numberArray) {
