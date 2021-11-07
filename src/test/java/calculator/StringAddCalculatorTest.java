@@ -1,6 +1,8 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -18,10 +20,12 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
-    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)")
-    void splitAndSum_singleNumber() {
-
+    @RepeatedTest(10)
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    void splitAndSum_singleNumber(RepetitionInfo repetitionInfo) {
+        int number = repetitionInfo.getCurrentRepetition();
+        int result = StringAddCalculator.splitAndSum(String.valueOf(number));
+        assertThat(number).isEqualTo(result);
     }
 
     @Test
