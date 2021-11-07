@@ -38,7 +38,8 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)")
     void splitAndSum_commandAndcolon_delimit() {
-
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
     }
 
     @Test
