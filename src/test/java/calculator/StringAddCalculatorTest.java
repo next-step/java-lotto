@@ -52,7 +52,8 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\\n1;2;3” => 6)")
     void splitAndSum_custom_delimit() {
-
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
