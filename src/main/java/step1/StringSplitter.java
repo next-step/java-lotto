@@ -31,7 +31,7 @@ public class StringSplitter {
 
     private String getPositionString(int position, String defaultString) {
         Matcher m = this.customDelimiterPattern.matcher(this.item);
-        if(!m.find()) {
+        if (!m.find()) {
             return defaultString;
         }
         return m.group(position);

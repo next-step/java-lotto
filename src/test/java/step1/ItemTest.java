@@ -6,17 +6,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ItemTest {
 
     @DisplayName("Item에 숫자를 제외하고 다른 문자열이 들어오면 IllegalArgument Exception")
     @ParameterizedTest
-    @ValueSource(strings = {":","kk","1:","-2","43242k"})
+    @ValueSource(strings = {":", "kk", "1:", "-2", "43242k"})
     void itemCreateNotNumberTest(String itemStr) {
         assertThatIllegalArgumentException().isThrownBy(() -> Item.from(itemStr));
     }
@@ -30,7 +27,7 @@ class ItemTest {
 
     @DisplayName("add 메서드는 더해서 Item을 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1:2:3","4:5:9"}, delimiter = ':')
+    @CsvSource(value = {"1:2:3", "4:5:9"}, delimiter = ':')
     void addTest(String leftStr, String rightStr, String expectStr) {
         Item left = Item.from(leftStr);
         Item right = Item.from(rightStr);

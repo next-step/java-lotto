@@ -16,7 +16,7 @@ public class Items {
     }
 
     public Item sum() {
-        return items.stream().reduce((left,right) -> left.add(right))
+        return items.stream().reduce((left, right) -> left.add(right))
                 .orElseThrow(IllegalArgumentException::new);
     }
 }

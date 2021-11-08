@@ -4,13 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ItemsTest {
 
@@ -23,7 +20,7 @@ class ItemsTest {
 
     @DisplayName("addItem() 메서드는 Item을 추가한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3:3","1:1", "1,2:2"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3:3", "1:1", "1,2:2"}, delimiter = ':')
     void getItemStringTest(String itemlist, int expect) {
 
         String[] split = itemlist.split(",");
@@ -34,7 +31,7 @@ class ItemsTest {
 
     @DisplayName("sum 메서드는 내부 아이템을 모두 더해서 리턴한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3:6","1:1", "1,2:3"}, delimiter = ':')
+    @CsvSource(value = {"1,2,3:6", "1:1", "1,2:3"}, delimiter = ':')
     void getItemStringTest(String itemlist, String expectStr) {
 
         String[] split = itemlist.split(",");
@@ -42,7 +39,6 @@ class ItemsTest {
 
         assertThat(items.sum()).isEqualTo(Item.from(expectStr));
     }
-
 
 
 }

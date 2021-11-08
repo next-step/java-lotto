@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
-    private Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
+    private final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
 
     public int splitAndSum(String input) {
         UserInput userInput = new UserInput(input);
-        if(userInput.isNullOrEmpty()) {
+        if (userInput.isNullOrEmpty()) {
             return 0;
         }
 
@@ -29,7 +29,7 @@ public class StringAddCalculator {
         Delimiter defaultDelimiter = Delimiter.withDefaultDelimiter();
         String customDelimiterSymbol = stringSplitter.getCustomDelimiterSymbol();
 
-        if(customDelimiterSymbol.isEmpty()) {
+        if (customDelimiterSymbol.isEmpty()) {
             return defaultDelimiter;
         }
 

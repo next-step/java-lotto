@@ -19,7 +19,7 @@ public class Delimiter {
     }
 
     public static Delimiter custom(String symbol) {
-        if(symbol == null) {
+        if (symbol == null) {
             symbol = EMPTY_SYMBOL;
         }
         return new Delimiter(symbol);

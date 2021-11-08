@@ -22,7 +22,7 @@ class StringSplitterTest {
 
     @DisplayName("getDelimiter()는 Delimiter가 없는 경우는 empty 값의 델리미터문자열을 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1:2:3|''","4;5;6|''"}, delimiter = '|')
+    @CsvSource(value = {"1:2:3|''", "4;5;6|''"}, delimiter = '|')
     void getEmptyDelimiterTest(String input, String expect) {
         StringSplitter stringSplitter = StringSplitter.create(input, pattern);
 
@@ -34,7 +34,7 @@ class StringSplitterTest {
 
     @DisplayName("getDelimiter()는 Delimiter가 있는 경우는 델리미터문자열을 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1:2;3","//;\n1:2;3"})
+    @ValueSource(strings = {"//;\n1:2;3", "//;\n1:2;3"})
     void getCustomDelimiterTest(String input) {
         StringSplitter stringSplitter = StringSplitter.create(input, pattern);
         String delimiterString = stringSplitter.getCustomDelimiterSymbol();
@@ -46,7 +46,7 @@ class StringSplitterTest {
 
     @DisplayName("getItems()는 Delimiter가 없는 경우 같은 값을 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1:2;3","4:5;3"})
+    @ValueSource(strings = {"1:2;3", "4:5;3"})
     void getItemStringTest(String input) {
         StringSplitter stringSplitter = StringSplitter.create(input, pattern);
         String itemString = stringSplitter.getItemString();
@@ -56,7 +56,7 @@ class StringSplitterTest {
 
     @DisplayName("getDelimiter()는 Delimiter가 있는 경우는 더할 문자열만 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1:2;3","//|\n1:2;3"})
+    @ValueSource(strings = {"//;\n1:2;3", "//|\n1:2;3"})
     void getItemStringWithExistDelimiterTest(String input) {
         StringSplitter stringSplitter = StringSplitter.create(input, pattern);
         String itemString = stringSplitter.getItemString();
