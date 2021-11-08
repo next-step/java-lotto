@@ -13,14 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DelimiterTest {
 
-    private Pattern pattern;
-
-    @BeforeEach
-    void setUp() {
-        String PATTERN_STRING = "//(.)\n(.*)";
-        pattern = Pattern.compile(PATTERN_STRING);
-    }
-
     @DisplayName("isExist() 구분자의 값이 있으면 true를 반환한다.")
     @ParameterizedTest
     @ValueSource(strings = {";", "+"})

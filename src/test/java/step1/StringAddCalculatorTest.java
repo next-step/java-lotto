@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -61,9 +62,10 @@ public class StringAddCalculatorTest {
     }
 
     @DisplayName("\\ \n 사이에 있는 추가구분자를 사용할 수 있다.")
-    @ParameterizedTest
-    @CsvSource(value = {"\\\\;\\n1;3:4,2|10", "\\\\.\\n1.5:6,4|16"}, delimiter = '|')
-    void customDelimiterTest(String input, int expect) {
+    @Test
+    void customDelimiterTest() {
+        String input = "//;\n1;3:4,2";
+        int expect = 10;
         int result = stringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expect);
     }
