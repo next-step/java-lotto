@@ -27,4 +27,16 @@ class ItemTest {
     void itemCreateNullOrEmptyTest(String itemStr) {
         assertThatIllegalArgumentException().isThrownBy(() -> Item.from(itemStr));
     }
+
+    @DisplayName("add 메서드는 더해서 Item을 반환한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:3","4:5:9"}, delimiter = ':')
+    void addTest(String leftStr, String rightStr, String expectStr) {
+        Item left = Item.from(leftStr);
+        Item right = Item.from(rightStr);
+
+        Item actual = left.add(right);
+
+        assertThat(actual).isEqualTo(Item.from(expectStr));
+    }
 }

@@ -7,10 +7,10 @@ public class Item {
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
     private static final String NULL_OR_EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈값일 수 없습니다.";
 
-    private final int item;
+    private final int value;
 
-    private Item(int item) {
-        this.item = item;
+    private Item(int value) {
+        this.value = value;
     }
 
     public static Item from(String itemStr) {
@@ -23,6 +23,10 @@ public class Item {
         return new Item(Integer.parseInt(itemStr));
     }
 
+    public Item add(Item item) {
+        return new Item(this.value + item.value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -32,11 +36,11 @@ public class Item {
             return false;
         }
         Item item1 = (Item) o;
-        return item == item1.item;
+        return value == item1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item);
+        return Objects.hash(value);
     }
 }
