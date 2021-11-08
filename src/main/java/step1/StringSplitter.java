@@ -5,11 +5,15 @@ import java.util.regex.Pattern;
 
 public class StringSplitter {
 
+    private static final String EMPTY_DELIMITER_SYMBOL = "";
+    private static final int DELIMITER_POSITION = 1;
+    private static final int ITEM_POSITION = 2;
+
     private final String item;
     private final Pattern customDelimiterPattern;
 
-    private StringSplitter(String item, Pattern customDelimiterPattern) {
-        this.item = item;
+    private StringSplitter(String input, Pattern customDelimiterPattern) {
+        this.item = input;
         this.customDelimiterPattern = customDelimiterPattern;
     }
 
@@ -17,13 +21,20 @@ public class StringSplitter {
         return new StringSplitter(item, customDelimiterPattern);
     }
 
-    public Delimiter getDelimiter() {
+    public String getCustomDelimiterSymbol() {
+        return getPositionString(DELIMITER_POSITION, EMPTY_DELIMITER_SYMBOL);
+    }
+
+    public String getItemString() {
+        return getPositionString(ITEM_POSITION, this.item);
+    }
+
+    private String getPositionString(int position, String defaultString) {
         Matcher m = this.customDelimiterPattern.matcher(this.item);
         if(!m.find()) {
-            return Delimiter.custom(null);
+            return defaultString;
         }
-        String symbol = m.group(1);
-        return Delimiter.custom(symbol);
+        return m.group(position);
     }
 
 //
