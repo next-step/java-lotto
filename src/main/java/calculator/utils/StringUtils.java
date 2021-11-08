@@ -1,4 +1,4 @@
-package utils;
+package calculator.utils;
 
 public final class StringUtils {
     private StringUtils() {

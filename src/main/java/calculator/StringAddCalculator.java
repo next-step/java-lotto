@@ -1,7 +1,7 @@
 package calculator;
 
-import utils.StringUtils;
-import validator.StringAddCalculatorValidator;
+import calculator.utils.StringUtils;
+import calculator.validator.StringAddCalculatorValidator;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;

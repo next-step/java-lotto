@@ -1,4 +1,4 @@
-package validator;
+package calculator.validator;
 
 public final class StringAddCalculatorValidator {
     private static final int ZERO = 0;
