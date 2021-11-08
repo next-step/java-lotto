@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-class StringAddCalculatorTest {
+class StringAddCalculatorValidatorTest {
     @ParameterizedTest(name = "[{index}] {0}의 결과는 0 이다.")
     @NullAndEmptySource
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")

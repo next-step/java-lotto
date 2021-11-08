@@ -1,6 +1,7 @@
 package calculator;
 
 import utils.StringUtils;
+import validator.StringAddCalculatorValidator;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -45,9 +46,7 @@ public class StringAddCalculator {
 
     private static int parseInt(String input) {
         int number = Integer.parseInt(input);
-        if (number < ZERO) {
-            throw new IllegalArgumentException("0보다 값이 작습니다.");
-        }
+        StringAddCalculatorValidator.checkLessThanZero(number);
         return number;
     }
 }
