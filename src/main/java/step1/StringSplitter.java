@@ -37,32 +37,4 @@ public class StringSplitter {
         return m.group(position);
     }
 
-//
-//    public boolean isExist() {
-//        return symbol != null && !symbol.isEmpty();
-//    }
-//
-//    @Override
-//    public Delimiter addDelimiter(Delimiter other) {
-//        return new StringSplitter(String.format(ADD_FORMAT, this.symbol, other.getSymbol()));
-//    }
-//
-//    @Override
-//    public String getSymbol() {
-//        return this.symbol;
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        StringSplitter basicDelimiter1 = (StringSplitter) o;
-//        return Objects.equals(symbol, basicDelimiter1.symbol);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(symbol);
-//    }
-
 }
