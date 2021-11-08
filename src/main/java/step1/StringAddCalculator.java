@@ -13,20 +13,35 @@ public class StringAddCalculator {
         if(userInput.isNullOrEmpty()) {
             return 0;
         }
-//
-//        BasicDelimiter basicDelimiter = BasicDelimiter.withDefaultDelimiter();
-//
-//        BasicDelimiter customBasicDelimiter = BasicDelimiter.customByPattern(input, pattern);
-//
-//        if(customBasicDelimiter.isExist()) {
-//            basicDelimiter = basicDelimiter.addDelimiter(customBasicDelimiter);
-//        }
-//
-//        String[] split = input.split(basicDelimiter.getSymbol());
-//
-//        return Arrays.stream(split)
-//                .mapToInt(Integer::parseInt)
-//                .sum();
-        return 0;
+
+        StringSplitter stringSplitter = StringSplitter.create(input, pattern);
+
+        Delimiter delimiter = createDelimiter(stringSplitter);
+
+        String itemString = stringSplitter.getItemString();
+
+        Items items = creatItems(delimiter, itemString);
+
+        return items.sum().getValue();
+    }
+
+    private Delimiter createDelimiter(StringSplitter stringSplitter) {
+        Delimiter defaultDelimiter = Delimiter.withDefaultDelimiter();
+        String customDelimiterSymbol = stringSplitter.getCustomDelimiterSymbol();
+
+        if(customDelimiterSymbol.isEmpty()) {
+            return defaultDelimiter;
+        }
+
+        return defaultDelimiter.addDelimiter(Delimiter.custom(customDelimiterSymbol));
+    }
+
+    private Items creatItems(Delimiter delimiter, String itemString) {
+        Items items = new Items();
+        String[] splitItemString = itemString.split(delimiter.getSymbol());
+        Arrays.stream(splitItemString)
+                .map(Item::from)
+                .forEach(items::addItem);
+        return items;
     }
 }

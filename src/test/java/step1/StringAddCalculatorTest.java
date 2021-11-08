@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringAddCalculatorTest {
 
@@ -72,9 +73,8 @@ public class StringAddCalculatorTest {
 
     @DisplayName("숫자 외에 다른 값은 실패한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"e,n", "e:한", "한:글"})
+    @ValueSource(strings = {"e,n", "e:한", "한:글", "1:2:-3", "1:ㅣ:2", "-1:1:3", "1::2::3::"})
     void addByCommaOrColonTest(String input) {
-        int result = stringAddCalculator.splitAndSum(input);
-        assertThat(result).isEqualTo(1);
+        assertThatIllegalArgumentException().isThrownBy(() -> stringAddCalculator.splitAndSum(input));
     }
 }

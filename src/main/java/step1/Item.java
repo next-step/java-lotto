@@ -13,6 +13,10 @@ public class Item {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public static Item from(String itemStr) {
         if(itemStr == null || itemStr.isEmpty()) {
             throw new IllegalArgumentException(NULL_OR_EMPTY_EXCEPTION_MESSAGE);
