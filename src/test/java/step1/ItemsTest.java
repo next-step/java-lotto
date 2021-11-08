@@ -21,7 +21,7 @@ class ItemsTest {
         items = new Items();
     }
 
-    @DisplayName("add(Item) 메서드는 Item을 추가한다.")
+    @DisplayName("addItem() 메서드는 Item을 추가한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3:3","1:1", "1,2:2"}, delimiter = ':')
     void getItemStringTest(String itemlist, int expect) {
@@ -31,6 +31,18 @@ class ItemsTest {
 
         assertThat(items.size()).isEqualTo(expect);
     }
+
+    @DisplayName("sum 메서드는 내부 아이템을 모두 더해서 리턴한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3:6","1:1", "1,2:3"}, delimiter = ':')
+    void getItemStringTest(String itemlist, String expectStr) {
+
+        String[] split = itemlist.split(",");
+        Arrays.stream(split).forEach(item -> items.addItem(Item.from(item)));
+
+        assertThat(items.sum()).isEqualTo(Item.from(expectStr));
+    }
+
 
 
 }

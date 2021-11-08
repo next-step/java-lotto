@@ -14,4 +14,9 @@ public class Items {
     public int size() {
         return items.size();
     }
+
+    public Item sum() {
+        return items.stream().reduce((left,right) -> left.add(right))
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }
