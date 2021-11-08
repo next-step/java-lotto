@@ -15,6 +15,6 @@ class LottoShopTest {
         for (LottoResult lottoResult : lottoResults.getLottoResults()) {
             System.out.println(lottoResult.detailedInfo());
         }
-
     }
+
 }

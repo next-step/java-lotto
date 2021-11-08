@@ -18,8 +18,7 @@ public class LottoShop {
 
     public LottoResults winner(Lottos lottos) {
         for (Lotto lotto : lottos.lottos()) {
-            int matchCnt = winningNumber.numOfWinningNumberMatchCnt(lotto);
-            lottoResults.addWinner(matchCnt);
+            lottoResults.addWinner(winningNumber.numOfWinningNumberMatchCnt(lotto));
         }
 
         return lottoResults;

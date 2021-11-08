@@ -1,20 +1,15 @@
 package lotto.domains;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResults {
+
+    private static final int WINNING_LIMIT = 3;
 
     private final List<LottoResult> lottoResults;
 
     public LottoResults() {
-        Map<Integer, Integer> winningInfos = new HashMap<>();
-        winningInfos.put(3, 5000);
-        winningInfos.put(4, 50000);
-        winningInfos.put(5, 1500000);
-        winningInfos.put(6, 2000000000);
+        Map<Integer, Integer> winningInfos = winningPrizeInfo();
 
         List<LottoResult> lottoResults = new ArrayList<>();
         for (Integer key : winningInfos.keySet()) {
@@ -24,16 +19,23 @@ public class LottoResults {
         this.lottoResults = lottoResults;
     }
 
+    private Map<Integer, Integer> winningPrizeInfo() {
+        Map<Integer, Integer> winningInfos = new HashMap<>();
+
+        winningInfos.put(3, 5000);
+        winningInfos.put(4, 50000);
+        winningInfos.put(5, 1500000);
+        winningInfos.put(6, 2000000000);
+
+        return winningInfos;
+    }
+
     public void addWinner(int matchCnt) {
-        if (matchCnt < 3) {
+        if (matchCnt < WINNING_LIMIT) {
             return;
         }
 
-        for (LottoResult lottoResult : lottoResults) {
-            if (lottoResult.match(matchCnt)) {
-                lottoResult.addWinner();
-            }
-        }
+        lottoResults.forEach(lottoResult -> lottoResult.addWinner(matchCnt));
     }
 
     public List<LottoResult> getLottoResults() {
@@ -41,12 +43,24 @@ public class LottoResults {
     }
 
     public Double profitRate(int money) {
-        Double totalPrize = 0.0;
+        double totalPrize = lottoResults.stream()
+                .mapToDouble(LottoResult::prizeSum)
+                .sum();
 
-        for (LottoResult lottoResult : lottoResults) {
-            totalPrize += lottoResult.totalPrizeAmount();
-        }
+        double profitRate = totalPrize / money;
+        return Math.round(profitRate * 100) / 100.0 ;
+    }
 
-        return totalPrize / money ;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(getLottoResults(), that.getLottoResults());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getLottoResults());
     }
 }

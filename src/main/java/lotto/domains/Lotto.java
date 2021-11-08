@@ -13,8 +13,24 @@ public class Lotto {
         this.lottoNumbers = shuffledNumbers();
     }
 
-    public List<Integer> lottoNumbers() {
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public List<Integer> numbers() {
         return lottoNumbers;
+    }
+
+    public int size() {
+        return lottoNumbers.size();
+    }
+
+    public Integer number(int i) {
+        if (i >= lottoNumbers.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return lottoNumbers.get(i);
     }
 
     private List<Integer> shuffledNumbers() {
@@ -33,15 +49,4 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public int size() {
-        return lottoNumbers.size();
-    }
-
-    public Integer number(int i) {
-        if (i >= lottoNumbers.size()) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        return lottoNumbers.get(i);
-    }
 }

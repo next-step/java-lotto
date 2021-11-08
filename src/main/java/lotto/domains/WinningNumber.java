@@ -6,6 +6,7 @@ import utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class WinningNumber {
 
@@ -30,14 +31,9 @@ public class WinningNumber {
             throw new IllegalArgumentException("당첨 번호와 로또 숫자의 길이가 같지 않습니다.");
         }
 
-        int matchCnt = 0;
-        for (int i = 0; i < lotto.size(); i++) {
-            if (winningNumbers.contains(lotto.number(i))) {
-                matchCnt++;
-            }
-        }
-
-        return matchCnt;
+        return (int) IntStream.range(0, lotto.size())
+                .filter(i -> winningNumbers.contains(lotto.number(i)))
+                .count();
     }
 
     @Override

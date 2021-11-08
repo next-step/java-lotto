@@ -11,24 +11,22 @@ public class Lottos {
     private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
-    private final int numOfLotto;
 
     public Lottos(String moneyString) {
-        this.numOfLotto = numOfLotto(moneyString);
-        this.lottos = readyLottos(numOfLotto);
+        this.lottos = readyLottos(numOfLotto(moneyString));
     }
 
     public int numOfLotto() {
-        return numOfLotto;
+        return lottos.size();
+    }
+
+    public List<Lotto> lottos() {
+        return lottos;
     }
 
     private int numOfLotto(String moneyString) {
         int money = DataParser.parseToInt(moneyString);
         return money / LOTTO_PRICE;
-    }
-
-    public List<Lotto> lottos() {
-        return lottos;
     }
 
     private List<Lotto> readyLottos(int lottosCnt) {
