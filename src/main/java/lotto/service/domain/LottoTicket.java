@@ -14,7 +14,7 @@ public class LottoTicket {
     private LottoTicket(List<LottoNumber> lottoNumbers) {
         Preconditions.checkNotNull(lottoNumbers, "lottoNumbers는 필수값 입니다.");
         Preconditions.checkSize(lottoNumbers.size(), LOTTO_NUMBERS_SIZE,
-                                String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBER_SIZE));
+                                String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBERS_SIZE));
 
         this.lottoNumbers = lottoNumbers;
     }
